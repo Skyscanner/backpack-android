@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        style="@style/CellWrapper"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <com.example.salesforceux.android_sample_app.TypeFaceTextView
+            android:id="@+id/title"
+            style="@style/ListViewCell.Title"
+            app:customFont="SalesforceSans-Regular.ttf"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/labels"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_below="@+id/title">
+
+            <com.example.salesforceux.android_sample_app.TypeFaceTextView
+                android:id="@+id/state_label"
+                android:text="Billing State:"
+                style="@style/ListViewCell.Label"
+                app:customFont="SalesforceSans-Regular.ttf"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <com.example.salesforceux.android_sample_app.TypeFaceTextView
+                android:id="@+id/phone_label"
+                android:text="Phone:"
+                style="@style/ListViewCell.Label"
+                app:customFont="SalesforceSans-Regular.ttf"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <com.example.salesforceux.android_sample_app.TypeFaceTextView
+                android:id="@+id/type_label"
+                android:text="Type:"
+                style="@style/ListViewCell.Label"
+                app:customFont="SalesforceSans-Regular.ttf"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <com.example.salesforceux.android_sample_app.TypeFaceTextView
+                android:id="@+id/owner_label"
+                android:text="Owner:"
+                style="@style/ListViewCell.Label"
+                app:customFont="SalesforceSans-Regular.ttf"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+        </LinearLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/labels"
+            android:layout_below="@+id/title"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical">
+
+            <com.example.salesforceux.android_sample_app.TypeFaceTextView
+                android:id="@+id/state"
+                style="@style/ListViewCell.Value"
+                app:customFont="SalesforceSans-Regular.ttf"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <com.example.salesforceux.android_sample_app.TypeFaceTextView
+                android:id="@+id/phone"
+                style="@style/ListViewCell.Value"
+                app:customFont="SalesforceSans-Regular.ttf"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <com.example.salesforceux.android_sample_app.TypeFaceTextView
+                android:id="@+id/type"
+                style="@style/ListViewCell.Value"
+                app:customFont="SalesforceSans-Regular.ttf"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <com.example.salesforceux.android_sample_app.TypeFaceTextView
+                android:id="@+id/owner"
+                style="@style/ListViewCell.Value"
+                app:customFont="SalesforceSans-Regular.ttf"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View style="@style/Border.Bottom" />
+
+</LinearLayout>

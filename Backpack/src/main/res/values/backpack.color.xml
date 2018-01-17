@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  
+  Backpack - Skyscanner's Design System
+  
+  Copyright 2018 Skyscanner Ltd
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
+-->
+<resources>
+
+	<color name="bpkBpkWhite" category="colors">#ffffffff</color>
+
+	<color name="bpkBpkBlue50" category="colors">#e1f4f8ff</color>
+
+	<color name="bpkBpkBlue100" category="colors">#cbeef5ff</color>
+
+	<color name="bpkBpkBlue200" category="colors">#b0e4eeff</color>
+
+	<color name="bpkBpkBlue300" category="colors">#7fd7e8ff</color>
+
+	<color name="bpkBpkBlue400" category="colors">#40c4dfff</color>
+
+	<color name="bpkBpkBlue500" category="colors">#00b2d6ff</color>
+
+	<color name="bpkBpkBlue600" category="colors">#009dbdff</color>
+
+	<color name="bpkBpkBlue700" category="colors">#008ca8ff</color>
+
+	<color name="bpkBpkBlue800" category="colors">#00758cff</color>
+
+	<color name="bpkBpkBlue900" category="colors">#005567ff</color>
+
+	<color name="bpkBpkGray50" category="colors">#f3f2f5ff</color>
+
+	<color name="bpkBpkGray100" category="colors">#e6e4ebff</color>
+
+	<color name="bpkBpkGray200" category="colors">#ccc9d4ff</color>
+
+	<color name="bpkBpkGray300" category="colors">#b2aebdff</color>
+
+	<color name="bpkBpkGray400" category="colors">#9a95a7ff</color>
+
+	<color name="bpkBpkGray500" category="colors">#817b8fff</color>
+
+	<color name="bpkBpkGray600" category="colors">#696179ff</color>
+
+	<color name="bpkBpkGray700" category="colors">#524c61ff</color>
+
+	<color name="bpkBpkGray800" category="colors">#3b344bff</color>
+
+	<color name="bpkBpkGray900" category="colors">#252033ff</color>
+
+	<color name="bpkBpkGreen50" category="colors">#dff7ecff</color>
+
+	<color name="bpkBpkGreen100" category="colors">#cbf5e2ff</color>
+
+	<color name="bpkBpkGreen200" category="colors">#afedd1ff</color>
+
+	<color name="bpkBpkGreen300" category="colors">#80e8b9ff</color>
+
+	<color name="bpkBpkGreen400" category="colors">#40de97ff</color>
+
+	<color name="bpkBpkGreen500" category="colors">#00d775ff</color>
+
+	<color name="bpkBpkGreen600" category="colors">#00bd68ff</color>
+
+	<color name="bpkBpkGreen700" category="colors">#00a85dff</color>
+
+	<color name="bpkBpkGreen800" category="colors">#008c4dff</color>
+
+	<color name="bpkBpkGreen900" category="colors">#006638ff</color>
+
+	<color name="bpkBpkRed50" category="colors">#fcf2f2ff</color>
+
+	<color name="bpkBpkRed100" category="colors">#ffd6d5ff</color>
+
+	<color name="bpkBpkRed200" category="colors">#ffbbbaff</color>
+
+	<color name="bpkBpkRed300" category="colors">#ff9694ff</color>
+
+	<color name="bpkBpkRed400" category="colors">#fe7471ff</color>
+
+	<color name="bpkBpkRed500" category="colors">#ff5452ff</color>
+
+	<color name="bpkBpkRed600" category="colors">#eb423fff</color>
+
+	<color name="bpkBpkRed700" category="colors">#de322fff</color>
+
+	<color name="bpkBpkRed800" category="colors">#cc1f1dff</color>
+
+	<color name="bpkBpkRed900" category="colors">#a80300ff</color>
+
+	<color name="bpkBpkYellow50" category="colors">#fff9e6ff</color>
+
+	<color name="bpkBpkYellow100" category="colors">#fff3cfff</color>
+
+	<color name="bpkBpkYellow200" category="colors">#ffecb8ff</color>
+
+	<color name="bpkBpkYellow300" category="colors">#ffe18cff</color>
+
+	<color name="bpkBpkYellow400" category="colors">#ffcf4aff</color>
+
+	<color name="bpkBpkYellow500" category="colors">#ffbb00ff</color>
+
+	<color name="bpkBpkYellow600" category="colors">#f0b000ff</color>
+
+	<color name="bpkBpkYellow700" category="colors">#e1a500ff</color>
+
+	<color name="bpkBpkYellow800" category="colors">#c28e00ff</color>
+
+	<color name="bpkBpkYellow900" category="colors">#9c7200ff</color>
+
+	<color name="bpkBpkPink50" category="colors">#fde4edff</color>
+
+	<color name="bpkBpkPink100" category="colors">#ffbfd7ff</color>
+
+	<color name="bpkBpkPink200" category="colors">#ff94bbff</color>
+
+	<color name="bpkBpkPink300" category="colors">#ff73a6ff</color>
+
+	<color name="bpkBpkPink400" category="colors">#ff619bff</color>
+
+	<color name="bpkBpkPink500" category="colors">#fa488aff</color>
+
+	<color name="bpkBpkPink600" category="colors">#d92b6bff</color>
+
+	<color name="bpkBpkPink700" category="colors">#c50f52ff</color>
+
+	<color name="bpkBpkPink800" category="colors">#b00c48ff</color>
+
+	<color name="bpkBpkPink900" category="colors">#94053aff</color>
+
+ </resources>

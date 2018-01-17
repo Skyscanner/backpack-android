@@ -1,0 +1,216 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/slds_color_brand</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Custom Styles -->
+
+    <!-- Cells -->
+
+    <style name="CellWrapper">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_margin">@dimen/slds_spacing_small</item>
+    </style>
+
+    <style name="ListViewCell">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/slds_font_size_text_medium</item>
+    </style>
+
+    <style name="ListViewCell.Title">
+        <item name="android:textColor">@color/slds_color_text_default</item>
+        <item name="android:layout_marginBottom">@dimen/slds_spacing_x_small</item>
+    </style>
+
+    <style name="ListViewCell.Label">
+        <item name="android:textColor">@color/slds_color_text_action_label</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
+    <style name="ListViewCell.Value">
+        <item name="android:textColor">@color/slds_color_text_default</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
+    <style name="ListViewCell.DetailValue">
+        <item name="android:textColor">@color/slds_color_text_default</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
+    <!-- Action Bar -->
+
+    <style name="ActionButton">
+        <item name="android:background">@color/slds_color_background_alt</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="ActionButtonLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textSize">@dimen/slds_font_size_x_small</item>
+        <item name="android:textColor">@color/slds_color_text_action_label</item>
+    </style>
+
+    <style name="ActionButtonIcon">
+        <item name="android:layout_width">@dimen/slds_square_icon_medium_boundary</item>
+        <item name="android:layout_height">@dimen/slds_square_icon_medium_boundary</item>
+        <item name="android:layout_marginTop">@dimen/slds_spacing_xx_small</item>
+        <item name="android:layout_marginBottom">@dimen/slds_spacing_xx_small</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="ActionButtonIcon.Filter">
+        <item name="android:background">@drawable/rounded_filter_icon</item>
+    </style>
+
+    <style name="ActionButtonIcon.Sort">
+        <item name="android:background">@drawable/rounded_sort_icon</item>
+    </style>
+
+    <style name="ActionButtonIcon.New">
+        <item name="android:background">@drawable/rounded_new_icon</item>
+    </style>
+
+    <style name="ActionButtonIcon.Call">
+        <item name="android:background">@drawable/rounded_call_icon</item>
+    </style>
+
+    <style name="ActionButtonIcon.Task">
+        <item name="android:background">@drawable/rounded_task_icon</item>
+    </style>
+
+    <style name="ActionButtonIcon.Event">
+        <item name="android:background">@drawable/rounded_event_icon</item>
+    </style>
+
+    <style name="ActionButtonIcon.Post">
+        <item name="android:background">@drawable/rounded_post_icon</item>
+    </style>
+
+    <style name="ActionButtonIcon.More">
+        <item name="android:background">@drawable/rounded_more_icon</item>
+    </style>
+
+    <!-- Header -->
+
+    <style name="Header">
+        <item name="android:background">@color/slds_color_background</item>
+    </style>
+
+    <style name="HeaderLogo">
+        <item name="android:layout_width">@dimen/slds_square_icon_medium</item>
+        <item name="android:layout_height">@dimen/slds_square_icon_medium</item>
+        <item name="android:layout_margin">@dimen/slds_spacing_small</item>
+        <item name="android:background">@drawable/rounded_account_icon</item>
+    </style>
+
+    <style name="HeaderChevron">
+        <item name="android:layout_width">@dimen/slds_square_icon_utility_small</item>
+        <item name="android:layout_height">@dimen/slds_square_icon_utility_small</item>
+        <item name="android:layout_marginTop">22dp</item>
+        <item name="android:layout_marginLeft">12dp</item>
+    </style>
+
+    <style name="HeaderTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/slds_color_text_default</item>
+        <item name="android:textSize">@dimen/slds_font_size_large</item>
+    </style>
+
+    <style name="HeaderTitle.Master">
+        <item name="android:layout_marginTop">@dimen/slds_spacing_medium</item>
+        <item name="android:layout_marginBottom">@dimen/slds_spacing_xxx_small</item>
+    </style>
+
+    <style name="HeaderTitle.Detail">
+        <item name="android:layout_marginTop">@dimen/slds_spacing_small</item>
+        <item name="android:layout_marginBottom">@dimen/slds_spacing_x_small</item>
+    </style>
+
+    <style name="HeaderSubtext">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/slds_font_size_small</item>
+    </style>
+
+    <style name="HeaderSubtext.Regular">
+        <item name="android:textColor">@color/slds_color_text_action_label</item>
+    </style>
+
+    <style name="HeaderSubtext.Blue">
+        <item name="android:textColor">@color/slds_color_text_link</item>
+    </style>
+
+    <!-- Tab Bar -->
+
+    <style name="TabBar">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="TabBarLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">@dimen/slds_font_size_heading_small</item>
+        <item name="android:textColor">@color/slds_color_text_default</item>
+    </style>
+
+    <style name="TabBarUnderline">
+        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">@color/slds_color_brand_dark</item>
+    </style>
+
+    <!-- Borders -->
+
+    <style name="Border">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.8dp</item>
+        <item name="android:background">@color/slds_color_border</item>
+    </style>
+
+    <style name="BorderThin">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.4dp</item>
+        <item name="android:background">@color/slds_color_border</item>
+    </style>
+
+    <style name="Border.Bottom">
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
+    <style name="BorderThin.Bottom">
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
+    <style name="Border.Top">
+        <item name="android:layout_alignParentTop">true</item>
+    </style>
+
+</resources>

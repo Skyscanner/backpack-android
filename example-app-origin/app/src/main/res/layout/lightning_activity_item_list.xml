@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_centerVertical="true"
+    tools:context="com.example.salesforceux.android_sample_app.ItemListActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/header_master"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_master_height"
+        style="@style/Header">
+
+        <include layout="@layout/lightning_header_master" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/header_master_height"
+        android:layout_marginBottom="@dimen/action_bar_height"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <include layout="@layout/lightning_item_list" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_bar_height"
+        android:layout_gravity="bottom" >
+
+        <include layout="@layout/lightning_action_bar_master" />
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

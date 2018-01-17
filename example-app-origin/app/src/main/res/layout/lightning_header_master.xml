@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <View style="@style/Border.Bottom"/>
+
+    <ImageView
+        style="@style/HeaderLogo"
+        android:id="@+id/accountsIcon" />
+
+    <com.example.salesforceux.android_sample_app.TypeFaceTextView
+        android:layout_toRightOf="@id/accountsIcon"
+        app:customFont="SalesforceSans-Light.ttf"
+        android:text="My Accounts"
+        android:id="@+id/headerTitle"
+        style="@style/HeaderTitle.Master"/>
+
+    <ImageView
+        android:layout_toRightOf="@id/headerTitle"
+        android:id="@+id/chevronDown"
+        style="@style/HeaderChevron"/>
+
+    <com.example.salesforceux.android_sample_app.TypeFaceTextView
+        android:layout_below="@id/headerTitle"
+        android:layout_toRightOf="@id/accountsIcon"
+        app:customFont="SalesforceSans-Regular.ttf"
+        android:text="5 items, sorted by Account Name"
+        android:id="@+id/headerDescription"
+        style="@style/HeaderSubtext.Regular"/>
+
+</RelativeLayout>

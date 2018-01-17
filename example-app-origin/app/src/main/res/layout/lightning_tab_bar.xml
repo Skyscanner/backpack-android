@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="3">
+
+    <RelativeLayout
+        style="@style/TabBar">
+
+        <com.example.salesforceux.android_sample_app.TypeFaceTextView
+            style="@style/TabBarLabel"
+            app:customFont="SalesforceSans-Regular.ttf"
+            android:text="FEED" />
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/TabBar">
+
+        <com.example.salesforceux.android_sample_app.TypeFaceTextView
+            style="@style/TabBarLabel"
+            app:customFont="SalesforceSans-Regular.ttf"
+            android:text="DETAILS" />
+
+        <LinearLayout style="@style/TabBarUnderline" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/TabBar">
+
+        <com.example.salesforceux.android_sample_app.TypeFaceTextView
+            style="@style/TabBarLabel"
+            app:customFont="SalesforceSans-Regular.ttf"
+            android:text="RELATED" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+{
+    "name": "backpack-android",
+    "version": "0.0.1",
+    "private": "true",
+    "engines": {
+        "node": "^8.9.4",
+        "npm": "^5.6.0"
+    },
+    "scripts": {
+        "preinstall": "node -e \"$(curl -fsSL https://raw.githubusercontent.com/Skyscanner/ensure-node-env/master/dist/index.js)\"",
+        "gulp": "gulp"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Skyscanner/backpack-android.git"
+    },
+    "author": "",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/Skyscanner/backpack-android/issues"
+    },
+    "homepage": "https://github.com/Skyscanner/backpack-android#readme",
+    "devDependencies": {
+        "bpk-tokens": "^26.7.2",
+        "del": "^3.0.0",
+        "gulp": "^3.9.1",
+        "gulp-data": "^1.3.1",
+        "gulp-nunjucks": "^3.1.1",
+        "gulp-rename": "^1.2.2",
+        "lodash": "^4.17.4",
+        "merge2": "^1.2.1",
+        "through2": "^2.0.3",
+        "tinycolor2": "^1.4.1"
+    },
+    "dependencies": {
+        "run-sequence": "^2.2.1"
+    }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_master_height">75dp</dimen>
+    <dimen name="header_detail_height">126dp</dimen>
+    <dimen name="action_bar_height">58dp</dimen>
+</resources>

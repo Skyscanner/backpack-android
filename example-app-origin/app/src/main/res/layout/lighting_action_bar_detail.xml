@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="5">
+
+    <LinearLayout style="@style/ActionButton">
+
+        <View style="@style/Border.Top" />
+
+        <ImageView
+            android:id="@+id/callIcon"
+            style="@style/ActionButtonIcon.Call"/>
+
+        <com.example.salesforceux.android_sample_app.TypeFaceTextView
+            style="@style/ActionButtonLabel"
+            app:customFont="SalesforceSans-Regular.ttf"
+            android:text="Call" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/ActionButton">
+
+        <View style="@style/Border.Top" />
+
+        <ImageView
+            android:id="@+id/taskIcon"
+            style="@style/ActionButtonIcon.Task"/>
+
+        <com.example.salesforceux.android_sample_app.TypeFaceTextView
+            style="@style/ActionButtonLabel"
+            app:customFont="SalesforceSans-Regular.ttf"
+            android:text="Task" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/ActionButton">
+
+        <View style="@style/Border.Top" />
+
+        <ImageView
+            android:id="@+id/eventIcon"
+            style="@style/ActionButtonIcon.Event" />
+
+        <com.example.salesforceux.android_sample_app.TypeFaceTextView
+            style="@style/ActionButtonLabel"
+            app:customFont="SalesforceSans-Regular.ttf"
+            android:text="Event" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/ActionButton">
+
+        <View style="@style/Border.Top" />
+
+        <ImageView
+            android:id="@+id/postIcon"
+            style="@style/ActionButtonIcon.Post" />
+
+        <com.example.salesforceux.android_sample_app.TypeFaceTextView
+            style="@style/ActionButtonLabel"
+            app:customFont="SalesforceSans-Regular.ttf"
+            android:text="Post" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/ActionButton">
+
+        <View style="@style/Border.Top" />
+
+        <ImageView
+            android:id="@+id/moreIcon"
+            style="@style/ActionButtonIcon.More" />
+
+        <com.example.salesforceux.android_sample_app.TypeFaceTextView
+            style="@style/ActionButtonLabel"
+            app:customFont="SalesforceSans-Regular.ttf"
+            android:text="More" />
+
+    </LinearLayout>
+
+</LinearLayout>
