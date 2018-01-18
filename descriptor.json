@@ -1,0 +1,28 @@
+{
+    "package": {
+        "name": "Backpack",
+        "repo": "Backpack",
+        "vcs_url": "https://github.com/Skyscanner/backpack-android",
+        "licenses": [
+            "Apache-2.0"
+        ],
+        "labels": [
+            "android",
+            "skyscanner",
+            "designsystem"
+        ],
+        "public_download_numbers": false,
+        "public_stats": false
+    },
+    "version": {
+        "name": "0.0.1",
+        "released": "2018-01-18",
+        "gpgSign": false
+    },
+    "files": [
+        {
+            "includePattern": "build/libs/(.*)"
+        }
+    ],
+    "publish": true
+}

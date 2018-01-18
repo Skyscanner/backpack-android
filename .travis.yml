@@ -1,0 +1,10 @@
+branches:
+  only:
+    - master
+deploy:
+  provider: bintray
+  file: "descriptor.json"
+  user: $BINTRAY_USER
+  key: $BINTRAY_KEY
+  dry-run: true
+
