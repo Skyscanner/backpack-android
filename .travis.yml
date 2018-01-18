@@ -10,6 +10,7 @@ script: ./gradlew build
 branches:
   only:
     - master
+    - /^greenkeeper/.*$/
 deploy:
   provider: bintray
   file: "descriptor.json"
