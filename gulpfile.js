@@ -49,12 +49,9 @@ gulp.task('template:color', () => (
         .pipe(rename('backpack.color.xml'))
         .pipe(gulp.dest(__PATHS__.outputRes))
 ));
-console.log("LOL");
-console.log(getColors());
-// console.log([...getColors()]);
 
-// gulp.task('default', () => {
-//     runSequence('template:color')
-// });
+ gulp.task('default', () => {
+     runSequence('template:color')
+ });
 
-// gulp.task('clean', () => del([__PATHS__.outputRes], { force: true }));
+ gulp.task('clean', () => del([__PATHS__.outputRes], { force: true }));

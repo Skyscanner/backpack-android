@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/slds_icon_action_filter" />
-    <corners android:radius="@dimen/slds_square_icon_medium_content" />
-</shape>

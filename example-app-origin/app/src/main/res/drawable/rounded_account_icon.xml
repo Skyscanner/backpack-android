@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/slds_icon_standard_account" />
-    <corners android:radius="@dimen/slds_border_radius_medium" />
-</shape>
