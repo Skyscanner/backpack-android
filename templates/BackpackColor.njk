@@ -20,6 +20,6 @@
 -->
 <resources>
 {% for color in data %}
-	<color name="{{color.name}}" category="{{color.category}}">{{color.value}}</color>
+	<color name="{{color.name}}">{{color[".alias"].value}}</color>
 {% endfor %}
  </resources>

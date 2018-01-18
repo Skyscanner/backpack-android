@@ -20,126 +20,126 @@
 -->
 <resources>
 
-	<color name="bpkBpkWhite" category="colors">#ffffffff</color>
+	<color name="bpkWhite">#ffffff</color>
 
-	<color name="bpkBpkBlue50" category="colors">#e1f4f8ff</color>
+	<color name="bpkBlue50">#e1f4f8</color>
 
-	<color name="bpkBpkBlue100" category="colors">#cbeef5ff</color>
+	<color name="bpkBlue100">#cbeef5</color>
 
-	<color name="bpkBpkBlue200" category="colors">#b0e4eeff</color>
+	<color name="bpkBlue200">#b0e4ee</color>
 
-	<color name="bpkBpkBlue300" category="colors">#7fd7e8ff</color>
+	<color name="bpkBlue300">#7fd7e8</color>
 
-	<color name="bpkBpkBlue400" category="colors">#40c4dfff</color>
+	<color name="bpkBlue400">#40c4df</color>
 
-	<color name="bpkBpkBlue500" category="colors">#00b2d6ff</color>
+	<color name="bpkBlue500">#00b2d6</color>
 
-	<color name="bpkBpkBlue600" category="colors">#009dbdff</color>
+	<color name="bpkBlue600">#009dbd</color>
 
-	<color name="bpkBpkBlue700" category="colors">#008ca8ff</color>
+	<color name="bpkBlue700">#008ca8</color>
 
-	<color name="bpkBpkBlue800" category="colors">#00758cff</color>
+	<color name="bpkBlue800">#00758c</color>
 
-	<color name="bpkBpkBlue900" category="colors">#005567ff</color>
+	<color name="bpkBlue900">#005567</color>
 
-	<color name="bpkBpkGray50" category="colors">#f3f2f5ff</color>
+	<color name="bpkGray50">#F3F2F5</color>
 
-	<color name="bpkBpkGray100" category="colors">#e6e4ebff</color>
+	<color name="bpkGray100">#E6E4EB</color>
 
-	<color name="bpkBpkGray200" category="colors">#ccc9d4ff</color>
+	<color name="bpkGray200">#CCC9D4</color>
 
-	<color name="bpkBpkGray300" category="colors">#b2aebdff</color>
+	<color name="bpkGray300">#B2AEBD</color>
 
-	<color name="bpkBpkGray400" category="colors">#9a95a7ff</color>
+	<color name="bpkGray400">#9A95A7</color>
 
-	<color name="bpkBpkGray500" category="colors">#817b8fff</color>
+	<color name="bpkGray500">#817B8F</color>
 
-	<color name="bpkBpkGray600" category="colors">#696179ff</color>
+	<color name="bpkGray600">#696179</color>
 
-	<color name="bpkBpkGray700" category="colors">#524c61ff</color>
+	<color name="bpkGray700">#524C61</color>
 
-	<color name="bpkBpkGray800" category="colors">#3b344bff</color>
+	<color name="bpkGray800">#3B344B</color>
 
-	<color name="bpkBpkGray900" category="colors">#252033ff</color>
+	<color name="bpkGray900">#252033</color>
 
-	<color name="bpkBpkGreen50" category="colors">#dff7ecff</color>
+	<color name="bpkGreen50">#dff7ec</color>
 
-	<color name="bpkBpkGreen100" category="colors">#cbf5e2ff</color>
+	<color name="bpkGreen100">#cbf5e2</color>
 
-	<color name="bpkBpkGreen200" category="colors">#afedd1ff</color>
+	<color name="bpkGreen200">#afedd1</color>
 
-	<color name="bpkBpkGreen300" category="colors">#80e8b9ff</color>
+	<color name="bpkGreen300">#80e8b9</color>
 
-	<color name="bpkBpkGreen400" category="colors">#40de97ff</color>
+	<color name="bpkGreen400">#40de97</color>
 
-	<color name="bpkBpkGreen500" category="colors">#00d775ff</color>
+	<color name="bpkGreen500">#00d775</color>
 
-	<color name="bpkBpkGreen600" category="colors">#00bd68ff</color>
+	<color name="bpkGreen600">#00bd68</color>
 
-	<color name="bpkBpkGreen700" category="colors">#00a85dff</color>
+	<color name="bpkGreen700">#00a85d</color>
 
-	<color name="bpkBpkGreen800" category="colors">#008c4dff</color>
+	<color name="bpkGreen800">#008c4d</color>
 
-	<color name="bpkBpkGreen900" category="colors">#006638ff</color>
+	<color name="bpkGreen900">#006638</color>
 
-	<color name="bpkBpkRed50" category="colors">#fcf2f2ff</color>
+	<color name="bpkRed50">#fcf2f2</color>
 
-	<color name="bpkBpkRed100" category="colors">#ffd6d5ff</color>
+	<color name="bpkRed100">#ffd6d5</color>
 
-	<color name="bpkBpkRed200" category="colors">#ffbbbaff</color>
+	<color name="bpkRed200">#ffbbba</color>
 
-	<color name="bpkBpkRed300" category="colors">#ff9694ff</color>
+	<color name="bpkRed300">#ff9694</color>
 
-	<color name="bpkBpkRed400" category="colors">#fe7471ff</color>
+	<color name="bpkRed400">#fe7471</color>
 
-	<color name="bpkBpkRed500" category="colors">#ff5452ff</color>
+	<color name="bpkRed500">#ff5452</color>
 
-	<color name="bpkBpkRed600" category="colors">#eb423fff</color>
+	<color name="bpkRed600">#eb423f</color>
 
-	<color name="bpkBpkRed700" category="colors">#de322fff</color>
+	<color name="bpkRed700">#de322f</color>
 
-	<color name="bpkBpkRed800" category="colors">#cc1f1dff</color>
+	<color name="bpkRed800">#cc1f1d</color>
 
-	<color name="bpkBpkRed900" category="colors">#a80300ff</color>
+	<color name="bpkRed900">#a80300</color>
 
-	<color name="bpkBpkYellow50" category="colors">#fff9e6ff</color>
+	<color name="bpkYellow50">#FFF9E6</color>
 
-	<color name="bpkBpkYellow100" category="colors">#fff3cfff</color>
+	<color name="bpkYellow100">#FFF3CF</color>
 
-	<color name="bpkBpkYellow200" category="colors">#ffecb8ff</color>
+	<color name="bpkYellow200">#FFECB8</color>
 
-	<color name="bpkBpkYellow300" category="colors">#ffe18cff</color>
+	<color name="bpkYellow300">#FFE18C</color>
 
-	<color name="bpkBpkYellow400" category="colors">#ffcf4aff</color>
+	<color name="bpkYellow400">#FFCF4A</color>
 
-	<color name="bpkBpkYellow500" category="colors">#ffbb00ff</color>
+	<color name="bpkYellow500">#FFBB00</color>
 
-	<color name="bpkBpkYellow600" category="colors">#f0b000ff</color>
+	<color name="bpkYellow600">#F0B000</color>
 
-	<color name="bpkBpkYellow700" category="colors">#e1a500ff</color>
+	<color name="bpkYellow700">#E1A500</color>
 
-	<color name="bpkBpkYellow800" category="colors">#c28e00ff</color>
+	<color name="bpkYellow800">#C28E00</color>
 
-	<color name="bpkBpkYellow900" category="colors">#9c7200ff</color>
+	<color name="bpkYellow900">#9C7200</color>
 
-	<color name="bpkBpkPink50" category="colors">#fde4edff</color>
+	<color name="bpkPink50">#FDE4ED</color>
 
-	<color name="bpkBpkPink100" category="colors">#ffbfd7ff</color>
+	<color name="bpkPink100">#FFBFD7</color>
 
-	<color name="bpkBpkPink200" category="colors">#ff94bbff</color>
+	<color name="bpkPink200">#FF94BB</color>
 
-	<color name="bpkBpkPink300" category="colors">#ff73a6ff</color>
+	<color name="bpkPink300">#FF73A6</color>
 
-	<color name="bpkBpkPink400" category="colors">#ff619bff</color>
+	<color name="bpkPink400">#FF619B</color>
 
-	<color name="bpkBpkPink500" category="colors">#fa488aff</color>
+	<color name="bpkPink500">#FA488A</color>
 
-	<color name="bpkBpkPink600" category="colors">#d92b6bff</color>
+	<color name="bpkPink600">#D92B6B</color>
 
-	<color name="bpkBpkPink700" category="colors">#c50f52ff</color>
+	<color name="bpkPink700">#C50F52</color>
 
-	<color name="bpkBpkPink800" category="colors">#b00c48ff</color>
+	<color name="bpkPink800">#B00C48</color>
 
-	<color name="bpkBpkPink900" category="colors">#94053aff</color>
+	<color name="bpkPink900">#94053A</color>
 
  </resources>

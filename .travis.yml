@@ -1,0 +1,19 @@
+language: android
+android:
+  components:
+  - build-tools-26.0.2
+  - android-26
+  - extra
+before_install:
+- chmod +x gradlew
+script: "./gradlew build"
+branches:
+  only:
+  - master
+  - "/^greenkeeper/.*$/"
+notifications:
+  slack:
+    rooms:
+      secure: OzKjBiHuf8JVNF/w9C8s5CmfJpyb8kaljrTWrqtDyxFm/FhQVvZI+ytXGJBfk7Wk+WRRhSbC3WdeozsrBrofvKD3zGd6RfPqNFAQMdD7nqI8i44LiFR1XANE3pWtq7ilUTRRLVwUcOqPhxUuxySLeXr/xp7OuSBQqXS2CMsIq2yWdhB0drP2FiYvgNXjtqE4hIEgnX+UqE1P0pxUIN1mZf89nWoaT+V0G6IvEBKBRYQz9qi46yMrvx1ldC3+p8uYzy+Rr62luVsrUVKlDtD0wvDyq21t8QoPktoQxy9QvJAmxd+vCjvbo9JoJD/uPSCSP5BG63BpXURPDWrRXwVCb1q0u/O+nDbIb1RU07JOfjt2wUKTJPfQa8vZ/+U7AIjZTCTWAT1OwnQ/5/s/AhsjxpSzcB9XmwLZVKXU/xymbh20BbVIpX/ioU26ntqKZHPBhGSP9LhogMiKsOgEAHVEcSW9qe8Nar/NSHvQH5YozEAopuFFfN6ZW+izD97qw1xretbzQiEigPgi5m15aMKkmtgug13k5Y0QJKKZajF1e1j5j+v8aMkSfvGFIJQ7/Pyq/hNsLXTd02gzFlARBYrVn+A75dsvmK0KHGW7upnc/OtstAoHK2rqlEYD2HwmGOmXPgijcTzQx6yVeOxWxbGw5DivudG7h/McJz+AcA1r0TQ=
+    on_pull_requests: false
+    on_success: always

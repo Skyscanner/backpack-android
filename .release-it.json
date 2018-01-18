@@ -1,0 +1,10 @@
+{
+    "dry-run": false,
+    "npm": {
+        "publish": false
+    },
+    "buildCommand": "npm run gulp",
+    "dist": {
+        "beforeStageCommand": "echo 'here'"
+    }
+}
