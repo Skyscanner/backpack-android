@@ -10,7 +10,7 @@ script: "./gradlew build"
 branches:
   only:
   - master
-  - "/^greenkeeper/.*$/"
+  - /^greenkeeper/.*$/
 notifications:
   slack:
     rooms:

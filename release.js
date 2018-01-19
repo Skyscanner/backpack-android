@@ -32,6 +32,7 @@ release();
 async function release() {
     const { version } = await inquirer.prompt(questions);
     await amendGradleFiles(version);
+
     const releaseOptions = {
         increment: version,
         npm: {
@@ -40,14 +41,17 @@ async function release() {
         github: {
             release: false
         },
-        src: {
+        "prompt": {
+            "src": {
+                "release": false,
+            }
+        }
+            src: {
             afterReleaseCommand: "./gradlew bintrayUpload"
         }
     }
     releaseit(releaseOptions);
 }
-
-
 
 async function amendGradleFiles(version) {
     const options = {
