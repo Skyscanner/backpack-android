@@ -1,6 +1,6 @@
 {
     "name": "backpack-android",
-    "version": "0.1.0",
+    "version": "0.0.2",
     "private": "true",
     "engines": {
         "node": "^8.9.4",
@@ -9,7 +9,7 @@
     "scripts": {
         "preinstall": "node -e \"$(curl -fsSL https://raw.githubusercontent.com/Skyscanner/ensure-node-env/master/dist/index.js)\"",
         "gulp": "gulp",
-        "release": "release-it",
+        "release": "node release.js",
         "prerelease": "npm run check:env",
         "check:env": ": ${BINTRAY_USER?Need to set BINTRAY_USER} ${BINTRAY_KEY?Need to set BINTRAY_KEY}"
     },
