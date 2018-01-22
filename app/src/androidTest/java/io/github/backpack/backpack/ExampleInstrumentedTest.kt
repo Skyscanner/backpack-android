@@ -1,4 +1,4 @@
-package io.github.backpack.backpackandroid
+package net.skyscanner.backpack
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("io.github.backpack.backpackandroid", appContext.packageName)
+        assertEquals("net.skyscanner.backpack", appContext.packageName)
     }
 }

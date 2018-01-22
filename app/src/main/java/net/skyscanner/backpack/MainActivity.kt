@@ -1,4 +1,4 @@
-package io.github.backpack.backpackandroid
+package net.skyscanner.backpack
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

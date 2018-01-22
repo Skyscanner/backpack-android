@@ -1,4 +1,4 @@
-package io.github.backpack.backpackandroid
+package net.skyscanner.backpack
 
 import org.junit.Test
 
