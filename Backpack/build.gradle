@@ -27,6 +27,40 @@ android {
 
 }
 
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                groupId 'net.skyscanner.backpack'
+                artifactId 'Backpack'
+
+                name 'Backpack'
+                description 'The Skyscanner Design System, Backpack, for Android'
+                url 'https://github.com/Skyscanner/backpack-android'
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'Backpack Squad'
+                    }
+                }
+                scm {
+                    connection 'https://github.com/Skyscanner/backpack-android.git'
+                    developerConnection 'https://github.com/Skyscanner/backpack-android.git'
+                    url 'https://backpack.github.io'
+
+                }
+            }
+        }
+    }
+}
+
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
