@@ -1,19 +1,30 @@
 language: android
 android:
   components:
-  - build-tools-27.0.3
-  - android-27
-  - extra
+    - build-tools-27.0.3
+    - android-27
+    - extra
 before_install:
-- chmod +x gradlew
-script: "./gradlew build"
+  - chmod +x gradlew
+  - nvm install
+  - npm install -g greenkeeper-lockfile@1
+install:
+  - npm install
+before_script: greenkeeper-lockfile-update
+script:
+  - npm run build
+  - ./gradlew build
+after_script: greenkeeper-lockfile-upload
 branches:
   only:
-  - master
-  - /^greenkeeper/.*$/
+    - master
+    - /^greenkeeper/.*$/
 notifications:
   slack:
     rooms:
       secure: OzKjBiHuf8JVNF/w9C8s5CmfJpyb8kaljrTWrqtDyxFm/FhQVvZI+ytXGJBfk7Wk+WRRhSbC3WdeozsrBrofvKD3zGd6RfPqNFAQMdD7nqI8i44LiFR1XANE3pWtq7ilUTRRLVwUcOqPhxUuxySLeXr/xp7OuSBQqXS2CMsIq2yWdhB0drP2FiYvgNXjtqE4hIEgnX+UqE1P0pxUIN1mZf89nWoaT+V0G6IvEBKBRYQz9qi46yMrvx1ldC3+p8uYzy+Rr62luVsrUVKlDtD0wvDyq21t8QoPktoQxy9QvJAmxd+vCjvbo9JoJD/uPSCSP5BG63BpXURPDWrRXwVCb1q0u/O+nDbIb1RU07JOfjt2wUKTJPfQa8vZ/+U7AIjZTCTWAT1OwnQ/5/s/AhsjxpSzcB9XmwLZVKXU/xymbh20BbVIpX/ioU26ntqKZHPBhGSP9LhogMiKsOgEAHVEcSW9qe8Nar/NSHvQH5YozEAopuFFfN6ZW+izD97qw1xretbzQiEigPgi5m15aMKkmtgug13k5Y0QJKKZajF1e1j5j+v8aMkSfvGFIJQ7/Pyq/hNsLXTd02gzFlARBYrVn+A75dsvmK0KHGW7upnc/OtstAoHK2rqlEYD2HwmGOmXPgijcTzQx6yVeOxWxbGw5DivudG7h/McJz+AcA1r0TQ=
     on_pull_requests: false
     on_success: always
+env:
+  global:
+    secure: Ghpkm2Td2/c1YKZMbEv9HdPQWhsf61kNaoDrj2dTSe5wRo0llz7uwJwVYcGCtb+JA9KsXO0GLO6b2itw9xS1hnjb9cjnQWr87BV5aPN5W9uAS03siCeCatZh+g3KE5Ir86GBnysgFWOj++jeIGbPDwIWCUUT/ANpLQx2RrIRujWeCYXDeB9D7Dofo1k7Pt9MFu9f1OzYE6m3alD+wekiNHCl3Jds+V1r4lfEsA3iFVrdWwizCCLCH2h480YVYkAhUYGm9vtJBaTEF74Iaqlx3NfR45UEmvL3Jks4lSNzrs/VSQhtYY/gYq4LV/ckwDTr/f3FI+Xitn2d+ImYqFHJmh7gkPFxViHxdvjAx/cBC1hM3mr4Hl3zt1lReN6bleJY58ix88FP6uqFn2n5s76QenlhRuRZTXNiDv9NfKSIdgZ4hbYusKYLjRLACnNDVme2YdT+AEY3dP4I/Mv4xV40RkJK9+VLQNIEQwidBUUzFf4Tl5AjJQqJ7cURBj5jq8tDrvSl+Zmr7QwJqNgf5l1MLMjNmfOioyZICAp2bGlJNT9ABu2pjZ1WioXH3D9q/95qMvOzFL5SEvBBttV4LNsK1za2z6z4AED3lXTe5beKUodkhVSXhgL+ci36rX2yEsZjFLtVpB5LVomxLa+elGDLTGPqHzJok+ljB6Abumi8STw=
