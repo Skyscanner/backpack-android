@@ -12,7 +12,7 @@ Backpack is available through [Bintray](https://bintray.com/skyscanner/Backpack/
 all of it, simply add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-    compile 'io.github.backpack:Backpack'
+    compile 'net.skyscanner.backpack:Backpack:0.0.3'
 ```
 and a maven repository reference in the `build.gradle` (in your main root) in the `repository` block:
 
