@@ -3,7 +3,7 @@
     "npm": {
         "publish": false
     },
-    "buildCommand": "npm run gulp",
+    "buildCommand": "npm run build",
     "dist": {
         "beforeStageCommand": "echo 'here'"
     }
