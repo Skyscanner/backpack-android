@@ -12,7 +12,9 @@ install:
   - npm install
 before_script: greenkeeper-lockfile-update
 script:
+  - set -e
   - npm run build
+  - ./scripts/check-pristine-state package-lock.json
   - ./gradlew build
 after_script: greenkeeper-lockfile-upload
 branches:
