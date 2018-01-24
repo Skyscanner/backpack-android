@@ -22,6 +22,7 @@ const pkg = require("./package.json");
 const semver = require("semver");
 const replace = require('replace-in-file');
 const releaseit = require("release-it");
+const fetch = require("node-fetch");
 
 const major = semver.inc(pkg.version, "major");
 const minor = semver.inc(pkg.version, "minor");
@@ -54,29 +55,60 @@ const questions = [{
 release();
 
 async function release() {
-    const {
-        version
-    } = await inquirer.prompt(questions);
-    await amendGradleFiles(version);
+    try {
+        await isMaintainer();
 
-    const releaseOptions = {
-        increment: version,
-        npm: {
-            publish: false
-        },
-        github: {
-            release: false
-        },
-        "prompt": {
-            "src": {
-                "release": false,
+        const {
+            version
+        } = await inquirer.prompt(questions);
+
+        await amendGradleFiles(version);
+
+        const releaseOptions = {
+            increment: version,
+            npm: {
+                publish: false
+            },
+            github: {
+                release: false
+            },
+            "prompt": {
+                "src": {
+                    "release": false,
+                }
+            },
+            src: {
+                afterReleaseCommand: "./gradlew bintrayUpload"
             }
-        },
-        src: {
-            afterReleaseCommand: "./gradlew bintrayUpload"
         }
+        await releaseit(releaseOptions);
+    } catch (exc) {
+        console.error(exc);
+        process.exit(1);
     }
-    releaseit(releaseOptions);
+
+
+}
+
+async function isMaintainer() {
+    const organisation = "skyscanner";
+    const user = process.env.BINTRAY_USER;
+    const key = process.env.BINTRAY_KEY;
+
+    const url = `https://${user}:${key}@bintray.com/api/v1/users/${user}`;
+    try {
+        console.log("🔎  Checking user permission");
+        let response = await fetch(url);
+        let status = await response.status;
+        let data = await response.json();
+
+        if (status !== 200) throw new Error("😱  Auth check failed, the given user is either not authorised or a server side error occurred");
+        if (data.organizations.indexOf(organisation) === -1) throw new Error(`😱  The given user is not part of the ${organisation} organisation, permission denied!`);
+        console.log(`✅  Hello ${user}, you're authorised for a new release`);
+        return true;
+    } catch (exc) {
+        throw exc;
+    }
 }
 
 async function amendGradleFiles(version) {
@@ -87,7 +119,7 @@ async function amendGradleFiles(version) {
     };
 
     try {
-        console.log("Version amended in", await replace(options));
+        console.log("🎉  Version amended in", await replace(options));
         return true;
     } catch (exc) {
         throw new Error(exc);
