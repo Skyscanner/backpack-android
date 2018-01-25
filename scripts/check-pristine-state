@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+const {
+    promisify
+} = require("util");
+const {
+    exec
+} = require('child_process');
+const execAsync = promisify(exec);
+
+const command = 'git status --porcelain | awk \'{print $2}\'';
+const [node, path, ...filesToIgnore] = process.argv;
+
+async function init() {
+    const {
+        stdout,
+        stderr
+    } = await execAsync(command, {
+        cwd: `${__dirname}/../`
+    });
+    const changedFiles = stdout
+        .trim()
+        .split("\n")
+        .filter(isNotInList(filesToIgnore))
+        .filter(exists);
+
+    if (changedFiles.length) {
+        console.log(`😰  Git shows some files have been changed (ignoring ${filesToIgnore.join(",")}). Changed files: ${changedFiles.join(",")}`);
+        process.exit(1);
+    }
+}
+
+function exists(item) {
+    return !!item;
+}
+
+function isNotInList(list) {
+    return function isItemNotInList(item) {
+        return list.indexOf(item) === -1;
+    }
+}
+
+init();
