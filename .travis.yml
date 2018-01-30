@@ -15,8 +15,6 @@ before_install:
 install:
   - npm install
 
-before_script: greenkeeper-lockfile-update
-
 android:
   components:
     - tools
@@ -40,6 +38,7 @@ android:
     - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
 
 before_script:
+  - greenkeeper-lockfile-update
   - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
   - emulator -avd test -no-window &
   - android-wait-for-emulator
