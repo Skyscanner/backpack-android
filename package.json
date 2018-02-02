@@ -7,11 +7,20 @@
     "npm": "^5.6.0"
   },
   "scripts": {
+    "precommit": "lint-staged",
     "preinstall": "node -e \"$(curl -fsSL https://raw.githubusercontent.com/Skyscanner/ensure-node-env/master/dist/index.js)\"",
-    "build": "gulp",
     "prerelease:env": ": ${BINTRAY_USER?Need to set BINTRAY_USER} ${BINTRAY_KEY?Need to set BINTRAY_KEY}",
     "prerelease": "npm run prerelease:env",
-    "release": "node release.js"
+    "release": "node release.js",
+    "test": "eslint . --ext .js,.jsx",
+    "prebuild": "npm test",
+    "build": "gulp",
+    "prettier": "prettier --config .prettierrc --write \"**/*.js\""
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint"
+    ]
   },
   "repository": {
     "type": "git",
@@ -24,23 +33,34 @@
   },
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
     "bpk-tokens": "^26.7.2",
     "del": "^3.0.0",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-skyscanner": "^3.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.6.1",
     "gulp": "^3.9.1",
     "gulp-data": "^1.3.1",
     "gulp-nunjucks": "^3.1.1",
     "gulp-rename": "^1.2.2",
-    "inquirer": "^5.0.0",
     "lodash": "^4.17.4",
     "merge2": "^1.2.1",
-    "node-fetch": "^2.0.0",
-    "release-it": "^6.0.0",
-    "replace-in-file": "^3.1.0",
-    "semver": "^5.5.0",
+    "prettier": "^1.10.2",
     "through2": "^2.0.3",
     "tinycolor2": "^1.4.1"
   },
   "dependencies": {
-    "run-sequence": "^2.2.1"
+    "gulp-util": "^3.0.8",
+    "inquirer": "^5.0.0",
+    "run-sequence": "^2.2.1",
+    "semver": "^5.5.0",
+    "release-it": "^6.0.0",
+    "replace-in-file": "^3.1.0",
+    "node-fetch": "^2.0.0"
   }
 }
