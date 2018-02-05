@@ -29,22 +29,23 @@ const PATHS = {
   templates: path.join(__dirname, 'templates'),
   outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res', 'values'),
 };
-
+const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
 const pascalCase = s => _.flow(_.camelCase, _.upperFirst)(s);
 
 const getTokenType = type =>
   Object.values(tokens.props).filter(i => i.type === type);
-const getColors = () =>
-  getTokenType('color').map(color => {
-    const newColor = JSON.parse(JSON.stringify(color));
-    newColor.name = `bpk${pascalCase(
-      newColor.name.replace(newColor.type.toUpperCase(), ''),
-    )}`;
-    return newColor;
-  });
 
-gulp.task('template:color', () =>
-  gulp
+gulp.task('template:color', () => {
+  const getColors = () =>
+    getTokenType('color').map(color => {
+      const newColor = JSON.parse(JSON.stringify(color));
+      newColor.name = `bpk${pascalCase(
+        newColor.name.replace(newColor.type.toUpperCase(), ''),
+      )}`;
+      return newColor;
+    });
+
+  return gulp
     .src(`${PATHS.templates}/BackpackColor.njk`)
     .pipe(
       nunjucks.compile({
@@ -52,11 +53,38 @@ gulp.task('template:color', () =>
       }),
     )
     .pipe(rename('backpack.color.xml'))
-    .pipe(gulp.dest(PATHS.outputRes)),
-);
+    .pipe(gulp.dest(PATHS.outputRes));
+});
+
+gulp.task('template:spacing', () => {
+  const getSpacing = () =>
+    getTokenType('size')
+      .map(token => JSON.parse(JSON.stringify(token)))
+      .filter(token => token.category === 'spacings')
+      .filter(({ name }) =>
+        VALID_SPACINGS.has(name.toLowerCase().replace('spacing_', '')),
+      )
+      .map(token => {
+        const newToken = token;
+        newToken.name = `bpk${pascalCase(
+          newToken.name.replace(newToken.type.toUpperCase(), ''),
+        )}`;
+        return newToken;
+      });
+
+  return gulp
+    .src(`${PATHS.templates}/BackpackSpacing.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: getSpacing(),
+      }),
+    )
+    .pipe(rename('backpack.dimensions.spacing.xml'))
+    .pipe(gulp.dest(PATHS.outputRes));
+});
 
 gulp.task('default', () => {
-  runSequence('template:color');
+  runSequence('template:color', 'template:spacing');
 });
 
 gulp.task('clean', () => del([PATHS.outputRes], { force: true }));
