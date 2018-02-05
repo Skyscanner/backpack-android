@@ -12,16 +12,28 @@ Backpack is available through [Bintray](https://bintray.com/skyscanner/Backpack/
 all of it, simply add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-    compile 'net.skyscanner.backpack:Backpack:0.0.3'
+compile 'net.skyscanner.backpack:Backpack:0.0.3'
 ```
-and a maven repository reference in the `build.gradle` (in your main root) in the `repository` block:
+
+Backpack is availabe in JCenter so if your app resolves dependencies through JCenter you're all set, if not add in your root `build.gradle` 
 
 ```gradle
-maven { 
-    url "https://dl.bintray.com/skyscanner/Backpack" 
-    }
+repositories {
+    jcenter()
+}
+```
+## Usage
+
+### Color
+```xml
+<TextView
+  android:text="This is Backpack Blue 500!"
+  android:textColor="@color/bpkBlue500" />
 ```
 
+```kotlin
+R.color.bpkBlue500
+```
 ## Contributing to Backpack
 
 Please see the [Contributing guide][0] for instructions on contributing to this project.
