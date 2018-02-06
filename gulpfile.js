@@ -29,15 +29,96 @@ const PATHS = {
   templates: path.join(__dirname, 'templates'),
   outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res', 'values'),
 };
+
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
+const VALID_TEXT_STYLES = new Set(['xs', 'sm', 'base', 'lg', 'xl', 'xxl']);
+const { FONT_FAMILY, FONT_FAMILY_EMPHASIZE } = tokens.aliases;
+const EMPHASIZED_FONT_WEIGHT = tokens.props.TEXT_EMPHASIZED_FONT_WEIGHT.value;
+
 const pascalCase = s => _.flow(_.camelCase, _.upperFirst)(s);
 
-const getTokenType = type =>
+const fontForWeight = weightString => {
+  const cleanWeight = weightString.trim();
+
+  if (cleanWeight === '400') {
+    if (!FONT_FAMILY) {
+      throw new Error('Expected `FONT_FAMILY` to exist in tokens. It did not');
+    }
+
+    return FONT_FAMILY.value.replace(/"/g, '');
+  } else if (cleanWeight === '500') {
+    if (!FONT_FAMILY_EMPHASIZE) {
+      throw new Error(
+        'Expected `FONT_FAMILY_EMPHASIZE` to exist in tokens. It did not',
+      );
+    }
+
+    return FONT_FAMILY_EMPHASIZE.value.replace(/"/g, '');
+  }
+  throw new Error(`No font know for font weight \`${cleanWeight}\`.`);
+};
+
+const tokensWithType = type =>
   Object.values(tokens.props).filter(i => i.type === type);
+
+const tokensWithCategory = category =>
+  Object.values(tokens.props).filter(i => i.category === category);
+
+const getTextStyles = () => {
+  const result = _.chain(
+    [].concat(
+      tokensWithCategory('font-sizes'),
+      tokensWithCategory('font-weights'),
+    ),
+  )
+    .groupBy(({ name }) =>
+      name.replace('_FONT_SIZE', '').replace('_FONT_WEIGHT', ''),
+    )
+    .map((values, key) => [values, key])
+    .filter(token =>
+      VALID_TEXT_STYLES.has(token[1].replace('TEXT_', '').toLowerCase()),
+    )
+    .map(token => {
+      const properties = token[0];
+      const key = token[1];
+
+      const sizeProp = _.filter(
+        properties,
+        ({ category }) => category === 'font-sizes',
+      );
+      const weightProp = _.filter(
+        properties,
+        ({ category }) => category === 'font-weights',
+      );
+
+      if (sizeProp.length !== 1 || weightProp.length !== 1) {
+        throw new Error(
+          'Expected all text sizes to have a weight and font size.',
+        );
+      }
+
+      return {
+        name: `bpk${pascalCase(key)}`,
+        size: Number.parseInt(sizeProp[0].value, 10),
+        fontFamily: fontForWeight(weightProp[0].value),
+      };
+    })
+    .flatMap(properties => [
+      properties,
+      {
+        ...properties,
+        fontFamily: fontForWeight(EMPHASIZED_FONT_WEIGHT),
+        name: `${properties.name}Emphasized`,
+      },
+    ])
+    .value();
+
+  return result;
+};
 
 gulp.task('template:color', () => {
   const getColors = () =>
-    getTokenType('color').map(color => {
+    tokensWithType('color').map(color => {
       const newColor = JSON.parse(JSON.stringify(color));
       newColor.name = `bpk${pascalCase(
         newColor.name.replace(newColor.type.toUpperCase(), ''),
@@ -58,7 +139,7 @@ gulp.task('template:color', () => {
 
 gulp.task('template:spacing', () => {
   const getSpacing = () =>
-    getTokenType('size')
+    tokensWithType('size')
       .map(token => JSON.parse(JSON.stringify(token)))
       .filter(token => token.category === 'spacings')
       .filter(({ name }) =>
@@ -83,8 +164,20 @@ gulp.task('template:spacing', () => {
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
+gulp.task('template:text', () =>
+  gulp
+    .src(`${PATHS.templates}/BackpackText.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: getTextStyles(),
+      }),
+    )
+    .pipe(rename('backpack.text.xml'))
+    .pipe(gulp.dest(PATHS.outputRes)),
+);
+
 gulp.task('default', () => {
-  runSequence('template:color', 'template:spacing');
+  runSequence('template:color', 'template:text', 'template:spacing');
 });
 
 gulp.task('clean', () => del([PATHS.outputRes], { force: true }));
