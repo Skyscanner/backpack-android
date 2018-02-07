@@ -28,4 +28,15 @@ class BpkResources {
    assertEquals("#ff817b8f", appContext.getResources().getString(R.color.bpkGray500));
    assertEquals("#ffffffff", appContext.getResources().getString(R.color.bpkWhite));
   }
+
+  @Test
+  fun bpkSpacing() {
+    val appContext = InstrumentationRegistry.getTargetContext()
+    assertEquals("4.0dip", appContext.getResources().getString(R.dimen.bpkSpacingSm));
+    assertEquals("8.0dip", appContext.getResources().getString(R.dimen.bpkSpacingMd));
+    assertEquals("16.0dip", appContext.getResources().getString(R.dimen.bpkSpacingBase));
+    assertEquals("24.0dip", appContext.getResources().getString(R.dimen.bpkSpacingLg));
+    assertEquals("32.0dip", appContext.getResources().getString(R.dimen.bpkSpacingXl));
+    assertEquals("40.0dip", appContext.getResources().getString(R.dimen.bpkSpacingXxl));
+  }
 }
