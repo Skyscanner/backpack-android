@@ -38,6 +38,12 @@ class BpkResources {
     assertEquals("32.0dip", appContext.getResources().getString(R.dimen.bpkSpacingXl));
     assertEquals("40.0dip", appContext.getResources().getString(R.dimen.bpkSpacingXxl));
   }
+  @Test
+  fun bpkRadii() {
+    val appContext = InstrumentationRegistry.getTargetContext()
+    assertEquals("2.0dip", appContext.getResources().getString(R.dimen.bpkBorderRadiusSm));
+    assertEquals("40.0dip", appContext.getResources().getString(R.dimen.bpkBorderRadiusPill));
+  }
 
   @Test
   fun bpkTextStyles() {
