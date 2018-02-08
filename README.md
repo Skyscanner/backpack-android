@@ -15,7 +15,7 @@ all of it, simply add the following line to your `build.gradle` (in your app mod
 compile 'net.skyscanner.backpack:Backpack:0.0.3'
 ```
 
-Backpack is availabe in JCenter so if your app resolves dependencies through JCenter you're all set, if not add in your root `build.gradle` 
+Backpack is availabe in JCenter so if your app resolves dependencies through JCenter you're all set, if not add in your root `build.gradle`
 
 ```gradle
 repositories {
@@ -23,6 +23,27 @@ repositories {
 }
 ```
 ## Usage
+
+### Text Styles
+
+The Backpack text styles are available as [style resources](Backpack/src/main/res/values/backpack.text.xml).
+
+The supported styles are
+
++ `bpkTextXs`
++ `bpkTextXsEmphasized`
++ `bpkTextSm`
++ `bpkTextSmEmphasized`
++ `bpkTextBase`
++ `bpkTextBaseEmphasized`
++ `bpkTextLg`
++ `bpkTextLgEmphasized`
++ `bpkTextXl`
++ `bpkTextXlEmphasized`
++ `bpkTextXl`
++ `bpkTextXlEmphasized`
++ `bpkTextXxl`
++ `bpkTextXxlEmphasized`
 
 ### Color
 ```xml

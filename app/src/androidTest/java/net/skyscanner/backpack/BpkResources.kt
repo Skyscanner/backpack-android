@@ -1,6 +1,5 @@
 package net.skyscanner.backpack
 
-import android.content.res.Resources
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 
@@ -38,5 +37,20 @@ class BpkResources {
     assertEquals("24.0dip", appContext.getResources().getString(R.dimen.bpkSpacingLg));
     assertEquals("32.0dip", appContext.getResources().getString(R.dimen.bpkSpacingXl));
     assertEquals("40.0dip", appContext.getResources().getString(R.dimen.bpkSpacingXxl));
+  }
+
+  @Test
+  fun bpkTextStyles() {
+    val appContext = InstrumentationRegistry.getTargetContext()
+    val toTest = arrayOf(R.style.bpkTextSm, R.style.bpkTextSmEmphasized)
+
+    for (style in toTest) {
+      val result = appContext.obtainStyledAttributes(R.style.bpkTextLg, R.styleable.BpkTextStyle)
+
+      assertNotNull(result.getString(R.styleable.BpkTextStyle_android_fontFamily))
+      assertNotNull(result.getString(R.styleable.BpkTextStyle_android_textSize))
+
+      result.recycle()
+    }
   }
 }
