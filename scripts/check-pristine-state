@@ -1,43 +1,35 @@
 #!/usr/bin/env node
 
-const {
-    promisify
-} = require("util");
-const {
-    exec
-} = require('child_process');
+const { promisify } = require('util');
+const { exec } = require('child_process');
+
 const execAsync = promisify(exec);
 
-const command = 'git status --porcelain | awk \'{print $2}\'';
-const [node, path, ...filesToIgnore] = process.argv;
+const command = "git status --porcelain | awk '{print $2}'";
+const [...filesToIgnore] = process.argv;
 
-async function init() {
-    const {
-        stdout,
-        stderr
-    } = await execAsync(command, {
-        cwd: `${__dirname}/../`
-    });
-    const changedFiles = stdout
-        .trim()
-        .split("\n")
-        .filter(isNotInList(filesToIgnore))
-        .filter(exists);
+const exists = item => !!item;
 
-    if (changedFiles.length) {
-        console.log(`😰  Git shows some files have been changed (ignoring ${filesToIgnore.join(",")}). Changed files: ${changedFiles.join(",")}`);
-        process.exit(1);
-    }
-}
+const isNotInList = list => item => list.indexOf(item) === -1;
 
-function exists(item) {
-    return !!item;
-}
+const init = async () => {
+  const { stdout } = await execAsync(command, {
+    cwd: `${__dirname}/../`,
+  });
+  const changedFiles = stdout
+    .trim()
+    .split('\n')
+    .filter(isNotInList(filesToIgnore))
+    .filter(exists);
 
-function isNotInList(list) {
-    return function isItemNotInList(item) {
-        return list.indexOf(item) === -1;
-    }
-}
+  if (changedFiles.length) {
+    console.log(
+      `😰  Git shows some files have been changed (ignoring ${filesToIgnore.join(
+        ',',
+      )}). Changed files: ${changedFiles.join(',')}`,
+    );
+    process.exit(1);
+  }
+};
 
 init();
