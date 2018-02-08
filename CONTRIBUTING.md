@@ -13,13 +13,13 @@ With `nvm` use `nvm use` to set the correct node version in your machine.
 Given that you have a compatible environment as stated above you can now setup the project.
 
 + `npm install` to install npm dependencies
-+  open the project in andorid studio
++  Open the project in Android studio
 
 ## Releasing
 
 > Backpack team only
 
-To issue a new release make sure you've set the project up as above, that you have push acess to the Backpack Bintray repo and the `BINTRAY_USER` and `BINTRAY_USER` env vars are set
+To issue a new release make sure you've set the project up as above, that you have push acess to the Backpack Bintray repo and the `BINTRAY_USER` and `BINTRAY_KEY` env vars are set
 
 Run `npm run release` and follow the process through, you'll be asked which semantic version the release
 
