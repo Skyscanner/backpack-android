@@ -1,10 +1,16 @@
 {
-    "dry-run": false,
-    "npm": {
-        "publish": false
-    },
-    "buildCommand": "npm run build",
-    "dist": {
-        "beforeStageCommand": "echo 'here'"
+  "requireCleanWorkingDir": false,
+  "prompt": {
+    "src": {
+      "release": true
     }
+  },
+  "src": {
+    "afterReleaseCommand": "./gradlew bintrayUpload"
+  },
+  "dry-run": false,
+  "npm": {
+    "publish": false
+  },
+  "buildCommand": "npm run build"
 }

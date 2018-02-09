@@ -28,7 +28,6 @@
     android:layout_marginLeft="135dp"
     android:layout_marginTop="@dimen/bpkSpacingXxl"
     android:background="@drawable/pill_button"
-    android:onClick="showMore"
     android:paddingVertical="@dimen/bpkSpacingMd"
     android:paddingHorizontal="@dimen/bpkSpacingBase"
     android:text="@string/main_button"
