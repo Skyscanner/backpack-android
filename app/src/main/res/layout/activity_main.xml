@@ -6,17 +6,36 @@
     android:layout_height="match_parent"
     tools:context="net.skyscanner.backpack.MainActivity">
 
-    <TextView
-        style="@style/bpkTextXxl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/bpkGreen500"
-        android:layout_marginLeft="@dimen/bpkSpacingBase"
-        android:layout_marginRight="@dimen/bpkSpacingBase"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+  <TextView
+    android:id="@+id/textView"
+    style="@style/bpkTextXxl"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/bpkSpacingBase"
+    android:layout_marginRight="@dimen/bpkSpacingBase"
+    android:text="@string/app_name"
+    android:textColor="@color/bpkBlue500"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+  <Button
+    android:id="@+id/toast_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="135dp"
+    android:layout_marginTop="@dimen/bpkSpacingXxl"
+    android:background="@drawable/pill_button"
+    android:onClick="showMore"
+    android:paddingVertical="@dimen/bpkSpacingMd"
+    android:paddingHorizontal="@dimen/bpkSpacingBase"
+    android:text="@string/main_button"
+    android:textColor="@color/bpkWhite"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textView"
+    app:layout_constraintVertical_bias="0.5" />
 
 </android.support.constraint.ConstraintLayout>

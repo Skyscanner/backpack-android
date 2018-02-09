@@ -139,9 +139,8 @@ gulp.task('template:color', () => {
 
 gulp.task('template:spacing', () => {
   const getSpacing = () =>
-    tokensWithType('size')
+    tokensWithCategory('spacings')
       .map(token => JSON.parse(JSON.stringify(token)))
-      .filter(token => token.category === 'spacings')
       .filter(({ name }) =>
         VALID_SPACINGS.has(name.toLowerCase().replace('spacing_', '')),
       )
@@ -175,9 +174,31 @@ gulp.task('template:text', () =>
     .pipe(rename('backpack.text.xml'))
     .pipe(gulp.dest(PATHS.outputRes)),
 );
+gulp.task('template:radii', () => {
+  const getRadii = () =>
+    tokensWithCategory('radii').map(token => {
+      const newToken = JSON.parse(JSON.stringify(token));
+      newToken.name = `bpk${pascalCase(newToken.name)}`;
+      return newToken;
+    });
+  return gulp
+    .src(`${PATHS.templates}/BackpackRadii.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: getRadii(),
+      }),
+    )
+    .pipe(rename('backpack.radii.xml'))
+    .pipe(gulp.dest(PATHS.outputRes));
+});
 
 gulp.task('default', () => {
-  runSequence('template:color', 'template:text', 'template:spacing');
+  runSequence(
+    'template:color',
+    'template:text',
+    'template:spacing',
+    'template:radii',
+  );
 });
 
 gulp.task('clean', () => del([PATHS.outputRes], { force: true }));
