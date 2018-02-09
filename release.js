@@ -107,15 +107,13 @@ async function release() {
 
     const releaseOptions = {
       increment: version,
+      requireCleanWorkingDir: false,
       npm: {
         publish: false,
       },
-      github: {
-        release: false,
-      },
       prompt: {
         src: {
-          release: false,
+          release: true,
         },
       },
       src: {
