@@ -13,6 +13,22 @@ Usage:
   style="@style/bpkTextSm" />
 ```
 
+Adds Backpack radii tokens. See th full list in the [README.md](README.md#radii).
+
+Usage:
+
+```XML
+<corners android:radius="@dimen/bpkBorderRadiusPill" />
+```
+
+Adds Backpack elevation tokens. See th full list in the [README.md](README.md#elevation).
+
+Usage:
+
+```XML
+android:elevation="@dimen/bpkElevationXs"
+```
+
 ## 0.0.3
 
 Update project id to "net.skyscanner.backpack"

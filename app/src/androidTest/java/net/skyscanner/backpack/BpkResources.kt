@@ -46,6 +46,16 @@ class BpkResources {
   }
 
   @Test
+  fun bpkElevation() {
+    val appContext = InstrumentationRegistry.getTargetContext()
+    assertEquals("2.0dip", appContext.getResources().getString(R.dimen.bpkElevationXs));
+    assertEquals("4.0dip", appContext.getResources().getString(R.dimen.bpkElevationSm));
+    assertEquals("6.0dip", appContext.getResources().getString(R.dimen.bpkElevationBase));
+    assertEquals("16.0dip", appContext.getResources().getString(R.dimen.bpkElevationLg));
+    assertEquals("24.0dip", appContext.getResources().getString(R.dimen.bpkElevationXl));
+  }
+
+  @Test
   fun bpkTextStyles() {
     val appContext = InstrumentationRegistry.getTargetContext()
     val toTest = arrayOf(R.style.bpkTextSm, R.style.bpkTextSmEmphasized)

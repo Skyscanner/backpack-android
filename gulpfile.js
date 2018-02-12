@@ -192,12 +192,31 @@ gulp.task('template:radii', () => {
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
+gulp.task('template:elevation', () => {
+  const getElevation = () =>
+    tokensWithCategory('elevation').map(token => {
+      const newToken = JSON.parse(JSON.stringify(token));
+      newToken.name = `bpk${pascalCase(newToken.name)}`;
+      return newToken;
+    });
+  return gulp
+    .src(`${PATHS.templates}/BackpackElevation.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: getElevation(),
+      }),
+    )
+    .pipe(rename('backpack.elevation.xml'))
+    .pipe(gulp.dest(PATHS.outputRes));
+});
+
 gulp.task('default', () => {
   runSequence(
     'template:color',
     'template:text',
     'template:spacing',
     'template:radii',
+    'template:elevation',
   );
 });
 

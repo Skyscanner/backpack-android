@@ -24,6 +24,27 @@ repositories {
 ```
 ## Usage
 
+### Radii
+
+The Backpack raddi tokens are available as [dimension resource](Backpack/src/main/res/values/backpack.radii.xml).
+
+The supported tokens are
+
++ `bpkBorderRadiusSm`
++ `bpkBorderRadiusPill`
+
+### Elevation
+
+The Backpack elevation tokens are available as [dimension resource](Backpack/src/main/res/values/backpack.elevation.xml).
+
+The supported tokens are
+
++ `bpkElevationXs`
++ `bpkElevationSm`
++ `bpkElevationBase`
++ `bpkElevationLg`
++ `bpkElevationXl`
+
 ### Text Styles
 
 The Backpack text styles are available as [style resources](Backpack/src/main/res/values/backpack.text.xml).
