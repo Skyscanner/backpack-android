@@ -3,7 +3,9 @@
 All notable changes to this project will be documented in this file.
 
 ## Master
+_Nothing Yet_
 
+## 0.1.0
 Adds Backpack text styles. See th full list in the [README.md](README.md#text-styles).
 
 Usage:
