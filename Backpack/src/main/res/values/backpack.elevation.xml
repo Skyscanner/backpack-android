@@ -18,14 +18,14 @@
 -->
 <resources>
 
-	<dimen name="bpkElevationXs">2dp</dimen>
-
-	<dimen name="bpkElevationSm">4dp</dimen>
-
 	<dimen name="bpkElevationBase">6dp</dimen>
 
 	<dimen name="bpkElevationLg">16dp</dimen>
 
+	<dimen name="bpkElevationSm">4dp</dimen>
+
 	<dimen name="bpkElevationXl">24dp</dimen>
+
+	<dimen name="bpkElevationXs">2dp</dimen>
 
  </resources>

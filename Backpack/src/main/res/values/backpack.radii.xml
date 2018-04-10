@@ -18,8 +18,8 @@
 -->
 <resources>
 
-	<dimen name="bpkBorderRadiusSm">2dp</dimen>
-
 	<dimen name="bpkBorderRadiusPill">40dp</dimen>
+
+	<dimen name="bpkBorderRadiusSm">2dp</dimen>
 
  </resources>

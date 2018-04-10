@@ -18,13 +18,13 @@
 -->
 <resources>
 
-	<dimen name="bpkSpacingSm">4dp</dimen>
-
-	<dimen name="bpkSpacingMd">8dp</dimen>
-
 	<dimen name="bpkSpacingBase">16dp</dimen>
 
 	<dimen name="bpkSpacingLg">24dp</dimen>
+
+	<dimen name="bpkSpacingMd">8dp</dimen>
+
+	<dimen name="bpkSpacingSm">4dp</dimen>
 
 	<dimen name="bpkSpacingXl">32dp</dimen>
 
