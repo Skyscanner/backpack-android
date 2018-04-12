@@ -22,6 +22,7 @@ const nunjucks = require('gulp-nunjucks');
 const rename = require('gulp-rename');
 const runSequence = require('run-sequence');
 const del = require('del');
+const tinycolor = require('tinycolor2');
 const _ = require('lodash');
 const tokens = require('bpk-tokens/tokens/base.raw.android.json');
 
@@ -119,11 +120,12 @@ const getTextStyles = () => {
 gulp.task('template:color', () => {
   const getColors = () =>
     tokensWithType('color').map(color => {
-      const newColor = JSON.parse(JSON.stringify(color));
-      newColor.name = `bpk${pascalCase(
-        newColor.name.replace(newColor.type.toUpperCase(), ''),
+      const colorObject = JSON.parse(JSON.stringify(color));
+      colorObject.name = `bpk${pascalCase(
+        colorObject.name.replace(colorObject.type.toUpperCase(), ''),
       )}`;
-      return newColor;
+      colorObject.value = tinycolor(colorObject.value).toHexString();
+      return colorObject;
     });
 
   return gulp
