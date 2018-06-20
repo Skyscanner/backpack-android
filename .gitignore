@@ -42,6 +42,11 @@ captures/
 .idea/tasks.xml
 .idea/gradle.xml
 .idea/libraries
+.idea/assetWizardSettings.xml
+.idea/dictionaries/
+.idea/caches/
+.idea/codeStyles/
+.idea/copyright/
 
 # Keystore files
 *.jks
@@ -200,4 +205,3 @@ typings/
 
 
 # End of https://www.gitignore.io/api/android,intellij+iml,node,macos
-
