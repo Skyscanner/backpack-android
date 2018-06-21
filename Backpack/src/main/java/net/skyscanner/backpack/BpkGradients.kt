@@ -13,7 +13,7 @@ object BpkGradients {
    * @param orientation The orientation of the requested gradient. Default is TL_BR
    * @return Gradient drawable with default backpack colors
    */
-  operator fun get(orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TL_BR): GradientDrawable {
+  fun getPrimary(orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TL_BR): GradientDrawable {
     return GradientDrawable(
       orientation,
       intArrayOf(R.color.bpkBlue500, R.color.bpkWhite))
