@@ -2,6 +2,7 @@ package net.skyscanner.backpack
 
 import android.annotation.TargetApi
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.support.test.runner.AndroidJUnit4
 import io.github.backpack.backpack.R
 import org.junit.Assert.assertEquals
@@ -13,7 +14,6 @@ import org.junit.runner.RunWith
 class BpkGradientsTest {
 
   @Test
-  @TargetApi(24)
   fun getPrimary() {
 
     val expectedGradient = GradientDrawable(
@@ -24,12 +24,13 @@ class BpkGradientsTest {
 
     assertEquals(expectedGradient.orientation, gradient.orientation)
     assertEquals(expectedGradient.alpha, gradient.alpha)
-    assertEquals(R.color.bpkBlue500, gradient.colors[0])
-    assertEquals(R.color.bpkWhite, gradient.colors[1])
+    if (Build.VERSION.SDK_INT >= 24) {
+      assertEquals(R.color.bpkBlue500, gradient.colors[0])
+      assertEquals(R.color.bpkWhite, gradient.colors[1])
+    }
   }
 
   @Test
-  @TargetApi(24)
   fun getPrimaryDefault() {
 
     val expectedGradient = GradientDrawable(
@@ -40,8 +41,10 @@ class BpkGradientsTest {
 
     assertEquals(expectedGradient.orientation, gradient.orientation)
     assertEquals(expectedGradient.alpha, gradient.alpha)
-    assertEquals(R.color.bpkBlue500, gradient.colors[0])
-    assertEquals(R.color.bpkWhite, gradient.colors[1])
+    if (Build.VERSION.SDK_INT >= 24) {
+      assertEquals(R.color.bpkBlue500, gradient.colors[0])
+      assertEquals(R.color.bpkWhite, gradient.colors[1])
+    }
   }
 
 }
