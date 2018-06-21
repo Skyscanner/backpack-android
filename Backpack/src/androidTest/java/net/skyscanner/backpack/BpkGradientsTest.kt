@@ -1,6 +1,5 @@
 package net.skyscanner.backpack
 
-import android.annotation.TargetApi
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.support.test.runner.AndroidJUnit4
@@ -20,7 +19,7 @@ class BpkGradientsTest {
       GradientDrawable.Orientation.TL_BR,
       intArrayOf(R.color.bpkBlue500, R.color.bpkWhite))
 
-    val gradient = BpkGradients.getPrimary(GradientDrawable.Orientation.TL_BR)
+    val gradient = BpkGradients.getPrimary()
 
     assertEquals(expectedGradient.orientation, gradient.orientation)
     assertEquals(expectedGradient.alpha, gradient.alpha)
