@@ -18,7 +18,7 @@ object BpkGradients {
 
     return GradientDrawable(
       orientation,
-      intArrayOf(ContextCompat.getColor(context, R.color.bpkBlue500), ContextCompat.getColor(context, R.color.bpkWhite)))
+      intArrayOf(ContextCompat.getColor(context, R.color.bpkBlue500), ContextCompat.getColor(context, R.color.bpkPrimaryGradientLight)))
   }
 
 }
