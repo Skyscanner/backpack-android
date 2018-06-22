@@ -1,5 +1,6 @@
 package net.skyscanner.backpack
 
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.support.test.runner.AndroidJUnit4
@@ -7,25 +8,35 @@ import io.github.backpack.backpack.R
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
+import android.support.test.InstrumentationRegistry
+import android.support.v4.content.ContextCompat
+import org.junit.Before
+
 
 @RunWith(AndroidJUnit4::class)
 
 class BpkGradientsTest {
+  private lateinit var textContext: Context
+
+  @Before
+  fun setup() {
+    textContext = InstrumentationRegistry.getContext()
+  }
 
   @Test
   fun getPrimary() {
 
     val expectedGradient = GradientDrawable(
       GradientDrawable.Orientation.TL_BR,
-      intArrayOf(R.color.bpkBlue500, R.color.bpkWhite))
+      intArrayOf(ContextCompat.getColor(textContext, R.color.bpkBlue500), ContextCompat.getColor(textContext, R.color.bpkWhite)))
 
-    val gradient = BpkGradients.getPrimary()
+    val gradient = BpkGradients.getPrimary(textContext)
 
     assertEquals(expectedGradient.orientation, gradient.orientation)
     assertEquals(expectedGradient.alpha, gradient.alpha)
     if (Build.VERSION.SDK_INT >= 24) {
-      assertEquals(R.color.bpkBlue500, gradient.colors[0])
-      assertEquals(R.color.bpkWhite, gradient.colors[1])
+      assertEquals(ContextCompat.getColor(textContext, R.color.bpkBlue500), gradient.colors[0])
+      assertEquals(ContextCompat.getColor(textContext, R.color.bpkWhite), gradient.colors[1])
     }
   }
 
@@ -34,15 +45,15 @@ class BpkGradientsTest {
 
     val expectedGradient = GradientDrawable(
       GradientDrawable.Orientation.BOTTOM_TOP,
-      intArrayOf(R.color.bpkBlue500, R.color.bpkWhite))
+      intArrayOf(ContextCompat.getColor(textContext, R.color.bpkBlue500), ContextCompat.getColor(textContext, R.color.bpkWhite)))
 
-    val gradient = BpkGradients.getPrimary(GradientDrawable.Orientation.BOTTOM_TOP)
+    val gradient = BpkGradients.getPrimary(textContext, GradientDrawable.Orientation.BOTTOM_TOP)
 
     assertEquals(expectedGradient.orientation, gradient.orientation)
     assertEquals(expectedGradient.alpha, gradient.alpha)
     if (Build.VERSION.SDK_INT >= 24) {
-      assertEquals(R.color.bpkBlue500, gradient.colors[0])
-      assertEquals(R.color.bpkWhite, gradient.colors[1])
+      assertEquals(ContextCompat.getColor(textContext, R.color.bpkBlue500), gradient.colors[0])
+      assertEquals(ContextCompat.getColor(textContext, R.color.bpkWhite), gradient.colors[1])
     }
   }
 
