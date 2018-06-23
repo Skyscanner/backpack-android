@@ -43,7 +43,7 @@
     "babel-eslint": "^8.2.1",
     "bpk-tokens": "^27.0.0",
     "del": "^3.0.0",
-    "eslint": "^4.16.0",
+    "eslint": "^5.0.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-skyscanner": "^3.0.0",
