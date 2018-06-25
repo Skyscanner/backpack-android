@@ -41,7 +41,7 @@
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
     "babel-eslint": "^8.2.1",
-    "bpk-tokens": "^27.0.0",
+    "bpk-tokens": "^27.0.4",
     "del": "^3.0.0",
     "eslint": "^4.16.0",
     "eslint-config-airbnb": "^16.1.0",
