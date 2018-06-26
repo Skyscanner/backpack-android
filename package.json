@@ -64,7 +64,7 @@
   },
   "dependencies": {
     "gulp-util": "^3.0.8",
-    "inquirer": "^5.0.0",
+    "inquirer": "^6.0.0",
     "node-fetch": "^2.0.0",
     "release-it": "^7.0.0",
     "replace-in-file": "^3.1.0",
