@@ -76,6 +76,15 @@ The supported styles are
 ```kotlin
 R.color.bpkBlue500
 ```
+### Gradient
+
+The Backpack gradient component is available with the `BPKGradient` utility class. It accepts the direction of the gradient as an optional parameter.
+
+```java
+BpkGradients.getPrimary(context);
+BpkGradients.getPrimary(context, GradientDrawable.Orientation.LEFT_RIGHT);
+```
+
 ## Contributing to Backpack
 
 Please see the [Contributing guide][0] for instructions on contributing to this project.

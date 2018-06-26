@@ -3,10 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 ## Master
+
 _Nothing Yet_
 
+## 0.2.0
+
+Introducing BpkGradients. See usage in [README.md](README.md#gradient).
+
 ## 0.1.0
-Adds Backpack text styles. See th full list in the [README.md](README.md#text-styles).
+
+Adds Backpack text styles. See the full list in the [README.md](README.md#text-styles).
 
 Usage:
 
@@ -15,7 +21,7 @@ Usage:
   style="@style/bpkTextSm" />
 ```
 
-Adds Backpack radii tokens. See th full list in the [README.md](README.md#radii).
+Adds Backpack radii tokens. See the full list in the [README.md](README.md#radii).
 
 Usage:
 
