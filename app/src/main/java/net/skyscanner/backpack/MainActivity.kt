@@ -13,6 +13,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main);
 
         val btn = findViewById<Button>(R.id.toast_button) as Button;
-        btn.setOnClickListener {view -> Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()}
+        btn.setOnClickListener {_ -> Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show()}
     }
 }
