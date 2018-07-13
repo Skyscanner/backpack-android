@@ -47,7 +47,8 @@ const fontForWeight = weightString => {
     }
 
     return FONT_FAMILY.value.replace(/"/g, '');
-  } else if (cleanWeight === '500') {
+  }
+  if (cleanWeight === '500') {
     if (!FONT_FAMILY_EMPHASIZE) {
       throw new Error(
         'Expected `FONT_FAMILY_EMPHASIZE` to exist in tokens. It did not',
