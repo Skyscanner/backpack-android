@@ -51,7 +51,6 @@
     "gulp-rename": "^1.2.2",
     "lodash": "^4.17.4",
     "merge2": "^1.2.1",
-    "prettier": "^1.10.2",
     "through2": "^2.0.3",
     "tinycolor2": "^1.4.1"
   },
