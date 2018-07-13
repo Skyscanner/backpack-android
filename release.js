@@ -17,11 +17,12 @@
  */
 
 const inquirer = require('inquirer');
-const pkg = require('./package.json');
 const semver = require('semver');
 const replace = require('replace-in-file');
 const releaseit = require('release-it');
 const fetch = require('node-fetch');
+
+const pkg = require('./package.json');
 
 const major = semver.inc(pkg.version, 'major');
 const minor = semver.inc(pkg.version, 'minor');
