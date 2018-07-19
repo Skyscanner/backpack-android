@@ -39,14 +39,16 @@ android:
 
 before_script:
   - greenkeeper-lockfile-update
+  - easy_install Pillow
+  - mksdcard -l e 1024M test-sd.img
   - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
-  - emulator -avd test -no-window &
+  - emulator -avd test -sdcard test-sd.img -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 script:
   - set -e
   - npm run build
-  - ./scripts/check-pristine-state package-lock.json
+  - ./scripts/check-pristine-state package-lock.json test-sd.img
   - ./gradlew cAT
   - ./gradlew verifyDebugAndroidTestScreenshotTest
 
