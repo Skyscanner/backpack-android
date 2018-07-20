@@ -1,5 +1,5 @@
 language: android
-sudo: false
+sudo: true
 
 cache:
   directories:
@@ -14,6 +14,7 @@ before_install:
 
 install:
   - npm install
+  - sudo easy_install Pillow
 
 android:
   components:
@@ -39,7 +40,6 @@ android:
 
 before_script:
   - greenkeeper-lockfile-update
-  - easy_install Pillow
   - mksdcard -l e 1024M test-sd.img
   - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
   - emulator -avd test -sdcard test-sd.img -no-window &
