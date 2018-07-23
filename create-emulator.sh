@@ -3,7 +3,8 @@
 # This file creates the emulator based on standard settings.
 # Use this emulator for all testing purposes including snapshot tests on CI.
 
+rm  test-sd.img
 mksdcard -l e 1024M test-sd.img
-sdkmanager "system-images;android-21;default;x86"
-echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n bpk-avd  -k "system-images;android-21;default;x86" &
-$ANDROID_HOME//emulator/emulator -avd bpk-avd -sdcard test-sd.img &
+sdkmanager "system-images;android-23;google_apis;x86"
+echo no | $ANDROID_HOME/tools/bin/avdmanager create avd -f -n bpk-avd1  -k "system-images;android-23;google_apis;x86" &
+$ANDROID_HOME//emulator/emulator -avd bpk-avd1 -sdcard test-sd.img &

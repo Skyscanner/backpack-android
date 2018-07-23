@@ -41,6 +41,7 @@ android:
 before_script:
   - greenkeeper-lockfile-update
   - echo y | android update sdk --no-ui --all --filter "android-ANDROID_API_LEVEL"
+  - echo y | android update sdk --no-ui --all --filter "android-EMULATOR_API_LEVEL"
   - android-update-sdk --components="sys-img-$ABI-$EMULATOR_TAG-$EMULATOR_API_LEVEL" --accept-licenses='android-sdk-license-[0-9a-f]{8}'
   - android list targets
   - mksdcard -l e 1024M test-sd.img
@@ -53,7 +54,6 @@ script:
   - set -e
   - npm run build
   - ./scripts/check-pristine-state package-lock.json test-sd.img test-sd.img.lock
-  - ./gradlew cAT
   - ./gradlew verifyDebugAndroidTestScreenshotTest
 
 after_script: greenkeeper-lockfile-upload
@@ -73,7 +73,7 @@ notifications:
 env:
   global:
     - ANDROID_API_LEVEL=27
-    - EMULATOR_API_LEVEL=21
+    - EMULATOR_API_LEVEL=23
     - ANDROID_BUILD_TOOLS_VERSION=27.0.3
     - ANDROID_ABI=x86
     - ANDROID_TAG=google_apis
