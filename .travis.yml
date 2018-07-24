@@ -37,13 +37,14 @@ android:
     # Specify at least one system image
     - sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL
     - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
+    - sys-img-$ABI-google_apis-$EMULATOR_API_LEVEL
     - sys-img-x86-android-23
 
 before_script:
   - greenkeeper-lockfile-update
   - echo y | android update sdk --no-ui --all --filter "android-ANDROID_API_LEVEL"
   - echo y | android update sdk --no-ui --all --filter "android-EMULATOR_API_LEVEL"
-  - android-update-sdk --components="sys-img-$ABI-$EMULATOR_TAG-$EMULATOR_API_LEVEL" --accept-licenses='android-sdk-license-[0-9a-f]{8}'
+  - android-update-sdk --components="sys-img-$ABI-google_apis-$EMULATOR_API_LEVEL" --accept-licenses='android-sdk-license-[0-9a-f]{8}'
   - android list targets
   - mksdcard -l e 1024M test-sd.img
   - echo no | android create avd --force -n bpk-avd -t $EMULATOR_TAG-$EMULATOR_API_LEVEL --abi $ABI
