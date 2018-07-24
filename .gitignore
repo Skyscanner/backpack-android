@@ -204,5 +204,8 @@ typings/
 # dotenv environment variables file
 .env
 
+#sd-card images for emulator
+test-sd.img
+test-sd.img.*
 
 # End of https://www.gitignore.io/api/android,intellij+iml,node,macos

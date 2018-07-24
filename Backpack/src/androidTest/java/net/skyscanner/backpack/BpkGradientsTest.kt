@@ -10,6 +10,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import android.support.test.InstrumentationRegistry
 import android.support.v4.content.ContextCompat
+import android.view.View
+import com.facebook.testing.screenshot.Screenshot
+import com.facebook.testing.screenshot.ViewHelpers
 import org.junit.Before
 
 
@@ -57,4 +60,29 @@ class BpkGradientsTest {
     }
   }
 
+  @Test
+  fun screenshotTestPrimaryDefault() {
+    val gradient = BpkGradients.getPrimary(testContext)
+    val view = View(testContext)
+    view.background = gradient
+    ViewHelpers.setupView(view)
+      .setExactWidthDp(300)
+      .setExactHeightDp(300)
+      .layout()
+    Screenshot.snap(view)
+      .record()
+  }
+
+  @Test
+  fun screenshotTestPrimary() {
+    val gradient = BpkGradients.getPrimary(testContext, GradientDrawable.Orientation.LEFT_RIGHT)
+    val view = View(testContext)
+    view.background = gradient
+    ViewHelpers.setupView(view)
+      .setExactWidthDp(300)
+      .setExactHeightDp(300)
+      .layout()
+    Screenshot.snap(view)
+      .record()
+  }
 }
