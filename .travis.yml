@@ -40,6 +40,7 @@ android:
 before_script:
   - greenkeeper-lockfile-update
   - echo y | android update sdk --no-ui --all --filter "android-EMULATOR_API_LEVEL"
+  - echo y | android update sdk --no-ui --all --filter "sys-img-$ABI-google_apis-$EMULATOR_API_LEVEL"
   - android-update-sdk --components="sys-img-$ABI-google_apis-$EMULATOR_API_LEVEL" --accept-licenses='android-sdk-license-[0-9a-f]{8}'
   - android list targets
   - mksdcard -l e 256M test-sd.img
@@ -70,13 +71,13 @@ notifications:
 
 env:
   global:
-    - ANDROID_API_LEVEL=27
-    - EMULATOR_API_LEVEL=25
-    - ANDROID_BUILD_TOOLS_VERSION=27.0.3
+    - ANDROID_API_LEVEL=28
+    - EMULATOR_API_LEVEL=28
+    - ANDROID_BUILD_TOOLS_VERSION=28.0.1
     - ANDROID_ABI=armeabi-v7a
     - ANDROID_TAG=default
     - EMULATOR_TAG=android
-    - ABI=armeabi-v7a
+    - ABI=x86_64
     - ADB_INSTALL_TIMEOUT=20
     - secure: Ghpkm2Td2/c1YKZMbEv9HdPQWhsf61kNaoDrj2dTSe5wRo0llz7uwJwVYcGCtb+JA9KsXO0GLO6b2itw9xS1hnjb9cjnQWr87BV5aPN5W9uAS03siCeCatZh+g3KE5Ir86GBnysgFWOj++jeIGbPDwIWCUUT/ANpLQx2RrIRujWeCYXDeB9D7Dofo1k7Pt9MFu9f1OzYE6m3alD+wekiNHCl3Jds+V1r4lfEsA3iFVrdWwizCCLCH2h480YVYkAhUYGm9vtJBaTEF74Iaqlx3NfR45UEmvL3Jks4lSNzrs/VSQhtYY/gYq4LV/ckwDTr/f3FI+Xitn2d+ImYqFHJmh7gkPFxViHxdvjAx/cBC1hM3mr4Hl3zt1lReN6bleJY58ix88FP6uqFn2n5s76QenlhRuRZTXNiDv9NfKSIdgZ4hbYusKYLjRLACnNDVme2YdT+AEY3dP4I/Mv4xV40RkJK9+VLQNIEQwidBUUzFf4Tl5AjJQqJ7cURBj5jq8tDrvSl+Zmr7QwJqNgf5l1MLMjNmfOioyZICAp2bGlJNT9ABu2pjZ1WioXH3D9q/95qMvOzFL5SEvBBttV4LNsK1za2z6z4AED3lXTe5beKUodkhVSXhgL+ci36rX2yEsZjFLtVpB5LVomxLa+elGDLTGPqHzJok+ljB6Abumi8STw=
 
