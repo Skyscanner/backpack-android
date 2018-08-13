@@ -1,31 +1,23 @@
 package net.skyscanner.backpack
 
-import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
-import android.support.test.runner.AndroidJUnit4
-import io.github.backpack.backpack.R
+import android.support.v4.content.ContextCompat
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
-import android.support.test.InstrumentationRegistry
-import android.support.v4.content.ContextCompat
-import org.junit.Before
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.Config
 
 
-@RunWith(AndroidJUnit4::class)
-
+@RunWith(RobolectricTestRunner::class)
+@Config(constants = BuildConfig::class)
 class BpkGradientsTest {
-  private lateinit var testContext: Context
-
-  @Before
-  fun setup() {
-    testContext = InstrumentationRegistry.getContext()
-  }
 
   @Test
   fun getPrimary() {
-
+    val testContext = RuntimeEnvironment.application.applicationContext
     val expectedGradient = GradientDrawable(
       GradientDrawable.Orientation.TL_BR,
       intArrayOf(ContextCompat.getColor(testContext, R.color.bpkBlue500), ContextCompat.getColor(testContext, R.color.bpkPrimaryGradientLight)))
@@ -42,6 +34,7 @@ class BpkGradientsTest {
 
   @Test
   fun getPrimaryDefault() {
+    val testContext = RuntimeEnvironment.application.applicationContext
 
     val expectedGradient = GradientDrawable(
       GradientDrawable.Orientation.BOTTOM_TOP,
