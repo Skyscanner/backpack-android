@@ -47,7 +47,7 @@ script:
   - set -e
   - npm run build
   - ./scripts/check-pristine-state package-lock.json
-  - ./gradlew cAT
+  - ./gradlew test
 
 after_script: greenkeeper-lockfile-upload
 
