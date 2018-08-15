@@ -14,7 +14,7 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry;
  * An activity representing a single Component detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link ComponentListActivity}.
+ * in a {@link MainActivity}.
  */
 public class ComponentDetailActivity extends AppCompatActivity {
 

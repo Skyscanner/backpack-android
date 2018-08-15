@@ -4,12 +4,12 @@ import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.support.test.runner.AndroidJUnit4
-import io.github.backpack.backpack.R
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import android.support.test.InstrumentationRegistry
 import android.support.v4.content.ContextCompat
+import net.skyscanner.backpack.core.R
 import org.junit.Before
 
 

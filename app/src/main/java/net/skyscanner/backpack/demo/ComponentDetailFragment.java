@@ -9,7 +9,7 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry;
 
 /**
  * A fragment representing a single Component detail screen.
- * This fragment is either contained in a {@link ComponentListActivity}
+ * This fragment is either contained in a {@link MainActivity}
  * in two-pane mode (on tablets) or a {@link ComponentDetailActivity}
  * on handsets.
  */

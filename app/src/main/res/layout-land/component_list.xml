@@ -10,7 +10,7 @@
   android:divider="?android:attr/dividerHorizontal"
   android:orientation="horizontal"
   android:showDividers="middle"
-  tools:context=".ComponentListActivity">
+  tools:context=".MainActivity">
 
   <!--
   This layout is a two-pane layout for the Components
@@ -27,7 +27,7 @@
     android:layout_marginRight="@dimen/bpkSpacingLg"
     android:layout_marginTop="@dimen/bpkSpacingLg"
     app:layoutManager="LinearLayoutManager"
-    tools:context="net.skyscanner.backpack.demo.ComponentListActivity"
+    tools:context="net.skyscanner.backpack.demo.MainActivity"
     tools:listitem="@layout/component_list_content" />
 
   <ScrollView

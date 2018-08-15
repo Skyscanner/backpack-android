@@ -10,5 +10,5 @@
   android:layout_marginTop="@dimen/bpkSpacingLg"
   android:layout_marginRight="@dimen/bpkSpacingLg"
   app:layoutManager="LinearLayoutManager"
-  tools:context=".ComponentListActivity"
+  tools:context=".MainActivity"
   tools:listitem="@layout/component_list_content" />
