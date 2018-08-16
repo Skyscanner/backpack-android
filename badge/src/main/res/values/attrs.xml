@@ -2,6 +2,7 @@
 <resources>
 
     <declare-styleable name="badge">
+      <!-- type of badge -->
         <attr name="type" format="enum">
             <enum name="success" value="1" />
             <enum name="warning" value="2" />
@@ -10,6 +11,7 @@
             <enum name="inverse" value="5" />
             <enum name="outline" value="6" />
         </attr>
+        <!-- message to be displayed -->
         <attr name="message" format="string"/>
     </declare-styleable>
 

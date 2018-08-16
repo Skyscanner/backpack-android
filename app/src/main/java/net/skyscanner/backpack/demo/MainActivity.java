@@ -17,7 +17,7 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry;
 import java.util.List;
 
 /**
- * An activity representing a list of Componentss. This activity
+ * An activity representing a list of Components. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
  * lead to a {@link ComponentDetailActivity} representing
