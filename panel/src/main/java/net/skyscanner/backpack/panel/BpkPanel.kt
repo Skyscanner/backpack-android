@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.panel
 
 import android.content.Context
+import android.support.annotation.Dimension
 import android.util.AttributeSet
 import android.widget.LinearLayout
 
@@ -12,6 +13,8 @@ class BpkPanel(
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.style.Bpk_panel)
+
+    @Dimension
     private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingSm)
 
     init {
@@ -50,6 +53,7 @@ class BpkPanel(
             padding = a.getBoolean(R.styleable.panel_bpk_padding, true)
         }
         draw()
+        a.recycle()
     }
 
 }
