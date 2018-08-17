@@ -1,6 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+repositories {
+  mavenCentral()
+}
+
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
@@ -12,11 +16,10 @@ android {
     versionName "1.0"
   }
 }
-repositories {
-  mavenCentral()
-}
+
 dependencies {
   implementation "com.android.support:support-annotations:$rootProject.ext.supportLibVersion"
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
   implementation project(':core')
 }

@@ -1,19 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'maven-publish'
 
-
-publishing {
-  publications {
-    library(MavenPublication) {
-      // Don't forget to change these
-      groupId 'net.skyscanner.backpack'
-      artifactId 'bpk-badge'
-      version '0.1'
-      artifact(bundleRelease)
-    }
-  }
+repositories {
+  mavenCentral()
 }
+
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
@@ -24,11 +15,6 @@ android {
     versionCode 1
     versionName "1.0"
   }
-
-  buildTypes {
-
-  }
-
 }
 
 dependencies {
@@ -37,6 +23,4 @@ dependencies {
   implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
   implementation project(':core')
 }
-repositories {
-  mavenCentral()
-}
+

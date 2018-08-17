@@ -2,6 +2,7 @@ package net.skyscanner.backpack.panel
 
 import android.content.Context
 import android.support.annotation.Dimension
+import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
 import android.widget.LinearLayout
 
@@ -9,7 +10,7 @@ import android.widget.LinearLayout
 class BpkPanel(
         context: Context,
         attrs: AttributeSet?,
-        defStyleAttr: Int) : LinearLayout(context, attrs, defStyleAttr) {
+        defStyleAttr: Int) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.style.Bpk_panel)
