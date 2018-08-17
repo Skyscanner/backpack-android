@@ -40,9 +40,6 @@ class BpkPanel(
         if (this.padding) {
           this.setPadding(paddingSize, paddingSize, paddingSize, paddingSize)
         }
-        val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        params.setMargins(paddingSize, paddingSize, paddingSize, paddingSize)
-        this.layoutParams = params
     }
 
 
