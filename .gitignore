@@ -50,8 +50,6 @@ captures/
 .idea/caches/
 .idea/codeStyles/
 .idea/copyright/
-.idea/caches/build_file_checksums.ser
-
 
 # Keystore files
 *.jks
