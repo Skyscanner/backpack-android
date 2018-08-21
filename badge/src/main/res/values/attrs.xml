@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="badge">
+      <!-- type of badge -->
+        <attr name="type" format="enum">
+            <enum name="success" value="1" />
+            <enum name="warning" value="2" />
+            <enum name="destructive" value="3" />
+            <enum name="light" value="4" />
+            <enum name="inverse" value="5" />
+            <enum name="outline" value="6" />
+        </attr>
+        <!-- message to be displayed -->
+        <attr name="message" format="string"/>
+    </declare-styleable>
+
+</resources>

@@ -28,7 +28,7 @@ const tokens = require('bpk-tokens/tokens/base.raw.android.json');
 
 const PATHS = {
   templates: path.join(__dirname, 'templates'),
-  outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res', 'values'),
+  outputRes: path.join(__dirname, 'core', 'src', 'main', 'res', 'values'),
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);

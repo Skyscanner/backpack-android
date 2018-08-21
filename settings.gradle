@@ -1,1 +1,1 @@
-include ':app', ':Backpack'
+include ':app', ':core', ':badge', ':panel', ':Backpack'

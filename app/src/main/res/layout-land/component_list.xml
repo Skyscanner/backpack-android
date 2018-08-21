@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_marginLeft="16dp"
+  android:layout_marginRight="16dp"
+  android:baselineAligned="false"
+  android:divider="?android:attr/dividerHorizontal"
+  android:orientation="horizontal"
+  android:showDividers="middle"
+  tools:context=".MainActivity">
+
+  <!--
+  This layout is a two-pane layout for the Components
+  master/detail flow.
+
+  -->
+
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/component_list"
+    android:name="net.skyscanner.backpack.demo.ComponentListFragment"
+    android:layout_width="@dimen/item_width"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/bpkSpacingLg"
+    android:layout_marginRight="@dimen/bpkSpacingLg"
+    android:layout_marginTop="@dimen/bpkSpacingLg"
+    app:layoutManager="LinearLayoutManager"
+    tools:context="net.skyscanner.backpack.demo.MainActivity"
+    tools:listitem="@layout/component_list_content" />
+
+  <ScrollView
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="3">
+
+    <FrameLayout
+      android:id="@+id/component_detail_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
+  </ScrollView>
+</LinearLayout>
