@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = '0.2.0'
+version = rootProject.ext.version
 group = 'net.skyscanner.backpack'
 repositories {
   google()
