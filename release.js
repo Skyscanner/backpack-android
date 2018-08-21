@@ -28,7 +28,7 @@ const major = semver.inc(pkg.version, 'major');
 const minor = semver.inc(pkg.version, 'minor');
 const patch = semver.inc(pkg.version, 'patch');
 
-const gradleFiles = [`${__dirname}/Backpack/build.gradle`];
+const gradleFiles = [`${__dirname}/build.gradle`];
 
 const questions = [
   {
@@ -59,8 +59,8 @@ const questions = [
 async function amendGradleFiles(version) {
   const options = {
     files: gradleFiles,
-    from: /version = '.+'/g,
-    to: `version = '${version}'`,
+    from: /BpkVersion = '.+'/g,
+    to: `BpkVersion = '${version}'`,
   };
 
   try {
