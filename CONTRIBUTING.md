@@ -15,6 +15,14 @@ Given that you have a compatible environment as stated above you can now setup t
 + `npm install` to install npm dependencies
 +  Open the project in Android studio
 
+## Adding a new component
+
+A [cookiecutter][2] app is a part of the repository. This generates the proper kotlin classes for the component and test cases. To use this, run the following command and follow the process.
+
+`cookiecutter .`
+
+Once the component it generated, add it to the `settings.gradle` file to start using.
+
 ## Releasing
 
 > Backpack team only
