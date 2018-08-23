@@ -117,9 +117,6 @@ async function release() {
           release: true,
         },
       },
-      src: {
-        afterReleaseCommand: './gradlew bintrayUpload',
-      },
     };
     await releaseit(releaseOptions);
   } catch (exc) {

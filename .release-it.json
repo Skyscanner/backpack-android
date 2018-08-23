@@ -5,9 +5,6 @@
       "release": true
     }
   },
-  "src": {
-    "afterReleaseCommand": "./gradlew bintrayUpload"
-  },
   "dry-run": false,
   "npm": {
     "publish": false
