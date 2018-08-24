@@ -26,7 +26,7 @@
     android:layout_marginLeft="@dimen/bpkSpacingLg"
     android:layout_marginRight="@dimen/bpkSpacingLg"
     android:layout_marginTop="@dimen/bpkSpacingLg"
-    app:layoutManager="LinearLayoutManager"
+    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
     tools:context="net.skyscanner.backpack.demo.MainActivity"
     tools:listitem="@layout/component_list_content" />
 
