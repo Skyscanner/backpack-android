@@ -22,5 +22,5 @@ dependencies {
   api project(':core')
   api project(':panel')
   api project(':badge')
+  api project(':text')
 }
-
