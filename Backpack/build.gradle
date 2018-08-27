@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
 
 version = rootProject.ext.version
 group='com.github.Skyscanner.backpack-android'
@@ -20,80 +18,6 @@ android {
   }
 
 }
-
-install {
-  repositories.mavenInstaller {
-    pom {
-      project {
-        packaging 'aar'
-        groupId 'net.skyscanner.backpack'
-        artifactId 'Backpack'
-
-        name 'Backpack'
-        description 'The Skyscanner Design System, Backpack, for Android'
-        url 'https://github.com/Skyscanner/backpack-android'
-
-        licenses {
-          license {
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-          }
-        }
-        developers {
-          developer {
-            id 'Backpack Squad'
-          }
-        }
-        scm {
-          connection 'https://github.com/Skyscanner/backpack-android.git'
-          developerConnection 'https://github.com/Skyscanner/backpack-android.git'
-          url 'https://backpack.github.io'
-
-        }
-      }
-    }
-  }
-}
-
-task sourcesJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-  source = android.sourceSets.main.java.srcDirs
-  excludes = ['**/*.kt']
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
-}
-
-artifacts {
-  archives javadocJar
-  archives sourcesJar
-}
-
-bintray {
-  user = System.getenv('BINTRAY_USER')
-  key = System.getenv('BINTRAY_KEY')
-  configurations = ['archives']
-  pkg {
-    repo = 'Backpack'
-    name = 'Backpack'
-    userOrg = 'skyscanner'
-    licenses = ['Apache-2.0']
-    vcsUrl = 'https://github.com/Skyscanner/backpack-android'
-    labels = ['android', 'skyscanner', 'designsystem']
-    version {
-      name = version
-      released = new Date()
-    }
-  }
-}
-
 dependencies {
   api project(':core')
   api project(':panel')
