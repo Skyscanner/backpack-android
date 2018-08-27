@@ -94,8 +94,9 @@ bintray {
 }
 
 dependencies {
+  implementation project(':badge')
   implementation project(':core')
   implementation project(':panel')
-  implementation project(':badge')
+  implementation project(':text')
 }
 

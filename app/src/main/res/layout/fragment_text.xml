@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/bpkSpacingBase"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    android:text="Default"
+    app:emphasize="true"
+    app:textStyle="lg" />
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:orientation="vertical">
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:textStyle="xxl" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:textStyle="xl" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:textStyle="lg" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:textStyle="base" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:textStyle="sm" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:textStyle="xs" />
+
+  </LinearLayout>
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/bpkSpacingBase"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    android:text="Emphasized"
+    app:emphasize="true"
+    app:textStyle="lg" />
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:orientation="vertical">
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:emphasize="true"
+      app:textStyle="xxl" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:emphasize="true"
+      app:textStyle="xl" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:emphasize="true"
+      app:textStyle="lg" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:emphasize="true"
+      app:textStyle="base" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:emphasize="true"
+      app:textStyle="sm" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Flights to Edinburgh"
+      app:emphasize="true"
+      app:textStyle="xs" />
+
+  </LinearLayout>
+</LinearLayout>
