@@ -2,6 +2,7 @@ package net.skyscanner.backpack.panel
 
 import android.content.Context
 import android.support.annotation.Dimension
+import android.support.annotation.Nullable
 import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
 import android.widget.LinearLayout
@@ -13,7 +14,7 @@ class BpkPanel(
         defStyleAttr: Int) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     constructor(context: Context) : this(context, null)
-    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.style.Bpk_panel)
+    constructor(context: Context,@Nullable attrs: AttributeSet?) : this(context, attrs, R.style.Bpk_panel)
 
     @Dimension
     private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingSm)
@@ -35,23 +36,18 @@ class BpkPanel(
           }
         }
 
-    private fun draw() {
+    private fun setup() {
         this.background = context.getDrawable(R.drawable.border)
         if (this.padding) {
           this.setPadding(paddingSize, paddingSize, paddingSize, paddingSize)
         }
     }
 
-
     private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.panel, R.attr.bpk_padding, defStyleAttr)
-        if (a.hasValue(R.styleable.panel_bpk_padding)) {
-            //default value of padding is true
-            padding = a.getBoolean(R.styleable.panel_bpk_padding, true)
-        }
-        draw()
+        padding = a.getBoolean(R.styleable.panel_bpk_padding, true)
+        setup()
         a.recycle()
     }
-
 }
