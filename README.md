@@ -8,18 +8,23 @@
 
 ## Installation
 
-Backpack is available through [Bintray](https://bintray.com/skyscanner/Backpack/Backpack). To install
-all of it, simply add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
+Backpack is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-android). To install
+all of it, add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-compile 'net.skyscanner.backpack:Backpack:0.1.0'
+implementation 'com.github.Skyscanner:backpack-android:0.2.1'
+```
+To install a single component, add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
+
+```gradle
+implementation 'com.github.Skyscanner.backpack-android:badge:0.2.1'
 ```
 
-Backpack is availabe in JCenter so if your app resolves dependencies through JCenter you're all set, if not add in your root `build.gradle`
+Backpack is available in Jitpack so if your app resolves dependencies through Jitpack you're all set, if not add in your root `build.gradle`
 
 ```gradle
 repositories {
-    jcenter()
+    maven { url 'https://jitpack.io' }
 }
 ```
 ## Usage
