@@ -27,8 +27,8 @@ Once the component it generated, add it to the `settings.gradle` file to start u
 
 > Backpack team only
 
-To issue a new release make sure you've set the project up as above, that you have push acess to the Backpack Bintray repo and the `BINTRAY_USER` and `BINTRAY_KEY` env vars are set
-
-Run `npm run release` and follow the process through, you'll be asked which semantic version the release
+Run `npm run release` and follow the process through, you'll be asked which semantic version the release.Once released verify the artifacts on [`jitpack`][3]
 
 [1]: https://github.com/creationix/nvm
+[2]: https://github.com/audreyr/cookiecutter
+[3]: https://jitpack.io/#Skyscanner/backpack-android
