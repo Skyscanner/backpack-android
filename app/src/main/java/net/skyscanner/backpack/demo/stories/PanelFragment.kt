@@ -10,8 +10,8 @@ import net.skyscanner.backpack.demo.R
 
 class PanelFragment : ComponentDetailFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_panel, container, false)
-    }
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.merge(R.layout.fragment_panel)
+  }
 
 }
