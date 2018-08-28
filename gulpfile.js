@@ -35,7 +35,11 @@ const VALID_TEXT_STYLES = new Set(['xs', 'sm', 'base', 'lg', 'xl', 'xxl']);
 const { FONT_FAMILY, FONT_FAMILY_EMPHASIZE } = tokens.aliases;
 const EMPHASIZED_FONT_WEIGHT = tokens.props.TEXT_EMPHASIZED_FONT_WEIGHT.value;
 
-const pascalCase = s => _.flow(_.camelCase, _.upperFirst)(s);
+const pascalCase = s =>
+  _.flow(
+    _.camelCase,
+    _.upperFirst,
+  )(s);
 
 const fontForWeight = weightString => {
   const cleanWeight = weightString.trim();
@@ -46,7 +50,8 @@ const fontForWeight = weightString => {
     }
 
     return FONT_FAMILY.value.replace(/"/g, '');
-  } else if (cleanWeight === '500') {
+  }
+  if (cleanWeight === '500') {
     if (!FONT_FAMILY_EMPHASIZE) {
       throw new Error(
         'Expected `FONT_FAMILY_EMPHASIZE` to exist in tokens. It did not',
