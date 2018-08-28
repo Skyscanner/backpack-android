@@ -1,0 +1,4 @@
+{
+  "component_name" : "Backpack component name eg BpkPanel",
+  "pkg_name": "{{cookiecutter.component_name|lower}} eg panel"
+}
