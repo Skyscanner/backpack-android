@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.facebook.testing.screenshot'
+
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
@@ -15,7 +17,8 @@ android {
     versionCode 1
     versionName "1.0"
     multiDexEnabled true
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    testInstrumentationRunner "net.skyscanner.backpack.BpkTestRunner"
   }
   buildTypes {
     release {
@@ -50,4 +53,7 @@ dependencies {
     exclude group: 'com.android.support'
   }
   implementation project(':Backpack')
+}
+screenshots {
+  multipleDevices false
 }
