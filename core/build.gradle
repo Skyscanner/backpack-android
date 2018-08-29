@@ -1,2 +1,9 @@
 apply from: "../base.gradle"
 
+android {
+  // Core module contains only tokens.
+  // This disables the unused-resources check from the module
+  lintOptions {
+    disable 'UnusedResources'
+  }
+}
