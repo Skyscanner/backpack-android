@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 
 
-class BpkPanel(
+open class BpkPanel(
         context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int) : LinearLayoutCompat(context, attrs, defStyleAttr) {
@@ -33,21 +33,16 @@ class BpkPanel(
             field = value
           if (this.padding) {
             this.setPadding(paddingSize, paddingSize, paddingSize, paddingSize)
+          }else{
+            this.setPadding(0,0,0,0)
           }
         }
-
-    private fun setup() {
-        this.background = context.getDrawable(R.drawable.border)
-        if (this.padding) {
-          this.setPadding(paddingSize, paddingSize, paddingSize, paddingSize)
-        }
-    }
 
     private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.panel, R.attr.bpk_padding, defStyleAttr)
         padding = a.getBoolean(R.styleable.panel_bpk_padding, true)
-        setup()
+        this.background = context.getDrawable(R.drawable.border)
         a.recycle()
     }
 }

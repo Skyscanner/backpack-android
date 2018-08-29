@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable
 import android.support.annotation.ColorRes
 import android.support.annotation.Dimension
 import android.support.annotation.Nullable
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.Gravity
@@ -91,7 +92,7 @@ open class BpkBadge(
       R.styleable.badge,
       0, 0)
 
-    type = Type.fromId(a.getInt(R.styleable.badge_type, 0))
+    type = Type.fromId(a.getInt(R.styleable.badge_type, 1))
     message = a.getString(R.styleable.badge_message)
 
     a.recycle()
@@ -111,17 +112,17 @@ open class BpkBadge(
     this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
 
     //set Text color
-    this.setTextColor(context.resources.getColor(type.textColor))
+    this.setTextColor(ContextCompat.getColor(context,type.textColor))
 
     // Set background color
     val border = GradientDrawable()
-    border.setColor(context.resources.getColor(type.bgColor))
+    border.setColor(ContextCompat.getColor(context,type.bgColor))
 
     //Set border
     if (type == Type.Outline) {
-      border.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), context.resources.getColor(R.color.bpkWhite))
+      border.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), ContextCompat.getColor(context,R.color.bpkWhite))
       //set alpha for border
-      border.setColor(context.resources.getColor(type.bgColor) and 0x32ffffff)
+      border.setColor(ContextCompat.getColor(context,type.bgColor) and 0x32ffffff)
     }
 
     //set corner radius
