@@ -29,6 +29,12 @@ Once the component it generated, add it to the `settings.gradle` file to start u
 
 Run `npm run release` and follow the process through, you'll be asked which semantic version the release.Once released verify the artifacts on [`jitpack`][3]
 
+## Docs
+
+Run `npm run docs` to genere API docs. Docs will be generated in the `build/docs` folder by default. To provide a different output folder use `npm run docs -- -PdokkaOutput=/path/to/folder`
+
+Run `npm run docs:clean` to remove generated docs.
+
 [1]: https://github.com/creationix/nvm
 [2]: https://github.com/audreyr/cookiecutter
 [3]: https://jitpack.io/#Skyscanner/backpack-android

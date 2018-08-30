@@ -33,8 +33,31 @@ dependencies {
   testImplementation 'junit:junit:4.12'
 }
 
+ext.modules = rootProject.subprojects
+  .findAll { it.project.name != "Backpack" && it.project.name != "app" }
+
 dokka {
-  outputFormat = 'html-as-java'
-  outputDirectory = "docs"
+  moduleName = "$rootProject.name"
+  outputFormat = 'html'
+  outputDirectory = "$rootProject.buildDir/docs"
   reportUndocumented = false
+
+  if (project.hasProperty("dokkaOutput")) {
+    outputDirectory = dokkaOutput
+  }
+
+  sourceDirs += files(
+    modules
+      .findAll { it.name != project.name }
+      .collect { new File(it.projectDir, "/src/main/java") }
+  )
+
+  modules.each { p ->
+    linkMapping {
+      dir = "${p.projectDir}/src/main/java"
+      url = "https://github.com/Skyscanner/backpack-android/tree/master/${p.name}/src/main/java"
+      suffix = "#L"
+    }
+  }
 }
+

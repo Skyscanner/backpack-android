@@ -44,4 +44,3 @@ ext {
   googlePlayServicesVersion = "15.0.1"
   androidMapsUtilsVersion = "0.5+"
 }
-
