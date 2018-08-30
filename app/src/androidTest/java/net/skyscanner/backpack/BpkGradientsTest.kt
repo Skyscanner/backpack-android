@@ -14,12 +14,13 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 
-class BpkGradientsTest {
+class BpkGradientsTest: BpkSnapshotTest()  {
   private lateinit var testContext: Context
 
   @Before
   fun setup() {
     testContext = InstrumentationRegistry.getTargetContext()
+    setDimensions(100,100)
   }
 
   @Test
@@ -27,12 +28,7 @@ class BpkGradientsTest {
     val gradient = BpkGradients.getPrimary(testContext)
     val view = View(testContext)
     view.background = gradient
-    ViewHelpers.setupView(view)
-      .setExactWidthDp(300)
-      .setExactHeightDp(300)
-      .layout()
-    Screenshot.snap(view)
-      .record()
+    snap(view)
   }
 
   @Test
@@ -40,11 +36,6 @@ class BpkGradientsTest {
     val gradient = BpkGradients.getPrimary(testContext, GradientDrawable.Orientation.LEFT_RIGHT)
     val view = View(testContext)
     view.background = gradient
-    ViewHelpers.setupView(view)
-      .setExactWidthDp(300)
-      .setExactHeightDp(300)
-      .layout()
-    Screenshot.snap(view)
-      .record()
+    snap(view)
   }
 }

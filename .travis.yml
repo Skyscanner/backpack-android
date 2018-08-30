@@ -50,7 +50,7 @@ script:
   - npm run build
   - ./scripts/check-pristine-state package-lock.json sd.img
   - ./gradlew cAT
-  - ./gradlew verifyDebugAndroidTestScreenshotTest
+  - ./gradlew runDebugAndroidTestScreenshotTest
 
 after_script: greenkeeper-lockfile-upload
 

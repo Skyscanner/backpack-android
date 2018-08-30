@@ -13,21 +13,13 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 
-class BpkBadgeTest {
+class BpkBadgeTest : BpkSnapshotTest() {
   private lateinit var testContext: Context
-
-  private fun snap(view: View){
-    ViewHelpers.setupView(view)
-      .setExactHeightPx(96)
-      .setExactWidthPx(200)
-      .layout()
-    Screenshot.snap(view)
-      .record()
-  }
 
   @Before
   fun setup() {
     testContext = InstrumentationRegistry.getTargetContext()
+    setDimensions(32,96)
   }
 
   @Test

@@ -15,12 +15,14 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 
-class BpkPanelTest {
+class BpkPanelTest: BpkSnapshotTest() {
   private lateinit var testContext: Context
+
 
   @Before
   fun setup() {
     testContext = InstrumentationRegistry.getTargetContext()
+    setDimensions(32,96)
   }
 
   @Test
@@ -29,11 +31,7 @@ class BpkPanelTest {
     val text = TextView(testContext)
     text.text = "message"
     panel.addView(text)
-
-    ViewHelpers.setupView(panel)
-      .layout()
-    Screenshot.snap(panel)
-      .record()
+    snap(panel)
   }
 
   @Test
@@ -43,10 +41,7 @@ class BpkPanelTest {
     text.text = "message"
     panel.addView(text)
     panel.padding = true
-    ViewHelpers.setupView(panel)
-      .layout()
-    Screenshot.snap(panel)
-      .record()
+    snap(panel)
   }
 
   @Test
@@ -56,9 +51,6 @@ class BpkPanelTest {
     text.text = "message"
     panel.addView(text)
     panel.padding = false
-    ViewHelpers.setupView(panel)
-      .layout()
-    Screenshot.snap(panel)
-      .record()
+    snap(panel)
   }
 }
