@@ -40,28 +40,6 @@ install:
   - npm install
   - sudo easy_install Pillow
 
-android:
-  components:
-    - tools
-    - platform-tools
-    - tools
-    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-    - android-$ANDROID_API_LEVEL
-    - android-$EMULATOR_API_LEVEL
-    # For Google APIs
-    - addon-google_apis-google-$ANDROID_API_LEVEL
-    - addon-google_apis-google-$EMULATOR_API_LEVEL
-    # Google Play Services
-    - extra-google-google_play_services
-    # Support library
-    - extra-android-support
-    # Latest artifacts in local repository
-    - extra-google-m2repository
-    - extra-android-m2repository
-    # Specify at least one system image
-    - sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL
-    - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
-
 before_script:
   - greenkeeper-lockfile-update
   - mksdcard -l e 512M sd.img
@@ -74,7 +52,7 @@ script:
   - npm run build
   - ./scripts/check-pristine-state package-lock.json sd.img
   - ./gradlew cAT
-  - ./gradlew runDebugAndroidTestScreenshotTest
+  - ./gradlew verifyDebugAndroidTestScreenshotTest
 
 after_script: greenkeeper-lockfile-upload
 
