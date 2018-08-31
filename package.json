@@ -22,7 +22,9 @@
     "test": "eslint . --ext .js,.jsx",
     "prebuild": "npm test",
     "build": "gulp",
-    "prettier": "prettier --config .prettierrc --write \"**/*.js\""
+    "prettier": "prettier --config .prettierrc --write \"**/*.js\"",
+    "docs": "./gradlew dokka",
+    "docs:clean": "./gradlew cleanDokka"
   },
   "lint-staged": {
     "*.js": [
