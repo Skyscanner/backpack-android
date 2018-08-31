@@ -43,6 +43,7 @@ install:
 before_script:
   - greenkeeper-lockfile-update
   - mksdcard -l e 512M sd.img
+  - android list targets
   - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
   - emulator -avd test -sdcard sd.img -no-window &
   - android-wait-for-emulator
