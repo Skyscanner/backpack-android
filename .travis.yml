@@ -35,21 +35,21 @@ install:
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager "tools" > /dev/null
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager "platform-tools" > /dev/null
   - echo y | $HOME/android-sdk/tools/android update sdk --all --filter build-tools-$ANDROID_BUILD_TOOLS_VERSION --no-ui
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "android-$ANDROID_API_LEVEL" > /dev/null
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "android-$EMULATOR_API_LEVEL" > /dev/null
+  - echo y | $HOME/android-sdk/tools/android update sdk --all --filter "android-$ANDROID_API_LEVEL" > /dev/null --no-ui
+  - echo y | $HOME/android-sdk/tools/android update sdk --all --filter "android-$EMULATOR_API_LEVEL" > /dev/null --no-ui
   # For Google APIs
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "addon-google_apis-google-$ANDROID_API_LEVEL" > /dev/null
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "addon-google_apis-google-$EMULATOR_API_LEVEL" > /dev/null
+  - echo y | $HOME/android-sdk/tools/android update sdk --all --filter "addon-google_apis-google-$ANDROID_API_LEVEL" > /dev/null --no-ui
+  - echo y | $HOME/android-sdk/tools/android "addon-google_apis-google-$EMULATOR_API_LEVEL" > /dev/null
   # Google Play Services
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "extra-google-google_play_services" > /dev/null
+  - echo y | $HOME/android-sdk/tools/android "extra-google-google_play_services" > /dev/null
   # Support library
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "extra-android-support" > /dev/null
+  - echo y | $HOME/android-sdk/tools/android "extra-android-support" > /dev/null
   # Latest artifacts in local repository
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "extra-google-m2repository" > /dev/null
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "extra-android-m2repository" > /dev/null
+  - echo y | $HOME/android-sdk/tools/android "extra-google-m2repository" > /dev/null
+  - echo y | $HOME/android-sdk/tools/android "extra-android-m2repository" > /dev/null
   # Specify at least one system image
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL" > /dev/null
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL" > /dev/null
+  - echo y | $HOME/android-sdk/tools/android "sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL" > /dev/null
+  - echo y | $HOME/android-sdk/tools/android "sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL" > /dev/null
   - npm install
   - sudo easy_install Pillow
 
@@ -65,7 +65,7 @@ script:
   - npm run build
   - ./scripts/check-pristine-state package-lock.json sd.img
   - ./gradlew cAT
-  - ./gradlew verifyDebugAndroidTestScreenshotTest
+  - ./gradlew app:verifyDebugAndroidTestScreenshotTest
 
 after_script: greenkeeper-lockfile-upload
 
