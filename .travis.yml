@@ -1,23 +1,10 @@
 language: android
 sudo: false
 
-before_cache:
-  # Do not cache a few Gradle files/directories (see https://docs.travis-ci.com/user/languages/java/#Caching)
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-
 cache:
   directories:
-    # Android SDK
-    - $HOME/android-sdk-dl
-    - $HOME/android-sdk
-
-    # Gradle dependencies
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-
-    # Android build cache (see http://tools.android.com/tech-docs/build-cache)
-    - $HOME/.android/build-cache
+    - ${TRAVIS_BUILD_DIR}/gradle/caches/
+    - ${TRAVIS_BUILD_DIR}/gradle/wrapper/dists/
 
 before_install:
   - chmod +x gradlew
@@ -26,46 +13,41 @@ before_install:
   - npm install -g greenkeeper-lockfile@1
 
 install:
-  # Download and unzip the Android SDK tools (if not already there thanks to the cache mechanism)
-  # Latest version available here: https://developer.android.com/studio/#command-tools
-  - if test ! -e $HOME/android-sdk-dl/sdk-tools.zip ; then curl https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip > $HOME/android-sdk-dl/sdk-tools.zip ; fi
-  - unzip -qq -n $HOME/android-sdk-dl/sdk-tools.zip -d $HOME/android-sdk
-
-  # Install or update Android SDK components (will not do anything if already up to date thanks to the cache mechanism)
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "tools" > /dev/null
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "platform-tools" > /dev/null
-  - echo y | $HOME/android-sdk/tools/android update sdk --all --filter build-tools-$ANDROID_BUILD_TOOLS_VERSION --no-ui
-  - echo y | $HOME/android-sdk/tools/android update sdk --all --filter "android-$ANDROID_API_LEVEL" > /dev/null --no-ui
-  - echo y | $HOME/android-sdk/tools/android update sdk --all --filter "android-$EMULATOR_API_LEVEL" > /dev/null --no-ui
-  # For Google APIs
-  - echo y | $HOME/android-sdk/tools/android update sdk --all --filter "addon-google_apis-google-$ANDROID_API_LEVEL" > /dev/null --no-ui
-  - echo y | $HOME/android-sdk/tools/android "addon-google_apis-google-$EMULATOR_API_LEVEL" > /dev/null
-  # Google Play Services
-  - echo y | $HOME/android-sdk/tools/android "extra-google-google_play_services" > /dev/null
-  # Support library
-  - echo y | $HOME/android-sdk/tools/android "extra-android-support" > /dev/null
-  # Latest artifacts in local repository
-  - echo y | $HOME/android-sdk/tools/android "extra-google-m2repository" > /dev/null
-  - echo y | $HOME/android-sdk/tools/android "extra-android-m2repository" > /dev/null
-  # Specify at least one system image
-  - echo y | $HOME/android-sdk/tools/android "sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL" > /dev/null
-  - echo y | $HOME/android-sdk/tools/android "sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL" > /dev/null
   - npm install
-  - sudo easy_install Pillow
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - tools
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    - android-$ANDROID_API_LEVEL
+    - android-$EMULATOR_API_LEVEL
+    # For Google APIs
+    - addon-google_apis-google-$ANDROID_API_LEVEL
+    - addon-google_apis-google-$EMULATOR_API_LEVEL
+    # Google Play Services
+    - extra-google-google_play_services
+    # Support library
+    - extra-android-support
+    # Latest artifacts in local repository
+    - extra-google-m2repository
+    - extra-android-m2repository
+    # Specify at least one system image
+    - sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL
+    - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
 
 before_script:
   - greenkeeper-lockfile-update
-  - mksdcard -l e 512M sd.img
-  - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL
-  - emulator -avd test -sdcard sd.img -no-window &
+  - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+  - emulator -avd test -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 script:
   - set -e
   - npm run build
-  - ./scripts/check-pristine-state package-lock.json sd.img
+  - ./scripts/check-pristine-state package-lock.json
   - ./gradlew cAT
-  - ./gradlew app:verifyDebugAndroidTestScreenshotTest
 
 after_script: greenkeeper-lockfile-upload
 
@@ -90,3 +72,4 @@ env:
     - ANDROID_TAG=google_apis
     - ADB_INSTALL_TIMEOUT=20
     - secure: Ghpkm2Td2/c1YKZMbEv9HdPQWhsf61kNaoDrj2dTSe5wRo0llz7uwJwVYcGCtb+JA9KsXO0GLO6b2itw9xS1hnjb9cjnQWr87BV5aPN5W9uAS03siCeCatZh+g3KE5Ir86GBnysgFWOj++jeIGbPDwIWCUUT/ANpLQx2RrIRujWeCYXDeB9D7Dofo1k7Pt9MFu9f1OzYE6m3alD+wekiNHCl3Jds+V1r4lfEsA3iFVrdWwizCCLCH2h480YVYkAhUYGm9vtJBaTEF74Iaqlx3NfR45UEmvL3Jks4lSNzrs/VSQhtYY/gYq4LV/ckwDTr/f3FI+Xitn2d+ImYqFHJmh7gkPFxViHxdvjAx/cBC1hM3mr4Hl3zt1lReN6bleJY58ix88FP6uqFn2n5s76QenlhRuRZTXNiDv9NfKSIdgZ4hbYusKYLjRLACnNDVme2YdT+AEY3dP4I/Mv4xV40RkJK9+VLQNIEQwidBUUzFf4Tl5AjJQqJ7cURBj5jq8tDrvSl+Zmr7QwJqNgf5l1MLMjNmfOioyZICAp2bGlJNT9ABu2pjZ1WioXH3D9q/95qMvOzFL5SEvBBttV4LNsK1za2z6z4AED3lXTe5beKUodkhVSXhgL+ci36rX2yEsZjFLtVpB5LVomxLa+elGDLTGPqHzJok+ljB6Abumi8STw=
+
