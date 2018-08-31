@@ -1,4 +1,6 @@
-# Backpack
+# Backpack Android
+
+> Backpack is a collection of design resources, reusable components and guidelines for creating Skyscanner's products.
 
 [![CI Status](http://img.shields.io/travis/Skyscanner/backpack-android.svg?style=flat)](https://travis-ci.org/Skyscanner/backpack-android)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Skyscanner/backpack-android.svg)](https://greenkeeper.io/)
@@ -14,19 +16,19 @@ all of it, add the following line to your `build.gradle` (in your app module) in
 ```gradle
 implementation 'com.github.Skyscanner:backpack-android:0.2.1'
 ```
-To install a single component, add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
 
-```gradle
-implementation 'com.github.Skyscanner.backpack-android:badge:0.2.1'
-```
-
-Backpack is available in Jitpack so if your app resolves dependencies through Jitpack you're all set, if not add in your root `build.gradle`
+If your app resolves dependencies through Jitpack you're all set, if not add in your root `build.gradle`
 
 ```gradle
 repositories {
     maven { url 'https://jitpack.io' }
 }
 ```
+## Components
+* [Badge][docs/Badge/README.md]
+* [Panel][docs/Panel/README.md]
+* [Text][docs/Text/README.md]
+
 ## Usage
 
 ### Radii

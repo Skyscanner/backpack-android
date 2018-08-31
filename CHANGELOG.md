@@ -1,10 +1,10 @@
-# Change Log
+# Backpack Android changelog
 
-All notable changes to this project will be documented in this file.
+[Unreleased changes](./UNRELEASED.md).
 
-## Master
+## 0.2.1
 
-_Nothing Yet_
+Introducing BpkBadge and BpkPanel component.
 
 ## 0.2.0
 
