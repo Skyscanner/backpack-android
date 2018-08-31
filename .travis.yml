@@ -43,8 +43,7 @@ install:
 before_script:
   - greenkeeper-lockfile-update
   - mksdcard -l e 512M sd.img
-  - android list targets
-  - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+  - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL
   - emulator -avd test -sdcard sd.img -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
@@ -72,7 +71,7 @@ notifications:
 env:
   global:
     - ANDROID_API_LEVEL=27
-    - EMULATOR_API_LEVEL=24
+    - EMULATOR_API_LEVEL=27
     - ANDROID_BUILD_TOOLS_VERSION=27.0.3
     - ANDROID_ABI=armeabi-v7a
     - ANDROID_TAG=google_apis
