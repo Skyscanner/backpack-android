@@ -35,7 +35,7 @@ install:
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager "tools" > /dev/null
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager "platform-tools" > /dev/null
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager "tools" > /dev/null
-  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "build-tools-$ANDROID_BUILD_TOOLS_VERSION" > /dev/null
+  - echo y | $HOME/android-sdk/tools/bin/sdkmanager "build-tools-27.0.3" > /dev/null
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager "android-$ANDROID_API_LEVEL" > /dev/null
   - echo y | $HOME/android-sdk/tools/bin/sdkmanager "android-$EMULATOR_API_LEVEL" > /dev/null
   # For Google APIs
