@@ -32,25 +32,25 @@ install:
   - unzip -qq -n $HOME/android-sdk-dl/sdk-tools.zip -d $HOME/android-sdk
 
   # Install or update Android SDK components (will not do anything if already up to date thanks to the cache mechanism)
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "tools"
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "platform-tools"
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "tools"
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "build-tools-$ANDROID_BUILD_TOOLS_VERSION"
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "android-$ANDROID_API_LEVEL"
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "android-$EMULATOR_API_LEVEL"
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "tools" > /dev/null
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "platform-tools" > /dev/null
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "tools" > /dev/null
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "build-tools-$ANDROID_BUILD_TOOLS_VERSION" > /dev/null
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "android-$ANDROID_API_LEVEL" > /dev/null
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "android-$EMULATOR_API_LEVEL" > /dev/null
   # For Google APIs
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "addon-google_apis-google-$ANDROID_API_LEVEL"
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "addon-google_apis-google-$EMULATOR_API_LEVEL"
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "addon-google_apis-google-$ANDROID_API_LEVEL" > /dev/null
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "addon-google_apis-google-$EMULATOR_API_LEVEL" > /dev/null
   # Google Play Services
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "extra-google-google_play_services"
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "extra-google-google_play_services" > /dev/null
   # Support library
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "extra-android-support"
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "extra-android-support" > /dev/null
   # Latest artifacts in local repository
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "extra-google-m2repository"
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "extra-android-m2repository"
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "extra-google-m2repository" > /dev/null
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "extra-android-m2repository" > /dev/null
   # Specify at least one system image
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL"
-  - echo y | $home/android-sdk/tools/bin/sdkmanager "sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL"
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL" > /dev/null
+  - echo y | $home/android-sdk/tools/bin/sdkmanager "sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL" > /dev/null
   - npm install
   - sudo easy_install Pillow
 
