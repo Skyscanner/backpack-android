@@ -29,7 +29,7 @@ before_install:
   - chmod +x gradlew
   - yes | sdkmanager "platforms;android-27"
   - nvm install
-  - npm install -g greenkeeper-lockfile@1
+#  - npm install -g greenkeeper-lockfile@1
 
 install:
   - npm install
@@ -58,7 +58,7 @@ android:
     - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
 
 before_script:
-  - greenkeeper-lockfile-update
+#  - greenkeeper-lockfile-update
   - mksdcard -l e 512M sd.img
   - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
   - emulator -avd test -sdcard sd.img -no-window &
@@ -73,7 +73,7 @@ script:
   # Run all unit tests
   - ./gradlew build test
 
-after_script: greenkeeper-lockfile-upload
+#after_script: greenkeeper-lockfile-upload
 
 branches:
   only:
