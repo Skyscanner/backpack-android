@@ -24,4 +24,7 @@ dependencies {
   api project(':panel')
   api project(':badge')
   api project(':text')
+  api project(':dummyone')
+  api project(':dummytwo')
+  api project(':dummythree')
 }
