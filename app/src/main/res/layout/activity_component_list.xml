@@ -24,11 +24,17 @@
     <LinearLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <include layout="@layout/component_list" />
+
+        <Spinner
+          android:id="@+id/themesSpinner"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

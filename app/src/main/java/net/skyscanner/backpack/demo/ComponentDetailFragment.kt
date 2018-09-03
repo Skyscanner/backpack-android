@@ -45,6 +45,7 @@ open class ComponentDetailFragment : Fragment() {
          * represents.
          */
         val ARG_ITEM_ID = "item_id"
+        val THEME = "theme"
     }
 
 }

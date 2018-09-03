@@ -3,6 +3,7 @@ package net.skyscanner.backpack.text
 import android.content.Context
 import android.content.res.TypedArray
 import android.support.annotation.IntDef
+import android.support.v4.content.ContextCompat
 import android.support.v4.widget.TextViewCompat
 import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
@@ -25,6 +26,9 @@ open class BpkText(
     const val XL = 4
     const val XXL = 5
   }
+
+  private val defaultTextColor = ContextCompat.getColor(context, R.color.bpkGray900)
+  private var bpkTextColor = defaultTextColor
 
   @Styles
   var textStyle: Int = BASE
@@ -49,7 +53,7 @@ open class BpkText(
   )
 
   constructor(context: Context) : this(context, null)
-  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.style.bpkTextBase)
+  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.attr.bpkTextStyle)
 
   init {
     initialize(context, attrs, defStyleAttr)
@@ -60,16 +64,18 @@ open class BpkText(
 
     val a: TypedArray = context.theme.obtainStyledAttributes(
       attrs,
-      R.styleable.text,
-      0, 0)
+      R.styleable.BpkText,
+      defStyleAttr, 0)
 
-    textStyle = a.getInt(R.styleable.text_textStyle, BASE)
-    emphasize = a.getBoolean(R.styleable.text_emphasize, false)
+    textStyle = a.getInt(R.styleable.BpkText_textStyle, BASE)
+    emphasize = a.getBoolean(R.styleable.BpkText_emphasize, false)
+    bpkTextColor = a.getColor(R.styleable.BpkText_textColor, defaultTextColor)
 
     a.recycle()
   }
 
   private fun setup() {
+    this.setTextColor(bpkTextColor)
 
     val styleProps = styleMapping[textStyle]
 

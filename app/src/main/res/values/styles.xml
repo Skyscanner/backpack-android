@@ -1,5 +1,12 @@
 <resources>
 
+  <style name="Widget.London.BpkText" parent="">
+    <item name="textColor">@color/bpkRed500</item>
+    <!-- Not exactly a themable property but can be set too, if we feel this
+     is not desired we can use a different strategy to load this in the component -->
+    <!--<item name="emphasize">true</item>-->
+  </style>
+
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
@@ -12,5 +19,12 @@
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
   <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+  <!-- This would be an airline theme -->
+  <style name="LondonTheme" parent="AppTheme">
+    <!-- Apply the custom styles for the BpkText component -->
+    <item name="bpkTextStyle">@style/Widget.London.BpkText</item>
+  </style>
+
 
 </resources>

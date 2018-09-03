@@ -17,6 +17,7 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry
 class ComponentDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(intent.getIntExtra(ComponentDetailFragment.THEME, R.style.AppTheme))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_component_detail)
         val toolbar = findViewById<View>(R.id.detail_toolbar) as Toolbar
