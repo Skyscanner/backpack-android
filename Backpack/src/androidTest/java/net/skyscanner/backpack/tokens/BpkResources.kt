@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.core
+package net.skyscanner.backpack.tokens
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

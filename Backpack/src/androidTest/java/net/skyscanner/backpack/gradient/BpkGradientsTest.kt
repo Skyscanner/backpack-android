@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.core
+package net.skyscanner.backpack.gradient
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
@@ -9,7 +9,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import android.support.test.InstrumentationRegistry
 import android.support.v4.content.ContextCompat
-import net.skyscanner.backpack.BpkGradients
 import net.skyscanner.backpack.R
 import org.junit.Before
 
