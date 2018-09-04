@@ -59,9 +59,9 @@ android:
 before_script:
 #  - greenkeeper-lockfile-update
   - mksdcard -l e 512M sd.img
-  - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
- # - cp bpk-avd.ini ~/.android/avd/bpk-avd.avd/config.ini
-  - emulator -avd test -sdcard sd.img -no-window &
+  - echo no | android create avd --force -n bpk-droid -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+  - cp bpk-droid.ini ~/.android/avd/bpk-droid.avd/config.ini
+  - emulator -avd bpk-droid -sdcard sd.img -no-window &
   - cat $HOME/.android/avd/test.avd/config.ini
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
