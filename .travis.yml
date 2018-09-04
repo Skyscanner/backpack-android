@@ -27,7 +27,6 @@ cache:
 
 before_install:
   - chmod +x gradlew
-  - yes | sdkmanager "platforms;android-27"
   - nvm install
 #  - npm install -g greenkeeper-lockfile@1
 
@@ -60,8 +59,9 @@ android:
 before_script:
 #  - greenkeeper-lockfile-update
   - mksdcard -l e 512M sd.img
-  - echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
-  - emulator -avd test -sdcard sd.img -no-window &
+  - echo no | android create avd --force -n bpk-droid -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+  - cp bpk-droid.ini $HOME/.android/avd/bpk-droid.avd/config.ini
+  - emulator -avd bpk-droid -sdcard sd.img -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 script:
@@ -69,9 +69,11 @@ script:
   - npm run build
   - ./scripts/check-pristine-state package-lock.json sd.img
   # Run espresso tests in the Backpack module ( this excludes snapshot tests)
-  - ./gradlew build Backpack:connectedCheck
+  - ./gradlew Backpack:connectedCheck
   # Run all unit tests
-  - ./gradlew build test
+  - ./gradlew test
+  # Run snapshot tests
+  - ./gradlew app:verifyDebugAndroidTestScreenshotTest
 
 #after_script: greenkeeper-lockfile-upload
 
@@ -95,4 +97,5 @@ env:
     - ANDROID_ABI=armeabi-v7a
     - ANDROID_TAG=google_apis
     - ADB_INSTALL_TIMEOUT=20
+    - ANDROID_SDK_ROOT=/usr/local/android-sdk/
     - secure: Ghpkm2Td2/c1YKZMbEv9HdPQWhsf61kNaoDrj2dTSe5wRo0llz7uwJwVYcGCtb+JA9KsXO0GLO6b2itw9xS1hnjb9cjnQWr87BV5aPN5W9uAS03siCeCatZh+g3KE5Ir86GBnysgFWOj++jeIGbPDwIWCUUT/ANpLQx2RrIRujWeCYXDeB9D7Dofo1k7Pt9MFu9f1OzYE6m3alD+wekiNHCl3Jds+V1r4lfEsA3iFVrdWwizCCLCH2h480YVYkAhUYGm9vtJBaTEF74Iaqlx3NfR45UEmvL3Jks4lSNzrs/VSQhtYY/gYq4LV/ckwDTr/f3FI+Xitn2d+ImYqFHJmh7gkPFxViHxdvjAx/cBC1hM3mr4Hl3zt1lReN6bleJY58ix88FP6uqFn2n5s76QenlhRuRZTXNiDv9NfKSIdgZ4hbYusKYLjRLACnNDVme2YdT+AEY3dP4I/Mv4xV40RkJK9+VLQNIEQwidBUUzFf4Tl5AjJQqJ7cURBj5jq8tDrvSl+Zmr7QwJqNgf5l1MLMjNmfOioyZICAp2bGlJNT9ABu2pjZ1WioXH3D9q/95qMvOzFL5SEvBBttV4LNsK1za2z6z4AED3lXTe5beKUodkhVSXhgL+ci36rX2yEsZjFLtVpB5LVomxLa+elGDLTGPqHzJok+ljB6Abumi8STw=
