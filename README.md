@@ -25,9 +25,9 @@ repositories {
 }
 ```
 ## Components
-* [Badge][docs/Badge/README.md]
-* [Panel][docs/Panel/README.md]
-* [Text][docs/Text/README.md]
+* [Badge](docs/Badge/README.md)
+* [Panel](docs/Panel/README.md)
+* [Text](docs/Text/README.md)
 
 ## Usage
 
