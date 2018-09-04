@@ -23,8 +23,8 @@
     "prebuild": "npm test",
     "build": "gulp",
     "prettier": "prettier --config .prettierrc --write \"**/*.js\"",
-    "docs": "./gradlew dokka",
-    "docs:clean": "./gradlew cleanDokka"
+    "docs": "./gradlew Backpack:dokka",
+    "docs:clean": "./gradlew Backpack:cleanDokka"
   },
   "lint-staged": {
     "*.js": [
