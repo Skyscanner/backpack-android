@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="badge">
+      <!-- type of badge -->
+        <attr name="type" format="enum">
+            <enum name="success" value="1" />
+            <enum name="warning" value="2" />
+            <enum name="destructive" value="3" />
+            <enum name="light" value="4" />
+            <enum name="inverse" value="5" />
+            <enum name="outline" value="6" />
+        </attr>
+        <!-- message to be displayed -->
+        <attr name="message" format="string"/>
+    </declare-styleable>
+
+  <declare-styleable name="text">
+    <attr name="textStyle" format="enum">
+      <enum name="xs" value="0" />
+      <enum name="sm" value="1" />
+      <enum name="base" value="2" />
+      <enum name="lg" value="3" />
+      <enum name="xl" value="4" />
+      <enum name="xxl" value="5" />
+    </attr>
+    <attr name="emphasize" format="boolean" />
+  </declare-styleable>
+  <declare-styleable name="panel">
+    <attr name="bpk_padding" format="boolean" />
+  </declare-styleable>
+</resources>
