@@ -15,14 +15,6 @@ Given that you have a compatible environment as stated above you can now setup t
 + `npm install` to install npm dependencies
 +  Open the project in Android studio
 
-## Adding a new component
-
-A [cookiecutter][2] app is a part of the repository. This generates the proper kotlin classes for the component and test cases. To use this, run the following command and follow the process.
-
-`cookiecutter .`
-
-Once the component it generated, add it to the `settings.gradle` file to start using.
-
 ## Releasing
 
 > Backpack team only
@@ -31,10 +23,9 @@ Run `npm run release` and follow the process through, you'll be asked which sema
 
 ## Docs
 
-Run `npm run docs` to genere API docs. Docs will be generated in the `build/docs` folder by default. To provide a different output folder use `npm run docs -- -PdokkaOutput=/path/to/folder`
+Run `npm run docs` to generate API docs. Docs will be generated in the `build/docs` folder by default. To provide a different output folder use `npm run docs -- -PdokkaOutput=/path/to/folder`
 
 Run `npm run docs:clean` to remove generated docs.
 
 [1]: https://github.com/creationix/nvm
-[2]: https://github.com/audreyr/cookiecutter
 [3]: https://jitpack.io/#Skyscanner/backpack-android
