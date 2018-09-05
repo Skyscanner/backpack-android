@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-  <style name="Bpk.{{cookiecutter.pkg_name}}" parent="android:Widget">
-  </style>
-
-</resources>
