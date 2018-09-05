@@ -273,4 +273,49 @@
         app:type="outline"/>
     </LinearLayout>
   </HorizontalScrollView>
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    android:layout_marginStart="@dimen/bpkSpacingBase"
+    android:text="gray"/>
+  <HorizontalScrollView
+    android:layout_width="match_parent"
+    android:scrollbars="none"
+    android:layout_height="wrap_content">
+    <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="64sp"
+      android:layout_margin="@dimen/bpkSpacingBase"
+      android:orientation="horizontal">
+
+      <net.skyscanner.backpack.badge.BpkBadge
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/bpkSpacingBase"
+        app:message="Apple"
+        app:type="gray"/>
+
+      <net.skyscanner.backpack.badge.BpkBadge
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/bpkSpacingBase"
+        app:message="Bananas"
+        app:type="gray"/>
+
+      <net.skyscanner.backpack.badge.BpkBadge
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/bpkSpacingBase"
+        app:message="Strawberries"
+        app:type="gray"/>
+
+      <net.skyscanner.backpack.badge.BpkBadge
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/bpkSpacingBase"
+        app:message="Pears"
+        app:type="gray"/>
+    </LinearLayout>
+  </HorizontalScrollView>
 </LinearLayout>
