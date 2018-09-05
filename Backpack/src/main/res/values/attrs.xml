@@ -10,6 +10,7 @@
             <enum name="light" value="4" />
             <enum name="inverse" value="5" />
             <enum name="outline" value="6" />
+            <enum name="gray" value="7" />
         </attr>
         <!-- message to be displayed -->
         <attr name="message" format="string"/>

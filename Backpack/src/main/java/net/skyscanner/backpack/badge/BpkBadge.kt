@@ -53,7 +53,12 @@ open class BpkBadge(
     /**
      * Style for badges with a thin white outline
      */
-    Outline(6, R.color.bpkWhite, R.color.bpkWhite);
+    Outline(6, R.color.bpkWhite, R.color.bpkWhite),
+
+    /**
+     * Style for badges with a thin white outline
+     */
+    Gray(7, R.color.bpkGray100, R.color.bpkGray700);
 
     internal companion object {
 
