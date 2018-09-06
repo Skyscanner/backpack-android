@@ -1,7 +1,5 @@
 package net.skyscanner.backpack.badge
 
-import android.content.Context
-import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -11,11 +9,9 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 
 class BpkBadgeTest : BpkSnapshotTest() {
-  private lateinit var testContext: Context
 
   @Before
   fun setup() {
-    testContext = InstrumentationRegistry.getTargetContext()
     setDimensions(32,96)
   }
 

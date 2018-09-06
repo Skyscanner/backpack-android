@@ -1,8 +1,6 @@
 package net.skyscanner.backpack.panel
 
 
-import android.content.Context
-import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.widget.TextView
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -13,12 +11,9 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 
 class BpkPanelTest: BpkSnapshotTest() {
-  private lateinit var testContext: Context
-
 
   @Before
   fun setup() {
-    testContext = InstrumentationRegistry.getTargetContext()
     setDimensions(32,96)
   }
 
