@@ -85,28 +85,23 @@ open class BpkBadge(
       this.text = message
     }
 
-  @Override
   private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
 
     val a: TypedArray = context.theme.obtainStyledAttributes(
       attrs,
-      R.styleable.badge,
-      0, 0)
+      R.styleable.BpkBadge,
+      defStyleAttr, 0)
 
-    type = Type.fromId(a.getInt(R.styleable.badge_type, 1))
-    message = a.getString(R.styleable.badge_message)
+    type = Type.fromId(a.getInt(R.styleable.BpkBadge_type, 1))
+    message = a.getString(R.styleable.BpkBadge_message)
 
     a.recycle()
   }
 
   private fun setup() {
-    if (message != null) {
-      this.text = message
-    }
 
-    if (type == null) {
-      return
-    }
+    this.text = message
+
     //set padding
     val paddingMd = resources.getDimension(R.dimen.bpkSpacingMd).toInt()
     val paddingSm = resources.getDimension(R.dimen.bpkSpacingSm).toInt()

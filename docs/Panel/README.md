@@ -14,7 +14,7 @@ Example of a padded panel in XML
 <net.skyscanner.backpack.panel.bpkpanel
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:bpk_padding="true">
+    app:padding="true">
 
     <textview
         android:layout_width="match_parent"

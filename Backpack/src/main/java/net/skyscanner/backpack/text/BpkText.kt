@@ -61,11 +61,11 @@ open class BpkText(
 
     val a: TypedArray = context.theme.obtainStyledAttributes(
       attrs,
-      R.styleable.text,
-      0, 0)
+      R.styleable.BpkText,
+      defStyleAttr, 0)
 
-    textStyle = a.getInt(R.styleable.text_textStyle, BASE)
-    emphasize = a.getBoolean(R.styleable.text_emphasize, false)
+    textStyle = a.getInt(R.styleable.BpkText_textStyle, BASE)
+    emphasize = a.getBoolean(R.styleable.BpkText_emphasize, false)
 
     a.recycle()
   }
