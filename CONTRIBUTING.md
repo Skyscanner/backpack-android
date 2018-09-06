@@ -18,7 +18,7 @@ source ~/.bash_profile
 
 Install system images
 ```
-$ANDROID_SDK_ROOT/tools/bin/sdkmanager "system-images;android-21;google_apis;x86"
+$ANDROID_HOME/tools/bin/sdkmanager "system-images;android-21;google_apis;x86"
 ```
 
 ## Setup
@@ -35,32 +35,39 @@ Create an AVD using the following commands
 
 ```
 $ANDROID_HOME/tools/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-21;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
-```
-
-To start the emulator and attach and sdcard to it, run
- 
-```$ANDROID_HOME/tools/mksdcard -l e 512M sd.img
-$ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &
+$ANDROID_HOME/tools/mksdcard -l e 512M sd.img
 ```
 
 Snapshot testing depends on a python package which can be installed as:
 
 ```
-sudo easy_install Pillow
+easy_install Pillow
+```
+
+To start the emulator and attach an sdcard to it, run
+ 
+```
+$ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &
 ```
 
 After adding new snapshot tests, run
 
-`./gradlew app:recordDebugAndroidTestScreenshotTest`
+```
+./gradlew app:recordDebugAndroidTestScreenshotTest
+```
 
 To test changes use
 
-`./gradlew app:verifyDebugAndroidTestScreenshotTest`
+```
+./gradlew app:verifyDebugAndroidTestScreenshotTest
+```
 
 #### Espresso tests
 To run connected tests run
 
-`./gradlew Backpack:connectedCheck`
+```
+./gradlew Backpack:connectedCheck
+```
 
 ## Releasing
 
