@@ -13,7 +13,7 @@ class BpkTextTest: BpkSnapshotTest()  {
 
   @Before
   fun setup() {
-    setDimensions(32,96)
+    setDimensions(72,180)
   }
 
   @Test
