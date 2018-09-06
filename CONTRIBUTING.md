@@ -18,18 +18,14 @@ Given that you have a compatible environment as stated above you can now setup t
 ## Testing
 
 #### Snapshot testing
-Create an AVD with the following configuration using AVD manager
-- Android API Level: 21
-- Device: Nexus 4
-- CPU: x86
-- Screen size: 4.7' xhdpi
+Create an AVD using the following commands
 
-Add the following lines to `~/.android/avd/Nexus-4.avd/config.ini`
 ```
-hw.lcd.height=1280
-hw.lcd.width=768
-hw.lcd.density=240
+$ANDROID_HOME/tools/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-21;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
+mksdcard -l e 512M sd.img
+$ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &
 ```
+
 After adding new snapshot tests, run
 
 `./gradlew app:recordDebugAndroidTestScreenshotTest`
