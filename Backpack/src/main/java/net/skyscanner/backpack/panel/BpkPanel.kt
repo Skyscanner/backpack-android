@@ -40,8 +40,8 @@ open class BpkPanel(
 
     private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
 
-        val a = context.obtainStyledAttributes(attrs, R.styleable.panel, R.attr.bpk_padding, defStyleAttr)
-        padding = a.getBoolean(R.styleable.panel_bpk_padding, true)
+        val a = context.obtainStyledAttributes(attrs, R.styleable.BpkPanel, R.attr.padding, defStyleAttr)
+        padding = a.getBoolean(R.styleable.BpkPanel_padding, true)
         this.background = context.getDrawable(R.drawable.border)
         a.recycle()
     }
