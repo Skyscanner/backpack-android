@@ -17,24 +17,15 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry
  */
 open class ComponentDetailFragment : Fragment() {
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    private var mItem: ComponentRegistry.Component? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (arguments!!.containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = ComponentRegistry.ITEM_MAP[arguments!!.getString(ARG_ITEM_ID)]
 
             val activity = this.activity
             val appBarLayout = activity!!.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)
             if (appBarLayout != null) {
-                appBarLayout.title = mItem!!.id
+                appBarLayout.title = arguments!!.getString(ARG_ITEM_ID)
             }
         }
     }
