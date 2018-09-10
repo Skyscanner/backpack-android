@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.dokka-android'
+apply plugin: 'com.github.dcendents.android-maven'
 
 version = rootProject.ext.version
-group='com.github.Skyscanner.backpack-android'
+group='com.github.skyscanner.backpack-android'
 
 repositories {
   google()
