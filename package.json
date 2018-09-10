@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "backpack-android",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "engines": {
     "node": "^8.11.4",
     "npm": "^5.6.0"
