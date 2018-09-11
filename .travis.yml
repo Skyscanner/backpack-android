@@ -41,6 +41,7 @@ android:
     - tools
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
     - android-$ANDROID_API_LEVEL
+    - android-$ANDROID_MIN_SDK_LEVEL
     - android-$EMULATOR_API_LEVEL
     # For Google APIs
     - addon-google_apis-google-$ANDROID_API_LEVEL
@@ -92,6 +93,7 @@ notifications:
 env:
   global:
     - ANDROID_API_LEVEL=27
+    - ANDROID_MIN_SDK_LEVEL=19
     - EMULATOR_API_LEVEL=21
     - ANDROID_BUILD_TOOLS_VERSION=27.0.3
     - ANDROID_ABI=armeabi-v7a

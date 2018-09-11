@@ -3,6 +3,7 @@ package net.skyscanner.backpack.panel
 import android.content.Context
 import android.support.annotation.Dimension
 import android.support.annotation.Nullable
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
 import net.skyscanner.backpack.R
@@ -42,7 +43,7 @@ open class BpkPanel(
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.BpkPanel, R.attr.padding, defStyleAttr)
         padding = a.getBoolean(R.styleable.BpkPanel_padding, true)
-        this.background = context.getDrawable(R.drawable.border)
+        this.background = ResourcesCompat.getDrawable(resources,R.drawable.border,null)
         a.recycle()
     }
 }
