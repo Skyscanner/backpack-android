@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-  ext.kotlin_version = '1.2.51'
+  ext.kotlin_version = '1.2.60'
   ext.dokka_version = '0.9.17'
   repositories {
     google()
@@ -33,9 +33,9 @@ ext {
   version = "$BpkVersion"
   compileSdkVersion = 27
   targetSdkVersion = 27
-  minSdkVersion = 21
+  minSdkVersion = 19
   buildToolsVersion = "27.0.3"
-  supportLibVersion = "27.0.1"
+  supportLibVersion = "27.1.1"
   googlePlayServicesVersion = "15.0.1"
   androidMapsUtilsVersion = "0.5+"
 }

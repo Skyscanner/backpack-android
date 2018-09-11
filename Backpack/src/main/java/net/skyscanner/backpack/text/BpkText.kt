@@ -14,7 +14,7 @@ open class BpkText(
   attrs: AttributeSet?,
   defStyleAttr: Int) : AppCompatTextView(context, attrs, defStyleAttr) {
 
-  @IntDef(XS.toLong(), SM.toLong(), BASE.toLong(), LG.toLong(), XL.toLong(), XXL.toLong())
+  @IntDef(XS, SM, BASE, LG, XL, XXL)
 
   annotation class Styles
 
