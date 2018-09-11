@@ -1,41 +1,30 @@
 package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.demo.ComponentDetailFragment
-import net.skyscanner.backpack.demo.stories.BadgeFragment
-import net.skyscanner.backpack.demo.stories.PanelFragment
-import net.skyscanner.backpack.demo.stories.TextFragment
-
-import java.util.ArrayList
-import java.util.HashMap
+import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.stories.Story
 
 /**
  * Helper class to register the fragments for components
  */
 object ComponentRegistry {
 
-  /**
-   * An array of sample (dummy) items.
-   */
-  val ITEMS: MutableList<Component> = ArrayList()
+  val COMPONENTS by lazy { COMPONENT_MAP.keys.toList() }
+  val COMPONENT_MAP = mapOf(
+    "Panel" to { Story.of(R.layout.fragment_panel) },
+    "Badge" to { Story.of(R.layout.fragment_badge) },
+    "Text" to { Story.of(R.layout.fragment_text) }
+  )
 
-  /**
-   * A map of sample (dummy) items, by ID.
-   */
-  val ITEM_MAP: MutableMap<String, Component> = HashMap()
+  val TOKENS by lazy { TOKENS_MAP.keys.toList() }
+  val TOKENS_MAP = mapOf(
+    "Radii" to { Story.of(R.layout.fragment_radii) }
+  )
 
-  init {
-    addItem(Component("Panel", PanelFragment::class.java))
-    addItem(Component("Badge", BadgeFragment::class.java))
-    addItem(Component("Text", TextFragment::class.java))
+  val ALL by lazy {
+    val all = mutableMapOf<String, () -> ComponentDetailFragment>()
+    all.putAll(TOKENS_MAP)
+    all.putAll(COMPONENT_MAP)
+    all
   }
-
-  private fun addItem(item: Component) {
-    ITEMS.add(item)
-    ITEM_MAP[item.id] = item
-  }
-
-  /**
-   * A dummy item representing a piece of content.
-   */
-  class Component(val id: String, val fragmentClass: Class<out ComponentDetailFragment>)
 }

@@ -39,27 +39,22 @@ class ComponentDetailActivity : AppCompatActivity() {
         // http://developer.android.com/guide/components/fragments.html
         //
         if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            val arguments = Bundle()
-            arguments.putString(ComponentDetailFragment.ARG_ITEM_ID,
-                    intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID))
-            val component = ComponentRegistry.ITEM_MAP[intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)]
-            toolbar.title = intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)
-          var fragment: ComponentDetailFragment?
+          // Create the detail fragment and add it to the activity
+          // using a fragment transaction.
+          val itemId = intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)
+          toolbar.title = intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)
 
-          try {
-                fragment = component?.fragmentClass?.newInstance()
-            } catch (e: InstantiationException) {
-                throw RuntimeException(e)
-            } catch (e: IllegalAccessException) {
-                throw RuntimeException(e)
-            }
+          val createFragment = ComponentRegistry.ALL[itemId]
+          var fragment = createFragment?.invoke()
 
-            fragment!!.arguments = arguments
-            supportFragmentManager.beginTransaction()
-                    .add(R.id.component_detail_container, fragment)
-                    .commit()
+          val arguments = fragment?.arguments ?: Bundle()
+          arguments.putString(ComponentDetailFragment.ARG_ITEM_ID,
+            intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID))
+
+          fragment?.arguments = arguments
+          supportFragmentManager.beginTransaction()
+                  .add(R.id.component_detail_container, fragment)
+                  .commit()
         }
     }
 }
