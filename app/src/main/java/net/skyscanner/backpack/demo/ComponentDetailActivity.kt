@@ -44,7 +44,7 @@ class ComponentDetailActivity : AppCompatActivity() {
           val itemId = intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)
           toolbar.title = intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)
 
-          val createFragment = ComponentRegistry.ITEM_MAP[itemId]
+          val createFragment = ComponentRegistry.ALL[itemId]
           var fragment = createFragment?.invoke()
 
           val arguments = fragment?.arguments ?: Bundle()

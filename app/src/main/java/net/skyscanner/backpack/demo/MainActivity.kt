@@ -22,12 +22,6 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry
  */
 class MainActivity : AppCompatActivity() {
 
-  /**
-   * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-   * device.
-   */
-  private var mTwoPane: Boolean = false
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_component_list)
@@ -36,44 +30,28 @@ class MainActivity : AppCompatActivity() {
     setSupportActionBar(toolbar)
     toolbar.title = title
 
+    val tokensList = findViewById<View>(R.id.tokensList)!!
+    setupRecyclerView(tokensList as RecyclerView, ComponentRegistry.TOKENS)
 
-    if (findViewById<View>(R.id.component_detail_container) != null) {
-      // The detail container view will be present only in the
-      // large-screen layouts (res/values-w900dp).
-      // If this view is present, then the
-      // activity should be in two-pane mode.
-      mTwoPane = true
-    }
-    val recyclerView = findViewById<View>(R.id.component_list)!!
-    setupRecyclerView(recyclerView as RecyclerView)
+    val componentsList = findViewById<View>(R.id.componentsList)!!
+    setupRecyclerView(componentsList as RecyclerView, ComponentRegistry.COMPONENTS)
   }
 
-  private fun setupRecyclerView(recyclerView: RecyclerView) {
-    recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, ComponentRegistry.ITEMS, mTwoPane)
+  private fun setupRecyclerView(recyclerView: RecyclerView, values: List<String>) {
+    recyclerView.adapter = SimpleItemRecyclerViewAdapter(values)
   }
 
-  private class SimpleItemRecyclerViewAdapter internal constructor(private val mParentActivity: MainActivity,
-                                                                   private val mValues: List<String>,
-                                                                   private val mTwoPane: Boolean) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+  private class SimpleItemRecyclerViewAdapter internal constructor(
+    private val mValues: List<String>) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
     private val mOnClickListener = View.OnClickListener { view ->
       val viewId = view.tag as String
-      val item = ComponentRegistry.ITEM_MAP[viewId]
-      if (mTwoPane) {
-        val fragment = item?.invoke()
-        val arguments = fragment?.arguments ?: Bundle()
-        arguments.putString(ComponentDetailFragment.ARG_ITEM_ID, viewId)
 
-        fragment?.arguments = arguments
-        mParentActivity.supportFragmentManager.beginTransaction()
-          .replace(R.id.component_detail_container, fragment)
-          .commit()
-      } else {
-        val context = view.context
-        val intent = Intent(context, ComponentDetailActivity::class.java)
-        intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, viewId)
+      val context = view.context
+      val intent = Intent(context, ComponentDetailActivity::class.java)
+      intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, viewId)
 
-        context.startActivity(intent)
-      }
+      context.startActivity(intent)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

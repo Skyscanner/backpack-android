@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.demo.data
 
+import net.skyscanner.backpack.demo.ComponentDetailFragment
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.Story
 
@@ -8,11 +9,22 @@ import net.skyscanner.backpack.demo.stories.Story
  */
 object ComponentRegistry {
 
-  val ITEMS get() = ITEM_MAP.keys.toList()
-
-  val ITEM_MAP = mapOf(
+  val COMPONENTS by lazy { COMPONENT_MAP.keys.toList() }
+  val COMPONENT_MAP = mapOf(
     "Panel" to { Story.of(R.layout.fragment_panel) },
     "Badge" to { Story.of(R.layout.fragment_badge) },
     "Text" to { Story.of(R.layout.fragment_text) }
   )
+
+  val TOKENS by lazy { TOKENS_MAP.keys.toList() }
+  val TOKENS_MAP = mapOf(
+    "Radii" to { Story.of(R.layout.fragment_radii) }
+  )
+
+  val ALL by lazy {
+    val all = mutableMapOf<String, () -> ComponentDetailFragment>()
+    all.putAll(TOKENS_MAP)
+    all.putAll(COMPONENT_MAP)
+    all
+  }
 }
