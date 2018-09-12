@@ -3,9 +3,9 @@
 [Unreleased changes](./UNRELEASED.md).
 ## 0.2.3
 
-Changes the dependency signature from `com.github.Skyscanner:backpack-android` to `com.github.skyscanner:backpack-android`
+Changes the dependency signature from `com.github.Skyscanner:backpack-android` to `com.github.skyscanner:backpack-android`.
 
-Fixes a bug which prevented release artifacts from being uploaded
+Fixes a bug which prevented release artifacts from being uploaded.
 
 ## 0.2.1
 
