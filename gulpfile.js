@@ -244,7 +244,7 @@ gulp.task('template:elevation', () => {
 
 gulp.task('template:icons', () => {
   gulp
-    .src('node_modules/bpk-svgs/src/icons/**/*.svg')
+    .src('node_modules/bpk-svgs/dist/svgs/icons/**/*.svg')
     .pipe(through.obj(convertToXml))
     .pipe(gulp.dest(PATHS.drawableRes));
 });
