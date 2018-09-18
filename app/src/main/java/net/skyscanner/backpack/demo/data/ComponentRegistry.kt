@@ -11,10 +11,11 @@ import net.skyscanner.backpack.demo.stories.Story
 object ComponentRegistry {
 
   val COMPONENTS by lazy { COMPONENT_MAP.keys.toList() }
-  val COMPONENT_MAP = mapOf(
+  private val COMPONENT_MAP = mapOf(
     "Panel" to { Story.of(R.layout.fragment_panel) },
     "Badge" to { Story.of(R.layout.fragment_badge) },
-    "Text" to { Story.of(R.layout.fragment_text) }
+    "Text" to { Story.of(R.layout.fragment_text) },
+    "Button" to { Story.of(R.layout.fragment_button)}
   )
 
   val TOKENS by lazy { TOKENS_MAP.keys.toList() }
