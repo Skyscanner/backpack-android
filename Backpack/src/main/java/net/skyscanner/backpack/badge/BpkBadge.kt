@@ -92,7 +92,7 @@ open class BpkBadge(
       R.styleable.BpkBadge,
       defStyleAttr, 0)
 
-    type = Type.fromId(a.getInt(R.styleable.BpkBadge_type, 1))
+    type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
     message = a.getString(R.styleable.BpkBadge_message)
 
     a.recycle()

@@ -26,28 +26,28 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Apple"
-        app:type="success"/>
+        app:badgeType="success"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Bananas"
-        app:type="success"/>
+        app:badgeType="success"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Strawberries"
-        app:type="success"/>
+        app:badgeType="success"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Pears"
-        app:type="success"/>
+        app:badgeType="success"/>
     </LinearLayout>
   </HorizontalScrollView>
   <TextView
@@ -70,28 +70,28 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Apple"
-        app:type="warning"/>
+        app:badgeType="warning"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Bananas"
-        app:type="warning"/>
+        app:badgeType="warning"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Strawberries"
-        app:type="warning"/>
+        app:badgeType="warning"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Pears"
-        app:type="warning"/>
+        app:badgeType="warning"/>
     </LinearLayout>
   </HorizontalScrollView>
   <TextView
@@ -114,28 +114,28 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Apple"
-        app:type="destructive"/>
+        app:badgeType="destructive"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Bananas"
-        app:type="destructive"/>
+        app:badgeType="destructive"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Strawberries"
-        app:type="destructive"/>
+        app:badgeType="destructive"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Pears"
-        app:type="destructive"/>
+        app:badgeType="destructive"/>
     </LinearLayout>
   </HorizontalScrollView>
   <TextView
@@ -159,28 +159,28 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Apple"
-        app:type="light"/>
+        app:badgeType="light"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Bananas"
-        app:type="light"/>
+        app:badgeType="light"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Strawberries"
-        app:type="light"/>
+        app:badgeType="light"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Pears"
-        app:type="light"/>
+        app:badgeType="light"/>
     </LinearLayout>
   </HorizontalScrollView>
   <TextView
@@ -204,28 +204,28 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Apple"
-        app:type="inverse"/>
+        app:badgeType="inverse"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Bananas"
-        app:type="inverse"/>
+        app:badgeType="inverse"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Strawberries"
-        app:type="inverse"/>
+        app:badgeType="inverse"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Pears"
-        app:type="inverse"/>
+        app:badgeType="inverse"/>
     </LinearLayout>
   </HorizontalScrollView>
   <TextView
@@ -249,28 +249,28 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Apple"
-        app:type="outline"/>
+        app:badgeType="outline"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Bananas"
-        app:type="outline"/>
+        app:badgeType="outline"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Strawberries"
-        app:type="outline"/>
+        app:badgeType="outline"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/bpkSpacingBase"
         app:message="Pears"
-        app:type="outline"/>
+        app:badgeType="outline"/>
     </LinearLayout>
   </HorizontalScrollView>
 </LinearLayout>
