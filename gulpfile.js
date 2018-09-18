@@ -24,11 +24,21 @@ const runSequence = require('run-sequence');
 const del = require('del');
 const tinycolor = require('tinycolor2');
 const _ = require('lodash');
+const through = require('through2');
+const svg2vectordrawable = require('svg2vectordrawable');
 const tokens = require('bpk-tokens/tokens/base.raw.android.json');
 
 const PATHS = {
   templates: path.join(__dirname, 'templates'),
   outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res', 'values'),
+  drawableRes: path.join(
+    __dirname,
+    'Backpack',
+    'src',
+    'main',
+    'res',
+    'drawable-nodpi',
+  ),
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
@@ -69,6 +79,21 @@ const tokensWithType = type =>
 
 const tokensWithCategory = category =>
   Object.values(tokens.props).filter(i => i.category === category);
+
+const convertToXml = (chunk, enc, cb) => {
+  const svgCode = chunk.contents.toString(enc);
+  return svg2vectordrawable(svgCode)
+    .then(xmlCode => {
+      chunk.contents = Buffer.from(xmlCode); // eslint-disable-line no-param-reassign
+      const s = chunk.path.split('/');
+      s[s.length - 1] = `bpk_${s[s.length - 1]
+        .replace(/-/g, '_')
+        .replace('.svg', '.xml')}`;
+      chunk.path = s.join('/'); // eslint-disable-line no-param-reassign
+      cb(null, chunk);
+    })
+    .catch(cb);
+};
 
 const getTextStyles = () => {
   const result = _.chain(
@@ -217,6 +242,13 @@ gulp.task('template:elevation', () => {
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
+gulp.task('template:icons', () => {
+  gulp
+    .src('node_modules/bpk-svgs/dist/svgs/icons/**/*.svg')
+    .pipe(through.obj(convertToXml))
+    .pipe(gulp.dest(PATHS.drawableRes));
+});
+
 gulp.task('default', () => {
   runSequence(
     'template:color',
@@ -224,6 +256,7 @@ gulp.task('default', () => {
     'template:spacing',
     'template:radii',
     'template:elevation',
+    'template:icons',
   );
 });
 
