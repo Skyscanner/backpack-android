@@ -3,7 +3,6 @@ package net.skyscanner.backpack.button
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
-import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -14,11 +13,9 @@ import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatButton
-import android.text.Layout
-import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
 import net.skyscanner.backpack.R
 
 open class BpkButton @JvmOverloads constructor(
@@ -27,7 +24,6 @@ open class BpkButton @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : AppCompatButton(context, attrs, defStyleAttr) {
 
-  private val margin by lazy(LazyThreadSafetyMode.NONE) { dpToPx(4, context) }
   private val roundedButtonCorner by lazy(LazyThreadSafetyMode.NONE) { dpToPx(16, context).toFloat() }
   private val strokeWidth by lazy(LazyThreadSafetyMode.NONE) { 2 }
 
@@ -37,17 +33,31 @@ open class BpkButton @JvmOverloads constructor(
       setup()
     }
 
+  var size: Size = Size.Basic
+    set(value) {
+      field = value
+      setup()
+    }
+
+  var icon: Drawable? = null
+    set(value) {
+      if (value != null) {
+        field = value
+        setup()
+      }
+    }
+
   init {
-    val a: TypedArray = context.theme.obtainStyledAttributes(
-      attrs,
-      R.styleable.BpkButton,
-      defStyleAttr, 0
-    )
-
-    type = Type.fromId(a.getInt(R.styleable.BpkButton_buttonType, 0))
-
-    a.recycle()
-
+    val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
+    try {
+      type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+      size = Size.fromId(attr.getInt(R.styleable.BpkButton_buttonSize, 0))
+      attr.getDrawable(R.styleable.BpkButton_buttonIcon)?.let { drawable ->
+        icon = drawable
+      }
+    } finally {
+      attr.recycle()
+    }
     setup()
   }
 
@@ -67,24 +77,69 @@ open class BpkButton @JvmOverloads constructor(
     }
   }
 
+  enum class Size(internal var id: Int) {
+    Basic(0),
+    Large(1);
+
+    internal companion object {
+      internal fun fromId(id: Int): Size {
+        for (f in values()) {
+          if (f.id == id) return f
+        }
+        throw IllegalArgumentException()
+      }
+    }
+  }
+
   private fun setup() {
-    this.setBackgroundColor(ContextCompat.getColor(context, type.bgColor))
-    this.setTextColor(ContextCompat.getColor(context, type.textColor))
-    this.background = getSelectorDrawable(
-      normalColor = ContextCompat.getColor(context, type.bgColor),
-      cornerRadius = roundedButtonCorner,
-      strokeWidth = strokeWidth,
-      strokeColor = type.strokeColor
-    )
-    this.textAlignment = View.TEXT_ALIGNMENT_CENTER
+    when (size) {
+      Size.Basic -> {
+        this.setPadding(dpToPx(8, context), dpToPx(8, context), dpToPx(8, context), dpToPx(8, context))
+      }
+      Size.Large -> {
+        this.setPadding(dpToPx(12, context), dpToPx(12, context), dpToPx(12, context), dpToPx(12, context))
+      }
+    }
+
+    if (text.isNullOrEmpty()) {
+      text = "     "
+    }
+
+    this.setOnClickListener {
+      Toast.makeText(context, "You clicked a button", Toast.LENGTH_SHORT).show()
+    }
+
+    if (this.isEnabled) {
+      this.background = getSelectorDrawable(
+        normalColor = ContextCompat.getColor(context, type.bgColor),
+        cornerRadius = if (size == Size.Basic) roundedButtonCorner else roundedButtonCorner * 1.3f,
+        strokeWidth = strokeWidth,
+        strokeColor = type.strokeColor
+      )
+      this.setTextColor(ContextCompat.getColor(context, type.textColor))
+    } else {
+      this.background = getSelectorDrawable(
+        normalColor = ContextCompat.getColor(context, R.color.bpkGray200),
+        cornerRadius = if (size == Size.Basic) roundedButtonCorner else roundedButtonCorner * 1.3f,
+        strokeWidth = strokeWidth,
+        strokeColor = R.color.bpkGray500
+      )
+      this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray700))
+    }
   }
 }
 
-fun dpToPx(dp: Int, ctx: Context): Int {
+/**
+ *
+ */
+private fun dpToPx(dp: Int, ctx: Context): Int {
   val density = ctx.resources.displayMetrics.density
   return Math.round(dp.toFloat() * density)
 }
 
+/**
+ *
+ */
 @SuppressLint("ObsoleteSdkInt")
 fun getSelectorDrawable(
   @ColorInt normalColor: Int,
@@ -118,6 +173,9 @@ fun getSelectorDrawable(
   }
 }
 
+/**
+ *
+ */
 private fun corneredDrawable(
   color: Int,
   cornerRadius: Float? = null,
@@ -133,6 +191,9 @@ private fun corneredDrawable(
   return gd
 }
 
+/**
+ *
+ */
 private fun getPressedColorSelector(
   @ColorInt normalColor: Int,
   @ColorInt pressedColor: Int,
@@ -150,6 +211,9 @@ private fun getPressedColorSelector(
   )
 }
 
+/**
+ *
+ */
 private fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
   val hsv = FloatArray(3)
   Color.colorToHSV(normalColor, hsv)
@@ -157,6 +221,9 @@ private fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
   return Color.HSVToColor(hsv)
 }
 
+/**
+ *
+ */
 private fun greyOut(normalColor: Int): Int {
   return Color.argb(
     Color.alpha(normalColor),
