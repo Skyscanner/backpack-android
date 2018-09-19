@@ -1,0 +1,35 @@
+package net.skyscanner.backpack.demo.stories
+
+import android.graphics.drawable.Drawable
+import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import net.skyscanner.backpack.demo.ComponentDetailFragment
+import net.skyscanner.backpack.demo.R
+
+class IconsStory : ComponentDetailFragment() {
+
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+      return inflater.inflate(R.layout.fragment_all_icons, container, false)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    val iconsGridView : RecyclerView= view.findViewById(R.id.lst_icons)
+
+    val drawableResources = ArrayList<Drawable>()
+
+    for (field in R.drawable::class.java.fields) {
+      if(field.name.startsWith("bpk_")) {
+        drawableResources.add(resources.getDrawable(field.getInt(null)))
+      }
+    }
+
+    iconsGridView.layoutManager = GridLayoutManager(context, 10)
+    iconsGridView.adapter =  IconsAdapter(drawableResources)
+
+  }
+}
