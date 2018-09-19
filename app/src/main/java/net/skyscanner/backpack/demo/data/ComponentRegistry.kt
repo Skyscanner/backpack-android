@@ -18,7 +18,8 @@ object ComponentRegistry {
 
   val TOKENS by lazy { TOKENS_MAP.keys.toList() }
   val TOKENS_MAP = mapOf(
-    "Radii" to { Story.of(R.layout.fragment_radii) }
+    "Radii" to { Story.of(R.layout.fragment_radii) },
+    "Icons" to { Story.of(R.layout.fragment_icons) }
   )
 
   val ALL by lazy {
