@@ -1,9 +1,7 @@
 package net.skyscanner.backpack.demo
 
 import android.os.Bundle
-import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.app.Fragment
-import net.skyscanner.backpack.demo.data.ComponentRegistry
 
 /**
  * A fragment representing a single Component detail screen.
@@ -17,25 +15,21 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry
  */
 open class ComponentDetailFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (arguments!!.containsKey(ARG_ITEM_ID)) {
-
-            val activity = this.activity
-            val appBarLayout = activity!!.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)
-            if (appBarLayout != null) {
-                appBarLayout.title = arguments!!.getString(ARG_ITEM_ID)
-            }
-        }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    if (arguments?.containsKey(ARG_ITEM_ID) == true) {
+      val activity = this.activity as ComponentDetailActivity
+      activity.title = arguments!!.getString(ARG_ITEM_ID)
     }
 
-    companion object {
-        /**
-         * The fragment argument representing the item ID that this fragment
-         * represents.
-         */
-        val ARG_ITEM_ID = "item_id"
-    }
+    super.onCreate(savedInstanceState)
+  }
+
+  companion object {
+    /**
+     * The fragment argument representing the item ID that this fragment
+     * represents.
+     */
+    val ARG_ITEM_ID = "item_id"
+  }
 
 }

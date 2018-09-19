@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.widget.ImageView
-import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 
 /**
@@ -21,9 +19,6 @@ class ComponentDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_component_detail)
         val toolbar = findViewById<View>(R.id.detail_toolbar) as Toolbar
         setSupportActionBar(toolbar)
-        val image = findViewById<ImageView>(R.id.img)
-        Picasso.get().load(R.drawable.header).resize(1024, 800)
-                .onlyScaleDown().into(image)
 
         // Show the Up button in the action bar.
         val actionBar = supportActionBar
