@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -12,10 +13,9 @@ import android.os.Build
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
-import android.view.View
-import android.widget.Toast
 import net.skyscanner.backpack.R
 
 open class BpkButton @JvmOverloads constructor(
@@ -53,7 +53,7 @@ open class BpkButton @JvmOverloads constructor(
       type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
       size = Size.fromId(attr.getInt(R.styleable.BpkButton_buttonSize, 0))
       attr.getDrawable(R.styleable.BpkButton_buttonIcon)?.let { drawable ->
-        icon = drawable
+        icon = DrawableCompat.wrap(drawable)
       }
     } finally {
       attr.recycle()
@@ -92,6 +92,8 @@ open class BpkButton @JvmOverloads constructor(
   }
 
   private fun setup() {
+    isClickable = true
+
     when (size) {
       Size.Basic -> {
         this.setPadding(dpToPx(8, context), dpToPx(8, context), dpToPx(8, context), dpToPx(8, context))
@@ -101,18 +103,16 @@ open class BpkButton @JvmOverloads constructor(
       }
     }
 
-    if (text.isNullOrEmpty()) {
-      text = "     "
-    }
+    var cornerRadius = if (size == Size.Basic) roundedButtonCorner else roundedButtonCorner * 1.3f
 
-    this.setOnClickListener {
-      Toast.makeText(context, "You clicked a button", Toast.LENGTH_SHORT).show()
+    if (text.isNullOrEmpty()) {
+      cornerRadius = 100F // circle
     }
 
     if (this.isEnabled) {
       this.background = getSelectorDrawable(
         normalColor = ContextCompat.getColor(context, type.bgColor),
-        cornerRadius = if (size == Size.Basic) roundedButtonCorner else roundedButtonCorner * 1.3f,
+        cornerRadius = cornerRadius,
         strokeWidth = strokeWidth,
         strokeColor = type.strokeColor
       )
@@ -120,12 +120,25 @@ open class BpkButton @JvmOverloads constructor(
     } else {
       this.background = getSelectorDrawable(
         normalColor = ContextCompat.getColor(context, R.color.bpkGray200),
-        cornerRadius = if (size == Size.Basic) roundedButtonCorner else roundedButtonCorner * 1.3f,
+        cornerRadius = cornerRadius,
         strokeWidth = strokeWidth,
         strokeColor = R.color.bpkGray500
       )
       this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray700))
     }
+
+    if (this.icon != null) {
+      DrawableCompat.setTintList(
+        this.icon!!,
+        getColorSelector(
+          ContextCompat.getColor(context, type.textColor),
+          ContextCompat.getColor(context, type.textColor),
+          ContextCompat.getColor(context, type.textColor)
+        )
+      )
+      this.setCompoundDrawablesWithIntrinsicBounds(this.icon!!, null, null, null)
+    }
+  
   }
 }
 
@@ -166,7 +179,7 @@ fun getSelectorDrawable(
     return states
   } else {
     return RippleDrawable(
-      getPressedColorSelector(normalColor, pressedColor, greyOut(normalColor)),
+      getColorSelector(normalColor, pressedColor, greyOut(normalColor)),
       corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth),
       corneredDrawable(Color.WHITE, cornerRadius)
     )
@@ -194,7 +207,7 @@ private fun corneredDrawable(
 /**
  *
  */
-private fun getPressedColorSelector(
+private fun getColorSelector(
   @ColorInt normalColor: Int,
   @ColorInt pressedColor: Int,
   @ColorInt disabledColor: Int
