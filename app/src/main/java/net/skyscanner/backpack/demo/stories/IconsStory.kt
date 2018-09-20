@@ -2,6 +2,8 @@ package net.skyscanner.backpack.demo.stories
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.graphics.drawable.VectorDrawableCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import net.skyscanner.backpack.demo.ComponentDetailFragment
 import net.skyscanner.backpack.demo.R
+
+private const val PLATFORM_VD_CLAZZ = "android.graphics.drawable.VectorDrawable"
 
 class IconsStory : ComponentDetailFragment() {
 
@@ -24,12 +28,20 @@ class IconsStory : ComponentDetailFragment() {
 
     for (field in R.drawable::class.java.fields) {
       if(field.name.startsWith("bpk_")) {
-        drawableResources.add(resources.getDrawable(field.getInt(null)))
+        ResourcesCompat.getDrawable(resources,field.getInt(null),null)?.apply {
+          if(isVectorDrawable(this)) {
+            drawableResources.add(this)
+          }
+        }
       }
     }
 
     iconsGridView.layoutManager = GridLayoutManager(context, 10)
     iconsGridView.adapter =  IconsAdapter(drawableResources)
+  }
 
+
+  private fun isVectorDrawable(d: Drawable): Boolean {
+    return d is VectorDrawableCompat || PLATFORM_VD_CLAZZ == d.javaClass.name
   }
 }
