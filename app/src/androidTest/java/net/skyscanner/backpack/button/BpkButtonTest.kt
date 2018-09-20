@@ -1,10 +1,14 @@
 package net.skyscanner.backpack.button
 
+import android.support.test.runner.AndroidJUnit4
 import android.support.v4.content.ContextCompat
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+
+@RunWith(AndroidJUnit4::class)
 
 class BpkButtonTest : BpkSnapshotTest() {
 
