@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -138,12 +137,16 @@ open class BpkButton @JvmOverloads constructor(
       )
       this.setCompoundDrawablesWithIntrinsicBounds(this.icon!!, null, null, null)
     }
-  
   }
 }
 
 /**
+ * Utility method to convert density independent pixels to pixels based on display metrics at runtime
  *
+ * @param dp required, integer representing the dp value
+ * @param context required, used for getting the displayMetrics at runtime
+ *
+ * @return Int representing the pixel value of the given dp
  */
 private fun dpToPx(dp: Int, ctx: Context): Int {
   val density = ctx.resources.displayMetrics.density
@@ -151,13 +154,22 @@ private fun dpToPx(dp: Int, ctx: Context): Int {
 }
 
 /**
+ * Utility method to create a drawable with given selector states for normal, pressed and disabled.
+ * Uses either a RippleDrawable if above API 21 or StateListDrawable
  *
+ * @param normalColor required, used as main background color on the drawable
+ * @param cornerRadius optional, used as the radius on the corners (use 100 for square)
+ * @param strokeColor optional, color integer for the stroke
+ * @param strokeWidth optional, width in px for the stroke
+ * @param pressedColor required, color integer for the pressed state, defaults to a 20% darken factor
+ *
+ * @return Drawable
  */
 @SuppressLint("ObsoleteSdkInt")
 fun getSelectorDrawable(
   @ColorInt normalColor: Int,
   cornerRadius: Float? = null,
-  strokeColor: Int? = null,
+  @ColorInt strokeColor: Int? = null,
   strokeWidth: Int? = null,
   @ColorInt pressedColor: Int = darken(normalColor)
 ): Drawable {
@@ -187,7 +199,15 @@ fun getSelectorDrawable(
 }
 
 /**
+ * Utility function to create a cornered (or circle) drawable given a corner radius.
+ * Additional stroke width and color can be defined
  *
+ * @param color required, used as the background for the drawable
+ * @param cornerRadius optional, if set used as the radius on the drawable
+ * @param strokeColor optional, color integer for the stroke
+ * @param strokeWidth optional, width in px for the stroke
+ *
+ * @return Drawable
  */
 private fun corneredDrawable(
   color: Int,
@@ -205,7 +225,13 @@ private fun corneredDrawable(
 }
 
 /**
+ * Utility function to state list for a drawable
  *
+ * @param normalColor required, used as the color for any non specified special state
+ * @param pressedColor required, used as the color for the pressed, focused and activated state
+ * @param disabledColor required, used as the color for the disabled state
+ *
+ * @return ColorStateList
  */
 private fun getColorSelector(
   @ColorInt normalColor: Int,
@@ -225,7 +251,12 @@ private fun getColorSelector(
 }
 
 /**
+ * Utility function for darkening a given color
  *
+ * @param normalColor required, representing the color we will darken, given as a color resource int
+ * @param factor required, used for the darkening factor, default to 20%
+ *
+ * @return Int
  */
 private fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
   val hsv = FloatArray(3)
@@ -235,9 +266,13 @@ private fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
 }
 
 /**
+ * Utility function for darkening out a given color
  *
+ * @param normalColor required, representing the color we will darken, given as a color resource int
+ *
+ * @return Int
  */
-private fun greyOut(normalColor: Int): Int {
+private fun greyOut(@ColorInt normalColor: Int): Int {
   return Color.argb(
     Color.alpha(normalColor),
     Color.red(normalColor) / 2,
