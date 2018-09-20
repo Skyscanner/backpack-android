@@ -2,6 +2,7 @@ package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.demo.ComponentDetailFragment
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.Story
 
 /**
@@ -19,7 +20,9 @@ object ComponentRegistry {
 
   val TOKENS by lazy { TOKENS_MAP.keys.toList() }
   private val TOKENS_MAP = mapOf(
-    "Radii" to { Story.of(R.layout.fragment_radii) }
+    "Radii" to { Story.of(R.layout.fragment_radii) },
+    "Icons" to { Story.of(R.layout.fragment_icons) },
+    "All Icons" to { IconsStory() }
   )
 
   val ALL by lazy {

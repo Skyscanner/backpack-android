@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_gravity="center"
+  android:layout_height="wrap_content" android:orientation="vertical">
+
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    app:emphasize="true"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/bpkSpacingMd"
+    android:text="Small"/>
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/bpkSpacingMd"
+    android:layout_height="wrap_content">
+    <ImageView
+      android:layout_width="16dp"
+      android:tint="@color/bpkGray900"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      app:srcCompat="@drawable/bpk_flight"
+      android:layout_height="16dp"/>
+    <ImageView
+      android:layout_width="16dp"
+      app:srcCompat="@drawable/bpk_cars"
+      android:tint="@color/bpkGray900"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:layout_height="16dp"/>
+    <ImageView
+      android:layout_width="16dp"
+      app:srcCompat="@drawable/bpk_hotels"
+      android:tint="@color/bpkGray900"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:layout_height="16dp"/>
+  </LinearLayout>
+
+  <net.skyscanner.backpack.text.BpkText
+    app:emphasize="true"
+    android:layout_width="wrap_content"
+    android:layout_marginStart="@dimen/bpkSpacingMd"
+    android:layout_height="wrap_content"
+    android:text="Large"/>
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+
+    android:layout_height="wrap_content">
+    <ImageView
+      android:layout_width="wrap_content"
+      android:tint="@color/bpkGray900"
+      app:srcCompat="@drawable/bpk_flight"
+      android:padding="@dimen/bpkSpacingMd"
+
+      android:layout_height="wrap_content"/>
+    <ImageView
+      android:layout_width="wrap_content"
+      app:srcCompat="@drawable/bpk_cars"
+      android:tint="@color/bpkGray900"
+      android:padding="@dimen/bpkSpacingMd"
+
+      android:layout_height="wrap_content"/>
+    <ImageView
+      android:layout_width="wrap_content"
+      android:tint="@color/bpkGray900"
+      app:srcCompat="@drawable/bpk_hotels"
+      android:padding="@dimen/bpkSpacingMd"
+
+      android:layout_height="wrap_content"/>
+  </LinearLayout>
+  <net.skyscanner.backpack.text.BpkText
+    app:emphasize="true"
+    android:layout_width="wrap_content"
+    android:layout_marginStart="@dimen/bpkSpacingMd"
+    android:layout_height="wrap_content"
+    android:text="In color"/>
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/bpkSpacingSm"
+    android:layout_height="wrap_content">
+    <ImageView
+      android:layout_width="wrap_content"
+      android:tint="@color/bpkBlue700"
+      app:srcCompat="@drawable/bpk_flight"
+      android:padding="@dimen/bpkSpacingMd"
+      android:layout_height="wrap_content"/>
+    <ImageView
+      android:layout_width="wrap_content"
+      app:srcCompat="@drawable/bpk_cars"
+      android:tint="@color/bpkGreen700"
+      android:padding="@dimen/bpkSpacingMd"
+      android:layout_height="wrap_content"/>
+    <ImageView
+      android:layout_width="wrap_content"
+      app:srcCompat="@drawable/bpk_hotels"
+      android:padding="@dimen/bpkSpacingMd"
+      android:tint="@color/bpkYellow700"
+      android:layout_height="wrap_content"/>
+  </LinearLayout>
+</LinearLayout>
