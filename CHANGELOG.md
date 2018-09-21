@@ -1,6 +1,14 @@
 # Backpack Android changelog
 
 [Unreleased changes](./UNRELEASED.md).
+
+# 0.2.4
+Adds backpack icons to resources
+
+## 0.2.3
+
+Fix artifacts publishing
+
 ## 0.2.3
 
 Changes the dependency signature from `com.github.Skyscanner:backpack-android` to `com.github.skyscanner:backpack-android`.
