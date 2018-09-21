@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -107,7 +106,7 @@ open class BpkButton @JvmOverloads constructor(
     )
     this.setTextColor(ContextCompat.getColor(context, if (this.isEnabled) type.textColor else R.color.bpkGray300))
     this.setTextAppearance(this.context, R.style.bpkButtonBase)
-    this.gravity = Gravity.CENTER_VERTICAL
+    this.gravity = Gravity.CENTER
 
     this.iconStart?.let {
       DrawableCompat.setTintList(
@@ -118,7 +117,6 @@ open class BpkButton @JvmOverloads constructor(
           ContextCompat.getColor(context, type.textColor)
         )
       )
-      it.setBounds(dpToPx(2, this.context), dpToPx(2, this.context), dpToPx(2, this.context), dpToPx(2, this.context))
     }
 
     this.iconEnd?.let {
@@ -130,7 +128,6 @@ open class BpkButton @JvmOverloads constructor(
           ContextCompat.getColor(context, type.textColor)
         )
       )
-      it.setBounds(dpToPx(2, this.context), dpToPx(2, this.context), dpToPx(2, this.context), dpToPx(2, this.context))
     }
 
     this.setCompoundDrawablesWithIntrinsicBounds(iconStart, null, iconEnd, null)
