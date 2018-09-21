@@ -190,7 +190,7 @@ fun getSelectorDrawable(
     return RippleDrawable(
       getColorSelector(normalColor, pressedColor, greyOut(normalColor)),
       corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth),
-      corneredDrawable(Color.WHITE, cornerRadius)
+      corneredDrawable(Color.BLACK, cornerRadius, strokeColor, strokeWidth)
     )
   }
 }
