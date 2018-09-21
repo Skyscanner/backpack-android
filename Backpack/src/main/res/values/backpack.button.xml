@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="BpkButtonStyle">
+    <attr name="android:fontFamily" />
+    <attr name="android:textSize" />
+  </declare-styleable>
+
+  <style name="bpkButtonBase">
+    <item name="android:fontFamily">sans-serif-light</item>
+    <item name="android:textSize">12sp</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:textAllCaps">true</item>
+  </style>
+</resources>
