@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -15,6 +16,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
+import android.view.Gravity
 import net.skyscanner.backpack.R
 
 open class BpkButton @JvmOverloads constructor(
@@ -23,7 +25,7 @@ open class BpkButton @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : AppCompatButton(context, attrs, defStyleAttr) {
 
-  private val roundedButtonCorner by lazy(LazyThreadSafetyMode.NONE) { dpToPx(16, context).toFloat() }
+  private val roundedButtonCorner by lazy(LazyThreadSafetyMode.NONE) { dpToPx(24, context).toFloat() }
   private val strokeWidth by lazy(LazyThreadSafetyMode.NONE) { 2 }
 
   var type: Type = Type.Primary
@@ -32,13 +34,15 @@ open class BpkButton @JvmOverloads constructor(
       setup()
     }
 
-  var size: Size = Size.Basic
+  var iconStart: Drawable? = null
     set(value) {
-      field = value
-      setup()
+      if (value != null) {
+        field = value
+        setup()
+      }
     }
 
-  var icon: Drawable? = null
+  var iconEnd: Drawable? = null
     set(value) {
       if (value != null) {
         field = value
@@ -50,9 +54,11 @@ open class BpkButton @JvmOverloads constructor(
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
     try {
       type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
-      size = Size.fromId(attr.getInt(R.styleable.BpkButton_buttonSize, 0))
-      attr.getDrawable(R.styleable.BpkButton_buttonIcon)?.let { drawable ->
-        icon = DrawableCompat.wrap(drawable)
+      attr.getDrawable(R.styleable.BpkButton_buttonIconStart)?.let { drawable ->
+        iconStart = DrawableCompat.wrap(drawable)
+      }
+      attr.getDrawable(R.styleable.BpkButton_buttonIconEnd)?.let { drawable ->
+        iconEnd = DrawableCompat.wrap(drawable)
       }
     } finally {
       attr.recycle()
@@ -76,67 +82,58 @@ open class BpkButton @JvmOverloads constructor(
     }
   }
 
-  enum class Size(internal var id: Int) {
-    Basic(0),
-    Large(1);
-
-    internal companion object {
-      internal fun fromId(id: Int): Size {
-        for (f in values()) {
-          if (f.id == id) return f
-        }
-        throw IllegalArgumentException()
-      }
-    }
-  }
-
+  @Suppress("DEPRECATION")
   private fun setup() {
-    isClickable = true
+    this.isClickable = true
 
-    when (size) {
-      Size.Basic -> {
-        this.setPadding(dpToPx(8, context), dpToPx(8, context), dpToPx(8, context), dpToPx(8, context))
-      }
-      Size.Large -> {
-        this.setPadding(dpToPx(12, context), dpToPx(12, context), dpToPx(12, context), dpToPx(12, context))
-      }
-    }
+    this.setPadding(
+      dpToPx(12, context),
+      dpToPx(if (this.iconStart != null || this.iconEnd != null) 8 else 12, context),
+      dpToPx(12, context),
+      dpToPx(if (this.iconStart != null || this.iconEnd != null) 8 else 12, context)
+    )
 
-    var cornerRadius = if (size == Size.Basic) roundedButtonCorner else roundedButtonCorner * 1.3f
+    var cornerRadius = roundedButtonCorner
 
     if (text.isNullOrEmpty()) {
       cornerRadius = 100F // circle
     }
 
-    if (this.isEnabled) {
-      this.background = getSelectorDrawable(
-        normalColor = ContextCompat.getColor(context, type.bgColor),
-        cornerRadius = cornerRadius,
-        strokeWidth = strokeWidth,
-        strokeColor = type.strokeColor
-      )
-      this.setTextColor(ContextCompat.getColor(context, type.textColor))
-    } else {
-      this.background = getSelectorDrawable(
-        normalColor = ContextCompat.getColor(context, R.color.bpkGray200),
-        cornerRadius = cornerRadius,
-        strokeWidth = strokeWidth,
-        strokeColor = R.color.bpkGray500
-      )
-      this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray700))
-    }
+    this.background = getSelectorDrawable(
+      normalColor = ContextCompat.getColor(context, if (this.isEnabled) type.bgColor else R.color.bpkGray100),
+      cornerRadius = cornerRadius,
+      strokeWidth = if (this.isEnabled) strokeWidth else 0,
+      strokeColor = if (this.isEnabled) type.strokeColor else android.R.color.transparent
+    )
+    this.setTextColor(ContextCompat.getColor(context, if (this.isEnabled) type.textColor else R.color.bpkGray300))
+    this.setTextAppearance(this.context, R.style.bpkButtonBase)
+    this.gravity = Gravity.CENTER_VERTICAL
 
-    if (this.icon != null) {
+    this.iconStart?.let {
       DrawableCompat.setTintList(
-        this.icon!!,
+        it,
         getColorSelector(
           ContextCompat.getColor(context, type.textColor),
           ContextCompat.getColor(context, type.textColor),
           ContextCompat.getColor(context, type.textColor)
         )
       )
-      this.setCompoundDrawablesWithIntrinsicBounds(this.icon!!, null, null, null)
+      it.setBounds(dpToPx(2, this.context), dpToPx(2, this.context), dpToPx(2, this.context), dpToPx(2, this.context))
     }
+
+    this.iconEnd?.let {
+      DrawableCompat.setTintList(
+        it,
+        getColorSelector(
+          ContextCompat.getColor(context, type.textColor),
+          ContextCompat.getColor(context, type.textColor),
+          ContextCompat.getColor(context, type.textColor)
+        )
+      )
+      it.setBounds(dpToPx(2, this.context), dpToPx(2, this.context), dpToPx(2, this.context), dpToPx(2, this.context))
+    }
+
+    this.setCompoundDrawablesWithIntrinsicBounds(iconStart, null, iconEnd, null)
   }
 }
 
@@ -144,7 +141,7 @@ open class BpkButton @JvmOverloads constructor(
  * Utility method to convert density independent pixels to pixels based on display metrics at runtime
  *
  * @param dp required, integer representing the dp value
- * @param context required, used for getting the displayMetrics at runtime
+ * @param ctx required, used for getting the displayMetrics at runtime
  *
  * @return Int representing the pixel value of the given dp
  */
