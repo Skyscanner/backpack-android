@@ -28,6 +28,7 @@ repositories {
 * [Badge](docs/Badge/README.md)
 * [Panel](docs/Panel/README.md)
 * [Text](docs/Text/README.md)
+* [Button](docs/Button/README.md)
 
 ## Usage
 
