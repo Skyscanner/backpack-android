@@ -102,7 +102,7 @@ open class BpkButton @JvmOverloads constructor(
       normalColor = ContextCompat.getColor(context, if (this.isEnabled) type.bgColor else R.color.bpkGray100),
       cornerRadius = cornerRadius,
       strokeWidth = if (this.isEnabled) strokeWidth else 0,
-      strokeColor = if (this.isEnabled) type.strokeColor else android.R.color.transparent
+      strokeColor = if (this.isEnabled) resources.getColor(type.strokeColor) else resources.getColor(android.R.color.transparent)
     )
     this.setTextColor(ContextCompat.getColor(context, if (this.isEnabled) type.textColor else R.color.bpkGray300))
     this.setTextAppearance(this.context, R.style.bpkButtonBase)
