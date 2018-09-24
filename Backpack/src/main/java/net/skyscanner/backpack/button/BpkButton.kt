@@ -13,6 +13,7 @@ import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
 import android.view.Gravity
@@ -26,6 +27,7 @@ open class BpkButton @JvmOverloads constructor(
 
   private val roundedButtonCorner by lazy(LazyThreadSafetyMode.NONE) { dpToPx(24, context).toFloat() }
   private val strokeWidth by lazy(LazyThreadSafetyMode.NONE) { 2 }
+  private val INVALID_RESOURCE = -1
 
   var type: Type = Type.Primary
     set(value) {
@@ -53,12 +55,18 @@ open class BpkButton @JvmOverloads constructor(
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
     try {
       type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
-      attr.getDrawable(R.styleable.BpkButton_buttonIconStart)?.let { drawable ->
-        iconStart = DrawableCompat.wrap(drawable)
+
+      attr.getResourceId(R.styleable.BpkButton_buttonIconStart, INVALID_RESOURCE).let{
+        if(it != INVALID_RESOURCE) {
+          iconStart = AppCompatResources.getDrawable(getContext(), it)
+        }
       }
-      attr.getDrawable(R.styleable.BpkButton_buttonIconEnd)?.let { drawable ->
-        iconEnd = DrawableCompat.wrap(drawable)
+      attr.getResourceId(R.styleable.BpkButton_buttonIconEnd,INVALID_RESOURCE).let{
+        if(it != INVALID_RESOURCE) {
+          iconEnd = AppCompatResources.getDrawable(getContext(), it)
+        }
       }
+
     } finally {
       attr.recycle()
     }
