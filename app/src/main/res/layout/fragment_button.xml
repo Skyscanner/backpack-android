@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:ignore="HardcodedText">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/primaryHeader"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Primary"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    android:layout_marginStart="@dimen/bpkSpacingBase"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"/>
+
+  <HorizontalScrollView
+    android:id="@+id/primaryBasicButtons"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:scrollbars="none"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/primaryHeader">
+
+    <android.support.v7.widget.LinearLayoutCompat
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingStart="@dimen/bpkSpacingSm"
+      android:paddingEnd="@dimen/bpkSpacingSm"
+      android:orientation="horizontal">
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonType="primary"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disabled"
+        android:enabled="false"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonType="primary"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With icon"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconStart="@drawable/bpk_long_arrow_right"
+        app:buttonType="primary"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With icon"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconEnd="@drawable/bpk_long_arrow_right"
+        app:buttonType="primary"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconStart="@drawable/bpk_long_arrow_right"
+        app:buttonType="primary"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+  </HorizontalScrollView>
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/secondaryHeader"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Secondary"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    android:layout_marginStart="@dimen/bpkSpacingBase"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/primaryBasicButtons"/>
+
+  <HorizontalScrollView
+    android:id="@+id/secondaryBasicButtons"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:scrollbars="none"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/secondaryHeader">
+
+    <android.support.v7.widget.LinearLayoutCompat
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingStart="@dimen/bpkSpacingSm"
+      android:paddingEnd="@dimen/bpkSpacingSm"
+      android:orientation="horizontal">
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonType="secondary"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disabled"
+        android:enabled="false"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonType="secondary"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With icon"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconStart="@drawable/bpk_long_arrow_right"
+        app:buttonType="secondary"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With icon"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconEnd="@drawable/bpk_long_arrow_right"
+        app:buttonType="secondary"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconStart="@drawable/bpk_long_arrow_right"
+        app:buttonType="secondary"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+  </HorizontalScrollView>
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/featuredHeader"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Featured"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    android:layout_marginStart="@dimen/bpkSpacingBase"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/secondaryBasicButtons"/>
+
+  <HorizontalScrollView
+    android:id="@+id/featuredBasicButtons"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:scrollbars="none"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/featuredHeader">
+
+    <android.support.v7.widget.LinearLayoutCompat
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingStart="@dimen/bpkSpacingSm"
+      android:paddingEnd="@dimen/bpkSpacingSm"
+      android:orientation="horizontal">
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonType="featured"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disabled"
+        android:enabled="false"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonType="featured"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With icon"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconStart="@drawable/bpk_long_arrow_right"
+        app:buttonType="featured"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With icon"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconEnd="@drawable/bpk_long_arrow_right"
+        app:buttonType="featured"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconStart="@drawable/bpk_long_arrow_right"
+        app:buttonType="featured"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+  </HorizontalScrollView>
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/destructiveHeader"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Destructive"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    android:layout_marginStart="@dimen/bpkSpacingBase"
+    android:textStyle="bold"
+    android:textSize="16sp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/featuredBasicButtons"/>
+
+  <HorizontalScrollView
+    android:id="@+id/destructiveBasicButtons"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:scrollbars="none"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/destructiveHeader">
+
+    <android.support.v7.widget.LinearLayoutCompat
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingStart="@dimen/bpkSpacingSm"
+      android:paddingEnd="@dimen/bpkSpacingSm"
+      android:orientation="horizontal">
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonType="destructive"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disabled"
+        android:enabled="false"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonType="destructive"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With icon"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconStart="@drawable/bpk_long_arrow_right"
+        app:buttonType="destructive"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With icon"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconEnd="@drawable/bpk_long_arrow_right"
+        app:buttonType="destructive"/>
+
+      <net.skyscanner.backpack.button.BpkButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        app:buttonIconStart="@drawable/bpk_long_arrow_right"
+        app:buttonType="destructive"/>
+
+    </android.support.v7.widget.LinearLayoutCompat>
+  </HorizontalScrollView>
+
+</android.support.constraint.ConstraintLayout>
