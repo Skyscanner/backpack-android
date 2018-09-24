@@ -73,7 +73,7 @@ To run connected tests run
 
 > Backpack team only
 
-Run `npm run release` and follow the process through, you'll be asked which semantic version the release.Once released verify the artifacts on [`jitpack`][3]
+Run `npm run release` and follow the process through, you'll be asked which semantic version the release. Once released verify the artefacts on [`jitpack`][3]
 
 ## Docs
 
