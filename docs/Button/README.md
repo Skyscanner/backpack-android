@@ -22,11 +22,12 @@ Example of a success type badge in XML
 Example of a success type badge in Kotlin
 
 ```Kotlin
-import net.skyscanner.backpack.button
+import net.skyscanner.backpack.button.BpkButton
 
-Button(context).apply {
-   buttonIconStart = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
-   buttonType = 'primary'
-   text = 'Message'
+BpkButton(context).apply {
+   iconEnd = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
+   iconStart = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
+   type = BpkButton.Type.Primary
+   text = "Message"
 }
 ```
