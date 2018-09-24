@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import net.skyscanner.backpack.demo.ComponentDetailFragment
 
-class Story : ComponentDetailFragment() {
+open class Story : ComponentDetailFragment() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val layoutId = arguments?.getInt(LAYOUT_ID) ?: savedInstanceState?.getInt(LAYOUT_ID)
