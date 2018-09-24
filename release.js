@@ -70,38 +70,9 @@ async function amendGradleFiles(version) {
     throw new Error(exc);
   }
 }
-async function isMaintainer() {
-  const organisation = 'skyscanner';
-  const user = process.env.BINTRAY_USER;
-  const key = process.env.BINTRAY_KEY;
 
-  const url = `https://${user}:${key}@bintray.com/api/v1/users/${user}`;
-  try {
-    console.log('🔎  Checking user permission');
-    const response = await fetch(url);
-    const status = await response.status;
-    const data = await response.json();
-
-    if (status !== 200) {
-      throw new Error(
-        '😱  Auth check failed, the given user is either not authorised or a server side error occurred',
-      );
-    }
-    if (data.organizations.indexOf(organisation) === -1) {
-      throw new Error(
-        `😱  The given user is not part of the ${organisation} organisation, permission denied!`,
-      );
-    }
-    console.log(`✅  Hello ${user}, you're authorised for a new release`);
-    return true;
-  } catch (exc) {
-    throw exc;
-  }
-}
 async function release() {
   try {
-    await isMaintainer();
-
     const { version } = await inquirer.prompt(questions);
 
     await amendGradleFiles(version);
