@@ -69,6 +69,7 @@ script:
   - set -e
   - npm run build
   - ./scripts/check-pristine-state package-lock.json sd.img
+  - 'if [[ -n "$TRAVIS_TAG" ]]; then ./scripts/build-docs-ci $TRAVIS_TAG; fi'
   # Run espresso tests in the Backpack module ( this excludes snapshot tests)
   - ./gradlew Backpack:connectedCheck
   # Run all unit tests
@@ -82,6 +83,22 @@ branches:
   only:
     - master
     - /^greenkeeper/.*$/
+    - /^[0-9]+\.[0-9]+\.[0-9]+$/
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $ANDROID_DOCS_DEPLOY_TOKEN
+  on:
+    tags: true
+    all_branches: true
+  local_dir: dist
+  skip_cleanup: true
+  detect_encoding: true
+  repo: backpack/android
+  target-branch: master
+  verbose: true
+  keep-history: true
 
 notifications:
   slack:
