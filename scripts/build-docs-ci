@@ -1,0 +1,64 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const child_process = require('child_process');
+const {
+  promisify
+} = require("util");
+const {
+  exec
+} = require('child_process');
+const execAsync = promisify(exec);
+
+const [node, path, releaseTag, ...rest] = process.argv;
+
+const exitOnError = (err) => {
+  if(err) {
+    console.log(err);
+    process.exit(1);
+  }
+}
+
+const buildDocs = () => {
+  fs.mkdirSync(`./dist`, exitOnError);
+
+  fs.mkdirSync(`./dist/versions`, exitOnError);
+
+  fs.mkdirSync(`./dist/versions/${releaseTag}`, exitOnError);
+
+  fs.mkdirSync(`./dist/versions/latest`, exitOnError);
+
+  child_process.execSync(`npm run docs -- -PdokkaOutput=./dist/versions/`, exitOnError);
+
+  fs.renameSync('./dist/versions/backpack-android', `./dist/versions/${releaseTag}`, exitOnError);
+
+  fs.writeFile(`dist/404.html`,
+`<!DOCTYPE html>
+<html>
+  <meta http-equiv="refresh" content="1;url=/android/versions/${releaseTag}" />
+  <script type="text/javascript">
+    const androidDocsPath = (window.location + '').split('android/versions/latest');
+    if (androidDocsPath.length > 1) {
+      window.location = \`/android/versions/${releaseTag}\${androidDocsPath[1]}\`;
+    }
+  </script>
+</html>
+`, { flag: 'w' }, exitOnError);
+
+  fs.writeFile(`dist/index.html`,
+`<!DOCTYPE html>
+<html>
+  <meta http-equiv="refresh" content="0;url=/android/versions/${releaseTag}" />
+</html>
+`, { flag: 'w' }, exitOnError);
+
+  fs.writeFile(`dist/versions/latest/index.html`,
+`<!DOCTYPE html>
+<html>
+  <meta http-equiv="refresh" content="0;url=/android/versions/${releaseTag}" />
+</html>
+`, { flag: 'w' }, exitOnError);
+}
+
+buildDocs();
+
