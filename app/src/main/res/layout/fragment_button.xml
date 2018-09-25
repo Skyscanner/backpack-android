@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
-                android:layout_gravity="center"
+                android:layout_margin="@dimen/bpkSpacingBase"
+                android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content">
 
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingBase"
+    android:layout_margin="@dimen/bpkSpacingSm"
     android:id="@+id/btn_default"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -14,7 +15,7 @@
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingBase"
+    android:layout_margin="@dimen/bpkSpacingSm"
     android:layout_width="wrap_content"
     android:id="@+id/btn_disabled"
     android:layout_toRightOf="@id/btn_default"
@@ -24,7 +25,7 @@
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingBase"
+    android:layout_margin="@dimen/bpkSpacingSm"
     android:layout_width="wrap_content"
     android:id="@+id/btn_start_icon"
     android:layout_height="wrap_content"
@@ -35,7 +36,7 @@
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingBase"
+    android:layout_margin="@dimen/bpkSpacingSm"
     android:layout_width="wrap_content"
     android:id="@+id/btn_end_icon"
     android:layout_height="wrap_content"
@@ -45,7 +46,7 @@
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingBase"
+    android:layout_margin="@dimen/bpkSpacingSm"
     android:layout_width="wrap_content"
     android:id="@+id/btn_icon"
     android:layout_toRightOf="@+id/btn_end_icon"
