@@ -58,12 +58,12 @@ open class BpkButton @JvmOverloads constructor(
 
       attr.getResourceId(R.styleable.BpkButton_buttonIconStart, INVALID_RESOURCE).let{
         if(it != INVALID_RESOURCE) {
-          iconStart = AppCompatResources.getDrawable(getContext(), it)
+          iconStart = AppCompatResources.getDrawable(context, it)
         }
       }
       attr.getResourceId(R.styleable.BpkButton_buttonIconEnd,INVALID_RESOURCE).let{
         if(it != INVALID_RESOURCE) {
-          iconEnd = AppCompatResources.getDrawable(getContext(), it)
+          iconEnd = AppCompatResources.getDrawable(context, it)
         }
       }
 
