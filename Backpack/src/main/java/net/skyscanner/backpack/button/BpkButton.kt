@@ -6,9 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
-import android.os.Build
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
@@ -17,6 +15,7 @@ import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
 import android.view.Gravity
+import android.widget.Toast
 import net.skyscanner.backpack.R
 
 open class BpkButton @JvmOverloads constructor(
@@ -34,6 +33,8 @@ open class BpkButton @JvmOverloads constructor(
       field = value
       setup()
     }
+
+  private val iconSize: Int = ((resources.getDimension(R.dimen.bpkSpacingBase)).toInt())
 
   var iconStart: Drawable? = null
     set(value) {
@@ -56,13 +57,13 @@ open class BpkButton @JvmOverloads constructor(
     try {
       type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
 
-      attr.getResourceId(R.styleable.BpkButton_buttonIconStart, INVALID_RESOURCE).let{
-        if(it != INVALID_RESOURCE) {
+      attr.getResourceId(R.styleable.BpkButton_buttonIconStart, INVALID_RESOURCE).let {
+        if (it != INVALID_RESOURCE) {
           iconStart = AppCompatResources.getDrawable(getContext(), it)
         }
       }
-      attr.getResourceId(R.styleable.BpkButton_buttonIconEnd,INVALID_RESOURCE).let{
-        if(it != INVALID_RESOURCE) {
+      attr.getResourceId(R.styleable.BpkButton_buttonIconEnd, INVALID_RESOURCE).let {
+        if (it != INVALID_RESOURCE) {
           iconEnd = AppCompatResources.getDrawable(getContext(), it)
         }
       }
@@ -94,10 +95,10 @@ open class BpkButton @JvmOverloads constructor(
     this.isClickable = true
 
     this.setPadding(
-      dpToPx(12, context),
-      dpToPx(if (this.iconStart != null || this.iconEnd != null) 8 else 12, context),
-      dpToPx(12, context),
-      dpToPx(if (this.iconStart != null || this.iconEnd != null) 8 else 12, context)
+      dpToPx(if (this.iconStart != null && this.iconEnd != null) 4 else 12, context),
+      dpToPx(8, context),
+      dpToPx(if (this.iconStart != null && this.iconEnd != null) 4 else 12, context),
+      dpToPx(8, context)
     )
 
     var cornerRadius = roundedButtonCorner
@@ -112,6 +113,7 @@ open class BpkButton @JvmOverloads constructor(
       strokeWidth = if (this.isEnabled) strokeWidth else 0,
       strokeColor = if (this.isEnabled) resources.getColor(type.strokeColor) else resources.getColor(android.R.color.transparent)
     )
+
     this.setTextColor(ContextCompat.getColor(context, if (this.isEnabled) type.textColor else R.color.bpkGray300))
     this.setTextAppearance(this.context, R.style.bpkButtonBase)
     this.gravity = Gravity.CENTER
@@ -125,6 +127,7 @@ open class BpkButton @JvmOverloads constructor(
           ContextCompat.getColor(context, type.textColor)
         )
       )
+      it.setBounds(0,0,iconSize,iconSize)
     }
 
     this.iconEnd?.let {
@@ -136,9 +139,11 @@ open class BpkButton @JvmOverloads constructor(
           ContextCompat.getColor(context, type.textColor)
         )
       )
+      it.setBounds(0,0,iconSize,iconSize)
     }
+    this.compoundDrawablePadding = resources.getDimension(R.dimen.bpkSpacingSm).toInt()
+    this.setCompoundDrawables(iconStart, null, iconEnd, null)
 
-    this.setCompoundDrawablesWithIntrinsicBounds(iconStart, null, iconEnd, null)
   }
 }
 
@@ -157,7 +162,8 @@ private fun dpToPx(dp: Int, ctx: Context): Int {
 
 /**
  * Utility method to create a drawable with given selector states for normal, pressed and disabled.
- * Uses either a RippleDrawable if above API 21 or StateListDrawable
+ * Uses StateListDrawable.
+ * Not using ripple drawables for consistency with RN versions
  *
  * @param normalColor required, used as main background color on the drawable
  * @param cornerRadius optional, used as the radius on the corners (use 100 for square)
@@ -169,35 +175,31 @@ private fun dpToPx(dp: Int, ctx: Context): Int {
  */
 @SuppressLint("ObsoleteSdkInt")
 fun getSelectorDrawable(
-  @ColorInt normalColor: Int,
+  @ColorInt
+  normalColor: Int,
   cornerRadius: Float? = null,
-  @ColorInt strokeColor: Int? = null,
+  @ColorInt
+  strokeColor: Int? = null,
   strokeWidth: Int? = null,
-  @ColorInt pressedColor: Int = darken(normalColor)
-): Drawable {
-  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-    val states = StateListDrawable()
-    states.addState(
-      intArrayOf(-android.R.attr.state_enabled),
-      corneredDrawable(greyOut(normalColor), cornerRadius, strokeColor, strokeWidth)
-    )
-    states.addState(
-      intArrayOf(android.R.attr.state_pressed),
-      corneredDrawable(pressedColor, cornerRadius, strokeColor, strokeWidth)
-    )
-    states.addState(
-      intArrayOf(android.R.attr.state_focused),
-      corneredDrawable(pressedColor, cornerRadius, strokeColor, strokeWidth)
-    )
-    states.addState(intArrayOf(), corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth))
-    return states
-  } else {
-    return RippleDrawable(
-      getColorSelector(normalColor, pressedColor, greyOut(normalColor)),
-      corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth),
-      corneredDrawable(Color.BLACK, cornerRadius, strokeColor, strokeWidth)
-    )
-  }
+  @ColorInt
+  pressedColor: Int = darken(normalColor)): Drawable {
+
+  val states = StateListDrawable()
+  states.addState(
+    intArrayOf(-android.R.attr.state_enabled),
+    corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth)
+  )
+  states.addState(
+    intArrayOf(android.R.attr.state_pressed),
+    corneredDrawable(pressedColor, cornerRadius, strokeColor, strokeWidth)
+  )
+  states.addState(
+    intArrayOf(android.R.attr.state_focused),
+    corneredDrawable(pressedColor, cornerRadius, strokeColor, strokeWidth)
+  )
+
+  states.addState(intArrayOf(), corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth))
+  return states
 }
 
 /**
@@ -267,18 +269,3 @@ private fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
   return Color.HSVToColor(hsv)
 }
 
-/**
- * Utility function for darkening out a given color
- *
- * @param normalColor required, representing the color we will darken, given as a color resource int
- *
- * @return Int
- */
-private fun greyOut(@ColorInt normalColor: Int): Int {
-  return Color.argb(
-    Color.alpha(normalColor),
-    Color.red(normalColor) / 2,
-    Color.green(normalColor) / 2,
-    Color.blue(normalColor) / 2
-  )
-}
