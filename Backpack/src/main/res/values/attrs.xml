@@ -38,7 +38,11 @@
       <enum name="featured" value="2"/>
       <enum name="destructive" value="3"/>
     </attr>
-    <attr name="buttonIconStart" format="reference"/>
-    <attr name="buttonIconEnd" format="reference"/>
+    <attr name="buttonIcon" format="reference"/>
+    <attr name="buttonIconPosition" format="enum">
+      <enum name="start" value="0"/>
+      <enum name="end" value="1"/>
+      <enum name="icon_only" value="2"/>
+    </attr>
   </declare-styleable>
 </resources>

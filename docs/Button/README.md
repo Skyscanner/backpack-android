@@ -14,8 +14,9 @@ Example of a primary button in XML
 <net.skyscanner.backpack.button.BpkButton
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  android:text="With icon"
-  app:buttonIconStart="@drawable/bpk_weather"
+  android:text="Button"
+  app:buttonIconPosition="end"
+  app:buttonIcon="@drawable/bpk_long_arrow_right"
   app:buttonType="primary"/>
 ```
 
@@ -25,9 +26,9 @@ Example of a primary button in Kotlin
 import net.skyscanner.backpack.button.BpkButton
 
 BpkButton(context).apply {
-   iconEnd = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
-   iconStart = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
+   icon = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
+   iconPosition = BpkButton.END
    type = BpkButton.Type.Primary
-   text = "Message"
+   text = "Button"
 }
 ```
