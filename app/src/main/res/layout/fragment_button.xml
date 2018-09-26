@@ -11,7 +11,7 @@
     android:id="@+id/btn_default"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Default"
+    android:text="Button"
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
@@ -32,7 +32,7 @@
     android:layout_toRightOf="@id/btn_disabled"
 
     android:text="With icon"
-    app:buttonIconStart="@drawable/bpk_long_arrow_right"
+    app:buttonIconEnd="@drawable/bpk_long_arrow_right"
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
@@ -42,7 +42,7 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/btn_default"
     android:text="With icon"
-    app:buttonIconEnd="@drawable/bpk_long_arrow_right"
+    app:buttonIconStart="@drawable/bpk_long_arrow_right"
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
