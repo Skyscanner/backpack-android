@@ -22,7 +22,7 @@ Example of a success type badge in XML
 Example of a success type badge in Kotlin
 
 ```Kotlin
-import net.skyscanner.backpack.panel
+import net.skyscanner.backpack.badge.BpkBadge
 
 BpkBadge(context).apply {
    message = 'Message'

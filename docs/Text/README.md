@@ -21,7 +21,7 @@ Example of a text view with large font in XML
 Example of a text view with large font in Kotlin
 
 ```Kotlin
-import net.skyscanner.backpack.text
+import net.skyscanner.backpack.text.BpkText
 
 BpkText(context).apply {
    text = 'Flights to Edinburgh'

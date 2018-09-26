@@ -2,6 +2,7 @@ package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.demo.ComponentDetailFragment
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.stories.ButtonStory
 import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.Story
 
@@ -15,7 +16,10 @@ object ComponentRegistry {
     "Panel" to { Story.of(R.layout.fragment_panel) },
     "Badge" to { Story.of(R.layout.fragment_badge) },
     "Text" to { Story.of(R.layout.fragment_text) },
-    "Button" to { Story.of(R.layout.fragment_button)}
+    "Button Primary" to { ButtonStory.of(R.layout.fragment_button,"primary")},
+    "Button Secondary" to { ButtonStory.of(R.layout.fragment_button,"secondary")},
+    "Button Destructive" to { ButtonStory.of(R.layout.fragment_button,"destructive")},
+    "Button Featured" to { ButtonStory.of(R.layout.fragment_button,"featured")}
   )
 
   val TOKENS by lazy { TOKENS_MAP.keys.toList() }

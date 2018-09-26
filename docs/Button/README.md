@@ -8,7 +8,7 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 The Button component can be used in both XML and Kotlin/Java
 
-Example of a success type badge in XML
+Example of a primary button in XML
 
 ```xml
 <net.skyscanner.backpack.button.BpkButton
@@ -19,14 +19,15 @@ Example of a success type badge in XML
   app:buttonType="primary"/>
 ```
 
-Example of a success type badge in Kotlin
+Example of a primary button in Kotlin
 
 ```Kotlin
-import net.skyscanner.backpack.button
+import net.skyscanner.backpack.button.BpkButton
 
-Button(context).apply {
-   buttonIconStart = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
-   buttonType = 'primary'
-   text = 'Message'
+BpkButton(context).apply {
+   iconEnd = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
+   iconStart = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
+   type = BpkButton.Type.Primary
+   text = "Message"
 }
 ```

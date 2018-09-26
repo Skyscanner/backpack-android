@@ -26,7 +26,7 @@ Example of a padded panel in XML
 Example of a padded panel in Kotlin
 
 ```Kotlin
-import net.skyscanner.backpack.panel
+import net.skyscanner.backpack.panel.BpkPanel
 
 BpkPanel(context).apply {
    padding = true
