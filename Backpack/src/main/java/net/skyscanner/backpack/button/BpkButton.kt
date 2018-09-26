@@ -57,14 +57,14 @@ open class BpkButton @JvmOverloads constructor(
     try {
       type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
 
-      attr.getResourceId(R.styleable.BpkButton_buttonIconStart, INVALID_RESOURCE).let {
-        if (it != INVALID_RESOURCE) {
-          iconStart = AppCompatResources.getDrawable(getContext(), it)
+      attr.getResourceId(R.styleable.BpkButton_buttonIconStart, INVALID_RESOURCE).let{
+        if(it != INVALID_RESOURCE) {
+          iconStart = AppCompatResources.getDrawable(context, it)
         }
       }
-      attr.getResourceId(R.styleable.BpkButton_buttonIconEnd, INVALID_RESOURCE).let {
-        if (it != INVALID_RESOURCE) {
-          iconEnd = AppCompatResources.getDrawable(getContext(), it)
+      attr.getResourceId(R.styleable.BpkButton_buttonIconEnd,INVALID_RESOURCE).let{
+        if(it != INVALID_RESOURCE) {
+          iconEnd = AppCompatResources.getDrawable(context, it)
         }
       }
 
@@ -268,4 +268,3 @@ private fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
   hsv[2] *= 1f - factor // value component
   return Color.HSVToColor(hsv)
 }
-
