@@ -29,7 +29,8 @@ class BpkButtonTest : BpkSnapshotTest() {
   fun screenshotTestButtonBasicPrimaryWithIcon() {
     val button = BpkButton(testContext)
     button.type = BpkButton.Type.Primary
-    button.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.START
     button.text = "Message"
     snap(button)
   }
@@ -38,7 +39,8 @@ class BpkButtonTest : BpkSnapshotTest() {
   fun screenshotTestButtonBasicPrimaryOnlyIcon() {
     val button = BpkButton(testContext)
     button.type = BpkButton.Type.Primary
-    button.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.ICON_ONLY
     snap(button)
   }
 
@@ -54,7 +56,8 @@ class BpkButtonTest : BpkSnapshotTest() {
   fun screenshotTestButtonBasicSecondaryWithIcon() {
     val button = BpkButton(testContext)
     button.type = BpkButton.Type.Secondary
-    button.iconEnd = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.END
     button.text = "Message"
     snap(button)
   }
@@ -63,7 +66,8 @@ class BpkButtonTest : BpkSnapshotTest() {
   fun screenshotTestButtonBasicSecondaryOnlyIcon() {
     val button = BpkButton(testContext)
     button.type = BpkButton.Type.Secondary
-    button.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.ICON_ONLY
     snap(button)
   }
 
@@ -80,7 +84,8 @@ class BpkButtonTest : BpkSnapshotTest() {
   fun screenshotTestButtonBasicFeaturedWithIcon() {
     val button = BpkButton(testContext)
     button.type = BpkButton.Type.Featured
-    button.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.START
     button.text = "Message"
     snap(button)
   }
@@ -89,7 +94,8 @@ class BpkButtonTest : BpkSnapshotTest() {
   fun screenshotTestButtonBasicFeaturedOnlyIcon() {
     val button = BpkButton(testContext)
     button.type = BpkButton.Type.Featured
-    button.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.ICON_ONLY
     snap(button)
   }
 
@@ -105,7 +111,8 @@ class BpkButtonTest : BpkSnapshotTest() {
   fun screenshotTestButtonBasicDestructiveWithIcon() {
     val button = BpkButton(testContext)
     button.type = BpkButton.Type.Destructive
-    button.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.START
     button.text = "Message"
     snap(button)
   }
@@ -114,7 +121,8 @@ class BpkButtonTest : BpkSnapshotTest() {
   fun screenshotTestButtonBasicDestructiveOnlyIcon() {
     val button = BpkButton(testContext)
     button.type = BpkButton.Type.Destructive
-    button.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.ICON_ONLY
     snap(button)
   }
 

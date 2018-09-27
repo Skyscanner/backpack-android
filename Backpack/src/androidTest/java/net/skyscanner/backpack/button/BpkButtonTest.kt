@@ -22,13 +22,13 @@ class BpkButtonTest {
   }
 
   // The drawables are set as start,top,end,bottom and are accessible in the compoundDrawables array
-
   @Test
   fun test_icon_end() {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
     val trainIcon = AppCompatResources.getDrawable(context, R.drawable.bpk_train)
     val button = BpkButton(context).apply {
-      iconEnd = trainIcon
+      icon = trainIcon
+      iconPosition = BpkButton.END
     }
     Assert.assertEquals(button.compoundDrawables[2],trainIcon)
   }
@@ -38,7 +38,8 @@ class BpkButtonTest {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
     val trainIcon = AppCompatResources.getDrawable(context, R.drawable.bpk_train)
     val button = BpkButton(context).apply {
-      iconStart = trainIcon
+      icon = trainIcon
+      iconPosition = BpkButton.START
     }
     Assert.assertEquals(button.compoundDrawables[0],trainIcon)
   }

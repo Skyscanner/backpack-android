@@ -11,8 +11,10 @@ import android.graphics.drawable.StateListDrawable
 import android.os.Build
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
+import android.support.annotation.IntDef
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v4.widget.TextViewCompat
 import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
@@ -25,8 +27,32 @@ open class BpkButton @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : AppCompatButton(context, attrs, defStyleAttr) {
 
-  private val roundedButtonCorner by lazy(LazyThreadSafetyMode.NONE) { dpToPx(24, context).toFloat() }
-  private val strokeWidth by lazy(LazyThreadSafetyMode.NONE) { 2 }
+  @IntDef(START, END, ICON_ONLY)
+
+  annotation class IconPosition
+
+  companion object {
+    const val START = 0
+    const val END = 1
+    const val ICON_ONLY = 2
+  }
+
+  @BpkButton.IconPosition
+  var iconPosition: Int = BpkButton.END
+    set(value) {
+      field = value
+      this.setup()
+    }
+
+  private val iconSize = context.resources.getDimension(R.dimen.bpk_icon_size_small).toInt()
+  private val defaultPadding = context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2
+  // Text is 12dp and icon is 16dp. if icon is present,
+  // padding needs to be reduced by 2 dp on both sides
+  private val paddingWithIcon = (context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2) - 2
+
+  val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
+  private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderRadiusSm).toInt()
+
   private val INVALID_RESOURCE = -1
 
   var type: Type = Type.Primary
@@ -35,15 +61,7 @@ open class BpkButton @JvmOverloads constructor(
       setup()
     }
 
-  var iconStart: Drawable? = null
-    set(value) {
-      if (value != null) {
-        field = value
-        setup()
-      }
-    }
-
-  var iconEnd: Drawable? = null
+  var icon: Drawable? = null
     set(value) {
       if (value != null) {
         field = value
@@ -55,18 +73,13 @@ open class BpkButton @JvmOverloads constructor(
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
     try {
       type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+      iconPosition = attr.getInt(R.styleable.BpkButton_buttonIconPosition, END)
 
-      attr.getResourceId(R.styleable.BpkButton_buttonIconStart, INVALID_RESOURCE).let{
-        if(it != INVALID_RESOURCE) {
-          iconStart = AppCompatResources.getDrawable(context, it)
+      attr.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RESOURCE).let {
+        if (it != INVALID_RESOURCE) {
+          icon = AppCompatResources.getDrawable(context, it)
         }
       }
-      attr.getResourceId(R.styleable.BpkButton_buttonIconEnd,INVALID_RESOURCE).let{
-        if(it != INVALID_RESOURCE) {
-          iconEnd = AppCompatResources.getDrawable(context, it)
-        }
-      }
-
     } finally {
       attr.recycle()
     }
@@ -89,34 +102,35 @@ open class BpkButton @JvmOverloads constructor(
     }
   }
 
-  @Suppress("DEPRECATION")
   private fun setup() {
-    this.isClickable = true
+
+    this.isClickable = isEnabled
+    //enforce null text for icon only
+    if (iconPosition == ICON_ONLY) {
+      text = null
+    }
 
     this.setPadding(
-      dpToPx(12, context),
-      dpToPx(if (this.iconStart != null || this.iconEnd != null) 8 else 12, context),
-      dpToPx(12, context),
-      dpToPx(if (this.iconStart != null || this.iconEnd != null) 8 else 12, context)
-    )
+      if (iconPosition == ICON_ONLY) paddingWithIcon else defaultPadding,
+      if (this.icon != null)  paddingWithIcon else defaultPadding,
+      if (iconPosition == ICON_ONLY) paddingWithIcon else defaultPadding,
+      if (this.icon != null) paddingWithIcon else defaultPadding)
 
-    var cornerRadius = roundedButtonCorner
-
-    if (text.isNullOrEmpty()) {
-      cornerRadius = 100F // circle
+    if (!text.isNullOrEmpty()) {
+      compoundDrawablePadding = paddingWithIcon / 2
     }
 
     this.background = getSelectorDrawable(
       normalColor = ContextCompat.getColor(context, if (this.isEnabled) type.bgColor else R.color.bpkGray100),
-      cornerRadius = cornerRadius,
+      cornerRadius = roundedButtonCorner,
       strokeWidth = if (this.isEnabled) strokeWidth else 0,
-      strokeColor = if (this.isEnabled) resources.getColor(type.strokeColor) else resources.getColor(android.R.color.transparent)
+      strokeColor = if (this.isEnabled) ContextCompat.getColor(context,type.strokeColor) else ContextCompat.getColor(context,android.R.color.transparent)
     )
     this.setTextColor(ContextCompat.getColor(context, if (this.isEnabled) type.textColor else R.color.bpkGray300))
-    this.setTextAppearance(this.context, R.style.bpkButtonBase)
+    TextViewCompat.setTextAppearance(this,  R.style.bpkButtonBase)
     this.gravity = Gravity.CENTER
 
-    this.iconStart?.let {
+    this.icon?.let {
       DrawableCompat.setTintList(
         it,
         getColorSelector(
@@ -127,32 +141,13 @@ open class BpkButton @JvmOverloads constructor(
       )
     }
 
-    this.iconEnd?.let {
-      DrawableCompat.setTintList(
-        it,
-        getColorSelector(
-          ContextCompat.getColor(context, type.textColor),
-          ContextCompat.getColor(context, type.textColor),
-          ContextCompat.getColor(context, type.textColor)
-        )
-      )
-    }
-
-    this.setCompoundDrawablesWithIntrinsicBounds(iconStart, null, iconEnd, null)
+    icon?.setBounds(0, 0, iconSize, iconSize)
+    this.setCompoundDrawablesWithIntrinsicBounds(
+      if (iconPosition == START || iconPosition == ICON_ONLY) icon else null,
+      null,
+      if (iconPosition == END) icon else null,
+      null)
   }
-}
-
-/**
- * Utility method to convert density independent pixels to pixels based on display metrics at runtime
- *
- * @param dp required, integer representing the dp value
- * @param ctx required, used for getting the displayMetrics at runtime
- *
- * @return Int representing the pixel value of the given dp
- */
-private fun dpToPx(dp: Int, ctx: Context): Int {
-  val density = ctx.resources.displayMetrics.density
-  return Math.round(dp.toFloat() * density)
 }
 
 /**
