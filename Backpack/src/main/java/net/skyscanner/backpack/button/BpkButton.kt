@@ -14,6 +14,7 @@ import android.support.annotation.ColorRes
 import android.support.annotation.IntDef
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v4.widget.TextViewCompat
 import android.support.v7.content.res.AppCompatResources
 import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
@@ -43,9 +44,15 @@ open class BpkButton @JvmOverloads constructor(
       this.setup()
     }
 
+  private val iconSize = context.resources.getDimension(R.dimen.bpk_icon_size_small).toInt()
+  private val defaultPadding = context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2
+  // Text is 12dp and icon is 16dp. if icon is present,
+  // padding needs to be reduced by 2 dp on both sides
+  private val paddingWithIcon = (context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2) - 2
 
-  private val roundedButtonCorner by lazy(LazyThreadSafetyMode.NONE) { dpToPx(24, context).toFloat() }
-  private val strokeWidth by lazy(LazyThreadSafetyMode.NONE) { 4 }
+  val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
+  private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderRadiusSm).toInt()
+
   private val INVALID_RESOURCE = -1
 
   var type: Type = Type.Primary
@@ -95,35 +102,32 @@ open class BpkButton @JvmOverloads constructor(
     }
   }
 
-  @Suppress("DEPRECATION")
   private fun setup() {
+
     this.isClickable = isEnabled
     //enforce null text for icon only
     if (iconPosition == ICON_ONLY) {
       text = null
     }
 
-    // Text is 12dp and icon is 16dp. if icon is present,
-    // padding needs to be reduced by 2 dp on both sides
     this.setPadding(
-      dpToPx(if (iconPosition == ICON_ONLY) 10 else 12, context),
-      dpToPx(if (this.icon != null) 10 else 12, context),
-      dpToPx(if (iconPosition == ICON_ONLY) 10 else 12, context),
-      dpToPx(if (this.icon != null) 10 else 12, context)
-    )
+      if (iconPosition == ICON_ONLY) paddingWithIcon else defaultPadding,
+      if (this.icon != null)  paddingWithIcon else defaultPadding,
+      if (iconPosition == ICON_ONLY) paddingWithIcon else defaultPadding,
+      if (this.icon != null) paddingWithIcon else defaultPadding)
 
     if (!text.isNullOrEmpty()) {
-      compoundDrawablePadding = 10
+      compoundDrawablePadding = paddingWithIcon / 2
     }
 
     this.background = getSelectorDrawable(
       normalColor = ContextCompat.getColor(context, if (this.isEnabled) type.bgColor else R.color.bpkGray100),
       cornerRadius = roundedButtonCorner,
       strokeWidth = if (this.isEnabled) strokeWidth else 0,
-      strokeColor = if (this.isEnabled) resources.getColor(type.strokeColor) else resources.getColor(android.R.color.transparent)
+      strokeColor = if (this.isEnabled) ContextCompat.getColor(context,type.strokeColor) else ContextCompat.getColor(context,android.R.color.transparent)
     )
     this.setTextColor(ContextCompat.getColor(context, if (this.isEnabled) type.textColor else R.color.bpkGray300))
-    this.setTextAppearance(this.context, R.style.bpkButtonBase)
+    TextViewCompat.setTextAppearance(this,  R.style.bpkButtonBase)
     this.gravity = Gravity.CENTER
 
     this.icon?.let {
@@ -137,25 +141,13 @@ open class BpkButton @JvmOverloads constructor(
       )
     }
 
+    icon?.setBounds(0, 0, iconSize, iconSize)
     this.setCompoundDrawablesWithIntrinsicBounds(
       if (iconPosition == START || iconPosition == ICON_ONLY) icon else null,
       null,
       if (iconPosition == END) icon else null,
       null)
   }
-}
-
-/**
- * Utility method to convert density independent pixels to pixels based on display metrics at runtime
- *
- * @param dp required, integer representing the dp value
- * @param ctx required, used for getting the displayMetrics at runtime
- *
- * @return Int representing the pixel value of the given dp
- */
-private fun dpToPx(dp: Int, ctx: Context): Int {
-  val density = ctx.resources.displayMetrics.density
-  return Math.round(dp.toFloat() * density)
 }
 
 /**
