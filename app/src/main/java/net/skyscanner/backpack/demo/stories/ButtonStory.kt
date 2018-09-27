@@ -7,6 +7,9 @@ import net.skyscanner.backpack.demo.R
 
 class ButtonStory : Story() {
 
+  private lateinit var disabledButton: BpkButton
+  private lateinit var iconButton: BpkButton
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     val type = arguments?.getString(ButtonStory.TYPE) ?: savedInstanceState?.getString(ButtonStory.TYPE)
 
@@ -27,6 +30,13 @@ class ButtonStory : Story() {
     view.findViewById<BpkButton>(R.id.btn_icon).type = buttonType
     super.onViewCreated(view, savedInstanceState)
 
+    disabledButton = view.findViewById<BpkButton>(R.id.btn_disabled)
+    iconButton = view.findViewById<BpkButton>(R.id.btn_icon)
+
+    iconButton.setOnClickListener {
+      disabledButton.isEnabled = !disabledButton.isEnabled
+      disabledButton.text = if (disabledButton.isEnabled) "Enabled" else "Disabled"
+    }
   }
 
   companion object {
