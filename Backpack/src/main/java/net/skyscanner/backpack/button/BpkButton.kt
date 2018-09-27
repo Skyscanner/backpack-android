@@ -28,7 +28,6 @@ open class BpkButton @JvmOverloads constructor(
 ) : AppCompatButton(context, attrs, defStyleAttr) {
 
   @IntDef(START, END, ICON_ONLY)
-
   annotation class IconPosition
 
   companion object {
@@ -50,7 +49,7 @@ open class BpkButton @JvmOverloads constructor(
   // padding needs to be reduced by 2 dp on both sides
   private val paddingWithIcon = (context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2) - 2
 
-  val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
+  private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
   private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderRadiusSm).toInt()
 
   private val INVALID_RESOURCE = -1
@@ -86,7 +85,12 @@ open class BpkButton @JvmOverloads constructor(
     setup()
   }
 
-  enum class Type(internal var id: Int, @ColorRes internal var bgColor: Int, @ColorRes internal var textColor: Int, @ColorRes internal var strokeColor: Int) {
+  override fun setEnabled(enabled: Boolean) {
+    super.setEnabled(enabled)
+    setup()
+  }
+
+  enum class Type(internal val id: Int, @ColorRes internal val bgColor: Int, @ColorRes internal val textColor: Int, @ColorRes internal val strokeColor: Int) {
     Primary(0, R.color.bpkGreen500, R.color.bpkWhite, android.R.color.transparent),
     Secondary(1, R.color.bpkWhite, R.color.bpkBlue600, R.color.bpkGray100),
     Featured(2, R.color.bpkPink500, R.color.bpkWhite, android.R.color.transparent),
@@ -103,7 +107,6 @@ open class BpkButton @JvmOverloads constructor(
   }
 
   private fun setup() {
-
     this.isClickable = isEnabled
     //enforce null text for icon only
     if (iconPosition == ICON_ONLY) {
@@ -112,9 +115,10 @@ open class BpkButton @JvmOverloads constructor(
 
     this.setPadding(
       if (iconPosition == ICON_ONLY) paddingWithIcon else defaultPadding,
-      if (this.icon != null)  paddingWithIcon else defaultPadding,
+      if (this.icon != null) paddingWithIcon else defaultPadding,
       if (iconPosition == ICON_ONLY) paddingWithIcon else defaultPadding,
-      if (this.icon != null) paddingWithIcon else defaultPadding)
+      if (this.icon != null) paddingWithIcon else defaultPadding
+    )
 
     if (!text.isNullOrEmpty()) {
       compoundDrawablePadding = paddingWithIcon / 2
@@ -122,12 +126,18 @@ open class BpkButton @JvmOverloads constructor(
 
     this.background = getSelectorDrawable(
       normalColor = ContextCompat.getColor(context, if (this.isEnabled) type.bgColor else R.color.bpkGray100),
+      pressedColor = darken(ContextCompat.getColor(context, if (this.isEnabled) type.bgColor else R.color.bpkGray100)),
+      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
       cornerRadius = roundedButtonCorner,
       strokeWidth = if (this.isEnabled) strokeWidth else 0,
-      strokeColor = if (this.isEnabled) ContextCompat.getColor(context,type.strokeColor) else ContextCompat.getColor(context,android.R.color.transparent)
+      strokeColor = ContextCompat.getColor(
+        context,
+        if (this.isEnabled) type.strokeColor else android.R.color.transparent
+      )
     )
+    
     this.setTextColor(ContextCompat.getColor(context, if (this.isEnabled) type.textColor else R.color.bpkGray300))
-    TextViewCompat.setTextAppearance(this,  R.style.bpkButtonBase)
+    TextViewCompat.setTextAppearance(this, R.style.bpkButtonBase)
     this.gravity = Gravity.CENTER
 
     this.icon?.let {
@@ -146,7 +156,8 @@ open class BpkButton @JvmOverloads constructor(
       if (iconPosition == START || iconPosition == ICON_ONLY) icon else null,
       null,
       if (iconPosition == END) icon else null,
-      null)
+      null
+    )
   }
 }
 
@@ -168,13 +179,14 @@ fun getSelectorDrawable(
   cornerRadius: Float? = null,
   @ColorInt strokeColor: Int? = null,
   strokeWidth: Int? = null,
-  @ColorInt pressedColor: Int = darken(normalColor)
+  @ColorInt pressedColor: Int,
+  @ColorInt disabledColor: Int
 ): Drawable {
   if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
     val states = StateListDrawable()
     states.addState(
       intArrayOf(-android.R.attr.state_enabled),
-      corneredDrawable(greyOut(normalColor), cornerRadius, strokeColor, strokeWidth)
+      corneredDrawable(disabledColor, cornerRadius, strokeColor, strokeWidth)
     )
     states.addState(
       intArrayOf(android.R.attr.state_pressed),
@@ -188,7 +200,7 @@ fun getSelectorDrawable(
     return states
   } else {
     return RippleDrawable(
-      getColorSelector(normalColor, pressedColor, greyOut(normalColor)),
+      getColorSelector(normalColor, pressedColor, disabledColor),
       corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth),
       corneredDrawable(Color.BLACK, cornerRadius, strokeColor, strokeWidth)
     )
@@ -260,20 +272,4 @@ private fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
   Color.colorToHSV(normalColor, hsv)
   hsv[2] *= 1f - factor // value component
   return Color.HSVToColor(hsv)
-}
-
-/**
- * Utility function for darkening out a given color
- *
- * @param normalColor required, representing the color we will darken, given as a color resource int
- *
- * @return Int
- */
-private fun greyOut(@ColorInt normalColor: Int): Int {
-  return Color.argb(
-    Color.alpha(normalColor),
-    Color.red(normalColor) / 2,
-    Color.green(normalColor) / 2,
-    Color.blue(normalColor) / 2
-  )
 }
