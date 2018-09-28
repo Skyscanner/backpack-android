@@ -4,9 +4,6 @@ import android.content.Context
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.content.res.AppCompatResources
-import com.nhaarman.mockito_kotlin.atLeastOnce
-import com.nhaarman.mockito_kotlin.spy
-import com.nhaarman.mockito_kotlin.verify
 import net.skyscanner.backpack.R
 import org.junit.Assert
 import org.junit.Before
@@ -67,7 +64,7 @@ class BpkButtonTest {
     subjectUnderTest.isEnabled = newState
 
     // Then
-    assert(subjectUnderTest.isEnabled == newState)
-    assert(subjectUnderTest.drawingCacheBackgroundColor == disabledBackgroundColor)
+    Assert.assertEquals(subjectUnderTest.isEnabled, newState)
+    Assert.assertEquals(subjectUnderTest.drawingCacheBackgroundColor, disabledBackgroundColor)
   }
 }
