@@ -45,4 +45,9 @@
       <enum name="icon_only" value="2"/>
     </attr>
   </declare-styleable>
+
+  <declare-styleable name="BpkCard">
+    <attr name="focused" format="boolean" />
+    <attr name="padded" format="boolean" />
+  </declare-styleable>
 </resources>

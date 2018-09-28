@@ -19,7 +19,8 @@ object ComponentRegistry {
     "Button Primary" to { ButtonStory.of(R.layout.fragment_button,"primary")},
     "Button Secondary" to { ButtonStory.of(R.layout.fragment_button,"secondary")},
     "Button Destructive" to { ButtonStory.of(R.layout.fragment_button,"destructive")},
-    "Button Featured" to { ButtonStory.of(R.layout.fragment_button,"featured")}
+    "Button Featured" to { ButtonStory.of(R.layout.fragment_button,"featured")},
+    "Card" to { Story.of(R.layout.fragment_card )}
   )
 
   val TOKENS by lazy { TOKENS_MAP.keys.toList() }

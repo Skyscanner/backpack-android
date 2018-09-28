@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <net.skyscanner.backpack.card.BpkCard
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="15dp">
+
+    <net.skyscanner.backpack.card.BpkCardContent
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:text="@string/stub_md" />
+
+    </net.skyscanner.backpack.card.BpkCardContent>
+  </net.skyscanner.backpack.card.BpkCard>
+
+  <net.skyscanner.backpack.card.BpkCard
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    app:padded="false">
+
+    <net.skyscanner.backpack.card.BpkCardContent
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:text="@string/stub_md" />
+
+    </net.skyscanner.backpack.card.BpkCardContent>
+  </net.skyscanner.backpack.card.BpkCard>
+
+  <net.skyscanner.backpack.card.BpkCard
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    app:focused="true">
+
+    <net.skyscanner.backpack.card.BpkCardContent
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:text="@string/stub_md" />
+
+    </net.skyscanner.backpack.card.BpkCardContent>
+  </net.skyscanner.backpack.card.BpkCard>
+
+
+  <net.skyscanner.backpack.card.BpkCard
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp">
+
+    <net.skyscanner.backpack.card.BpkCardContent
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:text="@string/stub_md" />
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:text="@string/stub_sm" />
+
+    </net.skyscanner.backpack.card.BpkCardContent>
+  </net.skyscanner.backpack.card.BpkCard>
+
+  <net.skyscanner.backpack.card.BpkCard
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    app:focused="true">
+
+    <net.skyscanner.backpack.card.BpkCardContent
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:text="@string/stub_md" />
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:text="@string/stub_sm" />
+
+    </net.skyscanner.backpack.card.BpkCardContent>
+  </net.skyscanner.backpack.card.BpkCard>
+
+  <net.skyscanner.backpack.card.BpkCard
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp">
+
+    <net.skyscanner.backpack.card.BpkCardContent
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/stub_md" />
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/stub_sm" />
+
+    </net.skyscanner.backpack.card.BpkCardContent>
+  </net.skyscanner.backpack.card.BpkCard>
+
+</LinearLayout>
