@@ -26,6 +26,7 @@ $ANDROID_HOME/tools/bin/sdkmanager "system-images;android-21;google_apis;x86"
 Given that you have a compatible environment as stated above you can now setup the project.
 
 + `npm install` to install npm dependencies
++ `npm run build` to build Backpack tokens
 +  Open the project in Android studio
 
 ## Testing
@@ -73,7 +74,8 @@ To run connected tests run
 
 > Backpack team only
 
-Run `npm run release` and follow the process through, you'll be asked which semantic version the release. Once released verify the artefacts on [`jitpack`][3]
+ - Move everything in `UNRELEASED.md` to `CHANGELOG.md` with the intended release version as the heading.
+ - Run `npm run release` and follow the process through, you'll be asked which semantic version the release. Once released verify the artefacts on [`jitpack`][3]
 
 ## Docs
 
