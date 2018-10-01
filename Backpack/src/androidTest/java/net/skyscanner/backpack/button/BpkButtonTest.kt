@@ -58,13 +58,13 @@ class BpkButtonTest {
       type = BpkButton.Type.Primary
     }
     val newState = false
-    val disabledBackgroundColor = R.color.bpkGray100
+    val expectedBackgroundState = subjectUnderTest.disabledBackground
 
     // When
     subjectUnderTest.isEnabled = newState
 
     // Then
     Assert.assertEquals(subjectUnderTest.isEnabled, newState)
-    Assert.assertEquals(subjectUnderTest.drawingCacheBackgroundColor, disabledBackgroundColor)
+    Assert.assertEquals(subjectUnderTest.background, expectedBackgroundState)
   }
 }

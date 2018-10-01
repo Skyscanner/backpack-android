@@ -12,6 +12,7 @@ import android.os.Build
 import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
 import android.support.annotation.IntDef
+import android.support.annotation.VisibleForTesting
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v4.widget.TextViewCompat
@@ -68,6 +69,28 @@ open class BpkButton @JvmOverloads constructor(
       }
     }
 
+  internal val disabledBackground by lazy {
+    getSelectorDrawable(
+      normalColor = ContextCompat.getColor(context, type.bgColor),
+      pressedColor = darken(ContextCompat.getColor(context, type.bgColor)),
+      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      cornerRadius = roundedButtonCorner,
+      strokeWidth = strokeWidth,
+      strokeColor = ContextCompat.getColor(context, type.strokeColor)
+    )
+  }
+
+  internal val enabledBackground by lazy {
+    getSelectorDrawable(
+      normalColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
+      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      cornerRadius = roundedButtonCorner,
+      strokeWidth = 0,
+      strokeColor = ContextCompat.getColor(context, android.R.color.transparent)
+    )
+  }
+
   init {
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
     try {
@@ -85,6 +108,11 @@ open class BpkButton @JvmOverloads constructor(
     setup()
   }
 
+  /**
+   * Even though we have a StateListDrawable, it is not enough just to rely on the state of
+   * the background for enabled/disabled change as we have text color and other properties
+   * changing incl the stroke of the background which means we need to change that as well.
+   */
   override fun setEnabled(enabled: Boolean) {
     super.setEnabled(enabled)
     setup()
@@ -124,18 +152,8 @@ open class BpkButton @JvmOverloads constructor(
       compoundDrawablePadding = paddingWithIcon / 2
     }
 
-    this.background = getSelectorDrawable(
-      normalColor = ContextCompat.getColor(context, if (this.isEnabled) type.bgColor else R.color.bpkGray100),
-      pressedColor = darken(ContextCompat.getColor(context, if (this.isEnabled) type.bgColor else R.color.bpkGray100)),
-      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
-      cornerRadius = roundedButtonCorner,
-      strokeWidth = if (this.isEnabled) strokeWidth else 0,
-      strokeColor = ContextCompat.getColor(
-        context,
-        if (this.isEnabled) type.strokeColor else android.R.color.transparent
-      )
-    )
-    
+    this.background = if (this.isEnabled) enabledBackground else disabledBackground
+
     this.setTextColor(ContextCompat.getColor(context, if (this.isEnabled) type.textColor else R.color.bpkGray300))
     TextViewCompat.setTextAppearance(this, R.style.bpkButtonBase)
     this.gravity = Gravity.CENTER
