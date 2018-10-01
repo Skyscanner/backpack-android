@@ -2,6 +2,9 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 0.3.0
+Change button API to accept `icon` and `iconPosition`.
+
 # 0.2.4
 Adds backpack icons to resources
 
