@@ -28,6 +28,7 @@ const minor = semver.inc(pkg.version, 'minor');
 const patch = semver.inc(pkg.version, 'patch');
 
 const gradleFiles = [`${__dirname}/build.gradle`];
+const readmeFile = [`${__dirname}/README.md`];
 
 const questions = [
   {
@@ -70,11 +71,27 @@ async function amendGradleFiles(version) {
   }
 }
 
+async function amendReadmeFiles(version) {
+  const options = {
+    files: readmeFile,
+    from: /backpack-android:([0-9]\.[0-9]\.[0-9])/g,
+    to: `backpack-android:${version}`,
+  };
+
+  try {
+    console.log('🎉  Version amended in', await replace(options));
+    return true;
+  } catch (exc) {
+    throw new Error(exc);
+  }
+}
+
 async function release() {
   try {
     const { version } = await inquirer.prompt(questions);
 
     await amendGradleFiles(version);
+    await amendReadmeFiles(version);
 
     const releaseOptions = {
       increment: version,
