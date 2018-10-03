@@ -2,6 +2,9 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 0.3.1
+Fixes a bug to set button state from code 
+
 # 0.3.0
 Change button API to accept `icon` and `iconPosition`.
 
