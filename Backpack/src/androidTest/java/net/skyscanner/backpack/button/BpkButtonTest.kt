@@ -51,20 +51,16 @@ class BpkButtonTest {
   }
 
   @Test
-  fun givenBpkButtonInAnyTypeAndFormWhenIsEnabledIsSetThenSetupIsCalled() {
-    // Given
-    val subjectUnderTest = BpkButton(context).apply {
+  fun test_enabled_state() {
+    val button = BpkButton(context).apply {
       isEnabled = true
       type = BpkButton.Type.Primary
     }
     val newState = false
-    val expectedBackgroundState = subjectUnderTest.disabledBackground
+    val expectedBackgroundState = button.disabledBackground
+    button.isEnabled = newState
 
-    // When
-    subjectUnderTest.isEnabled = newState
-
-    // Then
-    Assert.assertEquals(subjectUnderTest.isEnabled, newState)
-    Assert.assertEquals(subjectUnderTest.background, expectedBackgroundState)
+    Assert.assertEquals(button.isEnabled, newState)
+    Assert.assertEquals(button.background, expectedBackgroundState)
   }
 }
