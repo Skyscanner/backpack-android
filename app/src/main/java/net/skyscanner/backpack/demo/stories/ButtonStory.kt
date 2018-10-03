@@ -26,7 +26,6 @@ class ButtonStory : Story() {
     view.findViewById<BpkButton>(R.id.btn_start_icon).type = buttonType
     view.findViewById<BpkButton>(R.id.btn_icon).type = buttonType
     super.onViewCreated(view, savedInstanceState)
-
   }
 
   companion object {
