@@ -1,3 +1,5 @@
 # Unreleased
 
-_Nothing Yet_
+**Fixed:**
+
+- Bump kotlin version to 1.2.71
