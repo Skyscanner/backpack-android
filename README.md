@@ -29,6 +29,7 @@ repositories {
 * [Panel](docs/Panel/README.md)
 * [Text](docs/Text/README.md)
 * [Button](docs/Button/README.md)
+* [Card](docs/Card/README.md)
 
 ## Usage
 

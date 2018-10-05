@@ -17,6 +17,10 @@ open class BpkCard @JvmOverloads constructor(
     initialize(context, attrs, defStyleAttr)
   }
 
+  /**
+   * @property padding
+   * padding for card
+   */
   var padded: Boolean = false
     set(value) {
       field = value
@@ -25,6 +29,10 @@ open class BpkCard @JvmOverloads constructor(
       this.setContentPadding(padding, padding, padding, padding)
     }
 
+  /**
+   * @property padding
+   * focus state for card
+   */
   var focused: Boolean = false
     set(value) {
       field = value
