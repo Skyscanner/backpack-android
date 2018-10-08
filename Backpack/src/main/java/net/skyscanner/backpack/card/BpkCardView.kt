@@ -42,9 +42,9 @@ open class BpkCardView @JvmOverloads constructor(
     }
 
   private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
-    val a = context.obtainStyledAttributes(attrs, R.styleable.BpkCard, defStyleAttr, 0)
-    padded = a.getBoolean(R.styleable.BpkCard_padded, true)
-    focused = a.getBoolean(R.styleable.BpkCard_focused, false)
+    val a = context.obtainStyledAttributes(attrs, R.styleable.BpkCardView, defStyleAttr, 0)
+    padded = a.getBoolean(R.styleable.BpkCardView_padded, true)
+    focused = a.getBoolean(R.styleable.BpkCardView_focused, false)
     a.recycle()
 
     maxCardElevation = context.resources.getDimension(R.dimen.bpkElevationLg)
