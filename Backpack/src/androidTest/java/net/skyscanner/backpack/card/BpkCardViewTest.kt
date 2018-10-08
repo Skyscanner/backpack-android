@@ -9,12 +9,12 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class BpkCardTest {
+class BpkCardViewTest {
 
   @Test
   fun test_with_padding() {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
-    val card = BpkCard(context)
+    val card = BpkCardView(context)
     card.padded = true
     Assert.assertEquals(context.resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase), card.paddingBottom)
     Assert.assertEquals(context.resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase), card.paddingLeft)
@@ -25,7 +25,7 @@ class BpkCardTest {
   @Test
   fun test_without_padding() {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
-    val card = BpkCard(context)
+    val card = BpkCardView(context)
     card.padded = false
     Assert.assertEquals(0, card.paddingBottom)
     Assert.assertEquals(0, card.paddingLeft)
@@ -36,7 +36,7 @@ class BpkCardTest {
   @Test
   fun test_without_focus() {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
-    val card = BpkCard(context)
+    val card = BpkCardView(context)
     card.focused = false
     Assert.assertEquals(context.resources.getDimension(R.dimen.bpkElevationXs), card.cardElevation)
   }
@@ -44,7 +44,7 @@ class BpkCardTest {
   @Test
   fun test_with_focus() {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
-    val card = BpkCard(context)
+    val card = BpkCardView(context)
     card.focused = true
     Assert.assertEquals(context.resources.getDimension(R.dimen.bpkElevationLg), card.cardElevation)
   }

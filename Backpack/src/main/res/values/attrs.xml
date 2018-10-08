@@ -46,7 +46,7 @@
     </attr>
   </declare-styleable>
 
-  <declare-styleable name="BpkCard">
+  <declare-styleable name="BpkCardView">
     <attr name="focused" format="boolean" />
     <attr name="padded" format="boolean" />
   </declare-styleable>

@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import net.skyscanner.backpack.R
 
 
-open class BpkCard @JvmOverloads constructor(
+open class BpkCardView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.style.Bpk_card
@@ -17,6 +17,9 @@ open class BpkCard @JvmOverloads constructor(
     initialize(context, attrs, defStyleAttr)
   }
 
+  @Dimension
+  private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase)
+
   /**
    * @property padding
    * padding for card
@@ -24,8 +27,7 @@ open class BpkCard @JvmOverloads constructor(
   var padded: Boolean = false
     set(value) {
       field = value
-      @Dimension
-      val padding = if (padded) context.resources.getDimension(R.dimen.bpkSpacingBase).toInt() else 0
+      val padding = if (padded) paddingSize else 0
       this.setContentPadding(padding, padding, padding, padding)
     }
 

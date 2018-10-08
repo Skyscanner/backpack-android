@@ -6,4 +6,4 @@
 
 **Added**
 
-- New component BpkCard 
+- New component BpkCardView

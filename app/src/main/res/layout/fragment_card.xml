@@ -5,7 +5,7 @@
   android:layout_height="match_parent"
   android:orientation="vertical">
 
-  <net.skyscanner.backpack.card.BpkCard
+  <net.skyscanner.backpack.card.BpkCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/bpkSpacingBase"
@@ -18,9 +18,9 @@
       android:layout_height="match_parent"
       android:text="@string/stub_md" />
 
-  </net.skyscanner.backpack.card.BpkCard>
+  </net.skyscanner.backpack.card.BpkCardView>
 
-  <net.skyscanner.backpack.card.BpkCard
+  <net.skyscanner.backpack.card.BpkCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/bpkSpacingBase"
@@ -34,9 +34,9 @@
       android:layout_height="match_parent"
       android:text="@string/stub_md" />
 
-  </net.skyscanner.backpack.card.BpkCard>
+  </net.skyscanner.backpack.card.BpkCardView>
 
-  <net.skyscanner.backpack.card.BpkCard
+  <net.skyscanner.backpack.card.BpkCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/bpkSpacingBase"
@@ -51,10 +51,10 @@
       android:layout_height="match_parent"
       android:text="@string/stub_md" />
 
-  </net.skyscanner.backpack.card.BpkCard>
+  </net.skyscanner.backpack.card.BpkCardView>
 
 
-  <net.skyscanner.backpack.card.BpkCard
+  <net.skyscanner.backpack.card.BpkCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/bpkSpacingBase"
@@ -82,9 +82,9 @@
         android:layout_height="match_parent"
         android:text="@string/stub_sm" />
     </LinearLayout>
-  </net.skyscanner.backpack.card.BpkCard>
+  </net.skyscanner.backpack.card.BpkCardView>
 
-  <net.skyscanner.backpack.card.BpkCard
+  <net.skyscanner.backpack.card.BpkCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/bpkSpacingBase"
@@ -117,14 +117,11 @@
         android:layout_height="match_parent"
         android:layout_weight="0.3"
         android:paddingLeft="@dimen/bpkSpacingBase"
-        android:text="@string/stub_sm"
-        android:focusable="true"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground"/>
+        android:text="@string/stub_sm" />
     </android.support.v7.widget.LinearLayoutCompat>
-  </net.skyscanner.backpack.card.BpkCard>
+  </net.skyscanner.backpack.card.BpkCardView>
 
-  <net.skyscanner.backpack.card.BpkCard
+  <net.skyscanner.backpack.card.BpkCardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/bpkSpacingBase"
@@ -156,6 +153,6 @@
         android:text="@string/stub_sm" />
 
     </android.support.v7.widget.LinearLayoutCompat>
-  </net.skyscanner.backpack.card.BpkCard>
+  </net.skyscanner.backpack.card.BpkCardView>
 
 </LinearLayout>

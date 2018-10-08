@@ -19,7 +19,7 @@ class BpkCardTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestCardDefault() {
-    val card = BpkCard(testContext)
+    val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
     card.addView(text)
@@ -28,7 +28,7 @@ class BpkCardTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestCardWithPadding() {
-    val card = BpkCard(testContext)
+    val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
     card.addView(text)
@@ -38,7 +38,7 @@ class BpkCardTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestCardWithoutPadding() {
-    val card = BpkCard(testContext)
+    val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
     card.addView(text)
@@ -49,7 +49,7 @@ class BpkCardTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestCardWithFocus() {
-    val card = BpkCard(testContext)
+    val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
     card.addView(text)
@@ -59,7 +59,7 @@ class BpkCardTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestCardWithoutPaddingAndFocus() {
-    val card = BpkCard(testContext)
+    val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
     card.addView(text)
