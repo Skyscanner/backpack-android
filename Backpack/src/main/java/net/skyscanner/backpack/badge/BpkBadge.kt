@@ -10,7 +10,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.Gravity
-import android.widget.LinearLayout
+import android.view.ViewGroup
 import net.skyscanner.backpack.R
 
 
@@ -132,7 +132,7 @@ open class BpkBadge(
     border.cornerRadii = radius
     this.background = border
 
-    val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+    val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     this.gravity = Gravity.CENTER
     this.layoutParams = params
   }

@@ -11,16 +11,16 @@ The Panel component can be used in both XML and Kotlin
 Example of a padded panel in XML
 
 ```xml
-<net.skyscanner.backpack.panel.bpkpanel
+<net.skyscanner.backpack.panel.BpkPanel
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:padding="true">
 
-    <textview
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="panel message" />
-</net.skyscanner.backpack.panel.bpkpanel>
+</net.skyscanner.backpack.panel.BpkPanel>
 ```
 
 Example of a padded panel in Kotlin

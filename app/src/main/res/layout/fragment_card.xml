@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:padding="@dimen/bpkSpacingSm">
+
+  <net.skyscanner.backpack.text.BpkText
+    style="@style/bpkTextXlEmphasized"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Default" />
+
+  <net.skyscanner.backpack.card.BpkCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:text="@string/stub_md" />
+
+  </net.skyscanner.backpack.card.BpkCardView>
+
+  <net.skyscanner.backpack.text.BpkText
+    style="@style/bpkTextXlEmphasized"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Without Padding" />
+
+  <net.skyscanner.backpack.card.BpkCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:padded="false">
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:text="@string/stub_md" />
+
+  </net.skyscanner.backpack.card.BpkCardView>
+
+  <net.skyscanner.backpack.text.BpkText
+    style="@style/bpkTextXlEmphasized"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Focused" />
+
+  <net.skyscanner.backpack.card.BpkCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:focused="true">
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:text="@string/stub_md" />
+
+  </net.skyscanner.backpack.card.BpkCardView>
+
+  <net.skyscanner.backpack.text.BpkText
+    style="@style/bpkTextXlEmphasized"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Horizontal" />
+
+  <net.skyscanner.backpack.card.BpkCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:focused="true">
+
+    <android.support.v7.widget.LinearLayoutCompat
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:weightSum="1">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:padding="@dimen/bpkSpacingSm"
+        android:text="@string/stub_md" />
+
+      <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/vertical_dashed_line"
+        android:layerType="software" />
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:paddingLeft="@dimen/bpkSpacingBase"
+        android:text="@string/stub_sm" />
+    </android.support.v7.widget.LinearLayoutCompat>
+  </net.skyscanner.backpack.card.BpkCardView>
+
+  <net.skyscanner.backpack.text.BpkText
+    style="@style/bpkTextXlEmphasized"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Horizontal without Padding" />
+
+  <net.skyscanner.backpack.card.BpkCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:focused="true"
+    app:padded="false">
+
+    <android.support.v7.widget.LinearLayoutCompat
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:weightSum="1">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:padding="@dimen/bpkSpacingSm"
+        android:text="@string/stub_md" />
+
+      <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/vertical_dashed_line"
+        android:layerType="software" />
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:paddingLeft="@dimen/bpkSpacingBase"
+        android:text="@string/stub_sm" />
+    </android.support.v7.widget.LinearLayoutCompat>
+  </net.skyscanner.backpack.card.BpkCardView>
+
+  <net.skyscanner.backpack.text.BpkText
+    style="@style/bpkTextXlEmphasized"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Vertical" />
+
+  <net.skyscanner.backpack.card.BpkCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <android.support.v7.widget.LinearLayoutCompat
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/bpkSpacingSm"
+        android:text="@string/stub_md" />
+
+      <View
+        android:layout_width="wrap_content"
+        android:layout_height="4dp"
+        android:background="@drawable/dashed_line"
+        android:layerType="software" />
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/bpkSpacingSm"
+        android:text="@string/stub_sm" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+  </net.skyscanner.backpack.card.BpkCardView>
+
+</LinearLayout>
