@@ -18,16 +18,16 @@ open class BpkCardView @JvmOverloads constructor(
   }
 
   @Dimension
-  private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase)
+  private  var paddingSize : Int = 0
 
   /**
    * @property padding
    * padding for card
    */
-  var padded: Boolean = false
+  var padded: Boolean = true
     set(value) {
       field = value
-      val padding = if (padded) paddingSize else 0
+      val padding = if(padded) paddingSize else 0
       this.setContentPadding(padding, padding, padding, padding)
     }
 
@@ -38,10 +38,12 @@ open class BpkCardView @JvmOverloads constructor(
   var focused: Boolean = false
     set(value) {
       field = value
-      cardElevation = context.resources.getDimension(if (value) R.dimen.bpkElevationLg else R.dimen.bpkElevationXs)
+      cardElevation = context.resources.getDimension(if (value) R.dimen.bpkElevationBase else R.dimen.bpkElevationXs)
     }
 
   private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
+    paddingSize= context.resources.getDimension(R.dimen.bpkSpacingBase).toInt()
+
     val a = context.obtainStyledAttributes(attrs, R.styleable.BpkCardView, defStyleAttr, 0)
     padded = a.getBoolean(R.styleable.BpkCardView_padded, true)
     focused = a.getBoolean(R.styleable.BpkCardView_focused, false)
