@@ -2,6 +2,10 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 0.4.0
+- Bump kotlin version to 1.2.71
+- New component BpkCardView
+
 # 0.3.1
 Fixes a bug to set button state from code 
 
