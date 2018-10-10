@@ -30,7 +30,7 @@ const tokens = require('bpk-tokens/tokens/base.raw.android.json');
 
 const PATHS = {
   templates: path.join(__dirname, 'templates'),
-  outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res', 'values'),
+  outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res'),
   drawableRes: path.join(
     __dirname,
     'Backpack',
@@ -165,7 +165,7 @@ gulp.task('template:color', () => {
         data: getColors(),
       }),
     )
-    .pipe(rename('backpack.color.xml'))
+    .pipe(rename('values/backpack.color.xml'))
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
@@ -191,7 +191,7 @@ gulp.task('template:spacing', () => {
         data: getSpacing(),
       }),
     )
-    .pipe(rename('backpack.dimensions.spacing.xml'))
+    .pipe(rename('values/backpack.dimensions.spacing.xml'))
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
@@ -203,7 +203,19 @@ gulp.task('template:text', () =>
         data: getTextStyles(),
       }),
     )
-    .pipe(rename('backpack.text.xml'))
+    .pipe(rename('values/backpack.text.xml'))
+    .pipe(gulp.dest(PATHS.outputRes)),
+);
+
+gulp.task('template:text-v21', () =>
+  gulp
+    .src(`${PATHS.templates}/BackpackTextv21.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: getTextStyles(),
+      }),
+    )
+    .pipe(rename('values-v21/backpack.text.xml'))
     .pipe(gulp.dest(PATHS.outputRes)),
 );
 gulp.task('template:radii', () => {
@@ -220,7 +232,7 @@ gulp.task('template:radii', () => {
         data: getRadii(),
       }),
     )
-    .pipe(rename('backpack.radii.xml'))
+    .pipe(rename('values/backpack.radii.xml'))
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
@@ -238,7 +250,7 @@ gulp.task('template:elevation', () => {
         data: getElevation(),
       }),
     )
-    .pipe(rename('backpack.elevation.xml'))
+    .pipe(rename('values/backpack.elevation.xml'))
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
@@ -253,6 +265,7 @@ gulp.task('default', () => {
   runSequence(
     'template:color',
     'template:text',
+    'template:text-v21',
     'template:spacing',
     'template:radii',
     'template:elevation',
