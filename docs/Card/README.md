@@ -18,7 +18,8 @@ Example of a padded and focused card in XML
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:foreground="?android:attr/selectableItemBackground"
+    app:focused="true">
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="match_parent"
