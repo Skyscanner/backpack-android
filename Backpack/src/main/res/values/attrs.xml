@@ -23,6 +23,8 @@
       <enum name="lg" value="3"/>
       <enum name="xl" value="4"/>
       <enum name="xxl" value="5"/>
+      <enum name="xxxl" value="6"/>
+      <enum name="caps" value="7"/>
     </attr>
     <attr name="emphasize" format="boolean"/>
   </declare-styleable>

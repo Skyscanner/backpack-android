@@ -21,39 +21,50 @@
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
+      app:textStyle="xxxl" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/txt_flights_to_edinburgh"
       app:textStyle="xxl" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:textStyle="xl" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:textStyle="lg" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:textStyle="base" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:textStyle="sm" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:textStyle="xs" />
 
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/txt_flights_to_edinburgh"
+      app:textStyle="caps" />
   </LinearLayout>
 
   <net.skyscanner.backpack.text.BpkText
@@ -74,44 +85,58 @@
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
+      app:emphasize="true"
+      app:textStyle="xxxl" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/txt_flights_to_edinburgh"
       app:emphasize="true"
       app:textStyle="xxl" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:emphasize="true"
       app:textStyle="xl" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:emphasize="true"
       app:textStyle="lg" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:emphasize="true"
       app:textStyle="base" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:emphasize="true"
       app:textStyle="sm" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Flights to Edinburgh"
+      android:text="@string/txt_flights_to_edinburgh"
       app:emphasize="true"
       app:textStyle="xs" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/txt_flights_to_edinburgh"
+      app:emphasize="true"
+      app:textStyle="caps" />
 
   </LinearLayout>
 </LinearLayout>

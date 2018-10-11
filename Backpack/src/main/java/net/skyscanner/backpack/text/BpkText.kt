@@ -25,6 +25,8 @@ open class BpkText(
     const val LG = 3
     const val XL = 4
     const val XXL = 5
+    const val XXXL =6
+    const val CAPS = 7
   }
 
   @Styles
@@ -46,7 +48,9 @@ open class BpkText(
     BASE to Pair(R.style.bpkTextBaseEmphasized, R.style.bpkTextBase),
     LG to Pair(R.style.bpkTextLgEmphasized, R.style.bpkTextLg),
     XL to Pair(R.style.bpkTextXlEmphasized, R.style.bpkTextXl),
-    XXL to Pair(R.style.bpkTextXxlEmphasized, R.style.bpkTextXxl)
+    XXL to Pair(R.style.bpkTextXxlEmphasized, R.style.bpkTextXxl),
+    XXXL to Pair(R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxl),
+    CAPS to Pair(R.style.bpkTextCapsEmphasized, R.style.bpkTextCaps)
   )
 
   constructor(context: Context) : this(context, null)
@@ -73,6 +77,7 @@ open class BpkText(
   private fun setup() {
 
     val styleProps = styleMapping[textStyle]
+    setLineSpacing(0.0f,1.13f)
 
     if (styleProps != null) {
       TextViewCompat.setTextAppearance(this, if (emphasize) styleProps.first else styleProps.second)
