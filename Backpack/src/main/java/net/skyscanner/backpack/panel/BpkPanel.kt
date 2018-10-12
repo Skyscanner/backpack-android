@@ -18,10 +18,9 @@ open class BpkPanel(
     constructor(context: Context,@Nullable attrs: AttributeSet?) : this(context, attrs, R.style.Bpk_panel)
 
     @Dimension
-    private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingSm)
+    private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase)
 
     init {
-        paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingSm)
         initialize(context, attrs, defStyleAttr)
     }
 

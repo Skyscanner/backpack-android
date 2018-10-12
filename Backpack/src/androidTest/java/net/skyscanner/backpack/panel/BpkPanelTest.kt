@@ -13,12 +13,14 @@ class BpkPanelTest {
   @Test
   fun test_with_padding() {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
-    val panel = BpkPanel(context)
-    panel.padding = true
-    Assert.assertEquals(context.resources.getDimensionPixelOffset(R.dimen.bpkSpacingSm), panel.paddingBottom)
-    Assert.assertEquals(context.resources.getDimensionPixelOffset(R.dimen.bpkSpacingSm), panel.paddingLeft)
-    Assert.assertEquals(context.resources.getDimensionPixelOffset(R.dimen.bpkSpacingSm), panel.paddingTop)
-    Assert.assertEquals(context.resources.getDimensionPixelOffset(R.dimen.bpkSpacingSm), panel.paddingRight)
+    val panel = BpkPanel(context).apply {
+      padding = true
+    }
+    val expected = context.resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase)
+    Assert.assertEquals(expected, panel.paddingBottom)
+    Assert.assertEquals(expected, panel.paddingLeft)
+    Assert.assertEquals(expected, panel.paddingTop)
+    Assert.assertEquals(expected, panel.paddingRight)
   }
 
   @Test

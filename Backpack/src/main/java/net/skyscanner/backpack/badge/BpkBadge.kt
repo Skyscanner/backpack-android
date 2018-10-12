@@ -14,13 +14,10 @@ import android.view.ViewGroup
 import net.skyscanner.backpack.R
 
 
-open class BpkBadge(
+open class BpkBadge @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet?,
-  defStyleAttr: Int) : AppCompatTextView(context, attrs, defStyleAttr) {
-
-  constructor(context: Context) : this(context, null)
-  constructor(context: Context, @Nullable attrs: AttributeSet?) : this(context, attrs, R.style.Bpk_badge)
+  attrs: AttributeSet? = null,
+  defStyleAttr: Int = R.style.Bpk_badge) : AppCompatTextView(context, attrs, defStyleAttr) {
 
   init {
     initialize(context, attrs, defStyleAttr)
@@ -135,6 +132,9 @@ open class BpkBadge(
     val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     this.gravity = Gravity.CENTER
     this.layoutParams = params
+
+    // make sure is center aligned
+    includeFontPadding = false
   }
 
 
