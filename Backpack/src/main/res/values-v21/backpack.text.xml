@@ -25,7 +25,7 @@
   <style name="bpkTextBase">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textSize">16sp</item>
-    <item name="android:letterSpacing">-0.0125</item>
+    <item name="android:letterSpacing">-0.060</item>
   </style>
 
   <style name="bpkTextBaseEmphasized">
@@ -37,7 +37,7 @@
   <style name="bpkTextLg">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textSize">20sp</item>
-    <item name="android:letterSpacing">-0.02</item>
+    <item name="android:letterSpacing">-0.035</item>
   </style>
 
   <style name="bpkTextLgEmphasized">
@@ -49,7 +49,7 @@
   <style name="bpkTextSm">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textSize">14sp</item>
-    <item name="android:letterSpacing">0.0</item>
+    <item name="android:letterSpacing">-0.065</item>
   </style>
 
   <style name="bpkTextSmEmphasized">
@@ -73,7 +73,7 @@
   <style name="bpkTextXs">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textSize">12sp</item>
-    <item name="android:letterSpacing">0.0</item>
+    <item name="android:letterSpacing">-0.08</item>
   </style>
 
   <style name="bpkTextXsEmphasized">
@@ -85,7 +85,7 @@
   <style name="bpkTextXxl">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textSize">36sp</item>
-    <item name="android:letterSpacing">-0.028</item>
+    <item name="android:letterSpacing">-0.015</item>
   </style>
 
   <style name="bpkTextXxlEmphasized">
@@ -96,7 +96,8 @@
   <style name="bpkTextXxxl">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textSize">42sp</item>
-    <item name="android:letterSpacing">-0.0286</item>
+    <!--<item name="android:letterSpacing">-0.0286</item>-->
+    <item name="android:letterSpacing">-0.015</item>
   </style>
 
   <style name="bpkTextXxxlEmphasized">
@@ -108,7 +109,7 @@
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textSize">10sp</item>
     <item name="android:textAllCaps">true</item>
-    <item name="android:letterSpacing">0.04</item>
+    <item name="android:letterSpacing">-0.097</item>
   </style>
   <style name="bpkTextCapsEmphasized">
     <item name="android:fontFamily">sans-serif</item>
