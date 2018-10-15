@@ -25,7 +25,7 @@ open class BpkText(
     const val LG = 3
     const val XL = 4
     const val XXL = 5
-    const val XXXL =6
+    const val XXXL = 6
     const val CAPS = 7
   }
 
@@ -77,7 +77,7 @@ open class BpkText(
   private fun setup() {
 
     val styleProps = styleMapping[textStyle]
-    setLineSpacing(0.0f,1.13f)
+    setLineSpacing(0.0f, 1.13f)
 
     if (styleProps != null) {
       TextViewCompat.setTextAppearance(this, if (emphasize) styleProps.first else styleProps.second)
