@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
-  android:layout_margin="@dimen/bpkSpacingBase"
-  android:layout_gravity="center_vertical"
-  android:layout_height="wrap_content"
-  tools:ignore="HardcodedText">
+<RelativeLayout style="@style/App.Story">
   <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:ignore="HardcodedText">
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingSm"
       app:textStyle="sm"
-      android:text="Success" />
+      android:text="Success"/>
 
     <android.support.constraint.ConstraintLayout
       android:layout_width="match_parent"
@@ -36,7 +30,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/success_2"
-        app:message="Apples" />
+        app:message="Apples"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/success_2"
@@ -46,7 +40,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/success_1"
         app:layout_constraintEnd_toStartOf="@+id/success_3"
-        app:message="Bananas" />
+        app:message="Bananas"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/success_3"
@@ -56,7 +50,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/success_2"
         app:layout_constraintEnd_toStartOf="@+id/success_4"
-        app:message="Strawberries" />
+        app:message="Strawberries"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/success_4"
@@ -66,14 +60,14 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/success_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:message="Pears" />
+        app:message="Pears"/>
     </android.support.constraint.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:textStyle="sm"
-      android:text="Warning" />
+      android:text="Warning"/>
 
     <android.support.constraint.ConstraintLayout
       android:layout_width="match_parent"
@@ -90,7 +84,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/warning_2"
-        app:message="Apples" />
+        app:message="Apples"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/warning_2"
@@ -100,7 +94,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/warning_1"
         app:layout_constraintEnd_toStartOf="@+id/warning_3"
-        app:message="Bananas" />
+        app:message="Bananas"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/warning_3"
@@ -110,7 +104,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/warning_2"
         app:layout_constraintEnd_toStartOf="@+id/warning_4"
-        app:message="Strawberries" />
+        app:message="Strawberries"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/warning_4"
@@ -120,14 +114,14 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/warning_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:message="Pears" />
+        app:message="Pears"/>
     </android.support.constraint.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:textStyle="sm"
-      android:text="Destructive" />
+      android:text="Destructive"/>
 
     <android.support.constraint.ConstraintLayout
       android:layout_width="match_parent"
@@ -144,7 +138,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/destructive_2"
-        app:message="Apples" />
+        app:message="Apples"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/destructive_2"
@@ -154,7 +148,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/destructive_1"
         app:layout_constraintEnd_toStartOf="@+id/destructive_3"
-        app:message="Bananas" />
+        app:message="Bananas"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/destructive_3"
@@ -164,7 +158,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/destructive_2"
         app:layout_constraintEnd_toStartOf="@+id/destructive_4"
-        app:message="Strawberries" />
+        app:message="Strawberries"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/destructive_4"
@@ -174,14 +168,14 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/destructive_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:message="Pears" />
+        app:message="Pears"/>
     </android.support.constraint.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:textStyle="sm"
-      android:text="Light" />
+      android:text="Light"/>
 
     <android.support.constraint.ConstraintLayout
       android:layout_width="match_parent"
@@ -199,7 +193,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/light_2"
-        app:message="Apples" />
+        app:message="Apples"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/light_2"
@@ -209,7 +203,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/light_1"
         app:layout_constraintEnd_toStartOf="@+id/light_3"
-        app:message="Bananas" />
+        app:message="Bananas"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/light_3"
@@ -219,7 +213,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/light_2"
         app:layout_constraintEnd_toStartOf="@+id/light_4"
-        app:message="Strawberries" />
+        app:message="Strawberries"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/light_4"
@@ -229,14 +223,14 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/light_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:message="Pears" />
+        app:message="Pears"/>
     </android.support.constraint.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:textStyle="sm"
-      android:text="Inverse" />
+      android:text="Inverse"/>
 
     <android.support.constraint.ConstraintLayout
       android:layout_width="match_parent"
@@ -254,7 +248,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/inverse_2"
-        app:message="Apples" />
+        app:message="Apples"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/inverse_2"
@@ -264,7 +258,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/inverse_1"
         app:layout_constraintEnd_toStartOf="@+id/inverse_3"
-        app:message="Bananas" />
+        app:message="Bananas"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/inverse_3"
@@ -274,7 +268,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/inverse_2"
         app:layout_constraintEnd_toStartOf="@+id/inverse_4"
-        app:message="Strawberries" />
+        app:message="Strawberries"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/inverse_4"
@@ -284,14 +278,14 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/inverse_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:message="Pears" />
+        app:message="Pears"/>
     </android.support.constraint.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:textStyle="sm"
-      android:text="Outline" />
+      android:text="Outline"/>
 
     <android.support.constraint.ConstraintLayout
       android:layout_width="match_parent"
@@ -309,7 +303,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/outline_2"
-        app:message="Apples" />
+        app:message="Apples"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/outline_2"
@@ -319,7 +313,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/outline_1"
         app:layout_constraintEnd_toStartOf="@+id/outline_3"
-        app:message="Bananas" />
+        app:message="Bananas"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/outline_3"
@@ -329,7 +323,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/outline_2"
         app:layout_constraintEnd_toStartOf="@+id/outline_4"
-        app:message="Strawberries" />
+        app:message="Strawberries"/>
 
       <net.skyscanner.backpack.badge.BpkBadge
         android:id="@+id/outline_4"
@@ -339,7 +333,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@+id/outline_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:message="Pears" />
+        app:message="Pears"/>
     </android.support.constraint.ConstraintLayout>
 
   </LinearLayout>

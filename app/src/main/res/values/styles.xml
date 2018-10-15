@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
   <!-- Base application theme. -->
@@ -12,5 +13,12 @@
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
   <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+  <style name="App.Story" parent="android:Widget">
+    <item name="android:layout_gravity">center_vertical</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:padding">@dimen/bpkSpacingBase</item>
+  </style>
 
 </resources>
