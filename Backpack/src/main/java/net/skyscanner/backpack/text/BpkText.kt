@@ -14,7 +14,7 @@ open class BpkText(
   defStyleAttr: Int
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
-  @IntDef(XS, SM, BASE, LG, XL, XXL)
+  @IntDef(XS, SM, BASE, LG, XL, XXL, XXXL, CAPS)
 
   annotation class Styles
 
@@ -43,8 +43,9 @@ open class BpkText(
     }
 
   private val styleMapping = mapOf(
-    XS to Pair(R.style.bpkTextXsEmphasized, R.style.bpkTextXs),
+    XS to Pair(R.style.bpkTextSmEmphasized, R.style.bpkTextSm),
     SM to Pair(R.style.bpkTextSmEmphasized, R.style.bpkTextSm),
+    CAPS to Pair(R.style.bpkTextCapsEmphasized, R.style.bpkTextCaps),
     BASE to Pair(R.style.bpkTextBaseEmphasized, R.style.bpkTextBase),
     LG to Pair(R.style.bpkTextLgEmphasized, R.style.bpkTextLg),
     XL to Pair(R.style.bpkTextXlEmphasized, R.style.bpkTextXl),
@@ -78,6 +79,10 @@ open class BpkText(
 
     val styleProps = styleMapping[textStyle]
     setLineSpacing(0.0f, 1.13f)
+
+    if (textStyle == CAPS) {
+      setAllCaps(true)
+    }
 
     if (styleProps != null) {
       TextViewCompat.setTextAppearance(this, if (emphasize) styleProps.first else styleProps.second)

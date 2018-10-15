@@ -42,7 +42,16 @@ const PATHS = {
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
-const VALID_TEXT_STYLES = new Set(['xs', 'sm', 'base', 'lg', 'xl', 'xxl']);
+const VALID_TEXT_STYLES = new Set([
+  'caps',
+  'xs',
+  'sm',
+  'base',
+  'lg',
+  'xl',
+  'xxl',
+  'xxxl',
+]);
 const { FONT_FAMILY, FONT_FAMILY_EMPHASIZE } = tokens.aliases;
 const EMPHASIZED_FONT_WEIGHT = tokens.props.TEXT_EMPHASIZED_FONT_WEIGHT.value;
 
@@ -100,10 +109,14 @@ const getTextStyles = () => {
     [].concat(
       tokensWithCategory('font-sizes'),
       tokensWithCategory('font-weights'),
+      tokensWithCategory('letter-spacings'),
     ),
   )
     .groupBy(({ name }) =>
-      name.replace('_FONT_SIZE', '').replace('_FONT_WEIGHT', ''),
+      name
+        .replace('_FONT_SIZE', '')
+        .replace('_FONT_WEIGHT', '')
+        .replace('LETTER_SPACING_', 'TEXT_'),
     )
     .map((values, key) => [values, key])
     .filter(token =>
@@ -121,7 +134,10 @@ const getTextStyles = () => {
         properties,
         ({ category }) => category === 'font-weights',
       );
-
+      const letterSpacingProp = _.filter(
+        properties,
+        ({ category }) => category === 'letter-spacings',
+      );
       if (sizeProp.length !== 1 || weightProp.length !== 1) {
         throw new Error(
           'Expected all text sizes to have a weight and font size.',
@@ -132,6 +148,7 @@ const getTextStyles = () => {
         name: `bpk${pascalCase(key)}`,
         size: Number.parseInt(sizeProp[0].value, 10),
         fontFamily: fontForWeight(weightProp[0].value),
+        letterSpacing: letterSpacingProp[0].value,
       };
     })
     .flatMap(properties => [
@@ -143,7 +160,6 @@ const getTextStyles = () => {
       },
     ])
     .value();
-
   return result;
 };
 
