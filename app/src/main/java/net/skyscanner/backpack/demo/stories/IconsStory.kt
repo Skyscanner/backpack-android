@@ -22,14 +22,14 @@ class IconsStory : ComponentDetailFragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val iconsGridView : RecyclerView= view.findViewById(R.id.lst_icons)
+    val iconsGridView: RecyclerView = view.findViewById(R.id.lst_icons)
 
     val drawableResources = ArrayList<Drawable>()
 
     for (field in R.drawable::class.java.fields) {
-      if(field.name.startsWith("bpk_")) {
-        ResourcesCompat.getDrawable(resources,field.getInt(null),null)?.apply {
-          if(isVectorDrawable(this)) {
+      if (field.name.startsWith("bpk_")) {
+        ResourcesCompat.getDrawable(resources, field.getInt(null), null)?.apply {
+          if (isVectorDrawable(this)) {
             drawableResources.add(this)
           }
         }
@@ -37,9 +37,8 @@ class IconsStory : ComponentDetailFragment() {
     }
 
     iconsGridView.layoutManager = GridLayoutManager(context, 10)
-    iconsGridView.adapter =  IconsAdapter(drawableResources)
+    iconsGridView.adapter = IconsAdapter(drawableResources)
   }
-
 
   private fun isVectorDrawable(d: Drawable): Boolean {
     return d is VectorDrawableCompat || PLATFORM_VD_CLAZZ == d.javaClass.name

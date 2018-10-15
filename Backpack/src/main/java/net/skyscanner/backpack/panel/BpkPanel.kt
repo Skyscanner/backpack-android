@@ -8,14 +8,14 @@ import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
 import net.skyscanner.backpack.R
 
-
 open class BpkPanel(
-        context: Context,
-        attrs: AttributeSet?,
-        defStyleAttr: Int) : LinearLayoutCompat(context, attrs, defStyleAttr) {
+  context: Context,
+  attrs: AttributeSet?,
+  defStyleAttr: Int
+) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
     constructor(context: Context) : this(context, null)
-    constructor(context: Context,@Nullable attrs: AttributeSet?) : this(context, attrs, R.style.Bpk_panel)
+    constructor(context: Context, @Nullable attrs: AttributeSet?) : this(context, attrs, R.style.Bpk_panel)
 
     @Dimension
     private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase)
@@ -33,8 +33,8 @@ open class BpkPanel(
             field = value
           if (this.padding) {
             this.setPadding(paddingSize, paddingSize, paddingSize, paddingSize)
-          }else{
-            this.setPadding(0,0,0,0)
+          } else {
+            this.setPadding(0, 0, 0, 0)
           }
         }
 
@@ -42,7 +42,7 @@ open class BpkPanel(
 
         val a = context.obtainStyledAttributes(attrs, R.styleable.BpkPanel, R.attr.padding, defStyleAttr)
         padding = a.getBoolean(R.styleable.BpkPanel_padding, true)
-        this.background = ResourcesCompat.getDrawable(resources,R.drawable.border,null)
+        this.background = ResourcesCompat.getDrawable(resources, R.drawable.border, null)
         a.recycle()
     }
 }

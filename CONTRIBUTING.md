@@ -70,6 +70,11 @@ To run connected tests run
 ./gradlew Backpack:connectedCheck
 ```
 
+## Code Style
+Code style is ensured by [ktlint](https://github.com/shyiko/ktlint). It runs automatically during the `check` phase but can also be executed by running `gradlew ktlint`.
+
+To auto fix problems run `gradlew ktlintFormat`.
+
 ## Releasing
 
 > Backpack team only

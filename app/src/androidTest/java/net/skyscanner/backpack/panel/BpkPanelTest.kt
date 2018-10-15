@@ -1,6 +1,5 @@
 package net.skyscanner.backpack.panel
 
-
 import android.support.test.runner.AndroidJUnit4
 import android.widget.TextView
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -10,11 +9,11 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 
-class BpkPanelTest: BpkSnapshotTest() {
+class BpkPanelTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(100,100)
+    setDimensions(100, 100)
   }
 
   @Test

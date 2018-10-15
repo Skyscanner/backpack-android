@@ -1,6 +1,5 @@
 package net.skyscanner.backpack.text
 
-
 import android.support.test.runner.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -9,11 +8,11 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 
-class BpkTextTest: BpkSnapshotTest()  {
+class BpkTextTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(72,180)
+    setDimensions(72, 180)
   }
 
   @Test

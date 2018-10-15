@@ -20,5 +20,4 @@ object BpkGradients {
       orientation,
       intArrayOf(ContextCompat.getColor(context, R.color.bpkBlue500), ContextCompat.getColor(context, R.color.bpkPrimaryGradientLight)))
   }
-
 }

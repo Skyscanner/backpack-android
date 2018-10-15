@@ -24,7 +24,6 @@ class BpkButtonTest {
   fun test_message() {
     val button = BpkButton(context).apply {
       text = "Message"
-
     }
     Assert.assertEquals("Message", button.text.toString())
   }

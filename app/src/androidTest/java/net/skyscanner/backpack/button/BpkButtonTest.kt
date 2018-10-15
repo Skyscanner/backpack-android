@@ -14,7 +14,7 @@ class BpkButtonTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(40,120)
+    setDimensions(40, 120)
   }
 
   @Test
@@ -71,7 +71,6 @@ class BpkButtonTest : BpkSnapshotTest() {
     snap(button)
   }
 
-
   @Test
   fun screenshotTestButtonBasicFeatured() {
     val button = BpkButton(testContext)
@@ -125,5 +124,4 @@ class BpkButtonTest : BpkSnapshotTest() {
     button.iconPosition = BpkButton.ICON_ONLY
     snap(button)
   }
-
 }
