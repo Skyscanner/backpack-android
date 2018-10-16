@@ -43,7 +43,7 @@ open class BpkText(
     }
 
   private val styleMapping = mapOf(
-    XS to Pair(R.style.bpkTextSmEmphasized, R.style.bpkTextSm),
+    XS to Pair(R.style.bpkTextXsEmphasized, R.style.bpkTextXs),
     SM to Pair(R.style.bpkTextSmEmphasized, R.style.bpkTextSm),
     CAPS to Pair(R.style.bpkTextCapsEmphasized, R.style.bpkTextCaps),
     BASE to Pair(R.style.bpkTextBaseEmphasized, R.style.bpkTextBase),
