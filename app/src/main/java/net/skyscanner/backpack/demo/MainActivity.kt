@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity() {
   }
 
   private class SimpleItemRecyclerViewAdapter internal constructor(
-    private val mValues: List<String>) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
+    private val mValues: List<String>
+  ) : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
     private val mOnClickListener = View.OnClickListener { view ->
       val viewId = view.tag as String
 
@@ -51,7 +52,6 @@ class MainActivity : AppCompatActivity() {
       intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, viewId)
 
       context.startActivity(intent)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

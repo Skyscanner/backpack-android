@@ -8,11 +8,11 @@ import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import net.skyscanner.backpack.R
 
-
 open class BpkText(
   context: Context,
   attrs: AttributeSet?,
-  defStyleAttr: Int) : AppCompatTextView(context, attrs, defStyleAttr) {
+  defStyleAttr: Int
+) : AppCompatTextView(context, attrs, defStyleAttr) {
 
   @IntDef(XS, SM, BASE, LG, XL, XXL)
 

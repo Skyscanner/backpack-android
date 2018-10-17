@@ -7,7 +7,8 @@ import net.skyscanner.backpack.R
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -20,13 +21,13 @@ class BpkResources {
   @Test
   fun bpkColours() {
     val appContext = InstrumentationRegistry.getTargetContext()
-   assertEquals("#ff00b2d6", appContext.getString(R.color.bpkBlue500))
-   assertEquals("#ff00d775", appContext.getString(R.color.bpkGreen500))
-   assertEquals("#ffff5452", appContext.getString(R.color.bpkRed500))
-   assertEquals("#ffffbb00", appContext.getString(R.color.bpkYellow500))
-   assertEquals("#fffa488a", appContext.getString(R.color.bpkPink500))
-   assertEquals("#ff817b8f", appContext.getString(R.color.bpkGray500))
-   assertEquals("#ffffffff", appContext.getString(R.color.bpkWhite))
+    assertEquals("#ff00b2d6", appContext.getString(R.color.bpkBlue500))
+    assertEquals("#ff00d775", appContext.getString(R.color.bpkGreen500))
+    assertEquals("#ffff5452", appContext.getString(R.color.bpkRed500))
+    assertEquals("#ffffbb00", appContext.getString(R.color.bpkYellow500))
+    assertEquals("#fffa488a", appContext.getString(R.color.bpkPink500))
+    assertEquals("#ff817b8f", appContext.getString(R.color.bpkGray500))
+    assertEquals("#ffffffff", appContext.getString(R.color.bpkWhite))
   }
 
   @Test
@@ -39,6 +40,7 @@ class BpkResources {
     assertEquals("32.0dip", appContext.getString(R.dimen.bpkSpacingXl))
     assertEquals("40.0dip", appContext.getString(R.dimen.bpkSpacingXxl))
   }
+
   @Test
   fun bpkRadii() {
     val appContext = InstrumentationRegistry.getTargetContext()

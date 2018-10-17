@@ -10,11 +10,11 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 
-class BpkGradientsTest: BpkSnapshotTest()  {
+class BpkGradientsTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(100,100)
+    setDimensions(100, 100)
   }
 
   @Test

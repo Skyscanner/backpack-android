@@ -31,5 +31,4 @@ open class ComponentDetailFragment : Fragment() {
      */
     val ARG_ITEM_ID = "item_id"
   }
-
 }

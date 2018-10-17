@@ -8,7 +8,6 @@ import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import net.skyscanner.backpack.demo.R
 
-
 open class BpkSnapshotTest {
 
   private var height = 100

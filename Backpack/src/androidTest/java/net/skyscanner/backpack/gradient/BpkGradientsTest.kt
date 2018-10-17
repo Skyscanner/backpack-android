@@ -12,7 +12,6 @@ import android.support.v4.content.ContextCompat
 import net.skyscanner.backpack.R
 import org.junit.Before
 
-
 @RunWith(AndroidJUnit4::class)
 
 class BpkGradientsTest {
@@ -56,5 +55,4 @@ class BpkGradientsTest {
       assertEquals(ContextCompat.getColor(testContext, R.color.bpkPrimaryGradientLight), gradient.colors[1])
     }
   }
-
 }

@@ -1,6 +1,5 @@
 package net.skyscanner.backpack.card
 
-
 import android.support.test.runner.AndroidJUnit4
 import android.widget.TextView
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -45,7 +44,6 @@ class BpkCardTest : BpkSnapshotTest() {
     card.padded = false
     snap(card)
   }
-
 
   @Test
   fun screenshotTestCardWithFocus() {

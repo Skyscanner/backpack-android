@@ -5,7 +5,6 @@ import android.content.res.TypedArray
 import android.graphics.drawable.GradientDrawable
 import android.support.annotation.ColorRes
 import android.support.annotation.Dimension
-import android.support.annotation.Nullable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
@@ -13,20 +12,22 @@ import android.view.Gravity
 import android.view.ViewGroup
 import net.skyscanner.backpack.R
 
-
 open class BpkBadge @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_badge) : AppCompatTextView(context, attrs, defStyleAttr) {
+  defStyleAttr: Int = R.style.Bpk_badge
+) : AppCompatTextView(context, attrs, defStyleAttr) {
 
   init {
     initialize(context, attrs, defStyleAttr)
     setup()
   }
 
-  enum class Type(internal var id: Int,
-                  @ColorRes internal var bgColor: Int,
-                  @ColorRes internal var textColor: Int) {
+  enum class Type(
+    internal var id: Int,
+    @ColorRes internal var bgColor: Int,
+    @ColorRes internal var textColor: Int
+  ) {
     /**
      * Style for badges with positive messages
      */
@@ -99,26 +100,26 @@ open class BpkBadge @JvmOverloads constructor(
 
     this.text = message
 
-    //set padding
+    // set padding
     val paddingMd = resources.getDimension(R.dimen.bpkSpacingMd).toInt()
     val paddingSm = resources.getDimension(R.dimen.bpkSpacingSm).toInt()
     this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
 
-    //set Text color
-    this.setTextColor(ContextCompat.getColor(context,type.textColor))
+    // set Text color
+    this.setTextColor(ContextCompat.getColor(context, type.textColor))
 
     // Set background color
     val border = GradientDrawable()
-    border.setColor(ContextCompat.getColor(context,type.bgColor))
+    border.setColor(ContextCompat.getColor(context, type.bgColor))
 
-    //Set border
+    // Set border
     if (type == Type.Outline) {
-      border.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), ContextCompat.getColor(context,R.color.bpkWhite))
-      //set alpha for border
-      border.setColor(ContextCompat.getColor(context,type.bgColor) and 0x32ffffff)
+      border.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), ContextCompat.getColor(context, R.color.bpkWhite))
+      // set alpha for border
+      border.setColor(ContextCompat.getColor(context, type.bgColor) and 0x32ffffff)
     }
 
-    //set corner radius
+    // set corner radius
     @Dimension
     val cornerRadius = context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
 
@@ -136,6 +137,4 @@ open class BpkBadge @JvmOverloads constructor(
     // make sure is center aligned
     includeFontPadding = false
   }
-
-
 }

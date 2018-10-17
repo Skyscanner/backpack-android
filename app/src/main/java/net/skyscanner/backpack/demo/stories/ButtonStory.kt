@@ -10,7 +10,7 @@ class ButtonStory : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     val type = arguments?.getString(ButtonStory.TYPE) ?: savedInstanceState?.getString(ButtonStory.TYPE)
 
-    val buttonType =  when(type){
+    val buttonType = when (type) {
       "primary" -> BpkButton.Type.Primary
       "secondary" -> BpkButton.Type.Secondary
       "destructive" -> BpkButton.Type.Destructive
@@ -30,9 +30,9 @@ class ButtonStory : Story() {
 
   companion object {
     const val LAYOUT_ID = "fragment_id"
-    const val TYPE= "type"
+    const val TYPE = "type"
 
-    fun of(fragmentLayout: Int,type: String) = ButtonStory().apply {
+    fun of(fragmentLayout: Int, type: String) = ButtonStory().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
       arguments?.putString(TYPE, type)

@@ -12,7 +12,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(32,96)
+    setDimensions(32, 96)
   }
 
   @Test

@@ -123,7 +123,7 @@ open class BpkButton @JvmOverloads constructor(
 
   private fun setup() {
     this.isClickable = isEnabled
-    //enforce null text for icon only
+    // enforce null text for icon only
     if (iconPosition == ICON_ONLY) {
       text = null
     }

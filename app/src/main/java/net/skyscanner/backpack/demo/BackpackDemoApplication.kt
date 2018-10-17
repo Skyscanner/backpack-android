@@ -10,7 +10,7 @@ import com.facebook.stetho.Stetho
 class BackpackDemoApplication : MultiDexApplication() {
   override fun onCreate() {
     super.onCreate()
-    Stetho.initializeWithDefaults(this);
+    Stetho.initializeWithDefaults(this)
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
   }
 }
