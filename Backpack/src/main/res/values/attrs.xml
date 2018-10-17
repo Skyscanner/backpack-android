@@ -50,4 +50,13 @@
     <attr name="focused" format="boolean" />
     <attr name="padded" format="boolean" />
   </declare-styleable>
+
+  <declare-styleable name="BpkSpinner">
+    <attr name="small" format="boolean" />
+    <attr name="type" format="enum">
+      <enum name="primary" value="0"/>
+      <enum name="light" value="1" />
+      <enum name="dark" value="2" />
+    </attr>
+  </declare-styleable>
 </resources>
