@@ -8,15 +8,15 @@ import android.view.Gravity
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.text.BpkText
 
 open class BpkBadge @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.style.Bpk_badge
-) : AppCompatTextView(context, attrs, defStyleAttr) {
+) : BpkText(context, attrs, defStyleAttr) {
 
   init {
     initialize(context, attrs, defStyleAttr)

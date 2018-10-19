@@ -50,8 +50,7 @@ open class BpkText(
     LG to Pair(R.style.bpkTextLgEmphasized, R.style.bpkTextLg),
     XL to Pair(R.style.bpkTextXlEmphasized, R.style.bpkTextXl),
     XXL to Pair(R.style.bpkTextXxlEmphasized, R.style.bpkTextXxl),
-    XXXL to Pair(R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxl),
-    CAPS to Pair(R.style.bpkTextCapsEmphasized, R.style.bpkTextCaps)
+    XXXL to Pair(R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxl)
   )
 
   constructor(context: Context) : this(context, null)
@@ -78,10 +77,9 @@ open class BpkText(
   private fun setup() {
 
     val styleProps = styleMapping[textStyle]
-    setLineSpacing(0.0f, 1.13f)
 
     if (textStyle == CAPS) {
-      setAllCaps(true)
+      isAllCaps = true
     }
 
     if (styleProps != null) {
