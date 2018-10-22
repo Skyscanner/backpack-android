@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/App.Story"
+  tools:ignore="HardcodedText">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingSm"
+      app:textStyle="sm"
+      android:text="Primary (Default)"/>
+
+    <net.skyscanner.backpack.spinner.BpkSpinner
+      android:id="@+id/primary_spinner"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingSm"
+      app:textStyle="sm"
+      android:text="Dark"/>
+
+    <net.skyscanner.backpack.spinner.BpkSpinner
+      android:id="@+id/dark_spinner"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:type="dark"
+      android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingSm"
+      app:textStyle="sm"
+      android:text="Light"/>
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="@dimen/bpkSpacingBase"
+      android:background="@color/bpkGray900">
+
+      <net.skyscanner.backpack.spinner.BpkSpinner
+        android:id="@+id/light_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:type="light" />
+
+    </FrameLayout>
+  </LinearLayout>
+</RelativeLayout>

@@ -16,11 +16,13 @@ object ComponentRegistry {
     "Panel" to { Story.of(R.layout.fragment_panel) },
     "Badge" to { Story.of(R.layout.fragment_badge) },
     "Text" to { Story.of(R.layout.fragment_text) },
-    "Button Primary" to { ButtonStory.of(R.layout.fragment_button, "primary") },
-    "Button Secondary" to { ButtonStory.of(R.layout.fragment_button, "secondary") },
-    "Button Destructive" to { ButtonStory.of(R.layout.fragment_button, "destructive") },
-    "Button Featured" to { ButtonStory.of(R.layout.fragment_button, "featured") },
-    "Card" to { Story.of(R.layout.fragment_card) }
+    "Button - Primary" to { ButtonStory.of(R.layout.fragment_button, "primary") },
+    "Button - Secondary" to { ButtonStory.of(R.layout.fragment_button, "secondary") },
+    "Button - Destructive" to { ButtonStory.of(R.layout.fragment_button, "destructive") },
+    "Button - Featured" to { ButtonStory.of(R.layout.fragment_button, "featured") },
+    "Card" to { Story.of(R.layout.fragment_card) },
+    "Spinner - Default" to { Story.of(R.layout.fragment_spinner) },
+    "Spinner - Small" to { Story.of(R.layout.fragment_spinner_small) }
   )
 
   val TOKENS by lazy { TOKENS_MAP.keys.toList() }
