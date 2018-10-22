@@ -1,7 +1,7 @@
 package net.skyscanner.backpack.panel
 
-import android.support.test.runner.AndroidJUnit4
 import android.widget.TextView
+import androidx.test.runner.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
 import org.junit.Test
