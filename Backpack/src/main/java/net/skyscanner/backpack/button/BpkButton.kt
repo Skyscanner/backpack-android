@@ -93,7 +93,6 @@ open class BpkButton @JvmOverloads constructor(
       attr.recycle()
     }
     setup()
-
   }
 
   /**
@@ -139,7 +138,6 @@ open class BpkButton @JvmOverloads constructor(
     if (!text.isNullOrEmpty()) {
       compoundDrawablePadding = paddingWithIcon / 2
     }
-    setLineSpacing(0.0f, 1.13f)
 
     this.background = if (this.isEnabled) {
       getSelectorDrawable(
