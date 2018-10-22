@@ -30,6 +30,7 @@ repositories {
 * [Text](docs/Text/README.md)
 * [Button](docs/Button/README.md)
 * [Card](docs/Card/README.md)
+* [Spinner](docs/Spinner/README.md)
 
 ## Usage
 

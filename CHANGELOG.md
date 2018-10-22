@@ -5,11 +5,13 @@
 # 0.5.0
 
 Introducing BpkSpinner component. See usage in [README.md](docs/Spinner/README.md).
+
 Update build tools to 28.0.3.
 
 # 0.4.0
 
 Bump kotlin version to 1.2.71
+
 New component BpkCardView
 
 # 0.3.1
