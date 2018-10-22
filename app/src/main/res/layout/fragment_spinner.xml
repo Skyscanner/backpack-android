@@ -5,7 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   style="@style/App.Story"
   tools:ignore="HardcodedText">
-  <LinearLayout
+  <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -57,5 +57,5 @@
         app:type="light" />
 
     </FrameLayout>
-  </LinearLayout>
+  </androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>
