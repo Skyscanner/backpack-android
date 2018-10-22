@@ -2,10 +2,10 @@ package net.skyscanner.backpack.text
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.support.annotation.IntDef
-import android.support.v4.widget.TextViewCompat
-import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
+import androidx.annotation.IntDef
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 
 open class BpkText(

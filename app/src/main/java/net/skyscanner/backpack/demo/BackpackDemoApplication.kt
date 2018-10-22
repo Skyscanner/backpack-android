@@ -1,7 +1,7 @@
 package net.skyscanner.backpack.demo
 
-import android.support.multidex.MultiDexApplication
-import android.support.v7.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.multidex.MultiDexApplication
 import com.facebook.stetho.Stetho
 
 /**

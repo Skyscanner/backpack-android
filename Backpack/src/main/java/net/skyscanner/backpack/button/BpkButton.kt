@@ -9,16 +9,16 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
 import android.os.Build
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.annotation.IntDef
-import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
-import android.support.v4.widget.TextViewCompat
-import android.support.v7.content.res.AppCompatResources
-import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
 import android.view.Gravity
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.IntDef
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 
 open class BpkButton @JvmOverloads constructor(

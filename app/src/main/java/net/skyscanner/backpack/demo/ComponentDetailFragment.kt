@@ -1,7 +1,7 @@
 package net.skyscanner.backpack.demo
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 
 /**
  * A fragment representing a single Component detail screen.

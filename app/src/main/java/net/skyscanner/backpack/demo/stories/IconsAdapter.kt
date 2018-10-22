@@ -1,11 +1,11 @@
 package net.skyscanner.backpack.demo.stories
 
 import android.graphics.drawable.Drawable
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.IconsAdapter.ViewHolder
 

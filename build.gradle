@@ -60,4 +60,5 @@ ext {
   supportLibVersion = "27.1.1"
   googlePlayServicesVersion = "15.0.1"
   androidMapsUtilsVersion = "0.5+"
+  androidx = "1.0.0"
 }

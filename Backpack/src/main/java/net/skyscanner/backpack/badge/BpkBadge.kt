@@ -3,13 +3,13 @@ package net.skyscanner.backpack.badge
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.GradientDrawable
-import android.support.annotation.ColorRes
-import android.support.annotation.Dimension
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
+import androidx.annotation.Dimension
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 
 open class BpkBadge @JvmOverloads constructor(

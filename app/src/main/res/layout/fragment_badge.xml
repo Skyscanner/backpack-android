@@ -15,7 +15,7 @@
       app:textStyle="sm"
       android:text="Success"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:padding="@dimen/bpkSpacingSm"
@@ -61,7 +61,7 @@
         app:layout_constraintStart_toEndOf="@+id/success_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:message="Pears"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
       app:textStyle="sm"
       android:text="Warning"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:padding="@dimen/bpkSpacingSm"
@@ -115,7 +115,7 @@
         app:layout_constraintStart_toEndOf="@+id/warning_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:message="Pears"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
@@ -123,7 +123,7 @@
       app:textStyle="sm"
       android:text="Destructive"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:padding="@dimen/bpkSpacingSm"
@@ -169,7 +169,7 @@
         app:layout_constraintStart_toEndOf="@+id/destructive_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:message="Pears"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
@@ -177,7 +177,7 @@
       app:textStyle="sm"
       android:text="Light"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/bpkGray700"
@@ -224,7 +224,7 @@
         app:layout_constraintStart_toEndOf="@+id/light_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:message="Pears"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
@@ -232,7 +232,7 @@
       app:textStyle="sm"
       android:text="Inverse"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/bpkGray700"
@@ -279,7 +279,7 @@
         app:layout_constraintStart_toEndOf="@+id/inverse_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:message="Pears"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
@@ -287,7 +287,7 @@
       app:textStyle="sm"
       android:text="Outline"/>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@color/bpkGray700"
@@ -334,7 +334,7 @@
         app:layout_constraintStart_toEndOf="@+id/outline_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:message="Pears"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
   </LinearLayout>
 </RelativeLayout>

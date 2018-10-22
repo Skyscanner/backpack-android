@@ -1,11 +1,11 @@
 package net.skyscanner.backpack.panel
 
 import android.content.Context
-import android.support.annotation.Dimension
-import android.support.annotation.Nullable
-import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.widget.LinearLayoutCompat
 import android.util.AttributeSet
+import androidx.annotation.Dimension
+import androidx.annotation.Nullable
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.R
 
 open class BpkPanel(
