@@ -1,16 +1,9 @@
 package net.skyscanner.backpack.spinner
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
-import android.os.Parcel
-import android.os.Parcelable
 import android.support.annotation.ColorInt
 import android.support.v4.content.res.ResourcesCompat
-import android.support.v4.graphics.drawable.DrawableCompat
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.FrameLayout

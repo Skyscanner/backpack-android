@@ -2,17 +2,26 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 0.5.0
+
+Introducing BpkSpinner component. See usage in [README.md](docs/Spinner/README.md).
+Update build tools to 28.0.3.
+
 # 0.4.0
-- Bump kotlin version to 1.2.71
-- New component BpkCardView
+
+Bump kotlin version to 1.2.71
+New component BpkCardView
 
 # 0.3.1
+
 Fixes a bug to set button state from code 
 
 # 0.3.0
+
 Change button API to accept `icon` and `iconPosition`.
 
 # 0.2.4
+
 Adds backpack icons to resources
 
 ## 0.2.3
