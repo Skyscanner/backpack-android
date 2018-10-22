@@ -70,6 +70,8 @@ script:
   - npm run build
   - ./scripts/check-pristine-state package-lock.json sd.img
   - 'if [[ -n "$TRAVIS_TAG" ]]; then ./scripts/build-docs-ci $TRAVIS_TAG; fi'
+  # Run linters
+  - ./gradlew check
   # Run espresso tests in the Backpack module ( this excludes snapshot tests)
   - ./gradlew Backpack:connectedCheck
   # Run all unit tests
