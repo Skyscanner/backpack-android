@@ -1,9 +1,9 @@
 package net.skyscanner.backpack
 
 import android.content.Context
-import android.support.test.InstrumentationRegistry
 import android.view.ContextThemeWrapper
 import android.view.View
+import androidx.test.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import net.skyscanner.backpack.demo.R

@@ -22,7 +22,7 @@ android {
 
     vectorDrawables.useSupportLibrary = true
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 }
 
