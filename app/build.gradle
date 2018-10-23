@@ -42,11 +42,11 @@ android {
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-  implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
-  implementation "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
-  implementation "com.android.support:cardview-v7:$rootProject.ext.supportLibVersion"
-  implementation "com.android.support:design:$rootProject.ext.supportLibVersion"
+  implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
+  implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidx"
+  implementation "com.google.android.material:material:$rootProject.ext.androidx"
   implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
   testImplementation 'junit:junit:4.12'
   implementation 'com.facebook.stetho:stetho:1.5.0'
   androidTestImplementation 'com.android.support.test:runner:1.0.1'

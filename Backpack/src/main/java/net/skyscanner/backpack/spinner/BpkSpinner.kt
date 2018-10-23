@@ -2,14 +2,13 @@ package net.skyscanner.backpack.spinner
 
 import android.content.Context
 import android.graphics.PorterDuff
-import android.support.annotation.ColorInt
-import android.support.v4.content.res.ResourcesCompat
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
+import androidx.annotation.ColorInt
+import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.R
-import kotlin.jvm.JvmOverloads
 
 /**
  * BpkSpinner is designed to indicate that a part of the product is loading or performing a task

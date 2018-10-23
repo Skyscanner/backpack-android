@@ -9,21 +9,21 @@
               tools:context=".ComponentDetailActivity"
               tools:ignore="MergeRootFrame">
 
-  <android.support.design.widget.AppBarLayout
+  <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/app_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
       android:id="@+id/detail_toolbar"
       android:layout_width="match_parent"
       android:layout_height="?attr/actionBarSize"
       app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-  </android.support.design.widget.AppBarLayout>
+  </com.google.android.material.appbar.AppBarLayout>
 
-  <android.support.v4.widget.NestedScrollView
+  <androidx.core.widget.NestedScrollView
     android:id="@+id/component_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>

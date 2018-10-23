@@ -3,12 +3,12 @@ package net.skyscanner.backpack.gradient
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
-import android.support.test.runner.AndroidJUnit4
+import androidx.core.content.ContextCompat
+import androidx.test.InstrumentationRegistry
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
-import android.support.test.InstrumentationRegistry
-import android.support.v4.content.ContextCompat
+import androidx.test.runner.AndroidJUnit4
 import net.skyscanner.backpack.R
 import org.junit.Before
 

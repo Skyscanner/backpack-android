@@ -22,16 +22,15 @@ android {
 
     vectorDrawables.useSupportLibrary = true
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
-
 }
 
 dependencies {
-  implementation "com.android.support:support-annotations:$rootProject.ext.supportLibVersion"
+  implementation "androidx.annotation:annotation:$rootProject.ext.androidx"
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-  implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibVersion"
-  implementation "com.android.support:cardview-v7:$rootProject.ext.supportLibVersion"
+  implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
+  implementation "androidx.cardview:cardview:$rootProject.ext.androidx"
   androidTestImplementation 'com.android.support.test:runner:1.0.2'
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
   testImplementation 'junit:junit:4.12'

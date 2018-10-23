@@ -1,9 +1,9 @@
 package net.skyscanner.backpack.card
 
 import android.content.Context
-import android.support.annotation.Dimension
-import android.support.v7.widget.CardView
 import android.util.AttributeSet
+import androidx.annotation.Dimension
+import androidx.cardview.widget.CardView
 import net.skyscanner.backpack.R
 
 open class BpkCardView @JvmOverloads constructor(

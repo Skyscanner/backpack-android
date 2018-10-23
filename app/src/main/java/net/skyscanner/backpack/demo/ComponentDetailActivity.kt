@@ -1,9 +1,9 @@
 package net.skyscanner.backpack.demo
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 
 /**
@@ -48,7 +48,7 @@ class ComponentDetailActivity : AppCompatActivity() {
 
           fragment?.arguments = arguments
           supportFragmentManager.beginTransaction()
-                  .add(R.id.component_detail_container, fragment)
+                  .add(R.id.component_detail_container, fragment!!)
                   .commit()
         }
     }

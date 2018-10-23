@@ -2,7 +2,7 @@ package net.skyscanner.backpack.gradient
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 
 /**
