@@ -2,6 +2,18 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 0.6.0
+
+Added new icons:
+
+- bpk_call_back
+- bpk_end_call
+- bpk_keypad
+- bpk_mute
+- bpk_phone_call
+- bpk_send_message
+- bpk_unmute
+
 # 0.5.0
 
 Introducing BpkSpinner component. See usage in [README.md](docs/Spinner/README.md).
