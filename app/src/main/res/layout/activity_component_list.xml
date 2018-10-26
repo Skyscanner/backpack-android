@@ -21,30 +21,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_marginStart="@dimen/bpkSpacingLg">
-
-        <net.skyscanner.backpack.text.BpkText
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Tokens"
-          android:layout_marginTop="@dimen/bpkSpacingLg"
-          app:textStyle="lg"
-          app:emphasize="true" />
-        <include layout="@layout/component_list" android:id="@+id/tokensList" />
-
-        <net.skyscanner.backpack.text.BpkText
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="Components"
-          android:layout_marginTop="@dimen/bpkSpacingLg"
-          app:textStyle="lg"
-          app:emphasize="true" />
-        <include layout="@layout/component_list" android:id="@+id/componentsList" />
-    </LinearLayout>
+    <include
+      layout="@layout/component_list"
+      android:id="@+id/componentsList"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

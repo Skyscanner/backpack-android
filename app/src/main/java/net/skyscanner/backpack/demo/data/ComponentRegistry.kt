@@ -6,6 +6,10 @@ import net.skyscanner.backpack.demo.stories.ButtonStory
 import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.Story
 
+interface RegistryItem {
+  fun getType()
+}
+
 /**
  * Helper class to register the fragments for components
  */

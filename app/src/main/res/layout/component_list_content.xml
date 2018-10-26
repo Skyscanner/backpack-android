@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
 
-    <net.skyscanner.backpack.text.BpkText
-      android:id="@+id/component_name"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/bpkSpacingMd"
-      android:layout_marginTop="@dimen/bpkSpacingMd"
-      android:textAppearance="?attr/textAppearanceListItem" />
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/component_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/bpkSpacingBase"
+    android:paddingTop="@dimen/bpkSpacingBase"
+    android:paddingStart="@dimen/bpkSpacingLg"
+    android:paddingEnd="@dimen/bpkSpacingLg"
+    android:background="?android:attr/selectableItemBackground"
+    app:textStyle="lg" />
+
+  <View
+    android:id="@+id/component_divider"
+    android:layout_width="fill_parent"
+    android:layout_height="1dip"
+    android:layout_marginStart="@dimen/bpkSpacingLg"
+    android:layout_marginEnd="@dimen/bpkSpacingLg"
+    android:background="@color/bpkGray100" />
 
 </LinearLayout>
