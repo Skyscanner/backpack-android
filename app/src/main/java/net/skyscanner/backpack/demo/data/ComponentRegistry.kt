@@ -1,13 +1,62 @@
 package net.skyscanner.backpack.demo.data
 
-import net.skyscanner.backpack.demo.ComponentDetailFragment
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.ButtonStory
 import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.Story
+import net.skyscanner.backpack.demo.stories.SubStory
+import java.lang.IllegalArgumentException
 
 interface RegistryItem {
-  fun getType()
+  val name: String
+  fun getParent(): RegistryItem?
+  fun setParent(parent: RegistryItem)
+  fun createStory(): Story
+  fun getFullyQualifiedName(): String
+}
+
+class NodeItem(
+  override val name: String,
+  private val creator: (items: Array<String>) -> Story,
+  items: Map<String, RegistryItem> = emptyMap()
+) : RegistryItem {
+
+  private var parent: RegistryItem? = null
+  val subItems = items.mapValues {
+    it.value.setParent(this)
+    it.value
+  }
+
+  override fun createStory() = creator(subItems.map { it.value.getFullyQualifiedName() }.toTypedArray())
+
+  override fun getParent() = parent
+  override fun setParent(newParent: RegistryItem) {
+    parent = newParent
+  }
+
+  override fun getFullyQualifiedName(): String {
+    var parent = this.parent
+    var fullName = this.name
+
+    while (parent != null) {
+      fullName = "${parent.name} - $name"
+      parent = parent.getParent()
+    }
+
+    return fullName
+  }
+}
+
+private class NodeData(
+  val creator: (items: Array<String>) -> Story,
+  val items: Map<String, RegistryItem> = emptyMap()
+) {
+
+  constructor(creator: () -> Story): this({ _ -> creator() })
+}
+
+private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
+  return Pair(this, NodeItem(this, story.creator, story.items))
 }
 
 /**
@@ -15,32 +64,55 @@ interface RegistryItem {
  */
 object ComponentRegistry {
 
-  val COMPONENTS by lazy { COMPONENT_MAP.keys.toList() }
-  private val COMPONENT_MAP = mapOf(
-    "Panel" to { Story.of(R.layout.fragment_panel) },
-    "Badge" to { Story.of(R.layout.fragment_badge) },
-    "Text" to { Story.of(R.layout.fragment_text) },
-    "Button - Primary" to { ButtonStory.of(R.layout.fragment_button, "primary") },
-    "Button - Secondary" to { ButtonStory.of(R.layout.fragment_button, "secondary") },
-    "Button - Destructive" to { ButtonStory.of(R.layout.fragment_button, "destructive") },
-    "Button - Featured" to { ButtonStory.of(R.layout.fragment_button, "featured") },
-    "Card" to { Story.of(R.layout.fragment_card) },
-    "Spinner - Default" to { Story.of(R.layout.fragment_spinner) },
-    "Spinner - Small" to { Story.of(R.layout.fragment_spinner_small) },
-    "Switch" to { Story.of(R.layout.fragment_switch) }
+  private val COMPONENTS_TREE = mapOf(
+    "Panel" story NodeData { Story.of(R.layout.fragment_panel) },
+    "Badge" story NodeData { Story.of(R.layout.fragment_badge) },
+    "Text" story NodeData { Story.of(R.layout.fragment_text) },
+    "Button" story NodeData({ children -> SubStory.of(children) },
+      mapOf(
+        "Primary" story NodeData { ButtonStory.of(R.layout.fragment_button, "primary") },
+        "Secondary" story NodeData { ButtonStory.of(R.layout.fragment_button, "secondary") },
+        "Destructive" story NodeData { ButtonStory.of(R.layout.fragment_button, "destructive") },
+        "Featured" story NodeData { ButtonStory.of(R.layout.fragment_button, "featured") }
+      )),
+    "Card" story NodeData { Story.of(R.layout.fragment_card) },
+    "Spinner" story NodeData({ children -> SubStory.of(children) },
+      mapOf(
+        "Default" story NodeData { Story.of(R.layout.fragment_spinner) },
+        "Small" story NodeData { Story.of(R.layout.fragment_spinner_small) }
+      ))
   )
+
+  val COMPONENTS by lazy { COMPONENTS_TREE.map { it.value.name } }
 
   val TOKENS by lazy { TOKENS_MAP.keys.toList() }
   private val TOKENS_MAP = mapOf(
-    "Radii" to { Story.of(R.layout.fragment_radii) },
-    "Icons" to { Story.of(R.layout.fragment_icons) },
-    "All Icons" to { IconsStory() }
+    "Radii" story NodeData { Story.of(R.layout.fragment_radii) },
+    "Icons" story NodeData { Story.of(R.layout.fragment_icons) },
+    "All Icons" story NodeData { IconsStory() }
   )
 
-  val ALL by lazy {
-    val all = mutableMapOf<String, () -> ComponentDetailFragment>()
-    all.putAll(TOKENS_MAP)
-    all.putAll(COMPONENT_MAP)
-    all
+  fun getStoryCreator(fullyQualifiedName: String): RegistryItem {
+    val parts = fullyQualifiedName.split(" - ")
+    val first = parts[0]
+    val rest = parts.drop(1)
+
+    val token = TOKENS_MAP[fullyQualifiedName]
+    if (token != null) {
+      return token
+    }
+
+    return rest.fold(COMPONENTS_TREE[first]!!, { result, item ->
+      return if (result is NodeItem) {
+        result.subItems[item]
+          ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
+      } else {
+        result
+      }
+    })
+  }
+
+  fun getStoryName(fullyQualifiedName: String): String {
+    return fullyQualifiedName.split(" - ").last()
   }
 }

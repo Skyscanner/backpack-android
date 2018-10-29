@@ -9,12 +9,11 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import net.skyscanner.backpack.demo.ComponentDetailFragment
 import net.skyscanner.backpack.demo.R
 
 private const val PLATFORM_VD_CLAZZ = "android.graphics.drawable.VectorDrawable"
 
-class IconsStory : ComponentDetailFragment() {
+class IconsStory : Story() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
       return inflater.inflate(R.layout.fragment_all_icons, container, false)
