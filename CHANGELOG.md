@@ -2,6 +2,10 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 0.7.0
+
+- Indroducing the BpkSwitch component. See usage in [README.md](docs/Switch/README.md).
+
 # 0.6.0
 
 Added new icons:

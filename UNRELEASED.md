@@ -1,5 +1,3 @@
 # Unreleased
 
-**Added:**
-
-- Indroducing the BpkSwitch component.
+__Nothing yet__
