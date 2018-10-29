@@ -2,10 +2,10 @@ package net.skyscanner.backpack.spinner
 
 import android.content.Context
 import android.widget.ProgressBar
-import androidx.core.content.res.ResourcesCompat
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.ResourcesUtil.getColor
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -27,19 +27,19 @@ class BpkSpinnerTest {
   fun test_default() {
     Assert.assertFalse(subject.small)
     Assert.assertEquals(BpkSpinner.Type.PRIMARY, subject.type)
-    Assert.assertEquals(getColor(R.color.bpkBlue500), subject.getColor())
+    Assert.assertEquals(getColor(subject, R.color.bpkBlue500), subject.getColor())
   }
 
   @Test
   fun test_light() {
     subject.type = BpkSpinner.Type.LIGHT
-    Assert.assertEquals(getColor(R.color.bpkWhite), subject.getColor())
+    Assert.assertEquals(getColor(subject, R.color.bpkWhite), subject.getColor())
   }
 
   @Test
   fun test_dark() {
     subject.type = BpkSpinner.Type.DARK
-    Assert.assertEquals(getColor(R.color.bpkGray700), subject.getColor())
+    Assert.assertEquals(getColor(subject, R.color.bpkGray700), subject.getColor())
   }
 
   @Test
@@ -50,8 +50,4 @@ class BpkSpinnerTest {
   }
 
   private fun progressBar() = subject.getChildAt(0) as ProgressBar
-
-  private fun getColor(color: Int): Int {
-    return ResourcesCompat.getColor(context.resources, color, context.theme)
-  }
 }

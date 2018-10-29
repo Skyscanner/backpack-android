@@ -22,7 +22,8 @@ object ComponentRegistry {
     "Button - Featured" to { ButtonStory.of(R.layout.fragment_button, "featured") },
     "Card" to { Story.of(R.layout.fragment_card) },
     "Spinner - Default" to { Story.of(R.layout.fragment_spinner) },
-    "Spinner - Small" to { Story.of(R.layout.fragment_spinner_small) }
+    "Spinner - Small" to { Story.of(R.layout.fragment_spinner_small) },
+    "Switch" to { Story.of(R.layout.fragment_switch) }
   )
 
   val TOKENS by lazy { TOKENS_MAP.keys.toList() }
