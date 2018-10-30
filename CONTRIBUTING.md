@@ -70,6 +70,11 @@ To run connected tests run
 ./gradlew Backpack:connectedCheck
 ```
 
+## Demo app shortcuts
+
+- `Shift + D` : Toggle story view between RTL and LTR
+- `Shift + T` : Hide the toolbar
+
 ## Code Style
 Code style is ensured by [ktlint](https://github.com/shyiko/ktlint). It runs automatically during the `check` phase but can also be executed by running `gradlew ktlint`.
 
