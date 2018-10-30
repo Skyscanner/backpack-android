@@ -1,10 +1,11 @@
 package net.skyscanner.backpack.demo
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import kotlinx.android.synthetic.main.activity_component_detail.*
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 
 /**
@@ -18,12 +19,8 @@ class ComponentDetailActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_component_detail)
-    val toolbar = findViewById<View>(R.id.detail_toolbar) as Toolbar
-    setSupportActionBar(toolbar)
-
-    // Show the Up button in the action bar.
-    val actionBar = supportActionBar
-    actionBar?.setDisplayHomeAsUpEnabled(true)
+    setSupportActionBar(detail_toolbar)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     // savedInstanceState is non-null when there is fragment state
     // saved from previous configurations of this activity
@@ -38,15 +35,15 @@ class ComponentDetailActivity : AppCompatActivity() {
       // Create the detail fragment and add it to the activity
       // using a fragment transaction.
       val itemId = intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)
-      toolbar.title = itemId
+      detail_toolbar.title = itemId
 
       val createFragment = ComponentRegistry.getStoryCreator(itemId)
-      var fragment = createFragment?.createStory()
+      val fragment = createFragment.createStory()
 
-      val arguments = fragment?.arguments ?: Bundle()
+      val arguments = fragment.arguments ?: Bundle()
       arguments.putString(ComponentDetailFragment.ARG_ITEM_ID, itemId)
 
-      fragment?.arguments = arguments
+      fragment.arguments = arguments
       supportFragmentManager.beginTransaction()
         .add(R.id.component_detail_container, fragment!!)
         .commit()
@@ -58,5 +55,26 @@ class ComponentDetailActivity : AppCompatActivity() {
       android.R.id.home -> this.onBackPressed()
     }
     return true
+  }
+  /*
+   Hide/Un-hide toolbar: Shift + T
+   toggle layout direction: Shift + D
+  */
+  override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+    if (keyCode == KeyEvent.KEYCODE_T && event?.isShiftPressed == true) {
+      detail_toolbar.visibility = if (detail_toolbar.visibility == View.VISIBLE) {
+        View.GONE
+      } else {
+        View.VISIBLE
+      }
+    }
+    if (keyCode == KeyEvent.KEYCODE_D && event?.isShiftPressed == true) {
+      if (component_detail_container.layoutDirection == View.LAYOUT_DIRECTION_LTR) {
+        component_detail_container.layoutDirection = View.LAYOUT_DIRECTION_RTL
+      } else {
+        component_detail_container.layoutDirection = View.LAYOUT_DIRECTION_LTR
+      }
+    }
+    return super.onKeyUp(keyCode, event)
   }
 }
