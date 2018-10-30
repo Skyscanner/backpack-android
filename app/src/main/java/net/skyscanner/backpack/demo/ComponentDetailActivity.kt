@@ -38,12 +38,12 @@ class ComponentDetailActivity : AppCompatActivity() {
       detail_toolbar.title = itemId
 
       val createFragment = ComponentRegistry.getStoryCreator(itemId)
-      val fragment = createFragment?.createStory()
+      val fragment = createFragment.createStory()
 
-      val arguments = fragment?.arguments ?: Bundle()
+      val arguments = fragment.arguments ?: Bundle()
       arguments.putString(ComponentDetailFragment.ARG_ITEM_ID, itemId)
 
-      fragment?.arguments = arguments
+      fragment.arguments = arguments
       supportFragmentManager.beginTransaction()
         .add(R.id.component_detail_container, fragment!!)
         .commit()
@@ -56,20 +56,19 @@ class ComponentDetailActivity : AppCompatActivity() {
     }
     return true
   }
+  /*
+   Hide/Un-hide toolbar: Shift + T
+   toggle layout direction: Shift + D
+  */
   override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
-    /*
-      Hide/Un-hide toolbar: Shift + T
-      toggle layout direction: Shift + D
-     */
-
-    if (keyCode == KeyEvent.KEYCODE_T && event!!.isShiftPressed) {
+    if (keyCode == KeyEvent.KEYCODE_T && event?.isShiftPressed == true) {
       detail_toolbar.visibility = if (detail_toolbar.visibility == View.VISIBLE) {
         View.GONE
       } else {
         View.VISIBLE
       }
     }
-    if (keyCode == KeyEvent.KEYCODE_D && event!!.isShiftPressed) {
+    if (keyCode == KeyEvent.KEYCODE_D && event?.isShiftPressed == true) {
       if (component_detail_container.layoutDirection == View.LAYOUT_DIRECTION_LTR) {
         component_detail_container.layoutDirection = View.LAYOUT_DIRECTION_RTL
       } else {
