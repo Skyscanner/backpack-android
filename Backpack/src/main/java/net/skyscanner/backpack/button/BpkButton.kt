@@ -166,7 +166,7 @@ open class BpkButton @JvmOverloads constructor(
     }
 
     icon?.setBounds(0, 0, iconSize, iconSize)
-    this.setCompoundDrawablesWithIntrinsicBounds(
+    this.setCompoundDrawablesRelativeWithIntrinsicBounds(
       if (iconPosition == START || iconPosition == ICON_ONLY) icon else null,
       null,
       if (iconPosition == END) icon else null,

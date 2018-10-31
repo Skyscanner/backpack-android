@@ -36,7 +36,7 @@ class BpkButtonTest {
       icon = trainIcon
       iconPosition = BpkButton.END
     }
-    Assert.assertEquals(button.compoundDrawables[2], trainIcon)
+    Assert.assertEquals(button.compoundDrawablesRelative[2], trainIcon)
   }
 
   @Test
@@ -46,7 +46,7 @@ class BpkButtonTest {
       icon = trainIcon
       iconPosition = BpkButton.START
     }
-    Assert.assertEquals(button.compoundDrawables[0], trainIcon)
+    Assert.assertEquals(button.compoundDrawablesRelative[0], trainIcon)
   }
 
   @Test
