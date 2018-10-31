@@ -30,7 +30,7 @@ const tokens = require('bpk-tokens/tokens/base.raw.android.json');
 
 const PATHS = {
   templates: path.join(__dirname, 'templates'),
-  outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res', 'values'),
+  outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res'),
   drawableRes: path.join(
     __dirname,
     'Backpack',
@@ -42,7 +42,16 @@ const PATHS = {
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
-const VALID_TEXT_STYLES = new Set(['xs', 'sm', 'base', 'lg', 'xl', 'xxl']);
+const VALID_TEXT_STYLES = new Set([
+  'caps',
+  'xs',
+  'sm',
+  'base',
+  'lg',
+  'xl',
+  'xxl',
+  'xxxl',
+]);
 const { FONT_FAMILY, FONT_FAMILY_EMPHASIZE } = tokens.aliases;
 const EMPHASIZED_FONT_WEIGHT = tokens.props.TEXT_EMPHASIZED_FONT_WEIGHT.value;
 
@@ -100,10 +109,14 @@ const getTextStyles = () => {
     [].concat(
       tokensWithCategory('font-sizes'),
       tokensWithCategory('font-weights'),
+      tokensWithCategory('letter-spacings'),
     ),
   )
     .groupBy(({ name }) =>
-      name.replace('_FONT_SIZE', '').replace('_FONT_WEIGHT', ''),
+      name
+        .replace('_FONT_SIZE', '')
+        .replace('_FONT_WEIGHT', '')
+        .replace('LETTER_SPACING_', 'TEXT_'),
     )
     .map((values, key) => [values, key])
     .filter(token =>
@@ -121,7 +134,10 @@ const getTextStyles = () => {
         properties,
         ({ category }) => category === 'font-weights',
       );
-
+      const letterSpacingProp = _.filter(
+        properties,
+        ({ category }) => category === 'letter-spacings',
+      );
       if (sizeProp.length !== 1 || weightProp.length !== 1) {
         throw new Error(
           'Expected all text sizes to have a weight and font size.',
@@ -132,6 +148,7 @@ const getTextStyles = () => {
         name: `bpk${pascalCase(key)}`,
         size: Number.parseInt(sizeProp[0].value, 10),
         fontFamily: fontForWeight(weightProp[0].value),
+        letterSpacing: letterSpacingProp[0].value,
       };
     })
     .flatMap(properties => [
@@ -143,7 +160,6 @@ const getTextStyles = () => {
       },
     ])
     .value();
-
   return result;
 };
 
@@ -165,7 +181,7 @@ gulp.task('template:color', () => {
         data: getColors(),
       }),
     )
-    .pipe(rename('backpack.color.xml'))
+    .pipe(rename('values/backpack.color.xml'))
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
@@ -191,7 +207,7 @@ gulp.task('template:spacing', () => {
         data: getSpacing(),
       }),
     )
-    .pipe(rename('backpack.dimensions.spacing.xml'))
+    .pipe(rename('values/backpack.dimensions.spacing.xml'))
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
@@ -203,7 +219,19 @@ gulp.task('template:text', () =>
         data: getTextStyles(),
       }),
     )
-    .pipe(rename('backpack.text.xml'))
+    .pipe(rename('values/backpack.text.xml'))
+    .pipe(gulp.dest(PATHS.outputRes)),
+);
+
+gulp.task('template:text-v21', () =>
+  gulp
+    .src(`${PATHS.templates}/BackpackTextv21.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: getTextStyles(),
+      }),
+    )
+    .pipe(rename('values-v21/backpack.text.xml'))
     .pipe(gulp.dest(PATHS.outputRes)),
 );
 gulp.task('template:radii', () => {
@@ -220,7 +248,7 @@ gulp.task('template:radii', () => {
         data: getRadii(),
       }),
     )
-    .pipe(rename('backpack.radii.xml'))
+    .pipe(rename('values/backpack.radii.xml'))
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
@@ -238,7 +266,7 @@ gulp.task('template:elevation', () => {
         data: getElevation(),
       }),
     )
-    .pipe(rename('backpack.elevation.xml'))
+    .pipe(rename('values/backpack.elevation.xml'))
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
@@ -253,6 +281,7 @@ gulp.task('default', () => {
   runSequence(
     'template:color',
     'template:text',
+    'template:text-v21',
     'template:spacing',
     'template:radii',
     'template:elevation',

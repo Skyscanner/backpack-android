@@ -75,10 +75,37 @@ class BpkTextTest : BpkSnapshotTest() {
   }
 
   @Test
+  fun screenshotTestTextXXXL() {
+    val text = BpkText(testContext)
+    text.text = "Message"
+    text.textStyle = BpkText.XXXL
+    text.emphasize = false
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextCaps() {
+    val text = BpkText(testContext)
+    text.text = "Message"
+    text.textStyle = BpkText.CAPS
+    text.emphasize = false
+    snap(text)
+  }
+
+  @Test
   fun screenshotTestTextXXLEmphasize() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XXL
+    text.emphasize = true
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextXXXLEmphasize() {
+    val text = BpkText(testContext)
+    text.text = "Message"
+    text.textStyle = BpkText.XXXL
     text.emphasize = true
     snap(text)
   }
@@ -124,6 +151,15 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XS
+    text.emphasize = true
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextCapsEmphasize() {
+    val text = BpkText(testContext)
+    text.text = "Message"
+    text.textStyle = BpkText.CAPS
     text.emphasize = true
     snap(text)
   }
