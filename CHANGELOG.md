@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 0.8.0
+
+- Type ramp changes for letter-spacing
+- Fix RTL bug for `BPKButton`
+
 # 0.7.0
 
 - Indroducing the BpkSwitch component. See usage in [README.md](docs/Switch/README.md).
