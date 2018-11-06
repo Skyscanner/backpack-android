@@ -61,7 +61,7 @@
     "run-sequence": "^2.2.1",
     "semver": "^5.5.0",
     "svg2vectordrawable": "^2.4.0",
-    "through2": "^2.0.3",
+    "through2": "^3.0.0",
     "tinycolor2": "^1.4.1"
   }
 }
