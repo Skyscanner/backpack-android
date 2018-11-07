@@ -16,4 +16,9 @@
     <item name="android:layout_height">wrap_content</item>
   </style>
 
+  <style name="Bpk.dialog.animation" parent="">
+    <item name="android:windowEnterAnimation">@anim/dialog_slide_up</item>
+    <item name="android:windowExitAnimation">@anim/dialog_slide_out_down</item>
+  </style>
+
 </resources>

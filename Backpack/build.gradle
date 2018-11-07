@@ -33,6 +33,7 @@ dependencies {
   implementation "androidx.cardview:cardview:$rootProject.ext.androidx"
   androidTestImplementation 'com.android.support.test:runner:1.0.2'
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+  androidTestImplementation 'com.android.support.test:rules:1.0.2'
   testImplementation 'junit:junit:4.12'
   // NOTE: This is here and not in the root file because snyk is not ignoring it otherwise.
   // This is a test dependency and should be ignored (as stated in snyk docs)
