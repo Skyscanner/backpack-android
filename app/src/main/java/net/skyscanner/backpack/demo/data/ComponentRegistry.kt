@@ -67,7 +67,12 @@ object ComponentRegistry {
   private val COMPONENTS_TREE = mapOf(
     "Panel" story NodeData { Story.of(R.layout.fragment_panel) },
     "Badge" story NodeData { Story.of(R.layout.fragment_badge) },
-    "Text" story NodeData { Story.of(R.layout.fragment_text) },
+    "Text" story NodeData({ children -> SubStory.of(children) },
+      mapOf(
+        "Default" story NodeData { Story.of(R.layout.fragment_text) },
+        "Emphasized" story NodeData { Story.of(R.layout.fragment_text_emphasized) },
+        "Heavy" story NodeData { Story.of(R.layout.fragment_text_heavy) }
+      )),
     "Button" story NodeData({ children -> SubStory.of(children) },
       mapOf(
         "Primary" story NodeData { ButtonStory.of(R.layout.fragment_button, "primary") },

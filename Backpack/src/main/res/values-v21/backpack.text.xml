@@ -28,20 +28,8 @@
     <item name="android:letterSpacing">-0.0125</item>
   </style>
 
-  <style name="bpkTextBaseEmphasized">
-    <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textSize">16sp</item>
-    <item name="android:letterSpacing">-0.0125</item>
-  </style>
-
   <style name="bpkTextCaps">
     <item name="android:fontFamily">sans-serif</item>
-    <item name="android:textSize">10sp</item>
-    <item name="android:letterSpacing">0.04</item>
-  </style>
-
-  <style name="bpkTextCapsEmphasized">
-    <item name="android:fontFamily">sans-serif-medium</item>
     <item name="android:textSize">10sp</item>
     <item name="android:letterSpacing">0.04</item>
   </style>
@@ -52,20 +40,8 @@
     <item name="android:letterSpacing">-0.02</item>
   </style>
 
-  <style name="bpkTextLgEmphasized">
-    <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textSize">20sp</item>
-    <item name="android:letterSpacing">-0.02</item>
-  </style>
-
   <style name="bpkTextSm">
     <item name="android:fontFamily">sans-serif</item>
-    <item name="android:textSize">14sp</item>
-    <item name="android:letterSpacing">0</item>
-  </style>
-
-  <style name="bpkTextSmEmphasized">
-    <item name="android:fontFamily">sans-serif-medium</item>
     <item name="android:textSize">14sp</item>
     <item name="android:letterSpacing">0</item>
   </style>
@@ -76,20 +52,8 @@
     <item name="android:letterSpacing">-0.024999999999999998</item>
   </style>
 
-  <style name="bpkTextXlEmphasized">
-    <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textSize">24sp</item>
-    <item name="android:letterSpacing">-0.024999999999999998</item>
-  </style>
-
   <style name="bpkTextXs">
     <item name="android:fontFamily">sans-serif</item>
-    <item name="android:textSize">12sp</item>
-    <item name="android:letterSpacing">0</item>
-  </style>
-
-  <style name="bpkTextXsEmphasized">
-    <item name="android:fontFamily">sans-serif-medium</item>
     <item name="android:textSize">12sp</item>
     <item name="android:letterSpacing">0</item>
   </style>
@@ -100,20 +64,74 @@
     <item name="android:letterSpacing">-0.027777777777777776</item>
   </style>
 
-  <style name="bpkTextXxlEmphasized">
-    <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textSize">36sp</item>
-    <item name="android:letterSpacing">-0.027777777777777776</item>
-  </style>
-
   <style name="bpkTextXxxl">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textSize">42sp</item>
     <item name="android:letterSpacing">-0.02857142857142857</item>
   </style>
 
+  <style name="bpkTextBaseEmphasized">
+    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:letterSpacing">-0.0125</item>
+  </style>
+
+  <style name="bpkTextCapsEmphasized">
+    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:textSize">10sp</item>
+    <item name="android:letterSpacing">0.04</item>
+  </style>
+
+  <style name="bpkTextLgEmphasized">
+    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:textSize">20sp</item>
+    <item name="android:letterSpacing">-0.02</item>
+  </style>
+
+  <style name="bpkTextSmEmphasized">
+    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:letterSpacing">0</item>
+  </style>
+
+  <style name="bpkTextXlEmphasized">
+    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:textSize">24sp</item>
+    <item name="android:letterSpacing">-0.024999999999999998</item>
+  </style>
+
+  <style name="bpkTextXsEmphasized">
+    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:textSize">12sp</item>
+    <item name="android:letterSpacing">0</item>
+  </style>
+
+  <style name="bpkTextXxlEmphasized">
+    <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:textSize">36sp</item>
+    <item name="android:letterSpacing">-0.027777777777777776</item>
+  </style>
+
   <style name="bpkTextXxxlEmphasized">
     <item name="android:fontFamily">sans-serif-medium</item>
+    <item name="android:textSize">42sp</item>
+    <item name="android:letterSpacing">-0.02857142857142857</item>
+  </style>
+
+  <style name="bpkTextXlHeavy">
+    <item name="android:fontFamily">sans-serif-black</item>
+    <item name="android:textSize">24sp</item>
+    <item name="android:letterSpacing">-0.024999999999999998</item>
+  </style>
+
+  <style name="bpkTextXxlHeavy">
+    <item name="android:fontFamily">sans-serif-black</item>
+    <item name="android:textSize">36sp</item>
+    <item name="android:letterSpacing">-0.027777777777777776</item>
+  </style>
+
+  <style name="bpkTextXxxlHeavy">
+    <item name="android:fontFamily">sans-serif-black</item>
     <item name="android:textSize">42sp</item>
     <item name="android:letterSpacing">-0.02857142857142857</item>
   </style>

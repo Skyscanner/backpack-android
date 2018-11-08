@@ -43,7 +43,6 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.SM
-    text.emphasize = false
     snap(text)
   }
 
@@ -52,7 +51,6 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XL
-    text.emphasize = false
     snap(text)
   }
 
@@ -61,7 +59,6 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XS
-    text.emphasize = false
     snap(text)
   }
 
@@ -70,7 +67,6 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XXL
-    text.emphasize = false
     snap(text)
   }
 
@@ -79,7 +75,6 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XXXL
-    text.emphasize = false
     snap(text)
   }
 
@@ -88,7 +83,6 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.CAPS
-    text.emphasize = false
     snap(text)
   }
 
@@ -97,7 +91,7 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XXL
-    text.emphasize = true
+    text.weight = BpkText.Weight.EMPHASIZED
     snap(text)
   }
 
@@ -106,7 +100,7 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XXXL
-    text.emphasize = true
+    text.weight = BpkText.Weight.EMPHASIZED
     snap(text)
   }
 
@@ -115,7 +109,7 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.LG
-    text.emphasize = true
+    text.weight = BpkText.Weight.EMPHASIZED
     snap(text)
   }
 
@@ -124,7 +118,7 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.BASE
-    text.emphasize = true
+    text.weight = BpkText.Weight.EMPHASIZED
     snap(text)
   }
 
@@ -133,7 +127,7 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.SM
-    text.emphasize = true
+    text.weight = BpkText.Weight.EMPHASIZED
     snap(text)
   }
 
@@ -142,7 +136,7 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XL
-    text.emphasize = true
+    text.weight = BpkText.Weight.EMPHASIZED
     snap(text)
   }
 
@@ -151,7 +145,7 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.XS
-    text.emphasize = true
+    text.weight = BpkText.Weight.EMPHASIZED
     snap(text)
   }
 
@@ -160,7 +154,34 @@ class BpkTextTest : BpkSnapshotTest() {
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.CAPS
-    text.emphasize = true
+    text.weight = BpkText.Weight.EMPHASIZED
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextXLHeavy() {
+    val text = BpkText(testContext)
+    text.text = "Message"
+    text.textStyle = BpkText.XL
+    text.weight = BpkText.Weight.HEAVY
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextXXLHeavy() {
+    val text = BpkText(testContext)
+    text.text = "Message"
+    text.textStyle = BpkText.XXL
+    text.weight = BpkText.Weight.HEAVY
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextXXXLHeavy() {
+    val text = BpkText(testContext)
+    text.text = "Message"
+    text.textStyle = BpkText.XXXL
+    text.weight = BpkText.Weight.HEAVY
     snap(text)
   }
 }

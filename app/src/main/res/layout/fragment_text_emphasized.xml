@@ -8,47 +8,55 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_flights_to_edinburgh"
+    app:weight="emphasized"
     app:textStyle="xxxl" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_flights_to_edinburgh"
+    app:weight="emphasized"
     app:textStyle="xxl" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_flights_to_edinburgh"
+    app:weight="emphasized"
     app:textStyle="xl" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_flights_to_edinburgh"
+    app:weight="emphasized"
     app:textStyle="lg" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_flights_to_edinburgh"
+    app:weight="emphasized"
     app:textStyle="base" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_flights_to_edinburgh"
+    app:weight="emphasized"
     app:textStyle="sm" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_flights_to_edinburgh"
+    app:weight="emphasized"
     app:textStyle="xs" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_flights_to_edinburgh"
+    app:weight="emphasized"
     app:textStyle="caps" />
 </LinearLayout>
