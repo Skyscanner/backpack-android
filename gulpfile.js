@@ -52,8 +52,24 @@ const VALID_TEXT_STYLES = new Set([
   'xxl',
   'xxxl',
 ]);
-const { FONT_FAMILY, FONT_FAMILY_EMPHASIZE } = tokens.aliases;
-const EMPHASIZED_FONT_WEIGHT = tokens.props.TEXT_EMPHASIZED_FONT_WEIGHT.value;
+const VALID_HEAVY_TEXT_STYLES = new Set(['xl', 'xxl', 'xxxl']);
+const {
+  FONT_FAMILY,
+  FONT_FAMILY_EMPHASIZE,
+  FONT_FAMILY_HEAVY,
+} = tokens.aliases;
+
+const FONT_WEIGHTS = {
+  normal: 'normal',
+  emphasized: 'emphasized',
+  heavy: 'heavy',
+};
+
+const fontFamilyMappings = {
+  [FONT_WEIGHTS.normal]: FONT_FAMILY.value.replace(/"/g, ''),
+  [FONT_WEIGHTS.emphasized]: FONT_FAMILY_EMPHASIZE.value.replace(/"/g, ''),
+  [FONT_WEIGHTS.heavy]: FONT_FAMILY_HEAVY.value.replace(/"/g, ''),
+};
 
 const pascalCase = s =>
   _.flow(
@@ -61,26 +77,11 @@ const pascalCase = s =>
     _.upperFirst,
   )(s);
 
-const fontForWeight = weightString => {
-  const cleanWeight = weightString.trim();
-
-  if (cleanWeight === '400') {
-    if (!FONT_FAMILY) {
-      throw new Error('Expected `FONT_FAMILY` to exist in tokens. It did not');
-    }
-
-    return FONT_FAMILY.value.replace(/"/g, '');
+const getFontWeightSuffix = fontWeight => {
+  if (fontWeight !== FONT_WEIGHTS.normal) {
+    return pascalCase(fontWeight);
   }
-  if (cleanWeight === '500') {
-    if (!FONT_FAMILY_EMPHASIZE) {
-      throw new Error(
-        'Expected `FONT_FAMILY_EMPHASIZE` to exist in tokens. It did not',
-      );
-    }
-
-    return FONT_FAMILY_EMPHASIZE.value.replace(/"/g, '');
-  }
-  throw new Error(`No font know for font weight \`${cleanWeight}\`.`);
+  return '';
 };
 
 const tokensWithType = type =>
@@ -104,7 +105,7 @@ const convertToXml = (chunk, enc, cb) => {
     .catch(cb);
 };
 
-const getTextStyles = () => {
+const getTextStyles = fontWeight => {
   const result = _.chain(
     [].concat(
       tokensWithCategory('font-sizes'),
@@ -120,7 +121,10 @@ const getTextStyles = () => {
     )
     .map((values, key) => [values, key])
     .filter(token =>
-      VALID_TEXT_STYLES.has(token[1].replace('TEXT_', '').toLowerCase()),
+      (fontWeight === FONT_WEIGHTS.heavy
+        ? VALID_HEAVY_TEXT_STYLES
+        : VALID_TEXT_STYLES
+      ).has(token[1].replace('TEXT_', '').toLowerCase()),
     )
     .map(token => {
       const properties = token[0];
@@ -145,20 +149,12 @@ const getTextStyles = () => {
       }
 
       return {
-        name: `bpk${pascalCase(key)}`,
+        name: `bpk${pascalCase(key)}${getFontWeightSuffix(fontWeight)}`,
         size: Number.parseInt(sizeProp[0].value, 10),
-        fontFamily: fontForWeight(weightProp[0].value),
+        fontFamily: fontFamilyMappings[fontWeight],
         letterSpacing: letterSpacingProp[0].value,
       };
     })
-    .flatMap(properties => [
-      properties,
-      {
-        ...properties,
-        fontFamily: fontForWeight(EMPHASIZED_FONT_WEIGHT),
-        name: `${properties.name}Emphasized`,
-      },
-    ])
     .value();
   return result;
 };
@@ -216,7 +212,11 @@ gulp.task('template:text', () =>
     .src(`${PATHS.templates}/BackpackText.njk`)
     .pipe(
       nunjucks.compile({
-        data: getTextStyles(),
+        data: [
+          ...getTextStyles(FONT_WEIGHTS.normal),
+          ...getTextStyles(FONT_WEIGHTS.emphasized),
+          ...getTextStyles(FONT_WEIGHTS.heavy),
+        ],
       }),
     )
     .pipe(rename('values/backpack.text.xml'))
@@ -228,7 +228,11 @@ gulp.task('template:text-v21', () =>
     .src(`${PATHS.templates}/BackpackTextv21.njk`)
     .pipe(
       nunjucks.compile({
-        data: getTextStyles(),
+        data: [
+          ...getTextStyles(FONT_WEIGHTS.normal),
+          ...getTextStyles(FONT_WEIGHTS.emphasized),
+          ...getTextStyles(FONT_WEIGHTS.heavy),
+        ],
       }),
     )
     .pipe(rename('values-v21/backpack.text.xml'))

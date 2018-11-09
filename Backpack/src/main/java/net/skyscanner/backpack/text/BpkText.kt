@@ -14,6 +14,12 @@ open class BpkText(
   defStyleAttr: Int
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
+  enum class Weight {
+    NORMAL,
+    EMPHASIZED,
+    HEAVY
+  }
+
   @IntDef(XS, SM, BASE, LG, XL, XXL, XXXL, CAPS)
 
   annotation class Styles
@@ -36,21 +42,36 @@ open class BpkText(
       this.setup()
     }
 
-  var emphasize: Boolean = false
+  var weight = Weight.NORMAL
     set(value) {
       field = value
-      this.setup()
+      setup()
+    }
+
+  /**
+   * Sets the text style to emphasized.
+   *
+   * @Deprecated use [BpkText.weight] instead.
+   */
+  @Deprecated("Use weight instead")
+  var emphasize: Boolean = false
+    get() = weight == Weight.EMPHASIZED || field
+    set(value) {
+      field = value
+      if (value) {
+        weight = Weight.EMPHASIZED
+      }
     }
 
   private val styleMapping = mapOf(
-    XS to Pair(R.style.bpkTextXsEmphasized, R.style.bpkTextXs),
-    SM to Pair(R.style.bpkTextSmEmphasized, R.style.bpkTextSm),
-    CAPS to Pair(R.style.bpkTextCapsEmphasized, R.style.bpkTextCaps),
-    BASE to Pair(R.style.bpkTextBaseEmphasized, R.style.bpkTextBase),
-    LG to Pair(R.style.bpkTextLgEmphasized, R.style.bpkTextLg),
-    XL to Pair(R.style.bpkTextXlEmphasized, R.style.bpkTextXl),
-    XXL to Pair(R.style.bpkTextXxlEmphasized, R.style.bpkTextXxl),
-    XXXL to Pair(R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxl)
+    XS to arrayOf(R.style.bpkTextXs, R.style.bpkTextXsEmphasized, null),
+    SM to arrayOf(R.style.bpkTextSm, R.style.bpkTextSmEmphasized, null),
+    CAPS to arrayOf(R.style.bpkTextCaps, R.style.bpkTextCapsEmphasized, null),
+    BASE to arrayOf(R.style.bpkTextBase, R.style.bpkTextBaseEmphasized, null),
+    LG to arrayOf(R.style.bpkTextLg, R.style.bpkTextLgEmphasized, null),
+    XL to arrayOf(R.style.bpkTextXl, R.style.bpkTextXlEmphasized, R.style.bpkTextXlHeavy),
+    XXL to arrayOf(R.style.bpkTextXxl, R.style.bpkTextXxlEmphasized, R.style.bpkTextXxlHeavy),
+    XXXL to arrayOf(R.style.bpkTextXxxl, R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxlHeavy)
   )
 
   constructor(context: Context) : this(context, null)
@@ -69,7 +90,13 @@ open class BpkText(
       defStyleAttr, 0)
 
     textStyle = a.getInt(R.styleable.BpkText_textStyle, BASE)
-    emphasize = a.getBoolean(R.styleable.BpkText_emphasize, false)
+    val weightArg = a.getInt(R.styleable.BpkText_weight, -1)
+    if (weightArg == -1) {
+      // if weight has not been set we still read the emphasize property
+      emphasize = a.getBoolean(R.styleable.BpkText_emphasize, false)
+    } else {
+      weight = Weight.values()[weightArg]
+    }
 
     a.recycle()
   }
@@ -77,15 +104,15 @@ open class BpkText(
   private fun setup() {
 
     val styleProps = styleMapping[textStyle]
+    styleProps ?: throw IllegalStateException("Invalid textStyle")
+
+    val textAppearance = styleProps[weight.ordinal]
+    textAppearance ?: throw IllegalStateException("Weight $weight is not supported for the current size")
 
     if (textStyle == CAPS) {
       isAllCaps = true
     }
 
-    if (styleProps != null) {
-      TextViewCompat.setTextAppearance(this, if (emphasize) styleProps.first else styleProps.second)
-    } else {
-      throw IllegalStateException("Invalid textStyle")
-    }
+    TextViewCompat.setTextAppearance(this, textAppearance)
   }
 }

@@ -46,7 +46,7 @@ easy_install Pillow
 ```
 
 To start the emulator and attach an sdcard to it, run
- 
+
 ```
 $ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &
 ```

@@ -26,7 +26,13 @@
       <enum name="xxxl" value="6"/>
       <enum name="caps" value="7"/>
     </attr>
+    <!-- {@deprecated Use weight instead.} -->
     <attr name="emphasize" format="boolean"/>
+    <attr name="weight" format="enum">
+      <enum name="normal" value="0" />
+      <enum name="emphasized" value="1" />
+      <enum name="heavy" value="2" />
+    </attr>
   </declare-styleable>
 
   <declare-styleable name="BpkPanel">

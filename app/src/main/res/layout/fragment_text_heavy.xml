@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  style="@style/App.Story"
+  android:orientation="vertical">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/txt_flights_to_edinburgh"
+    app:weight="heavy"
+    app:textStyle="xxxl" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/txt_flights_to_edinburgh"
+    app:weight="heavy"
+    app:textStyle="xxl" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/txt_flights_to_edinburgh"
+    app:weight="heavy"
+    app:textStyle="xl" />
+</LinearLayout>
