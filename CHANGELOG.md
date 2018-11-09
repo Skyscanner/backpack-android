@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 0.9.0
+
+**Added:**
+
+- Added property `weight` to `BpkText` and support for new `heavy` weight.
+  - `emphasize` is now deprecated. Use `weight` instead.
+
 # 0.8.0
 
 - Type ramp changes for letter-spacing
@@ -37,7 +44,7 @@ New component BpkCardView
 
 # 0.3.1
 
-Fixes a bug to set button state from code 
+Fixes a bug to set button state from code
 
 # 0.3.0
 
