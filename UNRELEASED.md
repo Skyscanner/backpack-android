@@ -1,5 +1,3 @@
 # Unreleased
 
-**Added:**
-
-- Introducing BpkDialog component.
+__Nothing yet__

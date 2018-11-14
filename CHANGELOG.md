@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 1.0.0
+
+**Added:**
+
+- Introducing BpkDialog component.
+
 # 0.9.0
 
 **Added:**
