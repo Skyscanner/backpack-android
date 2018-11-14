@@ -31,6 +31,7 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
   implementation "androidx.cardview:cardview:$rootProject.ext.androidx"
+  implementation "com.google.android.material:material:$rootProject.materialDesign"
   androidTestImplementation 'com.android.support.test:runner:1.0.2'
   androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
   androidTestImplementation 'com.android.support.test:rules:1.0.2'

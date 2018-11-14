@@ -67,4 +67,11 @@
       <enum name="dark" value="2" />
     </attr>
   </declare-styleable>
+
+  <declare-styleable name="BpkChip">
+    <attr name="dismissible" format="boolean" />
+    <attr name="disabled" format="boolean" />
+    <attr name="selected" format="boolean" />
+  </declare-styleable>
+
 </resources>
