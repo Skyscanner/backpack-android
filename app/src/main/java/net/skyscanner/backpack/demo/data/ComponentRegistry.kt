@@ -5,6 +5,7 @@ import net.skyscanner.backpack.demo.stories.ButtonStory
 import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.SubStory
+import net.skyscanner.backpack.demo.stories.GradientStory
 import java.lang.IllegalArgumentException
 
 interface RegistryItem {
@@ -52,7 +53,7 @@ private class NodeData(
   val items: Map<String, RegistryItem> = emptyMap()
 ) {
 
-  constructor(creator: () -> Story): this({ _ -> creator() })
+  constructor(creator: () -> Story) : this({ _ -> creator() })
 }
 
 private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
@@ -94,6 +95,7 @@ object ComponentRegistry {
   private val TOKENS_MAP = mapOf(
     "Radii" story NodeData { Story.of(R.layout.fragment_radii) },
     "Icons" story NodeData { Story.of(R.layout.fragment_icons) },
+    "Gradient" story NodeData { GradientStory() },
     "All Icons" story NodeData { IconsStory() }
   )
 
