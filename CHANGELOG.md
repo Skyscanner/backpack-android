@@ -6,7 +6,7 @@
 
 **Added:**
 
-- Introducing BpkDialog component.
+- Introducing BpkDialog component. See usage in [README.md](docs/Dialog/README.md).
 
 # 0.9.0
 
