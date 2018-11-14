@@ -1,11 +1,12 @@
 package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.stories.ButtonStory
-import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.SubStory
 import net.skyscanner.backpack.demo.stories.GradientStory
+import net.skyscanner.backpack.demo.stories.DialogStory
+import net.skyscanner.backpack.demo.stories.ButtonStory
+import net.skyscanner.backpack.demo.stories.IconsStory
 import java.lang.IllegalArgumentException
 
 interface RegistryItem {
@@ -66,6 +67,13 @@ private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
 object ComponentRegistry {
 
   private val COMPONENTS_TREE = mapOf(
+    "Dialog" story NodeData({ children -> SubStory.of(children) },
+      mapOf(
+        "Normal" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Normal") },
+        "Warning" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Warning") },
+        "Delete" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Delete") },
+        "Confirmation" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Confirmation") }
+      )),
     "Panel" story NodeData { Story.of(R.layout.fragment_panel) },
     "Badge" story NodeData { Story.of(R.layout.fragment_badge) },
     "Text" story NodeData({ children -> SubStory.of(children) },
