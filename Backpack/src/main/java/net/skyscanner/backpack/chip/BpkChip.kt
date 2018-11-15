@@ -9,7 +9,7 @@ import net.skyscanner.backpack.R
 
 open class BpkChip @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet?,
+  attrs: AttributeSet?= null,
   defStyleAttr: Int = R.style.Bpk_chip) : Chip(context, attrs, defStyleAttr) {
 
   init {
