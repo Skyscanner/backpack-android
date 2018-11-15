@@ -1,5 +1,3 @@
 # Unreleased
 
-**Fixed:**
-
-- Update `bpk_send_message` icon.
+__Nothing yet__

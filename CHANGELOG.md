@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 1.0.1
+
+**Fixed:**
+
+- Updated `bpk_send_message` icon.
+
 # 1.0.0
 
 **Added:**
