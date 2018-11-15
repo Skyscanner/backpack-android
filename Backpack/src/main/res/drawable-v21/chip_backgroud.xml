@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+  android:color="@color/bpkBlue700">
+  <item>
+    <selector>
+      <item
+        android:drawable="@drawable/chip_selected"
+        android:state_enabled="true"
+        android:state_selected="true" />
+      <item android:drawable="@drawable/chip_default" />
+    </selector>
+  </item>
+</ripple>
+

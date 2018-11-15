@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical">
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/App.Story"
+  tools:ignore="HardcodedText">
 
-  <com.google.android.material.chip.ChipGroup
+  <net.skyscanner.backpack.chip.BpkDismissibleChip
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:text="Disabled"
+    app:disabled="true" />
 
-    <net.skyscanner.backpack.chip.BpkDismissibleChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="India"
-      app:disabled="true" />
-
-    <net.skyscanner.backpack.chip.BpkDismissibleChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="India" />
-
-  </com.google.android.material.chip.ChipGroup>
+  <net.skyscanner.backpack.chip.BpkDismissibleChip
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:text="Default"
+    app:disabled="false" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
+
