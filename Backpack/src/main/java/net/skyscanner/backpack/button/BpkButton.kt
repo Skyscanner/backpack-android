@@ -50,7 +50,7 @@ open class BpkButton @JvmOverloads constructor(
   private val paddingWithIcon = (context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2) - 2
 
   private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
-  private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderRadiusSm).toInt()
+  private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderSizeLg).toInt()
 
   private val INVALID_RESOURCE = -1
 

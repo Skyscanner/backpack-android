@@ -256,6 +256,24 @@ gulp.task('template:radii', () => {
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
+gulp.task('template:borders', () => {
+  const getBorders = () =>
+    tokensWithCategory('borders').map(token => {
+      const newToken = JSON.parse(JSON.stringify(token));
+      newToken.name = `bpk${pascalCase(newToken.name)}`;
+      return newToken;
+    });
+  return gulp
+    .src(`${PATHS.templates}/BackpackBorders.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: getBorders(),
+      }),
+    )
+    .pipe(rename('values/backpack.borders.xml'))
+    .pipe(gulp.dest(PATHS.outputRes));
+});
+
 gulp.task('template:elevation', () => {
   const getElevation = () =>
     tokensWithCategory('elevation').map(token => {
@@ -288,6 +306,7 @@ gulp.task('default', () => {
     'template:text-v21',
     'template:spacing',
     'template:radii',
+    'template:borders',
     'template:elevation',
     'template:icons',
   );

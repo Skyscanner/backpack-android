@@ -44,8 +44,17 @@ class BpkResources {
   @Test
   fun bpkRadii() {
     val appContext = InstrumentationRegistry.getTargetContext()
-    assertEquals("2.0dip", appContext.getString(R.dimen.bpkBorderRadiusSm))
+    assertEquals("4.0dip", appContext.getString(R.dimen.bpkBorderRadiusSm))
+    assertEquals("24.0dip", appContext.getString(R.dimen.bpkBorderRadiusLg))
     assertEquals("40.0dip", appContext.getString(R.dimen.bpkBorderRadiusPill))
+  }
+
+  @Test
+  fun bpkBorders() {
+    val appContext = InstrumentationRegistry.getTargetContext()
+    assertEquals("1.0dip", appContext.getString(R.dimen.bpkBorderSizeSm))
+    assertEquals("2.0dip", appContext.getString(R.dimen.bpkBorderSizeLg))
+    assertEquals("3.0dip", appContext.getString(R.dimen.bpkBorderSizeXl))
   }
 
   @Test
