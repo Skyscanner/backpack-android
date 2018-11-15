@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
-    "bpk-svgs": "^6.0.2",
+    "bpk-svgs": "^6.0.3",
     "bpk-tokens": "^27.2.0",
     "del": "^3.0.0",
     "ensure-node-env": "^1.0.8",
