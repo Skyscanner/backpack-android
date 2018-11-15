@@ -1,0 +1,15 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+  android:padding="90dp"
+  android:shape="rectangle">
+  <solid android:color="@color/bpkWhite" />
+  <padding
+    android:bottom="@dimen/bpkSpacingMd"
+    android:left="@dimen/bpkSpacingBase"
+    android:right="@dimen/bpkSpacingBase"
+    android:top="@dimen/bpkSpacingMd"/>
+  <corners
+    android:bottomLeftRadius="@dimen/bpkBorderRadiusPill"
+    android:bottomRightRadius="@dimen/bpkBorderRadiusPill"
+    android:topLeftRadius="@dimen/bpkBorderRadiusPill"
+    android:topRightRadius="@dimen/bpkBorderRadiusPill" />
+</shape>

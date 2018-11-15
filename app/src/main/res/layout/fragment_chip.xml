@@ -8,18 +8,25 @@
   <net.skyscanner.backpack.chip.BpkChip
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
     android:text="Disabled"
-    app:disabled="true" />
+    app:disabled="true"
+    app:selected="false"/>
 
   <net.skyscanner.backpack.chip.BpkChip
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Default" />
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:text="Default"
+    app:disabled="false"
+    app:selected="false"/>
 
   <net.skyscanner.backpack.chip.BpkChip
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingBase"
     android:text="Selected"
+    app:disabled="false"
     app:selected="true" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
