@@ -28,12 +28,4 @@ class BpkDismissibleChipTest : BpkSnapshotTest() {
     snap(view)
   }
 
-  @Test
-  fun screenshotTestSelected() {
-    val view = BpkDismissibleChip(testContext)
-    view.text = "tag"
-    view.isSelected = true
-    snap(view)
-  }
-
 }

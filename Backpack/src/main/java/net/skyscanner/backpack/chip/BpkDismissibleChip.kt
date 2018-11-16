@@ -18,7 +18,6 @@ open class BpkDismissibleChip @JvmOverloads constructor(
   init {
     initialize(context, attrs, R.style.Bpk_chip)
   }
-  private val iconSize = context.resources.getDimension(R.dimen.bpk_icon_size_small).toInt()
 
   var disabled: Boolean = false
     set(value) {
@@ -41,11 +40,10 @@ open class BpkDismissibleChip @JvmOverloads constructor(
     TextViewCompat.setTextAppearance(this, R.style.bpkTextSm)
     this.setTextColor(ResourcesCompat.getColorStateList(resources, R.color.bpk_chip_text_color, context.theme))
 
-    val closeIcon = ResourcesCompat.getDrawable(resources, R.drawable.bpk_close, context.theme)
-
-
-    closeIcon?.setBounds(0, 0, iconSize, iconSize)
-    DrawableCompat.setTintList(closeIcon!!, ResourcesCompat.getColorStateList(resources,R.color.chip_close_icon_tint,context.theme))
+    // close icon
+    val closeIcon = ResourcesCompat.getDrawable(resources, R.drawable.bpk_close_small, context.theme)
+    DrawableCompat.setTintList(closeIcon!!, ResourcesCompat.getColorStateList(resources, R.color.chip_close_icon_tint, context.theme))
+    this.compoundDrawablePadding = resources.getDimension(R.dimen.bpkElevationSm).toInt()
 
     TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
       this,
@@ -53,9 +51,9 @@ open class BpkDismissibleChip @JvmOverloads constructor(
       null, closeIcon, null
     )
 
+    // Background
     val background = ResourcesCompat.getDrawable(resources, R.drawable.chip_backgroud, context.theme)
     ViewCompat.setBackground(this, background)
-
   }
 }
 
