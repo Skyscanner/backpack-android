@@ -39,6 +39,7 @@ open class BpkDismissibleChip @JvmOverloads constructor(
     //Text
     TextViewCompat.setTextAppearance(this, R.style.bpkTextSm)
     this.setTextColor(ResourcesCompat.getColorStateList(resources, R.color.bpk_chip_text_color, context.theme))
+    this.setSingleLine(true)
 
     // close icon
     val closeIcon = ResourcesCompat.getDrawable(resources, R.drawable.bpk_close_small, context.theme)

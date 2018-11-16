@@ -39,6 +39,7 @@ open class BpkChip @JvmOverloads constructor(
     //Text
     TextViewCompat.setTextAppearance(this, R.style.bpkTextSm)
     this.setTextColor(ResourcesCompat.getColorStateList(resources, R.color.bpk_chip_text_color, context.theme))
+    this.setSingleLine(true)
 
     //Background
     val drawable = ResourcesCompat.getDrawable(resources, R.drawable.chip_backgroud, context.theme)

@@ -27,5 +27,4 @@ class BpkDismissibleChipTest : BpkSnapshotTest() {
     view.disabled = true
     snap(view)
   }
-
 }

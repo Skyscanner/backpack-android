@@ -35,5 +35,4 @@ class BpkChipTest : BpkSnapshotTest() {
     view.isSelected = true
     snap(view)
   }
-
 }
