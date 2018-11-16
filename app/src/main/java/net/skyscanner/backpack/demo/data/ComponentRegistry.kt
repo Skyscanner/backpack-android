@@ -118,12 +118,8 @@ object ComponentRegistry {
     }
 
     return rest.fold(COMPONENTS_TREE[first]!!, { result, item ->
-      return if (result is NodeItem) {
-        result.subItems[item]
-          ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
-      } else {
-        result
-      }
+      return result.subItems[item]
+        ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
     })
   }
 
