@@ -37,7 +37,7 @@ open class BpkCardView @JvmOverloads constructor(
   var focused: Boolean = false
     set(value) {
       field = value
-      cardElevation = context.resources.getDimension(if (value) R.dimen.bpkElevationBase else R.dimen.bpkElevationXs)
+      cardElevation = context.resources.getDimension(if (value) R.dimen.bpkElevationLg else R.dimen.bpkElevationSm)
     }
 
   private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
