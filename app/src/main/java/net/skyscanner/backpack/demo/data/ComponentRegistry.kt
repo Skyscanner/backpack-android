@@ -76,11 +76,7 @@ object ComponentRegistry {
       )),
     "Panel" story NodeData { Story.of(R.layout.fragment_panel) },
     "Badge" story NodeData { Story.of(R.layout.fragment_badge) },
-    "Chip" story NodeData({ children -> SubStory.of(children) },
-      mapOf(
-        "Default" story NodeData { Story.of(R.layout.fragment_chip) },
-        "Dismissible" story NodeData { Story.of(R.layout.fragment_chip_dismissible) }
-      )),
+    "Chip" story  NodeData { Story.of(R.layout.fragment_chip) },
     "Text" story NodeData({ children -> SubStory.of(children) },
       mapOf(
         "Default" story NodeData { Story.of(R.layout.fragment_text) },

@@ -5,11 +5,8 @@
 Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-android). Check the main [Readme](../../README.md#installation) for a complete installation guide.
 
 ## Usage
-The Chip component has two variants:
-- `BpkChip`
-- `BpkDismissibleChip`
 
-The Chip components can be used in both XML and Kotlin/Java
+The Chip component can be used in both XML and Kotlin/Java
 
 Example of a chip in XML
 
@@ -30,26 +27,6 @@ import net.skyscanner.backpack.chip.BpkChip
 
 BpkChip(context).apply {
   isSelected = true
-  disabled = false
-}
-```
-Example of a dismissible chip in XML
-
-```xml
-    <net.skyscanner.backpack.chip.BpkDismissibleChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Message"
-      app:disabled="true"/>
-```
-
-Example of a dismissible chip in Kotlin
-
-```Kotlin
-import net.skyscanner.backpack.chip.BpkDismissibleChip
-
-BpkDismissibleChip(context).apply {
   disabled = false
 }
 ```
