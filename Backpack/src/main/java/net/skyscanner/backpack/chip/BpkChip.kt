@@ -8,11 +8,11 @@ import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
-
 open class BpkChip @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_chip) : BpkText(context, attrs, defStyleAttr) {
+  defStyleAttr: Int = R.style.Bpk_chip
+) : BpkText(context, attrs, defStyleAttr) {
 
   init {
     initialize(context, attrs, R.style.Bpk_chip)
@@ -33,19 +33,19 @@ open class BpkChip @JvmOverloads constructor(
       attr.recycle()
     }
 
-    //Elevation
+    // Elevation
     ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationSm))
 
-    //Text
+    // Text
     TextViewCompat.setTextAppearance(this, R.style.bpkTextSm)
     this.setTextColor(ResourcesCompat.getColorStateList(resources, R.color.bpk_chip_text_color, context.theme))
     this.setSingleLine(true)
 
-    //Background
-    val drawable = ResourcesCompat.getDrawable(resources, R.drawable.chip_backgroud, context.theme)
+    // Background
+    val drawable = ResourcesCompat.getDrawable(resources, R.drawable.chip_background, context.theme)
     ViewCompat.setBackground(this, drawable)
 
-    //State change
+    // State change
     setOnClickListener {
       if (!disabled) {
         isSelected = !isSelected
@@ -53,4 +53,3 @@ open class BpkChip @JvmOverloads constructor(
     }
   }
 }
-

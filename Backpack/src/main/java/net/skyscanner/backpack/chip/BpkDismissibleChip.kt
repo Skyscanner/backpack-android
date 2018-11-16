@@ -9,11 +9,11 @@ import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
-
 open class BpkDismissibleChip @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_chip) : BpkText(context, attrs, defStyleAttr) {
+  defStyleAttr: Int = R.style.Bpk_chip
+) : BpkText(context, attrs, defStyleAttr) {
 
   init {
     initialize(context, attrs, R.style.Bpk_chip)
@@ -33,10 +33,10 @@ open class BpkDismissibleChip @JvmOverloads constructor(
       attr.recycle()
     }
 
-    //Elevation
+    // Elevation
     ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationSm))
 
-    //Text
+    // Text
     TextViewCompat.setTextAppearance(this, R.style.bpkTextSm)
     this.setTextColor(ResourcesCompat.getColorStateList(resources, R.color.bpk_chip_text_color, context.theme))
     this.setSingleLine(true)
@@ -53,8 +53,7 @@ open class BpkDismissibleChip @JvmOverloads constructor(
     )
 
     // Background
-    val background = ResourcesCompat.getDrawable(resources, R.drawable.chip_backgroud, context.theme)
+    val background = ResourcesCompat.getDrawable(resources, R.drawable.chip_background, context.theme)
     ViewCompat.setBackground(this, background)
   }
 }
-
