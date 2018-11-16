@@ -1,3 +1,5 @@
 # Unreleased
 
-__Nothing yet__
+**Added:**
+
+Added tokens for border sizes.
