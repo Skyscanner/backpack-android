@@ -2,6 +2,17 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 1.1.0
+
+**Added:**
+
+* Added tokens for border sizes.
+* Added `bpkElevationXxl` token.
+
+**Changed:**
+
+* Changed elevation token values. See https://backpack.github.io/tokens/shadows.
+
 # 1.0.1
 
 **Fixed:**
