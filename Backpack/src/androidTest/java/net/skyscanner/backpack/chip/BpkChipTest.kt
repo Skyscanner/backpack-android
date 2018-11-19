@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.chip
 
 import android.content.Context
+import androidx.core.content.ContextCompat
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import net.skyscanner.backpack.R
@@ -24,7 +25,7 @@ class BpkChipTest {
       text = "Message"
     }
     Assert.assertEquals("Message", chip.text.toString())
-    Assert.assertEquals(context.getColor(R.color.bpkGray700), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray700), chip.currentTextColor)
   }
 
   @Test
@@ -32,7 +33,7 @@ class BpkChipTest {
     val chip = BpkChip(context).apply {
       isSelected = true
     }
-    Assert.assertEquals(context.getColor(R.color.bpkWhite), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkWhite), chip.currentTextColor)
   }
 
   @Test
@@ -40,6 +41,6 @@ class BpkChipTest {
     val chip = BpkChip(context).apply {
       disabled = true
     }
-    Assert.assertEquals(context.getColor(R.color.bpkGray300), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray300), chip.currentTextColor)
   }
 }
