@@ -37,7 +37,7 @@ class BpkCardViewTest {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
     val card = BpkCardView(context)
     card.focused = false
-    Assert.assertEquals(context.resources.getDimension(R.dimen.bpkElevationXs), card.cardElevation)
+    Assert.assertEquals(context.resources.getDimension(R.dimen.bpkElevationSm), card.cardElevation)
   }
 
   @Test
@@ -45,6 +45,6 @@ class BpkCardViewTest {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
     val card = BpkCardView(context)
     card.focused = true
-    Assert.assertEquals(context.resources.getDimension(R.dimen.bpkElevationBase), card.cardElevation)
+    Assert.assertEquals(context.resources.getDimension(R.dimen.bpkElevationLg), card.cardElevation)
   }
 }

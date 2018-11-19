@@ -60,11 +60,12 @@ class BpkResources {
   @Test
   fun bpkElevation() {
     val appContext = InstrumentationRegistry.getTargetContext()
-    assertEquals("2.0dip", appContext.getString(R.dimen.bpkElevationXs))
-    assertEquals("4.0dip", appContext.getString(R.dimen.bpkElevationSm))
-    assertEquals("6.0dip", appContext.getString(R.dimen.bpkElevationBase))
-    assertEquals("16.0dip", appContext.getString(R.dimen.bpkElevationLg))
-    assertEquals("24.0dip", appContext.getString(R.dimen.bpkElevationXl))
+    assertEquals("1.0dip", appContext.getString(R.dimen.bpkElevationXs))
+    assertEquals("2.0dip", appContext.getString(R.dimen.bpkElevationSm))
+    assertEquals("4.0dip", appContext.getString(R.dimen.bpkElevationBase))
+    assertEquals("8.0dip", appContext.getString(R.dimen.bpkElevationLg))
+    assertEquals("16.0dip", appContext.getString(R.dimen.bpkElevationXl))
+    assertEquals("24.0dip", appContext.getString(R.dimen.bpkElevationXxl))
   }
 
   @Test
