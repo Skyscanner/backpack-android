@@ -24,13 +24,17 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 ```
+
 ## Components
+
 * [Badge](docs/Badge/README.md)
-* [Panel](docs/Panel/README.md)
-* [Text](docs/Text/README.md)
 * [Button](docs/Button/README.md)
 * [Card](docs/Card/README.md)
+* [Dialog](docs/Dialog/README.md)
+* [Panel](docs/Panel/README.md)
 * [Spinner](docs/Spinner/README.md)
+* [Switch](docs/Switch/README.md)
+* [Text](docs/Text/README.md)
 
 ## Usage
 
