@@ -26,6 +26,7 @@ Example of a chip in Kotlin
 import net.skyscanner.backpack.chip.BpkChip
 
 BpkChip(context).apply {
+  text = "Message"
   isSelected = true
   disabled = false
 }

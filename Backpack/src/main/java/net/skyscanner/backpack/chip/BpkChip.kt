@@ -15,7 +15,7 @@ open class BpkChip @JvmOverloads constructor(
 ) : BpkText(context, attrs, defStyleAttr) {
 
   init {
-    initialize(context, attrs, R.style.Bpk_chip)
+    initialize(context, attrs, defStyleAttr)
   }
 
   var disabled: Boolean = false
@@ -26,13 +26,13 @@ open class BpkChip @JvmOverloads constructor(
 
   private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
-    try {
-      disabled = attr.getBoolean(R.styleable.BpkChip_disabled, false)
-      isSelected = attr.getBoolean(R.styleable.BpkChip_selected, false)
-    } finally {
-      attr.recycle()
-    }
+    disabled = attr.getBoolean(R.styleable.BpkChip_disabled, false)
+    isSelected = attr.getBoolean(R.styleable.BpkChip_selected, false)
+    attr.recycle()
+    setup()
+  }
 
+  open fun setup() {
     // Elevation
     ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationSm))
 
