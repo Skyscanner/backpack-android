@@ -3,7 +3,9 @@ package net.skyscanner.backpack
 import android.content.Context
 import android.os.Looper
 import android.view.ContextThemeWrapper
+import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
 import androidx.test.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
@@ -26,8 +28,17 @@ open class BpkSnapshotTest {
   }
 
   protected fun snap(view: View) {
-    setupView(view)
-    Screenshot.snap(view).record()
+    val wrapper = LinearLayout(testContext)
+    val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+      LinearLayout.LayoutParams.WRAP_CONTENT)
+    wrapper.gravity = Gravity.CENTER
+    params.setMargins(10, 10, 10, 10)
+    wrapper.setBackgroundColor(R.color.bpkGray300)
+    wrapper.layoutParams = params
+    wrapper.addView(view)
+
+    setupView(wrapper)
+    Screenshot.snap(wrapper).record()
   }
 
   protected fun setDimensions(height: Int, width: Int) {
