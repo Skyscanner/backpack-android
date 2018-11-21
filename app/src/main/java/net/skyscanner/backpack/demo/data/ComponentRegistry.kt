@@ -69,10 +69,10 @@ object ComponentRegistry {
   private val COMPONENTS_TREE = mapOf(
     "Dialog" story NodeData({ children -> SubStory.of(children) },
       mapOf(
-        "Normal" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Normal") },
+        "With call to action" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Normal") },
         "Warning" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Warning") },
-        "Delete" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Delete") },
-        "Confirmation" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Confirmation") }
+        "Delete confirmation" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Delete") },
+        "Success" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Confirmation") }
       )),
     "Panel" story NodeData { Story.of(R.layout.fragment_panel) },
     "Badge" story NodeData { Story.of(R.layout.fragment_badge) },
