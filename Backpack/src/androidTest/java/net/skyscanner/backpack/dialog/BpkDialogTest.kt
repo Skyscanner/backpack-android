@@ -9,13 +9,13 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.util.TestActivity
 import org.junit.Test
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Before
 import org.junit.Assert
@@ -42,7 +42,7 @@ class BpkDialogTest {
   }
 
   @Test
-  @Ignore("TODO: mark as flaky")
+  @FlakyTest
   fun test_with_title() {
       val dialog = BpkDialog(mActivity).apply {
         title = "title"
@@ -57,7 +57,7 @@ class BpkDialogTest {
   }
 
   @Test
-  @Ignore("TODO: mark as flaky")
+  @FlakyTest
   fun test_with_description() {
     val dialog = BpkDialog(mActivity).apply {
       description = "Some description"
@@ -72,7 +72,7 @@ class BpkDialogTest {
   }
 
   @Test
-  @Ignore("TODO: mark as flaky")
+  @FlakyTest
   fun test_with_buttons() {
     val dialog = BpkDialog(mActivity).apply {
       addActionButton(BpkButton(mActivity).apply {
@@ -89,7 +89,7 @@ class BpkDialogTest {
   }
 
   @Test
-  @Ignore("TODO: mark as flaky")
+  @FlakyTest
   fun test_alert_style() {
     val dialog = BpkDialog(mActivity)
 
@@ -107,7 +107,7 @@ class BpkDialogTest {
   }
 
   @Test
-  @Ignore("TODO: mark as flaky")
+  @FlakyTest
   fun test_bottom_sheet_style() {
     val dialog = BpkDialog(mActivity, BpkDialog.Style.BOTTOM_SHEET)
 
