@@ -73,11 +73,11 @@ script:
   # Run linters
   - ./gradlew check
   # Run espresso tests in the Backpack module ( this excludes snapshot tests)
-  - ./gradlew Backpack:connectedCheck
+  - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest Backpack:connectedCheck
   # Run all unit tests
   - ./gradlew test
   # Run snapshot tests
-  - ./gradlew app:verifyDebugAndroidTestScreenshotTest
+  - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest app:verifyDebugAndroidTestScreenshotTest
 
 after_script: greenkeeper-lockfile-upload
 

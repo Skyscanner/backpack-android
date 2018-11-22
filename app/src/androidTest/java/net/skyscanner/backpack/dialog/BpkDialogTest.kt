@@ -6,6 +6,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -13,7 +14,6 @@ import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,7 +34,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("TODO: mark as flaky")
+  @FlakyTest
   fun screenshotTestDialog() {
     val asyncScreenshot = prepareForAsyncTest()
 
@@ -60,7 +60,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("TODO: mark as flaky")
+  @FlakyTest
   fun screenshotTestDialogBottomSheet() {
     val asyncScreenshot = prepareForAsyncTest()
 
