@@ -47,4 +47,12 @@ class BpkCardViewTest {
     card.focused = true
     Assert.assertEquals(context.resources.getDimension(R.dimen.bpkElevationLg), card.cardElevation)
   }
+
+  @Test
+  fun test_with_corner_style_large() {
+    val context = InstrumentationRegistry.getInstrumentation().targetContext
+    val card = BpkCardView(context)
+    card.cornerStyle = BpkCardView.CornerStyle.LARGE
+    Assert.assertEquals(context.resources.getDimension(R.dimen.bpkBorderRadiusLg), card.radius)
+  }
 }

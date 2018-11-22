@@ -18,7 +18,7 @@
           <net.skyscanner.backpack.text.BpkText
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:text="@string/stub" />
+              android:text="@string/stub_md" />
       </net.skyscanner.backpack.panel.BpkPanel>
 
       <net.skyscanner.backpack.panel.BpkPanel
@@ -29,7 +29,7 @@
           <net.skyscanner.backpack.text.BpkText
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:text="@string/stub" />
+              android:text="@string/stub_md" />
       </net.skyscanner.backpack.panel.BpkPanel>
   </LinearLayout>
 
