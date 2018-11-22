@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/App.Story"
+  android:orientation="vertical"
+  tools:ignore="HardcodedText">
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Afghanistan"
+      app:disabled="true" />
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Belgium"
+      app:disabled="false" />
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Canada"
+      app:disabled="false" />
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Denmark" />
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Ethiopia"
+      app:disabled="false" />
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Fiji"
+      app:disabled="false" />
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Germany" />
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Honduras"
+      app:disabled="false" />
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="India"
+      app:disabled="false" />
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
+  <androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Jamaica" />
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Kosovo"
+      app:disabled="true" />
+
+    <net.skyscanner.backpack.chip.BpkDismissibleChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Lesotho"
+      app:disabled="false" />
+  </androidx.appcompat.widget.LinearLayoutCompat>
+
+  <net.skyscanner.backpack.chip.BpkDismissibleChip
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingSm"
+    android:text="Madagascar"
+    app:disabled="false" />
+</androidx.appcompat.widget.LinearLayoutCompat>
+

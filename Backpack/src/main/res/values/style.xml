@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="Bpk.badge" parent="android:Widget"/>
-  <style name="Bpk.button" parent="android:Widget"/>
+  <style name="Bpk.badge" parent="android:Widget" />
+
+  <style name="Bpk.button" parent="android:Widget" />
 
   <style name="Bpk.panel" parent="android:Widget">
     <item name="android:padding">@dimen/bpkSpacingSm</item>
@@ -19,6 +20,10 @@
   <style name="Bpk.dialog.animation" parent="">
     <item name="android:windowEnterAnimation">@anim/dialog_slide_up</item>
     <item name="android:windowExitAnimation">@anim/dialog_slide_out_down</item>
+  </style>
+
+  <style name="Bpk.chip" parent="android:Widget">
+    <item name="android:textAppearance">@style/bpkTextSm</item>
   </style>
 
 </resources>
