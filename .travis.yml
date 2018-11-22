@@ -63,8 +63,7 @@ before_script:
   - echo no | android create avd --force -n bpk-droid -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
   - cp bpk-droid.ini $HOME/.android/avd/bpk-droid.avd/config.ini
   - emulator -avd bpk-droid -sdcard sd.img -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+
 script:
   - set -e
   - npm run build
@@ -72,10 +71,11 @@ script:
   - 'if [[ -n "$TRAVIS_TAG" ]]; then ./scripts/build-docs-ci $TRAVIS_TAG; fi'
   # Run linters
   - ./gradlew check
+  # wait for emulator to boot
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
   # Run espresso tests in the Backpack module ( this excludes snapshot tests)
   - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest Backpack:connectedCheck
-  # Run all unit tests
-  - ./gradlew test
   # Run snapshot tests
   - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest app:verifyDebugAndroidTestScreenshotTest
 
