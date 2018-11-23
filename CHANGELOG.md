@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 1.2.0
+
+**Added:**
+
+- Introducing BpkChip component. See usage in [README.md](docs/Chip/README.md).
+
 # 1.1.0
 
 **Added:**
