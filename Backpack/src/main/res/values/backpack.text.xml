@@ -54,12 +54,12 @@
 
   <style name="bpkTextXxl">
     <item name="android:fontFamily">sans-serif</item>
-    <item name="android:textSize">36sp</item>
+    <item name="android:textSize">30sp</item>
   </style>
 
   <style name="bpkTextXxxl">
     <item name="android:fontFamily">sans-serif</item>
-    <item name="android:textSize">42sp</item>
+    <item name="android:textSize">36sp</item>
   </style>
 
   <style name="bpkTextBaseEmphasized">
@@ -94,12 +94,12 @@
 
   <style name="bpkTextXxlEmphasized">
     <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textSize">36sp</item>
+    <item name="android:textSize">30sp</item>
   </style>
 
   <style name="bpkTextXxxlEmphasized">
     <item name="android:fontFamily">sans-serif-medium</item>
-    <item name="android:textSize">42sp</item>
+    <item name="android:textSize">36sp</item>
   </style>
 
   <style name="bpkTextXlHeavy">
@@ -109,12 +109,12 @@
 
   <style name="bpkTextXxlHeavy">
     <item name="android:fontFamily">sans-serif-black</item>
-    <item name="android:textSize">36sp</item>
+    <item name="android:textSize">30sp</item>
   </style>
 
   <style name="bpkTextXxxlHeavy">
     <item name="android:fontFamily">sans-serif-black</item>
-    <item name="android:textSize">42sp</item>
+    <item name="android:textSize">36sp</item>
   </style>
 
 </resources>
