@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 1.3.0
+
+**Added:**
+
+- Added new property `cornerStyle` to `BpkCardBiew`. See usage in [README.md](docs/Card/README.md).
+
 # 1.2.0
 
 **Added:**
