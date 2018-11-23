@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 1.3.1
+
+**Fixed:**
+
+- Revert elevation tokens changes released in 1.3.0.
+
 # 1.3.0
 
 **Added:**

@@ -18,8 +18,10 @@
 -->
 <resources>
 
+	<dimen name="bpkBorderRadiusLg">24dp</dimen>
+
 	<dimen name="bpkBorderRadiusPill">40dp</dimen>
 
-	<dimen name="bpkBorderRadiusSm">2dp</dimen>
+	<dimen name="bpkBorderRadiusSm">4dp</dimen>
 
  </resources>
