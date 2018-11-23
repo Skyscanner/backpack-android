@@ -2,19 +2,22 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.demo.R
 
 class ButtonStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    val type = arguments?.getString(ButtonStory.TYPE) ?: savedInstanceState?.getString(ButtonStory.TYPE)
+    val type = arguments?.getString(ButtonStory.TYPE)
+      ?: savedInstanceState?.getString(ButtonStory.TYPE)
 
     val buttonType = when (type) {
       "primary" -> BpkButton.Type.Primary
       "secondary" -> BpkButton.Type.Secondary
       "destructive" -> BpkButton.Type.Destructive
       "featured" -> BpkButton.Type.Featured
+      "white" -> BpkButton.Type.White
       else -> {
         BpkButton.Type.Primary
       }
@@ -25,6 +28,10 @@ class ButtonStory : Story() {
     view.findViewById<BpkButton>(R.id.btn_end_icon).type = buttonType
     view.findViewById<BpkButton>(R.id.btn_start_icon).type = buttonType
     view.findViewById<BpkButton>(R.id.btn_icon).type = buttonType
+
+    if (type == "white") {
+      view.setBackgroundColor(ContextCompat.getColor(context!!, R.color.bpkBlue500))
+    }
     super.onViewCreated(view, savedInstanceState)
   }
 
