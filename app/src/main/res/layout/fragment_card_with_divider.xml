@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/App.Story"
+  android:padding="0dp">
+
+  <net.skyscanner.backpack.card.BpkCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingLg"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground" >
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:weightSum="1">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.7"
+        android:padding="@dimen/bpkSpacingSm"
+        android:text="@string/stub_sm" />
+
+      <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/vertical_dashed_line"
+        android:layerType="software" />
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.3"
+        android:paddingLeft="@dimen/bpkSpacingBase"
+        android:text="@string/stub_xs" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+  </net.skyscanner.backpack.card.BpkCardView>
+</RelativeLayout>

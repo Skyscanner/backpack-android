@@ -65,4 +65,27 @@ class BpkCardTest : BpkSnapshotTest() {
     card.focused = true
     snap(card)
   }
+
+  @Test
+  fun screenshotTestCardWithCornerStyleLarge() {
+    val card = BpkCardView(testContext).apply {
+      addView(TextView(testContext).apply {
+        text = "message"
+      })
+      cornerStyle = BpkCardView.CornerStyle.LARGE
+    }
+    snap(card)
+  }
+
+  @Test
+  fun screenshotTestCardWithCornerStyleLargeAndFocus() {
+    val card = BpkCardView(testContext).apply {
+      addView(TextView(testContext).apply {
+        text = "message"
+      })
+      focused = true
+      cornerStyle = BpkCardView.CornerStyle.LARGE
+    }
+    snap(card)
+  }
 }

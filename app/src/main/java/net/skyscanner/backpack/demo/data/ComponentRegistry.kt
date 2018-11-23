@@ -90,7 +90,17 @@ object ComponentRegistry {
         "Destructive" story NodeData { ButtonStory.of(R.layout.fragment_button, "destructive") },
         "Featured" story NodeData { ButtonStory.of(R.layout.fragment_button, "featured") }
       )),
-    "Card" story NodeData { Story.of(R.layout.fragment_card) },
+    "Card" story NodeData({ children -> SubStory.of(children) },
+      mapOf(
+        "Default" story NodeData { Story.of(R.layout.fragment_card) },
+        "Without padding" story NodeData { Story.of(R.layout.fragment_card_without_padding) },
+        "Selected" story NodeData { Story.of(R.layout.fragment_card_selected) },
+        "Corner style large" story NodeData { Story.of(R.layout.fragment_card_cornerstyle_large) },
+        "With divider" story NodeData { Story.of(R.layout.fragment_card_with_divider) },
+        "With divider arranged vertically" story NodeData { Story.of(R.layout.fragment_card_with_divider_vertical) },
+        "With divider without padding" story NodeData { Story.of(R.layout.fragment_card_with_divider_no_padding) },
+        "With divider and corner style large" story NodeData { Story.of(R.layout.fragment_card_with_divider_cornerstyle_large) }
+      )),
     "Spinner" story NodeData({ children -> SubStory.of(children) },
       mapOf(
         "Default" story NodeData { Story.of(R.layout.fragment_spinner) },
