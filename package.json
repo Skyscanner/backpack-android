@@ -16,7 +16,7 @@
     "preemulator": "npm run emulator:boot",
     "emulator": "adb wait-for-device && sleep 5 && npm run emulator:build && npm run emulator:test",
     "postemulator": "npm run emulator:kill",
-    "prerelease": "npm run emulator",
+    "prerelease": "npm ci && npm run emulator",
     "release": "node release.js",
     "test": "eslint . --ext .js,.jsx",
     "prebuild": "npm test",
