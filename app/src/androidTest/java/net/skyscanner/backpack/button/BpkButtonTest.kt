@@ -144,4 +144,33 @@ class BpkButtonTest : BpkSnapshotTest() {
     button.iconPosition = BpkButton.ICON_ONLY
     snap(button)
   }
+
+  @Test
+  fun screenshotTestButtonBasicWhite() {
+    val button = BpkButton(testContext)
+    button.type = BpkButton.Type.White
+    button.text = "Message"
+    snap(button)
+  }
+
+  @Test
+  @Ignore
+  fun screenshotTestButtonBasicWhiteWithIcon() {
+    val button = BpkButton(testContext)
+    button.type = BpkButton.Type.White
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.START
+    button.text = "Message"
+    snap(button)
+  }
+
+  @Test
+  @Ignore
+  fun screenshotTestButtonBasicWhiteOnlyIcon() {
+    val button = BpkButton(testContext)
+    button.type = BpkButton.Type.White
+    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.ICON_ONLY
+    snap(button)
+  }
 }

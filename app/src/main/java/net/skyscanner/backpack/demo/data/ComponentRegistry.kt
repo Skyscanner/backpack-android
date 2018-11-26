@@ -88,7 +88,8 @@ object ComponentRegistry {
         "Primary" story NodeData { ButtonStory.of(R.layout.fragment_button, "primary") },
         "Secondary" story NodeData { ButtonStory.of(R.layout.fragment_button, "secondary") },
         "Destructive" story NodeData { ButtonStory.of(R.layout.fragment_button, "destructive") },
-        "Featured" story NodeData { ButtonStory.of(R.layout.fragment_button, "featured") }
+        "Featured" story NodeData { ButtonStory.of(R.layout.fragment_button, "featured") },
+        "White" story NodeData { ButtonStory.of(R.layout.fragment_button, "white") }
       )),
     "Card" story NodeData({ children -> SubStory.of(children) },
       mapOf(

@@ -109,7 +109,8 @@ open class BpkButton @JvmOverloads constructor(
     Primary(0, R.color.bpkGreen500, R.color.bpkWhite, android.R.color.transparent),
     Secondary(1, R.color.bpkWhite, R.color.bpkBlue600, R.color.bpkGray100),
     Featured(2, R.color.bpkPink500, R.color.bpkWhite, android.R.color.transparent),
-    Destructive(3, R.color.bpkWhite, R.color.bpkRed500, R.color.bpkGray100);
+    Destructive(3, R.color.bpkWhite, R.color.bpkRed500, R.color.bpkGray100),
+    White(4, android.R.color.transparent, R.color.bpkWhite, R.color.bpkWhite);
 
     internal companion object {
       internal fun fromId(id: Int): Type {
@@ -140,9 +141,14 @@ open class BpkButton @JvmOverloads constructor(
     }
 
     this.background = if (this.isEnabled) {
+      val pressedColor = if (type == Type.White) {
+        ContextCompat.getColor(context, R.color.bpkGray300)
+      } else {
+        darken(ContextCompat.getColor(context, type.bgColor))
+      }
       getSelectorDrawable(
         normalColor = ContextCompat.getColor(context, type.bgColor),
-        pressedColor = darken(ContextCompat.getColor(context, type.bgColor)),
+        pressedColor = pressedColor,
         disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
         cornerRadius = roundedButtonCorner,
         strokeWidth = strokeWidth,
