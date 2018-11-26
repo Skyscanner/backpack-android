@@ -2,6 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.0.0
+
+**Breaking:**
+
+- Text style changes:
+  XXL: from 36sp to 30sp
+  XXXL: from 42sp to 36sp
+
+
 # 1.3.1
 
 **Fixed:**
