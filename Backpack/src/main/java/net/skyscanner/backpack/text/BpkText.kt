@@ -7,12 +7,14 @@ import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.BpkView
+import net.skyscanner.backpack.util.Tooling
 
 open class BpkText(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int
-) : AppCompatTextView(context, attrs, defStyleAttr) {
+) : AppCompatTextView(context, attrs, defStyleAttr), Tooling by BpkView()  {
 
   enum class Weight {
     NORMAL,
