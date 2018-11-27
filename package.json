@@ -56,7 +56,7 @@
     "lodash": "^4.17.4",
     "merge2": "^1.2.1",
     "node-fetch": "^2.0.0",
-    "release-it": "^7.5.0",
+    "release-it": "^8.2.0",
     "replace-in-file": "^3.4.2",
     "run-sequence": "^2.2.1",
     "semver": "^5.5.0",
