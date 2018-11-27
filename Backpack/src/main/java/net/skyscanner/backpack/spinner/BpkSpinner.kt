@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import androidx.annotation.ColorInt
 import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.enableDebugHighlight
 
 /**
  * BpkSpinner is designed to indicate that a part of the product is loading or performing a task
@@ -75,6 +76,7 @@ open class BpkSpinner @JvmOverloads constructor(
     small = a.getBoolean(R.styleable.BpkSpinner_small, false)
     type = Type.values()[a.getInt(R.styleable.BpkSpinner_type, 0)]
     a.recycle()
+    enableDebugHighlight()
   }
 
   private fun updateColor() {

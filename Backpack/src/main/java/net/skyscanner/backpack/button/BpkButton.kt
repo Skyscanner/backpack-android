@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.enableDebugHighlight
 
 open class BpkButton @JvmOverloads constructor(
   context: Context,
@@ -172,6 +173,7 @@ open class BpkButton @JvmOverloads constructor(
       if (iconPosition == END) icon else null,
       null
     )
+    enableDebugHighlight()
   }
 }
 

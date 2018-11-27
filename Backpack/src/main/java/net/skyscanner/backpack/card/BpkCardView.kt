@@ -6,6 +6,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.Dimension
 import androidx.cardview.widget.CardView
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.enableDebugHighlight
 
 /**
  * Cards are used to group related items.
@@ -81,5 +82,7 @@ open class BpkCardView @JvmOverloads constructor(
     a.recycle()
 
     maxCardElevation = context.resources.getDimension(R.dimen.bpkElevationLg)
+
+    enableDebugHighlight()
   }
 }

@@ -7,14 +7,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.Tooling
-import net.skyscanner.backpack.util.BpkView
+import net.skyscanner.backpack.util.enableDebugHighlight
 
 open class BpkChip @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.style.Bpk_chip
-) : BpkText(context, attrs, defStyleAttr), Tooling by BpkView() {
+) : BpkText(context, attrs, defStyleAttr) {
 
   init {
     initialize(context, attrs, defStyleAttr)
@@ -32,7 +31,6 @@ open class BpkChip @JvmOverloads constructor(
     isSelected = attr.getBoolean(R.styleable.BpkChip_selected, false)
     attr.recycle()
     setup()
-    highlight(this)
   }
 
   open fun setup() {
@@ -54,5 +52,6 @@ open class BpkChip @JvmOverloads constructor(
         isSelected = !isSelected
       }
     }
+    enableDebugHighlight()
   }
 }

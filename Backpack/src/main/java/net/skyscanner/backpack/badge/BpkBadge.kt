@@ -11,6 +11,7 @@ import androidx.annotation.Dimension
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.enableDebugHighlight
 
 open class BpkBadge @JvmOverloads constructor(
   context: Context,
@@ -136,5 +137,7 @@ open class BpkBadge @JvmOverloads constructor(
 
     // make sure is center aligned
     includeFontPadding = false
+
+    enableDebugHighlight()
   }
 }

@@ -1,18 +1,12 @@
 package net.skyscanner.backpack.util
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.view.View
-import net.skyscanner.backpack.R
+import net.skyscanner.backpack.BuildConfig
 
-interface Tooling {
-  fun highlight(v: View)
-}
-
-class BpkView : Tooling {
-  override fun highlight(v: View) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      v.foreground = v.context.resources.getDrawable(R.color.bpkRed500, v.context.theme)
-    }
+fun View.enableDebugHighlight() {
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && BuildConfig.DEBUG) {
+    foreground = ColorDrawable(0x77008c4d)
   }
 }
-

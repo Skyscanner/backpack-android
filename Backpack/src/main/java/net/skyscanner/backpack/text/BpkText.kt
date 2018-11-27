@@ -7,14 +7,13 @@ import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.BpkView
-import net.skyscanner.backpack.util.Tooling
+import net.skyscanner.backpack.util.enableDebugHighlight
 
 open class BpkText(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int
-) : AppCompatTextView(context, attrs, defStyleAttr), Tooling by BpkView()  {
+) : AppCompatTextView(context, attrs, defStyleAttr) {
 
   enum class Weight {
     NORMAL,
@@ -109,12 +108,14 @@ open class BpkText(
     styleProps ?: throw IllegalStateException("Invalid textStyle")
 
     val textAppearance = styleProps[weight.ordinal]
-    textAppearance ?: throw IllegalStateException("Weight $weight is not supported for the current size")
+    textAppearance
+      ?: throw IllegalStateException("Weight $weight is not supported for the current size")
 
     if (textStyle == CAPS) {
       isAllCaps = true
     }
 
     TextViewCompat.setTextAppearance(this, textAppearance)
+    enableDebugHighlight()
   }
 }
