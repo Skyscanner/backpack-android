@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_component_detail.*
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 
@@ -14,7 +13,7 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry
  * item details are presented side-by-side with a list of items
  * in a [MainActivity].
  */
-class ComponentDetailActivity : AppCompatActivity() {
+class ComponentDetailActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -77,4 +76,5 @@ class ComponentDetailActivity : AppCompatActivity() {
     }
     return super.onKeyUp(keyCode, event)
   }
+
 }

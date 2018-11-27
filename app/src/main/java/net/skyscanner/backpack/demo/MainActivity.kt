@@ -2,12 +2,12 @@ package net.skyscanner.backpack.demo
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.HeaderItem
 import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.StoryItem
 import net.skyscanner.backpack.demo.data.ComponentRegistry
+
 
 /**
  * An activity representing a list of Components. This activity
@@ -17,7 +17,7 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
