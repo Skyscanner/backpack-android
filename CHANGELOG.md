@@ -2,6 +2,19 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.0.0
+
+**Breaking:**
+
+- Text style changes:
+  XXL: from 36sp to 30sp
+  XXXL: from 42sp to 36sp
+
+| Font size  | Old value  | New value  |
+|---|---|---|
+| XXL  | 36pt | 30pt  |
+| XXXL  | 42pt  | 36pt  |
+
 # 1.3.1
 
 **Fixed:**
