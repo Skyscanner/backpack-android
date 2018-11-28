@@ -25,7 +25,7 @@
 
 **Added:**
 
-- Added new property `cornerStyle` to `BpkCardBiew`. See usage in [README.md](docs/Card/README.md).
+- Added new property `cornerStyle` to `BpkCardView`. See usage in [README.md](docs/Card/README.md).
 
 # 1.2.0
 
