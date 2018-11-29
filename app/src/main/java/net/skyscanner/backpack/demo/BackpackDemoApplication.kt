@@ -6,7 +6,6 @@ import com.facebook.stetho.Stetho
 import io.github.inflationx.viewpump.ViewPump
 import net.skyscanner.backpack.util.BpkInterceptor
 
-
 /**
  * Application class registered in AndroidManifest.xml
  */
@@ -16,7 +15,7 @@ open class BackpackDemoApplication : MultiDexApplication() {
     Stetho.initializeWithDefaults(this)
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     ViewPump.init(ViewPump.builder()
-      .addInterceptor(BpkInterceptor())
+      .addInterceptor(BpkInterceptor(true))
       .build())
   }
 }
