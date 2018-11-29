@@ -8,7 +8,6 @@ import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.HeaderItem
 import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.StoryItem
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 
-
 /**
  * An activity representing a list of Components. This activity
  * has different presentations for handset and tablet-size devices. On

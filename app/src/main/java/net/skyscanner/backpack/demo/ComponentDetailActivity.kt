@@ -55,6 +55,7 @@ class ComponentDetailActivity : BpkBaseActivity() {
     }
     return true
   }
+
   /*
    Hide/Un-hide toolbar: Shift + T
    toggle layout direction: Shift + D
@@ -76,5 +77,4 @@ class ComponentDetailActivity : BpkBaseActivity() {
     }
     return super.onKeyUp(keyCode, event)
   }
-
 }
