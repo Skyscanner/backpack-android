@@ -17,7 +17,7 @@ class ButtonStory : Story() {
       "secondary" -> BpkButton.Type.Secondary
       "destructive" -> BpkButton.Type.Destructive
       "featured" -> BpkButton.Type.Featured
-      "white" -> BpkButton.Type.White
+      "outline" -> BpkButton.Type.Outline
       else -> {
         BpkButton.Type.Primary
       }
@@ -29,8 +29,8 @@ class ButtonStory : Story() {
     view.findViewById<BpkButton>(R.id.btn_start_icon).type = buttonType
     view.findViewById<BpkButton>(R.id.btn_icon).type = buttonType
 
-    if (type == "white") {
-      view.setBackgroundColor(ContextCompat.getColor(context!!, R.color.bpkBlue500))
+    if (type == "outline") {
+      view.setBackgroundColor(ContextCompat.getColor(context!!, R.color.bpkBlue400))
     }
     super.onViewCreated(view, savedInstanceState)
   }

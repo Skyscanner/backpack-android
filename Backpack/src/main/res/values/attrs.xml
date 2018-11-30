@@ -45,7 +45,7 @@
       <enum name="secondary" value="1"/>
       <enum name="featured" value="2"/>
       <enum name="destructive" value="3"/>
-      <enum name="white" value="4"/>
+      <enum name="outline" value="4"/>
     </attr>
     <attr name="buttonIcon" format="reference"/>
     <attr name="buttonIconPosition" format="enum">
