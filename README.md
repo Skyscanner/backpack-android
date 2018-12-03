@@ -30,6 +30,7 @@ repositories {
 * [Badge](docs/Badge/README.md)
 * [Button](docs/Button/README.md)
 * [Card](docs/Card/README.md)
+* [Chip](docs/Chip/README.md)
 * [Dialog](docs/Dialog/README.md)
 * [Panel](docs/Panel/README.md)
 * [Spinner](docs/Spinner/README.md)
