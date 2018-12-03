@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.1.0
+
+**Added**
+
+* Added new `outline` type to `BpkButton`, which has white text and border on a transparent background. Designed to be used on coloured backgrounds.
+
 # 2.0.0
 
 **Breaking:**
