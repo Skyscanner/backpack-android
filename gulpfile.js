@@ -291,13 +291,12 @@ gulp.task('template:elevation', () => {
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
-gulp.task('template:icons', () => {
-  const src = 'node_modules/bpk-svgs/dist/svgs/icons/**/*.svg';
-  return gulp
-    .src(src)
+gulp.task('template:icons', () =>
+  gulp
+    .src('node_modules/bpk-svgs/dist/svgs/icons/**/*.svg')
     .pipe(through.obj(convertToXml))
-    .pipe(gulp.dest(PATHS.drawableRes));
-});
+    .pipe(gulp.dest(PATHS.drawableRes)),
+);
 
 gulp.task(
   'default',
