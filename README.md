@@ -24,6 +24,7 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 ```
+#### Note that Backpack is expected to be used with AndroidX. Please refer to [AndroidX migration guide](https://developer.android.com/jetpack/androidx/migrate) to setup.
 
 ## Components
 
