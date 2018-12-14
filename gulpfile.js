@@ -20,7 +20,6 @@ const gulp = require('gulp');
 const path = require('path');
 const nunjucks = require('gulp-nunjucks');
 const rename = require('gulp-rename');
-const runSequence = require('run-sequence');
 const del = require('del');
 const tinycolor = require('tinycolor2');
 const _ = require('lodash');
@@ -292,15 +291,16 @@ gulp.task('template:elevation', () => {
     .pipe(gulp.dest(PATHS.outputRes));
 });
 
-gulp.task('template:icons', () => {
+gulp.task('template:icons', () =>
   gulp
     .src('node_modules/bpk-svgs/dist/svgs/icons/**/*.svg')
     .pipe(through.obj(convertToXml))
-    .pipe(gulp.dest(PATHS.drawableRes));
-});
+    .pipe(gulp.dest(PATHS.drawableRes)),
+);
 
-gulp.task('default', () => {
-  runSequence(
+gulp.task(
+  'default',
+  gulp.series(
     'template:color',
     'template:text',
     'template:text-v21',
@@ -309,7 +309,8 @@ gulp.task('default', () => {
     'template:borders',
     'template:elevation',
     'template:icons',
-  );
-});
+  ),
+  () => {},
+);
 
 gulp.task('clean', () => del([PATHS.outputRes], { force: true }));
