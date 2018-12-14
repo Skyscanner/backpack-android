@@ -221,22 +221,6 @@ gulp.task('template:text', () =>
     .pipe(rename('values/backpack.text.xml'))
     .pipe(gulp.dest(PATHS.outputRes)),
 );
-
-gulp.task('template:text-v21', () =>
-  gulp
-    .src(`${PATHS.templates}/BackpackTextv21.njk`)
-    .pipe(
-      nunjucks.compile({
-        data: [
-          ...getTextStyles(FONT_WEIGHTS.normal),
-          ...getTextStyles(FONT_WEIGHTS.emphasized),
-          ...getTextStyles(FONT_WEIGHTS.heavy),
-        ],
-      }),
-    )
-    .pipe(rename('values-v21/backpack.text.xml'))
-    .pipe(gulp.dest(PATHS.outputRes)),
-);
 gulp.task('template:radii', () => {
   const getRadii = () =>
     tokensWithCategory('radii').map(token => {
@@ -303,7 +287,6 @@ gulp.task(
   gulp.series(
     'template:color',
     'template:text',
-    'template:text-v21',
     'template:spacing',
     'template:radii',
     'template:borders',
