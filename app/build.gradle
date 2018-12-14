@@ -45,13 +45,13 @@ dependencies {
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
   implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidx"
   implementation "com.google.android.material:material:$rootProject.ext.androidx"
-  implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+  implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 
   testImplementation 'junit:junit:4.12'
   implementation 'com.facebook.stetho:stetho:1.5.0'
-  androidTestImplementation 'com.android.support.test:runner:1.0.1'
-  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-  androidTestImplementation 'com.android.support.test:rules:1.0.2'
+  androidTestImplementation 'androidx.test:runner:1.1.1'
+  androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+  androidTestImplementation 'androidx.test:rules:1.1.1'
   api project(':Backpack')
   // NOTE: This is here and not in the root file because snyk is not ignoring it otherwise.
   // This is a test dependency and should be ignored (as stated in snyk docs)
