@@ -1,6 +1,6 @@
 package net.skyscanner.backpack.dialog
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.FrameLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.test.espresso.Espresso.onView
@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkDialogTest : BpkSnapshotTest() {
 
-  private lateinit var mActivity: Activity
+  private lateinit var mActivity: AppCompatActivity
 
   @get:Rule
   var activityRule: ActivityTestRule<MainActivity> =

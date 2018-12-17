@@ -1,8 +1,8 @@
 package net.skyscanner.backpack.util
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 
 /**
  * Activity only used for test purposes
  */
-internal class TestActivity : Activity()
+internal class TestActivity : AppCompatActivity()

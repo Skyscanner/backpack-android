@@ -1,6 +1,6 @@
 package net.skyscanner.backpack.dialog
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Handler
 import android.os.Looper
 import android.view.Gravity
@@ -25,7 +25,7 @@ import org.junit.runner.RunWith
 class BpkDialogTest {
 
   private lateinit var handler: Handler
-  private lateinit var mActivity: Activity
+  private lateinit var mActivity: AppCompatActivity
 
   @get:Rule
   internal var activityRule: ActivityTestRule<TestActivity> =

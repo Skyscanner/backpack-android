@@ -6,9 +6,9 @@
   </declare-styleable>
 
   <style name="bpkButtonBase">
-    <item name="android:fontFamily">sans-serif-light</item>
+    <item name="fontFamily">sans-serif-light</item>
     <item name="android:textSize">12sp</item>
     <item name="android:textStyle">bold</item>
-    <item name="android:textAllCaps">true</item>
+    <item name="textAllCaps">true</item>
   </style>
 </resources>
