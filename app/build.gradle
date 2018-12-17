@@ -45,7 +45,7 @@ dependencies {
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
   implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidx"
   implementation "com.google.android.material:material:$rootProject.ext.androidx"
-  implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+  implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
   testImplementation 'junit:junit:4.12'
   implementation 'com.facebook.stetho:stetho:1.5.0'
