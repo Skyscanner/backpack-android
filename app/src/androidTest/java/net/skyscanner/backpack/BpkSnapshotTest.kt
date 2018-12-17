@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Looper
 import android.view.ContextThemeWrapper
 import android.view.View
-import androidx.test.InstrumentationRegistry
+import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
@@ -15,7 +15,7 @@ open class BpkSnapshotTest {
   private var height = 100
   private var width = 100
   var testContext: Context = ContextThemeWrapper(
-    InstrumentationRegistry.getTargetContext(),
+    InstrumentationRegistry.getInstrumentation().targetContext,
     R.style.AppTheme)
 
   protected fun setupView(view: View) {
