@@ -61,4 +61,5 @@ ext {
   googlePlayServicesVersion = "15.0.1"
   androidMapsUtilsVersion = "0.5+"
   androidx = "1.0.0"
+  constraintLayout = "1.1.3"
 }
