@@ -23,7 +23,8 @@ internal class WeekdayHeaderView @JvmOverloads constructor(
 
   private val headerLabelTextColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray500) }
   private val separatorLineColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray100) }
-  private val baseSpacing: Int by lazy { context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) }
+  private val horizontalSideMargin: Int by lazy { context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) }
+  private val verticalTopBottomMargin: Int by lazy { context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg) }
 
   private val firstWeekdayView: BpkText by lazy {
     BpkText(context).apply {
@@ -79,8 +80,8 @@ internal class WeekdayHeaderView @JvmOverloads constructor(
       .also {
         it.layoutParams =
           ConstraintLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT).apply {
-            marginEnd = baseSpacing
-            marginStart = baseSpacing
+            marginEnd = horizontalSideMargin
+            marginStart = horizontalSideMargin
           }
       }
       .apply {
@@ -106,40 +107,40 @@ internal class WeekdayHeaderView @JvmOverloads constructor(
       null, ConstraintSet.CHAIN_SPREAD_INSIDE
     )
 
-    constraintSet.connect(firstWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, baseSpacing)
+    constraintSet.connect(firstWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, verticalTopBottomMargin)
     constraintSet.connect(firstWeekdayView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START)
     constraintSet.connect(firstWeekdayView.id, ConstraintSet.END, secondWeekdayView.id, ConstraintSet.START)
-    constraintSet.connect(firstWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, baseSpacing)
+    constraintSet.connect(firstWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, verticalTopBottomMargin)
 
-    constraintSet.connect(secondWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, baseSpacing)
+    constraintSet.connect(secondWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, verticalTopBottomMargin)
     constraintSet.connect(secondWeekdayView.id, ConstraintSet.START, firstWeekdayView.id, ConstraintSet.END)
     constraintSet.connect(secondWeekdayView.id, ConstraintSet.END, thirdWeekdayView.id, ConstraintSet.START)
-    constraintSet.connect(secondWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, baseSpacing)
+    constraintSet.connect(secondWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, verticalTopBottomMargin)
 
-    constraintSet.connect(thirdWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, baseSpacing)
+    constraintSet.connect(thirdWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, verticalTopBottomMargin)
     constraintSet.connect(thirdWeekdayView.id, ConstraintSet.START, secondWeekdayView.id, ConstraintSet.END)
     constraintSet.connect(thirdWeekdayView.id, ConstraintSet.END, fourthWeekdayView.id, ConstraintSet.START)
-    constraintSet.connect(thirdWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, baseSpacing)
+    constraintSet.connect(thirdWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, verticalTopBottomMargin)
 
-    constraintSet.connect(fourthWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, baseSpacing)
+    constraintSet.connect(fourthWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, verticalTopBottomMargin)
     constraintSet.connect(fourthWeekdayView.id, ConstraintSet.START, thirdWeekdayView.id, ConstraintSet.END)
     constraintSet.connect(fourthWeekdayView.id, ConstraintSet.END, fifthWeekdayView.id, ConstraintSet.START)
-    constraintSet.connect(fourthWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, baseSpacing)
+    constraintSet.connect(fourthWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, verticalTopBottomMargin)
 
-    constraintSet.connect(fifthWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, baseSpacing)
+    constraintSet.connect(fifthWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, verticalTopBottomMargin)
     constraintSet.connect(fifthWeekdayView.id, ConstraintSet.START, fourthWeekdayView.id, ConstraintSet.END)
     constraintSet.connect(fifthWeekdayView.id, ConstraintSet.END, sixthWeekdayView.id, ConstraintSet.START)
-    constraintSet.connect(fifthWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, baseSpacing)
+    constraintSet.connect(fifthWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, verticalTopBottomMargin)
 
-    constraintSet.connect(sixthWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, baseSpacing)
+    constraintSet.connect(sixthWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, verticalTopBottomMargin)
     constraintSet.connect(sixthWeekdayView.id, ConstraintSet.START, fifthWeekdayView.id, ConstraintSet.END)
     constraintSet.connect(sixthWeekdayView.id, ConstraintSet.END, seventhWeekdayView.id, ConstraintSet.START)
-    constraintSet.connect(sixthWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, baseSpacing)
+    constraintSet.connect(sixthWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, verticalTopBottomMargin)
 
-    constraintSet.connect(seventhWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, baseSpacing)
+    constraintSet.connect(seventhWeekdayView.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, verticalTopBottomMargin)
     constraintSet.connect(seventhWeekdayView.id, ConstraintSet.START, sixthWeekdayView.id, ConstraintSet.END)
     constraintSet.connect(seventhWeekdayView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
-    constraintSet.connect(seventhWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, baseSpacing)
+    constraintSet.connect(seventhWeekdayView.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, verticalTopBottomMargin)
 
     constraintSet.applyTo(containerLayout)
 
