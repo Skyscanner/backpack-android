@@ -47,7 +47,7 @@ open class BpkButton @JvmOverloads constructor(
   private val defaultPadding = context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2
   // Text is 12dp and icon is 16dp. if icon is present,
   // padding needs to be reduced by 2 dp on both sides
-  private val paddingWithIcon = (context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2) - 2
+  private val paddingWithIcon = context.resources.getDimension(R.dimen.bpkSpacingMd).toInt()
 
   private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
   private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderSizeLg).toInt()
@@ -129,12 +129,12 @@ open class BpkButton @JvmOverloads constructor(
       text = null
     }
 
-    this.setPadding(
-      if (iconPosition == ICON_ONLY) paddingWithIcon else defaultPadding,
-      if (this.icon != null) paddingWithIcon else defaultPadding,
-      if (iconPosition == ICON_ONLY) paddingWithIcon else defaultPadding,
-      if (this.icon != null) paddingWithIcon else defaultPadding
-    )
+    when {
+      iconPosition == ICON_ONLY -> setPadding(paddingWithIcon, paddingWithIcon, paddingWithIcon, paddingWithIcon)
+      (this.icon != null && iconPosition == END) -> setPaddingRelative(defaultPadding, paddingWithIcon, paddingWithIcon, paddingWithIcon)
+      (this.icon != null && iconPosition == START) -> setPaddingRelative(paddingWithIcon, paddingWithIcon, defaultPadding, paddingWithIcon)
+      else -> setPadding(defaultPadding, defaultPadding, defaultPadding, defaultPadding)
+    }
 
     if (!text.isNullOrEmpty()) {
       compoundDrawablePadding = paddingWithIcon / 2
@@ -171,7 +171,6 @@ open class BpkButton @JvmOverloads constructor(
       )
     }
 
-    icon?.setBounds(0, 0, iconSize, iconSize)
     this.setCompoundDrawablesRelativeWithIntrinsicBounds(
       if (iconPosition == START || iconPosition == ICON_ONLY) icon else null,
       null,
