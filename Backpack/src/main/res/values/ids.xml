@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <item name="firstWeekdayHeaderLabel" type="id"/>
-  <item name="secondWeekdayHeaderLabel" type="id"/>
-  <item name="thirdWeekdayHeaderLabel" type="id"/>
-  <item name="fourthWeekdayHeaderLabel" type="id"/>
-  <item name="fifthWeekdayHeaderLabel" type="id"/>
-  <item name="sixthWeekdayHeaderLabel" type="id"/>
-  <item name="seventhWeekdayHeaderLabel" type="id"/>
+  <item name="firstWeekdayLabel" type="id"/>
+  <item name="secondWeekdayLabel" type="id"/>
+  <item name="thirdWeekdayLabel" type="id"/>
+  <item name="fourthWeekdayLabel" type="id"/>
+  <item name="fifthWeekdayLabel" type="id"/>
+  <item name="sixthWeekdayLabel" type="id"/>
+  <item name="seventhWeekdayLabel" type="id"/>
 </resources>
