@@ -6,51 +6,55 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 abstract class BpkCalendarController {
-  abstract val selectedDay: CalendarDay
 
-  abstract val range: CalendarRange
+  open val startDate: Calendar = DEFAULT_START_DATE
 
-  abstract val minDate: Calendar
-
-  abstract val maxDate: Calendar
+  open val endDate: Calendar = DEFAULT_END_DATE
 
   abstract val isRtl: Boolean
 
   abstract val locale: Locale
 
+  private val selectedRange: CalendarRange = CalendarRange()
+
   abstract fun onRangeSelected(range: CalendarRange)
 
-  internal fun onDayOfMonthSelected(selectedDay: CalendarDay) {
-    val currentRangeStart = range.start
-    val currentRangeEnd = range.end
+  protected fun onDayOfMonthSelected(selectedDay: CalendarDay) {
+    val currentRangeStart = selectedRange.start
+    val currentRangeEnd = selectedRange.end
 
     if (currentRangeStart != null) {
       when {
         currentRangeStart.date == selectedDay.date && currentRangeEnd == null -> {
-          range.start = selectedDay
-          range.end = selectedDay
+          selectedRange.start = selectedDay
+          selectedRange.end = selectedDay
         }
         currentRangeStart.date == selectedDay.date && currentRangeEnd != null && currentRangeEnd.date == selectedDay.date -> {
-          range.start = null
-          range.end = null
+          selectedRange.start = null
+          selectedRange.end = null
         }
         currentRangeStart.date != selectedDay.date && currentRangeEnd != null && currentRangeEnd.date == selectedDay.date -> {
-          range.start = currentRangeStart
-          range.end = null
+          selectedRange.start = currentRangeStart
+          selectedRange.end = null
         }
         selectedDay.date.before(currentRangeStart.date) -> {
-          range.start = selectedDay
-          range.end = null
+          selectedRange.start = selectedDay
+          selectedRange.end = null
         }
-        currentRangeEnd == null || currentRangeEnd.date != selectedDay.date -> range.end = selectedDay
+        currentRangeEnd == null || currentRangeEnd.date != selectedDay.date -> selectedRange.end = selectedDay
       }
     } else {
-      range.start = selectedDay
-      range.end = null
+      selectedRange.start = selectedDay
+      selectedRange.end = null
     }
 
-    onRangeSelected(range)
+    onRangeSelected(selectedRange)
   }
 
-  internal fun getLocalizedDate(date: Date, pattern: String): String = SimpleDateFormat(pattern, locale).format(date)
+  protected fun getLocalizedDate(date: Date, pattern: String): String = SimpleDateFormat(pattern, locale).format(date)
+
+  private companion object {
+    val DEFAULT_START_DATE: Calendar = Calendar.getInstance()
+    val DEFAULT_END_DATE: Calendar = Calendar.getInstance().apply { add(Calendar.YEAR, 1) }
+  }
 }

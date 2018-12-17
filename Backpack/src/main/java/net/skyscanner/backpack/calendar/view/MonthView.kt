@@ -456,7 +456,7 @@ class MonthView @JvmOverloads constructor(
   private fun isLastDayInMonth(day: Int, month: Int, year: Int) = day == getDaysInMonth(month, year)
 
   private fun isBeforeMin(year: Int, month: Int) =
-    controller?.minDate?.let { minDate ->
+    controller?.startDate?.let { minDate ->
       when {
         year < minDate.get(Calendar.YEAR) -> true
         year > minDate.get(Calendar.YEAR) -> false
@@ -467,7 +467,7 @@ class MonthView @JvmOverloads constructor(
     } ?: false
 
   private fun isBeforeMin(year: Int, month: Int, day: Int) =
-    controller?.minDate?.let { minDate ->
+    controller?.startDate?.let { minDate ->
       val minYear = minDate.get(Calendar.YEAR)
       val minMonth = minDate.get(Calendar.MONTH)
       val minDay = minDate.get(Calendar.DAY_OF_MONTH)
@@ -475,7 +475,7 @@ class MonthView @JvmOverloads constructor(
     } ?: false
 
   private fun isAfterMax(year: Int, month: Int, day: Int) =
-    controller?.maxDate?.let { maxDate ->
+    controller?.endDate?.let { maxDate ->
       when {
         year > maxDate.get(Calendar.YEAR) -> true
         year < maxDate.get(Calendar.YEAR) -> false

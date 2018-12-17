@@ -41,8 +41,8 @@ class MonthAdapter(
     }
 
     override fun getCount() =
-        (controller.maxDate.get(Calendar.YEAR) - controller.minDate.get(Calendar.YEAR)) *
-                MONTHS_IN_YEAR + controller.maxDate.get(Calendar.MONTH) - controller.minDate.get(Calendar.MONTH) + 1
+        (controller.endDate.get(Calendar.YEAR) - controller.startDate.get(Calendar.YEAR)) *
+                MONTHS_IN_YEAR + controller.endDate.get(Calendar.MONTH) - controller.startDate.get(Calendar.MONTH) + 1
 
     override fun getItem(position: Int) = null
 
@@ -72,9 +72,9 @@ class MonthAdapter(
 
         drawingParams.clear()
 
-        val positionWithStart = position + controller.minDate.get(Calendar.MONTH)
+        val positionWithStart = position + controller.startDate.get(Calendar.MONTH)
         val month = positionWithStart % MONTHS_IN_YEAR
-        val year = positionWithStart / MONTHS_IN_YEAR + controller.minDate.get(Calendar.YEAR)
+        val year = positionWithStart / MONTHS_IN_YEAR + controller.startDate.get(Calendar.YEAR)
         val day = if (isSelectedDayInMonth(selectedDay, year, month)) selectedDay.day else -1
 
         view.reuse()
