@@ -7,8 +7,6 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
-import android.graphics.drawable.StateListDrawable
-import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.annotation.ColorInt
@@ -201,29 +199,11 @@ fun getSelectorDrawable(
   @ColorInt pressedColor: Int,
   @ColorInt disabledColor: Int
 ): Drawable {
-  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-    val states = StateListDrawable()
-    states.addState(
-      intArrayOf(-android.R.attr.state_enabled),
-      corneredDrawable(disabledColor, cornerRadius, strokeColor, strokeWidth)
-    )
-    states.addState(
-      intArrayOf(android.R.attr.state_pressed),
-      corneredDrawable(pressedColor, cornerRadius, strokeColor, strokeWidth)
-    )
-    states.addState(
-      intArrayOf(android.R.attr.state_focused),
-      corneredDrawable(pressedColor, cornerRadius, strokeColor, strokeWidth)
-    )
-    states.addState(intArrayOf(), corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth))
-    return states
-  } else {
-    return RippleDrawable(
-      getColorSelector(normalColor, pressedColor, disabledColor),
-      corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth),
-      corneredDrawable(Color.BLACK, cornerRadius, strokeColor, strokeWidth)
-    )
-  }
+  return RippleDrawable(
+    getColorSelector(normalColor, pressedColor, disabledColor),
+    corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth),
+    corneredDrawable(Color.BLACK, cornerRadius, strokeColor, strokeWidth)
+  )
 }
 
 /**

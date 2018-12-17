@@ -55,7 +55,7 @@ ext {
   version = "$BpkVersion"
   compileSdkVersion = 28
   targetSdkVersion = 28
-  minSdkVersion = 19
+  minSdkVersion = 21
   buildToolsVersion = "28.0.3"
   supportLibVersion = "27.1.1"
   googlePlayServicesVersion = "15.0.1"
