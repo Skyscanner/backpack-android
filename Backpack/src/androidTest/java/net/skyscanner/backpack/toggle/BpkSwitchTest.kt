@@ -2,8 +2,8 @@ package net.skyscanner.backpack.toggle
 
 import android.content.Context
 import android.content.res.ColorStateList
-import androidx.test.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.ResourcesUtil.getColor
 import org.junit.Assert
