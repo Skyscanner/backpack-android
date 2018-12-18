@@ -2,7 +2,7 @@ package net.skyscanner.backpack.gradient
 
 import android.graphics.drawable.GradientDrawable
 import android.view.View
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
 import org.junit.Test
