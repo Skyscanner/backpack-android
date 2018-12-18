@@ -29,7 +29,7 @@ class BpkGradientsTest {
       GradientDrawable.Orientation.TL_BR,
       intArrayOf(ContextCompat.getColor(testContext, R.color.bpkBlue500), ContextCompat.getColor(testContext, R.color.bpkPrimaryGradientLight)))
 
-    val gradient = BpkGradients.getPrimary(testContext)
+    val gradient = BpkGradients(testContext)
 
     assertEquals(expectedGradient.orientation, gradient.orientation)
     assertEquals(expectedGradient.alpha, gradient.alpha)
@@ -46,7 +46,7 @@ class BpkGradientsTest {
       GradientDrawable.Orientation.BOTTOM_TOP,
       intArrayOf(ContextCompat.getColor(testContext, R.color.bpkBlue500), ContextCompat.getColor(testContext, R.color.bpkPrimaryGradientLight)))
 
-    val gradient = BpkGradients.getPrimary(testContext, GradientDrawable.Orientation.BOTTOM_TOP)
+    val gradient = BpkGradients(testContext, GradientDrawable.Orientation.BOTTOM_TOP)
 
     assertEquals(expectedGradient.orientation, gradient.orientation)
     assertEquals(expectedGradient.alpha, gradient.alpha)
