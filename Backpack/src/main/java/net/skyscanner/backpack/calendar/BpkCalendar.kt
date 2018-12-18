@@ -15,7 +15,7 @@ class BpkCalendar @JvmOverloads constructor(
 
   private val calendarView: CalendarView by lazy {
     CalendarView(context, attrs).also { calendarView ->
-      LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+      LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         .also { calendarView.layoutParams = it }
     }
   }

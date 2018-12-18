@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.skyscanner.backpack.calendar.BpkCalendar
+<FrameLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:id="@+id/bpkCalendar"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:nestedScrollingEnabled="true"/>
+  android:layout_height="match_parent">
+
+  <net.skyscanner.backpack.calendar.BpkCalendar
+    android:id="@+id/bpkCalendar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:nestedScrollingEnabled="true"/>
+</FrameLayout>
