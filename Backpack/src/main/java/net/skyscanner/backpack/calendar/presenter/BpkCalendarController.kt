@@ -15,11 +15,13 @@ abstract class BpkCalendarController {
 
   abstract val locale: Locale
 
-  private val selectedRange: CalendarRange = CalendarRange()
-
   abstract fun onRangeSelected(range: CalendarRange)
 
-  protected fun onDayOfMonthSelected(selectedDay: CalendarDay) {
+  internal val selectedDay: CalendarDay = CalendarDay()
+
+  internal val selectedRange: CalendarRange = CalendarRange()
+
+  internal fun onDayOfMonthSelected(selectedDay: CalendarDay) {
     val currentRangeStart = selectedRange.start
     val currentRangeEnd = selectedRange.end
 
@@ -51,7 +53,7 @@ abstract class BpkCalendarController {
     onRangeSelected(selectedRange)
   }
 
-  protected fun getLocalizedDate(date: Date, pattern: String): String = SimpleDateFormat(pattern, locale).format(date)
+  internal fun getLocalizedDate(date: Date, pattern: String): String = SimpleDateFormat(pattern, locale).format(date)
 
   private companion object {
     val DEFAULT_START_DATE: Calendar = Calendar.getInstance()

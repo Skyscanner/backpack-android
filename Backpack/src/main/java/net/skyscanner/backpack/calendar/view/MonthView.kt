@@ -16,6 +16,7 @@
 
 package net.skyscanner.backpack.calendar.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -92,8 +93,8 @@ class MonthView @JvmOverloads constructor(
     }
   }
 
-  var month: Int = 0
-  var year: Int = 0
+  private var month: Int = 0
+  private var year: Int = 0
 
   private var dayOfWeekStart = 0
   private var hasToday = false
@@ -135,6 +136,7 @@ class MonthView @JvmOverloads constructor(
       }
     }
 
+  @SuppressLint("ClickableViewAccessibility")
   override fun onTouchEvent(event: MotionEvent): Boolean {
     if (event.action == MotionEvent.ACTION_UP) {
         var x = event.x
@@ -267,21 +269,21 @@ class MonthView @JvmOverloads constructor(
     val isOutOfRange = isOutOfRange(year, month, day)
 
     if (!isOutOfRange) {
-      val type = controller.range.getDrawType(year, month, day)
+      val type = controller.selectedRange.getDrawType(year, month, day)
       if (type == CalendarRange.DrawType.SELECTED) {
         selectedCirclePaint.color = selectedDayCircleFillColor
-        if (controller.range.isRange && !controller.range.isOnTheSameDate) {
+        if (controller.selectedRange.isRange && !controller.selectedRange.isOnTheSameDate) {
           val padding = (stopX - startX) / 2
-          drawEdgeCircles(canvas, calendarDay, controller.range, padding, x, y, startX, startY, stopX, stopY)
+          drawEdgeCircles(canvas, calendarDay, controller.selectedRange, padding, x, y, startX, startY, stopX, stopY)
           calendarDay.add(Calendar.DAY_OF_MONTH, 1)
-          if (controller.range.getDrawType(calendarDay.year, calendarDay.month, calendarDay.day) != CalendarRange.DrawType.NONE) {
+          if (controller.selectedRange.getDrawType(calendarDay.year, calendarDay.month, calendarDay.day) != CalendarRange.DrawType.NONE) {
             drawRect(canvas, startX + padding, startY, stopX + padding, stopY)
           } else {
             drawRect(canvas, startX, startY, stopX - padding, stopY)
           }
         }
 
-        if (controller.range.isOnTheSameDate) {
+        if (controller.selectedRange.isOnTheSameDate) {
           overrideTextColor = Color.WHITE
           selectedCirclePaint.alpha = 255
           drawSameDayCircles(
@@ -294,7 +296,7 @@ class MonthView @JvmOverloads constructor(
           selectedCirclePaint.alpha = 255
         } else {
           overrideTextColor = Color.WHITE
-          if (controller.range.isInRange(controller.selectedDay, month, day)) {
+          if (controller.selectedRange.isInRange(controller.selectedDay, month, day)) {
             selectedCirclePaint.style = Paint.Style.FILL
             drawCircle(
               canvas,
@@ -323,7 +325,7 @@ class MonthView @JvmOverloads constructor(
           }
         }
       } else if (type == CalendarRange.DrawType.RANGE) {
-        drawRange(canvas, calendarDay, controller.range, x, y, startX, startY, stopX, stopY)
+        drawRange(canvas, calendarDay, controller.selectedRange, x, y, startX, startY, stopX, stopY)
         overrideTextColor = Color.WHITE
       } else {
         drawTodayCircle(canvas, x, y - miniDayNumberTextSize / 3, selectedDayCircleRadius, todayCirclePaint, day)
