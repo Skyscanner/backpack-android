@@ -76,7 +76,6 @@ class BpkResources {
     for (style in toTest) {
       val result = appContext.obtainStyledAttributes(R.style.bpkTextLg, R.styleable.BpkTextStyle)
 
-      assertNotNull(result.getString(R.styleable.BpkTextStyle_android_fontFamily))
       assertNotNull(result.getString(R.styleable.BpkTextStyle_android_textSize))
 
       result.recycle()
