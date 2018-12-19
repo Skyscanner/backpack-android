@@ -42,7 +42,8 @@ import java.util.TimeZone
  * within the specified month.
  */
 internal class MonthView @JvmOverloads constructor(
-  context: Context, attrs: AttributeSet? = null,
+  context: Context,
+  attrs: AttributeSet? = null,
   defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
@@ -210,7 +211,6 @@ internal class MonthView @JvmOverloads constructor(
       }
     }
     numberOfRows = calculateNumRows()
-
   }
 
   fun reuse() {

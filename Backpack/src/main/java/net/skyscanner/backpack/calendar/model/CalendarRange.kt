@@ -42,7 +42,6 @@ class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? = null
               DrawType.NONE
             }
         }
-
     }
 
     internal fun isInRange(selectedDay: CalendarDay?, month: Int, day: Int): Boolean {
