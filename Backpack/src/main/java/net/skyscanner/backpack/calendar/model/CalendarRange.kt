@@ -1,7 +1,8 @@
 package net.skyscanner.backpack.calendar.model
 
 import java.io.Serializable
-import java.util.*
+import java.util.Calendar
+import java.util.TimeZone
 
 class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? = null) : Serializable {
 

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.core.view.ViewCompat.LAYOUT_DIRECTION_RTL
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
-import java.util.*
+import java.util.Locale
 
 class ExampleBpkCalendarController(private val context: Context) : BpkCalendarController() {
   override fun onRangeSelected(range: CalendarRange) {

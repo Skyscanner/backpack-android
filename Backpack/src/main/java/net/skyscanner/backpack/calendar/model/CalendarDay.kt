@@ -2,7 +2,10 @@ package net.skyscanner.backpack.calendar.model
 
 import java.io.Serializable
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.TimeZone
+import java.util.Date
+import java.util.Locale
 
 class CalendarDay : Serializable {
     private val calendar: Calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
@@ -19,12 +22,6 @@ class CalendarDay : Serializable {
 
     constructor() {
         setTime(System.currentTimeMillis())
-    }
-
-    constructor(calendar: Calendar) {
-        year = calendar.get(Calendar.YEAR)
-        month = calendar.get(Calendar.MONTH)
-        day = calendar.get(Calendar.DAY_OF_MONTH)
     }
 
     constructor(year: Int, month: Int, day: Int) {

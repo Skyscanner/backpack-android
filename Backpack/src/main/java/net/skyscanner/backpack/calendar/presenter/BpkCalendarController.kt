@@ -3,7 +3,9 @@ package net.skyscanner.backpack.calendar.presenter
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
+import java.util.Date
 
 abstract class BpkCalendarController {
 

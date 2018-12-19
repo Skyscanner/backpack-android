@@ -34,13 +34,14 @@ import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.util.ResourcesUtil
 import java.security.InvalidParameterException
-import java.util.*
+import java.util.Calendar
+import java.util.TimeZone
 
 /**
  * A calendar-like view displaying a specified month and the appropriate selectable day numbers
  * within the specified month.
  */
-class MonthView @JvmOverloads constructor(
+internal class MonthView @JvmOverloads constructor(
   context: Context, attrs: AttributeSet? = null,
   defStyle: Int = 0
 ) : View(context, attrs, defStyle) {

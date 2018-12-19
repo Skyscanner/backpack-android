@@ -23,14 +23,16 @@ import android.widget.AbsListView.LayoutParams
 import android.widget.BaseAdapter
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.view.MonthView
-import java.util.*
+import java.util.Calendar
+import kotlin.collections.HashMap
+import kotlin.collections.set
 
-class MonthAdapter(
-    private val context: Context,
-    internal val controller: BpkCalendarController
+internal class MonthAdapter(
+  private val context: Context,
+  private val controller: BpkCalendarController
 ) : BaseAdapter(), MonthView.OnDayClickListener {
 
-    var selectedDay: CalendarDay = CalendarDay()
+    private var selectedDay: CalendarDay = CalendarDay()
         set(value) {
             field = value
             notifyDataSetChanged()
