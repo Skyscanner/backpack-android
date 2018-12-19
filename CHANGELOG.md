@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# v2.2.0
+- Drop support for Android API level 19 and 20
+- Fixes a bug in `BpkButton` where button size was different when icon was present
+- Updates API for `BPKGradient`
+- Updates to Kotlin 1.3.10
+
 # 2.1.0
 
 **Added**

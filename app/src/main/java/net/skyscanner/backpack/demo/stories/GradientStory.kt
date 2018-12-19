@@ -17,7 +17,7 @@ class GradientStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    gradient_primary.background = BpkGradients.getPrimary(context!!)
-    gradient_direction.background = BpkGradients.getPrimary(context!!, GradientDrawable.Orientation.TR_BL)
+    gradient_primary.background = BpkGradients(context!!)
+    gradient_direction.background = BpkGradients(context!!, GradientDrawable.Orientation.TR_BL)
   }
 }

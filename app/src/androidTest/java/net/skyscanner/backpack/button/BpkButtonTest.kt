@@ -1,7 +1,7 @@
 package net.skyscanner.backpack.button
 
 import androidx.core.content.ContextCompat
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before

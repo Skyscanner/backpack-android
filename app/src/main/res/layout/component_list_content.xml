@@ -13,7 +13,7 @@
     android:paddingTop="@dimen/bpkSpacingBase"
     android:paddingStart="@dimen/bpkSpacingLg"
     android:paddingEnd="@dimen/bpkSpacingLg"
-    android:background="?android:attr/selectableItemBackground"
+    android:background="?attr/selectableItemBackground"
     app:textStyle="lg" />
 
   <View

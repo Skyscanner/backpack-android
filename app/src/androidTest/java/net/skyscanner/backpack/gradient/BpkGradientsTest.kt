@@ -2,7 +2,7 @@ package net.skyscanner.backpack.gradient
 
 import android.graphics.drawable.GradientDrawable
 import android.view.View
-import androidx.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
 import org.junit.Test
@@ -19,7 +19,7 @@ class BpkGradientsTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestGradientDefault() {
-    val gradient = BpkGradients.getPrimary(testContext)
+    val gradient = BpkGradients(testContext)
     val view = View(testContext)
     view.background = gradient
     snap(view)
@@ -27,7 +27,7 @@ class BpkGradientsTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestGradient() {
-    val gradient = BpkGradients.getPrimary(testContext, GradientDrawable.Orientation.LEFT_RIGHT)
+    val gradient = BpkGradients(testContext, GradientDrawable.Orientation.LEFT_RIGHT)
     val view = View(testContext)
     view.background = gradient
     snap(view)
