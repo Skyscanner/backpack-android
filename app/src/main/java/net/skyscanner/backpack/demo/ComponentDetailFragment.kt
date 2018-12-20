@@ -5,8 +5,7 @@ import androidx.fragment.app.Fragment
 
 /**
  * A fragment representing a single Component detail screen.
- * This fragment is either contained in a [MainActivity]
- * in two-pane mode (on tablets) or a [ComponentDetailActivity]
+ * This fragment is contained in a [.ComponentDetailActivity]
  * on handsets.
  */
 /**

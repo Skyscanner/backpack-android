@@ -45,7 +45,7 @@ class ComponentDetailActivity : AppCompatActivity() {
 
       fragment.arguments = arguments
       supportFragmentManager.beginTransaction()
-        .add(R.id.component_detail_container, fragment!!)
+        .add(R.id.component_detail_container, fragment)
         .commit()
     }
   }

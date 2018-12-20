@@ -30,7 +30,7 @@ class ButtonStory : Story() {
     view.findViewById<BpkButton>(R.id.btn_icon).type = buttonType
 
     if (type == "outline") {
-      view.setBackgroundColor(ContextCompat.getColor(context!!, R.color.bpkBlue400))
+      view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bpkBlue400))
     }
     super.onViewCreated(view, savedInstanceState)
   }

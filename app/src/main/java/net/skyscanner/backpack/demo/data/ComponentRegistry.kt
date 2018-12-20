@@ -129,10 +129,10 @@ object ComponentRegistry {
       return token
     }
 
-    return rest.fold(COMPONENTS_TREE[first]!!, { result, item ->
+    return rest.fold(COMPONENTS_TREE[first]!!) { result, item ->
       return result.subItems[item]
         ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
-    })
+    }
   }
 
   fun getStoryName(fullyQualifiedName: String): String {

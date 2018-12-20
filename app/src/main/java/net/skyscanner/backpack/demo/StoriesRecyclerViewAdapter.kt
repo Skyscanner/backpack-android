@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 
 class StoriesRecyclerViewAdapter internal constructor(
-  private val mValues: List<ListItem>
+  private val values: List<ListItem>
 ) : RecyclerView.Adapter<StoriesRecyclerViewAdapter.ViewHolder>() {
 
-  private val mOnClickListener = View.OnClickListener { view ->
+  private val onClickListener = View.OnClickListener { view ->
     val viewId = view.tag as String
 
     val context = view.context
@@ -33,24 +33,24 @@ class StoriesRecyclerViewAdapter internal constructor(
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.name.text = ComponentRegistry.getStoryName(mValues[position].getText())
-    holder.itemView.tag = mValues[position].getText()
+    holder.name.text = ComponentRegistry.getStoryName(values[position].getText())
+    holder.itemView.tag = values[position].getText()
 
-    if (mValues[position] is StoryItem) {
-      holder.itemView.setOnClickListener(mOnClickListener)
+    if (values[position] is StoryItem) {
+      holder.itemView.setOnClickListener(onClickListener)
 
-      if (position + 1 == itemCount || mValues[position + 1] is HeaderItem) {
+      if (position + 1 == itemCount || values[position + 1] is HeaderItem) {
         holder.view.findViewById<View>(R.id.component_divider).visibility = View.GONE
       }
     }
   }
 
   override fun getItemCount(): Int {
-    return mValues.size
+    return values.size
   }
 
   override fun getItemViewType(position: Int): Int {
-    return if (mValues[position] is HeaderItem) 0 else 1
+    return if (values[position] is HeaderItem) 0 else 1
   }
 
   inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {

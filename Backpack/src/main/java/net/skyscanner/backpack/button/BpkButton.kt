@@ -41,7 +41,6 @@ open class BpkButton @JvmOverloads constructor(
       this.setup()
     }
 
-  private val iconSize = context.resources.getDimension(R.dimen.bpk_icon_size_small).toInt()
   private val defaultPadding = context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2
   // Text is 12dp and icon is 16dp. if icon is present,
   // padding needs to be reduced by 2 dp on both sides
