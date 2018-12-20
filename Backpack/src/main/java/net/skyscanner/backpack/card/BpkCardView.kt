@@ -40,7 +40,7 @@ open class BpkCardView @JvmOverloads constructor(
 
   /**
    * Sets the card to padded or not
-   * @property padding
+   * @property padded
    */
   var padded: Boolean = true
     set(value) {
@@ -51,7 +51,7 @@ open class BpkCardView @JvmOverloads constructor(
 
   /**
    * Sets the card to focused or not
-   * @property padding
+   * @property focused
    */
   var focused: Boolean = false
     set(value) {

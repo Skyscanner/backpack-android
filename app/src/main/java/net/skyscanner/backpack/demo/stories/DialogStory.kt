@@ -14,11 +14,11 @@ class DialogStory : Story() {
     val dialogType = arguments?.getString(DialogStory.TYPE) ?: savedInstanceState?.getInt(DialogStory.TYPE)
 
     val btn = view.findViewById<BpkButton>(R.id.open_dialog)
-    btn.setOnClickListener({
-      dialogsByType[dialogType]?.let {
+    btn.setOnClickListener { it ->
+      val let = dialogsByType[dialogType]?.let { it ->
         it.invoke(view.context).show()
       }
-    })
+    }
   }
 
   companion object {

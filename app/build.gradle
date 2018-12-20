@@ -39,7 +39,7 @@ android {
 
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
   implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidx"
   implementation "com.google.android.material:material:$rootProject.ext.androidx"
