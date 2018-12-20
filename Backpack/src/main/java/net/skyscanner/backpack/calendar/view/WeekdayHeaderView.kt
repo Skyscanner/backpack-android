@@ -6,7 +6,8 @@ import android.widget.LinearLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import java.util.Calendar
 
 internal class WeekdayHeaderView @JvmOverloads constructor(
   context: Context,
@@ -38,7 +39,6 @@ internal class WeekdayHeaderView @JvmOverloads constructor(
       val calendarDay = (i + weekStart) % numberOfDaysInWeek
       calendar.set(Calendar.DAY_OF_WEEK, calendarDay)
       val calendarDayName = simpleDateFormat.format(calendar.time)
-
 
       when (i) {
         0 -> firstWeekdayView.text = calendarDayName
