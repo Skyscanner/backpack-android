@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/bpkSpacingBase"
+    android:paddingEnd="@dimen/bpkSpacingBase">
+
+    <net.skyscanner.backpack.text.BpkText
+      android:id="@+id/first_weekday_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/bpkGray500"
+      android:paddingTop="@dimen/bpkSpacingLg"
+      android:paddingBottom="@dimen/bpkSpacingLg"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/second_weekday_label"
+      app:chainUseRtl="true"
+      app:layout_constraintHorizontal_chainStyle="spread_inside"
+      tools:text="Mon"/>
+
+    <net.skyscanner.backpack.text.BpkText
+      android:id="@+id/second_weekday_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/bpkGray500"
+      android:paddingTop="@dimen/bpkSpacingLg"
+      android:paddingBottom="@dimen/bpkSpacingLg"
+      app:layout_constraintStart_toEndOf="@+id/first_weekday_label"
+      app:layout_constraintEnd_toStartOf="@+id/third_weekday_label"
+      tools:text="Tue"/>
+
+    <net.skyscanner.backpack.text.BpkText
+      android:id="@+id/third_weekday_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/bpkGray500"
+      android:paddingTop="@dimen/bpkSpacingLg"
+      android:paddingBottom="@dimen/bpkSpacingLg"
+      app:layout_constraintStart_toEndOf="@+id/second_weekday_label"
+      app:layout_constraintEnd_toStartOf="@+id/fourth_weekday_label"
+      tools:text="Wed"/>
+
+    <net.skyscanner.backpack.text.BpkText
+      android:id="@+id/fourth_weekday_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/bpkGray500"
+      android:paddingTop="@dimen/bpkSpacingLg"
+      android:paddingBottom="@dimen/bpkSpacingLg"
+      app:layout_constraintStart_toEndOf="@+id/third_weekday_label"
+      app:layout_constraintEnd_toStartOf="@+id/fifth_weekday_label"
+      tools:text="Thu"/>
+
+    <net.skyscanner.backpack.text.BpkText
+      android:id="@+id/fifth_weekday_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/bpkGray500"
+      android:paddingTop="@dimen/bpkSpacingLg"
+      android:paddingBottom="@dimen/bpkSpacingLg"
+      app:layout_constraintStart_toEndOf="@+id/fourth_weekday_label"
+      app:layout_constraintEnd_toStartOf="@+id/sixth_weekday_label"
+      tools:text="Fri"/>
+
+    <net.skyscanner.backpack.text.BpkText
+      android:id="@+id/sixth_weekday_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/bpkGray500"
+      android:paddingTop="@dimen/bpkSpacingLg"
+      android:paddingBottom="@dimen/bpkSpacingLg"
+      app:layout_constraintStart_toEndOf="@+id/fifth_weekday_label"
+      app:layout_constraintEnd_toStartOf="@+id/seventh_weekday_label"
+      tools:text="Sat"/>
+
+    <net.skyscanner.backpack.text.BpkText
+      android:id="@+id/seventh_weekday_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/bpkGray500"
+      android:paddingTop="@dimen/bpkSpacingLg"
+      android:paddingBottom="@dimen/bpkSpacingLg"
+      app:layout_constraintStart_toEndOf="@+id/sixth_weekday_label"
+      app:layout_constraintEnd_toEndOf="parent"
+      tools:text="Sun"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/bpkGray100"
+    android:visibility="visible"
+    app:layout_constraintBottom_toBottomOf="parent"/>
+
+</LinearLayout>

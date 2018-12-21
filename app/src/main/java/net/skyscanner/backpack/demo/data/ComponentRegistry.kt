@@ -1,13 +1,13 @@
 package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.stories.ButtonStory
+import net.skyscanner.backpack.demo.stories.CalendarStory
+import net.skyscanner.backpack.demo.stories.DialogStory
+import net.skyscanner.backpack.demo.stories.GradientStory
+import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.SubStory
-import net.skyscanner.backpack.demo.stories.GradientStory
-import net.skyscanner.backpack.demo.stories.DialogStory
-import net.skyscanner.backpack.demo.stories.ButtonStory
-import net.skyscanner.backpack.demo.stories.IconsStory
-import java.lang.IllegalArgumentException
 
 interface RegistryItem {
   val name: String
@@ -87,6 +87,7 @@ object ComponentRegistry {
         "With divider without padding" story NodeData { Story.of(R.layout.fragment_card_with_divider_no_padding) },
         "With divider and corner style large" story NodeData { Story.of(R.layout.fragment_card_with_divider_cornerstyle_large) }
       )),
+    "Calendar" story NodeData { CalendarStory.of(R.layout.fragment_calendar) },
     "Chip" story NodeData { Story.of(R.layout.fragment_chip) },
     "Dialog" story NodeData({ children -> SubStory.of(children) },
       mapOf(

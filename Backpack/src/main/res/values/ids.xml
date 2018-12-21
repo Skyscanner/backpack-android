@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <item name="firstWeekdayLabel" type="id"/>
+  <item name="secondWeekdayLabel" type="id"/>
+  <item name="thirdWeekdayLabel" type="id"/>
+  <item name="fourthWeekdayLabel" type="id"/>
+  <item name="fifthWeekdayLabel" type="id"/>
+  <item name="sixthWeekdayLabel" type="id"/>
+  <item name="seventhWeekdayLabel" type="id"/>
+</resources>
