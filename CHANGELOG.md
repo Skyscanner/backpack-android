@@ -2,7 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
-# v2.2.0
+# 2.3.0
+**Added:**
+
+- Added new component `BPKCalendar`
+
+# 2.2.0
 - Drop support for Android API level 19 and 20
 - Fixes a bug in `BpkButton` where button size was different when icon was present
 - Updates API for `BPKGradient`

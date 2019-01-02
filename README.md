@@ -14,7 +14,7 @@ Backpack is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-
 all of it, add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-implementation 'com.github.skyscanner:backpack-android:2.2.0'
+implementation 'com.github.skyscanner:backpack-android:2.3.0'
 ```
 
 If your app resolves dependencies through Jitpack you're all set, if not add in your root `build.gradle`
@@ -31,6 +31,7 @@ repositories {
 * [Badge](docs/Badge/README.md)
 * [Button](docs/Button/README.md)
 * [Card](docs/Card/README.md)
+* [Calendar](docs/Calendar/README.md)
 * [Chip](docs/Chip/README.md)
 * [Dialog](docs/Dialog/README.md)
 * [Panel](docs/Panel/README.md)
