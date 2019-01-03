@@ -153,7 +153,14 @@ open class BpkButton @JvmOverloads constructor(
       )
     } else disabledBackground
 
-    this.setTextColor(ContextCompat.getColor(context, if (this.isEnabled) type.textColor else R.color.bpkGray300))
+    if (this.isEnabled) {
+      this.setTextColor(getColorSelector(
+        ContextCompat.getColor(context, type.textColor),
+        darken(ContextCompat.getColor(context, type.textColor), .1f),
+        ContextCompat.getColor(context, R.color.bpkGray300)))
+    } else {
+      this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray300))
+    }
     TextViewCompat.setTextAppearance(this, R.style.bpkButtonBase)
     this.gravity = Gravity.CENTER
 
@@ -162,8 +169,8 @@ open class BpkButton @JvmOverloads constructor(
         it,
         getColorSelector(
           ContextCompat.getColor(context, type.textColor),
-          ContextCompat.getColor(context, type.textColor),
-          ContextCompat.getColor(context, type.textColor)
+          darken(ContextCompat.getColor(context, type.textColor), .1f),
+          ContextCompat.getColor(context, R.color.bpkGray300)
         )
       )
     }
@@ -197,13 +204,11 @@ fun getSelectorDrawable(
   strokeWidth: Int? = null,
   @ColorInt pressedColor: Int,
   @ColorInt disabledColor: Int
-): Drawable {
-  return RippleDrawable(
-    getColorSelector(normalColor, pressedColor, disabledColor),
-    corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth),
-    corneredDrawable(Color.BLACK, cornerRadius, strokeColor, strokeWidth)
-  )
-}
+) = RippleDrawable(
+  getColorSelector(normalColor, pressedColor, disabledColor),
+  corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidth),
+  corneredDrawable(Color.BLACK, cornerRadius, strokeColor, strokeWidth)
+)
 
 /**
  * Utility function to create a cornered (or circle) drawable given a corner radius.
@@ -244,18 +249,16 @@ private fun getColorSelector(
   @ColorInt normalColor: Int,
   @ColorInt pressedColor: Int,
   @ColorInt disabledColor: Int
-): ColorStateList {
-  return ColorStateList(
-    arrayOf(
-      intArrayOf(-android.R.attr.state_enabled),
-      intArrayOf(android.R.attr.state_pressed),
-      intArrayOf(android.R.attr.state_focused),
-      intArrayOf(android.R.attr.state_activated),
-      intArrayOf()
-    ),
-    intArrayOf(disabledColor, pressedColor, pressedColor, pressedColor, normalColor)
-  )
-}
+) = ColorStateList(
+  arrayOf(
+    intArrayOf(-android.R.attr.state_enabled),
+    intArrayOf(android.R.attr.state_pressed),
+    intArrayOf(android.R.attr.state_focused),
+    intArrayOf(android.R.attr.state_activated),
+    intArrayOf()
+  ),
+  intArrayOf(disabledColor, pressedColor, pressedColor, pressedColor, normalColor)
+)
 
 /**
  * Utility function for darkening a given color
