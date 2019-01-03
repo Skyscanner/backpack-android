@@ -20,7 +20,7 @@ open class Story : ComponentDetailFragment() {
   companion object {
     const val LAYOUT_ID = "fragment_id"
 
-    fun of(fragmentLayout: Int) = Story().apply {
+    infix fun of(fragmentLayout: Int) = Story().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

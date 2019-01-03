@@ -17,7 +17,7 @@ class CalendarStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    fun of(fragmentLayout: Int) = CalendarStory().apply {
+    infix fun of(fragmentLayout: Int) = CalendarStory().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

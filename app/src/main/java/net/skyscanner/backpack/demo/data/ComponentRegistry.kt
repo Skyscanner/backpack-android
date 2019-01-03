@@ -67,46 +67,46 @@ private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
 object ComponentRegistry {
 
   private val COMPONENTS_TREE = mapOf(
-    "Badge" story NodeData { Story.of(R.layout.fragment_badge) },
-    "Button" story NodeData({ children -> SubStory.of(children) },
+    "Badge" story NodeData { Story of R.layout.fragment_badge },
+    "Button" story NodeData({ children -> SubStory of children },
       mapOf(
-        "Primary" story NodeData { ButtonStory.of(R.layout.fragment_button, "primary") },
-        "Secondary" story NodeData { ButtonStory.of(R.layout.fragment_button, "secondary") },
-        "Destructive" story NodeData { ButtonStory.of(R.layout.fragment_button, "destructive") },
-        "Featured" story NodeData { ButtonStory.of(R.layout.fragment_button, "featured") },
-        "Outline" story NodeData { ButtonStory.of(R.layout.fragment_button, "outline") }
+        "Primary" story NodeData { ButtonStory of "primary" },
+        "Secondary" story NodeData { ButtonStory of "secondary" },
+        "Destructive" story NodeData { ButtonStory of "destructive" },
+        "Featured" story NodeData { ButtonStory of "featured" },
+        "Outline" story NodeData { ButtonStory of "outline" }
       )),
-    "Card" story NodeData({ children -> SubStory.of(children) },
+    "Card" story NodeData({ children -> SubStory of children },
       mapOf(
-        "Default" story NodeData { Story.of(R.layout.fragment_card) },
-        "Without padding" story NodeData { Story.of(R.layout.fragment_card_without_padding) },
-        "Selected" story NodeData { Story.of(R.layout.fragment_card_selected) },
-        "Corner style large" story NodeData { Story.of(R.layout.fragment_card_cornerstyle_large) },
-        "With divider" story NodeData { Story.of(R.layout.fragment_card_with_divider) },
-        "With divider arranged vertically" story NodeData { Story.of(R.layout.fragment_card_with_divider_vertical) },
-        "With divider without padding" story NodeData { Story.of(R.layout.fragment_card_with_divider_no_padding) },
-        "With divider and corner style large" story NodeData { Story.of(R.layout.fragment_card_with_divider_cornerstyle_large) }
+        "Default" story NodeData { Story of R.layout.fragment_card },
+        "Without padding" story NodeData { Story of R.layout.fragment_card_without_padding },
+        "Selected" story NodeData { Story of R.layout.fragment_card_selected },
+        "Corner style large" story NodeData { Story of R.layout.fragment_card_cornerstyle_large },
+        "With divider" story NodeData { Story of R.layout.fragment_card_with_divider },
+        "With divider arranged vertically" story NodeData { Story of R.layout.fragment_card_with_divider_vertical },
+        "With divider without padding" story NodeData { Story of R.layout.fragment_card_with_divider_no_padding },
+        "With divider and corner style large" story NodeData { Story of R.layout.fragment_card_with_divider_cornerstyle_large }
       )),
-    "Calendar" story NodeData { CalendarStory.of(R.layout.fragment_calendar) },
-    "Chip" story NodeData { Story.of(R.layout.fragment_chip) },
-    "Dialog" story NodeData({ children -> SubStory.of(children) },
+    "Calendar" story NodeData { CalendarStory of R.layout.fragment_calendar },
+    "Chip" story NodeData { Story of R.layout.fragment_chip },
+    "Dialog" story NodeData({ children -> SubStory of children },
       mapOf(
-        "With call to action" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Normal") },
-        "Warning" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Warning") },
-        "Delete confirmation" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Delete") },
-        "Success" story NodeData { DialogStory.of(R.layout.fragment_dialog, "Confirmation") }
+        "With call to action" story NodeData { DialogStory of "Normal" },
+        "Warning" story NodeData { DialogStory of "Warning" },
+        "Delete confirmation" story NodeData { DialogStory of "Delete" },
+        "Success" story NodeData { DialogStory of "Confirmation" }
       )),
-    "Panel" story NodeData { Story.of(R.layout.fragment_panel) },
-    "Spinner" story NodeData({ children -> SubStory.of(children) },
+    "Panel" story NodeData { Story of R.layout.fragment_panel },
+    "Spinner" story NodeData({ children -> SubStory of children },
       mapOf(
-        "Default" story NodeData { Story.of(R.layout.fragment_spinner) },
-        "Small" story NodeData { Story.of(R.layout.fragment_spinner_small) }
+        "Default" story NodeData { Story of R.layout.fragment_spinner },
+        "Small" story NodeData { Story of R.layout.fragment_spinner_small }
       )),
-    "Text" story NodeData({ children -> SubStory.of(children) },
+    "Text" story NodeData({ children -> SubStory of children },
       mapOf(
-        "Default" story NodeData { Story.of(R.layout.fragment_text) },
-        "Emphasized" story NodeData { Story.of(R.layout.fragment_text_emphasized) },
-        "Heavy" story NodeData { Story.of(R.layout.fragment_text_heavy) }
+        "Default" story NodeData { Story of R.layout.fragment_text },
+        "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
+        "Heavy" story NodeData { Story of R.layout.fragment_text_heavy }
       ))
   )
 
@@ -116,8 +116,8 @@ object ComponentRegistry {
   private val TOKENS_MAP = mapOf(
     "All Icons" story NodeData { IconsStory() },
     "Gradient" story NodeData { GradientStory() },
-    "Icons" story NodeData { Story.of(R.layout.fragment_icons) },
-    "Radii" story NodeData { Story.of(R.layout.fragment_radii) }
+    "Icons" story NodeData { Story of R.layout.fragment_icons },
+    "Radii" story NodeData { Story of R.layout.fragment_radii }
   )
 
   fun getStoryCreator(fullyQualifiedName: String): RegistryItem {
