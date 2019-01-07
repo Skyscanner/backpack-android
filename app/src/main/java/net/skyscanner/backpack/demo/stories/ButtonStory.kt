@@ -39,9 +39,9 @@ class ButtonStory : Story() {
     const val LAYOUT_ID = "fragment_id"
     const val TYPE = "type"
 
-    fun of(fragmentLayout: Int, type: String) = ButtonStory().apply {
+    infix fun of(type: String) = ButtonStory().apply {
       arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
+      arguments?.putInt(LAYOUT_ID, R.layout.fragment_button)
       arguments?.putString(TYPE, type)
     }
   }

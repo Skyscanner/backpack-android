@@ -11,7 +11,8 @@ class DialogStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val dialogType = arguments?.getString(DialogStory.TYPE) ?: savedInstanceState?.getInt(DialogStory.TYPE)
+    val dialogType = arguments?.getString(DialogStory.TYPE)
+      ?: savedInstanceState?.getInt(DialogStory.TYPE)
 
     val btn = view.findViewById<BpkButton>(R.id.open_dialog)
     btn.setOnClickListener { it ->
@@ -25,9 +26,9 @@ class DialogStory : Story() {
     const val LAYOUT_ID = "fragment_id"
     const val TYPE = "type"
 
-    fun of(fragmentLayout: Int, type: String) = DialogStory().apply {
+    infix fun of(type: String) = DialogStory().apply {
       arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
+      arguments?.putInt(LAYOUT_ID, R.layout.fragment_dialog)
       arguments?.putString(TYPE, type)
     }
   }

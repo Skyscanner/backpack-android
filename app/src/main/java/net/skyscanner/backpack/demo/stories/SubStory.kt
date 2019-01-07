@@ -28,7 +28,7 @@ open class SubStory : Story() {
   companion object {
     const val STORIES = "stories"
 
-    fun of(stories: Array<String>) = SubStory().apply {
+    infix fun of(stories: Array<String>) = SubStory().apply {
       arguments = Bundle()
       arguments?.putStringArray(STORIES, stories)
     }
