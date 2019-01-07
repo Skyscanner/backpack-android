@@ -2,11 +2,16 @@ package net.skyscanner.backpack.text
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+
 
 open class BpkText(
   context: Context,
@@ -47,6 +52,13 @@ open class BpkText(
       field = value
       setup()
     }
+
+  /*var drawableTint: ColorStateList = null
+  set(value){
+    for (drawable in compoundDrawables) {
+      drawable?.colorFilter = PorterDuffColorFilter(getColor(value), PorterDuff.Mode.SRC_IN)
+    }
+  }*/
 
   /**
    * Sets the text style to emphasized.
@@ -98,6 +110,18 @@ open class BpkText(
       weight = Weight.values()[weightArg]
     }
 
+    // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
+    if (this.layoutDirection == View.LAYOUT_DIRECTION_LTR) {
+      this.setCompoundDrawablesRelative(compoundDrawables[0], compoundDrawables[1], compoundDrawables[2], compoundDrawables[3])
+    } else {
+      this.setCompoundDrawablesRelative(compoundDrawables[2], compoundDrawables[1], compoundDrawables[0], compoundDrawables[3])
+    }
+    if (a.getColorStateList(R.styleable.BpkText_drawableTint) != null) {
+      val drawableTint = a.getColorStateList(R.styleable.BpkText_drawableTint)
+      for (drawable in compoundDrawablesRelative) {
+        drawable?.colorFilter = PorterDuffColorFilter(drawableTint!!.getColorForState(EMPTY_STATE_SET, Color.WHITE), PorterDuff.Mode.SRC_IN)
+      }
+    }
     a.recycle()
   }
 
