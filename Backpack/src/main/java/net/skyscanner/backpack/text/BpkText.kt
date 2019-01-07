@@ -12,7 +12,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 
-
 open class BpkText(
   context: Context,
   attrs: AttributeSet?,
@@ -52,13 +51,6 @@ open class BpkText(
       field = value
       setup()
     }
-
-  /*var drawableTint: ColorStateList = null
-  set(value){
-    for (drawable in compoundDrawables) {
-      drawable?.colorFilter = PorterDuffColorFilter(getColor(value), PorterDuff.Mode.SRC_IN)
-    }
-  }*/
 
   /**
    * Sets the text style to emphasized.
@@ -112,17 +104,29 @@ open class BpkText(
 
     // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
     if (this.layoutDirection == View.LAYOUT_DIRECTION_LTR) {
-      this.setCompoundDrawablesRelative(compoundDrawables[0], compoundDrawables[1], compoundDrawables[2], compoundDrawables[3])
+      this.setCompoundDrawablesRelative(
+        compoundDrawablesRelative[0] ?: compoundDrawables[0],
+        compoundDrawablesRelative[1] ?: compoundDrawables[1],
+        compoundDrawablesRelative[2] ?: compoundDrawables[2],
+        compoundDrawablesRelative[3] ?: compoundDrawables[3])
     } else {
-      this.setCompoundDrawablesRelative(compoundDrawables[2], compoundDrawables[1], compoundDrawables[0], compoundDrawables[3])
+      this.setCompoundDrawablesRelative(
+        compoundDrawablesRelative[0] ?: compoundDrawables[2],
+        compoundDrawablesRelative[1] ?: compoundDrawables[1],
+        compoundDrawablesRelative[2] ?: compoundDrawables[0],
+        compoundDrawablesRelative[3] ?: compoundDrawables[3])
     }
     if (a.getColorStateList(R.styleable.BpkText_drawableTint) != null) {
       val drawableTint = a.getColorStateList(R.styleable.BpkText_drawableTint)
-      for (drawable in compoundDrawablesRelative) {
-        drawable?.colorFilter = PorterDuffColorFilter(drawableTint!!.getColorForState(EMPTY_STATE_SET, Color.WHITE), PorterDuff.Mode.SRC_IN)
-      }
+      setDrawableTint(drawableTint!!.getColorForState(EMPTY_STATE_SET, Color.WHITE))
     }
     a.recycle()
+  }
+
+  open fun setDrawableTint(color: Int) {
+    for (drawable in compoundDrawablesRelative) {
+      drawable?.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+    }
   }
 
   private fun setup() {
@@ -131,7 +135,8 @@ open class BpkText(
     styleProps ?: throw IllegalStateException("Invalid textStyle")
 
     val textAppearance = styleProps[weight.ordinal]
-    textAppearance ?: throw IllegalStateException("Weight $weight is not supported for the current size")
+    textAppearance
+      ?: throw IllegalStateException("Weight $weight is not supported for the current size")
 
     if (textStyle == CAPS) {
       isAllCaps = true
