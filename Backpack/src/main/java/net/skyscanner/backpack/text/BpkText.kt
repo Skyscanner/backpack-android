@@ -116,14 +116,14 @@ open class BpkText(
         compoundDrawablesRelative[2] ?: compoundDrawables[0],
         compoundDrawablesRelative[3] ?: compoundDrawables[3])
     }
-    if (a.getColorStateList(R.styleable.BpkText_drawableTint) != null) {
-      val drawableTint = a.getColorStateList(R.styleable.BpkText_drawableTint)
-      setDrawableTint(drawableTint!!.getColorForState(EMPTY_STATE_SET, Color.WHITE))
+    val drawableTint = a.getColorStateList(R.styleable.BpkText_drawableTint)
+    if (drawableTint!= null) {
+      setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
     }
     a.recycle()
   }
 
-  open fun setDrawableTint(color: Int) {
+  fun setDrawableTint(color: Int) {
     for (drawable in compoundDrawablesRelative) {
       drawable?.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
     }

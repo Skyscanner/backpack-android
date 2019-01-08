@@ -33,7 +33,7 @@
       <enum name="emphasized" value="1" />
       <enum name="heavy" value="2" />
     </attr>
-    <attr name="drawableTint"/>
+    <attr name="drawableTint" format="reference"/>
   </declare-styleable>
 
   <declare-styleable name="BpkPanel">
