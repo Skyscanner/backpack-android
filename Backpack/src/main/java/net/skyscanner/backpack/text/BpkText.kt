@@ -2,7 +2,11 @@ package net.skyscanner.backpack.text
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
@@ -98,7 +102,34 @@ open class BpkText(
       weight = Weight.values()[weightArg]
     }
 
+    // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
+
+    var start = compoundDrawablesRelative[0] ?: compoundDrawables[0]
+    val top = compoundDrawablesRelative[1] ?: compoundDrawables[1]
+    var end = compoundDrawablesRelative[2] ?: compoundDrawables[2]
+    val bottom = compoundDrawablesRelative[3] ?: compoundDrawables[3]
+
+    // Swapping drawables in case of RTL.
+    // compoundDrawablesRelative order is `start`,`top`,`end`,`bottom`
+    // compoundDrawables order is  `left`,`top`,`right`,`bottom`
+
+    if (this.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+      start = compoundDrawables[2]
+      end = compoundDrawables[0]
+    }
+    setCompoundDrawablesRelative(start, top, end, bottom)
+
+    val drawableTint = a.getColorStateList(R.styleable.BpkText_drawableTint)
+    if (drawableTint != null) {
+      setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
+    }
     a.recycle()
+  }
+
+  fun setDrawableTint(color: Int) {
+    for (drawable in compoundDrawablesRelative) {
+      drawable?.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+    }
   }
 
   private fun setup() {
@@ -107,7 +138,8 @@ open class BpkText(
     styleProps ?: throw IllegalStateException("Invalid textStyle")
 
     val textAppearance = styleProps[weight.ordinal]
-    textAppearance ?: throw IllegalStateException("Weight $weight is not supported for the current size")
+    textAppearance
+      ?: throw IllegalStateException("Weight $weight is not supported for the current size")
 
     if (textStyle == CAPS) {
       isAllCaps = true
