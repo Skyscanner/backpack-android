@@ -103,21 +103,24 @@ open class BpkText(
     }
 
     // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
-    if (this.layoutDirection == View.LAYOUT_DIRECTION_LTR) {
-      this.setCompoundDrawablesRelative(
-        compoundDrawablesRelative[0] ?: compoundDrawables[0],
-        compoundDrawablesRelative[1] ?: compoundDrawables[1],
-        compoundDrawablesRelative[2] ?: compoundDrawables[2],
-        compoundDrawablesRelative[3] ?: compoundDrawables[3])
-    } else {
-      this.setCompoundDrawablesRelative(
-        compoundDrawablesRelative[0] ?: compoundDrawables[2],
-        compoundDrawablesRelative[1] ?: compoundDrawables[1],
-        compoundDrawablesRelative[2] ?: compoundDrawables[0],
-        compoundDrawablesRelative[3] ?: compoundDrawables[3])
+
+    var start = compoundDrawablesRelative[0] ?: compoundDrawables[0]
+    val top = compoundDrawablesRelative[1] ?: compoundDrawables[1]
+    var end = compoundDrawablesRelative[2] ?: compoundDrawables[2]
+    val bottom = compoundDrawablesRelative[3] ?: compoundDrawables[3]
+
+    // Swapping drawables in case of RTL.
+    // compoundDrawablesRelative order is `start`,`top`,`end`,`bottom`
+    // compoundDrawables order is  `left`,`top`,`right`,`bottom`
+
+    if (this.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+      start = compoundDrawables[2]
+      end = compoundDrawables[0]
     }
+    setCompoundDrawablesRelative(start, top, end, bottom)
+
     val drawableTint = a.getColorStateList(R.styleable.BpkText_drawableTint)
-    if (drawableTint!= null) {
+    if (drawableTint != null) {
       setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
     }
     a.recycle()
