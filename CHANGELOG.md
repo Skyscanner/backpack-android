@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.3.1
+
+**Fixed:**
+
+- Darken text and icon on press along with the background on `BpkButton`
+- Support `drawableTint` on Android API < v23
+
 # 2.3.0
 **Added:**
 
