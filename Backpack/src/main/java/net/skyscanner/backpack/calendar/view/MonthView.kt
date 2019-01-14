@@ -297,6 +297,9 @@ internal class MonthView @JvmOverloads constructor(
           selectedCirclePaint.alpha = 255
         } else {
           overrideTextColor = Color.WHITE
+          // TODO: review/remove this. This if is only true when the user selects the
+          // last day in the calendar as the range's end. Removing the if does not seem
+          // to make any difference
           if (controller.selectedRange.isInRange(controller.selectedDay, month, day)) {
             selectedCirclePaint.style = Paint.Style.FILL
             drawCircle(

@@ -55,6 +55,9 @@ abstract class BpkCalendarController {
     onRangeSelected(selectedRange)
   }
 
+  // TODO: This will not respect differences in the order of the fields for each country.
+  // E.g. US = mm/dd/yyyy and UK = dd/mm/yyyy
+  // Shall we use DateFormat.getDateInstance instead?
   internal fun getLocalizedDate(date: Date, pattern: String): String = SimpleDateFormat(pattern, locale).format(date)
 
   private companion object {

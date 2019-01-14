@@ -4,8 +4,7 @@ import java.io.Serializable
 import java.util.Calendar
 import java.util.TimeZone
 
-class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? = null) : Serializable {
-
+data class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? = null) : Serializable {
     private val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
 
     internal val isOnTheSameDate: Boolean
@@ -44,6 +43,7 @@ class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? = null
         }
     }
 
+    // TODO: this is only being used in MonthView:300 and seems unnecessary. Remove/review
     internal fun isInRange(selectedDay: CalendarDay?, month: Int, day: Int): Boolean {
         var isInRange = selectedDay != null && month == selectedDay.month && day == selectedDay.day
         if (isInRange) {
