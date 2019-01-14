@@ -18,7 +18,7 @@ android:layout_width="16dp"
 android:tint="@color/bpkGray900"
 android:layout_margin="@dimen/bpkSpacingSm"
 app:srcCompat="@drawable/bpk_flight"
-android:layout_height="16dp"/>
+  android:layout_height="16dp" />
 ````
 
 Example usage in Kotlin
