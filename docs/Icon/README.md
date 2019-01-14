@@ -16,7 +16,7 @@ Exampe usage in XML
 <ImageView
 android:layout_width="16dp"
 android:tint="@color/bpkGray900"
-android:layout_margin="@dimen/bpkSpacingSm"
+  android:layout_margin="@dimen/bpkSpacingSm"
   app:srcCompat="@drawable/bpk_flight"
   android:layout_height="16dp" />
 ````
