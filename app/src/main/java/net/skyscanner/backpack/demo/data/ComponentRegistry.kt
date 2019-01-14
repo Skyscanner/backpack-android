@@ -102,6 +102,7 @@ object ComponentRegistry {
         "Default" story NodeData { Story of R.layout.fragment_spinner },
         "Small" story NodeData { Story of R.layout.fragment_spinner_small }
       )),
+    "Switch" story NodeData { Story of R.layout.fragment_switch },
     "Text" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_text },
