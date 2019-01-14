@@ -205,7 +205,7 @@ internal class MonthView @JvmOverloads constructor(
     numberOfCells = getDaysInMonth(month, year)
     for (i in 0 until numberOfCells) {
       val day = i + 1
-      if (sameDay(day, CalendarDay())) {
+      if (controller?.isToday(year, month, day) ?: sameDay(day, CalendarDay())) {
         hasToday = true
         this.today = day
       }

@@ -127,6 +127,19 @@ class BpkCalendarControllerTest {
     verify(spy, times(3)).onRangeSelected(expectedRange)
   }
 
+  @Test
+  fun test_isToday() {
+    val today = Calendar.getInstance()
+    val day = today.get(Calendar.DAY_OF_MONTH)
+    val month = today.get(Calendar.MONTH)
+    val year = today.get(Calendar.YEAR)
+
+    Assert.assertTrue(subject.isToday(year, month, day))
+    Assert.assertFalse(subject.isToday(year, month, day + 1))
+    Assert.assertFalse(subject.isToday(year, month + 1, day))
+    Assert.assertFalse(subject.isToday(year + 1, month, day))
+  }
+
   private fun Calendar.atStartOfDay() {
     this.apply {
       set(Calendar.HOUR_OF_DAY, 0)

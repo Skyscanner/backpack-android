@@ -21,7 +21,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkDialogTest : BpkSnapshotTest() {
 
-  private lateinit var mActivity: AppCompatActivity
+  private lateinit var activity: AppCompatActivity
 
   @get:Rule
   var activityRule: ActivityTestRule<MainActivity> =
@@ -30,7 +30,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   @Before
   fun setUp() {
     setDimensions(400, 350)
-    mActivity = activityRule.activity
+    activity = activityRule.activity
   }
 
   @Test
@@ -38,7 +38,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   fun screenshotTestDialog() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(mActivity).apply {
+    val dialog = BpkDialog(activity).apply {
       title = "You are going to Tokyo!"
       description = "Your flight is all booked. Why not check out some hotels now?"
       icon = BpkDialog.Icon(
@@ -64,7 +64,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   fun screenshotTestDialogBottomSheet() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(mActivity, BpkDialog.Style.BOTTOM_SHEET).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Style.BOTTOM_SHEET).apply {
       title = "Delete?"
       description = "Delete your profile?"
       icon = BpkDialog.Icon(
@@ -87,7 +87,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   private fun record(dialog: BpkDialog, asyncScreenshot: AsyncSnapshot) {
-    mActivity.runOnUiThread {
+    activity.runOnUiThread {
       dialog.show()
     }
 
@@ -98,12 +98,12 @@ class BpkDialogTest : BpkSnapshotTest() {
         // see the rounded corners
 
         val rootView = dialog.window!!.decorView
-        mActivity.windowManager.removeView(rootView)
+        activity.windowManager.removeView(rootView)
 
-        val wrapper = FrameLayout(mActivity)
+        val wrapper = FrameLayout(activity)
         wrapper.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
         wrapper.setPadding(20, 20, 20, 20)
-        wrapper.setBackgroundColor(ResourcesCompat.getColor(mActivity.resources, R.color.bpkGray500, mActivity.theme))
+        wrapper.setBackgroundColor(ResourcesCompat.getColor(activity.resources, R.color.bpkGray500, activity.theme))
         wrapper.addView(rootView)
 
         setupView(wrapper)
