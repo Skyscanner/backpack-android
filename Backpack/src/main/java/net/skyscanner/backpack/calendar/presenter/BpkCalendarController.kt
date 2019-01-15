@@ -60,6 +60,10 @@ abstract class BpkCalendarController {
   // Shall we use DateFormat.getDateInstance instead?
   internal fun getLocalizedDate(date: Date, pattern: String): String = SimpleDateFormat(pattern, locale).format(date)
 
+  open fun isToday(year: Int, month: Int, day: Int): Boolean {
+    return CalendarDay(year, month, day).date == CalendarDay().date
+  }
+
   private companion object {
     val DEFAULT_START_DATE: Calendar = Calendar.getInstance()
     val DEFAULT_END_DATE: Calendar = Calendar.getInstance().apply { add(Calendar.YEAR, 1) }
