@@ -3,7 +3,6 @@ package net.skyscanner.backpack.demo
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import io.github.inflationx.viewpump.ViewPump
 import net.skyscanner.backpack.demo.data.SharedPreferences
@@ -43,7 +42,7 @@ class BackpackDemoApplication : Application() {
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     highlight = SharedPreferences.shouldHighlight(this)
 
-    if(highlight){
+    if (highlight) {
       ViewPump.init(ViewPump.builder()
         .addInterceptor(BpkInterceptor())
         .build())

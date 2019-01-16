@@ -59,6 +59,7 @@ class ComponentDetailActivity : BpkBaseActivity() {
   /*
    Hide/Un-hide toolbar: Shift + T
    toggle layout direction: Shift + D
+   toggle markers: Shift + H
   */
   override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
     if (keyCode == KeyEvent.KEYCODE_T && event?.isShiftPressed == true) {

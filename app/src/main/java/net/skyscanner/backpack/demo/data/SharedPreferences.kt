@@ -9,7 +9,6 @@ class SharedPreferences {
   companion object {
     val SHOULD_HIGHLIGHT = "highlight"
 
-
     fun shouldHighlight(context: Context): Boolean {
       return context
         .getSharedPreferences(context.getString(R.string.preference_file_key),
