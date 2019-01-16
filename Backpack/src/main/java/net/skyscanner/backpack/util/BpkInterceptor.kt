@@ -6,14 +6,14 @@ import androidx.annotation.RequiresApi
 import io.github.inflationx.viewpump.InflateResult
 import io.github.inflationx.viewpump.Interceptor
 
-class BpkInterceptor(private val enable: Boolean = false) : Interceptor {
+class BpkInterceptor : Interceptor {
 
   @RequiresApi(Build.VERSION_CODES.M)
   override fun intercept(chain: Interceptor.Chain): InflateResult {
     val result = chain.proceed(chain.request())
     val view = result.view()
 
-    if (enable && view != null && isBpkView(view.javaClass)) {
+    if (view != null && isBpkView(view.javaClass)) {
       if (view.background == null) {
 
         view.background = ColorDrawable(0x77ac650c)
