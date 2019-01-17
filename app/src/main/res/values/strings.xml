@@ -18,4 +18,5 @@
   <string name="stub_xs" translatable="false">Lorem ipsum dolor sit amet.</string>
 
   <string name="txt_flights_to_edinburgh">Flights to Edinburgh</string>
+  <string name="preference_file_key">bpk_preferences</string>
 </resources>

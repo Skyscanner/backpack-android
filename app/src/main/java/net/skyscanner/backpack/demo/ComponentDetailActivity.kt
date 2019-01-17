@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_component_detail.*
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 
@@ -14,7 +13,7 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry
  * item details are presented side-by-side with a list of items
  * in a [MainActivity].
  */
-class ComponentDetailActivity : AppCompatActivity() {
+class ComponentDetailActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -56,9 +55,11 @@ class ComponentDetailActivity : AppCompatActivity() {
     }
     return true
   }
+
   /*
    Hide/Un-hide toolbar: Shift + T
    toggle layout direction: Shift + D
+   toggle markers: Shift + H
   */
   override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
     if (keyCode == KeyEvent.KEYCODE_T && event?.isShiftPressed == true) {
@@ -74,6 +75,10 @@ class ComponentDetailActivity : AppCompatActivity() {
       } else {
         component_detail_container.layoutDirection = View.LAYOUT_DIRECTION_LTR
       }
+    }
+    if (keyCode == KeyEvent.KEYCODE_H && event?.isShiftPressed == true) {
+      BackpackDemoApplication.highlight = !BackpackDemoApplication.highlight
+      BackpackDemoApplication.triggerRebirth(this)
     }
     return super.onKeyUp(keyCode, event)
   }
