@@ -12,13 +12,14 @@ class BpkInterceptor : Interceptor {
   override fun intercept(chain: Interceptor.Chain): InflateResult {
     val result = chain.proceed(chain.request())
     val view = result.view()
+    // brown marker highlight color
+    val highlightColor = 0x77ac650c
 
     if (view != null && isBpkView(view.javaClass)) {
       if (view.background == null) {
-
-        view.background = ColorDrawable(0x77ac650c)
+        view.background = ColorDrawable(highlightColor)
       } else {
-        view.foreground = ColorDrawable(0x77ac650c)
+        view.foreground = ColorDrawable(highlightColor)
       }
     }
     return result

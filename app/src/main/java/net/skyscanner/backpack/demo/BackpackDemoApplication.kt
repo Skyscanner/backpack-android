@@ -37,7 +37,7 @@ class BackpackDemoApplication : Application() {
 
   override fun onCreate() {
     super.onCreate()
-    instance = (applicationContext as BackpackDemoApplication?)!!
+    instance = applicationContext!! as BackpackDemoApplication
     Stetho.initializeWithDefaults(this)
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     highlight = SharedPreferences.shouldHighlight(this)
