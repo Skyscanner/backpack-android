@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.4.0
+**Added:**
+- Support for highlighting backpack components
+
+
 # 2.3.1
 
 **Fixed:**
