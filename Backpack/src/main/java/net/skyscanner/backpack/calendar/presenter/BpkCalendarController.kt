@@ -64,6 +64,13 @@ abstract class BpkCalendarController {
     return CalendarDay(year, month, day).date == CalendarDay().date
   }
 
+  fun updateSelection(range: CalendarRange) {
+    selectedRange.start = range.start
+    selectedRange.end = range.end
+
+    onRangeSelected(selectedRange)
+  }
+
   private companion object {
     val DEFAULT_START_DATE: Calendar = Calendar.getInstance()
     val DEFAULT_END_DATE: Calendar = Calendar.getInstance().apply { add(Calendar.YEAR, 1) }

@@ -7,7 +7,7 @@ import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.view.CalendarView
 import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
 
-class BpkCalendar @JvmOverloads constructor(
+open class BpkCalendar @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyle: Int = 0

@@ -11,6 +11,7 @@ import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.demo.MainActivity
@@ -168,6 +169,21 @@ class BpkCalendarTest : BpkSnapshotTest() {
         setupView(wrapped)
         asyncScreenshot.record(wrapped)
       }
+  }
+
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarWithRangeSetProgrammatically() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      getDate(2019, 0, 2),
+      getDate(2019, 11, 31))
+
+    calendar.setController(controller)
+    controller.updateSelection(CalendarRange(CalendarDay(2019, 0, 4), CalendarDay(2019, 0, 9)))
+    snap(wrapWithBackground(calendar))
   }
 
   private fun getDate(year: Int, month: Int, day: Int): Calendar {
