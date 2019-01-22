@@ -7,48 +7,48 @@
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:textStyle="xxxl" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:textStyle="xxl" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:textStyle="xl" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:textStyle="lg" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:textStyle="base" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:textStyle="sm" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:textStyle="xs" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:textStyle="caps" />
 </LinearLayout>
