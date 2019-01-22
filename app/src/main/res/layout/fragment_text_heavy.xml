@@ -7,21 +7,21 @@
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:weight="heavy"
     app:textStyle="xxxl" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:weight="heavy"
     app:textStyle="xxl" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_flights_to_edinburgh"
+    android:text="@string/txt_lorem_ipsum"
     app:weight="heavy"
     app:textStyle="xl" />
 </LinearLayout>
