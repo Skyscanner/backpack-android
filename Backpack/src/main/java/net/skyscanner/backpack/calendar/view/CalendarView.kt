@@ -18,9 +18,9 @@ package net.skyscanner.backpack.calendar.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.view.ViewConfiguration
 import android.widget.AbsListView
-import android.widget.AbsListView.OnScrollListener
 import android.widget.ListView
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
@@ -31,18 +31,20 @@ import net.skyscanner.backpack.calendar.presenter.MonthAdapter
 /**
  * This displays a list of months in a calendar format with selectable days.
  */
-internal class CalendarView constructor(context: Context, attr: AttributeSet?) : ListView(context, attr),
-  OnScrollListener {
-
-  override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
-    // Do nothing
-  }
+internal class CalendarView constructor(
+  context: Context,
+  attr: AttributeSet?
+) : ListView(context, attr), AbsListView.OnScrollListener {
 
   private var scrollFriction = 1.0f
   private var selectedDay: CalendarDay = CalendarDay()
   private var previousScrollPosition: Long = 0
   private var previousScrollState = OnScrollListener.SCROLL_STATE_IDLE
   private var currentScrollState = OnScrollListener.SCROLL_STATE_IDLE
+
+  override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
+    // TODO
+  }
 
   var controller: BpkCalendarController? = null
     set(value) {
@@ -59,6 +61,21 @@ internal class CalendarView constructor(context: Context, attr: AttributeSet?) :
     this.setDrawSelectorOnTop(false)
 
     setUpListView()
+  }
+
+  private val measureAndLayout = Runnable {
+    measure(
+      View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
+      View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.UNSPECIFIED))
+    layout(left, top, right, bottom)
+  }
+
+  override fun requestLayout() {
+    super.requestLayout()
+
+    // This is required for the bridged component to render correctly
+    // based on: https://github.com/facebook/react-native/blob/1151c096dab17e5d9a6ac05b61aacecd4305f3db/ReactAndroid/src/main/java/com/facebook/react/views/picker/ReactPicker.java#L75
+    this.post(measureAndLayout)
   }
 
   private fun changeAdapter(controller: BpkCalendarController) {
@@ -81,9 +98,7 @@ internal class CalendarView constructor(context: Context, attr: AttributeSet?) :
     setBackgroundColor(ContextCompat.getColor(context, R.color.bpkWhite))
   }
 
-  /**
-   * Updates the title and selected month if the view has moved to a new month.
-   */
+  // TODO: Updates the title and selected month if the view has moved to a new month.
   override fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
     val child = view.getChildAt(0) as MonthView? ?: return
 
