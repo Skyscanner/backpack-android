@@ -26,6 +26,7 @@
   <androidx.core.widget.NestedScrollView
     android:id="@+id/component_detail_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent"
+    android:fillViewport="true"/>
 
 </LinearLayout>

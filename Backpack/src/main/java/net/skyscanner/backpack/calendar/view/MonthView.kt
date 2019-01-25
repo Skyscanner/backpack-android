@@ -218,6 +218,10 @@ internal class MonthView @JvmOverloads constructor(
     requestLayout()
   }
 
+  fun getYear(): Int {
+    return year
+  }
+
   private fun drawMonthTitle(controller: BpkCalendarController, canvas: Canvas) {
     val dayWidthHalf = viewWidth / (numberOfDays * 3)
     val monthTitleX = (dayWidthHalf).toFloat()
