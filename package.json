@@ -41,8 +41,8 @@
   },
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
-    "bpk-svgs": "^6.0.9",
-    "bpk-tokens": "^27.4.0",
+    "bpk-svgs": "^6.1.0",
+    "bpk-tokens": "^27.4.7",
     "del": "^3.0.0",
     "ensure-node-env": "^1.0.8",
     "eslint-config-skyscanner-with-prettier": "^0.5.0",
