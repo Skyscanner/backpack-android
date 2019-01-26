@@ -81,7 +81,6 @@ script:
   - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest app:verifyDebugAndroidTestScreenshotTest
   - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then echo "Hello world" ; fi
   - npm run build && ls -la /home/travis/build/Skyscanner/backpack-android/app/build/outputs/apk/debug
-  - npm run build && ls -la /home/travis/build/Skyscanner/backpack-android/app/build/outputs/apk/release
   #  - npm run build && curl -F "ipa=@./app/build/outputs/apk/release/app-release-unsigned.apk" -H "X-HockeyAppToken: $HOCKEYAPP_TOKEN" https://rink.hockeyapp.net/api/2/apps/upload
 after_script: greenkeeper-lockfile-upload
 
