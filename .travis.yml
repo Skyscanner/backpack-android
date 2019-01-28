@@ -30,7 +30,7 @@ before_install:
   - nvm install
   - npm install -g greenkeeper-lockfile
   - yes | sdkmanager "platforms;android-"$ANDROID_API_LEVEL
-  -
+
 install:
   - npm install
   - sudo easy_install Pillow
@@ -68,6 +68,7 @@ before_script:
 script:
   - set -e
   - npm run build
+  - ./gradlew app:assembleRelease && curl -F ipa=@app/build/outputs/apk/release/app-release-unsigned.apk -H X-HockeyAppToken:$HOCKEYAPP_TOKEN https://rink.hockeyapp.net/api/2/apps/upload
   - ./scripts/check-pristine-state package-lock.json sd.img
   - 'if [[ -n "$TRAVIS_TAG" ]]; then ./scripts/build-docs-ci $TRAVIS_TAG; fi'
   # Run linters
@@ -79,8 +80,7 @@ script:
   - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest Backpack:connectedCheck
   # Run snapshot tests
   - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest app:verifyDebugAndroidTestScreenshotTest
-  - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then echo "Hello world" ; fi
-  - npm run build && ls -la /home/travis/build/Skyscanner/backpack-android/app/build/outputs/apk/debug/app-debug.apk
+  - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ];  ; fi
 
 after_script: greenkeeper-lockfile-upload
 

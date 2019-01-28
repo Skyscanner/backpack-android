@@ -15,7 +15,7 @@ android {
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode 1
-    versionName "1.0"
+    versionName rootProject.ext.version
 
     testInstrumentationRunner "net.skyscanner.backpack.BpkTestRunner"
   }
