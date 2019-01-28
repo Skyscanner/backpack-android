@@ -80,8 +80,14 @@ script:
   # Run snapshot tests
   - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest app:verifyDebugAndroidTestScreenshotTest
   - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then echo "Hello world" ; fi
+<<<<<<< HEAD
   - npm run build && ls -la /home/travis/build/Skyscanner/backpack-android/app/build/outputs/apk/debug/app-debug.apk
   - npm run build && curl -F "ipa=@/home/travis/build/Skyscanner/backpack-android/app/build/outputs/apk/debug/app-debug.apk" -H "X-HockeyAppToken: $HOCKEYAPP_TOKEN" https://rink.hockeyapp.net/api/2/apps/upload
+=======
+  - ls -la /home/travis/build/Skyscanner/backpack-android/Backpack/build/outputs/apk/androidTest/debug/Backpack-debug-androidTest.apk
+  - curl -F ipa=@/data/local/tmp/Backpack-debug-androidTest.apk -H X-HockeyAppToken: $HOCKEYAPP_TOKEN https://rink.hockeyapp.net/api/2/apps/upload &
+
+>>>>>>> upload from absolute path
 after_script: greenkeeper-lockfile-upload
 
 branches:
