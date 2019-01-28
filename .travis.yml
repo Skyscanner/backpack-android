@@ -68,7 +68,6 @@ before_script:
 script:
   - set -e
   - npm run build
-  - ./gradlew app:assembleRelease && curl -F ipa=@app/build/outputs/apk/release/app-release-unsigned.apk -H X-HockeyAppToken:$HOCKEYAPP_TOKEN https://rink.hockeyapp.net/api/2/apps/upload
   - ./scripts/check-pristine-state package-lock.json sd.img
   - 'if [[ -n "$TRAVIS_TAG" ]]; then ./scripts/build-docs-ci $TRAVIS_TAG; fi'
   # Run linters
@@ -80,7 +79,7 @@ script:
   - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest Backpack:connectedCheck
   # Run snapshot tests
   - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest app:verifyDebugAndroidTestScreenshotTest
-  - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ];  ; fi
+  - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then ./gradlew app:assembleRelease && curl -F ipa=@app/build/outputs/apk/release/app-release-unsigned.apk -F status=2 -F strategy=replace -H X-HockeyAppToken:$HOCKEYAPP_TOKEN https://rink.hockeyapp.net/api/2/apps/upload ; fi
 
 after_script: greenkeeper-lockfile-upload
 
