@@ -517,7 +517,7 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   internal companion object {
-    private const val MONTH_HEADLINE_PATTERN = "MMMM yyyy"
+    private const val MONTH_HEADLINE_PATTERN = "MMMM"
 
     const val VIEW_PARAMS_HEIGHT = "height"
     const val VIEW_PARAMS_MONTH = "month"
