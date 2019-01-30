@@ -2,6 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.6.0
+
+**Added:**
+
+- New `bpk_social_like` icon.
+- New `dark` variant of `BpkBadge`
+- Added year indicator badge on `BpkCalendar`
+- Support for distribution via Hockeyapp
+
 # 2.5.0
 
 **Added:**
