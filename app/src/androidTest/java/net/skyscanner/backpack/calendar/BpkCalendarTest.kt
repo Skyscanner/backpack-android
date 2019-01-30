@@ -74,6 +74,20 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
   @Test
   @FlakyTest
+  fun screenshotTestCalendarPast() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      getDate(2017, 0, 2),
+      getDate(2017, 11, 31))
+
+    calendar.setController(controller)
+    snap(wrapWithBackground(calendar))
+  }
+
+  @Test
+  @FlakyTest
   fun screenshotTestCalendarWithStartDateSelected() {
     val calendar = BpkCalendar(testContext)
     val controller = BpkCalendarControllerImpl(

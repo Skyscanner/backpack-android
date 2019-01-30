@@ -28,6 +28,10 @@ import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.MonthAdapter
 
+interface OnYearChangedListener {
+  fun onYearChanged(year: Int)
+}
+
 /**
  * This displays a list of months in a calendar format with selectable days.
  */
@@ -35,16 +39,6 @@ internal class CalendarView constructor(
   context: Context,
   attr: AttributeSet?
 ) : ListView(context, attr), AbsListView.OnScrollListener {
-
-  private var scrollFriction = 1.0f
-  private var selectedDay: CalendarDay = CalendarDay()
-  private var previousScrollPosition: Long = 0
-  private var previousScrollState = OnScrollListener.SCROLL_STATE_IDLE
-  private var currentScrollState = OnScrollListener.SCROLL_STATE_IDLE
-
-  override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
-    // TODO
-  }
 
   var controller: BpkCalendarController? = null
     set(value) {
@@ -54,6 +48,14 @@ internal class CalendarView constructor(
         selectedDay = value.selectedDay
       }
     }
+
+  var listener: OnYearChangedListener? = null
+
+  private var scrollFriction = 1.0f
+  private var selectedDay: CalendarDay = CalendarDay()
+  private var previousScrollPosition: Long = 0
+  private var previousScrollState = OnScrollListener.SCROLL_STATE_IDLE
+  private var currentScrollState = OnScrollListener.SCROLL_STATE_IDLE
   private var adapter: MonthAdapter? = null
 
   init {
@@ -105,5 +107,10 @@ internal class CalendarView constructor(
     val currScroll = (view.firstVisiblePosition * child.height - child.bottom).toLong()
     previousScrollPosition = currScroll
     previousScrollState = currentScrollState
+
+    listener?.onYearChanged(child.getYear())
+  }
+
+  override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
   }
 }
