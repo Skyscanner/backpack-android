@@ -29,7 +29,8 @@ before_install:
   - chmod +x gradlew
   - nvm install
   - npm install -g greenkeeper-lockfile
-
+  - yes | sdkmanager "platforms;android-"$ANDROID_API_LEVEL
+  
 install:
   - npm install
   - sudo easy_install Pillow
