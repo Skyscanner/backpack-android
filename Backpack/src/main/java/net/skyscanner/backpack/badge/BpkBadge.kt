@@ -51,7 +51,12 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with a thin white outline
      */
-    Outline(6, R.color.bpkWhite, R.color.bpkWhite);
+    Outline(6, R.color.bpkWhite, R.color.bpkWhite),
+
+    /**
+     * Style for badges with a dark background
+     */
+    Dark(7, R.color.bpkGray900, R.color.bpkWhite);
 
     internal companion object {
 
