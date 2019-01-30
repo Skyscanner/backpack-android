@@ -232,6 +232,61 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:textStyle="sm"
+      android:text="Dark"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/bpkWhite"
+      android:padding="@dimen/bpkSpacingSm"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:orientation="horizontal">
+
+      <net.skyscanner.backpack.badge.BpkBadge
+        android:id="@+id/dark_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:badgeType="dark"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dark_2"
+        app:message="Apples"/>
+
+      <net.skyscanner.backpack.badge.BpkBadge
+        android:id="@+id/dark_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:badgeType="dark"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/dark_1"
+        app:layout_constraintEnd_toStartOf="@+id/dark_3"
+        app:message="Bananas"/>
+
+      <net.skyscanner.backpack.badge.BpkBadge
+        android:id="@+id/dark_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:badgeType="dark"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/dark_2"
+        app:layout_constraintEnd_toStartOf="@+id/dark_4"
+        app:message="Strawberries"/>
+
+      <net.skyscanner.backpack.badge.BpkBadge
+        android:id="@+id/dark_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:badgeType="dark"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/dark_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:message="Pears"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:textStyle="sm"
       android:text="Inverse"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout

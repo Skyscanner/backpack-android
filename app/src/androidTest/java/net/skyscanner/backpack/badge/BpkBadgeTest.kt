@@ -53,6 +53,13 @@ class BpkBadgeTest : BpkSnapshotTest() {
     snap(badge)
   }
   @Test
+  fun screenshotTestBadgeDark() {
+    val badge = BpkBadge(testContext)
+    badge.type = BpkBadge.Type.Dark
+    badge.text = "Message"
+    snap(badge)
+  }
+  @Test
   fun screenshotTestBadgeWarning() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Warning
