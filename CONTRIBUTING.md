@@ -70,8 +70,8 @@ To run connected tests run
 ./gradlew Backpack:connectedCheck
 ```
 
-#### Validating changes
-Backpack provides the ability to build and publish any specific branch from a fork for testing. To use your own branch change the dependency in the below format:
+#### Deploying a branch
+To test your branch in a codebase, use the dependency in the below format.
 
 ```
 implementation 'com.github.<github-username>:backpack-android:<branch-name>'
