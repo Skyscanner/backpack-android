@@ -26,6 +26,11 @@ repositories {
 ```
 #### Note that Backpack is expected to be used with AndroidX. Please refer to [AndroidX migration guide](https://developer.android.com/jetpack/androidx/migrate) to setup.
 
+### Demo application
+The Backpack demo application is a good way of referring to the variants available for a component and their correct usage. The code is available under `/app` directory. The app can be downloaded from [here](https://rink.hockeyapp.net/apps/dbf61ff1e7e245ddad0bd92ac24a85e1/app_versions/1) or by scanning the QR code below.
+
+![QR code](https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Frink.hockeyapp.net%2Fapps%2Fdbf61ff1e7e245ddad0bd92ac24a85e1%2Fapp_versions%2F1&chs=256x256)
+
 ## Components
 
 * [Badge](docs/Badge/README.md)
