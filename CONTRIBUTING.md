@@ -70,6 +70,13 @@ To run connected tests run
 ./gradlew Backpack:connectedCheck
 ```
 
+#### Deploying a branch
+To test your branch in a codebase, use the dependency in the below format.
+
+```
+implementation 'com.github.<github-username>:backpack-android:<branch-name>'
+```
+
 ## Demo app shortcuts
 
 - `Shift + D` : Toggle story view between RTL and LTR
