@@ -6,56 +6,58 @@
   <declare-styleable name="BpkBadge">
     <!-- type of badge -->
     <attr name="badgeType" format="enum">
-      <enum name="success" value="1"/>
-      <enum name="warning" value="2"/>
-      <enum name="destructive" value="3"/>
-      <enum name="light" value="4"/>
-      <enum name="inverse" value="5"/>
-      <enum name="outline" value="6"/>
-      <enum name="dark" value="7"/>
+      <enum name="success" value="1" />
+      <enum name="warning" value="2" />
+      <enum name="destructive" value="3" />
+      <enum name="light" value="4" />
+      <enum name="inverse" value="5" />
+      <enum name="outline" value="6" />
+      <enum name="dark" value="7" />
     </attr>
     <!-- message to be displayed -->
-    <attr name="message" format="string"/>
+    <attr name="message" format="string" />
   </declare-styleable>
 
   <declare-styleable name="BpkText">
     <attr name="textStyle" format="enum">
-      <enum name="xs" value="0"/>
-      <enum name="sm" value="1"/>
-      <enum name="base" value="2"/>
-      <enum name="lg" value="3"/>
-      <enum name="xl" value="4"/>
-      <enum name="xxl" value="5"/>
-      <enum name="xxxl" value="6"/>
-      <enum name="caps" value="7"/>
+      <enum name="xs" value="0" />
+      <enum name="sm" value="1" />
+      <enum name="base" value="2" />
+      <enum name="lg" value="3" />
+      <enum name="xl" value="4" />
+      <enum name="xxl" value="5" />
+      <enum name="xxxl" value="6" />
+      <enum name="caps" value="7" />
     </attr>
     <!-- {@deprecated Use weight instead.} -->
-    <attr name="emphasize" format="boolean"/>
+    <attr name="emphasize" format="boolean" />
     <attr name="weight" format="enum">
       <enum name="normal" value="0" />
       <enum name="emphasized" value="1" />
       <enum name="heavy" value="2" />
     </attr>
-    <attr name="drawableTint" format="reference"/>
+    <attr name="drawableTint" format="reference" />
+    <!-- Themable attrs -->
+    <attr name="textColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkPanel">
-    <attr name="padding" format="boolean"/>
+    <attr name="padding" format="boolean" />
   </declare-styleable>
 
   <declare-styleable name="BpkButton">
     <attr name="buttonType" format="enum">
-      <enum name="primary" value="0"/>
-      <enum name="secondary" value="1"/>
-      <enum name="featured" value="2"/>
-      <enum name="destructive" value="3"/>
-      <enum name="outline" value="4"/>
+      <enum name="primary" value="0" />
+      <enum name="secondary" value="1" />
+      <enum name="featured" value="2" />
+      <enum name="destructive" value="3" />
+      <enum name="outline" value="4" />
     </attr>
-    <attr name="buttonIcon" format="reference"/>
+    <attr name="buttonIcon" format="reference" />
     <attr name="buttonIconPosition" format="enum">
-      <enum name="start" value="0"/>
-      <enum name="end" value="1"/>
-      <enum name="icon_only" value="2"/>
+      <enum name="start" value="0" />
+      <enum name="end" value="1" />
+      <enum name="icon_only" value="2" />
     </attr>
   </declare-styleable>
 
@@ -71,7 +73,7 @@
   <declare-styleable name="BpkSpinner">
     <attr name="small" format="boolean" />
     <attr name="type" format="enum">
-      <enum name="primary" value="0"/>
+      <enum name="primary" value="0" />
       <enum name="light" value="1" />
       <enum name="dark" value="2" />
     </attr>
@@ -80,6 +82,8 @@
   <declare-styleable name="BpkChip">
     <attr name="disabled" format="boolean" />
     <attr name="selected" format="boolean" />
+    <attr name="chipColor" format="color" />
+    <attr name="chipRippleColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkSwitch">

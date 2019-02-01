@@ -21,4 +21,22 @@
     <item name="android:padding">@dimen/bpkSpacingBase</item>
   </style>
 
+  <style name="AppTheme.London" parent="BackpackTheme">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/bpkRed500</item>
+    <item name="colorPrimaryDark">@color/bpkRed700</item>
+    <item name="colorAccent">@color/bpkBlue500</item>
+    <item name="android:windowBackground">@color/bpkWhite</item>
+    <!--<item name="chipColor">@color/bpkGreen900</item>-->
+    <item name="android:textAppearance">@style/AppTheme.London.TextBase</item>
+    <item name="drawableTint">@color/bpkRed300</item>
+    <!--<item name="chipColor">@color/bpkRed500</item>-->
+    <!--<item name="chipRippleColor">@color/bpkRed800</item>-->
+  </style>
+
+  <style name="AppTheme.London.TextBase" parent="bpkTextCapsEmphasized">
+    <item name="drawableTint">@color/bpkRed300</item>
+    <item name="android:textColor">@color/bpkRed300</item>
+  </style>
+
 </resources>

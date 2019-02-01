@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-  android:color="@color/bpkBlue800">
+  android:color="?chipRippleColor">
   <item>
-    <shape xmlns:android="http://schemas.android.com/apk/res/android"
-      android:shape="rectangle">
-      <solid android:color="@color/bpkBlue500" />
+    <shape android:shape="rectangle">
+      <solid android:color="?chipColor" />
       <padding
         android:bottom="@dimen/bpkSpacingMd"
         android:left="@dimen/bpkSpacingBase"

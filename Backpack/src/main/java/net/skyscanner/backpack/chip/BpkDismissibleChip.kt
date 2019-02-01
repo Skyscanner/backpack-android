@@ -10,7 +10,7 @@ import net.skyscanner.backpack.R
 open class BpkDismissibleChip @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_chip
+  defStyleAttr: Int = R.style.BackpackTheme_chip
 ) : BpkChip(context, attrs, defStyleAttr) {
 
   var onDismissListener: OnDismissListener? = null

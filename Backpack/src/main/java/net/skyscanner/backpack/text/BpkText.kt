@@ -12,10 +12,10 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 
-open class BpkText(
+open class BpkText @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet?,
-  defStyleAttr: Int
+  attrs: AttributeSet? = null,
+  defStyleAttr: Int = R.style.bpkTextBase
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
   enum class Weight {
@@ -77,9 +77,6 @@ open class BpkText(
     XXL to arrayOf(R.style.bpkTextXxl, R.style.bpkTextXxlEmphasized, R.style.bpkTextXxlHeavy),
     XXXL to arrayOf(R.style.bpkTextXxxl, R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxlHeavy)
   )
-
-  constructor(context: Context) : this(context, null)
-  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.style.bpkTextBase)
 
   init {
     initialize(context, attrs, defStyleAttr)

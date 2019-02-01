@@ -22,8 +22,13 @@
     <item name="android:windowExitAnimation">@anim/dialog_slide_out_down</item>
   </style>
 
-  <style name="Bpk.chip" parent="android:Widget">
+  <style name="BackpackTheme.chip" parent="android:Widget">
     <item name="android:textAppearance">@style/bpkTextSm</item>
+  </style>
+
+  <style name="BackpackTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="chipColor">@color/bpkBlue500</item>
+    <item name="chipRippleColor">@color/bpkBlue800</item>
   </style>
 
 </resources>

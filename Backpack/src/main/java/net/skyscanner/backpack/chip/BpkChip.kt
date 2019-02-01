@@ -10,8 +10,8 @@ import net.skyscanner.backpack.text.BpkText
 
 open class BpkChip @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_chip
+  attrs: AttributeSet?,
+  defStyleAttr: Int = R.style.BackpackTheme_chip
 ) : BpkText(context, attrs, defStyleAttr) {
 
   init {
@@ -25,9 +25,11 @@ open class BpkChip @JvmOverloads constructor(
     }
 
   private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
-    val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
+    val attr = context.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, R.style.BackpackTheme_chip)
     disabled = attr.getBoolean(R.styleable.BpkChip_disabled, false)
     isSelected = attr.getBoolean(R.styleable.BpkChip_selected, false)
+
+
     attr.recycle()
     setup()
   }
