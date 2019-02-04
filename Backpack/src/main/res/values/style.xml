@@ -5,6 +5,36 @@
 
   <style name="Bpk.button" parent="android:Widget" />
 
+  <style name="Bpk.button.Primary" parent="Bpk.button">
+    <item name="buttonBackground">@color/bpkGreen500</item>
+    <item name="buttonTextColor">@color/bpkWhite</item>
+    <item name="buttonStrokeColor">@android:color/transparent</item>
+  </style>
+
+  <style name="Bpk.button.Secondary" parent="Bpk.button">
+    <item name="buttonBackground">@color/bpkWhite</item>
+    <item name="buttonTextColor">@color/bpkBlue600</item>
+    <item name="buttonStrokeColor">@color/bpkGray100</item>
+  </style>
+
+  <style name="Bpk.button.Featured" parent="Bpk.button">
+    <item name="buttonBackground">@color/bpkPink500</item>
+    <item name="buttonTextColor">@color/bpkWhite</item>
+    <item name="buttonStrokeColor">@android:color/transparent</item>
+  </style>
+
+  <style name="Bpk.button.Destructive" parent="Bpk.button">
+    <item name="buttonBackground">@color/bpkWhite</item>
+    <item name="buttonTextColor">@color/bpkRed500</item>
+    <item name="buttonStrokeColor">@color/bpkGray100</item>
+  </style>
+
+  <style name="Bpk.button.Outline" parent="Bpk.button">
+    <item name="buttonBackground">@android:color/transparent</item>
+    <item name="buttonTextColor">@color/bpkWhite</item>
+    <item name="buttonStrokeColor">@color/bpkWhite</item>
+  </style>
+
   <style name="Bpk.panel" parent="android:Widget">
     <item name="android:padding">@dimen/bpkSpacingSm</item>
     <item name="background">@drawable/border</item>
