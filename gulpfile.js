@@ -16,8 +16,9 @@
  * limitations under the License.
  */
 
-const gulp = require('gulp');
 const path = require('path');
+
+const gulp = require('gulp');
 const nunjucks = require('gulp-nunjucks');
 const rename = require('gulp-rename');
 const del = require('del');
