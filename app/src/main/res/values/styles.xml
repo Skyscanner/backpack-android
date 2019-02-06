@@ -21,7 +21,7 @@
     <item name="android:padding">@dimen/bpkSpacingBase</item>
   </style>
 
-  <style name="AppTheme.London" parent="BackpackTheme">
+  <style name="AppTheme.London" parent="Bpk">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/bpkRed500</item>
     <item name="colorPrimaryDark">@color/bpkRed700</item>
