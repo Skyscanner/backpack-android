@@ -82,8 +82,6 @@
   <declare-styleable name="BpkChip">
     <attr name="disabled" format="boolean" />
     <attr name="selected" format="boolean" />
-    <attr name="chipColor" format="color" />
-    <attr name="chipRippleColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkSwitch">

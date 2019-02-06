@@ -3,33 +3,33 @@
 
   <style name="Bpk.badge" parent="android:Widget" />
 
-  <style name="Bpk.button" parent="android:Widget" />
+  <style name="Bpk.button" parent="android:Widget.Button" />
 
-  <style name="Bpk.button.Primary" parent="Bpk.button">
+  <style name="Bpk.button.Primary">
     <item name="buttonBackground">@color/bpkGreen500</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
     <item name="buttonStrokeColor">@android:color/transparent</item>
   </style>
 
-  <style name="Bpk.button.Secondary" parent="Bpk.button">
+  <style name="Bpk.button.Secondary">
     <item name="buttonBackground">@color/bpkWhite</item>
     <item name="buttonTextColor">@color/bpkBlue600</item>
     <item name="buttonStrokeColor">@color/bpkGray100</item>
   </style>
 
-  <style name="Bpk.button.Featured" parent="Bpk.button">
+  <style name="Bpk.button.Featured">
     <item name="buttonBackground">@color/bpkPink500</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
     <item name="buttonStrokeColor">@android:color/transparent</item>
   </style>
 
-  <style name="Bpk.button.Destructive" parent="Bpk.button">
+  <style name="Bpk.button.Destructive">
     <item name="buttonBackground">@color/bpkWhite</item>
     <item name="buttonTextColor">@color/bpkRed500</item>
     <item name="buttonStrokeColor">@color/bpkGray100</item>
   </style>
 
-  <style name="Bpk.button.Outline" parent="Bpk.button">
+  <style name="Bpk.button.Outline">
     <item name="buttonBackground">@android:color/transparent</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
     <item name="buttonStrokeColor">@color/bpkWhite</item>
@@ -57,8 +57,11 @@
   </style>
 
   <style name="BackpackTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="chipColor">@color/bpkBlue500</item>
-    <item name="chipRippleColor">@color/bpkBlue800</item>
+    <item name="android:textAppearance">@style/bpkTextSm</item>
+  </style>
+
+  <style name="BackpackTheme.DARK" parent="ThemeOverlay.AppCompat.Dark">
+    <item name="android:textAppearance">@style/bpkTextSm</item>
   </style>
 
 </resources>

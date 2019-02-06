@@ -4,7 +4,7 @@
   <item android:drawable="@drawable/chip_default" android:state_selected="false"/>
   <item android:state_selected="true">
     <shape android:shape="rectangle">
-      <solid android:color="?chipColor" />
+      <solid android:color="?colorPrimary" />
       <padding
         android:bottom="@dimen/bpkSpacingMd"
         android:left="@dimen/bpkSpacingBase"

@@ -2,7 +2,7 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="BackpackTheme">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/bpkBlue500</item>
     <item name="colorPrimaryDark">@color/bpkBlue700</item>
@@ -25,12 +25,10 @@
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/bpkRed500</item>
     <item name="colorPrimaryDark">@color/bpkRed700</item>
-    <item name="colorAccent">@color/bpkBlue500</item>
+    <item name="colorAccent">@color/bpkYellow500</item>
     <item name="android:windowBackground">@color/bpkWhite</item>
     <item name="android:textAppearance">@style/AppTheme.London.TextBase</item>
     <item name="drawableTint">@color/bpkRed300</item>
-    <item name="chipColor">@color/bpkRed500</item>
-    <item name="chipRippleColor">@color/bpkRed800</item>
   </style>
 
   <style name="AppTheme.London.TextBase" parent="bpkTextCapsEmphasized">
