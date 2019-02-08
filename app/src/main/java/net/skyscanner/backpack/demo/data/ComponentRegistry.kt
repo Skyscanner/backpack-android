@@ -8,6 +8,7 @@ import net.skyscanner.backpack.demo.stories.GradientStory
 import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.SubStory
+import net.skyscanner.backpack.demo.stories.ColorStory
 
 interface RegistryItem {
   val name: String
@@ -117,6 +118,7 @@ object ComponentRegistry {
   val TOKENS by lazy { TOKENS_MAP.keys.toList() }
   private val TOKENS_MAP = mapOf(
     "All Icons" story NodeData { IconsStory() },
+    "Color" story NodeData { ColorStory() },
     "Gradient" story NodeData { GradientStory() },
     "Icons" story NodeData { Story of R.layout.fragment_icons },
     "Radii" story NodeData { Story of R.layout.fragment_radii }
