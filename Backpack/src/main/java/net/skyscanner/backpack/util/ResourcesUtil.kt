@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.core.content.res.ResourcesCompat
+import android.util.DisplayMetrics
 
 internal object ResourcesUtil {
 
@@ -23,6 +24,11 @@ internal object ResourcesUtil {
   @Dimension
   fun dpToPx(@Dimension dp: Int, context: Context): Int {
     return Math.round(dp.toFloat() * context.resources.displayMetrics.density)
+  }
+
+  @Dimension
+  fun pxToDp(px: Float, context: Context): Float {
+    return (px / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT))
   }
 }
 
