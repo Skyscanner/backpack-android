@@ -22,4 +22,12 @@
     <item name="android:padding">@dimen/bpkSpacingBase</item>
   </style>
 
+  <style name="LondonTheme" parent="AppTheme">
+    <item name="colorPrimary">#ED1B28</item>
+  </style>
+
+  <style name="DohaTheme" parent="AppTheme">
+    <item name="colorPrimary">#9B104C</item>
+  </style>
+
 </resources>
