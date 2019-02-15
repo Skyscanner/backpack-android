@@ -2,9 +2,15 @@
 <resources>
   <style name="LondonTheme" parent="AppTheme">
     <item name="colorPrimary">#ED1B28</item>
+    <item name="bpkSwitchStyle">@style/BpkSwitch.Themed</item>
   </style>
 
   <style name="DohaTheme" parent="AppTheme">
     <item name="colorPrimary">#9B104C</item>
+    <item name="bpkSwitchStyle">@style/BpkSwitch.Themed</item>
+  </style>
+
+  <style name="BpkSwitch.Themed" parent="">
+    <item name="switchPrimaryColor">?colorPrimary</item>
   </style>
 </resources>

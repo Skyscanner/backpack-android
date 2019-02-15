@@ -8,7 +8,6 @@
     <item name="colorPrimaryDark">@color/bpkBlue700</item>
     <item name="colorAccent">@color/bpkGreen500</item>
     <item name="android:windowBackground">@color/bpkWhite</item>
-
   </style>
 
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -20,14 +19,6 @@
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">match_parent</item>
     <item name="android:padding">@dimen/bpkSpacingBase</item>
-  </style>
-
-  <style name="LondonTheme" parent="AppTheme">
-    <item name="colorPrimary">#ED1B28</item>
-  </style>
-
-  <style name="DohaTheme" parent="AppTheme">
-    <item name="colorPrimary">#9B104C</item>
   </style>
 
 </resources>

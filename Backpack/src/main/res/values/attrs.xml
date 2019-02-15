@@ -80,4 +80,10 @@
     <attr name="selected" format="boolean" />
   </declare-styleable>
 
+  <declare-styleable name="BpkSwitch">
+    <attr name="switchPrimaryColor" format="color" />
+  </declare-styleable>
+
+  <attr name="bpkSwitchStyle" format="reference" />
+
 </resources>
