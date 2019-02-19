@@ -26,3 +26,10 @@ BpkSwitch(context).apply {
   isChecked = true
 }
 ```
+
+## Theme Props
+
+- `switchPrimaryColor`
+
+Styles can be changed globally throught `bpkSwitchStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+
