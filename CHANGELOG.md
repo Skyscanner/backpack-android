@@ -2,6 +2,16 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.7.0
+
+**Added:**
+
+- New icons `grid-layout` and `social-like`.
+
+- BpkSwitch
+  - New XML property `switchPrimaryColor` added.
+  - BpkSwitch styles can now be changed globally by setting the `bpkSwitchStyle` property in your current theme/style.
+
 # 2.6.0
 
 **Added:**
