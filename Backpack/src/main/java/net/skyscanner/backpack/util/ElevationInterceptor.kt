@@ -25,9 +25,9 @@ class ElevationInterceptor : Interceptor {
       val elevation = ResourcesUtil.pxToDp(view.elevation, view.context)
       if (elevation !in validSpaces) {
         if (view.background == null) {
-          view.background = ResourcesCompat.getDrawable(view.resources, R.drawable.elevation_highlight, view.context.theme)
+          view.background = ResourcesCompat.getDrawable(view.resources, R.drawable.bpk_internal_elevation_highlight, view.context.theme)
         } else {
-          view.foreground = ResourcesCompat.getDrawable(view.resources, R.drawable.elevation_highlight, view.context.theme)
+          view.foreground = ResourcesCompat.getDrawable(view.resources, R.drawable.bpk_internal_elevation_highlight, view.context.theme)
         }
       }
     }
