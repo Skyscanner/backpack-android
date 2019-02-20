@@ -31,5 +31,5 @@ BpkSwitch(context).apply {
 
 - `switchPrimaryColor`
 
-Styles can be changed globally throught `bpkSwitchStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+Styles can be changed globally through `bpkSwitchStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
 
