@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.7.1
+
+- BpkCalendar
+  - Selecting a new date after the end date has been selected now resets the range selection.
+
 # 2.7.0
 
 **Added:**
