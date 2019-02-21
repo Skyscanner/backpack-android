@@ -116,13 +116,13 @@ class BpkCalendarControllerTest {
     val spy = spy(subject)
     val start = CalendarDay(2019, 0, 1)
     val end1 = CalendarDay(2019, 0, 4)
-    val end2 = CalendarDay(2019, 0, 3)
+    val start2 = CalendarDay(2019, 0, 3)
 
-    val expectedRange = CalendarRange(start, end2)
+    val expectedRange = CalendarRange(start2, null)
 
     spy.onDayOfMonthSelected(start)
     spy.onDayOfMonthSelected(end1)
-    spy.onDayOfMonthSelected(end2)
+    spy.onDayOfMonthSelected(start2)
 
     verify(spy, times(3)).onRangeSelected(expectedRange)
   }

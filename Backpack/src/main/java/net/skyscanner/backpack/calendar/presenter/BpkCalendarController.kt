@@ -37,15 +37,13 @@ abstract class BpkCalendarController {
           selectedRange.start = null
           selectedRange.end = null
         }
-        currentRangeStart.date != selectedDay.date && currentRangeEnd != null && currentRangeEnd.date == selectedDay.date -> {
-          selectedRange.start = currentRangeStart
-          selectedRange.end = null
-        }
-        selectedDay.date.before(currentRangeStart.date) -> {
+        currentRangeEnd != null || selectedDay.date.before(currentRangeStart.date) -> {
           selectedRange.start = selectedDay
           selectedRange.end = null
         }
-        currentRangeEnd == null || currentRangeEnd.date != selectedDay.date -> selectedRange.end = selectedDay
+        currentRangeEnd == null -> {
+          selectedRange.end = selectedDay
+        }
       }
     } else {
       selectedRange.start = selectedDay
