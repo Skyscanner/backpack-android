@@ -1,6 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="net.skyscanner.backpack" >
-  <application>
-    <activity android:name=".util.TestActivity" />
-  </application>
 </manifest>

@@ -2,6 +2,27 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.8.0
+
+**Added:**
+
+- New icons `hide` and `eco-leaf`.
+
+# 2.7.1
+
+- BpkCalendar
+  - Selecting a new date after the end date has been selected now resets the range selection.
+
+# 2.7.0
+
+**Added:**
+
+- New icons `grid-layout` and `social-like`.
+
+- BpkSwitch
+  - New XML property `switchPrimaryColor` added.
+  - BpkSwitch styles can now be changed globally by setting the `bpkSwitchStyle` property in your current theme/style.
+
 # 2.6.0
 
 **Added:**
