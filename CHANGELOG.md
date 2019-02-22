@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 2.8.0
+
+**Added:**
+
+- New icons `hide` and `eco-leaf`.
+
 # 2.7.1
 
 - BpkCalendar
