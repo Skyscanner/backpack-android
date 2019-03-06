@@ -14,11 +14,11 @@ abstract class BpkCalendarController {
 
   open val endDate: CalendarDay = DEFAULT_END_DATE
 
+  open val calendarColoring: CalendarColoring? = null
+
   abstract val isRtl: Boolean
 
   abstract val locale: Locale
-
-  abstract val calendarColoring: CalendarColoring?
 
   abstract fun onRangeSelected(range: CalendarRange)
 

@@ -12,16 +12,12 @@ import java.util.Locale
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
-import net.skyscanner.backpack.calendar.model.CalendarColoring
 
 internal open class BpkCalendarControllerTestImpl : BpkCalendarController() {
 
   override val isRtl = false
   override val locale: Locale = Locale.forLanguageTag("pt-br")
   override fun onRangeSelected(range: CalendarRange) {}
-
-  override val calendarColoring: CalendarColoring?
-    get() = CalendarColoring(setOf())
 }
 
 @RunWith(AndroidJUnit4::class)

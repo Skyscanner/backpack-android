@@ -40,9 +40,6 @@ private class BpkCalendarControllerImpl(
   override fun isToday(year: Int, month: Int, day: Int): Boolean {
     return day == 2 && month == 0 && year == 2019
   }
-
-  override val calendarColoring: CalendarColoring?
-    get() = null
 }
 
 @RunWith(AndroidJUnit4::class)
