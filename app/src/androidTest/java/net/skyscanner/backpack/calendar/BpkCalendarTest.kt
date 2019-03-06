@@ -11,7 +11,6 @@ import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController

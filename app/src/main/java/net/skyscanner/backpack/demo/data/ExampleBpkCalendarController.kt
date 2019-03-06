@@ -59,5 +59,4 @@ class ExampleBpkCalendarController(private val context: Context) : BpkCalendarCo
       )
     )
   }
-
 }
