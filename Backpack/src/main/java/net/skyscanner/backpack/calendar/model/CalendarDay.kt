@@ -56,4 +56,3 @@ data class CalendarDay(
     return utcCalendar.toCalendarDay()
   }
 }
-

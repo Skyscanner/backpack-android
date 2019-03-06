@@ -278,7 +278,7 @@ internal class MonthView @JvmOverloads constructor(
 
     if (!isOutOfRange) {
       val type = controller.selectedRange.getDrawType(calendarDay)
-      when(type){
+      when (type) {
         CalendarRange.DrawType.SELECTED -> {
           selectedCirclePaint.color =
             if (isColoredCalendar() && coloredCirclePaints.keys.contains(calendarDay)) coloredCirclePaints.getValue(calendarDay).color else selectedDayCircleFillColor
@@ -340,13 +340,12 @@ internal class MonthView @JvmOverloads constructor(
       }
     }
     if (hasToday && today == calendarDay.day) {
-      if(isColoredCalendar()){
+      if (isColoredCalendar()) {
         overrideTextColor = selectedDayCircleFillColor
-      }else{
+      } else {
         drawCircle(canvas, x, y - miniDayNumberTextSize / 3, selectedDayCircleRadius - rowPadding, todayCirclePaint)
       }
     }
-
 
     monthNumberPaint.color = when {
       isOutOfRange -> disabledTextColor
@@ -365,8 +364,7 @@ internal class MonthView @JvmOverloads constructor(
       drawCircle(canvas, (x - padding * 1.5).toInt(), y - padding, radius, paint)
       drawCircle(canvas, x, y - padding, radius, backgroundPaint)
       drawCircle(canvas, x, y - padding, radius, paint)
-    }
-    else{
+    } else {
       drawCircle(canvas, x - padding, y - padding, radius, paint)
       paint.style = Paint.Style.FILL
       drawCircle(canvas, x + padding, y - padding, radius, paint)
@@ -383,7 +381,7 @@ internal class MonthView @JvmOverloads constructor(
     y: Int
   ) {
     rangeBackPaint.color = if (isColoredCalendar()) rangeColorColored else rangeColorNonColored
-    if (isFirstDayInMonth(day.day) && day!= range.start) {
+    if (isFirstDayInMonth(day.day) && day != range.start) {
       drawCircle(canvas, x - paddingX, y - miniDayNumberTextSize / 3, selectedDayCircleRadius - paddingY, rangeBackPaint)
     }
     if (isLastDayInMonth(day.day, day.month, day.year) && day != range.end) {
