@@ -1,76 +1,59 @@
 package net.skyscanner.backpack.calendar.model
 
+import net.skyscanner.backpack.calendar.presenter.toCalendarDay
 import java.io.Serializable
-import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.TimeZone
 import java.util.Date
-import java.util.Locale
 
-class CalendarDay : Serializable {
-    private val calendar: Calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+data class CalendarDay(
+  val year: Int,
+  val month: Int,
+  val day: Int
+) : Serializable {
 
-    internal var year: Int = 0
-    internal var month: Int = 0
-    internal var day: Int = 0
-
-    val date: Date
-        get() {
-            calendar.trimCalendar()
-            return calendar.time
-        }
-
-    constructor() {
-        setTime(System.currentTimeMillis())
+  companion object {
+    fun of(timeInMillis: Long): CalendarDay {
+      val utcCalendar = utcCalendar()
+      utcCalendar.timeInMillis = timeInMillis
+      return utcCalendar.toCalendarDay()
     }
 
-    constructor(year: Int, month: Int, day: Int) {
-        setDay(year, month, day)
-    }
+    fun today(): CalendarDay = of(System.currentTimeMillis())
 
-    fun add(field: Int, value: Int) {
-        calendar.set(Calendar.DAY_OF_MONTH, day)
-        calendar.add(field, value)
-        setTime(calendar.timeInMillis)
-    }
+    fun utcCalendar() = Calendar.getInstance(TimeZone.getTimeZone("UTC"))!!
+  }
 
-    internal fun setDay(newYear: Int, newMonth: Int, newDay: Int) {
-        year = newYear
-        month = newMonth
-        day = newDay
+  private val calendar: Calendar = utcCalendar()
 
-        calendar.apply {
-            set(Calendar.YEAR, newYear)
-            set(Calendar.MONTH, newMonth)
-            set(Calendar.DAY_OF_MONTH, newDay)
-        }
-    }
+  val date: Date
+    get() = calendar.time
 
-    private fun setTime(timeInMillis: Long) {
-        calendar.timeInMillis = timeInMillis
-        month = calendar.get(Calendar.MONTH)
-        year = calendar.get(Calendar.YEAR)
-        day = calendar.get(Calendar.DAY_OF_MONTH)
-    }
+  init {
+    calendar.apply {
+      set(Calendar.YEAR, year)
+      set(Calendar.MONTH, month)
+      set(Calendar.DAY_OF_MONTH, day)
+    }.trimCalendar()
+  }
 
-    private fun Calendar.trimCalendar() {
-        this.apply {
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
-        }
-    }
+  private fun Calendar.trimCalendar() = apply {
+    set(Calendar.HOUR_OF_DAY, 0)
+    set(Calendar.MINUTE, 0)
+    set(Calendar.SECOND, 0)
+    set(Calendar.MILLISECOND, 0)
+  }
 
-    override fun toString(): String {
-        if (dayDateFormat == null) {
-            dayDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-            dayDateFormat!!.timeZone = TimeZone.getTimeZone("UTC")
-        }
-        return dayDateFormat!!.format(date)
-    }
+  override fun toString(): String = String.format("%04d-%02d-%02d", year, month + 1, day)
 
-    private companion object {
-        var dayDateFormat: SimpleDateFormat? = null
-    }
+  fun newInstanceByAddedDays(days: Int): CalendarDay {
+    val utcCalendar = utcCalendar().apply {
+      set(Calendar.YEAR, year)
+      set(Calendar.MONTH, month)
+      set(Calendar.DAY_OF_MONTH, day)
+    }.trimCalendar()
+    utcCalendar.add(Calendar.DAY_OF_MONTH, days)
+    return utcCalendar.toCalendarDay()
+  }
 }
+

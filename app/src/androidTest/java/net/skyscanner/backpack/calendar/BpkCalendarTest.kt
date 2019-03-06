@@ -11,6 +11,7 @@ import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
@@ -20,20 +21,18 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.Calendar
 import java.util.Locale
 
 private class BpkCalendarControllerImpl(
   override val isRtl: Boolean,
   override val locale: Locale,
-  private val initialStartDate: Calendar? = null,
-  private val initialEndDate: Calendar? = null
+  private val initialStartDate: CalendarDay? = null,
+  private val initialEndDate: CalendarDay? = null
 ) : BpkCalendarController() {
-
-  override val startDate: Calendar
+  override val startDate: CalendarDay
     get() = initialStartDate ?: super.startDate
 
-  override val endDate: Calendar
+  override val endDate: CalendarDay
     get() = initialEndDate ?: super.endDate
 
   override fun onRangeSelected(range: CalendarRange) {}
@@ -41,6 +40,9 @@ private class BpkCalendarControllerImpl(
   override fun isToday(year: Int, month: Int, day: Int): Boolean {
     return day == 2 && month == 0 && year == 2019
   }
+
+  override val calendarColoring: CalendarColoring?
+    get() = null
 }
 
 @RunWith(AndroidJUnit4::class)
@@ -200,11 +202,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     snap(wrapWithBackground(calendar))
   }
 
-  private fun getDate(year: Int, month: Int, day: Int): Calendar {
-    return Calendar.getInstance().apply {
-      set(year, month, day)
-    }
-  }
+  private fun getDate(year: Int, month: Int, day: Int) = CalendarDay(year, month, day)
 
   private fun wrapWithBackground(view: View): FrameLayout {
     return FrameLayout(testContext).apply {

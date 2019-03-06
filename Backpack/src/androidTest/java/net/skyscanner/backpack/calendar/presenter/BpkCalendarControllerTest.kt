@@ -12,11 +12,16 @@ import java.util.Locale
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
+import net.skyscanner.backpack.calendar.model.CalendarColoring
 
 internal open class BpkCalendarControllerTestImpl : BpkCalendarController() {
+
   override val isRtl = false
   override val locale: Locale = Locale.forLanguageTag("pt-br")
   override fun onRangeSelected(range: CalendarRange) {}
+
+  override val calendarColoring: CalendarColoring?
+    get() = CalendarColoring(setOf())
 }
 
 @RunWith(AndroidJUnit4::class)
@@ -27,15 +32,6 @@ class BpkCalendarControllerTest {
   @Before
   fun setUp() {
     subject = BpkCalendarControllerTestImpl()
-  }
-
-  @Test
-  fun test_default_dates() {
-    val today = Calendar.getInstance()
-    val nextYear = Calendar.getInstance().apply { add(Calendar.YEAR, 1) }
-
-    Assert.assertEquals(today.atStartOfDay(), subject.startDate.atStartOfDay())
-    Assert.assertEquals(nextYear.atStartOfDay(), subject.endDate.atStartOfDay())
   }
 
   @Test
@@ -138,14 +134,5 @@ class BpkCalendarControllerTest {
     Assert.assertFalse(subject.isToday(year, month, day + 1))
     Assert.assertFalse(subject.isToday(year, month + 1, day))
     Assert.assertFalse(subject.isToday(year + 1, month, day))
-  }
-
-  private fun Calendar.atStartOfDay() {
-    this.apply {
-      set(Calendar.HOUR_OF_DAY, 0)
-      set(Calendar.MINUTE, 0)
-      set(Calendar.SECOND, 0)
-      set(Calendar.MILLISECOND, 0)
-    }
   }
 }

@@ -22,17 +22,15 @@ import android.view.ViewGroup
 import android.widget.AbsListView.LayoutParams
 import android.widget.BaseAdapter
 import net.skyscanner.backpack.calendar.model.CalendarDay
+import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.view.MonthView
-import java.util.Calendar
-import kotlin.collections.HashMap
-import kotlin.collections.set
 
 internal class MonthAdapter(
   private val context: Context,
   private val controller: BpkCalendarController
 ) : BaseAdapter(), MonthView.OnDayClickListener {
 
-    private var selectedDay: CalendarDay = CalendarDay()
+    private var selectedDay: CalendarDay? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -42,9 +40,9 @@ internal class MonthAdapter(
         onDayTapped(day)
     }
 
-    override fun getCount() =
-        (controller.endDate.get(Calendar.YEAR) - controller.startDate.get(Calendar.YEAR)) *
-                MONTHS_IN_YEAR + controller.endDate.get(Calendar.MONTH) - controller.startDate.get(Calendar.MONTH) + 1
+  override fun getCount() =
+    (controller.endDate.year - controller.startDate.year) * MONTHS_IN_YEAR +
+      controller.endDate.month - controller.startDate.month + 1
 
     override fun getItem(position: Int) = null
 
@@ -55,11 +53,9 @@ internal class MonthAdapter(
     @Suppress("UNCHECKED_CAST")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view: MonthView
-        var drawingParams: HashMap<String, Int>? = null
 
         if (convertView != null) {
             view = convertView as MonthView
-            drawingParams = view.tag as HashMap<String, Int>
         } else {
             view = createMonthView(context).apply {
                 layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -68,24 +64,14 @@ internal class MonthAdapter(
             view.onDayClickListener = this@MonthAdapter
         }
 
-        if (drawingParams == null) {
-            drawingParams = HashMap()
-        }
-
-        drawingParams.clear()
-
-        val positionWithStart = position + controller.startDate.get(Calendar.MONTH)
+        val positionWithStart = position + controller.startDate.month
         val month = positionWithStart % MONTHS_IN_YEAR
-        val year = positionWithStart / MONTHS_IN_YEAR + controller.startDate.get(Calendar.YEAR)
-        val day = if (isSelectedDayInMonth(selectedDay, year, month)) selectedDay.day else -1
+        val year = positionWithStart / MONTHS_IN_YEAR + controller.startDate.year
+        val selectedDay = if (selectedDay != null && (isSelectedDayInMonth(selectedDay!!, year, month))) selectedDay!!.day else null
 
         view.reuse()
 
-        drawingParams[MonthView.VIEW_PARAMS_SELECTED_DAY] = day
-        drawingParams[MonthView.VIEW_PARAMS_YEAR] = year
-        drawingParams[MonthView.VIEW_PARAMS_MONTH] = month
-
-        view.setMonthParams(drawingParams)
+        view.setMonthParams(CalendarDrawingParams(year, month, selectedDay, controller.calendarColoring))
         view.invalidate()
 
         return view

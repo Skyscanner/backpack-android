@@ -52,7 +52,7 @@ internal class CalendarView constructor(
   var listener: OnYearChangedListener? = null
 
   private var scrollFriction = 1.0f
-  private var selectedDay: CalendarDay = CalendarDay()
+  private var selectedDay: CalendarDay? = null
   private var previousScrollPosition: Long = 0
   private var previousScrollState = OnScrollListener.SCROLL_STATE_IDLE
   private var currentScrollState = OnScrollListener.SCROLL_STATE_IDLE
