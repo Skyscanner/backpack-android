@@ -14,6 +14,7 @@ import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.verify
 
 internal open class BpkCalendarControllerTestImpl : BpkCalendarController() {
+
   override val isRtl = false
   override val locale: Locale = Locale.forLanguageTag("pt-br")
   override fun onRangeSelected(range: CalendarRange) {}
@@ -34,8 +35,8 @@ class BpkCalendarControllerTest {
     val today = Calendar.getInstance()
     val nextYear = Calendar.getInstance().apply { add(Calendar.YEAR, 1) }
 
-    Assert.assertEquals(today.atStartOfDay(), subject.startDate.atStartOfDay())
-    Assert.assertEquals(nextYear.atStartOfDay(), subject.endDate.atStartOfDay())
+    Assert.assertEquals(today.atStartOfDay().toCalendarDay(), subject.startDate)
+    Assert.assertEquals(nextYear.atStartOfDay().toCalendarDay(), subject.endDate)
   }
 
   @Test
@@ -140,12 +141,11 @@ class BpkCalendarControllerTest {
     Assert.assertFalse(subject.isToday(year + 1, month, day))
   }
 
-  private fun Calendar.atStartOfDay() {
+  private fun Calendar.atStartOfDay() =
     this.apply {
       set(Calendar.HOUR_OF_DAY, 0)
       set(Calendar.MINUTE, 0)
       set(Calendar.SECOND, 0)
       set(Calendar.MILLISECOND, 0)
     }
-  }
 }

@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.calendar.presenter
 
+import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import java.text.SimpleDateFormat
@@ -9,9 +10,17 @@ import java.util.Date
 
 abstract class BpkCalendarController {
 
-  open val startDate: Calendar = DEFAULT_START_DATE
+  open val startDate: CalendarDay =
+    Calendar.getInstance().toCalendarDay()
 
-  open val endDate: Calendar = DEFAULT_END_DATE
+  open val endDate: CalendarDay =
+    Calendar.getInstance()
+      .apply {
+        add(Calendar.YEAR, 1)
+      }
+      .toCalendarDay()
+
+  open val calendarColoring: CalendarColoring? = null
 
   abstract val isRtl: Boolean
 
@@ -19,7 +28,7 @@ abstract class BpkCalendarController {
 
   abstract fun onRangeSelected(range: CalendarRange)
 
-  internal val selectedDay: CalendarDay = CalendarDay()
+  internal val selectedDay: CalendarDay? = null
 
   internal val selectedRange: CalendarRange = CalendarRange()
 
@@ -29,11 +38,11 @@ abstract class BpkCalendarController {
 
     if (currentRangeStart != null) {
       when {
-        currentRangeStart.date == selectedDay.date && currentRangeEnd == null -> {
+        currentRangeStart == selectedDay && currentRangeEnd == null -> {
           selectedRange.start = selectedDay
           selectedRange.end = selectedDay
         }
-        currentRangeStart.date == selectedDay.date && currentRangeEnd != null && currentRangeEnd.date == selectedDay.date -> {
+        currentRangeStart == selectedDay && currentRangeEnd != null && currentRangeEnd == selectedDay -> {
           selectedRange.start = null
           selectedRange.end = null
         }
@@ -59,7 +68,7 @@ abstract class BpkCalendarController {
   internal fun getLocalizedDate(date: Date, pattern: String): String = SimpleDateFormat(pattern, locale).format(date)
 
   open fun isToday(year: Int, month: Int, day: Int): Boolean {
-    return CalendarDay(year, month, day).date == CalendarDay().date
+    return CalendarDay(year, month, day).date == CalendarDay.today().date
   }
 
   fun updateSelection(range: CalendarRange) {
@@ -68,9 +77,6 @@ abstract class BpkCalendarController {
 
     onRangeSelected(selectedRange)
   }
-
-  private companion object {
-    val DEFAULT_START_DATE: Calendar = Calendar.getInstance()
-    val DEFAULT_END_DATE: Calendar = Calendar.getInstance().apply { add(Calendar.YEAR, 1) }
-  }
 }
+
+internal fun Calendar.toCalendarDay() = CalendarDay(year = get(Calendar.YEAR), month = get(Calendar.MONTH), day = get(Calendar.DAY_OF_MONTH))

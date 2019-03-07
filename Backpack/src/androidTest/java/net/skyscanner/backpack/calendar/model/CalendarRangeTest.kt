@@ -88,11 +88,11 @@ class CalendarRangeTest {
 
     Assert.assertEquals(
       CalendarRange.DrawType.SELECTED,
-      range.getDrawType(2019, 0, 10))
+      range.getDrawType(CalendarDay(2019, 0, 10)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.SELECTED,
-      range.getDrawType(2019, 1, 10))
+      range.getDrawType(CalendarDay(2019, 1, 10)))
   }
 
   @Test
@@ -103,15 +103,15 @@ class CalendarRangeTest {
 
     Assert.assertEquals(
       CalendarRange.DrawType.RANGE,
-      range.getDrawType(2019, 0, 11))
+      range.getDrawType(CalendarDay(2019, 0, 11)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.RANGE,
-      range.getDrawType(2019, 0, 20))
+      range.getDrawType(CalendarDay(2019, 0, 20)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.RANGE,
-      range.getDrawType(2019, 1, 9))
+      range.getDrawType(CalendarDay(2019, 1, 9)))
   }
 
   @Test
@@ -122,15 +122,15 @@ class CalendarRangeTest {
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(2019, 0, 9))
+      range.getDrawType(CalendarDay(2019, 0, 9)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(2019, 2, 11))
+      range.getDrawType(CalendarDay(2019, 2, 11)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(2019, 1, 11))
+      range.getDrawType(CalendarDay(2019, 1, 11)))
   }
 
   @Test
@@ -141,7 +141,7 @@ class CalendarRangeTest {
 
     Assert.assertEquals(
       CalendarRange.DrawType.SELECTED,
-      range.getDrawType(2019, 0, 10))
+      range.getDrawType(CalendarDay(2019, 0, 10)))
 
     range = CalendarRange(
       null,
@@ -149,7 +149,7 @@ class CalendarRangeTest {
 
     Assert.assertEquals(
       CalendarRange.DrawType.SELECTED,
-      range.getDrawType(2019, 1, 10))
+      range.getDrawType(CalendarDay(2019, 1, 10)))
   }
 
   @Test
@@ -160,7 +160,7 @@ class CalendarRangeTest {
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(2019, 0, 11))
+      range.getDrawType(CalendarDay(2019, 0, 11)))
 
     range = CalendarRange(
       null,
@@ -168,6 +168,6 @@ class CalendarRangeTest {
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(2019, 1, 11))
+      range.getDrawType(CalendarDay(2019, 1, 11)))
   }
 }

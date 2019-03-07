@@ -20,20 +20,18 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.Calendar
 import java.util.Locale
 
 private class BpkCalendarControllerImpl(
   override val isRtl: Boolean,
   override val locale: Locale,
-  private val initialStartDate: Calendar? = null,
-  private val initialEndDate: Calendar? = null
+  private val initialStartDate: CalendarDay? = null,
+  private val initialEndDate: CalendarDay? = null
 ) : BpkCalendarController() {
-
-  override val startDate: Calendar
+  override val startDate: CalendarDay
     get() = initialStartDate ?: super.startDate
 
-  override val endDate: Calendar
+  override val endDate: CalendarDay
     get() = initialEndDate ?: super.endDate
 
   override fun onRangeSelected(range: CalendarRange) {}
@@ -200,11 +198,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     snap(wrapWithBackground(calendar))
   }
 
-  private fun getDate(year: Int, month: Int, day: Int): Calendar {
-    return Calendar.getInstance().apply {
-      set(year, month, day)
-    }
-  }
+  private fun getDate(year: Int, month: Int, day: Int) = CalendarDay(year, month, day)
 
   private fun wrapWithBackground(view: View): FrameLayout {
     return FrameLayout(testContext).apply {

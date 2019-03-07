@@ -6,7 +6,7 @@ import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
 
-class CalendarStory : Story() {
+class DefaultCalendarStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -17,7 +17,7 @@ class CalendarStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = CalendarStory().apply {
+    infix fun of(fragmentLayout: Int) = DefaultCalendarStory().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

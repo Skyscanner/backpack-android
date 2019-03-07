@@ -17,11 +17,11 @@ data class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? =
         NONE, RANGE, SELECTED
     }
 
-    internal fun getDrawType(year: Int, month: Int, day: Int): DrawType {
+    internal fun getDrawType(calendarDay: CalendarDay): DrawType {
         calendar.timeZone = TimeZone.getTimeZone("UTC")
-        calendar.set(Calendar.YEAR, year)
-        calendar.set(Calendar.MONTH, month)
-        calendar.set(Calendar.DAY_OF_MONTH, day)
+        calendar.set(Calendar.YEAR, calendarDay.year)
+        calendar.set(Calendar.MONTH, calendarDay.month)
+        calendar.set(Calendar.DAY_OF_MONTH, calendarDay.day)
         calendar.trimCalendar()
         val time = calendar.timeInMillis
         return if (isRange) {
@@ -31,9 +31,9 @@ data class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? =
                 else -> DrawType.NONE
             }
         } else {
-            if (isStartIsInSelectedMonth(year, month) &&
+            if (isStartIsInSelectedMonth(calendarDay.year, calendarDay.month) &&
                 isSelected(start, time) ||
-                isEndIsInSelectedMonth(year, month) &&
+                isEndIsInSelectedMonth(calendarDay.year, calendarDay.month) &&
                 isSelected(end, time)
             ) {
               DrawType.SELECTED
