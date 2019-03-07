@@ -21,7 +21,7 @@ data class CalendarDay(
 
     fun today(): CalendarDay = of(System.currentTimeMillis())
 
-    fun utcCalendar() = Calendar.getInstance(TimeZone.getTimeZone("UTC"))!!
+    fun utcCalendar(): Calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
   }
 
   private val calendar: Calendar = utcCalendar()

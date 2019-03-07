@@ -67,7 +67,9 @@ internal class MonthAdapter(
         val positionWithStart = position + controller.startDate.month
         val month = positionWithStart % MONTHS_IN_YEAR
         val year = positionWithStart / MONTHS_IN_YEAR + controller.startDate.year
-        val selectedDay = if (selectedDay != null && (isSelectedDayInMonth(selectedDay!!, year, month))) selectedDay!!.day else null
+        val selectedDay = selectedDay?.let {
+          if (isSelectedDayInMonth(it, year, month)) it.day else null
+        }
 
         view.reuse()
 
