@@ -7,7 +7,6 @@ import androidx.appcompat.view.ContextThemeWrapper
 import net.skyscanner.backpack.R
 import androidx.core.content.ContextCompat
 
-
 class ThemesUtil {
   companion object {
 
