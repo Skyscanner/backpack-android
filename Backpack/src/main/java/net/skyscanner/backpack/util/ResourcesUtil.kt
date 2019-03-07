@@ -8,6 +8,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.core.content.res.ResourcesCompat
 import android.util.DisplayMetrics
+import android.util.TypedValue
+import androidx.annotation.AttrRes
 
 internal object ResourcesUtil {
 
@@ -35,3 +37,7 @@ internal object ResourcesUtil {
 internal fun View.getColor(@ColorRes id: Int): Int {
   return ResourcesUtil.getColor(this, id)
 }
+
+@ColorInt
+fun Context.getThemeColor(@AttrRes attribute: Int) =
+  TypedValue().let { theme.resolveAttribute(attribute, it, true); it.data }
