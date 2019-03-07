@@ -285,7 +285,7 @@ internal class MonthView @JvmOverloads constructor(
           if (controller.selectedRange.isRange && !controller.selectedRange.isOnTheSameDate) {
             val paddingX = (stopX - startX) / 2
             drawEdgeCircles(canvas, calendarDay, controller.selectedRange, paddingX, rowPadding, x, y)
-            val nextDay = calendarDay.newInstanceByAddedDays(1)
+            val nextDay = calendarDay.addDays(1)
             if (controller.selectedRange.getDrawType(nextDay) != CalendarRange.DrawType.NONE) {
               drawRect(canvas, startX + paddingX, startY + rowPadding, stopX, stopY - rowPadding)
             } else {

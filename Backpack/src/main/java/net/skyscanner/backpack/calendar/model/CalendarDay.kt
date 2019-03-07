@@ -46,7 +46,7 @@ data class CalendarDay(
 
   override fun toString(): String = String.format("%04d-%02d-%02d", year, month + 1, day)
 
-  fun newInstanceByAddedDays(days: Int): CalendarDay {
+  fun addDays(days: Int): CalendarDay {
     val utcCalendar = utcCalendar().apply {
       set(Calendar.YEAR, year)
       set(Calendar.MONTH, month)

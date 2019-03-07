@@ -39,7 +39,7 @@ class CalendarDayTest {
 
   @Test
   fun test_addDays() {
-    val subject = CalendarDay(2019, 1, 1).newInstanceByAddedDays(1)
+    val subject = CalendarDay(2019, 1, 1).addDays(1)
 
     Assert.assertEquals(2, subject.day)
 
