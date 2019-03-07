@@ -4,7 +4,7 @@
   <item>
     <shape xmlns:android="http://schemas.android.com/apk/res/android"
       android:shape="rectangle">
-      <solid android:color="?bpkPrimaryColor" />
+      <solid android:color="@color/bpkBlue500" />
       <padding
         android:bottom="@dimen/bpkSpacingMd"
         android:left="@dimen/bpkSpacingBase"

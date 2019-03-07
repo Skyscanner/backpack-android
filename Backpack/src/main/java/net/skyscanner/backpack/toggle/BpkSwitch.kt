@@ -7,7 +7,6 @@ import androidx.appcompat.widget.SwitchCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.getColor
-import net.skyscanner.backpack.util.getThemeColor
 
 /**
  * BpkSwitch allow users to toggle between two states, on or off.
@@ -26,8 +25,7 @@ open class BpkSwitch @JvmOverloads constructor(
 
   init {
     val a = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0)
-//    val primaryColor = a.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
-    val primaryColor = context.getThemeColor(R.attr.bpkPrimaryColor)
+    val primaryColor = a.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
     a.recycle()
 
     trackTintList = ColorStateList.valueOf(getColor(R.color.bpkGray100))

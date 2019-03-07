@@ -6,9 +6,9 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
+import androidx.annotation.ColorInt
 import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.getThemeColor
 
 /**
  * BpkSpinner is designed to indicate that a part of the product is loading or performing a task
@@ -36,9 +36,9 @@ open class BpkSpinner @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
   private val colors = arrayOf(
-    context.getThemeColor(R.attr.bpkPrimaryColor),
-    ResourcesCompat.getColor(resources, R.color.bpkWhite, context.theme),
-    ResourcesCompat.getColor(resources, R.color.bpkGray700, context.theme)
+    R.color.bpkBlue500,
+    R.color.bpkWhite,
+    R.color.bpkGray700
   )
 
   private var mProgressBar: ProgressBar? = null
@@ -66,6 +66,10 @@ open class BpkSpinner @JvmOverloads constructor(
     initialize(context, attrs, defStyleAttr)
   }
 
+  @ColorInt
+  fun getColor(): Int =
+    ResourcesCompat.getColor(resources, colors[type.ordinal], context.theme)
+
   private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
     val a = context.obtainStyledAttributes(attrs, R.styleable.BpkSpinner, defStyleAttr, 0)
     small = a.getBoolean(R.styleable.BpkSpinner_small, false)
@@ -74,7 +78,7 @@ open class BpkSpinner @JvmOverloads constructor(
   }
 
   private fun updateColor() {
-    mProgressBar?.indeterminateDrawable?.mutate()?.setColorFilter(colors[type.ordinal], PorterDuff.Mode.SRC_IN)
+    mProgressBar?.indeterminateDrawable?.mutate()?.setColorFilter(getColor(), PorterDuff.Mode.SRC_IN)
   }
 
   private fun updateSize() {
