@@ -31,6 +31,15 @@ class BpkCalendarControllerTest {
   }
 
   @Test
+  fun test_default_dates() {
+    val today = Calendar.getInstance()
+    val nextYear = Calendar.getInstance().apply { add(Calendar.YEAR, 1) }
+
+    Assert.assertEquals(today.atStartOfDay().toCalendarDay(), subject.startDate)
+    Assert.assertEquals(nextYear.atStartOfDay().toCalendarDay(), subject.endDate)
+  }
+
+  @Test
   fun test_get_localized_date() {
     val date = Calendar.getInstance().apply {
       set(Calendar.YEAR, 2019)
@@ -131,4 +140,12 @@ class BpkCalendarControllerTest {
     Assert.assertFalse(subject.isToday(year, month + 1, day))
     Assert.assertFalse(subject.isToday(year + 1, month, day))
   }
+
+  private fun Calendar.atStartOfDay() =
+    this.apply {
+      set(Calendar.HOUR_OF_DAY, 0)
+      set(Calendar.MINUTE, 0)
+      set(Calendar.SECOND, 0)
+      set(Calendar.MILLISECOND, 0)
+    }
 }

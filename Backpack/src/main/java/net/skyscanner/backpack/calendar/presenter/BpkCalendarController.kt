@@ -10,9 +10,15 @@ import java.util.Date
 
 abstract class BpkCalendarController {
 
-  open val startDate: CalendarDay = DEFAULT_START_DATE
+  open val startDate: CalendarDay =
+    Calendar.getInstance().toCalendarDay()
 
-  open val endDate: CalendarDay = DEFAULT_END_DATE
+  open val endDate: CalendarDay =
+    Calendar.getInstance()
+      .apply {
+        add(Calendar.YEAR, 1)
+      }
+      .toCalendarDay()
 
   open val calendarColoring: CalendarColoring? = null
 
@@ -70,16 +76,6 @@ abstract class BpkCalendarController {
     selectedRange.end = range.end
 
     onRangeSelected(selectedRange)
-  }
-
-  private companion object {
-    val DEFAULT_START_DATE: CalendarDay = Calendar.getInstance().toCalendarDay()
-    val DEFAULT_END_DATE: CalendarDay = Calendar.getInstance()
-      .apply {
-        add(Calendar.YEAR, 1)
-        add(Calendar.DATE, -1)
-      }
-      .toCalendarDay()
   }
 }
 
