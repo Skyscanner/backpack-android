@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 3.0.0
+
+**Breaking:**
+
+- Added support for color markers in BpkCalendar
+
 # 2.8.0
 
 **Added:**
