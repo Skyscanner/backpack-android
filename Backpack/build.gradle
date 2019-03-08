@@ -28,10 +28,11 @@ android {
 dependencies {
   implementation "androidx.annotation:annotation:$rootProject.ext.androidx"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation 'com.google.android.material:material:1.0.0'
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
   implementation "androidx.cardview:cardview:$rootProject.ext.androidx"
-  androidTestImplementation "androidx.test.ext:junit:1.0.0"
+  androidTestImplementation "androidx.test.ext:junit:1.1.0"
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
   androidTestImplementation 'androidx.test:rules:1.1.1'
   androidTestImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
