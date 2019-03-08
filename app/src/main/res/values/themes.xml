@@ -7,6 +7,7 @@
 
   <style name="DohaTheme" parent="AppTheme">
     <item name="colorPrimary">#9B104C</item>
+    <item name="bpkPrimaryColor">#9B104C</item>
     <item name="bpkSwitchStyle">@style/BpkSwitch.Themed</item>
   </style>
 
