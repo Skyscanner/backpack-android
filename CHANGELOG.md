@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 3.1.0
+
+**Added:**
+
+- Added 'bpkPrimaryColor` theme property and `ThemeUtils.getPrimaryColor` function.
+  - These should be used in place of `bpkBlue500`.
+
 # 3.0.0
 
 **Breaking:**
