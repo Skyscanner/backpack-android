@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 3.2.0
+
+**Added:**
+
+- Added function `updateContent` to `BpkCalendarController`.
+
 # 3.1.0
 
 **Added:**
