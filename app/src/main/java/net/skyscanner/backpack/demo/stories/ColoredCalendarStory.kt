@@ -2,6 +2,7 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import kotlinx.android.synthetic.main.fragment_calendar_colored.shiftColorsButton
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
@@ -14,6 +15,10 @@ class ColoredCalendarStory : Story() {
     val controller = ExampleBpkCalendarController(requireContext())
     val bpkCalendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
     controller.isColoredCalendar = true
+    shiftColorsButton.setOnClickListener {
+      controller.newColors()
+      controller.updateContent()
+    }
     bpkCalendar.setController(controller)
   }
 

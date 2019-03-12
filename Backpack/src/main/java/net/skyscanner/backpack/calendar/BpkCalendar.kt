@@ -24,6 +24,7 @@ open class BpkCalendar @JvmOverloads constructor(
   fun setController(controller: BpkCalendarController) {
     weekday_header_view.initializeWithLocale(controller.locale)
     calendar_view.controller = controller
+    controller.updateContentCallback = calendar_view
     calendar_view.listener = this
   }
 
