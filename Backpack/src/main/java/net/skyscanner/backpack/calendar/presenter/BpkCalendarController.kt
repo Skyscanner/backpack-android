@@ -3,6 +3,7 @@ package net.skyscanner.backpack.calendar.presenter
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
+import net.skyscanner.backpack.calendar.view.CalendarUpdateCallback
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -31,6 +32,8 @@ abstract class BpkCalendarController {
   internal val selectedDay: CalendarDay? = null
 
   internal val selectedRange: CalendarRange = CalendarRange()
+
+  internal var updateCallbackContentCallback: CalendarUpdateCallback? = null
 
   internal fun onDayOfMonthSelected(selectedDay: CalendarDay) {
     val currentRangeStart = selectedRange.start
@@ -77,6 +80,8 @@ abstract class BpkCalendarController {
 
     onRangeSelected(selectedRange)
   }
+
+  fun updateContent() = updateCallbackContentCallback?.updateContent()
 }
 
 internal fun Calendar.toCalendarDay() = CalendarDay(year = get(Calendar.YEAR), month = get(Calendar.MONTH), day = get(Calendar.DAY_OF_MONTH))

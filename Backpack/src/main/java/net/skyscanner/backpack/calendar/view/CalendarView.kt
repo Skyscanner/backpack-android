@@ -24,12 +24,15 @@ import android.widget.AbsListView
 import android.widget.ListView
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.MonthAdapter
 
 interface OnYearChangedListener {
   fun onYearChanged(year: Int)
+}
+
+interface CalendarUpdateCallback {
+  fun updateContent()
 }
 
 /**
@@ -38,21 +41,19 @@ interface OnYearChangedListener {
 internal class CalendarView constructor(
   context: Context,
   attr: AttributeSet?
-) : ListView(context, attr), AbsListView.OnScrollListener {
+) : ListView(context, attr), AbsListView.OnScrollListener, CalendarUpdateCallback {
 
   var controller: BpkCalendarController? = null
     set(value) {
       field = value
       if (value != null) {
         changeAdapter(value)
-        selectedDay = value.selectedDay
       }
     }
 
   var listener: OnYearChangedListener? = null
 
   private var scrollFriction = 1.0f
-  private var selectedDay: CalendarDay? = null
   private var previousScrollPosition: Long = 0
   private var previousScrollState = OnScrollListener.SCROLL_STATE_IDLE
   private var currentScrollState = OnScrollListener.SCROLL_STATE_IDLE
@@ -80,13 +81,14 @@ internal class CalendarView constructor(
     this.post(measureAndLayout)
   }
 
-  private fun changeAdapter(controller: BpkCalendarController) {
-    adapter = createMonthAdapter(context, controller)
-    setAdapter(adapter)
+  override fun updateContent() {
+    adapter?.notifyDataSetChanged()
   }
 
-  private fun createMonthAdapter(context: Context, controller: BpkCalendarController) =
-    MonthAdapter(context, controller)
+  private fun changeAdapter(controller: BpkCalendarController) {
+    adapter = MonthAdapter(context, controller)
+    setAdapter(adapter)
+  }
 
   private fun setUpListView() {
     cacheColorHint = 0
