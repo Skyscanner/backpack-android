@@ -33,7 +33,7 @@ abstract class BpkCalendarController {
 
   internal val selectedRange: CalendarRange = CalendarRange()
 
-  internal var updateCallbackContentCallback: CalendarUpdateCallback? = null
+  internal var updateContentCallback: CalendarUpdateCallback? = null
 
   internal fun onDayOfMonthSelected(selectedDay: CalendarDay) {
     val currentRangeStart = selectedRange.start
@@ -81,7 +81,7 @@ abstract class BpkCalendarController {
     onRangeSelected(selectedRange)
   }
 
-  fun updateContent() = updateCallbackContentCallback?.updateContent()
+  fun updateContent() = updateContentCallback?.updateContent()
 }
 
 internal fun Calendar.toCalendarDay() = CalendarDay(year = get(Calendar.YEAR), month = get(Calendar.MONTH), day = get(Calendar.DAY_OF_MONTH))
