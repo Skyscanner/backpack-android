@@ -45,20 +45,26 @@ class BpkChipTest {
   }
 
   @Test
-  fun test_select_event() {
+  fun test_toggle() {
     val chip = BpkChip(context).apply {
       isSelected = false
     }
-    chip.performClick()
+
+    chip.toggle()
     Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkWhite), chip.currentTextColor)
+
+    chip.toggle()
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray700), chip.currentTextColor)
   }
 
   @Test
-  fun test_unselect_event() {
+  fun test_toggle_when_disabled() {
     val chip = BpkChip(context).apply {
-      isSelected = true
+      isSelected = false
+      disabled = true
     }
-    chip.performClick()
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray700), chip.currentTextColor)
+
+    chip.toggle()
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray300), chip.currentTextColor)
   }
 }
