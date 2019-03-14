@@ -28,7 +28,6 @@ android {
 dependencies {
   implementation "androidx.annotation:annotation:$rootProject.ext.androidx"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.google.android.material:material:1.0.0'
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
   implementation "androidx.cardview:cardview:$rootProject.ext.androidx"
