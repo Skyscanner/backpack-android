@@ -22,7 +22,7 @@ import net.skyscanner.backpack.R
 open class BpkButton @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.attr.buttonStyle
+  defStyleAttr: Int = R.attr.buttonType
 ) : AppCompatButton(context, attrs, defStyleAttr) {
 
   @IntDef(START, END, ICON_ONLY)

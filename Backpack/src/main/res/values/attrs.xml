@@ -53,10 +53,6 @@
     <attr name="buttonStrokeColor" format="color" />
   </declare-styleable>
 
-  <declare-styleable name="BpkButtonTheme">
-    <attr name="buttonStyle" format="reference" />
-  </declare-styleable>
-
   <declare-styleable name="BpkCardView">
     <attr name="focused" format="boolean" />
     <attr name="padded" format="boolean" />
@@ -85,5 +81,6 @@
   </declare-styleable>
 
   <attr name="bpkSwitchStyle" format="reference" />
+  <attr name="buttonType" format="reference" />
 
 </resources>
