@@ -51,6 +51,9 @@ open class BpkButton @JvmOverloads constructor(
 
   private val INVALID_RESOURCE = -1
 
+  @Deprecated(
+    "set individual properties `buttonBackground`, `buttonTextColor`," +
+      " `buttonStrokeColor` instead ")
   var type: Type = Type.Primary
     set(value) {
       field = value
