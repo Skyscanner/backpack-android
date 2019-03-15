@@ -32,7 +32,7 @@ open class BpkChip @JvmOverloads constructor(
     setup()
   }
 
-  open fun setup() {
+  internal open fun setup() {
     // Elevation
     ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationSm))
 
@@ -44,12 +44,11 @@ open class BpkChip @JvmOverloads constructor(
     // Background
     val drawable = ResourcesCompat.getDrawable(resources, R.drawable.chip_background, context.theme)
     ViewCompat.setBackground(this, drawable)
+  }
 
-    // State change
-    setOnClickListener {
-      if (!disabled) {
-        isSelected = !isSelected
-      }
+  fun toggle() {
+    if (!disabled) {
+      isSelected = !isSelected
     }
   }
 }

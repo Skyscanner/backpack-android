@@ -10,6 +10,7 @@ import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.SubStory
 import net.skyscanner.backpack.demo.stories.ColorStory
 import net.skyscanner.backpack.demo.stories.ColoredCalendarStory
+import net.skyscanner.backpack.demo.stories.ChipStory
 
 interface RegistryItem {
   val name: String
@@ -94,7 +95,7 @@ object ComponentRegistry {
         "Default" story NodeData { DefaultCalendarStory of R.layout.fragment_calendar_deafult },
         "Colored" story NodeData { ColoredCalendarStory of R.layout.fragment_calendar_colored }
       )),
-    "Chip" story NodeData { Story of R.layout.fragment_chip },
+    "Chip" story NodeData { ChipStory() },
     "Dialog" story NodeData({ children -> SubStory of children },
       mapOf(
         "With call to action" story NodeData { DialogStory of "Normal" },

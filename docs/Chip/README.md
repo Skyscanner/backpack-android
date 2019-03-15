@@ -32,4 +32,11 @@ BpkChip(context).apply {
 }
 ```
 
+## Toogling the chip's state
 
+By default the chip does not add any click listeners, so clicking it will not toggle its state.
+To do so add a click listener:
+
+```Kotlin
+chip.setOnClickListener { chip.toggle() }
+```
