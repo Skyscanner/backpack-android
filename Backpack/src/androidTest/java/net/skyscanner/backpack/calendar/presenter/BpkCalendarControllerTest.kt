@@ -149,7 +149,7 @@ class BpkCalendarControllerTest {
   @Test
   fun test_onDayOfMonthSelected_whenSingleDaySelection() {
     val spy = spy(subject)
-    spy.selectionType = SelectionType.SINGLE
+    spy.selectionType = SelectionType.SINGLE_DAY
     val selectedDay = CalendarDay(2019, 3, 16)
 
     spy.onDayOfMonthSelected(selectedDay)

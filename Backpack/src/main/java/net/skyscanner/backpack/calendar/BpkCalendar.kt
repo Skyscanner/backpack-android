@@ -32,7 +32,7 @@ open class BpkCalendar @JvmOverloads constructor(
       (selection_type as? RadioGroup)?.setOnCheckedChangeListener { group, checkedId ->
         when (checkedId) {
           R.id.single -> {
-            calendarController?.selectionType = SelectionType.SINGLE
+            calendarController?.selectionType = SelectionType.SINGLE_DAY
           }
           R.id.range -> {
             calendarController?.selectionType = SelectionType.RANGE

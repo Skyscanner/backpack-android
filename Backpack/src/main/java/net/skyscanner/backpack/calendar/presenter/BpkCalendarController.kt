@@ -41,7 +41,7 @@ abstract class BpkCalendarController {
 
   internal fun onDayOfMonthSelected(selectedDay: CalendarDay) {
     when(selectionType) {
-      SelectionType.SINGLE -> handleForSingle(selectedDay)
+      SelectionType.SINGLE_DAY -> handleForSingle(selectedDay)
       SelectionType.RANGE -> handleForRange(selectedDay)
     }
   }
@@ -105,5 +105,5 @@ internal fun Calendar.toCalendarDay() = CalendarDay(year = get(Calendar.YEAR), m
 
 enum class SelectionType {
   RANGE,
-  SINGLE
+  SINGLE_DAY
 }
