@@ -18,6 +18,7 @@ internal open class BpkCalendarControllerTestImpl : BpkCalendarController() {
   override val isRtl = false
   override val locale: Locale = Locale.forLanguageTag("pt-br")
   override fun onRangeSelected(range: CalendarRange) {}
+  override fun onSingleDaySelected(day: CalendarDay) {}
 }
 
 @RunWith(AndroidJUnit4::class)
@@ -30,6 +31,7 @@ class BpkCalendarControllerTest {
     subject = BpkCalendarControllerTestImpl()
   }
 
+  // region selection type Range
   @Test
   fun test_default_dates() {
     val today = Calendar.getInstance()
@@ -140,6 +142,22 @@ class BpkCalendarControllerTest {
     Assert.assertFalse(subject.isToday(year, month + 1, day))
     Assert.assertFalse(subject.isToday(year + 1, month, day))
   }
+
+  // endregion
+
+  // region selection type Single day
+  @Test
+  fun test_onDayOfMonthSelected_whenSingleDaySelection() {
+    val spy = spy(subject)
+    spy.selectionType = SelectionType.SINGLE
+    val selectedDay = CalendarDay(2019, 3, 16)
+
+    spy.onDayOfMonthSelected(selectedDay)
+
+    verify(spy, times(1)).onSingleDaySelected(selectedDay)
+  }
+
+  // endregion
 
   private fun Calendar.atStartOfDay() =
     this.apply {
