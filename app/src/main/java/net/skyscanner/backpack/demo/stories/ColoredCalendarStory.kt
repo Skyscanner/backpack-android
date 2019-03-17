@@ -14,6 +14,7 @@ class ColoredCalendarStory : Story() {
 
     val controller = ExampleBpkCalendarController(requireContext())
     val bpkCalendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
+    bpkCalendar.isSelectionTypeSwitcherVisible = true
     controller.isColoredCalendar = true
     shiftColorsButton.setOnClickListener {
       controller.newColors()

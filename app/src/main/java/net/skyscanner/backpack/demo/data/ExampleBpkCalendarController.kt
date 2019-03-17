@@ -22,6 +22,11 @@ class ExampleBpkCalendarController(private val context: Context) : BpkCalendarCo
       .show()
   }
 
+  override fun onSingleDaySelected(day: CalendarDay) {
+    Toast.makeText(context, String.format("%s", day.toString()), Toast.LENGTH_SHORT)
+      .show()
+  }
+
   var isColoredCalendar: Boolean = false
   var colorGenerationOffset: Long = 0L
 

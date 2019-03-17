@@ -36,6 +36,8 @@ private class BpkCalendarControllerImpl(
 
   override fun onRangeSelected(range: CalendarRange) {}
 
+  override fun onSingleDaySelected(day: CalendarDay) {}
+
   override fun isToday(year: Int, month: Int, day: Int): Boolean {
     return day == 2 && month == 0 && year == 2019
   }

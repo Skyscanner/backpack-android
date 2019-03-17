@@ -4,13 +4,26 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
+  <include layout="@layout/bpk_calendar_selection_type"
+    android:id="@+id/selection_type"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    app:layout_goneMarginTop="0dp"
+    />
+
   <net.skyscanner.backpack.calendar.view.WeekdayHeaderView
     android:id="@+id/weekday_header_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="@id/selection_type"
+    android:layout_marginTop="@dimen/bpkSpacingBase"
+    app:layout_goneMarginTop="0dp" />
 
   <net.skyscanner.backpack.calendar.view.CalendarView
     android:id="@+id/calendar_view"

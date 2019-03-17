@@ -11,7 +11,9 @@ class DefaultCalendarStory : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    view.findViewById<BpkCalendar>(R.id.bpkCalendar).setController(ExampleBpkCalendarController(requireContext()))
+    val calendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
+    calendar.isSelectionTypeSwitcherVisible = true
+    calendar.setController(ExampleBpkCalendarController(requireContext()))
   }
 
   companion object {

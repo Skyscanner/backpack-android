@@ -27,7 +27,11 @@ abstract class BpkCalendarController {
 
   abstract val locale: Locale
 
+  var selectionType: SelectionType = SelectionType.RANGE
+
   abstract fun onRangeSelected(range: CalendarRange)
+
+  abstract fun onSingleDaySelected(day: CalendarDay)
 
   internal val selectedDay: CalendarDay? = null
 
@@ -36,6 +40,19 @@ abstract class BpkCalendarController {
   internal var updateContentCallback: CalendarUpdateCallback? = null
 
   internal fun onDayOfMonthSelected(selectedDay: CalendarDay) {
+    when(selectionType) {
+      SelectionType.SINGLE -> handleForSingle(selectedDay)
+      SelectionType.RANGE -> handleForRange(selectedDay)
+    }
+  }
+
+  private fun handleForSingle(selectedDay: CalendarDay) {
+    selectedRange.start = selectedDay
+    selectedRange.end = selectedDay
+    onSingleDaySelected(selectedDay)
+  }
+
+  private fun handleForRange(selectedDay: CalendarDay) {
     val currentRangeStart = selectedRange.start
     val currentRangeEnd = selectedRange.end
 
@@ -85,3 +102,8 @@ abstract class BpkCalendarController {
 }
 
 internal fun Calendar.toCalendarDay() = CalendarDay(year = get(Calendar.YEAR), month = get(Calendar.MONTH), day = get(Calendar.DAY_OF_MONTH))
+
+enum class SelectionType {
+  RANGE,
+  SINGLE
+}
