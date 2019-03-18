@@ -10,7 +10,7 @@ Icons are converted to image vectors and are available as drawables.
 
 They can be used in code and XML.
 
-Exampe usage in XML
+Example usage in XML
 
 ```
 <ImageView
@@ -19,11 +19,12 @@ Exampe usage in XML
   android:layout_margin="@dimen/bpkSpacingSm"
   app:srcCompat="@drawable/bpk_flight"
   android:layout_height="16dp" />
-````
+```
 
 Example usage in Kotlin
 
 ```
 ImageView(context).apply {
   setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.bpk_flag))
-}`
+}
+```

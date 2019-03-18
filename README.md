@@ -48,7 +48,7 @@ The Backpack demo application is a good way of referring to the variants availab
 
 ### Radii
 
-The Backpack raddi tokens are available as [dimension resource](Backpack/src/main/res/values/backpack.radii.xml).
+The Backpack radii tokens are available as [dimension resource](Backpack/src/main/res/values/backpack.radii.xml).
 
 The supported tokens are
 
