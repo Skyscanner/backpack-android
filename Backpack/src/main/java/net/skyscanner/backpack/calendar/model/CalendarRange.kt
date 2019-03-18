@@ -6,7 +6,7 @@ import java.util.TimeZone
 
 open class CalendarSelection : Serializable
 
-data class SingleDay(val selectedDay: CalendarDay): CalendarSelection()
+data class SingleDay(val selectedDay: CalendarDay) : CalendarSelection()
 
 data class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? = null) : CalendarSelection() {
     private val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
