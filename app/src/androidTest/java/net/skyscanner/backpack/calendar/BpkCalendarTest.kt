@@ -6,10 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isChecked
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
@@ -17,6 +13,7 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
+import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.MainActivity
@@ -31,17 +28,16 @@ private class BpkCalendarControllerImpl(
   override val isRtl: Boolean,
   override val locale: Locale,
   private val initialStartDate: CalendarDay? = null,
-  private val initialEndDate: CalendarDay? = null
-) : BpkCalendarController() {
+  private val initialEndDate: CalendarDay? = null,
+  override val selectionType: SelectionType = SelectionType.RANGE
+) : BpkCalendarController(selectionType) {
   override val startDate: CalendarDay
     get() = initialStartDate ?: super.startDate
 
   override val endDate: CalendarDay
     get() = initialEndDate ?: super.endDate
 
-  override fun onRangeSelected(range: CalendarRange) {}
-
-  override fun onSingleDaySelected(day: CalendarDay) {}
+  override fun onRangeSelected(range: CalendarSelection) {}
 
   override fun isToday(year: Int, month: Int, day: Int): Boolean {
     return day == 2 && month == 0 && year == 2019
@@ -198,9 +194,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
       false,
       Locale.UK,
       getDate(2019, 0, 2),
-      getDate(2019, 11, 31)
+      getDate(2019, 11, 31),
+      SelectionType.SINGLE
     )
-    controller.selectionType = SelectionType.SINGLE_DAY
     calendar.setController(controller)
     val wrapped = wrapWithBackground(calendar)
 
@@ -210,9 +206,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
       rootLayout.addView(wrapped)
     }
-
-    Espresso.onView(withId(R.id.single)).perform(click())
-    Espresso.onView(withId(R.id.single)).check(matches(isChecked()))
 
     Espresso.onData(CoreMatchers.anything())
       .atPosition(0)
@@ -253,10 +246,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
       false,
       Locale.UK,
       getDate(2019, 0, 2),
-      getDate(2019, 11, 31)
+      getDate(2019, 11, 31),
+      SelectionType.SINGLE
     )
-
-    controller.selectionType = SelectionType.SINGLE_DAY
 
     calendar.setController(controller)
     controller.updateSelectionForSingleDay(CalendarDay(2019, 0, 16))

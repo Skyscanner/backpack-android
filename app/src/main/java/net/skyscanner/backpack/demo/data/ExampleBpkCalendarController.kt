@@ -8,27 +8,30 @@ import androidx.core.view.ViewCompat.LAYOUT_DIRECTION_RTL
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
+import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.ColoredBucket
+import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
+import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
-class ExampleBpkCalendarController(private val context: Context) : BpkCalendarController() {
-  override fun onRangeSelected(range: CalendarRange) {
-    Toast.makeText(context, String.format("%s - %s", range.start.toString(), range.end.toString()), Toast.LENGTH_SHORT)
-      .show()
-  }
-
-  override fun onSingleDaySelected(day: CalendarDay) {
-    Toast.makeText(context, String.format("%s", day.toString()), Toast.LENGTH_SHORT)
-      .show()
+class ExampleBpkCalendarController(
+  private val context: Context,
+  override val selectionType: SelectionType = SelectionType.RANGE
+) : BpkCalendarController(selectionType) {
+  override fun onRangeSelected(range: CalendarSelection) {
+    when (range) {
+      is SingleDay -> Toast.makeText(context, String.format("%s", range.selectedDay.toString()), Toast.LENGTH_SHORT).show()
+      is CalendarRange -> Toast.makeText(context, String.format("%s - %s", range.start.toString(), range.end.toString()), Toast.LENGTH_SHORT).show()
+    }
   }
 
   var isColoredCalendar: Boolean = false
-  var colorGenerationOffset: Long = 0L
+  private var colorGenerationOffset: Long = 0L
 
   override val isRtl: Boolean = getLayoutDirectionFromLocale(Locale.getDefault()) == LAYOUT_DIRECTION_RTL
   override val locale: Locale = Locale.getDefault()

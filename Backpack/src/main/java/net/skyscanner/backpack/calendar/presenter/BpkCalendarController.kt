@@ -3,13 +3,17 @@ package net.skyscanner.backpack.calendar.presenter
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
+import net.skyscanner.backpack.calendar.model.CalendarSelection
+import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.view.CalendarUpdateCallback
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import java.util.Date
 
-abstract class BpkCalendarController {
+abstract class BpkCalendarController(
+  open val selectionType: SelectionType = SelectionType.RANGE
+) {
 
   open val startDate: CalendarDay =
     Calendar.getInstance().toCalendarDay()
@@ -27,11 +31,7 @@ abstract class BpkCalendarController {
 
   abstract val locale: Locale
 
-  var selectionType: SelectionType = SelectionType.RANGE
-
-  abstract fun onRangeSelected(range: CalendarRange)
-
-  abstract fun onSingleDaySelected(day: CalendarDay)
+  abstract fun onRangeSelected(range: CalendarSelection)
 
   internal val selectedDay: CalendarDay? = null
 
@@ -41,7 +41,7 @@ abstract class BpkCalendarController {
 
   internal fun onDayOfMonthSelected(selectedDay: CalendarDay) {
     when (selectionType) {
-      SelectionType.SINGLE_DAY -> handleForSingle(selectedDay)
+      SelectionType.SINGLE -> handleForSingle(selectedDay)
       SelectionType.RANGE -> handleForRange(selectedDay)
     }
   }
@@ -49,7 +49,7 @@ abstract class BpkCalendarController {
   private fun handleForSingle(selectedDay: CalendarDay) {
     selectedRange.start = selectedDay
     selectedRange.end = selectedDay
-    onSingleDaySelected(selectedDay)
+    onRangeSelected(SingleDay(selectedDay))
   }
 
   private fun handleForRange(selectedDay: CalendarDay) {
@@ -102,7 +102,7 @@ abstract class BpkCalendarController {
     selectedRange.start = day
     selectedRange.end = day
 
-    onSingleDaySelected(day)
+    onRangeSelected(SingleDay(day))
   }
 
   fun updateContent() = updateContentCallback?.updateContent()
@@ -112,5 +112,5 @@ internal fun Calendar.toCalendarDay() = CalendarDay(year = get(Calendar.YEAR), m
 
 enum class SelectionType {
   RANGE,
-  SINGLE_DAY
+  SINGLE
 }

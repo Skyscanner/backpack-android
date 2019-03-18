@@ -239,7 +239,7 @@ internal class MonthView @JvmOverloads constructor(
       val calendarDay = CalendarDay(calendarDrawingParams.year, calendarDrawingParams.month, dayNumber)
 
       when (controller.selectionType) {
-        SelectionType.SINGLE_DAY -> drawDayCellForSingle(controller, canvas, calendarDay, x, y, stopY)
+        SelectionType.SINGLE -> drawDayCellForSingle(controller, canvas, calendarDay, x, y, stopY)
         SelectionType.RANGE -> drawDayCellForRange(controller, canvas, calendarDay, x, y, startX, stopX, startY, stopY)
       }
 
