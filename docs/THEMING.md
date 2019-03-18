@@ -1,6 +1,6 @@
 # Theming
 
-Theming for supported components is done using the default Android [theming](https://developer.android.com/guide/topics/ui/look-and-feel/themes) mechanism.
+Theming for suported components is done using the default Android [theming](https://developer.android.com/guide/topics/ui/look-and-feel/themes) mechanism.
 
 Each supported component can be themed individually using the `style` property, or globally by setting `{componentName}Style` in your theme.
 

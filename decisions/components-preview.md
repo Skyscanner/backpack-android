@@ -1,8 +1,8 @@
-# Component Preview (AKA stories)
+# Component Preview (a.k.a stories)
 
 ## Decision
-- All previews should respond to a shortcut to hide the navigation bar (CMD+D).
-- The component being previewed should fit in the screen in portrait mode *without* the navigation bar.
+- All previews should respond to a shortcut to hide the navbar (CMD+D).
+- The component being previewed should fit in the screen in portrait mode *without* the navbar.
 - The Android preview should be as close as possible as the iOS version (Always respecting any platform specific behaviour).
 - Different configurations (e.g. normal text and emphasised text) should have different previews. In this case clicking the main story should show a new list view with all configs.
 

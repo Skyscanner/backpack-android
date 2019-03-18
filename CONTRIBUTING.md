@@ -8,7 +8,7 @@ We use Node in this project. To manage the language runtime we recommend using [
 
 With `nvm` use `nvm use` to set the correct node version in your machine.
 
-To setup the Android environment install Android studio. Once installed, use the following commands to setup the android SDK
+To setup the Android environment install Android studio. Once installed, use the following commands to setup the android sdk
 
 ```
 echo "export ANDROID_HOME=\"$HOME/Library/Android/sdk\"" >> ~/.bash_profile
@@ -45,7 +45,7 @@ Snapshot testing depends on a python package which can be installed as:
 easy_install Pillow
 ```
 
-To start the emulator and attach an SD card to it, run
+To start the emulator and attach an sdcard to it, run
 
 ```
 $ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &

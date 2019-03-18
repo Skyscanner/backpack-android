@@ -6,7 +6,7 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 ## Usage
 
-`BpkCardView` is an extension of `CardView` in `com.android.support:cardview-v7`
+BpkCardView is an extension of `CardView` in `com.android.support:cardview-v7`
 
 The Card component can be used in both XML and Kotlin
 

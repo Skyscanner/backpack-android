@@ -60,9 +60,9 @@
 
 - New icons `grid-layout` and `social-like`.
 
-- `BpkSwitch`
+- BpkSwitch
   - New XML property `switchPrimaryColor` added.
-  - `BpkSwitch` styles can now be changed globally by setting the `bpkSwitchStyle` property in your current theme/style.
+  - BpkSwitch styles can now be changed globally by setting the `bpkSwitchStyle` property in your current theme/style.
 
 # 2.6.0
 
@@ -71,7 +71,7 @@
 - New `bpk_social_like` icon.
 - New `dark` variant of `BpkBadge`
 - Added year indicator badge on `BpkCalendar`
-- Support for distribution via HockeyApp
+- Support for distribution via Hockeyapp
 
 # 2.5.0
 
@@ -80,7 +80,7 @@
 - New `bpk_speaker` icon.
 
 - BpkCalendar
-  - Added ability to update the selected dates programmatically using `updateSelection` in `BpkCalendarController`.
+  - Added ability to update the selected dates programmatically using `updateSelection` in BpkCalendarController.
   - BpkCalendar can now be extended.
   - Internal changes to allow usage from React Native.
 
@@ -120,13 +120,13 @@
 **Breaking:**
 
 - Text style changes:
-  XXL: from `36sp` to `30sp`
-  XXXL: from `42sp` to `36sp`
+  XXL: from 36sp to 30sp
+  XXXL: from 42sp to 36sp
 
 | Font size  | Old value  | New value  |
 |---|---|---|
-| XXL  | `36pt` | `30pt`  |
-| XXXL  | `42pt`  | `36pt`  |
+| XXL  | 36pt | 30pt  |
+| XXXL  | 42pt  | 36pt  |
 
 # 1.3.1
 
@@ -167,7 +167,7 @@
 
 **Added:**
 
-- Introducing `BpkDialog` component. See usage in [README.md](docs/Dialog/README.md).
+- Introducing BpkDialog component. See usage in [README.md](docs/Dialog/README.md).
 
 # 0.9.0
 
@@ -183,19 +183,19 @@
 
 # 0.7.0
 
-- Introducing the `BpkSwitch` component. See usage in [README.md](docs/Switch/README.md).
+- Indroducing the BpkSwitch component. See usage in [README.md](docs/Switch/README.md).
 
 # 0.6.0
 
 Added new icons:
 
-- `bpk_call_back`
-- `bpk_end_call`
-- `bpk_keypad`
-- `bpk_mute`
-- `bpk_phone_call`
-- `bpk_send_message`
-- `bpk_unmute`
+- bpk_call_back
+- bpk_end_call
+- bpk_keypad
+- bpk_mute
+- bpk_phone_call
+- bpk_send_message
+- bpk_unmute
 
 # 0.5.0
 
@@ -205,9 +205,9 @@ Update build tools to 28.0.3.
 
 # 0.4.0
 
-Bump Kotlin version to 1.2.71
+Bump kotlin version to 1.2.71
 
-New component `BpkCardView`
+New component BpkCardView
 
 # 0.3.1
 
@@ -233,11 +233,11 @@ Fixes a bug which prevented release artifacts from being uploaded.
 
 ## 0.2.1
 
-Introducing `BpkBadge` and BpkPanel component.
+Introducing BpkBadge and BpkPanel component.
 
 ## 0.2.0
 
-Introducing `BpkGradients`. See usage in [README.md](README.md#gradient).
+Introducing BpkGradients. See usage in [README.md](README.md#gradient).
 
 ## 0.1.0
 
@@ -258,7 +258,7 @@ Usage:
 <corners android:radius="@dimen/bpkBorderRadiusPill" />
 ```
 
-Adds Backpack elevation tokens. See the full list in the [README.md](README.md#elevation).
+Adds Backpack elevation tokens. See th full list in the [README.md](README.md#elevation).
 
 Usage:
 
