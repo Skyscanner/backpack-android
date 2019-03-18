@@ -40,7 +40,7 @@ abstract class BpkCalendarController {
   internal var updateContentCallback: CalendarUpdateCallback? = null
 
   internal fun onDayOfMonthSelected(selectedDay: CalendarDay) {
-    when(selectionType) {
+    when (selectionType) {
       SelectionType.SINGLE_DAY -> handleForSingle(selectedDay)
       SelectionType.RANGE -> handleForRange(selectedDay)
     }
