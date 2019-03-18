@@ -6,9 +6,10 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 ## Usage
 
-BpkCalendar is an building on a fork of `CalendarView` and `MonthView` from the Android Open Source Project.
+BpkCalendar is building on a fork of `CalendarView` and `MonthView` from the Android Open Source Project.
 
 The Calendar component can be used in both XML and Kotlin, but it currently requires a `BpkCalendarController` to be sub-classed and set.
+Both single day and data range are supported. 
 
 Example of a calendar defined in XML
 
@@ -36,6 +37,10 @@ class ExampleBpkCalendarController(private val context: Context) : BpkCalendarCo
     // Do something with the selected range
   }
 
+  override fun onSingleDaySelected(day: CalendarDay) {
+    // Do something with the selected day
+  }
+
   override val isRtl: Boolean = getLayoutDirectionFromLocale(Locale.getDefault()) == LAYOUT_DIRECTION_RTL
   override val locale: Locale = Locale.getDefault()
 }
@@ -47,6 +52,14 @@ Setting the controller on the calendar:
 override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
   super.onViewCreated(view, savedInstanceState)
 
-  view.findViewById<BpkCalendar>(R.id.bpkCalendar).setController(ExampleBpkCalendarController(requireContext()))
+  val controller = ExampleBpkCalendarController(requireContext())
+  
+  controller.selectionType = SelectionType.RANGE
+  
+  view.findViewById<BpkCalendar>(R.id.bpkCalendar).setController(controller)
 }
 ```
+
+Notice the usage of `selectionType`. 
+When `selectionType` is `SelectionType.RANGE` the calendar will allow a date range and `onRangeSelected()` will be used in the controller.
+When `selectionType` is `SelectionType.SINGLE_DAY` the calendar will allow a date rang and `onSingleDaySelected()` will be used in the controller.
