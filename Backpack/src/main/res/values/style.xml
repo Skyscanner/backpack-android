@@ -25,5 +25,9 @@
   <style name="Bpk.chip" parent="android:Widget">
     <item name="android:textAppearance">@style/bpkTextSm</item>
   </style>
-
+  <style name="Bpk.button.Primary">
+    <item name="buttonBackground">@color/bpkGreen500</item>
+    <item name="buttonTextColor">@color/bpkWhite</item>
+    <item name="buttonStrokeColor">@android:color/transparent</item>
+  </style>
 </resources>

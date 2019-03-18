@@ -3,15 +3,33 @@
   <style name="LondonTheme" parent="AppTheme">
     <item name="colorPrimary">#ED1B28</item>
     <item name="bpkSwitchStyle">@style/BpkSwitch.Themed</item>
+    <item name="bpkButtonPrimary">@style/BlueButton</item>
+    <item name="bpkButtonSecondary">@style/RedButton</item>
+    <item name="bpkButtonDestructive">@style/BlueButton</item>
+    <item name="bpkButtonOutline">@style/RedButton</item>
+    <item name="bpkButtonFeatured">@style/BlueButton</item>
   </style>
 
   <style name="DohaTheme" parent="AppTheme">
     <item name="colorPrimary">#9B104C</item>
-    <item name="bpkPrimaryColor">#9B104C</item>
     <item name="bpkSwitchStyle">@style/BpkSwitch.Themed</item>
   </style>
 
   <style name="BpkSwitch.Themed" parent="">
     <item name="switchPrimaryColor">?colorPrimary</item>
   </style>
+
+
+  <style name="RedButton">
+    <item name="buttonBackground">@color/bpkRed600</item>
+    <item name="buttonTextColor">@color/bpkBlue600</item>
+    <item name="buttonStrokeColor">@color/bpkGray100</item>
+  </style>
+
+  <style name="BlueButton">
+    <item name="buttonBackground">@color/bpkBlue900</item>
+    <item name="buttonTextColor">@color/bpkYellow500</item>
+    <item name="buttonStrokeColor">@color/bpkGray100</item>
+  </style>
+
 </resources>

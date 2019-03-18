@@ -44,7 +44,7 @@
     android:text="With icon"
     app:buttonIconPosition="start"
     app:buttonIcon="@drawable/bpk_long_arrow_right"
-    app:buttonType="primary"/>
+    app:buttonType="secondary"/>
 
   <net.skyscanner.backpack.button.BpkButton
     android:layout_margin="@dimen/bpkSpacingSm"

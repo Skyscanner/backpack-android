@@ -19,11 +19,43 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 
+private fun getStyle(context: Context, attrs: AttributeSet?): Int {
+  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
+  val style = BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+  return when (style) {
+    BpkButton.Type.Primary -> R.attr.bpkButtonPrimary
+    BpkButton.Type.Secondary -> R.attr.bpkButtonSecondary
+    BpkButton.Type.Outline -> R.attr.bpkButtonOutline
+    BpkButton.Type.Featured -> R.attr.bpkButtonFeatured
+    BpkButton.Type.Destructive -> R.attr.bpkButtonDestructive
+  }
+}
+
+private fun getStyle(type: BpkButton.Type): Int {
+  return when (type) {
+    BpkButton.Type.Primary -> R.attr.bpkButtonPrimary
+    BpkButton.Type.Secondary -> R.attr.bpkButtonSecondary
+    BpkButton.Type.Outline -> R.attr.bpkButtonOutline
+    BpkButton.Type.Featured -> R.attr.bpkButtonFeatured
+    BpkButton.Type.Destructive -> R.attr.bpkButtonDestructive
+  }
+}
+
 open class BpkButton @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = getStyle(context, attrs)
 ) : AppCompatButton(context, attrs, defStyleAttr) {
+
+  private var type: Type = Type.Primary
+  fun getType(): Type {
+    return type
+  }
+
+  constructor(context: Context, initialType: Type) : this(context, null, getStyle(initialType)) {
+    type = initialType
+    print(type)
+  }
 
   @IntDef(START, END, ICON_ONLY)
   annotation class IconPosition
@@ -41,6 +73,13 @@ open class BpkButton @JvmOverloads constructor(
       this.setup()
     }
 
+  @ColorRes
+  private var buttonBackground: Int = R.color.bpkGreen500
+  @ColorRes
+  private var buttonTextColor: Int = R.color.bpkWhite
+  @ColorRes
+  private var buttonStrokeColor: Int = android.R.color.transparent
+
   private val defaultPadding = context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2
   // Text is 12dp and icon is 16dp. if icon is present,
   // padding needs to be reduced by 2 dp on both sides
@@ -50,12 +89,6 @@ open class BpkButton @JvmOverloads constructor(
   private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderSizeLg).toInt()
 
   private val INVALID_RESOURCE = -1
-
-  var type: Type = Type.Primary
-    set(value) {
-      field = value
-      setup()
-    }
 
   var icon: Drawable? = null
     set(value) {
@@ -78,8 +111,15 @@ open class BpkButton @JvmOverloads constructor(
   init {
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
     try {
-      type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+      println("type_is $type")
+      if (attr.hasValue(R.styleable.BpkButton_buttonType)) {
+        type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+      }
       iconPosition = attr.getInt(R.styleable.BpkButton_buttonIconPosition, END)
+
+      buttonBackground = attr.getResourceId(R.styleable.BpkButton_buttonBackground, getType().bgColor)
+      buttonTextColor = attr.getResourceId(R.styleable.BpkButton_buttonTextColor, getType().textColor)
+      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, getType().strokeColor)
 
       attr.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RESOURCE).let {
         if (it != INVALID_RESOURCE) {
@@ -138,25 +178,25 @@ open class BpkButton @JvmOverloads constructor(
     }
 
     this.background = if (this.isEnabled) {
-      val pressedColor = if (type == Type.Outline) {
+      val pressedColor = if (buttonBackground == android.R.color.transparent) {
         ContextCompat.getColor(context, R.color.bpkGray300)
       } else {
-        darken(ContextCompat.getColor(context, type.bgColor))
+        darken(ContextCompat.getColor(context, buttonBackground))
       }
       getSelectorDrawable(
-        normalColor = ContextCompat.getColor(context, type.bgColor),
+        normalColor = ContextCompat.getColor(context, buttonBackground),
         pressedColor = pressedColor,
         disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
         cornerRadius = roundedButtonCorner,
         strokeWidth = strokeWidth,
-        strokeColor = ContextCompat.getColor(context, type.strokeColor)
+        strokeColor = ContextCompat.getColor(context, buttonStrokeColor)
       )
     } else disabledBackground
 
     if (this.isEnabled) {
       this.setTextColor(getColorSelector(
-        ContextCompat.getColor(context, type.textColor),
-        darken(ContextCompat.getColor(context, type.textColor), .1f),
+        ContextCompat.getColor(context, buttonTextColor),
+        darken(ContextCompat.getColor(context, buttonTextColor), .1f),
         ContextCompat.getColor(context, R.color.bpkGray300)))
     } else {
       this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray300))
@@ -168,8 +208,8 @@ open class BpkButton @JvmOverloads constructor(
       DrawableCompat.setTintList(
         it,
         getColorSelector(
-          ContextCompat.getColor(context, type.textColor),
-          darken(ContextCompat.getColor(context, type.textColor), .1f),
+          ContextCompat.getColor(context, buttonTextColor),
+          darken(ContextCompat.getColor(context, buttonTextColor), .1f),
           ContextCompat.getColor(context, R.color.bpkGray300)
         )
       )

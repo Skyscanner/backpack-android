@@ -23,12 +23,6 @@ class ButtonStory : Story() {
       }
     }
 
-    view.findViewById<BpkButton>(R.id.btn_default).type = buttonType
-    view.findViewById<BpkButton>(R.id.btn_disabled).type = buttonType
-    view.findViewById<BpkButton>(R.id.btn_end_icon).type = buttonType
-    view.findViewById<BpkButton>(R.id.btn_start_icon).type = buttonType
-    view.findViewById<BpkButton>(R.id.btn_icon).type = buttonType
-
     if (type == "outline") {
       view.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.bpkBlue400))
     }
