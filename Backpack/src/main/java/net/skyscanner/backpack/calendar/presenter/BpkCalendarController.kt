@@ -91,11 +91,18 @@ abstract class BpkCalendarController {
     return CalendarDay(year, month, day).date == CalendarDay.today().date
   }
 
-  fun updateSelection(range: CalendarRange) {
+  fun updateSelectionForRange(range: CalendarRange) {
     selectedRange.start = range.start
     selectedRange.end = range.end
 
     onRangeSelected(selectedRange)
+  }
+
+  fun updateSelectionForSingleDay(day: CalendarDay) {
+    selectedRange.start = day
+    selectedRange.end = day
+
+    onSingleDaySelected(day)
   }
 
   fun updateContent() = updateContentCallback?.updateContent()

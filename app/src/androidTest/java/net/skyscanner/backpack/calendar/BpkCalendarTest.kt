@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isChecked
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
@@ -14,6 +18,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
+import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.MainActivity
 import org.hamcrest.CoreMatchers
 import org.junit.Before
@@ -187,6 +192,47 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
   @Test
   @FlakyTest
+  fun screenshotTestCalendarWithSingleDaySelected() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      getDate(2019, 0, 2),
+      getDate(2019, 11, 31)
+    )
+    controller.selectionType = SelectionType.SINGLE_DAY
+    calendar.setController(controller)
+    val wrapped = wrapWithBackground(calendar)
+
+    val asyncScreenshot = prepareForAsyncTest()
+
+    activity.runOnUiThread {
+      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+      rootLayout.addView(wrapped)
+    }
+
+    Espresso.onView(withId(R.id.single)).perform(click())
+    Espresso.onView(withId(R.id.single)).check(matches(isChecked()))
+
+    Espresso.onData(CoreMatchers.anything())
+      .atPosition(0)
+      .perform(ViewActions.click())
+
+    Espresso.onData(CoreMatchers.anything())
+      .atPosition(1)
+      .perform(ViewActions.click())
+
+    Espresso.onData(CoreMatchers.anything()) // Clicking on multiple dates should result in only one selected
+      .atPosition(1)
+      .perform(ViewActions.scrollTo())
+      .check { _, _ ->
+        setupView(wrapped)
+        asyncScreenshot.record(wrapped)
+      }
+  }
+
+  @Test
+  @FlakyTest
   fun screenshotTestCalendarWithRangeSetProgrammatically() {
     val calendar = BpkCalendar(testContext)
     val controller = BpkCalendarControllerImpl(
@@ -194,9 +240,26 @@ class BpkCalendarTest : BpkSnapshotTest() {
       Locale.UK,
       getDate(2019, 0, 2),
       getDate(2019, 11, 31))
+    calendar.setController(controller)
+    controller.updateSelectionForRange(CalendarRange(CalendarDay(2019, 0, 4), CalendarDay(2019, 0, 9)))
+    snap(wrapWithBackground(calendar))
+  }
+
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarWithSingleDaySetProgrammatically() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      getDate(2019, 0, 2),
+      getDate(2019, 11, 31)
+    )
+
+    controller.selectionType = SelectionType.SINGLE_DAY
 
     calendar.setController(controller)
-    controller.updateSelection(CalendarRange(CalendarDay(2019, 0, 4), CalendarDay(2019, 0, 9)))
+    controller.updateSelectionForSingleDay(CalendarDay(2019, 0, 16))
     snap(wrapWithBackground(calendar))
   }
 
