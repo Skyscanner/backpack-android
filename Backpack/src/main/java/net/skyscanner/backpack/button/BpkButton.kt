@@ -27,11 +27,11 @@ private fun getStyle(context: Context, attrs: AttributeSet?): Int {
 
 private fun getStyle(type: BpkButton.Type): Int {
   return when (type) {
-    BpkButton.Type.Primary -> R.attr.bpkButtonPrimary
-    BpkButton.Type.Secondary -> R.attr.bpkButtonSecondary
-    BpkButton.Type.Outline -> R.attr.bpkButtonOutline
-    BpkButton.Type.Featured -> R.attr.bpkButtonFeatured
-    BpkButton.Type.Destructive -> R.attr.bpkButtonDestructive
+    BpkButton.Type.Primary -> R.attr.bpkButtonPrimaryStyle
+    BpkButton.Type.Secondary -> R.attr.bpkButtonSecondaryStyle
+    BpkButton.Type.Outline -> R.attr.bpkButtonOutlineStyle
+    BpkButton.Type.Featured -> R.attr.bpkButtonFeaturedStyle
+    BpkButton.Type.Destructive -> R.attr.bpkButtonDestructiveStyle
   }
 }
 
@@ -68,12 +68,12 @@ open class BpkButton : AppCompatButton {
       this.setup()
     }
 
-  @ColorRes
-  private var buttonBackground: Int = R.color.bpkGreen500
-  @ColorRes
-  private var buttonTextColor: Int = R.color.bpkWhite
-  @ColorRes
-  private var buttonStrokeColor: Int = android.R.color.transparent
+  @ColorInt
+  private var buttonBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkGreen500)
+  @ColorInt
+  private var buttonTextColor: Int = ContextCompat.getColor(context, R.color.bpkWhite)
+  @ColorInt
+  private var buttonStrokeColor: Int = ContextCompat.getColor(context, android.R.color.transparent)
 
   private val defaultPadding = context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2
   // Text is 12dp and icon is 16dp. if icon is present,
@@ -112,9 +112,9 @@ open class BpkButton : AppCompatButton {
 
       iconPosition = attr.getInt(R.styleable.BpkButton_buttonIconPosition, END)
 
-      buttonBackground = attr.getResourceId(R.styleable.BpkButton_buttonBackground, type.bgColor)
-      buttonTextColor = attr.getResourceId(R.styleable.BpkButton_buttonTextColor, type.textColor)
-      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, type.strokeColor)
+      buttonBackgroundColor = attr.getColor(R.styleable.BpkButton_buttonBackgroundColor, ContextCompat.getColor(context, type.bgColor))
+      buttonTextColor = attr.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))
+      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, ContextCompat.getColor(context, type.strokeColor))
 
       attr.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RESOURCE).let {
         if (it != INVALID_RESOURCE) {
@@ -173,25 +173,25 @@ open class BpkButton : AppCompatButton {
     }
 
     this.background = if (this.isEnabled) {
-      val pressedColor = if (buttonBackground == android.R.color.transparent) {
+      val pressedColor = if (buttonBackgroundColor == android.R.color.transparent) {
         ContextCompat.getColor(context, R.color.bpkGray300)
       } else {
-        darken(ContextCompat.getColor(context, buttonBackground))
+        darken(buttonBackgroundColor)
       }
       getSelectorDrawable(
-        normalColor = ContextCompat.getColor(context, buttonBackground),
+        normalColor = buttonBackgroundColor,
         pressedColor = pressedColor,
         disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
         cornerRadius = roundedButtonCorner,
         strokeWidth = strokeWidth,
-        strokeColor = ContextCompat.getColor(context, buttonStrokeColor)
+        strokeColor = buttonStrokeColor
       )
     } else disabledBackground
 
     if (this.isEnabled) {
       this.setTextColor(getColorSelector(
-        ContextCompat.getColor(context, buttonTextColor),
-        darken(ContextCompat.getColor(context, buttonTextColor), .1f),
+        buttonTextColor,
+        darken(buttonTextColor, .1f),
         ContextCompat.getColor(context, R.color.bpkGray300)))
     } else {
       this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray300))
@@ -203,8 +203,8 @@ open class BpkButton : AppCompatButton {
       DrawableCompat.setTintList(
         it,
         getColorSelector(
-          ContextCompat.getColor(context, buttonTextColor),
-          darken(ContextCompat.getColor(context, buttonTextColor), .1f),
+          buttonTextColor,
+          darken(buttonTextColor, .1f),
           ContextCompat.getColor(context, R.color.bpkGray300)
         )
       )

@@ -3,33 +3,39 @@
   <style name="LondonTheme" parent="AppTheme">
     <item name="colorPrimary">#ED1B28</item>
     <item name="bpkSwitchStyle">@style/BpkSwitch.Themed</item>
-    <item name="bpkButtonPrimary">@style/BlueButton</item>
-    <item name="bpkButtonSecondary">@style/RedButton</item>
-    <item name="bpkButtonDestructive">@style/BlueButton</item>
-    <item name="bpkButtonOutline">@style/RedButton</item>
-    <item name="bpkButtonFeatured">@style/BlueButton</item>
+    <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
+    <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
   </style>
 
   <style name="DohaTheme" parent="AppTheme">
     <item name="colorPrimary">#9B104C</item>
     <item name="bpkSwitchStyle">@style/BpkSwitch.Themed</item>
+    <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
+    <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
   </style>
 
   <style name="BpkSwitch.Themed" parent="">
     <item name="switchPrimaryColor">?colorPrimary</item>
   </style>
 
-
-  <style name="RedButton">
-    <item name="buttonBackground">@color/bpkRed600</item>
-    <item name="buttonTextColor">@color/bpkBlue600</item>
-    <item name="buttonStrokeColor">@color/bpkGray100</item>
+  <style name="DohaThemeButtonPrimary">
+    <item name="buttonBackgroundColor">#ffb300</item>
+    <item name="buttonTextColor">@color/bpkWhite</item>
+  </style>
+  <style name="DohaThemeButtonSecondary">
+    <item name="buttonBackgroundColor">@color/bpkWhite</item>
+    <item name="buttonTextColor">#9B104C</item>
+    <item name="buttonStrokeColor">#B1121C</item>
   </style>
 
-  <style name="BlueButton">
-    <item name="buttonBackground">@color/bpkBlue900</item>
-    <item name="buttonTextColor">@color/bpkGray200</item>
-    <item name="buttonStrokeColor">@color/bpkYellow500</item>
+  <style name="LondonThemeButtonPrimary">
+    <item name="buttonBackgroundColor">#002F61</item>
+    <item name="buttonTextColor">@color/bpkWhite</item>
+  </style>
+  <style name="LondonThemeButtonSecondary">
+    <item name="buttonBackgroundColor">@color/bpkWhite</item>
+    <item name="buttonTextColor">#ED1B28</item>
+    <item name="buttonStrokeColor">#5E072C</item>
   </style>
 
 </resources>

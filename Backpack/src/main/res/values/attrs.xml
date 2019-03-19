@@ -57,14 +57,10 @@
       <enum name="end" value="1" />
       <enum name="icon_only" value="2" />
     </attr>
-    <attr name="buttonBackground" format="color" />
+    <attr name="buttonBackgroundColor" format="color" />
     <attr name="buttonTextColor" format="color" />
     <attr name="buttonStrokeColor" format="color" />
-    <attr name="bpkButtonSecondary" format="reference" />
-    <attr name="bpkButtonPrimary" format="reference" />
-    <attr name="bpkButtonFeatured" format="reference" />
-    <attr name="bpkButtonDestructive" format="reference" />
-    <attr name="bpkButtonOutline" format="reference" />
+
   </declare-styleable>
 
   <declare-styleable name="BpkCardView">
@@ -95,5 +91,10 @@
   </declare-styleable>
 
   <attr name="bpkSwitchStyle" format="reference" />
+  <attr name="bpkButtonSecondaryStyle" format="reference" />
+  <attr name="bpkButtonPrimaryStyle" format="reference" />
+  <attr name="bpkButtonFeaturedStyle" format="reference" />
+  <attr name="bpkButtonDestructiveStyle" format="reference" />
+  <attr name="bpkButtonOutlineStyle" format="reference" />
 
 </resources>
