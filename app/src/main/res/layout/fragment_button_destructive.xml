@@ -12,7 +12,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Default"
-    app:buttonType="primary"/>
+    app:buttonType="destructive"/>
 
   <net.skyscanner.backpack.button.BpkButton
     android:layout_margin="@dimen/bpkSpacingSm"
@@ -22,7 +22,7 @@
     android:layout_height="wrap_content"
     android:text="Disabled"
     android:enabled="false"
-    app:buttonType="primary"/>
+    app:buttonType="destructive"/>
 
   <net.skyscanner.backpack.button.BpkButton
     android:layout_margin="@dimen/bpkSpacingSm"
@@ -33,7 +33,7 @@
     android:text="With icon"
     app:buttonIconPosition="end"
     app:buttonIcon="@drawable/bpk_long_arrow_right"
-    app:buttonType="primary"/>
+    app:buttonType="destructive"/>
 
   <net.skyscanner.backpack.button.BpkButton
     android:layout_margin="@dimen/bpkSpacingSm"
@@ -44,7 +44,7 @@
     android:text="With icon"
     app:buttonIconPosition="start"
     app:buttonIcon="@drawable/bpk_long_arrow_right"
-    app:buttonType="secondary"/>
+    app:buttonType="destructive"/>
 
   <net.skyscanner.backpack.button.BpkButton
     android:layout_margin="@dimen/bpkSpacingSm"
@@ -55,6 +55,6 @@
     android:layout_height="wrap_content"
     app:buttonIconPosition="icon_only"
     app:buttonIcon="@drawable/bpk_long_arrow_right"
-    app:buttonType="primary"/>
+    app:buttonType="destructive"/>
 
 </RelativeLayout>
