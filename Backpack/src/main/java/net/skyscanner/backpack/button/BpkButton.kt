@@ -22,13 +22,7 @@ import net.skyscanner.backpack.R
 private fun getStyle(context: Context, attrs: AttributeSet?): Int {
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
   val style = BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
-  return when (style) {
-    BpkButton.Type.Primary -> R.attr.bpkButtonPrimary
-    BpkButton.Type.Secondary -> R.attr.bpkButtonSecondary
-    BpkButton.Type.Outline -> R.attr.bpkButtonOutline
-    BpkButton.Type.Featured -> R.attr.bpkButtonFeatured
-    BpkButton.Type.Destructive -> R.attr.bpkButtonDestructive
-  }
+  return getStyle(style)
 }
 
 private fun getStyle(type: BpkButton.Type): Int {
@@ -41,21 +35,22 @@ private fun getStyle(type: BpkButton.Type): Int {
   }
 }
 
-open class BpkButton @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = getStyle(context, attrs)
-) : AppCompatButton(context, attrs, defStyleAttr) {
-
-  private var type: Type = Type.Primary
-  fun getType(): Type {
-    return type
+open class BpkButton : AppCompatButton {
+  constructor(context: Context) : this(context, null)
+  constructor(context: Context, type: Type) : this(context, null, getStyle(type), type)
+  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, getStyle(context, attrs))
+  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary)
+  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, type: Type) : super(context, attrs, defStyleAttr) {
+    this.initialType = type
+    initialize(attrs, defStyleAttr)
   }
 
-  constructor(context: Context, initialType: Type) : this(context, null, getStyle(initialType)) {
-    type = initialType
-    print(type)
-  }
+  val type: Type
+    get() {
+      return initialType
+    }
+
+  private var initialType: Type
 
   @IntDef(START, END, ICON_ONLY)
   annotation class IconPosition
@@ -108,18 +103,18 @@ open class BpkButton @JvmOverloads constructor(
       strokeColor = ContextCompat.getColor(context, android.R.color.transparent)
     )
 
-  init {
+  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
     try {
-      println("type_is $type")
       if (attr.hasValue(R.styleable.BpkButton_buttonType)) {
-        type = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+        initialType = Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
       }
+
       iconPosition = attr.getInt(R.styleable.BpkButton_buttonIconPosition, END)
 
-      buttonBackground = attr.getResourceId(R.styleable.BpkButton_buttonBackground, getType().bgColor)
-      buttonTextColor = attr.getResourceId(R.styleable.BpkButton_buttonTextColor, getType().textColor)
-      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, getType().strokeColor)
+      buttonBackground = attr.getResourceId(R.styleable.BpkButton_buttonBackground, type.bgColor)
+      buttonTextColor = attr.getResourceId(R.styleable.BpkButton_buttonTextColor, type.textColor)
+      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, type.strokeColor)
 
       attr.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RESOURCE).let {
         if (it != INVALID_RESOURCE) {
