@@ -8,8 +8,8 @@ import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.view.CalendarUpdateCallback
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Locale
 import java.util.Date
+import java.util.Locale
 
 abstract class BpkCalendarController(
   open val selectionType: SelectionType = SelectionType.RANGE
@@ -91,18 +91,19 @@ abstract class BpkCalendarController(
     return CalendarDay(year, month, day).date == CalendarDay.today().date
   }
 
-  fun updateSelectionForRange(range: CalendarRange) {
-    selectedRange.start = range.start
-    selectedRange.end = range.end
-
-    onRangeSelected(selectedRange)
-  }
-
-  fun updateSelectionForSingleDay(day: CalendarDay) {
-    selectedRange.start = day
-    selectedRange.end = day
-
-    onRangeSelected(SingleDay(day))
+  fun updateSelection(selection: CalendarSelection) {
+    when (selection) {
+      is CalendarRange -> {
+        selectedRange.start = selection.start
+        selectedRange.end = selection.end
+        onRangeSelected(selectedRange)
+      }
+      is SingleDay -> {
+        selectedRange.start = selection.selectedDay
+        selectedRange.end = selection.selectedDay
+        onRangeSelected(SingleDay(selection.selectedDay))
+      }
+    }
   }
 
   fun updateContent() = updateContentCallback?.updateContent()

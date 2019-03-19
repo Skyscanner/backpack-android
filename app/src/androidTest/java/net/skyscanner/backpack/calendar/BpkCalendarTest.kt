@@ -14,6 +14,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
+import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.MainActivity
@@ -234,7 +235,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       getDate(2019, 0, 2),
       getDate(2019, 11, 31))
     calendar.setController(controller)
-    controller.updateSelectionForRange(CalendarRange(CalendarDay(2019, 0, 4), CalendarDay(2019, 0, 9)))
+    controller.updateSelection(CalendarRange(CalendarDay(2019, 0, 4), CalendarDay(2019, 0, 9)))
     snap(wrapWithBackground(calendar))
   }
 
@@ -251,7 +252,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    controller.updateSelectionForSingleDay(CalendarDay(2019, 0, 16))
+    controller.updateSelection(SingleDay(CalendarDay(2019, 0, 16)))
     snap(wrapWithBackground(calendar))
   }
 
