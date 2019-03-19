@@ -92,7 +92,7 @@ object ComponentRegistry {
       )),
     "Calendar" story NodeData({ children -> SubStory of children },
       mapOf(
-        "Default" story NodeData { DefaultCalendarStory of R.layout.fragment_calendar_deafult },
+        "Default" story NodeData { DefaultCalendarStory of R.layout.fragment_calendar_default },
         "Colored" story NodeData { ColoredCalendarStory of R.layout.fragment_calendar_colored }
       )),
     "Chip" story NodeData { ChipStory() },

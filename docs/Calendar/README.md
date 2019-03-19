@@ -6,9 +6,10 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 ## Usage
 
-BpkCalendar is an building on a fork of `CalendarView` and `MonthView` from the Android Open Source Project.
+BpkCalendar is  is based on `CalendarView` and `MonthView` from the Android Open Source Project.
 
 The Calendar component can be used in both XML and Kotlin, but it currently requires a `BpkCalendarController` to be sub-classed and set.
+Both single and range selection are supported.
 
 Example of a calendar defined in XML
 
@@ -31,9 +32,16 @@ BpkCalendar(context)
 Example of a calendar controller:
 
 ```Kotlin
-class ExampleBpkCalendarController(private val context: Context) : BpkCalendarController() {
-  override fun onRangeSelected(range: CalendarRange) {
-    // Do something with the selected range
+class ExampleBpkCalendarController(
+  private val context: Context,
+  override val selectionType: SelectionType
+ ) : BpkCalendarController(selectionType) {
+  override fun onRangeSelected(range: CalendarSelection) {
+      if (selection is CalendarRange) {
+         // handles range
+      } else if (selection is SingleDay) {
+         // handles single selection
+      }
   }
 
   override val isRtl: Boolean = getLayoutDirectionFromLocale(Locale.getDefault()) == LAYOUT_DIRECTION_RTL
@@ -47,6 +55,14 @@ Setting the controller on the calendar:
 override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
   super.onViewCreated(view, savedInstanceState)
 
-  view.findViewById<BpkCalendar>(R.id.bpkCalendar).setController(ExampleBpkCalendarController(requireContext()))
+  val controller = ExampleBpkCalendarController(requireContext(), SelectionType.SINGLE)
+  
+  view.findViewById<BpkCalendar>(R.id.bpkCalendar).setController(controller)
 }
 ```
+
+Notice the selection type is set in the BpkCalendarController constructor through the `selectionType` argument.
+ 
+When `selectionType` is `SelectionType.RANGE` the calendar will allow a date range. 
+When `selectionType` is `SelectionType.SINGLE_DAY` the calendar will allow a single date.
+In both cases, the handling of the selection will done in `onRangeSelected()` as in the example above.

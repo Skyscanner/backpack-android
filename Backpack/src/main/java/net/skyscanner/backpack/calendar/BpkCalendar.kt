@@ -4,8 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import kotlinx.android.synthetic.main.view_bpk_calendar.view.*
-
+import kotlinx.android.synthetic.main.view_bpk_calendar.view.calendar_view
+import kotlinx.android.synthetic.main.view_bpk_calendar.view.weekday_header_view
+import kotlinx.android.synthetic.main.view_bpk_calendar.view.year_pill_view
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.view.OnYearChangedListener

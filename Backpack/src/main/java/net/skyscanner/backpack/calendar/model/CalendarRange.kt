@@ -4,7 +4,11 @@ import java.io.Serializable
 import java.util.Calendar
 import java.util.TimeZone
 
-data class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? = null) : Serializable {
+open class CalendarSelection : Serializable
+
+data class SingleDay(val selectedDay: CalendarDay) : CalendarSelection()
+
+data class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? = null) : CalendarSelection() {
     private val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
 
     internal val isOnTheSameDate: Boolean

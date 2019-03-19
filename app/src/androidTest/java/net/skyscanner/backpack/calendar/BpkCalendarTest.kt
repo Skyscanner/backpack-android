@@ -13,7 +13,10 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
+import net.skyscanner.backpack.calendar.model.CalendarSelection
+import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
+import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.MainActivity
 import org.hamcrest.CoreMatchers
 import org.junit.Before
@@ -26,15 +29,16 @@ private class BpkCalendarControllerImpl(
   override val isRtl: Boolean,
   override val locale: Locale,
   private val initialStartDate: CalendarDay? = null,
-  private val initialEndDate: CalendarDay? = null
-) : BpkCalendarController() {
+  private val initialEndDate: CalendarDay? = null,
+  override val selectionType: SelectionType = SelectionType.RANGE
+) : BpkCalendarController(selectionType) {
   override val startDate: CalendarDay
     get() = initialStartDate ?: super.startDate
 
   override val endDate: CalendarDay
     get() = initialEndDate ?: super.endDate
 
-  override fun onRangeSelected(range: CalendarRange) {}
+  override fun onRangeSelected(range: CalendarSelection) {}
 
   override fun isToday(year: Int, month: Int, day: Int): Boolean {
     return day == 2 && month == 0 && year == 2019
@@ -185,6 +189,44 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
   @Test
   @FlakyTest
+  fun screenshotTestCalendarWithSingleDaySelected() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      getDate(2019, 0, 2),
+      getDate(2019, 11, 31),
+      SelectionType.SINGLE
+    )
+    calendar.setController(controller)
+    val wrapped = wrapWithBackground(calendar)
+
+    val asyncScreenshot = prepareForAsyncTest()
+
+    activity.runOnUiThread {
+      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+      rootLayout.addView(wrapped)
+    }
+
+    Espresso.onData(CoreMatchers.anything())
+      .atPosition(0)
+      .perform(ViewActions.click())
+
+    Espresso.onData(CoreMatchers.anything())
+      .atPosition(1)
+      .perform(ViewActions.click())
+
+    Espresso.onData(CoreMatchers.anything()) // Clicking on multiple dates should result in only one selected
+      .atPosition(1)
+      .perform(ViewActions.scrollTo())
+      .check { _, _ ->
+        setupView(wrapped)
+        asyncScreenshot.record(wrapped)
+      }
+  }
+
+  @Test
+  @FlakyTest
   fun screenshotTestCalendarWithRangeSetProgrammatically() {
     val calendar = BpkCalendar(testContext)
     val controller = BpkCalendarControllerImpl(
@@ -192,9 +234,25 @@ class BpkCalendarTest : BpkSnapshotTest() {
       Locale.UK,
       getDate(2019, 0, 2),
       getDate(2019, 11, 31))
-
     calendar.setController(controller)
     controller.updateSelection(CalendarRange(CalendarDay(2019, 0, 4), CalendarDay(2019, 0, 9)))
+    snap(wrapWithBackground(calendar))
+  }
+
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarWithSingleDaySetProgrammatically() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      getDate(2019, 0, 2),
+      getDate(2019, 11, 31),
+      SelectionType.SINGLE
+    )
+
+    calendar.setController(controller)
+    controller.updateSelection(SingleDay(CalendarDay(2019, 0, 16)))
     snap(wrapWithBackground(calendar))
   }
 

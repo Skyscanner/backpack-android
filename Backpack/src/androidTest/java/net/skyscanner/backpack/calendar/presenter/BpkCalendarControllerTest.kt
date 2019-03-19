@@ -1,23 +1,25 @@
 package net.skyscanner.backpack.calendar.presenter
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.nhaarman.mockitokotlin2.spy
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
+import net.skyscanner.backpack.calendar.model.CalendarSelection
+import net.skyscanner.backpack.calendar.model.SingleDay
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.Calendar
 import java.util.Locale
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.spy
-import com.nhaarman.mockitokotlin2.verify
 
-internal open class BpkCalendarControllerTestImpl : BpkCalendarController() {
+internal open class BpkCalendarControllerTestImpl(selectionType: SelectionType = SelectionType.RANGE) : BpkCalendarController(selectionType) {
 
   override val isRtl = false
   override val locale: Locale = Locale.forLanguageTag("pt-br")
-  override fun onRangeSelected(range: CalendarRange) {}
+  override fun onRangeSelected(range: CalendarSelection) {}
 }
 
 @RunWith(AndroidJUnit4::class)
@@ -30,6 +32,7 @@ class BpkCalendarControllerTest {
     subject = BpkCalendarControllerTestImpl()
   }
 
+  // region selection type Range
   @Test
   fun test_default_dates() {
     val today = Calendar.getInstance()
@@ -140,6 +143,21 @@ class BpkCalendarControllerTest {
     Assert.assertFalse(subject.isToday(year, month + 1, day))
     Assert.assertFalse(subject.isToday(year + 1, month, day))
   }
+
+  // endregion
+
+  // region selection type Single day
+  @Test
+  fun test_onDayOfMonthSelected_whenSingleDaySelection() {
+    val spy = spy(BpkCalendarControllerTestImpl(SelectionType.SINGLE))
+    val selectedDay = CalendarDay(2019, 3, 16)
+
+    spy.onDayOfMonthSelected(selectedDay)
+
+    verify(spy, times(1)).onRangeSelected(SingleDay(selectedDay))
+  }
+
+  // endregion
 
   private fun Calendar.atStartOfDay() =
     this.apply {

@@ -23,12 +23,4 @@
       android:nestedScrollingEnabled="true"/>
   </LinearLayout>
 
-  <net.skyscanner.backpack.button.BpkButton
-    android:id="@+id/shiftColorsButton"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:layout_margin="@dimen/bpkSpacingBase"
-    android:text="@string/calendar_colored_switch"
-    />
 </FrameLayout>
