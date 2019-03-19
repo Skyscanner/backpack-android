@@ -28,8 +28,8 @@
 
   <style name="BlueButton">
     <item name="buttonBackground">@color/bpkBlue900</item>
-    <item name="buttonTextColor">@color/bpkYellow500</item>
-    <item name="buttonStrokeColor">@color/bpkGray100</item>
+    <item name="buttonTextColor">@color/bpkGray200</item>
+    <item name="buttonStrokeColor">@color/bpkYellow500</item>
   </style>
 
 </resources>

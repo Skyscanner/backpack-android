@@ -25,10 +25,43 @@ Example of a primary button in Kotlin
 ```Kotlin
 import net.skyscanner.backpack.button.BpkButton
 
-BpkButton(context).apply {
+BpkButton(context,BpkButton.Type.Primary).apply {
    icon = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
    iconPosition = BpkButton.END
-   type = BpkButton.Type.Primary
    text = "Button"
 }
 ```
+
+
+## Theme Props
+
+- `buttonBackground`
+- `buttonTextColor`
+- `buttonStrokeColor`
+
+BpkButton accepts the above themeable attributes for the following styles
+
+- `bpkButtonPrimary`
+- `bpkButtonSecondary`
+- `bpkButtonDestructive`
+- `bpkButtonOutline`
+- `bpkButtonFeatured`
+
+Example
+
+```xml
+  <style name="BlueTheme" parent="AppTheme">
+    <item name="bpkButtonPrimary">@style/BlueButton</item>
+  </style>
+
+  <style name="BlueButton">
+    <item name="buttonBackground">@color/bpkBlue900</item>
+    <item name="buttonTextColor">@color/bpkGray200</item>
+    <item name="buttonStrokeColor">@color/bpkYellow500</item>
+  </style>
+
+```
+
+Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+
+
