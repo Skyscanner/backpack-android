@@ -51,9 +51,8 @@ class BpkButtonTest {
 
   @Test
   fun test_enabled_state() {
-    val button = BpkButton(context).apply {
+    val button = BpkButton(context, BpkButton.Type.Primary).apply {
       isEnabled = true
-      type = BpkButton.Type.Primary
     }
     val newState = false
     val expectedBackgroundState = button.disabledBackground

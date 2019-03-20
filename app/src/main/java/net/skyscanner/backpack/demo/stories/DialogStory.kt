@@ -15,15 +15,15 @@ class DialogStory : Story() {
       ?: savedInstanceState?.getInt(DialogStory.TYPE)
 
     val btn = view.findViewById<BpkButton>(R.id.open_dialog)
-    btn.setOnClickListener { it ->
-      val let = dialogsByType[dialogType]?.let { it ->
+    btn.setOnClickListener {
+      dialogsByType[dialogType]?.let {
         it.invoke(view.context).show()
       }
     }
   }
 
   companion object {
-    const val LAYOUT_ID = "fragment_id"
+    private const val LAYOUT_ID = "fragment_id"
     const val TYPE = "type"
 
     infix fun of(type: String) = DialogStory().apply {
@@ -46,19 +46,18 @@ class DialogStory : Story() {
 
         addActionButton(BpkButton(context).apply {
           text = "Continue"
-          setOnClickListener({
+          setOnClickListener {
             println("confirmed")
             dialog.dismiss()
-          })
+          }
         })
 
-        addActionButton(BpkButton(context).apply {
+        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
           text = "Skip"
-          type = BpkButton.Type.Secondary
-          setOnClickListener({
+          setOnClickListener {
             println("skipped")
             dialog.dismiss()
-          })
+          }
         })
       }
     },
@@ -73,13 +72,12 @@ class DialogStory : Story() {
           R.color.bpkYellow500
         )
 
-        addActionButton(BpkButton(context).apply {
+        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
           text = "Skip"
-          type = BpkButton.Type.Secondary
-          setOnClickListener({
+          setOnClickListener {
             println("skipped")
             dialog.dismiss()
-          })
+          }
         })
       }
     },
@@ -93,29 +91,25 @@ class DialogStory : Story() {
           R.drawable.bpk_trash,
           R.color.bpkRed500
         )
-
         setCancelable(false)
-
-        setOnCancelListener({
+        setOnCancelListener {
           println("canceled")
-        })
+        }
 
-        addActionButton(BpkButton(context).apply {
+        addActionButton(BpkButton(context, BpkButton.Type.Destructive).apply {
           text = "Delete"
-          type = BpkButton.Type.Destructive
-          setOnClickListener({
+          setOnClickListener {
             println("deleted")
             dialog.dismiss()
-          })
+          }
         })
 
-        addActionButton(BpkButton(context).apply {
+        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
           text = "Cancel"
-          type = BpkButton.Type.Secondary
-          setOnClickListener({
+          setOnClickListener {
             println("canceled")
             dialog.cancel()
-          })
+          }
         })
       }
     },

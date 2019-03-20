@@ -50,9 +50,8 @@ class BpkDialogTest : BpkSnapshotTest() {
         text = "Continue"
       })
 
-      addActionButton(BpkButton(context).apply {
+      addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
         text = "Skip"
-        type = BpkButton.Type.Secondary
       })
     }
 
@@ -72,14 +71,12 @@ class BpkDialogTest : BpkSnapshotTest() {
         R.color.bpkRed500
       )
 
-      addActionButton(BpkButton(context).apply {
+      addActionButton(BpkButton(context, BpkButton.Type.Destructive).apply {
         text = "Delete"
-        type = BpkButton.Type.Destructive
       })
 
-      addActionButton(BpkButton(context).apply {
+      addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
         text = "Cancel"
-        type = BpkButton.Type.Secondary
       })
     }
 

@@ -25,5 +25,4 @@
   <style name="Bpk.chip" parent="android:Widget">
     <item name="android:textAppearance">@style/bpkTextSm</item>
   </style>
-
 </resources>
