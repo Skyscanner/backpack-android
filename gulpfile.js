@@ -283,16 +283,36 @@ gulp.task('template:icons', () =>
     .pipe(gulp.dest(PATHS.drawableRes)),
 );
 
+gulp.task('template:animation', () => {
+  const getAnimation = () =>
+    tokensWithCategory('animations').map(token => {
+      const newToken = JSON.parse(JSON.stringify(token));
+      newToken.name = `bpk${pascalCase(newToken.name)}`;
+      newToken.value = newToken.value.slice(0, -2);
+      return newToken;
+    });
+  return gulp
+    .src(`${PATHS.templates}/BackpackAnimation.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: getAnimation(),
+      }),
+    )
+    .pipe(rename('values/backpack.animation.xml'))
+    .pipe(gulp.dest(PATHS.outputRes));
+});
+
 gulp.task(
   'default',
   gulp.series(
-    'template:color',
-    'template:text',
-    'template:spacing',
-    'template:radii',
+    'template:animation',
     'template:borders',
+    'template:color',
     'template:elevation',
     'template:icons',
+    'template:radii',
+    'template:spacing',
+    'template:text',
   ),
   () => {},
 );
