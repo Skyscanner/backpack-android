@@ -61,7 +61,7 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 }
 ```
 
-Notice the selection type is set in the BpkCalendarController constructor through the `selectionType` argument.
+Notice the selection type is set in the `BpkCalendarController` constructor through the `selectionType` argument.
  
 When `selectionType` is `SelectionType.RANGE` the calendar will allow a date range. 
 When `selectionType` is `SelectionType.SINGLE_DAY` the calendar will allow a single date.
