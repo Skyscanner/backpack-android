@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 5.0.0
+
+**Breaking:**
+
+- Added single selection to `BpkCalendar`.
+- Added theme props to `BpkButton`.
+
 # 4.0.0
 
 **Breaking:**
