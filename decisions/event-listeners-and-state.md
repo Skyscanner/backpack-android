@@ -79,5 +79,5 @@ to add a custom listener they will unintentionally override the behaviour we had
 
 Documentation with examples should be provided to remind users a listener should be added. 
 
-In the ocasions where a listener is absolutelly required we should take precautions to avoid 
+In the occasions where a listener is absolutely required we should take precautions to avoid 
 the two problems above, one course of action is a different event users can register without affection the default behaviour. For example, BpkChip could provide a `setOnSelectedStateChangeListener` so users can react to changes without replacing the click listener.
