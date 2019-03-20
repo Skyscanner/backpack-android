@@ -7,7 +7,6 @@
 **Breaking:**
 
 - Added single selection to `BpkCalendar`.
-- Added theme props to `BpkButton`.
 
 # 4.0.0
 
