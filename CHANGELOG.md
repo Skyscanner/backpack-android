@@ -1,6 +1,11 @@
 # Backpack Android changelog
 
 [Unreleased changes](./UNRELEASED.md).
+# 6.0.0
+
+**Breaking:**
+
+- Added theme support to `BpkButton`.
 
 # 5.0.0
 
