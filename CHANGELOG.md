@@ -1,6 +1,13 @@
 # Backpack Android changelog
 
 [Unreleased changes](./UNRELEASED.md).
+
+# 6.0.1
+
+**Fixed:**
+
+- Fix calendar year pill to show when the start date is in the past/future and to work in the RN bridge.
+
 # 6.0.0
 
 **Breaking:**
