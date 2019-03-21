@@ -27,11 +27,17 @@ open class BpkCalendar @JvmOverloads constructor(
     calendar_view.controller = controller
     controller.updateContentCallback = calendar_view
     calendar_view.listener = this
+
+    updateYearPill(controller.startDate.year)
   }
 
   override fun onYearChanged(year: Int) {
+    this.post { updateYearPill(year) }
+  }
+
+  private fun updateYearPill(year: Int) {
     val currentYear = Calendar.getInstance().get(Calendar.YEAR)
     year_pill_view.visibility = if (currentYear == year) View.GONE else View.VISIBLE
-    year_pill_view.postDelayed({ year_pill_view.message = year.toString() }, 0)
+    year_pill_view.message = year.toString()
   }
 }
