@@ -32,12 +32,12 @@ open class BpkCalendar @JvmOverloads constructor(
   }
 
   override fun onYearChanged(year: Int) {
-    this.post { updateYearPill(year) }
+    updateYearPill(year)
   }
 
   private fun updateYearPill(year: Int) {
     val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-    year_pill_view.visibility = if (currentYear == year) View.GONE else View.VISIBLE
     year_pill_view.message = year.toString()
+    year_pill_view.visibility = if (currentYear == year) View.GONE else View.VISIBLE
   }
 }
