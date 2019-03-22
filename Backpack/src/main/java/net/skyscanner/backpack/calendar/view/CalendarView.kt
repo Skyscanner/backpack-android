@@ -18,7 +18,6 @@ package net.skyscanner.backpack.calendar.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
 import android.view.ViewConfiguration
 import android.widget.AbsListView
 import android.widget.ListView
@@ -64,21 +63,6 @@ internal class CalendarView constructor(
     this.setDrawSelectorOnTop(false)
 
     setUpListView()
-  }
-
-  private val measureAndLayout = Runnable {
-    measure(
-      View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
-      View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.UNSPECIFIED))
-    layout(left, top, right, bottom)
-  }
-
-  override fun requestLayout() {
-    super.requestLayout()
-
-    // This is required for the bridged component to render correctly
-    // based on: https://github.com/facebook/react-native/blob/1151c096dab17e5d9a6ac05b61aacecd4305f3db/ReactAndroid/src/main/java/com/facebook/react/views/picker/ReactPicker.java#L75
-    this.post(measureAndLayout)
   }
 
   override fun updateContent() {
