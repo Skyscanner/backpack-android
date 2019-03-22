@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 6.1.0
+
+**Added:**
+
+- Added animation tokens.
+- Removed all logic related to the RN bridge from BpkCalendar
+
 # 6.0.1
 
 **Fixed:**
