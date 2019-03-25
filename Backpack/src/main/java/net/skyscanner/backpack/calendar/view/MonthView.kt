@@ -196,6 +196,8 @@ internal class MonthView @JvmOverloads constructor(
 
     weekStart = calendar.firstDayOfWeek
 
+    monthHeaderString = controller?.getLocalizedDate(calendar.time, MONTH_HEADLINE_PATTERN) ?: ""
+
     numberOfCells = getDaysInMonth(params.month, params.year)
     for (i in 0 until numberOfCells) {
       val day = i + 1
