@@ -7,6 +7,7 @@ data class CalendarColoring(
 )
 
 data class ColoredBucket(
-  @ColorInt val color: Int,
-  val days: Set<CalendarDay>
+  @ColorInt val color: Int?,
+  val days: Set<CalendarDay>,
+  @ColorInt val selectedColor: Int? = color
 )

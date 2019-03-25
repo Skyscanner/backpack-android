@@ -102,6 +102,7 @@ internal class MonthView @JvmOverloads constructor(
     }
   }
   private var coloredCirclePaints = mapOf<CalendarDay, Paint>()
+  private var coloredSelectedPaints = mapOf<CalendarDay, Paint>()
 
   private lateinit var calendarDrawingParams: CalendarDrawingParams
 
@@ -112,6 +113,7 @@ internal class MonthView @JvmOverloads constructor(
   private var numberOfDays = DEFAULT_NUM_DAYS
   private var numberOfCells = DEFAULT_NUM_DAYS
   private var numberOfRows = DEFAULT_NUM_ROWS
+  private var monthHeaderString = ""
 
   private val calendar: Calendar by lazy {
     Calendar.getInstance().also { it.timeZone = TimeZone.getTimeZone("UTC") }
@@ -163,7 +165,7 @@ internal class MonthView @JvmOverloads constructor(
 
   override fun onDraw(canvas: Canvas) {
     controller?.let {
-      drawMonthTitle(it, canvas)
+      drawMonthTitle(canvas)
       drawDaysInMonth(it, canvas)
     }
   }
@@ -185,6 +187,7 @@ internal class MonthView @JvmOverloads constructor(
     today = -1
     calendarDrawingParams = params
     coloredCirclePaints = params.toDrawingPaintMap()
+    coloredSelectedPaints = params.toSelectedDrawingPaintMap()
 
     calendar.set(Calendar.MONTH, params.month)
     calendar.set(Calendar.YEAR, params.year)
@@ -213,11 +216,10 @@ internal class MonthView @JvmOverloads constructor(
     return calendarDrawingParams.year
   }
 
-  private fun drawMonthTitle(controller: BpkCalendarController, canvas: Canvas) {
+  private fun drawMonthTitle(canvas: Canvas) {
     val dayWidthHalf = viewWidth / (numberOfDays * 3)
     val monthTitleX = (dayWidthHalf).toFloat()
     val monthTitleY = ((monthHeaderSize) / 2 + monthLabelTextSize / 3).toFloat()
-    val monthHeaderString = controller.getLocalizedDate(calendar.time, MONTH_HEADLINE_PATTERN)
 
     drawText(canvas, monthHeaderString, monthTitleX, monthTitleY, monthTitlePaint)
   }
@@ -238,9 +240,21 @@ internal class MonthView @JvmOverloads constructor(
 
       val calendarDay = CalendarDay(calendarDrawingParams.year, calendarDrawingParams.month, dayNumber)
 
+      val isOutOfRange = isOutOfRange(calendarDay)
       when (controller.selectionType) {
-        SelectionType.SINGLE -> drawDayCellForSingle(controller, canvas, calendarDay, x, y, stopY)
-        SelectionType.RANGE -> drawDayCellForRange(controller, canvas, calendarDay, x, y, startX, stopX, startY, stopY)
+        SelectionType.SINGLE -> drawDayCellForSingle(controller, canvas, calendarDay, x, y, stopY, isOutOfRange)
+        SelectionType.RANGE -> drawDayCellForRange(
+          controller,
+          canvas,
+          calendarDay,
+          x,
+          y,
+          startX,
+          stopX,
+          startY,
+          stopY,
+          isOutOfRange
+        )
       }
 
       j++
@@ -270,11 +284,11 @@ internal class MonthView @JvmOverloads constructor(
     calendarDay: CalendarDay,
     x: Int,
     y: Int,
-    stopY: Int
+    stopY: Int,
+    isOutOfRange: Boolean
   ) {
     var overrideTextColor: Int? = null
 
-    val isOutOfRange = isOutOfRange(calendarDay)
     val rowPadding = if (isColoredCalendar()) (rowHeight * 0.1).toInt() else 0
 
     if (!isOutOfRange) {
@@ -282,7 +296,7 @@ internal class MonthView @JvmOverloads constructor(
       when (type) {
         CalendarRange.DrawType.SELECTED -> {
           selectedCirclePaint.color =
-            if (isColoredCalendar() && coloredCirclePaints.keys.contains(calendarDay)) coloredCirclePaints.getValue(calendarDay).color else selectedDayCircleFillColor
+            if (isColoredCalendar() && coloredSelectedPaints.keys.contains(calendarDay)) coloredSelectedPaints.getValue(calendarDay).color else selectedDayCircleFillColor
 
           overrideTextColor = if (isColoredCalendar()) null else Color.WHITE
           selectedCirclePaint.style = Paint.Style.FILL
@@ -336,11 +350,11 @@ internal class MonthView @JvmOverloads constructor(
     startX: Int,
     stopX: Int,
     startY: Int,
-    stopY: Int
+    stopY: Int,
+    isOutOfRange: Boolean
   ) {
     var overrideTextColor: Int? = null
 
-    val isOutOfRange = isOutOfRange(calendarDay)
     val rowPadding = if (isColoredCalendar()) (rowHeight * 0.1).toInt() else 0
 
     if (!isOutOfRange) {
@@ -348,15 +362,15 @@ internal class MonthView @JvmOverloads constructor(
       when (type) {
         CalendarRange.DrawType.SELECTED -> {
           selectedCirclePaint.color =
-            if (isColoredCalendar() && coloredCirclePaints.keys.contains(calendarDay)) coloredCirclePaints.getValue(calendarDay).color else selectedDayCircleFillColor
+            if (isColoredCalendar() && coloredSelectedPaints.keys.contains(calendarDay)) coloredSelectedPaints.getValue(calendarDay).color else selectedDayCircleFillColor
           if (controller.selectedRange.isRange && !controller.selectedRange.isOnTheSameDate) {
             val paddingX = (stopX - startX) / 2
             drawEdgeCircles(canvas, calendarDay, controller.selectedRange, paddingX, rowPadding, x, y)
             val nextDay = calendarDay.addDays(1)
             if (controller.selectedRange.getDrawType(nextDay) != CalendarRange.DrawType.NONE) {
-              drawRect(canvas, startX + paddingX, startY + rowPadding, stopX, stopY - rowPadding)
+              drawRect(canvas, startX - 1 + paddingX, startY + rowPadding, stopX + 1, stopY - rowPadding)
             } else {
-              drawRect(canvas, startX, startY + rowPadding, stopX - paddingX, stopY - rowPadding)
+              drawRect(canvas, startX - 1, startY + rowPadding, stopX - paddingX + 1, stopY - rowPadding)
             }
           }
 
@@ -581,12 +595,30 @@ internal class MonthView @JvmOverloads constructor(
 internal fun CalendarDrawingParams.toDrawingPaintMap(): Map<CalendarDay, Paint> {
   return mutableMapOf<CalendarDay, Paint>().also { resultMap ->
     this.calendarColoring?.coloredBuckets?.forEach { bucket ->
-      val paint = Paint().apply {
-        style = Style.FILL_AND_STROKE
-        color = bucket.color
+      if (bucket.color != null) {
+        val paint = Paint().apply {
+          style = Style.FILL_AND_STROKE
+          color = bucket.color
+        }
+        bucket.days.forEach { day ->
+          resultMap[day] = paint
+        }
       }
-      bucket.days.forEach { day ->
-        resultMap[day] = paint
+    }
+  }.toMap()
+}
+
+internal fun CalendarDrawingParams.toSelectedDrawingPaintMap(): Map<CalendarDay, Paint> {
+  return mutableMapOf<CalendarDay, Paint>().also { resultMap ->
+    this.calendarColoring?.coloredBuckets?.forEach { bucket ->
+      if (bucket.selectedColor != null) {
+        val paint = Paint().apply {
+          style = Style.FILL_AND_STROKE
+          color = bucket.selectedColor
+        }
+        bucket.days.forEach { day ->
+          resultMap[day] = paint
+        }
       }
     }
   }.toMap()

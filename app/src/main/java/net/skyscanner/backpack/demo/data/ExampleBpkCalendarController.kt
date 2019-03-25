@@ -47,19 +47,21 @@ class ExampleBpkCalendarController(
   }
 
   private fun multiColoredExampleCalendarColoring(): CalendarColoring {
-    val daysBetweenStartAndEnd = TimeUnit.DAYS.convert(endDate.date.time - startDate.date.time, TimeUnit.MILLISECONDS)
+    val daysBetweenStartAndEnd = TimeUnit.DAYS.convert(endDate.date.time - startDate.date.time, TimeUnit.MILLISECONDS) + 1
     val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
     val redSet = mutableSetOf<CalendarDay>()
     val yellowSet = mutableSetOf<CalendarDay>()
     val greenSet = mutableSetOf<CalendarDay>()
     val greySet = mutableSetOf<CalendarDay>()
+    val emptySet = mutableSetOf<CalendarDay>()
     for (i in 0 until daysBetweenStartAndEnd) {
       val shiftedIterator = i + colorGenerationOffset
       when {
-        shiftedIterator % 4 == 0L -> redSet
-        shiftedIterator % 4 == 1L -> yellowSet
-        shiftedIterator % 4 == 2L -> greenSet
-        shiftedIterator % 4 == 3L -> greySet
+        shiftedIterator % 5 == 0L -> redSet
+        shiftedIterator % 5 == 1L -> yellowSet
+        shiftedIterator % 5 == 2L -> greenSet
+        shiftedIterator % 5 == 3L -> greySet
+        shiftedIterator % 5 == 4L -> emptySet
         else -> mutableSetOf()
       }.add(CalendarDay(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)))
       calendar.add(Calendar.DATE, 1)
@@ -68,8 +70,9 @@ class ExampleBpkCalendarController(
       setOf(
         ColoredBucket(ContextCompat.getColor(context, R.color.bpkRed500), redSet),
         ColoredBucket(ContextCompat.getColor(context, R.color.bpkYellow500), yellowSet),
-        ColoredBucket(ContextCompat.getColor(context, R.color.bpkGreen500), greenSet),
-        ColoredBucket(ContextCompat.getColor(context, R.color.bpkGray100), greySet)
+        ColoredBucket(ContextCompat.getColor(context, R.color.bpkGreen500), greenSet, ContextCompat.getColor(context, R.color.bpkGreen900)),
+        ColoredBucket(ContextCompat.getColor(context, R.color.bpkGray100), greySet),
+        ColoredBucket(null, emptySet, ContextCompat.getColor(context, R.color.bpkPink500))
       )
     )
   }
