@@ -186,8 +186,8 @@ internal class MonthView @JvmOverloads constructor(
     hasToday = false
     today = -1
     calendarDrawingParams = params
-    coloredCirclePaints = params.toDrawingPaintMap()
-    coloredSelectedPaints = params.toSelectedDrawingPaintMap()
+    coloredCirclePaints = params.toDrawingPaintMap(isSelectedColor = false)
+    coloredSelectedPaints = params.toDrawingPaintMap(isSelectedColor = true)
 
     calendar.set(Calendar.MONTH, params.month)
     calendar.set(Calendar.YEAR, params.year)
@@ -592,29 +592,14 @@ internal class MonthView @JvmOverloads constructor(
   }
 }
 
-internal fun CalendarDrawingParams.toDrawingPaintMap(): Map<CalendarDay, Paint> {
+internal fun CalendarDrawingParams.toDrawingPaintMap(isSelectedColor: Boolean): Map<CalendarDay, Paint> {
   return mutableMapOf<CalendarDay, Paint>().also { resultMap ->
     this.calendarColoring?.coloredBuckets?.forEach { bucket ->
-      if (bucket.color != null) {
+      val bucketColor = if (isSelectedColor) bucket.selectedColor else bucket.color
+      if (bucketColor != null) {
         val paint = Paint().apply {
           style = Style.FILL_AND_STROKE
-          color = bucket.color
-        }
-        bucket.days.forEach { day ->
-          resultMap[day] = paint
-        }
-      }
-    }
-  }.toMap()
-}
-
-internal fun CalendarDrawingParams.toSelectedDrawingPaintMap(): Map<CalendarDay, Paint> {
-  return mutableMapOf<CalendarDay, Paint>().also { resultMap ->
-    this.calendarColoring?.coloredBuckets?.forEach { bucket ->
-      if (bucket.selectedColor != null) {
-        val paint = Paint().apply {
-          style = Style.FILL_AND_STROKE
-          color = bucket.selectedColor
+          color = bucketColor
         }
         bucket.days.forEach { day ->
           resultMap[day] = paint
