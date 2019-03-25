@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.demo
 
+import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import net.skyscanner.backpack.demo.components.SettingsThemeOption
 import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.toggle.BpkSwitch
+import net.skyscanner.backpack.util.ThemeOverlayEnforcement
 
 class SettingsActivity : AppCompatActivity() {
   private lateinit var themes: List<SettingsThemeOption>
@@ -20,6 +22,10 @@ class SettingsActivity : AppCompatActivity() {
   )
 
   private var restartMessageShown = false
+
+  override fun attachBaseContext(newBase: Context) {
+    super.attachBaseContext(ThemeOverlayEnforcement(newBase))
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
