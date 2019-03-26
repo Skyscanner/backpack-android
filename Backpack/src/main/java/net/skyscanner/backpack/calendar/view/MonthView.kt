@@ -34,7 +34,6 @@ import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
-import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.util.ResourcesUtil
 import java.util.Calendar
 import java.util.TimeZone
@@ -263,21 +262,18 @@ internal class MonthView @JvmOverloads constructor(
       val calendarDay = CalendarDay(calendarDrawingParams.year, calendarDrawingParams.month, dayNumber)
 
       val isOutOfRange = isOutOfRange(calendarDay)
-      when (controller.selectionType) {
-        SelectionType.SINGLE -> drawDayCellForSingle(controller, canvas, calendarDay, x, y, stopY, isOutOfRange)
-        SelectionType.RANGE -> drawDayCellForRange(
-          controller,
-          canvas,
-          calendarDay,
-          x,
-          y,
-          startX,
-          stopX,
-          startY,
-          stopY,
-          isOutOfRange
-        )
-      }
+      drawDayCellForRange(
+        controller,
+        canvas,
+        calendarDay,
+        x,
+        y,
+        startX,
+        stopX,
+        startY,
+        stopY,
+        isOutOfRange
+      )
 
       j++
       if (j == numberOfDaysInAWeek) {
@@ -298,69 +294,6 @@ internal class MonthView @JvmOverloads constructor(
       drawCircle(canvas, x, (stopY - paddingFromBottom), coloredCircleStrokeWidth + todayCircleStrokeWidth, backgroundPaint)
       drawCircle(canvas, x, (stopY - paddingFromBottom), coloredCircleStrokeWidth, coloredCirclePaints.getValue(calendarDay))
     }
-  }
-
-  private fun drawDayCellForSingle(
-    controller: BpkCalendarController,
-    canvas: Canvas,
-    calendarDay: CalendarDay,
-    x: Int,
-    y: Int,
-    stopY: Int,
-    isOutOfRange: Boolean
-  ) {
-    var overrideTextColor: Int? = null
-
-    val rowPadding = if (isColoredCalendar()) (rowHeight * 0.1).toInt() else 0
-
-    if (!isOutOfRange) {
-      val type = controller.selectedRange.getDrawType(calendarDay)
-      when (type) {
-        CalendarRange.DrawType.SELECTED -> {
-          selectedCirclePaint.color =
-            if (isColoredCalendar() && coloredSelectedPaints.keys.contains(calendarDay)) coloredSelectedPaints.getValue(calendarDay).color else selectedDayCircleFillColor
-
-          overrideTextColor = if (isColoredCalendar()) null else Color.WHITE
-          selectedCirclePaint.style = Paint.Style.FILL
-
-          drawCircle(
-            canvas,
-            x,
-            y - miniDayNumberTextSize / 3,
-            selectedDayCircleRadius - rowPadding,
-            selectedCirclePaint
-          )
-
-          if (isColoredCalendar()) {
-            drawCircle(
-              canvas,
-              x,
-              y - miniDayNumberTextSize / 3,
-              selectedDayCircleRadius - rowPadding - sameDayCircleStrokeWidth,
-              backgroundPaint
-            )
-          }
-        }
-        CalendarRange.DrawType.NONE -> {
-          drawColoredSmallCircle(calendarDay, canvas, x, stopY, rowPadding)
-        }
-      }
-    }
-    if (hasToday && today == calendarDay.day) {
-      if (isColoredCalendar()) {
-        overrideTextColor = selectedDayCircleFillColor
-      } else {
-        drawCircle(canvas, x, y - miniDayNumberTextSize / 3, selectedDayCircleRadius - rowPadding, todayCirclePaint)
-      }
-    }
-
-    monthNumberPaint.color = when {
-      isOutOfRange -> disabledTextColor
-      overrideTextColor != null -> overrideTextColor
-      else -> defaultTextColor
-    }
-
-    drawText(canvas, String.format(controller.locale, "%d", calendarDay.day), x.toFloat(), y.toFloat(), monthNumberPaint)
   }
 
   private fun drawDayCellForRange(

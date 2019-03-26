@@ -48,7 +48,7 @@ abstract class BpkCalendarController(
 
   private fun handleForSingle(selectedDay: CalendarDay) {
     selectedRange.start = selectedDay
-    selectedRange.end = selectedDay
+    selectedRange.end = null
     onRangeSelected(SingleDay(selectedDay))
   }
 
