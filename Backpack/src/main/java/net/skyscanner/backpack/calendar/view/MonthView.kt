@@ -27,6 +27,7 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarDay
@@ -104,19 +105,20 @@ internal class MonthView @JvmOverloads constructor(
   private var coloredCirclePaints = mapOf<CalendarDay, Paint>()
   private var coloredSelectedPaints = mapOf<CalendarDay, Paint>()
 
-  private lateinit var calendarDrawingParams: CalendarDrawingParams
+  @VisibleForTesting
+  lateinit var calendarDrawingParams: CalendarDrawingParams
 
   private var dayOfWeekStart = 0
   private var hasToday = false
   private var today = DEFAULT_SELECTED_DAY
   private var weekStart = DEFAULT_WEEK_START
-  private var numberOfDays = DEFAULT_NUM_DAYS
-  private var numberOfCells = DEFAULT_NUM_DAYS
+  private var numberOfDaysInAWeek = DEFAULT_NUM_DAYS
+  private var numberOfDaysInMonth = DEFAULT_NUM_DAYS
   private var numberOfRows = DEFAULT_NUM_ROWS
   private var monthHeaderString = ""
 
-  private val calendar: Calendar by lazy {
-    Calendar.getInstance().also { it.timeZone = TimeZone.getTimeZone("UTC") }
+  private val localeDependentUtcCalendar: Calendar by lazy {
+    Calendar.getInstance(TimeZone.getTimeZone("UTC"), controller!!.locale)
   }
 
   private val defaultTextColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray900) }
@@ -189,17 +191,15 @@ internal class MonthView @JvmOverloads constructor(
     coloredCirclePaints = params.toDrawingPaintMap(isSelectedColor = false)
     coloredSelectedPaints = params.toDrawingPaintMap(isSelectedColor = true)
 
-    calendar.set(Calendar.MONTH, params.month)
-    calendar.set(Calendar.YEAR, params.year)
-    calendar.set(Calendar.DAY_OF_MONTH, 1)
-    dayOfWeekStart = calendar.get(Calendar.DAY_OF_WEEK)
+    localeDependentUtcCalendar.set(Calendar.YEAR, params.year)
+    localeDependentUtcCalendar.set(Calendar.MONTH, params.month)
+    localeDependentUtcCalendar.set(Calendar.DAY_OF_MONTH, 1)
+    dayOfWeekStart = localeDependentUtcCalendar.get(Calendar.DAY_OF_WEEK)
+    weekStart = localeDependentUtcCalendar.firstDayOfWeek
+    monthHeaderString = controller?.getLocalizedDate(localeDependentUtcCalendar.time, MONTH_HEADLINE_PATTERN) ?: ""
 
-    weekStart = calendar.firstDayOfWeek
-
-    monthHeaderString = controller?.getLocalizedDate(calendar.time, MONTH_HEADLINE_PATTERN) ?: ""
-
-    numberOfCells = getDaysInMonth(params.month, params.year)
-    for (i in 0 until numberOfCells) {
+    numberOfDaysInMonth = getDaysInMonth(params.month, params.year)
+    for (i in 0 until numberOfDaysInMonth - getNonDrawnDaysOffset()) {
       val day = i + 1
       if (controller?.isToday(params.year, params.month, day) == true) {
         hasToday = true
@@ -207,6 +207,26 @@ internal class MonthView @JvmOverloads constructor(
       }
     }
     numberOfRows = calculateNumRows()
+  }
+
+  @VisibleForTesting
+  fun getNonDrawnDaysOffset(): Int {
+    controller?.let {
+      val shouldApplyOffset =
+        calendarDrawingParams.year == it.startDate.year && calendarDrawingParams.month == it.startDate.month && it.startDate.day > numberOfDaysInAWeek
+      if (shouldApplyOffset) {
+        localeDependentUtcCalendar.set(Calendar.YEAR, it.startDate.year)
+        localeDependentUtcCalendar.set(Calendar.MONTH, it.startDate.month)
+        localeDependentUtcCalendar.set(Calendar.DAY_OF_MONTH, it.startDate.day)
+        while (localeDependentUtcCalendar.get(Calendar.DAY_OF_WEEK) != localeDependentUtcCalendar.firstDayOfWeek) {
+          localeDependentUtcCalendar.add(Calendar.DATE, -1)
+        }
+        localeDependentUtcCalendar.add(Calendar.DATE, -1)
+
+        return localeDependentUtcCalendar.get(Calendar.DAY_OF_MONTH)
+      }
+    }
+    return 0
   }
 
   fun reuse() {
@@ -219,7 +239,7 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   private fun drawMonthTitle(canvas: Canvas) {
-    val dayWidthHalf = viewWidth / (numberOfDays * 3)
+    val dayWidthHalf = viewWidth / (numberOfDaysInAWeek * 3)
     val monthTitleX = (dayWidthHalf).toFloat()
     val monthTitleY = ((monthHeaderSize) / 2 + monthLabelTextSize / 3).toFloat()
 
@@ -228,9 +248,9 @@ internal class MonthView @JvmOverloads constructor(
 
   private fun drawDaysInMonth(controller: BpkCalendarController, canvas: Canvas) {
     var y = (rowHeight + miniDayNumberTextSize) / 2 + monthHeaderSize
-    val dayWidthHalf = (viewWidth) / (numberOfDays * 2.0f)
+    val dayWidthHalf = (viewWidth) / (numberOfDaysInAWeek * 2.0f)
     var j = findDayOffset()
-    for (dayNumber in 1..numberOfCells) {
+    for (dayNumber in (getNonDrawnDaysOffset() + 1)..numberOfDaysInMonth) {
       val x = ((2 * j + 1) * dayWidthHalf).toInt()
 
       val yRelativeToDay = (rowHeight + miniDayNumberTextSize) / 2
@@ -260,7 +280,7 @@ internal class MonthView @JvmOverloads constructor(
       }
 
       j++
-      if (j == numberOfDays) {
+      if (j == numberOfDaysInAWeek) {
         j = 0
         y += rowHeight
       }
@@ -502,11 +522,18 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   private fun findDayOffset() =
-    (if (dayOfWeekStart < weekStart) dayOfWeekStart + numberOfDays else dayOfWeekStart) - weekStart
+    if (getNonDrawnDaysOffset() >= numberOfDaysInAWeek) {
+      0
+    } else {
+      var dayOffset = dayOfWeekStart - weekStart
+      if (dayOfWeekStart < weekStart)
+        dayOffset += numberOfDaysInAWeek
+      dayOffset
+    }
 
   private fun getDayFromLocation(x: Float, y: Float): Int {
     val day = getInternalDayFromLocation(x, y)
-    return if (day < 1 || day > numberOfCells) -1 else day
+    return if (day < 1 || day > numberOfDaysInMonth) -1 else day
   }
 
   private fun getInternalDayFromLocation(x: Float, y: Float): Int {
@@ -514,9 +541,9 @@ internal class MonthView @JvmOverloads constructor(
       return -1
     }
     val row = (y - monthHeaderSize).toInt() / rowHeight
-    val column = (x * numberOfDays / viewWidth).toInt()
+    val column = (x * numberOfDaysInAWeek / viewWidth).toInt()
     var day = column - findDayOffset() + 1
-    day += row * numberOfDays
+    day += row * numberOfDaysInAWeek + getNonDrawnDaysOffset()
     return day
   }
 
@@ -572,10 +599,14 @@ internal class MonthView @JvmOverloads constructor(
     }
 
   private fun calculateNumRows(): Int {
-    val offset = findDayOffset()
-    val dividend = (offset + numberOfCells) / numberOfDays
-    val remainder = (offset + numberOfCells) % numberOfDays
-    return dividend + if (remainder > 0) 1 else 0
+    return if (getNonDrawnDaysOffset() >= numberOfDaysInAWeek) {
+      (numberOfDaysInMonth - getNonDrawnDaysOffset()) / numberOfDaysInAWeek + 1
+    } else {
+      val offset = findDayOffset()
+      val dividend = (offset + numberOfDaysInMonth) / numberOfDaysInAWeek
+      val remainder = (offset + numberOfDaysInMonth) % numberOfDaysInAWeek
+      dividend + if (remainder > 0) 1 else 0
+    }
   }
 
   private fun isColoredCalendar() = calendarDrawingParams.calendarColoring != null

@@ -19,7 +19,19 @@ data class CalendarDay(
       return utcCalendar.toCalendarDay()
     }
 
-    fun today(): CalendarDay = of(System.currentTimeMillis())
+    fun of(str: String): CalendarDay? {
+      val yearMonthDay = str.split("-")
+      if (yearMonthDay.size == 3) {
+        return CalendarDay(
+          yearMonthDay[0].toInt(),
+          yearMonthDay[1].toInt() - 1,
+          yearMonthDay[2].toInt()
+        )
+      }
+      return null
+    }
+
+    fun today(): CalendarDay = Calendar.getInstance().toCalendarDay()
 
     fun utcCalendar(): Calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
   }

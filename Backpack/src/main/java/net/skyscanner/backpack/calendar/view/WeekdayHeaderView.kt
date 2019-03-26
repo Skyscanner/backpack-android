@@ -31,7 +31,7 @@ internal class WeekdayHeaderView @JvmOverloads constructor(
 
   internal fun initializeWithLocale(locale: Locale) {
     val simpleDateFormat = SimpleDateFormat("ccc", locale)
-    val calendar = Calendar.getInstance()
+    val calendar = Calendar.getInstance(locale)
     val weekStart = calendar.firstDayOfWeek
     val numberOfDaysInWeek = 7
 
