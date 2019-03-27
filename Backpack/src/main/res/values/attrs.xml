@@ -2,6 +2,7 @@
 <resources>
 
   <attr name="bpkPrimaryColor" format="color" />
+  <attr name="bpkThemeOverlay" format="reference" />
 
   <declare-styleable name="BpkBadge">
     <!-- type of badge -->

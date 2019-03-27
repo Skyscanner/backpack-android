@@ -2,20 +2,32 @@
 <resources>
   <style name="LondonTheme" parent="AppTheme">
     <item name="colorPrimary">#ED1B28</item>
-    <item name="bpkSwitchStyle">@style/BpkSwitch.Themed</item>
+    <item name="bpkThemeOverlay">@style/LondonTheme.BpkOverlay</item>
+  </style>
+
+  <style name="LondonTheme.BpkOverlay" parent="">
+    <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
     <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
   </style>
 
   <style name="DohaTheme" parent="AppTheme">
     <item name="colorPrimary">#9B104C</item>
-    <item name="bpkSwitchStyle">@style/BpkSwitch.Themed</item>
+    <item name="bpkThemeOverlay">@style/DohaTheme.BpkOverlay</item>
+  </style>
+
+  <style name="DohaTheme.BpkOverlay" parent="AppTheme">
+    <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
     <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
   </style>
 
-  <style name="BpkSwitch.Themed" parent="">
-    <item name="switchPrimaryColor">?colorPrimary</item>
+  <style name="DohaThemeBpkSwitch" parent="">
+    <item name="switchPrimaryColor">@color/bpkYellow900</item>
+  </style>
+
+  <style name="LondonThemeBpkSwitch" parent="">
+    <item name="switchPrimaryColor">#ED1B28</item>
   </style>
 
   <style name="DohaThemeButtonPrimary">

@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 
 private fun getStyle(context: Context, attrs: AttributeSet?): Int {
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
@@ -40,7 +41,8 @@ open class BpkButton : AppCompatButton {
   constructor(context: Context, type: Type) : this(context, null, getStyle(type), type)
   constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, getStyle(context, attrs))
   constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary)
-  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, type: Type) : super(context, attrs, defStyleAttr) {
+  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, type: Type)
+    : super(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
     this.initialType = type
     initialize(attrs, defStyleAttr)
   }
