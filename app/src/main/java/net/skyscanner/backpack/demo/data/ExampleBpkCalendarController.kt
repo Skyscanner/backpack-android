@@ -46,7 +46,6 @@ class ExampleBpkCalendarController(
   fun newColors() {
     colorGenerationOffset += 1
   }
-
 }
 
 @VisibleForTesting
