@@ -49,7 +49,7 @@ class ExampleBpkCalendarController(
 }
 
 @VisibleForTesting
-fun multiColoredExampleCalendarColoring(
+internal fun multiColoredExampleCalendarColoring(
   colorOffset: Long,
   startDate: CalendarDay,
   endDate: CalendarDay,

@@ -106,7 +106,7 @@ internal class MonthView @JvmOverloads constructor(
   private var coloredSelectedPaints = mapOf<CalendarDay, Paint>()
 
   @VisibleForTesting
-  lateinit var calendarDrawingParams: CalendarDrawingParams
+  internal lateinit var calendarDrawingParams: CalendarDrawingParams
 
   private var dayOfWeekStart = 0
   private var hasToday = false
@@ -210,7 +210,7 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   @VisibleForTesting
-  fun getNonDrawnDaysOffset(): Int {
+  internal fun getNonDrawnDaysOffset(): Int {
     controller?.let {
       val shouldApplyOffset =
         calendarDrawingParams.year == it.startDate.year && calendarDrawingParams.month == it.startDate.month && it.startDate.day > numberOfDaysInAWeek
