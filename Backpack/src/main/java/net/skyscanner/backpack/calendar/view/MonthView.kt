@@ -526,7 +526,7 @@ internal class MonthView @JvmOverloads constructor(
       0
     } else {
       var dayOffset = dayOfWeekStart - weekStart
-      if (dayOfWeekStart < weekStart){
+      if (dayOfWeekStart < weekStart) {
         dayOffset += numberOfDaysInAWeek
       }
       dayOffset
