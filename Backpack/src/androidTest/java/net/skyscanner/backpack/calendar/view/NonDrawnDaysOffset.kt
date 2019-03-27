@@ -119,4 +119,16 @@ class NonDrawnDaysOffset {
       // unused
     }
   }
+
+  private fun CalendarDay.Companion.of(str: String): CalendarDay? {
+    val yearMonthDay = str.split("-")
+    if (yearMonthDay.size == 3) {
+      return CalendarDay(
+        yearMonthDay[0].toInt(),
+        yearMonthDay[1].toInt() - 1,
+        yearMonthDay[2].toInt()
+      )
+    }
+    return null
+  }
 }
