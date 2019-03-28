@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="wrap_content">
 
   <net.skyscanner.backpack.calendar.view.WeekdayHeaderView
     android:id="@+id/weekday_header_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentTop="true"/>
 
   <net.skyscanner.backpack.calendar.view.CalendarView
     android:id="@+id/calendar_view"
     android:nestedScrollingEnabled="true"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    app:layout_constraintTop_toBottomOf="@id/weekday_header_view"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent" />
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/weekday_header_view"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true" />
 
   <net.skyscanner.backpack.badge.BpkBadge
     android:id="@+id/year_pill_view"
@@ -28,9 +28,9 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bpkSpacingBase"
     android:visibility="gone"
+    android:layout_centerHorizontal="true"
     app:badgeType="dark"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/weekday_header_view"
+    android:layout_below="@+id/weekday_header_view"
     app:message="9999" />
-</merge>
+</RelativeLayout>
+
