@@ -19,7 +19,7 @@ data class CalendarDay(
       return utcCalendar.toCalendarDay()
     }
 
-    fun today(): CalendarDay = of(System.currentTimeMillis())
+    fun today(): CalendarDay = Calendar.getInstance().toCalendarDay()
 
     fun utcCalendar(): Calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
   }

@@ -47,6 +47,7 @@ class ColoredCalendarStory : Story() {
           controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE)
         }
       }
+      controller.isColoredCalendar = true
       bpkCalendar.setController(controller)
     }
   }

@@ -27,13 +27,13 @@ import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
-import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.util.ResourcesUtil
 import java.util.Calendar
 import java.util.TimeZone
@@ -102,19 +102,22 @@ internal class MonthView @JvmOverloads constructor(
     }
   }
   private var coloredCirclePaints = mapOf<CalendarDay, Paint>()
+  private var coloredSelectedPaints = mapOf<CalendarDay, Paint>()
 
-  private lateinit var calendarDrawingParams: CalendarDrawingParams
+  @VisibleForTesting
+  internal lateinit var calendarDrawingParams: CalendarDrawingParams
 
   private var dayOfWeekStart = 0
   private var hasToday = false
   private var today = DEFAULT_SELECTED_DAY
   private var weekStart = DEFAULT_WEEK_START
-  private var numberOfDays = DEFAULT_NUM_DAYS
-  private var numberOfCells = DEFAULT_NUM_DAYS
+  private var numberOfDaysInAWeek = DEFAULT_NUM_DAYS
+  private var numberOfDaysInMonth = DEFAULT_NUM_DAYS
   private var numberOfRows = DEFAULT_NUM_ROWS
+  private var monthHeaderString = ""
 
-  private val calendar: Calendar by lazy {
-    Calendar.getInstance().also { it.timeZone = TimeZone.getTimeZone("UTC") }
+  private val localeDependentUtcCalendar: Calendar by lazy {
+    Calendar.getInstance(TimeZone.getTimeZone("UTC"), controller!!.locale)
   }
 
   private val defaultTextColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray900) }
@@ -163,7 +166,7 @@ internal class MonthView @JvmOverloads constructor(
 
   override fun onDraw(canvas: Canvas) {
     controller?.let {
-      drawMonthTitle(it, canvas)
+      drawMonthTitle(canvas)
       drawDaysInMonth(it, canvas)
     }
   }
@@ -184,17 +187,18 @@ internal class MonthView @JvmOverloads constructor(
     hasToday = false
     today = -1
     calendarDrawingParams = params
-    coloredCirclePaints = params.toDrawingPaintMap()
+    coloredCirclePaints = params.toDrawingPaintMap(isSelectedColor = false)
+    coloredSelectedPaints = params.toDrawingPaintMap(isSelectedColor = true)
 
-    calendar.set(Calendar.MONTH, params.month)
-    calendar.set(Calendar.YEAR, params.year)
-    calendar.set(Calendar.DAY_OF_MONTH, 1)
-    dayOfWeekStart = calendar.get(Calendar.DAY_OF_WEEK)
+    localeDependentUtcCalendar.set(Calendar.YEAR, params.year)
+    localeDependentUtcCalendar.set(Calendar.MONTH, params.month)
+    localeDependentUtcCalendar.set(Calendar.DAY_OF_MONTH, 1)
+    dayOfWeekStart = localeDependentUtcCalendar.get(Calendar.DAY_OF_WEEK)
+    weekStart = localeDependentUtcCalendar.firstDayOfWeek
+    monthHeaderString = controller?.getLocalizedDate(localeDependentUtcCalendar.time, MONTH_HEADLINE_PATTERN) ?: ""
 
-    weekStart = calendar.firstDayOfWeek
-
-    numberOfCells = getDaysInMonth(params.month, params.year)
-    for (i in 0 until numberOfCells) {
+    numberOfDaysInMonth = getDaysInMonth(params.month, params.year)
+    for (i in 0 until numberOfDaysInMonth - getNonDrawnDaysOffset()) {
       val day = i + 1
       if (controller?.isToday(params.year, params.month, day) == true) {
         hasToday = true
@@ -202,6 +206,26 @@ internal class MonthView @JvmOverloads constructor(
       }
     }
     numberOfRows = calculateNumRows()
+  }
+
+  @VisibleForTesting
+  internal fun getNonDrawnDaysOffset(): Int {
+    controller?.let {
+      val shouldApplyOffset =
+        calendarDrawingParams.year == it.startDate.year && calendarDrawingParams.month == it.startDate.month && it.startDate.day > numberOfDaysInAWeek
+      if (shouldApplyOffset) {
+        localeDependentUtcCalendar.set(Calendar.YEAR, it.startDate.year)
+        localeDependentUtcCalendar.set(Calendar.MONTH, it.startDate.month)
+        localeDependentUtcCalendar.set(Calendar.DAY_OF_MONTH, it.startDate.day)
+        while (localeDependentUtcCalendar.get(Calendar.DAY_OF_WEEK) != localeDependentUtcCalendar.firstDayOfWeek) {
+          localeDependentUtcCalendar.add(Calendar.DATE, -1)
+        }
+        localeDependentUtcCalendar.add(Calendar.DATE, -1)
+
+        return localeDependentUtcCalendar.get(Calendar.DAY_OF_MONTH)
+      }
+    }
+    return 0
   }
 
   fun reuse() {
@@ -213,20 +237,19 @@ internal class MonthView @JvmOverloads constructor(
     return calendarDrawingParams.year
   }
 
-  private fun drawMonthTitle(controller: BpkCalendarController, canvas: Canvas) {
-    val dayWidthHalf = viewWidth / (numberOfDays * 3)
+  private fun drawMonthTitle(canvas: Canvas) {
+    val dayWidthHalf = viewWidth / (numberOfDaysInAWeek * 3)
     val monthTitleX = (dayWidthHalf).toFloat()
     val monthTitleY = ((monthHeaderSize) / 2 + monthLabelTextSize / 3).toFloat()
-    val monthHeaderString = controller.getLocalizedDate(calendar.time, MONTH_HEADLINE_PATTERN)
 
     drawText(canvas, monthHeaderString, monthTitleX, monthTitleY, monthTitlePaint)
   }
 
   private fun drawDaysInMonth(controller: BpkCalendarController, canvas: Canvas) {
     var y = (rowHeight + miniDayNumberTextSize) / 2 + monthHeaderSize
-    val dayWidthHalf = (viewWidth) / (numberOfDays * 2.0f)
+    val dayWidthHalf = (viewWidth) / (numberOfDaysInAWeek * 2.0f)
     var j = findDayOffset()
-    for (dayNumber in 1..numberOfCells) {
+    for (dayNumber in (getNonDrawnDaysOffset() + 1)..numberOfDaysInMonth) {
       val x = ((2 * j + 1) * dayWidthHalf).toInt()
 
       val yRelativeToDay = (rowHeight + miniDayNumberTextSize) / 2
@@ -238,13 +261,22 @@ internal class MonthView @JvmOverloads constructor(
 
       val calendarDay = CalendarDay(calendarDrawingParams.year, calendarDrawingParams.month, dayNumber)
 
-      when (controller.selectionType) {
-        SelectionType.SINGLE -> drawDayCellForSingle(controller, canvas, calendarDay, x, y, stopY)
-        SelectionType.RANGE -> drawDayCellForRange(controller, canvas, calendarDay, x, y, startX, stopX, startY, stopY)
-      }
+      val isOutOfRange = isOutOfRange(calendarDay)
+      drawDayCellForRange(
+        controller,
+        canvas,
+        calendarDay,
+        x,
+        y,
+        startX,
+        stopX,
+        startY,
+        stopY,
+        isOutOfRange
+      )
 
       j++
-      if (j == numberOfDays) {
+      if (j == numberOfDaysInAWeek) {
         j = 0
         y += rowHeight
       }
@@ -264,69 +296,6 @@ internal class MonthView @JvmOverloads constructor(
     }
   }
 
-  private fun drawDayCellForSingle(
-    controller: BpkCalendarController,
-    canvas: Canvas,
-    calendarDay: CalendarDay,
-    x: Int,
-    y: Int,
-    stopY: Int
-  ) {
-    var overrideTextColor: Int? = null
-
-    val isOutOfRange = isOutOfRange(calendarDay)
-    val rowPadding = if (isColoredCalendar()) (rowHeight * 0.1).toInt() else 0
-
-    if (!isOutOfRange) {
-      val type = controller.selectedRange.getDrawType(calendarDay)
-      when (type) {
-        CalendarRange.DrawType.SELECTED -> {
-          selectedCirclePaint.color =
-            if (isColoredCalendar() && coloredCirclePaints.keys.contains(calendarDay)) coloredCirclePaints.getValue(calendarDay).color else selectedDayCircleFillColor
-
-          overrideTextColor = if (isColoredCalendar()) null else Color.WHITE
-          selectedCirclePaint.style = Paint.Style.FILL
-
-          drawCircle(
-            canvas,
-            x,
-            y - miniDayNumberTextSize / 3,
-            selectedDayCircleRadius - rowPadding,
-            selectedCirclePaint
-          )
-
-          if (isColoredCalendar()) {
-            drawCircle(
-              canvas,
-              x,
-              y - miniDayNumberTextSize / 3,
-              selectedDayCircleRadius - rowPadding - sameDayCircleStrokeWidth,
-              backgroundPaint
-            )
-          }
-        }
-        CalendarRange.DrawType.NONE -> {
-          drawColoredSmallCircle(calendarDay, canvas, x, stopY, rowPadding)
-        }
-      }
-    }
-    if (hasToday && today == calendarDay.day) {
-      if (isColoredCalendar()) {
-        overrideTextColor = selectedDayCircleFillColor
-      } else {
-        drawCircle(canvas, x, y - miniDayNumberTextSize / 3, selectedDayCircleRadius - rowPadding, todayCirclePaint)
-      }
-    }
-
-    monthNumberPaint.color = when {
-      isOutOfRange -> disabledTextColor
-      overrideTextColor != null -> overrideTextColor
-      else -> defaultTextColor
-    }
-
-    drawText(canvas, String.format(controller.locale, "%d", calendarDay.day), x.toFloat(), y.toFloat(), monthNumberPaint)
-  }
-
   private fun drawDayCellForRange(
     controller: BpkCalendarController,
     canvas: Canvas,
@@ -336,11 +305,11 @@ internal class MonthView @JvmOverloads constructor(
     startX: Int,
     stopX: Int,
     startY: Int,
-    stopY: Int
+    stopY: Int,
+    isOutOfRange: Boolean
   ) {
     var overrideTextColor: Int? = null
 
-    val isOutOfRange = isOutOfRange(calendarDay)
     val rowPadding = if (isColoredCalendar()) (rowHeight * 0.1).toInt() else 0
 
     if (!isOutOfRange) {
@@ -348,15 +317,15 @@ internal class MonthView @JvmOverloads constructor(
       when (type) {
         CalendarRange.DrawType.SELECTED -> {
           selectedCirclePaint.color =
-            if (isColoredCalendar() && coloredCirclePaints.keys.contains(calendarDay)) coloredCirclePaints.getValue(calendarDay).color else selectedDayCircleFillColor
+            if (isColoredCalendar() && coloredSelectedPaints.keys.contains(calendarDay)) coloredSelectedPaints.getValue(calendarDay).color else selectedDayCircleFillColor
           if (controller.selectedRange.isRange && !controller.selectedRange.isOnTheSameDate) {
             val paddingX = (stopX - startX) / 2
             drawEdgeCircles(canvas, calendarDay, controller.selectedRange, paddingX, rowPadding, x, y)
             val nextDay = calendarDay.addDays(1)
             if (controller.selectedRange.getDrawType(nextDay) != CalendarRange.DrawType.NONE) {
-              drawRect(canvas, startX + paddingX, startY + rowPadding, stopX, stopY - rowPadding)
+              drawRect(canvas, startX - 1 + paddingX, startY + rowPadding, stopX + 1, stopY - rowPadding)
             } else {
-              drawRect(canvas, startX, startY + rowPadding, stopX - paddingX, stopY - rowPadding)
+              drawRect(canvas, startX - 1, startY + rowPadding, stopX - paddingX + 1, stopY - rowPadding)
             }
           }
 
@@ -486,11 +455,19 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   private fun findDayOffset() =
-    (if (dayOfWeekStart < weekStart) dayOfWeekStart + numberOfDays else dayOfWeekStart) - weekStart
+    if (getNonDrawnDaysOffset() >= numberOfDaysInAWeek) {
+      0
+    } else {
+      var dayOffset = dayOfWeekStart - weekStart
+      if (dayOfWeekStart < weekStart) {
+        dayOffset += numberOfDaysInAWeek
+      }
+      dayOffset
+    }
 
   private fun getDayFromLocation(x: Float, y: Float): Int {
     val day = getInternalDayFromLocation(x, y)
-    return if (day < 1 || day > numberOfCells) -1 else day
+    return if (day < 1 || day > numberOfDaysInMonth) -1 else day
   }
 
   private fun getInternalDayFromLocation(x: Float, y: Float): Int {
@@ -498,9 +475,9 @@ internal class MonthView @JvmOverloads constructor(
       return -1
     }
     val row = (y - monthHeaderSize).toInt() / rowHeight
-    val column = (x * numberOfDays / viewWidth).toInt()
+    val column = (x * numberOfDaysInAWeek / viewWidth).toInt()
     var day = column - findDayOffset() + 1
-    day += row * numberOfDays
+    day += row * numberOfDaysInAWeek + getNonDrawnDaysOffset()
     return day
   }
 
@@ -556,10 +533,14 @@ internal class MonthView @JvmOverloads constructor(
     }
 
   private fun calculateNumRows(): Int {
-    val offset = findDayOffset()
-    val dividend = (offset + numberOfCells) / numberOfDays
-    val remainder = (offset + numberOfCells) % numberOfDays
-    return dividend + if (remainder > 0) 1 else 0
+    return if (getNonDrawnDaysOffset() >= numberOfDaysInAWeek) {
+      (numberOfDaysInMonth - getNonDrawnDaysOffset()) / numberOfDaysInAWeek + 1
+    } else {
+      val offset = findDayOffset()
+      val dividend = (offset + numberOfDaysInMonth) / numberOfDaysInAWeek
+      val remainder = (offset + numberOfDaysInMonth) % numberOfDaysInAWeek
+      dividend + if (remainder > 0) 1 else 0
+    }
   }
 
   private fun isColoredCalendar() = calendarDrawingParams.calendarColoring != null
@@ -578,15 +559,18 @@ internal class MonthView @JvmOverloads constructor(
   }
 }
 
-internal fun CalendarDrawingParams.toDrawingPaintMap(): Map<CalendarDay, Paint> {
+internal fun CalendarDrawingParams.toDrawingPaintMap(isSelectedColor: Boolean): Map<CalendarDay, Paint> {
   return mutableMapOf<CalendarDay, Paint>().also { resultMap ->
     this.calendarColoring?.coloredBuckets?.forEach { bucket ->
-      val paint = Paint().apply {
-        style = Style.FILL_AND_STROKE
-        color = bucket.color
-      }
-      bucket.days.forEach { day ->
-        resultMap[day] = paint
+      val bucketColor = if (isSelectedColor) bucket.selectedColor else bucket.color
+      if (bucketColor != null) {
+        val paint = Paint().apply {
+          style = Style.FILL_AND_STROKE
+          color = bucketColor
+        }
+        bucket.days.forEach { day ->
+          resultMap[day] = paint
+        }
       }
     }
   }.toMap()
