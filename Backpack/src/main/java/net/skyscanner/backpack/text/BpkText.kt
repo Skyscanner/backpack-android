@@ -5,19 +5,20 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
+import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
-import android.graphics.Typeface
 
-open class BpkText(
+open class BpkText @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet?,
-  defStyleAttr: Int
+  attrs: AttributeSet? = null,
+  defStyleAttr: Int = 0
 ) : AppCompatTextView(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
 
   enum class Weight {
@@ -54,6 +55,8 @@ open class BpkText(
       setup()
     }
 
+  var font: Typeface? = null
+
   /**
    * Sets the text style to emphasized.
    *
@@ -80,16 +83,12 @@ open class BpkText(
     XXXL to arrayOf(R.style.bpkTextXxxl, R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxlHeavy)
   )
 
-  constructor(context: Context) : this(context, null)
-  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.style.bpkTextBase)
-
   init {
-    initialize(context, attrs, defStyleAttr)
+    initialize(attrs, defStyleAttr)
     setup()
   }
 
-  private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
-
+  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     val a: TypedArray = context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkText,
@@ -126,20 +125,20 @@ open class BpkText(
       setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
     }
 
-    val fontBase = a.getString(R.styleable.BpkText_fontFamilyBase)
-    val fontEmphasized = a.getString(R.styleable.BpkText_fontFamilyEmphasized)
-    val fontHeavy = a.getString(R.styleable.BpkText_fontFamilyEmphasized)
-
-    var tf = Typeface.createFromAsset(context.assets, "sans-serif")
-
-    if (fontEmphasized != null && weightArg == Weight.EMPHASIZED.ordinal) {
-      tf = Typeface.createFromAsset(context.assets, fontEmphasized)
-    } else if (fontHeavy != null && weightArg == Weight.HEAVY.ordinal) {
-      tf = Typeface.createFromAsset(context.assets, fontHeavy)
-    } else if (fontHeavy != null && weightArg == Weight.HEAVY.ordinal) {
-      tf = Typeface.createFromAsset(context.assets, fontBase)
+    val t = TypedValue()
+    if (context.theme.resolveAttribute(R.attr.bpkTextFont, t, true)) {
+      val withPrimaryStyle = android.view.ContextThemeWrapper(context, t.resourceId)
+      val styledAttrs = withPrimaryStyle.obtainStyledAttributes(attrs, R.styleable.BpkText)
+      val fontBase = styledAttrs.getString(R.styleable.BpkText_fontFamilyBase)
+      val fontEmphasized = styledAttrs.getString(R.styleable.BpkText_fontFamilyEmphasized)
+      val fontHeavy = styledAttrs.getString(R.styleable.BpkText_fontFamilyHeavy)
+      styledAttrs.recycle()
+      this.font = when (weight) {
+        Weight.EMPHASIZED -> FontCache[fontEmphasized, context]
+        Weight.HEAVY -> FontCache[fontHeavy, context]
+        Weight.NORMAL -> FontCache[fontBase, context]
+      }
     }
-    typeface = tf
     a.recycle()
   }
 
@@ -163,5 +162,6 @@ open class BpkText(
     }
 
     TextViewCompat.setTextAppearance(this, textAppearance)
+    this.typeface = font
   }
 }

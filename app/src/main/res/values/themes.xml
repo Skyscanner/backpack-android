@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- London theme-->
+
   <style name="LondonTheme" parent="AppTheme">
     <item name="colorPrimary">#ED1B28</item>
     <item name="bpkThemeOverlay">@style/LondonTheme.BpkOverlay</item>
-  </style>
-
-  <style name="DohaTheme" parent="AppTheme">
-    <item name="colorPrimary">#9B104C</item>
-    <item name="bpkThemeOverlay">@style/DohaTheme.BpkOverlay</item>
   </style>
 
   <style name="LondonTheme.BpkOverlay" parent="">
@@ -15,33 +12,17 @@
     <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
-    <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
+    <item name="bpkTextFont">@style/LondonThemeText</item>
   </style>
 
-  <style name="DohaTheme.BpkOverlay" parent="">
-    <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
-    <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
-    <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
-    <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
-    <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
-  </style>
-
-  <style name="DohaThemeBpkSwitch" parent="">
-    <item name="switchPrimaryColor">@color/bpkYellow900</item>
+  <style name="LondonThemeText">
+    <item name="fontFamilyBase">ShadowsIntoLight</item>
+    <item name="fontFamilyHeavy">ShadowsIntoLight</item>
+    <item name="fontFamilyEmphasized">ShadowsIntoLight</item>
   </style>
 
   <style name="LondonThemeBpkSwitch" parent="">
     <item name="switchPrimaryColor">#ED1B28</item>
-  </style>
-
-  <style name="DohaThemeButtonPrimary">
-    <item name="buttonBackgroundColor">#ffb300</item>
-    <item name="buttonTextColor">@color/bpkWhite</item>
-  </style>
-  <style name="DohaThemeButtonSecondary">
-    <item name="buttonBackgroundColor">@color/bpkWhite</item>
-    <item name="buttonTextColor">#9B104C</item>
-    <item name="buttonStrokeColor">#B1121C</item>
   </style>
 
   <style name="LondonThemeButtonPrimary">
@@ -58,14 +39,48 @@
     <item name="spinnerColor">?colorPrimary</item>
   </style>
 
-  <style name="DohaThemeSpinnerPrimary">
-    <item name="spinnerColor">?colorPrimary</item>
+    <style name="LondonThemeCalendar">
+      <item name="calendarDateSelectedBackgroundColor">#D11622</item>
+      <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
+      <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
+    </style>
+
+  <style name="DohaTheme" parent="AppTheme">
+    <item name="colorPrimary">#9B104C</item>
+    <item name="bpkThemeOverlay">@style/DohaTheme.BpkOverlay</item>
   </style>
 
-  <style name="LondonThemeCalendar">
-    <item name="calendarDateSelectedBackgroundColor">#D11622</item>
-    <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
-    <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
+  <style name="DohaTheme.BpkOverlay" parent="">
+    <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
+    <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
+    <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
+    <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
+    <item name="bpkTextFont">@style/DohaThemeText</item>
+    <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
+  </style>
+
+  <style name="DohaThemeBpkSwitch" parent="">
+    <item name="switchPrimaryColor">@color/bpkYellow900</item>
+  </style>
+
+  <style name="DohaThemeText" >
+    <item name="fontFamilyBase">ShadowsIntoLight</item>
+    <item name="fontFamilyHeavy">ShadowsIntoLight</item>
+    <item name="fontFamilyEmphasized">ShadowsIntoLight</item>
+  </style>
+
+  <style name="DohaThemeButtonPrimary">
+    <item name="buttonBackgroundColor">#ffb300</item>
+    <item name="buttonTextColor">@color/bpkWhite</item>
+  </style>
+  <style name="DohaThemeButtonSecondary">
+    <item name="buttonBackgroundColor">@color/bpkWhite</item>
+    <item name="buttonTextColor">#9B104C</item>
+    <item name="buttonStrokeColor">#B1121C</item>
+  </style>
+
+  <style name="DohaThemeSpinnerPrimary">
+    <item name="spinnerColor">?colorPrimary</item>
   </style>
 
   <style name="DohaThemeCalendar">

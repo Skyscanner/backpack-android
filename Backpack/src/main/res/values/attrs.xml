@@ -46,7 +46,7 @@
     <attr name="drawableTint" format="reference" />
     <attr name="fontFamilyBase" format="string"/>
     <attr name="fontFamilyEmphasized" format="string"/>
-
+    <attr name="fontFamilyHeavy" format="string"/>
   </declare-styleable>
 
   <declare-styleable name="BpkPanel">
@@ -108,5 +108,5 @@
   <attr name="bpkButtonOutlineStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
-
+  <attr name="bpkTextFont" format="reference"/>
 </resources>
