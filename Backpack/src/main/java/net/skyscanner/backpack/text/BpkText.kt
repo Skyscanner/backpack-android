@@ -11,12 +11,14 @@ import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
+import android.graphics.Typeface
 
 open class BpkText(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int
-) : AppCompatTextView(context, attrs, defStyleAttr) {
+) : AppCompatTextView(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
 
   enum class Weight {
     NORMAL,
@@ -123,6 +125,21 @@ open class BpkText(
     if (drawableTint != null) {
       setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
     }
+
+    val fontBase = a.getString(R.styleable.BpkText_fontFamilyBase)
+    val fontEmphasized = a.getString(R.styleable.BpkText_fontFamilyEmphasized)
+    val fontHeavy = a.getString(R.styleable.BpkText_fontFamilyEmphasized)
+
+    var tf = Typeface.createFromAsset(context.assets, "sans-serif")
+
+    if (fontEmphasized != null && weightArg == Weight.EMPHASIZED.ordinal) {
+      tf = Typeface.createFromAsset(context.assets, fontEmphasized)
+    } else if (fontHeavy != null && weightArg == Weight.HEAVY.ordinal) {
+      tf = Typeface.createFromAsset(context.assets, fontHeavy)
+    } else if (fontHeavy != null && weightArg == Weight.HEAVY.ordinal) {
+      tf = Typeface.createFromAsset(context.assets, fontBase)
+    }
+    typeface = tf
     a.recycle()
   }
 

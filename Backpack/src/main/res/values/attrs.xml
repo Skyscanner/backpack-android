@@ -44,6 +44,9 @@
       <enum name="heavy" value="2" />
     </attr>
     <attr name="drawableTint" format="reference" />
+    <attr name="fontFamilyBase" format="string"/>
+    <attr name="fontFamilyEmphasized" format="string"/>
+
   </declare-styleable>
 
   <declare-styleable name="BpkPanel">
@@ -67,7 +70,6 @@
     <attr name="buttonBackgroundColor" format="color" />
     <attr name="buttonTextColor" format="color" />
     <attr name="buttonStrokeColor" format="color" />
-
   </declare-styleable>
 
   <declare-styleable name="BpkCardView">
