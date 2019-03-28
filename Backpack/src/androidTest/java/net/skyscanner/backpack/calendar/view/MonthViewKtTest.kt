@@ -41,7 +41,7 @@ class MonthViewKtTest {
     )
     )
 
-    val drawingPaintMap = calendarDrawingParams.toDrawingPaintMap()
+    val drawingPaintMap = calendarDrawingParams.toDrawingPaintMap(isSelectedColor = false)
 
     assertEquals(drawingPaintMap.getValue(day_group1_1).color, group1Color)
     assertEquals(drawingPaintMap.getValue(day_group1_2).color, group1Color)
