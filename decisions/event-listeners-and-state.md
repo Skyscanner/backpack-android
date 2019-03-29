@@ -72,7 +72,7 @@ In the example above `setOnClickListener` will be called by the super class befo
 
 **Flexibility:**
 
-Because with most listeners only one can be added (setListener vs addListener) if users need
+Because with most listeners only one can be added (`setListener` vs `addListener`) if users need
 to add a custom listener they will unintentionally override the behaviour we had defined for it. This can be avoided if we override the listener function and always add the behaviour, but this will make it impossible for users to disable this behaviour in certain occasions.
 
 ## Anything else
