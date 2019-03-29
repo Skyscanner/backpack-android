@@ -5,9 +5,10 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import java.text.SimpleDateFormat
+import org.threeten.bp.LocalDate
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.temporal.WeekFields
 import java.util.Locale
-import java.util.Calendar
 
 internal class WeekdayHeaderView @JvmOverloads constructor(
   context: Context,
@@ -30,25 +31,21 @@ internal class WeekdayHeaderView @JvmOverloads constructor(
   }
 
   internal fun initializeWithLocale(locale: Locale) {
-    val simpleDateFormat = SimpleDateFormat("ccc", locale)
-    val calendar = Calendar.getInstance(locale)
-    val weekStart = calendar.firstDayOfWeek
-    val numberOfDaysInWeek = 7
+    val formatter = DateTimeFormatter.ofPattern("ccc", locale)
+    dayOfWeek(locale, formatter, 1)
 
-    for (i in 0 until numberOfDaysInWeek) {
-      val calendarDay = (i + weekStart) % numberOfDaysInWeek
-      calendar.set(Calendar.DAY_OF_WEEK, calendarDay)
-      val calendarDayName = simpleDateFormat.format(calendar.time)
+    firstWeekdayView.text = dayOfWeek(locale, formatter, 1)
+    secondWeekdayView.text = dayOfWeek(locale, formatter, 2)
+    thirdWeekdayView.text = dayOfWeek(locale, formatter, 3)
+    fourthWeekdayView.text = dayOfWeek(locale, formatter, 4)
+    fifthWeekdayView.text = dayOfWeek(locale, formatter, 5)
+    sixthWeekdayView.text = dayOfWeek(locale, formatter, 6)
+    seventhWeekdayView.text = dayOfWeek(locale, formatter, 7)
+  }
 
-      when (i) {
-        0 -> firstWeekdayView.text = calendarDayName
-        1 -> secondWeekdayView.text = calendarDayName
-        2 -> thirdWeekdayView.text = calendarDayName
-        3 -> fourthWeekdayView.text = calendarDayName
-        4 -> fifthWeekdayView.text = calendarDayName
-        5 -> sixthWeekdayView.text = calendarDayName
-        6 -> seventhWeekdayView.text = calendarDayName
-      }
-    }
+  private fun dayOfWeek(locale: Locale, formatter: DateTimeFormatter, dayOfWeekIndex: Long): String {
+    val fieldISO = WeekFields.of(locale).dayOfWeek()
+    val dayOfWeek = LocalDate.now().with(fieldISO, dayOfWeekIndex)
+    return formatter.format(dayOfWeek)
   }
 }

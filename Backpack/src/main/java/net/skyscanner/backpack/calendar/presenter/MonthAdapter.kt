@@ -21,28 +21,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView.LayoutParams
 import android.widget.BaseAdapter
-import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.view.MonthView
+import org.threeten.bp.LocalDate
 
 internal class MonthAdapter(
   private val context: Context,
   private val controller: BpkCalendarController
 ) : BaseAdapter(), MonthView.OnDayClickListener {
 
-    private var selectedDay: CalendarDay? = null
+    private var selectedDay: LocalDate? = null
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun onDayClick(view: MonthView?, day: CalendarDay) {
+    override fun onDayClick(view: MonthView?, day: LocalDate) {
         onDayTapped(day)
     }
 
   override fun getCount() =
     (controller.endDate.year - controller.startDate.year) * MONTHS_IN_YEAR +
-      controller.endDate.month - controller.startDate.month + 1
+      controller.endDate.month.value - controller.startDate.month.value + 1
 
     override fun getItem(position: Int) = null
 
@@ -64,11 +64,11 @@ internal class MonthAdapter(
             view.onDayClickListener = this@MonthAdapter
         }
 
-        val positionWithStart = position + controller.startDate.month
-        val month = positionWithStart % MONTHS_IN_YEAR
+        val positionWithStart = position + controller.startDate.month.value - 1
+        val month = positionWithStart % MONTHS_IN_YEAR + 1
         val year = positionWithStart / MONTHS_IN_YEAR + controller.startDate.year
         val selectedDay = selectedDay?.let {
-          if (isSelectedDayInMonth(it, year, month)) it.day else null
+          if (isSelectedDayInMonth(it, year, month)) it.dayOfMonth else null
         }
 
         view.reuse()
@@ -83,10 +83,10 @@ internal class MonthAdapter(
         it.controller = controller
     }
 
-    private fun isSelectedDayInMonth(calendarDay: CalendarDay, year: Int, month: Int) =
-        calendarDay.year == year && calendarDay.month == month
+    private fun isSelectedDayInMonth(calendarDay: LocalDate, year: Int, month: Int) =
+        calendarDay.year == year && calendarDay.month.value == month
 
-    private fun onDayTapped(day: CalendarDay) {
+    private fun onDayTapped(day: LocalDate) {
         controller.onDayOfMonthSelected(day)
         selectedDay = day
     }

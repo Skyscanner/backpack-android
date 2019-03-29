@@ -2,26 +2,26 @@ package net.skyscanner.backpack.calendar.view
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.calendar.model.CalendarColoring
-import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.ColoredBucket
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.threeten.bp.LocalDate
 
 @RunWith(AndroidJUnit4::class)
 class MonthViewKtTest {
 
   @Test
   fun givenCalendarColoring_whenConvertedToDrawingPaintMap_thenCorrectColors() {
-    val day_group1_1 = CalendarDay(2019, 0, 1)
-    val day_group1_2 = CalendarDay(2019, 0, 2)
-    val day_group2_1 = CalendarDay(2019, 1, 1)
-    val day_group2_2 = CalendarDay(2019, 1, 2)
+    val day_group1_1 = LocalDate.of(2019, 1, 1)
+    val day_group1_2 = LocalDate.of(2019, 1, 2)
+    val day_group2_1 = LocalDate.of(2019, 2, 1)
+    val day_group2_2 = LocalDate.of(2019, 2, 2)
     val group1Color = 1
     val group2Color = 2
     val calendarDrawingParams = CalendarDrawingParams(
-      2019, 0, 1, CalendarColoring(
+      2019, 1, 1, CalendarColoring(
       setOf(
         ColoredBucket(
           group1Color,

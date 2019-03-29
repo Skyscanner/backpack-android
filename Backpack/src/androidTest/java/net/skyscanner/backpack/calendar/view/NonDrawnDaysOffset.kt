@@ -2,7 +2,6 @@ package net.skyscanner.backpack.calendar.view
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
@@ -10,6 +9,7 @@ import net.skyscanner.backpack.calendar.presenter.SelectionType
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.threeten.bp.LocalDate
 import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
@@ -19,7 +19,7 @@ class NonDrawnDaysOffset {
   fun givenFirstFewDaysInMonth_whenGetOffset_thenNoOffset() {
     val monthView = givenMonthView(
       locale = Locale.US,
-      startDate = CalendarDay.of("2019-01-02")!!,
+      startDate = LocalDate.of(2019, 1, 2),
       drawMonth = 2
     )
 
@@ -32,7 +32,7 @@ class NonDrawnDaysOffset {
   fun givenMidMonthAndSunWeekStart_whenGetOffset_thenOffsetToPreviousSat() {
     val monthView = givenMonthView(
       locale = Locale.US,
-      startDate = CalendarDay.of("2019-02-13")!!,
+      startDate = LocalDate.of(2019, 2, 13),
       drawMonth = 2
     )
 
@@ -45,7 +45,7 @@ class NonDrawnDaysOffset {
   fun givenMidMonthAndMonWeekStart_whenGetOffset_thenOffsetToPreviousSun() {
     val monthView = givenMonthView(
       locale = Locale.GERMANY,
-      startDate = CalendarDay.of("2019-02-13")!!,
+      startDate = LocalDate.of(2019, 2, 13),
       drawMonth = 2
     )
 
@@ -58,7 +58,7 @@ class NonDrawnDaysOffset {
   fun givenLastDayInMonthOnSunAndSunWeekStart_whenGetOffset_thenOffsetToPreviousSun() {
     val monthView = givenMonthView(
       locale = Locale.US,
-      startDate = CalendarDay.of("2019-03-31")!!,
+      startDate = LocalDate.of(2019, 3, 31),
       drawMonth = 3
     )
 
@@ -71,7 +71,7 @@ class NonDrawnDaysOffset {
   fun givenLastDayInMonthOnSunAndMonWeekStart_whenGetOffset_thenOffsetToPreviousMon() {
     val monthView = givenMonthView(
       locale = Locale.GERMANY,
-      startDate = CalendarDay.of("2019-03-31")!!,
+      startDate = LocalDate.of(2019, 3, 31),
       drawMonth = 3
     )
 
@@ -84,7 +84,7 @@ class NonDrawnDaysOffset {
   fun givenOtherMonthIsDrawn_whenGetOffset_thenNoOffset() {
     val monthView = givenMonthView(
       locale = Locale.GERMANY,
-      startDate = CalendarDay.of("2019-03-31")!!,
+      startDate = LocalDate.of(2019, 3, 31),
       drawMonth = 4
     )
 
@@ -93,7 +93,7 @@ class NonDrawnDaysOffset {
     Assert.assertEquals(0, offset)
   }
 
-  private fun givenMonthView(locale: Locale, startDate: CalendarDay, drawMonth: Int): MonthView {
+  private fun givenMonthView(locale: Locale, startDate: LocalDate, drawMonth: Int): MonthView {
     val context = InstrumentationRegistry.getInstrumentation().targetContext
     val monthView = MonthView(context = context)
 
@@ -102,12 +102,12 @@ class NonDrawnDaysOffset {
         get() {
           return locale
         }
-      override val startDate: CalendarDay
+      override val startDate: LocalDate
         get() {
           return startDate
         }
     }
-    monthView.calendarDrawingParams = CalendarDrawingParams(2019, drawMonth - 1, null, null)
+    monthView.calendarDrawingParams = CalendarDrawingParams(2019, drawMonth, null, null)
     return monthView
   }
 
@@ -118,17 +118,5 @@ class NonDrawnDaysOffset {
     override fun onRangeSelected(range: CalendarSelection) {
       // unused
     }
-  }
-
-  private fun CalendarDay.Companion.of(str: String): CalendarDay? {
-    val yearMonthDay = str.split("-")
-    if (yearMonthDay.size == 3) {
-      return CalendarDay(
-        yearMonthDay[0].toInt(),
-        yearMonthDay[1].toInt() - 1,
-        yearMonthDay[2].toInt()
-      )
-    }
-    return null
   }
 }

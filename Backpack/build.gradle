@@ -29,6 +29,7 @@ dependencies {
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
   implementation "androidx.cardview:cardview:$rootProject.ext.androidx"
+  implementation "org.threeten:threetenbp:$rootProject.ext.threetenbp"
   androidTestImplementation "androidx.test.ext:junit:1.0.0"
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
   androidTestImplementation 'androidx.test:rules:1.1.1'

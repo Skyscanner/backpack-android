@@ -11,7 +11,6 @@ import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar.model.CalendarColoring
-import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.SingleDay
@@ -25,20 +24,21 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.threeten.bp.LocalDate
 import java.util.Locale
 
 private class BpkCalendarControllerImpl(
   override val isRtl: Boolean,
   override val locale: Locale,
-  private val initialStartDate: CalendarDay? = null,
-  private val initialEndDate: CalendarDay? = null,
+  private val initialStartDate: LocalDate? = null,
+  private val initialEndDate: LocalDate? = null,
   override val selectionType: SelectionType = SelectionType.RANGE,
   override val calendarColoring: CalendarColoring? = null
 ) : BpkCalendarController(selectionType) {
-  override val startDate: CalendarDay
+  override val startDate: LocalDate
     get() = initialStartDate ?: super.startDate
 
-  override val endDate: CalendarDay
+  override val endDate: LocalDate
     get() = initialEndDate ?: super.endDate
 
   override fun onRangeSelected(range: CalendarSelection) {}
@@ -69,8 +69,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
-      getDate(2019, 0, 2),
-      getDate(2019, 11, 31))
+      LocalDate.of(2019, 0, 2),
+      LocalDate.of(2019, 11, 31)
+    )
 
     calendar.setController(controller)
     snap(wrapWithBackground(calendar))
@@ -80,8 +81,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
   @FlakyTest
   fun screenshotTestColoredCalendarDefault() {
     val calendar = BpkCalendar(testContext)
-    val initialStartDate = getDate(2019, 0, 2)
-    val initialEndDate = getDate(2019, 11, 31)
+    val initialStartDate = LocalDate.of(2019, 0, 2)
+    val initialEndDate = LocalDate.of(2019, 11, 31)
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
@@ -101,8 +102,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
-      getDate(2017, 0, 2),
-      getDate(2017, 11, 31))
+      LocalDate.of(2017, 0, 2),
+      LocalDate.of(2017, 11, 31)
+    )
 
     calendar.setController(controller)
     snap(wrapWithBackground(calendar))
@@ -115,8 +117,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
-      getDate(2019, 0, 2),
-      getDate(2019, 11, 31))
+      LocalDate.of(2019, 0, 2),
+      LocalDate.of(2019, 11, 31)
+    )
 
     calendar.setController(controller)
     val wrapped = wrapWithBackground(calendar)
@@ -144,8 +147,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
-      getDate(2019, 0, 2),
-      getDate(2019, 11, 31))
+      LocalDate.of(2019, 0, 2),
+      LocalDate.of(2019, 11, 31)
+    )
 
     calendar.setController(controller)
     val wrapped = wrapWithBackground(calendar)
@@ -177,8 +181,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
-      getDate(2019, 0, 2),
-      getDate(2019, 11, 31))
+      LocalDate.of(2019, 0, 2),
+      LocalDate.of(2019, 11, 31)
+    )
 
     calendar.setController(controller)
     val wrapped = wrapWithBackground(calendar)
@@ -192,8 +197,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
   @FlakyTest
   fun screenshotTestColoredCalendarWithStartAndEndDateSelected() {
     val calendar = BpkCalendar(testContext)
-    val initialStartDate = getDate(2019, 0, 2)
-    val initialEndDate = getDate(2019, 11, 31)
+    val initialStartDate = LocalDate.of(2019, 0, 2)
+    val initialEndDate = LocalDate.of(2019, 11, 31)
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
@@ -218,8 +223,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
-      getDate(2019, 0, 2),
-      getDate(2019, 11, 31),
+      LocalDate.of(2019, 0, 2),
+      LocalDate.of(2019, 11, 31),
       SelectionType.SINGLE
     )
     calendar.setController(controller)
@@ -256,10 +261,11 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
-      getDate(2019, 0, 2),
-      getDate(2019, 11, 31))
+      LocalDate.of(2019, 0, 2),
+      LocalDate.of(2019, 11, 31)
+    )
     calendar.setController(controller)
-    controller.updateSelection(CalendarRange(CalendarDay(2019, 0, 4), CalendarDay(2019, 0, 9)))
+    controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9)))
     snap(wrapWithBackground(calendar))
   }
 
@@ -270,13 +276,13 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       false,
       Locale.UK,
-      getDate(2019, 0, 2),
-      getDate(2019, 11, 31),
+      LocalDate.of(2019, 0, 2),
+      LocalDate.of(2019, 11, 31),
       SelectionType.SINGLE
     )
 
     calendar.setController(controller)
-    controller.updateSelection(SingleDay(CalendarDay(2019, 0, 16)))
+    controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 16)))
     snap(wrapWithBackground(calendar))
   }
 
@@ -302,8 +308,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
         asyncScreenshot.record(wrapped)
       }
   }
-
-  private fun getDate(year: Int, month: Int, day: Int) = CalendarDay(year, month, day)
 
   private fun wrapWithBackground(view: View): FrameLayout {
     return FrameLayout(testContext).apply {
