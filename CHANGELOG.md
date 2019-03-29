@@ -2,6 +2,17 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 6.3.0
+
+**Fixed:**
+
+- BpkCalendar now works with `height=wrap_content`
+
+**Added:**
+
+- BpkSpinner
+  - Added theming support
+
 # 6.2.0
 
 **Added:**
