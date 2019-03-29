@@ -5,21 +5,23 @@
     <item name="bpkThemeOverlay">@style/LondonTheme.BpkOverlay</item>
   </style>
 
-  <style name="LondonTheme.BpkOverlay" parent="">
-    <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
-    <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
-    <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
-  </style>
-
   <style name="DohaTheme" parent="AppTheme">
     <item name="colorPrimary">#9B104C</item>
     <item name="bpkThemeOverlay">@style/DohaTheme.BpkOverlay</item>
   </style>
 
-  <style name="DohaTheme.BpkOverlay" parent="AppTheme">
+  <style name="LondonTheme.BpkOverlay" parent="">
+    <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
+    <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
+    <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
+    <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
+  </style>
+
+  <style name="DohaTheme.BpkOverlay" parent="">
     <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
     <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
+    <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
   </style>
 
   <style name="DohaThemeBpkSwitch" parent="">
@@ -48,6 +50,14 @@
     <item name="buttonBackgroundColor">@color/bpkWhite</item>
     <item name="buttonTextColor">#ED1B28</item>
     <item name="buttonStrokeColor">#5E072C</item>
+  </style>
+
+  <style name="LondonThemeSpinnerPrimary">
+    <item name="spinnerColor">?colorPrimary</item>
+  </style>
+
+  <style name="DohaThemeSpinnerPrimary">
+    <item name="spinnerColor">?colorPrimary</item>
   </style>
 
 </resources>
