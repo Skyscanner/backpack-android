@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.util
 
-import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
 import android.os.Build
 import androidx.annotation.RequiresApi
 import io.github.inflationx.viewpump.InflateResult
@@ -16,10 +17,13 @@ class BpkInterceptor : Interceptor {
     val highlightColor = 0x77ac650c
 
     if (view != null && isBpkView(view.javaClass)) {
-      if (view.background == null) {
-        view.background = ColorDrawable(highlightColor)
-      } else {
-        view.foreground = ColorDrawable(highlightColor)
+      val drawable = ShapeDrawable(RectShape())
+      drawable.paint.color = highlightColor
+      view.viewTreeObserver.addOnPreDrawListener {
+        drawable.setBounds(0, 0, view.width, view.height)
+        view.overlay.clear()
+        view.overlay.add(drawable)
+        true
       }
     }
     return result
