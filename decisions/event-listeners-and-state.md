@@ -68,7 +68,7 @@ class MyCustomChip {
 
 ```
 
-In the example above `setOnClickListener` will be called by the super class before the props and init block have been called in the child class. This can be very hard to identify, especially from a user perspective.
+In the example above `setOnClickListener` will be called by the super class before the props and `init block` have been called in the child class. This can be very hard to identify, especially from a user perspective.
 
 **Flexibility:**
 
