@@ -120,10 +120,38 @@ internal class MonthView @JvmOverloads constructor(
     Calendar.getInstance(TimeZone.getTimeZone("UTC"), controller!!.locale)
   }
 
+  private val themeableColors: Map<String, Int?> by lazy {
+    val ifInvalidNull = { res: Int -> if (res == -1) null else res }
+    val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
+    val selectedBackgroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor, -1)
+      .let(ifInvalidNull)
+
+    val selectedRangeBackgroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor, -1)
+      .let(ifInvalidNull)
+
+    val selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor, -1)
+      .let(ifInvalidNull)
+
+    a.recycle()
+
+    mapOf(
+      "selectedBackgroundColor" to selectedBackgroundColor,
+      "selectedRangeBackgroundColor" to selectedRangeBackgroundColor,
+      "selectedTextColor" to selectedTextColor
+    )
+  }
+
   private val defaultTextColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray900) }
   private val disabledTextColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray100) }
-  private val selectedDayCircleFillColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkBlue500) }
-  private val rangeColorNonColored: Int by lazy { ContextCompat.getColor(context, R.color.bpkBlue400) }
+  private val selectedTextColor: Int by lazy {
+    themeableColors["selectedTextColor"] ?: ContextCompat.getColor(context, R.color.bpkWhite)
+  }
+  private val selectedDayCircleFillColor: Int by lazy {
+    themeableColors["selectedBackgroundColor"] ?: ContextCompat.getColor(context, R.color.bpkBlue500)
+  }
+  private val rangeColorNonColored: Int by lazy {
+    themeableColors["selectedRangeBackgroundColor"] ?: ContextCompat.getColor(context, R.color.bpkBlue400)
+  }
   private val rangeColorColored: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray100) }
   private val rangeTextColorColored: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray700) }
   private val todayCircleColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray100) }
@@ -329,7 +357,7 @@ internal class MonthView @JvmOverloads constructor(
             }
           }
 
-          overrideTextColor = if (isColoredCalendar()) null else Color.WHITE
+          overrideTextColor = if (isColoredCalendar()) null else selectedTextColor
           if (controller.selectedRange.isOnTheSameDate) {
             selectedCirclePaint.alpha = 255
             drawSameDayCircles(
@@ -368,7 +396,7 @@ internal class MonthView @JvmOverloads constructor(
           drawRect(canvas, startX - 1, startY + rowPadding, stopX + 1, stopY - rowPadding)
           drawEdgeCircles(canvas, calendarDay, controller.selectedRange, halfCellWidth, rowPadding, x, y)
           drawColoredSmallCircle(calendarDay, canvas, x, stopY, rowPadding)
-          overrideTextColor = if (isColoredCalendar()) rangeTextColorColored else Color.WHITE
+          overrideTextColor = if (isColoredCalendar()) rangeTextColorColored else selectedTextColor
         }
         CalendarRange.DrawType.NONE -> {
           drawColoredSmallCircle(calendarDay, canvas, x, stopY, rowPadding)

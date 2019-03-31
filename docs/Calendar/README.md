@@ -65,4 +65,13 @@ Notice the selection type is set in the `BpkCalendarController` constructor thro
  
 When `selectionType` is `SelectionType.RANGE` the calendar will allow a date range. 
 When `selectionType` is `SelectionType.SINGLE_DAY` the calendar will allow a single date.
-In both cases, the handling of the selection will done in `onRangeSelected()` as in the example above.
+In both cases, the handling of the selection
+ will done in `onRangeSelected()` as in the example above.
+
+## Theme Props
+
+- `calendarDateSelectedBackgroundColor`
+- `calendarDateSelectedRangeBackgroundColor`
+- `calendarDateSelectedTextColor`
+
+Styles can be changed globally through `bpkCalendarStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
