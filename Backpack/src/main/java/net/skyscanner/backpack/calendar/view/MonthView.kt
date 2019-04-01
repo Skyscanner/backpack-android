@@ -186,10 +186,10 @@ internal class MonthView @JvmOverloads constructor(
     coloredCirclePaints = params.toDrawingPaintMap(isSelectedColor = false)
     coloredSelectedPaints = params.toDrawingPaintMap(isSelectedColor = true)
 
-    val calendar = LocalDate.of(params.year, params.month, 1)
-    dayOfWeekStart = calendar.dayOfWeek.value
-    weekStart = WeekFields.of(controller?.locale).firstDayOfWeek
-    monthHeaderString = controller?.getLocalizedDate(calendar, MONTH_HEADLINE_PATTERN) ?: ""
+    val localDate = LocalDate.of(params.year, params.month, 1)
+    dayOfWeekStart = localDate.dayOfWeek.value
+    weekStart = WeekFields.of(controller?.locale).firstDayOfWeek.value
+    monthHeaderString = controller?.getLocalizedDate(localDate, MONTH_HEADLINE_PATTERN) ?: ""
 
     numberOfDaysInMonth = getDaysInMonth(params.month, params.year)
     for (i in 0 until numberOfDaysInMonth - getNonDrawnDaysOffset()) {
@@ -442,11 +442,11 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   private fun findDayOffset() =
-    if (getNonDrawnDaysOffset() >= numberOfDaysInAWeek) {
+    if (getNonDrawnDaysOffset() + 1 >= numberOfDaysInAWeek) {
       0
     } else {
-      var dayOffset = dayOfWeekStart - weekStart.value
-      if (dayOfWeekStart < weekStart.value) {
+      var dayOffset = dayOfWeekStart - weekStart
+      if (dayOfWeekStart < weekStart) {
         dayOffset += numberOfDaysInAWeek
       }
       dayOffset
@@ -518,7 +518,7 @@ internal class MonthView @JvmOverloads constructor(
     const val DEFAULT_NUM_DAYS = 7
     const val DEFAULT_NUM_ROWS = 6
 
-    val DEFAULT_WEEK_START = DayOfWeek.MONDAY
+    val DEFAULT_WEEK_START = DayOfWeek.MONDAY.value
   }
 }
 
