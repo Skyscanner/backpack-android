@@ -66,7 +66,7 @@ Notice the selection type is set in the `BpkCalendarController` constructor thro
 When `selectionType` is `SelectionType.RANGE` the calendar will allow a date range. 
 When `selectionType` is `SelectionType.SINGLE_DAY` the calendar will allow a single date.
 In both cases, the handling of the selection
- will done in `onRangeSelected()` as in the example above.
+ will be done in `onRangeSelected()` as in the example above.
 
 ## Theme Props
 
