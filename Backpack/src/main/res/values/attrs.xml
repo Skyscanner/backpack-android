@@ -44,9 +44,9 @@
       <enum name="heavy" value="2" />
     </attr>
     <attr name="drawableTint" format="reference" />
-    <attr name="fontFamilyBase" format="string"/>
-    <attr name="fontFamilyEmphasized" format="string"/>
-    <attr name="fontFamilyHeavy" format="string"/>
+    <attr name="fontFamilyBase" format="reference"/>
+    <attr name="fontFamilyEmphasized" format="reference"/>
+    <attr name="fontFamilyHeavy" format="reference"/>
   </declare-styleable>
 
   <declare-styleable name="BpkPanel">

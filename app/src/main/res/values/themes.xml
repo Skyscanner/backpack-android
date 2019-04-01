@@ -16,9 +16,9 @@
   </style>
 
   <style name="LondonThemeText">
-    <item name="fontFamilyBase">ShadowsIntoLight</item>
-    <item name="fontFamilyHeavy">ShadowsIntoLight</item>
-    <item name="fontFamilyEmphasized">ShadowsIntoLight</item>
+    <item name="fontFamilyBase">@font/shadows_into_light</item>
+    <item name="fontFamilyHeavy">@font/shadows_into_light</item>
+    <item name="fontFamilyEmphasized">@font/shadows_into_light</item>
   </style>
 
   <style name="LondonThemeBpkSwitch" parent="">
@@ -64,9 +64,9 @@
   </style>
 
   <style name="DohaThemeText" >
-    <item name="fontFamilyBase">ShadowsIntoLight</item>
-    <item name="fontFamilyHeavy">ShadowsIntoLight</item>
-    <item name="fontFamilyEmphasized">ShadowsIntoLight</item>
+    <item name="fontFamilyBase">@font/shadows_into_light</item>
+    <item name="fontFamilyHeavy">@font/shadows_into_light</item>
+    <item name="fontFamilyEmphasized">@font/shadows_into_light</item>
   </style>
 
   <style name="DohaThemeButtonPrimary">

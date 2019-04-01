@@ -129,9 +129,9 @@ open class BpkText @JvmOverloads constructor(
     if (context.theme.resolveAttribute(R.attr.bpkTextFont, t, true)) {
       val withPrimaryStyle = android.view.ContextThemeWrapper(context, t.resourceId)
       val styledAttrs = withPrimaryStyle.obtainStyledAttributes(attrs, R.styleable.BpkText)
-      val fontBase = styledAttrs.getString(R.styleable.BpkText_fontFamilyBase)
-      val fontEmphasized = styledAttrs.getString(R.styleable.BpkText_fontFamilyEmphasized)
-      val fontHeavy = styledAttrs.getString(R.styleable.BpkText_fontFamilyHeavy)
+      val fontBase = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyBase, -1)
+      val fontEmphasized = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1)
+      val fontHeavy = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1)
       styledAttrs.recycle()
       this.font = when (weight) {
         Weight.EMPHASIZED -> FontCache[fontEmphasized, context]
