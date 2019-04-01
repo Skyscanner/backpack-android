@@ -18,6 +18,12 @@
     <!-- message to be displayed -->
     <attr name="message" format="string" />
   </declare-styleable>
+  
+  <declare-styleable name="BpkCalendar">
+    <attr name="calendarDateSelectedBackgroundColor" format="color" />
+    <attr name="calendarDateSelectedRangeBackgroundColor" format="color" />
+    <attr name="calendarDateSelectedTextColor" format="color" />
+  </declare-styleable>
 
   <declare-styleable name="BpkText">
     <attr name="textStyle" format="enum">
@@ -80,6 +86,7 @@
       <enum name="light" value="1" />
       <enum name="dark" value="2" />
     </attr>
+    <attr name="spinnerColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkChip">
@@ -97,5 +104,7 @@
   <attr name="bpkButtonFeaturedStyle" format="reference" />
   <attr name="bpkButtonDestructiveStyle" format="reference" />
   <attr name="bpkButtonOutlineStyle" format="reference" />
+  <attr name="bpkCalendarStyle" format="reference" />
+  <attr name="bpkSpinnerPrimaryStyle" format="reference" />
 
 </resources>

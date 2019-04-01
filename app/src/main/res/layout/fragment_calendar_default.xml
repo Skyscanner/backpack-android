@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:orientation="vertical">
 
-  <LinearLayout
+  <include layout="@layout/calendar_selection_type"
+    android:id="@+id/selection_type"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="@dimen/bpkSpacingBase"/>
+
+  <net.skyscanner.backpack.calendar.BpkCalendar
+    android:id="@+id/bpkCalendar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <include layout="@layout/calendar_selection_type"
-      android:id="@+id/selection_type"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center_horizontal"
-      android:layout_marginTop="@dimen/bpkSpacingBase"/>
-
-    <net.skyscanner.backpack.calendar.BpkCalendar
-      android:id="@+id/bpkCalendar"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:nestedScrollingEnabled="true"/>
-  </LinearLayout>
-
-</FrameLayout>
+    android:layout_height="wrap_content"
+    android:nestedScrollingEnabled="true"/>
+</LinearLayout>
