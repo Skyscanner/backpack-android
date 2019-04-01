@@ -7,7 +7,6 @@ import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat.LAYOUT_DIRECTION_RTL
 import net.skyscanner.backpack.calendar.model.CalendarColoring
-import net.skyscanner.backpack.calendar.model.CalendarDay
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.ColoredBucket
@@ -15,10 +14,9 @@ import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
-import java.util.Calendar
 import java.util.Locale
-import java.util.TimeZone
-import java.util.concurrent.TimeUnit
+import org.threeten.bp.LocalDate
+import org.threeten.bp.temporal.ChronoUnit
 
 class ExampleBpkCalendarController(
   private val context: Context,
@@ -51,20 +49,17 @@ class ExampleBpkCalendarController(
 @VisibleForTesting
 internal fun multiColoredExampleCalendarColoring(
   colorOffset: Long,
-  startDate: CalendarDay,
-  endDate: CalendarDay,
+  startDate: LocalDate,
+  endDate: LocalDate,
   context: Context
 ): CalendarColoring {
-  val daysBetweenStartAndEnd = TimeUnit.DAYS.convert(endDate.date.time - startDate.date.time, TimeUnit.MILLISECONDS) + 1
-  val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-  calendar.set(Calendar.YEAR, startDate.year)
-  calendar.set(Calendar.MONTH, startDate.month)
-  calendar.set(Calendar.DAY_OF_MONTH, startDate.day)
-  val redSet = mutableSetOf<CalendarDay>()
-  val yellowSet = mutableSetOf<CalendarDay>()
-  val greenSet = mutableSetOf<CalendarDay>()
-  val greySet = mutableSetOf<CalendarDay>()
-  val emptySet = mutableSetOf<CalendarDay>()
+  val daysBetweenStartAndEnd = ChronoUnit.DAYS.between(startDate, endDate) + 1
+  val redSet = mutableSetOf<LocalDate>()
+  val yellowSet = mutableSetOf<LocalDate>()
+  val greenSet = mutableSetOf<LocalDate>()
+  val greySet = mutableSetOf<LocalDate>()
+  val emptySet = mutableSetOf<LocalDate>()
+  var dateIterator = LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth)
   for (i in 0 until daysBetweenStartAndEnd) {
     val shiftedIterator = i + colorOffset
     when {
@@ -74,8 +69,8 @@ internal fun multiColoredExampleCalendarColoring(
       shiftedIterator % 5 == 3L -> greySet
       shiftedIterator % 5 == 4L -> emptySet
       else -> mutableSetOf()
-    }.add(CalendarDay(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)))
-    calendar.add(Calendar.DATE, 1)
+    }.add(dateIterator)
+    dateIterator = dateIterator.plusDays(1)
   }
   return CalendarColoring(
     setOf(

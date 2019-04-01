@@ -1,18 +1,15 @@
 package net.skyscanner.backpack.calendar.model
 
+import org.threeten.bp.LocalDate
 import java.io.Serializable
-import java.util.Calendar
-import java.util.TimeZone
 
 open class CalendarSelection : Serializable
 
-data class SingleDay(val selectedDay: CalendarDay) : CalendarSelection()
+data class SingleDay(val selectedDay: LocalDate) : CalendarSelection()
 
-data class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? = null) : CalendarSelection() {
-    private val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-
+data class CalendarRange(var start: LocalDate? = null, var end: LocalDate? = null) : CalendarSelection() {
     internal val isOnTheSameDate: Boolean
-        get() = start != null && end != null && start?.year == end?.year && start?.month == end?.month && start?.day == end?.day
+        get() = isRange && start == end
 
     internal val isRange: Boolean
         get() = start != null && end != null
@@ -21,24 +18,18 @@ data class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? =
         NONE, RANGE, SELECTED
     }
 
-    internal fun getDrawType(calendarDay: CalendarDay): DrawType {
-        calendar.timeZone = TimeZone.getTimeZone("UTC")
-        calendar.set(Calendar.YEAR, calendarDay.year)
-        calendar.set(Calendar.MONTH, calendarDay.month)
-        calendar.set(Calendar.DAY_OF_MONTH, calendarDay.day)
-        calendar.trimCalendar()
-        val time = calendar.timeInMillis
+    internal fun getDrawType(calendarDay: LocalDate): DrawType {
         return if (isRange) {
             when {
-                isSelected(time) -> DrawType.SELECTED
-                isBetweenRange(time) -> DrawType.RANGE
+                isSelected(calendarDay) -> DrawType.SELECTED
+                isBetweenRange(calendarDay) -> DrawType.RANGE
                 else -> DrawType.NONE
             }
         } else {
-            if (isStartIsInSelectedMonth(calendarDay.year, calendarDay.month) &&
-                isSelected(start, time) ||
-                isEndIsInSelectedMonth(calendarDay.year, calendarDay.month) &&
-                isSelected(end, time)
+            if (isStartIsInSelectedMonth(calendarDay.year, calendarDay.month.value) &&
+                isSelected(start, calendarDay) ||
+                isEndIsInSelectedMonth(calendarDay.year, calendarDay.month.value) &&
+                isSelected(end, calendarDay)
             ) {
               DrawType.SELECTED
             } else {
@@ -47,41 +38,18 @@ data class CalendarRange(var start: CalendarDay? = null, var end: CalendarDay? =
         }
     }
 
-    // TODO: this is only being used in MonthView:300 and seems unnecessary. Remove/review
-    internal fun isInRange(selectedDay: CalendarDay?, month: Int, day: Int): Boolean {
-        var isInRange = selectedDay != null && month == selectedDay.month && day == selectedDay.day
-        if (isInRange) {
-            isInRange = isRangeOutsideOther(selectedDay!!, month, day)
-        }
-        return isInRange
-    }
+    private fun isSelected(currentDayTime: LocalDate) =
+        currentDayTime == start || currentDayTime == end
 
-    private fun Calendar.trimCalendar() {
-        this.apply {
-            set(Calendar.HOUR_OF_DAY, 0)
-            set(Calendar.MINUTE, 0)
-            set(Calendar.SECOND, 0)
-            set(Calendar.MILLISECOND, 0)
-        }
-    }
+    private fun isBetweenRange(currentDayTime: LocalDate) =
+        currentDayTime.isAfter(start) && currentDayTime.isBefore(end)
 
-    private fun isRangeOutsideOther(selectedDay: CalendarDay, month: Int, day: Int): Boolean {
-        val otherDay = if (start === selectedDay) end else start
-        return otherDay == null || (month == otherDay.month && day != otherDay.day || month != otherDay.month)
-    }
-
-    private fun isSelected(currentDayTime: Long) =
-        currentDayTime == start?.date?.time || end?.date?.time == currentDayTime
-
-    private fun isBetweenRange(currentDayTime: Long) =
-        currentDayTime > start?.date?.time ?: 0L && end?.date?.time ?: 0L > currentDayTime
-
-    private fun isSelected(day: CalendarDay?, currentDayTime: Long) =
-        if (day != null) currentDayTime == day.date.time else false
+    private fun isSelected(day: LocalDate?, currentDayTime: LocalDate) =
+        if (day != null) currentDayTime == day else false
 
     private fun isStartIsInSelectedMonth(year: Int, month: Int) =
-        start != null && start?.year == year && start?.month == month
+        start != null && start?.year == year && start?.month?.value == month
 
     private fun isEndIsInSelectedMonth(year: Int, month: Int) =
-        end != null && end?.year == year && end?.month == month
+        end != null && end?.year == year && end?.month?.value == month
 }

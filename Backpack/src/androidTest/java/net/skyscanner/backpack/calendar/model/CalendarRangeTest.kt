@@ -4,6 +4,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.threeten.bp.LocalDate
 
 @RunWith(AndroidJUnit4::class)
 class CalendarRangeTest {
@@ -12,8 +13,8 @@ class CalendarRangeTest {
   fun test_isOnTheSameDate_when_same_date() {
     Assert.assertTrue(
       CalendarRange(
-        CalendarDay(2019, 0, 10),
-        CalendarDay(2019, 0, 10)
+        LocalDate.of(2019, 2, 10),
+        LocalDate.of(2019, 2, 10)
       ).isOnTheSameDate
     )
   }
@@ -22,28 +23,28 @@ class CalendarRangeTest {
   fun test_isOnTheSameDate_when_not_same_date() {
     Assert.assertFalse(
       CalendarRange(
-        CalendarDay(2019, 0, 10),
-        CalendarDay(2019, 1, 10)
+        LocalDate.of(2019, 1, 10),
+        LocalDate.of(2019, 2, 10)
       ).isOnTheSameDate
     )
 
     Assert.assertFalse(
       CalendarRange(
-        CalendarDay(2019, 0, 10),
-        CalendarDay(2020, 0, 10)
+        LocalDate.of(2019, 1, 10),
+        LocalDate.of(2020, 1, 10)
       ).isOnTheSameDate
     )
 
     Assert.assertFalse(
       CalendarRange(
-        CalendarDay(2019, 0, 10),
-        CalendarDay(2019, 0, 11)
+        LocalDate.of(2019, 1, 10),
+        LocalDate.of(2019, 1, 11)
       ).isOnTheSameDate
     )
 
     Assert.assertFalse(
       CalendarRange(
-        CalendarDay(2019, 0, 10),
+        LocalDate.of(2019, 1, 10),
         null
       ).isOnTheSameDate
     )
@@ -60,14 +61,14 @@ class CalendarRangeTest {
   fun test_isRange() {
     Assert.assertTrue(
       CalendarRange(
-        CalendarDay(2019, 0, 10),
-        CalendarDay(2020, 0, 10)
+        LocalDate.of(2019, 1, 10),
+        LocalDate.of(2020, 1, 10)
       ).isRange
     )
 
     Assert.assertFalse(
       CalendarRange(
-        CalendarDay(2019, 0, 10),
+        LocalDate.of(2019, 1, 10),
         null
       ).isRange
     )
@@ -83,91 +84,91 @@ class CalendarRangeTest {
   @Test
   fun test_getDrawType_when_range_and_selected() {
     val range = CalendarRange(
-      CalendarDay(2019, 0, 10),
-      CalendarDay(2019, 1, 10))
+      LocalDate.of(2019, 1, 10),
+      LocalDate.of(2019, 2, 10))
 
     Assert.assertEquals(
       CalendarRange.DrawType.SELECTED,
-      range.getDrawType(CalendarDay(2019, 0, 10)))
+      range.getDrawType(LocalDate.of(2019, 1, 10)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.SELECTED,
-      range.getDrawType(CalendarDay(2019, 1, 10)))
+      range.getDrawType(LocalDate.of(2019, 2, 10)))
   }
 
   @Test
   fun test_getDrawType_when_range_and_in_range() {
     val range = CalendarRange(
-      CalendarDay(2019, 0, 10),
-      CalendarDay(2019, 1, 10))
+      LocalDate.of(2019, 1, 10),
+      LocalDate.of(2019, 2, 10))
 
     Assert.assertEquals(
       CalendarRange.DrawType.RANGE,
-      range.getDrawType(CalendarDay(2019, 0, 11)))
+      range.getDrawType(LocalDate.of(2019, 1, 11)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.RANGE,
-      range.getDrawType(CalendarDay(2019, 0, 20)))
+      range.getDrawType(LocalDate.of(2019, 1, 20)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.RANGE,
-      range.getDrawType(CalendarDay(2019, 1, 9)))
+      range.getDrawType(LocalDate.of(2019, 2, 9)))
   }
 
   @Test
   fun test_getDrawType_when_range_and_not_selected_nor_in_range() {
     val range = CalendarRange(
-      CalendarDay(2019, 0, 10),
-      CalendarDay(2019, 1, 10))
+      LocalDate.of(2019, 1, 10),
+      LocalDate.of(2019, 2, 10))
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(CalendarDay(2019, 0, 9)))
+      range.getDrawType(LocalDate.of(2019, 1, 9)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(CalendarDay(2019, 2, 11)))
+      range.getDrawType(LocalDate.of(2019, 3, 11)))
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(CalendarDay(2019, 1, 11)))
+      range.getDrawType(LocalDate.of(2019, 2, 11)))
   }
 
   @Test
   fun test_getDrawType_when_not_range_and_selected() {
     var range = CalendarRange(
-      CalendarDay(2019, 0, 10),
+      LocalDate.of(2019, 1, 10),
       null)
 
     Assert.assertEquals(
       CalendarRange.DrawType.SELECTED,
-      range.getDrawType(CalendarDay(2019, 0, 10)))
+      range.getDrawType(LocalDate.of(2019, 1, 10)))
 
     range = CalendarRange(
       null,
-      CalendarDay(2019, 1, 10))
+      LocalDate.of(2019, 2, 10))
 
     Assert.assertEquals(
       CalendarRange.DrawType.SELECTED,
-      range.getDrawType(CalendarDay(2019, 1, 10)))
+      range.getDrawType(LocalDate.of(2019, 2, 10)))
   }
 
   @Test
   fun test_getDrawType_when_not_range_and_not_selected() {
     var range = CalendarRange(
-      CalendarDay(2019, 0, 10),
+      LocalDate.of(2019, 1, 10),
       null)
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(CalendarDay(2019, 0, 11)))
+      range.getDrawType(LocalDate.of(2019, 1, 11)))
 
     range = CalendarRange(
       null,
-      CalendarDay(2019, 1, 10))
+      LocalDate.of(2019, 2, 10))
 
     Assert.assertEquals(
       CalendarRange.DrawType.NONE,
-      range.getDrawType(CalendarDay(2019, 1, 11)))
+      range.getDrawType(LocalDate.of(2019, 2, 11)))
   }
 }
