@@ -4,13 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import kotlinx.android.synthetic.main.view_bpk_calendar.view.calendar_view
-import kotlinx.android.synthetic.main.view_bpk_calendar.view.weekday_header_view
-import kotlinx.android.synthetic.main.view_bpk_calendar.view.year_pill_view
+import kotlinx.android.synthetic.main.view_bpk_calendar.view.*
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.view.OnYearChangedListener
-import org.threeten.bp.LocalDate
+import org.threeten.bp.YearMonth
 
 open class BpkCalendar @JvmOverloads constructor(
   context: Context,
@@ -36,8 +34,7 @@ open class BpkCalendar @JvmOverloads constructor(
   }
 
   private fun updateYearPill(year: Int) {
-    val yearCalendar = LocalDate.of(year, 1, 1)
-    year_pill_view.message = yearCalendar.year.toString()
-    year_pill_view.visibility = if (yearCalendar.year == year) View.GONE else View.VISIBLE
+    year_pill_view.message = year.toString()
+    year_pill_view.visibility = if (YearMonth.now().year == year) View.GONE else View.VISIBLE
   }
 }
