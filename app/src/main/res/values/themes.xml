@@ -15,6 +15,7 @@
     <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
+    <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
   </style>
 
   <style name="DohaTheme.BpkOverlay" parent="">
@@ -22,6 +23,7 @@
     <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
     <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
+    <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
   </style>
 
   <style name="DohaThemeBpkSwitch" parent="">
@@ -58,6 +60,18 @@
 
   <style name="DohaThemeSpinnerPrimary">
     <item name="spinnerColor">?colorPrimary</item>
+  </style>
+
+  <style name="LondonThemeCalendar">
+    <item name="calendarDateSelectedBackgroundColor">#D11622</item>
+    <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
+    <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
+  </style>
+
+  <style name="DohaThemeCalendar">
+    <item name="calendarDateSelectedBackgroundColor">#7F083B</item>
+    <item name="calendarDateSelectedRangeBackgroundColor">#9B104C</item>
+    <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
   </style>
 
 </resources>
