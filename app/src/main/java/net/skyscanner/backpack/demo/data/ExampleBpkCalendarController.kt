@@ -59,7 +59,7 @@ internal fun multiColoredExampleCalendarColoring(
   val greenSet = mutableSetOf<LocalDate>()
   val greySet = mutableSetOf<LocalDate>()
   val emptySet = mutableSetOf<LocalDate>()
-  var dateIterator = LocalDate.now()
+  var dateIterator = LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth)
   for (i in 0 until daysBetweenStartAndEnd) {
     val shiftedIterator = i + colorOffset
     when {
