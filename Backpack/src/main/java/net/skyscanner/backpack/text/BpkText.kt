@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import androidx.annotation.IntDef
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
@@ -127,16 +128,15 @@ open class BpkText @JvmOverloads constructor(
 
     val t = TypedValue()
     if (context.theme.resolveAttribute(R.attr.bpkTextFont, t, true)) {
-      val withPrimaryStyle = android.view.ContextThemeWrapper(context, t.resourceId)
-      val styledAttrs = withPrimaryStyle.obtainStyledAttributes(attrs, R.styleable.BpkText)
-      val fontBase = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyBase, -1)
-      val fontEmphasized = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1)
-      val fontHeavy = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1)
+      val styledAttrs = ContextThemeWrapper(context, t.resourceId).obtainStyledAttributes(attrs, R.styleable.BpkText)
+      val fontResource = when (weight) {
+        Weight.EMPHASIZED -> styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1)
+        Weight.HEAVY -> styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1)
+        Weight.NORMAL -> styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyBase, -1)
+      }
       styledAttrs.recycle()
-      this.font = when (weight) {
-        Weight.EMPHASIZED -> FontCache[fontEmphasized, context]
-        Weight.HEAVY -> FontCache[fontHeavy, context]
-        Weight.NORMAL -> FontCache[fontBase, context]
+      if (fontResource != -1) {
+        this.font = FontCache[fontResource, context]
       }
     }
     a.recycle()
@@ -152,7 +152,6 @@ open class BpkText @JvmOverloads constructor(
 
     val styleProps = styleMapping[textStyle]
     styleProps ?: throw IllegalStateException("Invalid textStyle")
-
     val textAppearance = styleProps[weight.ordinal]
     textAppearance
       ?: throw IllegalStateException("Weight $weight is not supported for the current size")
@@ -162,6 +161,6 @@ open class BpkText @JvmOverloads constructor(
     }
 
     TextViewCompat.setTextAppearance(this, textAppearance)
-    this.typeface = font
+    font?.let { this.typeface = font }
   }
 }
