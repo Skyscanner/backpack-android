@@ -12,7 +12,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.LocalDate
-import java.util.Calendar
 import java.util.Locale
 
 internal open class BpkCalendarControllerTestImpl(selectionType: SelectionType = SelectionType.RANGE) : BpkCalendarController(selectionType) {
@@ -44,11 +43,7 @@ class BpkCalendarControllerTest {
 
   @Test
   fun test_get_localized_date() {
-    val date = Calendar.getInstance().apply {
-      set(Calendar.YEAR, 2019)
-      set(Calendar.MONTH, 1)
-      set(Calendar.DAY_OF_MONTH, 1)
-    }.time
+    val date = LocalDate.of(2019, 2, 1)
 
     Assert.assertEquals("2019-fev-01", subject.getLocalizedDate(date, "yyyy-MMM-dd"))
   }

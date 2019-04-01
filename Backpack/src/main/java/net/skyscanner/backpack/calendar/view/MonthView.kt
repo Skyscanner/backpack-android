@@ -34,10 +34,9 @@ import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.util.ResourcesUtil
+import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.WeekFields
-import java.util.Calendar
-import java.util.TimeZone
 
 /**
  * A calendar-like view displaying a specified month and the appropriate selectable day numbers
@@ -117,10 +116,6 @@ internal class MonthView @JvmOverloads constructor(
   private var numberOfRows = DEFAULT_NUM_ROWS
   private var monthHeaderString = ""
 
-  private val localeDependentUtcCalendar: Calendar by lazy {
-    Calendar.getInstance(TimeZone.getTimeZone("UTC"), controller!!.locale)
-  }
-
   private val defaultTextColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray900) }
   private val disabledTextColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray100) }
   private val selectedDayCircleFillColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkBlue500) }
@@ -191,12 +186,10 @@ internal class MonthView @JvmOverloads constructor(
     coloredCirclePaints = params.toDrawingPaintMap(isSelectedColor = false)
     coloredSelectedPaints = params.toDrawingPaintMap(isSelectedColor = true)
 
-    localeDependentUtcCalendar.set(Calendar.YEAR, params.year)
-    localeDependentUtcCalendar.set(Calendar.MONTH, params.month - 1)
-    localeDependentUtcCalendar.set(Calendar.DAY_OF_MONTH, 1)
-    dayOfWeekStart = localeDependentUtcCalendar.get(Calendar.DAY_OF_WEEK)
-    weekStart = localeDependentUtcCalendar.firstDayOfWeek
-    monthHeaderString = controller?.getLocalizedDate(localeDependentUtcCalendar.time, MONTH_HEADLINE_PATTERN) ?: ""
+    val calendar = LocalDate.of(params.year, params.month, 1)
+    dayOfWeekStart = calendar.dayOfWeek.value
+    weekStart = WeekFields.of(controller?.locale).firstDayOfWeek
+    monthHeaderString = controller?.getLocalizedDate(calendar, MONTH_HEADLINE_PATTERN) ?: ""
 
     numberOfDaysInMonth = getDaysInMonth(params.month, params.year)
     for (i in 0 until numberOfDaysInMonth - getNonDrawnDaysOffset()) {
@@ -411,10 +404,10 @@ internal class MonthView @JvmOverloads constructor(
     y: Int
   ) {
     rangeBackPaint.color = if (isColoredCalendar()) rangeColorColored else rangeColorNonColored
-    if (isFirstDayInMonth(day.dayOfMonth) && day != range.start) {
+    if (day.dayOfMonth == 1 && day != range.start) {
       drawCircle(canvas, x - paddingX, y - miniDayNumberTextSize / 3, selectedDayCircleRadius - paddingY, rangeBackPaint)
     }
-    if (isLastDayInMonth(day.dayOfMonth, day.month.value, day.year) && day != range.end) {
+    if (day.dayOfMonth == getDaysInMonth(day.monthValue, day.year) && day != range.end) {
       drawCircle(canvas, x + paddingX, y - miniDayNumberTextSize / 3, selectedDayCircleRadius - paddingY, rangeBackPaint)
     }
   }
@@ -452,8 +445,8 @@ internal class MonthView @JvmOverloads constructor(
     if (getNonDrawnDaysOffset() >= numberOfDaysInAWeek) {
       0
     } else {
-      var dayOffset = dayOfWeekStart - weekStart
-      if (dayOfWeekStart < weekStart) {
+      var dayOffset = dayOfWeekStart - weekStart.value
+      if (dayOfWeekStart < weekStart.value) {
         dayOffset += numberOfDaysInAWeek
       }
       dayOffset
@@ -482,40 +475,20 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   private fun isOutOfRange(calendarDay: LocalDate) =
-    isBeforeMin(calendarDay.year, calendarDay.month.value, calendarDay.dayOfMonth) || isAfterMax(calendarDay.year, calendarDay.month.value, calendarDay.dayOfMonth)
-
-  private fun isFirstDayInMonth(day: Int) = day == 1
-
-  private fun isLastDayInMonth(day: Int, month: Int, year: Int) = day == getDaysInMonth(month, year)
-
-  private fun isBeforeMin(year: Int, month: Int) =
-    controller?.startDate?.let { minDate ->
-      when {
-        year < minDate.year -> true
-        year > minDate.year -> false
-        month < minDate.month.value -> true
-        month > minDate.month.value -> false
-        else -> false
-      }
-    } ?: false
+    isBeforeMin(calendarDay.year, calendarDay.month.value, calendarDay.dayOfMonth) || isAfterMax(
+      calendarDay.year,
+      calendarDay.month.value,
+      calendarDay.dayOfMonth
+    )
 
   private fun isBeforeMin(year: Int, month: Int, day: Int) =
     controller?.startDate?.let { minDate ->
-      val minYear = minDate.year
-      val minMonth = minDate.month.value
-      val minDay = minDate.dayOfMonth
-      if (isBeforeMin(year, month)) true else year == minYear && month == minMonth && day < minDay
+      LocalDate.of(year, month, day).isBefore(minDate)
     } ?: false
 
   private fun isAfterMax(year: Int, month: Int, day: Int) =
     controller?.endDate?.let { maxDate ->
-      when {
-        year > maxDate.year -> true
-        year < maxDate.year -> false
-        month > maxDate.month.value -> true
-        month < maxDate.month.value -> false
-        else -> day > maxDate.dayOfMonth
-      }
+      LocalDate.of(year, month, day).isAfter(maxDate)
     } ?: false
 
   private fun getDaysInMonth(month: Int, year: Int) =
@@ -538,13 +511,14 @@ internal class MonthView @JvmOverloads constructor(
     fun onDayClick(view: MonthView?, day: LocalDate)
   }
 
-  internal companion object {
-    private const val MONTH_HEADLINE_PATTERN = "MMMM"
+  private companion object {
+    const val MONTH_HEADLINE_PATTERN = "MMMM"
 
-    private const val DEFAULT_SELECTED_DAY = -1
-    private const val DEFAULT_WEEK_START = Calendar.MONDAY
-    private const val DEFAULT_NUM_DAYS = 7
-    private const val DEFAULT_NUM_ROWS = 6
+    const val DEFAULT_SELECTED_DAY = -1
+    const val DEFAULT_NUM_DAYS = 7
+    const val DEFAULT_NUM_ROWS = 6
+
+    val DEFAULT_WEEK_START = DayOfWeek.MONDAY
   }
 }
 

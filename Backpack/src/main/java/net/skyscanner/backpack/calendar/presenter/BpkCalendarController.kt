@@ -6,8 +6,7 @@ import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.view.CalendarUpdateCallback
 import org.threeten.bp.LocalDate
-import java.text.SimpleDateFormat
-import java.util.Date
+import org.threeten.bp.format.DateTimeFormatter
 import java.util.Locale
 
 abstract class BpkCalendarController(
@@ -65,7 +64,7 @@ abstract class BpkCalendarController(
           selectedRange.start = selectedDay
           selectedRange.end = null
         }
-        currentRangeEnd == null -> {
+        else -> {
           selectedRange.end = selectedDay
         }
       }
@@ -77,10 +76,7 @@ abstract class BpkCalendarController(
     onRangeSelected(selectedRange)
   }
 
-  // TODO: This will not respect differences in the order of the fields for each country.
-  // E.g. US = mm/dd/yyyy and UK = dd/mm/yyyy
-  // Shall we use DateFormat.getDateInstance instead?
-  internal fun getLocalizedDate(date: Date, pattern: String): String = SimpleDateFormat(pattern, locale).format(date)
+  internal fun getLocalizedDate(date: LocalDate, pattern: String): String = DateTimeFormatter.ofPattern(pattern, locale).format(date)
 
   open fun isToday(year: Int, month: Int, day: Int): Boolean {
     return LocalDate.of(year, month, day) == LocalDate.now()

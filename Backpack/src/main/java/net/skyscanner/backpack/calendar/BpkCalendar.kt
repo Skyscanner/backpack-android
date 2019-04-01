@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.view_bpk_calendar.view.year_pill_view
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.view.OnYearChangedListener
-import java.util.Calendar
+import org.threeten.bp.LocalDate
 
 open class BpkCalendar @JvmOverloads constructor(
   context: Context,
@@ -36,8 +36,8 @@ open class BpkCalendar @JvmOverloads constructor(
   }
 
   private fun updateYearPill(year: Int) {
-    val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-    year_pill_view.message = year.toString()
-    year_pill_view.visibility = if (currentYear == year) View.GONE else View.VISIBLE
+    val yearCalendar = LocalDate.of(year, 1, 1)
+    year_pill_view.message = yearCalendar.year.toString()
+    year_pill_view.visibility = if (yearCalendar.year == year) View.GONE else View.VISIBLE
   }
 }
