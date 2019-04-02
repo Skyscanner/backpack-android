@@ -12,7 +12,7 @@
     <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
-    <item name="bpkTextFont">@style/LondonThemeText</item>
+    <item name="bpkTextStyle">@style/LondonThemeText</item>
   </style>
 
   <style name="LondonThemeText">
@@ -55,7 +55,7 @@
     <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
     <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
-    <item name="bpkTextFont">@style/DohaThemeText</item>
+    <item name="bpkTextStyle">@style/DohaThemeText</item>
     <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
   </style>
 

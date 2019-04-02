@@ -108,5 +108,5 @@
   <attr name="bpkButtonOutlineStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
-  <attr name="bpkTextFont" format="reference"/>
+  <attr name="bpkTextStyle" format="reference"/>
 </resources>

@@ -7,11 +7,9 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.util.AttributeSet
 import android.util.Log
-import android.util.TypedValue
 import android.view.View
 import androidx.annotation.FontRes
 import androidx.annotation.IntDef
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
@@ -20,7 +18,7 @@ import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 open class BpkText @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = R.attr.bpkTextStyle
 ) : AppCompatTextView(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
 
   enum class Weight {
@@ -134,18 +132,12 @@ open class BpkText @JvmOverloads constructor(
       setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
     }
 
-    val t = TypedValue()
-    if (context.theme.resolveAttribute(R.attr.bpkTextFont, t, true)) {
-      val styledAttrs = ContextThemeWrapper(context, t.resourceId).obtainStyledAttributes(attrs, R.styleable.BpkText)
-      fontBase = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyBase, -1)
-      fontEmphasized = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1)
-      fontHeavy = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1)
+    fontBase = a.getResourceId(R.styleable.BpkText_fontFamilyBase, -1)
+    fontEmphasized = a.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1)
+    fontHeavy = a.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1)
 
-      if (fontBase == -1 || fontEmphasized == -1 || fontHeavy == -1) {
-        Log.w("BpkText", "Values for one or more of fontBase, fontEmphasized, fontHeavy is not set.")
-      }
-
-      styledAttrs.recycle()
+    if (fontBase == -1 || fontEmphasized == -1 || fontHeavy == -1) {
+      Log.w("BpkText", "Values for one or more of fontBase, fontEmphasized, fontHeavy is not set.")
     }
     a.recycle()
   }

@@ -38,9 +38,7 @@ BpkText(context).apply {
 - `fontFamilyEmphasized`
 - `fontFamilyHeavy`
 
-BpkText accepts the above themeable attributes for the following styles
-
-- `bpkTextFont`
+Styles can be changed globally through `bpkTextStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
 
 Example
 
@@ -57,5 +55,4 @@ Example
 
 ```
 
-Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
 
