@@ -91,7 +91,7 @@ abstract class BpkCalendarController(
       }
       is SingleDay -> {
         selectedRange.start = selection.selectedDay
-        selectedRange.end = selection.selectedDay
+        selectedRange.end = null
         onRangeSelected(SingleDay(selection.selectedDay))
       }
     }

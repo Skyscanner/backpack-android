@@ -9,8 +9,8 @@
   "scripts": {
     "preinstall": "npx ensure-node-env",
     "emulator:build": "./gradlew build",
-    "emulator:test": "./gradlew cAT",
-    "emulator:boot": "$ANDROID_HOME/emulator/emulator -avd bpk-avd -no-snapshot  &",
+    "emulator:test": "./gradlew cAT app:verifyDebugAndroidTestScreenshotTest",
+    "emulator:boot": "$ANDROID_HOME/emulator/emulator -avd bpk-droid-avd -sdcard sd.img -no-snapshot &",
     "emulator:kill": "adb emu kill",
     "preemulator": "npm run emulator:boot",
     "emulator": "adb wait-for-device && sleep 5 && npm run emulator:build && npm run emulator:test",
