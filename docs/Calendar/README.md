@@ -14,7 +14,7 @@ implementation 'com.jakewharton.threetenabp:threetenabp:$latestVersion'
 
 ## Usage
 
-Be sure to initialize the ThreeTenABP library according to their [usage guidelines](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md) in your `Application`'s context:
+Be sure to initialize the `ThreeTenABP` library according to their [usage guidelines](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md) in your `Application`'s context:
 
 ```Kotlin
 override fun onCreate() {
