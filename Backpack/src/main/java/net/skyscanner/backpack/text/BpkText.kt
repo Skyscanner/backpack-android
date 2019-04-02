@@ -6,17 +6,20 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
+import androidx.annotation.FontRes
 import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 
-open class BpkText(
+open class BpkText @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet?,
-  defStyleAttr: Int
-) : AppCompatTextView(context, attrs, defStyleAttr) {
+  attrs: AttributeSet? = null,
+  defStyleAttr: Int = R.attr.bpkTextStyle
+) : AppCompatTextView(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
 
   enum class Weight {
     NORMAL,
@@ -52,6 +55,15 @@ open class BpkText(
       setup()
     }
 
+  @FontRes
+  private var fontBase: Int = -1
+
+  @FontRes
+  private var fontHeavy: Int = -1
+
+  @FontRes
+  private var fontEmphasized: Int = -1
+
   /**
    * Sets the text style to emphasized.
    *
@@ -78,16 +90,12 @@ open class BpkText(
     XXXL to arrayOf(R.style.bpkTextXxxl, R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxlHeavy)
   )
 
-  constructor(context: Context) : this(context, null)
-  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, R.style.bpkTextBase)
-
   init {
-    initialize(context, attrs, defStyleAttr)
+    initialize(attrs, defStyleAttr)
     setup()
   }
 
-  private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
-
+  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     val a: TypedArray = context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkText,
@@ -123,6 +131,14 @@ open class BpkText(
     if (drawableTint != null) {
       setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
     }
+
+    fontBase = a.getResourceId(R.styleable.BpkText_fontFamilyBase, -1)
+    fontEmphasized = a.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1)
+    fontHeavy = a.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1)
+
+    if (fontBase == -1 || fontEmphasized == -1 || fontHeavy == -1) {
+      Log.w("BpkText", "Values for one or more of fontBase, fontEmphasized, fontHeavy is not set.")
+    }
     a.recycle()
   }
 
@@ -136,7 +152,6 @@ open class BpkText(
 
     val styleProps = styleMapping[textStyle]
     styleProps ?: throw IllegalStateException("Invalid textStyle")
-
     val textAppearance = styleProps[weight.ordinal]
     textAppearance
       ?: throw IllegalStateException("Weight $weight is not supported for the current size")
@@ -146,5 +161,15 @@ open class BpkText(
     }
 
     TextViewCompat.setTextAppearance(this, textAppearance)
+
+    val fontResource = when (weight) {
+      Weight.EMPHASIZED -> fontEmphasized
+      Weight.HEAVY -> fontHeavy
+      Weight.NORMAL -> fontBase
+    }
+
+    if (fontResource != -1) {
+      this.typeface = FontCache[fontResource, context]
+    }
   }
 }

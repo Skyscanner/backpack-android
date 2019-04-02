@@ -91,6 +91,8 @@ withInteractiveStarRatingState
 
 BpkThemeProvider
 
+BpkText
+
 BpkTicket
 
 # Company names, libraries etc.

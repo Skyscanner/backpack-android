@@ -30,3 +30,29 @@ BpkText(context).apply {
    weight = BpkText.Weight.EMPHASIZED
 }
 ```
+
+
+## Theme Props
+
+- `fontFamilyBase`
+- `fontFamilyEmphasized`
+- `fontFamilyHeavy`
+
+Styles can be changed globally through `bpkTextStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+
+Example
+
+```xml
+  <style name="BlueTheme" parent="AppTheme">
+      <item name="bpkTextStyle">@style/CursiveText</item>
+  </style>
+
+  <style name="CursiveText" >
+    <item name="fontFamilyBase">@font/shadows_into_light</item>
+    <item name="fontFamilyEmphasized">@font/shadows_into_dark</item>
+    <item name="fontFamilyHeavy">@font/shadows_into_light_heavy</item>
+  </style>
+
+```
+
+
