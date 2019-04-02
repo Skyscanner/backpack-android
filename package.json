@@ -37,6 +37,9 @@
     ],
     "*.kt": [
       "./scripts/lint-staged-ktlint.sh"
+    ],
+    "*.md": [
+      "mdspell -r --en-gb --ignore-acronyms --ignore-numbers --no-suggestions"
     ]
   },
   "repository": {
