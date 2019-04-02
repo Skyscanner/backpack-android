@@ -4,9 +4,15 @@
 
 Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
 
+Additionally, if you want to handle the output of the calendar (the dates), you also need to rely on the Android adaptation of the JSR-310 backport: [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP). This is, because we decided to rely on `org.threetenbp.bp.*` constructs as our business entities inside the calendar.
+
+Further instructions on how to integrate this into your app can be found [here](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md).
+
 ## Usage
 
-BpkCalendar is  is based on `CalendarView` and `MonthView` from the Android Open Source Project.
+First, we need to initialize the `ThreeTenABP` library in the context of your application in order to set it up with correct timezone data. See further instructions on that [here](https://github.com/JakeWharton/ThreeTenABP#usage).
+
+BpkCalendar is based on `CalendarView` and `MonthView` from the Android Open Source Project.
 
 The Calendar component can be used in both XML and Kotlin, but it currently requires a `BpkCalendarController` to be sub-classed and set.
 Both single and range selection are supported.
