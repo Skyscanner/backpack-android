@@ -4,13 +4,32 @@
 
 Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
 
-Additionally, if you want to handle the output of the calendar (the dates), you also need to rely on the Android adaptation of the JSR-310 backport: [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP). This is, because we decided to rely on `org.threetenbp.bp.*` constructs as our business entities inside the calendar.
+The calendar implementation relies on the Android adaptation of the JSR-310 backport for dealing with dates: [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP)
 
-Further instructions on how to integrate this into your app can be found [here](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md).
+Add the following line in your base module's Gradle script:
+
+```groovy
+implementation 'com.jakewharton.threetenabp:threetenabp:$latestVersion'
+```
 
 ## Usage
 
-First, we need to initialize the `ThreeTenABP` library in the context of your application in order to set it up with correct timezone data. See further instructions on that [here](https://github.com/JakeWharton/ThreeTenABP#usage).
+Be sure to initialize the ThreeTenABP library according to their [usage guidelines](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md) in your `Application`'s context:
+
+```Kotlin
+override fun onCreate() {
+  super.onCreate()
+  AndroidThreeTen.init(this)
+}
+```
+
+```Java
+@Override public void onCreate() {
+  super.onCreate();
+  AndroidThreeTen.init(this);
+}
+```
+
 
 BpkCalendar is based on `CalendarView` and `MonthView` from the Android Open Source Project.
 
