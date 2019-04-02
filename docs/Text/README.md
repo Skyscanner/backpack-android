@@ -44,7 +44,7 @@ Example
 
 ```xml
   <style name="BlueTheme" parent="AppTheme">
-      <item name="bpkTextFont">@style/CursiveText</item>
+      <item name="bpkTextStyle">@style/CursiveText</item>
   </style>
 
   <style name="CursiveText" >
