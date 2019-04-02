@@ -13,11 +13,9 @@ abstract class BpkCalendarController(
   open val selectionType: SelectionType = SelectionType.RANGE
 ) {
 
-  open val startDate: LocalDate =
-    LocalDate.now()
+  open val startDate: LocalDate = LocalDate.now()
 
-  open val endDate: LocalDate =
-    LocalDate.now().plusYears(1)
+  open val endDate: LocalDate = LocalDate.now().plusYears(1)
 
   open val calendarColoring: CalendarColoring? = null
 

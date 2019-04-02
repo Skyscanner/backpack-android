@@ -8,6 +8,7 @@ import io.github.inflationx.viewpump.ViewPump
 import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.util.BpkInterceptor
 import com.facebook.stetho.Stetho
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
  * Application class registered in AndroidManifest.xml
@@ -37,6 +38,7 @@ class BackpackDemoApplication : Application() {
 
   override fun onCreate() {
     super.onCreate()
+    AndroidThreeTen.init(this)
     instance = applicationContext!! as BackpackDemoApplication
     Stetho.initializeWithDefaults(this)
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
