@@ -12,11 +12,7 @@ object FontCache {
   operator fun get(res: Int, context: Context): Typeface? {
     var tf = fontCache[res]
     if (tf == null) {
-      try {
-        tf = ResourcesCompat.getFont(context, res)
-      } catch (e: Exception) {
-        return null
-      }
+      tf = ResourcesCompat.getFont(context, res)
       fontCache[res] = tf
     }
     return tf

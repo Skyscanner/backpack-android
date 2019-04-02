@@ -5,10 +5,11 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
-import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import androidx.annotation.FontRes
 import androidx.annotation.IntDef
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.AppCompatTextView
@@ -56,7 +57,14 @@ open class BpkText @JvmOverloads constructor(
       setup()
     }
 
-  var font: Typeface? = null
+  @FontRes
+  private var fontBase: Int = -1
+
+  @FontRes
+  private var fontHeavy: Int = -1
+
+  @FontRes
+  private var fontEmphasized: Int = -1
 
   /**
    * Sets the text style to emphasized.
@@ -129,15 +137,15 @@ open class BpkText @JvmOverloads constructor(
     val t = TypedValue()
     if (context.theme.resolveAttribute(R.attr.bpkTextFont, t, true)) {
       val styledAttrs = ContextThemeWrapper(context, t.resourceId).obtainStyledAttributes(attrs, R.styleable.BpkText)
-      val fontResource = when (weight) {
-        Weight.EMPHASIZED -> styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1)
-        Weight.HEAVY -> styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1)
-        Weight.NORMAL -> styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyBase, -1)
+      fontBase = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyBase, -1)
+      fontEmphasized = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1)
+      fontHeavy = styledAttrs.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1)
+
+      if (fontBase == -1 || fontEmphasized == -1 || fontHeavy == -1) {
+        Log.w("BpkText", "Values for one or more of fontBase, fontEmphasized, fontHeavy is not set.")
       }
+
       styledAttrs.recycle()
-      if (fontResource != -1) {
-        this.font = FontCache[fontResource, context]
-      }
     }
     a.recycle()
   }
@@ -161,6 +169,15 @@ open class BpkText @JvmOverloads constructor(
     }
 
     TextViewCompat.setTextAppearance(this, textAppearance)
-    font?.let { this.typeface = font }
+
+    val fontResource = when (weight) {
+      Weight.EMPHASIZED -> fontEmphasized
+      Weight.HEAVY -> fontHeavy
+      Weight.NORMAL -> fontBase
+    }
+
+    if (fontResource != -1) {
+      this.typeface = FontCache[fontResource, context]
+    }
   }
 }
