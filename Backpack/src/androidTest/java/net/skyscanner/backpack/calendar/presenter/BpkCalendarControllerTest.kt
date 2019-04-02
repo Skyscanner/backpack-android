@@ -1,6 +1,8 @@
 package net.skyscanner.backpack.calendar.presenter
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import com.jakewharton.threetenabp.AndroidThreeTen
 import com.nhaarman.mockitokotlin2.spy
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
@@ -28,6 +30,7 @@ class BpkCalendarControllerTest {
 
   @Before
   fun setUp() {
+    AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().targetContext)
     subject = BpkCalendarControllerTestImpl()
   }
 

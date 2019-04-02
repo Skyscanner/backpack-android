@@ -1,16 +1,24 @@
 package net.skyscanner.backpack.calendar.view
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.ColoredBucket
 import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.LocalDate
 
 @RunWith(AndroidJUnit4::class)
 class MonthViewKtTest {
+
+  @Before
+  fun setUp() {
+    AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().targetContext)
+  }
 
   @Test
   fun givenCalendarColoring_whenConvertedToDrawingPaintMap_thenCorrectColors() {

@@ -9,6 +9,7 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
+import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarRange
@@ -60,6 +61,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   fun setup() {
     setDimensions(700, 400)
     activity = activityRule.activity
+    AndroidThreeTen.init(activity)
   }
 
   @Test

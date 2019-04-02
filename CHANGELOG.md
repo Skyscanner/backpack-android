@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 7.1.0
+
+**Added:**
+
+- Replaced `org.threeten:threetenbp` with `com.jakewharton.threetenabp:threetenabp` for date handling
+- BpkText
+  - Added theming support
+
 # 7.0.0
 
 **Breaking:**
