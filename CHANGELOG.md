@@ -2,6 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 7.0.0
+
+**Breaking:**
+
+- BpkCalendar
+  - Replaced `java.util.Date` and `java.util.Calendar` with `JSR-310` date constructs (using `org.threeten.bp.*`)
+  - Added theming support
+  - Fixed `updateSelection` method for single selection
+
 # 6.3.0
 
 **Fixed:**
