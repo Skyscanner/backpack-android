@@ -4,7 +4,7 @@
 
 Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
 
-The calendar implementation relies on the Android adaptation of the JSR-310 backport for dealing with dates: [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP)
+The calendar implementation relies on the Android adaptation of the `JSR-310` backport for dealing with dates: [`ThreeTenABP`](https://github.com/JakeWharton/ThreeTenABP)
 
 Add the following line in your base module's Gradle script:
 
