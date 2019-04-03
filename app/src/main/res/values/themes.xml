@@ -13,6 +13,7 @@
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
     <item name="bpkTextStyle">@style/LondonThemeText</item>
+    <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
   </style>
 
   <style name="LondonThemeText">
