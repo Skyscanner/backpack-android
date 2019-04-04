@@ -18,7 +18,7 @@ import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 open class BpkText @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.attr.bpkTextStyle
+  defStyleAttr: Int = 0
 ) : AppCompatTextView(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
 
   enum class Weight {
@@ -96,10 +96,16 @@ open class BpkText @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
+
+    val styleAttr = when (defStyleAttr) {
+      0 -> R.attr.bpkTextStyle
+      else -> defStyleAttr
+    }
+
     val a: TypedArray = context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkText,
-      defStyleAttr, 0)
+      styleAttr, 0)
 
     textStyle = a.getInt(R.styleable.BpkText_textStyle, BASE)
     val weightArg = a.getInt(R.styleable.BpkText_weight, -1)
