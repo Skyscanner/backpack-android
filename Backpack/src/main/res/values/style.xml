@@ -24,5 +24,6 @@
 
   <style name="Bpk.chip" parent="android:Widget">
     <item name="android:textAppearance">@style/bpkTextSm</item>
+    <item name="chipSelectedBackgroundColor">@color/bpkBlue500</item>
   </style>
 </resources>
