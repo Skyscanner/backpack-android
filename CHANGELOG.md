@@ -2,6 +2,18 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 7.2.0
+
+**Added:**
+
+- BpkChip
+  - Added theming support to BpkChip
+
+**Fixed:**
+
+- BpkChip
+  - Fixed text theming for BpkChip
+
 # 7.1.0
 
 **Added:**
