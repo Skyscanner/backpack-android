@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -18,7 +19,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.text.FontCache
+import net.skyscanner.backpack.text.getFontFromTheme
 import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
+
+private const val INVALID_RESOURCE = -1
 
 private fun getStyle(context: Context, attrs: AttributeSet?): Int {
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
@@ -77,6 +82,8 @@ open class BpkButton : AppCompatButton {
   @ColorInt
   private var buttonStrokeColor: Int = ContextCompat.getColor(context, android.R.color.transparent)
 
+  private var themedFont: Typeface? = getFontFromTheme(context)?.let { FontCache[it, context] }
+
   private val defaultPadding = context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2
   // Text is 12dp and icon is 16dp. if icon is present,
   // padding needs to be reduced by 2 dp on both sides
@@ -84,8 +91,6 @@ open class BpkButton : AppCompatButton {
 
   private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
   private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderSizeLg).toInt()
-
-  private val INVALID_RESOURCE = -1
 
   var icon: Drawable? = null
     set(value) {
@@ -198,7 +203,9 @@ open class BpkButton : AppCompatButton {
     } else {
       this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray300))
     }
+
     TextViewCompat.setTextAppearance(this, R.style.bpkButtonBase)
+    themedFont?.let { this.typeface = it }
     this.gravity = Gravity.CENTER
 
     this.icon?.let {

@@ -179,3 +179,23 @@ open class BpkText @JvmOverloads constructor(
     }
   }
 }
+
+internal fun getFontFromTheme(context: Context, weight: BpkText.Weight = BpkText.Weight.NORMAL): Int? {
+  val a = context.theme.obtainStyledAttributes(null, R.styleable.BpkText, R.attr.bpkTextStyle, 0)
+
+  val nullIfInvalid = { resId: Int -> if (resId == -1) null else resId }
+
+  val fontBase = a.getResourceId(R.styleable.BpkText_fontFamilyBase, -1).let(nullIfInvalid)
+  val fontEmphasized = a.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1).let(nullIfInvalid)
+  val fontHeavy = a.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1).let(nullIfInvalid)
+
+  val fontResource = when (weight) {
+    BpkText.Weight.EMPHASIZED -> fontEmphasized
+    BpkText.Weight.HEAVY -> fontHeavy
+    BpkText.Weight.NORMAL -> fontBase
+  }
+
+  a.recycle()
+
+  return fontResource
+}
