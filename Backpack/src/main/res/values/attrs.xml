@@ -94,6 +94,7 @@
   <declare-styleable name="BpkChip">
     <attr name="disabled" format="boolean" />
     <attr name="selected" format="boolean" />
+    <attr name="chipSelectedBackgroundColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkSwitch">
@@ -107,6 +108,7 @@
   <attr name="bpkButtonDestructiveStyle" format="reference" />
   <attr name="bpkButtonOutlineStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
+  <attr name="bpkChipStyle" format="reference"/>
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
   <attr name="bpkTextStyle" format="reference"/>
 </resources>

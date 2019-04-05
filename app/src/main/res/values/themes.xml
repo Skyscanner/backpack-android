@@ -11,6 +11,7 @@
     <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
     <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
+    <item name="bpkChipStyle">@style/LondonThemeChip</item>
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
     <item name="bpkTextStyle">@style/LondonThemeText</item>
     <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
@@ -36,15 +37,22 @@
     <item name="buttonStrokeColor">#5E072C</item>
   </style>
 
+  <style name="LondonThemeChip">
+    <item name="chipSelectedBackgroundColor">?colorPrimary</item>
+  </style>
+
   <style name="LondonThemeSpinnerPrimary">
     <item name="spinnerColor">?colorPrimary</item>
   </style>
 
-    <style name="LondonThemeCalendar">
-      <item name="calendarDateSelectedBackgroundColor">#D11622</item>
-      <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
-      <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
-    </style>
+  <style name="LondonThemeCalendar">
+    <item name="calendarDateSelectedBackgroundColor">#D11622</item>
+    <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
+    <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
+  </style>
+
+
+  <!-- Doha theme-->
 
   <style name="DohaTheme" parent="AppTheme">
     <item name="colorPrimary">#9B104C</item>
@@ -55,6 +63,7 @@
     <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
     <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
+    <item name="bpkChipStyle">@style/DohaThemeChip</item>
     <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
     <item name="bpkTextStyle">@style/DohaThemeText</item>
     <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
@@ -73,7 +82,8 @@
   <style name="DohaThemeButtonPrimary">
     <item name="buttonBackgroundColor">#ffb300</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
-  </style>
+  </style
+    >
   <style name="DohaThemeButtonSecondary">
     <item name="buttonBackgroundColor">@color/bpkWhite</item>
     <item name="buttonTextColor">#9B104C</item>
@@ -88,6 +98,10 @@
     <item name="calendarDateSelectedBackgroundColor">#7F083B</item>
     <item name="calendarDateSelectedRangeBackgroundColor">#9B104C</item>
     <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
+  </style>
+
+  <style name="DohaThemeChip">
+    <item name="chipSelectedBackgroundColor">?colorPrimary</item>
   </style>
 
 </resources>
