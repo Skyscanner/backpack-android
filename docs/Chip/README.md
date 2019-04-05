@@ -40,3 +40,9 @@ To do so add a click listener:
 ```Kotlin
 chip.setOnClickListener { chip.toggle() }
 ```
+
+## Theme Props
+
+- `chipSelectedBackgroundColor`
+
+Styles can be changed globally through `bpkChipStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
