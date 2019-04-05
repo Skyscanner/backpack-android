@@ -3,6 +3,7 @@ package net.skyscanner.backpack.button
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Ignore
@@ -156,6 +157,20 @@ class BpkButtonTest : BpkSnapshotTest() {
     val button = BpkButton(testContext, BpkButton.Type.Outline)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.ICON_ONLY
+    snap(button)
+  }
+
+  @Test
+  fun screenshotTestButtonBasicPrimary_withTheme() {
+    val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Primary)
+    button.text = "Message"
+    snap(button)
+  }
+
+  @Test
+  fun screenshotTestButtonBasicSecondary_withTheme() {
+    val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Secondary)
+    button.text = "Message"
     snap(button)
   }
 }

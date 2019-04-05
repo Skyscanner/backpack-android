@@ -2,6 +2,7 @@ package net.skyscanner.backpack.chip
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.createThemedContext
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,6 +32,14 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestSelected() {
     val view = BpkChip(testContext)
+    view.text = "tag"
+    view.isSelected = true
+    snap(view)
+  }
+
+  @Test
+  fun screenshotTestSelected_withTheme() {
+    val view = BpkChip(createThemedContext(testContext))
     view.text = "tag"
     view.isSelected = true
     snap(view)

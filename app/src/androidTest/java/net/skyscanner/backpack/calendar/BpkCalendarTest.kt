@@ -17,6 +17,7 @@ import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.SelectionType
+import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.multiColoredExampleCalendarColoring
@@ -286,6 +287,25 @@ class BpkCalendarTest : BpkSnapshotTest() {
     calendar.setController(controller)
     controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 16)))
     snap(wrapWithBackground(calendar))
+  }
+
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarWithStartAndEndDateSelected_withTheme() {
+    val calendar = BpkCalendar(createThemedContext(testContext))
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      LocalDate.of(2019, 1, 2),
+      LocalDate.of(2019, 12, 31)
+    )
+
+    calendar.setController(controller)
+    val wrapped = wrapWithBackground(calendar)
+
+    val asyncScreenshot = prepareForAsyncTest()
+
+    selectStartEnd(wrapped, asyncScreenshot)
   }
 
   private fun selectStartEnd(wrapped: FrameLayout, asyncScreenshot: AsyncSnapshot) {
