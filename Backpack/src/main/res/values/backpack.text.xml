@@ -20,6 +20,7 @@
   <declare-styleable name="BpkTextStyle">
     <attr name="android:fontFamily" />
     <attr name="android:textSize" />
+    <attr name="android:letterSpacing" />
   </declare-styleable>
 
   <style name="bpkTextBase">

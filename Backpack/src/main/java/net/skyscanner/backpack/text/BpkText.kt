@@ -5,15 +5,29 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
 import androidx.annotation.FontRes
 import androidx.annotation.IntDef
+import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
+
+private val styleMapping = mapOf(
+  BpkText.XS to arrayOf(R.style.bpkTextXs, R.style.bpkTextXsEmphasized, null),
+  BpkText.SM to arrayOf(R.style.bpkTextSm, R.style.bpkTextSmEmphasized, null),
+  BpkText.CAPS to arrayOf(R.style.bpkTextCaps, R.style.bpkTextCapsEmphasized, null),
+  BpkText.BASE to arrayOf(R.style.bpkTextBase, R.style.bpkTextBaseEmphasized, null),
+  BpkText.LG to arrayOf(R.style.bpkTextLg, R.style.bpkTextLgEmphasized, null),
+  BpkText.XL to arrayOf(R.style.bpkTextXl, R.style.bpkTextXlEmphasized, R.style.bpkTextXlHeavy),
+  BpkText.XXL to arrayOf(R.style.bpkTextXxl, R.style.bpkTextXxlEmphasized, R.style.bpkTextXxlHeavy),
+  BpkText.XXXL to arrayOf(R.style.bpkTextXxxl, R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxlHeavy)
+)
 
 open class BpkText @JvmOverloads constructor(
   context: Context,
@@ -40,6 +54,9 @@ open class BpkText @JvmOverloads constructor(
     const val XXL = 5
     const val XXXL = 6
     const val CAPS = 7
+
+    fun getFont(context: Context, textStyle: Int = BpkText.BASE, weight: BpkText.Weight = BpkText.Weight.NORMAL) =
+      internalGetFont(context, textStyle, weight)
   }
 
   @Styles
@@ -78,17 +95,6 @@ open class BpkText @JvmOverloads constructor(
         weight = Weight.EMPHASIZED
       }
     }
-
-  private val styleMapping = mapOf(
-    XS to arrayOf(R.style.bpkTextXs, R.style.bpkTextXsEmphasized, null),
-    SM to arrayOf(R.style.bpkTextSm, R.style.bpkTextSmEmphasized, null),
-    CAPS to arrayOf(R.style.bpkTextCaps, R.style.bpkTextCapsEmphasized, null),
-    BASE to arrayOf(R.style.bpkTextBase, R.style.bpkTextBaseEmphasized, null),
-    LG to arrayOf(R.style.bpkTextLg, R.style.bpkTextLgEmphasized, null),
-    XL to arrayOf(R.style.bpkTextXl, R.style.bpkTextXlEmphasized, R.style.bpkTextXlHeavy),
-    XXL to arrayOf(R.style.bpkTextXxl, R.style.bpkTextXxlEmphasized, R.style.bpkTextXxlHeavy),
-    XXXL to arrayOf(R.style.bpkTextXxxl, R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxlHeavy)
-  )
 
   init {
     initialize(attrs, defStyleAttr)
@@ -178,9 +184,16 @@ open class BpkText @JvmOverloads constructor(
       this.typeface = FontCache[fontResource, context]
     }
   }
+
+  data class FontDefinition(
+    val typeface: Typeface,
+    val fontSize: Int,
+    val letterSpacing: Float?,
+    val isCustomFont: Boolean = false
+  )
 }
 
-internal fun getFontFromTheme(context: Context, weight: BpkText.Weight = BpkText.Weight.NORMAL): Int? {
+private fun internalGetFontFromTheme(context: Context, weight: BpkText.Weight = BpkText.Weight.NORMAL): Typeface? {
   val a = context.theme.obtainStyledAttributes(null, R.styleable.BpkText, R.attr.bpkTextStyle, 0)
 
   val nullIfInvalid = { resId: Int -> if (resId == -1) null else resId }
@@ -197,5 +210,36 @@ internal fun getFontFromTheme(context: Context, weight: BpkText.Weight = BpkText
 
   a.recycle()
 
-  return fontResource
+  return fontResource?.let { FontCache[it, context] }
+}
+
+private fun internalGetFont(context: Context, textStyle: Int = BpkText.BASE, weight: BpkText.Weight = BpkText.Weight.NORMAL): BpkText.FontDefinition {
+  val styleRes = getStyleId(textStyle, weight)
+
+  val textStyleAttributes = context.obtainStyledAttributes(styleRes, R.styleable.BpkTextStyle)
+  val fontFamily = textStyleAttributes.getString(R.styleable.BpkTextStyle_android_fontFamily) ?: "sans-serif"
+  val fontSize = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_android_textSize, ResourcesUtil.dpToPx(16, context))
+  val letterSpacing = textStyleAttributes.getFloat(R.styleable.BpkTextStyle_android_letterSpacing, -1f)
+    .let { if (it == -1f) null else it }
+
+  textStyleAttributes.recycle()
+
+  val fontFromTheme = internalGetFontFromTheme(context, weight)
+
+  if (fontFromTheme != null) {
+    return BpkText.FontDefinition(fontFromTheme, fontSize, null, isCustomFont = true)
+  }
+
+  return BpkText.FontDefinition(Typeface.create(fontFamily, Typeface.NORMAL), fontSize, letterSpacing)
+}
+
+@StyleRes
+private fun getStyleId(textStyle: Int, weight: BpkText.Weight): Int {
+  val styleProps = styleMapping[textStyle]
+  styleProps ?: throw IllegalStateException("Invalid textStyle")
+  val textAppearance = styleProps[weight.ordinal]
+  textAppearance
+    ?: throw IllegalStateException("Weight $weight is not supported for the current size")
+
+  return textAppearance
 }

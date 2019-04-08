@@ -23,7 +23,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Paint.Align
 import android.graphics.Paint.Style
-import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -33,6 +32,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
+import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.ResourcesUtil
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
@@ -48,15 +48,26 @@ internal class MonthView @JvmOverloads constructor(
   defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
+  private val monthNumberFont by lazy {
+    BpkText.getFont(context, BpkText.SM)
+  }
+
   private val monthNumberPaint: Paint by lazy {
     Paint().apply {
       isAntiAlias = true
       isFakeBoldText = false
       style = Style.FILL
       textAlign = Align.CENTER
-      textSize = miniDayNumberTextSize.toFloat()
+      monthNumberFont.letterSpacing?.let { letterSpacing = it }
+      textSize = monthNumberFont.fontSize.toFloat()
+      typeface = monthNumberFont.typeface
     }
   }
+
+  private val monthLabelFont by lazy {
+    BpkText.getFont(context, BpkText.LG, BpkText.Weight.EMPHASIZED)
+  }
+
   private val monthTitlePaint: Paint by lazy {
     Paint().apply {
       isAntiAlias = true
@@ -64,10 +75,12 @@ internal class MonthView @JvmOverloads constructor(
       color = defaultTextColor
       style = Style.FILL
       textAlign = Align.LEFT
-      textSize = monthLabelTextSize.toFloat()
-      typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD)
+      monthLabelFont.letterSpacing?.let { letterSpacing = it }
+      textSize = monthLabelFont.fontSize.toFloat()
+      typeface = monthLabelFont.typeface
     }
   }
+
   private val selectedCirclePaint: Paint by lazy {
     Paint().apply {
       isFakeBoldText = true
@@ -77,6 +90,7 @@ internal class MonthView @JvmOverloads constructor(
       style = Style.FILL_AND_STROKE
     }
   }
+
   private val todayCirclePaint: Paint by lazy {
     Paint().apply {
       isFakeBoldText = true
@@ -87,6 +101,7 @@ internal class MonthView @JvmOverloads constructor(
       strokeWidth = todayCircleStrokeWidth.toFloat()
     }
   }
+
   private val rangeBackPaint: Paint by lazy {
     Paint().apply {
       isFakeBoldText = true
@@ -95,12 +110,14 @@ internal class MonthView @JvmOverloads constructor(
       style = Style.FILL
     }
   }
+
   private val backgroundPaint: Paint by lazy {
     Paint().apply {
       color = Color.WHITE
       style = Style.FILL
     }
   }
+
   private var coloredCirclePaints = mapOf<LocalDate, Paint>()
   private var coloredSelectedPaints = mapOf<LocalDate, Paint>()
 
@@ -153,8 +170,8 @@ internal class MonthView @JvmOverloads constructor(
   private val todayCircleColor: Int by lazy { ContextCompat.getColor(context, R.color.bpkGray100) }
   private val todayCircleStrokeWidth: Int by lazy { ResourcesUtil.dpToPx(1, context) }
   private val sameDayCircleStrokeWidth: Int by lazy { ResourcesUtil.dpToPx(1, context) }
-  private val miniDayNumberTextSize: Int by lazy { ResourcesUtil.dpToPx(14, context) }
-  private val monthLabelTextSize: Int by lazy { ResourcesUtil.dpToPx(20, context) }
+  private val miniDayNumberTextSize: Int by lazy { monthNumberFont.fontSize }
+  private val monthLabelTextSize: Int by lazy { monthLabelFont.fontSize }
   private val selectedDayCircleRadius: Int by lazy { ResourcesUtil.dpToPx(20, context) }
   private val monthHeaderSize: Int by lazy { ResourcesUtil.dpToPx(52, context) }
   private val coloredCircleStrokeWidth: Int by lazy { ResourcesUtil.dpToPx(3, context) }
