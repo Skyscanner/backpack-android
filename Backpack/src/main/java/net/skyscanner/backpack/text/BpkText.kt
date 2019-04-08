@@ -211,7 +211,7 @@ private fun internalGetFont(context: Context, textStyle: Int = BpkText.BASE, wei
   val styleRes = getStyleId(textStyle, weight)
 
   val textStyleAttributes = context.obtainStyledAttributes(styleRes, R.styleable.BpkTextStyle)
-  val fontFamily = textStyleAttributes.getString(R.styleable.BpkTextStyle_fontFamily) ?: "sans-serif"
+  val fontFamily = textStyleAttributes.getString(R.styleable.BpkTextStyle_android_fontFamily) ?: "sans-serif"
   val fontSize = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_android_textSize, ResourcesUtil.dpToPx(16, context))
   val letterSpacing = textStyleAttributes.getFloat(R.styleable.BpkTextStyle_android_letterSpacing, -1f)
     .let { if (it == -1f) null else it }

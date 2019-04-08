@@ -3,6 +3,7 @@
 **Fixed:**
 
 - Fixed text theming for buttons, calendar and badge
+- Fixed `BpkCalendar` to use the correct font definitions
 
 **Added:**
 

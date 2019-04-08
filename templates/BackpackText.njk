@@ -20,10 +20,11 @@
   <declare-styleable name="BpkTextStyle">
     <attr name="android:fontFamily" />
     <attr name="android:textSize" />
+    <attr name="android:letterSpacing" />
   </declare-styleable>
 {% for text in data %}
   <style name="{{text.name}}">
-    <item name="fontFamily">{{text.fontFamily}}</item>
+    <item name="android:fontFamily">{{text.fontFamily}}</item>
     <item name="android:textSize">{{text.size}}sp</item>
     <item name="android:letterSpacing">{{text.letterSpacing}}</item>
   </style>
