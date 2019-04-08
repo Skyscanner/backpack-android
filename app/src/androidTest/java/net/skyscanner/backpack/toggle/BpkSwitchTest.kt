@@ -2,6 +2,7 @@ package net.skyscanner.backpack.toggle
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.createThemedContext
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,5 +24,10 @@ class BpkSwitchTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestSwitchDefaultChecked() {
     snap(BpkSwitch(testContext).apply { isChecked = true })
+  }
+
+  @Test
+  fun screenshotTestSwitchDefaultChecked_withTheme() {
+    snap(BpkSwitch(createThemedContext(testContext)).apply { isChecked = true })
   }
 }

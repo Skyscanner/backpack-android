@@ -2,6 +2,7 @@ package net.skyscanner.backpack.text
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.createThemedContext
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -182,6 +183,13 @@ class BpkTextTest : BpkSnapshotTest() {
     text.text = "Message"
     text.textStyle = BpkText.XXXL
     text.weight = BpkText.Weight.HEAVY
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextDefault_withTheme() {
+    val text = BpkText(createThemedContext(testContext))
+    text.text = "Message"
     snap(text)
   }
 }
