@@ -10,4 +10,14 @@
   <style name="TestThemeThree">
     <item name="bpkPrimaryColor">@color/bpkGreen400</item>
   </style>
+
+  <style name="TestTextCustomFont">
+    <item name="bpkTextStyle">@style/TestTextCustomFontStyle</item>
+  </style>
+
+  <style name="TestTextCustomFontStyle">
+    <item name="fontFamilyBase">@font/shadows_into_light</item>
+    <item name="fontFamilyHeavy">@font/shadows_into_light</item>
+    <item name="fontFamilyEmphasized">@font/shadows_into_light</item>
+  </style>
 </resources>

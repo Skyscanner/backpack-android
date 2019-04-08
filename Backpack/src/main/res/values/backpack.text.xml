@@ -18,7 +18,7 @@
 -->
 <resources>
   <declare-styleable name="BpkTextStyle">
-    <attr name="android:fontFamily" />
+    <attr name="fontFamily" />
     <attr name="android:textSize" />
     <attr name="android:letterSpacing" />
   </declare-styleable>

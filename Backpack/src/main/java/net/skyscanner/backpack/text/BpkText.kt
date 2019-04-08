@@ -161,13 +161,7 @@ open class BpkText @JvmOverloads constructor(
   }
 
   private fun setup() {
-
-    val styleProps = styleMapping[textStyle]
-    styleProps ?: throw IllegalStateException("Invalid textStyle")
-    val textAppearance = styleProps[weight.ordinal]
-    textAppearance
-      ?: throw IllegalStateException("Weight $weight is not supported for the current size")
-
+    val textAppearance = getStyleId(textStyle, weight)
     if (textStyle == CAPS) {
       isAllCaps = true
     }
@@ -217,7 +211,7 @@ private fun internalGetFont(context: Context, textStyle: Int = BpkText.BASE, wei
   val styleRes = getStyleId(textStyle, weight)
 
   val textStyleAttributes = context.obtainStyledAttributes(styleRes, R.styleable.BpkTextStyle)
-  val fontFamily = textStyleAttributes.getString(R.styleable.BpkTextStyle_android_fontFamily) ?: "sans-serif"
+  val fontFamily = textStyleAttributes.getString(R.styleable.BpkTextStyle_fontFamily) ?: "sans-serif"
   val fontSize = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_android_textSize, ResourcesUtil.dpToPx(16, context))
   val letterSpacing = textStyleAttributes.getFloat(R.styleable.BpkTextStyle_android_letterSpacing, -1f)
     .let { if (it == -1f) null else it }
