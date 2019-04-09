@@ -28,6 +28,7 @@ cache:
 before_install:
   - chmod +x gradlew
   - nvm install
+  - nvm use
   - npm install -g greenkeeper-lockfile
   - yes | sdkmanager "platforms;android-"$ANDROID_API_LEVEL
 
