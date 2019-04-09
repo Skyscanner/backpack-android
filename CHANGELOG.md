@@ -2,6 +2,17 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 7.3.0
+
+**Fixed:**
+
+- Fixed text theming for buttons, calendar and badge
+- Fixed `BpkCalendar` to use the correct font definitions
+
+**Added:**
+
+- Added function `BpkText.getFont` to retrieve the current font definition programmatically
+
 # 7.2.0
 
 **Added:**
