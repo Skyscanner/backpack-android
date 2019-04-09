@@ -18,7 +18,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
+
+private const val INVALID_RESOURCE = -1
 
 private fun getStyle(context: Context, attrs: AttributeSet?): Int {
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
@@ -47,6 +50,8 @@ open class BpkButton : AppCompatButton {
     initialize(attrs, defStyleAttr)
   }
 
+  private var isInitialized = false
+
   val type: Type
     get() {
       return initialType
@@ -66,8 +71,10 @@ open class BpkButton : AppCompatButton {
   @BpkButton.IconPosition
   var iconPosition: Int = BpkButton.END
     set(value) {
-      field = value
-      this.setup()
+      if (value != field) {
+        field = value
+        setUpIfInitialized()
+      }
     }
 
   @ColorInt
@@ -77,6 +84,8 @@ open class BpkButton : AppCompatButton {
   @ColorInt
   private var buttonStrokeColor: Int = ContextCompat.getColor(context, android.R.color.transparent)
 
+  private lateinit var bpkFont: BpkText.FontDefinition
+
   private val defaultPadding = context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2
   // Text is 12dp and icon is 16dp. if icon is present,
   // padding needs to be reduced by 2 dp on both sides
@@ -85,13 +94,11 @@ open class BpkButton : AppCompatButton {
   private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
   private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderSizeLg).toInt()
 
-  private val INVALID_RESOURCE = -1
-
   var icon: Drawable? = null
     set(value) {
-      if (value != null) {
+      if (value != field) {
         field = value
-        setup()
+        setUpIfInitialized()
       }
     }
 
@@ -126,6 +133,9 @@ open class BpkButton : AppCompatButton {
     } finally {
       attr.recycle()
     }
+
+    bpkFont = BpkText.getFont(context, BpkText.XS, BpkText.Weight.EMPHASIZED)
+    isInitialized = true
     setup()
   }
 
@@ -136,7 +146,7 @@ open class BpkButton : AppCompatButton {
    */
   override fun setEnabled(enabled: Boolean) {
     super.setEnabled(enabled)
-    setup()
+    setUpIfInitialized()
   }
 
   enum class Type(internal val id: Int, @ColorRes internal val bgColor: Int, @ColorRes internal val textColor: Int, @ColorRes internal val strokeColor: Int) {
@@ -153,6 +163,12 @@ open class BpkButton : AppCompatButton {
         }
         throw IllegalArgumentException()
       }
+    }
+  }
+
+  private fun setUpIfInitialized() {
+    if (isInitialized) {
+      setup()
     }
   }
 
@@ -198,7 +214,13 @@ open class BpkButton : AppCompatButton {
     } else {
       this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray300))
     }
+
     TextViewCompat.setTextAppearance(this, R.style.bpkButtonBase)
+    // If a custom font is set we update the typeface to reflect it.
+    // We do not support custom letter spacing for custom fonts at the moment
+    if (bpkFont.isCustomFont) {
+      typeface = bpkFont.typeface
+    }
     this.gravity = Gravity.CENTER
 
     this.icon?.let {

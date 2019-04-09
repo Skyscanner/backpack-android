@@ -15,11 +15,11 @@ import net.skyscanner.backpack.text.BpkText
 open class BpkBadge @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_badge
+  defStyleAttr: Int = 0
 ) : BpkText(context, attrs, defStyleAttr) {
 
   init {
-    initialize(context, attrs, defStyleAttr)
+    initialize(attrs, defStyleAttr)
     setup()
   }
 
@@ -88,7 +88,7 @@ open class BpkBadge @JvmOverloads constructor(
       this.text = message
     }
 
-  private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
+  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
 
     val a: TypedArray = context.theme.obtainStyledAttributes(
       attrs,

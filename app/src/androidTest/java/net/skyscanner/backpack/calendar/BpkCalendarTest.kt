@@ -308,6 +308,21 @@ class BpkCalendarTest : BpkSnapshotTest() {
     selectStartEnd(wrapped, asyncScreenshot)
   }
 
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarPast_withTheme() {
+    val calendar = BpkCalendar(createThemedContext(testContext))
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      LocalDate.of(2017, 1, 2),
+      LocalDate.of(2017, 12, 31)
+    )
+
+    calendar.setController(controller)
+    snap(wrapWithBackground(calendar))
+  }
+
   private fun selectStartEnd(wrapped: FrameLayout, asyncScreenshot: AsyncSnapshot) {
     activity.runOnUiThread {
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
