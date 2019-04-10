@@ -5,10 +5,7 @@
     <attr name="android:textSize" />
   </declare-styleable>
 
-  <style name="bpkButtonBase">
-    <item name="fontFamily">sans-serif-light</item>
-    <item name="android:textSize">12sp</item>
-    <item name="android:textStyle">bold</item>
+  <style name="bpkButtonBase" parent="bpkTextSmEmphasized">
     <item name="textAllCaps">true</item>
   </style>
 </resources>

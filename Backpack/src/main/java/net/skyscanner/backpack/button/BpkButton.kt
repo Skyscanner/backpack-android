@@ -9,6 +9,7 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import android.view.Gravity
+import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.IntDef
@@ -20,6 +21,8 @@ import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
+import androidx.annotation.DrawableRes
+import net.skyscanner.backpack.util.ResourcesUtil
 
 private const val INVALID_RESOURCE = -1
 
@@ -39,6 +42,13 @@ private fun getStyle(type: BpkButton.Type): Int {
   }
 }
 
+private class Tokens(val context: Context) {
+  val bpkSpacingBase = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+  val bpkSpacingLg = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
+  val bpkSpacingMd = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+  val bpkSpacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+}
+
 open class BpkButton : AppCompatButton {
   constructor(context: Context) : this(context, null)
   constructor(context: Context, type: Type) : this(context, null, getStyle(type), type)
@@ -50,23 +60,27 @@ open class BpkButton : AppCompatButton {
     initialize(attrs, defStyleAttr)
   }
 
-  private var isInitialized = false
+  companion object {
+    const val START = 0
+    const val END = 1
+    const val ICON_ONLY = 2
+  }
 
   val type: Type
     get() {
       return initialType
     }
 
-  private var initialType: Type
-
   @IntDef(START, END, ICON_ONLY)
   annotation class IconPosition
 
-  companion object {
-    const val START = 0
-    const val END = 1
-    const val ICON_ONLY = 2
-  }
+  var icon: Drawable? = null
+    set(value) {
+      if (value != field) {
+        field = value
+        setUpIfInitialized()
+      }
+    }
 
   @BpkButton.IconPosition
   var iconPosition: Int = BpkButton.END
@@ -77,6 +91,9 @@ open class BpkButton : AppCompatButton {
       }
     }
 
+  private var isInitialized = false
+  private var initialType: Type
+
   @ColorInt
   private var buttonBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkGreen500)
   @ColorInt
@@ -85,24 +102,26 @@ open class BpkButton : AppCompatButton {
   private var buttonStrokeColor: Int = ContextCompat.getColor(context, android.R.color.transparent)
 
   private lateinit var bpkFont: BpkText.FontDefinition
+  private lateinit var textMeasurement: TextMeasurement
 
-  private val defaultPadding = context.resources.getDimension(R.dimen.bpkSpacingLg).toInt() / 2
+  private val tokens = Tokens(context)
+
+  private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
+  // TODO: This is the only value that gives us the same height/padding as RN but it would be
+  // better to find a way to use token values
+  private val paddingVertical = ResourcesUtil.dpToPx(9, context)
+
   // Text is 12dp and icon is 16dp. if icon is present,
   // padding needs to be reduced by 2 dp on both sides
-  private val paddingWithIcon = context.resources.getDimension(R.dimen.bpkSpacingMd).toInt()
+  private val paddingWithIcon = paddingVertical - ResourcesUtil.dpToPx(2, context)
+
+  private var originalStartPadding: Int = 0
+  private var originalEndPadding: Int = 0
 
   private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
   private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderSizeLg).toInt()
 
-  var icon: Drawable? = null
-    set(value) {
-      if (value != field) {
-        field = value
-        setUpIfInitialized()
-      }
-    }
-
-  internal val disabledBackground =
+  private val disabledBackground =
     getSelectorDrawable(
       normalColor = ContextCompat.getColor(context, R.color.bpkGray100),
       pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
@@ -111,6 +130,48 @@ open class BpkButton : AppCompatButton {
       strokeWidth = 0,
       strokeColor = ContextCompat.getColor(context, android.R.color.transparent)
     )
+
+  override fun setCompoundDrawablesWithIntrinsicBounds(@DrawableRes left: Int, @DrawableRes top: Int, @DrawableRes right: Int, @DrawableRes bottom: Int) {
+    super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
+    updatePadding()
+  }
+
+  override fun setCompoundDrawablesWithIntrinsicBounds(left: Drawable?, top: Drawable?, right: Drawable?, bottom: Drawable?) {
+    super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
+    updatePadding()
+  }
+
+  override fun setText(text: CharSequence, type: TextView.BufferType) {
+    super.setText(text, type)
+    updatePadding()
+  }
+
+  override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+    super.onSizeChanged(w, h, oldw, oldh)
+    updatePadding(w)
+  }
+
+  override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
+    super.setPadding(left, top, right, bottom)
+    originalStartPadding = left
+    originalEndPadding = right
+    updatePadding(false)
+  }
+
+  override fun setPaddingRelative(start: Int, top: Int, end: Int, bottom: Int) {
+    super.setPaddingRelative(start, top, end, bottom)
+    originalStartPadding = start
+    originalEndPadding = end
+    updatePadding()
+  }
+
+  override fun setEnabled(enabled: Boolean) {
+    // Even though we have a StateListDrawable, it is not enough just to rely on the state of
+    // the background for enabled/disabled change as we have text color and other properties
+    // changing incl the stroke of the background which means we need to change that as well.
+    super.setEnabled(enabled)
+    setUpIfInitialized()
+  }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
@@ -135,35 +196,9 @@ open class BpkButton : AppCompatButton {
     }
 
     bpkFont = BpkText.getFont(context, BpkText.XS, BpkText.Weight.EMPHASIZED)
+    textMeasurement = TextMeasurement(paint)
     isInitialized = true
     setup()
-  }
-
-  /**
-   * Even though we have a StateListDrawable, it is not enough just to rely on the state of
-   * the background for enabled/disabled change as we have text color and other properties
-   * changing incl the stroke of the background which means we need to change that as well.
-   */
-  override fun setEnabled(enabled: Boolean) {
-    super.setEnabled(enabled)
-    setUpIfInitialized()
-  }
-
-  enum class Type(internal val id: Int, @ColorRes internal val bgColor: Int, @ColorRes internal val textColor: Int, @ColorRes internal val strokeColor: Int) {
-    Primary(0, R.color.bpkGreen500, R.color.bpkWhite, android.R.color.transparent),
-    Secondary(1, R.color.bpkWhite, R.color.bpkBlue600, R.color.bpkGray100),
-    Featured(2, R.color.bpkPink500, R.color.bpkWhite, android.R.color.transparent),
-    Destructive(3, R.color.bpkWhite, R.color.bpkRed500, R.color.bpkGray100),
-    Outline(4, android.R.color.transparent, R.color.bpkWhite, R.color.bpkWhite);
-
-    internal companion object {
-      internal fun fromId(id: Int): Type {
-        for (f in values()) {
-          if (f.id == id) return f
-        }
-        throw IllegalArgumentException()
-      }
-    }
   }
 
   private fun setUpIfInitialized() {
@@ -174,37 +209,22 @@ open class BpkButton : AppCompatButton {
 
   private fun setup() {
     this.isClickable = isEnabled
-    // enforce null text for icon only
     if (iconPosition == ICON_ONLY) {
-      text = null
+      text = ""
     }
 
     when {
       iconPosition == ICON_ONLY -> setPadding(paddingWithIcon, paddingWithIcon, paddingWithIcon, paddingWithIcon)
-      (this.icon != null && iconPosition == END) -> setPaddingRelative(defaultPadding, paddingWithIcon, paddingWithIcon, paddingWithIcon)
-      (this.icon != null && iconPosition == START) -> setPaddingRelative(paddingWithIcon, paddingWithIcon, defaultPadding, paddingWithIcon)
-      else -> setPadding(defaultPadding, defaultPadding, defaultPadding, defaultPadding)
+      (this.icon != null && iconPosition == END) -> setPaddingRelative(paddingHorizontal, paddingWithIcon, paddingHorizontal, paddingWithIcon)
+      (this.icon != null && iconPosition == START) -> setPaddingRelative(paddingHorizontal, paddingWithIcon, paddingHorizontal, paddingWithIcon)
+      else -> setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
     }
 
     if (!text.isNullOrEmpty()) {
-      compoundDrawablePadding = paddingWithIcon / 2
+      compoundDrawablePadding = tokens.bpkSpacingSm
     }
 
-    this.background = if (this.isEnabled) {
-      val pressedColor = if (buttonBackgroundColor == android.R.color.transparent) {
-        ContextCompat.getColor(context, R.color.bpkGray300)
-      } else {
-        darken(buttonBackgroundColor)
-      }
-      getSelectorDrawable(
-        normalColor = buttonBackgroundColor,
-        pressedColor = pressedColor,
-        disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
-        cornerRadius = roundedButtonCorner,
-        strokeWidth = strokeWidth,
-        strokeColor = buttonStrokeColor
-      )
-    } else disabledBackground
+    this.background = getButtonBackground()
 
     if (this.isEnabled) {
       this.setTextColor(getColorSelector(
@@ -240,6 +260,83 @@ open class BpkButton : AppCompatButton {
       if (iconPosition == END) icon else null,
       null
     )
+  }
+
+  private fun getButtonBackground(): Drawable? {
+    return if (this.isEnabled) {
+      val pressedColor = if (buttonBackgroundColor == android.R.color.transparent) {
+        ContextCompat.getColor(context, R.color.bpkGray300)
+      } else {
+        darken(buttonBackgroundColor)
+      }
+      getSelectorDrawable(
+        normalColor = buttonBackgroundColor,
+        pressedColor = pressedColor,
+        disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
+        cornerRadius = roundedButtonCorner,
+        strokeWidth = strokeWidth,
+        strokeColor = buttonStrokeColor
+      )
+    } else disabledBackground
+  }
+
+  private fun updatePadding(relative: Boolean = true) {
+    updatePadding(measuredWidth, relative)
+  }
+
+  private fun updatePadding(width: Int, relative: Boolean = true) {
+    if (width == 0) return
+
+    val compoundDrawables = compoundDrawables
+    if (compoundDrawables.isEmpty() || compoundDrawables.size != 4) return
+
+    val leftDrawable = compoundDrawables[0]
+    val rightDrawable = compoundDrawables[2]
+    if (leftDrawable == null && rightDrawable == null) return
+
+    val textWidth = textMeasurement.getTextWidth(text.toString())
+    val iconPadding = Math.max(compoundDrawablePadding, 1)
+
+    val paddingSize = if (leftDrawable != null && rightDrawable != null) {
+      (width - leftDrawable.intrinsicWidth - rightDrawable.intrinsicWidth - textWidth - iconPadding * 4) / 2
+    } else if (leftDrawable != null) {
+      (width - leftDrawable.intrinsicWidth - iconPadding * 2 - textWidth) / 2
+    } else {
+      (width - rightDrawable.intrinsicWidth - iconPadding * 2 - textWidth) / 2
+    }
+
+    if (relative) {
+      super.setPaddingRelative(
+        Math.max(originalStartPadding, paddingSize),
+        paddingTop,
+        Math.max(originalEndPadding, paddingSize),
+        paddingBottom
+      )
+    } else {
+      super.setPadding(
+        Math.max(originalStartPadding, paddingSize),
+        paddingTop,
+        Math.max(originalEndPadding, paddingSize),
+        paddingBottom
+      )
+    }
+  }
+
+  enum class Type(internal val id: Int, @ColorRes internal val bgColor: Int, @ColorRes internal val textColor: Int, @ColorRes internal val strokeColor: Int) {
+    Primary(0, R.color.bpkGreen500, R.color.bpkWhite, android.R.color.transparent),
+    Secondary(1, R.color.bpkWhite, R.color.bpkBlue600, R.color.bpkGray100),
+    Featured(2, R.color.bpkPink500, R.color.bpkWhite, android.R.color.transparent),
+    Destructive(3, R.color.bpkWhite, R.color.bpkRed500, R.color.bpkGray100),
+    Outline(4, android.R.color.transparent, R.color.bpkWhite, R.color.bpkWhite);
+
+    internal companion object {
+      internal fun fromId(id: Int): Type {
+        for (f in values()) {
+          if (f.id == id) return f
+        }
+        throw IllegalArgumentException()
+      }
+    }
   }
 }
 
