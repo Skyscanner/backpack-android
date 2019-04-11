@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 7.3.1
+
+**Changed:**
+
+- Redesigned icons `bpk_alert__active`, `bpk_alert__add`, `bpk_alert__expired`, `bpk_alert__remove`, `bpk_price_alerts`.
+
 # 7.3.0
 
 **Fixed:**
