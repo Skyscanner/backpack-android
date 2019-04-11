@@ -47,6 +47,7 @@ private class Tokens(val context: Context) {
   val bpkSpacingLg = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
   val bpkSpacingMd = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
   val bpkSpacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+  val bpkBorderSizeLg = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
 }
 
 open class BpkButton : AppCompatButton {
@@ -107,19 +108,17 @@ open class BpkButton : AppCompatButton {
   private val tokens = Tokens(context)
 
   private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
-  // TODO: This is the only value that gives us the same height/padding as RN but it would be
-  // better to find a way to use token values
-  private val paddingVertical = ResourcesUtil.dpToPx(9, context)
+  private val strokeWidth = tokens.bpkBorderSizeLg
 
-  // Text is 12dp and icon is 16dp. if icon is present,
-  // padding needs to be reduced by 2 dp on both sides
-  private val paddingWithIcon = paddingVertical - ResourcesUtil.dpToPx(2, context)
+  private val paddingVertical = tokens.bpkSpacingMd + (strokeWidth / 2)
+  // TODO: This is not the best logic but required to make button with icons the same size as normal buttons. Icons atm are too
+  // big and will be fixed eventually and this logic should hopefully go away
+  private val paddingWithIcon = tokens.bpkSpacingMd - ResourcesUtil.dpToPx(1.5f, context)
 
   private var originalStartPadding: Int = 0
   private var originalEndPadding: Int = 0
 
   private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
-  private val strokeWidth = context.resources.getDimension(R.dimen.bpkBorderSizeLg).toInt()
 
   private val disabledBackground =
     getSelectorDrawable(
@@ -127,7 +126,7 @@ open class BpkButton : AppCompatButton {
       pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
       disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
       cornerRadius = roundedButtonCorner,
-      strokeWidth = 0,
+      strokeWidth = strokeWidth,
       strokeColor = ContextCompat.getColor(context, android.R.color.transparent)
     )
 

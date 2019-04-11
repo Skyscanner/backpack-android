@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.button
 
+import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -27,14 +28,14 @@ class BpkButtonTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(40, 120)
+    setDimensions(300, 300)
   }
 
   @Test
   fun screenshotTestButtonBasicPrimary() {
     val button = BpkButton(testContext, BpkButton.Type.Primary)
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -44,7 +45,7 @@ class BpkButtonTest : BpkSnapshotTest() {
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.START
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -53,14 +54,14 @@ class BpkButtonTest : BpkSnapshotTest() {
     val button = BpkButton(testContext, BpkButton.Type.Primary)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.ICON_ONLY
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
   fun screenshotTestButtonBasicSecondary() {
     val button = BpkButton(testContext, BpkButton.Type.Secondary)
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -70,7 +71,7 @@ class BpkButtonTest : BpkSnapshotTest() {
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.END
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -79,14 +80,14 @@ class BpkButtonTest : BpkSnapshotTest() {
     val button = BpkButton(testContext, BpkButton.Type.Secondary)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.ICON_ONLY
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
   fun screenshotTestButtonBasicFeatured() {
     val button = BpkButton(testContext, BpkButton.Type.Featured)
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -96,7 +97,7 @@ class BpkButtonTest : BpkSnapshotTest() {
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.START
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -105,14 +106,14 @@ class BpkButtonTest : BpkSnapshotTest() {
     val button = BpkButton(testContext, BpkButton.Type.Featured)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.ICON_ONLY
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
   fun screenshotTestButtonBasicDestructive() {
     val button = BpkButton(testContext, BpkButton.Type.Destructive)
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -122,7 +123,7 @@ class BpkButtonTest : BpkSnapshotTest() {
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.START
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -131,14 +132,14 @@ class BpkButtonTest : BpkSnapshotTest() {
     val button = BpkButton(testContext, BpkButton.Type.Destructive)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.ICON_ONLY
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
   fun screenshotTestButtonBasicOutline() {
     val button = BpkButton(testContext, BpkButton.Type.Outline)
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -148,7 +149,7 @@ class BpkButtonTest : BpkSnapshotTest() {
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.START
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
@@ -157,20 +158,27 @@ class BpkButtonTest : BpkSnapshotTest() {
     val button = BpkButton(testContext, BpkButton.Type.Outline)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.ICON_ONLY
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
   fun screenshotTestButtonBasicPrimary_withTheme() {
     val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Primary)
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
   }
 
   @Test
   fun screenshotTestButtonBasicSecondary_withTheme() {
     val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Secondary)
     button.text = "Message"
-    snap(button)
+    snap(wrap(button))
+  }
+
+  private fun wrap(button: BpkButton): FrameLayout {
+    return FrameLayout(testContext).apply {
+      button.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+      addView(button)
+    }
   }
 }
