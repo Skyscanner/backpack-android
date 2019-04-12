@@ -32,6 +32,10 @@ BpkButton(context,BpkButton.Type.Primary).apply {
 }
 ```
 
+### Icon
+
+The icon prop only supports `VectorDrawables` or `BitmapDrawables`. If you provide a different `drawable` make sure
+its size is `16dp`.
 
 ## Theme Props
 

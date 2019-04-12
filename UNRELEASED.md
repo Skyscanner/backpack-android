@@ -2,4 +2,6 @@
 
 **Fixed**:
 
-- Fixed `BpkButton` icon alignment and adjust the style to match current RN implementation
+- BpkButton
+  - Fixed icon alignment and size.
+  - Adjusted style to match current RN implementation.

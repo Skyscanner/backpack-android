@@ -3,16 +3,24 @@ package net.skyscanner.backpack.button
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.VectorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
+import android.util.Log
+import android.util.TypedValue
 import android.view.Gravity
 import android.widget.TextView
+import androidx.annotation.VisibleForTesting
 import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.annotation.IntDef
+import androidx.annotation.DrawableRes
+import androidx.annotation.ColorRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
@@ -21,26 +29,9 @@ import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
-import androidx.annotation.DrawableRes
-import net.skyscanner.backpack.util.ResourcesUtil
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 
 private const val INVALID_RESOURCE = -1
-
-private fun getStyle(context: Context, attrs: AttributeSet?): Int {
-  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
-  val style = BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
-  return getStyle(style)
-}
-
-private fun getStyle(type: BpkButton.Type): Int {
-  return when (type) {
-    BpkButton.Type.Primary -> R.attr.bpkButtonPrimaryStyle
-    BpkButton.Type.Secondary -> R.attr.bpkButtonSecondaryStyle
-    BpkButton.Type.Outline -> R.attr.bpkButtonOutlineStyle
-    BpkButton.Type.Featured -> R.attr.bpkButtonFeaturedStyle
-    BpkButton.Type.Destructive -> R.attr.bpkButtonDestructiveStyle
-  }
-}
 
 private class Tokens(val context: Context) {
   val bpkSpacingBase = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
@@ -67,6 +58,44 @@ open class BpkButton : AppCompatButton {
     const val ICON_ONLY = 2
   }
 
+  private val tokens = Tokens(context)
+
+  private var isInitialized = false
+  private var initialType: Type
+
+  private var wrappedIcon: Drawable? = null
+
+  @ColorInt
+  private var buttonBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkGreen500)
+  @ColorInt
+  private var buttonTextColor: Int = ContextCompat.getColor(context, R.color.bpkWhite)
+  @ColorInt
+  private var buttonStrokeColor: Int = ContextCompat.getColor(context, android.R.color.transparent)
+
+  private lateinit var bpkFont: BpkText.FontDefinition
+  private lateinit var textMeasurement: TextMeasurement
+
+  private val strokeWidth = tokens.bpkBorderSizeLg
+  private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
+
+  private val paddingVertical = tokens.bpkSpacingMd + (strokeWidth / 2)
+
+  private var originalStartPadding: Int = 0
+  private var originalEndPadding: Int = 0
+
+  private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
+
+  @VisibleForTesting
+  internal val disabledBackground =
+    getSelectorDrawable(
+      normalColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
+      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      cornerRadius = roundedButtonCorner,
+      strokeWidth = null,
+      strokeColor = null
+    )
+
   val type: Type
     get() {
       return initialType
@@ -79,6 +108,13 @@ open class BpkButton : AppCompatButton {
     set(value) {
       if (value != field) {
         field = value
+
+        value?.let {
+          wrappedIcon = convertToBitmap(it)?.let { bitmap ->
+            BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, tokens.bpkSpacingBase, tokens.bpkSpacingBase, true))
+          }
+        }
+
         setUpIfInitialized()
       }
     }
@@ -91,44 +127,6 @@ open class BpkButton : AppCompatButton {
         setUpIfInitialized()
       }
     }
-
-  private var isInitialized = false
-  private var initialType: Type
-
-  @ColorInt
-  private var buttonBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkGreen500)
-  @ColorInt
-  private var buttonTextColor: Int = ContextCompat.getColor(context, R.color.bpkWhite)
-  @ColorInt
-  private var buttonStrokeColor: Int = ContextCompat.getColor(context, android.R.color.transparent)
-
-  private lateinit var bpkFont: BpkText.FontDefinition
-  private lateinit var textMeasurement: TextMeasurement
-
-  private val tokens = Tokens(context)
-
-  private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
-  private val strokeWidth = tokens.bpkBorderSizeLg
-
-  private val paddingVertical = tokens.bpkSpacingMd + (strokeWidth / 2)
-  // TODO: This is not the best logic but required to make button with icons the same size as normal buttons. Icons atm are too
-  // big and will be fixed eventually and this logic should hopefully go away
-  private val paddingWithIcon = tokens.bpkSpacingMd - ResourcesUtil.dpToPx(1.5f, context)
-
-  private var originalStartPadding: Int = 0
-  private var originalEndPadding: Int = 0
-
-  private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
-
-  private val disabledBackground =
-    getSelectorDrawable(
-      normalColor = ContextCompat.getColor(context, R.color.bpkGray100),
-      pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
-      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
-      cornerRadius = roundedButtonCorner,
-      strokeWidth = strokeWidth,
-      strokeColor = ContextCompat.getColor(context, android.R.color.transparent)
-    )
 
   override fun setCompoundDrawablesWithIntrinsicBounds(@DrawableRes left: Int, @DrawableRes top: Int, @DrawableRes right: Int, @DrawableRes bottom: Int) {
     super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
@@ -207,23 +205,34 @@ open class BpkButton : AppCompatButton {
   }
 
   private fun setup() {
-    this.isClickable = isEnabled
+    isClickable = isEnabled
     if (iconPosition == ICON_ONLY) {
       text = ""
     }
 
-    when {
-      iconPosition == ICON_ONLY -> setPadding(paddingWithIcon, paddingWithIcon, paddingWithIcon, paddingWithIcon)
-      (this.icon != null && iconPosition == END) -> setPaddingRelative(paddingHorizontal, paddingWithIcon, paddingHorizontal, paddingWithIcon)
-      (this.icon != null && iconPosition == START) -> setPaddingRelative(paddingHorizontal, paddingWithIcon, paddingHorizontal, paddingWithIcon)
-      else -> setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
+    TextViewCompat.setTextAppearance(this, R.style.bpkButtonBase)
+    // If a custom font is set we update the typeface to reflect it.
+    // We do not support custom letter spacing for custom fonts at the moment
+    if (bpkFont.isCustomFont) {
+      typeface = bpkFont.typeface
+      setTextSize(TypedValue.COMPLEX_UNIT_PX, bpkFont.fontSize.toFloat())
     }
+    gravity = Gravity.CENTER
+
+    var paddingHorizontal = paddingHorizontal
+    var paddingVertical = paddingVertical
+
+    if (iconPosition == ICON_ONLY) {
+      paddingHorizontal = tokens.bpkSpacingMd + strokeWidth
+    }
+
+    setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
 
     if (!text.isNullOrEmpty()) {
       compoundDrawablePadding = tokens.bpkSpacingSm
     }
 
-    this.background = getButtonBackground()
+    background = getButtonBackground()
 
     if (this.isEnabled) {
       this.setTextColor(getColorSelector(
@@ -234,15 +243,7 @@ open class BpkButton : AppCompatButton {
       this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray300))
     }
 
-    TextViewCompat.setTextAppearance(this, R.style.bpkButtonBase)
-    // If a custom font is set we update the typeface to reflect it.
-    // We do not support custom letter spacing for custom fonts at the moment
-    if (bpkFont.isCustomFont) {
-      typeface = bpkFont.typeface
-    }
-    this.gravity = Gravity.CENTER
-
-    this.icon?.let {
+    wrappedIcon?.let {
       DrawableCompat.setTintList(
         it,
         getColorSelector(
@@ -251,14 +252,14 @@ open class BpkButton : AppCompatButton {
           ContextCompat.getColor(context, R.color.bpkGray300)
         )
       )
-    }
 
-    this.setCompoundDrawablesRelativeWithIntrinsicBounds(
-      if (iconPosition == START || iconPosition == ICON_ONLY) icon else null,
-      null,
-      if (iconPosition == END) icon else null,
-      null
-    )
+      this.setCompoundDrawablesWithIntrinsicBounds(
+        if (iconPosition == START || iconPosition == ICON_ONLY) it else null,
+        null,
+        if (iconPosition == END) it else null,
+        null
+      )
+    }
   }
 
   private fun getButtonBackground(): Drawable? {
@@ -273,7 +274,7 @@ open class BpkButton : AppCompatButton {
         pressedColor = pressedColor,
         disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
         cornerRadius = roundedButtonCorner,
-        strokeWidth = strokeWidth,
+        strokeWidth = if (type !== Type.Secondary && type !== Type.Destructive) null else strokeWidth,
         strokeColor = buttonStrokeColor
       )
     } else disabledBackground
@@ -387,6 +388,9 @@ private fun corneredDrawable(
   cornerRadius?.let { gd.cornerRadius = it }
   if (strokeWidth != null && strokeColor != null) {
     gd.setStroke(strokeWidth, strokeColor)
+  } else {
+    // This is required otherwise the ripple effect leaks outside the button
+    gd.setStroke(0, -1)
   }
   return gd
 }
@@ -428,4 +432,36 @@ private fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
   Color.colorToHSV(normalColor, hsv)
   hsv[2] *= 1f - factor // value component
   return Color.HSVToColor(hsv)
+}
+
+private fun convertToBitmap(drawable: Drawable): Bitmap? {
+  if (drawable is BitmapDrawable) {
+    return drawable.bitmap
+  } else if (drawable is VectorDrawable || drawable is VectorDrawableCompat) {
+    val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    drawable.setBounds(0, 0, canvas.width, canvas.height)
+    drawable.draw(canvas)
+
+    return bitmap
+  }
+
+  Log.w("BpkButton", "Icon drawable not supported, make sure the size is set to 16dp")
+  return null
+}
+
+private fun getStyle(context: Context, attrs: AttributeSet?): Int {
+  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
+  val style = BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+  return getStyle(style)
+}
+
+private fun getStyle(type: BpkButton.Type): Int {
+  return when (type) {
+    BpkButton.Type.Primary -> R.attr.bpkButtonPrimaryStyle
+    BpkButton.Type.Secondary -> R.attr.bpkButtonSecondaryStyle
+    BpkButton.Type.Outline -> R.attr.bpkButtonOutlineStyle
+    BpkButton.Type.Featured -> R.attr.bpkButtonFeaturedStyle
+    BpkButton.Type.Destructive -> R.attr.bpkButtonDestructiveStyle
+  }
 }

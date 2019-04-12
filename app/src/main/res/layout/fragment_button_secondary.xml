@@ -11,7 +11,7 @@
     android:id="@+id/btn_default"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Default"
+    android:text="button"
     app:buttonType="secondary"/>
 
   <net.skyscanner.backpack.button.BpkButton
