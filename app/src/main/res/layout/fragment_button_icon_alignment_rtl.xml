@@ -5,7 +5,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   style="@style/App.Story"
   android:orientation="vertical"
-  tools:ignore="HardcodedText">
+  tools:ignore="HardcodedText"
+  android:layoutDirection="rtl">
 
   <net.skyscanner.backpack.button.BpkButton
     android:layout_margin="@dimen/bpkSpacingSm"

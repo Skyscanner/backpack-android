@@ -211,13 +211,14 @@ open class BpkButton : AppCompatButton {
     }
 
     TextViewCompat.setTextAppearance(this, R.style.bpkButtonBase)
+    gravity = Gravity.CENTER
+
     // If a custom font is set we update the typeface to reflect it.
     // We do not support custom letter spacing for custom fonts at the moment
     if (bpkFont.isCustomFont) {
       typeface = bpkFont.typeface
       setTextSize(TypedValue.COMPLEX_UNIT_PX, bpkFont.fontSize.toFloat())
     }
-    gravity = Gravity.CENTER
 
     var paddingHorizontal = paddingHorizontal
     var paddingVertical = paddingVertical
@@ -253,7 +254,7 @@ open class BpkButton : AppCompatButton {
         )
       )
 
-      this.setCompoundDrawablesWithIntrinsicBounds(
+      this.setCompoundDrawablesRelativeWithIntrinsicBounds(
         if (iconPosition == START || iconPosition == ICON_ONLY) it else null,
         null,
         if (iconPosition == END) it else null,

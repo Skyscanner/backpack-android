@@ -7,6 +7,7 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -38,6 +39,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicPrimaryWithIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Primary)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -47,6 +49,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicPrimaryOnlyIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Primary)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -62,6 +65,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicSecondaryWithIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Secondary)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -71,6 +75,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicSecondaryOnlyIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Secondary)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -86,6 +91,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicFeaturedWithIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Featured)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -95,6 +101,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicFeaturedOnlyIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Featured)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -110,6 +117,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicDestructiveWithIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Destructive)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -119,6 +127,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicDestructiveOnlyIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Destructive)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -134,6 +143,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicOutlineWithIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Outline)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -143,6 +153,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonBasicOutlineOnlyIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Outline)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -165,6 +176,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonLargeWithIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Primary)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
@@ -174,6 +186,7 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Ignore
   fun screenshotTestButtonLargeWithIconTrailing() {
     val button = BpkButton(testContext, BpkButton.Type.Primary)
     button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
