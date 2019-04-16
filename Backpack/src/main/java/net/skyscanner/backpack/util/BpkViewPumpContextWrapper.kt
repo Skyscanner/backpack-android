@@ -1,5 +1,3 @@
-@file:JvmName("BpkViewPumpContextWrapper")
-
 package net.skyscanner.backpack.util
 
 import android.content.Context
