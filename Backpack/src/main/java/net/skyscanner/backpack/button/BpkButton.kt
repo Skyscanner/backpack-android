@@ -275,7 +275,7 @@ open class BpkButton : AppCompatButton {
         pressedColor = pressedColor,
         disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
         cornerRadius = roundedButtonCorner,
-        strokeWidth = if (type !== Type.Secondary && type !== Type.Destructive) null else strokeWidth,
+        strokeWidth = if (type == Type.Primary || type == Type.Featured) null else strokeWidth,
         strokeColor = buttonStrokeColor
       )
     } else disabledBackground
