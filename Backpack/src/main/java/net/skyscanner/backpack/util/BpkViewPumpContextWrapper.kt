@@ -4,14 +4,12 @@ import android.content.Context
 import android.content.ContextWrapper
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
-class BpkViewPumpContextWrapper {
-  companion object {
+object BpkViewPumpContextWrapper {
     fun wrap(context: Context): ContextWrapper {
       return if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.P) {
         ContextWrapper(context)
       } else {
         ViewPumpContextWrapper.wrap(context)
       }
-    }
   }
 }
