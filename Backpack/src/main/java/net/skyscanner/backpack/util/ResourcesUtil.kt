@@ -23,7 +23,12 @@ internal object ResourcesUtil {
 
   @Dimension
   fun dpToPx(@Dimension dp: Int, context: Context): Int {
-    return Math.round(dp.toFloat() * context.resources.displayMetrics.density)
+    return dpToPx(dp.toFloat(), context)
+  }
+
+  @Dimension
+  fun dpToPx(@Dimension dp: Float, context: Context): Int {
+    return Math.round(dp * context.resources.displayMetrics.density)
   }
 
   @Dimension

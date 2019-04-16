@@ -76,7 +76,9 @@ object ComponentRegistry {
         "Secondary" story NodeData { Story of R.layout.fragment_button_secondary },
         "Destructive" story NodeData { Story of R.layout.fragment_button_destructive },
         "Featured" story NodeData { Story of R.layout.fragment_button_featured },
-        "Outline" story NodeData { Story of R.layout.fragment_button_outline }
+        "Outline" story NodeData { Story of R.layout.fragment_button_outline },
+        "Icon alignment" story NodeData { Story of R.layout.fragment_button_icon_alignment },
+        "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment_rtl }
       )),
     "Card" story NodeData({ children -> SubStory of children },
       mapOf(
