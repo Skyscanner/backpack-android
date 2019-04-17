@@ -1,7 +1,6 @@
 package net.skyscanner.backpack.util
 
 import android.content.Context
-import android.content.ContextWrapper
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 
 object BpkViewPumpContextWrapper {
@@ -11,7 +10,7 @@ object BpkViewPumpContextWrapper {
    */
   fun wrap(context: Context): Context {
     return if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.P) {
-      ContextWrapper(context)
+      context
     } else {
       ViewPumpContextWrapper.wrap(context)
     }
