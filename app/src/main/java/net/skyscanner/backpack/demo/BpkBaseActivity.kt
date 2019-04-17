@@ -11,8 +11,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import net.skyscanner.backpack.demo.data.SharedPreferences
+import net.skyscanner.backpack.util.BpkViewPumpContextWrapper
 import net.skyscanner.backpack.util.ThemeOverlayEnforcement
 
 @SuppressLint("Registered")
@@ -31,7 +31,7 @@ open class BpkBaseActivity : AppCompatActivity() {
   }
 
   override fun attachBaseContext(newBase: Context) {
-    super.attachBaseContext(ThemeOverlayEnforcement(ViewPumpContextWrapper.wrap(newBase)))
+    super.attachBaseContext(ThemeOverlayEnforcement(BpkViewPumpContextWrapper.wrap(newBase)))
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
