@@ -2,6 +2,18 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 7.4
+
+**Fixed**:
+
+- BpkButton
+  - Fixed icon alignment and size.
+  - Adjusted style to match current RN implementation.
+
+**Added:**
+
+- Added `BpkViewPumpContextWrapper` to wrap `ViewPump` functionality and disabled it for Android Q.
+
 # 7.3.1
 
 **Changed:**
