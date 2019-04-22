@@ -17,12 +17,11 @@
 package net.skyscanner.backpack.calendar.view
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.ViewConfiguration
 import android.widget.AbsListView
 import android.widget.ListView
-import androidx.core.content.ContextCompat
-import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.MonthAdapter
 
@@ -83,7 +82,7 @@ internal class CalendarView constructor(
     setOnScrollListener(this)
     setFadingEdgeLength(0)
     setFriction(ViewConfiguration.getScrollFriction() * scrollFriction)
-    setBackgroundColor(ContextCompat.getColor(context, R.color.bpkWhite))
+    setBackgroundColor(Color.TRANSPARENT)
   }
 
   // TODO: Updates the title and selected month if the view has moved to a new month.
