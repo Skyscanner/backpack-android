@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.button
 
 import android.content.Context
+import android.os.Handler
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -55,13 +56,15 @@ class BpkButtonTest {
     val button = BpkButton(context, BpkButton.Type.Primary).apply {
       isEnabled = true
     }
+
     val newState = false
     val expectedBackgroundState = button.disabledBackground()
-    button.isEnabled = newState
-
-    Assert.assertEquals(newState, button.isEnabled)
-    Assert.assertEquals(expectedBackgroundState.bounds, button.background.bounds)
-    Assert.assertEquals(expectedBackgroundState.alpha, button.background.alpha)
-    Assert.assertEquals(expectedBackgroundState.colorFilter, button.background.colorFilter)
+    Handler(context.mainLooper).post {
+      button.isEnabled = newState
+      Assert.assertEquals(newState, button.isEnabled)
+      Assert.assertEquals(expectedBackgroundState.bounds, button.background.bounds)
+      Assert.assertEquals(expectedBackgroundState.alpha, button.background.alpha)
+      Assert.assertEquals(expectedBackgroundState.colorFilter, button.background.colorFilter)
+    }
   }
 }
