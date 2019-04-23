@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.button
 
+import android.animation.AnimatorInflater
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
@@ -187,6 +188,7 @@ open class BpkButton : AppCompatButton {
           icon = AppCompatResources.getDrawable(context, it)
         }
       }
+      stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
     } finally {
       attr.recycle()
     }
