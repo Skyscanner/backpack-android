@@ -2,7 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
-# 7.4
+# 7.4.1
+
+**Fixed:**
+
+- BpkCalendar
+  - Changed changed background color to transparent.
+  - Removed synthetic imports.
+
+# 7.4.0
 
 **Fixed**:
 
