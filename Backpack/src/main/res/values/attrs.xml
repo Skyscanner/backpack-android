@@ -70,6 +70,7 @@
     <attr name="buttonBackgroundColor" format="color" />
     <attr name="buttonTextColor" format="color" />
     <attr name="buttonStrokeColor" format="color" />
+    <attr name="buttonCornerRadius" format="dimension" />
   </declare-styleable>
 
   <declare-styleable name="BpkCardView">

@@ -21,6 +21,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.IntDef
 import androidx.annotation.DrawableRes
 import androidx.annotation.ColorRes
+import androidx.annotation.Dimension
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
@@ -75,26 +76,23 @@ open class BpkButton : AppCompatButton {
   private lateinit var bpkFont: BpkText.FontDefinition
   private lateinit var textMeasurement: TextMeasurement
 
+  @Dimension
   private val strokeWidth = tokens.bpkBorderSizeLg
+
+  @Dimension
   private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
 
+  @Dimension
   private val paddingVertical = tokens.bpkSpacingMd + (strokeWidth / 2)
 
+  @Dimension
   private var originalStartPadding: Int = 0
+
+  @Dimension
   private var originalEndPadding: Int = 0
 
-  private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
-
-  @VisibleForTesting
-  internal val disabledBackground =
-    getSelectorDrawable(
-      normalColor = ContextCompat.getColor(context, R.color.bpkGray100),
-      pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
-      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
-      cornerRadius = roundedButtonCorner,
-      strokeWidth = null,
-      strokeColor = null
-    )
+  @Dimension
+  private var roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
 
   val type: Type
     get() {
@@ -182,6 +180,7 @@ open class BpkButton : AppCompatButton {
       buttonBackgroundColor = attr.getColor(R.styleable.BpkButton_buttonBackgroundColor, ContextCompat.getColor(context, type.bgColor))
       buttonTextColor = attr.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))
       buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, ContextCompat.getColor(context, type.strokeColor))
+      roundedButtonCorner = attr.getDimension(R.styleable.BpkButton_buttonCornerRadius, context.resources.getDimension(R.dimen.bpkSpacingLg))
 
       attr.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RESOURCE).let {
         if (it != INVALID_RESOURCE) {
@@ -236,10 +235,13 @@ open class BpkButton : AppCompatButton {
     background = getButtonBackground()
 
     if (this.isEnabled) {
-      this.setTextColor(getColorSelector(
-        buttonTextColor,
-        darken(buttonTextColor, .1f),
-        ContextCompat.getColor(context, R.color.bpkGray300)))
+      this.setTextColor(
+        getColorSelector(
+          buttonTextColor,
+          darken(buttonTextColor, .1f),
+          ContextCompat.getColor(context, R.color.bpkGray300)
+        )
+      )
     } else {
       this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray300))
     }
@@ -263,6 +265,18 @@ open class BpkButton : AppCompatButton {
     }
   }
 
+  @VisibleForTesting
+  internal fun disabledBackground(): Drawable {
+    return getSelectorDrawable(
+      normalColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
+      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      cornerRadius = roundedButtonCorner,
+      strokeWidth = null,
+      strokeColor = null
+    )
+  }
+
   private fun getButtonBackground(): Drawable? {
     return if (this.isEnabled) {
       val pressedColor = if (buttonBackgroundColor == android.R.color.transparent) {
@@ -278,7 +292,7 @@ open class BpkButton : AppCompatButton {
         strokeWidth = if (type == Type.Primary || type == Type.Featured) null else strokeWidth,
         strokeColor = buttonStrokeColor
       )
-    } else disabledBackground
+    } else disabledBackground()
   }
 
   private fun updatePadding(relative: Boolean = true) {

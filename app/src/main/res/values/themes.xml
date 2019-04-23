@@ -30,9 +30,11 @@
   <style name="LondonThemeButtonPrimary">
     <item name="buttonBackgroundColor">#002F61</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
+    <item name="buttonCornerRadius">@dimen/bpkSpacingSm</item>
   </style>
   <style name="LondonThemeButtonSecondary">
     <item name="buttonBackgroundColor">@color/bpkWhite</item>
+    <item name="buttonCornerRadius">@dimen/bpkSpacingSm</item>
     <item name="buttonTextColor">#ED1B28</item>
     <item name="buttonStrokeColor">#5E072C</item>
   </style>

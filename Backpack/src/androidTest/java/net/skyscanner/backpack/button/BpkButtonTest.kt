@@ -56,10 +56,12 @@ class BpkButtonTest {
       isEnabled = true
     }
     val newState = false
-    val expectedBackgroundState = button.disabledBackground
+    val expectedBackgroundState = button.disabledBackground()
     button.isEnabled = newState
 
     Assert.assertEquals(newState, button.isEnabled)
-    Assert.assertEquals(expectedBackgroundState, button.background)
+    Assert.assertEquals(expectedBackgroundState.bounds, button.background.bounds)
+    Assert.assertEquals(expectedBackgroundState.alpha, button.background.alpha)
+    Assert.assertEquals(expectedBackgroundState.colorFilter, button.background.colorFilter)
   }
 }
