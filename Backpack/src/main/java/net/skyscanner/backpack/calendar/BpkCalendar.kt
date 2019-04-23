@@ -4,10 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import kotlinx.android.synthetic.main.view_bpk_calendar.view.*
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.badge.BpkBadge
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
+import net.skyscanner.backpack.calendar.view.CalendarView
 import net.skyscanner.backpack.calendar.view.OnYearChangedListener
+import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
 import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 import org.threeten.bp.YearMonth
 
@@ -22,10 +24,11 @@ open class BpkCalendar @JvmOverloads constructor(
   }
 
   fun setController(controller: BpkCalendarController) {
-    weekday_header_view.initializeWithLocale(controller.locale)
-    calendar_view.controller = controller
-    controller.updateContentCallback = calendar_view
-    calendar_view.listener = this
+    val calendarView = findViewById<CalendarView>(R.id.calendar_view)
+    findViewById<WeekdayHeaderView>(R.id.weekday_header_view).initializeWithLocale(controller.locale)
+    calendarView.controller = controller
+    controller.updateContentCallback = calendarView
+    calendarView.listener = this
 
     updateYearPill(controller.startDate.year)
   }
@@ -35,7 +38,8 @@ open class BpkCalendar @JvmOverloads constructor(
   }
 
   private fun updateYearPill(year: Int) {
-    year_pill_view.message = year.toString()
-    year_pill_view.visibility = if (YearMonth.now().year == year) View.GONE else View.VISIBLE
+    val yearPillView = findViewById<BpkBadge>(R.id.year_pill_view)
+    yearPillView.message = year.toString()
+    yearPillView.visibility = if (YearMonth.now().year == year) View.GONE else View.VISIBLE
   }
 }
