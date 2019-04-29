@@ -95,8 +95,6 @@ open class BpkButton : AppCompatButton {
   @Dimension
   private var roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
 
-  private var isElevated = false
-
   val type: Type
     get() {
       return initialType
@@ -184,7 +182,6 @@ open class BpkButton : AppCompatButton {
       buttonTextColor = attr.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))
       buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, ContextCompat.getColor(context, type.strokeColor))
       roundedButtonCorner = attr.getDimension(R.styleable.BpkButton_buttonCornerRadius, context.resources.getDimension(R.dimen.bpkSpacingLg))
-      isElevated = attr.getBoolean(R.styleable.BpkButton_buttonShowElevation, false)
 
       attr.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RESOURCE).let {
         if (it != INVALID_RESOURCE) {
@@ -267,10 +264,7 @@ open class BpkButton : AppCompatButton {
         null
       )
     }
-    if (isElevated) {
-      stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
-    }
-
+    stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
     clipToOutline = true
   }
 

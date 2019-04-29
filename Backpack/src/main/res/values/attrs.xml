@@ -71,7 +71,6 @@
     <attr name="buttonTextColor" format="color" />
     <attr name="buttonStrokeColor" format="color" />
     <attr name="buttonCornerRadius" format="dimension" />
-    <attr name="buttonShowElevation" format="boolean" />
   </declare-styleable>
 
   <declare-styleable name="BpkCardView">
