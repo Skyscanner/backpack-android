@@ -40,7 +40,8 @@ private class Tokens(val context: Context) {
   val bpkSpacingLg = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
   val bpkSpacingMd = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
   val bpkSpacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
-  val bpkBorderSizeLg = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeSm)
+  val bpkBorderSizeSm = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeSm)
+  val bpkBorderSizeLg = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
 }
 
 open class BpkButton : AppCompatButton {
@@ -77,14 +78,19 @@ open class BpkButton : AppCompatButton {
   private lateinit var bpkFont: BpkText.FontDefinition
   private lateinit var textMeasurement: TextMeasurement
 
-  @Dimension
-  private val strokeWidth = tokens.bpkBorderSizeLg
+  private fun strokeWidth(): Int {
+    return (if (isElevated) {
+      tokens.bpkBorderSizeSm
+    } else {
+      tokens.bpkBorderSizeLg
+    })
+  }
 
   @Dimension
   private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
 
   @Dimension
-  private val paddingVertical = tokens.bpkSpacingMd + (strokeWidth / 2)
+  private val paddingVertical = tokens.bpkSpacingMd + (strokeWidth() / 2)
 
   @Dimension
   private var originalStartPadding: Int = 0
@@ -227,7 +233,7 @@ open class BpkButton : AppCompatButton {
     val paddingVertical = paddingVertical
 
     if (iconPosition == ICON_ONLY) {
-      paddingHorizontal = tokens.bpkSpacingMd + strokeWidth
+      paddingHorizontal = tokens.bpkSpacingMd + strokeWidth()
     }
 
     setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
@@ -297,7 +303,7 @@ open class BpkButton : AppCompatButton {
         pressedColor = pressedColor,
         disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
         cornerRadius = roundedButtonCorner,
-        strokeWidth = if (type == Type.Primary || type == Type.Featured) null else strokeWidth,
+        strokeWidth = if (type == Type.Primary || type == Type.Featured) null else strokeWidth(),
         strokeColor = buttonStrokeColor
       )
     } else disabledBackground()
