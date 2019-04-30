@@ -10,6 +10,8 @@ import net.skyscanner.backpack.demo.stories.SubStory
 import net.skyscanner.backpack.demo.stories.ColorStory
 import net.skyscanner.backpack.demo.stories.ColoredCalendarStory
 import net.skyscanner.backpack.demo.stories.ChipStory
+import net.skyscanner.backpack.demo.stories.ElevationStory
+import net.skyscanner.backpack.demo.stories.SpacingStory
 
 interface RegistryItem {
   val name: String
@@ -126,9 +128,11 @@ object ComponentRegistry {
   private val TOKENS_MAP = mapOf(
     "All Icons" story NodeData { IconsStory() },
     "Color" story NodeData { ColorStory() },
+    "Elevation" story NodeData { ElevationStory() },
     "Gradient" story NodeData { GradientStory() },
     "Icons" story NodeData { Story of R.layout.fragment_icons },
-    "Radii" story NodeData { Story of R.layout.fragment_radii }
+    "Radii" story NodeData { Story of R.layout.fragment_radii },
+    "Spacing" story NodeData { SpacingStory() }
   )
 
   fun getStoryCreator(fullyQualifiedName: String): RegistryItem {
