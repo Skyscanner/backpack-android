@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.button
 
+import android.animation.AnimatorInflater
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
@@ -21,6 +22,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.IntDef
 import androidx.annotation.DrawableRes
 import androidx.annotation.ColorRes
+import androidx.annotation.Dimension
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
@@ -38,6 +40,7 @@ private class Tokens(val context: Context) {
   val bpkSpacingLg = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
   val bpkSpacingMd = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
   val bpkSpacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+  val bpkBorderSizeSm = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeSm)
   val bpkBorderSizeLg = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
 }
 
@@ -75,26 +78,30 @@ open class BpkButton : AppCompatButton {
   private lateinit var bpkFont: BpkText.FontDefinition
   private lateinit var textMeasurement: TextMeasurement
 
-  private val strokeWidth = tokens.bpkBorderSizeLg
+  private fun strokeWidth(): Int {
+    return (if (isElevated) {
+      tokens.bpkBorderSizeSm
+    } else {
+      tokens.bpkBorderSizeLg
+    })
+  }
+
+  @Dimension
   private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
 
-  private val paddingVertical = tokens.bpkSpacingMd + (strokeWidth / 2)
+  @Dimension
+  private val paddingVertical = tokens.bpkSpacingMd + (strokeWidth() / 2)
 
+  @Dimension
   private var originalStartPadding: Int = 0
+
+  @Dimension
   private var originalEndPadding: Int = 0
 
-  private val roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
+  @Dimension
+  private var roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
 
-  @VisibleForTesting
-  internal val disabledBackground =
-    getSelectorDrawable(
-      normalColor = ContextCompat.getColor(context, R.color.bpkGray100),
-      pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
-      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
-      cornerRadius = roundedButtonCorner,
-      strokeWidth = null,
-      strokeColor = null
-    )
+  private var isElevated = false
 
   val type: Type
     get() {
@@ -182,6 +189,8 @@ open class BpkButton : AppCompatButton {
       buttonBackgroundColor = attr.getColor(R.styleable.BpkButton_buttonBackgroundColor, ContextCompat.getColor(context, type.bgColor))
       buttonTextColor = attr.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))
       buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, ContextCompat.getColor(context, type.strokeColor))
+      roundedButtonCorner = attr.getDimension(R.styleable.BpkButton_buttonCornerRadius, context.resources.getDimension(R.dimen.bpkSpacingLg))
+      isElevated = attr.getBoolean(R.styleable.BpkButton_buttonAddElevation, false)
 
       attr.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RESOURCE).let {
         if (it != INVALID_RESOURCE) {
@@ -221,10 +230,10 @@ open class BpkButton : AppCompatButton {
     }
 
     var paddingHorizontal = paddingHorizontal
-    var paddingVertical = paddingVertical
+    val paddingVertical = paddingVertical
 
     if (iconPosition == ICON_ONLY) {
-      paddingHorizontal = tokens.bpkSpacingMd + strokeWidth
+      paddingHorizontal = tokens.bpkSpacingMd + strokeWidth()
     }
 
     setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
@@ -236,10 +245,13 @@ open class BpkButton : AppCompatButton {
     background = getButtonBackground()
 
     if (this.isEnabled) {
-      this.setTextColor(getColorSelector(
-        buttonTextColor,
-        darken(buttonTextColor, .1f),
-        ContextCompat.getColor(context, R.color.bpkGray300)))
+      this.setTextColor(
+        getColorSelector(
+          buttonTextColor,
+          darken(buttonTextColor, .1f),
+          ContextCompat.getColor(context, R.color.bpkGray300)
+        )
+      )
     } else {
       this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray300))
     }
@@ -261,6 +273,24 @@ open class BpkButton : AppCompatButton {
         null
       )
     }
+
+    if (isElevated && isEnabled) {
+      stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
+    }
+
+    clipToOutline = true
+  }
+
+  @VisibleForTesting
+  internal fun disabledBackground(): Drawable {
+    return getSelectorDrawable(
+      normalColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
+      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      cornerRadius = roundedButtonCorner,
+      strokeWidth = null,
+      strokeColor = null
+    )
   }
 
   private fun getButtonBackground(): Drawable? {
@@ -275,10 +305,10 @@ open class BpkButton : AppCompatButton {
         pressedColor = pressedColor,
         disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
         cornerRadius = roundedButtonCorner,
-        strokeWidth = if (type == Type.Primary || type == Type.Featured) null else strokeWidth,
+        strokeWidth = if (type == Type.Primary || type == Type.Featured) null else strokeWidth(),
         strokeColor = buttonStrokeColor
       )
-    } else disabledBackground
+    } else disabledBackground()
   }
 
   private fun updatePadding(relative: Boolean = true) {

@@ -30,11 +30,15 @@
   <style name="LondonThemeButtonPrimary">
     <item name="buttonBackgroundColor">#002F61</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
+    <item name="buttonCornerRadius">@dimen/bpkSpacingMd</item>
+    <item name="buttonAddElevation">true</item>
   </style>
   <style name="LondonThemeButtonSecondary">
     <item name="buttonBackgroundColor">@color/bpkWhite</item>
+    <item name="buttonCornerRadius">@dimen/bpkSpacingMd</item>
     <item name="buttonTextColor">#ED1B28</item>
     <item name="buttonStrokeColor">#5E072C</item>
+    <item name="buttonAddElevation">true</item>
   </style>
 
   <style name="LondonThemeChip">
@@ -82,12 +86,16 @@
   <style name="DohaThemeButtonPrimary">
     <item name="buttonBackgroundColor">#ffb300</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
+    <item name="buttonCornerRadius">@dimen/bpkSpacingMd</item>
+    <item name="buttonAddElevation">true</item>
   </style
     >
   <style name="DohaThemeButtonSecondary">
     <item name="buttonBackgroundColor">@color/bpkWhite</item>
     <item name="buttonTextColor">#9B104C</item>
     <item name="buttonStrokeColor">#B1121C</item>
+    <item name="buttonCornerRadius">@dimen/bpkSpacingMd</item>
+    <item name="buttonAddElevation">true</item>
   </style>
 
   <style name="DohaThemeSpinnerPrimary">
