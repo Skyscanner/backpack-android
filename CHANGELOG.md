@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 7.5.0
+
+**Added:**
+
+- BpkButton
+  - Added `buttonCornerRadius` and `buttonAddElevation` theme props
+
 # 7.4.1
 
 **Fixed:**
