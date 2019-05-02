@@ -1,34 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/App.Story"
   android:orientation="vertical"
+  android:padding="0dp"
   tools:ignore="HardcodedText">
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingSm"
-    app:textStyle="sm"
-    android:text="Primary (Default)"/>
-
   <View
-    android:id="@+id/gradient_primary"
-    android:layout_width="100dp"
-    android:layout_height="100dp" />
-
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/bpkSpacingLg"
-    android:layout_marginBottom="@dimen/bpkSpacingSm"
-    app:textStyle="sm"
-    android:text="Primary (With direction)"/>
-
-  <View
-    android:id="@+id/gradient_direction"
-    android:layout_width="100dp"
-    android:layout_height="100dp" />
+    android:id="@+id/gradient"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

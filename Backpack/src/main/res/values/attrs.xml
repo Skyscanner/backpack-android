@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <attr name="bpkPrimaryColor" format="color" />
-  <attr name="bpkThemeOverlay" format="reference" />
-
   <declare-styleable name="BpkBadge">
     <!-- type of badge -->
     <attr name="badgeType" format="enum">
@@ -102,6 +99,12 @@
   <declare-styleable name="BpkSwitch">
     <attr name="switchPrimaryColor" format="color" />
   </declare-styleable>
+
+  <attr name="bpkThemeOverlay" format="reference" />
+
+  <attr name="bpkPrimaryColor" format="color" />
+  <attr name="bpkPrimaryGradientColorStart" format="color" />
+  <attr name="bpkPrimaryGradientColorEnd" format="color" />
 
   <attr name="bpkSwitchStyle" format="reference" />
   <attr name="bpkButtonSecondaryStyle" format="reference" />

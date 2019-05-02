@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_gradient.*
+import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.gradient.BpkGradients
 
-class GradientStory : Story() {
+class GradientStoryCustom : Story() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     return inflater.inflate(R.layout.fragment_gradient, container, false)
@@ -17,7 +17,35 @@ class GradientStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    gradient_primary.background = BpkGradients(requireContext())
-    gradient_direction.background = BpkGradients(requireContext(), GradientDrawable.Orientation.TR_BL)
+    view.findViewById<View>(R.id.gradient).background = BpkGradients(
+      requireContext(),
+      GradientDrawable.Orientation.TL_BR,
+      intArrayOf(
+        ContextCompat.getColor(requireContext(), R.color.bpkGreen500),
+        ContextCompat.getColor(requireContext(), R.color.bpkGreen200)))
+  }
+}
+
+class GradientStoryPrimary : Story() {
+
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    return inflater.inflate(R.layout.fragment_gradient, container, false)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    view.findViewById<View>(R.id.gradient).background = BpkGradients.getPrimary(requireContext())
+  }
+}
+
+class GradientStoryWithDirection : Story() {
+
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    return inflater.inflate(R.layout.fragment_gradient, container, false)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    view.findViewById<View>(R.id.gradient).background = BpkGradients.getPrimary(requireContext(), GradientDrawable.Orientation.TR_BL)
   }
 }

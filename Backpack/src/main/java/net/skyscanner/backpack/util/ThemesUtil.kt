@@ -12,23 +12,41 @@ class ThemesUtil {
   companion object {
 
     /***
-     * Utility function to get bpkPrimaryColor attribute
-     * A detailed reasoning of the logic can be found at
-     * https://mbcdev.com/2017/01/16/resolving-android-theme-colours-programmatically/
+     * Utility function to fetch Backpack's primary color.
+     *
+     * The primary color can set via theming via the `bpkPrimaryColor` attribute.
+     *
+     * The attribute is expected to be either a color or a color reference.
+     * In case the attribute is not found the default [R.color.bpkBlue500]
+     * will be returned.
+     *
+     * @param context the current ui context.
+     * @return a color integer
      */
     fun getPrimaryColor(context: Context): Int {
-      val typedValue = TypedValue()
-      val wasResolved = context.theme.resolveAttribute(R.attr.bpkPrimaryColor, typedValue, true)
-
-      return if (wasResolved && typedValue.resourceId == 0) {
-        typedValue.data
-      } else if (wasResolved) {
-        ContextCompat.getColor(
-          context, typedValue.resourceId)
-      } else {
-        ContextCompat.getColor(context, R.color.bpkBlue500)
-      }
+      return resolveThemeColor(context, R.attr.bpkPrimaryColor)
+        ?: ContextCompat.getColor(context, R.color.bpkBlue500)
     }
+  }
+}
+
+/**
+ * Resolve a color attribute in the current theme.
+ * The color can be either a color or a color reference.
+ *
+ * @param context the current ui context.
+ * @param resId the attribute id.
+ */
+internal fun resolveThemeColor(context: Context, resId: Int): Int? {
+  val typedValue = TypedValue()
+  val wasResolved = context.theme.resolveAttribute(resId, typedValue, true)
+
+  return if (wasResolved && typedValue.resourceId == 0) {
+    typedValue.data
+  } else if (wasResolved) {
+    ContextCompat.getColor(context, typedValue.resourceId)
+  } else {
+    null
   }
 }
 
@@ -67,7 +85,7 @@ internal fun createContextThemeOverlayWrapper(context: Context, attributeSet: At
 
 /**
  * Apply a list of wrappers to a context. The order of precedence is last to first, meaning
- * the last wrapper will be checked first and then the one before than, an so on.
+ * the last wrapper will be checked first and then the one before that, an so on.
  *
  * @param context The base context.
  * @param wrappers A list of functions to wrap the context.

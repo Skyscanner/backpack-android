@@ -1,16 +1,18 @@
 package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.stories.DefaultCalendarStory
-import net.skyscanner.backpack.demo.stories.DialogStory
-import net.skyscanner.backpack.demo.stories.GradientStory
-import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.SubStory
-import net.skyscanner.backpack.demo.stories.ColorStory
+import net.skyscanner.backpack.demo.stories.DefaultCalendarStory
 import net.skyscanner.backpack.demo.stories.ColoredCalendarStory
 import net.skyscanner.backpack.demo.stories.ChipStory
+import net.skyscanner.backpack.demo.stories.DialogStory
+import net.skyscanner.backpack.demo.stories.IconsStory
+import net.skyscanner.backpack.demo.stories.ColorStory
 import net.skyscanner.backpack.demo.stories.ElevationStory
+import net.skyscanner.backpack.demo.stories.GradientStoryPrimary
+import net.skyscanner.backpack.demo.stories.GradientStoryWithDirection
+import net.skyscanner.backpack.demo.stories.GradientStoryCustom
 import net.skyscanner.backpack.demo.stories.SpacingStory
 
 interface RegistryItem {
@@ -131,7 +133,12 @@ object ComponentRegistry {
     "All Icons" story NodeData { IconsStory() },
     "Color" story NodeData { ColorStory() },
     "Elevation" story NodeData { ElevationStory() },
-    "Gradient" story NodeData { GradientStory() },
+    "Gradient" story NodeData({ children -> SubStory of children },
+      mapOf(
+        "Primary" story NodeData { GradientStoryPrimary() },
+        "With direction" story NodeData { GradientStoryWithDirection() },
+        "Custom" story NodeData { GradientStoryCustom() }
+      )),
     "Icons" story NodeData { Story of R.layout.fragment_icons },
     "Radii" story NodeData { Story of R.layout.fragment_radii },
     "Spacing" story NodeData { SpacingStory() }
@@ -142,12 +149,10 @@ object ComponentRegistry {
     val first = parts[0]
     val rest = parts.drop(1)
 
-    val token = TOKENS_MAP[fullyQualifiedName]
-    if (token != null) {
-      return token
-    }
+    val story = TOKENS_MAP[first] ?: COMPONENTS_TREE[first]
+    story ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
 
-    return rest.fold(COMPONENTS_TREE[first]!!) { result, item ->
+    return rest.fold(story) { result, item ->
       return result.subItems[item]
         ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
     }
