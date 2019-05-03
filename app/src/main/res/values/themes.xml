@@ -3,7 +3,7 @@
   <!-- London theme-->
 
   <style name="LondonTheme" parent="AppTheme">
-    <item name="colorPrimary">#ED1B28</item>
+    <item name="colorPrimary">#002F61</item>
     <item name="bpkThemeOverlay">@style/LondonTheme.BpkOverlay</item>
   </style>
 
@@ -15,6 +15,8 @@
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
     <item name="bpkTextStyle">@style/LondonThemeText</item>
     <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
+    <item name="bpkPrimaryGradientColorStart">#002F61</item>
+    <item name="bpkPrimaryGradientColorEnd">#002E61</item>
   </style>
 
   <style name="LondonThemeText">
@@ -59,7 +61,7 @@
   <!-- Doha theme-->
 
   <style name="DohaTheme" parent="AppTheme">
-    <item name="colorPrimary">#9B104C</item>
+    <item name="colorPrimary">#ffb300</item>
     <item name="bpkThemeOverlay">@style/DohaTheme.BpkOverlay</item>
   </style>
 
@@ -71,6 +73,8 @@
     <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
     <item name="bpkTextStyle">@style/DohaThemeText</item>
     <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
+    <item name="bpkPrimaryGradientColorStart">#ffb300</item>
+    <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
   </style>
 
   <style name="DohaThemeBpkSwitch" parent="">

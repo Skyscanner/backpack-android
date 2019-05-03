@@ -6,14 +6,34 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 ## Usage
 
-The Gradient component can be used Kotlin/Java as
+The Gradient drawable can only be used in Kotlin/Java:
 
 
 ```Kotlin
 import net.skyscanner.backpack.gradient.BpkGradients
 
-view.background = BpkGradients(context, GradientDrawable.Orientation.BL_TR)
+view.background = BpkGradients(
+  context, 
+  GradientDrawable.Orientation.BL_TR,
+  intArrayOf(
+    ContextCompat.getColor(testContext, R.color.bpkGreen500),
+    ContextCompat.getColor(testContext, R.color.bpkGreen300))
+  )
 ```
 
+The default direction is `GradientDrawable.Orientation.TL_BR` and the default colours are Backpack's primary colours.
 
-The default direction of gradient is `GradientDrawable.Orientation.TL_BR`
+### Primary gradient
+
+For primary gradients use the `getPrimary` function:
+
+```Kotlin
+import net.skyscanner.backpack.gradient.BpkGradients
+
+view.background = BpkGradients.getPrimary(context)
+```
+
+The gradient returned by this function can be themed through the following theme props:
+
+- `bpkPrimaryGradientColorStart`
+- `bpkPrimaryGradientColorEnd`
