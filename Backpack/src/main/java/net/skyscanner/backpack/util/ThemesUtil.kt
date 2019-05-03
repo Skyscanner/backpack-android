@@ -22,6 +22,7 @@ class ThemesUtil {
      * @param context the current ui context.
      * @return a color integer
      */
+    @JvmStatic
     fun getPrimaryColor(context: Context): Int {
       return resolveThemeColor(context, R.attr.bpkPrimaryColor)
         ?: ContextCompat.getColor(context, R.color.bpkBlue500)
