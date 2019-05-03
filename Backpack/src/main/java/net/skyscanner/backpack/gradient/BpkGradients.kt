@@ -36,6 +36,7 @@ open class BpkGradients @JvmOverloads constructor(
      *
      * @return [BpkGradients]
      */
+    @JvmStatic
     fun getPrimary(context: Context, orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TL_BR): BpkGradients {
       val themedProps = resolveAllAttributes(
         context,
