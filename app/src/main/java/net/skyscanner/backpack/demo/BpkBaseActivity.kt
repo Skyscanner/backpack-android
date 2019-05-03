@@ -11,9 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.util.BpkViewPumpContextWrapper
-import net.skyscanner.backpack.util.ThemeOverlayEnforcement
 
 @SuppressLint("Registered")
 open class BpkBaseActivity : AppCompatActivity() {
@@ -31,12 +29,11 @@ open class BpkBaseActivity : AppCompatActivity() {
   }
 
   override fun attachBaseContext(newBase: Context) {
-    super.attachBaseContext(ThemeOverlayEnforcement(BpkViewPumpContextWrapper.wrap(newBase)))
+    super.attachBaseContext(BpkViewPumpContextWrapper.wrap(newBase))
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setTheme(SharedPreferences.getTheme(this))
 
     getSystemService(SENSOR_SERVICE)?.let {
       it as SensorManager

@@ -44,6 +44,8 @@ class BackpackDemoApplication : Application() {
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     highlight = SharedPreferences.shouldHighlight(this)
 
+    this.registerActivityLifecycleCallbacks(ThemeApplier(SharedPreferences.getTheme(this)))
+
     if (highlight) {
       ViewPump.init(ViewPump.builder()
         .addInterceptor(BpkInterceptor())

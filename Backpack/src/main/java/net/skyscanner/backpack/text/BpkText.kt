@@ -16,7 +16,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.ResourcesUtil
-import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 
 private val styleMapping = mapOf(
   BpkText.XS to arrayOf(R.style.bpkTextXs, R.style.bpkTextXsEmphasized, null),
@@ -33,7 +32,7 @@ open class BpkText @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : AppCompatTextView(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
+) : AppCompatTextView(context, attrs, defStyleAttr) {
 
   enum class Weight {
     NORMAL,

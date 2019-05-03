@@ -11,7 +11,6 @@ import android.widget.ProgressBar
 import androidx.annotation.ColorInt
 import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 
 private const val INVALID_RES = -1
 
@@ -38,7 +37,7 @@ open class BpkSpinner @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : FrameLayout(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr) {
 
   private val colors = arrayOf(
     R.color.bpkBlue500,

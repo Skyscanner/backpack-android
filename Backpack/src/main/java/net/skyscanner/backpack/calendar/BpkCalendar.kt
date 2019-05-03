@@ -10,14 +10,13 @@ import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.view.CalendarView
 import net.skyscanner.backpack.calendar.view.OnYearChangedListener
 import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
-import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 import org.threeten.bp.YearMonth
 
 open class BpkCalendar @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyle: Int = 0
-) : ConstraintLayout(createContextThemeOverlayWrapper(context, attrs), attrs, defStyle), OnYearChangedListener {
+) : ConstraintLayout(context, attrs, defStyle), OnYearChangedListener {
 
   init {
     inflate(this.context, R.layout.view_bpk_calendar, this)
