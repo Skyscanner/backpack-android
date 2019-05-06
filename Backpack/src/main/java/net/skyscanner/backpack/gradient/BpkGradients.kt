@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 import net.skyscanner.backpack.util.resolveThemeColor
 
 /**
@@ -37,9 +36,10 @@ open class BpkGradients @JvmOverloads constructor(
      *
      * @return [BpkGradients]
      */
+    @JvmStatic
     fun getPrimary(context: Context, orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TL_BR): BpkGradients {
       val themedProps = resolveAllAttributes(
-        createContextThemeOverlayWrapper(context, null),
+        context,
         intArrayOf(R.attr.bpkPrimaryGradientColorStart, R.attr.bpkPrimaryGradientColorEnd))
 
       return themedProps?.let { BpkGradients(context, orientation, it) } ?: BpkGradients(context, orientation)

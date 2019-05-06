@@ -8,13 +8,12 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 
 open class BpkChip @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : BpkText(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
+) : BpkText(context, attrs, defStyleAttr) {
 
   init {
     initialize(attrs, defStyleAttr)

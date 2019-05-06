@@ -5,15 +5,8 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.SwitchCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.getColor
-import net.skyscanner.backpack.util.withContextWrappers
-
-private fun wrapContext(context: Context, attrs: AttributeSet?) = withContextWrappers(context,
-  { createContextThemeWrapper(it, attrs, androidx.appcompat.R.attr.switchStyle) },
-  { createContextThemeOverlayWrapper(it, attrs) }
-)
 
 /**
  * BpkSwitch allow users to toggle between two states, on or off.
@@ -28,7 +21,7 @@ open class BpkSwitch @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.attr.bpkSwitchStyle
-) : SwitchCompat(wrapContext(context, attrs), attrs, defStyleAttr) {
+) : SwitchCompat(createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.switchStyle), attrs, defStyleAttr) {
 
   init {
     initialize(attrs, defStyleAttr)

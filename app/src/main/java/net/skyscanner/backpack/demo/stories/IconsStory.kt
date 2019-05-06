@@ -2,6 +2,7 @@ package net.skyscanner.backpack.demo.stories
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,10 +28,14 @@ class IconsStory : Story() {
 
     for (field in R.drawable::class.java.fields) {
       if (field.name.startsWith("bpk_")) {
-        ResourcesCompat.getDrawable(resources, field.getInt(null), null)?.apply {
-          if (isVectorDrawable(this)) {
-            drawableResources.add(this)
+        try {
+          ResourcesCompat.getDrawable(resources, field.getInt(null), null)?.apply {
+            if (isVectorDrawable(this)) {
+              drawableResources.add(this)
+            }
           }
+        } catch (e: Exception) {
+          Log.w("IconStory", "unable to load ${field.name}")
         }
       }
     }

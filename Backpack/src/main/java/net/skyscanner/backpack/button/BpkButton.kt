@@ -30,7 +30,6 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.createContextThemeOverlayWrapper
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 
 private const val INVALID_RESOURCE = -1
@@ -50,7 +49,7 @@ open class BpkButton : AppCompatButton {
   constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, getStyle(context, attrs))
   constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary)
   constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, type: Type)
-    : super(createContextThemeOverlayWrapper(context, attrs), attrs, defStyleAttr) {
+    : super(context, attrs, defStyleAttr) {
     this.initialType = type
     initialize(attrs, defStyleAttr)
   }
