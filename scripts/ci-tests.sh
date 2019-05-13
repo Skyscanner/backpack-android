@@ -4,11 +4,7 @@ set -e
 
 if [ "$TEST_METHOD" == "screenshot" ]; then
 
-  # Firebase service account decrypt
-  openssl aes-256-cbc -K $encrypted_xxxxxx_key -iv $encrypted_xxxxx_iv -in your_firebase_service_account.json.enc -out /tmp/service-account.json -d
-
-
-  bucket_name="test-lab-wibswwwt7d0z2-h3n2pk0baaprk" # TODO: create a `backpack-android` bucket
+  bucket_name="test-lab-h61rjp5y552yi-ifmvxb8i79zta" # TODO: create a `backpack-android` bucket
   date_str=$(date '+%Y-%m-%d_%H:%M:%S')
   dir_name=""$date_str".$$"
 
@@ -44,7 +40,7 @@ elif [ "$TEST_METHOD" == "connected" ]; then
   gcloud firebase test android run \
       --type instrumentation \
       --app ./app/build/outputs/apk/debug/app-debug.apk \
-      --test ./Backpack/build/outputs/apk/androidTest/debug/backpack-debug-androidTest.apk \
+      --test ./Backpack/build/outputs/apk/androidTest/debug/Backpack-debug-androidTest.apk \
       --device model=Nexus4,version=22
 else 
 
