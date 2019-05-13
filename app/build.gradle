@@ -57,4 +57,5 @@ dependencies {
 }
 screenshots {
   multipleDevices false
+  referenceDir "app/build/test-labs-screenshots/screenshots-default"
 }
