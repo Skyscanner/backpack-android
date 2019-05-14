@@ -1,6 +1,6 @@
-## Backpack-android architecture overview:
+## backpack-android architecture overview:
 
-`backpack-android is a traditional Gradle Android lib project, composed of two modules.
+`backpack-android` is a traditional Gradle Android lib project, composed of two modules.
 
 - app: The example app
 - Backpack: The Backpack Android components
@@ -55,7 +55,7 @@ Important classes/packages are:
 
 ## Backpack
 
-The `backpack` lib is where all components live. All packages, except `utils` are Backpack components.
+The `Backpack` lib is where all components live. All packages, except `utils` are Backpack components.
 
 ### Component's architecture
 
@@ -79,11 +79,15 @@ More can be found here: https://github.com/Skyscanner/backpack-android/tree/mast
       <item name="chipSelectedBackgroundColor">@colors/bpkRed500</item>
     </style>
     ```
+
     1. Individually through the `style` prop:
+
     ```xml
       <BpkChip style="@style/RedChip" />
     ```
+
     2. Globally via the `bpkChipStyle` attribute:
+
     ```xml
     // app/res/values/style.xml
     <style name="RedChip">
@@ -94,7 +98,9 @@ More can be found here: https://github.com/Skyscanner/backpack-android/tree/mast
       <item name="bpkChipStyle">@style/RedChip</item>
     </style>
     ```
+   
 - Themes can also be set programmatically using a `ContextThemeWrapper`:
+
   ```Kotlin
   val themedContext = ContextThemeWrapper(context, R.style.RedChip)
   val chip = BpkChip(themedContext)
@@ -106,11 +112,12 @@ The `style` attribute will take precedence over the global `bpkChipStyle`, meani
 have a different style for a single component.
 
 It is also possible to set theming properties directly via `xml`:
+
 ```xml
   <BpkChip style="@style/RedChip" app:chipSelectedBackgroundColor="@colors/bpkRed500" />
 ```
-This is not advertised and is not a supported way for theming to be used. If you do this, we cannot guarantee that small changes to Backpack will not break your UI.
 
+This is not advertised and is not a supported way for theming to be used. If you do this, we cannot guarantee that small changes to Backpack will not break your UI.
 
 ## Testing
 
@@ -125,8 +132,3 @@ There are currently three types of tests in `backpack-android`:
 - Snapshot tests:
   - Live inside the `app` module and run inside an emulator. Some of those tests are very flaky in the 
   CI and will be annotated with `@FlakyTest`. This means they will not run on CI but still run locally before a release.
-
-
-
-
-
