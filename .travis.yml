@@ -1,5 +1,5 @@
 language: android
-sudo: false
+sudo: required
 
 before_cache:
   # Do not cache a few Gradle files/directories (see https://docs.travis-ci.com/user/languages/java/#Caching)
@@ -25,7 +25,16 @@ cache:
     # Maven cache
     - $HOME/.m2
 
+    # Gcloud
+    - $HOME/google-cloud-sdk
+
 before_install:
+  - openssl aes-256-cbc -K $encrypted_64bd6e5c0667_key -iv $encrypted_64bd6e5c0667_iv -in gcloud-service-key.json.enc -out $HOME/gcloud-service-key.json -d
+  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export $CLOUDSDK_CORE_DISABLE_PROMPTS; curl https://sdk.cloud.google.com | bash; fi
+  - source /home/travis/google-cloud-sdk/path.bash.inc # Add gcloud to $PATH
+  - gcloud version
+  - gcloud config set project backpack-android-805d2
+  - gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
   - chmod +x gradlew
   - nvm install
   - nvm use
@@ -44,42 +53,23 @@ android:
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
     - android-$ANDROID_API_LEVEL
     - android-$ANDROID_MIN_SDK_LEVEL
-    - android-$EMULATOR_API_LEVEL
-    # For Google APIs
-    - addon-google_apis-google-$ANDROID_API_LEVEL
-    - addon-google_apis-google-$EMULATOR_API_LEVEL
-    # Google Play Services
-    - extra-google-google_play_services
-    # Support library
-    - extra-android-support
-    # Latest artifacts in local repository
-    - extra-google-m2repository
-    - extra-android-m2repository
-    # Specify at least one system image
-    - sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL
-    - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
 
 before_script:
   - greenkeeper-lockfile-update
-  - mksdcard -l e 512M sd.img
-  - echo no | android create avd --force -n bpk-droid -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
-  - cp bpk-droid.ini $HOME/.android/avd/bpk-droid.avd/config.ini
-  - emulator -avd bpk-droid -sdcard sd.img -no-window &
 
 script:
   - set -e
   - npm run build
   - ./scripts/check-pristine-state package-lock.json sd.img
   - 'if [[ -n "$TRAVIS_TAG" ]]; then ./scripts/build-docs-ci $TRAVIS_TAG; fi'
-  # Run linters
-  - ./gradlew check
-  # wait for emulator to boot
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
-  # Run espresso tests in the Backpack module ( this excludes snapshot tests)
-  - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest Backpack:connectedCheck
-  # Run snapshot tests
-  - ./gradlew -Pandroid.testInstrumentationRunnerArguments.notAnnotation=androidx.test.filters.FlakyTest app:verifyDebugAndroidTestScreenshotTest
+
+  # Assemble test apps
+  - ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :Backpack:assembleDebugAndroidTest -PdisablePreDex
+
+  # Call firebase builds. TODO: do in parallel
+  - TEST_METHOD=connected ./scripts/ci-tests.sh
+  - TEST_METHOD=screenshot ./scripts/ci-tests.sh
+
   - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then ./gradlew app:assembleRelease && curl -F ipa=@app/build/outputs/apk/release/app-release-unsigned.apk -F status=2 -F strategy=replace -H X-HockeyAppToken:$HOCKEYAPP_TOKEN https://rink.hockeyapp.net/api/2/apps/upload ; fi
 
 
@@ -112,12 +102,10 @@ deploy:
 
 env:
   global:
+    - CLOUDSDK_CORE_DISABLE_PROMPTS=1 
     - ANDROID_API_LEVEL=28
     - ANDROID_MIN_SDK_LEVEL=21
     - EMULATOR_API_LEVEL=21
     - ANDROID_BUILD_TOOLS_VERSION=28.0.3
-    - ANDROID_ABI=armeabi-v7a
-    - ANDROID_TAG=google_apis
-    - ADB_INSTALL_TIMEOUT=20
     - ANDROID_SDK_ROOT=/usr/local/android-sdk/
     - secure: hk/2CFZ56m4S/ngueKlt5pkgqkVkYbA/PqIWlSH7BDMAuM3zR4ulZc1176kpllZiIKWEIjdmNRIgGGAb0BI3lEkzOpGCLhpdRRItGh+D3s+I33F5futjnFRYaIgaTOEZD8AQPwXeFoPCDb7UFxOWcLTQOgR9anXZs+XPGhwlEWmYGlumo6HgY69Bx1NCchqHsIzPptpGBs+rfd7Xa7qJYfunrXyJ0EbshoGC5EFpCxzqzjKw5UkBBWXbvY7E01dY4CuwBEfoP0DpN/vX2nLVZ5mxzRLHhC068VMHtmwBGbee+EaGlYfHnB8jU7plV3MUkSfhgwQnS+hq/uhHNoukitlgvHfOzHWOPF5Zw1nELYDLZOP0mqoHmyFbHCynBt6ztWXupyJdknT0eTT2Kk9lsRRm7Ut2lm2OrFUxhasERHIJ5i25rUEF+n16QSNmPKILDVP/4PuD673QGi9ow3rwIyXoYojg7bTEyMNGVs78lRrP4UDdLtgLc7tT0GXRakoPVarHJSN9hmQXmB4061wSzZZiVe8TFN6tKNWCP6DA/otSTU+DsoyA6wpNM9NbVes5JTPOVJ11jigFrr/WMv9l8dyVDRpVbBDzM+LqWAbzfvdBJLOCTYugDZRzU8SxEJY7w8/4i7g6UYzBlGpEi1bU4gjuI+mq3UTRw5ySMKegEuc=
