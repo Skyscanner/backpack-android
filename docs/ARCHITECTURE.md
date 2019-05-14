@@ -1,6 +1,6 @@
 ## Backpack-android architecture overview:
 
-Backpack-android is a Android a traditional gradle Android lib project, composed of two modules.
+`backpack-android is a traditional Gradle Android lib project, composed of two modules.
 
 - app: The example app
 - Backpack: The Backpack Android components
@@ -9,7 +9,7 @@ Backpack-android is a Android a traditional gradle Android lib project, composed
 
 ### Stories
 
-Stories are defined programmatically in tree like structure that is then used to build the UI.
+Stories are defined programmatically in  tree-like structure that is then used to build the UI.
 
 Important classes/packages are: 
 
@@ -28,7 +28,7 @@ Important classes/packages are:
   ```
 
 - **`res/layout/`**
-  Where layouts for each story is defined. They are named `fragment_{story_name}`
+  Where layouts for each story is defined. They are named `fragment_{story_name}`.
 
 - **`{javaSrc}/stories`**
   If a story needs dynamic behaviours it will have an accompanying Kotlin class inside the `stories` package.
@@ -55,7 +55,7 @@ Important classes/packages are:
 
 ## Backpack
 
-The backpack lib is where all components live. All packages, except `utils` are Backpack components.
+The `backpack` lib is where all components live. All packages, except `utils` are Backpack components.
 
 ### Component's architecture
 
@@ -69,7 +69,7 @@ There are only a few things that should be observed about the architecture of th
 More can be found here: https://github.com/Skyscanner/backpack-android/tree/master/decisions
 
 ### Theming
-- Uses default Android theming mechanism https://developer.android.com/guide/topics/ui/look-and-feel/themes
+- Uses the native Android theming mechanism https://developer.android.com/guide/topics/ui/look-and-feel/themes
 - Each themeable component exposes a global attribute that can be used to theme all instances of that component.
   - E.g. BpkChip can be themed in two ways:
     ```xml
@@ -109,7 +109,7 @@ It is also possible to set theming properties directly via `xml`:
 ```xml
   <BpkChip style="@style/RedChip" app:chipSelectedBackgroundColor="@colors/bpkRed500" />
 ```
-This is not advertised and is not how we intend theming to be used.
+This is not advertised and is not a supported way for theming to be used. If you do this, we cannot guarantee that small changes to Backpack will not break your UI.
 
 
 ## Testing
