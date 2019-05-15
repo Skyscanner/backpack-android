@@ -1,19 +1,23 @@
 package net.skyscanner.backpack.chip
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.ThemesUtil
+import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 open class BpkChip @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : BpkText(context, attrs, defStyleAttr) {
+) : BpkText(wrapContextWithDefaults(context), attrs, defStyleAttr) {
 
   init {
     initialize(attrs, defStyleAttr)
@@ -38,7 +42,21 @@ open class BpkChip @JvmOverloads constructor(
     ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationSm))
 
     textStyle = BpkText.SM
-    this.setTextColor(ResourcesCompat.getColorStateList(resources, R.color.bpk_chip_text_color, context.theme))
+
+    val textColor = ColorStateList(
+      arrayOf(
+        intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
+        intArrayOf(android.R.attr.state_enabled),
+        intArrayOf(-android.R.attr.state_enabled)
+      ),
+      intArrayOf(
+        ContextCompat.getColor(context, R.color.bpkWhite),
+        ThemesUtil.getGrey700Color(context),
+        ThemesUtil.getGrey300Color(context)
+      )
+    )
+
+    this.setTextColor(textColor)
     this.setSingleLine(true)
 
     // Wrap with the default style so we always have a valid attribute in the xml

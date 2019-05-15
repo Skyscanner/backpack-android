@@ -6,6 +6,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.Dimension
 import androidx.cardview.widget.CardView
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 /**
  * Cards are used to group related items.
@@ -17,7 +18,7 @@ open class BpkCardView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.style.Bpk_card
-) : CardView(context, attrs, defStyleAttr) {
+) : CardView(wrapContextWithDefaults(context), attrs, defStyleAttr) {
 
   /**
    * List of possible border radius for the [BpkCardView].
@@ -32,7 +33,7 @@ open class BpkCardView @JvmOverloads constructor(
   }
 
   init {
-    initialize(context, attrs, defStyleAttr)
+    initialize(attrs, defStyleAttr)
   }
 
   @Dimension
@@ -71,7 +72,7 @@ open class BpkCardView @JvmOverloads constructor(
       radius = context.resources.getDimension(value.tokenRes)
     }
 
-  private fun initialize(context: Context, attrs: AttributeSet?, defStyleAttr: Int) {
+  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     paddingSize = context.resources.getDimension(R.dimen.bpkSpacingBase).toInt()
 
     val a = context.obtainStyledAttributes(attrs, R.styleable.BpkCardView, defStyleAttr, 0)

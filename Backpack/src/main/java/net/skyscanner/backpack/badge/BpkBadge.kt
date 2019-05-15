@@ -11,6 +11,7 @@ import androidx.annotation.Dimension
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.ThemesUtil
 
 open class BpkBadge @JvmOverloads constructor(
   context: Context,
@@ -18,9 +19,19 @@ open class BpkBadge @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : BpkText(context, attrs, defStyleAttr) {
 
+  private var initialized = false
+
+  private val grayMappings by lazy {
+    mapOf(
+      R.color.bpkGray900 to ThemesUtil.getGrey900Color(context),
+      R.color.bpkGray700 to ThemesUtil.getGrey700Color(context),
+      R.color.bpkGray50 to ThemesUtil.getGrey50Color(context)
+    )
+  }
+
   init {
     initialize(attrs, defStyleAttr)
-    setup()
+    initialized = true
   }
 
   enum class Type(
@@ -76,7 +87,7 @@ open class BpkBadge @JvmOverloads constructor(
   var type: Type = Type.Success
     set(value) {
       field = value
-      setup()
+      if (initialized) setup()
     }
   /**
    * @property message
@@ -99,6 +110,8 @@ open class BpkBadge @JvmOverloads constructor(
     message = a.getString(R.styleable.BpkBadge_message)
 
     a.recycle()
+
+    setup()
   }
 
   private fun setup() {
@@ -111,17 +124,17 @@ open class BpkBadge @JvmOverloads constructor(
     this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
 
     // set Text color
-    this.setTextColor(ContextCompat.getColor(context, type.textColor))
+    this.setTextColor(getTextColorWithMappings(type.textColor))
 
     // Set background color
     val border = GradientDrawable()
-    border.setColor(ContextCompat.getColor(context, type.bgColor))
+    border.setColor(getTextColorWithMappings(type.bgColor))
 
     // Set border
     if (type == Type.Outline) {
       border.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), ContextCompat.getColor(context, R.color.bpkWhite))
       // set alpha for border
-      border.setColor(ContextCompat.getColor(context, type.bgColor) and 0x32ffffff)
+      border.setColor(getTextColorWithMappings(type.bgColor) and 0x32ffffff)
     }
 
     // set corner radius
@@ -141,5 +154,11 @@ open class BpkBadge @JvmOverloads constructor(
 
     // make sure is center aligned
     includeFontPadding = false
+  }
+
+  private fun getTextColorWithMappings(resId: Int): Int {
+    return grayMappings.getOrElse(resId) {
+      ContextCompat.getColor(context, resId)
+    }
   }
 }

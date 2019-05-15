@@ -65,12 +65,15 @@ class ThemesUtil {
      * @return a new [Context] with defaults
      */
     @JvmStatic
-    fun wrapContextWithBackpackDefaults(context: Context): Context {
-      val copy = ContextWrapper(context)
-      copy.theme?.applyStyle(R.style.BpkDefaultThemeColors, false)
-      return copy
-    }
+    fun wrapContextWithBackpackDefaults(context: Context) =
+      wrapContextWithDefaults(context)
   }
+}
+
+internal fun wrapContextWithDefaults(context: Context): Context {
+  val copy = ContextWrapper(context)
+  copy.theme?.applyStyle(R.style.BpkDefaultThemeColors, false)
+  return copy
 }
 
 internal fun resolveThemeColorWithDefault(context: Context, resId: Int): Int {

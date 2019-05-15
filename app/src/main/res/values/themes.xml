@@ -17,12 +17,12 @@
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#002E61</item>
 
-    <item name="bpkGrey50Color">#F1F2F8</item>
-    <item name="bpkGrey100Color">#DDDDE5</item>
-    <item name="bpkGrey300Color">#B2B2BF</item>
-    <item name="bpkGrey500Color">#68697F</item>
-    <item name="bpkGrey700Color">#444560</item>
-    <item name="bpkGrey900Color">#111236</item>
+    <item name="bpkGrey50Color">#BABBC4</item>
+    <item name="bpkGrey100Color">#ACADB9</item>
+    <item name="bpkGrey300Color">#ACADB9</item>
+    <item name="bpkGrey500Color">#9FA0AD</item>
+    <item name="bpkGrey700Color">#9192A1</item>
+    <item name="bpkGrey900Color">#838595</item>
   </style>
 
   <style name="LondonThemeText">
@@ -81,12 +81,12 @@
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
 
-    <item name="bpkGrey50Color">#F1F2F8</item>
-    <item name="bpkGrey100Color">#DDDDE5</item>
-    <item name="bpkGrey300Color">#B2B2BF</item>
-    <item name="bpkGrey500Color">#68697F</item>
-    <item name="bpkGrey700Color">#444560</item>
-    <item name="bpkGrey900Color">#111236</item>
+    <item name="bpkGrey50Color">#BABBC4</item>
+    <item name="bpkGrey100Color">#ACADB9</item>
+    <item name="bpkGrey300Color">#ACADB9</item>
+    <item name="bpkGrey500Color">#9FA0AD</item>
+    <item name="bpkGrey700Color">#9192A1</item>
+    <item name="bpkGrey900Color">#838595</item>
   </style>
 
   <style name="DohaThemeBpkSwitch" parent="">
