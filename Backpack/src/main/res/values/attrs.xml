@@ -106,12 +106,12 @@
   <attr name="bpkPrimaryGradientColorStart" format="color" />
   <attr name="bpkPrimaryGradientColorEnd" format="color" />
 
-  <attr name="bpkGrey50Color" format="color" />
-  <attr name="bpkGrey100Color" format="color" />
-  <attr name="bpkGrey300Color" format="color" />
-  <attr name="bpkGrey500Color" format="color" />
-  <attr name="bpkGrey700Color" format="color" />
-  <attr name="bpkGrey900Color" format="color" />
+  <attr name="bpkGray50Color" format="color" />
+  <attr name="bpkGray100Color" format="color" />
+  <attr name="bpkGray300Color" format="color" />
+  <attr name="bpkGray500Color" format="color" />
+  <attr name="bpkGray700Color" format="color" />
+  <attr name="bpkGray900Color" format="color" />
 
   <attr name="bpkSwitchStyle" format="reference" />
   <attr name="bpkButtonSecondaryStyle" format="reference" />

@@ -23,9 +23,9 @@ open class BpkBadge @JvmOverloads constructor(
 
   private val grayMappings by lazy {
     mapOf(
-      R.color.bpkGray900 to ThemesUtil.getGrey900Color(context),
-      R.color.bpkGray700 to ThemesUtil.getGrey700Color(context),
-      R.color.bpkGray50 to ThemesUtil.getGrey50Color(context)
+      R.color.bpkGray900 to ThemesUtil.getGray900Color(context),
+      R.color.bpkGray700 to ThemesUtil.getGray700Color(context),
+      R.color.bpkGray50 to ThemesUtil.getGray50Color(context)
     )
   }
 

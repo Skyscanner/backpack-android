@@ -1,7 +1,9 @@
 package net.skyscanner.backpack.util
 
 import android.content.Context
+import android.content.ContextWrapper
 import android.graphics.Color
+import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -17,12 +19,12 @@ class ThemesUtilTest {
   private lateinit var context: Context
 
   private val blue500 by lazy { ContextCompat.getColor(context, R.color.bpkBlue500) }
-  private val grey50 by lazy { ContextCompat.getColor(context, R.color.bpkGray50) }
-  private val grey100 by lazy { ContextCompat.getColor(context, R.color.bpkGray100) }
-  private val grey300 by lazy { ContextCompat.getColor(context, R.color.bpkGray300) }
-  private val grey500 by lazy { ContextCompat.getColor(context, R.color.bpkGray500) }
-  private val grey700 by lazy { ContextCompat.getColor(context, R.color.bpkGray700) }
-  private val grey900 by lazy { ContextCompat.getColor(context, R.color.bpkGray900) }
+  private val gray50 by lazy { ContextCompat.getColor(context, R.color.bpkGray50) }
+  private val gray100 by lazy { ContextCompat.getColor(context, R.color.bpkGray100) }
+  private val gray300 by lazy { ContextCompat.getColor(context, R.color.bpkGray300) }
+  private val gray500 by lazy { ContextCompat.getColor(context, R.color.bpkGray500) }
+  private val gray700 by lazy { ContextCompat.getColor(context, R.color.bpkGray700) }
+  private val gray900 by lazy { ContextCompat.getColor(context, R.color.bpkGray900) }
 
   private val customBlue = Color.parseColor("#9B104A")
   private val customGrey50 = Color.parseColor("#9B104B")
@@ -41,12 +43,12 @@ class ThemesUtilTest {
   fun test_colors() {
     val allColors = listOf(
       listOf("primary", blue500, customBlue, { c: Context -> ThemesUtil.getPrimaryColor(c) }),
-      listOf("grey50", grey50, customGrey50, { c: Context -> ThemesUtil.getGrey50Color(c) }),
-      listOf("grey100", grey100, customGrey100, { c: Context -> ThemesUtil.getGrey100Color(c) }),
-      listOf("grey300", grey300, customGrey300, { c: Context -> ThemesUtil.getGrey300Color(c) }),
-      listOf("grey500", grey500, customGrey500, { c: Context -> ThemesUtil.getGrey500Color(c) }),
-      listOf("grey700", grey700, customGrey700, { c: Context -> ThemesUtil.getGrey700Color(c) }),
-      listOf("grey900", grey900, customGrey900, { c: Context -> ThemesUtil.getGrey900Color(c) })
+      listOf("gray50", gray50, customGrey50, { c: Context -> ThemesUtil.getGray50Color(c) }),
+      listOf("gray100", gray100, customGrey100, { c: Context -> ThemesUtil.getGray100Color(c) }),
+      listOf("gray300", gray300, customGrey300, { c: Context -> ThemesUtil.getGray300Color(c) }),
+      listOf("gray500", gray500, customGrey500, { c: Context -> ThemesUtil.getGray500Color(c) }),
+      listOf("gray700", gray700, customGrey700, { c: Context -> ThemesUtil.getGray700Color(c) }),
+      listOf("gray900", gray900, customGrey900, { c: Context -> ThemesUtil.getGray900Color(c) })
     )
 
     allColors.forEach {
@@ -62,5 +64,46 @@ class ThemesUtilTest {
         customColor,
         test(ContextThemeWrapper(context, R.style.TestThemeUtilsCustomColors)))
     }
+  }
+
+  @Test
+  fun test_wrapContextWithBackpackDefaults() {
+    val t = TypedValue()
+
+    Assert.assertFalse(context.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true))
+
+    val newContext = ThemesUtil.wrapContextWithBackpackDefaults(context)
+    newContext.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
+    Assert.assertEquals(blue500, t.data)
+
+    val withTheme = ContextThemeWrapper(context, R.style.TestThemeUtilsWrapWithDefaults)
+    val withThemeAndDefault = ThemesUtil.wrapContextWithBackpackDefaults(withTheme)
+    withThemeAndDefault.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
+
+    Assert.assertEquals(customBlue, t.data)
+
+    withThemeAndDefault.theme.resolveAttribute(R.attr.bpkGray50Color, t, true)
+    Assert.assertEquals(gray50, t.data)
+  }
+
+  @Test
+  fun test_applyBackpackDefaultsToContext() {
+    var testContext = ContextWrapper(context)
+    val t = TypedValue()
+
+    Assert.assertFalse(context.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true))
+
+    ThemesUtil.applyBackpackDefaultsToContext(testContext)
+    testContext.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
+    Assert.assertEquals(blue500, t.data)
+
+    val withTheme = ContextThemeWrapper(context, R.style.TestThemeUtilsWrapWithDefaults)
+    ThemesUtil.applyBackpackDefaultsToContext(withTheme)
+    withTheme.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
+
+    Assert.assertEquals(customBlue, t.data)
+
+    withTheme.theme.resolveAttribute(R.attr.bpkGray50Color, t, true)
+    Assert.assertEquals(gray50, t.data)
   }
 }

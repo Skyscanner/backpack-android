@@ -3,7 +3,7 @@
   android:shape="line">
 
   <stroke
-    android:color="?bpkGrey100Color"
+    android:color="?bpkGray100Color"
     android:dashWidth="@dimen/bpkSpacingSm"
     android:dashGap="@dimen/bpkSpacingSm"
     android:width="1dp"/>

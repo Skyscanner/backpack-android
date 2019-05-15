@@ -10,7 +10,7 @@ import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 open class BpkPanel @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet?,
+  attrs: AttributeSet? = null,
   defStyleAttr: Int = R.style.Bpk_panel
 ) : LinearLayoutCompat(wrapContextWithDefaults(context), attrs, defStyleAttr) {
 

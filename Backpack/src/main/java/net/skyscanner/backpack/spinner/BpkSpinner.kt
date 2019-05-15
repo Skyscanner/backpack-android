@@ -44,7 +44,7 @@ open class BpkSpinner @JvmOverloads constructor(
     arrayOf(
       ResourcesCompat.getColor(resources, R.color.bpkBlue500, context.theme),
       ResourcesCompat.getColor(resources, R.color.bpkWhite, context.theme),
-      ThemesUtil.getGrey700Color(context)
+      ThemesUtil.getGray700Color(context)
     )
   }
 

@@ -42,8 +42,8 @@ private class Tokens(val context: Context) {
   val bpkSpacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
   val bpkBorderSizeSm = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeSm)
   val bpkBorderSizeLg = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
-  val gray100 = ThemesUtil.getGrey100Color(context)
-  val gray300 = ThemesUtil.getGrey300Color(context)
+  val gray100 = ThemesUtil.getGray100Color(context)
+  val gray300 = ThemesUtil.getGray300Color(context)
 }
 
 open class BpkButton : AppCompatButton {
@@ -194,7 +194,7 @@ open class BpkButton : AppCompatButton {
       // TODO: refactor this to remove this check. If possible remove the information from the Enum
       // as this is internal information, and create a internal mapping between types and colors
       val strokeColor = if (type.strokeColor == R.color.bpkGray100) {
-        ThemesUtil.getGrey100Color(context)
+        ThemesUtil.getGray100Color(context)
       } else {
         ContextCompat.getColor(context, type.strokeColor)
       }

@@ -59,7 +59,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
     val radii = variables.iconContainerRadius
     shape.cornerRadii = floatArrayOf(radii, radii, radii, radii, radii, radii, radii, radii)
 
-    shape.setColor(ThemesUtil.getGrey300Color(context))
+    shape.setColor(ThemesUtil.getGray300Color(context))
     shape.setStroke(
       variables.iconContainerBorderSize.toInt(),
       ResourcesCompat.getColor(resources, R.color.bpkWhite, context.theme)
