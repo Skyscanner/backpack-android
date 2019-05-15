@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="TestThemeOne">
-  </style>
-
-  <style name="TestThemeTwo">
-    <item name="bpkPrimaryColor">#9B104C</item>
-  </style>
-
-  <style name="TestThemeThree">
-    <item name="bpkPrimaryColor">@color/bpkGreen400</item>
+  <style name="TestThemeUtilsCustomColors">
+    <item name="bpkPrimaryColor">#9B104A</item>
+    <item name="bpkGrey50Color">#9B104B</item>
+    <item name="bpkGrey100Color">#9B104C</item>
+    <item name="bpkGrey300Color">#9B104D</item>
+    <item name="bpkGrey500Color">#9B104E</item>
+    <item name="bpkGrey700Color">#9B104F</item>
+    <item name="bpkGrey900Color">#9B105A</item>
   </style>
 
   <style name="TestTextCustomFont">

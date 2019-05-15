@@ -1,11 +1,13 @@
 package net.skyscanner.backpack.util
 
 import android.content.Context
+import android.content.ContextWrapper
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.appcompat.view.ContextThemeWrapper
 import net.skyscanner.backpack.R
 import androidx.core.content.ContextCompat
+import java.lang.IllegalStateException
 
 class ThemesUtil {
   companion object {
@@ -23,11 +25,59 @@ class ThemesUtil {
      * @return a color integer
      */
     @JvmStatic
-    fun getPrimaryColor(context: Context): Int {
-      return resolveThemeColor(context, R.attr.bpkPrimaryColor)
-        ?: ContextCompat.getColor(context, R.color.bpkBlue500)
+    fun getPrimaryColor(context: Context) =
+      resolveThemeColorWithDefault(context, R.attr.bpkPrimaryColor)
+
+    @JvmStatic
+    fun getGrey50Color(context: Context) =
+      resolveThemeColorWithDefault(context, R.attr.bpkGrey50Color)
+
+    @JvmStatic
+    fun getGrey100Color(context: Context) =
+      resolveThemeColorWithDefault(context, R.attr.bpkGrey100Color)
+
+    @JvmStatic
+    fun getGrey300Color(context: Context) =
+      resolveThemeColorWithDefault(context, R.attr.bpkGrey300Color)
+
+    @JvmStatic
+    fun getGrey500Color(context: Context) =
+      resolveThemeColorWithDefault(context, R.attr.bpkGrey500Color)
+
+    @JvmStatic
+    fun getGrey700Color(context: Context) =
+      resolveThemeColorWithDefault(context, R.attr.bpkGrey700Color)
+
+    @JvmStatic
+    fun getGrey900Color(context: Context) =
+      resolveThemeColorWithDefault(context, R.attr.bpkGrey900Color)
+
+    /**
+     * Wrap the current `context` with default Backpack colors. After
+     * this call the context is guaranteed to have all Backpack default
+     * theme colors defined.
+     *
+     * This function will not replace any property that has already been
+     * defined in the current context, only properties that are not present
+     * will be added with its default value.
+     *
+     * @param context The context to be wrapped
+     * @return a new [Context] with defaults
+     */
+    @JvmStatic
+    fun wrapContextWithBackpackDefaults(context: Context): Context {
+      val copy = ContextWrapper(context)
+      copy.theme?.applyStyle(R.style.BpkDefaultThemeColors, false)
+      return copy
     }
   }
+}
+
+internal fun resolveThemeColorWithDefault(context: Context, resId: Int): Int {
+  return resolveThemeColor(ThemesUtil.wrapContextWithBackpackDefaults(context), resId)
+    // This should only ever happen if the value defined for the color is wrong as the property
+    // is guaranteed to be there because of the ContextThemeWrapper
+    ?: throw IllegalStateException("Could not resolve themed color!")
 }
 
 /**
