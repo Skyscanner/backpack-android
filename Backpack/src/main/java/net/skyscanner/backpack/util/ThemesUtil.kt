@@ -4,10 +4,21 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.util.AttributeSet
 import android.util.TypedValue
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.appcompat.view.ContextThemeWrapper
 import net.skyscanner.backpack.R
 import androidx.core.content.ContextCompat
 import java.lang.IllegalStateException
+
+private val COLOR_MAPPINGS = mapOf(
+  R.color.bpkGray50 to R.attr.bpkGray50Color,
+  R.color.bpkGray100 to R.attr.bpkGray100Color,
+  R.color.bpkGray300 to R.attr.bpkGray300Color,
+  R.color.bpkGray500 to R.attr.bpkGray500Color,
+  R.color.bpkGray700 to R.attr.bpkGray700Color,
+  R.color.bpkGray900 to R.attr.bpkGray900Color
+)
 
 class ThemesUtil {
   companion object {
@@ -29,100 +40,23 @@ class ThemesUtil {
       resolveThemeColorWithDefault(context, R.attr.bpkPrimaryColor)
 
     /***
-     * Utility function to fetch Backpack's gray50 color.
+     * Utility function to fetch a Backpack color.
      *
-     * The primary color can set via theming via the `bpkGray50Color` attribute.
-     *
-     * The attribute is expected to be either a color or a color reference.
-     * In case the attribute is not found the default [R.color.bpkGray50]
-     * will be returned.
+     * If the color is replaced via theming then that color will be returned.
      *
      * @param context the current ui context.
+     * @param colorRes the color resource
      * @return a color integer
+     *
+     * @see [R.style.BpkDefaultThemeColors]
      */
     @JvmStatic
-    fun getGray50Color(context: Context) =
-      resolveThemeColorWithDefault(context, R.attr.bpkGray50Color)
-
-    /***
-     * Utility function to fetch Backpack's gray100 color.
-     *
-     * The primary color can set via theming via the `bpkGray100Color` attribute.
-     *
-     * The attribute is expected to be either a color or a color reference.
-     * In case the attribute is not found the default [R.color.bpkGray100]
-     * will be returned.
-     *
-     * @param context the current ui context.
-     * @return a color integer
-     */
-    @JvmStatic
-    fun getGray100Color(context: Context) =
-      resolveThemeColorWithDefault(context, R.attr.bpkGray100Color)
-
-    /***
-     * Utility function to fetch Backpack's gray300 color.
-     *
-     * The primary color can set via theming via the `bpkGray300Color` attribute.
-     *
-     * The attribute is expected to be either a color or a color reference.
-     * In case the attribute is not found the default [R.color.bpkGray300]
-     * will be returned.
-     *
-     * @param context the current ui context.
-     * @return a color integer
-     */
-    @JvmStatic
-    fun getGray300Color(context: Context) =
-      resolveThemeColorWithDefault(context, R.attr.bpkGray300Color)
-
-    /***
-     * Utility function to fetch Backpack's gray500 color.
-     *
-     * The primary color can set via theming via the `bpkGray500Color` attribute.
-     *
-     * The attribute is expected to be either a color or a color reference.
-     * In case the attribute is not found the default [R.color.bpkGray500]
-     * will be returned.
-     *
-     * @param context the current ui context.
-     * @return a color integer
-     */
-    @JvmStatic
-    fun getGray500Color(context: Context) =
-      resolveThemeColorWithDefault(context, R.attr.bpkGray500Color)
-
-    /***
-     * Utility function to fetch Backpack's gray700 color.
-     *
-     * The primary color can set via theming via the `bpkGray700Color` attribute.
-     *
-     * The attribute is expected to be either a color or a color reference.
-     * In case the attribute is not found the default [R.color.bpkGray700]
-     * will be returned.
-     *
-     * @param context the current ui context.
-     * @return a color integer
-     */
-    @JvmStatic
-    fun getGray700Color(context: Context) =
-      resolveThemeColorWithDefault(context, R.attr.bpkGray700Color)
-
-    /***
-     * Utility function to fetch Backpack's gray900 color.
-     *
-     * The primary color can set via theming via the `bpkGray900Color` attribute.
-     *
-     * The attribute is expected to be either a color or a color reference.
-     * In case the attribute is not found the default [R.color.bpkGray900]
-     * will be returned.
-     *
-     * @param context the current ui context.
-     * @return a color integer
-     */
-    @JvmStatic
-    fun getGray900Color(context: Context) =
-      resolveThemeColorWithDefault(context, R.attr.bpkGray900Color)
+    @ColorInt
+    fun getColor(context: Context, @ColorRes colorRes: Int): Int {
+      return COLOR_MAPPINGS[colorRes]?.let {
+        resolveThemeColorWithDefault(context, it)
+      } ?: ContextCompat.getColor(context, colorRes)
+    }
 
     /**
      * Wrap the current `context` with default Backpack colors. After

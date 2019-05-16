@@ -51,8 +51,8 @@ open class BpkChip @JvmOverloads constructor(
       ),
       intArrayOf(
         ContextCompat.getColor(context, R.color.bpkWhite),
-        ThemesUtil.getGray700Color(context),
-        ThemesUtil.getGray300Color(context)
+        ThemesUtil.getColor(context, R.color.bpkGray700),
+        ThemesUtil.getColor(context, R.color.bpkGray300)
       )
     )
 

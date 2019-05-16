@@ -49,12 +49,12 @@ class ThemesUtilTest {
   fun test_colors() {
     val allColors = listOf(
       listOf("primary", blue500, customBlue, { c: Context -> ThemesUtil.getPrimaryColor(c) }),
-      listOf("gray50", gray50, customGrey50, { c: Context -> ThemesUtil.getGray50Color(c) }),
-      listOf("gray100", gray100, customGrey100, { c: Context -> ThemesUtil.getGray100Color(c) }),
-      listOf("gray300", gray300, customGrey300, { c: Context -> ThemesUtil.getGray300Color(c) }),
-      listOf("gray500", gray500, customGrey500, { c: Context -> ThemesUtil.getGray500Color(c) }),
-      listOf("gray700", gray700, customGrey700, { c: Context -> ThemesUtil.getGray700Color(c) }),
-      listOf("gray900", gray900, customGrey900, { c: Context -> ThemesUtil.getGray900Color(c) })
+      listOf("gray50", gray50, customGrey50, { c: Context -> ThemesUtil.getColor(c, R.color.bpkGray50) }),
+      listOf("gray100", gray100, customGrey100, { c: Context -> ThemesUtil.getColor(c, R.color.bpkGray100) }),
+      listOf("gray300", gray300, customGrey300, { c: Context -> ThemesUtil.getColor(c, R.color.bpkGray300) }),
+      listOf("gray500", gray500, customGrey500, { c: Context -> ThemesUtil.getColor(c, R.color.bpkGray500) }),
+      listOf("gray700", gray700, customGrey700, { c: Context -> ThemesUtil.getColor(c, R.color.bpkGray700) }),
+      listOf("gray900", gray900, customGrey900, { c: Context -> ThemesUtil.getColor(c, R.color.bpkGray900) })
     )
 
     allColors.forEach {

@@ -21,14 +21,6 @@ open class BpkBadge @JvmOverloads constructor(
 
   private var initialized = false
 
-  private val grayMappings by lazy {
-    mapOf(
-      R.color.bpkGray900 to ThemesUtil.getGray900Color(context),
-      R.color.bpkGray700 to ThemesUtil.getGray700Color(context),
-      R.color.bpkGray50 to ThemesUtil.getGray50Color(context)
-    )
-  }
-
   init {
     initialize(attrs, defStyleAttr)
     initialized = true
@@ -124,17 +116,17 @@ open class BpkBadge @JvmOverloads constructor(
     this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
 
     // set Text color
-    this.setTextColor(getTextColorWithMappings(type.textColor))
+    this.setTextColor(ThemesUtil.getColor(context, type.textColor))
 
     // Set background color
     val border = GradientDrawable()
-    border.setColor(getTextColorWithMappings(type.bgColor))
+    border.setColor(ThemesUtil.getColor(context, type.bgColor))
 
     // Set border
     if (type == Type.Outline) {
       border.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), ContextCompat.getColor(context, R.color.bpkWhite))
       // set alpha for border
-      border.setColor(getTextColorWithMappings(type.bgColor) and 0x32ffffff)
+      border.setColor(ThemesUtil.getColor(context, type.bgColor) and 0x32ffffff)
     }
 
     // set corner radius
@@ -154,11 +146,5 @@ open class BpkBadge @JvmOverloads constructor(
 
     // make sure is center aligned
     includeFontPadding = false
-  }
-
-  private fun getTextColorWithMappings(resId: Int): Int {
-    return grayMappings.getOrElse(resId) {
-      ContextCompat.getColor(context, resId)
-    }
   }
 }

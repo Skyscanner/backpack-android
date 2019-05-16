@@ -33,7 +33,7 @@ open class BpkSwitch @JvmOverloads constructor(
     val primaryColor = a.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
     a.recycle()
 
-    trackTintList = ColorStateList.valueOf(ThemesUtil.getGray100Color(context))
+    trackTintList = ColorStateList.valueOf(ThemesUtil.getColor(context, R.color.bpkGray100))
     thumbTintList = ColorStateList(
       arrayOf(
         intArrayOf(android.R.attr.state_checked),
@@ -41,7 +41,7 @@ open class BpkSwitch @JvmOverloads constructor(
       ),
       intArrayOf(
         primaryColor,
-        ThemesUtil.getGray50Color(context)
+        ThemesUtil.getColor(context, R.color.bpkGray50)
       )
     )
   }

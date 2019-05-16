@@ -42,8 +42,8 @@ private class Tokens(val context: Context) {
   val bpkSpacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
   val bpkBorderSizeSm = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeSm)
   val bpkBorderSizeLg = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
-  val gray100 = ThemesUtil.getGray100Color(context)
-  val gray300 = ThemesUtil.getGray300Color(context)
+  val gray100 = ThemesUtil.getColor(context, R.color.bpkGray100)
+  val gray300 = ThemesUtil.getColor(context, R.color.bpkGray300)
 }
 
 open class BpkButton : AppCompatButton {
@@ -191,15 +191,7 @@ open class BpkButton : AppCompatButton {
       buttonBackgroundColor = attr.getColor(R.styleable.BpkButton_buttonBackgroundColor, ContextCompat.getColor(context, type.bgColor))
       buttonTextColor = attr.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))
 
-      // TODO: refactor this to remove this check. If possible remove the information from the Enum
-      // as this is internal information, and create a internal mapping between types and colors
-      val strokeColor = if (type.strokeColor == R.color.bpkGray100) {
-        ThemesUtil.getGray100Color(context)
-      } else {
-        ContextCompat.getColor(context, type.strokeColor)
-      }
-
-      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, strokeColor)
+      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, ThemesUtil.getColor(context, type.strokeColor))
       roundedButtonCorner = attr.getDimension(R.styleable.BpkButton_buttonCornerRadius, context.resources.getDimension(R.dimen.bpkSpacingLg))
       isElevated = attr.getBoolean(R.styleable.BpkButton_buttonAddElevation, false)
 

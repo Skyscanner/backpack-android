@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.annotation.ColorInt
-import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.ThemesUtil
 
@@ -42,9 +41,9 @@ open class BpkSpinner @JvmOverloads constructor(
 
   private val colors by lazy {
     arrayOf(
-      ResourcesCompat.getColor(resources, R.color.bpkBlue500, context.theme),
-      ResourcesCompat.getColor(resources, R.color.bpkWhite, context.theme),
-      ThemesUtil.getGray700Color(context)
+      R.color.bpkBlue500,
+      R.color.bpkWhite,
+      R.color.bpkGray700
     )
   }
 
@@ -79,7 +78,7 @@ open class BpkSpinner @JvmOverloads constructor(
     if (type === Type.PRIMARY && themePrimaryColor != INVALID_RES) {
       return themePrimaryColor
     }
-    return colors[type.ordinal]
+    return ThemesUtil.getColor(context, colors[type.ordinal])
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
