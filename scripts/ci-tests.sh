@@ -4,7 +4,7 @@ set -e
 
 if [ "$TEST_METHOD" == "screenshot" ]; then
 
-  bucket_name="test-lab-h61rjp5y552yi-ifmvxb8i79zta" # TODO: create a `backpack-android` bucket
+  bucket_name="test-lab-8yj19qy8ht4mm-ku5ff32sak89k" # TODO: create a `backpack-android` bucket
   date_str=$(date '+%Y-%m-%d_%H:%M:%S')
   dir_name=""$date_str".$$"
 

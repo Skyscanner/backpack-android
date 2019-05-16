@@ -33,7 +33,7 @@ before_install:
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export $CLOUDSDK_CORE_DISABLE_PROMPTS; curl https://sdk.cloud.google.com | bash; fi
   - source /home/travis/google-cloud-sdk/path.bash.inc # Add gcloud to $PATH
   - gcloud version
-  - gcloud config set project backpack-android-805d2
+  - gcloud config set project api-project-768202461730
   - gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
   - chmod +x gradlew
   - nvm install
@@ -64,7 +64,7 @@ script:
   - 'if [[ -n "$TRAVIS_TAG" ]]; then ./scripts/build-docs-ci $TRAVIS_TAG; fi'
 
   # Assemble test apps
-  - ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :Backpack:assembleDebugAndroidTest -PdisablePreDex
+  - ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :Backpack:assembleDebugAndroidTest check -PdisablePreDex
 
   # Call firebase builds. TODO: do in parallel
   - TEST_METHOD=connected ./scripts/ci-tests.sh
