@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+  <style name="BpkDefaultThemeColors">
+    <item name="bpkPrimaryColor">@color/bpkBlue500</item>
+    <item name="bpkGray50Color">@color/bpkGray50</item>
+    <item name="bpkGray100Color">@color/bpkGray100</item>
+    <item name="bpkGray300Color">@color/bpkGray300</item>
+    <item name="bpkGray500Color">@color/bpkGray500</item>
+    <item name="bpkGray700Color">@color/bpkGray700</item>
+    <item name="bpkGray900Color">@color/bpkGray900</item>
+  </style>
+
   <style name="Bpk.badge" parent="android:Widget" />
 
   <style name="Bpk.button" parent="android:Widget" />

@@ -31,6 +31,7 @@ import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import net.skyscanner.backpack.util.BpkTheme
 
 private const val INVALID_RESOURCE = -1
 
@@ -41,6 +42,8 @@ private class Tokens(val context: Context) {
   val bpkSpacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
   val bpkBorderSizeSm = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeSm)
   val bpkBorderSizeLg = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
+  val gray100 = BpkTheme.getColor(context, R.color.bpkGray100)
+  val gray300 = BpkTheme.getColor(context, R.color.bpkGray300)
 }
 
 open class BpkButton : AppCompatButton {
@@ -187,7 +190,8 @@ open class BpkButton : AppCompatButton {
 
       buttonBackgroundColor = attr.getColor(R.styleable.BpkButton_buttonBackgroundColor, ContextCompat.getColor(context, type.bgColor))
       buttonTextColor = attr.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))
-      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, ContextCompat.getColor(context, type.strokeColor))
+
+      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, BpkTheme.getColor(context, type.strokeColor))
       roundedButtonCorner = attr.getDimension(R.styleable.BpkButton_buttonCornerRadius, context.resources.getDimension(R.dimen.bpkSpacingLg))
       isElevated = attr.getBoolean(R.styleable.BpkButton_buttonAddElevation, false)
 
@@ -248,11 +252,11 @@ open class BpkButton : AppCompatButton {
         getColorSelector(
           buttonTextColor,
           darken(buttonTextColor, .1f),
-          ContextCompat.getColor(context, R.color.bpkGray300)
+          tokens.gray300
         )
       )
     } else {
-      this.setTextColor(ContextCompat.getColor(context, R.color.bpkGray300))
+      this.setTextColor(tokens.gray300)
     }
 
     wrappedIcon?.let {
@@ -261,7 +265,7 @@ open class BpkButton : AppCompatButton {
         getColorSelector(
           buttonTextColor,
           darken(buttonTextColor, .1f),
-          ContextCompat.getColor(context, R.color.bpkGray300)
+          tokens.gray300
         )
       )
 
@@ -283,9 +287,9 @@ open class BpkButton : AppCompatButton {
   @VisibleForTesting
   internal fun disabledBackground(): Drawable {
     return getSelectorDrawable(
-      normalColor = ContextCompat.getColor(context, R.color.bpkGray100),
-      pressedColor = darken(ContextCompat.getColor(context, R.color.bpkGray100)),
-      disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
+      normalColor = tokens.gray100,
+      pressedColor = darken(tokens.gray100),
+      disabledColor = tokens.gray100,
       cornerRadius = roundedButtonCorner,
       strokeWidth = null,
       strokeColor = null
@@ -295,14 +299,14 @@ open class BpkButton : AppCompatButton {
   private fun getButtonBackground(): Drawable? {
     return if (this.isEnabled) {
       val pressedColor = if (buttonBackgroundColor == android.R.color.transparent) {
-        ContextCompat.getColor(context, R.color.bpkGray300)
+        tokens.gray300
       } else {
         darken(buttonBackgroundColor)
       }
       getSelectorDrawable(
         normalColor = buttonBackgroundColor,
         pressedColor = pressedColor,
-        disabledColor = ContextCompat.getColor(context, R.color.bpkGray100),
+        disabledColor = tokens.gray100,
         cornerRadius = roundedButtonCorner,
         strokeWidth = if (type == Type.Primary || type == Type.Featured) null else strokeWidth(),
         strokeColor = buttonStrokeColor

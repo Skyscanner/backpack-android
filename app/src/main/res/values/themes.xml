@@ -5,6 +5,7 @@
   <style name="LondonTheme" parent="">
     <item name="bpkPrimaryColor">#002F61</item>
     <item name="colorPrimary">?bpkPrimaryColor</item>
+
     <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
     <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
@@ -12,8 +13,16 @@
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
     <item name="bpkTextStyle">@style/LondonThemeText</item>
     <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
+
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#002E61</item>
+
+    <item name="bpkGray50Color">#BABBC4</item>
+    <item name="bpkGray100Color">#ACADB9</item>
+    <item name="bpkGray300Color">#ACADB9</item>
+    <item name="bpkGray500Color">#9FA0AD</item>
+    <item name="bpkGray700Color">#9192A1</item>
+    <item name="bpkGray900Color">#838595</item>
   </style>
 
   <style name="LondonThemeText">
@@ -60,6 +69,7 @@
   <style name="DohaTheme" parent="">
     <item name="bpkPrimaryColor">#ffb300</item>
     <item name="colorPrimary">?bpkPrimaryColor</item>
+
     <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
     <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
@@ -67,8 +77,16 @@
     <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
     <item name="bpkTextStyle">@style/DohaThemeText</item>
     <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
+
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
+
+    <item name="bpkGray50Color">#BABBC4</item>
+    <item name="bpkGray100Color">#ACADB9</item>
+    <item name="bpkGray300Color">#ACADB9</item>
+    <item name="bpkGray500Color">#9FA0AD</item>
+    <item name="bpkGray700Color">#9192A1</item>
+    <item name="bpkGray900Color">#838595</item>
   </style>
 
   <style name="DohaThemeBpkSwitch" parent="">

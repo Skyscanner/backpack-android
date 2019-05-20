@@ -3,6 +3,7 @@ package net.skyscanner.backpack.panel
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.createThemedContext
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -42,6 +43,15 @@ class BpkPanelTest : BpkSnapshotTest() {
     text.text = "message"
     panel.addView(text)
     panel.padding = false
+    snap(panel)
+  }
+
+  @Test
+  fun screenshotTestPanel_withTheme() {
+    val panel = BpkPanel(createThemedContext(testContext))
+    val text = TextView(createThemedContext(testContext))
+    text.text = "message"
+    panel.addView(text)
     snap(panel)
   }
 }

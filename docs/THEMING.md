@@ -23,29 +23,29 @@ You can theme all instances of `BpkSwitch` in your app/activity by setting the `
 
 __For supported attributes check each component's documentation.__
 
-## Theme overlays and runtime theming
+## Themeable colours
 
-Another option to apply a custom theme during runtime without having to change your application/activity theme is to 
-use the `bpkThemeOverlay` attribute.
+Backpack supports theming the following colours:
 
-E.g.:
+- `bpkPrimaryColor`
+- `bpkGray50Color`
+- `bpkGray100Color`
+- `bpkGray300Color`
+- `bpkGray500Color`
+- `bpkGray700Color`
+- `bpkGray900Color`
 
-```xml
- <style name="AppTheme">
-    <item name="bpkThemeOverlay">@style/MyCustomTheme</item>
-  </style>
-```
+Those can be accessed programmatically using the `ThemesUtil` class. 
 
-**By default this attribute will have no effect**, in order to enforce it you need to wrapped the context with `ThemeOverlayEnforcement`.
-
-E.g.:
+If you want to use them inside a XML file use `wrapContextWithBackpackDefaults` or `applyBackpackDefaultsToContext` in `ThemesUtil` to apply the default values to your UI `context`.
 
 ```Kotlin
-override fun attachBaseContext(newBase: Context) {
-  if (useBpkTheme) {
-    super.attachBaseContext(ThemeOverlayEnforcement(newBase))
-  } else {
-    super.attachBaseContext(newBase)
-  }
-}
+val contextWithDefaults = ThemesUtil.wrapContextWithBackpackDefaults(context)
+// View XML and all its children will have access to those variables
+MyView(contextWithDefaults)
+
+// or
+
+// This will mutate the context.
+ThemesUtil.applyBackpackDefaultsToContext(context)
 ```
