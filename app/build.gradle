@@ -57,5 +57,7 @@ dependencies {
 }
 screenshots {
   multipleDevices false
-  referenceDir "app/build/test-labs-screenshots/screenshots-default"
+  if (!project.hasProperty("localTests") || localTests == false) {
+    referenceDir "app/build/test-labs-screenshots/screenshots-default"
+  }
 }

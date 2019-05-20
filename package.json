@@ -9,7 +9,7 @@
   "scripts": {
     "preinstall": "npx ensure-node-env",
     "emulator:build": "./gradlew build",
-    "emulator:test": "./gradlew cAT app:verifyDebugAndroidTestScreenshotTest",
+    "emulator:test": "./gradlew cAT app:verifyDebugAndroidTestScreenshotTest -PlocalTests=true",
     "emulator:boot": "$ANDROID_HOME/emulator/emulator -avd bpk-droid-avd -sdcard sd.img -no-snapshot &",
     "emulator:kill": "adb emu kill",
     "preemulator": "npm run emulator:boot",
@@ -71,7 +71,7 @@
     "markdown-spellcheck": "^1.3.1",
     "merge2": "^1.2.1",
     "node-fetch": "^2.0.0",
-    "release-it": "^9.1.0",
+    "release-it": "^12.2.0",
     "replace-in-file": "^3.4.2",
     "semver": "^5.5.0",
     "svg2vectordrawable": "^2.4.0",
