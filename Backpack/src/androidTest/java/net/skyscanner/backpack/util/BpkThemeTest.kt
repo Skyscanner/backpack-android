@@ -33,12 +33,12 @@ class BpkThemeTest {
   private val gray900 by lazy { ContextCompat.getColor(activity, R.color.bpkGray900) }
 
   private val customBlue = Color.parseColor("#9B104A")
-  private val customGrey50 = Color.parseColor("#9B104B")
-  private val customGrey100 = Color.parseColor("#9B104C")
-  private val customGrey300 = Color.parseColor("#9B104D")
-  private val customGrey500 = Color.parseColor("#9B104E")
-  private val customGrey700 = Color.parseColor("#9B104F")
-  private val customGrey900 = Color.parseColor("#9B105A")
+  private val customGray50 = Color.parseColor("#9B104B")
+  private val customGray100 = Color.parseColor("#9B104C")
+  private val customGray300 = Color.parseColor("#9B104D")
+  private val customGray500 = Color.parseColor("#9B104E")
+  private val customGray700 = Color.parseColor("#9B104F")
+  private val customGray900 = Color.parseColor("#9B105A")
 
   @Before
   fun setUp() {
@@ -49,12 +49,12 @@ class BpkThemeTest {
   fun test_colors() {
     val allColors = listOf(
       listOf("primary", blue500, customBlue, { c: Context -> BpkTheme.getPrimaryColor(c) }),
-      listOf("gray50", gray50, customGrey50, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray50) }),
-      listOf("gray100", gray100, customGrey100, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray100) }),
-      listOf("gray300", gray300, customGrey300, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray300) }),
-      listOf("gray500", gray500, customGrey500, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray500) }),
-      listOf("gray700", gray700, customGrey700, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray700) }),
-      listOf("gray900", gray900, customGrey900, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray900) })
+      listOf("gray50", gray50, customGray50, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray50) }),
+      listOf("gray100", gray100, customGray100, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray100) }),
+      listOf("gray300", gray300, customGray300, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray300) }),
+      listOf("gray500", gray500, customGray500, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray500) }),
+      listOf("gray700", gray700, customGray700, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray700) }),
+      listOf("gray900", gray900, customGray900, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray900) })
     )
 
     allColors.forEach {
