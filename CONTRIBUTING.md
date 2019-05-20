@@ -88,6 +88,10 @@ Code style is ensured by [ktlint](https://github.com/shyiko/ktlint). It runs aut
 
 To auto fix problems run `gradlew ktlintFormat`.
 
+## How we review Backpack contributions
+
+Please see the [code review guidelines](https://github.com/Skyscanner/backpack/blob/master/CODE_REVIEW_GUIDELINES.md).
+
 ## Releasing
 
 > Backpack team only
