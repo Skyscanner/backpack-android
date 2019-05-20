@@ -10,7 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.ImageViewCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.ThemesUtil
+import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.getColor
 
 internal class BpkDialogIcon @JvmOverloads constructor(
@@ -59,7 +59,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
     val radii = variables.iconContainerRadius
     shape.cornerRadii = floatArrayOf(radii, radii, radii, radii, radii, radii, radii, radii)
 
-    shape.setColor(ThemesUtil.getColor(context, R.color.bpkGray300))
+    shape.setColor(BpkTheme.getColor(context, R.color.bpkGray300))
     shape.setStroke(
       variables.iconContainerBorderSize.toInt(),
       ResourcesCompat.getColor(resources, R.color.bpkWhite, context.theme)

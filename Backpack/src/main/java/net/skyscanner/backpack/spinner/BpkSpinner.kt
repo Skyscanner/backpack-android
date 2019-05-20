@@ -10,7 +10,7 @@ import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.annotation.ColorInt
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.ThemesUtil
+import net.skyscanner.backpack.util.BpkTheme
 
 private const val INVALID_RES = -1
 
@@ -78,7 +78,7 @@ open class BpkSpinner @JvmOverloads constructor(
     if (type === Type.PRIMARY && themePrimaryColor != INVALID_RES) {
       return themePrimaryColor
     }
-    return ThemesUtil.getColor(context, colors[type.ordinal])
+    return BpkTheme.getColor(context, colors[type.ordinal])
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {

@@ -9,3 +9,7 @@
   - `bpkGray500Color`
   - `bpkGray700Color`
   - `bpkGray900Color`
+
+**Breaking:**
+
+- Renamed `ThemesUtil` to `BpkTheme`

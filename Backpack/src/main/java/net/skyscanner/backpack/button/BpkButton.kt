@@ -31,7 +31,7 @@ import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import net.skyscanner.backpack.util.ThemesUtil
+import net.skyscanner.backpack.util.BpkTheme
 
 private const val INVALID_RESOURCE = -1
 
@@ -42,8 +42,8 @@ private class Tokens(val context: Context) {
   val bpkSpacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
   val bpkBorderSizeSm = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeSm)
   val bpkBorderSizeLg = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
-  val gray100 = ThemesUtil.getColor(context, R.color.bpkGray100)
-  val gray300 = ThemesUtil.getColor(context, R.color.bpkGray300)
+  val gray100 = BpkTheme.getColor(context, R.color.bpkGray100)
+  val gray300 = BpkTheme.getColor(context, R.color.bpkGray300)
 }
 
 open class BpkButton : AppCompatButton {
@@ -191,7 +191,7 @@ open class BpkButton : AppCompatButton {
       buttonBackgroundColor = attr.getColor(R.styleable.BpkButton_buttonBackgroundColor, ContextCompat.getColor(context, type.bgColor))
       buttonTextColor = attr.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))
 
-      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, ThemesUtil.getColor(context, type.strokeColor))
+      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, BpkTheme.getColor(context, type.strokeColor))
       roundedButtonCorner = attr.getDimension(R.styleable.BpkButton_buttonCornerRadius, context.resources.getDimension(R.dimen.bpkSpacingLg))
       isElevated = attr.getBoolean(R.styleable.BpkButton_buttonAddElevation, false)
 

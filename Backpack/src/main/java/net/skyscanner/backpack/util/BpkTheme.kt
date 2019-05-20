@@ -20,7 +20,7 @@ private val COLOR_MAPPINGS = mapOf(
   R.color.bpkGray900 to R.attr.bpkGray900Color
 )
 
-class ThemesUtil {
+class BpkTheme {
   companion object {
 
     /***
@@ -71,8 +71,8 @@ class ThemesUtil {
      * @return a new [Context] with defaults
      */
     @JvmStatic
-    fun wrapContextWithBackpackDefaults(context: Context) =
-      wrapContextWithDefaults(context)
+    fun wrapContextWithDefaults(context: Context) =
+      net.skyscanner.backpack.util.wrapContextWithDefaults(context)
 
     /**
      * Apply the default Backpack colors to the current context`. After
@@ -86,8 +86,8 @@ class ThemesUtil {
      * @param context The context to be wrapped
      */
     @JvmStatic
-    fun applyBackpackDefaultsToContext(context: Context) =
-      applyDefaultsToContext(context)
+    fun applyDefaultsToContext(context: Context) =
+      net.skyscanner.backpack.util.applyDefaultsToContext(context)
   }
 }
 
@@ -102,7 +102,7 @@ internal fun applyDefaultsToContext(context: Context) {
 }
 
 internal fun resolveThemeColorWithDefault(context: Context, resId: Int): Int {
-  return resolveThemeColor(ThemesUtil.wrapContextWithBackpackDefaults(context), resId)
+  return resolveThemeColor(BpkTheme.wrapContextWithDefaults(context), resId)
     // This should only ever happen if the value defined for the color is wrong as the property
     // is guaranteed to be there because of the ContextThemeWrapper
     ?: throw IllegalStateException("Could not resolve themed color!")

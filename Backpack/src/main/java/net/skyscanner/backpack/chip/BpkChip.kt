@@ -10,7 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.ThemesUtil
+import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 open class BpkChip @JvmOverloads constructor(
@@ -51,8 +51,8 @@ open class BpkChip @JvmOverloads constructor(
       ),
       intArrayOf(
         ContextCompat.getColor(context, R.color.bpkWhite),
-        ThemesUtil.getColor(context, R.color.bpkGray700),
-        ThemesUtil.getColor(context, R.color.bpkGray300)
+        BpkTheme.getColor(context, R.color.bpkGray700),
+        BpkTheme.getColor(context, R.color.bpkGray300)
       )
     )
 

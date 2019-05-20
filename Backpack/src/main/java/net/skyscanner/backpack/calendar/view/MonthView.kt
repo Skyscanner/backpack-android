@@ -34,7 +34,7 @@ import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.ResourcesUtil
-import net.skyscanner.backpack.util.ThemesUtil
+import net.skyscanner.backpack.util.BpkTheme
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.WeekFields
@@ -155,8 +155,8 @@ internal class MonthView @JvmOverloads constructor(
     )
   }
 
-  private val defaultTextColor: Int by lazy { ThemesUtil.getColor(context, R.color.bpkGray900) }
-  private val disabledTextColor: Int by lazy { ThemesUtil.getColor(context, R.color.bpkGray100) }
+  private val defaultTextColor: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray900) }
+  private val disabledTextColor: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray100) }
   private val selectedTextColor: Int by lazy {
     themeableColors["selectedTextColor"] ?: ContextCompat.getColor(context, R.color.bpkWhite)
   }
@@ -166,9 +166,9 @@ internal class MonthView @JvmOverloads constructor(
   private val rangeColorNonColored: Int by lazy {
     themeableColors["selectedRangeBackgroundColor"] ?: ContextCompat.getColor(context, R.color.bpkBlue400)
   }
-  private val rangeColorColored: Int by lazy { ThemesUtil.getColor(context, R.color.bpkGray100) }
-  private val rangeTextColorColored: Int by lazy { ThemesUtil.getColor(context, R.color.bpkGray700) }
-  private val todayCircleColor: Int by lazy { ThemesUtil.getColor(context, R.color.bpkGray100) }
+  private val rangeColorColored: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray100) }
+  private val rangeTextColorColored: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray700) }
+  private val todayCircleColor: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray100) }
   private val todayCircleStrokeWidth: Int by lazy { ResourcesUtil.dpToPx(1, context) }
   private val sameDayCircleStrokeWidth: Int by lazy { ResourcesUtil.dpToPx(1, context) }
   private val miniDayNumberTextSize: Int by lazy { monthNumberFont.fontSize }
