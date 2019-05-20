@@ -4,4 +4,5 @@
 
 ALL_FILES=$*
 
-./gradlew ktlint -Pfiles="$ALL_FILES"
+./gradlew ktLintFormat -Pfiles="$ALL_FILES"
+git add .
