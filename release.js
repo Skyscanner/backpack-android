@@ -99,6 +99,9 @@ async function release() {
       npm: {
         publish: false,
       },
+      git: {
+        requireCleanWorkingDir: false,
+      },
       prompt: {
         src: {
           release: true,
