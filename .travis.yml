@@ -28,6 +28,9 @@ cache:
     # Gcloud
     - $HOME/google-cloud-sdk
 
+    # Python packages
+    - /usr/local/lib/python2.7/site-packages
+
 before_install:
   - openssl aes-256-cbc -K $encrypted_64bd6e5c0667_key -iv $encrypted_64bd6e5c0667_iv -in gcloud-service-key.json.enc -out $HOME/gcloud-service-key.json -d
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export $CLOUDSDK_CORE_DISABLE_PROMPTS; curl https://sdk.cloud.google.com | bash; fi
@@ -56,6 +59,12 @@ android:
 
 before_script:
   - greenkeeper-lockfile-update
+  # Enable gradle deamon again, the recomendation to keep it disable on CI is outdated
+  - sed -i 's/org\.gradle\.daemon=false//g' $HOME/.gradle/gradle.properties
+  # Give more memory to gradle
+  - echo "org.gradle.jvmargs=-Xmx2048m" > $HOME/.gradle/gradle.properties
+  # Disable pre dexing
+  - cp gradle-init-ci.gradle $HOME/.gradle/init.gradle
 
 script:
   - set -e

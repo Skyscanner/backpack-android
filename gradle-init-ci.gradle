@@ -1,0 +1,13 @@
+// Disable pre dexing in the ci.
+// see https://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/
+allprojects {
+  project.plugins.whenPluginAdded { plugin ->
+    if ("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
+      println "Disable pre dexing for module ${project.name}"
+      project.android.dexOptions.preDexLibraries = false
+    } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
+      println "Disable pre dexing for module ${project.name}"
+      project.android.dexOptions.preDexLibraries = false
+    }
+  }
+}
