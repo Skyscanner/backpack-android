@@ -61,7 +61,7 @@ before_script:
   # Give more memory to gradle
   - echo "org.gradle.jvmargs=-Xmx2048m" > $HOME/.gradle/gradle.properties
   # Disable pre dexing
-  - cp gradle-init-ci.gradle $HOME/.gradle/init.gradle
+  # - cp gradle-init-ci.gradle $HOME/.gradle/init.gradle
 
 script:
   - set -e
