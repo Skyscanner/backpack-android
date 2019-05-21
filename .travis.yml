@@ -50,9 +50,6 @@ install:
 
 android:
   components:
-    - tools
-    - platform-tools
-    - tools
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
     - android-$ANDROID_API_LEVEL
     - android-$ANDROID_MIN_SDK_LEVEL
