@@ -2,27 +2,34 @@
 <resources>
 
   <!-- London theme start -->
-  <style name="LondonTheme" parent="">
-    <item name="bpkPrimaryColor">#002F61</item>
+  <style name="LondonTheme">
+    <item name="bpkPrimaryColor">#013A76</item>
     <item name="colorPrimary">?bpkPrimaryColor</item>
 
+    <item name="bpkGray50Color">#F1F3F3</item>
+    <item name="bpkGray100Color">#DCDFE0</item>
+    <item name="bpkGray300Color">#B3BABD</item>
+    <item name="bpkGray500Color">#657176</item>
+    <item name="bpkGray700Color">#4B5458</item>
+    <item name="bpkGray900Color">#0B1A22</item>
+
     <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
+
+    <item name="bpkChipStyle">@style/DohaThemeChip</item>
+
     <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
-    <item name="bpkChipStyle">@style/LondonThemeChip</item>
+    <item name="bpkButtonFeaturedStyle">@style/LondonThemeButtonFeatured</item>
+    <item name="bpkButtonDestructiveStyle">@style/LondonThemeButtonDestructive</item>
+
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
-    <item name="bpkTextStyle">@style/LondonThemeText</item>
+
     <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
+
+    <item name="bpkTextStyle">@style/LondonThemeText</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#002E61</item>
-
-    <item name="bpkGray50Color">#BABBC4</item>
-    <item name="bpkGray100Color">#ACADB9</item>
-    <item name="bpkGray300Color">#ACADB9</item>
-    <item name="bpkGray500Color">#9FA0AD</item>
-    <item name="bpkGray700Color">#9192A1</item>
-    <item name="bpkGray900Color">#838595</item>
   </style>
 
   <style name="LondonThemeText">
@@ -35,26 +42,37 @@
     <item name="switchPrimaryColor">#ED1B28</item>
   </style>
 
-  <style name="LondonThemeButtonPrimary">
-    <item name="buttonBackgroundColor">#002F61</item>
-    <item name="buttonTextColor">@color/bpkWhite</item>
-    <item name="buttonCornerRadius">@dimen/bpkSpacingMd</item>
-    <item name="buttonAddElevation">true</item>
-  </style>
-  <style name="LondonThemeButtonSecondary">
-    <item name="buttonBackgroundColor">@color/bpkWhite</item>
-    <item name="buttonCornerRadius">@dimen/bpkSpacingMd</item>
-    <item name="buttonTextColor">#ED1B28</item>
-    <item name="buttonStrokeColor">#5E072C</item>
-    <item name="buttonAddElevation">true</item>
+  <style name="LondonThemeButton">
+    <item name="buttonCornerRadius">@dimen/bpkBorderRadiusSm</item>
   </style>
 
-  <style name="LondonThemeChip">
-    <item name="chipSelectedBackgroundColor">?bpkPrimaryColor</item>
+  <style name="LondonThemeButtonPrimary" parent="LondonThemeButton">
+    <item name="buttonBackgroundColor">?bpkPrimaryColor</item>
+    <item name="buttonTextColor">@color/bpkWhite</item>
+  </style>
+
+  <style name="LondonThemeButtonSecondary" parent="LondonThemeButton">
+    <item name="buttonBackgroundColor">@color/bpkWhite</item>
+    <item name="buttonTextColor">?bpkPrimaryColor</item>
+    <item name="buttonStrokeColor">?bpkPrimaryColor</item>
+  </style>
+
+  <style name="LondonThemeButtonFeatured" parent="LondonThemeButton">
+    <item name="buttonBackgroundColor">#ED1B28</item>
+    <item name="buttonTextColor">@color/bpkWhite</item>
+  </style>
+
+  <style name="LondonThemeButtonDestructive" parent="LondonThemeButton">
+    <item name="buttonBackgroundColor">@color/bpkWhite</item>
+    <item name="buttonTextColor">#ED1B28</item>
   </style>
 
   <style name="LondonThemeSpinnerPrimary">
     <item name="spinnerColor">?bpkPrimaryColor</item>
+  </style>
+
+  <style name="LondonThemeChip">
+    <item name="chipSelectedBackgroundColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="LondonThemeCalendar">
@@ -69,6 +87,12 @@
   <style name="DohaTheme" parent="">
     <item name="bpkPrimaryColor">#ffb300</item>
     <item name="colorPrimary">?bpkPrimaryColor</item>
+    <item name="bpkGray50Color">#F1F3F3</item>
+    <item name="bpkGray100Color">#DCDFE0</item>
+    <item name="bpkGray300Color">#B3BABD</item>
+    <item name="bpkGray500Color">#657176</item>
+    <item name="bpkGray700Color">#4B5458</item>
+    <item name="bpkGray900Color">#0B1A22</item>
 
     <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
     <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
@@ -80,13 +104,6 @@
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
-
-    <item name="bpkGray50Color">#BABBC4</item>
-    <item name="bpkGray100Color">#ACADB9</item>
-    <item name="bpkGray300Color">#ACADB9</item>
-    <item name="bpkGray500Color">#9FA0AD</item>
-    <item name="bpkGray700Color">#9192A1</item>
-    <item name="bpkGray900Color">#838595</item>
   </style>
 
   <style name="DohaThemeBpkSwitch" parent="">
