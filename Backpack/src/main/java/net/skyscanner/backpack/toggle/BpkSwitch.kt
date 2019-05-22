@@ -9,6 +9,11 @@ import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.getColor
 
+private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
+  val withBaseStyle = createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.switchStyle)
+  return createContextThemeWrapper(withBaseStyle, attrs, R.attr.bpkSwitchStyle)
+}
+
 /**
  * BpkSwitch allow users to toggle between two states, on or off.
  *
@@ -21,17 +26,17 @@ import net.skyscanner.backpack.util.getColor
 open class BpkSwitch @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.attr.bpkSwitchStyle
-) : SwitchCompat(createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.switchStyle), attrs, defStyleAttr) {
+  defStyleAttr: Int = 0
+) : SwitchCompat(wrapContext(context, attrs), attrs, defStyleAttr) {
 
   init {
     initialize(attrs, defStyleAttr)
   }
 
   fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val a = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0)
-    val primaryColor = a.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
-    a.recycle()
+    val styledAttrs = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0)
+    val primaryColor = styledAttrs.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
+    styledAttrs.recycle()
 
     trackTintList = ColorStateList.valueOf(BpkTheme.getColor(context, R.color.bpkGray100))
     thumbTintList = ColorStateList(
