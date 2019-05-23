@@ -188,10 +188,10 @@ open class BpkButton : AppCompatButton {
 
       iconPosition = attr.getInt(R.styleable.BpkButton_buttonIconPosition, END)
 
-      buttonBackgroundColor = attr.getColor(R.styleable.BpkButton_buttonBackgroundColor, ContextCompat.getColor(context, type.bgColor))
-      buttonTextColor = attr.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))
+      buttonBackgroundColor = attr.getColor(R.styleable.BpkButton_buttonBackgroundColor, BpkTheme.getColor(context, type.bgColor))
+      buttonTextColor = attr.getColor(R.styleable.BpkButton_buttonTextColor, BpkTheme.getColor(context, type.textColor))
 
-      buttonStrokeColor = attr.getResourceId(R.styleable.BpkButton_buttonStrokeColor, BpkTheme.getColor(context, type.strokeColor))
+      buttonStrokeColor = attr.getColor(R.styleable.BpkButton_buttonStrokeColor, BpkTheme.getColor(context, type.strokeColor))
       roundedButtonCorner = attr.getDimension(R.styleable.BpkButton_buttonCornerRadius, context.resources.getDimension(R.dimen.bpkSpacingLg))
       isElevated = attr.getBoolean(R.styleable.BpkButton_buttonAddElevation, false)
 

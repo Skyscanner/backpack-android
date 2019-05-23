@@ -6,6 +6,12 @@
 
 - `BpkSwitch`
   - Changed theming approach to not rely on constructor's default arguments.
+  
+**Fixed:**
+
+- `BpkButton`:
+  - Fixed theming for stroke color.
+
 
 ## How to write a good changelog entry
 

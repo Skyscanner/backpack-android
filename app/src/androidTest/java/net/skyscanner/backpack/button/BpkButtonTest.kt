@@ -176,6 +176,20 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  fun screenshotTestButtonBasicFeatured_withTheme() {
+    val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Featured)
+    button.text = "Message"
+    snap(wrap(button))
+  }
+
+  @Test
+  fun screenshotTestButtonBasicDestructive_withTheme() {
+    val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Destructive)
+    button.text = "Message"
+    snap(wrap(button))
+  }
+
+  @Test
   @Ignore
   fun screenshotTestButtonLargeWithIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Primary)
