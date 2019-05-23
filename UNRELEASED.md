@@ -2,17 +2,6 @@
 
 > Place your changes below this line.
 
-**Changed:**
-
-- `BpkSwitch`
-  - Changed theming approach to not rely on constructor's default arguments.
-  
-**Fixed:**
-
-- `BpkButton`:
-  - Fixed theming for stroke color.
-
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

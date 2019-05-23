@@ -2,6 +2,18 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.0.1
+
+**Changed:**
+
+- `BpkSwitch`
+  - Changed theming approach to not rely on constructor's default arguments.
+  
+**Fixed:**
+
+- `BpkButton`:
+  - Fixed theming for stroke color.
+
 # 9.0.0
 
 **Added:**
