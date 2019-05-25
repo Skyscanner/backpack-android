@@ -36,6 +36,7 @@ class BpkTheme {
      * @return a color integer
      */
     @JvmStatic
+    @ColorInt
     fun getPrimaryColor(context: Context) =
       resolveThemeColorWithDefault(context, R.attr.bpkPrimaryColor)
 
