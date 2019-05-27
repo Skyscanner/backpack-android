@@ -5,6 +5,7 @@
   <style name="LondonTheme">
     <item name="bpkPrimaryColor">#013A76</item>
     <item name="colorPrimary">?bpkPrimaryColor</item>
+    <item name="colorPrimaryDark">#00254B</item>
 
     <item name="bpkGray50Color">#F1F3F3</item>
     <item name="bpkGray100Color">#DCDFE0</item>
@@ -87,6 +88,8 @@
   <style name="DohaTheme" parent="">
     <item name="bpkPrimaryColor">#ffb300</item>
     <item name="colorPrimary">?bpkPrimaryColor</item>
+    <item name="colorPrimaryDark">#ffa000</item>
+
     <item name="bpkGray50Color">#F1F3F3</item>
     <item name="bpkGray100Color">#DCDFE0</item>
     <item name="bpkGray300Color">#B3BABD</item>
