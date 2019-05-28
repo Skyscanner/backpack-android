@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.0.2
+
+**Fixed:**
+- `BpkPanel`
+  - Added missing rounding corners
+
 # 9.0.1
 
 **Changed:**
