@@ -2,6 +2,20 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.1.0
+
+**Added:**
+
+- Added the following new tokens/dimensions:
+  - `bpkTextBaseSize`
+  - `bpkTextCapsSize`
+  - `bpkTextLgSize`
+  - `bpkTextSmSize`
+  - `bpkTextXlSize`
+  - `bpkTextXsSize`
+  - `bpkTextXxlSize`
+  - `bpkTextXxxlSize`
+
 # 9.0.2
 
 **Fixed:**
