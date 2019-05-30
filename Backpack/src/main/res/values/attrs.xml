@@ -100,6 +100,13 @@
     <attr name="switchPrimaryColor" format="color" />
   </declare-styleable>
 
+  <declare-styleable name="BpkStarRating">
+    <attr name="starColor" format="color" />
+    <attr name="starFilledColor" format="color" />
+    <attr name="rating" format="float" />
+    <attr name="maxRating" format="integer" />
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
@@ -113,6 +120,7 @@
   <attr name="bpkGray700Color" format="color" />
   <attr name="bpkGray900Color" format="color" />
 
+  <attr name="bpkStarRatingStyle" format="reference" />
   <attr name="bpkSwitchStyle" format="reference" />
   <attr name="bpkButtonSecondaryStyle" format="reference" />
   <attr name="bpkButtonPrimaryStyle" format="reference" />

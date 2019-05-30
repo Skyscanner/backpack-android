@@ -123,6 +123,12 @@ object ComponentRegistry {
         "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
         "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
         "With drawables" story NodeData { Story of R.layout.fragment_text_drawables }
+      )),
+    "Star Rating" story NodeData({ children -> SubStory of children },
+      mapOf(
+        "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
+        "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
+        "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max }
       ))
   )
 
