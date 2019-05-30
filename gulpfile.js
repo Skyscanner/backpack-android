@@ -105,6 +105,12 @@ const convertToXml = (chunk, enc, cb) => {
     .catch(cb);
 };
 
+const getTextDimensions = () =>
+  tokensWithCategory('font-sizes').map(({ value, name }) => ({
+    name: `bpkText${pascalCase(name.split('_')[1])}Size`,
+    size: Number.parseInt(value, 10),
+  }));
+
 const getTextStyles = fontWeight => {
   const result = _.chain(
     [].concat(
@@ -150,7 +156,7 @@ const getTextStyles = fontWeight => {
 
       return {
         name: `bpk${pascalCase(key)}${getFontWeightSuffix(fontWeight)}`,
-        size: Number.parseInt(sizeProp[0].value, 10),
+        size: `@dimen/bpkText${pascalCase(sizeProp[0].name.split('_')[1])}Size`,
         fontFamily: fontFamilyMappings[fontWeight],
         letterSpacing: letterSpacingProp[0].value,
       };
@@ -212,6 +218,7 @@ gulp.task('template:text', () =>
     .src(`${PATHS.templates}/BackpackText.njk`)
     .pipe(
       nunjucks.compile({
+        dimensions: [...getTextDimensions()],
         data: [
           ...getTextStyles(FONT_WEIGHTS.normal),
           ...getTextStyles(FONT_WEIGHTS.emphasized),
