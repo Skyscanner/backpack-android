@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.2.0
+
+**Added:**
+- `BpkStarRating` 
+
 # 9.1.0
 
 **Added:**
