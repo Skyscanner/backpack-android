@@ -10,7 +10,7 @@ import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.BpkTheme.Companion.wrapContextWithDefaults
 import net.skyscanner.backpack.util.createContextThemeWrapper
 
-class BpkStarRating @JvmOverloads constructor(
+open class BpkStarRating @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
