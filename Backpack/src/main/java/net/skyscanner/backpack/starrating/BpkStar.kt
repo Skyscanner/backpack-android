@@ -1,7 +1,10 @@
 package net.skyscanner.backpack.starrating
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.ColorFilter
+import android.graphics.PixelFormat
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.annotation.ColorInt
