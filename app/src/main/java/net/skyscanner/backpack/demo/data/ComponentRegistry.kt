@@ -127,6 +127,7 @@ object ComponentRegistry {
     "Star Rating" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
+        "RTL" story NodeData { Story of R.layout.fragment_star_rating_rtl },
         "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
         "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max }
       ))

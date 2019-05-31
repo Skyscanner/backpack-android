@@ -6,7 +6,6 @@ import android.graphics.ColorFilter
 import android.graphics.PixelFormat
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
-import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 import androidx.core.content.ContextCompat
@@ -20,12 +19,12 @@ private const val MAX_VALUE = 1.0f
 internal class BpkStar(
   context: Context,
   @ColorInt private var starFilledColor: Int,
-  @ColorInt private var starColor: Int
+  @ColorInt private var starColor: Int,
+  private var rtl: Boolean
 ) : Drawable() {
 
   private val star = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.bpk_star)!!.mutate())
   private val half = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.bpk_star_half)!!.mutate())
-  private val rtl = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_RTL
 
   @FloatRange(from = 0.0, to = 1.0)
   private var value: Float = MIN_VALUE
@@ -37,7 +36,8 @@ internal class BpkStar(
   fun update(
     @FloatRange(from = 0.0, to = 1.0) value: Float,
     @ColorInt starFilledColor: Int,
-    @ColorInt starColor: Int
+    @ColorInt starColor: Int,
+    rtl: Boolean
   ) {
     if (value !in MIN_VALUE..MAX_VALUE) {
       throw IllegalArgumentException("Invalid value $value")
@@ -57,6 +57,11 @@ internal class BpkStar(
 
     if (this.starColor != starColor) {
       this.starColor = starColor
+      invalidate = true
+    }
+
+    if (this.rtl != rtl) {
+      this.rtl = rtl
       invalidate = true
     }
 

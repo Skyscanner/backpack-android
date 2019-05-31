@@ -42,7 +42,7 @@
 
   <style name="LondonThemeBpkStarRating" parent="">
     <item name="starColor">?bpkGray100Color</item>
-    <item name="starFilledColor">?colorAccent</item>
+    <item name="starFilledColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="LondonThemeBpkSwitch" parent="">
@@ -118,7 +118,7 @@
 
   <style name="DohaThemeBpkStarRating" parent="">
     <item name="starColor">?bpkGray100Color</item>
-    <item name="starFilledColor">?colorAccent</item>
+    <item name="starFilledColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="DohaThemeBpkSwitch" parent="">

@@ -1,8 +1,10 @@
 package net.skyscanner.backpack.starrating
 
 import android.graphics.Color
+import android.view.View
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.createThemedContext
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,67 +41,67 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestStarRating_NegativeValue() {
+  fun screenshotTestStarRating_NegativeRating() {
     rating.maxRating = 5
     rating.rating = -0.5f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_ZeroValue() {
+  fun screenshotTestStarRating_ZeroRating() {
     rating.maxRating = 5
     rating.rating = 0.0f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_BeforeHalfStarValue() {
+  fun screenshotTestStarRating_RatingValueBetween0And0_5() {
     rating.maxRating = 5
     rating.rating = 0.4999999f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_AfterHalfStarValue() {
+  fun screenshotTestStarRating_RatingValue0_5() {
     rating.maxRating = 5
     rating.rating = 0.5f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_BeforeFullStarValue() {
+  fun screenshotTestStarRating_RatingValueBetween0_5And1() {
     rating.maxRating = 5
     rating.rating = 0.9999999f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_AfterFullStarValue() {
+  fun screenshotTestStarRating_RatingValue1() {
     rating.maxRating = 5
     rating.rating = 1.0f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_OverMaxValue() {
+  fun screenshotTestStarRating_6withMax5() {
     rating.maxRating = 5
     rating.rating = 6.0f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_StarColor() {
+  fun screenshotTestStarRating_withTheme() {
+    val rating = BpkStarRating(createThemedContext(testContext)).apply { setBackgroundColor(Color.WHITE) }
     rating.maxRating = 5
     rating.rating = 2.5f
-    rating.starColor = Color.RED
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_StarFilledColor() {
+  fun screenshotTestStarRating_rtl() {
+    rating.layoutDirection = View.LAYOUT_DIRECTION_RTL
     rating.maxRating = 5
     rating.rating = 2.5f
-    rating.starFilledColor = Color.RED
     snap(rating)
   }
 }
