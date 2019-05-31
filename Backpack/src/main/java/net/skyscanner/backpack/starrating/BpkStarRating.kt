@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 
 open class BpkStarRating @JvmOverloads constructor(
@@ -35,10 +35,10 @@ open class BpkStarRating @JvmOverloads constructor(
     }
 
   @ColorInt
-  private var starColor: Int = BpkTheme.getColor(context, R.color.bpkGray100)
+  private var starColor: Int = ResourcesCompat.getColor(resources, R.color.bpkGray100, null)
 
   @ColorInt
-  private var starFilledColor: Int = BpkTheme.getColor(context, R.color.bpkYellow500)
+  private var starFilledColor: Int = ResourcesCompat.getColor(resources, R.color.bpkYellow500, null)
 
   init {
     initialize(attrs, defStyleAttr)
