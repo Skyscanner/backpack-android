@@ -75,9 +75,9 @@ class BpkStarRating @JvmOverloads constructor(
         _rating = it.getFloat(R.styleable.BpkStarRating_rating, maxRating / 2f)
         _starColor = it.getColor(R.styleable.BpkStarRating_starColor, starColor)
         _starFilledColor = it.getColor(R.styleable.BpkStarRating_starFilledColor, starFilledColor)
-        update()
       }
       ?.recycle()
+    update()
   }
 
   private fun update() {
