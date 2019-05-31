@@ -133,9 +133,10 @@ class BpkCalendarControllerTest {
   fun test_isToday() {
     val today = LocalDate.now()
 
+    val dayOfMonth = today.dayOfMonth % 28 + 1
     Assert.assertTrue(subject.isToday(today.year, today.monthValue, today.dayOfMonth))
-    Assert.assertFalse(subject.isToday(today.year, today.monthValue, today.dayOfMonth % 28 + 1))
-    Assert.assertFalse(subject.isToday(today.year, today.monthValue % 12 + 1, today.dayOfMonth))
+    Assert.assertFalse(subject.isToday(today.year, today.monthValue, dayOfMonth))
+    Assert.assertFalse(subject.isToday(today.year, today.monthValue % 12 + 1, dayOfMonth))
     Assert.assertFalse(subject.isToday(today.year + 1, today.monthValue, today.dayOfMonth))
   }
 

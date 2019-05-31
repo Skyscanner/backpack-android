@@ -15,6 +15,7 @@
     <item name="bpkGray900Color">#0B1A22</item>
 
     <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
+    <item name="bpkStarRatingStyle">@style/LondonThemeBpkStarRating</item>
 
     <item name="bpkChipStyle">@style/DohaThemeChip</item>
 
@@ -37,6 +38,11 @@
     <item name="fontFamilyBase">@font/shadows_into_light</item>
     <item name="fontFamilyHeavy">@font/shadows_into_light</item>
     <item name="fontFamilyEmphasized">@font/shadows_into_light</item>
+  </style>
+
+  <style name="LondonThemeBpkStarRating" parent="">
+    <item name="starColor">?bpkGray100Color</item>
+    <item name="starFilledColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="LondonThemeBpkSwitch" parent="">
@@ -98,6 +104,7 @@
     <item name="bpkGray900Color">#0B1A22</item>
 
     <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
+    <item name="bpkStarRatingStyle">@style/DohaThemeBpkStarRating</item>
     <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
     <item name="bpkChipStyle">@style/DohaThemeChip</item>
@@ -107,6 +114,11 @@
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
+  </style>
+
+  <style name="DohaThemeBpkStarRating" parent="">
+    <item name="starColor">?bpkGray100Color</item>
+    <item name="starFilledColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="DohaThemeBpkSwitch" parent="">
