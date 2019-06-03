@@ -39,16 +39,15 @@ open class BpkSpinner @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-  private val colors by lazy {
-    arrayOf(
-      R.color.bpkBlue500,
-      R.color.bpkWhite,
-      R.color.bpkGray700
-    )
-  }
+  private val colors = arrayOf(
+    R.color.bpkBlue500,
+    R.color.bpkWhite,
+    R.color.bpkGray700
+  )
 
-  private var mProgressBar: ProgressBar? = null
-  @ColorInt private var themePrimaryColor: Int = INVALID_RES
+  private var progressBar: ProgressBar? = null
+  @ColorInt
+  private var themePrimaryColor: Int = INVALID_RES
 
   /**
    * Updates the Spinner's type.
@@ -101,16 +100,16 @@ open class BpkSpinner @JvmOverloads constructor(
   }
 
   private fun updateColor() {
-    mProgressBar?.indeterminateDrawable?.mutate()?.setColorFilter(getColor(), PorterDuff.Mode.SRC_IN)
+    progressBar?.indeterminateDrawable?.mutate()?.setColorFilter(getColor(), PorterDuff.Mode.SRC_IN)
   }
 
   private fun updateSize() {
     val style = if (small) android.R.attr.progressBarStyleSmall else android.R.attr.progressBarStyle
-    mProgressBar = ProgressBar(context, null, style)
+    progressBar = ProgressBar(context, null, style)
 
     removeAllViews()
     addView(
-      mProgressBar,
+      progressBar,
       ViewGroup.LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT,
         ViewGroup.LayoutParams.MATCH_PARENT))

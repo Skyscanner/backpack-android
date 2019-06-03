@@ -49,75 +49,11 @@ internal class MonthView @JvmOverloads constructor(
   defStyle: Int = 0
 ) : View(context, attrs, defStyle) {
 
-  private val monthNumberFont by lazy {
+  private val monthNumberFont =
     BpkText.getFont(context, BpkText.SM)
-  }
 
-  private val monthNumberPaint: Paint by lazy {
-    Paint().apply {
-      isAntiAlias = true
-      isFakeBoldText = false
-      style = Style.FILL
-      textAlign = Align.CENTER
-      monthNumberFont.letterSpacing?.let { letterSpacing = it }
-      textSize = monthNumberFont.fontSize.toFloat()
-      typeface = monthNumberFont.typeface
-    }
-  }
-
-  private val monthLabelFont by lazy {
+  private val monthLabelFont =
     BpkText.getFont(context, BpkText.LG, BpkText.Weight.EMPHASIZED)
-  }
-
-  private val monthTitlePaint: Paint by lazy {
-    Paint().apply {
-      isAntiAlias = true
-      isFakeBoldText = false
-      color = defaultTextColor
-      style = Style.FILL
-      textAlign = Align.LEFT
-      monthLabelFont.letterSpacing?.let { letterSpacing = it }
-      textSize = monthLabelFont.fontSize.toFloat()
-      typeface = monthLabelFont.typeface
-    }
-  }
-
-  private val selectedCirclePaint: Paint by lazy {
-    Paint().apply {
-      isFakeBoldText = true
-      isAntiAlias = true
-      color = selectedDayCircleFillColor
-      textAlign = Align.CENTER
-      style = Style.FILL_AND_STROKE
-    }
-  }
-
-  private val todayCirclePaint: Paint by lazy {
-    Paint().apply {
-      isFakeBoldText = true
-      isAntiAlias = true
-      color = todayCircleColor
-      textAlign = Align.CENTER
-      style = Style.STROKE
-      strokeWidth = todayCircleStrokeWidth.toFloat()
-    }
-  }
-
-  private val rangeBackPaint: Paint by lazy {
-    Paint().apply {
-      isFakeBoldText = true
-      isAntiAlias = true
-      color = rangeColorNonColored
-      style = Style.FILL
-    }
-  }
-
-  private val backgroundPaint: Paint by lazy {
-    Paint().apply {
-      color = Color.WHITE
-      style = Style.FILL
-    }
-  }
 
   private var coloredCirclePaints = mapOf<LocalDate, Paint>()
   private var coloredSelectedPaints = mapOf<LocalDate, Paint>()
@@ -134,53 +70,93 @@ internal class MonthView @JvmOverloads constructor(
   private var numberOfRows = DEFAULT_NUM_ROWS
   private var monthHeaderString = ""
 
-  private val themeableColors: Map<String, Int?> by lazy {
-    val ifInvalidNull = { res: Int -> if (res == -1) null else res }
-    val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
-    val selectedBackgroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor, -1)
-      .let(ifInvalidNull)
+  private val defaultTextColor: Int = BpkTheme.getColor(context, R.color.bpkGray900)
+  private val disabledTextColor: Int = BpkTheme.getColor(context, R.color.bpkGray100)
 
-    val selectedRangeBackgroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor, -1)
-      .let(ifInvalidNull)
-
-    val selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor, -1)
-      .let(ifInvalidNull)
-
-    a.recycle()
-
-    mapOf(
-      "selectedBackgroundColor" to selectedBackgroundColor,
-      "selectedRangeBackgroundColor" to selectedRangeBackgroundColor,
-      "selectedTextColor" to selectedTextColor
-    )
-  }
-
-  private val defaultTextColor: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray900) }
-  private val disabledTextColor: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray100) }
-  private val selectedTextColor: Int by lazy {
-    themeableColors["selectedTextColor"] ?: ContextCompat.getColor(context, R.color.bpkWhite)
-  }
-  private val selectedDayCircleFillColor: Int by lazy {
-    themeableColors["selectedBackgroundColor"] ?: ContextCompat.getColor(context, R.color.bpkBlue500)
-  }
-  private val rangeColorNonColored: Int by lazy {
-    themeableColors["selectedRangeBackgroundColor"] ?: ContextCompat.getColor(context, R.color.bpkBlue400)
-  }
-  private val rangeColorColored: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray100) }
-  private val rangeTextColorColored: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray700) }
-  private val todayCircleColor: Int by lazy { BpkTheme.getColor(context, R.color.bpkGray100) }
-  private val todayCircleStrokeWidth: Int by lazy { ResourcesUtil.dpToPx(1, context) }
-  private val sameDayCircleStrokeWidth: Int by lazy { ResourcesUtil.dpToPx(1, context) }
-  private val miniDayNumberTextSize: Int by lazy { monthNumberFont.fontSize }
-  private val monthLabelTextSize: Int by lazy { monthLabelFont.fontSize }
-  private val selectedDayCircleRadius: Int by lazy { ResourcesUtil.dpToPx(20, context) }
-  private val monthHeaderSize: Int by lazy { ResourcesUtil.dpToPx(52, context) }
-  private val coloredCircleStrokeWidth: Int by lazy { ResourcesUtil.dpToPx(3, context) }
+  private val rangeColorColored: Int = BpkTheme.getColor(context, R.color.bpkGray100)
+  private val rangeTextColorColored: Int = BpkTheme.getColor(context, R.color.bpkGray700)
+  private val todayCircleColor: Int = BpkTheme.getColor(context, R.color.bpkGray100)
+  private val todayCircleStrokeWidth: Int = ResourcesUtil.dpToPx(1, context)
+  private val sameDayCircleStrokeWidth: Int = ResourcesUtil.dpToPx(1, context)
+  private val miniDayNumberTextSize: Int = monthNumberFont.fontSize
+  private val monthLabelTextSize: Int = monthLabelFont.fontSize
+  private val selectedDayCircleRadius: Int = ResourcesUtil.dpToPx(20, context)
+  private val monthHeaderSize: Int = ResourcesUtil.dpToPx(52, context)
+  private val coloredCircleStrokeWidth: Int = ResourcesUtil.dpToPx(3, context)
 
   private var rowHeight: Int = ResourcesUtil.dpToPx(45, context)
   private var viewWidth = 0
 
   private var isRtl: Boolean = false
+
+  private val selectedTextColor: Int
+  private val selectedDayCircleFillColor: Int
+  private val rangeColorNonColored: Int
+
+  init {
+    val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
+
+    selectedDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
+      ContextCompat.getColor(context, R.color.bpkBlue500))
+
+    rangeColorNonColored = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
+      ContextCompat.getColor(context, R.color.bpkBlue400))
+
+    selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor,
+      ContextCompat.getColor(context, R.color.bpkWhite))
+
+    a.recycle()
+  }
+
+  private val monthNumberPaint = Paint().apply {
+    isAntiAlias = true
+    isFakeBoldText = false
+    style = Style.FILL
+    textAlign = Align.CENTER
+    monthNumberFont.letterSpacing?.let { letterSpacing = it }
+    textSize = monthNumberFont.fontSize.toFloat()
+    typeface = monthNumberFont.typeface
+  }
+
+  private val monthTitlePaint = Paint().apply {
+    isAntiAlias = true
+    isFakeBoldText = false
+    color = defaultTextColor
+    style = Style.FILL
+    textAlign = Align.LEFT
+    monthLabelFont.letterSpacing?.let { letterSpacing = it }
+    textSize = monthLabelFont.fontSize.toFloat()
+    typeface = monthLabelFont.typeface
+  }
+
+  private val selectedCirclePaint = Paint().apply {
+    isFakeBoldText = true
+    isAntiAlias = true
+    color = selectedDayCircleFillColor
+    textAlign = Align.CENTER
+    style = Style.FILL_AND_STROKE
+  }
+
+  private val todayCirclePaint = Paint().apply {
+    isFakeBoldText = true
+    isAntiAlias = true
+    color = todayCircleColor
+    textAlign = Align.CENTER
+    style = Style.STROKE
+    strokeWidth = todayCircleStrokeWidth.toFloat()
+  }
+
+  private val rangeBackPaint = Paint().apply {
+    isFakeBoldText = true
+    isAntiAlias = true
+    color = rangeColorNonColored
+    style = Style.FILL
+  }
+
+  private val backgroundPaint = Paint().apply {
+    color = Color.WHITE
+    style = Style.FILL
+  }
 
   var onDayClickListener: OnDayClickListener? = null
   var controller: BpkCalendarController? = null
@@ -215,7 +191,7 @@ internal class MonthView @JvmOverloads constructor(
 
   override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
     setMeasuredDimension(
-      View.MeasureSpec.getSize(widthMeasureSpec),
+      MeasureSpec.getSize(widthMeasureSpec),
       rowHeight * numberOfRows + monthHeaderSize + selectedDayCircleRadius
     )
   }
@@ -375,7 +351,7 @@ internal class MonthView @JvmOverloads constructor(
             )
             selectedCirclePaint.alpha = 255
           } else {
-            selectedCirclePaint.style = Paint.Style.FILL
+            selectedCirclePaint.style = Style.FILL
 
             drawCircle(
               canvas,
@@ -427,7 +403,7 @@ internal class MonthView @JvmOverloads constructor(
 
   private fun drawSameDayCircles(canvas: Canvas, paint: Paint, padding: Int, x: Int, y: Int, radius: Int) {
     paint.strokeWidth = sameDayCircleStrokeWidth.toFloat()
-    paint.style = Paint.Style.STROKE
+    paint.style = Style.STROKE
 
     if (isColoredCalendar()) {
       drawCircle(canvas, (x - padding * 1.5).toInt(), y - padding, radius, paint)
@@ -435,7 +411,7 @@ internal class MonthView @JvmOverloads constructor(
       drawCircle(canvas, x, y - padding, radius, paint)
     } else {
       drawCircle(canvas, x - padding, y - padding, radius, paint)
-      paint.style = Paint.Style.FILL
+      paint.style = Style.FILL
       drawCircle(canvas, x + padding, y - padding, radius, paint)
     }
   }

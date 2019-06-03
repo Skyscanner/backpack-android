@@ -111,9 +111,9 @@ open class BpkDialog(
   }
 
   private class ViewHolder(container: View) {
-    val title: BpkText by lazy { container.findViewById<BpkText>(R.id.dialog_title) }
-    val description: BpkText by lazy { container.findViewById<BpkText>(R.id.dialog_description) }
-    val iconView: BpkDialogIcon by lazy { container.findViewById<BpkDialogIcon>(R.id.dialog_icon) }
-    val contentLayout: ViewGroup by lazy { container.findViewById<ViewGroup>(R.id.dialog_content_layout) }
+    val title: BpkText = container.findViewById(R.id.dialog_title)
+    val description: BpkText = container.findViewById(R.id.dialog_description)
+    val iconView: BpkDialogIcon = container.findViewById(R.id.dialog_icon)
+    val contentLayout: ViewGroup = container.findViewById(R.id.dialog_content_layout)
   }
 }

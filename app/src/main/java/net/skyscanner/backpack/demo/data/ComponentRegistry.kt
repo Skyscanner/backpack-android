@@ -133,9 +133,6 @@ object ComponentRegistry {
       ))
   )
 
-  val COMPONENTS by lazy { COMPONENTS_TREE.map { it.value.name } }
-
-  val TOKENS by lazy { TOKENS_MAP.keys.toList() }
   private val TOKENS_MAP = mapOf(
     "All Icons" story NodeData { IconsStory() },
     "Color" story NodeData { ColorStory() },
@@ -150,6 +147,10 @@ object ComponentRegistry {
     "Radii" story NodeData { Story of R.layout.fragment_radii },
     "Spacing" story NodeData { SpacingStory() }
   )
+
+  val COMPONENTS = COMPONENTS_TREE.map { it.value.name }
+
+  val TOKENS = TOKENS_MAP.keys.toList()
 
   fun getStoryCreator(fullyQualifiedName: String): RegistryItem {
     val parts = fullyQualifiedName.split(" - ")

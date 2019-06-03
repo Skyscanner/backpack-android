@@ -24,13 +24,13 @@ class BpkThemeTest {
   internal var activityRule: ActivityTestRule<TestActivity> =
     ActivityTestRule(TestActivity::class.java)
 
-  private val blue500 by lazy { ContextCompat.getColor(activity, R.color.bpkBlue500) }
-  private val gray50 by lazy { ContextCompat.getColor(activity, R.color.bpkGray50) }
-  private val gray100 by lazy { ContextCompat.getColor(activity, R.color.bpkGray100) }
-  private val gray300 by lazy { ContextCompat.getColor(activity, R.color.bpkGray300) }
-  private val gray500 by lazy { ContextCompat.getColor(activity, R.color.bpkGray500) }
-  private val gray700 by lazy { ContextCompat.getColor(activity, R.color.bpkGray700) }
-  private val gray900 by lazy { ContextCompat.getColor(activity, R.color.bpkGray900) }
+  private val blue500 by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkBlue500) }
+  private val gray50 by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkGray50) }
+  private val gray100 by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkGray100) }
+  private val gray300 by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkGray300) }
+  private val gray500 by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkGray500) }
+  private val gray700 by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkGray700) }
+  private val gray900 by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkGray900) }
 
   private val customBlue = Color.parseColor("#9B104A")
   private val customGray50 = Color.parseColor("#9B104B")
