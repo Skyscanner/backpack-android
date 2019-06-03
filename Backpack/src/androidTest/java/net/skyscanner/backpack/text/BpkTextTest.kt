@@ -1,8 +1,10 @@
 package net.skyscanner.backpack.text
 
 import android.content.Context
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.view.ContextThemeWrapper
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -185,5 +187,57 @@ class BpkTextTest {
       Assert.assertEquals(message, font.fontSize, ResourcesUtil.dpToPx(fontSize, context))
       Assert.assertEquals(message, font.letterSpacing, null)
     }
+  }
+
+  @Test
+  fun applyTo_TextView() {
+    val font = BpkText.getFont(context, BpkText.BASE)
+    val subject = TextView(context)
+    subject.text = "Foo"
+
+    font.applyTo(subject)
+
+    Assert.assertEquals(font.typeface, subject.typeface)
+    Assert.assertEquals(font.letterSpacing, subject.letterSpacing)
+    Assert.assertEquals(font.fontSize.toFloat(), subject.textSize)
+  }
+
+  @Test
+  fun applyTo_TextView_withCustomFont() {
+    val withCustomFont = ContextThemeWrapper(context, net.skyscanner.backpack.test.R.style.TestTextCustomFont)
+
+    val font = BpkText.getFont(withCustomFont, BpkText.BASE)
+    val subject = TextView(withCustomFont)
+    subject.text = "Foo"
+
+    font.applyTo(subject)
+
+    Assert.assertEquals(font.typeface, subject.typeface)
+    Assert.assertEquals(0f, subject.letterSpacing)
+    Assert.assertEquals(font.fontSize.toFloat(), subject.textSize)
+  }
+
+  @Test
+  fun applyTo_Paint() {
+    val font = BpkText.getFont(context, BpkText.BASE)
+    val subject = Paint()
+    font.applyTo(subject)
+
+    Assert.assertEquals(font.typeface, subject.typeface)
+    Assert.assertEquals(font.letterSpacing, subject.letterSpacing)
+    Assert.assertEquals(font.fontSize.toFloat(), subject.textSize)
+  }
+
+  @Test
+  fun applyTo_Paint_withCustomFont() {
+    val withCustomFont = ContextThemeWrapper(context, net.skyscanner.backpack.test.R.style.TestTextCustomFont)
+
+    val font = BpkText.getFont(withCustomFont, BpkText.BASE)
+    val subject = Paint()
+    font.applyTo(subject)
+
+    Assert.assertEquals(font.typeface, subject.typeface)
+    Assert.assertEquals(0f, subject.letterSpacing)
+    Assert.assertEquals(font.fontSize.toFloat(), subject.textSize)
   }
 }
