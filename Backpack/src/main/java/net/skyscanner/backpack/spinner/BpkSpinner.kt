@@ -2,6 +2,7 @@ package net.skyscanner.backpack.spinner
 
 import android.content.Context
 import android.graphics.PorterDuff
+import android.provider.Settings.Global
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
@@ -45,9 +46,11 @@ open class BpkSpinner @JvmOverloads constructor(
     R.color.bpkGray700
   )
 
+  private val animationsEnabled =
+    Global.getFloat(context.contentResolver, Global.ANIMATOR_DURATION_SCALE, 1f) != 0f
+
   private var progressBar: ProgressBar? = null
-  @ColorInt
-  private var themePrimaryColor: Int = INVALID_RES
+  @ColorInt private var themePrimaryColor: Int = INVALID_RES
 
   /**
    * Updates the Spinner's type.
@@ -104,17 +107,24 @@ open class BpkSpinner @JvmOverloads constructor(
   }
 
   private fun updateSize() {
-    val style = if (small) android.R.attr.progressBarStyleSmall else android.R.attr.progressBarStyle
-    progressBar = ProgressBar(context, null, style)
+    // Progress animation causes a timeout error in espresso tests:
+    //   - Perhaps the main thread has not gone idle within a reasonable amount of time? There could be an animation or something constantly repainting the screen.
+    //
+    // Since this component only makes sense with animations we simple don't add the progress bar when animations are disabled.
 
-    removeAllViews()
-    addView(
-      progressBar,
-      ViewGroup.LayoutParams(
-        ViewGroup.LayoutParams.MATCH_PARENT,
-        ViewGroup.LayoutParams.MATCH_PARENT))
+    if (animationsEnabled) {
+      val style = if (small) android.R.attr.progressBarStyleSmall else android.R.attr.progressBarStyle
+      progressBar = ProgressBar(context, null, style)
 
-    updateColor()
+      removeAllViews()
+      addView(
+        progressBar,
+        ViewGroup.LayoutParams(
+          ViewGroup.LayoutParams.MATCH_PARENT,
+          ViewGroup.LayoutParams.MATCH_PARENT))
+
+      updateColor()
+    }
   }
 
   enum class Type {
