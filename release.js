@@ -20,6 +20,7 @@ const inquirer = require('inquirer');
 const semver = require('semver');
 const replace = require('replace-in-file');
 const releaseit = require('release-it');
+const fetch = require('node-fetch');
 
 const pkg = require('./package.json');
 
@@ -86,6 +87,36 @@ async function amendReadmeFiles(version) {
   }
 }
 
+async function triggerJitPackBuild(version) {
+  try {
+    fetch(
+      `https://jitpack.io/com/github/Skyscanner/backpack-android/${version}/build.log`,
+      {
+        method: 'GET',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        redirect: 'follow',
+        referrer: 'no-referrer',
+      },
+    )
+      .then(response => {
+        const { status } = response;
+        if (status / 100 === 4 || status / 100 === 5) {
+          console.log(
+            `Unable to trigger JitPack build, response.code=${status}`,
+          );
+        } else {
+          console.log('JitPack build triggered!');
+        }
+      })
+      .catch(error => {
+        console.log(`Failed to trigger JitPack build with ${error}`);
+      });
+  } catch (error) {
+    console.log(`Failed to trigger JitPack build with ${error}`);
+  }
+}
+
 async function release() {
   try {
     const { version } = await inquirer.prompt(questions);
@@ -109,6 +140,7 @@ async function release() {
       },
     };
     await releaseit(releaseOptions);
+    await triggerJitPackBuild(version);
   } catch (exc) {
     console.error(exc);
     process.exit(1);
