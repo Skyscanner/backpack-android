@@ -1,6 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
+**Fixed:**
+
+- `BpkText`:
+  - Fixed issue where `BpkText.getFont()` is not be accessible from Java code.
 
 ## How to write a good changelog entry
 

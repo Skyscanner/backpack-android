@@ -54,6 +54,7 @@ open class BpkText @JvmOverloads constructor(
     const val XXXL = 6
     const val CAPS = 7
 
+    @JvmStatic
     fun getFont(context: Context, textStyle: Int = BpkText.BASE, weight: BpkText.Weight = BpkText.Weight.NORMAL) =
       internalGetFont(context, textStyle, weight)
   }
