@@ -2,16 +2,6 @@
 
 > Place your changes below this line.
 
-**Added:**
-
-- Added new icons `bpk_filter`, `bpk_heart__outline`, `bpk_trend__down`, `bpk_trend__steady`, `bpk_trend__will_rise`, `bpk_world__amer`, `bpk_world__apac`, `bpk_world__emea`
-- `BpkText`:
-  - Added method `applyTo` to `BpkFontDefinition` and `JvmStatic` annotation to `getFont`.
-
-**Updated:**
-
-- Updated icons `bpk_family`, `bpk_heart`
-
 
 ## How to write a good changelog entry
 
