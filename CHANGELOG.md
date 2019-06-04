@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.3.1
+
+**Updated:**
+
+- Updated icons `bpk_heart__outline`
+
 # 9.3.0
 
 **Added:**
@@ -17,7 +23,7 @@
 # 9.2.0
 
 **Added:**
-- `BpkStarRating` 
+- `BpkStarRating`
 
 # 9.1.0
 
@@ -45,7 +51,7 @@
 
 - `BpkSwitch`
   - Changed theming approach to not rely on constructor's default arguments.
-  
+
 **Fixed:**
 
 - `BpkButton`:
