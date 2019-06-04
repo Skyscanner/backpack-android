@@ -16,19 +16,18 @@ internal class WeekdayHeaderView @JvmOverloads constructor(
   defStyle: Int = 0
 ) : LinearLayout(context, attrs, defStyle) {
 
-  private val firstWeekdayView: BpkText by lazy { findViewById<BpkText>(R.id.first_weekday_label) }
-  private val secondWeekdayView: BpkText by lazy { findViewById<BpkText>(R.id.second_weekday_label) }
-  private val thirdWeekdayView: BpkText by lazy { findViewById<BpkText>(R.id.third_weekday_label) }
-  private val fourthWeekdayView: BpkText by lazy { findViewById<BpkText>(R.id.fourth_weekday_label) }
-  private val fifthWeekdayView: BpkText by lazy { findViewById<BpkText>(R.id.fifth_weekday_label) }
-  private val sixthWeekdayView: BpkText by lazy { findViewById<BpkText>(R.id.sixth_weekday_label) }
-  private val seventhWeekdayView: BpkText by lazy { findViewById<BpkText>(R.id.seventh_weekday_label) }
-
   init {
     addView(inflate(context, R.layout.view_bpk_calendar_weekday_header, null))
-
     orientation = VERTICAL
   }
+
+  private val firstWeekdayView: BpkText = findViewById(R.id.first_weekday_label)
+  private val secondWeekdayView: BpkText = findViewById(R.id.second_weekday_label)
+  private val thirdWeekdayView: BpkText = findViewById(R.id.third_weekday_label)
+  private val fourthWeekdayView: BpkText = findViewById(R.id.fourth_weekday_label)
+  private val fifthWeekdayView: BpkText = findViewById(R.id.fifth_weekday_label)
+  private val sixthWeekdayView: BpkText = findViewById(R.id.sixth_weekday_label)
+  private val seventhWeekdayView: BpkText = findViewById(R.id.seventh_weekday_label)
 
   internal fun initializeWithLocale(locale: Locale) {
     val formatter = DateTimeFormatter.ofPattern("ccc", locale)

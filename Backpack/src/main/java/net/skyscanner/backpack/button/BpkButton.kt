@@ -14,7 +14,6 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import android.util.Log
-import android.util.TypedValue
 import android.view.Gravity
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
@@ -228,8 +227,7 @@ open class BpkButton : AppCompatButton {
     // If a custom font is set we update the typeface to reflect it.
     // We do not support custom letter spacing for custom fonts at the moment
     if (bpkFont.isCustomFont) {
-      typeface = bpkFont.typeface
-      setTextSize(TypedValue.COMPLEX_UNIT_PX, bpkFont.fontSize.toFloat())
+      bpkFont.applyTo(this)
     }
 
     var paddingHorizontal = paddingHorizontal

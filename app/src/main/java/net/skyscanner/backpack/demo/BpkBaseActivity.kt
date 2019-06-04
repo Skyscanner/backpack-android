@@ -12,19 +12,20 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.util.BpkViewPumpContextWrapper
+import net.skyscanner.backpack.util.unsafeLazy
 
 @SuppressLint("Registered")
 open class BpkBaseActivity : AppCompatActivity() {
 
-  private val sensorManager by lazy {
+  private val sensorManager by unsafeLazy {
     getSystemService(SENSOR_SERVICE) as SensorManager
   }
 
-  private val accelerometer by lazy {
+  private val accelerometer by unsafeLazy {
     sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
   }
 
-  private val shakeListener by lazy {
+  private val shakeListener by unsafeLazy {
     ShakeListener(this::onShaked)
   }
 
@@ -35,11 +36,8 @@ open class BpkBaseActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    getSystemService(SENSOR_SERVICE)?.let {
-      it as SensorManager
-      val sensor = it.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-      it.registerListener(shakeListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
-    }
+    val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    sensorManager.registerListener(shakeListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
