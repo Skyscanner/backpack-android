@@ -113,9 +113,7 @@ internal class MonthView @JvmOverloads constructor(
     isFakeBoldText = false
     style = Style.FILL
     textAlign = Align.CENTER
-    monthNumberFont.letterSpacing?.let { letterSpacing = it }
-    textSize = monthNumberFont.fontSize.toFloat()
-    typeface = monthNumberFont.typeface
+    monthNumberFont.applyTo(this)
   }
 
   private val monthTitlePaint = Paint().apply {
@@ -124,9 +122,7 @@ internal class MonthView @JvmOverloads constructor(
     color = defaultTextColor
     style = Style.FILL
     textAlign = Align.LEFT
-    monthLabelFont.letterSpacing?.let { letterSpacing = it }
-    textSize = monthLabelFont.fontSize.toFloat()
-    typeface = monthLabelFont.typeface
+    monthLabelFont.applyTo(this)
   }
 
   private val selectedCirclePaint = Paint().apply {

@@ -2,13 +2,16 @@ package net.skyscanner.backpack.text
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.Paint
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
+import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.FontRes
 import androidx.annotation.IntDef
 import androidx.annotation.StyleRes
@@ -54,6 +57,7 @@ open class BpkText @JvmOverloads constructor(
     const val XXXL = 6
     const val CAPS = 7
 
+    @JvmStatic
     fun getFont(context: Context, textStyle: Int = BpkText.BASE, weight: BpkText.Weight = BpkText.Weight.NORMAL) =
       internalGetFont(context, textStyle, weight)
   }
@@ -183,7 +187,20 @@ open class BpkText @JvmOverloads constructor(
     val fontSize: Int,
     val letterSpacing: Float?,
     val isCustomFont: Boolean = false
-  )
+  ) {
+
+    fun applyTo(text: TextView) {
+      text.typeface = typeface
+      text.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize.toFloat())
+      letterSpacing?.let { text.letterSpacing = it }
+    }
+
+    fun applyTo(paint: Paint) {
+      paint.typeface = typeface
+      paint.textSize = fontSize.toFloat()
+      letterSpacing?.let { paint.letterSpacing = it }
+    }
+  }
 }
 
 private fun internalGetFontFromTheme(context: Context, weight: BpkText.Weight = BpkText.Weight.NORMAL): Typeface? {
