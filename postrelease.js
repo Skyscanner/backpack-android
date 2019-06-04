@@ -28,19 +28,15 @@ function getVersion() {
 
 function triggerJitPackBuild(version) {
   const url = `https://jitpack.io/com/github/Skyscanner/backpack-android/${version}/build.log`;
-  console.log(url);
-  return fetch(url)
-    .then(response => {
-      const { status } = response;
-      if (status / 100 === 4 || status / 100 === 5) {
-        console.log(`Unable to trigger JitPack build, response.code=${status}`);
-      } else {
-        console.log('JitPack build triggered!');
-      }
-    })
-    .catch(error => {
-      console.log(`Failed to trigger JitPack build with ${error}`);
-    });
+  return fetch(url).then(response => {
+    const { status } = response;
+    if (status / 100 === 4 || status / 100 === 5) {
+      throw new Error(
+        `Unable to trigger JitPack build, response.code=${status}`,
+      );
+    }
+    console.log('JitPack build triggered!');
+  });
 }
 
 async function postrelease() {
@@ -48,7 +44,7 @@ async function postrelease() {
     const version = getVersion();
     await triggerJitPackBuild(version);
   } catch (exc) {
-    console.error(exc);
+    console.error('Failed to trigger JitPack build', exc);
   }
 }
 
