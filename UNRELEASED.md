@@ -2,6 +2,11 @@
 
 > Place your changes below this line.
 
+# 9.4.0
+
+**Added:**
+
+- Added new smiley icons face--blank, face--happy, face--sad.
 
 ## How to write a good changelog entry
 
