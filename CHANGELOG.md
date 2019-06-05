@@ -2,6 +2,16 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.4.0
+
+**Added:**
+
+- Added new smiley icons face--blank, face--happy, face--sad.
+
+**Updated:**
+
+- Updated world and heart icons.
+
 # 9.3.1
 
 **Updated:**

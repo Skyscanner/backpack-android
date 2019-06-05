@@ -2,15 +2,6 @@
 
 > Place your changes below this line.
 
-# 9.4.0
-
-**Added:**
-
-- Added new smiley icons face--blank, face--happy, face--sad.
-
-**Updated:**
-- Updated world and heart icons.
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
