@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.4.1
+
+**Fixed**:
+
+- `BpkSpinner`:
+  - Disable spinner animation when `Global.ANIMATOR_DURATION_SCALE` is 0. This ensures it doesn't
+    cause timeouts in Espresso tests.
+
 # 9.4.0
 
 **Added:**

@@ -2,12 +2,6 @@
 
 > Place your changes below this line.
 
-**Fixed**:
-
-- `BpkSpinner`:
-  - Disable spinner animation when `Global.ANIMATOR_DURATION_SCALE` is 0. This ensures it doesn't
-    cause timeouts in Espresso tests.
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
