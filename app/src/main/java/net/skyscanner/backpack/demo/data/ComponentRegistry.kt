@@ -110,11 +110,19 @@ object ComponentRegistry {
         "Delete confirmation" story NodeData { DialogStory of "Delete" },
         "Success" story NodeData { DialogStory of "Confirmation" }
       )),
+    "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
     "Spinner" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_spinner },
         "Small" story NodeData { Story of R.layout.fragment_spinner_small }
+      )),
+    "Star Rating" story NodeData({ children -> SubStory of children },
+      mapOf(
+        "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
+        "RTL" story NodeData { Story of R.layout.fragment_star_rating_rtl },
+        "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
+        "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max }
       )),
     "Switch" story NodeData { Story of R.layout.fragment_switch },
     "Text" story NodeData({ children -> SubStory of children },
@@ -123,13 +131,6 @@ object ComponentRegistry {
         "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
         "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
         "With drawables" story NodeData { Story of R.layout.fragment_text_drawables }
-      )),
-    "Star Rating" story NodeData({ children -> SubStory of children },
-      mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
-        "RTL" story NodeData { Story of R.layout.fragment_star_rating_rtl },
-        "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
-        "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max }
       ))
   )
 
