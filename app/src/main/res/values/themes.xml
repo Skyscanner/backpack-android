@@ -91,7 +91,7 @@
 
   <style name="LondonThemeFab">
     <item name="fabBackgroundColor">?bpkPrimaryColor</item>
-    <item name="starColor">?bpkGray50Color</item>
+    <item name="fabIconColor">@color/bpkRed500</item>
   </style>
 
   <!-- London theme end -->
@@ -170,7 +170,7 @@
 
   <style name="DohaThemeFab">
     <item name="fabBackgroundColor">?bpkPrimaryColor</item>
-    <item name="starColor">?bpkGray50Color</item>
+    <item name="fabIconColor">?bpkGray50Color</item>
   </style>
   <!-- Doha theme end -->
 

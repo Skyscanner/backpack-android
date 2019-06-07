@@ -2,6 +2,8 @@
 
 > Place your changes below this line.
 
+**Added:**
+- `BpkFab` 
 
 ## How to write a good changelog entry
 

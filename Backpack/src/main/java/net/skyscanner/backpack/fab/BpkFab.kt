@@ -20,7 +20,7 @@ import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.darken
 
-internal open class BpkFab @JvmOverloads constructor(
+open class BpkFab @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
@@ -81,6 +81,11 @@ internal open class BpkFab @JvmOverloads constructor(
       pressedColor = darken(backgroundColour),
       disabledColor = BpkTheme.getColor(context, R.color.bpkGray100)
     )
+  }
+
+  override fun setEnabled(enabled: Boolean) {
+    super.setEnabled(enabled)
+    isClickable = enabled
   }
 
   override fun verifyDrawable(who: Drawable) =
