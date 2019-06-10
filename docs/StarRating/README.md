@@ -6,9 +6,9 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 ## Usage
 
-The Star rating component can be used in both XML and Kotlin/Java
+The Star Rating component can be used in both XML and Kotlin/Java
 
-Example of a Star rating in XML
+Example of a Star Rating in XML
 
 ```xml
 <net.skyscanner.backpack.starrating.BpkStarRating
@@ -18,7 +18,7 @@ Example of a Star rating in XML
   app:rating="2.5" />
 ```
 
-Example of a Star rating in Kotlin
+Example of a Star Rating in Kotlin
 
 ```Kotlin
 import net.skyscanner.backpack.starrating.BpkStarRating

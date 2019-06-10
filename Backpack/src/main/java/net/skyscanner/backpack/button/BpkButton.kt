@@ -31,6 +31,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.util.BpkTheme
+import net.skyscanner.backpack.util.darken
 
 private const val INVALID_RESOURCE = -1
 
@@ -354,7 +355,12 @@ open class BpkButton : AppCompatButton {
     }
   }
 
-  enum class Type(internal val id: Int, @ColorRes internal val bgColor: Int, @ColorRes internal val textColor: Int, @ColorRes internal val strokeColor: Int) {
+  enum class Type(
+    internal val id: Int,
+    @ColorRes internal val bgColor: Int,
+    @ColorRes internal val textColor: Int,
+    @ColorRes internal val strokeColor: Int
+  ) {
     Primary(0, R.color.bpkGreen500, R.color.bpkWhite, android.R.color.transparent),
     Secondary(1, R.color.bpkWhite, R.color.bpkBlue600, R.color.bpkGray100),
     Featured(2, R.color.bpkPink500, R.color.bpkWhite, android.R.color.transparent),
@@ -387,9 +393,9 @@ open class BpkButton : AppCompatButton {
 @SuppressLint("ObsoleteSdkInt")
 fun getSelectorDrawable(
   @ColorInt normalColor: Int,
-  cornerRadius: Float? = null,
+  @Dimension cornerRadius: Float? = null,
   @ColorInt strokeColor: Int? = null,
-  strokeWidth: Int? = null,
+  @Dimension strokeWidth: Int? = null,
   @ColorInt pressedColor: Int,
   @ColorInt disabledColor: Int
 ) = RippleDrawable(
@@ -410,9 +416,9 @@ fun getSelectorDrawable(
  * @return Drawable
  */
 private fun corneredDrawable(
-  color: Int,
-  cornerRadius: Float? = null,
-  strokeColor: Int? = null,
+  @ColorInt color: Int,
+  @Dimension cornerRadius: Float? = null,
+  @ColorInt strokeColor: Int? = null,
   strokeWidth: Int? = null
 ): Drawable {
   val gd = GradientDrawable()
@@ -450,21 +456,6 @@ private fun getColorSelector(
   ),
   intArrayOf(disabledColor, pressedColor, pressedColor, pressedColor, normalColor)
 )
-
-/**
- * Utility function for darkening a given color
- *
- * @param normalColor required, representing the color we will darken, given as a color resource int
- * @param factor required, used for the darkening factor, default to 20%
- *
- * @return Int
- */
-private fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
-  val hsv = FloatArray(3)
-  Color.colorToHSV(normalColor, hsv)
-  hsv[2] *= 1f - factor // value component
-  return Color.HSVToColor(hsv)
-}
 
 private fun convertToBitmap(drawable: Drawable): Bitmap? {
   if (drawable is BitmapDrawable) {

@@ -23,6 +23,7 @@
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
     <item name="bpkButtonFeaturedStyle">@style/LondonThemeButtonFeatured</item>
     <item name="bpkButtonDestructiveStyle">@style/LondonThemeButtonDestructive</item>
+    <item name="bpkFabStyle">@style/LondonThemeFab</item>
 
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
 
@@ -87,6 +88,12 @@
     <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
     <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
   </style>
+
+  <style name="LondonThemeFab">
+    <item name="fabBackgroundColor">?bpkPrimaryColor</item>
+    <item name="fabIconColor">@color/bpkRed500</item>
+  </style>
+
   <!-- London theme end -->
 
 
@@ -111,6 +118,7 @@
     <item name="bpkSpinnerPrimaryStyle">@style/DohaThemeSpinnerPrimary</item>
     <item name="bpkTextStyle">@style/DohaThemeText</item>
     <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
+    <item name="bpkFabStyle">@style/DohaThemeFab</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
@@ -158,6 +166,11 @@
 
   <style name="DohaThemeChip">
     <item name="chipSelectedBackgroundColor">?bpkPrimaryColor</item>
+  </style>
+
+  <style name="DohaThemeFab">
+    <item name="fabBackgroundColor">?bpkPrimaryColor</item>
+    <item name="fabIconColor">?bpkGray50Color</item>
   </style>
   <!-- Doha theme end -->
 
