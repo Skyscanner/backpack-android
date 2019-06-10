@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.5.0
+
+**Added:**
+- `BpkFab` 
+
 # 9.4.1
 
 **Fixed**:
