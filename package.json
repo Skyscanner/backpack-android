@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "backpack-android",
-  "version": "9.3.0",
+  "version": "9.4.1",
   "engines": {
     "node": "^10.15.3",
     "npm": "^6.4.1"
@@ -17,6 +17,7 @@
     "postemulator": "npm run emulator:kill",
     "prerelease": "npm ci && npm run emulator",
     "release": "node release.js",
+    "postrelease": "node postrelease.js > /dev/null 2>&1 &",
     "lint": "eslint . --ext .js,.jsx",
     "prebuild": "npm run lint",
     "build": "gulp && npm run spellcheck",
@@ -53,7 +54,7 @@
   },
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
-    "bpk-svgs": "^6.7.2",
+    "bpk-svgs": "^6.7.4",
     "bpk-tokens": "^27.4.7",
     "del": "^4.0.0",
     "ensure-node-env": "^1.2.2",
@@ -66,6 +67,7 @@
     "gulp-util": "^3.0.8",
     "husky": "^1.3.1",
     "inquirer": "^6.0.0",
+    "js-yaml": "^3.13.1",
     "lint-staged": "^8.1.3",
     "lodash": "^4.17.4",
     "markdown-spellcheck": "^1.3.1",
@@ -77,5 +79,6 @@
     "svg2vectordrawable": "^2.4.0",
     "through2": "^3.0.0",
     "tinycolor2": "^1.4.1"
-  }
+  },
+  "dependencies": {}
 }

@@ -2,6 +2,24 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.4.1
+
+**Fixed**:
+
+- `BpkSpinner`:
+  - Disable spinner animation when `Global.ANIMATOR_DURATION_SCALE` is 0. This ensures it doesn't
+    cause timeouts in Espresso tests.
+
+# 9.4.0
+
+**Added:**
+
+- Added new smiley icons face--blank, face--happy, face--sad.
+
+**Updated:**
+
+- Updated world and heart icons.
+
 # 9.3.1
 
 **Updated:**
