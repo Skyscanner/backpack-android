@@ -323,6 +323,19 @@ class BpkCalendarTest : BpkSnapshotTest() {
     snap(wrapWithBackground(calendar))
   }
 
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarPast_cutPreviousWeeks() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.GERMAN,
+      LocalDate.of(2019, 6, 8)
+    )
+    calendar.setController(controller)
+    snap(wrapWithBackground(calendar))
+  }
+
   private fun selectStartEnd(wrapped: FrameLayout, asyncScreenshot: AsyncSnapshot) {
     activity.runOnUiThread {
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout

@@ -460,7 +460,7 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   private fun findDayOffset() =
-    if (getNonDrawnDaysOffset() + 1 >= numberOfDaysInAWeek) {
+    if (getNonDrawnDaysOffset() > 0) {
       0
     } else {
       var dayOffset = dayOfWeekStart - weekStart
