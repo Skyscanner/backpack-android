@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.5.1
+
+**Fixed**:
+
+- `BpkCalendar`:
+  - Fixed rendering of passed weeks before current week in month.
+  - Fixed invalid days of the week on some rare circumstances.
+
 # 9.5.0
 
 **Added:**
