@@ -29,7 +29,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "prepare-commit-msg": "jirabot precommit $HUSKY_GIT_PARAMS || true"
     }
   },
   "lint-staged": {
