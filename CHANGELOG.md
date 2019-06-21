@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.5.2
+
+**Fixed**:
+
+- `BpkButton`:
+  - Fixed a native crash on Galaxy S4 in some places
+
+
 # 9.5.1
 
 **Fixed**:
