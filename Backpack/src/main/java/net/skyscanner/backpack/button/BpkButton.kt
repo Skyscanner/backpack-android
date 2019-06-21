@@ -12,6 +12,7 @@ import android.graphics.drawable.VectorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
@@ -277,7 +278,11 @@ open class BpkButton : AppCompatButton {
     }
 
     if (isElevated && isEnabled) {
-      stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
+      // there's a bug on elevation implementation on that particular device
+      val isBuggyDevice = Build.MANUFACTURER == "samsung" && Build.MODEL == "GT-I9505"
+      if (!isBuggyDevice) {
+        stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
+      }
     }
 
     clipToOutline = true
