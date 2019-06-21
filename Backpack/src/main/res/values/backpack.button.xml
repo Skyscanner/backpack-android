@@ -6,6 +6,6 @@
   </declare-styleable>
 
   <style name="bpkButtonBase" parent="bpkTextSmEmphasized">
-    <item name="textAllCaps">true</item>
+    <item name="textInAllCaps">true</item>
   </style>
 </resources>
