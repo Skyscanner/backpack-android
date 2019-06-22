@@ -33,6 +33,8 @@ import net.skyscanner.backpack.text.BpkText
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.darken
+import net.skyscanner.backpack.util.isStateListAnimatorSupported
+import net.skyscanner.backpack.util.loadStateListAnimator
 
 private const val INVALID_RESOURCE = -1
 
@@ -277,14 +279,9 @@ open class BpkButton : AppCompatButton {
       )
     }
 
-    if (isElevated && isEnabled) {
-      // there's a bug on elevation implementation on that particular device
-      val isBuggyDevice = Build.MANUFACTURER == "samsung" && Build.MODEL == "GT-I9505"
-      if (!isBuggyDevice) {
-        stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
-      }
+    if (shouldSetStateListAnimator()) {
+      loadStateListAnimator(R.drawable.bpk_button_state_animator)
     }
-
     clipToOutline = true
   }
 
@@ -381,6 +378,9 @@ open class BpkButton : AppCompatButton {
       }
     }
   }
+
+  private fun shouldSetStateListAnimator() = isElevated && isEnabled && isStateListAnimatorSupported()
+
 }
 
 /**
@@ -493,3 +493,4 @@ private fun getStyle(type: BpkButton.Type): Int {
     BpkButton.Type.Destructive -> R.attr.bpkButtonDestructiveStyle
   }
 }
+
