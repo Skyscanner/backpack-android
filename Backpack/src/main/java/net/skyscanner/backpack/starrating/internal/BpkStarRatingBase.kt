@@ -42,9 +42,9 @@ open class BpkStarRatingBase internal constructor(
     }
 
   private var _rating: Float = maxRating / 2f
-  var rating: Float
+  open var rating: Float
     get() = _rating
-    set(value) {
+     set(value) {
       _rating = clamp(value, 0f, maxRating.toFloat())
       update()
     }

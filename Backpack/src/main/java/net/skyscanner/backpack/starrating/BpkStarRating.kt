@@ -18,4 +18,11 @@ open class BpkStarRating @JvmOverloads constructor(
   half = R.drawable.bpk_star_half,
   full = R.drawable.bpk_star,
   starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
-)
+) {
+
+  final override var rating: Float
+    get() = super.rating
+    set(value) {
+      super.rating = value
+    }
+}

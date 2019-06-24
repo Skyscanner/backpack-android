@@ -13,7 +13,7 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
 ) : BpkStarRatingBase(
-  context = createContextThemeWrapper(context, attrs, R.attr.bpkStarRatingStyle),
+  context = createContextThemeWrapper(context, attrs, R.attr.bpkInteractiveStarRatingStyle),
   attrs = attrs,
   defStyleAttr = defStyleAttr,
   empty = R.drawable.bpk_star,
@@ -24,11 +24,17 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
 
   var onRatingChangedListener: ((Float, Float) -> Unit)? = null
 
+  final override var rating: Float
+    get() = super.rating
+    set(value) {
+      super.rating = Math.round(value).toFloat()
+    }
+
   override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
     val x = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) width - ev.x else ev.x
     val itemWidth = width / maxRating
     val selectedItems = x / itemWidth
-    rating = Math.max(1f, Math.round(selectedItems + 0.5f).toFloat())
+    rating = Math.max(1f, selectedItems + 0.5f)
     onRatingChangedListener?.invoke(rating, maxRating.toFloat())
     return true
   }
