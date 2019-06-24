@@ -28,7 +28,7 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
     val x = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) width - ev.x else ev.x
     val itemWidth = width / maxRating
     val selectedItems = x / itemWidth
-    rating = Math.round(selectedItems + 0.5f).toFloat()
+    rating = Math.max(1f, Math.round(selectedItems + 0.5f).toFloat())
     onRatingChangedListener?.invoke(rating, maxRating)
     return true
   }
