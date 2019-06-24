@@ -379,7 +379,6 @@ open class BpkButton : AppCompatButton {
   }
 
   private fun shouldSetStateListAnimator() = isElevated && isEnabled && isStateListAnimatorSupported()
-
 }
 
 /**
