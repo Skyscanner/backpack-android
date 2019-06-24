@@ -22,19 +22,19 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
   starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
 ) {
 
-  var onRatingChangedListener: ((Float, Int) -> Unit)? = null
+  var onRatingChangedListener: ((Float, Float) -> Unit)? = null
 
   override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
     val x = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) width - ev.x else ev.x
     val itemWidth = width / maxRating
     val selectedItems = x / itemWidth
     rating = Math.max(1f, Math.round(selectedItems + 0.5f).toFloat())
-    onRatingChangedListener?.invoke(rating, maxRating)
+    onRatingChangedListener?.invoke(rating, maxRating.toFloat())
     return true
   }
 
-  interface OnRatingChangedListener : (Float, Int) -> Unit {
+  interface OnRatingChangedListener : (Float, Float) -> Unit {
 
-    override fun invoke(current: Float, max: Int)
+    override fun invoke(current: Float, max: Float)
   }
 }

@@ -16,6 +16,7 @@
 
     <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
     <item name="bpkStarRatingStyle">@style/LondonThemeBpkStarRating</item>
+    <item name="bpkInteractiveStarRatingStyle">@style/LondonThemeBpkStarRating</item>
 
     <item name="bpkChipStyle">@style/DohaThemeChip</item>
 
@@ -112,6 +113,7 @@
 
     <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
     <item name="bpkStarRatingStyle">@style/DohaThemeBpkStarRating</item>
+    <item name="bpkInteractiveStarRatingStyle">@style/DohaThemeBpkStarRating</item>
     <item name="bpkButtonPrimaryStyle">@style/DohaThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/DohaThemeButtonSecondary</item>
     <item name="bpkChipStyle">@style/DohaThemeChip</item>

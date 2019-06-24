@@ -49,7 +49,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layoutDirection="rtl"
-    android:text="5 out of 5"
+    android:text="5 out of 5 RTL"
     app:textStyle="sm" />
 
   <net.skyscanner.backpack.starrating.BpkInteractiveStarRating
@@ -58,6 +58,19 @@
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:layoutDirection="rtl"
     app:maxRating="5"
+    app:rating="5" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="5 out of 10"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.starrating.BpkInteractiveStarRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:maxRating="10"
     app:rating="5" />
 
 </LinearLayout>
