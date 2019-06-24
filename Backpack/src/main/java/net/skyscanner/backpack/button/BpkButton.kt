@@ -16,6 +16,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.ColorInt
@@ -33,8 +34,6 @@ import net.skyscanner.backpack.text.BpkText
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.darken
-import net.skyscanner.backpack.util.isStateListAnimatorSupported
-import net.skyscanner.backpack.util.loadStateListAnimator
 
 private const val INVALID_RESOURCE = -1
 
@@ -494,3 +493,13 @@ private fun getStyle(type: BpkButton.Type): Int {
   }
 }
 
+private fun View.isStateListAnimatorSupported() =
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+    true
+  } else isSpecificDeviceSupported()
+
+private fun isSpecificDeviceSupported() = Build.MODEL != "GT-I9505"
+
+private fun View.loadStateListAnimator(@DrawableRes animator: Int) {
+  this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, animator)
+}
