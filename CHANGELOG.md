@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.5.3
+
+**Fixed**:
+
+- `BpkButton`:
+  - Elevation is now disabled for API 21 as it causes native crashes in some edge cases.
+
 # 9.5.2
 
 **Fixed**:
