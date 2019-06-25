@@ -5,6 +5,12 @@
 **Added**:
 
 - `BpkInteractiveStarRating`
+- New `paid`, `star-outline` icons
+
+
+**Updated**:
+
+- Icons `meal`, `bar`, `star`, `star-half` `media` icons
   
 ## How to write a good changelog entry
 

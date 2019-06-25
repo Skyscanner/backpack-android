@@ -40,7 +40,6 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
   }
 
   interface OnRatingChangedListener : (Float, Float) -> Unit {
-
     override fun invoke(current: Float, max: Float)
   }
 }
