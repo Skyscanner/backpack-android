@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  style="@style/App.Story"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <Button
+    android:id="@+id/base"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Base" />
+
+  <net.skyscanner.backpack.toast.BpkToast
+    android:id="@+id/toast_base"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+  <Button
+    android:id="@+id/large"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Large" />
+
+  <net.skyscanner.backpack.toast.BpkToast
+    android:id="@+id/toast_large"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/bpkTextLgSize" />
+  <Button
+    android:id="@+id/prolonged"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Long" />
+
+  <net.skyscanner.backpack.toast.BpkToast
+    android:id="@+id/toast_prolonged"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+
+  <Button
+    android:id="@+id/base_static"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Base Static" />
+
+  <Button
+    android:id="@+id/prolonged_static"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Large Static" />
+
+</LinearLayout>

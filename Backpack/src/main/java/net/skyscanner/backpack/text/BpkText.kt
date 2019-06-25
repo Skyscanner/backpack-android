@@ -44,7 +44,6 @@ open class BpkText @JvmOverloads constructor(
   }
 
   @IntDef(XS, SM, BASE, LG, XL, XXL, XXXL, CAPS)
-
   annotation class Styles
 
   companion object {

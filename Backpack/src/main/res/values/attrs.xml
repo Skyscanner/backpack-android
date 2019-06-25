@@ -134,6 +134,7 @@
   <attr name="bpkButtonDestructiveStyle" format="reference" />
   <attr name="bpkButtonOutlineStyle" format="reference" />
   <attr name="bpkFabStyle" format="reference" />
+  <attr name="bpkToastStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
   <attr name="bpkChipStyle" format="reference"/>
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
