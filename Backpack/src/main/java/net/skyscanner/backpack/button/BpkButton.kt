@@ -496,6 +496,7 @@ private fun getStyle(type: BpkButton.Type): Int {
 }
 
 private fun isStateListAnimatorSupported() =
-  Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && isSpecificDeviceSupported()
+  Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !isSpecificDeviceBlackListed()
 
-private fun isSpecificDeviceSupported() = Build.MODEL != "GT-I9505"
+private fun isSpecificDeviceBlackListed() =
+  Build.MANUFACTURER.equals("samsung", true) && Build.MODEL.equals("gt-i9505", true)
