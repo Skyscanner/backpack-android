@@ -1,6 +1,10 @@
 # Unreleased
 
-> Place your changes below this line.
+**Added:**
+
+- BpkButton
+  - Primary and Featured buttons now have elevation by default
+  - `buttonAddElevation` attribute has no effect any more.
 
 **Added**:
 
