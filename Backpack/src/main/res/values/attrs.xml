@@ -127,6 +127,7 @@
   <attr name="bpkGray900Color" format="color" />
 
   <attr name="bpkStarRatingStyle" format="reference" />
+  <attr name="bpkInteractiveStarRatingStyle" format="reference" />
   <attr name="bpkSwitchStyle" format="reference" />
   <attr name="bpkButtonSecondaryStyle" format="reference" />
   <attr name="bpkButtonPrimaryStyle" format="reference" />
