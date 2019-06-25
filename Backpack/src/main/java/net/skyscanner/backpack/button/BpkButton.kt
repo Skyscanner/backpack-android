@@ -277,14 +277,9 @@ open class BpkButton : AppCompatButton {
       )
     }
 
-    if (isElevated && isEnabled) {
-      // there's a bug on elevation implementation on that particular device
-      val isBuggyDevice = Build.MANUFACTURER == "samsung" && Build.MODEL == "GT-I9505"
-      if (!isBuggyDevice) {
-        stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
-      }
+    if (shouldSetStateListAnimator()) {
+      loadStateListAnimator(R.drawable.bpk_button_state_animator)
     }
-
     clipToOutline = true
   }
 
@@ -380,6 +375,12 @@ open class BpkButton : AppCompatButton {
         throw IllegalArgumentException()
       }
     }
+  }
+
+  private fun shouldSetStateListAnimator() = isElevated && isEnabled && isStateListAnimatorSupported()
+
+  private fun loadStateListAnimator(@DrawableRes animator: Int) {
+    this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, animator)
   }
 }
 
@@ -493,3 +494,9 @@ private fun getStyle(type: BpkButton.Type): Int {
     BpkButton.Type.Destructive -> R.attr.bpkButtonDestructiveStyle
   }
 }
+
+private fun isStateListAnimatorSupported() =
+  Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !isSpecificDeviceBlackListed()
+
+private fun isSpecificDeviceBlackListed() =
+  Build.MANUFACTURER.equals("samsung", true) && Build.MODEL.equals("gt-i9505", true)
