@@ -16,7 +16,6 @@ import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
-import android.view.View
 import android.widget.TextView
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.ColorInt
@@ -379,6 +378,10 @@ open class BpkButton : AppCompatButton {
   }
 
   private fun shouldSetStateListAnimator() = isElevated && isEnabled && isStateListAnimatorSupported()
+
+  private fun loadStateListAnimator(@DrawableRes animator: Int) {
+    this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, animator)
+  }
 }
 
 /**
@@ -492,13 +495,7 @@ private fun getStyle(type: BpkButton.Type): Int {
   }
 }
 
-private fun View.isStateListAnimatorSupported() =
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-    true
-  } else isSpecificDeviceSupported()
+private fun isStateListAnimatorSupported() =
+  Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && isSpecificDeviceSupported()
 
 private fun isSpecificDeviceSupported() = Build.MODEL != "GT-I9505"
-
-private fun View.loadStateListAnimator(@DrawableRes animator: Int) {
-  this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, animator)
-}
