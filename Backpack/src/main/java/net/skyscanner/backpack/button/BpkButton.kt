@@ -41,7 +41,6 @@ private class Tokens(val context: Context) {
   val bpkSpacingLg = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
   val bpkSpacingMd = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
   val bpkSpacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
-  val bpkBorderSizeSm = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeSm)
   val bpkBorderSizeLg = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
   val gray100 = BpkTheme.getColor(context, R.color.bpkGray100)
   val gray300 = BpkTheme.getColor(context, R.color.bpkGray300)
