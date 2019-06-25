@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.button
 
 import android.app.Activity
+import android.os.Looper
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
@@ -23,6 +24,12 @@ class BpkButtonTest {
 
   @Before
   fun setUp() {
+    // Required otherwise some tests fail with
+    // android.util.AndroidRuntimeException: Animators may only be run on Looper threads
+    if (Looper.myLooper() == null) {
+      Looper.prepare()
+    }
+
     activity = activityRule.activity
   }
 
@@ -58,19 +65,16 @@ class BpkButtonTest {
 
   @Test
   fun test_enabled_state() {
-    // android.util.AndroidRuntimeException: Animators may only be run on Looper threads
-    activity.runOnUiThread {
-      val button = BpkButton(activity, BpkButton.Type.Primary).apply {
-        isEnabled = true
-      }
-      val newState = false
-      val expectedBackgroundState = button.disabledBackground()
-      button.isEnabled = newState
-
-      Assert.assertEquals(newState, button.isEnabled)
-      Assert.assertEquals(expectedBackgroundState.bounds, button.background.bounds)
-      Assert.assertEquals(expectedBackgroundState.alpha, button.background.alpha)
-      Assert.assertEquals(expectedBackgroundState.colorFilter, button.background.colorFilter)
+    val button = BpkButton(activity, BpkButton.Type.Primary).apply {
+      isEnabled = true
     }
+    val newState = false
+    val expectedBackgroundState = button.disabledBackground()
+    button.isEnabled = newState
+
+    Assert.assertEquals(newState, button.isEnabled)
+    Assert.assertEquals(expectedBackgroundState.bounds, button.background.bounds)
+    Assert.assertEquals(expectedBackgroundState.alpha, button.background.alpha)
+    Assert.assertEquals(expectedBackgroundState.colorFilter, button.background.colorFilter)
   }
 }
