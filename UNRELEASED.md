@@ -1,20 +1,6 @@
 # Unreleased
 
-**Added:**
-
-- BpkButton
-  - Primary and Featured buttons now have elevation by default
-  - `buttonAddElevation` attribute has no effect any more.
-
-**Added**:
-
-- `BpkInteractiveStarRating`
-- New `paid`, `star-outline` icons
-
-
-**Updated**:
-
-- Icons `meal`, `bar`, `star`, `star-half` `media` icons
+> Place your changes below this line.
   
 ## How to write a good changelog entry
 
