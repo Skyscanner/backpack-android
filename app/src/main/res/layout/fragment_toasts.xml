@@ -1,54 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/App.Story"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
 
-  <Button
-    android:id="@+id/base"
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/widget_low"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Base" />
+    android:text="Low duration from Widget"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"/>
 
   <net.skyscanner.backpack.toast.BpkToast
-    android:id="@+id/toast_base"
+    android:id="@+id/toast_low"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 
-  <Button
-    android:id="@+id/large"
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/widget_high"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Large" />
+    android:text="High duration from Widget"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
   <net.skyscanner.backpack.toast.BpkToast
-    android:id="@+id/toast_large"
+    android:id="@+id/toast_high"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textSize="@dimen/bpkTextLgSize" />
-  <Button
-    android:id="@+id/prolonged"
+    app:toastDuration="high"/>
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/static_low"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Long" />
+    android:text="Low duration from method"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
-  <net.skyscanner.backpack.toast.BpkToast
-    android:id="@+id/toast_prolonged"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-
-
-  <Button
-    android:id="@+id/base_static"
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/static_high"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Base Static" />
-
-  <Button
-    android:id="@+id/prolonged_static"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Large Static" />
+    android:text="High duration from method"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
 </LinearLayout>

@@ -15,7 +15,7 @@
     <!-- message to be displayed -->
     <attr name="message" format="string" />
   </declare-styleable>
-  
+
   <declare-styleable name="BpkCalendar">
     <attr name="calendarDateSelectedBackgroundColor" format="color" />
     <attr name="calendarDateSelectedRangeBackgroundColor" format="color" />
@@ -113,6 +113,13 @@
     <attr name="fabBackgroundColor" format="color" />
   </declare-styleable>
 
+  <declare-styleable name="BpkToast">
+    <attr name="toastDuration" format="enum">
+      <enum name="low" value="0" />
+      <enum name="high" value="1" />
+    </attr>
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
@@ -135,7 +142,6 @@
   <attr name="bpkButtonDestructiveStyle" format="reference" />
   <attr name="bpkButtonOutlineStyle" format="reference" />
   <attr name="bpkFabStyle" format="reference" />
-  <attr name="bpkToastStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
   <attr name="bpkChipStyle" format="reference"/>
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
