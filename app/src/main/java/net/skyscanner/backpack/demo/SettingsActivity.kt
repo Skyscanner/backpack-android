@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import net.skyscanner.backpack.demo.components.SettingsThemeOption
@@ -18,8 +17,6 @@ class SettingsActivity : AppCompatActivity() {
     "London" to R.style.LondonTheme,
     "Doha" to R.style.DohaTheme
   )
-
-  private var restartMessageShown = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -98,11 +95,8 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     themeMapping[theme]?.let {
-      if (!restartMessageShown) {
-        restartMessageShown = true
-        Toast.makeText(this, "Restart the app to apply the new theme", Toast.LENGTH_LONG).show()
-      }
       SharedPreferences.saveTheme(this, it)
+      BackpackDemoApplication.triggerRebirth(this)
     }
   }
 }
