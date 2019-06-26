@@ -25,6 +25,8 @@
     <item name="bpkButtonFeaturedStyle">@style/LondonThemeButtonFeatured</item>
     <item name="bpkButtonDestructiveStyle">@style/LondonThemeButtonDestructive</item>
     <item name="bpkFabStyle">@style/LondonThemeFab</item>
+    <item name="bpkButtonLinkStyle">@style/LondonThemeButtonLink</item>
+
 
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
 
@@ -95,6 +97,10 @@
     <item name="fabIconColor">@color/bpkRed500</item>
   </style>
 
+  <style name="LondonThemeButtonLink">
+    <item name="buttonTextColor">?bpkPrimaryColor</item>
+  </style>
+
   <!-- London theme end -->
 
 
@@ -121,6 +127,7 @@
     <item name="bpkTextStyle">@style/DohaThemeText</item>
     <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
     <item name="bpkFabStyle">@style/DohaThemeFab</item>
+    <item name="bpkButtonLinkStyle">@style/DohaThemeButtonLink</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
@@ -173,6 +180,10 @@
   <style name="DohaThemeFab">
     <item name="fabBackgroundColor">?bpkPrimaryColor</item>
     <item name="fabIconColor">?bpkGray50Color</item>
+  </style>
+
+  <style name="DohaThemeButtonLink">
+    <item name="buttonTextColor">?bpkPrimaryColor</item>
   </style>
   <!-- Doha theme end -->
 

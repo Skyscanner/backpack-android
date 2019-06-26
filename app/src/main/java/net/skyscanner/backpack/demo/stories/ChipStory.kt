@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import net.skyscanner.backpack.chip.BpkChip
 import net.skyscanner.backpack.demo.R
 
@@ -16,7 +17,10 @@ class ChipStory : Story() {
     super.onViewCreated(view, savedInstanceState)
 
     forEachChip(view as ViewGroup) { chip ->
-      chip.setOnClickListener { chip.toggle() }
+      chip.setOnClickListener {
+        Toast.makeText(context, "Clicked", Toast.LENGTH_LONG).show()
+        chip.toggle()
+      }
     }
   }
 

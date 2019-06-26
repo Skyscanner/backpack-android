@@ -1,4 +1,4 @@
-# Button
+# Button Link
 
 ## Installation
 
@@ -6,18 +6,18 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 ## Usage
 
-The Button component can be used in both XML and Kotlin/Java
+The `ButtonLink` component can be used in both XML and Kotlin/Java
 
 Example of a primary button in XML
 
 ```xml
-<net.skyscanner.backpack.button.BpkButton
+<net.skyscanner.backpack.button.BpkButtonLink
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
   android:text="Button"
   app:buttonIconPosition="end"
   app:buttonIcon="@drawable/bpk_long_arrow_right"
-  app:buttonType="primary"/>
+  app:uppercase="true"/>
 ```
 
 Example of a primary button in Kotlin
@@ -25,7 +25,7 @@ Example of a primary button in Kotlin
 ```Kotlin
 import net.skyscanner.backpack.button.BpkButton
 
-BpkButton(context,BpkButton.Type.Primary).apply {
+BpkButtonLink(context).apply {
    icon = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
    iconPosition = BpkButton.END
    text = "Button"
@@ -39,33 +39,7 @@ its size is `16dp`.
 
 ## Theme Props
 
-- `buttonBackground`
 - `buttonTextColor`
-- `buttonStrokeColor`
-- `buttonCornerRadius`
-
-BpkButton accepts the above themeable attributes for the following styles
-
-- `bpkButtonPrimary`
-- `bpkButtonSecondary`
-- `bpkButtonDestructive`
-- `bpkButtonOutline`
-- `bpkButtonFeatured`
-
-Example
-
-```xml
-  <style name="BlueTheme" parent="AppTheme">
-    <item name="bpkButtonPrimary">@style/BlueButton</item>
-  </style>
-
-  <style name="BlueButton">
-    <item name="buttonBackground">@color/bpkBlue900</item>
-    <item name="buttonTextColor">@color/bpkGray200</item>
-    <item name="buttonStrokeColor">@color/bpkYellow500</item>
-  </style>
-
-```
 
 Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
 
