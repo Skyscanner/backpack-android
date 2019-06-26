@@ -2,6 +2,20 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.6.0
+
+**Added:**
+
+- BpkButton
+  - Primary and Featured buttons now have elevation by default
+  - `buttonAddElevation` attribute has no effect any more.
+
+- Added new component `BpkInteractiveStarRating`
+
+- Icons:
+  - New `paid`, `star-outline` icons
+  - Updated `meal`, `bar`, `star`, `star-half` `media` icons
+
 # 9.5.3
 
 **Fixed**:

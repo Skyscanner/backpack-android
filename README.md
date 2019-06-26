@@ -14,7 +14,7 @@ Backpack is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-
 all of it, add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-implementation 'com.github.skyscanner:backpack-android:9.5.3'
+implementation 'com.github.skyscanner:backpack-android:9.6.0'
 ```
 
 If your app resolves dependencies through Jitpack you're all set, if not add in your root `build.gradle`
@@ -40,9 +40,10 @@ The Backpack demo application is a good way of referring to the variants availab
 * [Chip](docs/Chip/README.md)
 * [Dialog](docs/Dialog/README.md)
 * [Floating Action Button](docs/FloatingActionButton/README.md)
+* [Interactive Star Rating](docs/InteractiveStarRating/README.md)
 * [Panel](docs/Panel/README.md)
 * [Spinner](docs/Spinner/README.md)
-* [Star rating](docs/StarRating/README.md)
+* [Star Rating](docs/StarRating/README.md)
 * [Switch](docs/Switch/README.md)
 * [Text](docs/Text/README.md)
 
