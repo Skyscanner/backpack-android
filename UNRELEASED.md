@@ -1,6 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
+
+**Added**:
+
+- `BpkToast`
   
 ## How to write a good changelog entry
 
