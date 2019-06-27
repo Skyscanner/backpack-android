@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.7.0
+
+**Added**:
+
+- `BpkToast`
+
 # 9.6.0
 
 **Added:**
