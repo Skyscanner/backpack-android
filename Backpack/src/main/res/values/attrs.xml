@@ -15,7 +15,7 @@
     <!-- message to be displayed -->
     <attr name="message" format="string" />
   </declare-styleable>
-  
+
   <declare-styleable name="BpkCalendar">
     <attr name="calendarDateSelectedBackgroundColor" format="color" />
     <attr name="calendarDateSelectedRangeBackgroundColor" format="color" />

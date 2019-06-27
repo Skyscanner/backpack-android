@@ -14,6 +14,7 @@ import androidx.annotation.Px
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.use
 
 @SuppressLint("ViewConstructor")
 open class BpkStarRatingBase internal constructor(
@@ -51,21 +52,19 @@ open class BpkStarRatingBase internal constructor(
 
   init {
     orientation = HORIZONTAL
-
     var starColor = ResourcesCompat.getColor(resources, R.color.bpkGray100, null)
     var starFilledColor: Int = ResourcesCompat.getColor(resources, R.color.bpkYellow500, null)
+
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkStarRating,
       defStyleAttr, 0
-    )
-      ?.also {
-        _maxRating = it.getInt(R.styleable.BpkStarRating_maxRating, maxRating)
-        _rating = it.getFloat(R.styleable.BpkStarRating_rating, maxRating / 2f)
-        starColor = it.getColor(R.styleable.BpkStarRating_starColor, starColor)
-        starFilledColor = it.getColor(R.styleable.BpkStarRating_starFilledColor, starFilledColor)
-      }
-      ?.recycle()
+    ).use {
+      _maxRating = it.getInt(R.styleable.BpkStarRating_maxRating, maxRating)
+      _rating = it.getFloat(R.styleable.BpkStarRating_rating, maxRating / 2f)
+      starColor = it.getColor(R.styleable.BpkStarRating_starColor, starColor)
+      starFilledColor = it.getColor(R.styleable.BpkStarRating_starFilledColor, starFilledColor)
+    }
 
     this.empty = getDrawable(empty, starColor)
     this.half = HalfStarDrawable(

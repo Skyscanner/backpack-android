@@ -2,6 +2,7 @@ package net.skyscanner.backpack.util
 
 import android.content.Context
 import android.content.res.Resources
+import android.content.res.TypedArray
 import android.util.DisplayMetrics
 import android.view.View
 import androidx.annotation.ColorInt
@@ -39,4 +40,12 @@ internal object ResourcesUtil {
 
 internal fun View.getColor(@ColorRes id: Int): Int {
   return ResourcesUtil.getColor(this, id)
+}
+
+internal inline fun <R> TypedArray?.use(block: (TypedArray) -> R): R? {
+  try {
+    return this?.let(block)
+  } finally {
+    this?.recycle()
+  }
 }

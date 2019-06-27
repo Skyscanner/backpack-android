@@ -19,6 +19,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.darken
+import net.skyscanner.backpack.util.use
 
 open class BpkFab @JvmOverloads constructor(
   context: Context,
@@ -50,25 +51,22 @@ open class BpkFab @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val ta = context.theme.obtainStyledAttributes(
-      attrs,
-      R.styleable.BpkFab,
-      defStyleAttr,
-      0
-    )
-
     var backgroundColour = BpkTheme.getColor(context, R.color.bpkGreen500)
     var iconColour = BpkTheme.getColor(context, R.color.bpkWhite)
     var icon: Drawable? = null
 
-    if (ta != null) {
-      backgroundColour = ta.getInt(R.styleable.BpkFab_fabBackgroundColor, backgroundColour)
-      iconColour = ta.getInt(R.styleable.BpkFab_fabIconColor, iconColour)
-      val iconRes = ta.getResourceId(R.styleable.BpkFab_fabIcon, 0)
+    context.theme.obtainStyledAttributes(
+      attrs,
+      R.styleable.BpkFab,
+      defStyleAttr,
+      0
+    ).use {
+      backgroundColour = it.getInt(R.styleable.BpkFab_fabBackgroundColor, backgroundColour)
+      iconColour = it.getInt(R.styleable.BpkFab_fabIconColor, iconColour)
+      val iconRes = it.getResourceId(R.styleable.BpkFab_fabIcon, 0)
       if (iconRes != 0) {
         icon = ContextCompat.getDrawable(context, iconRes)
       }
-      ta.recycle()
     }
 
     this.iconColor = iconColour
