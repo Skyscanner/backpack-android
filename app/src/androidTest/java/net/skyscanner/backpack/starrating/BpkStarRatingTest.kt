@@ -10,7 +10,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-
 class BpkStarRatingTest : BpkSnapshotTest() {
 
   private val rating = BpkStarRating(testContext).apply { setBackgroundColor(Color.WHITE) }

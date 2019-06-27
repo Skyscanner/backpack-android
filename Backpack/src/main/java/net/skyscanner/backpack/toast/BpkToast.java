@@ -13,19 +13,12 @@ import androidx.annotation.StringRes;
 
 import net.skyscanner.backpack.text.BpkText;
 
-public class BpkToast extends Toast {
+public final class BpkToast {
 
-  private final Context mContext;
+  public static final int LENGTH_SHORT = Toast.LENGTH_SHORT;
+  public static final int LENGTH_LONG = Toast.LENGTH_LONG;
 
-  public BpkToast(Context context) {
-    super(context);
-    mContext = context;
-  }
-
-  @Override
-  public void setText(CharSequence s) {
-    final BpkText.FontDefinition font = getToastFont(mContext);
-    super.setText(wrapText(font, s));
+  private BpkToast() {
   }
 
   @NonNull
