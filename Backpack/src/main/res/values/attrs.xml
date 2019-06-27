@@ -113,13 +113,6 @@
     <attr name="fabBackgroundColor" format="color" />
   </declare-styleable>
 
-  <declare-styleable name="BpkToast">
-    <attr name="toastDuration" format="enum">
-      <enum name="low" value="0" />
-      <enum name="high" value="1" />
-    </attr>
-  </declare-styleable>
-
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />

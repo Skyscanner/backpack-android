@@ -11,24 +11,14 @@ class ToastStory : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    view.findViewById<TextView>(R.id.widget_low).setOnClickListener {
+    view.findViewById<TextView>(R.id.toast_short).setOnClickListener {
       it as TextView
-      view.findViewById<BpkToast>(R.id.toast_low).show(it.text)
+      BpkToast.makeText(activity!!, it.text, BpkToast.LENGTH_SHORT).show()
     }
 
-    view.findViewById<TextView>(R.id.widget_high).setOnClickListener {
+    view.findViewById<TextView>(R.id.toast_long).setOnClickListener {
       it as TextView
-      view.findViewById<BpkToast>(R.id.toast_high).show(it.text)
-    }
-
-    view.findViewById<TextView>(R.id.static_low).setOnClickListener {
-      it as TextView
-      BpkToast.makeText(activity!!, it.text).show()
-    }
-
-    view.findViewById<TextView>(R.id.static_high).setOnClickListener {
-      it as TextView
-      BpkToast.makeText(activity!!, it.text).show()
+      BpkToast.makeText(activity!!, it.text, BpkToast.LENGTH_LONG).show()
     }
   }
 

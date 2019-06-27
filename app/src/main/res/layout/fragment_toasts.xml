@@ -1,48 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/App.Story"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical">
 
   <net.skyscanner.backpack.button.BpkButton
-    android:id="@+id/widget_low"
+    android:id="@+id/toast_short"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Low duration from Widget"
-    android:layout_marginBottom="@dimen/bpkSpacingBase"/>
-
-  <net.skyscanner.backpack.toast.BpkToast
-    android:id="@+id/toast_low"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-
-  <net.skyscanner.backpack.button.BpkButton
-    android:id="@+id/widget_high"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="High duration from Widget"
-    android:layout_marginBottom="@dimen/bpkSpacingBase" />
-
-  <net.skyscanner.backpack.toast.BpkToast
-    android:id="@+id/toast_high"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:toastDuration="high"/>
-
-  <net.skyscanner.backpack.button.BpkButton
-    android:id="@+id/static_low"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Low duration from method"
+    android:text="Short Toast"
     android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
   <net.skyscanner.backpack.button.BpkButton
-    android:id="@+id/static_high"
+    android:id="@+id/toast_long"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="High duration from method"
+    android:text="Long Toast"
     android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
 </LinearLayout>
