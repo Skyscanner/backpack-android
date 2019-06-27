@@ -3,8 +3,9 @@ package net.skyscanner.backpack.demo
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import net.skyscanner.backpack.demo.data.SharedPreferences
 
-class ThemeApplier(private val themeRes: Int) : Application.ActivityLifecycleCallbacks {
+object ThemeApplier : Application.ActivityLifecycleCallbacks {
   override fun onActivityPaused(activity: Activity?) {}
   override fun onActivityResumed(activity: Activity?) {}
   override fun onActivityStarted(activity: Activity?) {}
@@ -12,6 +13,6 @@ class ThemeApplier(private val themeRes: Int) : Application.ActivityLifecycleCal
   override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {}
   override fun onActivityStopped(activity: Activity?) {}
   override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
-    activity?.theme?.applyStyle(themeRes, true)
+    activity?.theme?.applyStyle(SharedPreferences.getTheme(activity), true)
   }
 }
