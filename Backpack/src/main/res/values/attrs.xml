@@ -113,6 +113,12 @@
     <attr name="fabBackgroundColor" format="color" />
   </declare-styleable>
 
+  <declare-styleable name="BpkCheckbox">
+    <attr name="checkboxCheckedColor" format="color" />
+    <attr name="checkboxDisabledColor" format="color" />
+    <attr name="checkboxColor" format="color" />
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
@@ -139,4 +145,5 @@
   <attr name="bpkChipStyle" format="reference"/>
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
   <attr name="bpkTextStyle" format="reference"/>
+  <attr name="bpkCheckboxStyle" format="reference"/>
 </resources>

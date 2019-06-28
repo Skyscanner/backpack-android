@@ -103,6 +103,7 @@ object ComponentRegistry {
         "Colored" story NodeData { ColoredCalendarStory of R.layout.fragment_calendar_colored }
       )),
     "Chip" story NodeData { ChipStory() },
+    "Checkbox" story NodeData { Story of R.layout.fragment_checkbox },
     "Dialog" story NodeData({ children -> SubStory of children },
       mapOf(
         "With call to action" story NodeData { DialogStory of "Normal" },
