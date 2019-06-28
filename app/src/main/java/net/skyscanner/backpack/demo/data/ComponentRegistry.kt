@@ -15,6 +15,7 @@ import net.skyscanner.backpack.demo.stories.GradientStoryWithDirection
 import net.skyscanner.backpack.demo.stories.GradientStoryCustom
 import net.skyscanner.backpack.demo.stories.SpacingStory
 import net.skyscanner.backpack.demo.stories.ToastStory
+import net.skyscanner.backpack.demo.stories.TextSpansStory
 
 interface RegistryItem {
   val name: String
@@ -134,6 +135,7 @@ object ComponentRegistry {
         "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
         "With drawables" story NodeData { Story of R.layout.fragment_text_drawables }
       )),
+    "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
     "Toast" story NodeData { ToastStory of R.layout.fragment_toasts }
   )
 
