@@ -37,6 +37,7 @@ The Backpack demo application is a good way of referring to the variants availab
 * [Button](docs/Button/README.md)
 * [Card](docs/Card/README.md)
 * [Calendar](docs/Calendar/README.md)
+* [Checkbox](docs/Checkbox/README.md)
 * [Chip](docs/Chip/README.md)
 * [Dialog](docs/Dialog/README.md)
 * [Floating Action Button](docs/FloatingActionButton/README.md)

@@ -1,0 +1,35 @@
+# Checkbox
+
+## Installation
+
+Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
+
+## Usage
+
+The Checkbox component can be used in both XML and Kotlin/Java
+
+Example of a Checkbox in XML
+
+```xml
+<net.skyscanner.backpack.checkbox.BpkCheckbox
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"/>
+```
+
+Example of a Star Rating in Kotlin
+
+```Kotlin
+import net.skyscanner.backpack.checkbox.BpkCheckbox
+
+BpkCheckbox(context).apply {
+  isChecked = true
+}
+```
+
+## Theme Props
+
+- `checkboxColorChecked`
+- `checkboxColorDisabled`
+- `checkboxColor`
+
+Styles can be changed globally through `bpkCheckboxStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.

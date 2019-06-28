@@ -25,6 +25,7 @@
     <item name="bpkButtonFeaturedStyle">@style/LondonThemeButtonFeatured</item>
     <item name="bpkButtonDestructiveStyle">@style/LondonThemeButtonDestructive</item>
     <item name="bpkFabStyle">@style/LondonThemeFab</item>
+    <item name="bpkCheckboxStyle">@style/LondonThemeCheckbox</item>
 
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
 
@@ -95,6 +96,12 @@
     <item name="fabIconColor">@color/bpkRed500</item>
   </style>
 
+  <style name="LondonThemeCheckbox">
+    <item name="checkboxColorChecked">@color/bpkRed500</item>
+    <item name="checkboxColorDisabled">@color/bpkGray500</item>
+    <item name="checkboxColor">#013A76</item>
+  </style>
+
   <!-- London theme end -->
 
 
@@ -121,6 +128,7 @@
     <item name="bpkTextStyle">@style/DohaThemeText</item>
     <item name="bpkCalendarStyle">@style/DohaThemeCalendar</item>
     <item name="bpkFabStyle">@style/DohaThemeFab</item>
+    <item name="bpkCheckboxStyle">@style/DohaThemeCheckbox</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
@@ -173,6 +181,12 @@
   <style name="DohaThemeFab">
     <item name="fabBackgroundColor">?bpkPrimaryColor</item>
     <item name="fabIconColor">?bpkGray50Color</item>
+  </style>
+
+  <style name="DohaThemeCheckbox">
+    <item name="checkboxColorChecked">@color/bpkRed500</item>
+    <item name="checkboxColorDisabled">@color/bpkGray500</item>
+    <item name="checkboxColor">#ffb300</item>
   </style>
   <!-- Doha theme end -->
 

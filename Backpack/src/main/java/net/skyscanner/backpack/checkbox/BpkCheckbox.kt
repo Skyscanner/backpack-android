@@ -1,10 +1,11 @@
-package net.skyscanner.backpack
+package net.skyscanner.backpack.checkbox
 
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.core.widget.CompoundButtonCompat
+import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -28,24 +29,24 @@ open class BpkCheckbox @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var defaultColour = BpkTheme.getPrimaryColor(context)
-    var checkedColour = BpkTheme.getPrimaryColor(context)
-    var disabledColour = BpkTheme.getColor(context, R.color.bpkGray200)
+    var defaultColor = BpkTheme.getPrimaryColor(context)
+    var checkedColor = defaultColor
+    var disabledColor = BpkTheme.getColor(context, R.color.bpkGray100)
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkCheckbox,
       defStyleAttr,
       0
     ).use {
-      defaultColour = it.getInt(R.styleable.BpkCheckbox_checkboxColor, defaultColour)
-      checkedColour = it.getInt(R.styleable.BpkCheckbox_checkboxCheckedColor, checkedColour)
-      disabledColour = it.getInt(R.styleable.BpkCheckbox_checkboxDisabledColor, disabledColour)
+      defaultColor = it.getInt(R.styleable.BpkCheckbox_checkboxColor, defaultColor)
+      checkedColor = it.getInt(R.styleable.BpkCheckbox_checkboxColorChecked, checkedColor)
+      disabledColor = it.getInt(R.styleable.BpkCheckbox_checkboxColorDisabled, disabledColor)
     }
 
-    this.disabledTint = ColorStateList.valueOf(disabledColour)
+    this.disabledTint = ColorStateList.valueOf(disabledColor)
     this.enabledTint = ColorStateList(
       arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
-      intArrayOf(checkedColour, defaultColour)
+      intArrayOf(checkedColor, defaultColor)
     )
     updateTint()
     BpkText.getFont(context, BpkText.SM, BpkText.Weight.NORMAL).applyTo(this)

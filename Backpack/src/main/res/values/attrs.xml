@@ -114,8 +114,8 @@
   </declare-styleable>
 
   <declare-styleable name="BpkCheckbox">
-    <attr name="checkboxCheckedColor" format="color" />
-    <attr name="checkboxDisabledColor" format="color" />
+    <attr name="checkboxColorChecked" format="color" />
+    <attr name="checkboxColorDisabled" format="color" />
     <attr name="checkboxColor" format="color" />
   </declare-styleable>
 

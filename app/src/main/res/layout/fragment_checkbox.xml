@@ -6,27 +6,27 @@
   android:layout_height="match_parent"
   android:orientation="vertical">
 
-  <net.skyscanner.backpack.BpkCheckbox
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:text="Default Unchecked" />
 
-  <net.skyscanner.backpack.BpkCheckbox
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:checked="true"
     android:text="Default Checked" />
 
-  <net.skyscanner.backpack.BpkCheckbox
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:enabled="false"
     android:text="Disabled Unchecked" />
 
-  <net.skyscanner.backpack.BpkCheckbox
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
@@ -34,8 +34,7 @@
     android:enabled="false"
     android:text="Disabled Checked" />
 
-
-  <net.skyscanner.backpack.BpkCheckbox
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
