@@ -73,7 +73,7 @@ open class BpkButton : BpkButtonBase {
         buttonStrokeColor = it.getColor(R.styleable.BpkButton_buttonStrokeColor, BpkTheme.getColor(context, type.strokeColor))
         roundedButtonCorner = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, context.resources.getDimension(R.dimen.bpkSpacingLg))
 
-        buttonTextColor = ContextCompat.getColor(context, type.textColor)
+        defaultTextColor = ContextCompat.getColor(context, type.textColor)
       }
 
     update()

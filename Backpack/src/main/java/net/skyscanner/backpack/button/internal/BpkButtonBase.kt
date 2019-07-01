@@ -42,11 +42,15 @@ open abstract class BpkButtonBase internal constructor(
 
   private val font = BpkText.getFont(this.context, BpkText.SM, BpkText.Weight.EMPHASIZED)
 
-  private var overrideTextColor: Int? = null
+  protected var defaultTextColor: Int = ContextCompat.getColor(this.context, R.color.bpkWhite)
+    set(value) {
+      field = value
+      updateSelf()
+    }
 
-  private var _buttonTextColor: Int = ContextCompat.getColor(this.context, R.color.bpkWhite)
-  protected var buttonTextColor: Int
-    get() = overrideTextColor ?: _buttonTextColor
+  private var _buttonTextColor: Int? = null
+  private var buttonTextColor: Int
+    get() = _buttonTextColor ?: defaultTextColor
     set(value) {
       _buttonTextColor = value
       updateSelf()
@@ -91,7 +95,7 @@ open abstract class BpkButtonBase internal constructor(
       ?.use {
         it.getColor(net.skyscanner.backpack.R.styleable.BpkButton_buttonTextColor, INVALID_RES).let { res ->
           if (res != INVALID_RES) {
-            overrideTextColor = res
+            _buttonTextColor = res
           }
         }
 
