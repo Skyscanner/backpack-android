@@ -112,8 +112,8 @@
   </declare-styleable>
 
   <declare-styleable name="BpkHorizontalNav">
-    <attr name="horizontalNavSelectedTextColor" format="color" />
     <attr name="horizontalNavTextColor" format="color" />
+    <attr name="horizontalNavSelectedTextColor" format="color" />
     <attr name="horizontalNavIndicatorColor" format="color" />
   </declare-styleable>
 
