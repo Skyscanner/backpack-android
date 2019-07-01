@@ -28,7 +28,7 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(300, 300)
+    setDimensions(50, 100)
   }
 
   @Test

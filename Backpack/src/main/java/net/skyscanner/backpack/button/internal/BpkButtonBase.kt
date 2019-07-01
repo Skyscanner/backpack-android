@@ -134,9 +134,9 @@ open abstract class BpkButtonBase internal constructor(
       )
 
       this.setCompoundDrawablesRelativeWithIntrinsicBounds(
-        if (iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY) it else null,
+        it.takeIf { iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY },
         null,
-        if (iconPosition == ICON_POSITION_END) it else null,
+        it.takeIf { iconPosition == ICON_POSITION_END },
         null
       )
     }

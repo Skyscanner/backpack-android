@@ -78,10 +78,10 @@ internal fun getColorSelector(
   @ColorInt disabledColor: Int
 ) = ColorStateList(
   arrayOf(
-    intArrayOf(-android.R.attr.state_enabled),
-    intArrayOf(android.R.attr.state_pressed),
-    intArrayOf(android.R.attr.state_focused),
-    intArrayOf(android.R.attr.state_activated),
+    intArrayOf(-R.attr.state_enabled),
+    intArrayOf(R.attr.state_pressed),
+    intArrayOf(R.attr.state_focused),
+    intArrayOf(R.attr.state_activated),
     intArrayOf()
   ),
   intArrayOf(disabledColor, pressedColor, pressedColor, pressedColor, normalColor)
