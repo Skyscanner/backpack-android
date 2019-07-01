@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.8.0
+
+**Added**:
+
+- Added `BpkCheckbox` and `BpkButtonLink` components.
+- Added `BpkFontSpan` and `BpkPrimaryColorSpan` font spans.
+
 # 9.7.0
 
 **Added**:

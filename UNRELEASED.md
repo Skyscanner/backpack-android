@@ -1,13 +1,6 @@
 # Unreleased
 
 > Place your changes below this line.
-
-
-**Added**:
-
-- `BpkCheckbox`
-- `BpkFontSpan`
-- `BpkPrimaryColorSpan`
   
 ## How to write a good changelog entry
 
