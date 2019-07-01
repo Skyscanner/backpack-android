@@ -28,7 +28,7 @@ subprojects {
     task ktlint(type: JavaExec, group: "verification") {
       description = "Check Kotlin code style."
       classpath = configurations.lintClassPath
-      main = "com.github.shyiko.ktlint.Main"
+      main = "com.pinterest.ktlint.Main"
 
       if (project.hasProperty("files")) {
         args files.split(" ")
@@ -43,7 +43,7 @@ subprojects {
     task ktlintFormat(type: JavaExec, group: "formatting") {
       description = "Fix Kotlin code style deviations."
       classpath = configurations.lintClassPath
-      main = "com.github.shyiko.ktlint.Main"
+      main = "com.pinterest.ktlint.Main"
       args "-F", "src/**/*.kt"
     }
 
