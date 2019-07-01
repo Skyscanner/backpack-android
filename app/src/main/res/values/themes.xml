@@ -27,6 +27,7 @@
     <item name="bpkFabStyle">@style/LondonThemeFab</item>
     <item name="bpkButtonLinkStyle">@style/LondonThemeButtonLink</item>
     <item name="bpkCheckboxStyle">@style/LondonThemeCheckbox</item>
+    <item name="bpkHorizontalNavStyle">@style/LondonThemeHorizontalNav</item>
 
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
 
@@ -107,6 +108,12 @@
     <item name="checkboxColor">#013A76</item>
   </style>
 
+  <style name="LondonThemeHorizontalNav">
+    <item name="horizontalNavTextColor">@color/bpkBlue900</item>
+    <item name="horizontalNavSelectedTextColor">@color/bpkRed900</item>
+    <item name="horizontalNavIndicatorColor">@color/bpkGreen900</item>
+  </style>
+
   <!-- London theme end -->
 
 
@@ -138,6 +145,7 @@
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
+    <item name="bpkHorizontalNavStyle">@style/DohaThemeHorizontalNav</item>
   </style>
 
   <style name="DohaThemeBpkStarRating" parent="">
@@ -198,6 +206,13 @@
     <item name="checkboxColorDisabled">@color/bpkGray500</item>
     <item name="checkboxColor">#ffb300</item>
   </style>
+
+  <style name="DohaThemeHorizontalNav">
+    <item name="horizontalNavTextColor">#9B104C</item>
+    <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
+    <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
+  </style>
+
   <!-- Doha theme end -->
 
 </resources>
