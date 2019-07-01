@@ -29,7 +29,7 @@ internal const val ICON_POSITION_ICON_ONLY = 2
 
 internal const val INVALID_RES = -1
 
-open abstract class BpkButtonBase internal constructor(
+abstract class BpkButtonBase internal constructor(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int
@@ -91,9 +91,9 @@ open abstract class BpkButtonBase internal constructor(
     gravity = Gravity.CENTER
     isClickable = isEnabled
 
-    this.context.theme.obtainStyledAttributes(attrs, net.skyscanner.backpack.R.styleable.BpkButton, defStyleAttr, 0)
+    this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       ?.use {
-        it.getColor(net.skyscanner.backpack.R.styleable.BpkButton_buttonTextColor, INVALID_RES).let { res ->
+        it.getColor(R.styleable.BpkButton_buttonTextColor, INVALID_RES).let { res ->
           if (res != INVALID_RES) {
             _buttonTextColor = res
           }
