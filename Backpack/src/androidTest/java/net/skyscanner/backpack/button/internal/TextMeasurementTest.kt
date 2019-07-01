@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.button
+package net.skyscanner.backpack.button.internal
 
 import android.text.TextPaint
 import androidx.test.ext.junit.runners.AndroidJUnit4

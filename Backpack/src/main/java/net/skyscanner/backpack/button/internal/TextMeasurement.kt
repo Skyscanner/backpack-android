@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.button
+package net.skyscanner.backpack.button.internal
 
 import android.graphics.Rect
 import android.text.TextPaint

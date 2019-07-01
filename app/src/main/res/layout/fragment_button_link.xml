@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/App.Story"
+  android:orientation="vertical"
+  tools:ignore="HardcodedText">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Default" />
+
+  <net.skyscanner.backpack.button.BpkButtonLink
+    android:id="@+id/btn_default"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Button" />
+
+  <net.skyscanner.backpack.button.BpkButtonLink
+    android:id="@+id/btn_disabled"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:enabled="false"
+    android:text="Disabled" />
+
+  <net.skyscanner.backpack.button.BpkButtonLink
+    android:layout_width="wrap_content"
+    android:id="@+id/btn_not_uppercase"
+    android:layout_height="wrap_content"
+    app:uppercase="false"
+    android:text="Not uppercase"
+    />
+
+  <net.skyscanner.backpack.button.BpkButtonLink
+    android:layout_width="wrap_content"
+    android:id="@+id/btn_start_icon"
+    android:layout_height="wrap_content"
+    android:text="With leading icon"
+    app:buttonIconPosition="start"
+    app:buttonIcon="@drawable/bpk_alert__active"
+  />
+
+  <net.skyscanner.backpack.button.BpkButtonLink
+    android:layout_width="wrap_content"
+    android:id="@+id/btn_end_icon"
+    android:layout_height="wrap_content"
+    android:text="With trailing icon"
+    app:buttonIconPosition="end"
+    app:buttonIcon="@drawable/bpk_alert__active"
+    />
+
+
+</LinearLayout>

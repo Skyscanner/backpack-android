@@ -16,7 +16,9 @@ class ChipStory : Story() {
     super.onViewCreated(view, savedInstanceState)
 
     forEachChip(view as ViewGroup) { chip ->
-      chip.setOnClickListener { chip.toggle() }
+      chip.setOnClickListener {
+        chip.toggle()
+      }
     }
   }
 
