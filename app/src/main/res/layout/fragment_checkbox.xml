@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  style="@style/App.Story"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:text="Default Unchecked" />
+
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:checked="true"
+    android:text="Default Checked" />
+
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:enabled="false"
+    android:text="Disabled Unchecked" />
+
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:checked="true"
+    android:enabled="false"
+    android:text="Disabled Checked" />
+
+  <net.skyscanner.backpack.checkbox.BpkCheckbox
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:layoutDirection="rtl"
+    android:text="Default RTL" />
+
+</LinearLayout>

@@ -3,14 +3,13 @@ package net.skyscanner.backpack.toast;
 import android.content.Context;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextPaint;
-import android.text.style.CharacterStyle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.skyscanner.backpack.text.BpkFontSpan;
 import net.skyscanner.backpack.text.BpkText;
 
 public final class BpkToast {
@@ -43,21 +42,7 @@ public final class BpkToast {
       return null;
     }
     return new SpannableStringBuilder()
-      .append(text, new BpkTextSpan(font), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-  }
-
-  private static class BpkTextSpan extends CharacterStyle {
-
-    private final BpkText.FontDefinition mFont;
-
-    private BpkTextSpan(@NonNull BpkText.FontDefinition font) {
-      mFont = font;
-    }
-
-    @Override
-    public void updateDrawState(TextPaint tp) {
-      mFont.applyTo(tp);
-    }
+      .append(text, new BpkFontSpan(font), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
   }
 
 }
