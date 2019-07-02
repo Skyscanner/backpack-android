@@ -7,6 +7,11 @@
 - `BpkInteractiveStarRating`
   - Fixed multiple listener invocations with the same values.
 
+**Added:**
+
+- `BpkDialog`:
+  - `addActionButton` now accepts any view as argument.
+  
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
