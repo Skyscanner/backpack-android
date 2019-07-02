@@ -58,6 +58,13 @@ class HorizontalNavTests : BpkSnapshotTest() {
     snap(horizontalNav)
   }
 
+  @Test
+  fun screenshotHorizontalNav_alternate() {
+    val horizontalNav = BpkHorizontalNav(testContext).init()
+    horizontalNav.appearance = BpkHorizontalNav.Appearance.Alternate
+    snap(horizontalNav)
+  }
+
   private fun BpkHorizontalNav.init() = apply {
     setBackgroundColor(Color.WHITE)
     addTab(newTab().setText("1"))
