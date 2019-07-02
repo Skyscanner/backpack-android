@@ -23,10 +23,6 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
 ) {
 
   var onRatingChangedListener: ((Float, Float) -> Unit)? = null
-    set(value) {
-      field = value
-      value?.invoke(rating, maxRating.toFloat())
-    }
 
   final override var rating: Float
     get() = super.rating
@@ -35,15 +31,6 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
       if (newValue != super.rating) {
         super.rating = newValue
         onRatingChangedListener?.invoke(newValue, maxRating.toFloat())
-      }
-    }
-
-  final override var maxRating: Int
-    get() = super.maxRating
-    set(value) {
-      if (value != super.maxRating) {
-        super.maxRating = value
-        onRatingChangedListener?.invoke(rating, value.toFloat())
       }
     }
 

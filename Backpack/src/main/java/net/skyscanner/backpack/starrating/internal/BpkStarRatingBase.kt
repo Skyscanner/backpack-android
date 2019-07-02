@@ -32,7 +32,7 @@ open class BpkStarRatingBase internal constructor(
   private val full: Drawable
 
   private var _maxRating: Int = 5
-  open var maxRating: Int
+  var maxRating: Int
     get() = _maxRating
     set(value) {
       if (value < 0) {

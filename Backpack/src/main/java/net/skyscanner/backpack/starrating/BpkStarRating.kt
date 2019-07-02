@@ -25,10 +25,4 @@ open class BpkStarRating @JvmOverloads constructor(
     set(value) {
       super.rating = value
     }
-
-  final override var maxRating: Int
-    get() = super.maxRating
-    set(value) {
-      super.maxRating = value
-    }
 }
