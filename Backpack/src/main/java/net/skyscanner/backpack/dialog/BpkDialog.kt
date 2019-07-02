@@ -19,7 +19,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.res.ResourcesCompat
-import net.skyscanner.backpack.button.BpkButton
 
 open class BpkDialog(
   context: Context,
@@ -57,7 +56,7 @@ open class BpkDialog(
       viewHolder?.iconView?.icon = icon
     }
 
-  fun addActionButton(button: BpkButton) {
+  fun addActionButton(button: View) {
     button.layoutParams = LinearLayoutCompat.LayoutParams(
       LinearLayoutCompat.LayoutParams.MATCH_PARENT,
       LinearLayoutCompat.LayoutParams.WRAP_CONTENT

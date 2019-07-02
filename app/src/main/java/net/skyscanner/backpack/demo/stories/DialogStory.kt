@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import net.skyscanner.backpack.button.BpkButton
+import net.skyscanner.backpack.button.BpkButtonLink
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.dialog.BpkDialog
 
@@ -131,6 +132,39 @@ Safe travels!"""
           R.drawable.bpk_tick,
           R.color.bpkGreen500
         )
+      }
+    },
+
+    "Links" to { context: Context ->
+      val dialog = BpkDialog(context)
+      dialog.apply {
+        title = "Want to know when prices change?"
+        description = "Create a price alert and we'll let you know changes for this route"
+        icon = BpkDialog.Icon(
+          R.drawable.bpk_alert__active,
+          R.color.bpkGreen500
+        )
+
+        addActionButton(BpkButton(context).apply {
+          text = "Create"
+          setOnClickListener {
+            dialog.dismiss()
+          }
+        })
+
+        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
+          text = "Direct flights only"
+          setOnClickListener {
+            dialog.dismiss()
+          }
+        })
+
+        addActionButton(BpkButtonLink(context).apply {
+          text = "No, Thanks!"
+          setOnClickListener {
+            dialog.dismiss()
+          }
+        })
       }
     }
   )

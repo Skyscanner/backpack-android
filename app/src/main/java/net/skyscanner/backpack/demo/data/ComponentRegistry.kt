@@ -115,7 +115,8 @@ object ComponentRegistry {
         "With call to action" story NodeData { DialogStory of "Normal" },
         "Warning" story NodeData { DialogStory of "Warning" },
         "Delete confirmation" story NodeData { DialogStory of "Delete" },
-        "Success" story NodeData { DialogStory of "Confirmation" }
+        "Success" story NodeData { DialogStory of "Confirmation" },
+        "With Links" story NodeData { DialogStory of "Links" }
       )),
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
