@@ -27,7 +27,11 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
   final override var rating: Float
     get() = super.rating
     set(value) {
-      super.rating = Math.round(value).toFloat()
+      val newValue = Math.round(value).toFloat()
+      if (newValue != super.rating) {
+        super.rating = newValue
+        onRatingChangedListener?.invoke(newValue, maxRating.toFloat())
+      }
     }
 
   override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -35,7 +39,6 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
     val itemWidth = width / maxRating
     val selectedItems = x / itemWidth
     rating = Math.max(1f, selectedItems + 0.5f)
-    onRatingChangedListener?.invoke(rating, maxRating.toFloat())
     return true
   }
 
