@@ -115,6 +115,10 @@
     <attr name="horizontalNavTextColor" format="color" />
     <attr name="horizontalNavSelectedTextColor" format="color" />
     <attr name="horizontalNavIndicatorColor" format="color" />
+    <attr name="horizontalNavAppearance" format="enum">
+      <enum name="normal" value="0" />
+      <enum name="alternate" value="1" />
+    </attr>
   </declare-styleable>
 
   <declare-styleable name="BpkFab">
@@ -158,4 +162,5 @@
   <attr name="bpkTextStyle" format="reference"/>
   <attr name="bpkCheckboxStyle" format="reference"/>
   <attr name="bpkHorizontalNavStyle" format="reference"/>
+  <attr name="bpkHorizontalNavStyleAlternate" format="reference"/>
 </resources>

@@ -5,46 +5,77 @@ import android.content.res.ColorStateList
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.util.AttributeSet
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorRes
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.BpkTheme
+import net.skyscanner.backpack.util.*
 import net.skyscanner.backpack.util.ResourcesUtil
-import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
+import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 open class BpkHorizontalNav @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : TabLayout(
-  createContextThemeWrapper(
-    createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.tabStyle),
-    attrs, R.attr.bpkHorizontalNavStyle
-  ), attrs, defStyleAttr) {
+) : TabLayout(wrapContextWithDefaults(context), attrs, defStyleAttr) {
 
-  private val fontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
+  private enum class Appearance(
+    val id: Int,
+    @AttrRes val styleAttribute: Int,
+    @ColorRes val defaultTextColor: Int,
+    @ColorRes val defaultTextSelectedColor: Int,
+    @ColorRes val defaultIndicatorColor: Int
+  ) {
+    Normal(
+      id = 0,
+      styleAttribute = R.attr.bpkHorizontalNavStyle,
+      defaultTextColor = R.color.bpkGray700,
+      defaultTextSelectedColor = R.color.bpkBlue500,
+      defaultIndicatorColor = R.color.bpkBlue500
+    ),
+    Alternate(
+      id = 1,
+      styleAttribute = R.attr.bpkHorizontalNavStyleAlternate,
+      defaultTextColor = R.color.bpkGray50,
+      defaultTextSelectedColor = R.color.bpkWhite,
+      defaultIndicatorColor = R.color.bpkWhite
+    )
+  }
+
+  private lateinit var fontSpan: BpkFontSpan
 
   init {
     initialize(attrs, defStyleAttr)
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var textColor: Int = BpkTheme.getColor(context, R.color.bpkGray700)
-    var textSelectedColor: Int = BpkTheme.getColor(context, R.color.bpkBlue500)
-    var indicatorColor: Int = BpkTheme.getColor(context, R.color.bpkBlue500)
-
-    context.theme.obtainStyledAttributes(
+    val appearance = context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkHorizontalNav,
       defStyleAttr,
       0
     ).use {
-      textColor = it.getColor(R.styleable.BpkHorizontalNav_horizontalNavTextColor, textColor)
-      textSelectedColor = it.getColor(R.styleable.BpkHorizontalNav_horizontalNavSelectedTextColor, textSelectedColor)
-      indicatorColor = it.getColor(R.styleable.BpkHorizontalNav_horizontalNavIndicatorColor, indicatorColor)
-    }
+      it.getInt(R.styleable.BpkHorizontalNav_horizontalNavAppearance, 0)
+        .let { id -> Appearance.values().find { it.id == id } }
+    } ?: Appearance.Normal
+
+    var textColor: Int = BpkTheme.getColor(context, appearance.defaultTextColor)
+    var textSelectedColor: Int = BpkTheme.getColor(context, appearance.defaultTextSelectedColor)
+    var indicatorColor: Int = BpkTheme.getColor(context, appearance.defaultIndicatorColor)
+
+    val stylisedContext = createContextThemeWrapper(context, attrs, appearance.styleAttribute)
+    fontSpan = BpkFontSpan(stylisedContext, BpkText.SM, BpkText.Weight.EMPHASIZED)
+    stylisedContext
+      .theme
+      .obtainStyledAttributes(attrs, R.styleable.BpkHorizontalNav, defStyleAttr, 0)
+      .use {
+        textColor = it.getColor(R.styleable.BpkHorizontalNav_horizontalNavTextColor, textColor)
+        textSelectedColor = it.getColor(R.styleable.BpkHorizontalNav_horizontalNavSelectedTextColor, textSelectedColor)
+        indicatorColor = it.getColor(R.styleable.BpkHorizontalNav_horizontalNavIndicatorColor, indicatorColor)
+      }
 
     @Suppress("DEPRECATION")
     setSelectedTabIndicatorHeight(ResourcesUtil.dpToPx(2, context))

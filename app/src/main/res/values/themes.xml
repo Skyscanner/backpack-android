@@ -28,6 +28,7 @@
     <item name="bpkButtonLinkStyle">@style/LondonThemeButtonLink</item>
     <item name="bpkCheckboxStyle">@style/LondonThemeCheckbox</item>
     <item name="bpkHorizontalNavStyle">@style/LondonThemeHorizontalNav</item>
+    <item name="bpkHorizontalNavStyleAlternate">@style/LondonThemeHorizontalNavAlternate</item>
 
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
 
@@ -109,9 +110,15 @@
   </style>
 
   <style name="LondonThemeHorizontalNav">
-    <item name="horizontalNavTextColor">@color/bpkBlue900</item>
-    <item name="horizontalNavSelectedTextColor">@color/bpkRed900</item>
-    <item name="horizontalNavIndicatorColor">@color/bpkGreen900</item>
+    <item name="horizontalNavTextColor">?bpkGray500Color</item>
+    <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
+    <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
+  </style>
+
+  <style name="LondonThemeHorizontalNavAlternate">
+    <item name="horizontalNavTextColor">?bpkGray100Color</item>
+    <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
+    <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
 
   <!-- London theme end -->
@@ -146,6 +153,7 @@
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
     <item name="bpkHorizontalNavStyle">@style/DohaThemeHorizontalNav</item>
+    <item name="bpkHorizontalNavStyleAlternate">@style/DohaThemeHorizontalNavAlternate</item>
   </style>
 
   <style name="DohaThemeBpkStarRating" parent="">
@@ -208,7 +216,13 @@
   </style>
 
   <style name="DohaThemeHorizontalNav">
-    <item name="horizontalNavTextColor">#9B104C</item>
+    <item name="horizontalNavTextColor">?bpkGray500Color</item>
+    <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
+    <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
+  </style>
+
+  <style name="DohaThemeHorizontalNavAlternate">
+    <item name="horizontalNavTextColor">?bpkGray100Color</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
