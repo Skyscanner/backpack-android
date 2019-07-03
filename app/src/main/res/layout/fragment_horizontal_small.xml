@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/App.Story"
+  android:orientation="vertical"
+  tools:ignore="HardcodedText">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Default"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl"
+    app:horizontalNavSize="small" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="RTL"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav_rtl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl"
+    android:layoutDirection="rtl"
+    app:horizontalNavSize="small" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Scrollable"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav_scrollable"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl"
+    app:horizontalNavSize="small"
+    app:tabMode="scrollable" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Scrollable RTL"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav_scrollable_rtl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl"
+    android:layoutDirection="rtl"
+    app:horizontalNavSize="small"
+    app:tabMode="scrollable" />
+
+</LinearLayout>

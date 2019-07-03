@@ -33,4 +33,4 @@ BpkHorizontalNav(context).apply {
 - `horizontalNavSelectedTextColor`
 - `horizontalNavIndicatorColor`
 
-Styles can be changed globally through `bpkHorizontalNavStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+Styles can be changed globally through `bpkHorizontalNavStyle` and `bpkHorizontalNavStyleAlternate`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.

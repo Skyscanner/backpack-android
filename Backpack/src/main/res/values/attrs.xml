@@ -119,6 +119,10 @@
       <enum name="normal" value="0" />
       <enum name="alternate" value="1" />
     </attr>
+    <attr name="horizontalNavSize" format="enum">
+      <enum name="small" value="0" />
+      <enum name="normal" value="1" />
+    </attr>
   </declare-styleable>
 
   <declare-styleable name="BpkFab">

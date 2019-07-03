@@ -7,6 +7,7 @@ import android.text.SpannableStringBuilder
 import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkFontSpan
@@ -44,36 +45,63 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     )
   }
 
-  private val fontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
+  enum class Size(
+    internal val id: Int,
+    @DimenRes internal val value: Int
+  ) {
+    Small(
+      id = 0,
+      value = R.dimen.bpk_horizontal_nav_size_small
+    ),
+    Normal(
+      id = 1,
+      value = R.dimen.bpk_horizontal_nav_size_normal
+    )
+  }
 
   private var _appearance: Appearance = Appearance.Normal
-
   var appearance: Appearance
     get() = _appearance
     set(value) {
       if (_appearance != value) {
         _appearance = value
-        update(null, 0)
+        updateAppearance()
       }
     }
 
+  private var _size: Size = Size.Normal
+  var size: Size
+    get() = _size
+    set(value) {
+      if (_size != value) {
+        _size = value
+        updateSize()
+      }
+    }
+
+  private val fontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
+
   init {
-    _appearance = initialize(attrs, defStyleAttr)
-    update(attrs, defStyleAttr)
+    initialize(attrs, defStyleAttr)
+    updateAppearance(attrs, defStyleAttr)
+    updateSize()
   }
 
-  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) =
+  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkHorizontalNav,
       defStyleAttr,
       0
     ).use {
-      it.getInt(R.styleable.BpkHorizontalNav_horizontalNavAppearance, 0)
-        .let { id -> Appearance.values().find { it.id == id } }
-    } ?: Appearance.Normal
+      _appearance = it.getInt(R.styleable.BpkHorizontalNav_horizontalNavAppearance, appearance.id)
+        .let { id -> Appearance.values().find { it.id == id } }!!
+      _size = it.getInt(R.styleable.BpkHorizontalNav_horizontalNavSize, size.id)
+        .let { id -> Size.values().find { it.id == id } }!!
+    }
+  }
 
-  private fun update(attrs: AttributeSet?, defStyleAttr: Int) {
+  private fun updateAppearance(attrs: AttributeSet? = null, defStyleAttr: Int = 0) {
     var textColor: Int = BpkTheme.getColor(context, appearance.defaultTextColor)
     var textSelectedColor: Int = BpkTheme.getColor(context, appearance.defaultTextSelectedColor)
     var indicatorColor: Int = BpkTheme.getColor(context, appearance.defaultIndicatorColor)
@@ -92,6 +120,15 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     setSelectedTabIndicatorHeight(resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg))
     setTabTextColors(textColor, textSelectedColor)
     setSelectedTabIndicatorColor(indicatorColor)
+  }
+
+  private fun updateSize() {
+    requestLayout()
+  }
+
+  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    val heightSpec = MeasureSpec.makeMeasureSpec(resources.getDimensionPixelSize(size.value), MeasureSpec.EXACTLY)
+    super.onMeasure(widthMeasureSpec, heightSpec)
   }
 
   override fun setTabTextColors(textColor: ColorStateList?) {

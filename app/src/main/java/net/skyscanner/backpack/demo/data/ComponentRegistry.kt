@@ -107,7 +107,8 @@ object ComponentRegistry {
     "Horizontal Nav" story NodeData({ children -> SubStory of children },
       mapOf(
       "Default" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_default },
-      "Alternate" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_alternate }
+      "Alternate" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_alternate },
+      "Small" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_small }
     )),
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
