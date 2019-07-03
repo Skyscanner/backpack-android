@@ -55,7 +55,7 @@ task clean(type: Delete) {
   delete rootProject.buildDir
 }
 
-def BpkVersion = '9.9.0'
+def BpkVersion = '9.10.0'
 
 ext {
   version = "$BpkVersion"

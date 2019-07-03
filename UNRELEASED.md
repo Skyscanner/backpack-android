@@ -1,10 +1,6 @@
 # Unreleased
 
 > Place your changes below this line.
-  
-**Added**:
-
-- `BpkHorizontalNav`
 
 ## How to write a good changelog entry
 

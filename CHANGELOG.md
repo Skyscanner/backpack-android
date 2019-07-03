@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.10.0
+
+**Added**:
+
+- `BpkHorizontalNav`
+
 # 9.9.0
 
 **Fixed**:
