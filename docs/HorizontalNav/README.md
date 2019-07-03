@@ -1,0 +1,36 @@
+# Horizontal Nav
+
+## Installation
+
+Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
+
+## Usage
+
+The `HorizontalNav` component can be used in both XML and Kotlin/Java
+
+Example of a `HorizontalNav` in XML
+
+```xml
+<net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"/>
+```
+
+Example of a `HorizontalNav` in Kotlin
+
+```Kotlin
+import net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+
+BpkHorizontalNav(context).apply {
+  addTab(newTab().setText("1"))
+  addTab(newTab().setText("2"))
+}
+```
+
+## Theme Props
+
+- `horizontalNavTextColor`
+- `horizontalNavSelectedTextColor`
+- `horizontalNavIndicatorColor`
+
+Styles can be changed globally through `bpkHorizontalNavStyle` and `bpkHorizontalNavStyleAlternate`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.

@@ -1,21 +1,7 @@
 package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.stories.Story
-import net.skyscanner.backpack.demo.stories.SubStory
-import net.skyscanner.backpack.demo.stories.DefaultCalendarStory
-import net.skyscanner.backpack.demo.stories.ColoredCalendarStory
-import net.skyscanner.backpack.demo.stories.ChipStory
-import net.skyscanner.backpack.demo.stories.DialogStory
-import net.skyscanner.backpack.demo.stories.IconsStory
-import net.skyscanner.backpack.demo.stories.ColorStory
-import net.skyscanner.backpack.demo.stories.ElevationStory
-import net.skyscanner.backpack.demo.stories.GradientStoryPrimary
-import net.skyscanner.backpack.demo.stories.GradientStoryWithDirection
-import net.skyscanner.backpack.demo.stories.GradientStoryCustom
-import net.skyscanner.backpack.demo.stories.SpacingStory
-import net.skyscanner.backpack.demo.stories.ToastStory
-import net.skyscanner.backpack.demo.stories.TextSpansStory
+import net.skyscanner.backpack.demo.stories.*
 
 interface RegistryItem {
   val name: String
@@ -118,6 +104,7 @@ object ComponentRegistry {
         "Success" story NodeData { DialogStory of "Confirmation" },
         "With Links" story NodeData { DialogStory of "Links" }
       )),
+    "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
     "Spinner" story NodeData({ children -> SubStory of children },

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/App.Story"
+  android:orientation="vertical"
+  tools:ignore="HardcodedText">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Default"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Scrollable"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav_scrollable"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:tabMode="scrollable"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Small"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav_small"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:horizontalNavSize="small"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Alternate"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav_alternate"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:horizontalNavAppearance="alternate"
+    android:background="@color/bpkBlue600"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="RTL"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav_rtl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl"
+    android:layoutDirection="rtl" />
+
+</LinearLayout>

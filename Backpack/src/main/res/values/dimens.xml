@@ -6,4 +6,6 @@
   <!-- consumer facing resources -->
   <dimen name="bpk_icon_size_small">16dp</dimen>
   <dimen name="bpk_icon_size_normal">24dp</dimen>
+  <dimen name="bpk_horizontal_nav_size_small">@dimen/bpkSpacingXl</dimen>
+  <dimen name="bpk_horizontal_nav_size_normal">36dp</dimen>
 </resources>
