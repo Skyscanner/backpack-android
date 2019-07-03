@@ -104,12 +104,7 @@ object ComponentRegistry {
         "Success" story NodeData { DialogStory of "Confirmation" },
         "With Links" story NodeData { DialogStory of "Links" }
       )),
-    "Horizontal Nav" story NodeData({ children -> SubStory of children },
-      mapOf(
-      "Default" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_default },
-      "Alternate" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_alternate },
-      "Small" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_small }
-    )),
+    "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
     "Spinner" story NodeData({ children -> SubStory of children },

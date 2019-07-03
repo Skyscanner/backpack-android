@@ -10,9 +10,10 @@ class HorizontalNavStory : Story() {
     super.onViewCreated(view, savedInstanceState)
 
     init(view.findViewById(R.id.horizontal_nav))
-    init(view.findViewById(R.id.horizontal_nav_rtl))
     init(view.findViewById(R.id.horizontal_nav_scrollable))
-    init(view.findViewById(R.id.horizontal_nav_scrollable_rtl))
+    init(view.findViewById(R.id.horizontal_nav_small))
+    init(view.findViewById(R.id.horizontal_nav_alternate))
+    init(view.findViewById(R.id.horizontal_nav_rtl))
   }
 
   private fun init(horizontalNav: BpkHorizontalNav) {
