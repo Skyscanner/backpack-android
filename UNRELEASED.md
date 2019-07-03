@@ -1,16 +1,6 @@
 # Unreleased
 
 > Place your changes below this line.
-
-**Fixed**:
-
-- `BpkInteractiveStarRating`
-  - Fixed multiple listener invocations with the same values.
-
-**Added:**
-
-- `BpkDialog`:
-  - `addActionButton` now accepts any view as argument.
   
 ## How to write a good changelog entry
 

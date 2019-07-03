@@ -2,6 +2,18 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.9.0
+
+**Fixed**:
+
+- `BpkInteractiveStarRating`
+  - Fixed multiple listener invocations with the same values.
+
+**Added:**
+
+- `BpkDialog`:
+  - `addActionButton` now accepts any view as argument.
+
 # 9.8.0
 
 **Added**:
