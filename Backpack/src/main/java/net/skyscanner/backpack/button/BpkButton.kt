@@ -54,7 +54,10 @@ open class BpkButton : BpkButtonBase {
   private val paddingVertical = tokens.bpkSpacingMd + (tokens.bpkBorderSizeLg / 2)
 
   @Dimension
-  private var roundedButtonCorner = context.resources.getDimension(R.dimen.bpkSpacingLg)
+  private var defaultCornerRadius = context.resources.getDimension(R.dimen.bpkSpacingLg)
+
+  @Dimension
+  private var roundedButtonCorner = defaultCornerRadius
 
   val type: Type
     get() {
@@ -71,7 +74,7 @@ open class BpkButton : BpkButtonBase {
         buttonBackgroundColor = it.getColor(R.styleable.BpkButton_buttonBackgroundColor, BpkTheme.getColor(context, type.bgColor))
 
         buttonStrokeColor = it.getColor(R.styleable.BpkButton_buttonStrokeColor, BpkTheme.getColor(context, type.strokeColor))
-        roundedButtonCorner = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, context.resources.getDimension(R.dimen.bpkSpacingLg))
+        roundedButtonCorner = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, defaultCornerRadius)
 
         defaultTextColor = ContextCompat.getColor(context, type.textColor)
       }
@@ -111,7 +114,7 @@ open class BpkButton : BpkButtonBase {
     return getRippleDrawable(
       context = context,
       normalColor = tokens.gray100,
-      cornerRadius = roundedButtonCorner,
+      cornerRadius = if (iconPosition != ICON_ONLY) roundedButtonCorner else defaultCornerRadius,
       strokeWidth = null,
       strokeColor = null
     )
@@ -122,7 +125,7 @@ open class BpkButton : BpkButtonBase {
       getRippleDrawable(
         context = context,
         normalColor = buttonBackgroundColor,
-        cornerRadius = roundedButtonCorner,
+        cornerRadius = if (iconPosition != ICON_ONLY) roundedButtonCorner else defaultCornerRadius,
         strokeWidth = if (type == Type.Primary || type == Type.Featured) null else tokens.bpkBorderSizeLg,
         strokeColor = buttonStrokeColor
       )

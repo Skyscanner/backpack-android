@@ -68,6 +68,7 @@ abstract class BpkButtonBase internal constructor(
     set(value) {
       _iconPosition = value
       updateSelf()
+      update()
     }
 
   private var _icon: Drawable? = null
@@ -82,6 +83,7 @@ abstract class BpkButtonBase internal constructor(
         }
 
         updateSelf()
+        update()
       }
     }
 

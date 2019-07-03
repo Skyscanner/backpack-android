@@ -21,4 +21,7 @@
     <item name="android:padding">@dimen/bpkSpacingBase</item>
   </style>
 
+  <style name="TestRoundIconOnlyButton">
+    <item name="buttonCornerRadius">4dp</item>
+  </style>
 </resources>
