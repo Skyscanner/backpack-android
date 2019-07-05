@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.10.1
+
+**Fixed**:
+
+- `BpkButton`
+  - Fixed icon only buttons to be always round.
+
 # 9.10.0
 
 **Added**:
