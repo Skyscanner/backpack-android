@@ -49,7 +49,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layoutDirection="rtl"
-    android:text="5 out of 5 RTL"
+    android:text="2 out of 5 RTL"
     app:textStyle="sm" />
 
   <net.skyscanner.backpack.starrating.BpkInteractiveStarRating
