@@ -3,6 +3,7 @@ package net.skyscanner.backpack.button.internal
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.VectorDrawable
@@ -19,9 +20,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.darken
-import net.skyscanner.backpack.util.use
-import net.skyscanner.backpack.util.wrapContextWithDefaults
+import net.skyscanner.backpack.util.*
 
 internal const val ICON_POSITION_START = 0
 internal const val ICON_POSITION_END = 1
@@ -95,8 +94,10 @@ abstract class BpkButtonBase internal constructor(
 
     this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       ?.use {
-        it.getColor(R.styleable.BpkButton_buttonTextColor, INVALID_RES).let { res ->
-          if (res != INVALID_RES) {
+        it.getColor(R.styleable.BpkButton_buttonTextColor, Color.TRANSPARENT).let { res ->
+          // We use Color.TRANSPARENT here because -1 (INVALID_RES) is also used to represent the white color,
+          // which should be a valid colour here.
+          if (res != Color.TRANSPARENT) {
             _buttonTextColor = res
           }
         }
