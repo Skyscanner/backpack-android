@@ -50,6 +50,4 @@
     app:buttonIconPosition="end"
     app:buttonIcon="@drawable/bpk_alert__active"
     />
-
-
 </LinearLayout>

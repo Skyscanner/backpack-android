@@ -7,6 +7,9 @@
 - `BpkInteractiveStarRating`
   - Listener is being invoked when rating set programmatically or when user finishes the interaction.
 
+- `ButtonLink`
+  - setting `buttonTextColor` to white now works.
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
