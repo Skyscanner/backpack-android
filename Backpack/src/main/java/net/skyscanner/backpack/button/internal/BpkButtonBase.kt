@@ -3,7 +3,6 @@ package net.skyscanner.backpack.button.internal
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.VectorDrawable
@@ -94,13 +93,13 @@ abstract class BpkButtonBase internal constructor(
 
     this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       ?.use {
-        it.getColor(R.styleable.BpkButton_buttonTextColor, Color.TRANSPARENT).let { res ->
-          // We use Color.TRANSPARENT here because -1 (INVALID_RES) is also used to represent the white color,
-          // which should be a valid colour here.
-          if (res != Color.TRANSPARENT) {
-            _buttonTextColor = res
-          }
-        }
+        // TODO: Try to refactor this so using getColorStateList is not necessary.
+        // We are using getColorStateList because we can't set consistent default because of how
+        // BpkButton changes the default colour based on its type.
+        // Furthermore using getColor is problematic because we need to provide a default and if we
+        // make INVALID_RES (-1) the default, it is not possible to se this property to white, because
+        // white is also represented as -1.
+        _buttonTextColor = it.getColorStateList(R.styleable.BpkButton_buttonTextColor)?.defaultColor
 
         _iconPosition = it.getInt(R.styleable.BpkButton_buttonIconPosition, ICON_POSITION_END)
         it.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RES).let { res ->
