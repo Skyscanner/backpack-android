@@ -1,24 +1,30 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.VectorDrawable
+import android.text.method.TransformationMethod
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.TextView
 import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.text.BpkIconSpan
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.text.withIcon
+import net.skyscanner.backpack.text.withText
 import net.skyscanner.backpack.util.darken
 import net.skyscanner.backpack.util.use
 import net.skyscanner.backpack.util.wrapContextWithDefaults
@@ -114,6 +120,11 @@ abstract class BpkButtonBase internal constructor(
     isInitialized = true
   }
 
+  override fun setInputType(type: Int) {
+    super.setInputType(type)
+    updateSelf()
+  }
+
   private fun updateSelf() {
     font.applyTo(this)
 
@@ -129,22 +140,10 @@ abstract class BpkButtonBase internal constructor(
       this.setTextColor(tokens.gray300)
     }
 
-    _icon?.let {
-      DrawableCompat.setTintList(
-        it,
-        getColorSelector(
-          buttonTextColor,
-          darken(buttonTextColor, .1f),
-          tokens.gray300
-        )
-      )
-
-      this.setCompoundDrawablesRelativeWithIntrinsicBounds(
-        it.takeIf { iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY },
-        null,
-        it.takeIf { iconPosition == ICON_POSITION_END },
-        null
-      )
+    // invoke transformation method
+    text = text
+    if (transformationMethod !is IconTransformationMethod) {
+      transformationMethod = IconTransformationMethod(transformationMethod)
     }
   }
 
@@ -260,6 +259,26 @@ abstract class BpkButtonBase internal constructor(
           tokens.bpkSpacingBase,
           tokens.bpkSpacingBase,
           true))
+    }
+  }
+
+  private inner class IconTransformationMethod(private val wrapped: TransformationMethod?) : TransformationMethod {
+
+    override fun onFocusChanged(view: View?, sourceText: CharSequence?, focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
+      wrapped?.onFocusChanged(view, sourceText, focused, direction, previouslyFocusedRect)
+    }
+
+    override fun getTransformation(source: CharSequence, view: View?): CharSequence {
+      val transformedText = wrapped?.getTransformation(source, view) ?: source
+
+      return _icon?.let {
+        val icon = BpkIconSpan(it).apply { tint = ColorStateList.valueOf(currentTextColor) }
+        if (iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY) {
+          icon withText transformedText
+        } else {
+          transformedText withIcon icon
+        }
+      } ?: transformedText
     }
   }
 }
