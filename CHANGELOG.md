@@ -2,6 +2,20 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 9.11.0
+
+**Added:**
+
+- New `flight-landing`, `flight-takeoff` and `aircraft` icons.
+
+**Fixed**:
+
+- `BpkInteractiveStarRating`
+  - Listener is being invoked when rating set programmatically or when user finishes the interaction.
+
+- `ButtonLink`
+  - setting `buttonTextColor` to white now works.
+
 # 9.10.1
 
 **Fixed**:
