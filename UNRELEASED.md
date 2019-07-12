@@ -2,6 +2,9 @@
 
 > Place your changes below this line.
 
+**Added:**
+- New `flight-landing`, `flight-takeoff` and `aircraft` icons.
+
 **Fixed**:
 
 - `BpkInteractiveStarRating`
