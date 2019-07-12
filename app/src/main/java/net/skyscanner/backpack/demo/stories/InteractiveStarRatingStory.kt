@@ -1,18 +1,25 @@
 package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import net.skyscanner.backpack.demo.R
+import android.view.ViewGroup
 import net.skyscanner.backpack.starrating.BpkInteractiveStarRating
+import net.skyscanner.backpack.toast.BpkToast
 
 class InteractiveStarRatingStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    view.findViewById<BpkInteractiveStarRating>(R.id.star_rating_empty).onRatingChangedListener = { current, max ->
-      Log.d("InteractiveStarRating", "$current/$max")
+    view as ViewGroup
+
+    (0 until view.childCount).forEach { idx ->
+      val child = view.getChildAt(idx)
+      if (child is BpkInteractiveStarRating) {
+        child.onRatingChangedListener = { current, max ->
+          BpkToast.makeText(context, "$current/$max", BpkToast.LENGTH_SHORT).show()
+        }
+      }
     }
   }
 
