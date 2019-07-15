@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Gravity
+import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
@@ -15,7 +17,13 @@ class BpkTextField @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : AppCompatEditText(createContextThemeWrapper(context, attrs, R.attr.bpkTextFieldStyle), attrs, defStyleAttr) {
+) : AppCompatEditText(
+  createContextThemeWrapper(
+    createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.editTextStyle),
+    attrs, R.attr.bpkTextFieldStyle
+  ),
+  attrs,
+  defStyleAttr) {
 
   private var iconTintColor: Int = 0
     set(value) {
@@ -77,8 +85,15 @@ class BpkTextField @JvmOverloads constructor(
       intArrayOf(textFieldColorHintFocused, textFieldColorHintNormal)
     ))
 
-    val padding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+    val padding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+      resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
     setPaddingRelative(padding, padding, padding, padding)
     compoundDrawablePadding = padding
+    gravity = Gravity.START or Gravity.CENTER_VERTICAL
+  }
+
+  override fun onRtlPropertiesChanged(layoutDirection: Int) {
+    super.onRtlPropertiesChanged(layoutDirection)
+    textDirection = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) View.TEXT_DIRECTION_RTL else View.TEXT_DIRECTION_LTR
   }
 }

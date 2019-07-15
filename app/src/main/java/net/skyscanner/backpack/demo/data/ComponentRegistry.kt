@@ -128,6 +128,7 @@ object ComponentRegistry {
         "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
         "With drawables" story NodeData { Story of R.layout.fragment_text_drawables }
       )),
+    "Text Field" story NodeData { Story of R.layout.fragment_text_fields },
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
     "Toast" story NodeData { ToastStory of R.layout.fragment_toasts }
   )
