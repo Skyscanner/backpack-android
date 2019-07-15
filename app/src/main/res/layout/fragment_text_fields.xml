@@ -11,6 +11,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:hint="Input empty" />
+
+  <net.skyscanner.backpack.text.BpkTextField
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
     android:hint="Input empty"
     app:textFieldIconStart="@drawable/bpk_search" />
 

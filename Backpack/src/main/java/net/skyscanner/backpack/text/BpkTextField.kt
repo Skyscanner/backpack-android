@@ -76,7 +76,7 @@ class BpkTextField @JvmOverloads constructor(
       textColor = it.getColor(R.styleable.BpkTextField_textFieldColor, textColor)
       hintNormalColor = it.getColor(R.styleable.BpkTextField_textFieldColorHintNormal, hintNormalColor)
       hintFocusedColor = it.getColor(R.styleable.BpkTextField_textFieldColorHintFocused, hintFocusedColor)
-      iconColor = it.getColor(R.styleable.BpkTextField_textFieldColorHintFocused, iconColor)
+      iconColor = it.getColor(R.styleable.BpkTextField_textFieldColorIcon, iconColor)
       iconStart = it.getDrawable(R.styleable.BpkTextField_textFieldIconStart)
       iconEnd = it.getDrawable(R.styleable.BpkTextField_textFieldIconEnd)
       background = it.getDrawable(R.styleable.BpkTextField_textFieldBackground) ?: background
