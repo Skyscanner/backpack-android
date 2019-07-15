@@ -2,6 +2,7 @@ package net.skyscanner.backpack.text
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
@@ -59,10 +60,12 @@ class BpkTextField @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     BpkText.getFont(context, BpkText.SM, BpkText.Weight.NORMAL).applyTo(paint)
 
-    var textFieldColor = BpkTheme.getColor(context, R.color.bpkGray700)
-    var textFieldColorHintNormal = BpkTheme.getColor(context, R.color.bpkGray300)
-    var textFieldColorHintFocused = BpkTheme.getColor(context, R.color.bpkGray500)
-    var textFieldColorIcon = BpkTheme.getColor(context, R.color.bpkGray700)
+    var textColor = BpkTheme.getColor(context, R.color.bpkGray700)
+    var hintNormalColor = BpkTheme.getColor(context, R.color.bpkGray300)
+    var hintFocusedColor = BpkTheme.getColor(context, R.color.bpkGray500)
+    var iconColor = BpkTheme.getColor(context, R.color.bpkGray700)
+
+    var background: Drawable = ColorDrawable(BpkTheme.getColor(context, R.color.bpkWhite))
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -70,26 +73,29 @@ class BpkTextField @JvmOverloads constructor(
       defStyleAttr,
       0
     ).use {
-      textFieldColor = it.getColor(R.styleable.BpkTextField_textFieldColor, textFieldColor)
-      textFieldColorHintNormal = it.getColor(R.styleable.BpkTextField_textFieldColorHintNormal, textFieldColorHintNormal)
-      textFieldColorHintFocused = it.getColor(R.styleable.BpkTextField_textFieldColorHintFocused, textFieldColorHintFocused)
-      textFieldColorIcon = it.getColor(R.styleable.BpkTextField_textFieldColorHintFocused, textFieldColorIcon)
+      textColor = it.getColor(R.styleable.BpkTextField_textFieldColor, textColor)
+      hintNormalColor = it.getColor(R.styleable.BpkTextField_textFieldColorHintNormal, hintNormalColor)
+      hintFocusedColor = it.getColor(R.styleable.BpkTextField_textFieldColorHintFocused, hintFocusedColor)
+      iconColor = it.getColor(R.styleable.BpkTextField_textFieldColorHintFocused, iconColor)
       iconStart = it.getDrawable(R.styleable.BpkTextField_textFieldIconStart)
       iconEnd = it.getDrawable(R.styleable.BpkTextField_textFieldIconEnd)
+      background = it.getDrawable(R.styleable.BpkTextField_textFieldBackground) ?: background
     }
 
-    iconTintColor = textFieldColorIcon
-    setTextColor(textFieldColor)
+    this.iconTintColor = iconColor
+    setTextColor(textColor)
     setHintTextColor(ColorStateList(
       arrayOf(intArrayOf(android.R.attr.state_focused), intArrayOf()),
-      intArrayOf(textFieldColorHintFocused, textFieldColorHintNormal)
+      intArrayOf(hintFocusedColor, hintNormalColor)
     ))
 
     val padding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
       resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
     setPaddingRelative(padding, padding, padding, padding)
     compoundDrawablePadding = padding
+
     gravity = Gravity.START or Gravity.CENTER_VERTICAL
+    this.background = background
   }
 
   override fun onRtlPropertiesChanged(layoutDirection: Int) {

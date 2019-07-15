@@ -53,6 +53,7 @@
     <attr name="textFieldColorIcon" format="color" />
     <attr name="textFieldIconStart" format="reference" />
     <attr name="textFieldIconEnd" format="reference" />
+    <attr name="textFieldBackground" format="reference" />
   </declare-styleable>
 
   <declare-styleable name="BpkPanel">
