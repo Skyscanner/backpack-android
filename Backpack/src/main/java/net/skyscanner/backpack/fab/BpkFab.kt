@@ -35,14 +35,16 @@ open class BpkFab @JvmOverloads constructor(
       field?.callback = null
       unscheduleDrawable(field)
       field = value
-      if (value != null) {
-        value.callback = this
-        value.setBounds(0, 0, value.intrinsicWidth, value.intrinsicHeight)
-        DrawableCompat.setTint(value, iconColor)
-        if (value.isStateful) {
-          icon?.state = drawableState
+        ?.mutate()
+        ?.let { DrawableCompat.wrap(it) }
+        ?.also {
+          it.setBounds(0, 0, it.intrinsicWidth, it.intrinsicHeight)
+          it.callback = this
+          DrawableCompat.setTint(it, iconColor)
+          if (it.isStateful) {
+            it.state = drawableState
+          }
         }
-      }
       invalidate()
     }
 
