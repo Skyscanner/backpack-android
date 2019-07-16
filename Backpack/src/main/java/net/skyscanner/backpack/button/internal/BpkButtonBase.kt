@@ -1,7 +1,6 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Rect
@@ -21,8 +20,8 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.text.*
 import net.skyscanner.backpack.text.BpkIconSpan
-import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.text.withIcon
 import net.skyscanner.backpack.text.withText
 import net.skyscanner.backpack.util.darken
@@ -272,11 +271,18 @@ abstract class BpkButtonBase internal constructor(
       val transformedText = wrapped?.getTransformation(source, view) ?: source
 
       return _icon?.let {
-        val icon = BpkIconSpan(it).apply { tint = ColorStateList.valueOf(currentTextColor) }
-        if (iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY) {
-          icon withText transformedText
+        val iconSpan = BpkIconSpan(it).apply {
+          tint = textColors
+          state = drawableState
+        }
+        if (iconPosition == ICON_POSITION_ICON_ONLY || transformedText.isEmpty()) {
+          return iconSpan.asSpan()
+        }
+
+        if (iconPosition == ICON_POSITION_START) {
+          iconSpan withText transformedText
         } else {
-          transformedText withIcon icon
+          transformedText withIcon iconSpan
         }
       } ?: transformedText
     }

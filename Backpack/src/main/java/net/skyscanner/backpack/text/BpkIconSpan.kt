@@ -17,7 +17,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 internal class BpkIconSpan(drawable: Drawable) : ImageSpan(DrawableCompat.wrap(drawable.mutate())) {
 
   init {
-    this.drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+    this.drawable.setBounds(0, 0, this.drawable.intrinsicWidth, this.drawable.intrinsicHeight)
   }
 
   constructor(resources: Resources, @DrawableRes id: Int) :
@@ -32,56 +32,46 @@ internal class BpkIconSpan(drawable: Drawable) : ImageSpan(DrawableCompat.wrap(d
       DrawableCompat.setTintList(drawable, value)
     }
 
-  override fun getSize(
-    paint: Paint,
-    text: CharSequence,
-    start: Int,
-    end: Int,
-    fontMetricsInt: Paint.FontMetricsInt?
-  ): Int {
-    val drawable = drawable
-    val rect = drawable.bounds
-    if (fontMetricsInt != null) {
-      val fmPaint = paint.fontMetricsInt
-      val fontHeight = fmPaint.descent - fmPaint.ascent
-      val drHeight = rect.bottom - rect.top
-      val centerY = fmPaint.ascent + fontHeight / 2
-
-      fontMetricsInt.ascent = centerY - drHeight / 2
-      fontMetricsInt.top = fontMetricsInt.ascent
-      fontMetricsInt.bottom = centerY + drHeight / 2
-      fontMetricsInt.descent = fontMetricsInt.bottom
+  var state: IntArray
+    get() = drawable.state
+    set(value) {
+      drawable.state = value
     }
-    return rect.right
+
+  override fun getSize(paint: Paint, text: CharSequence, start: Int, end: Int, out: Paint.FontMetricsInt?): Int {
+    if (out != null) {
+      val fontMetrics = paint.fontMetricsInt
+      val height = fontMetrics.fontHeight
+      val width = (height * drawable.intrinsicWidth) / drawable.intrinsicHeight
+      drawable.setBounds(0, 0, width, height)
+
+      out.ascent = fontMetrics.ascent
+      out.top = fontMetrics.top
+      out.descent = fontMetrics.descent
+      out.bottom = fontMetrics.bottom
+    }
+    return drawable.bounds.width()
   }
 
-  override fun draw(
-    canvas: Canvas,
-    text: CharSequence,
-    start: Int,
-    end: Int,
-    x: Float,
-    top: Int,
-    y: Int,
-    bottom: Int,
-    paint: Paint
-  ) {
-    val drawable = drawable
-    canvas.save()
-    val fmPaint = paint.fontMetricsInt
-    val fontHeight = fmPaint.descent - fmPaint.ascent
-    val centerY = y + fmPaint.descent - fontHeight / 2
-    val transY = centerY - (drawable.bounds.bottom - drawable.bounds.top) / 2
-    canvas.translate(x, transY.toFloat())
+  override fun draw(canvas: Canvas, text: CharSequence, start: Int, end: Int, x: Float, top: Int, y: Int, bottom: Int, paint: Paint) {
+    val count = canvas.save()
+    canvas.translate(x, (y + paint.fontMetricsInt.ascent).toFloat())
     drawable.draw(canvas)
-    canvas.restore()
+    canvas.restoreToCount(count)
   }
 }
 
+private val Paint.FontMetricsInt.fontHeight
+  get() = descent - ascent
+
 internal infix fun CharSequence.withIcon(icon: BpkIconSpan): CharSequence {
-  return SpannableStringBuilder(this).append(" ").append(" ", icon, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+  return SpannableStringBuilder(this).append(' ').append(icon.asSpan())
 }
 
 internal infix fun BpkIconSpan.withText(text: CharSequence): CharSequence {
-  return SpannableStringBuilder().append(" ", this, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE).append(" ").append(text)
+  return SpannableStringBuilder().append(this.asSpan()).append(' ').append(text)
+}
+
+internal fun BpkIconSpan.asSpan(): CharSequence {
+  return SpannableStringBuilder().append(" ", this, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 }
