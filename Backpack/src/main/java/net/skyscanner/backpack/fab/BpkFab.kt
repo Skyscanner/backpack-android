@@ -4,28 +4,22 @@ import android.animation.AnimatorInflater
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.RippleDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.OvalShape
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
-import net.skyscanner.backpack.util.darken
 import net.skyscanner.backpack.util.use
 
 open class BpkFab @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : AppCompatButton(createContextThemeWrapper(context, attrs, R.attr.bpkFabStyle), attrs, defStyleAttr) {
+) : FloatingActionButton(createContextThemeWrapper(context, attrs, R.attr.bpkFabStyle), attrs, defStyleAttr) {
 
   @ColorInt
   private var iconColor: Int = 0
@@ -74,11 +68,7 @@ open class BpkFab @JvmOverloads constructor(
     this.isClickable = isEnabled
     this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
     this.elevation = resources.getDimensionPixelSize(R.dimen.bpkElevationBase).toFloat()
-    this.background = getSelectorDrawable(
-      backgroundColour,
-      pressedColor = darken(backgroundColour),
-      disabledColor = BpkTheme.getColor(context, R.color.bpkGray100)
-    )
+    this.backgroundTintList = getColorSelector(backgroundColour, backgroundColour, BpkTheme.getColor(context, R.color.bpkGray100))
   }
 
   override fun setEnabled(enabled: Boolean) {
@@ -123,22 +113,6 @@ open class BpkFab @JvmOverloads constructor(
       it.draw(canvas)
     }
   }
-
-  private fun getSelectorDrawable(
-    @ColorInt normalColor: Int,
-    @ColorInt pressedColor: Int,
-    @ColorInt disabledColor: Int
-  ) = RippleDrawable(
-    getColorSelector(normalColor, pressedColor, disabledColor),
-    circleDrawable(normalColor),
-    circleDrawable(Color.BLACK)
-  )
-
-  private fun circleDrawable(@ColorInt color: Int) =
-    ShapeDrawable(OvalShape()).apply {
-      paint.color = color
-      paint.style = Paint.Style.FILL
-    }
 
   private fun getColorSelector(
     @ColorInt normalColor: Int,
