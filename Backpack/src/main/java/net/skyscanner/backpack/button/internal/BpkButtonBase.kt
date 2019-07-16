@@ -87,9 +87,9 @@ abstract class BpkButtonBase internal constructor(
     }
 
   init {
-    setSingleLine(true)
-    ellipsize = TextUtils.TruncateAt.END
+    minLines = 1
     maxLines = 1
+    ellipsize = TextUtils.TruncateAt.END
     isAllCaps = true
     gravity = Gravity.CENTER
     isClickable = isEnabled
