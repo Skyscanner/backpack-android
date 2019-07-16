@@ -3,10 +3,8 @@ package net.skyscanner.backpack.fab
 import android.animation.AnimatorInflater
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.BpkTheme
@@ -31,7 +29,6 @@ open class BpkFab @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     var backgroundColour = BpkTheme.getColor(context, R.color.bpkGreen500)
     var iconColour = BpkTheme.getColor(context, R.color.bpkWhite)
-    var icon: Drawable? = null
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -41,10 +38,6 @@ open class BpkFab @JvmOverloads constructor(
     ).use {
       backgroundColour = it.getInt(R.styleable.BpkFab_fabBackgroundColor, backgroundColour)
       iconColour = it.getInt(R.styleable.BpkFab_fabIconColor, iconColour)
-      val iconRes = it.getResourceId(R.styleable.BpkFab_fabIcon, 0)
-      if (iconRes != 0) {
-        icon = ContextCompat.getDrawable(context, iconRes)
-      }
     }
 
     this.imageTintList = ColorStateList.valueOf(iconColour)

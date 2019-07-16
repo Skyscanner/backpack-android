@@ -126,7 +126,6 @@
   </declare-styleable>
 
   <declare-styleable name="BpkFab">
-    <attr name="fabIcon" format="reference" />
     <attr name="fabIconColor" format="color" />
     <attr name="fabBackgroundColor" format="color" />
   </declare-styleable>
