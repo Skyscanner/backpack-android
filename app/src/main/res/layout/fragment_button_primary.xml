@@ -30,7 +30,10 @@
     android:id="@+id/btn_start_icon"
     android:layout_height="wrap_content"
     android:layout_toEndOf="@id/btn_disabled"
-    android:text="With icon"
+    android:text="With icon asdasdasdadasdasdasdad"
+    android:ellipsize="end"
+    android:singleLine="true"
+    android:lines="1"
     app:buttonIconPosition="end"
     app:buttonIcon="@drawable/bpk_long_arrow_right"
     app:buttonType="primary"/>

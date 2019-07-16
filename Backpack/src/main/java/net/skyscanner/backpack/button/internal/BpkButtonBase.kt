@@ -20,7 +20,10 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.text.*
+import net.skyscanner.backpack.text.BpkIconSpan
+import net.skyscanner.backpack.text.asSpan
+import net.skyscanner.backpack.text.withText
 import net.skyscanner.backpack.util.*
 
 internal const val ICON_POSITION_START = 0
