@@ -30,10 +30,7 @@
     android:id="@+id/btn_start_icon"
     android:layout_height="wrap_content"
     android:layout_toEndOf="@id/btn_disabled"
-    android:text="With icon asdasdasdadasdasdasdad"
-    android:ellipsize="end"
-    android:singleLine="true"
-    android:lines="1"
+    android:text="With icon"
     app:buttonIconPosition="end"
     app:buttonIcon="@drawable/bpk_long_arrow_right"
     app:buttonType="primary"/>
@@ -57,6 +54,18 @@
     android:layout_below="@id/btn_default"
     android:layout_height="wrap_content"
     app:buttonIconPosition="icon_only"
+    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonType="primary"/>
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:layout_margin="@dimen/bpkSpacingSm"
+    android:layout_width="wrap_content"
+    android:id="@+id/btn_start_icon_long"
+    android:layout_height="wrap_content"
+    android:layout_toEndOf="@id/btn_icon"
+    android:layout_below="@id/btn_default"
+    android:text="@string/stub"
+    app:buttonIconPosition="end"
     app:buttonIcon="@drawable/bpk_long_arrow_right"
     app:buttonType="primary"/>
 
