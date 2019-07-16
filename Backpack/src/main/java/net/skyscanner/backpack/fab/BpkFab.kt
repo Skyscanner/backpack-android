@@ -3,12 +3,10 @@ package net.skyscanner.backpack.fab
 import android.animation.AnimatorInflater
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.BpkTheme
@@ -19,26 +17,12 @@ open class BpkFab @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : FloatingActionButton(createContextThemeWrapper(context, attrs, R.attr.bpkFabStyle), attrs, defStyleAttr) {
-
-  @ColorInt
-  private var iconColor: Int = 0
-
-  var icon: Drawable? = null
-    set(value) {
-      field?.callback = null
-      unscheduleDrawable(field)
-      field = value
-      if (value != null) {
-        value.callback = this
-        value.setBounds(0, 0, value.intrinsicWidth, value.intrinsicHeight)
-        DrawableCompat.setTint(value, iconColor)
-        if (value.isStateful) {
-          icon?.state = drawableState
-        }
-      }
-      invalidate()
-    }
+) : FloatingActionButton(
+  createContextThemeWrapper(
+    createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.floatingActionButtonStyle),
+    attrs, R.attr.bpkFabStyle
+  ),
+  attrs, defStyleAttr) {
 
   init {
     initialize(attrs, defStyleAttr)
@@ -63,8 +47,7 @@ open class BpkFab @JvmOverloads constructor(
       }
     }
 
-    this.iconColor = iconColour
-    this.icon = icon
+    this.imageTintList = ColorStateList.valueOf(iconColour)
     this.isClickable = isEnabled
     this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
     this.elevation = resources.getDimensionPixelSize(R.dimen.bpkElevationBase).toFloat()
@@ -74,44 +57,6 @@ open class BpkFab @JvmOverloads constructor(
   override fun setEnabled(enabled: Boolean) {
     super.setEnabled(enabled)
     isClickable = enabled
-  }
-
-  override fun verifyDrawable(who: Drawable) =
-    super.verifyDrawable(who) || icon == who
-
-  override fun jumpDrawablesToCurrentState() {
-    super.jumpDrawablesToCurrentState()
-    icon?.jumpToCurrentState()
-  }
-
-  override fun drawableStateChanged() {
-    super.drawableStateChanged()
-    icon?.let {
-      if (it.isStateful && it.setState(drawableState)) {
-        invalidateDrawable(it)
-      }
-    }
-  }
-
-  override fun drawableHotspotChanged(x: Float, y: Float) {
-    super.drawableHotspotChanged(x, y)
-    icon?.setHotspot(x, y)
-  }
-
-  override fun onDraw(canvas: Canvas) {
-    super.onDraw(canvas)
-    icon?.let {
-      val bounds = it.bounds
-
-      val halfWidth = bounds.width() / 2f
-      val halfHeight = bounds.height() / 2f
-
-      val cX = width / 2f
-      val cY = height / 2f
-
-      canvas.translate(cX - halfWidth, cY - halfHeight)
-      it.draw(canvas)
-    }
   }
 
   private fun getColorSelector(
