@@ -5,6 +5,11 @@
 **Added**:
 
 - `BpkTextField`
+  
+**Fixed**:
+
+- `BpkButton`, `BpkButtonLink`
+  - fixed `ellipsize` behaviour.
 
 ## How to write a good changelog entry
 
