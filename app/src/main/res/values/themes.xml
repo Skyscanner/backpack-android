@@ -35,6 +35,7 @@
     <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
 
     <item name="bpkTextStyle">@style/LondonThemeText</item>
+    <item name="bpkTextFieldStyle">@style/LondonThemeTextField</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#002E61</item>
@@ -121,6 +122,14 @@
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
 
+  <style name="LondonThemeTextField">
+    <item name="textFieldColor">?bpkPrimaryColor</item>
+    <item name="textFieldColorHintNormal">#9dbde6</item>
+    <item name="textFieldColorHintFocused">#6392ce</item>
+    <item name="textFieldColorIcon">?bpkPrimaryColor</item>
+    <item name="textFieldBackground">@color/bpkWhite</item>
+  </style>
+
   <!-- London theme end -->
 
 
@@ -149,6 +158,7 @@
     <item name="bpkFabStyle">@style/DohaThemeFab</item>
     <item name="bpkButtonLinkStyle">@style/DohaThemeButtonLink</item>
     <item name="bpkCheckboxStyle">@style/DohaThemeCheckbox</item>
+    <item name="bpkTextFieldStyle">@style/DohaThemeTextField</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
@@ -225,6 +235,14 @@
     <item name="horizontalNavTextColor">?bpkGray100Color</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
+  </style>
+
+  <style name="DohaThemeTextField">
+    <item name="textFieldColor">?bpkPrimaryColor</item>
+    <item name="textFieldColorHintNormal">#ffd677</item>
+    <item name="textFieldColorHintFocused">#ffca4c</item>
+    <item name="textFieldColorIcon">?bpkPrimaryColor</item>
+    <item name="textFieldBackground">@color/bpkWhite</item>
   </style>
 
   <!-- Doha theme end -->

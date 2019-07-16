@@ -46,6 +46,16 @@
     <attr name="fontFamilyHeavy" format="reference"/>
   </declare-styleable>
 
+  <declare-styleable name="BpkTextField">
+    <attr name="textFieldColor" format="color" />
+    <attr name="textFieldColorHintNormal" format="color" />
+    <attr name="textFieldColorHintFocused" format="color" />
+    <attr name="textFieldColorIcon" format="color" />
+    <attr name="textFieldBackground" format="reference" />
+    <attr name="textFieldIconStart" format="reference" />
+    <attr name="textFieldIconEnd" format="reference" />
+  </declare-styleable>
+
   <declare-styleable name="BpkPanel">
     <attr name="padding" format="boolean" />
   </declare-styleable>
@@ -167,4 +177,5 @@
   <attr name="bpkCheckboxStyle" format="reference"/>
   <attr name="bpkHorizontalNavStyle" format="reference"/>
   <attr name="bpkHorizontalNavStyleAlternate" format="reference"/>
+  <attr name="bpkTextFieldStyle" format="reference"/>
 </resources>

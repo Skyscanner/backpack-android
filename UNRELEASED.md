@@ -1,6 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
+  
+**Added**:
+
+- `BpkTextField`
 
 ## How to write a good changelog entry
 
