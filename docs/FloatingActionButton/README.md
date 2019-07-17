@@ -14,7 +14,7 @@ Example of a Floating Action Button in XML
 <net.skyscanner.backpack.fab.BpkFab
   android:layout_width="56dp"
   android:layout_height="56dp"
-  app:fabIcon="@drawable/bpk_search" />
+  android:src="@drawable/bpk_search" />
 ```
 
 Example of a Floating Action Button in Kotlin
@@ -24,7 +24,7 @@ import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.fab.BpkFab
 
 BpkFab(context).apply {
-  icon = ContextCompat.getDrawable(context, R.drawable.bpk_search)
+  setImageResource(R.drawable.bpk_search)
 }
 ```
 
