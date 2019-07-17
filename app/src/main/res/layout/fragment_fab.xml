@@ -10,18 +10,18 @@
     android:layout_width="56dp"
     android:layout_height="56dp"
     android:layout_margin="@dimen/bpkSpacingLg"
-    app:fabIcon="@drawable/bpk_search" />
+    android:src="@drawable/bpk_search" />
 
   <net.skyscanner.backpack.fab.BpkFab
     android:layout_width="56dp"
     android:layout_height="56dp"
     android:layout_margin="@dimen/bpkSpacingLg"
-    app:fabIcon="@drawable/bpk_star" />
+    android:src="@drawable/bpk_star" />
 
   <net.skyscanner.backpack.fab.BpkFab
     android:layout_width="56dp"
     android:layout_height="56dp"
     android:layout_margin="@dimen/bpkSpacingLg"
-    app:fabIcon="@drawable/bpk_flight" />
+    android:src="@drawable/bpk_flight" />
 
 </LinearLayout>

@@ -2,10 +2,6 @@
 
 > Place your changes below this line.
   
-**Added**:
-
-- `BpkTextField`
-  
 **Fixed**:
 
 - `BpkButton`, `BpkButtonLink`
