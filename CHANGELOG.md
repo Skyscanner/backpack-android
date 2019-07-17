@@ -2,6 +2,17 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 10.0.0
+
+**Added**:
+
+- `BpkTextField`
+
+**Breaking:**
+
+- `BpkFab`:
+  - Changed base class to `FloatingActionButton`
+
 # 9.11.0
 
 **Added:**

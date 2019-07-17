@@ -1,15 +1,6 @@
 # Unreleased
 
 > Place your changes below this line.
-  
-**Added**:
-
-- `BpkTextField`
-
-**Breaking:**
-
-- `BpkFab`:
-  - Changed base class to `FloatingActionButton`
 
 ## How to write a good changelog entry
 
