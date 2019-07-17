@@ -9,7 +9,7 @@
 **Fixed**:
 
 - `BpkButton`, `BpkButtonLink`
-  - fixed `ellipsize` behaviour.
+  - fixed icons alignment when text is too long.
 
 ## How to write a good changelog entry
 
