@@ -20,6 +20,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.*
+import kotlin.math.max
 
 internal const val ICON_POSITION_START = 0
 internal const val ICON_POSITION_END = 1
@@ -34,8 +35,6 @@ abstract class BpkButtonBase internal constructor(
 ) : AppCompatButton(wrapContextWithDefaults(context), attrs, defStyleAttr) {
 
   private var isInitialized = false
-
-  private val textMeasurement: TextMeasurement by lazy { TextMeasurement(paint) }
   internal val tokens = ButtonTokens(this.context)
 
   private val font = BpkText.getFont(this.context, BpkText.SM, BpkText.Weight.EMPHASIZED)
@@ -208,9 +207,11 @@ abstract class BpkButtonBase internal constructor(
     val leftDrawable = compoundDrawables[0]
     val rightDrawable = compoundDrawables[2]
     if (leftDrawable == null && rightDrawable == null) return
+    val layout = layout ?: return
+    if (layout.lineCount == 0) return
 
-    val textWidth = textMeasurement.getTextWidth(text.toString())
-    val iconPadding = Math.max(compoundDrawablePadding, 1)
+    val textWidth = layout.getLineWidth(0).toInt()
+    val iconPadding = max(compoundDrawablePadding, 1)
 
     val paddingSize = if (leftDrawable != null && rightDrawable != null) {
       (width - leftDrawable.intrinsicWidth - rightDrawable.intrinsicWidth - textWidth - iconPadding * 4) / 2
@@ -222,16 +223,16 @@ abstract class BpkButtonBase internal constructor(
 
     if (relative) {
       super.setPaddingRelative(
-        Math.max(originalStartPadding, paddingSize),
+        max(originalStartPadding, paddingSize),
         paddingTop,
-        Math.max(originalEndPadding, paddingSize),
+        max(originalEndPadding, paddingSize),
         paddingBottom
       )
     } else {
       super.setPadding(
-        Math.max(originalStartPadding, paddingSize),
+        max(originalStartPadding, paddingSize),
         paddingTop,
-        Math.max(originalEndPadding, paddingSize),
+        max(originalEndPadding, paddingSize),
         paddingBottom
       )
     }
