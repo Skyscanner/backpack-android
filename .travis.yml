@@ -71,7 +71,7 @@ script:
   - TEST_METHOD=screenshot ./scripts/ci-tests.sh
 
   - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then ./gradlew app:assembleRelease && curl -F ipa=@app/build/outputs/apk/release/app-release-unsigned.apk -F status=2 -F strategy=replace -H X-HockeyAppToken:$HOCKEYAPP_TOKEN https://rink.hockeyapp.net/api/2/apps/upload ; fi
-
+  - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then ./scripts/compile-bridges.sh ; fi
 
 after_script:
   - greenkeeper-lockfile-upload
