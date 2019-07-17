@@ -66,7 +66,7 @@ if [ $? -ne 0 ]; then
   echo "\nCompilation failed, adding new issue...\n"
 
   issue_title="Version $bpk_version of backpack-android is failing to compile with native bridges"
-  issue_body="Version $bpk_version of backpack-android failed to compile with latest bridges, check out this build for for information $TRAVIS_BUILD_WEB_URL"
+  issue_body="Version $bpk_version of backpack-android failed to compile with latest bridges, check out this build for more information $TRAVIS_BUILD_WEB_URL"
   
   curl -f -H "Authorization: token $BACKPACK_BOT_COMMENT_TOKEN" -X POST -d "{\"body\":\"$issue_body\", \"title\":\"$issue_title\"}" https://api.github.com/repos/Skyscanner/backpack-react-native/issues > /dev/null
 else
