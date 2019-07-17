@@ -36,8 +36,8 @@ open class BpkFab @JvmOverloads constructor(
       defStyleAttr,
       0
     ).use {
-      backgroundColour = it.getInt(R.styleable.BpkFab_fabBackgroundColor, backgroundColour)
-      iconColour = it.getInt(R.styleable.BpkFab_fabIconColor, iconColour)
+      backgroundColour = it.getColor(R.styleable.BpkFab_fabBackgroundColor, backgroundColour)
+      iconColour = it.getColor(R.styleable.BpkFab_fabIconColor, iconColour)
     }
 
     this.imageTintList = ColorStateList.valueOf(iconColour)
