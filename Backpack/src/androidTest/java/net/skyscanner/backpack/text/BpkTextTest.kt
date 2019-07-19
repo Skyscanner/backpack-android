@@ -12,6 +12,7 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.unsafeLazy
 import org.junit.Before
@@ -24,6 +25,7 @@ class BpkTextTest {
   @Before
   fun setUp() {
     context = InstrumentationRegistry.getInstrumentation().targetContext
+    BpkTheme.applyDefaultsToContext(context)
   }
 
   @Test
@@ -164,7 +166,6 @@ class BpkTextTest {
 
       val font = getFont.invoke(context)
 
-      Assert.assertFalse(message, font.isCustomFont)
       Assert.assertEquals(message, Typeface.create(fontFamily, Typeface.NORMAL), font.typeface)
       Assert.assertEquals(message, font.fontSize, ResourcesUtil.dpToPx(fontSize, context))
       Assert.assertEquals(message, font.letterSpacing, letterSpacing)
@@ -182,7 +183,6 @@ class BpkTextTest {
 
       val font = getFont.invoke(withCustomFont)
 
-      Assert.assertTrue(message, font.isCustomFont)
       Assert.assertEquals(message, ResourcesCompat.getFont(withCustomFont, net.skyscanner.backpack.test.R.font.shadows_into_light), font.typeface)
       Assert.assertEquals(message, font.fontSize, ResourcesUtil.dpToPx(fontSize, context))
       Assert.assertEquals(message, font.letterSpacing, null)
