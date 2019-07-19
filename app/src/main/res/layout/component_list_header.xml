@@ -10,5 +10,5 @@
   android:layout_marginBottom="@dimen/bpkSpacingBase"
   android:textAllCaps="true"
   android:textColor="@color/bpkGray500"
-  app:emphasize="true"
+  app:weight="emphasized"
   app:textStyle="sm" />

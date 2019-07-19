@@ -59,7 +59,7 @@ class BpkTextTest {
 
     Assert.assertEquals(expectedTextSizeSp, textSizeSp)
     Assert.assertEquals(testString, text.text)
-    Assert.assertEquals(true, text.emphasize)
+    Assert.assertEquals(BpkText.Weight.EMPHASIZED, text.weight)
   }
 
   @Test
@@ -78,41 +78,6 @@ class BpkTextTest {
 
     Assert.assertEquals(expectedTextSizeSp, textSizeSp)
     Assert.assertEquals(testString, text.text)
-  }
-
-  @Test
-  fun emphasized_old() {
-    val text = BpkText(context).apply {
-      text = testString
-      emphasize = true
-    }
-
-    val textSizePx = text.textSize
-    val textSizeSp = textSizePx / context.resources.displayMetrics.scaledDensity
-
-    val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextBaseEmphasized, R.styleable.BpkTextStyle)
-    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) / context.resources.displayMetrics.scaledDensity
-
-    Assert.assertEquals(expectedTextSizeSp, textSizeSp)
-    Assert.assertEquals(testString, text.text)
-    Assert.assertEquals(true, text.emphasize)
-  }
-
-  @Test
-  fun weight_emphasized_compatibility() {
-    val text = BpkText(context).apply {
-      text = testString
-      weight = BpkText.Weight.EMPHASIZED
-    }
-
-    Assert.assertTrue(text.emphasize)
-
-    text.weight = BpkText.Weight.NORMAL
-    Assert.assertFalse(text.emphasize)
-
-    text.emphasize = true
-    Assert.assertTrue(text.emphasize)
-    Assert.assertEquals(BpkText.Weight.EMPHASIZED, text.weight)
   }
 
   @Test(expected = IllegalStateException::class)

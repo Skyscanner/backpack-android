@@ -79,21 +79,6 @@ open class BpkText @JvmOverloads constructor(
 
   private val fontResolver = FontFamilyResolver(this.context)
 
-  /**
-   * Sets the text style to emphasized.
-   *
-   * @Deprecated use [BpkText.weight] instead.
-   */
-  @Deprecated("Use weight instead")
-  var emphasize: Boolean = false
-    get() = weight == Weight.EMPHASIZED || field
-    set(value) {
-      field = value
-      if (value) {
-        weight = Weight.EMPHASIZED
-      }
-    }
-
   init {
     initialize(attrs, defStyleAttr)
     setup()
@@ -108,15 +93,11 @@ open class BpkText @JvmOverloads constructor(
     ).use {
       _textStyle = it.getInt(R.styleable.BpkText_textStyle, BASE)
       val weightArg = it.getInt(R.styleable.BpkText_weight, -1)
-      if (weightArg == -1) {
-        // if weight has not been set we still read the emphasize property
-        emphasize = it.getBoolean(R.styleable.BpkText_emphasize, false)
-      } else {
+      if (weightArg != -1) {
         _weight = Weight.values()[weightArg]
       }
 
       // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
-
       var start = compoundDrawablesRelative[0] ?: compoundDrawables[0]
       val top = compoundDrawablesRelative[1] ?: compoundDrawables[1]
       var end = compoundDrawablesRelative[2] ?: compoundDrawables[2]
