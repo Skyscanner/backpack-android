@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.IconsAdapter.ViewHolder
 
-class IconsAdapter(private var icons: ArrayList<Drawable>) : RecyclerView.Adapter<ViewHolder>() {
+class IconsAdapter(private var icons: ArrayList<Drawable>, private var names: ArrayList<String>) : RecyclerView.Adapter<ViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val view = LayoutInflater.from(parent.context)
@@ -19,6 +20,9 @@ class IconsAdapter(private var icons: ArrayList<Drawable>) : RecyclerView.Adapte
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.img.setImageDrawable(icons[position])
+    holder.img.setOnClickListener {
+      Toast.makeText(holder.itemView.context, names[position], Toast.LENGTH_SHORT).show()
+    }
   }
 
   override fun getItemCount(): Int {
