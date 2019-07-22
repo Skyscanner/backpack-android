@@ -39,6 +39,7 @@
       <enum name="heavy" value="2" />
     </attr>
     <attr name="drawableTint" format="reference" />
+    <attr name="android:textColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkTextField">

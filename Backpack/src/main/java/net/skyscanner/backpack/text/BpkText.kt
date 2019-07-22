@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.text
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.graphics.Color
 import android.graphics.PorterDuffColorFilter
@@ -77,7 +78,7 @@ open class BpkText @JvmOverloads constructor(
       setup()
     }
 
-  private val fontResolver = FontFamilyResolver(this.context)
+  private var _textColour: ColorStateList? = null
 
   init {
     initialize(attrs, defStyleAttr)
@@ -95,6 +96,10 @@ open class BpkText @JvmOverloads constructor(
       val weightArg = it.getInt(R.styleable.BpkText_weight, -1)
       if (weightArg != -1) {
         _weight = Weight.values()[weightArg]
+      }
+
+      if (it.hasValue(R.styleable.BpkText_android_textColor)) {
+        _textColour = it.getColorStateList(R.styleable.BpkText_android_textColor)
       }
 
       // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
@@ -133,7 +138,7 @@ open class BpkText @JvmOverloads constructor(
     }
 
     TextViewCompat.setTextAppearance(this, textAppearance)
-    fontResolver.getForWeight(weight)?.let { this.typeface = it }
+    _textColour?.let(::setTextColor)
   }
 
   data class FontDefinition(

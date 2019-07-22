@@ -38,12 +38,6 @@
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#002E61</item>
-
-    <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
-    <item name="bpkFontFamilyEmphasized">?bpkFontFamilyBase</item>
-    <item name="bpkFontFamilyHeavy">?bpkFontFamilyBase</item>
-
-    <item name="bpkTextBaseAppearance">@style/bpkTextBase</item>
   </style>
 
   <style name="LondonThemeBpkStarRating" parent="">
@@ -241,8 +235,8 @@
 
   <style name="CustomTextStyle">
     <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
-    <item name="bpkFontFamilyEmphasized">?bpkFontFamilyBase</item>
-    <item name="bpkFontFamilyHeavy">?bpkFontFamilyBase</item>
+    <item name="bpkFontFamilyEmphasized">@font/shadows_into_light</item>
+    <item name="bpkFontFamilyHeavy">@font/shadows_into_light</item>
 
     <item name="bpkTextBaseAppearance">@style/bpkTextBase</item>
     <item name="bpkTextCapsAppearance">@style/bpkTextCaps</item>
