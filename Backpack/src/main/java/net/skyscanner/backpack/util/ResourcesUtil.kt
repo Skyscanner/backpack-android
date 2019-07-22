@@ -3,6 +3,8 @@ package net.skyscanner.backpack.util
 import android.content.Context
 import android.content.res.Resources
 import android.content.res.TypedArray
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.util.DisplayMetrics
 import android.view.View
 import androidx.annotation.ColorInt
@@ -49,3 +51,7 @@ internal inline fun <R> TypedArray?.use(block: (TypedArray) -> R): R? {
     this?.recycle()
   }
 }
+
+@Suppress("UNCHECKED_CAST")
+internal operator fun <T : Drawable> LayerDrawable.get(index: Int) =
+  getDrawable(index) as T

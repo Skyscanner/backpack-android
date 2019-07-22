@@ -41,4 +41,13 @@
     android:layoutDirection="rtl"
     android:text="Default RTL" />
 
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:ratingTitle="Title dsfs sdfsd  fs sdfdsfs sdf sfs fsdf "
+    app:ratingSubtitle="Subtitle"
+    app:ratingSize="icon"
+    app:ratingIcon="@drawable/bpk_star"
+    app:ratingValue="9.0"/>
+
 </LinearLayout>
