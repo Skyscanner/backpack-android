@@ -2,6 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 10.0.1
+
+**Fixed**:
+
+- `BpkButton`, `BpkButtonLink`
+  - fixed icons alignment when text is too long.
+- `BpkTextField`
+  - open for extension
+  
 # 10.0.0
 
 **Added**:

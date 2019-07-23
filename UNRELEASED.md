@@ -1,11 +1,6 @@
 # Unreleased
 
 > Place your changes below this line.
-  
-**Fixed**:
-
-- `BpkButton`, `BpkButtonLink`
-  - fixed icons alignment when text is too long.
 
 ## How to write a good changelog entry
 

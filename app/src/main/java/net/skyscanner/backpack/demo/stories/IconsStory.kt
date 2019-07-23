@@ -17,7 +17,7 @@ private const val PLATFORM_VD_CLAZZ = "android.graphics.drawable.VectorDrawable"
 class IconsStory : Story() {
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-      return inflater.inflate(R.layout.fragment_all_icons, container, false)
+    return inflater.inflate(R.layout.fragment_all_icons, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,6 +25,7 @@ class IconsStory : Story() {
     val iconsGridView: RecyclerView = view.findViewById(R.id.lst_icons)
 
     val drawableResources = ArrayList<Drawable>()
+    val iconNames = ArrayList<String>()
 
     for (field in R.drawable::class.java.fields) {
       if (field.name.startsWith("bpk_")) {
@@ -32,6 +33,7 @@ class IconsStory : Story() {
           ResourcesCompat.getDrawable(resources, field.getInt(null), null)?.apply {
             if (isVectorDrawable(this)) {
               drawableResources.add(this)
+              iconNames.add(field.name)
             }
           }
         } catch (e: Exception) {
@@ -41,7 +43,7 @@ class IconsStory : Story() {
     }
 
     iconsGridView.layoutManager = GridLayoutManager(context, 10)
-    iconsGridView.adapter = IconsAdapter(drawableResources)
+    iconsGridView.adapter = IconsAdapter(drawableResources, iconNames)
   }
 
   private fun isVectorDrawable(d: Drawable): Boolean {

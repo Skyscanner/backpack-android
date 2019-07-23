@@ -14,7 +14,7 @@ import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
-class BpkTextField @JvmOverloads constructor(
+open class BpkTextField @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
