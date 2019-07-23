@@ -2,7 +2,6 @@ package net.skyscanner.backpack.rating
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.TextUtils
 import android.text.style.ForegroundColorSpan
@@ -20,6 +19,7 @@ import net.skyscanner.backpack.rating.internal.RatingSelectors
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.BpkTheme
+import net.skyscanner.backpack.util.append
 import net.skyscanner.backpack.util.createContextThemeWrapper
 
 open class BpkRating @JvmOverloads constructor(
@@ -94,8 +94,7 @@ open class BpkRating @JvmOverloads constructor(
   }
 
   private val descriptionView = BpkText(this.context).apply {
-    setTextColor(BpkTheme.getColor(this.context, R.color.bpkGray500))
-    appearance.title.applyTo(this)
+    setTextColor(BpkTheme.getColor(this.context, R.color.bpkGray900))
     maxLines = 2
     ellipsize = TextUtils.TruncateAt.END
     gravity = Gravity.START
@@ -144,7 +143,7 @@ open class BpkRating @JvmOverloads constructor(
 
   private fun updateScore() {
     val score = score()
-    val tintList = selectors.color(score)
+    val tintList = selectors.colors(score)
     ViewCompat.setBackgroundTintList(badge, tintList)
 
     if (appearance.size == Size.Icon) {
@@ -170,16 +169,13 @@ open class BpkRating @JvmOverloads constructor(
     val subtitle = subtitle(score)
     val subtitleAppearance = appearance.subtitle
 
-    if (subtitleAppearance != null && !subtitle.isNullOrEmpty()) {
-      descriptionView.text = SpannableStringBuilder(title(score))
-        .append('\n')
-        .apply {
-          val start = length
-          append(subtitle, BpkFontSpan(subtitleAppearance), Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-          setSpan(ForegroundColorSpan(resources.getColor(R.color.bpkGray500)), start, length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+    descriptionView.text = SpannableStringBuilder()
+      .append(title(score), BpkFontSpan(appearance.title))
+      .also {
+        if (subtitleAppearance != null && !subtitle.isNullOrEmpty()) {
+          it.append("\n")
+          it.append(subtitle, BpkFontSpan(subtitleAppearance), ForegroundColorSpan(BpkTheme.getColor(context, R.color.bpkGray500)))
         }
-    } else {
-      descriptionView.text = title(score)
-    }
+      }
   }
 }

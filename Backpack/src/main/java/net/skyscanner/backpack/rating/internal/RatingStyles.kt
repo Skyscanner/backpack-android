@@ -53,7 +53,7 @@ internal enum class RatingStyles(
   Large(
     id = 4,
     size = BpkRating.Size.Large,
-    badgeSize = R.dimen.bpk_rating_score_badge_size_small,
+    badgeSize = R.dimen.bpk_rating_score_badge_size_large,
     scoreSize = BpkText.LG,
     titleSize = BpkText.LG,
     subtitleSize = BpkText.BASE,

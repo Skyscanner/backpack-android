@@ -2,7 +2,6 @@ package net.skyscanner.backpack.horisontalnav
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.util.AttributeSet
 import androidx.annotation.AttrRes
@@ -154,8 +153,9 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   }
 
   override fun addTab(tab: Tab, position: Int, setSelected: Boolean) {
-    if (tab.text != null) {
-      tab.text = SpannableStringBuilder().append(tab.text, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+    val tabText = tab.text
+    if (tabText != null) {
+      tab.text = SpannableStringBuilder().append(tabText, fontSpan)
     }
     super.addTab(tab, position, setSelected)
   }
