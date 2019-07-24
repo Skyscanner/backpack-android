@@ -148,7 +148,16 @@ class BpkTextTest {
 
       val font = getFont.invoke(withCustomFont)
 
-      Assert.assertEquals(message, ResourcesCompat.getFont(withCustomFont, net.skyscanner.backpack.test.R.font.shadows_into_light), font.typeface)
+      val expectedFont = when {
+        message.contains("Emphasized") ->
+          Typeface.create("cursive", Typeface.NORMAL)
+        message.contains("Heavy") ->
+          Typeface.create("casual", Typeface.NORMAL)
+        else ->
+          ResourcesCompat.getFont(withCustomFont, net.skyscanner.backpack.test.R.font.shadows_into_light)
+      }
+
+      Assert.assertEquals(message, expectedFont, font.typeface)
       Assert.assertEquals(message, font.fontSize, ResourcesUtil.dpToPx(fontSize, context))
       Assert.assertEquals(message, font.letterSpacing, null)
     }
