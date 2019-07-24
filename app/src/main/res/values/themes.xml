@@ -36,6 +36,7 @@
 
     <item name="bpkTextStyle">@style/LondonThemeText</item>
     <item name="bpkTextFieldStyle">@style/LondonThemeTextField</item>
+    <item name="bpkRatingStyle">@style/LondonThemeRating</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#002E61</item>
@@ -130,6 +131,10 @@
     <item name="textFieldBackground">@color/bpkWhite</item>
   </style>
 
+  <style name="LondonThemeRating">
+    <item name="ratingColor">@drawable/london_rating_colors</item>
+  </style>
+
   <!-- London theme end -->
 
 
@@ -159,6 +164,7 @@
     <item name="bpkButtonLinkStyle">@style/DohaThemeButtonLink</item>
     <item name="bpkCheckboxStyle">@style/DohaThemeCheckbox</item>
     <item name="bpkTextFieldStyle">@style/DohaThemeTextField</item>
+    <item name="bpkRatingStyle">@style/DohaThemeRating</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
@@ -243,6 +249,10 @@
     <item name="textFieldColorHintFocused">#ffca4c</item>
     <item name="textFieldColorIcon">?bpkPrimaryColor</item>
     <item name="textFieldBackground">@color/bpkWhite</item>
+  </style>
+
+  <style name="DohaThemeRating">
+    <item name="ratingColor">@drawable/doha_rating_colors</item>
   </style>
 
   <!-- Doha theme end -->
