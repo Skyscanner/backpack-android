@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 10.0.2
+
+## Changed
+
+- New design for the `trips` icon.
+
 # 10.0.1
 
 **Fixed**:
@@ -10,7 +16,7 @@
   - fixed icons alignment when text is too long.
 - `BpkTextField`
   - open for extension
-  
+
 # 10.0.0
 
 **Added**:
@@ -114,7 +120,7 @@
 # 9.5.0
 
 **Added:**
-- `BpkFab` 
+- `BpkFab`
 
 # 9.4.1
 
