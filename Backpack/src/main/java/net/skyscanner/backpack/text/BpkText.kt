@@ -171,7 +171,7 @@ private fun internalGetFont(context: Context, textStyle: Int = BpkText.BASE, wei
 
   textStyleAttributes.recycle()
 
-  return FontFamilyResolver(context).getForWeight(weight)?.let {
+  return FontFamilyResolver(context, weight)?.let {
     BpkText.FontDefinition(it, fontSize, letterSpacing)
   } ?: throw IllegalStateException("Bpk font not configured correctly")
 }

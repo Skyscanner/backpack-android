@@ -7,16 +7,16 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.text.FontCache
 
-class FontFamilyResolver(val context: Context) {
+object FontFamilyResolver {
 
-  private val fontResources by lazy {
+  private fun getFontResources(context: Context): List<Typeface?> {
     val fontAttributes = intArrayOf(
       R.attr.bpkFontFamilyBase,
       R.attr.bpkFontFamilyEmphasized,
       R.attr.bpkFontFamilyHeavy
     )
 
-    fontAttributes.map {
+    return fontAttributes.map {
       val outValue = TypedValue()
       val resolved = context.theme.resolveAttribute(it, outValue, true)
 
@@ -30,8 +30,8 @@ class FontFamilyResolver(val context: Context) {
     }
   }
 
-  fun getForWeight(fontWeight: BpkText.Weight): Typeface? {
-    val (fontBase, fontEmphasized, fontHeavy) = fontResources
+  operator fun invoke(context: Context, fontWeight: BpkText.Weight): Typeface? {
+    val (fontBase, fontEmphasized, fontHeavy) = getFontResources(context)
 
     return when (fontWeight) {
       BpkText.Weight.EMPHASIZED -> fontEmphasized

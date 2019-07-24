@@ -26,36 +26,34 @@ class FontFamilyResolverTest {
 
   @Test
   fun test_default_font() {
-    val subject = FontFamilyResolver(BpkTheme.wrapContextWithDefaults(context))
+    val testContext = BpkTheme.wrapContextWithDefaults(context)
 
     val serif = Typeface.create("sans-serif", Typeface.NORMAL)
     val serifMedium = Typeface.create("sans-serif-medium", Typeface.NORMAL)
     val serifBlack = Typeface.create("sans-serif-black", Typeface.NORMAL)
 
-    Assert.assertEquals(serif, subject.getForWeight(BpkText.Weight.NORMAL))
-    Assert.assertEquals(serifMedium, subject.getForWeight(BpkText.Weight.EMPHASIZED))
-    Assert.assertEquals(serifBlack, subject.getForWeight(BpkText.Weight.HEAVY))
+    Assert.assertEquals("normal", serif, FontFamilyResolver(testContext, BpkText.Weight.NORMAL))
+    Assert.assertEquals("emphasized", serifMedium, FontFamilyResolver(testContext, BpkText.Weight.EMPHASIZED))
+    Assert.assertEquals("heavy", serifBlack, FontFamilyResolver(testContext, BpkText.Weight.HEAVY))
   }
 
   @Test
   fun test_custom_font() {
-    val subject = FontFamilyResolver(ContextThemeWrapper(context, R.style.TestTextCustomFont))
+    val testContext = ContextThemeWrapper(context, R.style.TestTextCustomFont)
 
     val shadows = FontCache[R.font.shadows_into_light, context]
     val cursive = Typeface.create("cursive", Typeface.NORMAL)
     val casual = Typeface.create("casual", Typeface.NORMAL)
 
-    Assert.assertEquals(shadows, subject.getForWeight(BpkText.Weight.NORMAL))
-    Assert.assertEquals(cursive, subject.getForWeight(BpkText.Weight.EMPHASIZED))
-    Assert.assertEquals(casual, subject.getForWeight(BpkText.Weight.HEAVY))
+    Assert.assertEquals("normal", shadows, FontFamilyResolver(testContext, BpkText.Weight.NORMAL))
+    Assert.assertEquals("emphasized", cursive, FontFamilyResolver(testContext, BpkText.Weight.EMPHASIZED))
+    Assert.assertEquals("heavy", casual, FontFamilyResolver(testContext, BpkText.Weight.HEAVY))
   }
 
   @Test
   fun test_with_font_not_defined() {
-    val subject = FontFamilyResolver(context)
-
-    Assert.assertNotNull(subject.getForWeight(BpkText.Weight.NORMAL))
-    Assert.assertNotNull(subject.getForWeight(BpkText.Weight.EMPHASIZED))
-    Assert.assertNotNull(subject.getForWeight(BpkText.Weight.HEAVY))
+    Assert.assertNotNull("normal", FontFamilyResolver(context, BpkText.Weight.NORMAL))
+    Assert.assertNotNull("emphasized", FontFamilyResolver(context, BpkText.Weight.EMPHASIZED))
+    Assert.assertNotNull("heavy", FontFamilyResolver(context, BpkText.Weight.HEAVY))
   }
 }

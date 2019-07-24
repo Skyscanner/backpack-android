@@ -16,6 +16,7 @@ import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.unsafeLazy
 import org.junit.Before
+import net.skyscanner.backpack.test.R as TestR
 
 @RunWith(AndroidJUnit4::class)
 class BpkTextTest {
@@ -139,7 +140,7 @@ class BpkTextTest {
 
   @Test
   fun getFont_withCustomFont() {
-    val withCustomFont = ContextThemeWrapper(context, net.skyscanner.backpack.test.R.style.TestTextCustomFont)
+    val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
     textDefinitions.forEach { test ->
       val message = test[0] as String
@@ -154,7 +155,7 @@ class BpkTextTest {
         message.contains("Heavy") ->
           Typeface.create("casual", Typeface.NORMAL)
         else ->
-          ResourcesCompat.getFont(withCustomFont, net.skyscanner.backpack.test.R.font.shadows_into_light)
+          ResourcesCompat.getFont(withCustomFont, TestR.font.shadows_into_light)
       }
 
       Assert.assertEquals(message, expectedFont, font.typeface)
@@ -178,7 +179,7 @@ class BpkTextTest {
 
   @Test
   fun applyTo_TextView_withCustomFont() {
-    val withCustomFont = ContextThemeWrapper(context, net.skyscanner.backpack.test.R.style.TestTextCustomFont)
+    val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
     val font = BpkText.getFont(withCustomFont, BpkText.BASE)
     val subject = TextView(withCustomFont)
@@ -204,7 +205,7 @@ class BpkTextTest {
 
   @Test
   fun applyTo_Paint_withCustomFont() {
-    val withCustomFont = ContextThemeWrapper(context, net.skyscanner.backpack.test.R.style.TestTextCustomFont)
+    val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
     val font = BpkText.getFont(withCustomFont, BpkText.BASE)
     val subject = Paint()
