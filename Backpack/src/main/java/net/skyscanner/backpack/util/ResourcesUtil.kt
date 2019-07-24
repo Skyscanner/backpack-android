@@ -3,9 +3,6 @@ package net.skyscanner.backpack.util
 import android.content.Context
 import android.content.res.Resources
 import android.content.res.TypedArray
-import android.graphics.drawable.LayerDrawable
-import android.text.Spannable
-import android.text.SpannableStringBuilder
 import android.util.DisplayMetrics
 import android.view.View
 import androidx.annotation.ColorInt
@@ -51,20 +48,4 @@ internal inline fun <R> TypedArray?.use(block: (TypedArray) -> R): R? {
   } finally {
     this?.recycle()
   }
-}
-
-internal operator fun LayerDrawable.get(index: Int) =
-  getDrawable(index)
-
-internal fun SpannableStringBuilder.append(text: CharSequence?, what: Any): SpannableStringBuilder {
-  return this.append(text ?: "", what, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-}
-
-internal fun SpannableStringBuilder.append(text: CharSequence?, vararg what: Any): SpannableStringBuilder {
-  val start = length
-  this.append(text ?: "")
-  what.forEach {
-    setSpan(it, start, length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-  }
-  return this
 }

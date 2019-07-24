@@ -2,6 +2,7 @@ package net.skyscanner.backpack.toast;
 
 import android.content.Context;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,6 @@ import androidx.annotation.StringRes;
 
 import net.skyscanner.backpack.text.BpkFontSpan;
 import net.skyscanner.backpack.text.BpkText;
-import net.skyscanner.backpack.util.ResourcesUtilKt;
 
 public final class BpkToast {
 
@@ -41,7 +41,8 @@ public final class BpkToast {
     if (text == null) {
       return null;
     }
-    return ResourcesUtilKt.append(new SpannableStringBuilder(), text, new BpkFontSpan(font));
+    return new SpannableStringBuilder()
+      .append(text, new BpkFontSpan(font), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
   }
 
 }

@@ -16,14 +16,27 @@ import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.unsafeLazy
 
-open class BpkRating @JvmOverloads constructor(
+open class BpkRating private constructor(
   context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  attrs: AttributeSet?,
+  defStyleAttr: Int,
+  defaultOrientation: Orientation,
+  defaultSize: Size
 ) : ConstraintLayout(
   createContextThemeWrapper(context, attrs, R.attr.bpkRatingStyle),
   attrs,
   defStyleAttr) {
+
+  @JvmOverloads
+  constructor(context: Context,
+              attrs: AttributeSet? = null,
+              defStyleAttr: Int = 0
+  ) : this(context, attrs, defStyleAttr, Orientation.Horizontal, Size.Base)
+
+  constructor(context: Context,
+              orientation: Orientation = Orientation.Horizontal,
+              size: Size = Size.Base
+  ) : this(context, null, 0, orientation, size)
 
   enum class Score {
     Low,
@@ -46,7 +59,7 @@ open class BpkRating @JvmOverloads constructor(
 
   private val score = RatingScore(this.context, attrs, defStyleAttr)
   private val selectors = RatingSelectors(this.context, attrs, defStyleAttr)
-  private val appearance = RatingAppearance(this.context, attrs, defStyleAttr)
+  private val appearance = RatingAppearance(this.context, attrs, defStyleAttr, defaultOrientation, defaultSize)
 
   private val badge by unsafeLazy {
     findViewById<BpkText>(R.id.bpk_rating_badge).apply {
@@ -126,19 +139,18 @@ open class BpkRating @JvmOverloads constructor(
     update(score())
   }
 
-  private fun update(score: Score) {
-    updateScore(score)
-    updateTitle(score)
-    updateSubtitle(score)
+  private fun update(value: Score) {
+    updateScore(value)
+    updateTitle(value)
+    updateSubtitle(value)
   }
 
-  private fun updateScore(score: Score) {
-    val tintList = selectors.colors(score)
-    ViewCompat.setBackgroundTintList(badge, tintList)
+  private fun updateScore(value: Score) {
+    ViewCompat.setBackgroundTintList(badge,  selectors.colors(value))
 
     if (appearance.size == Size.Icon) {
       badge.text = null
-      selectors.icon(score)
+      selectors.icon(value)
         ?.let {
           val size = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
           it.setBounds(0, 0, size, size)
@@ -150,15 +162,16 @@ open class BpkRating @JvmOverloads constructor(
         }
     } else {
       badge.setPadding(0, 0, 0, 0)
-      badge.text = "$rating"
+      badge.text = this.score.stringValue
     }
   }
 
-  private fun updateTitle(score: Score) {
-    titleView.text = title(score)
+  private fun updateTitle(value: Score) {
+    titleView.text = title(value)
   }
 
-  private fun updateSubtitle(score: Score) {
-    subtitleView.text = subtitle(score)
+  private fun updateSubtitle(value: Score) {
+    subtitleView.text = subtitle(value)
   }
+
 }
