@@ -34,8 +34,8 @@ open class BpkRating private constructor(
   ) : this(context, attrs, defStyleAttr, Orientation.Horizontal, Size.Base)
 
   constructor(context: Context,
-              orientation: Orientation = Orientation.Horizontal,
-              size: Size = Size.Base
+              orientation: Orientation,
+              size: Size
   ) : this(context, null, 0, orientation, size)
 
   enum class Score {
