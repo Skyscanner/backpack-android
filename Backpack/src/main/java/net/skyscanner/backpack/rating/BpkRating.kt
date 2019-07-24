@@ -2,31 +2,25 @@ package net.skyscanner.backpack.rating
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.text.SpannableStringBuilder
-import android.text.TextUtils
-import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
-import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.FloatRange
-import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.rating.internal.RatingScore
 import net.skyscanner.backpack.rating.internal.RatingAppearance
 import net.skyscanner.backpack.rating.internal.RatingSelectors
-import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.BpkTheme
-import net.skyscanner.backpack.util.append
 import net.skyscanner.backpack.util.createContextThemeWrapper
+import net.skyscanner.backpack.util.unsafeLazy
 
 open class BpkRating @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : LinearLayoutCompat(
+) : ConstraintLayout(
   createContextThemeWrapper(context, attrs, R.attr.bpkRatingStyle),
   attrs,
   defStyleAttr) {
@@ -50,25 +44,58 @@ open class BpkRating @JvmOverloads constructor(
     Vertical
   }
 
+  private val score = RatingScore(this.context, attrs, defStyleAttr)
+  private val selectors = RatingSelectors(this.context, attrs, defStyleAttr)
+  private val appearance = RatingAppearance(this.context, attrs, defStyleAttr)
+
+  private val badge by unsafeLazy {
+    findViewById<BpkText>(R.id.bpk_rating_badge).apply {
+      appearance.score.applyTo(this)
+      appearance.badgeSize.let {
+        minHeight = it
+        maxHeight = it
+        minWidth = it
+        maxWidth = it
+      }
+    }
+  }
+
+  private val titleView by unsafeLazy {
+    findViewById<BpkText>(R.id.bpk_rating_title).apply {
+      appearance.title.applyTo(this)
+    }
+  }
+
+  private val subtitleView by unsafeLazy {
+    findViewById<BpkText>(R.id.bpk_rating_subtitle).apply {
+      val subtitleAppearance = appearance.subtitle
+      if (subtitleAppearance != null) {
+        subtitleAppearance.applyTo(this)
+      } else {
+        visibility = View.GONE
+      }
+    }
+  }
+
   var icon: (Score) -> Drawable?
     get() = selectors.icon
     set(value) {
       selectors.icon = value
-      updateScore()
+      updateScore(score())
     }
 
   var title: (Score) -> CharSequence?
     get() = selectors.title
     set(value) {
       selectors.title = value
-      updateDescription()
+      updateTitle(score())
     }
 
   var subtitle: (Score) -> CharSequence?
     get() = selectors.subtitle
     set(value) {
       selectors.subtitle = value
-      updateDescription()
+      updateSubtitle(score())
     }
 
   @get:FloatRange(from = 0.0, to = 10.0)
@@ -76,73 +103,36 @@ open class BpkRating @JvmOverloads constructor(
     get() = score.rating
     set(@FloatRange(from = 0.0, to = 10.0) value) {
       score.rating = value
-      updateScore()
-      updateDescription()
+      update(score())
     }
-
-  private val score = RatingScore(this.context, attrs, defStyleAttr)
-  private val selectors = RatingSelectors(this.context, attrs, defStyleAttr)
-  private val appearance = RatingAppearance(this.context, attrs, defStyleAttr)
-
-  private val badge = BpkText(this.context).apply {
-    setTextColor(BpkTheme.getColor(this.context, R.color.bpkWhite))
-    setBackgroundResource(R.drawable.bpk_bg_rating_badge)
-    appearance.score.applyTo(this)
-    gravity = Gravity.CENTER
-    maxLines = 1
-    ellipsize = TextUtils.TruncateAt.END
-  }
-
-  private val descriptionView = BpkText(this.context).apply {
-    setTextColor(BpkTheme.getColor(this.context, R.color.bpkGray900))
-    maxLines = 2
-    ellipsize = TextUtils.TruncateAt.END
-    gravity = Gravity.START
-  }
 
   init {
-    val badgeParams = LayoutParams(appearance.badgeSize, appearance.badgeSize)
     when (appearance.orientation) {
-      Orientation.Horizontal -> {
-        super.setOrientation(HORIZONTAL)
-        gravity = Gravity.CENTER_VERTICAL
-        badgeParams.marginEnd = appearance.spacing
-      }
-      Orientation.Vertical -> {
-        super.setOrientation(VERTICAL)
-        gravity = Gravity.CENTER_VERTICAL
-        badgeParams.bottomMargin = appearance.spacing
-      }
+      Orientation.Horizontal -> R.layout.view_bpk_rating_horizontal
+      Orientation.Vertical -> R.layout.view_bpk_rating_vertical
+    }.let {
+      LayoutInflater.from(this.context).inflate(it, this, true)
     }
 
-    addView(badge, badgeParams)
-    addView(descriptionView)
-    updateScore()
-    updateDescription()
+    titleView.layoutParams = titleView.layoutParams
+      .let { it as MarginLayoutParams }
+      .apply {
+        when (appearance.orientation) {
+          Orientation.Horizontal -> marginStart = appearance.spacing
+          Orientation.Vertical -> topMargin = appearance.spacing
+        }
+      }
+
+    update(score())
   }
 
-  final override fun addView(child: View?) {
-    super.addView(child)
+  private fun update(score: Score) {
+    updateScore(score)
+    updateTitle(score)
+    updateSubtitle(score)
   }
 
-  final override fun addView(child: View?, index: Int) {
-    super.addView(child, index)
-  }
-
-  final override fun addView(child: View?, width: Int, height: Int) {
-    super.addView(child, width, height)
-  }
-
-  final override fun addView(child: View?, params: ViewGroup.LayoutParams?) {
-    super.addView(child, params)
-  }
-
-  final override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
-    super.addView(child, index, params)
-  }
-
-  private fun updateScore() {
-    val score = score()
+  private fun updateScore(score: Score) {
     val tintList = selectors.colors(score)
     ViewCompat.setBackgroundTintList(badge, tintList)
 
@@ -164,18 +154,11 @@ open class BpkRating @JvmOverloads constructor(
     }
   }
 
-  private fun updateDescription() {
-    val score = score()
-    val subtitle = subtitle(score)
-    val subtitleAppearance = appearance.subtitle
+  private fun updateTitle(score: Score) {
+    titleView.text = title(score)
+  }
 
-    descriptionView.text = SpannableStringBuilder()
-      .append(title(score), BpkFontSpan(appearance.title))
-      .also {
-        if (subtitleAppearance != null && !subtitle.isNullOrEmpty()) {
-          it.append("\n")
-          it.append(subtitle, BpkFontSpan(subtitleAppearance), ForegroundColorSpan(BpkTheme.getColor(context, R.color.bpkGray500)))
-        }
-      }
+  private fun updateSubtitle(score: Score) {
+    subtitleView.text = subtitle(score)
   }
 }

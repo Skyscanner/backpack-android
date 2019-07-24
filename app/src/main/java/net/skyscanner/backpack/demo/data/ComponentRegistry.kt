@@ -110,7 +110,10 @@ object ComponentRegistry {
     "Rating" story NodeData({ children -> SubStory of children },
       mapOf(
         "Values" story NodeData { Story of R.layout.fragment_rating_values },
-        "Icon alignment" story NodeData { Story of R.layout.fragment_button_link_icon_alignment }
+        "Horizontal" story NodeData { Story of R.layout.fragment_rating_horizontal },
+        "Vertical" story NodeData { Story of R.layout.fragment_rating_vertical },
+        "Horizontal RTL" story NodeData { Story ofRtl R.layout.fragment_rating_horizontal },
+        "Vertical RTL" story NodeData { Story ofRtl R.layout.fragment_rating_vertical }
       )),
     "Spinner" story NodeData({ children -> SubStory of children },
       mapOf(

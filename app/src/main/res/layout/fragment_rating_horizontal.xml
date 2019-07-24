@@ -11,54 +11,45 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:ratingSize="large"
-    app:ratingSubtitle="s12345"
+    app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="@array/rating_sample_titles"
-    app:ratingValue="3.0" />
+    app:ratingValue="9.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSize="large"
+    app:ratingSize="base"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="@array/rating_sample_titles"
-    app:ratingValue="5.9999" />
+    app:ratingValue="9.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSize="large"
+    app:ratingSize="small"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="@array/rating_sample_titles"
-    app:ratingValue="7.0" />
+    app:ratingValue="9.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSize="large"
+    app:ratingSize="extra_small"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="@array/rating_sample_titles"
-    app:ratingValue="7.9999" />
+    app:ratingValue="9.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSize="large"
+    app:ratingIcon="@drawable/bpk_star"
+    app:ratingSize="icon"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="@array/rating_sample_titles"
-    app:ratingValue="8.0" />
-
-  <net.skyscanner.backpack.rating.BpkRating
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSize="large"
-    app:ratingSubtitle="@array/rating_sample_subtitles"
-    app:ratingTitle="@array/rating_sample_titles"
-    app:ratingValue="10.0" />
-
+    app:ratingValue="9.0" />
 
 </LinearLayout>
