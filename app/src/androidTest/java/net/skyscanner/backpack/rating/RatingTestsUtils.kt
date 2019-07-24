@@ -35,7 +35,7 @@ internal fun createTestRating(
         BpkRating.Score.High -> "Sub High"
       }
     }
-    rating = value
+    this.value = value
     layoutDirection = if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
     background = ColorDrawable(Color.WHITE)
   }

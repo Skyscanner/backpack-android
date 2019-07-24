@@ -23,9 +23,8 @@ open class BpkRating private constructor(
   defaultOrientation: Orientation,
   defaultSize: Size
 ) : ConstraintLayout(
-  createContextThemeWrapper(context, attrs, R.attr.bpkRatingStyle),
-  attrs,
-  defStyleAttr) {
+  createContextThemeWrapper(context, attrs, R.attr.bpkRatingStyle), attrs, defStyleAttr
+) {
 
   @JvmOverloads
   constructor(context: Context,
@@ -112,7 +111,7 @@ open class BpkRating private constructor(
     }
 
   @get:FloatRange(from = 0.0, to = 10.0)
-  var rating: Float
+  var value: Float
     get() = score.rating
     set(@FloatRange(from = 0.0, to = 10.0) value) {
       score.rating = value
@@ -162,7 +161,7 @@ open class BpkRating private constructor(
         }
     } else {
       badge.setPadding(0, 0, 0, 0)
-      badge.text = this.score.stringValue
+      badge.text = score.asString()
     }
   }
 

@@ -21,8 +21,8 @@ internal class RatingScore(
       field = (clamped * 10).toInt() / 10f // rounding to one decimal
     }
 
-  val stringValue
-    get() = rating.toString()
+  fun asString() =
+    rating.toString()
 
   override fun invoke(): BpkRating.Score = when {
     rating >= 0f && rating < 6f -> BpkRating.Score.Low
