@@ -16,8 +16,8 @@
 
   <style name="TestTextCustomFont">
     <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
-    <item name="bpkFontFamilyEmphasized">?bpkFontFamilyBase</item>
-    <item name="bpkFontFamilyHeavy">?bpkFontFamilyBase</item>
+    <item name="bpkFontFamilyEmphasized">cursive</item>
+    <item name="bpkFontFamilyHeavy">casual</item>
 
     <item name="bpkTextBaseAppearance">@style/bpkTextBase</item>
     <item name="bpkTextCapsAppearance">@style/bpkTextCaps</item>
