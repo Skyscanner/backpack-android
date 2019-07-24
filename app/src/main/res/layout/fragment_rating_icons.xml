@@ -10,7 +10,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingSize="icon"
+    app:ratingIcon="@drawable/rating_sample_icon"
     app:ratingTitle="@array/rating_sample_titles"
     app:ratingValue="3.0" />
 
@@ -18,7 +19,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingSize="icon"
+    app:ratingIcon="@drawable/rating_sample_icon"
     app:ratingTitle="@array/rating_sample_titles"
     app:ratingValue="5.9999" />
 
@@ -26,32 +28,36 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingSize="icon"
     app:ratingTitle="@array/rating_sample_titles"
+    app:ratingIcon="@drawable/rating_sample_icon"
     app:ratingValue="7.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingSize="icon"
     app:ratingTitle="@array/rating_sample_titles"
+    app:ratingIcon="@drawable/rating_sample_icon"
     app:ratingValue="7.9999" />
 
   <net.skyscanner.backpack.rating.BpkRating
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingSize="icon"
     app:ratingTitle="@array/rating_sample_titles"
+    app:ratingIcon="@drawable/rating_sample_icon"
     app:ratingValue="8.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingSize="icon"
     app:ratingTitle="@array/rating_sample_titles"
+    app:ratingIcon="@drawable/rating_sample_icon"
     app:ratingValue="10.0" />
 
 

@@ -21,6 +21,9 @@
   <string name="preference_file_key">bpk_preferences</string>
   <string name="calendar_colored_switch">Shift colors</string>
 
+  <string name="rating_sample_const_title">Constant Title</string>
+  <string name="rating_sample_const_subtitle">Constant Subtitle</string>
+
   <string-array name="rating_sample_titles">
     <item>Low Title</item>
     <item>Medium Title</item>
