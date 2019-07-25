@@ -21,7 +21,7 @@ internal class RatingScore(
       field = (clamped * 10).toInt() / 10f // rounding to one decimal
     }
 
-  fun asString() =
+  override fun toString() =
     rating.toString()
 
   override fun invoke(): BpkRating.Score = when {

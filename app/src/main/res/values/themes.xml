@@ -132,7 +132,9 @@
   </style>
 
   <style name="LondonThemeRating">
-    <item name="ratingColor">@drawable/london_rating_colors</item>
+    <item name="ratingColorLow">#6392ce</item>
+    <item name="ratingColorMedium">#013A76</item>
+    <item name="ratingColorHigh">#00254B</item>
   </style>
 
   <!-- London theme end -->
@@ -252,7 +254,9 @@
   </style>
 
   <style name="DohaThemeRating">
-    <item name="ratingColor">@drawable/doha_rating_colors</item>
+    <item name="ratingColorLow">#ffd677</item>
+    <item name="ratingColorMedium">#ffb300</item>
+    <item name="ratingColorHigh">#ffa000</item>
   </style>
 
   <!-- Doha theme end -->

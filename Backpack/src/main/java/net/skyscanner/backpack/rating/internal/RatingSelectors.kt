@@ -3,15 +3,14 @@ package net.skyscanner.backpack.rating.internal
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.StyleableRes
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.rating.BpkRating
+import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.use
 
 internal class RatingSelectors(
@@ -52,33 +51,35 @@ internal class RatingSelectors(
     }
   }
 
-  val colors: (BpkRating.Score) -> ColorStateList
+  val color: (BpkRating.Score) -> ColorStateList
 
   init {
-    var colorsDrawable: LayerDrawable? = null
+    var colorLow = BpkTheme.getColor(context, R.color.bpkRed500)
+    var colorMedium = BpkTheme.getColor(context, R.color.bpkYellow500)
+    var colorHigh = BpkTheme.getColor(context, R.color.bpkGreen500)
+
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkRating,
       defStyleAttr, 0
     ).use {
-      colorsDrawable = it.getDrawable(R.styleable.BpkRating_ratingColor) as? LayerDrawable
+      colorLow = it.getColor(R.styleable.BpkRating_ratingColorLow, colorLow)
+      colorMedium = it.getColor(R.styleable.BpkRating_ratingColorMedium, colorMedium)
+      colorHigh = it.getColor(R.styleable.BpkRating_ratingColorHigh, colorHigh)
+
       icons = it.getDrawable(R.styleable.BpkRating_ratingIcon)
       titles = it.resolveStringOrArray(R.styleable.BpkRating_ratingTitle)
       subtitles = it.resolveStringOrArray(R.styleable.BpkRating_ratingSubtitle)
     }
 
-    val colors = colorsDrawable?.let { ld ->
-      Array(ld.numberOfLayers) {
-        val cd = ld.getDrawable(it) as ColorDrawable
-        ColorStateList.valueOf(cd.color)
-      }
-    } ?: arrayOf(
-      ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkRed500)),
-      ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkYellow500)),
-      ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkGreen500))
+    val colors = arrayOf(
+      ColorStateList.valueOf(colorLow),
+      ColorStateList.valueOf(colorMedium),
+      ColorStateList.valueOf(colorHigh)
     )
-
-    this.colors = { colors[it.index] }
+    color = {
+      colors[it.index]
+    }
   }
 
   private fun TypedArray.resolveStringOrArray(@StyleableRes index: Int): Array<CharSequence>? {

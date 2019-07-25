@@ -79,8 +79,8 @@ BpkRating(context, BpkRating.Orientation.Horizontal, BpkRating.Size.Base).apply 
 
 ## Theme Props
 
-- `ratingColor`
-  Refers to a [`LayerDrawable`](https://developer.android.com/reference/android/graphics/drawable/LayerDrawable) containing [`ColorDrawables`](https://developer.android.com/reference/android/graphics/drawable/ColorDrawable).
-  The layer index will be chosen based on corresponding score value (0 - low, 1 - medium, 2 - high).
+- `ratingColorLow`
+- `ratingColorMedium`
+- `ratingColorHigh`
 
 Styles can be changed globally through `bpkRatingStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.

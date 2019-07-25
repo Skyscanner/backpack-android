@@ -13,7 +13,7 @@
     app:ratingOrientation="vertical"
     app:ratingSize="large"
     app:ratingSubtitle="@array/rating_sample_subtitles"
-    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingTitle="Large"
     app:ratingValue="9.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
@@ -23,7 +23,7 @@
     app:ratingOrientation="vertical"
     app:ratingSize="base"
     app:ratingSubtitle="@array/rating_sample_subtitles"
-    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingTitle="Base"
     app:ratingValue="9.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
@@ -33,7 +33,7 @@
     app:ratingOrientation="vertical"
     app:ratingSize="small"
     app:ratingSubtitle="@array/rating_sample_subtitles"
-    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingTitle="Small"
     app:ratingValue="9.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
@@ -43,7 +43,7 @@
     app:ratingOrientation="vertical"
     app:ratingSize="extra_small"
     app:ratingSubtitle="@array/rating_sample_subtitles"
-    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingTitle="Extra Small"
     app:ratingValue="9.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
@@ -54,7 +54,7 @@
     app:ratingOrientation="vertical"
     app:ratingSize="icon"
     app:ratingSubtitle="@array/rating_sample_subtitles"
-    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingTitle="Icon"
     app:ratingValue="9.0" />
 
 </LinearLayout>

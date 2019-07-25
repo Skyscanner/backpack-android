@@ -147,7 +147,10 @@
   </declare-styleable>
 
   <declare-styleable name="BpkRating">
-    <attr name="ratingColor" format="reference" />
+    <attr name="ratingColorLow" format="color" />
+    <attr name="ratingColorMedium" format="color" />
+    <attr name="ratingColorHigh" format="color" />
+
     <attr name="ratingIcon" format="reference" />
     <attr name="ratingTitle" format="string|reference" />
     <attr name="ratingSubtitle" format="string|reference" />
