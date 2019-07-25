@@ -40,7 +40,7 @@ If the value is a string resource, the same value will be used for all values.
 *Please note that on some sizes subtitles disabled*.
 
 - `ratingOrientation` - defines orientation of the layout.
-- `ratingSize` - defines dimensions of the layout.
+- `ratingSize` - the dimensions of the layout
 - `ratingValue` - A float value in `[0.0-10.0]` range. If the value exceeds the boundaries, it'll be clamped.
 
 
