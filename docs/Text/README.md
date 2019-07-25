@@ -34,25 +34,58 @@ BpkText(context).apply {
 
 ## Theme Props
 
-- `fontFamilyBase`
-- `fontFamilyEmphasized`
-- `fontFamilyHeavy`
+- `bpkFontFamilyBase`
+- `bpkFontFamilyEmphasized`
+- `bpkFontFamilyHeavy`
 
-Styles can be changed globally through `bpkTextStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+- `bpkTextBaseAppearance`
+- `bpkTextCapsAppearance`
+- `bpkTextLgAppearance`
+- `bpkTextSmAppearance`
+- `bpkTextXlAppearance`
+- `bpkTextXsAppearance`
+- `bpkTextXxlAppearance`
+- `bpkTextXxxlAppearance`
+- `bpkTextBaseEmphasizedAppearance`
+- `bpkTextCapsEmphasizedAppearance`
+- `bpkTextLgEmphasizedAppearance`
+- `bpkTextSmEmphasizedAppearance`
+- `bpkTextXlEmphasizedAppearance`
+- `bpkTextXsEmphasizedAppearance`
+- `bpkTextXxlEmphasizedAppearance`
+- `bpkTextXxxlEmphasizedAppearance`
+- `bpkTextXlHeavyAppearance`
+- `bpkTextXxlHeavyAppearance`
+- `bpkTextXxxlHeavyAppearance`
 
 Example
 
 ```xml
   <style name="BlueTheme" parent="AppTheme">
-      <item name="bpkTextStyle">@style/CursiveText</item>
-  </style>
+    <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
+    <item name="bpkFontFamilyEmphasized">@font/shadows_into_dark</item>
+    <item name="bpkFontFamilyHeavy">@font/shadows_into_light_heavy</item>
 
-  <style name="CursiveText" >
-    <item name="fontFamilyBase">@font/shadows_into_light</item>
-    <item name="fontFamilyEmphasized">@font/shadows_into_dark</item>
-    <item name="fontFamilyHeavy">@font/shadows_into_light_heavy</item>
+    <item name="bpkTextBaseAppearance">@style/bpkTextBase</item>
+    <item name="bpkTextCapsAppearance">@style/bpkTextCaps</item>
+    <item name="bpkTextLgAppearance">@style/bpkTextLg</item>
+    <item name="bpkTextSmAppearance">@style/bpkTextSm</item>
+    <item name="bpkTextXlAppearance">@style/bpkTextXl</item>
+    <item name="bpkTextXsAppearance">@style/bpkTextXs</item>
+    <item name="bpkTextXxlAppearance">@style/bpkTextXxl</item>
+    <item name="bpkTextXxxlAppearance">@style/bpkTextXxxl</item>
+    <item name="bpkTextBaseEmphasizedAppearance">@style/bpkTextBaseEmphasized</item>
+    <item name="bpkTextCapsEmphasizedAppearance">@style/bpkTextCapsEmphasized</item>
+    <item name="bpkTextLgEmphasizedAppearance">@style/bpkTextLgEmphasized</item>
+    <item name="bpkTextSmEmphasizedAppearance">@style/bpkTextSmEmphasized</item>
+    <item name="bpkTextXlEmphasizedAppearance">@style/bpkTextXlEmphasized</item>
+    <item name="bpkTextXsEmphasizedAppearance">@style/bpkTextXsEmphasized</item>
+    <item name="bpkTextXxlEmphasizedAppearance">@style/bpkTextXxlEmphasized</item>
+    <item name="bpkTextXxxlEmphasizedAppearance">@style/bpkTextXxxlEmphasized</item>
+    <item name="bpkTextXlHeavyAppearance">@style/bpkTextXlHeavy</item>
+    <item name="bpkTextXxlHeavyAppearance">@style/bpkTextXxlHeavy</item>
+    <item name="bpkTextXxxlHeavyAppearance">@style/bpkTextXxxlHeavy</item>
   </style>
-
 ```
 
 

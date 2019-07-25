@@ -99,7 +99,7 @@ internal fun wrapContextWithDefaults(context: Context): Context {
 }
 
 internal fun applyDefaultsToContext(context: Context) {
-  context.theme?.applyStyle(R.style.BpkDefaultThemeColors, false)
+  context.theme?.applyStyle(R.style.BpkDefaultTheme, false)
 }
 
 internal fun resolveThemeColorWithDefault(context: Context, resId: Int): Int {

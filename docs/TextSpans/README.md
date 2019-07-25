@@ -31,9 +31,7 @@ textView.text = SpannableStringBuilder("Foo").append("bar", span, Spannable.SPAN
 
 ## Theme Props
 
-- `fontFamilyBase`
-- `fontFamilyEmphasized`
-- `fontFamilyHeavy`
 - `bpkPrimaryColor`
+- [Font theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/Text/README.md)
 
 Styles can be changed globally through `bpkTextStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.

@@ -37,10 +37,7 @@ BpkTextField(context).apply {
 - `textFieldColorHintFocused`
 - `textFieldColorIcon`
 - `textFieldBackground`
-- `fontFamilyBase`
-- `fontFamilyEmphasized`
-- `fontFamilyHeavy`
-
+- [Font theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/Text/README.md)
 
 Styles can be changed globally through `bpkTextFieldStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
 
@@ -52,11 +49,8 @@ Example
   </style>
 
   <style name="CursiveText" >
-    <item name="fontFamilyBase">@font/shadows_into_light</item>
-    <item name="fontFamilyEmphasized">@font/shadows_into_dark</item>
-    <item name="fontFamilyHeavy">@font/shadows_into_light_heavy</item>
+    <item name="textFieldColor">@color/bpkBlue700</item>
+    <item name="textFieldColorHintNormal">@color/bpkBlue300</item>
+    <item name="textFieldColorHintFocused">@color/bpkBlue500</item>
   </style>
-
 ```
-
-
