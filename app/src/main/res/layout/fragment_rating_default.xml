@@ -28,7 +28,7 @@
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="@array/rating_sample_titles"
-    app:ratingValue="7.0" />
+    app:ratingValue="6.0" />
 
   <net.skyscanner.backpack.rating.BpkRating
     android:layout_width="wrap_content"
