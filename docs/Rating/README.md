@@ -25,7 +25,7 @@ Example of a Rating in XML:
 In this example:
 
 - `ratingIcon` – a reference to [`LayerDrawable`](https://developer.android.com/reference/android/graphics/drawable/LayerDrawable) or [`Drawable`](https://developer.android.com/reference/android/graphics/drawable/Drawable).
-The layer index will be chosen based on corresponding score value (0 - low, 1 - medium, 2 - high).
+The layer index will be chosen based on the corresponding score value (0 - low, 1 - medium, 2 - high).
 If drawable is not layered, the same drawable will be used for all values.
 When the provided drawable is not a layered drawable, the same icon will be used for all scores.
 *Please note that on some sizes icons disabled*.
