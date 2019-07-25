@@ -29,6 +29,7 @@ The layer index will be chosen based on the corresponding score value (0 - low, 
 If drawable is not layered, the same drawable will be used for all values.
 When the provided drawable is not a layered drawable, the same icon will be used for all scores.
 *Please note that on some sizes icons disabled*.
+*Note that when size is equal to `Icon` only one icon is supported and thus layered drawables are ignored*  
 
 - `ratingTitle` – a reference to [`StringArray`](https://developer.android.com/guide/topics/resources/string-resource#StringArray) or [`String`](https://developer.android.com/guide/topics/resources/string-resource#String).
 The item index will be chosen based on the corresponding score value (0 - low, 1 - medium, 2 - high).
