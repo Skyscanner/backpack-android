@@ -42,7 +42,7 @@ If the value is a string resource, the same value will be used for all scores.
 
 - `ratingOrientation` - the layout orientation.
 - `ratingSize` - the dimensions of the layout
-- `ratingValue` - A float value in `[0.0-10.0]` range. If the value exceeds the boundaries, it'll be clamped.
+- `ratingValue` - The actual rating expressed as a range between `0.0 to 10.0`. If the value exceeds the boundaries, it'll be clamped.
 
 
 Example of a Rating in Kotlin
