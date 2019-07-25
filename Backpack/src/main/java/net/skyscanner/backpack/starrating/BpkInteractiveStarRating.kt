@@ -7,6 +7,8 @@ import android.view.View
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.starrating.internal.BpkStarRatingBase
 import net.skyscanner.backpack.util.createContextThemeWrapper
+import kotlin.math.max
+import kotlin.math.roundToInt
 
 open class BpkInteractiveStarRating @JvmOverloads constructor(
   context: Context,
@@ -27,21 +29,32 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
   final override var rating: Float
     get() = super.rating
     set(value) {
-      val newValue = Math.round(value).toFloat()
+      val newValue = value.roundToInt().toFloat()
       if (newValue != super.rating) {
         super.rating = newValue
         onRatingChangedListener?.invoke(newValue, maxRating.toFloat())
       }
     }
 
+  private var lastRating: Float = rating
+
   override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+    if (ev.action == MotionEvent.ACTION_DOWN) {
+      lastRating = rating
+    }
+
     val x = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) width - ev.x else ev.x
     val itemWidth = width / maxRating
     val selectedItems = x / itemWidth
-    super.rating = Math.round(Math.max(1f, selectedItems + 0.5f)).toFloat()
-    if (ev.action == MotionEvent.ACTION_UP || ev.action == MotionEvent.ACTION_CANCEL) {
+    super.rating = max(1f, selectedItems + 0.5f).roundToInt().toFloat()
+
+    if (ev.action == MotionEvent.ACTION_UP) {
       onRatingChangedListener?.invoke(rating, maxRating.toFloat())
     }
+    if (ev.action == MotionEvent.ACTION_CANCEL) {
+      super.rating = lastRating
+    }
+
     return true
   }
 
