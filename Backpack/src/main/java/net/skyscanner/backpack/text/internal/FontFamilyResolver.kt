@@ -9,13 +9,13 @@ import net.skyscanner.backpack.text.FontCache
 
 internal object FontFamilyResolver {
 
-  private fun getFontResources(context: Context): List<Typeface?> {
-    val fontAttributes = intArrayOf(
-      R.attr.bpkFontFamilyBase,
-      R.attr.bpkFontFamilyEmphasized,
-      R.attr.bpkFontFamilyHeavy
-    )
+  private val fontAttributes = intArrayOf(
+    R.attr.bpkFontFamilyBase,
+    R.attr.bpkFontFamilyEmphasized,
+    R.attr.bpkFontFamilyHeavy
+  )
 
+  private fun getFontResources(context: Context): List<Typeface?> {
     return fontAttributes.map {
       val outValue = TypedValue()
       val resolved = context.theme.resolveAttribute(it, outValue, true)

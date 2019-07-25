@@ -179,10 +179,9 @@ private fun internalGetFont(context: Context, textStyle: Int = BpkText.BASE, wei
 @StyleRes
 private fun getStyleId(context: Context, textStyle: Int, weight: BpkText.Weight): Int {
   val styleProps = styleMapping[textStyle]
-  styleProps ?: throw IllegalStateException("Invalid textStyle")
-  val textAppearanceAttr = styleProps[weight.ordinal]
+    ?: throw IllegalStateException("Invalid textStyle")
 
-  textAppearanceAttr
+  val textAppearanceAttr = styleProps[weight.ordinal]
     ?: throw IllegalStateException("Weight $weight is not supported for the current size")
 
   val outValue = TypedValue()
