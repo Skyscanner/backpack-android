@@ -39,7 +39,7 @@ The item index will be chosen based on corresponding score value (0 - low, 1 - m
 If the value is a string resource, the same value will be used for all values.
 *Please note that on some sizes subtitles disabled*.
 
-- `ratingOrientation` - defines orientation of the layout.
+- `ratingOrientation` - the layout orientation.
 - `ratingSize` - the dimensions of the layout
 - `ratingValue` - A float value in `[0.0-10.0]` range. If the value exceeds the boundaries, it'll be clamped.
 
