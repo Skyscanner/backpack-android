@@ -7,7 +7,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.text.FontCache
 
-object FontFamilyResolver {
+internal object FontFamilyResolver {
 
   private fun getFontResources(context: Context): List<Typeface?> {
     val fontAttributes = intArrayOf(
