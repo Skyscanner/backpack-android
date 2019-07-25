@@ -2,7 +2,6 @@ package net.skyscanner.backpack.rating.internal
 
 import androidx.annotation.DimenRes
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.rating.BpkRating
 import net.skyscanner.backpack.text.BpkText
 
 internal enum class RatingStyles(

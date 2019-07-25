@@ -95,5 +95,4 @@ internal class RatingAppearance(
       RatingStyles.Base -> BpkRating.Size.Base
       RatingStyles.Large -> BpkRating.Size.Large
     }
-
 }

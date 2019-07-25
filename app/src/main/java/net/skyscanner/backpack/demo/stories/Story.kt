@@ -25,8 +25,8 @@ open class Story : ComponentDetailFragment() {
 
     infix fun of(fragmentLayout: Int) = Story().apply {
       arguments = Bundle().apply {
-       putInt(LAYOUT_ID, fragmentLayout)
-       putBoolean(RTL, false)
+        putInt(LAYOUT_ID, fragmentLayout)
+        putBoolean(RTL, false)
       }
     }
 

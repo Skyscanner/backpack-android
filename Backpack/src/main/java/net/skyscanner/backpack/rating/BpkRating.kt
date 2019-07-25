@@ -27,14 +27,16 @@ open class BpkRating private constructor(
 ) {
 
   @JvmOverloads
-  constructor(context: Context,
-              attrs: AttributeSet? = null,
-              defStyleAttr: Int = 0
+  constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
   ) : this(context, attrs, defStyleAttr, Orientation.Horizontal, Size.Base)
 
-  constructor(context: Context,
-              orientation: Orientation,
-              size: Size
+  constructor(
+    context: Context,
+    orientation: Orientation,
+    size: Size
   ) : this(context, null, 0, orientation, size)
 
   enum class Score {
@@ -145,7 +147,7 @@ open class BpkRating private constructor(
   }
 
   private fun updateScore(value: Score) {
-    ViewCompat.setBackgroundTintList(badge,  selectors.color(value))
+    ViewCompat.setBackgroundTintList(badge, selectors.color(value))
 
     if (appearance.size == Size.Icon) {
       badge.text = null
@@ -172,5 +174,4 @@ open class BpkRating private constructor(
   private fun updateSubtitle(value: Score) {
     subtitleView.text = subtitle(value)
   }
-
 }
