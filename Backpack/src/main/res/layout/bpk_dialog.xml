@@ -21,7 +21,7 @@
       android:layout_height="wrap_content"
       android:textAlignment="center"
       app:textStyle="xl"
-      app:emphasize="true" />
+      app:weight="emphasized" />
 
     <net.skyscanner.backpack.text.BpkText
       android:id="@+id/dialog_description"

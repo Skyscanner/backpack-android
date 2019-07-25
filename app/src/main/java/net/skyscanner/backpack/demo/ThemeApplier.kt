@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import net.skyscanner.backpack.demo.data.SharedPreferences
+import net.skyscanner.backpack.util.BpkTheme
 
 object ThemeApplier : Application.ActivityLifecycleCallbacks {
   override fun onActivityPaused(activity: Activity?) {}
@@ -14,5 +15,6 @@ object ThemeApplier : Application.ActivityLifecycleCallbacks {
   override fun onActivityStopped(activity: Activity?) {}
   override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
     activity?.theme?.applyStyle(SharedPreferences.getTheme(activity), true)
+    activity?.let { BpkTheme.applyDefaultsToContext(it) }
   }
 }

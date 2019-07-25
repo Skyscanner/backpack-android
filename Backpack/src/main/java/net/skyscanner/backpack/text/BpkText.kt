@@ -1,34 +1,34 @@
 package net.skyscanner.backpack.text
 
 import android.content.Context
-import android.content.res.TypedArray
+import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.graphics.Color
 import android.graphics.PorterDuffColorFilter
 import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.FontRes
 import androidx.annotation.IntDef
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.text.internal.FontFamilyResolver
 import net.skyscanner.backpack.util.ResourcesUtil
+import net.skyscanner.backpack.util.use
 
 private val styleMapping = mapOf(
-  BpkText.XS to arrayOf(R.style.bpkTextXs, R.style.bpkTextXsEmphasized, null),
-  BpkText.SM to arrayOf(R.style.bpkTextSm, R.style.bpkTextSmEmphasized, null),
-  BpkText.CAPS to arrayOf(R.style.bpkTextCaps, R.style.bpkTextCapsEmphasized, null),
-  BpkText.BASE to arrayOf(R.style.bpkTextBase, R.style.bpkTextBaseEmphasized, null),
-  BpkText.LG to arrayOf(R.style.bpkTextLg, R.style.bpkTextLgEmphasized, null),
-  BpkText.XL to arrayOf(R.style.bpkTextXl, R.style.bpkTextXlEmphasized, R.style.bpkTextXlHeavy),
-  BpkText.XXL to arrayOf(R.style.bpkTextXxl, R.style.bpkTextXxlEmphasized, R.style.bpkTextXxlHeavy),
-  BpkText.XXXL to arrayOf(R.style.bpkTextXxxl, R.style.bpkTextXxxlEmphasized, R.style.bpkTextXxxlHeavy)
+  BpkText.XS to arrayOf(R.attr.bpkTextXsAppearance, R.attr.bpkTextXsEmphasizedAppearance, null),
+  BpkText.SM to arrayOf(R.attr.bpkTextSmAppearance, R.attr.bpkTextSmEmphasizedAppearance, null),
+  BpkText.CAPS to arrayOf(R.attr.bpkTextCapsAppearance, R.attr.bpkTextCapsEmphasizedAppearance, null),
+  BpkText.BASE to arrayOf(R.attr.bpkTextBaseAppearance, R.attr.bpkTextBaseEmphasizedAppearance, null),
+  BpkText.LG to arrayOf(R.attr.bpkTextLgAppearance, R.attr.bpkTextLgEmphasizedAppearance, null),
+  BpkText.XL to arrayOf(R.attr.bpkTextXlAppearance, R.attr.bpkTextXlEmphasizedAppearance, R.attr.bpkTextXlHeavyAppearance),
+  BpkText.XXL to arrayOf(R.attr.bpkTextXxlAppearance, R.attr.bpkTextXxlEmphasizedAppearance, R.attr.bpkTextXxlHeavyAppearance),
+  BpkText.XXXL to arrayOf(R.attr.bpkTextXxxlAppearance, R.attr.bpkTextXxxlEmphasizedAppearance, R.attr.bpkTextXxxlHeavyAppearance)
 )
 
 open class BpkText @JvmOverloads constructor(
@@ -62,41 +62,23 @@ open class BpkText @JvmOverloads constructor(
   }
 
   @Styles
-  var textStyle: Int = BASE
+  private var _textStyle: Int = BASE
+  var textStyle
+    get() = _textStyle
     set(value) {
-      field = value
+      _textStyle = value
       this.setup()
     }
 
-  var weight = Weight.NORMAL
+  private var _weight: Weight = Weight.NORMAL
+  var weight
+    get() = _weight
     set(value) {
-      field = value
+      _weight = value
       setup()
     }
 
-  @FontRes
-  private var fontBase: Int = -1
-
-  @FontRes
-  private var fontHeavy: Int = -1
-
-  @FontRes
-  private var fontEmphasized: Int = -1
-
-  /**
-   * Sets the text style to emphasized.
-   *
-   * @Deprecated use [BpkText.weight] instead.
-   */
-  @Deprecated("Use weight instead")
-  var emphasize: Boolean = false
-    get() = weight == Weight.EMPHASIZED || field
-    set(value) {
-      field = value
-      if (value) {
-        weight = Weight.EMPHASIZED
-      }
-    }
+  private var _textColour: ColorStateList? = null
 
   init {
     initialize(attrs, defStyleAttr)
@@ -105,55 +87,42 @@ open class BpkText @JvmOverloads constructor(
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
 
-    val styleAttr = when (defStyleAttr) {
-      0 -> R.attr.bpkTextStyle
-      else -> defStyleAttr
-    }
-
-    val a: TypedArray = context.theme.obtainStyledAttributes(
+    context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkText,
-      styleAttr, 0)
+      defStyleAttr, 0
+    ).use {
+      _textStyle = it.getInt(R.styleable.BpkText_textStyle, BASE)
+      val weightArg = it.getInt(R.styleable.BpkText_weight, -1)
+      if (weightArg != -1) {
+        _weight = Weight.values()[weightArg]
+      }
 
-    textStyle = a.getInt(R.styleable.BpkText_textStyle, BASE)
-    val weightArg = a.getInt(R.styleable.BpkText_weight, -1)
-    if (weightArg == -1) {
-      // if weight has not been set we still read the emphasize property
-      emphasize = a.getBoolean(R.styleable.BpkText_emphasize, false)
-    } else {
-      weight = Weight.values()[weightArg]
+      if (it.hasValue(R.styleable.BpkText_android_textColor)) {
+        _textColour = it.getColorStateList(R.styleable.BpkText_android_textColor)
+      }
+
+      // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
+      var start = compoundDrawablesRelative[0] ?: compoundDrawables[0]
+      val top = compoundDrawablesRelative[1] ?: compoundDrawables[1]
+      var end = compoundDrawablesRelative[2] ?: compoundDrawables[2]
+      val bottom = compoundDrawablesRelative[3] ?: compoundDrawables[3]
+
+      // Swapping drawables in case of RTL.
+      // compoundDrawablesRelative order is `start`,`top`,`end`,`bottom`
+      // compoundDrawables order is  `left`,`top`,`right`,`bottom`
+
+      if (this.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+        start = compoundDrawables[2]
+        end = compoundDrawables[0]
+      }
+      setCompoundDrawablesRelative(start, top, end, bottom)
+
+      val drawableTint = it.getColorStateList(R.styleable.BpkText_drawableTint)
+      if (drawableTint != null) {
+        setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
+      }
     }
-
-    // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
-
-    var start = compoundDrawablesRelative[0] ?: compoundDrawables[0]
-    val top = compoundDrawablesRelative[1] ?: compoundDrawables[1]
-    var end = compoundDrawablesRelative[2] ?: compoundDrawables[2]
-    val bottom = compoundDrawablesRelative[3] ?: compoundDrawables[3]
-
-    // Swapping drawables in case of RTL.
-    // compoundDrawablesRelative order is `start`,`top`,`end`,`bottom`
-    // compoundDrawables order is  `left`,`top`,`right`,`bottom`
-
-    if (this.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
-      start = compoundDrawables[2]
-      end = compoundDrawables[0]
-    }
-    setCompoundDrawablesRelative(start, top, end, bottom)
-
-    val drawableTint = a.getColorStateList(R.styleable.BpkText_drawableTint)
-    if (drawableTint != null) {
-      setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
-    }
-
-    fontBase = a.getResourceId(R.styleable.BpkText_fontFamilyBase, -1)
-    fontEmphasized = a.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1)
-    fontHeavy = a.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1)
-
-    if (fontBase == -1 || fontEmphasized == -1 || fontHeavy == -1) {
-      Log.w("BpkText", "Values for one or more of fontBase, fontEmphasized, fontHeavy is not set.")
-    }
-    a.recycle()
   }
 
   fun setDrawableTint(color: Int) {
@@ -163,29 +132,19 @@ open class BpkText @JvmOverloads constructor(
   }
 
   private fun setup() {
-    val textAppearance = getStyleId(textStyle, weight)
+    val textAppearance = getStyleId(context, textStyle, weight)
     if (textStyle == CAPS) {
       isAllCaps = true
     }
 
     TextViewCompat.setTextAppearance(this, textAppearance)
-
-    val fontResource = when (weight) {
-      Weight.EMPHASIZED -> fontEmphasized
-      Weight.HEAVY -> fontHeavy
-      Weight.NORMAL -> fontBase
-    }
-
-    if (fontResource != -1) {
-      this.typeface = FontCache[fontResource, context]
-    }
+    _textColour?.let(::setTextColor)
   }
 
   data class FontDefinition(
     val typeface: Typeface,
     val fontSize: Int,
-    val letterSpacing: Float?,
-    val isCustomFont: Boolean = false
+    val letterSpacing: Float?
   ) {
 
     fun applyTo(text: TextView) {
@@ -202,53 +161,33 @@ open class BpkText @JvmOverloads constructor(
   }
 }
 
-private fun internalGetFontFromTheme(context: Context, weight: BpkText.Weight = BpkText.Weight.NORMAL): Typeface? {
-  val a = context.theme.obtainStyledAttributes(null, R.styleable.BpkText, R.attr.bpkTextStyle, 0)
-
-  val nullIfInvalid = { resId: Int -> if (resId == -1) null else resId }
-
-  val fontBase = a.getResourceId(R.styleable.BpkText_fontFamilyBase, -1).let(nullIfInvalid)
-  val fontEmphasized = a.getResourceId(R.styleable.BpkText_fontFamilyEmphasized, -1).let(nullIfInvalid)
-  val fontHeavy = a.getResourceId(R.styleable.BpkText_fontFamilyHeavy, -1).let(nullIfInvalid)
-
-  val fontResource = when (weight) {
-    BpkText.Weight.EMPHASIZED -> fontEmphasized
-    BpkText.Weight.HEAVY -> fontHeavy
-    BpkText.Weight.NORMAL -> fontBase
-  }
-
-  a.recycle()
-
-  return fontResource?.let { FontCache[it, context] }
-}
-
 private fun internalGetFont(context: Context, textStyle: Int = BpkText.BASE, weight: BpkText.Weight = BpkText.Weight.NORMAL): BpkText.FontDefinition {
-  val styleRes = getStyleId(textStyle, weight)
+  val styleRes = getStyleId(context, textStyle, weight)
 
   val textStyleAttributes = context.obtainStyledAttributes(styleRes, R.styleable.BpkTextStyle)
-  val fontFamily = textStyleAttributes.getString(R.styleable.BpkTextStyle_android_fontFamily) ?: "sans-serif"
   val fontSize = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_android_textSize, ResourcesUtil.dpToPx(16, context))
   val letterSpacing = textStyleAttributes.getFloat(R.styleable.BpkTextStyle_android_letterSpacing, -1f)
     .let { if (it == -1f) null else it }
 
   textStyleAttributes.recycle()
 
-  val fontFromTheme = internalGetFontFromTheme(context, weight)
-
-  if (fontFromTheme != null) {
-    return BpkText.FontDefinition(fontFromTheme, fontSize, null, isCustomFont = true)
-  }
-
-  return BpkText.FontDefinition(Typeface.create(fontFamily, Typeface.NORMAL), fontSize, letterSpacing)
+  return FontFamilyResolver(context, weight)?.let {
+    BpkText.FontDefinition(it, fontSize, letterSpacing)
+  } ?: throw IllegalStateException("Bpk font not configured correctly")
 }
 
 @StyleRes
-private fun getStyleId(textStyle: Int, weight: BpkText.Weight): Int {
+private fun getStyleId(context: Context, textStyle: Int, weight: BpkText.Weight): Int {
   val styleProps = styleMapping[textStyle]
-  styleProps ?: throw IllegalStateException("Invalid textStyle")
-  val textAppearance = styleProps[weight.ordinal]
-  textAppearance
+    ?: throw IllegalStateException("Invalid textStyle")
+
+  val textAppearanceAttr = styleProps[weight.ordinal]
     ?: throw IllegalStateException("Weight $weight is not supported for the current size")
 
-  return textAppearance
+  val outValue = TypedValue()
+  if (context.theme.resolveAttribute(textAppearanceAttr, outValue, true)) {
+    return outValue.resourceId
+  }
+
+  return 0
 }
