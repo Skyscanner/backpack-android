@@ -107,6 +107,15 @@ object ComponentRegistry {
     "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
+    "Rating" story NodeData({ children -> SubStory of children },
+      mapOf(
+        "Default" story NodeData { Story of R.layout.fragment_rating_default },
+        "Icons" story NodeData { Story of R.layout.fragment_rating_icons },
+        "No selectors" story NodeData { Story of R.layout.fragment_rating_no_selectors },
+        "Sizes" story NodeData { Story of R.layout.fragment_rating_sizes },
+        "Sizes RTL" story NodeData { Story ofRtl R.layout.fragment_rating_sizes },
+        "Size Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical }
+      )),
     "Spinner" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_spinner },

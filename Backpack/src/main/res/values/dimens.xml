@@ -8,4 +8,6 @@
   <dimen name="bpk_icon_size_normal">24dp</dimen>
   <dimen name="bpk_horizontal_nav_size_small">@dimen/bpkSpacingXl</dimen>
   <dimen name="bpk_horizontal_nav_size_normal">36dp</dimen>
+  <dimen name="bpk_rating_score_badge_size_small">36dp</dimen>
+  <dimen name="bpk_rating_score_badge_size_large">48dp</dimen>
 </resources>
