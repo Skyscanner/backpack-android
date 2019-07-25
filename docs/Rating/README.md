@@ -32,7 +32,7 @@ When the provided drawable is not a layered drawable, the same icon will be used
 
 - `ratingTitle` – a reference to [`StringArray`](https://developer.android.com/guide/topics/resources/string-resource#StringArray) or [`String`](https://developer.android.com/guide/topics/resources/string-resource#String).
 The item index will be chosen based on the corresponding score value (0 - low, 1 - medium, 2 - high).
-If the value is a string resource, the same value will be used for all values.
+If the value is a string resource, the same value will be used for all scores.
 
 - `ratingSubtitle` – a reference to [`StringArray`](https://developer.android.com/guide/topics/resources/string-resource#StringArray) or [`String`](https://developer.android.com/guide/topics/resources/string-resource#String).
 The item index will be chosen based on corresponding score value (0 - low, 1 - medium, 2 - high).
