@@ -73,7 +73,7 @@ BpkRating(context, BpkRating.Orientation.Horizontal, BpkRating.Size.Base).apply 
     rating = 3f
 }
 ```
-`title`, `subtitle` and `icon` are optional functions, which return value for corresponding properties depending on the score.
+`title`, `subtitle` and `icon` are optional functions that return the value for the current score.
 
 ## Theme Props
 
