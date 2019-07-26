@@ -2,22 +2,6 @@
 
 > Place your changes below this line.
 
-**Breaking**:
-
-- `BpkText`:
-  - Removed deprecated `emphasized` prop. You should use `weight="emphasized"` now.
-  - Introduced theme variables for all text styles. Those can be used to theme native components with Backpack's text style via code or `xml`.
-  - Previous text styles (e.g `@style/bpkTextBase`) should not be used any more.
-  - Text colour is now `gray700` by default. 
-
-**Added**:
-
-- `BpkRating`
-
-## Changed
-
-- New design for the `trips` icon.
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
