@@ -12,7 +12,9 @@ open class Story : ComponentDetailFragment() {
     val layoutId = arguments?.getInt(LAYOUT_ID) ?: savedInstanceState?.getInt(LAYOUT_ID)
     if (layoutId != null) {
       return inflater.inflate(layoutId, container, false).apply {
-        layoutDirection = if (arguments?.getBoolean(RTL) == true) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+        if (arguments?.getBoolean(RTL) == true) {
+          layoutDirection = View.LAYOUT_DIRECTION_RTL
+        }
       }
     } else {
       throw IllegalStateException("Story has not been property initialized")

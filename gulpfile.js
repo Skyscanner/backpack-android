@@ -26,7 +26,9 @@ const tinycolor = require('tinycolor2');
 const _ = require('lodash');
 const through = require('through2');
 const svg2vectordrawable = require('svg2vectordrawable');
+const xmldom = require('xmldom');
 const tokens = require('bpk-tokens/tokens/base.raw.android.json');
+const iconsMetadata = require('bpk-svgs/dist/metadata.json');
 
 const PATHS = {
   templates: path.join(__dirname, 'templates'),
@@ -85,11 +87,23 @@ const tokensWithType = type =>
 const tokensWithCategory = category =>
   Object.values(tokens.props).filter(i => i.category === category);
 
+const shouldAutoMirror = chunk => {
+  const iconMetadata = iconsMetadata[chunk.stem];
+  return iconMetadata && iconMetadata.autoMirror;
+};
+
 const convertToXml = (chunk, enc, cb) => {
   const svgCode = chunk.contents.toString(enc);
   return svg2vectordrawable(svgCode)
     .then(xmlCode => {
-      chunk.contents = Buffer.from(xmlCode); // eslint-disable-line no-param-reassign
+      const xmlDoc = new xmldom.DOMParser().parseFromString(xmlCode, 'utf-8');
+
+      if (shouldAutoMirror(chunk)) {
+        xmlDoc.documentElement.setAttribute('android:autoMirrored', 'true');
+      }
+
+      const xmlContent = new xmldom.XMLSerializer().serializeToString(xmlDoc);
+      chunk.contents = Buffer.from(xmlContent, 'utf-8'); // eslint-disable-line no-param-reassign
       const s = chunk.path.split('/');
       s[s.length - 1] = `bpk_${s[s.length - 1]
         .replace(/-/g, '_')

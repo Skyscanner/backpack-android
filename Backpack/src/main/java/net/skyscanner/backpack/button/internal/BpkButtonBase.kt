@@ -260,7 +260,9 @@ abstract class BpkButtonBase internal constructor(
           bitmap,
           tokens.bpkSpacingBase,
           tokens.bpkSpacingBase,
-          true))
+          true)).apply {
+        isAutoMirrored = drawable.isAutoMirrored
+      }
     }
   }
 }
