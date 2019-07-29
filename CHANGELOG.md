@@ -2,6 +2,20 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 11.0.0
+
+**Breaking**:
+
+- `BpkText`:
+  - Removed deprecated `emphasized` prop. You should use `weight="emphasized"` now.
+  - Introduced theme variables for all text styles. Those can be used to theme native components with Backpack's text style via code or `xml`.
+  - Previous text styles (e.g `@style/bpkTextBase`) should not be directly used any more.
+  - Text colour is now `gray700` by default.
+
+**Added**:
+
+- `BpkRating` component.
+
 # 10.0.1
 
 **Fixed**:

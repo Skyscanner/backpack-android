@@ -4,7 +4,6 @@
 
 ## Changed
 
-- New design for the `trips` icon.
 - `BpkInteractiveStarRating` resets its value when receiving cancel touch event.
 
 ## How to write a good changelog entry

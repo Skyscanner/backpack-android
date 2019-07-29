@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  style="@style/App.Story"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingOrientation="vertical"
+    app:ratingSize="large"
+    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingTitle="Large"
+    app:ratingValue="9.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingOrientation="vertical"
+    app:ratingSize="base"
+    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingTitle="Base"
+    app:ratingValue="9.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingOrientation="vertical"
+    app:ratingSize="small"
+    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingTitle="Small"
+    app:ratingValue="9.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingOrientation="vertical"
+    app:ratingSize="extra_small"
+    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingTitle="Extra Small"
+    app:ratingValue="9.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingIcon="@drawable/bpk_star"
+    app:ratingOrientation="vertical"
+    app:ratingSize="icon"
+    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingTitle="Icon"
+    app:ratingValue="9.0" />
+
+</LinearLayout>

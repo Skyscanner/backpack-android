@@ -33,17 +33,13 @@
       <enum name="xxxl" value="6" />
       <enum name="caps" value="7" />
     </attr>
-    <!-- {@deprecated Use weight instead.} -->
-    <attr name="emphasize" format="boolean" />
     <attr name="weight" format="enum">
       <enum name="normal" value="0" />
       <enum name="emphasized" value="1" />
       <enum name="heavy" value="2" />
     </attr>
     <attr name="drawableTint" format="reference" />
-    <attr name="fontFamilyBase" format="reference"/>
-    <attr name="fontFamilyEmphasized" format="reference"/>
-    <attr name="fontFamilyHeavy" format="reference"/>
+    <attr name="android:textColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkTextField">
@@ -146,6 +142,29 @@
     <attr name="checkboxColor" format="color" />
   </declare-styleable>
 
+  <declare-styleable name="BpkRating">
+    <attr name="ratingColorLow" format="color" />
+    <attr name="ratingColorMedium" format="color" />
+    <attr name="ratingColorHigh" format="color" />
+
+    <attr name="ratingIcon" format="reference" />
+    <attr name="ratingTitle" format="string|reference" />
+    <attr name="ratingSubtitle" format="string|reference" />
+    <attr name="ratingValue" format="float" />
+
+    <attr name="ratingOrientation" format="enum">
+      <enum value="0" name="horizontal" />
+      <enum value="1" name="vertical" />
+    </attr>
+    <attr name="ratingSize" format="enum">
+      <enum value="0" name="icon" />
+      <enum value="1" name="extra_small" />
+      <enum value="2" name="small" />
+      <enum value="3" name="base" />
+      <enum value="4" name="large" />
+    </attr>
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
@@ -172,9 +191,38 @@
   <attr name="bpkCalendarStyle" format="reference" />
   <attr name="bpkChipStyle" format="reference"/>
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
-  <attr name="bpkTextStyle" format="reference"/>
   <attr name="bpkCheckboxStyle" format="reference"/>
   <attr name="bpkHorizontalNavStyle" format="reference"/>
   <attr name="bpkHorizontalNavStyleAlternate" format="reference"/>
   <attr name="bpkTextFieldStyle" format="reference"/>
+
+  <!-- FONT THEMING START -->
+
+  <attr name="bpkFontFamilyBase" format="reference|string"/>
+  <attr name="bpkFontFamilyEmphasized" format="reference|string"/>
+  <attr name="bpkFontFamilyHeavy" format="reference|string"/>
+
+  <attr name="bpkTextBaseAppearance" format="reference" />
+  <attr name="bpkTextCapsAppearance" format="reference" />
+  <attr name="bpkTextLgAppearance" format="reference" />
+  <attr name="bpkTextSmAppearance" format="reference" />
+  <attr name="bpkTextXlAppearance" format="reference" />
+  <attr name="bpkTextXsAppearance" format="reference" />
+  <attr name="bpkTextXxlAppearance" format="reference" />
+  <attr name="bpkTextXxxlAppearance" format="reference" />
+  <attr name="bpkTextBaseEmphasizedAppearance" format="reference" />
+  <attr name="bpkTextCapsEmphasizedAppearance" format="reference" />
+  <attr name="bpkTextLgEmphasizedAppearance" format="reference" />
+  <attr name="bpkTextSmEmphasizedAppearance" format="reference" />
+  <attr name="bpkTextXlEmphasizedAppearance" format="reference" />
+  <attr name="bpkTextXsEmphasizedAppearance" format="reference" />
+  <attr name="bpkTextXxlEmphasizedAppearance" format="reference" />
+  <attr name="bpkTextXxxlEmphasizedAppearance" format="reference" />
+  <attr name="bpkTextXlHeavyAppearance" format="reference" />
+  <attr name="bpkTextXxlHeavyAppearance" format="reference" />
+  <attr name="bpkTextXxxlHeavyAppearance" format="reference" />
+
+  <!-- FONT THEMING END -->
+
+  <attr name="bpkRatingStyle" format="reference"/>
 </resources>

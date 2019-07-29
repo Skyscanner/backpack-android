@@ -12,9 +12,11 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.unsafeLazy
 import org.junit.Before
+import net.skyscanner.backpack.test.R as TestR
 
 @RunWith(AndroidJUnit4::class)
 class BpkTextTest {
@@ -24,6 +26,7 @@ class BpkTextTest {
   @Before
   fun setUp() {
     context = InstrumentationRegistry.getInstrumentation().targetContext
+    BpkTheme.applyDefaultsToContext(context)
   }
 
   @Test
@@ -57,7 +60,7 @@ class BpkTextTest {
 
     Assert.assertEquals(expectedTextSizeSp, textSizeSp)
     Assert.assertEquals(testString, text.text)
-    Assert.assertEquals(true, text.emphasize)
+    Assert.assertEquals(BpkText.Weight.EMPHASIZED, text.weight)
   }
 
   @Test
@@ -76,41 +79,6 @@ class BpkTextTest {
 
     Assert.assertEquals(expectedTextSizeSp, textSizeSp)
     Assert.assertEquals(testString, text.text)
-  }
-
-  @Test
-  fun emphasized_old() {
-    val text = BpkText(context).apply {
-      text = testString
-      emphasize = true
-    }
-
-    val textSizePx = text.textSize
-    val textSizeSp = textSizePx / context.resources.displayMetrics.scaledDensity
-
-    val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextBaseEmphasized, R.styleable.BpkTextStyle)
-    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) / context.resources.displayMetrics.scaledDensity
-
-    Assert.assertEquals(expectedTextSizeSp, textSizeSp)
-    Assert.assertEquals(testString, text.text)
-    Assert.assertEquals(true, text.emphasize)
-  }
-
-  @Test
-  fun weight_emphasized_compatibility() {
-    val text = BpkText(context).apply {
-      text = testString
-      weight = BpkText.Weight.EMPHASIZED
-    }
-
-    Assert.assertTrue(text.emphasize)
-
-    text.weight = BpkText.Weight.NORMAL
-    Assert.assertFalse(text.emphasize)
-
-    text.emphasize = true
-    Assert.assertTrue(text.emphasize)
-    Assert.assertEquals(BpkText.Weight.EMPHASIZED, text.weight)
   }
 
   @Test(expected = IllegalStateException::class)
@@ -164,7 +132,6 @@ class BpkTextTest {
 
       val font = getFont.invoke(context)
 
-      Assert.assertFalse(message, font.isCustomFont)
       Assert.assertEquals(message, Typeface.create(fontFamily, Typeface.NORMAL), font.typeface)
       Assert.assertEquals(message, font.fontSize, ResourcesUtil.dpToPx(fontSize, context))
       Assert.assertEquals(message, font.letterSpacing, letterSpacing)
@@ -173,7 +140,7 @@ class BpkTextTest {
 
   @Test
   fun getFont_withCustomFont() {
-    val withCustomFont = ContextThemeWrapper(context, net.skyscanner.backpack.test.R.style.TestTextCustomFont)
+    val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
     textDefinitions.forEach { test ->
       val message = test[0] as String
@@ -182,8 +149,16 @@ class BpkTextTest {
 
       val font = getFont.invoke(withCustomFont)
 
-      Assert.assertTrue(message, font.isCustomFont)
-      Assert.assertEquals(message, ResourcesCompat.getFont(withCustomFont, net.skyscanner.backpack.test.R.font.shadows_into_light), font.typeface)
+      val expectedFont = when {
+        message.contains("Emphasized") ->
+          Typeface.create("cursive", Typeface.NORMAL)
+        message.contains("Heavy") ->
+          Typeface.create("casual", Typeface.NORMAL)
+        else ->
+          ResourcesCompat.getFont(withCustomFont, TestR.font.shadows_into_light)
+      }
+
+      Assert.assertEquals(message, expectedFont, font.typeface)
       Assert.assertEquals(message, font.fontSize, ResourcesUtil.dpToPx(fontSize, context))
       Assert.assertEquals(message, font.letterSpacing, null)
     }
@@ -204,7 +179,7 @@ class BpkTextTest {
 
   @Test
   fun applyTo_TextView_withCustomFont() {
-    val withCustomFont = ContextThemeWrapper(context, net.skyscanner.backpack.test.R.style.TestTextCustomFont)
+    val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
     val font = BpkText.getFont(withCustomFont, BpkText.BASE)
     val subject = TextView(withCustomFont)
@@ -230,7 +205,7 @@ class BpkTextTest {
 
   @Test
   fun applyTo_Paint_withCustomFont() {
-    val withCustomFont = ContextThemeWrapper(context, net.skyscanner.backpack.test.R.style.TestTextCustomFont)
+    val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
     val font = BpkText.getFont(withCustomFont, BpkText.BASE)
     val subject = Paint()

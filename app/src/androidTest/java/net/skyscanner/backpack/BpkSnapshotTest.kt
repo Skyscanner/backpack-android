@@ -9,14 +9,17 @@ import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.util.BpkTheme
 
 open class BpkSnapshotTest {
 
   private var height = 100
   private var width = 100
-  var testContext: Context = ContextThemeWrapper(
-    InstrumentationRegistry.getInstrumentation().targetContext,
-    R.style.AppTheme)
+  var testContext: Context =
+    BpkTheme.wrapContextWithDefaults(
+      ContextThemeWrapper(
+        InstrumentationRegistry.getInstrumentation().targetContext,
+        R.style.AppTheme))
 
   protected fun setupView(view: View) {
     ViewHelpers.setupView(view)

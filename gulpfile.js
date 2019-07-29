@@ -53,11 +53,6 @@ const VALID_TEXT_STYLES = new Set([
   'xxxl',
 ]);
 const VALID_HEAVY_TEXT_STYLES = new Set(['xl', 'xxl', 'xxxl']);
-const {
-  FONT_FAMILY,
-  FONT_FAMILY_EMPHASIZE,
-  FONT_FAMILY_HEAVY,
-} = tokens.aliases;
 
 const FONT_WEIGHTS = {
   normal: 'normal',
@@ -66,9 +61,9 @@ const FONT_WEIGHTS = {
 };
 
 const fontFamilyMappings = {
-  [FONT_WEIGHTS.normal]: FONT_FAMILY.value.replace(/"/g, ''),
-  [FONT_WEIGHTS.emphasized]: FONT_FAMILY_EMPHASIZE.value.replace(/"/g, ''),
-  [FONT_WEIGHTS.heavy]: FONT_FAMILY_HEAVY.value.replace(/"/g, ''),
+  [FONT_WEIGHTS.normal]: '?bpkFontFamilyBase',
+  [FONT_WEIGHTS.emphasized]: '?bpkFontFamilyEmphasized',
+  [FONT_WEIGHTS.heavy]: '?bpkFontFamilyHeavy',
 };
 
 const pascalCase = s =>
@@ -325,3 +320,36 @@ gulp.task(
 );
 
 gulp.task('clean', () => del([PATHS.outputRes], { force: true }));
+
+gulp.task('printTextAttributes', done => {
+  [
+    ...getTextStyles(FONT_WEIGHTS.normal),
+    ...getTextStyles(FONT_WEIGHTS.emphasized),
+    ...getTextStyles(FONT_WEIGHTS.heavy),
+  ].forEach(({ name }) => {
+    console.log(`<attr name="${name}Appearance" format="reference" />`);
+  });
+  done();
+});
+
+/**
+ * Generate text styles for our themes
+ * Usage:
+ *  gulp printTextAppearenceStyles
+ *  // Add a suffix to the style name. eg `bpkTextBaseSerif`
+ *  gulp printTextAppearenceStyles --serif
+ */
+gulp.task('printTextAppearenceStyles', done => {
+  const parseSuffix = _.flow([s => s.substring(2), _.capitalize]);
+  const fontSuffix = parseSuffix(process.argv[3] || '');
+  [
+    ...getTextStyles(FONT_WEIGHTS.normal),
+    ...getTextStyles(FONT_WEIGHTS.emphasized),
+    ...getTextStyles(FONT_WEIGHTS.heavy),
+  ].forEach(({ name }) => {
+    console.log(
+      `<item name="${name}Appearance">@style/${name}${fontSuffix}</item>`,
+    );
+  });
+  done();
+});

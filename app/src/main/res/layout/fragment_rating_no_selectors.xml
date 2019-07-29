@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  style="@style/App.Story"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingSize="small"
+    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingTitle="@string/rating_sample_const_title"
+    app:ratingValue="3.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingSize="small"
+    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingTitle="@string/rating_sample_const_title"
+    app:ratingValue="7.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingSize="small"
+    app:ratingSubtitle="@array/rating_sample_subtitles"
+    app:ratingTitle="@string/rating_sample_const_title"
+    app:ratingValue="8.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingSize="small"
+    app:ratingSubtitle="@string/rating_sample_const_subtitle"
+    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingValue="3.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingSize="small"
+    app:ratingSubtitle="@string/rating_sample_const_subtitle"
+    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingValue="7.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingSize="small"
+    app:ratingSubtitle="@string/rating_sample_const_subtitle"
+    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingValue="8.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingSize="icon"
+    app:ratingIcon="@drawable/bpk_star"
+    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingValue="3.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingSize="icon"
+    app:ratingIcon="@drawable/bpk_star"
+    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingValue="7.0" />
+
+  <net.skyscanner.backpack.rating.BpkRating
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:ratingSize="icon"
+    app:ratingIcon="@drawable/bpk_star"
+    app:ratingTitle="@array/rating_sample_titles"
+    app:ratingValue="8.0" />
+
+
+</LinearLayout>
