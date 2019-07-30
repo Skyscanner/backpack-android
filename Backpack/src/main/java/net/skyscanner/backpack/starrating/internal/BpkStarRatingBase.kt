@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 
 import android.content.Context
-import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
@@ -29,7 +28,7 @@ open class BpkStarRatingBase internal constructor(
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
   private val empty: Drawable
-  private val half: Drawable
+  private val half: HalfStarDrawable
   private val full: Drawable
 
   private var _maxRating: Int = 5
@@ -68,10 +67,10 @@ open class BpkStarRatingBase internal constructor(
     }
 
     this.empty = getDrawable(empty, starColor)
-    this.half = LayerDrawable(arrayOf(
+    this.half = HalfStarDrawable(
       this.empty,
       getDrawable(half, starFilledColor)
-    ))
+    )
     this.full = getDrawable(full, starFilledColor)
     update()
   }
@@ -82,7 +81,8 @@ open class BpkStarRatingBase internal constructor(
   }
 
   private fun update() {
-//    half.rtl = layoutDirection == View.LAYOUT_DIRECTION_RTL
+    half.rtl = layoutDirection == View.LAYOUT_DIRECTION_RTL
+
     val diff = maxRating - childCount
     if (diff > 0) {
       for (i in 0 until diff) {
