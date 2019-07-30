@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 11.0.1
+
+**Changed**:
+
+- `BpkInteractiveStarRating` resets its value when receiving cancel touch event.
+
 # 11.0.0
 
 **Breaking**:
