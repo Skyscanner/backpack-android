@@ -68,8 +68,8 @@ open class BpkStarRatingBase internal constructor(
 
     this.empty = getDrawable(empty, starColor)
     this.half = HalfStarDrawable(
-      background = this.empty,
-      foreground = getDrawable(half, starFilledColor)
+      this.empty,
+      getDrawable(half, starFilledColor)
     )
     this.full = getDrawable(full, starFilledColor)
     update()
@@ -82,6 +82,7 @@ open class BpkStarRatingBase internal constructor(
 
   private fun update() {
     half.rtl = layoutDirection == View.LAYOUT_DIRECTION_RTL
+
     val diff = maxRating - childCount
     if (diff > 0) {
       for (i in 0 until diff) {

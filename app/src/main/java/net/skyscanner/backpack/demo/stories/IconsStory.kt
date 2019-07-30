@@ -43,10 +43,22 @@ class IconsStory : Story() {
     }
 
     iconsGridView.layoutManager = GridLayoutManager(context, 10)
-    iconsGridView.adapter = IconsAdapter(drawableResources, iconNames)
+    iconsGridView.adapter = IconsAdapter(
+      drawableResources,
+      iconNames,
+      arguments?.getInt(LAYOUT_DIRECTION) ?: View.LAYOUT_DIRECTION_LTR)
   }
 
   private fun isVectorDrawable(d: Drawable): Boolean {
     return d is VectorDrawableCompat || PLATFORM_VD_CLAZZ == d.javaClass.name
+  }
+
+  companion object {
+    const val LAYOUT_DIRECTION = "LAYOUT_DIRECTION"
+
+    infix fun of(layoutDirection: Int) = IconsStory().apply {
+      arguments = Bundle()
+      arguments?.putInt(LAYOUT_DIRECTION, layoutDirection)
+    }
   }
 }

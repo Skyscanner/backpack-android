@@ -1,9 +1,3 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    <path
-        android:fillColor="#000000"
-        android:pathData="M12.7 11.3A0.9 0.9 0 0 1 13 12c0 0.3-0.1 0.5-0.3 0.7A0.9 0.9 0 0 1 12 13a0.9 0.9 0 0 1-0.7-0.3A0.9 0.9 0 0 1 11 12c0-0.3 0.1-0.5 0.3-0.7A0.9 0.9 0 0 1 12 11c0.3 0 0.5 0.1 0.7 0.3zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-4.6-5.8l-6.1 3.9a1.16 1.16 0 0 0-0.7 0.5c-0.2 0.2-0.4 0.4-0.5 0.7l-3.9 6.1c-0.1 0.2 0.1 0.5 0.3 0.3l6.1-3.9a1.8 1.8 0 0 0 0.7-0.5c0.2-0.2 0.4-0.5 0.5-0.7l3.9-6.1c0.2-0.1-0.1-0.4-0.3-0.3z"/>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:fillColor="#000000" android:pathData="M12.7 11.3A0.9 0.9 0 0 1 13 12c0 0.3-0.1 0.5-0.3 0.7A0.9 0.9 0 0 1 12 13a0.9 0.9 0 0 1-0.7-0.3A0.9 0.9 0 0 1 11 12c0-0.3 0.1-0.5 0.3-0.7A0.9 0.9 0 0 1 12 11c0.3 0 0.5 0.1 0.7 0.3zM22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10zm-4.6-5.8l-6.1 3.9a1.16 1.16 0 0 0-0.7 0.5c-0.2 0.2-0.4 0.4-0.5 0.7l-3.9 6.1c-0.1 0.2 0.1 0.5 0.3 0.3l6.1-3.9a1.8 1.8 0 0 0 0.7-0.5c0.2-0.2 0.4-0.5 0.5-0.7l3.9-6.1c0.2-0.1-0.1-0.4-0.3-0.3z"/>
 </vector>

@@ -2,9 +2,29 @@
 
 > Place your changes below this line.
 
-## Changed
+**Added:**
 
-- `BpkInteractiveStarRating` resets its value when receiving cancel touch event.
+- Icons:
+  - Added `autoMirrored` props to the following icons:
+    - `arrow-left`
+    - `arrow-right`
+    - `long-arrow-left`
+    - `long-arrow-right`
+    - `chevron-left`
+    - `chevron-right`
+    - `fast-track`
+    - `list`
+    - `media`
+    - `native-android--back`
+    - `native-android--forward`
+    - `policy`
+    - `share`
+    - `star-half`
+    - `swap`
+    - `trend`
+    - `trend--down`
+    - `trend--steady`
+    - `trend--will-rise`
 
 ## How to write a good changelog entry
 

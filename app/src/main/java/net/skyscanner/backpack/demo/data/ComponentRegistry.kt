@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.demo.data
 
+import android.view.View
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.*
 
@@ -124,7 +125,7 @@ object ComponentRegistry {
     "Star Rating" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
-        "RTL" story NodeData { Story of R.layout.fragment_star_rating_rtl },
+        "RTL" story NodeData { Story ofRtl R.layout.fragment_star_rating_default },
         "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
         "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max }
       )),
@@ -143,7 +144,11 @@ object ComponentRegistry {
   )
 
   private val TOKENS_MAP = mapOf(
-    "All Icons" story NodeData { IconsStory() },
+    "All Icons" story NodeData({ children -> SubStory of children },
+      mapOf(
+        "Default" story NodeData { IconsStory() },
+        "RTL" story NodeData { IconsStory of View.LAYOUT_DIRECTION_RTL }
+      )),
     "Color" story NodeData { ColorStory() },
     "Elevation" story NodeData { ElevationStory() },
     "Gradient" story NodeData({ children -> SubStory of children },
