@@ -2,30 +2,6 @@
 
 > Place your changes below this line.
 
-**Added:**
-
-- Icons:
-  - Added `autoMirrored` props to the following icons:
-    - `arrow-left`
-    - `arrow-right`
-    - `long-arrow-left`
-    - `long-arrow-right`
-    - `chevron-left`
-    - `chevron-right`
-    - `fast-track`
-    - `list`
-    - `media`
-    - `native-android--back`
-    - `native-android--forward`
-    - `policy`
-    - `share`
-    - `star-half`
-    - `swap`
-    - `trend`
-    - `trend--down`
-    - `trend--steady`
-    - `trend--will-rise`
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

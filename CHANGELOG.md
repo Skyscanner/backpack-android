@@ -2,9 +2,35 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 11.0.2
+
+**Fixed**:
+
+- Icons:
+  - Added `autoMirrored` props to the following icons:
+    - `arrow-left`
+    - `arrow-right`
+    - `long-arrow-left`
+    - `long-arrow-right`
+    - `chevron-left`
+    - `chevron-right`
+    - `fast-track`
+    - `list`
+    - `media`
+    - `native-android--back`
+    - `native-android--forward`
+    - `policy`
+    - `share`
+    - `star-half`
+    - `swap`
+    - `trend`
+    - `trend--down`
+    - `trend--steady`
+    - `trend--will-rise`
+
 # 11.0.1
 
-**Changed**:
+**Fixed**:
 
 - `BpkInteractiveStarRating` resets its value when receiving cancel touch event.
 
