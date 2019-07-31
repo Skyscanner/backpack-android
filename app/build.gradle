@@ -41,9 +41,10 @@ dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
-  implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidx"
+  implementation "androidx.annotation:annotation:$rootProject.ext.androidx"
+  implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidXLegacy"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
-  implementation "com.google.android.material:material:$rootProject.ext.androidx"
+  implementation "com.google.android.material:material:$rootProject.ext.androidMaterial"
   implementation "com.jakewharton.threetenabp:threetenabp:1.1.2"
   testImplementation 'junit:junit:4.12'
   implementation 'com.facebook.stetho:stetho:1.5.0'
