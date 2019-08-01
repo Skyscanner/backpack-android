@@ -27,9 +27,9 @@ dependencies {
   implementation "androidx.annotation:annotation:$rootProject.ext.androidx"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidx"
-  implementation "com.google.android.material:material:$rootProject.ext.androidx"
+  implementation "com.google.android.material:material:$rootProject.ext.androidMaterial"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
-  implementation "androidx.cardview:cardview:$rootProject.ext.androidx"
+  implementation "androidx.cardview:cardview:$rootProject.ext.cardView"
   implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threeTenAbp"
   androidTestImplementation "androidx.test.ext:junit:1.0.0"
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
