@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 11.0.3
+
+**Fixed:**
+
+- Bumped `androidx.appcompat:appcompat` to `1.0.2`
+
 # 11.0.2
 
 **Fixed**:
