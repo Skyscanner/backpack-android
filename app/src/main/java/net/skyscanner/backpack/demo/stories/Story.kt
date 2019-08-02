@@ -32,11 +32,17 @@ open class Story : ComponentDetailFragment() {
       }
     }
 
-    infix fun ofRtl(fragmentLayout: Int) = Story().apply {
-      arguments = Bundle().apply {
-        putInt(LAYOUT_ID, fragmentLayout)
-        putBoolean(RTL, true)
+    enum class Direction {
+      LTR,
+      RTL,
+    }
+
+    infix fun Story.with(direction: Direction): Story {
+      if (arguments == null) {
+        arguments = Bundle()
       }
+      arguments?.putBoolean(RTL, direction == Companion.Direction.RTL)
+      return this
     }
   }
 }

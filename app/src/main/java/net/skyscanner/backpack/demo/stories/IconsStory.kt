@@ -3,9 +3,7 @@ package net.skyscanner.backpack.demo.stories
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,10 +13,6 @@ import net.skyscanner.backpack.demo.R
 private const val PLATFORM_VD_CLAZZ = "android.graphics.drawable.VectorDrawable"
 
 class IconsStory : Story() {
-
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.fragment_all_icons, container, false)
-  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -46,7 +40,7 @@ class IconsStory : Story() {
     iconsGridView.adapter = IconsAdapter(
       drawableResources,
       iconNames,
-      arguments?.getInt(LAYOUT_DIRECTION) ?: View.LAYOUT_DIRECTION_LTR)
+      view.layoutDirection)
   }
 
   private fun isVectorDrawable(d: Drawable): Boolean {
@@ -54,11 +48,11 @@ class IconsStory : Story() {
   }
 
   companion object {
-    const val LAYOUT_DIRECTION = "LAYOUT_DIRECTION"
+    private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(layoutDirection: Int) = IconsStory().apply {
+    infix fun of(fragmentLayout: Int) = IconsStory().apply {
       arguments = Bundle()
-      arguments?.putInt(LAYOUT_DIRECTION, layoutDirection)
+      arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }
   }
 }
