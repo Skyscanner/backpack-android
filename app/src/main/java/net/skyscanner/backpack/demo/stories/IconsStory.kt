@@ -3,7 +3,9 @@ package net.skyscanner.backpack.demo.stories
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,12 @@ import net.skyscanner.backpack.demo.R
 private const val PLATFORM_VD_CLAZZ = "android.graphics.drawable.VectorDrawable"
 
 class IconsStory : Story() {
+
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    super.onCreateView(inflater, container, savedInstanceState)?.apply {
+      // we force LTR layout here as we need to show LTR grid alignment with LTR/RTL icons
+      layoutDirection = View.LAYOUT_DIRECTION_LTR
+    }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -40,7 +48,7 @@ class IconsStory : Story() {
     iconsGridView.adapter = IconsAdapter(
       drawableResources,
       iconNames,
-      view.layoutDirection)
+      if (isRtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR)
   }
 
   private fun isVectorDrawable(d: Drawable): Boolean {

@@ -12,7 +12,7 @@ open class Story : ComponentDetailFragment() {
     val layoutId = arguments?.getInt(LAYOUT_ID) ?: savedInstanceState?.getInt(LAYOUT_ID)
     if (layoutId != null) {
       return inflater.inflate(layoutId, container, false).apply {
-        if (arguments?.getBoolean(RTL) == true) {
+        if (isRtl) {
           layoutDirection = View.LAYOUT_DIRECTION_RTL
         }
       }
@@ -20,6 +20,9 @@ open class Story : ComponentDetailFragment() {
       throw IllegalStateException("Story has not been property initialized")
     }
   }
+
+  protected val isRtl
+    get() = arguments?.getBoolean(RTL) == true
 
   companion object {
     const val LAYOUT_ID = "fragment_id"
