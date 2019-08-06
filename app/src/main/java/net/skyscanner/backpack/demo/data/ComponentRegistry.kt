@@ -1,8 +1,9 @@
 package net.skyscanner.backpack.demo.data
 
-import android.view.View
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.*
+import net.skyscanner.backpack.demo.stories.Story.Companion.Direction
+import net.skyscanner.backpack.demo.stories.Story.Companion.with
 
 interface RegistryItem {
   val name: String
@@ -72,7 +73,7 @@ object ComponentRegistry {
         "Outline" story NodeData { Story of R.layout.fragment_button_outline },
         "With rounder corners" story NodeData { Story of R.layout.fragment_button_with_corners },
         "Icon alignment" story NodeData { Story of R.layout.fragment_button_icon_alignment },
-        "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment_rtl }
+        "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment with Direction.RTL }
       )),
     "ButtonLink" story NodeData({ children -> SubStory of children },
       mapOf(
@@ -114,7 +115,7 @@ object ComponentRegistry {
         "Icons" story NodeData { Story of R.layout.fragment_rating_icons },
         "No selectors" story NodeData { Story of R.layout.fragment_rating_no_selectors },
         "Sizes" story NodeData { Story of R.layout.fragment_rating_sizes },
-        "Sizes RTL" story NodeData { Story ofRtl R.layout.fragment_rating_sizes },
+        "Sizes RTL" story NodeData { Story of R.layout.fragment_rating_sizes with Direction.RTL },
         "Size Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical }
       )),
     "Spinner" story NodeData({ children -> SubStory of children },
@@ -125,7 +126,7 @@ object ComponentRegistry {
     "Star Rating" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
-        "RTL" story NodeData { Story ofRtl R.layout.fragment_star_rating_default },
+        "RTL" story NodeData { Story of R.layout.fragment_star_rating_default with Direction.RTL },
         "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
         "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max }
       )),
@@ -146,8 +147,8 @@ object ComponentRegistry {
   private val TOKENS_MAP = mapOf(
     "All Icons" story NodeData({ children -> SubStory of children },
       mapOf(
-        "Default" story NodeData { IconsStory() },
-        "RTL" story NodeData { IconsStory of View.LAYOUT_DIRECTION_RTL }
+        "Default" story NodeData { IconsStory of R.layout.fragment_all_icons },
+        "RTL" story NodeData { IconsStory of R.layout.fragment_all_icons with Direction.RTL }
       )),
     "Color" story NodeData { ColorStory() },
     "Elevation" story NodeData { ElevationStory() },
