@@ -11,10 +11,8 @@ import android.util.DisplayMetrics
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.RelativeLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -67,14 +65,24 @@ open class BpkDialog(
   }
 
   private fun setupDialog() {
-    if (style == Style.BOTTOM_SHEET) {
-      window?.setGravity(Gravity.BOTTOM)
-      window?.setWindowAnimations(R.style.Bpk_dialog_animation)
-    }
-
     requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+    window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window?.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    window?.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+
     setContentView(setUpContentView())
+    window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    if (style == Style.BOTTOM_SHEET) {
+      viewHolder?.container?.verticalGravity = DialogContentLayout.Gravity.Bottom
+      window?.setWindowAnimations(R.style.Bpk_dialog_animation)
+    } else {
+      viewHolder?.container?.verticalGravity = DialogContentLayout.Gravity.Center
+    }
+    viewHolder?.container?.dismissListener = {
+      dismiss()
+    }
 
     val metrics = DisplayMetrics()
     val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -85,8 +93,8 @@ open class BpkDialog(
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val view = inflater.inflate(R.layout.bpk_dialog, null)
 
-    viewHolder = ViewHolder(view).apply {
-      val params = contentLayout.layoutParams as RelativeLayout.LayoutParams
+    viewHolder = ViewHolder((view as ViewGroup).getChildAt(0) as DialogContentLayout).apply {
+      val params = contentLayout.layoutParams as ViewGroup.MarginLayoutParams
       params.topMargin = variables.contentContainerMarginTop
       contentLayout.background = getContentBackground()
       contentLayout.setPadding(
@@ -109,7 +117,7 @@ open class BpkDialog(
     return shape
   }
 
-  private class ViewHolder(container: View) {
+  private class ViewHolder(val container: DialogContentLayout) {
     val title: BpkText = container.findViewById(R.id.dialog_title)
     val description: BpkText = container.findViewById(R.id.dialog_description)
     val iconView: BpkDialogIcon = container.findViewById(R.id.dialog_icon)
