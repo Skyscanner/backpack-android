@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:top="36dp">
+    <shape android:shape="rectangle">
+      <corners android:topLeftRadius="@dimen/bpkBorderRadiusSm" android:topRightRadius="@dimen/bpkBorderRadiusSm" />
+      <solid android:color="@color/bpk_dialog_background" />
+      <padding android:left="@dimen/bpk_dialog_padding_horizontal" android:right="@dimen/bpk_dialog_padding_horizontal"  />
+    </shape>
+  </item>
+</layer-list>

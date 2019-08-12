@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.dialog
+package net.skyscanner.backpack.dialog.internal
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -12,7 +12,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import kotlin.math.roundToInt
 
-internal class DialogContentLayout @JvmOverloads constructor(
+internal class DialogWindowLayout @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
@@ -37,7 +37,7 @@ internal class DialogContentLayout @JvmOverloads constructor(
       background = if (value) fullscreenBg else modalBg
     }
 
-  private val modalPadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
+  private val modalPadding = resources.getDimensionPixelSize(R.dimen.bpk_dialog_margin)
 
   var dismissListener: () -> Unit = {
   }

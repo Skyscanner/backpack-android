@@ -10,4 +10,10 @@
   <dimen name="bpk_horizontal_nav_size_normal">36dp</dimen>
   <dimen name="bpk_rating_score_badge_size_small">36dp</dimen>
   <dimen name="bpk_rating_score_badge_size_large">48dp</dimen>
+
+  <dimen name="bpk_dialog_padding_horizontal">@dimen/bpkSpacingXl</dimen>
+  <dimen name="bpk_dialog_margin">@dimen/bpkSpacingXl</dimen>
+  <dimen name="bpk_dialog_spacing_title">12dp</dimen>
+  <dimen name="bpk_dialog_spacing_button">@dimen/bpkSpacingMd</dimen>
+  <dimen name="bpk_dialog_padding_bottom">@dimen/bpkSpacingMd</dimen>
 </resources>

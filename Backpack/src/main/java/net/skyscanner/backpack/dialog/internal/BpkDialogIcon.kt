@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.dialog
+package net.skyscanner.backpack.dialog.internal
 
 import android.content.Context
 import android.content.res.ColorStateList
@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.ImageViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.dialog.BpkDialog
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.getColor
 
@@ -34,7 +35,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
 
   private fun initialize() {
     val imageSize = resources.getDimension(R.dimen.bpk_icon_size_normal).toInt()
-    imageView.layoutParams = RelativeLayout.LayoutParams(imageSize, imageSize).apply {
+    imageView.layoutParams = LayoutParams(imageSize, imageSize).apply {
       addRule(CENTER_IN_PARENT, TRUE)
     }
 
