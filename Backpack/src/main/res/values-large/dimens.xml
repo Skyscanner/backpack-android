@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- internal resources -->
+  <dimen name="bpk_dialog_preferred_width">440dp</dimen>
+</resources>

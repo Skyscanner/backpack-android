@@ -105,7 +105,7 @@ object ComponentRegistry {
         "Delete confirmation" story NodeData { DialogStory of "Delete" },
         "Success" story NodeData { DialogStory of "Confirmation" },
         "With Links" story NodeData { DialogStory of "Links" },
-        "Long" story NodeData { DialogStory of "Long" }
+        "Long Text" story NodeData { DialogStory of "Long" }
       )),
     "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },

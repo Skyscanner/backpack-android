@@ -15,7 +15,6 @@ import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import net.skyscanner.backpack.dialog.internal.BpkDialogIcon
-import net.skyscanner.backpack.dialog.internal.DialogConstants
 import net.skyscanner.backpack.dialog.internal.DialogWindowLayout
 
 open class BpkDialog(
@@ -30,7 +29,6 @@ open class BpkDialog(
   }
 
   private var viewHolder: ViewHolder? = null
-  private val variables = DialogConstants(context)
 
   init {
     setupDialog()

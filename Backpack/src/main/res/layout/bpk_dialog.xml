@@ -12,7 +12,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      app:layout_constraintWidth_max="@dimen/abc_config_prefDialogWidth">
+      app:layout_constraintWidth_max="@dimen/bpk_dialog_preferred_width">
 
       <ScrollView
         android:layout_width="match_parent"
