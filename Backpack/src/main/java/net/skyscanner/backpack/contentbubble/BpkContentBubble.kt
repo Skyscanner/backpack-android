@@ -197,26 +197,29 @@ open class BpkContentBubble @JvmOverloads constructor(
     val width = width.toFloat()
     val height = height.toFloat()
     val radiusHeight = cornerRadiusDrawable.intrinsicHeight
+    val radiusWidth = cornerRadiusDrawable.intrinsicWidth
     val radiusHalfHeight = (radiusHeight / 2).toFloat()
     val radiusHalfWidth = (cornerRadiusDrawable.intrinsicWidth / 2).toFloat()
     val pointerHeight = pointerDrawable.intrinsicHeight
 
-    canvas.rotate(90f, radiusHalfWidth, radiusHalfHeight)
-    canvas.drawBitmap(radiusMask, 0f, 0f, paint)
-    canvas.rotate(-90f, radiusHalfWidth, radiusHalfHeight)
+    val count = canvas.saveCount
 
-    canvas.translate(0f, height - pointerHeight - radiusHeight)
-    canvas.drawBitmap(radiusMask, 0f, 0f, paint)
+    // bottom right corner
+    canvas.drawBitmap(radiusMask, 0f, height - pointerHeight - radiusHeight, paint)
 
-    canvas.translate(width - radiusHeight, 0f)
-    canvas.rotate(270f, radiusHalfWidth, radiusHalfHeight)
-    canvas.drawBitmap(radiusMask, 0f, 0f, paint)
-
-    canvas.rotate(-270f, radiusHalfWidth, radiusHalfHeight)
-    canvas.translate(0f, -(height - pointerHeight - radiusHeight))
-
+    // top left corner
     canvas.rotate(180f, radiusHalfWidth, radiusHalfHeight)
+    canvas.drawBitmap(radiusMask, -(width - radiusWidth), 0f, paint)
+
+    // top left corner
+    canvas.rotate(-90f, radiusHalfWidth, radiusHalfHeight)
     canvas.drawBitmap(radiusMask, 0f, 0f, paint)
+
+    // bottom right corner
+    canvas.rotate(-180f, radiusHalfWidth, radiusHalfHeight)
+    canvas.drawBitmap(radiusMask, -(height - pointerHeight - radiusHeight), width - radiusWidth, paint)
+
+    canvas.restoreToCount(count)
   }
 
   private fun mapXmlToPointerPosition(id: Int) =
