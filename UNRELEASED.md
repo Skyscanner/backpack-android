@@ -4,7 +4,7 @@
 
 **Added:**
 
-- Added `BpkContentBubble` component
+- Added `BpkFlare` component
 
 ## How to write a good changelog entry
 

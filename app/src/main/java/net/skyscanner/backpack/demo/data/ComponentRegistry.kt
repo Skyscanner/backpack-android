@@ -98,14 +98,6 @@ object ComponentRegistry {
       )),
     "Chip" story NodeData { ChipStory() },
     "Checkbox" story NodeData { Story of R.layout.fragment_checkbox },
-    "Content Bubble" story NodeData({ children -> SubStory of children },
-      mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_content_bubble },
-        "Pointer offset" story NodeData { Story of R.layout.fragment_content_bubble_pointer_offset },
-        "Pointer offset RTL" story NodeData { Story of R.layout.fragment_content_bubble_pointer_offset with Direction.RTL },
-        "Rounded" story NodeData { Story of R.layout.fragment_content_bubble_rounded },
-        "Fit content" story NodeData { Story of R.layout.fragment_content_bubble_fitcontent }
-        )),
     "Dialog" story NodeData({ children -> SubStory of children },
       mapOf(
         "With call to action" story NodeData { DialogStory of "Normal" },
@@ -113,6 +105,14 @@ object ComponentRegistry {
         "Delete confirmation" story NodeData { DialogStory of "Delete" },
         "Success" story NodeData { DialogStory of "Confirmation" },
         "With Links" story NodeData { DialogStory of "Links" }
+      )),
+    "Flare" story NodeData({ children -> SubStory of children },
+      mapOf(
+        "Default" story NodeData { Story of R.layout.fragment_flare },
+        "Pointer offset" story NodeData { Story of R.layout.fragment_flare_pointer_offset },
+        "Pointer offset RTL" story NodeData { Story of R.layout.fragment_flare_pointer_offset with Direction.RTL },
+        "Rounded" story NodeData { Story of R.layout.fragment_flare_rounded },
+        "Fit content" story NodeData { Story of R.layout.fragment_flare_fitcontent }
       )),
     "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },

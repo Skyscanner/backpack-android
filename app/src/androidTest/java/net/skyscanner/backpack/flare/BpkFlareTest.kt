@@ -1,6 +1,5 @@
-package net.skyscanner.backpack.contentbubble
+package net.skyscanner.backpack.flare
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
@@ -18,16 +17,9 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 
-class BpkContentBubbleTest : BpkSnapshotTest() {
+class BpkFlareTest : BpkSnapshotTest() {
 
-  private class CustomContentBubble(context: Context) : BpkContentBubble(
-    context,
-    null,
-    0,
-    ContextCompat.getDrawable(context, R.drawable.bpk_arrow_down)!!,
-    ContextCompat.getDrawable(context, R.drawable.bpk_add_circle)!!)
-
-  private val subject = BpkContentBubble(testContext).apply {
+  private val subject = BpkFlare(testContext).apply {
     layoutParams = ViewGroup.LayoutParams(300, 100)
   }
 
@@ -61,7 +53,7 @@ class BpkContentBubbleTest : BpkSnapshotTest() {
   fun screenshotTestContentBubblePointerPositionStart() {
     snap(subject.apply {
       addView(imageView)
-      pointerPosition = BpkContentBubble.PointerPosition.START
+      pointerPosition = BpkFlare.PointerPosition.START
     })
   }
 
@@ -69,14 +61,14 @@ class BpkContentBubbleTest : BpkSnapshotTest() {
   fun screenshotTestContentBubblePointerPositionEnd() {
     snap(subject.apply {
       addView(imageView)
-      pointerPosition = BpkContentBubble.PointerPosition.END
+      pointerPosition = BpkFlare.PointerPosition.END
     })
   }
 
   @Test
   fun screenshotTestContentBubblePointerPositionStart_RTL() {
     snap(subject.apply {
-      pointerPosition = BpkContentBubble.PointerPosition.START
+      pointerPosition = BpkFlare.PointerPosition.START
       layoutDirection = View.LAYOUT_DIRECTION_RTL
       addView(imageView)
     })
@@ -85,7 +77,7 @@ class BpkContentBubbleTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestContentBubblePointerPositionEnd_RTL() {
     snap(subject.apply {
-      pointerPosition = BpkContentBubble.PointerPosition.END
+      pointerPosition = BpkFlare.PointerPosition.END
       layoutDirection = View.LAYOUT_DIRECTION_RTL
       addView(imageView)
     })
@@ -102,15 +94,6 @@ class BpkContentBubbleTest : BpkSnapshotTest() {
           background = ColorDrawable(Color.LTGRAY)
         })
       })
-    })
-  }
-
-  @Test
-  fun screenshotTestContentBubble_withCustomDrawables() {
-    snap(CustomContentBubble(testContext).apply {
-      layoutParams = ViewGroup.LayoutParams(300, 100)
-      round = true
-      addView(imageView)
     })
   }
 }

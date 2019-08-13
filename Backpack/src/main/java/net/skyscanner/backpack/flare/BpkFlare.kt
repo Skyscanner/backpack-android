@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.contentbubble
+package net.skyscanner.backpack.flare
 
 import android.content.Context
 import android.graphics.*
@@ -14,18 +14,16 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 
 /**
- * [BpkContentBubble] is designed to render a single item inside a "bubble".
+ * [BpkFlare] is designed to render a single item inside a "bubble".
  * Think of message apps and how they show content inside text bubbles.
  *
  * No background or padding should be set directly to this view, set it directly its
  * child.
  */
-open class BpkContentBubble @JvmOverloads constructor(
+open class BpkFlare @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
-  private val pointerDrawable: Drawable = ContextCompat.getDrawable(context, R.drawable.content_bubble_default_pointer)!!,
-  private val cornerRadiusDrawable: Drawable = ContextCompat.getDrawable(context, R.drawable.content_bubble_default_radii)!!
+  defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
   enum class PointerPosition(internal val id: Int, internal val offset: Float) {
@@ -34,11 +32,19 @@ open class BpkContentBubble @JvmOverloads constructor(
     END(2, 0.75f)
   }
 
-  private lateinit var mask: Bitmap
-  private lateinit var maskCanvas: Canvas
+  private val pointerDrawable: Drawable = ContextCompat.getDrawable(context, R.drawable.flare_default_pointer)!!.apply {
+    setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+  }
+  private val cornerRadiusDrawable: Drawable = ContextCompat.getDrawable(context, R.drawable.flare_default_radius)!!.apply {
+    setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+  }
 
-  private lateinit var radiusMask: Bitmap
-  private lateinit var radiusMaskCanvas: Canvas
+  private val mask = Bitmap.createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+    pointerDrawable.draw(Canvas(this))
+  }
+  private val radiusMask = Bitmap.createBitmap(cornerRadiusDrawable.intrinsicWidth, cornerRadiusDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+    cornerRadiusDrawable.draw(Canvas(this))
+  }
 
   private val clipRect = RectF()
   private val porterDuffXfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
@@ -52,19 +58,19 @@ open class BpkContentBubble @JvmOverloads constructor(
    * ensure all content is visible.
    */
   var fitContent = false
-    set(value) {
-      field = value
-      requestLayout()
-    }
+  set(value) {
+    field = value
+    requestLayout()
+  }
 
   /**
    * Specify if corner radius should be added or not.
    */
   var round = false
-    set(value) {
-      field = value
-      requestLayout()
-    }
+  set(value) {
+    field = value
+    requestLayout()
+  }
 
   /**
    * Specify where the pointer should be rendered.
@@ -72,22 +78,22 @@ open class BpkContentBubble @JvmOverloads constructor(
    * @see [PointerPosition]
    */
   var pointerPosition = PointerPosition.MIDDLE
-    set(value) {
-      field = value
-      requestLayout()
-    }
+  set(value) {
+    field = value
+    requestLayout()
+  }
 
   init {
     this.initialize(attrs, defStyleAttr)
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    context.theme.obtainStyledAttributes(attrs, R.styleable.BpkContentBubble, defStyleAttr, 0)
+    context.theme.obtainStyledAttributes(attrs, R.styleable.BpkFlare, defStyleAttr, 0)
       ?.use {
-        fitContent = it.getBoolean(R.styleable.BpkContentBubble_contentBubbleFitContent, fitContent)
-        round = it.getBoolean(R.styleable.BpkContentBubble_contentBubbleRound, round)
+        fitContent = it.getBoolean(R.styleable.BpkFlare_flareFitContent, fitContent)
+        round = it.getBoolean(R.styleable.BpkFlare_flareRound, round)
 
-        pointerPosition = it.getInt(R.styleable.BpkContentBubble_contentBubblePointerPosition, pointerPosition.id)
+        pointerPosition = it.getInt(R.styleable.BpkFlare_flarePointerPosition, pointerPosition.id)
           .let(::mapXmlToPointerPosition) ?: pointerPosition
       }
 
@@ -96,16 +102,6 @@ open class BpkContentBubble @JvmOverloads constructor(
     setPadding(0, 0, 0, 0)
     // PorterDuffXfermode doesn't work in some devices when hardware acceleration is on
     setLayerType(LAYER_TYPE_SOFTWARE, null)
-
-    pointerDrawable.apply {
-      setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-    }
-
-    cornerRadiusDrawable.apply {
-      setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-    }
-
-    setUpMasks()
   }
 
   override fun draw(canvas: Canvas) {
@@ -171,17 +167,6 @@ open class BpkContentBubble @JvmOverloads constructor(
       @Suppress("DEPRECATION")
       this.clipRect(rect, Region.Op.DIFFERENCE)
     }
-  }
-
-  private fun setUpMasks() {
-    mask = Bitmap.createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-    maskCanvas = Canvas(mask)
-
-    radiusMask = Bitmap.createBitmap(cornerRadiusDrawable.intrinsicWidth, cornerRadiusDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-    radiusMaskCanvas = Canvas(radiusMask)
-
-    pointerDrawable.draw(maskCanvas)
-    cornerRadiusDrawable.draw(radiusMaskCanvas)
   }
 
   private fun drawRadiusMask(canvas: Canvas) {

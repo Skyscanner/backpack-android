@@ -165,10 +165,10 @@
     </attr>
   </declare-styleable>
 
-  <declare-styleable name="BpkContentBubble">
-    <attr name="contentBubbleFitContent" format="boolean" />
-    <attr name="contentBubbleRound" format="boolean" />
-    <attr name="contentBubblePointerPosition" format="enum" >
+  <declare-styleable name="BpkFlare">
+    <attr name="flareFitContent" format="boolean" />
+    <attr name="flareRound" format="boolean" />
+    <attr name="flarePointerPosition" format="enum" >
       <enum value="0" name="start" />
       <enum value="1" name="middle" />
       <enum value="2" name="end" />

@@ -2,43 +2,46 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/App.Story"
-  android:padding="0dp"
-  android:orientation="vertical">
+  android:orientation="vertical"
+  android:padding="0dp">
 
-  <net.skyscanner.backpack.contentbubble.BpkContentBubble
+  <net.skyscanner.backpack.flare.BpkFlare
     android:layout_width="wrap_content"
     android:layout_height="150dp"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:contentBubblePointerPosition="start">
+    app:flarePointerPosition="start">
+
     <androidx.appcompat.widget.AppCompatImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:scaleType="centerCrop"
-      app:srcCompat="@drawable/canadian_rockies_canada"/>
-  </net.skyscanner.backpack.contentbubble.BpkContentBubble>
+      app:srcCompat="@drawable/canadian_rockies_canada" />
+  </net.skyscanner.backpack.flare.BpkFlare>
 
-  <net.skyscanner.backpack.contentbubble.BpkContentBubble
+  <net.skyscanner.backpack.flare.BpkFlare
     android:layout_width="wrap_content"
     android:layout_height="150dp"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:contentBubblePointerPosition="middle">
+    app:flarePointerPosition="middle">
+
     <androidx.appcompat.widget.AppCompatImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:scaleType="centerCrop"
-      app:srcCompat="@drawable/canadian_rockies_canada"/>
-  </net.skyscanner.backpack.contentbubble.BpkContentBubble>
+      app:srcCompat="@drawable/canadian_rockies_canada" />
+  </net.skyscanner.backpack.flare.BpkFlare>
 
-  <net.skyscanner.backpack.contentbubble.BpkContentBubble
+  <net.skyscanner.backpack.flare.BpkFlare
     android:layout_width="wrap_content"
     android:layout_height="150dp"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:contentBubblePointerPosition="end">
+    app:flarePointerPosition="end">
+
     <androidx.appcompat.widget.AppCompatImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:scaleType="centerCrop"
-      app:srcCompat="@drawable/canadian_rockies_canada"/>
-  </net.skyscanner.backpack.contentbubble.BpkContentBubble>
+      app:srcCompat="@drawable/canadian_rockies_canada" />
+  </net.skyscanner.backpack.flare.BpkFlare>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
