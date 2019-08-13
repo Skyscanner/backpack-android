@@ -30,7 +30,7 @@ class BpkDialogTest : BpkSnapshotTest() {
 
   @Before
   fun setUp() {
-    setDimensions(400, 350)
+    setDimensions(700, 700)
     activity = activityRule.activity
   }
 
@@ -136,7 +136,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       dialog.show()
     }
 
-    onView(withId(R.id.dialog_content_layout))
+    onView(withId(R.id.dialog_buttons_root))
       .inRoot(isDialog())
       .check { _, _ ->
         // This is not ideal but I couldn't find a way to snapshot the whole window and we need contrast to

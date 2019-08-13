@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <net.skyscanner.backpack.dialog.internal.DialogInsetsLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  tools:background="@color/bpkGray500">
 
   <net.skyscanner.backpack.dialog.internal.DialogWindowLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-      android:layout_width="match_parent"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:orientation="vertical"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintWidth_max="@dimen/bpk_dialog_preferred_width">
 
       <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="@dimen/bpkSpacingLg"
+        android:requiresFadingEdge="vertical"
         android:scrollbarStyle="outsideOverlay">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -30,7 +39,8 @@
             android:id="@+id/dialog_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            tools:src="@drawable/bpk_trash" />
 
           <net.skyscanner.backpack.text.BpkText
             android:id="@+id/dialog_title"
@@ -39,7 +49,8 @@
             android:layout_marginTop="@dimen/bpk_dialog_spacing_title"
             android:textAlignment="center"
             app:textStyle="xl"
-            app:weight="emphasized" />
+            app:weight="emphasized"
+            tools:text="Title" />
 
           <net.skyscanner.backpack.text.BpkText
             android:id="@+id/dialog_description"
@@ -48,14 +59,15 @@
             android:layout_marginTop="@dimen/bpkSpacingMd"
             android:layout_marginBottom="@dimen/bpkSpacingLg"
             android:textAlignment="center"
-            app:textStyle="lg" />
+            app:textStyle="lg"
+            tools:text="Message" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
       </ScrollView>
 
       <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/buttons_root_layout"
+        android:id="@+id/dialog_buttons_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bpk_bg_dialog_bottom"

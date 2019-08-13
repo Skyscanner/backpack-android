@@ -97,7 +97,7 @@ class BpkDialogTest {
       dialog.show()
     }
 
-    onView(withId(R.id.dialog_content_layout))
+    onView(withId(R.id.dialog_buttons_root))
       .check { _, _ ->
         val gravity = dialog.window.attributes.gravity
         val windowAnimation = dialog.window.attributes.windowAnimations
@@ -115,7 +115,7 @@ class BpkDialogTest {
       dialog.show()
     }
 
-    onView(withId(R.id.dialog_content_layout))
+    onView(withId(R.id.dialog_buttons_root))
       .check { _, _ ->
         val gravity = dialog.window.attributes.gravity
         val windowAnimation = dialog.window.attributes.windowAnimations

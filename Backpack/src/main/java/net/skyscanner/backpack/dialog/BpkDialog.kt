@@ -94,6 +94,6 @@ open class BpkDialog(
     val title: BpkText = container.findViewById(R.id.dialog_title)
     val description: BpkText = container.findViewById(R.id.dialog_description)
     val iconView: BpkDialogIcon = container.findViewById(R.id.dialog_icon)
-    val buttonsRoot: ViewGroup = container.findViewById(R.id.buttons_root_layout)
+    val buttonsRoot: ViewGroup = container.findViewById(R.id.dialog_buttons_root)
   }
 }
