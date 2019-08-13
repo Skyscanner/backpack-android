@@ -47,39 +47,33 @@ open class BpkContentBubble @JvmOverloads constructor(
     isAntiAlias = true
   }
 
-  private var _fitContent = false
   /**
    * When fitContent is true the view will ensure extra space is reserved for the bubble pointer to
    * ensure all content is visible.
    */
-  var fitContent: Boolean
-    get() = _fitContent
+  var fitContent = false
     set(value) {
-      _fitContent = value
+      field = value
       requestLayout()
     }
 
-  private var _round = false
   /**
    * Specify if corner radius should be added or not.
    */
-  var round: Boolean
-    get() = _round
+  var round = false
     set(value) {
-      _round = value
+      field = value
       requestLayout()
     }
 
-  private var _pointerPosition = PointerPosition.MIDDLE
   /**
    * Specify where the pointer should be rendered.
    *
    * @see [PointerPosition]
    */
-  var pointerPosition: PointerPosition
-    get() = _pointerPosition
+  var pointerPosition = PointerPosition.MIDDLE
     set(value) {
-      _pointerPosition = value
+      field = value
       requestLayout()
     }
 
@@ -90,10 +84,10 @@ open class BpkContentBubble @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkContentBubble, defStyleAttr, 0)
       ?.use {
-        _fitContent = it.getBoolean(R.styleable.BpkContentBubble_contentBubbleFitContent, fitContent)
-        _round = it.getBoolean(R.styleable.BpkContentBubble_contentBubbleRound, round)
+        fitContent = it.getBoolean(R.styleable.BpkContentBubble_contentBubbleFitContent, fitContent)
+        round = it.getBoolean(R.styleable.BpkContentBubble_contentBubbleRound, round)
 
-        _pointerPosition = it.getInt(R.styleable.BpkContentBubble_contentBubblePointerPosition, pointerPosition.id)
+        pointerPosition = it.getInt(R.styleable.BpkContentBubble_contentBubblePointerPosition, pointerPosition.id)
           .let(::mapXmlToPointerPosition) ?: pointerPosition
       }
 
@@ -120,14 +114,14 @@ open class BpkContentBubble @JvmOverloads constructor(
     val width = width.toFloat()
     val height = height.toFloat()
 
-    val pointerHalfWidth = pointerDrawable.intrinsicWidth / 2
+    val pointerHalfWidth = mask.width / 2
     val pointerOffset = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
       1 - pointerPosition.offset
     } else {
       pointerPosition.offset
     }
 
-    val yStart = height - pointerDrawable.intrinsicHeight
+    val yStart = height - mask.height
     val pointerXStart = width * pointerOffset - pointerHalfWidth
     val pointerXEnd = width * pointerOffset + pointerHalfWidth
 
@@ -140,14 +134,11 @@ open class BpkContentBubble @JvmOverloads constructor(
     super.draw(canvas)
     canvas.restoreToCount(count)
 
-    paint.xfermode = porterDuffXfermode
     canvas.drawBitmap(mask, pointerXStart, yStart, paint)
 
     if (round) {
       drawRadiusMask(canvas)
     }
-
-    paint.xfermode = null
   }
 
   override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -196,18 +187,18 @@ open class BpkContentBubble @JvmOverloads constructor(
   private fun drawRadiusMask(canvas: Canvas) {
     val width = width.toFloat()
     val height = height.toFloat()
-    val radiusHeight = cornerRadiusDrawable.intrinsicHeight
-    val radiusWidth = cornerRadiusDrawable.intrinsicWidth
+    val radiusHeight = radiusMask.height
+    val radiusWidth = radiusMask.width
     val radiusHalfHeight = (radiusHeight / 2).toFloat()
-    val radiusHalfWidth = (cornerRadiusDrawable.intrinsicWidth / 2).toFloat()
-    val pointerHeight = pointerDrawable.intrinsicHeight
+    val radiusHalfWidth = (radiusHeight / 2).toFloat()
+    val pointerHeight = mask.height
 
     val count = canvas.saveCount
 
     // bottom right corner
     canvas.drawBitmap(radiusMask, 0f, height - pointerHeight - radiusHeight, paint)
 
-    // top left corner
+    // top right corner
     canvas.rotate(180f, radiusHalfWidth, radiusHalfHeight)
     canvas.drawBitmap(radiusMask, -(width - radiusWidth), 0f, paint)
 
