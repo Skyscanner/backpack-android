@@ -13,7 +13,7 @@ class SnackbarStory : Story() {
 
     view.findViewById<TextView>(R.id.snackbar_short).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_SHORT)
+      BpkSnackbar.builder(view, it.text, BpkSnackbar.LENGTH_SHORT)
         .setAction("Action!") {}
         .build()
         .show()
@@ -21,7 +21,7 @@ class SnackbarStory : Story() {
 
     view.findViewById<TextView>(R.id.snackbar_long).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_LONG)
+      BpkSnackbar.builder(view, it.text, BpkSnackbar.LENGTH_LONG)
         .setAction("Action!") {}
         .build()
         .show()
@@ -29,7 +29,7 @@ class SnackbarStory : Story() {
 
     view.findViewById<TextView>(R.id.snackbar_indefinite).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_INDEFINITE)
+      BpkSnackbar.builder(view, it.text, BpkSnackbar.LENGTH_INDEFINITE)
         .setAction("Action!") {}
         .build()
         .show()
