@@ -39,8 +39,7 @@ internal class DialogWindowLayout @JvmOverloads constructor(
 
   private val modalPadding = resources.getDimensionPixelSize(R.dimen.bpk_dialog_margin)
 
-  var dismissListener: () -> Unit = {
-  }
+  var dismissListener: () -> Unit = {}
 
   var verticalGravity: Gravity = Gravity.Center
     set(value) {
@@ -69,7 +68,7 @@ internal class DialogWindowLayout @JvmOverloads constructor(
 
   override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-    fullscreen = content.measuredHeight >= measuredHeight * fullscreenDefinition
+    fullscreen = content.measuredHeight >= measuredHeight * heightPercentageToShowFullScreen
   }
 
   override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -97,6 +96,6 @@ internal class DialogWindowLayout @JvmOverloads constructor(
   private companion object {
     val modalBg = ColorDrawable(Color.TRANSPARENT)
     val fullscreenBg = ColorDrawable(Color.WHITE)
-    const val fullscreenDefinition = 0.75f
+    const val heightPercentageToShowFullScreen = 0.75f
   }
 }

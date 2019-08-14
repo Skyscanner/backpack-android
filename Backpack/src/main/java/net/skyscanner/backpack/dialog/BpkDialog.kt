@@ -72,6 +72,7 @@ open class BpkDialog(
     } else {
       viewHolder?.container?.verticalGravity = DialogWindowLayout.Gravity.Center
     }
+
     viewHolder?.container?.dismissListener = {
       dismiss()
     }

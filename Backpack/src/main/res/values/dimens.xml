@@ -11,6 +11,7 @@
   <dimen name="bpk_rating_score_badge_size_small">36dp</dimen>
   <dimen name="bpk_rating_score_badge_size_large">48dp</dimen>
 
+  <!-- TODO: change to values build by task from tokens  -->
   <dimen name="bpk_dialog_padding_horizontal">@dimen/bpkSpacingXl</dimen>
   <dimen name="bpk_dialog_margin">@dimen/bpkSpacingXxl</dimen>
   <dimen name="bpk_dialog_spacing_title">12dp</dimen>
@@ -18,5 +19,5 @@
   <dimen name="bpk_dialog_padding_bottom">@dimen/bpkSpacingMd</dimen>
   <dimen name="bpk_dialog_icon_stroke">@dimen/bpkSpacingSm</dimen>
   <dimen name="bpk_dialog_icon_size">72dp</dimen>
-  <dimen name="bpk_dialog_preferred_width">320dp</dimen>
+  <dimen name="bpk_dialog_max_width">320dp</dimen>
 </resources>
