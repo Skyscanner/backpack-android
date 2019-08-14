@@ -1,15 +1,7 @@
 # Unreleased
 
-**Breaking**:
-  - `BpkIcon`:
-    - Renamed `bpk_swap` to `bpk_swap__horizontal`:
-
 **Added**:
   - `BpkSnackbar`
-
-**Added**:
-  - `BpkIcon`:
-    - Added `bpk_swap__vertical`
 
 > Place your changes below this line.
 

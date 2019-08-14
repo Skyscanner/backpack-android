@@ -165,6 +165,19 @@
     </attr>
   </declare-styleable>
 
+  <declare-styleable name="BpkFlare">
+    <attr name="flareRound" format="boolean" />
+    <attr name="flareInsetPaddingMode" format="enum">
+      <enum value="0" name="none" />
+      <enum value="1" name="bottom" />
+    </attr>
+    <attr name="flarePointerPosition" format="enum" >
+      <enum value="0" name="start" />
+      <enum value="1" name="middle" />
+      <enum value="2" name="end" />
+    </attr>
+  </declare-styleable>
+
   <declare-styleable name="BpkSnackbar">
     <attr name="snackbarTextColor" format="color" />
     <attr name="snackbarActionColor" format="color" />
