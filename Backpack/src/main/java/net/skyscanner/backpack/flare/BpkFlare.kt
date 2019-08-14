@@ -17,8 +17,8 @@ import java.lang.IllegalStateException
  * [BpkFlare] is designed to render a single item inside a "bubble".
  * Think of message apps and how they show content inside text bubbles.
  *
- * This view uses bitmap masking to mask the flare shape and corners. In some devices
- * when hardware acceleration is enabled this doesn't work as expected, so hardware
+ * This view uses bitmap masking to mask the flare shape and corners.
+ * When hardware acceleration is enabled this doesn't work as expected, so hardware
  * acceleration is disabled for this view.
  *
  * [BpkFlare] is designed to work with only one child and will throw an error if more than
@@ -101,7 +101,7 @@ open class BpkFlare @JvmOverloads constructor(
     }
 
   init {
-    this.initialize(attrs, defStyleAttr)
+    initialize(attrs, defStyleAttr)
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
@@ -171,15 +171,6 @@ open class BpkFlare @JvmOverloads constructor(
     }
   }
 
-  private fun Canvas.clipOutRectCompat(rect: RectF) {
-    if (Build.VERSION.SDK_INT >= 26) {
-      this.clipOutRect(rect)
-    } else {
-      @Suppress("DEPRECATION")
-      this.clipRect(rect, Region.Op.DIFFERENCE)
-    }
-  }
-
   private fun drawRadiusMask(canvas: Canvas) {
     val width = width.toFloat()
     val height = height.toFloat()
@@ -214,4 +205,13 @@ open class BpkFlare @JvmOverloads constructor(
 
   private fun mapXmlToInsetPaddingMode(id: Int) =
     InsetPaddingMode.values().find { it.id == id }
+}
+
+private fun Canvas.clipOutRectCompat(rect: RectF) {
+  if (Build.VERSION.SDK_INT >= 26) {
+    this.clipOutRect(rect)
+  } else {
+    @Suppress("DEPRECATION")
+    this.clipRect(rect, Region.Op.DIFFERENCE)
+  }
 }
