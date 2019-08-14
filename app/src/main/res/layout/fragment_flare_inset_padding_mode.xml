@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  style="@style/App.Story"
+  android:orientation="vertical"
+  android:padding="0dp">
+
+  <net.skyscanner.backpack.flare.BpkFlare
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingLg"
+    app:flareInsetPaddingMode="bottom"
+    app:flareRound="true">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:background="?bpkPrimaryColor"
+      android:padding="@dimen/bpkSpacingLg">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_lorem_ipsum"
+        android:textColor="@color/bpkWhite"
+        app:textStyle="xxl" />
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stub_sm"
+        android:textColor="@color/bpkWhite" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+  </net.skyscanner.backpack.flare.BpkFlare>
+
+  <net.skyscanner.backpack.flare.BpkFlare
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/bpkSpacingLg"
+    app:flareInsetPaddingMode="bottom">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:background="?bpkPrimaryColor"
+      android:orientation="vertical">
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_lorem_ipsum"
+        android:textColor="@color/bpkWhite"
+        app:textStyle="xxl" />
+
+      <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stub_sm"
+        android:textColor="@color/bpkWhite" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+  </net.skyscanner.backpack.flare.BpkFlare>
+</androidx.appcompat.widget.LinearLayoutCompat>
