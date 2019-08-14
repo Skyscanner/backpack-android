@@ -1,7 +1,6 @@
 package net.skyscanner.backpack.snackbar
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.res.ColorStateList
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -10,7 +9,6 @@ import android.util.TypedValue
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkFontSpan
@@ -18,7 +16,7 @@ import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.use
 
-open class BpkSnackbar private constructor(
+class BpkSnackbar private constructor(
   private val snackbar: Snackbar,
   @ColorInt private val textColor: Int,
   @ColorInt private val actionColor: Int,
@@ -35,6 +33,9 @@ open class BpkSnackbar private constructor(
     snackbar.view.backgroundTintList = ColorStateList.valueOf(backgroundColor)
     snackbar.setActionTextColor(actionColor)
   }
+
+  fun build(): Snackbar =
+     snackbar
 
   fun setText(message: CharSequence): BpkSnackbar {
     val spanned = SpannableStringBuilder(message).apply {
@@ -68,58 +69,10 @@ open class BpkSnackbar private constructor(
   inline fun setAction(@StringRes resId: Int, crossinline listener: (View) -> Unit): BpkSnackbar =
     setAction(resId, View.OnClickListener { listener(it) })
 
-  fun show(): Unit =
-    snackbar.show()
-
-  fun dismiss(): Unit =
-    snackbar.dismiss()
-
-  fun isShown(): Boolean =
-    snackbar.isShown
-
-  val duration: Int
-    get() = snackbar.duration
-
   fun setDuration(duration: Int): BpkSnackbar {
     snackbar.duration = duration
     return this
   }
-
-  @Deprecated("")
-  fun setCallback(callback: Snackbar.Callback): BpkSnackbar {
-    snackbar.setCallback(callback)
-    return this
-  }
-
-  fun setBehavior(behavior: BaseTransientBottomBar.Behavior): BpkSnackbar {
-    snackbar.behavior = behavior
-    return this
-  }
-
-   val behavior: BaseTransientBottomBar.Behavior?
-    get() = snackbar.behavior
-
-  val context: Context
-    get() = snackbar.context
-
-  val view: View
-    get() = snackbar.view
-
-  fun addCallback(callback: BaseTransientBottomBar.BaseCallback<Snackbar>): BpkSnackbar {
-    snackbar.addCallback(callback)
-    return this
-  }
-
-  fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<Snackbar>): BpkSnackbar {
-    snackbar.removeCallback(callback)
-    return this
-  }
-
-  fun isShownOrQueued(): Boolean =
-    snackbar.isShownOrQueued
-
-  val rawSnackbar: Snackbar
-    get() = snackbar
 
   companion object {
 

@@ -15,6 +15,7 @@ class SnackbarStory : Story() {
       it as TextView
       BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_SHORT)
         .setAction("Action!") {}
+        .build()
         .show()
     }
 
@@ -22,6 +23,7 @@ class SnackbarStory : Story() {
       it as TextView
       BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_LONG)
         .setAction("Action!") {}
+        .build()
         .show()
     }
 
@@ -29,6 +31,7 @@ class SnackbarStory : Story() {
       it as TextView
       BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_INDEFINITE)
         .setAction("Action!") {}
+        .build()
         .show()
     }
   }
