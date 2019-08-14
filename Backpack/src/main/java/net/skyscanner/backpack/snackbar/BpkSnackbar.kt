@@ -14,6 +14,18 @@ import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.use
 
+/**
+ * A builder wrapper around [Snackbar] providing the required customization.
+ *
+ * [BpkSnackbar.builder] creates a new builder. It's strongly recommended to set text and action
+ * before you build a [Snackbar] using [BpkSnackbar.build] method.
+ *
+ * @see BpkSnackbar.builder
+ * @see BpkSnackbar.setText
+ * @see BpkSnackbar.setAction
+ * @see BpkSnackbar.setDuration
+ * @see BpkSnackbar.build
+ */
 class BpkSnackbar private constructor(
   private val context: Context,
   private val snackbar: Snackbar,
@@ -46,7 +58,7 @@ class BpkSnackbar private constructor(
     setText(context.getString(resId))
 
   fun setAction(text: CharSequence, listener: View.OnClickListener): BpkSnackbar {
-    snackbar.setAction(snackbar.customiseText(text, textFontSpan, textColorSpan), listener)
+    snackbar.setAction(snackbar.customiseText(text, actionFontSpan, actionColorSpan), listener)
     return this
   }
 
@@ -75,6 +87,10 @@ class BpkSnackbar private constructor(
     @JvmStatic
     val LENGTH_LONG = Snackbar.LENGTH_LONG
 
+    /**
+     * Creates a new builder for a [Snackbar] using given [text] and [duration].
+     * [view] provides theme and hierarchy to put the [Snackbar]
+     */
     @SuppressLint("Recycle")
     @JvmStatic
     fun builder(view: View, text: CharSequence, duration: Int): BpkSnackbar {
@@ -103,6 +119,10 @@ class BpkSnackbar private constructor(
         .setText(text)
     }
 
+    /**
+     * Creates a new builder for a [Snackbar] using given [text] and [duration].
+     * [view] provides theme and hierarchy to put the [Snackbar]
+     */
     @JvmStatic
     fun builder(view: View, @StringRes text: Int, duration: Int) =
       builder(view, view.resources.getString(text), duration)
