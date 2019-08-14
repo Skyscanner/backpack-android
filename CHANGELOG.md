@@ -2,6 +2,19 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 12.0.0
+
+**Breaking**:
+
+- `BpkIcon`:
+  - Renamed `bpk_swap` to `bpk_swap__horizontal`:
+
+**Added**:
+
+- Added `BpkFlare` component
+- `BpkIcon`:
+  - Added `bpk_swap__vertical`
+
 # 11.0.3
 
 **Fixed:**
