@@ -166,8 +166,11 @@
   </declare-styleable>
 
   <declare-styleable name="BpkFlare">
-    <attr name="flareFitContent" format="boolean" />
     <attr name="flareRound" format="boolean" />
+    <attr name="flareInsetPaddingMode" format="enum">
+      <enum value="0" name="none" />
+      <enum value="1" name="bottom" />
+    </attr>
     <attr name="flarePointerPosition" format="enum" >
       <enum value="0" name="start" />
       <enum value="1" name="middle" />

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -35,14 +36,14 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestContentBubbleDefault() {
+  fun screenshotTestFlareDefault() {
     snap(subject.apply {
       addView(imageView)
     })
   }
 
   @Test
-  fun screenshotTestContentBubbleRounded() {
+  fun screenshotTestFlareRounded() {
     snap(subject.apply {
       addView(imageView)
       round = true
@@ -50,7 +51,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestContentBubblePointerPositionStart() {
+  fun screenshotTestFlarePointerPositionStart() {
     snap(subject.apply {
       addView(imageView)
       pointerPosition = BpkFlare.PointerPosition.START
@@ -58,7 +59,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestContentBubblePointerPositionEnd() {
+  fun screenshotTestFlarePointerPositionEnd() {
     snap(subject.apply {
       addView(imageView)
       pointerPosition = BpkFlare.PointerPosition.END
@@ -66,7 +67,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestContentBubblePointerPositionStart_RTL() {
+  fun screenshotTestFlarePointerPositionStart_RTL() {
     snap(subject.apply {
       pointerPosition = BpkFlare.PointerPosition.START
       layoutDirection = View.LAYOUT_DIRECTION_RTL
@@ -75,7 +76,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestContentBubblePointerPositionEnd_RTL() {
+  fun screenshotTestFlarePointerPositionEnd_RTL() {
     snap(subject.apply {
       pointerPosition = BpkFlare.PointerPosition.END
       layoutDirection = View.LAYOUT_DIRECTION_RTL
@@ -84,14 +85,47 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestContentBubbleFitContent() {
+  fun screenshotTestFlareInsetPaddingMode() {
+    val wrapContent = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
     snap(FrameLayout(testContext).apply {
       addView(subject.apply {
-        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        fitContent = true
-        addView(BpkText(testContext).apply {
-          text = testContext.resources.getString(R.string.stub_sm)
+        layoutParams = wrapContent
+        insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
+
+        addView(LinearLayoutCompat(context).apply {
+          layoutParams = wrapContent
           background = ColorDrawable(Color.LTGRAY)
+
+          addView(BpkText(testContext).apply {
+            layoutParams = wrapContent
+            text = testContext.resources.getString(R.string.stub_sm)
+          })
+        })
+      })
+    })
+  }
+
+  @Test
+  fun screenshotTestFlareInsetPaddingMode_withRelativePaddingRTL() {
+    val wrapContent = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+    snap(FrameLayout(testContext).apply {
+      layoutDirection = View.LAYOUT_DIRECTION_RTL
+
+      addView(subject.apply {
+        layoutParams = wrapContent
+        insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
+
+        addView(LinearLayoutCompat(context).apply {
+          layoutParams = wrapContent
+          background = ColorDrawable(Color.LTGRAY)
+          setPaddingRelative(0, 10, 40, 0)
+
+          addView(BpkText(testContext).apply {
+            layoutParams = wrapContent
+            text = testContext.resources.getString(R.string.stub_sm)
+          })
         })
       })
     })

@@ -112,7 +112,7 @@ object ComponentRegistry {
         "Pointer offset" story NodeData { Story of R.layout.fragment_flare_pointer_offset },
         "Pointer offset RTL" story NodeData { Story of R.layout.fragment_flare_pointer_offset with Direction.RTL },
         "Rounded" story NodeData { Story of R.layout.fragment_flare_rounded },
-        "Fit content" story NodeData { Story of R.layout.fragment_flare_fitcontent }
+        "Inset padding mode" story NodeData { Story of R.layout.fragment_flare_inset_padding_mode }
       )),
     "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },

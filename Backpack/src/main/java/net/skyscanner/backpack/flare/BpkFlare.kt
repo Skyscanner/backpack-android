@@ -5,19 +5,26 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
+import java.lang.IllegalStateException
 
 /**
  * [BpkFlare] is designed to render a single item inside a "bubble".
  * Think of message apps and how they show content inside text bubbles.
  *
- * No background or padding should be set directly to this view, set it directly its
+ * This view uses bitmap masking to mask the flare shape and corners. In some devices
+ * when hardware acceleration is enabled this doesn't work as expected, so hardware
+ * acceleration is disabled for this view.
+ *
+ * [BpkFlare] is designed to work with only one child and will throw an error if more than
+ * one is provided.
+ *
+ * No background or padding should be set to this view, set it directly to its
  * child.
  */
 open class BpkFlare @JvmOverloads constructor(
@@ -32,35 +39,33 @@ open class BpkFlare @JvmOverloads constructor(
     END(2, 0.75f)
   }
 
-  private val pointerDrawable: Drawable = ContextCompat.getDrawable(context, R.drawable.flare_default_pointer)!!.apply {
-    setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-  }
-  private val cornerRadiusDrawable: Drawable = ContextCompat.getDrawable(context, R.drawable.flare_default_radius)!!.apply {
-    setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+  enum class InsetPaddingMode(internal val id: Int) {
+    NONE(0),
+    BOTTOM(1)
   }
 
-  private val mask = Bitmap.createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
-    pointerDrawable.draw(Canvas(this))
+  private val pointerMask by unsafeLazy {
+    val pointerDrawable = ContextCompat.getDrawable(context, R.drawable.flare_default_pointer)!!.apply {
+      setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+    }
+    Bitmap.createBitmap(pointerDrawable.intrinsicWidth, pointerDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+      pointerDrawable.draw(Canvas(this))
+    }
   }
-  private val radiusMask = Bitmap.createBitmap(cornerRadiusDrawable.intrinsicWidth, cornerRadiusDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
-    cornerRadiusDrawable.draw(Canvas(this))
+
+  private val radiusMask by unsafeLazy {
+    val radiiDrawable = ContextCompat.getDrawable(context, R.drawable.flare_default_radius)!!.apply {
+      setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+    }
+    Bitmap.createBitmap(radiiDrawable.intrinsicWidth, radiiDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888).apply {
+      radiiDrawable.draw(Canvas(this))
+    }
   }
 
   private val clipRect = RectF()
-  private val porterDuffXfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
   private val paint = Paint().apply {
-    xfermode = porterDuffXfermode
+    xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
     isAntiAlias = true
-  }
-
-  /**
-   * When fitContent is true the view will ensure extra space is reserved for the bubble pointer to
-   * ensure all content is visible.
-   */
-  var fitContent = false
-  set(value) {
-    field = value
-    requestLayout()
   }
 
   /**
@@ -83,6 +88,18 @@ open class BpkFlare @JvmOverloads constructor(
     requestLayout()
   }
 
+  /**
+   * Specify if extra padding should be added to account
+   * for the view clipping used to display the flare pointer.
+   *
+   * @see [InsetPaddingMode]
+   */
+  var insetPaddingMode = InsetPaddingMode.NONE
+    set(value) {
+      field = value
+      requestLayout()
+    }
+
   init {
     this.initialize(attrs, defStyleAttr)
   }
@@ -90,11 +107,12 @@ open class BpkFlare @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkFlare, defStyleAttr, 0)
       ?.use {
-        fitContent = it.getBoolean(R.styleable.BpkFlare_flareFitContent, fitContent)
         round = it.getBoolean(R.styleable.BpkFlare_flareRound, round)
-
         pointerPosition = it.getInt(R.styleable.BpkFlare_flarePointerPosition, pointerPosition.id)
           .let(::mapXmlToPointerPosition) ?: pointerPosition
+
+        insetPaddingMode = it.getInt(R.styleable.BpkFlare_flareInsetPaddingMode, insetPaddingMode.id)
+          .let(::mapXmlToInsetPaddingMode) ?: insetPaddingMode
       }
 
     background = null
@@ -104,20 +122,36 @@ open class BpkFlare @JvmOverloads constructor(
     setLayerType(LAYER_TYPE_SOFTWARE, null)
   }
 
+  override fun onViewAdded(child: View) {
+    super.onViewAdded(child)
+    if (this.childCount > 1) {
+      throw IllegalStateException("BpkFlare should have only one child")
+    }
+
+    if (insetPaddingMode == InsetPaddingMode.BOTTOM) {
+      val paddingBottom = child.paddingBottom + pointerMask.height
+      if (child.paddingStart > 0 || child.paddingEnd > 0) {
+        child.setPaddingRelative(child.paddingStart, child.paddingTop, child.paddingEnd, paddingBottom)
+      } else {
+        child.setPadding(child.paddingLeft, child.paddingTop, child.paddingRight, paddingBottom)
+      }
+    }
+  }
+
   override fun draw(canvas: Canvas) {
     val count = canvas.saveCount
 
     val width = width.toFloat()
     val height = height.toFloat()
 
-    val pointerHalfWidth = mask.width / 2
+    val pointerHalfWidth = pointerMask.width / 2
     val pointerOffset = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
       1 - pointerPosition.offset
     } else {
       pointerPosition.offset
     }
 
-    val yStart = height - mask.height
+    val yStart = height - pointerMask.height
     val pointerXStart = width * pointerOffset - pointerHalfWidth
     val pointerXEnd = width * pointerOffset + pointerHalfWidth
 
@@ -130,33 +164,10 @@ open class BpkFlare @JvmOverloads constructor(
     super.draw(canvas)
     canvas.restoreToCount(count)
 
-    canvas.drawBitmap(mask, pointerXStart, yStart, paint)
+    canvas.drawBitmap(pointerMask, pointerXStart, yStart, paint)
 
     if (round) {
       drawRadiusMask(canvas)
-    }
-  }
-
-  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-    val firstChild = getChildAt(0)
-    if (firstChild == null || !fitContent || firstChild.layoutParams.height >= 0) {
-      super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-    } else {
-      getChildAt(0)?.let {
-        // When fit content is true we add the size of the pointer to the view's height, in order
-        // for the children to take up that size we need to change `WRAP_CONTENT` to `MATCH_PARENT`
-        if (it.layoutParams.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
-          it.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
-        }
-        it.measure(widthMeasureSpec, heightMeasureSpec)
-      }
-
-      super.onMeasure(
-        widthMeasureSpec,
-        MeasureSpec.makeMeasureSpec(
-          getChildAt(0).measuredHeight + pointerDrawable.intrinsicHeight,
-          MeasureSpec.EXACTLY
-        ))
     }
   }
 
@@ -176,7 +187,7 @@ open class BpkFlare @JvmOverloads constructor(
     val radiusWidth = radiusMask.width
     val radiusHalfHeight = (radiusHeight / 2).toFloat()
     val radiusHalfWidth = (radiusHeight / 2).toFloat()
-    val pointerHeight = mask.height
+    val pointerHeight = pointerMask.height
 
     val count = canvas.saveCount
 
@@ -200,4 +211,7 @@ open class BpkFlare @JvmOverloads constructor(
 
   private fun mapXmlToPointerPosition(id: Int) =
     PointerPosition.values().find { it.id == id }
+
+  private fun mapXmlToInsetPaddingMode(id: Int) =
+    InsetPaddingMode.values().find { it.id == id }
 }
