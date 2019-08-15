@@ -33,7 +33,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:background="@drawable/bpk_bg_dialog_top"
+          android:background="@drawable/bpk_dialog_bg_top"
           android:orientation="vertical">
 
           <net.skyscanner.backpack.dialog.internal.BpkDialogIcon
@@ -71,10 +71,10 @@
         android:id="@+id/dialog_buttons_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bpk_bg_dialog_bottom"
+        android:background="@drawable/bpk_dialog_bg_bottom"
         android:orientation="vertical"
         android:paddingBottom="@dimen/bpk_dialog_padding_bottom"
-        app:divider="@drawable/bpk_bg_dialog_divider"
+        app:divider="@drawable/bpk_dialog_bg_divider"
         app:showDividers="middle|end" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -24,7 +24,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
     maxHeight = size
     scaleType = ScaleType.CENTER
     imageTintList = ColorStateList.valueOf(getColor(R.color.bpkWhite))
-    background = ContextCompat.getDrawable(this.context, R.drawable.bpk_bg_dialog_icon)
+    background = ContextCompat.getDrawable(this.context, R.drawable.bpk_dialog_bg_icon)
   }
 
   var icon: BpkDialog.Icon? = null
