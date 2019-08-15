@@ -8,18 +8,18 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   date_str=$(date '+%Y-%m-%d_%H:%M:%S')
   dir_name=""$date_str".$$"
 
-  remote_screenshots_folder=""$bucket_name"/"$dir_name"/Nexus4-22-en-portrait/artifacts/sdcard/screenshots/net.skyscanner.backpack.test/screenshots-default"
+  remote_screenshots_folder=""$bucket_name"/"$dir_name"/Nexus4-21-en-portrait/artifacts/sdcard/screenshots/net.skyscanner.backpack.test/screenshots-default"
   local_screenshots_folder="app/build/test-labs-screenshots"
 
   gcloud firebase test android run \
       --type instrumentation \
       --app ./app/build/outputs/apk/debug/app-debug.apk \
       --test ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
-      --device model=Nexus4,version=22 \
+      --device model=Nexus4,version=21 \
       --results-dir="$dir_name"
 
 
-  remote_screenshots_folder=""$bucket_name"/"$dir_name"/Nexus4-22-en-portrait/artifacts/sdcard/screenshots/net.skyscanner.backpack.test/screenshots-default"
+  remote_screenshots_folder=""$bucket_name"/"$dir_name"/Nexus4-21-en-portrait/artifacts/sdcard/screenshots/net.skyscanner.backpack.test/screenshots-default"
 
   echo "Retrieving screenshots from temporary bucket [$remote_screenshots_folder]"
 
@@ -41,7 +41,7 @@ elif [ "$TEST_METHOD" == "connected" ]; then
       --type instrumentation \
       --app ./app/build/outputs/apk/debug/app-debug.apk \
       --test ./Backpack/build/outputs/apk/androidTest/debug/Backpack-debug-androidTest.apk \
-      --device model=Nexus4,version=22
+      --device model=Nexus4,version=21
 else 
 
   echo "Env TEST_METHOD not defined"
