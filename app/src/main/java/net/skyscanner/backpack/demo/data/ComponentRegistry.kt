@@ -126,6 +126,7 @@ object ComponentRegistry {
         "Sizes RTL" story NodeData { Story of R.layout.fragment_rating_sizes with Direction.RTL },
         "Size Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical }
       )),
+    "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Spinner" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_spinner },

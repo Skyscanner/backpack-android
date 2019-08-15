@@ -94,6 +94,8 @@ BpkThemeProvider
 BpkText
 
 BpkTicket
+BpkSnackbar
+Snackbar
 
 # Company names, libraries etc.
 Artifactory
