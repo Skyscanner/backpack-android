@@ -47,7 +47,7 @@ class BpkSnackbar private constructor(
   }
 
   fun build(): Snackbar =
-     snackbar
+    snackbar
 
   fun setText(message: CharSequence): BpkSnackbar {
     snackbar.setText(snackbar.customiseText(message, textFontSpan, textColorSpan))
