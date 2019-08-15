@@ -2,6 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 12.0.2
+
+**Added**:
+  - `BpkSnackbar`
+  - `BpkDialog` now expands to full screen when it takes more than 75% of available height.
+
+**Fixed**:
+  - `BpkDialog` content is now scrollable.
+  
 # 12.0.0
 
 **Breaking**:
