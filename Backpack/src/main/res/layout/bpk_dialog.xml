@@ -7,6 +7,7 @@
   tools:background="@color/bpkGray500">
 
   <net.skyscanner.backpack.dialog.internal.DialogWindowLayout
+    android:id="@+id/dialog_window_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

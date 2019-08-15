@@ -86,12 +86,13 @@ open class BpkDialog(
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val view = inflater.inflate(R.layout.bpk_dialog, null)
 
-    viewHolder = ViewHolder((view as ViewGroup).getChildAt(0) as DialogWindowLayout)
+    viewHolder = ViewHolder(view)
 
     return view
   }
 
-  private class ViewHolder(val container: DialogWindowLayout) {
+  private class ViewHolder(root: View) {
+    val container: DialogWindowLayout = root.findViewById(R.id.dialog_window_layout)
     val title: BpkText = container.findViewById(R.id.dialog_title)
     val description: BpkText = container.findViewById(R.id.dialog_description)
     val iconView: BpkDialogIcon = container.findViewById(R.id.dialog_icon)
