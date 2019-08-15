@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.snackbar
+package net.skyscanner.backpack.snackbar.internal
 
 import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
@@ -38,7 +38,7 @@ internal fun Snackbar.customiseText(text: CharSequence, font: BpkFontSpan, color
     setSpan(color, 0, length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
   }
 
-private fun Snackbar.setAppearanceCompat(@IdRes id: Int, font: BpkFontSpan, color: ForegroundColorSpan) {
+internal fun Snackbar.setAppearanceCompat(@IdRes id: Int, font: BpkFontSpan, color: ForegroundColorSpan) {
   // we have to use this customization method
   // because spannable are not working with action in API 21
   try {

@@ -9,6 +9,10 @@ import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.snackbar.internal.customiseText
+import net.skyscanner.backpack.snackbar.internal.setActionAppearanceCompat
+import net.skyscanner.backpack.snackbar.internal.setBackgroundColorCompat
+import net.skyscanner.backpack.snackbar.internal.setMessageAppearanceCompat
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.BpkTheme
@@ -90,6 +94,14 @@ class BpkSnackbar private constructor(
     /**
      * Creates a new builder for a [Snackbar] using given [text] and [duration].
      * [view] provides theme and hierarchy to put the [Snackbar]
+     *
+     * @param view the view to render the snackbar
+     * @param text the snackbar message
+     * @param duration the snackbar duration
+     *
+     * @see [BpkSnackbar.LENGTH_INDEFINITE]
+     * @see [BpkSnackbar.LENGTH_SHORT]
+     * @see [BpkSnackbar.LENGTH_LONG]
      */
     @SuppressLint("Recycle")
     @JvmStatic
@@ -122,6 +134,14 @@ class BpkSnackbar private constructor(
     /**
      * Creates a new builder for a [Snackbar] using given [text] and [duration].
      * [view] provides theme and hierarchy to put the [Snackbar]
+     *
+     * @param view the view to render the snackbar
+     * @param text the snackbar message
+     * @param duration the snackbar duration
+     *
+     * @see [BpkSnackbar.LENGTH_INDEFINITE]
+     * @see [BpkSnackbar.LENGTH_SHORT]
+     * @see [BpkSnackbar.LENGTH_LONG]
      */
     @JvmStatic
     fun builder(view: View, @StringRes text: Int, duration: Int) =

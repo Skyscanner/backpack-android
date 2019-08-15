@@ -16,7 +16,8 @@ BpkSnackbar.builder(view, "Message", BpkSnackbar.LENGTH_SHORT)
         .build()
         .show()
 ```
-It's strongly not recommended to change message or action once the Snackbar has been built.
+It's strongly recommended not to change the message or action after the Snackbar has been built. 
+This might result in losing the themed attributes.
 
 ## Theme Props
 
