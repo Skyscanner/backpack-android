@@ -6,19 +6,16 @@ import android.graphics.Color
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.GradientDrawable
 import android.util.DisplayMetrics
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.RelativeLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.content.res.ResourcesCompat
+import net.skyscanner.backpack.dialog.internal.BpkDialogIcon
+import net.skyscanner.backpack.dialog.internal.DialogWindowLayout
 
 open class BpkDialog(
   context: Context,
@@ -32,7 +29,6 @@ open class BpkDialog(
   }
 
   private var viewHolder: ViewHolder? = null
-  private val variables = DialogConstants(context)
 
   init {
     setupDialog()
@@ -57,24 +53,29 @@ open class BpkDialog(
     }
 
   fun addActionButton(button: View) {
-    button.layoutParams = LinearLayoutCompat.LayoutParams(
-      LinearLayoutCompat.LayoutParams.MATCH_PARENT,
-      LinearLayoutCompat.LayoutParams.WRAP_CONTENT
-    ).apply {
-      setMargins(0, 0, 0, variables.buttonStackItemSpace)
-    }
-    viewHolder?.contentLayout?.addView(button)
+    viewHolder?.buttonsRoot?.addView(button, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
   }
 
   private fun setupDialog() {
+    requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+    window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window?.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    window?.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+
+    setContentView(setUpContentView())
+    window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+    window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     if (style == Style.BOTTOM_SHEET) {
-      window?.setGravity(Gravity.BOTTOM)
+      viewHolder?.container?.verticalGravity = DialogWindowLayout.Gravity.Bottom
       window?.setWindowAnimations(R.style.Bpk_dialog_animation)
+    } else {
+      viewHolder?.container?.verticalGravity = DialogWindowLayout.Gravity.Center
     }
 
-    requestWindowFeature(Window.FEATURE_NO_TITLE)
-    setContentView(setUpContentView())
-    window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    viewHolder?.container?.dismissListener = {
+      dismiss()
+    }
 
     val metrics = DisplayMetrics()
     val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -85,34 +86,16 @@ open class BpkDialog(
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     val view = inflater.inflate(R.layout.bpk_dialog, null)
 
-    viewHolder = ViewHolder(view).apply {
-      val params = contentLayout.layoutParams as RelativeLayout.LayoutParams
-      params.topMargin = variables.contentContainerMarginTop
-      contentLayout.background = getContentBackground()
-      contentLayout.setPadding(
-        variables.contentContainerPaddingHorizontal,
-        variables.contentContainerPaddingTop,
-        variables.contentContainerPaddingHorizontal,
-        variables.contentContainerPaddingBottom
-      )
-    }
+    viewHolder = ViewHolder(view)
 
     return view
   }
 
-  private fun getContentBackground(): GradientDrawable {
-    val shape = GradientDrawable()
-    shape.shape = GradientDrawable.RECTANGLE
-    val radii = variables.contentRadius
-    shape.cornerRadii = floatArrayOf(radii, radii, radii, radii, radii, radii, radii, radii)
-    shape.setColor(ResourcesCompat.getColor(context.resources, R.color.bpkWhite, context.theme))
-    return shape
-  }
-
-  private class ViewHolder(container: View) {
+  private class ViewHolder(root: View) {
+    val container: DialogWindowLayout = root.findViewById(R.id.dialog_window_layout)
     val title: BpkText = container.findViewById(R.id.dialog_title)
     val description: BpkText = container.findViewById(R.id.dialog_description)
     val iconView: BpkDialogIcon = container.findViewById(R.id.dialog_icon)
-    val contentLayout: ViewGroup = container.findViewById(R.id.dialog_content_layout)
+    val buttonsRoot: ViewGroup = container.findViewById(R.id.dialog_buttons_root)
   }
 }

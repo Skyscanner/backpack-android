@@ -30,7 +30,7 @@ class BpkDialogTest : BpkSnapshotTest() {
 
   @Before
   fun setUp() {
-    setDimensions(400, 350)
+    setDimensions(600, 420)
     activity = activityRule.activity
   }
 
@@ -41,6 +41,31 @@ class BpkDialogTest : BpkSnapshotTest() {
     val dialog = BpkDialog(activity).apply {
       title = "You are going to Tokyo!"
       description = "Your flight is all booked. Why not check out some hotels now?"
+      icon = BpkDialog.Icon(
+        R.drawable.bpk_tick,
+        R.color.bpkGreen500
+      )
+
+      addActionButton(BpkButton(context).apply {
+        text = "Continue"
+      })
+
+      addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
+        text = "Skip"
+      })
+    }
+
+    record(dialog, asyncScreenshot)
+  }
+
+  @Test
+  fun screenshotTestDialogFullScreen() {
+    val asyncScreenshot = prepareForAsyncTest()
+
+    val dialog = BpkDialog(activity).apply {
+      title = "You are going to Tokyo!"
+      description = Array(30) { "Your flight is all booked. Why not check out some hotels now?" }.joinToString(separator = "\n")
+
       icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
         R.color.bpkGreen500
@@ -136,7 +161,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       dialog.show()
     }
 
-    onView(withId(R.id.dialog_content_layout))
+    onView(withId(R.id.dialog_buttons_root))
       .inRoot(isDialog())
       .check { _, _ ->
         // This is not ideal but I couldn't find a way to snapshot the whole window and we need contrast to

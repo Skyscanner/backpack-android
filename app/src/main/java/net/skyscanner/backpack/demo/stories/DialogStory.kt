@@ -166,6 +166,34 @@ Safe travels!"""
           }
         })
       }
+    },
+
+    "Long" to { context: Context ->
+      val dialog = BpkDialog(context)
+      dialog.apply {
+        title = "You are going to Tokyo!"
+        description = Array(3) { getString(R.string.stub) }.joinToString()
+        icon = BpkDialog.Icon(
+          R.drawable.bpk_tick,
+          R.color.bpkGreen500
+        )
+
+        addActionButton(BpkButton(context).apply {
+          text = "Continue"
+          setOnClickListener {
+            println("confirmed")
+            dialog.dismiss()
+          }
+        })
+
+        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
+          text = "Skip"
+          setOnClickListener {
+            println("skipped")
+            dialog.dismiss()
+          }
+        })
+      }
     }
   )
 }
