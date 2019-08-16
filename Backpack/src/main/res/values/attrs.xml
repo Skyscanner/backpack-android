@@ -73,6 +73,7 @@
     <attr name="buttonBackgroundColor" format="color" />
     <attr name="buttonTextColor" format="color" />
     <attr name="buttonStrokeColor" format="color" />
+    <attr name="buttonStrokeColorPressed" format="color" />
     <attr name="buttonCornerRadius" format="dimension" />
     <attr name="buttonAddElevation" format="boolean" />
   </declare-styleable>

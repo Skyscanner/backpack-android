@@ -11,6 +11,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.*
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.use
+import net.skyscanner.backpack.util.ResourcesUtil
 
 open class BpkButton : BpkButtonBase {
   constructor(context: Context) : this(context, null)
@@ -47,6 +48,9 @@ open class BpkButton : BpkButtonBase {
   @ColorInt
   private var buttonStrokeColor: Int = ContextCompat.getColor(context, android.R.color.transparent)
 
+  @ColorInt
+  private var buttonStrokeColorPressed: Int = buttonStrokeColor
+
   @Dimension
   private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
 
@@ -58,6 +62,12 @@ open class BpkButton : BpkButtonBase {
 
   @Dimension
   private var roundedButtonCorner = defaultCornerRadius
+
+  @Dimension
+  private val strokeWidthNormal = tokens.bpkBorderSizeLg
+
+  @Dimension
+  private val strokeWidthSelected = tokens.bpkBorderSizeLg + ResourcesUtil.dpToPx(1, context)
 
   val type: Type
     get() {
@@ -74,6 +84,8 @@ open class BpkButton : BpkButtonBase {
         buttonBackgroundColor = it.getColor(R.styleable.BpkButton_buttonBackgroundColor, BpkTheme.getColor(context, type.bgColor))
 
         buttonStrokeColor = it.getColor(R.styleable.BpkButton_buttonStrokeColor, BpkTheme.getColor(context, type.strokeColor))
+        buttonStrokeColorPressed = it.getColor(R.styleable.BpkButton_buttonStrokeColorPressed, BpkTheme.getColor(context, type.strokeColorSelected))
+
         roundedButtonCorner = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, defaultCornerRadius)
 
         defaultTextColor = ContextCompat.getColor(context, type.textColor)
@@ -112,7 +124,6 @@ open class BpkButton : BpkButtonBase {
   @VisibleForTesting
   internal fun disabledBackground(): Drawable {
     return getRippleDrawable(
-      context = context,
       normalColor = tokens.gray100,
       cornerRadius = if (iconPosition != ICON_ONLY) roundedButtonCorner else defaultCornerRadius,
       strokeWidth = null,
@@ -123,14 +134,20 @@ open class BpkButton : BpkButtonBase {
   private fun getButtonBackground(): Drawable? {
     return if (this.isEnabled) {
       getRippleDrawable(
-        context = context,
         normalColor = buttonBackgroundColor,
         cornerRadius = if (iconPosition != ICON_ONLY) roundedButtonCorner else defaultCornerRadius,
-        strokeWidth = if (type == Type.Primary || type == Type.Featured) null else tokens.bpkBorderSizeLg,
-        strokeColor = buttonStrokeColor
+        strokeWidth = strokeWidthForType(type),
+        strokeColor = getColorSelector(buttonStrokeColor, buttonStrokeColorPressed, buttonStrokeColor)
       )
     } else disabledBackground()
   }
+
+  private fun strokeWidthForType(type: Type): StrokeWidth? =
+    when (type) {
+      BpkButton.Type.Secondary, BpkButton.Type.Destructive, BpkButton.Type.Outline ->
+        Pair(strokeWidthNormal, strokeWidthSelected)
+      else -> null
+    }
 
   private fun shouldSetStateListAnimator() =
     isEnabled && isElevationRequiredForType() && isStateListAnimatorSupported()
@@ -145,13 +162,14 @@ open class BpkButton : BpkButtonBase {
     internal val id: Int,
     @ColorRes internal val bgColor: Int,
     @ColorRes internal val textColor: Int,
-    @ColorRes internal val strokeColor: Int
+    @ColorRes internal val strokeColor: Int,
+    @ColorRes internal val strokeColorSelected: Int
   ) {
-    Primary(0, R.color.bpkGreen500, R.color.bpkWhite, android.R.color.transparent),
-    Secondary(1, R.color.bpkWhite, R.color.bpkBlue600, R.color.bpkGray100),
-    Featured(2, R.color.bpkPink500, R.color.bpkWhite, android.R.color.transparent),
-    Destructive(3, R.color.bpkWhite, R.color.bpkRed500, R.color.bpkGray100),
-    Outline(4, android.R.color.transparent, R.color.bpkWhite, R.color.bpkWhite);
+    Primary(0, R.color.bpkGreen500, R.color.bpkWhite, android.R.color.transparent, android.R.color.transparent),
+    Secondary(1, R.color.bpkWhite, R.color.bpkBlue500, R.color.bpkGray100, R.color.bpkGray100),
+    Featured(2, R.color.bpkPink500, R.color.bpkWhite, android.R.color.transparent, android.R.color.transparent),
+    Destructive(3, R.color.bpkWhite, R.color.bpkRed500, R.color.bpkGray100, R.color.bpkGray100),
+    Outline(4, android.R.color.transparent, R.color.bpkWhite, R.color.bpkWhite, R.color.bpkWhite);
 
     internal companion object {
       internal fun fromId(id: Int): Type {
