@@ -42,6 +42,7 @@ its size is `16dp`.
 - `buttonBackground`
 - `buttonTextColor`
 - `buttonStrokeColor`
+- `buttonStrokeColorPressed`
 - `buttonCornerRadius`
 
 BpkButton accepts the above themeable attributes for the following styles
