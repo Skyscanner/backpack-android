@@ -11,10 +11,9 @@ import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.resolveThemeColor
 
-internal typealias StrokeWidth = Pair<Int?, Int?>
+internal typealias StrokeWidth = Pair<Int, Int>
 
 /**
  * Utility method to create a ripple drawable for buttons.
@@ -71,8 +70,6 @@ private fun BpkButtonBase.getContentDrawable(
 ): Drawable {
   val strokeWidthNormal = strokeWidth?.first
   val strokeWidthSelected = strokeWidth?.second
-
-  ResourcesUtil
 
   return if (strokeWidthSelected == null) {
     corneredDrawable(normalColor, cornerRadius, strokeColor, strokeWidthNormal)

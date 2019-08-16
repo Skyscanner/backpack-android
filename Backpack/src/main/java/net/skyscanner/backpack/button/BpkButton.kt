@@ -64,7 +64,10 @@ open class BpkButton : BpkButtonBase {
   private var roundedButtonCorner = defaultCornerRadius
 
   @Dimension
-  private val oneDpInPx = ResourcesUtil.dpToPx(1, context)
+  private val strokeWidthNormal = tokens.bpkBorderSizeLg
+
+  @Dimension
+  private val strokeWidthSelected = tokens.bpkBorderSizeLg + ResourcesUtil.dpToPx(1, context)
 
   val type: Type
     get() {
@@ -142,7 +145,7 @@ open class BpkButton : BpkButtonBase {
   private fun strokeWidthForType(type: Type): StrokeWidth? =
     when (type) {
       BpkButton.Type.Secondary, BpkButton.Type.Destructive, BpkButton.Type.Outline ->
-        Pair(tokens.bpkBorderSizeLg, tokens.bpkBorderSizeLg + oneDpInPx)
+        Pair(strokeWidthNormal, strokeWidthSelected)
       else -> null
     }
 
