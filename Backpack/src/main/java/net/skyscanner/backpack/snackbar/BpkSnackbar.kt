@@ -69,12 +69,6 @@ class BpkSnackbar private constructor(
   fun setAction(@StringRes resId: Int, listener: View.OnClickListener): BpkSnackbar =
     setAction(context.getText(resId), listener)
 
-  inline fun setAction(text: CharSequence, crossinline listener: (View) -> Unit): BpkSnackbar =
-    setAction(text, View.OnClickListener { listener(it) })
-
-  inline fun setAction(@StringRes resId: Int, crossinline listener: (View) -> Unit): BpkSnackbar =
-    setAction(resId, View.OnClickListener { listener(it) })
-
   fun setDuration(duration: Int): BpkSnackbar {
     snackbar.duration = duration
     return this
@@ -145,3 +139,9 @@ class BpkSnackbar private constructor(
       builder(view, view.resources.getString(text), duration)
   }
 }
+
+inline fun BpkSnackbar.setAction(text: CharSequence, crossinline listener: (View) -> Unit): BpkSnackbar =
+  setAction(text, View.OnClickListener { listener(it) })
+
+inline fun BpkSnackbar.setAction(@StringRes resId: Int, crossinline listener: (View) -> Unit): BpkSnackbar =
+  setAction(resId, View.OnClickListener { listener(it) })
