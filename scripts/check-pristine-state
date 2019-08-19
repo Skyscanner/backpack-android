@@ -29,7 +29,7 @@ const init = async () => {
       `😰  Git shows some files have been changed. Changed files: ${changedFilesLog}. (ignoring ${ignoredFilesLog})`,
     );
 
-    const { diff } = await execAsync('git diff', {
+    const { stdout: diff } = await execAsync('git --no-pager diff', {
       cwd: `${__dirname}/../`,
     });
 
