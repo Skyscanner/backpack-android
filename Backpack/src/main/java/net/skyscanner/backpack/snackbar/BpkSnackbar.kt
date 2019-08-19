@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.snackbar.internal.customiseText
@@ -19,20 +20,19 @@ import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.use
 
 /**
- * A builder wrapper around [Snackbar] providing the required customization.
+ * A make wrapper around [Snackbar] providing the required customization.
  *
- * [BpkSnackbar.builder] creates a new builder. It's strongly recommended to set text and action
- * before you build a [Snackbar] using [BpkSnackbar.build] method.
+ * Use [BpkSnackbar.make] to create a new instance, then use it as a [Snackbar].
  *
- * @see BpkSnackbar.builder
+ * @see BpkSnackbar.make
  * @see BpkSnackbar.setText
  * @see BpkSnackbar.setAction
  * @see BpkSnackbar.setDuration
- * @see BpkSnackbar.build
  */
 class BpkSnackbar private constructor(
   private val context: Context,
-  private val snackbar: Snackbar,
+  view: View,
+  duration: Int,
   @ColorInt textColor: Int,
   @ColorInt actionColor: Int,
   @ColorInt backgroundColor: Int
@@ -44,14 +44,24 @@ class BpkSnackbar private constructor(
   private val actionFontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
   private val actionColorSpan = ForegroundColorSpan(actionColor)
 
+  private val callbacks = ArrayList<BaseTransientBottomBar.BaseCallback<BpkSnackbar>>()
+
+  private val snackbar = Snackbar.make(view, "", duration)
+
   init {
     snackbar.setBackgroundColorCompat(backgroundColor)
     snackbar.setMessageAppearanceCompat(textFontSpan, textColorSpan)
     snackbar.setActionAppearanceCompat(actionFontSpan, actionColorSpan)
-  }
+    snackbar.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+      override fun onShown(transientBottomBar: Snackbar?) {
+        callbacks.forEach { it.onShown(this@BpkSnackbar) }
+      }
 
-  fun build(): Snackbar =
-    snackbar
+      override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+        callbacks.forEach { it.onDismissed(this@BpkSnackbar, event) }
+      }
+    })
+  }
 
   fun setText(message: CharSequence): BpkSnackbar {
     snackbar.setText(snackbar.customiseText(message, textFontSpan, textColorSpan))
@@ -69,10 +79,43 @@ class BpkSnackbar private constructor(
   fun setAction(@StringRes resId: Int, listener: View.OnClickListener): BpkSnackbar =
     setAction(context.getText(resId), listener)
 
+  val duration: Int
+    get() = snackbar.duration
+
   fun setDuration(duration: Int): BpkSnackbar {
     snackbar.duration = duration
     return this
   }
+
+  val isShown: Boolean
+    get() = snackbar.isShown
+
+  fun show() =
+    snackbar.show()
+
+  fun dismiss() =
+    snackbar.dismiss()
+
+  fun addCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar {
+    callback?.let(callbacks::add)
+    return this
+  }
+
+  fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar {
+    callbacks.remove(callback)
+    return this
+  }
+
+  val behaviour: BaseTransientBottomBar.Behavior
+    get() = snackbar.behavior
+
+  fun setBehaviour(behavior: BaseTransientBottomBar.Behavior?): BpkSnackbar {
+    snackbar.behavior = behavior
+    return this
+  }
+
+  val rawSnackbar: Snackbar =
+    snackbar
 
   companion object {
 
@@ -83,7 +126,7 @@ class BpkSnackbar private constructor(
     const val LENGTH_LONG = Snackbar.LENGTH_LONG
 
     /**
-     * Creates a new builder for a [Snackbar] using given [text] and [duration].
+     * Creates a new instance for a [Snackbar] using given [text] and [duration].
      * [view] provides theme and hierarchy to put the [Snackbar]
      *
      * @param view the view to render the snackbar
@@ -96,7 +139,7 @@ class BpkSnackbar private constructor(
      */
     @SuppressLint("Recycle")
     @JvmStatic
-    fun builder(view: View, text: CharSequence, duration: Int): BpkSnackbar {
+    fun make(view: View, text: CharSequence, duration: Int): BpkSnackbar {
       val context = view.context
 
       @ColorInt var textColor = BpkTheme.getColor(context, R.color.bpkWhite)
@@ -114,7 +157,8 @@ class BpkSnackbar private constructor(
 
       return BpkSnackbar(
         context = context,
-        snackbar = Snackbar.make(view, "", duration),
+        view = view,
+        duration = duration,
         textColor = textColor,
         actionColor = actionColor,
         backgroundColor = backgroundColor
@@ -123,7 +167,7 @@ class BpkSnackbar private constructor(
     }
 
     /**
-     * Creates a new builder for a [Snackbar] using given [text] and [duration].
+     * Creates a new instance for a [Snackbar] using given [text] and [duration].
      * [view] provides theme and hierarchy to put the [Snackbar]
      *
      * @param view the view to render the snackbar
@@ -135,13 +179,9 @@ class BpkSnackbar private constructor(
      * @see [BpkSnackbar.LENGTH_LONG]
      */
     @JvmStatic
-    fun builder(view: View, @StringRes text: Int, duration: Int) =
-      builder(view, view.resources.getString(text), duration)
+    fun make(view: View, @StringRes text: Int, duration: Int) =
+      make(view, view.resources.getString(text), duration)
   }
+
+  abstract class Callback : BaseTransientBottomBar.BaseCallback<BpkSnackbar>()
 }
-
-inline fun BpkSnackbar.setAction(text: CharSequence, crossinline listener: (View) -> Unit): BpkSnackbar =
-  setAction(text, View.OnClickListener { listener(it) })
-
-inline fun BpkSnackbar.setAction(@StringRes resId: Int, crossinline listener: (View) -> Unit): BpkSnackbar =
-  setAction(resId, View.OnClickListener { listener(it) })
