@@ -28,24 +28,5 @@ __For supported attributes check each component's documentation.__
 Backpack supports theming the following colours:
 
 - `bpkPrimaryColor`
-- `bpkGray50Color`
-- `bpkGray100Color`
-- `bpkGray300Color`
-- `bpkGray500Color`
-- `bpkGray700Color`
-- `bpkGray900Color`
 
-Those can be accessed programmatically using the `ThemesUtil` class. 
-
-If you want to use them inside a XML file use `wrapContextWithBackpackDefaults` or `applyBackpackDefaultsToContext` in `ThemesUtil` to apply the default values to your UI `context`.
-
-```Kotlin
-val contextWithDefaults = ThemesUtil.wrapContextWithBackpackDefaults(context)
-// View XML and all its children will have access to those variables
-MyView(contextWithDefaults)
-
-// or
-
-// This will mutate the context.
-ThemesUtil.applyBackpackDefaultsToContext(context)
-```
+Those can be accessed programmatically using the `BpkTheme` class.
