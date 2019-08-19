@@ -2,7 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
-# 12.0.2
+# 12.3.0
+
+**Added:**
+
+- `BpkButton`
+  - Stroke width now increases when pressed for Secondary, Destructive and Outlined buttons
+  - Added `buttonStrokeColourPressed` theme property.
+
+# 12.2.0
 
 **Added**:
   - `BpkSnackbar`
