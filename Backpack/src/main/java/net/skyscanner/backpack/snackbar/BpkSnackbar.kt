@@ -82,14 +82,11 @@ class BpkSnackbar private constructor(
 
   companion object {
 
-    @JvmStatic
-    val LENGTH_INDEFINITE = Snackbar.LENGTH_INDEFINITE
+    const val LENGTH_INDEFINITE = Snackbar.LENGTH_INDEFINITE
 
-    @JvmStatic
-    val LENGTH_SHORT = Snackbar.LENGTH_SHORT
+    const val LENGTH_SHORT = Snackbar.LENGTH_SHORT
 
-    @JvmStatic
-    val LENGTH_LONG = Snackbar.LENGTH_LONG
+    const val LENGTH_LONG = Snackbar.LENGTH_LONG
 
     /**
      * Creates a new builder for a [Snackbar] using given [text] and [duration].
