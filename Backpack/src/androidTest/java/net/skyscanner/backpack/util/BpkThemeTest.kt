@@ -49,12 +49,12 @@ class BpkThemeTest {
   fun test_colors() {
     val allColors = listOf(
       listOf("primary", blue500, customBlue, { c: Context -> BpkTheme.getPrimaryColor(c) }),
-      listOf("gray50", gray50, customGray50, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray50) }),
-      listOf("gray100", gray100, customGray100, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray100) }),
-      listOf("gray300", gray300, customGray300, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray300) }),
-      listOf("gray500", gray500, customGray500, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray500) }),
-      listOf("gray700", gray700, customGray700, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray700) }),
-      listOf("gray900", gray900, customGray900, { c: Context -> BpkTheme.getColor(c, R.color.bpkGray900) })
+      listOf("gray50", gray50, customGray50, { c: Context -> ContextCompat.getColor(c, R.color.bpkGray50) }),
+      listOf("gray100", gray100, customGray100, { c: Context -> ContextCompat.getColor(c, R.color.bpkGray100) }),
+      listOf("gray300", gray300, customGray300, { c: Context -> ContextCompat.getColor(c, R.color.bpkGray300) }),
+      listOf("gray500", gray500, customGray500, { c: Context -> ContextCompat.getColor(c, R.color.bpkGray500) }),
+      listOf("gray700", gray700, customGray700, { c: Context -> ContextCompat.getColor(c, R.color.bpkGray700) }),
+      listOf("gray900", gray900, customGray900, { c: Context -> ContextCompat.getColor(c, R.color.bpkGray900) })
     )
 
     allColors.forEach {

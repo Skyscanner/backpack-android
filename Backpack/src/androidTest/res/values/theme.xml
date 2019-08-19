@@ -2,12 +2,6 @@
 <resources>
   <style name="TestThemeUtilsCustomColors">
     <item name="bpkPrimaryColor">#9B104A</item>
-    <item name="bpkGray50Color">#9B104B</item>
-    <item name="bpkGray100Color">#9B104C</item>
-    <item name="bpkGray300Color">#9B104D</item>
-    <item name="bpkGray500Color">#9B104E</item>
-    <item name="bpkGray700Color">#9B104F</item>
-    <item name="bpkGray900Color">#9B105A</item>
   </style>
 
   <style name="TestThemeUtilsWrapWithDefaults">

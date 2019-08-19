@@ -8,9 +8,9 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
@@ -60,12 +60,12 @@ open class BpkTextField @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     BpkText.getFont(context, BpkText.SM, BpkText.Weight.NORMAL).applyTo(paint)
 
-    var textColor = BpkTheme.getColor(context, R.color.bpkGray700)
-    var hintNormalColor = BpkTheme.getColor(context, R.color.bpkGray300)
-    var hintFocusedColor = BpkTheme.getColor(context, R.color.bpkGray500)
-    var iconColor = BpkTheme.getColor(context, R.color.bpkGray700)
+    var textColor = ContextCompat.getColor(context, R.color.bpkGray700)
+    var hintNormalColor = ContextCompat.getColor(context, R.color.bpkGray300)
+    var hintFocusedColor = ContextCompat.getColor(context, R.color.bpkGray500)
+    var iconColor = ContextCompat.getColor(context, R.color.bpkGray700)
 
-    var background: Drawable = ColorDrawable(BpkTheme.getColor(context, R.color.bpkWhite))
+    var background: Drawable = ColorDrawable(ContextCompat.getColor(context, R.color.bpkWhite))
 
     context.theme.obtainStyledAttributes(
       attrs,

@@ -5,20 +5,10 @@ import android.content.ContextWrapper
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.appcompat.view.ContextThemeWrapper
 import net.skyscanner.backpack.R
 import androidx.core.content.ContextCompat
 import java.lang.IllegalStateException
-
-private val COLOR_MAPPINGS = mapOf(
-  R.color.bpkGray50 to R.attr.bpkGray50Color,
-  R.color.bpkGray100 to R.attr.bpkGray100Color,
-  R.color.bpkGray300 to R.attr.bpkGray300Color,
-  R.color.bpkGray500 to R.attr.bpkGray500Color,
-  R.color.bpkGray700 to R.attr.bpkGray700Color,
-  R.color.bpkGray900 to R.attr.bpkGray900Color
-)
 
 class BpkTheme {
   companion object {
@@ -39,25 +29,6 @@ class BpkTheme {
     @ColorInt
     fun getPrimaryColor(context: Context) =
       resolveThemeColorWithDefault(context, R.attr.bpkPrimaryColor)
-
-    /***
-     * Utility function to fetch a Backpack color.
-     *
-     * If the color is replaced via theming then that color will be returned.
-     *
-     * @param context the current ui context.
-     * @param colorRes the color resource
-     * @return a color integer
-     *
-     * @see [R.style.BpkDefaultThemeColors]
-     */
-    @JvmStatic
-    @ColorInt
-    fun getColor(context: Context, @ColorRes colorRes: Int): Int {
-      return COLOR_MAPPINGS[colorRes]?.let {
-        resolveThemeColorWithDefault(context, it)
-      } ?: ContextCompat.getColor(context, colorRes)
-    }
 
     /**
      * Wrap the current `context` with default Backpack colors. After

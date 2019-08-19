@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.core.content.ContextCompat
 import androidx.core.widget.CompoundButtonCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
@@ -31,7 +32,7 @@ open class BpkCheckbox @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     var defaultColor = BpkTheme.getPrimaryColor(context)
     var checkedColor = defaultColor
-    var disabledColor = BpkTheme.getColor(context, R.color.bpkGray100)
+    var disabledColor = ContextCompat.getColor(context, R.color.bpkGray100)
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkCheckbox,

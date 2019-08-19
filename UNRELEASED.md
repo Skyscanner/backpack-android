@@ -2,6 +2,28 @@
 
 > Place your changes below this line.
 
+**Fixed:**
+
+- Updated gray colours `gray50`, `gray100`, `gray200`, `gray300`, `gray400`, `gray500`, `gray700`, `gray900`
+  - Deprecated `gray600` and `gray800` please update as these will be removed in the future.
+  - For these tokens please use either one token above or below your current value to suit your needs.
+
+- Updated icon borders to utilise updated gray color
+
+- `BpkText` now uses `bpkGray900` as default text colour.
+
+**Breaking:**
+
+- Removed themeable grey colours.
+  - `bpkGray50Color`
+  - `bpkGray100Color`
+  - `bpkGray300Color`
+  - `bpkGray500Color`
+  - `bpkGray700Color`
+  - `bpkGray900Color`
+
+- Removed function `BpkTheme.getColor`
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

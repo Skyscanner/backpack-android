@@ -7,13 +7,6 @@
     <item name="colorPrimary">?bpkPrimaryColor</item>
     <item name="colorPrimaryDark">#00254B</item>
 
-    <item name="bpkGray50Color">#F1F3F3</item>
-    <item name="bpkGray100Color">#DCDFE0</item>
-    <item name="bpkGray300Color">#B3BABD</item>
-    <item name="bpkGray500Color">#657176</item>
-    <item name="bpkGray700Color">#4B5458</item>
-    <item name="bpkGray900Color">#0B1A22</item>
-
     <item name="bpkSwitchStyle">@style/LondonThemeBpkSwitch</item>
     <item name="bpkStarRatingStyle">@style/LondonThemeBpkStarRating</item>
     <item name="bpkInteractiveStarRatingStyle">@style/LondonThemeBpkStarRating</item>
@@ -43,7 +36,7 @@
   </style>
 
   <style name="LondonThemeBpkStarRating" parent="">
-    <item name="starColor">?bpkGray100Color</item>
+    <item name="starColor">@color/bpkGray100</item>
     <item name="starFilledColor">?bpkPrimaryColor</item>
   </style>
 
@@ -107,13 +100,13 @@
   </style>
 
   <style name="LondonThemeHorizontalNav">
-    <item name="horizontalNavTextColor">?bpkGray500Color</item>
+    <item name="horizontalNavTextColor">@color/bpkGray500</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="LondonThemeHorizontalNavAlternate">
-    <item name="horizontalNavTextColor">?bpkGray100Color</item>
+    <item name="horizontalNavTextColor">@color/bpkGray100</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
@@ -147,13 +140,6 @@
     <item name="colorPrimary">?bpkPrimaryColor</item>
     <item name="colorPrimaryDark">#ffa000</item>
 
-    <item name="bpkGray50Color">#F1F3F3</item>
-    <item name="bpkGray100Color">#DCDFE0</item>
-    <item name="bpkGray300Color">#B3BABD</item>
-    <item name="bpkGray500Color">#657176</item>
-    <item name="bpkGray700Color">#4B5458</item>
-    <item name="bpkGray900Color">#0B1A22</item>
-
     <item name="bpkSwitchStyle">@style/DohaThemeBpkSwitch</item>
     <item name="bpkStarRatingStyle">@style/DohaThemeBpkStarRating</item>
     <item name="bpkInteractiveStarRatingStyle">@style/DohaThemeBpkStarRating</item>
@@ -176,7 +162,7 @@
   </style>
 
   <style name="DohaThemeBpkStarRating" parent="">
-    <item name="starColor">?bpkGray100Color</item>
+    <item name="starColor">@color/bpkGray100</item>
     <item name="starFilledColor">?bpkPrimaryColor</item>
   </style>
 
@@ -215,7 +201,7 @@
 
   <style name="DohaThemeFab">
     <item name="fabBackgroundColor">?bpkPrimaryColor</item>
-    <item name="fabIconColor">?bpkGray50Color</item>
+    <item name="fabIconColor">@color/bpkGray100</item>
   </style>
 
   <style name="DohaThemeButtonLink">
@@ -229,13 +215,13 @@
   </style>
 
   <style name="DohaThemeHorizontalNav">
-    <item name="horizontalNavTextColor">?bpkGray500Color</item>
+    <item name="horizontalNavTextColor">@color/bpkGray500</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="DohaThemeHorizontalNavAlternate">
-    <item name="horizontalNavTextColor">?bpkGray100Color</item>
+    <item name="horizontalNavTextColor">@color/bpkGray100</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
