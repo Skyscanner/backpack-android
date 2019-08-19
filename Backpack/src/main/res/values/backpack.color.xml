@@ -38,25 +38,25 @@
 
 	<color name="bpkBlue900">#005567</color>
 
-	<color name="bpkGray100">#e6e4eb</color>
+	<color name="bpkGray100">#dddde5</color>
 
-	<color name="bpkGray200">#ccc9d4</color>
+	<color name="bpkGray200">#cdcdd7</color>
 
-	<color name="bpkGray300">#b2aebd</color>
+	<color name="bpkGray300">#b2b2bf</color>
 
-	<color name="bpkGray400">#9a95a7</color>
+	<color name="bpkGray400">#8f90a0</color>
 
-	<color name="bpkGray50">#f3f2f5</color>
+	<color name="bpkGray50">#f1f2f8</color>
 
-	<color name="bpkGray500">#817b8f</color>
+	<color name="bpkGray500">#68697f</color>
 
 	<color name="bpkGray600">#696179</color>
 
-	<color name="bpkGray700">#524c61</color>
+	<color name="bpkGray700">#444560</color>
 
 	<color name="bpkGray800">#3b344b</color>
 
-	<color name="bpkGray900">#252033</color>
+	<color name="bpkGray900">#111236</color>
 
 	<color name="bpkGreen100">#cbf5e2</color>
 
