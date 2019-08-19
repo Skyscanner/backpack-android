@@ -28,6 +28,12 @@ const init = async () => {
     console.log(
       `😰  Git shows some files have been changed. Changed files: ${changedFilesLog}. (ignoring ${ignoredFilesLog})`,
     );
+
+    const { diff } = await execAsync('git diff', {
+      cwd: `${__dirname}/../`,
+    });
+
+    console.log(diff);
     process.exit(1);
   }
 };
