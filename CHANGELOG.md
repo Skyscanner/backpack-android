@@ -2,6 +2,32 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 13.0.0
+
+**Fixed:**
+
+- Updated gray colours `gray50`, `gray100`, `gray200`, `gray300`, `gray400`, `gray500`, `gray700`, `gray900`
+  - Deprecated `gray600` and `gray800` please update as these will be removed in the future.
+  - For these tokens please use either one token above or below your current value to suit your needs.
+
+- Updated icon borders to utilise updated gray color
+
+- `BpkText` now uses `bpkGray900` as default text colour.
+
+**Breaking:**
+
+- Removed themeable grey colours.
+  - `bpkGray50Color`
+  - `bpkGray100Color`
+  - `bpkGray300Color`
+  - `bpkGray500Color`
+  - `bpkGray700Color`
+  - `bpkGray900Color`
+
+- Removed function `BpkTheme.getColor`
+
+- Changed API of `BpkSnackbar` to be consistent with material `Snackbar`.
+
 # 12.3.0
 
 **Added:**
