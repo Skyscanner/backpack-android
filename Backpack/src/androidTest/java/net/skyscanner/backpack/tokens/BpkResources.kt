@@ -26,7 +26,7 @@ class BpkResources {
     assertEquals("#ffff5452", appContext.getString(R.color.bpkRed500))
     assertEquals("#ffffbb00", appContext.getString(R.color.bpkYellow500))
     assertEquals("#fffa488a", appContext.getString(R.color.bpkPink500))
-    assertEquals("#ff817b8f", appContext.getString(R.color.bpkGray500))
+    assertEquals("#ff68697f", appContext.getString(R.color.bpkGray500))
     assertEquals("#ffffffff", appContext.getString(R.color.bpkWhite))
   }
 

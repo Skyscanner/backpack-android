@@ -8,6 +8,7 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.BaseTransientBottomBar
+import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.snackbar.internal.customiseText
@@ -16,7 +17,6 @@ import net.skyscanner.backpack.snackbar.internal.setBackgroundColorCompat
 import net.skyscanner.backpack.snackbar.internal.setMessageAppearanceCompat
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.use
 
 /**
@@ -158,9 +158,9 @@ class BpkSnackbar private constructor(
     fun make(view: View, text: CharSequence, duration: Int): BpkSnackbar {
       val context = view.context
 
-      @ColorInt var textColor = BpkTheme.getColor(context, R.color.bpkWhite)
-      @ColorInt var actionColor = BpkTheme.getColor(context, R.color.bpkBlue500)
-      @ColorInt var backgroundColor = BpkTheme.getColor(context, R.color.bpkGray900)
+      @ColorInt var textColor = ContextCompat.getColor(context, R.color.bpkWhite)
+      @ColorInt var actionColor = ContextCompat.getColor(context, R.color.bpkBlue500)
+      @ColorInt var backgroundColor = ContextCompat.getColor(context, R.color.bpkGray900)
 
       val outValue = TypedValue()
       context.theme.resolveAttribute(R.attr.bpkSnackbarStyle, outValue, true)

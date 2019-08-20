@@ -64,7 +64,6 @@ open class BpkButtonLink @JvmOverloads constructor(
 
     if (isEnabled) {
       background = getRippleDrawable(
-        context = context,
         normalColor = ContextCompat.getColor(context, android.R.color.transparent)
       )
     } else {

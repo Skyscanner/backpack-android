@@ -7,6 +7,7 @@ import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.SelectionType
+import net.skyscanner.backpack.util.BpkTheme
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -17,9 +18,12 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 class NonDrawnDaysOffset {
 
+  private val context = InstrumentationRegistry.getInstrumentation().targetContext
+
   @Before
   fun setUp() {
-    AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().targetContext)
+    BpkTheme.applyDefaultsToContext(context)
+    AndroidThreeTen.init(context)
   }
 
   @Test
@@ -101,7 +105,6 @@ class NonDrawnDaysOffset {
   }
 
   private fun givenMonthView(locale: Locale, startDate: LocalDate, drawMonth: Int): MonthView {
-    val context = InstrumentationRegistry.getInstrumentation().targetContext
     val monthView = MonthView(context = context)
 
     monthView.controller = object : TestBpkCalendarController() {

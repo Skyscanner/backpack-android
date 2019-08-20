@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.getColor
 
@@ -38,7 +38,7 @@ open class BpkSwitch @JvmOverloads constructor(
     val primaryColor = styledAttrs.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
     styledAttrs.recycle()
 
-    trackTintList = ColorStateList.valueOf(BpkTheme.getColor(context, R.color.bpkGray100))
+    trackTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkGray100))
     thumbTintList = ColorStateList(
       arrayOf(
         intArrayOf(android.R.attr.state_checked),
@@ -46,7 +46,7 @@ open class BpkSwitch @JvmOverloads constructor(
       ),
       intArrayOf(
         primaryColor,
-        BpkTheme.getColor(context, R.color.bpkGray50)
+        ContextCompat.getColor(context, R.color.bpkGray50)
       )
     )
   }

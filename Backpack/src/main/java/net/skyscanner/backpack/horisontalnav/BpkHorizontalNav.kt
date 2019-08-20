@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
+import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkFontSpan
@@ -102,9 +103,9 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   }
 
   private fun updateAppearance(attrs: AttributeSet? = null, defStyleAttr: Int = 0) {
-    var textColor: Int = BpkTheme.getColor(context, appearance.defaultTextColor)
-    var textSelectedColor: Int = BpkTheme.getColor(context, appearance.defaultTextSelectedColor)
-    var indicatorColor: Int = BpkTheme.getColor(context, appearance.defaultIndicatorColor)
+    var textColor: Int = ContextCompat.getColor(context, appearance.defaultTextColor)
+    var textSelectedColor: Int = ContextCompat.getColor(context, appearance.defaultTextSelectedColor)
+    var indicatorColor: Int = ContextCompat.getColor(context, appearance.defaultIndicatorColor)
 
     val stylisedContext = createContextThemeWrapper(context, attrs, appearance.styleAttribute)
     stylisedContext

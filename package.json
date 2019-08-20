@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "backpack-android",
-  "version": "12.2.0",
+  "version": "12.3.0",
   "engines": {
     "node": "^10.15.3",
     "npm": "^6.4.1"
@@ -55,8 +55,8 @@
   },
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
-    "bpk-svgs": "^7.0.0",
-    "bpk-tokens": "^27.6.6",
+    "bpk-svgs": "^7.1.0",
+    "bpk-tokens": "^27.7.0",
     "del": "^4.0.0",
     "ensure-node-env": "^1.2.2",
     "eslint-config-skyscanner-with-prettier": "^0.8.0",

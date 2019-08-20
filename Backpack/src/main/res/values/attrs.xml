@@ -73,6 +73,7 @@
     <attr name="buttonBackgroundColor" format="color" />
     <attr name="buttonTextColor" format="color" />
     <attr name="buttonStrokeColor" format="color" />
+    <attr name="buttonStrokeColorPressed" format="color" />
     <attr name="buttonCornerRadius" format="dimension" />
     <attr name="buttonAddElevation" format="boolean" />
   </declare-styleable>
@@ -190,13 +191,6 @@
   <attr name="bpkPrimaryGradientColorStart" format="color" />
   <attr name="bpkPrimaryGradientColorEnd" format="color" />
 
-  <attr name="bpkGray50Color" format="color" />
-  <attr name="bpkGray100Color" format="color" />
-  <attr name="bpkGray300Color" format="color" />
-  <attr name="bpkGray500Color" format="color" />
-  <attr name="bpkGray700Color" format="color" />
-  <attr name="bpkGray900Color" format="color" />
-
   <attr name="bpkStarRatingStyle" format="reference" />
   <attr name="bpkInteractiveStarRatingStyle" format="reference" />
   <attr name="bpkSwitchStyle" format="reference" />
@@ -215,6 +209,7 @@
   <attr name="bpkHorizontalNavStyleAlternate" format="reference"/>
   <attr name="bpkTextFieldStyle" format="reference"/>
   <attr name="bpkSnackbarStyle" format="reference"/>
+  <attr name="bpkRatingStyle" format="reference"/>
 
   <!-- FONT THEMING START -->
 
@@ -244,5 +239,4 @@
 
   <!-- FONT THEMING END -->
 
-  <attr name="bpkRatingStyle" format="reference"/>
 </resources>
