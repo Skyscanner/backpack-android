@@ -20,15 +20,20 @@ import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.use
 
 /**
- * A make wrapper around [Snackbar] providing the required customization.
+ * A wrapper around [Snackbar] providing the required customization.
  *
- * Use [BpkSnackbar.make] to create a new instance, then use it as a [Snackbar].
+ * Use [BpkSnackbar.make] to create a new instance, then use it in the same way as a [Snackbar].
  *
  * @see BpkSnackbar.make
  * @see BpkSnackbar.setText
  * @see BpkSnackbar.setAction
  * @see BpkSnackbar.setDuration
+ * @see BpkSnackbar.setDuration
+ * @see BpkSnackbar.setOnDismissed
+ * @see BpkSnackbar.setBehaviour
+ * @see BpkSnackbar.show
  */
+@Suppress("MemberVisibilityCanBePrivate")
 class BpkSnackbar private constructor(
   private val context: Context,
   view: View,
@@ -82,6 +87,9 @@ class BpkSnackbar private constructor(
   val duration: Int
     get() = snackbar.duration
 
+  /**
+   * @param duration one of the [LENGTH_SHORT], [LENGTH_LONG], [LENGTH_INDEFINITE]
+   */
   fun setDuration(duration: Int): BpkSnackbar {
     snackbar.duration = duration
     return this
@@ -106,7 +114,7 @@ class BpkSnackbar private constructor(
     return this
   }
 
-  val behaviour: BaseTransientBottomBar.Behavior
+  val behaviour: BaseTransientBottomBar.Behavior?
     get() = snackbar.behavior
 
   fun setBehaviour(behavior: BaseTransientBottomBar.Behavior?): BpkSnackbar {
@@ -114,6 +122,14 @@ class BpkSnackbar private constructor(
     return this
   }
 
+  /**
+   * Provides access to internal [Snackbar] instance.
+   * This method should only be used for accessing properties and methods
+   * that [BpkSnackbar] does not have.
+   *
+   * Neither of [Snackbar.setAction], [Snackbar.setActionTextColor], [Snackbar.setText]
+   * should be used with the instance.
+   */
   val rawSnackbar: Snackbar =
     snackbar
 
@@ -127,7 +143,7 @@ class BpkSnackbar private constructor(
 
     /**
      * Creates a new instance for a [Snackbar] using given [text] and [duration].
-     * [view] provides theme and hierarchy to put the [Snackbar]
+     * [view] is being used for themed context and hierarchy to put the [Snackbar]
      *
      * @param view the view to render the snackbar
      * @param text the snackbar message
