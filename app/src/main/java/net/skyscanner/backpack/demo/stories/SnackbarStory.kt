@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.snackbar.BpkSnackbar
+import net.skyscanner.backpack.snackbar.setAction
 
 class SnackbarStory : Story() {
 
@@ -13,25 +14,22 @@ class SnackbarStory : Story() {
 
     view.findViewById<TextView>(R.id.snackbar_short).setOnClickListener {
       it as TextView
-      BpkSnackbar.builder(view, it.text, BpkSnackbar.LENGTH_SHORT)
+      BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_SHORT)
         .setAction("Action!") {}
-        .build()
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_long).setOnClickListener {
       it as TextView
-      BpkSnackbar.builder(view, it.text, BpkSnackbar.LENGTH_LONG)
+      BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_LONG)
         .setAction("Action!") {}
-        .build()
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_indefinite).setOnClickListener {
       it as TextView
-      BpkSnackbar.builder(view, it.text, BpkSnackbar.LENGTH_INDEFINITE)
+      BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_INDEFINITE)
         .setAction("Action!") {}
-        .build()
         .show()
     }
   }

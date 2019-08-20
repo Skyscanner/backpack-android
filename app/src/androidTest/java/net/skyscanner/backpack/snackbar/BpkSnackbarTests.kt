@@ -4,7 +4,6 @@ import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.google.android.material.snackbar.Snackbar
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
@@ -44,44 +43,40 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestSnackbar_Default() {
     capture {
-      BpkSnackbar.builder(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .build()
+      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
     }
   }
 
   @Test
   fun screenshotTestSnackbar_DefaultWithAction() {
     capture {
-      BpkSnackbar.builder(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setAction("Action") {}
-        .build()
     }
   }
 
   @Test
   fun screenshotTestSnackbar_DefaultThemed() {
     capture {
-      BpkSnackbar.builder(themedRoot, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .build()
+      BpkSnackbar.make(themedRoot, "Test", BpkSnackbar.LENGTH_INDEFINITE)
     }
   }
 
   @Test
   fun screenshotTestSnackbar_DefaultWithActionThemed() {
     capture {
-      BpkSnackbar.builder(themedRoot, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+      BpkSnackbar.make(themedRoot, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setAction("Action") {}
-        .build()
     }
   }
 
-  private inline fun capture(crossinline what: AsyncSnapshot.() -> Snackbar) {
+  private inline fun capture(crossinline what: AsyncSnapshot.() -> BpkSnackbar) {
     val asyncScreenshot = prepareForAsyncTest()
     activity.runOnUiThread {
       what(asyncScreenshot)
-        .addCallback(object : Snackbar.Callback() {
-          override fun onShown(sb: Snackbar) {
-            asyncScreenshot.record(sb.view)
+        .addCallback(object : BpkSnackbar.Callback() {
+          override fun onShown(sb: BpkSnackbar) {
+            asyncScreenshot.record(sb.rawSnackbar.view)
           }
         })
         .show()

@@ -6,18 +6,15 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 ## Usage
 
-The Snackbar uses builder pattern and can be used in Kotlin/Java
+The Snackbar can be used in Kotlin/Java
 
 ```Kotlin
 import net.skyscanner.backpack.snackbar.BpkSnackbar
 
-BpkSnackbar.builder(view, "Message", BpkSnackbar.LENGTH_SHORT)
+BpkSnackbar.make(view, "Message", BpkSnackbar.LENGTH_SHORT)
         .setAction("Action") {}
-        .build()
         .show()
 ```
-It's strongly recommended not to change the message or action after the Snackbar has been built. 
-This might result in losing the themed attributes.
 
 ## Theme Props
 
