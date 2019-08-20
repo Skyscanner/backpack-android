@@ -142,7 +142,7 @@ class BpkSnackbar private constructor(
     const val LENGTH_LONG = Snackbar.LENGTH_LONG
 
     /**
-     * Creates a new instance for a [Snackbar] using given [text] and [duration].
+     * Creates a new [Snackbar] instance using the given [text] and [duration].
      * [view] is used for accessing the themed context and hierarchy, to decide where to render the [Snackbar]
      *
      * @param view the view to render the snackbar
