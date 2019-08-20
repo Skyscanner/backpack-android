@@ -8,9 +8,9 @@ import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.StyleableRes
+import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.rating.BpkRating
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.use
 
 internal class RatingSelectors(
@@ -54,9 +54,9 @@ internal class RatingSelectors(
   val color: (BpkRating.Score) -> ColorStateList
 
   init {
-    var colorLow = BpkTheme.getColor(context, R.color.bpkRed500)
-    var colorMedium = BpkTheme.getColor(context, R.color.bpkYellow500)
-    var colorHigh = BpkTheme.getColor(context, R.color.bpkGreen500)
+    var colorLow = ContextCompat.getColor(context, R.color.bpkRed500)
+    var colorMedium = ContextCompat.getColor(context, R.color.bpkYellow500)
+    var colorHigh = ContextCompat.getColor(context, R.color.bpkGreen500)
 
     context.theme.obtainStyledAttributes(
       attrs,

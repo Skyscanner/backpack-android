@@ -9,7 +9,6 @@ import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.*
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.use
 import net.skyscanner.backpack.util.ResourcesUtil
 
@@ -81,10 +80,10 @@ open class BpkButton : BpkButtonBase {
           initialType = Type.fromId(it.getInt(R.styleable.BpkButton_buttonType, 0))
         }
 
-        buttonBackgroundColor = it.getColor(R.styleable.BpkButton_buttonBackgroundColor, BpkTheme.getColor(context, type.bgColor))
+        buttonBackgroundColor = it.getColor(R.styleable.BpkButton_buttonBackgroundColor, ContextCompat.getColor(context, type.bgColor))
 
-        buttonStrokeColor = it.getColor(R.styleable.BpkButton_buttonStrokeColor, BpkTheme.getColor(context, type.strokeColor))
-        buttonStrokeColorPressed = it.getColor(R.styleable.BpkButton_buttonStrokeColorPressed, BpkTheme.getColor(context, type.strokeColorSelected))
+        buttonStrokeColor = it.getColor(R.styleable.BpkButton_buttonStrokeColor, ContextCompat.getColor(context, type.strokeColor))
+        buttonStrokeColorPressed = it.getColor(R.styleable.BpkButton_buttonStrokeColorPressed, ContextCompat.getColor(context, type.strokeColorSelected))
 
         roundedButtonCorner = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, defaultCornerRadius)
 

@@ -5,5 +5,5 @@
     <solid android:color="@color/bpkWhite" />
     <stroke
         android:width="1dip"
-        android:color="?bpkGray100Color" />
+        android:color="@color/bpkGray100" />
 </shape>

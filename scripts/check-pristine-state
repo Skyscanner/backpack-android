@@ -23,11 +23,17 @@ const init = async () => {
     .filter(exists);
 
   if (changedFiles.length) {
+    const changedFilesLog = changedFiles.join(',');
+    const ignoredFilesLog = filesToIgnore.join(',');
     console.log(
-      `😰  Git shows some files have been changed (ignoring ${filesToIgnore.join(
-        ',',
-      )}). Changed files: ${changedFiles.join(',')}`,
+      `😰  Git shows some files have been changed. Changed files: ${changedFilesLog}. (ignoring ${ignoredFilesLog})`,
     );
+
+    const { stdout: diff } = await execAsync('git --no-pager diff', {
+      cwd: `${__dirname}/../`,
+    });
+
+    console.log(diff);
     process.exit(1);
   }
 };

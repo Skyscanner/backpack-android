@@ -34,7 +34,6 @@ import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.ResourcesUtil
-import net.skyscanner.backpack.util.BpkTheme
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.WeekFields
@@ -70,12 +69,12 @@ internal class MonthView @JvmOverloads constructor(
   private var numberOfRows = DEFAULT_NUM_ROWS
   private var monthHeaderString = ""
 
-  private val defaultTextColor: Int = BpkTheme.getColor(context, R.color.bpkGray900)
-  private val disabledTextColor: Int = BpkTheme.getColor(context, R.color.bpkGray100)
+  private val defaultTextColor: Int = ContextCompat.getColor(context, R.color.bpkGray900)
+  private val disabledTextColor: Int = ContextCompat.getColor(context, R.color.bpkGray100)
 
-  private val rangeColorColored: Int = BpkTheme.getColor(context, R.color.bpkGray100)
-  private val rangeTextColorColored: Int = BpkTheme.getColor(context, R.color.bpkGray700)
-  private val todayCircleColor: Int = BpkTheme.getColor(context, R.color.bpkGray100)
+  private val rangeColorColored: Int = ContextCompat.getColor(context, R.color.bpkGray100)
+  private val rangeTextColorColored: Int = ContextCompat.getColor(context, R.color.bpkGray700)
+  private val todayCircleColor: Int = ContextCompat.getColor(context, R.color.bpkGray100)
   private val todayCircleStrokeWidth: Int = ResourcesUtil.dpToPx(1, context)
   private val sameDayCircleStrokeWidth: Int = ResourcesUtil.dpToPx(1, context)
   private val miniDayNumberTextSize: Int = monthNumberFont.fontSize
