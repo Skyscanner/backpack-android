@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <com.google.android.material.appbar.CollapsingToolbarLayout
+    android:id="@+id/bpk_page_title_collapsing_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:expandedTitleMarginStart="@dimen/bpk_page_title_expanded_spacing_horizontal"
+    app:expandedTitleMarginEnd="@dimen/bpk_page_title_expanded_spacing_horizontal"
+    app:expandedTitleMarginTop="@dimen/bpk_page_title_expanded_spacing_top"
+    app:expandedTitleMarginBottom="@dimen/bpk_page_title_expanded_spacing_bottom"
+    android:minHeight="@dimen/bpk_page_title_min_height"
+    app:contentScrim="@android:color/transparent"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+    app:expandedTitleTextAppearance="?bpkTextXxxlHeavyAppearance"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+      android:id="@+id/bpk_page_title_toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?actionBarSize"
+      android:background="@null"
+      app:layout_collapseMode="pin"
+      style="?toolbarStyle"/>
+
+  </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+</com.google.android.material.appbar.AppBarLayout>
