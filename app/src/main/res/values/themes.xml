@@ -133,9 +133,8 @@
   </style>
 
   <style name="LondonThemePageTitle">
-    <item name="pageTitleExpandedTextColor">#6392ce</item>
     <item name="pageTitleBackgroundColor">#00254B</item>
-    <item name="pageTitleCollapsedTextColor">@color/bpkWhite</item>
+    <item name="pageTitleCollapsedTextColor">#6392ce</item>
   </style>
 
   <!-- London theme end -->
@@ -255,9 +254,8 @@
   </style>
 
   <style name="DohaThemePageTitle">
-    <item name="pageTitleExpandedTextColor">#ffd677</item>
     <item name="pageTitleBackgroundColor">#ffa000</item>
-    <item name="pageTitleCollapsedTextColor">@color/bpkWhite</item>
+    <item name="pageTitleCollapsedTextColor">#ffd677</item>
   </style>
 
   <!-- Doha theme end -->
