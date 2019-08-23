@@ -28,6 +28,7 @@ class BpkPageTitle @JvmOverloads constructor(
 ) : AppBarLayout(createContextThemeWrapper(context, attrs, R.attr.bpkPageTitleStyle), attrs) {
 
   private val collapsingLayout = CollapsingToolbarLayout(this.context)
+  private val minHeight = resources.getDimensionPixelSize(R.dimen.bpk_page_title_min_height)
 
   val toolbar: Toolbar
 
@@ -96,12 +97,16 @@ class BpkPageTitle @JvmOverloads constructor(
       it.expandedTitleMarginTop = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_top)
       it.expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_bottom)
 
-      it.minimumHeight = resources.getDimensionPixelSize(R.dimen.bpk_page_title_min_height)
+      it.minimumHeight = minHeight
 
       it.setScrimsShown(false)
 
       addView(it, COLLAPSING_LAYOUT_PARAMS)
     }
+  }
+
+  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(minHeight, MeasureSpec.EXACTLY))
   }
 
   override fun onRtlPropertiesChanged(layoutDirection: Int) {
