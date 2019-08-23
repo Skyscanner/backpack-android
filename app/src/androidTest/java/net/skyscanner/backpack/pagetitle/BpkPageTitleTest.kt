@@ -34,10 +34,10 @@ class BpkPageTitleTest : BpkSnapshotTest() {
     activity.runOnUiThread {
       activity.setContentView(R.layout.fragment_page_title)
     }
-    val s = prepareForAsyncTest()
+    val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ ->
-        s.record(v)
+        asyncSnapshot.record(v)
       }
   }
 
@@ -46,11 +46,11 @@ class BpkPageTitleTest : BpkSnapshotTest() {
     activity.runOnUiThread {
       activity.setContentView(R.layout.fragment_page_title)
     }
-    val s = prepareForAsyncTest()
+    val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
       .check { v, _ ->
-        s.record(v)
+        asyncSnapshot.record(v)
       }
   }
 
@@ -59,11 +59,11 @@ class BpkPageTitleTest : BpkSnapshotTest() {
     activity.runOnUiThread {
       activity.setContentView(R.layout.fragment_page_title)
     }
-    val s = prepareForAsyncTest()
+    val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
       .check { v, _ ->
-        s.record(v)
+        asyncSnapshot.record(v)
       }
   }
 
@@ -73,10 +73,10 @@ class BpkPageTitleTest : BpkSnapshotTest() {
       activity.setContentView(R.layout.fragment_page_title)
       activity.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
     }
-    val s = prepareForAsyncTest()
+    val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ ->
-        s.record(v)
+        asyncSnapshot.record(v)
       }
   }
 
@@ -86,11 +86,11 @@ class BpkPageTitleTest : BpkSnapshotTest() {
       activity.setContentView(R.layout.fragment_page_title)
       activity.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
     }
-    val s = prepareForAsyncTest()
+    val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
       .check { v, _ ->
-        s.record(v)
+        asyncSnapshot.record(v)
       }
   }
 
@@ -100,23 +100,24 @@ class BpkPageTitleTest : BpkSnapshotTest() {
       activity.setContentView(R.layout.fragment_page_title)
       activity.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
     }
-    val s = prepareForAsyncTest()
+    val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
       .check { v, _ ->
-        s.record(v)
+        asyncSnapshot.record(v)
       }
   }
+
   @Test
   fun screenshotPageTitle_default_themed() {
     activity.runOnUiThread {
       activity.setTheme(R.style.LondonTheme)
       activity.setContentView(R.layout.fragment_page_title)
     }
-    val s = prepareForAsyncTest()
+    val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ ->
-        s.record(v)
+        asyncSnapshot.record(v)
       }
   }
 
@@ -126,11 +127,11 @@ class BpkPageTitleTest : BpkSnapshotTest() {
       activity.setTheme(R.style.LondonTheme)
       activity.setContentView(R.layout.fragment_page_title)
     }
-    val s = prepareForAsyncTest()
+    val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
       .check { v, _ ->
-        s.record(v)
+        asyncSnapshot.record(v)
       }
   }
 
@@ -140,11 +141,11 @@ class BpkPageTitleTest : BpkSnapshotTest() {
       activity.setTheme(R.style.LondonTheme)
       activity.setContentView(R.layout.fragment_page_title)
     }
-    val s = prepareForAsyncTest()
+    val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
       .check { v, _ ->
-        s.record(v)
+        asyncSnapshot.record(v)
       }
   }
 }
