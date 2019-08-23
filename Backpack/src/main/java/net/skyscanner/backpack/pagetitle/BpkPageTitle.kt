@@ -2,10 +2,11 @@ package net.skyscanner.backpack.pagetitle
 
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.Gravity
+import android.view.View
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
@@ -31,14 +32,14 @@ class BpkPageTitle @JvmOverloads constructor(
   val toolbar: Toolbar
 
   @ColorInt
-  var expandedTitleColor: Int = Color.TRANSPARENT
+  var expandedTitleColor: Int = ContextCompat.getColor(this.context, R.color.bpkGray900)
     set(value) {
       field = value
       collapsingLayout.setExpandedTitleColor(value)
     }
 
   @ColorInt
-  var collapsedTitleColor: Int = Color.TRANSPARENT
+  var collapsedTitleColor: Int = ContextCompat.getColor(this.context, R.color.bpkGray900)
     set(value) {
       field = value
       toolbar.setTitleTextColor(value)
@@ -54,9 +55,9 @@ class BpkPageTitle @JvmOverloads constructor(
 
   init {
     var toolbarStyle = this.context.theme.resolveId(R.attr.toolbarStyle)
-    var backgroundColor = Color.WHITE
-    var collapsedTextColor = ContextCompat.getColor(this.context, R.color.bpkGray900)
-    var expandedTextColor = ContextCompat.getColor(this.context, R.color.bpkGray900)
+    var backgroundColor = ContextCompat.getColor(this.context, R.color.bpkWhite)
+    var expandedTitleColor = expandedTitleColor
+    var collapsedTextColor = collapsedTitleColor
     var title: CharSequence? = null
 
     this.context.theme.obtainStyledAttributes(
@@ -66,17 +67,17 @@ class BpkPageTitle @JvmOverloads constructor(
     ).use {
       toolbarStyle = it.getResourceId(R.styleable.BpkPageTitle_pageTitleToolbarStyle, toolbarStyle)
       backgroundColor = it.getColor(R.styleable.BpkPageTitle_pageTitleBackgroundColor, backgroundColor)
-      expandedTextColor = it.getColor(R.styleable.BpkPageTitle_pageTitleExpandedTextColor, expandedTextColor)
+      expandedTitleColor = it.getColor(R.styleable.BpkPageTitle_pageTitleExpandedTextColor, expandedTitleColor)
       collapsedTextColor = it.getColor(R.styleable.BpkPageTitle_pageTitleCollapsedTextColor, collapsedTextColor)
       title = it.getString(R.styleable.BpkPageTitle_pageTitleText)
     }
 
     this.toolbar = Toolbar(ContextThemeWrapper(this.context, toolbarStyle))
-    collapsingLayout.setCollapsedTitleTextColor(Color.RED)
     setupToolbar()
 
     setupCollapsingLayout()
-    this.expandedTitleColor = expandedTextColor
+
+    this.expandedTitleColor = expandedTitleColor
     this.collapsedTitleColor = collapsedTextColor
     this.background = ColorDrawable(backgroundColor)
     this.title = title
@@ -85,12 +86,13 @@ class BpkPageTitle @JvmOverloads constructor(
   private fun setupCollapsingLayout() {
     collapsingLayout.also {
       it.setExpandedTitleTextAppearance(context.theme.resolveId(R.attr.bpkTextXxxlHeavyAppearance))
-      val typeface = FontFamilyResolver.invoke(it.context, BpkText.Weight.HEAVY)
-      it.setCollapsedTitleTypeface(typeface)
-      it.setExpandedTitleTypeface(typeface)
+      it.setExpandedTitleTypeface(FontFamilyResolver.invoke(it.context, BpkText.Weight.HEAVY))
+
+      it.setCollapsedTitleTextAppearance(context.theme.resolveId(R.attr.bpkTextBaseEmphasizedAppearance))
+      it.setCollapsedTitleTypeface(FontFamilyResolver.invoke(it.context, BpkText.Weight.EMPHASIZED))
 
       it.expandedTitleMarginStart = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_horizontal)
-      it.expandedTitleMarginEnd = it.expandedTitleMarginStart
+      it.expandedTitleMarginEnd = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_horizontal)
       it.expandedTitleMarginTop = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_top)
       it.expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_bottom)
 
@@ -100,6 +102,12 @@ class BpkPageTitle @JvmOverloads constructor(
 
       addView(it, COLLAPSING_LAYOUT_PARAMS)
     }
+  }
+
+  override fun onRtlPropertiesChanged(layoutDirection: Int) {
+    super.onRtlPropertiesChanged(layoutDirection)
+    collapsingLayout.collapsedTitleGravity = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) Gravity.END else Gravity.START
+    collapsingLayout.expandedTitleGravity = collapsingLayout.collapsedTitleGravity
   }
 
   private fun setupToolbar() {

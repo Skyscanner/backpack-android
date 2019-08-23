@@ -96,6 +96,6 @@ internal class DialogWindowLayout @JvmOverloads constructor(
   private companion object {
     val modalBg = ColorDrawable(Color.TRANSPARENT)
     val fullscreenBg = ColorDrawable(Color.WHITE)
-    const val heightPercentageToShowFullScreen = 0.85f
+    const val heightPercentageToShowFullScreen = 0.75f
   }
 }
