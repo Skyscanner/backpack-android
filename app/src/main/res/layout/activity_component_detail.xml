@@ -25,7 +25,7 @@
 
   </com.google.android.material.appbar.AppBarLayout>
 
-  <androidx.core.widget.NestedScrollView
+  <net.skyscanner.backpack.demo.components.LockableNestedScrollView
     android:id="@+id/component_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
