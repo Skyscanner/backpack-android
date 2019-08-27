@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 13.1.0
+
+**Added:**
+
+- `BpkPageTitle`
+
 # 13.0.0
 
 **Fixed:**
