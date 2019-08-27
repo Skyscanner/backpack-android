@@ -37,8 +37,7 @@ The scrolling child of [`CoordinatorLayout`](https://developer.android.com/refer
 
 ## Theme Props
 
-- `pageTitleBackgroundColor`
-- `pageTitleCollapsedTextColor`
-- `pageTitleToolbarStyle`
+- `pageTitleBackgroundColor` - `bpkWhite` by default.
+- `pageTitleToolbarStyle` - `?attr/toolbarStyle` by default.
 
 Styles can be changed globally through `bpkPageTitleStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
