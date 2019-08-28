@@ -142,4 +142,8 @@
 
 	<color name="bpkYellow900">#9c7200</color>
 
+	<color name="bpkTextPrimaryLight">#111236</color>
+
+	<color name="bpkTextSecondaryLight">#444560</color>
+
  </resources>
