@@ -103,7 +103,7 @@ class BpkPageTitle @JvmOverloads constructor(
 
   override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
     params?.let {
-      if (it.height == ViewGroup.LayoutParams.WRAP_CONTENT) {
+      if (it.height == LayoutParams.WRAP_CONTENT || it.height == LayoutParams.MATCH_PARENT) {
         it.height = resources.getDimensionPixelSize(R.dimen.bpk_page_title_min_height)
       }
     }
