@@ -13,7 +13,7 @@
   <dimen name="bpk_page_title_toolbar_height">48dp</dimen>
   <dimen name="bpk_page_title_expanded_spacing_horizontal">@dimen/bpkSpacingLg</dimen>
   <dimen name="bpk_page_title_expanded_spacing_top">@dimen/bpkSpacingXxl</dimen>
-  <dimen name="bpk_page_title_expanded_spacing_bottom">@dimen/bpkSpacingBase</dimen>
+  <dimen name="bpk_page_title_expanded_spacing_bottom">@dimen/bpkSpacingLg</dimen>
   <!--spacing_top(40) + spacing_bottom(16) + text_size(36) -->
   <dimen name="bpk_page_title_min_height">92dp</dimen>
 

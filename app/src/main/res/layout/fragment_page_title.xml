@@ -8,7 +8,6 @@
     android:id="@+id/appBar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:pageTitleText="Page Title"
     app:pageTitleExpandedTextColor="@color/bpkYellow500"/>
 
   <androidx.core.widget.NestedScrollView
