@@ -2,21 +2,6 @@
 
 > Place your changes below this line.
 
-**Fixed:**
-
-- `BpkTextEdit`
-  - Changed text size from SM to BASE.
-
-- `BpkPageTitle`
-  - Fixed wrong title alignment on RTL.
-  - Fixed wrong scrolling behaviour of `CoordinatorLayout` in some cases.
-
-**Added:**
-
-- New colours added:
-  - `bpkTextPrimaryLight`
-  - `bpkTextSecondaryLight`
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

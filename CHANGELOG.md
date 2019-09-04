@@ -2,6 +2,23 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 13.2.0
+
+**Fixed:**
+
+- `BpkTextEdit`
+  - Changed text size from SM to BASE.
+
+- `BpkPageTitle`
+  - Fixed wrong title alignment on RTL.
+  - Fixed wrong scrolling behaviour of `CoordinatorLayout` in some cases.
+
+**Added:**
+
+- New colours added:
+  - `bpkTextPrimaryLight`
+  - `bpkTextSecondaryLight`
+
 # 13.1.0
 
 **Added:**
