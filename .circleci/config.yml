@@ -1,0 +1,131 @@
+aliases:
+  - &environment
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-28  # gcloud is baked into this image
+    environment:
+      JVM_OPTS: -Xmx3200m
+
+  - &attach_workspace
+    attach_workspace:
+        at: ~/code
+
+  - &gcloud_tests
+    name: Gcloud Tests
+    command: |
+      echo $GCLOUD_SERVICE_KEY | base64 --decode > ${HOME}/gcloud-service-key.json
+      gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+      gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+      ./scripts/ci-tests.sh
+
+  - &save_build_cache
+    save_cache:
+      key: build-cache
+      paths:
+        - ./app/build/outputs/apk/debug/app-debug.apk
+        - ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+        - ./Backpack/build/outputs/apk/androidTest/debug/Backpack-debug-androidTest.apk
+  
+  - &restore_build_cache
+    restore_cache:
+      keys: build-cache
+
+  - &restore_cache
+    restore_cache:
+      keys: 
+        - jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "Backpack/build.gradle" }}
+        - node-{{ checksum "package-lock.json" }}
+  
+version: 2
+workflows:
+  version: 2
+  master:
+    jobs:
+      - "Build"
+      - "Instrumented tests":
+          requires: 
+            - "Build"
+      - "Screenshot tests":
+          requires: 
+            - "Build"
+jobs:
+  "Build":
+    <<: *environment
+    steps:
+      - checkout
+      - *attach_workspace
+      - *restore_cache
+
+      - run:
+          name: Install tools
+          command: |
+            set +e
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+            export NVM_DIR="$HOME/.nvm"
+            \. "$NVM_DIR/nvm.sh"
+            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
+            echo 'nvm use' >> $BASH_ENV
+            nvm install
+            nvm use
+            npm install -g greenkeeper-lockfile
+
+      - run:
+          name: Download Dependencies
+          command: |
+            ./gradlew androidDependencies
+            npm install
+
+      - save_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}-{{ checksum  "Backpack/build.gradle" }}
+          paths:
+            - ~/.gradle
+
+      - save_cache:
+          key: node-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: Lint and build
+          command: |
+            set -e
+            npm run build
+            ./scripts/check-pristine-state package-lock.json sd.img
+            ./gradlew :app:assembleDebug :app:assembleDebugAndroidTest :Backpack:assembleDebugAndroidTest check -PdisablePreDex
+
+      - *save_build_cache
+
+  "Instrumented tests":
+    <<: *environment
+    environment:
+      TEST_METHOD: connected
+
+    steps:
+      - checkout
+      - *attach_workspace
+      - *restore_cache
+      - *restore_build_cache
+      - run: *gcloud_tests
+      - store_test_results:
+          path: app/build/test-results/connected
+      - store_artifacts:
+          path: app/build/test-results/connected
+
+  "Screenshot tests":
+    <<: *environment
+    environment:
+      TEST_METHOD: screenshot
+    steps:
+      - checkout
+      - *attach_workspace
+      - *restore_cache
+      - *restore_build_cache
+      - run:
+          name: Install screenshot dependencies
+          command: pip install Pillow
+      - run: *gcloud_tests
+      - store_test_results:
+          path: app/build/test-results/screenshots
+      - store_artifacts:
+          path: app/build/test-results/screenshots
