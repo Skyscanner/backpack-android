@@ -58,7 +58,7 @@ open class BpkTextField @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    BpkText.getFont(context, BpkText.SM, BpkText.Weight.NORMAL).applyTo(paint)
+    BpkText.getFont(context, BpkText.BASE, BpkText.Weight.NORMAL).applyTo(paint)
 
     var textColor = ContextCompat.getColor(context, R.color.bpkGray700)
     var hintNormalColor = ContextCompat.getColor(context, R.color.bpkGray300)
