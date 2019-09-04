@@ -1,10 +1,17 @@
 # Unreleased
 
 > Place your changes below this line.
+
+**Fixed:**
+
+- `BpkTextEdit`
+  - Changed text size from SM to BASE.
+
 **Added:**
- - New colours added:
-   - `bpkTextPrimaryLight`
-   - `bpkTextSecondaryLight`
+
+- New colours added:
+  - `bpkTextPrimaryLight`
+  - `bpkTextSecondaryLight`
 
 ## How to write a good changelog entry
 
