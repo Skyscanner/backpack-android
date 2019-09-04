@@ -7,6 +7,10 @@
 - `BpkTextEdit`
   - Changed text size from SM to BASE.
 
+- `BpkPageTitle`
+  - Fixed wrong title alignment on RTL.
+  - Fixed wrong scrolling behaviour of `CoordinatorLayout` in some cases.
+
 **Added:**
 
 - New colours added:
