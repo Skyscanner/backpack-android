@@ -5,8 +5,7 @@ import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.Gravity
-import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
@@ -28,7 +27,6 @@ class BpkPageTitle @JvmOverloads constructor(
 ) : AppBarLayout(createContextThemeWrapper(context, attrs, R.attr.bpkPageTitleStyle), attrs) {
 
   private val collapsingLayout = CollapsingToolbarLayout(this.context)
-  private val minHeight = resources.getDimensionPixelSize(R.dimen.bpk_page_title_min_height)
 
   val toolbar: Toolbar
 
@@ -97,22 +95,19 @@ class BpkPageTitle @JvmOverloads constructor(
       it.expandedTitleMarginTop = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_top)
       it.expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_bottom)
 
-      it.minimumHeight = minHeight
-
       it.setScrimsShown(false)
 
       addView(it, COLLAPSING_LAYOUT_PARAMS)
     }
   }
 
-  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-    super.onMeasure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(minHeight, MeasureSpec.EXACTLY))
-  }
-
-  override fun onRtlPropertiesChanged(layoutDirection: Int) {
-    super.onRtlPropertiesChanged(layoutDirection)
-    collapsingLayout.collapsedTitleGravity = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) Gravity.END else Gravity.START
-    collapsingLayout.expandedTitleGravity = collapsingLayout.collapsedTitleGravity
+  override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
+    params?.let {
+      if (it.height == LayoutParams.WRAP_CONTENT) {
+        it.height = resources.getDimensionPixelSize(R.dimen.bpk_page_title_min_height)
+      }
+    }
+    super.setLayoutParams(params)
   }
 
   private fun setupToolbar() {

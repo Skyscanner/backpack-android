@@ -1,6 +1,8 @@
 package net.skyscanner.backpack.pagetitle
 
+import android.app.Activity
 import android.view.View
+import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
@@ -31,9 +33,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotPageTitle_default() {
-    activity.runOnUiThread {
-      activity.setContentView(R.layout.fragment_page_title)
-    }
+    activity.init()
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ ->
@@ -43,9 +43,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotPageTitle_collapsed() {
-    activity.runOnUiThread {
-      activity.setContentView(R.layout.fragment_page_title)
-    }
+    activity.init()
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
@@ -56,9 +54,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotPageTitle_expanded() {
-    activity.runOnUiThread {
-      activity.setContentView(R.layout.fragment_page_title)
-    }
+    activity.init()
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
@@ -69,10 +65,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotPageTitle_default_rtl() {
-    activity.runOnUiThread {
-      activity.setContentView(R.layout.fragment_page_title)
-      activity.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    }
+    activity.init(rtl = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ ->
@@ -82,10 +75,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotPageTitle_collapsed_rtl() {
-    activity.runOnUiThread {
-      activity.setContentView(R.layout.fragment_page_title)
-      activity.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    }
+    activity.init(rtl = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
@@ -96,10 +86,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotPageTitle_expanded_rtl() {
-    activity.runOnUiThread {
-      activity.setContentView(R.layout.fragment_page_title)
-      activity.window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    }
+    activity.init(rtl = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
@@ -110,10 +97,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotPageTitle_default_themed() {
-    activity.runOnUiThread {
-      activity.setTheme(R.style.LondonTheme)
-      activity.setContentView(R.layout.fragment_page_title)
-    }
+    activity.init(theme = R.style.LondonTheme)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ ->
@@ -123,10 +107,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotPageTitle_collapsed_themed() {
-    activity.runOnUiThread {
-      activity.setTheme(R.style.LondonTheme)
-      activity.setContentView(R.layout.fragment_page_title)
-    }
+    activity.init(theme = R.style.LondonTheme)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
@@ -137,15 +118,30 @@ class BpkPageTitleTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotPageTitle_expanded_themed() {
-    activity.runOnUiThread {
-      activity.setTheme(R.style.LondonTheme)
-      activity.setContentView(R.layout.fragment_page_title)
-    }
+    activity.init(theme = R.style.LondonTheme)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
       .check { v, _ ->
         asyncSnapshot.record(v)
       }
+  }
+
+  private fun Activity.init(
+    @StyleRes theme: Int = 0,
+    rtl: Boolean = false
+  ) {
+    runOnUiThread {
+      if (theme != 0) {
+        setTheme(theme)
+      }
+      setContentView(R.layout.fragment_page_title)
+      if (!rtl) {
+        findViewById<BpkPageTitle>(R.id.appBar).title = "Page Title"
+      } else {
+        window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
+        findViewById<BpkPageTitle>(R.id.appBar).title = "عنوان الصفحة"
+      }
+    }
   }
 }
