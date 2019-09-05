@@ -5,9 +5,11 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.getColor
+import net.skyscanner.backpack.util.use
 
 private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
   val withBaseStyle = createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.switchStyle)
@@ -34,20 +36,24 @@ open class BpkSwitch @JvmOverloads constructor(
   }
 
   fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val styledAttrs = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0)
-    val primaryColor = styledAttrs.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
-    styledAttrs.recycle()
+    context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
+      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
+      val trackCheckedColor = ColorUtils.setAlphaComponent(checkedColor, 97) // factor 0.38 (0.38 * 255) taken from https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/color/MaterialColors.java#L42
 
-    trackTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkGray100))
-    thumbTintList = ColorStateList(
+      trackTintList = getColorStateList(trackCheckedColor, ContextCompat.getColor(context, R.color.bpkGray100))
+      thumbTintList = getColorStateList(checkedColor, ContextCompat.getColor(context, R.color.bpkGray50))
+    }
+  }
+
+  private fun getColorStateList(checkedColor: Int, uncheckedColor: Int) =
+    ColorStateList(
       arrayOf(
         intArrayOf(android.R.attr.state_checked),
         intArrayOf(-android.R.attr.state_checked)
       ),
       intArrayOf(
-        primaryColor,
-        ContextCompat.getColor(context, R.color.bpkGray50)
+        checkedColor,
+        uncheckedColor
       )
     )
-  }
 }
