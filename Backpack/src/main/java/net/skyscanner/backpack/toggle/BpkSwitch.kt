@@ -16,6 +16,9 @@ private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
   return createContextThemeWrapper(withBaseStyle, attrs, R.attr.bpkSwitchStyle)
 }
 
+// taken from https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/color/MaterialColors.java#L42
+private const val CHECKED_TRACK_COLOR_ALPHA = (0.38f * 255f).toInt()
+
 /**
  * BpkSwitch allow users to toggle between two states, on or off.
  *
@@ -38,7 +41,7 @@ open class BpkSwitch @JvmOverloads constructor(
   fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
       val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
-      val trackCheckedColor = ColorUtils.setAlphaComponent(checkedColor, 97) // factor 0.38 (0.38 * 255) taken from https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/color/MaterialColors.java#L42
+      val trackCheckedColor = ColorUtils.setAlphaComponent(checkedColor, CHECKED_TRACK_COLOR_ALPHA)
 
       trackTintList = getColorStateList(trackCheckedColor, ContextCompat.getColor(context, R.color.bpkGray100))
       thumbTintList = getColorStateList(checkedColor, ContextCompat.getColor(context, R.color.bpkGray50))
