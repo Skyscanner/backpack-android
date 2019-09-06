@@ -1,64 +1,80 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const child_process = require('child_process');
-const {
-  promisify
-} = require("util");
-const {
-  exec
-} = require('child_process');
-const execAsync = promisify(exec);
+const { execSync } = require('child_process');
 
-const [node, path, releaseTag, ...rest] = process.argv;
+const dist = `docs-dist`;
+const releaseTag = process.argv[2];
 
-const exitOnError = (err) => {
-  if(err) {
+const exitOnError = err => {
+  if (err) {
     console.log(err);
     process.exit(1);
   }
-}
+};
 
-const buildDocs = () => {
-  fs.mkdirSync(`./dist`, exitOnError);
+const createIfDoenstExist = (path, callback) => {
+  if (!fs.existsSync(path)) {
+    fs.mkdirSync(path, callback);
+  }
+};
 
-  fs.mkdirSync(`./dist/versions`, exitOnError);
+createIfDoenstExist(dist, exitOnError);
 
-  fs.mkdirSync(`./dist/versions/${releaseTag}`, exitOnError);
+createIfDoenstExist(`${dist}/versions`, exitOnError);
 
-  fs.mkdirSync(`./dist/versions/latest`, exitOnError);
+createIfDoenstExist(`${dist}/versions/${releaseTag}`, exitOnError);
 
-  child_process.execSync(`npm run docs -- -PdokkaOutput=./dist/versions/`, exitOnError);
+createIfDoenstExist(`${dist}/versions/latest`, exitOnError);
 
-  fs.renameSync('./dist/versions/backpack-android', `./dist/versions/${releaseTag}`, exitOnError);
+execSync(
+  'echo "\n" >> Backpack/src/main/java/net/skyscanner/backpack/badge/BpkBadge.kt',
+  exitOnError,
+);
 
-  fs.writeFile(`dist/404.html`,
-`<!DOCTYPE html>
+execSync(`./gradlew :Backpack:dokka`, exitOnError);
+
+fs.renameSync(
+  `Backpack/build/javadoc/`,
+  `${dist}/versions/${releaseTag}`,
+  exitOnError,
+);
+
+fs.writeFile(
+  `docs-dist/404.html`,
+  `<!DOCTYPE html>
 <html>
-  <meta http-equiv="refresh" content="1;url=/android/versions/${releaseTag}" />
-  <script type="text/javascript">
-    const androidDocsPath = (window.location + '').split('android/versions/latest');
-    if (androidDocsPath.length > 1) {
-      window.location = \`/android/versions/${releaseTag}\${androidDocsPath[1]}\`;
-    }
-  </script>
+<meta http-equiv="refresh" content="1;url=/android/versions/${releaseTag}/backpack-android" />
+<script type="text/javascript">
+  const androidDocsPath = (window.location + '').split('android/versions/latest');
+  if (androidDocsPath.length > 1) {
+    window.location = \`/android/versions/${releaseTag}\${androidDocsPath[1]}\`;
+  }
+</script>
 </html>
-`, { flag: 'w' }, exitOnError);
+`,
+  { flag: 'w' },
+  exitOnError,
+);
 
-  fs.writeFile(`dist/index.html`,
-`<!DOCTYPE html>
+fs.writeFile(
+  `docs-dist/index.html`,
+  `<!DOCTYPE html>
 <html>
-  <meta http-equiv="refresh" content="0;url=/android/versions/${releaseTag}" />
+<meta http-equiv="refresh" content="0;url=/android/versions/${releaseTag}/backpack-android" />
 </html>
-`, { flag: 'w' }, exitOnError);
+`,
+  { flag: 'w' },
+  exitOnError,
+);
 
-  fs.writeFile(`dist/versions/latest/index.html`,
-`<!DOCTYPE html>
+fs.writeFile(
+  `docs-dist/versions/latest/index.html`,
+  `<!DOCTYPE html>
 <html>
-  <meta http-equiv="refresh" content="0;url=/android/versions/${releaseTag}" />
+<meta http-equiv="refresh" content="0;url=/android/versions/${releaseTag}/backpack-android" />
 </html>
-`, { flag: 'w' }, exitOnError);
-}
-
-buildDocs();
-
+`,
+  { flag: 'w' },
+  exitOnError,
+);

@@ -46,12 +46,12 @@ dependencies {
 dokka {
   moduleName = "$rootProject.name"
   outputFormat = 'html'
-  outputDirectory = "$rootProject.buildDir/docs"
+  outputDirectory = "$buildDir/javadoc"
   reportUndocumented = false
-
-  if (project.hasProperty("dokkaOutput")) {
-    outputDirectory = dokkaOutput
-  }
+//
+//  if (project.hasProperty("dokkaOutput")) {
+//    outputDirectory = dokkaOutput
+//  }
 
   linkMapping {
     dir = "${project.projectDir}/src/main/java"
