@@ -1,12 +1,6 @@
 # Unreleased
 
 > Place your changes below this line.
-
-**Added:**
-
-- `BpkBadge`
-  - Added theme support
-  - Added `android:includeFontPadding` theme property
   
 ## How to write a good changelog entry
 

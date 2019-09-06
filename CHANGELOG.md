@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 13.3.0
+
+**Added:**
+
+- `BpkBadge`
+  - Added theme support
+  - Added `android:includeFontPadding` theme property
+  
 # 13.2.1
 
 **Fixed:**
