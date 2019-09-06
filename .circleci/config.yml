@@ -55,18 +55,18 @@ workflows:
   version: 2
   master:
     jobs:
-      - "Build"
-      - "Instrumented tests":
-          requires: 
-            - "Build"
-      - "Screenshot tests":
-          requires: 
-            - "Build"
+      # - "Build"
+      # - "Instrumented tests":
+      #     requires: 
+      #       - "Build"
+      # - "Screenshot tests":
+      #     requires: 
+      #       - "Build"
       # TODO: Only run on master
-      - "Publish docs":
-          requires: 
-            - "Instrumented tests"
-            - "Screenshot tests"
+      - "Publish docs"
+          # requires: 
+          #   - "Instrumented tests"
+          #   - "Screenshot tests"
 jobs:
   "Build":
     <<: *environment
@@ -150,7 +150,7 @@ jobs:
           command: |
             git clone git@github.com:backpack/android.git docs-dist
             
-            ./build-docs-ci $CIRCLE_TAG
+            ./scripts/build-docs-ci $CIRCLE_TAG
 
             cd docs-dist
 
