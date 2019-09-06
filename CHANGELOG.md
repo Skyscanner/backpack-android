@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 13.2.1
+
+**Fixed:**
+
+- Switch
+  - Updated selected track colour to match platform standards.
+
 # 13.2.0
 
 **Fixed:**
