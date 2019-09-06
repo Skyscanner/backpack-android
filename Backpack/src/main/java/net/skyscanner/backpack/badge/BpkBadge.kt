@@ -11,12 +11,13 @@ import androidx.annotation.Dimension
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.createContextThemeWrapper
 
 open class BpkBadge @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : BpkText(context, attrs, defStyleAttr) {
+) : BpkText(createContextThemeWrapper(context, attrs, R.attr.bpkBadgeStyle), attrs, defStyleAttr) {
 
   private var initialized = false
 
@@ -99,6 +100,7 @@ open class BpkBadge @JvmOverloads constructor(
 
     type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
     message = a.getString(R.styleable.BpkBadge_message)
+    includeFontPadding = a.getBoolean(R.styleable.BpkBadge_android_includeFontPadding, false)
 
     a.recycle()
 
@@ -142,8 +144,5 @@ open class BpkBadge @JvmOverloads constructor(
     val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     this.gravity = Gravity.CENTER
     this.layoutParams = params
-
-    // make sure is center aligned
-    includeFontPadding = false
   }
 }
