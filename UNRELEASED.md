@@ -5,7 +5,7 @@
 **Added:**
 
 - `BpkBadge`
-  - Themes support
+  - Added theme support
   - Added `android:includeFontPadding` theme property
   
 ## How to write a good changelog entry
