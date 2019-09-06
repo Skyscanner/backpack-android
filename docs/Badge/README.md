@@ -29,3 +29,9 @@ BpkBadge(context).apply {
    type = 'success'
 }
 ```
+
+## Theme Props
+
+- `android:includeFontPadding`
+
+Styles can be changed globally through `bpkBadgeStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.

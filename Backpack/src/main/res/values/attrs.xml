@@ -14,6 +14,7 @@
     </attr>
     <!-- message to be displayed -->
     <attr name="message" format="string" />
+    <attr name="android:includeFontPadding" format="boolean" />
   </declare-styleable>
 
   <declare-styleable name="BpkCalendar">
@@ -219,6 +220,7 @@
   <attr name="bpkSnackbarStyle" format="reference"/>
   <attr name="bpkRatingStyle" format="reference"/>
   <attr name="bpkPageTitleStyle" format="reference"/>
+  <attr name="bpkBadgeStyle" format="reference"/>
 
   <!-- FONT THEMING START -->
 
