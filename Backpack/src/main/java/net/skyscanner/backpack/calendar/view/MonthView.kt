@@ -49,7 +49,7 @@ internal class MonthView @JvmOverloads constructor(
 ) : View(context, attrs, defStyle) {
 
   private val monthNumberFont =
-    BpkText.getFont(context, BpkText.SM)
+    BpkText.getFont(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
 
   private val monthLabelFont =
     BpkText.getFont(context, BpkText.LG, BpkText.Weight.EMPHASIZED)
@@ -294,10 +294,10 @@ internal class MonthView @JvmOverloads constructor(
     stopY: Int,
     paddingFromBottom: Int
   ) {
-    if (coloredCirclePaints.keys.contains(calendarDay)) {
-      drawCircle(canvas, x, (stopY - paddingFromBottom), coloredCircleStrokeWidth + todayCircleStrokeWidth, backgroundPaint)
-      drawCircle(canvas, x, (stopY - paddingFromBottom), coloredCircleStrokeWidth, coloredCirclePaints.getValue(calendarDay))
-    }
+//    if (coloredCirclePaints.keys.contains(calendarDay)) {
+//      drawCircle(canvas, x, (stopY - paddingFromBottom), coloredCircleStrokeWidth + todayCircleStrokeWidth, backgroundPaint)
+//      drawCircle(canvas, x, (stopY - paddingFromBottom), coloredCircleStrokeWidth, coloredCirclePaints.getValue(calendarDay))
+//    }
   }
 
   private fun drawDayCellForRange(
@@ -376,6 +376,15 @@ internal class MonthView @JvmOverloads constructor(
         }
         CalendarRange.DrawType.NONE -> {
           drawColoredSmallCircle(calendarDay, canvas, x, stopY, rowPadding)
+          if (coloredCirclePaints.keys.contains(calendarDay)) {
+            drawCircle(
+              canvas,
+              x,
+              y - miniDayNumberTextSize / 3,
+              selectedDayCircleRadius - rowPadding - sameDayCircleStrokeWidth,
+              coloredCirclePaints.getValue(calendarDay)
+            )
+          }
         }
       }
     }
