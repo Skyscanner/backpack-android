@@ -1,6 +1,21 @@
 # Unreleased
 
 > Place your changes below this line.
+
+**Added:**
+
+- `MonthView`:
+  - Both calendar have the same style
+  - Added new style value `calendarDateSelectedSameDayBackgroundColor` to set the secondary circle color
+  - Increased `rowheight`
+  - Added new style parameter to London and Doha themes
+  - Default font weight is `Emphasized`
+  - Removed today marking circle
+  - `Colored` calendar shows color around days instead of below them
+
+**Fixed:**
+- `MonthView`:
+  - Range rectangular canvas drawable height is calculated from circle size
   
 ## How to write a good changelog entry
 
