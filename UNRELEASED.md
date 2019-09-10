@@ -17,6 +17,11 @@
 - `MonthView`:
   - Range rectangular canvas drawable height is calculated from circle size
   
+**Added:**
+
+- `BpkIcon`:
+  - Added `bpk_single_booking`
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
