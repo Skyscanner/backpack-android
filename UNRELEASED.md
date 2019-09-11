@@ -15,7 +15,7 @@
 
 **Fixed:**
 - `MonthView`:
-  - Range rectangular canvas drawable height is calculated from circle size
+  - Height calculation of range rectangulars
   
 **Added:**
 
