@@ -83,7 +83,7 @@ internal class MonthView @JvmOverloads constructor(
   private val selectedTextColor: Int
   private val selectedDayCircleFillColor: Int
   private val selectedDaySameDayCircleFillColor: Int
-  private val rangeBackgoroundColor: Int
+  private val rangeBackgroundColor: Int
 
   init {
     val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
@@ -94,7 +94,7 @@ internal class MonthView @JvmOverloads constructor(
     selectedDaySameDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
       ContextCompat.getColor(context, R.color.bpkBlue900))
 
-    rangeBackgoroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
+    rangeBackgroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
       ContextCompat.getColor(context, R.color.bpkBlue400))
 
     selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor,
@@ -139,7 +139,7 @@ internal class MonthView @JvmOverloads constructor(
   private val rangeBackPaint = Paint().apply {
     isFakeBoldText = true
     isAntiAlias = true
-    color = rangeBackgoroundColor
+    color = rangeBackgroundColor
     style = Style.FILL
   }
 
@@ -367,7 +367,6 @@ internal class MonthView @JvmOverloads constructor(
     x: Int,
     y: Int
   ) {
-    rangeBackPaint.color = rangeBackgoroundColor
     if (day.dayOfMonth == 1 && day != range.start) {
       drawCircle(canvas, x - paddingX, y - miniDayNumberTextSize / 3, selectedDayCircleRadius, rangeBackPaint)
     }
@@ -399,7 +398,6 @@ internal class MonthView @JvmOverloads constructor(
   private fun drawRect(canvas: Canvas, startX: Int, startY: Int, stopX: Int, stopY: Int) {
     val x1 = if (isRtl) viewWidth - stopX else startX
     val x2 = if (isRtl) viewWidth - startX else stopX
-    rangeBackPaint.color = rangeBackgoroundColor
     canvas.drawRect(
       x1.toFloat(), startY.toFloat(), x2.toFloat(), stopY.toFloat(), rangeBackPaint
     )
