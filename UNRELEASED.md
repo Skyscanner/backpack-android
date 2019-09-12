@@ -5,7 +5,17 @@
 
 - `BpkIcon`:
   - Added `bpk_single_booking`
+- `BpkChip`:
+  - Added `chipBackgroundColor` attribute to allow set custom background color
+  - Added default font weight is `Emphasized`
+  - Changed default font color to `bpkTextPrimaryLight`
+  - Changed default background color to `bpkGray50`
+  - Removed elevation
 
+**Fixed:**
+
+- `Themes`
+  - `London` theme used wrong chip theme
 
 ## How to write a good changelog entry
 

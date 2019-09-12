@@ -11,7 +11,7 @@
     <item name="bpkStarRatingStyle">@style/LondonThemeBpkStarRating</item>
     <item name="bpkInteractiveStarRatingStyle">@style/LondonThemeBpkStarRating</item>
 
-    <item name="bpkChipStyle">@style/DohaThemeChip</item>
+    <item name="bpkChipStyle">@style/LondonThemeChip</item>
 
     <item name="bpkButtonPrimaryStyle">@style/LondonThemeButtonPrimary</item>
     <item name="bpkButtonSecondaryStyle">@style/LondonThemeButtonSecondary</item>
