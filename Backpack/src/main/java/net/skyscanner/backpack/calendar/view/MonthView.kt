@@ -75,7 +75,7 @@ internal class MonthView @JvmOverloads constructor(
   private val selectedDayCircleRadius: Int = ResourcesUtil.dpToPx(20, context)
   private val monthHeaderSize: Int = ResourcesUtil.dpToPx(52, context)
 
-  private var rowHeight: Int = ResourcesUtil.dpToPx(64, context)
+  private var rowHeight: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl) * 2
   private var viewWidth = 0
 
   private var isRtl: Boolean = false
@@ -83,7 +83,7 @@ internal class MonthView @JvmOverloads constructor(
   private val selectedTextColor: Int
   private val selectedDayCircleFillColor: Int
   private val selectedDaySameDayCircleFillColor: Int
-  private val rangeColorNonColored: Int
+  private val rangeBackgoroundColor: Int
 
   init {
     val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
@@ -94,7 +94,7 @@ internal class MonthView @JvmOverloads constructor(
     selectedDaySameDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
       ContextCompat.getColor(context, R.color.bpkBlue900))
 
-    rangeColorNonColored = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
+    rangeBackgoroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
       ContextCompat.getColor(context, R.color.bpkBlue400))
 
     selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor,
@@ -139,7 +139,7 @@ internal class MonthView @JvmOverloads constructor(
   private val rangeBackPaint = Paint().apply {
     isFakeBoldText = true
     isAntiAlias = true
-    color = rangeColorNonColored
+    color = rangeBackgoroundColor
     style = Style.FILL
   }
 
@@ -367,7 +367,7 @@ internal class MonthView @JvmOverloads constructor(
     x: Int,
     y: Int
   ) {
-    rangeBackPaint.color = rangeColorNonColored
+    rangeBackPaint.color = rangeBackgoroundColor
     if (day.dayOfMonth == 1 && day != range.start) {
       drawCircle(canvas, x - paddingX, y - miniDayNumberTextSize / 3, selectedDayCircleRadius, rangeBackPaint)
     }
@@ -399,7 +399,7 @@ internal class MonthView @JvmOverloads constructor(
   private fun drawRect(canvas: Canvas, startX: Int, startY: Int, stopX: Int, stopY: Int) {
     val x1 = if (isRtl) viewWidth - stopX else startX
     val x2 = if (isRtl) viewWidth - startX else stopX
-    rangeBackPaint.color = rangeColorNonColored
+    rangeBackPaint.color = rangeBackgoroundColor
     canvas.drawRect(
       x1.toFloat(), startY.toFloat(), x2.toFloat(), stopY.toFloat(), rangeBackPaint
     )
@@ -490,6 +490,8 @@ internal fun CalendarDrawingParams.toDrawingPaintMap(isSelectedColor: Boolean): 
       val bucketColor = if (isSelectedColor) bucket.selectedColor else bucket.color
       if (bucketColor != null) {
         val paint = Paint().apply {
+          isAntiAlias = true
+          isFakeBoldText = true
           style = Style.FILL
           color = bucketColor
         }
