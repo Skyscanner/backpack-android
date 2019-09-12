@@ -48,7 +48,7 @@ open class BpkChip @JvmOverloads constructor(
       ),
       intArrayOf(
         ContextCompat.getColor(context, R.color.bpkWhite),
-        ContextCompat.getColor(context, R.color.bpkTextPrimaryLight),
+        ContextCompat.getColor(context, R.color.bpkGray900),
         ContextCompat.getColor(context, R.color.bpkGray300)
       )
     )
