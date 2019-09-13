@@ -292,9 +292,9 @@ internal class MonthView @JvmOverloads constructor(
             drawEdgeCircles(canvas, calendarDay, controller.selectedRange, paddingX, x, y)
             val nextDay = calendarDay.plusDays(1)
             if (controller.selectedRange.getDrawType(nextDay) != CalendarRange.DrawType.NONE) {
-              drawRect(canvas, startX - 1 + paddingX, startYBase + selectedDayCircleRadius, stopX + 1, startYBase - selectedDayCircleRadius)
+              drawRect(canvas, startX - 1 + paddingX, startYBase - selectedDayCircleRadius, stopX + 1, startYBase + selectedDayCircleRadius)
             } else {
-              drawRect(canvas, startX - 1, startYBase + selectedDayCircleRadius, stopX - paddingX + 1, startYBase - selectedDayCircleRadius)
+              drawRect(canvas, startX - 1, startYBase - selectedDayCircleRadius, stopX - paddingX + 1, startYBase + selectedDayCircleRadius)
             }
           }
 
@@ -323,7 +323,7 @@ internal class MonthView @JvmOverloads constructor(
         }
         CalendarRange.DrawType.RANGE -> {
           val halfCellWidth = (stopX - startX) / 2
-          drawRect(canvas, startX - 1, startYBase + selectedDayCircleRadius, stopX + 1, startYBase - selectedDayCircleRadius)
+          drawRect(canvas, startX - 1, startYBase - selectedDayCircleRadius, stopX + 1, startYBase + selectedDayCircleRadius)
           drawEdgeCircles(canvas, calendarDay, controller.selectedRange, halfCellWidth, x, y)
         }
         CalendarRange.DrawType.NONE -> {
