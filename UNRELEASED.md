@@ -12,10 +12,11 @@
   - Default font weight is `Emphasized`
   - Removed today marking circle
   - `Colored` calendar shows color around days instead of below them
+  - Calendar day texts appearance is separated into a style
 
 **Fixed:**
 - `MonthView`:
-  - Height calculation of range rectangulars
+  - Height calculation of range rectangular
   
 **Added:**
 
