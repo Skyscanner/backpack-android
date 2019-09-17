@@ -19,11 +19,7 @@
       android:id="@+id/first_weekday_label"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:textColor="@color/bpkGray500"
-      android:layout_weight="1"
-      android:gravity="center"
-      android:lines="1"
-      android:ellipsize="end"
+      style="@style/Bpk.Calendar.Day"
       tools:text="Mon"
       />
 
@@ -31,11 +27,7 @@
       android:id="@+id/second_weekday_label"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:textColor="@color/bpkGray500"
-      android:layout_weight="1"
-      android:gravity="center"
-      android:lines="1"
-      android:ellipsize="end"
+      style="@style/Bpk.Calendar.Day"
       tools:text="Tue"
       />
 
@@ -43,11 +35,7 @@
       android:id="@+id/third_weekday_label"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:textColor="@color/bpkGray500"
-      android:layout_weight="1"
-      android:gravity="center"
-      android:lines="1"
-      android:ellipsize="end"
+      style="@style/Bpk.Calendar.Day"
       tools:text="Wed"
       />
 
@@ -55,11 +43,7 @@
       android:id="@+id/fourth_weekday_label"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:textColor="@color/bpkGray500"
-      android:layout_weight="1"
-      android:gravity="center"
-      android:lines="1"
-      android:ellipsize="end"
+      style="@style/Bpk.Calendar.Day"
       tools:text="Thu"
       />
 
@@ -67,11 +51,7 @@
       android:id="@+id/fifth_weekday_label"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:textColor="@color/bpkGray500"
-      android:layout_weight="1"
-      android:gravity="center"
-      android:lines="1"
-      android:ellipsize="end"
+      style="@style/Bpk.Calendar.Day"
       tools:text="Fri"
       />
 
@@ -79,11 +59,7 @@
       android:id="@+id/sixth_weekday_label"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:textColor="@color/bpkGray500"
-      android:layout_weight="1"
-      android:gravity="center"
-      android:lines="1"
-      android:ellipsize="end"
+      style="@style/Bpk.Calendar.Day"
       tools:text="Sat"
       />
 
@@ -91,12 +67,8 @@
       android:id="@+id/seventh_weekday_label"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:gravity="center"
-      android:textColor="@color/bpkGray500"
-      android:layout_weight="1"
-      android:lines="1"
-      android:ellipsize="end"
-      tools:text="Sun Sun"
+      style="@style/Bpk.Calendar.Day"
+      tools:text="Sun"
       />
 
   </LinearLayout>

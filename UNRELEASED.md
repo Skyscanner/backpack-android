@@ -1,11 +1,27 @@
 # Unreleased
 
 > Place your changes below this line.
+
+**Added:**
+
+- `MonthView`:
+  - Both calendar have the same style
+  - Added new style value `calendarDateSelectedSameDayBackgroundColor` to set the secondary circle color
+  - Increased `rowheight`
+  - Added new style parameter to London and Doha themes
+  - Default font weight is `Emphasized`
+  - Removed today marking circle
+  - `Colored` calendar shows color around days instead of below them
+  - Calendar day texts appearance is separated into a style
+
+**Fixed:**
+- `MonthView`:
+  - Height calculation of range rectangular
+  
 **Added:**
 
 - `BpkIcon`:
   - Added `bpk_single_booking`
-
 
 ## How to write a good changelog entry
 
