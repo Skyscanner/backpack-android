@@ -37,10 +37,8 @@ open class BpkChip @JvmOverloads constructor(
   }
 
   internal open fun setup() {
-    // Elevation
-    ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationSm))
-
-    textStyle = BpkText.SM
+    textStyle = SM
+    weight = Weight.EMPHASIZED
 
     val textColor = ColorStateList(
       arrayOf(
@@ -50,7 +48,7 @@ open class BpkChip @JvmOverloads constructor(
       ),
       intArrayOf(
         ContextCompat.getColor(context, R.color.bpkWhite),
-        ContextCompat.getColor(context, R.color.bpkGray700),
+        ContextCompat.getColor(context, R.color.bpkGray900),
         ContextCompat.getColor(context, R.color.bpkGray300)
       )
     )

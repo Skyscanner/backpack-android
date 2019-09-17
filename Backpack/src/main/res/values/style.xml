@@ -53,5 +53,6 @@
   <style name="Bpk.chip" parent="android:Widget">
     <item name="android:textAppearance">@style/bpkTextSm</item>
     <item name="chipSelectedBackgroundColor">@color/bpkBlue500</item>
+    <item name="chipBackgroundColor">@color/bpkGray50</item>
   </style>
 </resources>

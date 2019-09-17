@@ -44,5 +44,6 @@ chip.setOnClickListener { chip.toggle() }
 ## Theme Props
 
 - `chipSelectedBackgroundColor`
+- `chipBackgroundColor`
 
 Styles can be changed globally through `bpkChipStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
