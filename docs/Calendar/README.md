@@ -98,5 +98,6 @@ In both cases, the handling of the selection
 - `calendarDateSelectedBackgroundColor`
 - `calendarDateSelectedRangeBackgroundColor`
 - `calendarDateSelectedTextColor`
+- `calendarDateSelectedSameDayBackgroundColor`
 
 Styles can be changed globally through `bpkCalendarStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
