@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:drawable="@drawable/chip_selected" android:state_pressed="true" android:state_selected="true"/>
-  <item android:drawable="@drawable/chip_default" android:state_selected="false"/>
-  <item android:state_selected="true">
-    <shape android:shape="rectangle">
-      <solid android:color="?chipSelectedBackgroundColor" />
-      <padding
-        android:bottom="@dimen/bpkSpacingMd"
-        android:left="@dimen/bpkSpacingBase"
-        android:right="@dimen/bpkSpacingBase"
-        android:top="@dimen/bpkSpacingMd" />
-      <corners
-        android:bottomLeftRadius="@dimen/bpkBorderRadiusPill"
-        android:bottomRightRadius="@dimen/bpkBorderRadiusPill"
-        android:topLeftRadius="@dimen/bpkBorderRadiusPill"
-        android:topRightRadius="@dimen/bpkBorderRadiusPill" />
-    </shape>
-  </item>
-</selector>
-
+<shape
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:padding="90dp"
+  android:shape="rectangle">
+  <padding
+    android:bottom="@dimen/bpkSpacingMd"
+    android:left="@dimen/bpkSpacingBase"
+    android:right="@dimen/bpkSpacingBase"
+    android:top="@dimen/bpkSpacingMd" />
+  <corners
+    android:bottomLeftRadius="@dimen/bpkBorderRadiusPill"
+    android:bottomRightRadius="@dimen/bpkBorderRadiusPill"
+    android:topLeftRadius="@dimen/bpkBorderRadiusPill"
+    android:topRightRadius="@dimen/bpkBorderRadiusPill" />
+</shape>

@@ -6,9 +6,9 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.chip.internal.getChipBackground
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.wrapContextWithDefaults
 
@@ -18,20 +18,42 @@ open class BpkChip @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : BpkText(wrapContextWithDefaults(context), attrs, defStyleAttr) {
 
-  init {
-    initialize(attrs, defStyleAttr)
-  }
-
   var disabled: Boolean = false
     set(value) {
       field = value
       this.isEnabled = !disabled
     }
 
+  var chipBackgroundColor: Int = -1
+    set(value) {
+      field = value
+      setupBackground()
+    }
+
+  var chipSelectedBackgroundColor: Int = -1
+    set(value) {
+      field = value
+      setupBackground()
+    }
+
+  init {
+    initialize(attrs, defStyleAttr)
+  }
+
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
+    val t = TypedValue()
+    var wrapped: Context = context
+
+    if (context.theme.resolveAttribute(R.attr.bpkChipStyle, t, true)) {
+      // If we have global styles (theming) for the chip we wrap again so this overrides the default
+      wrapped = ContextThemeWrapper(context, t.resourceId)
+    }
+
+    val attr = wrapped.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
     disabled = attr.getBoolean(R.styleable.BpkChip_disabled, false)
     isSelected = attr.getBoolean(R.styleable.BpkChip_selected, false)
+    chipBackgroundColor = attr.getColor(R.styleable.BpkChip_chipBackgroundColor, ContextCompat.getColor(context, R.color.bpkGray50))
+    chipSelectedBackgroundColor = attr.getColor(R.styleable.BpkChip_chipSelectedBackgroundColor, ContextCompat.getColor(context, R.color.bpkBlue500))
     attr.recycle()
     setup()
   }
@@ -56,18 +78,12 @@ open class BpkChip @JvmOverloads constructor(
     this.setTextColor(textColor)
     this.setSingleLine(true)
 
-    // Wrap with the default style so we always have a valid attribute in the xml
-    var context = ContextThemeWrapper(this.context, R.style.Bpk_chip)
-
-    val t = TypedValue()
-    if (context.theme.resolveAttribute(R.attr.bpkChipStyle, t, true)) {
-      // If we have global styles (theming) for the chip we wrap again so this overrides the default
-      context = ContextThemeWrapper(context, t.resourceId)
-    }
-
     // Background
-    val drawable = ResourcesCompat.getDrawable(resources, R.drawable.chip_background, context.theme)
-    ViewCompat.setBackground(this, drawable)
+    setupBackground()
+  }
+
+  private fun setupBackground() {
+    ViewCompat.setBackground(this, getChipBackground(chipBackgroundColor, chipSelectedBackgroundColor))
   }
 
   fun toggle() {
