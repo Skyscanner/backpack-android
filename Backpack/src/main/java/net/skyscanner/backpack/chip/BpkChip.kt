@@ -8,7 +8,6 @@ import android.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.chip.internal.getChipBackground
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.wrapContextWithDefaults
 
@@ -27,13 +26,13 @@ open class BpkChip @JvmOverloads constructor(
   var chipBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkGray50)
     set(value) {
       field = value
-      setupBackground()
+      updateBackground()
     }
 
   var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkBlue500)
     set(value) {
       field = value
-      setupBackground()
+      updateBackground()
     }
 
   init {
@@ -50,6 +49,7 @@ open class BpkChip @JvmOverloads constructor(
     }
 
     val attr = wrapped.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
+    background = ContextCompat.getDrawable(wrapped, R.drawable.chip_background)
     disabled = attr.getBoolean(R.styleable.BpkChip_disabled, false)
     isSelected = attr.getBoolean(R.styleable.BpkChip_selected, false)
     chipBackgroundColor = attr.getColor(R.styleable.BpkChip_chipBackgroundColor, chipBackgroundColor)
@@ -79,16 +79,28 @@ open class BpkChip @JvmOverloads constructor(
     this.setSingleLine(true)
 
     // Background
-    setupBackground()
-  }
-
-  private fun setupBackground() {
-    ViewCompat.setBackground(this, getChipBackground(chipBackgroundColor, selectedBackgroundColor))
+    updateBackground()
   }
 
   fun toggle() {
     if (!disabled) {
       isSelected = !isSelected
     }
+  }
+
+  private fun updateBackground() {
+    val backgroundTintList = ColorStateList(
+      arrayOf(
+        intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
+        intArrayOf(android.R.attr.state_enabled),
+        intArrayOf(-android.R.attr.state_enabled)
+      ),
+      intArrayOf(
+        selectedBackgroundColor,
+        chipBackgroundColor,
+        chipBackgroundColor
+      )
+    )
+    ViewCompat.setBackgroundTintList(this, backgroundTintList)
   }
 }
