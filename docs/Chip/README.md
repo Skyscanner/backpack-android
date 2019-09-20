@@ -29,6 +29,8 @@ BpkChip(context).apply {
   text = "Message"
   isSelected = true
   disabled = false
+  chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkGray50)
+  chipSelectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkBlue500)
 }
 ```
 

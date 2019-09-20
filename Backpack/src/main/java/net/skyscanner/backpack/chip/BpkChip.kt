@@ -24,13 +24,13 @@ open class BpkChip @JvmOverloads constructor(
       this.isEnabled = !disabled
     }
 
-  var chipBackgroundColor: Int = -1
+  var chipBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkGray50)
     set(value) {
       field = value
       setupBackground()
     }
 
-  var chipSelectedBackgroundColor: Int = -1
+  var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkBlue500)
     set(value) {
       field = value
       setupBackground()
@@ -52,8 +52,8 @@ open class BpkChip @JvmOverloads constructor(
     val attr = wrapped.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
     disabled = attr.getBoolean(R.styleable.BpkChip_disabled, false)
     isSelected = attr.getBoolean(R.styleable.BpkChip_selected, false)
-    chipBackgroundColor = attr.getColor(R.styleable.BpkChip_chipBackgroundColor, ContextCompat.getColor(context, R.color.bpkGray50))
-    chipSelectedBackgroundColor = attr.getColor(R.styleable.BpkChip_chipSelectedBackgroundColor, ContextCompat.getColor(context, R.color.bpkBlue500))
+    chipBackgroundColor = attr.getColor(R.styleable.BpkChip_chipBackgroundColor, chipBackgroundColor)
+    selectedBackgroundColor = attr.getColor(R.styleable.BpkChip_chipSelectedBackgroundColor, selectedBackgroundColor)
     attr.recycle()
     setup()
   }
@@ -83,7 +83,7 @@ open class BpkChip @JvmOverloads constructor(
   }
 
   private fun setupBackground() {
-    ViewCompat.setBackground(this, getChipBackground(chipBackgroundColor, chipSelectedBackgroundColor))
+    ViewCompat.setBackground(this, getChipBackground(chipBackgroundColor, selectedBackgroundColor))
   }
 
   fun toggle() {

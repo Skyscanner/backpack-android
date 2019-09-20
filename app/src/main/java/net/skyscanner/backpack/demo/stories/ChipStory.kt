@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.chip.BpkChip
 import net.skyscanner.backpack.demo.R
 
@@ -30,7 +29,6 @@ class ChipStory : Story() {
         forEachChip(child, cb)
       } else if (child is BpkChip) {
         cb(child)
-        child.chipBackgroundColor = ContextCompat.getColor(child.context, listOf(R.color.bpkBlue300, R.color.bpkBlue400, R.color.bpkBlue500, R.color.bpkBlue600, R.color.bpkBlue700, R.color.bpkBlue800, R.color.bpkBlue900).shuffled().first())
       }
     }
   }
