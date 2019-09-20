@@ -86,6 +86,7 @@
 
   <style name="LondonThemeCalendar">
     <item name="calendarDateSelectedBackgroundColor">#D11622</item>
+    <item name="calendarDateSelectedSameDayBackgroundColor">#ED1B28</item>
     <item name="calendarDateSelectedRangeBackgroundColor">#ED1B28</item>
     <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
   </style>
@@ -204,6 +205,7 @@
 
   <style name="DohaThemeCalendar">
     <item name="calendarDateSelectedBackgroundColor">#7F083B</item>
+    <item name="calendarDateSelectedSameDayBackgroundColor">#9B104C</item>
     <item name="calendarDateSelectedRangeBackgroundColor">#9B104C</item>
     <item name="calendarDateSelectedTextColor">@color/bpkWhite</item>
   </style>

@@ -1,8 +1,10 @@
 package net.skyscanner.backpack.chip
 
+import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.createThemedContext
+import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -42,6 +44,23 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(createThemedContext(testContext))
     view.text = "tag"
     view.isSelected = true
+    snap(view)
+  }
+
+  @Test
+  fun screenshotTestCustomBackground() {
+    val view = BpkChip(testContext)
+    view.text = "tag"
+    view.chipBackgroundColor = ContextCompat.getColor(testContext, R.color.bpkYellow600)
+    snap(view)
+  }
+
+  @Test
+  fun screenshotTestCustomSelectedBackground() {
+    val view = BpkChip(testContext)
+    view.text = "tag"
+    view.selectedBackgroundColor = ContextCompat.getColor(testContext, R.color.bpkRed900)
+    view.toggle()
     snap(view)
   }
 }

@@ -55,4 +55,13 @@
     <item name="chipSelectedBackgroundColor">@color/bpkBlue500</item>
     <item name="chipBackgroundColor">@color/bpkGray50</item>
   </style>
+
+  <style name="Bpk.Calendar.Day" parent="android:Widget">
+    <item name="android:gravity">center</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:lines">1</item>
+    <item name="android:ellipsize">end</item>
+    <item name="android:textColor">@color/bpkGray400</item>
+    <item name="textStyle">sm</item>
+  </style>
 </resources>
