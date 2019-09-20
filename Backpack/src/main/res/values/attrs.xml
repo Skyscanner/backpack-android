@@ -107,6 +107,7 @@
     <attr name="disabled" format="boolean" />
     <attr name="selected" format="boolean" />
     <attr name="chipSelectedBackgroundColor" format="color" />
+    <attr name="chipBackgroundColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkSwitch">
