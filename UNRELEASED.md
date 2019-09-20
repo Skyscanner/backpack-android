@@ -24,12 +24,9 @@
 - `BpkChip`:
   - Added `chipBackgroundColor` attribute to allow set custom background color
   - Added default font weight is `Emphasized`
-  - Added `chipBackgroundColor` and `chipSelectedBackgroundColor` are changeable from code
-  - Added background is created from code
   - Changed default font color to `bpkTextPrimaryLight`
   - Changed default background color to `bpkGray50`
   - Removed elevation
-  - Removed unused chip background drawables
 
 ## How to write a good changelog entry
 
