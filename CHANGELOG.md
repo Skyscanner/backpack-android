@@ -2,6 +2,32 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 13.4.0
+
+**Added:**
+- `MonthView`:
+  - `calendarDateSelectedSameDayBackgroundColor` attribute
+
+- `BpkIcon`:
+  - Added `bpk_single_booking`
+  
+- `BpkChip`:
+  - `chipBackgroundColor` attribute
+  
+**Fixed:**
+- `MonthView`:
+  - Height calculation of range selection
+  - Increased `rowheight`
+  - Default font weight is `emphasized`
+  - Removed today marking circle
+  - Changed the day's colour appearance
+
+- `BpkChip`:
+  - Default font weight is `emphasized`
+  - Default font color is `bpkTextPrimaryLight`
+  - Default background color is `bpkGray50`
+  - Removed elevation
+
 # 13.3.0
 
 **Added:**

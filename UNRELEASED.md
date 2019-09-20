@@ -2,32 +2,6 @@
 
 > Place your changes below this line.
 
-**Added:**
-
-- `MonthView`:
-  - Both calendar have the same style
-  - Added new style value `calendarDateSelectedSameDayBackgroundColor` to set the secondary circle color
-  - Increased `rowheight`
-  - Added new style parameter to London and Doha themes
-  - Default font weight is `Emphasized`
-  - Removed today marking circle
-  - `Colored` calendar shows color around days instead of below them
-  - Calendar day texts appearance is separated into a style
-
-**Fixed:**
-- `MonthView`:
-  - Height calculation of range rectangular
-
-- `BpkIcon`:
-  - Added `bpk_single_booking`
-
-- `BpkChip`:
-  - Added `chipBackgroundColor` attribute to allow set custom background color
-  - Added default font weight is `Emphasized`
-  - Changed default font color to `bpkTextPrimaryLight`
-  - Changed default background color to `bpkGray50`
-  - Removed elevation
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
