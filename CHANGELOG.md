@@ -5,7 +5,7 @@
 # 13.4.0
 
 **Added:**
-- `MonthView`:
+- `BpkCalendar`:
   - `calendarDateSelectedSameDayBackgroundColor` attribute
 
 - `BpkIcon`:
@@ -15,7 +15,7 @@
   - `chipBackgroundColor` attribute
   
 **Fixed:**
-- `MonthView`:
+- `BpkCalendar`:
   - Height calculation of range selection
   - Increased `rowheight`
   - Default font weight is `emphasized`
