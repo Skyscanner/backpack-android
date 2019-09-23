@@ -18,6 +18,10 @@
 -->
 <resources>
 
+	<color name="bpkAbisko">#5a489b</color>
+
+	<color name="bpkBagan">#ffebd0</color>
+
 	<color name="bpkBlue100">#cbeef5</color>
 
 	<color name="bpkBlue200">#b0e4ee</color>
@@ -37,6 +41,12 @@
 	<color name="bpkBlue800">#00758c</color>
 
 	<color name="bpkBlue900">#005567</color>
+
+	<color name="bpkBunol">#ff7b59</color>
+
+	<color name="bpkErfoud">#ffb54d</color>
+
+	<color name="bpkGlencoe">#73cec6</color>
 
 	<color name="bpkGray100">#dddde5</color>
 
@@ -77,6 +87,20 @@
 	<color name="bpkGreen800">#008c4d</color>
 
 	<color name="bpkGreen900">#006638</color>
+
+	<color name="bpkHarbour">#f6dde1</color>
+
+	<color name="bpkHillier">#e18b96</color>
+
+	<color name="bpkKolkata">#ff9400</color>
+
+	<color name="bpkMonteverde">#00a698</color>
+
+	<color name="bpkNara">#ffe7e0</color>
+
+	<color name="bpkPanjin">#d1435b</color>
+
+	<color name="bpkPetra">#ffab95</color>
 
 	<color name="bpkPink100">#ffbfd7</color>
 
@@ -119,6 +143,30 @@
 	<color name="bpkRed800">#cc1f1d</color>
 
 	<color name="bpkRed900">#a80300</color>
+
+	<color name="bpkSegano">#d0eeec</color>
+
+	<color name="bpkSkyBlue">#0770e3</color>
+
+	<color name="bpkSkyBlueShade01">#084eb2</color>
+
+	<color name="bpkSkyBlueShade02">#042759</color>
+
+	<color name="bpkSkyBlueShade03">#02122c</color>
+
+	<color name="bpkSkyBlueTint01">#6d9feb</color>
+
+	<color name="bpkSkyBlueTint02">#9dc0f2</color>
+
+	<color name="bpkSkyBlueTint03">#cddff8</color>
+
+	<color name="bpkSystemGreen">#00a698</color>
+
+	<color name="bpkSystemRed">#d1435b</color>
+
+	<color name="bpkTochigi">#e1ddec</color>
+
+	<color name="bpkValensole">#a59bc8</color>
 
 	<color name="bpkWhite">#ffffff</color>
 
