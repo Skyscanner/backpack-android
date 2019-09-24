@@ -1,6 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
+**Added:**
+
+- `BpkColor`:
+  - NEW BRAND COLOURS 🎉
 
 ## How to write a good changelog entry
 
