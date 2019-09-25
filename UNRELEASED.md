@@ -7,7 +7,7 @@
 - `compileSdk` and `targetSdk` updated to API 29
 - NEW BRAND COLOURS 🎉
 
-**Fixed:**
+**Breaking:**
 
 - Updated all components to use new colours.
 
