@@ -1,12 +1,15 @@
 # Unreleased
 
 > Place your changes below this line.
+
 **Added:**
 
-- `BpkColor`:
-  - NEW BRAND COLOURS 🎉
-- `compileSdk` and `targetSdk`
-  - updated to API 29
+- `compileSdk` and `targetSdk` updated to API 29
+- NEW BRAND COLOURS 🎉
+
+**Fixed:**
+
+- Updated all components to use new colours.
 
 ## How to write a good changelog entry
 
