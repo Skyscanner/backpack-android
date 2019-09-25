@@ -74,11 +74,11 @@ internal fun multiColoredExampleCalendarColoring(
   }
   return CalendarColoring(
     setOf(
-      ColoredBucket(ContextCompat.getColor(context, R.color.bpkNara), redSet),
+      ColoredBucket(ContextCompat.getColor(context, R.color.bpkPetra), redSet),
       ColoredBucket(ContextCompat.getColor(context, R.color.bpkBagan), yellowSet),
       ColoredBucket(ContextCompat.getColor(context, R.color.bpkSegano), greenSet),
       ColoredBucket(ContextCompat.getColor(context, R.color.bpkGray50), greySet),
-      ColoredBucket(null, emptySet, ContextCompat.getColor(context, R.color.bpkPink500))
+      ColoredBucket(null, emptySet, ContextCompat.getColor(context, R.color.bpkPetra))
     )
   )
 }

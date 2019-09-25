@@ -51,12 +51,6 @@
     <item name="android:windowExitAnimation">@anim/dialog_slide_out_down</item>
   </style>
 
-  <style name="Bpk.chip" parent="android:Widget">
-    <item name="android:textAppearance">@style/bpkTextSm</item>
-    <item name="chipSelectedBackgroundColor">@color/bpkBlue500</item>
-    <item name="chipBackgroundColor">@color/bpkGray50</item>
-  </style>
-
   <style name="Bpk.Calendar.Day" parent="android:Widget">
     <item name="android:gravity">center</item>
     <item name="android:layout_weight">1</item>

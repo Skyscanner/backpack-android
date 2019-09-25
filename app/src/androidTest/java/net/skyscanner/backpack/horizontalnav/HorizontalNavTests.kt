@@ -55,7 +55,7 @@ class HorizontalNavTests : BpkSnapshotTest() {
   @Test
   fun screenshotHorizontalNav_alternate() {
     val horizontalNav = BpkHorizontalNav(testContext).init()
-    horizontalNav.setBackgroundResource(R.color.bpkBlue600)
+    horizontalNav.setBackgroundResource(R.color.bpkSkyBlueTint03)
     horizontalNav.appearance = BpkHorizontalNav.Appearance.Alternate
     snap(horizontalNav)
   }

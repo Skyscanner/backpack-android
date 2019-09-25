@@ -51,7 +51,7 @@ class BpkChipTest : BpkSnapshotTest() {
   fun screenshotTestCustomBackground() {
     val view = BpkChip(testContext)
     view.text = "tag"
-    view.chipBackgroundColor = ContextCompat.getColor(testContext, R.color.bpkYellow600)
+    view.chipBackgroundColor = ContextCompat.getColor(testContext, R.color.bpkErfoud)
     snap(view)
   }
 
@@ -59,7 +59,7 @@ class BpkChipTest : BpkSnapshotTest() {
   fun screenshotTestCustomSelectedBackground() {
     val view = BpkChip(testContext)
     view.text = "tag"
-    view.selectedBackgroundColor = ContextCompat.getColor(testContext, R.color.bpkRed900)
+    view.selectedBackgroundColor = ContextCompat.getColor(testContext, R.color.bpkPanjin)
     view.toggle()
     snap(view)
   }

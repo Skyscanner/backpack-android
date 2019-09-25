@@ -28,6 +28,23 @@ class BpkResources {
     assertEquals("#fffa488a", appContext.getString(R.color.bpkPink500))
     assertEquals("#ff68697f", appContext.getString(R.color.bpkGray500))
     assertEquals("#ffffffff", appContext.getString(R.color.bpkWhite))
+
+    // new colours
+    assertEquals("#ff0770e3", appContext.getString(R.color.bpkSkyBlue))
+    assertEquals("#ffd1435b", appContext.getString(R.color.bpkPanjin))
+    assertEquals("#ffffb54d", appContext.getString(R.color.bpkErfoud))
+    assertEquals("#ff00a698", appContext.getString(R.color.bpkMonteverde))
+    assertEquals("#ff5a489b", appContext.getString(R.color.bpkAbisko))
+    assertEquals("#ffffebd0", appContext.getString(R.color.bpkBagan))
+    assertEquals("#ffff7b59", appContext.getString(R.color.bpkBunol))
+    assertEquals("#ff73cec6", appContext.getString(R.color.bpkGlencoe))
+    assertEquals("#ffe18b96", appContext.getString(R.color.bpkHillier))
+    assertEquals("#ffff9400", appContext.getString(R.color.bpkKolkata))
+    assertEquals("#ffffe7e0", appContext.getString(R.color.bpkNara))
+    assertEquals("#ffffab95", appContext.getString(R.color.bpkPetra))
+    assertEquals("#ffd0eeec", appContext.getString(R.color.bpkSegano))
+    assertEquals("#ffe1ddec", appContext.getString(R.color.bpkTochigi))
+    assertEquals("#ffa59bc8", appContext.getString(R.color.bpkValensole))
   }
 
   @Test

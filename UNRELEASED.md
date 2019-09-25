@@ -10,6 +10,7 @@
 **Breaking:**
 
 - Updated all components to use new colours.
+- Removed unused `Bpk.chip` style.
 
 ## How to write a good changelog entry
 
