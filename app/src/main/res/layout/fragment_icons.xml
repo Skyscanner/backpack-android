@@ -86,21 +86,21 @@
     android:layout_height="wrap_content">
     <ImageView
       android:layout_width="wrap_content"
-      android:tint="@color/bpkBlue700"
+      android:tint="@color/bpkSkyBlue"
       app:srcCompat="@drawable/bpk_flight"
       android:padding="@dimen/bpkSpacingMd"
       android:layout_height="wrap_content"/>
     <ImageView
       android:layout_width="wrap_content"
       app:srcCompat="@drawable/bpk_cars"
-      android:tint="@color/bpkGreen700"
+      android:tint="@color/bpkMonteverde"
       android:padding="@dimen/bpkSpacingMd"
       android:layout_height="wrap_content"/>
     <ImageView
       android:layout_width="wrap_content"
       app:srcCompat="@drawable/bpk_hotels"
       android:padding="@dimen/bpkSpacingMd"
-      android:tint="@color/bpkYellow700"
+      android:tint="@color/bpkErfoud"
       android:layout_height="wrap_content"/>
   </LinearLayout>
 </LinearLayout>
