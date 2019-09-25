@@ -40,7 +40,7 @@ open class BpkSwitch @JvmOverloads constructor(
 
   fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
-      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkBlue500))
+      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkSkyBlue))
       val trackCheckedColor = ColorUtils.setAlphaComponent(checkedColor, CHECKED_TRACK_COLOR_ALPHA)
 
       trackTintList = getColorStateList(trackCheckedColor, ContextCompat.getColor(context, R.color.bpkGray100))

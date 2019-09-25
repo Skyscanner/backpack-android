@@ -17,8 +17,8 @@ import net.skyscanner.backpack.util.resolveThemeColor
  */
 open class BpkGradients @JvmOverloads constructor(
   context: Context,
-  orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TL_BR,
-  colors: IntArray = intArrayOf(ContextCompat.getColor(context, R.color.bpkBlue500), ContextCompat.getColor(context, R.color.bpkPrimaryGradientLight))
+  orientation: Orientation = Orientation.TL_BR,
+  colors: IntArray = intArrayOf(ContextCompat.getColor(context, R.color.bpkSkyBlue), ContextCompat.getColor(context, R.color.bpkSkyBlue))
 ) : GradientDrawable(orientation, colors) {
 
   companion object {
@@ -37,7 +37,7 @@ open class BpkGradients @JvmOverloads constructor(
      * @return [BpkGradients]
      */
     @JvmStatic
-    fun getPrimary(context: Context, orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TL_BR): BpkGradients {
+    fun getPrimary(context: Context, orientation: Orientation = Orientation.TL_BR): BpkGradients {
       val themedProps = resolveAllAttributes(
         context,
         intArrayOf(R.attr.bpkPrimaryGradientColorStart, R.attr.bpkPrimaryGradientColorEnd))

@@ -4,9 +4,9 @@
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
-    <item name="colorPrimary">@color/bpkBlue500</item>
-    <item name="colorPrimaryDark">@color/bpkBlue700</item>
-    <item name="colorAccent">@color/bpkGreen500</item>
+    <item name="colorPrimary">@color/bpkSkyBlue</item>
+    <item name="colorPrimaryDark">@color/bpkSkyBlueShade01</item>
+    <item name="colorAccent">@color/bpkMonteverde</item>
     <item name="android:windowBackground">@color/bpkWhite</item>
     <item name="android:textAppearance">?bpkTextBaseAppearance</item>
   </style>

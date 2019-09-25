@@ -34,15 +34,15 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with positive messages
      */
-    Success(1, R.color.bpkGreen500, R.color.bpkGray700),
+    Success(1, R.color.bpkMonteverde, R.color.bpkGray700),
     /**
      *  Style for badges with warning messages
      */
-    Warning(2, R.color.bpkYellow500, R.color.bpkGray700),
+    Warning(2, R.color.bpkErfoud, R.color.bpkGray700),
     /**
      * Style for badges with error messages
      */
-    Destructive(3, R.color.bpkRed500, R.color.bpkWhite),
+    Destructive(3, R.color.bpkPanjin, R.color.bpkWhite),
     /**
      *  Light themed style for badges
      */

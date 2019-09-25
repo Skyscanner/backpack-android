@@ -27,7 +27,7 @@ open class BpkFab @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var backgroundColour = ContextCompat.getColor(context, R.color.bpkGreen500)
+    var backgroundColour = ContextCompat.getColor(context, R.color.bpkMonteverde)
     var iconColour = ContextCompat.getColor(context, R.color.bpkWhite)
 
     context.theme.obtainStyledAttributes(

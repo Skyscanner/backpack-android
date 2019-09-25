@@ -22,7 +22,7 @@ class ColorStory : Story() {
     val colorResources = ArrayList<Field>()
 
     for (field in R.color::class.java.fields) {
-      if (field.name.startsWith("bpk") && field.name.endsWith("0")) {
+      if (field.name.startsWith("bpk") && !field.name.contains("_")) {
         colorResources.add(field)
       }
     }
