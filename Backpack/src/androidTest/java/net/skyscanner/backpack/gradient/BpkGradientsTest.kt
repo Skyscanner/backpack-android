@@ -27,15 +27,15 @@ class BpkGradientsTest {
 
     val expectedGradient = GradientDrawable(
       GradientDrawable.Orientation.TL_BR,
-      intArrayOf(ContextCompat.getColor(testContext, R.color.bpkBlue500), ContextCompat.getColor(testContext, R.color.bpkPrimaryGradientLight)))
+      intArrayOf(ContextCompat.getColor(testContext, R.color.bpkSkyBlue), ContextCompat.getColor(testContext, R.color.bpkSkyBlue)))
 
     val gradient = BpkGradients(testContext)
 
     assertEquals(expectedGradient.orientation, gradient.orientation)
     assertEquals(expectedGradient.alpha, gradient.alpha)
     if (Build.VERSION.SDK_INT >= 24) {
-      assertEquals(ContextCompat.getColor(testContext, R.color.bpkBlue500), gradient.colors[0])
-      assertEquals(ContextCompat.getColor(testContext, R.color.bpkPrimaryGradientLight), gradient.colors[1])
+      assertEquals(ContextCompat.getColor(testContext, R.color.bpkSkyBlue), gradient.colors[0])
+      assertEquals(ContextCompat.getColor(testContext, R.color.bpkSkyBlue), gradient.colors[1])
     }
   }
 
@@ -44,15 +44,15 @@ class BpkGradientsTest {
 
     val expectedGradient = GradientDrawable(
       GradientDrawable.Orientation.BOTTOM_TOP,
-      intArrayOf(ContextCompat.getColor(testContext, R.color.bpkBlue500), ContextCompat.getColor(testContext, R.color.bpkPrimaryGradientLight)))
+      intArrayOf(ContextCompat.getColor(testContext, R.color.bpkSkyBlue), ContextCompat.getColor(testContext, R.color.bpkSkyBlue)))
 
     val gradient = BpkGradients(testContext, GradientDrawable.Orientation.BOTTOM_TOP)
 
     assertEquals(expectedGradient.orientation, gradient.orientation)
     assertEquals(expectedGradient.alpha, gradient.alpha)
     if (Build.VERSION.SDK_INT >= 24) {
-      assertEquals(ContextCompat.getColor(testContext, R.color.bpkBlue500), gradient.colors[0])
-      assertEquals(ContextCompat.getColor(testContext, R.color.bpkPrimaryGradientLight), gradient.colors[1])
+      assertEquals(ContextCompat.getColor(testContext, R.color.bpkSkyBlue), gradient.colors[0])
+      assertEquals(ContextCompat.getColor(testContext, R.color.bpkSkyBlue), gradient.colors[1])
     }
   }
 }

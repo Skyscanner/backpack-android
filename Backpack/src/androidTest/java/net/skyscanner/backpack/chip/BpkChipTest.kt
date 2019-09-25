@@ -84,11 +84,10 @@ class BpkChipTest {
   fun chipSelectedBackgroundColor() {
 
     val chip = BpkChip(context).apply {
-      Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkBlue500), selectedBackgroundColor)
-      Assert.assertNotEquals(ContextCompat.getColor(context, R.color.bpkYellow500), selectedBackgroundColor)
-      selectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkYellow500)
+      Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyBlue), selectedBackgroundColor)
+      selectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkErfoud)
     }
 
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkYellow500), chip.selectedBackgroundColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkErfoud), chip.selectedBackgroundColor)
   }
 }

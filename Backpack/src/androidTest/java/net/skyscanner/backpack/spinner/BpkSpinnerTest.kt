@@ -28,7 +28,7 @@ class BpkSpinnerTest {
   fun test_default() {
     Assert.assertFalse(subject.small)
     Assert.assertEquals(BpkSpinner.Type.PRIMARY, subject.type)
-    Assert.assertEquals(getColor(subject, R.color.bpkBlue500), subject.getColor())
+    Assert.assertEquals(getColor(subject, R.color.bpkSkyBlue), subject.getColor())
   }
 
   @Test
