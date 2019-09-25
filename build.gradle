@@ -59,10 +59,10 @@ def BpkVersion = '13.4.0'
 
 ext {
   version = "$BpkVersion"
-  compileSdkVersion = 28
-  targetSdkVersion = 28
+  compileSdkVersion = 29
+  targetSdkVersion = 29
   minSdkVersion = 21
-  buildToolsVersion = "28.0.3"
+  buildToolsVersion = "29.0.2"
   supportLibVersion = "27.1.1"
   googlePlayServicesVersion = "15.0.1"
   androidMapsUtilsVersion = "0.5+"

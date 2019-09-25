@@ -5,6 +5,8 @@
 
 - `BpkColor`:
   - NEW BRAND COLOURS 🎉
+- `compileSdk` and `targetSdk`
+  - updated to API 29
 
 ## How to write a good changelog entry
 
