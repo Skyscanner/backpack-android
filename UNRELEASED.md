@@ -2,16 +2,6 @@
 
 > Place your changes below this line.
 
-**Added:**
-
-- `compileSdk` and `targetSdk` updated to API 29
-- NEW BRAND COLOURS 🎉
-
-**Breaking:**
-
-- Updated all components to use new colours.
-- Removed unused `Bpk.chip` style.
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

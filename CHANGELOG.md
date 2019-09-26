@@ -2,6 +2,18 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 14.0.0
+
+**Added:**
+
+- `compileSdk` and `targetSdk` updated to API 29
+- NEW BRAND COLOURS 🎉
+
+**Breaking:**
+
+- Updated all components to use new colours.
+- Removed unused `Bpk.chip` style.
+
 # 13.4.0
 
 **Added:**
