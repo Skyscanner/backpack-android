@@ -2,8 +2,9 @@
 <resources>
 
   <style name="BpkDefaultTheme">
-    <item name="bpkPrimaryColor">@color/bpkBlue500</item>
+    <item name="bpkPrimaryColor">@color/bpkSkyBlue</item>
 
+    <!--  Move relative to backpack and update to relative  -->
     <item name="bpkFontFamilyBase">sans-serif</item>
     <item name="bpkFontFamilyEmphasized">sans-serif-medium</item>
     <item name="bpkFontFamilyHeavy">sans-serif-black</item>
@@ -48,12 +49,6 @@
   <style name="Bpk.dialog.animation" parent="">
     <item name="android:windowEnterAnimation">@anim/dialog_slide_up</item>
     <item name="android:windowExitAnimation">@anim/dialog_slide_out_down</item>
-  </style>
-
-  <style name="Bpk.chip" parent="android:Widget">
-    <item name="android:textAppearance">@style/bpkTextSm</item>
-    <item name="chipSelectedBackgroundColor">@color/bpkBlue500</item>
-    <item name="chipBackgroundColor">@color/bpkGray50</item>
   </style>
 
   <style name="Bpk.Calendar.Day" parent="android:Widget">

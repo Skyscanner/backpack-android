@@ -23,7 +23,7 @@ class BpkThemeTest {
   internal var activityRule: ActivityTestRule<TestActivity> =
     ActivityTestRule(TestActivity::class.java)
 
-  private val blue500 by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkBlue500) }
+  private val skyBlue by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkSkyBlue) }
   private val customBlue = Color.parseColor("#9B104A")
 
   @Before
@@ -33,7 +33,7 @@ class BpkThemeTest {
 
   @Test
   fun test_primary_color() {
-    Assert.assertEquals("default", blue500, BpkTheme.getPrimaryColor(activity))
+    Assert.assertEquals("default", skyBlue, BpkTheme.getPrimaryColor(activity))
 
     Assert.assertEquals(
       "Themed",
@@ -49,7 +49,7 @@ class BpkThemeTest {
 
     val newContext = BpkTheme.wrapContextWithDefaults(activity)
     newContext.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
-    Assert.assertEquals(blue500, t.data)
+    Assert.assertEquals(skyBlue, t.data)
 
     val withTheme = ContextThemeWrapper(activity, R.style.TestThemeUtilsWrapWithDefaults)
     val withThemeAndDefault = BpkTheme.wrapContextWithDefaults(withTheme)
@@ -67,7 +67,7 @@ class BpkThemeTest {
 
     BpkTheme.applyDefaultsToContext(testContext)
     testContext.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
-    Assert.assertEquals(blue500, t.data)
+    Assert.assertEquals(skyBlue, t.data)
 
     val withTheme = ContextThemeWrapper(activity, R.style.TestThemeUtilsWrapWithDefaults)
     BpkTheme.applyDefaultsToContext(withTheme)

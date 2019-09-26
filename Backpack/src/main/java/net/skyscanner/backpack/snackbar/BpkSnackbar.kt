@@ -159,7 +159,7 @@ class BpkSnackbar private constructor(
       val context = view.context
 
       @ColorInt var textColor = ContextCompat.getColor(context, R.color.bpkWhite)
-      @ColorInt var actionColor = ContextCompat.getColor(context, R.color.bpkBlue500)
+      @ColorInt var actionColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
       @ColorInt var backgroundColor = ContextCompat.getColor(context, R.color.bpkGray900)
 
       val outValue = TypedValue()

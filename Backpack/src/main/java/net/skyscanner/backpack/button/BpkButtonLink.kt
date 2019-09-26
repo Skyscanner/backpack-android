@@ -46,7 +46,7 @@ open class BpkButtonLink @JvmOverloads constructor(
     }
 
   init {
-    defaultTextColor = ContextCompat.getColor(this.context, R.color.bpkBlue500)
+    defaultTextColor = ContextCompat.getColor(this.context, R.color.bpkSkyBlue)
 
     compoundDrawablePadding = tokens.bpkSpacingSm
 

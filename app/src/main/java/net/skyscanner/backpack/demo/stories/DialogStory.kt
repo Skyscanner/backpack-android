@@ -12,8 +12,8 @@ class DialogStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val dialogType = arguments?.getString(DialogStory.TYPE)
-      ?: savedInstanceState?.getInt(DialogStory.TYPE)
+    val dialogType = arguments?.getString(TYPE)
+      ?: savedInstanceState?.getInt(TYPE)
 
     val btn = view.findViewById<BpkButton>(R.id.open_dialog)
     btn.setOnClickListener {
@@ -42,7 +42,7 @@ class DialogStory : Story() {
         description = "Your flight is all booked. Why not check out some hotels now?"
         icon = BpkDialog.Icon(
           R.drawable.bpk_tick,
-          R.color.bpkGreen500
+          R.color.bpkMonteverde
         )
 
         addActionButton(BpkButton(context).apply {
@@ -70,7 +70,7 @@ class DialogStory : Story() {
         description = "Engine Overload.!^R? Please do something. Throw me into the freezer or something!!"
         icon = BpkDialog.Icon(
           R.drawable.bpk_lightning,
-          R.color.bpkYellow500
+          R.color.bpkErfoud
         )
 
         addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
@@ -90,7 +90,7 @@ class DialogStory : Story() {
         description = "Are you sure you want to delete your avatar?"
         icon = BpkDialog.Icon(
           R.drawable.bpk_trash,
-          R.color.bpkRed500
+          R.color.bpkPanjin
         )
         setCancelable(false)
         setOnCancelListener {
@@ -130,7 +130,7 @@ Please note down your reference number and contact Trip.com if you need to track
 Safe travels!"""
         icon = BpkDialog.Icon(
           R.drawable.bpk_tick,
-          R.color.bpkGreen500
+          R.color.bpkMonteverde
         )
       }
     },
@@ -142,7 +142,7 @@ Safe travels!"""
         description = "Create a price alert and we'll let you know changes for this route"
         icon = BpkDialog.Icon(
           R.drawable.bpk_alert__active,
-          R.color.bpkGreen500
+          R.color.bpkMonteverde
         )
 
         addActionButton(BpkButton(context).apply {
@@ -175,7 +175,7 @@ Safe travels!"""
         description = Array(3) { getString(R.string.stub) }.joinToString()
         icon = BpkDialog.Icon(
           R.drawable.bpk_tick,
-          R.color.bpkGreen500
+          R.color.bpkMonteverde
         )
 
         addActionButton(BpkButton(context).apply {

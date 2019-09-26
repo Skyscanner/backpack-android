@@ -43,7 +43,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       description = "Your flight is all booked. Why not check out some hotels now?"
       icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
-        R.color.bpkGreen500
+        R.color.bpkMonteverde
       )
 
       addActionButton(BpkButton(context).apply {
@@ -68,7 +68,7 @@ class BpkDialogTest : BpkSnapshotTest() {
 
       icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
-        R.color.bpkGreen500
+        R.color.bpkMonteverde
       )
 
       addActionButton(BpkButton(context).apply {
@@ -92,7 +92,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       description = "Delete your profile?"
       icon = BpkDialog.Icon(
         R.drawable.bpk_trash,
-        R.color.bpkRed500
+        R.color.bpkPanjin
       )
 
       addActionButton(BpkButton(context, BpkButton.Type.Destructive).apply {
@@ -117,7 +117,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       description = "Create a price alert and we'll let you know changes for this route"
       icon = BpkDialog.Icon(
         R.drawable.bpk_alert__active,
-        R.color.bpkGreen500
+        R.color.bpkMonteverde
       )
 
       addActionButton(BpkButton(context).apply {
@@ -141,7 +141,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       description = "Delete your profile?"
       icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
-        R.color.bpkGreen400
+        R.color.bpkMonteverde
       )
 
       addActionButton(BpkButton(context).apply {

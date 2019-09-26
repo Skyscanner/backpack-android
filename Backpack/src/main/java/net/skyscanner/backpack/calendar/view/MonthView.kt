@@ -89,13 +89,13 @@ internal class MonthView @JvmOverloads constructor(
     val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
 
     selectedDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
-      ContextCompat.getColor(context, R.color.bpkGray700))
+      ContextCompat.getColor(context, R.color.bpkSkyBlueShade02))
 
     selectedDaySameDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
-      ContextCompat.getColor(context, R.color.bpkGray300))
+      ContextCompat.getColor(context, R.color.bpkSkyBlueTint02))
 
     rangeBackgroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
-      ContextCompat.getColor(context, R.color.bpkGray100))
+      ContextCompat.getColor(context, R.color.bpkSkyBlueTint03))
 
     selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor,
       ContextCompat.getColor(context, R.color.bpkWhite))

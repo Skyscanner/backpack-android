@@ -34,8 +34,8 @@ open class BpkHorizontalNav @JvmOverloads constructor(
       id = 0,
       styleAttribute = R.attr.bpkHorizontalNavStyle,
       defaultTextColor = R.color.bpkGray700,
-      defaultTextSelectedColor = R.color.bpkBlue500,
-      defaultIndicatorColor = R.color.bpkBlue500
+      defaultTextSelectedColor = R.color.bpkSkyBlue,
+      defaultIndicatorColor = R.color.bpkSkyBlue
     ),
     Alternate(
       id = 1,

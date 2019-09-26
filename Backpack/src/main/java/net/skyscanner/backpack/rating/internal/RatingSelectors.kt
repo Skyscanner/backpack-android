@@ -54,9 +54,9 @@ internal class RatingSelectors(
   val color: (BpkRating.Score) -> ColorStateList
 
   init {
-    var colorLow = ContextCompat.getColor(context, R.color.bpkRed500)
-    var colorMedium = ContextCompat.getColor(context, R.color.bpkYellow500)
-    var colorHigh = ContextCompat.getColor(context, R.color.bpkGreen500)
+    var colorLow = ContextCompat.getColor(context, R.color.bpkPanjin)
+    var colorMedium = ContextCompat.getColor(context, R.color.bpkErfoud)
+    var colorHigh = ContextCompat.getColor(context, R.color.bpkMonteverde)
 
     context.theme.obtainStyledAttributes(
       attrs,
