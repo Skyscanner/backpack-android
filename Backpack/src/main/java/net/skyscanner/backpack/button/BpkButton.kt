@@ -57,10 +57,10 @@ open class BpkButton : BpkButtonBase {
   private val paddingVertical = tokens.bpkSpacingMd + (tokens.bpkBorderSizeLg / 2)
 
   @Dimension
-  private var defaultCornerRadius = context.resources.getDimension(R.dimen.bpkSpacingLg)
+  private var cornerRadius = context.resources.getDimension(R.dimen.bpkSpacingSm)
 
   @Dimension
-  private var roundedButtonCorner = defaultCornerRadius
+  private var iconOnlyCornerRadius = context.resources.getDimension(R.dimen.bpkSpacingLg)
 
   @Dimension
   private val strokeWidthNormal = tokens.bpkBorderSizeLg
@@ -85,7 +85,7 @@ open class BpkButton : BpkButtonBase {
         buttonStrokeColor = it.getColor(R.styleable.BpkButton_buttonStrokeColor, ContextCompat.getColor(context, type.strokeColor))
         buttonStrokeColorPressed = it.getColor(R.styleable.BpkButton_buttonStrokeColorPressed, ContextCompat.getColor(context, type.strokeColorSelected))
 
-        roundedButtonCorner = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, defaultCornerRadius)
+        cornerRadius = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, cornerRadius)
 
         defaultTextColor = ContextCompat.getColor(context, type.textColor)
       }
@@ -124,7 +124,7 @@ open class BpkButton : BpkButtonBase {
   internal fun disabledBackground(): Drawable {
     return getRippleDrawable(
       normalColor = tokens.gray100,
-      cornerRadius = if (iconPosition != ICON_ONLY) roundedButtonCorner else defaultCornerRadius,
+      cornerRadius = if (iconPosition == ICON_ONLY) iconOnlyCornerRadius else cornerRadius,
       strokeWidth = null,
       strokeColor = null
     )
@@ -134,7 +134,7 @@ open class BpkButton : BpkButtonBase {
     return if (this.isEnabled) {
       getRippleDrawable(
         normalColor = buttonBackgroundColor,
-        cornerRadius = if (iconPosition != ICON_ONLY) roundedButtonCorner else defaultCornerRadius,
+        cornerRadius = if (iconPosition == ICON_ONLY) iconOnlyCornerRadius else cornerRadius,
         strokeWidth = strokeWidthForType(type),
         strokeColor = getColorSelector(buttonStrokeColor, buttonStrokeColorPressed, buttonStrokeColor)
       )
