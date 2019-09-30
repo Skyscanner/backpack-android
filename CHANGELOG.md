@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 14.1.0
+
+**Fixed:**
+
+- BpkButton
+  - Fixed default border radius.
+
 # 14.0.0
 
 **Added:**
