@@ -42,7 +42,7 @@ class BpkResources {
     assertEquals("#ffff9400", appContext.getString(R.color.bpkKolkata))
     assertEquals("#ffffe7e0", appContext.getString(R.color.bpkNara))
     assertEquals("#ffffab95", appContext.getString(R.color.bpkPetra))
-    assertEquals("#ffd0eeec", appContext.getString(R.color.bpkSegano))
+    assertEquals("#ffd0eeec", appContext.getString(R.color.bpkSagano))
     assertEquals("#ffe1ddec", appContext.getString(R.color.bpkTochigi))
     assertEquals("#ffa59bc8", appContext.getString(R.color.bpkValensole))
   }
