@@ -18,7 +18,7 @@ import net.skyscanner.backpack.util.resolveThemeColor
 open class BpkGradients @JvmOverloads constructor(
   context: Context,
   orientation: Orientation = Orientation.TL_BR,
-  colors: IntArray = intArrayOf(ContextCompat.getColor(context, R.color.bpkSkyBlue), ContextCompat.getColor(context, R.color.bpkSkyBlue))
+  colors: IntArray = intArrayOf(ContextCompat.getColor(context, R.color.bpkSkyBlue), ContextCompat.getColor(context, R.color.bpkPrimaryGradientLight))
 ) : GradientDrawable(orientation, colors) {
 
   companion object {

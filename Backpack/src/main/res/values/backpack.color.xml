@@ -122,7 +122,7 @@
 
 	<color name="bpkPink900">#94053a</color>
 
-	<color name="bpkPrimaryGradientLight">#02ddd8</color>
+	<color name="bpkPrimaryGradientLight">#0770e3</color>
 
 	<color name="bpkRed100">#ffd6d5</color>
 
@@ -144,7 +144,7 @@
 
 	<color name="bpkRed900">#a80300</color>
 
-	<color name="bpkSegano">#d0eeec</color>
+	<color name="bpkSagano">#d0eeec</color>
 
 	<color name="bpkSkyBlue">#0770e3</color>
 
@@ -159,6 +159,22 @@
 	<color name="bpkSkyBlueTint02">#9dc0f2</color>
 
 	<color name="bpkSkyBlueTint03">#cddff8</color>
+
+	<color name="bpkSkyGray">#111236</color>
+
+	<color name="bpkSkyGrayTint01">#444560</color>
+
+	<color name="bpkSkyGrayTint02">#68697f</color>
+
+	<color name="bpkSkyGrayTint03">#8f90a0</color>
+
+	<color name="bpkSkyGrayTint04">#b2b2bf</color>
+
+	<color name="bpkSkyGrayTint05">#cdcdd7</color>
+
+	<color name="bpkSkyGrayTint06">#dddde5</color>
+
+	<color name="bpkSkyGrayTint07">#f1f2f8</color>
 
 	<color name="bpkSystemGreen">#00a698</color>
 
