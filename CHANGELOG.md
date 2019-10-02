@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 15.0.0
+
+**Breaking:**
+
+- Rename `bpkSegano` colour to `bpkSagano`.
+
 # 14.0.1
 
 **Fixed:**
