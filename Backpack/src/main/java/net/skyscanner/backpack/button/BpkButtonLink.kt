@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.button
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.IntDef
 import androidx.core.content.ContextCompat
@@ -43,6 +44,12 @@ open class BpkButtonLink @JvmOverloads constructor(
     set(value) {
       _uppercase = value
       update()
+    }
+
+  final override var icon: Drawable?
+    get() = super.icon
+    set(value) {
+      super.icon = value
     }
 
   init {

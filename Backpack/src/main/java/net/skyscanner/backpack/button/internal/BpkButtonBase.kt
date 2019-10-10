@@ -2,6 +2,8 @@ package net.skyscanner.backpack.button.internal
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
+import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.TextView
@@ -63,16 +65,12 @@ abstract class BpkButtonBase internal constructor(
     }
 
   private var _icon: Drawable? = null
-  var icon: Drawable? = null
+  open var icon: Drawable? = null
     get() = _icon
     set(value) {
       if (value != field) {
         field = value
-
-        value?.let {
-          _icon = adjustDrawableSize(it)
-        }
-
+        _icon = value?.let(::adjustDrawableSize)
         updateSelf()
         update()
       }
@@ -122,35 +120,40 @@ abstract class BpkButtonBase internal constructor(
       this.setTextColor(tokens.gray300)
     }
 
-    _icon?.let {
-      DrawableCompat.setTintList(
-        it,
-        getColorSelector(
-          buttonTextColor,
-          darken(buttonTextColor, .1f),
-          tokens.gray300
+    val icon = _icon
+    if (icon != null) {
+        DrawableCompat.setTintList(
+          icon,
+          getColorSelector(
+            buttonTextColor,
+            darken(buttonTextColor, .1f),
+            tokens.gray300
+          )
         )
-      )
 
-      this.setCompoundDrawables(
-        it.takeIf { iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY },
-        null,
-        it.takeIf { iconPosition == ICON_POSITION_END },
-        null
-      )
+        this.setCompoundDrawablesRelativeWithIntrinsicBounds(
+          icon.takeIf { iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY },
+          null,
+          icon.takeIf { iconPosition == ICON_POSITION_END },
+          null
+        )
+    } else {
+      this.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
     }
   }
 
   protected abstract fun update()
 
   override fun setEnabled(enabled: Boolean) {
-    super.setEnabled(enabled)
+    if (enabled != isEnabled) {
+      super.setEnabled(enabled)
 
-    isClickable = isEnabled
+      isClickable = isEnabled
 
-    if (isInitialized) {
-      updateSelf()
-      update()
+      if (isInitialized) {
+        updateSelf()
+        update()
+      }
     }
   }
 
@@ -232,8 +235,21 @@ abstract class BpkButtonBase internal constructor(
     }
   }
 
-  private fun adjustDrawableSize(drawable: Drawable): Drawable? {
-    drawable.setBounds(0, 0, tokens.bpkSpacingBase, tokens.bpkSpacingBase)
-    return drawable
+  private fun adjustDrawableSize(drawable: Drawable) = object : LayerDrawable(
+    arrayOf(drawable)
+  ) {
+
+    init {
+      setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        setLayerSize(0, intrinsicWidth, intrinsicHeight)
+      }
+    }
+
+    override fun getIntrinsicWidth(): Int =
+      tokens.bpkSpacingBase
+
+    override fun getIntrinsicHeight(): Int =
+      tokens.bpkSpacingBase
   }
 }
