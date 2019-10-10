@@ -21,8 +21,8 @@ class GradientStoryCustom : Story() {
       requireContext(),
       GradientDrawable.Orientation.TL_BR,
       intArrayOf(
-        ContextCompat.getColor(requireContext(), R.color.bpkGreen500),
-        ContextCompat.getColor(requireContext(), R.color.bpkGreen200)))
+        ContextCompat.getColor(requireContext(), R.color.bpkMonteverde),
+        ContextCompat.getColor(requireContext(), R.color.bpkSagano)))
   }
 }
 

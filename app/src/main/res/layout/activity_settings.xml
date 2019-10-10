@@ -28,9 +28,9 @@
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="match_parent"
     android:layout_height="@dimen/bpkSpacingXxl"
-    android:background="@color/bpkGray50"
+    android:background="@color/bpkSkyGrayTint07"
     android:paddingStart="@dimen/bpkSpacingBase"
-    android:textColor="@color/bpkGray600"
+    android:textColor="@color/bpkSkyGrayTint01"
     android:gravity="center_vertical|left"
     app:textStyle="base"
     android:text="Component Themes"/>
@@ -58,7 +58,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="This will enable themes for compatible components"
-    android:textColor="@color/bpkGray500"
+    android:textColor="@color/bpkSkyGrayTint02"
     app:textStyle="sm"
     android:layout_marginHorizontal="@dimen/bpkSpacingBase"/>
 
@@ -98,7 +98,7 @@
     android:layout_marginTop="@dimen/bpkSpacingSm"
     android:layout_marginStart="@dimen/bpkSpacingBase"
     android:layout_marginEnd="@dimen/bpkSpacingBase"
-    android:background="@color/bpkGray100" />
+    android:background="@color/bpkSkyGrayTint06" />
 
 
 </LinearLayout>

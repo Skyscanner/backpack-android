@@ -9,6 +9,6 @@
   android:layout_marginTop="@dimen/bpkSpacingBase"
   android:layout_marginBottom="@dimen/bpkSpacingBase"
   android:textAllCaps="true"
-  android:textColor="@color/bpkGray500"
+  android:textColor="@color/bpkSkyGrayTint02"
   app:weight="emphasized"
   app:textStyle="sm" />

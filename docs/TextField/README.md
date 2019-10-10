@@ -49,8 +49,8 @@ Example
   </style>
 
   <style name="CursiveText" >
-    <item name="textFieldColor">@color/bpkBlue700</item>
-    <item name="textFieldColorHintNormal">@color/bpkBlue300</item>
-    <item name="textFieldColorHintFocused">@color/bpkBlue500</item>
+    <item name="textFieldColor">@color/bpkSkyBlueShade02</item>
+    <item name="textFieldColorHintNormal">@color/bpkSkyBlueTint01</item>
+    <item name="textFieldColorHintFocused">@color/bpkSkyBlue</item>
   </style>
 ```

@@ -34,11 +34,11 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with positive messages
      */
-    Success(1, R.color.bpkMonteverde, R.color.bpkGray700),
+    Success(1, R.color.bpkMonteverde, R.color.bpkSkyGrayTint01),
     /**
      *  Style for badges with warning messages
      */
-    Warning(2, R.color.bpkErfoud, R.color.bpkGray700),
+    Warning(2, R.color.bpkErfoud, R.color.bpkSkyGrayTint01),
     /**
      * Style for badges with error messages
      */
@@ -46,11 +46,11 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      *  Light themed style for badges
      */
-    Light(4, R.color.bpkGray50, R.color.bpkGray700),
+    Light(4, R.color.bpkSkyGrayTint07, R.color.bpkSkyGrayTint01),
     /**
      *  Style for badges on dark themes
      */
-    Inverse(5, R.color.bpkWhite, R.color.bpkGray700),
+    Inverse(5, R.color.bpkWhite, R.color.bpkSkyGrayTint01),
     /**
      * Style for badges with a thin white outline
      */
@@ -59,7 +59,7 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with a dark background
      */
-    Dark(7, R.color.bpkGray900, R.color.bpkWhite);
+    Dark(7, R.color.bpkSkyGray, R.color.bpkWhite);
 
     internal companion object {
 

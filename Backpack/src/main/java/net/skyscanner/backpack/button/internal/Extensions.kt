@@ -33,7 +33,7 @@ internal fun BpkButtonBase.getRippleDrawable(
   strokeWidth: StrokeWidth? = null
 ) = RippleDrawable(
   ColorStateList.valueOf(resolveThemeColor(context, R.attr.colorControlHighlight)
-    ?: ContextCompat.getColor(context, net.skyscanner.backpack.R.color.bpkGray100)),
+    ?: ContextCompat.getColor(context, net.skyscanner.backpack.R.color.bpkSkyGrayTint06)),
   getContentDrawable(normalColor, cornerRadius, strokeColor, strokeWidth),
   corneredDrawable(Color.WHITE, cornerRadius, strokeColor, strokeWidth?.first)
 )

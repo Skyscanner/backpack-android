@@ -21,15 +21,6 @@ class BpkResources {
   @Test
   fun bpkColours() {
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    assertEquals("#ff00b2d6", appContext.getString(R.color.bpkBlue500))
-    assertEquals("#ff00d775", appContext.getString(R.color.bpkGreen500))
-    assertEquals("#ffff5452", appContext.getString(R.color.bpkRed500))
-    assertEquals("#ffffbb00", appContext.getString(R.color.bpkYellow500))
-    assertEquals("#fffa488a", appContext.getString(R.color.bpkPink500))
-    assertEquals("#ff68697f", appContext.getString(R.color.bpkGray500))
-    assertEquals("#ffffffff", appContext.getString(R.color.bpkWhite))
-
-    // new colours
     assertEquals("#ff0770e3", appContext.getString(R.color.bpkSkyBlue))
     assertEquals("#ffd1435b", appContext.getString(R.color.bpkPanjin))
     assertEquals("#ffffb54d", appContext.getString(R.color.bpkErfoud))
@@ -45,6 +36,8 @@ class BpkResources {
     assertEquals("#ffd0eeec", appContext.getString(R.color.bpkSagano))
     assertEquals("#ffe1ddec", appContext.getString(R.color.bpkTochigi))
     assertEquals("#ffa59bc8", appContext.getString(R.color.bpkValensole))
+    assertEquals("#ff68697f", appContext.getString(R.color.bpkSkyGrayTint02))
+    assertEquals("#ffffffff", appContext.getString(R.color.bpkWhite))
   }
 
   @Test

@@ -52,7 +52,7 @@ open class BpkStarRatingBase internal constructor(
 
   init {
     orientation = HORIZONTAL
-    var starColor = ResourcesCompat.getColor(resources, R.color.bpkGray100, null)
+    var starColor = ResourcesCompat.getColor(resources, R.color.bpkSkyGrayTint06, null)
     var starFilledColor: Int = ResourcesCompat.getColor(resources, R.color.bpkErfoud, null)
 
     context.theme.obtainStyledAttributes(

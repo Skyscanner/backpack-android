@@ -31,14 +31,14 @@ class BpkPageTitle @JvmOverloads constructor(
   val toolbar: Toolbar
 
   @ColorInt
-  var expandedTitleColor: Int = ContextCompat.getColor(this.context, R.color.bpkGray900)
+  var expandedTitleColor: Int = ContextCompat.getColor(this.context, R.color.bpkSkyGray)
     set(value) {
       field = value
       collapsingLayout.setExpandedTitleColor(value)
     }
 
   @ColorInt
-  var collapsedTitleColor: Int = ContextCompat.getColor(this.context, R.color.bpkGray900)
+  var collapsedTitleColor: Int = ContextCompat.getColor(this.context, R.color.bpkSkyGray)
     set(value) {
       field = value
       toolbar.setTitleTextColor(value)

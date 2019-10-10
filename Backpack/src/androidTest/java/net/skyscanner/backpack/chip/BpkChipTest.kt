@@ -25,7 +25,7 @@ class BpkChipTest {
       text = "Message"
     }
     Assert.assertEquals("Message", chip.text.toString())
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray900), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGray), chip.currentTextColor)
   }
 
   @Test
@@ -41,7 +41,7 @@ class BpkChipTest {
     val chip = BpkChip(context).apply {
       disabled = true
     }
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray300), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGrayTint04), chip.currentTextColor)
   }
 
   @Test
@@ -54,7 +54,7 @@ class BpkChipTest {
     Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkWhite), chip.currentTextColor)
 
     chip.toggle()
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray900), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGray), chip.currentTextColor)
   }
 
   @Test
@@ -65,19 +65,19 @@ class BpkChipTest {
     }
 
     chip.toggle()
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray300), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGrayTint04), chip.currentTextColor)
   }
 
   @Test
   fun test_set_chipBackgroundColor() {
 
     val chip = BpkChip(context).apply {
-      Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray50), chipBackgroundColor)
-      Assert.assertNotEquals(ContextCompat.getColor(context, R.color.bpkGray500), chipBackgroundColor)
-      chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkGray500)
+      Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGrayTint07), chipBackgroundColor)
+      Assert.assertNotEquals(ContextCompat.getColor(context, R.color.bpkSkyGrayTint02), chipBackgroundColor)
+      chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint02)
     }
 
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkGray500), chip.chipBackgroundColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGrayTint02), chip.chipBackgroundColor)
   }
 
   @Test

@@ -44,7 +44,7 @@ open class BpkFab @JvmOverloads constructor(
     this.isClickable = isEnabled
     this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
     this.elevation = resources.getDimensionPixelSize(R.dimen.bpkElevationBase).toFloat()
-    this.backgroundTintList = getColorSelector(backgroundColour, backgroundColour, ContextCompat.getColor(context, R.color.bpkGray100))
+    this.backgroundTintList = getColorSelector(backgroundColour, backgroundColour, ContextCompat.getColor(context, R.color.bpkSkyGrayTint06))
   }
 
   override fun setEnabled(enabled: Boolean) {

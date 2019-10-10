@@ -15,7 +15,7 @@ Define a theme in `themes.xml`
   </style>
 
   <style name="BpkSwitch.Red" parent="">
-    <item name="switchPrimaryColor">@color/bpkRed500</item>
+    <item name="switchPrimaryColor">@color/bpkPanjin</item>
   </style>
 ```
 
