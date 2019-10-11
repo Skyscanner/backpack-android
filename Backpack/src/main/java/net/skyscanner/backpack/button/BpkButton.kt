@@ -161,6 +161,9 @@ open class BpkButton : BpkButtonBase {
   private var enabled: Boolean? = null
 
   override fun setEnabled(enabled: Boolean) {
+    // we want to store the enabling state set
+    // by the used in order to recover to it when loading is set to false.
+    // the null values used to detect the initialization
     if (this.enabled != isEnabled) {
       this.enabled = enabled
       super.setEnabled(enabled)
