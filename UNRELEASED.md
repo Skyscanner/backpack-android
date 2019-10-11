@@ -3,8 +3,13 @@
 > Place your changes below this line.
 
 **Added:**
- - BpkIcon:
-   - Added file and printer icons
+
+- BpkIcon:
+  - Added file and printer icons
+
+**Breaking:**
+
+- Removed old brand colours.
 
 ## How to write a good changelog entry
 
