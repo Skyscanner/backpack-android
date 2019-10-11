@@ -61,13 +61,11 @@ Example
   </style>
 
   <style name="BlueButton">
-    <item name="buttonBackground">@color/bpkBlue900</item>
-    <item name="buttonTextColor">@color/bpkGray200</item>
-    <item name="buttonStrokeColor">@color/bpkYellow500</item>
+    <item name="buttonBackground">@color/bpkSkyBlueShade03</item>
+    <item name="buttonTextColor">@color/bpkSkyGrayTint05</item>
+    <item name="buttonStrokeColor">@color/bpkKolkata</item>
   </style>
 
 ```
 
 Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
-
-

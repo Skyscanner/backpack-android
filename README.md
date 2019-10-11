@@ -103,11 +103,11 @@ The supported styles are
 ```xml
 <TextView
   android:text="This is Backpack Blue 500!"
-  android:textColor="@color/bpkBlue500" />
+  android:textColor="@color/bpkSkyBlue" />
 ```
 
 ```kotlin
-R.color.bpkBlue500
+R.color.bpkSkyBlue
 ```
 ### Gradient
 

@@ -182,7 +182,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/bpkGray700"
+      android:background="@color/bpkSkyGrayTint01"
       android:padding="@dimen/bpkSpacingSm"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:orientation="horizontal">
@@ -292,7 +292,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/bpkGray700"
+      android:background="@color/bpkSkyGrayTint01"
       android:padding="@dimen/bpkSpacingSm"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:orientation="horizontal">
@@ -347,7 +347,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/bpkGray700"
+      android:background="@color/bpkSkyGrayTint01"
       android:padding="@dimen/bpkSpacingSm"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:orientation="horizontal">

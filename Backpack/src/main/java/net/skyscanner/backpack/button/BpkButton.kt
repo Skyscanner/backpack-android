@@ -212,9 +212,9 @@ open class BpkButton : BpkButtonBase {
     @ColorRes internal val strokeColorSelected: Int
   ) {
     Primary(0, R.color.bpkMonteverde, R.color.bpkWhite, android.R.color.transparent, android.R.color.transparent),
-    Secondary(1, R.color.bpkWhite, R.color.bpkSkyBlue, R.color.bpkGray100, R.color.bpkSkyBlue),
+    Secondary(1, R.color.bpkWhite, R.color.bpkSkyBlue, R.color.bpkSkyGrayTint06, R.color.bpkSkyBlue),
     Featured(2, R.color.bpkSkyBlue, R.color.bpkWhite, android.R.color.transparent, android.R.color.transparent),
-    Destructive(3, R.color.bpkWhite, R.color.bpkPanjin, R.color.bpkGray100, R.color.bpkPanjin),
+    Destructive(3, R.color.bpkWhite, R.color.bpkPanjin, R.color.bpkSkyGrayTint06, R.color.bpkPanjin),
     Outline(4, android.R.color.transparent, R.color.bpkWhite, R.color.bpkWhite, R.color.bpkWhite);
 
     internal companion object {

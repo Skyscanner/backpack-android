@@ -76,7 +76,7 @@ More can be found here: https://github.com/Skyscanner/backpack-android/tree/mast
     // app/res/values/themes.xml
 
     <style name="RedChip">
-      <item name="chipSelectedBackgroundColor">@colors/bpkRed500</item>
+      <item name="chipSelectedBackgroundColor">@colors/bpkPanjin</item>
     </style>
     ```
 
@@ -91,7 +91,7 @@ More can be found here: https://github.com/Skyscanner/backpack-android/tree/mast
     ```xml
     // app/res/values/style.xml
     <style name="RedChip">
-      <item name="chipSelectedBackgroundColor">@colors/bpkRed500</item>
+      <item name="chipSelectedBackgroundColor">@colors/bpkPanjin</item>
     </style>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -114,7 +114,7 @@ have a different style for a single component.
 It is also possible to set theming properties directly via `xml`:
 
 ```xml
-  <BpkChip style="@style/RedChip" app:chipSelectedBackgroundColor="@colors/bpkRed500" />
+  <BpkChip style="@style/RedChip" app:chipSelectedBackgroundColor="@colors/bpkPanjin" />
 ```
 
 This is not advertised and is not a supported way for theming to be used. If you do this, we cannot guarantee that small changes to Backpack will not break your UI.

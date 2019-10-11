@@ -30,9 +30,9 @@ open class BpkCheckbox @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var defaultColor = ContextCompat.getColor(context, R.color.bpkGray500)
+    var defaultColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint02)
     var checkedColor = BpkTheme.getPrimaryColor(context)
-    var disabledColor = ContextCompat.getColor(context, R.color.bpkGray300)
+    var disabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkCheckbox,

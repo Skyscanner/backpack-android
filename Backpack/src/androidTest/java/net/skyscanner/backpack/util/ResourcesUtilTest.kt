@@ -23,14 +23,14 @@ class ResourcesUtilTest {
 
   @Test
   fun test_getColor() {
-    val expected = ResourcesCompat.getColor(context.resources, R.color.bpkGray50, context.theme)
-    Assert.assertEquals(expected, ResourcesUtil.getColor(TextView(context), R.color.bpkGray50))
-    Assert.assertEquals(expected, ResourcesUtil.getColor(context.resources, R.color.bpkGray50))
+    val expected = ResourcesCompat.getColor(context.resources, R.color.bpkSkyGrayTint07, context.theme)
+    Assert.assertEquals(expected, ResourcesUtil.getColor(TextView(context), R.color.bpkSkyGrayTint07))
+    Assert.assertEquals(expected, ResourcesUtil.getColor(context.resources, R.color.bpkSkyGrayTint07))
   }
 
   @Test
   fun test_getColor_extension() {
-    val expected = ResourcesCompat.getColor(context.resources, R.color.bpkGray50, context.theme)
-    Assert.assertEquals(expected, TextView(context).getColor(R.color.bpkGray50))
+    val expected = ResourcesCompat.getColor(context.resources, R.color.bpkSkyGrayTint07, context.theme)
+    Assert.assertEquals(expected, TextView(context).getColor(R.color.bpkSkyGrayTint07))
   }
 }

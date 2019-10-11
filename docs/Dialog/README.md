@@ -19,7 +19,7 @@ dialog.apply {
     description = "Your flight is all booked. Why not check out some hotels now?"
     icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
-        R.color.bpkGreen500
+        R.color.bpkMonteverde
     )
 
     addActionButton(BpkButton(context).apply {

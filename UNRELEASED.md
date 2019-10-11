@@ -4,7 +4,18 @@
 
 **Added:**
 
-- Loading support for the button.
+
+**Added:**
+
+- BpkButton:
+  - Loading support.
+  
+- BpkIcon:
+  - Added file and printer icons
+
+**Breaking:**
+
+- Removed old brand colours.
 
 ## How to write a good changelog entry
 

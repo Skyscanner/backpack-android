@@ -67,8 +67,8 @@ internal class MonthView @JvmOverloads constructor(
   private var numberOfRows = DEFAULT_NUM_ROWS
   private var monthHeaderString = ""
 
-  private val defaultTextColor: Int = ContextCompat.getColor(context, R.color.bpkGray900)
-  private val disabledTextColor: Int = ContextCompat.getColor(context, R.color.bpkGray100)
+  private val defaultTextColor: Int = ContextCompat.getColor(context, R.color.bpkSkyGray)
+  private val disabledTextColor: Int = ContextCompat.getColor(context, R.color.bpkSkyGrayTint06)
 
   private val miniDayNumberTextSize: Int = monthNumberFont.fontSize
   private val monthLabelTextSize: Int = monthLabelFont.fontSize
