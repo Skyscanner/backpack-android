@@ -38,7 +38,7 @@
   </style>
 
   <style name="LondonThemeBpkStarRating" parent="">
-    <item name="starColor">@color/bpkGray100</item>
+    <item name="starColor">@color/bpkSkyGrayTint06</item>
     <item name="starFilledColor">?bpkPrimaryColor</item>
   </style>
 
@@ -93,7 +93,7 @@
 
   <style name="LondonThemeFab">
     <item name="fabBackgroundColor">?bpkPrimaryColor</item>
-    <item name="fabIconColor">@color/bpkRed500</item>
+    <item name="fabIconColor">@color/bpkPanjin</item>
   </style>
 
   <style name="LondonThemeButtonLink">
@@ -101,19 +101,19 @@
   </style>
 
   <style name="LondonThemeCheckbox">
-    <item name="checkboxColorChecked">@color/bpkRed500</item>
-    <item name="checkboxColorDisabled">@color/bpkGray500</item>
+    <item name="checkboxColorChecked">@color/bpkPanjin</item>
+    <item name="checkboxColorDisabled">@color/bpkSkyGrayTint02</item>
     <item name="checkboxColor">#013A76</item>
   </style>
 
   <style name="LondonThemeHorizontalNav">
-    <item name="horizontalNavTextColor">@color/bpkGray500</item>
+    <item name="horizontalNavTextColor">@color/bpkSkyGrayTint02</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="LondonThemeHorizontalNavAlternate">
-    <item name="horizontalNavTextColor">@color/bpkGray100</item>
+    <item name="horizontalNavTextColor">@color/bpkSkyGrayTint06</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
@@ -134,7 +134,7 @@
 
   <style name="LondonThemeSnackbar">
     <item name="snackbarTextColor">#6392ce</item>
-    <item name="snackbarActionColor">@color/bpkRed500</item>
+    <item name="snackbarActionColor">@color/bpkPanjin</item>
     <item name="snackbarBackgroundColor">#00254B</item>
   </style>
 
@@ -176,12 +176,12 @@
   </style>
 
   <style name="DohaThemeBpkStarRating" parent="">
-    <item name="starColor">@color/bpkGray100</item>
+    <item name="starColor">@color/bpkSkyGrayTint06</item>
     <item name="starFilledColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="DohaThemeBpkSwitch" parent="">
-    <item name="switchPrimaryColor">@color/bpkYellow900</item>
+    <item name="switchPrimaryColor">@color/bpkKolkata</item>
   </style>
 
   <style name="DohaThemeButtonPrimary">
@@ -216,7 +216,7 @@
 
   <style name="DohaThemeFab">
     <item name="fabBackgroundColor">?bpkPrimaryColor</item>
-    <item name="fabIconColor">@color/bpkGray100</item>
+    <item name="fabIconColor">@color/bpkSkyGrayTint06</item>
   </style>
 
   <style name="DohaThemeButtonLink">
@@ -224,19 +224,19 @@
   </style>
 
   <style name="DohaThemeCheckbox">
-    <item name="checkboxColorChecked">@color/bpkRed500</item>
-    <item name="checkboxColorDisabled">@color/bpkGray500</item>
+    <item name="checkboxColorChecked">@color/bpkPanjin</item>
+    <item name="checkboxColorDisabled">@color/bpkSkyGrayTint02</item>
     <item name="checkboxColor">#ffb300</item>
   </style>
 
   <style name="DohaThemeHorizontalNav">
-    <item name="horizontalNavTextColor">@color/bpkGray500</item>
+    <item name="horizontalNavTextColor">@color/bpkSkyGrayTint02</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
 
   <style name="DohaThemeHorizontalNavAlternate">
-    <item name="horizontalNavTextColor">@color/bpkGray100</item>
+    <item name="horizontalNavTextColor">@color/bpkSkyGrayTint06</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
@@ -257,7 +257,7 @@
 
   <style name="DohaThemeSnackbar">
     <item name="snackbarTextColor">#ffd677</item>
-    <item name="snackbarActionColor">@color/bpkPink900</item>
+    <item name="snackbarActionColor">@color/bpkHillier</item>
     <item name="snackbarBackgroundColor">#ffa000</item>
   </style>
 

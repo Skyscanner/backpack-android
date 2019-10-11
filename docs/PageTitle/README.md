@@ -15,8 +15,8 @@ Example of a Page Title in XML
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   app:pageTitleText="Page Title"
-  app:pageTitleExpandedTextColor="@color/bpkGray900"
-  app:pageTitleCollapsedTextColor="@color/bpkGray900"/>
+  app:pageTitleExpandedTextColor="@color/bpkSkyGray"
+  app:pageTitleCollapsedTextColor="@color/bpkSkyGray"/>
 ```
 
 Example of a Page Title in Kotlin
@@ -26,8 +26,8 @@ import net.skyscanner.backpack.pagetitle.BpkPageTitle
 
 BpkPageTitle(context).apply {
   title = "Page Title"
-  expandedTitleColor = ContextCompat.getColor(context, R.color.bpkGray900)
-  collapsedTitleColor = ContextCompat.getColor(context, R.color.bpkGray900)
+  expandedTitleColor = ContextCompat.getColor(context, R.color.bpkSkyGray)
+  collapsedTitleColor = ContextCompat.getColor(context, R.color.bpkSkyGray)
 }
 ```
 

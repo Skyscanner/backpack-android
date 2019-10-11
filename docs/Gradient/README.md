@@ -16,8 +16,8 @@ view.background = BpkGradients(
   context, 
   GradientDrawable.Orientation.BL_TR,
   intArrayOf(
-    ContextCompat.getColor(testContext, R.color.bpkGreen500),
-    ContextCompat.getColor(testContext, R.color.bpkGreen300))
+    ContextCompat.getColor(testContext, R.color.bpkMonteverde),
+    ContextCompat.getColor(testContext, R.color.bpkSagano))
   )
 ```
 

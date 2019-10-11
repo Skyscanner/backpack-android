@@ -22,71 +22,11 @@
 
 	<color name="bpkBagan">#ffebd0</color>
 
-	<color name="bpkBlue100">#cbeef5</color>
-
-	<color name="bpkBlue200">#b0e4ee</color>
-
-	<color name="bpkBlue300">#7fd7e8</color>
-
-	<color name="bpkBlue400">#40c4df</color>
-
-	<color name="bpkBlue50">#e1f4f8</color>
-
-	<color name="bpkBlue500">#00b2d6</color>
-
-	<color name="bpkBlue600">#009dbd</color>
-
-	<color name="bpkBlue700">#008ca8</color>
-
-	<color name="bpkBlue800">#00758c</color>
-
-	<color name="bpkBlue900">#005567</color>
-
 	<color name="bpkBunol">#ff7b59</color>
 
 	<color name="bpkErfoud">#ffb54d</color>
 
 	<color name="bpkGlencoe">#73cec6</color>
-
-	<color name="bpkGray100">#dddde5</color>
-
-	<color name="bpkGray200">#cdcdd7</color>
-
-	<color name="bpkGray300">#b2b2bf</color>
-
-	<color name="bpkGray400">#8f90a0</color>
-
-	<color name="bpkGray50">#f1f2f8</color>
-
-	<color name="bpkGray500">#68697f</color>
-
-	<color name="bpkGray600">#696179</color>
-
-	<color name="bpkGray700">#444560</color>
-
-	<color name="bpkGray800">#3b344b</color>
-
-	<color name="bpkGray900">#111236</color>
-
-	<color name="bpkGreen100">#cbf5e2</color>
-
-	<color name="bpkGreen200">#afedd1</color>
-
-	<color name="bpkGreen300">#80e8b9</color>
-
-	<color name="bpkGreen400">#40de97</color>
-
-	<color name="bpkGreen50">#dff7ec</color>
-
-	<color name="bpkGreen500">#00d775</color>
-
-	<color name="bpkGreen600">#00bd68</color>
-
-	<color name="bpkGreen700">#00a85d</color>
-
-	<color name="bpkGreen800">#008c4d</color>
-
-	<color name="bpkGreen900">#006638</color>
 
 	<color name="bpkHarbour">#f6dde1</color>
 
@@ -102,47 +42,7 @@
 
 	<color name="bpkPetra">#ffab95</color>
 
-	<color name="bpkPink100">#ffbfd7</color>
-
-	<color name="bpkPink200">#ff94bb</color>
-
-	<color name="bpkPink300">#ff73a6</color>
-
-	<color name="bpkPink400">#ff619b</color>
-
-	<color name="bpkPink50">#fde4ed</color>
-
-	<color name="bpkPink500">#fa488a</color>
-
-	<color name="bpkPink600">#d92b6b</color>
-
-	<color name="bpkPink700">#c50f52</color>
-
-	<color name="bpkPink800">#b00c48</color>
-
-	<color name="bpkPink900">#94053a</color>
-
 	<color name="bpkPrimaryGradientLight">#0770e3</color>
-
-	<color name="bpkRed100">#ffd6d5</color>
-
-	<color name="bpkRed200">#ffbbba</color>
-
-	<color name="bpkRed300">#ff9694</color>
-
-	<color name="bpkRed400">#fe7471</color>
-
-	<color name="bpkRed50">#fcf2f2</color>
-
-	<color name="bpkRed500">#ff5452</color>
-
-	<color name="bpkRed600">#eb423f</color>
-
-	<color name="bpkRed700">#de322f</color>
-
-	<color name="bpkRed800">#cc1f1d</color>
-
-	<color name="bpkRed900">#a80300</color>
 
 	<color name="bpkSagano">#d0eeec</color>
 
@@ -185,26 +85,6 @@
 	<color name="bpkValensole">#a59bc8</color>
 
 	<color name="bpkWhite">#ffffff</color>
-
-	<color name="bpkYellow100">#fff3cf</color>
-
-	<color name="bpkYellow200">#ffecb8</color>
-
-	<color name="bpkYellow300">#ffe18c</color>
-
-	<color name="bpkYellow400">#ffcf4a</color>
-
-	<color name="bpkYellow50">#fff9e6</color>
-
-	<color name="bpkYellow500">#ffbb00</color>
-
-	<color name="bpkYellow600">#f0b000</color>
-
-	<color name="bpkYellow700">#e1a500</color>
-
-	<color name="bpkYellow800">#c28e00</color>
-
-	<color name="bpkYellow900">#9c7200</color>
 
 	<color name="bpkTextPrimaryLight">#111236</color>
 

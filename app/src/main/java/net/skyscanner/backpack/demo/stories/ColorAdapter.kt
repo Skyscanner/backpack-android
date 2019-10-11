@@ -23,8 +23,8 @@ class ColorAdapter(private val colorResources: ArrayList<Field>) : RecyclerView.
     holder.name.text = colorResources[position].name.replace("bpk", "", true)
     holder.colorValue.text = holder.itemView.resources.getString(colorResources[position].getInt(null)).replace("#ff", "")
     if (colorResources[position].name.contains("900") || colorResources[position].name.contains("800")) {
-      holder.name.setTextColor(ContextCompat.getColor(holder.name.context, R.color.bpkGray100))
-      holder.colorValue.setTextColor(ContextCompat.getColor(holder.colorValue.context, R.color.bpkGray100))
+      holder.name.setTextColor(ContextCompat.getColor(holder.name.context, R.color.bpkSkyGrayTint06))
+      holder.colorValue.setTextColor(ContextCompat.getColor(holder.colorValue.context, R.color.bpkSkyGrayTint06))
     }
   }
 

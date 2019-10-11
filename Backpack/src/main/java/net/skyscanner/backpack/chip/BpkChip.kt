@@ -23,7 +23,7 @@ open class BpkChip @JvmOverloads constructor(
       this.isEnabled = !disabled
     }
 
-  var chipBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkGray50)
+  var chipBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
     set(value) {
       field = value
       updateBackground()
@@ -70,8 +70,8 @@ open class BpkChip @JvmOverloads constructor(
       ),
       intArrayOf(
         ContextCompat.getColor(context, R.color.bpkWhite),
-        ContextCompat.getColor(context, R.color.bpkGray900),
-        ContextCompat.getColor(context, R.color.bpkGray300)
+        ContextCompat.getColor(context, R.color.bpkSkyGray),
+        ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
       )
     )
 

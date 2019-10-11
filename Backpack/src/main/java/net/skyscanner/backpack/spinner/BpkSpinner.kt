@@ -43,7 +43,7 @@ open class BpkSpinner @JvmOverloads constructor(
   private val colors = arrayOf(
     R.color.bpkSkyBlue,
     R.color.bpkWhite,
-    R.color.bpkGray700
+    R.color.bpkSkyGrayTint01
   )
 
   private val animationsEnabled =
