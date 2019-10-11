@@ -164,7 +164,7 @@ open class BpkButton : BpkButtonBase {
     // we want to store the enabling state set
     // by the used in order to recover to it when loading is set to false.
     // the null values used to detect the initialization
-    if (this.enabled != isEnabled) {
+    if (enabled != isEnabled) {
       this.enabled = enabled
       super.setEnabled(enabled)
     }
