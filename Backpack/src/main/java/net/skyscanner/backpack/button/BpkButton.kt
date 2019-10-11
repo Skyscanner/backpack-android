@@ -90,7 +90,7 @@ open class BpkButton : BpkButtonBase {
       setStyle(CircularProgressDrawable.DEFAULT)
       centerRadius = resources.getDimension(R.dimen.bpkSpacingSm) * 1.3f
       strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
-      setColorSchemeColors(resources.getColor(R.color.bpkGray300))
+      setColorSchemeColors(resources.getColor(R.color.bpkSkyGrayTint04))
       start()
     }
   }
