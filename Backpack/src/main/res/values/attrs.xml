@@ -72,6 +72,7 @@
       <enum name="end" value="1" />
       <enum name="icon_only" value="2" />
     </attr>
+    <attr name="buttonLoading" format="boolean" />
     <attr name="buttonBackgroundColor" format="color" />
     <attr name="buttonTextColor" format="color" />
     <attr name="buttonStrokeColor" format="color" />

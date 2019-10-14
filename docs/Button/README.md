@@ -17,7 +17,8 @@ Example of a primary button in XML
   android:text="Button"
   app:buttonIconPosition="end"
   app:buttonIcon="@drawable/bpk_long_arrow_right"
-  app:buttonType="primary"/>
+  app:buttonType="primary"
+  app:buttonLoading="false" />
 ```
 
 Example of a primary button in Kotlin
@@ -29,6 +30,7 @@ BpkButton(context,BpkButton.Type.Primary).apply {
    icon = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
    iconPosition = BpkButton.END
    text = "Button"
+   loading = false
 }
 ```
 

@@ -95,9 +95,12 @@ open class BpkButton : BpkButtonBase {
     }
   }
 
+  private var _loading = false
   var loading: Boolean = false
+    get() = _loading
     set(value) {
-      if (value != field) {
+      _loading = value
+      if (_loading != field) {
         field = value
         update()
       }
@@ -118,6 +121,8 @@ open class BpkButton : BpkButtonBase {
         cornerRadius = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, cornerRadius)
 
         defaultTextColor = ContextCompat.getColor(context, type.textColor)
+
+        _loading = it.getBoolean(R.styleable.BpkButton_buttonLoading, _loading)
       }
 
     update()
