@@ -1,13 +1,10 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.VectorDrawable
+import android.graphics.drawable.LayerDrawable
+import android.os.Build
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.widget.TextView
 import androidx.annotation.Dimension
@@ -16,7 +13,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.*
@@ -69,16 +65,12 @@ abstract class BpkButtonBase internal constructor(
     }
 
   private var _icon: Drawable? = null
-  var icon: Drawable? = null
+  open var icon: Drawable? = null
     get() = _icon
     set(value) {
       if (value != field) {
         field = value
-
-        value?.let {
-          _icon = convertAndResize(it)
-        }
-
+        _icon = value?.let(::adjustDrawableSize)
         updateSelf()
         update()
       }
@@ -103,7 +95,7 @@ abstract class BpkButtonBase internal constructor(
         _iconPosition = it.getInt(R.styleable.BpkButton_buttonIconPosition, ICON_POSITION_END)
         it.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RES).let { res ->
           if (res != INVALID_RES) {
-            _icon = AppCompatResources.getDrawable(context, res)?.let(::convertAndResize)
+            _icon = AppCompatResources.getDrawable(context, res)?.let(::adjustDrawableSize)
           }
         }
       }
@@ -128,35 +120,40 @@ abstract class BpkButtonBase internal constructor(
       this.setTextColor(tokens.gray300)
     }
 
-    _icon?.let {
-      DrawableCompat.setTintList(
-        it,
-        getColorSelector(
-          buttonTextColor,
-          darken(buttonTextColor, .1f),
-          tokens.gray300
+    val icon = _icon
+    if (icon != null) {
+        DrawableCompat.setTintList(
+          icon,
+          getColorSelector(
+            buttonTextColor,
+            darken(buttonTextColor, .1f),
+            tokens.gray300
+          )
         )
-      )
 
-      this.setCompoundDrawablesRelativeWithIntrinsicBounds(
-        it.takeIf { iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY },
-        null,
-        it.takeIf { iconPosition == ICON_POSITION_END },
-        null
-      )
+        this.setCompoundDrawablesRelativeWithIntrinsicBounds(
+          icon.takeIf { iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY },
+          null,
+          icon.takeIf { iconPosition == ICON_POSITION_END },
+          null
+        )
+    } else {
+      this.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
     }
   }
 
   protected abstract fun update()
 
   override fun setEnabled(enabled: Boolean) {
-    super.setEnabled(enabled)
+    if (enabled != isEnabled) {
+      super.setEnabled(enabled)
 
-    isClickable = isEnabled
+      isClickable = isEnabled
 
-    if (isInitialized) {
-      updateSelf()
-      update()
+      if (isInitialized) {
+        updateSelf()
+        update()
+      }
     }
   }
 
@@ -238,31 +235,21 @@ abstract class BpkButtonBase internal constructor(
     }
   }
 
-  private fun convertAndResize(drawable: Drawable): BitmapDrawable? {
-    val bitmap = if (drawable is BitmapDrawable) {
-      drawable.bitmap
-    } else if (drawable is VectorDrawable || drawable is VectorDrawableCompat) {
-      val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-      val canvas = Canvas(bitmap)
-      drawable.setBounds(0, 0, canvas.width, canvas.height)
-      drawable.draw(canvas)
+  private fun adjustDrawableSize(drawable: Drawable) = object : LayerDrawable(
+    arrayOf(drawable)
+  ) {
 
-      bitmap
-    } else {
-      Log.w("BpkButton", "Icon drawable not supported, make sure the size is set to 16dp")
-      null
-    }
-
-    return bitmap?.let {
-      BitmapDrawable(
-        resources,
-        Bitmap.createScaledBitmap(
-          bitmap,
-          tokens.bpkSpacingBase,
-          tokens.bpkSpacingBase,
-          true)).apply {
-        isAutoMirrored = drawable.isAutoMirrored
+    init {
+      setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        setLayerSize(0, intrinsicWidth, intrinsicHeight)
       }
     }
+
+    override fun getIntrinsicWidth(): Int =
+      tokens.bpkSpacingBase
+
+    override fun getIntrinsicHeight(): Int =
+      tokens.bpkSpacingBase
   }
 }

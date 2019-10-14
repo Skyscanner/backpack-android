@@ -7,10 +7,12 @@ import android.os.Build
 import android.util.AttributeSet
 import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.*
 import net.skyscanner.backpack.util.use
 import net.skyscanner.backpack.util.ResourcesUtil
+import net.skyscanner.backpack.util.unsafeLazy
 
 open class BpkButton : BpkButtonBase {
   constructor(context: Context) : this(context, null)
@@ -73,6 +75,37 @@ open class BpkButton : BpkButtonBase {
       return initialType
     }
 
+  private var _icon: Drawable? = super.icon
+  final override var icon: Drawable?
+    get() = super.icon
+    set(value) {
+      if (_icon != value) {
+        _icon = value
+        super.icon = value
+      }
+    }
+
+  private val _progress by unsafeLazy {
+    CircularProgressDrawable(context).apply {
+      setStyle(CircularProgressDrawable.DEFAULT)
+      centerRadius = resources.getDimension(R.dimen.bpkSpacingSm) * 1.3f
+      strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
+      setColorSchemeColors(resources.getColor(R.color.bpkSkyGrayTint04))
+      start()
+    }
+  }
+
+  private var _loading = false
+  var loading: Boolean = false
+    get() = _loading
+    set(value) {
+      _loading = value
+      if (_loading != field) {
+        field = value
+        update()
+      }
+    }
+
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       ?.use {
@@ -88,6 +121,8 @@ open class BpkButton : BpkButtonBase {
         cornerRadius = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, cornerRadius)
 
         defaultTextColor = ContextCompat.getColor(context, type.textColor)
+
+        _loading = it.getBoolean(R.styleable.BpkButton_buttonLoading, _loading)
       }
 
     update()
@@ -118,6 +153,26 @@ open class BpkButton : BpkButtonBase {
     }
 
     clipToOutline = true
+
+    if (loading) {
+      super.icon = _progress
+      super.setEnabled(false)
+    } else {
+      super.icon = _icon
+      super.setEnabled(enabled != false)
+    }
+  }
+
+  private var enabled: Boolean? = null
+
+  override fun setEnabled(enabled: Boolean) {
+    // we want to store the enabling state set
+    // by the used in order to recover to it when loading is set to false.
+    // the null values used to detect the initialization
+    if (enabled != isEnabled) {
+      this.enabled = enabled
+      super.setEnabled(enabled)
+    }
   }
 
   @VisibleForTesting

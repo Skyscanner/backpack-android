@@ -73,7 +73,8 @@ object ComponentRegistry {
         "Outline" story NodeData { Story of R.layout.fragment_button_outline },
         "With rounder corners" story NodeData { Story of R.layout.fragment_button_with_corners },
         "Icon alignment" story NodeData { Story of R.layout.fragment_button_icon_alignment },
-        "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment with Direction.RTL }
+        "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment with Direction.RTL },
+        "Loading" story NodeData { LoadingButtonStory of R.layout.fragment_button_loading }
       )),
     "ButtonLink" story NodeData({ children -> SubStory of children },
       mapOf(

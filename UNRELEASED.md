@@ -4,6 +4,12 @@
 
 **Added:**
 
+
+**Added:**
+
+- BpkButton:
+  - Added `loading` (`app:buttonLoading` in XML) property and loading style.
+  
 - BpkIcon:
   - Added file and printer icons
 
