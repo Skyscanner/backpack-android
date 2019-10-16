@@ -2,6 +2,20 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 16.0.0
+
+**Added:**
+
+- BpkButton:
+  - Added `loading` (`app:buttonLoading` in XML) property and loading style.
+  
+- BpkIcon:
+  - Added file and printer icons
+
+**Breaking:**
+
+- Removed old brand colours.
+
 # 15.0.0
 
 **Breaking:**

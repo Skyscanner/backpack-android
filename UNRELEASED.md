@@ -2,21 +2,6 @@
 
 > Place your changes below this line.
 
-**Added:**
-
-
-**Added:**
-
-- BpkButton:
-  - Added `loading` (`app:buttonLoading` in XML) property and loading style.
-  
-- BpkIcon:
-  - Added file and printer icons
-
-**Breaking:**
-
-- Removed old brand colours.
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
