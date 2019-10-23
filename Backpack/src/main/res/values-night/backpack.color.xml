@@ -18,6 +18,8 @@
 -->
 <resources>
 
+	<color name="bpkBackground">#000000</color>
+
 	<color name="bpkAbisko">#5a489b</color>
 
 	<color name="bpkBagan">#ffebd0</color>
@@ -58,21 +60,21 @@
 
 	<color name="bpkSkyBlueTint03">#cddff8</color>
 
-	<color name="bpkSkyGray">#111236</color>
+	<color name="bpkSkyGray">#f1f2f8</color>
 
-	<color name="bpkSkyGrayTint01">#444560</color>
+	<color name="bpkSkyGrayTint01">#dddde5</color>
 
-	<color name="bpkSkyGrayTint02">#68697f</color>
+	<color name="bpkSkyGrayTint02">#cdcdd7</color>
 
-	<color name="bpkSkyGrayTint03">#8f90a0</color>
+	<color name="bpkSkyGrayTint03">#b2b2bf</color>
 
-	<color name="bpkSkyGrayTint04">#b2b2bf</color>
+	<color name="bpkSkyGrayTint04">#8f90a0</color>
 
-	<color name="bpkSkyGrayTint05">#cdcdd7</color>
+	<color name="bpkSkyGrayTint05">#68697f</color>
 
-	<color name="bpkSkyGrayTint06">#dddde5</color>
+	<color name="bpkSkyGrayTint06">#444560</color>
 
-	<color name="bpkSkyGrayTint07">#f1f2f8</color>
+	<color name="bpkSkyGrayTint07">#111236</color>
 
 	<color name="bpkSystemGreen">#00a698</color>
 
@@ -84,14 +86,14 @@
 
 	<color name="bpkWhite">#ffffff</color>
 
-	<color name="bpkBackground">#ffffff</color>
+	<color name="bpkSecondary">#6d9feb</color>
 
-	<color name="bpkTextPrimary">#111236</color>
+	<color name="bpkTextPrimary">#ffffff</color>
 
-	<color name="bpkTextQuaternary">#8f90a0</color>
+	<color name="bpkTextQuaternary">#cdcdd7</color>
 
-	<color name="bpkTextSecondary">#68697f</color>
+	<color name="bpkTextSecondary">#8f90a0</color>
 
-	<color name="bpkTextTertiary">#8f90a0</color>
+	<color name="bpkTextTertiary">#b2b2bf</color>
 
  </resources>
