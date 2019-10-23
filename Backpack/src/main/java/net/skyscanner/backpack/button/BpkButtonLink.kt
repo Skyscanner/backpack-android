@@ -9,8 +9,8 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ICON_POSITION_END
 import net.skyscanner.backpack.button.internal.ICON_POSITION_START
+import net.skyscanner.backpack.button.internal.getRippleDrawable
 import net.skyscanner.backpack.util.createContextThemeWrapper
-import net.skyscanner.backpack.util.resolveThemeDrawable
 import net.skyscanner.backpack.util.use
 
 open class BpkButtonLink @JvmOverloads constructor(
@@ -62,13 +62,21 @@ open class BpkButtonLink @JvmOverloads constructor(
         _uppercase = it.getBoolean(R.styleable.BpkButtonLink_uppercase, true)
       }
 
-    background = resolveThemeDrawable(context, android.R.attr.selectableItemBackground)
     update()
   }
 
   override fun update() {
     val paddingVertical = tokens.bpkSpacingMd + (tokens.bpkBorderSizeLg / 2)
     setPadding(0, paddingVertical, 0, paddingVertical)
+
+    if (isEnabled) {
+      background = getRippleDrawable(
+        normalColor = ContextCompat.getColor(context, android.R.color.transparent)
+      )
+    } else {
+      background = null
+    }
+
     isAllCaps = _uppercase
   }
 }
