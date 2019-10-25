@@ -54,7 +54,7 @@ class BpkPageTitle @JvmOverloads constructor(
 
   init {
     var toolbarStyle = this.context.theme.resolveId(R.attr.toolbarStyle)
-    var backgroundColor = ContextCompat.getColor(this.context, R.color.bpkWhite)
+    var backgroundColor = ContextCompat.getColor(this.context, R.color.bpkBackground)
     var expandedTitleColor = expandedTitleColor
     var collapsedTextColor = collapsedTitleColor
     var title: CharSequence? = null
