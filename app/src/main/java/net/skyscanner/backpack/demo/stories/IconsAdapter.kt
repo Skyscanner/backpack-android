@@ -24,7 +24,7 @@ class IconsAdapter(
     val view = LayoutInflater.from(parent.context)
       .inflate(R.layout.icon_item, parent, false)
 
-    rtlIconBackgroundColor = ContextCompat.getColor(parent.context, R.color.bpkHarbour)
+    rtlIconBackgroundColor = ContextCompat.getColor(parent.context, R.color.bpkSkyGrayTint04)
 //    ColorUtils.setAlphaComponent(rtlIconBackgroundColor, 85)
     return ViewHolder(view)
   }
