@@ -58,7 +58,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="This will enable themes for compatible components"
-    android:textColor="@color/bpkSkyGrayTint02"
+    android:textColor="@color/bpkTextSecondary"
     app:textStyle="sm"
     android:layout_marginHorizontal="@dimen/bpkSpacingBase"/>
 

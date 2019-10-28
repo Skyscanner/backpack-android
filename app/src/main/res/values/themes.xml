@@ -102,12 +102,12 @@
 
   <style name="LondonThemeCheckbox">
     <item name="checkboxColorChecked">@color/bpkPanjin</item>
-    <item name="checkboxColorDisabled">@color/bpkSkyGrayTint02</item>
+    <item name="checkboxColorDisabled">@color/bpkTextSecondary</item>
     <item name="checkboxColor">#013A76</item>
   </style>
 
   <style name="LondonThemeHorizontalNav">
-    <item name="horizontalNavTextColor">@color/bpkSkyGrayTint02</item>
+    <item name="horizontalNavTextColor">@color/bpkTextSecondary</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
@@ -225,12 +225,12 @@
 
   <style name="DohaThemeCheckbox">
     <item name="checkboxColorChecked">@color/bpkPanjin</item>
-    <item name="checkboxColorDisabled">@color/bpkSkyGrayTint02</item>
+    <item name="checkboxColorDisabled">@color/bpkTextSecondary</item>
     <item name="checkboxColor">#ffb300</item>
   </style>
 
   <style name="DohaThemeHorizontalNav">
-    <item name="horizontalNavTextColor">@color/bpkSkyGrayTint02</item>
+    <item name="horizontalNavTextColor">@color/bpkTextSecondary</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
     <item name="horizontalNavIndicatorColor">?bpkPrimaryColor</item>
   </style>
