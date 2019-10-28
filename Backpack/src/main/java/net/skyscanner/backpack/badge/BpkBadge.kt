@@ -59,7 +59,7 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with a dark background
      */
-    Dark(7, R.color.bpkSkyGray, R.color.bpkWhite);
+    Dark(7, R.color.bpkTextPrimary, R.color.bpkWhite);
 
     internal companion object {
 

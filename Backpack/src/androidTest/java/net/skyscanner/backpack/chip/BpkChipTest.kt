@@ -25,7 +25,7 @@ class BpkChipTest {
       text = "Message"
     }
     Assert.assertEquals("Message", chip.text.toString())
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGray), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkTextPrimary), chip.currentTextColor)
   }
 
   @Test
@@ -54,7 +54,7 @@ class BpkChipTest {
     Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkWhite), chip.currentTextColor)
 
     chip.toggle()
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGray), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkTextPrimary), chip.currentTextColor)
   }
 
   @Test

@@ -33,7 +33,7 @@
     android:ellipsize="end"
     android:gravity="start"
     android:maxLines="1"
-    android:textColor="@color/bpkSkyGray"
+    android:textColor="@color/bpkTextPrimary"
     app:layout_constraintBottom_toTopOf="@+id/bpk_rating_subtitle"
     app:layout_constraintStart_toEndOf="@+id/bpk_rating_badge"
     app:layout_constraintTop_toTopOf="parent"
