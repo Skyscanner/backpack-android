@@ -28,7 +28,7 @@
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="match_parent"
     android:layout_height="@dimen/bpkSpacingXxl"
-    android:background="@color/bpkSkyGrayTint07"
+    android:background="@color/bpkBackgroundSecondary"
     android:paddingStart="@dimen/bpkSpacingBase"
     android:textColor="@color/bpkSkyGrayTint01"
     android:gravity="center_vertical|left"

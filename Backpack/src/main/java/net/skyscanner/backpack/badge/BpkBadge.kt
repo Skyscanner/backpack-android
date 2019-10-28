@@ -46,7 +46,7 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      *  Light themed style for badges
      */
-    Light(4, R.color.bpkSkyGrayTint07, R.color.bpkSkyGrayTint01),
+    Light(4, R.color.bpkBackgroundSecondary, R.color.bpkSkyGrayTint01),
     /**
      *  Style for badges on dark themes
      */
