@@ -160,7 +160,7 @@ class BpkSnackbar private constructor(
 
       @ColorInt var textColor = ContextCompat.getColor(context, R.color.bpkBackground)
       @ColorInt var actionColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
-      @ColorInt var backgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGray)
+      @ColorInt var backgroundColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
 
       val outValue = TypedValue()
       context.theme.resolveAttribute(R.attr.bpkSnackbarStyle, outValue, true)

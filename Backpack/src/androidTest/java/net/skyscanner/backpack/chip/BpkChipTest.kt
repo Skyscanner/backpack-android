@@ -25,7 +25,7 @@ class BpkChipTest {
       text = "Message"
     }
     Assert.assertEquals("Message", chip.text.toString())
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGray), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkTextPrimary), chip.currentTextColor)
   }
 
   @Test
@@ -54,7 +54,7 @@ class BpkChipTest {
     Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkWhite), chip.currentTextColor)
 
     chip.toggle()
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGray), chip.currentTextColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkTextPrimary), chip.currentTextColor)
   }
 
   @Test
@@ -72,12 +72,12 @@ class BpkChipTest {
   fun test_set_chipBackgroundColor() {
 
     val chip = BpkChip(context).apply {
-      Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGrayTint07), chipBackgroundColor)
-      Assert.assertNotEquals(ContextCompat.getColor(context, R.color.bpkSkyGrayTint02), chipBackgroundColor)
-      chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint02)
+      Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkBackgroundSecondary), chipBackgroundColor)
+      Assert.assertNotEquals(ContextCompat.getColor(context, R.color.bpkTextSecondary), chipBackgroundColor)
+      chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkTextSecondary)
     }
 
-    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkSkyGrayTint02), chip.chipBackgroundColor)
+    Assert.assertEquals(ContextCompat.getColor(context, R.color.bpkTextSecondary), chip.chipBackgroundColor)
   }
 
   @Test
