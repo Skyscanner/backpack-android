@@ -4,14 +4,14 @@ import android.content.Context
 import android.graphics.PorterDuff
 import android.provider.Settings.Global
 import android.util.AttributeSet
-import android.util.TypedValue
-import android.view.ContextThemeWrapper
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.createContextThemeWrapper
+import net.skyscanner.backpack.util.use
 
 private const val INVALID_RES = -1
 
@@ -84,22 +84,12 @@ open class BpkSpinner @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val a = context.obtainStyledAttributes(attrs, R.styleable.BpkSpinner, defStyleAttr, 0)
-    val small = a.getBoolean(R.styleable.BpkSpinner_small, false)
-    val type = Type.values()[a.getInt(R.styleable.BpkSpinner_type, 0)]
-
-    val t = TypedValue()
-    if (context.theme.resolveAttribute(R.attr.bpkSpinnerPrimaryStyle, t, true)) {
-      val withPrimaryStyle = ContextThemeWrapper(context, t.resourceId)
-      val spinnerPrimaryStyle = withPrimaryStyle.obtainStyledAttributes(attrs, R.styleable.BpkSpinner)
-      themePrimaryColor = spinnerPrimaryStyle.getColor(R.styleable.BpkSpinner_spinnerColor, INVALID_RES)
-      spinnerPrimaryStyle.recycle()
+    val wrappedContext = createContextThemeWrapper(context, attrs, R.attr.bpkSpinnerPrimaryStyle)
+    wrappedContext.obtainStyledAttributes(attrs, R.styleable.BpkSpinner, defStyleAttr, 0).use {
+      themePrimaryColor = it.getColor(R.styleable.BpkSpinner_spinnerColor, INVALID_RES)
+      this.small = it.getBoolean(R.styleable.BpkSpinner_small, false)
+      this.type = Type.values()[it.getInt(R.styleable.BpkSpinner_type, 0)]
     }
-
-    a.recycle()
-
-    this.small = small
-    this.type = type
   }
 
   private fun updateColor() {

@@ -142,9 +142,7 @@
     <item name="pageTitleBackgroundColor">#00254B</item>
     <item name="pageTitleCollapsedTextColor">#6392ce</item>
   </style>
-
   <!-- London theme end -->
-
 
   <!-- Doha theme start -->
   <style name="DohaTheme" parent="CustomTextStyle">
