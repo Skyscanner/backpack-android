@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 16.0.1
+
+**Fixed:**
+
+- BpkSpinner
+  - Fixed inline `style` support.
+
 # 16.0.0
 
 **Added:**
