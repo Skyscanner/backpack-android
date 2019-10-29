@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <color name="__buttonDisabledBackground">@color/bpkBlackTint02</color>
+  <color name="__buttonDisabledText">@color/bpkBlackTint03</color>
+  <color name="__buttonSecondaryBackground">@color/bpkBlackTint02</color>
+  <color name="__buttonSecondaryBorder">@color/bpkBlackTint03</color>
+
+
+ </resources>

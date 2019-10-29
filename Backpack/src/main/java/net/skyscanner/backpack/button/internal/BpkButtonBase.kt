@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
@@ -11,7 +12,6 @@ import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
@@ -35,20 +35,6 @@ abstract class BpkButtonBase internal constructor(
 
   private val font = BpkText.getFont(this.context, BpkText.SM, BpkText.Weight.EMPHASIZED)
 
-  protected var defaultTextColor: Int = ContextCompat.getColor(this.context, R.color.bpkWhite)
-    set(value) {
-      field = value
-      updateSelf()
-    }
-
-  private var _buttonTextColor: Int? = null
-  private var buttonTextColor: Int
-    get() = _buttonTextColor ?: defaultTextColor
-    set(value) {
-      _buttonTextColor = value
-      updateSelf()
-    }
-
   @Dimension
   private var originalStartPadding: Int = 0
 
@@ -60,7 +46,7 @@ abstract class BpkButtonBase internal constructor(
     get() = _iconPosition
     set(value) {
       _iconPosition = value
-      updateSelf()
+      updateIcon()
       update()
     }
 
@@ -71,7 +57,7 @@ abstract class BpkButtonBase internal constructor(
       if (value != field) {
         field = value
         _icon = value?.let(::adjustDrawableSize)
-        updateSelf()
+        updateIcon()
         update()
       }
     }
@@ -83,15 +69,7 @@ abstract class BpkButtonBase internal constructor(
     isClickable = isEnabled
 
     this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
-      ?.use {
-        // TODO: Try to refactor this so using getColorStateList is not necessary.
-        // We are using getColorStateList because we can't set consistent default because of how
-        // BpkButton changes the default colour based on its type.
-        // Furthermore using getColor is problematic because we need to provide a default and if we
-        // make INVALID_RES (-1) the default, it is not possible to se this property to white, because
-        // white is also represented as -1.
-        _buttonTextColor = it.getColorStateList(R.styleable.BpkButton_buttonTextColor)?.defaultColor
-
+      .use {
         _iconPosition = it.getInt(R.styleable.BpkButton_buttonIconPosition, ICON_POSITION_END)
         it.getResourceId(R.styleable.BpkButton_buttonIcon, INVALID_RES).let { res ->
           if (res != INVALID_RES) {
@@ -100,46 +78,9 @@ abstract class BpkButtonBase internal constructor(
         }
       }
 
-    updateSelf()
-
-    isInitialized = true
-  }
-
-  private fun updateSelf() {
     font.applyTo(this)
-
-    if (this.isEnabled) {
-      this.setTextColor(
-        getColorSelector(
-          buttonTextColor,
-          darken(buttonTextColor, .1f),
-          tokens.gray300
-        )
-      )
-    } else {
-      this.setTextColor(tokens.gray300)
-    }
-
-    val icon = _icon
-    if (icon != null) {
-        DrawableCompat.setTintList(
-          icon,
-          getColorSelector(
-            buttonTextColor,
-            darken(buttonTextColor, .1f),
-            tokens.gray300
-          )
-        )
-
-        this.setCompoundDrawablesRelativeWithIntrinsicBounds(
-          icon.takeIf { iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY },
-          null,
-          icon.takeIf { iconPosition == ICON_POSITION_END },
-          null
-        )
-    } else {
-      this.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
-    }
+    updateIcon()
+    isInitialized = true
   }
 
   protected abstract fun update()
@@ -151,10 +92,20 @@ abstract class BpkButtonBase internal constructor(
       isClickable = isEnabled
 
       if (isInitialized) {
-        updateSelf()
+        updateIcon()
         update()
       }
     }
+  }
+
+  override fun setTextColor(color: Int) {
+    super.setTextColor(color)
+    updateIcon()
+  }
+
+  override fun setTextColor(colors: ColorStateList?) {
+    super.setTextColor(colors)
+    updateIcon()
   }
 
   override fun setCompoundDrawablesWithIntrinsicBounds(@DrawableRes left: Int, @DrawableRes top: Int, @DrawableRes right: Int, @DrawableRes bottom: Int) {
@@ -232,6 +183,21 @@ abstract class BpkButtonBase internal constructor(
         max(originalEndPadding, paddingSize),
         paddingBottom
       )
+    }
+  }
+
+  private fun updateIcon() {
+    val icon = _icon
+    if (icon != null) {
+      DrawableCompat.setTintList(icon, textColors)
+      this.setCompoundDrawablesRelativeWithIntrinsicBounds(
+        icon.takeIf { iconPosition == ICON_POSITION_START || iconPosition == ICON_POSITION_ICON_ONLY },
+        null,
+        icon.takeIf { iconPosition == ICON_POSITION_END },
+        null
+      )
+    } else {
+      this.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
     }
   }
 
