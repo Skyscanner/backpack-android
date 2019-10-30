@@ -2,8 +2,10 @@ package net.skyscanner.backpack.util
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
+import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.appcompat.view.ContextThemeWrapper
 import net.skyscanner.backpack.R
@@ -95,6 +97,19 @@ internal fun resolveThemeColor(context: Context, resId: Int): Int? {
     typedValue.data
   } else if (wasResolved) {
     ContextCompat.getColor(context, typedValue.resourceId)
+  } else {
+    null
+  }
+}
+
+internal fun resolveThemeDrawable(context: Context, @AttrRes resId: Int): Drawable? {
+  val typedValue = TypedValue()
+  val wasResolved = context.theme.resolveAttribute(resId, typedValue, true)
+
+  return if (wasResolved && typedValue.resourceId == 0) {
+    ContextCompat.getDrawable(context, typedValue.data)
+  } else if (wasResolved) {
+    ContextCompat.getDrawable(context, typedValue.resourceId)
   } else {
     null
   }
