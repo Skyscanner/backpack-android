@@ -15,7 +15,6 @@ import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -175,7 +174,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         val wrapper = FrameLayout(activity)
         wrapper.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
         wrapper.setPadding(20, 20, 20, 20)
-        wrapper.setBackgroundColor(ResourcesCompat.getColor(activity.resources, R.color.bpkSkyGrayTint02, activity.theme))
+        wrapper.setBackgroundColor(ResourcesCompat.getColor(activity.resources, R.color.bpkTextSecondary, activity.theme))
         wrapper.addView(rootView)
 
         setupView(wrapper)

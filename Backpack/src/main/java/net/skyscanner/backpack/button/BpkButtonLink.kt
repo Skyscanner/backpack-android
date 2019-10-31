@@ -9,8 +9,10 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ICON_POSITION_END
 import net.skyscanner.backpack.button.internal.ICON_POSITION_START
-import net.skyscanner.backpack.button.internal.getRippleDrawable
+import net.skyscanner.backpack.button.internal.getColorSelector
 import net.skyscanner.backpack.util.createContextThemeWrapper
+import net.skyscanner.backpack.util.darken
+import net.skyscanner.backpack.util.resolveThemeDrawable
 import net.skyscanner.backpack.util.use
 
 open class BpkButtonLink @JvmOverloads constructor(
@@ -53,30 +55,28 @@ open class BpkButtonLink @JvmOverloads constructor(
     }
 
   init {
-    defaultTextColor = ContextCompat.getColor(this.context, R.color.bpkSkyBlue)
+    var textColor = ContextCompat.getColor(context, R.color.bpkPrimary)
 
     compoundDrawablePadding = tokens.bpkSpacingSm
 
     this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButtonLink, defStyleAttr, 0)
-      ?.use {
+      .use {
         _uppercase = it.getBoolean(R.styleable.BpkButtonLink_uppercase, true)
+        textColor = it.getColor(R.styleable.BpkButton_buttonTextColor, textColor)
       }
 
+    background = resolveThemeDrawable(context, android.R.attr.selectableItemBackground)
+    setTextColor(getColorSelector(
+      textColor,
+      darken(textColor, .1f),
+      ContextCompat.getColor(context, R.color.__buttonDisabledText)
+    ))
     update()
   }
 
   override fun update() {
     val paddingVertical = tokens.bpkSpacingMd + (tokens.bpkBorderSizeLg / 2)
     setPadding(0, paddingVertical, 0, paddingVertical)
-
-    if (isEnabled) {
-      background = getRippleDrawable(
-        normalColor = ContextCompat.getColor(context, android.R.color.transparent)
-      )
-    } else {
-      background = null
-    }
-
     isAllCaps = _uppercase
   }
 }
