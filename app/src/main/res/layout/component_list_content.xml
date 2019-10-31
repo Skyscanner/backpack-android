@@ -22,6 +22,7 @@
     android:layout_height="1dip"
     android:layout_marginStart="@dimen/bpkSpacingLg"
     android:layout_marginEnd="@dimen/bpkSpacingLg"
-    android:background="@color/bpkSkyGrayTint06" />
+    android:alpha="0.3"
+    android:background="@color/bpkTextTertiary" />
 
 </LinearLayout>

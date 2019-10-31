@@ -158,9 +158,9 @@ class BpkSnackbar private constructor(
     fun make(view: View, text: CharSequence, duration: Int): BpkSnackbar {
       val context = view.context
 
-      @ColorInt var textColor = ContextCompat.getColor(context, R.color.bpkWhite)
+      @ColorInt var textColor = ContextCompat.getColor(context, R.color.bpkBackground)
       @ColorInt var actionColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
-      @ColorInt var backgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGray)
+      @ColorInt var backgroundColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
 
       val outValue = TypedValue()
       context.theme.resolveAttribute(R.attr.bpkSnackbarStyle, outValue, true)

@@ -175,7 +175,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         val wrapper = FrameLayout(activity)
         wrapper.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
         wrapper.setPadding(20, 20, 20, 20)
-        wrapper.setBackgroundColor(ResourcesCompat.getColor(activity.resources, R.color.bpkSkyGrayTint02, activity.theme))
+        wrapper.setBackgroundColor(ResourcesCompat.getColor(activity.resources, R.color.bpkTextSecondary, activity.theme))
         wrapper.addView(rootView)
 
         setupView(wrapper)

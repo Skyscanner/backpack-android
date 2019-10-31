@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:background="@color/bpkSkyGrayTint02">
+  tools:background="@color/bpkTextSecondary">
 
   <net.skyscanner.backpack.dialog.internal.DialogWindowLayout
     android:id="@+id/dialog_window_layout"
