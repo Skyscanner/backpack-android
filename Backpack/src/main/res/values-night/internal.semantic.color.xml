@@ -8,5 +8,7 @@
   <color name="__calendarSameDayBackground">@color/bpkSkyBlueShade01</color>
   <color name="__calendarRangeBackground">@color/bpkSkyBlueShade01</color>
   <color name="__calendarDisabledColour">@color/bpkSkyGrayTint02</color>
+  <color name="__dialogBackground">@color/bpkBackgroundSecondaryDark</color>
+
 
  </resources>
