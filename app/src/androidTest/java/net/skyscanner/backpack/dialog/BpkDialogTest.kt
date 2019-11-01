@@ -15,6 +15,7 @@ import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
