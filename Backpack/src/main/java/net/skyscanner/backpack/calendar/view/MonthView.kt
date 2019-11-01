@@ -19,6 +19,7 @@ package net.skyscanner.backpack.calendar.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Paint.Align
 import android.graphics.Paint.Style
@@ -30,6 +31,7 @@ import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarRange
+import net.skyscanner.backpack.calendar.model.ColoredBucket
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.ResourcesUtil
@@ -53,8 +55,7 @@ internal class MonthView @JvmOverloads constructor(
   private val monthLabelFont =
     BpkText.getFont(context, BpkText.LG, BpkText.Weight.EMPHASIZED)
 
-  private var coloredCirclePaints = mapOf<LocalDate, Paint>()
-  private var coloredSelectedPaints = mapOf<LocalDate, Paint>()
+  private val colouredParams = mutableMapOf<LocalDate, ColoredBucket>()
 
   @VisibleForTesting
   internal lateinit var calendarDrawingParams: CalendarDrawingParams
@@ -67,8 +68,10 @@ internal class MonthView @JvmOverloads constructor(
   private var numberOfRows = DEFAULT_NUM_ROWS
   private var monthHeaderString = ""
 
-  private val defaultTextColor: Int = ContextCompat.getColor(context, R.color.bpkSkyGray)
-  private val disabledTextColor: Int = ContextCompat.getColor(context, R.color.bpkSkyGrayTint06)
+  private val defaultTextColor: Int = ContextCompat.getColor(context, R.color.bpkTextPrimary)
+  private val defaultTextColorLight: Int = ContextCompat.getColor(context, R.color.bpkTextPrimaryLight)
+  private val defaultTextColorDark: Int = ContextCompat.getColor(context, R.color.bpkTextPrimaryDark)
+  private val disabledTextColor: Int = ContextCompat.getColor(context, R.color.__calendarDisabledColour)
 
   private val miniDayNumberTextSize: Int = monthNumberFont.fontSize
   private val monthLabelTextSize: Int = monthLabelFont.fontSize
@@ -92,10 +95,10 @@ internal class MonthView @JvmOverloads constructor(
       ContextCompat.getColor(context, R.color.bpkSkyBlueShade02))
 
     selectedDaySameDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
-      ContextCompat.getColor(context, R.color.bpkSkyBlueTint02))
+      ContextCompat.getColor(context, R.color.__calendarSameDayBackground))
 
     rangeBackgroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
-      ContextCompat.getColor(context, R.color.bpkSkyBlueTint03))
+      ContextCompat.getColor(context, R.color.__calendarRangeBackground))
 
     selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor,
       ContextCompat.getColor(context, R.color.bpkWhite))
@@ -140,6 +143,12 @@ internal class MonthView @JvmOverloads constructor(
     isFakeBoldText = true
     isAntiAlias = true
     color = rangeBackgroundColor
+    style = Style.FILL
+  }
+
+  private val colouredBucketPaint = Paint().apply {
+    isAntiAlias = true
+    isFakeBoldText = true
     style = Style.FILL
   }
 
@@ -189,8 +198,12 @@ internal class MonthView @JvmOverloads constructor(
     // Allocate space for caching the day numbers and focus values
     today = -1
     calendarDrawingParams = params
-    coloredCirclePaints = params.toDrawingPaintMap(isSelectedColor = false)
-    coloredSelectedPaints = params.toDrawingPaintMap(isSelectedColor = true)
+    colouredParams.clear()
+    params.calendarColoring?.coloredBuckets?.forEach { bucket ->
+      bucket.days.forEach {
+        colouredParams[it] = bucket
+      }
+    }
 
     val localDate = LocalDate.of(params.year, params.month, 1)
     dayOfWeekStart = localDate.dayOfWeek.value
@@ -281,8 +294,8 @@ internal class MonthView @JvmOverloads constructor(
   ) {
     var overrideTextColor: Int? = null
 
+    val type = controller.selectedRange.getDrawType(calendarDay)
     if (!isOutOfRange) {
-      val type = controller.selectedRange.getDrawType(calendarDay)
       val startYBase = y - miniDayNumberTextSize / 3
       when (type) {
         CalendarRange.DrawType.SELECTED -> {
@@ -327,13 +340,14 @@ internal class MonthView @JvmOverloads constructor(
           drawEdgeCircles(canvas, calendarDay, controller.selectedRange, halfCellWidth, x, y)
         }
         CalendarRange.DrawType.NONE -> {
-          if (coloredCirclePaints.keys.contains(calendarDay)) {
+          if (colouredParams.containsKey(calendarDay)) {
+            colouredBucketPaint.color = colouredParams.get(calendarDay)?.color ?: Color.TRANSPARENT
             drawCircle(
               canvas,
               x,
               startYBase,
               selectedDayCircleRadius,
-              coloredCirclePaints.getValue(calendarDay)
+              colouredBucketPaint
             )
           }
         }
@@ -343,7 +357,13 @@ internal class MonthView @JvmOverloads constructor(
     monthNumberPaint.color = when {
       isOutOfRange -> disabledTextColor
       overrideTextColor != null -> overrideTextColor
-      else -> defaultTextColor
+      type == CalendarRange.DrawType.SELECTED -> defaultTextColor
+      type == CalendarRange.DrawType.RANGE -> defaultTextColor
+      else -> when (colouredParams[calendarDay]?.textStyle) {
+        ColoredBucket.TextStyle.Light -> defaultTextColorLight
+        ColoredBucket.TextStyle.Dark -> defaultTextColorDark
+        null -> defaultTextColor
+      }
     }
 
     drawText(canvas, String.format(controller.locale, "%d", calendarDay.dayOfMonth), x.toFloat(), y.toFloat(), monthNumberPaint)
@@ -480,23 +500,4 @@ internal class MonthView @JvmOverloads constructor(
 
     val DEFAULT_WEEK_START = DayOfWeek.MONDAY.value
   }
-}
-
-internal fun CalendarDrawingParams.toDrawingPaintMap(isSelectedColor: Boolean): Map<LocalDate, Paint> {
-  return mutableMapOf<LocalDate, Paint>().also { resultMap ->
-    this.calendarColoring?.coloredBuckets?.forEach { bucket ->
-      val bucketColor = if (isSelectedColor) bucket.selectedColor else bucket.color
-      if (bucketColor != null) {
-        val paint = Paint().apply {
-          isAntiAlias = true
-          isFakeBoldText = true
-          style = Style.FILL
-          color = bucketColor
-        }
-        bucket.days.forEach { day ->
-          resultMap[day] = paint
-        }
-      }
-    }
-  }.toMap()
 }

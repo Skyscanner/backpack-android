@@ -44,7 +44,7 @@ open class BpkSwitch @JvmOverloads constructor(
       val trackCheckedColor = ColorUtils.setAlphaComponent(checkedColor, CHECKED_TRACK_COLOR_ALPHA)
 
       trackTintList = getColorStateList(trackCheckedColor, ContextCompat.getColor(context, R.color.bpkSkyGrayTint06))
-      thumbTintList = getColorStateList(checkedColor, ContextCompat.getColor(context, R.color.bpkSkyGrayTint07))
+      thumbTintList = getColorStateList(checkedColor, ContextCompat.getColor(context, R.color.bpkBackgroundSecondary))
     }
   }
 

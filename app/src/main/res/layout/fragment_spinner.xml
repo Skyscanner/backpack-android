@@ -49,7 +49,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:padding="@dimen/bpkSpacingBase"
-      android:background="@color/bpkSkyGray">
+      android:background="@color/bpkTextPrimary">
 
       <net.skyscanner.backpack.spinner.BpkSpinner
         android:id="@+id/light_spinner"

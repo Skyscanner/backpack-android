@@ -2,8 +2,9 @@ package net.skyscanner.backpack.dialog.internal
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.PorterDuff
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
+import androidx.annotation.ColorRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
@@ -16,15 +17,15 @@ internal class BpkDialogIcon @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
+  private val size = resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_size)
+
   init {
-    val size = resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_size)
     minimumWidth = size
     minimumHeight = size
     maxWidth = size
     maxHeight = size
     scaleType = ScaleType.CENTER
     imageTintList = ColorStateList.valueOf(getColor(R.color.bpkWhite))
-    background = ContextCompat.getDrawable(this.context, R.drawable.bpk_dialog_bg_icon)
   }
 
   var icon: BpkDialog.Icon? = null
@@ -32,9 +33,16 @@ internal class BpkDialogIcon @JvmOverloads constructor(
       field = value
       if (value != null) {
         setImageDrawable(ContextCompat.getDrawable(context, value.drawableRes))
-        background.setColorFilter(
-          ContextCompat.getColor(context, value.colorRes),
-          PorterDuff.Mode.ADD)
+        background = createBackground(value.colorRes)
       }
     }
+
+  private fun createBackground(@ColorRes backgroundId: Int) = GradientDrawable().apply {
+    cornerRadius = size / 2f
+    color = ContextCompat.getColorStateList(context, backgroundId)
+    setStroke(
+      resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
+      ContextCompat.getColorStateList(context, R.color.__dialogBackground)
+    )
+  }
 }
