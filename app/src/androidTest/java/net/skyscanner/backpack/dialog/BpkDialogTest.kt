@@ -60,7 +60,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore
+  @Ignore("The scroll bar in the CI is generally different from the local version")
   fun screenshotTestDialogFullScreen() {
     val asyncScreenshot = prepareForAsyncTest()
 
