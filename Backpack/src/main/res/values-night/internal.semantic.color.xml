@@ -9,6 +9,6 @@
   <color name="__calendarRangeBackground">@color/bpkSkyBlueShade01</color>
   <color name="__calendarDisabledColour">@color/bpkSkyGrayTint02</color>
   <color name="__dialogBackground">@color/bpkBackgroundSecondaryDark</color>
-
+  <color name="__panelBorder">@color/bpkBlackTint02</color>
 
  </resources>
