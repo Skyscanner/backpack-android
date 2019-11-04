@@ -2,6 +2,28 @@
 
 > Place your changes below this line.
 
+**Breaking:**
+  - The library reacts to the Dark Mode now
+
+- **Added:**
+  - New semantic colours and the palette for the Dark Mode support
+  - Dark Mode support for icons
+  - Dark Mode support for `Badge`
+  - Dark Mode support for `Button`
+  - Dark Mode support for `ButtonLink`
+  - Dark Mode support for `Card`
+  - Dark Mode support for `Calendar`
+  - Dark Mode support for `Chip`
+  - Dark Mode support for `Dialog`
+  - Dark Mode support for `Flare`
+  - Dark Mode support for `PageTitle`
+  - Dark Mode support for `Panel`
+  - Dark Mode support for `Rating`
+  - Dark Mode support for `Snackbar`
+  - Dark Mode support for `Text`
+  - Dark Mode support for `TextField`
+  - Dark Mode support for `Toast`
+  
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
