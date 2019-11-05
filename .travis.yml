@@ -82,7 +82,6 @@ after_script:
 branches:
   only:
     - master
-    - Exp_Dark_Mode
     - /^greenkeeper/.*$/
     - /^[0-9]+\.[0-9]+\.[0-9]+$/
 
