@@ -62,10 +62,10 @@ open class BpkTextField @JvmOverloads constructor(
 
     var textColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint01)
     var hintNormalColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
-    var hintFocusedColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint02)
+    var hintFocusedColor = ContextCompat.getColor(context, R.color.bpkTextSecondary)
     var iconColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint01)
 
-    var background: Drawable = ColorDrawable(ContextCompat.getColor(context, R.color.bpkWhite))
+    var background: Drawable = ColorDrawable(ContextCompat.getColor(context, R.color.bpkBackground))
 
     context.theme.obtainStyledAttributes(
       attrs,

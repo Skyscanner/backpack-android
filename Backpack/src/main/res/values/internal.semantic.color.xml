@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <color name="__buttonDisabledBackground">@color/bpkSkyGrayTint06</color>
+  <color name="__buttonDisabledText">@color/bpkSkyGrayTint04</color>
+  <color name="__buttonSecondaryBackground">@color/bpkWhite</color>
+  <color name="__buttonSecondaryBorder">@color/bpkSkyGrayTint06</color>
+  <color name="__calendarSameDayBackground">@color/bpkSkyBlueTint02</color>
+  <color name="__calendarRangeBackground">@color/bpkSkyBlueTint03</color>
+  <color name="__calendarDisabledColour">@color/bpkSkyGrayTint06</color>
+  <color name="__dialogBackground">@color/bpkWhite</color>
+  <color name="__panelBorder">@color/bpkSkyGrayTint06</color>
+ </resources>

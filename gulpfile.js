@@ -19,6 +19,7 @@
 const path = require('path');
 
 const gulp = require('gulp');
+const merge = require('merge-stream');
 const nunjucks = require('gulp-nunjucks');
 const rename = require('gulp-rename');
 const del = require('del');
@@ -101,6 +102,13 @@ const convertToXml = (chunk, enc, cb) => {
       if (shouldAutoMirror(chunk)) {
         xmlDoc.documentElement.setAttribute('android:autoMirrored', 'true');
       }
+      const paths = xmlDoc.getElementsByTagName('path');
+      for (let i = 0; i < paths.length; i += 1) {
+        const item = paths.item(i);
+        if (item.getAttribute('android:fillColor') === '#000000') {
+          item.setAttribute('android:fillColor', '@color/bpkTextPrimary');
+        }
+      }
 
       const xmlContent = new xmldom.XMLSerializer().serializeToString(xmlDoc);
       chunk.contents = Buffer.from(xmlContent, 'utf-8'); // eslint-disable-line no-param-reassign
@@ -174,16 +182,20 @@ const getTextStyles = fontWeight => {
   return result;
 };
 
+const isSemanticColor = entity => entity.value && entity.darkValue;
+
 gulp.task('template:color', () => {
   const getColors = () =>
-    tokensWithType('color').map(color => {
-      const colorObject = JSON.parse(JSON.stringify(color));
-      colorObject.name = `bpk${pascalCase(
-        colorObject.name.replace(colorObject.type.toUpperCase(), ''),
-      )}`;
-      colorObject.value = tinycolor(colorObject.value).toHexString();
-      return colorObject;
-    });
+    tokensWithType('color')
+      .map(color => {
+        const colorObject = JSON.parse(JSON.stringify(color));
+        colorObject.name = `bpk${pascalCase(
+          colorObject.name.replace(colorObject.type.toUpperCase(), ''),
+        )}`;
+        colorObject.value = tinycolor(colorObject.value).toHexString();
+        return colorObject;
+      })
+      .filter(entry => !isSemanticColor(entry));
 
   return gulp
     .src(`${PATHS.templates}/BackpackColor.njk`)
@@ -194,6 +206,56 @@ gulp.task('template:color', () => {
     )
     .pipe(rename('values/backpack.color.xml'))
     .pipe(gulp.dest(PATHS.outputRes));
+});
+
+gulp.task('template:semanticColor', () => {
+  const getColors = () =>
+    tokensWithType('color').reduce(
+      (out, color) => {
+        const colorObject = JSON.parse(JSON.stringify(color));
+        colorObject.name = `bpk${pascalCase(
+          colorObject.name.replace(colorObject.type.toUpperCase(), ''),
+        )}`;
+
+        if (isSemanticColor(colorObject)) {
+          const light = {
+            ...colorObject,
+            value: tinycolor(colorObject.value).toHexString(),
+          };
+          out.light.push(light);
+          const dark = {
+            ...colorObject,
+            value: tinycolor(colorObject.darkValue).toHexString(),
+          };
+          out.dark.push(dark);
+        }
+        return out;
+      },
+      { light: [], dark: [] },
+    );
+  const colors = getColors();
+
+  const light = gulp
+    .src(`${PATHS.templates}/BackpackColor.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: colors.light,
+      }),
+    )
+    .pipe(rename('values/backpack.semantic.color.xml'))
+    .pipe(gulp.dest(PATHS.outputRes));
+
+  const dark = gulp
+    .src(`${PATHS.templates}/BackpackColor.njk`)
+    .pipe(
+      nunjucks.compile({
+        data: colors.dark,
+      }),
+    )
+    .pipe(rename('values-night/backpack.semantic.color.xml'))
+    .pipe(gulp.dest(PATHS.outputRes));
+
+  return merge(light, dark);
 });
 
 gulp.task('template:spacing', () => {
@@ -324,6 +386,7 @@ gulp.task(
     'template:animation',
     'template:borders',
     'template:color',
+    'template:semanticColor',
     'template:elevation',
     'template:icons',
     'template:radii',
