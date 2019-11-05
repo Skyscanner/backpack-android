@@ -2,6 +2,31 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 17.0.0
+
+**Breaking:**
+  - The library reacts to the Dark Mode now
+
+- **Added:**
+  - New semantic colours and the palette for the Dark Mode support
+  - Dark Mode support for icons
+  - Dark Mode support for `Badge`
+  - Dark Mode support for `Button`
+  - Dark Mode support for `ButtonLink`
+  - Dark Mode support for `Card`
+  - Dark Mode support for `Calendar`
+  - Dark Mode support for `Chip`
+  - Dark Mode support for `Dialog`
+  - Dark Mode support for `Flare`
+  - Dark Mode support for `PageTitle`
+  - Dark Mode support for `Panel`
+  - Dark Mode support for `Rating`
+  - Dark Mode support for `Snackbar`
+  - Dark Mode support for `Text`
+  - Dark Mode support for `TextField`
+  - Dark Mode support for `Toast`
+  
+
 # 16.0.1
 
 **Fixed:**
