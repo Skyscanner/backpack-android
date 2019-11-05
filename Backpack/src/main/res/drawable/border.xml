@@ -5,5 +5,5 @@
     <solid android:color="@color/bpkBackground" />
     <stroke
         android:width="1dip"
-        android:color="@color/bpkSkyGrayTint06" />
+        android:color="@color/__panelBorder" />
 </shape>

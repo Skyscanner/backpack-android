@@ -46,7 +46,7 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      *  Light themed style for badges
      */
-    Light(4, R.color.bpkBackgroundSecondary, R.color.bpkSkyGrayTint01),
+    Light(4, R.color.bpkSkyGrayTint07, R.color.bpkSkyGrayTint01),
     /**
      *  Style for badges on dark themes
      */
@@ -59,7 +59,7 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with a dark background
      */
-    Dark(7, R.color.bpkTextPrimary, R.color.bpkWhite);
+    Dark(7, R.color.bpkSkyGray, R.color.bpkWhite);
 
     internal companion object {
 
