@@ -15,8 +15,8 @@ git clone --single-branch https://github.com/Skyscanner/backpack-react-native
 cd backpack-react-native
 
 # Only react native is required to compile de Android code
-rn_version=$(node -p -e "require('./package.json').devDependencies['react-native']")
-npm install "react-native@$rn_version"
+nvm use
+npm install
 
 all_bridges=$(find packages -name "build.gradle" | grep -v node_modules | awk -F "/" '{print $2}')
 
