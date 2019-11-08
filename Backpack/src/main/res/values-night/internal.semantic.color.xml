@@ -12,4 +12,5 @@
   <color name="__panelBorder">@color/bpkBlackTint02</color>
   <color name="__switchTrackDisabled">@color/bpkBlackTint02</color>
   <color name="__switchThumbDisabled">@color/bpkBlackTint03</color>
+  <color name="__starRatingStarColor">@color/bpkBlackTint02</color>
  </resources>
