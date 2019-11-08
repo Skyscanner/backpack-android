@@ -30,27 +30,33 @@ open class BpkCheckbox @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var defaultColor = ContextCompat.getColor(context, R.color.bpkTextSecondary)
-    var checkedColor = BpkTheme.getPrimaryColor(context)
-    var disabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
+    var checkmarkDefaultColor = ContextCompat.getColor(context, R.color.bpkTextSecondary)
+    var checkmarkCheckedColor = BpkTheme.getPrimaryColor(context)
+    var checkmarkDisabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
+    val textDisabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
+    val textEnabledColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkCheckbox,
       defStyleAttr,
       0
     ).use {
-      defaultColor = it.getInt(R.styleable.BpkCheckbox_checkboxColor, defaultColor)
-      checkedColor = it.getInt(R.styleable.BpkCheckbox_checkboxColorChecked, checkedColor)
-      disabledColor = it.getInt(R.styleable.BpkCheckbox_checkboxColorDisabled, disabledColor)
+      checkmarkDefaultColor = it.getInt(R.styleable.BpkCheckbox_checkboxColor, checkmarkDefaultColor)
+      checkmarkCheckedColor = it.getInt(R.styleable.BpkCheckbox_checkboxColorChecked, checkmarkCheckedColor)
+      checkmarkDisabledColor = it.getInt(R.styleable.BpkCheckbox_checkboxColorDisabled, checkmarkDisabledColor)
     }
 
-    this.disabledTint = ColorStateList.valueOf(disabledColor)
+    this.disabledTint = ColorStateList.valueOf(checkmarkDisabledColor)
     this.enabledTint = ColorStateList(
       arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
-      intArrayOf(checkedColor, defaultColor)
+      intArrayOf(checkmarkCheckedColor, checkmarkDefaultColor)
     )
     updateTint()
     BpkText.getFont(context, BpkText.SM, BpkText.Weight.NORMAL).applyTo(this)
+    setTextColor(ColorStateList(
+      arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
+      intArrayOf(textDisabledColor, textEnabledColor)
+    ))
   }
 
   override fun setEnabled(enabled: Boolean) {

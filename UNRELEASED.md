@@ -2,6 +2,12 @@
 
 > Place your changes below this line.
 
+- **Breaking:**
+  - `Checkbox` text color cannot be set now via `android:textColor` attribute.
+  
+- **Added:**
+  - Dark Mode support for `Checkbox`
+  
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
