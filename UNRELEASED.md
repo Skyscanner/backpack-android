@@ -2,6 +2,9 @@
 
 > Place your changes below this line.
 
+- **Breaking:**
+  - `Checkbox` text color cannot be set now via `android:textColor` attribute.
+  
 - **Added:**
   - Dark Mode support for `Checkbox`
   

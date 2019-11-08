@@ -33,7 +33,7 @@ open class BpkCheckbox @JvmOverloads constructor(
     var checkmarkDefaultColor = ContextCompat.getColor(context, R.color.bpkTextSecondary)
     var checkmarkCheckedColor = BpkTheme.getPrimaryColor(context)
     var checkmarkDisabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
-    val textDisabledColor = ContextCompat.getColor(context, R.color.bpkTextTertiary)
+    val textDisabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
     val textEnabledColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(
       attrs,
