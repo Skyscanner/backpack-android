@@ -39,13 +39,19 @@ open class BpkSwitch @JvmOverloads constructor(
   }
 
   fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
+    val textDisabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
+    val textEnabledColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
-      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkSkyBlue))
+      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkPrimary))
       val trackCheckedColor = ColorUtils.setAlphaComponent(checkedColor, CHECKED_TRACK_COLOR_ALPHA)
 
-      trackTintList = getColorStateList(trackCheckedColor, ContextCompat.getColor(context, R.color.bpkSkyGrayTint06))
-      thumbTintList = getColorStateList(checkedColor, ContextCompat.getColor(context, R.color.bpkBackgroundSecondary))
+      trackTintList = getColorStateList(trackCheckedColor, ContextCompat.getColor(context, R.color.__switchTrackDisabled))
+      thumbTintList = getColorStateList(checkedColor, ContextCompat.getColor(context, R.color.__switchThumbDisabled))
     }
+    setTextColor(ColorStateList(
+      arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
+      intArrayOf(textDisabledColor, textEnabledColor)
+    ))
   }
 
   private fun getColorStateList(checkedColor: Int, uncheckedColor: Int) =
