@@ -10,5 +10,6 @@
   <color name="__calendarDisabledColour">@color/bpkSkyGrayTint02</color>
   <color name="__dialogBackground">@color/bpkBackgroundSecondaryDark</color>
   <color name="__panelBorder">@color/bpkBlackTint02</color>
-
+  <color name="__switchTrackDisabled">@color/bpkBlackTint02</color>
+  <color name="__switchThumbDisabled">@color/bpkBlackTint03</color>
  </resources>

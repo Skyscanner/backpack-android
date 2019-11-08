@@ -4,9 +4,11 @@
 
 - **Breaking:**
   - `Checkbox` text color cannot be set now via `android:textColor` attribute.
+  - `Switch` text color cannot be set now via `android:textColor` attribute.
   
 - **Added:**
   - Dark Mode support for `Checkbox`
+  - Dark Mode support for `Switch`
   
 ## How to write a good changelog entry
 
