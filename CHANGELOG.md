@@ -2,6 +2,21 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 18.0.0
+
+- **Breaking:**
+  - `Checkbox` text color cannot be set now via `android:textColor` attribute.
+  - `Switch` text color cannot be set now via `android:textColor` attribute.
+  
+- **Added:**
+  - Dark Mode support for `Checkbox`
+  - Dark Mode support for `Switch`
+  - Dark Mode support for `StarRating`
+  - Dark Mode support for `InteractiveStarRating`
+  - Dark Mode support for `HorizontalNav`
+  - Disabled state support for `Checkbox`
+  - Semantic color support for `bpkPrimaryColor`
+  
 # 17.0.0
 
 **Breaking:**
