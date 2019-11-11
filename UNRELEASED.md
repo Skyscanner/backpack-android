@@ -9,6 +9,8 @@
 - **Added:**
   - Dark Mode support for `Checkbox`
   - Dark Mode support for `Switch`
+  - Dark Mode support for `StarRating`
+  - Dark Mode support for `InteractiveStarRating`
   
 ## How to write a good changelog entry
 
