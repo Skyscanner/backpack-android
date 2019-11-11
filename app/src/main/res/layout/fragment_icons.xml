@@ -86,7 +86,7 @@
     android:layout_height="wrap_content">
     <ImageView
       android:layout_width="wrap_content"
-      android:tint="@color/bpkSkyBlue"
+      android:tint="@color/bpkPrimary"
       app:srcCompat="@drawable/bpk_flight"
       android:padding="@dimen/bpkSpacingMd"
       android:layout_height="wrap_content"/>

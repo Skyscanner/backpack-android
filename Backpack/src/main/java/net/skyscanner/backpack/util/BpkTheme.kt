@@ -21,7 +21,7 @@ class BpkTheme {
      * The primary color can set via theming via the `bpkPrimaryColor` attribute.
      *
      * The attribute is expected to be either a color or a color reference.
-     * In case the attribute is not found the default [R.color.bpkSkyBlue]
+     * In case the attribute is not found the default [R.color.bpkPrimary]
      * will be returned.
      *
      * @param context the current ui context.

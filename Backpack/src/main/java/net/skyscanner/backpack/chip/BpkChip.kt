@@ -29,7 +29,7 @@ open class BpkChip @JvmOverloads constructor(
       updateBackground()
     }
 
-  var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkSkyBlue)
+  var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkPrimary)
     set(value) {
       field = value
       updateBackground()
