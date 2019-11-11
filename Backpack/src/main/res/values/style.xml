@@ -2,7 +2,7 @@
 <resources>
 
   <style name="BpkDefaultTheme">
-    <item name="bpkPrimaryColor">@color/bpkSkyBlue</item>
+    <item name="bpkPrimaryColor">@color/bpkPrimary</item>
 
     <!--  Move relative to backpack and update to relative  -->
     <item name="bpkFontFamilyBase">sans-serif</item>
