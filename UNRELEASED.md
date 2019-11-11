@@ -11,6 +11,7 @@
   - Dark Mode support for `Switch`
   - Dark Mode support for `StarRating`
   - Dark Mode support for `InteractiveStarRating`
+  - Dark Mode support for `HorizontalNav`
   
 ## How to write a good changelog entry
 

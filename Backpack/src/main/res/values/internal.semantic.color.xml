@@ -13,4 +13,5 @@
   <color name="__switchTrackDisabled">@color/bpkSkyGrayTint06</color>
   <color name="__switchThumbDisabled">@color/bpkSkyGrayTint07</color>
   <color name="__starRatingStarColor">@color/bpkSkyGrayTint06</color>
+  <color name="__horizontalNavTextDefault">@color/bpkSkyGrayTint01</color>
  </resources>
