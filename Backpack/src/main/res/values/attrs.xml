@@ -200,6 +200,7 @@
       <enum name="back" value="1" />
       <enum name="close" value="2" />
     </attr>
+    <attr name="pageTitleMenu" format="reference" />
   </declare-styleable>
 
   <attr name="bpkThemeOverlay" format="reference" />

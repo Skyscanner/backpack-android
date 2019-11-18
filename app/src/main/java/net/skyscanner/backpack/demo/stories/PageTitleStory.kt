@@ -5,6 +5,7 @@ import android.view.View
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.LockableNestedScrollView
 import net.skyscanner.backpack.pagetitle.BpkPageTitle
+import net.skyscanner.backpack.toast.BpkToast
 
 class PageTitleStory : Story() {
 
@@ -13,10 +14,17 @@ class PageTitleStory : Story() {
     activity!!.findViewById<LockableNestedScrollView>(R.id.component_detail_container).apply {
       scrollingEnabled = false
     }
-    view.findViewById<BpkPageTitle>(R.id.appBar).title = if (view.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+    val pageTitle = view.findViewById<BpkPageTitle>(R.id.appBar)
+    pageTitle.title = if (view.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
       "عنوان الصفحة"
     } else {
       "Page Title"
+    }
+    pageTitle.navAction = {
+      BpkToast.makeText(requireContext(), "Nav is clicked!", BpkToast.LENGTH_SHORT).show()
+    }
+    pageTitle.menuAction = {
+      BpkToast.makeText(requireContext(), "${it.itemId.let(resources::getResourceEntryName)} is clicked!", BpkToast.LENGTH_SHORT).show()
     }
   }
 

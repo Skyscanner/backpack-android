@@ -3,6 +3,7 @@ package net.skyscanner.backpack.pagetitle
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
+import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.annotation.*
 import androidx.appcompat.view.ContextThemeWrapper
@@ -74,6 +75,24 @@ class BpkPageTitle @JvmOverloads constructor(
       toolbar.setNavigationOnClickListener { value.invoke() }
     }
 
+  @get:MenuRes
+  var menu: Int = 0
+    set(@MenuRes value) {
+      if (field != value) {
+        field = value
+        toolbar.inflateMenu(value)
+      }
+    }
+
+  var menuAction: (MenuItem) -> Unit = {}
+    set(value) {
+      field = value
+      toolbar.setOnMenuItemClickListener {
+        value.invoke(it)
+        return@setOnMenuItemClickListener true
+      }
+    }
+
   init {
     var toolbarStyle = resolveThemeId(this.context, R.attr.toolbarStyle)
     var backgroundColor = ContextCompat.getColor(this.context, R.color.bpkBackground)
@@ -81,6 +100,7 @@ class BpkPageTitle @JvmOverloads constructor(
     var collapsedTextColor = collapsedTitleColor
     var title: CharSequence? = null
     var navMode = NavMode.None
+    var menu: Int = 0
 
     this.context.theme.obtainStyledAttributes(
       attrs,
@@ -93,6 +113,7 @@ class BpkPageTitle @JvmOverloads constructor(
       collapsedTextColor = it.getColor(R.styleable.BpkPageTitle_pageTitleCollapsedTextColor, collapsedTextColor)
       title = it.getString(R.styleable.BpkPageTitle_pageTitleText)
       navMode = it.getInt(R.styleable.BpkPageTitle_pageTitleNavMode, navMode.xmlId).let(::mapXmlToNavMode)
+      menu = it.getResourceId(R.styleable.BpkPageTitle_pageTitleMenu, menu)
     }
 
     this.toolbar = Toolbar(ContextThemeWrapper(this.context, toolbarStyle))
@@ -106,6 +127,7 @@ class BpkPageTitle @JvmOverloads constructor(
     this.title = title
     this.navMode = navMode
     this.navAction = navAction
+    this.menu = menu
   }
 
   private fun setupCollapsingLayout() {
