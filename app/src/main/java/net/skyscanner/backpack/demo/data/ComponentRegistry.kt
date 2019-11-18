@@ -121,7 +121,11 @@ object ComponentRegistry {
     "Page Title" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { PageTitleStory of R.layout.fragment_page_title },
-        "RTL" story NodeData { PageTitleStory of R.layout.fragment_page_title with Direction.RTL }
+        "RTL" story NodeData { PageTitleStory of R.layout.fragment_page_title with Direction.RTL },
+        "With Nav Back" story NodeData { PageTitleStory of R.layout.fragment_page_title_with_nav_back },
+        "With Nav Back RTL" story NodeData { PageTitleStory of R.layout.fragment_page_title_with_nav_back with Direction.RTL },
+        "With Nav Close" story NodeData { PageTitleStory of R.layout.fragment_page_title_with_nav_close },
+        "With Nav Close RTL" story NodeData { PageTitleStory of R.layout.fragment_page_title_with_nav_close with Direction.RTL }
       )),
     "Panel" story NodeData { Story of R.layout.fragment_panel },
     "Rating" story NodeData({ children -> SubStory of children },

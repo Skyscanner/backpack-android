@@ -195,6 +195,11 @@
     <attr name="pageTitleCollapsedTextColor" format="color" />
     <attr name="pageTitleToolbarStyle" format="reference" />
     <attr name="pageTitleText" format="string" />
+    <attr name="pageTitleNavMode" format="enum">
+      <enum name="none" value="0" />
+      <enum name="back" value="1" />
+      <enum name="close" value="2" />
+    </attr>
   </declare-styleable>
 
   <attr name="bpkThemeOverlay" format="reference" />

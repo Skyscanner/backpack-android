@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -25,6 +26,12 @@ class BpkPageTitle @JvmOverloads constructor(
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
 ) : AppBarLayout(createContextThemeWrapper(context, attrs, R.attr.bpkPageTitleStyle), attrs) {
+
+  enum class NavMode {
+    None,
+    Back,
+    Close
+  }
 
   private val collapsingLayout = CollapsingToolbarLayout(this.context)
 
@@ -52,12 +59,27 @@ class BpkPageTitle @JvmOverloads constructor(
       collapsingLayout.title = value
     }
 
+  var navMode: NavMode = NavMode.None
+    set(value) {
+      if (field != value) {
+        field = value
+        toolbar.setNavigationIcon(field.drawableRes)
+      }
+    }
+
+  var navAction: () -> Unit = {}
+    set(value) {
+      field = value
+      toolbar.setNavigationOnClickListener { value.invoke() }
+    }
+
   init {
     var toolbarStyle = this.context.theme.resolveId(R.attr.toolbarStyle)
     var backgroundColor = ContextCompat.getColor(this.context, R.color.bpkBackground)
     var expandedTitleColor = expandedTitleColor
     var collapsedTextColor = collapsedTitleColor
     var title: CharSequence? = null
+    var navMode = NavMode.None
 
     this.context.theme.obtainStyledAttributes(
       attrs,
@@ -69,6 +91,7 @@ class BpkPageTitle @JvmOverloads constructor(
       expandedTitleColor = it.getColor(R.styleable.BpkPageTitle_pageTitleExpandedTextColor, expandedTitleColor)
       collapsedTextColor = it.getColor(R.styleable.BpkPageTitle_pageTitleCollapsedTextColor, collapsedTextColor)
       title = it.getString(R.styleable.BpkPageTitle_pageTitleText)
+      navMode = it.getInt(R.styleable.BpkPageTitle_pageTitleNavMode, navMode.xmlId).let(::mapXmlToNavMode)
     }
 
     this.toolbar = Toolbar(ContextThemeWrapper(this.context, toolbarStyle))
@@ -80,6 +103,8 @@ class BpkPageTitle @JvmOverloads constructor(
     this.collapsedTitleColor = collapsedTextColor
     this.background = ColorDrawable(backgroundColor)
     this.title = title
+    this.navMode = navMode
+    this.navAction = navAction
   }
 
   private fun setupCollapsingLayout() {
@@ -138,6 +163,24 @@ class BpkPageTitle @JvmOverloads constructor(
       }
       return resources.getDimensionPixelSize(fallback)
     }
+
+    private val NavMode.xmlId
+      get() = when (this) {
+        NavMode.None -> 0
+        NavMode.Back -> 1
+        NavMode.Close -> 2
+      }
+
+    @get:DrawableRes
+    private val NavMode.drawableRes
+      get() = when (this) {
+        NavMode.None -> 0
+        NavMode.Back -> R.drawable.bpk_native_android__back
+        NavMode.Close -> R.drawable.bpk_native_android__close
+      }
+
+    private fun mapXmlToNavMode(id: Int) =
+      NavMode.values().find { it.xmlId == id }!!
 
     private val COLLAPSING_LAYOUT_PARAMS = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT).apply {
       scrollFlags = LayoutParams.SCROLL_FLAG_SCROLL or LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
