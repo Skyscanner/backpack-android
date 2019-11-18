@@ -1,24 +1,25 @@
 package net.skyscanner.backpack.pagetitle
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.ViewGroup
-import androidx.annotation.AttrRes
-import androidx.annotation.ColorInt
-import androidx.annotation.DimenRes
-import androidx.annotation.DrawableRes
+import androidx.annotation.*
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.pagetitle.internal.PAGE_TITLE_COLLAPSING_LAYOUT_PARAMS
+import net.skyscanner.backpack.pagetitle.internal.drawableRes
+import net.skyscanner.backpack.pagetitle.internal.mapXmlToNavMode
+import net.skyscanner.backpack.pagetitle.internal.xmlId
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.text.internal.FontFamilyResolver
 import net.skyscanner.backpack.util.createContextThemeWrapper
+import net.skyscanner.backpack.util.resolveThemeDimen
+import net.skyscanner.backpack.util.resolveThemeId
 import net.skyscanner.backpack.util.use
 
 class BpkPageTitle @JvmOverloads constructor(
@@ -74,7 +75,7 @@ class BpkPageTitle @JvmOverloads constructor(
     }
 
   init {
-    var toolbarStyle = this.context.theme.resolveId(R.attr.toolbarStyle)
+    var toolbarStyle = resolveThemeId(this.context, R.attr.toolbarStyle)
     var backgroundColor = ContextCompat.getColor(this.context, R.color.bpkBackground)
     var expandedTitleColor = expandedTitleColor
     var collapsedTextColor = collapsedTitleColor
@@ -109,20 +110,20 @@ class BpkPageTitle @JvmOverloads constructor(
 
   private fun setupCollapsingLayout() {
     collapsingLayout.also {
-      it.setExpandedTitleTextAppearance(context.theme.resolveId(R.attr.bpkTextXxxlHeavyAppearance))
+      it.setExpandedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextXxxlHeavyAppearance))
       it.setExpandedTitleTypeface(FontFamilyResolver.invoke(it.context, BpkText.Weight.HEAVY))
 
-      it.setCollapsedTitleTextAppearance(context.theme.resolveId(R.attr.bpkTextBaseEmphasizedAppearance))
+      it.setCollapsedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextBaseEmphasizedAppearance))
       it.setCollapsedTitleTypeface(FontFamilyResolver.invoke(it.context, BpkText.Weight.EMPHASIZED))
 
-      it.expandedTitleMarginStart = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_horizontal)
-      it.expandedTitleMarginEnd = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_horizontal)
+      it.expandedTitleMarginStart = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_start)
+      it.expandedTitleMarginEnd = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_end)
       it.expandedTitleMarginTop = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_top)
       it.expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_bottom)
 
       it.setScrimsShown(false)
 
-      addView(it, COLLAPSING_LAYOUT_PARAMS)
+      addView(it, PAGE_TITLE_COLLAPSING_LAYOUT_PARAMS)
     }
   }
 
@@ -138,52 +139,11 @@ class BpkPageTitle @JvmOverloads constructor(
   private fun setupToolbar() {
     toolbar.background = null
 
-    val toolbarHeight = context.theme.resolveDimen(android.R.attr.actionBarSize, R.dimen.bpk_page_title_toolbar_height)
+    val toolbarHeight = resolveThemeDimen(context, android.R.attr.actionBarSize, R.dimen.bpk_page_title_toolbar_height)
     val params = CollapsingToolbarLayout.LayoutParams(LayoutParams.MATCH_PARENT, toolbarHeight).apply {
       collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
     }
 
     collapsingLayout.addView(toolbar, params)
-  }
-
-  private companion object {
-
-    private fun Resources.Theme.resolveId(@AttrRes id: Int, fallback: Int = 0): Int {
-      val tv = TypedValue()
-      if (resolveAttribute(id, tv, true)) {
-        return tv.resourceId
-      }
-      return fallback
-    }
-
-    private fun Resources.Theme.resolveDimen(@AttrRes id: Int, @DimenRes fallback: Int = 0): Int {
-      val tv = TypedValue()
-      if (resolveAttribute(id, tv, true)) {
-        return TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics)
-      }
-      return resources.getDimensionPixelSize(fallback)
-    }
-
-    private val NavMode.xmlId
-      get() = when (this) {
-        NavMode.None -> 0
-        NavMode.Back -> 1
-        NavMode.Close -> 2
-      }
-
-    @get:DrawableRes
-    private val NavMode.drawableRes
-      get() = when (this) {
-        NavMode.None -> 0
-        NavMode.Back -> R.drawable.bpk_native_android__back
-        NavMode.Close -> R.drawable.bpk_native_android__close
-      }
-
-    private fun mapXmlToNavMode(id: Int) =
-      NavMode.values().find { it.xmlId == id }!!
-
-    private val COLLAPSING_LAYOUT_PARAMS = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT).apply {
-      scrollFlags = LayoutParams.SCROLL_FLAG_SCROLL or LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
-    }
   }
 }
