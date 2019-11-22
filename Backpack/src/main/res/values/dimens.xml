@@ -10,13 +10,13 @@
   <dimen name="bpk_horizontal_nav_size_normal">36dp</dimen>
   <dimen name="bpk_rating_score_badge_size_small">36dp</dimen>
   <dimen name="bpk_rating_score_badge_size_large">48dp</dimen>
-  <dimen name="bpk_page_title_toolbar_height">48dp</dimen>
-  <dimen name="bpk_page_title_expanded_spacing_horizontal_large">72dp</dimen>
-  <dimen name="bpk_page_title_expanded_spacing_horizontal_small">@dimen/bpkSpacingLg</dimen>
-  <dimen name="bpk_page_title_expanded_spacing_top">@dimen/bpkSpacingXxl</dimen>
-  <dimen name="bpk_page_title_expanded_spacing_bottom">@dimen/bpkSpacingLg</dimen>
+  <dimen name="bpk_nav_bar_toolbar_height">48dp</dimen>
+  <dimen name="bpk_nav_bar_expanded_spacing_horizontal_large">72dp</dimen>
+  <dimen name="bpk_nav_bar_expanded_spacing_horizontal_small">@dimen/bpkSpacingLg</dimen>
+  <dimen name="bpk_nav_bar_expanded_spacing_top">@dimen/bpkSpacingXxl</dimen>
+  <dimen name="bpk_nav_bar_expanded_spacing_bottom">@dimen/bpkSpacingLg</dimen>
   <!--spacing_top(40) + spacing_bottom(16) + text_size(36) -->
-  <dimen name="bpk_page_title_min_height">92dp</dimen>
+  <dimen name="bpk_nav_bar_min_height">92dp</dimen>
 
   <!-- TODO: change to values build by task from tokens  -->
   <dimen name="bpk_dialog_padding_horizontal">@dimen/bpkSpacingXl</dimen>

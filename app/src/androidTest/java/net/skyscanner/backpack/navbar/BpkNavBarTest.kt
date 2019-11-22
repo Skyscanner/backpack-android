@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.pagetitle
+package net.skyscanner.backpack.navbar
 
 import android.app.Activity
 import android.view.View
@@ -17,7 +17,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkPageTitleTest : BpkSnapshotTest() {
+class BpkNavBarTest : BpkSnapshotTest() {
 
   private lateinit var activity: AppCompatActivity
 
@@ -32,7 +32,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotPageTitle_default() {
+  fun screenshotNavBar_default() {
     activity.init()
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
@@ -42,7 +42,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotPageTitle_collapsed() {
+  fun screenshotNavBar_collapsed() {
     activity.init()
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
@@ -53,7 +53,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotPageTitle_expanded() {
+  fun screenshotNavBar_expanded() {
     activity.init()
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
@@ -64,7 +64,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotPageTitle_default_rtl() {
+  fun screenshotNavBar_default_rtl() {
     activity.init(rtl = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
@@ -74,7 +74,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotPageTitle_collapsed_rtl() {
+  fun screenshotNavBar_collapsed_rtl() {
     activity.init(rtl = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
@@ -85,7 +85,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotPageTitle_expanded_rtl() {
+  fun screenshotNavBar_expanded_rtl() {
     activity.init(rtl = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
@@ -96,7 +96,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotPageTitle_default_themed() {
+  fun screenshotNavBar_default_themed() {
     activity.init(theme = R.style.LondonTheme)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
@@ -106,7 +106,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotPageTitle_collapsed_themed() {
+  fun screenshotNavBar_collapsed_themed() {
     activity.init(theme = R.style.LondonTheme)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
@@ -117,7 +117,7 @@ class BpkPageTitleTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotPageTitle_expanded_themed() {
+  fun screenshotNavBar_expanded_themed() {
     activity.init(theme = R.style.LondonTheme)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
@@ -135,12 +135,12 @@ class BpkPageTitleTest : BpkSnapshotTest() {
       if (theme != 0) {
         setTheme(theme)
       }
-      setContentView(R.layout.fragment_page_title)
+      setContentView(R.layout.fragment_nav_bar)
       if (!rtl) {
-        findViewById<BpkPageTitle>(R.id.appBar).title = "Page Title"
+        findViewById<BpkNavBar>(R.id.appBar).title = "Nav Bar"
       } else {
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-        findViewById<BpkPageTitle>(R.id.appBar).title = "عنوان الصفحة"
+        findViewById<BpkNavBar>(R.id.appBar).title = "عنوان الصفحة"
       }
     }
   }
