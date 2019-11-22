@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.pagetitle.internal.*
 import net.skyscanner.backpack.pagetitle.internal.PAGE_TITLE_COLLAPSING_LAYOUT_PARAMS
 import net.skyscanner.backpack.pagetitle.internal.drawableRes
 import net.skyscanner.backpack.pagetitle.internal.mapXmlToNavMode
@@ -27,7 +28,7 @@ class BpkPageTitle @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : AppBarLayout(createContextThemeWrapper(context, attrs, R.attr.bpkPageTitleStyle), attrs) {
+) : AppBarLayout(context, attrs) {
 
   enum class NavMode {
     None,
@@ -66,6 +67,11 @@ class BpkPageTitle @JvmOverloads constructor(
       if (field != value) {
         field = value
         toolbar.setNavigationIcon(field.drawableRes)
+        collapsingLayout.expandedTitleMarginStart = resources.getDimensionPixelSize(when (field) {
+          NavMode.None -> R.dimen.bpk_page_title_expanded_spacing_horizontal_small
+          NavMode.Back -> R.dimen.bpk_page_title_expanded_spacing_horizontal_large
+          NavMode.Close -> R.dimen.bpk_page_title_expanded_spacing_horizontal_large
+        })
       }
     }
 
@@ -102,7 +108,7 @@ class BpkPageTitle @JvmOverloads constructor(
     var navMode = NavMode.None
     var menu: Int = 0
 
-    this.context.theme.obtainStyledAttributes(
+    createContextThemeWrapper(context, attrs, R.attr.bpkPageTitleStyle).theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkPageTitle,
       defStyleAttr, 0
@@ -116,7 +122,7 @@ class BpkPageTitle @JvmOverloads constructor(
       menu = it.getResourceId(R.styleable.BpkPageTitle_pageTitleMenu, menu)
     }
 
-    this.toolbar = Toolbar(ContextThemeWrapper(this.context, toolbarStyle))
+    this.toolbar = BpkToolbar(ContextThemeWrapper(this.context, toolbarStyle))
     setupToolbar()
 
     setupCollapsingLayout()
@@ -138,8 +144,8 @@ class BpkPageTitle @JvmOverloads constructor(
       it.setCollapsedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextBaseEmphasizedAppearance))
       it.setCollapsedTitleTypeface(FontFamilyResolver.invoke(it.context, BpkText.Weight.EMPHASIZED))
 
-      it.expandedTitleMarginStart = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_start)
-      it.expandedTitleMarginEnd = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_end)
+      it.expandedTitleMarginStart = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_horizontal_small)
+      it.expandedTitleMarginEnd = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_horizontal_small)
       it.expandedTitleMarginTop = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_top)
       it.expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_page_title_expanded_spacing_bottom)
 

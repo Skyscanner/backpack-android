@@ -11,8 +11,8 @@
   <dimen name="bpk_rating_score_badge_size_small">36dp</dimen>
   <dimen name="bpk_rating_score_badge_size_large">48dp</dimen>
   <dimen name="bpk_page_title_toolbar_height">48dp</dimen>
-  <dimen name="bpk_page_title_expanded_spacing_start">72dp</dimen>
-  <dimen name="bpk_page_title_expanded_spacing_end">@dimen/bpkSpacingLg</dimen>
+  <dimen name="bpk_page_title_expanded_spacing_horizontal_large">72dp</dimen>
+  <dimen name="bpk_page_title_expanded_spacing_horizontal_small">@dimen/bpkSpacingLg</dimen>
   <dimen name="bpk_page_title_expanded_spacing_top">@dimen/bpkSpacingXxl</dimen>
   <dimen name="bpk_page_title_expanded_spacing_bottom">@dimen/bpkSpacingLg</dimen>
   <!--spacing_top(40) + spacing_bottom(16) + text_size(36) -->
