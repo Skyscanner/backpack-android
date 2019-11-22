@@ -127,8 +127,186 @@ class BpkNavBarTest : BpkSnapshotTest() {
       }
   }
 
+  @Test
+  fun screenshotNavBar_collapsed_icon() {
+    activity.init(icon = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeUp())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_expanded_icon() {
+    activity.init(icon = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeDown())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_collapsed_icon_rtl() {
+    activity.init(icon = true, rtl = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeUp())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_expanded_icon_trl() {
+    activity.init(icon = true, rtl = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeDown())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_collapsed_menu() {
+    activity.init(menu = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeUp())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_expanded_menu() {
+    activity.init(menu = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeDown())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_collapsed_menu_rtl() {
+    activity.init(menu = true, rtl = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeUp())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_expanded_menu_rtl() {
+    activity.init(menu = true, rtl = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeDown())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_collapsed_iconAndMenu() {
+    activity.init(icon = true, menu = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeUp())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_expanded_iconAndMenu() {
+    activity.init(icon = true, menu = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeDown())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_collapsed_withIconAndMenu_rtl() {
+    activity.init(icon = true, menu = true, rtl = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeUp())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_expanded_withIconAndMenu_rtl() {
+    activity.init(icon = true, menu = true, rtl = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeDown())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_collapsed_themed_withIconAndMenu() {
+    activity.init(theme = R.style.LondonTheme, icon = true, menu = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeUp())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_expanded_themed_withIconAndMenu() {
+    activity.init(theme = R.style.LondonTheme, icon = true, menu = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeDown())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_collapsed_themed_withIconAndMenu_rtl() {
+    activity.init(theme = R.style.LondonTheme, icon = true, menu = true, rtl = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeUp())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
+  @Test
+  fun screenshotNavBar_expanded_themed_withIconAndMenu_rtl() {
+    activity.init(theme = R.style.LondonTheme, icon = true, menu = true, rtl = true)
+    val asyncSnapshot = prepareForAsyncTest()
+    onView(ViewMatchers.withId(R.id.appBar))
+      .perform(ViewActions.swipeDown())
+      .check { v, _ ->
+        asyncSnapshot.record(v)
+      }
+  }
+
   private fun Activity.init(
     @StyleRes theme: Int = 0,
+    icon: Boolean = false,
+    menu: Boolean = false,
     rtl: Boolean = false
   ) {
     runOnUiThread {
@@ -136,11 +314,23 @@ class BpkNavBarTest : BpkSnapshotTest() {
         setTheme(theme)
       }
       setContentView(R.layout.fragment_nav_bar)
+      val navBar = findViewById<BpkNavBar>(R.id.appBar)
       if (!rtl) {
-        findViewById<BpkNavBar>(R.id.appBar).title = "Nav Bar"
+        navBar.title = "Nav Bar"
       } else {
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
-        findViewById<BpkNavBar>(R.id.appBar).title = "عنوان الصفحة"
+        navBar.title = "عنوان الصفحة"
+      }
+
+      if (icon) {
+        navBar.icon = getDrawable(R.drawable.bpk_native_android__back)
+      } else {
+        navBar.icon = null
+      }
+      if (menu) {
+        navBar.menu = R.menu.settings
+      } else {
+        navBar.menu = 0
       }
     }
   }

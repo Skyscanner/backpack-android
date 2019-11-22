@@ -59,11 +59,11 @@ class BpkNavBar @JvmOverloads constructor(
       collapsingLayout.title = value
     }
 
-  var navIcon: Drawable? = null
+  var icon: Drawable? = null
     set(value) {
       if (field != value) {
         field = value
-        toolbar.navigationIcon = field
+        toolbar.navigationIcon = value
         collapsingLayout.expandedTitleMarginStart = resources.getDimensionPixelSize(when (field) {
           null -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small
           else -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_large
@@ -74,7 +74,7 @@ class BpkNavBar @JvmOverloads constructor(
   var navAction: () -> Unit = {}
     set(value) {
       field = value
-      toolbar.setNavigationOnClickListener { value.invoke() }
+      toolbar.setNavigationOnClickListener { field.invoke() }
     }
 
   @get:MenuRes
@@ -82,7 +82,10 @@ class BpkNavBar @JvmOverloads constructor(
     set(@MenuRes value) {
       if (field != value) {
         field = value
-        toolbar.inflateMenu(value)
+        toolbar.menu.clear()
+        if (value != 0) {
+          toolbar.inflateMenu(value)
+        }
       }
     }
 
@@ -118,7 +121,7 @@ class BpkNavBar @JvmOverloads constructor(
     this.collapsedTitleColor = collapsedTextColor
     this.background = ColorDrawable(ContextCompat.getColor(context, R.color.bpkBackground))
     this.title = title
-    this.navIcon = navIcon
+    this.icon = navIcon
     this.navAction = navAction
     this.menu = menu
   }
