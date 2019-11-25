@@ -1,10 +1,6 @@
 # Unreleased
 
 > Place your changes below this line.
-
-**Fixed:**
-
-- Updated `bpk_cars`, `bpk_flights` and `bpk_hotels` icons.
   
 ## How to write a good changelog entry
 
