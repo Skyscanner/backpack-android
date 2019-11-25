@@ -7,6 +7,7 @@
   
 - **Added:**
   - `BpkNavBar`
+    * Menu and nav icon support.
   
 ## How to write a good changelog entry
 
