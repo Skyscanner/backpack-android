@@ -23,7 +23,7 @@
     <item name="bpkHorizontalNavStyle">@style/LondonThemeHorizontalNav</item>
     <item name="bpkHorizontalNavStyleAlternate">@style/LondonThemeHorizontalNavAlternate</item>
     <item name="bpkSnackbarStyle">@style/LondonThemeSnackbar</item>
-    <item name="bpkPageTitleStyle">@style/LondonThemePageTitle</item>
+    <item name="bpkNavBarStyle">@style/LondonThemeNavBar</item>
 
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
 
@@ -138,9 +138,8 @@
     <item name="snackbarBackgroundColor">#00254B</item>
   </style>
 
-  <style name="LondonThemePageTitle">
-    <item name="pageTitleBackgroundColor">#00254B</item>
-    <item name="pageTitleCollapsedTextColor">#6392ce</item>
+  <style name="LondonThemeNavBar">
+    <item name="navBarCollapsedTextColor">#6392ce</item>
   </style>
   <!-- London theme end -->
 
@@ -169,7 +168,7 @@
     <item name="bpkHorizontalNavStyle">@style/DohaThemeHorizontalNav</item>
     <item name="bpkHorizontalNavStyleAlternate">@style/DohaThemeHorizontalNavAlternate</item>
     <item name="bpkSnackbarStyle">@style/DohaThemeSnackbar</item>
-    <item name="bpkPageTitleStyle">@style/DohaThemePageTitle</item>
+    <item name="bpkNavBarStyle">@style/DohaThemeNavBar</item>
     <item name="bpkBadgeStyle">@style/DohaThemeBadge</item>
   </style>
 
@@ -259,9 +258,8 @@
     <item name="snackbarBackgroundColor">#ffa000</item>
   </style>
 
-  <style name="DohaThemePageTitle">
-    <item name="pageTitleBackgroundColor">#ffa000</item>
-    <item name="pageTitleCollapsedTextColor">#ffd677</item>
+  <style name="DohaThemeNavBar">
+    <item name="navBarCollapsedTextColor">#ffd677</item>
   </style>
 
   <style name="DohaThemeBadge">
