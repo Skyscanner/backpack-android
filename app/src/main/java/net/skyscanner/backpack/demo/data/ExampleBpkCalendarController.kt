@@ -14,13 +14,15 @@ import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
+import org.threeten.bp.DayOfWeek
 import java.util.Locale
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 
 class ExampleBpkCalendarController(
   private val context: Context,
-  override val selectionType: SelectionType = SelectionType.RANGE
+  override val selectionType: SelectionType = SelectionType.RANGE,
+  private val disableDates: Boolean = false
 ) : BpkCalendarController(selectionType) {
   override fun onRangeSelected(range: CalendarSelection) {
     when (range) {
@@ -31,6 +33,7 @@ class ExampleBpkCalendarController(
 
   var isColoredCalendar: Boolean = false
   private var colorGenerationOffset: Long = 0L
+  private var disabledWeekdays = DayOfWeek.WEDNESDAY
 
   override val isRtl: Boolean = getLayoutDirectionFromLocale(Locale.getDefault()) == LAYOUT_DIRECTION_RTL
   override val locale: Locale = Locale.getDefault()
@@ -41,8 +44,19 @@ class ExampleBpkCalendarController(
       null
     }
 
+  override fun isDateDisabled(date: LocalDate): Boolean {
+    if (!disableDates) {
+      return false
+    }
+    return date.dayOfWeek == disabledWeekdays
+  }
+
   fun newColors() {
     colorGenerationOffset += 1
+  }
+
+  fun shiftDisabledDates() {
+    disabledWeekdays += 1
   }
 }
 

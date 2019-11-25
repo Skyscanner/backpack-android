@@ -19,6 +19,10 @@ abstract class BpkCalendarController(
 
   open val calendarColoring: CalendarColoring? = null
 
+  open fun isDateDisabled(date: LocalDate): Boolean {
+    return false
+  }
+
   abstract val isRtl: Boolean
 
   abstract val locale: Locale

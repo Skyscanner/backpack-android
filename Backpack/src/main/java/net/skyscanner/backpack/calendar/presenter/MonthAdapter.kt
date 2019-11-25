@@ -73,7 +73,7 @@ internal class MonthAdapter(
 
         view.reuse()
 
-        view.setMonthParams(CalendarDrawingParams(year, month, selectedDay, controller.calendarColoring))
+        view.setMonthParams(CalendarDrawingParams(year, month, selectedDay, controller.calendarColoring, controller::isDateDisabled))
         view.invalidate()
 
         return view
