@@ -7,5 +7,5 @@ internal data class CalendarDrawingParams(
   val month: Int,
   val selectedDay: Int?,
   val calendarColoring: CalendarColoring?,
-  val disabledDatesDefinition: (LocalDate) -> Boolean
+  val disabledDatesDefinition: (LocalDate) -> Boolean = { false }
 )
