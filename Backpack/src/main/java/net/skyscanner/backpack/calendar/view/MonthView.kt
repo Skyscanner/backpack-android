@@ -56,6 +56,7 @@ internal class MonthView @JvmOverloads constructor(
     BpkText.getFont(context, BpkText.LG, BpkText.Weight.EMPHASIZED)
 
   private val colouredParams = mutableMapOf<LocalDate, ColoredBucket>()
+  private var isDateDisabled: (LocalDate) -> Boolean = { false }
 
   @VisibleForTesting
   internal lateinit var calendarDrawingParams: CalendarDrawingParams
@@ -205,6 +206,8 @@ internal class MonthView @JvmOverloads constructor(
       }
     }
 
+    isDateDisabled = params.disabledDatesDefinition
+
     val localDate = LocalDate.of(params.year, params.month, 1)
     dayOfWeekStart = localDate.dayOfWeek.value
     weekStart = WeekFields.of(controller?.locale).firstDayOfWeek.value
@@ -262,7 +265,7 @@ internal class MonthView @JvmOverloads constructor(
 
       val calendarDay = LocalDate.of(calendarDrawingParams.year, calendarDrawingParams.month, dayNumber)
 
-      val isOutOfRange = isOutOfRange(calendarDay)
+      val disabled = isDisabledDate(calendarDay)
       drawDayCellForRange(
         controller,
         canvas,
@@ -271,7 +274,7 @@ internal class MonthView @JvmOverloads constructor(
         y,
         startX,
         stopX,
-        isOutOfRange
+        disabled
       )
 
       j++
@@ -290,13 +293,13 @@ internal class MonthView @JvmOverloads constructor(
     y: Int,
     startX: Int,
     stopX: Int,
-    isOutOfRange: Boolean
+    isDisabled: Boolean
   ) {
     var overrideTextColor: Int? = null
 
     val type = controller.selectedRange.getDrawType(calendarDay)
-    if (!isOutOfRange) {
-      val startYBase = y - miniDayNumberTextSize / 3
+    val startYBase = y - miniDayNumberTextSize / 3
+    if (!isDisabled) {
       when (type) {
         CalendarRange.DrawType.SELECTED -> {
           selectedCirclePaint.color = selectedDayCircleFillColor
@@ -352,10 +355,19 @@ internal class MonthView @JvmOverloads constructor(
           }
         }
       }
+    } else {
+      if (type == CalendarRange.DrawType.RANGE) {
+        val halfCellWidth = (stopX - startX) / 2
+        drawRect(canvas, startX - 1, startYBase - selectedDayCircleRadius, stopX + 1, startYBase + selectedDayCircleRadius)
+        drawEdgeCircles(canvas, calendarDay, controller.selectedRange, halfCellWidth, x, y)
+      }
     }
 
     monthNumberPaint.color = when {
-      isOutOfRange -> disabledTextColor
+      isDisabled -> when (type) {
+        CalendarRange.DrawType.RANGE -> defaultTextColor
+        else -> disabledTextColor
+      }
       overrideTextColor != null -> overrideTextColor
       type == CalendarRange.DrawType.SELECTED -> defaultTextColor
       type == CalendarRange.DrawType.RANGE -> defaultTextColor
@@ -451,7 +463,7 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   private fun onDayClick(day: Int) {
-    if (isOutOfRange(LocalDate.of(calendarDrawingParams.year, calendarDrawingParams.month, day))) return
+    if (isDisabledDate(LocalDate.of(calendarDrawingParams.year, calendarDrawingParams.month, day))) return
 
     onDayClickListener?.onDayClick(this, LocalDate.of(calendarDrawingParams.year, calendarDrawingParams.month, day))
   }
@@ -462,6 +474,9 @@ internal class MonthView @JvmOverloads constructor(
       calendarDay.month.value,
       calendarDay.dayOfMonth
     )
+
+  private fun isDisabledDate(calendarDay: LocalDate) =
+    isOutOfRange(calendarDay) || isDateDisabled(calendarDay)
 
   private fun isBeforeMin(year: Int, month: Int, day: Int) =
     controller?.startDate?.let { minDate ->

@@ -93,6 +93,20 @@ When `selectionType` is `SelectionType.SINGLE_DAY` the calendar will allow a sin
 In both cases, the handling of the selection
  will be done in `onRangeSelected()` as in the example above.
 
+Example of controller with disabled dates support:
+
+```kotlin
+class ExampleBpkCalendarController(
+  override val selectionType: SelectionType
+ ) : BpkCalendarController(selectionType) {
+  //...
+  override fun isDateDisabled(date: LocalDate): Boolean {
+    return date.dayOfWeek == DayOfWeek.WEDNESDAY
+  }
+  //...
+}
+```
+
 ## Theme Props
 
 - `calendarDateSelectedBackgroundColor`

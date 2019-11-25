@@ -26,6 +26,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import java.util.Locale
 
@@ -35,7 +36,8 @@ private class BpkCalendarControllerImpl(
   private val initialStartDate: LocalDate? = null,
   private val initialEndDate: LocalDate? = null,
   override val selectionType: SelectionType = SelectionType.RANGE,
-  override val calendarColoring: CalendarColoring? = null
+  override val calendarColoring: CalendarColoring? = null,
+  private val disabledDayOfTheWeek: DayOfWeek? = null
 ) : BpkCalendarController(selectionType) {
   override val startDate: LocalDate
     get() = initialStartDate ?: super.startDate
@@ -47,6 +49,10 @@ private class BpkCalendarControllerImpl(
 
   override fun isToday(year: Int, month: Int, day: Int): Boolean {
     return day == 2 && month == 1 && year == 2019
+  }
+
+  override fun isDateDisabled(date: LocalDate): Boolean {
+    return date.dayOfWeek == disabledDayOfTheWeek
   }
 }
 
@@ -286,6 +292,75 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
     controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 16)))
+    snap(wrapWithBackground(calendar))
+  }
+
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarWithDisabledDates() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      LocalDate.of(2019, 1, 2),
+      LocalDate.of(2019, 12, 31),
+      SelectionType.SINGLE,
+      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY
+    )
+
+    calendar.setController(controller)
+    snap(wrapWithBackground(calendar))
+  }
+
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarWithDisabledDates_SelectSingle() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      LocalDate.of(2019, 1, 2),
+      LocalDate.of(2019, 12, 31),
+      SelectionType.SINGLE,
+      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY
+    )
+
+    calendar.setController(controller)
+    controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 10)))
+    snap(wrapWithBackground(calendar))
+  }
+
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarWithDisabledDates_SelectRange() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      LocalDate.of(2019, 1, 2),
+      LocalDate.of(2019, 12, 31),
+      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY
+    )
+    calendar.setController(controller)
+    controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10)))
+    snap(wrapWithBackground(calendar))
+  }
+
+  @Test
+  @FlakyTest
+  fun screenshotTestCalendarWithDisabledDates_SelectDisabledDate() {
+    val calendar = BpkCalendar(testContext)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      LocalDate.of(2019, 1, 2),
+      LocalDate.of(2019, 12, 31),
+      SelectionType.SINGLE,
+      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY
+    )
+
+    calendar.setController(controller)
+    controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 9)))
     snap(wrapWithBackground(calendar))
   }
 

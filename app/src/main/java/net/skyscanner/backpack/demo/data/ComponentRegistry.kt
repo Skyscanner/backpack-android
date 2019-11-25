@@ -95,7 +95,8 @@ object ComponentRegistry {
     "Calendar" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { DefaultCalendarStory of R.layout.fragment_calendar_default },
-        "Colored" story NodeData { ColoredCalendarStory of R.layout.fragment_calendar_colored }
+        "Colored" story NodeData { ColoredCalendarStory of R.layout.fragment_calendar_colored },
+        "Disabled Dates" story NodeData { DisabledCalendarStory of R.layout.fragment_calendar_disabled }
       )),
     "Chip" story NodeData { ChipStory() },
     "Checkbox" story NodeData { Story of R.layout.fragment_checkbox },
