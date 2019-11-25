@@ -74,7 +74,7 @@ async function amendGradleFiles(version) {
 async function amendReadmeFiles(version) {
   const options = {
     files: readmeFile,
-    from: /backpack-android:([0-9]\.[0-9]\.[0-9])/g,
+    from: /backpack-android:([0-9]+\.[0-9]\.[0-9])/g,
     to: `backpack-android:${version}`,
   };
 

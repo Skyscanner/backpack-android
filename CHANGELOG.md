@@ -2,6 +2,17 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 19.0.0
+  
+- **Breaking:**
+  - `BpkPageTitle` was removed.
+  
+- **Added:**
+  - `BpkNavBar`
+    * Menu and nav icon support.
+  - `BpkCalendar`
+    * Disabled dates customisation
+
 # 18.0.1
 
 **Fixed:**
