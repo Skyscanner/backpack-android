@@ -189,12 +189,12 @@
     <attr name="snackbarBackgroundColor" format="color" />
   </declare-styleable>
 
-  <declare-styleable name="BpkPageTitle">
-    <attr name="pageTitleBackgroundColor" format="color" />
-    <attr name="pageTitleExpandedTextColor" format="color" />
-    <attr name="pageTitleCollapsedTextColor" format="color" />
-    <attr name="pageTitleToolbarStyle" format="reference" />
-    <attr name="pageTitleText" format="string" />
+  <declare-styleable name="BpkNavBar">
+    <attr name="navBarExpandedTextColor" format="color" />
+    <attr name="navBarCollapsedTextColor" format="color" />
+    <attr name="navBarTitle" format="string" />
+    <attr name="navBarIcon" format="reference"/>
+    <attr name="navBarMenu" format="reference" />
   </declare-styleable>
 
   <attr name="bpkThemeOverlay" format="reference" />
@@ -222,7 +222,7 @@
   <attr name="bpkTextFieldStyle" format="reference"/>
   <attr name="bpkSnackbarStyle" format="reference"/>
   <attr name="bpkRatingStyle" format="reference"/>
-  <attr name="bpkPageTitleStyle" format="reference"/>
+  <attr name="bpkNavBarStyle" format="reference"/>
   <attr name="bpkBadgeStyle" format="reference"/>
 
   <!-- FONT THEMING START -->

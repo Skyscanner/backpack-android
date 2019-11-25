@@ -119,10 +119,14 @@ object ComponentRegistry {
       )),
     "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
-    "Page Title" story NodeData({ children -> SubStory of children },
+    "Nav Bar" story NodeData({ children -> SubStory of children },
       mapOf(
-        "Default" story NodeData { PageTitleStory of R.layout.fragment_page_title },
-        "RTL" story NodeData { PageTitleStory of R.layout.fragment_page_title with Direction.RTL }
+        "Default" story NodeData { NavBarStory of R.layout.fragment_nav_bar },
+        "RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar with Direction.RTL },
+        "With Icon" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon },
+        "With Icon RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon with Direction.RTL },
+        "With Menu" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu },
+        "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL }
       )),
     "Panel" story NodeData { Story of R.layout.fragment_panel },
     "Rating" story NodeData({ children -> SubStory of children },

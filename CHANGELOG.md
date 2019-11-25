@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 18.0.1
+
+**Fixed:**
+
+- Updated `bpk_cars`, `bpk_flights` and `bpk_hotels` icons.
+
 # 18.0.0
 
 - **Breaking:**

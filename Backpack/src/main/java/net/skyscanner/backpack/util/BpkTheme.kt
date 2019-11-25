@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.annotation.DimenRes
 import androidx.appcompat.view.ContextThemeWrapper
 import net.skyscanner.backpack.R
 import androidx.core.content.ContextCompat
@@ -113,6 +114,22 @@ internal fun resolveThemeDrawable(context: Context, @AttrRes resId: Int): Drawab
   } else {
     null
   }
+}
+
+internal fun resolveThemeId(context: Context, @AttrRes id: Int, fallback: Int = 0): Int {
+  val tv = TypedValue()
+  if (context.theme.resolveAttribute(id, tv, true)) {
+    return tv.resourceId
+  }
+  return fallback
+}
+
+internal fun resolveThemeDimen(context: Context, @AttrRes id: Int, @DimenRes fallback: Int = 0): Int {
+  val tv = TypedValue()
+  if (context.theme.resolveAttribute(id, tv, true)) {
+    return TypedValue.complexToDimensionPixelSize(tv.data, context.resources.displayMetrics)
+  }
+  return context.resources.getDimensionPixelSize(fallback)
 }
 
 /**
