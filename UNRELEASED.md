@@ -1,6 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
+
+- **Added:**
+  - `BpkNavBar`
+    * Menu getter
   
 ## How to write a good changelog entry
 
