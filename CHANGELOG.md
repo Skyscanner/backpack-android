@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 19.1.0
+- **Added:**
+  - `BpkNavBar`
+    * Menu getter
+
 # 19.0.0
   
 - **Breaking:**
