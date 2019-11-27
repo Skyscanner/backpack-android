@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.annotation.*
@@ -88,6 +89,9 @@ class BpkNavBar @JvmOverloads constructor(
         }
       }
     }
+
+  val menuItems: Menu
+    get() = toolbar.menu
 
   var menuAction: (MenuItem) -> Unit = {}
     set(value) {
