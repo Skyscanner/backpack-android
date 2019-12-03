@@ -24,7 +24,7 @@ Example of a primary spinner in Kotlin
 import net.skyscanner.backpack.spinner.BpkSpinner
 
 BpkSpinner(context).apply {
-  type = BpkSpinner.Type.Primary
+  type = BpkSpinner.Type.PRIMARY
   small = false
 }
 ```
