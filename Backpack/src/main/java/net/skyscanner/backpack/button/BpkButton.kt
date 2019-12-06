@@ -121,8 +121,6 @@ open class BpkButton : BpkButtonBase {
         buttonStrokeColor = it.getColor(R.styleable.BpkButton_buttonStrokeColor, ContextCompat.getColor(context, type.strokeColor))
         buttonStrokeColorPressed = it.getColor(R.styleable.BpkButton_buttonStrokeColorPressed, ContextCompat.getColor(context, type.strokeColorSelected))
 
-        cornerRadius = it.getDimension(R.styleable.BpkButton_buttonCornerRadius, cornerRadius)
-
         _loading = it.getBoolean(R.styleable.BpkButton_buttonLoading, _loading)
 
         textColor = it.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))

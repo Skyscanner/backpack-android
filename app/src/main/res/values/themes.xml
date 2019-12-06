@@ -46,27 +46,23 @@
     <item name="switchPrimaryColor">#ED1B28</item>
   </style>
 
-  <style name="LondonThemeButton">
-    <item name="buttonCornerRadius">@dimen/bpkBorderRadiusSm</item>
-  </style>
-
-  <style name="LondonThemeButtonPrimary" parent="LondonThemeButton">
+  <style name="LondonThemeButtonPrimary">
     <item name="buttonBackgroundColor">?bpkPrimaryColor</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
   </style>
 
-  <style name="LondonThemeButtonSecondary" parent="LondonThemeButton">
+  <style name="LondonThemeButtonSecondary">
     <item name="buttonBackgroundColor">@color/bpkWhite</item>
     <item name="buttonTextColor">?bpkPrimaryColor</item>
     <item name="buttonStrokeColorPressed">?bpkPrimaryColor</item>
   </style>
 
-  <style name="LondonThemeButtonFeatured" parent="LondonThemeButton">
+  <style name="LondonThemeButtonFeatured">
     <item name="buttonBackgroundColor">#ED1B28</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
   </style>
 
-  <style name="LondonThemeButtonDestructive" parent="LondonThemeButton">
+  <style name="LondonThemeButtonDestructive">
     <item name="buttonBackgroundColor">@color/bpkWhite</item>
     <item name="buttonTextColor">#ED1B28</item>
     <item name="buttonStrokeColorPressed">#ED1B28</item>
@@ -184,16 +180,12 @@
   <style name="DohaThemeButtonPrimary">
     <item name="buttonBackgroundColor">#ffb300</item>
     <item name="buttonTextColor">@color/bpkWhite</item>
-    <item name="buttonCornerRadius">@dimen/bpkSpacingMd</item>
-    <item name="buttonAddElevation">true</item>
   </style>
 
   <style name="DohaThemeButtonSecondary">
     <item name="buttonBackgroundColor">@color/bpkWhite</item>
     <item name="buttonTextColor">#9B104C</item>
     <item name="buttonStrokeColorPressed">#B1121C</item>
-    <item name="buttonCornerRadius">@dimen/bpkSpacingMd</item>
-    <item name="buttonAddElevation">true</item>
   </style>
 
   <style name="DohaThemeSpinnerPrimary">

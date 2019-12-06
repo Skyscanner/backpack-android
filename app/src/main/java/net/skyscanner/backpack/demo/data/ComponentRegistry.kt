@@ -71,7 +71,6 @@ object ComponentRegistry {
         "Destructive" story NodeData { Story of R.layout.fragment_button_destructive },
         "Featured" story NodeData { Story of R.layout.fragment_button_featured },
         "Outline" story NodeData { Story of R.layout.fragment_button_outline },
-        "With rounder corners" story NodeData { Story of R.layout.fragment_button_with_corners },
         "Icon alignment" story NodeData { Story of R.layout.fragment_button_icon_alignment },
         "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment with Direction.RTL },
         "Loading" story NodeData { LoadingButtonStory of R.layout.fragment_button_loading }
