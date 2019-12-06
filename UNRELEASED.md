@@ -1,6 +1,11 @@
 # Unreleased
 
 > Place your changes below this line.
+
+**Breaking:**
+
+- Button:
+  - removed `buttonCornerRadius` and `buttonAddElevation` attributes.
   
 ## How to write a good changelog entry
 
