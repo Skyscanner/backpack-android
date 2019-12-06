@@ -1,6 +1,5 @@
 package net.skyscanner.backpack.button
 
-import android.view.ContextThemeWrapper
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -208,14 +207,6 @@ class BpkButtonTest : BpkSnapshotTest() {
     button.iconPosition = BpkButton.END
     button.text = "Message"
     snap(wrap(button, 500))
-  }
-
-  @Test
-  fun screenshotTestButtonIconOnlyAlwaysRound() {
-    val button = BpkButton(ContextThemeWrapper(testContext, R.style.TestRoundIconOnlyButton), BpkButton.Type.Primary)
-    button.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.ICON_ONLY
-    snap(wrap(button, 30, 30))
   }
 
   private fun wrap(button: BpkButton, width: Int = FrameLayout.LayoutParams.WRAP_CONTENT, height: Int = FrameLayout.LayoutParams.WRAP_CONTENT): FrameLayout {
