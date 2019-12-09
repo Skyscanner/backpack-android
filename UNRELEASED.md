@@ -7,6 +7,10 @@
 - Button:
   - removed `buttonCornerRadius` and `buttonAddElevation` attributes.
   
+**Fixed:**
+- Button
+  - the text cut when changing the text to a larger one
+  
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

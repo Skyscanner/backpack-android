@@ -143,7 +143,7 @@ open class BpkButton : BpkButtonBase {
     val paddingVertical = paddingVertical
 
     if (iconPosition == ICON_ONLY) {
-      paddingHorizontal = tokens.bpkSpacingMd + tokens.bpkBorderSizeLg
+      paddingHorizontal = tokens.bpkSpacingMd
     }
 
     setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
