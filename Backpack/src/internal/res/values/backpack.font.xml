@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="BackpackFont" parent="">
+    <item name="bpkFontFamilyBase">monospace</item>
+    <item name="bpkFontFamilyEmphasized">monospace</item>
+    <item name="bpkFontFamilyHeavy">monospace</item>
+
+    <item name="bpkTextBaseAppearance">@style/bpkTextBaseSerif</item>
+    <item name="bpkTextCapsAppearance">@style/bpkTextCapsSerif</item>
+    <item name="bpkTextLgAppearance">@style/bpkTextLgSerif</item>
+    <item name="bpkTextSmAppearance">@style/bpkTextSmSerif</item>
+    <item name="bpkTextXlAppearance">@style/bpkTextXlSerif</item>
+    <item name="bpkTextXsAppearance">@style/bpkTextXsSerif</item>
+    <item name="bpkTextXxlAppearance">@style/bpkTextXxlSerif</item>
+    <item name="bpkTextXxxlAppearance">@style/bpkTextXxxlSerif</item>
+    <item name="bpkTextBaseEmphasizedAppearance">@style/bpkTextBaseEmphasizedSerif</item>
+    <item name="bpkTextCapsEmphasizedAppearance">@style/bpkTextCapsEmphasizedSerif</item>
+    <item name="bpkTextLgEmphasizedAppearance">@style/bpkTextLgEmphasizedSerif</item>
+    <item name="bpkTextSmEmphasizedAppearance">@style/bpkTextSmEmphasizedSerif</item>
+    <item name="bpkTextXlEmphasizedAppearance">@style/bpkTextXlEmphasizedSerif</item>
+    <item name="bpkTextXsEmphasizedAppearance">@style/bpkTextXsEmphasizedSerif</item>
+    <item name="bpkTextXxlEmphasizedAppearance">@style/bpkTextXxlEmphasizedSerif</item>
+    <item name="bpkTextXxxlEmphasizedAppearance">@style/bpkTextXxxlEmphasizedSerif</item>
+    <item name="bpkTextXlHeavyAppearance">@style/bpkTextXlHeavySerif</item>
+    <item name="bpkTextXxlHeavyAppearance">@style/bpkTextXxlHeavySerif</item>
+    <item name="bpkTextXxxlHeavyAppearance">@style/bpkTextXxxlHeavySerif</item>
+  </style>
+</resources>

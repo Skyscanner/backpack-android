@@ -21,6 +21,20 @@ android {
     versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
+
+  flavorDimensions "version"
+  productFlavors {
+    oss {
+      dimension "version"
+      versionNameSuffix "-oss"
+    }
+    internal {
+      dimension "version"
+      versionNameSuffix "-internal"
+    }
+  }
+
+  defaultPublishConfig "ossRelease"
 }
 
 dependencies {
