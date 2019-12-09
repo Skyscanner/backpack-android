@@ -209,6 +209,22 @@ class BpkButtonTest : BpkSnapshotTest() {
     snap(wrap(button, 500))
   }
 
+  @Test
+  fun screenshotTestButton_TextIncreasing() {
+    val button = BpkButton(testContext, BpkButton.Type.Primary)
+    button.text = "Message"
+    button.text = "Long long long long long long long long long long long text"
+    snap(wrap(button, 500))
+  }
+
+  @Test
+  fun screenshotTestButton_TextDecreasing() {
+    val button = BpkButton(testContext, BpkButton.Type.Primary)
+    button.text = "Long long long long long long long long long long long text"
+    button.text = "Message"
+    snap(wrap(button, 500))
+  }
+
   private fun wrap(button: BpkButton, width: Int = FrameLayout.LayoutParams.WRAP_CONTENT, height: Int = FrameLayout.LayoutParams.WRAP_CONTENT): FrameLayout {
     return FrameLayout(testContext).apply {
       button.layoutParams = FrameLayout.LayoutParams(width, height)

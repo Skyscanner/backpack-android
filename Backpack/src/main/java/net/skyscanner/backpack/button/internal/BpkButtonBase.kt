@@ -5,10 +5,10 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
+import android.text.*
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.TextView
-import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
@@ -17,6 +17,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.*
 import kotlin.math.max
+import kotlin.math.min
 
 internal const val ICON_POSITION_START = 0
 internal const val ICON_POSITION_END = 1
@@ -35,11 +36,11 @@ abstract class BpkButtonBase internal constructor(
 
   private val font = BpkText.getFont(this.context, BpkText.SM, BpkText.Weight.EMPHASIZED)
 
-  @Dimension
-  private var originalStartPadding: Int = 0
+  private var minPaddingStart = tokens.bpkSpacingBase - tokens.bpkSpacingSm
 
-  @Dimension
-  private var originalEndPadding: Int = 0
+  private var minPaddingEnd = tokens.bpkSpacingBase - tokens.bpkSpacingSm
+
+  private var maxIconSpacing = tokens.bpkSpacingSm
 
   private var _iconPosition: Int = ICON_POSITION_END
   open var iconPosition: Int
@@ -81,6 +82,9 @@ abstract class BpkButtonBase internal constructor(
     font.applyTo(this)
     updateIcon()
     isInitialized = true
+    ellipsize = TextUtils.TruncateAt.END
+    super.setCompoundDrawablePadding(maxIconSpacing)
+    super.setPaddingRelative(minPaddingStart, paddingTop, minPaddingEnd, paddingBottom)
   }
 
   protected abstract fun update()
@@ -110,80 +114,68 @@ abstract class BpkButtonBase internal constructor(
 
   override fun setCompoundDrawablesWithIntrinsicBounds(@DrawableRes left: Int, @DrawableRes top: Int, @DrawableRes right: Int, @DrawableRes bottom: Int) {
     super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
-    updatePadding()
+    layoutComponents()
   }
 
   override fun setCompoundDrawablesWithIntrinsicBounds(left: Drawable?, top: Drawable?, right: Drawable?, bottom: Drawable?) {
     super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
-    updatePadding()
+    layoutComponents()
   }
 
   override fun setText(text: CharSequence, type: TextView.BufferType) {
     super.setText(text, type)
-    updatePadding()
+    layoutComponents()
   }
 
   override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
     super.onSizeChanged(w, h, oldw, oldh)
-    updatePadding(w)
+    layoutComponents()
   }
 
   override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
     super.setPadding(left, top, right, bottom)
-    originalStartPadding = left
-    originalEndPadding = right
-    updatePadding(false)
+    minPaddingStart = left
+    minPaddingEnd = right
+    layoutComponents()
   }
 
   override fun setPaddingRelative(start: Int, top: Int, end: Int, bottom: Int) {
     super.setPaddingRelative(start, top, end, bottom)
-    originalStartPadding = start
-    originalEndPadding = end
-    updatePadding()
+    minPaddingStart = start
+    minPaddingEnd = end
+    layoutComponents()
   }
 
-  private fun updatePadding(relative: Boolean = true) {
-    updatePadding(measuredWidth, relative)
+  override fun setCompoundDrawablePadding(pad: Int) {
+    maxIconSpacing = pad
+    layoutComponents()
   }
 
-  private fun updatePadding(width: Int, relative: Boolean = true) {
-    if (width == 0) return
-
-    val compoundDrawables = compoundDrawables
-    if (compoundDrawables.isEmpty() || compoundDrawables.size != 4) return
-
-    val leftDrawable = compoundDrawables[0]
-    val rightDrawable = compoundDrawables[2]
-    if (leftDrawable == null && rightDrawable == null) return
-    val layout = layout ?: return
-    if (layout.lineCount == 0) return
-
-    val textWidth = layout.getLineWidth(0).toInt()
-    val iconPadding = max(compoundDrawablePadding, 1)
-
-    val paddingSize = if (leftDrawable != null && rightDrawable != null) {
-      (width - leftDrawable.intrinsicWidth - rightDrawable.intrinsicWidth - textWidth - iconPadding * 4) / 2
-    } else if (leftDrawable != null) {
-      (width - leftDrawable.intrinsicWidth - iconPadding * 2 - textWidth) / 2
-    } else {
-      (width - rightDrawable.intrinsicWidth - iconPadding * 2 - textWidth) / 2
+  private val actualWidth: Int
+    get() {
+      val layoutWidth = width
+      if (layoutWidth != 0) {
+        return layoutWidth
+      }
+      return measuredWidth
     }
 
-    if (relative) {
-      super.setPaddingRelative(
-        max(originalStartPadding, paddingSize),
-        paddingTop,
-        max(originalEndPadding, paddingSize),
-        paddingBottom
-      )
-    } else {
-      super.setPadding(
-        max(originalStartPadding, paddingSize),
-        paddingTop,
-        max(originalEndPadding, paddingSize),
-        paddingBottom
-      )
+  private fun layoutComponents() {
+    val width = actualWidth
+    if (width == 0) {
+      return
     }
+
+    val iconWidth = icon?.intrinsicWidth ?: 0
+    val iconSpacing = if (icon != null && text.isNotEmpty()) maxIconSpacing else 0
+    val maxLineWidth = max(0, width - minPaddingStart - minPaddingEnd - iconWidth - iconSpacing)
+    val textToMeasure = transformationMethod?.getTransformation(text, this) ?: text
+    val totalTextWidth = paint.measureText(textToMeasure, 0, length()).toInt()
+    val singleLineTextWidth = min(maxLineWidth, totalTextWidth)
+    val padding = (width - singleLineTextWidth - iconWidth - iconSpacing) / 2
+
+    super.setCompoundDrawablePadding(iconSpacing)
+    super.setPaddingRelative(padding, paddingTop, padding, paddingBottom)
   }
 
   private fun updateIcon() {

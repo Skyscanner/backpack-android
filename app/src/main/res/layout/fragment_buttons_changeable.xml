@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  style="@style/App.Story"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/button_increase"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Short Text"
+    app:buttonIcon="@drawable/bpk_close"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/button_decrease"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Long Text Long Text Long Text Long Text Long"
+    app:buttonIcon="@drawable/bpk_close"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+</LinearLayout>
