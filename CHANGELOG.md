@@ -2,6 +2,16 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 20.0.0
+
+- **Breaking:**
+  - Button:
+    - removed `buttonCornerRadius` and `buttonAddElevation` attributes.
+  
+- **Fixed:**
+  - Button
+    - the text cut when changing the text to a larger one
+
 # 19.1.0
 - **Added:**
   - `BpkNavBar`

@@ -1,15 +1,6 @@
 # Unreleased
 
 > Place your changes below this line.
-
-**Breaking:**
-
-- Button:
-  - removed `buttonCornerRadius` and `buttonAddElevation` attributes.
-  
-**Fixed:**
-- Button
-  - the text cut when changing the text to a larger one
   
 ## How to write a good changelog entry
 
