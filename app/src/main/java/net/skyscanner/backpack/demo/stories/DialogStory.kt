@@ -3,6 +3,7 @@ package net.skyscanner.backpack.demo.stories
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.button.BpkButtonLink
 import net.skyscanner.backpack.demo.R
@@ -188,6 +189,31 @@ Safe travels!"""
 
         addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
           text = "Skip"
+          setOnClickListener {
+            println("skipped")
+            dialog.dismiss()
+          }
+        })
+      }
+    },
+
+    "Flare" to { context: Context ->
+      val dialog = BpkDialog(context, BpkDialog.Style.FLARE)
+      dialog.apply {
+        title = "Where will you go?"
+        description = "See the best Black Friday deals from out 1,200 travel partners. Remember to keep checking back as we update deals throughput the weekend."
+        Picasso.get().load("file:///android_asset/dialog_sample.jpg").into(image)
+
+        addActionButton(BpkButton(context).apply {
+          text = "Find your deal"
+          setOnClickListener {
+            println("confirmed")
+            dialog.dismiss()
+          }
+        })
+
+        addActionButton(BpkButtonLink(context).apply {
+          text = "Ok, got it"
           setOnClickListener {
             println("skipped")
             dialog.dismiss()

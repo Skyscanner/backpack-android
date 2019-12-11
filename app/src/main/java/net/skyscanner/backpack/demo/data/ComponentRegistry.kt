@@ -107,7 +107,8 @@ object ComponentRegistry {
         "Delete confirmation" story NodeData { DialogStory of "Delete" },
         "Success" story NodeData { DialogStory of "Confirmation" },
         "With Links" story NodeData { DialogStory of "Links" },
-        "Long Text" story NodeData { DialogStory of "Long" }
+        "Long Text" story NodeData { DialogStory of "Long" },
+        "Flare" story NodeData { DialogStory of "Flare" }
       )),
     "Flare" story NodeData({ children -> SubStory of children },
       mapOf(
