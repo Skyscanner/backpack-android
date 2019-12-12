@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'org.jetbrains.dokka-android'
 apply plugin: 'com.github.dcendents.android-maven'
 
+apply from: 'gradle-maven-push.gradle'
+
 version = rootProject.ext.version
 group='com.github.skyscanner.backpack-android'
 

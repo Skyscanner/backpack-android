@@ -96,8 +96,9 @@ Please see the [code review guidelines](https://github.com/Skyscanner/backpack/b
 
 > Backpack team only
 
+ - You must be logged in internal `Artifactory`.
  - Move everything in `UNRELEASED.md` to `CHANGELOG.md` with the intended release version as the heading.
- - Run `npm run release` and follow the process through, you'll be asked which semantic version the release. Once released verify the artefacts on [`jitpack`][3]
+ - Run `npm run release` and follow the process through, you'll be asked which semantic version the release. Once released verify the artifacts on [`jitpack`][3] and `Artifactory`.
 
 ## Docs
 

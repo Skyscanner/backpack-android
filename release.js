@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+const childProcess = require('child_process');
+
 const inquirer = require('inquirer');
 const semver = require('semver');
 const replace = require('replace-in-file');
@@ -88,6 +90,7 @@ async function amendReadmeFiles(version) {
 
 async function release() {
   try {
+    childProcess.execSync('./gradlew :Backpack:checkMavenCredentials');
     const { version } = await inquirer.prompt(questions);
 
     await amendGradleFiles(version);
@@ -109,6 +112,7 @@ async function release() {
       },
     };
     await releaseit(releaseOptions);
+    childProcess.execSync('./gradlew :Backpack:publish');
   } catch (exc) {
     console.error(exc);
     process.exit(1);
