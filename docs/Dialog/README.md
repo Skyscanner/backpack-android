@@ -50,11 +50,9 @@ val dialog = BpkDialog(context, BpkDialog.Style.FLARE)
 dialog.apply {
     title = "You are going to Tokyo!"
     description = "Your flight is all booked. Why not check out some hotels now?"
-    icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        R.color.bpkMonteverde
-    )
-
+    
+    Picasso.get().load(url).into(image)
+    
     addActionButton(BpkButton(context).apply {
         text = "Continue"
         setOnClickListener({
