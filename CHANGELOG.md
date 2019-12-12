@@ -1,7 +1,14 @@
 # Backpack Android changelog
 
 [Unreleased changes](./UNRELEASED.md).
-
+ 
+# 20.1.0
+  
+- **Added:**
+  - `BpkDialog`
+    * New flare style
+    * Image property
+    
 # 20.0.0
 
 - **Breaking:**
