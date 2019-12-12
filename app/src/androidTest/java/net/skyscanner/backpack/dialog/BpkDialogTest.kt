@@ -8,6 +8,7 @@ import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.button.BpkButtonLink
@@ -181,5 +182,32 @@ class BpkDialogTest : BpkSnapshotTest() {
         setupView(wrapper)
         asyncScreenshot.record(wrapper)
       }
+  }
+
+  @Test
+  fun screenshotTestFlareDialog() {
+    val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
+    val asyncScreenshot = prepareForAsyncTest()
+
+    val dialog = BpkDialog(activity, BpkDialog.Style.FLARE).apply {
+      title = "You are going to Tokyo!"
+      description = "Your flight is all booked."
+      icon = BpkDialog.Icon(
+        R.drawable.bpk_tick,
+        R.color.bpkMonteverde
+      )
+
+      image!!.setImageBitmap(bitmap)
+
+      addActionButton(BpkButton(context).apply {
+        text = "Continue"
+      })
+
+      addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
+        text = "Skip"
+      })
+    }
+
+    record(dialog, asyncScreenshot)
   }
 }
