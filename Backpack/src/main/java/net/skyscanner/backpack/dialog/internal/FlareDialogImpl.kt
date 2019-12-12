@@ -17,9 +17,9 @@ internal class FlareDialogImpl(
 
   init {
     dialog.window?.let {
-      val maxW = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm) * 110
+      val maxWidth = dialog.context.resources.getDimensionPixelSize(R.dimen.bpk_dialog_flare_max_width)
       val displayWidth = getScreenWidth(dialog)
-      it.setLayout(min(displayWidth, maxW), LayoutParams.WRAP_CONTENT)
+      it.setLayout(min(displayWidth, maxWidth), LayoutParams.WRAP_CONTENT)
 
       val background = ColorDrawable(Color.TRANSPARENT)
       val margin = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
