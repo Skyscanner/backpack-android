@@ -24,6 +24,8 @@
 
 	<color name="bpkBackgroundTertiary">#ffffff</color>
 
+	<color name="bpkLine">#cdcdd7</color>
+
 	<color name="bpkPrimary">#0770e3</color>
 
 	<color name="bpkTextPrimary">#111236</color>
