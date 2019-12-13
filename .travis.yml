@@ -70,21 +70,22 @@ script:
   - TEST_METHOD=connected ./scripts/ci-tests.sh
   - TEST_METHOD=screenshot ./scripts/ci-tests.sh
 
-  - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then openssl aes-256-cbc -K $encrypted_8363dc54ada0_key -iv $encrypted_8363dc54ada0_iv -in backpack.android.demo.key.enc -out backpack.android.demo.key -d ; fi
-  - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then ./gradlew app:assembleRelease && curl -F ipa=@app/build/outputs/apk/release/app-release.apk -F status=2 -F strategy=replace -H X-HockeyAppToken:$HOCKEYAPP_TOKEN https://rink.hockeyapp.net/api/2/apps/upload ; fi
+  - if [ true ]; then openssl aes-256-cbc -K $encrypted_8363dc54ada0_key -iv $encrypted_8363dc54ada0_iv -in backpack.android.demo.key.enc -out backpack.android.demo.key -d ; fi
+  - if [ true ]; then ./gradlew app:assembleRelease && curl -F ipa=@app/build/outputs/apk/release/app-release.apk -F status=2 -F strategy=replace -H X-HockeyAppToken:$HOCKEYAPP_TOKEN https://rink.hockeyapp.net/api/2/apps/upload ; fi
   - if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then ./scripts/compile-bridges.sh ; fi
 
 after_script:
   - greenkeeper-lockfile-upload
   - chmod +x notify.sh
   - if [ "$TRAVIS_PULL_REQUEST" != 'false' ]; then sh notify.sh $BACKPACK_BOT_COMMENT_TOKEN $TRAVIS_REPO_SLUG $TRAVIS_PULL_REQUEST $TRAVIS_COMMIT; fi
-  - 'if [ "$TRAVIS_BRANCH" == master ] && [ "$TRAVIS_PULL_REQUEST" == false ]; then curl -s -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "Travis-API-Version: 3" -H "Authorization: token $TRAVIS_API_KEY" -d "{\"request\": {\"branch\":\"master\"}}" https://api.travis-ci.org/repo/Skyscanner%2Fbackpack-docs/requests; fi'
+  - 'if [ true ]; then curl -s -X POST -H "Content-Type: application/json" -H "Accept: application/json" -H "Travis-API-Version: 3" -H "Authorization: token $TRAVIS_API_KEY" -d "{\"request\": {\"branch\":\"master\"}}" https://api.travis-ci.org/repo/Skyscanner%2Fbackpack-docs/requests; fi'
 
 branches:
   only:
     - master
     - /^greenkeeper/.*$/
     - /^[0-9]+\.[0-9]+\.[0-9]+$/
+    - BPK-2504_DEV_Android_Hockeyapp_app_is_not_working
 
 deploy:
   provider: pages
