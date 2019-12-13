@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.facebook.testing.screenshot'
 
+def travis = System.getenv("TRAVIS")
+
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
   buildToolsVersion rootProject.ext.buildToolsVersion
@@ -19,10 +21,23 @@ android {
 
     testInstrumentationRunner "net.skyscanner.backpack.BpkTestRunner"
   }
+  signingConfigs {
+    if (travis) {
+      release {
+        storeFile rootProject.file('backpack.android.demo.key')
+        storePassword System.getenv("KEYSTORE_PASSWORD")
+        keyAlias System.getenv("KEYSTORE_ALIAS")
+        keyPassword System.getenv("KEYSTORE_ALIAS_PASSWORD")
+      }
+    }
+  }
   buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    if (travis) {
+      release {
+        minifyEnabled false
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        signingConfig signingConfigs.release
+      }
     }
   }
   lintOptions {
