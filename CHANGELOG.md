@@ -1,6 +1,17 @@
 # Backpack Android changelog
 
 [Unreleased changes](./UNRELEASED.md).
+
+# 20.2.0
+
+**Fixed:**
+
+- `BpkBadge`
+  - Fixed a crash when changing type in runtime.
+
+**Added**:
+
+- Add `bpkLine` semantic colour.
  
 # 20.1.0
   
