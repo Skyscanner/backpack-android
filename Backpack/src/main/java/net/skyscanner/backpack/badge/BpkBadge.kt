@@ -5,7 +5,6 @@ import android.content.res.TypedArray
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.ViewGroup
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.core.content.ContextCompat
@@ -140,9 +139,6 @@ open class BpkBadge @JvmOverloads constructor(
       cornerRadius, cornerRadius)
     border.cornerRadii = radius
     this.background = border
-
-    val params = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     this.gravity = Gravity.CENTER
-    this.layoutParams = params
   }
 }
