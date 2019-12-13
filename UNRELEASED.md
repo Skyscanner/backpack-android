@@ -1,6 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
+    
+- **Fixed:**
+  - `BpkBadge`
+    * Fixed the crash when changing type in the runtime.
   
 ## How to write a good changelog entry
 
