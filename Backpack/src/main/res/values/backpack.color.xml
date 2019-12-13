@@ -106,6 +106,10 @@
 
 	<color name="bpkWhite">#ffffff</color>
 
+	<color name="bpkLineDark">#444560</color>
+
+	<color name="bpkLineLight">#cdcdd7</color>
+
 	<color name="bpkPrimaryDark">#6d9feb</color>
 
 	<color name="bpkPrimaryLight">#0770e3</color>
