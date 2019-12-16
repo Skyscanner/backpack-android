@@ -71,3 +71,5 @@ dialog.apply {
     })
 }
 ```
+
+Please use `DialogInterface.OnDismissListener` as the `DialogInterface.OnCancelListener` is not supported.
