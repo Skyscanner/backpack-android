@@ -32,7 +32,7 @@ afterEvaluate { project ->
                 version version
                 description description
 
-                artifact bundleReleaseAar
+              artifact("$buildDir/outputs/aar/Backpack-internal-release.aar")
                 artifact sourceJar
 
                 pom.withXml {

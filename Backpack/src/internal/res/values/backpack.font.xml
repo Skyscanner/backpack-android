@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="BackpackFont" parent="BackpackFontBase">
+    <item name="bpkFontFamilyBase">monospace</item>
+    <item name="bpkFontFamilyEmphasized">monospace</item>
+    <item name="bpkFontFamilyHeavy">monospace</item>
+  </style>
+
+  <!-- TODO: override text styles in this flavour -->
+
+</resources>

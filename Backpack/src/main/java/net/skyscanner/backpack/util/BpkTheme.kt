@@ -74,6 +74,7 @@ internal fun wrapContextWithDefaults(context: Context): Context {
 
 internal fun applyDefaultsToContext(context: Context) {
   context.theme?.applyStyle(R.style.BpkDefaultTheme, false)
+  context.theme?.applyStyle(R.style.BackpackFont, false)
 }
 
 internal fun resolveThemeColorWithDefault(context: Context, resId: Int): Int {

@@ -3,12 +3,9 @@
 
   <style name="BpkDefaultTheme">
     <item name="bpkPrimaryColor">@color/bpkPrimary</item>
+  </style>
 
-    <!--  Move relative to backpack and update to relative  -->
-    <item name="bpkFontFamilyBase">sans-serif</item>
-    <item name="bpkFontFamilyEmphasized">sans-serif-medium</item>
-    <item name="bpkFontFamilyHeavy">sans-serif-black</item>
-
+  <style name="BackpackFontBase" parent="">
     <item name="bpkTextBaseAppearance">@style/bpkTextBaseSerif</item>
     <item name="bpkTextCapsAppearance">@style/bpkTextCapsSerif</item>
     <item name="bpkTextLgAppearance">@style/bpkTextLgSerif</item>
