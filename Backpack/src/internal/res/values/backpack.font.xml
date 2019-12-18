@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <style name="BackpackFont" parent="BackpackFontBase">
-    <item name="bpkFontFamilyBase">monospace</item>
-    <item name="bpkFontFamilyEmphasized">monospace</item>
-    <item name="bpkFontFamilyHeavy">monospace</item>
+    <item name="bpkFontFamilyBase">sans-serif</item>
+    <item name="bpkFontFamilyEmphasized">sans-serif-medium</item>
+    <item name="bpkFontFamilyHeavy">sans-serif-black</item>
   </style>
 
   <!-- TODO: override text styles in this flavour -->
