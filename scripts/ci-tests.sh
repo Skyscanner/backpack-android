@@ -33,7 +33,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
 
   echo "Verifying screenshots..."
 
-  ./gradlew :app:verifyDebugAndroidTestScreenshotTest
+  ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
 
 elif [ "$TEST_METHOD" == "connected" ]; then
 
