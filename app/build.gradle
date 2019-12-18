@@ -50,6 +50,15 @@ android {
       // A11y support TBD
       'ContentDescription'
   }
+  flavorDimensions "version"
+  productFlavors {
+    oss {
+      dimension "version"
+    }
+    internal {
+      dimension "version"
+    }
+  }
 }
 
 dependencies {

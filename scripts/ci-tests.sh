@@ -13,8 +13,8 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
 
   gcloud firebase test android run \
       --type instrumentation \
-      --app ./app/build/outputs/apk/debug/app-debug.apk \
-      --test ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+      --app ./app/build/outputs/apk/oss/debug/app-oss-debug.apk \
+      --test ./app/build/outputs/apk/androidTest/oss/debug/app-oss-debug-androidTest.apk \
       --device model=Nexus4,version=21 \
       --results-dir="$dir_name"
 
@@ -33,14 +33,14 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
 
   echo "Verifying screenshots..."
 
-  ./gradlew :app:verifyDebugAndroidTestScreenshotTest
+  ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
 
 elif [ "$TEST_METHOD" == "connected" ]; then
 
   gcloud firebase test android run \
       --type instrumentation \
-      --app ./app/build/outputs/apk/debug/app-debug.apk \
-      --test ./Backpack/build/outputs/apk/androidTest/debug/Backpack-debug-androidTest.apk \
+      --app ./app/build/outputs/apk/oss/debug/app-oss-debug.apk \
+      --test ./Backpack/build/outputs/apk/androidTest/oss/debug/Backpack-oss-debug-androidTest.apk \
       --device model=Nexus4,version=21
 else 
 

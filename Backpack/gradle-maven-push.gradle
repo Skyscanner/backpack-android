@@ -29,10 +29,10 @@ afterEvaluate { project ->
             maven(MavenPublication) {
                 groupId 'com.github.skyscanner'
                 artifactId 'backpack-android'
-                version version
+                version "$version-internal"
                 description description
 
-                artifact bundleReleaseAar
+              artifact("$buildDir/outputs/aar/Backpack-internal-release.aar")
                 artifact sourceJar
 
                 pom.withXml {

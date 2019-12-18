@@ -60,7 +60,7 @@ After adding new snapshot tests, run
 To test changes use
 
 ```
-./gradlew app:verifyDebugAndroidTestScreenshotTest
+./gradlew app:verifyOssDebugAndroidTestScreenshotTest
 ```
 
 #### Espresso tests
