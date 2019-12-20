@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 21.0.0
+    
+- **Breaking:**
+  - General
+    * Updated `AppCompat` to 1.1.0
+  - `BpkText`
+    * `drawableTint` is maintained now by `AppCompat` library
+
 # 20.2.0
 
 **Fixed:**
