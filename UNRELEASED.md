@@ -2,7 +2,7 @@
 
 > Place your changes below this line.
     
-- **Added:**
+- **Breaking:**
   - General
     * Updated `AppCompat` to 1.1.0
   - `BpkText`
