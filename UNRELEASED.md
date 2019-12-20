@@ -1,6 +1,12 @@
 # Unreleased
 
 > Place your changes below this line.
+    
+- **Breaking:**
+  - General
+    * Updated `AppCompat` to 1.1.0
+  - `BpkText`
+    * `drawableTint` is maintained now by `AppCompat` library
   
 ## How to write a good changelog entry
 

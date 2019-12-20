@@ -3,9 +3,6 @@ package net.skyscanner.backpack.text
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Paint
-import android.graphics.Color
-import android.graphics.PorterDuffColorFilter
-import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -117,18 +114,11 @@ open class BpkText @JvmOverloads constructor(
         end = compoundDrawables[0]
       }
       setCompoundDrawablesRelative(start, top, end, bottom)
-
-      val drawableTint = it.getColorStateList(R.styleable.BpkText_drawableTint)
-      if (drawableTint != null) {
-        setDrawableTint(drawableTint.getColorForState(EMPTY_STATE_SET, Color.WHITE))
-      }
     }
   }
 
   fun setDrawableTint(color: Int) {
-    for (drawable in compoundDrawablesRelative) {
-      drawable?.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
-    }
+    TextViewCompat.setCompoundDrawableTintList(this, ColorStateList.valueOf(color))
   }
 
   private fun setup() {
