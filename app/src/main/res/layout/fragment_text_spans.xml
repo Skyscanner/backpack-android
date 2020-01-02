@@ -5,7 +5,7 @@
   android:layout_height="match_parent"
   android:orientation="vertical">
 
-  <TextView
+  <net.skyscanner.backpack.text.BpkText
     android:id="@+id/text"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

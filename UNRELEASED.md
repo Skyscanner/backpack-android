@@ -1,6 +1,11 @@
 # Unreleased
 
 > Place your changes below this line.
+
+**Added**:
+
+- `BpkLinkSpan` span.
+- `BpkText` uses `bpkPrimary` color for the links. 
   
 ## How to write a good changelog entry
 

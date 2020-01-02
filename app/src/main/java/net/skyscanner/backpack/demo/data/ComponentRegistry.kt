@@ -159,7 +159,8 @@ object ComponentRegistry {
         "Default" story NodeData { Story of R.layout.fragment_text },
         "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
         "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
-        "With drawables" story NodeData { Story of R.layout.fragment_text_drawables }
+        "With drawables" story NodeData { Story of R.layout.fragment_text_drawables },
+        "With links" story NodeData { Story of R.layout.fragment_text_links }
       )),
     "Text Field" story NodeData { Story of R.layout.fragment_text_fields },
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
