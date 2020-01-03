@@ -1,6 +1,11 @@
 # Unreleased
 
 > Place your changes below this line.
+
+- **Fixed:**
+
+- `BpkBadge`
+  - Changed success, warning and error colours.
   
 ## How to write a good changelog entry
 
