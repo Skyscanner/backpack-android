@@ -16,6 +16,7 @@ import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
+import net.skyscanner.backpack.calendar.presenter.MockDateProvider
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
@@ -30,6 +31,8 @@ import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import java.util.Locale
 
+private val today = LocalDate.of(2019, 1, 2)
+
 private class BpkCalendarControllerImpl(
   override val isRtl: Boolean,
   override val locale: Locale,
@@ -38,7 +41,7 @@ private class BpkCalendarControllerImpl(
   override val selectionType: SelectionType = SelectionType.RANGE,
   override val calendarColoring: CalendarColoring? = null,
   private val disabledDayOfTheWeek: DayOfWeek? = null
-) : BpkCalendarController(selectionType) {
+) : BpkCalendarController(selectionType, MockDateProvider(today)) {
   override val startDate: LocalDate
     get() = initialStartDate ?: super.startDate
 
@@ -46,10 +49,6 @@ private class BpkCalendarControllerImpl(
     get() = initialEndDate ?: super.endDate
 
   override fun onRangeSelected(range: CalendarSelection) {}
-
-  override fun isToday(year: Int, month: Int, day: Int): Boolean {
-    return day == 2 && month == 1 && year == 2019
-  }
 
   override fun isDateDisabled(date: LocalDate): Boolean {
     return date.dayOfWeek == disabledDayOfTheWeek
