@@ -33,7 +33,7 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with positive messages
      */
-    Success(1, R.color.bpkMonteverde, R.color.bpkSkyGrayTint01),
+    Success(1, R.color.bpkGlencoe, R.color.bpkSkyGrayTint01),
     /**
      *  Style for badges with warning messages
      */
@@ -41,7 +41,7 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with error messages
      */
-    Destructive(3, R.color.bpkPanjin, R.color.bpkWhite),
+    Destructive(3, R.color.bpkHillier, R.color.bpkWhite),
     /**
      *  Light themed style for badges
      */

@@ -5,6 +5,8 @@
 - **Fixed:**
   - `BpkCard`
     * Set default background to `bpkBackgroundTertiary`
+  - `BpkBadge`
+    * Changed success, warning and error colours.
  
 ## How to write a good changelog entry
 
