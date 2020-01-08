@@ -1,11 +1,14 @@
 package net.skyscanner.backpack.card
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.annotation.DimenRes
 import androidx.annotation.Dimension
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.use
 import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 /**
@@ -74,13 +77,16 @@ open class BpkCardView @JvmOverloads constructor(
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     paddingSize = context.resources.getDimension(R.dimen.bpkSpacingBase).toInt()
-
-    val a = context.obtainStyledAttributes(attrs, R.styleable.BpkCardView, defStyleAttr, 0)
-    padded = a.getBoolean(R.styleable.BpkCardView_padded, true)
-    focused = a.getBoolean(R.styleable.BpkCardView_focused, false)
-    cornerStyle = CornerStyle.values()[a.getInt(R.styleable.BpkCardView_cornerStyle, 0)]
-    a.recycle()
-
     maxCardElevation = context.resources.getDimension(R.dimen.bpkElevationLg)
+
+    context.obtainStyledAttributes(attrs, R.styleable.BpkCardView, defStyleAttr, 0).use {
+      padded = it.getBoolean(R.styleable.BpkCardView_padded, true)
+      focused = it.getBoolean(R.styleable.BpkCardView_focused, false)
+      cornerStyle = CornerStyle.values()[it.getInt(R.styleable.BpkCardView_cornerStyle, 0)]
+
+      val background = it.getColorStateList(R.styleable.BpkCardView_cardBackgroundColor)
+        ?: ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkBackgroundTertiary))
+      setCardBackgroundColor(background)
+    }
   }
 }
