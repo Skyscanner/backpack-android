@@ -116,9 +116,3 @@ private object LocalDateProvider : CurrentDateProvider {
 
   override fun invoke(): LocalDate = LocalDate.now()
 }
-
-@VisibleForTesting
-class MockDateProvider(private val value: LocalDate) : CurrentDateProvider {
-
-  override fun invoke(): LocalDate = value
-}
