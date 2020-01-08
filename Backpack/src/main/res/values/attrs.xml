@@ -85,6 +85,7 @@
   <declare-styleable name="BpkCardView">
     <attr name="focused" format="boolean" />
     <attr name="padded" format="boolean" />
+    <attr name="cardBackgroundColor" format="color"/>
     <attr name="cornerStyle" format="enum">
       <enum name="small" value="0" />
       <enum name="large" value="1" />
