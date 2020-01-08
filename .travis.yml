@@ -43,7 +43,7 @@ before_install:
 
 install:
   - npm install
-  - sudo easy_install Pillow
+  - sudo easy_install Pillow==6.2.2
 
 android:
   components:
