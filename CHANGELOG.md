@@ -2,6 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+#21.0.1
+  
+- **Fixed:**
+  - `BpkCard`
+    * Set default background to `bpkBackgroundTertiary`
+  - `BpkBadge`
+    * Changed success, warning and error colours.
+ 
+
 # 21.0.0
     
 - **Breaking:**

@@ -10,8 +10,8 @@ import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.view.CalendarView
 import net.skyscanner.backpack.calendar.view.OnYearChangedListener
 import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
+import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.wrapContextWithDefaults
-import org.threeten.bp.YearMonth
 
 open class BpkCalendar @JvmOverloads constructor(
   context: Context,
@@ -23,9 +23,12 @@ open class BpkCalendar @JvmOverloads constructor(
     inflate(this.context, R.layout.view_bpk_calendar, this)
   }
 
+  private val calendarView by unsafeLazy { findViewById<CalendarView>(R.id.calendar_view) }
+  private val weekdayHeaderView by unsafeLazy { findViewById<WeekdayHeaderView>(R.id.weekday_header_view) }
+  private val yearPillView by unsafeLazy { findViewById<BpkBadge>(R.id.year_pill_view) }
+
   fun setController(controller: BpkCalendarController) {
-    val calendarView = findViewById<CalendarView>(R.id.calendar_view)
-    findViewById<WeekdayHeaderView>(R.id.weekday_header_view).initializeWithLocale(controller.locale)
+    weekdayHeaderView.initializeWithLocale(controller.locale)
     calendarView.controller = controller
     controller.updateContentCallback = calendarView
     calendarView.listener = this
@@ -38,8 +41,12 @@ open class BpkCalendar @JvmOverloads constructor(
   }
 
   private fun updateYearPill(year: Int) {
-    val yearPillView = findViewById<BpkBadge>(R.id.year_pill_view)
     yearPillView.message = year.toString()
-    yearPillView.visibility = if (YearMonth.now().year == year) View.GONE else View.VISIBLE
+    val controller = calendarView.controller
+    yearPillView.visibility = when {
+      controller == null -> View.GONE
+      controller.currentDateProvider.invoke().year != year -> View.VISIBLE
+      else -> View.GONE
+    }
   }
 }
