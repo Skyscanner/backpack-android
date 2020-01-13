@@ -9,7 +9,7 @@ import net.skyscanner.backpack.util.BpkTheme
 class BpkLinkSpan<T>(
   context: Context,
   private val link: T,
-  private val linksHandler: (T) -> Unit
+  private val linkHandler: (T) -> Unit
 ) : ClickableSpan() {
 
   private val color = BpkTheme.getPrimaryColor(context)
@@ -20,6 +20,6 @@ class BpkLinkSpan<T>(
   }
 
   override fun onClick(widget: View) {
-    linksHandler(link)
+    linkHandler(link)
   }
 }

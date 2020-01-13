@@ -26,12 +26,6 @@ class BpkLinksSpanTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestPrimaryColorSpan_Default() {
-    textView.text = "Test"
-    snap(textView)
-  }
-
-  @Test
   fun screenshotTestLinkSpan_Custom() {
     val span = BpkLinkSpan(testContext, link, handler)
     textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
