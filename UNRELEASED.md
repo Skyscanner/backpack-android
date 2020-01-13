@@ -5,7 +5,7 @@
 **Added**:
 
 - `BpkLinkSpan` span.
-- `BpkText` uses `bpkPrimary` color for the links. 
+- `BpkText` now uses `bpkPrimary` colour for links. 
   
 ## How to write a good changelog entry
 
