@@ -29,6 +29,16 @@ val span = BpkPrimaryColorSpan(context)
 textView.text = SpannableStringBuilder("Foo").append("bar", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
 ```
 
+`BpkLinkSpan` is designed to set a clickable action on a part of Spanned.
+Here's an example:
+
+```Kotlin
+import net.skyscanner.backpack.text.BpkLinkSpan
+
+val span = BpkLinkSpan(context, "https://skyscanner.net") { openInBrowser(it) }
+textView.text = SpannableStringBuilder("Foo").append("bar", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+```
+
 ## Theme Props
 
 - `bpkPrimaryColor`
