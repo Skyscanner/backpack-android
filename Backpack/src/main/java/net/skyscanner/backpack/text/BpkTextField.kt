@@ -60,12 +60,12 @@ open class BpkTextField @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     BpkText.getFont(context, BpkText.BASE, BpkText.Weight.NORMAL).applyTo(paint)
 
-    var textColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint01)
-    var hintNormalColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
+    var textColor = ContextCompat.getColor(context, R.color.__textFieldText)
+    var hintNormalColor = ContextCompat.getColor(context, R.color.__textFieldHint)
     var hintFocusedColor = ContextCompat.getColor(context, R.color.bpkTextSecondary)
-    var iconColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint01)
+    var iconColor = ContextCompat.getColor(context, R.color.__textFieldIcon)
 
-    var background: Drawable = ColorDrawable(ContextCompat.getColor(context, R.color.bpkBackground))
+    var background: Drawable = ColorDrawable(ContextCompat.getColor(context, R.color.bpkBackgroundTertiary))
 
     context.theme.obtainStyledAttributes(
       attrs,

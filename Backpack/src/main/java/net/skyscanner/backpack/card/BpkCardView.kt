@@ -85,7 +85,7 @@ open class BpkCardView @JvmOverloads constructor(
       cornerStyle = CornerStyle.values()[it.getInt(R.styleable.BpkCardView_cornerStyle, 0)]
 
       val background = it.getColorStateList(R.styleable.BpkCardView_cardBackgroundColor)
-        ?: ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkBackgroundTertiary))
+        ?: ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkBackgroundElevation01))
       setCardBackgroundColor(background)
     }
   }

@@ -2,16 +2,19 @@
 <resources>
 
   <color name="__buttonDisabledBackground">@color/bpkBlackTint02</color>
-  <color name="__buttonDisabledText">@color/bpkBlackTint03</color>
+  <color name="__buttonDisabledText">@color/bpkBlackTint05</color>
   <color name="__buttonSecondaryBackground">@color/bpkBlackTint02</color>
-  <color name="__buttonSecondaryBorder">@color/bpkBlackTint03</color>
+  <color name="__buttonSecondaryBorder">@color/bpkBlackTint05</color>
   <color name="__calendarSameDayBackground">@color/bpkSkyBlueShade01</color>
   <color name="__calendarRangeBackground">@color/bpkSkyBlueShade01</color>
   <color name="__calendarDisabledColour">@color/bpkSkyGrayTint02</color>
-  <color name="__dialogBackground">@color/bpkBackgroundSecondaryDark</color>
-  <color name="__panelBorder">@color/bpkBlackTint02</color>
+  <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
+  <color name="__panelBorder">@color/bpkLineDark</color>
   <color name="__switchTrackDisabled">@color/bpkBlackTint02</color>
-  <color name="__switchThumbDisabled">@color/bpkBlackTint03</color>
-  <color name="__starRatingStarColor">@color/bpkBlackTint02</color>
+  <color name="__switchThumbDisabled">@color/bpkBlackTint05</color>
+  <color name="__starRatingStarColor">@color/bpkLineDark</color>
   <color name="__horizontalNavTextDefault">@color/bpkTextTertiaryDark</color>
+  <color name="__textFieldText">@color/bpkTextPrimaryDark</color>
+  <color name="__textFieldHint">@color/bpkTextTertiaryDark</color>
+  <color name="__textFieldIcon">@color/bpkTextSecondary</color>
  </resources>

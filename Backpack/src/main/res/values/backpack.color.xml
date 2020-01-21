@@ -18,7 +18,27 @@
 -->
 <resources>
 
+	<color name="bpkBackgroundAlternativeDark">#000000</color>
+
+	<color name="bpkBackgroundAlternativeLight">#f1f2f8</color>
+
+	<color name="bpkBackgroundAlternativeSecondaryDark">#1d1b20</color>
+
+	<color name="bpkBackgroundAlternativeSecondaryLight">#ffffff</color>
+
 	<color name="bpkBackgroundDark">#000000</color>
+
+	<color name="bpkBackgroundElevation01Dark">#1d1b20</color>
+
+	<color name="bpkBackgroundElevation01Light">#ffffff</color>
+
+	<color name="bpkBackgroundElevation02Dark">#2c2c2e</color>
+
+	<color name="bpkBackgroundElevation02Light">#ffffff</color>
+
+	<color name="bpkBackgroundElevation03Dark">#3a3a3c</color>
+
+	<color name="bpkBackgroundElevation03Light">#ffffff</color>
 
 	<color name="bpkBackgroundLight">#ffffff</color>
 
@@ -40,7 +60,13 @@
 
 	<color name="bpkBlackTint02">#2c2c2e</color>
 
-	<color name="bpkBlackTint03">#636366</color>
+	<color name="bpkBlackTint03">#3a3a3c</color>
+
+	<color name="bpkBlackTint04">#48484a</color>
+
+	<color name="bpkBlackTint05">#636366</color>
+
+	<color name="bpkBlackTint06">#8e8e93</color>
 
 	<color name="bpkBunol">#ff7b59</color>
 
@@ -106,7 +132,7 @@
 
 	<color name="bpkWhite">#ffffff</color>
 
-	<color name="bpkLineDark">#444560</color>
+	<color name="bpkLineDark">#48484a</color>
 
 	<color name="bpkLineLight">#cdcdd7</color>
 
@@ -120,15 +146,15 @@
 
 	<color name="bpkTextPrimaryLight">#111236</color>
 
-	<color name="bpkTextQuaternaryDark">#cdcdd7</color>
+	<color name="bpkTextQuaternaryDark">#8e8e93</color>
 
 	<color name="bpkTextQuaternaryLight">#8f90a0</color>
 
-	<color name="bpkTextSecondaryDark">#8f90a0</color>
+	<color name="bpkTextSecondaryDark">#8e8e93</color>
 
 	<color name="bpkTextSecondaryLight">#68697f</color>
 
-	<color name="bpkTextTertiaryDark">#b2b2bf</color>
+	<color name="bpkTextTertiaryDark">#8e8e93</color>
 
 	<color name="bpkTextTertiaryLight">#8f90a0</color>
 

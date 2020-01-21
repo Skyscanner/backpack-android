@@ -726,3 +726,7 @@ README.md
 v23
 subclassed
 
+bpkTextPrimary
+bpkTextSecondary
+bpkTextTertiary
+bpkTextQuaternary
