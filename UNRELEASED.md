@@ -16,7 +16,7 @@
 - `BpkCard` elevation colour in the DM
 - `BpkTextField` text, hint and icon colours in the DM
 - `BpkStarRating` inactive star colour in the DM
-- `bpkTextSecondary`, `bpkTextTertiary`, `bpkTextQuaternary` colors in the DM
+- `BpkText` colour tokens
 - `bpkBlackTint03` was renamed to `bpkBlackTint05`
   
 ## How to write a good changelog entry
