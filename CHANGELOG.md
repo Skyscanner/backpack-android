@@ -2,6 +2,23 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+#21.1.0
+
+- **Added**:
+  - `BpkLinkSpan` span.
+  - `BpkText` now uses `bpkPrimary` colour for links.
+  - New elevation colours
+  - New black tints colours
+
+- **Fixed**:
+  - `bpkLine` color in the DM
+  - `BpkPanel` border color in the DM
+  - `BpkCard` elevation colour in the DM
+  - `BpkTextField` text, hint and icon colours in the DM
+  - `BpkStarRating` inactive star colour in the DM
+  - `BpkText` colour tokens
+  - `bpkBlackTint03` was renamed to `bpkBlackTint05`
+
 #21.0.1
   
 - **Fixed:**
