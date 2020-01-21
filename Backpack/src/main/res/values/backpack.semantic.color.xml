@@ -18,7 +18,17 @@
 -->
 <resources>
 
+	<color name="bpkBackgroundAlternative">#f1f2f8</color>
+
+	<color name="bpkBackgroundAlternativeSecondary">#ffffff</color>
+
 	<color name="bpkBackground">#ffffff</color>
+
+	<color name="bpkBackgroundElevation01">#ffffff</color>
+
+	<color name="bpkBackgroundElevation02">#ffffff</color>
+
+	<color name="bpkBackgroundElevation03">#ffffff</color>
 
 	<color name="bpkBackgroundSecondary">#f1f2f8</color>
 

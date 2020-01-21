@@ -18,22 +18,32 @@
 -->
 <resources>
 
+	<color name="bpkBackgroundAlternative">#000000</color>
+
+	<color name="bpkBackgroundAlternativeSecondary">#1d1b20</color>
+
 	<color name="bpkBackground">#000000</color>
+
+	<color name="bpkBackgroundElevation01">#1d1b20</color>
+
+	<color name="bpkBackgroundElevation02">#2c2c2e</color>
+
+	<color name="bpkBackgroundElevation03">#3a3a3c</color>
 
 	<color name="bpkBackgroundSecondary">#1d1b20</color>
 
 	<color name="bpkBackgroundTertiary">#2c2c2e</color>
 
-	<color name="bpkLine">#444560</color>
+	<color name="bpkLine">#48484a</color>
 
 	<color name="bpkPrimary">#6d9feb</color>
 
 	<color name="bpkTextPrimary">#ffffff</color>
 
-	<color name="bpkTextQuaternary">#cdcdd7</color>
+	<color name="bpkTextQuaternary">#8e8e93</color>
 
-	<color name="bpkTextSecondary">#8f90a0</color>
+	<color name="bpkTextSecondary">#8e8e93</color>
 
-	<color name="bpkTextTertiary">#b2b2bf</color>
+	<color name="bpkTextTertiary">#8e8e93</color>
 
  </resources>
