@@ -1,6 +1,11 @@
 # Unreleased
 
 > Place your changes below this line.
+
+**Fixed:**
+
+- `BpkNavBar`
+  - Fixed collapsed style for dark mode.
   
 ## How to write a good changelog entry
 
