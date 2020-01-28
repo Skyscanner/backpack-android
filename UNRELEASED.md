@@ -6,6 +6,9 @@
 
 - `BpkNavBar`
   - Fixed collapsed style for dark mode.
+
+- `BpkCalendar`
+ - Fixed line colour and disabled dates text colour for dark mode.
   
 ## How to write a good changelog entry
 
