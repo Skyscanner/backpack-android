@@ -7,7 +7,7 @@
   <color name="__buttonSecondaryBorder">@color/bpkBlackTint05</color>
   <color name="__calendarSameDayBackground">@color/bpkSkyBlueShade01</color>
   <color name="__calendarRangeBackground">@color/bpkSkyBlueShade01</color>
-  <color name="__calendarDisabledColour">@color/bpkSkyGrayTint02</color>
+  <color name="__calendarDisabledColour">@color/bpkTextSecondary</color>
   <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
   <color name="__panelBorder">@color/bpkLineDark</color>
   <color name="__switchTrackDisabled">@color/bpkBlackTint02</color>
