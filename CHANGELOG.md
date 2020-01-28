@@ -2,7 +2,17 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
-#21.1.0
+# 21.1.1
+
+**Fixed:**
+
+- `BpkNavBar`
+  - Fixed collapsed style for dark mode.
+
+- `BpkCalendar`
+  - Fixed line colour and disabled dates text colour for dark mode.
+
+# 21.1.0
 
 - **Added**:
   - `BpkLinkSpan` span.
@@ -19,7 +29,7 @@
   - `BpkText` colour tokens
   - `bpkBlackTint03` was renamed to `bpkBlackTint05`
 
-#21.0.1
+# 21.0.1
   
 - **Fixed:**
   - `BpkCard`
