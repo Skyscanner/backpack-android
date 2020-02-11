@@ -27,6 +27,9 @@ open class BpkCalendar @JvmOverloads constructor(
   private val weekdayHeaderView by unsafeLazy { findViewById<WeekdayHeaderView>(R.id.weekday_header_view) }
   private val yearPillView by unsafeLazy { findViewById<BpkBadge>(R.id.year_pill_view) }
 
+  val controller: BpkCalendarController?
+    get() = calendarView.controller
+
   fun setController(controller: BpkCalendarController) {
     weekdayHeaderView.initializeWithLocale(controller.locale)
     calendarView.controller = controller

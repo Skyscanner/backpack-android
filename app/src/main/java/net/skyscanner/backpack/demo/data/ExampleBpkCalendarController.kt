@@ -22,9 +22,13 @@ import org.threeten.bp.temporal.ChronoUnit
 class ExampleBpkCalendarController(
   private val context: Context,
   override val selectionType: SelectionType = SelectionType.RANGE,
-  private val disableDates: Boolean = false
+  private val disableDates: Boolean = false,
+  private val automationMode: Boolean = false
 ) : BpkCalendarController(selectionType) {
   override fun onRangeSelected(range: CalendarSelection) {
+    if (automationMode) {
+      return
+    }
     when (range) {
       is SingleDay -> Toast.makeText(context, String.format("%s", range.selectedDay.toString()), Toast.LENGTH_SHORT).show()
       is CalendarRange -> Toast.makeText(context, String.format("%s - %s", range.start.toString(), range.end.toString()), Toast.LENGTH_SHORT).show()

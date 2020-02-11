@@ -2,6 +2,7 @@ package net.skyscanner.backpack.spinner
 
 import android.content.Context
 import android.graphics.PorterDuff
+import android.os.Build
 import android.provider.Settings.Global
 import android.util.AttributeSet
 import android.view.ViewGroup
@@ -102,7 +103,7 @@ open class BpkSpinner @JvmOverloads constructor(
     //
     // Since this component only makes sense with animations we simple don't add the progress bar when animations are disabled.
 
-    if (animationsEnabled) {
+    if (animationsEnabled || Build.VERSION.SDK_INT >= 29) {
       val style = if (small) android.R.attr.progressBarStyleSmall else android.R.attr.progressBarStyle
       progressBar = ProgressBar(context, null, style)
 

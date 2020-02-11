@@ -19,8 +19,9 @@ class DefaultCalendarStory : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
     val calendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
-    controller = ExampleBpkCalendarController(requireContext())
+    controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE, false, automationMode)
     calendar.setController(controller)
     initSelectionTypeSwitcher()
   }
