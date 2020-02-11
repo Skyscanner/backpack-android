@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <style name="BackpackFont" parent="BackpackFontBase">
-    <item name="bpkFontFamilyBase">sans-serif</item>
-    <item name="bpkFontFamilyEmphasized">sans-serif-medium</item>
-    <item name="bpkFontFamilyHeavy">sans-serif-black</item>
+    <item name="bpkFontFamilyBase">@font/skyscanner_relative_android_book</item>
+    <item name="bpkFontFamilyEmphasized">@font/skyscanner_relative_android_bold</item>
+    <item name="bpkFontFamilyHeavy">@font/skyscanner_relative_android_black</item>
   </style>
-
-  <!-- TODO: override text styles in this flavour -->
-
 </resources>

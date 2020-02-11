@@ -213,3 +213,7 @@ sd.img
 sd.img.*
 
 # End of https://www.gitignore.io/api/android,intellij+iml,node,macos
+
+# To pevent having Relative Font in the repository
+*.ttf
+font/
