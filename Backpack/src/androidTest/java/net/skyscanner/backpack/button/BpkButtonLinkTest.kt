@@ -46,6 +46,5 @@ class BpkButtonLinkTest {
       iconPosition = BpkButton.START
     }
     Assert.assertNotNull(button.compoundDrawablesRelative[0])
-    Assert.assertFalse(true)
   }
 }
