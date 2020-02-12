@@ -28,6 +28,8 @@ Given that you have a compatible environment as stated above you can now setup t
 + `npm install` to install npm dependencies
 + `npm run build` to build Backpack tokens
 +  Open the project in Android studio
++ If you are a Skyscanner employee search the internal documentation for "Guide – Setup Internal Backpack Android Builds" and follow the instructions.
+
 
 ## Testing
 
@@ -96,7 +98,7 @@ Please see the [code review guidelines](https://github.com/Skyscanner/backpack/b
 
 > Backpack team only
 
- - Search the internal documentation for "Guide – Preparing the Backpack Android Releases" and follow the instructions.
+ - Search the internal documentation for "Guide – Setup Internal Backpack Android Builds" and follow the instructions.
  - Move everything in `UNRELEASED.md` to `CHANGELOG.md` with the intended release version as the heading.
  - Run `npm run release` and follow the process through, you'll be asked which semantic version to release. Once released verify the artifacts are available.
 
