@@ -64,7 +64,7 @@ script:
   - 'if [[ -n "$TRAVIS_TAG" ]]; then ./scripts/build-docs-ci $TRAVIS_TAG; fi'
 
   # Assemble test apps
-  - ./gradlew :app:assembleOssDebug :app:assembleOssDebugAndroidTest :Backpack:assembleOssDebugAndroidTest check -PdisablePreDex
+  - ./gradlew :app:assembleOssDebug :app:assembleOssDebugAndroidTest :Backpack:assembleOssDebugAndroidTest :app:ktlint :Backpack:ktlint -PdisablePreDex
 
   # Call firebase builds. TODO: do in parallel
   - TEST_METHOD=connected ./scripts/ci-tests.sh

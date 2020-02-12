@@ -48,6 +48,7 @@ subprojects {
     }
 
     check.dependsOn ktlint
+
   }
 }
 
