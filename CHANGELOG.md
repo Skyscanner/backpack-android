@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 21.1.2
+
+**Fixed:**
+
+- Fixed internal font definition.
+
 # 21.1.1
 
 **Fixed:**
