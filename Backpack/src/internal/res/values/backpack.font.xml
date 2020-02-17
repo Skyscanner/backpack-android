@@ -1,8 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="BackpackFont" parent="BackpackFontBase">
+  <!-- BackpackFont is applied via BpkTheme.applyDefaultsToContext  -->
+  <style name="BackpackFont" parent="BpkFontInternal" />
+
+  <!-- This can be extended directly to ensure the internal build resources are used -->
+  <style name="BpkFontInternal" parent="BackpackFontBase">
     <item name="bpkFontFamilyBase">@font/skyscanner_relative_android_book</item>
     <item name="bpkFontFamilyEmphasized">@font/skyscanner_relative_android_bold</item>
     <item name="bpkFontFamilyHeavy">@font/skyscanner_relative_android_black</item>
+
+    <item name="android:lineSpacingMultiplier">1</item>
+
+    <item name="bpkBadgeStyle">@style/InternalBpkBadge</item>
+
+    <item name="bpkTextBaseAppearance">@style/bpkTextBaseInternal</item>
+    <item name="bpkTextCapsAppearance">@style/bpkTextCapsInternal</item>
+    <item name="bpkTextLgAppearance">@style/bpkTextLgInternal</item>
+    <item name="bpkTextSmAppearance">@style/bpkTextSmInternal</item>
+    <item name="bpkTextXlAppearance">@style/bpkTextXlInternal</item>
+    <item name="bpkTextXsAppearance">@style/bpkTextXsInternal</item>
+    <item name="bpkTextXxlAppearance">@style/bpkTextXxlInternal</item>
+    <item name="bpkTextXxxlAppearance">@style/bpkTextXxxlInternal</item>
+    <item name="bpkTextBaseEmphasizedAppearance">@style/bpkTextBaseEmphasizedInternal</item>
+    <item name="bpkTextCapsEmphasizedAppearance">@style/bpkTextCapsEmphasizedInternal</item>
+    <item name="bpkTextLgEmphasizedAppearance">@style/bpkTextLgEmphasizedInternal</item>
+    <item name="bpkTextSmEmphasizedAppearance">@style/bpkTextSmEmphasizedInternal</item>
+    <item name="bpkTextXlEmphasizedAppearance">@style/bpkTextXlEmphasizedInternal</item>
+    <item name="bpkTextXsEmphasizedAppearance">@style/bpkTextXsEmphasizedInternal</item>
+    <item name="bpkTextXxlEmphasizedAppearance">@style/bpkTextXxlEmphasizedInternal</item>
+    <item name="bpkTextXxxlEmphasizedAppearance">@style/bpkTextXxxlEmphasizedInternal</item>
+    <item name="bpkTextXlHeavyAppearance">@style/bpkTextXlHeavyInternal</item>
+    <item name="bpkTextXxlHeavyAppearance">@style/bpkTextXxlHeavyInternal</item>
+    <item name="bpkTextXxxlHeavyAppearance">@style/bpkTextXxxlHeavyInternal</item>
+  </style>
+
+  <!-- Badge should include font padding to work with relative -->
+  <style name="InternalBpkBadge" parent="">
+    <item name="android:includeFontPadding">true</item>
+  </style>
+
+  <!-- Text should have no lineSpacingMultiplier to work with relative -->
+  <style name="bpkTextBaseInternal" parent="bpkTextBase">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextCapsInternal" parent="bpkTextCaps">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextLgInternal" parent="bpkTextLg">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextSmInternal" parent="bpkTextSm">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXlInternal" parent="bpkTextXl">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXsInternal" parent="bpkTextXs">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXxlInternal" parent="bpkTextXxl">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXxxlInternal" parent="bpkTextXxxl">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextBaseEmphasizedInternal" parent="bpkTextBaseEmphasized">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextCapsEmphasizedInternal" parent="bpkTextCapsEmphasized">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextLgEmphasizedInternal" parent="bpkTextLgEmphasized">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextSmEmphasizedInternal" parent="bpkTextSmEmphasized">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXlEmphasizedInternal" parent="bpkTextXlEmphasized">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXsEmphasizedInternal" parent="bpkTextXsEmphasized">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXxlEmphasizedInternal" parent="bpkTextXxlEmphasized">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXxxlEmphasizedInternal" parent="bpkTextXxxlEmphasized">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXlHeavyInternal" parent="bpkTextXlHeavy">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXxlHeavyInternal" parent="bpkTextXxlHeavy">
+    <item name="android:lineSpacingMultiplier">1</item>
+  </style>
+
+  <style name="bpkTextXxxlHeavyInternal" parent="bpkTextXxxlHeavy">
+    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 </resources>
