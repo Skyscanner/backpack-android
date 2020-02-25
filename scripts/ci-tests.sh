@@ -16,6 +16,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
       --app ./app/build/outputs/apk/oss/debug/app-oss-debug.apk \
       --test ./app/build/outputs/apk/androidTest/oss/debug/app-oss-debug-androidTest.apk \
       --device model=Nexus4,version=21 \
+      --environment-variables "notClass=net.skyscanner.backpack.docs.GenerateScreenshots" \
       --results-dir="$dir_name"
 
 
