@@ -29,5 +29,12 @@ open class ComponentDetailFragment : Fragment() {
      * represents.
      */
     val ARG_ITEM_ID = "item_id"
+
+    /*
+     * Tells if the fragment running in automation mode.
+     * Use this to avoid showing toast and things designed only for
+     * user feedback
+     */
+    val AUTOMATION_MODE = "automation_mode"
   }
 }

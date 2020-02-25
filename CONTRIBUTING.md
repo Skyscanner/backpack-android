@@ -19,6 +19,7 @@ source ~/.bash_profile
 Install system images
 ```
 $ANDROID_HOME/tools/bin/sdkmanager "system-images;android-21;google_apis;x86"
+$ANDROID_HOME/tools/bin/sdkmanager "system-images;android-29;google_apis;x86"
 ```
 
 ## Setup
@@ -78,6 +79,23 @@ To test your branch in a codebase, use the dependency in the below format.
 ```
 implementation 'com.github.<github-username>:backpack-android:<branch-name>'
 ```
+
+## Taking screenshots
+
+Before running the script install and start the docs emulator.
+
+```
+$ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name "pixel_9.0" --device "pixel" --package "system-images;android-29;google_apis;x86" --tag "google_apis" --abi "x86
+$ANDROID_HOME/emulator/emulator -avd bpk-droid-docs-avd
+```
+
+Run `./scripts/generate_screenshots.sh` to capture all screenshots. Files will be saved in the correct directory.
+
+> Note: Python is required.
+
+### Adding new screenshots
+
+To add new screenshots, add a new entry to `net/skyscanner/backpack/docs/DocsRegistry.kt`
 
 ## Demo app shortcuts
 

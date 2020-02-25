@@ -36,11 +36,14 @@ class ComponentDetailActivity : BpkBaseActivity() {
       val itemId = intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)
       detail_toolbar.title = itemId
 
+      val automationMode = intent.getBooleanExtra(ComponentDetailFragment.AUTOMATION_MODE, false)
+
       val createFragment = ComponentRegistry.getStoryCreator(itemId)
       val fragment = createFragment.createStory()
 
       val arguments = fragment.arguments ?: Bundle()
       arguments.putString(ComponentDetailFragment.ARG_ITEM_ID, itemId)
+      arguments.putBoolean(ComponentDetailFragment.AUTOMATION_MODE, automationMode)
 
       fragment.arguments = arguments
       supportFragmentManager.beginTransaction()
@@ -56,6 +59,14 @@ class ComponentDetailActivity : BpkBaseActivity() {
     return super.onOptionsItemSelected(item)
   }
 
+  fun toggleToolbar() {
+    detail_toolbar.visibility = if (detail_toolbar.visibility == View.VISIBLE) {
+      View.GONE
+    } else {
+      View.VISIBLE
+    }
+  }
+
   /*
    Hide/Un-hide toolbar: Shift + T
    toggle layout direction: Shift + D
@@ -63,11 +74,7 @@ class ComponentDetailActivity : BpkBaseActivity() {
   */
   override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
     if (keyCode == KeyEvent.KEYCODE_T && event?.isShiftPressed == true) {
-      detail_toolbar.visibility = if (detail_toolbar.visibility == View.VISIBLE) {
-        View.GONE
-      } else {
-        View.VISIBLE
-      }
+      toggleToolbar()
     }
     if (keyCode == KeyEvent.KEYCODE_D && event?.isShiftPressed == true) {
       if (component_detail_container.layoutDirection == View.LAYOUT_DIRECTION_LTR) {
