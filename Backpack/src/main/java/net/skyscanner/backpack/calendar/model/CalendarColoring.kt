@@ -1,7 +1,6 @@
 package net.skyscanner.backpack.calendar.model
 
 import android.content.Context
-import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
@@ -17,7 +16,7 @@ data class ColoredBucket(
   val days: Set<LocalDate>
 )
 
-abstract class CalendarCellStyle {
+sealed class CalendarCellStyle {
 
   /**
    * Text style of the calendar cell. Where [Light] and [Dark] refer to the background colour.
@@ -30,47 +29,44 @@ abstract class CalendarCellStyle {
     Dark
   }
 
-  companion object {
-    /**
-     * A positive cell style which is suitable to indicate for example
-     * a date which has a comparatively low price among the dates in
-     * the calendar.
-     */
-    @JvmStatic
-    val positive = object : CalendarCellStyle() {
-      override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkGlencoe)
-    }
+  /**
+   * A positive cell style which is suitable to indicate for example
+   * a date which has a comparatively low price among the dates in
+   * the calendar.
+   */
+  object Positive : CalendarCellStyle() {
+    override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkGlencoe)
+  }
 
-    /**
-     * A neutral cell style which is suitable to indicate for example
-     * a date which has a comparatively average price among the dates in
-     * the calendar.
-     */
-    @JvmStatic
-    val neutral = object : CalendarCellStyle() {
-      override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkErfoud)
-    }
+  /**
+   * A neutral cell style which is suitable to indicate for example
+   * a date which has a comparatively average price among the dates in
+   * the calendar.
+   */
+  object Neutral : CalendarCellStyle() {
+    override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkErfoud)
+  }
 
-    /**
-     * A negative cell style which is suitable to indicate for example
-     * a date which has a comparatively high price among the dates in
-     * the calendar.
-     */
-    @JvmStatic
-    val negative = object : CalendarCellStyle() {
-      override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkHillier)
-      override fun textStyle(context: Context) = TextStyle.Light
-    }
+  /**
+   * A negative cell style which is suitable to indicate for example
+   * a date which has a comparatively high price among the dates in
+   * the calendar.
+   */
+  object Negative : CalendarCellStyle() {
+    override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkHillier)
+    override fun textStyle(context: Context) = TextStyle.Light
+  }
 
-    /**
-     * A custom cell style.
-     */
-    @JvmStatic
-    fun custom(@ColorInt color: Int?, textStyle: TextStyle? = null) = object : CalendarCellStyle() {
-      override fun color(context: Context) = color ?: Color.TRANSPARENT
-      override fun textStyle(context: Context): TextStyle {
-        return textStyle ?: super.textStyle(context)
-      }
+  /**
+   * A custom cell style.
+   */
+  data class Custom(
+    @ColorInt private val color: Int,
+    private val textStyle: TextStyle? = null
+  ) : CalendarCellStyle() {
+    override fun color(context: Context) = color
+    override fun textStyle(context: Context): TextStyle {
+      return textStyle ?: super.textStyle(context)
     }
   }
 

@@ -119,11 +119,11 @@ class ExampleBpkCalendarController(
  ) : BpkCalendarController(selectionType) {
   override val calendarColoring = CalendarColoring(
     setOf(
-      ColoredBucket(CalendarCellStyle.negative, redSet),
-      ColoredBucket(CalendarCellStyle.neutral, yellowSet),
-      ColoredBucket(CalendarCellStyle.positive, greenSet),
+      ColoredBucket(CalendarCellStyle.Negative, redSet),
+      ColoredBucket(CalendarCellStyle.Neutral, yellowSet),
+      ColoredBucket(CalendarCellStyle.Positive, greenSet),
       ColoredBucket(
-        CalendarCellStyle.custom(ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)),
+        CalendarCellStyle.Custom(ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)),
         greySet
       )
     )
