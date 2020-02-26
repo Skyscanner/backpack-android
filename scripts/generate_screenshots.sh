@@ -62,6 +62,17 @@ function clearData() {
 	checkStatus
 }
 
+function configDevice() {
+	echo "🎬  Configuring demo mode"
+	adb shell settings put global sysui_demo_allowed 1
+	adb shell am broadcast -a com.android.systemui.demo -e command clock -e hhmm 1000
+	adb shell am broadcast -a com.android.systemui.demo -e command battery -e plugged false
+  adb shell am broadcast -a com.android.systemui.demo -e command battery -e level 100
+  adb shell am broadcast -a com.android.systemui.demo -e command network -e wifi show -e level 4
+  adb shell am broadcast -a com.android.systemui.demo -e command network -e mobile show -e datatype none -e level 4
+  adb shell am broadcast -a com.android.systemui.demo -e command notifications -e visible false
+}
+
 function run() {
 	echo "📸  Taking screenshots..."
 	python ./scripts/screenshot-server.py &
@@ -81,11 +92,6 @@ function waitUntil() {
 	sleep $1
 }
 
-function section() {
-	echo ""
-	echo "🎬  $1"
-}
-
 function start() {
 	if [ `ps aux | grep qemu | wc -l` -gt 1 ]; then
 		adb reconnect > /dev/null
@@ -100,6 +106,7 @@ function start() {
 }
 
 function finish() {
+	adb shell am broadcast -a com.android.systemui.demo -e command exit
 	echo "✅  All done. Please review the new screenshots"
 }
 
@@ -113,6 +120,7 @@ function generate() {
 	echo ""
 
 	start
+	configDevice
 	run
 	finish
 }
