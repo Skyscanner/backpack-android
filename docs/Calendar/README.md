@@ -107,6 +107,34 @@ class ExampleBpkCalendarController(
 }
 ```
 
+### Coloured buckets
+
+Coloured buckets are used to change the style of calendar cells.
+
+To define coloured buckets set the `calendarColoring` attribute in the calendar controller.
+
+```kotlin
+class ExampleBpkCalendarController(
+  override val selectionType: SelectionType
+ ) : BpkCalendarController(selectionType) {
+  override val calendarColoring = CalendarColoring(
+    setOf(
+      ColoredBucket(CalendarCellStyle.negative, redSet),
+      ColoredBucket(CalendarCellStyle.neutral, yellowSet),
+      ColoredBucket(CalendarCellStyle.positive, greenSet),
+      ColoredBucket(
+        CalendarCellStyle.custom(ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)),
+        greySet
+      )
+    )
+}
+```
+
+For more examples see:
+
+- [ExampleBpkCalendarController](https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt)
+- [CalendarColoring](https://github.com/Skyscanner/backpack-android/blob/master/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarColoring.kt)
+
 ## Theme Props
 
 - `calendarDateSelectedBackgroundColor`

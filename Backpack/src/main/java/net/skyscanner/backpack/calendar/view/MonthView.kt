@@ -29,6 +29,7 @@ import android.view.View
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.calendar.model.CalendarCellStyle
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.ColoredBucket
@@ -38,6 +39,7 @@ import net.skyscanner.backpack.util.ResourcesUtil
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.WeekFields
+import java.util.*
 
 /**
  * A calendar-like view displaying a specified month and the appropriate selectable day numbers
@@ -344,7 +346,7 @@ internal class MonthView @JvmOverloads constructor(
         }
         CalendarRange.DrawType.NONE -> {
           if (colouredParams.containsKey(calendarDay)) {
-            colouredBucketPaint.color = colouredParams.get(calendarDay)?.color ?: Color.TRANSPARENT
+            colouredBucketPaint.color = colouredParams.get(calendarDay)?.calendarCellStyle?.color(context) ?: Color.TRANSPARENT
             drawCircle(
               canvas,
               x,
@@ -371,9 +373,9 @@ internal class MonthView @JvmOverloads constructor(
       overrideTextColor != null -> overrideTextColor
       type == CalendarRange.DrawType.SELECTED -> defaultTextColor
       type == CalendarRange.DrawType.RANGE -> defaultTextColor
-      else -> when (colouredParams[calendarDay]?.textStyle) {
-        ColoredBucket.TextStyle.Light -> defaultTextColorLight
-        ColoredBucket.TextStyle.Dark -> defaultTextColorDark
+      else -> when (colouredParams[calendarDay]?.calendarCellStyle?.textStyle(context)) {
+        CalendarCellStyle.TextStyle.Light -> defaultTextColorLight
+        CalendarCellStyle.TextStyle.Dark -> defaultTextColorDark
         null -> defaultTextColor
       }
     }
