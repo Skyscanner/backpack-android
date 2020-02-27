@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 23.0.0
+
+**Breaking:**
+
+- BpkCalendar
+  - Added pre defined `CalendarCellStyles` to standardize calendar colouring logic.
+  - `ColoredBucket` constructor was changed to use `CalendarCellStyles`.
+
 # 21.1.1
 
 **Fixed:**
