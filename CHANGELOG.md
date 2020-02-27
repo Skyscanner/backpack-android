@@ -2,7 +2,7 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
-# 23.0.0
+# 22.0.0
 
 **Breaking:**
 
