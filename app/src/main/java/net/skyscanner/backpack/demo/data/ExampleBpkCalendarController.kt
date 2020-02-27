@@ -6,11 +6,7 @@ import android.widget.Toast
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat.LAYOUT_DIRECTION_RTL
-import net.skyscanner.backpack.calendar.model.CalendarColoring
-import net.skyscanner.backpack.calendar.model.CalendarRange
-import net.skyscanner.backpack.calendar.model.CalendarSelection
-import net.skyscanner.backpack.calendar.model.ColoredBucket
-import net.skyscanner.backpack.calendar.model.SingleDay
+import net.skyscanner.backpack.calendar.model.*
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
@@ -76,7 +72,6 @@ internal fun multiColoredExampleCalendarColoring(
   val yellowSet = mutableSetOf<LocalDate>()
   val greenSet = mutableSetOf<LocalDate>()
   val greySet = mutableSetOf<LocalDate>()
-  val emptySet = mutableSetOf<LocalDate>()
   var dateIterator = LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth)
   for (i in 0 until daysBetweenStartAndEnd) {
     val shiftedIterator = i + colorOffset
@@ -85,18 +80,19 @@ internal fun multiColoredExampleCalendarColoring(
       shiftedIterator % 5 == 1L -> yellowSet
       shiftedIterator % 5 == 2L -> greenSet
       shiftedIterator % 5 == 3L -> greySet
-      shiftedIterator % 5 == 4L -> emptySet
       else -> mutableSetOf()
     }.add(dateIterator)
     dateIterator = dateIterator.plusDays(1)
   }
   return CalendarColoring(
     setOf(
-      ColoredBucket(ContextCompat.getColor(context, R.color.bpkPetra), redSet),
-      ColoredBucket(ContextCompat.getColor(context, R.color.bpkBagan), yellowSet),
-      ColoredBucket(ContextCompat.getColor(context, R.color.bpkSagano), greenSet),
-      ColoredBucket(ContextCompat.getColor(context, R.color.bpkBackgroundSecondary), greySet),
-      ColoredBucket(null, emptySet, ContextCompat.getColor(context, R.color.bpkPetra))
+      ColoredBucket(CalendarCellStyle.Negative, redSet),
+      ColoredBucket(CalendarCellStyle.Neutral, yellowSet),
+      ColoredBucket(CalendarCellStyle.Positive, greenSet),
+      ColoredBucket(
+        CalendarCellStyle.Custom(ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)),
+        greySet
+      )
     )
   )
 }
