@@ -32,6 +32,63 @@ class SnackbarStory : Story() {
         .setAction("Action!") {}
         .show()
     }
+
+    view.findViewById<TextView>(R.id.snackbar_titled).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "description here", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("ABCDEF")
+        .setAction("Action!") {}
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_iconed).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "description here", BpkSnackbar.LENGTH_INDEFINITE)
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction("Action!") {}
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_titled_iconed).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "description here", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("ABCDEF")
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction("Action!") {}
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_iconized_action).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "description here", BpkSnackbar.LENGTH_INDEFINITE)
+        .setAction(R.drawable.bpk_close) { }
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_titled_iconized_action).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "description here", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("ABCDEF")
+        .setAction(R.drawable.bpk_close) { }
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_iconed_iconized_action).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "description here", BpkSnackbar.LENGTH_INDEFINITE)
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction(R.drawable.bpk_close) { }
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_titled_iconed_iconized_action).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "description here", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("ABCDEF")
+        .setAction(R.drawable.bpk_close) { }
+        .setIcon(R.drawable.bpk_tick_circle)
+        .show()
+    }
   }
 
   companion object {
