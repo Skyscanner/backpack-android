@@ -7,6 +7,7 @@ import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
 import org.junit.Before
 import org.junit.Rule
@@ -67,6 +68,70 @@ class BpkSnackbarTests : BpkSnapshotTest() {
     capture {
       BpkSnackbar.make(themedRoot, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setAction("Action") {}
+    }
+  }
+
+  @Test
+  fun screenshotTestSnackbar_withTitle() {
+    capture {
+      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("Title")
+        .setAction("Action") {}
+    }
+  }
+
+  @Test
+  fun screenshotTestSnackbar_withIcon() {
+    capture {
+      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction("Action") {}
+    }
+  }
+
+  @Test
+  fun screenshotTestSnackbar_withTitleAndIcon() {
+    capture {
+      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("Title")
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction("Action") {}
+    }
+  }
+
+  @Test
+  fun screenshotTestSnackbar_iconOnly() {
+    capture {
+      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+        .setAction(R.drawable.bpk_close) {}
+    }
+  }
+
+  @Test
+  fun screenshotTestSnackbar_iconOnly_withTitle() {
+    capture {
+      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("Title")
+        .setAction(R.drawable.bpk_close) {}
+    }
+  }
+
+  @Test
+  fun screenshotTestSnackbar_iconOnly_withIcon() {
+    capture {
+      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction(R.drawable.bpk_close) {}
+    }
+  }
+
+  @Test
+  fun screenshotTestSnackbar_iconOnly_withTitleAndIcon() {
+    capture {
+      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("Title")
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction(R.drawable.bpk_close) {}
     }
   }
 
