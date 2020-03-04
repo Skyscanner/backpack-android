@@ -85,7 +85,7 @@ implementation 'com.github.<github-username>:backpack-android:<branch-name>'
 Before running the script install and start the docs emulator.
 
 ```
-$ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name "pixel_9.0" --device "pixel" --package "system-images;android-29;google_apis;x86" --tag "google_apis" --abi "x86
+$ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name "bpk-droid-docs-avd" --device "pixel" --package "system-images;android-29;google_apis;x86" --tag "google_apis" --abi "x86
 $ANDROID_HOME/emulator/emulator -avd bpk-droid-docs-avd
 ```
 
