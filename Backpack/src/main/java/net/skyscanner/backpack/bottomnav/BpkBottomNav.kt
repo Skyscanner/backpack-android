@@ -2,6 +2,10 @@ package net.skyscanner.backpack.bottomnav
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.TextPaint
+import android.text.style.CharacterStyle
 import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
@@ -12,8 +16,9 @@ import androidx.core.view.ViewCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.text.BpkText
 
-class BpkBottomNav @JvmOverloads constructor(
+open class BpkBottomNav @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
@@ -24,6 +29,8 @@ class BpkBottomNav @JvmOverloads constructor(
     super.setOnNavigationItemSelectedListener(it)
   }
 
+  private val fontSpan = BottomNavSpan(context)
+
   init {
     labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
     background = ContextCompat.getDrawable(context, R.drawable.bpk_bottom_nav_background)
@@ -33,8 +40,13 @@ class BpkBottomNav @JvmOverloads constructor(
     ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationLg))
   }
 
-  fun addItem(id: Int, title: CharSequence, icon: Drawable): MenuItem =
-    menu.add(Menu.NONE, id, menu.size(), title).setIcon(icon)
+  fun addItem(id: Int, title: String, icon: Drawable): MenuItem =
+    menu.add(Menu.NONE,
+      id,
+      menu.size(),
+      SpannableStringBuilder().append(title, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+    )
+      .setIcon(icon)
 
   fun addItem(id: Int, @StringRes title: Int, @DrawableRes icon: Int): MenuItem =
     addItem(id, resources.getString(title), ContextCompat.getDrawable(context, icon)!!)
@@ -94,6 +106,17 @@ class BpkBottomNav @JvmOverloads constructor(
         }
       }
       return -1
+    }
+  }
+
+  // We have to create a custom span as a BpkFontSpan causes some animation glitches as it sets text size as well.
+  private class BottomNavSpan(private val font: BpkText.FontDefinition) : CharacterStyle() {
+
+    constructor(context: Context, textStyle: Int = BpkText.BASE, weight: BpkText.Weight = BpkText.Weight.NORMAL) :
+      this(BpkText.getFont(context, textStyle, weight))
+
+    override fun updateDrawState(tp: TextPaint) {
+      tp.typeface = font.typeface
     }
   }
 }
