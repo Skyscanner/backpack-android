@@ -28,4 +28,5 @@
   <dimen name="bpk_dialog_icon_size">72dp</dimen>
   <dimen name="bpk_dialog_max_width">320dp</dimen>
   <dimen name="bpk_dialog_flare_max_width">440dp</dimen>
+  <dimen name="bpk_bottom_nav_height">56dp</dimen>
 </resources>

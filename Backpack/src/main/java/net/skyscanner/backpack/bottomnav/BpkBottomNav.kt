@@ -1,0 +1,99 @@
+package net.skyscanner.backpack.bottomnav
+
+import android.content.Context
+import android.graphics.drawable.Drawable
+import android.util.AttributeSet
+import android.view.Menu
+import android.view.MenuItem
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import net.skyscanner.backpack.R
+
+class BpkBottomNav @JvmOverloads constructor(
+  context: Context,
+  attrs: AttributeSet? = null,
+  defStyleAttr: Int = 0
+) : BottomNavigationView(context, attrs, defStyleAttr) {
+
+  private val listeners = ListenersDelegate(menu).also {
+    super.setOnNavigationItemReselectedListener(it)
+    super.setOnNavigationItemSelectedListener(it)
+  }
+
+  init {
+    labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+    background = ContextCompat.getDrawable(context, R.drawable.bpk_bottom_nav_background)
+    minimumHeight = resources.getDimensionPixelSize(R.dimen.bpk_bottom_nav_height)
+    itemTextColor = ContextCompat.getColorStateList(context, R.color.bpk_bottom_nav_selector)
+    itemIconTintList = itemTextColor
+    ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationLg))
+  }
+
+  fun addItem(id: Int, title: CharSequence, icon: Drawable): MenuItem =
+    menu.add(Menu.NONE, id, menu.size(), title).setIcon(icon)
+
+  fun addItem(id: Int, @StringRes title: Int, @DrawableRes icon: Int): MenuItem =
+    addItem(id, resources.getString(title), ContextCompat.getDrawable(context, icon)!!)
+
+  fun addOnNavigationItemSelectedListener(listener: (MenuItem, Int) -> Unit) {
+    listeners.selected += listener
+  }
+
+  fun addOnNavigationItemReselectedListener(listener: (MenuItem, Int) -> Unit) {
+    listeners.reselected += listener
+  }
+
+  fun removeOnNavigationItemSelectedListener(listener: (MenuItem, Int) -> Unit) {
+    listeners.selected -= listener
+  }
+
+  fun removeOnNavigationItemReselectedListener(listener: (MenuItem, Int) -> Unit) {
+    listeners.reselected -= listener
+  }
+
+  @Deprecated("Use add/remove OnNavigationItemSelectedListener instead",
+    replaceWith = ReplaceWith("addOnNavigationItemSelectedListener"))
+  override fun setOnNavigationItemSelectedListener(listener: OnNavigationItemSelectedListener?) {
+    TODO("Not supported")
+  }
+
+  @Deprecated("Use add/remove OnNavigationItemSelectedListener instead",
+    replaceWith = ReplaceWith("addOnNavigationItemReselectedListener"))
+  override fun setOnNavigationItemReselectedListener(listener: OnNavigationItemReselectedListener?) {
+    TODO("Not supported")
+  }
+
+  private class ListenersDelegate(private val menu: Menu) : OnNavigationItemSelectedListener, OnNavigationItemReselectedListener {
+
+    val reselected = mutableListOf<(MenuItem, Int) -> Unit>()
+    val selected = mutableListOf<(MenuItem, Int) -> Unit>()
+
+    override fun onNavigationItemReselected(item: MenuItem) {
+      val index = findIndexOf(item)
+      if (index != -1) {
+        reselected.forEach { it.invoke(item, index) }
+      }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+      val index = findIndexOf(item)
+      if (index != -1) {
+        selected.forEach { it.invoke(item, index) }
+      }
+      return true
+    }
+
+    private fun findIndexOf(item: MenuItem): Int {
+      for (i in 0 until menu.size()) {
+        if (menu.getItem(i) == item) {
+          return i
+        }
+      }
+      return -1
+    }
+  }
+}
