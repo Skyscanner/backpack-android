@@ -46,6 +46,7 @@ object DocsRegistry {
     Screenshot("Rating - Sizes", "sizes"),
     Screenshot("Rating - Size Vertical", "vertical"),
     Screenshot("Snackbar", "default", ::setupSnackbar),
+    Screenshot("Snackbar", "icon", ::setupSnackbarIconAction),
     Screenshot("Star Rating - Default", "default"),
     Screenshot("Star Rating Interactive", "default"),
     Screenshot("Switch", "default"),
@@ -96,7 +97,14 @@ private fun setupDialog() {
 }
 
 private fun setupSnackbar() {
-  Espresso.onView(ViewMatchers.withText("INDEFINITE SNACKBAR"))
+  Espresso.onView(ViewMatchers.withText("MESSAGE (DURATION INDEFINITE)"))
+    .perform(ViewActions.click())
+
+  Thread.sleep(50)
+}
+
+private fun setupSnackbarIconAction() {
+  Espresso.onView(ViewMatchers.withText("ICON + TITLE + MESSAGE (ICON ACTION)"))
     .perform(ViewActions.click())
 
   Thread.sleep(50)

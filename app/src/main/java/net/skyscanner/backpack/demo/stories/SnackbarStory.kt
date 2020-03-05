@@ -32,6 +32,63 @@ class SnackbarStory : Story() {
         .setAction("Action!") {}
         .show()
     }
+
+    view.findViewById<TextView>(R.id.snackbar_title).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("Title")
+        .setAction("Action!") {}
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_icon).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction("Action!") {}
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_title_icon).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("Title")
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction("Action!") {}
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_iconOnly).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
+        .setAction(R.drawable.bpk_close) { }
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_title_iconOnly).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("Title")
+        .setAction(R.drawable.bpk_close) { }
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_icon_iconOnly).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction(R.drawable.bpk_close) { }
+        .show()
+    }
+
+    view.findViewById<TextView>(R.id.snackbar_title_icon_iconOnly).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle("Title")
+        .setAction(R.drawable.bpk_close) { }
+        .setIcon(R.drawable.bpk_tick_circle)
+        .show()
+    }
   }
 
   companion object {

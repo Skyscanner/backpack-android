@@ -9,21 +9,70 @@
     android:id="@+id/snackbar_short"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Short Snackbar"
+    android:text="Message (Duration Short)"
     android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
   <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/snackbar_long"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Long Snackbar"
+    android:text="Message (Duration Long)"
     android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
   <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/snackbar_indefinite"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Indefinite Snackbar"
+    android:text="Message (Duration Indefinite)"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/snackbar_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Title + Message"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/snackbar_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Icon + Message"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/snackbar_title_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Icon + Title + Message"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/snackbar_iconOnly"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Message (Icon Action)"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/snackbar_title_iconOnly"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Title + Message (Icon Action)"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/snackbar_icon_iconOnly"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Icon + Message (Icon Action)"
+    android:layout_marginBottom="@dimen/bpkSpacingBase" />
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/snackbar_title_icon_iconOnly"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Icon + title + message (Icon Action)"
     android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
 </LinearLayout>

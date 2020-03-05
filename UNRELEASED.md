@@ -2,8 +2,12 @@
 
 > Place your changes below this line.
 
-**Added**:
+- **Added:**
 
+- `BpkSnackbar`
+  - Title attribute
+  - Icon attribute
+  - Icon-only action.
 - `BpkBottomNav` component.
 
 ## How to write a good changelog entry

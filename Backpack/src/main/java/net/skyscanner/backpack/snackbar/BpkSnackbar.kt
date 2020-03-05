@@ -2,19 +2,26 @@ package net.skyscanner.backpack.snackbar
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.text.style.ForegroundColorSpan
+import android.graphics.drawable.Drawable
+import android.text.SpannableStringBuilder
+import android.text.style.ImageSpan
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
+import android.widget.TextView
+import androidx.annotation.AnyRes
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import androidx.core.content.ContextCompat
+import androidx.core.os.ConfigurationCompat
+import androidx.core.view.GravityCompat
 import com.google.android.material.snackbar.Snackbar
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.snackbar.internal.createIconDrawable
 import net.skyscanner.backpack.snackbar.internal.customiseText
-import net.skyscanner.backpack.snackbar.internal.setActionAppearanceCompat
 import net.skyscanner.backpack.snackbar.internal.setBackgroundColorCompat
-import net.skyscanner.backpack.snackbar.internal.setMessageAppearanceCompat
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.use
@@ -38,26 +45,16 @@ class BpkSnackbar private constructor(
   private val context: Context,
   view: View,
   duration: Int,
-  @ColorInt textColor: Int,
+  @ColorInt private val textColor: Int,
   @ColorInt actionColor: Int,
   @ColorInt backgroundColor: Int
 ) {
 
-  private val textFontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.NORMAL)
-  private val textColorSpan = ForegroundColorSpan(textColor)
-
-  private val actionFontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
-  private val actionColorSpan = ForegroundColorSpan(actionColor)
-
   private val callbacks = ArrayList<BaseTransientBottomBar.BaseCallback<BpkSnackbar>>()
 
-  private val snackbar = Snackbar.make(view, "", duration)
-
-  init {
-    snackbar.setBackgroundColorCompat(backgroundColor)
-    snackbar.setMessageAppearanceCompat(textFontSpan, textColorSpan)
-    snackbar.setActionAppearanceCompat(actionFontSpan, actionColorSpan)
-    snackbar.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+  private val snackbar = Snackbar.make(view, "", duration).apply {
+    setBackgroundColorCompat(backgroundColor)
+    addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
       override fun onShown(transientBottomBar: Snackbar?) {
         callbacks.forEach { it.onShown(this@BpkSnackbar) }
       }
@@ -68,21 +65,59 @@ class BpkSnackbar private constructor(
     })
   }
 
-  fun setText(message: CharSequence): BpkSnackbar {
-    snackbar.setText(snackbar.customiseText(message, textFontSpan, textColorSpan))
-    return this
+  private val titleFontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
+  private val textFontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.NORMAL)
+
+  private val textView = snackbar.view.findViewById<TextView>(R.id.snackbar_text).apply {
+    gravity = GravityCompat.START or Gravity.CENTER_VERTICAL
+    compoundDrawablePadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+    setTextColor(textColor)
+    minimumHeight = context.resources.getDimensionPixelSize(R.dimen.bpk_snackbar_min_height)
   }
+
+  private val actionView = snackbar.view.findViewById<TextView>(R.id.snackbar_action).apply {
+    setTextColor(actionColor)
+    BpkText.getFont(context, BpkText.SM, BpkText.Weight.EMPHASIZED).applyTo(this)
+    transformationMethod = null
+  }
+
+  private var title: CharSequence? = null
+  private var text: CharSequence? = null
+
+  fun setTitle(title: CharSequence): BpkSnackbar = apply {
+    this.title = title.toString().toUpperCase(ConfigurationCompat.getLocales(context.resources.configuration).get(0))
+    updateTitleIfShown(isShown)
+  }
+
+  fun setText(message: CharSequence): BpkSnackbar = apply {
+    this.text = message
+    updateTitleIfShown(isShown)
+  }
+
+  fun setIcon(icon: Drawable?): BpkSnackbar = apply {
+    textView.setCompoundDrawablesRelative(createIconDrawable(icon, textColor), null, null, null)
+  }
+
+  fun setIcon(@DrawableRes icon: Int): BpkSnackbar =
+    setIcon(ContextCompat.getDrawable(context, icon))
 
   fun setText(@StringRes resId: Int): BpkSnackbar =
     setText(context.getString(resId))
 
-  fun setAction(text: CharSequence, listener: View.OnClickListener): BpkSnackbar {
-    snackbar.setAction(snackbar.customiseText(text, actionFontSpan, actionColorSpan), listener)
-    return this
+  fun setAction(text: CharSequence, listener: View.OnClickListener): BpkSnackbar = apply {
+    setActionInternal(text = text, icon = null, callback = listener)
   }
 
-  fun setAction(@StringRes resId: Int, listener: View.OnClickListener): BpkSnackbar =
-    setAction(context.getText(resId), listener)
+  fun setAction(@AnyRes resId: Int, listener: View.OnClickListener): BpkSnackbar = apply {
+    if (context.resources.getResourceTypeName(resId) == "drawable") {
+      return setAction(ContextCompat.getDrawable(context, resId)!!, listener)
+    }
+    return setAction(context.getText(resId), listener)
+  }
+
+  fun setAction(icon: Drawable, listener: View.OnClickListener): BpkSnackbar = apply {
+    setActionInternal(text = null, icon = icon, callback = listener)
+  }
 
   val duration: Int
     get() = snackbar.duration
@@ -90,36 +125,34 @@ class BpkSnackbar private constructor(
   /**
    * @param duration one of the [LENGTH_SHORT], [LENGTH_LONG], [LENGTH_INDEFINITE]
    */
-  fun setDuration(duration: Int): BpkSnackbar {
+  fun setDuration(duration: Int): BpkSnackbar = apply {
     snackbar.duration = duration
-    return this
   }
 
   val isShown: Boolean
     get() = snackbar.isShown
 
   fun show() =
-    snackbar.show()
+    snackbar
+      .show()
+      .also { updateTitleIfShown(true) }
 
   fun dismiss() =
     snackbar.dismiss()
 
-  fun addCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar {
+  fun addCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
     callback?.let(callbacks::add)
-    return this
   }
 
-  fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar {
+  fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
     callbacks.remove(callback)
-    return this
   }
 
   val behaviour: BaseTransientBottomBar.Behavior?
     get() = snackbar.behavior
 
-  fun setBehaviour(behavior: BaseTransientBottomBar.Behavior?): BpkSnackbar {
+  fun setBehaviour(behavior: BaseTransientBottomBar.Behavior?): BpkSnackbar = apply {
     snackbar.behavior = behavior
-    return this
   }
 
   /**
@@ -132,6 +165,32 @@ class BpkSnackbar private constructor(
    */
   val rawSnackbar: Snackbar =
     snackbar
+
+  private fun updateTitleIfShown(isShown: Boolean) {
+    if (isShown) {
+      val ssb = SpannableStringBuilder()
+      title?.let {
+        ssb.append(customiseText(it, titleFontSpan))
+        ssb.append(" ")
+      }
+      text?.let {
+        ssb.append(customiseText(it, textFontSpan))
+      }
+      snackbar.setText(ssb)
+    }
+  }
+
+  private fun setActionInternal(text: CharSequence?, icon: Drawable?, callback: View.OnClickListener) {
+    actionView.gravity = when {
+      icon != null -> Gravity.CENTER
+      else -> GravityCompat.START or Gravity.CENTER_VERTICAL
+    }
+    snackbar.setAction(when {
+      !text.isNullOrEmpty() -> text
+      icon != null -> customiseText(" ", ImageSpan(createIconDrawable(icon, textColor)!!))
+      else -> ""
+    }, callback)
+  }
 
   companion object {
 
@@ -159,7 +218,7 @@ class BpkSnackbar private constructor(
       val context = view.context
 
       @ColorInt var textColor = ContextCompat.getColor(context, R.color.bpkBackground)
-      @ColorInt var actionColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
+      @ColorInt var actionColor = ContextCompat.getColor(context, R.color.bpkMonteverde)
       @ColorInt var backgroundColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
 
       val outValue = TypedValue()

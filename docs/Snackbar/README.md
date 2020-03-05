@@ -16,6 +16,28 @@ BpkSnackbar.make(view, "Message", BpkSnackbar.LENGTH_SHORT)
         .show()
 ```
 
+An example with title and icon
+
+```Kotlin
+import net.skyscanner.backpack.snackbar.BpkSnackbar
+
+BpkSnackbar.make(view, "Message", BpkSnackbar.LENGTH_SHORT)
+        .setTitle("Title")
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction("Action") {}
+        .show()
+```
+
+An example with icon-only action
+
+```Kotlin
+import net.skyscanner.backpack.snackbar.BpkSnackbar
+
+BpkSnackbar.make(view, "Message", BpkSnackbar.LENGTH_SHORT)
+        .setAction(R.drawable.bpk_close) {}
+        .show()
+```
+
 ## Theme Props
 
 - `snackbarTextColor`
