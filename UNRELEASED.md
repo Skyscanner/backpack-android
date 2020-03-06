@@ -8,6 +8,7 @@
   - Title attribute
   - Icon attribute
   - Icon-only action.
+- `BpkBottomNav` component.
 
 ## How to write a good changelog entry
 

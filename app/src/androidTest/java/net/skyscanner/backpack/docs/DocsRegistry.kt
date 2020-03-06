@@ -11,6 +11,7 @@ import org.threeten.bp.LocalDate
 object DocsRegistry {
   val screenshots = listOf(
     Screenshot("Badge", "all"),
+    Screenshot("BottomNav", "default"),
     Screenshot("Button - Primary", "primary"),
     Screenshot("Button - Secondary", "secondary"),
     Screenshot("Button - Featured", "featured"),

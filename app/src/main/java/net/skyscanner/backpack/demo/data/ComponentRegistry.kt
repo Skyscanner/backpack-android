@@ -64,6 +64,7 @@ object ComponentRegistry {
 
   private val COMPONENTS_TREE = mapOf(
     "Badge" story NodeData { Story of R.layout.fragment_badge },
+    "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
     "Button" story NodeData({ children -> SubStory of children },
       mapOf(
         "Primary" story NodeData { Story of R.layout.fragment_button_primary },
