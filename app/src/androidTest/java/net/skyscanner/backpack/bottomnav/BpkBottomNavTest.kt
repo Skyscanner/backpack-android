@@ -20,7 +20,7 @@ class BpkBottomNavTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestBottomNav_Default() {
     snap(BpkBottomNav(testContext).apply {
-      addItem(1, R.string.bottom_nav_home, R.drawable.bpk_hotels)
+      addItem(1, R.string.bottom_nav_home, R.drawable.bpk_aircraft)
       addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
       addItem(3, R.string.bottom_nav_trips, R.drawable.bpk_star)
       addItem(4, R.string.bottom_nav_profile, R.drawable.bpk_account_circle)
@@ -30,7 +30,7 @@ class BpkBottomNavTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestBottomNav_Themed() {
     snap(BpkBottomNav(createThemedContext(testContext)).apply {
-      addItem(1, R.string.bottom_nav_home, R.drawable.bpk_hotels)
+      addItem(1, R.string.bottom_nav_home, R.drawable.bpk_aircraft)
       addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
       addItem(3, R.string.bottom_nav_trips, R.drawable.bpk_star)
       addItem(4, R.string.bottom_nav_profile, R.drawable.bpk_account_circle)
