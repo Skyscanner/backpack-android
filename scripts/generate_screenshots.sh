@@ -75,7 +75,7 @@ function configDevice() {
 
 function run() {
 	echo "📸  Taking screenshots..."
-	python ./scripts/screenshot-server.py &
+	node ./scripts/screenshot-server.js &
 	echo $! > ss-server.pid
 	ipAddr=$(getActiveNetwork)
 	~/Library/Android/sdk/platform-tools/adb shell am instrument --no-window-animation -w \
