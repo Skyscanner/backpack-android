@@ -17,6 +17,7 @@ object DocsRegistry {
     Screenshot("Button - Featured", "featured"),
     Screenshot("Button - Destructive", "destructive"),
     Screenshot("Button - Outline", "outline"),
+    Screenshot("Button - Loading", "loading"),
     Screenshot("ButtonLink - Default", "default"),
     Screenshot("Calendar - Default", "range", ::setupCalendar),
     Screenshot("Card - Default", "default"),
