@@ -2,6 +2,16 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 22.1.0
+
+**Added:**
+
+- `BpkSnackbar`
+  - Title attribute
+  - Icon attribute
+  - Icon-only action.
+- `BpkBottomNav` component.
+
 # 22.0.0
 
 **Breaking:**
