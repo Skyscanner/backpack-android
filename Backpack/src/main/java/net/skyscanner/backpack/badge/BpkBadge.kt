@@ -41,7 +41,7 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with error messages
      */
-    Destructive(3, R.color.bpkHillier, R.color.bpkWhite),
+    Destructive(3, R.color.bpkPanjin, R.color.bpkWhite),
     /**
      *  Light themed style for badges
      */
