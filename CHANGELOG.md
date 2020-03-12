@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 22.1.1
+
+**Changed:**
+
+- `BpkBadge`
+  - Made 'destructive' badges darker to match other platforms.
+
 # 22.1.0
 
 **Added:**
@@ -48,16 +55,16 @@
   - `bpkBlackTint03` was renamed to `bpkBlackTint05`
 
 # 21.0.1
-  
+
 - **Fixed:**
   - `BpkCard`
     * Set default background to `bpkBackgroundTertiary`
   - `BpkBadge`
     * Changed success, warning and error colours.
- 
+
 
 # 21.0.0
-    
+
 - **Breaking:**
   - General
     * Updated `AppCompat` to 1.1.0
@@ -74,20 +81,20 @@
 **Added**:
 
 - Add `bpkLine` semantic colour.
- 
+
 # 20.1.0
-  
+
 - **Added:**
   - `BpkDialog`
     * New flare style
     * Image property
-    
+
 # 20.0.0
 
 - **Breaking:**
   - Button:
     - removed `buttonCornerRadius` and `buttonAddElevation` attributes.
-  
+
 - **Fixed:**
   - Button
     - the text cut when changing the text to a larger one
@@ -98,10 +105,10 @@
     * Menu getter
 
 # 19.0.0
-  
+
 - **Breaking:**
   - `BpkPageTitle` was removed.
-  
+
 - **Added:**
   - `BpkNavBar`
     * Menu and nav icon support.
@@ -119,7 +126,7 @@
 - **Breaking:**
   - `Checkbox` text color cannot be set now via `android:textColor` attribute.
   - `Switch` text color cannot be set now via `android:textColor` attribute.
-  
+
 - **Added:**
   - Dark Mode support for `Checkbox`
   - Dark Mode support for `Switch`
@@ -128,7 +135,7 @@
   - Dark Mode support for `HorizontalNav`
   - Disabled state support for `Checkbox`
   - Semantic color support for `bpkPrimaryColor`
-  
+
 # 17.0.0
 
 **Breaking:**
@@ -152,7 +159,7 @@
   - Dark Mode support for `Text`
   - Dark Mode support for `TextField`
   - Dark Mode support for `Toast`
-  
+
 
 # 16.0.1
 
@@ -167,7 +174,7 @@
 
 - BpkButton:
   - Added `loading` (`app:buttonLoading` in XML) property and loading style.
-  
+
 - BpkIcon:
   - Added file and printer icons
 
@@ -208,10 +215,10 @@
 
 - `BpkIcon`:
   - Added `bpk_single_booking`
-  
+
 - `BpkChip`:
   - `chipBackgroundColor` attribute
-  
+
 **Fixed:**
 - `BpkCalendar`:
   - Height calculation of range selection
@@ -233,7 +240,7 @@
 - `BpkBadge`
   - Added theme support
   - Added `android:includeFontPadding` theme property
-  
+
 # 13.2.1
 
 **Fixed:**
@@ -306,7 +313,7 @@
 
 **Fixed**:
   - `BpkDialog` content is now scrollable.
-  
+
 # 12.0.0
 
 **Breaking**:
@@ -380,7 +387,7 @@
   - fixed icons alignment when text is too long.
 - `BpkTextField`
   - open for extension
-  
+
 # 10.0.0
 
 **Added**:
@@ -484,7 +491,7 @@
 # 9.5.0
 
 **Added:**
-- `BpkFab` 
+- `BpkFab`
 
 # 9.4.1
 
