@@ -1,6 +1,9 @@
 # Unreleased
 
-> Place your changes below this line.
+**Fixed:**
+
+- BpkCalendar
+  - Updated selected background colour.
 
 ## How to write a good changelog entry
 
