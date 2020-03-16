@@ -22,6 +22,7 @@
     <attr name="calendarDateSelectedSameDayBackgroundColor" format="color" />
     <attr name="calendarDateSelectedRangeBackgroundColor" format="color" />
     <attr name="calendarDateSelectedTextColor" format="color" />
+    <attr name="calendarRangeTextColor" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkText">
