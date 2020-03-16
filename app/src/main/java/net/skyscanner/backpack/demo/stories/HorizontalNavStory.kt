@@ -20,6 +20,7 @@ class HorizontalNavStory : Story() {
     horizontalNav.addTab(horizontalNav.newTab().setText("Flights"))
     horizontalNav.addTab(horizontalNav.newTab().setText("Hotels"))
     horizontalNav.addTab(horizontalNav.newTab().setText("Car Hire"))
+    horizontalNav.setNotificationDot(0, true)
   }
 
   companion object {
