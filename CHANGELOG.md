@@ -2,6 +2,19 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 22.2.0
+
+**Fixed:**
+
+- BpkCalendar
+  - Updated selected background colour.
+
+**Added:**
+
+- `BpkHorizontalNav`
+  - `setNotificationDot()` method
+
+
 # 22.1.1
 
 **Changed:**
