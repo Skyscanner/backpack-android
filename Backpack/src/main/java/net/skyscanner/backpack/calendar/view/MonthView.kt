@@ -370,7 +370,7 @@ internal class MonthView @JvmOverloads constructor(
 
     monthNumberPaint.color = when {
       isDisabled -> when (type) {
-        CalendarRange.DrawType.RANGE -> defaultTextColor
+        CalendarRange.DrawType.RANGE -> rangeTextColor
         else -> disabledTextColor
       }
       overrideTextColor != null -> overrideTextColor
