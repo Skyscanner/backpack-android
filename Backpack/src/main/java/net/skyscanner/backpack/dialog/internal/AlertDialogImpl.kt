@@ -30,7 +30,9 @@ internal class AlertDialogImpl(
         else -> DialogWindowLayout.Gravity.Center
       }
       dismissListener = {
-        dialog.dismiss()
+        if(isCanceledOnTouchOutside) {
+          dialog.dismiss()
+        }
       }
     }
   }
