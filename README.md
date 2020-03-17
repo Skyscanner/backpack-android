@@ -14,7 +14,7 @@ Backpack is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-
 all of it, add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-implementation 'com.github.skyscanner:backpack-android:22.2.0'
+implementation 'com.github.skyscanner:backpack-android:22.2.1'
 ```
 
 If your app resolves dependencies through Jitpack you're all set, if not add in your root `build.gradle`

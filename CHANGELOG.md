@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 22.2.1
+
+**Fixed:**
+
+- `BpkDialog`
+  - fixed `setCanceledOnTouchOutside()` behaviour.
+
 # 22.2.0
 
 **Fixed:**
