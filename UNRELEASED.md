@@ -27,3 +27,7 @@ See [`CHANGELOG.md`](CHANGELOG.md) for real-world examples of good changelog ent
 
 - `bpk-component-horcrux`:
   - Fixed issue where `BpkHorcrux` would occasionally possess the living.
+
+- `BpkDialog`
+  - `setCanceledOnTouchOutside()` method to change dialog dismiss behaviour
+
