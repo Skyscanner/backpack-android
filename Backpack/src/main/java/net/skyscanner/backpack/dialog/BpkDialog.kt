@@ -50,4 +50,9 @@ open class BpkDialog(
   fun addActionButton(view: View) {
     impl.addActionButton(view)
   }
+
+  override fun setCanceledOnTouchOutside(cancel: Boolean) {
+    super.setCanceledOnTouchOutside(cancel)
+    impl.isCanceledOnTouchOutside = cancel
+  }
 }

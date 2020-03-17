@@ -19,6 +19,8 @@ internal interface BpkDialogImpl {
 
   var icon: BpkDialog.Icon?
 
+  var isCanceledOnTouchOutside: Boolean
+
   fun addActionButton(view: View)
 
   abstract class Base(
@@ -60,6 +62,8 @@ internal interface BpkDialogImpl {
         field = value
         iconView?.icon = icon
       }
+
+    override var isCanceledOnTouchOutside: Boolean = true
 
     override fun addActionButton(view: View) {
       buttonsRoot?.addView(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
