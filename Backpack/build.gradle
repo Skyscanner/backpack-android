@@ -51,7 +51,7 @@ dependencies {
   androidTestImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
   androidTestImplementation 'org.mockito:mockito-android:2.28.2'
   api 'io.github.inflationx:viewpump:1.0.0'
-  testImplementation 'junit:junit:4.12'
+  testImplementation 'junit:junit:4.13'
   // NOTE: This is here and not in the root file because snyk is not ignoring it otherwise.
   // This is a test dependency and should be ignored (as stated in snyk docs)
   lintClassPath 'com.pinterest:ktlint:0.33.0'
