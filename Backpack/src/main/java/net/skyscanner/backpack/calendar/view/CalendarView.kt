@@ -56,10 +56,11 @@ internal class CalendarView constructor(
   private var previousScrollState = OnScrollListener.SCROLL_STATE_IDLE
   private var currentScrollState = OnScrollListener.SCROLL_STATE_IDLE
   private var adapter: MonthAdapter? = null
+  private var lastSeenYear: Int? = null
 
   init {
     this.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-    this.setDrawSelectorOnTop(false)
+    this.isDrawSelectorOnTop = false
 
     setUpListView()
   }
@@ -95,15 +96,21 @@ internal class CalendarView constructor(
 
   // TODO: Updates the title and selected month if the view has moved to a new month.
   override fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
-    val child = view.getChildAt(0) as MonthView? ?: return
+    val child = view.getChildAt(0) ?: return
 
+    if (child is MonthView) {
+      lastSeenYear = child.getYear()
+    }
+
+    val year = lastSeenYear ?: controller?.startDate?.year
     val currScroll = (view.firstVisiblePosition * child.height - child.bottom).toLong()
     previousScrollPosition = currScroll
     previousScrollState = currentScrollState
 
-    val year = child.getYear()
-    calendarScrollListeners.forEach {
-      it.onScroll(this, firstVisibleItem, visibleItemCount, totalItemCount, year)
+    if (year != null) {
+      calendarScrollListeners.forEach {
+        it.onScroll(this, firstVisibleItem, visibleItemCount, totalItemCount, year)
+      }
     }
   }
 
