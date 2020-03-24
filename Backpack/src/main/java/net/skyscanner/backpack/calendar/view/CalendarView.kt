@@ -99,5 +99,6 @@ internal class CalendarView constructor(
   }
 
   override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {
+    scrollListener?.onScrollStateChanged(this, scrollState)
   }
 }
