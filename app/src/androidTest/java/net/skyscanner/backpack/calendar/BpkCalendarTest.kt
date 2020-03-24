@@ -418,7 +418,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  @FlakyTest
   fun screenshotTestCalendarSetSelectionFromTop_withTheme() {
     val calendar = BpkCalendar(createThemedContext(testContext))
     val controller = BpkCalendarControllerImpl(

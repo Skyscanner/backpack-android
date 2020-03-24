@@ -8,8 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.badge.BpkBadge
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
+import net.skyscanner.backpack.calendar.view.BpkCalendarScrollListener
 import net.skyscanner.backpack.calendar.view.CalendarView
-import net.skyscanner.backpack.calendar.view.OnYearChangedListener
 import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.wrapContextWithDefaults
@@ -18,7 +18,7 @@ open class BpkCalendar @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyle: Int = 0
-) : ConstraintLayout(wrapContextWithDefaults(context), attrs, defStyle), OnYearChangedListener {
+) : ConstraintLayout(wrapContextWithDefaults(context), attrs, defStyle), BpkCalendarScrollListener {
 
   init {
     inflate(this.context, R.layout.view_bpk_calendar, this)
@@ -35,20 +35,24 @@ open class BpkCalendar @JvmOverloads constructor(
     weekdayHeaderView.initializeWithLocale(controller.locale)
     calendarView.controller = controller
     controller.updateContentCallback = calendarView
-    calendarView.listener = this
+    calendarView.calendarScrollListeners.add(this)
 
     updateYearPill(controller.startDate.year)
   }
 
-  fun setOnScrollListener(listener: AbsListView.OnScrollListener) {
-    calendarView.scrollListener = listener
+  fun addOnScrollListener(listener: BpkCalendarScrollListener) {
+    calendarView.calendarScrollListeners.add(listener)
+  }
+
+  fun removeOnScrollListener(listener: BpkCalendarScrollListener) {
+    calendarView.calendarScrollListeners.remove(listener)
   }
 
   fun setSelectionFromTop(position: Int, y: Int = 0) {
     calendarView.setSelectionFromTop(position, y)
   }
 
-  override fun onYearChanged(year: Int) {
+  override fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int, year: Int) {
     updateYearPill(year)
   }
 

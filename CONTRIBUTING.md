@@ -57,7 +57,7 @@ $ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &
 After adding new snapshot tests, run
 
 ```
-./gradlew app:recordDebugAndroidTestScreenshotTest
+./gradlew app:recordOssDebugAndroidTestScreenshotTest
 ```
 
 To test changes use
