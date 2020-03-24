@@ -50,6 +50,7 @@ internal class CalendarView constructor(
     }
 
   var listener: OnYearChangedListener? = null
+  var scrollListener: OnScrollListener? = null
 
   private var scrollFriction = 1.0f
   private var previousScrollPosition: Long = 0
@@ -94,6 +95,7 @@ internal class CalendarView constructor(
     previousScrollState = currentScrollState
 
     listener?.onYearChanged(child.getYear())
+    scrollListener?.onScroll(this, firstVisibleItem, visibleItemCount, totalItemCount)
   }
 
   override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {

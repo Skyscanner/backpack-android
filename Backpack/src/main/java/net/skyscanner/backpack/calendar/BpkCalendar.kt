@@ -3,11 +3,13 @@ package net.skyscanner.backpack.calendar
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.widget.AbsListView
 import androidx.constraintlayout.widget.ConstraintLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.badge.BpkBadge
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.view.CalendarView
+import net.skyscanner.backpack.calendar.view.OnCalendarScrollListener
 import net.skyscanner.backpack.calendar.view.OnYearChangedListener
 import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
 import net.skyscanner.backpack.util.unsafeLazy
@@ -37,6 +39,14 @@ open class BpkCalendar @JvmOverloads constructor(
     calendarView.listener = this
 
     updateYearPill(controller.startDate.year)
+  }
+
+  fun setOnScrollListener(listener: AbsListView.OnScrollListener) {
+    calendarView.scrollListener = listener
+  }
+
+  fun setSelectionFromTop(position: Int, y: Int = 0) {
+    calendarView.setSelectionFromTop(position, y)
   }
 
   override fun onYearChanged(year: Int) {
