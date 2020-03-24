@@ -9,7 +9,6 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.badge.BpkBadge
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.view.CalendarView
-import net.skyscanner.backpack.calendar.view.OnCalendarScrollListener
 import net.skyscanner.backpack.calendar.view.OnYearChangedListener
 import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
 import net.skyscanner.backpack.util.unsafeLazy
