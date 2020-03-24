@@ -35,17 +35,17 @@ open class BpkCalendar @JvmOverloads constructor(
     weekdayHeaderView.initializeWithLocale(controller.locale)
     calendarView.controller = controller
     controller.updateContentCallback = calendarView
-    calendarView.calendarScrollListeners.add(this)
+    calendarView.addBpkCalendarScrollListener(this)
 
     updateYearPill(controller.startDate.year)
   }
 
   fun addOnScrollListener(listener: BpkCalendarScrollListener) {
-    calendarView.calendarScrollListeners.add(listener)
+    calendarView.addBpkCalendarScrollListener(listener)
   }
 
   fun removeOnScrollListener(listener: BpkCalendarScrollListener) {
-    calendarView.calendarScrollListeners.remove(listener)
+    calendarView.removeBpkCalendarScrollListener(listener)
   }
 
   fun setSelectionFromTop(position: Int, y: Int = 0) {

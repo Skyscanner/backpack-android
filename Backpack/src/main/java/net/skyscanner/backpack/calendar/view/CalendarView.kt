@@ -49,7 +49,7 @@ internal class CalendarView constructor(
       }
     }
 
-  var calendarScrollListeners = mutableSetOf<BpkCalendarScrollListener>()
+  private var calendarScrollListeners = mutableSetOf<BpkCalendarScrollListener>()
 
   private var scrollFriction = 1.0f
   private var previousScrollPosition: Long = 0
@@ -66,6 +66,14 @@ internal class CalendarView constructor(
 
   override fun updateContent() {
     adapter?.notifyDataSetChanged()
+  }
+
+  fun addBpkCalendarScrollListener(listener: BpkCalendarScrollListener) {
+    calendarScrollListeners.add(listener)
+  }
+
+  fun removeBpkCalendarScrollListener(listener: BpkCalendarScrollListener) {
+    calendarScrollListeners.remove(listener)
   }
 
   private fun changeAdapter(controller: BpkCalendarController) {
