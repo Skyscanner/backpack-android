@@ -25,12 +25,12 @@ import android.widget.ListView
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.MonthAdapter
 
-interface OnYearChangedListener {
-  fun onYearChanged(year: Int)
-}
-
 interface CalendarUpdateCallback {
   fun updateContent()
+}
+
+interface BpkCalendarScrollListener {
+  fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int, year: Int)
 }
 
 /**
@@ -49,7 +49,7 @@ internal class CalendarView constructor(
       }
     }
 
-  var listener: OnYearChangedListener? = null
+  private var calendarScrollListeners = mutableSetOf<BpkCalendarScrollListener>()
 
   private var scrollFriction = 1.0f
   private var previousScrollPosition: Long = 0
@@ -66,6 +66,14 @@ internal class CalendarView constructor(
 
   override fun updateContent() {
     adapter?.notifyDataSetChanged()
+  }
+
+  fun addBpkCalendarScrollListener(listener: BpkCalendarScrollListener) {
+    calendarScrollListeners.add(listener)
+  }
+
+  fun removeBpkCalendarScrollListener(listener: BpkCalendarScrollListener) {
+    calendarScrollListeners.remove(listener)
   }
 
   private fun changeAdapter(controller: BpkCalendarController) {
@@ -93,7 +101,10 @@ internal class CalendarView constructor(
     previousScrollPosition = currScroll
     previousScrollState = currentScrollState
 
-    listener?.onYearChanged(child.getYear())
+    val year = child.getYear()
+    calendarScrollListeners.forEach {
+      it.onScroll(this, firstVisibleItem, visibleItemCount, totalItemCount, year)
+    }
   }
 
   override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {

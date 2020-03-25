@@ -1,5 +1,12 @@
 # Unreleased
 
+> Place your changes below this line.
+
+**Added:**
+- `BpkCalendar`:
+  - Ability to add and remove `BpkCalendarScrollListener` scroll listeners of the calendar with `addScrollListener`, and `removeScrollListener`
+  - Ability to scroll to a specific position programmatically (with y offset) with `setSelectionFromTop(position: Int, y: Int = 0)`
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
