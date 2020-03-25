@@ -2,6 +2,32 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 22.2.2
+
+**Fixed:**
+
+- Updated `bpk_hotels` icon.
+
+# 22.2.1
+
+**Fixed:**
+
+- `BpkDialog`
+  - fixed `setCanceledOnTouchOutside()` behaviour.
+
+# 22.2.0
+
+**Fixed:**
+
+- BpkCalendar
+  - Updated selected background colour.
+
+**Added:**
+
+- `BpkHorizontalNav`
+  - `setNotificationDot()` method
+
+
 # 22.1.1
 
 **Changed:**

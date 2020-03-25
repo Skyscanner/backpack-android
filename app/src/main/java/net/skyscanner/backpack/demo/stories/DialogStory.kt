@@ -94,6 +94,7 @@ class DialogStory : Story() {
           R.color.bpkPanjin
         )
         setCancelable(false)
+        setCanceledOnTouchOutside(false)
         setOnCancelListener {
           println("canceled")
         }

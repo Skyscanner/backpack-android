@@ -66,6 +66,12 @@ class HorizontalNavTests : BpkSnapshotTest() {
     snap(horizontalNav)
   }
 
+  @Test
+  fun screenshotHorizontalNav_notificationDot() {
+    horizontalNav.setNotificationDot(0, true)
+    snap(horizontalNav)
+  }
+
   private fun BpkHorizontalNav.init() = apply {
     setBackgroundColor(Color.WHITE)
     addTab(newTab().setText("1"))

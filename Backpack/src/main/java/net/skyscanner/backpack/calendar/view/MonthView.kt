@@ -39,7 +39,6 @@ import net.skyscanner.backpack.util.ResourcesUtil
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.WeekFields
-import java.util.*
 
 /**
  * A calendar-like view displaying a specified month and the appropriate selectable day numbers
@@ -90,12 +89,13 @@ internal class MonthView @JvmOverloads constructor(
   private val selectedDayCircleFillColor: Int
   private val selectedDaySameDayCircleFillColor: Int
   private val rangeBackgroundColor: Int
+  private val rangeTextColor: Int
 
   init {
     val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
 
     selectedDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
-      ContextCompat.getColor(context, R.color.bpkSkyBlueShade02))
+      ContextCompat.getColor(context, R.color.bpkPrimary))
 
     selectedDaySameDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
       ContextCompat.getColor(context, R.color.__calendarSameDayBackground))
@@ -104,7 +104,10 @@ internal class MonthView @JvmOverloads constructor(
       ContextCompat.getColor(context, R.color.__calendarRangeBackground))
 
     selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor,
-      ContextCompat.getColor(context, R.color.bpkWhite))
+      ContextCompat.getColor(context, R.color.__calendarSelectedTextColor))
+
+    rangeTextColor = a.getColor(R.styleable.BpkCalendar_calendarRangeTextColor,
+      ContextCompat.getColor(context, R.color.__calendarRangeText))
 
     a.recycle()
   }
@@ -367,12 +370,12 @@ internal class MonthView @JvmOverloads constructor(
 
     monthNumberPaint.color = when {
       isDisabled -> when (type) {
-        CalendarRange.DrawType.RANGE -> defaultTextColor
+        CalendarRange.DrawType.RANGE -> rangeTextColor
         else -> disabledTextColor
       }
       overrideTextColor != null -> overrideTextColor
       type == CalendarRange.DrawType.SELECTED -> defaultTextColor
-      type == CalendarRange.DrawType.RANGE -> defaultTextColor
+      type == CalendarRange.DrawType.RANGE -> rangeTextColor
       else -> when (colouredParams[calendarDay]?.calendarCellStyle?.textStyle(context)) {
         CalendarCellStyle.TextStyle.Light -> defaultTextColorLight
         CalendarCellStyle.TextStyle.Dark -> defaultTextColorDark
