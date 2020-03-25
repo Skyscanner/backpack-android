@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 22.2.2
+
+**Fixed:**
+
+- Updated `bpk_hotels` icon.
+
 # 22.2.1
 
 **Fixed:**
