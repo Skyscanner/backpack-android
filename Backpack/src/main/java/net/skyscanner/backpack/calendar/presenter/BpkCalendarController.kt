@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2013 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package net.skyscanner.backpack.calendar.presenter
 
 import androidx.annotation.VisibleForTesting
@@ -8,7 +24,7 @@ import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.view.CalendarUpdateCallback
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
-import java.util.Locale
+import java.util.*
 
 abstract class BpkCalendarController(
   open val selectionType: SelectionType = SelectionType.RANGE,
@@ -24,6 +40,18 @@ abstract class BpkCalendarController(
   open fun isDateDisabled(date: LocalDate): Boolean {
     return false
   }
+
+  /**
+   * When provided, will be used to create footer views for the calendar.
+   *
+   * If your implementation allows this property to be changed or your [MonthFooterAdapter]
+   * implementation can be updated in a way that requires the calendar to update, call
+   * [updateContent] after such update.
+   *
+   * @see [MonthFooterAdapter]
+   * @see [updateContent]
+   */
+  open val monthFooterAdapter: MonthFooterAdapter? = null
 
   abstract val isRtl: Boolean
 
