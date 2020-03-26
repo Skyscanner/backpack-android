@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import net.skyscanner.backpack.R
 import org.threeten.bp.LocalDate
+import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 
 data class CalendarColoring(
   val coloredBuckets: Set<ColoredBucket>
@@ -55,6 +56,18 @@ sealed class CalendarCellStyle {
   object Negative : CalendarCellStyle() {
     override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkHillier)
     override fun textStyle(context: Context) = TextStyle.Light
+  }
+
+  /**
+   * A cell style which is suitable to indicate a holiday.
+   * Use this in conjunction with [HighlightedDaysAdapter] to
+   * show a footer with the list of holidays for the month.
+   *
+   * @see HighlightedDaysAdapter
+   */
+  object Hightlight : CalendarCellStyle() {
+    override fun color(context: Context) =
+      ContextCompat.getColor(context, R.color.__calendarHighlightedDayDot)
   }
 
   /**

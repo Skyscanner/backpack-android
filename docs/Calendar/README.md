@@ -135,6 +135,46 @@ For more examples see:
 - [ExampleBpkCalendarController](https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt)
 - [CalendarColoring](https://github.com/Skyscanner/backpack-android/blob/master/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarColoring.kt)
 
+### Month footer views
+
+`BpkCalendar` supports adding a footer to each month to display additional information through the `BpkCalendarController.monthFooterAdapter` attribute.
+We provide `HighlightedDaysAdapter` to add a footer listing days you want to highlight for each month.
+
+Example of controller with holidays support:
+
+```kotlin
+class ExampleBpkCalendarController(
+  override val selectionType: SelectionType
+ ) : BpkCalendarController(selectionType) {
+  override val monthFooterAdapter =
+    HighlightedDaysAdapter(
+      context,
+      locale,
+      setOf(
+        HighlightedDay(LocalDate.of(2020, 12, 25), "Christmas Day")
+      ))
+}
+```
+
+To highlight the day in the calendar itself, use the coloured buckets mechanism shown above and the `CalendarCellStyle.Highlight` style.
+
+Example of controller with holidays highlighted:
+
+```kotlin
+class ExampleBpkCalendarController(
+  override val selectionType: SelectionType
+ ) : BpkCalendarController(selectionType) {
+  override val calendarColoring = CalendarColoring(
+    setOf(
+      ColoredBucket(CalendarCellStyle.Highlight, setOf(LocalDate.of(2020, 12, 25))),
+    )
+}
+```
+
+For more examples see:
+
+- [FooterViewCalendarStory](https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/stories/FooterViewCalendarStory.kt)
+
 ## Theme Props
 
 - `calendarDateSelectedBackgroundColor`
