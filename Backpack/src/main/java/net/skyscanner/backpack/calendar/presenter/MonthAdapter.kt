@@ -59,14 +59,17 @@ internal class MonthAdapter(
 
   override fun hasStableIds() = true
 
+  override fun getViewTypeCount() = 2
+
+  override fun getItemViewType(position: Int) = positionMetadata[position].viewType
+
   @Suppress("UNCHECKED_CAST")
   override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
     val metadata = positionMetadata[position]
     val month = metadata.month
     val year = metadata.year
-    val viewType = metadata.viewType
 
-    return if (viewType == VIEW_TYPE_FOOTER) {
+    return if (getItemViewType(position) == VIEW_TYPE_FOOTER) {
       getFooterView(convertView, month, year)
     } else {
       getMothView(convertView, month, year)
@@ -89,10 +92,9 @@ internal class MonthAdapter(
   }
 
   private fun getFooterView(convertView: View?, month: Int, year: Int): View {
-    val shouldBind = convertView != null && convertView !is MonthView
     val monthFooterAdapter = controller.monthFooterAdapter!!
-    return if (shouldBind) {
-      monthFooterAdapter.onBindView(convertView!!, month, year)
+    return if (convertView != null) {
+      monthFooterAdapter.onBindView(convertView, month, year)
       convertView
     } else {
       val newFooter = monthFooterAdapter.onCreateView(month, year)
@@ -106,7 +108,7 @@ internal class MonthAdapter(
       if (isSelectedDayInMonth(it, year, month)) it.dayOfMonth else null
     }
 
-    val view = if (convertView != null && convertView is MonthView) {
+    val view = if (convertView != null) {
       convertView as MonthView
     } else {
       createMonthView(context)
