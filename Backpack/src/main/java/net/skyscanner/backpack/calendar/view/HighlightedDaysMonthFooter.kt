@@ -13,7 +13,7 @@ import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 
-class HighlightedDaysMonthFooter(
+open class HighlightedDaysMonthFooter(
   context: Context,
   val formatDate: DateFormatter
 ) : LinearLayout(context) {
@@ -37,11 +37,9 @@ class HighlightedDaysMonthFooter(
     holidays?.forEach { holiday ->
       addView(
         HolidayView(context).apply {
-          setDescription(holiday.description)
-          setDate(formatDate(holiday.date))
-          if (holiday.color != null) {
-            setColor(holiday.color)
-          }
+          description = holiday.description
+          date = formatDate(holiday.date)
+          color = holiday.color
         },
         LayoutParams(
           LayoutParams.WRAP_CONTENT,
@@ -59,17 +57,26 @@ class HighlightedDaysMonthFooter(
         .inflate(R.layout.view_bpk_calendar_holiday, this, true)
     }
 
-    fun setDate(date: String) {
-      dateView.text = date
-    }
+    var date: String? = null
+      set(value) {
+        field = value
+        dateView.text = value
+      }
 
-    fun setDescription(description: String) {
-      descriptionView.text = description
-    }
+    var description: String? = null
+      set(value) {
+        field = value
+        descriptionView.text = value
+      }
 
-    fun setColor(@ColorInt color: Int) {
-      val drawableStart = dateView.compoundDrawablesRelative[0]
-      drawableStart.colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
-    }
+    @ColorInt
+    var color: Int? = null
+      set(value) {
+        field = value
+        if (value != null) {
+          val drawableStart = dateView.compoundDrawablesRelative[0]
+          drawableStart.colorFilter = PorterDuffColorFilter(value, PorterDuff.Mode.SRC_IN)
+        }
+      }
   }
 }

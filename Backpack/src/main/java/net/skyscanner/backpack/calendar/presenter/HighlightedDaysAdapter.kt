@@ -11,7 +11,7 @@ import java.util.*
 
 typealias DateFormatter = (LocalDate) -> String
 
-class HighlightedDaysAdapter(
+open class HighlightedDaysAdapter(
   val context: Context,
   val locale: Locale,
   holidays: Set<HighlightedDay>,
