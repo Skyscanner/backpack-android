@@ -1,11 +1,12 @@
 package net.skyscanner.backpack.calendar.view
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.presenter.DateFormatter
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
@@ -73,10 +74,7 @@ open class HighlightedDaysMonthFooter(
       set(value) {
         field = value
         if (value != null) {
-          val drawableStart = dateView.compoundDrawablesRelative[0]
-          DrawableCompat.wrap(drawableStart.mutate()).let {
-            DrawableCompat.setTint(it, value)
-          }
+          TextViewCompat.setCompoundDrawableTintList(dateView, ColorStateList.valueOf(value))
         }
       }
   }
