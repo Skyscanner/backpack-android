@@ -18,9 +18,11 @@ private class FooterViewCalendarController(
   override val calendarColoring: CalendarColoring? = CalendarColoring(
     coloredBuckets = setOf(
       ColoredBucket(CalendarCellStyle.Hightlight, setOf(
-        startDate.plusDays(1),
         startDate.plusDays(2),
         endDate.minusDays(1)
+      )),
+      ColoredBucket(CalendarCellStyle.Negative, setOf(
+        startDate.plusDays(1)
       ))
     )
   )
@@ -30,9 +32,16 @@ private class FooterViewCalendarController(
       context,
       locale,
       setOf(
-        HighlightedDay(startDate.plusDays(1), "Do nothing day"),
-        HighlightedDay(startDate.plusDays(2), "Tea day"),
-        HighlightedDay(endDate.minusDays(1), "I wish it was Friday day")
+        HighlightedDay(
+          startDate.plusDays(1),
+          "Do nothing day",
+          CalendarCellStyle.Negative.color(context)),
+        HighlightedDay(
+          startDate.plusDays(2),
+          "Tea day"),
+        HighlightedDay(
+          endDate.minusDays(1),
+          "I wish it was Friday day")
       ))
 }
 
