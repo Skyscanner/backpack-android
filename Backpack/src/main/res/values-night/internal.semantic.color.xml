@@ -10,6 +10,7 @@
   <color name="__calendarRangeText">@color/bpkSkyGray</color>
   <color name="__calendarDisabledColour">@color/bpkTextSecondary</color>
   <color name="__calendarSelectedTextColor">@color/bpkTextPrimaryLight</color>
+  <color name="__calendarHighlightedDayDot">@color/bpkBlackTint04</color>
   <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
   <color name="__panelBorder">@color/bpkLineDark</color>
   <color name="__switchTrackDisabled">@color/bpkBlackTint02</color>
@@ -20,4 +21,4 @@
   <color name="__textFieldHint">@color/bpkTextTertiaryDark</color>
   <color name="__textFieldIcon">@color/bpkTextSecondary</color>
   <color name="__bottomNavUnselected">@color/bpkTextSecondaryDark</color>
- </resources>
+</resources>

@@ -97,6 +97,8 @@ BpkTicket
 BpkSnackbar
 Snackbar
 
+FooterViewCalendarStory
+
 # Company names, libraries etc.
 Artifactory
 Cocoapods

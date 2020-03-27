@@ -4,26 +4,45 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import net.skyscanner.backpack.calendar.BpkCalendar
-import net.skyscanner.backpack.calendar.presenter.MonthFooterAdapter
+import net.skyscanner.backpack.calendar.model.CalendarCellStyle
+import net.skyscanner.backpack.calendar.model.CalendarColoring
+import net.skyscanner.backpack.calendar.model.ColoredBucket
+import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
+import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter.HighlightedDay
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
-import net.skyscanner.backpack.text.BpkText
 
-private class FooterViewCalendarController(val context: Context) : ExampleBpkCalendarController(context) {
-  override val monthFooterAdapter = object : MonthFooterAdapter {
-    override fun hasFooterForMonth(month: Int, year: Int): Boolean {
-      return month % 2 == 0
-    }
+private class FooterViewCalendarController(
+  val context: Context
+) : ExampleBpkCalendarController(context) {
+  override val calendarColoring: CalendarColoring? = CalendarColoring(
+    coloredBuckets = setOf(
+      ColoredBucket(CalendarCellStyle.Hightlight, setOf(
+        startDate.plusDays(2),
+        endDate.minusDays(1)
+      )),
+      ColoredBucket(CalendarCellStyle.Negative, setOf(
+        startDate.plusDays(1)
+      ))
+    )
+  )
 
-    override fun onCreateView(month: Int, year: Int): BpkText {
-      return BpkText(context)
-    }
-
-    override fun onBindView(view: View, month: Int, year: Int) {
-      view as BpkText
-      view.text = "Footer view for $month and $year"
-    }
-  }
+  override val monthFooterAdapter =
+    HighlightedDaysAdapter(
+      context,
+      locale,
+      setOf(
+        HighlightedDay(
+          startDate.plusDays(1),
+          "Do nothing day",
+          CalendarCellStyle.Negative.color(context)),
+        HighlightedDay(
+          startDate.plusDays(2),
+          "Tea day"),
+        HighlightedDay(
+          endDate.minusDays(1),
+          "I wish it was Friday day")
+      ))
 }
 
 class FooterViewCalendarStory : Story() {
