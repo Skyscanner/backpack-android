@@ -72,6 +72,13 @@ class HorizontalNavTests : BpkSnapshotTest() {
     snap(horizontalNav)
   }
 
+  @Test
+  fun screenshotHorizontalNav_badge() {
+    horizontalNav.tabMode = TabLayout.MODE_SCROLLABLE
+    horizontalNav.setBadge(0, "Beta")
+    snap(horizontalNav)
+  }
+
   private fun BpkHorizontalNav.init() = apply {
     setBackgroundColor(Color.WHITE)
     addTab(newTab().setText("1"))

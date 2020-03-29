@@ -2,16 +2,13 @@ package net.skyscanner.backpack.horisontalnav
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.os.Build
+import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
-import android.text.style.ImageSpan
 import android.util.AttributeSet
+import android.util.SparseArray
 import android.util.SparseBooleanArray
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
@@ -21,6 +18,8 @@ import androidx.collection.SparseArrayCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.badge.BpkBadge
+import net.skyscanner.backpack.horisontalnav.internal.NotificationDotSpan
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -92,7 +91,8 @@ open class BpkHorizontalNav @JvmOverloads constructor(
 
   private val fontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
   private val texts = SparseArrayCompat<CharSequence?>()
-  private val badges = SparseBooleanArray()
+  private val notificationDots = SparseBooleanArray()
+  private val badges = SparseArray<CharSequence?>()
   private val allCaps = AllCapsTransformationMethod(context)
 
   init {
@@ -134,6 +134,9 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     setSelectedTabIndicatorHeight(resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg))
     setTabTextColors(textColor, textSelectedColor)
     setSelectedTabIndicatorColor(indicatorColor)
+    for (i in 0 until tabCount) {
+      updateTab(i)
+    }
   }
 
   private fun updateSize() {
@@ -170,11 +173,19 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   override fun addTab(tab: Tab, position: Int, setSelected: Boolean) {
     val capitalisedText = allCaps.getTransformation(tab.text, this)
     texts.put(position, capitalisedText)
-    super.addTab(tab.setText(capitalisedText), position, setSelected)
+    super.addTab(tab.setText(capitalisedText).setCustomView(R.layout.view_bpk_tab), position, setSelected)
     updateTab(position)
   }
 
   fun setNotificationDot(position: Int, value: Boolean) {
+    notificationDots.put(position, value)
+    updateTab(position)
+  }
+
+  fun setBadge(position: Int, value: CharSequence) {
+    if (tabMode != MODE_SCROLLABLE) {
+      throw IllegalStateException("The mode needs to be set to MODE_SCROLLABLE to supports badges")
+    }
     badges.put(position, value)
     updateTab(position)
   }
@@ -183,47 +194,22 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     val tab = getTabAt(position) ?: return
     if (texts.get(position) != null) {
       tab.text = SpannableStringBuilder().apply {
-        append(tab.text, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-        if (badges.get(position)) {
+        append(texts.get(position), fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        if (notificationDots.get(position)) {
           append(" ", NotificationDotSpan(context), Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         }
       }
     }
-    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1) {
-      applySpanFixes(this)
+    tab.customView?.apply {
+      findViewById<BpkBadge>(R.id.tab_badge)?.let {
+        it.text = badges.get(position)
+        it.visibility = if (it.length() > 0) View.VISIBLE else View.GONE
+        it.setBackground(ColorStateList.valueOf(Color.TRANSPARENT), tabTextColors!!)
+        it.setTextColor(tabTextColors)
+      }
+      findViewById<TextView>(android.R.id.text1).setTextColor(tabTextColors)
     }
   }
 
   private fun isEmpty() = tabCount == 0
-
-  private fun applySpanFixes(view: View) {
-    when (view) {
-      is TextView -> view.transformationMethod = null
-      is ViewGroup -> {
-        for (i in 0 until view.childCount) {
-          applySpanFixes(view.getChildAt(i))
-        }
-      }
-    }
-  }
-
-  private class NotificationDotSpan(context: Context) : ImageSpan(
-    ContextCompat.getDrawable(context, R.drawable.bpk_horizontal_nav_dot)!!.apply {
-      setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-    },
-    ALIGN_BOTTOM
-  ) {
-
-    override fun getSize(paint: Paint, text: CharSequence?, start: Int, end: Int, fm: Paint.FontMetricsInt?): Int {
-      super.getSize(paint, text, start, end, fm)
-      return drawable.bounds.width() * 3
-    }
-
-    override fun draw(canvas: Canvas, text: CharSequence?, start: Int, end: Int, x: Float, top: Int, y: Int, bottom: Int, paint: Paint) {
-      val count = canvas.save()
-      canvas.translate(drawable.bounds.width().toFloat(), -y.toFloat())
-      super.draw(canvas, text, start, end, x, top, y, bottom, paint)
-      canvas.restoreToCount(count)
-    }
-  }
 }

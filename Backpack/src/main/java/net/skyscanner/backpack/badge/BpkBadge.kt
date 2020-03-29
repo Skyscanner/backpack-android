@@ -1,12 +1,13 @@
 package net.skyscanner.backpack.badge
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.annotation.ColorRes
-import androidx.annotation.Dimension
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
@@ -107,7 +108,6 @@ open class BpkBadge @JvmOverloads constructor(
   }
 
   private fun setup() {
-
     this.text = message
 
     // set padding
@@ -118,27 +118,30 @@ open class BpkBadge @JvmOverloads constructor(
     // set Text color
     this.setTextColor(ContextCompat.getColor(context, type.textColor))
 
-    // Set background color
-    val border = GradientDrawable()
-    border.setColor(ContextCompat.getColor(context, type.bgColor))
-
-    // Set border
+    // Set background
+    val bgColor = ContextCompat.getColorStateList(context, type.bgColor)!!
     if (type == Type.Outline) {
-      border.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), ContextCompat.getColor(context, R.color.bpkWhite))
-      // set alpha for border
-      border.setColor(ContextCompat.getColor(context, type.bgColor) and 0x32ffffff)
+      setBackground(ColorStateList.valueOf(bgColor.defaultColor and 0x32ffffff), bgColor)
+    } else {
+      setBackground(bgColor)
     }
-
-    // set corner radius
-    @Dimension
-    val cornerRadius = context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
-
-    val radius = floatArrayOf(cornerRadius, cornerRadius,
-      cornerRadius, cornerRadius,
-      cornerRadius, cornerRadius,
-      cornerRadius, cornerRadius)
-    border.cornerRadii = radius
-    this.background = border
     this.gravity = Gravity.CENTER
+  }
+
+  internal fun setBackground(
+    solid: ColorStateList,
+    stroke: ColorStateList = solid
+  ) {
+    val drawable = GradientDrawable()
+    drawable.color = solid
+    drawable.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), stroke)
+
+    val cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusSm)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+      drawable.cornerRadius = cornerRadius
+    } else {
+      drawable.cornerRadii = FloatArray(8) { cornerRadius }
+    }
+    this.background = drawable
   }
 }

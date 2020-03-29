@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="48dp"
+  android:gravity="center"
+  android:orientation="horizontal"
+  android:showDividers="middle|beginning|end"
+  android:divider="@drawable/bpk_tab_divider"
+  tools:background="#CCC">
+
+  <ImageView
+    android:id="@android:id/icon"
+    android:layout_width="@dimen/bpk_icon_size_normal"
+    android:layout_height="@dimen/bpk_icon_size_normal"
+    tools:src="@drawable/bpk_cars"
+    android:scaleType="centerInside"
+    />
+
+  <TextView
+    android:id="@android:id/text1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="13sp"
+    tools:text="Tab"
+    tools:textAllCaps="true"/>
+
+  <net.skyscanner.backpack.badge.BpkBadge
+    android:id="@+id/tab_badge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:textStyle="sm"
+    tools:message="BETA" />
+
+</LinearLayout>
