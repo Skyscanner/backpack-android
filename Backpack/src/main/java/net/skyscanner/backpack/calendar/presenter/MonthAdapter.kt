@@ -17,81 +17,136 @@
 package net.skyscanner.backpack.calendar.presenter
 
 import android.content.Context
+import android.database.DataSetObserver
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AbsListView.LayoutParams
 import android.widget.BaseAdapter
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.view.MonthView
 import org.threeten.bp.LocalDate
+import org.threeten.bp.Period
 
 internal class MonthAdapter(
   private val context: Context,
   private val controller: BpkCalendarController
 ) : BaseAdapter(), MonthView.OnDayClickListener {
 
-    private var selectedDay: LocalDate? = null
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun onDayClick(view: MonthView?, day: LocalDate) {
-        onDayTapped(day)
+  private var selectedDay: LocalDate? = null
+    set(value) {
+      field = value
+      notifyDataSetChanged()
     }
 
-  override fun getCount() =
-    (controller.endDate.year - controller.startDate.year) * MONTHS_IN_YEAR +
-      controller.endDate.month.value - controller.startDate.month.value + 1
+  private var positionMetadata = computeMetadata()
 
-    override fun getItem(position: Int) = null
+  init {
+    registerDataSetObserver(object : DataSetObserver() {
+      override fun onChanged() {
+        positionMetadata = computeMetadata()
+      }
+    })
+  }
 
-    override fun getItemId(position: Int) = position.toLong()
+  override fun onDayClick(view: MonthView?, day: LocalDate) {
+    onDayTapped(day)
+  }
 
-    override fun hasStableIds() = true
+  override fun getCount() = positionMetadata.size
 
-    @Suppress("UNCHECKED_CAST")
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view: MonthView
+  override fun getItem(position: Int) = null
 
-        if (convertView != null) {
-            view = convertView as MonthView
-        } else {
-            view = createMonthView(context).apply {
-                layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-                isClickable = true
-            }
-            view.onDayClickListener = this@MonthAdapter
-        }
+  override fun getItemId(position: Int) = position.toLong()
 
-        val positionWithStart = position + controller.startDate.month.value - 1
-        val month = positionWithStart % MONTHS_IN_YEAR + 1
-        val year = positionWithStart / MONTHS_IN_YEAR + controller.startDate.year
-        val selectedDay = selectedDay?.let {
-          if (isSelectedDayInMonth(it, year, month)) it.dayOfMonth else null
-        }
+  override fun hasStableIds() = true
 
-        view.reuse()
+  override fun getViewTypeCount() = 2
 
-        view.setMonthParams(CalendarDrawingParams(year, month, selectedDay, controller.calendarColoring, controller::isDateDisabled))
-        view.invalidate()
+  override fun getItemViewType(position: Int) = positionMetadata[position].viewType
 
-        return view
+  @Suppress("UNCHECKED_CAST")
+  override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+    val metadata = positionMetadata[position]
+    val month = metadata.month
+    val year = metadata.year
+
+    return if (getItemViewType(position) == VIEW_TYPE_FOOTER) {
+      getFooterView(convertView, month, year)
+    } else {
+      getMothView(convertView, month, year)
+    }
+  }
+
+  private fun createMonthView(context: Context) =
+    MonthView(context).also {
+      it.controller = controller
+      it.isClickable = true
+      it.onDayClickListener = this@MonthAdapter
+  }
+
+  private fun isSelectedDayInMonth(calendarDay: LocalDate, year: Int, month: Int) =
+    calendarDay.year == year && calendarDay.month.value == month
+
+  private fun onDayTapped(day: LocalDate) {
+    controller.onDayOfMonthSelected(day)
+    selectedDay = day
+  }
+
+  private fun getFooterView(convertView: View?, month: Int, year: Int): View {
+    val monthFooterAdapter = controller.monthFooterAdapter!!
+    return if (convertView != null) {
+      monthFooterAdapter.onBindView(convertView, month, year)
+      convertView
+    } else {
+      val newFooter = monthFooterAdapter.onCreateView(month, year)
+      monthFooterAdapter.onBindView(newFooter, month, year)
+      newFooter
+    }
+  }
+
+  private fun getMothView(convertView: View?, month: Int, year: Int): View {
+    val selectedDay = selectedDay?.let {
+      if (isSelectedDayInMonth(it, year, month)) it.dayOfMonth else null
     }
 
-    private fun createMonthView(context: Context) = MonthView(context).also {
-        it.controller = controller
+    val view = if (convertView != null) {
+      convertView as MonthView
+    } else {
+      createMonthView(context)
     }
 
-    private fun isSelectedDayInMonth(calendarDay: LocalDate, year: Int, month: Int) =
-        calendarDay.year == year && calendarDay.month.value == month
+    view.reuse()
+    view.setMonthParams(CalendarDrawingParams(year, month, selectedDay, controller.calendarColoring, controller::isDateDisabled))
+    view.invalidate()
 
-    private fun onDayTapped(day: LocalDate) {
-        controller.onDayOfMonthSelected(day)
-        selectedDay = day
-    }
+    return view
+  }
 
-    internal companion object {
-        const val MONTHS_IN_YEAR = 12
+  private fun computeMetadata(): List<PositionMetadata> {
+    // We add one because we always want to include months even if there ins't a full month
+    // difference between them. E.g. `01-01-2020 - 03-03-2020` would return only 2 months,
+    // be we want to show all three here.
+    val totalMonths = Period.between(controller.startDate, controller.endDate).toTotalMonths().toInt() + 1
+
+    return (0 until totalMonths).fold(mutableListOf<PositionMetadata>()) { acc, position ->
+      val positionWithStart = position + controller.startDate.month.value - 1
+      val month = positionWithStart % MONTHS_IN_YEAR + 1
+      val year = positionWithStart / MONTHS_IN_YEAR + controller.startDate.year
+
+      acc.add(PositionMetadata(month, year, VIEW_TYPE_MONTH))
+
+      if (controller.monthFooterAdapter?.hasFooterForMonth(month.toInt(), year.toInt()) == true) {
+        acc.add(PositionMetadata(month, year, VIEW_TYPE_FOOTER))
+      }
+
+      acc
     }
+  }
+
+  internal companion object {
+    const val MONTHS_IN_YEAR = 12
+    const val VIEW_TYPE_MONTH = 0
+    const val VIEW_TYPE_FOOTER = 1
+
+    data class PositionMetadata(val month: Int, val year: Int, val viewType: Int)
+  }
 }

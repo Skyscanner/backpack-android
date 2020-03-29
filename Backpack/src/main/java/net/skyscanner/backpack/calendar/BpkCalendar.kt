@@ -1,14 +1,31 @@
+/*
+ * Copyright (C) 2013 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package net.skyscanner.backpack.calendar
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.widget.AbsListView
 import androidx.constraintlayout.widget.ConstraintLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.badge.BpkBadge
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
+import net.skyscanner.backpack.calendar.view.BpkCalendarScrollListener
 import net.skyscanner.backpack.calendar.view.CalendarView
-import net.skyscanner.backpack.calendar.view.OnYearChangedListener
 import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.wrapContextWithDefaults
@@ -17,7 +34,7 @@ open class BpkCalendar @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyle: Int = 0
-) : ConstraintLayout(wrapContextWithDefaults(context), attrs, defStyle), OnYearChangedListener {
+) : ConstraintLayout(wrapContextWithDefaults(context), attrs, defStyle), BpkCalendarScrollListener {
 
   init {
     inflate(this.context, R.layout.view_bpk_calendar, this)
@@ -34,12 +51,24 @@ open class BpkCalendar @JvmOverloads constructor(
     weekdayHeaderView.initializeWithLocale(controller.locale)
     calendarView.controller = controller
     controller.updateContentCallback = calendarView
-    calendarView.listener = this
+    calendarView.addBpkCalendarScrollListener(this)
 
     updateYearPill(controller.startDate.year)
   }
 
-  override fun onYearChanged(year: Int) {
+  fun addOnScrollListener(listener: BpkCalendarScrollListener) {
+    calendarView.addBpkCalendarScrollListener(listener)
+  }
+
+  fun removeOnScrollListener(listener: BpkCalendarScrollListener) {
+    calendarView.removeBpkCalendarScrollListener(listener)
+  }
+
+  fun setSelectionFromTop(position: Int, y: Int = 0) {
+    calendarView.setSelectionFromTop(position, y)
+  }
+
+  override fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int, year: Int) {
     updateYearPill(year)
   }
 

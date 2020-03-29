@@ -15,7 +15,7 @@ import java.util.Locale
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 
-class ExampleBpkCalendarController(
+open class ExampleBpkCalendarController(
   private val context: Context,
   override val selectionType: SelectionType = SelectionType.RANGE,
   private val disableDates: Boolean = false,

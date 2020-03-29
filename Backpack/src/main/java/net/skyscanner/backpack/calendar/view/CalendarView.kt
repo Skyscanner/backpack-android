@@ -25,12 +25,12 @@ import android.widget.ListView
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.MonthAdapter
 
-interface OnYearChangedListener {
-  fun onYearChanged(year: Int)
-}
-
 interface CalendarUpdateCallback {
   fun updateContent()
+}
+
+interface BpkCalendarScrollListener {
+  fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int, year: Int)
 }
 
 /**
@@ -49,23 +49,32 @@ internal class CalendarView constructor(
       }
     }
 
-  var listener: OnYearChangedListener? = null
+  private var calendarScrollListeners = mutableSetOf<BpkCalendarScrollListener>()
 
   private var scrollFriction = 1.0f
   private var previousScrollPosition: Long = 0
   private var previousScrollState = OnScrollListener.SCROLL_STATE_IDLE
   private var currentScrollState = OnScrollListener.SCROLL_STATE_IDLE
   private var adapter: MonthAdapter? = null
+  private var lastSeenYear: Int? = null
 
   init {
     this.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-    this.setDrawSelectorOnTop(false)
+    this.isDrawSelectorOnTop = false
 
     setUpListView()
   }
 
   override fun updateContent() {
     adapter?.notifyDataSetChanged()
+  }
+
+  fun addBpkCalendarScrollListener(listener: BpkCalendarScrollListener) {
+    calendarScrollListeners.add(listener)
+  }
+
+  fun removeBpkCalendarScrollListener(listener: BpkCalendarScrollListener) {
+    calendarScrollListeners.remove(listener)
   }
 
   private fun changeAdapter(controller: BpkCalendarController) {
@@ -87,13 +96,22 @@ internal class CalendarView constructor(
 
   // TODO: Updates the title and selected month if the view has moved to a new month.
   override fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
-    val child = view.getChildAt(0) as MonthView? ?: return
+    val child = view.getChildAt(0) ?: return
 
+    if (child is MonthView) {
+      lastSeenYear = child.getYear()
+    }
+
+    val year = lastSeenYear ?: controller?.startDate?.year
     val currScroll = (view.firstVisiblePosition * child.height - child.bottom).toLong()
     previousScrollPosition = currScroll
     previousScrollState = currentScrollState
 
-    listener?.onYearChanged(child.getYear())
+    if (year != null) {
+      calendarScrollListeners.forEach {
+        it.onScroll(this, firstVisibleItem, visibleItemCount, totalItemCount, year)
+      }
+    }
   }
 
   override fun onScrollStateChanged(view: AbsListView?, scrollState: Int) {

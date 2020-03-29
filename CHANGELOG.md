@@ -2,6 +2,16 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 22.3.0
+
+**Added:**
+
+- `BpkCalendar`:
+  - Ability to add and remove `BpkCalendarScrollListener` scroll listeners of the calendar with `addScrollListener`, and `removeScrollListener`
+  - Ability to scroll to a specific position programmatically (with y offset) with `setSelectionFromTop(position: Int, y: Int = 0)`
+  - Added new `monthFooterAdapter` attribute to `BpkCalendarController` and new `HighlightedDaysAdapter` to add a list of holidays to each month.
+  - Added new `CalendarCellStyle.Highlight` style.
+
 # 22.2.2
 
 **Fixed:**
