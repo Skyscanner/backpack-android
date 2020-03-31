@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="wrap_content"
+  tools:layout_width="match_parent"
   android:layout_height="48dp"
-  android:gravity="center"
-  android:orientation="horizontal"
-  android:showDividers="middle|beginning|end"
-  android:divider="@drawable/bpk_tab_divider"
   tools:background="#CCC">
 
   <ImageView
@@ -16,6 +13,12 @@
     android:layout_height="@dimen/bpk_icon_size_normal"
     tools:src="@drawable/bpk_cars"
     android:scaleType="centerInside"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toStartOf="@android:id/text1"
+    app:layout_constraintHorizontal_chainStyle="packed"
+    android:layout_marginHorizontal="@dimen/bpkSpacingSm"
     />
 
   <TextView
@@ -23,6 +26,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textSize="13sp"
+    android:maxLines="1"
+    android:ellipsize="end"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toEndOf="@android:id/icon"
+    app:layout_constraintEnd_toStartOf="@+id/tab_badge"
+    android:layout_marginHorizontal="@dimen/bpkSpacingSm"
     tools:text="Tab"
     tools:textAllCaps="true"/>
 
@@ -31,6 +41,11 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:textStyle="sm"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toEndOf="@android:id/text1"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginHorizontal="@dimen/bpkSpacingSm"
     tools:message="BETA" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

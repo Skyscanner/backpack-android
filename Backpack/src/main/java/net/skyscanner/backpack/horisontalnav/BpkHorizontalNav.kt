@@ -183,9 +183,6 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   }
 
   fun setBadge(position: Int, value: CharSequence) {
-    if (tabMode != MODE_SCROLLABLE) {
-      throw IllegalStateException("The mode needs to be set to MODE_SCROLLABLE to supports badges")
-    }
     badges.put(position, value)
     updateTab(position)
   }
@@ -207,7 +204,9 @@ open class BpkHorizontalNav @JvmOverloads constructor(
         it.setBackground(ColorStateList.valueOf(Color.TRANSPARENT), tabTextColors!!)
         it.setTextColor(tabTextColors)
       }
-      findViewById<TextView>(android.R.id.text1).setTextColor(tabTextColors)
+      findViewById<TextView>(android.R.id.text1)?.let {
+        it.setTextColor(tabTextColors)
+      }
     }
   }
 
