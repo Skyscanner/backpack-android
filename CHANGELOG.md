@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 22.4.0
+
+- **Added:**
+
+- `BpkHorizontalNav`
+  - `setBadge()` method
+
 # 22.3.0
 
 **Added:**
