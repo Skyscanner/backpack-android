@@ -21,9 +21,10 @@ class HorizontalNavStory : Story() {
     horizontalNav.addTab(horizontalNav.newTab().setText("Flights"))
     horizontalNav.addTab(horizontalNav.newTab().setText("Hotels"))
     horizontalNav.addTab(horizontalNav.newTab().setText("Car Hire"))
-    horizontalNav.setNotificationDot(0, true)
     if (horizontalNav.id == R.id.horizontal_nav_badge) {
       horizontalNav.setBadge(0, "BETA")
+    } else {
+      horizontalNav.setNotificationDot(0, true)
     }
   }
 
