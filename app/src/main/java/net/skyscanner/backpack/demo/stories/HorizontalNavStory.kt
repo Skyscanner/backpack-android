@@ -14,13 +14,18 @@ class HorizontalNavStory : Story() {
     init(view.findViewById(R.id.horizontal_nav_small))
     init(view.findViewById(R.id.horizontal_nav_alternate))
     init(view.findViewById(R.id.horizontal_nav_rtl))
+    init(view.findViewById(R.id.horizontal_nav_badge))
   }
 
   private fun init(horizontalNav: BpkHorizontalNav) {
     horizontalNav.addTab(horizontalNav.newTab().setText("Flights"))
     horizontalNav.addTab(horizontalNav.newTab().setText("Hotels"))
     horizontalNav.addTab(horizontalNav.newTab().setText("Car Hire"))
-    horizontalNav.setNotificationDot(0, true)
+    if (horizontalNav.id == R.id.horizontal_nav_badge) {
+      horizontalNav.setBadge(0, "BETA")
+    } else {
+      horizontalNav.setNotificationDot(0, true)
+    }
   }
 
   companion object {
