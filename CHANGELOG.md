@@ -2,6 +2,13 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 23.0.0
+
+- **Breaking:**
+
+This release is to ratify an error in version `22.3.0`.
+This version was breaking as we removed `onYearChanged` method from `BpkCalendar` and classes overriding would break.
+
 # 22.4.0
 
 - **Added:**
@@ -9,7 +16,7 @@
 - `BpkHorizontalNav`
   - `setBadge()` method
 
-# 22.3.0
+# 22.3.0 - EDIT: This was a breaking change, update to 23.0.0 instead.
 
 **Added:**
 
