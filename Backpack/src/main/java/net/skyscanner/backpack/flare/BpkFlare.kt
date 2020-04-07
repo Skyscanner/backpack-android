@@ -56,13 +56,6 @@ open class BpkFlare @JvmOverloads constructor(
     }
   }
 
-  private val upPointerMask by unsafeLazy {
-    val matrix = Matrix().apply {
-      postRotate(180f)
-    }
-    Bitmap.createBitmap(pointerMask, 0, 0, pointerMask.width, pointerMask.height, matrix, true)
-  }
-
   private val radiusMask by unsafeLazy {
     val radiiDrawable = ContextCompat.getDrawable(context, R.drawable.flare_default_radius)!!.apply {
       setBounds(0, 0, intrinsicWidth, intrinsicHeight)
@@ -175,35 +168,47 @@ open class BpkFlare @JvmOverloads constructor(
       pointerPosition.offset
     }
 
-    val (yEnd, yStart) = if (pointerDirection == PointerDirection.DOWN) {
-      Pair(height, height - pointerMask.height)
-    } else {
-      Pair(pointerMask.height.toFloat(), 0f)
-    }
-
+    val pointerYStart = height - pointerMask.height
     val pointerXStart = width * pointerOffset - pointerHalfWidth
     val pointerXEnd = width * pointerOffset + pointerHalfWidth
 
-    clipRect.set(0f, yStart, pointerXStart, yEnd)
-    canvas.clipOutRectCompat(clipRect)
-
-    clipRect.set(width, yStart, pointerXEnd, yEnd)
-    canvas.clipOutRectCompat(clipRect)
+    if (pointerDirection == PointerDirection.DOWN) {
+      clipPointerArea(pointerYStart, pointerXStart, height, canvas, width, pointerXEnd)
+    } else {
+      clipPointerArea(0f, pointerXStart, pointerMask.height.toFloat(), canvas, width, pointerXEnd)
+    }
 
     super.draw(canvas)
     canvas.restoreToCount(count)
 
-    val mask = if (pointerDirection == PointerDirection.DOWN) {
-      pointerMask
-    } else {
-      upPointerMask
-    }
-
-    canvas.drawBitmap(mask, pointerXStart, yStart, paint)
+    drawPointerMask(canvas, pointerXStart, pointerYStart)
 
     if (round) {
       drawRadiusMask(canvas)
     }
+  }
+
+  private fun clipPointerArea(pointerYStart: Float, pointerXStart: Float, height: Float, canvas: Canvas, width: Float, pointerXEnd: Float) {
+    clipRect.set(0f, pointerYStart, pointerXStart, height)
+    canvas.clipOutRectCompat(clipRect)
+
+    clipRect.set(width, pointerYStart, pointerXEnd, height)
+    canvas.clipOutRectCompat(clipRect)
+  }
+
+  private fun drawPointerMask(canvas: Canvas, pointerXStart: Float, pointerYStart: Float) {
+    val count = canvas.saveCount
+    val width = width.toFloat()
+    val height = height.toFloat()
+
+    if (pointerDirection == PointerDirection.UP) {
+      canvas.rotate(180f, width / 2, height / 2)
+      canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
+    } else {
+      canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
+    }
+
+    canvas.restoreToCount(count)
   }
 
   private fun drawRadiusMask(canvas: Canvas) {
@@ -217,7 +222,7 @@ open class BpkFlare @JvmOverloads constructor(
 
     val count = canvas.saveCount
 
-    // bottom let corner
+    // bottom left corner
     canvas.drawBitmap(radiusMask, 0f, height - pointerHeight - radiusHeight, paint)
 
     // top right corner
