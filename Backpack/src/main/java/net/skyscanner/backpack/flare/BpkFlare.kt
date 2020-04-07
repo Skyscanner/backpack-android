@@ -148,25 +148,10 @@ open class BpkFlare @JvmOverloads constructor(
 
     when (insetPaddingMode) {
       InsetPaddingMode.NONE -> {}
-      InsetPaddingMode.BOTTOM, InsetPaddingMode.TOP -> {
-        val paddingBottom = if (insetPaddingMode == InsetPaddingMode.BOTTOM) {
-          child.paddingBottom + pointerMask.height
-        } else {
-          child.paddingBottom
-        }
-
-        val paddingTop = if (insetPaddingMode == InsetPaddingMode.TOP) {
-          child.paddingTop + pointerMask.height
-        } else {
-          child.paddingTop
-        }
-
-        if (child.paddingStart > 0 || child.paddingEnd > 0) {
-          child.setPaddingRelative(child.paddingStart, paddingTop, child.paddingEnd, paddingBottom)
-        } else {
-          child.setPadding(child.paddingLeft, paddingTop, child.paddingRight, paddingBottom)
-        }
-      }
+      InsetPaddingMode.BOTTOM ->
+        setPaddingVertical(child, child.paddingTop, child.paddingBottom + pointerMask.height)
+      InsetPaddingMode.TOP ->
+        setPaddingVertical(child, child.paddingTop + pointerMask.height, child.paddingBottom)
     }
   }
 
@@ -266,6 +251,14 @@ open class BpkFlare @JvmOverloads constructor(
 
   private fun mapXmlToInsetPaddingMode(id: Int) =
     InsetPaddingMode.values().find { it.id == id }
+
+  private fun setPaddingVertical(child: View, paddingTop: Int, paddingBottom: Int) {
+    if (child.paddingStart > 0 || child.paddingEnd > 0) {
+      child.setPaddingRelative(child.paddingStart, paddingTop, child.paddingEnd, paddingBottom)
+    } else {
+      child.setPadding(child.paddingLeft, paddingTop, child.paddingRight, paddingBottom)
+    }
+  }
 }
 
 private fun Canvas.clipOutRectCompat(rect: RectF) {
