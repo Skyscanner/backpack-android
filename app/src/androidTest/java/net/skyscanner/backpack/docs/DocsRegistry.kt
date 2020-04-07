@@ -34,6 +34,7 @@ object DocsRegistry {
     Screenshot("Dialog - Delete confirmation", "delete-confirmation", ::setupDialog),
     Screenshot("Dialog - Flare", "with-flare", ::setupDialog),
     Screenshot("Flare - Default", "default"),
+    Screenshot("Flare - Pointing up", "pointing-up"),
     Screenshot("Flare - Pointer offset", "pointer-offset"),
     Screenshot("Flare - Rounded", "rounded"),
     Screenshot("Flare - Inset padding mode", "inset-padding"),
