@@ -44,7 +44,8 @@ open class BpkFlare @JvmOverloads constructor(
 
   enum class InsetPaddingMode(internal val id: Int) {
     NONE(0),
-    BOTTOM(1)
+    BOTTOM(1),
+    TOP(2),
   }
 
   private val pointerMask by unsafeLazy {
@@ -145,12 +146,26 @@ open class BpkFlare @JvmOverloads constructor(
       throw IllegalStateException("BpkFlare should have only one child")
     }
 
-    if (insetPaddingMode == InsetPaddingMode.BOTTOM) {
-      val paddingBottom = child.paddingBottom + pointerMask.height
-      if (child.paddingStart > 0 || child.paddingEnd > 0) {
-        child.setPaddingRelative(child.paddingStart, child.paddingTop, child.paddingEnd, paddingBottom)
-      } else {
-        child.setPadding(child.paddingLeft, child.paddingTop, child.paddingRight, paddingBottom)
+    when (insetPaddingMode) {
+      InsetPaddingMode.NONE -> {}
+      InsetPaddingMode.BOTTOM, InsetPaddingMode.TOP -> {
+        val paddingBottom = if (insetPaddingMode == InsetPaddingMode.BOTTOM) {
+          child.paddingBottom + pointerMask.height
+        } else {
+          child.paddingBottom
+        }
+
+        val paddingTop = if (insetPaddingMode == InsetPaddingMode.TOP) {
+          child.paddingTop + pointerMask.height
+        } else {
+          child.paddingTop
+        }
+
+        if (child.paddingStart > 0 || child.paddingEnd > 0) {
+          child.setPaddingRelative(child.paddingStart, paddingTop, child.paddingEnd, paddingBottom)
+        } else {
+          child.setPadding(child.paddingLeft, paddingTop, child.paddingRight, paddingBottom)
+        }
       }
     }
   }
@@ -172,10 +187,11 @@ open class BpkFlare @JvmOverloads constructor(
     val pointerXStart = width * pointerOffset - pointerHalfWidth
     val pointerXEnd = width * pointerOffset + pointerHalfWidth
 
-    if (pointerDirection == PointerDirection.DOWN) {
-      clipPointerArea(pointerYStart, pointerXStart, height, canvas, width, pointerXEnd)
-    } else {
-      clipPointerArea(0f, pointerXStart, pointerMask.height.toFloat(), canvas, width, pointerXEnd)
+    when (pointerDirection) {
+      PointerDirection.DOWN ->
+        clipPointerArea(pointerYStart, pointerXStart, height, canvas, width, pointerXEnd)
+      PointerDirection.UP ->
+        clipPointerArea(0f, pointerXStart, pointerMask.height.toFloat(), canvas, width, pointerXEnd)
     }
 
     super.draw(canvas)
@@ -201,11 +217,13 @@ open class BpkFlare @JvmOverloads constructor(
     val width = width.toFloat()
     val height = height.toFloat()
 
-    if (pointerDirection == PointerDirection.UP) {
-      canvas.rotate(180f, width / 2, height / 2)
-      canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
-    } else {
-      canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
+    when (pointerDirection) {
+      PointerDirection.UP -> {
+        canvas.rotate(180f, width / 2, height / 2)
+        canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
+      }
+      PointerDirection.DOWN ->
+        canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
     }
 
     canvas.restoreToCount(count)
