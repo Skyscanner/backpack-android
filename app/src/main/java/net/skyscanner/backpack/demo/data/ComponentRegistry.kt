@@ -116,6 +116,7 @@ object ComponentRegistry {
     "Flare" story NodeData({ children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_flare },
+        "Pointing up" story NodeData { Story of R.layout.fragment_flare_up },
         "Pointer offset" story NodeData { Story of R.layout.fragment_flare_pointer_offset },
         "Pointer offset RTL" story NodeData { Story of R.layout.fragment_flare_pointer_offset with Direction.RTL },
         "Rounded" story NodeData { Story of R.layout.fragment_flare_rounded },
