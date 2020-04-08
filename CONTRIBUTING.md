@@ -1,14 +1,14 @@
 # Contributing
 
-In this document we describe how to setup this repository for development and the release process.
+In this document we describe how to set up this repository for development and the release process.
 
 ## Environment
 
-We use Node in this project. To manage the language runtime we recommend using [`nvm`][1] respectively. The required Node version is in `.nvmrc`.
+We use Node in this project. To manage the language runtime we recommend using [`nvm`][1]. The required Node version is in `.nvmrc`.
 
-With `nvm` use `nvm use` to set the correct node version in your machine.
+With `nvm`, use `nvm use` to set the correct Node version in your machine.
 
-To setup the Android environment install Android studio. Once installed, use the following commands to setup the android SDK
+To set up the Android environment, install Android Studio. Once installed, use the following commands to set up the Android SDK:
 
 ```
 echo "export ANDROID_HOME=\"$HOME/Library/Android/sdk\"" >> ~/.bash_profile
@@ -24,12 +24,12 @@ $ANDROID_HOME/tools/bin/sdkmanager "system-images;android-29;google_apis;x86"
 
 ## Setup
 
-Given that you have a compatible environment as stated above you can now setup the project.
+Given that you have a compatible environment as stated above you can now set up the project.
 
 + `npm install` to install npm dependencies
 + `npm run build` to build Backpack tokens
-+  Open the project in Android studio
-+ If you are a Skyscanner employee search the internal documentation for "Guide – Setup Internal Backpack Android Builds" and follow the instructions.
++  Open the project in Android Studio
++ If you are a Skyscanner employee, search the internal documentation for _"Guide – Setup Internal Backpack Android Builds"_ and follow the instructions.
 
 
 ## Testing
