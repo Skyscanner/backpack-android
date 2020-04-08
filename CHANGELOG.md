@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 23.1.0
+
+**Added:**
+
+- `BpkFlare`:
+  - Added `flarePointerDirection` attribute with `DOWN` and `UP` options.
+  - Added new `UP` option to `flareInsetPaddingMode`.
+
 # 23.0.0
 
 - **Breaking:**
