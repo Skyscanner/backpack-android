@@ -186,6 +186,7 @@ internal class MonthView @JvmOverloads constructor(
     controller?.let {
       drawMonthTitle(canvas)
       drawDaysInMonth(it, canvas)
+      contentDescription = monthHeaderString
     }
   }
 
