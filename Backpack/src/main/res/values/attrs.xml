@@ -174,11 +174,16 @@
     <attr name="flareInsetPaddingMode" format="enum">
       <enum value="0" name="none" />
       <enum value="1" name="bottom" />
+      <enum value="2" name="top" />
     </attr>
     <attr name="flarePointerPosition" format="enum" >
       <enum value="0" name="start" />
       <enum value="1" name="middle" />
       <enum value="2" name="end" />
+    </attr>
+    <attr name="flarePointerDirection" format="enum" >
+      <enum value="0" name="down" />
+      <enum value="1" name="up" />
     </attr>
   </declare-styleable>
 

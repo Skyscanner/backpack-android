@@ -16,6 +16,7 @@ Example of a Flare in XML
   android:layout_height="200dp"
   android:layout_marginBottom="@dimen/bpkSpacingMd"
   app:flarePointerPosition="middle"
+  app:flarePointerDirection="down"
   app:flareRound="false"
   app:flareInsetPaddingMode="none">
 
@@ -38,6 +39,7 @@ import net.skyscanner.backpack.flare.BpkFlare
 BpkFlare(context).apply {
   layoutParams = ViewGroup.LayoutParams(300, 100)
   pointerPosition = BpkFlare.PointerPosition.MIDDLE
+  flarePointerDirection = BpkFlare.PointerDirection.DOWN
   insetPaddingMode = BpkFlare.InsetPaddingMode.NONE
   round = false
   addView(ImageView(contenxt).apply {
@@ -47,3 +49,20 @@ BpkFlare(context).apply {
   })
 }
 ```
+
+## Attributes
+
+- `flarePointerPosition`: `middle|start|end`
+  - Determines where the flare is rendered horizontally.
+
+- `flarePointerDirection`: `down|up`
+  - Determines where the pointer is rendered vertically and the direction it will be pointing to.
+
+- `flareInsetPaddingMode`: `none|bottom|top`
+  - Determines where to add extra padding to account for the pointer size.
+    To render the flare view we cut out part of the canvas, if you intend to add, for example,
+    a text view to the top of the flare view with a flare pointing up, you should set this prop
+    to `top` or part of the text will be cut off.
+
+- `flareRound`: `Boolean`
+  - When true will render the flare with rounded corners.
