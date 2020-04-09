@@ -1,6 +1,7 @@
 # Unreleased
 
 > Place your changes below this line.
+- Added acessibility labels to `WeekDay` and `Month` views in `BpkCalendar`
 
 ## How to write a good changelog entry
 
