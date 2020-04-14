@@ -21,4 +21,13 @@
   <color name="__textFieldHint">@color/bpkTextTertiaryDark</color>
   <color name="__textFieldIcon">@color/bpkTextSecondary</color>
   <color name="__bottomNavUnselected">@color/bpkTextSecondaryDark</color>
+
+
+  <color name="__barChartColumnTitleColor">@color/bpkSkyGrayTint04</color>
+  <color name="__barChartColumnSubtitleColor">@color/bpkSkyGrayTint04</color>
+  <color name="__barChartGroupTitleColor">@color/bpkWhite</color>
+  <color name="__barChartBarBackgroundColor">@color/bpkSkyGrayTint01</color>
+  <color name="__barChartLineColor">@color/bpkSkyGrayTint04</color>
+  <color name="__barChartUndefinedColor">@color/bpkSkyGrayTint04</color>
+  <color name="__barChartPrimaryColor">@color/bpkPrimaryDark</color>
 </resources>

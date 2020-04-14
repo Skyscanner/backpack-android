@@ -19,4 +19,54 @@
     android:text="Long Toast"
     android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
+  <net.skyscanner.backpack.barchart.BpkBarChartView
+    android:id="@+id/test"
+    android:layout_width="match_parent"
+    android:layout_height="240dp" />
+
+
+<!--  <LinearLayout-->
+<!--    android:orientation="horizontal"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:padding="16dp"-->
+<!--    android:clipChildren="false"-->
+<!--    android:clipToPadding="false">-->
+
+<!--    <View-->
+<!--      android:id="@+id/test1"-->
+<!--      android:layout_width="16dp"-->
+<!--      android:layout_height="128dp"-->
+<!--      android:layout_marginRight="16dp"-->
+<!--      android:clickable="true"-->
+<!--      android:focusable="true"-->
+<!--      android:focusableInTouchMode="true"/>-->
+<!--    <View-->
+<!--      android:id="@+id/test2"-->
+<!--      android:layout_width="16dp"-->
+<!--      android:layout_height="128dp"-->
+<!--      android:layout_marginRight="16dp"-->
+<!--      android:clickable="true"-->
+<!--      android:focusable="true"-->
+<!--      android:focusableInTouchMode="true"/>-->
+<!--    <View-->
+<!--      android:id="@+id/test3"-->
+<!--      android:layout_width="16dp"-->
+<!--      android:layout_height="128dp"-->
+<!--      android:layout_marginRight="16dp"-->
+<!--      android:clickable="true"-->
+<!--      android:focusable="true"-->
+<!--      android:focusableInTouchMode="true"/>-->
+<!--    <View-->
+<!--      android:id="@+id/test4"-->
+<!--      android:layout_width="16dp"-->
+<!--      android:layout_height="128dp"-->
+<!--      android:layout_marginRight="16dp"-->
+<!--      android:clickable="true"-->
+<!--      android:focusable="true"-->
+<!--      android:focusableInTouchMode="true"/>-->
+
+<!--  </LinearLayout>-->
+
+
 </LinearLayout>
