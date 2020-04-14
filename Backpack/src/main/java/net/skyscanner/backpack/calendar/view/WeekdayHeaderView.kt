@@ -49,7 +49,6 @@ internal class WeekdayHeaderView @JvmOverloads constructor(
     val formatter = DateTimeFormatter.ofPattern("ccc", locale)
     val descriptionFormatter = DateTimeFormatter.ofPattern("cccc", locale)
 
-
     firstWeekdayView.text = dayOfWeek(locale, formatter, 1)
     secondWeekdayView.text = dayOfWeek(locale, formatter, 2)
     thirdWeekdayView.text = dayOfWeek(locale, formatter, 3)

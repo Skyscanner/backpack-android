@@ -1,12 +1,15 @@
 package net.skyscanner.backpack.calendar.model
 
 import android.content.Context
+import android.content.res.Configuration
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import net.skyscanner.backpack.R
-import org.threeten.bp.LocalDate
+import net.skyscanner.backpack.calendar.model.CalendarCellStyle.TextStyle.Dark
+import net.skyscanner.backpack.calendar.model.CalendarCellStyle.TextStyle.Light
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
+import org.threeten.bp.LocalDate
 
 data class CalendarColoring(
   val coloredBuckets: Set<ColoredBucket>
@@ -36,7 +39,8 @@ sealed class CalendarCellStyle {
    * the calendar.
    */
   object Positive : CalendarCellStyle() {
-    override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkGlencoe)
+    override fun color(context: Context) =
+      ContextCompat.getColor(context, R.color.__calendarCellStylePositiveColor)
   }
 
   /**
@@ -45,7 +49,8 @@ sealed class CalendarCellStyle {
    * the calendar.
    */
   object Neutral : CalendarCellStyle() {
-    override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkErfoud)
+    override fun color(context: Context) =
+      ContextCompat.getColor(context, R.color.__calendarCellStyleNeutralColor)
   }
 
   /**
@@ -54,8 +59,18 @@ sealed class CalendarCellStyle {
    * the calendar.
    */
   object Negative : CalendarCellStyle() {
-    override fun color(context: Context) = ContextCompat.getColor(context, R.color.bpkHillier)
-    override fun textStyle(context: Context) = TextStyle.Light
+    override fun color(context: Context) =
+      ContextCompat.getColor(context, R.color.__calendarCellStyleNegativeColor)
+
+    override fun textStyle(context: Context): TextStyle {
+      val nightModeFlags: Int = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+      return if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+        Light
+      } else {
+        Dark
+      }
+    }
   }
 
   /**
