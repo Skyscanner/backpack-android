@@ -6,7 +6,10 @@ import android.graphics.drawable.Drawable
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-internal class ChartDrawable : Drawable() {
+internal class ChartDrawable(
+  private val background: ColorStateList,
+  private val foreground: ColorStateList
+) : Drawable() {
 
   private val paint = Paint().apply {
     isAntiAlias = true
@@ -32,22 +35,6 @@ internal class ChartDrawable : Drawable() {
       val radius = bounds.width() / 2
       val totalRange = height - radius - radius
       return totalRange * value + radius
-    }
-
-  var background: ColorStateList = ColorStateList.valueOf(Color.GRAY)
-    set(value) {
-      if (field != value) {
-        field = value
-        invalidateSelf()
-      }
-    }
-
-  var foreground: ColorStateList = ColorStateList.valueOf(Color.RED)
-    set(value) {
-      if (field != value) {
-        field = value
-        invalidateSelf()
-      }
     }
 
   override fun getAlpha(): Int =

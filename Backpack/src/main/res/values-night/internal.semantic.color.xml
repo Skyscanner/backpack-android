@@ -27,7 +27,7 @@
   <color name="__barChartColumnSubtitleColor">@color/bpkSkyGrayTint04</color>
   <color name="__barChartGroupTitleColor">@color/bpkWhite</color>
   <color name="__barChartBarBackgroundColor">@color/bpkSkyGrayTint01</color>
-  <color name="__barChartLineColor">@color/bpkSkyGrayTint04</color>
-  <color name="__barChartUndefinedColor">@color/bpkSkyGrayTint04</color>
-  <color name="__barChartPrimaryColor">@color/bpkPrimaryDark</color>
+  <color name="__barChartLineColor">@color/bpkPrimary</color>
+  <color name="__barChartDisabledColor">@color/bpkSkyGrayTint04</color>
+  <color name="__barChartSelectedColor">@color/bpkGlencoe</color>
 </resources>

@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="wrap_content"
+  android:layout_width="@dimen/bpkSpacingXxl"
   android:layout_height="match_parent"
   tools:layout_height="160dp"
   android:paddingStart="@dimen/bpkSpacingMd"
+  android:clipToPadding="false"
+  android:clipChildren="false"
   android:paddingTop="@dimen/bpkSpacingMd"
   android:paddingEnd="@dimen/bpkSpacingMd"
   android:paddingBottom="@dimen/bpkSpacingMd">
@@ -28,6 +30,10 @@
     app:layout_constraintBottom_toTopOf="@+id/bpk_barchart_column_subtitle"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginTop="@dimen/bpkSpacingMd"
+    android:ellipsize="end"
+    android:singleLine="true"
+    android:maxLines="1"
     app:textStyle="sm"
     app:weight="emphasized"
     tools:text="3" />
@@ -41,6 +47,9 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:textStyle="sm"
+    android:ellipsize="end"
+    android:singleLine="true"
+    android:maxLines="1"
     tools:text="Fr" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

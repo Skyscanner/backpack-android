@@ -6,6 +6,8 @@ import android.widget.TextView
 import net.skyscanner.backpack.barchart.BpkBarChartView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.toast.BpkToast
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ToastStory : Story() {
 
@@ -49,21 +51,23 @@ class ToastStory : Story() {
 //    }
   }
 
-  private fun createGroup(number: Int) = BpkBarChartView.Group(
-    title = "Group $number",
+  private val random = Random()
+
+  private fun createGroup(month: Int) = BpkBarChartView.Group(
+    title = arrayOf("January", "February", "March", "April", "May", "June", "Jule")[month % 6],
     items = ArrayList<BpkBarChartView.Bar>(10).apply {
-      for (i in 0 until 10) {
-        add(createColumn(i))
+      for (dayOfTheMonth in 0 until 30) {
+        add(createColumn(month * 30 + dayOfTheMonth))
       }
     }
   )
 
-  private fun createColumn(progress: Int) = BpkBarChartView.Bar(
-    title = arrayOf("A", "B", "C", "D", "E", "F", "G", "I", "J", "K")[progress],
-    subtitle = progress.toString(),
+  private fun createColumn(dayOfTheYear: Int) = BpkBarChartView.Bar(
+    title = arrayOf("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")[dayOfTheYear % 7],
+    subtitle = (dayOfTheYear % 30 + 1).toString(),
     badge = "",
-    value = progress / 10f,
-    type = BpkBarChartView.Type.Primary
+    value = random.nextInt(120) / 100f,
+    disabled = random.nextInt(5) == 0
   )
 
   companion object {

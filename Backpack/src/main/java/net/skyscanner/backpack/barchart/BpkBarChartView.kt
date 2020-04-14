@@ -19,16 +19,11 @@ class BpkBarChartView @JvmOverloads constructor(
 ) : ConstraintLayout(createContextThemeWrapper(context, attrs, R.attr.bpkBarChartStyle), attrs, defStyleAttr),
   (BpkBarChartView.Model) -> Unit {
 
-  enum class Type {
-    Undefined,
-    Primary
-  }
-
   data class Bar(
     val title: CharSequence,
     val subtitle: CharSequence,
     val badge: CharSequence,
-    val type: Type,
+    val disabled: Boolean,
     val value: Float
   )
 
@@ -38,8 +33,8 @@ class BpkBarChartView @JvmOverloads constructor(
   )
 
   data class Legend(
-    val type: Type,
-    val label: CharSequence
+    val enabledTitle: CharSequence,
+    val disabledTitle: CharSequence
   )
 
   data class Model(
@@ -52,8 +47,8 @@ class BpkBarChartView @JvmOverloads constructor(
     val columnSubtitle: ColorStateList,
     val groupTitle: ColorStateList,
     val chartBackground: ColorStateList,
-    val chartLine: ColorStateList,
-    val types: Map<Type, ColorStateList>
+    val chartForeground: ColorStateList,
+    val chartLine: ColorStateList
   )
 
   interface OnBarClickListener : Consumer<Bar> {
@@ -66,13 +61,12 @@ class BpkBarChartView @JvmOverloads constructor(
   private val graphView: ChartGraphView
 
   init {
-    var columnTitle = ContextCompat.getColorStateList(context, R.color.__barChartColumnTitleColor)!!
-    var columnSubtitle = ContextCompat.getColorStateList(context, R.color.__barChartColumnSubtitleColor)!!
+    var columnTitle = ContextCompat.getColorStateList(context, R.color.bpk_barchart_title_selector)!!
+    var columnSubtitle = ContextCompat.getColorStateList(context, R.color.bpk_barchart_subtitle_selector)!!
     var groupTitle = ContextCompat.getColorStateList(context, R.color.__barChartGroupTitleColor)!!
     var chartBackground = ContextCompat.getColorStateList(context, R.color.__barChartBarBackgroundColor)!!
+    var chartForeground = ContextCompat.getColorStateList(context, R.color.bpk_barchart_bar_selector)!!
     var chartLine = ContextCompat.getColorStateList(context, R.color.__barChartLineColor)!!
-    var undefined = ContextCompat.getColorStateList(context, R.color.__barChartUndefinedColor)!!
-    var primary = ContextCompat.getColorStateList(context, R.color.__barChartPrimaryColor)!!
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -87,10 +81,9 @@ class BpkBarChartView @JvmOverloads constructor(
         ?: groupTitle
       chartBackground = it.getColorStateList(R.styleable.BpkBarChartView_barChartBarBackgroundColor)
         ?: chartBackground
+      chartForeground = it.getColorStateList(R.styleable.BpkBarChartView_barChartBarForegroundColor)
+        ?: chartForeground
       chartLine = it.getColorStateList(R.styleable.BpkBarChartView_barChartLineColor) ?: chartLine
-      undefined = it.getColorStateList(R.styleable.BpkBarChartView_barChartUndefinedColor)
-        ?: undefined
-      primary = it.getColorStateList(R.styleable.BpkBarChartView_barChartPrimaryColor) ?: primary
     }
 
     val colors = Colors(
@@ -98,11 +91,8 @@ class BpkBarChartView @JvmOverloads constructor(
       columnSubtitle = columnSubtitle,
       groupTitle = groupTitle,
       chartBackground = chartBackground,
-      chartLine = chartLine,
-      types = mapOf(
-        Type.Undefined to undefined,
-        Type.Primary to primary
-      )
+      chartForeground = chartForeground,
+      chartLine = chartLine
     )
 
     graphView = ChartGraphView(context, colors) {

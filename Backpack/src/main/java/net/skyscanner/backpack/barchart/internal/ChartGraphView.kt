@@ -40,7 +40,6 @@ internal class ChartGraphView constructor(
         }
       }
     })
-
     addView(it, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
   }
 

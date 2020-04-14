@@ -201,9 +201,8 @@
     <attr name="barChartColumnSubtitleColor" format="color" />
     <attr name="barChartGroupTitleColor" format="color" />
     <attr name="barChartBarBackgroundColor" format="color" />
+    <attr name="barChartBarForegroundColor" format="color" />
     <attr name="barChartLineColor" format="color" />
-    <attr name="barChartUndefinedColor" format="color" />
-    <attr name="barChartPrimaryColor" format="color" />
   </declare-styleable>
 
   <attr name="bpkThemeOverlay" format="reference" />

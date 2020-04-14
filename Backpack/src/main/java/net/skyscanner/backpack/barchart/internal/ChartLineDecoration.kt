@@ -17,7 +17,7 @@ internal class ChartLineDecoration(
     style = Paint.Style.FILL_AND_STROKE
   }
 
-  private var position = 0f
+  private var position = Float.MIN_VALUE
 
   override fun invoke(position: Float) {
     this.position = position
@@ -26,6 +26,8 @@ internal class ChartLineDecoration(
 
   override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
     super.onDraw(c, parent, state)
+    if (position == Float.MIN_VALUE) return
+
     val lineY = position + parent.paddingTop
 
     paint.color = colors.chartLine.run { getColorForState(parent.drawableState, defaultColor) }

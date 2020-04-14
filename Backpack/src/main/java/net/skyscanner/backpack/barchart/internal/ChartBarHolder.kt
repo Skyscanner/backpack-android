@@ -32,8 +32,7 @@ internal class ChartBarHolder(
     setTextColor(colors.columnSubtitle)
   }
 
-  private val chart = ChartDrawable()
-    .apply { background = colors.chartBackground }
+  private val chart = ChartDrawable(colors.chartBackground, colors.chartForeground)
 
   private val chartView = findViewById<View>(R.id.bpk_barchart_column_chart).apply {
     background = chart
@@ -43,6 +42,6 @@ internal class ChartBarHolder(
     title.text = model.title
     subtitle.text = model.subtitle
     chart.value = model.value
-    chart.foreground = colors.types.getValue(model.type)
+    view.isEnabled = !model.disabled
   }
 }
