@@ -2,12 +2,6 @@
 
 > Place your changes below this line.
 
-**Fixed:**
-
-- `BpkCalendar`
-  - Added accessibility labels to `WeekDay` and `Month` views in `BpkCalendar`.
-  - Updated calendar pre defined cell styles to match latest design.
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

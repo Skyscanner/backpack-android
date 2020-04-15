@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 23.1.1
+
+**Fixed:**
+
+- `BpkCalendar`
+  - Added accessibility labels to `WeekDay` and `Month` views in `BpkCalendar`.
+  - Updated calendar pre defined cell styles to match latest design.
+
 # 23.1.0
 
 **Added:**
