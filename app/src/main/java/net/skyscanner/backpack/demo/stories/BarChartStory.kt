@@ -21,8 +21,13 @@ class BarChartStory : Story() {
           createMonth(3),
           createMonth(4),
           createMonth(5)
+        ),
+        legend = BpkBarChart.Legend(
+          "£",
+          "No Price"
         )
-      ))
+      )
+      )
     }
   }
 

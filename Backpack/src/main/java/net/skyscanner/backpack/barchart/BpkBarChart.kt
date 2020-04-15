@@ -3,11 +3,13 @@ package net.skyscanner.backpack.barchart
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.barchart.internal.ChartGraphView
+import net.skyscanner.backpack.barchart.internal.ChartLegend
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -16,7 +18,7 @@ class BpkBarChart @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : ConstraintLayout(createContextThemeWrapper(context, attrs, R.attr.bpkBarChartStyle), attrs, defStyleAttr),
+) : FrameLayout(createContextThemeWrapper(context, attrs, R.attr.bpkBarChartStyle), attrs, defStyleAttr),
   (BpkBarChart.Model) -> Unit {
 
   data class Bar(
@@ -39,7 +41,7 @@ class BpkBarChart @JvmOverloads constructor(
 
   data class Model(
     val groups: List<Group>,
-    val legend: List<Legend>? = null
+    val legend: Legend? = null
   )
 
   data class Colors(
@@ -59,6 +61,8 @@ class BpkBarChart @JvmOverloads constructor(
   var listener: Consumer<Bar>? = null
 
   private val graphView: ChartGraphView
+  private val legendView: ChartLegend
+  private val colors: Colors
 
   init {
     var columnTitle = ContextCompat.getColorStateList(context, R.color.bpk_barchart_title_selector)!!
@@ -86,7 +90,7 @@ class BpkBarChart @JvmOverloads constructor(
       chartLine = it.getColorStateList(R.styleable.BpkBarChart_barChartLineColor) ?: chartLine
     }
 
-    val colors = Colors(
+    colors = Colors(
       columnTitle = columnTitle,
       columnSubtitle = columnSubtitle,
       groupTitle = groupTitle,
@@ -100,9 +104,13 @@ class BpkBarChart @JvmOverloads constructor(
     }
 
     addView(graphView, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+
+    legendView = ChartLegend(context, colors)
+    addView(legendView, LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.END or Gravity.TOP))
   }
 
   override fun invoke(model: Model) {
     graphView(model.groups)
+    legendView.invoke(model.legend)
   }
 }
