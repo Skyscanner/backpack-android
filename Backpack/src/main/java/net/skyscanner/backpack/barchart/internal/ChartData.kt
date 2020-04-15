@@ -1,9 +1,9 @@
 package net.skyscanner.backpack.barchart.internal
 
-import net.skyscanner.backpack.barchart.BpkBarChartView
+import net.skyscanner.backpack.barchart.BpkBarChart
 
 internal class ChartData(
-  groups: List<BpkBarChartView.Group>? = null
+  groups: List<BpkBarChart.Group>? = null
 ) {
 
   private var data: List<Item> =
@@ -12,14 +12,14 @@ internal class ChartData(
   val size: Int
     get() = data.size
 
-  fun getItem(index: Int): BpkBarChartView.Bar =
+  fun getItem(index: Int): BpkBarChart.Bar =
     data[index].bar
 
-  fun getGroup(index: Int): BpkBarChartView.Group =
+  fun getGroup(index: Int): BpkBarChart.Group =
     data[index].group
 
   private data class Item(
-    val group: BpkBarChartView.Group,
-    val bar: BpkBarChartView.Bar
+    val group: BpkBarChart.Group,
+    val bar: BpkBarChart.Bar
   )
 }

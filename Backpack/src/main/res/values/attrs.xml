@@ -196,7 +196,7 @@
     <attr name="navBarMenu" format="reference" />
   </declare-styleable>
 
-  <declare-styleable name="BpkBarChartView">
+  <declare-styleable name="BpkBarChart">
     <attr name="barChartColumnTitleColor" format="color" />
     <attr name="barChartColumnSubtitleColor" format="color" />
     <attr name="barChartGroupTitleColor" format="color" />

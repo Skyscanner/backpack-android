@@ -2,12 +2,12 @@ package net.skyscanner.backpack.barchart.internal
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import net.skyscanner.backpack.barchart.BpkBarChartView
+import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.util.Consumer
 
 internal class ChartAdapter(
-  private val colors: BpkBarChartView.Colors,
-  private val onClick: Consumer<BpkBarChartView.Bar>,
+  private val colors: BpkBarChart.Colors,
+  private val onClick: Consumer<BpkBarChart.Bar>,
   private val onLineChanged: Consumer<Float>
 ) : RecyclerView.Adapter<ChartBarHolder>(), Consumer<ChartData> {
 

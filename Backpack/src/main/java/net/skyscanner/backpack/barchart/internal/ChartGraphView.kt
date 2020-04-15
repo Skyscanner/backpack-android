@@ -8,16 +8,16 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.barchart.BpkBarChartView
+import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
 
 @SuppressLint("ViewConstructor")
 internal class ChartGraphView constructor(
   context: Context,
-  colors: BpkBarChartView.Colors,
-  onClick: Consumer<BpkBarChartView.Bar>
-) : FrameLayout(context), Consumer<List<BpkBarChartView.Group>> {
+  colors: BpkBarChart.Colors,
+  onClick: Consumer<BpkBarChart.Bar>
+) : FrameLayout(context), Consumer<List<BpkBarChart.Group>> {
 
   private val titleHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
 
@@ -57,7 +57,7 @@ internal class ChartGraphView constructor(
 
   private var model: ChartData = ChartData()
 
-  override fun invoke(groups: List<BpkBarChartView.Group>) {
+  override fun invoke(groups: List<BpkBarChart.Group>) {
     this.model = ChartData(groups)
     adapter.invoke(model)
   }

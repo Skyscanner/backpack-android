@@ -4,12 +4,12 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.TypedValue
 import androidx.recyclerview.widget.RecyclerView
-import net.skyscanner.backpack.barchart.BpkBarChartView
+import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.util.Consumer
 
 internal class ChartLineDecoration(
   private val parent: RecyclerView,
-  private val colors: BpkBarChartView.Colors
+  private val colors: BpkBarChart.Colors
 ) : RecyclerView.ItemDecoration(), Consumer<Float> {
 
   private val paint = Paint().apply {

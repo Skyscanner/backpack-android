@@ -4,16 +4,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.barchart.BpkBarChartView
+import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class ChartBarHolder(
   parent: ViewGroup,
-  private val colors: BpkBarChartView.Colors,
-  private val onClick: Consumer<BpkBarChartView.Bar>,
+  private val colors: BpkBarChart.Colors,
+  private val onClick: Consumer<BpkBarChart.Bar>,
   private val onLineChanged: Consumer<Float>
-) : ItemHolder<BpkBarChartView.Bar>(parent, R.layout.view_bpk_barchart_column) {
+) : ItemHolder<BpkBarChart.Bar>(parent, R.layout.view_bpk_barchart_column) {
 
   init {
     view.setOnClickListener {
@@ -38,7 +38,7 @@ internal class ChartBarHolder(
     background = chart
   }
 
-  override fun bind(model: BpkBarChartView.Bar) {
+  override fun bind(model: BpkBarChart.Bar) {
     title.text = model.title
     subtitle.text = model.subtitle
     chart.value = model.value

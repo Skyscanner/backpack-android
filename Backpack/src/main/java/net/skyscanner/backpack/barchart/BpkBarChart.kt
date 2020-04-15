@@ -12,12 +12,12 @@ import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
-class BpkBarChartView @JvmOverloads constructor(
+class BpkBarChart @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
 ) : ConstraintLayout(createContextThemeWrapper(context, attrs, R.attr.bpkBarChartStyle), attrs, defStyleAttr),
-  (BpkBarChartView.Model) -> Unit {
+  (BpkBarChart.Model) -> Unit {
 
   data class Bar(
     val title: CharSequence,
@@ -70,20 +70,20 @@ class BpkBarChartView @JvmOverloads constructor(
 
     context.theme.obtainStyledAttributes(
       attrs,
-      R.styleable.BpkBarChartView,
+      R.styleable.BpkBarChart,
       defStyleAttr, 0
     ).use {
-      columnTitle = it.getColorStateList(R.styleable.BpkBarChartView_barChartColumnTitleColor)
+      columnTitle = it.getColorStateList(R.styleable.BpkBarChart_barChartColumnTitleColor)
         ?: columnTitle
-      columnSubtitle = it.getColorStateList(R.styleable.BpkBarChartView_barChartColumnSubtitleColor)
+      columnSubtitle = it.getColorStateList(R.styleable.BpkBarChart_barChartColumnSubtitleColor)
         ?: columnSubtitle
-      groupTitle = it.getColorStateList(R.styleable.BpkBarChartView_barChartGroupTitleColor)
+      groupTitle = it.getColorStateList(R.styleable.BpkBarChart_barChartGroupTitleColor)
         ?: groupTitle
-      chartBackground = it.getColorStateList(R.styleable.BpkBarChartView_barChartBarBackgroundColor)
+      chartBackground = it.getColorStateList(R.styleable.BpkBarChart_barChartBarBackgroundColor)
         ?: chartBackground
-      chartForeground = it.getColorStateList(R.styleable.BpkBarChartView_barChartBarForegroundColor)
+      chartForeground = it.getColorStateList(R.styleable.BpkBarChart_barChartBarForegroundColor)
         ?: chartForeground
-      chartLine = it.getColorStateList(R.styleable.BpkBarChartView_barChartLineColor) ?: chartLine
+      chartLine = it.getColorStateList(R.styleable.BpkBarChart_barChartLineColor) ?: chartLine
     }
 
     val colors = Colors(
