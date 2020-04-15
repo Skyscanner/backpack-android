@@ -1,7 +1,12 @@
 # Unreleased
 
 > Place your changes below this line.
-- Added acessibility labels to `WeekDay` and `Month` views in `BpkCalendar`
+
+**Fixed:**
+
+- `BpkCalendar`
+  - Added accessibility labels to `WeekDay` and `Month` views in `BpkCalendar`.
+  - Updated calendar pre defined cell styles to match latest design.
 
 ## How to write a good changelog entry
 
