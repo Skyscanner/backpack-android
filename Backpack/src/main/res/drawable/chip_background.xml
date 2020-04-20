@@ -6,11 +6,10 @@
     <shape
       android:padding="90dp"
       android:shape="rectangle">
+      <size android:height="@dimen/bpk_chip_height" />
       <padding
-        android:bottom="@dimen/bpkSpacingMd"
         android:left="@dimen/bpkSpacingBase"
-        android:right="@dimen/bpkSpacingBase"
-        android:top="@dimen/bpkSpacingMd" />
+        android:right="@dimen/bpkSpacingBase" />
       <corners
         android:bottomLeftRadius="@dimen/bpkBorderRadiusPill"
         android:bottomRightRadius="@dimen/bpkBorderRadiusPill"

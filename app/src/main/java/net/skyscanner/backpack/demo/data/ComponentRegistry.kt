@@ -101,7 +101,12 @@ object ComponentRegistry {
         "Footer view" story NodeData { FooterViewCalendarStory of R.layout.fragment_calendar_footer_view },
         "Footer view RTL" story NodeData { FooterViewCalendarStory of R.layout.fragment_calendar_footer_view with Direction.RTL }
       )),
-    "Chip" story NodeData { ChipStory() },
+    "Chip" story NodeData({ children -> SubStory of children },
+      mapOf(
+        "Default" story NodeData { ChipStory of R.layout.fragment_chip },
+        "With icon" story NodeData { ChipStory of R.layout.fragment_chip_with_icon },
+        "With icon RTL" story NodeData { ChipStory of R.layout.fragment_chip_with_icon with Direction.RTL }
+      )),
     "Checkbox" story NodeData { Story of R.layout.fragment_checkbox },
     "Dialog" story NodeData({ children -> SubStory of children },
       mapOf(
