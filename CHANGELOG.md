@@ -2,6 +2,16 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 23.2.0
+
+**Added:**
+
+- `BpkCalendar`:
+  - Added new `descriptionOnly` prop to `HighlightedDay`.
+
+- `BpkChip`:
+  - Added new `chipIcon` prop.
+
 # 23.1.1
 
 **Fixed:**
