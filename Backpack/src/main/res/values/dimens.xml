@@ -31,5 +31,5 @@
   <dimen name="bpk_snackbar_min_height">60dp</dimen>
   <dimen name="bpk_bottom_nav_height">56dp</dimen>
   <!--spacing_md * 2(16) + font sm line height(18) -->
-  <dimen name="bpk_chip_height">34dp</dimen>
+  <dimen name="bpk_chip_height">34sp</dimen>
 </resources>

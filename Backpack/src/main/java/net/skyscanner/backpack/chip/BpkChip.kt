@@ -4,22 +4,20 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.util.TypedValue
-import android.view.ContextThemeWrapper
 import android.view.Gravity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
-import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 open class BpkChip @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : BpkText(wrapContextWithDefaults(context), attrs, defStyleAttr) {
+) : BpkText(createContextThemeWrapper(context, attrs, R.attr.bpkChipStyle), attrs, defStyleAttr) {
 
   private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
   private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_normal)
@@ -78,12 +76,9 @@ open class BpkChip @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val themedContext = context.wrapWithTheme()
-    themedContext
-      .theme
-      .obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
+    context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
       .use {
-        background = ContextCompat.getDrawable(themedContext, R.drawable.chip_background)
+        background = ContextCompat.getDrawable(context, R.drawable.chip_background)
         disabled = it.getBoolean(R.styleable.BpkChip_disabled, false)
         isSelected = it.getBoolean(R.styleable.BpkChip_selected, false)
         chipBackgroundColor = it.getColor(R.styleable.BpkChip_chipBackgroundColor, chipBackgroundColor)
@@ -114,16 +109,5 @@ open class BpkChip @JvmOverloads constructor(
       )
     )
     ViewCompat.setBackgroundTintList(this, backgroundTintList)
-  }
-
-  private fun Context.wrapWithTheme(): Context {
-    val t = TypedValue()
-
-    if (this.theme.resolveAttribute(R.attr.bpkChipStyle, t, true)) {
-      // If we have global styles (theming) for the chip we wrap again so this overrides the default
-      return ContextThemeWrapper(this, t.resourceId)
-    }
-
-    return this
   }
 }
