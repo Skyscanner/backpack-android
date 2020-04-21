@@ -8,7 +8,7 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 The Checkbox component can be used in both XML and Kotlin/Java
 
-Example of a Checkbox in XML
+Example of a checkbox in XML
 
 ```xml
 <net.skyscanner.backpack.checkbox.BpkCheckbox
@@ -16,7 +16,7 @@ Example of a Checkbox in XML
   android:layout_height="wrap_content"/>
 ```
 
-Example of a Star Rating in Kotlin
+Example of a checkbox in Kotlin
 
 ```Kotlin
 import net.skyscanner.backpack.checkbox.BpkCheckbox
