@@ -4,6 +4,9 @@
 
 **Added:**
 
+- `BpkCalendar`:
+  - Added new `descriptionOnly` prop to `HighlightedDay`.
+
 - `BpkChip`:
   - Added new `chipIcon` prop.
 
