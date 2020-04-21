@@ -30,4 +30,6 @@
   <dimen name="bpk_dialog_flare_max_width">440dp</dimen>
   <dimen name="bpk_snackbar_min_height">60dp</dimen>
   <dimen name="bpk_bottom_nav_height">56dp</dimen>
+  <dimen name="bpk_barchart_popup_triangle_width">12dp</dimen>
+  <dimen name="bpk_barchart_popup_triangle_height">@dimen/bpkSpacingSm</dimen>
 </resources>

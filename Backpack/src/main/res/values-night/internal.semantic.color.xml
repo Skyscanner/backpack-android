@@ -30,4 +30,7 @@
   <color name="__barChartLineColor">@color/bpkPrimary</color>
   <color name="__barChartDisabledColor">@color/bpkSkyGrayTint04</color>
   <color name="__barChartSelectedColor">@color/bpkGlencoe</color>
+
+  <color name="__barChartPopupBackgroundColor">@color/bpkSkyGrayTint04</color>
+  <color name="__barChartPopupTextColor">@color/bpkSkyBlueShade03</color>
 </resources>

@@ -3,23 +3,27 @@ package net.skyscanner.backpack.barchart.internal
 import android.content.res.ColorStateList
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import net.skyscanner.backpack.util.withSave
 import kotlin.math.min
-import kotlin.math.roundToInt
 
 internal class ChartDrawable(
   private val background: ColorStateList,
   private val foreground: ColorStateList
 ) : Drawable() {
 
-  private val paint = Paint().apply {
+  private val backgroundPaint = Paint().apply {
     isAntiAlias = true
     isDither = true
     style = Paint.Style.FILL_AND_STROKE
   }
 
-  private val cap = Path()
+  private val foregroundPaint = Paint().apply {
+    isAntiAlias = true
+    isDither = true
+    style = Paint.Style.FILL_AND_STROKE
+  }
 
-  private val rect = RectF()
+  private val triangle = Path()
 
   var value: Float = 0f
     set(value) {
@@ -29,30 +33,40 @@ internal class ChartDrawable(
       }
     }
 
-  val valueInPixels: Float
+  private val totalRange: Float
     get() {
-      val height = bounds.height()
-      val radius = bounds.width() / 2
-      val totalRange = height - radius - radius
-      return totalRange * value + radius
+      val minRange = diameter
+      val maxRange = bounds.height()
+      return maxRange - minRange
     }
 
+  val diameter: Float
+    get() = bounds.width().toFloat()
+
+  val radius: Float
+    get() = diameter / 2
+
+  val valueInPixels: Float
+    get() = totalRange * min(1.0f, value)
+
   override fun getAlpha(): Int =
-    paint.alpha
+    backgroundPaint.alpha
 
   override fun setAlpha(alpha: Int) {
-    paint.alpha = alpha
+    backgroundPaint.alpha = alpha
+    foregroundPaint.alpha = alpha
   }
 
   override fun getOpacity(): Int =
     PixelFormat.TRANSPARENT
 
   override fun setColorFilter(colorFilter: ColorFilter?) {
-    paint.colorFilter = colorFilter
+    backgroundPaint.colorFilter = colorFilter
+    foregroundPaint.colorFilter = colorFilter
   }
 
   override fun getColorFilter(): ColorFilter? =
-    paint.colorFilter
+    backgroundPaint.colorFilter
 
   override fun isStateful(): Boolean =
     background.isStateful || foreground.isStateful
@@ -60,48 +74,35 @@ internal class ChartDrawable(
   override fun onStateChange(state: IntArray?): Boolean =
     isStateful
 
-  @Suppress("UnnecessaryVariable")
+  override fun onBoundsChange(bounds: Rect) {
+    super.onBoundsChange(bounds)
+
+    val width = bounds.width().toFloat()
+
+    triangle.reset()
+    triangle.moveTo(0f, radius)
+    triangle.lineTo(bounds.centerX().toFloat(), 0f)
+    triangle.lineTo(width, radius)
+    triangle.lineTo(0f, radius)
+  }
+
   override fun draw(canvas: Canvas) {
-    val width = bounds.width()
-    val height = bounds.height()
+    val width = bounds.width().toFloat()
+    val height = bounds.height().toFloat()
 
-    val diameter = width
-    val radius = diameter / 2f
+    backgroundPaint.color = background.getColorForState(state, background.defaultColor)
+    foregroundPaint.color = foreground.getColorForState(state, foreground.defaultColor)
 
-    // drawing the background
-    rect.set(bounds)
-    paint.color = background.getColorForState(state, background.defaultColor)
-    canvas.drawRoundRect(rect, radius, radius, paint)
+    canvas.withSave {
 
-    // drawing the foreground
-    val minRange = diameter
-    val maxRange = height
-    val totalRange = maxRange - minRange
-    val activeRange = (totalRange * min(1.0f, value)).roundToInt()
-    val inactiveRange = totalRange - activeRange
-    paint.color = foreground.getColorForState(state, foreground.defaultColor)
-    rect.top = rect.top + inactiveRange
-    canvas.drawRoundRect(rect, radius, radius, paint)
+      if (value > 1.0f) {
+        canvas.drawPath(triangle, foregroundPaint)
+        canvas.clipRect(0f, radius, width, height)
+      }
 
-    // drawing the cap
-    if (value > 1.0f) {
-      cap.reset()
-      val capCy = bounds.top.toFloat()
-      val capCx = bounds.centerX().toFloat()
-
-      val capLeft = bounds.left.toFloat()
-      val capTop = capCy - radius
-      val capRight = bounds.right.toFloat()
-      val capBottom = capCy + radius
-
-      cap.moveTo(capLeft, capBottom)
-
-      cap.lineTo(capLeft, capCy)
-      cap.lineTo(capCx, capTop)
-      cap.lineTo(capRight, capCy)
-      cap.lineTo(capRight, capBottom)
-      cap.lineTo(capLeft, capBottom)
-      canvas.drawPath(cap, paint)
+      canvas.drawRoundRect(0f, 0f, width, height, radius, radius, backgroundPaint)
+      val foregroundTop = totalRange - valueInPixels
+      canvas.drawRoundRect(0f, foregroundTop, width, height, radius, radius, foregroundPaint)
     }
   }
 }

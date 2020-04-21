@@ -11,16 +11,12 @@ import net.skyscanner.backpack.util.ItemHolder
 internal class ChartBarHolder(
   parent: ViewGroup,
   private val colors: BpkBarChart.Colors,
-  private val onClick: Consumer<BpkBarChart.Bar>,
-  private val onLineChanged: Consumer<Float>
+  private val onClick: Consumer<ChartBarHolder>
 ) : ItemHolder<BpkBarChart.Bar>(parent, R.layout.view_bpk_barchart_column) {
 
   init {
     view.setOnClickListener {
-      model?.let {
-        onClick(it)
-        onLineChanged(chartView.bottom - chart.valueInPixels)
-      }
+      onClick(this)
     }
   }
 
@@ -37,6 +33,12 @@ internal class ChartBarHolder(
   private val chartView = findViewById<View>(R.id.bpk_barchart_column_chart).apply {
     background = chart
   }
+
+  val chartTopPosition
+    get() = chartView.bottom - chart.valueInPixels - chart.radius
+
+  val chartRoundedTopPosition
+    get() = chartTopPosition - chart.radius
 
   override fun bind(model: BpkBarChart.Bar) {
     title.text = model.title

@@ -1,5 +1,7 @@
 package net.skyscanner.backpack.util
 
+import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +13,17 @@ internal abstract class ItemHolder<T>(
   protected val view: View
 ) : RecyclerView.ViewHolder(view), Consumer<T> {
 
+  val context: Context
+    get() = itemView.context
+
+  val resources: Resources
+    get() = itemView.resources
+
+  var model: T? = null
+    private set
+
   constructor(parent: ViewGroup, @LayoutRes layout: Int) :
     this(LayoutInflater.from(parent.context).inflate(layout, parent, false))
-
-  protected var model: T? = null
 
   final override fun invoke(model: T) {
     if (this.model != model) {

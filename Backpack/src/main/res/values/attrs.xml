@@ -203,6 +203,8 @@
     <attr name="barChartBarBackgroundColor" format="color" />
     <attr name="barChartBarForegroundColor" format="color" />
     <attr name="barChartLineColor" format="color" />
+    <attr name="barChartPopupBackgroundColor" format="color" />
+    <attr name="barChartPopupTextColor" format="color" />
   </declare-styleable>
 
   <attr name="bpkThemeOverlay" format="reference" />

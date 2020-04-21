@@ -22,6 +22,7 @@ class BpkBarChart @JvmOverloads constructor(
   (BpkBarChart.Model) -> Unit {
 
   data class Bar(
+    val id: Long = 0L,
     val title: CharSequence,
     val subtitle: CharSequence,
     val badge: CharSequence,
@@ -50,7 +51,9 @@ class BpkBarChart @JvmOverloads constructor(
     val groupTitle: ColorStateList,
     val chartBackground: ColorStateList,
     val chartForeground: ColorStateList,
-    val chartLine: ColorStateList
+    val chartLine: ColorStateList,
+    val popupBackground: ColorStateList,
+    val popupText: ColorStateList
   )
 
   interface OnBarClickListener : Consumer<Bar> {
@@ -71,6 +74,8 @@ class BpkBarChart @JvmOverloads constructor(
     var chartBackground = ContextCompat.getColorStateList(context, R.color.__barChartBarBackgroundColor)!!
     var chartForeground = ContextCompat.getColorStateList(context, R.color.bpk_barchart_bar_selector)!!
     var chartLine = ContextCompat.getColorStateList(context, R.color.__barChartLineColor)!!
+    var popupBackground = ContextCompat.getColorStateList(context, R.color.__barChartPopupBackgroundColor)!!
+    var popupText = ContextCompat.getColorStateList(context, R.color.__barChartPopupTextColor)!!
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -88,6 +93,9 @@ class BpkBarChart @JvmOverloads constructor(
       chartForeground = it.getColorStateList(R.styleable.BpkBarChart_barChartBarForegroundColor)
         ?: chartForeground
       chartLine = it.getColorStateList(R.styleable.BpkBarChart_barChartLineColor) ?: chartLine
+      popupBackground = it.getColorStateList(R.styleable.BpkBarChart_barChartPopupBackgroundColor)
+        ?: popupBackground
+      popupText = it.getColorStateList(R.styleable.BpkBarChart_barChartPopupTextColor) ?: popupText
     }
 
     colors = Colors(
@@ -96,7 +104,9 @@ class BpkBarChart @JvmOverloads constructor(
       groupTitle = groupTitle,
       chartBackground = chartBackground,
       chartForeground = chartForeground,
-      chartLine = chartLine
+      chartLine = chartLine,
+      popupBackground = popupBackground,
+      popupText = popupText
     )
 
     graphView = ChartGraphView(context, colors) {

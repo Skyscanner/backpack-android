@@ -19,6 +19,14 @@ internal class ChartGraphView constructor(
   onClick: Consumer<BpkBarChart.Bar>
 ) : FrameLayout(context), Consumer<List<BpkBarChart.Group>> {
 
+  private val onClickWrapper = object : Consumer<ChartBarHolder> {
+    override fun invoke(holder: ChartBarHolder) {
+      onClick(holder.model!!)
+      lineDecoration.invoke(holder)
+      recyclerView.invalidateItemDecorations()
+    }
+  }
+
   private val titleHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
 
   private val title = BpkText(context).also {
@@ -40,6 +48,7 @@ internal class ChartGraphView constructor(
         }
       }
     })
+    it.addItemDecoration(ChartPopupDecoration(context, colors))
     addView(it, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
   }
 
@@ -47,11 +56,15 @@ internal class ChartGraphView constructor(
     recyclerView.layoutManager = it
   }
 
-  private val lineDecoration = ChartLineDecoration(recyclerView, colors).also {
+  private val lineDecoration = ChartLineDecoration(resources, colors).also {
     recyclerView.addItemDecoration(it)
   }
 
-  private val adapter = ChartAdapter(colors, onClick, lineDecoration).also {
+  private val popupDecoration = ChartPopupDecoration(context, colors).also {
+    recyclerView.addItemDecoration(it)
+  }
+
+  private val adapter = ChartAdapter(colors, onClickWrapper).also {
     recyclerView.adapter = it
   }
 
