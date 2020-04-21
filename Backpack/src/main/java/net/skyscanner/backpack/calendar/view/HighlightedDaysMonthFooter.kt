@@ -3,10 +3,11 @@ package net.skyscanner.backpack.calendar.view
 import android.content.Context
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.presenter.DateFormatter
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
@@ -37,6 +38,7 @@ open class HighlightedDaysMonthFooter(
     holidays?.forEach { holiday ->
       addView(
         HolidayView(context).apply {
+          descriptionOnly = holiday.descriptionOnly
           description = holiday.description
           date = formatDate(holiday.date)
           color = holiday.color
@@ -50,6 +52,9 @@ open class HighlightedDaysMonthFooter(
   private class HolidayView(context: Context) : ConstraintLayout(context) {
     private val dateView by unsafeLazy { findViewById<BpkText>(R.id.date) }
     private val descriptionView by unsafeLazy { findViewById<BpkText>(R.id.description) }
+    private val dotView by unsafeLazy { findViewById<AppCompatImageView>(R.id.dot) }
+    private val spacingMd = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+    private val spacingSm = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
 
     init {
       LayoutInflater
@@ -74,7 +79,19 @@ open class HighlightedDaysMonthFooter(
       set(value) {
         field = value
         if (value != null) {
-          TextViewCompat.setCompoundDrawableTintList(dateView, ColorStateList.valueOf(value))
+          dotView.backgroundTintList = ColorStateList.valueOf(value)
+        }
+      }
+
+    var descriptionOnly = false
+      set(value) {
+        field = value
+        if (value) {
+          dateView.visibility = View.GONE
+          descriptionView.setPaddingRelative(spacingSm, 0, 0, 0)
+        } else {
+          dateView.visibility = View.VISIBLE
+          descriptionView.setPaddingRelative(spacingMd, 0, 0, 0)
         }
       }
   }

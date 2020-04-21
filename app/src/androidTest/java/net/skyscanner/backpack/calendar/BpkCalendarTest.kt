@@ -413,8 +413,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
     snap(wrapWithBackground(calendar))
   }
 
-  // NOTE: the "dot" before the holiday doesn't render because the test lib can't handle
-  // relative drawables
   @Test
   fun screenshotTestCalendarWithHighlightedDaysFooter() {
     val monthFooterAdapter = HighlightedDaysAdapter(
@@ -424,7 +422,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
         HighlightedDaysAdapter.HighlightedDay(
           LocalDate.of(2017, 1, 1), "New Year's Day"),
         HighlightedDaysAdapter.HighlightedDay(
-          LocalDate.of(2017, 1, 2), "Bank Holiday")
+          date = LocalDate.of(2017, 1, 2),
+          description = "Bank Holiday",
+          descriptionOnly = true)
       )
     )
 
