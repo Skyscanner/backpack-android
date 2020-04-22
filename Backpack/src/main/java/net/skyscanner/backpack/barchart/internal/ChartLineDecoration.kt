@@ -21,7 +21,7 @@ internal class ChartLineDecoration(
   private var position = Float.MIN_VALUE
 
   override fun invoke(holder: ChartBarHolder) {
-    this.position = holder.chartTopPosition
+    this.position = holder.chartRoundedTopPosition
   }
 
   override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {

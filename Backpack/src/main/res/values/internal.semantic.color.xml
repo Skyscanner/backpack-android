@@ -22,13 +22,9 @@
   <color name="__textFieldIcon">@color/bpkSkyGrayTint01</color>
   <color name="__bottomNavUnselected">@color/bpkSkyGrayTint04</color>
 
-  <color name="__barChartColumnTitleColor">@color/bpkSkyBlueShade03</color>
-  <color name="__barChartColumnSubtitleColor">@color/bpkSkyGrayTint02</color>
-  <color name="__barChartGroupTitleColor">@color/bpkSkyBlueShade03</color>
   <color name="__barChartBarBackgroundColor">@color/bpkSkyGrayTint06</color>
-  <color name="__barChartLineColor">@color/bpkPrimary</color>
   <color name="__barChartDisabledColor">@color/bpkSkyGrayTint03</color>
-  <color name="__barChartSelectedColor">@color/bpkMonteverde</color>
+  <color name="__barChartActivatedColor">@color/bpkMonteverde</color>
   <color name="__barChartPopupBackgroundColor">@color/bpkSkyBlueShade02</color>
   <color name="__barChartPopupTextColor">@color/bpkWhite</color>
 </resources>

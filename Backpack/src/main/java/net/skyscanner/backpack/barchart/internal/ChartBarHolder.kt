@@ -34,16 +34,13 @@ internal class ChartBarHolder(
     background = chart
   }
 
-  val chartTopPosition
-    get() = chartView.bottom - chart.valueInPixels - chart.radius
-
   val chartRoundedTopPosition
-    get() = chartTopPosition - chart.radius
+    get() = chartView.bottom - chart.valueInPixels - chart.diameter
 
   override fun bind(model: BpkBarChart.Bar) {
     title.text = model.title
     subtitle.text = model.subtitle
     chart.value = model.value
-    view.isEnabled = !model.disabled
+    view.isActivated = !model.disabled
   }
 }

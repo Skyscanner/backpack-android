@@ -43,7 +43,7 @@ class BarChartStory : Story() {
   )
 
   private fun createBar(dayOfTheYear: Int) = BpkBarChart.Bar(
-    title = arrayOf("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")[dayOfTheYear % 7],
+    title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
     subtitle = (dayOfTheYear % 30 + 1).toString(),
     badge = "£" + random.nextInt(100),
     value = random.nextInt(120) / 100f,

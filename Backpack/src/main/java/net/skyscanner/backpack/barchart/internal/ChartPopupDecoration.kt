@@ -3,6 +3,7 @@ package net.skyscanner.backpack.barchart.internal
 import android.content.Context
 import android.graphics.Canvas
 import androidx.recyclerview.widget.RecyclerView
+import net.skyscanner.backpack.R
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.util.forEach
 import net.skyscanner.backpack.util.withSave
@@ -13,6 +14,7 @@ internal class ChartPopupDecoration(
 ) : RecyclerView.ItemDecoration() {
 
   private val drawable = ChartPopupDrawable(context, colors)
+  private val spacing = context.resources.getDimension(R.dimen.bpkSpacingSm)
 
   override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
     super.onDrawOver(c, parent, state)
@@ -30,7 +32,7 @@ internal class ChartPopupDecoration(
 
     c.withSave {
       val dx = anchor.itemView.left + (anchor.itemView.width - drawable.bounds.width()) / 2f
-      val dy = parent.paddingTop + anchor.chartRoundedTopPosition - drawable.bounds.height()
+      val dy = parent.paddingTop + anchor.chartRoundedTopPosition - spacing - drawable.bounds.height()
 
       translate(dx, dy)
       drawable.draw(this)

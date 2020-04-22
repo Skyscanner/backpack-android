@@ -2,14 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="@dimen/bpkSpacingXxl"
+  android:layout_width="wrap_content"
+  android:minWidth="@dimen/bpkSpacingXl"
   android:layout_height="match_parent"
   tools:layout_height="160dp"
-  android:paddingStart="@dimen/bpkSpacingMd"
   android:clipToPadding="false"
   android:clipChildren="false"
   android:paddingTop="@dimen/bpkSpacingMd"
-  android:paddingEnd="@dimen/bpkSpacingMd"
   android:paddingBottom="@dimen/bpkSpacingMd">
 
   <View
@@ -18,6 +17,7 @@
     android:layout_height="0dp"
     android:duplicateParentState="true"
     app:layout_constraintBottom_toTopOf="@+id/bpk_barchart_column_title"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
     app:layout_constraintBottom_toTopOf="@+id/bpk_barchart_column_subtitle"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    android:layout_marginTop="@dimen/bpkSpacingMd"
+    android:layout_marginBottom="@dimen/bpkSpacingSm"
     android:ellipsize="end"
     android:singleLine="true"
     android:maxLines="1"

@@ -70,10 +70,10 @@ class BpkBarChart @JvmOverloads constructor(
   init {
     var columnTitle = ContextCompat.getColorStateList(context, R.color.bpk_barchart_title_selector)!!
     var columnSubtitle = ContextCompat.getColorStateList(context, R.color.bpk_barchart_subtitle_selector)!!
-    var groupTitle = ContextCompat.getColorStateList(context, R.color.__barChartGroupTitleColor)!!
+    var groupTitle = ContextCompat.getColorStateList(context, R.color.bpkTextPrimary)!!
     var chartBackground = ContextCompat.getColorStateList(context, R.color.__barChartBarBackgroundColor)!!
     var chartForeground = ContextCompat.getColorStateList(context, R.color.bpk_barchart_bar_selector)!!
-    var chartLine = ContextCompat.getColorStateList(context, R.color.__barChartLineColor)!!
+    var chartLine = ContextCompat.getColorStateList(context, R.color.__barChartActivatedColor)!!
     var popupBackground = ContextCompat.getColorStateList(context, R.color.__barChartPopupBackgroundColor)!!
     var popupText = ContextCompat.getColorStateList(context, R.color.__barChartPopupTextColor)!!
 
@@ -113,10 +113,10 @@ class BpkBarChart @JvmOverloads constructor(
       listener?.invoke(it)
     }
 
-    addView(graphView, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
-
     legendView = ChartLegend(context, colors)
     addView(legendView, LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.END or Gravity.TOP))
+
+    addView(graphView, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
   }
 
   override fun invoke(model: Model) {

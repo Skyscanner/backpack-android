@@ -28,6 +28,7 @@ internal class ChartGraphView constructor(
   }
 
   private val titleHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
+  private val titleSpacing = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
 
   private val title = BpkText(context).also {
     it.setTextColor(colors.groupTitle)
@@ -38,7 +39,7 @@ internal class ChartGraphView constructor(
   }
 
   private val recyclerView: RecyclerView = RecyclerView(context).also {
-    it.setPadding(0, titleHeight, 0, 0)
+    it.setPadding(0, titleHeight + titleSpacing, 0, 0)
     it.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         val position = layoutManager.findFirstVisibleItemPosition()

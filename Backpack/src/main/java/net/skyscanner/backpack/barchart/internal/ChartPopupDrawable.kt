@@ -32,7 +32,7 @@ internal class ChartPopupDrawable(
   private val borderRadius = resources.getDimension(R.dimen.bpkBorderRadiusSm)
   private val blockHeight = resources.getDimension(R.dimen.bpkSpacingXl)
 
-  private val textSpacing = resources.getDimension(R.dimen.bpkSpacingMd)
+  private val textSpacing = resources.getDimension(R.dimen.bpkSpacingMd) + resources.getDimension(R.dimen.bpkSpacingSm)
   private val textBounds = Rect()
 
   private val backgroundPaint = Paint().apply {
@@ -109,8 +109,11 @@ internal class ChartPopupDrawable(
     }
 
     textPaint.color = colors.popupText.getColorForState(state)
-    val textX = (bounds.width() - textBounds.width()) / 2f
-    val textY = (blockHeight + textBounds.height()) / 2f
-    canvas.drawText(text, textX, textY, textPaint)
+    canvas.withSave {
+      val dx = (bounds.width() - textBounds.width()) / 2f
+      val dy = (blockHeight + textBounds.height()) / 2f
+      canvas.translate(dx, dy)
+      canvas.drawText(text, 0f, 0f, textPaint)
+    }
   }
 }

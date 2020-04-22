@@ -8,7 +8,7 @@
   tools:parentTag="android.widget.LinearLayout">
 
   <net.skyscanner.backpack.badge.BpkBadge
-    android:id="@+id/bpk_barchart_legend_enabled"
+    android:id="@+id/bpk_barchart_legend_activated"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/bpkSpacingMd"
@@ -16,10 +16,9 @@
     android:minWidth="@dimen/bpkSpacingXxl" />
 
   <net.skyscanner.backpack.badge.BpkBadge
-    android:id="@+id/bpk_barchart_legend_disabled"
+    android:id="@+id/bpk_barchart_legend_inactivated"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:enabled="false"
     app:badgeType="dark"
     android:minWidth="@dimen/bpkSpacingXxl" />
 
