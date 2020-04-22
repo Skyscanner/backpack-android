@@ -21,7 +21,7 @@ class BpkBarChart @JvmOverloads constructor(
 ) : FrameLayout(createContextThemeWrapper(context, attrs, R.attr.bpkBarChartStyle), attrs, defStyleAttr),
   (BpkBarChart.Model) -> Unit {
 
-  data class Bar(
+  data class Column(
     val id: Long = 0L,
     val title: CharSequence,
     val subtitle: CharSequence,
@@ -32,7 +32,7 @@ class BpkBarChart @JvmOverloads constructor(
 
   data class Group(
     val title: CharSequence,
-    val items: List<Bar>
+    val items: List<Column>
   )
 
   data class Legend(
@@ -56,12 +56,12 @@ class BpkBarChart @JvmOverloads constructor(
     val popupText: ColorStateList
   )
 
-  interface OnBarClickListener : Consumer<Bar> {
+  interface OnBarClickListener : Consumer<Column> {
 
-    override fun invoke(bar: Bar)
+    override fun invoke(column: Column)
   }
 
-  var listener: Consumer<Bar>? = null
+  var listener: Consumer<Column>? = null
 
   private val graphView: ChartGraphView
   private val legendView: ChartLegend

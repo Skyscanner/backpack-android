@@ -16,12 +16,12 @@ import net.skyscanner.backpack.util.Consumer
 internal class ChartGraphView constructor(
   context: Context,
   colors: BpkBarChart.Colors,
-  onClick: Consumer<BpkBarChart.Bar>
+  onClick: Consumer<BpkBarChart.Column>
 ) : FrameLayout(context), Consumer<List<BpkBarChart.Group>> {
 
   private val onClickWrapper = { holder: ChartBarHolder ->
     onClick(holder.model!!)
-    lineDecoration.invoke(holder)
+    lineDecoration(holder)
     recyclerView.invalidateItemDecorations()
   }
 

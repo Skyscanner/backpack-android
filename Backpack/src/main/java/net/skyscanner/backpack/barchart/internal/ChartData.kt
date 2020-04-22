@@ -12,14 +12,14 @@ internal class ChartData(
   val size: Int
     get() = data.size
 
-  fun getItem(index: Int): BpkBarChart.Bar =
-    data[index].bar
+  fun getItem(index: Int): BpkBarChart.Column =
+    data[index].column
 
   fun getGroup(index: Int): BpkBarChart.Group =
     data[index].group
 
   private data class Item(
     val group: BpkBarChart.Group,
-    val bar: BpkBarChart.Bar
+    val column: BpkBarChart.Column
   )
 }

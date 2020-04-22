@@ -35,14 +35,14 @@ class BarChartStory : Story() {
 
   private fun createMonth(month: Int) = BpkBarChart.Group(
     title = arrayOf("January", "February", "March", "April", "May", "June", "Jule")[month % 6],
-    items = ArrayList<BpkBarChart.Bar>(10).apply {
+    items = ArrayList<BpkBarChart.Column>(10).apply {
       for (dayOfTheMonth in 0 until 30) {
         add(createBar(month * 30 + dayOfTheMonth))
       }
     }
   )
 
-  private fun createBar(dayOfTheYear: Int) = BpkBarChart.Bar(
+  private fun createBar(dayOfTheYear: Int) = BpkBarChart.Column(
     title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
     subtitle = (dayOfTheYear % 30 + 1).toString(),
     badge = "£" + random.nextInt(100),

@@ -15,8 +15,14 @@ internal class ChartAdapter(
   private var selectedPosition: Int = -1
 
   private val onClickWrapper = { holder: ChartBarHolder ->
-    selectedId = holder.model?.id ?: -1L
-    selectedPosition = holder.adapterPosition
+    if (!holder.itemView.isSelected) {
+      selectedId = holder.model?.id ?: -1L
+      selectedPosition = holder.adapterPosition
+    } else {
+      selectedId = -1L
+      selectedPosition = -1
+    }
+
     notifyDataSetChanged()
     onClick(holder)
   }
