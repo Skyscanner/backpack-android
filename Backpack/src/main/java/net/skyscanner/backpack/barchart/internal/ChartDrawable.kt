@@ -3,6 +3,7 @@ package net.skyscanner.backpack.barchart.internal
 import android.content.res.ColorStateList
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import net.skyscanner.backpack.util.getColorForState
 import net.skyscanner.backpack.util.withSave
 import kotlin.math.min
 
@@ -90,8 +91,8 @@ internal class ChartDrawable(
     val width = bounds.width().toFloat()
     val height = bounds.height().toFloat()
 
-    backgroundPaint.color = background.getColorForState(state, background.defaultColor)
-    foregroundPaint.color = foreground.getColorForState(state, foreground.defaultColor)
+    backgroundPaint.color = background.getColorForState(state)
+    foregroundPaint.color = foreground.getColorForState(state)
 
     canvas.withSave {
 

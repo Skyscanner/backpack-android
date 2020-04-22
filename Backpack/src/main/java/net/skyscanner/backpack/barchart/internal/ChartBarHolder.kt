@@ -12,7 +12,7 @@ internal class ChartBarHolder(
   parent: ViewGroup,
   private val colors: BpkBarChart.Colors,
   private val onClick: Consumer<ChartBarHolder>
-) : ItemHolder<BpkBarChart.Bar>(parent, R.layout.view_bpk_barchart_column) {
+) : ItemHolder<BpkBarChart.Bar>(parent, R.layout.view_bpk_barchart_item) {
 
   init {
     view.setOnClickListener {

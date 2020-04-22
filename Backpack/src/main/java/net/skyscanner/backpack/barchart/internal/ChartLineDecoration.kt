@@ -7,6 +7,7 @@ import android.util.TypedValue
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.util.Consumer
+import net.skyscanner.backpack.util.getColorForState
 
 internal class ChartLineDecoration(
   private val resources: Resources,
@@ -30,7 +31,7 @@ internal class ChartLineDecoration(
 
     val lineY = position + parent.paddingTop
 
-    paint.color = colors.chartLine.run { getColorForState(parent.drawableState, defaultColor) }
+    paint.color = colors.chartLine.getColorForState(parent.drawableState)
     c.drawLine(0f, lineY, parent.width.toFloat(), lineY, paint)
   }
 }

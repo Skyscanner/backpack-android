@@ -14,13 +14,11 @@ internal class ChartAdapter(
   private var selectedId: Long = -1L
   private var selectedPosition: Int = -1
 
-  private val onClickWrapper = object : Consumer<ChartBarHolder> {
-    override fun invoke(holder: ChartBarHolder) {
-      selectedId = holder.model?.id ?: -1L
-      selectedPosition = holder.adapterPosition
-      notifyDataSetChanged()
-      onClick(holder)
-    }
+  private val onClickWrapper = { holder: ChartBarHolder ->
+    selectedId = holder.model?.id ?: -1L
+    selectedPosition = holder.adapterPosition
+    notifyDataSetChanged()
+    onClick(holder)
   }
 
   override fun invoke(model: ChartData) {

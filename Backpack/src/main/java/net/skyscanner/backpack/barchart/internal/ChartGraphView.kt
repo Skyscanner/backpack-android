@@ -19,12 +19,10 @@ internal class ChartGraphView constructor(
   onClick: Consumer<BpkBarChart.Bar>
 ) : FrameLayout(context), Consumer<List<BpkBarChart.Group>> {
 
-  private val onClickWrapper = object : Consumer<ChartBarHolder> {
-    override fun invoke(holder: ChartBarHolder) {
-      onClick(holder.model!!)
-      lineDecoration.invoke(holder)
-      recyclerView.invalidateItemDecorations()
-    }
+  private val onClickWrapper = { holder: ChartBarHolder ->
+    onClick(holder.model!!)
+    lineDecoration.invoke(holder)
+    recyclerView.invalidateItemDecorations()
   }
 
   private val titleHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
