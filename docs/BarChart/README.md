@@ -50,15 +50,15 @@ fun createGroup() = BpkBarChart.Group(
 )
 
 barChart.model = BpkBarChart.Model(
-        groups = listOf(
-          createGroup(),
-          createGroup()
-        ),
-        legend = BpkBarChart.Legend(
-          "£",
-          "No Price"
-        )
-      )
+  groups = listOf(
+    createGroup(),
+    createGroup()
+  ),
+  legend = BpkBarChart.Legend(
+    "£",
+     "No Price"
+   )
+ )
 ```
 
 Another example can be found in `BarChartStory` in the sample project.
