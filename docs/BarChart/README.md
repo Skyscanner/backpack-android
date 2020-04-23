@@ -27,8 +27,8 @@ BpkBarChart(context).apply {
 }
 ```
 
-To render the data you need to set a view model to Bar Chart in code.
-Detailed documentation on each property of the model is available in Javadoc.
+To render data you need to set a view model to `BarChart` in code.
+Detailed documentation on each property of the model is available [here](https://backpack.github.io/android/versions/latest/net.skyscanner.backpack.barchart).
 
 Here's some basic example in Kotlin:
 
