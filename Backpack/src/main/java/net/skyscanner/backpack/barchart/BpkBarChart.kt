@@ -52,7 +52,7 @@ open class BpkBarChart @JvmOverloads constructor(
     /**
      * Marking the item inactive means inactive colours from the palette, will be used to draw this item.
      *
-     * This can be used to visualise that there's no data available for the bar.
+     * This can be used to show that there's no data available for this bar.
      *
      * The item will remain clickable.
      */
