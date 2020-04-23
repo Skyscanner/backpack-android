@@ -2,6 +2,32 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 23.2.0
+
+**Added:**
+
+- `BpkCalendar`:
+  - Added new `descriptionOnly` prop to `HighlightedDay`.
+
+- `BpkChip`:
+  - Added new `chipIcon` prop.
+
+# 23.1.1
+
+**Fixed:**
+
+- `BpkCalendar`
+  - Added accessibility labels to `WeekDay` and `Month` views in `BpkCalendar`.
+  - Updated calendar pre defined cell styles to match latest design.
+
+# 23.1.0
+
+**Added:**
+
+- `BpkFlare`:
+  - Added `flarePointerDirection` attribute with `DOWN` and `UP` options.
+  - Added new `UP` option to `flareInsetPaddingMode`.
+
 # 23.0.0
 
 - **Breaking:**

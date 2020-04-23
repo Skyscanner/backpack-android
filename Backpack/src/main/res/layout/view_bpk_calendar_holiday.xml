@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:paddingBottom="@dimen/bpkSpacingBase"
-android:orientation="vertical">
-
-<net.skyscanner.backpack.text.BpkText
-  android:id="@+id/date"
-  android:layout_width="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  app:layout_constraintTop_toTopOf="parent"
-  app:layout_constraintStart_toStartOf="parent"
-  android:drawablePadding="@dimen/bpkSpacingSm"
-  app:drawableStartCompat="@drawable/bpk_calendar_holiday_dot"
-  app:textStyle="sm"
-  tools:text="25 Dez"/>
+  android:paddingBottom="@dimen/bpkSpacingBase"
+  android:orientation="vertical">
 
-<net.skyscanner.backpack.text.BpkText
-  android:id="@+id/description"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  app:layout_constraintTop_toTopOf="parent"
-  app:layout_constraintStart_toEndOf="@id/date"
-  android:layout_marginStart="@dimen/bpkSpacingMd"
-  app:textStyle="sm"
-  tools:text="Christmas"/>
+  <androidx.appcompat.widget.AppCompatImageView
+    android:id="@+id/dot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:background="@drawable/bpk_calendar_holiday_dot"/>
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toEndOf="@id/dot"
+    android:layout_marginStart="@dimen/bpkSpacingSm"
+    app:textStyle="sm"
+    tools:text="25 Dez"/>
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/description"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toEndOf="@id/date"
+    app:textStyle="sm"
+    tools:text="Christmas"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

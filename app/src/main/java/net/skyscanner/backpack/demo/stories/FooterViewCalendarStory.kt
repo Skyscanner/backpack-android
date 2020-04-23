@@ -38,7 +38,8 @@ private class FooterViewCalendarController(
           CalendarCellStyle.Negative.color(context)),
         HighlightedDay(
           startDate.plusDays(2),
-          "Tea day"),
+          "Tea day",
+          descriptionOnly = true),
         HighlightedDay(
           endDate.minusDays(1),
           "I wish it was Friday day")

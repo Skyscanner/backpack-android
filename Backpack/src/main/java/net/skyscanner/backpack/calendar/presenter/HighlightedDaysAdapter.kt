@@ -56,6 +56,13 @@ open class HighlightedDaysAdapter(
   data class HighlightedDay(
     val date: LocalDate,
     val description: String,
-    @ColorInt val color: Int? = null
-  )
+    @ColorInt val color: Int? = null,
+    /**
+     * Shows only the description provided and not the date.
+     */
+    val descriptionOnly: Boolean = false
+  ) {
+    constructor(date: LocalDate, description: String, descriptionOnly: Boolean) :
+      this(date, description, null, descriptionOnly)
+  }
 }

@@ -17,7 +17,8 @@ Example of a chip in XML
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Message"
       app:disabled="true"
-      app:selected="true" />
+      app:selected="true"
+      app:chipIcon="@drawable/bpk_close" />
 ```
 
 Example of a chip in Kotlin
@@ -31,6 +32,7 @@ BpkChip(context).apply {
   disabled = false
   chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
   chipSelectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
+  chipIcon = ContextCompat.getDrawable(testContext, R.drawable.bpk_account)
 }
 ```
 

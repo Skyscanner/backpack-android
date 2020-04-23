@@ -11,6 +11,9 @@
   <color name="__calendarDisabledColour">@color/bpkSkyGrayTint06</color>
   <color name="__calendarSelectedTextColor">@color/bpkWhite</color>
   <color name="__calendarHighlightedDayDot">@color/bpkSkyGrayTint05</color>
+  <color name="__calendarCellStylePositiveColor">@color/bpkMonteverde</color>
+  <color name="__calendarCellStyleNeutralColor">@color/bpkKolkata</color>
+  <color name="__calendarCellStyleNegativeColor">@color/bpkPanjin</color>
   <color name="__dialogBackground">@color/bpkWhite</color>
   <color name="__panelBorder">@color/bpkSkyGrayTint06</color>
   <color name="__switchTrackDisabled">@color/bpkSkyGrayTint06</color>

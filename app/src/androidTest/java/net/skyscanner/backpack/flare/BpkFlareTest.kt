@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.flare
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
@@ -86,24 +87,11 @@ class BpkFlareTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestFlareInsetPaddingMode() {
-    val wrapContent = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-
-    snap(FrameLayout(testContext).apply {
-      addView(subject.apply {
-        layoutParams = wrapContent
-        insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
-
-        addView(LinearLayoutCompat(context).apply {
-          layoutParams = wrapContent
-          background = ColorDrawable(Color.LTGRAY)
-
-          addView(BpkText(testContext).apply {
-            layoutParams = wrapContent
-            text = testContext.resources.getString(R.string.stub_sm)
-          })
-        })
-      })
-    })
+    snap(
+      setupViewForInsetPaddingTest(testContext) {
+        subject.insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
+      }
+    )
   }
 
   @Test
@@ -129,5 +117,46 @@ class BpkFlareTest : BpkSnapshotTest() {
         })
       })
     })
+  }
+
+  @Test
+  fun screenshotTestFlare_withPointerDirectionUP() {
+    snap(subject.apply {
+      addView(imageView)
+      pointerDirection = BpkFlare.PointerDirection.UP
+    })
+  }
+
+  @Test
+  fun screenshotTestFlare_withPaddingModeTop_andPointerDirectionUP() {
+    snap(
+      setupViewForInsetPaddingTest(testContext) {
+        subject.pointerDirection = BpkFlare.PointerDirection.UP
+        subject.insetPaddingMode = BpkFlare.InsetPaddingMode.TOP
+      }
+    )
+  }
+
+  private fun setupViewForInsetPaddingTest(context: Context, configSubject: () -> Unit): View {
+    val wrapContent = ViewGroup.LayoutParams(
+      ViewGroup.LayoutParams.WRAP_CONTENT,
+      ViewGroup.LayoutParams.WRAP_CONTENT)
+
+    return FrameLayout(testContext).apply {
+      addView(subject.apply {
+        layoutParams = wrapContent
+        configSubject()
+
+        addView(LinearLayoutCompat(context).apply {
+          layoutParams = wrapContent
+          background = ColorDrawable(Color.LTGRAY)
+
+          addView(BpkText(testContext).apply {
+            layoutParams = wrapContent
+            text = testContext.resources.getString(R.string.stub_sm)
+          })
+        })
+      })
+    }
   }
 }

@@ -11,6 +11,9 @@
   <color name="__calendarDisabledColour">@color/bpkTextSecondary</color>
   <color name="__calendarSelectedTextColor">@color/bpkTextPrimaryLight</color>
   <color name="__calendarHighlightedDayDot">@color/bpkBlackTint04</color>
+  <color name="__calendarCellStylePositiveColor">@color/bpkGlencoe</color>
+  <color name="__calendarCellStyleNeutralColor">@color/bpkErfoud</color>
+  <color name="__calendarCellStyleNegativeColor">@color/bpkHillier</color>
   <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
   <color name="__panelBorder">@color/bpkLineDark</color>
   <color name="__switchTrackDisabled">@color/bpkBlackTint02</color>

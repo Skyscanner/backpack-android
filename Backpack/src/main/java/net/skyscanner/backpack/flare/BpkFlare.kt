@@ -2,16 +2,14 @@ package net.skyscanner.backpack.flare
 
 import android.content.Context
 import android.graphics.*
-import android.util.AttributeSet
-import android.widget.FrameLayout
-import android.graphics.Bitmap
 import android.os.Build
+import android.util.AttributeSet
 import android.view.View
+import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
-import java.lang.IllegalStateException
 
 /**
  * [BpkFlare] is designed to render a single item inside a "bubble".
@@ -36,12 +34,18 @@ open class BpkFlare @JvmOverloads constructor(
   enum class PointerPosition(internal val id: Int, internal val offset: Float) {
     START(0, 0.25f),
     MIDDLE(1, 0.5f),
-    END(2, 0.75f)
+    END(2, 0.75f),
+  }
+
+  enum class PointerDirection(internal val id: Int) {
+    DOWN(0),
+    UP(1),
   }
 
   enum class InsetPaddingMode(internal val id: Int) {
     NONE(0),
-    BOTTOM(1)
+    BOTTOM(1),
+    TOP(2),
   }
 
   private val pointerMask by unsafeLazy {
@@ -78,7 +82,7 @@ open class BpkFlare @JvmOverloads constructor(
   }
 
   /**
-   * Specify where the pointer should be rendered.
+   * Specify the horizontal position of the flare.
    *
    * @see [PointerPosition]
    */
@@ -87,6 +91,17 @@ open class BpkFlare @JvmOverloads constructor(
     field = value
     requestLayout()
   }
+
+  /**
+   * Specify the vertical direction of the flare.
+   *
+   * @see [PointerDirection]
+   */
+  var pointerDirection = PointerDirection.DOWN
+    set(value) {
+      field = value
+      requestLayout()
+    }
 
   /**
    * Specify if extra padding should be added to account
@@ -111,6 +126,9 @@ open class BpkFlare @JvmOverloads constructor(
         pointerPosition = it.getInt(R.styleable.BpkFlare_flarePointerPosition, pointerPosition.id)
           .let(::mapXmlToPointerPosition) ?: pointerPosition
 
+        pointerDirection = it.getInt(R.styleable.BpkFlare_flarePointerDirection, pointerDirection.id)
+          .let(::mapXmlToPointerDirection) ?: pointerDirection
+
         insetPaddingMode = it.getInt(R.styleable.BpkFlare_flareInsetPaddingMode, insetPaddingMode.id)
           .let(::mapXmlToInsetPaddingMode) ?: insetPaddingMode
       }
@@ -128,13 +146,12 @@ open class BpkFlare @JvmOverloads constructor(
       throw IllegalStateException("BpkFlare should have only one child")
     }
 
-    if (insetPaddingMode == InsetPaddingMode.BOTTOM) {
-      val paddingBottom = child.paddingBottom + pointerMask.height
-      if (child.paddingStart > 0 || child.paddingEnd > 0) {
-        child.setPaddingRelative(child.paddingStart, child.paddingTop, child.paddingEnd, paddingBottom)
-      } else {
-        child.setPadding(child.paddingLeft, child.paddingTop, child.paddingRight, paddingBottom)
-      }
+    when (insetPaddingMode) {
+      InsetPaddingMode.NONE -> {}
+      InsetPaddingMode.BOTTOM ->
+        setPaddingVertical(child, child.paddingTop, child.paddingBottom + pointerMask.height)
+      InsetPaddingMode.TOP ->
+        setPaddingVertical(child, child.paddingTop + pointerMask.height, child.paddingBottom)
     }
   }
 
@@ -151,24 +168,50 @@ open class BpkFlare @JvmOverloads constructor(
       pointerPosition.offset
     }
 
-    val yStart = height - pointerMask.height
+    val pointerYStart = height - pointerMask.height
     val pointerXStart = width * pointerOffset - pointerHalfWidth
     val pointerXEnd = width * pointerOffset + pointerHalfWidth
 
-    clipRect.set(0f, yStart, pointerXStart, height)
-    canvas.clipOutRectCompat(clipRect)
-
-    clipRect.set(width, yStart, pointerXEnd, height)
-    canvas.clipOutRectCompat(clipRect)
+    when (pointerDirection) {
+      PointerDirection.DOWN ->
+        clipPointerArea(pointerYStart, pointerXStart, height, canvas, width, pointerXEnd)
+      PointerDirection.UP ->
+        clipPointerArea(0f, pointerXStart, pointerMask.height.toFloat(), canvas, width, pointerXEnd)
+    }
 
     super.draw(canvas)
     canvas.restoreToCount(count)
 
-    canvas.drawBitmap(pointerMask, pointerXStart, yStart, paint)
+    drawPointerMask(canvas, pointerXStart, pointerYStart)
 
     if (round) {
       drawRadiusMask(canvas)
     }
+  }
+
+  private fun clipPointerArea(pointerYStart: Float, pointerXStart: Float, height: Float, canvas: Canvas, width: Float, pointerXEnd: Float) {
+    clipRect.set(0f, pointerYStart, pointerXStart, height)
+    canvas.clipOutRectCompat(clipRect)
+
+    clipRect.set(width, pointerYStart, pointerXEnd, height)
+    canvas.clipOutRectCompat(clipRect)
+  }
+
+  private fun drawPointerMask(canvas: Canvas, pointerXStart: Float, pointerYStart: Float) {
+    val count = canvas.saveCount
+    val width = width.toFloat()
+    val height = height.toFloat()
+
+    when (pointerDirection) {
+      PointerDirection.UP -> {
+        canvas.rotate(180f, width / 2, height / 2)
+        canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
+      }
+      PointerDirection.DOWN ->
+        canvas.drawBitmap(pointerMask, pointerXStart, pointerYStart, paint)
+    }
+
+    canvas.restoreToCount(count)
   }
 
   private fun drawRadiusMask(canvas: Canvas) {
@@ -176,13 +219,13 @@ open class BpkFlare @JvmOverloads constructor(
     val height = height.toFloat()
     val radiusHeight = radiusMask.height
     val radiusWidth = radiusMask.width
-    val radiusHalfHeight = (radiusHeight / 2).toFloat()
-    val radiusHalfWidth = (radiusHeight / 2).toFloat()
+    val radiusHalfHeight = radiusHeight.toFloat() / 2
+    val radiusHalfWidth = radiusHeight.toFloat() / 2
     val pointerHeight = pointerMask.height
 
     val count = canvas.saveCount
 
-    // bottom right corner
+    // bottom left corner
     canvas.drawBitmap(radiusMask, 0f, height - pointerHeight - radiusHeight, paint)
 
     // top right corner
@@ -201,10 +244,21 @@ open class BpkFlare @JvmOverloads constructor(
   }
 
   private fun mapXmlToPointerPosition(id: Int) =
-    PointerPosition.values().find { it.id == id }
+      PointerPosition.values().find { it.id == id }
+
+  private fun mapXmlToPointerDirection(id: Int) =
+    PointerDirection.values().find { it.id == id }
 
   private fun mapXmlToInsetPaddingMode(id: Int) =
     InsetPaddingMode.values().find { it.id == id }
+
+  private fun setPaddingVertical(child: View, paddingTop: Int, paddingBottom: Int) {
+    if (child.paddingStart > 0 || child.paddingEnd > 0) {
+      child.setPaddingRelative(child.paddingStart, paddingTop, child.paddingEnd, paddingBottom)
+    } else {
+      child.setPadding(child.paddingLeft, paddingTop, child.paddingRight, paddingBottom)
+    }
+  }
 }
 
 private fun Canvas.clipOutRectCompat(rect: RectF) {
