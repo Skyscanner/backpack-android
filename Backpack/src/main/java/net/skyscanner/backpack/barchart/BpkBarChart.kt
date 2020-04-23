@@ -68,7 +68,7 @@ open class BpkBarChart @JvmOverloads constructor(
 
   /**
    * Represents a group of the items sharing the same title.
-   * The title is being rendered above the bars and being updated when chart is being scrolled.
+   * The title is rendered above the bars and is updated as the chart scrolls horizontally.
    */
   data class Group(
 
