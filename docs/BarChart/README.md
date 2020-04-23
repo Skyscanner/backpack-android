@@ -6,7 +6,8 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 
 ## Usage
 
-The Bar Chart component can be used in both XML and Kotlin/Java
+E.g. The Bar Chart component can be used in both XML and Kotlin/Java,  
+however, feeding the component with data can only be done programmatically.
 
 Example of a Bar Chart in XML
 
