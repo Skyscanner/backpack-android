@@ -118,10 +118,8 @@ class BpkBarchartTests : BpkSnapshotTest() {
         )
       )
     }
-    // scrolling list to the end with few swipes
+    // scrolling list with few swipes
     capture {
-      perform(ViewActions.swipeLeft())
-      perform(ViewActions.swipeLeft())
       perform(ViewActions.swipeLeft())
       perform(ViewActions.swipeLeft())
       perform(ViewActions.swipeLeft())
