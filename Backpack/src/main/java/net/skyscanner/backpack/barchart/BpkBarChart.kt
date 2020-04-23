@@ -59,9 +59,8 @@ open class BpkBarChart @JvmOverloads constructor(
     val inactive: Boolean,
 
     /**
-     * The value of the bar itself, from 0.0f to any other number.
-     * If the value is larger than 1.0f a peak will be drawn.
-     * The range between 0.0f and 1.0f represent percentage of the bar.
+     * The value of the bar itself, should be a range between 0.0f and 1.0f.
+     * When a value bigger than 1.0f  is set, a "peak" indicator will be show at the top of the bar.
      */
     val value: Float
   )
