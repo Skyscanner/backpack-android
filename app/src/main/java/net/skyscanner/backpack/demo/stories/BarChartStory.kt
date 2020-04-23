@@ -5,7 +5,6 @@ import android.view.View
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.demo.R
 import java.util.*
-import kotlin.collections.ArrayList
 
 class BarChartStory : Story() {
 
@@ -34,7 +33,7 @@ class BarChartStory : Story() {
 
   private fun createMonth(month: Int) = BpkBarChart.Group(
     title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
-    items = ArrayList<BpkBarChart.Column>(10).apply {
+    items = mutableListOf<BpkBarChart.Column>().apply {
       for (dayOfTheMonth in 0 until 30) {
         add(createBar(month * 30 + dayOfTheMonth))
       }

@@ -21,27 +21,102 @@ open class BpkBarChart @JvmOverloads constructor(
 ) : FrameLayout(createContextThemeWrapper(context, attrs, R.attr.bpkBarChartStyle), attrs, defStyleAttr),
   Consumer<BpkBarChart.Model> {
 
+  /**
+   * Represents a single bar in the chart.
+   */
   data class Column(
+
+    /**
+     * An optional identifier of the bar.
+     * This allows to save the selected element each time the model is updated.
+     *
+     * If not set, the selection will be dropped each time when you set new model.
+     */
     val id: Long = 0L,
+
+    /**
+     * A primary text placed just below the bar itself.
+     */
     val title: CharSequence,
+
+    /**
+     * A secondary text placed just below the title.
+     */
     val subtitle: CharSequence,
+
+    /**
+     * Text to be shown in the popup when the item is selected.
+     */
     val badge: CharSequence,
+
+    /**
+     * Marks the item an inactive meaning that inactive colours (from the palette) will be used to draw this item.
+     *
+     * This can be used to visualise that there's no data available for the bar.
+     *
+     * The item will remain clickable.
+     */
     val inactive: Boolean,
+
+    /**
+     * The value of the bar itself, from 0.0f to any other number.
+     * If the value is larger than 1.0f a peak will be drawn.
+     * The range between 0.0f and 1.0f represent percentage of the bar.
+     */
     val value: Float
   )
 
+  /**
+   * Represents a group of the items sharing the same title.
+   * The title is being rendered above the bars and being updated when chart is being scrolled.
+   */
   data class Group(
+
+    /**
+     * Label of this group to be renderer above the bars.
+     */
     val title: CharSequence,
+
+    /**
+     * Bars in the group.
+     */
     val items: List<Column>
   )
 
+  /**
+   * Represents a legend for the chart.
+   * [Column.inactive] attribute is being used to split the bars to active/inactive sets.
+   * These properties explain each set.
+   */
   data class Legend(
+
+    /**
+     * A label being rendered in the legend with using active colours from the palette.
+     */
     val activeTitle: CharSequence,
+
+    /**
+     * A label being rendered in the legend with using inactive colours from the palette.
+     */
     val inactiveTitle: CharSequence
   )
 
+  /**
+   * Represents a view model which is needed to be feed into the component to render the data.
+   *
+   * @see [BpkBarChart.model]
+   * @see [BpkBarChart.invoke]
+   */
   data class Model(
+
+    /**
+     * Grouped bars to render.
+     */
     val groups: List<Group>,
+
+    /**
+     * An optional legend. If null, no legend is being shown.
+     */
     val legend: Legend? = null
   )
 

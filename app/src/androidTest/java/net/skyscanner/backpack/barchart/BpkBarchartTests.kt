@@ -109,24 +109,6 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBarChart_GroupTitleChange() {
-    init {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0),
-          createMonth(1)
-        )
-      )
-    }
-    // scrolling list with few swipes
-    capture {
-      perform(ViewActions.swipeLeft())
-      perform(ViewActions.swipeLeft())
-      perform(ViewActions.swipeLeft())
-    }
-  }
-
-  @Test
   fun screenshotTestBarChart_WithBadge() {
     init {
       model = BpkBarChart.Model(
