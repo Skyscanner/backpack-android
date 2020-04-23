@@ -14,12 +14,12 @@ import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
-class BpkBarChart @JvmOverloads constructor(
+open class BpkBarChart @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
 ) : FrameLayout(createContextThemeWrapper(context, attrs, R.attr.bpkBarChartStyle), attrs, defStyleAttr),
-  (BpkBarChart.Model) -> Unit {
+  Consumer<BpkBarChart.Model> {
 
   data class Column(
     val id: Long = 0L,
@@ -119,8 +119,14 @@ class BpkBarChart @JvmOverloads constructor(
     addView(graphView, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
   }
 
+  var model: Model? = null
+    set(value) {
+      field = value
+      graphView.invoke(model?.groups)
+      legendView.invoke(model?.legend)
+    }
+
   override fun invoke(model: Model) {
-    graphView(model.groups)
-    legendView.invoke(model.legend)
+    this.model = model
   }
 }

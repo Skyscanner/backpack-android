@@ -34,6 +34,9 @@ internal class ChartBarHolder(
     background = chart
   }
 
+  val chartTopPosition
+    get() = chartView.bottom - chart.valueInPixels - chart.radius
+
   val chartRoundedTopPosition
     get() = chartView.bottom - chart.valueInPixels - chart.diameter
 
@@ -42,5 +45,6 @@ internal class ChartBarHolder(
     subtitle.text = model.subtitle
     chart.value = model.value
     view.isActivated = !model.disabled
+    chartView.contentDescription = model.badge
   }
 }

@@ -6,7 +6,7 @@ internal class ChartData(
   groups: List<BpkBarChart.Group>? = null
 ) {
 
-  private var data: List<Item> =
+  private val data: List<Item> =
     groups?.flatMap { group -> group.items.map { Item(group, it) } } ?: emptyList()
 
   val size: Int

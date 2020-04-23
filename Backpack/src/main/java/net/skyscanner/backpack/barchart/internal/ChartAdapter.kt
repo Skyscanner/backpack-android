@@ -11,16 +11,16 @@ internal class ChartAdapter(
 ) : RecyclerView.Adapter<ChartBarHolder>(), Consumer<ChartData> {
 
   private var data: ChartData = ChartData()
-  private var selectedId: Long = -1L
-  private var selectedPosition: Int = -1
+  private var selectedId: Long = UNSELECTED_ID
+  private var selectedPosition: Int = UNSELECTED_POSITION
 
   private val onClickWrapper = { holder: ChartBarHolder ->
     if (!holder.itemView.isSelected) {
-      selectedId = holder.model?.id ?: -1L
+      selectedId = holder.model?.id ?: UNSELECTED_ID
       selectedPosition = holder.adapterPosition
     } else {
-      selectedId = -1L
-      selectedPosition = -1
+      selectedId = UNSELECTED_ID
+      selectedPosition = UNSELECTED_POSITION
     }
 
     notifyDataSetChanged()
@@ -29,7 +29,7 @@ internal class ChartAdapter(
 
   override fun invoke(model: ChartData) {
     this.data = model
-    selectedPosition = -1
+    selectedPosition = UNSELECTED_POSITION
     notifyDataSetChanged()
   }
 
@@ -42,8 +42,14 @@ internal class ChartAdapter(
   override fun onBindViewHolder(holder: ChartBarHolder, position: Int) {
     val item = data.getItem(position)
     holder(item)
-    val sameId = item.id != 0L && selectedId == item.id
+    val sameId = item.id != NO_ID && selectedId == item.id
     val samePosition = position == selectedPosition
     holder.itemView.isSelected = samePosition || sameId
+  }
+
+  private companion object {
+    const val NO_ID = 0L
+    const val UNSELECTED_ID = -1L
+    const val UNSELECTED_POSITION = -1
   }
 }

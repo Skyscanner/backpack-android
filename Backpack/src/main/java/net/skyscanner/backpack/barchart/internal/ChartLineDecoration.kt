@@ -7,6 +7,7 @@ import android.util.TypedValue
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.util.Consumer
+import net.skyscanner.backpack.util.forEach
 import net.skyscanner.backpack.util.getColorForState
 
 internal class ChartLineDecoration(
@@ -23,19 +24,32 @@ internal class ChartLineDecoration(
 
   override fun invoke(holder: ChartBarHolder) {
     if (!holder.itemView.isSelected) {
-      this.position = holder.chartRoundedTopPosition
+      this.position = holder.chartTopPosition
     } else {
       this.position = Float.MIN_VALUE
     }
   }
 
-  override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+  override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
     super.onDraw(c, parent, state)
     if (position == Float.MIN_VALUE) return
+    drawLine(c, parent, 0, parent.width)
+  }
 
+  override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    super.onDrawOver(c, parent, state)
+    if (position == Float.MIN_VALUE) return
+
+    parent.forEach {
+      if (it.isSelected) {
+        drawLine(c, parent, it.left, it.right)
+      }
+    }
+  }
+
+  private fun drawLine(c: Canvas, parent: RecyclerView, left: Int, right: Int) {
     val lineY = position + parent.paddingTop
-
     paint.color = colors.chartLine.getColorForState(parent.drawableState)
-    c.drawLine(0f, lineY, parent.width.toFloat(), lineY, paint)
+    c.drawLine(left.toFloat(), lineY, right.toFloat(), lineY, paint)
   }
 }

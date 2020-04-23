@@ -17,7 +17,7 @@ internal class ChartGraphView constructor(
   context: Context,
   colors: BpkBarChart.Colors,
   onClick: Consumer<BpkBarChart.Column>
-) : FrameLayout(context), Consumer<List<BpkBarChart.Group>> {
+) : FrameLayout(context), Consumer<List<BpkBarChart.Group>?> {
 
   private val onClickWrapper = { holder: ChartBarHolder ->
     onClick(holder.model!!)
@@ -26,7 +26,7 @@ internal class ChartGraphView constructor(
   }
 
   private val titleHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
-  private val titleSpacing = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
+  private val titleSpacing = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) + resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
 
   private val title = BpkText(context).also {
     it.setTextColor(colors.groupTitle)
@@ -37,6 +37,8 @@ internal class ChartGraphView constructor(
   }
 
   private val recyclerView: RecyclerView = RecyclerView(context).also {
+    it.clipToPadding = false
+    it.clipChildren = false
     it.setPadding(0, titleHeight + titleSpacing, 0, 0)
     it.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -69,7 +71,7 @@ internal class ChartGraphView constructor(
 
   private var model: ChartData = ChartData()
 
-  override fun invoke(groups: List<BpkBarChart.Group>) {
+  override fun invoke(groups: List<BpkBarChart.Group>?) {
     this.model = ChartData(groups)
     adapter.invoke(model)
   }
