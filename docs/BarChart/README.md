@@ -65,7 +65,7 @@ Another example can be found in `BarChartStory` in the sample project.
 
 ## Theme Props
 
-All the colours support `ColorStateList`.
+All colours support `ColorStateList`.
 
 - `barChartColumnTitleColor` - `state_selected` will be used when the bar is selected.
 - `barChartColumnSubtitleColor` - `state_selected` will be used when the bar is selected.
