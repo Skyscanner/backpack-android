@@ -50,7 +50,7 @@ open class BpkBarChart @JvmOverloads constructor(
     val badge: CharSequence,
 
     /**
-     * Marks the item an inactive meaning that inactive colours (from the palette) will be used to draw this item.
+     * Marking the item inactive means inactive colours from the palette, will be used to draw this item.
      *
      * This can be used to visualise that there's no data available for the bar.
      *
