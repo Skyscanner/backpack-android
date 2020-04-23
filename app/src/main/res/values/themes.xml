@@ -32,6 +32,7 @@
     <item name="bpkTextFieldStyle">@style/LondonThemeTextField</item>
     <item name="bpkRatingStyle">@style/LondonThemeRating</item>
     <item name="bpkBadgeStyle">@style/LondonThemeBadge</item>
+    <item name="bpkBarChartStyle">@style/LondonThemeBarChart</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#002E61</item>
@@ -102,6 +103,17 @@
     <item name="checkboxColor">#013A76</item>
   </style>
 
+  <style name="LondonThemeBarChart">
+    <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
+    <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
+    <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
+    <item name="barChartBarBackgroundColor">@color/bpkSkyBlueTint02</item>
+    <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
+    <item name="barChartLineColor">?bpkPrimaryColor</item>
+    <item name="barChartPopupBackgroundColor">@color/bpkSkyBlueShade01</item>
+    <item name="barChartPopupTextColor">@color/bpkSagano</item>
+  </style>
+
   <style name="LondonThemeHorizontalNav">
     <item name="horizontalNavTextColor">@color/bpkTextSecondary</item>
     <item name="horizontalNavSelectedTextColor">?bpkPrimaryColor</item>
@@ -166,6 +178,7 @@
     <item name="bpkSnackbarStyle">@style/DohaThemeSnackbar</item>
     <item name="bpkNavBarStyle">@style/DohaThemeNavBar</item>
     <item name="bpkBadgeStyle">@style/DohaThemeBadge</item>
+    <item name="bpkBarChartStyle">@style/DohaThemeBarChart</item>
   </style>
 
   <style name="DohaThemeBpkStarRating" parent="">
@@ -258,6 +271,16 @@
     <item name="android:includeFontPadding">false</item>
   </style>
 
+  <style name="DohaThemeBarChart">
+    <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
+    <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
+    <item name="barChartGroupTitleColor">?bpkPrimaryColor</item>
+    <item name="barChartBarBackgroundColor">@color/bpkSkyBlueTint02</item>
+    <item name="barChartBarForegroundColor">?bpkPrimaryColor</item>
+    <item name="barChartLineColor">?bpkPrimaryColor</item>
+    <item name="barChartPopupBackgroundColor">@color/bpkSagano</item>
+    <item name="barChartPopupTextColor">@color/bpkAbisko</item>
+  </style>
   <!-- Doha theme end -->
 
   <style name="CustomTextStyle">

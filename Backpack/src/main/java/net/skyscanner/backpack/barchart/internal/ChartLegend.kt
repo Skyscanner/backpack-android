@@ -21,24 +21,24 @@ internal class ChartLegend constructor(
     LayoutInflater.from(context).inflate(R.layout.view_bpk_barchart_legend, this, true)
   }
 
-  private val enabled = findViewById<BpkBadge>(R.id.bpk_barchart_legend_activated).apply {
+  private val activated = findViewById<BpkBadge>(R.id.bpk_barchart_legend_activated).apply {
     isActivated = true
     setBackground(colors.chartForeground)
   }
-  private val disabled = findViewById<BpkBadge>(R.id.bpk_barchart_legend_inactivated).apply {
+  private val inactivated = findViewById<BpkBadge>(R.id.bpk_barchart_legend_inactivated).apply {
     isActivated = false
     setBackground(colors.chartForeground)
   }
 
   override fun invoke(legend: BpkBarChart.Legend?) {
     if (legend == null) {
-      enabled.visibility = View.GONE
-      disabled.visibility = View.GONE
+      activated.visibility = View.GONE
+      inactivated.visibility = View.GONE
     } else {
-      enabled.visibility = View.VISIBLE
-      disabled.visibility = View.VISIBLE
-      enabled.text = legend.enabledTitle
-      disabled.text = legend.disabledTitle
+      activated.visibility = View.VISIBLE
+      inactivated.visibility = View.VISIBLE
+      activated.text = legend.activeTitle
+      inactivated.text = legend.inactiveTitle
     }
   }
 }

@@ -13,7 +13,7 @@ class BarChartStory : Story() {
     super.onViewCreated(view, savedInstanceState)
 
     view.findViewById<BpkBarChart>(R.id.bar_chart).apply {
-      invoke(BpkBarChart.Model(
+      model = BpkBarChart.Model(
         groups = listOf(
           createMonth(0),
           createMonth(1),
@@ -26,7 +26,6 @@ class BarChartStory : Story() {
           "£",
           "No Price"
         )
-      )
       )
     }
   }
@@ -47,7 +46,7 @@ class BarChartStory : Story() {
     subtitle = (dayOfTheYear % 30 + 1).toString(),
     badge = "£" + random.nextInt(100),
     value = random.nextInt(120) / 100f,
-    disabled = random.nextInt(5) == 0
+    inactive = random.nextInt(5) == 0
   )
 
   companion object {

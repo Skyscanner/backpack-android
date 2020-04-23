@@ -24,7 +24,7 @@ internal class ChartLineDecoration(
 
   override fun invoke(holder: ChartBarHolder) {
     if (!holder.itemView.isSelected) {
-      this.position = holder.chartTopPosition
+      this.position = holder.chartRoundedTopPosition
     } else {
       this.position = Float.MIN_VALUE
     }

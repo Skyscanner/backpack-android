@@ -26,7 +26,7 @@ open class BpkBarChart @JvmOverloads constructor(
     val title: CharSequence,
     val subtitle: CharSequence,
     val badge: CharSequence,
-    val disabled: Boolean,
+    val inactive: Boolean,
     val value: Float
   )
 
@@ -36,8 +36,8 @@ open class BpkBarChart @JvmOverloads constructor(
   )
 
   data class Legend(
-    val enabledTitle: CharSequence,
-    val disabledTitle: CharSequence
+    val activeTitle: CharSequence,
+    val inactiveTitle: CharSequence
   )
 
   data class Model(
@@ -68,16 +68,18 @@ open class BpkBarChart @JvmOverloads constructor(
   private val colors: Colors
 
   init {
-    var columnTitle = ContextCompat.getColorStateList(context, R.color.bpk_barchart_title_selector)!!
-    var columnSubtitle = ContextCompat.getColorStateList(context, R.color.bpk_barchart_subtitle_selector)!!
-    var groupTitle = ContextCompat.getColorStateList(context, R.color.bpkTextPrimary)!!
-    var chartBackground = ContextCompat.getColorStateList(context, R.color.__barChartBarBackgroundColor)!!
-    var chartForeground = ContextCompat.getColorStateList(context, R.color.bpk_barchart_bar_selector)!!
-    var chartLine = ContextCompat.getColorStateList(context, R.color.__barChartActivatedColor)!!
-    var popupBackground = ContextCompat.getColorStateList(context, R.color.__barChartPopupBackgroundColor)!!
-    var popupText = ContextCompat.getColorStateList(context, R.color.__barChartPopupTextColor)!!
+    val themedContext = this.context
 
-    context.theme.obtainStyledAttributes(
+    var columnTitle = ContextCompat.getColorStateList(themedContext, R.color.bpk_barchart_title_selector)!!
+    var columnSubtitle = ContextCompat.getColorStateList(themedContext, R.color.bpk_barchart_subtitle_selector)!!
+    var groupTitle = ContextCompat.getColorStateList(themedContext, R.color.bpkTextPrimary)!!
+    var chartBackground = ContextCompat.getColorStateList(themedContext, R.color.bpkBackgroundSecondary)!!
+    var chartForeground = ContextCompat.getColorStateList(themedContext, R.color.bpk_barchart_bar_selector)!!
+    var chartLine = ContextCompat.getColorStateList(themedContext, R.color.__barChartActivatedColor)!!
+    var popupBackground = ContextCompat.getColorStateList(themedContext, R.color.__barChartPopupBackgroundColor)!!
+    var popupText = ContextCompat.getColorStateList(themedContext, R.color.__barChartPopupTextColor)!!
+
+    themedContext.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkBarChart,
       defStyleAttr, 0
@@ -109,11 +111,11 @@ open class BpkBarChart @JvmOverloads constructor(
       popupText = popupText
     )
 
-    graphView = ChartGraphView(context, colors) {
+    graphView = ChartGraphView(themedContext, colors) {
       listener?.invoke(it)
     }
 
-    legendView = ChartLegend(context, colors)
+    legendView = ChartLegend(themedContext, colors)
     addView(legendView, LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.END or Gravity.TOP))
 
     addView(graphView, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))

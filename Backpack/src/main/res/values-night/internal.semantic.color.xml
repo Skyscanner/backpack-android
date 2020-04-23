@@ -25,8 +25,7 @@
   <color name="__textFieldIcon">@color/bpkTextSecondary</color>
   <color name="__bottomNavUnselected">@color/bpkTextSecondaryDark</color>
 
-  <color name="__barChartBarBackgroundColor">@color/bpkSkyGrayTint01</color>
-  <color name="__barChartDisabledColor">@color/bpkSkyGrayTint04</color>
+  <color name="__barChartInactivatedColor">@color/bpkSkyGrayTint04</color>
   <color name="__barChartActivatedColor">@color/bpkGlencoe</color>
   <color name="__barChartPopupBackgroundColor">@color/bpkSkyGrayTint04</color>
   <color name="__barChartPopupTextColor">@color/bpkSkyBlueShade03</color>
