@@ -85,7 +85,7 @@ open class BpkBarChart @JvmOverloads constructor(
   /**
    * Represents a legend for the chart.
    * Two types of legends are available, `active` and `inactive`. Those relate to the `inactive` prop of the bar.
-   * `Inactive` bars will have the same style as the `inactive` legend and `active` bars the same style as the 
+   * `Inactive` bars will have the same style as the `inactive` legend and `active` bars the same style as the
    * `active` legend.
    * @see Column.inactive
    */
