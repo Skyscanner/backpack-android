@@ -116,7 +116,8 @@ open class BpkBarChart @JvmOverloads constructor(
     val groups: List<Group>,
 
     /**
-     * An optional legend. If null, no legend is being shown.
+     * An optional legend.
+     * @see Legend
      */
     val legend: Legend? = null
   )
