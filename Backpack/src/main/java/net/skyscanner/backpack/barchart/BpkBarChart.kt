@@ -105,7 +105,7 @@ open class BpkBarChart @JvmOverloads constructor(
   /**
    * Represents the view model used to provide data to the chart.
    *
-   * @see [BpkBarChart.model]
+   * @see BpkBarChart.model
    * @see [BpkBarChart.invoke]
    */
   data class Model(
