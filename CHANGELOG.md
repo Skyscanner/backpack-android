@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 23.3.0
+
+**Added:**
+
+- `BpkBarChart`
+
 # 23.2.0
 
 **Added:**
