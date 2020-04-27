@@ -95,7 +95,7 @@ open class BpkBarChart @JvmOverloads constructor(
     val activeTitle: CharSequence,
 
     /**
-     * A label being rendered in the legend with using inactive colours from the palette.
+     * This label will be used to represent active bars and will use the active colours from the palette.
      */
     val inactiveTitle: CharSequence
   )
