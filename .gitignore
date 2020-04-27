@@ -51,6 +51,8 @@ captures/
 .idea/caches/
 .idea/codeStyles/
 .idea/copyright/
+.idea/markdown-navigator.xml
+.idea/markdown-navigator-*.xml
 
 
 # Keystore files

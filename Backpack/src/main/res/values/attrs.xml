@@ -202,6 +202,17 @@
     <attr name="navBarMenu" format="reference" />
   </declare-styleable>
 
+  <declare-styleable name="BpkBarChart">
+    <attr name="barChartColumnTitleColor" format="color" />
+    <attr name="barChartColumnSubtitleColor" format="color" />
+    <attr name="barChartGroupTitleColor" format="color" />
+    <attr name="barChartBarBackgroundColor" format="color" />
+    <attr name="barChartBarForegroundColor" format="color" />
+    <attr name="barChartLineColor" format="color" />
+    <attr name="barChartPopupBackgroundColor" format="color" />
+    <attr name="barChartPopupTextColor" format="color" />
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
@@ -227,6 +238,7 @@
   <attr name="bpkTextFieldStyle" format="reference"/>
   <attr name="bpkSnackbarStyle" format="reference"/>
   <attr name="bpkRatingStyle" format="reference"/>
+  <attr name="bpkBarChartStyle" format="reference"/>
   <attr name="bpkNavBarStyle" format="reference"/>
   <attr name="bpkBadgeStyle" format="reference"/>
 

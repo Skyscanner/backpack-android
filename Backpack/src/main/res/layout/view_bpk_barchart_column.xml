@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:minWidth="@dimen/bpkSpacingXl"
+  android:layout_height="match_parent"
+  tools:layout_height="160dp"
+  android:clipToPadding="false"
+  android:clipChildren="false"
+  android:paddingTop="@dimen/bpkSpacingMd"
+  android:paddingBottom="@dimen/bpkSpacingMd">
+
+  <View
+    android:id="@+id/bpk_barchart_column_chart"
+    android:layout_width="@dimen/bpkSpacingBase"
+    android:layout_height="0dp"
+    android:duplicateParentState="true"
+    app:layout_constraintBottom_toTopOf="@+id/bpk_barchart_column_title"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/bpk_barchart_column_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:duplicateParentState="true"
+    app:layout_constraintBottom_toTopOf="@+id/bpk_barchart_column_subtitle"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginBottom="@dimen/bpkSpacingSm"
+    android:ellipsize="end"
+    android:singleLine="true"
+    android:maxLines="1"
+    app:textStyle="sm"
+    app:weight="emphasized"
+    tools:text="3" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/bpk_barchart_column_subtitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:duplicateParentState="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:textStyle="sm"
+    android:ellipsize="end"
+    android:singleLine="true"
+    android:maxLines="1"
+    tools:text="Fr" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
