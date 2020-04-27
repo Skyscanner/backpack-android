@@ -111,7 +111,7 @@ open class BpkBarChart @JvmOverloads constructor(
   data class Model(
 
     /**
-     * Grouped bars to render.
+     * List of bar groups to render.
      */
     val groups: List<Group>,
 
