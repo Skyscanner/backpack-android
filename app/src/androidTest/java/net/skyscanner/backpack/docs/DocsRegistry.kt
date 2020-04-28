@@ -21,6 +21,7 @@ object DocsRegistry {
     Screenshot("Button - Loading", "loading"),
     Screenshot("ButtonLink - Default", "default"),
     Screenshot("Calendar - Default", "range", ::setupCalendar),
+    Screenshot("Calendar - Colored", "colored", ::setupCalendar),
     Screenshot("Card - Default", "default"),
     Screenshot("Card - Without padding", "without-padding"),
     Screenshot("Card - Selected", "selected"),
