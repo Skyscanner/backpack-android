@@ -20,13 +20,17 @@ class ColoredCalendarStory : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    controller = ExampleBpkCalendarController(requireContext())
+    val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
+    controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE, false, automationMode)
     val bpkCalendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
     controller.isColoredCalendar = true
     initSelectionTypeSwitcher()
     shiftColorsButton.setOnClickListener {
       controller.newColors()
       controller.updateContent()
+    }
+    if (automationMode) {
+      shiftColorsButton.visibility = View.INVISIBLE
     }
     bpkCalendar.setController(controller)
   }
