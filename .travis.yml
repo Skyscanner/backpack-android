@@ -59,6 +59,7 @@ before_script:
 
 script:
   - set -e
+  - npm run danger
   - npm run build
   - ./scripts/check-pristine-state package-lock.json sd.img
   - 'if [[ -n "$TRAVIS_TAG" ]]; then ./scripts/build-docs-ci $TRAVIS_TAG; fi'

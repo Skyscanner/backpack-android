@@ -21,6 +21,7 @@
     "lint": "eslint . --ext .js,.jsx",
     "prebuild": "npm run lint",
     "build": "gulp && npm run spellcheck",
+    "danger": "danger ci",
     "prettier": "prettier --config .prettierrc --write \"**/*.js\"",
     "docs": "./gradlew Backpack:dokka",
     "docs:clean": "./gradlew Backpack:cleanDokka",
@@ -57,6 +58,7 @@
   "devDependencies": {
     "bpk-svgs": "^8.2.33",
     "bpk-tokens": "^30.0.0",
+    "danger": "^10.1.1",
     "del": "^4.0.0",
     "ensure-node-env": "^1.2.2",
     "eslint-config-skyscanner-with-prettier": "^0.8.0",
