@@ -1,7 +1,7 @@
 /**
- * Backpack - Skyscanner's Design System
+ * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2016-2020 Skyscanner Ltd
+ * Copyright 2018-2020 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 // See http://danger.systems/js if you're not sure what this is.
 
-const fs = require('fs');
+import fs from 'fs';
 
-const { includes } = require('lodash');
-const { danger, fail, warn, message } = require('danger');
+import { includes } from 'lodash';
+import { danger, fail, warn, message } from 'danger';
 
-const meta = require('./meta.json');
+import meta from './meta.json';
 
 const BACKPACK_SQUAD_MEMBERS = meta.maintainers.map(
   maintainer => maintainer.github,
 );
+
 const author = danger.github.pr.user.login;
 const isPrExternal = !BACKPACK_SQUAD_MEMBERS.includes(author);
 
@@ -64,7 +64,6 @@ if (lockFileUpdated) {
 
 // New files should include the Backpack license heading.
 const unlicensedFiles = createdFiles.filter(filePath => {
-  // Applies to js, css, scss and sh files that are not located in dist or flow-typed folders.
   if (
     filePath.match(/\.(js|sh|kt|java)$/) &&
     !filePath.includes('dist/') &&
