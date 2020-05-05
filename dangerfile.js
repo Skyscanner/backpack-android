@@ -19,12 +19,12 @@
 
 // See http://danger.systems/js if you're not sure what this is.
 
-import fs from 'fs';
+const fs = require('fs');
 
-import { includes } from 'lodash';
-import { danger, fail, warn, message } from 'danger';
+const { includes } = require('lodash');
+const { danger, fail, warn, message } = require('danger');
 
-import * as meta from './meta.json';
+const meta = require('./meta.json');
 
 const BACKPACK_SQUAD_MEMBERS = meta.maintainers.map(
   maintainer => maintainer.github,
