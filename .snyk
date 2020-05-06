@@ -1,0 +1,64 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - release-it > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - release-it > inquirer > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - '@babel/core > lodash':
+        patched: '2020-05-06T22:56:59.052Z'
+    - inquirer > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - lint-staged > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - '@babel/preset-env > @babel/plugin-transform-block-scoping > lodash':
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint-config-skyscanner-with-prettier > eslint > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint-config-skyscanner-with-prettier > eslint-plugin-backpack > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint-config-skyscanner-with-prettier > eslint-plugin-import > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint_d > eslint > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - lint-staged > yup > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - markdown-spellcheck > async > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - markdown-spellcheck > inquirer > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - release-it > deprecated-obj > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - '@babel/preset-env > @babel/plugin-transform-classes > @babel/helper-define-map > lodash':
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint-config-skyscanner-with-prettier > babel-eslint > @babel/traverse > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint-config-skyscanner-with-prettier > eslint > inquirer > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint-config-skyscanner-with-prettier > eslint > table > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint_d > eslint > inquirer > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint_d > eslint > table > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - '@babel/preset-env > @babel/plugin-transform-unicode-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash':
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint-config-skyscanner-with-prettier > babel-eslint > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - '@babel/preset-env > @babel/preset-modules > @babel/plugin-transform-dotall-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash':
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint-config-skyscanner-with-prettier > babel-eslint > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - '@babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/generator > lodash':
+        patched: '2020-05-06T22:56:59.052Z'
+    - eslint-config-skyscanner-with-prettier > babel-eslint > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
+        patched: '2020-05-06T22:56:59.052Z'
+    - '@babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2020-05-06T22:56:59.052Z'
+    - '@babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2020-05-06T22:56:59.052Z'
