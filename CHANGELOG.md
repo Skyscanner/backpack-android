@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 23.4.0
+
+**Added:**
+
+- Added new `account--name`, `ticket-flexible` and `hotel-flexible` icons.
+
 # 23.3.0
 
 **Added:**
