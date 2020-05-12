@@ -58,13 +58,13 @@ open class BpkChip @JvmOverloads constructor(
       this.isEnabled = !disabled
     }
 
-  var chipBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)
+  open var chipBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)
     set(value) {
       field = value
       updateBackground()
     }
 
-  var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkPrimary)
+  open var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkPrimary)
     set(value) {
       field = value
       updateBackground()
@@ -113,7 +113,7 @@ open class BpkChip @JvmOverloads constructor(
     }
   }
 
-  private fun updateBackground() {
+  internal open fun updateBackground() {
     val backgroundTintList = ColorStateList(
       arrayOf(
         intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
