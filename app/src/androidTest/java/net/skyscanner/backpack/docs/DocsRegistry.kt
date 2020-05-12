@@ -49,6 +49,7 @@ object DocsRegistry {
     Screenshot("Card - With divider without padding", "with-divider-without-padding"),
     Screenshot("Card - With divider and corner style large", "with-divider-and-corner-style-large"),
     Screenshot("Chip - Default", "all"),
+    Screenshot("Chip - Outline", "outline"),
     Screenshot("Chip - With icon", "with-icon"),
     Screenshot("Checkbox", "default"),
     Screenshot("Dialog - With call to action", "with-cta", ::setupDialog),
