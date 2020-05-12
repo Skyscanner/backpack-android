@@ -80,7 +80,7 @@ internal fun getColorSelector(
   intArrayOf(disabledColor, pressedColor, pressedColor, pressedColor, normalColor)
 )
 
-fun BpkButtonBase.getContentDrawable(
+private fun BpkButtonBase.getContentDrawable(
   @ColorInt normalColor: Int,
   @Dimension cornerRadius: Float? = null,
   @ColorInt strokeColor: ColorStateList? = null,
