@@ -36,26 +36,6 @@ BpkChip(context).apply {
 }
 ```
 
-Example of a Outline Chip in XML
-
-```xml
-    <net.skyscanner.backpack.chip.BpkOutlineChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Message" />
-```
-
-Example of a Outline Chip in Kotlin
-
-```Kotlin
-import net.skyscanner.backpack.chip.BpkOutlineChip
-
-BpkOutlineChip(context).apply {
-  text = "Message"
-}
-```
-
 ## Toggling the chip's state
 
 By default the chip does not add any click listeners, so clicking it will not toggle its state.

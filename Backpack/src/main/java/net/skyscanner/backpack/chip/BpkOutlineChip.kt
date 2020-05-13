@@ -10,7 +10,6 @@ import android.util.StateSet
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.createContextThemeWrapper
 
 class BpkOutlineChip @JvmOverloads constructor(
@@ -28,7 +27,7 @@ class BpkOutlineChip @JvmOverloads constructor(
     intArrayOf(
       ContextCompat.getColor(context, R.color.bpkWhite),
       ContextCompat.getColor(context, R.color.bpkWhite),
-      ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
+      ContextCompat.getColor(context, R.color.bpkBlackTint05)
     )
   )
 
@@ -38,7 +37,7 @@ class BpkOutlineChip @JvmOverloads constructor(
 
   override fun updateBackground() {
     background = getStateListDrawable(selectedBackgroundColor)
-    height = ResourcesUtil.dpToPx(34, context)
+    height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
   }
 
   private fun getStateListDrawable(selectedBackgroundColor: Int): StateListDrawable? {
