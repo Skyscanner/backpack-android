@@ -65,17 +65,6 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCustomBackground() {
-    val view = BpkOutlineChip(testContext)
-    view.text = "tag"
-    view.chipBackgroundColor = ContextCompat.getColor(testContext, R.color.bpkErfoud)
-    getContainer().apply {
-      addView(view)
-      snap(this)
-    }
-  }
-
-  @Test
   fun screenshotTestCustomSelectedBackground() {
     val view = BpkOutlineChip(testContext)
     view.text = "tag"
