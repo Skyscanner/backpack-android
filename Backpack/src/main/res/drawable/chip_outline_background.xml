@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ripple
+<shape
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:color="?colorControlHighlight">
-  <item>
-    <shape
-      android:padding="90dp"
-      android:shape="rectangle">
-      <size android:height="@dimen/bpk_chip_height" />
-      <padding
-        android:left="@dimen/bpkSpacingBase"
-        android:right="@dimen/bpkSpacingBase" />
-      <corners
-        android:bottomLeftRadius="@dimen/bpkBorderRadiusPill"
-        android:bottomRightRadius="@dimen/bpkBorderRadiusPill"
-        android:topLeftRadius="@dimen/bpkBorderRadiusPill"
-        android:topRightRadius="@dimen/bpkBorderRadiusPill" />
-      <stroke
-        android:width="@dimen/bpkBorderSizeSm"
-        android:color="@color/bpkLineDark" />
-    </shape>
-  </item>
-</ripple>
+  android:padding="90dp"
+  android:shape="rectangle">
+  <size android:height="@dimen/bpk_chip_height" />
+  <padding
+    android:left="@dimen/bpkSpacingBase"
+    android:right="@dimen/bpkSpacingBase" />
+  <corners
+    android:bottomLeftRadius="@dimen/bpkBorderRadiusPill"
+    android:bottomRightRadius="@dimen/bpkBorderRadiusPill"
+    android:topLeftRadius="@dimen/bpkBorderRadiusPill"
+    android:topRightRadius="@dimen/bpkBorderRadiusPill" />
+  <stroke
+    android:width="@dimen/bpkBorderSizeSm"
+    android:color="@color/bpkLineDark" />
+</shape>
+
