@@ -80,6 +80,5 @@ BpkOutlineChip(context).apply {
 - `chipSelectedBackgroundColor`
 - `chipBackgroundColor`
 
-For outline version use the `BpkOutlineChip` class
 
 Styles can be changed globally through `bpkChipStyle` or `bpkOutlineChipStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
