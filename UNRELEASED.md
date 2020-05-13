@@ -1,7 +1,6 @@
 # Unreleased
 
 > Place your changes below this line.
- - Added `BpkOutlineChip` component
 
 ## How to write a good changelog entry
 
