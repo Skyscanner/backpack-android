@@ -230,6 +230,7 @@
   <attr name="bpkFabStyle" format="reference" />
   <attr name="bpkButtonLinkStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
+  <attr name="bpkOutlineChipStyle" format="reference"/>
   <attr name="bpkChipStyle" format="reference"/>
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
   <attr name="bpkCheckboxStyle" format="reference"/>

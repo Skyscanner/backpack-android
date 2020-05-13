@@ -45,9 +45,40 @@ To do so add a click listener:
 chip.setOnClickListener { chip.toggle() }
 ```
 
+## BpkOutlineChip
+
+Chip with outline style, supports the same properties as a normal chip except changing the background colour.
+
+Example of a outline chip in XML
+
+```xml
+    <net.skyscanner.backpack.chip.BpkOutlineChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:text="Message"
+      app:disabled="true"
+      app:selected="true" />
+```
+
+Example of a outline chip in Kotlin
+
+```Kotlin
+import net.skyscanner.backpack.chip.BpkOutlineChip
+
+BpkOutlineChip(context).apply {
+  text = "Message"
+  isSelected = true
+  disabled = false
+  chipSelectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
+  chipIcon = ContextCompat.getDrawable(testContext, R.drawable.bpk_account)
+}
+```
+
 ## Theme Props
 
 - `chipSelectedBackgroundColor`
 - `chipBackgroundColor`
 
-Styles can be changed globally through `bpkChipStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+
+Styles can be changed globally through `bpkChipStyle` or `bpkOutlineChipStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.

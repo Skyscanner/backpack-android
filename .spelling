@@ -78,9 +78,9 @@ BpkSectionListHeader
 BpkSectionListItem
 BpkSectionListItemSeparator
 BpkSectionListSection
-
+BpkOutlineChip
 BpkScrim
-
+OutlineChip
 BpkSelect
 
 BpkStar

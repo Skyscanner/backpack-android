@@ -113,7 +113,7 @@ open class BpkChip @JvmOverloads constructor(
     }
   }
 
-  private fun updateBackground() {
+  internal open fun updateBackground() {
     val backgroundTintList = ColorStateList(
       arrayOf(
         intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
