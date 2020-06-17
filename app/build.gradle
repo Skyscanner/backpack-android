@@ -82,7 +82,7 @@ dependencies {
   api project(':Backpack')
   // NOTE: This is here and not in the root file because snyk is not ignoring it otherwise.
   // This is a test dependency and should be ignored (as stated in snyk docs)
-  lintClassPath 'com.pinterest:ktlint:0.33.0'
+  lintClassPath 'com.pinterest:ktlint:0.37.2'
 }
 screenshots {
   multipleDevices false
