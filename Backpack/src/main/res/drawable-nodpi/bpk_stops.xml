@@ -1,3 +1,3 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
-    <path android:fillColor="@color/bpkTextPrimary" android:pathData="M6 8.57A5.93 5.93 0 0 0 4 13v4H2v-4a8 8 0 0 1 4-6.91zm15.65 4.37a1 1 0 0 0-1.41 0L18 15.17V13a8 8 0 0 0-4-6.91v2.48A5.93 5.93 0 0 1 16 13v2.17l-2.23-2.23a1 1 0 0 0-1.41 1.41L17 19l4.65-4.65a1 1 0 0 0 0-1.41zM12 6a2 2 0 1 0-2 2 2 2 0 0 0 2-2z"/>
+    <path android:pathData="M12.5 6.5a2 2 0 1 1-2-2a2 2 0 0 1 2 2zM7.38 7.07a1 1 0 0 1-0.36 1.37a7 7 0 0 0-3.5 6.06v4a1 1 0 0 1-2 0v-4A9 9 0 0 1 6 6.7a1 1 0 0 1 1.36 0.37zm6.27 0a1 1 0 0 1 1.37-0.36a9 9 0 0 1 4.5 7.79v1.54l1.29-1.25a1 1 0 0 1 1.41 1.42l-3.04 2.7a1 1 0 0 1-1.33 0l-3.04-2.7a1 1 0 0 1 1.41-1.42l1.3 1.25V14.5A7 7 0 0 0 14 8.44a1 1 0 0 1-0.37-1.37z"/>
 </vector>
