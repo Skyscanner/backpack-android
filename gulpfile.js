@@ -87,7 +87,11 @@ const fontFamilyMappings = {
   [FONT_WEIGHTS.heavy]: '?bpkFontFamilyHeavy',
 };
 
-const pascalCase = s => _.flow(_.camelCase, _.upperFirst)(s);
+const pascalCase = s =>
+  _.flow(
+    _.camelCase,
+    _.upperFirst,
+  )(s);
 
 const getFontWeightSuffix = fontWeight => {
   if (fontWeight !== FONT_WEIGHTS.normal) {
