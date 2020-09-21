@@ -1,4 +1,4 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
-    <path android:fillType="evenOdd" android:pathData="M6 0.75a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h9a3 3 0 0 0 3-3v-1.5a4.5 4.5 0 0 0 0-9v-1.5a3 3 0 0 0-3-3zm12 10.5a1.5 1.5 0 0 0 0-3zm-3.4-4.02a1.54 1.54 0 0 1-0.07 2.15L9.4 14.25L6.38 10.8A1.53 1.53 0 0 1 6.5 8.65a1.49 1.49 0 0 1 2.1 0.11l0.02 0.02L9.6 9.9l2.88-2.74a1.49 1.49 0 0 1 2.1 0.05l0.02 0.02z"/>
-    <path android:pathData="M1.5 21.75a1.5 1.5 0 0 1 1.5-1.5h15a1.5 1.5 0 0 1 0 3H3a1.5 1.5 0 0 1-1.5-1.5z"/>
+    <path android:fillColor="@color/bpkTextPrimary" android:fillType="evenOdd" android:pathData="M6 0.75a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h9a3 3 0 0 0 3-3v-1.5a4.5 4.5 0 0 0 0-9v-1.5a3 3 0 0 0-3-3zm12 10.5a1.5 1.5 0 0 0 0-3zm-3.4-4.02a1.54 1.54 0 0 1-0.07 2.15L9.4 14.25 6.38 10.8A1.53 1.53 0 0 1 6.5 8.65a1.49 1.49 0 0 1 2.1 0.11l0.02 0.02L9.6 9.9l2.88-2.74a1.49 1.49 0 0 1 2.1 0.05l0.02 0.02z"/>
+    <path android:fillColor="@color/bpkTextPrimary" android:pathData="M1.5 21.75a1.5 1.5 0 0 1 1.5-1.5h15a1.5 1.5 0 0 1 0 3H3a1.5 1.5 0 0 1-1.5-1.5z"/>
 </vector>
