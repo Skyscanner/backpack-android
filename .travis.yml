@@ -30,7 +30,7 @@ cache:
     - $HOME/google-cloud-sdk
 
 before_install:
-  - sudo bash -c "yes | add-apt-repository ppa:deadsnakes/ppa && apt-get update && apt-get install -y python3.6 python3-pip"
+  - pyenv install 3.6
   - pyenv global 3.6
   - python -V
   - openssl aes-256-cbc -K $encrypted_64bd6e5c0667_key -iv $encrypted_64bd6e5c0667_iv -in gcloud-service-key.json.enc -out $HOME/gcloud-service-key.json -d
