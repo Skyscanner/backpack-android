@@ -42,14 +42,14 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
 
   if [ -d "$local_screenshots_folder" ]; then
     rm -rf "$local_screenshots_folder"
-  fi 
+  fi
 
   mkdir -p "$local_screenshots_folder"
 
   gsutil -m cp -r "gs://$remote_screenshots_folder" "$local_screenshots_folder"
 
   echo "Verifying screenshots..."
-
+  pyenv global 2.7.11
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
 
 elif [ "$TEST_METHOD" == "connected" ]; then
@@ -59,7 +59,7 @@ elif [ "$TEST_METHOD" == "connected" ]; then
       --app ./app/build/outputs/apk/oss/debug/app-oss-debug.apk \
       --test ./Backpack/build/outputs/apk/androidTest/oss/debug/Backpack-oss-debug-androidTest.apk \
       --device model=Nexus4,version=21
-else 
+else
 
   echo "Env TEST_METHOD not defined"
   exit 1
