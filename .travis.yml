@@ -33,6 +33,7 @@ before_install:
   - pyenv install 3.6.3
   - pyenv install 2.7.11
   - pyenv global 3.6.3
+  - sudo apt-get install python-pip
   - openssl aes-256-cbc -K $encrypted_64bd6e5c0667_key -iv $encrypted_64bd6e5c0667_iv -in gcloud-service-key.json.enc -out $HOME/gcloud-service-key.json -d
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export $CLOUDSDK_CORE_DISABLE_PROMPTS; curl https://sdk.cloud.google.com | bash; fi
   - source /home/travis/google-cloud-sdk/path.bash.inc # Add gcloud to $PATH
@@ -72,7 +73,7 @@ script:
 
   # Call firebase builds. TODO: do in parallel
   - TEST_METHOD=connected ./scripts/ci-tests.sh
-  - TEST_METHOD=screenshot ./scripts/ci-tests.sh
+  - sudo TEST_METHOD=screenshot ./scripts/ci-tests.sh
 
   - |
     if [ "$TRAVIS_BRANCH" == 'master' ] && [ "$TRAVIS_PULL_REQUEST" == 'false' ]; then

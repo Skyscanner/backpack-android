@@ -50,6 +50,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
 
   echo "Verifying screenshots..."
   pyenv global 2.7.11
+  sudo easy_install Pillow==6.2.2
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
 
 elif [ "$TEST_METHOD" == "connected" ]; then
