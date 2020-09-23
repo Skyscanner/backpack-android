@@ -49,6 +49,10 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   gsutil -m cp -r "gs://$remote_screenshots_folder" "$local_screenshots_folder"
 
   echo "Verifying screenshots..."
+  echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+  echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
+  echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.bashrc
+  source ~/.bashrc
   pyenv global 2.7.11
   sudo easy_install Pillow==6.2.2
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
