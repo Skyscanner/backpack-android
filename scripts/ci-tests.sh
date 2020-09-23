@@ -15,9 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export CLOUDSDK_PYTHON=$(which python3)
+export CLOUDSDK_PYTHON="/opt/pyenv/versions/3.6.3/bin/python"
 set -e
-export CLOUDSDK_PYTHON=$(which python3)
+export CLOUDSDK_PYTHON="/opt/pyenv/versions/3.6.3/bin/python"
 if [ "$TEST_METHOD" == "screenshot" ]; then
 
   bucket_name="test-lab-8yj19qy8ht4mm-ku5ff32sak89k" # TODO: create a `backpack-android` bucket
