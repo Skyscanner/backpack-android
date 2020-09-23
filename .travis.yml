@@ -29,7 +29,7 @@ cache:
     - $HOME/google-cloud-sdk
 
 before_install:
-  - sudo apt-get install python-pip pyenv -y
+  - sudo apt-get install python-pip -y
   - sudo easy_install Pillow==6.2.2
   - pyenv install 3.6.3
   - pyenv install 2.7.11
