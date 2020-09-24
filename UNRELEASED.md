@@ -2,62 +2,6 @@
 
 > Place your changes below this line.
 
-**Added:**
-  - `BpkIcon`
-    - New icon dimension – `sm`.
-    - New icons:
-        - `bpk_account__female`
-        - `bpk_beach`
-        - `bpk_car_wash`
-        - `bpk_cars_flexible`
-        - `bpk_clean`
-        - `bpk_clean_policy`
-        - `bpk_cleaning_medical`
-        - `bpk_collapse`
-        - `bpk_education`
-        - `bpk_electric`
-        - `bpk_exclamation`
-        - `bpk_explore`
-        - `bpk_face_id`
-        - `bpk_face_mask`
-        - `bpk_fingerprint`
-        - `bpk_flight_flexible`
-        - `bpk_logout`
-        - `bpk_pause`
-        - `bpk_play`
-        - `bpk_ppe`
-        - `bpk_social_distancing`
-        - `bpk_sort_down`
-        - `bpk_sort_up`
-        - `bpk_swap`
-        - `bpk_virus`
-        - `bpk_weather__clear`
-        - `bpk_weather__cloudy`
-        - `bpk_weather__fog`
-        - `bpk_weather__partly_cloudy`
-        - `bpk_weather__rain`
-        - `bpk_weather__snow`
-        - `bpk_weather__thunderstorm`
-        - `bpk_weather__tornado`
-        - `bpk_weather__wind`
-
-**Removed:**
-  - `BpkIcon`
-    - `bpk_close_small`
-
-**Fixed:**
-  - Improved vector assets support on `Android 5.X` for:
-    - `BpkBottomNav`
-    - `BpkChip`
-    - `BpkFlare`
-    - `BpkDialog`
-    - `BpkHorizontalHav`
-    - `BpkNavBar`
-    - `BpkStarRating`
-    - `BpkPanel`
-    - `BpkSnackbar`
-  - Updated samples using `BpkIcon`
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
