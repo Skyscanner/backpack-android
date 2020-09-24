@@ -8,6 +8,7 @@ import android.graphics.drawable.StateListDrawable
 import android.util.AttributeSet
 import android.util.StateSet
 import androidx.annotation.ColorInt
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -45,7 +46,7 @@ class BpkOutlineChip @JvmOverloads constructor(
     stateListDrawable.addState(intArrayOf(android.R.attr.state_selected), corneredDrawable(selectedBackgroundColor))
     stateListDrawable.addState(
       StateSet.WILD_CARD,
-      ContextCompat.getDrawable(context, R.drawable.chip_outline_background)
+      AppCompatResources.getDrawable(context, R.drawable.chip_outline_background)
     )
     return stateListDrawable
   }

@@ -23,6 +23,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
@@ -96,12 +97,16 @@ open class BpkChip @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
       .use {
-        background = ContextCompat.getDrawable(context, R.drawable.chip_background)
+        background = AppCompatResources.getDrawable(context, R.drawable.chip_background)
         disabled = it.getBoolean(R.styleable.BpkChip_disabled, false)
         isSelected = it.getBoolean(R.styleable.BpkChip_selected, false)
         chipBackgroundColor = it.getColor(R.styleable.BpkChip_chipBackgroundColor, chipBackgroundColor)
         selectedBackgroundColor = it.getColor(R.styleable.BpkChip_chipSelectedBackgroundColor, selectedBackgroundColor)
-        icon = it.getDrawable(R.styleable.BpkChip_chipIcon)
+
+        val iconId = it.getResourceId(R.styleable.BpkChip_chipIcon, 0)
+        if (iconId != 0) {
+          icon = AppCompatResources.getDrawable(context, iconId)
+        }
       }
 
     updateBackground()

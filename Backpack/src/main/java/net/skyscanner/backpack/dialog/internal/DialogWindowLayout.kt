@@ -25,8 +25,8 @@ import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import kotlin.math.roundToInt
@@ -53,7 +53,7 @@ internal class DialogWindowLayout @JvmOverloads constructor(
   private var fullscreen = false
     set(value) {
       field = value
-      background = if (value) ContextCompat.getDrawable(context, R.color.__dialogBackground) else modalBg
+      background = if (value) AppCompatResources.getDrawable(context, R.color.__dialogBackground) else modalBg
     }
 
   private val modalPadding = resources.getDimensionPixelSize(R.dimen.bpk_dialog_margin)

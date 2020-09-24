@@ -24,13 +24,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.demo.R
 
 private const val PLATFORM_VD_CLAZZ = "android.graphics.drawable.VectorDrawable"
+private const val ICON_TYPE = "icon_type"
+
+internal enum class IconType {
+  Default {
+    override fun matchesName(name: String): Boolean = !name.endsWith("_sm")
+  },
+  Small {
+    override fun matchesName(name: String) = name.endsWith("_sm")
+  };
+
+  abstract fun matchesName(name: String): Boolean
+}
 
 class IconsStory : Story() {
 
@@ -47,10 +59,12 @@ class IconsStory : Story() {
     val drawableResources = ArrayList<Drawable>()
     val iconNames = ArrayList<String>()
 
+    val iconType: IconType = arguments?.getSerializable(ICON_TYPE) as? IconType? ?: IconType.Default
+
     for (field in R.drawable::class.java.fields) {
-      if (field.name.startsWith("bpk_")) {
+      if (field.name.startsWith("bpk_") && iconType.matchesName(field.name)) {
         try {
-          ResourcesCompat.getDrawable(resources, field.getInt(null), null)?.apply {
+          AppCompatResources.getDrawable(requireContext(), field.getInt(null))?.apply {
             if (isVectorDrawable(this)) {
               drawableResources.add(this)
               iconNames.add(field.name)
@@ -76,9 +90,10 @@ class IconsStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = IconsStory().apply {
+    internal infix fun of(type: IconType) = IconsStory().apply {
       arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
+      arguments?.putInt(LAYOUT_ID, R.layout.fragment_all_icons)
+      arguments?.putSerializable(ICON_TYPE, type)
     }
   }
 }

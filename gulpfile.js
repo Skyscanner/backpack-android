@@ -130,11 +130,19 @@ const convertToXml = (chunk, enc, cb) => {
 
       const xmlContent = new xmldom.XMLSerializer().serializeToString(xmlDoc);
       chunk.contents = Buffer.from(xmlContent, 'utf-8'); // eslint-disable-line no-param-reassign
-      const s = chunk.path.split('/');
-      s[s.length - 1] = `bpk_${s[s.length - 1]
+      const locationPaths = chunk.path.split('/');
+      const type = locationPaths[locationPaths.length - 2];
+      locationPaths.splice(locationPaths.length - 2, 1);
+      let suffix = `_${type}`;
+      if (type === 'lg') {
+        // lg icon is default
+        suffix = '';
+      }
+      const fileName = locationPaths[locationPaths.length - 1]
         .replace(/-/g, '_')
-        .replace('.svg', '.xml')}`;
-      chunk.path = s.join('/'); // eslint-disable-line no-param-reassign
+        .replace('.svg', `${suffix}.xml`);
+      locationPaths[locationPaths.length - 1] = `bpk_${fileName}`;
+      chunk.path = locationPaths.join('/'); // eslint-disable-line no-param-reassign
       cb(null, chunk);
     })
     .catch(cb);

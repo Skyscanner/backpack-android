@@ -1,3 +1,5 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
-    <path android:fillColor="@color/bpkTextPrimary" android:pathData="M22 18v2H4v-2zM4.83 9.13L9.33 11 5.8 14.51l1.54 0.53 5.74-2.5 4.18 1.74a1.25 1.25 0 0 0 0.96-2.3L5.62 6.74l-1.46-3.3-1.15-0.49L3.3 7a2.5 2.5 0 0 0 1.53 2.13zm7-3.85l-0.99-0.4-0.11 2.69L14.5 9.1zM14 15a1 1 0 1 0 1-1 1 1 0 0 0-1 1z"/>
+    <path android:fillColor="@color/bpkTextPrimary" android:pathData="M9.88 7.85L9.5 6a0.5 0.5 0 0 1 0.62-0.58l1.36 0.36a1 1 0 0 1 0.5 0.3l2.3 2.57a0.5 0.5 0 0 1-0.51 0.8L10.6 8.61a1 1 0 0 1-0.73-0.76z"/>
+    <path android:fillColor="@color/bpkTextPrimary" android:pathData="M3.05 4.54a1.01 1.01 0 0 0-0.6-0.44L2.13 4.02a0.5 0.5 0 0 0-0.62 0.57l0.84 3.97a3.41 3.41 0 0 0 2.23 2.55l4.53 1.2a0.5 0.5 0 0 1 0.3 0.73L5.61 18.9a0.5 0.5 0 0 0 0.3 0.74l1.23 0.33a1.02 1.02 0 0 0 0.95-0.23l6.63-5.51a1.42 1.42 0 0 1 1.1-0.15l5.61 1.48c0.54 0.14 1.12-0.18 1.05-0.72-0.17-1.43-1.6-2.5-3.2-2.92L6.54 8.55a3.03 3.03 0 0 1-1.8-1.32L3.05 4.54z"/>
+    <path android:fillColor="@color/bpkTextPrimary" android:pathData="M15.91 18.19a1.51 1.51 0 0 0 1.85-1.05 1.48 1.48 0 0 0-1.07-1.81 1.51 1.51 0 0 0-1.85 1.04 1.48 1.48 0 0 0 1.07 1.82z"/>
 </vector>

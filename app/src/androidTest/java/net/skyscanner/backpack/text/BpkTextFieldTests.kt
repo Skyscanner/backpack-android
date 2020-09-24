@@ -19,7 +19,7 @@
 package net.skyscanner.backpack.text
 
 import android.view.View
-import androidx.core.content.ContextCompat
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.createThemedContext
@@ -59,14 +59,14 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   @Test
   @Ignore
   fun screenshotTestTextField_IconStart() {
-    subject.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_search)
+    subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
   @Test
   @Ignore
   fun screenshotTestTextField_IconEnd() {
-    subject.iconEnd = ContextCompat.getDrawable(testContext, R.drawable.bpk_search)
+    subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
@@ -74,7 +74,7 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   @Ignore
   fun screenshotTestTextField_IconStart_withTint() {
     subject.setText("")
-    subject.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_search)
+    subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
@@ -82,7 +82,7 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   @Ignore
   fun screenshotTestTextField_IconEnd_withTint() {
     subject.setText("")
-    subject.iconEnd = ContextCompat.getDrawable(testContext, R.drawable.bpk_search)
+    subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
@@ -108,14 +108,14 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestTextField_IconStart_RTL() {
     subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    subject.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_search)
+    subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
   @Test
   fun screenshotTestTextField_IconEnd_RTL() {
     subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    subject.iconEnd = ContextCompat.getDrawable(testContext, R.drawable.bpk_search)
+    subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
@@ -123,7 +123,7 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   fun screenshotTestTextField_IconStart_withTint_RTL() {
     subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
     subject.setText("")
-    subject.iconStart = ContextCompat.getDrawable(testContext, R.drawable.bpk_search)
+    subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
@@ -131,7 +131,7 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   fun screenshotTestTextField_IconEnd_withTint_RTL() {
     subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
     subject.setText("")
-    subject.iconEnd = ContextCompat.getDrawable(testContext, R.drawable.bpk_search)
+    subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 

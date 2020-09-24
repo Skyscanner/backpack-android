@@ -43,7 +43,7 @@ BpkFlare(context).apply {
   insetPaddingMode = BpkFlare.InsetPaddingMode.NONE
   round = false
   addView(ImageView(contenxt).apply {
-    setImageDrawable(ContextCompat.getDrawable(context, R.drawable.canadian_rockies_canada))
+    setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.canadian_rockies_canada))
     layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     scaleType = ImageView.ScaleType.CENTER_CROP
   })

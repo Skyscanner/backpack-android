@@ -25,6 +25,6 @@ Example usage in Kotlin
 
 ```
 ImageView(context).apply {
-  setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.bpk_flag))
+  setImageDrawable(AppCompatResources.getDrawable.getDrawable(context, R.drawable.bpk_flag))
 }
 ```

@@ -26,7 +26,7 @@ Example of a primary button in Kotlin
 import net.skyscanner.backpack.button.BpkButton
 
 BpkButtonLink(context).apply {
-   icon = ContextCompat.getDrawable(context, R.drawable.bpk_weather)
+   icon = AppCompatResources.getDrawable(context, R.drawable.bpk_weather)
    iconPosition = BpkButton.END
    text = "Button"
 }

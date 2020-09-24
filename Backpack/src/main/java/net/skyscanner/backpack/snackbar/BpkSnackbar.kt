@@ -31,6 +31,7 @@ import androidx.annotation.AnyRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
@@ -117,7 +118,7 @@ class BpkSnackbar private constructor(
   }
 
   fun setIcon(@DrawableRes icon: Int): BpkSnackbar =
-    setIcon(ContextCompat.getDrawable(context, icon))
+    setIcon(AppCompatResources.getDrawable(context, icon))
 
   fun setText(@StringRes resId: Int): BpkSnackbar =
     setText(context.getString(resId))
@@ -128,7 +129,7 @@ class BpkSnackbar private constructor(
 
   fun setAction(@AnyRes resId: Int, listener: View.OnClickListener): BpkSnackbar = apply {
     if (context.resources.getResourceTypeName(resId) == "drawable") {
-      return setAction(ContextCompat.getDrawable(context, resId)!!, listener)
+      return setAction(AppCompatResources.getDrawable(context, resId)!!, listener)
     }
     return setAction(context.getText(resId), listener)
   }

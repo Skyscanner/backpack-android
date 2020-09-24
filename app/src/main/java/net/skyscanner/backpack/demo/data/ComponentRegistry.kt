@@ -199,8 +199,10 @@ object ComponentRegistry {
   private val TOKENS_MAP = mapOf(
     "All Icons" story NodeData({ children -> SubStory of children },
       mapOf(
-        "Default" story NodeData { IconsStory of R.layout.fragment_all_icons },
-        "RTL" story NodeData { IconsStory of R.layout.fragment_all_icons with Direction.RTL }
+        "Default" story NodeData { IconsStory of IconType.Default },
+        "RTL" story NodeData { IconsStory of IconType.Default with Direction.RTL },
+        "Small" story NodeData { IconsStory of IconType.Small },
+        "Small RTL" story NodeData { IconsStory of IconType.Small with Direction.RTL }
       )),
     "Color" story NodeData { ColorStory() },
     "Elevation" story NodeData { ElevationStory() },

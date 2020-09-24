@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.chip
 
 import android.util.LayoutDirection
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -89,7 +90,7 @@ class BpkChipTest : BpkSnapshotTest() {
   fun screenshotTestWithIcon() {
     val view = BpkChip(testContext)
     view.text = "tag"
-    view.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_account)
+    view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     snap(view)
   }
 
@@ -98,7 +99,7 @@ class BpkChipTest : BpkSnapshotTest() {
   fun screenshotTestSelectedWithIcon() {
     val view = BpkChip(testContext)
     view.text = "tag"
-    view.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_account)
+    view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.isSelected = true
     snap(view)
   }
@@ -108,7 +109,7 @@ class BpkChipTest : BpkSnapshotTest() {
   fun screenshotTestDisabledWithIcon() {
     val view = BpkChip(testContext)
     view.text = "tag"
-    view.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_account)
+    view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.disabled = true
     snap(view)
   }
@@ -118,7 +119,7 @@ class BpkChipTest : BpkSnapshotTest() {
   fun screenshotTestWithIcon_RTL() {
     val view = BpkChip(testContext)
     view.text = "tag"
-    view.icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_account)
+    view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.layoutDirection = LayoutDirection.RTL
     snap(view)
   }
