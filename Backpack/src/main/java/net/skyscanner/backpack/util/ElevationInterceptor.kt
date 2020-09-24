@@ -20,7 +20,7 @@ package net.skyscanner.backpack.util
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.core.content.res.ResourcesCompat
+import androidx.appcompat.content.res.AppCompatResources
 import io.github.inflationx.viewpump.InflateResult
 import io.github.inflationx.viewpump.Interceptor
 import net.skyscanner.backpack.R
@@ -43,9 +43,9 @@ class ElevationInterceptor : Interceptor {
       val elevation = ResourcesUtil.pxToDp(view.elevation, view.context)
       if (elevation !in validSpaces) {
         if (view.background == null) {
-          view.background = ResourcesCompat.getDrawable(view.resources, R.drawable.bpk_internal_elevation_highlight, view.context.theme)
+          view.background = AppCompatResources.getDrawable(view.context, R.drawable.bpk_internal_elevation_highlight)
         } else {
-          view.foreground = ResourcesCompat.getDrawable(view.resources, R.drawable.bpk_internal_elevation_highlight, view.context.theme)
+          view.foreground = AppCompatResources.getDrawable(view.context, R.drawable.bpk_internal_elevation_highlight)
         }
       }
     }

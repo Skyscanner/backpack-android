@@ -19,7 +19,7 @@
 package net.skyscanner.backpack.button
 
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.createThemedContext
@@ -78,7 +78,7 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
   @Ignore
   fun screenshotTestButtonLinkWithLeadingIcon() {
     val button = BpkButtonLink(testContext).apply {
-      icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+      icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
       iconPosition = BpkButton.START
       text = "Message"
     }
@@ -89,7 +89,7 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
   @Ignore
   fun screenshotTestButtonLinkWithTrailingIcon() {
     val button = BpkButtonLink(testContext).apply {
-      icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+      icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
       iconPosition = BpkButton.END
       text = "Message"
     }
@@ -100,7 +100,7 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
   @Ignore
   fun screenshotTestButtonLinkWithIcon() {
     val button = BpkButtonLink(testContext).apply {
-      icon = ContextCompat.getDrawable(testContext, R.drawable.bpk_tick)
+      icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
       text = "Message"
     }
     snap(wrap(button))

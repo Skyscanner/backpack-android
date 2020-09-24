@@ -29,7 +29,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
@@ -51,9 +51,9 @@ open class BpkBottomNav @JvmOverloads constructor(
 
   init {
     labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
-    background = ContextCompat.getDrawable(context, R.drawable.bpk_bottom_nav_background)
+    background = AppCompatResources.getDrawable(context, R.drawable.bpk_bottom_nav_background)
     minimumHeight = resources.getDimensionPixelSize(R.dimen.bpk_bottom_nav_height)
-    itemTextColor = ContextCompat.getColorStateList(context, R.color.bpk_bottom_nav_selector)
+    itemTextColor = AppCompatResources.getColorStateList(context, R.color.bpk_bottom_nav_selector)
     itemIconTintList = itemTextColor
     ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationLg))
   }
@@ -67,7 +67,7 @@ open class BpkBottomNav @JvmOverloads constructor(
       .setIcon(icon)
 
   fun addItem(id: Int, @StringRes title: Int, @DrawableRes icon: Int): MenuItem =
-    addItem(id, resources.getString(title), ContextCompat.getDrawable(context, icon)!!)
+    addItem(id, resources.getString(title), AppCompatResources.getDrawable(context, icon)!!)
 
   fun addOnNavigationItemSelectedListener(listener: (MenuItem, Int) -> Unit) {
     listeners.selected += listener

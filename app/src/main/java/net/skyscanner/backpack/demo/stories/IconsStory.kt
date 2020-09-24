@@ -24,7 +24,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
@@ -64,7 +64,7 @@ class IconsStory : Story() {
     for (field in R.drawable::class.java.fields) {
       if (field.name.startsWith("bpk_") && iconType.matchesName(field.name)) {
         try {
-          ResourcesCompat.getDrawable(resources, field.getInt(null), null)?.apply {
+          AppCompatResources.getDrawable(requireContext(), field.getInt(null))?.apply {
             if (isVectorDrawable(this)) {
               drawableResources.add(this)
               iconNames.add(field.name)

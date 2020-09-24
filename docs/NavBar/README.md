@@ -29,7 +29,7 @@ import net.skyscanner.backpack.navbar.BpkNavBar
 BpkNavBar(context).apply {
   title = "Nav Bar"
   menu = R.menu.settings
-  icon = ContextCompat.getDrawable(context, R.drawable.bpk_native_android__back)
+  icon = AppCompatResources.getDrawable(context, R.drawable.bpk_native_android__back)
   expandedTitleColor = ContextCompat.getColor(context, R.color.bpkSkyGray)
   collapsedTitleColor = ContextCompat.getColor(context, R.color.bpkSkyGray)
 }
@@ -38,7 +38,7 @@ BpkNavBar(context).apply {
 The `NavBar` component uses the same logic as [`AppBarLayout`](https://developer.android.com/reference/android/support/design/widget/AppBarLayout),
 and needs to be used as a direct child of [`CoordinatorLayout`](https://developer.android.com/reference/android/support/design/widget/CoordinatorLayout).
 
-The scrolling child of [`CoordinatorLayout`](https://developer.android.com/reference/android/support/design/widget/CoordinatorLayout) should have 
+The scrolling child of [`CoordinatorLayout`](https://developer.android.com/reference/android/support/design/widget/CoordinatorLayout) should have
 `app:layout_behavior="@string/appbar_scrolling_view_behavior"` attribute.
 
 ## Theme Props

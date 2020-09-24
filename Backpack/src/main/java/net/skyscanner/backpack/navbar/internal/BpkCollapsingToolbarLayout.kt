@@ -20,7 +20,7 @@ package net.skyscanner.backpack.navbar.internal
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
+import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
@@ -46,6 +46,6 @@ internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
     expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_bottom)
 
     setScrimsShown(false)
-    contentScrim = ContextCompat.getDrawable(context, R.drawable.navbar_content_scrim_background)
+    contentScrim = AppCompatResources.getDrawable(context, R.drawable.navbar_content_scrim_background)
   }
 }

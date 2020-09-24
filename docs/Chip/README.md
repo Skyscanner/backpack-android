@@ -32,7 +32,7 @@ BpkChip(context).apply {
   disabled = false
   chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
   chipSelectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
-  chipIcon = ContextCompat.getDrawable(testContext, R.drawable.bpk_account)
+  chipIcon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
 }
 ```
 
@@ -71,7 +71,7 @@ BpkOutlineChip(context).apply {
   isSelected = true
   disabled = false
   chipSelectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
-  chipIcon = ContextCompat.getDrawable(testContext, R.drawable.bpk_account)
+  chipIcon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
 }
 ```
 

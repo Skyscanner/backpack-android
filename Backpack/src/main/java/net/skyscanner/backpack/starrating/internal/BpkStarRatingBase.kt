@@ -21,7 +21,6 @@ package net.skyscanner.backpack.starrating.internal
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 
 import android.content.Context
@@ -29,8 +28,9 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.Px
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 
@@ -70,8 +70,8 @@ open class BpkStarRatingBase internal constructor(
 
   init {
     orientation = HORIZONTAL
-    var starColor = ResourcesCompat.getColor(resources, R.color.__starRatingStarColor, null)
-    var starFilledColor: Int = ResourcesCompat.getColor(resources, R.color.bpkErfoud, null)
+    var starColor = ContextCompat.getColor(context, R.color.__starRatingStarColor)
+    var starFilledColor: Int = ContextCompat.getColor(context, R.color.bpkErfoud)
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -127,7 +127,7 @@ open class BpkStarRatingBase internal constructor(
   }
 
   private fun getDrawable(@DrawableRes id: Int, @ColorInt tint: Int) =
-    DrawableCompat.wrap(ContextCompat.getDrawable(context, id)!!.mutate())
+    DrawableCompat.wrap(AppCompatResources.getDrawable(context, id)!!.mutate())
       .apply { DrawableCompat.setTint(this, tint) }
 
   private fun clamp(value: Float, min: Float, max: Float) =

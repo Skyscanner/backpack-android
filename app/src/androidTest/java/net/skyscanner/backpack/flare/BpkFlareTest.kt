@@ -25,8 +25,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
@@ -44,7 +44,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   private val imageView = ImageView(testContext).apply {
-    setImageDrawable(ContextCompat.getDrawable(context, R.drawable.canadian_rockies_canada))
+    setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.canadian_rockies_canada))
     layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     scaleType = ImageView.ScaleType.CENTER_CROP
   }

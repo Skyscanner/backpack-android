@@ -25,7 +25,7 @@ import androidx.core.content.ContextCompat
 
 BpkTextField(context).apply {
    setText('Flights to Edinburgh')
-   iconStart = ContextCompat.getDrawable(context, R.drawable.bpk_search)
+   iconStart = AppCompatResources.getDrawable(context, R.drawable.bpk_search)
 }
 ```
 

@@ -22,11 +22,11 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.text.style.ImageSpan
-import androidx.core.content.ContextCompat
+import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
 
 internal class NotificationDotSpan(context: Context) : ImageSpan(
-  ContextCompat.getDrawable(context, R.drawable.bpk_horizontal_nav_dot)!!.apply {
+  AppCompatResources.getDrawable(context, R.drawable.bpk_horizontal_nav_dot)!!.apply {
     setBounds(0, 0, intrinsicWidth, intrinsicHeight)
   },
   ALIGN_BOTTOM

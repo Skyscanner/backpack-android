@@ -26,6 +26,7 @@ import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ContextThemeWrapper
 import net.skyscanner.backpack.R
 import androidx.core.content.ContextCompat
@@ -127,9 +128,9 @@ internal fun resolveThemeDrawable(context: Context, @AttrRes resId: Int): Drawab
   val wasResolved = context.theme.resolveAttribute(resId, typedValue, true)
 
   return if (wasResolved && typedValue.resourceId == 0) {
-    ContextCompat.getDrawable(context, typedValue.data)
+    AppCompatResources.getDrawable(context, typedValue.data)
   } else if (wasResolved) {
-    ContextCompat.getDrawable(context, typedValue.resourceId)
+    AppCompatResources.getDrawable(context, typedValue.resourceId)
   } else {
     null
   }

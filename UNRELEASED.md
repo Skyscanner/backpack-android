@@ -45,6 +45,19 @@
   - `BpkIcon`
     - `bpk_close_small`
 
+**Fixed:**
+  - Improved vector assets support on `Android 5.X` for:
+    - `BpkBottomNav`
+    - `BpkChip`
+    - `BpkFlare`
+    - `BpkDialog`
+    - `BpkHorizontalHav`
+    - `BpkNavBar`
+    - `BpkStarRating`
+    - `BpkPanel`
+    - `BpkSnackbar`
+  - Updated samples using `BpkIcon`
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
