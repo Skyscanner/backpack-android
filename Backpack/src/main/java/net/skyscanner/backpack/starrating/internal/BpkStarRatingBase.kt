@@ -46,7 +46,7 @@ open class BpkStarRatingBase internal constructor(
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
   private val empty: Drawable
-  private val half: HalfStarDrawable
+  private val half: Drawable
   private val full: Drawable
 
   private var _maxRating: Int = 5
@@ -85,10 +85,7 @@ open class BpkStarRatingBase internal constructor(
     }
 
     this.empty = getDrawable(empty, starColor)
-    this.half = HalfStarDrawable(
-      this.empty,
-      getDrawable(half, starFilledColor)
-    )
+    this.half = getDrawable(half, starFilledColor)
     this.full = getDrawable(full, starFilledColor)
     update()
   }
@@ -99,7 +96,7 @@ open class BpkStarRatingBase internal constructor(
   }
 
   private fun update() {
-    half.rtl = layoutDirection == View.LAYOUT_DIRECTION_RTL
+    half.isAutoMirrored = layoutDirection == View.LAYOUT_DIRECTION_RTL
 
     val diff = maxRating - childCount
     if (diff > 0) {
