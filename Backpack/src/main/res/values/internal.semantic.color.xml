@@ -18,7 +18,7 @@
   <color name="__panelBorder">@color/bpkSkyGrayTint06</color>
   <color name="__switchTrackDisabled">@color/bpkSkyGrayTint06</color>
   <color name="__switchThumbDisabled">@color/bpkSkyGrayTint07</color>
-  <color name="__starRatingStarColor">@color/bpkSkyGrayTint06</color>
+  <color name="__starRatingStarColor">@color/bpkSkyGrayTint04</color>
   <color name="__horizontalNavTextDefault">@color/bpkSkyGrayTint01</color>
   <color name="__textFieldText">@color/bpkSkyGrayTint01</color>
   <color name="__textFieldHint">@color/bpkSkyGrayTint04</color>

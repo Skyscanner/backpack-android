@@ -32,7 +32,7 @@ open class BpkStarRating @JvmOverloads constructor(
   context = createContextThemeWrapper(context, attrs, R.attr.bpkStarRatingStyle),
   attrs = attrs,
   defStyleAttr = defStyleAttr,
-  empty = R.drawable.bpk_star,
+  empty = R.drawable.bpk_star_outline,
   half = R.drawable.bpk_star_half,
   full = R.drawable.bpk_star,
   starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
