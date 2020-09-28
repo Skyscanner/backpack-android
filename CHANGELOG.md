@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 24.0.1
+
+**Fixed:**
+  - `BpkStarRating`
+    - Half-star icon is now not filled
+    - Colours update
+    - Empty icon is now outline
+
 # 24.0.0
 
 **Breaking:**
