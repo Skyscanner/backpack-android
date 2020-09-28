@@ -5,6 +5,8 @@
 **Fixed:**
   - `BpkStarRating`
     - Half-star icon is now not filled
+    - Colours update
+    - Empty icon is now outline
 
 ## How to write a good changelog entry
 

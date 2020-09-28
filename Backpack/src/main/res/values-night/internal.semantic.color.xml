@@ -18,7 +18,7 @@
   <color name="__panelBorder">@color/bpkLineDark</color>
   <color name="__switchTrackDisabled">@color/bpkBlackTint02</color>
   <color name="__switchThumbDisabled">@color/bpkBlackTint05</color>
-  <color name="__starRatingStarColor">@color/bpkLineDark</color>
+  <color name="__starRatingStarColor">@color/bpkBlackTint05</color>
   <color name="__horizontalNavTextDefault">@color/bpkTextTertiaryDark</color>
   <color name="__textFieldText">@color/bpkTextPrimaryDark</color>
   <color name="__textFieldHint">@color/bpkTextTertiaryDark</color>
