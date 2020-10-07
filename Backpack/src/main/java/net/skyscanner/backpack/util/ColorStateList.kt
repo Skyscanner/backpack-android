@@ -19,6 +19,24 @@
 package net.skyscanner.backpack.util
 
 import android.content.res.ColorStateList
+import androidx.annotation.ColorInt
 
 internal fun ColorStateList.getColorForState(state: IntArray) =
   getColorForState(state, defaultColor)
+
+internal inline fun colorStateList(
+  @ColorInt color: Int,
+  @ColorInt pressedColor: Int,
+  @ColorInt focusedColor: Int = pressedColor,
+  @ColorInt activatedColor: Int = pressedColor,
+  @ColorInt disabledColor: Int
+) = ColorStateList(
+  arrayOf(
+    intArrayOf(-android.R.attr.state_enabled),
+    intArrayOf(android.R.attr.state_pressed),
+    intArrayOf(android.R.attr.state_focused),
+    intArrayOf(android.R.attr.state_activated),
+    intArrayOf()
+  ),
+  intArrayOf(disabledColor, pressedColor, focusedColor, activatedColor, color)
+)

@@ -18,31 +18,31 @@
 
 package net.skyscanner.backpack.button
 
-import android.animation.AnimatorInflater
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import androidx.annotation.*
-import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.*
 import net.skyscanner.backpack.util.use
-import net.skyscanner.backpack.util.ResourcesUtil
-import net.skyscanner.backpack.util.darken
 import net.skyscanner.backpack.util.unsafeLazy
 
-open class BpkButton : BpkButtonBase {
-  constructor(context: Context) : this(context, null)
-  constructor(context: Context, type: Type) : this(context, null, getStyle(type), type)
-  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, getStyle(context, attrs))
+open class BpkButton(
+  context: Context,
+  attrs: AttributeSet?,
+  defStyleAttr: Int,
+  type: Type
+) : BpkButtonBase(context, attrs, defStyleAttr) {
+
+  constructor(context: Context) : this(context, null, 0, Type.Primary)
+
+  constructor(context: Context, type: Type) : this(context, null, 0, type)
+
+  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0, getButtonType(context, attrs))
+
   constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary)
-  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, type: Type) :
-    super(context, attrs, defStyleAttr) {
-    this.initialType = type
-    initialize(attrs, defStyleAttr)
-  }
 
   companion object {
     const val START = ICON_POSITION_START
@@ -60,39 +60,11 @@ open class BpkButton : BpkButtonBase {
       super.iconPosition = value
     }
 
-  private var initialType: Type
-
-  @ColorInt
-  private var buttonBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkMonteverde)
-
-  @ColorInt
-  private var buttonStrokeColor: Int = ContextCompat.getColor(context, android.R.color.transparent)
-
-  @ColorInt
-  private var buttonStrokeColorPressed: Int = buttonStrokeColor
-
   @Dimension
   private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
 
   @Dimension
   private val paddingVertical = tokens.bpkSpacingMd + (tokens.bpkBorderSizeLg / 2)
-
-  @Dimension
-  private var cornerRadius = context.resources.getDimension(R.dimen.bpkSpacingSm)
-
-  @Dimension
-  private var iconOnlyCornerRadius = context.resources.getDimension(R.dimen.bpkSpacingLg)
-
-  @Dimension
-  private val strokeWidthNormal = tokens.bpkBorderSizeLg
-
-  @Dimension
-  private val strokeWidthSelected = tokens.bpkBorderSizeLg + ResourcesUtil.dpToPx(1, context)
-
-  val type: Type
-    get() {
-      return initialType
-    }
 
   private var _icon: Drawable? = super.icon
   final override var icon: Drawable?
@@ -126,29 +98,31 @@ open class BpkButton : BpkButtonBase {
       }
     }
 
+  private var style = type.createStyle(context)
+
+  var type: Type = type
+    set(value) {
+      field = value
+      style = type.createStyle(context)
+      update()
+    }
+
+  init {
+    initialize(attrs, defStyleAttr)
+  }
+
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var textColor = ContextCompat.getColor(context, R.color.bpkWhite)
+    var type = type
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       .use {
         if (it.hasValue(R.styleable.BpkButton_buttonType)) {
-          initialType = Type.fromId(it.getInt(R.styleable.BpkButton_buttonType, 0))
+          type = Type.fromId(it.getInt(R.styleable.BpkButton_buttonType, 0))
         }
-
-        buttonBackgroundColor = it.getColor(R.styleable.BpkButton_buttonBackgroundColor, ContextCompat.getColor(context, type.bgColor))
-
-        buttonStrokeColor = it.getColor(R.styleable.BpkButton_buttonStrokeColor, ContextCompat.getColor(context, type.strokeColor))
-        buttonStrokeColorPressed = it.getColor(R.styleable.BpkButton_buttonStrokeColorPressed, ContextCompat.getColor(context, type.strokeColorSelected))
-
         _loading = it.getBoolean(R.styleable.BpkButton_buttonLoading, _loading)
-
-        textColor = it.getColor(R.styleable.BpkButton_buttonTextColor, ContextCompat.getColor(context, type.textColor))
       }
 
-    setTextColor(getColorSelector(
-      textColor,
-      darken(textColor, .1f),
-      ContextCompat.getColor(context, type.disabledTextColor)
-    ))
+    this.type = type
+    style = type.createStyle(context)
     update()
   }
 
@@ -170,10 +144,13 @@ open class BpkButton : BpkButtonBase {
       compoundDrawablePadding = tokens.bpkSpacingSm
     }
 
-    background = getButtonBackground()
+    background = style.getButtonBackground(iconPosition)
+    setTextColor(style.contentColor)
 
-    if (shouldSetStateListAnimator()) {
-      loadStateListAnimator(R.drawable.bpk_button_state_animator)
+    if (isEnabled && isStateListAnimatorSupported()) {
+      this.stateListAnimator = style.getStateListAnimator()
+    } else {
+      this.stateListAnimator = null
     }
 
     clipToOutline = true
@@ -199,96 +176,29 @@ open class BpkButton : BpkButtonBase {
     }
   }
 
-  @VisibleForTesting
-  internal fun disabledBackground(): Drawable {
-    return getRippleDrawable(
-      normalColor = ContextCompat.getColor(context, type.disabledBgColor),
-      cornerRadius = if (iconPosition == ICON_ONLY) iconOnlyCornerRadius else cornerRadius,
-      strokeWidth = null,
-      strokeColor = null
-    )
-  }
-
-  private fun getButtonBackground(): Drawable? {
-    return if (this.isEnabled) {
-      getRippleDrawable(
-        normalColor = buttonBackgroundColor,
-        cornerRadius = if (iconPosition == ICON_ONLY) iconOnlyCornerRadius else cornerRadius,
-        strokeWidth = strokeWidthForType(type),
-        strokeColor = getColorSelector(buttonStrokeColor, buttonStrokeColorPressed, buttonStrokeColor)
-      )
-    } else disabledBackground()
-  }
-
-  private fun strokeWidthForType(type: Type): StrokeWidth? =
-    when (type) {
-      BpkButton.Type.Secondary, BpkButton.Type.Destructive, BpkButton.Type.Outline ->
-        Pair(strokeWidthNormal, strokeWidthSelected)
-      else -> null
-    }
-
-  private fun shouldSetStateListAnimator() =
-    isEnabled && isElevationRequiredForType() && isStateListAnimatorSupported()
-
-  private fun isElevationRequiredForType() = type == Type.Primary || type == Type.Featured
-
-  private fun loadStateListAnimator(@DrawableRes animator: Int) {
-    this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, animator)
-  }
-
   enum class Type(
     internal val id: Int,
-    @ColorRes internal val bgColor: Int,
-    @ColorRes internal val textColor: Int,
-    @ColorRes internal val strokeColor: Int,
-    @ColorRes internal val strokeColorSelected: Int,
-    @ColorRes internal val disabledBgColor: Int,
-    @ColorRes internal val disabledTextColor: Int
+    internal val createStyle: (Context) -> ButtonStyle
   ) {
     Primary(
       id = 0,
-      bgColor = R.color.bpkMonteverde,
-      textColor = R.color.bpkWhite,
-      strokeColor = android.R.color.transparent,
-      strokeColorSelected = android.R.color.transparent,
-      disabledBgColor = R.color.__buttonDisabledBackground,
-      disabledTextColor = R.color.__buttonDisabledText
+      createStyle = ButtonStyles.Primary
     ),
     Secondary(
       id = 1,
-      bgColor = R.color.__buttonSecondaryBackground,
-      textColor = R.color.bpkPrimary,
-      strokeColor = R.color.__buttonSecondaryBorder,
-      strokeColorSelected = R.color.bpkPrimary,
-      disabledBgColor = R.color.__buttonDisabledBackground,
-      disabledTextColor = R.color.__buttonDisabledText
+      createStyle = ButtonStyles.Secondary
     ),
     Featured(
       id = 2,
-      bgColor = R.color.bpkSkyBlue,
-      textColor = R.color.bpkWhite,
-      strokeColor = android.R.color.transparent,
-      strokeColorSelected = android.R.color.transparent,
-      disabledBgColor = R.color.__buttonDisabledBackground,
-      disabledTextColor = R.color.__buttonDisabledText
+      createStyle = ButtonStyles.Featured
     ),
     Destructive(
       id = 3,
-      bgColor = R.color.__buttonSecondaryBackground,
-      textColor = R.color.bpkPanjin,
-      strokeColor = R.color.__buttonSecondaryBorder,
-      strokeColorSelected = R.color.bpkPanjin,
-      disabledBgColor = R.color.__buttonDisabledBackground,
-      disabledTextColor = R.color.__buttonDisabledText
+      createStyle = ButtonStyles.Destructive
     ),
     Outline(
       id = 4,
-      bgColor = android.R.color.transparent,
-      textColor = R.color.bpkWhite,
-      strokeColor = R.color.bpkWhite,
-      strokeColorSelected = R.color.bpkWhite,
-      disabledBgColor = R.color.bpkSkyGrayTint06,
-      disabledTextColor = R.color.bpkSkyGrayTint04
+      createStyle = ButtonStyles.Outline
     );
 
     internal companion object {
@@ -302,20 +212,9 @@ open class BpkButton : BpkButtonBase {
   }
 }
 
-private fun getStyle(context: Context, attrs: AttributeSet?): Int {
+private fun getButtonType(context: Context, attrs: AttributeSet?): BpkButton.Type {
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
-  val style = BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
-  return getStyle(style)
-}
-
-private fun getStyle(type: BpkButton.Type): Int {
-  return when (type) {
-    BpkButton.Type.Primary -> R.attr.bpkButtonPrimaryStyle
-    BpkButton.Type.Secondary -> R.attr.bpkButtonSecondaryStyle
-    BpkButton.Type.Outline -> R.attr.bpkButtonOutlineStyle
-    BpkButton.Type.Featured -> R.attr.bpkButtonFeaturedStyle
-    BpkButton.Type.Destructive -> R.attr.bpkButtonDestructiveStyle
-  }
+  return BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
 }
 
 private fun isStateListAnimatorSupported() =
