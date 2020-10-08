@@ -120,8 +120,8 @@ internal class ButtonStyle(
           )
         ) {
           val strokeAnimation = context.resources.getInteger(R.integer.bpkAnimationDurationSm)
-//          setEnterFadeDuration(strokeAnimation)
-//          setExitFadeDuration(strokeAnimation)
+          setEnterFadeDuration(strokeAnimation)
+          setExitFadeDuration(strokeAnimation)
         }
       )
   }

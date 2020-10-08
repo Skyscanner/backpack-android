@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
+import android.os.Build
 import android.util.StateSet
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
@@ -24,6 +25,11 @@ internal inline fun stateListDrawable(
   }
   addState(StateSet.WILD_CARD, drawable)
   block()
+  if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+    // see https://stackoverflow.com/questions/21085690/android-selector-with-fade-in-fade-out-duration-initially-invisible
+    setEnterFadeDuration(0)
+    setExitFadeDuration(0)
+  }
 }
 
 internal inline fun rippleDrawable(
