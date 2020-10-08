@@ -27,7 +27,6 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.*
 import net.skyscanner.backpack.util.use
-import net.skyscanner.backpack.util.unsafeLazy
 
 open class BpkButton(
   context: Context,
@@ -76,16 +75,19 @@ open class BpkButton(
       }
     }
 
-  private val _progress by unsafeLazy {
-    CircularProgressDrawable(context).apply {
-      setStyle(CircularProgressDrawable.DEFAULT)
-      centerRadius = resources.getDimension(R.dimen.bpkSpacingSm) * 1.3f
-      strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
-      val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
-      setColorSchemeColors(disabledColour)
-      start()
+  private var _progress: CircularProgressDrawable? = null
+  private val progress: CircularProgressDrawable
+    get() {
+      if (_progress == null) {
+        _progress = CircularProgressDrawable(context).apply {
+          setStyle(CircularProgressDrawable.DEFAULT)
+          centerRadius = resources.getDimension(R.dimen.bpkSpacingSm) * 1.3f
+          strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
+          start()
+        }
+      }
+      return _progress!!
     }
-  }
 
   private var _loading = false
   var loading: Boolean = false
@@ -98,32 +100,31 @@ open class BpkButton(
       }
     }
 
-  private var style = type.createStyle(context)
-
   var type: Type = type
     set(value) {
       field = value
-      style = type.createStyle(context)
+      applyStyle(type.createStyle(context))
       update()
     }
 
   init {
-    initialize(attrs, defStyleAttr)
-  }
-
-  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     var type = type
+    var style: ButtonStyle = type.createStyle(context)
+
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       .use {
         if (it.hasValue(R.styleable.BpkButton_buttonType)) {
           type = Type.fromId(it.getInt(R.styleable.BpkButton_buttonType, 0))
+          style = type.createStyle(context)
         }
+
+        style = ButtonStyle.fromAttributes(context, it, style)
         _loading = it.getBoolean(R.styleable.BpkButton_buttonLoading, _loading)
       }
 
+    this.clipToOutline = true
     this.type = type
-    style = type.createStyle(context)
-    update()
+    applyStyle(style)
   }
 
   override fun update() {
@@ -144,19 +145,10 @@ open class BpkButton(
       compoundDrawablePadding = tokens.bpkSpacingSm
     }
 
-    background = style.getButtonBackground(iconPosition)
-    setTextColor(style.contentColor)
-
-    if (isEnabled && isStateListAnimatorSupported()) {
-      this.stateListAnimator = style.getStateListAnimator()
-    } else {
-      this.stateListAnimator = null
-    }
-
-    clipToOutline = true
-
     if (loading) {
-      super.icon = _progress
+      val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
+      progress.setColorSchemeColors(disabledColour)
+      super.icon = progress
       super.setEnabled(false)
     } else {
       super.icon = _icon
@@ -174,6 +166,18 @@ open class BpkButton(
       this.enabled = enabled
       super.setEnabled(enabled)
     }
+  }
+
+  private fun applyStyle(style: ButtonStyle) {
+    background = style.getButtonBackground(iconPosition)
+    setTextColor(style.contentColor)
+
+    if (isEnabled && isStateListAnimatorSupported()) {
+      this.stateListAnimator = style.getStateListAnimator()
+    } else {
+      this.stateListAnimator = null
+    }
+    update()
   }
 
   enum class Type(
