@@ -22,7 +22,8 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
-import androidx.annotation.*
+import androidx.annotation.Dimension
+import androidx.annotation.IntDef
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.*

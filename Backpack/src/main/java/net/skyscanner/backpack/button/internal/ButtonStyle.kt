@@ -43,7 +43,7 @@ internal class ButtonStyle(
   @ColorInt private val strokeColorPressed: Int,
   @ColorInt private val disabledBgColor: Int,
   @ColorInt private val disabledTextColor: Int,
-  @DrawableRes private val stateListAnimatorRes: Int = 0
+  @DrawableRes private val stateListAnimatorRes: Int
 ) {
 
   private val strokeWidth = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
@@ -56,13 +56,9 @@ internal class ButtonStyle(
   )
 
   fun getStateListAnimator(): StateListAnimator? =
-    if (stateListAnimatorRes != 0) {
       AnimatorInflater.loadStateListAnimator(context, stateListAnimatorRes)
-    } else {
-      null
-    }
 
-  fun getButtonBackground(@BpkButton.IconPosition iconPosition: Int): Drawable? {
+  fun getButtonBackground(@BpkButton.IconPosition iconPosition: Int): Drawable {
 
     val resources = context.resources
 
@@ -82,26 +78,28 @@ internal class ButtonStyle(
       setStroke(strokeWidth, strokeColor)
     }
 
-    return rippleDrawable(
-      context = context,
-      mask = roundRectDrawable(Color.WHITE),
-      content = stateListDrawable(
-        pressed = roundRectDrawable(
-          color = bgColor,
-          strokeColor = strokeColorPressed,
-          strokeWidth = strokeWidthPressed
-        ),
-        disabled = roundRectDrawable(disabledBgColor),
-        drawable = roundRectDrawable(
-          color = bgColor,
-          strokeColor = strokeColor,
-          strokeWidth = strokeWidth
-        )
-      ) {
-        val strokeAnimation = context.resources.getInteger(R.integer.bpkAnimationDurationSm)
-        setEnterFadeDuration(strokeAnimation)
-        setExitFadeDuration(strokeAnimation)
-      }
+    return stateListDrawable(
+      disabled = roundRectDrawable(disabledBgColor),
+      drawable = rippleDrawable(
+        context = context,
+        mask = roundRectDrawable(Color.WHITE),
+        content = stateListDrawable(
+          pressed = roundRectDrawable(
+            color = bgColor,
+            strokeColor = strokeColorPressed,
+            strokeWidth = strokeWidthPressed
+          ),
+          drawable = roundRectDrawable(
+            color = bgColor,
+            strokeColor = strokeColor,
+            strokeWidth = strokeWidth
+          )
+        ) {
+          val strokeAnimation = context.resources.getInteger(R.integer.bpkAnimationDurationSm)
+          setEnterFadeDuration(strokeAnimation)
+          setExitFadeDuration(strokeAnimation)
+        }
+      )
     )
   }
 
@@ -116,7 +114,7 @@ internal class ButtonStyle(
       @ColorInt defaultStrokeColorPressed: Int,
       @ColorInt disabledBgColor: Int,
       @ColorInt disabledTextColor: Int,
-      @DrawableRes stateListAnimatorRes: Int = 0
+      @DrawableRes stateListAnimatorRes: Int
     ): ButtonStyle {
       var bgColor = defaultBgColor
       var textColor = defaultTextColor
@@ -151,7 +149,7 @@ internal class ButtonStyle(
       @ColorRes strokeColorPressedRes: Int,
       @ColorRes disabledBgColorRes: Int,
       @ColorRes disabledTextColorRes: Int,
-      @DrawableRes stateListAnimatorRes: Int = 0
+      @DrawableRes stateListAnimatorRes: Int = R.drawable.bpk_button_state_animator_zero
     ): ButtonStyle {
 
       var typedArray: TypedArray? = null
