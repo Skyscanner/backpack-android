@@ -228,6 +228,16 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  fun screenshotTestButtonTypeChange() {
+    val button = BpkButton(testContext, BpkButton.Type.Primary)
+    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.END
+    button.text = "Message"
+    button.type = BpkButton.Type.Secondary
+    snap(wrap(button, 500))
+  }
+
+  @Test
   fun screenshotTestButton_TextIncreasing() {
     val button = BpkButton(testContext, BpkButton.Type.Primary)
     button.text = "Message"
