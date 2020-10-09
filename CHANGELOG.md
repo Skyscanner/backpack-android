@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 24.1.0
+
+**Added:**
+  - `BpkButton`
+    - Type can now be changed programmatically.
+
 # 24.0.1
 
 **Fixed:**
