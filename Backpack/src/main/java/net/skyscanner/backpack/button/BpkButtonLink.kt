@@ -78,7 +78,7 @@ open class BpkButtonLink @JvmOverloads constructor(
       }
 
     val style = ButtonStyles.Link(context)
-    background = style.getButtonBackground(iconPosition)
+    background = style.getButtonBackground(isEnabled, iconPosition)
     setTextColor(style.contentColor)
     update()
   }

@@ -43,11 +43,9 @@ internal class ButtonStyle(
   @ColorInt private val strokeColorPressed: Int,
   @ColorInt private val disabledBgColor: Int,
   @ColorInt private val disabledTextColor: Int,
+  @Px private val strokeWidth: Int,
   @DrawableRes private val stateListAnimatorRes: Int
 ) {
-
-  private val strokeWidth = context.resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
-  private val strokeWidthPressed = strokeWidth + ResourcesUtil.dpToPx(1, context)
 
   val contentColor: ColorStateList = colorStateList(
     color = textColor,
@@ -58,14 +56,18 @@ internal class ButtonStyle(
   fun getStateListAnimator(): StateListAnimator? =
       AnimatorInflater.loadStateListAnimator(context, stateListAnimatorRes)
 
-  fun getButtonBackground(@BpkButton.IconPosition iconPosition: Int): Drawable {
-
-    val resources = context.resources
+  fun getButtonBackground(enabled: Boolean, @BpkButton.IconPosition iconPosition: Int): Drawable {
 
     val radius = if (iconPosition == BpkButton.ICON_ONLY) {
-      resources.getDimension(R.dimen.bpkSpacingLg)
+      context.resources.getDimension(R.dimen.bpkSpacingLg)
     } else {
-      resources.getDimension(R.dimen.bpkSpacingSm)
+      context.resources.getDimension(R.dimen.bpkSpacingSm)
+    }
+
+    val strokeWidthPressed = if (strokeWidth > 0) {
+      strokeWidth + ResourcesUtil.dpToPx(1, context)
+    } else {
+      0
     }
 
     fun roundRectDrawable(
@@ -78,9 +80,8 @@ internal class ButtonStyle(
       setStroke(strokeWidth, strokeColor)
     }
 
-    return stateListDrawable(
-      disabled = roundRectDrawable(disabledBgColor),
-      drawable = rippleDrawable(
+    if (enabled) {
+      return rippleDrawable(
         context = context,
         mask = roundRectDrawable(Color.WHITE),
         content = stateListDrawable(
@@ -100,7 +101,9 @@ internal class ButtonStyle(
           setExitFadeDuration(strokeAnimation)
         }
       )
-    )
+    } else {
+      return roundRectDrawable(disabledBgColor)
+    }
   }
 
   companion object {
@@ -114,6 +117,7 @@ internal class ButtonStyle(
       @ColorInt defaultStrokeColorPressed: Int,
       @ColorInt disabledBgColor: Int,
       @ColorInt disabledTextColor: Int,
+      @Px strokeWidth: Int,
       @DrawableRes stateListAnimatorRes: Int
     ): ButtonStyle {
       var bgColor = defaultBgColor
@@ -136,7 +140,8 @@ internal class ButtonStyle(
         strokeColorPressed = strokeColorPressed,
         disabledBgColor = disabledBgColor,
         disabledTextColor = disabledTextColor,
-        stateListAnimatorRes = stateListAnimatorRes
+        stateListAnimatorRes = stateListAnimatorRes,
+        strokeWidth = strokeWidth
       )
     }
 
@@ -145,10 +150,11 @@ internal class ButtonStyle(
       @AttrRes style: Int,
       @ColorRes bgColorRes: Int,
       @ColorRes textColorRes: Int,
-      @ColorRes strokeColorRes: Int,
-      @ColorRes strokeColorPressedRes: Int,
+      @ColorRes strokeColorRes: Int = android.R.color.transparent,
+      @ColorRes strokeColorPressedRes: Int = strokeColorRes,
       @ColorRes disabledBgColorRes: Int,
       @ColorRes disabledTextColorRes: Int,
+      @DimenRes strokeWidthRes: Int = R.dimen.bpk_internal_spacing_zero,
       @DrawableRes stateListAnimatorRes: Int = R.drawable.bpk_button_state_animator_zero
     ): ButtonStyle {
 
@@ -167,9 +173,10 @@ internal class ButtonStyle(
           defaultTextColor = ContextCompat.getColor(context, textColorRes),
           defaultStrokeColor = ContextCompat.getColor(context, strokeColorRes),
           defaultStrokeColorPressed = ContextCompat.getColor(context, strokeColorPressedRes),
-          stateListAnimatorRes = stateListAnimatorRes,
           disabledBgColor = ContextCompat.getColor(context, disabledBgColorRes),
-          disabledTextColor = ContextCompat.getColor(context, disabledTextColorRes)
+          disabledTextColor = ContextCompat.getColor(context, disabledTextColorRes),
+          strokeWidth = context.resources.getDimensionPixelSize(strokeWidthRes),
+          stateListAnimatorRes = stateListAnimatorRes
         )
       } finally {
         typedArray?.recycle()
@@ -189,6 +196,7 @@ internal class ButtonStyle(
       defaultStrokeColorPressed = fallback.strokeColorPressed,
       disabledBgColor = fallback.disabledBgColor,
       disabledTextColor = fallback.disabledTextColor,
+      strokeWidth = fallback.strokeWidth,
       stateListAnimatorRes = fallback.stateListAnimatorRes
     )
   }

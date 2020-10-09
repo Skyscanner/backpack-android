@@ -101,11 +101,17 @@ open class BpkButton(
       }
     }
 
+  private lateinit var style: ButtonStyle
+
+  private fun applyStyle(style: ButtonStyle) {
+    this.style = style
+    update()
+  }
+
   var type: Type = type
     set(value) {
       field = value
       applyStyle(type.createStyle(context))
-      update()
     }
 
   init {
@@ -140,6 +146,14 @@ open class BpkButton(
       paddingHorizontal = tokens.bpkSpacingMd
     }
 
+    background = style.getButtonBackground(isEnabled, iconPosition)
+    setTextColor(style.contentColor)
+
+    if (isEnabled && isStateListAnimatorSupported()) {
+      this.stateListAnimator = style.getStateListAnimator()
+    } else {
+      this.stateListAnimator = null
+    }
     setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
 
     if (!text.isNullOrEmpty()) {
@@ -167,18 +181,6 @@ open class BpkButton(
       this.enabled = enabled
       super.setEnabled(enabled)
     }
-  }
-
-  private fun applyStyle(style: ButtonStyle) {
-    background = style.getButtonBackground(iconPosition)
-    setTextColor(style.contentColor)
-
-    if (isEnabled && isStateListAnimatorSupported()) {
-      this.stateListAnimator = style.getStateListAnimator()
-    } else {
-      this.stateListAnimator = null
-    }
-    update()
   }
 
   enum class Type(

@@ -34,4 +34,5 @@
   <dimen name="bpk_chip_height">34sp</dimen>
   <dimen name="bpk_barchart_popup_triangle_width">12dp</dimen>
   <dimen name="bpk_barchart_popup_triangle_height">@dimen/bpkSpacingSm</dimen>
+  <dimen name="bpk_internal_spacing_zero">0dp</dimen>
 </resources>

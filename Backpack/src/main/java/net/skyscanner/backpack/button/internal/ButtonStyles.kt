@@ -29,8 +29,6 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonPrimaryStyle,
       bgColorRes = R.color.bpkMonteverde,
       textColorRes = R.color.bpkWhite,
-      strokeColorRes = R.color.bpkMonteverde,
-      strokeColorPressedRes = R.color.bpkMonteverde,
       disabledBgColorRes = R.color.__buttonDisabledBackground,
       disabledTextColorRes = R.color.__buttonDisabledText,
       stateListAnimatorRes = R.drawable.bpk_button_state_animator
@@ -45,6 +43,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       textColorRes = R.color.bpkPrimary,
       strokeColorRes = R.color.__buttonSecondaryBorder,
       strokeColorPressedRes = R.color.bpkPrimary,
+      strokeWidthRes = R.dimen.bpkBorderSizeLg,
       disabledBgColorRes = R.color.__buttonDisabledBackground,
       disabledTextColorRes = R.color.__buttonDisabledText
     )
@@ -56,8 +55,6 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonFeaturedStyle,
       bgColorRes = R.color.bpkSkyBlue,
       textColorRes = R.color.bpkWhite,
-      strokeColorRes = R.color.bpkSkyBlue,
-      strokeColorPressedRes = R.color.bpkSkyBlue,
       disabledBgColorRes = R.color.__buttonDisabledBackground,
       disabledTextColorRes = R.color.__buttonDisabledText,
       stateListAnimatorRes = R.drawable.bpk_button_state_animator
@@ -73,7 +70,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       strokeColorRes = R.color.__buttonSecondaryBorder,
       strokeColorPressedRes = R.color.bpkPanjin,
       disabledBgColorRes = R.color.__buttonDisabledBackground,
-      disabledTextColorRes = R.color.__buttonDisabledText
+      disabledTextColorRes = R.color.__buttonDisabledText,
+      strokeWidthRes = R.dimen.bpkBorderSizeLg
     )
   }
 
@@ -84,9 +82,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       bgColorRes = android.R.color.transparent,
       textColorRes = R.color.bpkWhite,
       strokeColorRes = R.color.bpkWhite,
-      strokeColorPressedRes = R.color.bpkWhite,
       disabledBgColorRes = R.color.bpkSkyGrayTint06,
-      disabledTextColorRes = R.color.bpkSkyGrayTint04
+      disabledTextColorRes = R.color.bpkSkyGrayTint04,
+      strokeWidthRes = R.dimen.bpkBorderSizeLg
     )
   }
 
@@ -96,8 +94,6 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonLinkStyle,
       bgColorRes = android.R.color.transparent,
       textColorRes = R.color.bpkPrimary,
-      strokeColorRes = android.R.color.transparent,
-      strokeColorPressedRes = android.R.color.transparent,
       disabledBgColorRes = android.R.color.transparent,
       disabledTextColorRes = R.color.__buttonDisabledText
     )
