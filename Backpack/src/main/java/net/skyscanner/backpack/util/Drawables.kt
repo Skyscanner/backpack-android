@@ -1,0 +1,73 @@
+/**
+ * Backpack for Android - Skyscanner's Design System
+ *
+ * Copyright 2018-2020 Skyscanner Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package net.skyscanner.backpack.util
+
+import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.RippleDrawable
+import android.graphics.drawable.StateListDrawable
+import android.os.Build
+import android.util.StateSet
+import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
+import net.skyscanner.backpack.R
+
+internal inline fun stateListDrawable(
+  drawable: Drawable,
+  disabled: Drawable? = null,
+  pressed: Drawable? = null,
+  block: StateListDrawable.() -> Unit = {}
+): StateListDrawable = StateListDrawable().apply {
+  if (disabled != null) {
+    addState(intArrayOf(-android.R.attr.state_enabled), disabled)
+  }
+  if (pressed != null) {
+    addState(intArrayOf(android.R.attr.state_pressed), pressed)
+  }
+  addState(StateSet.WILD_CARD, drawable)
+  block()
+  if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+    // see https://stackoverflow.com/questions/21085690/android-selector-with-fade-in-fade-out-duration-initially-invisible
+    setEnterFadeDuration(0)
+    setExitFadeDuration(0)
+  }
+}
+
+internal inline fun rippleDrawable(
+  context: Context,
+  content: Drawable,
+  mask: Drawable,
+  @ColorInt rippleColor: Int? = null
+): RippleDrawable {
+
+  val rippleColorStateList = if (rippleColor == null) {
+    val colorControlHighlight = resolveThemeColor(context, R.attr.colorControlHighlight)
+      ?: ContextCompat.getColor(context, R.color.bpkSkyGrayTint06)
+    ColorStateList.valueOf(colorControlHighlight)
+  } else {
+    ColorStateList.valueOf(rippleColor)
+  }
+
+  return RippleDrawable(
+    rippleColorStateList,
+    content,
+    mask
+  )
+}
