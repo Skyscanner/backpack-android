@@ -213,6 +213,17 @@
     <attr name="barChartPopupTextColor" format="color" />
   </declare-styleable>
 
+  <declare-styleable name="BpkOverlayView">
+    <attr name="overlayType" format="enum">
+      <enum name="none" value="0" />
+      <enum name="tint" value="1" />
+    </attr>
+    <attr name="overlayCornerType" format="enum">
+      <enum name="none" value="0" />
+      <enum name="rounded" value="1" />
+    </attr>
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />

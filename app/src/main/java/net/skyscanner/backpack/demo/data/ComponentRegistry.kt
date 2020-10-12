@@ -159,6 +159,7 @@ object ComponentRegistry {
         "With Menu" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu },
         "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL }
       )),
+    "Overlay" story NodeData { Story of R.layout.fragment_overlay },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
     "Rating" story NodeData({ children -> SubStory of children },
       mapOf(
