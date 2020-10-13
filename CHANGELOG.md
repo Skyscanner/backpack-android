@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 24.2.0
+
+**Added:**
+  - `BpkOverlay`
+
 # 24.1.0
 
 **Added:**
