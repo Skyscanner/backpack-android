@@ -46,6 +46,7 @@ The Backpack demo application is a good way of referring to the variants availab
 * [Interactive Star Rating](docs/InteractiveStarRating/README.md)
 * [Nav Bar](docs/NavBar/README.md)
 * [Panel](docs/Panel/README.md)
+* [Overlay](docs/Overlay/README.md)
 * [Rating](docs/Rating/README.md)
 * [Snackbar](docs/Snackbar/README.md)
 * [Spinner](docs/Spinner/README.md)

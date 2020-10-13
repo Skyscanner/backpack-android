@@ -65,6 +65,7 @@ object DocsRegistry {
     Screenshot("Nav Bar - Default", "expanded"),
     Screenshot("Nav Bar - Default", "collapsed", ::setupNavBarCollapsed),
     Screenshot("Nav Bar - With Menu", "navigation", ::setupNavBarCollapsed),
+    Screenshot("Overlay", "all"),
     Screenshot("Panel", "all"),
     Screenshot("Rating - Default", "default"),
     Screenshot("Rating - Sizes", "sizes"),
