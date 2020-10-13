@@ -6,7 +6,7 @@
   android:orientation="vertical"
   tools:ignore="HardcodedText">
 
-  <net.skyscanner.backpack.overlay.BpkOverlayView
+  <net.skyscanner.backpack.overlay.BpkOverlay
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -31,9 +31,9 @@
       android:textColor="@color/bpkWhite"
       app:textStyle="lg" />
 
-  </net.skyscanner.backpack.overlay.BpkOverlayView>
+  </net.skyscanner.backpack.overlay.BpkOverlay>
 
-  <net.skyscanner.backpack.overlay.BpkOverlayView
+  <net.skyscanner.backpack.overlay.BpkOverlay
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -57,6 +57,6 @@
       android:textColor="@color/bpkWhite"
       app:textStyle="lg" />
 
-  </net.skyscanner.backpack.overlay.BpkOverlayView>
+  </net.skyscanner.backpack.overlay.BpkOverlay>
 
 </LinearLayout>
