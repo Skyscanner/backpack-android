@@ -2,6 +2,25 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 24.2.0
+
+**Added:**
+  - `BpkOverlay`
+
+# 24.1.0
+
+**Added:**
+  - `BpkButton`
+    - Type can now be changed programmatically.
+
+# 24.0.1
+
+**Fixed:**
+  - `BpkStarRating`
+    - Half-star icon is now not filled
+    - Colours update
+    - Empty icon is now outline
+
 # 24.0.0
 
 **Breaking:**

@@ -80,19 +80,4 @@ class BpkButtonTest {
     }
     Assert.assertNotNull(button.compoundDrawablesRelative[0])
   }
-
-  @Test
-  fun test_enabled_state() {
-    val button = BpkButton(activity, BpkButton.Type.Primary).apply {
-      isEnabled = true
-    }
-    val newState = false
-    val expectedBackgroundState = button.disabledBackground()
-    button.isEnabled = newState
-
-    Assert.assertEquals(newState, button.isEnabled)
-    Assert.assertEquals(expectedBackgroundState.bounds, button.background.bounds)
-    Assert.assertEquals(expectedBackgroundState.alpha, button.background.alpha)
-    Assert.assertEquals(expectedBackgroundState.colorFilter, button.background.colorFilter)
-  }
 }

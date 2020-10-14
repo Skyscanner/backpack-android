@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/App.Story"
+  android:orientation="vertical"
+  tools:ignore="HardcodedText">
+
+  <net.skyscanner.backpack.overlay.BpkOverlay
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    app:overlayCornerType="rounded"
+    app:overlayType="tint">
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:adjustViewBounds="true"
+      android:scaleType="centerInside"
+      android:src="@drawable/canadian_rockies_canada" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="Rounded corners"
+      android:textColor="@color/bpkWhite"
+      app:textStyle="lg" />
+
+  </net.skyscanner.backpack.overlay.BpkOverlay>
+
+  <net.skyscanner.backpack.overlay.BpkOverlay
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    app:overlayCornerType="none"
+    app:overlayType="tint">
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:adjustViewBounds="true"
+      android:scaleType="centerInside"
+      android:src="@drawable/canadian_rockies_canada" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:text="No rounded corners"
+      android:textColor="@color/bpkWhite"
+      app:textStyle="lg" />
+
+  </net.skyscanner.backpack.overlay.BpkOverlay>
+
+</LinearLayout>

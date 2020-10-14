@@ -2,12 +2,6 @@
 
 > Place your changes below this line.
 
-**Fixed:**
-  - `BpkStarRating`
-    - Half-star icon is now not filled
-    - Colours update
-    - Empty icon is now outline
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
