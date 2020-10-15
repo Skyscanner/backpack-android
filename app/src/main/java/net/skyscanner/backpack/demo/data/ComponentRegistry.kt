@@ -168,7 +168,8 @@ object ComponentRegistry {
         "No selectors" story NodeData { Story of R.layout.fragment_rating_no_selectors },
         "Sizes" story NodeData { Story of R.layout.fragment_rating_sizes },
         "Sizes RTL" story NodeData { Story of R.layout.fragment_rating_sizes with Direction.RTL },
-        "Size Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical }
+        "Size Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical },
+        "Size Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill }
       )),
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Spinner" story NodeData({ children -> SubStory of children },

@@ -38,7 +38,7 @@ open class BpkRating private constructor(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int,
-  defaultOrientation: Orientation,
+  defaultStyle: Style,
   defaultSize: Size
 ) : ConstraintLayout(
   createContextThemeWrapper(context, attrs, R.attr.bpkRatingStyle), attrs, defStyleAttr
@@ -49,13 +49,13 @@ open class BpkRating private constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-  ) : this(context, attrs, defStyleAttr, Orientation.Horizontal, Size.Base)
+  ) : this(context, attrs, defStyleAttr, Style.Horizontal, Size.Base)
 
   constructor(
     context: Context,
-    orientation: Orientation,
+    style: Style,
     size: Size
-  ) : this(context, null, 0, orientation, size)
+  ) : this(context, null, 0, style, size)
 
   enum class Score {
     Low,
@@ -71,14 +71,15 @@ open class BpkRating private constructor(
     Large,
   }
 
-  enum class Orientation {
+  enum class Style {
     Horizontal,
-    Vertical
+    Vertical,
+    Pill,
   }
 
   private val score = RatingScore(this.context, attrs, defStyleAttr)
   private val selectors = RatingSelectors(this.context, attrs, defStyleAttr)
-  private val appearance = RatingAppearance(this.context, attrs, defStyleAttr, defaultOrientation, defaultSize)
+  private val appearance = RatingAppearance(this.context, attrs, defStyleAttr, defaultStyle, defaultSize)
 
   private val badge by unsafeLazy {
     findViewById<BpkText>(R.id.bpk_rating_badge).apply {
@@ -139,9 +140,10 @@ open class BpkRating private constructor(
     }
 
   init {
-    when (appearance.orientation) {
-      Orientation.Horizontal -> R.layout.view_bpk_rating_horizontal
-      Orientation.Vertical -> R.layout.view_bpk_rating_vertical
+    when (appearance.style) {
+      Style.Pill -> R.layout.view_bpk_rating_pill
+      Style.Horizontal -> R.layout.view_bpk_rating_horizontal
+      Style.Vertical -> R.layout.view_bpk_rating_vertical
     }.let {
       LayoutInflater.from(this.context).inflate(it, this, true)
     }
@@ -149,9 +151,10 @@ open class BpkRating private constructor(
     titleView.layoutParams = titleView.layoutParams
       .let { it as MarginLayoutParams }
       .apply {
-        when (appearance.orientation) {
-          Orientation.Horizontal -> marginStart = appearance.spacing
-          Orientation.Vertical -> topMargin = appearance.spacing
+        when (appearance.style) {
+          Style.Horizontal -> marginStart = appearance.spacing
+          Style.Pill -> marginStart = appearance.spacing
+          Style.Vertical -> topMargin = appearance.spacing
         }
       }
 

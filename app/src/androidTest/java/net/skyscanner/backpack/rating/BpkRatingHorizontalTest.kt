@@ -27,7 +27,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkRatingHorizontalTest : BpkSnapshotTest() {
 
-  private val orientation = BpkRating.Orientation.Horizontal
+  private val style = BpkRating.Style.Horizontal
 
   @Before
   fun setup() {
@@ -36,37 +36,37 @@ class BpkRatingHorizontalTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestRating_Default() {
-    val subject = createTestRating(testContext, orientation = orientation)
+    val subject = createTestRating(testContext, style = style)
     snap(subject)
   }
 
   @Test
   fun screenshotTestRating_Icon() {
-    val subject = createTestRating(testContext, orientation = orientation, size = BpkRating.Size.Icon)
+    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Icon)
     snap(subject)
   }
 
   @Test
   fun screenshotTestRating_ExtraSmall() {
-    val subject = createTestRating(testContext, orientation = orientation, size = BpkRating.Size.ExtraSmall)
+    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.ExtraSmall)
     snap(subject)
   }
 
   @Test
   fun screenshotTestRating_Small() {
-    val subject = createTestRating(testContext, orientation = orientation, size = BpkRating.Size.Small)
+    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Small)
     snap(subject)
   }
 
   @Test
   fun screenshotTestRating_Base() {
-    val subject = createTestRating(testContext, orientation = orientation, size = BpkRating.Size.Base)
+    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Base)
     snap(subject)
   }
 
   @Test
   fun screenshotTestRating_Large() {
-    val subject = createTestRating(testContext, orientation = orientation, size = BpkRating.Size.Large)
+    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
     snap(subject)
   }
 
@@ -78,31 +78,31 @@ class BpkRatingHorizontalTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestRating_IconRtl() {
-    val subject = createTestRating(testContext, rtl = true, orientation = orientation, size = BpkRating.Size.Icon)
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.Icon)
     snap(subject)
   }
 
   @Test
   fun screenshotTestRating_ExtraSmallRtl() {
-    val subject = createTestRating(testContext, rtl = true, orientation = orientation, size = BpkRating.Size.ExtraSmall)
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.ExtraSmall)
     snap(subject)
   }
 
   @Test
   fun screenshotTestRating_SmallRtl() {
-    val subject = createTestRating(testContext, rtl = true, orientation = orientation, size = BpkRating.Size.Small)
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.Small)
     snap(subject)
   }
 
   @Test
   fun screenshotTestRating_BaseRtl() {
-    val subject = createTestRating(testContext, rtl = true, orientation = orientation, size = BpkRating.Size.Base)
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.Base)
     snap(subject)
   }
 
   @Test
   fun screenshotTestRating_LargeRtl() {
-    val subject = createTestRating(testContext, rtl = true, orientation = orientation, size = BpkRating.Size.Large)
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.Large)
     snap(subject)
   }
 }

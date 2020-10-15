@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/bpk_rating_badge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bpk_bg_rating_badge"
+    android:ellipsize="end"
+    android:gravity="center"
+    android:maxLines="1"
+    android:textColor="@color/bpkWhite"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:backgroundTint="@color/bpkMonteverde"
+    tools:layout_height="@dimen/bpk_rating_score_badge_size_large"
+    tools:layout_width="@dimen/bpk_rating_score_badge_size_large"
+    tools:text="9.0"
+    tools:textStyle="lg"
+    tools:weight="emphasized" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/bpk_rating_title"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/bpkSpacingMd"
+    android:ellipsize="end"
+    android:gravity="start"
+    android:maxLines="1"
+    android:textColor="@color/bpkTextPrimary"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/bpk_rating_badge"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="Excellent"
+    tools:textStyle="lg"
+    tools:weight="emphasized" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/bpk_rating_subtitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/bpkSpacingSm"
+    android:ellipsize="end"
+    android:gravity="start"
+    android:maxLines="1"
+    android:textColor="@color/bpkTextSecondary"
+    app:layout_constrainedWidth="true"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@+id/bpk_rating_title"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="This layout uses mocked attributes for preview"
+    tools:textStyle="Base"
+    tools:visibility="visible"
+    tools:weight="normal" />
+
+</merge>

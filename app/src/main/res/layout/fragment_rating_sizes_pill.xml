@@ -11,7 +11,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:ratingSize="large"
-    app:ratingStyle="vertical"
+    app:ratingStyle="pill"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="Large"
     app:ratingValue="9.0" />
@@ -21,7 +21,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:ratingSize="base"
-    app:ratingStyle="vertical"
+    app:ratingStyle="pill"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="Base"
     app:ratingValue="9.0" />
@@ -31,7 +31,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:ratingSize="small"
-    app:ratingStyle="vertical"
+    app:ratingStyle="pill"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="Small"
     app:ratingValue="9.0" />
@@ -41,7 +41,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:ratingSize="extra_small"
-    app:ratingStyle="vertical"
+    app:ratingStyle="pill"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="Extra Small"
     app:ratingValue="9.0" />
@@ -52,7 +52,7 @@
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:ratingIcon="@drawable/bpk_star"
     app:ratingSize="icon"
-    app:ratingStyle="vertical"
+    app:ratingStyle="pill"
     app:ratingSubtitle="@array/rating_sample_subtitles"
     app:ratingTitle="Icon"
     app:ratingValue="9.0" />

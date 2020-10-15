@@ -26,12 +26,12 @@ import net.skyscanner.backpack.demo.R
 
 internal fun createTestRating(
   context: Context,
-  orientation: BpkRating.Orientation = BpkRating.Orientation.Horizontal,
+  style: BpkRating.Style = BpkRating.Style.Horizontal,
   size: BpkRating.Size = BpkRating.Size.Base,
   value: Float = 7f,
   rtl: Boolean = false
 ) =
-  BpkRating(context, orientation, size).apply {
+  BpkRating(context, style, size).apply {
     icon = {
       when (it) {
         BpkRating.Score.Low -> context.getDrawable(R.drawable.bpk_star_outline)
