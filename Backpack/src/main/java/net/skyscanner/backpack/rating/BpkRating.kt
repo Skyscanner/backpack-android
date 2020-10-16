@@ -84,9 +84,7 @@ open class BpkRating private constructor(
   private val badge by unsafeLazy {
     findViewById<BpkText>(R.id.bpk_rating_badge).apply {
       appearance.score.applyTo(this)
-      appearance.badgeSize.let {
-        minHeight = it
-        maxHeight = it
+      appearance.badgeWidth.let {
         minWidth = it
         maxWidth = it
       }
@@ -176,7 +174,7 @@ open class BpkRating private constructor(
         ?.let {
           val size = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
           it.setBounds(0, 0, size, size)
-          val drawablePadding = (appearance.badgeSize - size) / 2
+          val drawablePadding = (appearance.badgeWidth - size) / 2
           badge.setPaddingRelative(drawablePadding, 0, drawablePadding, 0)
           badge.setCompoundDrawablesRelative(it, null, null, null)
           // todo: move this to badge initialization then we have consistent behaviour of setDrawableTint

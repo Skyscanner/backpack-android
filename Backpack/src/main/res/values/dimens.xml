@@ -10,6 +10,7 @@
   <dimen name="bpk_horizontal_nav_size_normal">36dp</dimen>
   <dimen name="bpk_rating_score_badge_size_small">36dp</dimen>
   <dimen name="bpk_rating_score_badge_size_large">48dp</dimen>
+  <dimen name="bpk_rating_score_pill_width_large">64dp</dimen>
   <dimen name="bpk_nav_bar_toolbar_height">48dp</dimen>
   <dimen name="bpk_nav_bar_expanded_spacing_horizontal_large">72dp</dimen>
   <dimen name="bpk_nav_bar_expanded_spacing_horizontal_small">@dimen/bpkSpacingLg</dimen>

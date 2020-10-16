@@ -24,6 +24,7 @@ import net.skyscanner.backpack.text.BpkText
 
 internal enum class RatingStyles(
   @DimenRes val badgeSize: Int,
+  @DimenRes val pillWidth: Int,
   @BpkText.Styles val scoreSize: Int,
   @BpkText.Styles val titleSize: Int,
   @BpkText.Styles val subtitleSize: Int?,
@@ -31,6 +32,7 @@ internal enum class RatingStyles(
 ) {
   Icon(
     badgeSize = R.dimen.bpkSpacingLg,
+    pillWidth = R.dimen.bpkSpacingXl,
     scoreSize = BpkText.SM,
     titleSize = BpkText.XS,
     subtitleSize = null,
@@ -38,6 +40,7 @@ internal enum class RatingStyles(
   ),
   ExtraSmall(
     badgeSize = R.dimen.bpkSpacingXl,
+    pillWidth = R.dimen.bpkSpacingXl,
     scoreSize = BpkText.SM,
     titleSize = BpkText.XS,
     subtitleSize = null,
@@ -45,6 +48,7 @@ internal enum class RatingStyles(
   ),
   Small(
     badgeSize = R.dimen.bpk_rating_score_badge_size_small,
+    pillWidth = R.dimen.bpkSpacingXl,
     scoreSize = BpkText.SM,
     titleSize = BpkText.SM,
     subtitleSize = BpkText.XS,
@@ -52,6 +56,7 @@ internal enum class RatingStyles(
   ),
   Base(
     badgeSize = R.dimen.bpkSpacingXxl,
+    pillWidth = R.dimen.bpk_rating_score_badge_size_large,
     scoreSize = BpkText.BASE,
     titleSize = BpkText.BASE,
     subtitleSize = BpkText.SM,
@@ -59,6 +64,7 @@ internal enum class RatingStyles(
   ),
   Large(
     badgeSize = R.dimen.bpk_rating_score_badge_size_large,
+    pillWidth = R.dimen.bpk_rating_score_pill_width_large,
     scoreSize = BpkText.LG,
     titleSize = BpkText.LG,
     subtitleSize = BpkText.BASE,

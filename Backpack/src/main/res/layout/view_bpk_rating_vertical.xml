@@ -9,7 +9,7 @@
   <net.skyscanner.backpack.text.BpkText
     android:id="@+id/bpk_rating_badge"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
     android:background="@drawable/bpk_bg_rating_badge"
     android:ellipsize="end"
     android:gravity="center"
@@ -18,6 +18,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintDimensionRatio="1:1"
     tools:backgroundTint="@color/bpkMonteverde"
     tools:layout_height="@dimen/bpk_rating_score_badge_size_large"
     tools:layout_width="@dimen/bpk_rating_score_badge_size_large"

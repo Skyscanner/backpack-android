@@ -45,7 +45,7 @@ internal class RatingAppearance(
   val subtitle: BpkText.FontDefinition?
 
   @Px
-  val badgeSize: Int
+  val badgeWidth: Int
 
   @Px
   val spacing: Int
@@ -72,8 +72,12 @@ internal class RatingAppearance(
     this.title = BpkText.getFont(context, styles.titleSize, BpkText.Weight.EMPHASIZED)
     this.subtitle = styles.subtitleSize?.let { BpkText.getFont(context, it, BpkText.Weight.NORMAL) }
     this.score = BpkText.getFont(context, styles.scoreSize, BpkText.Weight.EMPHASIZED)
-    this.badgeSize = context.resources.getDimensionPixelSize(styles.badgeSize)
     this.spacing = context.resources.getDimensionPixelSize(styles.spacing)
+    this.badgeWidth = when (style) {
+      BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.pillWidth)
+      BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.badgeSize)
+      BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.badgeSize)
+    }
   }
 
   private val BpkRating.Style.xmlId
