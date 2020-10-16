@@ -2,6 +2,15 @@
 
 > Place your changes below this line.
 
+**Breaking:**
+  - `BpkRating`
+    - `ratingOrientation` XML attribute has been renamed to `ratingOrientation`
+    - `BpkRating.Orientation` XML attribute has been renamed to `BpkRating.Style`
+
+**Added:**
+  - `BpkRating`
+    - New style – `pill`
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
