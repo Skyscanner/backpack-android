@@ -29,7 +29,8 @@ internal enum class RatingStyles(
   @BpkText.Styles val scoreSize: Int,
   @BpkText.Styles val titleSize: Int,
   @BpkText.Styles val subtitleSize: Int?,
-  @DimenRes val spacing: Int
+  @DimenRes val spacing: Int,
+  @DimenRes val spacingPill: Int
 ) {
   Icon(
     badgeSize = R.dimen.bpkSpacingLg,
@@ -38,7 +39,8 @@ internal enum class RatingStyles(
     scoreSize = BpkText.SM,
     titleSize = BpkText.XS,
     subtitleSize = null,
-    spacing = R.dimen.bpkSpacingSm
+    spacing = R.dimen.bpkSpacingSm,
+    spacingPill = R.dimen.bpkSpacingMd
   ),
   ExtraSmall(
     badgeSize = R.dimen.bpkSpacingXl,
@@ -47,7 +49,8 @@ internal enum class RatingStyles(
     scoreSize = BpkText.SM,
     titleSize = BpkText.XS,
     subtitleSize = null,
-    spacing = R.dimen.bpkSpacingSm
+    spacing = R.dimen.bpkSpacingSm,
+    spacingPill = R.dimen.bpkSpacingMd
   ),
   Small(
     badgeSize = R.dimen.bpk_rating_score_badge_size_small,
@@ -56,7 +59,8 @@ internal enum class RatingStyles(
     scoreSize = BpkText.SM,
     titleSize = BpkText.SM,
     subtitleSize = BpkText.XS,
-    spacing = R.dimen.bpkSpacingMd
+    spacing = R.dimen.bpkSpacingMd,
+    spacingPill = R.dimen.bpkSpacingMd
   ),
   Base(
     badgeSize = R.dimen.bpkSpacingXxl,
@@ -65,7 +69,8 @@ internal enum class RatingStyles(
     scoreSize = BpkText.BASE,
     titleSize = BpkText.BASE,
     subtitleSize = BpkText.SM,
-    spacing = R.dimen.bpkSpacingMd
+    spacing = R.dimen.bpkSpacingMd,
+    spacingPill = R.dimen.bpk_rating_score_pill_spacing_medium
   ),
   Large(
     badgeSize = R.dimen.bpk_rating_score_badge_size_large,
@@ -74,6 +79,7 @@ internal enum class RatingStyles(
     scoreSize = BpkText.LG,
     titleSize = BpkText.LG,
     subtitleSize = BpkText.BASE,
-    spacing = R.dimen.bpkSpacingMd
+    spacing = R.dimen.bpkSpacingMd,
+    spacingPill = R.dimen.bpkSpacingBase
   ),
 }

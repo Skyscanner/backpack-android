@@ -75,7 +75,11 @@ internal class RatingAppearance(
     this.title = BpkText.getFont(context, styles.titleSize, BpkText.Weight.EMPHASIZED)
     this.subtitle = styles.subtitleSize?.let { BpkText.getFont(context, it, BpkText.Weight.NORMAL) }
     this.score = BpkText.getFont(context, styles.scoreSize, BpkText.Weight.EMPHASIZED)
-    this.spacing = context.resources.getDimensionPixelSize(styles.spacing)
+    this.spacing = when (style) {
+      BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.spacingPill)
+      BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.spacing)
+      BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.spacing)
+    }
     this.badgeWidth = when (style) {
       BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.pillWidth)
       BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.badgeSize)
