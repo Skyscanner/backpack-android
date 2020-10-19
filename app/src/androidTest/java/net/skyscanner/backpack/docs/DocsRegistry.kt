@@ -70,7 +70,7 @@ object DocsRegistry {
     Screenshot("Rating - Default", "default"),
     Screenshot("Rating - Horizontal", "sizes"),
     Screenshot("Rating - Vertical", "vertical"),
-    Screenshot("Rating - Pill", "vertical"),
+    Screenshot("Rating - Pill", "pill"),
     Screenshot("Snackbar", "default", ::setupSnackbar),
     Screenshot("Snackbar", "icon", ::setupSnackbarIconAction),
     Screenshot("Star Rating - Default", "default"),
