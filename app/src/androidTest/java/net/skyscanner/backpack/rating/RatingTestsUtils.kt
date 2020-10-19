@@ -22,6 +22,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.demo.R
 
 internal fun createTestRating(
@@ -34,23 +35,31 @@ internal fun createTestRating(
   BpkRating(context, style, size).apply {
     icon = {
       when (it) {
-        BpkRating.Score.Low -> context.getDrawable(R.drawable.bpk_star_outline)
-        BpkRating.Score.Medium -> context.getDrawable(R.drawable.bpk_star_half)
-        BpkRating.Score.High -> context.getDrawable(R.drawable.bpk_star)
+        BpkRating.Score.Low -> AppCompatResources.getDrawable(context, R.drawable.bpk_star_outline)
+        BpkRating.Score.Medium -> AppCompatResources.getDrawable(context, R.drawable.bpk_star_half)
+        BpkRating.Score.High -> AppCompatResources.getDrawable(context, R.drawable.bpk_star)
       }
     }
     title = {
+      val array = resources.getStringArray(
+        if (rtl) R.array.rating_sample_titles_rtl else R.array.rating_sample_titles
+      )
+
       when (it) {
-        BpkRating.Score.Low -> "Low"
-        BpkRating.Score.Medium -> "Medium"
-        BpkRating.Score.High -> "High"
+        BpkRating.Score.Low -> array[0]
+        BpkRating.Score.Medium -> array[1]
+        BpkRating.Score.High -> array[2]
       }
     }
     subtitle = {
+      val array = resources.getStringArray(
+        if (rtl) R.array.rating_sample_subtitles_rtl else R.array.rating_sample_subtitles
+      )
+
       when (it) {
-        BpkRating.Score.Low -> "Sub Low"
-        BpkRating.Score.Medium -> "Sub Medium"
-        BpkRating.Score.High -> "Sub High"
+        BpkRating.Score.Low -> array[0]
+        BpkRating.Score.Medium -> array[1]
+        BpkRating.Score.High -> array[2]
       }
     }
     this.value = value

@@ -169,8 +169,7 @@ object ComponentRegistry {
         "Horizontal" story NodeData { Story of R.layout.fragment_rating_sizes },
         "Horizontal RTL" story NodeData { Story of R.layout.fragment_rating_sizes with Direction.RTL },
         "Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical },
-        "Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill },
-        "Pill RTL" story NodeData { Story of R.layout.fragment_rating_sizes_pill with Direction.RTL }
+        "Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill }
       )),
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Spinner" story NodeData({ children -> SubStory of children },

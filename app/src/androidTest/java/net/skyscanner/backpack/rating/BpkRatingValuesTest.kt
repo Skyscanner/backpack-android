@@ -29,7 +29,7 @@ class BpkRatingValuesTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(150, 150)
+    setDimensions(100, 200)
   }
 
   @Test

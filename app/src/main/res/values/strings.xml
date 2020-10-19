@@ -38,6 +38,18 @@
     <item>High Subtitle</item>
   </string-array>
 
+  <string-array name="rating_sample_titles_rtl">
+    <item>عنوان منخفض</item>
+    <item>عنوان متوسط</item>
+    <item>عنوان مرتفع</item>
+  </string-array>
+
+  <string-array name="rating_sample_subtitles_rtl">
+    <item>ترجمة منخفضة fd</item>
+    <item>ترجمة متوسطة</item>
+    <item>ترجمة عالية</item>
+  </string-array>
+
   <string name="bottom_nav_home">Home</string>
   <string name="bottom_nav_explore">Explore</string>
   <string name="bottom_nav_trips">Trips</string>

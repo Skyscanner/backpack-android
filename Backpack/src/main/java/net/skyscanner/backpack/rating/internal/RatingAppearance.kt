@@ -48,6 +48,9 @@ internal class RatingAppearance(
   val badgeWidth: Int
 
   @Px
+  val badgeHeight: Int
+
+  @Px
   val spacing: Int
 
   init {
@@ -75,6 +78,11 @@ internal class RatingAppearance(
     this.spacing = context.resources.getDimensionPixelSize(styles.spacing)
     this.badgeWidth = when (style) {
       BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.pillWidth)
+      BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.badgeSize)
+      BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.badgeSize)
+    }
+    this.badgeHeight = when (style) {
+      BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.pillHeight)
       BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.badgeSize)
       BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.badgeSize)
     }

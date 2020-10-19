@@ -88,6 +88,10 @@ open class BpkRating private constructor(
         minWidth = it
         maxWidth = it
       }
+      appearance.badgeHeight.let {
+        minHeight = it
+        maxHeight = it
+      }
     }
   }
 

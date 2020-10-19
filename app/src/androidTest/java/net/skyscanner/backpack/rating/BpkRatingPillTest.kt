@@ -25,13 +25,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkRatingHorizontalTest : BpkSnapshotTest() {
+class BpkRatingPillTest : BpkSnapshotTest() {
 
-  private val style = BpkRating.Style.Horizontal
+  private val style = BpkRating.Style.Pill
 
   @Before
   fun setup() {
-    setDimensions(100, 200)
+    setDimensions(150, 300)
   }
 
   @Test
@@ -72,7 +72,7 @@ class BpkRatingHorizontalTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestRating_DefaultRtl() {
-    val subject = createTestRating(testContext, rtl = true)
+    val subject = createTestRating(testContext, style = style, rtl = true)
     snap(subject)
   }
 
@@ -103,6 +103,20 @@ class BpkRatingHorizontalTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestRating_LargeRtl() {
     val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.Large)
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_TitleOverflow() {
+    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
+    subject.title = { "Loooooooooooooooong title" }
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_SubtitleOverflow() {
+    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
+    subject.subtitle = { "Looooooooooooooooooooooooooooong subtitle" }
     snap(subject)
   }
 }
