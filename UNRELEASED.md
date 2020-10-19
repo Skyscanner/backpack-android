@@ -4,7 +4,7 @@
 
 **Breaking:**
   - `BpkRating`
-    - `ratingOrientation` XML attribute has been renamed to `ratingOrientation`
+    - `ratingOrientation` XML attribute has been renamed to `ratingStyle`
     - `BpkRating.Orientation` XML attribute has been renamed to `BpkRating.Style`
 
 **Added:**
