@@ -59,9 +59,9 @@ internal class ButtonStyle(
   fun getButtonBackground(enabled: Boolean, @BpkButton.IconPosition iconPosition: Int): Drawable {
 
     val radius = if (iconPosition == BpkButton.ICON_ONLY) {
-      context.resources.getDimension(R.dimen.bpkSpacingLg)
+      context.resources.getDimension(R.dimen.bpkBorderRadiusLg)
     } else {
-      context.resources.getDimension(R.dimen.bpkSpacingSm)
+      context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
     }
 
     val strokeWidthPressed = if (strokeWidth > 0) {
