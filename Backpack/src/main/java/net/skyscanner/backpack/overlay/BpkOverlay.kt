@@ -54,7 +54,7 @@ open class BpkOverlay @JvmOverloads constructor(
     Rounded(
       id = 1,
       clipToOutline = true,
-      outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusSm)
+      outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs)
     ),
   }
 

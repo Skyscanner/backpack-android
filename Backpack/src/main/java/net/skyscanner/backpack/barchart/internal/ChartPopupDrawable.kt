@@ -47,7 +47,7 @@ internal class ChartPopupDrawable(
     lineTo(0f, -1f)
   }
 
-  private val borderRadius = resources.getDimension(R.dimen.bpkBorderRadiusSm)
+  private val borderRadius = resources.getDimension(R.dimen.bpkBorderRadiusXs)
   private val blockHeight = resources.getDimension(R.dimen.bpkSpacingXl)
 
   private val textSpacing = resources.getDimension(R.dimen.bpkSpacingMd) + resources.getDimension(R.dimen.bpkSpacingSm)

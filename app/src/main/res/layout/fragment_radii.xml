@@ -5,11 +5,44 @@
   android:orientation="vertical">
 
   <net.skyscanner.backpack.text.BpkText
-    android:layout_marginTop="@dimen/bpkSpacingXl"
+    android:layout_marginTop="@dimen/bpkSpacingSm"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_radius_xs"
+    android:text="\@dimen/bpkBorderRadiusXs"
+    android:textColor="@color/bpkWhite"
+    android:textAlignment="center"
+    android:padding="@dimen/bpkSpacingBase"
+    app:textStyle="lg"/>
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_marginTop="@dimen/bpkSpacingSm"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/border_radius_sm"
     android:text="\@dimen/bpkBorderRadiusSm"
+    android:textColor="@color/bpkWhite"
+    android:textAlignment="center"
+    android:padding="@dimen/bpkSpacingBase"
+    app:textStyle="lg"/>
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_marginTop="@dimen/bpkSpacingXl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_radius_md"
+    android:text="\@dimen/bpkBorderRadiusMd"
+    android:textColor="@color/bpkWhite"
+    android:textAlignment="center"
+    android:padding="@dimen/bpkSpacingBase"
+    app:textStyle="lg"/>
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_marginTop="@dimen/bpkSpacingXl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_radius_lg"
+    android:text="\@dimen/bpkBorderRadiusLg"
     android:textColor="@color/bpkWhite"
     android:textAlignment="center"
     android:padding="@dimen/bpkSpacingBase"
