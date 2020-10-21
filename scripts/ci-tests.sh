@@ -25,7 +25,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   dir_name=""$date_str".$$"
 
   remote_screenshots_folder=""$bucket_name"/"$dir_name"/Nexus4-21-en-portrait/artifacts/sdcard/screenshots/net.skyscanner.backpack.test/screenshots-default"
-  local_screenshots_folder="app/build/test-labs-screenshots"
+  local_screenshots_folder="app/build/screenshotsOssDebugAndroidTest"
 
   gcloud firebase test android run \
       --type instrumentation \
