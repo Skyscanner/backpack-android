@@ -6,6 +6,7 @@ buildscript {
     google()
     jcenter()
     maven { url 'https://jitpack.io' }
+    maven { url 'https://plugins.gradle.org/m2/' }
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:4.0.1'
@@ -13,6 +14,7 @@ buildscript {
     classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:$dokka_version"
     classpath 'com.facebook.testing.screenshot:plugin:0.13.0'
+    classpath "org.jlleitschuh.gradle:ktlint-gradle:9.4.1"
   }
 }
 
@@ -24,27 +26,24 @@ allprojects {
 }
 
 subprojects {
-  afterEvaluate { project ->
-    task ktlint(type: JavaExec, group: "verification") {
-      description = "Check Kotlin code style."
-      classpath = configurations.lintClassPath
-      main = "com.pinterest.ktlint.Main"
+  apply plugin: "org.jlleitschuh.gradle.ktlint"
 
-      if (project.hasProperty("files")) {
-        args files.split(" ")
-      } else {
-        args "src/**/*.kt"
-      }
-      // to generate report in checkstyle format prepend following args:
-      // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
-      // see https://github.com/shyiko/ktlint#usage for more
+  ktlint {
+    version = "0.33.0"
+    android = true
+    enableExperimentalRules = false
+    ignoreFailures = true // this will be remove in another task
+    reporters {
+      reporter "checkstyle"
     }
+  }
 
-    task ktlintFormat(type: JavaExec, group: "formatting") {
-      description = "Fix Kotlin code style deviations."
-      classpath = configurations.lintClassPath
-      main = "com.pinterest.ktlint.Main"
-      args "-F", "src/**/*.kt"
+  afterEvaluate { project ->
+
+    // for backward compatibility, will be removed in another task
+    task ktlint(type: SourceTask, group: "verification") {
+      description = "Check Kotlin code style."
+      dependsOn(ktlintCheck)
     }
 
     check.dependsOn ktlint
