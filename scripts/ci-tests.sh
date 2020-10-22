@@ -49,7 +49,8 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   gsutil -m cp -r "gs://$remote_screenshots_folder" "$local_screenshots_folder"
 
   echo "Verifying screenshots..."
-  find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
+  ls app/build/screenshotsOssDebugAndroidTest
+#  find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
 
 elif [ "$TEST_METHOD" == "connected" ]; then
