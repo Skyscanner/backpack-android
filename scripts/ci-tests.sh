@@ -49,6 +49,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   gsutil -m cp -r "gs://$remote_screenshots_folder" "$local_screenshots_folder"
 
   echo "Verifying screenshots..."
+  unzip app/build/screenshotsOssDebugAndroidTest/screenshot_bundle.zip -d app/build/screenshotsOssDebugAndroidTest/
   ls -R app/build/screenshotsOssDebugAndroidTest
 #  find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
