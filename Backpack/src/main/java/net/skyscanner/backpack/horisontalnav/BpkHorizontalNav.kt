@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.horisontalnav
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -111,6 +112,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   private val texts = SparseArrayCompat<CharSequence?>()
   private val notificationDots = SparseBooleanArray()
   private val badges = SparseArray<CharSequence?>()
+  @SuppressLint("RestrictedApi")
   private val allCaps = AllCapsTransformationMethod(context)
 
   init {
@@ -188,6 +190,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     addTab(tab, tabCount, setSelected)
   }
 
+  @SuppressLint("RestrictedApi")
   override fun addTab(tab: Tab, position: Int, setSelected: Boolean) {
     val capitalisedText = allCaps.getTransformation(tab.text, this)
     texts.put(position, capitalisedText)
