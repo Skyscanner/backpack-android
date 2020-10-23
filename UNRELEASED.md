@@ -8,8 +8,8 @@
     - `BpkRating.Orientation` XML attribute has been renamed to `BpkRating.Style`
  - `bpkBorderRadiusSm` has been changed from `4dp` to `8dp`
  - `BpkButton` radius has been changed from `4dp` to `8dp`
- - `BpkPanel` radius has been changed from `4dp` to `8dp`
- - `BpkCard` radius has been changed from `4dp` to `8dp`
+ - `BpkPanel` radius has been changed from `4dp` to `12dp`
+ - `BpkCard` radius has been changed from `4dp` to `12dp`
 
 **Added:**
   - `BpkRating`
