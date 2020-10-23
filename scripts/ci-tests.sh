@@ -25,7 +25,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   dir_name=""$date_str".$$"
 
   remote_screenshots_folder=""$bucket_name"/"$dir_name"/Nexus4-21-en-portrait/artifacts/sdcard/screenshots/net.skyscanner.backpack.test/screenshots-default"
-  local_screenshots_folder="app/build/screenshotsOssDebugAndroidTest"
+  local_screenshots_folder="app/build/test-labs-screenshots"
 
   gcloud firebase test android run \
       --type instrumentation \
@@ -49,10 +49,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   gsutil -m cp -r "gs://$remote_screenshots_folder" "$local_screenshots_folder"
 
   echo "Verifying screenshots..."
-  sudo apt-get -y install zip unzip
-  ls -R app/build/screenshotsOssDebugAndroidTest
-  find app/build -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
-  unzip app/build/screenshotsOssDebugAndroidTest/screenshots-default/screenshot_bundle.zip -d app/build/screenshotsOssDebugAndroidTest/screenshots-default/
+  unzip app/build/screenshotsOssDebugAndroidTest/screenshots-default/screenshot_bundle.zip -d app/build/test-labs-screenshots/screenshots-default/
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
 
 elif [ "$TEST_METHOD" == "connected" ]; then
