@@ -199,7 +199,11 @@ class BpkSnackbar private constructor(
     }
   }
 
-  private fun setActionInternal(text: CharSequence?, icon: Drawable?, callback: View.OnClickListener) {
+  private fun setActionInternal(
+    text: CharSequence?,
+    icon: Drawable?,
+    callback: View.OnClickListener
+  ) {
     actionView.gravity = when {
       icon != null -> Gravity.CENTER
       else -> GravityCompat.START or Gravity.CENTER_VERTICAL

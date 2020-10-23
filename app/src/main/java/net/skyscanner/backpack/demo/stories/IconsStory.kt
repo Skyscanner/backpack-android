@@ -46,7 +46,11 @@ internal enum class IconType {
 
 class IconsStory : Story() {
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? =
     super.onCreateView(inflater, container, savedInstanceState)?.apply {
       // we force LTR layout here as we need to show LTR grid alignment with LTR/RTL icons
       layoutDirection = View.LAYOUT_DIRECTION_LTR

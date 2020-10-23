@@ -253,7 +253,11 @@ class BpkButtonTest : BpkSnapshotTest() {
     snap(wrap(button, 500))
   }
 
-  private fun wrap(button: BpkButton, width: Int = FrameLayout.LayoutParams.WRAP_CONTENT, height: Int = FrameLayout.LayoutParams.WRAP_CONTENT): FrameLayout {
+  private fun wrap(
+    button: BpkButton,
+    width: Int = FrameLayout.LayoutParams.WRAP_CONTENT,
+    height: Int = FrameLayout.LayoutParams.WRAP_CONTENT
+  ): FrameLayout {
     return FrameLayout(testContext).apply {
       button.layoutParams = FrameLayout.LayoutParams(width, height)
       addView(button)

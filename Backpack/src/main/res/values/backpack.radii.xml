@@ -20,8 +20,12 @@
 
 	<dimen name="bpkBorderRadiusLg">24dp</dimen>
 
+	<dimen name="bpkBorderRadiusMd">12dp</dimen>
+
 	<dimen name="bpkBorderRadiusPill">40dp</dimen>
 
-	<dimen name="bpkBorderRadiusSm">4dp</dimen>
+	<dimen name="bpkBorderRadiusSm">8dp</dimen>
+
+	<dimen name="bpkBorderRadiusXs">4dp</dimen>
 
  </resources>
