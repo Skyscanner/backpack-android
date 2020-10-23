@@ -46,7 +46,7 @@ subprojects {
       dependsOn(ktlintCheck)
     }
 
-    check.dependsOn ktlint
+    check.dependsOn("ktlint")
   }
 }
 
