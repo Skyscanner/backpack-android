@@ -42,7 +42,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
 
   if [ -d "$local_screenshots_folder" ]; then
     rm -rf "$local_screenshots_folder"
-  fiw
+  fi
 
   mkdir -p "$local_screenshots_folder"
 
