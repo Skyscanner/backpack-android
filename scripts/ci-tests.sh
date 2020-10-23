@@ -42,7 +42,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
 
   if [ -d "$local_screenshots_folder" ]; then
     rm -rf "$local_screenshots_folder"
-  fi
+  fiw
 
   mkdir -p "$local_screenshots_folder"
 
@@ -52,7 +52,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   sudo apt-get -y install zip unzip
   ls -R app/build/screenshotsOssDebugAndroidTest
   find app/build -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
-  unzip app/build/screenshotsOssDebugAndroidTest/screenshot_bundle.zip -d app/build/screenshotsOssDebugAndroidTest/
+  unzip app/build/screenshotsOssDebugAndroidTest/screenshots-default/screenshot_bundle.zip -d app/build/screenshotsOssDebugAndroidTest/screenshots-default/
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
 
 elif [ "$TEST_METHOD" == "connected" ]; then
