@@ -34,7 +34,9 @@ import org.junit.runner.RunWith
 import org.threeten.bp.LocalDate
 import java.util.Locale
 
-internal open class BpkCalendarControllerTestImpl(selectionType: SelectionType = SelectionType.RANGE) : BpkCalendarController(selectionType) {
+internal open class BpkCalendarControllerTestImpl(
+  selectionType: SelectionType = SelectionType.RANGE
+) : BpkCalendarController(selectionType) {
 
   override val isRtl = false
   override val locale: Locale = Locale.forLanguageTag("pt-br")

@@ -5,8 +5,8 @@
 **Breaking:**
  - `bpkBorderRadiusSm` has been changed from `4dp` to `8dp`
  - `BpkButton` radius has been changed from `4dp` to `8dp`
- - `BpkPanel` radius has been changed from `4dp` to `8dp`
- - `BpkCard` radius has been changed from `4dp` to `8dp`
+ - `BpkPanel` radius has been changed from `4dp` to `12dp`
+ - `BpkCard` radius has been changed from `4dp` to `12dp`
 
 ## How to write a good changelog entry
 

@@ -130,7 +130,11 @@ open class BpkBottomNav @JvmOverloads constructor(
   // We have to create a custom span as a BpkFontSpan causes some animation glitches as it sets text size as well.
   private class BottomNavSpan(private val font: BpkText.FontDefinition) : CharacterStyle() {
 
-    constructor(context: Context, textStyle: Int = BpkText.BASE, weight: BpkText.Weight = BpkText.Weight.NORMAL) :
+    constructor(
+      context: Context,
+      textStyle: Int = BpkText.BASE,
+      weight: BpkText.Weight = BpkText.Weight.NORMAL
+    ) :
       this(BpkText.getFont(context, textStyle, weight))
 
     override fun updateDrawState(tp: TextPaint) {

@@ -159,7 +159,11 @@ internal fun resolveThemeDimen(context: Context, @AttrRes id: Int, @DimenRes fal
  * @param attributeSet List of attributes for the current component.
  * @param styleAttr Style attribute to provide default values for the current context.
  */
-internal fun createContextThemeWrapper(context: Context, attributeSet: AttributeSet?, styleAttr: Int): Context {
+internal fun createContextThemeWrapper(
+  context: Context,
+  attributeSet: AttributeSet?,
+  styleAttr: Int
+): Context {
   val a = context.obtainStyledAttributes(attributeSet, intArrayOf(styleAttr), 0, 0)
   val themeId = a.getResourceId(0, 0)
   a.recycle()

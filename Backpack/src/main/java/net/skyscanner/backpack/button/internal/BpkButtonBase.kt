@@ -130,12 +130,22 @@ abstract class BpkButtonBase internal constructor(
     updateIcon()
   }
 
-  override fun setCompoundDrawablesWithIntrinsicBounds(@DrawableRes left: Int, @DrawableRes top: Int, @DrawableRes right: Int, @DrawableRes bottom: Int) {
+  override fun setCompoundDrawablesWithIntrinsicBounds(
+    @DrawableRes left: Int,
+    @DrawableRes top: Int,
+    @DrawableRes right: Int,
+    @DrawableRes bottom: Int
+  ) {
     super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
     layoutComponents()
   }
 
-  override fun setCompoundDrawablesWithIntrinsicBounds(left: Drawable?, top: Drawable?, right: Drawable?, bottom: Drawable?) {
+  override fun setCompoundDrawablesWithIntrinsicBounds(
+    left: Drawable?,
+    top: Drawable?,
+    right: Drawable?,
+    bottom: Drawable?
+  ) {
     super.setCompoundDrawablesWithIntrinsicBounds(left, top, right, bottom)
     layoutComponents()
   }

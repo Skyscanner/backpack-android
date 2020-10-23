@@ -29,7 +29,11 @@ import net.skyscanner.backpack.gradient.BpkGradients
 
 class GradientStoryCustom : Story() {
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     return inflater.inflate(R.layout.fragment_gradient, container, false)
   }
 
@@ -46,7 +50,11 @@ class GradientStoryCustom : Story() {
 
 class GradientStoryPrimary : Story() {
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     return inflater.inflate(R.layout.fragment_gradient, container, false)
   }
 
@@ -58,7 +66,11 @@ class GradientStoryPrimary : Story() {
 
 class GradientStoryWithDirection : Story() {
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     return inflater.inflate(R.layout.fragment_gradient, container, false)
   }
 

@@ -28,7 +28,11 @@ import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter
 
 open class SubStory : Story() {
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     val stories = arguments?.getStringArray(STORIES) ?: savedInstanceState?.getStringArray(STORIES)
     if (stories != null) {
       val view = inflater.inflate(R.layout.component_list, container, false)

@@ -73,7 +73,11 @@ open class BpkText @JvmOverloads constructor(
     const val CAPS = 7
 
     @JvmStatic
-    fun getFont(context: Context, textStyle: Int = BpkText.BASE, weight: BpkText.Weight = BpkText.Weight.NORMAL) =
+    fun getFont(
+      context: Context,
+      textStyle: Int = BpkText.BASE,
+      weight: BpkText.Weight = BpkText.Weight.NORMAL
+    ) =
       internalGetFont(context, textStyle, weight)
   }
 
@@ -173,7 +177,11 @@ open class BpkText @JvmOverloads constructor(
   }
 }
 
-private fun internalGetFont(context: Context, textStyle: Int = BpkText.BASE, weight: BpkText.Weight = BpkText.Weight.NORMAL): BpkText.FontDefinition {
+private fun internalGetFont(
+  context: Context,
+  textStyle: Int = BpkText.BASE,
+  weight: BpkText.Weight = BpkText.Weight.NORMAL
+): BpkText.FontDefinition {
   val styleRes = getStyleId(context, textStyle, weight)
 
   val textStyleAttributes = context.obtainStyledAttributes(styleRes, R.styleable.BpkTextStyle)

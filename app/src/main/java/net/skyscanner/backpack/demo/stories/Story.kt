@@ -26,7 +26,11 @@ import net.skyscanner.backpack.demo.ComponentDetailFragment
 
 open class Story : ComponentDetailFragment() {
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
     val layoutId = arguments?.getInt(LAYOUT_ID) ?: savedInstanceState?.getInt(LAYOUT_ID)
     if (layoutId != null) {
       return inflater.inflate(layoutId, container, false).apply {
