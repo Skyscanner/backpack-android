@@ -50,9 +50,9 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
 
   echo "Verifying screenshots..."
   sudo apt-get -y install zip unzip
-  unzip app/build/screenshotsOssDebugAndroidTest/screenshot_bundle.zip -d app/build/screenshotsOssDebugAndroidTest/
   ls -R app/build/screenshotsOssDebugAndroidTest
   find app/build -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/|-\1/"
+  unzip app/build/screenshotsOssDebugAndroidTest/screenshot_bundle.zip -d app/build/screenshotsOssDebugAndroidTest/
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
 
 elif [ "$TEST_METHOD" == "connected" ]; then
