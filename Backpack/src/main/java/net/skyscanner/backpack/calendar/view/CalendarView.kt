@@ -48,7 +48,13 @@ interface CalendarUpdateCallback {
 }
 
 interface BpkCalendarScrollListener {
-  fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int, year: Int)
+  fun onScroll(
+    view: AbsListView,
+    firstVisibleItem: Int,
+    visibleItemCount: Int,
+    totalItemCount: Int,
+    year: Int
+  )
 }
 
 /**
@@ -113,7 +119,12 @@ internal class CalendarView constructor(
   }
 
   // TODO: Updates the title and selected month if the view has moved to a new month.
-  override fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int) {
+  override fun onScroll(
+    view: AbsListView,
+    firstVisibleItem: Int,
+    visibleItemCount: Int,
+    totalItemCount: Int
+  ) {
     val child = view.getChildAt(0) ?: return
 
     if (child is MonthView) {

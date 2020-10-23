@@ -207,7 +207,14 @@ open class BpkFlare @JvmOverloads constructor(
     }
   }
 
-  private fun clipPointerArea(pointerYStart: Float, pointerXStart: Float, height: Float, canvas: Canvas, width: Float, pointerXEnd: Float) {
+  private fun clipPointerArea(
+    pointerYStart: Float,
+    pointerXStart: Float,
+    height: Float,
+    canvas: Canvas,
+    width: Float,
+    pointerXEnd: Float
+  ) {
     clipRect.set(0f, pointerYStart, pointerXStart, height)
     canvas.clipOutRectCompat(clipRect)
 

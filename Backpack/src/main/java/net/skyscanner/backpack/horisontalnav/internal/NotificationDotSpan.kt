@@ -32,12 +32,28 @@ internal class NotificationDotSpan(context: Context) : ImageSpan(
   ALIGN_BOTTOM
 ) {
 
-  override fun getSize(paint: Paint, text: CharSequence?, start: Int, end: Int, fm: Paint.FontMetricsInt?): Int {
+  override fun getSize(
+    paint: Paint,
+    text: CharSequence?,
+    start: Int,
+    end: Int,
+    fm: Paint.FontMetricsInt?
+  ): Int {
     super.getSize(paint, text, start, end, fm)
     return drawable.bounds.width() * 3
   }
 
-  override fun draw(canvas: Canvas, text: CharSequence?, start: Int, end: Int, x: Float, top: Int, y: Int, bottom: Int, paint: Paint) {
+  override fun draw(
+    canvas: Canvas,
+    text: CharSequence?,
+    start: Int,
+    end: Int,
+    x: Float,
+    top: Int,
+    y: Int,
+    bottom: Int,
+    paint: Paint
+  ) {
     val count = canvas.save()
     canvas.translate(drawable.bounds.width().toFloat(), -y.toFloat())
     super.draw(canvas, text, start, end, x, top, y, bottom, paint)

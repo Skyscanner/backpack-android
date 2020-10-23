@@ -86,7 +86,13 @@ open class BpkCalendar @JvmOverloads constructor(
     calendarView.setSelectionFromTop(position, y)
   }
 
-  override fun onScroll(view: AbsListView, firstVisibleItem: Int, visibleItemCount: Int, totalItemCount: Int, year: Int) {
+  override fun onScroll(
+    view: AbsListView,
+    firstVisibleItem: Int,
+    visibleItemCount: Int,
+    totalItemCount: Int,
+    year: Int
+  ) {
     updateYearPill(year)
   }
 

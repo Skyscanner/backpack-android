@@ -154,7 +154,7 @@ open class BpkBadge @JvmOverloads constructor(
     drawable.color = solid
     drawable.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), stroke)
 
-    val cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusSm)
+    val cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusXs)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
       drawable.cornerRadius = cornerRadius
     } else {

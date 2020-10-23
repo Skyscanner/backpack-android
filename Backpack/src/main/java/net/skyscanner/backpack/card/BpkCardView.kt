@@ -49,7 +49,7 @@ open class BpkCardView @JvmOverloads constructor(
    * [CornerStyle.LARGE] = [R.dimen.bpkBorderRadiusLg]
    */
   enum class CornerStyle(@DimenRes val tokenRes: Int) {
-    SMALL(R.dimen.bpkBorderRadiusSm),
+    SMALL(R.dimen.bpkBorderRadiusMd),
     LARGE(R.dimen.bpkBorderRadiusLg)
   }
 

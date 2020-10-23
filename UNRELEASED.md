@@ -2,6 +2,12 @@
 
 > Place your changes below this line.
 
+**Breaking:**
+ - `bpkBorderRadiusSm` has been changed from `4dp` to `8dp`
+ - `BpkButton` radius has been changed from `4dp` to `8dp`
+ - `BpkPanel` radius has been changed from `4dp` to `12dp`
+ - `BpkCard` radius has been changed from `4dp` to `12dp`
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

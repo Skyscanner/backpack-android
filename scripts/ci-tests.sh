@@ -49,7 +49,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   gsutil -m cp -r "gs://$remote_screenshots_folder" "$local_screenshots_folder"
 
   echo "Verifying screenshots..."
-
+  unzip app/build/test-labs-screenshots/screenshots-default/screenshot_bundle.zip -d app/build/test-labs-screenshots/screenshots-default/
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
 
 elif [ "$TEST_METHOD" == "connected" ]; then
