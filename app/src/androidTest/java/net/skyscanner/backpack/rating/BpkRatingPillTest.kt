@@ -25,13 +25,13 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkRatingVerticalTest : BpkSnapshotTest() {
+class BpkRatingPillTest : BpkSnapshotTest() {
 
-  private val style = BpkRating.Style.Vertical
+  private val style = BpkRating.Style.Pill
 
   @Before
   fun setup() {
-    setDimensions(150, 150)
+    setDimensions(150, 300)
   }
 
   @Test
@@ -67,6 +67,56 @@ class BpkRatingVerticalTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestRating_Large() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_DefaultRtl() {
+    val subject = createTestRating(testContext, style = style, rtl = true)
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_IconRtl() {
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.Icon)
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_ExtraSmallRtl() {
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.ExtraSmall)
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_SmallRtl() {
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.Small)
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_BaseRtl() {
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.Base)
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_LargeRtl() {
+    val subject = createTestRating(testContext, rtl = true, style = style, size = BpkRating.Size.Large)
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_TitleOverflow() {
+    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
+    subject.title = { "Loooooooooooooooong title" }
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestRating_SubtitleOverflow() {
+    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
+    subject.subtitle = { "Looooooooooooooooooooooooooooong subtitle" }
     snap(subject)
   }
 }

@@ -17,7 +17,7 @@ Example of a Rating in XML:
   app:ratingIcon="@drawable/rating_sample_icon"
   app:ratingTitle="@array/rating_sample_titles"
   app:ratingSubtitle="@array/rating_sample_subtitles"
-  app:ratingOrientation="vertical"
+  app:ratingStyle="vertical"
   app:ratingSize="large"
   app:ratingValue="3.0"/>
 ```
@@ -28,7 +28,7 @@ In this example:
 The layer index will be chosen based on the corresponding score value (0 - low, 1 - medium, 2 - high).
 If drawable is not layered, the same drawable will be used for all values.
 When the provided drawable is not a layered drawable, the same icon will be used for all scores.
-*Note that the icon will be displayed only when size is equal to `icon`*  
+*Note that the icon will be displayed only when size is equal to `icon`*
 
 - `ratingTitle` – a reference to [`StringArray`](https://developer.android.com/guide/topics/resources/string-resource#StringArray) or [`String`](https://developer.android.com/guide/topics/resources/string-resource#String).
 The item index will be chosen based on the corresponding score value (0 - low, 1 - medium, 2 - high).
@@ -39,7 +39,7 @@ The item index will be chosen based on the corresponding score value (0 - low, 1
 If the value is a string resource, the same value will be used for all scores.
 *Note that when size is equal to `icon` or `extra_small` the subtitle disables*.
 
-- `ratingOrientation` - the layout orientation.
+- `ratingStyle` - the layout configuration.
 - `ratingSize` - the dimensions of the layout
 - `ratingValue` - The actual rating expressed as a range between `0.0 to 10.0`.
 If the value exceeds the boundaries, it'll be clamped.
@@ -50,7 +50,7 @@ Example of a Rating in Kotlin
 ```Kotlin
 import net.skyscanner.backpack.rating.BpkRating
 
-BpkRating(context, BpkRating.Orientation.Horizontal, BpkRating.Size.Base).apply {
+BpkRating(context, BpkRating.Style.Horizontal, BpkRating.Size.Base).apply {
     icon = {
       when (it) {
         BpkRating.Score.Low -> context.getDrawable(R.drawable.bpk_star_outline)

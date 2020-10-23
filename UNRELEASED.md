@@ -3,10 +3,17 @@
 > Place your changes below this line.
 
 **Breaking:**
+  - `BpkRating`
+    - `ratingOrientation` XML attribute has been renamed to `ratingStyle`
+    - `BpkRating.Orientation` XML attribute has been renamed to `BpkRating.Style`
  - `bpkBorderRadiusSm` has been changed from `4dp` to `8dp`
  - `BpkButton` radius has been changed from `4dp` to `8dp`
  - `BpkPanel` radius has been changed from `4dp` to `12dp`
  - `BpkCard` radius has been changed from `4dp` to `12dp`
+
+**Added:**
+  - `BpkRating`
+    - New style – `pill`
 
 ## How to write a good changelog entry
 

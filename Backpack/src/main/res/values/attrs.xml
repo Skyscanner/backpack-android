@@ -157,9 +157,10 @@
     <attr name="ratingSubtitle" format="string|reference" />
     <attr name="ratingValue" format="float" />
 
-    <attr name="ratingOrientation" format="enum">
+    <attr name="ratingStyle" format="enum">
       <enum value="0" name="horizontal" />
       <enum value="1" name="vertical" />
+      <enum value="2" name="pill" />
     </attr>
     <attr name="ratingSize" format="enum">
       <enum value="0" name="icon" />
