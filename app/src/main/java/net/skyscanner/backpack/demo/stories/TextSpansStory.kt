@@ -47,10 +47,18 @@ class TextSpansStory : Story() {
       append("primary color span \n", BpkPrimaryColorSpan(activity!!), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
       append("This is an example of \n")
-      append("Backpack font span \n", BpkFontSpan(activity!!, BpkText.LG, BpkText.Weight.EMPHASIZED), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+      append(
+        "Backpack font span \n",
+        BpkFontSpan(activity!!, BpkText.LG, BpkText.Weight.EMPHASIZED),
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+      )
 
       append("This is an example of \n")
-      append("Backpack link span \n", BpkLinkSpan(activity!!, "Link clicked!", linksHandler), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+      append(
+        "Backpack link span \n",
+        BpkLinkSpan(activity!!, "Link clicked!", linksHandler),
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+      )
     }
   }
 

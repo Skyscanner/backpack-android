@@ -85,7 +85,9 @@ class BpkDialogTest : BpkSnapshotTest() {
 
     val dialog = BpkDialog(activity).apply {
       title = "You are going to Tokyo!"
-      description = Array(30) { "Your flight is all booked. Why not check out some hotels now?" }.joinToString(separator = "\n")
+      description = Array(30) {
+        "Your flight is all booked. Why not check out some hotels now?"
+      }.joinToString(separator = "\n")
 
       icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
@@ -192,7 +194,10 @@ class BpkDialogTest : BpkSnapshotTest() {
         activity.windowManager.removeView(rootView)
 
         val wrapper = FrameLayout(activity)
-        wrapper.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+        wrapper.layoutParams = FrameLayout.LayoutParams(
+          FrameLayout.LayoutParams.WRAP_CONTENT,
+          FrameLayout.LayoutParams.WRAP_CONTENT
+        )
         wrapper.setPadding(20, 20, 20, 20)
         wrapper.setBackgroundColor(ResourcesCompat.getColor(activity.resources, R.color.bpkTextSecondary, activity.theme))
         wrapper.addView(rootView)

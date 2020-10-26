@@ -44,7 +44,8 @@ internal class ChartGraphView constructor(
   }
 
   private val titleHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
-  private val titleSpacing = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) + resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+  private val titleSpacing = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+    resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
 
   private val title = BpkText(context).also {
     it.setTextColor(colors.groupTitle)

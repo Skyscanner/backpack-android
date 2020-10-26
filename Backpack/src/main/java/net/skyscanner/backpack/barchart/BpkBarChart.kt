@@ -211,7 +211,11 @@ open class BpkBarChart @JvmOverloads constructor(
     }
 
     legendView = ChartLegend(themedContext, colors)
-    addView(legendView, LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.END or Gravity.TOP))
+    addView(legendView, LayoutParams(
+      LayoutParams.WRAP_CONTENT,
+      ViewGroup.LayoutParams.WRAP_CONTENT,
+      Gravity.END or Gravity.TOP)
+    )
 
     addView(graphView, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
   }

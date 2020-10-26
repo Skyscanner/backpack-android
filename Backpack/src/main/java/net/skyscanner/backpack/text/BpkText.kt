@@ -43,8 +43,16 @@ private val styleMapping = mapOf(
   BpkText.BASE to arrayOf(R.attr.bpkTextBaseAppearance, R.attr.bpkTextBaseEmphasizedAppearance, null),
   BpkText.LG to arrayOf(R.attr.bpkTextLgAppearance, R.attr.bpkTextLgEmphasizedAppearance, null),
   BpkText.XL to arrayOf(R.attr.bpkTextXlAppearance, R.attr.bpkTextXlEmphasizedAppearance, R.attr.bpkTextXlHeavyAppearance),
-  BpkText.XXL to arrayOf(R.attr.bpkTextXxlAppearance, R.attr.bpkTextXxlEmphasizedAppearance, R.attr.bpkTextXxlHeavyAppearance),
-  BpkText.XXXL to arrayOf(R.attr.bpkTextXxxlAppearance, R.attr.bpkTextXxxlEmphasizedAppearance, R.attr.bpkTextXxxlHeavyAppearance)
+  BpkText.XXL to arrayOf(
+    R.attr.bpkTextXxlAppearance,
+    R.attr.bpkTextXxlEmphasizedAppearance,
+    R.attr.bpkTextXxlHeavyAppearance
+  ),
+  BpkText.XXXL to arrayOf(
+    R.attr.bpkTextXxxlAppearance,
+    R.attr.bpkTextXxxlEmphasizedAppearance,
+    R.attr.bpkTextXxxlHeavyAppearance
+  )
 )
 
 open class BpkText @JvmOverloads constructor(
@@ -185,7 +193,10 @@ private fun internalGetFont(
   val styleRes = getStyleId(context, textStyle, weight)
 
   val textStyleAttributes = context.obtainStyledAttributes(styleRes, R.styleable.BpkTextStyle)
-  val fontSize = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_android_textSize, ResourcesUtil.dpToPx(16, context))
+  val fontSize = textStyleAttributes.getDimensionPixelSize(
+    R.styleable.BpkTextStyle_android_textSize,
+    ResourcesUtil.dpToPx(16, context)
+  )
   val letterSpacing = textStyleAttributes.getFloat(R.styleable.BpkTextStyle_android_letterSpacing, -1f)
     .let { if (it == -1f) null else it }
 

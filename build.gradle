@@ -32,7 +32,6 @@ subprojects {
     version = "0.33.0"
     android = true
     enableExperimentalRules = false
-    ignoreFailures = true // this will be remove in another task
     reporters {
       reporter "checkstyle"
     }

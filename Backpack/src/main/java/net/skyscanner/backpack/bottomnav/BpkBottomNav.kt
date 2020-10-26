@@ -97,7 +97,9 @@ open class BpkBottomNav @JvmOverloads constructor(
     TODO("Not supported")
   }
 
-  private class ListenersDelegate(private val menu: Menu) : OnNavigationItemSelectedListener, OnNavigationItemReselectedListener {
+  private class ListenersDelegate(
+    private val menu: Menu
+  ) : OnNavigationItemSelectedListener, OnNavigationItemReselectedListener {
 
     val reselected = mutableListOf<(MenuItem, Int) -> Unit>()
     val selected = mutableListOf<(MenuItem, Int) -> Unit>()

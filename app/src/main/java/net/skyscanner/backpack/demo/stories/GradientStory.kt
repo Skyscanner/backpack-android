@@ -76,6 +76,9 @@ class GradientStoryWithDirection : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    view.findViewById<View>(R.id.gradient).background = BpkGradients.getPrimary(requireContext(), GradientDrawable.Orientation.TR_BL)
+    view.findViewById<View>(R.id.gradient).background = BpkGradients.getPrimary(
+      requireContext(),
+      GradientDrawable.Orientation.TR_BL
+    )
   }
 }

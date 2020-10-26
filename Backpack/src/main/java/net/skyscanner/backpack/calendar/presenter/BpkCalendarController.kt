@@ -126,7 +126,8 @@ abstract class BpkCalendarController(
     onRangeSelected(selectedRange)
   }
 
-  internal fun getLocalizedDate(date: LocalDate, pattern: String): String = DateTimeFormatter.ofPattern(pattern, locale).format(date)
+  internal fun getLocalizedDate(date: LocalDate, pattern: String): String =
+    DateTimeFormatter.ofPattern(pattern, locale).format(date)
 
   open fun isToday(year: Int, month: Int, day: Int): Boolean {
     return LocalDate.of(year, month, day) == currentDateProvider.invoke()

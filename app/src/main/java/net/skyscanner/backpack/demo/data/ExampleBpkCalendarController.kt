@@ -44,8 +44,16 @@ open class ExampleBpkCalendarController(
       return
     }
     when (range) {
-      is SingleDay -> Toast.makeText(context, String.format("%s", range.selectedDay.toString()), Toast.LENGTH_SHORT).show()
-      is CalendarRange -> Toast.makeText(context, String.format("%s - %s", range.start.toString(), range.end.toString()), Toast.LENGTH_SHORT).show()
+      is SingleDay -> Toast.makeText(
+        context,
+        String.format("%s", range.selectedDay.toString()),
+        Toast.LENGTH_SHORT
+      ).show()
+      is CalendarRange -> Toast.makeText(
+        context,
+        String.format("%s - %s", range.start.toString(), range.end.toString()),
+        Toast.LENGTH_SHORT
+      ).show()
     }
   }
 

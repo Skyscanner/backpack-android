@@ -46,8 +46,8 @@ class NodeItem(
   override fun createStory() = creator(subItems.map { it.value.getFullyQualifiedName() }.toTypedArray())
 
   override fun getParent() = parent
-  override fun setParent(newParent: RegistryItem) {
-    parent = newParent
+  override fun setParent(parent: RegistryItem) {
+    this.parent = parent
   }
 
   override fun getFullyQualifiedName(): String {
@@ -111,7 +111,9 @@ object ComponentRegistry {
         "With divider" story NodeData { Story of R.layout.fragment_card_with_divider },
         "With divider arranged vertically" story NodeData { Story of R.layout.fragment_card_with_divider_vertical },
         "With divider without padding" story NodeData { Story of R.layout.fragment_card_with_divider_no_padding },
-        "With divider and corner style large" story NodeData { Story of R.layout.fragment_card_with_divider_cornerstyle_large }
+        "With divider and corner style large" story NodeData {
+          Story of R.layout.fragment_card_with_divider_cornerstyle_large
+        }
       )),
     "Calendar" story NodeData({ children -> SubStory of children },
       mapOf(
@@ -119,7 +121,9 @@ object ComponentRegistry {
         "Colored" story NodeData { ColoredCalendarStory of R.layout.fragment_calendar_colored },
         "Disabled Dates" story NodeData { DisabledCalendarStory of R.layout.fragment_calendar_disabled },
         "Footer view" story NodeData { FooterViewCalendarStory of R.layout.fragment_calendar_footer_view },
-        "Footer view RTL" story NodeData { FooterViewCalendarStory of R.layout.fragment_calendar_footer_view with Direction.RTL }
+        "Footer view RTL" story NodeData {
+          FooterViewCalendarStory of R.layout.fragment_calendar_footer_view with Direction.RTL
+        }
       )),
     "Chip" story NodeData({ children -> SubStory of children },
       mapOf(
