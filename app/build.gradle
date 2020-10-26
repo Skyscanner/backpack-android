@@ -50,10 +50,7 @@ android {
       // App indexing not required for demo app
       'GoogleAppIndexingWarning',
       // A11y support TBD
-      'ContentDescription',
-      // Will be fixed later
-      'MissingConstraints',
-      'RestrictedApi'
+      'ContentDescription'
   }
   flavorDimensions "version"
   productFlavors {
