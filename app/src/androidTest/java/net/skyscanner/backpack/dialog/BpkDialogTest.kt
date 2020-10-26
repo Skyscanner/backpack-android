@@ -18,14 +18,14 @@
 
 package net.skyscanner.backpack.dialog
 
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.rule.ActivityTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.button.BpkButton
@@ -66,13 +66,17 @@ class BpkDialogTest : BpkSnapshotTest() {
         R.color.bpkMonteverde
       )
 
-      addActionButton(BpkButton(context).apply {
-        text = "Continue"
-      })
+      addActionButton(
+        BpkButton(context).apply {
+          text = "Continue"
+        }
+      )
 
-      addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-        text = "Skip"
-      })
+      addActionButton(
+        BpkButton(context, BpkButton.Type.Secondary).apply {
+          text = "Skip"
+        }
+      )
     }
 
     record(dialog, asyncScreenshot)
@@ -94,13 +98,17 @@ class BpkDialogTest : BpkSnapshotTest() {
         R.color.bpkMonteverde
       )
 
-      addActionButton(BpkButton(context).apply {
-        text = "Continue"
-      })
+      addActionButton(
+        BpkButton(context).apply {
+          text = "Continue"
+        }
+      )
 
-      addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-        text = "Skip"
-      })
+      addActionButton(
+        BpkButton(context, BpkButton.Type.Secondary).apply {
+          text = "Skip"
+        }
+      )
     }
 
     record(dialog, asyncScreenshot)
@@ -118,13 +126,17 @@ class BpkDialogTest : BpkSnapshotTest() {
         R.color.bpkPanjin
       )
 
-      addActionButton(BpkButton(context, BpkButton.Type.Destructive).apply {
-        text = "Delete"
-      })
+      addActionButton(
+        BpkButton(context, BpkButton.Type.Destructive).apply {
+          text = "Delete"
+        }
+      )
 
-      addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-        text = "Cancel"
-      })
+      addActionButton(
+        BpkButton(context, BpkButton.Type.Secondary).apply {
+          text = "Cancel"
+        }
+      )
     }
 
     record(dialog, asyncScreenshot)
@@ -143,13 +155,17 @@ class BpkDialogTest : BpkSnapshotTest() {
         R.color.bpkMonteverde
       )
 
-      addActionButton(BpkButton(context).apply {
-        text = "Create"
-      })
+      addActionButton(
+        BpkButton(context).apply {
+          text = "Create"
+        }
+      )
 
-      addActionButton(BpkButtonLink(context).apply {
-        text = "No, Thanks!"
-      })
+      addActionButton(
+        BpkButtonLink(context).apply {
+          text = "No, Thanks!"
+        }
+      )
     }
 
     record(dialog, asyncScreenshot)
@@ -167,13 +183,17 @@ class BpkDialogTest : BpkSnapshotTest() {
         R.color.bpkMonteverde
       )
 
-      addActionButton(BpkButton(context).apply {
-        text = "Continue"
-      })
+      addActionButton(
+        BpkButton(context).apply {
+          text = "Continue"
+        }
+      )
 
-      addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-        text = "Skip"
-      })
+      addActionButton(
+        BpkButton(context, BpkButton.Type.Secondary).apply {
+          text = "Skip"
+        }
+      )
     }
 
     record(dialog, asyncScreenshot)
@@ -223,13 +243,17 @@ class BpkDialogTest : BpkSnapshotTest() {
 
       image!!.setImageBitmap(bitmap)
 
-      addActionButton(BpkButton(context).apply {
-        text = "Continue"
-      })
+      addActionButton(
+        BpkButton(context).apply {
+          text = "Continue"
+        }
+      )
 
-      addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-        text = "Skip"
-      })
+      addActionButton(
+        BpkButton(context, BpkButton.Type.Secondary).apply {
+          text = "Skip"
+        }
+      )
     }
 
     record(dialog, asyncScreenshot)

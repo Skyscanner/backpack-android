@@ -24,18 +24,18 @@ import android.graphics.Typeface
 import android.view.ContextThemeWrapper
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Assert
-import org.junit.Test
-import org.junit.runner.RunWith
+import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.text.BpkText.*
+import net.skyscanner.backpack.test.R as TestR
+import net.skyscanner.backpack.text.BpkText.Weight
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.unsafeLazy
+import org.junit.Assert
 import org.junit.Before
-import net.skyscanner.backpack.test.R as TestR
+import org.junit.Test
+import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkTextTest {
@@ -170,7 +170,7 @@ class BpkTextTest {
       val fontFamily = test[1] as String
       val fontSize = test[2] as Int
       val letterSpacing = test[3] as Float
-      val getFont = test[4] as (context: Context) -> FontDefinition
+      val getFont = test[4] as (context: Context) -> BpkText.FontDefinition
 
       val font = getFont.invoke(context)
 
@@ -187,7 +187,7 @@ class BpkTextTest {
     textDefinitions.forEach { test ->
       val message = test[0] as String
       val fontSize = test[2] as Int
-      val getFont = test[4] as (context: Context) -> FontDefinition
+      val getFont = test[4] as (context: Context) -> BpkText.FontDefinition
 
       val font = getFont.invoke(withCustomFont)
 

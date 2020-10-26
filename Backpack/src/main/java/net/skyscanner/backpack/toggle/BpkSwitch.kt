@@ -66,10 +66,12 @@ open class BpkSwitch @JvmOverloads constructor(
       trackTintList = getColorStateList(trackCheckedColor, ContextCompat.getColor(context, R.color.__switchTrackDisabled))
       thumbTintList = getColorStateList(checkedColor, ContextCompat.getColor(context, R.color.__switchThumbDisabled))
     }
-    setTextColor(ColorStateList(
-      arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
-      intArrayOf(textDisabledColor, textEnabledColor)
-    ))
+    setTextColor(
+      ColorStateList(
+        arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
+        intArrayOf(textDisabledColor, textEnabledColor)
+      )
+    )
   }
 
   private fun getColorStateList(checkedColor: Int, uncheckedColor: Int) =

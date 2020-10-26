@@ -38,7 +38,9 @@ open class BpkFab @JvmOverloads constructor(
     createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.floatingActionButtonStyle),
     attrs, R.attr.bpkFabStyle
   ),
-  attrs, defStyleAttr) {
+  attrs,
+  defStyleAttr
+) {
 
   init {
     initialize(attrs, defStyleAttr)

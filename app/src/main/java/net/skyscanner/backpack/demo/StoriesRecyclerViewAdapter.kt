@@ -42,11 +42,15 @@ class StoriesRecyclerViewAdapter internal constructor(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     return if (viewType == 0) {
-      ViewHolder(LayoutInflater.from(parent.context)
-        .inflate(R.layout.component_list_header, parent, false))
+      ViewHolder(
+        LayoutInflater.from(parent.context)
+          .inflate(R.layout.component_list_header, parent, false)
+      )
     } else {
-      ViewHolder(LayoutInflater.from(parent.context)
-        .inflate(R.layout.component_list_content, parent, false))
+      ViewHolder(
+        LayoutInflater.from(parent.context)
+          .inflate(R.layout.component_list_content, parent, false)
+      )
     }
   }
 

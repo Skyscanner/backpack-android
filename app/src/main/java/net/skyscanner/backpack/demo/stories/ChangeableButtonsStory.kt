@@ -21,8 +21,8 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import net.skyscanner.backpack.demo.R
 import kotlin.math.max
+import net.skyscanner.backpack.demo.R
 
 class ChangeableButtonsStory : Story() {
 

@@ -56,7 +56,8 @@ class BpkThemeTest {
     Assert.assertEquals(
       "Themed",
       customBlue,
-      BpkTheme.getPrimaryColor(ContextThemeWrapper(activity, R.style.TestThemeUtilsCustomColors)))
+      BpkTheme.getPrimaryColor(ContextThemeWrapper(activity, R.style.TestThemeUtilsCustomColors))
+    )
   }
 
   @Test

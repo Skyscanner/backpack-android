@@ -27,9 +27,9 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
-import kotlin.math.roundToInt
 
 internal class DialogWindowLayout @JvmOverloads constructor(
   context: Context,

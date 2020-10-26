@@ -64,21 +64,25 @@ class DialogStory : Story() {
           R.color.bpkMonteverde
         )
 
-        addActionButton(BpkButton(context).apply {
-          text = "Continue"
-          setOnClickListener {
-            println("confirmed")
-            dialog.dismiss()
+        addActionButton(
+          BpkButton(context).apply {
+            text = "Continue"
+            setOnClickListener {
+              println("confirmed")
+              dialog.dismiss()
+            }
           }
-        })
+        )
 
-        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-          setOnClickListener {
-            println("skipped")
-            dialog.dismiss()
+        addActionButton(
+          BpkButton(context, BpkButton.Type.Secondary).apply {
+            text = "Skip"
+            setOnClickListener {
+              println("skipped")
+              dialog.dismiss()
+            }
           }
-        })
+        )
       }
     },
 
@@ -92,13 +96,15 @@ class DialogStory : Story() {
           R.color.bpkErfoud
         )
 
-        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-          setOnClickListener {
-            println("skipped")
-            dialog.dismiss()
+        addActionButton(
+          BpkButton(context, BpkButton.Type.Secondary).apply {
+            text = "Skip"
+            setOnClickListener {
+              println("skipped")
+              dialog.dismiss()
+            }
           }
-        })
+        )
       }
     },
 
@@ -117,21 +123,25 @@ class DialogStory : Story() {
           println("canceled")
         }
 
-        addActionButton(BpkButton(context, BpkButton.Type.Destructive).apply {
-          text = "Delete"
-          setOnClickListener {
-            println("deleted")
-            dialog.dismiss()
+        addActionButton(
+          BpkButton(context, BpkButton.Type.Destructive).apply {
+            text = "Delete"
+            setOnClickListener {
+              println("deleted")
+              dialog.dismiss()
+            }
           }
-        })
+        )
 
-        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Cancel"
-          setOnClickListener {
-            println("canceled")
-            dialog.cancel()
+        addActionButton(
+          BpkButton(context, BpkButton.Type.Secondary).apply {
+            text = "Cancel"
+            setOnClickListener {
+              println("canceled")
+              dialog.cancel()
+            }
           }
-        })
+        )
       }
     },
 
@@ -165,26 +175,32 @@ Safe travels!"""
           R.color.bpkMonteverde
         )
 
-        addActionButton(BpkButton(context).apply {
-          text = "Create"
-          setOnClickListener {
-            dialog.dismiss()
+        addActionButton(
+          BpkButton(context).apply {
+            text = "Create"
+            setOnClickListener {
+              dialog.dismiss()
+            }
           }
-        })
+        )
 
-        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Direct flights only"
-          setOnClickListener {
-            dialog.dismiss()
+        addActionButton(
+          BpkButton(context, BpkButton.Type.Secondary).apply {
+            text = "Direct flights only"
+            setOnClickListener {
+              dialog.dismiss()
+            }
           }
-        })
+        )
 
-        addActionButton(BpkButtonLink(context).apply {
-          text = "No, Thanks!"
-          setOnClickListener {
-            dialog.dismiss()
+        addActionButton(
+          BpkButtonLink(context).apply {
+            text = "No, Thanks!"
+            setOnClickListener {
+              dialog.dismiss()
+            }
           }
-        })
+        )
       }
     },
 
@@ -198,21 +214,25 @@ Safe travels!"""
           R.color.bpkMonteverde
         )
 
-        addActionButton(BpkButton(context).apply {
-          text = "Continue"
-          setOnClickListener {
-            println("confirmed")
-            dialog.dismiss()
+        addActionButton(
+          BpkButton(context).apply {
+            text = "Continue"
+            setOnClickListener {
+              println("confirmed")
+              dialog.dismiss()
+            }
           }
-        })
+        )
 
-        addActionButton(BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-          setOnClickListener {
-            println("skipped")
-            dialog.dismiss()
+        addActionButton(
+          BpkButton(context, BpkButton.Type.Secondary).apply {
+            text = "Skip"
+            setOnClickListener {
+              println("skipped")
+              dialog.dismiss()
+            }
           }
-        })
+        )
       }
     },
 
@@ -224,21 +244,25 @@ Safe travels!"""
           "Remember to keep checking back as we update deals throughput the weekend."
         Picasso.get().load("file:///android_asset/dialog_sample.jpg").into(image)
 
-        addActionButton(BpkButton(context).apply {
-          text = "Find your deal"
-          setOnClickListener {
-            println("confirmed")
-            dialog.dismiss()
+        addActionButton(
+          BpkButton(context).apply {
+            text = "Find your deal"
+            setOnClickListener {
+              println("confirmed")
+              dialog.dismiss()
+            }
           }
-        })
+        )
 
-        addActionButton(BpkButtonLink(context).apply {
-          text = "Ok, got it"
-          setOnClickListener {
-            println("skipped")
-            dialog.dismiss()
+        addActionButton(
+          BpkButtonLink(context).apply {
+            text = "Ok, got it"
+            setOnClickListener {
+              println("skipped")
+              dialog.dismiss()
+            }
           }
-        })
+        )
       }
     }
   )

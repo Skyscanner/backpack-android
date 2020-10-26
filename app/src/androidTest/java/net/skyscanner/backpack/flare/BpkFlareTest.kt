@@ -56,51 +56,63 @@ class BpkFlareTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestFlareDefault() {
-    snap(subject.apply {
-      addView(imageView)
-    })
+    snap(
+      subject.apply {
+        addView(imageView)
+      }
+    )
   }
 
   @Test
   fun screenshotTestFlareRounded() {
-    snap(subject.apply {
-      addView(imageView)
-      round = true
-    })
+    snap(
+      subject.apply {
+        addView(imageView)
+        round = true
+      }
+    )
   }
 
   @Test
   fun screenshotTestFlarePointerPositionStart() {
-    snap(subject.apply {
-      addView(imageView)
-      pointerPosition = BpkFlare.PointerPosition.START
-    })
+    snap(
+      subject.apply {
+        addView(imageView)
+        pointerPosition = BpkFlare.PointerPosition.START
+      }
+    )
   }
 
   @Test
   fun screenshotTestFlarePointerPositionEnd() {
-    snap(subject.apply {
-      addView(imageView)
-      pointerPosition = BpkFlare.PointerPosition.END
-    })
+    snap(
+      subject.apply {
+        addView(imageView)
+        pointerPosition = BpkFlare.PointerPosition.END
+      }
+    )
   }
 
   @Test
   fun screenshotTestFlarePointerPositionStart_RTL() {
-    snap(subject.apply {
-      pointerPosition = BpkFlare.PointerPosition.START
-      layoutDirection = View.LAYOUT_DIRECTION_RTL
-      addView(imageView)
-    })
+    snap(
+      subject.apply {
+        pointerPosition = BpkFlare.PointerPosition.START
+        layoutDirection = View.LAYOUT_DIRECTION_RTL
+        addView(imageView)
+      }
+    )
   }
 
   @Test
   fun screenshotTestFlarePointerPositionEnd_RTL() {
-    snap(subject.apply {
-      pointerPosition = BpkFlare.PointerPosition.END
-      layoutDirection = View.LAYOUT_DIRECTION_RTL
-      addView(imageView)
-    })
+    snap(
+      subject.apply {
+        pointerPosition = BpkFlare.PointerPosition.END
+        layoutDirection = View.LAYOUT_DIRECTION_RTL
+        addView(imageView)
+      }
+    )
   }
 
   @Test
@@ -116,33 +128,43 @@ class BpkFlareTest : BpkSnapshotTest() {
   fun screenshotTestFlareInsetPaddingMode_withRelativePaddingRTL() {
     val wrapContent = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-    snap(FrameLayout(testContext).apply {
-      layoutDirection = View.LAYOUT_DIRECTION_RTL
+    snap(
+      FrameLayout(testContext).apply {
+        layoutDirection = View.LAYOUT_DIRECTION_RTL
 
-      addView(subject.apply {
-        layoutParams = wrapContent
-        insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
-
-        addView(LinearLayoutCompat(context).apply {
-          layoutParams = wrapContent
-          background = ColorDrawable(Color.LTGRAY)
-          setPaddingRelative(0, 10, 40, 0)
-
-          addView(BpkText(testContext).apply {
+        addView(
+          subject.apply {
             layoutParams = wrapContent
-            text = testContext.resources.getString(R.string.stub_sm)
-          })
-        })
-      })
-    })
+            insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
+
+            addView(
+              LinearLayoutCompat(context).apply {
+                layoutParams = wrapContent
+                background = ColorDrawable(Color.LTGRAY)
+                setPaddingRelative(0, 10, 40, 0)
+
+                addView(
+                  BpkText(testContext).apply {
+                    layoutParams = wrapContent
+                    text = testContext.resources.getString(R.string.stub_sm)
+                  }
+                )
+              }
+            )
+          }
+        )
+      }
+    )
   }
 
   @Test
   fun screenshotTestFlare_withPointerDirectionUP() {
-    snap(subject.apply {
-      addView(imageView)
-      pointerDirection = BpkFlare.PointerDirection.UP
-    })
+    snap(
+      subject.apply {
+        addView(imageView)
+        pointerDirection = BpkFlare.PointerDirection.UP
+      }
+    )
   }
 
   @Test
@@ -158,23 +180,30 @@ class BpkFlareTest : BpkSnapshotTest() {
   private fun setupViewForInsetPaddingTest(context: Context, configSubject: () -> Unit): View {
     val wrapContent = ViewGroup.LayoutParams(
       ViewGroup.LayoutParams.WRAP_CONTENT,
-      ViewGroup.LayoutParams.WRAP_CONTENT)
+      ViewGroup.LayoutParams.WRAP_CONTENT
+    )
 
     return FrameLayout(testContext).apply {
-      addView(subject.apply {
-        layoutParams = wrapContent
-        configSubject()
-
-        addView(LinearLayoutCompat(context).apply {
+      addView(
+        subject.apply {
           layoutParams = wrapContent
-          background = ColorDrawable(Color.LTGRAY)
+          configSubject()
 
-          addView(BpkText(testContext).apply {
-            layoutParams = wrapContent
-            text = testContext.resources.getString(R.string.stub_sm)
-          })
-        })
-      })
+          addView(
+            LinearLayoutCompat(context).apply {
+              layoutParams = wrapContent
+              background = ColorDrawable(Color.LTGRAY)
+
+              addView(
+                BpkText(testContext).apply {
+                  layoutParams = wrapContent
+                  text = testContext.resources.getString(R.string.stub_sm)
+                }
+              )
+            }
+          )
+        }
+      )
     }
   }
 }

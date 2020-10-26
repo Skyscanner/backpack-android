@@ -30,16 +30,20 @@ class SharedPreferences {
 
     fun shouldHighlight(context: Context): Boolean {
       return context
-        .getSharedPreferences(context.getString(R.string.preference_file_key),
-          Context.MODE_PRIVATE)
+        .getSharedPreferences(
+          context.getString(R.string.preference_file_key),
+          Context.MODE_PRIVATE
+        )
         .getBoolean(SHOULD_HIGHLIGHT, false)
     }
 
     @SuppressLint("ApplySharedPref")
     fun saveHighlightState(context: Context, state: Boolean) {
       val sharedPref = context
-        .getSharedPreferences(context.getString(R.string.preference_file_key),
-          Context.MODE_PRIVATE)
+        .getSharedPreferences(
+          context.getString(R.string.preference_file_key),
+          Context.MODE_PRIVATE
+        )
       with(sharedPref.edit()) {
         putBoolean(SHOULD_HIGHLIGHT, state)
         commit()
@@ -48,15 +52,19 @@ class SharedPreferences {
 
     fun getTheme(context: Context): Int {
       return context
-        .getSharedPreferences(context.getString(R.string.preference_file_key),
-          Context.MODE_PRIVATE)
+        .getSharedPreferences(
+          context.getString(R.string.preference_file_key),
+          Context.MODE_PRIVATE
+        )
         .getInt(THEME, R.style.AppTheme)
     }
 
     fun saveTheme(context: Context, theme: Int) {
       val sharedPref = context
-        .getSharedPreferences(context.getString(R.string.preference_file_key),
-          Context.MODE_PRIVATE)
+        .getSharedPreferences(
+          context.getString(R.string.preference_file_key),
+          Context.MODE_PRIVATE
+        )
 
       with(sharedPref.edit()) {
         putInt(THEME, theme)

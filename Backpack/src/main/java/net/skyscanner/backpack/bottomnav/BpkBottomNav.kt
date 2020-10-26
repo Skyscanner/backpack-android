@@ -59,7 +59,8 @@ open class BpkBottomNav @JvmOverloads constructor(
   }
 
   fun addItem(id: Int, title: String, icon: Drawable): MenuItem =
-    menu.add(Menu.NONE,
+    menu.add(
+      Menu.NONE,
       id,
       menu.size(),
       SpannableStringBuilder().append(title, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
@@ -85,14 +86,18 @@ open class BpkBottomNav @JvmOverloads constructor(
     listeners.reselected -= listener
   }
 
-  @Deprecated("Use add/remove OnNavigationItemSelectedListener instead",
-    replaceWith = ReplaceWith("addOnNavigationItemSelectedListener"))
+  @Deprecated(
+    "Use add/remove OnNavigationItemSelectedListener instead",
+    replaceWith = ReplaceWith("addOnNavigationItemSelectedListener")
+  )
   override fun setOnNavigationItemSelectedListener(listener: OnNavigationItemSelectedListener?) {
     TODO("Not supported")
   }
 
-  @Deprecated("Use add/remove OnNavigationItemSelectedListener instead",
-    replaceWith = ReplaceWith("addOnNavigationItemReselectedListener"))
+  @Deprecated(
+    "Use add/remove OnNavigationItemSelectedListener instead",
+    replaceWith = ReplaceWith("addOnNavigationItemReselectedListener")
+  )
   override fun setOnNavigationItemReselectedListener(listener: OnNavigationItemReselectedListener?) {
     TODO("Not supported")
   }

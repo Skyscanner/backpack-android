@@ -33,9 +33,12 @@ class LoadingButtonStory : Story() {
       if (child is BpkButton) {
         child.setOnClickListener {
           child.loading = true
-          child.postDelayed({
-            child.loading = false
-          }, 2500)
+          child.postDelayed(
+            {
+              child.loading = false
+            },
+            2500
+          )
         }
       }
     }

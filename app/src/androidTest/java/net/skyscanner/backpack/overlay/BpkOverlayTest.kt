@@ -37,16 +37,22 @@ import org.junit.runner.RunWith
 class BpkOverlayTest : BpkSnapshotTest() {
 
   private val overlay: BpkOverlay = BpkOverlay(testContext).apply {
-    addView(AppCompatImageView(context).apply {
-      setImageResource(R.drawable.canadian_rockies_canada)
-      adjustViewBounds = true
-      scaleType = ImageView.ScaleType.CENTER_CROP
-    }, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
-    addView(BpkText(context).apply {
-      textStyle = BpkText.XS
-      setTextColor(Color.WHITE)
-      text = "Text"
-    }, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER))
+    addView(
+      AppCompatImageView(context).apply {
+        setImageResource(R.drawable.canadian_rockies_canada)
+        adjustViewBounds = true
+        scaleType = ImageView.ScaleType.CENTER_CROP
+      },
+      LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+    )
+    addView(
+      BpkText(context).apply {
+        textStyle = BpkText.XS
+        setTextColor(Color.WHITE)
+        text = "Text"
+      },
+      LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER)
+    )
   }
 
   @Before

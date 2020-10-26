@@ -21,7 +21,6 @@ package net.skyscanner.backpack.text.internal
 import android.content.Context
 import android.graphics.Typeface
 import android.view.ContextThemeWrapper
-
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.test.R

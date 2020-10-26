@@ -112,20 +112,30 @@ internal class MonthView @JvmOverloads constructor(
   init {
     val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
 
-    selectedDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
-      ContextCompat.getColor(context, R.color.bpkPrimary))
+    selectedDayCircleFillColor = a.getColor(
+      R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
+      ContextCompat.getColor(context, R.color.bpkPrimary)
+    )
 
-    selectedDaySameDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
-      ContextCompat.getColor(context, R.color.__calendarSameDayBackground))
+    selectedDaySameDayCircleFillColor = a.getColor(
+      R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
+      ContextCompat.getColor(context, R.color.__calendarSameDayBackground)
+    )
 
-    rangeBackgroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
-      ContextCompat.getColor(context, R.color.__calendarRangeBackground))
+    rangeBackgroundColor = a.getColor(
+      R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
+      ContextCompat.getColor(context, R.color.__calendarRangeBackground)
+    )
 
-    selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor,
-      ContextCompat.getColor(context, R.color.__calendarSelectedTextColor))
+    selectedTextColor = a.getColor(
+      R.styleable.BpkCalendar_calendarDateSelectedTextColor,
+      ContextCompat.getColor(context, R.color.__calendarSelectedTextColor)
+    )
 
-    rangeTextColor = a.getColor(R.styleable.BpkCalendar_calendarRangeTextColor,
-      ContextCompat.getColor(context, R.color.__calendarRangeText))
+    rangeTextColor = a.getColor(
+      R.styleable.BpkCalendar_calendarRangeTextColor,
+      ContextCompat.getColor(context, R.color.__calendarRangeText)
+    )
 
     a.recycle()
   }
@@ -341,7 +351,8 @@ internal class MonthView @JvmOverloads constructor(
                 startYBase + selectedDayCircleRadius
               )
             } else {
-              drawRect(canvas,
+              drawRect(
+                canvas,
                 startX - 1,
                 startYBase - selectedDayCircleRadius,
                 stopX - paddingX + 1,

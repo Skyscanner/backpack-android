@@ -19,11 +19,16 @@
 package net.skyscanner.backpack.barchart.internal
 
 import android.content.res.ColorStateList
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.ColorFilter
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.PixelFormat
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
+import kotlin.math.min
 import net.skyscanner.backpack.util.getColorForState
 import net.skyscanner.backpack.util.withSave
-import kotlin.math.min
 
 internal class ChartDrawable(
   private val background: ColorStateList,

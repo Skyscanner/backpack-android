@@ -87,9 +87,11 @@ class BpkCardTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestCardWithCornerStyleLarge() {
     val card = BpkCardView(testContext).apply {
-      addView(TextView(testContext).apply {
-        text = "message"
-      })
+      addView(
+        TextView(testContext).apply {
+          text = "message"
+        }
+      )
       cornerStyle = BpkCardView.CornerStyle.LARGE
     }
     snap(card)
@@ -98,9 +100,11 @@ class BpkCardTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestCardWithCornerStyleLargeAndFocus() {
     val card = BpkCardView(testContext).apply {
-      addView(TextView(testContext).apply {
-        text = "message"
-      })
+      addView(
+        TextView(testContext).apply {
+          text = "message"
+        }
+      )
       focused = true
       cornerStyle = BpkCardView.CornerStyle.LARGE
     }

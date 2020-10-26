@@ -99,7 +99,7 @@ internal class MonthAdapter(
       it.controller = controller
       it.isClickable = true
       it.onDayClickListener = this@MonthAdapter
-  }
+    }
 
   private fun isSelectedDayInMonth(calendarDay: LocalDate, year: Int, month: Int) =
     calendarDay.year == year && calendarDay.month.value == month
@@ -133,13 +133,15 @@ internal class MonthAdapter(
     }
 
     view.reuse()
-    view.setMonthParams(CalendarDrawingParams(
-      year,
-      month,
-      selectedDay,
-      controller.calendarColoring,
-      controller::isDateDisabled
-    ))
+    view.setMonthParams(
+      CalendarDrawingParams(
+        year,
+        month,
+        selectedDay,
+        controller.calendarColoring,
+        controller::isDateDisabled
+      )
+    )
     view.invalidate()
 
     return view

@@ -114,7 +114,9 @@ open class BpkBadge @JvmOverloads constructor(
     val a: TypedArray = context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkBadge,
-      defStyleAttr, 0)
+      defStyleAttr,
+      0
+    )
 
     type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
     message = a.getString(R.styleable.BpkBadge_message)

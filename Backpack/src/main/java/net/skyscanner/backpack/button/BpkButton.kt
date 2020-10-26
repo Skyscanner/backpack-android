@@ -26,7 +26,12 @@ import androidx.annotation.Dimension
 import androidx.annotation.IntDef
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.button.internal.*
+import net.skyscanner.backpack.button.internal.BpkButtonBase
+import net.skyscanner.backpack.button.internal.ButtonStyle
+import net.skyscanner.backpack.button.internal.ButtonStyles
+import net.skyscanner.backpack.button.internal.ICON_POSITION_END
+import net.skyscanner.backpack.button.internal.ICON_POSITION_ICON_ONLY
+import net.skyscanner.backpack.button.internal.ICON_POSITION_START
 import net.skyscanner.backpack.util.use
 
 open class BpkButton(

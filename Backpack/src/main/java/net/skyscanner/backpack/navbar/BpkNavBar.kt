@@ -25,7 +25,8 @@ import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
-import androidx.annotation.*
+import androidx.annotation.ColorInt
+import androidx.annotation.MenuRes
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.AppBarLayout
@@ -83,10 +84,12 @@ class BpkNavBar @JvmOverloads constructor(
       if (field != value) {
         field = value
         toolbar.navigationIcon = value
-        collapsingLayout.expandedTitleMarginStart = resources.getDimensionPixelSize(when (field) {
-          null -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small
-          else -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_large
-        })
+        collapsingLayout.expandedTitleMarginStart = resources.getDimensionPixelSize(
+          when (field) {
+            null -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small
+            else -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_large
+          }
+        )
       }
     }
 

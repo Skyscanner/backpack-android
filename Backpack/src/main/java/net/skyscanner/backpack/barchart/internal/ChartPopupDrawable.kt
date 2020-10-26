@@ -19,15 +19,20 @@
 package net.skyscanner.backpack.barchart.internal
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.ColorFilter
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.PixelFormat
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.text.TextPaint
+import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.getColorForState
 import net.skyscanner.backpack.util.withSave
-import kotlin.math.roundToInt
 
 internal class ChartPopupDrawable(
   context: Context,
@@ -115,8 +120,10 @@ internal class ChartPopupDrawable(
   override fun draw(canvas: Canvas) {
     backgroundPaint.color = colors.popupBackground.getColorForState(state)
 
-    canvas.drawRoundRect(0f, 0f, bounds.width().toFloat(), blockHeight,
-      borderRadius, borderRadius, backgroundPaint)
+    canvas.drawRoundRect(
+      0f, 0f, bounds.width().toFloat(), blockHeight,
+      borderRadius, borderRadius, backgroundPaint
+    )
 
     canvas.withSave {
       val dx = (bounds.width() - triangleWidth) / 2f

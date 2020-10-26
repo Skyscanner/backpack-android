@@ -19,13 +19,14 @@
 package net.skyscanner.backpack.starrating
 
 import android.content.Context
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.*
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verifyZeroInteractions
 
 @RunWith(AndroidJUnit4::class)
 class BpkInteractiveStarRatingTests {
@@ -77,7 +78,7 @@ class BpkInteractiveStarRatingTests {
   @Test
   fun test_listenerIsNotInvoked_whenRatingChangedLessThenThreshold() {
     val listener = mock(BpkInteractiveStarRating.OnRatingChangedListener::class.java)
-      subject.rating = 2.1f
+    subject.rating = 2.1f
     subject.maxRating = 5
     subject.onRatingChangedListener = listener
     subject.rating = 2.2f

@@ -61,7 +61,8 @@ open class BpkGradients @JvmOverloads constructor(
     fun getPrimary(context: Context, orientation: Orientation = Orientation.TL_BR): BpkGradients {
       val themedProps = resolveAllAttributes(
         context,
-        intArrayOf(R.attr.bpkPrimaryGradientColorStart, R.attr.bpkPrimaryGradientColorEnd))
+        intArrayOf(R.attr.bpkPrimaryGradientColorStart, R.attr.bpkPrimaryGradientColorEnd)
+      )
 
       return themedProps?.let { BpkGradients(context, orientation, it) } ?: BpkGradients(context, orientation)
     }

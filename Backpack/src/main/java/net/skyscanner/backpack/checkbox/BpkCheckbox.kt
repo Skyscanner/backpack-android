@@ -38,7 +38,10 @@ open class BpkCheckbox @JvmOverloads constructor(
   createContextThemeWrapper(
     createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.checkboxStyle),
     attrs, R.attr.bpkCheckboxStyle
-  ), attrs, defStyleAttr) {
+  ),
+  attrs,
+  defStyleAttr
+) {
 
   private lateinit var disabledTint: ColorStateList
   private lateinit var enabledTint: ColorStateList
@@ -71,10 +74,12 @@ open class BpkCheckbox @JvmOverloads constructor(
     )
     updateTint()
     BpkText.getFont(context, BpkText.SM, BpkText.Weight.NORMAL).applyTo(this)
-    setTextColor(ColorStateList(
-      arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
-      intArrayOf(textDisabledColor, textEnabledColor)
-    ))
+    setTextColor(
+      ColorStateList(
+        arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
+        intArrayOf(textDisabledColor, textEnabledColor)
+      )
+    )
   }
 
   override fun setEnabled(enabled: Boolean) {

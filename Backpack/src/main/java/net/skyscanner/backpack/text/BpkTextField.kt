@@ -42,7 +42,8 @@ open class BpkTextField @JvmOverloads constructor(
     attrs, R.attr.bpkTextFieldStyle
   ),
   attrs,
-  defStyleAttr) {
+  defStyleAttr
+) {
 
   private var iconTintColor: Int = 0
     set(value) {
@@ -102,10 +103,12 @@ open class BpkTextField @JvmOverloads constructor(
 
     this.iconTintColor = iconColor
     setTextColor(textColor)
-    setHintTextColor(ColorStateList(
-      arrayOf(intArrayOf(android.R.attr.state_focused), intArrayOf()),
-      intArrayOf(hintFocusedColor, hintNormalColor)
-    ))
+    setHintTextColor(
+      ColorStateList(
+        arrayOf(intArrayOf(android.R.attr.state_focused), intArrayOf()),
+        intArrayOf(hintFocusedColor, hintNormalColor)
+      )
+    )
 
     val padding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
       resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
