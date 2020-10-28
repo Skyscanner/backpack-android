@@ -112,20 +112,30 @@ internal class MonthView @JvmOverloads constructor(
   init {
     val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
 
-    selectedDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
-      ContextCompat.getColor(context, R.color.bpkPrimary))
+    selectedDayCircleFillColor = a.getColor(
+      R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
+      ContextCompat.getColor(context, R.color.bpkPrimary)
+    )
 
-    selectedDaySameDayCircleFillColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
-      ContextCompat.getColor(context, R.color.__calendarSameDayBackground))
+    selectedDaySameDayCircleFillColor = a.getColor(
+      R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
+      ContextCompat.getColor(context, R.color.__calendarSameDayBackground)
+    )
 
-    rangeBackgroundColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
-      ContextCompat.getColor(context, R.color.__calendarRangeBackground))
+    rangeBackgroundColor = a.getColor(
+      R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
+      ContextCompat.getColor(context, R.color.__calendarRangeBackground)
+    )
 
-    selectedTextColor = a.getColor(R.styleable.BpkCalendar_calendarDateSelectedTextColor,
-      ContextCompat.getColor(context, R.color.__calendarSelectedTextColor))
+    selectedTextColor = a.getColor(
+      R.styleable.BpkCalendar_calendarDateSelectedTextColor,
+      ContextCompat.getColor(context, R.color.__calendarSelectedTextColor)
+    )
 
-    rangeTextColor = a.getColor(R.styleable.BpkCalendar_calendarRangeTextColor,
-      ContextCompat.getColor(context, R.color.__calendarRangeText))
+    rangeTextColor = a.getColor(
+      R.styleable.BpkCalendar_calendarRangeTextColor,
+      ContextCompat.getColor(context, R.color.__calendarRangeText)
+    )
 
     a.recycle()
   }
@@ -250,8 +260,9 @@ internal class MonthView @JvmOverloads constructor(
   @VisibleForTesting
   internal fun getNonDrawnDaysOffset(): Int {
     controller?.let {
-      val shouldApplyOffset =
-        calendarDrawingParams.year == it.startDate.year && calendarDrawingParams.month == it.startDate.month.value && it.startDate.dayOfMonth > numberOfDaysInAWeek
+      val shouldApplyOffset = calendarDrawingParams.year == it.startDate.year &&
+        calendarDrawingParams.month == it.startDate.month.value &&
+        it.startDate.dayOfMonth > numberOfDaysInAWeek
       if (shouldApplyOffset) {
         val fieldISO = WeekFields.of(it.locale).dayOfWeek()
         return it.startDate.with(fieldISO, 1).dayOfMonth - 1
@@ -332,9 +343,21 @@ internal class MonthView @JvmOverloads constructor(
             drawEdgeCircles(canvas, calendarDay, controller.selectedRange, paddingX, x, y)
             val nextDay = calendarDay.plusDays(1)
             if (controller.selectedRange.getDrawType(nextDay) != CalendarRange.DrawType.NONE) {
-              drawRect(canvas, startX - 1 + paddingX, startYBase - selectedDayCircleRadius, stopX + 1, startYBase + selectedDayCircleRadius)
+              drawRect(
+                canvas,
+                startX - 1 + paddingX,
+                startYBase - selectedDayCircleRadius,
+                stopX + 1,
+                startYBase + selectedDayCircleRadius
+              )
             } else {
-              drawRect(canvas, startX - 1, startYBase - selectedDayCircleRadius, stopX - paddingX + 1, startYBase + selectedDayCircleRadius)
+              drawRect(
+                canvas,
+                startX - 1,
+                startYBase - selectedDayCircleRadius,
+                stopX - paddingX + 1,
+                startYBase + selectedDayCircleRadius
+              )
             }
           }
 
@@ -368,7 +391,7 @@ internal class MonthView @JvmOverloads constructor(
         }
         CalendarRange.DrawType.NONE -> {
           if (colouredParams.containsKey(calendarDay)) {
-            colouredBucketPaint.color = colouredParams.get(calendarDay)?.calendarCellStyle?.color(context) ?: Color.TRANSPARENT
+            colouredBucketPaint.color = colouredParams[calendarDay]?.calendarCellStyle?.color(context) ?: Color.TRANSPARENT
             drawCircle(
               canvas,
               x,
@@ -402,7 +425,13 @@ internal class MonthView @JvmOverloads constructor(
       }
     }
 
-    drawText(canvas, String.format(controller.locale, "%d", calendarDay.dayOfMonth), x.toFloat(), y.toFloat(), monthNumberPaint)
+    drawText(
+      canvas,
+      String.format(controller.locale, "%d", calendarDay.dayOfMonth),
+      x.toFloat(),
+      y.toFloat(),
+      monthNumberPaint
+    )
   }
 
   private fun drawSameDayCircles(canvas: Canvas, padding: Int, x: Int, y: Int, radius: Int) {

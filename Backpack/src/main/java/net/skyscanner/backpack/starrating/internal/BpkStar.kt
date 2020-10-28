@@ -26,11 +26,13 @@ internal class BpkStar(
   private val empty: Drawable,
   private val half: Drawable,
   private val full: Drawable
-) : LayerDrawable(arrayOf(
-  empty,
-  half,
-  full
-)) {
+) : LayerDrawable(
+  arrayOf(
+    empty,
+    half,
+    full
+  )
+) {
 
   enum class Value {
     Empty,

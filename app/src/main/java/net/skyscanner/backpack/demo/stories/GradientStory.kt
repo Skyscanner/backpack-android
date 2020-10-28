@@ -44,7 +44,9 @@ class GradientStoryCustom : Story() {
       GradientDrawable.Orientation.TL_BR,
       intArrayOf(
         ContextCompat.getColor(requireContext(), R.color.bpkMonteverde),
-        ContextCompat.getColor(requireContext(), R.color.bpkSagano)))
+        ContextCompat.getColor(requireContext(), R.color.bpkSagano)
+      )
+    )
   }
 }
 
@@ -76,6 +78,9 @@ class GradientStoryWithDirection : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    view.findViewById<View>(R.id.gradient).background = BpkGradients.getPrimary(requireContext(), GradientDrawable.Orientation.TR_BL)
+    view.findViewById<View>(R.id.gradient).background = BpkGradients.getPrimary(
+      requireContext(),
+      GradientDrawable.Orientation.TR_BL
+    )
   }
 }

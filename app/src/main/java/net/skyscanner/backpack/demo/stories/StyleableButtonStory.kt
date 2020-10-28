@@ -22,7 +22,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import net.skyscanner.backpack.button.BpkButton
-import net.skyscanner.backpack.button.BpkButton.*
+import net.skyscanner.backpack.button.BpkButton.Type
 import net.skyscanner.backpack.demo.R
 
 class StyleableButtonStory : Story() {

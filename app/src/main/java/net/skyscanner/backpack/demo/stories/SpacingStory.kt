@@ -20,14 +20,14 @@ package net.skyscanner.backpack.demo.stories
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
+import java.lang.reflect.Field
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
-import android.view.Gravity
-import java.lang.reflect.Field
 
 class SpacingStory : Story() {
 

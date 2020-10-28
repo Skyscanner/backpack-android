@@ -28,9 +28,9 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ContextThemeWrapper
-import net.skyscanner.backpack.R
 import androidx.core.content.ContextCompat
 import java.lang.IllegalStateException
+import net.skyscanner.backpack.R
 
 class BpkTheme {
   companion object {

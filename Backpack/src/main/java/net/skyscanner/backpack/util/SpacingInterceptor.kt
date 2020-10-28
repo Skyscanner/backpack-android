@@ -33,13 +33,15 @@ class SpacingInterceptor : Interceptor {
     val view = result.view()
     if (view != null) {
       val padding = listOf(view.paddingBottom, view.paddingLeft, view.paddingRight, view.paddingTop)
-      val validSpaces = listOf(0,
+      val validSpaces = listOf(
+        0,
         view.context.resources.getDimension(R.dimen.bpkSpacingBase).toInt(),
         view.context.resources.getDimension(R.dimen.bpkSpacingLg).toInt(),
         view.context.resources.getDimension(R.dimen.bpkSpacingMd).toInt(),
         view.context.resources.getDimension(R.dimen.bpkSpacingSm).toInt(),
         view.context.resources.getDimension(R.dimen.bpkSpacingXl).toInt(),
-        view.context.resources.getDimension(R.dimen.bpkSpacingXxl).toInt())
+        view.context.resources.getDimension(R.dimen.bpkSpacingXxl).toInt()
+      )
 
       if (!validSpaces.containsAll(padding)) {
         if (view.background == null) {

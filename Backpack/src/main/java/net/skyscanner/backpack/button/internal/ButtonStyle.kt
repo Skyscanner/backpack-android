@@ -27,13 +27,20 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.util.TypedValue
-import androidx.annotation.*
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.Px
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
-import net.skyscanner.backpack.util.*
 import net.skyscanner.backpack.util.ResourcesUtil
+import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.darken
+import net.skyscanner.backpack.util.rippleDrawable
+import net.skyscanner.backpack.util.stateListDrawable
 
 internal class ButtonStyle(
   private val context: Context,
@@ -54,7 +61,7 @@ internal class ButtonStyle(
   )
 
   fun getStateListAnimator(): StateListAnimator? =
-      AnimatorInflater.loadStateListAnimator(context, stateListAnimatorRes)
+    AnimatorInflater.loadStateListAnimator(context, stateListAnimatorRes)
 
   fun getButtonBackground(enabled: Boolean, @BpkButton.IconPosition iconPosition: Int): Drawable {
 

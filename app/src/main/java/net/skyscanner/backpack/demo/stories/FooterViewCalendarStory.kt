@@ -35,13 +35,19 @@ private class FooterViewCalendarController(
 ) : ExampleBpkCalendarController(context) {
   override val calendarColoring: CalendarColoring? = CalendarColoring(
     coloredBuckets = setOf(
-      ColoredBucket(CalendarCellStyle.Hightlight, setOf(
-        startDate.plusDays(2),
-        endDate.minusDays(1)
-      )),
-      ColoredBucket(CalendarCellStyle.Negative, setOf(
-        startDate.plusDays(1)
-      ))
+      ColoredBucket(
+        CalendarCellStyle.Hightlight,
+        setOf(
+          startDate.plusDays(2),
+          endDate.minusDays(1)
+        )
+      ),
+      ColoredBucket(
+        CalendarCellStyle.Negative,
+        setOf(
+          startDate.plusDays(1)
+        )
+      )
     )
   )
 
@@ -53,15 +59,19 @@ private class FooterViewCalendarController(
         HighlightedDay(
           startDate.plusDays(1),
           "Do nothing day",
-          CalendarCellStyle.Negative.color(context)),
+          CalendarCellStyle.Negative.color(context)
+        ),
         HighlightedDay(
           startDate.plusDays(2),
           "Tea day",
-          descriptionOnly = true),
+          descriptionOnly = true
+        ),
         HighlightedDay(
           endDate.minusDays(1),
-          "I wish it was Friday day")
-      ))
+          "I wish it was Friday day"
+        )
+      )
+    )
 }
 
 class FooterViewCalendarStory : Story() {

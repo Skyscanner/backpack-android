@@ -22,11 +22,11 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
+import com.facebook.stetho.Stetho
+import com.jakewharton.threetenabp.AndroidThreeTen
 import io.github.inflationx.viewpump.ViewPump
 import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.util.BpkInterceptor
-import com.facebook.stetho.Stetho
-import com.jakewharton.threetenabp.AndroidThreeTen
 
 /**
  * Application class registered in AndroidManifest.xml
@@ -65,9 +65,11 @@ class BackpackDemoApplication : Application() {
     this.registerActivityLifecycleCallbacks(ThemeApplier)
 
     if (highlight) {
-      ViewPump.init(ViewPump.builder()
-        .addInterceptor(BpkInterceptor())
-        .build())
+      ViewPump.init(
+        ViewPump.builder()
+          .addInterceptor(BpkInterceptor())
+          .build()
+      )
     }
   }
 }

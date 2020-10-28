@@ -19,7 +19,13 @@
 package net.skyscanner.backpack.flare
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
+import android.graphics.RectF
+import android.graphics.Region
 import android.os.Build
 import android.util.AttributeSet
 import android.view.View
@@ -94,10 +100,10 @@ open class BpkFlare @JvmOverloads constructor(
    * Specify if corner radius should be added or not.
    */
   var round = false
-  set(value) {
-    field = value
-    requestLayout()
-  }
+    set(value) {
+      field = value
+      requestLayout()
+    }
 
   /**
    * Specify the horizontal position of the flare.
@@ -105,10 +111,10 @@ open class BpkFlare @JvmOverloads constructor(
    * @see [PointerPosition]
    */
   var pointerPosition = PointerPosition.MIDDLE
-  set(value) {
-    field = value
-    requestLayout()
-  }
+    set(value) {
+      field = value
+      requestLayout()
+    }
 
   /**
    * Specify the vertical direction of the flare.
@@ -269,7 +275,7 @@ open class BpkFlare @JvmOverloads constructor(
   }
 
   private fun mapXmlToPointerPosition(id: Int) =
-      PointerPosition.values().find { it.id == id }
+    PointerPosition.values().find { it.id == id }
 
   private fun mapXmlToPointerDirection(id: Int) =
     PointerDirection.values().find { it.id == id }

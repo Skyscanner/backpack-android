@@ -22,11 +22,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import kotlin.math.max
+import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.starrating.internal.BpkStarRatingBase
 import net.skyscanner.backpack.util.createContextThemeWrapper
-import kotlin.math.max
-import kotlin.math.roundToInt
 
 open class BpkInteractiveStarRating @JvmOverloads constructor(
   context: Context,

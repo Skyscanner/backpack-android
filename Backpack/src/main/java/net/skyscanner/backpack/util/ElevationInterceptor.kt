@@ -32,13 +32,15 @@ class ElevationInterceptor : Interceptor {
     val result = chain.proceed(chain.request())
     val view = result.view()
     if (view != null) {
-      val validSpaces = listOf(0.0f,
+      val validSpaces = listOf(
+        0.0f,
         view.context.resources.getDimension(R.dimen.bpkElevationBase),
         view.context.resources.getDimension(R.dimen.bpkElevationLg),
         view.context.resources.getDimension(R.dimen.bpkElevationSm),
         view.context.resources.getDimension(R.dimen.bpkElevationXl),
         view.context.resources.getDimension(R.dimen.bpkElevationXs),
-        view.context.resources.getDimension(R.dimen.bpkElevationXxl))
+        view.context.resources.getDimension(R.dimen.bpkElevationXxl)
+      )
 
       val elevation = ResourcesUtil.pxToDp(view.elevation, view.context)
       if (elevation !in validSpaces) {

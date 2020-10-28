@@ -21,8 +21,8 @@ package net.skyscanner.backpack.util
 import android.content.Context
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.R
 import org.junit.Assert
 import org.junit.Before

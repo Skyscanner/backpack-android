@@ -24,17 +24,18 @@ import android.graphics.Typeface
 import android.view.ContextThemeWrapper
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Assert
-import org.junit.Test
-import org.junit.runner.RunWith
+import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.test.R as TestR
+import net.skyscanner.backpack.text.BpkText.Weight
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.unsafeLazy
+import org.junit.Assert
 import org.junit.Before
-import net.skyscanner.backpack.test.R as TestR
+import org.junit.Test
+import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkTextTest {
@@ -57,7 +58,8 @@ class BpkTextTest {
     val textSizeSp = textSizePx / context.resources.displayMetrics.scaledDensity
 
     val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextBase, R.styleable.BpkTextStyle)
-    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) / context.resources.displayMetrics.scaledDensity
+    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) /
+      context.resources.displayMetrics.scaledDensity
 
     Assert.assertEquals(expectedTextSizeSp, textSizeSp)
     Assert.assertEquals(testString, text.text)
@@ -67,18 +69,19 @@ class BpkTextTest {
   fun emphasized() {
     val text = BpkText(context).apply {
       text = testString
-      weight = BpkText.Weight.EMPHASIZED
+      weight = Weight.EMPHASIZED
     }
 
     val textSizePx = text.textSize
     val textSizeSp = textSizePx / context.resources.displayMetrics.scaledDensity
 
     val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextBaseEmphasized, R.styleable.BpkTextStyle)
-    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) / context.resources.displayMetrics.scaledDensity
+    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) /
+      context.resources.displayMetrics.scaledDensity
 
     Assert.assertEquals(expectedTextSizeSp, textSizeSp)
     Assert.assertEquals(testString, text.text)
-    Assert.assertEquals(BpkText.Weight.EMPHASIZED, text.weight)
+    Assert.assertEquals(Weight.EMPHASIZED, text.weight)
   }
 
   @Test
@@ -86,14 +89,15 @@ class BpkTextTest {
     val text = BpkText(context).apply {
       text = testString
       textStyle = BpkText.XL
-      weight = BpkText.Weight.HEAVY
+      weight = Weight.HEAVY
     }
 
     val textSizePx = text.textSize
     val textSizeSp = textSizePx / context.resources.displayMetrics.scaledDensity
 
     val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextXlHeavy, R.styleable.BpkTextStyle)
-    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) / context.resources.displayMetrics.scaledDensity
+    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) /
+      context.resources.displayMetrics.scaledDensity
 
     Assert.assertEquals(expectedTextSizeSp, textSizeSp)
     Assert.assertEquals(testString, text.text)
@@ -110,32 +114,52 @@ class BpkTextTest {
   fun throw_when_heavy_unsupported() {
     BpkText(context).apply {
       textStyle = BpkText.SM
-      weight = BpkText.Weight.HEAVY
+      weight = Weight.HEAVY
     }
   }
 
   private val textDefinitions by unsafeLazy {
-    val fontsAccessor = { style: Int, weight: BpkText.Weight -> { context: Context -> BpkText.getFont(context, style, weight) } }
+    val fontsAccessor = { style: Int, weight: Weight ->
+      { context: Context -> BpkText.getFont(context, style, weight) }
+    }
     arrayOf(
-      arrayOf("bpkTextBase", "sans-serif", 16, -0.0125f, fontsAccessor(BpkText.BASE, BpkText.Weight.NORMAL)),
-      arrayOf("bpkTextCaps", "sans-serif", 10, 0.04f, fontsAccessor(BpkText.CAPS, BpkText.Weight.NORMAL)),
-      arrayOf("bpkTextLg", "sans-serif", 20, -0.02f, fontsAccessor(BpkText.LG, BpkText.Weight.NORMAL)),
-      arrayOf("bpkTextSm", "sans-serif", 14, 0f, fontsAccessor(BpkText.SM, BpkText.Weight.NORMAL)),
-      arrayOf("bpkTextXl", "sans-serif", 24, -0.024999999999999998f, fontsAccessor(BpkText.XL, BpkText.Weight.NORMAL)),
-      arrayOf("bpkTextXs", "sans-serif", 12, 0f, fontsAccessor(BpkText.XS, BpkText.Weight.NORMAL)),
-      arrayOf("bpkTextXxl", "sans-serif", 30, -0.02666666666666667f, fontsAccessor(BpkText.XXL, BpkText.Weight.NORMAL)),
-      arrayOf("bpkTextXxxl", "sans-serif", 36, -0.027777777777777776f, fontsAccessor(BpkText.XXXL, BpkText.Weight.NORMAL)),
-      arrayOf("bpkTextBaseEmphasized", "sans-serif-medium", 16, -0.0125f, fontsAccessor(BpkText.BASE, BpkText.Weight.EMPHASIZED)),
-      arrayOf("bpkTextCapsEmphasized", "sans-serif-medium", 10, 0.04f, fontsAccessor(BpkText.CAPS, BpkText.Weight.EMPHASIZED)),
-      arrayOf("bpkTextLgEmphasized", "sans-serif-medium", 20, -0.02f, fontsAccessor(BpkText.LG, BpkText.Weight.EMPHASIZED)),
-      arrayOf("bpkTextSmEmphasized", "sans-serif-medium", 14, 0f, fontsAccessor(BpkText.SM, BpkText.Weight.EMPHASIZED)),
-      arrayOf("bpkTextXlEmphasized", "sans-serif-medium", 24, -0.024999999999999998f, fontsAccessor(BpkText.XL, BpkText.Weight.EMPHASIZED)),
-      arrayOf("bpkTextXsEmphasized", "sans-serif-medium", 12, 0f, fontsAccessor(BpkText.XS, BpkText.Weight.EMPHASIZED)),
-      arrayOf("bpkTextXxlEmphasized", "sans-serif-medium", 30, -0.02666666666666667f, fontsAccessor(BpkText.XXL, BpkText.Weight.EMPHASIZED)),
-      arrayOf("bpkTextXxxlEmphasized", "sans-serif-medium", 36, -0.027777777777777776f, fontsAccessor(BpkText.XXXL, BpkText.Weight.EMPHASIZED)),
-      arrayOf("bpkTextXlHeavy", "sans-serif-black", 24, -0.024999999999999998f, fontsAccessor(BpkText.XL, BpkText.Weight.HEAVY)),
-      arrayOf("bpkTextXxlHeavy", "sans-serif-black", 30, -0.02666666666666667f, fontsAccessor(BpkText.XXL, BpkText.Weight.HEAVY)),
-      arrayOf("bpkTextXxxlHeavy", "sans-serif-black", 36, -0.027777777777777776f, fontsAccessor(BpkText.XXXL, BpkText.Weight.HEAVY))
+      arrayOf("bpkTextBase", "sans-serif", 16, -0.0125f, fontsAccessor(BpkText.BASE, Weight.NORMAL)),
+      arrayOf("bpkTextCaps", "sans-serif", 10, 0.04f, fontsAccessor(BpkText.CAPS, Weight.NORMAL)),
+      arrayOf("bpkTextLg", "sans-serif", 20, -0.02f, fontsAccessor(BpkText.LG, Weight.NORMAL)),
+      arrayOf("bpkTextSm", "sans-serif", 14, 0f, fontsAccessor(BpkText.SM, Weight.NORMAL)),
+      arrayOf("bpkTextXl", "sans-serif", 24, -0.024999999999999998f, fontsAccessor(BpkText.XL, Weight.NORMAL)),
+      arrayOf("bpkTextXs", "sans-serif", 12, 0f, fontsAccessor(BpkText.XS, Weight.NORMAL)),
+      arrayOf("bpkTextXxl", "sans-serif", 30, -0.02666666666666667f, fontsAccessor(BpkText.XXL, Weight.NORMAL)),
+      arrayOf("bpkTextXxxl", "sans-serif", 36, -0.027777777777777776f, fontsAccessor(BpkText.XXXL, Weight.NORMAL)),
+      arrayOf("bpkTextBaseEmphasized", "sans-serif-medium", 16, -0.0125f, fontsAccessor(BpkText.BASE, Weight.EMPHASIZED)),
+      arrayOf("bpkTextCapsEmphasized", "sans-serif-medium", 10, 0.04f, fontsAccessor(BpkText.CAPS, Weight.EMPHASIZED)),
+      arrayOf("bpkTextLgEmphasized", "sans-serif-medium", 20, -0.02f, fontsAccessor(BpkText.LG, Weight.EMPHASIZED)),
+      arrayOf("bpkTextSmEmphasized", "sans-serif-medium", 14, 0f, fontsAccessor(BpkText.SM, Weight.EMPHASIZED)),
+      arrayOf(
+        "bpkTextXlEmphasized",
+        "sans-serif-medium",
+        24,
+        -0.024999999999999998f,
+        fontsAccessor(BpkText.XL, Weight.EMPHASIZED)
+      ),
+      arrayOf("bpkTextXsEmphasized", "sans-serif-medium", 12, 0f, fontsAccessor(BpkText.XS, Weight.EMPHASIZED)),
+      arrayOf(
+        "bpkTextXxlEmphasized",
+        "sans-serif-medium",
+        30,
+        -0.02666666666666667f,
+        fontsAccessor(BpkText.XXL, Weight.EMPHASIZED)
+      ),
+      arrayOf(
+        "bpkTextXxxlEmphasized",
+        "sans-serif-medium",
+        36,
+        -0.027777777777777776f,
+        fontsAccessor(BpkText.XXXL, Weight.EMPHASIZED)
+      ),
+      arrayOf("bpkTextXlHeavy", "sans-serif-black", 24, -0.024999999999999998f, fontsAccessor(BpkText.XL, Weight.HEAVY)),
+      arrayOf("bpkTextXxlHeavy", "sans-serif-black", 30, -0.02666666666666667f, fontsAccessor(BpkText.XXL, Weight.HEAVY)),
+      arrayOf("bpkTextXxxlHeavy", "sans-serif-black", 36, -0.027777777777777776f, fontsAccessor(BpkText.XXXL, Weight.HEAVY))
     )
   }
 

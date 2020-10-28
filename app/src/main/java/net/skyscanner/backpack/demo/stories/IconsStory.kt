@@ -84,7 +84,8 @@ class IconsStory : Story() {
     iconsGridView.adapter = IconsAdapter(
       drawableResources,
       iconNames,
-      if (isRtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR)
+      if (isRtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+    )
   }
 
   private fun isVectorDrawable(d: Drawable): Boolean {

@@ -23,7 +23,7 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
-import android.text.*
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
 import android.widget.TextView
@@ -31,11 +31,12 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.graphics.drawable.DrawableCompat
-import net.skyscanner.backpack.R
-import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.*
 import kotlin.math.max
 import kotlin.math.min
+import net.skyscanner.backpack.R
+import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.use
+import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 internal const val ICON_POSITION_START = 0
 internal const val ICON_POSITION_END = 1

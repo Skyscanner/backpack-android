@@ -35,6 +35,7 @@
 package net.skyscanner.backpack.calendar.presenter
 
 import androidx.annotation.VisibleForTesting
+import java.util.Locale
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
@@ -42,7 +43,6 @@ import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.view.CalendarUpdateCallback
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
-import java.util.*
 
 abstract class BpkCalendarController(
   open val selectionType: SelectionType = SelectionType.RANGE,
@@ -126,7 +126,8 @@ abstract class BpkCalendarController(
     onRangeSelected(selectedRange)
   }
 
-  internal fun getLocalizedDate(date: LocalDate, pattern: String): String = DateTimeFormatter.ofPattern(pattern, locale).format(date)
+  internal fun getLocalizedDate(date: LocalDate, pattern: String): String =
+    DateTimeFormatter.ofPattern(pattern, locale).format(date)
 
   open fun isToday(year: Int, month: Int, day: Int): Boolean {
     return LocalDate.of(year, month, day) == currentDateProvider.invoke()

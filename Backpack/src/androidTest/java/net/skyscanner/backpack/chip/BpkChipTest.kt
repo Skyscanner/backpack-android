@@ -20,8 +20,8 @@ package net.skyscanner.backpack.chip
 
 import android.content.Context
 import androidx.core.content.ContextCompat
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.R
 import org.junit.Assert
 import org.junit.Before

@@ -27,8 +27,8 @@ import androidx.annotation.FloatRange
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.rating.internal.RatingScore
 import net.skyscanner.backpack.rating.internal.RatingAppearance
+import net.skyscanner.backpack.rating.internal.RatingScore
 import net.skyscanner.backpack.rating.internal.RatingSelectors
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper

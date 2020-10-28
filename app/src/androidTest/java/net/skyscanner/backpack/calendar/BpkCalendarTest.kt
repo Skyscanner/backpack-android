@@ -28,12 +28,17 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
+import java.util.Locale
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.SingleDay
-import net.skyscanner.backpack.calendar.presenter.*
+import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
+import net.skyscanner.backpack.calendar.presenter.CurrentDateProvider
+import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
+import net.skyscanner.backpack.calendar.presenter.MonthFooterAdapter
+import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
@@ -45,7 +50,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
-import java.util.*
 
 private val today = LocalDate.of(2019, 1, 2)
 
@@ -118,7 +122,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
       initialStartDate,
       initialEndDate,
       SelectionType.RANGE,
-      multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext))
+      multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext)
+    )
 
     calendar.setController(controller)
     snap(wrapWithBackground(calendar))
@@ -438,11 +443,13 @@ class BpkCalendarTest : BpkSnapshotTest() {
       Locale.UK,
       setOf(
         HighlightedDaysAdapter.HighlightedDay(
-          LocalDate.of(2017, 1, 1), "New Year's Day"),
+          LocalDate.of(2017, 1, 1), "New Year's Day"
+        ),
         HighlightedDaysAdapter.HighlightedDay(
           date = LocalDate.of(2017, 1, 2),
           description = "Bank Holiday",
-          descriptionOnly = true)
+          descriptionOnly = true
+        )
       )
     )
 

@@ -53,7 +53,9 @@ class BpkGradientsTest : BpkSnapshotTest() {
       GradientDrawable.Orientation.TL_BR,
       intArrayOf(
         ContextCompat.getColor(testContext, R.color.bpkMonteverde),
-        ContextCompat.getColor(testContext, R.color.bpkSagano)))
+        ContextCompat.getColor(testContext, R.color.bpkSagano)
+      )
+    )
 
     val view = View(testContext)
     view.background = gradient

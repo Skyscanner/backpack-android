@@ -18,21 +18,21 @@
 
 package net.skyscanner.backpack.dialog
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Handler
 import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.util.TestActivity
-import org.junit.Test
-import org.junit.Rule
 import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
@@ -58,9 +58,9 @@ class BpkDialogTest {
   @Test
   @FlakyTest
   fun test_with_title() {
-      val dialog = BpkDialog(mActivity).apply {
-        title = "title"
-      }
+    val dialog = BpkDialog(mActivity).apply {
+      title = "title"
+    }
 
     handler.post {
       dialog.show()
@@ -89,9 +89,11 @@ class BpkDialogTest {
   @FlakyTest
   fun test_with_buttons() {
     val dialog = BpkDialog(mActivity).apply {
-      addActionButton(BpkButton(mActivity).apply {
-        text = "Confirm"
-      })
+      addActionButton(
+        BpkButton(mActivity).apply {
+          text = "Confirm"
+        }
+      )
     }
 
     handler.post {

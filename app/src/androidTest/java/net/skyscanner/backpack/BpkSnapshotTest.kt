@@ -37,7 +37,9 @@ open class BpkSnapshotTest {
     BpkTheme.wrapContextWithDefaults(
       ContextThemeWrapper(
         InstrumentationRegistry.getInstrumentation().targetContext,
-        R.style.AppTheme))
+        R.style.AppTheme
+      )
+    )
 
   protected fun setupView(view: View) {
     ViewHelpers.setupView(view)

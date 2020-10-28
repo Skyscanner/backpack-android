@@ -19,9 +19,35 @@
 package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.stories.*
+import net.skyscanner.backpack.demo.stories.BarChartStory
+import net.skyscanner.backpack.demo.stories.BottomNavStory
+import net.skyscanner.backpack.demo.stories.ChangeableButtonsStory
+import net.skyscanner.backpack.demo.stories.ChipStory
+import net.skyscanner.backpack.demo.stories.ColorStory
+import net.skyscanner.backpack.demo.stories.ColoredCalendarStory
+import net.skyscanner.backpack.demo.stories.DefaultCalendarStory
+import net.skyscanner.backpack.demo.stories.DialogStory
+import net.skyscanner.backpack.demo.stories.DisabledCalendarStory
+import net.skyscanner.backpack.demo.stories.ElevationStory
+import net.skyscanner.backpack.demo.stories.FooterViewCalendarStory
+import net.skyscanner.backpack.demo.stories.GradientStoryCustom
+import net.skyscanner.backpack.demo.stories.GradientStoryPrimary
+import net.skyscanner.backpack.demo.stories.GradientStoryWithDirection
+import net.skyscanner.backpack.demo.stories.HorizontalNavStory
+import net.skyscanner.backpack.demo.stories.IconType
+import net.skyscanner.backpack.demo.stories.IconsStory
+import net.skyscanner.backpack.demo.stories.InteractiveStarRatingStory
+import net.skyscanner.backpack.demo.stories.LoadingButtonStory
+import net.skyscanner.backpack.demo.stories.NavBarStory
+import net.skyscanner.backpack.demo.stories.SnackbarStory
+import net.skyscanner.backpack.demo.stories.SpacingStory
+import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.Story.Companion.Direction
 import net.skyscanner.backpack.demo.stories.Story.Companion.with
+import net.skyscanner.backpack.demo.stories.StyleableButtonStory
+import net.skyscanner.backpack.demo.stories.SubStory
+import net.skyscanner.backpack.demo.stories.TextSpansStory
+import net.skyscanner.backpack.demo.stories.ToastStory
 
 interface RegistryItem {
   val name: String
@@ -46,8 +72,8 @@ class NodeItem(
   override fun createStory() = creator(subItems.map { it.value.getFullyQualifiedName() }.toTypedArray())
 
   override fun getParent() = parent
-  override fun setParent(newParent: RegistryItem) {
-    parent = newParent
+  override fun setParent(parent: RegistryItem) {
+    this.parent = parent
   }
 
   override fun getFullyQualifiedName(): String {
@@ -84,7 +110,8 @@ object ComponentRegistry {
     "Badge" story NodeData { Story of R.layout.fragment_badge },
     "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
-    "Button" story NodeData({ children -> SubStory of children },
+    "Button" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Primary" story NodeData { Story of R.layout.fragment_button_primary },
         "Secondary" story NodeData { Story of R.layout.fragment_button_secondary },
@@ -96,13 +123,17 @@ object ComponentRegistry {
         "Loading" story NodeData { LoadingButtonStory of R.layout.fragment_button_loading },
         "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
         "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable }
-      )),
-    "ButtonLink" story NodeData({ children -> SubStory of children },
+      )
+    ),
+    "ButtonLink" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_button_link },
         "Icon alignment" story NodeData { Story of R.layout.fragment_button_link_icon_alignment }
-      )),
-    "Card" story NodeData({ children -> SubStory of children },
+      )
+    ),
+    "Card" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_card },
         "Without padding" story NodeData { Story of R.layout.fragment_card_without_padding },
@@ -111,25 +142,35 @@ object ComponentRegistry {
         "With divider" story NodeData { Story of R.layout.fragment_card_with_divider },
         "With divider arranged vertically" story NodeData { Story of R.layout.fragment_card_with_divider_vertical },
         "With divider without padding" story NodeData { Story of R.layout.fragment_card_with_divider_no_padding },
-        "With divider and corner style large" story NodeData { Story of R.layout.fragment_card_with_divider_cornerstyle_large }
-      )),
-    "Calendar" story NodeData({ children -> SubStory of children },
+        "With divider and corner style large" story NodeData {
+          Story of R.layout.fragment_card_with_divider_cornerstyle_large
+        }
+      )
+    ),
+    "Calendar" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { DefaultCalendarStory of R.layout.fragment_calendar_default },
         "Colored" story NodeData { ColoredCalendarStory of R.layout.fragment_calendar_colored },
         "Disabled Dates" story NodeData { DisabledCalendarStory of R.layout.fragment_calendar_disabled },
         "Footer view" story NodeData { FooterViewCalendarStory of R.layout.fragment_calendar_footer_view },
-        "Footer view RTL" story NodeData { FooterViewCalendarStory of R.layout.fragment_calendar_footer_view with Direction.RTL }
-      )),
-    "Chip" story NodeData({ children -> SubStory of children },
+        "Footer view RTL" story NodeData {
+          FooterViewCalendarStory of R.layout.fragment_calendar_footer_view with Direction.RTL
+        }
+      )
+    ),
+    "Chip" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { ChipStory of R.layout.fragment_chip },
         "Outline" story NodeData { ChipStory of R.layout.fragment_outline_chip },
         "With icon" story NodeData { ChipStory of R.layout.fragment_chip_with_icon },
         "With icon RTL" story NodeData { ChipStory of R.layout.fragment_chip_with_icon with Direction.RTL }
-      )),
+      )
+    ),
     "Checkbox" story NodeData { Story of R.layout.fragment_checkbox },
-    "Dialog" story NodeData({ children -> SubStory of children },
+    "Dialog" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "With call to action" story NodeData { DialogStory of "Normal" },
         "Warning" story NodeData { DialogStory of "Warning" },
@@ -138,8 +179,10 @@ object ComponentRegistry {
         "With Links" story NodeData { DialogStory of "Links" },
         "Long Text" story NodeData { DialogStory of "Long" },
         "Flare" story NodeData { DialogStory of "Flare" }
-      )),
-    "Flare" story NodeData({ children -> SubStory of children },
+      )
+    ),
+    "Flare" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_flare },
         "Pointing up" story NodeData { Story of R.layout.fragment_flare_up },
@@ -147,10 +190,12 @@ object ComponentRegistry {
         "Pointer offset RTL" story NodeData { Story of R.layout.fragment_flare_pointer_offset with Direction.RTL },
         "Rounded" story NodeData { Story of R.layout.fragment_flare_rounded },
         "Inset padding mode" story NodeData { Story of R.layout.fragment_flare_inset_padding_mode }
-      )),
+      )
+    ),
     "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
-    "Nav Bar" story NodeData({ children -> SubStory of children },
+    "Nav Bar" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { NavBarStory of R.layout.fragment_nav_bar },
         "RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar with Direction.RTL },
@@ -158,10 +203,12 @@ object ComponentRegistry {
         "With Icon RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon with Direction.RTL },
         "With Menu" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu },
         "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL }
-      )),
+      )
+    ),
     "Overlay" story NodeData { Story of R.layout.fragment_overlay },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
-    "Rating" story NodeData({ children -> SubStory of children },
+    "Rating" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_rating_default },
         "Icons" story NodeData { Story of R.layout.fragment_rating_icons },
@@ -170,51 +217,62 @@ object ComponentRegistry {
         "Horizontal RTL" story NodeData { Story of R.layout.fragment_rating_sizes with Direction.RTL },
         "Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical },
         "Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill }
-      )),
+      )
+    ),
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
-    "Spinner" story NodeData({ children -> SubStory of children },
+    "Spinner" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_spinner },
         "Small" story NodeData { Story of R.layout.fragment_spinner_small }
-      )),
-    "Star Rating" story NodeData({ children -> SubStory of children },
+      )
+    ),
+    "Star Rating" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
         "RTL" story NodeData { Story of R.layout.fragment_star_rating_default with Direction.RTL },
         "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
         "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max }
-      )),
+      )
+    ),
     "Star Rating Interactive" story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
     "Switch" story NodeData { Story of R.layout.fragment_switch },
-    "Text" story NodeData({ children -> SubStory of children },
+    "Text" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { Story of R.layout.fragment_text },
         "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
         "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
         "With drawables" story NodeData { Story of R.layout.fragment_text_drawables },
         "With links" story NodeData { Story of R.layout.fragment_text_links }
-      )),
+      )
+    ),
     "Text Field" story NodeData { Story of R.layout.fragment_text_fields },
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
     "Toast" story NodeData { ToastStory of R.layout.fragment_toasts }
   )
 
   private val TOKENS_MAP = mapOf(
-    "All Icons" story NodeData({ children -> SubStory of children },
+    "All Icons" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Default" story NodeData { IconsStory of IconType.Default },
         "RTL" story NodeData { IconsStory of IconType.Default with Direction.RTL },
         "Small" story NodeData { IconsStory of IconType.Small },
         "Small RTL" story NodeData { IconsStory of IconType.Small with Direction.RTL }
-      )),
+      )
+    ),
     "Color" story NodeData { ColorStory() },
     "Elevation" story NodeData { ElevationStory() },
-    "Gradient" story NodeData({ children -> SubStory of children },
+    "Gradient" story NodeData(
+      { children -> SubStory of children },
       mapOf(
         "Primary" story NodeData { GradientStoryPrimary() },
         "With direction" story NodeData { GradientStoryWithDirection() },
         "Custom" story NodeData { GradientStoryCustom() }
-      )),
+      )
+    ),
     "Icons" story NodeData { Story of R.layout.fragment_icons },
     "Radii" story NodeData { Story of R.layout.fragment_radii },
     "Spacing" story NodeData { SpacingStory() }

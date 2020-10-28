@@ -31,9 +31,7 @@ function triggerJitPackBuild(version) {
   return fetch(url).then(response => {
     const { status } = response;
     if (status / 100 === 4 || status / 100 === 5) {
-      throw new Error(
-        `Unable to trigger JitPack build, response.code=${status}`,
-      );
+      throw new Error(`Unable to trigger JitPack build, response.code=${status}`);
     }
     console.log('JitPack build triggered!');
   });

@@ -201,9 +201,12 @@ class BpkBarchartTests : BpkSnapshotTest() {
     title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
     items = ArrayList<BpkBarChart.Column>(10).apply {
       for (dayOfTheMonth in 0 until 30) {
-        add(createBar(month * 30 + dayOfTheMonth,
-          badge, value, inactive
-        ))
+        add(
+          createBar(
+            month * 30 + dayOfTheMonth,
+            badge, value, inactive
+          )
+        )
       }
     }
   )

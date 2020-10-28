@@ -42,7 +42,11 @@ class NavBarStory : Story() {
       BpkToast.makeText(requireContext(), "Nav is clicked!", BpkToast.LENGTH_SHORT).show()
     }
     navBar.menuAction = {
-      BpkToast.makeText(requireContext(), "${it.itemId.let(resources::getResourceEntryName)} is clicked!", BpkToast.LENGTH_SHORT).show()
+      BpkToast.makeText(
+        requireContext(),
+        "${it.itemId.let(resources::getResourceEntryName)} is clicked!",
+        BpkToast.LENGTH_SHORT
+      ).show()
     }
   }
 

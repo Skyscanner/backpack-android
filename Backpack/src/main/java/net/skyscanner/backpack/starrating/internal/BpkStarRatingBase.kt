@@ -19,18 +19,17 @@
 package net.skyscanner.backpack.starrating.internal
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
-import androidx.annotation.DrawableRes
-import androidx.core.graphics.drawable.DrawableCompat
-
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 

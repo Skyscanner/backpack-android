@@ -24,8 +24,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import net.skyscanner.backpack.demo.R
 import java.lang.reflect.Field
+import net.skyscanner.backpack.demo.R
 
 class ColorStory : Story() {
   override fun onCreateView(

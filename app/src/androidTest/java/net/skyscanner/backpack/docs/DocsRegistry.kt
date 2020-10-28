@@ -85,7 +85,7 @@ object DocsRegistry {
     Screenshot("Spinner - Small", "small"),
     // Leave toast last as it stays visible in the screen for a while
     Screenshot("Toast", "default", ::setupToast)
-    ).map { it.toArgs() }
+  ).map { it.toArgs() }
 }
 
 data class Screenshot(
@@ -100,10 +100,12 @@ private fun setupCalendar() {
   Espresso.onView(ViewMatchers.withId(R.id.bpkCalendar))
     .check { view, _ ->
       view as BpkCalendar
-      view.controller?.updateSelection(CalendarRange(
-        LocalDate.now().plusDays(5),
-        LocalDate.now().plusDays(10)
-      ))
+      view.controller?.updateSelection(
+        CalendarRange(
+          LocalDate.now().plusDays(5),
+          LocalDate.now().plusDays(10)
+        )
+      )
       view.controller?.updateContent()
     }
 }

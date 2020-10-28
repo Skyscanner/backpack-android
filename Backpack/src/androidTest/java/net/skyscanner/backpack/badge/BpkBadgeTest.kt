@@ -19,8 +19,8 @@
 package net.skyscanner.backpack.badge
 
 import android.graphics.PixelFormat
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert
 import org.junit.Ignore
 import org.junit.Test

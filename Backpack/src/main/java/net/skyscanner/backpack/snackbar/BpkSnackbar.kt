@@ -32,10 +32,10 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
 import androidx.core.view.GravityCompat
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.snackbar.internal.createIconDrawable
@@ -208,11 +208,14 @@ class BpkSnackbar private constructor(
       icon != null -> Gravity.CENTER
       else -> GravityCompat.START or Gravity.CENTER_VERTICAL
     }
-    snackbar.setAction(when {
-      !text.isNullOrEmpty() -> text
-      icon != null -> customiseText(" ", ImageSpan(createIconDrawable(icon, textColor)!!))
-      else -> ""
-    }, callback)
+    snackbar.setAction(
+      when {
+        !text.isNullOrEmpty() -> text
+        icon != null -> customiseText(" ", ImageSpan(createIconDrawable(icon, textColor)!!))
+        else -> ""
+      },
+      callback
+    )
   }
 
   companion object {

@@ -18,15 +18,16 @@
 
 package net.skyscanner.backpack.docs
 
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.Parameterized
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
-import net.skyscanner.backpack.demo.*
+import net.skyscanner.backpack.demo.ComponentDetailActivity
+import net.skyscanner.backpack.demo.ComponentDetailFragment
 import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 open class GenerateScreenshots(
