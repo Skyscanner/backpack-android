@@ -25,9 +25,7 @@ import { danger, fail, warn, message } from 'danger';
 
 import meta from './meta.json';
 
-const BACKPACK_SQUAD_MEMBERS = meta.maintainers.map(
-  maintainer => maintainer.github,
-);
+const BACKPACK_SQUAD_MEMBERS = meta.maintainers.map(maintainer => maintainer.github);
 
 const author = danger.github.pr.user.login;
 const isPrExternal = !BACKPACK_SQUAD_MEMBERS.includes(author);
@@ -47,13 +45,9 @@ if (isPrExternal) {
 
 // If any code have changed, the UNRELEASED log should have been updated.
 const unreleasedModified = includes(modifiedFiles, 'UNRELEASED.md');
-const packagesModified = fileChanges.some(filePath =>
-  filePath.startsWith('Backpack/src'),
-);
+const packagesModified = fileChanges.some(filePath => filePath.startsWith('Backpack/src'));
 if (packagesModified && !unreleasedModified && !declaredTrivial) {
-  warn(
-    "One or more packages have changed, but `UNRELEASED.md` wasn't updated.",
-  );
+  warn("One or more packages have changed, but `UNRELEASED.md` wasn't updated.");
 }
 
 // Ensure package-lock changes are intentional.
@@ -64,22 +58,12 @@ if (lockFileUpdated) {
 
 // New files should include the Backpack license heading.
 const unlicensedFiles = createdFiles.filter(filePath => {
-  if (
-    filePath.match(/\.(js|sh|kt|java)$/) &&
-    !filePath.includes('dist/') &&
-    !filePath.includes('build/')
-  ) {
+  if (filePath.match(/\.(js|sh|kt|java)$/) && !filePath.includes('dist/') && !filePath.includes('build/')) {
     const fileContent = fs.readFileSync(filePath);
-    return !fileContent.includes(
-      'Licensed under the Apache License, Version 2.0 (the "License")',
-    );
+    return !fileContent.includes('Licensed under the Apache License, Version 2.0 (the "License")');
   }
   return false;
 });
 if (unlicensedFiles.length > 0) {
-  fail(
-    `These new files do not include the license heading: ${unlicensedFiles.join(
-      ', ',
-    )}`,
-  );
+  fail(`These new files do not include the license heading: ${unlicensedFiles.join(', ')}`);
 }

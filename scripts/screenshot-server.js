@@ -52,10 +52,7 @@ http
     const [componentName, ...screenShotName] = query.name.split('_');
 
     const folderPath = path.join('docs', componentName, 'screenshots');
-    const screenShotPath = path.join(
-      folderPath,
-      `${screenShotName.join('_')}.png`,
-    );
+    const screenShotPath = path.join(folderPath, `${screenShotName.join('_')}.png`);
 
     try {
       if (!fs.existsSync(folderPath)) {

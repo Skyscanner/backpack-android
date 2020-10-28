@@ -52,27 +52,11 @@ const iconsMetadata = require('bpk-svgs/dist/metadata.json');
 const PATHS = {
   templates: path.join(__dirname, 'templates'),
   outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res'),
-  drawableRes: path.join(
-    __dirname,
-    'Backpack',
-    'src',
-    'main',
-    'res',
-    'drawable-nodpi',
-  ),
+  drawableRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res', 'drawable-nodpi'),
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
-const VALID_TEXT_STYLES = new Set([
-  'caps',
-  'xs',
-  'sm',
-  'base',
-  'lg',
-  'xl',
-  'xxl',
-  'xxxl',
-]);
+const VALID_TEXT_STYLES = new Set(['caps', 'xs', 'sm', 'base', 'lg', 'xl', 'xxl', 'xxxl']);
 const VALID_HEAVY_TEXT_STYLES = new Set(['xl', 'xxl', 'xxxl']);
 
 const FONT_WEIGHTS = {
@@ -100,11 +84,9 @@ const getFontWeightSuffix = fontWeight => {
   return '';
 };
 
-const tokensWithType = type =>
-  Object.values(tokens.props).filter(i => i.type === type);
+const tokensWithType = type => Object.values(tokens.props).filter(i => i.type === type);
 
-const tokensWithCategory = category =>
-  Object.values(tokens.props).filter(i => i.category === category);
+const tokensWithCategory = category => Object.values(tokens.props).filter(i => i.category === category);
 
 const shouldAutoMirror = chunk => {
   const iconMetadata = iconsMetadata[chunk.stem];
@@ -138,9 +120,7 @@ const convertToXml = (chunk, enc, cb) => {
         // lg icon is default
         suffix = '';
       }
-      const fileName = locationPaths[locationPaths.length - 1]
-        .replace(/-/g, '_')
-        .replace('.svg', `${suffix}.xml`);
+      const fileName = locationPaths[locationPaths.length - 1].replace(/-/g, '_').replace('.svg', `${suffix}.xml`);
       locationPaths[locationPaths.length - 1] = `bpk_${fileName}`;
       chunk.path = locationPaths.join('/'); // eslint-disable-line no-param-reassign
       cb(null, chunk);
@@ -156,11 +136,7 @@ const getTextDimensions = () =>
 
 const getTextStyles = fontWeight => {
   const result = _.chain(
-    [].concat(
-      tokensWithCategory('font-sizes'),
-      tokensWithCategory('font-weights'),
-      tokensWithCategory('letter-spacings'),
-    ),
+    [].concat(tokensWithCategory('font-sizes'), tokensWithCategory('font-weights'), tokensWithCategory('letter-spacings')),
   )
     .groupBy(({ name }) =>
       name
@@ -170,31 +146,19 @@ const getTextStyles = fontWeight => {
     )
     .map((values, key) => [values, key])
     .filter(token =>
-      (fontWeight === FONT_WEIGHTS.heavy
-        ? VALID_HEAVY_TEXT_STYLES
-        : VALID_TEXT_STYLES
-      ).has(token[1].replace('TEXT_', '').toLowerCase()),
+      (fontWeight === FONT_WEIGHTS.heavy ? VALID_HEAVY_TEXT_STYLES : VALID_TEXT_STYLES).has(
+        token[1].replace('TEXT_', '').toLowerCase(),
+      ),
     )
     .map(token => {
       const properties = token[0];
       const key = token[1];
 
-      const sizeProp = _.filter(
-        properties,
-        ({ category }) => category === 'font-sizes',
-      );
-      const weightProp = _.filter(
-        properties,
-        ({ category }) => category === 'font-weights',
-      );
-      const letterSpacingProp = _.filter(
-        properties,
-        ({ category }) => category === 'letter-spacings',
-      );
+      const sizeProp = _.filter(properties, ({ category }) => category === 'font-sizes');
+      const weightProp = _.filter(properties, ({ category }) => category === 'font-weights');
+      const letterSpacingProp = _.filter(properties, ({ category }) => category === 'letter-spacings');
       if (sizeProp.length !== 1 || weightProp.length !== 1) {
-        throw new Error(
-          'Expected all text sizes to have a weight and font size.',
-        );
+        throw new Error('Expected all text sizes to have a weight and font size.');
       }
 
       return {
@@ -215,9 +179,7 @@ gulp.task('template:color', () => {
     tokensWithType('color')
       .map(color => {
         const colorObject = JSON.parse(JSON.stringify(color));
-        colorObject.name = `bpk${pascalCase(
-          colorObject.name.replace(colorObject.type.toUpperCase(), ''),
-        )}`;
+        colorObject.name = `bpk${pascalCase(colorObject.name.replace(colorObject.type.toUpperCase(), ''))}`;
         colorObject.value = tinycolor(colorObject.value).toHexString();
         return colorObject;
       })
@@ -239,9 +201,7 @@ gulp.task('template:semanticColor', () => {
     tokensWithType('color').reduce(
       (out, color) => {
         const colorObject = JSON.parse(JSON.stringify(color));
-        colorObject.name = `bpk${pascalCase(
-          colorObject.name.replace(colorObject.type.toUpperCase(), ''),
-        )}`;
+        colorObject.name = `bpk${pascalCase(colorObject.name.replace(colorObject.type.toUpperCase(), ''))}`;
 
         if (isSemanticColor(colorObject)) {
           const light = {
@@ -288,14 +248,10 @@ gulp.task('template:spacing', () => {
   const getSpacing = () =>
     tokensWithCategory('spacings')
       .map(token => JSON.parse(JSON.stringify(token)))
-      .filter(({ name }) =>
-        VALID_SPACINGS.has(name.toLowerCase().replace('spacing_', '')),
-      )
+      .filter(({ name }) => VALID_SPACINGS.has(name.toLowerCase().replace('spacing_', '')))
       .map(token => {
         const newToken = token;
-        newToken.name = `bpk${pascalCase(
-          newToken.name.replace(newToken.type.toUpperCase(), ''),
-        )}`;
+        newToken.name = `bpk${pascalCase(newToken.name.replace(newToken.type.toUpperCase(), ''))}`;
         return newToken;
       });
 
@@ -450,9 +406,7 @@ gulp.task('printTextAppearenceStyles', done => {
     ...getTextStyles(FONT_WEIGHTS.emphasized),
     ...getTextStyles(FONT_WEIGHTS.heavy),
   ].forEach(({ name }) => {
-    console.log(
-      `<item name="${name}Appearance">@style/${name}${fontSuffix}</item>`,
-    );
+    console.log(`<item name="${name}Appearance">@style/${name}${fontSuffix}</item>`);
   });
   done();
 });
