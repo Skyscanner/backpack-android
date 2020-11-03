@@ -19,10 +19,8 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.sizedDrawable
 
@@ -50,22 +48,14 @@ abstract class BpkButtonWithIcon internal constructor(
     set(value) {
       if (field != value) {
         field = value?.let {
-          DrawableCompat.wrap(
-            sizedDrawable(
-              drawable = it,
-              width = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
-              height = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
-            )
+          sizedDrawable(
+            drawable = it,
+            width = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
+            height = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
           )
         }
         updateCompoundIcon()
       }
-    }
-
-  internal var iconDrawableTint: ColorStateList? = null
-    set(value) {
-      field = value
-      updateCompoundIcon()
     }
 
   override fun setText(text: CharSequence, type: BufferType) {
@@ -79,7 +69,6 @@ abstract class BpkButtonWithIcon internal constructor(
   private fun updateCompoundIcon() {
     val icon = iconDrawable
     if (icon != null) {
-      DrawableCompat.setTintList(icon, iconDrawableTint)
       setCompoundDrawablesRelativeWithIntrinsicBounds(
         icon.takeIf { iconDrawablePosition == ICON_POSITION_START || iconDrawablePosition == ICON_POSITION_ICON_ONLY },
         null,

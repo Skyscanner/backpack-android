@@ -19,18 +19,17 @@
 package net.skyscanner.backpack.button
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import androidx.annotation.Dimension
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.button.internal.BpkButtonWithIcon
+import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ButtonStyle
 import net.skyscanner.backpack.button.internal.ButtonStyles
-import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
 
@@ -39,7 +38,7 @@ open class BpkButton(
   attrs: AttributeSet?,
   defStyleAttr: Int,
   type: Type
-) : BpkButtonWithIcon(context, attrs, defStyleAttr) {
+) : BpkButtonBase(context, attrs, defStyleAttr) {
 
   constructor(context: Context) : this(context, null, 0, Type.Primary)
 
@@ -61,14 +60,14 @@ open class BpkButton(
   @Dimension
   private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) + (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
 
-  override var iconPosition: Int
-    get() = super.iconPosition
+  final override var iconPosition: Int
+    get() = super.iconDrawablePosition
     set(value) {
-      super.iconPosition = value
+      super.iconDrawablePosition = value
       var paddingHorizontal = paddingHorizontal
       val paddingVertical = paddingVertical
 
-      if (iconPosition == BpkButton.ICON_ONLY) {
+      if (iconPosition == ICON_ONLY) {
         paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
       } else {
         compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
@@ -77,7 +76,7 @@ open class BpkButton(
       setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
     }
 
-  var icon: Drawable? = null
+  final override var icon: Drawable? = null
     set(value) {
       field = value
       updateIconState()
@@ -95,7 +94,7 @@ open class BpkButton(
   var loading: Boolean = false
     set(value) {
       field = value
-      isEnabled = !value
+      updateEnabledState()
       updateIconState()
     }
 
@@ -107,7 +106,8 @@ open class BpkButton(
       applyStyle(type.createStyle(context))
     }
 
-  private val font = BpkText.getFont(this.context, BpkText.SM, BpkText.Weight.EMPHASIZED)
+  private var enabled = isEnabled
+
   init {
     var type = type
     var style: ButtonStyle = type.createStyle(context)
@@ -137,10 +137,28 @@ open class BpkButton(
     this.loading = loading
     this.icon = icon
     this.iconPosition = iconPosition
-    font.applyTo(this)
-    isClickable = isEnabled
-    isAllCaps = true
     applyStyle(style)
+  }
+
+  override fun setTextColor(color: Int) {
+    super.setTextColor(color)
+    icon?.setTintList(ColorStateList.valueOf(color))
+  }
+
+  override fun setTextColor(colors: ColorStateList) {
+    super.setTextColor(colors)
+    icon?.setTintList(colors)
+  }
+
+  override fun setEnabled(enabled: Boolean) {
+    this.enabled = enabled
+    updateEnabledState()
+  }
+  private fun updateEnabledState() {
+    super.setEnabled(enabled && !loading)
+    if (this::style.isInitialized) {
+      applyStyle(style)
+    }
   }
 
   private fun applyStyle(style: ButtonStyle) {
@@ -155,25 +173,13 @@ open class BpkButton(
     }
   }
 
-  override fun drawableStateChanged() {
-    super.drawableStateChanged()
-  }
-
-  override fun setEnabled(enabled: Boolean) {
-    super.setEnabled(enabled)
-    applyStyle(style)
-  }
-
   private fun updateIconState() {
     iconDrawable = if (loading) {
       val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
       progress.setColorSchemeColors(disabledColour)
       progress
     } else {
-      val icon = icon
-      if (icon != null) {
-        DrawableCompat.setTintList(icon, textColors)
-      }
+      icon?.setTintList(textColors)
       icon
     }
   }

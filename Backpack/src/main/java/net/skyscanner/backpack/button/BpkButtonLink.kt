@@ -23,11 +23,9 @@ import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.button.internal.BpkButtonWithIcon
+import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ButtonStyles
-import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
@@ -35,7 +33,7 @@ open class BpkButtonLink @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : BpkButtonWithIcon(
+) : BpkButtonBase(
   createContextThemeWrapper(context, attrs, R.attr.bpkButtonLinkStyle),
   attrs,
   defStyleAttr
@@ -52,18 +50,21 @@ open class BpkButtonLink @JvmOverloads constructor(
       isAllCaps = value
     }
 
-  var icon: Drawable?
+  final override var icon: Drawable?
     get() = iconDrawable
     set(value) {
       this.iconDrawable = value
     }
 
-  private val font = BpkText.getFont(this.context, BpkText.SM, BpkText.Weight.EMPHASIZED)
+  final override var iconPosition: Int
+    get() = iconDrawablePosition
+    set(value) {
+      this.iconDrawablePosition = value
+    }
 
   init {
     var iconPosition: Int = iconPosition
     var icon: Drawable? = null
-
     this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       .use {
         iconPosition = it.getInt(R.styleable.BpkButton_buttonIconPosition, iconPosition)
@@ -73,15 +74,10 @@ open class BpkButtonLink @JvmOverloads constructor(
           }
         }
       }
-
     this.iconPosition = iconPosition
     this.iconDrawable = icon
 
-    isClickable = isEnabled
-    font.applyTo(this)
-
     var uppercase = true
-
     this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButtonLink, defStyleAttr, 0)
       .use {
         uppercase = it.getBoolean(R.styleable.BpkButtonLink_uppercase, true)
@@ -100,18 +96,11 @@ open class BpkButtonLink @JvmOverloads constructor(
 
   override fun setTextColor(color: Int) {
     super.setTextColor(color)
-    updateIconColor(ColorStateList.valueOf(color))
+    icon?.setTintList(ColorStateList.valueOf(color))
   }
 
   override fun setTextColor(colors: ColorStateList) {
     super.setTextColor(colors)
-    updateIconColor(colors)
-  }
-
-  private fun updateIconColor(colors: ColorStateList) {
-    val icon = icon
-    if (icon != null) {
-      DrawableCompat.setTintList(icon, colors)
-    }
+    icon?.setTintList(colors)
   }
 }
