@@ -23,15 +23,15 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import androidx.annotation.Dimension
-import androidx.annotation.IntDef
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.button.internal.BpkButtonBase
+import net.skyscanner.backpack.button.internal.BpkButtonWithIcon
 import net.skyscanner.backpack.button.internal.ButtonStyle
 import net.skyscanner.backpack.button.internal.ButtonStyles
-import net.skyscanner.backpack.button.internal.ICON_POSITION_END
-import net.skyscanner.backpack.button.internal.ICON_POSITION_ICON_ONLY
-import net.skyscanner.backpack.button.internal.ICON_POSITION_START
+import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
 
 open class BpkButton(
@@ -39,7 +39,7 @@ open class BpkButton(
   attrs: AttributeSet?,
   defStyleAttr: Int,
   type: Type
-) : BpkButtonBase(context, attrs, defStyleAttr) {
+) : BpkButtonWithIcon(context, attrs, defStyleAttr) {
 
   constructor(context: Context) : this(context, null, 0, Type.Primary)
 
@@ -50,68 +50,56 @@ open class BpkButton(
   constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary)
 
   companion object {
-    const val START = ICON_POSITION_START
-    const val END = ICON_POSITION_END
-    const val ICON_ONLY = ICON_POSITION_ICON_ONLY
+    const val START = 0
+    const val END = 1
+    const val ICON_ONLY = 2
   }
 
-  @IntDef(START, END, ICON_ONLY)
-  annotation class IconPosition
+  @Dimension
+  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) - resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
 
-  @BpkButton.IconPosition
-  override var iconPosition
+  @Dimension
+  private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) + (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
+
+  override var iconPosition: Int
     get() = super.iconPosition
     set(value) {
       super.iconPosition = value
+      var paddingHorizontal = paddingHorizontal
+      val paddingVertical = paddingVertical
+
+      if (iconPosition == BpkButton.ICON_ONLY) {
+        paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+      } else {
+        compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+      }
+
+      setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
     }
 
-  @Dimension
-  private val paddingHorizontal = tokens.bpkSpacingBase - tokens.bpkSpacingSm
-
-  @Dimension
-  private val paddingVertical = tokens.bpkSpacingMd + (tokens.bpkBorderSizeLg / 2)
-
-  private var _icon: Drawable? = super.icon
-  final override var icon: Drawable?
-    get() = super.icon
+  var icon: Drawable? = null
     set(value) {
-      if (_icon != value) {
-        _icon = value
-        super.icon = value
-      }
+      field = value
+      updateIconState()
     }
 
-  private var _progress: CircularProgressDrawable? = null
-  private val progress: CircularProgressDrawable
-    get() {
-      if (_progress == null) {
-        _progress = CircularProgressDrawable(context).apply {
-          setStyle(CircularProgressDrawable.DEFAULT)
-          centerRadius = resources.getDimension(R.dimen.bpkSpacingSm) * 1.3f
-          strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
-          start()
-        }
-      }
-      return _progress!!
+  private val progress by unsafeLazy {
+    CircularProgressDrawable(context).apply {
+      setStyle(CircularProgressDrawable.DEFAULT)
+      centerRadius = resources.getDimension(R.dimen.bpkSpacingSm) * 1.3f
+      strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
+      start()
     }
+  }
 
-  private var _loading = false
   var loading: Boolean = false
-    get() = _loading
     set(value) {
-      _loading = value
-      if (_loading != field) {
-        field = value
-        update()
-      }
+      field = value
+      isEnabled = !value
+      updateIconState()
     }
 
   private lateinit var style: ButtonStyle
-
-  private fun applyStyle(style: ButtonStyle) {
-    this.style = style
-    update()
-  }
 
   var type: Type = type
     set(value) {
@@ -119,9 +107,13 @@ open class BpkButton(
       applyStyle(type.createStyle(context))
     }
 
+  private val font = BpkText.getFont(this.context, BpkText.SM, BpkText.Weight.EMPHASIZED)
   init {
     var type = type
     var style: ButtonStyle = type.createStyle(context)
+    var loading = loading
+    var icon = iconDrawable
+    var iconPosition = iconPosition
 
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       .use {
@@ -131,26 +123,28 @@ open class BpkButton(
         }
 
         style = ButtonStyle.fromAttributes(context, it, style)
-        _loading = it.getBoolean(R.styleable.BpkButton_buttonLoading, _loading)
+        loading = it.getBoolean(R.styleable.BpkButton_buttonLoading, loading)
+        iconPosition = it.getInt(R.styleable.BpkButton_buttonIconPosition, iconPosition)
+        it.getResourceId(R.styleable.BpkButton_buttonIcon, 0).let { res ->
+          if (res != 0) {
+            icon = AppCompatResources.getDrawable(context, res)
+          }
+        }
       }
 
     this.clipToOutline = true
     this.type = type
+    this.loading = loading
+    this.icon = icon
+    this.iconPosition = iconPosition
+    font.applyTo(this)
+    isClickable = isEnabled
+    isAllCaps = true
     applyStyle(style)
   }
 
-  override fun update() {
-    if (iconPosition == ICON_ONLY) {
-      text = ""
-    }
-
-    var paddingHorizontal = paddingHorizontal
-    val paddingVertical = paddingVertical
-
-    if (iconPosition == ICON_ONLY) {
-      paddingHorizontal = tokens.bpkSpacingMd
-    }
-
+  private fun applyStyle(style: ButtonStyle) {
+    this.style = style
     background = style.getButtonBackground(isEnabled, iconPosition)
     setTextColor(style.contentColor)
 
@@ -159,32 +153,28 @@ open class BpkButton(
     } else {
       this.stateListAnimator = null
     }
-    setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
-
-    if (!text.isNullOrEmpty()) {
-      compoundDrawablePadding = tokens.bpkSpacingSm
-    }
-
-    if (loading) {
-      val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
-      progress.setColorSchemeColors(disabledColour)
-      super.icon = progress
-      super.setEnabled(false)
-    } else {
-      super.icon = _icon
-      super.setEnabled(enabled != false)
-    }
   }
 
-  private var enabled: Boolean? = null
+  override fun drawableStateChanged() {
+    super.drawableStateChanged()
+  }
 
   override fun setEnabled(enabled: Boolean) {
-    // we want to store the enabling state set
-    // by the used in order to recover to it when loading is set to false.
-    // the null values used to detect the initialization
-    if (enabled != isEnabled) {
-      this.enabled = enabled
-      super.setEnabled(enabled)
+    super.setEnabled(enabled)
+    applyStyle(style)
+  }
+
+  private fun updateIconState() {
+    iconDrawable = if (loading) {
+      val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
+      progress.setColorSchemeColors(disabledColour)
+      progress
+    } else {
+      val icon = icon
+      if (icon != null) {
+        DrawableCompat.setTintList(icon, textColors)
+      }
+      icon
     }
   }
 

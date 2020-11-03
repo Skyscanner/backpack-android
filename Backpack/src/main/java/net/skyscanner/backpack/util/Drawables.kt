@@ -21,6 +21,7 @@ package net.skyscanner.backpack.util
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
 import android.os.Build
@@ -33,7 +34,7 @@ internal inline fun stateListDrawable(
   drawable: Drawable,
   disabled: Drawable? = null,
   pressed: Drawable? = null,
-  block: StateListDrawable.() -> Unit = {}
+  block: StateListDrawable.() -> Unit = {},
 ): StateListDrawable = StateListDrawable().apply {
   if (disabled != null) {
     addState(intArrayOf(-android.R.attr.state_enabled), disabled)
@@ -54,7 +55,7 @@ internal inline fun rippleDrawable(
   context: Context,
   content: Drawable,
   mask: Drawable,
-  @ColorInt rippleColor: Int? = null
+  @ColorInt rippleColor: Int? = null,
 ): RippleDrawable {
 
   val rippleColorStateList = if (rippleColor == null) {
@@ -70,4 +71,26 @@ internal inline fun rippleDrawable(
     content,
     mask
   )
+}
+
+internal inline fun sizedDrawable(
+  drawable: Drawable,
+  width: Int,
+  height: Int,
+) = object : LayerDrawable(
+  arrayOf(drawable)
+) {
+
+  init {
+    setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+      setLayerSize(0, intrinsicWidth, intrinsicHeight)
+    }
+  }
+
+  override fun getIntrinsicWidth(): Int =
+    width
+
+  override fun getIntrinsicHeight(): Int =
+    height
 }

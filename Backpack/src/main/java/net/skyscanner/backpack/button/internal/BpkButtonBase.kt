@@ -38,9 +38,9 @@ import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.use
 import net.skyscanner.backpack.util.wrapContextWithDefaults
 
-internal const val ICON_POSITION_START = 0
-internal const val ICON_POSITION_END = 1
-internal const val ICON_POSITION_ICON_ONLY = 2
+private const val ICON_POSITION_START = 0
+private const val ICON_POSITION_END = 1
+private const val ICON_POSITION_ICON_ONLY = 2
 
 internal const val INVALID_RES = -1
 
