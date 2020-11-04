@@ -70,6 +70,16 @@ abstract class BpkButtonLayout internal constructor(
     layoutComponents()
   }
 
+  override fun setCompoundDrawables(left: Drawable?, top: Drawable?, right: Drawable?, bottom: Drawable?) {
+    super.setCompoundDrawables(left, top, right, bottom)
+    layoutComponents()
+  }
+
+  override fun setCompoundDrawablesRelative(start: Drawable?, top: Drawable?, end: Drawable?, bottom: Drawable?) {
+    super.setCompoundDrawablesRelative(start, top, end, bottom)
+    layoutComponents()
+  }
+
   override fun setText(text: CharSequence, type: BufferType) {
     super.setText(text, type)
     layoutComponents()
