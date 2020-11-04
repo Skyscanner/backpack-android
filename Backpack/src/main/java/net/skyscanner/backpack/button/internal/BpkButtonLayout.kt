@@ -36,7 +36,9 @@ abstract class BpkButtonLayout internal constructor(
   defStyleAttr: Int
 ) : AppCompatButton(context, attrs, defStyleAttr) {
 
-  private var minPaddingStart = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) - resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+  private var minPaddingStart = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) -
+    resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+
   private var minPaddingEnd = minPaddingStart
   private var maxIconSpacing = resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
 

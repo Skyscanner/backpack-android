@@ -90,7 +90,9 @@ open class BpkButtonLink @JvmOverloads constructor(
     background = style.getButtonBackground(isEnabled, iconPosition)
     setTextColor(style.contentColor)
 
-    val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) + (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
+    val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+      (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
+
     setPadding(0, paddingVertical, 0, paddingVertical)
   }
 

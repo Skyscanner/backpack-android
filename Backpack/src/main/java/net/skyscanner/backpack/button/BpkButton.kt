@@ -55,10 +55,12 @@ open class BpkButton(
   }
 
   @Dimension
-  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) - resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) -
+    resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
 
   @Dimension
-  private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) + (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
+  private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+    (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
 
   final override var iconPosition: Int
     get() = super.iconDrawablePosition
