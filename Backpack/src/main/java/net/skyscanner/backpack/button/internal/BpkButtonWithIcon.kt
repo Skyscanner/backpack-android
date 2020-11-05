@@ -24,11 +24,7 @@ import android.util.AttributeSet
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.sizedDrawable
 
-private const val ICON_POSITION_START = 0
-private const val ICON_POSITION_END = 1
-private const val ICON_POSITION_ICON_ONLY = 2
-
-// provides internal properties for icon, its position and tint.
+// provides internal properties for icon and its position
 abstract class BpkButtonWithIcon internal constructor(
   context: Context,
   attrs: AttributeSet?,

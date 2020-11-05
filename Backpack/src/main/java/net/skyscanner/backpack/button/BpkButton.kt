@@ -24,12 +24,16 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.AttributeSet
 import androidx.annotation.Dimension
+import androidx.annotation.IntDef
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ButtonStyle
 import net.skyscanner.backpack.button.internal.ButtonStyles
+import net.skyscanner.backpack.button.internal.ICON_POSITION_END
+import net.skyscanner.backpack.button.internal.ICON_POSITION_ICON_ONLY
+import net.skyscanner.backpack.button.internal.ICON_POSITION_START
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
 
@@ -49,23 +53,19 @@ open class BpkButton(
   constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary)
 
   companion object {
-    const val START = 0
-    const val END = 1
-    const val ICON_ONLY = 2
+    const val START = ICON_POSITION_START
+    const val END = ICON_POSITION_END
+    const val ICON_ONLY = ICON_POSITION_ICON_ONLY
   }
 
-  @Dimension
-  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) -
-    resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+  @IntDef(START, END, ICON_ONLY)
+  annotation class IconPosition
 
-  @Dimension
-  private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
-    (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
-
-  final override var iconPosition: Int
-    get() = super.iconDrawablePosition
+  @BpkButton.IconPosition
+  override var iconPosition
+    get() = iconDrawablePosition
     set(value) {
-      super.iconDrawablePosition = value
+      iconDrawablePosition = value
       var paddingHorizontal = paddingHorizontal
       val paddingVertical = paddingVertical
 
@@ -77,6 +77,14 @@ open class BpkButton(
 
       setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
     }
+
+  @Dimension
+  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) -
+    resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+
+  @Dimension
+  private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+    (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
 
   final override var icon: Drawable? = null
     set(value) {
@@ -156,6 +164,7 @@ open class BpkButton(
     this.enabled = enabled
     updateEnabledState()
   }
+
   private fun updateEnabledState() {
     super.setEnabled(enabled && !loading)
     if (this::style.isInitialized) {

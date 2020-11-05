@@ -63,7 +63,7 @@ internal class ButtonStyle(
   fun getStateListAnimator(): StateListAnimator? =
     AnimatorInflater.loadStateListAnimator(context, stateListAnimatorRes)
 
-  fun getButtonBackground(enabled: Boolean, iconPosition: Int): Drawable {
+  fun getButtonBackground(enabled: Boolean, @BpkButton.IconPosition iconPosition: Int): Drawable {
 
     val radius = if (iconPosition == BpkButton.ICON_ONLY) {
       context.resources.getDimension(R.dimen.bpkBorderRadiusLg)

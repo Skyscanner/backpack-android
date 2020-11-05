@@ -121,13 +121,18 @@ abstract class BpkButtonLayout internal constructor(
     val icon = compoundDrawables[0] ?: compoundDrawables[2]
     val iconWidth = icon?.intrinsicWidth ?: 0
     val iconSpacing = if (icon != null && text.isNotEmpty()) maxIconSpacing else 0
-    val maxLineWidth = max(0, width - minPaddingStart - minPaddingEnd - iconWidth - iconSpacing)
-    val textToMeasure = transformationMethod?.getTransformation(text, this) ?: text
-    val totalTextWidth = paint.measureText(textToMeasure, 0, length()).toInt()
-    val singleLineTextWidth = min(maxLineWidth, totalTextWidth)
-    val padding = (width - singleLineTextWidth - iconWidth - iconSpacing) / 2
 
     super.setCompoundDrawablePadding(iconSpacing)
-    super.setPaddingRelative(padding, paddingTop, padding, paddingBottom)
+
+    if (icon != null) {
+      val maxLineWidth = max(0, width - minPaddingStart - minPaddingEnd - iconWidth - iconSpacing)
+      val textToMeasure = transformationMethod?.getTransformation(text, this) ?: text
+      val totalTextWidth = paint.measureText(textToMeasure, 0, length()).toInt()
+      val singleLineTextWidth = min(maxLineWidth, totalTextWidth)
+      val padding = (width - singleLineTextWidth - iconWidth - iconSpacing) / 2
+      super.setPaddingRelative(padding, paddingTop, padding, paddingBottom)
+    } else {
+      super.setPaddingRelative(minPaddingStart, paddingTop, minPaddingEnd, paddingBottom)
+    }
   }
 }

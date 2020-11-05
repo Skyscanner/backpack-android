@@ -22,10 +22,13 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import androidx.annotation.IntDef
 import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ButtonStyles
+import net.skyscanner.backpack.button.internal.ICON_POSITION_END
+import net.skyscanner.backpack.button.internal.ICON_POSITION_START
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
@@ -40,9 +43,19 @@ open class BpkButtonLink @JvmOverloads constructor(
 ) {
 
   companion object {
-    const val START = 0
-    const val END = 1
+    const val START = ICON_POSITION_START
+    const val END = ICON_POSITION_END
   }
+
+  @IntDef(START, END)
+  annotation class IconPosition
+
+  @BpkButtonLink.IconPosition
+  override var iconPosition
+    get() = iconDrawablePosition
+    set(value) {
+      iconDrawablePosition = value
+    }
 
   var uppercase: Boolean = true
     set(value) {
@@ -53,13 +66,7 @@ open class BpkButtonLink @JvmOverloads constructor(
   final override var icon: Drawable?
     get() = iconDrawable
     set(value) {
-      this.iconDrawable = value
-    }
-
-  final override var iconPosition: Int
-    get() = iconDrawablePosition
-    set(value) {
-      this.iconDrawablePosition = value
+      iconDrawable = value
     }
 
   init {

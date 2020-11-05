@@ -24,11 +24,9 @@ import android.util.AttributeSet
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.wrapContextWithDefaults
 
-private const val ICON_POSITION_START = 0
-private const val ICON_POSITION_END = 1
-private const val ICON_POSITION_ICON_ONLY = 2
-
-internal const val INVALID_RES = -1
+internal const val ICON_POSITION_START = 0
+internal const val ICON_POSITION_END = 1
+internal const val ICON_POSITION_ICON_ONLY = 2
 
 // mainly exists here for compatibility reasons
 abstract class BpkButtonBase internal constructor(
