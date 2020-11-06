@@ -44,12 +44,12 @@ open class BpkChip @JvmOverloads constructor(
     arrayOf(
       intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
       intArrayOf(android.R.attr.state_enabled),
-      intArrayOf(-android.R.attr.state_enabled)
+      intArrayOf(-android.R.attr.state_enabled),
     ),
     intArrayOf(
       ContextCompat.getColor(context, R.color.bpkWhite),
       ContextCompat.getColor(context, R.color.bpkTextPrimary),
-      ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
+      ContextCompat.getColor(context, R.color.bpkSkyGrayTint04),
     )
   )
 
@@ -59,13 +59,13 @@ open class BpkChip @JvmOverloads constructor(
       this.isEnabled = !disabled
     }
 
-  var chipBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)
+  var chipBackgroundColor: Int = ContextCompat.getColor(context, R.color.__chipSolidBackground)
     set(value) {
       field = value
       updateBackground()
     }
 
-  var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkPrimary)
+  var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkPrimaryLight)
     set(value) {
       field = value
       updateBackground()
@@ -87,7 +87,7 @@ open class BpkChip @JvmOverloads constructor(
     compoundDrawablePadding = iconPadding
     gravity = Gravity.CENTER_VERTICAL
     textStyle = SM
-    weight = Weight.EMPHASIZED
+    weight = Weight.NORMAL
     this.setTextColor(textColor)
     this.isSingleLine = true
 
@@ -123,12 +123,12 @@ open class BpkChip @JvmOverloads constructor(
       arrayOf(
         intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
         intArrayOf(android.R.attr.state_enabled),
-        intArrayOf(-android.R.attr.state_enabled)
+        intArrayOf(-android.R.attr.state_enabled),
       ),
       intArrayOf(
         selectedBackgroundColor,
         chipBackgroundColor,
-        chipBackgroundColor
+        chipBackgroundColor,
       )
     )
     ViewCompat.setBackgroundTintList(this, backgroundTintList)

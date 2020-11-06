@@ -29,4 +29,5 @@
   <color name="__barChartActivatedColor">@color/bpkMonteverde</color>
   <color name="__barChartPopupBackgroundColor">@color/bpkSkyBlueShade02</color>
   <color name="__barChartPopupTextColor">@color/bpkWhite</color>
+  <color name="__chipSolidBackground">@color/bpkSkyGrayTint07</color>
 </resources>
