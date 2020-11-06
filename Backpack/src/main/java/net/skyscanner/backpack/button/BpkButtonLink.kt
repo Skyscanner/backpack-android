@@ -19,9 +19,11 @@
 package net.skyscanner.backpack.button
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.IntDef
+import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ButtonStyles
@@ -50,43 +52,64 @@ open class BpkButtonLink @JvmOverloads constructor(
 
   @BpkButtonLink.IconPosition
   override var iconPosition
-    get() = super.iconPosition
+    get() = iconDrawablePosition
     set(value) {
-      super.iconPosition = value
+      iconDrawablePosition = value
     }
 
-  private var _uppercase = true
-  var uppercase: Boolean
-    get() = _uppercase
+  var uppercase: Boolean = true
     set(value) {
-      _uppercase = value
-      update()
+      field = value
+      isAllCaps = value
     }
 
   final override var icon: Drawable?
-    get() = super.icon
+    get() = iconDrawable
     set(value) {
-      super.icon = value
+      iconDrawable = value
     }
 
   init {
+    var iconPosition: Int = iconPosition
+    var icon: Drawable? = null
+    this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
+      .use {
+        iconPosition = it.getInt(R.styleable.BpkButton_buttonIconPosition, iconPosition)
+        it.getResourceId(R.styleable.BpkButton_buttonIcon, 0).let { res ->
+          if (res != 0) {
+            icon = AppCompatResources.getDrawable(context, res)
+          }
+        }
+      }
+    this.iconPosition = iconPosition
+    this.iconDrawable = icon
 
-    compoundDrawablePadding = tokens.bpkSpacingSm
-
+    var uppercase = true
     this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButtonLink, defStyleAttr, 0)
       .use {
-        _uppercase = it.getBoolean(R.styleable.BpkButtonLink_uppercase, true)
+        uppercase = it.getBoolean(R.styleable.BpkButtonLink_uppercase, true)
       }
+    this.uppercase = uppercase
+
+    compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
 
     val style = ButtonStyles.Link(context)
     background = style.getButtonBackground(isEnabled, iconPosition)
     setTextColor(style.contentColor)
-    update()
+
+    val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+      (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
+
+    setPadding(0, paddingVertical, 0, paddingVertical)
   }
 
-  override fun update() {
-    val paddingVertical = tokens.bpkSpacingMd + (tokens.bpkBorderSizeLg / 2)
-    setPadding(0, paddingVertical, 0, paddingVertical)
-    isAllCaps = _uppercase
+  override fun setTextColor(color: Int) {
+    super.setTextColor(color)
+    icon?.setTintList(ColorStateList.valueOf(color))
+  }
+
+  override fun setTextColor(colors: ColorStateList) {
+    super.setTextColor(colors)
+    icon?.setTintList(colors)
   }
 }
