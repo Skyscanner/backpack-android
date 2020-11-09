@@ -33,7 +33,7 @@ internal sealed class BpkChipStyles : BpkChipStyle {
         border = chipColors(
           selected = selectedBackgroundColor,
           default = ContextCompat.getColor(context, R.color.bpkTextTertiary),
-          disabled = ContextCompat.getColor(context, R.color.bpkLine),
+          disabled = ContextCompat.getColor(context, R.color.__chipDisabled),
         ),
       )
 

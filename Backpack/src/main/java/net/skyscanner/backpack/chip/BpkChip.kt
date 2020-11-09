@@ -44,7 +44,7 @@ open class BpkChip @JvmOverloads constructor(
   private val textColor = chipColors(
     selected = ContextCompat.getColor(context, R.color.bpkWhite),
     default = ContextCompat.getColor(context, R.color.bpkTextPrimary),
-    disabled = ContextCompat.getColor(context, R.color.bpkLine),
+    disabled = ContextCompat.getColor(context, R.color.__chipDisabled),
   )
 
   var disabled: Boolean = false
