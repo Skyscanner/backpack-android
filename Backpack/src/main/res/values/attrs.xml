@@ -109,6 +109,7 @@
     <attr name="chipSelectedBackgroundColor" format="color" />
     <attr name="chipDisabledBackgroundColor" format="color" />
     <attr name="chipBackgroundColor" format="color" />
+    <attr name="chipTextColor" format="color" />
     <attr name="chipIcon" format="reference" />
   </declare-styleable>
 

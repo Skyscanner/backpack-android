@@ -31,7 +31,9 @@ BpkChip(context).apply {
   isSelected = true
   disabled = false
   chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
+  chipTextColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
   chipSelectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
+  disabledBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
   chipIcon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
 }
 ```
@@ -70,7 +72,10 @@ BpkOutlineChip(context).apply {
   text = "Message"
   isSelected = true
   disabled = false
+  chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
+  chipTextColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
   chipSelectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
+  disabledBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
   chipIcon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
 }
 ```
@@ -79,6 +84,8 @@ BpkOutlineChip(context).apply {
 
 - `chipSelectedBackgroundColor`
 - `chipBackgroundColor`
+- `chipDisabledBackgroundColor`
+- `chipTextColor`
 
 
 Styles can be changed globally through `bpkChipStyle` or `bpkOutlineChipStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.

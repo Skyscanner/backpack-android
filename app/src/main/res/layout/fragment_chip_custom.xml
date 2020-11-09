@@ -19,6 +19,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="true"
       app:selected="false" />
 
@@ -30,6 +31,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
 
@@ -41,6 +43,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
   </androidx.appcompat.widget.LinearLayoutCompat>
@@ -57,6 +60,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:selected="false" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -67,6 +71,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="true" />
 
@@ -78,6 +83,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
   </androidx.appcompat.widget.LinearLayoutCompat>
@@ -94,6 +100,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:selected="false" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -104,6 +111,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
 
@@ -115,6 +123,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="true" />
   </androidx.appcompat.widget.LinearLayoutCompat>
@@ -131,6 +140,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:selected="false" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -141,6 +151,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="true" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -151,6 +162,7 @@
       app:chipBackgroundColor="@color/bpkTochigi"
       app:chipDisabledBackgroundColor="@color/bpkTochigi"
       app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
   </androidx.appcompat.widget.LinearLayoutCompat>
@@ -162,6 +174,7 @@
     app:chipBackgroundColor="@color/bpkTochigi"
     app:chipDisabledBackgroundColor="@color/bpkTochigi"
     app:chipSelectedBackgroundColor="@color/bpkAbisko"
+    app:chipTextColor="@color/bpkTextPrimaryLight"
     app:disabled="false"
     app:selected="true" />
 </androidx.appcompat.widget.LinearLayoutCompat>

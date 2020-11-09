@@ -1,11 +1,14 @@
 package net.skyscanner.backpack.chip.internal
 
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
 
 internal interface BpkChipStyle {
 
   val background: Drawable
+
+  val text: ColorStateList
 
   @get:ColorInt
   @setparam:ColorInt
@@ -18,4 +21,8 @@ internal interface BpkChipStyle {
   @get:ColorInt
   @setparam:ColorInt
   var disabledBackgroundColor: Int
+
+  @get:ColorInt
+  @setparam:ColorInt
+  var textColor: Int
 }
