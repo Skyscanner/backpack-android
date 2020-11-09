@@ -107,6 +107,7 @@
     <attr name="disabled" format="boolean" />
     <attr name="selected" format="boolean" />
     <attr name="chipSelectedBackgroundColor" format="color" />
+    <attr name="chipDisabledBackgroundColor" format="color" />
     <attr name="chipBackgroundColor" format="color" />
     <attr name="chipIcon" format="reference" />
   </declare-styleable>
