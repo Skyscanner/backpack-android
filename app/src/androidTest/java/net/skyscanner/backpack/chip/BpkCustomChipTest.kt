@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.chip
 
+import android.content.Context
 import android.util.LayoutDirection
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
@@ -13,7 +14,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkOutlineChipTest : BpkSnapshotTest() {
+class BpkCustomChipTest : BpkSnapshotTest() {
+
   @Before
   fun setup() {
     setDimensions(36, 100)
@@ -21,47 +23,34 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestDefault() {
-    snap((BpkOutlineChip(testContext).apply { text = "tag" }))
+    snap(createChip())
   }
 
   @Test
   fun screenshotTestDisabled() {
-    val view = BpkOutlineChip(testContext)
-    view.text = "tag"
+    val view = createChip()
     view.disabled = true
     snap(view)
   }
 
   @Test
   fun screenshotTestSelected() {
-    val view = BpkOutlineChip(testContext)
-    view.text = "tag"
+    val view = createChip()
     view.isSelected = true
     snap(view)
   }
 
   @Test
   fun screenshotTestSelected_withTheme() {
-    val view = BpkOutlineChip(createThemedContext(testContext))
-    view.text = "tag"
+    val view = createChip(createThemedContext(testContext))
     view.isSelected = true
-    snap(view)
-  }
-
-  @Test
-  fun screenshotTestCustomSelectedBackground() {
-    val view = BpkOutlineChip(testContext)
-    view.text = "tag"
-    view.selectedBackgroundColor = ContextCompat.getColor(testContext, R.color.bpkPanjin)
-    view.toggle()
     snap(view)
   }
 
   @Test
   @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestWithIcon() {
-    val view = BpkOutlineChip(testContext)
-    view.text = "tag"
+    val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     snap(view)
   }
@@ -69,8 +58,7 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
   @Test
   @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestSelectedWithIcon() {
-    val view = BpkOutlineChip(testContext)
-    view.text = "tag"
+    val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.isSelected = true
     snap(view)
@@ -79,8 +67,7 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
   @Test
   @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestDisabledWithIcon() {
-    val view = BpkOutlineChip(testContext)
-    view.text = "tag"
+    val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.disabled = true
     snap(view)
@@ -89,10 +76,18 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
   @Test
   @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestWithIcon_RTL() {
-    val view = BpkOutlineChip(testContext)
-    view.text = "tag"
+    val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.layoutDirection = LayoutDirection.RTL
     snap(view)
   }
+
+  private fun createChip(context: Context = testContext): BpkChip =
+    BpkChip(context).apply {
+      text = "tag"
+
+      chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkTochigi)
+      disabledBackgroundColor = ContextCompat.getColor(context, R.color.bpkTochigi)
+      selectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkAbisko)
+    }
 }
