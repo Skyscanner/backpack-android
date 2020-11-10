@@ -5,7 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   style="@style/App.Story"
   android:orientation="vertical"
-  android:background="@color/bpkSkyBlueShade03"
+  android:background="@color/bpkBackgroundAlternativeSecondary"
   tools:ignore="HardcodedText"
   >
 

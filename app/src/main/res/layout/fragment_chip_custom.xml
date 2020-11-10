@@ -16,6 +16,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Afghanistan"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="true"
       app:selected="false" />
 
@@ -24,6 +28,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Belgium"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
 
@@ -32,6 +40,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Canada"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
   </androidx.appcompat.widget.LinearLayoutCompat>
@@ -45,6 +57,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Denmark"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:selected="false" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -52,6 +68,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Ethiopia"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="true" />
 
@@ -60,6 +80,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Fiji"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
   </androidx.appcompat.widget.LinearLayoutCompat>
@@ -73,6 +97,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Germany"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:selected="false" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -80,6 +108,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Honduras"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
 
@@ -88,6 +120,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="India"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="true" />
   </androidx.appcompat.widget.LinearLayoutCompat>
@@ -101,6 +137,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Jamaica"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:selected="false" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -108,6 +148,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Kosovo"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="true" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -115,6 +159,10 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Lesotho"
+      app:chipBackgroundColor="@color/bpkTochigi"
+      app:chipDisabledBackgroundColor="@color/bpkTochigi"
+      app:chipSelectedBackgroundColor="@color/bpkAbisko"
+      app:chipTextColor="@color/bpkTextPrimaryLight"
       app:disabled="false"
       app:selected="false" />
   </androidx.appcompat.widget.LinearLayoutCompat>
@@ -123,6 +171,10 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/bpkSpacingSm"
     android:text="Madagascar"
+    app:chipBackgroundColor="@color/bpkTochigi"
+    app:chipDisabledBackgroundColor="@color/bpkTochigi"
+    app:chipSelectedBackgroundColor="@color/bpkAbisko"
+    app:chipTextColor="@color/bpkTextPrimaryLight"
     app:disabled="false"
     app:selected="true" />
 </androidx.appcompat.widget.LinearLayoutCompat>

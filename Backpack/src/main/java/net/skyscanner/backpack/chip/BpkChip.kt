@@ -19,15 +19,14 @@
 package net.skyscanner.backpack.chip
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.view.ViewCompat
+import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.chip.internal.BpkChipStyle
+import net.skyscanner.backpack.chip.internal.BpkChipStyles
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -35,23 +34,11 @@ import net.skyscanner.backpack.util.use
 open class BpkChip @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : BpkText(createContextThemeWrapper(context, attrs, R.attr.bpkChipStyle), attrs, defStyleAttr) {
 
   private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
   private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_normal)
-  private val textColor = ColorStateList(
-    arrayOf(
-      intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
-      intArrayOf(android.R.attr.state_enabled),
-      intArrayOf(-android.R.attr.state_enabled)
-    ),
-    intArrayOf(
-      ContextCompat.getColor(context, R.color.bpkWhite),
-      ContextCompat.getColor(context, R.color.bpkTextPrimary),
-      ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
-    )
-  )
 
   var disabled: Boolean = false
     set(value) {
@@ -59,57 +46,78 @@ open class BpkChip @JvmOverloads constructor(
       this.isEnabled = !disabled
     }
 
-  var chipBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)
+  private val style: BpkChipStyle
+
+  var chipBackgroundColor: Int
+    get() = style.backgroundColor
     set(value) {
-      field = value
-      updateBackground()
+      style.backgroundColor = value
+      updateStyle()
     }
 
-  var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkPrimary)
+  var chipTextColor: Int
+    get() = style.textColor
     set(value) {
-      field = value
-      updateBackground()
+      style.textColor = value
+      updateStyle()
+    }
+
+  var selectedBackgroundColor: Int
+    get() = style.selectedBackgroundColor
+    set(value) {
+      style.selectedBackgroundColor = value
+      updateStyle()
+    }
+
+  var disabledBackgroundColor: Int
+    get() = style.disabledBackgroundColor
+    set(value) {
+      style.disabledBackgroundColor = value
+      updateStyle()
     }
 
   var icon: Drawable? = null
     set(value) {
       field = value
         ?.mutate()
-        ?.let { DrawableCompat.wrap(it) }
         ?.apply { setBounds(0, 0, iconSize, iconSize) }
         ?.also {
-          DrawableCompat.setTintList(it, textColor)
+          it.setTintList(textColors)
           this.setCompoundDrawablesRelative(it, null, null, null)
         }
     }
 
   init {
-    compoundDrawablePadding = iconPadding
-    gravity = Gravity.CENTER_VERTICAL
-    textStyle = SM
-    weight = Weight.EMPHASIZED
-    this.setTextColor(textColor)
+    this.style = provideStyle(this.context, attrs, defStyleAttr)
+    this.compoundDrawablePadding = iconPadding
+    this.gravity = Gravity.CENTER_VERTICAL
+    this.textStyle = SM
+    this.weight = Weight.NORMAL
+    this.setTextColor(style.text)
     this.isSingleLine = true
+    this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
 
+    setPadding(
+      resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
+      0,
+      resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
+      0
+    )
     initialize(attrs, defStyleAttr)
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
       .use {
-        background = AppCompatResources.getDrawable(context, R.drawable.chip_background)
         disabled = it.getBoolean(R.styleable.BpkChip_disabled, false)
         isSelected = it.getBoolean(R.styleable.BpkChip_selected, false)
-        chipBackgroundColor = it.getColor(R.styleable.BpkChip_chipBackgroundColor, chipBackgroundColor)
-        selectedBackgroundColor = it.getColor(R.styleable.BpkChip_chipSelectedBackgroundColor, selectedBackgroundColor)
-
         val iconId = it.getResourceId(R.styleable.BpkChip_chipIcon, 0)
         if (iconId != 0) {
           icon = AppCompatResources.getDrawable(context, iconId)
         }
       }
 
-    updateBackground()
+    updateStyle()
   }
 
   fun toggle() {
@@ -118,19 +126,12 @@ open class BpkChip @JvmOverloads constructor(
     }
   }
 
-  internal open fun updateBackground() {
-    val backgroundTintList = ColorStateList(
-      arrayOf(
-        intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
-        intArrayOf(android.R.attr.state_enabled),
-        intArrayOf(-android.R.attr.state_enabled)
-      ),
-      intArrayOf(
-        selectedBackgroundColor,
-        chipBackgroundColor,
-        chipBackgroundColor
-      )
-    )
-    ViewCompat.setBackgroundTintList(this, backgroundTintList)
+  internal open fun provideStyle(context: Context, attrs: AttributeSet?, defStyleAttr: Int): BpkChipStyle =
+    BpkChipStyles.Solid(context, attrs, defStyleAttr)
+
+  private fun updateStyle() {
+    this.background = style.background
+    setTextColor(style.text)
+    TextViewCompat.setCompoundDrawableTintList(this, style.text)
   }
 }
