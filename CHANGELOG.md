@@ -2,6 +2,17 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 25.1.0
+
+**Added:**
+  - `BpkChip`
+    - New property – `chipDisabledBackgroundColor`
+    - New property – `chipTextColor`
+
+**Fixed:**
+  - `BpkChip`
+    - Updated the designs
+
 # 25.0.0
 
 **Breaking:**
