@@ -21,7 +21,7 @@ tests_apk_path='app/build/outputs/apk/androidTest/internal/debug/app-internal-de
 app_apk_path='app/build/outputs/apk/internal/debug/app-internal-debug.apk'
 app_package_name='net.skyscanner.backpack'
 
-docs_avd="bpk-droid-docs-avd"
+docs_avd="bpk-droid-avd"
 
 apk=app/build/outputs/apk/base/debug/Go.Android.App-base-debug.apk
 
@@ -113,7 +113,7 @@ function start() {
 		adb reconnect > /dev/null
 		waitUntil 2 "the emulator to reconnect"
 	else
-		echo "emulator not started, please start 'bpk-droid-docs-avd'"
+		echo "emulator not started, please start '$docs_avd'"
 		exit 1
 	fi
 	installApp
