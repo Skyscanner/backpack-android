@@ -240,8 +240,7 @@ Safe travels!"""
       val dialog = BpkDialog(context, BpkDialog.Style.FLARE)
       dialog.apply {
         title = "What is Backpack?"
-        description = "The design system provides a single source of truth" +
-        "for the design language used at Skyscanner."
+        description = "The design system provides a single source of truth for the design language used at Skyscanner."
 
         addActionButton(
           BpkButton(context).apply {
