@@ -85,8 +85,8 @@ implementation 'com.github.<github-username>:backpack-android:<branch-name>'
 Before running the script install and start the docs emulator.
 
 ```
-$ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name "bpk-droid-docs-avd" --device "pixel" --package "system-images;android-29;google_apis;x86" --tag "google_apis" --abi "x86"
-$ANDROID_HOME/emulator/emulator -avd bpk-droid-docs-avd
+$ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name "bpk-droid-avd" --device "pixel" --package "system-images;android-29;google_apis;x86" --tag "google_apis" --abi "x86"
+$ANDROID_HOME/emulator/emulator -avd bpk-droid-avd
 ```
 
 Run `./scripts/generate_screenshots.sh` to capture all screenshots. Files will be saved in the correct directory.
