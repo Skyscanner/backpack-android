@@ -239,6 +239,34 @@ Safe travels!"""
     "Flare" to { context: Context ->
       val dialog = BpkDialog(context, BpkDialog.Style.FLARE)
       dialog.apply {
+        title = "What is Backpack?"
+        description = "The design system provides a single source of truth for the design language used at Skyscanner."
+
+        addActionButton(
+          BpkButton(context).apply {
+            text = "Got it!"
+            setOnClickListener {
+              println("confirmed")
+              dialog.dismiss()
+            }
+          }
+        )
+
+        addActionButton(
+          BpkButtonLink(context).apply {
+            text = "Whatev's"
+            setOnClickListener {
+              println("skipped")
+              dialog.dismiss()
+            }
+          }
+        )
+      }
+    },
+
+    "FlareWithImage" to { context: Context ->
+      val dialog = BpkDialog(context, BpkDialog.Style.FLARE)
+      dialog.apply {
         title = "Where will you go?"
         description = "See the best Black Friday deals from out 1,200 travel partners. " +
           "Remember to keep checking back as we update deals throughput the weekend."

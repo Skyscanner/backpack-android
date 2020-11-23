@@ -179,7 +179,8 @@ object ComponentRegistry {
         "Success" story NodeData { DialogStory of "Confirmation" },
         "With Links" story NodeData { DialogStory of "Links" },
         "Long Text" story NodeData { DialogStory of "Long" },
-        "Flare" story NodeData { DialogStory of "Flare" }
+        "Flare" story NodeData { DialogStory of "Flare" },
+        "Flare with image" story NodeData { DialogStory of "FlareWithImage" }
       )
     ),
     "Flare" story NodeData(
