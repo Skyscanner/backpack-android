@@ -99,6 +99,7 @@ internal class MonthView @JvmOverloads constructor(
   private val monthHeaderSize: Int = ResourcesUtil.dpToPx(52, context)
 
   private var rowHeight: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl) * 2
+  private var labelsYOffset: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
   private var viewWidth = 0
 
   private var isRtl: Boolean = false
@@ -191,9 +192,12 @@ internal class MonthView @JvmOverloads constructor(
     set(value) {
       if (value != null) {
         field = value
+        labelsViewModel.update(value.calendarLabels)
         isRtl = value.isRtl
       }
     }
+
+  private val labelsViewModel = BpkCalendarLabelsViewModel(context)
 
   @SuppressLint("ClickableViewAccessibility")
   override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -212,6 +216,7 @@ internal class MonthView @JvmOverloads constructor(
 
   override fun onDraw(canvas: Canvas) {
     controller?.let {
+      labelsViewModel.cellWidth = (width / DEFAULT_NUM_DAYS.toFloat()) * LABEL_WIDTH_PERCENT
       drawMonthTitle(canvas)
       drawDaysInMonth(it, canvas)
       contentDescription = monthHeaderString
@@ -239,6 +244,8 @@ internal class MonthView @JvmOverloads constructor(
         colouredParams[it] = bucket
       }
     }
+
+    labelsViewModel.update(params.labels)
 
     isDateDisabled = params.disabledDatesDefinition
 
@@ -309,7 +316,7 @@ internal class MonthView @JvmOverloads constructor(
         y,
         startX,
         stopX,
-        disabled
+        disabled,
       )
 
       j++
@@ -328,7 +335,7 @@ internal class MonthView @JvmOverloads constructor(
     y: Int,
     startX: Int,
     stopX: Int,
-    isDisabled: Boolean
+    isDisabled: Boolean,
   ) {
     var overrideTextColor: Int? = null
 
@@ -431,6 +438,14 @@ internal class MonthView @JvmOverloads constructor(
       x.toFloat(),
       y.toFloat(),
       monthNumberPaint
+    )
+
+    labelsViewModel.draw(
+      canvas = canvas,
+      date = calendarDay,
+      x = x.toFloat(),
+      y = y.toFloat() + labelsYOffset,
+      disabled = isDisabled,
     )
   }
 
@@ -565,6 +580,7 @@ internal class MonthView @JvmOverloads constructor(
     const val DEFAULT_SELECTED_DAY = -1
     const val DEFAULT_NUM_DAYS = 7
     const val DEFAULT_NUM_ROWS = 6
+    const val LABEL_WIDTH_PERCENT = 0.8f
 
     val DEFAULT_WEEK_START = DayOfWeek.MONDAY.value
   }

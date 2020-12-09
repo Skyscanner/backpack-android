@@ -37,6 +37,7 @@ package net.skyscanner.backpack.calendar.presenter
 import androidx.annotation.VisibleForTesting
 import java.util.Locale
 import net.skyscanner.backpack.calendar.model.CalendarColoring
+import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.SingleDay
@@ -54,6 +55,8 @@ abstract class BpkCalendarController(
   open val endDate: LocalDate = currentDateProvider.invoke().plusYears(1)
 
   open val calendarColoring: CalendarColoring? = null
+
+  open val calendarLabels: Map<LocalDate, CalendarLabel>? = null
 
   open fun isDateDisabled(date: LocalDate): Boolean {
     return false
