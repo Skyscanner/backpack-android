@@ -81,14 +81,14 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
   super.onViewCreated(view, savedInstanceState)
 
   val controller = ExampleBpkCalendarController(requireContext(), SelectionType.SINGLE)
-  
+
   view.findViewById<BpkCalendar>(R.id.bpkCalendar).setController(controller)
 }
 ```
 
 Notice the selection type is set in the `BpkCalendarController` constructor through the `selectionType` argument.
- 
-When `selectionType` is `SelectionType.RANGE` the calendar will allow a date range. 
+
+When `selectionType` is `SelectionType.RANGE` the calendar will allow a date range.
 When `selectionType` is `SelectionType.SINGLE_DAY` the calendar will allow a single date.
 In both cases, the handling of the selection
  will be done in `onRangeSelected()` as in the example above.
@@ -134,6 +134,30 @@ For more examples see:
 
 - [ExampleBpkCalendarController](https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt)
 - [CalendarColoring](https://github.com/Skyscanner/backpack-android/blob/master/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarColoring.kt)
+
+
+### Labeled buckets
+
+Labeled buckets are used to add some extra text to each calendar cell.
+
+To define labels set the `calendarLabels` attribute in the calendar controller.
+
+```kotlin
+class ExampleBpkCalendarController(
+  override val selectionType: SelectionType
+ ) : BpkCalendarController(selectionType) {
+  override val calendarLabels = mapOf(
+    LocalDate.of(2020, 11, 7) to CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
+    LocalDate.of(2020, 11, 8) to CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
+    LocalDate.of(2020, 11, 9) to CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
+  )
+}
+```
+
+For more examples see:
+
+- [ExampleBpkCalendarController](https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt)
+- [CalendarLabel](https://github.com/Skyscanner/backpack-android/blob/master/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarLabel.kt)
 
 ### Month footer views
 

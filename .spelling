@@ -23,6 +23,7 @@ BpkCalendarDate
 BpkCalendarDatePropTypes
 BpkCalendarView
 BpkCalendarGrid
+CalendarLabel
 
 BpkCard
 
@@ -740,3 +741,4 @@ ColorStateList
 state_selected
 state_activated
 Javadoc
+Labeled
