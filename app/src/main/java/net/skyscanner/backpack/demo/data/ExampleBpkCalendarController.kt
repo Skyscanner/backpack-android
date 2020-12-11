@@ -79,10 +79,14 @@ open class ExampleBpkCalendarController(
 
   override val calendarLabels: Map<LocalDate, CalendarLabel>?
     get() = if (labeled) mapOf(
-      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 1) to CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
-      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 2) to CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
-      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 3) to CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
-      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 4) to CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
+      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 1) to
+        CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
+      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 2) to
+        CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
+      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 3) to
+        CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
+      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 4) to
+        CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
     ) else null
 
   override fun isDateDisabled(date: LocalDate): Boolean {
