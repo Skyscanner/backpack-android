@@ -5,6 +5,8 @@
 **Added:**
   - `BpkCalendar`
     - New functionality – labels for each cell.
+  - `BpkTextField`
+    - New design.
 
 ## How to write a good changelog entry
 
