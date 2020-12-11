@@ -139,7 +139,8 @@ internal class MonthAdapter(
         month,
         selectedDay,
         controller.calendarColoring,
-        controller::isDateDisabled
+        controller::isDateDisabled,
+        controller.calendarLabels,
       )
     )
     view.invalidate()

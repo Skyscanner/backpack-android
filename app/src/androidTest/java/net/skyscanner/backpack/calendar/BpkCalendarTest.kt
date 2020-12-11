@@ -31,6 +31,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import java.util.Locale
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar.model.CalendarColoring
+import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.SingleDay
@@ -67,7 +68,8 @@ private class BpkCalendarControllerImpl(
   override val selectionType: SelectionType = SelectionType.RANGE,
   override val calendarColoring: CalendarColoring? = null,
   private val disabledDayOfTheWeek: DayOfWeek? = null,
-  override val monthFooterAdapter: MonthFooterAdapter? = null
+  override val monthFooterAdapter: MonthFooterAdapter? = null,
+  override val calendarLabels: Map<LocalDate, CalendarLabel>? = null,
 ) : BpkCalendarController(selectionType, MockDateProvider(today)) {
   override val startDate: LocalDate
     get() = initialStartDate ?: super.startDate
@@ -123,6 +125,33 @@ class BpkCalendarTest : BpkSnapshotTest() {
       initialEndDate,
       SelectionType.RANGE,
       multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext)
+    )
+
+    calendar.setController(controller)
+    snap(wrapWithBackground(calendar))
+  }
+
+  @Test
+  fun screenshotTestLabeledCalendarDefault() {
+    val calendar = BpkCalendar(testContext)
+    val initialStartDate = LocalDate.of(2019, 1, 2)
+    val initialEndDate = LocalDate.of(2019, 12, 31)
+    val controller = BpkCalendarControllerImpl(
+      false,
+      Locale.UK,
+      initialStartDate,
+      initialEndDate,
+      SelectionType.RANGE,
+      calendarLabels = mapOf(
+        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 1) to
+          CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
+        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 2) to
+          CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
+        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
+          CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
+        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
+          CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
+      ),
     )
 
     calendar.setController(controller)

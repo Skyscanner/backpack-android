@@ -18,13 +18,14 @@
 
 package net.skyscanner.backpack.calendar.model
 
-import org.threeten.bp.LocalDate
+data class CalendarLabel(
+  val text: String,
+  val style: Style,
+) {
 
-internal data class CalendarDrawingParams(
-  val year: Int,
-  val month: Int,
-  val selectedDay: Int?,
-  val calendarColoring: CalendarColoring?,
-  val disabledDatesDefinition: (LocalDate) -> Boolean = { false },
-  val labels: Map<LocalDate, CalendarLabel>?,
-)
+  enum class Style {
+    PriceLow,
+    PriceMedium,
+    PriceHigh,
+  }
+}

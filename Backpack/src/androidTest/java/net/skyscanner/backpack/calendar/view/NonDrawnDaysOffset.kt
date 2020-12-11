@@ -135,7 +135,7 @@ class NonDrawnDaysOffset {
           return startDate
         }
     }
-    monthView.calendarDrawingParams = CalendarDrawingParams(2019, drawMonth, null, null)
+    monthView.calendarDrawingParams = CalendarDrawingParams(2019, drawMonth, null, null, labels = null)
     return monthView
   }
 

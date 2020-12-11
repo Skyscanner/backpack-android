@@ -37,6 +37,7 @@ import net.skyscanner.backpack.demo.stories.HorizontalNavStory
 import net.skyscanner.backpack.demo.stories.IconType
 import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.InteractiveStarRatingStory
+import net.skyscanner.backpack.demo.stories.LabeledCalendarStory
 import net.skyscanner.backpack.demo.stories.LoadingButtonStory
 import net.skyscanner.backpack.demo.stories.NavBarStory
 import net.skyscanner.backpack.demo.stories.SnackbarStory
@@ -156,7 +157,8 @@ object ComponentRegistry {
         "Footer view" story NodeData { FooterViewCalendarStory of R.layout.fragment_calendar_footer_view },
         "Footer view RTL" story NodeData {
           FooterViewCalendarStory of R.layout.fragment_calendar_footer_view with Direction.RTL
-        }
+        },
+        "Labeled" story NodeData { LabeledCalendarStory of R.layout.fragment_calendar_default },
       )
     ),
     "Chip" story NodeData(
