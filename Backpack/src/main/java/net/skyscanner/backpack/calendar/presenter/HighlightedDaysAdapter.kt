@@ -33,7 +33,7 @@ open class HighlightedDaysAdapter(
   val context: Context,
   val locale: Locale,
   holidays: Set<HighlightedDay>,
-  private val formatDate: DateFormatter? = null
+  private val formatDate: DateFormatter? = null,
 ) : MonthFooterAdapter {
 
   private val defaultDateFormatter by unsafeLazy {
@@ -78,7 +78,7 @@ open class HighlightedDaysAdapter(
     /**
      * Shows only the description provided and not the date.
      */
-    val descriptionOnly: Boolean = false
+    val descriptionOnly: Boolean = false,
   ) {
     constructor(date: LocalDate, description: String, descriptionOnly: Boolean) :
       this(date, description, null, descriptionOnly)

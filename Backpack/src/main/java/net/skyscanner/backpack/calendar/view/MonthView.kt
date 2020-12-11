@@ -65,7 +65,7 @@ import org.threeten.bp.temporal.WeekFields
 internal class MonthView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyle: Int = 0
+  defStyle: Int = 0,
 ) : View(context, attrs, defStyle) {
 
   private val monthNumberFont =
@@ -465,7 +465,7 @@ internal class MonthView @JvmOverloads constructor(
     range: CalendarRange,
     paddingX: Int,
     x: Int,
-    y: Int
+    y: Int,
   ) {
     if (day.dayOfMonth == 1 && day != range.start) {
       drawCircle(canvas, x - paddingX, y - miniDayNumberTextSize / 3, selectedDayCircleRadius, rangeBackPaint)
