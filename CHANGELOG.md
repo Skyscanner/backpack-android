@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 25.2.0
+
+**Added:**
+  - `BpkCalendar`
+    - New functionality – labels for each cell.
+
 # 25.1.0
 
 **Added:**
