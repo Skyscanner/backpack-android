@@ -57,6 +57,12 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   }
 
   @Test
+  fun screenshotTestTextField_Disabled() {
+    subject.isEnabled = false
+    snap(subject)
+  }
+
+  @Test
   @Ignore
   fun screenshotTestTextField_IconStart() {
     subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
@@ -102,6 +108,13 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   fun screenshotTestTextField_Hint_RTL() {
     subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
     subject.setText("")
+    snap(subject)
+  }
+
+  @Test
+  fun screenshotTestTextField_Disabled_RTL() {
+    subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
+    subject.isEnabled = false
     snap(subject)
   }
 
