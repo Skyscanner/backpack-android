@@ -31,7 +31,7 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
 
 private class FooterViewCalendarController(
-  val context: Context
+  val context: Context,
 ) : ExampleBpkCalendarController(context) {
   override val calendarColoring: CalendarColoring? = CalendarColoring(
     coloredBuckets = setOf(

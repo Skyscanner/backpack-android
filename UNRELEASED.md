@@ -3,8 +3,6 @@
 > Place your changes below this line.
 
 **Added:**
-  - `BpkCalendar`
-    - New functionality – labels for each cell.
   - `BpkTextField`
     - New design.
 

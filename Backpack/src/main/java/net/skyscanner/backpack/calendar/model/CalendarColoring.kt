@@ -30,12 +30,12 @@ import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 import org.threeten.bp.LocalDate
 
 data class CalendarColoring(
-  val coloredBuckets: Set<ColoredBucket>
+  val coloredBuckets: Set<ColoredBucket>,
 )
 
 data class ColoredBucket(
   val calendarCellStyle: CalendarCellStyle,
-  val days: Set<LocalDate>
+  val days: Set<LocalDate>,
 )
 
 sealed class CalendarCellStyle {
@@ -108,7 +108,7 @@ sealed class CalendarCellStyle {
    */
   data class Custom(
     @ColorInt private val color: Int,
-    private val textStyle: TextStyle? = null
+    private val textStyle: TextStyle? = null,
   ) : CalendarCellStyle() {
     override fun color(context: Context) = color
     override fun textStyle(context: Context): TextStyle {

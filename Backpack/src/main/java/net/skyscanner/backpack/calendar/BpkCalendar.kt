@@ -51,7 +51,7 @@ import net.skyscanner.backpack.util.wrapContextWithDefaults
 open class BpkCalendar @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyle: Int = 0
+  defStyle: Int = 0,
 ) : ConstraintLayout(wrapContextWithDefaults(context), attrs, defStyle), BpkCalendarScrollListener {
 
   init {
@@ -91,7 +91,7 @@ open class BpkCalendar @JvmOverloads constructor(
     firstVisibleItem: Int,
     visibleItemCount: Int,
     totalItemCount: Int,
-    year: Int
+    year: Int,
   ) {
     updateYearPill(year)
   }

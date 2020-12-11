@@ -47,7 +47,7 @@ import org.threeten.bp.format.DateTimeFormatter
 
 abstract class BpkCalendarController(
   open val selectionType: SelectionType = SelectionType.RANGE,
-  val currentDateProvider: CurrentDateProvider = LocalDateProvider
+  val currentDateProvider: CurrentDateProvider = LocalDateProvider,
 ) {
 
   open val startDate: LocalDate = currentDateProvider.invoke()
