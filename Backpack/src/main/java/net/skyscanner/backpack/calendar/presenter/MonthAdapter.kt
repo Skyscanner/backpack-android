@@ -46,7 +46,7 @@ import org.threeten.bp.Period
 
 internal class MonthAdapter(
   private val context: Context,
-  private val controller: BpkCalendarController
+  private val controller: BpkCalendarController,
 ) : BaseAdapter(), MonthView.OnDayClickListener {
 
   private var selectedDay: LocalDate? = null

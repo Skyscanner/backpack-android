@@ -34,7 +34,7 @@ import net.skyscanner.backpack.util.unsafeLazy
 
 open class HighlightedDaysMonthFooter(
   context: Context,
-  val formatDate: DateFormatter
+  val formatDate: DateFormatter,
 ) : LinearLayout(context) {
 
   var holidays: Set<HighlightedDaysAdapter.HighlightedDay>? = null

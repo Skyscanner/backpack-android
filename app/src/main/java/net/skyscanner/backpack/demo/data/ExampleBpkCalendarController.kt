@@ -44,7 +44,7 @@ open class ExampleBpkCalendarController(
   override val selectionType: SelectionType = SelectionType.RANGE,
   private val disableDates: Boolean = false,
   private val labeled: Boolean = false,
-  private val automationMode: Boolean = false
+  private val automationMode: Boolean = false,
 ) : BpkCalendarController(selectionType) {
   override fun onRangeSelected(range: CalendarSelection) {
     if (automationMode) {
@@ -110,7 +110,7 @@ internal fun multiColoredExampleCalendarColoring(
   colorOffset: Long,
   startDate: LocalDate,
   endDate: LocalDate,
-  context: Context
+  context: Context,
 ): CalendarColoring {
   val daysBetweenStartAndEnd = ChronoUnit.DAYS.between(startDate, endDate) + 1
   val redSet = mutableSetOf<LocalDate>()

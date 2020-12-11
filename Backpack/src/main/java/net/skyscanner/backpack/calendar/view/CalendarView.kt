@@ -53,7 +53,7 @@ interface BpkCalendarScrollListener {
     firstVisibleItem: Int,
     visibleItemCount: Int,
     totalItemCount: Int,
-    year: Int
+    year: Int,
   )
 }
 
@@ -62,7 +62,7 @@ interface BpkCalendarScrollListener {
  */
 internal class CalendarView constructor(
   context: Context,
-  attr: AttributeSet?
+  attr: AttributeSet?,
 ) : ListView(context, attr), AbsListView.OnScrollListener, CalendarUpdateCallback {
 
   var controller: BpkCalendarController? = null
@@ -123,7 +123,7 @@ internal class CalendarView constructor(
     view: AbsListView,
     firstVisibleItem: Int,
     visibleItemCount: Int,
-    totalItemCount: Int
+    totalItemCount: Int,
   ) {
     val child = view.getChildAt(0) ?: return
 
