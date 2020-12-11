@@ -20,9 +20,11 @@
   <color name="__switchThumbDisabled">@color/bpkBlackTint05</color>
   <color name="__starRatingStarColor">@color/bpkBlackTint05</color>
   <color name="__horizontalNavTextDefault">@color/bpkTextTertiaryDark</color>
-  <color name="__textFieldText">@color/bpkTextPrimaryDark</color>
-  <color name="__textFieldHint">@color/bpkTextTertiaryDark</color>
-  <color name="__textFieldIcon">@color/bpkTextSecondary</color>
+  <color name="__textFieldTextDisabled">@color/bpkSkyGrayTint02</color>
+  <color name="__textFieldHint">@color/bpkSkyGrayTint04</color>
+  <color name="__textFieldIcon">@color/bpkBlackTint06</color>
+  <color name="__textFieldBorder">@color/bpkBlackTint05</color>
+  <color name="__textFieldBorderDisabled">@color/bpkBlackTint03</color>
   <color name="__bottomNavUnselected">@color/bpkTextSecondaryDark</color>
 
   <color name="__barChartInactivatedColor">@color/bpkSkyGrayTint04</color>
