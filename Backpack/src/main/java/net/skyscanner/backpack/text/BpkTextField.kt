@@ -19,16 +19,16 @@
 package net.skyscanner.backpack.text
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
@@ -79,12 +79,13 @@ open class BpkTextField @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     BpkText.getFont(context, BpkText.BASE, BpkText.Weight.NORMAL).applyTo(paint)
 
-    var textColor = ContextCompat.getColor(context, R.color.__textFieldText)
+    var textColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
+    var textColorDisabled = ContextCompat.getColor(context, R.color.__textFieldTextDisabled)
     var hintNormalColor = ContextCompat.getColor(context, R.color.__textFieldHint)
-    var hintFocusedColor = ContextCompat.getColor(context, R.color.bpkTextSecondary)
+    var hintFocusedColor = ContextCompat.getColor(context, R.color.__textFieldHint)
     var iconColor = ContextCompat.getColor(context, R.color.__textFieldIcon)
 
-    var background: Drawable = ColorDrawable(ContextCompat.getColor(context, R.color.bpkBackgroundTertiary))
+    var background: Drawable = AppCompatResources.getDrawable(context, R.drawable.bpk_text_field_background)!!
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -102,21 +103,36 @@ open class BpkTextField @JvmOverloads constructor(
     }
 
     this.iconTintColor = iconColor
-    setTextColor(textColor)
+    setTextColor(
+      colorStateList(
+        color = textColor,
+        pressedColor = textColor,
+        focusedColor = textColor,
+        activatedColor = textColor,
+        disabledColor = textColorDisabled,
+      )
+    )
     setHintTextColor(
-      ColorStateList(
-        arrayOf(intArrayOf(android.R.attr.state_focused), intArrayOf()),
-        intArrayOf(hintFocusedColor, hintNormalColor)
+      colorStateList(
+        color = hintNormalColor,
+        pressedColor = hintNormalColor,
+        focusedColor = hintFocusedColor,
+        activatedColor = hintFocusedColor,
+        disabledColor = textColorDisabled,
       )
     )
 
-    val padding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+    val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+    val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
       resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
-    setPaddingRelative(padding, padding, padding, padding)
-    compoundDrawablePadding = padding
+    setPaddingRelative(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
+    compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+      resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
 
     gravity = Gravity.START or Gravity.CENTER_VERTICAL
     this.background = background
+    this.minHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl) +
+      resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
   }
 
   override fun onRtlPropertiesChanged(layoutDirection: Int) {
