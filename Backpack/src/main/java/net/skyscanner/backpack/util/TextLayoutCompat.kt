@@ -55,14 +55,23 @@ internal object TextLayoutCompat {
   interface StaticLayoutCreator {
 
     fun create(
-      source: CharSequence, bufStart: Int, bufEnd: Int, paint: TextPaint, outerWidth: Int, align: Layout.Alignment,
-      textDir: TextDirectionHeuristic, spacingMult: Float, spacingAdd: Float, includePad: Boolean,
-      ellipsize: TextUtils.TruncateAt?, ellipsizedWidth: Int, maxLines: Int
+      source: CharSequence,
+      bufStart: Int,
+      bufEnd: Int,
+      paint: TextPaint,
+      outerWidth: Int,
+      align: Layout.Alignment,
+      textDir: TextDirectionHeuristic,
+      spacingMult: Float,
+      spacingAdd: Float,
+      includePad: Boolean,
+      ellipsize: TextUtils.TruncateAt?,
+      ellipsizedWidth: Int,
+      maxLines: Int
     ): StaticLayout
-
   }
 
-  object StaticLayoutCreatorApi21: StaticLayoutCreator {
+  object StaticLayoutCreatorApi21 : StaticLayoutCreator {
 
     private val ConstructorReference: Constructor<StaticLayout>? = try {
       StaticLayout::class.java.getDeclaredConstructor(
@@ -92,16 +101,26 @@ internal object TextLayoutCompat {
     }
 
     @Suppress("DEPRECATION")
-    override fun create(source: CharSequence, bufStart: Int, bufEnd: Int, paint: TextPaint, outerWidth: Int,
-                        align: Layout.Alignment, textDir: TextDirectionHeuristic, spacingMult: Float, spacingAdd: Float,
-                        includePad: Boolean, ellipsize: TextUtils.TruncateAt?, ellipsizedWidth: Int, maxLines: Int,
+    override fun create(
+      source: CharSequence,
+      bufStart: Int,
+      bufEnd: Int,
+      paint: TextPaint,
+      outerWidth: Int,
+      align: Layout.Alignment,
+      textDir: TextDirectionHeuristic,
+      spacingMult: Float,
+      spacingAdd: Float,
+      includePad: Boolean,
+      ellipsize: TextUtils.TruncateAt?,
+      ellipsizedWidth: Int,
+      maxLines: Int,
     ): StaticLayout = try {
 
       ConstructorReference?.newInstance(
         source, bufStart, bufEnd, paint, outerWidth, align, textDir, spacingMult,
         spacingAdd, includePad, ellipsize, ellipsizedWidth, maxLines,
       ) ?: throw NullPointerException("StaticLayoutConstructor is null!")
-
     } catch (t: Throwable) {
 
       if (BuildConfig.DEBUG) {
@@ -112,27 +131,34 @@ internal object TextLayoutCompat {
         source, bufStart, bufEnd, paint, outerWidth, align, spacingMult,
         spacingAdd, includePad, ellipsize, ellipsizedWidth,
       )
-
     }
-
   }
 
   @RequiresApi(Build.VERSION_CODES.M)
   object StaticLayoutCreatorApi23 : StaticLayoutCreator {
 
-    override fun create(source: CharSequence, bufStart: Int, bufEnd: Int, paint: TextPaint, outerWidth: Int,
-                        align: Layout.Alignment, textDir: TextDirectionHeuristic, spacingMult: Float, spacingAdd: Float,
-                        includePad: Boolean, ellipsize: TextUtils.TruncateAt?, ellipsizedWidth: Int, maxLines: Int,
+    override fun create(
+      source: CharSequence,
+      bufStart: Int,
+      bufEnd: Int,
+      paint: TextPaint,
+      outerWidth: Int,
+      align: Layout.Alignment,
+      textDir: TextDirectionHeuristic,
+      spacingMult: Float,
+      spacingAdd: Float,
+      includePad: Boolean,
+      ellipsize: TextUtils.TruncateAt?,
+      ellipsizedWidth: Int,
+      maxLines: Int,
     ): StaticLayout = StaticLayout.Builder.obtain(source, bufStart, bufEnd, paint, outerWidth)
-        .setAlignment(align)
-        .setTextDirection(textDir)
-        .setLineSpacing(spacingAdd, spacingMult)
-        .setIncludePad(includePad)
-        .setEllipsize(ellipsize)
-        .setEllipsizedWidth(ellipsizedWidth)
-        .setMaxLines(maxLines)
-        .build()
-
+      .setAlignment(align)
+      .setTextDirection(textDir)
+      .setLineSpacing(spacingAdd, spacingMult)
+      .setIncludePad(includePad)
+      .setEllipsize(ellipsize)
+      .setEllipsizedWidth(ellipsizedWidth)
+      .setMaxLines(maxLines)
+      .build()
   }
-
 }

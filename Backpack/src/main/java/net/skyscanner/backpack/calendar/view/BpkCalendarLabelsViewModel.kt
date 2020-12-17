@@ -72,7 +72,7 @@ internal class BpkCalendarLabelsViewModel(
     }
 
   fun draw(canvas: Canvas, date: LocalDate, x: Float, y: Float, disabled: Boolean) {
-    if (disabled) {
+    if (disabled || isEmpty()) {
       return
     }
     val label = labels.getOrElse(date) { placeholder }
