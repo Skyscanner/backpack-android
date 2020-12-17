@@ -151,6 +151,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
           CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
         LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
           CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
+        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
+          CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
       ),
     )
 
