@@ -50,6 +50,9 @@ internal class BpkCalendarLabelsViewModel(
     paints.getValue(CalendarLabel.Style.PriceMedium),
   )
 
+  fun isEmpty(): Boolean =
+    labels.isEmpty()
+
   fun update(data: Map<LocalDate, CalendarLabel>?) {
     labels = data?.mapValues { BpkCalendarLabelViewModel(it.value, paints.getValue(it.value.style)) } ?: emptyMap()
     if (cellWidth > 0) {
@@ -86,7 +89,7 @@ internal class BpkCalendarLabelsViewModel(
       set(value) {
         if (field != value) {
           field = value
-          text = TextLayoutCompat.StaticLayout(
+          text = TextLayoutCompat.staticLayout(
             source = label.text,
             paint = paint,
             align = Layout.Alignment.ALIGN_NORMAL,

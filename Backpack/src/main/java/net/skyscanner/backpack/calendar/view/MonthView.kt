@@ -99,7 +99,9 @@ internal class MonthView @JvmOverloads constructor(
   private val monthHeaderSize: Int = ResourcesUtil.dpToPx(52, context)
 
   private var rowHeight: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl) * 2
-  private var labelsYOffset: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+  private var rowHeightLabeled: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl) * 2
+  private var labelsYOffset: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) +
+    context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
   private var viewWidth = 0
 
   private var isRtl: Boolean = false
@@ -194,6 +196,7 @@ internal class MonthView @JvmOverloads constructor(
         field = value
         labelsViewModel.update(value.calendarLabels)
         isRtl = value.isRtl
+        requestLayout()
       }
     }
 
@@ -224,6 +227,7 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    val rowHeight = if (labelsViewModel.isEmpty()) rowHeight else rowHeightLabeled
     setMeasuredDimension(
       MeasureSpec.getSize(widthMeasureSpec),
       rowHeight * numberOfRows + monthHeaderSize + selectedDayCircleRadius
@@ -246,6 +250,7 @@ internal class MonthView @JvmOverloads constructor(
     }
 
     labelsViewModel.update(params.labels)
+    requestLayout()
 
     isDateDisabled = params.disabledDatesDefinition
 
@@ -296,6 +301,7 @@ internal class MonthView @JvmOverloads constructor(
   }
 
   private fun drawDaysInMonth(controller: BpkCalendarController, canvas: Canvas) {
+    val rowHeight = if (labelsViewModel.isEmpty()) rowHeight else rowHeightLabeled
     var y = (rowHeight + miniDayNumberTextSize) / 2 + monthHeaderSize
     val dayWidthHalf = (viewWidth) / (numberOfDaysInAWeek * 2.0f)
     var j = findDayOffset()
@@ -523,6 +529,7 @@ internal class MonthView @JvmOverloads constructor(
     if (x < 0 || x > viewWidth) {
       return -1
     }
+    val rowHeight = if (labelsViewModel.isEmpty()) rowHeight else rowHeightLabeled
     val row = (y - monthHeaderSize).toInt() / rowHeight
     val column = (x * numberOfDaysInAWeek / viewWidth).toInt()
     var day = column - findDayOffset() + 1

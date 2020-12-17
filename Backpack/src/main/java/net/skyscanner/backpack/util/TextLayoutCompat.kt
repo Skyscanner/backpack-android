@@ -40,7 +40,7 @@ internal object TextLayoutCompat {
     null
   }
 
-  fun StaticLayout(
+  fun staticLayout(
     source: CharSequence,
     bufStart: Int = 0,
     bufEnd: Int = source.length,
