@@ -99,7 +99,7 @@ internal class MonthView @JvmOverloads constructor(
   private val monthHeaderSize: Int = ResourcesUtil.dpToPx(52, context)
 
   private var rowHeight: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl) * 2
-  private var labelsYOffset: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
+  private var labelsYOffset: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
   private var viewWidth = 0
 
   private var isRtl: Boolean = false

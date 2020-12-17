@@ -87,6 +87,8 @@ open class ExampleBpkCalendarController(
         CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
       LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 4) to
         CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
+      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 5) to
+        CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
     ) else null
 
   override fun isDateDisabled(date: LocalDate): Boolean {
