@@ -43,8 +43,8 @@ open class ExampleBpkCalendarController(
   private val context: Context,
   override val selectionType: SelectionType = SelectionType.RANGE,
   private val disableDates: Boolean = false,
-  private val labeled: Boolean = false,
   private val automationMode: Boolean = false,
+  override val calendarLabels: Map<LocalDate, CalendarLabel>? = null,
 ) : BpkCalendarController(selectionType) {
   override fun onRangeSelected(range: CalendarSelection) {
     if (automationMode) {
@@ -76,20 +76,6 @@ open class ExampleBpkCalendarController(
     } else {
       null
     }
-
-  override val calendarLabels: Map<LocalDate, CalendarLabel>?
-    get() = if (labeled) mapOf(
-      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 1) to
-        CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
-      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 2) to
-        CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
-      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 3) to
-        CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
-      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 4) to
-        CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
-      LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 5) to
-        CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
-    ) else null
 
   override fun isDateDisabled(date: LocalDate): Boolean {
     if (!disableDates) {
