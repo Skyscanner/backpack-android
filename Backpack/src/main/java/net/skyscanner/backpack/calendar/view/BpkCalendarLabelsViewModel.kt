@@ -26,6 +26,7 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import android.text.TextUtils
 import androidx.core.content.ContextCompat
+import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.text.BpkText
@@ -93,7 +94,7 @@ internal class BpkCalendarLabelsViewModel(
             source = label.text,
             paint = paint,
             align = Layout.Alignment.ALIGN_NORMAL,
-            outerWidth = value.toInt(),
+            outerWidth = value.roundToInt(),
             includePad = true,
             ellipsize = TextUtils.TruncateAt.END,
             maxLines = 2,
