@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 25.3.0
+
+**Updated:**
+  - `BpkTextField`
+    - New design.
+  - `BpkCalendar`
+    - Multiline labels support
+
 # 25.2.0
 
 **Added:**

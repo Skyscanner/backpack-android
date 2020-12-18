@@ -54,7 +54,7 @@ task clean(type: Delete) {
 }
 
 // NOTE: If you change how this is defined make sure scripts/trigger-rn-build.sh still works
-def BpkVersion = '25.2.0'
+def BpkVersion = '25.3.0'
 
 ext {
   version = "$BpkVersion"
