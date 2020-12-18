@@ -45,7 +45,7 @@ internal class BpkCalendarLabelsViewModel(
 
   private val placeholder = BpkCalendarLabelViewModel(
     label = CalendarLabel(
-      text = "-",
+      text = "–",
       style = CalendarLabel.Style.PriceMedium,
     ),
     paints.getValue(CalendarLabel.Style.PriceMedium),
