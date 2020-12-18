@@ -2,9 +2,11 @@
 
 > Place your changes below this line.
 
-**Added:**
+**Updated:**
   - `BpkTextField`
     - New design.
+  - `BpkCalendar`
+    - Multiline labels support
 
 ## How to write a good changelog entry
 

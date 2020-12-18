@@ -26,9 +26,11 @@ import kotlinx.android.synthetic.main.calendar_selection_type.single
 import kotlinx.android.synthetic.main.fragment_calendar_default.bpkCalendar
 import kotlinx.android.synthetic.main.fragment_calendar_default.selection_type
 import net.skyscanner.backpack.calendar.BpkCalendar
+import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
+import org.threeten.bp.LocalDate
 
 class LabeledCalendarStory : Story() {
 
@@ -43,7 +45,7 @@ class LabeledCalendarStory : Story() {
       requireContext(),
       SelectionType.RANGE,
       disableDates = false,
-      labeled = true,
+      calendarLabels = createLabels(),
       automationMode = automationMode
     )
     calendar.setController(controller)
@@ -60,15 +62,28 @@ class LabeledCalendarStory : Story() {
     (selection_type as? RadioGroup)?.setOnCheckedChangeListener { _, checkedId ->
       when (checkedId) {
         R.id.single -> {
-          controller = ExampleBpkCalendarController(requireContext(), SelectionType.SINGLE, labeled = true)
+          controller = ExampleBpkCalendarController(requireContext(), SelectionType.SINGLE, calendarLabels = createLabels())
         }
         R.id.range -> {
-          controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE, labeled = true)
+          controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE, calendarLabels = createLabels())
         }
       }
       bpkCalendar.setController(controller)
     }
   }
+
+  private fun createLabels(startDate: LocalDate = LocalDate.now()) = mapOf(
+    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 1) to
+      CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
+    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 2) to
+      CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
+    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 3) to
+      CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
+    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 4) to
+      CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
+    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 5) to
+      CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
+  )
 
   companion object {
     private const val LAYOUT_ID = "fragment_id"
