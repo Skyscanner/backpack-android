@@ -1,7 +1,7 @@
 #!/bin/sh
 # Backpack for Android - Skyscanner's Design System
 #
-# Copyright 2018-2020 Skyscanner Ltd
+# Copyright 2018-2021 Skyscanner Ltd
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
