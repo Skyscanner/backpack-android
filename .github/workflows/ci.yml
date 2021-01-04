@@ -38,8 +38,8 @@ jobs:
 #      - name: npm greenkeeper-lockfile
 #        run: npm install -g greenkeeper-lockfile
 
-      - name: npm run danger
-        run: npm run danger
+#      - name: npm run danger
+#        run: npm run danger
 
       - name: npm run build
         run: npm run build
