@@ -29,11 +29,10 @@ jobs:
       - name: nvm install
         run: nvm install
 
-      - name: nvm use
-        run: nvm use
-
-      - name: npm install
-        run: npm install
+      - name: nvm install
+        run: |
+          nvm use
+          npm install
 
 #      - name: npm greenkeeper-lockfile
 #        run: npm install -g greenkeeper-lockfile
