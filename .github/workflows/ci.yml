@@ -54,7 +54,7 @@ jobs:
 
       # Run lint, ktlint
       - name: Run Checks
-        run: ./gradlew check -PdisablePreDex
+        run: ./gradlew :app:check :Backpack:check -PdisablePreDex
 
       - name: Unit Tests
         run: ./gradlew test -PdisablePreDex
