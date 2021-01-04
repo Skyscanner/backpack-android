@@ -32,8 +32,8 @@ jobs:
       - name: nvm use
         run: nvm use
 
-      - name: npm greenkeeper-lockfile
-        run: npm install -g greenkeeper-lockfile
+#      - name: npm greenkeeper-lockfile
+#        run: npm install -g greenkeeper-lockfile
 
       - name: npm run danger
         run: npm run danger
