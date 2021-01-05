@@ -24,7 +24,7 @@ jobs:
         run: |
           sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt update
-          echo "y" | sudo apt-get install python3.6.3
+          echo "y" | sudo apt-get install python3.6
           echo "y" | sudo apt-get install python2.7
           python2.7 --version
           python3.6 --version
