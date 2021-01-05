@@ -38,7 +38,7 @@ jobs:
 #        run: npm install -g greenkeeper-lockfile
 
       - name: npm run danger
-        uses: danger/danger-js@X.Y.Z
+        run: npm run danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #        run: npm run danger
