@@ -32,7 +32,7 @@ jobs:
       - name: nvm ci
         run: |
           nvm use
-          npm ci -g greenkeeper-lockfile
+          npm ci
 
 #      - name: npm greenkeeper-lockfile
 #        run: npm install -g greenkeeper-lockfile
