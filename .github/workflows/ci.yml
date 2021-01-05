@@ -20,17 +20,21 @@ jobs:
       # Checkout the repo
       - uses: actions/checkout@v2
 
+      - name: Install Python 3
+        run: |
+          echo "y" | sudo apt-get install python3.6.3
+          python3.6.3 --version
+
       - name: Install Android SDK
         run: echo "y" | sudo apt install android-sdk
 
       - name: Install GCloud
         run: |
-          echo "y" | sudo apt-get install apt-transport-https ca-certificates gnupg
-          echo "y" | sudo apt-get update && sudo apt-get install google-cloud-sdk
-          gcloud --version
-
-#      - name: Install Python 3
-#        run: pyenv install 3.6.3
+          export CLOUDSDK_PYTHON=$(whereis python3.6.3)
+          echo "y" | sudo apt-get install apt-transport-https ca-certificates gnupg google-cloud-sdk
+          gcloud version
+          gcloud config set project api-project-768202461730
+          gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
 
       - name: nvm install
         run: nvm install
@@ -47,7 +51,6 @@ jobs:
         run: npm run danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: npm run danger
 
       - name: npm run build
         run: npm run build
