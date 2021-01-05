@@ -26,9 +26,11 @@ jobs:
           curl https://pyenv.run | bash
           exec "$SHELL"
           pyenv install 3.6.3
-          pyenv global 2.7
+          pyenv install 2.7.18
+          pyenv global 2.7.18
           python2.7 --version
           python3.6 --version
+          python --version
 
       - name: apt-get install android-sdk
         run: sudo apt install -y android-sdk
