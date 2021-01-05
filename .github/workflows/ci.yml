@@ -26,6 +26,7 @@ jobs:
           curl https://pyenv.run | bash
           exec "$SHELL"
           pyenv install 3.6.3
+          pyenv global 2.7
           python2.7 --version
           python3.6 --version
 
