@@ -24,7 +24,7 @@ jobs:
         run: |
           sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt update
-          echo "y" | sudo apt-get install python3.6
+          echo "y" | sudo apt-get install python3.6.3
           echo "y" | sudo apt-get install python2.7
           python2.7 --version
           python3.6 --version
@@ -34,8 +34,8 @@ jobs:
 
       - name: Install GCloud
         run: |
-          export CLOUDSDK_PYTHON=$(whereis python3.6)
           echo "y" | sudo apt-get install apt-transport-https ca-certificates gnupg google-cloud-sdk
+          export CLOUDSDK_PYTHON=$(whereis python3.6)
           gcloud version
           gcloud config set project api-project-768202461730
           gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
