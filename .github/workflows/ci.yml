@@ -49,15 +49,17 @@ jobs:
       - name: check-pristine-state
         run: ./scripts/check-pristine-state package-lock.json sd.img
 
-      # Run lint, ktlint
-      - name: Run Checks
-        run: ./gradlew :app:ktlint :Backpack:ktlint :app:lint :Backpack:lint -PdisablePreDex
+      - name: gradle ktlint
+        run: ./gradlew :app:ktlint :Backpack:ktlint -PdisablePreDex
 
-      - name: Unit Tests
-        run: ./gradlew :app:ktlint -PdisablePreDex
+      - name: gradle lint
+        run: ./gradlew :app:lintOssDebug :Backpack:lintOssDebug -PdisablePreDex
 
-      - name: Android Tests
-        run: ./gradlew connectedAndroidTest -PdisablePreDex
+      - name: gradle test
+        run: ./gradlew :app:testOssDebugUnitTest :Backpack:testOssDebugUnitTest -PdisablePreDex
+
+      - name: gradle connected test
+        run: ./gradlew :app:connectedOssDebugAndroidTest :Backpack:connectedOssDebugAndroidTest -PdisablePreDex
 
       - name: Assemble Test Apps
         run: ./gradlew :app:assembleOssDebug :app:assembleOssDebugAndroidTest :Backpack:assembleOssDebugAndroidTest -PdisablePreDex
