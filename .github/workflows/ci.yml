@@ -41,7 +41,7 @@ jobs:
         uses: danger/danger-js@X.Y.Z
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run danger
+#        run: npm run danger
 
       - name: npm run build
         run: npm run build
