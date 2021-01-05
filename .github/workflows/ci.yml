@@ -29,16 +29,16 @@ jobs:
       - name: nvm install
         run: nvm install
 
-      - name: nvm install
+      - name: nvm ci
         run: |
           nvm use
-          npm install
+          npm ci -g greenkeeper-lockfile
 
 #      - name: npm greenkeeper-lockfile
 #        run: npm install -g greenkeeper-lockfile
 
-#      - name: npm run danger
-#        run: npm run danger
+      - name: npm run danger
+        run: npm run danger
 
       - name: npm run build
         run: npm run build
@@ -46,18 +46,12 @@ jobs:
       - name: check-pristine-state
         run: ./scripts/check-pristine-state package-lock.json sd.img
 
-
-#      - name: NPM ci
-#        run: |
-#          nvm use
-#          npm ci
-
       # Run lint, ktlint
       - name: Run Checks
-        run: ./gradlew :app:check :Backpack:check -PdisablePreDex
+        run: ./gradlew :app:ktlint :Backpack:ktlint :app:lint :Backpack:lint -PdisablePreDex
 
       - name: Unit Tests
-        run: ./gradlew test -PdisablePreDex
+        run: ./gradlew :app:ktlint -PdisablePreDex
 
       - name: Android Tests
         run: ./gradlew connectedAndroidTest -PdisablePreDex
