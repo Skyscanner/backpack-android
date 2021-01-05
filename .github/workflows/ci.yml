@@ -20,7 +20,7 @@ jobs:
       # Checkout the repo
       - uses: actions/checkout@v2
 
-      - name: Install Python 3
+      - name: apt-get install python
         run: |
           sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt update
@@ -29,16 +29,19 @@ jobs:
           python2.7 --version
           python3.6 --version
 
-      - name: Install Android SDK
+      - name: apt-get install android-sdk
         run: echo "y" | sudo apt install android-sdk
 
-      - name: Install GCloud
+      - name: get-get install gclould
         run: |
           echo "y" | sudo apt-get install apt-transport-https ca-certificates gnupg google-cloud-sdk
           export CLOUDSDK_PYTHON=$(whereis python3.6)
+          echo $GCLOUDKEY > $HOME/gcloud-service-key.json
           gcloud version
           gcloud config set project api-project-768202461730
           gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
+        env:
+          GCLOUDKEY: ${{ secrets.GCLOUDKEY }}
 
       - name: nvm install
         run: nvm install
@@ -62,19 +65,22 @@ jobs:
       - name: check-pristine-state
         run: ./scripts/check-pristine-state package-lock.json sd.img
 
+      - name: gradle build
+        run: ./gradlew :app:assembleOssDebug :app:assembleOssDebugAndroidTest :Backpack:assembleOssDebugAndroidTest -PdisablePreDex
+
       - name: gradle ktlint
         run: ./gradlew :app:ktlint :Backpack:ktlint -PdisablePreDex
 
       - name: gradle lint
         run: ./gradlew :app:lintOssDebug :Backpack:lintOssDebug -PdisablePreDex
 
-      - name: gradle test
+      - name: gradle unit tests
         run: ./gradlew :app:testOssDebugUnitTest :Backpack:testOssDebugUnitTest -PdisablePreDex
 
-      - name: gradle connected test
-        run: ./gradlew :app:connectedOssDebugAndroidTest :Backpack:connectedOssDebugAndroidTest -PdisablePreDex
+      - name: gradle connected tests
+        run: TEST_METHOD=connected ./scripts/ci-tests.sh
 
-      - name: Assemble Test Apps
-        run: ./gradlew :app:assembleOssDebug :app:assembleOssDebugAndroidTest :Backpack:assembleOssDebugAndroidTest -PdisablePreDex
+      - name: gradle screenshot tests
+        run: TEST_METHOD=screenshot ./scripts/ci-tests.sh
 
 
