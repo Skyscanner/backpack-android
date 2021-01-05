@@ -22,20 +22,20 @@ jobs:
 
       - name: apt-get install python
         run: |
-          sudo add-apt-repository ppa:deadsnakes/ppa
-          sudo apt update
-          echo "y" | sudo apt-get install python3.6
-          echo "y" | sudo apt-get install python2.7
+          sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+          curl https://pyenv.run | bash
+          exec "$SHELL"
+          pyenv install 3.6.3
           python2.7 --version
           python3.6 --version
 
       - name: apt-get install android-sdk
-        run: echo "y" | sudo apt install android-sdk
+        run: sudo apt install -y android-sdk
 
-      - name: get-get install gclould
+      - name: apt-get install gclould
         run: |
-          echo "y" | sudo apt-get install apt-transport-https ca-certificates gnupg google-cloud-sdk
-          export CLOUDSDK_PYTHON=$(whereis python3.6)
+          sudo apt-get install -y apt-transport-https ca-certificates gnupg google-cloud-sdk
+          CLOUDSDK_PYTHON="/opt/pyenv/versions/3.6.3/bin/python"
           echo $GCLOUDKEY > $HOME/gcloud-service-key.json
           gcloud version
           gcloud config set project api-project-768202461730
