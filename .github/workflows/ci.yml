@@ -22,14 +22,15 @@ jobs:
 
       - name: Install Python
         uses: "gabrielfalcao/pyenv-action@v7"
+        run: cd ~
         with:
           default: 2.7.18
           versions: 3.6.3, 2.7.18
 
       - name: python check
         run: |
-          python2.7 --version
-          python3.6 --version
+          python2 --version
+          python3 --version
           python --version
 
       - name: apt-get install android-sdk
