@@ -22,13 +22,13 @@ jobs:
 
       - name: Install Python
         uses: "gabrielfalcao/pyenv-action@v7"
-        run: cd ~
         with:
           default: 2.7.18
           versions: 3.6.3, 2.7.18
 
       - name: python check
         run: |
+          mv .python-version ~/.python-version
           python2 --version
           python3 --version
           python --version
