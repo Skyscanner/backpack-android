@@ -20,18 +20,14 @@ jobs:
       # Checkout the repo
       - uses: actions/checkout@v2
 
-      - name: apt-get install python
+      - name: Install Python
+        uses: "gabrielfalcao/pyenv-action@v5"
+        with:
+          default: 2.7.18
+          versions: 3.6.3, 2.7.18
+
+      - name: python check
         run: |
-          sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
-          curl https://pyenv.run | bash
-          echo 'export PATH="/home/runner/.pyenv/bin:$PATH"' >> ~/.bashrc
-          echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-          echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
-          exec "$SHELL"
-          source ~/.bashrc
-          pyenv install 3.6.3
-          pyenv install 2.7.18
-          pyenv global 2.7.18
           python2.7 --version
           python3.6 --version
           python --version
@@ -57,9 +53,6 @@ jobs:
         run: |
           nvm use
           npm ci
-
-#      - name: npm greenkeeper-lockfile
-#        run: npm install -g greenkeeper-lockfile
 
       - name: npm run danger
         run: npm run danger
