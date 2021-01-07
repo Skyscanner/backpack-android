@@ -79,31 +79,36 @@ jobs:
 
     strategy:
       fail-fast: false
+      matrix:
+        module:
+          - app
+          - Backpack
 
     steps:
 
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install Pillow
-        run: sudo easy_install Pillow==6.2.2
-
-#      - name: Install Python
-#        uses: "gabrielfalcao/pyenv-action@v7"
-#        with:
-#          default: 2.7.18
-#          versions: 2.7.18
+      - name: Setup Python
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '2.x'
+        run: |
+          python --version
+          sudo easy_install Pillow==6.2.2
 
       - name: Android Tests
+        if: ${{ matrix.module }} == 'Backpack'
         uses: reactivecircus/android-emulator-runner@v2
         with:
           target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
-          script: ./gradlew :Backpack:connected${{ env.flavour }}${{ env.config }}AndroidTest
+          script: ./gradlew :${{ matrix.module }}:connected${{ env.flavour }}${{ env.config }}AndroidTest
 
       - name: Screenshot Tests
+        if: ${{ matrix.module }} == 'app'
         uses: reactivecircus/android-emulator-runner@v2
         with:
           target: google_apis
@@ -111,6 +116,6 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           script: |
-            ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
+            ./gradlew :app:verify{{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
             git status --porcelain | awk '{print $2}'
             git status --porcelain || exit 1
