@@ -42,14 +42,14 @@ jobs:
   Java:
     name: Java
     runs-on: ubuntu-latest
+    env:
+      flavour:
+        - Oss
+      config:
+        - Debug
 
     strategy:
       fail-fast: false
-      env:
-        flavour:
-          - Oss
-        config:
-          - Debug
 
     steps:
       - uses: actions/checkout@v2
@@ -72,16 +72,16 @@ jobs:
   Android:
     name: Android
     runs-on: macos-latest
+    env:
+      api-level:
+        - 21
+      flavour:
+        - Oss
+      config:
+        - Debug
 
     strategy:
       fail-fast: false
-      env:
-        api-level:
-          - 21
-        flavour:
-          - Oss
-        config:
-          - Debug
 
     steps:
 
