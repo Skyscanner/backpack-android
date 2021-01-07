@@ -84,6 +84,13 @@ jobs:
           - Debug
 
     steps:
+      uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: google_apis
+          profile: Nexus 4
+          sdcard-path-or-size: 512M
+          api-level: ${{ env.api-level }}
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -94,16 +101,10 @@ jobs:
 #          versions: 2.7.18
 
       - name: Android Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ env.api-level }}
-          script: ./gradlew :Backpack:connected${{ env.flavour }}${{ env.config }}AndroidTest
+        run: ./gradlew :Backpack:connected${{ env.flavour }}${{ env.config }}AndroidTest
 
       - name: Screenshot Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ env.api-level }}
-          script: |
-            ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
-            git status --porcelain | awk '{print $2}'
-            git status --porcelain || exit 1
+        run: |
+          ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
+          git status --porcelain | awk '{print $2}'
+          git status --porcelain || exit 1
