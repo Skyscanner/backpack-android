@@ -58,7 +58,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Build
-        run: ./gradlew :assemble${{ env.flavour }} -PdisablePreDex
+        run: ./gradlew :app:assemble${{ env.flavour }}${{ env.config }} :Backpack:assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
       - name: KtLint check
         run: ./gradlew :${{ env.module }}:ktlint -PdisablePreDex
@@ -81,20 +81,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install Pillow
+        run: sudo easy_install Pillow==6.2.2
+
 #      - name: Install Python
 #        uses: "gabrielfalcao/pyenv-action@v7"
 #        with:
 #          default: 2.7.18
 #          versions: 2.7.18
 
-      - name: Android Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          target: google_apis
-          profile: Nexus 4
-          sdcard-path-or-size: 512M
-          api-level: ${{ env.api-level }}
-          script: ./gradlew :Backpack:connected${{ env.flavour }}${{ env.config }}AndroidTest
+#      - name: Android Tests
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          target: google_apis
+#          profile: Nexus 4
+#          sdcard-path-or-size: 512M
+#          api-level: ${{ env.api-level }}
+#          script: ./gradlew :Backpack:connected${{ env.flavour }}${{ env.config }}AndroidTest
 
       - name: Screenshot Tests
         uses: reactivecircus/android-emulator-runner@v2
