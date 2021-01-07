@@ -127,4 +127,6 @@ jobs:
 
       - name: Verifying screenshots
         if: ${{ matrix.module == 'app' }}
-        run: eval '[[ -n $(git status --porcelain) ]] && echo "Some files have been changed!" && kill -SIGINT $$;'
+        run: |
+          git status --porcelain | grep .
+          eval '[[ "$?" -eq "0" ]] && echo "Some files have been changed!" && kill -SIGINT $$;'
