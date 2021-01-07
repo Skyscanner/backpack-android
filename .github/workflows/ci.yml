@@ -52,8 +52,8 @@ jobs:
       fail-fast: false
       matrix:
         module:
-          app
-          Backpack
+          - app
+          - Backpack
 
     steps:
       - uses: actions/checkout@v2
