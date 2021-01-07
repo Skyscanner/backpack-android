@@ -14,7 +14,7 @@ defaults:
 jobs:
 
   Emulator:
-    name: Run Emulator Tests
+    name: Android
     runs-on: macos-latest
 
     strategy:
@@ -37,95 +37,74 @@ jobs:
           default: 2.7.18
           versions: 2.7.18
 
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-
-      - name: connectedCheck
+      - name: Android Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
-          script: |
-            ./gradlew :Backpack:connected${{ matrix.flavour }}${{ matrix.config }}AndroidTest
-            ./gradlew :app:verify${{ matrix.flavour }}${{ matrix.config }}AndroidTestScreenshotTest
+          script: ./gradlew :Backpack:connected${{ matrix.flavour }}${{ matrix.config }}AndroidTest
 
+      - name: Screenshot Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          script: ./gradlew :app:verify${{ matrix.flavour }}${{ matrix.config }}AndroidTestScreenshotTest
 
-#  CI:
-#    name: Build and Test
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      # Checkout the repo
-#      - uses: actions/checkout@v2
-#
-#      - name: pwd
-#        run: |
-#          pwd
-#          ls
-#
-#      - name: Install Python
-#        uses: "gabrielfalcao/pyenv-action@v7"
-#        with:
-#          default: 2.7.18
-#          versions: 3.6.3, 2.7.18
-#
-#      - name: python check
-#        run: |
-#          mv .python-version ~/.python-version
-#          pyenv global 2.7.18
-#          python2 --version
-#          python3 --version
-#          python --version
-#
-#      - name: apt-get install android-sdk
-#        run: sudo apt install -y android-sdk
-#
-#      - name: apt-get install gclould
-#        run: |
-#          sudo apt-get install -y apt-transport-https ca-certificates gnupg google-cloud-sdk
-#          sudo apt-get install -y tree
-#          CLOUDSDK_PYTHON="/opt/pyenv/versions/3.6.3/bin/python"
-#          echo $GCLOUDKEY > $HOME/gcloud-service-key.json
-#          gcloud version
-#          gcloud config set project api-project-768202461730
-#          gcloud auth activate-service-account --key-file $HOME/gcloud-service-key.json
-#        env:
-#          GCLOUDKEY: ${{ secrets.GCLOUDKEY }}
+  Java:
+    name: Java
+    runs-on: ubuntu-latest
 
-#      - name: nvm install
-#        run: nvm install
-#
-#      - name: nvm ci
-#        run: |
-#          nvm use
-#          npm ci
-#
-#      - name: npm run danger
-#        run: npm run danger
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: npm run build
-#        run: npm run build
-#
-#      - name: check-pristine-state
-#        run: ./scripts/check-pristine-state package-lock.json sd.img
-#
-#      - name: gradle build
-#        run: ./gradlew :app:assembleOssDebug :app:assembleOssDebugAndroidTest :Backpack:assembleOssDebugAndroidTest -PdisablePreDex
-#
-#      - name: gradle ktlint
-#        run: ./gradlew :app:ktlint :Backpack:ktlint -PdisablePreDex
-#
-#      - name: gradle lint
-#        run: ./gradlew :app:lintOssDebug :Backpack:lintOssDebug -PdisablePreDex
-#
-#      - name: gradle unit tests
-#        run: ./gradlew :app:testOssDebugUnitTest :Backpack:testOssDebugUnitTest -PdisablePreDex
+    strategy:
+      fail-fast: false
+      matrix:
+        flavour:
+          - Oss
+        config:
+          - Debug
+        modules:
+          - Backpack
+          - app
 
-#      - name: gradle connected tests
-#        run: TEST_METHOD=connected ./scripts/ci-tests.sh
-#
-#      - name: gradle screenshot tests
-#        run: TEST_METHOD=screenshot ./scripts/ci-tests.sh
+    steps:
+      - uses: actions/checkout@v2
 
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Kotlin Lint
+        run: ./gradlew :${{ matrix.module }}:ktlint -PdisablePreDex
+
+      - name: Android Lint
+        run: ./gradlew :${{ matrix.module }}:lint${{ matrix.flavour }}${{ matrix.config }} -PdisablePreDex
+
+      - name: Build
+        run: ./gradlew :${{ matrix.module }}:assemble${{ matrix.flavour }}${{ matrix.config }} -PdisablePreDex
+
+      - name: Unit Tests
+        run: ./gradlew :${{ matrix.module }}:test${{ matrix.flavour }}${{ matrix.config }}UnitTest -PdisablePreDex
+
+  Node:
+    name: Node
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup NVM
+        run: nvm install
+
+      - name: NPM CI
+        run: |
+          nvm use
+          npm ci
+
+      - name: Danger check
+        run: npm run danger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tokens check
+        run: ./scripts/check-pristine-state package-lock.json sd.img
+
+      - name: Build
+        run: npm run build
 
