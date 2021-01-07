@@ -60,7 +60,7 @@ jobs:
           - Oss
         config:
           - Debug
-        modules:
+        module:
           - Backpack
           - app
 
