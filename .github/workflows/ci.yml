@@ -50,6 +50,10 @@ jobs:
 
     strategy:
       fail-fast: false
+      matrix:
+        module:
+          app
+          Backpack
 
     steps:
       - uses: actions/checkout@v2
@@ -58,16 +62,16 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Build
-        run: ./gradlew :app:assemble${{ env.flavour }}${{ env.config }} :Backpack:assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
+        run: ./gradlew :${{ matrix.module }}:assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
       - name: KtLint check
-        run: ./gradlew :${{ env.module }}:ktlint -PdisablePreDex
+        run: ./gradlew :${{ matrix.module }}:${{ env.module }}:ktlint -PdisablePreDex
 
       - name: Lint check
-        run: ./gradlew :lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
+        run: ./gradlew :${{ matrix.module }}:lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
       - name: Unit Tests
-        run: ./gradlew :test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
+        run: ./gradlew :${{ matrix.module }}:test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
 
   Android:
     name: Android
@@ -90,14 +94,14 @@ jobs:
 #          default: 2.7.18
 #          versions: 2.7.18
 
-#      - name: Android Tests
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          target: google_apis
-#          profile: Nexus 4
-#          sdcard-path-or-size: 512M
-#          api-level: ${{ env.api-level }}
-#          script: ./gradlew :Backpack:connected${{ env.flavour }}${{ env.config }}AndroidTest
+      - name: Android Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: google_apis
+          profile: Nexus 4
+          sdcard-path-or-size: 512M
+          api-level: ${{ env.api-level }}
+          script: ./gradlew :Backpack:connected${{ env.flavour }}${{ env.config }}AndroidTest
 
       - name: Screenshot Tests
         uses: reactivecircus/android-emulator-runner@v2
