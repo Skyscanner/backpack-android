@@ -111,6 +111,6 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           script: |
-          ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
-          git status --porcelain | awk '{print $2}'
-          git status --porcelain || exit 1
+            ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
+            git status --porcelain | awk '{print $2}'
+            git status --porcelain || exit 1
