@@ -85,11 +85,11 @@ jobs:
 
     steps:
       uses: reactivecircus/android-emulator-runner@v2
-        with:
-          target: google_apis
-          profile: Nexus 4
-          sdcard-path-or-size: 512M
-          api-level: ${{ env.api-level }}
+      with:
+        target: google_apis
+        profile: Nexus 4
+        sdcard-path-or-size: 512M
+        api-level: ${{ env.api-level }}
 
       - name: Checkout
         uses: actions/checkout@v2
