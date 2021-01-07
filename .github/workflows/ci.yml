@@ -26,9 +26,6 @@ jobs:
           - Oss
         config:
           - Debug
-        modules:
-          - app
-          - Backpack
 
     steps:
       - name: Checkout
@@ -47,7 +44,9 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
-          script: ./gradlew connected${{ matrix.flavour }}${{ matrix.config }}AndroidTest
+          script: |
+            ./gradlew :Backpack:connected${{ matrix.flavour }}${{ matrix.config }}AndroidTest
+            ./gradlew :app:verify${{ matrix.flavour }}${{ matrix.config }}AndroidTestScreenshotTest
 
 
 #  CI:
