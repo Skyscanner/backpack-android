@@ -98,7 +98,7 @@ jobs:
           sudo easy_install Pillow==6.2.2
 
       - name: Android Tests
-        if: ${{ matrix.module }} == 'Backpack'
+        if: ${{ matrix.module == 'Backpack' }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
           target: google_apis
@@ -108,7 +108,7 @@ jobs:
           script: ./gradlew :${{ matrix.module }}:connected${{ env.flavour }}${{ env.config }}AndroidTest
 
       - name: Screenshot Tests
-        if: ${{ matrix.module }} == 'app'
+        if: ${{ matrix.module == 'app' }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
           target: google_apis
