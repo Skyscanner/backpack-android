@@ -20,6 +20,11 @@ jobs:
       # Checkout the repo
       - uses: actions/checkout@v2
 
+      - name: pwd
+        run: |
+          pwd
+          ls
+
       - name: Install Python
         uses: "gabrielfalcao/pyenv-action@v7"
         with:
