@@ -11,6 +11,11 @@ defaults:
   run:
     shell: bash -l {0}
 
+env:
+  flavour: Oss
+  config: Debug
+  api-level: 21
+
 jobs:
 
   Node:
@@ -42,11 +47,6 @@ jobs:
   Java:
     name: Java
     runs-on: ubuntu-latest
-    env:
-      flavour:
-        - Oss
-      config:
-        - Debug
 
     strategy:
       fail-fast: false
@@ -72,13 +72,6 @@ jobs:
   Android:
     name: Android
     runs-on: macos-latest
-    env:
-      api-level:
-        - 21
-      flavour:
-        - Oss
-      config:
-        - Debug
 
     strategy:
       fail-fast: false
