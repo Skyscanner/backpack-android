@@ -31,11 +31,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install Python
-        uses: "gabrielfalcao/pyenv-action@v7"
-        with:
-          default: 2.7.18
-          versions: 2.7.18
+#      - name: Install Python
+#        uses: "gabrielfalcao/pyenv-action@v7"
+#        with:
+#          default: 2.7.18
+#          versions: 2.7.18
 
       - name: Android Tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -47,7 +47,10 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
-          script: ./gradlew :app:verify${{ matrix.flavour }}${{ matrix.config }}AndroidTestScreenshotTest
+          script: |
+            ./gradlew :app:record${{ matrix.flavour }}${{ matrix.config }}AndroidTestScreenshotTest
+            git status --porcelain | awk '{print $2}'
+            git status --porcelain || exit 1
 
   Java:
     name: Java
@@ -60,9 +63,6 @@ jobs:
           - Oss
         config:
           - Debug
-        module:
-          - Backpack
-          - app
 
     steps:
       - uses: actions/checkout@v2
@@ -70,17 +70,17 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
-      - name: Kotlin Lint
+      - name: Build
+        run: ./gradlew :assemble${{ matrix.flavour }}${{ matrix.config }} -PdisablePreDex
+
+      - name: KtLint check
         run: ./gradlew :${{ matrix.module }}:ktlint -PdisablePreDex
 
-      - name: Android Lint
-        run: ./gradlew :${{ matrix.module }}:lint${{ matrix.flavour }}${{ matrix.config }} -PdisablePreDex
-
-      - name: Build
-        run: ./gradlew :${{ matrix.module }}:assemble${{ matrix.flavour }}${{ matrix.config }} -PdisablePreDex
+      - name: Lint check
+        run: ./gradlew :lint${{ matrix.flavour }}${{ matrix.config }} -PdisablePreDex
 
       - name: Unit Tests
-        run: ./gradlew :${{ matrix.module }}:test${{ matrix.flavour }}${{ matrix.config }}UnitTest -PdisablePreDex
+        run: ./gradlew :test${{ matrix.flavour }}${{ matrix.config }}UnitTest -PdisablePreDex
 
   Node:
     name: Node
@@ -97,6 +97,9 @@ jobs:
           nvm use
           npm ci
 
+      - name: Build
+        run: npm run build
+
       - name: Danger check
         run: npm run danger
         env:
@@ -104,7 +107,4 @@ jobs:
 
       - name: Tokens check
         run: ./scripts/check-pristine-state package-lock.json sd.img
-
-      - name: Build
-        run: npm run build
 
