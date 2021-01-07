@@ -120,7 +120,7 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           script: |
-            ./gradlew :${{ matrix.module }}:assemble${{ env.flavour }}${{ env.config }}
-            ./gradlew :${{ matrix.module }}:verify${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
-            git status --porcelain | awk '{print $2}'
-            git status --porcelain || exit 1
+            ./gradlew :${{ matrix.module }}:connected${{ env.flavour }}${{ env.config }}AndroidTest
+            echo "Verifying screenshots..."
+            git status --porcelain
+            [[ -n $(git status --porcelain) ]] && echo "Some files have been changed!" && kill -SIGINT $$;
