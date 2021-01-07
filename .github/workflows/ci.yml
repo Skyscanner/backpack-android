@@ -123,7 +123,7 @@ jobs:
 
       - name: Git status
         if: ${{ matrix.module == 'app' }}
-        run: git status --porcelain
+        run: git status
 
       - name: Verifying screenshots
         if: ${{ matrix.module == 'app' }}
