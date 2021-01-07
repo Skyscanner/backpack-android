@@ -40,6 +40,7 @@ jobs:
       - name: apt-get install gclould
         run: |
           sudo apt-get install -y apt-transport-https ca-certificates gnupg google-cloud-sdk
+          sudo apt-get install -y tree
           CLOUDSDK_PYTHON="/opt/pyenv/versions/3.6.3/bin/python"
           echo $GCLOUDKEY > $HOME/gcloud-service-key.json
           gcloud version
@@ -48,39 +49,39 @@ jobs:
         env:
           GCLOUDKEY: ${{ secrets.GCLOUDKEY }}
 
-      - name: nvm install
-        run: nvm install
-
-      - name: nvm ci
-        run: |
-          nvm use
-          npm ci
-
-      - name: npm run danger
-        run: npm run danger
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: npm run build
-        run: npm run build
-
-      - name: check-pristine-state
-        run: ./scripts/check-pristine-state package-lock.json sd.img
+#      - name: nvm install
+#        run: nvm install
+#
+#      - name: nvm ci
+#        run: |
+#          nvm use
+#          npm ci
+#
+#      - name: npm run danger
+#        run: npm run danger
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: npm run build
+#        run: npm run build
+#
+#      - name: check-pristine-state
+#        run: ./scripts/check-pristine-state package-lock.json sd.img
 
       - name: gradle build
         run: ./gradlew :app:assembleOssDebug :app:assembleOssDebugAndroidTest :Backpack:assembleOssDebugAndroidTest -PdisablePreDex
+#
+#      - name: gradle ktlint
+#        run: ./gradlew :app:ktlint :Backpack:ktlint -PdisablePreDex
+#
+#      - name: gradle lint
+#        run: ./gradlew :app:lintOssDebug :Backpack:lintOssDebug -PdisablePreDex
+#
+#      - name: gradle unit tests
+#        run: ./gradlew :app:testOssDebugUnitTest :Backpack:testOssDebugUnitTest -PdisablePreDex
 
-      - name: gradle ktlint
-        run: ./gradlew :app:ktlint :Backpack:ktlint -PdisablePreDex
-
-      - name: gradle lint
-        run: ./gradlew :app:lintOssDebug :Backpack:lintOssDebug -PdisablePreDex
-
-      - name: gradle unit tests
-        run: ./gradlew :app:testOssDebugUnitTest :Backpack:testOssDebugUnitTest -PdisablePreDex
-
-      - name: gradle connected tests
-        run: TEST_METHOD=connected ./scripts/ci-tests.sh
+#      - name: gradle connected tests
+#        run: TEST_METHOD=connected ./scripts/ci-tests.sh
 
       - name: gradle screenshot tests
         run: TEST_METHOD=screenshot ./scripts/ci-tests.sh

@@ -47,7 +47,7 @@ if [ "$TEST_METHOD" == "screenshot" ]; then
   mkdir -p "$local_screenshots_folder"
 
   gsutil -m cp -r "gs://$remote_screenshots_folder" "$local_screenshots_folder"
-
+  tree app/build/test-labs-screenshots
   echo "Verifying screenshots..."
   unzip app/build/test-labs-screenshots/screenshots-default/screenshot_bundle.zip -d app/build/test-labs-screenshots/screenshots-default/
   ./gradlew :app:verifyOssDebugAndroidTestScreenshotTest
