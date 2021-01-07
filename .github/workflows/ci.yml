@@ -13,75 +13,6 @@ defaults:
 
 jobs:
 
-  Emulator:
-    name: Android
-    runs-on: macos-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        api-level:
-          - 21
-        flavour:
-          - Oss
-        config:
-          - Debug
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-#      - name: Install Python
-#        uses: "gabrielfalcao/pyenv-action@v7"
-#        with:
-#          default: 2.7.18
-#          versions: 2.7.18
-
-      - name: Android Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          script: ./gradlew :Backpack:connected${{ matrix.flavour }}${{ matrix.config }}AndroidTest
-
-      - name: Screenshot Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          script: |
-            ./gradlew :app:record${{ matrix.flavour }}${{ matrix.config }}AndroidTestScreenshotTest
-            git status --porcelain | awk '{print $2}'
-            git status --porcelain || exit 1
-
-  Java:
-    name: Java
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        flavour:
-          - Oss
-        config:
-          - Debug
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-
-      - name: Build
-        run: ./gradlew :assemble${{ matrix.flavour }}${{ matrix.config }} -PdisablePreDex
-
-      - name: KtLint check
-        run: ./gradlew :${{ matrix.module }}:ktlint -PdisablePreDex
-
-      - name: Lint check
-        run: ./gradlew :lint${{ matrix.flavour }}${{ matrix.config }} -PdisablePreDex
-
-      - name: Unit Tests
-        run: ./gradlew :test${{ matrix.flavour }}${{ matrix.config }}UnitTest -PdisablePreDex
-
   Node:
     name: Node
     runs-on: ubuntu-latest
@@ -108,3 +39,71 @@ jobs:
       - name: Tokens check
         run: ./scripts/check-pristine-state package-lock.json sd.img
 
+  Java:
+    name: Java
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      env:
+        flavour:
+          - Oss
+        config:
+          - Debug
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Build
+        run: ./gradlew :assemble${{ env.flavour }} -PdisablePreDex
+
+      - name: KtLint check
+        run: ./gradlew :${{ env.module }}:ktlint -PdisablePreDex
+
+      - name: Lint check
+        run: ./gradlew :lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
+
+      - name: Unit Tests
+        run: ./gradlew :test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
+
+  Android:
+    name: Android
+    runs-on: macos-latest
+
+    strategy:
+      fail-fast: false
+      env:
+        api-level:
+          - 21
+        flavour:
+          - Oss
+        config:
+          - Debug
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+#      - name: Install Python
+#        uses: "gabrielfalcao/pyenv-action@v7"
+#        with:
+#          default: 2.7.18
+#          versions: 2.7.18
+
+      - name: Android Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.api-level }}
+          script: ./gradlew :Backpack:connected${{ env.flavour }}${{ env.config }}AndroidTest
+
+      - name: Screenshot Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.api-level }}
+          script: |
+            ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
+            git status --porcelain | awk '{print $2}'
+            git status --porcelain || exit 1
