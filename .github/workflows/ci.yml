@@ -139,7 +139,7 @@ jobs:
 
       - name: Add commit comment
         # Only run if there is no tag, and the commit is not on master
-        if: !contains('refs/tags/', github.ref) && github.ref != 'refs/heads/master'
+        if: contains('refs/tags/', github.ref) != true && github.ref != 'refs/heads/master'
         uses: peter-evans/commit-comment@v1
         with:
           body: |
