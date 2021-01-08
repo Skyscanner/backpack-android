@@ -35,13 +35,16 @@ jobs:
           nvm use
           npm ci
 
-      - name: Build
-        run: npm run build
+      - name: ESLint check
+        run: npm run lint
 
       - name: Danger check
         run: npm run danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: npm run build
 
       - name: Tokens check
         run: |
