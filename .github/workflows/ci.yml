@@ -28,11 +28,12 @@ jobs:
       - name: Setup NPM
         run: |
           nvm install
-          nvm use
           npm install --global gulp-cli
 
       - name: NPM CI
-        run: npm ci
+        run: |
+          nvm use
+          npm ci
 
       - name: Build
         run: npm run build
