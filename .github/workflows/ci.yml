@@ -153,12 +153,12 @@ jobs:
             `com.github.Skyscanner:backpack-android:${{ env.GITHUB_SHA }}`
 
       - name: Get release tag
-        if: github.ref == 'refs/heads/master'
+#        if: github.ref == 'refs/heads/master'
         id: tag
         uses: dawidd6/action-get-tag@v1
 
       - name: Build Dokka Docs
-        if: github.ref == 'refs/heads/master'
+#        if: github.ref == 'refs/heads/master'
         run: |
           nvm install
           nvm use
