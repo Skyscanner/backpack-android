@@ -25,21 +25,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup NVM
+      - name: Setup NPM
         run: |
           nvm install
+          nvm use
           npm install --global gulp-cli
 
       - name: NPM CI
-        run: |
-          nvm use
-          npm ci
+        run: npm ci
 
       - name: Build
         run: npm run build
 
       - name: Danger check
-        run: npm run danger
+        run: |
+          set -e
+          npm run danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
