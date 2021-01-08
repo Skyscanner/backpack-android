@@ -155,7 +155,7 @@ jobs:
 
       - name: Trigger RN build
         run: |
-          curl -f -s -X POST -H "Content-Type: application/json" -H "Accept: application/vnd.github.v3+json" -H "Authorization: token BACKPACK_TRIGGER_BUILD_TOKEN" -d "{\"ref\":\"master\",\"inputs\":{\"repo\":\"backpack-android\"}}" https://api.github.com/repos/Skyscanner/backpack-react-native/actions/workflows/ci.yml/dispatches
+          curl -f -s -X POST -H "Content-Type: application/json" -H "Accept: application/vnd.github.v3+json" -H "Authorization: token BACKPACK_TRIGGER_BUILD_TOKEN" -d "{\"ref\":\"master\",\"inputs\":{\"repo\":\"backpack-android\"}}" https://api.github.com/repos/Skyscanner/backpack-react-native/actions/workflows/android-ci.yml/dispatches
         env:
           BACKPACK_TRIGGER_BUILD_TOKEN: ${{ secrets.BACKPACK_DOCS_DEPLOY_TOKEN }}
 
