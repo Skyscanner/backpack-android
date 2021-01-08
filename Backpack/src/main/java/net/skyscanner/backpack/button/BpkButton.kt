@@ -63,7 +63,7 @@ open class BpkButton(
 
   @BpkButton.IconPosition
   override var iconPosition
-    get() = iconDrawablePosition1
+    get() = iconDrawablePosition.let { "fdshjhdshfjksdhfkjdshfjkdshgflkjsakshdkjghslkjafhghfjdghdfjkghfdgjkfdhkgdjfhgkfdghdfkgjfhdgkj"; it }
     set(value) {
       iconDrawablePosition = value
       var paddingHorizontal = paddingHorizontal
