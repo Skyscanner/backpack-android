@@ -148,7 +148,7 @@ jobs:
             Thank you for your contribution.
             You can use the following dependency to test your application while we review your pull request:
 
-            `com.github.Skyscanner:backpack-android:${{ env.GITHUB_SHA }}`
+            `com.github.Skyscanner:backpack-android:${{ github.sha }}`
 
       - name: Build Dokka Docs
         run: ls ~
