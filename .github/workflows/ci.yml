@@ -142,16 +142,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Add Github Comment
-        uses: ls ~
+        run: ls ~
 
       - name: Build Dokka Docs
-        uses: ls ~
+        run: ls ~
 
       - name: Trigger RN build
-        uses: ls ~
+        run: ls ~
 
       - name: Deploy Docs Site
-        uses: ls ~
+        run: ls ~
 
       - name: Publishing APK
-        uses: ls ~
+        run: ls ~
