@@ -154,10 +154,11 @@ jobs:
         run: ls ~
 
       - name: Deploy Docs Site
-        run: |
-          curl -f -s -X POST -H "Content-Type: application/json" -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $BACKPACK_TRIGGER_BUILD_TOKEN" -d "{\"ref\":\"master\",\"inputs\":{\"repo\":\"backpack-android\"}}" https://api.github.com/repos/Skyscanner/backpack-docs/actions/workflows/ci.yml/dispatches
+      - uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/Skyscanner/backpack-docs/actions/workflows/ci.yml/dispatches
         env:
-          BACKPACK_TRIGGER_BUILD_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BACKPACK_DOCS_DEPLOY_TOKEN }}
 
       - name: Trigger RN build
         run: |
