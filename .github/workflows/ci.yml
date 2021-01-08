@@ -145,10 +145,12 @@ jobs:
         uses: peter-evans/commit-comment@v1
         with:
           body: |
-            Thank you for your contribution.\n
-            You can use the following dependency to test your application while we review your pull request:\n
-            \n
-            \`com.github.Skyscanner:backpack-android:[commit-comment]\`
+            Thank you for your contribution.
+            You can use the following dependency to test your application while we review your pull request:
+
+            \`com.github.Skyscanner:backpack-android:[commit-comment][1]\`
+          path: test
+           position: 1
 
       - name: Build Dokka Docs
         run: ls ~
