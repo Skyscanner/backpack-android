@@ -154,14 +154,14 @@ jobs:
         run: ls ~
 
       - name: Deploy Docs Site
-      - uses: octokit/request-action@v2.x
+        uses: octokit/request-action@v2.x
         with:
           route: POST /repos/Skyscanner/backpack-docs/actions/workflows/ci.yml/dispatches
         env:
           GITHUB_TOKEN: ${{ secrets.BACKPACK_DOCS_DEPLOY_TOKEN }}
 
       - name: Trigger RN build
-      - uses: octokit/request-action@v2.x
+        uses: octokit/request-action@v2.x
         with:
           route: POST /repos/Skyscanner/backpack-react-native/actions/workflows/android-ci.yml/dispatches
         env:
