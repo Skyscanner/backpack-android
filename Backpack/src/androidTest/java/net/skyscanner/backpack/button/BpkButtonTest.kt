@@ -23,7 +23,6 @@ import android.os.Looper
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import junit.framework.Assert.fail
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.TestActivity
 import org.junit.Assert
@@ -58,7 +57,6 @@ class BpkButtonTest {
       text = "Message"
     }
     Assert.assertEquals("Message", button.text.toString())
-    fail()
   }
 
   // The drawables are set as start,top,end,bottom and are accessible in the compoundDrawables array
