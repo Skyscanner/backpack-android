@@ -148,9 +148,9 @@ jobs:
             Thank you for your contribution.
             You can use the following dependency to test your application while we review your pull request:
 
-            \`com.github.Skyscanner:backpack-android:[commit-comment][1]\`
-          path: test
-           position: 1
+            `com.github.Skyscanner:backpack-android:[commit-comment][1]`
+          path: "$GITHUB_SHA"
+          position: 1
 
       - name: Build Dokka Docs
         run: ls ~
