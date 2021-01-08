@@ -53,7 +53,6 @@ task clean(type: Delete) {
   delete rootProject.buildDir
 }
 
-// NOTE: If you change how this is defined make sure scripts/trigger-rn-build.sh still works
 def BpkVersion = '25.3.0'
 
 ext {
