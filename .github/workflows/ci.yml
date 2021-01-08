@@ -39,9 +39,7 @@ jobs:
         run: npm run build
 
       - name: Danger check
-        run: |
-          set -e
-          npm run danger
+        run: npm run danger
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
