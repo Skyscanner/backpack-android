@@ -129,4 +129,4 @@ jobs:
         if: ${{ matrix.module == 'app' }}
         run: |
           git status --porcelain | grep .
-          eval '[[ "$?" -eq "0" ]] && echo "Some files have been changed!" && kill -SIGINT $$;'
+          if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then echo "Some files have neen changed"; exit -1; else echo "No changes detected"; fi
