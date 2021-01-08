@@ -162,6 +162,7 @@ jobs:
         run: |
           nvm install
           nvm use
+          set -e
           ./scripts/build-docs-ci test
 
       - name: Deploy Docs Site
