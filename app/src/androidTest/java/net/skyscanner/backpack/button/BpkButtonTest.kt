@@ -57,6 +57,13 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
+  fun screenshotTestButtonBasicPrimaryTest() {
+    val button = BpkButton(testContext, BpkButton.Type.Primary)
+    button.text = "Message"
+    snap(wrap(button))
+  }
+
+  @Test
   @Ignore
   fun screenshotTestButtonBasicPrimaryWithIcon() {
     val button = BpkButton(testContext, BpkButton.Type.Primary)
