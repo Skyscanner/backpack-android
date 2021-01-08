@@ -73,9 +73,6 @@ async function amendGradleFiles(version) {
   }
 }
 
-
-    console.log('🎉  Version amended in🎉  Version amended in🎉  Version amended in🎉  Version amended in🎉  Version amended in🎉  Version amended in🎉  Version amended in', await replace(options));
-
 async function amendReadmeFiles(version) {
   const options = {
     files: readmeFile,

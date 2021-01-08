@@ -22,7 +22,7 @@ public final class BpkToast {
 
   @NonNull
   public static Toast makeText(Context context, @StringRes int text, int duration) {
-    return makeText(context, context.getResources().getText(text), duration);
+    return                                                    makeText(context, context.getResources().getText(text), duration);
   }
 
   @NonNull
