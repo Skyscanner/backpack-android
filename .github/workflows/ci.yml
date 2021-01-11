@@ -132,6 +132,7 @@ jobs:
           script: |
             ./gradlew :${{ matrix.module }}:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
             ./scripts/check-no-changes.sh
+            ls app/screenshots
 
   Deploy:
     name: Deploy
