@@ -27,7 +27,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonPrimaryStyle,
-      bgColorRes = R.color.bpkKolkata,
+      bgColorRes = R.color.bpkMonteverde,
       textColorRes = R.color.bpkWhite,
       disabledBgColorRes = R.color.__buttonDisabledBackground,
       disabledTextColorRes = R.color.__buttonDisabledText,
