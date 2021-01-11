@@ -127,7 +127,7 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           script: |
-            ./gradlew :${{ matrix.module }}:record{${ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
+            ./gradlew :${{ matrix.module }}:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
             ./scripts/check-no-changes.sh
 
   Deploy:
