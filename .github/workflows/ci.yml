@@ -97,7 +97,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Python
-        if: ${{ matrix.module == 'app' }}
         uses: actions/setup-python@v2
         with:
           python-version: '2.x'
@@ -144,7 +143,7 @@ jobs:
             Thank you for your contribution.
             You can use the following dependency to test your application while we review your pull request:
 
-            `com.github.Skyscanner:backpack-android:${{ env.GITHUB_SHA }}`
+            `com.github.Skyscanner:backpack-android:${{ github.sha }}`
 
       - name: Get release tag
         if: contains('refs/tags/', github.ref)
