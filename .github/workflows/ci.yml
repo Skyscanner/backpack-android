@@ -107,6 +107,9 @@ jobs:
         run: |
           python --version
           sudo easy_install Pillow==6.2.2
+          pip install PIL==6.2.2
+          pip install Pillow==6.2.2
+
 
       - name: Android Tests
         if: ${{ matrix.module == 'Backpack' }}
