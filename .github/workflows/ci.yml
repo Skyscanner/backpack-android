@@ -102,15 +102,6 @@ jobs:
         with:
           python-version: '2.x'
 
-      - name: Setup Pillow
-        if: ${{ matrix.module == 'app' }}
-        run: |
-          python --version
-          sudo easy_install Pillow==6.2.2
-          pip install PIL==6.2.2
-          pip install Pillow==6.2.2
-
-
       - name: Android Tests
         if: ${{ matrix.module == 'Backpack' }}
         uses: reactivecircus/android-emulator-runner@v2
@@ -131,10 +122,8 @@ jobs:
           api-level: ${{ env.api-level }}
           script: |
             sudo easy_install Pillow==6.2.2
-            pip install Pillow==6.2.2
             ./gradlew :${{ matrix.module }}:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest
             ./scripts/check-no-changes.sh
-            ls app/screenshots
 
   Deploy:
     name: Deploy
