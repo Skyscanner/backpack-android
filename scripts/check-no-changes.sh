@@ -15,5 +15,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-comment="Thank you for your contribution.\nYou can use the following dependency to test your application while we review your pull request:\n\n\`com.github.${2%/*}:backpack-android:${4}\`"
-curl -H "Authorization: token $1" -X POST -d "{\"body\":\" $comment \"}" https://api.github.com/repos/$2/issues/$3/comments
+if [[ $(git status --porcelain) ]]; then
+  echo "Some files have been changed!"
+  git status --porcelain
+  exit -1
+else
+    echo "No changes detected";
+fi

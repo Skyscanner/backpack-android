@@ -2,7 +2,7 @@
 
 > Backpack is a collection of design resources, reusable components and guidelines for creating Skyscanner's products.
 
-[![CI Status](https://img.shields.io/travis/Skyscanner/backpack-android.svg?style=flat)](https://travis-ci.org/Skyscanner/backpack-android)
+[![CI Status](https://github.com/Skyscanner/backpack-android/workflows/CI/badge.svg)](https://github.com/Skyscanner/backpack-android/actions)
 
 [![Release](https://jitpack.io/v/skyscanner/backpack-android.svg)](https://jitpack.io/#skyscanner/backpack-android)
 [![license](https://img.shields.io/github/license/Skyscanner/backpack-android.svg)](https://github.com/Skyscanner/backpack-android)
