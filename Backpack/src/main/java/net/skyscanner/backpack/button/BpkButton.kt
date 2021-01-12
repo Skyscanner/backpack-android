@@ -201,7 +201,7 @@ open class BpkButton(
   ) {
     Primary(
       id = 0,
-      createStyle = ButtonStyles.Primary
+      createStyle = ButtonStyles.Primary,
     ),
     Secondary(
       id = 1,
