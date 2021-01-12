@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # Backpack for Android - Skyscanner's Design System
 #
 # Copyright 2018-2021 Skyscanner Ltd
