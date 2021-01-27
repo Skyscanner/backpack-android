@@ -20,7 +20,7 @@ package net.skyscanner.backpack.bottomsheet
 
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout.*
+import androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams
 import androidx.core.content.res.ResourcesCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
