@@ -7,7 +7,7 @@ Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/b
 ## Usage
 
 The Bottom Sheet component can be used in both XML and Kotlin/Java.
-To work correctly, it needs to be placed inside [CoordinatorLayout](https://developer.android.com/reference/androidx/coordinatorlayout/widget/CoordinatorLayout).
+In order to work correctly, it needs to be placed inside [CoordinatorLayout](https://developer.android.com/reference/androidx/coordinatorlayout/widget/CoordinatorLayout).
 
 Example of a Bottom Sheet in XML
 
