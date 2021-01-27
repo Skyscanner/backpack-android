@@ -16,28 +16,20 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.demo.components
+package net.skyscanner.backpack.bottomsheet
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
-import android.view.MotionEvent
-import androidx.core.widget.NestedScrollView
+import androidx.cardview.widget.CardView
+import net.skyscanner.backpack.R
 
-class LockableNestedScrollView @JvmOverloads constructor(
+open class BpkBottomSheet @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
-) : NestedScrollView(context, attrs, defStyleAttr) {
+  defStyleAttr: Int = 0,
+) : CardView(context, attrs, defStyleAttr) {
 
-  var scrollingEnabled = true
-
-  @SuppressLint("ClickableViewAccessibility")
-  override fun onTouchEvent(ev: MotionEvent): Boolean {
-    return scrollingEnabled && super.onTouchEvent(ev)
-  }
-
-  override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-    return scrollingEnabled && super.onInterceptTouchEvent(ev)
+  init {
+    cardElevation = resources.getDimension(R.dimen.bpkElevationLg)
   }
 }

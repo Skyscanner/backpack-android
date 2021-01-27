@@ -21,4 +21,18 @@
     <item name="android:layout_height">match_parent</item>
     <item name="android:padding">@dimen/bpkSpacingBase</item>
   </style>
+
+  <style name="App.ListItem" parent="">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:paddingStart">@dimen/bpkSpacingLg</item>
+    <item name="android:paddingEnd">@dimen/bpkSpacingLg</item>
+    <item name="android:paddingTop">@dimen/bpkSpacingBase</item>
+    <item name="android:paddingBottom">@dimen/bpkSpacingBase</item>
+    <item name="android:background">?selectableItemBackground</item>
+    <item name="android:clickable">true</item>
+    <item name="android:gravity">start|center_vertical</item>
+    <item name="textStyle">lg</item>
+  </style>
+
 </resources>

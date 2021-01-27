@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bpkBackgroundSecondary" />
+
+  <net.skyscanner.backpack.bottomsheet.BpkBottomSheet
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:behavior_peekHeight="180dp"
+    app:layout_behavior="net.skyscanner.backpack.bottomsheet.BpkBottomSheetBehaviour">
+
+    <androidx.core.widget.NestedScrollView
+      android:id="@+id/bottom_sheet"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+        <net.skyscanner.backpack.text.BpkText
+          style="@style/App.ListItem"
+          android:text="List item" />
+
+      </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+  </net.skyscanner.backpack.bottomsheet.BpkBottomSheet>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

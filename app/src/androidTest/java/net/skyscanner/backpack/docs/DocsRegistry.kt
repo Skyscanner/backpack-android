@@ -31,6 +31,7 @@ object DocsRegistry {
     Screenshot("Badge", "all"),
     Screenshot("Bar Chart", "default"),
     Screenshot("Bottom Nav", "default"),
+    Screenshot("Bottom Sheet", "default"),
     Screenshot("Button - Primary", "primary"),
     Screenshot("Button - Secondary", "secondary"),
     Screenshot("Button - Featured", "featured"),
@@ -113,7 +114,7 @@ private fun setupCalendar() {
 }
 
 private fun setupNavBarCollapsed() {
-  Espresso.onView(ViewMatchers.withId(R.id.component_detail_container))
+  Espresso.onView(ViewMatchers.withId(R.id.navBarCoordinator))
     .perform(ViewActions.swipeUp())
 
   Thread.sleep(100)

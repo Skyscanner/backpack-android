@@ -22,25 +22,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import net.skyscanner.backpack.demo.ComponentDetailFragment
+import net.skyscanner.backpack.demo.R
 
 open class Story : ComponentDetailFragment() {
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View? {
+    val scrollable = arguments?.getBoolean(SCROLLABLE, true) ?: true
     val layoutId = arguments?.getInt(LAYOUT_ID) ?: savedInstanceState?.getInt(LAYOUT_ID)
-    if (layoutId != null) {
-      return inflater.inflate(layoutId, container, false).apply {
-        if (isRtl) {
-          layoutDirection = View.LAYOUT_DIRECTION_RTL
-        }
-      }
+      ?: throw IllegalStateException("Story has not been property initialized")
+
+    val rootView = if (scrollable) {
+      val scrollView = NestedScrollView(requireContext())
+      scrollView.id = R.id.scrollable_container
+      scrollView.isFillViewport = true
+      inflater.inflate(layoutId, scrollView, true)
     } else {
-      throw IllegalStateException("Story has not been property initialized")
+      inflater.inflate(layoutId, container, false)
     }
+
+    if (isRtl) {
+      rootView.layoutDirection = View.LAYOUT_DIRECTION_RTL
+    }
+    return rootView
   }
 
   protected val isRtl
@@ -49,11 +58,13 @@ open class Story : ComponentDetailFragment() {
   companion object {
     const val LAYOUT_ID = "fragment_id"
     const val RTL = "rtl"
+    const val SCROLLABLE = "scrollable"
 
     infix fun of(fragmentLayout: Int) = Story().apply {
       arguments = Bundle().apply {
         putInt(LAYOUT_ID, fragmentLayout)
         putBoolean(RTL, false)
+        putBoolean(SCROLLABLE, true)
       }
     }
 
@@ -67,6 +78,14 @@ open class Story : ComponentDetailFragment() {
         arguments = Bundle()
       }
       arguments?.putBoolean(RTL, direction == Companion.Direction.RTL)
+      return this
+    }
+
+    infix fun Story.scrollable(value: Boolean): Story {
+      if (arguments == null) {
+        arguments = Bundle()
+      }
+      arguments?.putBoolean(SCROLLABLE, value)
       return this
     }
   }

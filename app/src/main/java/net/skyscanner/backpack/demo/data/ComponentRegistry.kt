@@ -44,6 +44,7 @@ import net.skyscanner.backpack.demo.stories.SnackbarStory
 import net.skyscanner.backpack.demo.stories.SpacingStory
 import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.Story.Companion.Direction
+import net.skyscanner.backpack.demo.stories.Story.Companion.scrollable
 import net.skyscanner.backpack.demo.stories.Story.Companion.with
 import net.skyscanner.backpack.demo.stories.StyleableButtonStory
 import net.skyscanner.backpack.demo.stories.SubStory
@@ -61,7 +62,7 @@ interface RegistryItem {
 class NodeItem(
   override val name: String,
   private val creator: (items: Array<String>) -> Story,
-  items: Map<String, RegistryItem> = emptyMap()
+  items: Map<String, RegistryItem> = emptyMap(),
 ) : RegistryItem {
 
   private var parent: RegistryItem? = null
@@ -92,7 +93,7 @@ class NodeItem(
 
 private class NodeData(
   val creator: (items: Array<String>) -> Story,
-  val items: Map<String, RegistryItem> = emptyMap()
+  val items: Map<String, RegistryItem> = emptyMap(),
 ) {
 
   constructor(creator: () -> Story) : this({ _ -> creator() })
@@ -111,6 +112,7 @@ object ComponentRegistry {
     "Badge" story NodeData { Story of R.layout.fragment_badge },
     "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
+    "Bottom Sheet" story NodeData { Story of R.layout.fragment_bottom_sheet scrollable false },
     "Button" story NodeData(
       { children -> SubStory of children },
       mapOf(
