@@ -25,10 +25,9 @@
 
   </com.google.android.material.appbar.AppBarLayout>
 
-  <net.skyscanner.backpack.demo.components.LockableNestedScrollView
+  <FrameLayout
     android:id="@+id/component_detail_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"/>
+    android:layout_height="match_parent" />
 
 </LinearLayout>

@@ -113,7 +113,7 @@ private fun setupCalendar() {
 }
 
 private fun setupNavBarCollapsed() {
-  Espresso.onView(ViewMatchers.withId(R.id.component_detail_container))
+  Espresso.onView(ViewMatchers.withId(R.id.scrollable_container))
     .perform(ViewActions.swipeUp())
 
   Thread.sleep(100)
