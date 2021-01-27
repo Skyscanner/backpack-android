@@ -35,6 +35,7 @@ The Backpack demo application is a good way of referring to the variants availab
 
 * [Badge](docs/Badge/README.md)
 * [Bottom Nav](docs/BottomNav/README.md)
+* [Bottom Sheet](docs/BottomSheet/README.md)
 * [Button](docs/Button/README.md)
 * [Card](docs/Card/README.md)
 * [Calendar](docs/Calendar/README.md)
