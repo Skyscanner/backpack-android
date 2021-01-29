@@ -20,20 +20,20 @@
     android:layout_height="wrap_content">
     <ImageView
       android:layout_width="16dp"
-      android:tint="@color/bpkTextPrimary"
+      app:tint="@color/bpkTextPrimary"
       android:layout_margin="@dimen/bpkSpacingSm"
       app:srcCompat="@drawable/bpk_flight"
       android:layout_height="16dp"/>
     <ImageView
       android:layout_width="16dp"
       app:srcCompat="@drawable/bpk_cars"
-      android:tint="@color/bpkTextPrimary"
+      app:tint="@color/bpkTextPrimary"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:layout_height="16dp"/>
     <ImageView
       android:layout_width="16dp"
       app:srcCompat="@drawable/bpk_hotels"
-      android:tint="@color/bpkTextPrimary"
+      app:tint="@color/bpkTextPrimary"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:layout_height="16dp"/>
   </LinearLayout>
@@ -52,7 +52,7 @@
     android:layout_height="wrap_content">
     <ImageView
       android:layout_width="wrap_content"
-      android:tint="@color/bpkTextPrimary"
+      app:tint="@color/bpkTextPrimary"
       app:srcCompat="@drawable/bpk_flight"
       android:padding="@dimen/bpkSpacingMd"
 
@@ -60,13 +60,13 @@
     <ImageView
       android:layout_width="wrap_content"
       app:srcCompat="@drawable/bpk_cars"
-      android:tint="@color/bpkTextPrimary"
+      app:tint="@color/bpkTextPrimary"
       android:padding="@dimen/bpkSpacingMd"
 
       android:layout_height="wrap_content"/>
     <ImageView
       android:layout_width="wrap_content"
-      android:tint="@color/bpkTextPrimary"
+      app:tint="@color/bpkTextPrimary"
       app:srcCompat="@drawable/bpk_hotels"
       android:padding="@dimen/bpkSpacingMd"
 
@@ -86,21 +86,21 @@
     android:layout_height="wrap_content">
     <ImageView
       android:layout_width="wrap_content"
-      android:tint="@color/bpkPrimary"
+      app:tint="@color/bpkPrimary"
       app:srcCompat="@drawable/bpk_flight"
       android:padding="@dimen/bpkSpacingMd"
       android:layout_height="wrap_content"/>
     <ImageView
       android:layout_width="wrap_content"
       app:srcCompat="@drawable/bpk_cars"
-      android:tint="@color/bpkMonteverde"
+      app:tint="@color/bpkMonteverde"
       android:padding="@dimen/bpkSpacingMd"
       android:layout_height="wrap_content"/>
     <ImageView
       android:layout_width="wrap_content"
       app:srcCompat="@drawable/bpk_hotels"
       android:padding="@dimen/bpkSpacingMd"
-      android:tint="@color/bpkErfoud"
+      app:tint="@color/bpkErfoud"
       android:layout_height="wrap_content"/>
   </LinearLayout>
 </LinearLayout>

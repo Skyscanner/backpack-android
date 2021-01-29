@@ -26,6 +26,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@Suppress("DEPRECATION")
 class BpkToastTests : BpkSnapshotTest() {
 
   @Before
@@ -37,13 +38,13 @@ class BpkToastTests : BpkSnapshotTest() {
   fun screenshotTestToast_Default() {
     val toast = BpkToast.makeText(testContext, "Test", BpkToast.LENGTH_SHORT)
     toast.show()
-    snap(toast.view)
+    snap(toast.view!!)
   }
 
   @Test
   fun screenshotTestToast_Themed() {
     val toast = BpkToast.makeText(createThemedContext(testContext), "Test", BpkToast.LENGTH_SHORT)
     toast.show()
-    snap(toast.view)
+    snap(toast.view!!)
   }
 }
