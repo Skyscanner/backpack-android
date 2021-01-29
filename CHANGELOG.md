@@ -2,6 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 26.0.0
+
+**Added:**
+  - `BpkBottomSheet`
+
+**Breaking:**
+  - Removed `ViewPump` dependency
+  - Removed `BpkInterceptor`, `BpkViewPumpContextWrapper`, `ElevationInterceptor`, `SpacingInterceptor`
+
 # 25.3.0
 
 **Updated:**
