@@ -35,6 +35,10 @@ android {
     }
   }
   defaultPublishConfig "ossRelease"
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 }
 
 dependencies {
@@ -44,13 +48,14 @@ dependencies {
   implementation "com.google.android.material:material:$rootProject.ext.androidMaterial"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
   implementation "androidx.cardview:cardview:$rootProject.ext.cardView"
+  implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.ext.swiperefreshLayout"
   implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threeTenAbp"
-  androidTestImplementation "androidx.test.ext:junit:1.1.1"
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-  androidTestImplementation 'androidx.test:rules:1.2.0'
-  androidTestImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
-  androidTestImplementation 'org.mockito:mockito-android:2.28.2'
-  testImplementation 'junit:junit:4.13.1'
+  androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitAndroid"
+  androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCore"
+  androidTestImplementation "androidx.test:rules:$rootProject.ext.testRules"
+  androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$rootProject.ext.mockitoKotlin"
+  androidTestImplementation "org.mockito:mockito-android:$rootProject.ext.mockitoAndroid"
+  testImplementation "junit:junit:$rootProject.ext.junit"
 }
 
 dokka {
