@@ -52,6 +52,7 @@ class ComponentDetailActivity : BpkBaseActivity() {
       // Create the detail fragment and add it to the activity
       // using a fragment transaction.
       val itemId = intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)
+        ?: error("ComponentDetailActivity intent must have ${ComponentDetailFragment.ARG_ITEM_ID} set")
       detail_toolbar.title = itemId
 
       val automationMode = intent.getBooleanExtra(ComponentDetailFragment.AUTOMATION_MODE, false)

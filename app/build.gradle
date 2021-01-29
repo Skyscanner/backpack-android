@@ -71,14 +71,14 @@ dependencies {
   implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidXLegacy"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
   implementation "com.google.android.material:material:$rootProject.ext.androidMaterial"
-  implementation "com.jakewharton.threetenabp:threetenabp:1.2.1"
-  implementation 'com.squareup.picasso:picasso:2.71828'
-  testImplementation 'junit:junit:4.13.1'
-  implementation 'com.facebook.stetho:stetho:1.5.1'
-  androidTestImplementation "androidx.test.ext:junit:1.1.1"
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-  androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.0'
-  androidTestImplementation 'androidx.test:rules:1.2.0'
+  implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threeTenAbp"
+  implementation "com.squareup.picasso:picasso:$rootProject.ext.picasso"
+  testImplementation "junit:junit:$rootProject.ext.junit"
+  implementation "com.facebook.stetho:stetho:$rootProject.ext.stetho"
+  androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitAndroid"
+  androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCore"
+  androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoContrib"
+  androidTestImplementation "androidx.test:rules:$rootProject.ext.testRules"
   api project(':Backpack')
 }
 screenshots {
