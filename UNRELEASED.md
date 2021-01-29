@@ -4,6 +4,9 @@
 
 **Added:**
   - `BpkBottomSheet`
+**Breaking:**
+  - Removed `ViewPump` dependency
+  - Removed `BpkInterceptor`, `BpkViewPumpContextWrapper`, `ElevationInterceptor`, `SpacingInterceptor`
 
 ## How to write a good changelog entry
 

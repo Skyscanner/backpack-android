@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.hardware.Sensor
@@ -29,7 +28,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import net.skyscanner.backpack.util.BpkViewPumpContextWrapper
 import net.skyscanner.backpack.util.unsafeLazy
 
 @SuppressLint("Registered")
@@ -45,10 +43,6 @@ open class BpkBaseActivity : AppCompatActivity() {
 
   private val shakeListener by unsafeLazy {
     ShakeListener(this::onShaked)
-  }
-
-  override fun attachBaseContext(newBase: Context) {
-    super.attachBaseContext(BpkViewPumpContextWrapper.wrap(newBase))
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

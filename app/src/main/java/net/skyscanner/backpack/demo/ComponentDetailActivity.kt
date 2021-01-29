@@ -101,10 +101,6 @@ class ComponentDetailActivity : BpkBaseActivity() {
         component_detail_container.layoutDirection = View.LAYOUT_DIRECTION_LTR
       }
     }
-    if (keyCode == KeyEvent.KEYCODE_H && event?.isShiftPressed == true) {
-      BackpackDemoApplication.highlight = !BackpackDemoApplication.highlight
-      BackpackDemoApplication.triggerRebirth(this)
-    }
     return super.onKeyUp(keyCode, event)
   }
 }
