@@ -101,7 +101,6 @@ To add new screenshots, add a new entry to `net/skyscanner/backpack/docs/DocsReg
 
 - `Shift + D` : Toggle story view between RTL and LTR
 - `Shift + T` : Hide the toolbar
-- `Shift + H` : Show/Hide debug markers
 
 ## Code Style
 Code style is ensured by [ktlint](https://github.com/shyiko/ktlint). It runs automatically during the `check` phase but can also be executed by running `gradlew ktlint`.
