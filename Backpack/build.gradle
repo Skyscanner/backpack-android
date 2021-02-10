@@ -50,6 +50,7 @@ dependencies {
   implementation "androidx.cardview:cardview:$rootProject.ext.cardView"
   implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.ext.swiperefreshLayout"
   implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threeTenAbp"
+  implementation "com.google.android.gms:play-services-maps:$rootProject.ext.googleMaps"
   androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitAndroid"
   androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCore"
   androidTestImplementation "androidx.test:rules:$rootProject.ext.testRules"

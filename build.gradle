@@ -66,6 +66,7 @@ ext {
   androidXLegacy = "1.0.0"
   androidMaterial = "1.2.1"
   cardView = "1.0.0"
+  googleMaps = "17.0.0"
   constraintLayout = "1.1.3"
   swiperefreshLayout = "1.1.0"
   threeTenAbp = "1.3.0"

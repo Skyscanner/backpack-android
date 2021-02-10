@@ -219,3 +219,4 @@ sd.img.*
 # To pevent having Relative Font in the repository
 *.ttf
 font/
+backpack.android.demo.key
