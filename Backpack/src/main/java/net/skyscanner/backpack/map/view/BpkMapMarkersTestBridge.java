@@ -21,6 +21,8 @@ package net.skyscanner.backpack.map.view;
 import android.content.Context;
 import android.view.View;
 
+// This class is used for screenshots testing only.
+// It's not a part of public API and may be changed at any moment without being considered as a breaking change.
 import org.jetbrains.annotations.NotNull;
 
 /*package*/ enum BpkMapMarkersTestBridge {

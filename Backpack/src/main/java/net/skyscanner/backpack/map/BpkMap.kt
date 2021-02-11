@@ -26,6 +26,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import net.skyscanner.backpack.map.view.createBpkMarkerView
 
+/**
+ * Receives the map in async mode and adds some Backpack customisations to it.
+ */
 fun MapView.getBpkMapAsync(onReady: (GoogleMap) -> Unit) {
   getMapAsync {
     it.setInfoWindowAdapter(BpkWindowInfoAdapter(context))
@@ -33,6 +36,9 @@ fun MapView.getBpkMapAsync(onReady: (GoogleMap) -> Unit) {
   }
 }
 
+/**
+ * Receives the map in async mode and adds some Backpack customisations to it.
+ */
 fun SupportMapFragment.getBpkMapAsync(onReady: (GoogleMap) -> Unit) {
   getMapAsync {
     it.setInfoWindowAdapter(BpkWindowInfoAdapter(requireContext()))

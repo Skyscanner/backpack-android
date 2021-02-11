@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.map
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.View
 import androidx.annotation.DrawableRes
 import com.google.android.gms.maps.GoogleMap
@@ -31,18 +32,44 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.map.view.createBpkMarkerView
 import net.skyscanner.backpack.util.screenshotView
 
+/**
+ * An icon which will be displayed on the badge.
+ */
 var Marker.icon: Int
   @DrawableRes get() = extra.icon
   set(@DrawableRes value) {
     extra = extra.copy(icon = value)
   }
 
+/**
+ * An alternative solution to associate some object with given [Marker].
+ *
+ * [Marker.getTag] or [Marker.setTag] should never be used – Backpack utilises it
+ * to store its internal properties (e.g. [Marker.icon]).
+ *
+ * @see Marker.getTag
+ * @see Marker.setTag
+ */
 var Marker.bpkTag: Any?
   get() = extra.bpkTag
   set(value) {
     extra = extra.copy(bpkTag = value)
   }
 
+/**
+ * Adds custom Backpack marker to the map.
+ * Methods like [GoogleMap.addMarker] should not be used as it may lead to undefined behaviour.
+ *
+ * Please be aware that this method is heavy as it captures the [View] to [Bitmap] and stores it in the memory.
+ * Showing too many map markers may lead to frequent GC invocations and memory overflow.
+ *
+ * @param context will be used to construct the badge view
+ * @param title will be displayed on the badge
+ * @param icon will be displayed on the badge. If set to 0 (by default), no icon will be renderer.
+ * @param tag any custom object needs to be associated with the marker
+ *
+ * @return [Marker] added to the map.
+ */
 fun GoogleMap.addBpkMarker(
   context: Context,
   position: LatLng,
