@@ -109,7 +109,7 @@ To auto fix problems run `gradlew ktlintFormat`.
 
 ## How we review Backpack contributions
 
-Please see the [code review guidelines](https://github.com/Skyscanner/backpack/blob/master/CODE_REVIEW_GUIDELINES.md).
+Please see the [code review guidelines](https://github.com/Skyscanner/backpack/blob/main/CODE_REVIEW_GUIDELINES.md).
 
 ## Releasing
 

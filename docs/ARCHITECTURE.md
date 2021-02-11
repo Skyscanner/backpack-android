@@ -66,7 +66,7 @@ There are only a few things that should be observed about the architecture of th
 3. Changing a property programmatically should immediately reflect on the UI.
 4. Components should be "extensible", i.e. `open class` in Kotlin. It's also important to think about the component being used that way when writing/reviewing it.
 
-More can be found here: https://github.com/Skyscanner/backpack-android/tree/master/decisions
+More can be found here: https://github.com/Skyscanner/backpack-android/tree/main/decisions
 
 ### Theming
 - Uses the native Android theming mechanism https://developer.android.com/guide/topics/ui/look-and-feel/themes

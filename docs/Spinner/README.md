@@ -33,4 +33,4 @@ BpkSpinner(context).apply {
 
 - `spinnerColor`
 
-Styles for the `primary` spinner can be changed globally through `bpkSpinnerPrimaryStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+Styles for the `primary` spinner can be changed globally through `bpkSpinnerPrimaryStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/THEMING.md) for more information.

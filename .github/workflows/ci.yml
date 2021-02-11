@@ -2,10 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     tags: ['*.*.*']
   pull_request:
-    branches: [master]
+    branches: [main]
 
 defaults:
   run:
@@ -135,8 +135,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Add commit comment
-        # Only run if there is no tag, and the commit is not on master
-        if: contains('refs/tags/', github.ref) != true && github.ref != 'refs/heads/master'
+        # Only run if there is no tag, and the commit is not on main
+        if: contains('refs/tags/', github.ref) != true && github.ref != 'refs/heads/main'
         uses: peter-evans/commit-comment@v1
         with:
           body: |
@@ -159,9 +159,9 @@ jobs:
           ./scripts/build-docs-ci ${{steps.tag.outputs.tag}}
 
       - name: Deploy Docs Site
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: |
-          curl -f -s -X POST -H "Content-Type: application/json" -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $GITHUB_TOKEN" -d "{\"ref\":\"master\",\"inputs\":{\"repo\":\"backpack-android\"}}" https://api.github.com/repos/Skyscanner/backpack-docs/actions/workflows/ci.yml/dispatches
+          curl -f -s -X POST -H "Content-Type: application/json" -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $GITHUB_TOKEN" -d "{\"ref\":\"main\",\"inputs\":{\"repo\":\"backpack-android\"}}" https://api.github.com/repos/Skyscanner/backpack-docs/actions/workflows/ci.yml/dispatches
         env:
           GITHUB_TOKEN: ${{ secrets.BACKPACK_DOCS_DEPLOY_TOKEN }}
 
@@ -172,7 +172,7 @@ jobs:
 #          ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
 #
 #      - name: Publish APK to AppCenter
-#        if: github.ref == 'refs/heads/master'
+#        if: github.ref == 'refs/heads/main'
 #        uses: wzieba/AppCenter-Github-Action@v1
 #          with:
 #            appName: Skyscanner/Backpack-Android

@@ -77,4 +77,4 @@ All colours support `ColorStateList`.
 - `barChartPopupBackgroundColor`
 - `barChartPopupTextColor`
 
-Styles can be changed globally through `bpkBarChartStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+Styles can be changed globally through `bpkBarChartStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/THEMING.md) for more information.
