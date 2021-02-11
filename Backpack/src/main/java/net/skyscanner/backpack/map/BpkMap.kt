@@ -51,8 +51,8 @@ private class BpkWindowInfoAdapter(
 ) : GoogleMap.InfoWindowAdapter {
 
   override fun getInfoWindow(marker: Marker): View =
-    createBpkMarkerView(context, marker.title, marker.icon)
-      .apply { isSelected = true }
+    createBpkMarkerView(context, marker.title, marker.icon, showPointer = !marker.pointerOnly)
+      .apply { isSelected = !marker.pointerOnly }
 
   override fun getInfoContents(p0: Marker): View? =
     null

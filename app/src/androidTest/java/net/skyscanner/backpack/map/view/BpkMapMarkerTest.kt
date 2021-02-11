@@ -37,27 +37,39 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestMapMarker_Default() {
-    val view = bridge.create(testContext, "Title", 0)
+    val view = bridge.create(testContext, "Title", 0, true)
     snap(view)
   }
 
   @Test
-  fun screenshotTestMapMarker_DefaultSelected() {
-    val view = bridge.create(testContext, "Title", 0)
+  fun screenshotTestMapMarker_Default_Selected() {
+    val view = bridge.create(testContext, "Title", 0, true)
     view.isSelected = true
+    snap(view)
+  }
+
+  @Test
+  fun screenshotTestMapMarker_Default_NoPointer() {
+    val view = bridge.create(testContext, "Title", 0, false)
     snap(view)
   }
 
   @Test
   fun screenshotTestMapMarker_WithIcon() {
-    val view = bridge.create(testContext, "Title", R.drawable.bpk_map)
+    val view = bridge.create(testContext, "Title", R.drawable.bpk_map, true)
     snap(view)
   }
 
   @Test
   fun screenshotTestMapMarker_WithIcon_Selected() {
-    val view = bridge.create(testContext, "Title", R.drawable.bpk_map)
+    val view = bridge.create(testContext, "Title", R.drawable.bpk_map, true)
     view.isSelected = true
+    snap(view)
+  }
+
+  @Test
+  fun screenshotTestMapMarker_WithIcon_NoPointer() {
+    val view = bridge.create(testContext, "Title", R.drawable.bpk_map, false)
     snap(view)
   }
 }

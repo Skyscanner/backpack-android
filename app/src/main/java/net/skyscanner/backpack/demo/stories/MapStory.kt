@@ -28,43 +28,50 @@ import net.skyscanner.backpack.map.getBpkMapAsync
 
 class MapStory : Story() {
 
+  enum class Type {
+    PointersOnly,
+    Badges,
+    BadgesWithIcons,
+  }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
     val context = requireContext()
+    val type = arguments?.getSerializable(TYPE) as Type
     mapFragment.getBpkMapAsync {
       it.addBpkMarker(
         context = context,
+        position = LatLng(45.0, 0.0),
+        title = "Badge 1",
+        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+        pointerOnly = type == Type.PointersOnly,
+      )
+      it.addBpkMarker(
+        context = context,
         position = LatLng(0.0, 0.0),
-        title = "0, 0",
-        icon = R.drawable.bpk_city,
+        title = "Badge 2",
+        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+        pointerOnly = type == Type.PointersOnly,
       )
       it.addBpkMarker(
         context = context,
-        position = LatLng(0.0, 90.0),
-        title = "0, 90",
-        icon = R.drawable.bpk_city,
-      )
-      it.addBpkMarker(
-        context = context,
-        position = LatLng(0.0, 180.0),
-        title = "0, 180",
-      )
-      it.addBpkMarker(
-        context = context,
-        position = LatLng(0.0, 270.0),
-        title = "0, 270",
+        position = LatLng(-45.0, 0.0),
+        title = "Badge 3",
+        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+        pointerOnly = type == Type.PointersOnly,
       )
     }
   }
 
   companion object {
-    private const val LAYOUT_ID = "fragment_id"
+    private const val TYPE = "type"
 
-    infix fun of(fragmentLayout: Int) = MapStory().apply {
+    infix fun of(type: Type) = MapStory().apply {
       arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
+      arguments?.putInt(LAYOUT_ID, R.layout.fragment_map)
       arguments?.putBoolean(SCROLLABLE, false)
+      arguments?.putSerializable(TYPE, type)
     }
   }
 }

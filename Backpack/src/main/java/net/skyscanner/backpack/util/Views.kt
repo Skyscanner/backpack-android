@@ -23,23 +23,22 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.view.View
 
-internal inline fun screenshotView(
-  view: View,
+internal inline fun View.rasterize(
   widthMeasureSpec: Int = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
   heightMeasureSpec: Int = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
   bitmapConfig: Bitmap.Config = Bitmap.Config.ARGB_8888,
   onLayoutDone: (View) -> Unit = {},
 ): Bitmap {
 
-  view.measure(widthMeasureSpec, heightMeasureSpec)
-  view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+  measure(widthMeasureSpec, heightMeasureSpec)
+  layout(0, 0, measuredWidth, measuredHeight)
 
-  onLayoutDone(view)
+  onLayoutDone(this)
 
-  val bitmap = Bitmap.createBitmap(view.width, view.height, bitmapConfig)
+  val bitmap = Bitmap.createBitmap(width, height, bitmapConfig)
   bitmap.eraseColor(Color.TRANSPARENT)
   val canvas = Canvas(bitmap)
-  view.draw(canvas)
+  draw(canvas)
 
   return bitmap
 }

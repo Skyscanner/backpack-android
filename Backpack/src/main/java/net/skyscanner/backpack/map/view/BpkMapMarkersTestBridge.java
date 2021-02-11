@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
   Instance;
 
   @NotNull
-  /*package*/ View create(@NotNull Context context, @NotNull String title, int icon) {
-    return BpkMapViewsKt.createBpkMarkerView(context, title, icon);
+  /*package*/ View create(@NotNull Context context, @NotNull String title, int icon, boolean showPointer) {
+    return BpkMapViewsKt.createBpkMarkerView(context, title, icon, showPointer);
   }
 }

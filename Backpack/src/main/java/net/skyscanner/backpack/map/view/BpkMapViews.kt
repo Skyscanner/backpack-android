@@ -28,7 +28,8 @@ import net.skyscanner.backpack.text.BpkText
 internal fun createBpkMarkerView(
   context: Context,
   title: String,
-  icon: Int = 0,
+  icon: Int,
+  showPointer: Boolean,
 ): View {
   val root: View
   if (icon != 0) {
@@ -38,5 +39,6 @@ internal fun createBpkMarkerView(
     root = View.inflate(context, R.layout.view_bpk_map_marker_label, null)
   }
   root.findViewById<BpkText>(R.id.text).text = title
+  root.findViewById<View>(R.id.circle).visibility = if (showPointer) View.VISIBLE else View.GONE
   return root
 }

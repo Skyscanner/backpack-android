@@ -201,7 +201,14 @@ object ComponentRegistry {
     ),
     "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
-    "Map Markers" story NodeData { MapStory of R.layout.fragment_map },
+    "Map Markers" story NodeData(
+      { children -> SubStory of children },
+      mapOf(
+        "Pointers" story NodeData { MapStory of MapStory.Type.PointersOnly },
+        "Badges " story NodeData { MapStory of MapStory.Type.Badges },
+        "With icons" story NodeData { MapStory of MapStory.Type.BadgesWithIcons },
+      )
+    ),
     "Nav Bar" story NodeData(
       { children -> SubStory of children },
       mapOf(
