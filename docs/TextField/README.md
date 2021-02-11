@@ -37,9 +37,9 @@ BpkTextField(context).apply {
 - `textFieldColorHintFocused`
 - `textFieldColorIcon`
 - `textFieldBackground`
-- [Font theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/Text/README.md)
+- [Font theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/Text/README.md)
 
-Styles can be changed globally through `bpkTextFieldStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+Styles can be changed globally through `bpkTextFieldStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/THEMING.md) for more information.
 
 Example
 

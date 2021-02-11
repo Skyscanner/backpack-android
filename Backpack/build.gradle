@@ -70,7 +70,7 @@ dokka {
 
   linkMapping {
     dir = "${project.projectDir}/src/main/java"
-    url = "https://github.com/Skyscanner/backpack-android/tree/master/${project.name}/src/main/java"
+    url = "https://github.com/Skyscanner/backpack-android/tree/main/${project.name}/src/main/java"
     suffix = "#L"
   }
 }
