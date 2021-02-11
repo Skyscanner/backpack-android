@@ -132,8 +132,8 @@ class ExampleBpkCalendarController(
 
 For more examples see:
 
-- [ExampleBpkCalendarController](https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt)
-- [CalendarColoring](https://github.com/Skyscanner/backpack-android/blob/master/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarColoring.kt)
+- [ExampleBpkCalendarController](https://github.com/Skyscanner/backpack-android/blob/main/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt)
+- [CalendarColoring](https://github.com/Skyscanner/backpack-android/blob/main/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarColoring.kt)
 
 
 ### Labeled buckets
@@ -156,8 +156,8 @@ class ExampleBpkCalendarController(
 
 For more examples see:
 
-- [ExampleBpkCalendarController](https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt)
-- [CalendarLabel](https://github.com/Skyscanner/backpack-android/blob/master/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarLabel.kt)
+- [ExampleBpkCalendarController](https://github.com/Skyscanner/backpack-android/blob/main/app/src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt)
+- [CalendarLabel](https://github.com/Skyscanner/backpack-android/blob/main/Backpack/src/main/java/net/skyscanner/backpack/calendar/model/CalendarLabel.kt)
 
 ### Month footer views
 
@@ -197,7 +197,7 @@ class ExampleBpkCalendarController(
 
 For more examples see:
 
-- [FooterViewCalendarStory](https://github.com/Skyscanner/backpack-android/blob/master/app/src/main/java/net/skyscanner/backpack/demo/stories/FooterViewCalendarStory.kt)
+- [FooterViewCalendarStory](https://github.com/Skyscanner/backpack-android/blob/main/app/src/main/java/net/skyscanner/backpack/demo/stories/FooterViewCalendarStory.kt)
 
 ## Theme Props
 
@@ -206,4 +206,4 @@ For more examples see:
 - `calendarDateSelectedTextColor`
 - `calendarDateSelectedSameDayBackgroundColor`
 
-Styles can be changed globally through `bpkCalendarStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+Styles can be changed globally through `bpkCalendarStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/THEMING.md) for more information.

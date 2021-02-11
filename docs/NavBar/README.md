@@ -45,4 +45,4 @@ The scrolling child of [`CoordinatorLayout`](https://developer.android.com/refer
 
 - `navBarCollapsedTextColor` - `bpkTextPrimary` by default.
 
-Styles can be changed globally through `bpkNavBarStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+Styles can be changed globally through `bpkNavBarStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/THEMING.md) for more information.

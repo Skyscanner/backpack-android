@@ -14,4 +14,4 @@ import net.skyscanner.backpack.toast.BpkToast
 BpkToast.makeText(context, "Message", BpkToast.LENGTH_SHORT).show()
 ```
 
-The fonts will be applied globally from the current theme. Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+The fonts will be applied globally from the current theme. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/THEMING.md) for more information.

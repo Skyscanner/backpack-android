@@ -47,4 +47,4 @@ BpkSnackbar.make(view, "Message", BpkSnackbar.LENGTH_SHORT)
 Styles can be changed globally through `bpkSnackbarStyle`.
 The fonts will be applied globally from the current theme.
  
-Check [theming](https://github.com/Skyscanner/backpack-android/blob/master/docs/THEMING.md) for more information.
+Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/THEMING.md) for more information.
