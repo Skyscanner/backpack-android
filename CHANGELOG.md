@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 26.1.0
+
+**Added:**
+  - Custom Google Maps markers support
+
+**Fixed:**
+  - `BpkDialog` border radius
+
 # 26.0.0
 
 **Added:**
