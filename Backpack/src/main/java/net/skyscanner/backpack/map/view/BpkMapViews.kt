@@ -39,6 +39,6 @@ internal fun createBpkMarkerView(
     root = View.inflate(context, R.layout.view_bpk_map_marker_label, null)
   }
   root.findViewById<BpkText>(R.id.text).text = title
-  root.findViewById<View>(R.id.circle).visibility = if (showPointer) View.VISIBLE else View.GONE
+  root.findViewById<View>(R.id.pointer).visibility = if (showPointer) View.VISIBLE else View.GONE
   return root
 }

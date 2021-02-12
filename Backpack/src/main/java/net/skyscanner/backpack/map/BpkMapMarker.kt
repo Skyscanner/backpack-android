@@ -108,7 +108,7 @@ fun GoogleMap.addBpkMarker(
 internal inline fun Context.generatePointer(
   onAnchorPositionCalculated: (Float, Float) -> Unit
 ): BitmapDescriptor {
-  val drawable = AppCompatResources.getDrawable(this, R.drawable.bpk_map_marker_circle)!!
+  val drawable = AppCompatResources.getDrawable(this, R.drawable.bpk_map_marker_pointer)!!
   val bitmap = drawable.rasterize()
   onAnchorPositionCalculated(0.5f, 0.5f)
   return BitmapDescriptorFactory.fromBitmap(bitmap)
@@ -121,9 +121,9 @@ internal inline fun Context.generateLabelIcon(
 ): BitmapDescriptor {
 
   val bitmap = createBpkMarkerView(this, title, icon, true).rasterize {
-    val circle = it.findViewById<View>(R.id.circle)
-    val halfCircleYPosition = it.height - (circle.height / 2f)
-    onAnchorPositionCalculated(0.5f, halfCircleYPosition / it.height)
+    val pointer = it.findViewById<View>(R.id.pointer)
+    val halfPointerYPosition = it.height - (pointer.height / 2f)
+    onAnchorPositionCalculated(0.5f, halfPointerYPosition / it.height)
   }
 
   return BitmapDescriptorFactory.fromBitmap(bitmap)
