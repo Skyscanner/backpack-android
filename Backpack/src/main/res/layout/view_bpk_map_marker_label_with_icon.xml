@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:gravity="center_horizontal"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bpk_map_marker_bg"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="@dimen/bpkSpacingMd">
+
+    <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/icon"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:paddingEnd="2dp"
+      android:scaleType="fitCenter"
+      android:src="@drawable/bpk_airports"
+      app:tint="@color/bpk_map_marker_content_color" />
+
+    <net.skyscanner.backpack.text.BpkText
+      android:id="@+id/text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:gravity="center"
+      android:textAlignment="center"
+      android:textColor="@color/bpk_map_marker_content_color"
+      app:textStyle="sm"
+      app:weight="emphasized"
+      tools:text="£35+" />
+
+  </LinearLayout>
+
+  <androidx.appcompat.widget.AppCompatImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/bpk_map_marker_flare"
+    app:tint="@color/bpkSkyBlue" />
+
+  <androidx.appcompat.widget.AppCompatImageView
+    android:id="@+id/pointer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/bpk_map_marker_pointer" />
+
+</LinearLayout>

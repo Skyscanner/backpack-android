@@ -12,6 +12,11 @@
       android:name="net.skyscanner.backpack.demo.BackpackDemoApplication"
       android:usesCleartextTraffic="true"
       android:theme="@style/AppTheme">
+
+    <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="${MAPS_API_KEY}" />
+
       <activity android:name=".MainActivity">
           <intent-filter>
               <action android:name="android.intent.action.MAIN" />

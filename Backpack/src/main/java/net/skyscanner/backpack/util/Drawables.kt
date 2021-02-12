@@ -20,6 +20,9 @@ package net.skyscanner.backpack.util
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RippleDrawable
@@ -93,4 +96,16 @@ internal inline fun sizedDrawable(
 
   override fun getIntrinsicHeight(): Int =
     height
+}
+
+internal fun Drawable.rasterize(
+  width: Int = intrinsicWidth,
+  height: Int = intrinsicHeight,
+  config: Bitmap.Config = Bitmap.Config.ARGB_8888,
+): Bitmap {
+  setBounds(0, 0, width, height)
+  val bitmap = Bitmap.createBitmap(width, height, config)
+  bitmap.eraseColor(Color.TRANSPARENT)
+  draw(Canvas(bitmap))
+  return bitmap
 }

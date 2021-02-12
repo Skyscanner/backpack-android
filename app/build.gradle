@@ -6,7 +6,10 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.facebook.testing.screenshot'
 
-def travis = System.getenv("TRAVIS")
+def properties = new Properties()
+if (rootProject.file("local.properties").exists()) {
+  properties.load(rootProject.file("local.properties").newDataInputStream())
+}
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
@@ -21,25 +24,23 @@ android {
 
     testInstrumentationRunner "net.skyscanner.backpack.BpkTestRunner"
     testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.docs.GenerateScreenshots"
+
+    manifestPlaceholders = [ MAPS_API_KEY : properties.getProperty("MAPS_API_KEY", "") ]
   }
 
   signingConfigs {
-    if (travis) {
-      release {
-        storeFile rootProject.file('backpack.android.demo.key')
-        storePassword System.getenv("KEYSTORE_PASSWORD")
-        keyAlias System.getenv("KEYSTORE_ALIAS")
-        keyPassword System.getenv("KEYSTORE_ALIAS_PASSWORD")
-      }
+    release {
+      storeFile rootProject.file('backpack.android.demo.key')
+      storePassword properties.getProperty('KEYSTORE_PASSWORD')
+      keyAlias properties.getProperty('KEYSTORE_ALIAS')
+      keyPassword properties.getProperty('KEYSTORE_ALIAS_PASSWORD')
     }
   }
   buildTypes {
-    if (travis) {
-      release {
-        minifyEnabled false
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        signingConfig signingConfigs.release
-      }
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.release
     }
   }
   lintOptions {
@@ -77,6 +78,7 @@ dependencies {
   implementation "com.google.android.material:material:$rootProject.ext.androidMaterial"
   implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threeTenAbp"
   implementation "com.squareup.picasso:picasso:$rootProject.ext.picasso"
+  implementation "com.google.android.gms:play-services-maps:$rootProject.ext.googleMaps"
   testImplementation "junit:junit:$rootProject.ext.junit"
   implementation "com.facebook.stetho:stetho:$rootProject.ext.stetho"
   androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitAndroid"
