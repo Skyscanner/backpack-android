@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-  <corners android:bottomLeftRadius="@dimen/bpkBorderRadiusXs" android:bottomRightRadius="@dimen/bpkBorderRadiusSm" />
+  <corners android:bottomLeftRadius="@dimen/bpkBorderRadiusSm" android:bottomRightRadius="@dimen/bpkBorderRadiusSm" />
   <solid android:color="@color/__dialogBackground" />
   <padding android:left="@dimen/bpk_dialog_padding_horizontal" android:right="@dimen/bpk_dialog_padding_horizontal" />
 </shape>

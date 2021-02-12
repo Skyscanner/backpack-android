@@ -5,6 +5,9 @@
 **Added:**
   - Custom Google Maps markers support
 
+**Fixed:**
+  - `BpkDialog` border radius
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
