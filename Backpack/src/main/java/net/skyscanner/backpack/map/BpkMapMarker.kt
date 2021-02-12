@@ -30,7 +30,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.map.view.createBpkMarkerView
+import net.skyscanner.backpack.map.internal.createBpkMarkerView
 import net.skyscanner.backpack.util.rasterize
 
 /**

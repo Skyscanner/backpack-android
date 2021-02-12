@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.map.view
+package net.skyscanner.backpack.map.internal
 
 import android.content.Context
 import android.view.View

@@ -24,7 +24,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
-import net.skyscanner.backpack.map.view.createBpkMarkerView
+import net.skyscanner.backpack.map.internal.createBpkMarkerView
 
 /**
  * Receives the map in async mode and adds some Backpack customisations to it.
