@@ -67,7 +67,7 @@ var Marker.bpkTag: Any?
  * @param context will be used to construct the badge view
  * @param title will be displayed on the badge
  * @param icon will be displayed on the badge. If set to 0 (by default), no icon will be renderer
- * @param pointerOnly if true, it will not display badge until its selected
+ * @param pointerOnly if true, it will not display badge until it's selected
  * @param tag any custom object needs to be associated with the marker
  *
  * @return [Marker] added to the map.
@@ -79,33 +79,30 @@ fun GoogleMap.addBpkMarker(
   pointerOnly: Boolean,
   @DrawableRes icon: Int = 0,
   tag: Any? = null,
-): Marker {
-
-  return addMarker(
-    MarkerOptions()
-      .position(position)
-      .title(title)
-      .also {
-        if (pointerOnly) {
-          it.icon(
-            context.generatePointer { x, y ->
-              it.anchor(x, y)
-            }
-          )
-        } else {
-          it.icon(
-            context.generateLabelIcon(title, icon) { x, y ->
-              it.anchor(x, y)
-              it.infoWindowAnchor(0.5f, 1f)
-            }
-          )
-        }
+): Marker = addMarker(
+  MarkerOptions()
+    .position(position)
+    .title(title)
+    .also {
+      if (pointerOnly) {
+        it.icon(
+          context.generatePointer { x, y ->
+            it.anchor(x, y)
+          }
+        )
+      } else {
+        it.icon(
+          context.generateLabelIcon(title, icon) { x, y ->
+            it.anchor(x, y)
+            it.infoWindowAnchor(0.5f, 1f)
+          }
+        )
       }
-  ).apply {
-    this.icon = icon
-    this.bpkTag = tag
-    this.pointerOnly = pointerOnly
-  }
+    }
+).apply {
+  this.icon = icon
+  this.bpkTag = tag
+  this.pointerOnly = pointerOnly
 }
 
 internal inline fun Context.generatePointer(
