@@ -69,7 +69,7 @@ internal class MonthView @JvmOverloads constructor(
 ) : View(context, attrs, defStyle) {
 
   private val monthNumberFont =
-    BpkText.getFont(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
+    BpkText.getFont(context, BpkText.BASE, BpkText.Weight.EMPHASIZED)
 
   private val monthLabelFont =
     BpkText.getFont(context, BpkText.LG, BpkText.Weight.EMPHASIZED)
@@ -95,7 +95,7 @@ internal class MonthView @JvmOverloads constructor(
 
   private val miniDayNumberTextSize: Int = monthNumberFont.fontSize
   private val monthLabelTextSize: Int = monthLabelFont.fontSize
-  private val selectedDayCircleRadius: Int = ResourcesUtil.dpToPx(20, context)
+  private val selectedDayCircleRadius: Int = ResourcesUtil.dpToPx(18, context)
   private val monthHeaderSize: Int = ResourcesUtil.dpToPx(52, context)
 
   private var rowHeight: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl) * 2
