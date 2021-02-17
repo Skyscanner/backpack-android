@@ -10,7 +10,7 @@
 **Fixed:**
   - `BpkDialog` border radius
 
-# 26.0.1
+# 26.1.1
 
 **Fixed:**
   - `BpkCalendar` - updated the design
