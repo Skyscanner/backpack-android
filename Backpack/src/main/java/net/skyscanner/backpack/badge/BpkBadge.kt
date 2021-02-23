@@ -21,6 +21,7 @@ package net.skyscanner.backpack.badge
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.util.AttributeSet
@@ -29,13 +30,12 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.createContextThemeWrapper
 
 open class BpkBadge @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : BpkText(createContextThemeWrapper(context, attrs, R.attr.bpkBadgeStyle), attrs, defStyleAttr) {
+) : BpkText(context, attrs, defStyleAttr) {
 
   private var initialized = false
 
@@ -52,11 +52,11 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with positive messages
      */
-    Success(1, R.color.bpkGlencoe, R.color.bpkSkyGrayTint01),
+    Success(1, R.color.bpkGlencoe, R.color.bpkSkyBlueShade03),
     /**
      *  Style for badges with warning messages
      */
-    Warning(2, R.color.bpkErfoud, R.color.bpkSkyGrayTint01),
+    Warning(2, R.color.bpkErfoud, R.color.bpkSkyBlueShade03),
     /**
      * Style for badges with error messages
      */
@@ -64,11 +64,11 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      *  Light themed style for badges
      */
-    Light(4, R.color.bpkSkyGrayTint07, R.color.bpkSkyGrayTint01),
+    Light(4, R.color.bpkSkyGrayTint07, R.color.bpkSkyBlueShade03),
     /**
      *  Style for badges on dark themes
      */
-    Inverse(5, R.color.bpkWhite, R.color.bpkSkyGrayTint01),
+    Inverse(5, R.color.bpkWhite, R.color.bpkSkyBlueShade03),
     /**
      * Style for badges with a thin white outline
      */
@@ -120,7 +120,6 @@ open class BpkBadge @JvmOverloads constructor(
 
     type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
     message = a.getString(R.styleable.BpkBadge_message)
-    includeFontPadding = a.getBoolean(R.styleable.BpkBadge_android_includeFontPadding, false)
 
     a.recycle()
 
@@ -128,6 +127,10 @@ open class BpkBadge @JvmOverloads constructor(
   }
 
   private fun setup() {
+    this.includeFontPadding = true
+    this.textStyle = XS
+    this.weight = Weight.EMPHASIZED
+    this.minHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
     this.text = message
 
     // set padding
@@ -141,7 +144,7 @@ open class BpkBadge @JvmOverloads constructor(
     // Set background
     val bgColor = ContextCompat.getColorStateList(context, type.bgColor)!!
     if (type == Type.Outline) {
-      setBackground(ColorStateList.valueOf(bgColor.defaultColor and 0x32ffffff), bgColor)
+      setBackground(ColorStateList.valueOf(Color.TRANSPARENT), bgColor)
     } else {
       setBackground(bgColor)
     }
