@@ -31,7 +31,6 @@
 
     <item name="bpkTextFieldStyle">@style/LondonThemeTextField</item>
     <item name="bpkRatingStyle">@style/LondonThemeRating</item>
-    <item name="bpkBadgeStyle">@style/LondonThemeBadge</item>
     <item name="bpkBarChartStyle">@style/LondonThemeBarChart</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
@@ -75,10 +74,6 @@
 
   <style name="LondonThemeChip">
     <item name="chipSelectedBackgroundColor">?bpkPrimaryColor</item>
-  </style>
-
-  <style name="LondonThemeBadge">
-    <item name="android:includeFontPadding">true</item>
   </style>
 
   <style name="LondonThemeCalendar">
@@ -177,7 +172,6 @@
     <item name="bpkHorizontalNavStyleAlternate">@style/DohaThemeHorizontalNavAlternate</item>
     <item name="bpkSnackbarStyle">@style/DohaThemeSnackbar</item>
     <item name="bpkNavBarStyle">@style/DohaThemeNavBar</item>
-    <item name="bpkBadgeStyle">@style/DohaThemeBadge</item>
     <item name="bpkBarChartStyle">@style/DohaThemeBarChart</item>
   </style>
 
@@ -265,10 +259,6 @@
 
   <style name="DohaThemeNavBar">
     <item name="navBarCollapsedTextColor">#ffd677</item>
-  </style>
-
-  <style name="DohaThemeBadge">
-    <item name="android:includeFontPadding">false</item>
   </style>
 
   <style name="DohaThemeBarChart">

@@ -11,8 +11,6 @@
 
     <item name="android:lineSpacingMultiplier">1</item>
 
-    <item name="bpkBadgeStyle">@style/InternalBpkBadge</item>
-
     <item name="bpkTextBaseAppearance">@style/bpkTextBaseInternal</item>
     <item name="bpkTextCapsAppearance">@style/bpkTextCapsInternal</item>
     <item name="bpkTextLgAppearance">@style/bpkTextLgInternal</item>
@@ -32,11 +30,6 @@
     <item name="bpkTextXlHeavyAppearance">@style/bpkTextXlHeavyInternal</item>
     <item name="bpkTextXxlHeavyAppearance">@style/bpkTextXxlHeavyInternal</item>
     <item name="bpkTextXxxlHeavyAppearance">@style/bpkTextXxxlHeavyInternal</item>
-  </style>
-
-  <!-- Badge should include font padding to work with relative -->
-  <style name="InternalBpkBadge" parent="">
-    <item name="android:includeFontPadding">true</item>
   </style>
 
   <!-- Text should have no lineSpacingMultiplier to work with relative -->

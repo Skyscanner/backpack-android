@@ -2,6 +2,13 @@
 
 > Place your changes below this line.
 
+**Breaking:**
+  - `BpkBadge`
+    - updated the design
+    - removed `bpkBadgeStyle` theme attribute
+    - removed `android:includeFontPadding` attribute
+    - `android:includeFontPadding` is set to true by default
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
