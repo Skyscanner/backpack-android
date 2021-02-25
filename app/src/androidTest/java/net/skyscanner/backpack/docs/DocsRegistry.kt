@@ -70,6 +70,7 @@ object DocsRegistry {
     Screenshot("Nav Bar - With Menu", "navigation", ::setupNavBarCollapsed),
     Screenshot("Overlay", "all"),
     Screenshot("Panel", "all"),
+    Screenshot("RadioButton", "default"),
     Screenshot("Rating - Default", "default"),
     Screenshot("Rating - Horizontal", "sizes"),
     Screenshot("Rating - Vertical", "vertical"),

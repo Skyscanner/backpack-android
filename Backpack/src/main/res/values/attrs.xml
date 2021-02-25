@@ -148,6 +148,12 @@
     <attr name="checkboxColor" format="color" />
   </declare-styleable>
 
+  <declare-styleable name="BpkRadioButton">
+    <attr name="radioButtonColorChecked" format="color" />
+    <attr name="radioButtonColorDisabled" format="color" />
+    <attr name="radioButtonColor" format="color" />
+  </declare-styleable>
+
   <declare-styleable name="BpkRating">
     <attr name="ratingColorLow" format="color" />
     <attr name="ratingColorMedium" format="color" />
@@ -247,6 +253,7 @@
   <attr name="bpkChipStyle" format="reference"/>
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
   <attr name="bpkCheckboxStyle" format="reference"/>
+  <attr name="bpkRadioButtonStyle" format="reference"/>
   <attr name="bpkHorizontalNavStyle" format="reference"/>
   <attr name="bpkHorizontalNavStyleAlternate" format="reference"/>
   <attr name="bpkTextFieldStyle" format="reference"/>

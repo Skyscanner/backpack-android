@@ -20,6 +20,7 @@
     <item name="bpkFabStyle">@style/LondonThemeFab</item>
     <item name="bpkButtonLinkStyle">@style/LondonThemeButtonLink</item>
     <item name="bpkCheckboxStyle">@style/LondonThemeCheckbox</item>
+    <item name="bpkRadioButtonStyle">@style/LondonThemeRadioButton</item>
     <item name="bpkHorizontalNavStyle">@style/LondonThemeHorizontalNav</item>
     <item name="bpkHorizontalNavStyleAlternate">@style/LondonThemeHorizontalNavAlternate</item>
     <item name="bpkSnackbarStyle">@style/LondonThemeSnackbar</item>
@@ -98,6 +99,12 @@
     <item name="checkboxColor">#013A76</item>
   </style>
 
+  <style name="LondonThemeRadioButton">
+    <item name="radioButtonColorChecked">@color/bpkPanjin</item>
+    <item name="radioButtonColorDisabled">@color/bpkTextSecondary</item>
+    <item name="radioButtonColor">#013A76</item>
+  </style>
+
   <style name="LondonThemeBarChart">
     <item name="barChartColumnTitleColor">?bpkPrimaryColor</item>
     <item name="barChartColumnSubtitleColor">@color/bpkSkyBlue</item>
@@ -163,6 +170,7 @@
     <item name="bpkFabStyle">@style/DohaThemeFab</item>
     <item name="bpkButtonLinkStyle">@style/DohaThemeButtonLink</item>
     <item name="bpkCheckboxStyle">@style/DohaThemeCheckbox</item>
+    <item name="bpkRadioButtonStyle">@style/DohaThemeRadioButton</item>
     <item name="bpkTextFieldStyle">@style/DohaThemeTextField</item>
     <item name="bpkRatingStyle">@style/DohaThemeRating</item>
 
@@ -223,6 +231,12 @@
     <item name="checkboxColorChecked">@color/bpkPanjin</item>
     <item name="checkboxColorDisabled">@color/bpkTextSecondary</item>
     <item name="checkboxColor">#ffb300</item>
+  </style>
+
+  <style name="DohaThemeRadioButton">
+    <item name="radioButtonColorChecked">@color/bpkPanjin</item>
+    <item name="radioButtonColorDisabled">@color/bpkTextSecondary</item>
+    <item name="radioButtonColor">#ffb300</item>
   </style>
 
   <style name="DohaThemeHorizontalNav">

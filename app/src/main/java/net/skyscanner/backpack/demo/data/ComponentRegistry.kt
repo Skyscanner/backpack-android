@@ -222,6 +222,7 @@ object ComponentRegistry {
     ),
     "Overlay" story NodeData { Story of R.layout.fragment_overlay },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
+    "RadioButton" story NodeData { Story of R.layout.fragment_radio_button },
     "Rating" story NodeData(
       { children -> SubStory of children },
       mapOf(

@@ -2,6 +2,9 @@
 
 > Place your changes below this line.
 
+**Added:**
+  - `BpkRadioButton` component
+
 **Breaking:**
   - `BpkBadge`
     - updated the design
