@@ -36,9 +36,10 @@ Example of a RadioButton in Kotlin
 ```Kotlin
 import net.skyscanner.backpack.radiobutton.BpkRadioButton
 
-BpkRadioButton(context).apply {
+val radioButton = BpkRadioButton(context).apply {
   isChecked = true
 }
+radioGroup.addView(radioButton)
 ```
 
 ## Theme Props
