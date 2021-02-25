@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  style="@style/App.Story"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <RadioGroup
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:checkedButton="@+id/radio_button_checked">
+
+    <net.skyscanner.backpack.radiobutton.BpkRadioButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingLg"
+      android:text="Default Unchecked" />
+
+    <net.skyscanner.backpack.radiobutton.BpkRadioButton
+      android:id="@+id/radio_button_checked"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingLg"
+      android:text="Default Checked" />
+
+    <net.skyscanner.backpack.radiobutton.BpkRadioButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingLg"
+      android:layoutDirection="rtl"
+      android:text="Default RTL" />
+
+  </RadioGroup>
+
+    <net.skyscanner.backpack.radiobutton.BpkRadioButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingLg"
+      android:enabled="false"
+      android:text="Disabled Unchecked" />
+
+    <net.skyscanner.backpack.radiobutton.BpkRadioButton
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingLg"
+      android:checked="true"
+      android:enabled="false"
+      android:text="Disabled Checked" />
+
+</LinearLayout>
