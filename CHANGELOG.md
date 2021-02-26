@@ -2,6 +2,21 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 27.0.0
+
+**Added:**
+  - `BpkRadioButton` component
+
+**Breaking:**
+  - `BpkDialog`
+    - renamed `BpkDialog.Icon.colorRes` property to `BpkDialog.Icon.color`
+    - `BpkDialog.Icon.color` now accepts `@ColorInt` instead of `@ColorRes`
+  - `BpkBadge`
+    - updated the design
+    - removed `bpkBadgeStyle` theme attribute
+    - removed `android:includeFontPadding` attribute
+    - `android:includeFontPadding` is set to true by default
+
 # 26.1.1
 
 **Fixed:**
