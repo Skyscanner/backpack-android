@@ -6,6 +6,9 @@
   - `BpkRadioButton` component
 
 **Breaking:**
+  - `BpkDialog`
+    - renamed `BpkDialog.Icon.colorRes` property to `BpkDialog.Icon.color`
+    - `BpkDialog.Icon.color` now accepts `@ColorInt` instead of `@ColorRes`
   - `BpkBadge`
     - updated the design
     - removed `bpkBadgeStyle` theme attribute

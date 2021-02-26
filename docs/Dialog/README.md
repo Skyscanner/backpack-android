@@ -11,6 +11,7 @@ The Dialog component can only be used in Kotlin/Java
 Example of dialog in Kotlin
 
 ```Kotlin
+import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.dialog.BpkDialog
 
 val dialog = BpkDialog(context, BpkDialog.Style.ALERT)
@@ -19,7 +20,7 @@ dialog.apply {
     description = "Your flight is all booked. Why not check out some hotels now?"
     icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
-        R.color.bpkMonteverde
+        ContextCompat.getColor(context, R.color.bpkMonteverde),
     )
 
     addActionButton(BpkButton(context).apply {
@@ -50,9 +51,9 @@ val dialog = BpkDialog(context, BpkDialog.Style.FLARE)
 dialog.apply {
     title = "You are going to Tokyo!"
     description = "Your flight is all booked. Why not check out some hotels now?"
-    
+
     Picasso.get().load(url).into(image)
-    
+
     addActionButton(BpkButton(context).apply {
         text = "Continue"
         setOnClickListener({
