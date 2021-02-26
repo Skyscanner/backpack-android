@@ -22,7 +22,7 @@ import android.app.Dialog
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import net.skyscanner.backpack.dialog.internal.AlertDialogImpl
 import net.skyscanner.backpack.dialog.internal.FlareDialogImpl
@@ -32,7 +32,7 @@ open class BpkDialog(
   val style: Style = Style.ALERT
 ) : Dialog(context, 0) {
 
-  data class Icon(@DrawableRes val drawableRes: Int, @ColorRes val colorRes: Int)
+  data class Icon(@DrawableRes val drawableRes: Int, @ColorInt val color: Int)
 
   enum class Style {
     ALERT, BOTTOM_SHEET, FLARE

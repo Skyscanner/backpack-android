@@ -22,7 +22,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import net.skyscanner.backpack.R
@@ -51,13 +51,13 @@ internal class BpkDialogIcon @JvmOverloads constructor(
       field = value
       if (value != null) {
         setImageDrawable(AppCompatResources.getDrawable(context, value.drawableRes))
-        background = createBackground(value.colorRes)
+        background = createBackground(value.color)
       }
     }
 
-  private fun createBackground(@ColorRes backgroundId: Int) = GradientDrawable().apply {
+  private fun createBackground(@ColorInt backgroundColor: Int) = GradientDrawable().apply {
     cornerRadius = size / 2f
-    color = AppCompatResources.getColorStateList(context, backgroundId)
+    color = ColorStateList.valueOf(backgroundColor)
     setStroke(
       resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
       AppCompatResources.getColorStateList(context, R.color.__dialogBackground)
