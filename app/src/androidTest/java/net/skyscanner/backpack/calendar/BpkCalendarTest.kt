@@ -271,7 +271,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   fun screenshotTestCalendarWithSingleDaySelected() {
     val calendar = BpkCalendar(testContext)
     val controller = BpkCalendarControllerImpl(
-      false,
       Locale.UK,
       LocalDate.of(2019, 1, 2),
       LocalDate.of(2019, 12, 31),
@@ -351,7 +350,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   fun screenshotTestCalendarWithDisabledDates_SelectSingle() {
     val calendar = BpkCalendar(testContext)
     val controller = BpkCalendarControllerImpl(
-      false,
       Locale.UK,
       LocalDate.of(2019, 1, 2),
       LocalDate.of(2019, 12, 31),
