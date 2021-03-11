@@ -74,8 +74,6 @@ abstract class BpkCalendarController(
    */
   open val monthFooterAdapter: MonthFooterAdapter? = null
 
-  abstract val isRtl: Boolean
-
   abstract val locale: Locale
 
   abstract fun onRangeSelected(range: CalendarSelection)

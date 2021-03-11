@@ -140,8 +140,6 @@ class NonDrawnDaysOffset {
   }
 
   abstract class TestBpkCalendarController : BpkCalendarController(SelectionType.RANGE) {
-    override val isRtl: Boolean
-      get() = false // unused
 
     override fun onRangeSelected(range: CalendarSelection) {
       // unused

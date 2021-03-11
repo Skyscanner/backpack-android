@@ -69,7 +69,6 @@ class ExampleBpkCalendarController(
       }
   }
 
-  override val isRtl: Boolean = getLayoutDirectionFromLocale(Locale.getDefault()) == LAYOUT_DIRECTION_RTL
   override val locale: Locale = Locale.getDefault()
 }
 ```
