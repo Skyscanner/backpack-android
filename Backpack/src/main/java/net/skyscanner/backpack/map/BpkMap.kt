@@ -52,7 +52,7 @@ private class BpkWindowInfoAdapter(
 
   override fun getInfoWindow(marker: Marker): View =
     createBpkMarkerView(context, marker.title, marker.icon, showPointer = !marker.pointerOnly)
-      .apply { isSelected = !marker.pointerOnly }
+      .apply { isSelected = true }
 
   override fun getInfoContents(p0: Marker): View? =
     null
