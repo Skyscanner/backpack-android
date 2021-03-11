@@ -106,7 +106,7 @@ internal class MonthView @JvmOverloads constructor(
   private var labelsYOffset: Int = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
   private var viewWidth = 0
 
-  private var isRtl: Boolean = false
+  private var isRtl: Boolean = layoutDirection == LAYOUT_DIRECTION_RTL
 
   private val selectedTextColor: Int
   private val selectedDayCircleFillColor: Int
@@ -197,10 +197,16 @@ internal class MonthView @JvmOverloads constructor(
       if (value != null) {
         field = value
         labelsViewModel.update(value.calendarLabels)
-        isRtl = value.isRtl
+        isRtl = layoutDirection == LAYOUT_DIRECTION_RTL
         requestLayout()
       }
     }
+
+  override fun onRtlPropertiesChanged(layoutDirection: Int) {
+    super.onRtlPropertiesChanged(layoutDirection)
+    isRtl = layoutDirection == LAYOUT_DIRECTION_RTL
+    requestLayout()
+  }
 
   private val labelsViewModel = BpkCalendarLabelsViewModel(context)
 

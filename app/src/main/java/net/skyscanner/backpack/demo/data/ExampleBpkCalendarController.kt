@@ -19,11 +19,9 @@
 package net.skyscanner.backpack.demo.data
 
 import android.content.Context
-import android.text.TextUtils.getLayoutDirectionFromLocale
 import android.widget.Toast
 import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat.LAYOUT_DIRECTION_RTL
 import java.util.Locale
 import net.skyscanner.backpack.calendar.model.CalendarCellStyle
 import net.skyscanner.backpack.calendar.model.CalendarColoring
@@ -68,7 +66,6 @@ open class ExampleBpkCalendarController(
   private var colorGenerationOffset: Long = 0L
   private var disabledWeekdays = DayOfWeek.WEDNESDAY
 
-  override val isRtl: Boolean = getLayoutDirectionFromLocale(Locale.getDefault()) == LAYOUT_DIRECTION_RTL
   override val locale: Locale = Locale.getDefault()
   override val calendarColoring: CalendarColoring?
     get() = if (isColoredCalendar) {

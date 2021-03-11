@@ -38,7 +38,6 @@ internal open class BpkCalendarControllerTestImpl(
   selectionType: SelectionType = SelectionType.RANGE
 ) : BpkCalendarController(selectionType) {
 
-  override val isRtl = false
   override val locale: Locale = Locale.forLanguageTag("pt-br")
   override fun onRangeSelected(range: CalendarSelection) {}
 }
