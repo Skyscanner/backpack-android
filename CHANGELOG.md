@@ -2,6 +2,14 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 28.0.0
+
+**Updated:**
+  - `BpkMapMarker` in selected state looks the same in all the cases
+
+**Breaking:**
+  - `BpkCalendar` removed `isRtl` property from `BpkCalendarController`
+
 # 27.0.0
 
 **Added:**
