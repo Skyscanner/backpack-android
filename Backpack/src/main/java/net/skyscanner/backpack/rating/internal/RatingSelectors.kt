@@ -69,11 +69,12 @@ internal class RatingSelectors(
     }
   }
 
-  val color: (BpkRating.Score) -> ColorStateList
+  val backgroundColor: (BpkRating.Score) -> ColorStateList
+  val contentColor: (BpkRating.Score) -> ColorStateList
 
   init {
     var colorLow = ContextCompat.getColor(context, R.color.bpkPanjin)
-    var colorMedium = ContextCompat.getColor(context, R.color.bpkErfoud)
+    var colorMedium = ContextCompat.getColor(context, R.color.__rating_medium_color)
     var colorHigh = ContextCompat.getColor(context, R.color.bpkMonteverde)
 
     context.theme.obtainStyledAttributes(
@@ -90,13 +91,22 @@ internal class RatingSelectors(
       subtitles = it.resolveStringOrArray(R.styleable.BpkRating_ratingSubtitle)
     }
 
-    val colors = arrayOf(
+    val backgroundColors = arrayOf(
       ColorStateList.valueOf(colorLow),
       ColorStateList.valueOf(colorMedium),
       ColorStateList.valueOf(colorHigh)
     )
-    color = {
-      colors[it.index]
+    backgroundColor = {
+      backgroundColors[it.index]
+    }
+
+    val contentColors = arrayOf(
+      ContextCompat.getColorStateList(context, R.color.bpkWhite)!!,
+      ContextCompat.getColorStateList(context, R.color.bpkBlack)!!,
+      ContextCompat.getColorStateList(context, R.color.bpkWhite)!!,
+    )
+    contentColor = {
+      contentColors[it.index]
     }
   }
 

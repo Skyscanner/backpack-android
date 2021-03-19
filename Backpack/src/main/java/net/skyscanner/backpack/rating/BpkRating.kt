@@ -170,7 +170,8 @@ open class BpkRating private constructor(
   }
 
   private fun updateScore(value: Score) {
-    ViewCompat.setBackgroundTintList(badge, selectors.color(value))
+    ViewCompat.setBackgroundTintList(badge, selectors.backgroundColor(value))
+    badge.setTextColor(selectors.contentColor(value))
 
     if (appearance.size == Size.Icon) {
       badge.text = null
