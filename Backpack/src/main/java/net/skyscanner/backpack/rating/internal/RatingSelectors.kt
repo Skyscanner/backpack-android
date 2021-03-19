@@ -102,7 +102,7 @@ internal class RatingSelectors(
 
     val contentColors = arrayOf(
       ContextCompat.getColorStateList(context, R.color.bpkWhite)!!,
-      ContextCompat.getColorStateList(context, R.color.bpkSkyGray)!!,
+      ContextCompat.getColorStateList(context, R.color.bpkBlack)!!,
       ContextCompat.getColorStateList(context, R.color.bpkWhite)!!,
     )
     contentColor = {
