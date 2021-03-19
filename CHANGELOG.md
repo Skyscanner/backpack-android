@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 28.0.1
+
+**Updated:**
+  - `BpkRating` design
+
 # 28.0.0
 
 **Updated:**
