@@ -10,7 +10,7 @@
     android:layout_width="56dp"
     android:layout_height="56dp"
     android:layout_margin="@dimen/bpkSpacingLg"
-    android:contentDescription="@string/search"
+    android:contentDescription="Search"
     android:src="@drawable/bpk_search" />
 
   <net.skyscanner.backpack.fab.BpkFab
