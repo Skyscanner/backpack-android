@@ -14,6 +14,7 @@ Example of a Floating Action Button in XML
 <net.skyscanner.backpack.fab.BpkFab
   android:layout_width="56dp"
   android:layout_height="56dp"
+  android:contentDescription="@string/search"
   android:src="@drawable/bpk_search" />
 ```
 
@@ -25,6 +26,7 @@ import net.skyscanner.backpack.fab.BpkFab
 
 BpkFab(context).apply {
   setImageResource(R.drawable.bpk_search)
+  setContentDescription(resources.getString(R.string.search))
 }
 ```
 
