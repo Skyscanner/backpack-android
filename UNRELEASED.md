@@ -1,11 +1,9 @@
 # Unreleased
 
 > Place your changes below this line.
->
-**Updated:**
-  - Icons set
 
 **Updated:**
+  - Icons set
   - `BpkDialog` design
 
 ## How to write a good changelog entry
