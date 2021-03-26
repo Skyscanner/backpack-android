@@ -76,7 +76,7 @@ class DialogStory : Story() {
         )
 
         addActionButton(
-          BpkButton(context, BpkButton.Type.Secondary).apply {
+          BpkButtonLink(context).apply {
             text = "Skip"
             setOnClickListener {
               println("skipped")
@@ -98,7 +98,7 @@ class DialogStory : Story() {
         )
 
         addActionButton(
-          BpkButton(context, BpkButton.Type.Secondary).apply {
+          BpkButtonLink(context).apply {
             text = "Skip"
             setOnClickListener {
               println("skipped")
@@ -135,7 +135,7 @@ class DialogStory : Story() {
         )
 
         addActionButton(
-          BpkButton(context, BpkButton.Type.Secondary).apply {
+          BpkButtonLink(context).apply {
             text = "Cancel"
             setOnClickListener {
               println("canceled")
@@ -186,7 +186,7 @@ Safe travels!"""
         )
 
         addActionButton(
-          BpkButton(context, BpkButton.Type.Secondary).apply {
+          BpkButtonLink(context).apply {
             text = "Direct flights only"
             setOnClickListener {
               dialog.dismiss()
@@ -226,7 +226,7 @@ Safe travels!"""
         )
 
         addActionButton(
-          BpkButton(context, BpkButton.Type.Secondary).apply {
+          BpkButtonLink(context).apply {
             text = "Skip"
             setOnClickListener {
               println("skipped")

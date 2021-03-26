@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:top="36dp">
     <shape android:shape="rectangle">
-      <corners android:topLeftRadius="@dimen/bpkBorderRadiusSm" android:topRightRadius="@dimen/bpkBorderRadiusSm" />
+      <corners android:topLeftRadius="@dimen/bpkBorderRadiusMd" android:topRightRadius="@dimen/bpkBorderRadiusMd" />
       <solid android:color="@color/__dialogBackground" />
       <padding android:left="@dimen/bpk_dialog_padding_horizontal" android:right="@dimen/bpk_dialog_padding_horizontal"  />
     </shape>
