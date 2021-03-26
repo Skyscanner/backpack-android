@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 28.0.2
+
+**Updated:**
+  - Icons set
+  - `BpkDialog` design
+
 # 28.0.1
 
 **Updated:**
