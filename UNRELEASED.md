@@ -1,6 +1,9 @@
 # Unreleased
 
 > Place your changes below this line.
+>
+**Updated:**
+  - Icons set
 
 ## How to write a good changelog entry
 

@@ -58,7 +58,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
-    "bpk-svgs": "^12.1.10",
+    "bpk-svgs": "^12.5.2",
     "bpk-tokens": "^35.0.0",
     "danger": "^9.4.0",
     "del": "^4.0.0",
