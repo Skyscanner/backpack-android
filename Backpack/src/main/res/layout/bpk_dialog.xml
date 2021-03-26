@@ -48,6 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/bpk_dialog_spacing_title"
+            android:layout_marginStart="@dimen/bpkSpacingMd"
+            android:layout_marginEnd="@dimen/bpkSpacingMd"
             android:textAlignment="center"
             app:textStyle="xl"
             app:weight="emphasized"
@@ -57,10 +59,12 @@
             android:id="@+id/dialog_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/bpkSpacingMd"
+            android:layout_marginTop="@dimen/bpkSpacingBase"
             android:layout_marginBottom="@dimen/bpkSpacingLg"
+            android:layout_marginStart="@dimen/bpkSpacingMd"
+            android:layout_marginEnd="@dimen/bpkSpacingMd"
             android:textAlignment="center"
-            app:textStyle="lg"
+            app:textStyle="base"
             tools:text="Message" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
