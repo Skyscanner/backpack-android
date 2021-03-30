@@ -70,7 +70,7 @@ open class BpkStarRatingBase internal constructor(
   init {
     orientation = HORIZONTAL
     var starColor = ContextCompat.getColor(context, R.color.__starRatingStarColor)
-    var starFilledColor: Int = ContextCompat.getColor(context, R.color.bpkKolkata)
+    var starFilledColor: Int = ContextCompat.getColor(context, R.color.__starRatingStarColorFilled)
 
     context.theme.obtainStyledAttributes(
       attrs,
