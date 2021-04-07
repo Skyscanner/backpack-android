@@ -166,13 +166,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BACKPACK_DOCS_DEPLOY_TOKEN }}
 
       - name: Building release APK
-#        if: github.ref == 'refs/heads/main'
         run: |
           openssl aes-256-cbc -K $KEYSTORE_DECRYPT_KEY -iv $KEYSTORE_DECRYPT_IV -in backpack.android.demo.key.enc -out backpack.android.demo.key -d;
           ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
 
       - name: Publish APK to AppCenter
-#        if: github.ref == 'refs/heads/main'
         uses: wzieba/AppCenter-Github-Action@v1
           with:
             appName: Backpack/Backpack Android
