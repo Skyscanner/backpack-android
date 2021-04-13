@@ -173,6 +173,13 @@ jobs:
           echo KEYSTORE_ALIAS=$KEYSTORE_ALIAS >> local.properties
           echo KEYSTORE_ALIAS_PASSWORD=$KEYSTORE_ALIAS_PASSWORD >> local.properties
           ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          $KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_ALIAS_PASSWORD: ${{ secrets.KEYSTORE_ALIAS_PASSWORD }}
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+          KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
+          KEYSTORE_DECRYPT_IV: ${{ secrets.$KEYSTORE_DECRYPT_IV }}
 
       - name: Publish APK to AppCenter
         uses: wzieba/AppCenter-Github-Action@v1
@@ -183,10 +190,3 @@ jobs:
           file: app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk
           notifyTesters: false
           debug: false
-        env:
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          $KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
-          KEYSTORE_ALIAS_PASSWORD: ${{ secrets.KEYSTORE_ALIAS_PASSWORD }}
-          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
-          KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
-          KEYSTORE_DECRYPT_IV: ${{ secrets.$KEYSTORE_DECRYPT_IV }}
