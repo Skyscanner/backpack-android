@@ -12,7 +12,7 @@ defaults:
     shell: bash -l {0}
 
 env:
-  flavour: Oss
+  flavour: oss
   config: Debug
   api-level: 21
 
