@@ -12,7 +12,7 @@ defaults:
     shell: bash -l {0}
 
 env:
-  flavour: Oss
+  flavour: oss
   config: Debug
   api-level: 21
 
@@ -165,19 +165,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.BACKPACK_DOCS_DEPLOY_TOKEN }}
 
-#      No need for now - need to create AppCenter app first
-#      - name: Building release APK
-#        run: |
-#          openssl aes-256-cbc -K $encrypted_8363dc54ada0_key -iv $encrypted_8363dc54ada0_iv -in backpack.android.demo.key.enc -out backpack.android.demo.key -d;
-#          ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
-#
-#      - name: Publish APK to AppCenter
-#        if: github.ref == 'refs/heads/main'
-#        uses: wzieba/AppCenter-Github-Action@v1
-#          with:
-#            appName: Skyscanner/Backpack-Android
-#            token: ${{secrets.APP_CENTER_TOKEN}}
-#            group: Testers
-#            file: app/build/outputs/apk/oss/release/app-oss-release.apk
-#            notifyTesters: false
-#            debug: false
+      - name: Building release APK
+        run: |
+          openssl aes-256-cbc -K $KEYSTORE_DECRYPT_KEY -iv $KEYSTORE_DECRYPT_IV -in backpack.android.demo.key.enc -out backpack.android.demo.key -d;
+          ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_ALIAS_PASSWORD: ${{ secrets.KEYSTORE_ALIAS_PASSWORD }}
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+          KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
+          KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
+
+      - name: Publish APK to AppCenter
+        uses: wzieba/AppCenter-Github-Action@v1
+        with:
+          appName: Backpack/Backpack-Android
+          token: ${{secrets.APP_CENTER_TOKEN}}
+          file: app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk
+          notifyTesters: false
+          debug: false
