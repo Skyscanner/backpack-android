@@ -178,7 +178,7 @@ jobs:
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
 
       - name: Publish APK to AppCenter
-        uses: devussy/AppCenter-Distribute-Github-Action@v1.0.5
+        uses: devussy/AppCenter-Distribute-Github-Action@v1.0.2
         with:
           app: Backpack/Backpack-Android
           token: ${{secrets.APP_CENTER_TOKEN}}
