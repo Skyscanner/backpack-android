@@ -184,7 +184,7 @@ jobs:
         with:
           app: Backpack/Backpack-Android
           token: ${{secrets.APP_CENTER_TOKEN}}
-          group: Collaborators
+          group: Everyone
           file: app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk
           silent: true
           releaseNotes: Test
