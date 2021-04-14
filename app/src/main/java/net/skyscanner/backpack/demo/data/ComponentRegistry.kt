@@ -110,7 +110,7 @@ private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
 object ComponentRegistry {
 
   private val COMPONENTS_TREE = mapOf(
-    "Badge Test" story NodeData { Story of R.layout.fragment_badge },
+    "Badge" story NodeData { Story of R.layout.fragment_badge },
     "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
     "Bottom Sheet" story NodeData { Story of R.layout.fragment_bottom_sheet scrollable false },
