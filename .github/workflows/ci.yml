@@ -168,10 +168,6 @@ jobs:
       - name: Building release APK
         run: |
           openssl aes-256-cbc -K $KEYSTORE_DECRYPT_KEY -iv $KEYSTORE_DECRYPT_IV -in backpack.android.demo.key.enc -out backpack.android.demo.key -d;
-          echo MAPS_API_KEY=$MAPS_API_KEY >> local.properties
-          echo KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD >> local.properties
-          echo KEYSTORE_ALIAS=$KEYSTORE_ALIAS >> local.properties
-          echo KEYSTORE_ALIAS_PASSWORD=$KEYSTORE_ALIAS_PASSWORD >> local.properties
           ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -187,7 +183,6 @@ jobs:
         with:
           appName: Backpack/Backpack-Android
           token: ${{secrets.APP_CENTER_TOKEN}}
-          group: Testers
           file: app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk
           notifyTesters: false
           debug: false
