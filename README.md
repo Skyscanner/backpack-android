@@ -27,7 +27,7 @@ repositories {
 #### Note that Backpack is expected to be used with AndroidX. Please refer to [AndroidX migration guide](https://developer.android.com/jetpack/androidx/migrate) to setup.
 
 ### Demo application
-The Backpack demo application is a good way of referring to the variants available for a component and their correct usage. The code is available under `/app` directory. [The app can be downloaded from App Center](https://install.appcenter.ms/orgs/Backpack/apps/Backpack-Android) or by scanning the QR code below.
+The Backpack demo application is a good way of referring to the variants available for a component and their correct usage. The code is available under `/app` directory. [The app can be downloaded from App Center](https://install.appcenter.ms/orgs/backpack/apps/backpack-android/distribution_groups/everyone) or by scanning the QR code below.
 
 ![QR code](qr.png)
 
