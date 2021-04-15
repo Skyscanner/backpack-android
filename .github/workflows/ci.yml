@@ -166,7 +166,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BACKPACK_DOCS_DEPLOY_TOKEN }}
 
       - name: Building release APK
-        if: contains('refs/tags/', github.ref)
+#        if: contains('refs/tags/', github.ref)
         run: |
           openssl aes-256-cbc -K $KEYSTORE_DECRYPT_KEY -iv $KEYSTORE_DECRYPT_IV -in backpack.android.demo.key.enc -out backpack.android.demo.key -d;
           ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
@@ -179,7 +179,7 @@ jobs:
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
 
       - name: Publish APK to AppCenter
-        if: contains('refs/tags/', github.ref)
+#        if: contains('refs/tags/', github.ref)
         uses: devussy/AppCenter-Distribute-Github-Action@v1.0.2
         with:
           app: Backpack/Backpack-Android
