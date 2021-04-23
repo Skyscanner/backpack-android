@@ -11,15 +11,18 @@
     android:id="@+id/bpk_nudger_decrement"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:contentDescription="−"
     app:buttonIcon="@drawable/bpk_minus_sm"
     app:buttonIconPosition="icon_only"
-    app:buttonType="secondary" />
+    app:buttonType="secondary"
+    tools:ignore="HardcodedText" />
 
   <net.skyscanner.backpack.text.BpkText
     android:id="@+id/bpk_nudger_label"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/bpkSpacingMd"
+    android:accessibilityLiveRegion="polite"
     android:gravity="center"
     android:minWidth="24sp"
     app:weight="emphasized"
@@ -29,7 +32,9 @@
     android:id="@+id/bpk_nudger_increment"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:contentDescription="+"
     app:buttonIcon="@drawable/bpk_plus_sm"
     app:buttonIconPosition="icon_only"
-    app:buttonType="secondary" />
+    app:buttonType="secondary"
+    tools:ignore="HardcodedText" />
 </merge>
