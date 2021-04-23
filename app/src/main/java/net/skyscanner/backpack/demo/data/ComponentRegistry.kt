@@ -220,6 +220,7 @@ object ComponentRegistry {
         "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL }
       )
     ),
+    "Nudger" story NodeData { Story of R.layout.fragment_nudger },
     "Overlay" story NodeData { Story of R.layout.fragment_overlay },
     "Panel" story NodeData { Story of R.layout.fragment_panel },
     "RadioButton" story NodeData { Story of R.layout.fragment_radio_button },
