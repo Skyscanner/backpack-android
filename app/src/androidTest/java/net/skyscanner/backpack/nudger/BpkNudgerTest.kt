@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.nudger
 
+import android.view.View
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.createThemedContext
@@ -64,6 +65,12 @@ class BpkNudgerTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestNudger_withTheme() {
     val nudger = BpkNudger(createThemedContext(testContext))
+    snap(nudger)
+  }
+
+  @Test
+  fun screenshotTestNudger_rtl() {
+    nudger.layoutDirection = View.LAYOUT_DIRECTION_RTL
     snap(nudger)
   }
 }
