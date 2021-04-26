@@ -232,6 +232,12 @@
     </attr>
   </declare-styleable>
 
+  <declare-styleable name="BpkNudger">
+    <attr name="nudgerMinValue" format="integer" />
+    <attr name="nudgerMaxValue" format="integer" />
+    <attr name="nudgerValue" format="integer" />
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />

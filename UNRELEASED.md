@@ -21,6 +21,7 @@ See [`CHANGELOG.md`](CHANGELOG.md) for real-world examples of good changelog ent
   - Upgraded `fire` dependency to `3.0.0`.
 
 **Added:**
+  - `BpkNudger` component
 
 - `bpk-component-infinity-gauntlet`:
   - New `timeStone` prop for controlling time. See &lt;link to docs site&gt;.

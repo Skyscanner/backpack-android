@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/App.Story"
+  android:orientation="vertical"
+  tools:ignore="HardcodedText">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
+    android:text="Standard"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.nudger.BpkNudger
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:nudgerValue="5" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/bpkSpacingLg"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
+    android:text="Minus Disabled"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.nudger.BpkNudger
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="@dimen/bpkSpacingLg"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
+    android:text="Plus Disabled"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.nudger.BpkNudger
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:nudgerMaxValue="10"
+    app:nudgerValue="10" />
+
+</LinearLayout>
