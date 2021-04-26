@@ -14,8 +14,8 @@ Example of a nudger in XML
 <net.skyscanner.backpack.nudger.BpkNudger
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  app:nudgerMaximumValue="10"
-  app:nudgerMinimumValue="0"
+  app:nudgerMaxValue="10"
+  app:nudgerMinValue="0"
   app:nudgerValue="5" />
 ```
 
@@ -25,8 +25,8 @@ Example of a nudger in Kotlin
 import net.skyscanner.backpack.nudger.BpkNudger
 
 BpkNudger(context).apply {
-   maximumValue = 10
-   minimumValue = 0
+   maxValue = 10
+   minValue = 0
    value = 5
 }
 ```

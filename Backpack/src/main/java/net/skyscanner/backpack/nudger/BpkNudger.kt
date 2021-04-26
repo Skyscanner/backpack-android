@@ -52,7 +52,7 @@ open class BpkNudger @JvmOverloads constructor(
   var value: Int = 0
     set(value) {
       if (field != value) {
-        if (value < minimumValue || value > maximumValue) {
+        if (value < minValue || value > maxValue) {
           return
         }
         field = value
@@ -60,23 +60,23 @@ open class BpkNudger @JvmOverloads constructor(
       }
     }
 
-  var minimumValue: Int = 0
-    set(minimumValue) {
-      if (minimumValue > maximumValue) {
-        throw IllegalArgumentException("Cannot set minimumValue $minimumValue when maximumValue is $maximumValue")
+  var minValue: Int = 0
+    set(minValue) {
+      if (minValue > maxValue) {
+        throw IllegalArgumentException("Cannot set minValue $minValue when maxValue is $maxValue")
       }
-      field = minimumValue
-      value = max(value, minimumValue)
+      field = minValue
+      value = max(value, minValue)
       update()
     }
 
-  var maximumValue: Int = 100
-    set(maximumValue) {
-      if (maximumValue < minimumValue) {
-        throw IllegalArgumentException("Cannot set maximumValue $maximumValue when minimumValue is $minimumValue")
+  var maxValue: Int = 100
+    set(maxValue) {
+      if (maxValue < minValue) {
+        throw IllegalArgumentException("Cannot set maxValue $maxValue when minValue is $minValue")
       }
-      field = maximumValue
-      value = min(value, maximumValue)
+      field = maxValue
+      value = min(value, maxValue)
       update()
     }
 
@@ -89,8 +89,8 @@ open class BpkNudger @JvmOverloads constructor(
       R.styleable.BpkNudger,
       defStyleAttr, 0
     ).use {
-      minimumValue = it.getInt(R.styleable.BpkNudger_nudgerMinimumValue, minimumValue)
-      maximumValue = it.getInt(R.styleable.BpkNudger_nudgerMaximumValue, maximumValue)
+      minValue = it.getInt(R.styleable.BpkNudger_nudgerMinValue, minValue)
+      maxValue = it.getInt(R.styleable.BpkNudger_nudgerMaxValue, maxValue)
       value = it.getInt(R.styleable.BpkNudger_nudgerValue, value)
     }
 
@@ -105,8 +105,8 @@ open class BpkNudger @JvmOverloads constructor(
   }
 
   private fun update() {
-    decrementButton.isEnabled = value > minimumValue
-    incrementButton.isEnabled = value < maximumValue
+    decrementButton.isEnabled = value > minValue
+    incrementButton.isEnabled = value < maxValue
     label.text = value.toString()
   }
 }

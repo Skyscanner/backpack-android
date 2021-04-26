@@ -30,7 +30,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    app:nudgerMaximumValue="10"
+    app:nudgerMaxValue="10"
     app:nudgerValue="10" />
 
   <net.skyscanner.backpack.text.BpkText

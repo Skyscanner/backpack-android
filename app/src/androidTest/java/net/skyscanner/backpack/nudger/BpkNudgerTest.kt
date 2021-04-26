@@ -51,7 +51,7 @@ class BpkNudgerTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestNudger_plusDisabled() {
     nudger.value = 10
-    nudger.maximumValue = 10
+    nudger.maxValue = 10
     snap(nudger)
   }
 
