@@ -18,15 +18,18 @@
 
 package net.skyscanner.backpack.nudger
 
-import android.content.Context
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.nhaarman.mockitokotlin2.mock
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.TestActivity
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.verifyNoInteractions
@@ -35,24 +38,27 @@ import org.mockito.Mockito.verifyNoInteractions
 class BpkNudgerTest {
 
   private lateinit var subject: BpkNudger
-  private lateinit var context: Context
+
+  @get:Rule
+  internal var activityRule: ActivityScenarioRule<TestActivity> =
+    ActivityScenarioRule(TestActivity::class.java)
 
   @Before
   fun setUp() {
-    context = InstrumentationRegistry.getInstrumentation().targetContext
+    val context = InstrumentationRegistry.getInstrumentation().targetContext
     subject = BpkNudger(context)
   }
 
   @Test
   fun test_listenerIsNotInvoked_onSet() {
-    val listener = { _: Int -> }
+    val listener = mock<(Int) -> Unit>()
     subject.onChangeListener = listener
     verifyNoInteractions(listener)
   }
 
   @Test
   fun test_listenerIsNotInvoked_whenValueSet() {
-    val listener = { _: Int -> }
+    val listener = mock<(Int) -> Unit>()
     subject.onChangeListener = listener
     subject.value = 5
     verifyNoInteractions(listener)
@@ -60,6 +66,7 @@ class BpkNudgerTest {
 
   @Test
   fun test_listenerIsInvoked_whenValueIncreased() {
+    activityRule.scenario.onActivity { it.setContentView(subject) }
     var lastCurrent = 0
     var invocationsCount = 0
     val listener = { current: Int ->
@@ -74,6 +81,7 @@ class BpkNudgerTest {
 
   @Test
   fun test_listenerIsInvoked_whenValueDecreased() {
+    activityRule.scenario.onActivity { it.setContentView(subject) }
     var lastCurrent = 0
     var invocationsCount = 0
     val listener = { current: Int ->
