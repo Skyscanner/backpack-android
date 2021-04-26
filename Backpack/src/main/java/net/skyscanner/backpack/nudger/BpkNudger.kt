@@ -52,10 +52,7 @@ open class BpkNudger @JvmOverloads constructor(
   var value: Int = 0
     set(value) {
       if (field != value) {
-        if (value < minValue || value > maxValue) {
-          return
-        }
-        field = value
+        field = value.coerceIn(minValue, maxValue)
         update()
       }
     }
@@ -95,11 +92,11 @@ open class BpkNudger @JvmOverloads constructor(
     }
 
     decrementButton.setOnClickListener {
-      value -= 1
+      value--
       onChangeListener?.invoke(value)
     }
     incrementButton.setOnClickListener {
-      value += 1
+      value++
       onChangeListener?.invoke(value)
     }
   }
