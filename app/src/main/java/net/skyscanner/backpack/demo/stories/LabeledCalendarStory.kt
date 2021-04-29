@@ -20,11 +20,8 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import android.widget.RadioGroup
-import kotlinx.android.synthetic.main.calendar_selection_type.range
-import kotlinx.android.synthetic.main.calendar_selection_type.single
-import kotlinx.android.synthetic.main.fragment_calendar_default.bpkCalendar
-import kotlinx.android.synthetic.main.fragment_calendar_default.selection_type
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.calendar.presenter.SelectionType
@@ -53,13 +50,18 @@ class LabeledCalendarStory : Story() {
   }
 
   private fun initSelectionTypeSwitcher() {
+    val single = requireView().findViewById<RadioButton>(R.id.single)
+    val range = requireView().findViewById<RadioButton>(R.id.range)
+    val selectionType = requireView().findViewById<RadioGroup>(R.id.selection_type)
+    val bpkCalendar = requireView().findViewById<BpkCalendar>(R.id.bpkCalendar)
+
     single.text = "Single"
     range.text = "Range"
     range.isChecked = true
 
-    selection_type.visibility = View.VISIBLE
+    selectionType.visibility = View.VISIBLE
 
-    (selection_type as? RadioGroup)?.setOnCheckedChangeListener { _, checkedId ->
+    selectionType.setOnCheckedChangeListener { _, checkedId ->
       when (checkedId) {
         R.id.single -> {
           controller = ExampleBpkCalendarController(requireContext(), SelectionType.SINGLE, calendarLabels = createLabels())
@@ -73,16 +75,11 @@ class LabeledCalendarStory : Story() {
   }
 
   private fun createLabels(startDate: LocalDate = LocalDate.now()) = mapOf(
-    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 1) to
-      CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
-    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 2) to
-      CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
-    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 3) to
-      CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
-    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 4) to
-      CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
-    LocalDate.of(startDate.year, startDate.month, startDate.dayOfMonth + 5) to
-      CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
+    startDate.plusDays(1) to CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
+    startDate.plusDays(2) to CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
+    startDate.plusDays(3) to CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
+    startDate.plusDays(4) to CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
+    startDate.plusDays(5) to CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
   )
 
   companion object {
