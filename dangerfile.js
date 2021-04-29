@@ -17,31 +17,19 @@
  */
 
 // See http://danger.systems/js if you're not sure what this is.
-
 import fs from 'fs';
 
 import { includes } from 'lodash';
-import { danger, fail, warn, message } from 'danger';
+import { danger, fail, warn } from 'danger';
 
-import meta from './meta.json';
-
-const BACKPACK_SQUAD_MEMBERS = meta.maintainers.map(maintainer => maintainer.github);
-
-const author = danger.github.pr.user.login;
-const isPrExternal = !BACKPACK_SQUAD_MEMBERS.includes(author);
+const currentYear = new Date().getFullYear();
+const shouldContainLicensingInformation = filePath =>
+  filePath.match(/\.(js|sh|kt|java)$/) && !filePath.includes('dist/') && !filePath.includes('build/');
 
 const createdFiles = danger.git.created_files;
 const modifiedFiles = danger.git.modified_files;
 const fileChanges = [...modifiedFiles, ...createdFiles];
 const declaredTrivial = danger.github.pr.title.includes('#trivial');
-
-// Be nice to our neighbours.
-if (isPrExternal) {
-  message('Thanks for the PR 🎉.');
-  warn(
-    `If this is coming from a fork, CI will fail. This is a known limitation due to CI not sharing secrets to forked repos. Somebody from Backpack can check this manually.`,
-  );
-}
 
 // If any code have changed, the UNRELEASED log should have been updated.
 const unreleasedModified = includes(modifiedFiles, 'UNRELEASED.md');
@@ -58,7 +46,7 @@ if (lockFileUpdated) {
 
 // New files should include the Backpack license heading.
 const unlicensedFiles = createdFiles.filter(filePath => {
-  if (filePath.match(/\.(js|sh|kt|java)$/) && !filePath.includes('dist/') && !filePath.includes('build/')) {
+  if (shouldContainLicensingInformation(filePath)) {
     const fileContent = fs.readFileSync(filePath);
     return !fileContent.includes('Licensed under the Apache License, Version 2.0 (the "License")');
   }
@@ -66,4 +54,16 @@ const unlicensedFiles = createdFiles.filter(filePath => {
 });
 if (unlicensedFiles.length > 0) {
   fail(`These new files do not include the license heading: ${unlicensedFiles.join(', ')}`);
+}
+
+// Updated files should include the latest year in licensing header.
+const outdatedLicenses = fileChanges.filter(filePath => {
+  if (shouldContainLicensingInformation(filePath) && !unlicensedFiles.includes(filePath)) {
+    const fileContent = fs.readFileSync(filePath);
+    return !fileContent.includes(`Copyright 2018-${currentYear} Skyscanner Ltd`);
+  }
+  return false;
+});
+if (outdatedLicenses.length > 0) {
+  fail(`These files contain an outdated licensing header: ${outdatedLicenses.join(', ')}. Please update to ${currentYear}.`);
 }
