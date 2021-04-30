@@ -61,10 +61,10 @@ class ExampleBpkCalendarController(
   private val context: Context,
   override val selectionType: SelectionType
  ) : BpkCalendarController(selectionType) {
-  override fun onRangeSelected(selection: CalendarSelection) {
-      if (selection is CalendarRange) {
+  override fun onRangeSelected(range: CalendarSelection) {
+      if (range is CalendarRange) {
          // handles range
-      } else if (selection is SingleDay) {
+      } else if (range is SingleDay) {
          // handles single selection
       }
   }
