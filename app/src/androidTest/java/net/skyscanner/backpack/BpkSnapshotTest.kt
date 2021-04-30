@@ -18,30 +18,22 @@
 
 package net.skyscanner.backpack
 
-import android.content.Context
 import android.os.Looper
-import android.view.ContextThemeWrapper
 import android.view.View
 import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
-import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.util.BpkTheme
 
 open class BpkSnapshotTest {
 
   private var height = 100
   private var width = 100
-  var testContext: Context =
-    BpkTheme.wrapContextWithDefaults(
-      ContextThemeWrapper(
-        InstrumentationRegistry.getInstrumentation().targetContext,
-        R.style.AppTheme
-      )
-    )
+
+  var testContext = BpkTestVariant.current.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
 
   protected fun setupView(view: View) {
+    view.layoutDirection = testContext.resources.configuration.layoutDirection
     ViewHelpers.setupView(view)
       .setExactHeightDp(height)
       .setExactWidthDp(width)

@@ -21,10 +21,10 @@ package net.skyscanner.backpack.demo
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import net.skyscanner.backpack.demo.data.SharedPreferences
+import androidx.annotation.StyleRes
 import net.skyscanner.backpack.util.BpkTheme
 
-object ThemeApplier : Application.ActivityLifecycleCallbacks {
+data class ThemeApplier(@StyleRes private val theme: Int) : Application.ActivityLifecycleCallbacks {
   override fun onActivityPaused(activity: Activity) {}
   override fun onActivityResumed(activity: Activity) {}
   override fun onActivityStarted(activity: Activity) {}
@@ -32,7 +32,7 @@ object ThemeApplier : Application.ActivityLifecycleCallbacks {
   override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
   override fun onActivityStopped(activity: Activity) {}
   override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-    activity.theme?.applyStyle(SharedPreferences.getTheme(activity), true)
+    activity.theme?.applyStyle(theme, true)
     activity.let { BpkTheme.applyDefaultsToContext(it) }
   }
 }
