@@ -20,13 +20,11 @@ package net.skyscanner.backpack.badge
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-
 class BpkBadgeTest : BpkSnapshotTest() {
 
   @Before
@@ -89,13 +87,6 @@ class BpkBadgeTest : BpkSnapshotTest() {
   fun screenshotTestBadgeOutline() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Outline
-    badge.text = "Message"
-    snap(badge)
-  }
-
-  @Test
-  fun screenshotTestBadgeDefault_withTheme() {
-    val badge = BpkBadge(createThemedContext(testContext))
     badge.text = "Message"
     snap(badge)
   }

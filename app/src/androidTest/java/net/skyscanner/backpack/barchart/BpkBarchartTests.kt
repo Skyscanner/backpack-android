@@ -155,22 +155,6 @@ class BpkBarchartTests : BpkSnapshotTest() {
     }
   }
 
-  @Test
-  fun screenshotTestBarChart_Themed() {
-    init(R.style.LondonTheme) {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0)
-        ),
-        legend = BpkBarChart.Legend(
-          activeTitle = "Enabled",
-          inactiveTitle = "Disabled"
-        )
-      )
-    }
-    capture()
-  }
-
   private inline fun init(@StyleRes theme: Int = 0, crossinline block: BpkBarChart.() -> Unit) {
     activity.runOnUiThread {
       if (theme != 0) {

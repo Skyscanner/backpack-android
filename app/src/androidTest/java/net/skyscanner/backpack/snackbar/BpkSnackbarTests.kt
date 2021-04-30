@@ -23,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
@@ -53,12 +52,6 @@ class BpkSnackbarTests : BpkSnapshotTest() {
     }
   }
 
-  private val themedRoot by unsafeLazy {
-    FrameLayout(createThemedContext(testContext)).apply {
-      activity.setContentView(this)
-    }
-  }
-
   @Test
   fun screenshotTestSnackbar_Default() {
     capture {
@@ -70,21 +63,6 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   fun screenshotTestSnackbar_DefaultWithAction() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setAction("Action") {}
-    }
-  }
-
-  @Test
-  fun screenshotTestSnackbar_DefaultThemed() {
-    capture {
-      BpkSnackbar.make(themedRoot, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-    }
-  }
-
-  @Test
-  fun screenshotTestSnackbar_DefaultWithActionThemed() {
-    capture {
-      BpkSnackbar.make(themedRoot, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setAction("Action") {}
     }
   }

@@ -24,7 +24,6 @@ import android.text.SpannableStringBuilder
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -48,13 +47,6 @@ class BpkPrimaryColorSpanTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestPrimaryColorSpan_Custom() {
     val span = BpkPrimaryColorSpan(testContext)
-    textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-    snap(textView)
-  }
-
-  @Test
-  fun screenshotTestPrimaryColorSpan_withTheme() {
-    val span = BpkPrimaryColorSpan(createThemedContext(testContext))
     textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
     snap(textView)
   }

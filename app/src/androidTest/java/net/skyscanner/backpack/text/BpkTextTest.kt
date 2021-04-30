@@ -20,14 +20,12 @@ package net.skyscanner.backpack.text
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-
 class BpkTextTest : BpkSnapshotTest() {
 
   @Before
@@ -206,22 +204,8 @@ class BpkTextTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestTextDefault_withTheme() {
-    val text = BpkText(createThemedContext(testContext))
-    text.text = "Message"
-    snap(text)
-  }
-
-  @Test
   fun screenshotTestTextLink() {
     val text = BpkText(testContext)
-    text.setText(R.string.txt_lorem_ipsum_link)
-    snap(text)
-  }
-
-  @Test
-  fun screenshotTestTextLink_with_Theme() {
-    val text = BpkText(createThemedContext(testContext))
     text.setText(R.string.txt_lorem_ipsum_link)
     snap(text)
   }

@@ -19,10 +19,8 @@
 package net.skyscanner.backpack.starrating
 
 import android.graphics.Color
-import android.view.View
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -103,22 +101,6 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun screenshotTestStarRating_6withMax5() {
     rating.maxRating = 5
     rating.rating = 6.0f
-    snap(rating)
-  }
-
-  @Test
-  fun screenshotTestStarRating_withTheme() {
-    val rating = BpkStarRating(createThemedContext(testContext)).apply { setBackgroundColor(Color.WHITE) }
-    rating.maxRating = 5
-    rating.rating = 2.5f
-    snap(rating)
-  }
-
-  @Test
-  fun screenshotTestStarRating_rtl() {
-    rating.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    rating.maxRating = 5
-    rating.rating = 2.5f
     snap(rating)
   }
 }

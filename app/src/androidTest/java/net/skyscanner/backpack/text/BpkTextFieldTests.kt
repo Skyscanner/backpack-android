@@ -18,11 +18,9 @@
 
 package net.skyscanner.backpack.text
 
-import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Ignore
@@ -30,7 +28,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-
 class BpkTextFieldTests : BpkSnapshotTest() {
 
   private val subject = BpkTextField(testContext).also(::init)
@@ -89,69 +86,6 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   fun screenshotTestTextField_IconEnd_withTint() {
     subject.setText("")
     subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
-    snap(subject)
-  }
-
-  @Test
-  fun screenshotTestTextField_withTheme() {
-    val subject = BpkTextField(createThemedContext(testContext)).also(::init)
-    snap(subject)
-  }
-
-  @Test
-  fun screenshotTestTextField_Default_RTL() {
-    subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    snap(subject)
-  }
-
-  @Test
-  fun screenshotTestTextField_Hint_RTL() {
-    subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    subject.setText("")
-    snap(subject)
-  }
-
-  @Test
-  fun screenshotTestTextField_Disabled_RTL() {
-    subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    subject.isEnabled = false
-    snap(subject)
-  }
-
-  @Test
-  fun screenshotTestTextField_IconStart_RTL() {
-    subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
-    snap(subject)
-  }
-
-  @Test
-  fun screenshotTestTextField_IconEnd_RTL() {
-    subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
-    snap(subject)
-  }
-
-  @Test
-  fun screenshotTestTextField_IconStart_withTint_RTL() {
-    subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    subject.setText("")
-    subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
-    snap(subject)
-  }
-
-  @Test
-  fun screenshotTestTextField_IconEnd_withTint_RTL() {
-    subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    subject.setText("")
-    subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
-    snap(subject)
-  }
-
-  @Test
-  fun screenshotTestTextField_withTheme_RTL() {
-    val subject = BpkTextField(createThemedContext(testContext)).also(::init)
-    subject.layoutDirection = View.LAYOUT_DIRECTION_RTL
     snap(subject)
   }
 }

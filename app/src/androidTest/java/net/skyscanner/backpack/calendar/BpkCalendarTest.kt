@@ -40,7 +40,6 @@ import net.skyscanner.backpack.calendar.presenter.CurrentDateProvider
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 import net.skyscanner.backpack.calendar.presenter.MonthFooterAdapter
 import net.skyscanner.backpack.calendar.presenter.SelectionType
-import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.multiColoredExampleCalendarColoring
@@ -389,36 +388,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
     controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 9)))
-    snap(wrapWithBackground(calendar))
-  }
-
-  @Test
-  fun screenshotTestCalendarWithStartAndEndDateSelected_withTheme() {
-    val calendar = BpkCalendar(createThemedContext(testContext))
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31)
-    )
-
-    calendar.setController(controller)
-    val wrapped = wrapWithBackground(calendar)
-
-    val asyncScreenshot = prepareForAsyncTest()
-
-    selectStartEnd(wrapped, asyncScreenshot)
-  }
-
-  @Test
-  fun screenshotTestCalendarPast_withTheme() {
-    val calendar = BpkCalendar(createThemedContext(testContext))
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2017, 1, 2),
-      LocalDate.of(2017, 12, 31)
-    )
-
-    calendar.setController(controller)
     snap(wrapWithBackground(calendar))
   }
 

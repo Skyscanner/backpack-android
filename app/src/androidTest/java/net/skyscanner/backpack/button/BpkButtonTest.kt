@@ -22,14 +22,11 @@ import android.widget.FrameLayout
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-
-@RunWith(AndroidJUnit4::class)
 
 /**
  * FIXME
@@ -41,7 +38,7 @@ import org.junit.runner.RunWith
  * `setCompoundDrawablesWithIntrinsicBounds` on API-21 which is required to support RTL. We can add
  * them when we update the emulators on the CI or move to a device farm for snapshot testing
  */
-
+@RunWith(AndroidJUnit4::class)
 class BpkButtonTest : BpkSnapshotTest() {
 
   @Before
@@ -176,34 +173,6 @@ class BpkButtonTest : BpkSnapshotTest() {
     val button = BpkButton(testContext, BpkButton.Type.Outline)
     button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.ICON_ONLY
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicPrimary_withTheme() {
-    val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Primary)
-    button.text = "Message"
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicSecondary_withTheme() {
-    val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Secondary)
-    button.text = "Message"
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicFeatured_withTheme() {
-    val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Featured)
-    button.text = "Message"
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicDestructive_withTheme() {
-    val button = BpkButton(createThemedContext(testContext), BpkButton.Type.Destructive)
-    button.text = "Message"
     snap(wrap(button))
   }
 
