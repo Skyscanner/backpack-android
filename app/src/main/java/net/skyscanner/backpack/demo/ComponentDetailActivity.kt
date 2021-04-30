@@ -22,8 +22,9 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
-import kotlinx.android.synthetic.main.activity_component_detail.*
+import androidx.appcompat.widget.Toolbar
 import net.skyscanner.backpack.demo.data.ComponentRegistry
+import net.skyscanner.backpack.util.unsafeLazy
 
 /**
  * An activity representing a single Component detail screen. This
@@ -33,10 +34,13 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry
  */
 class ComponentDetailActivity : BpkBaseActivity() {
 
+  private val detailToolbar by unsafeLazy { findViewById<Toolbar>(R.id.detail_toolbar) }
+  private val componentDetailContainer by unsafeLazy { findViewById<View>(R.id.component_detail_container) }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_component_detail)
-    setSupportActionBar(detail_toolbar)
+    setSupportActionBar(detailToolbar)
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     // savedInstanceState is non-null when there is fragment state
@@ -53,7 +57,7 @@ class ComponentDetailActivity : BpkBaseActivity() {
       // using a fragment transaction.
       val itemId = intent.getStringExtra(ComponentDetailFragment.ARG_ITEM_ID)
         ?: error("ComponentDetailActivity intent must have ${ComponentDetailFragment.ARG_ITEM_ID} set")
-      detail_toolbar.title = itemId
+      detailToolbar.title = itemId
 
       val automationMode = intent.getBooleanExtra(ComponentDetailFragment.AUTOMATION_MODE, false)
 
@@ -79,7 +83,7 @@ class ComponentDetailActivity : BpkBaseActivity() {
   }
 
   fun toggleToolbar() {
-    detail_toolbar.visibility = if (detail_toolbar.visibility == View.VISIBLE) {
+    detailToolbar.visibility = if (detailToolbar.visibility == View.VISIBLE) {
       View.GONE
     } else {
       View.VISIBLE
@@ -96,10 +100,10 @@ class ComponentDetailActivity : BpkBaseActivity() {
       toggleToolbar()
     }
     if (keyCode == KeyEvent.KEYCODE_D && event?.isShiftPressed == true) {
-      if (component_detail_container.layoutDirection == View.LAYOUT_DIRECTION_LTR) {
-        component_detail_container.layoutDirection = View.LAYOUT_DIRECTION_RTL
+      if (componentDetailContainer.layoutDirection == View.LAYOUT_DIRECTION_LTR) {
+        componentDetailContainer.layoutDirection = View.LAYOUT_DIRECTION_RTL
       } else {
-        component_detail_container.layoutDirection = View.LAYOUT_DIRECTION_LTR
+        componentDetailContainer.layoutDirection = View.LAYOUT_DIRECTION_LTR
       }
     }
     return super.onKeyUp(keyCode, event)

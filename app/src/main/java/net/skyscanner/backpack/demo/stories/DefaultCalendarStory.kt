@@ -20,11 +20,8 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import android.widget.RadioGroup
-import kotlinx.android.synthetic.main.calendar_selection_type.range
-import kotlinx.android.synthetic.main.calendar_selection_type.single
-import kotlinx.android.synthetic.main.fragment_calendar_default.bpkCalendar
-import kotlinx.android.synthetic.main.fragment_calendar_default.selection_type
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
@@ -45,13 +42,18 @@ class DefaultCalendarStory : Story() {
   }
 
   private fun initSelectionTypeSwitcher() {
+    val single = requireView().findViewById<RadioButton>(R.id.single)
+    val range = requireView().findViewById<RadioButton>(R.id.range)
+    val selectionType = requireView().findViewById<RadioGroup>(R.id.selection_type)
+    val bpkCalendar = requireView().findViewById<BpkCalendar>(R.id.bpkCalendar)
+
     single.text = "Single"
     range.text = "Range"
     range.isChecked = true
 
-    selection_type.visibility = View.VISIBLE
+    selectionType.visibility = View.VISIBLE
 
-    (selection_type as? RadioGroup)?.setOnCheckedChangeListener { _, checkedId ->
+    selectionType.setOnCheckedChangeListener { _, checkedId ->
       when (checkedId) {
         R.id.single -> {
           controller = ExampleBpkCalendarController(requireContext(), SelectionType.SINGLE)
