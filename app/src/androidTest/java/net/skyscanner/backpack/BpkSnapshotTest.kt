@@ -73,7 +73,7 @@ open class BpkSnapshotTest {
 
   private fun getScreenshotName(
     testClass: String = TestNameDetector.getTestClass(),
-    testName: String = TestNameDetector.getTestName()
+    testName: String = TestNameDetector.getTestName(),
   ): String =
     "${testClass.removePrefix("net.skyscanner.backpack.")}_$testName"
 }
