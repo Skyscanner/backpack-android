@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 28.1.0
+
+**Added:**
+  - `BpkNudger` component
+
 # 28.0.3
 
 **Updated:**
