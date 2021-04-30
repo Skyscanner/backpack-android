@@ -90,7 +90,9 @@ dependencies {
 }
 screenshots {
   multipleDevices false
-  if (!project.hasProperty("localTests") || localTests == false) {
-    referenceDir "app/build/test-labs-screenshots/screenshots-default"
+  def variant = project.gradle.startParameter.projectProperties.get("android.testInstrumentationRunnerArguments.variant")
+  if (variant == null || variant.isEmpty()) {
+    variant = "default"
   }
+  recordDir = "screenshots/$variant"
 }
