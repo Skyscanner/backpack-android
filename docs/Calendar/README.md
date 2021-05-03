@@ -122,7 +122,7 @@ class ExampleBpkCalendarController(
       ColoredBucket(CalendarCellStyle.Neutral, yellowSet),
       ColoredBucket(CalendarCellStyle.Positive, greenSet),
       ColoredBucket(
-        CalendarCellStyle.Custom(ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)),
+        CalendarCellStyle.Custom(context.getColor(R.color.bpkBackgroundSecondary)),
         greySet
       )
     )

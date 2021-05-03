@@ -13,11 +13,11 @@ The Gradient drawable can only be used in Kotlin/Java:
 import net.skyscanner.backpack.gradient.BpkGradients
 
 view.background = BpkGradients(
-  context, 
+  context,
   GradientDrawable.Orientation.BL_TR,
   intArrayOf(
-    ContextCompat.getColor(testContext, R.color.bpkMonteverde),
-    ContextCompat.getColor(testContext, R.color.bpkSagano))
+    context.getColor(R.color.bpkMonteverde),
+    context.getColor(R.color.bpkSagano))
   )
 ```
 

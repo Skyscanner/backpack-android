@@ -21,7 +21,6 @@ Example of a text field with icon on start in Kotlin:
 
 ```Kotlin
 import net.skyscanner.backpack.text.BpkTextField
-import androidx.core.content.ContextCompat
 
 BpkTextField(context).apply {
    setText('Flights to Edinburgh')

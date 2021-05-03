@@ -31,7 +31,6 @@ Example of a Flare in XML
 Example of a Flare in Kotlin
 
 ```Kotlin
-import androidx.core.content.ContextCompat
 import android.widget.ImageView
 import android.view.ViewGroup
 import net.skyscanner.backpack.flare.BpkFlare
