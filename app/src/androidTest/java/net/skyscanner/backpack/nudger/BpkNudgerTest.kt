@@ -26,7 +26,7 @@ import org.junit.runner.RunWith
 
 /**
  * FIXME
- * TD
+ * TDv
  * The buttons show up without icons. The snapshot test framework is not rendering
  * the icons when using `setCompoundDrawablesRelativeWithIntrinsicBounds` instead of
  * `setCompoundDrawablesWithIntrinsicBounds` on API-21 which is required to support RTL. We can add

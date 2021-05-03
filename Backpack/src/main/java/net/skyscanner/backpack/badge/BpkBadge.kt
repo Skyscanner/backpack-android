@@ -141,7 +141,7 @@ open class BpkBadge @JvmOverloads constructor(
     this.setTextColor(ContextCompat.getColor(context, type.textColor))
 
     // Set background
-    val bgColor = ContextCompat.getColorStateList(context, type.bgColor)!!
+    val bgColor = context.getColorStateList(type.bgColor)
     if (type == Type.Outline) {
       setBackground(ColorStateList.valueOf(Color.TRANSPARENT), bgColor)
     } else {
