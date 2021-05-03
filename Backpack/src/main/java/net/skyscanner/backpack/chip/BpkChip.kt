@@ -23,7 +23,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.chip.internal.BpkChipStyle
 import net.skyscanner.backpack.chip.internal.BpkChipStyles
@@ -132,6 +131,6 @@ open class BpkChip @JvmOverloads constructor(
   private fun updateStyle() {
     this.background = style.background
     setTextColor(style.text)
-    TextViewCompat.setCompoundDrawableTintList(this, style.text)
+    compoundDrawableTintList = style.text
   }
 }
