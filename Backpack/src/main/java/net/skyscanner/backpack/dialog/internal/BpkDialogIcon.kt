@@ -59,7 +59,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
     color = ColorStateList.valueOf(backgroundColor)
     setStroke(
       resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
-      AppCompatResources.getColorStateList(context, R.color.__dialogBackground)
+      context.getColorStateList(R.color.__dialogBackground)
     )
   }
 }

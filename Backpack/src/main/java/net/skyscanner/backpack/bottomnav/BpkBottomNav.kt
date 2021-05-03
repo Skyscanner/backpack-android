@@ -52,7 +52,7 @@ open class BpkBottomNav @JvmOverloads constructor(
     labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
     background = AppCompatResources.getDrawable(context, R.drawable.bpk_bottom_nav_background)
     minimumHeight = resources.getDimensionPixelSize(R.dimen.bpk_bottom_nav_height)
-    itemTextColor = AppCompatResources.getColorStateList(context, R.color.bpk_bottom_nav_selector)
+    itemTextColor = context.getColorStateList(R.color.bpk_bottom_nav_selector)
     itemIconTintList = itemTextColor
     elevation = resources.getDimension(R.dimen.bpkElevationLg)
   }
