@@ -72,7 +72,6 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompat"
   implementation "androidx.annotation:annotation:$rootProject.ext.androidxAnnotations"
-  implementation "androidx.legacy:legacy-support-v4:$rootProject.ext.androidXLegacy"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
   implementation "com.google.android.material:material:$rootProject.ext.androidMaterial"
   implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threeTenAbp"
