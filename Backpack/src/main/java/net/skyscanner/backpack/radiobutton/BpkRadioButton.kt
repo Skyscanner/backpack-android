@@ -22,7 +22,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatRadioButton
-import androidx.core.widget.CompoundButtonCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.BpkTheme
@@ -90,7 +89,7 @@ open class BpkRadioButton @JvmOverloads constructor(
     if (!isTintInitialized()) {
       return
     }
-    CompoundButtonCompat.setButtonTintList(this, if (isEnabled) enabledTint else disabledTint)
+    buttonTintList = if (isEnabled) enabledTint else disabledTint
   }
 
   private fun isTintInitialized() = ::disabledTint.isInitialized && ::enabledTint.isInitialized
