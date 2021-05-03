@@ -20,7 +20,6 @@ package net.skyscanner.backpack.util
 
 import android.content.Context
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.R
@@ -41,14 +40,14 @@ class ResourcesUtilTest {
 
   @Test
   fun test_getColor() {
-    val expected = ResourcesCompat.getColor(context.resources, R.color.bpkBackgroundSecondary, context.theme)
+    val expected = context.getColor(R.color.bpkBackgroundSecondary)
     Assert.assertEquals(expected, ResourcesUtil.getColor(TextView(context), R.color.bpkBackgroundSecondary))
     Assert.assertEquals(expected, ResourcesUtil.getColor(context.resources, R.color.bpkBackgroundSecondary))
   }
 
   @Test
   fun test_getColor_extension() {
-    val expected = ResourcesCompat.getColor(context.resources, R.color.bpkBackgroundSecondary, context.theme)
+    val expected = context.getColor(R.color.bpkBackgroundSecondary)
     Assert.assertEquals(expected, TextView(context).getColor(R.color.bpkBackgroundSecondary))
   }
 }

@@ -20,7 +20,6 @@ package net.skyscanner.backpack.dialog
 
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -190,7 +189,7 @@ class BpkDialogTest : BpkSnapshotTest() {
           FrameLayout.LayoutParams.WRAP_CONTENT
         )
         wrapper.setPadding(20, 20, 20, 20)
-        wrapper.setBackgroundColor(ResourcesCompat.getColor(activity.resources, R.color.bpkTextSecondary, activity.theme))
+        wrapper.setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
         wrapper.addView(rootView)
 
         setupView(wrapper)
