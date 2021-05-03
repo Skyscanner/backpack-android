@@ -36,7 +36,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-
 class BpkFlareTest : BpkSnapshotTest() {
 
   private val subject = BpkFlare(testContext).apply {
@@ -94,65 +93,10 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestFlarePointerPositionStart_RTL() {
-    snap(
-      subject.apply {
-        pointerPosition = BpkFlare.PointerPosition.START
-        layoutDirection = View.LAYOUT_DIRECTION_RTL
-        addView(imageView)
-      }
-    )
-  }
-
-  @Test
-  fun screenshotTestFlarePointerPositionEnd_RTL() {
-    snap(
-      subject.apply {
-        pointerPosition = BpkFlare.PointerPosition.END
-        layoutDirection = View.LAYOUT_DIRECTION_RTL
-        addView(imageView)
-      }
-    )
-  }
-
-  @Test
   fun screenshotTestFlareInsetPaddingMode() {
     snap(
       setupViewForInsetPaddingTest(testContext) {
         subject.insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
-      }
-    )
-  }
-
-  @Test
-  fun screenshotTestFlareInsetPaddingMode_withRelativePaddingRTL() {
-    val wrapContent = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-
-    snap(
-      FrameLayout(testContext).apply {
-        layoutDirection = View.LAYOUT_DIRECTION_RTL
-
-        addView(
-          subject.apply {
-            layoutParams = wrapContent
-            insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
-
-            addView(
-              LinearLayoutCompat(context).apply {
-                layoutParams = wrapContent
-                background = ColorDrawable(Color.LTGRAY)
-                setPaddingRelative(0, 10, 40, 0)
-
-                addView(
-                  BpkText(testContext).apply {
-                    layoutParams = wrapContent
-                    text = testContext.resources.getString(R.string.stub_sm)
-                  }
-                )
-              }
-            )
-          }
-        )
       }
     )
   }

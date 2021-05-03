@@ -18,30 +18,23 @@
 
 package net.skyscanner.backpack
 
-import android.content.Context
 import android.os.Looper
-import android.view.ContextThemeWrapper
 import android.view.View
 import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
-import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.util.BpkTheme
 
 open class BpkSnapshotTest {
 
   private var height = 100
   private var width = 100
-  var testContext: Context =
-    BpkTheme.wrapContextWithDefaults(
-      ContextThemeWrapper(
-        InstrumentationRegistry.getInstrumentation().targetContext,
-        R.style.AppTheme
-      )
-    )
+
+  private val variant = BpkTestVariant.current
+  var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
 
   protected fun setupView(view: View) {
+    view.layoutDirection = testContext.resources.configuration.layoutDirection
     ViewHelpers.setupView(view)
       .setExactHeightDp(height)
       .setExactWidthDp(width)
@@ -50,7 +43,9 @@ open class BpkSnapshotTest {
 
   protected fun snap(view: View) {
     setupView(view)
-    Screenshot.snap(view).record()
+    Screenshot.snap(view)
+      .setName(getScreenshotName())
+      .record()
   }
 
   protected fun setDimensions(height: Int, width: Int) {
@@ -68,11 +63,17 @@ open class BpkSnapshotTest {
     return AsyncSnapshot(testClass, testName)
   }
 
-  inner class AsyncSnapshot(private val tesClass: String, private val testName: String) {
+  inner class AsyncSnapshot(private val testClass: String, private val testName: String) {
     fun record(view: View) {
       Screenshot.snap(view)
-        .setName("${tesClass}_$testName")
+        .setName(getScreenshotName(testClass, testName))
         .record()
     }
   }
+
+  private fun getScreenshotName(
+    testClass: String = TestNameDetector.getTestClass(),
+    testName: String = TestNameDetector.getTestName(),
+  ): String =
+    "${testClass.removePrefix("net.skyscanner.backpack.")}_$testName"
 }

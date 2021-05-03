@@ -18,12 +18,10 @@
 
 package net.skyscanner.backpack.chip
 
-import android.util.LayoutDirection
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Ignore
@@ -53,14 +51,6 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestSelected() {
     val view = BpkOutlineChip(testContext)
-    view.text = "tag"
-    view.isSelected = true
-    snap(view)
-  }
-
-  @Test
-  fun screenshotTestSelected_withTheme() {
-    val view = BpkOutlineChip(createThemedContext(testContext))
     view.text = "tag"
     view.isSelected = true
     snap(view)
@@ -101,16 +91,6 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.disabled = true
-    snap(view)
-  }
-
-  @Test
-  @Ignore("TODO: relative drawables do not work with the screenshot test lib")
-  fun screenshotTestWithIcon_RTL() {
-    val view = BpkOutlineChip(testContext)
-    view.text = "tag"
-    view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
-    view.layoutDirection = LayoutDirection.RTL
     snap(view)
   }
 }

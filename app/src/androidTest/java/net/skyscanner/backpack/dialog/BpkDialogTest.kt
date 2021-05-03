@@ -31,7 +31,6 @@ import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.button.BpkButtonLink
-import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
@@ -165,34 +164,6 @@ class BpkDialogTest : BpkSnapshotTest() {
       addActionButton(
         BpkButtonLink(context).apply {
           text = "No, Thanks!"
-        }
-      )
-    }
-
-    record(dialog, asyncScreenshot)
-  }
-
-  @Test
-  fun screenshotTestDialog_withTheme() {
-    val asyncScreenshot = prepareForAsyncTest()
-
-    val dialog = BpkDialog(createThemedContext(activity)).apply {
-      title = "Delete?"
-      description = "Delete your profile?"
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        ContextCompat.getColor(context, R.color.bpkMonteverde),
-      )
-
-      addActionButton(
-        BpkButton(context).apply {
-          text = "Continue"
-        }
-      )
-
-      addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
         }
       )
     }

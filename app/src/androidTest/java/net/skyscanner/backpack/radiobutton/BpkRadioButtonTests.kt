@@ -19,10 +19,8 @@
 package net.skyscanner.backpack.radiobutton
 
 import android.graphics.Color
-import android.view.View
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -60,22 +58,6 @@ class BpkRadioButtonTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestRadioButton_CheckedDisabled() {
     radioButton.isEnabled = false
-    radioButton.isChecked = true
-    snap(radioButton)
-  }
-
-  @Test
-  fun screenshotTestRadioButton_rtl() {
-    radioButton.layoutDirection = View.LAYOUT_DIRECTION_RTL
-    snap(radioButton)
-  }
-
-  @Test
-  fun screenshotTestRadioButton_withTheme() {
-    val radioButton = BpkRadioButton(createThemedContext(testContext)).apply {
-      setBackgroundColor(Color.WHITE)
-      text = "RadioButton"
-    }
     radioButton.isChecked = true
     snap(radioButton)
   }

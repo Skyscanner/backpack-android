@@ -19,11 +19,9 @@
 package net.skyscanner.backpack.horizontalnav
 
 import android.graphics.Color
-import android.view.View
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
 import org.junit.Before
@@ -42,12 +40,6 @@ class HorizontalNavTests : BpkSnapshotTest() {
 
   @Test
   fun screenshotHorizontalNav_Default() {
-    snap(horizontalNav)
-  }
-
-  @Test
-  fun screenshotHorizontalNav_withTheme() {
-    val horizontalNav = BpkHorizontalNav(createThemedContext(testContext)).init()
     snap(horizontalNav)
   }
 
@@ -75,12 +67,6 @@ class HorizontalNavTests : BpkSnapshotTest() {
     val horizontalNav = BpkHorizontalNav(testContext).init()
     horizontalNav.setBackgroundResource(R.color.bpkSkyBlueTint03)
     horizontalNav.appearance = BpkHorizontalNav.Appearance.Alternate
-    snap(horizontalNav)
-  }
-
-  @Test
-  fun screenshotHorizontalNav_Rtl() {
-    horizontalNav.layoutDirection = View.LAYOUT_DIRECTION_RTL
     snap(horizontalNav)
   }
 

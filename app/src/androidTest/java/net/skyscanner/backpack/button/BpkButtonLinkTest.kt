@@ -22,14 +22,11 @@ import android.widget.FrameLayout
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.createThemedContext
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-
-@RunWith(AndroidJUnit4::class)
 
 /**
  * FIXME
@@ -41,7 +38,7 @@ import org.junit.runner.RunWith
  * `setCompoundDrawablesWithIntrinsicBounds` on API-21 which is required to support RTL. We can add
  * them when we update the emulators on the CI or move to a device farm for snapshot testing
  */
-
+@RunWith(AndroidJUnit4::class)
 class BpkButtonLinkTest : BpkSnapshotTest() {
 
   @Before
@@ -103,13 +100,6 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
       icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
       text = "Message"
     }
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonLink_withTheme() {
-    val button = BpkButtonLink(createThemedContext(testContext))
-    button.text = "Message"
     snap(wrap(button))
   }
 
