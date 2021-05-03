@@ -23,7 +23,6 @@ import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.annotation.ColorRes
@@ -160,11 +159,7 @@ open class BpkBadge @JvmOverloads constructor(
     drawable.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), stroke)
 
     val cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusXs)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-      drawable.cornerRadius = cornerRadius
-    } else {
-      drawable.cornerRadii = FloatArray(8) { cornerRadius }
-    }
+    drawable.cornerRadius = cornerRadius
     this.background = drawable
   }
 }

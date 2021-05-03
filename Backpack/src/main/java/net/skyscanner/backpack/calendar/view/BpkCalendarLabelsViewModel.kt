@@ -23,6 +23,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.text.Layout
 import android.text.StaticLayout
+import android.text.TextDirectionHeuristics
 import android.text.TextPaint
 import android.text.TextUtils
 import androidx.core.content.ContextCompat
@@ -30,7 +31,6 @@ import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.TextLayoutCompat
 import net.skyscanner.backpack.util.withSave
 import org.threeten.bp.LocalDate
 
@@ -90,15 +90,25 @@ internal class BpkCalendarLabelsViewModel(
       set(value) {
         if (field != value) {
           field = value
-          text = TextLayoutCompat.staticLayout(
-            source = label.text,
-            paint = paint,
-            align = Layout.Alignment.ALIGN_NORMAL,
-            outerWidth = value.roundToInt(),
-            includePad = true,
-            ellipsize = TextUtils.TruncateAt.END,
-            maxLines = 2,
+          val outerWidth = value.roundToInt()
+          text = StaticLayout.Builder.obtain(
+            label.text,
+            0,
+            label.text.length,
+            paint,
+            outerWidth
           )
+            .setAlignment(Layout.Alignment.ALIGN_NORMAL)
+            .setTextDirection(TextDirectionHeuristics.FIRSTSTRONG_LTR)
+            .setLineSpacing(
+              0f,
+              1f
+            )
+            .setIncludePad(true)
+            .setEllipsize(TextUtils.TruncateAt.END)
+            .setEllipsizedWidth(outerWidth)
+            .setMaxLines(2)
+            .build()
         }
       }
 
