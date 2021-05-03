@@ -25,7 +25,6 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.FloatRange
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.ViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.rating.internal.RatingAppearance
 import net.skyscanner.backpack.rating.internal.RatingScore
@@ -170,7 +169,7 @@ open class BpkRating private constructor(
   }
 
   private fun updateScore(value: Score) {
-    ViewCompat.setBackgroundTintList(badge, selectors.backgroundColor(value))
+    badge.backgroundTintList = selectors.backgroundColor(value)
     badge.setTextColor(selectors.contentColor(value))
 
     if (appearance.size == Size.Icon) {
