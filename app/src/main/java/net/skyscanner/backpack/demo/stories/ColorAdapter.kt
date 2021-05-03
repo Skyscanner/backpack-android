@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.stories
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.reflect.Field
 import net.skyscanner.backpack.demo.R
@@ -53,7 +52,7 @@ class ColorAdapter(private val colorResources: ArrayList<Field>) : RecyclerView.
   }
 
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var background: LinearLayoutCompat = itemView.findViewById(R.id.color_item)
+    var background: View = itemView.findViewById(R.id.color_item)
     var name: BpkText = itemView.findViewById(R.id.txt_color_name)
     var colorValue: BpkText = itemView.findViewById(R.id.txt_color_value)
   }
