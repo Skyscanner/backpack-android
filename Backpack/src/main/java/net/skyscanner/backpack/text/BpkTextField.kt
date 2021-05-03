@@ -25,7 +25,6 @@ import android.view.Gravity
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -34,21 +33,21 @@ import net.skyscanner.backpack.util.use
 open class BpkTextField @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : AppCompatEditText(
   createContextThemeWrapper(
     createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.editTextStyle),
     attrs, R.attr.bpkTextFieldStyle
   ),
   attrs,
-  defStyleAttr
+  defStyleAttr,
 ) {
 
   private var iconTintColor: Int = 0
     set(value) {
       field = value
-      iconStart?.let { DrawableCompat.setTint(it, value) }
-      iconEnd?.let { DrawableCompat.setTint(it, value) }
+      iconStart?.setTint(value)
+      iconEnd?.setTint(value)
     }
 
   var iconStart: Drawable? = null
@@ -56,8 +55,7 @@ open class BpkTextField @JvmOverloads constructor(
       unscheduleDrawable(field)
       field = value
         ?.mutate()
-        ?.let { DrawableCompat.wrap(it) }
-        ?.also { DrawableCompat.setTint(value, iconTintColor) }
+        ?.also { it.setTint(iconTintColor) }
       setCompoundDrawablesRelativeWithIntrinsicBounds(iconStart, null, iconEnd, null)
     }
 
@@ -66,8 +64,7 @@ open class BpkTextField @JvmOverloads constructor(
       unscheduleDrawable(field)
       field = value
         ?.mutate()
-        ?.let { DrawableCompat.wrap(it) }
-        ?.also { DrawableCompat.setTint(value, iconTintColor) }
+        ?.also { it.setTint(iconTintColor) }
       setCompoundDrawablesRelativeWithIntrinsicBounds(iconStart, null, iconEnd, null)
     }
 

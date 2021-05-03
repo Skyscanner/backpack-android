@@ -28,7 +28,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 
@@ -62,7 +61,7 @@ open class BpkStarRatingBase internal constructor(
   open var rating: Float
     get() = _rating
     set(value) {
-      _rating = clamp(value, 0f, maxRating.toFloat())
+      _rating = value.coerceIn(0f, maxRating.toFloat())
       update()
     }
 
@@ -112,7 +111,7 @@ open class BpkStarRatingBase internal constructor(
     for (i in 0 until maxRating) {
       val child = getChildAt(i)
       val background = child.background as BpkStar
-      val value = clamp(rating - i, 0f, 1f)
+      val value = (rating - i).coerceIn(0f, 1f)
       background.value = when {
         (value >= 0.0f && value < 0.5f) -> BpkStar.Value.Empty
         (value >= 0.5f && value < 1.0f) -> BpkStar.Value.Half
@@ -122,9 +121,7 @@ open class BpkStarRatingBase internal constructor(
   }
 
   private fun getDrawable(@DrawableRes id: Int, @ColorInt tint: Int) =
-    DrawableCompat.wrap(AppCompatResources.getDrawable(context, id)!!.mutate())
-      .apply { DrawableCompat.setTint(this, tint) }
-
-  private fun clamp(value: Float, min: Float, max: Float) =
-    Math.min(max, Math.max(min, value))
+    AppCompatResources.getDrawable(context, id)!!
+      .mutate()
+      .apply { setTint(tint) }
 }
