@@ -20,7 +20,6 @@ package net.skyscanner.backpack.chip
 
 import android.content.Context
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
@@ -86,8 +85,8 @@ class BpkCustomOutlineChipTest : BpkSnapshotTest() {
     BpkOutlineChip(context).apply {
       text = "tag"
 
-      chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkTochigi)
-      disabledBackgroundColor = ContextCompat.getColor(context, R.color.bpkTochigi)
-      selectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkAbisko)
+      chipBackgroundColor = context.getColor(R.color.bpkTochigi)
+      disabledBackgroundColor = context.getColor(R.color.bpkTochigi)
+      selectedBackgroundColor = context.getColor(R.color.bpkAbisko)
     }
 }

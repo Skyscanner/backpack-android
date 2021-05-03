@@ -25,7 +25,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.IconsAdapter.ViewHolder
@@ -42,7 +41,7 @@ class IconsAdapter(
     val view = LayoutInflater.from(parent.context)
       .inflate(R.layout.icon_item, parent, false)
 
-    rtlIconBackgroundColor = ContextCompat.getColor(parent.context, R.color.bpkSkyGrayTint04)
+    rtlIconBackgroundColor = parent.context.getColor(R.color.bpkSkyGrayTint04)
 //    ColorUtils.setAlphaComponent(rtlIconBackgroundColor, 85)
     return ViewHolder(view)
   }

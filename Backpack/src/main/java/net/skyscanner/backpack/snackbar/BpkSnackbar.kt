@@ -32,7 +32,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
 import androidx.core.os.ConfigurationCompat
 import androidx.core.view.GravityCompat
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -243,9 +242,9 @@ class BpkSnackbar private constructor(
     fun make(view: View, text: CharSequence, duration: Int): BpkSnackbar {
       val context = view.context
 
-      @ColorInt var textColor = ContextCompat.getColor(context, R.color.bpkBackground)
-      @ColorInt var actionColor = ContextCompat.getColor(context, R.color.bpkMonteverde)
-      @ColorInt var backgroundColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
+      @ColorInt var textColor = context.getColor(R.color.bpkBackground)
+      @ColorInt var actionColor = context.getColor(R.color.bpkMonteverde)
+      @ColorInt var backgroundColor = context.getColor(R.color.bpkTextPrimary)
 
       val outValue = TypedValue()
       context.theme.resolveAttribute(R.attr.bpkSnackbarStyle, outValue, true)

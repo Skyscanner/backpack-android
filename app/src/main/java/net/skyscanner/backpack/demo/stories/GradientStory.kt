@@ -23,7 +23,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.gradient.BpkGradients
 
@@ -43,8 +42,8 @@ class GradientStoryCustom : Story() {
       requireContext(),
       GradientDrawable.Orientation.TL_BR,
       intArrayOf(
-        ContextCompat.getColor(requireContext(), R.color.bpkMonteverde),
-        ContextCompat.getColor(requireContext(), R.color.bpkSagano)
+        requireContext().getColor(R.color.bpkMonteverde),
+        requireContext().getColor(R.color.bpkSagano),
       )
     )
   }

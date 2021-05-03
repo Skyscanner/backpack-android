@@ -23,7 +23,6 @@ import android.graphics.Color
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.test.R
@@ -41,7 +40,7 @@ class BpkThemeTest {
   internal var activityRule: ActivityTestRule<TestActivity> =
     ActivityTestRule(TestActivity::class.java)
 
-  private val skyBlue by unsafeLazy { ContextCompat.getColor(activity, R.color.bpkSkyBlue) }
+  private val skyBlue by unsafeLazy { activity.getColor(R.color.bpkSkyBlue) }
   private val customBlue = Color.parseColor("#9B104A")
 
   @Before

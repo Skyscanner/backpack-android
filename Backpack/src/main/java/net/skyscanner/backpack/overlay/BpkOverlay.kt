@@ -26,7 +26,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.overlay.internal.CornerRadiusViewOutlineProvider
@@ -84,7 +83,7 @@ open class BpkOverlay @JvmOverloads constructor(
     set(value) {
       field = value
 
-      val color = ContextCompat.getColor(context, value.colorRes)
+      val color = context.getColor(value.colorRes)
 
       this.overlayColor = Color.argb(
         (field.opacity * 255).roundToInt(),

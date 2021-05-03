@@ -20,7 +20,6 @@ package net.skyscanner.backpack.gradient
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.resolveThemeColor
 
@@ -37,8 +36,8 @@ open class BpkGradients @JvmOverloads constructor(
   context: Context,
   orientation: Orientation = Orientation.TL_BR,
   colors: IntArray = intArrayOf(
-    ContextCompat.getColor(context, R.color.bpkSkyBlue),
-    ContextCompat.getColor(context, R.color.bpkPrimaryGradientLight)
+    context.getColor(R.color.bpkSkyBlue),
+    context.getColor(R.color.bpkPrimaryGradientLight),
   )
 ) : GradientDrawable(orientation, colors) {
 

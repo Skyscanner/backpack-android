@@ -23,7 +23,6 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 
@@ -35,9 +34,9 @@ internal sealed class BpkChipStyles : BpkChipStyle {
     defStyleAttr: Int,
   ) : BpkChipStyles() {
 
-    override var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkPrimaryLight)
-    override var backgroundColor: Int = ContextCompat.getColor(context, R.color.bpkBackgroundElevation03)
-    override var textColor: Int = ContextCompat.getColor(context, R.color.bpkTextPrimary)
+    override var selectedBackgroundColor: Int = context.getColor(R.color.bpkPrimaryLight)
+    override var backgroundColor: Int = context.getColor(R.color.bpkBackgroundElevation03)
+    override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
     override var disabledBackgroundColor: Int = Color.TRANSPARENT
 
     override val background: Drawable
@@ -51,16 +50,16 @@ internal sealed class BpkChipStyles : BpkChipStyle {
         ),
         border = chipColors(
           selected = selectedBackgroundColor,
-          default = ContextCompat.getColor(context, R.color.bpkTextTertiary),
-          disabled = ContextCompat.getColor(context, R.color.__chipDisabled),
+          default = context.getColor(R.color.bpkTextTertiary),
+          disabled = context.getColor(R.color.__chipDisabled),
         ),
       )
 
     override val text: ColorStateList
       get() = chipColors(
-        selected = ContextCompat.getColor(context, R.color.bpkWhite),
+        selected = context.getColor(R.color.bpkWhite),
         default = textColor,
-        disabled = ContextCompat.getColor(context, R.color.__chipDisabled),
+        disabled = context.getColor(R.color.__chipDisabled),
       )
 
     init {
@@ -80,10 +79,10 @@ internal sealed class BpkChipStyles : BpkChipStyle {
     defStyleAttr: Int,
   ) : BpkChipStyles() {
 
-    override var selectedBackgroundColor: Int = ContextCompat.getColor(context, R.color.bpkPrimaryLight)
-    override var backgroundColor: Int = ContextCompat.getColor(context, R.color.__chipSolidBackground)
-    override var textColor: Int = ContextCompat.getColor(context, R.color.bpkTextPrimary)
-    override var disabledBackgroundColor: Int = ContextCompat.getColor(context, R.color.__chipSolidBackground)
+    override var selectedBackgroundColor: Int = context.getColor(R.color.bpkPrimaryLight)
+    override var backgroundColor: Int = context.getColor(R.color.__chipSolidBackground)
+    override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
+    override var disabledBackgroundColor: Int = context.getColor(R.color.__chipSolidBackground)
 
     override val background: Drawable
       get() = chipRoundedRect(
@@ -99,9 +98,9 @@ internal sealed class BpkChipStyles : BpkChipStyle {
 
     override val text: ColorStateList
       get() = chipColors(
-        selected = ContextCompat.getColor(context, R.color.bpkWhite),
+        selected = context.getColor(R.color.bpkWhite),
         default = textColor,
-        disabled = ContextCompat.getColor(context, R.color.__chipDisabled),
+        disabled = context.getColor(R.color.__chipDisabled),
       )
 
     init {

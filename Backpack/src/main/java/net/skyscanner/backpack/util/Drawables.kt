@@ -29,7 +29,6 @@ import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.StateSet
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 
 internal inline fun stateListDrawable(
@@ -57,7 +56,7 @@ internal inline fun rippleDrawable(
 
   val rippleColorStateList = if (rippleColor == null) {
     val colorControlHighlight = resolveThemeColor(context, R.attr.colorControlHighlight)
-      ?: ContextCompat.getColor(context, R.color.bpkSkyGrayTint06)
+      ?: context.getColor(R.color.bpkSkyGrayTint06)
     ColorStateList.valueOf(colorControlHighlight)
   } else {
     ColorStateList.valueOf(rippleColor)

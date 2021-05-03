@@ -26,7 +26,6 @@ import android.text.StaticLayout
 import android.text.TextDirectionHeuristics
 import android.text.TextPaint
 import android.text.TextUtils
-import androidx.core.content.ContextCompat
 import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarLabel
@@ -136,8 +135,7 @@ internal class BpkCalendarLabelsViewModel(
       }
     ).applyTo(this)
 
-    color = ContextCompat.getColor(
-      context,
+    color = context.getColor(
       when (this@createTextPaint) {
         CalendarLabel.Style.PriceLow -> R.color.bpkMonteverde
         CalendarLabel.Style.PriceMedium -> R.color.bpkTextSecondary

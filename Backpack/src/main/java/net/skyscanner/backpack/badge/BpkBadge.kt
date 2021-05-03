@@ -26,7 +26,6 @@ import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
@@ -138,7 +137,7 @@ open class BpkBadge @JvmOverloads constructor(
     this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
 
     // set Text color
-    this.setTextColor(ContextCompat.getColor(context, type.textColor))
+    this.setTextColor(context.getColor(type.textColor))
 
     // Set background
     val bgColor = context.getColorStateList(type.bgColor)

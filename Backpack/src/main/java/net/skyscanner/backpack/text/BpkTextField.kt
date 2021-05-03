@@ -25,7 +25,6 @@ import android.view.Gravity
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.colorStateList
@@ -79,11 +78,11 @@ open class BpkTextField @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     BpkText.getFont(context, BpkText.BASE, BpkText.Weight.NORMAL).applyTo(paint)
 
-    var textColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
-    var textColorDisabled = ContextCompat.getColor(context, R.color.__textFieldTextDisabled)
-    var hintNormalColor = ContextCompat.getColor(context, R.color.__textFieldHint)
-    var hintFocusedColor = ContextCompat.getColor(context, R.color.__textFieldHint)
-    var iconColor = ContextCompat.getColor(context, R.color.__textFieldIcon)
+    var textColor = context.getColor(R.color.bpkTextPrimary)
+    var textColorDisabled = context.getColor(R.color.__textFieldTextDisabled)
+    var hintNormalColor = context.getColor(R.color.__textFieldHint)
+    var hintFocusedColor = context.getColor(R.color.__textFieldHint)
+    var iconColor = context.getColor(R.color.__textFieldIcon)
 
     var background: Drawable = AppCompatResources.getDrawable(context, R.drawable.bpk_text_field_background)!!
 

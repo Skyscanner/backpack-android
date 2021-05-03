@@ -28,7 +28,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
@@ -69,8 +68,8 @@ open class BpkStarRatingBase internal constructor(
 
   init {
     orientation = HORIZONTAL
-    var starColor = ContextCompat.getColor(context, R.color.__starRatingStarColor)
-    var starFilledColor: Int = ContextCompat.getColor(context, R.color.__starRatingStarColorFilled)
+    var starColor = context.getColor(R.color.__starRatingStarColor)
+    var starFilledColor: Int = context.getColor(R.color.__starRatingStarColorFilled)
 
     context.theme.obtainStyledAttributes(
       attrs,
