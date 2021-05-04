@@ -18,7 +18,7 @@ source ~/.bash_profile
 
 Install system images
 ```
-$ANDROID_HOME/tools/bin/sdkmanager "system-images;android-21;google_apis;x86"
+$ANDROID_HOME/tools/bin/sdkmanager "system-images;android-24;google_apis;x86"
 $ANDROID_HOME/tools/bin/sdkmanager "system-images;android-29;google_apis;x86"
 ```
 
@@ -38,7 +38,7 @@ Given that you have a compatible environment as stated above you can now set up 
 Create an AVD using the following commands
 
 ```
-$ANDROID_HOME/tools/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-21;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
+$ANDROID_HOME/tools/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 $ANDROID_HOME/tools/mksdcard -l e 512M sd.img
 ```
 
