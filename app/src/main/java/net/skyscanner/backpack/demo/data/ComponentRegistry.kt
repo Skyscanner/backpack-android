@@ -236,6 +236,7 @@ object ComponentRegistry {
         "Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill }
       )
     ),
+    "Slider" story NodeData { Story of R.layout.fragment_slider },
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Spinner" story NodeData(
       { children -> SubStory of children },

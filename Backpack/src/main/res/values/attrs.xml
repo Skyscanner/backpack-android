@@ -238,6 +238,13 @@
     <attr name="nudgerValue" format="integer" />
   </declare-styleable>
 
+  <declare-styleable name="BpkSlider">
+    <attr name="android:value" format="float" />
+    <attr name="sliderTrackColorActive" format="color" />
+    <attr name="sliderTrackColorInactive" format="color" />
+    <attr name="sliderThumbColor" format="color" />
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
@@ -267,6 +274,7 @@
   <attr name="bpkRatingStyle" format="reference"/>
   <attr name="bpkBarChartStyle" format="reference"/>
   <attr name="bpkNavBarStyle" format="reference"/>
+  <attr name="bpkSliderStyle" format="reference"/>
 
   <!-- FONT THEMING START -->
 

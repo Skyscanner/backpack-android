@@ -25,6 +25,7 @@
     <item name="bpkHorizontalNavStyleAlternate">@style/LondonThemeHorizontalNavAlternate</item>
     <item name="bpkSnackbarStyle">@style/LondonThemeSnackbar</item>
     <item name="bpkNavBarStyle">@style/LondonThemeNavBar</item>
+    <item name="bpkSliderStyle">@style/LondonThemeSlider</item>
 
     <item name="bpkSpinnerPrimaryStyle">@style/LondonThemeSpinnerPrimary</item>
 
@@ -151,6 +152,13 @@
   <style name="LondonThemeNavBar">
     <item name="navBarCollapsedTextColor">#6392ce</item>
   </style>
+
+  <style name="LondonThemeSlider">
+    <item name="sliderThumbColor">@color/bpkPanjin</item>
+    <item name="sliderTrackColorInactive">@color/bpkTextSecondary</item>
+    <item name="sliderTrackColorActive">#013A76</item>
+  </style>
+
   <!-- London theme end -->
 
   <!-- Doha theme start -->
@@ -173,6 +181,7 @@
     <item name="bpkRadioButtonStyle">@style/DohaThemeRadioButton</item>
     <item name="bpkTextFieldStyle">@style/DohaThemeTextField</item>
     <item name="bpkRatingStyle">@style/DohaThemeRating</item>
+    <item name="bpkSliderStyle">@style/DohaThemeSlider</item>
 
     <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
     <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
@@ -284,6 +293,12 @@
     <item name="barChartLineColor">?bpkPrimaryColor</item>
     <item name="barChartPopupBackgroundColor">@color/bpkSagano</item>
     <item name="barChartPopupTextColor">@color/bpkAbisko</item>
+  </style>
+
+  <style name="DohaThemeSlider">
+    <item name="sliderThumbColor">@color/bpkPanjin</item>
+    <item name="sliderTrackColorInactive">@color/bpkTextSecondary</item>
+    <item name="sliderTrackColorActive">#ffb300</item>
   </style>
   <!-- Doha theme end -->
 
