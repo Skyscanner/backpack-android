@@ -32,7 +32,7 @@ import net.skyscanner.backpack.util.use
 open class BpkSlider @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : RangeSlider(
   createContextThemeWrapper(
     // FIXME Remove material context theme wrapper when moving to material theme
@@ -61,14 +61,13 @@ open class BpkSlider @JvmOverloads constructor(
       defStyleAttr,
       0
     ).use {
-      val thumbColor = it.getInt(R.styleable.BpkSlider_sliderThumbColor, BpkTheme.getPrimaryColor(context))
-      val trackColorActive = it.getInt(R.styleable.BpkSlider_sliderTrackColorActive, BpkTheme.getPrimaryColor(context))
-      val trackColorInactive =
-        it.getInt(R.styleable.BpkSlider_sliderTrackColorInactive, ContextCompat.getColor(context, R.color.bpkLine))
+      val primaryColor = ColorStateList.valueOf(BpkTheme.getPrimaryColor(context))
+      // FIXME replace ContextCompat call with system call when minSdk updated
+      val lineColor = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkLine))
 
-      thumbTintList = ColorStateList.valueOf(thumbColor)
-      trackActiveTintList = ColorStateList.valueOf(trackColorActive)
-      trackInactiveTintList = ColorStateList.valueOf(trackColorInactive)
+      thumbTintList = it.getColorStateList(R.styleable.BpkSlider_sliderThumbColor) ?: primaryColor
+      trackActiveTintList = it.getColorStateList(R.styleable.BpkSlider_sliderTrackColorActive) ?: primaryColor
+      trackInactiveTintList = it.getColorStateList(R.styleable.BpkSlider_sliderTrackColorInactive) ?: lineColor
 
       if (it.hasValue(R.styleable.BpkSlider_android_value)) {
         value = it.getFloat(R.styleable.BpkSlider_android_value, 0.0f)
