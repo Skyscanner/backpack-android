@@ -23,7 +23,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -75,7 +74,6 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestWithIcon() {
     val view = BpkChip(testContext)
     view.text = "tag"
@@ -84,7 +82,6 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestSelectedWithIcon() {
     val view = BpkChip(testContext)
     view.text = "tag"
@@ -94,7 +91,6 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestDisabledWithIcon() {
     val view = BpkChip(testContext)
     view.text = "tag"

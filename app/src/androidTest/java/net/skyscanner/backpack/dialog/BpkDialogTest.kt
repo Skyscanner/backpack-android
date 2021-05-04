@@ -32,7 +32,6 @@ import net.skyscanner.backpack.button.BpkButtonLink
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -81,7 +80,6 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("The scroll bar in the CI is generally different from the local version")
   fun screenshotTestDialogFullScreen() {
     val asyncScreenshot = prepareForAsyncTest()
 
@@ -198,7 +196,6 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("Sometimes the test fails with 2 visually same images")
   fun screenshotTestFlareDialog() {
     val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
     val asyncScreenshot = prepareForAsyncTest()

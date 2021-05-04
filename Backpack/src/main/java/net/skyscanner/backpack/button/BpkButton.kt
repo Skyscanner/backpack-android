@@ -75,6 +75,7 @@ open class BpkButton(
       }
 
       setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
+      applyStyle(type.createStyle(context))
     }
 
   @Dimension
