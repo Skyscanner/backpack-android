@@ -22,7 +22,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.ContextThemeWrapper
-import androidx.core.content.ContextCompat
 import com.google.android.material.slider.RangeSlider
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.BpkTheme
@@ -62,8 +61,7 @@ open class BpkSlider @JvmOverloads constructor(
       0
     ).use {
       val primaryColor = ColorStateList.valueOf(BpkTheme.getPrimaryColor(context))
-      // FIXME replace ContextCompat call with system call when minSdk updated
-      val lineColor = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.bpkLine))
+      val lineColor = ColorStateList.valueOf(context.getColor(R.color.bpkLine))
 
       thumbTintList = it.getColorStateList(R.styleable.BpkSlider_sliderThumbColor) ?: primaryColor
       trackActiveTintList = it.getColorStateList(R.styleable.BpkSlider_sliderTrackColorActive) ?: primaryColor
@@ -72,6 +70,8 @@ open class BpkSlider @JvmOverloads constructor(
       if (it.hasValue(R.styleable.BpkSlider_android_value)) {
         value = it.getFloat(R.styleable.BpkSlider_android_value, 0.0f)
       }
+
+      isTickVisible = false
     }
   }
 }
