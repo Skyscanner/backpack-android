@@ -28,7 +28,6 @@ import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.skyscanner.backpack.R
@@ -58,14 +57,14 @@ class BpkNavBar @JvmOverloads constructor(
   }
 
   @ColorInt
-  var expandedTitleColor: Int = ContextCompat.getColor(context, R.color.bpkTextPrimary)
+  var expandedTitleColor: Int = context.getColor(R.color.bpkTextPrimary)
     set(value) {
       field = value
       collapsingLayout.setExpandedTitleColor(value)
     }
 
   @ColorInt
-  var collapsedTitleColor: Int = ContextCompat.getColor(context, R.color.bpkTextPrimary)
+  var collapsedTitleColor: Int = context.getColor(R.color.bpkTextPrimary)
     set(value) {
       field = value
       toolbar.setTitleTextColor(value)
@@ -144,7 +143,7 @@ class BpkNavBar @JvmOverloads constructor(
 
     this.expandedTitleColor = expandedTitleColor
     this.collapsedTitleColor = collapsedTextColor
-    this.background = ColorDrawable(ContextCompat.getColor(context, R.color.bpkBackground))
+    this.background = ColorDrawable(context.getColor(R.color.bpkBackground))
     this.title = title
     this.icon = navIcon
     this.navAction = navAction

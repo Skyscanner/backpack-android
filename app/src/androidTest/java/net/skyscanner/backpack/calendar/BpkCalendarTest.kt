@@ -22,7 +22,6 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -474,7 +473,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   private fun wrapWithBackground(view: View): FrameLayout {
     return FrameLayout(testContext).apply {
       layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-      setBackgroundColor(ResourcesCompat.getColor(resources, R.color.bpkWhite, null))
+      setBackgroundColor(resources.getColor(R.color.bpkWhite, null))
       addView(view)
     }
   }

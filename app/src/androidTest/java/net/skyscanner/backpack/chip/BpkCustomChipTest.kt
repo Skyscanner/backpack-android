@@ -20,12 +20,10 @@ package net.skyscanner.backpack.chip
 
 import android.content.Context
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -57,7 +55,6 @@ class BpkCustomChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestWithIcon() {
     val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
@@ -65,7 +62,6 @@ class BpkCustomChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestSelectedWithIcon() {
     val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
@@ -74,7 +70,6 @@ class BpkCustomChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("TODO: relative drawables do not work with the screenshot test lib")
   fun screenshotTestDisabledWithIcon() {
     val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
@@ -86,8 +81,8 @@ class BpkCustomChipTest : BpkSnapshotTest() {
     BpkChip(context).apply {
       text = "tag"
 
-      chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkTochigi)
-      disabledBackgroundColor = ContextCompat.getColor(context, R.color.bpkTochigi)
-      selectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkAbisko)
+      chipBackgroundColor = context.getColor(R.color.bpkTochigi)
+      disabledBackgroundColor = context.getColor(R.color.bpkTochigi)
+      selectedBackgroundColor = context.getColor(R.color.bpkAbisko)
     }
 }

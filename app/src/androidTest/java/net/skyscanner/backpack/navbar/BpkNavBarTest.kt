@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.navbar
 
 import android.app.Activity
-import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
@@ -146,37 +145,11 @@ class BpkNavBarTest : BpkSnapshotTest() {
       }
   }
 
-  @Test
-  fun screenshotNavBar_collapsed_themed_withIconAndMenu() {
-    activity.init(theme = R.style.LondonTheme, icon = true, menu = true)
-    val asyncSnapshot = prepareForAsyncTest()
-    onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeUp())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
-  }
-
-  @Test
-  fun screenshotNavBar_expanded_themed_withIconAndMenu() {
-    activity.init(theme = R.style.LondonTheme, icon = true, menu = true)
-    val asyncSnapshot = prepareForAsyncTest()
-    onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeDown())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
-  }
-
   private fun Activity.init(
-    @StyleRes theme: Int = 0,
     icon: Boolean = false,
     menu: Boolean = false,
   ) {
     runOnUiThread {
-      if (theme != 0) {
-        setTheme(theme)
-      }
       setContentView(R.layout.fragment_nav_bar)
       val navBar = findViewById<BpkNavBar>(R.id.appBar)
       navBar.title = "Nav Bar"

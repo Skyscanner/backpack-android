@@ -27,7 +27,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import net.skyscanner.backpack.util.unsafeLazy
 
 @SuppressLint("Registered")
@@ -57,7 +56,7 @@ open class BpkBaseActivity : AppCompatActivity() {
     val drawable = menu.findItem(R.id.settings_button).icon
     if (drawable != null) {
       drawable.mutate()
-      val bpkWhite = ResourcesCompat.getColor(resources, R.color.bpkWhite, null)
+      val bpkWhite = getColor(R.color.bpkWhite)
       drawable.setColorFilter(bpkWhite, PorterDuff.Mode.SRC_ATOP)
     }
     return super.onCreateOptionsMenu(menu)

@@ -33,7 +33,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.Px
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.util.ResourcesUtil
@@ -176,12 +175,12 @@ internal class ButtonStyle(
         return fromTypedArray(
           context = context,
           typedArray = typedArray,
-          defaultBgColor = ContextCompat.getColor(context, bgColorRes),
-          defaultTextColor = ContextCompat.getColor(context, textColorRes),
-          defaultStrokeColor = ContextCompat.getColor(context, strokeColorRes),
-          defaultStrokeColorPressed = ContextCompat.getColor(context, strokeColorPressedRes),
-          disabledBgColor = ContextCompat.getColor(context, disabledBgColorRes),
-          disabledTextColor = ContextCompat.getColor(context, disabledTextColorRes),
+          defaultBgColor = context.getColor(bgColorRes),
+          defaultTextColor = context.getColor(textColorRes),
+          defaultStrokeColor = context.getColor(strokeColorRes),
+          defaultStrokeColorPressed = context.getColor(strokeColorPressedRes),
+          disabledBgColor = context.getColor(disabledBgColorRes),
+          disabledTextColor = context.getColor(disabledTextColorRes),
           strokeWidth = context.resources.getDimensionPixelSize(strokeWidthRes),
           stateListAnimatorRes = stateListAnimatorRes
         )

@@ -27,7 +27,6 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -99,7 +98,7 @@ open class BpkSpinner @JvmOverloads constructor(
     if (type === Type.PRIMARY && themePrimaryColor != INVALID_RES) {
       return themePrimaryColor
     }
-    return ContextCompat.getColor(context, colors[type.ordinal])
+    return context.getColor(colors[type.ordinal])
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
@@ -121,6 +120,7 @@ open class BpkSpinner @JvmOverloads constructor(
     //
     // Since this component only makes sense with animations we simple don't add the progress bar when animations are disabled.
 
+    // td
     if (animationsEnabled || Build.VERSION.SDK_INT >= 29) {
       val style = if (small) android.R.attr.progressBarStyleSmall else android.R.attr.progressBarStyle
       progressBar = ProgressBar(context, null, style)

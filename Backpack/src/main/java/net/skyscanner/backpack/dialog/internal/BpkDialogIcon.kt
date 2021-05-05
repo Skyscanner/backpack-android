@@ -27,7 +27,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.dialog.BpkDialog
-import net.skyscanner.backpack.util.getColor
 
 internal class BpkDialogIcon @JvmOverloads constructor(
   context: Context,
@@ -43,7 +42,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
     maxWidth = size
     maxHeight = size
     scaleType = ScaleType.CENTER
-    imageTintList = ColorStateList.valueOf(getColor(R.color.bpkWhite))
+    imageTintList = context.getColorStateList(R.color.bpkWhite)
   }
 
   var icon: BpkDialog.Icon? = null
@@ -60,7 +59,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
     color = ColorStateList.valueOf(backgroundColor)
     setStroke(
       resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
-      AppCompatResources.getColorStateList(context, R.color.__dialogBackground)
+      context.getColorStateList(R.color.__dialogBackground)
     )
   }
 }

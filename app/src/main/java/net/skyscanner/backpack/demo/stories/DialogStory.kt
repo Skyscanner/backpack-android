@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.stories
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.button.BpkButtonLink
@@ -62,7 +61,7 @@ class DialogStory : Story() {
         description = "Your flight is all booked. Why not check out some hotels now?"
         icon = BpkDialog.Icon(
           R.drawable.bpk_tick,
-          ContextCompat.getColor(context, R.color.bpkMonteverde),
+          context.getColor(R.color.bpkMonteverde),
         )
 
         addActionButton(
@@ -94,7 +93,7 @@ class DialogStory : Story() {
         description = "Engine Overload.!^R? Please do something. Throw me into the freezer or something!!"
         icon = BpkDialog.Icon(
           R.drawable.bpk_lightning,
-          ContextCompat.getColor(context, R.color.bpkErfoud),
+          context.getColor(R.color.bpkErfoud),
         )
 
         addActionButton(
@@ -116,7 +115,7 @@ class DialogStory : Story() {
         description = "Are you sure you want to delete your avatar?"
         icon = BpkDialog.Icon(
           R.drawable.bpk_trash,
-          ContextCompat.getColor(context, R.color.bpkPanjin),
+          context.getColor(R.color.bpkPanjin),
         )
         setCancelable(false)
         setCanceledOnTouchOutside(false)
@@ -161,7 +160,7 @@ Please note down your reference number and contact Trip.com if you need to track
 Safe travels!"""
         icon = BpkDialog.Icon(
           R.drawable.bpk_tick,
-          ContextCompat.getColor(context, R.color.bpkMonteverde),
+          context.getColor(R.color.bpkMonteverde),
         )
       }
     },
@@ -173,7 +172,7 @@ Safe travels!"""
         description = "Create a price alert and we'll let you know changes for this route"
         icon = BpkDialog.Icon(
           R.drawable.bpk_alert__active,
-          ContextCompat.getColor(context, R.color.bpkMonteverde),
+          context.getColor(R.color.bpkMonteverde),
         )
 
         addActionButton(
@@ -212,7 +211,7 @@ Safe travels!"""
         description = Array(3) { getString(R.string.stub) }.joinToString()
         icon = BpkDialog.Icon(
           R.drawable.bpk_tick,
-          ContextCompat.getColor(context, R.color.bpkMonteverde),
+          context.getColor(R.color.bpkMonteverde),
         )
 
         addActionButton(

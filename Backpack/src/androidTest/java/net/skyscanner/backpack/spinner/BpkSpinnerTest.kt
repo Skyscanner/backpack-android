@@ -23,7 +23,6 @@ import android.widget.ProgressBar
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.ResourcesUtil.getColor
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Ignore
@@ -46,19 +45,19 @@ class BpkSpinnerTest {
   fun test_default() {
     Assert.assertFalse(subject.small)
     Assert.assertEquals(BpkSpinner.Type.PRIMARY, subject.type)
-    Assert.assertEquals(getColor(subject, R.color.bpkSkyBlue), subject.getColor())
+    Assert.assertEquals(subject.context.getColor(R.color.bpkSkyBlue), subject.getColor())
   }
 
   @Test
   fun test_light() {
     subject.type = BpkSpinner.Type.LIGHT
-    Assert.assertEquals(getColor(subject, R.color.bpkWhite), subject.getColor())
+    Assert.assertEquals(subject.context.getColor(R.color.bpkWhite), subject.getColor())
   }
 
   @Test
   fun test_dark() {
     subject.type = BpkSpinner.Type.DARK
-    Assert.assertEquals(getColor(subject, R.color.bpkSkyGrayTint01), subject.getColor())
+    Assert.assertEquals(subject.context.getColor(R.color.bpkSkyGrayTint01), subject.getColor())
   }
 
   @Test

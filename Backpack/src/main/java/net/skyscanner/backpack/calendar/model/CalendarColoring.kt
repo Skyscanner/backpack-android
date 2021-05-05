@@ -21,7 +21,6 @@ package net.skyscanner.backpack.calendar.model
 import android.content.Context
 import android.content.res.Configuration
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarCellStyle.TextStyle.Dark
@@ -58,7 +57,7 @@ sealed class CalendarCellStyle {
    */
   object Positive : CalendarCellStyle() {
     override fun color(context: Context) =
-      ContextCompat.getColor(context, R.color.__calendarCellStylePositiveColor)
+      context.getColor(R.color.__calendarCellStylePositiveColor)
   }
 
   /**
@@ -68,7 +67,7 @@ sealed class CalendarCellStyle {
    */
   object Neutral : CalendarCellStyle() {
     override fun color(context: Context) =
-      ContextCompat.getColor(context, R.color.__calendarCellStyleNeutralColor)
+      context.getColor(R.color.__calendarCellStyleNeutralColor)
   }
 
   /**
@@ -78,7 +77,7 @@ sealed class CalendarCellStyle {
    */
   object Negative : CalendarCellStyle() {
     override fun color(context: Context) =
-      ContextCompat.getColor(context, R.color.__calendarCellStyleNegativeColor)
+      context.getColor(R.color.__calendarCellStyleNegativeColor)
 
     override fun textStyle(context: Context): TextStyle {
       val nightModeFlags: Int = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
@@ -100,7 +99,7 @@ sealed class CalendarCellStyle {
    */
   object Hightlight : CalendarCellStyle() {
     override fun color(context: Context) =
-      ContextCompat.getColor(context, R.color.__calendarHighlightedDayDot)
+      context.getColor(R.color.__calendarHighlightedDayDot)
   }
 
   /**

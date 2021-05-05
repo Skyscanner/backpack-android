@@ -21,7 +21,6 @@ Example of a Floating Action Button in XML
 Example of a Floating Action Button in Kotlin
 
 ```Kotlin
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.fab.BpkFab
 
 BpkFab(context).apply {

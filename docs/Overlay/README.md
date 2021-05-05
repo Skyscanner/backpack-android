@@ -37,7 +37,6 @@ Example of a Overlay in XML
 Example of a Overlay in Kotlin
 
 ```Kotlin
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.overlay.BpkOverlay
 
 BpkOverlay(context).apply {

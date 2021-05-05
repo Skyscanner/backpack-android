@@ -24,20 +24,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 
-/**
- * FIXME
- * 31/10/2018
- * see https://github.com/Skyscanner/backpack-android/pull/103
- *
- * The test cases with icons have been ignored. The snapshot test framework is not rendering
- * the icons when using `setCompoundDrawablesRelativeWithIntrinsicBounds` instead of
- * `setCompoundDrawablesWithIntrinsicBounds` on API-21 which is required to support RTL. We can add
- * them when we update the emulators on the CI or move to a device farm for snapshot testing
- */
 @RunWith(AndroidJUnit4::class)
 class BpkButtonLinkTest : BpkSnapshotTest() {
 
@@ -72,7 +61,6 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore
   fun screenshotTestButtonLinkWithLeadingIcon() {
     val button = BpkButtonLink(testContext).apply {
       icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
@@ -83,7 +71,6 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore
   fun screenshotTestButtonLinkWithTrailingIcon() {
     val button = BpkButtonLink(testContext).apply {
       icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
@@ -94,7 +81,6 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore
   fun screenshotTestButtonLinkWithIcon() {
     val button = BpkButtonLink(testContext).apply {
       icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)

@@ -22,8 +22,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatCheckBox
-import androidx.core.content.ContextCompat
-import androidx.core.widget.CompoundButtonCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.BpkTheme
@@ -51,11 +49,11 @@ open class BpkCheckbox @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var checkmarkDefaultColor = ContextCompat.getColor(context, R.color.bpkTextSecondary)
+    var checkmarkDefaultColor = context.getColor(R.color.bpkTextSecondary)
     var checkmarkCheckedColor = BpkTheme.getPrimaryColor(context)
-    var checkmarkDisabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
-    val textDisabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
-    val textEnabledColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
+    var checkmarkDisabledColor = context.getColor(R.color.bpkSkyGrayTint04)
+    val textDisabledColor = context.getColor(R.color.bpkSkyGrayTint04)
+    val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkCheckbox,
@@ -91,7 +89,7 @@ open class BpkCheckbox @JvmOverloads constructor(
     if (!isTintInitialized()) {
       return
     }
-    CompoundButtonCompat.setButtonTintList(this, if (isEnabled) enabledTint else disabledTint)
+    buttonTintList = if (isEnabled) enabledTint else disabledTint
   }
 
   private fun isTintInitialized() = ::disabledTint.isInitialized && ::enabledTint.isInitialized

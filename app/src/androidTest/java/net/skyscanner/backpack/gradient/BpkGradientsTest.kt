@@ -20,7 +20,6 @@ package net.skyscanner.backpack.gradient
 
 import android.graphics.drawable.GradientDrawable
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.R
@@ -50,8 +49,8 @@ class BpkGradientsTest : BpkSnapshotTest() {
       testContext,
       GradientDrawable.Orientation.TL_BR,
       intArrayOf(
-        ContextCompat.getColor(testContext, R.color.bpkMonteverde),
-        ContextCompat.getColor(testContext, R.color.bpkSagano)
+        testContext.getColor(R.color.bpkMonteverde),
+        testContext.getColor(R.color.bpkSagano)
       )
     )
 

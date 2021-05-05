@@ -28,7 +28,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ContextThemeWrapper
-import androidx.core.content.ContextCompat
 import java.lang.IllegalStateException
 import net.skyscanner.backpack.R
 
@@ -117,7 +116,7 @@ internal fun resolveThemeColor(context: Context, resId: Int): Int? {
   return if (wasResolved && typedValue.resourceId == 0) {
     typedValue.data
   } else if (wasResolved) {
-    ContextCompat.getColor(context, typedValue.resourceId)
+    context.getColor(typedValue.resourceId)
   } else {
     null
   }

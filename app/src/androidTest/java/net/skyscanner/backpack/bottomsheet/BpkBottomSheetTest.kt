@@ -19,9 +19,9 @@
 package net.skyscanner.backpack.bottomsheet
 
 import android.widget.FrameLayout
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams
-import androidx.core.content.res.ResourcesCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
@@ -36,7 +36,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
   init {
     val frameLayout = FrameLayout(root.context)
-    frameLayout.background = ResourcesCompat.getDrawable(frameLayout.resources, R.color.bpkBackgroundSecondary, null)
+    frameLayout.background = AppCompatResources.getDrawable(frameLayout.context, R.color.bpkBackgroundSecondary)
     frameLayout.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
     root.addView(frameLayout)
 

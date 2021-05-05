@@ -24,7 +24,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.LinearLayoutCompat
 import java.lang.reflect.Field
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
@@ -59,7 +58,7 @@ class SpacingStory : Story() {
         text = it.name + " = " + resources.getString(it.getInt(null))
       }
       text.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
-      view.findViewById<LinearLayoutCompat>(R.id.layout_spacing_container).addView(text)
+      view.findViewById<ViewGroup>(R.id.layout_spacing_container).addView(text)
     }
   }
 }

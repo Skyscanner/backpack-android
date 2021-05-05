@@ -22,11 +22,9 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
-import net.skyscanner.backpack.util.getColor
 import net.skyscanner.backpack.util.use
 
 private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
@@ -57,14 +55,14 @@ open class BpkSwitch @JvmOverloads constructor(
   }
 
   fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val textDisabledColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint04)
-    val textEnabledColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
+    val textDisabledColor = context.getColor(R.color.bpkSkyGrayTint04)
+    val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
-      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, getColor(R.color.bpkPrimary))
+      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, context.getColor(R.color.bpkPrimary))
       val trackCheckedColor = ColorUtils.setAlphaComponent(checkedColor, CHECKED_TRACK_COLOR_ALPHA)
 
-      trackTintList = getColorStateList(trackCheckedColor, ContextCompat.getColor(context, R.color.__switchTrackDisabled))
-      thumbTintList = getColorStateList(checkedColor, ContextCompat.getColor(context, R.color.__switchThumbDisabled))
+      trackTintList = getColorStateList(trackCheckedColor, context.getColor(R.color.__switchTrackDisabled))
+      thumbTintList = getColorStateList(checkedColor, context.getColor(R.color.__switchThumbDisabled))
     }
     setTextColor(
       ColorStateList(
@@ -78,11 +76,11 @@ open class BpkSwitch @JvmOverloads constructor(
     ColorStateList(
       arrayOf(
         intArrayOf(android.R.attr.state_checked),
-        intArrayOf(-android.R.attr.state_checked)
+        intArrayOf(-android.R.attr.state_checked),
       ),
       intArrayOf(
         checkedColor,
-        uncheckedColor
+        uncheckedColor,
       )
     )
 }

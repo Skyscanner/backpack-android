@@ -23,7 +23,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -47,8 +46,8 @@ open class BpkFab @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var backgroundColour = ContextCompat.getColor(context, R.color.bpkMonteverde)
-    var iconColour = ContextCompat.getColor(context, R.color.bpkWhite)
+    var backgroundColour = context.getColor(R.color.bpkMonteverde)
+    var iconColour = context.getColor(R.color.bpkWhite)
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -67,7 +66,7 @@ open class BpkFab @JvmOverloads constructor(
     this.backgroundTintList = getColorSelector(
       backgroundColour,
       backgroundColour,
-      ContextCompat.getColor(context, R.color.bpkSkyGrayTint06)
+      context.getColor(R.color.bpkSkyGrayTint06)
     )
   }
 

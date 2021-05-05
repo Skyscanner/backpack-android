@@ -32,9 +32,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
-import androidx.core.os.ConfigurationCompat
-import androidx.core.view.GravityCompat
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import net.skyscanner.backpack.R
@@ -88,7 +85,7 @@ class BpkSnackbar private constructor(
   private val textFontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.NORMAL)
 
   private val textView = snackbar.view.findViewById<TextView>(R.id.snackbar_text).apply {
-    gravity = GravityCompat.START or Gravity.CENTER_VERTICAL
+    gravity = Gravity.START or Gravity.CENTER_VERTICAL
     compoundDrawablePadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
     setTextColor(textColor)
     minimumHeight = context.resources.getDimensionPixelSize(R.dimen.bpk_snackbar_min_height)
@@ -104,7 +101,7 @@ class BpkSnackbar private constructor(
   private var text: CharSequence? = null
 
   fun setTitle(title: CharSequence): BpkSnackbar = apply {
-    this.title = title.toString().toUpperCase(ConfigurationCompat.getLocales(context.resources.configuration).get(0))
+    this.title = title.toString().toUpperCase(context.resources.configuration.locales[0])
     updateTitleIfShown(isShown)
   }
 
@@ -206,7 +203,7 @@ class BpkSnackbar private constructor(
   ) {
     actionView.gravity = when {
       icon != null -> Gravity.CENTER
-      else -> GravityCompat.START or Gravity.CENTER_VERTICAL
+      else -> Gravity.START or Gravity.CENTER_VERTICAL
     }
     snackbar.setAction(
       when {
@@ -243,9 +240,9 @@ class BpkSnackbar private constructor(
     fun make(view: View, text: CharSequence, duration: Int): BpkSnackbar {
       val context = view.context
 
-      @ColorInt var textColor = ContextCompat.getColor(context, R.color.bpkBackground)
-      @ColorInt var actionColor = ContextCompat.getColor(context, R.color.bpkMonteverde)
-      @ColorInt var backgroundColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
+      @ColorInt var textColor = context.getColor(R.color.bpkBackground)
+      @ColorInt var actionColor = context.getColor(R.color.bpkMonteverde)
+      @ColorInt var backgroundColor = context.getColor(R.color.bpkTextPrimary)
 
       val outValue = TypedValue()
       context.theme.resolveAttribute(R.attr.bpkSnackbarStyle, outValue, true)

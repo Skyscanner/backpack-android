@@ -29,7 +29,6 @@ import android.widget.TextView
 import androidx.annotation.IntDef
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.internal.FontFamilyResolver
 import net.skyscanner.backpack.util.BpkTheme
@@ -151,7 +150,7 @@ open class BpkText @JvmOverloads constructor(
   }
 
   fun setDrawableTint(color: Int) {
-    TextViewCompat.setCompoundDrawableTintList(this, ColorStateList.valueOf(color))
+    compoundDrawableTintList = ColorStateList.valueOf(color)
   }
 
   private fun setup() {
@@ -160,7 +159,7 @@ open class BpkText @JvmOverloads constructor(
       isAllCaps = true
     }
 
-    TextViewCompat.setTextAppearance(this, textAppearance)
+    setTextAppearance(textAppearance)
     _textColour?.let(::setTextColor)
     setLinkTextColor(_textColorLink)
   }

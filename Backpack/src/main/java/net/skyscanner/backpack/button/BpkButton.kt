@@ -21,7 +21,6 @@ package net.skyscanner.backpack.button
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.AttributeSet
 import androidx.annotation.Dimension
 import androidx.annotation.IntDef
@@ -76,6 +75,7 @@ open class BpkButton(
       }
 
       setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
+      applyStyle(type.createStyle(context))
     }
 
   @Dimension
@@ -177,7 +177,7 @@ open class BpkButton(
     background = style.getButtonBackground(isEnabled, iconPosition)
     setTextColor(style.contentColor)
 
-    if (isEnabled && isStateListAnimatorSupported()) {
+    if (isEnabled) {
       this.stateListAnimator = style.getStateListAnimator()
     } else {
       this.stateListAnimator = null
@@ -235,9 +235,3 @@ private fun getButtonType(context: Context, attrs: AttributeSet?): BpkButton.Typ
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
   return BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
 }
-
-private fun isStateListAnimatorSupported() =
-  Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 && !isSpecificDeviceBlackListed()
-
-private fun isSpecificDeviceBlackListed() =
-  Build.MANUFACTURER.equals("samsung", true) && Build.MODEL.equals("gt-i9505", true)

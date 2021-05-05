@@ -24,7 +24,6 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.barchart.internal.ChartGraphView
 import net.skyscanner.backpack.barchart.internal.ChartLegend
@@ -165,14 +164,14 @@ open class BpkBarChart @JvmOverloads constructor(
   init {
     val themedContext = this.context
 
-    var columnTitle = ContextCompat.getColorStateList(themedContext, R.color.bpk_barchart_title_selector)!!
-    var columnSubtitle = ContextCompat.getColorStateList(themedContext, R.color.bpk_barchart_subtitle_selector)!!
-    var groupTitle = ContextCompat.getColorStateList(themedContext, R.color.bpkTextPrimary)!!
-    var chartBackground = ContextCompat.getColorStateList(themedContext, R.color.bpkBackgroundSecondary)!!
-    var chartForeground = ContextCompat.getColorStateList(themedContext, R.color.bpk_barchart_bar_selector)!!
-    var chartLine = ContextCompat.getColorStateList(themedContext, R.color.__barChartActivatedColor)!!
-    var popupBackground = ContextCompat.getColorStateList(themedContext, R.color.__barChartPopupBackgroundColor)!!
-    var popupText = ContextCompat.getColorStateList(themedContext, R.color.__barChartPopupTextColor)!!
+    var columnTitle = context.getColorStateList(R.color.bpk_barchart_title_selector)
+    var columnSubtitle = context.getColorStateList(R.color.bpk_barchart_subtitle_selector)
+    var groupTitle = context.getColorStateList(R.color.bpkTextPrimary)
+    var chartBackground = context.getColorStateList(R.color.bpkBackgroundSecondary)
+    var chartForeground = context.getColorStateList(R.color.bpk_barchart_bar_selector)
+    var chartLine = context.getColorStateList(R.color.__barChartActivatedColor)
+    var popupBackground = context.getColorStateList(R.color.__barChartPopupBackgroundColor)
+    var popupText = context.getColorStateList(R.color.__barChartPopupTextColor)
 
     themedContext.theme.obtainStyledAttributes(
       attrs,

@@ -21,8 +21,6 @@ package net.skyscanner.backpack.demo.stories
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.reflect.Field
 import net.skyscanner.backpack.demo.R
@@ -38,14 +36,14 @@ class ColorAdapter(private val colorResources: ArrayList<Field>) : RecyclerView.
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.background.setBackgroundColor(
-      ContextCompat.getColor(holder.itemView.context, colorResources[position].getInt(null))
+      holder.itemView.context.getColor(colorResources[position].getInt(null))
     )
     holder.name.text = colorResources[position].name.replace("bpk", "", true)
     holder.colorValue.text = holder.itemView.resources.getString(colorResources[position].getInt(null))
       .replace("#ff", "")
     if (colorResources[position].name.contains("900") || colorResources[position].name.contains("800")) {
-      holder.name.setTextColor(ContextCompat.getColor(holder.name.context, R.color.bpkSkyGrayTint06))
-      holder.colorValue.setTextColor(ContextCompat.getColor(holder.colorValue.context, R.color.bpkSkyGrayTint06))
+      holder.name.setTextColor(holder.name.context.getColor(R.color.bpkSkyGrayTint06))
+      holder.colorValue.setTextColor(holder.colorValue.context.getColor(R.color.bpkSkyGrayTint06))
     }
   }
 
@@ -54,7 +52,7 @@ class ColorAdapter(private val colorResources: ArrayList<Field>) : RecyclerView.
   }
 
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var background: LinearLayoutCompat = itemView.findViewById(R.id.color_item)
+    var background: View = itemView.findViewById(R.id.color_item)
     var name: BpkText = itemView.findViewById(R.id.txt_color_name)
     var colorValue: BpkText = itemView.findViewById(R.id.txt_color_value)
   }

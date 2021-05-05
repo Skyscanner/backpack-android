@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.data
 import android.content.Context
 import android.widget.Toast
 import androidx.annotation.VisibleForTesting
-import androidx.core.content.ContextCompat
 import java.util.Locale
 import net.skyscanner.backpack.calendar.model.CalendarCellStyle
 import net.skyscanner.backpack.calendar.model.CalendarColoring
@@ -120,7 +119,7 @@ internal fun multiColoredExampleCalendarColoring(
       ColoredBucket(CalendarCellStyle.Neutral, yellowSet),
       ColoredBucket(CalendarCellStyle.Positive, greenSet),
       ColoredBucket(
-        CalendarCellStyle.Custom(ContextCompat.getColor(context, R.color.bpkBackgroundSecondary)),
+        CalendarCellStyle.Custom(context.getColor(R.color.bpkBackgroundSecondary)),
         greySet
       )
     )

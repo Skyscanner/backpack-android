@@ -30,8 +30,8 @@ BpkNavBar(context).apply {
   title = "Nav Bar"
   menu = R.menu.settings
   icon = AppCompatResources.getDrawable(context, R.drawable.bpk_native_android__back)
-  expandedTitleColor = ContextCompat.getColor(context, R.color.bpkSkyGray)
-  collapsedTitleColor = ContextCompat.getColor(context, R.color.bpkSkyGray)
+  expandedTitleColor = context.getColor(R.color.bpkSkyGray)
+  collapsedTitleColor = context.getColor(R.color.bpkSkyGray)
 }
 ```
 

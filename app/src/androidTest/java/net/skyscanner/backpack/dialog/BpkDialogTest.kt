@@ -20,8 +20,6 @@ package net.skyscanner.backpack.dialog
 
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -34,7 +32,6 @@ import net.skyscanner.backpack.button.BpkButtonLink
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -63,7 +60,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       description = "Your flight is all booked. Why not check out some hotels now?"
       icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
-        ContextCompat.getColor(context, R.color.bpkMonteverde),
+        context.getColor(R.color.bpkMonteverde),
       )
 
       addActionButton(
@@ -83,7 +80,6 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("The scroll bar in the CI is generally different from the local version")
   fun screenshotTestDialogFullScreen() {
     val asyncScreenshot = prepareForAsyncTest()
 
@@ -95,7 +91,7 @@ class BpkDialogTest : BpkSnapshotTest() {
 
       icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
-        ContextCompat.getColor(context, R.color.bpkMonteverde),
+        context.getColor(R.color.bpkMonteverde),
       )
 
       addActionButton(
@@ -123,7 +119,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       description = "Delete your profile?"
       icon = BpkDialog.Icon(
         R.drawable.bpk_trash,
-        ContextCompat.getColor(context, R.color.bpkPanjin),
+        context.getColor(R.color.bpkPanjin),
       )
 
       addActionButton(
@@ -152,7 +148,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       description = "Create a price alert and we'll let you know changes for this route"
       icon = BpkDialog.Icon(
         R.drawable.bpk_alert__active,
-        ContextCompat.getColor(context, R.color.bpkMonteverde),
+        context.getColor(R.color.bpkMonteverde),
       )
 
       addActionButton(
@@ -191,7 +187,7 @@ class BpkDialogTest : BpkSnapshotTest() {
           FrameLayout.LayoutParams.WRAP_CONTENT
         )
         wrapper.setPadding(20, 20, 20, 20)
-        wrapper.setBackgroundColor(ResourcesCompat.getColor(activity.resources, R.color.bpkTextSecondary, activity.theme))
+        wrapper.setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
         wrapper.addView(rootView)
 
         setupView(wrapper)
@@ -200,7 +196,6 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("Sometimes the test fails with 2 visually same images")
   fun screenshotTestFlareDialog() {
     val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
     val asyncScreenshot = prepareForAsyncTest()
@@ -210,7 +205,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       description = "Your flight is all booked."
       icon = BpkDialog.Icon(
         R.drawable.bpk_tick,
-        ContextCompat.getColor(context, R.color.bpkMonteverde),
+        context.getColor(R.color.bpkMonteverde),
       )
 
       image!!.setImageBitmap(bitmap)

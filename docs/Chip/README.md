@@ -30,11 +30,11 @@ BpkChip(context).apply {
   text = "Message"
   isSelected = true
   disabled = false
-  chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
-  chipTextColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
-  chipSelectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
-  disabledBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
-  chipIcon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
+  chipBackgroundColor = context.getColor(R.color.bpkSkyGrayTint07)
+  chipTextColor = context.getColor(R.color.bpkTextPrimary)
+  chipSelectedBackgroundColor = context.getColor(R.color.bpkSkyBlue)
+  disabledBackgroundColor = context.getColor(R.color.bpkSkyGrayTint07)
+  chipIcon = AppCompatResources.getDrawable(context, R.drawable.bpk_account)
 }
 ```
 
@@ -72,11 +72,11 @@ BpkOutlineChip(context).apply {
   text = "Message"
   isSelected = true
   disabled = false
-  chipBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
-  chipTextColor = ContextCompat.getColor(context, R.color.bpkTextPrimary)
-  chipSelectedBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyBlue)
-  disabledBackgroundColor = ContextCompat.getColor(context, R.color.bpkSkyGrayTint07)
-  chipIcon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
+  chipBackgroundColor = context.getColor(R.color.bpkSkyGrayTint07)
+  chipTextColor = context.getColor(R.color.bpkTextPrimary)
+  chipSelectedBackgroundColor = context.getColor(R.color.bpkSkyBlue)
+  disabledBackgroundColor = context.getColor(R.color.bpkSkyGrayTint07)
+  chipIcon = AppCompatResources.getDrawable(context, R.drawable.bpk_account)
 }
 ```
 

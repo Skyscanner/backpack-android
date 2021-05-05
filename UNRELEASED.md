@@ -2,6 +2,12 @@
 
 > Place your changes below this line.
 
+**Breaking:**
+  - `minSdk` has been bumped to 24
+
+**Fixed:**
+  - `BpkButton` background changes when `iconPosition` property is updated
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

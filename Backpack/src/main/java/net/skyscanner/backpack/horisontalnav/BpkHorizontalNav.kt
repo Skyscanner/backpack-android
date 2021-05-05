@@ -34,7 +34,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.appcompat.text.AllCapsTransformationMethod
 import androidx.collection.SparseArrayCompat
-import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.badge.BpkBadge
@@ -136,9 +135,9 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   }
 
   private fun updateAppearance(attrs: AttributeSet? = null, defStyleAttr: Int = 0) {
-    var textColor: Int = ContextCompat.getColor(context, appearance.defaultTextColor)
-    var textSelectedColor: Int = ContextCompat.getColor(context, appearance.defaultTextSelectedColor)
-    var indicatorColor: Int = ContextCompat.getColor(context, appearance.defaultIndicatorColor)
+    var textColor: Int = context.getColor(appearance.defaultTextColor)
+    var textSelectedColor: Int = context.getColor(appearance.defaultTextSelectedColor)
+    var indicatorColor: Int = context.getColor(appearance.defaultIndicatorColor)
 
     val stylisedContext = createContextThemeWrapper(context, attrs, appearance.styleAttribute)
     stylisedContext

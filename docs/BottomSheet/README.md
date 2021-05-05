@@ -44,7 +44,6 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout.*
-import androidx.core.content.res.ResourcesCompat
 
   val root = CoordinatorLayout(context)
 

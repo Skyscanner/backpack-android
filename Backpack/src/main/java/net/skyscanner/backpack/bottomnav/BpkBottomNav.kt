@@ -30,7 +30,6 @@ import android.view.MenuItem
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.ViewCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import net.skyscanner.backpack.R
@@ -53,9 +52,9 @@ open class BpkBottomNav @JvmOverloads constructor(
     labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
     background = AppCompatResources.getDrawable(context, R.drawable.bpk_bottom_nav_background)
     minimumHeight = resources.getDimensionPixelSize(R.dimen.bpk_bottom_nav_height)
-    itemTextColor = AppCompatResources.getColorStateList(context, R.color.bpk_bottom_nav_selector)
+    itemTextColor = context.getColorStateList(R.color.bpk_bottom_nav_selector)
     itemIconTintList = itemTextColor
-    ViewCompat.setElevation(this, resources.getDimension(R.dimen.bpkElevationLg))
+    elevation = resources.getDimension(R.dimen.bpkElevationLg)
   }
 
   fun addItem(id: Int, title: String, icon: Drawable): MenuItem =

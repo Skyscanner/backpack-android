@@ -23,11 +23,9 @@ import android.content.res.ColorStateList
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
@@ -139,10 +137,10 @@ open class BpkBadge @JvmOverloads constructor(
     this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
 
     // set Text color
-    this.setTextColor(ContextCompat.getColor(context, type.textColor))
+    this.setTextColor(context.getColor(type.textColor))
 
     // Set background
-    val bgColor = ContextCompat.getColorStateList(context, type.bgColor)!!
+    val bgColor = context.getColorStateList(type.bgColor)
     if (type == Type.Outline) {
       setBackground(ColorStateList.valueOf(Color.TRANSPARENT), bgColor)
     } else {
@@ -160,11 +158,7 @@ open class BpkBadge @JvmOverloads constructor(
     drawable.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), stroke)
 
     val cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusXs)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-      drawable.cornerRadius = cornerRadius
-    } else {
-      drawable.cornerRadii = FloatArray(8) { cornerRadius }
-    }
+    drawable.cornerRadius = cornerRadius
     this.background = drawable
   }
 }

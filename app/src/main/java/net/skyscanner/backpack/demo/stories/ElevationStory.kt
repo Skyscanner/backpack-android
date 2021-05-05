@@ -24,7 +24,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.LinearLayoutCompat
 import java.lang.reflect.Field
 import net.skyscanner.backpack.card.BpkCardView
 import net.skyscanner.backpack.demo.R
@@ -65,7 +64,7 @@ class ElevationStory : Story() {
       }
       text.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
       card.addView(text)
-      view.findViewById<LinearLayoutCompat>(R.id.layout_elevation_container).addView(card)
+      view.findViewById<ViewGroup>(R.id.layout_elevation_container).addView(card)
     }
   }
 }
