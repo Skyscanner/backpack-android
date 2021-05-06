@@ -7,6 +7,7 @@
 
 **Added:**
   - New `BpkSlider` component
+  - New `car-door` icon
 
 **Fixed:**
   - `BpkButton` background changes when `iconPosition` property is updated
