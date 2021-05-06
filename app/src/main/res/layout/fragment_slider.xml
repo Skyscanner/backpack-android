@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/App.Story"
+  android:orientation="vertical"
+  tools:ignore="HardcodedText">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
+    android:text="Standard"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.slider.BpkSlider
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:value="50.0"
+    android:valueTo="100.0" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
+    android:text="Stepped"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.slider.BpkSlider
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stepSize="10.0"
+    android:value="50.0"
+    android:valueTo="100.0" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
+    android:text="Range slider"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.slider.BpkSlider
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stepSize="1.0"
+    android:valueTo="100.0"
+    app:values="@array/initial_slider_values" />
+
+</LinearLayout>
