@@ -2,6 +2,18 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 29.0.0
+
+**Breaking:**
+  - `minSdk` has been bumped to 24
+
+**Added:**
+  - New `BpkSlider` component
+  - New `car-door` icon
+
+**Fixed:**
+  - `BpkButton` background changes when `iconPosition` property is updated
+
 # 28.1.0
 
 **Added:**
