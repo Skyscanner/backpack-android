@@ -20,6 +20,7 @@ package net.skyscanner.backpack.text
 
 import android.content.Context
 import android.graphics.Typeface
+import android.os.Build
 import androidx.core.content.res.ResourcesCompat
 import java.util.Hashtable
 
@@ -30,7 +31,12 @@ object FontCache {
   operator fun get(res: Int, context: Context): Typeface? {
     var tf = fontCache[res]
     if (tf == null) {
-      tf = ResourcesCompat.getFont(context, res)
+      tf = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        // Preview is broken when using the compat version for font loading as of AS 4.2 (see https://issuetracker.google.com/issues/150587499)
+        context.resources.getFont(res)
+      } else {
+        ResourcesCompat.getFont(context, res)
+      }
       fontCache[res] = tf
     }
     return tf
