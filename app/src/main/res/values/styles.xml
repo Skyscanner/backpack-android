@@ -8,7 +8,6 @@
     <item name="colorPrimaryDark">@color/bpkSkyBlueShade01</item>
     <item name="colorAccent">@color/bpkMonteverde</item>
     <item name="android:windowBackground">@color/bpkBackground</item>
-    <item name="android:textAppearance">?bpkTextBaseAppearance</item>
   </style>
 
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

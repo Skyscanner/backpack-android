@@ -32,6 +32,7 @@ import net.skyscanner.backpack.rating.internal.RatingSelectors
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.unsafeLazy
+import net.skyscanner.backpack.util.withBpkThemeInEditMode
 
 open class BpkRating private constructor(
   context: Context,
@@ -78,7 +79,8 @@ open class BpkRating private constructor(
 
   private val score = RatingScore(this.context, attrs, defStyleAttr)
   private val selectors = RatingSelectors(this.context, attrs, defStyleAttr)
-  private val appearance = RatingAppearance(this.context, attrs, defStyleAttr, defaultStyle, defaultSize)
+  private val appearance =
+    RatingAppearance(this.context.withBpkThemeInEditMode(isInEditMode), attrs, defStyleAttr, defaultStyle, defaultSize)
 
   private val badge by unsafeLazy {
     findViewById<BpkText>(R.id.bpk_rating_badge).apply {

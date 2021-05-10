@@ -34,6 +34,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.withBpkThemeInEditMode
 
 open class BpkBottomNav @JvmOverloads constructor(
   context: Context,
@@ -46,7 +47,7 @@ open class BpkBottomNav @JvmOverloads constructor(
     super.setOnNavigationItemSelectedListener(it)
   }
 
-  private val fontSpan = BottomNavSpan(context)
+  private val fontSpan = BottomNavSpan(context.withBpkThemeInEditMode(isInEditMode))
 
   init {
     labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
