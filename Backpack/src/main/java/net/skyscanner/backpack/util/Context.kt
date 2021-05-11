@@ -24,7 +24,7 @@ import android.content.ContextWrapper
 internal fun Context.isInEditMode(): Boolean =
   unwrapped().packageCodePath == "com.android.layoutlib.bridge.android.BridgeContext"
 
-internal fun Context.unwrapped(): Context {
+private fun Context.unwrapped(): Context {
   var context = this
   while (context is ContextWrapper) {
     context = context.baseContext
