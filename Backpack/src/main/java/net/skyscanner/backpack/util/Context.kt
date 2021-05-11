@@ -16,23 +16,18 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.text
+package net.skyscanner.backpack.util
 
 import android.content.Context
-import android.graphics.Typeface
-import androidx.core.content.res.ResourcesCompat
-import java.util.Hashtable
+import android.content.ContextWrapper
 
-object FontCache {
+internal fun Context.isInEditMode(): Boolean =
+  unwrapped().packageCodePath == "com.android.layoutlib.bridge.android.BridgeContext"
 
-  private val fontCache = Hashtable<Int, Typeface>()
-
-  operator fun get(res: Int, context: Context): Typeface? {
-    var tf = fontCache[res]
-    if (tf == null) {
-      tf = ResourcesCompat.getFont(context, res)
-      fontCache[res] = tf
-    }
-    return tf
+internal fun Context.unwrapped(): Context {
+  var context = this
+  while (context is ContextWrapper) {
+    context = context.baseContext
   }
+  return context
 }
