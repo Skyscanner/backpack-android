@@ -20,10 +20,12 @@ package net.skyscanner.backpack.text.internal
 
 import android.content.Context
 import android.graphics.Typeface
+import android.os.Build
 import android.util.TypedValue
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.text.FontCache
+import net.skyscanner.backpack.util.isInEditMode
 
 internal object FontFamilyResolver {
 
@@ -41,7 +43,12 @@ internal object FontFamilyResolver {
       if (resolved && outValue.resourceId == 0) {
         Typeface.create(outValue.string.toString(), Typeface.NORMAL)
       } else if (resolved) {
-        FontCache[outValue.resourceId, context]
+        if (context.isInEditMode() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          // Preview is broken when using the compat version for font loading as of AS 4.2 (see https://issuetracker.google.com/issues/150587499)
+          context.resources.getFont(outValue.resourceId)
+        } else {
+          FontCache[outValue.resourceId, context]
+        }
       } else {
         null
       }

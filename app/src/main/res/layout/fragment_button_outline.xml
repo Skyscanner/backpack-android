@@ -5,6 +5,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   style="@style/App.Story"
   android:background="?bpkPrimaryColor"
+  tools:background="@color/bpkSkyBlue"
   tools:ignore="HardcodedText">
 
   <net.skyscanner.backpack.button.BpkButton
