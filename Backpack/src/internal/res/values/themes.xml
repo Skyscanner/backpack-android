@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="BpkTheme" parent="BpkThemeBase">
+    <item name="bpkFontFamilyBase">@font/skyscanner_relative_android_book</item>
+    <item name="bpkFontFamilyEmphasized">@font/skyscanner_relative_android_bold</item>
+    <item name="bpkFontFamilyHeavy">@font/skyscanner_relative_android_black</item>
+
+    <item name="android:lineSpacingMultiplier">1</item>
+
+    <item name="bpkTextBaseAppearance">@style/bpkTextBaseInternal</item>
+    <item name="bpkTextCapsAppearance">@style/bpkTextCapsInternal</item>
+    <item name="bpkTextLgAppearance">@style/bpkTextLgInternal</item>
+    <item name="bpkTextSmAppearance">@style/bpkTextSmInternal</item>
+    <item name="bpkTextXlAppearance">@style/bpkTextXlInternal</item>
+    <item name="bpkTextXsAppearance">@style/bpkTextXsInternal</item>
+    <item name="bpkTextXxlAppearance">@style/bpkTextXxlInternal</item>
+    <item name="bpkTextXxxlAppearance">@style/bpkTextXxxlInternal</item>
+    <item name="bpkTextBaseEmphasizedAppearance">@style/bpkTextBaseEmphasizedInternal</item>
+    <item name="bpkTextCapsEmphasizedAppearance">@style/bpkTextCapsEmphasizedInternal</item>
+    <item name="bpkTextLgEmphasizedAppearance">@style/bpkTextLgEmphasizedInternal</item>
+    <item name="bpkTextSmEmphasizedAppearance">@style/bpkTextSmEmphasizedInternal</item>
+    <item name="bpkTextXlEmphasizedAppearance">@style/bpkTextXlEmphasizedInternal</item>
+    <item name="bpkTextXsEmphasizedAppearance">@style/bpkTextXsEmphasizedInternal</item>
+    <item name="bpkTextXxlEmphasizedAppearance">@style/bpkTextXxlEmphasizedInternal</item>
+    <item name="bpkTextXxxlEmphasizedAppearance">@style/bpkTextXxxlEmphasizedInternal</item>
+    <item name="bpkTextXlHeavyAppearance">@style/bpkTextXlHeavyInternal</item>
+    <item name="bpkTextXxlHeavyAppearance">@style/bpkTextXxlHeavyInternal</item>
+    <item name="bpkTextXxxlHeavyAppearance">@style/bpkTextXxxlHeavyInternal</item>
+  </style>
+</resources>

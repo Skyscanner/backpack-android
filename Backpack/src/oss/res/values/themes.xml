@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="BpkTheme" parent="BpkThemeBase">
+    <item name="bpkFontFamilyBase">sans-serif</item>
+    <item name="bpkFontFamilyEmphasized">sans-serif-medium</item>
+    <item name="bpkFontFamilyHeavy">sans-serif-black</item>
+  </style>
+</resources>

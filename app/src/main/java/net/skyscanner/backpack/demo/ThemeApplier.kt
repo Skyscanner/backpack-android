@@ -22,7 +22,6 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import androidx.annotation.StyleRes
-import net.skyscanner.backpack.util.BpkTheme
 
 data class ThemeApplier(@StyleRes private val theme: Int) : Application.ActivityLifecycleCallbacks {
   override fun onActivityPaused(activity: Activity) {}
@@ -33,6 +32,5 @@ data class ThemeApplier(@StyleRes private val theme: Int) : Application.Activity
   override fun onActivityStopped(activity: Activity) {}
   override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
     activity.theme?.applyStyle(theme, true)
-    activity.let { BpkTheme.applyDefaultsToContext(it) }
   }
 }
