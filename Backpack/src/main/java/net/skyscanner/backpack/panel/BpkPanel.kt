@@ -24,13 +24,12 @@ import androidx.annotation.Dimension
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 open class BpkPanel @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.style.Bpk_panel
-) : LinearLayoutCompat(wrapContextWithDefaults(context), attrs, defStyleAttr) {
+) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
   @Dimension
   private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase)

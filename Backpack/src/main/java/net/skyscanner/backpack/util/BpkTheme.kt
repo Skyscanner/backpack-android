@@ -28,7 +28,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ContextThemeWrapper
-import java.lang.IllegalStateException
 import net.skyscanner.backpack.R
 
 class BpkTheme {
@@ -49,7 +48,10 @@ class BpkTheme {
     @JvmStatic
     @ColorInt
     fun getPrimaryColor(context: Context) =
-      resolveThemeColorWithDefault(context, R.attr.bpkPrimaryColor)
+      resolveThemeColor(context, R.attr.bpkPrimaryColor)
+        // This should only ever happen if the value defined for the color is wrong as the property
+        // is guaranteed to be there because of the ContextThemeWrapper
+        ?: throw IllegalStateException("Could not resolve themed color!")
 
     /**
      * Wrap the current `context` with default Backpack colors. After
@@ -93,13 +95,6 @@ internal fun wrapContextWithDefaults(context: Context): Context {
 internal fun applyDefaultsToContext(context: Context) {
   context.theme?.applyStyle(R.style.BpkDefaultTheme, false)
   context.theme?.applyStyle(R.style.BackpackFont, false)
-}
-
-internal fun resolveThemeColorWithDefault(context: Context, resId: Int): Int {
-  return resolveThemeColor(BpkTheme.wrapContextWithDefaults(context), resId)
-    // This should only ever happen if the value defined for the color is wrong as the property
-    // is guaranteed to be there because of the ContextThemeWrapper
-    ?: throw IllegalStateException("Could not resolve themed color!")
 }
 
 /**
@@ -161,7 +156,7 @@ internal fun resolveThemeDimen(context: Context, @AttrRes id: Int, @DimenRes fal
 internal fun createContextThemeWrapper(
   context: Context,
   attributeSet: AttributeSet?,
-  styleAttr: Int
+  styleAttr: Int,
 ): Context {
   val a = context.obtainStyledAttributes(attributeSet, intArrayOf(styleAttr), 0, 0)
   val themeId = a.getResourceId(0, 0)

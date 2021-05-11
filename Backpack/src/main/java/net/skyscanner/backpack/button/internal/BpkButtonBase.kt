@@ -22,7 +22,6 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 internal const val ICON_POSITION_START = 0
 internal const val ICON_POSITION_END = 1
@@ -33,7 +32,7 @@ abstract class BpkButtonBase internal constructor(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int
-) : BpkButtonWithIcon(wrapContextWithDefaults(context), attrs, defStyleAttr) {
+) : BpkButtonWithIcon(context, attrs, defStyleAttr) {
 
   private val font = BpkText.getFont(this.context, BpkText.SM, BpkText.Weight.EMPHASIZED)
 
