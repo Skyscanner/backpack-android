@@ -34,7 +34,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
-import net.skyscanner.backpack.util.withBpkThemeInEditMode
 
 /**
  * [BpkFlare] is designed to render a single item inside a "bubble".
@@ -145,7 +144,6 @@ open class BpkFlare @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    context.withBpkThemeInEditMode(isInEditMode)
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkFlare, defStyleAttr, 0)
       .use {
         round = it.getBoolean(R.styleable.BpkFlare_flareRound, round)

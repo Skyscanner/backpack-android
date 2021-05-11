@@ -168,10 +168,3 @@ internal fun createContextThemeWrapper(
   a.recycle()
   return ContextThemeWrapper(context, themeId)
 }
-
-internal fun Context.withBpkThemeInEditMode(isInEditMode: Boolean): Context {
-  if (isInEditMode) {
-    BpkTheme.applyDefaultsToContext(this)
-  }
-  return this
-}
