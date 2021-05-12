@@ -29,7 +29,6 @@ import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.button.BpkButtonLink
-import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Ignore
@@ -43,8 +42,8 @@ class BpkDialogTest : BpkSnapshotTest() {
   private lateinit var activity: AppCompatActivity
 
   @get:Rule
-  var activityRule: ActivityTestRule<MainActivity> =
-    ActivityTestRule(MainActivity::class.java)
+  var activityRule: ActivityTestRule<AppCompatActivity> =
+    ActivityTestRule(AppCompatActivity::class.java)
 
   @Before
   fun setUp() {

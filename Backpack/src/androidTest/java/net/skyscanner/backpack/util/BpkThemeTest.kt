@@ -60,23 +60,6 @@ class BpkThemeTest {
   }
 
   @Test
-  fun test_wrapContextWithDefaults() {
-    val t = TypedValue()
-
-    Assert.assertFalse(activity.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true))
-
-    val newContext = BpkTheme.wrapContextWithDefaults(activity)
-    newContext.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
-    Assert.assertEquals(skyBlue, t.data)
-
-    val withTheme = ContextThemeWrapper(activity, R.style.TestThemeUtilsWrapWithDefaults)
-    val withThemeAndDefault = BpkTheme.wrapContextWithDefaults(withTheme)
-    withThemeAndDefault.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
-
-    Assert.assertEquals(customBlue, t.data)
-  }
-
-  @Test
   fun test_applyDefaultsToContext() {
     var testContext = ContextWrapper(activity)
     val t = TypedValue()

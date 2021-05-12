@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.barchart
 
-import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
@@ -153,11 +152,8 @@ class BpkBarchartTests : BpkSnapshotTest() {
     }
   }
 
-  private inline fun init(@StyleRes theme: Int = 0, crossinline block: BpkBarChart.() -> Unit) {
+  private inline fun init(crossinline block: BpkBarChart.() -> Unit) {
     activity.runOnUiThread {
-      if (theme != 0) {
-        activity.setTheme(theme)
-      }
       activity.setContentView(R.layout.fragment_bar_chart)
       val barChart = activity.findViewById<BpkBarChart>(R.id.bar_chart)
       block(barChart)

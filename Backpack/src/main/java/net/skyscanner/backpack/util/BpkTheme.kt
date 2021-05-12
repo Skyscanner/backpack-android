@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.util
 
 import android.content.Context
-import android.content.ContextWrapper
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -54,22 +53,6 @@ class BpkTheme {
         ?: throw IllegalStateException("Could not resolve themed color!")
 
     /**
-     * Wrap the current `context` with default Backpack colors. After
-     * this call the context is guaranteed to have all Backpack default
-     * theme colors defined.
-     *
-     * This function will not replace any property that has already been
-     * defined in the current context, only properties that are not present
-     * will be added with its default value.
-     *
-     * @param context The context to be wrapped
-     * @return a new [Context] with defaults
-     */
-    @JvmStatic
-    fun wrapContextWithDefaults(context: Context) =
-      net.skyscanner.backpack.util.wrapContextWithDefaults(context)
-
-    /**
      * Apply the default Backpack colors to the current context`. After
      * this call the context is guaranteed to have all Backpack default
      * theme colors defined.
@@ -84,12 +67,6 @@ class BpkTheme {
     fun applyDefaultsToContext(context: Context) =
       net.skyscanner.backpack.util.applyDefaultsToContext(context)
   }
-}
-
-internal fun wrapContextWithDefaults(context: Context): Context {
-  val copy = ContextWrapper(context)
-  applyDefaultsToContext(copy)
-  return copy
 }
 
 internal fun applyDefaultsToContext(context: Context) {

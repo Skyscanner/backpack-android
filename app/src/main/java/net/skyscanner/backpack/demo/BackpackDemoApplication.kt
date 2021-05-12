@@ -24,7 +24,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
 import com.facebook.stetho.Stetho
 import com.jakewharton.threetenabp.AndroidThreeTen
-import net.skyscanner.backpack.demo.data.SharedPreferences
 
 /**
  * Application class registered in AndroidManifest.xml
@@ -52,7 +51,5 @@ class BackpackDemoApplication : Application() {
     instance = applicationContext!! as BackpackDemoApplication
     Stetho.initializeWithDefaults(this)
     AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-
-    registerActivityLifecycleCallbacks(ThemeApplier(SharedPreferences.getTheme(this)))
   }
 }

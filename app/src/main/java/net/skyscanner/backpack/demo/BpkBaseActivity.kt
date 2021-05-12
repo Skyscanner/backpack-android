@@ -27,6 +27,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.util.unsafeLazy
 
 @SuppressLint("Registered")
@@ -46,6 +47,7 @@ open class BpkBaseActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    setTheme(SharedPreferences.getTheme(this))
 
     val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     sensorManager.registerListener(shakeListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
