@@ -21,24 +21,30 @@ package net.skyscanner.backpack.calendar.view
 import android.content.Context
 import android.view.ViewGroup
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
 import java.util.Locale
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.TestActivity
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class WeekdayViewHeaderTest {
 
+  @get:Rule
+  internal var activityRule: ActivityTestRule<TestActivity> =
+    ActivityTestRule(TestActivity::class.java)
+
   private lateinit var context: Context
 
   @Before
   fun setUp() {
-    context = InstrumentationRegistry.getInstrumentation().targetContext
+    context = activityRule.activity
     AndroidThreeTen.init(context)
   }
 

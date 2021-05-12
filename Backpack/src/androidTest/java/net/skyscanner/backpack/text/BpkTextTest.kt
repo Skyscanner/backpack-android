@@ -25,15 +25,16 @@ import android.view.ContextThemeWrapper
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.test.R as TestR
 import net.skyscanner.backpack.text.BpkText.Weight
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.ResourcesUtil
+import net.skyscanner.backpack.util.TestActivity
 import net.skyscanner.backpack.util.unsafeLazy
 import org.junit.Assert
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -42,10 +43,13 @@ class BpkTextTest {
   private val testString: String = "Test"
   private lateinit var context: Context
 
+  @get:Rule
+  internal var activityRule: ActivityTestRule<TestActivity> =
+    ActivityTestRule(TestActivity::class.java)
+
   @Before
   fun setUp() {
-    context = InstrumentationRegistry.getInstrumentation().targetContext
-    BpkTheme.applyDefaultsToContext(context)
+    context = activityRule.activity
   }
 
   @Test

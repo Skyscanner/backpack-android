@@ -28,6 +28,6 @@ import net.skyscanner.backpack.R
 internal class TestActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setTheme(R.style.Theme_AppCompat)
+    setTheme(R.style.BpkTheme)
   }
 }

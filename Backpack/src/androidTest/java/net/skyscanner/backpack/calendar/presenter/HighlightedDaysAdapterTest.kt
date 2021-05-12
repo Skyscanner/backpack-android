@@ -19,13 +19,14 @@
 package net.skyscanner.backpack.calendar.presenter
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
 import java.util.Locale
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter.HighlightedDay
 import net.skyscanner.backpack.calendar.view.HighlightedDaysMonthFooter
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.TestActivity
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.instanceOf
 import org.junit.Assert.assertArrayEquals
@@ -35,6 +36,7 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertThat
 import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.LocalDate
@@ -42,13 +44,16 @@ import org.threeten.bp.LocalDate
 @RunWith(AndroidJUnit4::class)
 class HighlightedDaysAdapterTest {
 
+  @get:Rule
+  internal var activityRule: ActivityTestRule<TestActivity> =
+    ActivityTestRule(TestActivity::class.java)
+
   private lateinit var subject: HighlightedDaysAdapter
   private lateinit var holidays: Map<String, Set<HighlightedDay>>
 
   @Before
   fun setup() {
-    val context = InstrumentationRegistry.getInstrumentation().targetContext
-    AndroidThreeTen.init(context)
+    AndroidThreeTen.init(activityRule.activity)
 
     holidays = mapOf(
       "2020-1" to setOf(
@@ -67,7 +72,7 @@ class HighlightedDaysAdapterTest {
     )
 
     subject = HighlightedDaysAdapter(
-      context,
+      activityRule.activity,
       Locale.UK,
       holidays.values.flatten().toSet()
     )
@@ -97,8 +102,7 @@ class HighlightedDaysAdapterTest {
 
   @Test
   fun test_onBindView() {
-    val context = InstrumentationRegistry.getInstrumentation().targetContext
-    val view = HighlightedDaysMonthFooter(context) { it.toString() }
+    val view = HighlightedDaysMonthFooter(activityRule.activity) { it.toString() }
 
     subject.onBindView(view, 1, 2020)
     assertNotNull(view.holidays)
@@ -126,10 +130,8 @@ class HighlightedDaysAdapterTest {
 
   @Test
   fun test_date_formatter_custom_locale() {
-    val context = InstrumentationRegistry.getInstrumentation().targetContext
-
     val subject = HighlightedDaysAdapter(
-      context,
+      activityRule.activity,
       Locale.forLanguageTag("pt-BR"),
       holidays.values.flatten().toSet()
     )
