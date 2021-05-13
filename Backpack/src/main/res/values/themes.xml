@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="BpkThemeBase" parent="Theme.AppCompat.DayNight.NoActionBar">
+  <style name="BpkThemeBase" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
     <item name="bpkPrimaryColor">@color/bpkPrimary</item>
     <item name="colorPrimary">?attr/bpkPrimaryColor</item>
     <item name="colorPrimaryDark">@color/bpkSkyBlueShade01</item>
