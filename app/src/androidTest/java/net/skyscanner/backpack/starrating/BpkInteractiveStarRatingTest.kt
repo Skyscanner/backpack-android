@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.starrating
 
-import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -28,7 +27,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkInteractiveStarRatingTest : BpkSnapshotTest() {
 
-  private val rating = BpkInteractiveStarRating(testContext).apply { setBackgroundColor(Color.WHITE) }
+  private val rating = BpkInteractiveStarRating(testContext)
 
   @Before
   fun setup() {

@@ -133,6 +133,7 @@ class BpkButtonTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestButtonBasicOutline() {
+    setBackground(R.color.bpkPrimary)
     val button = BpkButton(testContext, BpkButton.Type.Outline)
     button.text = "Message"
     snap(wrap(button))
@@ -140,6 +141,7 @@ class BpkButtonTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestButtonBasicOutlineWithIcon() {
+    setBackground(R.color.bpkPrimary)
     val button = BpkButton(testContext, BpkButton.Type.Outline)
     button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.START
@@ -149,6 +151,7 @@ class BpkButtonTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestButtonBasicOutlineOnlyIcon() {
+    setBackground(R.color.bpkPrimary)
     val button = BpkButton(testContext, BpkButton.Type.Outline)
     button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.ICON_ONLY

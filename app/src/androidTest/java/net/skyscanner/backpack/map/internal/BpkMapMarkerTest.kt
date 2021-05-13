@@ -32,6 +32,7 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
+    setBackground(android.R.color.transparent)
     setDimensions(56, 128)
   }
 

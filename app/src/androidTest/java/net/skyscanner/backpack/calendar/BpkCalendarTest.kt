@@ -40,7 +40,6 @@ import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 import net.skyscanner.backpack.calendar.presenter.MonthFooterAdapter
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.MainActivity
-import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.multiColoredExampleCalendarColoring
 import org.hamcrest.CoreMatchers
 import org.junit.Before
@@ -106,7 +105,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -123,7 +122,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -151,7 +150,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -164,7 +163,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -177,21 +176,20 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    val wrapped = wrapWithBackground(calendar)
 
     val asyncScreenshot = prepareForAsyncTest()
 
     activity.runOnUiThread {
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(wrapped)
+      rootLayout.addView(calendar)
     }
 
     Espresso.onData(CoreMatchers.anything())
       .atPosition(0)
       .perform(ViewActions.click())
       .check { _, _ ->
-        setupView(wrapped)
-        asyncScreenshot.record(wrapped)
+        setupView(calendar)
+        asyncScreenshot.record(calendar)
       }
   }
 
@@ -205,13 +203,12 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    val wrapped = wrapWithBackground(calendar)
 
     val asyncScreenshot = prepareForAsyncTest()
 
     activity.runOnUiThread {
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(wrapped)
+      rootLayout.addView(calendar)
     }
 
     Espresso.onData(CoreMatchers.anything())
@@ -222,8 +219,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
       .atPosition(0)
       .perform(ViewActions.click())
       .check { _, _ ->
-        setupView(wrapped)
-        asyncScreenshot.record(wrapped)
+        setupView(calendar)
+        asyncScreenshot.record(calendar)
       }
   }
 
@@ -237,11 +234,10 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    val wrapped = wrapWithBackground(calendar)
 
     val asyncScreenshot = prepareForAsyncTest()
 
-    selectStartEnd(wrapped, asyncScreenshot)
+    selectStartEnd(calendar, asyncScreenshot)
   }
 
   @Test
@@ -258,11 +254,10 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    val wrapped = wrapWithBackground(calendar)
 
     val asyncScreenshot = prepareForAsyncTest()
 
-    selectStartEnd(wrapped, asyncScreenshot)
+    selectStartEnd(calendar, asyncScreenshot)
   }
 
   @Test
@@ -275,13 +270,12 @@ class BpkCalendarTest : BpkSnapshotTest() {
       SelectionType.SINGLE
     )
     calendar.setController(controller)
-    val wrapped = wrapWithBackground(calendar)
 
     val asyncScreenshot = prepareForAsyncTest()
 
     activity.runOnUiThread {
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(wrapped)
+      rootLayout.addView(calendar)
     }
 
     Espresso.onData(CoreMatchers.anything())
@@ -296,8 +290,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
       .atPosition(1)
       .perform(ViewActions.scrollTo())
       .check { _, _ ->
-        setupView(wrapped)
-        asyncScreenshot.record(wrapped)
+        setupView(calendar)
+        asyncScreenshot.record(calendar)
       }
   }
 
@@ -311,7 +305,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
     calendar.setController(controller)
     controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9)))
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -326,7 +320,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
     controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 16)))
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -341,7 +335,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -357,7 +351,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
     controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 10)))
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -371,7 +365,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
     calendar.setController(controller)
     controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10)))
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -387,7 +381,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
     controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 9)))
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -398,7 +392,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       LocalDate.of(2019, 6, 8)
     )
     calendar.setController(controller)
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -412,7 +406,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
     calendar.setSelectionFromTop(2)
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
   @Test
@@ -444,13 +438,13 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
 
     calendar.setController(controller)
-    snap(wrapWithBackground(calendar))
+    snap(calendar)
   }
 
-  private fun selectStartEnd(wrapped: FrameLayout, asyncScreenshot: AsyncSnapshot) {
+  private fun selectStartEnd(view: View, asyncScreenshot: AsyncSnapshot) {
     activity.runOnUiThread {
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(wrapped)
+      rootLayout.addView(view)
     }
 
     Espresso.onData(CoreMatchers.anything())
@@ -465,16 +459,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
       .atPosition(0)
       .perform(ViewActions.scrollTo())
       .check { _, _ ->
-        setupView(wrapped)
-        asyncScreenshot.record(wrapped)
+        setupView(view)
+        asyncScreenshot.record(view)
       }
-  }
-
-  private fun wrapWithBackground(view: View): FrameLayout {
-    return FrameLayout(testContext).apply {
-      layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-      setBackgroundColor(resources.getColor(R.color.bpkWhite, null))
-      addView(view)
-    }
   }
 }

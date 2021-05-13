@@ -30,6 +30,7 @@ class BpkPanelTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
+    setBackground(android.R.color.transparent)
     setDimensions(100, 100)
   }
 

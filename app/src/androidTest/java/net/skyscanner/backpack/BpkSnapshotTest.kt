@@ -22,6 +22,9 @@ import android.content.Context
 import android.graphics.Canvas
 import android.os.Looper
 import android.view.View
+import androidx.annotation.ColorRes
+import androidx.annotation.Dimension
+import androidx.annotation.Dimension.DP
 import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
@@ -31,6 +34,7 @@ open class BpkSnapshotTest {
 
   private var height = 100
   private var width = 100
+  private var background = R.color.bpkBackground
 
   private val variant = BpkTestVariant.current
   var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
@@ -50,9 +54,13 @@ open class BpkSnapshotTest {
       .record()
   }
 
-  protected fun setDimensions(height: Int, width: Int) {
+  protected fun setDimensions(@Dimension(unit = DP) height: Int, @Dimension(unit = DP) width: Int) {
     this.height = height
     this.width = width
+  }
+
+  protected fun setBackground(@ColorRes background: Int) {
+    this.background = background
   }
 
   protected fun prepareForAsyncTest(): AsyncSnapshot {
@@ -81,6 +89,7 @@ open class BpkSnapshotTest {
 
   private fun wrapMeasuredViewWithBackground(view: View): View {
     val result = ViewMirror(view.context, view)
+    result.setBackgroundResource(background)
 
     ViewHelpers.setupView(result)
       .setExactHeightDp(height)
@@ -98,7 +107,6 @@ open class BpkSnapshotTest {
   ) : View(context) {
 
     init {
-      background = context.getDrawable(R.color.bpkBackground)
       view.jumpDrawablesToCurrentState() // this is for views with custom drawable state, such as checkboxes, radios, etc
     }
 

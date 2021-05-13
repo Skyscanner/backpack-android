@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.radiobutton
 
-import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -30,7 +29,6 @@ class BpkRadioButtonTests : BpkSnapshotTest() {
 
   private val radioButton = BpkRadioButton(testContext).apply {
     text = "RadioButton"
-    setBackgroundColor(Color.WHITE)
   }
 
   @Before
