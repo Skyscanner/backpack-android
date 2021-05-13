@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack
 
+import android.content.Context
+import android.graphics.Canvas
 import android.os.Looper
 import android.view.View
 import androidx.test.platform.app.InstrumentationRegistry
@@ -43,7 +45,7 @@ open class BpkSnapshotTest {
 
   protected fun snap(view: View) {
     setupView(view)
-    Screenshot.snap(view)
+    Screenshot.snap(wrapMeasuredViewWithBackground(view))
       .setName(getScreenshotName())
       .record()
   }
@@ -65,7 +67,7 @@ open class BpkSnapshotTest {
 
   inner class AsyncSnapshot(private val testClass: String, private val testName: String) {
     fun record(view: View) {
-      Screenshot.snap(view)
+      Screenshot.snap(wrapMeasuredViewWithBackground(view))
         .setName(getScreenshotName(testClass, testName))
         .record()
     }
@@ -76,4 +78,37 @@ open class BpkSnapshotTest {
     testName: String = TestNameDetector.getTestName(),
   ): String =
     "${testClass.removePrefix("net.skyscanner.backpack.")}_$testName"
+
+  private fun wrapMeasuredViewWithBackground(view: View): View {
+    val result = ViewMirror(view.context, view)
+
+    ViewHelpers.setupView(result)
+      .setExactHeightDp(height)
+      .setExactWidthDp(width)
+      .layout()
+
+    return result
+  }
+
+  // adding view to FrameLayout or creating custom ViewGroup breaks many tests for some reason.
+  // instead we use custom drawing here via proxy view
+  private class ViewMirror constructor(
+    context: Context,
+    private val view: View,
+  ) : View(context) {
+
+    init {
+      background = context.getDrawable(R.color.bpkBackground)
+      view.jumpDrawablesToCurrentState() // this is for views with custom drawable state, such as checkboxes, radios, etc
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+      setMeasuredDimension(view.measuredWidth, view.measuredHeight) // we want the canvas to have the exact same size
+    }
+
+    override fun dispatchDraw(canvas: Canvas) {
+      super.dispatchDraw(canvas)
+      view.draw(canvas)
+    }
+  }
 }
