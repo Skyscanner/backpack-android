@@ -32,7 +32,7 @@ class BpkButtonTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(300, 300)
+    setDimensions(40, 300)
   }
 
   @Test
