@@ -51,27 +51,7 @@ class BpkTheme {
         // This should only ever happen if the value defined for the color is wrong as the property
         // is guaranteed to be there because of the ContextThemeWrapper
         ?: throw IllegalStateException("Could not resolve themed color!")
-
-    /**
-     * Apply the default Backpack colors to the current context`. After
-     * this call the context is guaranteed to have all Backpack default
-     * theme colors defined.
-     *
-     * This function will not replace any property that has already been
-     * defined in the current context, only properties that are not present
-     * will be added with its default value.
-     *
-     * @param context The context to be wrapped
-     */
-    @JvmStatic
-    fun applyDefaultsToContext(context: Context) =
-      net.skyscanner.backpack.util.applyDefaultsToContext(context)
   }
-}
-
-internal fun applyDefaultsToContext(context: Context) {
-  context.theme?.applyStyle(R.style.BpkDefaultTheme, false)
-  context.theme?.applyStyle(R.style.BackpackFont, false)
 }
 
 /**
