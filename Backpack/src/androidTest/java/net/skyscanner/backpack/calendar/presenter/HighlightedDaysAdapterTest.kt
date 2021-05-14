@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar.presenter
 
+import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -48,12 +49,15 @@ class HighlightedDaysAdapterTest {
   internal var activityRule: ActivityTestRule<TestActivity> =
     ActivityTestRule(TestActivity::class.java)
 
+  private lateinit var context: Context
+
   private lateinit var subject: HighlightedDaysAdapter
   private lateinit var holidays: Map<String, Set<HighlightedDay>>
 
   @Before
   fun setup() {
-    AndroidThreeTen.init(activityRule.activity)
+    context = activityRule.activity
+    AndroidThreeTen.init(context)
 
     holidays = mapOf(
       "2020-1" to setOf(
@@ -72,7 +76,7 @@ class HighlightedDaysAdapterTest {
     )
 
     subject = HighlightedDaysAdapter(
-      activityRule.activity,
+      context,
       Locale.UK,
       holidays.values.flatten().toSet()
     )
@@ -102,7 +106,7 @@ class HighlightedDaysAdapterTest {
 
   @Test
   fun test_onBindView() {
-    val view = HighlightedDaysMonthFooter(activityRule.activity) { it.toString() }
+    val view = HighlightedDaysMonthFooter(context) { it.toString() }
 
     subject.onBindView(view, 1, 2020)
     assertNotNull(view.holidays)
@@ -131,7 +135,7 @@ class HighlightedDaysAdapterTest {
   @Test
   fun test_date_formatter_custom_locale() {
     val subject = HighlightedDaysAdapter(
-      activityRule.activity,
+      context,
       Locale.forLanguageTag("pt-BR"),
       holidays.values.flatten().toSet()
     )
