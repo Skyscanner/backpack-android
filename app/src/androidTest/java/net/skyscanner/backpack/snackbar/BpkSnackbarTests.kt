@@ -137,7 +137,12 @@ class BpkSnackbarTests : BpkSnapshotTest() {
       what(asyncScreenshot)
         .addCallback(object : BpkSnackbar.Callback() {
           override fun onShown(sb: BpkSnackbar) {
-            asyncScreenshot.record(sb.rawSnackbar.view)
+            sb.rawSnackbar.view.postDelayed(
+              {
+                asyncScreenshot.record(sb.rawSnackbar.view)
+              },
+              70
+            )
           }
         })
         .show()
