@@ -27,14 +27,11 @@ import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-// FIXME: KOA-4584
-@Ignore("This tests became flaky once we switched to API 24. The images look the same but the tests fail.")
 class BpkSnackbarTests : BpkSnapshotTest() {
 
   private lateinit var activity: AppCompatActivity
@@ -140,7 +137,12 @@ class BpkSnackbarTests : BpkSnapshotTest() {
       what(asyncScreenshot)
         .addCallback(object : BpkSnackbar.Callback() {
           override fun onShown(sb: BpkSnackbar) {
-            asyncScreenshot.record(sb.rawSnackbar.view)
+            sb.rawSnackbar.view.postDelayed(
+              {
+                asyncScreenshot.record(sb.rawSnackbar.view)
+              },
+              70
+            )
           }
         })
         .show()
