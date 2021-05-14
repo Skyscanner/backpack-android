@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.barchart
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
@@ -162,7 +160,6 @@ class BpkBarchartTests : BpkSnapshotTest() {
       }
       activity.setContentView(R.layout.fragment_bar_chart)
       val barChart = activity.findViewById<BpkBarChart>(R.id.bar_chart)
-      barChart.background = ColorDrawable(Color.WHITE)
       block(barChart)
     }
   }

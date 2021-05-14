@@ -32,6 +32,7 @@ class BpkCardTest : BpkSnapshotTest() {
   @Before
   fun setup() {
     setDimensions(150, 150)
+    setBackground(android.R.color.transparent)
   }
 
   @Test

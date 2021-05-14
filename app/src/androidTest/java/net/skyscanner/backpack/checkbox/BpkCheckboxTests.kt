@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.checkbox
 
-import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -30,7 +29,6 @@ class BpkCheckboxTests : BpkSnapshotTest() {
 
   private val checkbox = BpkCheckbox(testContext).apply {
     text = "Checkbox"
-    setBackgroundColor(Color.WHITE)
   }
 
   @Before

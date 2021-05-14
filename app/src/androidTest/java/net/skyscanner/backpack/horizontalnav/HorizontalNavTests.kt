@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.horizontalnav
 
-import android.graphics.Color
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -84,7 +83,6 @@ class HorizontalNavTests : BpkSnapshotTest() {
   }
 
   private fun BpkHorizontalNav.init() = apply {
-    setBackgroundColor(Color.WHITE)
     addTab(newTab().setText("1"))
     addTab(newTab().setText("2"))
     addTab(newTab().setText("3"))

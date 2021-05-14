@@ -30,6 +30,7 @@ import org.junit.runner.RunWith
 class BpkOutlineChipTest : BpkSnapshotTest() {
   @Before
   fun setup() {
+    setBackground(R.color.bpkPrimary)
     setDimensions(36, 100)
   }
 
@@ -56,6 +57,7 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestCustomSelectedBackground() {
+    setBackground(android.R.color.transparent)
     val view = BpkOutlineChip(testContext)
     view.text = "tag"
     view.selectedBackgroundColor = testContext.getColor(R.color.bpkPanjin)

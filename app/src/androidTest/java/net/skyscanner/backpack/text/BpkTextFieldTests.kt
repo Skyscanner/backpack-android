@@ -38,6 +38,7 @@ class BpkTextFieldTests : BpkSnapshotTest() {
 
   @Before
   fun setup() {
+    setBackground(android.R.color.transparent)
     setDimensions(60, 200)
   }
 

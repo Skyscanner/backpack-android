@@ -19,8 +19,6 @@
 package net.skyscanner.backpack.rating
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.demo.R
@@ -64,5 +62,4 @@ internal fun createTestRating(
     }
     this.value = value
     layoutDirection = if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
-    background = ColorDrawable(Color.WHITE)
   }

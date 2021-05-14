@@ -20,6 +20,7 @@ package net.skyscanner.backpack.badge
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -85,6 +86,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
   @Test
   fun screenshotTestBadgeOutline() {
+    setBackground(R.color.bpkPrimary)
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Outline
     badge.text = "Message"

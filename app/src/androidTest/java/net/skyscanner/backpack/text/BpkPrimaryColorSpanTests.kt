@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.text
 
-import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.widget.TextView
@@ -31,7 +30,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkPrimaryColorSpanTests : BpkSnapshotTest() {
 
-  private val textView = TextView(testContext).apply { setBackgroundColor(Color.WHITE) }
+  private val textView = TextView(testContext)
 
   @Before
   fun setup() {
