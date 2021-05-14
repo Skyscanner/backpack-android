@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.util
 
 import android.graphics.Color
+import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -55,5 +56,15 @@ class BpkThemeTest {
       customBlue,
       BpkTheme.getPrimaryColor(ContextThemeWrapper(activity, R.style.TestThemeUtilsCustomColors))
     )
+  }
+
+  @Test
+  fun test_theme_properties() {
+    val t = TypedValue()
+
+    Assert.assertTrue(activity.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true))
+
+    activity.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
+    Assert.assertEquals(skyBlue, t.data)
   }
 }
