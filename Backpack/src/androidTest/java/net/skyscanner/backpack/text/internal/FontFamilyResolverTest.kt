@@ -20,6 +20,7 @@ package net.skyscanner.backpack.text.internal
 
 import android.content.Context
 import android.graphics.Typeface
+import android.view.ContextThemeWrapper
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.test.R
@@ -58,13 +59,14 @@ class FontFamilyResolverTest {
 
   @Test
   fun test_custom_font() {
+    val testContext = ContextThemeWrapper(context, R.style.TestTextCustomFont)
     val shadows = FontCache[R.font.shadows_into_light, context]
     val cursive = Typeface.create("cursive", Typeface.NORMAL)
     val casual = Typeface.create("casual", Typeface.NORMAL)
 
-    Assert.assertEquals("normal", shadows, FontFamilyResolver(context, BpkText.Weight.NORMAL))
-    Assert.assertEquals("emphasized", cursive, FontFamilyResolver(context, BpkText.Weight.EMPHASIZED))
-    Assert.assertEquals("heavy", casual, FontFamilyResolver(context, BpkText.Weight.HEAVY))
+    Assert.assertEquals("normal", shadows, FontFamilyResolver(testContext, BpkText.Weight.NORMAL))
+    Assert.assertEquals("emphasized", cursive, FontFamilyResolver(testContext, BpkText.Weight.EMPHASIZED))
+    Assert.assertEquals("heavy", casual, FontFamilyResolver(testContext, BpkText.Weight.HEAVY))
   }
 
   @Test
