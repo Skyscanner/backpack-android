@@ -28,26 +28,22 @@ import androidx.test.platform.app.InstrumentationRegistry
 import java.util.Locale
 import net.skyscanner.backpack.demo.R
 
-sealed class BpkTestVariant(val id: String) {
+sealed class BpkTestVariant(val id: String, val themeId: Int = R.style.AppTheme) {
 
   open fun applyToActivity(activity: Activity): Activity =
-    activity.apply { setTheme(themeId()) }
+    activity.apply { setTheme(themeId) }
 
   open fun newActivity(activity: Activity): Activity =
     activity
 
-  open fun themeId(): Int = R.style.AppTheme
-
   open fun newContext(context: Context): Context =
     context.apply {
-      setTheme(themeId())
+      setTheme(themeId)
     }
 
   object Default : BpkTestVariant("default")
 
-  object Themed : BpkTestVariant("themed") {
-    override fun themeId() = R.style.LondonTheme
-  }
+  object Themed : BpkTestVariant("themed", R.style.LondonTheme)
 
   object DarkMode : BpkTestVariant("dm") {
 
