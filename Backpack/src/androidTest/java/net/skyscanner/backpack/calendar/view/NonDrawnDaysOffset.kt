@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar.view
 
+import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -41,9 +42,12 @@ class NonDrawnDaysOffset {
   internal var activityRule: ActivityTestRule<TestActivity> =
     ActivityTestRule(TestActivity::class.java)
 
+  private lateinit var context: Context
+
   @Before
   fun setUp() {
-    AndroidThreeTen.init(activityRule.activity)
+    context = activityRule.activity
+    AndroidThreeTen.init(context)
   }
 
   @Test
@@ -125,7 +129,7 @@ class NonDrawnDaysOffset {
   }
 
   private fun givenMonthView(locale: Locale, startDate: LocalDate, drawMonth: Int): MonthView {
-    val monthView = MonthView(context = activityRule.activity)
+    val monthView = MonthView(context = context)
 
     monthView.controller = object : TestBpkCalendarController() {
       override val locale: Locale
