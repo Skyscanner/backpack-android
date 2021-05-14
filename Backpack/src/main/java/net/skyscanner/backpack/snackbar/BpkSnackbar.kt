@@ -70,6 +70,7 @@ class BpkSnackbar private constructor(
 
   private val snackbar = Snackbar.make(view, "", duration).apply {
     setBackgroundColorCompat(backgroundColor)
+    animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
     addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
       override fun onShown(transientBottomBar: Snackbar?) {
         callbacks.forEach { it.onShown(this@BpkSnackbar) }
