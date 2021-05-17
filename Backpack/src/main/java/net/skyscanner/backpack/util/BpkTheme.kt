@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.util
 
 import android.content.Context
-import android.content.ContextWrapper
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -28,7 +27,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.view.ContextThemeWrapper
-import java.lang.IllegalStateException
 import net.skyscanner.backpack.R
 
 class BpkTheme {
@@ -49,57 +47,11 @@ class BpkTheme {
     @JvmStatic
     @ColorInt
     fun getPrimaryColor(context: Context) =
-      resolveThemeColorWithDefault(context, R.attr.bpkPrimaryColor)
-
-    /**
-     * Wrap the current `context` with default Backpack colors. After
-     * this call the context is guaranteed to have all Backpack default
-     * theme colors defined.
-     *
-     * This function will not replace any property that has already been
-     * defined in the current context, only properties that are not present
-     * will be added with its default value.
-     *
-     * @param context The context to be wrapped
-     * @return a new [Context] with defaults
-     */
-    @JvmStatic
-    fun wrapContextWithDefaults(context: Context) =
-      net.skyscanner.backpack.util.wrapContextWithDefaults(context)
-
-    /**
-     * Apply the default Backpack colors to the current context`. After
-     * this call the context is guaranteed to have all Backpack default
-     * theme colors defined.
-     *
-     * This function will not replace any property that has already been
-     * defined in the current context, only properties that are not present
-     * will be added with its default value.
-     *
-     * @param context The context to be wrapped
-     */
-    @JvmStatic
-    fun applyDefaultsToContext(context: Context) =
-      net.skyscanner.backpack.util.applyDefaultsToContext(context)
+      resolveThemeColor(context, R.attr.bpkPrimaryColor)
+        // This should only ever happen if the value defined for the color is wrong as the property
+        // is guaranteed to be there because of the ContextThemeWrapper
+        ?: throw IllegalStateException("Could not resolve themed color!")
   }
-}
-
-internal fun wrapContextWithDefaults(context: Context): Context {
-  val copy = ContextWrapper(context)
-  applyDefaultsToContext(copy)
-  return copy
-}
-
-internal fun applyDefaultsToContext(context: Context) {
-  context.theme?.applyStyle(R.style.BpkDefaultTheme, false)
-  context.theme?.applyStyle(R.style.BackpackFont, false)
-}
-
-internal fun resolveThemeColorWithDefault(context: Context, resId: Int): Int {
-  return resolveThemeColor(BpkTheme.wrapContextWithDefaults(context), resId)
-    // This should only ever happen if the value defined for the color is wrong as the property
-    // is guaranteed to be there because of the ContextThemeWrapper
-    ?: throw IllegalStateException("Could not resolve themed color!")
 }
 
 /**
@@ -161,7 +113,7 @@ internal fun resolveThemeDimen(context: Context, @AttrRes id: Int, @DimenRes fal
 internal fun createContextThemeWrapper(
   context: Context,
   attributeSet: AttributeSet?,
-  styleAttr: Int
+  styleAttr: Int,
 ): Context {
   val a = context.obtainStyledAttributes(attributeSet, intArrayOf(styleAttr), 0, 0)
   val themeId = a.getResourceId(0, 0)

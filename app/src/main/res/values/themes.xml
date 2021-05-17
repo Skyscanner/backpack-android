@@ -302,7 +302,7 @@
   </style>
   <!-- Doha theme end -->
 
-  <style name="CustomTextStyle">
+  <style name="CustomTextStyle" parent="AppTheme">
     <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
     <item name="bpkFontFamilyEmphasized">@font/shadows_into_light</item>
     <item name="bpkFontFamilyHeavy">@font/shadows_into_light</item>

@@ -29,13 +29,12 @@ import kotlin.math.min
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
-import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 open class BpkNudger @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : LinearLayoutCompat(wrapContextWithDefaults(context), attrs, defStyleAttr) {
+) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
   private val decrementButton by unsafeLazy<View> {
     findViewById(R.id.bpk_nudger_decrement)

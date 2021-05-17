@@ -21,7 +21,6 @@ package net.skyscanner.backpack.slider
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
-import android.view.ContextThemeWrapper
 import com.google.android.material.slider.RangeSlider
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.BpkTheme
@@ -34,11 +33,7 @@ open class BpkSlider @JvmOverloads constructor(
   defStyleAttr: Int = 0,
 ) : RangeSlider(
   createContextThemeWrapper(
-    // FIXME Remove material context theme wrapper when moving to material theme
-    createContextThemeWrapper(
-      ContextThemeWrapper(context, R.style.Theme_MaterialComponents_Light),
-      attrs, com.google.android.material.R.attr.sliderStyle
-    ),
+    createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.sliderStyle),
     attrs, R.attr.bpkSliderStyle
   ),
   attrs,

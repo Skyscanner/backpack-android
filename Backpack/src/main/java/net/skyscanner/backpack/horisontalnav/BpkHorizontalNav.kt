@@ -42,13 +42,12 @@ import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
-import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 open class BpkHorizontalNav @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
-) : TabLayout(wrapContextWithDefaults(context), attrs, defStyleAttr) {
+) : TabLayout(context, attrs, defStyleAttr) {
 
   enum class Appearance(
     internal val id: Int,

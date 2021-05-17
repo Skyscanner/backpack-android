@@ -46,13 +46,12 @@ import net.skyscanner.backpack.calendar.view.BpkCalendarScrollListener
 import net.skyscanner.backpack.calendar.view.CalendarView
 import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
 import net.skyscanner.backpack.util.unsafeLazy
-import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 open class BpkCalendar @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyle: Int = 0,
-) : ConstraintLayout(wrapContextWithDefaults(context), attrs, defStyle), BpkCalendarScrollListener {
+) : ConstraintLayout(context, attrs, defStyle), BpkCalendarScrollListener {
 
   init {
     inflate(this.context, R.layout.view_bpk_calendar, this)

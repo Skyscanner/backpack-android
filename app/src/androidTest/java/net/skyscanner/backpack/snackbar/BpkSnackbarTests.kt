@@ -27,11 +27,13 @@ import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@Ignore("These tests are flaky as sometimes the test is finished before the screenshot is generated")
 class BpkSnackbarTests : BpkSnapshotTest() {
 
   private lateinit var activity: AppCompatActivity

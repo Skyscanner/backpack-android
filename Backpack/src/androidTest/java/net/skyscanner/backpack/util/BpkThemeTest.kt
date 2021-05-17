@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.util
 
-import android.content.ContextWrapper
 import android.graphics.Color
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
@@ -60,37 +59,12 @@ class BpkThemeTest {
   }
 
   @Test
-  fun test_wrapContextWithDefaults() {
+  fun test_theme_properties() {
     val t = TypedValue()
 
-    Assert.assertFalse(activity.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true))
+    Assert.assertTrue(activity.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true))
 
-    val newContext = BpkTheme.wrapContextWithDefaults(activity)
-    newContext.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
+    activity.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
     Assert.assertEquals(skyBlue, t.data)
-
-    val withTheme = ContextThemeWrapper(activity, R.style.TestThemeUtilsWrapWithDefaults)
-    val withThemeAndDefault = BpkTheme.wrapContextWithDefaults(withTheme)
-    withThemeAndDefault.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
-
-    Assert.assertEquals(customBlue, t.data)
-  }
-
-  @Test
-  fun test_applyDefaultsToContext() {
-    var testContext = ContextWrapper(activity)
-    val t = TypedValue()
-
-    Assert.assertFalse(activity.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true))
-
-    BpkTheme.applyDefaultsToContext(testContext)
-    testContext.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
-    Assert.assertEquals(skyBlue, t.data)
-
-    val withTheme = ContextThemeWrapper(activity, R.style.TestThemeUtilsWrapWithDefaults)
-    BpkTheme.applyDefaultsToContext(withTheme)
-    withTheme.theme.resolveAttribute(R.attr.bpkPrimaryColor, t, true)
-
-    Assert.assertEquals(customBlue, t.data)
   }
 }

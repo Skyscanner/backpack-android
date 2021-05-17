@@ -4,10 +4,6 @@
     <item name="bpkPrimaryColor">#9B104A</item>
   </style>
 
-  <style name="TestThemeUtilsWrapWithDefaults">
-    <item name="bpkPrimaryColor">#9B104A</item>
-  </style>
-
   <style name="TestTextCustomFont">
     <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
     <item name="bpkFontFamilyEmphasized">cursive</item>

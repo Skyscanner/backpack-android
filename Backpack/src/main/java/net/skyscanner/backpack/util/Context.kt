@@ -22,7 +22,7 @@ import android.content.Context
 import android.content.ContextWrapper
 
 internal fun Context.isInEditMode(): Boolean =
-  unwrapped().packageCodePath == "com.android.layoutlib.bridge.android.BridgeContext"
+  unwrapped()::class.qualifiedName == "com.android.layoutlib.bridge.android.BridgeContext"
 
 private fun Context.unwrapped(): Context {
   var context = this

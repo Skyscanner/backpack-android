@@ -39,6 +39,7 @@ class SettingsActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     val theme = SharedPreferences.getTheme(this)
+    setTheme(theme)
     val hasCustomTheme = theme != R.style.AppTheme
 
     setContentView(R.layout.activity_settings)

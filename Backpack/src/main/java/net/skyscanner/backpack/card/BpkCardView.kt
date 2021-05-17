@@ -26,7 +26,6 @@ import androidx.annotation.Dimension
 import androidx.cardview.widget.CardView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
-import net.skyscanner.backpack.util.wrapContextWithDefaults
 
 /**
  * Cards are used to group related items.
@@ -38,7 +37,7 @@ open class BpkCardView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.style.Bpk_card
-) : CardView(wrapContextWithDefaults(context), attrs, defStyleAttr) {
+) : CardView(context, attrs, defStyleAttr) {
 
   /**
    * List of possible border radius for the [BpkCardView].

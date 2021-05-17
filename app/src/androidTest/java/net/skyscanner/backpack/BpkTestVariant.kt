@@ -22,43 +22,28 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Looper
-import android.view.ContextThemeWrapper
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDialog
 import androidx.test.platform.app.InstrumentationRegistry
 import java.util.Locale
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.ThemeApplier
-import net.skyscanner.backpack.util.BpkTheme
 
-sealed class BpkTestVariant(val id: String) {
+sealed class BpkTestVariant(val id: String, val themeId: Int = R.style.AppTheme) {
 
   open fun applyToActivity(activity: Activity): Activity =
-    activity
+    activity.apply { setTheme(themeId) }
 
   open fun newActivity(activity: Activity): Activity =
     activity
 
   open fun newContext(context: Context): Context =
-    BpkTheme.wrapContextWithDefaults(
-      androidx.appcompat.view.ContextThemeWrapper(
-        context,
-        R.style.AppTheme,
-      )
-    )
+    context.apply {
+      setTheme(themeId)
+    }
 
   object Default : BpkTestVariant("default")
 
-  object Themed : BpkTestVariant("themed") {
-
-    override fun applyToActivity(activity: Activity): Activity =
-      activity.apply {
-        ThemeApplier(R.style.LondonTheme).onActivityCreated(this, null)
-      }
-
-    override fun newContext(context: Context) =
-      ContextThemeWrapper(super.newContext(context), R.style.LondonTheme)
-  }
+  object Themed : BpkTestVariant("themed", R.style.LondonTheme)
 
   object DarkMode : BpkTestVariant("dm") {
 
@@ -76,7 +61,10 @@ sealed class BpkTestVariant(val id: String) {
       if (Looper.myLooper() == null) {
         Looper.prepare()
       }
-      val dialog = AppCompatDialog(super.newContext(context))
+      val config = Configuration(context.resources.configuration).apply {
+        uiMode = uiMode or Configuration.UI_MODE_NIGHT_YES
+      }
+      val dialog = AppCompatDialog(super.newContext(context.createConfigurationContext(config)))
       return dialog.context
     }
   }
