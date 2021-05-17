@@ -24,6 +24,14 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 ```
+
+To use components update your app theme to inherit from the Backpack theme:
+```xml
+  <style name="AppTheme" parent="BpkTheme">
+    <!-- Customize your theme here. -->
+  </style>
+```
+
 #### Note that Backpack is expected to be used with AndroidX. Please refer to [AndroidX migration guide](https://developer.android.com/jetpack/androidx/migrate) to setup.
 
 ### Demo application
