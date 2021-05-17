@@ -72,9 +72,13 @@ internal class RatingSelectors(
   val contentColor: (BpkRating.Score) -> ColorStateList
 
   init {
-    var colorLow = context.getColor(R.color.bpkPanjin)
-    var colorMedium = context.getColor(R.color.__rating_medium_color)
-    var colorHigh = context.getColor(R.color.bpkMonteverde)
+    var colorLow = context.getColor(R.color.bpkHillier)
+    var colorMedium = context.getColor(R.color.bpkErfoud)
+    var colorHigh = context.getColor(R.color.bpkGlencoe)
+
+    var textColorLow = context.getColor(R.color.bpkBlack)
+    var textColorMedium = context.getColor(R.color.bpkBlack)
+    var textColorHigh = context.getColor(R.color.bpkBlack)
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -84,6 +88,10 @@ internal class RatingSelectors(
       colorLow = it.getColor(R.styleable.BpkRating_ratingColorLow, colorLow)
       colorMedium = it.getColor(R.styleable.BpkRating_ratingColorMedium, colorMedium)
       colorHigh = it.getColor(R.styleable.BpkRating_ratingColorHigh, colorHigh)
+
+      textColorLow = it.getColor(R.styleable.BpkRating_ratingTextColorLow, textColorLow)
+      textColorMedium = it.getColor(R.styleable.BpkRating_ratingTextColorMedium, textColorMedium)
+      textColorHigh = it.getColor(R.styleable.BpkRating_ratingTextColorHigh, textColorHigh)
 
       icons = it.getDrawable(R.styleable.BpkRating_ratingIcon)
       titles = it.resolveStringOrArray(R.styleable.BpkRating_ratingTitle)
@@ -100,9 +108,9 @@ internal class RatingSelectors(
     }
 
     val contentColors = arrayOf(
-      context.getColorStateList(R.color.bpkWhite),
-      context.getColorStateList(R.color.bpkBlack),
-      context.getColorStateList(R.color.bpkWhite),
+      ColorStateList.valueOf(textColorLow),
+      ColorStateList.valueOf(textColorMedium),
+      ColorStateList.valueOf(textColorHigh)
     )
     contentColor = {
       contentColors[it.index]

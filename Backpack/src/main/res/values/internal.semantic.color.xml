@@ -20,7 +20,6 @@
   <color name="__switchThumbDisabled">@color/bpkSkyGrayTint07</color>
   <color name="__starRatingStarColor">@color/bpkSkyGrayTint04</color>
   <color name="__starRatingStarColorFilled">@color/bpkKolkata</color>
-  <color name="__rating_medium_color">@color/bpkKolkata</color>
   <color name="__horizontalNavTextDefault">@color/bpkSkyGrayTint01</color>
   <color name="__textFieldTextDisabled">@color/bpkSkyGrayTint04</color>
   <color name="__textFieldHint">@color/bpkTextSecondaryLight</color>
