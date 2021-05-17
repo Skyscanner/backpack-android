@@ -180,6 +180,10 @@
       <enum value="3" name="base" />
       <enum value="4" name="large" />
     </attr>
+    <attr name="ratingScale" format="enum">
+      <enum value="0" name="zeroToTen" />
+      <enum value="1" name="zeroToFive" />
+    </attr>
   </declare-styleable>
 
   <declare-styleable name="BpkFlare">

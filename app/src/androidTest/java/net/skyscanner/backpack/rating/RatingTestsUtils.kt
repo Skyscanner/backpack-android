@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.rating
 
 import android.content.Context
-import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.demo.R
 
@@ -27,10 +26,10 @@ internal fun createTestRating(
   context: Context,
   style: BpkRating.Style = BpkRating.Style.Horizontal,
   size: BpkRating.Size = BpkRating.Size.Base,
+  scale: BpkRating.Scale = BpkRating.Scale.ZeroToTen,
   value: Float = 7f,
-  rtl: Boolean = false
 ) =
-  BpkRating(context, style, size).apply {
+  BpkRating(context, style, size, scale).apply {
     icon = {
       when (it) {
         BpkRating.Score.Low -> AppCompatResources.getDrawable(context, R.drawable.bpk_star_outline)
@@ -39,9 +38,7 @@ internal fun createTestRating(
       }
     }
     title = {
-      val array = resources.getStringArray(
-        if (rtl) R.array.rating_sample_titles_rtl else R.array.rating_sample_titles
-      )
+      val array = resources.getStringArray(R.array.rating_sample_titles)
 
       when (it) {
         BpkRating.Score.Low -> array[0]
@@ -50,9 +47,7 @@ internal fun createTestRating(
       }
     }
     subtitle = {
-      val array = resources.getStringArray(
-        if (rtl) R.array.rating_sample_subtitles_rtl else R.array.rating_sample_subtitles
-      )
+      val array = resources.getStringArray(R.array.rating_sample_subtitles)
 
       when (it) {
         BpkRating.Score.Low -> array[0]
@@ -61,5 +56,4 @@ internal fun createTestRating(
       }
     }
     this.value = value
-    layoutDirection = if (rtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
   }
