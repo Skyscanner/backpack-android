@@ -25,7 +25,7 @@ repositories {
 }
 ```
 
-To use components update your app theme to inherit from the Backpack theme:
+You also need to inherit your app theme from Backpack:
 ```xml
   <style name="AppTheme" parent="BpkTheme">
     <!-- Customize your theme here. -->
