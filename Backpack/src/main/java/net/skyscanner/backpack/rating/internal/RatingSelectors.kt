@@ -33,7 +33,7 @@ import net.skyscanner.backpack.util.use
 internal class RatingSelectors(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) {
 
   private val scoresCount = BpkRating.Score.values().size
@@ -72,46 +72,41 @@ internal class RatingSelectors(
   val contentColor: (BpkRating.Score) -> ColorStateList
 
   init {
-    var colorLow = context.getColor(R.color.bpkHillier)
-    var colorMedium = context.getColor(R.color.bpkErfoud)
-    var colorHigh = context.getColor(R.color.bpkGlencoe)
-
-    var textColorLow = context.getColor(R.color.bpkBlack)
-    var textColorMedium = context.getColor(R.color.bpkBlack)
-    var textColorHigh = context.getColor(R.color.bpkBlack)
+    val contentColors = mutableListOf<ColorStateList>()
+    val backgroundColors = mutableListOf<ColorStateList>()
 
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkRating,
       defStyleAttr, 0
     ).use {
-      colorLow = it.getColor(R.styleable.BpkRating_ratingColorLow, colorLow)
-      colorMedium = it.getColor(R.styleable.BpkRating_ratingColorMedium, colorMedium)
-      colorHigh = it.getColor(R.styleable.BpkRating_ratingColorHigh, colorHigh)
+      backgroundColors.add(
+        it.getColorStateList(R.styleable.BpkRating_ratingColorLow)
+          ?: context.getColorStateList(R.color.bpkHillier)
+      )
+      backgroundColors.add(
+        it.getColorStateList(R.styleable.BpkRating_ratingColorMedium)
+          ?: context.getColorStateList(R.color.bpkErfoud)
+      )
+      backgroundColors.add(
+        it.getColorStateList(R.styleable.BpkRating_ratingColorHigh)
+          ?: context.getColorStateList(R.color.bpkGlencoe)
+      )
 
-      textColorLow = it.getColor(R.styleable.BpkRating_ratingTextColorLow, textColorLow)
-      textColorMedium = it.getColor(R.styleable.BpkRating_ratingTextColorMedium, textColorMedium)
-      textColorHigh = it.getColor(R.styleable.BpkRating_ratingTextColorHigh, textColorHigh)
+      val defaultContentColor = context.getColorStateList(R.color.bpkBlack)
+      contentColors.add(it.getColorStateList(R.styleable.BpkRating_ratingTextColorLow) ?: defaultContentColor)
+      contentColors.add(it.getColorStateList(R.styleable.BpkRating_ratingTextColorMedium) ?: defaultContentColor)
+      contentColors.add(it.getColorStateList(R.styleable.BpkRating_ratingTextColorHigh) ?: defaultContentColor)
 
       icons = it.getDrawable(R.styleable.BpkRating_ratingIcon)
       titles = it.resolveStringOrArray(R.styleable.BpkRating_ratingTitle)
       subtitles = it.resolveStringOrArray(R.styleable.BpkRating_ratingSubtitle)
     }
 
-    val backgroundColors = arrayOf(
-      ColorStateList.valueOf(colorLow),
-      ColorStateList.valueOf(colorMedium),
-      ColorStateList.valueOf(colorHigh)
-    )
     backgroundColor = {
       backgroundColors[it.index]
     }
 
-    val contentColors = arrayOf(
-      ColorStateList.valueOf(textColorLow),
-      ColorStateList.valueOf(textColorMedium),
-      ColorStateList.valueOf(textColorHigh)
-    )
     contentColor = {
       contentColors[it.index]
     }
