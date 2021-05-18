@@ -73,30 +73,29 @@ internal class RatingSelectors(
   val contentColor: (BpkRating.Score) -> ColorStateList
 
   init {
-    val backgroundColors = mutableListOf<ColorStateList>()
+    var colorLow = context.getColorStateList(R.color.bpkHillier)
+    var colorMedium = context.getColorStateList(R.color.bpkErfoud)
+    var colorHigh = context.getColorStateList(R.color.bpkGlencoe)
 
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkRating,
       defStyleAttr, 0
     ).use {
-      backgroundColors.add(
-        it.getColorStateList(R.styleable.BpkRating_ratingColorLow)
-          ?: context.getColorStateList(R.color.bpkHillier)
-      )
-      backgroundColors.add(
-        it.getColorStateList(R.styleable.BpkRating_ratingColorMedium)
-          ?: context.getColorStateList(R.color.bpkErfoud)
-      )
-      backgroundColors.add(
-        it.getColorStateList(R.styleable.BpkRating_ratingColorHigh)
-          ?: context.getColorStateList(R.color.bpkGlencoe)
-      )
+      colorLow = it.getColorStateList(R.styleable.BpkRating_ratingColorLow) ?: colorLow
+      colorMedium = it.getColorStateList(R.styleable.BpkRating_ratingColorMedium) ?: colorMedium
+      colorHigh = it.getColorStateList(R.styleable.BpkRating_ratingColorHigh) ?: colorHigh
 
       icons = it.getDrawable(R.styleable.BpkRating_ratingIcon)
       titles = it.resolveStringOrArray(R.styleable.BpkRating_ratingTitle)
       subtitles = it.resolveStringOrArray(R.styleable.BpkRating_ratingSubtitle)
     }
+
+    val backgroundColors = arrayOf(
+      colorLow,
+      colorMedium,
+      colorHigh
+    )
 
     backgroundColor = {
       backgroundColors[it.index]
