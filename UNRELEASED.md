@@ -8,9 +8,14 @@
   - Backpack now provides a base theme to be extended by the application
   - `BpkTheme.applyDefaultsToContext` and `BpkTheme.wrapContextWithDefaults` were removed in favour of using the base theme
 
+**Added:**
+
+- Added `ratingScale` property to`BpkRating` to support a 0-5 scale
+
 **Fixed:**
 
 - Android Studio preview for components
+- Updated colours for `BpkRating` component for better accessibility
 
 ## How to write a good changelog entry
 
