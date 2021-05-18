@@ -83,8 +83,5 @@ BpkRating(context, BpkRating.Style.Horizontal, BpkRating.Size.Base, BpkRating.Sc
 - `ratingColorLow`
 - `ratingColorMedium`
 - `ratingColorHigh`
-- `ratingTextColorLow`
-- `ratingTextColorMedium`
-- `ratingTextColorHigh`
 
 Styles can be changed globally through `bpkRatingStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/THEMING.md) for more information.

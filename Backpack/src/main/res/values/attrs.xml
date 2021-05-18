@@ -159,10 +159,6 @@
     <attr name="ratingColorMedium" format="color" />
     <attr name="ratingColorHigh" format="color" />
 
-    <attr name="ratingTextColorLow" format="color" />
-    <attr name="ratingTextColorMedium" format="color" />
-    <attr name="ratingTextColorHigh" format="color" />
-
     <attr name="ratingIcon" format="reference" />
     <attr name="ratingTitle" format="string|reference" />
     <attr name="ratingSubtitle" format="string|reference" />

@@ -141,10 +141,6 @@
     <item name="ratingColorLow">#6392ce</item>
     <item name="ratingColorMedium">#013A76</item>
     <item name="ratingColorHigh">#00254B</item>
-
-    <item name="ratingTextColorLow">@color/bpkWhite</item>
-    <item name="ratingTextColorMedium">@color/bpkWhite</item>
-    <item name="ratingTextColorHigh">@color/bpkWhite</item>
   </style>
 
   <style name="LondonThemeSnackbar">
@@ -276,10 +272,6 @@
     <item name="ratingColorLow">#ffd677</item>
     <item name="ratingColorMedium">#ffb300</item>
     <item name="ratingColorHigh">#ffa000</item>
-
-    <item name="ratingTextColorLow">@color/bpkBlack</item>
-    <item name="ratingTextColorMedium">@color/bpkBlack</item>
-    <item name="ratingTextColorHigh">@color/bpkBlack</item>
   </style>
 
   <style name="DohaThemeSnackbar">
