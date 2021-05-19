@@ -26,6 +26,7 @@ import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.StyleableRes
+import androidx.core.graphics.ColorUtils
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.rating.BpkRating
 import net.skyscanner.backpack.util.use
@@ -33,7 +34,7 @@ import net.skyscanner.backpack.util.use
 internal class RatingSelectors(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) {
 
   private val scoresCount = BpkRating.Score.values().size
@@ -72,18 +73,18 @@ internal class RatingSelectors(
   val contentColor: (BpkRating.Score) -> ColorStateList
 
   init {
-    var colorLow = context.getColor(R.color.bpkPanjin)
-    var colorMedium = context.getColor(R.color.__rating_medium_color)
-    var colorHigh = context.getColor(R.color.bpkMonteverde)
+    var colorLow = context.getColorStateList(R.color.bpkHillier)
+    var colorMedium = context.getColorStateList(R.color.bpkErfoud)
+    var colorHigh = context.getColorStateList(R.color.bpkGlencoe)
 
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkRating,
       defStyleAttr, 0
     ).use {
-      colorLow = it.getColor(R.styleable.BpkRating_ratingColorLow, colorLow)
-      colorMedium = it.getColor(R.styleable.BpkRating_ratingColorMedium, colorMedium)
-      colorHigh = it.getColor(R.styleable.BpkRating_ratingColorHigh, colorHigh)
+      colorLow = it.getColorStateList(R.styleable.BpkRating_ratingColorLow) ?: colorLow
+      colorMedium = it.getColorStateList(R.styleable.BpkRating_ratingColorMedium) ?: colorMedium
+      colorHigh = it.getColorStateList(R.styleable.BpkRating_ratingColorHigh) ?: colorHigh
 
       icons = it.getDrawable(R.styleable.BpkRating_ratingIcon)
       titles = it.resolveStringOrArray(R.styleable.BpkRating_ratingTitle)
@@ -91,21 +92,24 @@ internal class RatingSelectors(
     }
 
     val backgroundColors = arrayOf(
-      ColorStateList.valueOf(colorLow),
-      ColorStateList.valueOf(colorMedium),
-      ColorStateList.valueOf(colorHigh)
+      colorLow,
+      colorMedium,
+      colorHigh
     )
+
     backgroundColor = {
       backgroundColors[it.index]
     }
 
-    val contentColors = arrayOf(
-      context.getColorStateList(R.color.bpkWhite),
-      context.getColorStateList(R.color.bpkBlack),
-      context.getColorStateList(R.color.bpkWhite),
-    )
+    val lightContentColor = context.getColorStateList(R.color.bpkWhite)
+    val darkContentColor = context.getColorStateList(R.color.bpkBlack)
     contentColor = {
-      contentColors[it.index]
+      // use dark or light text color depending on contrast ratio for accessibility
+      if (ColorUtils.calculateContrast(backgroundColors[it.index].defaultColor, darkContentColor.defaultColor) >= 4.5) {
+        darkContentColor
+      } else {
+        lightContentColor
+      }
     }
   }
 

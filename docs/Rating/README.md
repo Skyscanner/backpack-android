@@ -19,7 +19,8 @@ Example of a Rating in XML:
   app:ratingSubtitle="@array/rating_sample_subtitles"
   app:ratingStyle="vertical"
   app:ratingSize="large"
-  app:ratingValue="3.0"/>
+  app:ratingValue="3.0"
+  app:ratingScale="zeroToTen"/>
 ```
 
 In this example:
@@ -41,8 +42,8 @@ If the value is a string resource, the same value will be used for all scores.
 
 - `ratingStyle` - the layout configuration.
 - `ratingSize` - the dimensions of the layout
-- `ratingValue` - The actual rating expressed as a range between `0.0 to 10.0`.
-If the value exceeds the boundaries, it'll be clamped.
+- `ratingValue` - The actual rating expressed as a range clamped between the range defined by `ratingScale`.
+- `ratingScale` - The value range of the component. Either `zeroToTen` (`0.0 to 10.0`) or `zeroToFive` (`0.0 to 5.0`) with `zeroToTen` being the default.
 
 
 Example of a Rating in Kotlin
@@ -50,7 +51,7 @@ Example of a Rating in Kotlin
 ```Kotlin
 import net.skyscanner.backpack.rating.BpkRating
 
-BpkRating(context, BpkRating.Style.Horizontal, BpkRating.Size.Base).apply {
+BpkRating(context, BpkRating.Style.Horizontal, BpkRating.Size.Base, BpkRating.Scale.ZeroToTen).apply {
     icon = {
       when (it) {
         BpkRating.Score.Low -> context.getDrawable(R.drawable.bpk_star_outline)

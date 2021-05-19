@@ -23,7 +23,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import androidx.annotation.FloatRange
 import androidx.constraintlayout.widget.ConstraintLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.rating.internal.RatingAppearance
@@ -38,7 +37,8 @@ open class BpkRating private constructor(
   attrs: AttributeSet?,
   defStyleAttr: Int,
   defaultStyle: Style,
-  defaultSize: Size
+  defaultSize: Size,
+  defaultScale: Scale,
 ) : ConstraintLayout(
   createContextThemeWrapper(context, attrs, R.attr.bpkRatingStyle), attrs, defStyleAttr
 ) {
@@ -47,14 +47,15 @@ open class BpkRating private constructor(
   constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-  ) : this(context, attrs, defStyleAttr, Style.Horizontal, Size.Base)
+    defStyleAttr: Int = 0,
+  ) : this(context, attrs, defStyleAttr, Style.Horizontal, Size.Base, Scale.ZeroToTen)
 
   constructor(
     context: Context,
     style: Style,
-    size: Size
-  ) : this(context, null, 0, style, size)
+    size: Size,
+    scale: Scale,
+  ) : this(context, null, 0, style, size, scale)
 
   enum class Score {
     Low,
@@ -76,7 +77,12 @@ open class BpkRating private constructor(
     Pill,
   }
 
-  private val score = RatingScore(this.context, attrs, defStyleAttr)
+  enum class Scale {
+    ZeroToTen,
+    ZeroToFive,
+  }
+
+  private val score = RatingScore(this.context, attrs, defStyleAttr, defaultScale)
   private val selectors = RatingSelectors(this.context, attrs, defStyleAttr)
   private val appearance = RatingAppearance(this.context, attrs, defStyleAttr, defaultStyle, defaultSize)
 
@@ -132,10 +138,9 @@ open class BpkRating private constructor(
       updateSubtitle(score())
     }
 
-  @get:FloatRange(from = 0.0, to = 10.0)
   var value: Float
     get() = score.rating
-    set(@FloatRange(from = 0.0, to = 10.0) value) {
+    set(value) {
       score.rating = value
       update(score())
     }

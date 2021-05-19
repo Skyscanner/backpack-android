@@ -233,7 +233,8 @@ object ComponentRegistry {
         "Horizontal" story NodeData { Story of R.layout.fragment_rating_sizes },
         "Horizontal RTL" story NodeData { Story of R.layout.fragment_rating_sizes with Direction.RTL },
         "Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical },
-        "Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill }
+        "Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill },
+        "Zero to Five Scale" story NodeData { Story of R.layout.fragment_rating_zero_to_five },
       )
     ),
     "Slider" story NodeData { Story of R.layout.fragment_slider },
