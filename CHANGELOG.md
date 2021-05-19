@@ -2,6 +2,23 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 30.0.0
+
+**Breaking:**
+
+- New app theming behaviour
+  - Backpack now provides a base theme to be extended by the application
+  - `BpkTheme.applyDefaultsToContext` and `BpkTheme.wrapContextWithDefaults` were removed in favour of using the base theme
+
+**Added:**
+
+- Added `ratingScale` property to`BpkRating` to support a 0-5 scale
+
+**Fixed:**
+
+- Android Studio preview for components
+- Updated colours for `BpkRating` component for better accessibility
+
 # 29.0.0
 
 **Breaking:**
