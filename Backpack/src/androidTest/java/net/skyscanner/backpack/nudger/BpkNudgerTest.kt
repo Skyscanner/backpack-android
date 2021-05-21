@@ -88,8 +88,10 @@ class BpkNudgerTest {
       invocationsCount++
       lastCurrent = current
     }
-    subject.value = 2
-    subject.onChangeListener = listener
+    activityRule.scenario.onActivity {
+      subject.value = 2
+      subject.onChangeListener = listener
+    }
     onView(withId(R.id.bpk_nudger_decrement)).perform(click())
     assertEquals(1, lastCurrent)
     assertEquals(1, invocationsCount)
