@@ -2,7 +2,12 @@ package net.skyscanner.backpack.calendar2.data
 
 import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.calendar2.extension.firstDay
+import net.skyscanner.backpack.calendar2.extension.lastDay
 import net.skyscanner.backpack.calendar2.extension.lastDayOfWeek
+import net.skyscanner.backpack.calendar2.extension.nextMonth
+import net.skyscanner.backpack.calendar2.extension.prevMonth
+import net.skyscanner.backpack.calendar2.extension.yearMonth
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
@@ -24,15 +29,18 @@ internal inline fun CalendarMonth(
 ): CalendarMonth {
 
   val firstDay = days.first()
-  val yearMonth = YearMonth.of(firstDay.year, firstDay.month)
+
+  val yearMonth = firstDay.yearMonth()
+  val prevMonth = yearMonth.prevMonth()
+  val nextMonth = yearMonth.nextMonth()
 
   val items = mutableListOf<CalendarItem>()
   items += CalendarHeader(title = yearMonth.month.getDisplayName(monthsTextStyle, locale), yearMonth = yearMonth)
 
   var currentDayOfWeek = weekFields.firstDayOfWeek
-  val selectSpacingBefore = firstDay.minusDays(1) in selection && firstDay in selection
+  val selectSpacingBefore = prevMonth.lastDay() in selection && firstDay in selection
   while (currentDayOfWeek != firstDay.dayOfWeek) {
-    items += CalendarSpace(selected = selectSpacingBefore)
+    items += CalendarSpace(selected = selectSpacingBefore, yearMonth = prevMonth)
     currentDayOfWeek += 1
   }
 
@@ -40,9 +48,9 @@ internal inline fun CalendarMonth(
 
   val lastDay = days.last()
   currentDayOfWeek = lastDay.dayOfWeek
-  val selectSpacingAfter = lastDay.plusDays(1) in selection && lastDay in selection
+  val selectSpacingAfter = nextMonth.firstDay() in selection && lastDay in selection
   while (currentDayOfWeek != weekFields.lastDayOfWeek) {
-    items += CalendarSpace(selected = selectSpacingAfter)
+    items += CalendarSpace(selected = selectSpacingAfter, yearMonth = yearMonth)
     currentDayOfWeek += 1
   }
 

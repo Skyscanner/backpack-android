@@ -9,6 +9,7 @@ internal sealed class CalendarItem
 
 internal data class CalendarSpace(
   val selected: Boolean,
+  val yearMonth: YearMonth,
 ) : CalendarItem()
 
 internal data class CalendarHeader(

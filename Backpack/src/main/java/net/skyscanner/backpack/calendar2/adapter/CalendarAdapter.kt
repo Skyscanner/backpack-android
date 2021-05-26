@@ -51,7 +51,7 @@ internal class CalendarAdapter(
     is CalendarDay -> item.date.getLong(ChronoField.EPOCH_DAY)
     is CalendarFooter -> item.yearMonth.yearMonthHash() * -10L - 1
     is CalendarHeader -> item.yearMonth.yearMonthHash() * -10L - 2
-    is CalendarSpace -> RecyclerView.NO_ID
+    is CalendarSpace -> item.yearMonth.yearMonthHash() * -10L - 3
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
