@@ -37,11 +37,15 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
+  }
 }
 
 dependencies {
   implementation "androidx.annotation:annotation:$rootProject.ext.androidxAnnotations"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompat"
   implementation "com.google.android.material:material:$rootProject.ext.androidMaterial"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
@@ -49,6 +53,7 @@ dependencies {
   implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.ext.swiperefreshLayout"
   implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threeTenAbp"
   implementation "com.google.android.gms:play-services-maps:$rootProject.ext.googleMaps"
+  implementation "androidx.core:core-ktx:$rootProject.ext.ktx"
   androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitAndroid"
   androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCore"
   androidTestImplementation "androidx.test:rules:$rootProject.ext.testRules"

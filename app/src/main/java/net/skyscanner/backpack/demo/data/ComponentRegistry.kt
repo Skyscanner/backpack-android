@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.data
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
+import net.skyscanner.backpack.demo.stories.Calendar2Story
 import net.skyscanner.backpack.demo.stories.ChangeableButtonsStory
 import net.skyscanner.backpack.demo.stories.ChipStory
 import net.skyscanner.backpack.demo.stories.ColorStory
@@ -164,6 +165,7 @@ object ComponentRegistry {
         "Labeled" story NodeData { LabeledCalendarStory of R.layout.fragment_calendar_default },
       )
     ),
+    "Calendar 2" story NodeData { Calendar2Story of R.layout.fragment_calendar_2 },
     "Chip" story NodeData(
       { children -> SubStory of children },
       mapOf(
@@ -268,7 +270,7 @@ object ComponentRegistry {
     ),
     "Text Field" story NodeData { Story of R.layout.fragment_text_fields },
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
-    "Toast" story NodeData { ToastStory of R.layout.fragment_toasts }
+    "Toast" story NodeData { ToastStory of R.layout.fragment_toasts },
   )
 
   private val TOKENS_MAP = mapOf(
