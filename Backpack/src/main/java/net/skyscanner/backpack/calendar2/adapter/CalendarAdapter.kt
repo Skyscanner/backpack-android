@@ -72,7 +72,6 @@ internal class CalendarAdapter(
     }
 
   private companion object {
-
     const val TYPE_SPACE = 0
     const val TYPE_HEADER = 1
     const val TYPE_DAY = 2

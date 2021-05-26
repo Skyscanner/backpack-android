@@ -7,7 +7,9 @@ import org.threeten.bp.YearMonth
 
 internal sealed class CalendarItem
 
-internal object CalendarSpace : CalendarItem()
+internal data class CalendarSpace(
+  val selected: Boolean,
+) : CalendarItem()
 
 internal data class CalendarHeader(
   val title: String,

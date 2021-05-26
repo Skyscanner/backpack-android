@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.calendar2.data
 
 import java.util.Locale
+import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.extension.lastDayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
@@ -18,6 +19,7 @@ internal inline fun CalendarMonth(
   monthsTextStyle: TextStyle,
   weekFields: WeekFields,
   footers: List<YearMonth>,
+  selection: CalendarSelection,
   day: (LocalDate) -> CalendarDay,
 ): CalendarMonth {
 
@@ -28,16 +30,19 @@ internal inline fun CalendarMonth(
   items += CalendarHeader(title = yearMonth.month.getDisplayName(monthsTextStyle, locale), yearMonth = yearMonth)
 
   var currentDayOfWeek = weekFields.firstDayOfWeek
+  val selectSpacingBefore = firstDay.minusDays(1) in selection && firstDay in selection
   while (currentDayOfWeek != firstDay.dayOfWeek) {
-    items += CalendarSpace
+    items += CalendarSpace(selected = selectSpacingBefore)
     currentDayOfWeek += 1
   }
 
   days.mapTo(items, day)
 
-  currentDayOfWeek = days.last().dayOfWeek
+  val lastDay = days.last()
+  currentDayOfWeek = lastDay.dayOfWeek
+  val selectSpacingAfter = lastDay.plusDays(1) in selection && lastDay in selection
   while (currentDayOfWeek != weekFields.lastDayOfWeek) {
-    items += CalendarSpace
+    items += CalendarSpace(selected = selectSpacingAfter)
     currentDayOfWeek += 1
   }
 

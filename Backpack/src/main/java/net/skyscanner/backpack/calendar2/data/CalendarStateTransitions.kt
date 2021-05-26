@@ -65,6 +65,7 @@ private fun CalendarState.monthsOf(
         locale = params.locale,
         weekFields = weekFields,
         monthsTextStyle = params.monthsTextStyle,
+        selection = selection,
         footers = params.footers,
       ) { date ->
         CalendarDay(date, selection, params.styles, params.labels, params.disabledDates)
