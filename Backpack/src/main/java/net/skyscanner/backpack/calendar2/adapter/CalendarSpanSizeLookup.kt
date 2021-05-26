@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.calendar2.view
+package net.skyscanner.backpack.calendar2.adapter
 
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.coroutines.CoroutineScope

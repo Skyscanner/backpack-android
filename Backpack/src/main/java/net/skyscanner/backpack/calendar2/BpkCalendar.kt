@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.isActive
+import net.skyscanner.backpack.calendar2.adapter.CalendarAdapter
+import net.skyscanner.backpack.calendar2.adapter.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
-import net.skyscanner.backpack.calendar2.view.CalendarAdapter
-import net.skyscanner.backpack.calendar2.view.CalendarSpanSizeLookup
-import net.skyscanner.backpack.calendar2.widget.CalendarHeaderView
+import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.ResourcesUtil
 
 class BpkCalendar @JvmOverloads constructor(

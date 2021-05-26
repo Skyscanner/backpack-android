@@ -1,4 +1,4 @@
-package net.skyscanner.backpack.calendar2.widget
+package net.skyscanner.backpack.calendar2.view
 
 import android.content.Context
 import android.util.AttributeSet
