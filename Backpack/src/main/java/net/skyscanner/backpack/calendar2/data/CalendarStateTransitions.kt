@@ -18,11 +18,14 @@ internal fun CalendarState.dispatchClick(day: Int, month: Int, year: Int): Calen
     CalendarParams.SelectionMode.Disabled -> selection
     CalendarParams.SelectionMode.Single -> CalendarSelection.Single(date.date)
     CalendarParams.SelectionMode.Range -> when (selection) {
-      is CalendarSelection.None -> CalendarSelection.Range(start = date.date, end = null)
-      is CalendarSelection.Single -> CalendarSelection.Range(start = selection.date, end = date.date)
+      is CalendarSelection.None -> CalendarSelection.Single(date.date)
+      is CalendarSelection.Single -> when {
+        selection.date > date.date -> CalendarSelection.Single(date.date)
+        else -> CalendarSelection.Range(start = selection.date, end = date.date)
+      }
       is CalendarSelection.Range -> when (selection.end) {
         null -> CalendarSelection.Range(start = selection.start, end = date.date)
-        else -> CalendarSelection.Range(start = date.date, end = null)
+        else -> CalendarSelection.Single(date.date)
       }
     }
   }
