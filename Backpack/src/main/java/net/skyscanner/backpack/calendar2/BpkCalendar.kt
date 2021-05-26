@@ -38,7 +38,7 @@ class BpkCalendar @JvmOverloads constructor(
   init {
     orientation = VERTICAL
     recyclerView.layoutManager = layoutManager
-    addView(headerView, LayoutParams(LayoutParams.MATCH_PARENT, ResourcesUtil.dpToPx(50f, context)))
+    addView(headerView, LayoutParams(LayoutParams.MATCH_PARENT, ResourcesUtil.dpToPx(50, context)))
     addView(recyclerView, LayoutParams(LayoutParams.MATCH_PARENT, 0, 1f))
   }
 

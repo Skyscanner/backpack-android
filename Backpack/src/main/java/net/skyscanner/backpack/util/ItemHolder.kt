@@ -50,7 +50,7 @@ internal abstract class ItemHolder<T>(
     }
   }
 
-  abstract fun bind(model: T)
+  protected abstract fun bind(model: T)
 
   fun <T : View> findViewById(@IdRes id: Int): T =
     view.findViewById(id)

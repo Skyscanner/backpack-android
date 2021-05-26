@@ -36,7 +36,7 @@ class Calendar2Story : Story() {
     calendar.setParams(
       CalendarParams(
         range = LocalDate.now() - Period.ofYears(1)..(LocalDate.now() + Period.ofYears(1)),
-        selectionMode = CalendarParams.SelectionMode.Single,
+        selectionMode = CalendarParams.SelectionMode.Range,
         disabledDates = listOf(
           LocalDate.of(2020, 5, 25),
         ),

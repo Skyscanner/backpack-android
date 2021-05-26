@@ -35,6 +35,7 @@ internal inline fun stateListDrawable(
   drawable: Drawable,
   disabled: Drawable? = null,
   pressed: Drawable? = null,
+  selected: Drawable? = null,
   block: StateListDrawable.() -> Unit = {},
 ): StateListDrawable = StateListDrawable().apply {
   if (disabled != null) {
@@ -42,6 +43,9 @@ internal inline fun stateListDrawable(
   }
   if (pressed != null) {
     addState(intArrayOf(android.R.attr.state_pressed), pressed)
+  }
+  if (selected != null) {
+    addState(intArrayOf(android.R.attr.state_selected), selected)
   }
   addState(StateSet.WILD_CARD, drawable)
   block()

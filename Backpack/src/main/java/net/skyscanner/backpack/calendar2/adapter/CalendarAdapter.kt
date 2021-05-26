@@ -64,7 +64,7 @@ internal class CalendarAdapter(
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
     if (holder is ItemHolder<*>) {
       holder as ItemHolder<CalendarItem>
-      holder.bind(data.getItem(position))
+      holder.invoke(data.getItem(position))
     } else {
       footers as CalendarFooterAdapter<RecyclerView.ViewHolder>
       val item = data.getItem(position) as CalendarFooter

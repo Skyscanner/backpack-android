@@ -1,13 +1,16 @@
 package net.skyscanner.backpack.calendar2.adapter
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.CalendarCellStyle
 import net.skyscanner.backpack.calendar2.data.CalendarDay
+import net.skyscanner.backpack.calendar2.view.CalendarSelectionDrawable
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
+import net.skyscanner.backpack.util.stateListDrawable
 
 internal class CalendarCellDay(
   parent: ViewGroup,
@@ -16,11 +19,16 @@ internal class CalendarCellDay(
 
   private val day = findViewById<TextView>(R.id.bpk_calendar_cell_date)
   private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label)
+  private val selectionDrawable = CalendarSelectionDrawable(context)
 
   init {
     view.setOnClickListener {
       model?.let(output)
     }
+    day.background = stateListDrawable(
+      drawable = ColorDrawable(Color.TRANSPARENT),
+      selected = selectionDrawable,
+    )
   }
 
   override fun bind(model: CalendarDay) {
@@ -28,20 +36,7 @@ internal class CalendarCellDay(
     day.text = model.date.dayOfMonth.toString()
     label.text = model.label
     label.isVisible = !model.label.isNullOrEmpty()
-
-    view.background = when (model.selection) {
-      CalendarDay.Selection.Double -> null
-      CalendarDay.Selection.End -> null
-      CalendarDay.Selection.Middle -> null
-      CalendarDay.Selection.Single -> null
-      CalendarDay.Selection.Start -> null
-      CalendarDay.Selection.None -> when (model.style) {
-        is CalendarCellStyle.Custom -> null
-        is CalendarCellStyle.Negative -> null
-        is CalendarCellStyle.Neutral -> null
-        is CalendarCellStyle.Positive -> null
-        null -> null
-      }
-    }
+    view.isSelected = model.selection != CalendarDay.Selection.None
+    selectionDrawable.selection = model.selection
   }
 }
