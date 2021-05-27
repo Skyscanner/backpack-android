@@ -68,7 +68,7 @@ internal class CalendarAdapter(
     } else {
       footers as CalendarFooterAdapter<RecyclerView.ViewHolder>
       val item = data.getItem(position) as CalendarFooter
-      footers.onBindViewHolder(holder, item.yearMonth.monthValue, item.yearMonth.year)
+      footers.onBindViewHolder(holder, item.yearMonth)
     }
 
   private companion object {
