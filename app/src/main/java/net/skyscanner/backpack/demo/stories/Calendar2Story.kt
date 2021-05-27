@@ -37,8 +37,9 @@ class Calendar2Story : Story() {
         range = LocalDate.now() - Period.ofYears(1)..(LocalDate.now() + Period.ofYears(1)),
         selectionMode = CalendarParams.SelectionMode.Range,
         cells = mapOf(
+          LocalDate.of(2020, 6, 24) to CalendarParams.Info(status = CalendarParams.Status.Highlighted),
           LocalDate.of(2020, 6, 25) to CalendarParams.Info(status = CalendarParams.Status.Disabled),
-          LocalDate.of(2020, 6, 26) to CalendarParams.Info(label = "Test"),
+          LocalDate.of(2020, 6, 26) to CalendarParams.Info(label = "Test", status = CalendarParams.Status.Positive),
           LocalDate.of(2020, 6, 27) to CalendarParams.Info(status = CalendarParams.Status.Positive),
           LocalDate.of(2020, 6, 28) to CalendarParams.Info(status = CalendarParams.Status.Neutral),
           LocalDate.of(2020, 6, 29) to CalendarParams.Info(status = CalendarParams.Status.Negative),
