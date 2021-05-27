@@ -18,12 +18,42 @@
 
 package net.skyscanner.backpack.calendar2
 
-import java.time.temporal.WeekFields
+import net.skyscanner.backpack.calendar2.data.CalendarDay
 import net.skyscanner.backpack.calendar2.data.CalendarMonth
+import net.skyscanner.backpack.calendar2.extension.toList
+import net.skyscanner.backpack.calendar2.extension.yearMonthHash
 
 data class CalendarState internal constructor(
   val params: CalendarParams,
   val selection: CalendarSelection = CalendarSelection.None,
-  internal val months: List<CalendarMonth> = emptyList(),
-  internal val weekFields: WeekFields = WeekFields.of(params.locale),
+  internal val months: List<CalendarMonth> = monthsOf(params, selection),
 )
+
+internal fun monthsOf(
+  params: CalendarParams,
+  selection: CalendarSelection,
+): List<CalendarMonth> =
+  params
+    .range
+    .toList()
+    .groupBy { date -> date.yearMonthHash() }
+    .toSortedMap()
+    .map { entry -> entry.value.sortedBy { date -> date.dayOfMonth } }
+    .map { dates ->
+      CalendarMonth(
+        days = dates,
+        locale = params.locale,
+        weekFields = params.weekFields,
+        monthsTextStyle = params.monthsText,
+        selection = selection,
+        footers = params.footers,
+      ) { date ->
+        CalendarDay(
+          date = date,
+          selection = selection,
+          cells = params.cells,
+          locale = params.locale,
+          contentDescription = params.dateAccessibilityText,
+        )
+      }
+    }

@@ -21,7 +21,10 @@ package net.skyscanner.backpack.calendar2.data
 import kotlinx.coroutines.CoroutineScope
 import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
+import net.skyscanner.backpack.calendar2.extension.findDate
+import net.skyscanner.backpack.calendar2.monthsOf
 import net.skyscanner.backpack.util.MutableStateMachine
 import net.skyscanner.backpack.util.StateMachine
 
@@ -35,7 +38,7 @@ internal fun CalendarStateMachine(
   params: CalendarParams,
 ): CalendarStateMachine {
 
-  val fsm = MutableStateMachine<CalendarState, Nothing>(scope, CalendarState(params).dispatchParamsUpdate(params))
+  val fsm = MutableStateMachine<CalendarState, Nothing>(scope, CalendarState(params))
 
   return object : CalendarStateMachine, StateMachine<CalendarState, Nothing> by fsm {
 
@@ -52,3 +55,40 @@ internal fun CalendarStateMachine(
     }
   }
 }
+
+internal fun CalendarState.dispatchClick(day: Int, month: Int, year: Int): CalendarState {
+  if (params.selectionMode == CalendarParams.SelectionMode.Disabled) return this
+
+  val date = months.findDate(day, month, year) ?: return this
+  if (date.info.status == CalendarParams.Status.Disabled) return this
+
+  val selection = when (params.selectionMode) {
+    CalendarParams.SelectionMode.Disabled -> selection
+    CalendarParams.SelectionMode.Single -> CalendarSelection.Single(date.date)
+    CalendarParams.SelectionMode.Range -> when (selection) {
+      is CalendarSelection.None -> CalendarSelection.Single(date.date)
+      is CalendarSelection.Single -> when {
+        selection.date > date.date -> CalendarSelection.Single(date.date)
+        else -> CalendarSelection.Range(start = selection.date, end = date.date)
+      }
+      is CalendarSelection.Range -> when (selection.end) {
+        null -> CalendarSelection.Range(start = selection.start, end = date.date)
+        else -> CalendarSelection.Single(date.date)
+      }
+    }
+  }
+
+  return copy(
+    selection = selection,
+    months = monthsOf(params = params, selection = selection),
+  )
+}
+
+internal fun CalendarState.dispatchParamsUpdate(params: CalendarParams): CalendarState =
+  copy(
+    params = params,
+    months = monthsOf(
+      params = params,
+      selection = selection,
+    ),
+  )

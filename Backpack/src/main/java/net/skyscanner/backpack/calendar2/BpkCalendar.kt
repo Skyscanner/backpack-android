@@ -93,7 +93,7 @@ class BpkCalendar @JvmOverloads constructor(
       }
 
       fsm.state.onEach {
-        headerView.invoke(it)
+        headerView.invoke(it.params)
       }.launchIn(scope)
 
       cleanup()

@@ -21,6 +21,7 @@ package net.skyscanner.backpack.calendar2
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
+import java.time.temporal.WeekFields
 import java.util.Locale
 
 data class CalendarParams(
@@ -34,6 +35,8 @@ data class CalendarParams(
   val monthsText: TextStyle = TextStyle.FULL,
   val dateAccessibilityText: TextStyle = TextStyle.NARROW,
 ) {
+
+  internal val weekFields = WeekFields.of(locale)
 
   enum class SelectionMode {
     Disabled,

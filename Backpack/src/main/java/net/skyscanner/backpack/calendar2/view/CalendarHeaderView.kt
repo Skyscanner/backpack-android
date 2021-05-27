@@ -25,7 +25,6 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import java.time.DayOfWeek
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.CalendarState
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
 
@@ -33,23 +32,23 @@ internal class CalendarHeaderView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
-) : LinearLayoutCompat(context, attrs, defStyleAttr), Consumer<CalendarState> {
+) : LinearLayoutCompat(context, attrs, defStyleAttr), Consumer<CalendarParams> {
 
   init {
     orientation = HORIZONTAL
   }
 
-  private var lastState: CalendarState? = null
+  private var lastState: CalendarParams? = null
 
-  override fun invoke(state: CalendarState) {
-    if (lastState?.weekFields == state.weekFields && lastState?.params == state.params) return
+  override fun invoke(state: CalendarParams) {
+    if (lastState == state) return
 
     lastState = state
     removeAllViews()
 
     var current = state.weekFields.firstDayOfWeek
     do {
-      addField(current, state.params)
+      addField(current, state)
       current += 1
     } while (current != state.weekFields.firstDayOfWeek)
   }
