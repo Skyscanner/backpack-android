@@ -22,7 +22,9 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface CalendarComponent {
 
-  val state: StateFlow<CalendarState>?
+  val state: StateFlow<CalendarState>
 
   fun setParams(value: CalendarParams)
+
+  fun setSelection(selection: CalendarSelection)
 }

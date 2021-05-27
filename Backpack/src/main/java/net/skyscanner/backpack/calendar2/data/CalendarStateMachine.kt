@@ -57,6 +57,12 @@ internal fun CalendarStateMachine(
         it.dispatchClick(day, month, year)
       }
     }
+
+    override fun setSelection(selection: CalendarSelection) {
+      fsm.commit {
+        it.dispatchSetSelection(selection)
+      }
+    }
   }
 }
 
@@ -96,3 +102,18 @@ internal fun CalendarState.dispatchParamsUpdate(params: CalendarParams): Calenda
       selection = selection,
     ),
   )
+
+internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): CalendarState {
+  val newParams = params.copy(
+    selectionMode = when (selection) {
+      is CalendarSelection.None -> params.selectionMode
+      is CalendarSelection.Range -> CalendarParams.SelectionMode.Range
+      is CalendarSelection.Single -> CalendarParams.SelectionMode.Single
+    }
+  )
+  return copy(
+    params = newParams,
+    selection = selection,
+    months = monthsOf(newParams, selection)
+  )
+}

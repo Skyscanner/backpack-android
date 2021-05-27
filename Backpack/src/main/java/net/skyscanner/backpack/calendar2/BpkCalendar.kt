@@ -23,33 +23,44 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.time.LocalDate
+import java.time.Period
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.isActive
+import kotlinx.coroutines.plus
 import net.skyscanner.backpack.calendar2.adapter.CalendarAdapter
 import net.skyscanner.backpack.calendar2.adapter.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.ResourcesUtil
 
-class BpkCalendar @JvmOverloads constructor(
+class BpkCalendar private constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
-) : LinearLayoutCompat(context, attrs, defStyleAttr), CalendarComponent {
+  private val scope: CoroutineScope,
+  private val stateMachine: CalendarStateMachine = CalendarStateMachine(
+    scope = scope,
+    initialParams = CalendarParams(
+      range = LocalDate.now() - Period.ofMonths(1)..LocalDate.now() + Period.ofYears(1),
+      selectionMode = CalendarParams.SelectionMode.Range
+    )
+  ),
+) : LinearLayoutCompat(context, attrs, defStyleAttr), CalendarComponent by stateMachine {
 
-  private var scope: CoroutineScope? = null
-  private var fsm: CalendarStateMachine? = null
+  @JvmOverloads
+  constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+  ) : this(context, attrs, defStyleAttr, GlobalScope + Dispatchers.Main)
+
   private val headerView = CalendarHeaderView(context)
   private val recyclerView = RecyclerView(context)
   private val layoutManager = GridLayoutManager(context, 7)
-
-  private var lastParams: CalendarParams? = null
 
   var footerAdapter: CalendarFooterAdapter<RecyclerView.ViewHolder> = DefaultCalendarFooterAdapter
 
@@ -58,55 +69,15 @@ class BpkCalendar @JvmOverloads constructor(
     recyclerView.layoutManager = layoutManager
     addView(headerView, LayoutParams(LayoutParams.MATCH_PARENT, ResourcesUtil.dpToPx(50, context)))
     addView(recyclerView, LayoutParams(LayoutParams.MATCH_PARENT, 0, 1f))
-  }
 
-  override fun onAttachedToWindow() {
-    super.onAttachedToWindow()
-    lastParams?.let(::invalidate)
-  }
+    layoutManager.spanSizeLookup = CalendarSpanSizeLookup(scope, stateMachine.state)
 
-  override fun setParams(value: CalendarParams) {
-    this.lastParams = value
-    invalidate(value)
-  }
-
-  override fun onDetachedFromWindow() {
-    super.onDetachedFromWindow()
-    cleanup()
-  }
-
-  override val state: StateFlow<CalendarState>?
-    get() = fsm?.state
-
-  private fun invalidate(
-    params: CalendarParams,
-  ) {
-    if (!isAttachedToWindow) return
-
-    if (scope == null || scope?.isActive == false || fsm == null) {
-      val scope = CoroutineScope(Job() + Dispatchers.Main)
-      val fsm = CalendarStateMachine(scope, params)
-
-      layoutManager.spanSizeLookup = CalendarSpanSizeLookup(scope, fsm.state)
-      recyclerView.adapter = CalendarAdapter(scope, fsm.state, footerAdapter) {
-        fsm.onClick(it.date.dayOfMonth, it.date.monthValue, it.date.year)
-      }
-
-      fsm.state.onEach {
-        headerView.invoke(it.params)
-      }.launchIn(scope)
-
-      cleanup()
-      this.scope = scope
-      this.fsm = fsm
-    } else {
-      fsm!!.setParams(params)
+    recyclerView.adapter = CalendarAdapter(scope, stateMachine.state, footerAdapter) {
+      stateMachine.onClick(it.date.dayOfMonth, it.date.monthValue, it.date.year)
     }
-  }
 
-  private fun cleanup() {
-    scope?.cancel()
-    fsm = null
-    scope = null
+    stateMachine.state.onEach {
+      headerView.invoke(it.params)
+    }.launchIn(scope)
   }
 }
