@@ -23,8 +23,6 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.time.LocalDate
-import java.time.Period
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -36,6 +34,8 @@ import net.skyscanner.backpack.calendar2.adapter.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.ResourcesUtil
+import org.threeten.bp.LocalDate
+import org.threeten.bp.Period
 
 class BpkCalendar private constructor(
   context: Context,

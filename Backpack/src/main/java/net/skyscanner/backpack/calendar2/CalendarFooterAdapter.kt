@@ -20,7 +20,7 @@ package net.skyscanner.backpack.calendar2
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.time.YearMonth
+import org.threeten.bp.YearMonth
 
 interface CalendarFooterAdapter<VH : RecyclerView.ViewHolder> {
 

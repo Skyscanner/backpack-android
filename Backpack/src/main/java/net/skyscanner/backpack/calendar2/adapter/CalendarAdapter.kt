@@ -20,7 +20,6 @@ package net.skyscanner.backpack.calendar2.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.time.temporal.ChronoField
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -37,6 +36,7 @@ import net.skyscanner.backpack.calendar2.extension.getItem
 import net.skyscanner.backpack.calendar2.extension.yearMonthHash
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
+import org.threeten.bp.temporal.ChronoField
 
 internal class CalendarAdapter(
   scope: CoroutineScope,

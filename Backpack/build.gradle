@@ -34,7 +34,6 @@ android {
   }
   defaultPublishConfig "ossRelease"
   compileOptions {
-    coreLibraryDesugaringEnabled true
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
@@ -47,7 +46,6 @@ dependencies {
   implementation "androidx.annotation:annotation:$rootProject.ext.androidxAnnotations"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
-  coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompat"
   implementation "com.google.android.material:material:$rootProject.ext.androidMaterial"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"

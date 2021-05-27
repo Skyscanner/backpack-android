@@ -22,11 +22,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.LinearLayoutCompat
-import java.time.DayOfWeek
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
+import org.threeten.bp.DayOfWeek
 
 internal class CalendarHeaderView @JvmOverloads constructor(
   context: Context,

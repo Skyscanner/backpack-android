@@ -18,8 +18,8 @@
 
 package net.skyscanner.backpack.calendar2.extension
 
-import java.time.LocalDate
-import java.time.YearMonth
+import org.threeten.bp.LocalDate
+import org.threeten.bp.YearMonth
 
 internal fun LocalDate.yearMonthHash(): Int =
   year * 100 + monthValue

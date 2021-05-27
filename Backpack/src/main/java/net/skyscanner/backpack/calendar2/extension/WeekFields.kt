@@ -18,8 +18,8 @@
 
 package net.skyscanner.backpack.calendar2.extension
 
-import java.time.DayOfWeek
-import java.time.temporal.WeekFields
+import org.threeten.bp.DayOfWeek
+import org.threeten.bp.temporal.WeekFields
 
 internal val WeekFields.lastDayOfWeek: DayOfWeek
   get() = firstDayOfWeek - 1

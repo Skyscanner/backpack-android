@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.calendar2
 
-import java.time.LocalDate
+import org.threeten.bp.LocalDate
 
 sealed class CalendarSelection {
 
