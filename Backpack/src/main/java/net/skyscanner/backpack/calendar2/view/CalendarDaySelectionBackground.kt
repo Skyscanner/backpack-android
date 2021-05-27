@@ -16,9 +16,23 @@ import net.skyscanner.backpack.util.getColorForState
 import net.skyscanner.backpack.util.smallestDimension
 import net.skyscanner.backpack.util.use
 
-internal class CalendarSelectionDrawable(context: Context) : Drawable() {
+internal typealias CalendarDaySelectionBackground = (CalendarDay.Selection?) -> Drawable
 
-  var selection: CalendarDay.Selection = CalendarDay.Selection.None
+internal fun CalendarDaySelectionBackground(
+  context: Context,
+): CalendarDaySelectionBackground {
+  val impl = CalendarDaySelectionDrawable(context)
+
+  return { selection ->
+    impl.apply {
+      this.selection = selection
+    }
+  }
+}
+
+private class CalendarDaySelectionDrawable(context: Context) : Drawable() {
+
+  var selection: CalendarDay.Selection? = null
     set(value) {
       field = value
       invalidateSelf()
@@ -50,7 +64,6 @@ internal class CalendarSelectionDrawable(context: Context) : Drawable() {
 
   override fun draw(canvas: Canvas) {
     when (selection) {
-      CalendarDay.Selection.None -> Unit
       CalendarDay.Selection.Single -> {
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
@@ -70,6 +83,7 @@ internal class CalendarSelectionDrawable(context: Context) : Drawable() {
         canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, 0f, 0.5f)
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
+      null -> return
     }
   }
 

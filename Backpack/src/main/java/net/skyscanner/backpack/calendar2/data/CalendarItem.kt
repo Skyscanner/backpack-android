@@ -24,11 +24,10 @@ internal data class CalendarFooter(
 internal data class CalendarDay(
   val date: LocalDate,
   val info: CalendarParams.Info,
-  val selection: Selection,
+  val selection: Selection?,
 ) : CalendarItem() {
 
   enum class Selection {
-    None,
     Single,
     Double,
     Start,
@@ -45,17 +44,17 @@ internal fun CalendarDay(
   date = date,
   info = cells[date] ?: CalendarParams.Info.Default,
   selection = when (selection) {
-    is CalendarSelection.None -> CalendarDay.Selection.None
+    is CalendarSelection.None -> null
     is CalendarSelection.Single -> when (date) {
       selection.date -> CalendarDay.Selection.Single
-      else -> CalendarDay.Selection.None
+      else -> null
     }
     is CalendarSelection.Range -> when {
       selection.start == date && selection.end == date -> CalendarDay.Selection.Double
       selection.start == date -> CalendarDay.Selection.Start
       selection.end == date -> CalendarDay.Selection.End
       date in selection -> CalendarDay.Selection.Middle
-      else -> CalendarDay.Selection.None
+      else -> null
     }
   },
 )

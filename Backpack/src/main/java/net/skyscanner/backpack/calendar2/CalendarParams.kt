@@ -24,7 +24,6 @@ data class CalendarParams(
   data class Info(
     val status: Status? = null,
     val label: String? = null,
-    val rank: Rank? = null,
   ) {
 
     internal companion object {
@@ -32,14 +31,12 @@ data class CalendarParams(
     }
   }
 
-  enum class Rank {
-    Low,
-    Medium,
-    High,
-  }
-
   enum class Status {
     Disabled,
     Highlighted,
+    Positive,
+    Neutral,
+    Negative,
+    Empty,
   }
 }

@@ -14,6 +14,12 @@
   <color name="__calendarCellStylePositiveColor">@color/bpkMonteverde</color>
   <color name="__calendarCellStyleNeutralColor">@color/bpkKolkata</color>
   <color name="__calendarCellStyleNegativeColor">@color/bpkPanjin</color>
+  <color name="__calendarCellStyleEmptyColor">@color/bpkSkyGrayTint03</color>
+  <color name="__calendarCellPositiveTextColor">@color/bpkWhite</color>
+  <color name="__calendarCellNeutralTextColor">@color/bpkSkyGray</color>
+  <color name="__calendarCellNegativeTextColor">@color/bpkWhite</color>
+  <color name="__calendarCellEmptyTextColor">@color/bpkWhite</color>
+  <color name="__calendarCellDisabledTextColor">@color/bpkSkyGrayTint04</color>
   <color name="__dialogBackground">@color/bpkWhite</color>
   <color name="__panelBorder">@color/bpkSkyGrayTint06</color>
   <color name="__switchTrackDisabled">@color/bpkSkyGrayTint06</color>

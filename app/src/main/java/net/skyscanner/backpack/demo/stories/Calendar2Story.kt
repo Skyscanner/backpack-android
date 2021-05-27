@@ -39,9 +39,10 @@ class Calendar2Story : Story() {
         cells = mapOf(
           LocalDate.of(2020, 6, 25) to CalendarParams.Info(status = CalendarParams.Status.Disabled),
           LocalDate.of(2020, 6, 26) to CalendarParams.Info(label = "Test"),
-          LocalDate.of(2020, 6, 27) to CalendarParams.Info(rank = CalendarParams.Rank.Low),
-          LocalDate.of(2020, 6, 28) to CalendarParams.Info(rank = CalendarParams.Rank.Medium),
-          LocalDate.of(2020, 6, 29) to CalendarParams.Info(rank = CalendarParams.Rank.High),
+          LocalDate.of(2020, 6, 27) to CalendarParams.Info(status = CalendarParams.Status.Positive),
+          LocalDate.of(2020, 6, 28) to CalendarParams.Info(status = CalendarParams.Status.Neutral),
+          LocalDate.of(2020, 6, 29) to CalendarParams.Info(status = CalendarParams.Status.Negative),
+          LocalDate.of(2020, 6, 30) to CalendarParams.Info(status = CalendarParams.Status.Empty),
         ),
       )
     )
