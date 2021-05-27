@@ -1,9 +1,9 @@
 package net.skyscanner.backpack.calendar2
 
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.TextStyle
 import java.util.Locale
-import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
-import org.threeten.bp.format.TextStyle
 
 data class CalendarParams(
   val range: ClosedRange<LocalDate>,

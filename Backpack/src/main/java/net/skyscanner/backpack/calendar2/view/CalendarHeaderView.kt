@@ -4,13 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.LinearLayoutCompat
+import java.time.DayOfWeek
+import java.time.format.TextStyle
 import java.util.Locale
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarState
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
-import org.threeten.bp.DayOfWeek
-import org.threeten.bp.format.TextStyle
 
 internal class CalendarHeaderView @JvmOverloads constructor(
   context: Context,

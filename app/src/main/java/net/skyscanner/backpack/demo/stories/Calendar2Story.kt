@@ -20,11 +20,11 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import java.time.LocalDate
+import java.time.Period
 import net.skyscanner.backpack.calendar2.BpkCalendar
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.demo.R
-import org.threeten.bp.LocalDate
-import org.threeten.bp.Period
 
 class Calendar2Story : Story() {
 

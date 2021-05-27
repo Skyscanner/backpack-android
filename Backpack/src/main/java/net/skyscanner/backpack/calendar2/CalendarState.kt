@@ -1,7 +1,7 @@
 package net.skyscanner.backpack.calendar2
 
+import java.time.temporal.WeekFields
 import net.skyscanner.backpack.calendar2.data.CalendarMonth
-import org.threeten.bp.temporal.WeekFields
 
 data class CalendarState internal constructor(
   val params: CalendarParams,

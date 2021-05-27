@@ -1,12 +1,12 @@
 package net.skyscanner.backpack.calendar2.data
 
+import java.time.temporal.WeekFields
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
 import net.skyscanner.backpack.calendar2.extension.findDate
 import net.skyscanner.backpack.calendar2.extension.toList
 import net.skyscanner.backpack.calendar2.extension.yearMonthHash
-import org.threeten.bp.temporal.WeekFields
 
 internal fun CalendarState.dispatchClick(day: Int, month: Int, year: Int): CalendarState {
   if (params.selectionMode == CalendarParams.SelectionMode.Disabled) return this

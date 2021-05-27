@@ -1,6 +1,6 @@
 package net.skyscanner.backpack.calendar2.extension
 
-import org.threeten.bp.LocalDate
+import java.time.LocalDate
 
 internal fun ClosedRange<LocalDate>.toList(): List<LocalDate> {
   val result = mutableListOf<LocalDate>()
