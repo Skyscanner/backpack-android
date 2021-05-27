@@ -82,10 +82,16 @@ private fun CalendarState.monthsOf(
         days = dates,
         locale = params.locale,
         weekFields = weekFields,
-        monthsTextStyle = params.monthsTextStyle,
+        monthsTextStyle = params.monthsText,
         selection = selection,
         footers = params.footers,
       ) { date ->
-        CalendarDay(date, selection, params.cells)
+        CalendarDay(
+          date = date,
+          selection = selection,
+          cells = params.cells,
+          locale = params.locale,
+          contentDescription = params.dateAccessibilityText,
+        )
       }
     }

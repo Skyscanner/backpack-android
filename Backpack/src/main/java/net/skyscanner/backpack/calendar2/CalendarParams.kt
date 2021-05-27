@@ -29,8 +29,10 @@ data class CalendarParams(
   val cells: Map<LocalDate, Info> = emptyMap(),
   val footers: List<YearMonth> = emptyList(),
   val locale: Locale = Locale.getDefault(),
-  val dayOfWeekTextStyle: TextStyle = TextStyle.NARROW,
-  val monthsTextStyle: TextStyle = TextStyle.FULL,
+  val dayOfWeekText: TextStyle = TextStyle.NARROW,
+  val dayOfWeekAccessibilityText: TextStyle = TextStyle.FULL,
+  val monthsText: TextStyle = TextStyle.FULL,
+  val dateAccessibilityText: TextStyle = TextStyle.NARROW,
 ) {
 
   enum class SelectionMode {

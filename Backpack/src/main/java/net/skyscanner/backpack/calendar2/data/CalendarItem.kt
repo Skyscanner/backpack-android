@@ -20,6 +20,8 @@ package net.skyscanner.backpack.calendar2.data
 
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.format.TextStyle
+import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 
@@ -43,6 +45,7 @@ internal data class CalendarDay(
   val date: LocalDate,
   val info: CalendarParams.Info,
   val selection: Selection?,
+  val contentDescription: String,
 ) : CalendarItem() {
 
   enum class Selection {
@@ -58,9 +61,12 @@ internal fun CalendarDay(
   date: LocalDate,
   selection: CalendarSelection,
   cells: Map<LocalDate, CalendarParams.Info>,
+  locale: Locale,
+  contentDescription: TextStyle,
 ): CalendarDay = CalendarDay(
   date = date,
   info = cells[date] ?: CalendarParams.Info.Default,
+  contentDescription = "${date.dayOfMonth} ${date.month.getDisplayName(contentDescription, locale)}",
   selection = when (selection) {
     is CalendarSelection.None -> null
     is CalendarSelection.Single -> when (date) {

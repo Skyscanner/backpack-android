@@ -55,7 +55,7 @@ internal class CalendarCellDay(
 
   override fun bind(model: CalendarDay) {
     view.isEnabled = model.info.status != CalendarParams.Status.Disabled
-    view.contentDescription = model.date.toString() // TODO:
+    view.contentDescription = model.contentDescription + " " + (model.info.label ?: "")
 
     day.text = model.date.dayOfMonth.toString()
 

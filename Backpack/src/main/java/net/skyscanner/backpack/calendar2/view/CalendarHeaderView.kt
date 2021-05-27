@@ -23,9 +23,8 @@ import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.LinearLayoutCompat
 import java.time.DayOfWeek
-import java.time.format.TextStyle
-import java.util.Locale
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarState
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
@@ -50,12 +49,12 @@ internal class CalendarHeaderView @JvmOverloads constructor(
 
     var current = state.weekFields.firstDayOfWeek
     do {
-      addField(current, state.params.dayOfWeekTextStyle, state.params.locale)
+      addField(current, state.params)
       current += 1
     } while (current != state.weekFields.firstDayOfWeek)
   }
 
-  private fun addField(field: DayOfWeek, textStyle: TextStyle, locale: Locale) {
+  private fun addField(field: DayOfWeek, params: CalendarParams) {
     val text = BpkText(context)
     text.textStyle = BpkText.SM
     text.weight = BpkText.Weight.EMPHASIZED
@@ -64,7 +63,8 @@ internal class CalendarHeaderView @JvmOverloads constructor(
     text.maxLines = 1
     text.isSingleLine = true
     text.isAllCaps = true
-    text.text = field.getDisplayName(textStyle, locale)
+    text.text = field.getDisplayName(params.dayOfWeekText, params.locale)
+    text.contentDescription = field.getDisplayName(params.dayOfWeekAccessibilityText, params.locale)
     addView(text, LayoutParams(0, LayoutParams.MATCH_PARENT, 1f))
   }
 }
