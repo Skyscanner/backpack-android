@@ -38,15 +38,15 @@ class Calendar2Story : Story() {
         range = LocalDate.now() - Period.ofYears(1)..(LocalDate.now() + Period.ofYears(1)),
         selectionMode = CalendarParams.SelectionMode.Range,
         disabledDates = listOf(
-          LocalDate.of(2020, 5, 25),
+          LocalDate.of(2020, 6, 25),
         ),
         labels = mapOf(
-          LocalDate.of(2020, 5, 26) to "Test",
+          LocalDate.of(2020, 6, 26) to "Test",
         ),
         styles = mapOf(
-          LocalDate.of(2020, 5, 27) to CalendarCellStyle.Positive,
-          LocalDate.of(2020, 5, 28) to CalendarCellStyle.Neutral,
-          LocalDate.of(2020, 5, 29) to CalendarCellStyle.Negative,
+          LocalDate.of(2020, 6, 27) to CalendarCellStyle.Positive,
+          LocalDate.of(2020, 6, 28) to CalendarCellStyle.Neutral,
+          LocalDate.of(2020, 6, 29) to CalendarCellStyle.Negative,
         ),
       )
     )
