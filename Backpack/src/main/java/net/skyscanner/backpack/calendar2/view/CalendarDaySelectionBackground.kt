@@ -81,24 +81,25 @@ private class CalendarDaySelectionDrawable(context: Context) : Drawable() {
   }
 
   override fun draw(canvas: Canvas) {
+    val rtl = layoutDirection == LayoutDirection.RTL
     when (selection) {
       CalendarDay.Selection.Single -> {
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
       CalendarDay.Selection.Double -> {
-        val offsetX = if (layoutDirection == LayoutDirection.RTL) +sameDateCirclesOffset else -sameDateCirclesOffset
+        val offsetX = if (rtl) +sameDateCirclesOffset else -sameDateCirclesOffset
         canvas.drawCircle(selectedDaySameDayCircleFillColor, Style.STROKE, offsetX = offsetX)
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
       CalendarDay.Selection.Start -> {
-        canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, 0.5f, 1f)
+        canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, if (rtl) 0f else 0.5f, if (rtl) 0.5f else 1f)
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
       CalendarDay.Selection.Middle -> {
         canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, 0f, 1f)
       }
       CalendarDay.Selection.End -> {
-        canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, 0f, 0.5f)
+        canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, if (rtl) 0.5f else 0f, if (rtl) 1f else 0.5f)
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
       null -> return
