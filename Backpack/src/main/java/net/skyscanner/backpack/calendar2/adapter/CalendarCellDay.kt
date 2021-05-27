@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.data.CalendarDay
 import net.skyscanner.backpack.calendar2.view.CalendarSelectionDrawable
 import net.skyscanner.backpack.util.Consumer
@@ -32,11 +33,12 @@ internal class CalendarCellDay(
   }
 
   override fun bind(model: CalendarDay) {
-    view.isEnabled = !model.disabled
     day.text = model.date.dayOfMonth.toString()
-    label.text = model.label
-    label.isVisible = !model.label.isNullOrEmpty()
     view.isSelected = model.selection != CalendarDay.Selection.None
     selectionDrawable.selection = model.selection
+
+    view.isEnabled = model.info.status != CalendarParams.Status.Disabled
+    label.text = model.info.label
+    label.isVisible = !model.info.label.isNullOrEmpty()
   }
 }

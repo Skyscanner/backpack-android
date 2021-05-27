@@ -12,7 +12,7 @@ internal fun CalendarState.dispatchClick(day: Int, month: Int, year: Int): Calen
   if (params.selectionMode == CalendarParams.SelectionMode.Disabled) return this
 
   val date = months.findDate(day, month, year) ?: return this
-  if (date.disabled) return this
+  if (date.info.status == CalendarParams.Status.Disabled) return this
 
   val selection = when (params.selectionMode) {
     CalendarParams.SelectionMode.Disabled -> selection
@@ -68,6 +68,6 @@ private fun CalendarState.monthsOf(
         selection = selection,
         footers = params.footers,
       ) { date ->
-        CalendarDay(date, selection, params.styles, params.labels, params.disabledDates)
+        CalendarDay(date, selection, params.cells)
       }
     }

@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import net.skyscanner.backpack.calendar2.BpkCalendar
-import net.skyscanner.backpack.calendar2.CalendarCellStyle
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.demo.R
 import org.threeten.bp.LocalDate
@@ -37,16 +36,12 @@ class Calendar2Story : Story() {
       CalendarParams(
         range = LocalDate.now() - Period.ofYears(1)..(LocalDate.now() + Period.ofYears(1)),
         selectionMode = CalendarParams.SelectionMode.Range,
-        disabledDates = listOf(
-          LocalDate.of(2020, 6, 25),
-        ),
-        labels = mapOf(
-          LocalDate.of(2020, 6, 26) to "Test",
-        ),
-        styles = mapOf(
-          LocalDate.of(2020, 6, 27) to CalendarCellStyle.Positive,
-          LocalDate.of(2020, 6, 28) to CalendarCellStyle.Neutral,
-          LocalDate.of(2020, 6, 29) to CalendarCellStyle.Negative,
+        cells = mapOf(
+          LocalDate.of(2020, 6, 25) to CalendarParams.Info(status = CalendarParams.Status.Disabled),
+          LocalDate.of(2020, 6, 26) to CalendarParams.Info(label = "Test"),
+          LocalDate.of(2020, 6, 27) to CalendarParams.Info(rank = CalendarParams.Rank.Low),
+          LocalDate.of(2020, 6, 28) to CalendarParams.Info(rank = CalendarParams.Rank.Medium),
+          LocalDate.of(2020, 6, 29) to CalendarParams.Info(rank = CalendarParams.Rank.High),
         ),
       )
     )

@@ -8,9 +8,7 @@ import org.threeten.bp.format.TextStyle
 data class CalendarParams(
   val range: ClosedRange<LocalDate>,
   val selectionMode: SelectionMode,
-  val styles: Map<LocalDate, CalendarCellStyle> = emptyMap(),
-  val labels: Map<LocalDate, String> = emptyMap(),
-  val disabledDates: List<LocalDate> = emptyList(),
+  val cells: Map<LocalDate, Info> = emptyMap(),
   val footers: List<YearMonth> = emptyList(),
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekTextStyle: TextStyle = TextStyle.NARROW,
@@ -21,5 +19,27 @@ data class CalendarParams(
     Disabled,
     Single,
     Range,
+  }
+
+  data class Info(
+    val status: Status? = null,
+    val label: String? = null,
+    val rank: Rank? = null,
+  ) {
+
+    internal companion object {
+      val Default = Info()
+    }
+  }
+
+  enum class Rank {
+    Low,
+    Medium,
+    High,
+  }
+
+  enum class Status {
+    Disabled,
+    Highlighted,
   }
 }

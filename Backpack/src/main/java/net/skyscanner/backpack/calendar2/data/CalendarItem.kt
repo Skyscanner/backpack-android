@@ -1,6 +1,6 @@
 package net.skyscanner.backpack.calendar2.data
 
-import net.skyscanner.backpack.calendar2.CalendarCellStyle
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
@@ -23,9 +23,7 @@ internal data class CalendarFooter(
 
 internal data class CalendarDay(
   val date: LocalDate,
-  val label: String?,
-  val disabled: Boolean,
-  val style: CalendarCellStyle?,
+  val info: CalendarParams.Info,
   val selection: Selection,
 ) : CalendarItem() {
 
@@ -42,14 +40,10 @@ internal data class CalendarDay(
 internal fun CalendarDay(
   date: LocalDate,
   selection: CalendarSelection,
-  styles: Map<LocalDate, CalendarCellStyle>,
-  labels: Map<LocalDate, String>,
-  disabledDates: List<LocalDate>,
+  cells: Map<LocalDate, CalendarParams.Info>,
 ): CalendarDay = CalendarDay(
   date = date,
-  disabled = date in disabledDates,
-  label = labels[date],
-  style = styles[date],
+  info = cells[date] ?: CalendarParams.Info.Default,
   selection = when (selection) {
     is CalendarSelection.None -> CalendarDay.Selection.None
     is CalendarSelection.Single -> when (date) {
