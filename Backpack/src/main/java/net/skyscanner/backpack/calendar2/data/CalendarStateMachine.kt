@@ -18,7 +18,10 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.plus
 import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
@@ -35,10 +38,11 @@ internal interface CalendarStateMachine : CalendarComponent, StateMachine<Calend
 
 internal fun CalendarStateMachine(
   scope: CoroutineScope,
-  params: CalendarParams,
+  initialParams: CalendarParams,
+  dispatcher: CoroutineDispatcher = Dispatchers.Default,
 ): CalendarStateMachine {
 
-  val fsm = MutableStateMachine<CalendarState, Nothing>(scope, CalendarState(params))
+  val fsm = MutableStateMachine<CalendarState, Nothing>(scope + dispatcher, CalendarState(initialParams))
 
   return object : CalendarStateMachine, StateMachine<CalendarState, Nothing> by fsm {
 
