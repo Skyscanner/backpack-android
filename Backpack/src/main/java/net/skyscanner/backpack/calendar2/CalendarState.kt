@@ -38,18 +38,18 @@ internal fun monthsOf(
     .toList()
     .groupBy { date -> date.yearMonthHash() }
     .toSortedMap()
-    .map { entry -> entry.value.sortedBy { date -> date.dayOfMonth } }
-    .map { dates ->
+    .map { entry ->
       CalendarMonth(
-        days = dates,
+        days = entry.value.sortedBy { date -> date.dayOfMonth },
         locale = params.locale,
         weekFields = params.weekFields,
         monthsTextStyle = params.monthsText,
         selection = selection,
         footers = params.footers,
-      ) { date ->
+      ) { yearMonth, date ->
         CalendarDay(
           date = date,
+          yearMonth = yearMonth,
           selection = selection,
           cells = params.cells,
           locale = params.locale,

@@ -43,7 +43,7 @@ internal inline fun CalendarMonth(
   weekFields: WeekFields,
   footers: List<YearMonth>,
   selection: CalendarSelection,
-  day: (LocalDate) -> CalendarDay,
+  day: (YearMonth, LocalDate) -> CalendarDay,
 ): CalendarMonth {
 
   val firstDay = days.first()
@@ -62,7 +62,9 @@ internal inline fun CalendarMonth(
     currentDayOfWeek += 1
   }
 
-  days.mapTo(items, day)
+  days.mapTo(items) {
+    day(yearMonth, it)
+  }
 
   val lastDay = days.last()
   currentDayOfWeek = lastDay.dayOfWeek

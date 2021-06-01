@@ -32,6 +32,7 @@ import kotlinx.coroutines.plus
 import net.skyscanner.backpack.calendar2.adapter.CalendarAdapter
 import net.skyscanner.backpack.calendar2.adapter.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
+import net.skyscanner.backpack.calendar2.extension.getItem
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.ResourcesUtil
 import org.threeten.bp.LocalDate
@@ -61,6 +62,7 @@ class BpkCalendar private constructor(
   private val headerView = CalendarHeaderView(context)
   private val recyclerView = RecyclerView(context)
   private val layoutManager = GridLayoutManager(context, 7)
+  private val scrollListeners = mutableListOf<CalendarOnScrollListener>()
 
   var footerAdapter: CalendarFooterAdapter<RecyclerView.ViewHolder> = DefaultCalendarFooterAdapter
 
@@ -76,8 +78,26 @@ class BpkCalendar private constructor(
       stateMachine.onClick(it.date.dayOfMonth, it.date.monthValue, it.date.year)
     }
 
+    recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+      override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        val firstItemPosition = layoutManager.findFirstVisibleItemPosition()
+        val item = stateMachine.state.value.months.getItem(firstItemPosition)
+        scrollListeners.forEach {
+          it.invoke(item.yearMonth)
+        }
+      }
+    })
+
     stateMachine.state.onEach {
       headerView.invoke(it.params)
     }.launchIn(scope)
+  }
+
+  fun addOnScrollListener(listener: CalendarOnScrollListener) {
+    scrollListeners += listener
+  }
+
+  fun removeOnScrollListener(listener: CalendarOnScrollListener) {
+    scrollListeners -= listener
   }
 }

@@ -25,20 +25,23 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
 
-internal sealed class CalendarItem
+internal sealed class CalendarItem {
+
+  abstract val yearMonth: YearMonth
+}
 
 internal data class CalendarSpace(
   val selected: Boolean,
-  val yearMonth: YearMonth,
+  override val yearMonth: YearMonth,
 ) : CalendarItem()
 
 internal data class CalendarHeader(
   val title: String,
-  val yearMonth: YearMonth,
+  override val yearMonth: YearMonth,
 ) : CalendarItem()
 
 internal data class CalendarFooter(
-  val yearMonth: YearMonth,
+  override val yearMonth: YearMonth,
 ) : CalendarItem()
 
 internal data class CalendarDay(
@@ -46,6 +49,7 @@ internal data class CalendarDay(
   val info: CalendarParams.Info,
   val selection: Selection?,
   val contentDescription: String,
+  override val yearMonth: YearMonth,
 ) : CalendarItem() {
 
   enum class Selection {
@@ -59,12 +63,14 @@ internal data class CalendarDay(
 
 internal fun CalendarDay(
   date: LocalDate,
+  yearMonth: YearMonth,
   selection: CalendarSelection,
   cells: Map<LocalDate, CalendarParams.Info>,
   locale: Locale,
   contentDescription: TextStyle,
 ): CalendarDay = CalendarDay(
   date = date,
+  yearMonth = yearMonth,
   info = cells[date] ?: CalendarParams.Info.Default,
   contentDescription = "${date.dayOfMonth} ${date.month.getDisplayName(contentDescription, locale)}",
   selection = when (selection) {
