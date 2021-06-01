@@ -36,7 +36,7 @@ import net.skyscanner.backpack.calendar2.adapter.CalendarAdapter
 import net.skyscanner.backpack.calendar2.adapter.CalendarLayoutManager
 import net.skyscanner.backpack.calendar2.adapter.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
-import net.skyscanner.backpack.calendar2.extension.getItem
+import net.skyscanner.backpack.calendar2.extension.getItemByGlobalIndex
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.addView
@@ -109,7 +109,7 @@ class BpkCalendar private constructor(
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
           val firstItemPosition = calendarLayoutManager.findFirstVisibleItemPosition()
-          val item = state.value.months.getItem(firstItemPosition)
+          val item = state.value.months.getItemByGlobalIndex(firstItemPosition)
 
           scrollListeners.forEach {
             it.invoke(item.yearMonth)

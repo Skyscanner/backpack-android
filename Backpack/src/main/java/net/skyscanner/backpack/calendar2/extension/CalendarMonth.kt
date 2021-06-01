@@ -21,7 +21,7 @@ package net.skyscanner.backpack.calendar2.extension
 import net.skyscanner.backpack.calendar2.data.CalendarItem
 import net.skyscanner.backpack.calendar2.data.CalendarMonth
 
-internal fun List<CalendarMonth>.getItem(globalIndex: Int): CalendarItem {
+internal fun List<CalendarMonth>.getItemByGlobalIndex(globalIndex: Int): CalendarItem {
   var month: CalendarMonth? = null
   var localIndex = globalIndex
 
