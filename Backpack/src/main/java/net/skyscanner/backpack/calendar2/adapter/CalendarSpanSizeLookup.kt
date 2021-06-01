@@ -30,7 +30,7 @@ import net.skyscanner.backpack.util.Consumer
 internal class CalendarSpanSizeLookup : GridLayoutManager.SpanSizeLookup(), Consumer<List<CalendarMonth>> {
 
   private var data: List<CalendarMonth> = emptyList()
-  val totalSpans = 7
+  val totalSpans = NUM_COLUMNS
 
   override fun invoke(data: List<CalendarMonth>) {
     this.data = data
@@ -38,8 +38,12 @@ internal class CalendarSpanSizeLookup : GridLayoutManager.SpanSizeLookup(), Cons
 
   override fun getSpanSize(position: Int): Int = when (data.getItemByGlobalIndex(position)) {
     is CalendarDay -> 1
-    is CalendarFooter -> 7
-    is CalendarHeader -> 7
+    is CalendarFooter -> NUM_COLUMNS
+    is CalendarHeader -> NUM_COLUMNS
     is CalendarSpace -> 1
+  }
+
+  private companion object {
+    const val NUM_COLUMNS = 7
   }
 }
