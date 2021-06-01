@@ -34,6 +34,7 @@ data class CalendarParams(
   val dayOfWeekAccessibilityText: TextStyle = TextStyle.FULL,
   val monthsText: TextStyle = TextStyle.FULL,
   val dateAccessibilityText: TextStyle = TextStyle.NARROW,
+  val now: LocalDate = LocalDate.now(),
 ) {
 
   internal val weekFields = WeekFields.of(locale)

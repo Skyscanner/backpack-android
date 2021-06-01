@@ -16,22 +16,12 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.extension
+package net.skyscanner.backpack.calendar2.adapter
 
-import net.skyscanner.backpack.calendar2.data.CalendarItem
-import net.skyscanner.backpack.calendar2.data.CalendarMonth
+import android.content.Context
+import androidx.recyclerview.widget.GridLayoutManager
 
-internal fun List<CalendarMonth>.getItem(globalIndex: Int): CalendarItem {
-  var month: CalendarMonth? = null
-  var localIndex = globalIndex
-
-  for (it in this) {
-    if (localIndex in it.items.indices) {
-      month = it
-      break
-    }
-    localIndex -= it.items.size
+internal fun CalendarLayoutManager(context: Context, spanSizeLookup: CalendarSpanSizeLookup) =
+  GridLayoutManager(context, spanSizeLookup.totalSpans).apply {
+    this.spanSizeLookup = spanSizeLookup
   }
-
-  return month?.items?.get(localIndex) ?: error("Unable to find a month for index $globalIndex")
-}

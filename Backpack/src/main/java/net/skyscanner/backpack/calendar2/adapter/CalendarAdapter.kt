@@ -20,12 +20,7 @@ package net.skyscanner.backpack.calendar2.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
-import net.skyscanner.backpack.calendar2.CalendarState
 import net.skyscanner.backpack.calendar2.data.CalendarDay
 import net.skyscanner.backpack.calendar2.data.CalendarFooter
 import net.skyscanner.backpack.calendar2.data.CalendarHeader
@@ -39,20 +34,19 @@ import net.skyscanner.backpack.util.ItemHolder
 import org.threeten.bp.temporal.ChronoField
 
 internal class CalendarAdapter(
-  scope: CoroutineScope,
-  input: StateFlow<CalendarState>,
   private val footers: CalendarFooterAdapter<*>,
   private val output: Consumer<CalendarDay>,
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<List<CalendarMonth>> {
 
-  private var data: List<CalendarMonth> = input.value.months
+  private var data: List<CalendarMonth> = emptyList()
 
   init {
     setHasStableIds(true)
-    input.onEach {
-      this.data = it.months
-      notifyDataSetChanged()
-    }.launchIn(scope)
+  }
+
+  override fun invoke(data: List<CalendarMonth>) {
+    this.data = data
+    notifyDataSetChanged()
   }
 
   override fun getItemCount(): Int =

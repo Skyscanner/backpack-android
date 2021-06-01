@@ -20,8 +20,9 @@ package net.skyscanner.backpack.calendar2
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.recyclerview.widget.GridLayoutManager
+import android.view.Gravity
+import android.widget.FrameLayout
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,12 +30,16 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
+import net.skyscanner.backpack.R
+import net.skyscanner.backpack.badge.BpkBadge
 import net.skyscanner.backpack.calendar2.adapter.CalendarAdapter
+import net.skyscanner.backpack.calendar2.adapter.CalendarLayoutManager
 import net.skyscanner.backpack.calendar2.adapter.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
 import net.skyscanner.backpack.calendar2.extension.getItem
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.ResourcesUtil
+import net.skyscanner.backpack.util.addView
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
 
@@ -50,7 +55,7 @@ class BpkCalendar private constructor(
       selectionMode = CalendarParams.SelectionMode.Range
     )
   ),
-) : LinearLayoutCompat(context, attrs, defStyleAttr), CalendarComponent by stateMachine {
+) : FrameLayout(context, attrs, defStyleAttr), CalendarComponent by stateMachine {
 
   @JvmOverloads
   constructor(
@@ -59,38 +64,15 @@ class BpkCalendar private constructor(
     defStyleAttr: Int = 0,
   ) : this(context, attrs, defStyleAttr, GlobalScope + Dispatchers.Main)
 
-  private val headerView = CalendarHeaderView(context)
-  private val recyclerView = RecyclerView(context)
-  private val layoutManager = GridLayoutManager(context, 7)
   private val scrollListeners = mutableListOf<CalendarOnScrollListener>()
 
   var footerAdapter: CalendarFooterAdapter<RecyclerView.ViewHolder> = DefaultCalendarFooterAdapter
 
   init {
-    orientation = VERTICAL
-    recyclerView.layoutManager = layoutManager
-    addView(headerView, LayoutParams(LayoutParams.MATCH_PARENT, ResourcesUtil.dpToPx(50, context)))
-    addView(recyclerView, LayoutParams(LayoutParams.MATCH_PARENT, 0, 1f))
-
-    layoutManager.spanSizeLookup = CalendarSpanSizeLookup(scope, stateMachine.state)
-
-    recyclerView.adapter = CalendarAdapter(scope, stateMachine.state, footerAdapter) {
-      stateMachine.onClick(it.date.dayOfMonth, it.date.monthValue, it.date.year)
-    }
-
-    recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-      override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        val firstItemPosition = layoutManager.findFirstVisibleItemPosition()
-        val item = stateMachine.state.value.months.getItem(firstItemPosition)
-        scrollListeners.forEach {
-          it.invoke(item.yearMonth)
-        }
-      }
-    })
-
-    stateMachine.state.onEach {
-      headerView.invoke(it.params)
-    }.launchIn(scope)
+    val headerHeight = ResourcesUtil.dpToPx(50, context)
+    initHeaderView(headerHeight)
+    initRecyclerView(headerHeight)
+    initYearView(headerHeight)
   }
 
   fun addOnScrollListener(listener: CalendarOnScrollListener) {
@@ -99,5 +81,71 @@ class BpkCalendar private constructor(
 
   fun removeOnScrollListener(listener: CalendarOnScrollListener) {
     scrollListeners -= listener
+  }
+
+  private fun initHeaderView(headerHeight: Int) {
+    val headerView = CalendarHeaderView(context)
+
+    addView(headerView) {
+      width = LayoutParams.MATCH_PARENT
+      height = headerHeight
+    }
+
+    state.onEach {
+      headerView(it.params)
+    }.launchIn(scope)
+  }
+
+  private fun initRecyclerView(headerHeight: Int) {
+    val calendarSpanSizeLookup = CalendarSpanSizeLookup()
+    val calendarLayoutManager = CalendarLayoutManager(context, calendarSpanSizeLookup)
+    val calendarAdapter = CalendarAdapter(footerAdapter, stateMachine::onClick)
+
+    val recyclerView = RecyclerView(context).apply {
+      layoutManager = calendarLayoutManager
+      adapter = calendarAdapter
+
+      addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+          val firstItemPosition = calendarLayoutManager.findFirstVisibleItemPosition()
+          val item = state.value.months.getItem(firstItemPosition)
+
+          scrollListeners.forEach {
+            it.invoke(item.yearMonth)
+          }
+        }
+      })
+    }
+
+    addView(recyclerView) {
+      width = LayoutParams.MATCH_PARENT
+      height = LayoutParams.MATCH_PARENT
+      topMargin = headerHeight
+    }
+
+    state.onEach {
+      calendarSpanSizeLookup(it.months)
+      calendarAdapter(it.months)
+    }.launchIn(scope)
+  }
+
+  private fun initYearView(headerHeight: Int) {
+    val badge = BpkBadge(context).apply {
+      type = BpkBadge.Type.Dark
+      isVisible = false
+    }
+
+    addOnScrollListener {
+      badge.text = it.year.toString()
+      badge.isVisible = it.year != state.value.params.now.year
+    }
+
+    addView(badge) {
+      width = LayoutParams.WRAP_CONTENT
+      height = LayoutParams.WRAP_CONTENT
+      topMargin = headerHeight + resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+      gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+    }
   }
 }

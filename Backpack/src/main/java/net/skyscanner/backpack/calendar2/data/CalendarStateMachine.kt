@@ -26,14 +26,13 @@ import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
-import net.skyscanner.backpack.calendar2.extension.findDate
 import net.skyscanner.backpack.calendar2.monthsOf
 import net.skyscanner.backpack.util.MutableStateMachine
 import net.skyscanner.backpack.util.StateMachine
 
 internal interface CalendarStateMachine : CalendarComponent, StateMachine<CalendarState, Nothing> {
 
-  fun onClick(day: Int, month: Int, year: Int)
+  fun onClick(date: CalendarDay)
 }
 
 internal fun CalendarStateMachine(
@@ -52,9 +51,9 @@ internal fun CalendarStateMachine(
       }
     }
 
-    override fun onClick(day: Int, month: Int, year: Int) {
+    override fun onClick(date: CalendarDay) {
       fsm.commit {
-        it.dispatchClick(day, month, year)
+        it.dispatchClick(date)
       }
     }
 
@@ -66,10 +65,8 @@ internal fun CalendarStateMachine(
   }
 }
 
-internal fun CalendarState.dispatchClick(day: Int, month: Int, year: Int): CalendarState {
+internal fun CalendarState.dispatchClick(date: CalendarDay): CalendarState {
   if (params.selectionMode == CalendarParams.SelectionMode.Disabled) return this
-
-  val date = months.findDate(day, month, year) ?: return this
   if (date.info.status == CalendarParams.Status.Disabled) return this
 
   val selection = when (params.selectionMode) {

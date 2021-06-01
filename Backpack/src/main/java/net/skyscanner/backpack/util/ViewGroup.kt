@@ -20,6 +20,8 @@ package net.skyscanner.backpack.util
 
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
 
 internal inline fun ViewGroup.forEachIndexed(block: (Int, View) -> Unit) {
   for (i in 0 until childCount) {
@@ -31,4 +33,16 @@ internal inline fun ViewGroup.forEach(block: (View) -> Unit) {
   for (i in 0 until childCount) {
     block(getChildAt(i))
   }
+}
+
+internal inline fun FrameLayout.addView(view: View, builder: FrameLayout.LayoutParams.() -> Unit) {
+  val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+  builder(params)
+  addView(view, params)
+}
+
+internal inline fun LinearLayout.addView(view: View, builder: LinearLayout.LayoutParams.() -> Unit) {
+  val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+  builder(params)
+  addView(view, params)
 }

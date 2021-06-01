@@ -19,29 +19,21 @@
 package net.skyscanner.backpack.calendar2.adapter
 
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import net.skyscanner.backpack.calendar2.CalendarState
 import net.skyscanner.backpack.calendar2.data.CalendarDay
 import net.skyscanner.backpack.calendar2.data.CalendarFooter
 import net.skyscanner.backpack.calendar2.data.CalendarHeader
 import net.skyscanner.backpack.calendar2.data.CalendarMonth
 import net.skyscanner.backpack.calendar2.data.CalendarSpace
 import net.skyscanner.backpack.calendar2.extension.getItem
+import net.skyscanner.backpack.util.Consumer
 
-internal class CalendarSpanSizeLookup(
-  scope: CoroutineScope,
-  input: StateFlow<CalendarState>,
-) : GridLayoutManager.SpanSizeLookup() {
+internal class CalendarSpanSizeLookup : GridLayoutManager.SpanSizeLookup(), Consumer<List<CalendarMonth>> {
 
-  private var data: List<CalendarMonth> = input.value.months
+  private var data: List<CalendarMonth> = emptyList()
+  val totalSpans = 7
 
-  init {
-    input.onEach {
-      this.data = it.months
-    }.launchIn(scope)
+  override fun invoke(data: List<CalendarMonth>) {
+    this.data = data
   }
 
   override fun getSpanSize(position: Int): Int = when (data.getItem(position)) {
