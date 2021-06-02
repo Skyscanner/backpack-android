@@ -28,13 +28,13 @@ import android.graphics.PixelFormat
 import android.graphics.drawable.Drawable
 import android.util.LayoutDirection
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.data.CalendarDay
+import net.skyscanner.backpack.calendar2.data.CalendarCellDay
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.getColorForState
 import net.skyscanner.backpack.util.smallestDimension
 import net.skyscanner.backpack.util.use
 
-internal typealias CalendarDaySelectionBackground = (CalendarDay.Selection?) -> Drawable
+internal typealias CalendarDaySelectionBackground = (CalendarCellDay.Selection?) -> Drawable
 
 internal fun CalendarDaySelectionBackground(
   context: Context,
@@ -50,7 +50,7 @@ internal fun CalendarDaySelectionBackground(
 
 private class CalendarDaySelectionDrawable(context: Context) : Drawable() {
 
-  var selection: CalendarDay.Selection? = null
+  var selection: CalendarCellDay.Selection? = null
     set(value) {
       field = value
       invalidateSelf()
@@ -83,22 +83,22 @@ private class CalendarDaySelectionDrawable(context: Context) : Drawable() {
   override fun draw(canvas: Canvas) {
     val rtl = layoutDirection == LayoutDirection.RTL
     when (selection) {
-      CalendarDay.Selection.Single -> {
+      CalendarCellDay.Selection.Single -> {
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
-      CalendarDay.Selection.Double -> {
+      CalendarCellDay.Selection.Double -> {
         val offsetX = if (rtl) +sameDateCirclesOffset else -sameDateCirclesOffset
         canvas.drawCircle(selectedDaySameDayCircleFillColor, Style.STROKE, offsetX = offsetX)
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
-      CalendarDay.Selection.Start -> {
+      CalendarCellDay.Selection.Start -> {
         canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, if (rtl) 0f else 0.5f, if (rtl) 0.5f else 1f)
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
-      CalendarDay.Selection.Middle -> {
+      CalendarCellDay.Selection.Middle -> {
         canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, 0f, 1f)
       }
-      CalendarDay.Selection.End -> {
+      CalendarCellDay.Selection.End -> {
         canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, if (rtl) 0.5f else 0f, if (rtl) 1f else 0.5f)
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }

@@ -32,10 +32,10 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.badge.BpkBadge
-import net.skyscanner.backpack.calendar2.adapter.CalendarAdapter
-import net.skyscanner.backpack.calendar2.adapter.CalendarLayoutManager
-import net.skyscanner.backpack.calendar2.adapter.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
+import net.skyscanner.backpack.calendar2.list.CalendarAdapter
+import net.skyscanner.backpack.calendar2.list.CalendarLayoutManager
+import net.skyscanner.backpack.calendar2.list.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.addView

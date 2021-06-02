@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.adapter
+package net.skyscanner.backpack.calendar2.list
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -28,17 +28,17 @@ import kotlinx.coroutines.withContext
 import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.DefaultCalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.data.CalendarCell
+import net.skyscanner.backpack.calendar2.data.CalendarCellDay
+import net.skyscanner.backpack.calendar2.data.CalendarCellFooter
+import net.skyscanner.backpack.calendar2.data.CalendarCellHeader
+import net.skyscanner.backpack.calendar2.data.CalendarCellSpace
 import net.skyscanner.backpack.calendar2.data.CalendarCells
-import net.skyscanner.backpack.calendar2.data.CalendarDay
-import net.skyscanner.backpack.calendar2.data.CalendarFooter
-import net.skyscanner.backpack.calendar2.data.CalendarHeader
-import net.skyscanner.backpack.calendar2.data.CalendarSpace
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarAdapter(
   private val scope: CoroutineScope,
-  private val output: Consumer<CalendarDay>,
+  private val output: Consumer<CalendarCellDay>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<CalendarCells> {
 
   private var data: CalendarCells = CalendarCells()
@@ -71,17 +71,17 @@ internal class CalendarAdapter(
     data[position].id
 
   override fun getItemViewType(position: Int): Int = when (data[position]) {
-    is CalendarDay -> TYPE_DAY
-    is CalendarFooter -> TYPE_FOOTER
-    is CalendarHeader -> TYPE_HEADER
-    is CalendarSpace -> TYPE_SPACE
+    is CalendarCellDay -> TYPE_DAY
+    is CalendarCellFooter -> TYPE_FOOTER
+    is CalendarCellHeader -> TYPE_HEADER
+    is CalendarCellSpace -> TYPE_SPACE
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
-    TYPE_HEADER -> CalendarCellHeader(parent)
-    TYPE_DAY -> CalendarCellDay(parent, output)
+    TYPE_HEADER -> CalendarCellHeaderHolder(parent)
+    TYPE_DAY -> CalendarCellDayHolder(parent, output)
     TYPE_FOOTER -> footerAdapter.onCreateViewHolder(parent)
-    else -> CalendarCellSpace(parent)
+    else -> CalendarCellSpaceHolder(parent)
   }
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
@@ -90,7 +90,7 @@ internal class CalendarAdapter(
       holder.invoke(data[position])
     } else {
       val footers = footerAdapter as CalendarFooterAdapter<RecyclerView.ViewHolder>
-      val item = data[position] as CalendarFooter
+      val item = data[position] as CalendarCellFooter
       footers.onBindViewHolder(holder, item.yearMonth)
     }
 

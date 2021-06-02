@@ -16,19 +16,19 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.adapter
+package net.skyscanner.backpack.calendar2.list
 
 import android.view.ViewGroup
 import android.widget.TextView
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.data.CalendarHeader
+import net.skyscanner.backpack.calendar2.data.CalendarCellHeader
 import net.skyscanner.backpack.util.ItemHolder
 
-internal class CalendarCellHeader(
+internal class CalendarCellHeaderHolder(
   parent: ViewGroup,
-) : ItemHolder<CalendarHeader>(parent, R.layout.view_bpk_calendar_header) {
+) : ItemHolder<CalendarCellHeader>(parent, R.layout.view_bpk_calendar_header) {
 
-  override fun bind(model: CalendarHeader) {
+  override fun bind(model: CalendarCellHeader) {
     (itemView as TextView).text = model.title
   }
 }

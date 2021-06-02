@@ -16,14 +16,14 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.adapter
+package net.skyscanner.backpack.calendar2.list
 
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.calendar2.data.CalendarDay
+import net.skyscanner.backpack.calendar2.data.CalendarCellDay
 import net.skyscanner.backpack.calendar2.view.CalendarDayLabelContentColor
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionBackground
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionContentColor
@@ -32,10 +32,10 @@ import net.skyscanner.backpack.calendar2.view.CalendarDayStatusContentColor
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 
-internal class CalendarCellDay(
+internal class CalendarCellDayHolder(
   parent: ViewGroup,
-  private val output: Consumer<CalendarDay>,
-) : ItemHolder<CalendarDay>(parent, R.layout.view_bpk_calendar_day) {
+  private val output: Consumer<CalendarCellDay>,
+) : ItemHolder<CalendarCellDay>(parent, R.layout.view_bpk_calendar_day) {
 
   private val day = findViewById<TextView>(R.id.bpk_calendar_cell_date)
   private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label)
@@ -53,7 +53,7 @@ internal class CalendarCellDay(
     }
   }
 
-  override fun bind(model: CalendarDay) {
+  override fun bind(model: CalendarCellDay) {
     view.isEnabled = model.info.status != CalendarParams.Status.Disabled
     view.contentDescription = model.contentDescription + " " + (model.info.label ?: "")
 

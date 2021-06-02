@@ -45,7 +45,7 @@ internal fun CalendarCells(
         selection = selection,
         footers = params.footers,
       ) { yearMonth, date ->
-        CalendarDay(
+        CalendarCellDay(
           date = date,
           yearMonth = yearMonth,
           selection = selection,

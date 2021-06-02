@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.calendar2.adapter
+package net.skyscanner.backpack.calendar2.list
 
 import androidx.recyclerview.widget.DiffUtil
 import net.skyscanner.backpack.calendar2.data.CalendarCells
