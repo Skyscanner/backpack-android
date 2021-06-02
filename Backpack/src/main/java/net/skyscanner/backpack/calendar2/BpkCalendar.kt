@@ -74,7 +74,7 @@ class BpkCalendar private constructor(
   private val calendarLayoutManager = CalendarLayoutManager(context, calendarSpanSizeLookup)
   private val calendarAdapter = CalendarAdapter(scope, stateMachine::onClick)
 
-  var footerAdapter: CalendarFooterAdapter<*>
+  var footersAdapter: CalendarFooterAdapter<*>
     get() = calendarAdapter.footerAdapter
     set(value) {
       calendarAdapter.footerAdapter = value

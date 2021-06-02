@@ -26,7 +26,7 @@ interface CalendarFooterAdapter<VH : RecyclerView.ViewHolder> {
 
   fun onCreateViewHolder(parent: ViewGroup): VH
 
-  fun onBindViewHolder(holder: VH, data: YearMonth)
+  fun onBindViewHolder(holder: VH, yearMonth: YearMonth)
 }
 
 internal object DefaultCalendarFooterAdapter : CalendarFooterAdapter<RecyclerView.ViewHolder> {
@@ -34,6 +34,6 @@ internal object DefaultCalendarFooterAdapter : CalendarFooterAdapter<RecyclerVie
   override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
     error("A custom footer adapter has to be assigned!")
 
-  override fun onBindViewHolder(holder: RecyclerView.ViewHolder, data: YearMonth) =
+  override fun onBindViewHolder(holder: RecyclerView.ViewHolder, yearMonth: YearMonth) =
     error("A custom footer adapter has to be assigned!")
 }

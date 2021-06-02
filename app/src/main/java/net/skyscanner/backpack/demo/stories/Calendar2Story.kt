@@ -20,10 +20,14 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import kotlin.random.Random
 import net.skyscanner.backpack.calendar2.BpkCalendar
+import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
@@ -38,7 +42,6 @@ class Calendar2Story : Story() {
     val labels: Boolean = false,
     val colored: Boolean = false,
     val disableWeekends: Boolean = false,
-    val highlight: Boolean = false,
   ) {
 
     SelectionDisabled(selection = CalendarParams.SelectionMode.Disabled),
@@ -48,7 +51,6 @@ class Calendar2Story : Story() {
     WithDisabledDates(disableWeekends = true),
     WithLabels(labels = true),
     WithColors(colored = true),
-    WithHighlight(highlight = true),
   }
 
   private val calendar by unsafeLazy { view!!.findViewById<BpkCalendar>(R.id.calendar2)!! }
@@ -60,54 +62,62 @@ class Calendar2Story : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val period = Period.between(range.start, range.endInclusive)
+    calendar.footersAdapter = object : CalendarFooterAdapter<RecyclerView.ViewHolder> {
 
-    val footers = if (type.hasFooters) List(period.months) {
-      val date = range.start + Period.ofMonths(it)
-      YearMonth.of(date.year, date.month)
-    } else emptyList()
+      override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
+        object : RecyclerView.ViewHolder(BpkText(parent.context)) {}
 
-    var cells = emptyMap<LocalDate, CalendarParams.Info>()
+      override fun onBindViewHolder(holder: RecyclerView.ViewHolder, yearMonth: YearMonth) {
+        val textView = holder.itemView as BpkText
+        textView.text = "Month footer for: $yearMonth"
+        textView.setTextColor(requireContext().getColorStateList(R.color.bpkTextPrimary))
+      }
+    }
+
+    val footers = if (type.hasFooters) {
+      range
+        .toMap { YearMonth.of(it.year, it.month) }
+        .values
+        .toSet()
+    } else emptySet()
+
+    var info = emptyMap<LocalDate, CalendarParams.Info>()
 
     if (type.disableWeekends) {
-      cells = range.toList()
-        .filter { it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY }
-        .associateBy({ it }) {
-          CalendarParams.Info(status = CalendarParams.Status.Disabled)
-        }
+      info = range
+        .toMap { CalendarParams.Info(status = CalendarParams.Status.Disabled) }
+        .filter { it.key.dayOfWeek == DayOfWeek.SATURDAY || it.key.dayOfWeek == DayOfWeek.SUNDAY }
     } else if (type.labels) {
-      cells = range.toList()
-        .associateBy({ it }) {
-          val price = random.nextInt(100)
-          CalendarParams.Info(
-            label = when (price) {
-              in 0..25 -> "–"
-              else -> "£$price"
-            },
-            status = when (price) {
-              in 0..25 -> CalendarParams.Status.Empty
-              in 25..50 -> CalendarParams.Status.Positive
-              in 50..75 -> CalendarParams.Status.Neutral
-              in 75..100 -> CalendarParams.Status.Negative
-              else -> CalendarParams.Status.Empty
-            }
-          )
-        }
+      info = range.toMap {
+        val price = random.nextInt(100)
+        CalendarParams.Info(
+          label = when (price) {
+            in 0..25 -> "–"
+            else -> "£$price"
+          },
+          status = when (price) {
+            in 0..25 -> CalendarParams.Status.Empty
+            in 25..50 -> CalendarParams.Status.Positive
+            in 50..75 -> CalendarParams.Status.Neutral
+            in 75..100 -> CalendarParams.Status.Negative
+            else -> CalendarParams.Status.Empty
+          }
+        )
+      }
     } else if (type.colored) {
       val random = Random(0)
-      cells = range.toList()
-        .associateBy({ it }) {
-          val price = random.nextInt(100)
-          CalendarParams.Info(
-            status = when (price) {
-              in 0..25 -> CalendarParams.Status.Empty
-              in 25..50 -> CalendarParams.Status.Positive
-              in 50..75 -> CalendarParams.Status.Neutral
-              in 75..100 -> CalendarParams.Status.Negative
-              else -> CalendarParams.Status.Empty
-            }
-          )
-        }
+      info = range.toMap {
+        val price = random.nextInt(100)
+        CalendarParams.Info(
+          status = when (price) {
+            in 0..25 -> CalendarParams.Status.Empty
+            in 25..50 -> CalendarParams.Status.Positive
+            in 50..75 -> CalendarParams.Status.Neutral
+            in 75..100 -> CalendarParams.Status.Negative
+            else -> CalendarParams.Status.Empty
+          }
+        )
+      }
     }
 
     calendar.setParams(
@@ -115,7 +125,7 @@ class Calendar2Story : Story() {
         range = range,
         selectionMode = type.selection,
         footers = footers,
-        cells = cells,
+        info = info,
       )
     )
   }
@@ -131,11 +141,11 @@ class Calendar2Story : Story() {
     }
   }
 
-  private fun ClosedRange<LocalDate>.toList(): List<LocalDate> {
-    val result = mutableListOf<LocalDate>()
+  private fun <R> ClosedRange<LocalDate>.toMap(valueSelector: (LocalDate) -> R): Map<LocalDate, R> {
+    val result = mutableMapOf<LocalDate, R>()
     var current = start
     while (current != endInclusive) {
-      result += current
+      result[current] = valueSelector(current)
       current = current.plusDays(1)
     }
     return result

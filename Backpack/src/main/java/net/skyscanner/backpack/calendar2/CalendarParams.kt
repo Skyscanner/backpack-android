@@ -27,8 +27,8 @@ import org.threeten.bp.temporal.WeekFields
 data class CalendarParams(
   val range: ClosedRange<LocalDate>,
   val selectionMode: SelectionMode,
-  val cells: Map<LocalDate, Info> = emptyMap(),
-  val footers: List<YearMonth> = emptyList(),
+  val info: Map<LocalDate, Info> = emptyMap(),
+  val footers: Set<YearMonth> = emptySet(),
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
   val dayOfWeekAccessibilityText: TextStyle = TextStyle.FULL,

@@ -41,7 +41,7 @@ internal inline fun CalendarMonth(
   locale: Locale,
   monthsTextStyle: TextStyle,
   weekFields: WeekFields,
-  footers: List<YearMonth>,
+  footers: Set<YearMonth>,
   selection: CalendarSelection,
   day: (YearMonth, LocalDate) -> CalendarCellDay,
 ): CalendarMonth {
@@ -51,17 +51,17 @@ internal inline fun CalendarMonth(
   val prevMonth = yearMonth.prevMonth()
   val nextMonth = yearMonth.nextMonth()
 
-  val items = mutableListOf<CalendarCell>()
-  items += CalendarCellHeader(title = yearMonth.month.getDisplayName(monthsTextStyle, locale), yearMonth = yearMonth)
+  val cells = mutableListOf<CalendarCell>()
+  cells += CalendarCellHeader(title = yearMonth.month.getDisplayName(monthsTextStyle, locale), yearMonth = yearMonth)
 
   var currentDayOfWeek = weekFields.firstDayOfWeek
   val selectSpacingBefore = prevMonth.lastDay() in selection && firstDay in selection
   while (currentDayOfWeek != firstDay.dayOfWeek) {
-    items += CalendarCellSpace(selected = selectSpacingBefore, yearMonth = prevMonth)
+    cells += CalendarCellSpace(selected = selectSpacingBefore, yearMonth = prevMonth)
     currentDayOfWeek += 1
   }
 
-  days.mapTo(items) {
+  days.mapTo(cells) {
     day(yearMonth, it)
   }
 
@@ -69,13 +69,13 @@ internal inline fun CalendarMonth(
   currentDayOfWeek = lastDay.dayOfWeek
   val selectSpacingAfter = nextMonth.firstDay() in selection && lastDay in selection
   while (currentDayOfWeek != weekFields.lastDayOfWeek) {
-    items += CalendarCellSpace(selected = selectSpacingAfter, yearMonth = yearMonth)
+    cells += CalendarCellSpace(selected = selectSpacingAfter, yearMonth = yearMonth)
     currentDayOfWeek += 1
   }
 
   if (yearMonth in footers) {
-    items += CalendarCellFooter(yearMonth = yearMonth)
+    cells += CalendarCellFooter(yearMonth = yearMonth)
   }
 
-  return CalendarMonth(yearMonth = yearMonth, cells = items)
+  return CalendarMonth(yearMonth = yearMonth, cells = cells)
 }
