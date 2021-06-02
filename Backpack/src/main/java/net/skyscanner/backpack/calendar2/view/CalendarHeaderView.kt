@@ -19,6 +19,8 @@
 package net.skyscanner.backpack.calendar2.view
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -26,6 +28,7 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
+import net.skyscanner.backpack.util.ResourcesUtil
 import org.threeten.bp.DayOfWeek
 
 internal class CalendarHeaderView @JvmOverloads constructor(
@@ -33,6 +36,12 @@ internal class CalendarHeaderView @JvmOverloads constructor(
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr), Consumer<CalendarParams> {
+
+  private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    style = Paint.Style.FILL_AND_STROKE
+    color = context.getColor(R.color.bpkLine)
+    strokeWidth = ResourcesUtil.dpToPx(1f, context)
+  }
 
   init {
     orientation = HORIZONTAL
@@ -51,6 +60,12 @@ internal class CalendarHeaderView @JvmOverloads constructor(
       addField(current, state)
       current += 1
     } while (current != state.weekFields.firstDayOfWeek)
+  }
+
+  override fun dispatchDraw(canvas: Canvas) {
+    super.dispatchDraw(canvas)
+    val y = height.toFloat() - linePaint.strokeWidth / 2
+    canvas.drawLine(0f, y, width.toFloat(), y, linePaint)
   }
 
   private fun addField(field: DayOfWeek, params: CalendarParams) {
