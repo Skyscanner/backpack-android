@@ -7,6 +7,8 @@
   android:textColor="@color/bpkTextPrimary"
   android:paddingStart="@dimen/bpkSpacingBase"
   android:paddingEnd="@dimen/bpkSpacingBase"
+  android:paddingTop="@dimen/bpkSpacingLg"
+  android:paddingBottom="@dimen/bpkSpacingLg"
   android:singleLine="true"
   app:textStyle="lg"
   app:weight="emphasized" />
