@@ -165,7 +165,18 @@ object ComponentRegistry {
         "Labeled" story NodeData { LabeledCalendarStory of R.layout.fragment_calendar_default },
       )
     ),
-    "Calendar 2" story NodeData { Calendar2Story of R.layout.fragment_calendar_2 },
+    "Calendar 2" story NodeData(
+      { children -> SubStory of children },
+      mapOf(
+        "Selection Disabled" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionDisabled },
+        "Selection Single" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionSingle },
+        "Selection Range" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionRange },
+        "With disabled dates" story NodeData { Calendar2Story of Calendar2Story.Type.WithDisabledDates },
+        "With day colours" story NodeData { Calendar2Story of Calendar2Story.Type.WithColors },
+        "With day labels" story NodeData { Calendar2Story of Calendar2Story.Type.WithLabels },
+        "With months footers" story NodeData { Calendar2Story of Calendar2Story.Type.WithFooters },
+      )
+    ),
     "Chip" story NodeData(
       { children -> SubStory of children },
       mapOf(
