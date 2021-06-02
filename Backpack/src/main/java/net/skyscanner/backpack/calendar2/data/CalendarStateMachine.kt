@@ -26,7 +26,6 @@ import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
-import net.skyscanner.backpack.calendar2.monthsOf
 import net.skyscanner.backpack.util.MutableStateMachine
 import net.skyscanner.backpack.util.StateMachine
 
@@ -87,14 +86,14 @@ internal fun CalendarState.dispatchClick(date: CalendarDay): CalendarState {
 
   return copy(
     selection = selection,
-    months = monthsOf(params = params, selection = selection),
+    cells = CalendarCells(params = params, selection = selection),
   )
 }
 
 internal fun CalendarState.dispatchParamsUpdate(params: CalendarParams): CalendarState =
   copy(
     params = params,
-    months = monthsOf(
+    cells = CalendarCells(
       params = params,
       selection = selection,
     ),
@@ -111,6 +110,6 @@ internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): C
   return copy(
     params = newParams,
     selection = selection,
-    months = monthsOf(newParams, selection)
+    cells = CalendarCells(newParams, selection),
   )
 }

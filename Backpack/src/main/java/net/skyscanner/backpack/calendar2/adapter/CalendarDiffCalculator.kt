@@ -19,30 +19,27 @@
 package net.skyscanner.backpack.calendar2.adapter
 
 import androidx.recyclerview.widget.DiffUtil
+import net.skyscanner.backpack.calendar2.data.CalendarCells
 import net.skyscanner.backpack.calendar2.data.CalendarDay
 import net.skyscanner.backpack.calendar2.data.CalendarFooter
 import net.skyscanner.backpack.calendar2.data.CalendarHeader
-import net.skyscanner.backpack.calendar2.data.CalendarMonth
 import net.skyscanner.backpack.calendar2.data.CalendarSpace
-import net.skyscanner.backpack.calendar2.extension.cellByPosition
-import net.skyscanner.backpack.calendar2.extension.cellsCount
 
 internal class CalendarDiffCalculator(
-  private val oldState: List<CalendarMonth>,
-  private val newState: List<CalendarMonth>,
+  private val oldState: CalendarCells,
+  private val newState: CalendarCells,
 ) : DiffUtil.Callback() {
 
   override fun getOldListSize(): Int =
-    oldState.cellsCount()
+    oldState.size
 
   override fun getNewListSize(): Int =
-    newState.cellsCount()
+    newState.size
 
   override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-    val old = oldState.cellByPosition(oldItemPosition)
-    val new = newState.cellByPosition(newItemPosition)
+    val old = oldState[oldItemPosition]
 
-    return when (new) {
+    return when (val new = newState[newItemPosition]) {
       is CalendarDay -> new.date == (old as? CalendarDay)?.date
       is CalendarFooter -> new.yearMonth == (old as? CalendarFooter)?.yearMonth
       is CalendarHeader -> new.yearMonth == (old as? CalendarHeader)?.yearMonth
@@ -50,9 +47,6 @@ internal class CalendarDiffCalculator(
     }
   }
 
-  override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-    val old = oldState.cellByPosition(oldItemPosition)
-    val new = newState.cellByPosition(newItemPosition)
-    return old == new
-  }
+  override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+    newState[newItemPosition] == oldState[oldItemPosition]
 }

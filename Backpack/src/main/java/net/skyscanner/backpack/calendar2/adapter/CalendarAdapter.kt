@@ -27,14 +27,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.DefaultCalendarFooterAdapter
+import net.skyscanner.backpack.calendar2.data.CalendarCell
+import net.skyscanner.backpack.calendar2.data.CalendarCells
 import net.skyscanner.backpack.calendar2.data.CalendarDay
 import net.skyscanner.backpack.calendar2.data.CalendarFooter
 import net.skyscanner.backpack.calendar2.data.CalendarHeader
-import net.skyscanner.backpack.calendar2.data.CalendarItem
-import net.skyscanner.backpack.calendar2.data.CalendarMonth
 import net.skyscanner.backpack.calendar2.data.CalendarSpace
-import net.skyscanner.backpack.calendar2.extension.cellByPosition
-import net.skyscanner.backpack.calendar2.extension.cellsCount
 import net.skyscanner.backpack.calendar2.extension.yearMonthHash
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
@@ -43,9 +41,9 @@ import org.threeten.bp.temporal.ChronoField
 internal class CalendarAdapter(
   private val scope: CoroutineScope,
   private val output: Consumer<CalendarDay>,
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<List<CalendarMonth>> {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<CalendarCells> {
 
-  private var data: List<CalendarMonth> = emptyList()
+  private var data: CalendarCells = CalendarCells()
 
   var footerAdapter: CalendarFooterAdapter<*> = DefaultCalendarFooterAdapter
     set(value) {
@@ -57,7 +55,7 @@ internal class CalendarAdapter(
     setHasStableIds(true)
   }
 
-  override fun invoke(data: List<CalendarMonth>) {
+  override fun invoke(data: CalendarCells) {
     val calculator = CalendarDiffCalculator(this.data, data)
     scope.launch(Dispatchers.Default) {
       val diff = DiffUtil.calculateDiff(calculator, false)
@@ -69,16 +67,16 @@ internal class CalendarAdapter(
   }
 
   override fun getItemCount(): Int =
-    data.cellsCount()
+    data.size
 
-  override fun getItemViewType(position: Int): Int = when (data.cellByPosition(position)) {
+  override fun getItemViewType(position: Int): Int = when (data[position]) {
     is CalendarDay -> TYPE_DAY
     is CalendarFooter -> TYPE_FOOTER
     is CalendarHeader -> TYPE_HEADER
     is CalendarSpace -> TYPE_SPACE
   }
 
-  override fun getItemId(position: Int): Long = when (val item = data.cellByPosition(position)) {
+  override fun getItemId(position: Int): Long = when (val item = data[position]) {
     is CalendarDay -> item.date.getLong(ChronoField.EPOCH_DAY)
     is CalendarFooter -> item.yearMonth.yearMonthHash() * -10L - 1
     is CalendarHeader -> item.yearMonth.yearMonthHash() * -10L - 2
@@ -94,11 +92,11 @@ internal class CalendarAdapter(
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
     if (holder is ItemHolder<*>) {
-      holder as ItemHolder<CalendarItem>
-      holder.invoke(data.cellByPosition(position))
+      holder as ItemHolder<CalendarCell>
+      holder.invoke(data[position])
     } else {
       val footers = footerAdapter as CalendarFooterAdapter<RecyclerView.ViewHolder>
-      val item = data.cellByPosition(position) as CalendarFooter
+      val item = data[position] as CalendarFooter
       footers.onBindViewHolder(holder, item.yearMonth)
     }
 

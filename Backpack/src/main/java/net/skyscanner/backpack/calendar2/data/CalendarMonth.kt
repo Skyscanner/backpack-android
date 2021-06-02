@@ -33,7 +33,7 @@ import org.threeten.bp.temporal.WeekFields
 
 internal data class CalendarMonth(
   val yearMonth: YearMonth,
-  val items: List<CalendarItem>,
+  val cells: List<CalendarCell>,
 )
 
 internal inline fun CalendarMonth(
@@ -52,7 +52,7 @@ internal inline fun CalendarMonth(
   val prevMonth = yearMonth.prevMonth()
   val nextMonth = yearMonth.nextMonth()
 
-  val items = mutableListOf<CalendarItem>()
+  val items = mutableListOf<CalendarCell>()
   items += CalendarHeader(title = yearMonth.month.getDisplayName(monthsTextStyle, locale), yearMonth = yearMonth)
 
   var currentDayOfWeek = weekFields.firstDayOfWeek
@@ -78,5 +78,5 @@ internal inline fun CalendarMonth(
     items += CalendarFooter(yearMonth = yearMonth)
   }
 
-  return CalendarMonth(yearMonth = yearMonth, items = items)
+  return CalendarMonth(yearMonth = yearMonth, cells = items)
 }
