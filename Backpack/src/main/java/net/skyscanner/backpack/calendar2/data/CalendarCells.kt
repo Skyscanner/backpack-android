@@ -3,7 +3,7 @@ package net.skyscanner.backpack.calendar2.data
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.extension.toList
-import net.skyscanner.backpack.calendar2.extension.yearMonthHash
+import net.skyscanner.backpack.calendar2.extension.yearMonth
 
 internal data class CalendarCells(
   private val months: List<CalendarMonth> = emptyList(),
@@ -11,13 +11,9 @@ internal data class CalendarCells(
 
   val size: Int = months.sumBy { it.cells.size }
 
-  operator fun get(position: Int): CalendarCell =
-    getOrNull(position) ?: error("Unable to find a month for index $position")
-
-  fun getOrNull(position: Int): CalendarCell? {
+  operator fun get(position: Int): CalendarCell {
     var month: CalendarMonth? = null
     var localIndex = position
-
     for (it in months) {
       if (localIndex in it.cells.indices) {
         month = it
@@ -26,7 +22,7 @@ internal data class CalendarCells(
       localIndex -= it.cells.size
     }
 
-    return month?.cells?.getOrNull(localIndex)
+    return month?.cells?.getOrNull(localIndex) ?: error("Unable to find a month for index $position")
   }
 }
 
@@ -37,11 +33,12 @@ internal fun CalendarCells(
   val months = params
     .range
     .toList()
-    .groupBy { date -> date.yearMonthHash() }
+    .groupBy { date -> date.yearMonth() }
     .toSortedMap()
     .map { entry ->
       CalendarMonth(
         days = entry.value.sortedBy { date -> date.dayOfMonth },
+        yearMonth = entry.key,
         locale = params.locale,
         weekFields = params.weekFields,
         monthsTextStyle = params.monthsText,

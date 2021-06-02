@@ -25,7 +25,6 @@ import net.skyscanner.backpack.calendar2.extension.lastDay
 import net.skyscanner.backpack.calendar2.extension.lastDayOfWeek
 import net.skyscanner.backpack.calendar2.extension.nextMonth
 import net.skyscanner.backpack.calendar2.extension.prevMonth
-import net.skyscanner.backpack.calendar2.extension.yearMonth
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
@@ -38,6 +37,7 @@ internal data class CalendarMonth(
 
 internal inline fun CalendarMonth(
   days: List<LocalDate>,
+  yearMonth: YearMonth,
   locale: Locale,
   monthsTextStyle: TextStyle,
   weekFields: WeekFields,
@@ -48,7 +48,6 @@ internal inline fun CalendarMonth(
 
   val firstDay = days.first()
 
-  val yearMonth = firstDay.yearMonth()
   val prevMonth = yearMonth.prevMonth()
   val nextMonth = yearMonth.nextMonth()
 
