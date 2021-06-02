@@ -33,7 +33,7 @@ data class CalendarParams(
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
   val dayOfWeekAccessibilityText: TextStyle = TextStyle.FULL,
   val monthsText: TextStyle = TextStyle.FULL,
-  val dateAccessibilityText: TextStyle = TextStyle.NARROW,
+  val dateAccessibilityText: TextStyle = TextStyle.FULL,
   val now: LocalDate = LocalDate.now(),
 ) {
 
