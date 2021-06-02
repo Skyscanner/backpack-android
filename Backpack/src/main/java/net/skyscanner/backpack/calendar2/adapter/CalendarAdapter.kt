@@ -33,10 +33,8 @@ import net.skyscanner.backpack.calendar2.data.CalendarDay
 import net.skyscanner.backpack.calendar2.data.CalendarFooter
 import net.skyscanner.backpack.calendar2.data.CalendarHeader
 import net.skyscanner.backpack.calendar2.data.CalendarSpace
-import net.skyscanner.backpack.calendar2.extension.yearMonthHash
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
-import org.threeten.bp.temporal.ChronoField
 
 internal class CalendarAdapter(
   private val scope: CoroutineScope,
@@ -69,18 +67,14 @@ internal class CalendarAdapter(
   override fun getItemCount(): Int =
     data.size
 
+  override fun getItemId(position: Int): Long =
+    data[position].id
+
   override fun getItemViewType(position: Int): Int = when (data[position]) {
     is CalendarDay -> TYPE_DAY
     is CalendarFooter -> TYPE_FOOTER
     is CalendarHeader -> TYPE_HEADER
     is CalendarSpace -> TYPE_SPACE
-  }
-
-  override fun getItemId(position: Int): Long = when (val item = data[position]) {
-    is CalendarDay -> item.date.getLong(ChronoField.EPOCH_DAY)
-    is CalendarFooter -> item.yearMonth.yearMonthHash() * -10L - 1
-    is CalendarHeader -> item.yearMonth.yearMonthHash() * -10L - 2
-    is CalendarSpace -> item.yearMonth.yearMonthHash() * -10L - 3
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {

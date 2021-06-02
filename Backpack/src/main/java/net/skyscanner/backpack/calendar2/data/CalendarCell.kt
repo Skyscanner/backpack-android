@@ -21,28 +21,44 @@ package net.skyscanner.backpack.calendar2.data
 import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.calendar2.extension.yearMonthHash
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
+import org.threeten.bp.temporal.ChronoField
 
 internal sealed class CalendarCell {
 
   abstract val yearMonth: YearMonth
+
+  abstract val id: Long
 }
 
 internal data class CalendarSpace(
   val selected: Boolean,
   override val yearMonth: YearMonth,
-) : CalendarCell()
+) : CalendarCell() {
+
+  override val id: Long =
+    -(yearMonth.yearMonthHash() * 10L + 1L)
+}
 
 internal data class CalendarHeader(
   val title: String,
   override val yearMonth: YearMonth,
-) : CalendarCell()
+) : CalendarCell() {
+
+  override val id: Long =
+    -(yearMonth.yearMonthHash() * 10L + 2L)
+}
 
 internal data class CalendarFooter(
   override val yearMonth: YearMonth,
-) : CalendarCell()
+) : CalendarCell() {
+
+  override val id: Long =
+    -(yearMonth.yearMonthHash() * 10L + 3L)
+}
 
 internal data class CalendarDay(
   val date: LocalDate,
@@ -51,6 +67,9 @@ internal data class CalendarDay(
   val contentDescription: String,
   override val yearMonth: YearMonth,
 ) : CalendarCell() {
+
+  override val id: Long =
+    date.getLong(ChronoField.EPOCH_DAY)
 
   enum class Selection {
     Single,
