@@ -48,7 +48,7 @@ class BpkCalendar private constructor(
   private val stateMachine: CalendarStateMachine = CalendarStateMachine(
     scope = scope,
     initialParams = CalendarParams(
-      range = LocalDate.now() - Period.ofMonths(1)..LocalDate.now() + Period.ofYears(1),
+      range = LocalDate.now() - Period.ofYears(1)..LocalDate.now() + Period.ofYears(1),
       selectionMode = CalendarParams.SelectionMode.Range,
     )
   ),
