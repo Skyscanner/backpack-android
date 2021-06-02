@@ -4,6 +4,7 @@ import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.extension.toList
 import net.skyscanner.backpack.calendar2.extension.yearMonth
+import org.threeten.bp.LocalDate
 
 internal data class CalendarCells(
   private val months: List<CalendarMonth> = emptyList(),
@@ -23,6 +24,19 @@ internal data class CalendarCells(
     }
 
     return month?.cells?.getOrNull(localIndex) ?: error("Unable to find a month for index $position")
+  }
+
+  fun indexOf(date: LocalDate): Int {
+    var accumulated = 0
+    months.forEach { month ->
+      val indexInMonth = month.cells.indexOfFirst { (it as? CalendarCellDay)?.date == date }
+      if (indexInMonth < 0) {
+        accumulated += month.cells.size
+      } else {
+        return indexInMonth + accumulated
+      }
+    }
+    return -1
   }
 }
 

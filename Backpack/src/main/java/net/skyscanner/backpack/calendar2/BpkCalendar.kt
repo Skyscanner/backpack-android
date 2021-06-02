@@ -115,4 +115,18 @@ class BpkCalendar private constructor(
   fun removeOnScrollListener(listener: CalendarOnScrollListener) {
     scrollListeners -= listener
   }
+
+  fun scrollToDate(date: LocalDate) {
+    val index = state.value.cells.indexOf(date)
+    if (index >= 0) {
+      recyclerView.scrollToPosition(index)
+    }
+  }
+
+  fun smoothScrollToDate(date: LocalDate) {
+    val index = state.value.cells.indexOf(date)
+    if (index >= 0) {
+      recyclerView.smoothScrollToPosition(index)
+    }
+  }
 }
