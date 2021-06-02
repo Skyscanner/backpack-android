@@ -24,7 +24,7 @@ import net.skyscanner.backpack.calendar2.data.CalendarFooter
 import net.skyscanner.backpack.calendar2.data.CalendarHeader
 import net.skyscanner.backpack.calendar2.data.CalendarMonth
 import net.skyscanner.backpack.calendar2.data.CalendarSpace
-import net.skyscanner.backpack.calendar2.extension.getItemByGlobalIndex
+import net.skyscanner.backpack.calendar2.extension.cellByPosition
 import net.skyscanner.backpack.util.Consumer
 
 internal class CalendarSpanSizeLookup : GridLayoutManager.SpanSizeLookup(), Consumer<List<CalendarMonth>> {
@@ -36,7 +36,7 @@ internal class CalendarSpanSizeLookup : GridLayoutManager.SpanSizeLookup(), Cons
     this.data = data
   }
 
-  override fun getSpanSize(position: Int): Int = when (data.getItemByGlobalIndex(position)) {
+  override fun getSpanSize(position: Int): Int = when (data.cellByPosition(position)) {
     is CalendarDay -> 1
     is CalendarFooter -> NUM_COLUMNS
     is CalendarHeader -> NUM_COLUMNS

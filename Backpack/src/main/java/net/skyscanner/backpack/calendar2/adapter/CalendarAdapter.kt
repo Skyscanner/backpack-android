@@ -19,47 +19,66 @@
 package net.skyscanner.backpack.calendar2.adapter
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
+import net.skyscanner.backpack.calendar2.DefaultCalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.data.CalendarDay
 import net.skyscanner.backpack.calendar2.data.CalendarFooter
 import net.skyscanner.backpack.calendar2.data.CalendarHeader
 import net.skyscanner.backpack.calendar2.data.CalendarItem
 import net.skyscanner.backpack.calendar2.data.CalendarMonth
 import net.skyscanner.backpack.calendar2.data.CalendarSpace
-import net.skyscanner.backpack.calendar2.extension.getItemByGlobalIndex
+import net.skyscanner.backpack.calendar2.extension.cellByPosition
+import net.skyscanner.backpack.calendar2.extension.cellsCount
 import net.skyscanner.backpack.calendar2.extension.yearMonthHash
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 import org.threeten.bp.temporal.ChronoField
 
 internal class CalendarAdapter(
-  private val footers: CalendarFooterAdapter<*>,
+  private val scope: CoroutineScope,
   private val output: Consumer<CalendarDay>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<List<CalendarMonth>> {
 
   private var data: List<CalendarMonth> = emptyList()
+
+  var footerAdapter: CalendarFooterAdapter<*> = DefaultCalendarFooterAdapter
+    set(value) {
+      field = value
+      notifyDataSetChanged()
+    }
 
   init {
     setHasStableIds(true)
   }
 
   override fun invoke(data: List<CalendarMonth>) {
-    this.data = data
-    notifyDataSetChanged()
+    val calculator = CalendarDiffCalculator(this.data, data)
+    scope.launch(Dispatchers.Default) {
+      val diff = DiffUtil.calculateDiff(calculator, false)
+      withContext(Dispatchers.Main) {
+        this@CalendarAdapter.data = data
+        diff.dispatchUpdatesTo(this@CalendarAdapter)
+      }
+    }
   }
 
   override fun getItemCount(): Int =
-    data.sumBy { it.items.size }
+    data.cellsCount()
 
-  override fun getItemViewType(position: Int): Int = when (data.getItemByGlobalIndex(position)) {
+  override fun getItemViewType(position: Int): Int = when (data.cellByPosition(position)) {
     is CalendarDay -> TYPE_DAY
     is CalendarFooter -> TYPE_FOOTER
     is CalendarHeader -> TYPE_HEADER
     is CalendarSpace -> TYPE_SPACE
   }
 
-  override fun getItemId(position: Int): Long = when (val item = data.getItemByGlobalIndex(position)) {
+  override fun getItemId(position: Int): Long = when (val item = data.cellByPosition(position)) {
     is CalendarDay -> item.date.getLong(ChronoField.EPOCH_DAY)
     is CalendarFooter -> item.yearMonth.yearMonthHash() * -10L - 1
     is CalendarHeader -> item.yearMonth.yearMonthHash() * -10L - 2
@@ -69,17 +88,17 @@ internal class CalendarAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
     TYPE_HEADER -> CalendarCellHeader(parent)
     TYPE_DAY -> CalendarCellDay(parent, output)
-    TYPE_FOOTER -> footers.onCreateViewHolder(parent)
+    TYPE_FOOTER -> footerAdapter.onCreateViewHolder(parent)
     else -> CalendarCellSpace(parent)
   }
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
     if (holder is ItemHolder<*>) {
       holder as ItemHolder<CalendarItem>
-      holder.invoke(data.getItemByGlobalIndex(position))
+      holder.invoke(data.cellByPosition(position))
     } else {
-      footers as CalendarFooterAdapter<RecyclerView.ViewHolder>
-      val item = data.getItemByGlobalIndex(position) as CalendarFooter
+      val footers = footerAdapter as CalendarFooterAdapter<RecyclerView.ViewHolder>
+      val item = data.cellByPosition(position) as CalendarFooter
       footers.onBindViewHolder(holder, item.yearMonth)
     }
 

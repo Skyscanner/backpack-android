@@ -36,7 +36,7 @@ import net.skyscanner.backpack.calendar2.adapter.CalendarAdapter
 import net.skyscanner.backpack.calendar2.adapter.CalendarLayoutManager
 import net.skyscanner.backpack.calendar2.adapter.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
-import net.skyscanner.backpack.calendar2.extension.getItemByGlobalIndex
+import net.skyscanner.backpack.calendar2.extension.cellByPosition
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.addView
@@ -65,8 +65,13 @@ class BpkCalendar private constructor(
   ) : this(context, attrs, defStyleAttr, GlobalScope + Dispatchers.Main)
 
   private val scrollListeners = mutableListOf<CalendarOnScrollListener>()
+  private val calendarAdapter = CalendarAdapter(scope, stateMachine::onClick)
 
-  var footerAdapter: CalendarFooterAdapter<RecyclerView.ViewHolder> = DefaultCalendarFooterAdapter
+  var footerAdapter: CalendarFooterAdapter<*>
+    get() = calendarAdapter.footerAdapter
+    set(value) {
+      calendarAdapter.footerAdapter = value
+    }
 
   init {
     val headerHeight = ResourcesUtil.dpToPx(50, context)
@@ -99,17 +104,17 @@ class BpkCalendar private constructor(
   private fun initRecyclerView(headerHeight: Int) {
     val calendarSpanSizeLookup = CalendarSpanSizeLookup()
     val calendarLayoutManager = CalendarLayoutManager(context, calendarSpanSizeLookup)
-    val calendarAdapter = CalendarAdapter(footerAdapter, stateMachine::onClick)
 
     val recyclerView = RecyclerView(context).apply {
       layoutManager = calendarLayoutManager
       adapter = calendarAdapter
+      itemAnimator = null
 
       addOnScrollListener(object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
           val firstItemPosition = calendarLayoutManager.findFirstVisibleItemPosition()
-          val item = state.value.months.getItemByGlobalIndex(firstItemPosition)
+          val item = state.value.months.cellByPosition(firstItemPosition)
 
           scrollListeners.forEach {
             it.invoke(item.yearMonth)
