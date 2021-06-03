@@ -63,7 +63,7 @@ internal fun CalendarCells(
           date = date,
           yearMonth = yearMonth,
           selection = selection,
-          cells = params.info,
+          cells = params.cellInfo,
           locale = params.locale,
           contentDescription = params.dateAccessibilityText,
         )

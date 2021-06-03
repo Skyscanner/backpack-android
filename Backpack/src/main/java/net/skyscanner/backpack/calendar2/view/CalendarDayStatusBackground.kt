@@ -25,11 +25,11 @@ import android.graphics.Paint
 import android.graphics.PixelFormat
 import android.graphics.drawable.Drawable
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.util.getColorForState
 import net.skyscanner.backpack.util.smallestDimension
 
-internal typealias CalendarDayStatusBackground = (CalendarParams.Status?) -> Drawable
+internal typealias CalendarDayStatusBackground = (CellStatus?) -> Drawable
 
 internal fun CalendarDayStatusBackground(
   context: Context,
@@ -45,7 +45,7 @@ internal fun CalendarDayStatusBackground(
 
 private class CalendarDayStatusDrawable(context: Context) : Drawable() {
 
-  var status: CalendarParams.Status? = null
+  var status: CellStatus? = null
     set(value) {
       field = value
       invalidateSelf()
@@ -61,12 +61,12 @@ private class CalendarDayStatusDrawable(context: Context) : Drawable() {
 
   override fun draw(canvas: Canvas) {
     when (status) {
-      CalendarParams.Status.Highlighted -> paint.color = colorHighlight.getColorForState(state)
-      CalendarParams.Status.Positive -> paint.color = colorPositive.getColorForState(state)
-      CalendarParams.Status.Neutral -> paint.color = colorNeutral.getColorForState(state)
-      CalendarParams.Status.Negative -> paint.color = colorNegative.getColorForState(state)
-      CalendarParams.Status.Empty -> paint.color = colorEmpty.getColorForState(state)
-      CalendarParams.Status.Disabled, null -> return
+      CellStatus.Highlighted -> paint.color = colorHighlight.getColorForState(state)
+      CellStatus.Positive -> paint.color = colorPositive.getColorForState(state)
+      CellStatus.Neutral -> paint.color = colorNeutral.getColorForState(state)
+      CellStatus.Negative -> paint.color = colorNegative.getColorForState(state)
+      CellStatus.Empty -> paint.color = colorEmpty.getColorForState(state)
+      CellStatus.Disabled, null -> return
     }
 
     val bounds = bounds

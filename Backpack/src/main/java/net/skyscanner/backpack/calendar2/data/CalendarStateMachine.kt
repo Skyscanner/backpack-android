@@ -26,6 +26,7 @@ import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
+import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.util.MutableStateMachine
 import net.skyscanner.backpack.util.StateMachine
 
@@ -66,7 +67,7 @@ internal fun CalendarStateMachine(
 
 internal fun CalendarState.dispatchClick(date: CalendarCellDay): CalendarState {
   if (params.selectionMode == CalendarParams.SelectionMode.Disabled) return this
-  if (date.info.status == CalendarParams.Status.Disabled) return this
+  if (date.info.status == CellStatus.Disabled) return this
 
   val selection = when (params.selectionMode) {
     CalendarParams.SelectionMode.Disabled -> selection

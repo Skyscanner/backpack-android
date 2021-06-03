@@ -26,6 +26,8 @@ import kotlin.random.Random
 import net.skyscanner.backpack.calendar2.BpkCalendar
 import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CellInfo
+import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
@@ -83,26 +85,26 @@ class Calendar2Story : Story() {
         .toSet()
     } else emptySet()
 
-    var info = emptyMap<LocalDate, CalendarParams.Info>()
+    var info = emptyMap<LocalDate, CellInfo>()
 
     if (type.disableWeekends) {
       info = range
-        .toMap { CalendarParams.Info(status = CalendarParams.Status.Disabled) }
+        .toMap { CellInfo(status = CellStatus.Disabled) }
         .filter { it.key.dayOfWeek == DayOfWeek.SATURDAY || it.key.dayOfWeek == DayOfWeek.SUNDAY }
     } else if (type.labels) {
       info = range.toMap {
         val price = random.nextInt(100)
-        CalendarParams.Info(
+        CellInfo(
           label = when (price) {
             in 0..25 -> "–"
             else -> "£$price"
           },
           status = when (price) {
-            in 0..25 -> CalendarParams.Status.Empty
-            in 25..50 -> CalendarParams.Status.Positive
-            in 50..75 -> CalendarParams.Status.Neutral
-            in 75..100 -> CalendarParams.Status.Negative
-            else -> CalendarParams.Status.Empty
+            in 0..25 -> CellStatus.Empty
+            in 25..50 -> CellStatus.Positive
+            in 50..75 -> CellStatus.Neutral
+            in 75..100 -> CellStatus.Negative
+            else -> CellStatus.Empty
           }
         )
       }
@@ -110,13 +112,13 @@ class Calendar2Story : Story() {
       val random = Random(0)
       info = range.toMap {
         val price = random.nextInt(100)
-        CalendarParams.Info(
+        CellInfo(
           status = when (price) {
-            in 0..25 -> CalendarParams.Status.Empty
-            in 25..50 -> CalendarParams.Status.Positive
-            in 50..75 -> CalendarParams.Status.Neutral
-            in 75..100 -> CalendarParams.Status.Negative
-            else -> CalendarParams.Status.Empty
+            in 0..25 -> CellStatus.Empty
+            in 25..50 -> CellStatus.Positive
+            in 50..75 -> CellStatus.Neutral
+            in 75..100 -> CellStatus.Negative
+            else -> CellStatus.Empty
           }
         )
       }
@@ -127,7 +129,7 @@ class Calendar2Story : Story() {
         range = range,
         selectionMode = type.selection,
         footers = footers,
-        info = info,
+        cellInfo = info,
       )
     )
   }

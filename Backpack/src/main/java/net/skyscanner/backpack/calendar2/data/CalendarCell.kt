@@ -19,8 +19,8 @@
 package net.skyscanner.backpack.calendar2.data
 
 import java.util.Locale
-import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.extension.yearMonthHash
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
@@ -62,7 +62,7 @@ internal data class CalendarCellFooter(
 
 internal data class CalendarCellDay(
   val date: LocalDate,
-  val info: CalendarParams.Info,
+  val info: CellInfo,
   val selection: Selection?,
   val contentDescription: String,
   override val yearMonth: YearMonth,
@@ -84,13 +84,13 @@ internal fun CalendarCellDay(
   date: LocalDate,
   yearMonth: YearMonth,
   selection: CalendarSelection,
-  cells: Map<LocalDate, CalendarParams.Info>,
+  cells: Map<LocalDate, CellInfo>,
   locale: Locale,
   contentDescription: TextStyle,
 ): CalendarCellDay = CalendarCellDay(
   date = date,
   yearMonth = yearMonth,
-  info = cells[date] ?: CalendarParams.Info.Default,
+  info = cells[date] ?: CellInfo.Default,
   contentDescription = "${date.dayOfMonth} ${date.month.getDisplayName(contentDescription, locale)}",
   selection = when (selection) {
     is CalendarSelection.None -> null

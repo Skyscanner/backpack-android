@@ -22,7 +22,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.data.CalendarCellDay
 import net.skyscanner.backpack.calendar2.view.CalendarDayLabelContentColor
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionBackground
@@ -54,7 +54,7 @@ internal class CalendarCellDayHolder(
   }
 
   override fun bind(model: CalendarCellDay) {
-    view.isEnabled = model.info.status != CalendarParams.Status.Disabled
+    view.isEnabled = model.info.status != CellStatus.Disabled
     view.contentDescription = model.contentDescription + " " + (model.info.label ?: "")
 
     day.text = model.date.dayOfMonth.toString()

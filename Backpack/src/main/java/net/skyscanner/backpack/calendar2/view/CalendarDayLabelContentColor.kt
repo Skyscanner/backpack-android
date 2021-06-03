@@ -21,9 +21,9 @@ package net.skyscanner.backpack.calendar2.view
 import android.content.Context
 import android.content.res.ColorStateList
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CellStatus
 
-internal typealias CalendarDayLabelContentColor = (CalendarParams.Status?) -> ColorStateList
+internal typealias CalendarDayLabelContentColor = (CellStatus?) -> ColorStateList
 
 internal fun CalendarDayLabelContentColor(
   context: Context,
@@ -35,12 +35,12 @@ internal fun CalendarDayLabelContentColor(
 
   return { status ->
     when (status) {
-      CalendarParams.Status.Disabled -> disabled
-      CalendarParams.Status.Highlighted -> default
-      CalendarParams.Status.Positive -> positive
-      CalendarParams.Status.Neutral -> default
-      CalendarParams.Status.Negative -> default
-      CalendarParams.Status.Empty -> disabled
+      CellStatus.Disabled -> disabled
+      CellStatus.Highlighted -> default
+      CellStatus.Positive -> positive
+      CellStatus.Neutral -> default
+      CellStatus.Negative -> default
+      CellStatus.Empty -> disabled
       null -> default
     }
   }
