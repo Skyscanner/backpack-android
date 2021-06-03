@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import java.util.Locale
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +33,8 @@ import net.skyscanner.backpack.util.StateMachine
 internal interface CalendarStateMachine : CalendarComponent, StateMachine<CalendarState, Nothing> {
 
   fun onClick(date: CalendarCell.Day)
+
+  fun onLocaleChanged(locale: Locale)
 }
 
 internal fun CalendarStateMachine(
@@ -59,6 +62,12 @@ internal fun CalendarStateMachine(
     override fun setSelection(selection: CalendarSelection) {
       fsm.commit {
         it.dispatchSetSelection(selection)
+      }
+    }
+
+    override fun onLocaleChanged(locale: Locale) {
+      fsm.commit {
+        it.dispatchParamsUpdate(it.params.copy(locale = locale))
       }
     }
   }

@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.calendar2
 
 import android.content.Context
+import android.content.res.Configuration
 import android.util.AttributeSet
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -103,6 +104,11 @@ class BpkCalendar private constructor(
       badge.text = it.year.toString()
       badge.isVisible = it.year != state.value.params.now.year
     }
+  }
+
+  override fun onConfigurationChanged(newConfig: Configuration) {
+    super.onConfigurationChanged(newConfig)
+    stateMachine.onLocaleChanged(newConfig.locales.get(0))
   }
 
   fun scrollToDate(date: LocalDate) {
