@@ -63,7 +63,7 @@ class Calendar2Story : Story() {
   private val calendar by unsafeLazy { view!!.findViewById<BpkCalendar>(R.id.calendar2)!! }
   private val type by unsafeLazy { arguments!!.getSerializable(TYPE) as Type }
   private val now = LocalDate.now()
-  private val range = now - Period.ofYears(1)..(now + Period.ofYears(1))
+  private val range = now..(now + Period.ofYears(2))
   private val random = Random(0)
 
   private val footersAdapter = object : CalendarFooterAdapter<RecyclerView.ViewHolder> {
