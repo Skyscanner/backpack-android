@@ -38,10 +38,6 @@ internal sealed class CalendarCell {
     override val yearMonth: YearMonth,
   ) : CalendarCell()
 
-  internal data class Footer(
-    override val yearMonth: YearMonth,
-  ) : CalendarCell()
-
   internal data class Day(
     val date: LocalDate,
     val info: CellInfo,

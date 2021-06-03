@@ -21,7 +21,6 @@ package net.skyscanner.backpack.calendar2
 import java.util.Locale
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
 
@@ -32,7 +31,6 @@ data class CalendarParams(
   val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
   val defaultCellInfo: CellInfo = CellInfo(),
   val disabledDates: Set<LocalDate> = emptySet(),
-  val footers: Set<YearMonth> = emptySet(),
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
   val dayOfWeekAccessibilityText: TextStyle = TextStyle.FULL,

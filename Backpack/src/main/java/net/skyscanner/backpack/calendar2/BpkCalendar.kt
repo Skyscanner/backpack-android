@@ -40,6 +40,7 @@ import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
+import org.threeten.bp.YearMonth
 
 @ExperimentalBackpackApi
 class BpkCalendar private constructor(
@@ -71,16 +72,10 @@ class BpkCalendar private constructor(
   private val recyclerView by unsafeLazy { findViewById<RecyclerView>(R.id.bpk_calendar_recycler_view) }
   private val badge by unsafeLazy { findViewById<TextView>(R.id.bpk_calendar_badge) }
 
-  private val scrollListeners = mutableListOf<CalendarOnScrollListener>()
+  private val scrollListeners = mutableListOf<(YearMonth) -> Unit>()
   private val calendarSpanSizeLookup = CalendarSpanSizeLookup()
   private val calendarLayoutManager = CalendarLayoutManager(context, calendarSpanSizeLookup)
   private val calendarAdapter = CalendarAdapter(scope, stateMachine::onClick)
-
-  var footersAdapter: CalendarFooterAdapter<*>
-    get() = calendarAdapter.footerAdapter
-    set(value) {
-      calendarAdapter.footerAdapter = value
-    }
 
   init {
     recyclerView.layoutManager = calendarLayoutManager
@@ -104,18 +99,10 @@ class BpkCalendar private constructor(
       calendarAdapter(it.cells)
     }.launchIn(scope)
 
-    addOnScrollListener {
+    scrollListeners += {
       badge.text = it.year.toString()
       badge.isVisible = it.year != state.value.params.now.year
     }
-  }
-
-  fun addOnScrollListener(listener: CalendarOnScrollListener) {
-    scrollListeners += listener
-  }
-
-  fun removeOnScrollListener(listener: CalendarOnScrollListener) {
-    scrollListeners -= listener
   }
 
   fun scrollToDate(date: LocalDate) {

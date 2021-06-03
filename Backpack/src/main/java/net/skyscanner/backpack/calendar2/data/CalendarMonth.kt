@@ -41,7 +41,6 @@ internal inline fun CalendarMonth(
   locale: Locale,
   monthsTextStyle: TextStyle,
   weekFields: WeekFields,
-  footers: Set<YearMonth>,
   selection: CalendarSelection,
   day: (YearMonth, LocalDate) -> CalendarCell.Day,
 ): CalendarMonth {
@@ -71,10 +70,6 @@ internal inline fun CalendarMonth(
   while (currentDayOfWeek != weekFields.lastDayOfWeek) {
     cells += CalendarCell.Space(selected = selectSpacingAfter, yearMonth = yearMonth)
     currentDayOfWeek += 1
-  }
-
-  if (yearMonth in footers) {
-    cells += CalendarCell.Footer(yearMonth = yearMonth)
   }
 
   return CalendarMonth(yearMonth = yearMonth, cells = cells)

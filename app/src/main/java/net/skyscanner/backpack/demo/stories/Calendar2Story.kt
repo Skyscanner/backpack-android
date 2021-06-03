@@ -20,8 +20,6 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import kotlin.random.Random
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,21 +28,18 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import net.skyscanner.backpack.calendar2.BpkCalendar
-import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.toast.BpkToast
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
-import org.threeten.bp.YearMonth
 
 @OptIn(ExperimentalBackpackApi::class)
 class Calendar2Story : Story() {
@@ -53,7 +48,6 @@ class Calendar2Story : Story() {
     SelectionDisabled,
     SelectionSingle,
     SelectionRange,
-    WithFooters,
     WithDisabledDates,
     WithLabels,
     WithColors,
@@ -65,18 +59,6 @@ class Calendar2Story : Story() {
   private val now = LocalDate.now()
   private val range = now..(now + Period.ofYears(2))
   private val random = Random(0)
-
-  private val footersAdapter = object : CalendarFooterAdapter<RecyclerView.ViewHolder> {
-
-    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-      object : RecyclerView.ViewHolder(BpkText(parent.context)) {}
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, yearMonth: YearMonth) {
-      val textView = holder.itemView as BpkText
-      textView.text = "Month footer for: $yearMonth"
-      textView.setTextColor(requireContext().getColorStateList(R.color.bpkTextPrimary))
-    }
-  }
 
   private var scope: CoroutineScope? = null
 
@@ -114,19 +96,6 @@ class Calendar2Story : Story() {
           CalendarParams(
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
-          )
-        )
-      }
-      Type.WithFooters -> {
-        calendar.footersAdapter = footersAdapter
-        calendar.setParams(
-          CalendarParams(
-            range = range,
-            selectionMode = CalendarParams.SelectionMode.Range,
-            footers = range
-              .toMap { YearMonth.of(it.year, it.month) }
-              .values
-              .toSet(),
           )
         )
       }

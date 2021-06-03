@@ -34,7 +34,6 @@ internal class CalendarSpanSizeLookup : GridLayoutManager.SpanSizeLookup(), Cons
 
   override fun getSpanSize(position: Int): Int = when (data[position]) {
     is CalendarCell.Day -> 1
-    is CalendarCell.Footer -> NUM_COLUMNS
     is CalendarCell.Header -> NUM_COLUMNS
     is CalendarCell.Space -> 1
   }

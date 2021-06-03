@@ -25,8 +25,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
-import net.skyscanner.backpack.calendar2.DefaultCalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCells
 import net.skyscanner.backpack.util.Consumer
@@ -38,12 +36,6 @@ internal class CalendarAdapter(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<CalendarCells> {
 
   private var data: CalendarCells = CalendarCells()
-
-  var footerAdapter: CalendarFooterAdapter<*> = DefaultCalendarFooterAdapter
-    set(value) {
-      field = value
-      notifyDataSetChanged()
-    }
 
   override fun invoke(data: CalendarCells) {
     val calculator = CalendarDiffCalculator(this.data, data)
@@ -61,7 +53,6 @@ internal class CalendarAdapter(
 
   override fun getItemViewType(position: Int): Int = when (data[position]) {
     is CalendarCell.Day -> TYPE_DAY
-    is CalendarCell.Footer -> TYPE_FOOTER
     is CalendarCell.Header -> TYPE_HEADER
     is CalendarCell.Space -> TYPE_SPACE
   }
@@ -69,24 +60,15 @@ internal class CalendarAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
     TYPE_HEADER -> CalendarCellHeaderHolder(parent)
     TYPE_DAY -> CalendarCellDayHolder(parent, output)
-    TYPE_FOOTER -> footerAdapter.onCreateViewHolder(parent)
     else -> CalendarCellSpaceHolder(parent)
   }
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
-    if (holder is ItemHolder<*>) {
-      holder as ItemHolder<CalendarCell>
-      holder.invoke(data[position])
-    } else {
-      val footers = footerAdapter as CalendarFooterAdapter<RecyclerView.ViewHolder>
-      val item = data[position] as CalendarCell.Footer
-      footers.onBindViewHolder(holder, item.yearMonth)
-    }
+    (holder as ItemHolder<CalendarCell>).invoke(data[position])
 
   private companion object {
     const val TYPE_SPACE = 0
     const val TYPE_HEADER = 1
     const val TYPE_DAY = 2
-    const val TYPE_FOOTER = 3
   }
 }

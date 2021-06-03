@@ -75,7 +75,6 @@ internal fun CalendarCells(
         weekFields = params.weekFields,
         monthsTextStyle = params.monthsText,
         selection = selection,
-        footers = params.footers,
       ) { yearMonth, date ->
         CalendarCellDay(
           date = date,

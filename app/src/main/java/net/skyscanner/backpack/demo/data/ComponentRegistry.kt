@@ -174,7 +174,6 @@ object ComponentRegistry {
         "Disabled weekends" story NodeData { Calendar2Story of Calendar2Story.Type.WithDisabledDates },
         "Day colours" story NodeData { Calendar2Story of Calendar2Story.Type.WithColors },
         "Day labels" story NodeData { Calendar2Story of Calendar2Story.Type.WithLabels },
-        "Months footers" story NodeData { Calendar2Story of Calendar2Story.Type.WithFooters },
         "Pre-selected range" story NodeData { Calendar2Story of Calendar2Story.Type.PreselectedRange },
       )
     ),
