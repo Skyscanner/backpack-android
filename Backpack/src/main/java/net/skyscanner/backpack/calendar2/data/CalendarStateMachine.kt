@@ -75,7 +75,7 @@ internal fun CalendarStateMachine(
 
 internal fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState {
   if (params.selectionMode == CalendarParams.SelectionMode.Disabled) return this
-  if (date.date in params.disabledDates) return this
+  if (date.info.disabled) return this
 
   val selection = when (params.selectionMode) {
     CalendarParams.SelectionMode.Disabled -> selection

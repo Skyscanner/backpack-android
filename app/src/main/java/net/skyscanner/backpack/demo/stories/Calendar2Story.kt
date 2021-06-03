@@ -104,10 +104,8 @@ class Calendar2Story : Story() {
           CalendarParams(
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
-            disabledDates = range
-              .toMap { }
-              .filter { it.key.dayOfWeek == DayOfWeek.SATURDAY || it.key.dayOfWeek == DayOfWeek.SUNDAY }
-              .keys,
+            cellsInfo = range
+              .toMap { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
           )
         )
       }
@@ -116,12 +114,11 @@ class Calendar2Story : Story() {
           CalendarParams(
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
-            defaultCellInfo = CellInfo(label = "-"),
             cellsInfo = range.toMap {
               val price = random.nextInt(100)
               CellInfo(
                 label = when (price) {
-                  in 0..25 -> null
+                  in 0..25 -> "-"
                   else -> "£$price"
                 },
                 status = when (price) {
@@ -132,7 +129,7 @@ class Calendar2Story : Story() {
                 },
                 style = CellStatusStyle.Label,
               )
-            }.filter { it.value.label != null },
+            },
           )
         )
       }

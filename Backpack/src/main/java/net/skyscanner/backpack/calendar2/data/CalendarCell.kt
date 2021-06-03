@@ -42,7 +42,6 @@ internal sealed class CalendarCell {
   internal data class Day(
     val date: LocalDate,
     val info: CellInfo,
-    val disabled: Boolean,
     val selection: Selection?,
     val contentDescription: String,
     override val yearMonth: YearMonth,
@@ -65,9 +64,8 @@ internal fun CalendarCellDay(
 ): CalendarCell.Day = CalendarCell.Day(
   date = date,
   yearMonth = yearMonth,
-  info = params.cellsInfo[date] ?: params.defaultCellInfo,
+  info = params.cellsInfo[date] ?: CellInfo.Default,
   contentDescription = "${date.dayOfMonth} ${date.month.getDisplayName(params.dateAccessibilityText, params.locale)}",
-  disabled = date in params.disabledDates,
   selection = when (selection) {
     is CalendarSelection.None -> null
     is CalendarSelection.Single -> when (date) {

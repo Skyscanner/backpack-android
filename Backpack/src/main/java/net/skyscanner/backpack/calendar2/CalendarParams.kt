@@ -29,8 +29,6 @@ data class CalendarParams(
   val range: ClosedRange<LocalDate>,
   val selectionMode: SelectionMode,
   val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
-  val defaultCellInfo: CellInfo = CellInfo(),
-  val disabledDates: Set<LocalDate> = emptySet(),
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
   val dayOfWeekAccessibilityText: TextStyle = TextStyle.FULL,
@@ -51,10 +49,16 @@ data class CalendarParams(
 
 @ExperimentalBackpackApi
 data class CellInfo(
+  val disabled: Boolean = false,
   val status: CellStatus? = null,
   val label: String? = null,
   val style: CellStatusStyle = CellStatusStyle.Background,
-)
+) {
+
+  internal companion object {
+    val Default = CellInfo()
+  }
+}
 
 @ExperimentalBackpackApi
 enum class CellStatus {
