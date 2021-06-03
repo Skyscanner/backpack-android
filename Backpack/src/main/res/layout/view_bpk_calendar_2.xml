@@ -9,7 +9,7 @@
   <net.skyscanner.backpack.calendar2.view.CalendarHeaderView
     android:id="@+id/bpk_calendar_header"
     android:layout_width="0dp"
-    android:layout_height="50dp"
+    android:layout_height="@dimen/bpk_calendar_header_height"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />

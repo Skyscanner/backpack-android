@@ -29,7 +29,6 @@ import android.graphics.drawable.Drawable
 import android.util.LayoutDirection
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.data.CalendarCellDay
-import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.getColorForState
 import net.skyscanner.backpack.util.smallestDimension
 import net.skyscanner.backpack.util.use
@@ -77,7 +76,7 @@ private class CalendarDaySelectionDrawable(context: Context) : Drawable() {
         R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
       ) ?: context.getColorStateList(R.color.__calendarRangeBackground)
     }
-    paint.strokeWidth = ResourcesUtil.dpToPx(1f, context)
+    paint.strokeWidth = context.resources.getDimension(R.dimen.bpk_calendar_border_width)
   }
 
   override fun draw(canvas: Canvas) {

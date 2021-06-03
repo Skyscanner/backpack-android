@@ -6,12 +6,12 @@
   android:layout_height="wrap_content"
   android:gravity="center_horizontal|top"
   android:orientation="vertical"
-  android:paddingBottom="24dp">
+  android:paddingBottom="@dimen/bpkSpacingLg">
 
   <net.skyscanner.backpack.text.BpkText
     android:id="@+id/bpk_calendar_cell_date"
     android:layout_width="match_parent"
-    android:layout_height="36dp"
+    android:layout_height="@dimen/bpk_calendar_date_size"
     android:ellipsize="end"
     android:gravity="center"
     android:maxLines="1"

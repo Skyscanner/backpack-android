@@ -28,7 +28,6 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
-import net.skyscanner.backpack.util.ResourcesUtil
 import org.threeten.bp.DayOfWeek
 
 internal class CalendarHeaderView @JvmOverloads constructor(
@@ -40,7 +39,7 @@ internal class CalendarHeaderView @JvmOverloads constructor(
   private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
     style = Paint.Style.FILL_AND_STROKE
     color = context.getColor(R.color.bpkLine)
-    strokeWidth = ResourcesUtil.dpToPx(1f, context)
+    strokeWidth = resources.getDimension(R.dimen.bpk_calendar_border_width)
   }
 
   init {
