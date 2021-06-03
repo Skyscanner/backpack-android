@@ -10,5 +10,6 @@
   android:paddingTop="@dimen/bpkSpacingLg"
   android:paddingBottom="@dimen/bpkSpacingLg"
   android:singleLine="true"
+  android:gravity="start|center_vertical"
   app:textStyle="lg"
   app:weight="emphasized" />

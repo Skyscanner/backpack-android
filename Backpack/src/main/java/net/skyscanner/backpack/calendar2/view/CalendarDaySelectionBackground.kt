@@ -145,7 +145,7 @@ private class CalendarDaySelectionDrawable(context: Context) : Drawable() {
     val bounds = bounds
     val x = bounds.centerX().toFloat()
     val y = bounds.centerY().toFloat()
-    val radius = (bounds.smallestDimension() / 2f) - paint.strokeWidth
+    val radius = (bounds.smallestDimension() - paint.strokeWidth) / 2f
 
     paint.color = color.getColorForState(state)
     paint.style = style
