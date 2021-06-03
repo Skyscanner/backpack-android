@@ -18,17 +18,21 @@
 
 package net.skyscanner.backpack.calendar2
 
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.LocalDate
 
+@ExperimentalBackpackApi
 sealed class CalendarSelection {
 
   abstract operator fun contains(date: LocalDate): Boolean
 
+  @ExperimentalBackpackApi
   object None : CalendarSelection() {
     override fun contains(date: LocalDate): Boolean =
       false
   }
 
+  @ExperimentalBackpackApi
   data class Single(
     val date: LocalDate,
   ) : CalendarSelection() {
@@ -37,6 +41,7 @@ sealed class CalendarSelection {
       this.date == date
   }
 
+  @ExperimentalBackpackApi
   data class Range(
     val start: LocalDate,
     val end: LocalDate?,

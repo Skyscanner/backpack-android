@@ -19,7 +19,9 @@
 package net.skyscanner.backpack.calendar2
 
 import kotlinx.coroutines.flow.StateFlow
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
+@ExperimentalBackpackApi
 interface CalendarComponent {
 
   val state: StateFlow<CalendarState>

@@ -20,8 +20,10 @@ package net.skyscanner.backpack.calendar2
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.YearMonth
 
+@ExperimentalBackpackApi
 interface CalendarFooterAdapter<VH : RecyclerView.ViewHolder> {
 
   fun onCreateViewHolder(parent: ViewGroup): VH

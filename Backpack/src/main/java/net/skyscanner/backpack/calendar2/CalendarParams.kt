@@ -19,11 +19,13 @@
 package net.skyscanner.backpack.calendar2
 
 import java.util.Locale
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
 
+@ExperimentalBackpackApi
 data class CalendarParams(
   val range: ClosedRange<LocalDate>,
   val selectionMode: SelectionMode,
@@ -39,12 +41,14 @@ data class CalendarParams(
 
   internal val weekFields = WeekFields.of(locale)
 
+  @ExperimentalBackpackApi
   enum class SelectionMode {
     Disabled,
     Single,
     Range,
   }
 
+  @ExperimentalBackpackApi
   data class Info(
     val status: Status? = null,
     val label: String? = null,
@@ -55,6 +59,7 @@ data class CalendarParams(
     }
   }
 
+  @ExperimentalBackpackApi
   enum class Status {
     Disabled,
     Highlighted,

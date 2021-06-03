@@ -19,7 +19,9 @@
 package net.skyscanner.backpack.calendar2
 
 import net.skyscanner.backpack.calendar2.data.CalendarCells
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
+@ExperimentalBackpackApi
 data class CalendarState internal constructor(
   val params: CalendarParams,
   val selection: CalendarSelection = CalendarSelection.None,

@@ -28,15 +28,17 @@ import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
 import org.threeten.bp.YearMonth
 
+@OptIn(ExperimentalBackpackApi::class)
 class Calendar2Story : Story() {
 
-  enum class Type(
+  enum class Type constructor(
     val selection: CalendarParams.SelectionMode = CalendarParams.SelectionMode.Range,
     val hasFooters: Boolean = false,
     val labels: Boolean = false,
