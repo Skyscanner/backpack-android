@@ -18,6 +18,15 @@
 
 package net.skyscanner.backpack.util
 
+/**
+ * The API marked by this annotation is not stable and may be changed at
+ * any time without considering this as a breaking change.
+ *
+ * The code might not be covered with tests or documented.
+ *
+ * It's intended to be used by Koala squad members for API/code experimentation
+ * or to mark the features which are currently in progress.
+ */
 @Suppress("DEPRECATION")
 @Experimental(level = Experimental.Level.ERROR)
 @RequiresOptIn(level = RequiresOptIn.Level.ERROR)

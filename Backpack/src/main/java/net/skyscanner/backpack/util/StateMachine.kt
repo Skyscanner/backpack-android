@@ -27,6 +27,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
+/**
+ * StateMachine apis are used for some complex components with some state management.
+ *
+ * Each time the state changes, a new version of it is available for reading in [state].
+ *
+ * Each state change may also emmit a temporarily existing [effects] (for instance, to show Toast in case of error).
+ *
+ * The widget decided itself when the state needs to be changed. It may also provide some public methods
+ * to have limited control over the state changes (e.g. settings the params).
+ */
 interface StateMachine<State, Effect> {
 
   val state: StateFlow<State>
