@@ -171,10 +171,11 @@ object ComponentRegistry {
         "Selection Disabled" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionDisabled },
         "Selection Single" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionSingle },
         "Selection Range" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionRange },
-        "With disabled dates" story NodeData { Calendar2Story of Calendar2Story.Type.WithDisabledDates },
-        "With day colours" story NodeData { Calendar2Story of Calendar2Story.Type.WithColors },
-        "With day labels" story NodeData { Calendar2Story of Calendar2Story.Type.WithLabels },
-        "With months footers" story NodeData { Calendar2Story of Calendar2Story.Type.WithFooters },
+        "Disabled weekends" story NodeData { Calendar2Story of Calendar2Story.Type.WithDisabledDates },
+        "Day colours" story NodeData { Calendar2Story of Calendar2Story.Type.WithColors },
+        "Day labels" story NodeData { Calendar2Story of Calendar2Story.Type.WithLabels },
+        "Months footers" story NodeData { Calendar2Story of Calendar2Story.Type.WithFooters },
+        "Pre-selected range" story NodeData { Calendar2Story of Calendar2Story.Type.PreselectedRange },
       )
     ),
     "Chip" story NodeData(

@@ -26,6 +26,7 @@ import kotlin.random.Random
 import net.skyscanner.backpack.calendar2.BpkCalendar
 import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
@@ -41,21 +42,15 @@ import org.threeten.bp.YearMonth
 @OptIn(ExperimentalBackpackApi::class)
 class Calendar2Story : Story() {
 
-  enum class Type constructor(
-    val selection: CalendarParams.SelectionMode = CalendarParams.SelectionMode.Range,
-    val hasFooters: Boolean = false,
-    val labels: Boolean = false,
-    val colored: Boolean = false,
-    val disableWeekends: Boolean = false,
-  ) {
-
-    SelectionDisabled(selection = CalendarParams.SelectionMode.Disabled),
-    SelectionSingle(selection = CalendarParams.SelectionMode.Single),
-    SelectionRange(selection = CalendarParams.SelectionMode.Range),
-    WithFooters(hasFooters = true),
-    WithDisabledDates(disableWeekends = true),
-    WithLabels(labels = true),
-    WithColors(colored = true),
+  enum class Type {
+    SelectionDisabled,
+    SelectionSingle,
+    SelectionRange,
+    WithFooters,
+    WithDisabledDates,
+    WithLabels,
+    WithColors,
+    PreselectedRange,
   }
 
   private val calendar by unsafeLazy { view!!.findViewById<BpkCalendar>(R.id.calendar2)!! }
@@ -64,84 +59,132 @@ class Calendar2Story : Story() {
   private val range = now - Period.ofYears(1)..(now + Period.ofYears(1))
   private val random = Random(0)
 
+  private val footersAdapter = object : CalendarFooterAdapter<RecyclerView.ViewHolder> {
+
+    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
+      object : RecyclerView.ViewHolder(BpkText(parent.context)) {}
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, yearMonth: YearMonth) {
+      val textView = holder.itemView as BpkText
+      textView.text = "Month footer for: $yearMonth"
+      textView.setTextColor(requireContext().getColorStateList(R.color.bpkTextPrimary))
+    }
+  }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    calendar.footersAdapter = object : CalendarFooterAdapter<RecyclerView.ViewHolder> {
-
-      override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-        object : RecyclerView.ViewHolder(BpkText(parent.context)) {}
-
-      override fun onBindViewHolder(holder: RecyclerView.ViewHolder, yearMonth: YearMonth) {
-        val textView = holder.itemView as BpkText
-        textView.text = "Month footer for: $yearMonth"
-        textView.setTextColor(requireContext().getColorStateList(R.color.bpkTextPrimary))
-      }
-    }
-
-    val footers = if (type.hasFooters) {
-      range
-        .toMap { YearMonth.of(it.year, it.month) }
-        .values
-        .toSet()
-    } else emptySet()
-
-    val disabledDates = if (type.disableWeekends) {
-      range
-        .toMap { }
-        .filter { it.key.dayOfWeek == DayOfWeek.SATURDAY || it.key.dayOfWeek == DayOfWeek.SUNDAY }
-        .keys
-    } else emptySet()
-
-    val cellsInfo = when {
-      type.labels -> range.toMap {
-        val price = random.nextInt(100)
-        CellInfo(
-          label = when (price) {
-            in 0..25 -> null
-            else -> "£$price"
-          },
-          status = when (price) {
-            in 25..50 -> CellStatus.Positive
-            in 50..75 -> CellStatus.Neutral
-            in 75..100 -> CellStatus.Negative
-            else -> null
-          },
-          style = CellStatusStyle.Label,
-        )
-      }.filter { it.value.label != null }
-      type.colored -> range.toMap {
-        val price = random.nextInt(100)
-        CellInfo(
-          status = when (price) {
-            in 0..25 -> CellStatus.Empty
-            in 25..50 -> CellStatus.Positive
-            in 50..75 -> CellStatus.Neutral
-            in 75..100 -> CellStatus.Negative
-            else -> CellStatus.Empty
-          },
-          style = CellStatusStyle.Background,
+    when (type) {
+      Type.SelectionDisabled -> {
+        calendar.setParams(
+          CalendarParams(
+            range = range,
+            selectionMode = CalendarParams.SelectionMode.Disabled,
+          )
         )
       }
-      else -> emptyMap()
+      Type.SelectionSingle -> {
+        calendar.setParams(
+          CalendarParams(
+            range = range,
+            selectionMode = CalendarParams.SelectionMode.Single,
+          )
+        )
+      }
+      Type.SelectionRange -> {
+        calendar.setParams(
+          CalendarParams(
+            range = range,
+            selectionMode = CalendarParams.SelectionMode.Range,
+          )
+        )
+      }
+      Type.WithFooters -> {
+        calendar.footersAdapter = footersAdapter
+        calendar.setParams(
+          CalendarParams(
+            range = range,
+            selectionMode = CalendarParams.SelectionMode.Range,
+            footers = range
+              .toMap { YearMonth.of(it.year, it.month) }
+              .values
+              .toSet(),
+          )
+        )
+      }
+      Type.WithDisabledDates -> {
+        calendar.setParams(
+          CalendarParams(
+            range = range,
+            selectionMode = CalendarParams.SelectionMode.Range,
+            disabledDates = range
+              .toMap { }
+              .filter { it.key.dayOfWeek == DayOfWeek.SATURDAY || it.key.dayOfWeek == DayOfWeek.SUNDAY }
+              .keys,
+          )
+        )
+      }
+      Type.WithLabels -> {
+        calendar.setParams(
+          CalendarParams(
+            range = range,
+            selectionMode = CalendarParams.SelectionMode.Range,
+            defaultCellInfo = CellInfo(label = "-"),
+            cellsInfo = range.toMap {
+              val price = random.nextInt(100)
+              CellInfo(
+                label = when (price) {
+                  in 0..25 -> null
+                  else -> "£$price"
+                },
+                status = when (price) {
+                  in 25..50 -> CellStatus.Positive
+                  in 50..75 -> CellStatus.Neutral
+                  in 75..100 -> CellStatus.Negative
+                  else -> null
+                },
+                style = CellStatusStyle.Label,
+              )
+            }.filter { it.value.label != null },
+          )
+        )
+      }
+      Type.WithColors -> {
+        calendar.setParams(
+          CalendarParams(
+            range = range,
+            selectionMode = CalendarParams.SelectionMode.Range,
+            cellsInfo = range.toMap {
+              val price = random.nextInt(100)
+              CellInfo(
+                status = when (price) {
+                  in 0..25 -> CellStatus.Empty
+                  in 25..50 -> CellStatus.Positive
+                  in 50..75 -> CellStatus.Neutral
+                  in 75..100 -> CellStatus.Negative
+                  else -> CellStatus.Empty
+                },
+                style = CellStatusStyle.Background,
+              )
+            }
+          )
+        )
+      }
+      Type.PreselectedRange -> {
+        calendar.setParams(
+          CalendarParams(
+            range = range,
+            selectionMode = CalendarParams.SelectionMode.Range,
+          )
+        )
+        calendar.setSelection(
+          CalendarSelection.Range(
+            start = range.start.plusDays(10),
+            end = range.start.plusDays(20),
+          )
+        )
+      }
     }
-
-    val defaultCellInfo = if (type.labels) {
-      CellInfo(label = "-")
-    } else {
-      CellInfo()
-    }
-
-    calendar.setParams(
-      CalendarParams(
-        range = range,
-        selectionMode = type.selection,
-        footers = footers,
-        disabledDates = disabledDates,
-        cellsInfo = cellsInfo,
-        defaultCellInfo = defaultCellInfo,
-      )
-    )
   }
 
   companion object {
