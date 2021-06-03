@@ -23,6 +23,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.random.Random
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import net.skyscanner.backpack.calendar2.BpkCalendar
 import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.CalendarParams
@@ -32,6 +38,7 @@ import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.toast.BpkToast
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.DayOfWeek
@@ -71,8 +78,19 @@ class Calendar2Story : Story() {
     }
   }
 
+  private var scope: CoroutineScope? = null
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    scope?.cancel()
+    scope = CoroutineScope(Dispatchers.Main)
+
+    calendar.state
+      .filter { it.selection !is CalendarSelection.None }
+      .onEach {
+        BpkToast.makeText(requireContext(), it.selection.toString(), BpkToast.LENGTH_SHORT).show()
+      }
+      .launchIn(scope!!)
 
     when (type) {
       Type.SelectionDisabled -> {
@@ -185,6 +203,12 @@ class Calendar2Story : Story() {
         )
       }
     }
+  }
+
+  override fun onDestroyView() {
+    super.onDestroyView()
+    scope?.cancel()
+    scope = null
   }
 
   companion object {
