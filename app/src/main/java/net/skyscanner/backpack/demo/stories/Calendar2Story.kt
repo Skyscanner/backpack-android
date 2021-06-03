@@ -28,6 +28,7 @@ import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.CellStatus
+import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
@@ -85,32 +86,31 @@ class Calendar2Story : Story() {
         .toSet()
     } else emptySet()
 
-    var info = emptyMap<LocalDate, CellInfo>()
-
-    if (type.disableWeekends) {
-      info = range
-        .toMap { CellInfo(status = CellStatus.Disabled) }
+    val disabledDates = if (type.disableWeekends) {
+      range
+        .toMap { }
         .filter { it.key.dayOfWeek == DayOfWeek.SATURDAY || it.key.dayOfWeek == DayOfWeek.SUNDAY }
-    } else if (type.labels) {
-      info = range.toMap {
+        .keys
+    } else emptySet()
+
+    val cellsInfo = when {
+      type.labels -> range.toMap {
         val price = random.nextInt(100)
         CellInfo(
           label = when (price) {
-            in 0..25 -> "–"
+            in 0..25 -> null
             else -> "£$price"
           },
           status = when (price) {
-            in 0..25 -> CellStatus.Empty
             in 25..50 -> CellStatus.Positive
             in 50..75 -> CellStatus.Neutral
             in 75..100 -> CellStatus.Negative
-            else -> CellStatus.Empty
-          }
+            else -> null
+          },
+          style = CellStatusStyle.Label,
         )
-      }
-    } else if (type.colored) {
-      val random = Random(0)
-      info = range.toMap {
+      }.filter { it.value.label != null }
+      type.colored -> range.toMap {
         val price = random.nextInt(100)
         CellInfo(
           status = when (price) {
@@ -119,9 +119,17 @@ class Calendar2Story : Story() {
             in 50..75 -> CellStatus.Neutral
             in 75..100 -> CellStatus.Negative
             else -> CellStatus.Empty
-          }
+          },
+          style = CellStatusStyle.Background,
         )
       }
+      else -> emptyMap()
+    }
+
+    val defaultCellInfo = if (type.labels) {
+      CellInfo(label = "-")
+    } else {
+      CellInfo()
     }
 
     calendar.setParams(
@@ -129,7 +137,9 @@ class Calendar2Story : Story() {
         range = range,
         selectionMode = type.selection,
         footers = footers,
-        cellInfo = info,
+        disabledDates = disabledDates,
+        cellsInfo = cellsInfo,
+        defaultCellInfo = defaultCellInfo,
       )
     )
   }

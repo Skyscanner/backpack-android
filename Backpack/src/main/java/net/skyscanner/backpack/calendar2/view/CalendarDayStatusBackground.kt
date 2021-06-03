@@ -54,19 +54,17 @@ private class CalendarDayStatusDrawable(context: Context) : Drawable() {
   private val colorPositive = context.getColorStateList(R.color.__calendarCellStylePositiveColor)
   private val colorNeutral = context.getColorStateList(R.color.__calendarCellStyleNeutralColor)
   private val colorNegative = context.getColorStateList(R.color.__calendarCellStyleNegativeColor)
-  private val colorHighlight = context.getColorStateList(R.color.__calendarHighlightedDayDot)
   private val colorEmpty = context.getColorStateList(R.color.__calendarCellStyleEmptyColor)
 
   private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
 
   override fun draw(canvas: Canvas) {
     when (status) {
-      CellStatus.Highlighted -> paint.color = colorHighlight.getColorForState(state)
       CellStatus.Positive -> paint.color = colorPositive.getColorForState(state)
       CellStatus.Neutral -> paint.color = colorNeutral.getColorForState(state)
       CellStatus.Negative -> paint.color = colorNegative.getColorForState(state)
       CellStatus.Empty -> paint.color = colorEmpty.getColorForState(state)
-      CellStatus.Disabled, null -> return
+      null -> return
     }
 
     val bounds = bounds

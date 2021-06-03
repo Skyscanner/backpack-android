@@ -18,13 +18,12 @@
 
 package net.skyscanner.backpack.calendar2.data
 
-import java.util.Locale
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.extension.yearMonthHash
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
-import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.ChronoField
 
 internal sealed class CalendarCell {
@@ -63,6 +62,7 @@ internal data class CalendarCellFooter(
 internal data class CalendarCellDay(
   val date: LocalDate,
   val info: CellInfo,
+  val disabled: Boolean,
   val selection: Selection?,
   val contentDescription: String,
   override val yearMonth: YearMonth,
@@ -84,14 +84,13 @@ internal fun CalendarCellDay(
   date: LocalDate,
   yearMonth: YearMonth,
   selection: CalendarSelection,
-  cells: Map<LocalDate, CellInfo>,
-  locale: Locale,
-  contentDescription: TextStyle,
+  params: CalendarParams,
 ): CalendarCellDay = CalendarCellDay(
   date = date,
   yearMonth = yearMonth,
-  info = cells[date] ?: CellInfo.Default,
-  contentDescription = "${date.dayOfMonth} ${date.month.getDisplayName(contentDescription, locale)}",
+  info = params.cellsInfo[date] ?: params.defaultCellInfo,
+  contentDescription = "${date.dayOfMonth} ${date.month.getDisplayName(params.dateAccessibilityText, params.locale)}",
+  disabled = date in params.disabledDates,
   selection = when (selection) {
     is CalendarSelection.None -> null
     is CalendarSelection.Single -> when (date) {

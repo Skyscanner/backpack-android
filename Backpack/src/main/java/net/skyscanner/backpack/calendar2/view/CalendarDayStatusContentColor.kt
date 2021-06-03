@@ -30,7 +30,6 @@ internal fun CalendarDayStatusContentColor(
 ): CalendarDayStatusContentColor {
 
   val default = context.getColorStateList(R.color.bpkTextPrimary)
-  val disabled = context.getColorStateList(R.color.__calendarCellDisabledTextColor)
   val positive = context.getColorStateList(R.color.__calendarCellPositiveTextColor)
   val neutral = context.getColorStateList(R.color.__calendarCellNeutralTextColor)
   val negative = context.getColorStateList(R.color.__calendarCellNegativeTextColor)
@@ -38,8 +37,6 @@ internal fun CalendarDayStatusContentColor(
 
   return { status ->
     when (status) {
-      CellStatus.Disabled -> disabled
-      CellStatus.Highlighted -> default
       CellStatus.Positive -> positive
       CellStatus.Neutral -> neutral
       CellStatus.Negative -> negative

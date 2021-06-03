@@ -22,7 +22,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.CellStatus
+import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCellDay
 import net.skyscanner.backpack.calendar2.view.CalendarDayLabelContentColor
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionBackground
@@ -47,6 +47,8 @@ internal class CalendarCellDayHolder(
   private val statusContentColor = CalendarDayStatusContentColor(context)
   private val labelColor = CalendarDayLabelContentColor(context)
 
+  private val disabledTextColor = context.getColorStateList(R.color.__calendarCellDisabledTextColor)
+
   init {
     view.setOnClickListener {
       model?.let(output)
@@ -54,23 +56,44 @@ internal class CalendarCellDayHolder(
   }
 
   override fun bind(model: CalendarCellDay) {
-    view.isEnabled = model.info.status != CellStatus.Disabled
+    view.isEnabled = !model.disabled
+    view.isSelected = model.selection != null
     view.contentDescription = model.contentDescription + " " + (model.info.label ?: "")
 
     day.text = model.date.dayOfMonth.toString()
+    label.text = model.info.label
 
-    if (model.selection != null) {
-      view.isSelected = true
-      day.setTextColor(selectionContentColor(model.selection))
-      day.background = selectionBackground(model.selection)
-    } else {
-      view.isSelected = false
-      day.setTextColor(statusContentColor(model.info.status))
-      day.background = statusBackground(model.info.status)
+    when {
+      model.selection != null -> {
+        day.setTextColor(selectionContentColor(model.selection))
+        day.background = selectionBackground(model.selection)
+      }
+      model.disabled -> {
+        day.setTextColor(disabledTextColor)
+        day.background = null
+      }
+      model.info.style == CellStatusStyle.Background -> {
+        day.setTextColor(statusContentColor(model.info.status))
+        day.background = statusBackground(model.info.status)
+      }
+      else -> {
+        day.setTextColor(statusContentColor(null))
+        day.background = null
+      }
     }
 
-    label.text = model.info.label
-    label.isVisible = !model.info.label.isNullOrEmpty()
-    label.setTextColor(labelColor(model.info.status))
+    when {
+      model.disabled -> {
+        label.isVisible = false
+      }
+      model.info.style == CellStatusStyle.Label -> {
+        label.isVisible = !model.info.label.isNullOrEmpty()
+        label.setTextColor(labelColor(model.info.status))
+      }
+      else -> {
+        label.isVisible = !model.info.label.isNullOrEmpty()
+        label.setTextColor(labelColor(null))
+      }
+    }
   }
 }

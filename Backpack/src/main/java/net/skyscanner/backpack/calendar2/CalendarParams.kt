@@ -29,7 +29,9 @@ import org.threeten.bp.temporal.WeekFields
 data class CalendarParams(
   val range: ClosedRange<LocalDate>,
   val selectionMode: SelectionMode,
-  val cellInfo: Map<LocalDate, CellInfo> = emptyMap(),
+  val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
+  val defaultCellInfo: CellInfo = CellInfo(),
+  val disabledDates: Set<LocalDate> = emptySet(),
   val footers: Set<YearMonth> = emptySet(),
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
@@ -53,19 +55,19 @@ data class CalendarParams(
 data class CellInfo(
   val status: CellStatus? = null,
   val label: String? = null,
-) {
-
-  internal companion object {
-    val Default = CellInfo()
-  }
-}
+  val style: CellStatusStyle = CellStatusStyle.Background,
+)
 
 @ExperimentalBackpackApi
 enum class CellStatus {
-  Disabled,
-  Highlighted,
   Positive,
   Neutral,
   Negative,
   Empty,
+}
+
+@ExperimentalBackpackApi
+enum class CellStatusStyle {
+  Background,
+  Label,
 }
