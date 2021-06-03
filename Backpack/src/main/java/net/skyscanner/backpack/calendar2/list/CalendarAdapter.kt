@@ -49,10 +49,6 @@ internal class CalendarAdapter(
       notifyDataSetChanged()
     }
 
-  init {
-    setHasStableIds(true)
-  }
-
   override fun invoke(data: CalendarCells) {
     val calculator = CalendarDiffCalculator(this.data, data)
     scope.launch(Dispatchers.Default) {
@@ -66,9 +62,6 @@ internal class CalendarAdapter(
 
   override fun getItemCount(): Int =
     data.size
-
-  override fun getItemId(position: Int): Long =
-    data[position].id
 
   override fun getItemViewType(position: Int): Int = when (data[position]) {
     is CalendarCellDay -> TYPE_DAY

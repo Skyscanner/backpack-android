@@ -21,43 +21,27 @@ package net.skyscanner.backpack.calendar2.data
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
-import net.skyscanner.backpack.calendar2.extension.yearMonthHash
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
-import org.threeten.bp.temporal.ChronoField
 
 internal sealed class CalendarCell {
 
   abstract val yearMonth: YearMonth
-
-  abstract val id: Long
 }
 
 internal data class CalendarCellSpace(
   val selected: Boolean,
   override val yearMonth: YearMonth,
-) : CalendarCell() {
-
-  override val id: Long =
-    -(yearMonth.yearMonthHash() * 10L + 1L)
-}
+) : CalendarCell()
 
 internal data class CalendarCellHeader(
   val title: String,
   override val yearMonth: YearMonth,
-) : CalendarCell() {
-
-  override val id: Long =
-    -(yearMonth.yearMonthHash() * 10L + 2L)
-}
+) : CalendarCell()
 
 internal data class CalendarCellFooter(
   override val yearMonth: YearMonth,
-) : CalendarCell() {
-
-  override val id: Long =
-    -(yearMonth.yearMonthHash() * 10L + 3L)
-}
+) : CalendarCell()
 
 internal data class CalendarCellDay(
   val date: LocalDate,
@@ -67,9 +51,6 @@ internal data class CalendarCellDay(
   val contentDescription: String,
   override val yearMonth: YearMonth,
 ) : CalendarCell() {
-
-  override val id: Long =
-    date.getLong(ChronoField.EPOCH_DAY)
 
   enum class Selection {
     Single,
