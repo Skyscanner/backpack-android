@@ -115,16 +115,16 @@ class Calendar2Story : Story() {
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
             cellsInfo = range.toMap {
-              val price = random.nextInt(100)
+              val price = random.nextInt(maxPrice)
               CellInfo(
                 label = when (price) {
-                  in 0..25 -> "-"
+                  in minPrice..noPriceThreshold -> "-"
                   else -> "£$price"
                 },
                 status = when (price) {
-                  in 25..50 -> CellStatus.Positive
-                  in 50..75 -> CellStatus.Neutral
-                  in 75..100 -> CellStatus.Negative
+                  in noPriceThreshold..positivePriceThreshold -> CellStatus.Positive
+                  in positivePriceThreshold..neutralPriceThreshold -> CellStatus.Neutral
+                  in neutralPriceThreshold..maxPrice -> CellStatus.Negative
                   else -> null
                 },
                 style = CellStatusStyle.Label,
@@ -139,13 +139,13 @@ class Calendar2Story : Story() {
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
             cellsInfo = range.toMap {
-              val price = random.nextInt(100)
+              val price = random.nextInt(maxPrice)
               CellInfo(
                 status = when (price) {
-                  in 0..25 -> CellStatus.Empty
-                  in 25..50 -> CellStatus.Positive
-                  in 50..75 -> CellStatus.Neutral
-                  in 75..100 -> CellStatus.Negative
+                  in minPrice..noPriceThreshold -> CellStatus.Empty
+                  in noPriceThreshold..positivePriceThreshold -> CellStatus.Positive
+                  in positivePriceThreshold..neutralPriceThreshold -> CellStatus.Neutral
+                  in neutralPriceThreshold..maxPrice -> CellStatus.Negative
                   else -> CellStatus.Empty
                 },
                 style = CellStatusStyle.Background,
@@ -179,6 +179,11 @@ class Calendar2Story : Story() {
 
   companion object {
     private const val TYPE = "TYPE"
+    private const val minPrice = 0
+    private const val maxPrice = 100
+    private const val noPriceThreshold = maxPrice / 4
+    private const val positivePriceThreshold = maxPrice / 4 * 2
+    private const val neutralPriceThreshold = maxPrice / 4 * 3
 
     infix fun of(type: Type) = Calendar2Story().apply {
       arguments = Bundle()
