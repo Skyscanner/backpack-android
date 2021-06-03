@@ -19,10 +19,7 @@
 package net.skyscanner.backpack.calendar2.list
 
 import androidx.recyclerview.widget.DiffUtil
-import net.skyscanner.backpack.calendar2.data.CalendarCellDay
-import net.skyscanner.backpack.calendar2.data.CalendarCellFooter
-import net.skyscanner.backpack.calendar2.data.CalendarCellHeader
-import net.skyscanner.backpack.calendar2.data.CalendarCellSpace
+import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCells
 
 internal class CalendarDiffCalculator(
@@ -40,10 +37,10 @@ internal class CalendarDiffCalculator(
     val old = oldState[oldItemPosition]
 
     return when (val new = newState[newItemPosition]) {
-      is CalendarCellDay -> new.date == (old as? CalendarCellDay)?.date
-      is CalendarCellFooter -> new.yearMonth == (old as? CalendarCellFooter)?.yearMonth
-      is CalendarCellHeader -> new.yearMonth == (old as? CalendarCellHeader)?.yearMonth
-      is CalendarCellSpace -> new.yearMonth == (old as? CalendarCellSpace)?.yearMonth
+      is CalendarCell.Day -> new.date == (old as? CalendarCell.Day)?.date
+      is CalendarCell.Footer -> new.yearMonth == (old as? CalendarCell.Footer)?.yearMonth
+      is CalendarCell.Header -> new.yearMonth == (old as? CalendarCell.Header)?.yearMonth
+      is CalendarCell.Space -> new.yearMonth == (old as? CalendarCell.Space)?.yearMonth
     }
   }
 

@@ -27,30 +27,29 @@ import org.threeten.bp.YearMonth
 internal sealed class CalendarCell {
 
   abstract val yearMonth: YearMonth
-}
 
-internal data class CalendarCellSpace(
-  val selected: Boolean,
-  override val yearMonth: YearMonth,
-) : CalendarCell()
+  internal data class Space(
+    val selected: Boolean,
+    override val yearMonth: YearMonth,
+  ) : CalendarCell()
 
-internal data class CalendarCellHeader(
-  val title: String,
-  override val yearMonth: YearMonth,
-) : CalendarCell()
+  internal data class Header(
+    val title: String,
+    override val yearMonth: YearMonth,
+  ) : CalendarCell()
 
-internal data class CalendarCellFooter(
-  override val yearMonth: YearMonth,
-) : CalendarCell()
+  internal data class Footer(
+    override val yearMonth: YearMonth,
+  ) : CalendarCell()
 
-internal data class CalendarCellDay(
-  val date: LocalDate,
-  val info: CellInfo,
-  val disabled: Boolean,
-  val selection: Selection?,
-  val contentDescription: String,
-  override val yearMonth: YearMonth,
-) : CalendarCell() {
+  internal data class Day(
+    val date: LocalDate,
+    val info: CellInfo,
+    val disabled: Boolean,
+    val selection: Selection?,
+    val contentDescription: String,
+    override val yearMonth: YearMonth,
+  ) : CalendarCell()
 
   enum class Selection {
     Single,
@@ -66,7 +65,7 @@ internal fun CalendarCellDay(
   yearMonth: YearMonth,
   selection: CalendarSelection,
   params: CalendarParams,
-): CalendarCellDay = CalendarCellDay(
+): CalendarCell.Day = CalendarCell.Day(
   date = date,
   yearMonth = yearMonth,
   info = params.cellsInfo[date] ?: params.defaultCellInfo,
@@ -75,14 +74,14 @@ internal fun CalendarCellDay(
   selection = when (selection) {
     is CalendarSelection.None -> null
     is CalendarSelection.Single -> when (date) {
-      selection.date -> CalendarCellDay.Selection.Single
+      selection.date -> CalendarCell.Selection.Single
       else -> null
     }
     is CalendarSelection.Range -> when {
-      selection.start == date && selection.end == date -> CalendarCellDay.Selection.Double
-      selection.start == date -> CalendarCellDay.Selection.Start
-      selection.end == date -> CalendarCellDay.Selection.End
-      date in selection -> CalendarCellDay.Selection.Middle
+      selection.start == date && selection.end == date -> CalendarCell.Selection.Double
+      selection.start == date -> CalendarCell.Selection.Start
+      selection.end == date -> CalendarCell.Selection.End
+      date in selection -> CalendarCell.Selection.Middle
       else -> null
     }
   },

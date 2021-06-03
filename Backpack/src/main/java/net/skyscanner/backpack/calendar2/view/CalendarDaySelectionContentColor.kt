@@ -21,10 +21,10 @@ package net.skyscanner.backpack.calendar2.view
 import android.content.Context
 import android.content.res.ColorStateList
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.data.CalendarCellDay
+import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.util.use
 
-internal typealias CalendarDaySelectionContentColor = (CalendarCellDay.Selection?) -> ColorStateList
+internal typealias CalendarDaySelectionContentColor = (CalendarCell.Selection?) -> ColorStateList
 
 internal fun CalendarDaySelectionContentColor(
   context: Context,
@@ -44,11 +44,11 @@ internal fun CalendarDaySelectionContentColor(
 
   return { selection ->
     when (selection) {
-      CalendarCellDay.Selection.Single -> selected
-      CalendarCellDay.Selection.Double -> selected
-      CalendarCellDay.Selection.Start -> selected
-      CalendarCellDay.Selection.Middle -> range
-      CalendarCellDay.Selection.End -> selected
+      CalendarCell.Selection.Single -> selected
+      CalendarCell.Selection.Double -> selected
+      CalendarCell.Selection.Start -> selected
+      CalendarCell.Selection.Middle -> range
+      CalendarCell.Selection.End -> selected
       null -> default
     }
   }

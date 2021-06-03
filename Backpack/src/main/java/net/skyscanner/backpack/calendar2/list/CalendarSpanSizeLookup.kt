@@ -19,10 +19,7 @@
 package net.skyscanner.backpack.calendar2.list
 
 import androidx.recyclerview.widget.GridLayoutManager
-import net.skyscanner.backpack.calendar2.data.CalendarCellDay
-import net.skyscanner.backpack.calendar2.data.CalendarCellFooter
-import net.skyscanner.backpack.calendar2.data.CalendarCellHeader
-import net.skyscanner.backpack.calendar2.data.CalendarCellSpace
+import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCells
 import net.skyscanner.backpack.util.Consumer
 
@@ -36,10 +33,10 @@ internal class CalendarSpanSizeLookup : GridLayoutManager.SpanSizeLookup(), Cons
   }
 
   override fun getSpanSize(position: Int): Int = when (data[position]) {
-    is CalendarCellDay -> 1
-    is CalendarCellFooter -> NUM_COLUMNS
-    is CalendarCellHeader -> NUM_COLUMNS
-    is CalendarCellSpace -> 1
+    is CalendarCell.Day -> 1
+    is CalendarCell.Footer -> NUM_COLUMNS
+    is CalendarCell.Header -> NUM_COLUMNS
+    is CalendarCell.Space -> 1
   }
 
   private companion object {

@@ -21,14 +21,14 @@ package net.skyscanner.backpack.calendar2.list
 import android.view.ViewGroup
 import android.widget.TextView
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.data.CalendarCellHeader
+import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarCellHeaderHolder(
   parent: ViewGroup,
-) : ItemHolder<CalendarCellHeader>(parent, R.layout.view_bpk_calendar_header) {
+) : ItemHolder<CalendarCell.Header>(parent, R.layout.view_bpk_calendar_header) {
 
-  override fun bind(model: CalendarCellHeader) {
+  override fun bind(model: CalendarCell.Header) {
     (itemView as TextView).text = model.title
   }
 }

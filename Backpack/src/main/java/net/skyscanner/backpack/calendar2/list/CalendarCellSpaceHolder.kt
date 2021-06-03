@@ -21,19 +21,18 @@ package net.skyscanner.backpack.calendar2.list
 import android.view.View
 import android.view.ViewGroup
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.data.CalendarCellDay.Selection
-import net.skyscanner.backpack.calendar2.data.CalendarCellSpace
+import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionBackground
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarCellSpaceHolder(
   parent: ViewGroup,
-) : ItemHolder<CalendarCellSpace>(parent, R.layout.view_bpk_calendar_space) {
+) : ItemHolder<CalendarCell.Space>(parent, R.layout.view_bpk_calendar_space) {
 
   private val background = CalendarDaySelectionBackground(context)
   private val space = view.findViewById<View>(R.id.bpk_calendar_space)
 
-  override fun bind(model: CalendarCellSpace) {
-    space.background = background(if (model.selected) Selection.Middle else null)
+  override fun bind(model: CalendarCell.Space) {
+    space.background = background(if (model.selected) CalendarCell.Selection.Middle else null)
   }
 }

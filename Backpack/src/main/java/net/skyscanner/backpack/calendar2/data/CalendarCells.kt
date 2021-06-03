@@ -47,7 +47,7 @@ internal data class CalendarCells(
   fun indexOf(date: LocalDate): Int {
     var accumulated = 0
     months.forEach { month ->
-      val indexInMonth = month.cells.indexOfFirst { (it as? CalendarCellDay)?.date == date }
+      val indexInMonth = month.cells.indexOfFirst { (it as? CalendarCell.Day)?.date == date }
       if (indexInMonth < 0) {
         accumulated += month.cells.size
       } else {

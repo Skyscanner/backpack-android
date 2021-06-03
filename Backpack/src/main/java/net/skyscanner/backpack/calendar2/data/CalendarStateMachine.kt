@@ -31,7 +31,7 @@ import net.skyscanner.backpack.util.StateMachine
 
 internal interface CalendarStateMachine : CalendarComponent, StateMachine<CalendarState, Nothing> {
 
-  fun onClick(date: CalendarCellDay)
+  fun onClick(date: CalendarCell.Day)
 }
 
 internal fun CalendarStateMachine(
@@ -50,7 +50,7 @@ internal fun CalendarStateMachine(
       }
     }
 
-    override fun onClick(date: CalendarCellDay) {
+    override fun onClick(date: CalendarCell.Day) {
       fsm.commit {
         it.dispatchClick(date)
       }
@@ -64,7 +64,7 @@ internal fun CalendarStateMachine(
   }
 }
 
-internal fun CalendarState.dispatchClick(date: CalendarCellDay): CalendarState {
+internal fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState {
   if (params.selectionMode == CalendarParams.SelectionMode.Disabled) return this
   if (date.date in params.disabledDates) return this
 

@@ -28,17 +28,13 @@ import kotlinx.coroutines.withContext
 import net.skyscanner.backpack.calendar2.CalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.DefaultCalendarFooterAdapter
 import net.skyscanner.backpack.calendar2.data.CalendarCell
-import net.skyscanner.backpack.calendar2.data.CalendarCellDay
-import net.skyscanner.backpack.calendar2.data.CalendarCellFooter
-import net.skyscanner.backpack.calendar2.data.CalendarCellHeader
-import net.skyscanner.backpack.calendar2.data.CalendarCellSpace
 import net.skyscanner.backpack.calendar2.data.CalendarCells
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarAdapter(
   private val scope: CoroutineScope,
-  private val output: Consumer<CalendarCellDay>,
+  private val output: Consumer<CalendarCell.Day>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<CalendarCells> {
 
   private var data: CalendarCells = CalendarCells()
@@ -64,10 +60,10 @@ internal class CalendarAdapter(
     data.size
 
   override fun getItemViewType(position: Int): Int = when (data[position]) {
-    is CalendarCellDay -> TYPE_DAY
-    is CalendarCellFooter -> TYPE_FOOTER
-    is CalendarCellHeader -> TYPE_HEADER
-    is CalendarCellSpace -> TYPE_SPACE
+    is CalendarCell.Day -> TYPE_DAY
+    is CalendarCell.Footer -> TYPE_FOOTER
+    is CalendarCell.Header -> TYPE_HEADER
+    is CalendarCell.Space -> TYPE_SPACE
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
@@ -83,7 +79,7 @@ internal class CalendarAdapter(
       holder.invoke(data[position])
     } else {
       val footers = footerAdapter as CalendarFooterAdapter<RecyclerView.ViewHolder>
-      val item = data[position] as CalendarCellFooter
+      val item = data[position] as CalendarCell.Footer
       footers.onBindViewHolder(holder, item.yearMonth)
     }
 

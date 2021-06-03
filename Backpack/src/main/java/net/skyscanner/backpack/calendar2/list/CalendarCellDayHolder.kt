@@ -23,7 +23,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CellStatusStyle
-import net.skyscanner.backpack.calendar2.data.CalendarCellDay
+import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.view.CalendarDayLabelContentColor
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionBackground
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionContentColor
@@ -34,8 +34,8 @@ import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarCellDayHolder(
   parent: ViewGroup,
-  private val output: Consumer<CalendarCellDay>,
-) : ItemHolder<CalendarCellDay>(parent, R.layout.view_bpk_calendar_day) {
+  private val output: Consumer<CalendarCell.Day>,
+) : ItemHolder<CalendarCell.Day>(parent, R.layout.view_bpk_calendar_day) {
 
   private val day = findViewById<TextView>(R.id.bpk_calendar_cell_date)
   private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label)
@@ -55,7 +55,7 @@ internal class CalendarCellDayHolder(
     }
   }
 
-  override fun bind(model: CalendarCellDay) {
+  override fun bind(model: CalendarCell.Day) {
     view.isEnabled = !model.disabled
     view.isSelected = model.selection != null
     view.contentDescription = model.contentDescription + " " + (model.info.label ?: "")
