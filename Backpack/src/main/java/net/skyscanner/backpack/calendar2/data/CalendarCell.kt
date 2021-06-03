@@ -30,6 +30,7 @@ internal sealed class CalendarCell {
 
   internal data class Space(
     val selected: Boolean,
+    val position: Int,
     override val yearMonth: YearMonth,
   ) : CalendarCell()
 

@@ -39,7 +39,7 @@ internal class CalendarDiffCalculator(
     return when (val new = newState[newItemPosition]) {
       is CalendarCell.Day -> new.date == (old as? CalendarCell.Day)?.date
       is CalendarCell.Header -> new.yearMonth == (old as? CalendarCell.Header)?.yearMonth
-      is CalendarCell.Space -> new.yearMonth == (old as? CalendarCell.Space)?.yearMonth
+      is CalendarCell.Space -> new.yearMonth == (old as? CalendarCell.Space)?.yearMonth && new.position == old.position
     }
   }
 
