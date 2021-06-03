@@ -4,12 +4,12 @@
   android:layout_height="wrap_content"
   android:gravity="center_horizontal|top"
   android:orientation="vertical"
-  android:paddingBottom="24dp">
+  android:paddingBottom="@dimen/bpkSpacingLg">
 
   <View
     android:id="@+id/bpk_calendar_space"
     android:layout_width="match_parent"
-    android:layout_height="36dp"
+    android:layout_height="@dimen/bpk_calendar_date_size"
     android:gravity="center"
     android:duplicateParentState="true"/>
 
