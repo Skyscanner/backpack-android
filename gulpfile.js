@@ -46,8 +46,8 @@ const _ = require('lodash');
 const through = require('through2');
 const svg2vectordrawable = require('svg2vectordrawable');
 const xmldom = require('xmldom');
-const tokens = require('bpk-tokens/tokens/base.raw.android.json');
-const iconsMetadata = require('bpk-svgs/dist/metadata.json');
+const tokens = require('@skyscanner/bpk-android/tokens/base.raw.android.json');
+const iconsMetadata = require('@skyscanner/bpk-svgs/dist/metadata.json');
 
 const PATHS = {
   templates: path.join(__dirname, 'templates'),
@@ -338,7 +338,7 @@ gulp.task('template:elevation', () => {
 
 gulp.task('template:icons', () =>
   gulp
-    .src('node_modules/bpk-svgs/dist/svgs/icons/**/*.svg')
+    .src('node_modules/@skyscanner/bpk-svgs/dist/svgs/icons/**/*.svg')
     .pipe(through.obj(convertToXml))
     .pipe(gulp.dest(PATHS.drawableRes)),
 );
