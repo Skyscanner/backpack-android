@@ -23,7 +23,9 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.Gravity
+import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.forEach
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.text.BpkText
@@ -44,40 +46,32 @@ internal class CalendarHeaderView @JvmOverloads constructor(
 
   init {
     orientation = HORIZONTAL
+    repeat(DayOfWeek.values().size) {
+      val text = BpkText(context)
+      text.textStyle = BpkText.SM
+      text.weight = BpkText.Weight.EMPHASIZED
+      text.setTextColor(context.getColorStateList(R.color.bpkTextSecondary))
+      text.gravity = Gravity.CENTER
+      text.maxLines = 1
+      text.isSingleLine = true
+      text.isAllCaps = true
+      addView(text, LayoutParams(0, LayoutParams.MATCH_PARENT, 1f))
+    }
   }
 
-  private var lastState: CalendarParams? = null
-
-  override fun invoke(state: CalendarParams) {
-    if (lastState == state) return
-
-    lastState = state
-    removeAllViews()
-
-    var current = state.weekFields.firstDayOfWeek
-    do {
-      addField(current, state)
+  override fun invoke(params: CalendarParams) {
+    var current = params.weekFields.firstDayOfWeek
+    forEach {
+      it as TextView
+      it.text = current.getDisplayName(params.dayOfWeekText, params.locale)
+      it.contentDescription = current.getDisplayName(params.dayOfWeekAccessibilityText, params.locale)
       current += 1
-    } while (current != state.weekFields.firstDayOfWeek)
+    }
   }
 
   override fun dispatchDraw(canvas: Canvas) {
     super.dispatchDraw(canvas)
     val y = height.toFloat() - linePaint.strokeWidth / 2
     canvas.drawLine(0f, y, width.toFloat(), y, linePaint)
-  }
-
-  private fun addField(field: DayOfWeek, params: CalendarParams) {
-    val text = BpkText(context)
-    text.textStyle = BpkText.SM
-    text.weight = BpkText.Weight.EMPHASIZED
-    text.setTextColor(context.getColorStateList(R.color.bpkTextSecondary))
-    text.gravity = Gravity.CENTER
-    text.maxLines = 1
-    text.isSingleLine = true
-    text.isAllCaps = true
-    text.text = field.getDisplayName(params.dayOfWeekText, params.locale)
-    text.contentDescription = field.getDisplayName(params.dayOfWeekAccessibilityText, params.locale)
-    addView(text, LayoutParams(0, LayoutParams.MATCH_PARENT, 1f))
   }
 }
