@@ -65,6 +65,12 @@ android {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
+    freeCompilerArgs += [
+      "-Xopt-in=kotlin.RequiresOptIn",
+    ]
+  }
 }
 
 dependencies {
@@ -72,6 +78,7 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompat"
   implementation "androidx.annotation:annotation:$rootProject.ext.androidxAnnotations"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.coroutines"
   implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
   implementation "com.google.android.material:material:$rootProject.ext.androidMaterial"
   implementation "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threeTenAbp"

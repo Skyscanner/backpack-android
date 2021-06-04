@@ -22,17 +22,21 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.DisplayMetrics
 import androidx.annotation.Dimension
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
+import kotlin.math.roundToInt
 
 internal object ResourcesUtil {
 
   @Dimension
   fun dpToPx(@Dimension dp: Int, context: Context): Int {
-    return dpToPx(dp.toFloat(), context)
+    return dpToPx(dp.toFloat(), context).roundToInt()
   }
 
   @Dimension
-  fun dpToPx(@Dimension dp: Float, context: Context): Int {
-    return Math.round(dp * context.resources.displayMetrics.density)
+  fun dpToPx(@Dimension dp: Float, context: Context): Float {
+    return dp * context.resources.displayMetrics.density
   }
 
   @Dimension
@@ -41,10 +45,14 @@ internal object ResourcesUtil {
   }
 }
 
-internal inline fun <R> TypedArray?.use(block: (TypedArray) -> R): R? {
+@OptIn(ExperimentalContracts::class)
+internal inline fun <R> TypedArray.use(block: (TypedArray) -> R): R {
+  contract {
+    callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+  }
   try {
-    return this?.let(block)
+    return this.let(block)
   } finally {
-    this?.recycle()
+    this.recycle()
   }
 }
