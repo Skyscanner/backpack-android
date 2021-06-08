@@ -9,7 +9,7 @@ buildscript {
     maven { url 'https://plugins.gradle.org/m2/' }
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:4.2.1'
+    classpath 'com.android.tools.build:gradle:4.2.1' // keep in sync with lint version - If the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:$dokka_version"
     classpath 'com.facebook.testing.screenshot:plugin:0.14.0'
@@ -79,4 +79,5 @@ ext {
   mockitoKotlin = "2.2.0"
   mockitoAndroid = "3.9.0"
   coroutines = "1.5.0"
+  lint = "27.2.1"
 }

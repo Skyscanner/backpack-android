@@ -64,6 +64,8 @@ dependencies {
   androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$rootProject.ext.mockitoKotlin"
   androidTestImplementation "org.mockito:mockito-android:$rootProject.ext.mockitoAndroid"
   testImplementation "junit:junit:$rootProject.ext.junit"
+
+  lintPublish project(':backpack-lint')
 }
 
 dokka {
