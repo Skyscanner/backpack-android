@@ -1,5 +1,8 @@
 # Unreleased
 
+**Added:**
+- Lint check for component usage
+
 > Place your changes below this line.
 
 **Changed:**
