@@ -53,6 +53,7 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     )
 
     private val APPLICABLE_TYPES = Component.values().flatMap { it.componentsToReplace }
+    private val APPLICABLE_METHODS = Component.values().flatMap { it.staticMethodsToReplace }
   }
 
   private val classCache = mutableListOf<String>()
@@ -62,6 +63,8 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
   override fun applicableSuperClasses(): List<String> = APPLICABLE_TYPES
 
   override fun getApplicableElements(): Collection<String> = APPLICABLE_TYPES
+
+  override fun getApplicableMethodNames(): List<String> = APPLICABLE_METHODS
 
   override fun appliesTo(folderType: ResourceFolderType): Boolean = folderType == ResourceFolderType.LAYOUT
 
@@ -93,6 +96,14 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     }
   }
 
+  override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
+    val className = method.containingClass?.qualifiedName ?: return
+    val component = Component.findMethod(method.name, className)
+    if (component != null) {
+      context.report(context.getLocation(node), className, component)
+    }
+  }
+
   private fun Context.report(location: Location, existingComponent: String, component: Component) {
     report(
       ISSUE,
@@ -101,7 +112,12 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     )
   }
 
-  private enum class Component(val fullName: String, val webName: String, val componentsToReplace: Set<String>) {
+  private enum class Component(
+    val fullName: String,
+    val webName: String,
+    val componentsToReplace: Set<String>,
+    val staticMethodsToReplace: Set<String> = emptySet(),
+  ) {
     BOTTOM_NAV(
       fullName = "net.skyscanner.backpack.bottomnav.BpkBottomNav",
       webName = "bottom-nav",
@@ -120,7 +136,8 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     CALENDAR(
       fullName = "net.skyscanner.backpack.calendar.BpkCalendar",
       webName = "calendar",
-      componentsToReplace = setOf("java.util.Calendar", "com.google.android.material.datepicker.MaterialDatePicker")
+      componentsToReplace = setOf("java.util.Calendar", "com.google.android.material.datepicker.MaterialDatePicker.Builder"),
+      staticMethodsToReplace = setOf("datePicker", "dateRangePicker")
     ),
     CARD(
       fullName = "net.skyscanner.backpack.card.BpkCardView",
@@ -183,7 +200,8 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     SNACKBAR(
       fullName = "net.skyscanner.backpack.snackbar.BpkSnackbar",
       webName = "snackbar",
-      componentsToReplace = setOf("com.google.android.material.snackbar.Snackbar")
+      componentsToReplace = setOf("com.google.android.material.snackbar.Snackbar"),
+      staticMethodsToReplace = setOf("make")
     ),
     SPINNER(
       fullName = "net.skyscanner.backpack.spinner.BpkSpinner",
@@ -208,7 +226,8 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     TOAST(
       fullName = "net.skyscanner.backpack.toast.BpkToast",
       webName = "toast",
-      componentsToReplace = setOf("android.widget.Toast")
+      componentsToReplace = setOf("android.widget.Toast"),
+      staticMethodsToReplace = setOf("makeText")
     ),
     ;
 
@@ -217,6 +236,9 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     companion object {
       internal fun find(componentToReplace: String) =
         values().firstOrNull { it.componentsToReplace.contains(componentToReplace) }
+
+      internal fun findMethod(method: String, componentClass: String) =
+        values().firstOrNull { it.staticMethodsToReplace.contains(method) && it.componentsToReplace.contains(componentClass) }
     }
   }
 }
