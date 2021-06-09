@@ -42,8 +42,8 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
   companion object {
     val ISSUE = Issue.create(
       id = "BpkComponentUsage",
-      briefDescription = "A backpack version of this component is available",
-      explanation = "Use backpack components where available to improve consistency, accessibility and dark mode support.",
+      briefDescription = "A Backpack version of this component is available",
+      explanation = "Use Backpack components where available to improve consistency, accessibility and dark mode support.",
       category = Category.CORRECTNESS,
       severity = Severity.WARNING,
       implementation = Implementation(
