@@ -42,7 +42,7 @@ class CustomButton(context: Context) : Button(context)"""
       .expectWarningCount(1)
       .expect(
         """
-src/CustomButton.kt:4: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
+src/CustomButton.kt:4: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.button.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
 class CustomButton(context: Context) : Button(context)
       ~~~~~~~~~~~~
 0 errors, 1 warnings
@@ -67,7 +67,7 @@ class View(context: Context) {
       .expectWarningCount(1)
       .expect(
         """
-src/View.kt:4: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
+src/View.kt:4: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.button.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
   private val button = Button(context)
                        ~~~~~~~~~~~~~~~
 0 errors, 1 warnings
@@ -92,9 +92,37 @@ src/View.kt:4: Warning: Backpack component available for android.widget.Button. 
       .expectWarningCount(1)
       .expect(
         """
-res/layout/native_button.xml:2: Warning: Backpack component available for Button. Use net.skyscanner.backpack.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
+res/layout/native_button.xml:2: Warning: Backpack component available for Button. Use net.skyscanner.backpack.button.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
 ^
+0 errors, 1 warnings
+      """
+      )
+  }
+
+  @Test
+  fun `warning when using static method of native component`() {
+    lint()
+      .files(
+        kotlin(
+          """import android.widget.Toast
+import android.content.Context
+
+class View(private val context: Context) {
+  fun showToast() {
+    Toast.makeText(context, "Toast!", Toast.LENGTH_SHORT)
+  }
+}"""
+        )
+      )
+      .issues(BpkComponentUsageDetector.ISSUE)
+      .run()
+      .expectWarningCount(1)
+      .expect(
+        """
+src/View.kt:6: Warning: Backpack component available for android.widget.Toast. Use net.skyscanner.backpack.toast.BpkToast instead. More info at https://backpack.github.io/components/toast [BpkComponentUsage]
+    Toast.makeText(context, "Toast!", Toast.LENGTH_SHORT)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 0 errors, 1 warnings
       """
       )
@@ -105,7 +133,7 @@ res/layout/native_button.xml:2: Warning: Backpack component available for Button
     lint()
       .files(
         kotlin(
-          """import net.skyscanner.backpack.BpkButton
+          """import net.skyscanner.backpack.button.BpkButton
 import android.content.Context
 
 class CustomButton(context: Context) : BpkButton(context)"""
@@ -121,7 +149,7 @@ class CustomButton(context: Context) : BpkButton(context)"""
     lint()
       .files(
         kotlin(
-          """import net.skyscanner.backpack.BpkButton
+          """import net.skyscanner.backpack.button.BpkButton
 
 class View(context: Context) {
 private val button = BpkButton(context)
@@ -143,6 +171,26 @@ private val button = BpkButton(context)
 <net.skyscanner.backpack.BpkButton xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content" />"""
+        )
+      )
+      .issues(BpkComponentUsageDetector.ISSUE)
+      .run()
+      .expectClean()
+  }
+
+  @Test
+  fun `clean when using static method of bpk component`() {
+    lint()
+      .files(
+        kotlin(
+          """import net.skyscanner.backpack.toast.BpkToast
+import android.content.Context
+
+class View(private val context: Context) {
+  fun showToast() {
+    BpkToast.makeText(context, "Toast!", BpkToast.LENGTH_SHORT)
+  }
+}"""
         )
       )
       .issues(BpkComponentUsageDetector.ISSUE)
