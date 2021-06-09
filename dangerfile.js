@@ -38,6 +38,16 @@ if (packagesModified && !unreleasedModified && !declaredTrivial) {
   warn("One or more packages have changed, but `UNRELEASED.md` wasn't updated.");
 }
 
+// If any files were created, the BpkComponentUsageDetector should have been updated.
+const usageDetector = includes(
+  modifiedFiles,
+  'backpack-lint/src/main/java/net/skyscanner/backpack/lint/check/BpkComponentUsageDetector.kt',
+);
+const packageFilesCreated = createdFiles.some(filePath => filePath.startsWith('Backpack/src/main/java'));
+if (packageFilesCreated && !usageDetector && !declaredTrivial) {
+  warn("One or more package files were created, but `BpkComponentUsageDetector.kt` wasn't updated.");
+}
+
 // Ensure package-lock changes are intentional.
 const lockFileUpdated = includes(modifiedFiles, 'package-lock.json');
 if (lockFileUpdated) {
