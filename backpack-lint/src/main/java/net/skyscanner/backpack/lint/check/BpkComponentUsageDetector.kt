@@ -97,6 +97,9 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
   }
 
   override fun visitMethodCall(context: JavaContext, node: UCallExpression, method: PsiMethod) {
+    if (!context.evaluator.isStatic(method)) {
+      return
+    }
     val className = method.containingClass?.qualifiedName ?: return
     val component = Component.findMethod(method.name, className)
     if (component != null) {
