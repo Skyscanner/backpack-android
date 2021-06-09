@@ -172,10 +172,7 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     NAV_BAR(
       fullName = "net.skyscanner.backpack.navbar.BpkNavBar",
       webName = "navigation-bar",
-      componentsToReplace = setOf(
-        "com.google.android.material.appbar.AppBarLayout",
-        "com.google.android.material.appbar.CollapsingToolbarLayout"
-      )
+      componentsToReplace = setOf("com.google.android.material.appbar.CollapsingToolbarLayout")
     ),
     RADIO_BUTTON(
       fullName = "net.skyscanner.backpack.radiobutton.BpkRadioButton",
