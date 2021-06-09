@@ -1,0 +1,15 @@
+apply plugin: 'kotlin'
+
+dependencies {
+  compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  compileOnly "com.android.tools.lint:lint-api:$rootProject.ext.lint"
+
+  testImplementation "com.android.tools.lint:lint-tests:$rootProject.ext.lint"
+  testImplementation "junit:junit:$rootProject.ext.junit"
+}
+
+jar {
+  manifest {
+    attributes("Lint-Registry-v2": "net.skyscanner.backpack.lint.IssueRegistry")
+  }
+}

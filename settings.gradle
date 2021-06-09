@@ -1,1 +1,3 @@
-include ':Backpack', ':app'
+include ':Backpack',
+  ':backpack-lint',
+  ':app'
