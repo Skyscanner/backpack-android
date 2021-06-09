@@ -52,16 +52,7 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
       )
     )
 
-    private const val BPK_BUTTON = "net.skyscanner.backpack.BpkButton"
-
-    private val COMPONENTS = mapOf(
-      // BpkButton
-      "android.widget.Button" to BPK_BUTTON,
-      "Button" to BPK_BUTTON,
-      "androidx.appcompat.widget.AppCompatButton" to BPK_BUTTON,
-    )
-
-    private val APPLICABLE_TYPES = COMPONENTS.keys.toList()
+    private val APPLICABLE_TYPES = Component.values().flatMap { it.componentsToReplace }
   }
 
   private val classCache = mutableListOf<String>()
@@ -76,7 +67,7 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
 
   override fun visitClass(context: JavaContext, declaration: UClass) {
     val superClass = declaration.javaPsi.superClass?.qualifiedName ?: return
-    val component = COMPONENTS[superClass]
+    val component = Component.find(superClass)
     if (component != null) {
       if (declaration.name == null || classCache.contains(declaration.name)) {
         // in some cases we might have two relevant super classes (e.g. when there's an AppCompat and default component) - only report issue once
@@ -89,20 +80,40 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
 
   override fun visitConstructor(context: JavaContext, node: UCallExpression, constructor: PsiMethod) {
     val className = node.returnType?.canonicalText ?: return
-    val component = COMPONENTS[className]
+    val component = Component.find(className)
     if (component != null) {
       context.report(context.getLocation(node), className, component)
     }
   }
 
   override fun visitElement(context: XmlContext, element: Element) {
-    val component = COMPONENTS[element.tagName]
+    val component = Component.find(element.tagName)
     if (component != null) {
       context.report(context.getLocation(element), element.tagName, component)
     }
   }
 
-  private fun Context.report(location: Location, existingComponent: String, component: String) {
-    report(ISSUE, location, "Backpack component available for $existingComponent. Use $component instead")
+  private fun Context.report(location: Location, existingComponent: String, component: Component) {
+    report(
+      ISSUE,
+      location,
+      "Backpack component available for $existingComponent. Use ${component.fullName} instead. More info at ${component.url}"
+    )
+  }
+
+  private enum class Component(val fullName: String, val webName: String, val componentsToReplace: Set<String>) {
+    BUTTON(
+      fullName = "net.skyscanner.backpack.BpkButton",
+      webName = "button",
+      componentsToReplace = setOf("android.widget.Button", "Button", "androidx.appcompat.widget.AppCompatButton")
+    ),
+    ;
+
+    val url: String = "https://backpack.github.io/components/$webName"
+
+    companion object {
+      internal fun find(componentToReplace: String) =
+        values().firstOrNull { it.componentsToReplace.contains(componentToReplace) }
+    }
   }
 }

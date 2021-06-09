@@ -42,7 +42,7 @@ class CustomButton(context: Context) : Button(context)"""
       .expectWarningCount(1)
       .expect(
         """
-src/CustomButton.kt:4: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.BpkButton instead [BpkComponentUsage]
+src/CustomButton.kt:4: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
 class CustomButton(context: Context) : Button(context)
       ~~~~~~~~~~~~
 0 errors, 1 warnings
@@ -67,7 +67,7 @@ class View(context: Context) {
       .expectWarningCount(1)
       .expect(
         """
-src/View.kt:4: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.BpkButton instead [BpkComponentUsage]
+src/View.kt:4: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
   private val button = Button(context)
                        ~~~~~~~~~~~~~~~
 0 errors, 1 warnings
@@ -92,7 +92,7 @@ src/View.kt:4: Warning: Backpack component available for android.widget.Button. 
       .expectWarningCount(1)
       .expect(
         """
-res/layout/native_button.xml:2: Warning: Backpack component available for Button. Use net.skyscanner.backpack.BpkButton instead [BpkComponentUsage]
+res/layout/native_button.xml:2: Warning: Backpack component available for Button. Use net.skyscanner.backpack.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
 ^
 0 errors, 1 warnings
