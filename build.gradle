@@ -4,7 +4,7 @@ buildscript {
   ext.dokka_version = '0.9.18'
   repositories {
     google()
-    jcenter()
+    mavenCentral()
     maven { url 'https://jitpack.io' }
     maven { url 'https://plugins.gradle.org/m2/' }
   }
@@ -20,7 +20,7 @@ buildscript {
 allprojects {
   repositories {
     google()
-    jcenter()
+    mavenCentral()
   }
 }
 
