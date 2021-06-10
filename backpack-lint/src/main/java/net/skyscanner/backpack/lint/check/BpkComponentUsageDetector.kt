@@ -233,12 +233,17 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
 
     val url: String = "https://backpack.github.io/components/$webName"
 
+    private fun replacesComponent(componentToReplace: String) = componentsToReplace.contains(componentToReplace)
+
+    private fun replacesMethod(method: String, componentClass: String) =
+      staticMethodsToReplace.contains(method) && replacesComponent(componentClass)
+
     companion object {
       internal fun find(componentToReplace: String) =
-        values().firstOrNull { it.componentsToReplace.contains(componentToReplace) }
+        values().firstOrNull { it.replacesComponent(componentToReplace) }
 
       internal fun findMethod(method: String, componentClass: String) =
-        values().firstOrNull { it.staticMethodsToReplace.contains(method) && it.componentsToReplace.contains(componentClass) }
+        values().firstOrNull { it.replacesMethod(method, componentClass) }
     }
   }
 }
