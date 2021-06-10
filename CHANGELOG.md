@@ -2,6 +2,15 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 30.1.0
+
+**Added:**
+- Lint check for component usage
+
+**Changed:**
+- Migrated to new Backpack Foundations packages, `@skyscanner/bpk-ios` and `@skyscanner/bpk-svgs`.
+- Updated icons to newer versions.
+
 # 30.0.0
 
 **Breaking:**

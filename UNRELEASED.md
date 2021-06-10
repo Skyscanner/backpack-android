@@ -1,13 +1,6 @@
 # Unreleased
 
-**Added:**
-- Lint check for component usage
-
 > Place your changes below this line.
-
-**Changed:**
-- Migrated to new Backpack Foundations packages, `@skyscanner/bpk-ios` and `@skyscanner/bpk-svgs`.
-- Updated icons to newer versions.
 
 ## How to write a good changelog entry
 
