@@ -12,7 +12,6 @@ if (rootProject.file("local.properties").exists()) {
 
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
 
   defaultConfig {
     applicationId 'net.skyscanner.backpack'
