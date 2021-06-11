@@ -3,7 +3,7 @@
 > Place your changes below this line.
 
 **Fixed:**
-- Downgraded core-ktx version to 1.3.2 to fix test timeouts
+- Downgraded `core-ktx` version to 1.3.2 to fix test timeouts
 
 ## How to write a good changelog entry
 
