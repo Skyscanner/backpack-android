@@ -2,6 +2,11 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 30.1.1
+
+**Fixed:**
+- Downgraded `core-ktx` version to 1.3.2 to fix test timeouts
+
 # 30.1.0
 
 **Added:**
