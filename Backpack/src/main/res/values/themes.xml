@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <style name="BpkThemeBase" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+  <style name="BpkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
     <item name="bpkPrimaryColor">@color/bpkPrimary</item>
     <item name="colorPrimary">?attr/bpkPrimaryColor</item>
     <item name="colorPrimaryDark">@color/bpkSkyBlueShade01</item>
@@ -9,6 +9,10 @@
     <item name="windowNoTitle">true</item>
     <item name="windowActionBar">false</item>
     <item name="colorButtonNormal">@android:color/white</item>
+
+    <item name="bpkFontFamilyBase">sans-serif</item>
+    <item name="bpkFontFamilyEmphasized">sans-serif-medium</item>
+    <item name="bpkFontFamilyHeavy">sans-serif-black</item>
 
     <item name="bpkTextBaseAppearance">@style/bpkTextBaseSerif</item>
     <item name="bpkTextCapsAppearance">@style/bpkTextCapsSerif</item>
@@ -30,7 +34,5 @@
     <item name="bpkTextXxlHeavyAppearance">@style/bpkTextXxlHeavySerif</item>
     <item name="bpkTextXxxlHeavyAppearance">@style/bpkTextXxxlHeavySerif</item>
   </style>
-
-  <style name="BpkTheme" parent="BpkThemeBase" />
 
 </resources>

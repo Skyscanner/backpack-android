@@ -41,6 +41,17 @@ android {
       signingConfig signingConfigs.release
     }
   }
+  flavorDimensions "version"
+  productFlavors {
+    oss {
+      dimension "version"
+      versionNameSuffix "-oss"
+    }
+    internal {
+      dimension "version"
+      versionNameSuffix "-internal"
+    }
+  }
   lintOptions {
     // Backups not required for demo app
     disable 'AllowBackup',
