@@ -58,9 +58,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        module:
-          - app
-          - Backpack
+        module: [app, Backpack]
+        include:
+          - module: app
+            flavour: 'oss'
+          - module: Backpack
+            flavour: ''
 
     steps:
       - uses: actions/checkout@v2
@@ -69,16 +72,16 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Build
-        run: ./gradlew :${{ matrix.module }}:assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
+        run: ./gradlew :${{ matrix.module }}:assemble${{ matrix.flavour }}${{ env.config }} -PdisablePreDex
 
       - name: KtLint check
         run: ./gradlew :${{ matrix.module }}:${{ env.module }}:ktlint -PdisablePreDex
 
       - name: Lint check
-        run: ./gradlew :${{ matrix.module }}:lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
+        run: ./gradlew :${{ matrix.module }}:lint${{ matrix.flavour }}${{ env.config }} -PdisablePreDex
 
       - name: Unit Tests
-        run: ./gradlew :${{ matrix.module }}:test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
+        run: ./gradlew :${{ matrix.module }}:test${{ matrix.flavour }}${{ env.config }}UnitTest -PdisablePreDex
 
   Android:
     name: Android
@@ -99,7 +102,7 @@ jobs:
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
-          script: ./gradlew :Backpack:connected${{ env.flavour }}${{ env.config }}AndroidTest
+          script: ./gradlew :Backpack:connected${{ env.config }}AndroidTest
 
   Screenshots:
     name: Screenshots

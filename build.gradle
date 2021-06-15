@@ -48,6 +48,11 @@ subprojects {
   }
 }
 
+task install {
+  dependsOn ':Backpack:assembleRelease'
+  dependsOn ':Backpack:publishToMavenLocal'
+}
+
 task clean(type: Delete) {
   delete rootProject.buildDir
 }

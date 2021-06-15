@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="BpkTheme" parent="BpkThemeBase">
+  <style name="AppThemeBase" parent="BpkTheme">
     <item name="bpkFontFamilyBase">@font/skyscanner_relative_android_book</item>
     <item name="bpkFontFamilyEmphasized">@font/skyscanner_relative_android_bold</item>
     <item name="bpkFontFamilyHeavy">@font/skyscanner_relative_android_black</item>

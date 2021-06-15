@@ -2,7 +2,9 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="BpkTheme">
+  <style name="AppThemeBase" parent="BpkTheme"/>
+
+  <style name="AppTheme" parent="AppThemeBase">
     <!-- Customize your theme here. -->
     <item name="android:windowBackground">@color/bpkBackground</item>
   </style>
