@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 31.0.1
+
+**Fixed:**
+
+- Updated font definition for relative theme
+
 # 31.0.0
 
 **Breaking:**
