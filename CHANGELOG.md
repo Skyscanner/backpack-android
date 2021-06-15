@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 31.0.0
+
+**Breaking:**
+
+- Removed separation of internal & OSS variant. Custom font now needs to be provided by app
+
 # 30.1.1
 
 **Fixed:**
