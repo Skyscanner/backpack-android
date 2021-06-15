@@ -1,79 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- Text should have no lineSpacingMultiplier to work with relative -->
-  <style name="bpkTextBaseInternal" parent="bpkTextBase">
+
+  <style name="bpkTextBaseRelative" parent="bpkTextBase">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextCapsInternal" parent="bpkTextCaps">
+  <style name="bpkTextCapsRelative" parent="bpkTextCaps">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextLgInternal" parent="bpkTextLg">
+  <style name="bpkTextLgRelative" parent="bpkTextLg">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextSmInternal" parent="bpkTextSm">
+  <style name="bpkTextSmRelative" parent="bpkTextSm">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXlInternal" parent="bpkTextXl">
+  <style name="bpkTextXlRelative" parent="bpkTextXl">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXsInternal" parent="bpkTextXs">
+  <style name="bpkTextXsRelative" parent="bpkTextXs">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXxlInternal" parent="bpkTextXxl">
+  <style name="bpkTextXxlRelative" parent="bpkTextXxl">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXxxlInternal" parent="bpkTextXxxl">
+  <style name="bpkTextXxxlRelative" parent="bpkTextXxxl">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextBaseEmphasizedInternal" parent="bpkTextBaseEmphasized">
+  <style name="bpkTextBaseEmphasizedRelative" parent="bpkTextBaseEmphasized">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextCapsEmphasizedInternal" parent="bpkTextCapsEmphasized">
+  <style name="bpkTextCapsEmphasizedRelative" parent="bpkTextCapsEmphasized">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextLgEmphasizedInternal" parent="bpkTextLgEmphasized">
+  <style name="bpkTextLgEmphasizedRelative" parent="bpkTextLgEmphasized">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextSmEmphasizedInternal" parent="bpkTextSmEmphasized">
+  <style name="bpkTextSmEmphasizedRelative" parent="bpkTextSmEmphasized">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXlEmphasizedInternal" parent="bpkTextXlEmphasized">
+  <style name="bpkTextXlEmphasizedRelative" parent="bpkTextXlEmphasized">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXsEmphasizedInternal" parent="bpkTextXsEmphasized">
+  <style name="bpkTextXsEmphasizedRelative" parent="bpkTextXsEmphasized">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXxlEmphasizedInternal" parent="bpkTextXxlEmphasized">
+  <style name="bpkTextXxlEmphasizedRelative" parent="bpkTextXxlEmphasized">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXxxlEmphasizedInternal" parent="bpkTextXxxlEmphasized">
+  <style name="bpkTextXxxlEmphasizedRelative" parent="bpkTextXxxlEmphasized">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXlHeavyInternal" parent="bpkTextXlHeavy">
+  <style name="bpkTextXlHeavyRelative" parent="bpkTextXlHeavy">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXxlHeavyInternal" parent="bpkTextXxlHeavy">
+  <style name="bpkTextXxlHeavyRelative" parent="bpkTextXxlHeavy">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
-  <style name="bpkTextXxxlHeavyInternal" parent="bpkTextXxxlHeavy">
+  <style name="bpkTextXxxlHeavyRelative" parent="bpkTextXxxlHeavy">
     <item name="android:lineSpacingMultiplier">1</item>
   </style>
+
 </resources>

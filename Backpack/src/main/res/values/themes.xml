@@ -35,4 +35,26 @@
     <item name="bpkTextXxxlHeavyAppearance">@style/bpkTextXxxlHeavySerif</item>
   </style>
 
+  <style name="BpkTheme.Relative">
+    <item name="bpkTextBaseAppearance">@style/bpkTextBaseRelative</item>
+    <item name="bpkTextCapsAppearance">@style/bpkTextCapsRelative</item>
+    <item name="bpkTextLgAppearance">@style/bpkTextLgRelative</item>
+    <item name="bpkTextSmAppearance">@style/bpkTextSmRelative</item>
+    <item name="bpkTextXlAppearance">@style/bpkTextXlRelative</item>
+    <item name="bpkTextXsAppearance">@style/bpkTextXsRelative</item>
+    <item name="bpkTextXxlAppearance">@style/bpkTextXxlRelative</item>
+    <item name="bpkTextXxxlAppearance">@style/bpkTextXxxlRelative</item>
+    <item name="bpkTextBaseEmphasizedAppearance">@style/bpkTextBaseEmphasizedRelative</item>
+    <item name="bpkTextCapsEmphasizedAppearance">@style/bpkTextCapsEmphasizedRelative</item>
+    <item name="bpkTextLgEmphasizedAppearance">@style/bpkTextLgEmphasizedRelative</item>
+    <item name="bpkTextSmEmphasizedAppearance">@style/bpkTextSmEmphasizedRelative</item>
+    <item name="bpkTextXlEmphasizedAppearance">@style/bpkTextXlEmphasizedRelative</item>
+    <item name="bpkTextXsEmphasizedAppearance">@style/bpkTextXsEmphasizedRelative</item>
+    <item name="bpkTextXxlEmphasizedAppearance">@style/bpkTextXxlEmphasizedRelative</item>
+    <item name="bpkTextXxxlEmphasizedAppearance">@style/bpkTextXxxlEmphasizedRelative</item>
+    <item name="bpkTextXlHeavyAppearance">@style/bpkTextXlHeavyRelative</item>
+    <item name="bpkTextXxlHeavyAppearance">@style/bpkTextXxlHeavyRelative</item>
+    <item name="bpkTextXxxlHeavyAppearance">@style/bpkTextXxxlHeavyRelative</item>
+  </style>
+
 </resources>
