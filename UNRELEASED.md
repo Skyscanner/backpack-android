@@ -1,6 +1,11 @@
 # Unreleased
 
 > Place your changes below this line.
+>
+
+**Breaking:**
+
+- Removed separation of internal & OSS variant. Custom font now needs to be provided by app
 
 ## How to write a good changelog entry
 
