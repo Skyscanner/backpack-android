@@ -45,10 +45,6 @@
     <item name="android:letterSpacing">-0.0125</item>
   </style>
 
-  <style name="bpkTextBaseRelative" parent="bpkTextBase">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextCaps">
     <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -57,10 +53,6 @@
 
   <style name="bpkTextCapsSerif" parent="bpkTextCaps">
     <item name="android:letterSpacing">0.04</item>
-  </style>
-
-  <style name="bpkTextCapsRelative" parent="bpkTextCaps">
-    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
   <style name="bpkTextLg">
@@ -73,10 +65,6 @@
     <item name="android:letterSpacing">-0.02</item>
   </style>
 
-  <style name="bpkTextLgRelative" parent="bpkTextLg">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextSm">
     <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -85,10 +73,6 @@
 
   <style name="bpkTextSmSerif" parent="bpkTextSm">
     <item name="android:letterSpacing">0</item>
-  </style>
-
-  <style name="bpkTextSmRelative" parent="bpkTextSm">
-    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
   <style name="bpkTextXl">
@@ -101,10 +85,6 @@
     <item name="android:letterSpacing">-0.024999999999999998</item>
   </style>
 
-  <style name="bpkTextXlRelative" parent="bpkTextXl">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextXs">
     <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -113,10 +93,6 @@
 
   <style name="bpkTextXsSerif" parent="bpkTextXs">
     <item name="android:letterSpacing">0</item>
-  </style>
-
-  <style name="bpkTextXsRelative" parent="bpkTextXs">
-    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
   <style name="bpkTextXxl">
@@ -129,10 +105,6 @@
     <item name="android:letterSpacing">-0.02666666666666667</item>
   </style>
 
-  <style name="bpkTextXxlRelative" parent="bpkTextXxl">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextXxxl">
     <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -141,10 +113,6 @@
 
   <style name="bpkTextXxxlSerif" parent="bpkTextXxxl">
     <item name="android:letterSpacing">-0.027777777777777776</item>
-  </style>
-
-  <style name="bpkTextXxxlRelative" parent="bpkTextXxxl">
-    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
   <style name="bpkTextBaseEmphasized">
@@ -157,10 +125,6 @@
     <item name="android:letterSpacing">-0.0125</item>
   </style>
 
-  <style name="bpkTextBaseEmphasizedRelative" parent="bpkTextBaseEmphasized">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextCapsEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -169,10 +133,6 @@
 
   <style name="bpkTextCapsEmphasizedSerif" parent="bpkTextCapsEmphasized">
     <item name="android:letterSpacing">0.04</item>
-  </style>
-
-  <style name="bpkTextCapsEmphasizedRelative" parent="bpkTextCapsEmphasized">
-    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
   <style name="bpkTextLgEmphasized">
@@ -185,10 +145,6 @@
     <item name="android:letterSpacing">-0.02</item>
   </style>
 
-  <style name="bpkTextLgEmphasizedRelative" parent="bpkTextLgEmphasized">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextSmEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -197,10 +153,6 @@
 
   <style name="bpkTextSmEmphasizedSerif" parent="bpkTextSmEmphasized">
     <item name="android:letterSpacing">0</item>
-  </style>
-
-  <style name="bpkTextSmEmphasizedRelative" parent="bpkTextSmEmphasized">
-    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
   <style name="bpkTextXlEmphasized">
@@ -213,10 +165,6 @@
     <item name="android:letterSpacing">-0.024999999999999998</item>
   </style>
 
-  <style name="bpkTextXlEmphasizedRelative" parent="bpkTextXlEmphasized">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextXsEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -225,10 +173,6 @@
 
   <style name="bpkTextXsEmphasizedSerif" parent="bpkTextXsEmphasized">
     <item name="android:letterSpacing">0</item>
-  </style>
-
-  <style name="bpkTextXsEmphasizedRelative" parent="bpkTextXsEmphasized">
-    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
   <style name="bpkTextXxlEmphasized">
@@ -241,10 +185,6 @@
     <item name="android:letterSpacing">-0.02666666666666667</item>
   </style>
 
-  <style name="bpkTextXxlEmphasizedRelative" parent="bpkTextXxlEmphasized">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextXxxlEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -253,10 +193,6 @@
 
   <style name="bpkTextXxxlEmphasizedSerif" parent="bpkTextXxxlEmphasized">
     <item name="android:letterSpacing">-0.027777777777777776</item>
-  </style>
-
-  <style name="bpkTextXxxlEmphasizedRelative" parent="bpkTextXxxlEmphasized">
-    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
   <style name="bpkTextXlHeavy">
@@ -269,10 +205,6 @@
     <item name="android:letterSpacing">-0.024999999999999998</item>
   </style>
 
-  <style name="bpkTextXlHeavyRelative" parent="bpkTextXlHeavy">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextXxlHeavy">
     <item name="android:fontFamily">?bpkFontFamilyHeavy</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -283,10 +215,6 @@
     <item name="android:letterSpacing">-0.02666666666666667</item>
   </style>
 
-  <style name="bpkTextXxlHeavyRelative" parent="bpkTextXxlHeavy">
-    <item name="android:lineSpacingMultiplier">1</item>
-  </style>
-
   <style name="bpkTextXxxlHeavy">
     <item name="android:fontFamily">?bpkFontFamilyHeavy</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -295,10 +223,6 @@
 
   <style name="bpkTextXxxlHeavySerif" parent="bpkTextXxxlHeavy">
     <item name="android:letterSpacing">-0.027777777777777776</item>
-  </style>
-
-  <style name="bpkTextXxxlHeavyRelative" parent="bpkTextXxxlHeavy">
-    <item name="android:lineSpacingMultiplier">1</item>
   </style>
 
 </resources>
