@@ -35,3 +35,16 @@ BpkStarRating(context).apply {
 - `starFilledColor`
 
 Styles can be changed globally through `bpkStarRatingStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/THEMING.md) for more information.
+
+## Accessibility
+
+To ensure this component is accessible set a `contentDescription` for the component, unless there is a label indicating the rating available.
+For simpler logic you can also set `accessibilityStatusRes` in both XML and Kotlin/Java to announce `x out of y`.
+
+The string resource needs to contain a `%f` and `%d` placeholder:
+
+```xml
+<string name="star_rating_accessibility_status">%.0f out of %d</string>
+```
+
+If both `contentDescription` and `accessibilityStatusRes` are set the `contentDescription` will be appended to the accessibility status to match status description behaviour.

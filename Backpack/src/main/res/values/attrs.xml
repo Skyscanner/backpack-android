@@ -121,6 +121,7 @@
     <attr name="starFilledColor" format="color" />
     <attr name="rating" format="float" />
     <attr name="maxRating" format="integer" />
+    <attr name="accessibilityStatus" format="reference" />
   </declare-styleable>
 
   <declare-styleable name="BpkHorizontalNav">

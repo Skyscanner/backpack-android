@@ -38,6 +38,9 @@
     <item>High Subtitle</item>
   </string-array>
 
+  <string name="star_rating_accessibility_status">%.0f out of %d</string>
+  <string name="star_rating_decimal_accessibility_status">%.1f out of %d</string>
+
   <string name="bottom_nav_home">Home</string>
   <string name="bottom_nav_explore">Explore</string>
   <string name="bottom_nav_trips">Trips</string>
