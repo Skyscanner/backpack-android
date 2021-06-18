@@ -3,6 +3,9 @@
 > Place your changes below this line.
 >
 
+**Added:**
+- Accessibility support for `BpkStarRating` and `BpkStarRatingInteractive` - set the new `accessibilityStatus` attribute for better announcements.
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
