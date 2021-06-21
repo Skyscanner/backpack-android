@@ -19,9 +19,17 @@
 package net.skyscanner.backpack.starrating
 
 import android.content.Context
+import android.os.Build
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import android.view.accessibility.AccessibilityEvent
+import android.view.accessibility.AccessibilityNodeInfo
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
+import android.view.accessibility.AccessibilityNodeInfo.RangeInfo
+import android.widget.RatingBar
+import android.widget.SeekBar
 import kotlin.math.max
 import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
@@ -31,7 +39,7 @@ import net.skyscanner.backpack.util.createContextThemeWrapper
 open class BpkInteractiveStarRating @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : BpkStarRatingBase(
   context = createContextThemeWrapper(context, attrs, R.attr.bpkInteractiveStarRatingStyle),
   attrs = attrs,
@@ -41,6 +49,12 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
   full = R.drawable.bpk_star,
   starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl)
 ) {
+
+  init {
+    if (importantForAccessibility == IMPORTANT_FOR_ACCESSIBILITY_AUTO) {
+      importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
+    }
+  }
 
   var onRatingChangedListener: ((Float, Float) -> Unit)? = null
 
@@ -74,6 +88,65 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
     }
 
     return true
+  }
+
+  override fun performAccessibilityAction(action: Int, arguments: Bundle?): Boolean {
+    if (super.performAccessibilityAction(action, arguments)) {
+      return true
+    }
+
+    when (action) {
+      AccessibilityNodeInfo.ACTION_SCROLL_BACKWARD -> {
+        rating -= 1f
+        updateStateDescription()
+        return true
+      }
+      AccessibilityNodeInfo.ACTION_SCROLL_FORWARD -> {
+        rating += 1f
+        updateStateDescription()
+        return true
+      }
+    }
+
+    return false
+  }
+
+  override fun onInitializeAccessibilityEvent(event: AccessibilityEvent) {
+    super.onInitializeAccessibilityEvent(event)
+    event.itemCount = maxRating
+    event.currentItemIndex = rating.toInt()
+    if (event.eventType == AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED) {
+      updateStateDescription()
+    }
+  }
+
+  override fun getAccessibilityClassName(): CharSequence {
+    return RatingBar::class.java.name
+  }
+
+  override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
+    super.onInitializeAccessibilityNodeInfo(info)
+    val rangeInfo = RangeInfo.obtain(
+      RangeInfo.RANGE_TYPE_INT, 0f, maxRating.toFloat(), rating
+    )
+    info.rangeInfo = rangeInfo
+    if (rating > 0) {
+      info.addAction(AccessibilityAction.ACTION_SCROLL_BACKWARD)
+    }
+    if (rating < maxRating) {
+      info.addAction(AccessibilityAction.ACTION_SCROLL_FORWARD)
+    }
+    info.className = SeekBar::class.java.name
+    info.addAction(AccessibilityAction.ACTION_SET_PROGRESS)
+  }
+
+  private fun updateStateDescription() {
+    val text = getAccessibilityText()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      stateDescription = text
+    } else if (isAccessibilityFocused) {
+      announceForAccessibility(text)
+    }
   }
 
   interface OnRatingChangedListener : (Float, Float) -> Unit {

@@ -17,6 +17,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:contentDescription="Rating"
+    app:accessibilityStatus="@string/star_rating_accessibility_status"
     app:maxRating="5"
     app:rating="0.0" />
 
@@ -30,6 +32,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:contentDescription="Rating"
+    app:accessibilityStatus="@string/star_rating_accessibility_status"
     app:maxRating="5"
     app:rating="3" />
 
@@ -43,6 +47,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:contentDescription="Rating"
+    app:accessibilityStatus="@string/star_rating_accessibility_status"
     app:maxRating="5"
     app:rating="5" />
 
@@ -58,6 +64,8 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:layoutDirection="rtl"
+    android:contentDescription="Rating"
+    app:accessibilityStatus="@string/star_rating_accessibility_status"
     app:maxRating="5"
     app:rating="2" />
 
@@ -71,6 +79,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:contentDescription="Rating"
+    app:accessibilityStatus="@string/star_rating_accessibility_status"
     app:maxRating="8"
     app:rating="5" />
 

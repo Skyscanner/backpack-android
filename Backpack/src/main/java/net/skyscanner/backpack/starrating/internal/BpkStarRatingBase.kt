@@ -39,7 +39,7 @@ open class BpkStarRatingBase internal constructor(
   @DrawableRes empty: Int,
   @DrawableRes half: Int,
   @DrawableRes full: Int,
-  @Px private val starSize: Int
+  @Px private val starSize: Int,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
   private val empty: Drawable
@@ -65,6 +65,14 @@ open class BpkStarRatingBase internal constructor(
       update()
     }
 
+  var accessibilityStatusRes: Int? = null
+    set(value) {
+      field = value
+      if (importantForAccessibility == IMPORTANT_FOR_ACCESSIBILITY_AUTO && accessibilityStatusRes != null) {
+        importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_YES
+      }
+    }
+
   init {
     orientation = HORIZONTAL
     var starColor = context.getColor(R.color.__starRatingStarColor)
@@ -79,6 +87,7 @@ open class BpkStarRatingBase internal constructor(
       _rating = it.getFloat(R.styleable.BpkStarRating_rating, maxRating / 2f)
       starColor = it.getColor(R.styleable.BpkStarRating_starColor, starColor)
       starFilledColor = it.getColor(R.styleable.BpkStarRating_starFilledColor, starFilledColor)
+      accessibilityStatusRes = it.getResourceId(R.styleable.BpkStarRating_accessibilityStatus, 0).takeIf { it != 0 }
     }
 
     this.empty = getDrawable(empty, starColor)
@@ -91,6 +100,9 @@ open class BpkStarRatingBase internal constructor(
     super.onRtlPropertiesChanged(layoutDirection)
     update()
   }
+
+  protected fun getAccessibilityText(): String? =
+    accessibilityStatusRes?.let { context.resources.getString(it, rating, maxRating) }
 
   private fun update() {
     half.isAutoMirrored = layoutDirection == View.LAYOUT_DIRECTION_RTL
