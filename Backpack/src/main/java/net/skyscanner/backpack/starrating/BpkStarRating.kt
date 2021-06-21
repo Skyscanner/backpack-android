@@ -44,6 +44,8 @@ open class BpkStarRating @JvmOverloads constructor(
     val text = getAccessibilityText()
     if (text != null) {
       if (info.contentDescription != null) {
+        // append the content description to match other announcements.
+        // Using `announceForAccessibility` or similar methods didn't get announced when focused, so this is a workaround
         info.contentDescription = "$text ${info.contentDescription}"
       } else {
         info.contentDescription = text
