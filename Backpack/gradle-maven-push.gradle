@@ -1,7 +1,7 @@
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-def artifactoryURL = "https://artifactory.skyscannertools.net/artifactory/infrastructure-maven"
+def sonatypeURL = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
 
 task sourceJar(type: Jar) {
   from android.sourceSets.main.java.srcDirs
@@ -19,16 +19,16 @@ if (rootProject.file("local.properties").exists()) {
 
 afterEvaluate { project ->
 
-  project.ext.getJFrogUsername = {
-    def result = localProperties.getProperty("SKYSCANNER_ARTIFACTORY_OWNER")
+  project.ext.getOssrhUsername = {
+    def result = localProperties.getProperty("ossrhUsername")
     if (result == null) {
       return ""
     }
     return result
   }
 
-  project.ext.getJFrogPassword = {
-    def result = localProperties.getProperty("SKYSCANNER_ARTIFACTORY_TOKEN")
+  project.ext.getOssrhPassword = {
+    def result = localProperties.getProperty("ossrhPassword")
     if (result == null) {
       return ""
     }
@@ -83,16 +83,6 @@ afterEvaluate { project ->
         }
       }
     }
-
-    repositories {
-      maven {
-        url "$artifactoryURL"
-        credentials {
-          username "${project.getJFrogUsername()}"
-          password "${project.getJFrogPassword()}"
-        }
-      }
-    }
   }
 
   task checkMavenCredentials(type: Exec) {
@@ -103,8 +93,8 @@ afterEvaluate { project ->
                  '--fail',
                  '-I',
                  '-u',
-                 "${project.getJFrogUsername()}:${project.getJFrogPassword()}",
-                 "$artifactoryURL"])
+                 "${project.getOssrhUsername()}:${project.getOssrhPassword()}",
+                 "$sonatypeURL"])
   }
 }
 
