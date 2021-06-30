@@ -14,8 +14,11 @@ buildscript {
     classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:$dokka_version"
     classpath 'com.facebook.testing.screenshot:plugin:0.14.0'
     classpath "org.jlleitschuh.gradle:ktlint-gradle:10.1.0"
+    classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
   }
 }
+
+apply plugin: 'io.github.gradle-nexus.publish-plugin'
 
 allprojects {
   repositories {
@@ -45,6 +48,25 @@ subprojects {
     }
 
     check.dependsOn("ktlint")
+  }
+}
+
+def properties = new Properties()
+properties.putAll(System.getenv())
+if (rootProject.file("local.properties").exists()) {
+  properties.load(rootProject.file("local.properties").newDataInputStream())
+}
+
+nexusPublishing {
+  repositories {
+    sonatype {
+      stagingProfileId = properties.getProperty("sonatypeStagingProfileId")
+      username = properties.getProperty("ossrhUsername")
+      password = properties.getProperty("ossrhPassword")
+
+      nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+      snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+    }
   }
 }
 

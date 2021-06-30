@@ -5,7 +5,7 @@ apply plugin: 'org.jetbrains.dokka-android'
 apply from: 'gradle-maven-push.gradle'
 
 version = rootProject.ext.version
-group = 'com.github.skyscanner.backpack-android'
+group = 'net.skyscanner.backpack'
 
 repositories {
   google()
