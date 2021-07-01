@@ -107,4 +107,19 @@ class CalendarRangeSelectionTests {
       }
     }
   }
+
+  @Test
+  fun `disabled date cannot be selected`() {
+    val info = mapOf(
+      CalendarSettings.RangeSelection.range.start to CellInfo(disabled = true),
+    )
+
+    testCalendarWith(CalendarSettings.RangeSelection.copy(cellsInfo = info)) {
+      stateMachine.onClick(firstDay)
+
+      verify {
+        assertTrue(state.selection is CalendarSelection.None)
+      }
+    }
+  }
 }

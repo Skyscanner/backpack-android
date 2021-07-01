@@ -6,7 +6,6 @@ import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.firstDay
 import net.skyscanner.backpack.calendar2.lastDay
-import net.skyscanner.backpack.calendar2.rangeOf
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -63,5 +62,4 @@ class CalendarSingleSelectionTests {
       }
     }
   }
-
 }
