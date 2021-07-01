@@ -50,11 +50,11 @@ class CalendarSingleSelectionTests {
 
   @Test
   fun `disabled date cannot be selected`() {
-    val info = mapOf(
+    val disabledDates = mapOf(
       CalendarSettings.SingleSelection.range.start to CellInfo(disabled = true),
     )
 
-    testCalendarWith(CalendarSettings.SingleSelection.copy(cellsInfo = info)) {
+    testCalendarWith(CalendarSettings.SingleSelection.copy(cellsInfo = disabledDates)) {
       stateMachine.onClick(firstDay)
 
       verify {
