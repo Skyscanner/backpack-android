@@ -158,7 +158,7 @@ jobs:
             Thank you for your contribution.
             You can use the following dependency to test your application while we review your pull request:
 
-            `com.github.Skyscanner:backpack-android:${{ github.sha }}`
+            `net.skyscanner.backpack:backpack-android:${{ github.sha }}`
 
       - name: Get release tag
         if: contains('refs/tags/', github.ref)

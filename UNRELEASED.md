@@ -2,6 +2,8 @@
 
 > Place your changes below this line.
 >
+**Breaking:**
+- Now publishing via Maven Central
 
 **Added:**
 - Accessibility support for `BpkStarRating` and `BpkStarRatingInteractive` - set the new `accessibilityStatus` attribute for better announcements.
