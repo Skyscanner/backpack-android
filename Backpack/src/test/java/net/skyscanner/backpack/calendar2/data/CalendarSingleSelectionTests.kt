@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.calendar2.data
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
@@ -14,9 +15,13 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class CalendarSingleSelectionTests {
 
+  private val singleSelection = CalendarSettings.Default.copy(
+    selectionMode = CalendarParams.SelectionMode.Single,
+  )
+
   @Test
   fun `date can be selected`() {
-    testCalendarWith(CalendarSettings.SingleSelection) {
+    testCalendarWith(singleSelection) {
       stateMachine.onClick(firstDay)
 
       verify {
@@ -27,7 +32,7 @@ class CalendarSingleSelectionTests {
 
   @Test
   fun `when selection is in place cells have correct state`() {
-    testCalendarWith(CalendarSettings.SingleSelection) {
+    testCalendarWith(singleSelection) {
       stateMachine.onClick(firstDay)
 
       verify {
@@ -38,7 +43,7 @@ class CalendarSingleSelectionTests {
 
   @Test
   fun `selected date can be changed`() {
-    testCalendarWith(CalendarSettings.SingleSelection) {
+    testCalendarWith(singleSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(lastDay)
 
@@ -51,10 +56,10 @@ class CalendarSingleSelectionTests {
   @Test
   fun `disabled date cannot be selected`() {
     val disabledDates = mapOf(
-      CalendarSettings.SingleSelection.range.start to CellInfo(disabled = true),
+      singleSelection.range.start to CellInfo(disabled = true),
     )
 
-    testCalendarWith(CalendarSettings.SingleSelection.copy(cellsInfo = disabledDates)) {
+    testCalendarWith(singleSelection.copy(cellsInfo = disabledDates)) {
       stateMachine.onClick(firstDay)
 
       verify {

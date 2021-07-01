@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.calendar2.data
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
@@ -15,9 +16,13 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class CalendarRangeSelectionTests {
 
+  private val rangeSelection = CalendarSettings.Default.copy(
+    selectionMode = CalendarParams.SelectionMode.Range,
+  )
+
   @Test
   fun `when range is opened selection is correct`() {
-    testCalendarWith(CalendarSettings.RangeSelection) {
+    testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
 
       verify {
@@ -28,7 +33,7 @@ class CalendarRangeSelectionTests {
 
   @Test
   fun `when range is closed selection is correct`() {
-    testCalendarWith(CalendarSettings.RangeSelection) {
+    testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(lastDay)
 
@@ -39,8 +44,8 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun `when range is withing ther same date selection is correct`() {
-    testCalendarWith(CalendarSettings.RangeSelection) {
+  fun `when range is withing the same date selection is correct`() {
+    testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(firstDay)
 
@@ -52,7 +57,7 @@ class CalendarRangeSelectionTests {
 
   @Test
   fun `when range is closing before start a new range is created`() {
-    testCalendarWith(CalendarSettings.RangeSelection) {
+    testCalendarWith(rangeSelection) {
       stateMachine.onClick(lastDay)
       stateMachine.onClick(firstDay)
       stateMachine.onClick(firstDay)
@@ -64,7 +69,7 @@ class CalendarRangeSelectionTests {
 
   @Test
   fun `range can be reselected`() {
-    testCalendarWith(CalendarSettings.RangeSelection) {
+    testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(lastDay)
       stateMachine.onClick(firstDay)
@@ -78,9 +83,9 @@ class CalendarRangeSelectionTests {
   @Test
   fun `when range is selected cells have correct state`() {
     val disabledDates = mapOf(
-      CalendarSettings.RangeSelection.range.start.plusDays(1) to CellInfo(disabled = true),
+      rangeSelection.range.start.plusDays(1) to CellInfo(disabled = true),
     )
-    testCalendarWith(CalendarSettings.RangeSelection.copy(cellsInfo = disabledDates)) {
+    testCalendarWith(rangeSelection.copy(cellsInfo = disabledDates)) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(lastDay)
 
@@ -101,7 +106,7 @@ class CalendarRangeSelectionTests {
 
   @Test
   fun `when range is withing the same date cells have correct state`() {
-    testCalendarWith(CalendarSettings.RangeSelection) {
+    testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(firstDay)
 
@@ -114,10 +119,10 @@ class CalendarRangeSelectionTests {
   @Test
   fun `disabled date cannot be selected`() {
     val disabledDates = mapOf(
-      CalendarSettings.RangeSelection.range.start to CellInfo(disabled = true),
+      rangeSelection.range.start to CellInfo(disabled = true),
     )
 
-    testCalendarWith(CalendarSettings.RangeSelection.copy(cellsInfo = disabledDates)) {
+    testCalendarWith(rangeSelection.copy(cellsInfo = disabledDates)) {
       stateMachine.onClick(firstDay)
 
       verify {

@@ -42,20 +42,4 @@ object CalendarSettings {
     selectionMode = CalendarParams.SelectionMode.Single,
     locale = Locale.ENGLISH,
   )
-
-  val DisabledSelection = Default.copy(
-    selectionMode = CalendarParams.SelectionMode.Disabled,
-  )
-
-  val SingleSelection = Default.copy(
-    selectionMode = CalendarParams.SelectionMode.Single,
-  )
-
-  val RangeSelection = Default.copy(
-    selectionMode = CalendarParams.SelectionMode.Range,
-  )
-
-  val RussianLocale = Default.copy(
-    locale = Locale.forLanguageTag("ru-RU"),
-  )
 }
