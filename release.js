@@ -112,7 +112,9 @@ async function release() {
       },
     };
     await releaseit(releaseOptions);
-    childProcess.execSync('./gradlew :Backpack:publish');
+    const publishTask = ':Backpack:publishMavenPublicationToSonatypeRepository';
+    const releaseTask = 'closeAndReleaseSonatypeStagingRepository';
+    childProcess.execSync(`./gradlew ${publishTask} ${releaseTask}`);
   } catch (exc) {
     console.error(exc);
     process.exit(1);

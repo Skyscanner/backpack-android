@@ -58,6 +58,9 @@ captures/
 # Keystore files
 *.jks
 
+# GPG keys
+*.gpg
+
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 
