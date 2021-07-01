@@ -72,8 +72,8 @@ internal fun CalendarCells(
         days = entry.value.sortedBy { date -> date.dayOfMonth },
         yearMonth = entry.key,
         locale = params.locale,
+        monthsFormatter = params.monthsFormatter,
         weekFields = params.weekFields,
-        monthsTextStyle = params.monthsText,
         selection = selection,
       ) { yearMonth, date ->
         CalendarCellDay(

@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2
 
+import java.text.SimpleDateFormat
 import java.util.Locale
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.LocalDate
@@ -31,13 +32,16 @@ data class CalendarParams(
   val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
-  val dayOfWeekAccessibilityText: TextStyle = TextStyle.FULL,
-  val monthsText: TextStyle = TextStyle.FULL,
+  val dayOfWeekAccessibilityText: TextStyle = TextStyle.FULL_STANDALONE,
+//  val monthsText: TextStyle = TextStyle.FULL_STANDALONE, inaccessible for now,
+//  see https://github.com/ThreeTen/threetenbp/issues/55
   val dateAccessibilityText: TextStyle = TextStyle.FULL,
   val now: LocalDate = LocalDate.now(),
 ) {
 
   internal val weekFields = WeekFields.of(locale)
+
+  internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
 
   @ExperimentalBackpackApi
   enum class SelectionMode {
