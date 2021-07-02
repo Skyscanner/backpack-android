@@ -2,6 +2,16 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 32.0.0
+
+**Breaking:**
+
+- Now publishing on Maven Central
+
+**Added:**
+
+- Accessibility support for `BpkStarRating` and `BpkStarRatingInteractive` - set the new `accessibilityStatus` attribute for better announcements.
+
 # 31.0.1
 
 **Fixed:**
