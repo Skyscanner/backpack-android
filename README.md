@@ -4,24 +4,24 @@
 
 [![CI Status](https://github.com/Skyscanner/backpack-android/workflows/CI/badge.svg)](https://github.com/Skyscanner/backpack-android/actions)
 
-[![Release](https://jitpack.io/v/skyscanner/backpack-android.svg)](https://jitpack.io/#skyscanner/backpack-android)
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
 [![license](https://img.shields.io/github/license/Skyscanner/backpack-android.svg)](https://github.com/Skyscanner/backpack-android)
 [![platform](https://img.shields.io/badge/platform-android-green.svg)](https://github.com/Skyscanner/backpack-android)
 
 ## Installation
 
-Backpack is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-android). To install
+Backpack is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). To install
 all of it, add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-implementation 'com.github.skyscanner:backpack-android:31.0.1'
+implementation 'net.skyscanner.backpack:backpack-android:31.0.1'
 ```
 
-If your app resolves dependencies through Jitpack you're all set, if not add in your root `build.gradle`
+If your app resolves dependencies through Maven Central you're all set, if not add in your root `build.gradle`
 
 ```gradle
 repositories {
-    maven { url 'https://jitpack.io' }
+    mavenCentral()
 }
 ```
 

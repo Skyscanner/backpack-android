@@ -18,7 +18,6 @@
     "postemulator": "npm run emulator:kill",
     "prerelease": "npm ci && npm run emulator",
     "release": "node release.js",
-    "postrelease": "node postrelease.js > /dev/null 2>&1 &",
     "lint": "eslint . --ext .js,.jsx",
     "prebuild": "npm run lint",
     "build": "gulp && npm run spellcheck",

@@ -1,82 +1,69 @@
 apply plugin: 'maven-publish'
-
-def artifactoryURL = "https://artifactory.skyscannertools.net/artifactory/infrastructure-maven"
+apply plugin: 'signing'
 
 task sourceJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier "source"
+  from android.sourceSets.main.java.srcDirs
+  classifier "source"
 }
 
-def localProperties = new Properties()
-if (rootProject.file("local.properties").exists()) {
-  localProperties.load(rootProject.file("local.properties").newDataInputStream())
+artifacts {
+  archives sourceJar
 }
 
 afterEvaluate { project ->
+  publishing {
+    publications {
+      maven(MavenPublication) {
+        groupId group
+        artifactId 'backpack-android'
+        version "$version"
 
-    project.ext.getJFrogUsername = {
-      def result = localProperties.getProperty("SKYSCANNER_ARTIFACTORY_OWNER")
-      if (result == null) {
-        return ""
-      }
-      return result
-    }
+        from components.release
+        artifact sourceJar
 
-    project.ext.getJFrogPassword = {
-      def result = localProperties.getProperty("SKYSCANNER_ARTIFACTORY_TOKEN")
-      if (result == null) {
-        return ""
-      }
-      return result
-    }
+        pom {
+          name = 'backpack-android'
+          description = "Backpack is a collection of design resources, reusable components and guidelines for creating Skyscanner's products."
+          url = 'https://github.com/Skyscanner/backpack-android'
 
-    publishing {
-        publications {
-            maven(MavenPublication) {
-                groupId 'com.github.skyscanner'
-                artifactId 'backpack-android'
-                version "$version"
-                description description
-
-              artifact("$buildDir/outputs/aar/Backpack-release.aar")
-                artifact sourceJar
-
-                pom.withXml {
-
-                    def dependenciesNode = asNode().appendNode('dependencies')
-                    //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
-                    project.configurations.implementation.allDependencies.each {
-                        if (it.group != null && (it.name != null || "unspecified" == it.name) && it.version != null) {
-                            def dependencyNode = dependenciesNode.appendNode('dependency')
-                            dependencyNode.appendNode('groupId', it.group)
-                            dependencyNode.appendNode('artifactId', it.name)
-                            dependencyNode.appendNode('version', it.version)
-                        }
-                    }
-                }
+          licenses {
+            license {
+              name = 'The Apache License, Version 2.0'
+              url = 'https://github.com/Skyscanner/backpack-android/blob/main/LICENSE.txt'
             }
-        }
-
-        repositories {
-            maven {
-                url "$artifactoryURL"
-                credentials {
-                    username "${project.getJFrogUsername()}"
-                    password "${project.getJFrogPassword()}"
-                }
+          }
+          developers {
+            developer {
+              id = 'skyscanner'
+              name = 'Skyscanner Open Source'
+              email = 'koalasquad@skyscanner.net'
             }
+          }
+          scm {
+            connection = 'scm:git:git://github.com/Skyscanner/backpack-android.git'
+            developerConnection = 'scm:git:ssh://github.com/Skyscanner/backpack-android.git'
+            url = 'http://github.com/Skyscanner/backpack-android/tree/main'
+          }
         }
+      }
     }
-
-    task checkMavenCredentials(type: Exec) {
-        outputs.upToDateWhen { false }
-        workingDir './'
-        commandLine(['curl',
-                     '--silent',
-                     '--fail',
-                     '-I',
-                     '-u',
-                     "${project.getJFrogUsername()}:${project.getJFrogPassword()}",
-                     "$artifactoryURL"])
-    }
+  }
 }
+
+tasks.register('checkMavenCredentials') {
+  doLast {
+    def props = ["ossrhUsername", "ossrhPassword", "signing.keyId", "signing.password", "signing.secretKeyRingFile", "sonatypeStagingProfileId"]
+    if (props.any { rootProject.ext[it]?.isEmpty() }) {
+      ant.fail("Missing maven credentials")
+    }
+  }
+}
+
+ext["signing.keyId"] = rootProject.ext["signing.keyId"]
+ext["signing.password"] = rootProject.ext["signing.password"]
+ext["signing.secretKeyRingFile"] = rootProject.ext["signing.secretKeyRingFile"]
+
+signing {
+  sign publishing.publications
+}
+

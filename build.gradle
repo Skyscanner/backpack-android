@@ -5,7 +5,6 @@ buildscript {
   repositories {
     google()
     mavenCentral()
-    maven { url 'https://jitpack.io' }
     maven { url 'https://plugins.gradle.org/m2/' }
   }
   dependencies {
@@ -14,8 +13,12 @@ buildscript {
     classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:$dokka_version"
     classpath 'com.facebook.testing.screenshot:plugin:0.14.0'
     classpath "org.jlleitschuh.gradle:ktlint-gradle:10.1.0"
+    classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
   }
 }
+
+apply plugin: 'io.github.gradle-nexus.publish-plugin'
+apply from: 'publish-root.gradle'
 
 allprojects {
   repositories {
@@ -46,11 +49,6 @@ subprojects {
 
     check.dependsOn("ktlint")
   }
-}
-
-task install {
-  dependsOn ':Backpack:assembleRelease'
-  dependsOn ':Backpack:publishToMavenLocal'
 }
 
 task clean(type: Delete) {

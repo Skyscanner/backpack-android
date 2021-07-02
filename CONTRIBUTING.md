@@ -77,7 +77,7 @@ To run connected tests run
 To test your branch in a codebase, use the dependency in the below format.
 
 ```
-implementation 'com.github.<github-username>:backpack-android:<branch-name>'
+implementation 'net.skyscanner.backpack.<github-username>:backpack-android:<branch-name>'
 ```
 
 ## Taking screenshots
@@ -128,4 +128,3 @@ Run `npm run docs:clean` to remove generated docs.
 
 
 [1]: https://github.com/creationix/nvm
-[3]: https://jitpack.io/#Skyscanner/backpack-android

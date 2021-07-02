@@ -101,7 +101,6 @@ Snackbar
 FooterViewCalendarStory
 
 # Company names, libraries etc.
-Artifactory
 Cocoapods
 CommonJS
 ESLint
@@ -111,6 +110,7 @@ Homebrew
 iOS
 LastPass
 Lerna
+Maven
 npm
 nvm
 Podfile
@@ -718,7 +718,6 @@ getBarLabel
 getBarSelection
 
 Kotlin
-Jitpack
 drawables
 configs
 HockeyApp
