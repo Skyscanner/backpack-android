@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 32.0.1
+
+**Fixed:**
+
+- Publish public dependencies with library
+
 # 32.0.0
 
 **Breaking:**

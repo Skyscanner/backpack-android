@@ -14,7 +14,7 @@ Backpack is available through [Maven Central](https://search.maven.org/artifact/
 all of it, add the following line to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-implementation 'net.skyscanner.backpack:backpack-android:32.0.0'
+implementation 'net.skyscanner.backpack:backpack-android:32.0.1'
 ```
 
 If your app resolves dependencies through Maven Central you're all set, if not add in your root `build.gradle`
