@@ -41,7 +41,6 @@ abstract class BpkButtonBase internal constructor(
   abstract var icon: Drawable?
 
   init {
-    isAllCaps = true
     isClickable = isEnabled
     font.applyTo(this)
   }

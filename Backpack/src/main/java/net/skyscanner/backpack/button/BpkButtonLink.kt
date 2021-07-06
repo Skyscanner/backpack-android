@@ -60,7 +60,6 @@ open class BpkButtonLink @JvmOverloads constructor(
   var uppercase: Boolean = true
     set(value) {
       field = value
-      isAllCaps = value
     }
 
   final override var icon: Drawable?
