@@ -40,7 +40,7 @@ open class BpkButton(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int,
-  type: Type
+  type: Type,
 ) : BpkButtonBase(context, attrs, defStyleAttr) {
 
   constructor(context: Context) : this(context, null, 0, Type.Primary)
@@ -69,18 +69,22 @@ open class BpkButton(
       val paddingVertical = paddingVertical
 
       if (iconPosition == ICON_ONLY) {
-        paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+        paddingHorizontal = paddingHorizontalIconOnly
+        compoundDrawablePadding = 0
       } else {
-        compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+        compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
       }
 
-      setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
+      setPaddingRelative(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
       applyStyle(type.createStyle(context))
     }
 
   @Dimension
-  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) -
-    resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+  private val paddingHorizontalIconOnly = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+    resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
+
+  @Dimension
+  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
 
   @Dimension
   private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
@@ -200,7 +204,7 @@ open class BpkButton(
 
   enum class Type(
     internal val id: Int,
-    internal val createStyle: (Context) -> ButtonStyle
+    internal val createStyle: (Context) -> ButtonStyle,
   ) {
     Primary(
       id = 0,

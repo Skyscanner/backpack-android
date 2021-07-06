@@ -14,7 +14,7 @@
     android:layout_height="wrap_content"
     android:text="Icon end"
     app:buttonIconPosition="end"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
@@ -24,7 +24,7 @@
     android:layout_height="wrap_content"
     android:text="Icon start"
     app:buttonIconPosition="start"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
@@ -33,7 +33,7 @@
     android:id="@+id/btn_icon"
     android:layout_height="wrap_content"
     app:buttonIconPosition="icon_only"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
@@ -42,7 +42,7 @@
     android:layout_height="wrap_content"
     android:text="Icon end with a really long text abcdefghi"
     app:buttonIconPosition="end"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
@@ -51,7 +51,7 @@
     android:layout_height="wrap_content"
     android:text="Icon end with a break in text abcdefghijklmnopqrstuvwxyz"
     app:buttonIconPosition="end"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
@@ -60,7 +60,7 @@
     android:layout_height="wrap_content"
     android:text="Icon start with a really long text abcdefg"
     app:buttonIconPosition="start"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonType="primary"/>
 
   <net.skyscanner.backpack.button.BpkButton
@@ -69,7 +69,7 @@
     android:layout_height="wrap_content"
     android:text="Icon start with a break in text abcdefghijklmnopqrstuvwxyz"
     app:buttonIconPosition="start"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonType="primary"/>
 
 </LinearLayout>

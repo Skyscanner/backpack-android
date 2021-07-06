@@ -21,6 +21,7 @@ package net.skyscanner.backpack.button.internal
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import androidx.appcompat.widget.AppCompatButton
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.sizedDrawable
 
@@ -29,7 +30,7 @@ abstract class BpkButtonWithIcon internal constructor(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int
-) : BpkButtonLayout(context, attrs, defStyleAttr) {
+) : AppCompatButton(context, attrs, defStyleAttr) {
 
   internal var iconDrawablePosition: Int = ICON_POSITION_END
     set(value) {

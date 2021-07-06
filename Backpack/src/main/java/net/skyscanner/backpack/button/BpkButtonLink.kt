@@ -90,7 +90,7 @@ open class BpkButtonLink @JvmOverloads constructor(
       }
     this.uppercase = uppercase
 
-    compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+    compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
 
     val style = ButtonStyles.Link(context)
     background = style.getButtonBackground(isEnabled, iconPosition)

@@ -20,7 +20,9 @@ package net.skyscanner.backpack.button.internal
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.TextUtils
 import android.util.AttributeSet
+import android.view.Gravity
 import net.skyscanner.backpack.text.BpkText
 
 internal const val ICON_POSITION_START = 0
@@ -41,6 +43,9 @@ abstract class BpkButtonBase internal constructor(
   abstract var icon: Drawable?
 
   init {
+    maxLines = 1
+    gravity = Gravity.CENTER
+    ellipsize = TextUtils.TruncateAt.END
     isClickable = isEnabled
     font.applyTo(this)
   }

@@ -51,7 +51,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="With icon"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonIconPosition="end"
     app:buttonType="outline" />
 
@@ -60,7 +60,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="With icon"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonIconPosition="start"
     app:buttonType="outline" />
 
@@ -68,7 +68,7 @@
     android:id="@+id/btn_icon"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonIconPosition="icon_only"
     app:buttonType="outline" />
 
