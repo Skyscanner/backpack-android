@@ -35,7 +35,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
-import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.darken
 import net.skyscanner.backpack.util.rippleDrawable
@@ -49,15 +48,17 @@ internal class ButtonStyle(
   @ColorInt private val strokeColorPressed: Int,
   @ColorInt private val disabledBgColor: Int,
   @ColorInt private val disabledTextColor: Int,
+  @ColorInt private val loadingTextColor: Int,
   @Px private val strokeWidth: Int,
-  @DrawableRes private val stateListAnimatorRes: Int
+  @DrawableRes private val stateListAnimatorRes: Int,
 ) {
 
-  val contentColor: ColorStateList = colorStateList(
-    color = textColor,
-    pressedColor = darken(textColor, .1f),
-    disabledColor = disabledTextColor
-  )
+  fun getContentColor(loading: Boolean): ColorStateList =
+    colorStateList(
+      color = textColor,
+      pressedColor = darken(textColor, .1f),
+      disabledColor = if (loading) loadingTextColor else disabledTextColor
+    )
 
   fun getStateListAnimator(): StateListAnimator? =
     AnimatorInflater.loadStateListAnimator(context, stateListAnimatorRes)
@@ -70,16 +71,10 @@ internal class ButtonStyle(
       context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
     }
 
-    val strokeWidthPressed = if (strokeWidth > 0) {
-      strokeWidth + ResourcesUtil.dpToPx(1, context)
-    } else {
-      0
-    }
-
     fun roundRectDrawable(
       @ColorInt color: Int,
       @ColorInt strokeColor: Int = Color.TRANSPARENT,
-      @Px strokeWidth: Int = 0
+      @Px strokeWidth: Int = 0,
     ): Drawable = GradientDrawable().apply {
       setColor(color)
       cornerRadius = radius
@@ -94,7 +89,7 @@ internal class ButtonStyle(
           pressed = roundRectDrawable(
             color = bgColor,
             strokeColor = strokeColorPressed,
-            strokeWidth = strokeWidthPressed
+            strokeWidth = strokeWidth
           ),
           drawable = roundRectDrawable(
             color = bgColor,
@@ -123,8 +118,9 @@ internal class ButtonStyle(
       @ColorInt defaultStrokeColorPressed: Int,
       @ColorInt disabledBgColor: Int,
       @ColorInt disabledTextColor: Int,
+      @ColorInt loadingTextColor: Int,
       @Px strokeWidth: Int,
-      @DrawableRes stateListAnimatorRes: Int
+      @DrawableRes stateListAnimatorRes: Int,
     ): ButtonStyle {
       var bgColor = defaultBgColor
       var textColor = defaultTextColor
@@ -146,6 +142,7 @@ internal class ButtonStyle(
         strokeColorPressed = strokeColorPressed,
         disabledBgColor = disabledBgColor,
         disabledTextColor = disabledTextColor,
+        loadingTextColor = loadingTextColor,
         stateListAnimatorRes = stateListAnimatorRes,
         strokeWidth = strokeWidth
       )
@@ -160,8 +157,9 @@ internal class ButtonStyle(
       @ColorRes strokeColorPressedRes: Int = strokeColorRes,
       @ColorRes disabledBgColorRes: Int,
       @ColorRes disabledTextColorRes: Int,
+      @ColorRes loadingTextColor: Int,
       @DimenRes strokeWidthRes: Int = R.dimen.bpk_internal_spacing_zero,
-      @DrawableRes stateListAnimatorRes: Int = R.drawable.bpk_button_state_animator_zero
+      @DrawableRes stateListAnimatorRes: Int = R.drawable.bpk_button_state_animator_zero,
     ): ButtonStyle {
 
       var typedArray: TypedArray? = null
@@ -181,6 +179,7 @@ internal class ButtonStyle(
           defaultStrokeColorPressed = context.getColor(strokeColorPressedRes),
           disabledBgColor = context.getColor(disabledBgColorRes),
           disabledTextColor = context.getColor(disabledTextColorRes),
+          loadingTextColor = context.getColor(loadingTextColor),
           strokeWidth = context.resources.getDimensionPixelSize(strokeWidthRes),
           stateListAnimatorRes = stateListAnimatorRes
         )
@@ -192,7 +191,7 @@ internal class ButtonStyle(
     fun fromAttributes(
       context: Context,
       typedArray: TypedArray?,
-      fallback: ButtonStyle
+      fallback: ButtonStyle,
     ): ButtonStyle = fromTypedArray(
       context = context,
       typedArray = typedArray,
@@ -202,6 +201,7 @@ internal class ButtonStyle(
       defaultStrokeColorPressed = fallback.strokeColorPressed,
       disabledBgColor = fallback.disabledBgColor,
       disabledTextColor = fallback.disabledTextColor,
+      loadingTextColor = fallback.loadingTextColor,
       strokeWidth = fallback.strokeWidth,
       stateListAnimatorRes = fallback.stateListAnimatorRes
     )

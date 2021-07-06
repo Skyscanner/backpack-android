@@ -106,6 +106,9 @@ open class BpkButton(
       field = value
       updateEnabledState()
       updateIconState()
+      if (this::style.isInitialized) {
+        applyStyle(style)
+      }
     }
 
   private lateinit var style: ButtonStyle
@@ -175,7 +178,7 @@ open class BpkButton(
   private fun applyStyle(style: ButtonStyle) {
     this.style = style
     background = style.getButtonBackground(isEnabled, iconPosition)
-    setTextColor(style.contentColor)
+    setTextColor(style.getContentColor(loading))
 
     if (isEnabled) {
       this.stateListAnimator = style.getStateListAnimator()
