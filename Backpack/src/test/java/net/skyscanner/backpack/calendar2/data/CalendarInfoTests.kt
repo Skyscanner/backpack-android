@@ -5,7 +5,7 @@ import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
-import net.skyscanner.backpack.calendar2.extension.toList
+import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -17,7 +17,7 @@ class CalendarInfoTests {
   @Test
   fun `if date is disabled cell has correct state`() {
     val params = CalendarSettings.Default.copy(
-      cellsInfo = CalendarSettings.Default.range.toList().associateWith {
+      cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
         CellInfo(disabled = true)
       }
     )
@@ -36,7 +36,7 @@ class CalendarInfoTests {
   @Test
   fun `if date with label cell has correct state`() {
     val params = CalendarSettings.Default.copy(
-      cellsInfo = CalendarSettings.Default.range.toList().associateWith {
+      cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
         CellInfo(label = it.dayOfMonth.toString())
       }
     )
@@ -57,7 +57,7 @@ class CalendarInfoTests {
   fun `if date with status as label cell has correct state`() {
     val statuses = CellStatus.values()
     val params = CalendarSettings.Default.copy(
-      cellsInfo = CalendarSettings.Default.range.toList().associateWith {
+      cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
         CellInfo(status = statuses[it.dayOfMonth % statuses.size], style = CellStatusStyle.Label)
       }
     )
@@ -79,7 +79,7 @@ class CalendarInfoTests {
   fun `if date with status as background cell has correct state`() {
     val statuses = CellStatus.values()
     val params = CalendarSettings.Default.copy(
-      cellsInfo = CalendarSettings.Default.range.toList().associateWith {
+      cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
         CellInfo(status = statuses[it.dayOfMonth % statuses.size], style = CellStatusStyle.Background)
       }
     )

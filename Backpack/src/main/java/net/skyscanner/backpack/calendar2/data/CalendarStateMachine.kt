@@ -21,7 +21,6 @@ package net.skyscanner.backpack.calendar2.data
 import java.util.Locale
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.plus
 import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarParams
@@ -40,7 +39,7 @@ internal interface CalendarStateMachine : CalendarComponent, StateMachine<Calend
 internal fun CalendarStateMachine(
   scope: CoroutineScope,
   initialParams: CalendarParams,
-  dispatcher: CoroutineDispatcher = Dispatchers.Default,
+  dispatcher: CoroutineDispatcher,
 ): CalendarStateMachine {
 
   val fsm = MutableStateMachine<CalendarState, Nothing>(scope + dispatcher, CalendarState(initialParams))
@@ -74,7 +73,6 @@ internal fun CalendarStateMachine(
 }
 
 internal fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState {
-  if (params.selectionMode == CalendarParams.SelectionMode.Disabled) return this
   if (date.info.disabled) return this
 
   val selection = when (params.selectionMode) {

@@ -18,14 +18,27 @@
 
 package net.skyscanner.backpack.calendar2.extension
 
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.LocalDate
+import org.threeten.bp.temporal.ChronoUnit
+import org.threeten.bp.temporal.TemporalUnit
 
-internal fun ClosedRange<LocalDate>.toList(): List<LocalDate> {
-  val result = mutableListOf<LocalDate>()
-  var current = start
-  while (current != endInclusive) {
-    result += current
-    current = current.plusDays(1)
+@ExperimentalBackpackApi
+fun ClosedRange<LocalDate>.toIterable(
+  amount: Long = 1L,
+  unit: TemporalUnit = ChronoUnit.DAYS,
+): Iterable<LocalDate> =
+  object : Iterable<LocalDate> {
+    override fun iterator(): Iterator<LocalDate> = object : Iterator<LocalDate> {
+
+      var current = start
+
+      override fun hasNext(): Boolean =
+        current <= endInclusive
+
+      override fun next(): LocalDate {
+        current = current.plus(amount, unit)
+        return current
+      }
+    }
   }
-  return result
-}

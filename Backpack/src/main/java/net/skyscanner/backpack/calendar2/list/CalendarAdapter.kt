@@ -35,7 +35,7 @@ internal class CalendarAdapter(
   private val output: Consumer<CalendarCell.Day>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<CalendarCells> {
 
-  private var data: CalendarCells = CalendarCells()
+  private var data: CalendarCells = CalendarCells(emptyList())
 
   override fun invoke(data: CalendarCells) {
     val calculator = CalendarDiffCalculator(this.data, data)

@@ -51,6 +51,7 @@ class BpkCalendar private constructor(
   private val scope: CoroutineScope,
   private val stateMachine: CalendarStateMachine = CalendarStateMachine(
     scope = scope,
+    dispatcher = Dispatchers.Default,
     initialParams = CalendarParams(
       range = LocalDate.now() - Period.ofYears(1)..LocalDate.now() + Period.ofYears(1),
       selectionMode = CalendarParams.SelectionMode.Range,

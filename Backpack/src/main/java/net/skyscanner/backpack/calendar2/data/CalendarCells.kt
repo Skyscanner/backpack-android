@@ -20,12 +20,12 @@ package net.skyscanner.backpack.calendar2.data
 
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.extension.toList
+import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.calendar2.extension.yearMonth
 import org.threeten.bp.LocalDate
 
 internal data class CalendarCells(
-  private val months: List<CalendarMonth> = emptyList(),
+  private val months: List<CalendarMonth>,
 ) {
 
   val size: Int = months.sumBy { it.cells.size }
@@ -64,7 +64,7 @@ internal fun CalendarCells(
 ): CalendarCells {
   val months = params
     .range
-    .toList()
+    .toIterable()
     .groupBy { date -> date.yearMonth() }
     .toSortedMap()
     .map { entry ->

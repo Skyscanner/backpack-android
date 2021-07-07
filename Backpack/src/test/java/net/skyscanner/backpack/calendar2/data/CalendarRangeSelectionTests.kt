@@ -60,9 +60,9 @@ class CalendarRangeSelectionTests {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(lastDay)
       stateMachine.onClick(firstDay)
-      stateMachine.onClick(firstDay)
+      stateMachine.onClick(lastDay)
       verify {
-        assertEquals(CalendarSelection.Range(firstDay.date, firstDay.date), state.selection)
+        assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), state.selection)
       }
     }
   }

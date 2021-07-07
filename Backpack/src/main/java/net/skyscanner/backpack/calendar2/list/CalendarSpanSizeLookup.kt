@@ -25,7 +25,7 @@ import net.skyscanner.backpack.util.Consumer
 
 internal class CalendarSpanSizeLookup : GridLayoutManager.SpanSizeLookup(), Consumer<CalendarCells> {
 
-  private var data: CalendarCells = CalendarCells()
+  private var data: CalendarCells = CalendarCells(emptyList())
   val totalSpans = NUM_COLUMNS
 
   override fun invoke(data: CalendarCells) {
