@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.button
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.IntDef
@@ -62,12 +61,6 @@ open class BpkButtonLink @JvmOverloads constructor(
       field = value
     }
 
-  final override var icon: Drawable?
-    get() = iconDrawable
-    set(value) {
-      iconDrawable = value
-    }
-
   init {
     var iconPosition: Int = iconPosition
     var icon: Drawable? = null
@@ -81,7 +74,7 @@ open class BpkButtonLink @JvmOverloads constructor(
         }
       }
     this.iconPosition = iconPosition
-    this.iconDrawable = icon
+    this.icon = icon
 
     var uppercase = true
     this.context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButtonLink, defStyleAttr, 0)
@@ -90,7 +83,7 @@ open class BpkButtonLink @JvmOverloads constructor(
       }
     this.uppercase = uppercase
 
-    compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+    iconPadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
 
     val style = ButtonStyles.Link(context)
     background = style.getButtonBackground(isEnabled, iconPosition)
@@ -100,15 +93,5 @@ open class BpkButtonLink @JvmOverloads constructor(
       (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
 
     setPadding(0, paddingVertical, 0, paddingVertical)
-  }
-
-  override fun setTextColor(color: Int) {
-    super.setTextColor(color)
-    icon?.setTintList(ColorStateList.valueOf(color))
-  }
-
-  override fun setTextColor(colors: ColorStateList) {
-    super.setTextColor(colors)
-    icon?.setTintList(colors)
   }
 }

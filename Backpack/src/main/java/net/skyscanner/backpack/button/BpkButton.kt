@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.button
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.Dimension
@@ -68,11 +67,11 @@ open class BpkButton(
       var paddingHorizontal = paddingHorizontal
       val paddingVertical = paddingVertical
 
-      if (iconPosition == ICON_ONLY) {
+      if (value == ICON_ONLY) {
         paddingHorizontal = paddingHorizontalIconOnly
-        compoundDrawablePadding = 0
+        iconPadding = 0
       } else {
-        compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+        iconPadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
       }
 
       setPaddingRelative(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
@@ -90,11 +89,10 @@ open class BpkButton(
   private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
     (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
 
-  final override var icon: Drawable? = null
-    set(value) {
-      field = value
-      updateIconState()
-    }
+  override fun setIcon(icon: Drawable?) {
+    super.setIcon(icon)
+    updateIconState()
+  }
 
   private val progress by unsafeLazy {
     CircularProgressDrawable(context).apply {
@@ -129,7 +127,7 @@ open class BpkButton(
     var type = type
     var style: ButtonStyle = type.createStyle(context)
     var loading = loading
-    var icon = iconDrawable
+    var icon = getIcon()
     var iconPosition = iconPosition
 
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
@@ -157,16 +155,6 @@ open class BpkButton(
     applyStyle(style)
   }
 
-  override fun setTextColor(color: Int) {
-    super.setTextColor(color)
-    icon?.setTintList(ColorStateList.valueOf(color))
-  }
-
-  override fun setTextColor(colors: ColorStateList) {
-    super.setTextColor(colors)
-    icon?.setTintList(colors)
-  }
-
   override fun setEnabled(enabled: Boolean) {
     this.enabled = enabled
     updateEnabledState()
@@ -192,14 +180,16 @@ open class BpkButton(
   }
 
   private fun updateIconState() {
-    iconDrawable = if (loading) {
-      val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
-      progress.setColorSchemeColors(disabledColour)
-      progress
-    } else {
-      icon?.setTintList(textColors)
-      icon
-    }
+    super.setIcon(
+      if (loading) {
+        val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
+        progress.setColorSchemeColors(disabledColour)
+        progress
+      } else {
+        icon
+      }
+    )
+    iconTint = textColors
   }
 
   enum class Type(

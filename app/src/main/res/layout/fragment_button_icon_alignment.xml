@@ -40,7 +40,7 @@
     android:layout_margin="@dimen/bpkSpacingSm"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Icon end with a really long text abcdefghi"
+    android:text="Icon end with a really long text abcdefghijklmnopqrstuvwxyz"
     app:buttonIconPosition="end"
     app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonType="primary"/>
@@ -58,7 +58,7 @@
     android:layout_margin="@dimen/bpkSpacingSm"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Icon start with a really long text abcdefg"
+    android:text="Icon start with a really long text abcdefghijklmnopqrstuvwxyz"
     app:buttonIconPosition="start"
     app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonType="primary"/>
