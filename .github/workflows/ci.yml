@@ -149,17 +149,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Add commit comment
-        # Only run if there is no tag, the commit is not on main, it is not created by dependabot and it is not a fork
-        if: contains('refs/tags/', github.ref) != true && github.ref != 'refs/heads/main' && github.actor != 'dependabot[bot]' && github.repository == github.event.pull_request.head.repo.full_name
-        uses: peter-evans/commit-comment@v1
-        with:
-          body: |
-            Thank you for your contribution.
-            You can use the following dependency to test your application while we review your pull request:
-
-            `com.github.Skyscanner:backpack-android:${{ github.sha }}`
-
       - name: Get release tag
         if: contains('refs/tags/', github.ref)
         id: tag

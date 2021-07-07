@@ -2,7 +2,7 @@
 
 ## Installation
 
-Backpack Android is available through Jitpack. Check the main Readme for a complete installation guide.
+Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main Readme for a complete installation guide.
 
 ## Usage
 

@@ -2,11 +2,11 @@
 
 ## Installation
 
-Backpack Android is available through [Jitpack](https://jitpack.io/#Skyscanner/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
+Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
 
 ## Usage
 
-E.g. The Bar Chart component can be used in both XML and Kotlin/Java,  
+E.g. The Bar Chart component can be used in both XML and Kotlin/Java,
 however, feeding the component with data can only be done programmatically.
 
 Example of a Bar Chart in XML
