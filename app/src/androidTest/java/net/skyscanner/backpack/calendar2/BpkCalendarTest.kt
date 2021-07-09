@@ -21,17 +21,24 @@ package net.skyscanner.backpack.calendar2
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
 import java.util.Locale
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.demo.MainActivity
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
-import org.hamcrest.CoreMatchers
+import net.skyscanner.backpack.util.InternalBackpackApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -54,8 +61,11 @@ class BpkCalendarTest : BpkSnapshotTest() {
   var activityRule: ActivityTestRule<MainActivity> =
     ActivityTestRule(MainActivity::class.java)
 
+  @OptIn(InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
   @Before
   fun setup() {
+    CalendarDispatchers.setMain(TestCoroutineDispatcher())
+    CalendarDispatchers.setBackground(TestCoroutineDispatcher())
     setDimensions(700, 400)
     activity = activityRule.activity
     AndroidThreeTen.init(activity)
@@ -146,9 +156,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
       rootLayout.addView(calendar)
     }
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
+    Espresso
+      .onView(withId(R.id.bpk_calendar_recycler_view))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
       .check { _, _ ->
         setupView(calendar)
         asyncScreenshot.record(calendar)
@@ -174,13 +184,13 @@ class BpkCalendarTest : BpkSnapshotTest() {
       rootLayout.addView(calendar)
     }
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
+    Espresso
+      .onView(withId(R.id.bpk_calendar_recycler_view))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
+    Espresso
+      .onView(withId(R.id.bpk_calendar_recycler_view))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
       .check { _, _ ->
         setupView(calendar)
         asyncScreenshot.record(calendar)
@@ -240,17 +250,17 @@ class BpkCalendarTest : BpkSnapshotTest() {
       rootLayout.addView(calendar)
     }
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
+    Espresso
+      .onView(withId(R.id.bpk_calendar_recycler_view))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(1)
-      .perform(ViewActions.click())
+    Espresso
+      .onView(withId(R.id.bpk_calendar_recycler_view))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.click()))
 
-    Espresso.onData(CoreMatchers.anything()) // Clicking on multiple dates should result in only one selected
-      .atPosition(1)
-      .perform(ViewActions.scrollTo())
+    Espresso // Clicking on multiple dates should result in only one selected
+      .onView(withId(R.id.bpk_calendar_recycler_view))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.scrollTo()))
       .check { _, _ ->
         setupView(calendar)
         asyncScreenshot.record(calendar)
@@ -367,17 +377,17 @@ class BpkCalendarTest : BpkSnapshotTest() {
       rootLayout.addView(view)
     }
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
+    Espresso
+      .onView(withId(R.id.bpk_calendar_recycler_view))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(1)
-      .perform(ViewActions.click())
+    Espresso
+      .onView(withId(R.id.bpk_calendar_recycler_view))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.click()))
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.scrollTo())
+    Espresso
+      .onView(withId(R.id.bpk_calendar_recycler_view))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.scrollTo()))
       .check { _, _ ->
         setupView(view)
         asyncScreenshot.record(view)

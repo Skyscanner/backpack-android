@@ -20,14 +20,16 @@ package net.skyscanner.backpack.calendar2.list
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCells
+import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.util.Consumer
+import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarAdapter(
@@ -37,11 +39,20 @@ internal class CalendarAdapter(
 
   private var data: CalendarCells = CalendarCells(emptyList())
 
+  val spanSizeLookup: GridLayoutManager.SpanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+    override fun getSpanSize(position: Int): Int = when (data[position]) {
+      is CalendarCell.Day -> 1
+      is CalendarCell.Header -> NUM_COLUMNS
+      is CalendarCell.Space -> 1
+    }
+  }
+
+  @OptIn(InternalBackpackApi::class)
   override fun invoke(data: CalendarCells) {
     val calculator = CalendarDiffCalculator(this.data, data)
-    scope.launch(Dispatchers.Default) {
+    scope.launch(CalendarDispatchers.Background) {
       val diff = DiffUtil.calculateDiff(calculator, false)
-      withContext(Dispatchers.Main) {
+      withContext(CalendarDispatchers.Main) {
         this@CalendarAdapter.data = data
         diff.dispatchUpdatesTo(this@CalendarAdapter)
       }
@@ -66,9 +77,10 @@ internal class CalendarAdapter(
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
     (holder as ItemHolder<CalendarCell>).invoke(data[position])
 
-  private companion object {
-    const val TYPE_SPACE = 0
-    const val TYPE_HEADER = 1
-    const val TYPE_DAY = 2
+  companion object {
+    private const val TYPE_SPACE = 0
+    private const val TYPE_HEADER = 1
+    private const val TYPE_DAY = 2
+    const val NUM_COLUMNS = 7
   }
 }

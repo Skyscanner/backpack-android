@@ -36,9 +36,7 @@ fun ClosedRange<LocalDate>.toIterable(
       override fun hasNext(): Boolean =
         current <= endInclusive
 
-      override fun next(): LocalDate {
-        current = current.plus(amount, unit)
-        return current
-      }
+      override fun next(): LocalDate =
+        current.also { current = current.plus(amount, unit) }
     }
   }

@@ -28,7 +28,7 @@ internal data class CalendarCells(
   private val months: List<CalendarMonth>,
 ) {
 
-  val size: Int = months.sumBy { it.cells.size }
+  val size: Int = months.sumOf { it.cells.size }
 
   operator fun get(position: Int): CalendarCell {
     var month: CalendarMonth? = null
