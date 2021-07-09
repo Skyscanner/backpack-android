@@ -74,6 +74,7 @@ internal fun CalendarStateMachine(
 
 internal fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState {
   if (date.info.disabled) return this
+  if (date.outOfRange) return this
 
   val selection = when (params.selectionMode) {
     CalendarParams.SelectionMode.Disabled -> selection

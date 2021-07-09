@@ -20,6 +20,8 @@ package net.skyscanner.backpack.calendar2.data
 
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.calendar2.extension.firstDay
+import net.skyscanner.backpack.calendar2.extension.lastDay
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.calendar2.extension.yearMonth
 import org.threeten.bp.LocalDate
@@ -65,6 +67,7 @@ internal fun CalendarCells(
   val months = params
     .range
     .toIterable()
+    .let { daysBeforeRangeStarts(params) + it + daysAfterRangeEnds(params) }
     .groupBy { date -> date.yearMonth() }
     .toSortedMap()
     .map { entry ->
@@ -86,4 +89,26 @@ internal fun CalendarCells(
     }
 
   return CalendarCells(months = months)
+}
+
+private fun daysBeforeRangeStarts(params: CalendarParams): List<LocalDate> {
+  val result = mutableListOf<LocalDate>()
+  val firstDay = params.range.start.yearMonth().firstDay()
+  var current = params.range.start
+  while (current != firstDay) {
+    current = current.plusDays(-1)
+    result += current
+  }
+  return result
+}
+
+private fun daysAfterRangeEnds(params: CalendarParams): List<LocalDate> {
+  val result = mutableListOf<LocalDate>()
+  val lastDay = params.range.endInclusive.yearMonth().lastDay()
+  var current = params.range.endInclusive
+  while (current != lastDay) {
+    current = current.plusDays(1)
+    result += current
+  }
+  return result
 }

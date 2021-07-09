@@ -44,6 +44,7 @@ internal sealed class CalendarCell {
     val info: CellInfo,
     val selection: Selection?,
     val contentDescription: String,
+    val outOfRange: Boolean,
     override val yearMonth: YearMonth,
   ) : CalendarCell()
 
@@ -65,6 +66,7 @@ internal fun CalendarCellDay(
   date = date,
   yearMonth = yearMonth,
   info = params.cellsInfo[date] ?: CellInfo.Default,
+  outOfRange = date !in params.range,
   contentDescription = "${date.dayOfMonth} ${date.month.getDisplayName(params.dateAccessibilityText, params.locale)}",
   selection = when (selection) {
     is CalendarSelection.None -> null
