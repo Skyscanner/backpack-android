@@ -16,7 +16,7 @@
 
   <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/button_decrease"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="Long Text Long Text Long Text Long Text Long"
     app:buttonIcon="@drawable/bpk_close_sm"
