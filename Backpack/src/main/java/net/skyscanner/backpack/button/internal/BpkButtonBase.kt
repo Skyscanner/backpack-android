@@ -19,13 +19,11 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
-import android.graphics.drawable.Drawable
+import android.text.TextUtils
 import android.util.AttributeSet
+import android.view.Gravity
+import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-
-internal const val ICON_POSITION_START = 0
-internal const val ICON_POSITION_END = 1
-internal const val ICON_POSITION_ICON_ONLY = 2
 
 // mainly exists here for compatibility reasons
 abstract class BpkButtonBase internal constructor(
@@ -38,11 +36,13 @@ abstract class BpkButtonBase internal constructor(
 
   abstract var iconPosition: Int
 
-  abstract var icon: Drawable?
-
   init {
-    isAllCaps = true
+    maxLines = 1
+    gravity = Gravity.CENTER
+    ellipsize = TextUtils.TruncateAt.END
     isClickable = isEnabled
+    iconSize = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+    backgroundTintList = null
     font.applyTo(this)
   }
 }

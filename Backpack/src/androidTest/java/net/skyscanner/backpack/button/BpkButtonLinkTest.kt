@@ -49,8 +49,8 @@ class BpkButtonLinkTest {
   fun test_icon_end() {
     val trainIcon = AppCompatResources.getDrawable(activity, R.drawable.bpk_train)
     val button = BpkButtonLink(activity).apply {
-      icon = trainIcon
       iconPosition = BpkButton.END
+      icon = trainIcon
     }
 
     Assert.assertNotNull(button.compoundDrawablesRelative[2])
@@ -60,8 +60,8 @@ class BpkButtonLinkTest {
   fun test_icon_start() {
     val trainIcon = AppCompatResources.getDrawable(activity, R.drawable.bpk_train)
     val button = BpkButtonLink(activity).apply {
-      icon = trainIcon
       iconPosition = BpkButton.START
+      icon = trainIcon
     }
     Assert.assertNotNull(button.compoundDrawablesRelative[0])
   }

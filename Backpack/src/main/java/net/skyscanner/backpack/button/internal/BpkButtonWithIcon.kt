@@ -19,38 +19,30 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
-import android.graphics.drawable.Drawable
+import android.content.res.ColorStateList
 import android.util.AttributeSet
-import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.sizedDrawable
+import com.google.android.material.button.MaterialButton
+
+internal const val ICON_POSITION_START = 0
+internal const val ICON_POSITION_END = 1
+internal const val ICON_POSITION_ICON_ONLY = 2
 
 // provides internal properties for icon and its position
 abstract class BpkButtonWithIcon internal constructor(
   context: Context,
   attrs: AttributeSet?,
-  defStyleAttr: Int
-) : BpkButtonLayout(context, attrs, defStyleAttr) {
+  defStyleAttr: Int,
+) : MaterialButton(context, attrs, defStyleAttr) {
 
   internal var iconDrawablePosition: Int = ICON_POSITION_END
     set(value) {
       field = value
+      iconGravity = when (value) {
+        ICON_POSITION_START -> ICON_GRAVITY_TEXT_START
+        else -> ICON_GRAVITY_TEXT_END
+      }
       if (value == ICON_POSITION_ICON_ONLY) {
         text = ""
-      }
-      updateCompoundIcon()
-    }
-
-  internal var iconDrawable: Drawable? = null
-    set(value) {
-      if (field != value) {
-        field = value?.let {
-          sizedDrawable(
-            drawable = it,
-            width = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
-            height = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
-          )
-        }
-        updateCompoundIcon()
       }
     }
 
@@ -62,17 +54,13 @@ abstract class BpkButtonWithIcon internal constructor(
     }
   }
 
-  private fun updateCompoundIcon() {
-    val icon = iconDrawable
-    if (icon != null) {
-      setCompoundDrawablesRelativeWithIntrinsicBounds(
-        icon.takeIf { iconDrawablePosition == ICON_POSITION_START || iconDrawablePosition == ICON_POSITION_ICON_ONLY },
-        null,
-        icon.takeIf { iconDrawablePosition == ICON_POSITION_END },
-        null
-      )
-    } else {
-      setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
-    }
+  override fun setTextColor(color: Int) {
+    super.setTextColor(color)
+    iconTint = ColorStateList.valueOf(color)
+  }
+
+  override fun setTextColor(colors: ColorStateList) {
+    super.setTextColor(colors)
+    iconTint = colors
   }
 }

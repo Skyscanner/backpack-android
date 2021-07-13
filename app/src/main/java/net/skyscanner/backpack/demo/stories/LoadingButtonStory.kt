@@ -22,14 +22,15 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import net.skyscanner.backpack.button.BpkButton
+import net.skyscanner.backpack.demo.R
 
 class LoadingButtonStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    view as ViewGroup
-    for (i in 0 until view.childCount) {
-      val child = view.getChildAt(i)
+    val parent = view.findViewById<ViewGroup>(R.id.story_container)
+    for (i in 0 until parent.childCount) {
+      val child = parent.getChildAt(i)
       if (child is BpkButton) {
         child.setOnClickListener {
           child.loading = true

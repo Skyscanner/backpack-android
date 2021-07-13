@@ -31,7 +31,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       textColorRes = R.color.bpkWhite,
       disabledBgColorRes = R.color.__buttonDisabledBackground,
       disabledTextColorRes = R.color.__buttonDisabledText,
-      stateListAnimatorRes = R.drawable.bpk_button_state_animator
+      loadingTextColor = R.color.__buttonLoadingText,
+      stateListAnimatorRes = R.drawable.bpk_button_state_animator,
     )
   }
 
@@ -45,7 +46,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       strokeColorPressedRes = R.color.bpkPrimary,
       strokeWidthRes = R.dimen.bpkBorderSizeLg,
       disabledBgColorRes = R.color.__buttonDisabledBackground,
-      disabledTextColorRes = R.color.__buttonDisabledText
+      disabledTextColorRes = R.color.__buttonDisabledText,
+      loadingTextColor = R.color.__buttonLoadingText,
     )
   }
 
@@ -57,7 +59,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       textColorRes = R.color.bpkWhite,
       disabledBgColorRes = R.color.__buttonDisabledBackground,
       disabledTextColorRes = R.color.__buttonDisabledText,
-      stateListAnimatorRes = R.drawable.bpk_button_state_animator
+      loadingTextColor = R.color.__buttonLoadingText,
+      stateListAnimatorRes = R.drawable.bpk_button_state_animator,
     )
   }
 
@@ -71,7 +74,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       strokeColorPressedRes = R.color.bpkPanjin,
       disabledBgColorRes = R.color.__buttonDisabledBackground,
       disabledTextColorRes = R.color.__buttonDisabledText,
-      strokeWidthRes = R.dimen.bpkBorderSizeLg
+      loadingTextColor = R.color.__buttonLoadingText,
+      strokeWidthRes = R.dimen.bpkBorderSizeLg,
     )
   }
 
@@ -84,7 +88,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       strokeColorRes = R.color.bpkWhite,
       disabledBgColorRes = R.color.bpkSkyGrayTint06,
       disabledTextColorRes = R.color.bpkSkyGrayTint04,
-      strokeWidthRes = R.dimen.bpkBorderSizeLg
+      loadingTextColor = R.color.__buttonLoadingText,
+      strokeWidthRes = R.dimen.bpkBorderSizeLg,
     )
   }
 
@@ -95,7 +100,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       bgColorRes = android.R.color.transparent,
       textColorRes = R.color.bpkPrimary,
       disabledBgColorRes = android.R.color.transparent,
-      disabledTextColorRes = R.color.__buttonDisabledText
+      disabledTextColorRes = R.color.__buttonDisabledText,
+      loadingTextColor = R.color.__buttonLoadingText,
     )
   }
 }

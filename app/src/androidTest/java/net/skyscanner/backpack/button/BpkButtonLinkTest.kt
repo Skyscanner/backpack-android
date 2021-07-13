@@ -63,9 +63,9 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestButtonLinkWithLeadingIcon() {
     val button = BpkButtonLink(testContext).apply {
-      icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
       iconPosition = BpkButton.START
       text = "Message"
+      icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
     }
     snap(wrap(button))
   }
@@ -73,9 +73,9 @@ class BpkButtonLinkTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestButtonLinkWithTrailingIcon() {
     val button = BpkButtonLink(testContext).apply {
-      icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
       iconPosition = BpkButton.END
       text = "Message"
+      icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
     }
     snap(wrap(button))
   }

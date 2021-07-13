@@ -3,6 +3,13 @@
 > Place your changes below this line.
 >
 
+**Fixed:**
+
+- Updated Button component to match Design System:
+  - Updated various colours
+  - Updated icon spacing + horizontal padding
+  - All caps property is now false
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
