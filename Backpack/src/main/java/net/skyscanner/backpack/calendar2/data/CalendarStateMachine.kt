@@ -109,17 +109,19 @@ internal fun CalendarState.dispatchParamsUpdate(params: CalendarParams): Calenda
   )
 
 internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): CalendarState {
-  // we cannot select disabled dates
   when (selection) {
     is CalendarSelection.None -> Unit
     is CalendarSelection.Range -> when {
       params.selectionMode != CalendarParams.SelectionMode.Range -> return this
       params.cellsInfo[selection.start]?.disabled == true -> return this
       params.cellsInfo[selection.end]?.disabled == true -> return this
+      selection.start !in params.range -> return this
+      selection.end != null && selection.end !in params.range -> return this
     }
     is CalendarSelection.Single -> when {
       params.selectionMode != CalendarParams.SelectionMode.Single -> return this
       params.cellsInfo[selection.date]?.disabled == true -> return this
+      selection.date !in params.range -> return this
     }
   }
   return copy(

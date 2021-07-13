@@ -19,7 +19,7 @@ internal val CalendarTestScope.firstDay: CalendarCell.Day
 
 internal val CalendarTestScope.lastDay: CalendarCell.Day
   get() {
-    val index = state.cells.indexOf(CalendarSettings.Default.range.endInclusive.minusDays(1))
+    val index = state.cells.indexOf(CalendarSettings.Default.range.endInclusive)
     return state.cells[index] as CalendarCell.Day
   }
 
