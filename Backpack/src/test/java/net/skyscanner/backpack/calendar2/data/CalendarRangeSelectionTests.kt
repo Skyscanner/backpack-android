@@ -26,7 +26,7 @@ class CalendarRangeSelectionTests {
       stateMachine.onClick(firstDay)
 
       verify {
-        assertEquals(CalendarSelection.Single(firstDay.date), state.selection)
+        assertEquals(CalendarSelection.Range(start = firstDay.date, end = null), state.selection)
       }
     }
   }
