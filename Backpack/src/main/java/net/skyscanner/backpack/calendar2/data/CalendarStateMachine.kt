@@ -15,8 +15,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:OptIn(ExperimentalBackpackApi::class)
-
 package net.skyscanner.backpack.calendar2.data
 
 import java.util.Locale
@@ -27,7 +25,6 @@ import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.MutableStateMachine
 import net.skyscanner.backpack.util.StateMachine
 
@@ -75,8 +72,7 @@ internal fun CalendarStateMachine(
 }
 
 internal fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState {
-  if (date.info.disabled) return this
-  if (date.outOfRange) return this
+  if (date.inactive) return this
 
   val selection = when (params.selectionMode) {
     CalendarParams.SelectionMode.Disabled -> selection

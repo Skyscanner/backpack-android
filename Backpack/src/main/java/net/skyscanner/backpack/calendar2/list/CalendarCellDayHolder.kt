@@ -56,7 +56,7 @@ internal class CalendarCellDayHolder(
   }
 
   override fun bind(model: CalendarCell.Day) {
-    view.isEnabled = !model.info.disabled && !model.outOfRange
+    view.isEnabled = !model.inactive
     view.isSelected = model.selection != null
     view.contentDescription = model.contentDescription + " " + (model.info.label ?: "")
 
@@ -68,7 +68,7 @@ internal class CalendarCellDayHolder(
         day.setTextColor(selectionContentColor(model.selection))
         day.background = selectionBackground(model.selection)
       }
-      model.info.disabled || model.outOfRange -> {
+      model.inactive -> {
         day.setTextColor(disabledTextColor)
         day.background = null
       }
@@ -83,7 +83,7 @@ internal class CalendarCellDayHolder(
     }
 
     when {
-      model.info.disabled || model.outOfRange -> {
+      model.inactive -> {
         label.isVisible = false
       }
       model.info.style == CellStatusStyle.Label -> {

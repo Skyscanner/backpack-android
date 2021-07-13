@@ -46,7 +46,12 @@ internal sealed class CalendarCell {
     val contentDescription: String,
     val outOfRange: Boolean,
     override val yearMonth: YearMonth,
-  ) : CalendarCell()
+  ) : CalendarCell() {
+
+    val inactive: Boolean
+      get() = info.disabled || outOfRange
+
+  }
 
   enum class Selection {
     Single,
