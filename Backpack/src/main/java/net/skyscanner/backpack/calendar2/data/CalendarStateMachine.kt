@@ -81,15 +81,14 @@ internal fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState 
   val selection = when (params.selectionMode) {
     CalendarParams.SelectionMode.Disabled -> selection
     CalendarParams.SelectionMode.Single -> CalendarSelection.Single(date.date)
-    CalendarParams.SelectionMode.Range -> when (selection) {
-      is CalendarSelection.None -> CalendarSelection.Single(date.date)
-      is CalendarSelection.Single -> when {
-        selection.date > date.date -> CalendarSelection.Single(date.date)
-        else -> CalendarSelection.Range(start = selection.date, end = date.date)
-      }
-      is CalendarSelection.Range -> when (selection.end) {
-        null -> CalendarSelection.Range(start = selection.start, end = date.date)
-        else -> CalendarSelection.Single(date.date)
+    CalendarParams.SelectionMode.Range -> {
+      val rangeStart = (selection as? CalendarSelection.Range)?.start
+      val rangeEnd = (selection as? CalendarSelection.Range)?.end
+      when {
+        rangeStart != null && rangeEnd != null -> CalendarSelection.Range(start = date.date, end = null)
+        rangeStart == null -> CalendarSelection.Range(start = date.date, end = null)
+        date.date < rangeStart -> CalendarSelection.Range(start = date.date, end = null)
+        else -> CalendarSelection.Range(start = rangeStart, end = date.date)
       }
     }
   }

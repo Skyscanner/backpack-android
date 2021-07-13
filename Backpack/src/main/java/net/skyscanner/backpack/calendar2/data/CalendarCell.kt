@@ -76,9 +76,10 @@ internal fun CalendarCellDay(
     }
     is CalendarSelection.Range -> when {
       selection.start == date && selection.end == date -> CalendarCell.Selection.Double
-      selection.start == date -> CalendarCell.Selection.Start
+      selection.start == date && selection.end == null -> CalendarCell.Selection.Single
+      selection.start == date && selection.end != null -> CalendarCell.Selection.Start
       selection.end == date -> CalendarCell.Selection.End
-      date in selection -> CalendarCell.Selection.Middle
+      selection.end != null && date in selection -> CalendarCell.Selection.Middle
       else -> null
     }
   },
