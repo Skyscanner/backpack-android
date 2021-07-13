@@ -80,4 +80,16 @@ class BpkButtonTest {
     }
     Assert.assertNotNull(button.compoundDrawablesRelative[0])
   }
+
+  @Test
+  fun test_icon_loading_state_toggle() {
+    val trainIcon = AppCompatResources.getDrawable(activity, R.drawable.bpk_train)
+    val button = BpkButton(activity).apply {
+      icon = trainIcon
+      iconPosition = BpkButton.START
+      loading = true
+    }
+    button.loading = false
+    Assert.assertEquals(trainIcon, button.compoundDrawablesRelative[0])
+  }
 }

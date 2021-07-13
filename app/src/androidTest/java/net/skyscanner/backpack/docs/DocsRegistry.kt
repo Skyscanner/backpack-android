@@ -37,7 +37,6 @@ object DocsRegistry {
     Screenshot("Button - Featured", "featured"),
     Screenshot("Button - Destructive", "destructive"),
     Screenshot("Button - Outline", "outline"),
-    Screenshot("Button - Loading", "loading"),
     Screenshot("ButtonLink - Default", "default"),
     Screenshot("Calendar - Default", "range", ::setupCalendar),
     Screenshot("Calendar - Colored", "colored", ::setupCalendar),
@@ -124,28 +123,28 @@ private fun setupNavBarCollapsed() {
 }
 
 private fun setupDialog() {
-  Espresso.onView(ViewMatchers.withText("SHOW"))
+  Espresso.onView(ViewMatchers.withText("Show"))
     .perform(ViewActions.click())
 
   Thread.sleep(50)
 }
 
 private fun setupSnackbar() {
-  Espresso.onView(ViewMatchers.withText("MESSAGE (DURATION INDEFINITE)"))
+  Espresso.onView(ViewMatchers.withText("Message (Duration Indefinite)"))
     .perform(ViewActions.click())
 
   Thread.sleep(50)
 }
 
 private fun setupSnackbarIconAction() {
-  Espresso.onView(ViewMatchers.withText("ICON + TITLE + MESSAGE (ICON ACTION)"))
+  Espresso.onView(ViewMatchers.withText("Icon + title + message (Icon Action)"))
     .perform(ViewActions.click())
 
   Thread.sleep(50)
 }
 
 private fun setupToast() {
-  Espresso.onView(ViewMatchers.withText("SHORT TOAST"))
+  Espresso.onView(ViewMatchers.withText("Short Toast"))
     .perform(ViewActions.click())
 
   Thread.sleep(50)

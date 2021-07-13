@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.button
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.Dimension
@@ -40,7 +39,7 @@ open class BpkButton(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int,
-  type: Type
+  type: Type,
 ) : BpkButtonBase(context, attrs, defStyleAttr) {
 
   constructor(context: Context) : this(context, null, 0, Type.Primary)
@@ -68,29 +67,38 @@ open class BpkButton(
       var paddingHorizontal = paddingHorizontal
       val paddingVertical = paddingVertical
 
-      if (iconPosition == ICON_ONLY) {
-        paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+      if (value == ICON_ONLY) {
+        paddingHorizontal = paddingHorizontalIconOnly
+        iconPadding = 0
       } else {
-        compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+        iconPadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
       }
 
-      setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
+      setPaddingRelative(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
       applyStyle(type.createStyle(context))
     }
 
+  private var iconDrawable: Drawable? = icon
+    set(value) {
+      field = value
+      updateIconState()
+    }
+
   @Dimension
-  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase) -
-    resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+  private val paddingHorizontalIconOnly = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+    resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
+
+  @Dimension
+  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
 
   @Dimension
   private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
     (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
 
-  final override var icon: Drawable? = null
-    set(value) {
-      field = value
-      updateIconState()
-    }
+  override fun setIcon(icon: Drawable?) {
+    super.setIcon(icon)
+    iconDrawable = icon
+  }
 
   private val progress by unsafeLazy {
     CircularProgressDrawable(context).apply {
@@ -106,6 +114,9 @@ open class BpkButton(
       field = value
       updateEnabledState()
       updateIconState()
+      if (this::style.isInitialized) {
+        applyStyle(style)
+      }
     }
 
   private lateinit var style: ButtonStyle
@@ -122,7 +133,7 @@ open class BpkButton(
     var type = type
     var style: ButtonStyle = type.createStyle(context)
     var loading = loading
-    var icon = iconDrawable
+    var icon = getIcon()
     var iconPosition = iconPosition
 
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
@@ -150,16 +161,6 @@ open class BpkButton(
     applyStyle(style)
   }
 
-  override fun setTextColor(color: Int) {
-    super.setTextColor(color)
-    icon?.setTintList(ColorStateList.valueOf(color))
-  }
-
-  override fun setTextColor(colors: ColorStateList) {
-    super.setTextColor(colors)
-    icon?.setTintList(colors)
-  }
-
   override fun setEnabled(enabled: Boolean) {
     this.enabled = enabled
     updateEnabledState()
@@ -175,7 +176,7 @@ open class BpkButton(
   private fun applyStyle(style: ButtonStyle) {
     this.style = style
     background = style.getButtonBackground(isEnabled, iconPosition)
-    setTextColor(style.contentColor)
+    setTextColor(style.getContentColor(loading))
 
     if (isEnabled) {
       this.stateListAnimator = style.getStateListAnimator()
@@ -185,19 +186,21 @@ open class BpkButton(
   }
 
   private fun updateIconState() {
-    iconDrawable = if (loading) {
-      val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
-      progress.setColorSchemeColors(disabledColour)
-      progress
-    } else {
-      icon?.setTintList(textColors)
-      icon
-    }
+    super.setIcon(
+      if (loading) {
+        val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
+        progress.setColorSchemeColors(disabledColour)
+        progress
+      } else {
+        iconDrawable
+      }
+    )
+    iconTint = textColors
   }
 
   enum class Type(
     internal val id: Int,
-    internal val createStyle: (Context) -> ButtonStyle
+    internal val createStyle: (Context) -> ButtonStyle,
   ) {
     Primary(
       id = 0,

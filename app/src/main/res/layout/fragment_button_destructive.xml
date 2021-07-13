@@ -1,60 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   style="@style/App.Story"
   tools:ignore="HardcodedText">
 
+  <androidx.constraintlayout.helper.widget.Flow
+    android:id="@+id/flowView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:constraint_referenced_ids="btn_default,btn_loading,btn_disabled,btn_start_icon,btn_end_icon,btn_icon"
+    app:flow_horizontalBias="0"
+    app:flow_horizontalGap="@dimen/bpkSpacingMd"
+    app:flow_horizontalStyle="packed"
+    app:flow_verticalGap="@dimen/bpkSpacingMd"
+    app:flow_verticalStyle="packed"
+    app:flow_wrapMode="chain"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingSm"
     android:id="@+id/btn_default"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Button"
-    app:buttonType="destructive"/>
+    app:buttonType="destructive" />
 
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingSm"
+    android:id="@+id/btn_loading"
     android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Loading"
+    app:buttonLoading="true"
+    app:buttonType="destructive" />
+
+  <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/btn_disabled"
-    android:layout_toEndOf="@id/btn_default"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Disabled"
     android:enabled="false"
-    app:buttonType="destructive"/>
+    android:text="Disabled"
+    app:buttonType="destructive" />
 
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingSm"
-    android:layout_width="wrap_content"
     android:id="@+id/btn_start_icon"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_toEndOf="@id/btn_disabled"
     android:text="With icon"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonIconPosition="end"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
-    app:buttonType="destructive"/>
+    app:buttonType="destructive" />
 
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingSm"
-    android:layout_width="wrap_content"
     android:id="@+id/btn_end_icon"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@id/btn_default"
     android:text="With icon"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonIconPosition="start"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
-    app:buttonType="destructive"/>
+    app:buttonType="destructive" />
 
   <net.skyscanner.backpack.button.BpkButton
-    android:layout_margin="@dimen/bpkSpacingSm"
-    android:layout_width="wrap_content"
     android:id="@+id/btn_icon"
-    android:layout_toEndOf="@+id/btn_end_icon"
-    android:layout_below="@id/btn_default"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonIconPosition="icon_only"
-    app:buttonIcon="@drawable/bpk_long_arrow_right"
-    app:buttonType="destructive"/>
+    app:buttonType="destructive" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -100,7 +100,7 @@
       android:layout_margin="@dimen/bpkSpacingSm"
       android:layout_toEndOf="@id/btn_disabled"
       android:text="With icon"
-      app:buttonIcon="@drawable/bpk_long_arrow_right"
+      app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
       app:buttonIconPosition="end"
       app:buttonType="primary" />
 
@@ -111,7 +111,7 @@
       android:layout_below="@id/btn_default"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="With icon"
-      app:buttonIcon="@drawable/bpk_long_arrow_right"
+      app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
       app:buttonIconPosition="start"
       app:buttonType="primary" />
 
@@ -122,7 +122,7 @@
       android:layout_below="@id/btn_default"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:layout_toEndOf="@+id/btn_end_icon"
-      app:buttonIcon="@drawable/bpk_long_arrow_right"
+      app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
       app:buttonIconPosition="icon_only"
       app:buttonType="primary" />
 

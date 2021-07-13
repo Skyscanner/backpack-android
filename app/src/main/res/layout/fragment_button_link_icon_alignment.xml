@@ -12,7 +12,7 @@
     android:layout_height="wrap_content"
     android:text="With leading icon"
     app:buttonIconPosition="start"
-    app:buttonIcon="@drawable/bpk_alert__active"
+    app:buttonIcon="@drawable/bpk_alert__active_sm"
   />
 
   <net.skyscanner.backpack.button.BpkButtonLink
@@ -20,7 +20,7 @@
     android:layout_height="wrap_content"
     android:text="With trailing icon"
     app:buttonIconPosition="end"
-    app:buttonIcon="@drawable/bpk_alert__active"
+    app:buttonIcon="@drawable/bpk_alert__active_sm"
     />
 
   <net.skyscanner.backpack.text.BpkText
@@ -36,7 +36,7 @@
     android:layout_height="wrap_content"
     android:text="With leading icon"
     app:buttonIconPosition="start"
-    app:buttonIcon="@drawable/bpk_alert__active"
+    app:buttonIcon="@drawable/bpk_alert__active_sm"
     />
 
   <net.skyscanner.backpack.button.BpkButtonLink
@@ -45,7 +45,7 @@
     android:layout_height="wrap_content"
     android:text="With trailing icon"
     app:buttonIconPosition="end"
-    app:buttonIcon="@drawable/bpk_alert__active"
+    app:buttonIcon="@drawable/bpk_alert__active_sm"
     />
 
 
