@@ -158,7 +158,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.click()))
       .check { _, _ ->
         setupView(calendar)
         asyncScreenshot.record(calendar)
@@ -186,11 +186,11 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.click()))
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.click()))
       .check { _, _ ->
         setupView(calendar)
         asyncScreenshot.record(calendar)
@@ -238,7 +238,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Single,
       now = now,
     )
     calendar.setParams(params)
@@ -252,15 +252,15 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(53, ViewActions.click()))
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(54, ViewActions.click()))
 
     Espresso // Clicking on multiple dates should result in only one selected
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.scrollTo()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(54, ViewActions.scrollTo()))
       .check { _, _ ->
         setupView(calendar)
         asyncScreenshot.record(calendar)
@@ -333,7 +333,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Single,
+      selectionMode = CalendarParams.SelectionMode.Range,
       cellsInfo = disabledDayOfTheWeekInfo(initialRange, DayOfWeek.WEDNESDAY),
       now = now,
     )
@@ -358,19 +358,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
     snap(calendar)
   }
 
-  @Test
-  fun screenshotTestCalendarPast_cutPreviousWeeks() {
-    val calendar = BpkCalendar(testContext)
-    val params = CalendarParams(
-      locale = Locale.GERMAN,
-      range = LocalDate.of(2019, 6, 8)..initialEndDate,
-      selectionMode = CalendarParams.SelectionMode.Range,
-      now = now,
-    )
-    calendar.setParams(params)
-    snap(calendar)
-  }
-
   private fun selectStartEnd(view: View, asyncScreenshot: AsyncSnapshot) {
     activity.runOnUiThread {
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
@@ -379,15 +366,15 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.click()))
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(54, ViewActions.click()))
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, ViewActions.scrollTo()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.scrollTo()))
       .check { _, _ ->
         setupView(view)
         asyncScreenshot.record(view)

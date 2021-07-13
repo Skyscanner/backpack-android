@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:OptIn(ExperimentalBackpackApi::class)
 
 package net.skyscanner.backpack.calendar2.data
 
@@ -26,6 +27,7 @@ import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.MutableStateMachine
 import net.skyscanner.backpack.util.StateMachine
 
@@ -108,16 +110,21 @@ internal fun CalendarState.dispatchParamsUpdate(params: CalendarParams): Calenda
   )
 
 internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): CalendarState {
-  val newParams = params.copy(
-    selectionMode = when (selection) {
-      is CalendarSelection.None -> params.selectionMode
-      is CalendarSelection.Range -> CalendarParams.SelectionMode.Range
-      is CalendarSelection.Single -> CalendarParams.SelectionMode.Single
+  // we cannot select disabled dates
+  when (selection) {
+    is CalendarSelection.None -> Unit
+    is CalendarSelection.Range -> when {
+      params.selectionMode != CalendarParams.SelectionMode.Range -> return this
+      params.cellsInfo[selection.start]?.disabled == true -> return this
+      params.cellsInfo[selection.end]?.disabled == true -> return this
     }
-  )
+    is CalendarSelection.Single -> when {
+      params.selectionMode != CalendarParams.SelectionMode.Single -> return this
+      params.cellsInfo[selection.date]?.disabled == true -> return this
+    }
+  }
   return copy(
-    params = newParams,
     selection = selection,
-    cells = CalendarCells(newParams, selection),
+    cells = CalendarCells(params, selection),
   )
 }
