@@ -38,7 +38,7 @@ internal fun testCalendarWith(
 object CalendarSettings {
 
   val Default = CalendarParams(
-    range = LocalDate.of(2000, Month.JANUARY, 1)..LocalDate.of(2000, Month.DECEMBER, 1),
+    range = LocalDate.of(2000, Month.JANUARY, 1)..LocalDate.of(2000, Month.DECEMBER, 31),
     selectionMode = CalendarParams.SelectionMode.Single,
     locale = Locale.ENGLISH,
   )

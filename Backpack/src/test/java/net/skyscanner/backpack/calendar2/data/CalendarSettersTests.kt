@@ -24,7 +24,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Range) forces Range selection mode to state`() {
+  fun `setSelection(Range) ignores change when selectionMode=Disabled`() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Disabled,
     )
@@ -32,13 +32,14 @@ class CalendarSettersTests {
       stateMachine.setSelection(CalendarSelection.Range(firstDay.date, lastDay.date))
 
       verify {
-        assertEquals(CalendarParams.SelectionMode.Range, state.params.selectionMode)
+        assertEquals(CalendarSelection.None, state.selection)
+        assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
       }
     }
   }
 
   @Test
-  fun `setSelection(Single) forces Single selection mode to state`() {
+  fun `setSelection(Single) ignores change when selectionMode=Disabled`() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Disabled,
     )
@@ -46,7 +47,8 @@ class CalendarSettersTests {
       stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
 
       verify {
-        assertEquals(CalendarParams.SelectionMode.Single, state.params.selectionMode)
+        assertEquals(CalendarSelection.None, state.selection)
+        assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
       }
     }
   }
