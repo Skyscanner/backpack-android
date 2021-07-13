@@ -8,7 +8,7 @@
 - Updated Button component to match Design System:
   - Updated various colours
   - Updated icon spacing + horizontal padding
-  - Removed all caps property
+  - All caps property is now false
 
 ## How to write a good changelog entry
 
