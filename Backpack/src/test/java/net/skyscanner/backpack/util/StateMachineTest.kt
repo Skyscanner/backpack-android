@@ -84,5 +84,4 @@ class StateMachineTest {
     scope.cancel()
     assertTrue(job.isCancelled)
   }
-
 }

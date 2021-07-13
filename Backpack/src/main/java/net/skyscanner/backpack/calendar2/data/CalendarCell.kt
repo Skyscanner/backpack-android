@@ -50,7 +50,6 @@ internal sealed class CalendarCell {
 
     val inactive: Boolean
       get() = info.disabled || outOfRange
-
   }
 
   enum class Selection {

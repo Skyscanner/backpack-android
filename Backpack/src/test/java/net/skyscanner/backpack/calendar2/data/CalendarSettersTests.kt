@@ -8,7 +8,6 @@ import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.firstDay
 import net.skyscanner.backpack.calendar2.lastDay
 import net.skyscanner.backpack.calendar2.testCalendarWith
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
