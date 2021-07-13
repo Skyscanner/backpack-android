@@ -3,6 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   style="@style/App.Story"
+  android:id="@+id/story_container"
   tools:ignore="HardcodedText">
 
   <androidx.constraintlayout.helper.widget.Flow

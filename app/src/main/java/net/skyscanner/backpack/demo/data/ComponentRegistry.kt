@@ -39,6 +39,7 @@ import net.skyscanner.backpack.demo.stories.IconType
 import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.InteractiveStarRatingStory
 import net.skyscanner.backpack.demo.stories.LabeledCalendarStory
+import net.skyscanner.backpack.demo.stories.LoadingButtonStory
 import net.skyscanner.backpack.demo.stories.MapStory
 import net.skyscanner.backpack.demo.stories.NavBarStory
 import net.skyscanner.backpack.demo.stories.SnackbarStory
@@ -124,6 +125,7 @@ object ComponentRegistry {
         "Outline" story NodeData { Story of R.layout.fragment_button_outline },
         "Icon alignment" story NodeData { Story of R.layout.fragment_button_icon_alignment },
         "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment with Direction.RTL },
+        "Loading" story NodeData { LoadingButtonStory of R.layout.fragment_button_primary },
         "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
         "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable }
       )

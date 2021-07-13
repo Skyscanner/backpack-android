@@ -78,6 +78,12 @@ open class BpkButton(
       applyStyle(type.createStyle(context))
     }
 
+  private var iconDrawable: Drawable? = icon
+    set(value) {
+      field = value
+      updateIconState()
+    }
+
   @Dimension
   private val paddingHorizontalIconOnly = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
     resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
@@ -91,7 +97,7 @@ open class BpkButton(
 
   override fun setIcon(icon: Drawable?) {
     super.setIcon(icon)
-    updateIconState()
+    iconDrawable = icon
   }
 
   private val progress by unsafeLazy {
@@ -186,7 +192,7 @@ open class BpkButton(
         progress.setColorSchemeColors(disabledColour)
         progress
       } else {
-        icon
+        iconDrawable
       }
     )
     iconTint = textColors
