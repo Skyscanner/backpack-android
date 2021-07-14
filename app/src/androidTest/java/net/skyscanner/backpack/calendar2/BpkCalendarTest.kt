@@ -396,7 +396,10 @@ class BpkCalendarTest : BpkSnapshotTest() {
         )
       }
 
-  private fun disabledDayOfTheWeekInfo(range: ClosedRange<LocalDate>, disabledDayOfWeek: DayOfWeek): Map<LocalDate, CellInfo> =
+  private fun disabledDayOfTheWeekInfo(
+    range: ClosedRange<LocalDate>,
+    disabledDayOfWeek: DayOfWeek
+  ): Map<LocalDate, CellInfo> =
     range
       .toIterable()
       .filter { it.dayOfWeek == disabledDayOfWeek }

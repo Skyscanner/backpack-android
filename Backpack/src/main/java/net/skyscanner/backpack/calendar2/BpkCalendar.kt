@@ -77,7 +77,8 @@ class BpkCalendar private constructor(
 
   private val scrollListeners = mutableListOf<(YearMonth) -> Unit>()
   private val calendarAdapter = CalendarAdapter(scope, stateMachine::onClick)
-  private val calendarLayoutManager = CalendarLayoutManager(context, CalendarAdapter.NUM_COLUMNS, calendarAdapter.spanSizeLookup)
+  private val calendarLayoutManager =
+    CalendarLayoutManager(context, CalendarAdapter.NUM_COLUMNS, calendarAdapter.spanSizeLookup)
 
   init {
     recyclerView.layoutManager = calendarLayoutManager
