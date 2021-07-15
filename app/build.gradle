@@ -62,6 +62,9 @@ android {
       // A11y support TBD
       'ContentDescription'
   }
+  testOptions {
+    animationsDisabled = true
+  }
   flavorDimensions "version"
   productFlavors {
     oss {

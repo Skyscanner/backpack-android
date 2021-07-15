@@ -6,7 +6,7 @@
   android:layout_height="wrap_content"
   app:cardBackgroundColor="@color/__dialogBackground"
   app:padded="false"
-  app:cornerStyle="large">
+  app:cornerStyle="small">
 
   <ScrollView
     android:layout_width="match_parent"
