@@ -10,6 +10,9 @@
   - Updated icon spacing + horizontal padding
   - All caps property is now false
 
+- Updated Dialog component to match Design System:
+  - Updated flare radius to `12dp`
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
