@@ -24,6 +24,8 @@
     android:id="@+id/bpk_calendar_cell_label"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingStart="@dimen/bpkSpacingSm"
+    android:paddingEnd="@dimen/bpkSpacingSm"
     android:ellipsize="end"
     android:gravity="center_horizontal"
     android:maxLines="2"

@@ -21,7 +21,7 @@ package net.skyscanner.backpack.calendar2.list
 import android.content.Context
 import androidx.recyclerview.widget.GridLayoutManager
 
-internal fun CalendarLayoutManager(context: Context, spanSizeLookup: CalendarSpanSizeLookup) =
-  GridLayoutManager(context, spanSizeLookup.totalSpans).apply {
+internal fun CalendarLayoutManager(context: Context, totalSpans: Int, spanSizeLookup: GridLayoutManager.SpanSizeLookup) =
+  GridLayoutManager(context, totalSpans).apply {
     this.spanSizeLookup = spanSizeLookup
   }
