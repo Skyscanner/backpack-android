@@ -28,7 +28,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class HorizontalNavTests : BpkSnapshotTest() {
+class BpkHorizontalNavTest : BpkSnapshotTest() {
 
   private val horizontalNav = BpkHorizontalNav(testContext).init()
 
@@ -83,8 +83,8 @@ class HorizontalNavTests : BpkSnapshotTest() {
   }
 
   private fun BpkHorizontalNav.init() = apply {
-    addTab(newTab().setText("1"))
-    addTab(newTab().setText("2"))
-    addTab(newTab().setText("3"))
+    addTab(newTab().setText("Tab 1"))
+    addTab(newTab().setText("Tab 2"))
+    addTab(newTab().setText("Tab 3"))
   }
 }

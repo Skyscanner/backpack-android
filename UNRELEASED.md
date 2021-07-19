@@ -5,13 +5,17 @@
 
 **Fixed:**
 
-- Updated Button component to match Design System:
+- Updated `BpkButton` to match Design System:
   - Updated various colours
   - Updated icon spacing + horizontal padding
   - All caps property is now false
 
-- Updated Dialog component to match Design System:
+- Updated `BpkDialog` to match Design System:
   - Updated flare radius to `12dp`
+
+- Updated `BpkHorizontalNav` to match Design System:
+  - Updated default text colour to primary text
+  - All caps property is now false
 
 ## How to write a good changelog entry
 
