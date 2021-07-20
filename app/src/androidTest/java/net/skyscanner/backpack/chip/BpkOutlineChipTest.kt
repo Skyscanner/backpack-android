@@ -30,13 +30,15 @@ import org.junit.runner.RunWith
 class BpkOutlineChipTest : BpkSnapshotTest() {
   @Before
   fun setup() {
-    setBackground(R.color.bpkPrimary)
+    setBackground(R.color.bpkBackgroundAlternative)
     setDimensions(36, 100)
   }
 
   @Test
   fun screenshotTestDefault() {
-    snap((BpkOutlineChip(testContext).apply { text = "tag" }))
+    val view = BpkOutlineChip(testContext)
+    view.text = "tag"
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -44,7 +46,7 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
     val view = BpkOutlineChip(testContext)
     view.text = "tag"
     view.disabled = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -52,7 +54,7 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
     val view = BpkOutlineChip(testContext)
     view.text = "tag"
     view.isSelected = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -62,7 +64,7 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.selectedBackgroundColor = testContext.getColor(R.color.bpkPanjin)
     view.toggle()
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -70,7 +72,7 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
     val view = BpkOutlineChip(testContext)
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -79,7 +81,7 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.isSelected = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -88,6 +90,6 @@ class BpkOutlineChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.disabled = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 }

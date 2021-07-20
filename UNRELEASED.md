@@ -17,6 +17,10 @@
   - Updated default text colour to primary text
   - All caps property is now false
 
+- Updated `BpkChip` to match Design System:
+  - Updated icon spacing to `8dp`
+  - Icon size updated from `24dp` to `16dp`
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

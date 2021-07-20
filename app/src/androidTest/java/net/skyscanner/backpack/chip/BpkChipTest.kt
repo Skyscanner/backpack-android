@@ -37,7 +37,7 @@ class BpkChipTest : BpkSnapshotTest() {
   fun screenshotTestDefault() {
     val view = BpkChip(testContext)
     view.text = "tag"
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -45,7 +45,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "tag"
     view.disabled = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -53,7 +53,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "tag"
     view.isSelected = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -61,7 +61,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "tag"
     view.chipBackgroundColor = testContext.getColor(R.color.bpkErfoud)
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -70,7 +70,7 @@ class BpkChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.selectedBackgroundColor = testContext.getColor(R.color.bpkPanjin)
     view.toggle()
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -78,7 +78,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -87,7 +87,7 @@ class BpkChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.isSelected = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -96,6 +96,6 @@ class BpkChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.disabled = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 }

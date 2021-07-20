@@ -36,8 +36,8 @@ open class BpkChip @JvmOverloads constructor(
   defStyleAttr: Int = 0,
 ) : BpkText(createContextThemeWrapper(context, attrs, R.attr.bpkChipStyle), attrs, defStyleAttr) {
 
-  private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
-  private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_normal)
+  private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+  private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
 
   var disabled: Boolean = false
     set(value) {
