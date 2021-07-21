@@ -27,6 +27,7 @@ import android.util.AttributeSet
 import android.util.SparseArray
 import android.util.SparseBooleanArray
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
@@ -148,6 +149,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     setSelectedTabIndicatorHeight(resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg))
     setTabTextColors(textColor, textSelectedColor)
     setSelectedTabIndicatorColor(indicatorColor)
+    isInlineLabel = true
     for (i in 0 until tabCount) {
       updateTab(i)
     }
@@ -186,7 +188,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
 
   override fun addTab(tab: Tab, position: Int, setSelected: Boolean) {
     texts.put(position, tab.text)
-    super.addTab(tab.setText(tab.text).setCustomView(R.layout.view_bpk_tab), position, setSelected)
+    super.addTab(tab.setCustomView(R.layout.view_bpk_tab), position, setSelected)
     updateTab(position)
   }
 
@@ -218,6 +220,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
         it.setTextColor(tabTextColors)
       }
       findViewById<TextView>(android.R.id.text1)?.setTextColor(tabTextColors)
+      findViewById<ImageView>(android.R.id.icon)?.imageTintList = tabTextColors
     }
   }
 
