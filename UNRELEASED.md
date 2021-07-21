@@ -18,6 +18,10 @@
   - All caps property is now false
   - Update icon spacing from `24dp` to `16dp` and fixed icon alignment and tinting
 
+- Updated `BpkChip` to match Design System:
+  - Updated icon spacing to `8dp`
+  - Icon size updated from `24dp` to `16dp`
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
