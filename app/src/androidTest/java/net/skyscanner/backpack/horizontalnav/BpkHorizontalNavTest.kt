@@ -82,6 +82,16 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
     snap(horizontalNav)
   }
 
+  @Test
+  fun screenshotHorizontalNav_icons() {
+    val horizontalNav = BpkHorizontalNav(testContext).apply {
+      addTab(newTab().setText("Tab 1").setIcon(R.drawable.bpk_cars))
+      addTab(newTab().setText("Tab 2").setIcon(R.drawable.bpk_cars))
+      addTab(newTab().setText("Tab 3").setIcon(R.drawable.bpk_cars))
+    }
+    snap(horizontalNav)
+  }
+
   private fun BpkHorizontalNav.init() = apply {
     addTab(newTab().setText("Tab 1"))
     addTab(newTab().setText("Tab 2"))

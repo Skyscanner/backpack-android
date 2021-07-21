@@ -83,4 +83,16 @@
     android:layout_height="wrap_content"
     app:tabMode="scrollable"
     android:layout_marginBottom="@dimen/bpkSpacingXxl" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="With icons"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
+    android:id="@+id/horizontal_nav_icons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingXxl" />
 </LinearLayout>

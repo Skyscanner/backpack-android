@@ -9,8 +9,8 @@
 
   <ImageView
     android:id="@android:id/icon"
-    android:layout_width="@dimen/bpk_icon_size_normal"
-    android:layout_height="@dimen/bpk_icon_size_normal"
+    android:layout_width="@dimen/bpk_icon_size_small"
+    android:layout_height="@dimen/bpk_icon_size_small"
     tools:src="@drawable/bpk_cars"
     android:scaleType="centerInside"
     app:layout_constraintTop_toTopOf="parent"
@@ -18,7 +18,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@android:id/text1"
     app:layout_constraintHorizontal_chainStyle="packed"
-    android:layout_marginHorizontal="@dimen/bpkSpacingSm"
+    android:layout_marginStart="@dimen/bpkSpacingSm"
     />
 
   <TextView

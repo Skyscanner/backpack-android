@@ -16,6 +16,7 @@
 - Updated `BpkHorizontalNav` to match Design System:
   - Updated default text colour to primary text
   - All caps property is now false
+  - Update icon spacing from `24dp` to `16dp` and fixed icon alignment and tinting
 
 ## How to write a good changelog entry
 
