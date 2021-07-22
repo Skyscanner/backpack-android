@@ -22,6 +22,11 @@
   - Updated icon spacing to `8dp`
   - Icon size updated from `24dp` to `16dp`
 
+- Updated `BpkSwitch` to match Design System:
+  - Updated track checked colour to sky blue tint 03
+  - Updated unchecked thumb colour to sky white
+  - Updated dark unchecked track colour to black tint 3
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
