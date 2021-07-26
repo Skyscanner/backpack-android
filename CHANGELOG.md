@@ -2,6 +2,32 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 32.0.2
+
+**Fixed:**
+
+- Updated `BpkButton` to match Design System:
+  - Updated various colours
+  - Updated icon spacing + horizontal padding
+  - All caps property is now false
+
+- Updated `BpkDialog` to match Design System:
+  - Updated flare radius to `12dp`
+
+- Updated `BpkHorizontalNav` to match Design System:
+  - Updated default text colour to primary text
+  - All caps property is now false
+  - Update icon spacing from `24dp` to `16dp` and fixed icon alignment and tinting
+
+- Updated `BpkChip` to match Design System:
+  - Updated icon spacing to `8dp`
+  - Icon size updated from `24dp` to `16dp`
+
+- Updated `BpkSwitch` to match Design System:
+  - Updated track checked colour to sky blue tint 03
+  - Updated unchecked thumb colour to sky white
+  - Updated dark unchecked track colour to black tint 3
+
 # 32.0.1
 
 **Fixed:**
