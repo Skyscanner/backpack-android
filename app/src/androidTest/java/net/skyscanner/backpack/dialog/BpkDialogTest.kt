@@ -169,6 +169,37 @@ class BpkDialogTest : BpkSnapshotTest() {
     record(dialog, asyncScreenshot)
   }
 
+  @Test
+  fun screenshotTestFlareDialog() {
+    val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
+    val asyncScreenshot = prepareForAsyncTest()
+
+    val dialog = BpkDialog(activity, BpkDialog.Style.FLARE).apply {
+      title = "You are going to Tokyo!"
+      description = "Your flight is all booked."
+      icon = BpkDialog.Icon(
+        R.drawable.bpk_tick,
+        context.getColor(R.color.bpkMonteverde),
+      )
+
+      image!!.setImageBitmap(bitmap)
+
+      addActionButton(
+        BpkButton(context).apply {
+          text = "Continue"
+        }
+      )
+
+      addActionButton(
+        BpkButton(context, BpkButton.Type.Secondary).apply {
+          text = "Skip"
+        }
+      )
+    }
+
+    record(dialog, asyncScreenshot)
+  }
+
   private fun record(dialog: BpkDialog, asyncScreenshot: AsyncSnapshot) {
     // not ideal, but the scrollbar disappears too early when running on CI causing test failures if visible
     dialog.window?.decorView?.findScrollView()?.scrollBarDefaultDelayBeforeFade = 5000
@@ -214,36 +245,5 @@ class BpkDialogTest : BpkSnapshotTest() {
       }
     }
     return null
-  }
-
-  @Test
-  fun screenshotTestFlareDialog() {
-    val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
-    val asyncScreenshot = prepareForAsyncTest()
-
-    val dialog = BpkDialog(activity, BpkDialog.Style.FLARE).apply {
-      title = "You are going to Tokyo!"
-      description = "Your flight is all booked."
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        context.getColor(R.color.bpkMonteverde),
-      )
-
-      image!!.setImageBitmap(bitmap)
-
-      addActionButton(
-        BpkButton(context).apply {
-          text = "Continue"
-        }
-      )
-
-      addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-        }
-      )
-    }
-
-    record(dialog, asyncScreenshot)
   }
 }
