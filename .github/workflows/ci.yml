@@ -139,6 +139,14 @@ jobs:
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
             ./scripts/check-no-changes.sh
 
+      - name: Upload Screenshot Tests Artifact
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.flavour }}${{ env.config }}-screenshot-test-output
+          path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
+          retention-days: 5
+
   Deploy:
     name: Deploy
     runs-on: ubuntu-latest
