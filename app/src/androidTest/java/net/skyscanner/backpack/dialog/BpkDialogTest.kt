@@ -18,7 +18,10 @@
 
 package net.skyscanner.backpack.dialog
 
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.RootMatchers.isDialog
@@ -167,6 +170,9 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   private fun record(dialog: BpkDialog, asyncScreenshot: AsyncSnapshot) {
+    // not ideal, but the scrollbar disappears too early when running on CI causing test failures if visible
+    dialog.window?.decorView?.findScrollView()?.scrollBarDefaultDelayBeforeFade = 5000
+
     activity.runOnUiThread {
       dialog.show()
     }
@@ -192,6 +198,22 @@ class BpkDialogTest : BpkSnapshotTest() {
         setupView(wrapper)
         asyncScreenshot.record(wrapper)
       }
+  }
+
+  private fun View.findScrollView(): ScrollView? {
+    if (this !is ViewGroup) return null
+    for (i in 0..childCount) {
+      val child = getChildAt(i)
+      if (child is ScrollView) {
+        return child
+      } else if (child is ViewGroup) {
+        val view = child.findScrollView()
+        if (view != null) {
+          return view
+        }
+      }
+    }
+    return null
   }
 
   @Test
