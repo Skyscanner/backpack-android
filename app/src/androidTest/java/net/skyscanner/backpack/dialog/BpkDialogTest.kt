@@ -18,7 +18,10 @@
 
 package net.skyscanner.backpack.dialog
 
+import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.matcher.RootMatchers.isDialog
@@ -31,7 +34,6 @@ import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.button.BpkButtonLink
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -80,7 +82,6 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("It seems to be unstable after updating the testing framework, will be fixed in KOA-4598")
   fun screenshotTestDialogFullScreen() {
     val asyncScreenshot = prepareForAsyncTest()
 
@@ -168,34 +169,6 @@ class BpkDialogTest : BpkSnapshotTest() {
     record(dialog, asyncScreenshot)
   }
 
-  private fun record(dialog: BpkDialog, asyncScreenshot: AsyncSnapshot) {
-    activity.runOnUiThread {
-      dialog.show()
-    }
-
-    onView(withId(R.id.dialog_buttons_root))
-      .inRoot(isDialog())
-      .check { _, _ ->
-        // This is not ideal but I couldn't find a way to snapshot the whole window and we need contrast to
-        // see the rounded corners
-
-        val rootView = dialog.window!!.decorView
-        activity.windowManager.removeView(rootView)
-
-        val wrapper = FrameLayout(activity)
-        wrapper.layoutParams = FrameLayout.LayoutParams(
-          FrameLayout.LayoutParams.WRAP_CONTENT,
-          FrameLayout.LayoutParams.WRAP_CONTENT
-        )
-        wrapper.setPadding(20, 20, 20, 20)
-        wrapper.setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
-        wrapper.addView(rootView)
-
-        setupView(wrapper)
-        asyncScreenshot.record(wrapper)
-      }
-  }
-
   @Test
   fun screenshotTestFlareDialog() {
     val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
@@ -225,5 +198,52 @@ class BpkDialogTest : BpkSnapshotTest() {
     }
 
     record(dialog, asyncScreenshot)
+  }
+
+  private fun record(dialog: BpkDialog, asyncScreenshot: AsyncSnapshot) {
+    // not ideal, but the scrollbar disappears too early when running on CI causing test failures if visible
+    dialog.window?.decorView?.findScrollView()?.scrollBarDefaultDelayBeforeFade = 5000
+
+    activity.runOnUiThread {
+      dialog.show()
+    }
+
+    onView(withId(R.id.dialog_buttons_root))
+      .inRoot(isDialog())
+      .check { _, _ ->
+        // This is not ideal but I couldn't find a way to snapshot the whole window and we need contrast to
+        // see the rounded corners
+
+        val rootView = dialog.window!!.decorView
+        activity.windowManager.removeView(rootView)
+
+        val wrapper = FrameLayout(activity)
+        wrapper.layoutParams = FrameLayout.LayoutParams(
+          FrameLayout.LayoutParams.WRAP_CONTENT,
+          FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        wrapper.setPadding(20, 20, 20, 20)
+        wrapper.setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
+        wrapper.addView(rootView)
+
+        setupView(wrapper)
+        asyncScreenshot.record(wrapper)
+      }
+  }
+
+  private fun View.findScrollView(): ScrollView? {
+    if (this !is ViewGroup) return null
+    for (i in 0..childCount) {
+      val child = getChildAt(i)
+      if (child is ScrollView) {
+        return child
+      } else if (child is ViewGroup) {
+        val view = child.findScrollView()
+        if (view != null) {
+          return view
+        }
+      }
+    }
+    return null
   }
 }
