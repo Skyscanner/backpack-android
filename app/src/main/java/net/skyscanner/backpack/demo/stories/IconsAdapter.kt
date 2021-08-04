@@ -24,10 +24,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.IconsAdapter.ViewHolder
+import net.skyscanner.backpack.toast.BpkToast
 
 class IconsAdapter(
   private var icons: ArrayList<Drawable>,
@@ -49,7 +49,7 @@ class IconsAdapter(
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     holder.img.setImageDrawable(icons[position])
     holder.img.setOnClickListener {
-      Toast.makeText(holder.itemView.context, names[position], Toast.LENGTH_SHORT).show()
+      BpkToast.makeText(holder.itemView.context, names[position], BpkToast.LENGTH_SHORT).show()
     }
 
     // We do this instead of setting the parent's layout direction to avoid changing the
