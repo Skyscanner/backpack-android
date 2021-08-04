@@ -2,60 +2,6 @@
 <issues format="5" by="lint 4.2.2" client="gradle" variant="ossDebug" version="4.2.2">
 
     <issue
-        id="UnusedResources"
-        message="The resource `R.dimen.item_width` appears to be unused"
-        errorLine1="  &lt;dimen name=&quot;item_width&quot;>200dp&lt;/dimen>"
-        errorLine2="         ~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/dimes.xml"
-            line="3"
-            column="10"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.dimen.app_bar_height` appears to be unused"
-        errorLine1="  &lt;dimen name=&quot;app_bar_height&quot;>200dp&lt;/dimen>"
-        errorLine2="         ~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/values/dimes.xml"
-            line="4"
-            column="10"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.mipmap.ic_launcher_round` appears to be unused"
-        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
-        errorLine2="^">
-        <location
-            file="src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
-            line="2"
-            column="1"/>
-        <location
-            file="src/main/res/mipmap-hdpi/ic_launcher_round.png"/>
-        <location
-            file="src/main/res/mipmap-mdpi/ic_launcher_round.png"/>
-        <location
-            file="src/main/res/mipmap-xhdpi/ic_launcher_round.png"/>
-        <location
-            file="src/main/res/mipmap-xxhdpi/ic_launcher_round.png"/>
-        <location
-            file="src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.drawable.ic_rtl` appears to be unused"
-        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
-        errorLine2="^">
-        <location
-            file="src/main/res/drawable/ic_rtl.xml"
-            line="1"
-            column="1"/>
-    </issue>
-
-    <issue
         id="IconLauncherShape"
         message="Launcher icon used as round icon did not have a circular shape">
         <location
