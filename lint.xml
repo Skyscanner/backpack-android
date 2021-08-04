@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+
+  <!-- Our vectors are generated, so we don't have much control about their length etc -->
+  <issue id="VectorPath" severity="ignore"/>
+  <issue id="VectorRaster" severity="ignore"/>
+
+  <!-- Overdraw is mostly a false positive and the performance improvements when avoiding it are minimal these days -->
+  <issue id="Overdraw" severity="ignore"/>
+
+  <!-- We don't support any backup in the demo app -->
+  <issue id="AllowBackup" severity="ignore" />
+
+  <!-- We do not support AndroidTV -->
+  <issue id="MissingLeanbackSupport" severity="ignore"/>
+  <issue id="MissingLeanbackLauncher" severity="ignore"/>
+  <issue id="ImpliedTouchscreenHardware" severity="ignore"/>
+
+  <!-- Dependency updates are handled by dependabot and we generally don't want to be warned about it in a PR as the changes are unrelated -->
+  <issue id="GradleDependency" severity="ignore" />
+
+</lint>

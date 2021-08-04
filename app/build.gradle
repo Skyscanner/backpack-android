@@ -53,14 +53,10 @@ android {
     }
   }
   lintOptions {
-    // Backups not required for demo app
-    disable 'AllowBackup',
-      // Gradle dependencies to be in sync with app
-      'GradleDependency',
-      // App indexing not required for demo app
-      'GoogleAppIndexingWarning',
-      // A11y support TBD
-      'ContentDescription'
+    baseline file("lint-baseline.xml")
+    lintConfig file("../lint.xml")
+    checkReleaseBuilds false
+    warningsAsErrors true
   }
   testOptions {
     animationsDisabled = true

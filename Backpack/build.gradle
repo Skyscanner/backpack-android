@@ -31,6 +31,12 @@ android {
       "-Xuse-experimental=net.skyscanner.backpack.util.ExperimentalBackpackApi",
     ]
   }
+  lintOptions {
+    baseline file("lint-baseline.xml")
+    lintConfig file("../lint.xml")
+    checkReleaseBuilds false
+    warningsAsErrors true
+  }
 }
 
 dependencies {
