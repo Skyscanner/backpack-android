@@ -2,39 +2,6 @@
 <issues format="5" by="lint 4.2.2" client="gradle" variant="debug" version="4.2.2">
 
     <issue
-        id="CustomViewStyleable"
-        message="By convention, the custom view (`MonthView`) and the declare-styleable (`BpkCalendar`) should have the same name (various editor features rely on this convention)"
-        errorLine1="    val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)"
-        errorLine2="                                                       ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/net/skyscanner/backpack/calendar/view/MonthView.kt"
-            line="117"
-            column="56"/>
-    </issue>
-
-    <issue
-        id="CustomViewStyleable"
-        message="By convention, the custom view (`MonthView`) and the declare-styleable (`BpkCalendar`) should have the same name (various editor features rely on this convention)"
-        errorLine1="    val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)"
-        errorLine2="                                                       ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/net/skyscanner/backpack/calendar/view/MonthView.kt"
-            line="117"
-            column="56"/>
-    </issue>
-
-    <issue
-        id="CustomViewStyleable"
-        message="By convention, the custom view (`MonthView`) and the declare-styleable (`BpkCalendar`) should have the same name (various editor features rely on this convention)"
-        errorLine1="    val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)"
-        errorLine2="                                                       ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/net/skyscanner/backpack/calendar/view/MonthView.kt"
-            line="117"
-            column="56"/>
-    </issue>
-
-    <issue
         id="UseCompatTextViewDrawableApis"
         message="Use `TextViewCompat.setCompoundDrawableTintList()`"
         errorLine1="    compoundDrawableTintList = style.text"
