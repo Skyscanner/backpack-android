@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <issues format="5" by="lint 4.2.2" client="gradle" variant="ossDebug" version="4.2.2">
-
-    <issue
-        id="ScopedStorage"
-        message="WRITE_EXTERNAL_STORAGE no longer provides write access when targeting Android 10+"
-        errorLine1="  &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; />"
-        errorLine2="                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/AndroidManifest.xml"
-            line="4"
-            column="34"/>
-    </issue>
-
+  
     <issue
         id="BpkComponentUsage"
         message="Backpack component available for android.widget.Toast. Use net.skyscanner.backpack.toast.BpkToast instead. More info at https://backpack.github.io/components/toast"
