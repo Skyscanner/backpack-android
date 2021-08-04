@@ -19,4 +19,7 @@
   <!-- Dependency updates are handled by dependabot and we generally don't want to be warned about it in a PR as the changes are unrelated -->
   <issue id="GradleDependency" severity="ignore" />
 
+  <!-- As our minSdk is 24 this is not relevant -->
+  <issue id="UseCompatTextViewDrawableApis" severity="ignore"/>
+
 </lint>

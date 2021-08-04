@@ -2,28 +2,6 @@
 <issues format="5" by="lint 4.2.2" client="gradle" variant="debug" version="4.2.2">
 
     <issue
-        id="UseCompatTextViewDrawableApis"
-        message="Use `TextViewCompat.setCompoundDrawableTintList()`"
-        errorLine1="    compoundDrawableTintList = style.text"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/net/skyscanner/backpack/chip/BpkChip.kt"
-            line="134"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="UseCompatTextViewDrawableApis"
-        message="Use `TextViewCompat.setCompoundDrawableTintList()`"
-        errorLine1="    compoundDrawableTintList = ColorStateList.valueOf(color)"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/net/skyscanner/backpack/text/BpkText.kt"
-            line="153"
-            column="5"/>
-    </issue>
-
-    <issue
         id="ViewConstructor"
         message="Custom view `HighlightedDaysMonthFooter` is missing constructor used by tools: `(Context)` or `(Context,AttributeSet)` or `(Context,AttributeSet,int)`"
         errorLine1="open class HighlightedDaysMonthFooter("
