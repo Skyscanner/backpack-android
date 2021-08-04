@@ -2,17 +2,6 @@
 <issues format="5" by="lint 4.2.2" client="gradle" variant="debug" version="4.2.2">
 
     <issue
-        id="ContentDescription"
-        message="Missing `contentDescription` attribute on image"
-        errorLine1="  &lt;ImageView"
-        errorLine2="   ~~~~~~~~~">
-        <location
-            file="src/main/res/layout/view_bpk_tab.xml"
-            line="10"
-            column="4"/>
-    </issue>
-
-    <issue
         id="IgnoreWithoutReason"
         message="Test is ignored without giving any explanation"
         errorLine1="  @Ignore // FIXME: Test is not working anymore (the component looks fine)"
