@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="5" by="lint 4.2.2" client="gradle" variant="debug" version="4.2.2">
+
+    <issue
+        id="CustomViewStyleable"
+        message="By convention, the custom view (`MonthView`) and the declare-styleable (`BpkCalendar`) should have the same name (various editor features rely on this convention)"
+        errorLine1="    val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)"
+        errorLine2="                                                       ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/calendar/view/MonthView.kt"
+            line="117"
+            column="56"/>
+    </issue>
+
+    <issue
+        id="CustomViewStyleable"
+        message="By convention, the custom view (`MonthView`) and the declare-styleable (`BpkCalendar`) should have the same name (various editor features rely on this convention)"
+        errorLine1="    val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)"
+        errorLine2="                                                       ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/calendar/view/MonthView.kt"
+            line="117"
+            column="56"/>
+    </issue>
+
+    <issue
+        id="CustomViewStyleable"
+        message="By convention, the custom view (`MonthView`) and the declare-styleable (`BpkCalendar`) should have the same name (various editor features rely on this convention)"
+        errorLine1="    val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)"
+        errorLine2="                                                       ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/calendar/view/MonthView.kt"
+            line="117"
+            column="56"/>
+    </issue>
+
+    <issue
+        id="UseCompatTextViewDrawableApis"
+        message="Use `TextViewCompat.setCompoundDrawableTintList()`"
+        errorLine1="    compoundDrawableTintList = style.text"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/chip/BpkChip.kt"
+            line="134"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UseCompatTextViewDrawableApis"
+        message="Use `TextViewCompat.setCompoundDrawableTintList()`"
+        errorLine1="    compoundDrawableTintList = ColorStateList.valueOf(color)"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/text/BpkText.kt"
+            line="153"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="ViewConstructor"
+        message="Custom view `HighlightedDaysMonthFooter` is missing constructor used by tools: `(Context)` or `(Context,AttributeSet)` or `(Context,AttributeSet,int)`"
+        errorLine1="open class HighlightedDaysMonthFooter("
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/calendar/view/HighlightedDaysMonthFooter.kt"
+            line="35"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="  &lt;ImageView"
+        errorLine2="   ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/view_bpk_tab.xml"
+            line="10"
+            column="4"/>
+    </issue>
+
+    <issue
+        id="IgnoreWithoutReason"
+        message="Test is ignored without giving any explanation"
+        errorLine1="  @Ignore // FIXME: Test is not working anymore (the component looks fine)"
+        errorLine2="  ~~~~~~~">
+        <location
+            file="src/androidTest/java/net/skyscanner/backpack/badge/BpkBadgeTest.kt"
+            line="56"
+            column="3"/>
+    </issue>
+
+</issues>
