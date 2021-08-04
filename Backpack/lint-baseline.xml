@@ -2,17 +2,6 @@
 <issues format="5" by="lint 4.2.2" client="gradle" variant="debug" version="4.2.2">
 
     <issue
-        id="ViewConstructor"
-        message="Custom view `HighlightedDaysMonthFooter` is missing constructor used by tools: `(Context)` or `(Context,AttributeSet)` or `(Context,AttributeSet,int)`"
-        errorLine1="open class HighlightedDaysMonthFooter("
-        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/java/net/skyscanner/backpack/calendar/view/HighlightedDaysMonthFooter.kt"
-            line="35"
-            column="12"/>
-    </issue>
-
-    <issue
         id="ContentDescription"
         message="Missing `contentDescription` attribute on image"
         errorLine1="  &lt;ImageView"

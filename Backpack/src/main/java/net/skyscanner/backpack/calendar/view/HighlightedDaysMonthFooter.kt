@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -32,6 +33,7 @@ import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 
+@SuppressLint("ViewConstructor") // this view is only instantiated in code
 open class HighlightedDaysMonthFooter(
   context: Context,
   val formatDate: DateFormatter,
