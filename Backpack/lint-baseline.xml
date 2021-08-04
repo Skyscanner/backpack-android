@@ -1,15 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <issues format="5" by="lint 4.2.2" client="gradle" variant="debug" version="4.2.2">
-
-    <issue
-        id="IgnoreWithoutReason"
-        message="Test is ignored without giving any explanation"
-        errorLine1="  @Ignore // FIXME: Test is not working anymore (the component looks fine)"
-        errorLine2="  ~~~~~~~">
-        <location
-            file="src/androidTest/java/net/skyscanner/backpack/badge/BpkBadgeTest.kt"
-            line="56"
-            column="3"/>
-    </issue>
-
 </issues>
