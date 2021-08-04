@@ -34,7 +34,7 @@ android {
   lintOptions {
     baseline file("lint-baseline.xml")
     lintConfig file("../lint.xml")
-    checkReleaseBuilds false
+    checkReleaseBuilds false // we're already running lint separately
     warningsAsErrors true
   }
 }
