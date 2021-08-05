@@ -114,6 +114,7 @@ internal class MonthView @JvmOverloads constructor(
   private val rangeTextColor: Int
 
   init {
+    @SuppressLint("CustomViewStyleable") // We're accessing the calendar style from the parent view here
     val a = this.context.obtainStyledAttributes(attrs, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0)
 
     selectedDayCircleFillColor = a.getColor(
