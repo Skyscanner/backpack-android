@@ -44,7 +44,7 @@ class BpkFlareTest : BpkSnapshotTest() {
 
   private val imageView = ImageView(testContext).apply {
     setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.canadian_rockies_canada))
-    layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
     scaleType = ImageView.ScaleType.CENTER_CROP
   }
 

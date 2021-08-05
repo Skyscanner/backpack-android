@@ -2,20 +2,6 @@
 <issues format="5" by="lint 4.2.2" client="gradle" variant="ossDebug" version="4.2.2">
 
     <issue
-        id="IconLocation"
-        message="Found bitmap drawable `res/drawable/canadian_rockies_canada.jpg` in densityless folder">
-        <location
-            file="src/main/res/drawable/canadian_rockies_canada.jpg"/>
-    </issue>
-
-    <issue
-        id="IconExtension"
-        message="Misleading file extension; named `.jpg` but the file format is `webp`">
-        <location
-            file="src/main/res/drawable/canadian_rockies_canada.jpg"/>
-    </issue>
-
-    <issue
         id="ContentDescription"
         message="Missing `contentDescription` attribute on image"
         errorLine1="  &lt;ImageView"

@@ -20,7 +20,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:adjustViewBounds="true"
-      android:scaleType="centerInside"
+      android:scaleType="centerCrop"
       android:src="@drawable/canadian_rockies_canada" />
 
     <net.skyscanner.backpack.text.BpkText
@@ -46,7 +46,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:adjustViewBounds="true"
-      android:scaleType="centerInside"
+      android:scaleType="centerCrop"
       android:src="@drawable/canadian_rockies_canada" />
 
     <net.skyscanner.backpack.text.BpkText
