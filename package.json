@@ -60,7 +60,7 @@
     "@babel/preset-env": "^7.9.6",
     "@skyscanner/bpk-android": "^1.0.0",
     "@skyscanner/bpk-svgs": "^12.7.1",
-    "danger": "^9.4.0",
+    "danger": "^10.6.6",
     "del": "^4.0.0",
     "ensure-node-env": "^1.2.2",
     "eslint-config-skyscanner-with-prettier": "^0.8.0",
