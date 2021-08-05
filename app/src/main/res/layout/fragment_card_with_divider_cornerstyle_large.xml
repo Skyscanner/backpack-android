@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   style="@style/App.Story"
   android:padding="0dp">
 
@@ -36,8 +37,9 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.3"
-        android:paddingLeft="@dimen/bpkSpacingBase"
-        android:text="@string/stub_xs" />
+        android:paddingStart="@dimen/bpkSpacingBase"
+        android:text="@string/stub_xs"
+        tools:ignore="RtlSymmetry" />
     </androidx.appcompat.widget.LinearLayoutCompat>
   </net.skyscanner.backpack.card.BpkCardView>
 </RelativeLayout>
