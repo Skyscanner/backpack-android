@@ -18,8 +18,8 @@
     android:layout_height="wrap_content"
     android:text="@string/txt_lorem_ipsum"
     app:drawableTint="@color/bpkMonteverde"
-    android:drawableRight="@drawable/bpk_arrow_right"
-    android:drawableLeft="@drawable/bpk_flight"
+    android:drawableEnd="@drawable/bpk_arrow_right"
+    android:drawableStart="@drawable/bpk_flight"
     app:textStyle="lg" />
 
 </LinearLayout>

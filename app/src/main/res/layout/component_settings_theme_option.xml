@@ -12,7 +12,7 @@
     android:layout_height="@dimen/bpkSpacingXl"
     android:text="London"
     android:background="?attr/selectableItemBackground"
-    android:gravity="center_vertical|left"
+    android:gravity="center_vertical|start"
     android:layout_weight=".8"/>
 
   <ImageView
