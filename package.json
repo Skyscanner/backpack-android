@@ -79,7 +79,7 @@
     "merge2": "^1.2.1",
     "node-fetch": "^2.0.0",
     "prettier": "^2.3.2",
-    "release-it": "^12.2.0",
+    "release-it": "^14.10.1",
     "replace-in-file": "^6.2.0",
     "semver": "^7.3.5",
     "svg2vectordrawable": "^2.4.0",
