@@ -46,7 +46,7 @@ const _ = require('lodash');
 const through = require('through2');
 const svg2vectordrawable = require('svg2vectordrawable');
 const xmldom = require('xmldom');
-const tokens = require('@skyscanner/bpk-android/tokens/base.raw.android.json');
+const tokens = require('@skyscanner/bpk-foundations-android/tokens/base.raw.android.json');
 const iconsMetadata = require('@skyscanner/bpk-svgs/dist/metadata.json');
 
 const PATHS = {
