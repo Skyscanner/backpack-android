@@ -6,14 +6,30 @@ updates:
     interval: daily
     time: "10:00"
   open-pull-requests-limit: 10
+- package-ecosystem: gradle
+  directory: "/app"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: gradle
+  directory: "/Backpack"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: gradle
+  directory: "/backpack-lint"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
 - package-ecosystem: npm
   directory: "/"
   schedule:
     interval: daily
     time: "10:00"
   open-pull-requests-limit: 10
-  labels:
-  - dependabot
   versioning-strategy: increase-if-necessary
   allow:
     - dependency-type: "direct"
