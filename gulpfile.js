@@ -107,6 +107,8 @@ const convertToXml = (chunk, enc, cb) => {
         const item = paths.item(i);
         if (item.getAttribute('android:fillColor') === '#000000') {
           item.setAttribute('android:fillColor', '@color/bpkTextPrimary');
+        } else if (!item.getAttribute('android:fillColor')) {
+          item.setAttribute('android:fillColor', '@color/bpkTextPrimary');
         }
       }
 
