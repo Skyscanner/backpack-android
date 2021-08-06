@@ -26,7 +26,8 @@
     "docs": "./gradlew Backpack:dokka",
     "docs:clean": "./gradlew Backpack:cleanDokka",
     "spellcheck": "mdspell -r --en-gb --ignore-acronyms --ignore-numbers --no-suggestions '*.md' '**/*.md' '!**/node_modules/**/*.md'",
-    "spellcheck:interactive": "mdspell --en-gb --ignore-acronyms --no-suggestions --ignore-numbers '*.md' '**/*.md' '!**/node_modules/**/*.md'"
+    "spellcheck:interactive": "mdspell --en-gb --ignore-acronyms --no-suggestions --ignore-numbers '*.md' '**/*.md' '!**/node_modules/**/*.md'",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -74,7 +75,7 @@
     "gulp-nunjucks": "^4.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-util": "^3.0.8",
-    "husky": "^7.0.1",
+    "husky": "^7.0.0",
     "inquirer": "^6.0.0",
     "js-yaml": "^4.1.0",
     "lint-staged": "^8.1.3",
