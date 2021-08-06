@@ -83,7 +83,7 @@
     "replace-in-file": "^6.2.0",
     "semver": "^7.3.5",
     "svg2vectordrawable": "^2.4.0",
-    "through2": "^3.0.0",
+    "through2": "^4.0.2",
     "tinycolor2": "^1.4.1",
     "xmldom": "^0.6.0"
   },
