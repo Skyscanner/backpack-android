@@ -31,9 +31,11 @@ android {
     ]
   }
   lintOptions {
+    baseline file("lint-baseline.xml")
     lintConfig file("../lint.xml")
     checkReleaseBuilds false // we're already running lint separately
     warningsAsErrors true
+    disable 'UnusedResources' // we're exposing resources for consumers
   }
 }
 
