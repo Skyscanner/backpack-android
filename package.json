@@ -59,7 +59,7 @@
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@skyscanner/bpk-foundations-android": "^1.1.0",
-    "@skyscanner/bpk-svgs": "^12.7.1",
+    "@skyscanner/bpk-svgs": "^14.0.0",
     "babel-eslint": "^10.1.0",
     "danger": "^10.6.6",
     "del": "^6.0.0",
