@@ -83,7 +83,7 @@
     "merge-stream": "^2.0.0",
     "merge2": "^1.2.1",
     "node-fetch": "^2.0.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.3.2",
     "release-it": "^12.2.0",
     "replace-in-file": "^6.2.0",
     "semver": "^5.5.0",
