@@ -23,16 +23,18 @@
     app:weight="emphasized"
     tools:text="£35+" />
 
-  <androidx.appcompat.widget.AppCompatImageView
+  <ImageView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:importantForAccessibility="no"
     android:src="@drawable/bpk_map_marker_flare"
     app:tint="@color/bpkSkyBlue" />
 
-  <androidx.appcompat.widget.AppCompatImageView
+  <ImageView
     android:id="@+id/pointer"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:importantForAccessibility="no"
     android:src="@drawable/bpk_map_marker_pointer" />
 
 </LinearLayout>
