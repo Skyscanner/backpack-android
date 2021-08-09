@@ -21,13 +21,14 @@
       android:layout_height="wrap_content"
       android:adjustViewBounds="true"
       android:scaleType="centerCrop"
+      android:contentDescription="@string/image_rockies_content_description"
       android:src="@drawable/canadian_rockies_canada" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      android:text="Rounded corners"
+      android:text="@string/overlay_rounded_corners"
       android:textColor="@color/bpkWhite"
       app:textStyle="lg" />
 
@@ -47,13 +48,14 @@
       android:layout_height="wrap_content"
       android:adjustViewBounds="true"
       android:scaleType="centerCrop"
+      android:contentDescription="@string/image_rockies_content_description"
       android:src="@drawable/canadian_rockies_canada" />
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      android:text="No rounded corners"
+      android:text="@string/overlay_no_rounded_corners"
       android:textColor="@color/bpkWhite"
       app:textStyle="lg" />
 

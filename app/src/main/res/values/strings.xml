@@ -46,4 +46,9 @@
   <string name="bottom_nav_trips">Trips</string>
   <string name="bottom_nav_profile">Profile</string>
 
+  <string name="image_rockies_content_description">Image of woman standing on a pier by a lake in the mountains</string>
+
+  <string name="overlay_rounded_corners">Rounded corners</string>
+  <string name="overlay_no_rounded_corners">No rounded corners</string>
+
 </resources>

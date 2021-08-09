@@ -11,10 +11,11 @@
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:flarePointerPosition="start">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:scaleType="centerCrop"
+      android:contentDescription="@string/image_rockies_content_description"
       app:srcCompat="@drawable/canadian_rockies_canada" />
   </net.skyscanner.backpack.flare.BpkFlare>
 
@@ -24,10 +25,11 @@
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:flarePointerPosition="middle">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:scaleType="centerCrop"
+      android:contentDescription="@string/image_rockies_content_description"
       app:srcCompat="@drawable/canadian_rockies_canada" />
   </net.skyscanner.backpack.flare.BpkFlare>
 
@@ -37,10 +39,11 @@
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     app:flarePointerPosition="end">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:scaleType="centerCrop"
+      android:contentDescription="@string/image_rockies_content_description"
       app:srcCompat="@drawable/canadian_rockies_canada" />
   </net.skyscanner.backpack.flare.BpkFlare>
 
