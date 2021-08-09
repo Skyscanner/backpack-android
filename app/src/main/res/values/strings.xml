@@ -58,4 +58,6 @@
   <string name="icons_car">Car icon</string>
   <string name="icons_hotel">Hotel icon</string>
 
+  <string name="settings_selected">Selected</string>
+
 </resources>

@@ -2,17 +2,6 @@
 <issues format="5" by="lint 4.2.2" client="gradle" variant="ossDebug" version="4.2.2">
 
     <issue
-        id="ContentDescription"
-        message="Missing `contentDescription` attribute on image"
-        errorLine1="  &lt;ImageView"
-        errorLine2="   ~~~~~~~~~">
-        <location
-            file="src/main/res/layout/component_settings_theme_option.xml"
-            line="18"
-            column="4"/>
-    </issue>
-
-    <issue
         id="SetTextI18n"
         message="Do not concatenate text displayed with `setText`. Use resource string with placeholders."
         errorLine1="      it.text = it.text.toString() + &quot; increased&quot;"
@@ -306,17 +295,6 @@
         <location
             file="src/main/res/layout/activity_settings.xml"
             line="60"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;London&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;London&quot;"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/component_settings_theme_option.xml"
-            line="13"
             column="5"/>
     </issue>
 
