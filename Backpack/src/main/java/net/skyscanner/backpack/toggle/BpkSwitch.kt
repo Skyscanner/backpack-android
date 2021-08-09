@@ -23,6 +23,7 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.graphics.ColorUtils
+import com.google.android.material.color.MaterialColors
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -31,9 +32,6 @@ private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
   val withBaseStyle = createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.switchStyle)
   return createContextThemeWrapper(withBaseStyle, attrs, R.attr.bpkSwitchStyle)
 }
-
-// taken from https://github.com/material-components/material-components-android/blob/master/lib/java/com/google/android/material/color/MaterialColors.java#L42
-private const val CHECKED_TRACK_COLOR_ALPHA = (0.38f * 255f).toInt()
 
 /**
  * BpkSwitch allow users to toggle between two states, on or off.
@@ -58,11 +56,16 @@ open class BpkSwitch @JvmOverloads constructor(
     val textDisabledColor = context.getColor(R.color.bpkSkyGrayTint04)
     val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
-      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, context.getColor(R.color.bpkPrimary))
-      val trackCheckedColor = ColorUtils.setAlphaComponent(checkedColor, CHECKED_TRACK_COLOR_ALPHA)
+      val primaryColor = context.getColor(R.color.bpkPrimary)
+      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, primaryColor)
+      val trackCheckedColor = if (checkedColor == primaryColor) {
+        context.getColor(R.color.bpkSkyBlueTint03)
+      } else {
+        ColorUtils.setAlphaComponent(checkedColor, (MaterialColors.ALPHA_DISABLED * 255).toInt())
+      }
 
       trackTintList = getColorStateList(trackCheckedColor, context.getColor(R.color.__switchTrackDisabled))
-      thumbTintList = getColorStateList(checkedColor, context.getColor(R.color.__switchThumbDisabled))
+      thumbTintList = getColorStateList(checkedColor, context.getColor(R.color.bpkWhite))
     }
     setTextColor(
       ColorStateList(

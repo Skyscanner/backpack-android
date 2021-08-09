@@ -17,7 +17,6 @@ android {
   defaultConfig {
     minSdkVersion rootProject.ext.minSdkVersion
     targetSdkVersion rootProject.ext.targetSdkVersion
-    versionName "1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
   compileOptions {
@@ -30,6 +29,13 @@ android {
       "-Xopt-in=kotlin.RequiresOptIn",
       "-Xuse-experimental=net.skyscanner.backpack.util.ExperimentalBackpackApi",
     ]
+  }
+  lintOptions {
+    baseline file("lint-baseline.xml")
+    lintConfig file("../lint.xml")
+    checkReleaseBuilds false // we're already running lint separately
+    warningsAsErrors true
+    disable 'UnusedResources' // we're exposing resources for consumers
   }
 }
 

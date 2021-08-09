@@ -37,28 +37,28 @@ class BpkCustomChipTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestDefault() {
-    snap(createChip())
+    snap(createChip().wrapInParent())
   }
 
   @Test
   fun screenshotTestDisabled() {
     val view = createChip()
     view.disabled = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
   fun screenshotTestSelected() {
     val view = createChip()
     view.isSelected = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
   fun screenshotTestWithIcon() {
     val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -66,7 +66,7 @@ class BpkCustomChipTest : BpkSnapshotTest() {
     val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.isSelected = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   @Test
@@ -74,7 +74,7 @@ class BpkCustomChipTest : BpkSnapshotTest() {
     val view = createChip()
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.disabled = true
-    snap(view)
+    snap(view.wrapInParent())
   }
 
   private fun createChip(context: Context = testContext): BpkChip =

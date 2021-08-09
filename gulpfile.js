@@ -46,7 +46,7 @@ const _ = require('lodash');
 const through = require('through2');
 const svg2vectordrawable = require('svg2vectordrawable');
 const xmldom = require('xmldom');
-const tokens = require('@skyscanner/bpk-android/tokens/base.raw.android.json');
+const tokens = require('@skyscanner/bpk-foundations-android/tokens/base.raw.android.json');
 const iconsMetadata = require('@skyscanner/bpk-svgs/dist/metadata.json');
 
 const PATHS = {
@@ -106,6 +106,8 @@ const convertToXml = (chunk, enc, cb) => {
       for (let i = 0; i < paths.length; i += 1) {
         const item = paths.item(i);
         if (item.getAttribute('android:fillColor') === '#000000') {
+          item.setAttribute('android:fillColor', '@color/bpkTextPrimary');
+        } else if (!item.getAttribute('android:fillColor')) {
           item.setAttribute('android:fillColor', '@color/bpkTextPrimary');
         }
       }

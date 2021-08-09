@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.horisontalnav
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -28,11 +27,11 @@ import android.util.AttributeSet
 import android.util.SparseArray
 import android.util.SparseBooleanArray
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
-import androidx.appcompat.text.AllCapsTransformationMethod
 import androidx.collection.SparseArrayCompat
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.R
@@ -59,7 +58,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     Normal(
       id = 0,
       styleAttribute = R.attr.bpkHorizontalNavStyle,
-      defaultTextColor = R.color.__horizontalNavTextDefault,
+      defaultTextColor = R.color.bpkTextPrimary,
       defaultTextSelectedColor = R.color.bpkPrimary,
       defaultIndicatorColor = R.color.bpkPrimary
     ),
@@ -110,8 +109,6 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   private val texts = SparseArrayCompat<CharSequence?>()
   private val notificationDots = SparseBooleanArray()
   private val badges = SparseArray<CharSequence?>()
-  @SuppressLint("RestrictedApi")
-  private val allCaps = AllCapsTransformationMethod(context)
 
   init {
     initialize(attrs, defStyleAttr)
@@ -152,6 +149,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     setSelectedTabIndicatorHeight(resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg))
     setTabTextColors(textColor, textSelectedColor)
     setSelectedTabIndicatorColor(indicatorColor)
+    isInlineLabel = true
     for (i in 0 until tabCount) {
       updateTab(i)
     }
@@ -188,11 +186,9 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     addTab(tab, tabCount, setSelected)
   }
 
-  @SuppressLint("RestrictedApi")
   override fun addTab(tab: Tab, position: Int, setSelected: Boolean) {
-    val capitalisedText = allCaps.getTransformation(tab.text, this)
-    texts.put(position, capitalisedText)
-    super.addTab(tab.setText(capitalisedText).setCustomView(R.layout.view_bpk_tab), position, setSelected)
+    texts.put(position, tab.text)
+    super.addTab(tab.setCustomView(R.layout.view_bpk_tab), position, setSelected)
     updateTab(position)
   }
 
@@ -223,9 +219,8 @@ open class BpkHorizontalNav @JvmOverloads constructor(
         it.setBackground(ColorStateList.valueOf(Color.TRANSPARENT), tabTextColors!!)
         it.setTextColor(tabTextColors)
       }
-      findViewById<TextView>(android.R.id.text1)?.let {
-        it.setTextColor(tabTextColors)
-      }
+      findViewById<TextView>(android.R.id.text1)?.setTextColor(tabTextColors)
+      findViewById<ImageView>(android.R.id.icon)?.imageTintList = tabTextColors
     }
   }
 

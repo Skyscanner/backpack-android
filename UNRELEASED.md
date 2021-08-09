@@ -4,11 +4,7 @@
 >
 
 **Fixed:**
-
-- Updated Button component to match Design System:
-  - Updated various colours
-  - Updated icon spacing + horizontal padding
-  - All caps property is now false
+- Updated `world--amer`, `world--apac`, `world--emea` icons to their latest version
 
 ## How to write a good changelog entry
 

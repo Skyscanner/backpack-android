@@ -1,0 +1,1709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="5" by="lint 4.2.2" client="gradle" variant="ossDebug" version="4.2.2">
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="  &lt;ImageView"
+        errorLine2="   ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/component_settings_theme_option.xml"
+            line="18"
+            column="4"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="21"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="27"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="33"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="53"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="60"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="67"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="87"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="93"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="99"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_overlay.xml"
+            line="19"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;ImageView"
+        errorLine2="     ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_overlay.xml"
+            line="45"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        errorLine1="      it.text = it.text.toString() + &quot; increased&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/ChangeableButtonsStory.kt"
+            line="34"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="      it.text = it.text.toString() + &quot; increased&quot;"
+        errorLine2="                                      ~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/ChangeableButtonsStory.kt"
+            line="34"
+            column="39"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="    single.text = &quot;Single&quot;"
+        errorLine2="                   ~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/ColoredCalendarStory.kt"
+            line="60"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="    range.text = &quot;Range&quot;"
+        errorLine2="                  ~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/ColoredCalendarStory.kt"
+            line="61"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="    single.text = &quot;Single&quot;"
+        errorLine2="                   ~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DefaultCalendarStory.kt"
+            line="50"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="    range.text = &quot;Range&quot;"
+        errorLine2="                  ~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DefaultCalendarStory.kt"
+            line="51"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Continue&quot;"
+        errorLine2="                    ~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="69"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Skip&quot;"
+        errorLine2="                    ~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="79"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Skip&quot;"
+        errorLine2="                    ~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="101"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Delete&quot;"
+        errorLine2="                    ~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="128"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Cancel&quot;"
+        errorLine2="                    ~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="138"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Create&quot;"
+        errorLine2="                    ~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="180"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Direct flights only&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="189"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;No, Thanks!&quot;"
+        errorLine2="                    ~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="198"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Continue&quot;"
+        errorLine2="                    ~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="219"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Skip&quot;"
+        errorLine2="                    ~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="229"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Got it!&quot;"
+        errorLine2="                    ~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="247"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Whatev&apos;s&quot;"
+        errorLine2="                    ~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="257"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Find your deal&quot;"
+        errorLine2="                    ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="277"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="            text = &quot;Ok, got it&quot;"
+        errorLine2="                    ~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="287"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="    single.text = &quot;Single&quot;"
+        errorLine2="                   ~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DisabledCalendarStory.kt"
+            line="56"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="    range.text = &quot;Range&quot;"
+        errorLine2="                  ~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DisabledCalendarStory.kt"
+            line="57"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="    single.text = &quot;Single&quot;"
+        errorLine2="                   ~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/LabeledCalendarStory.kt"
+            line="58"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="    range.text = &quot;Range&quot;"
+        errorLine2="                  ~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/LabeledCalendarStory.kt"
+            line="59"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Component Themes&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Component Themes&quot;/>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="36"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Enable themes&quot;, should use `@string` resource"
+        errorLine1="      android:text=&quot;Enable themes&quot;/>"
+        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="48"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;This will enable themes for compatible components&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;This will enable themes for compatible components&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="60"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;London&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;London&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/component_settings_theme_option.xml"
+            line="13"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="31"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="35"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="39"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="43"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="47"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="51"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="55"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="59"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="63"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="67"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="71"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="75"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="79"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="83"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="87"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="91"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="95"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="99"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="103"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="107"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="111"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="115"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="119"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="123"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="127"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="131"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="135"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="139"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
+        errorLine1="          android:text=&quot;List item&quot; />"
+        errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="143"
+            column="11"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Short Text&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Short Text&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_buttons_changeable.xml"
+            line="13"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Long Text Long Text Long Text Long Text Long&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Long Text Long Text Long Text Long Text Long&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_buttons_changeable.xml"
+            line="21"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Default Unchecked&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Default Unchecked&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_checkbox.xml"
+            line="13"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Default Checked&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Default Checked&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_checkbox.xml"
+            line="20"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Disabled Unchecked&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Disabled Unchecked&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_checkbox.xml"
+            line="27"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Disabled Checked&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Disabled Checked&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_checkbox.xml"
+            line="35"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Default RTL&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Default RTL&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_checkbox.xml"
+            line="42"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Show&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Show&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_dialog.xml"
+            line="11"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Small&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Small&quot;/>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="14"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Large&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Large&quot;/>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="46"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;In color&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;In color&quot;/>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="80"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;\@dimen/bpkBorderRadiusXs&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;\@dimen/bpkBorderRadiusXs&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radii.xml"
+            line="12"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;\@dimen/bpkBorderRadiusSm&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;\@dimen/bpkBorderRadiusSm&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radii.xml"
+            line="23"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;\@dimen/bpkBorderRadiusMd&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;\@dimen/bpkBorderRadiusMd&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radii.xml"
+            line="34"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;\@dimen/bpkBorderRadiusLg&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;\@dimen/bpkBorderRadiusLg&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radii.xml"
+            line="45"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;\@dimen/bpkBorderRadiusPill&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;\@dimen/bpkBorderRadiusPill&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radii.xml"
+            line="56"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Default Unchecked&quot;, should use `@string` resource"
+        errorLine1="      android:text=&quot;Default Unchecked&quot; />"
+        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radio_button.xml"
+            line="18"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Default Checked&quot;, should use `@string` resource"
+        errorLine1="      android:text=&quot;Default Checked&quot; />"
+        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radio_button.xml"
+            line="25"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Default RTL&quot;, should use `@string` resource"
+        errorLine1="      android:text=&quot;Default RTL&quot; />"
+        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radio_button.xml"
+            line="32"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Disabled Unchecked&quot;, should use `@string` resource"
+        errorLine1="      android:text=&quot;Disabled Unchecked&quot; />"
+        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radio_button.xml"
+            line="41"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Disabled Checked&quot;, should use `@string` resource"
+        errorLine1="      android:text=&quot;Disabled Checked&quot; />"
+        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_radio_button.xml"
+            line="49"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Message (Duration Short)&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Message (Duration Short)&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="12"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Message (Duration Long)&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Message (Duration Long)&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="19"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Message (Duration Indefinite)&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Message (Duration Indefinite)&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="26"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Title + Message&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Title + Message&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="33"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Icon + Message&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Icon + Message&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="40"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Icon + Title + Message&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Icon + Title + Message&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="47"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Message (Icon Action)&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Message (Icon Action)&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="54"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Title + Message (Icon Action)&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Title + Message (Icon Action)&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="61"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Icon + Message (Icon Action)&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Icon + Message (Icon Action)&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="68"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Icon + title + message (Icon Action)&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Icon + title + message (Icon Action)&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_snackbar.xml"
+            line="75"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;0 out of 5&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;0 out of 5&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_default.xml"
+            line="12"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_default.xml"
+            line="19"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;2.5 out of 5&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;2.5 out of 5&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_default.xml"
+            line="27"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_default.xml"
+            line="34"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;5 out of 5&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;5 out of 5&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_default.xml"
+            line="42"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_default.xml"
+            line="49"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;0 out of 5&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;0 out of 5&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="12"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="20"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;3 out of 5&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;3 out of 5&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="28"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="35"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;5 out of 5&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;5 out of 5&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="43"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="50"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;2 out of 5 RTL&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;2 out of 5 RTL&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="59"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="67"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;5 out of 8&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;5 out of 8&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="75"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_interactive.xml"
+            line="82"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="12"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="20"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="28"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="36"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="44"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="52"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="60"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="67"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="75"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_max.xml"
+            line="83"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="12"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="19"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="26"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="33"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="40"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="47"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="54"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="60"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="67"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Rating&quot;, should use `@string` resource"
+        errorLine1="    android:contentDescription=&quot;Rating&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_star_rating_values.xml"
+            line="74"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Default Unchecked&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Default Unchecked&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_switch.xml"
+            line="13"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Default Checked&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Default Checked&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_switch.xml"
+            line="20"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Disabled Unchecked&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Disabled Unchecked&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_switch.xml"
+            line="27"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Disabled Checked&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Disabled Checked&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_switch.xml"
+            line="35"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Default RTL&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Default RTL&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_switch.xml"
+            line="42"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input empty&quot;, should use `@string` resource"
+        errorLine1="    android:hint=&quot;Input empty&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="14"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input empty&quot;, should use `@string` resource"
+        errorLine1="    android:hint=&quot;Input empty&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="20"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input empty&quot;, should use `@string` resource"
+        errorLine1="    android:hint=&quot;Input empty&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="27"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input filled&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Input filled&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="28"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input with icon end&quot;, should use `@string` resource"
+        errorLine1="    android:hint=&quot;Input with icon end&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="35"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input disabled&quot;, should use `@string` resource"
+        errorLine1="    android:hint=&quot;Input disabled&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="42"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input empty RTL&quot;, should use `@string` resource"
+        errorLine1="    android:hint=&quot;Input empty RTL&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="49"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input empty RTL&quot;, should use `@string` resource"
+        errorLine1="    android:hint=&quot;Input empty RTL&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="57"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input filled RTL&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Input filled RTL&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="59"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input with icon end RTL&quot;, should use `@string` resource"
+        errorLine1="    android:hint=&quot;Input with icon end RTL&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="66"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Input disabled RTL&quot;, should use `@string` resource"
+        errorLine1="    android:hint=&quot;Input disabled RTL&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="75"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Short Toast&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Short Toast&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_toasts.xml"
+            line="12"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Long Toast&quot;, should use `@string` resource"
+        errorLine1="    android:text=&quot;Long Toast&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_toasts.xml"
+            line="19"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Settings&quot;, should use `@string` resource"
+        errorLine1="    android:title=&quot;Settings&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/settings.xml"
+            line="5"
+            column="5"/>
+    </issue>
+
+</issues>

@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.data
 
 import android.content.Context
-import android.widget.Toast
 import androidx.annotation.VisibleForTesting
 import java.util.Locale
 import net.skyscanner.backpack.calendar.model.CalendarCellStyle
@@ -32,6 +31,7 @@ import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.toast.BpkToast
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
@@ -48,15 +48,15 @@ open class ExampleBpkCalendarController(
       return
     }
     when (range) {
-      is SingleDay -> Toast.makeText(
+      is SingleDay -> BpkToast.makeText(
         context,
         String.format("%s", range.selectedDay.toString()),
-        Toast.LENGTH_SHORT
+        BpkToast.LENGTH_SHORT
       ).show()
-      is CalendarRange -> Toast.makeText(
+      is CalendarRange -> BpkToast.makeText(
         context,
         String.format("%s - %s", range.start.toString(), range.end.toString()),
-        Toast.LENGTH_SHORT
+        BpkToast.LENGTH_SHORT
       ).show()
     }
   }

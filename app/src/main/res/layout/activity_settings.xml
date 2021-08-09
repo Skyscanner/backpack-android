@@ -31,9 +31,10 @@
     android:background="@color/bpkBackgroundSecondary"
     android:paddingStart="@dimen/bpkSpacingBase"
     android:textColor="@color/bpkSkyGrayTint01"
-    android:gravity="center_vertical|left"
+    android:gravity="center_vertical|start"
     app:textStyle="base"
-    android:text="Component Themes"/>
+    android:text="Component Themes"
+    tools:ignore="RtlSymmetry" />
 
   <LinearLayout
     android:layout_width="match_parent"
