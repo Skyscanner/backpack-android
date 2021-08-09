@@ -58,6 +58,12 @@
   <string name="icons_car">Car icon</string>
   <string name="icons_hotel">Hotel icon</string>
 
+  <string name="settings_title">Settings</string>
   <string name="settings_selected">Selected</string>
+  <string name="settings_section_theme">Component Themes</string>
+  <string name="settings_option_theme_title">Enable themes</string>
+  <string name="settings_option_theme_description">This will enable themes for compatible components</string>
+  <string name="settings_theme_doha">Doha</string>
+  <string name="settings_theme_london">London</string>
 
 </resources>

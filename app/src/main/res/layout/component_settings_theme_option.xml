@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="@dimen/bpkSpacingXl"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/bpkSpacingXl"
+  android:background="?attr/selectableItemBackground"
+  android:paddingHorizontal="@dimen/bpkSpacingBase"
   android:orientation="horizontal"
   android:weightSum="1">
 
@@ -11,18 +13,17 @@
     android:id="@+id/theme_name"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bpkSpacingXl"
-    tools:text="London"
-    android:background="?attr/selectableItemBackground"
+    android:layout_weight=".8"
     android:gravity="center_vertical|start"
-    android:layout_weight=".8"/>
+    tools:text="London" />
 
   <ImageView
     android:id="@+id/selected_indicator"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/bpk_tick"
     android:layout_weight=".2"
-    app:tint="?attr/colorPrimary"
     android:contentDescription="@string/settings_selected"
-    android:visibility="gone"/>
+    android:src="@drawable/bpk_tick"
+    android:visibility="gone"
+    app:tint="?attr/colorPrimary" />
 </LinearLayout>

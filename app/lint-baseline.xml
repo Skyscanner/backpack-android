@@ -267,39 +267,6 @@
 
     <issue
         id="HardcodedText"
-        message="Hardcoded string &quot;Component Themes&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Component Themes&quot;/>"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/activity_settings.xml"
-            line="36"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Enable themes&quot;, should use `@string` resource"
-        errorLine1="      android:text=&quot;Enable themes&quot;/>"
-        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/activity_settings.xml"
-            line="48"
-            column="7"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;This will enable themes for compatible components&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;This will enable themes for compatible components&quot;"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/activity_settings.xml"
-            line="60"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
         message="Hardcoded string &quot;List item&quot;, should use `@string` resource"
         errorLine1="          android:text=&quot;List item&quot; />"
         errorLine2="          ~~~~~~~~~~~~~~~~~~~~~~~~">
