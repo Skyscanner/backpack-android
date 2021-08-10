@@ -23,7 +23,7 @@ import net.skyscanner.backpack.calendar2.data.CalendarCell
 
 internal class CalendarSpanSizeLookup(
   private val adapter: CalendarAdapter,
-): GridLayoutManager.SpanSizeLookup() {
+) : GridLayoutManager.SpanSizeLookup() {
 
   val totalSpans = NUM_COLUMNS
 
