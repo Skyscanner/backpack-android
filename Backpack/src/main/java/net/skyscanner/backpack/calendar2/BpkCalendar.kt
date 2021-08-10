@@ -35,6 +35,7 @@ import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
 import net.skyscanner.backpack.calendar2.list.CalendarAdapter
 import net.skyscanner.backpack.calendar2.list.CalendarLayoutManager
+import net.skyscanner.backpack.calendar2.list.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.InternalBackpackApi
@@ -77,8 +78,8 @@ class BpkCalendar private constructor(
 
   private val scrollListeners = mutableListOf<(YearMonth) -> Unit>()
   private val calendarAdapter = CalendarAdapter(scope, stateMachine::onClick)
-  private val calendarLayoutManager =
-    CalendarLayoutManager(context, CalendarAdapter.NUM_COLUMNS, calendarAdapter.spanSizeLookup)
+  private val spanSizeLookup = CalendarSpanSizeLookup(calendarAdapter)
+  private val calendarLayoutManager = CalendarLayoutManager(context, spanSizeLookup)
 
   init {
     recyclerView.layoutManager = calendarLayoutManager

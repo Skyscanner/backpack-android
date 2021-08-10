@@ -156,9 +156,10 @@ class BpkCalendarTest : BpkSnapshotTest() {
       rootLayout.addView(calendar)
     }
 
+    val indexOfSelectedItem = 18
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfSelectedItem, ViewActions.click()))
       .check { _, _ ->
         setupView(calendar)
         asyncScreenshot.record(calendar)
@@ -184,13 +185,14 @@ class BpkCalendarTest : BpkSnapshotTest() {
       rootLayout.addView(calendar)
     }
 
+    val indexOfSelectedItem = 18
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfSelectedItem, ViewActions.click()))
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfSelectedItem, ViewActions.click()))
       .check { _, _ ->
         setupView(calendar)
         asyncScreenshot.record(calendar)
@@ -250,17 +252,34 @@ class BpkCalendarTest : BpkSnapshotTest() {
       rootLayout.addView(calendar)
     }
 
+    val indexOfInitialSelectedItem = 53
+    val indexOfFinalSelectedItem = 54
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(53, ViewActions.click()))
+      .perform(
+        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+          indexOfInitialSelectedItem,
+          ViewActions.click()
+        )
+      )
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(54, ViewActions.click()))
+      .perform(
+        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+          indexOfFinalSelectedItem,
+          ViewActions.click()
+        )
+      )
 
     Espresso // Clicking on multiple dates should result in only one selected
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(54, ViewActions.scrollTo()))
+      .perform(
+        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+          indexOfFinalSelectedItem,
+          ViewActions.scrollTo()
+        )
+      )
       .check { _, _ ->
         setupView(calendar)
         asyncScreenshot.record(calendar)
@@ -364,17 +383,24 @@ class BpkCalendarTest : BpkSnapshotTest() {
       rootLayout.addView(view)
     }
 
+    val indexOfRangeStart = 18
+    val indexOfRangeEnd = 54
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfRangeStart, ViewActions.click()))
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(54, ViewActions.click()))
+      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfRangeEnd, ViewActions.click()))
 
     Espresso
       .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(18, ViewActions.scrollTo()))
+      .perform(
+        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+          indexOfRangeStart,
+          ViewActions.scrollTo()
+        )
+      )
       .check { _, _ ->
         setupView(view)
         asyncScreenshot.record(view)

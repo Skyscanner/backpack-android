@@ -20,7 +20,6 @@ package net.skyscanner.backpack.calendar2.list
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -39,14 +38,6 @@ internal class CalendarAdapter(
 
   private var data: CalendarCells = CalendarCells(emptyList())
 
-  val spanSizeLookup: GridLayoutManager.SpanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-    override fun getSpanSize(position: Int): Int = when (data[position]) {
-      is CalendarCell.Day -> 1
-      is CalendarCell.Header -> NUM_COLUMNS
-      is CalendarCell.Space -> 1
-    }
-  }
-
   @OptIn(InternalBackpackApi::class)
   override fun invoke(data: CalendarCells) {
     val calculator = CalendarDiffCalculator(this.data, data)
@@ -58,6 +49,9 @@ internal class CalendarAdapter(
       }
     }
   }
+
+  operator fun get(position: Int): CalendarCell =
+    data[position]
 
   override fun getItemCount(): Int =
     data.size
@@ -81,6 +75,5 @@ internal class CalendarAdapter(
     private const val TYPE_SPACE = 0
     private const val TYPE_HEADER = 1
     private const val TYPE_DAY = 2
-    const val NUM_COLUMNS = 7
   }
 }
