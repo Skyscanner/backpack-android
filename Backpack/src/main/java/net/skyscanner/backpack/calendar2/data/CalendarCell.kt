@@ -44,8 +44,13 @@ internal sealed class CalendarCell {
     val info: CellInfo,
     val selection: Selection?,
     val contentDescription: String,
+    val outOfRange: Boolean,
     override val yearMonth: YearMonth,
-  ) : CalendarCell()
+  ) : CalendarCell() {
+
+    val inactive: Boolean
+      get() = info.disabled || outOfRange
+  }
 
   enum class Selection {
     Single,
@@ -65,6 +70,7 @@ internal fun CalendarCellDay(
   date = date,
   yearMonth = yearMonth,
   info = params.cellsInfo[date] ?: CellInfo.Default,
+  outOfRange = date !in params.range,
   contentDescription = "${date.dayOfMonth} ${date.month.getDisplayName(params.dateAccessibilityText, params.locale)}",
   selection = when (selection) {
     is CalendarSelection.None -> null
@@ -74,9 +80,10 @@ internal fun CalendarCellDay(
     }
     is CalendarSelection.Range -> when {
       selection.start == date && selection.end == date -> CalendarCell.Selection.Double
-      selection.start == date -> CalendarCell.Selection.Start
+      selection.start == date && selection.end == null -> CalendarCell.Selection.Single
+      selection.start == date && selection.end != null -> CalendarCell.Selection.Start
       selection.end == date -> CalendarCell.Selection.End
-      date in selection -> CalendarCell.Selection.Middle
+      selection.end != null && date in selection -> CalendarCell.Selection.Middle
       else -> null
     }
   },

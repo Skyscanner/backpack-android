@@ -20,19 +20,14 @@ package net.skyscanner.backpack.calendar2.list
 
 import androidx.recyclerview.widget.GridLayoutManager
 import net.skyscanner.backpack.calendar2.data.CalendarCell
-import net.skyscanner.backpack.calendar2.data.CalendarCells
-import net.skyscanner.backpack.util.Consumer
 
-internal class CalendarSpanSizeLookup : GridLayoutManager.SpanSizeLookup(), Consumer<CalendarCells> {
+internal class CalendarSpanSizeLookup(
+  private val adapter: CalendarAdapter,
+) : GridLayoutManager.SpanSizeLookup() {
 
-  private var data: CalendarCells = CalendarCells()
   val totalSpans = NUM_COLUMNS
 
-  override fun invoke(data: CalendarCells) {
-    this.data = data
-  }
-
-  override fun getSpanSize(position: Int): Int = when (data[position]) {
+  override fun getSpanSize(position: Int): Int = when (adapter[position]) {
     is CalendarCell.Day -> 1
     is CalendarCell.Header -> NUM_COLUMNS
     is CalendarCell.Space -> 1

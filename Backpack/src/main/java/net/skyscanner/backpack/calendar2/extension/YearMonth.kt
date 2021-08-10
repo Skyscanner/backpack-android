@@ -25,7 +25,7 @@ internal fun YearMonth.firstDay(): LocalDate =
   atDay(1)
 
 internal fun YearMonth.lastDay(): LocalDate =
-  atDay(lengthOfMonth())
+  atEndOfMonth()
 
 internal fun YearMonth.prevMonth(): YearMonth =
   minusMonths(1)

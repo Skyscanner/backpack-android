@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.extension.firstDay
@@ -27,7 +29,6 @@ import net.skyscanner.backpack.calendar2.extension.nextMonth
 import net.skyscanner.backpack.calendar2.extension.prevMonth
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
-import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
 
 internal data class CalendarMonth(
@@ -39,7 +40,7 @@ internal inline fun CalendarMonth(
   days: List<LocalDate>,
   yearMonth: YearMonth,
   locale: Locale,
-  monthsTextStyle: TextStyle,
+  monthsFormatter: SimpleDateFormat,
   weekFields: WeekFields,
   selection: CalendarSelection,
   day: (YearMonth, LocalDate) -> CalendarCell.Day,
@@ -51,7 +52,7 @@ internal inline fun CalendarMonth(
   val nextMonth = yearMonth.nextMonth()
 
   val cells = mutableListOf<CalendarCell>()
-  cells += CalendarCell.Header(title = yearMonth.month.getDisplayName(monthsTextStyle, locale), yearMonth = yearMonth)
+  cells += CalendarCell.Header(title = MonthTitle(yearMonth, monthsFormatter, locale), yearMonth = yearMonth)
 
   var currentDayOfWeek = weekFields.firstDayOfWeek
   val selectSpacingBefore = prevMonth.lastDay() in selection && firstDay in selection
@@ -75,4 +76,13 @@ internal inline fun CalendarMonth(
   }
 
   return CalendarMonth(yearMonth = yearMonth, cells = cells)
+}
+
+// see https://github.com/ThreeTen/threetenbp/issues/55
+@Suppress("DEPRECATION")
+internal fun MonthTitle(yearMonth: YearMonth, formatter: SimpleDateFormat, locale: Locale): String {
+  val date = Date()
+  date.year = yearMonth.year - 1900
+  date.month = yearMonth.monthValue - 1
+  return formatter.format(date).capitalize(locale)
 }

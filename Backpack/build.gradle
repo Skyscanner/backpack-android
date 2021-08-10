@@ -57,6 +57,8 @@ dependencies {
   androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$rootProject.ext.mockitoKotlin"
   androidTestImplementation "org.mockito:mockito-android:$rootProject.ext.mockitoAndroid"
   testImplementation "junit:junit:$rootProject.ext.junit"
+  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.ext.coroutines"
+  testImplementation "org.threeten:threetenbp:$rootProject.ext.threeTenAbp"
 
   lintPublish project(':backpack-lint')
 }

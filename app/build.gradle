@@ -80,6 +80,12 @@ android {
       "-Xopt-in=kotlin.RequiresOptIn",
     ]
   }
+  packagingOptions {
+    exclude "**/attach_hotspot_windows.dll"
+    exclude "META-INF/licenses/**"
+    exclude "META-INF/AL2.0"
+    exclude "META-INF/LGPL2.1"
+  }
 }
 
 dependencies {
@@ -91,6 +97,7 @@ dependencies {
   androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCore"
   androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espressoContrib"
   androidTestImplementation "androidx.test:rules:$rootProject.ext.testRules"
+  androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.ext.coroutines"
   implementation project(':Backpack')
 }
 screenshots {

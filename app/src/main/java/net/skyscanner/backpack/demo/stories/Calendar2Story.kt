@@ -33,6 +33,7 @@ import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
+import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.toast.BpkToast
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
@@ -105,7 +106,8 @@ class Calendar2Story : Story() {
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
             cellsInfo = range
-              .toMap { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
+              .toIterable()
+              .associateWith { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
           )
         )
       }
@@ -114,22 +116,24 @@ class Calendar2Story : Story() {
           CalendarParams(
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
-            cellsInfo = range.toMap {
-              val price = random.nextInt(maxPrice)
-              CellInfo(
-                label = when (price) {
-                  in minPrice..noPriceThreshold -> "-"
-                  else -> "£$price"
-                },
-                status = when (price) {
-                  in noPriceThreshold..positivePriceThreshold -> CellStatus.Positive
-                  in positivePriceThreshold..neutralPriceThreshold -> CellStatus.Neutral
-                  in neutralPriceThreshold..maxPrice -> CellStatus.Negative
-                  else -> null
-                },
-                style = CellStatusStyle.Label,
-              )
-            },
+            cellsInfo = range
+              .toIterable()
+              .associateWith {
+                val price = random.nextInt(maxPrice)
+                CellInfo(
+                  label = when (price) {
+                    in minPrice..noPriceThreshold -> "-"
+                    else -> "£$price"
+                  },
+                  status = when (price) {
+                    in noPriceThreshold..positivePriceThreshold -> CellStatus.Positive
+                    in positivePriceThreshold..neutralPriceThreshold -> CellStatus.Neutral
+                    in neutralPriceThreshold..maxPrice -> CellStatus.Negative
+                    else -> null
+                  },
+                  style = CellStatusStyle.Label,
+                )
+              },
           )
         )
       }
@@ -138,19 +142,21 @@ class Calendar2Story : Story() {
           CalendarParams(
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
-            cellsInfo = range.toMap {
-              val price = random.nextInt(maxPrice)
-              CellInfo(
-                status = when (price) {
-                  in minPrice..noPriceThreshold -> CellStatus.Empty
-                  in noPriceThreshold..positivePriceThreshold -> CellStatus.Positive
-                  in positivePriceThreshold..neutralPriceThreshold -> CellStatus.Neutral
-                  in neutralPriceThreshold..maxPrice -> CellStatus.Negative
-                  else -> CellStatus.Empty
-                },
-                style = CellStatusStyle.Background,
-              )
-            }
+            cellsInfo = range
+              .toIterable()
+              .associateWith {
+                val price = random.nextInt(maxPrice)
+                CellInfo(
+                  status = when (price) {
+                    in minPrice..noPriceThreshold -> CellStatus.Empty
+                    in noPriceThreshold..positivePriceThreshold -> CellStatus.Positive
+                    in positivePriceThreshold..neutralPriceThreshold -> CellStatus.Neutral
+                    in neutralPriceThreshold..maxPrice -> CellStatus.Negative
+                    else -> CellStatus.Empty
+                  },
+                  style = CellStatusStyle.Background,
+                )
+              }
           )
         )
       }
@@ -191,15 +197,5 @@ class Calendar2Story : Story() {
       arguments?.putBoolean(SCROLLABLE, false)
       arguments?.putSerializable(TYPE, type)
     }
-  }
-
-  private fun <R> ClosedRange<LocalDate>.toMap(valueSelector: (LocalDate) -> R): Map<LocalDate, R> {
-    val result = mutableMapOf<LocalDate, R>()
-    var current = start
-    while (current != endInclusive) {
-      result[current] = valueSelector(current)
-      current = current.plusDays(1)
-    }
-    return result
   }
 }

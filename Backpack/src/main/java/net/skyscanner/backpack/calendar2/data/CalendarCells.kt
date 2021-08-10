@@ -20,15 +20,17 @@ package net.skyscanner.backpack.calendar2.data
 
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.extension.toList
+import net.skyscanner.backpack.calendar2.extension.firstDay
+import net.skyscanner.backpack.calendar2.extension.lastDay
+import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.calendar2.extension.yearMonth
 import org.threeten.bp.LocalDate
 
 internal data class CalendarCells(
-  private val months: List<CalendarMonth> = emptyList(),
+  private val months: List<CalendarMonth>,
 ) {
 
-  val size: Int = months.sumBy { it.cells.size }
+  val size: Int = months.sumOf { it.cells.size }
 
   operator fun get(position: Int): CalendarCell {
     var month: CalendarMonth? = null
@@ -64,7 +66,8 @@ internal fun CalendarCells(
 ): CalendarCells {
   val months = params
     .range
-    .toList()
+    .toIterable()
+    .let { daysBeforeRangeStarts(params) + it + daysAfterRangeEnds(params) }
     .groupBy { date -> date.yearMonth() }
     .toSortedMap()
     .map { entry ->
@@ -72,8 +75,8 @@ internal fun CalendarCells(
         days = entry.value.sortedBy { date -> date.dayOfMonth },
         yearMonth = entry.key,
         locale = params.locale,
+        monthsFormatter = params.monthsFormatter,
         weekFields = params.weekFields,
-        monthsTextStyle = params.monthsText,
         selection = selection,
       ) { yearMonth, date ->
         CalendarCellDay(
@@ -86,4 +89,26 @@ internal fun CalendarCells(
     }
 
   return CalendarCells(months = months)
+}
+
+private fun daysBeforeRangeStarts(params: CalendarParams): List<LocalDate> {
+  val result = mutableListOf<LocalDate>()
+  val firstDay = params.range.start.yearMonth().firstDay()
+  var current = params.range.start
+  while (current != firstDay) {
+    current = current.plusDays(-1)
+    result += current
+  }
+  return result
+}
+
+private fun daysAfterRangeEnds(params: CalendarParams): List<LocalDate> {
+  val result = mutableListOf<LocalDate>()
+  val lastDay = params.range.endInclusive.yearMonth().lastDay()
+  var current = params.range.endInclusive
+  while (current != lastDay) {
+    current = current.plusDays(1)
+    result += current
+  }
+  return result
 }
