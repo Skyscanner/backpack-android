@@ -51,6 +51,10 @@ class IconsAdapter(
     holder.img.setOnClickListener {
       BpkToast.makeText(holder.itemView.context, names[position], BpkToast.LENGTH_SHORT).show()
     }
+    holder.img.contentDescription = names[position]
+      .replace("bpk_", "")
+      .replace("_sm", "")
+      .replace("_", " ")
 
     // We do this instead of setting the parent's layout direction to avoid changing the
     // position of all icons to make it easier to see which icons currently support RTL

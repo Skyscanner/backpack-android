@@ -45,7 +45,7 @@ class SettingsActivity : AppCompatActivity() {
     setContentView(R.layout.activity_settings)
 
     val toolbar = findViewById<Toolbar>(R.id.settings_toolbar)
-    toolbar.title = "Settings"
+    toolbar.title = getString(R.string.settings_title)
     setSupportActionBar(toolbar)
 
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -56,15 +56,16 @@ class SettingsActivity : AppCompatActivity() {
     )
 
     val themeToggle = findViewById<BpkSwitch>(R.id.theme_toggle)
+    val themePicker = findViewById<View>(R.id.theme_picker)
 
-    themeToggle?.apply {
-      setOnCheckedChangeListener { _, isChecked ->
-        onThemeSwitchClicked(isChecked)
-      }
+    themePicker.setOnClickListener {
+      themeToggle.isChecked = !themeToggle.isChecked
+      onThemeSwitchClicked(themeToggle.isChecked)
     }
 
     if (hasCustomTheme) {
-      themeToggle?.apply { isChecked = true }
+      themeToggle.isChecked = true
+      onThemeSwitchClicked(themeToggle.isChecked)
       themes.forEach {
         if (themeMapping[it.text] == theme) {
           it.isCurrent = true
@@ -89,7 +90,7 @@ class SettingsActivity : AppCompatActivity() {
     updateTheme()
   }
 
-  fun onThemeSwitchClicked(isChecked: Boolean) {
+  private fun onThemeSwitchClicked(isChecked: Boolean) {
     val themeList = findViewById<LinearLayout>(R.id.themes_list)
 
     themes.forEach { it.isCurrent = false }

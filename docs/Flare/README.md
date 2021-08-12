@@ -20,7 +20,7 @@ Example of a Flare in XML
   app:flareRound="false"
   app:flareInsetPaddingMode="none">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:scaleType="centerCrop"

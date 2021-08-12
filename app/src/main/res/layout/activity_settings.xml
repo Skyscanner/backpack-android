@@ -4,8 +4,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:orientation="vertical"
   android:fitsSystemWindows="true"
+  android:orientation="vertical"
   tools:context=".SettingsActivity"
   tools:ignore="MergeRootFrame">
 
@@ -21,7 +21,7 @@
       android:layout_height="?attr/actionBarSize"
       app:popupTheme="@style/AppTheme.PopupOverlay"
       app:titleTextAppearance="?bpkTextLgEmphasizedAppearance"
-      app:titleTextColor="@color/bpkWhite"/>
+      app:titleTextColor="@color/bpkWhite" />
 
   </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,46 +29,61 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/bpkSpacingXxl"
     android:background="@color/bpkBackgroundSecondary"
-    android:paddingStart="@dimen/bpkSpacingBase"
-    android:textColor="@color/bpkSkyGrayTint01"
     android:gravity="center_vertical|start"
+    android:paddingStart="@dimen/bpkSpacingBase"
+    android:text="@string/settings_section_theme"
+    android:textColor="@color/bpkSkyGrayTint01"
     app:textStyle="base"
-    android:text="Component Themes"
     tools:ignore="RtlSymmetry" />
 
-  <LinearLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/theme_picker"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/bpkSpacingSm"
-    android:layout_marginHorizontal="@dimen/bpkSpacingBase">
+    android:background="?attr/selectableItemBackground"
+    android:paddingHorizontal="@dimen/bpkSpacingBase"
+    android:paddingVertical="@dimen/bpkSpacingSm">
 
     <net.skyscanner.backpack.text.BpkText
       android:id="@+id/enable_theme"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:text="Enable themes"/>
+      android:text="@string/settings_option_theme_title"
+      app:layout_constraintBottom_toTopOf="@id/theme_toggle_description"
+      app:layout_constraintEnd_toStartOf="@id/theme_toggle"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
     <net.skyscanner.backpack.toggle.BpkSwitch
       android:id="@+id/theme_toggle"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      />
-  </LinearLayout>
+      android:clickable="false"
+      android:focusable="false"
+      android:focusableInTouchMode="false"
+      app:layout_constraintBottom_toBottomOf="@id/theme_toggle_description"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@id/enable_theme"
+      app:layout_constraintTop_toTopOf="@id/enable_theme" />
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="This will enable themes for compatible components"
-    android:textColor="@color/bpkTextSecondary"
-    app:textStyle="sm"
-    android:layout_marginHorizontal="@dimen/bpkSpacingBase"/>
+    <net.skyscanner.backpack.text.BpkText
+      android:id="@+id/theme_toggle_description"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="@string/settings_option_theme_description"
+      android:textColor="@color/bpkTextSecondary"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/theme_toggle"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/enable_theme"
+      app:textStyle="sm" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
   <LinearLayout
     android:id="@+id/themes_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/bpkSpacingSm"
-    android:layout_marginHorizontal="@dimen/bpkSpacingBase"
     android:orientation="vertical"
     android:visibility="gone">
 
@@ -76,28 +91,23 @@
       android:id="@+id/theme_london"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      app:themeName="London"
-      android:onClick="onThemeSelected">
-
-    </net.skyscanner.backpack.demo.components.SettingsThemeOption>
+      android:onClick="onThemeSelected"
+      app:themeName="@string/settings_theme_london" />
 
     <net.skyscanner.backpack.demo.components.SettingsThemeOption
       android:id="@+id/theme_doha"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      app:themeName="Doha"
-      android:onClick="onThemeSelected">
-
-    </net.skyscanner.backpack.demo.components.SettingsThemeOption>
+      android:onClick="onThemeSelected"
+      app:themeName="@string/settings_theme_doha" />
 
   </LinearLayout>
 
-
   <View
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="1dip"
-    android:layout_marginTop="@dimen/bpkSpacingSm"
     android:layout_marginStart="@dimen/bpkSpacingBase"
+    android:layout_marginTop="@dimen/bpkSpacingSm"
     android:layout_marginEnd="@dimen/bpkSpacingBase"
     android:background="@color/bpkSkyGrayTint06" />
 

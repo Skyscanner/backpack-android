@@ -46,4 +46,24 @@
   <string name="bottom_nav_trips">Trips</string>
   <string name="bottom_nav_profile">Profile</string>
 
+  <string name="image_rockies_content_description">Image of woman standing on a pier by a lake in the mountains</string>
+
+  <string name="overlay_rounded_corners">Rounded corners</string>
+  <string name="overlay_no_rounded_corners">No rounded corners</string>
+
+  <string name="icons_small">Small</string>
+  <string name="icons_large">Large</string>
+  <string name="icons_color">In color</string>
+  <string name="icons_flight">Flight icon</string>
+  <string name="icons_car">Car icon</string>
+  <string name="icons_hotel">Hotel icon</string>
+
+  <string name="settings_title">Settings</string>
+  <string name="settings_selected">Selected</string>
+  <string name="settings_section_theme">Component Themes</string>
+  <string name="settings_option_theme_title">Enable themes</string>
+  <string name="settings_option_theme_description">This will enable themes for compatible components</string>
+  <string name="settings_theme_doha">Doha</string>
+  <string name="settings_theme_london">London</string>
+
 </resources>
