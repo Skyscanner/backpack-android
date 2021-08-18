@@ -14,6 +14,7 @@
     app:textStyle="sm" />
 
   <net.skyscanner.backpack.slider.BpkSlider
+    android:contentDescription="Standard slider"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:value="50.0"
@@ -27,6 +28,7 @@
     app:textStyle="sm" />
 
   <net.skyscanner.backpack.slider.BpkSlider
+    android:contentDescription="Stepped slider"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:stepSize="10.0"
@@ -37,10 +39,28 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingMd"
-    android:text="Range slider"
+    android:text="Formatted"
     app:textStyle="sm" />
 
   <net.skyscanner.backpack.slider.BpkSlider
+    android:id="@+id/formatted_slider"
+    android:contentDescription="Formatted slider"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:stepSize="10.0"
+    android:value="3000.0"
+    android:valueFrom="1000.0"
+    android:valueTo="5000.0" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
+    android:text="Range"
+    app:textStyle="sm" />
+
+  <net.skyscanner.backpack.slider.BpkSlider
+    android:contentDescription="Range slider"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:stepSize="1.0"
