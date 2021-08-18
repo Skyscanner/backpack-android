@@ -67,3 +67,23 @@ BpkSlider(context).apply {
 }
 ```
 
+Example of a slider with formatted label in Kotlin
+
+```Kotlin
+import net.skyscanner.backpack.slider.BpkSlider
+import java.text.NumberFormat
+import java.util.*
+
+BpkSlider(context).apply {
+   valueFrom = 1000f
+   valueTo = 5000f
+   value = 3000f
+   stepSize = 10f
+   setLabelFormatter { value: Float ->
+     val format = NumberFormat.getCurrencyInstance()
+     format.maximumFractionDigits = 0
+     format.currency = Currency.getInstance("GBP")
+     format.format(value.toDouble())
+   }
+}
+```
