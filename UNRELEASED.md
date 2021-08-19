@@ -28,6 +28,9 @@ See [`CHANGELOG.md`](CHANGELOG.md) for real-world examples of good changelog ent
 
 - `bpk-component-infinity-gauntlet`:
   - New `timeStone` prop for controlling time. See &lt;link to docs site&gt;.
+- `bpk-component-slider`:
+  - Story with formatted label
+  - Example in docs with formatted label
 
 **Fixed:**
 
