@@ -6,6 +6,11 @@
 **Fixed:**
 - Updated `world--amer`, `world--apac`, `world--emea` icons to their latest version
 
+**Added:**
+- `BpkSwitch`:
+  - Story with formatted label
+  - Example in docs with formatted label
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
@@ -28,9 +33,6 @@ See [`CHANGELOG.md`](CHANGELOG.md) for real-world examples of good changelog ent
 
 - `bpk-component-infinity-gauntlet`:
   - New `timeStone` prop for controlling time. See &lt;link to docs site&gt;.
-- `bpk-component-slider`:
-  - Story with formatted label
-  - Example in docs with formatted label
 
 **Fixed:**
 
