@@ -37,7 +37,7 @@ interface CalendarComponent {
 
   /**
    * Updates the params used to configure the calendar.
-   * Please notice the changes won't apply immediately – the new state will be calculated in background thread.
+   * Please note the changes won't apply immediately – the new state will be calculated in background thread.
    */
   fun setParams(value: CalendarParams)
 
