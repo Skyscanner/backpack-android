@@ -20,7 +20,7 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
-import kotlin.random.Random
+import kotlin.math.roundToInt
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -41,7 +41,6 @@ import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
-import kotlin.math.roundToInt
 
 @OptIn(ExperimentalBackpackApi::class)
 class Calendar2Story : Story() {
