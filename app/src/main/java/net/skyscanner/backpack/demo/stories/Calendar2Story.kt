@@ -41,6 +41,7 @@ import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalBackpackApi::class)
 class Calendar2Story : Story() {
@@ -57,9 +58,8 @@ class Calendar2Story : Story() {
 
   private val calendar by unsafeLazy { view!!.findViewById<BpkCalendar>(R.id.calendar2)!! }
   private val type by unsafeLazy { arguments!!.getSerializable(TYPE) as Type }
-  private val now = LocalDate.now()
+  private val now = LocalDate.of(2019, 1, 1)
   private val range = now..(now + Period.ofYears(2))
-  private val random = Random(0)
 
   private var scope: CoroutineScope? = null
 
@@ -79,6 +79,7 @@ class Calendar2Story : Story() {
       Type.SelectionDisabled -> {
         calendar.setParams(
           CalendarParams(
+            now = now,
             range = range,
             selectionMode = CalendarParams.SelectionMode.Disabled,
           )
@@ -87,6 +88,7 @@ class Calendar2Story : Story() {
       Type.SelectionSingle -> {
         calendar.setParams(
           CalendarParams(
+            now = now,
             range = range,
             selectionMode = CalendarParams.SelectionMode.Single,
           )
@@ -95,6 +97,7 @@ class Calendar2Story : Story() {
       Type.SelectionRange -> {
         calendar.setParams(
           CalendarParams(
+            now = now,
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
           )
@@ -103,6 +106,7 @@ class Calendar2Story : Story() {
       Type.WithDisabledDates -> {
         calendar.setParams(
           CalendarParams(
+            now = now,
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
             cellsInfo = range
@@ -114,22 +118,25 @@ class Calendar2Story : Story() {
       Type.WithLabels -> {
         calendar.setParams(
           CalendarParams(
+            now = now,
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
             cellsInfo = range
               .toIterable()
               .associateWith {
-                val price = random.nextInt(maxPrice)
+                val price = it.dayOfMonth % maxPrice
                 CellInfo(
                   label = when (price) {
                     in minPrice..noPriceThreshold -> "-"
-                    else -> "£$price"
+                    else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
                   },
                   status = when (price) {
-                    in noPriceThreshold..positivePriceThreshold -> CellStatus.Positive
-                    in positivePriceThreshold..neutralPriceThreshold -> CellStatus.Neutral
-                    in neutralPriceThreshold..maxPrice -> CellStatus.Negative
-                    else -> null
+                    noPriceThreshold -> null
+                    emptyPriceThreshold -> CellStatus.Empty
+                    positivePriceThreshold -> CellStatus.Positive
+                    neutralPriceThreshold -> CellStatus.Neutral
+                    negativePriceThreshold -> CellStatus.Negative
+                    else -> CellStatus.Empty
                   },
                   style = CellStatusStyle.Label,
                 )
@@ -140,18 +147,20 @@ class Calendar2Story : Story() {
       Type.WithColors -> {
         calendar.setParams(
           CalendarParams(
+            now = now,
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
             cellsInfo = range
               .toIterable()
               .associateWith {
-                val price = random.nextInt(maxPrice)
+                val price = it.dayOfMonth % maxPrice
                 CellInfo(
                   status = when (price) {
-                    in minPrice..noPriceThreshold -> CellStatus.Empty
-                    in noPriceThreshold..positivePriceThreshold -> CellStatus.Positive
-                    in positivePriceThreshold..neutralPriceThreshold -> CellStatus.Neutral
-                    in neutralPriceThreshold..maxPrice -> CellStatus.Negative
+                    noPriceThreshold -> null
+                    emptyPriceThreshold -> CellStatus.Empty
+                    positivePriceThreshold -> CellStatus.Positive
+                    neutralPriceThreshold -> CellStatus.Neutral
+                    negativePriceThreshold -> CellStatus.Negative
                     else -> CellStatus.Empty
                   },
                   style = CellStatusStyle.Background,
@@ -163,6 +172,7 @@ class Calendar2Story : Story() {
       Type.PreselectedRange -> {
         calendar.setParams(
           CalendarParams(
+            now = now,
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
           )
@@ -186,10 +196,12 @@ class Calendar2Story : Story() {
   companion object {
     private const val TYPE = "TYPE"
     private const val minPrice = 0
-    private const val maxPrice = 100
-    private const val noPriceThreshold = maxPrice / 4
-    private const val positivePriceThreshold = maxPrice / 4 * 2
-    private const val neutralPriceThreshold = maxPrice / 4 * 3
+    private const val maxPrice = 5
+    private const val noPriceThreshold = 0
+    private const val emptyPriceThreshold = 1
+    private const val positivePriceThreshold = 2
+    private const val neutralPriceThreshold = 3
+    private const val negativePriceThreshold = 4
 
     infix fun of(type: Type) = Calendar2Story().apply {
       arguments = Bundle()

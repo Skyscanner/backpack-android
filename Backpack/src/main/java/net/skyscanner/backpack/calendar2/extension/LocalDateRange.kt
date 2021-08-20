@@ -23,6 +23,11 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 import org.threeten.bp.temporal.TemporalUnit
 
+/**
+ * Converts range of local dates to [Iterable].
+ * @param amount difference between dates in iterator
+ * @param unit units of a difference
+ */
 @ExperimentalBackpackApi
 fun ClosedRange<LocalDate>.toIterable(
   amount: Long = 1L,

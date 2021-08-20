@@ -21,11 +21,19 @@ package net.skyscanner.backpack.docs
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.model.CalendarRange
+import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.util.ExperimentalBackpackApi
+import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 
+@OptIn(InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
 object DocsRegistry {
   val screenshots = listOf(
     Screenshot("Badge", "all"),
@@ -41,6 +49,9 @@ object DocsRegistry {
     Screenshot("Calendar - Default", "range", ::setupCalendar),
     Screenshot("Calendar - Colored", "colored", ::setupCalendar),
     Screenshot("Calendar - Labeled", "labeled", ::setupCalendar),
+    Screenshot("Calendar 2 - Pre-selected range", "range", ::setupCalendar2),
+    Screenshot("Calendar 2 - Day colours", "colored", ::setupCalendar2),
+    Screenshot("Calendar 2 - Day labels", "labeled", ::setupCalendar2),
     Screenshot("Card - Default", "default"),
     Screenshot("Card - Without padding", "without-padding"),
     Screenshot("Card - Selected", "selected"),
@@ -91,6 +102,10 @@ object DocsRegistry {
     // Leave toast last as it stays visible in the screen for a while
     Screenshot("Toast", "default", ::setupToast)
   ).map { it.toArgs() }
+
+  init {
+    CalendarDispatchers.setBackground(TestCoroutineDispatcher())
+  }
 }
 
 data class Screenshot(
@@ -112,6 +127,20 @@ private fun setupCalendar() {
         )
       )
       view.controller?.updateContent()
+    }
+}
+
+@OptIn(ExperimentalBackpackApi::class, InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
+private fun setupCalendar2() {
+  Espresso.onView(ViewMatchers.withId(R.id.calendar2))
+    .check { view, _ ->
+      view as net.skyscanner.backpack.calendar2.BpkCalendar
+      view.setSelection(
+        CalendarSelection.Range(
+          view.state.value.params.now.plusDays(5),
+          view.state.value.params.now.plusDays(10)
+        )
+      )
     }
 }
 

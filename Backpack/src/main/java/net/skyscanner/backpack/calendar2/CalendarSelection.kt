@@ -21,17 +21,29 @@ package net.skyscanner.backpack.calendar2
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.LocalDate
 
+/**
+ * Describes the current selection in the calendar
+ */
 @ExperimentalBackpackApi
 sealed class CalendarSelection {
 
+  /**
+   * Check whether selection contains the date
+   */
   abstract operator fun contains(date: LocalDate): Boolean
 
+  /**
+   * No dates are selected
+   */
   @ExperimentalBackpackApi
   object None : CalendarSelection() {
     override fun contains(date: LocalDate): Boolean =
       false
   }
 
+  /**
+   * Single [date] is selected
+   */
   @ExperimentalBackpackApi
   data class Single(
     val date: LocalDate,
@@ -41,6 +53,11 @@ sealed class CalendarSelection {
       this.date == date
   }
 
+  /**
+   * A range of dates is selected.
+   * @param start of range
+   * @param end end of range. May be null if user haven't selected the end date yet
+   */
   @ExperimentalBackpackApi
   data class Range(
     val start: LocalDate,
