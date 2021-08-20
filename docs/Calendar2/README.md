@@ -14,7 +14,7 @@ implementation 'com.jakewharton.threetenabp:threetenabp:$latestVersion'
 
 ## Usage
 
-> **_NOTE:_**  This component is experimental and must be approved for a specific usecase by Koala team.
+> **_NOTE:_**  This component is experimental and must be approved for a specific use case by Koala team.
 
 Be sure to initialize the `ThreeTenABP` library according to their [usage guidelines](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md) in your `Application`'s context:
 
