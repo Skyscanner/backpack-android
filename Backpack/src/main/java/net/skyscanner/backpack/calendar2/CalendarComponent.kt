@@ -47,7 +47,7 @@ interface CalendarComponent {
    * [CalendarSelection] needs to meet to validity criteria, otherwise this method will have no effect.
    *
    * Validity criteria:
-   * – selection is withing the [CalendarParams.range]
+   * – selection is within the [CalendarParams.range]
    * – selection boundaries are not disabled dates
    * – selection type corresponds to [CalendarParams.selectionMode]
    *
