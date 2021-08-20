@@ -118,7 +118,7 @@ enum class CellStatus {
   Neutral,
 
   /**
-   * Negative (rad) colouring
+   * Negative (red) colouring
    */
   Negative,
 
