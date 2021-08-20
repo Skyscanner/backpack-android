@@ -21,12 +21,42 @@ package net.skyscanner.backpack.calendar2
 import kotlinx.coroutines.flow.StateFlow
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
+/**
+ * Calendar public API.
+ *
+ * It works like a state machine – calling each method updates its state in background and emits new state to [state].
+ * The state could also be updated when some UI event (such as date selection) happens.
+ */
 @ExperimentalBackpackApi
 interface CalendarComponent {
 
+  /**
+   * The current state the calendar in.
+   */
   val state: StateFlow<CalendarState>
 
+  /**
+   * Updates the params used to configure the calendar.
+   * Please note the changes won't apply immediately – the new state will be calculated in background thread.
+   */
   fun setParams(value: CalendarParams)
+
+  /**
+   * Sets custom dates selection programmatically.
+   *
+   * [CalendarSelection] needs to meet to validity criteria, otherwise this method will have no effect.
+   *
+   * Validity criteria:
+   * – selection is within the [CalendarParams.range]
+   * – selection boundaries are not disabled dates
+   * – selection type corresponds to [CalendarParams.selectionMode]
+   *
+   * If [selection] is [CalendarSelection.Range]:
+   * - range has start date set
+   * – start date is lower than end date (if end date is present)
+   *
+   * Please note the changes won't apply immediately – the new state will be calculated in background thread.
+   */
 
   fun setSelection(selection: CalendarSelection)
 }

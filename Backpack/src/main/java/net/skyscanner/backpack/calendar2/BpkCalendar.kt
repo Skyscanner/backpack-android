@@ -113,6 +113,10 @@ class BpkCalendar private constructor(
     stateMachine.onLocaleChanged(newConfig.locales.get(0))
   }
 
+  /**
+   * Scrolls to a specific date in a calendar.
+   * Does nothing if the date is out of range.
+   */
   fun scrollToDate(date: LocalDate) {
     val index = state.value.cells.indexOf(date)
     if (index >= 0) {
@@ -120,6 +124,10 @@ class BpkCalendar private constructor(
     }
   }
 
+  /**
+   * Scrolls with animation to a specific date in a calendar.
+   * Does nothing if the date is out of range.
+   */
   fun smoothScrollToDate(date: LocalDate) {
     val index = state.value.cells.indexOf(date)
     if (index >= 0) {

@@ -21,6 +21,11 @@ package net.skyscanner.backpack.calendar2
 import net.skyscanner.backpack.calendar2.data.CalendarCells
 import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
+/**
+ * The model containing all the information describing [BpkCalendar] in the moment.
+ * @param params parameters used to configure the calendar
+ * @param selection the current Calendar selection
+ */
 @ExperimentalBackpackApi
 data class CalendarState internal constructor(
   val params: CalendarParams,

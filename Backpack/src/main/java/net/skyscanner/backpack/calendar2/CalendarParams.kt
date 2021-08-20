@@ -25,6 +25,19 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
 
+/**
+ * Describes the calendar configuration.
+ *
+ * @param range range of the dates available for selection (including [ClosedRange.start] and [ClosedRange.endInclusive]).
+ * Please notice that Calendar can display dates outside of the range (for instance, to render months in a complete form).
+ *
+ * @param selectionMode setting describing the selection behaviour
+ * @param cellsInfo additional information to be added to dates cell
+ * @param locale locale used for formatting and locale-specific behaviour, e.g. finding first day of week
+ * @param dayOfWeekText [TextStyle] to format days of week in calendar header
+ * @param dayOfWeekAccessibilityText [TextStyle] to format accessibility description of days of week in calendar header
+ * @param dateAccessibilityText [TextStyle] to format accessibility description of a date cell
+ */
 @ExperimentalBackpackApi
 data class CalendarParams(
   val range: ClosedRange<LocalDate>,
@@ -43,14 +56,38 @@ data class CalendarParams(
 
   internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
 
+  /**
+   * Describes the selection behaviour
+   */
   @ExperimentalBackpackApi
   enum class SelectionMode {
+
+    /**
+     * No date can be selected
+     */
     Disabled,
+
+    /**
+     * Only a single, non-disabled date can be selected.
+     */
     Single,
+
+    /**
+     * Only a range can be selected.
+     * The boundaries of range are always non-disabled dates, but there could be disabled dates within the range.
+     */
     Range,
   }
 }
 
+/**
+ * Additional information to be added to dates cell
+ *
+ * @param disabled marks this date as disabled – it cannot be chosen as a selection boundary
+ * @param status adds colouring behaviour to the cell
+ * @param label adds the label to the bottom of the cell
+ * @param style determines how colouring will work for this cell
+ */
 @ExperimentalBackpackApi
 data class CellInfo(
   val disabled: Boolean = false,
@@ -64,16 +101,46 @@ data class CellInfo(
   }
 }
 
+/**
+ * Describes the colouring of the cell
+ */
 @ExperimentalBackpackApi
 enum class CellStatus {
+
+  /**
+   * Positive (green) colouring
+   */
   Positive,
+
+  /**
+   * Neutral (yellow) colouring
+   */
   Neutral,
+
+  /**
+   * Negative (red) colouring
+   */
   Negative,
+
+  /**
+   * Empty (grey) colouring
+   */
   Empty,
 }
 
+/**
+ * Describes the colouring behaviour of the cell
+ */
 @ExperimentalBackpackApi
 enum class CellStatusStyle {
+
+  /**
+   * The colour will be used for background
+   */
   Background,
+
+  /**
+   * The colour will be used as [CellInfo.label] text colour
+   */
   Label,
 }
