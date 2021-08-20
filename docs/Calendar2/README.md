@@ -26,7 +26,7 @@ override fun onCreate() {
 ```
 
 BpkCalendar uses coroutines under the hood.
-Single it designed with coroutines, the API is designed primarily for Kotlin language and may not be interoperable with Java.
+Since it designed with coroutines, the API is designed primarily for Kotlin language and may not be interoperable with Java.
 To use the API, make sure [kotlinx-coroutines](https://github.com/Kotlin/kotlinx.coroutines) is included to your project.
 
 BpkCalendar is designed as a state machine.
