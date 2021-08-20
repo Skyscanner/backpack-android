@@ -55,7 +55,7 @@ interface CalendarComponent {
    * - range has start date set
    * – start date is lower than end date (if end date is present)
    *
-   * Please notice the changes won't apply immediately – the new state will be calculated in background thread.
+   * Please note the changes won't apply immediately – the new state will be calculated in background thread.
    */
 
   fun setSelection(selection: CalendarSelection)
