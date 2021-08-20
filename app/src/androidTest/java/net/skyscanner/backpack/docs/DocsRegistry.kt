@@ -130,7 +130,7 @@ private fun setupCalendar() {
     }
 }
 
-@OptIn(ExperimentalBackpackApi::class, InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
+@OptIn(ExperimentalBackpackApi::class)
 private fun setupCalendar2() {
   Espresso.onView(ViewMatchers.withId(R.id.calendar2))
     .check { view, _ ->
