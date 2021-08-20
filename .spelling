@@ -745,6 +745,6 @@ CoordinatorLayout
 RadioButton
 BpkRadioButton
 RadioGroup
-coroutines
-StateFlow
 Calendar2
+StateFlow
+kotlinx-coroutines
