@@ -42,6 +42,7 @@ import net.skyscanner.backpack.demo.stories.LabeledCalendarStory
 import net.skyscanner.backpack.demo.stories.LoadingButtonStory
 import net.skyscanner.backpack.demo.stories.MapStory
 import net.skyscanner.backpack.demo.stories.NavBarStory
+import net.skyscanner.backpack.demo.stories.SliderStory
 import net.skyscanner.backpack.demo.stories.SnackbarStory
 import net.skyscanner.backpack.demo.stories.SpacingStory
 import net.skyscanner.backpack.demo.stories.Story
@@ -250,7 +251,7 @@ object ComponentRegistry {
         "Zero to Five Scale" story NodeData { Story of R.layout.fragment_rating_zero_to_five },
       )
     ),
-    "Slider" story NodeData { Story of R.layout.fragment_slider },
+    "Slider" story NodeData { SliderStory of R.layout.fragment_slider },
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Spinner" story NodeData(
       { children -> SubStory of children },
