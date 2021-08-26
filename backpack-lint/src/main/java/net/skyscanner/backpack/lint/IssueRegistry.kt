@@ -19,9 +19,12 @@
 package net.skyscanner.backpack.lint
 
 import com.android.tools.lint.client.api.IssueRegistry
+import com.android.tools.lint.client.api.Vendor
 import com.android.tools.lint.detector.api.CURRENT_API
 import com.android.tools.lint.detector.api.Issue
 import net.skyscanner.backpack.lint.check.BpkComponentUsageDetector
+import net.skyscanner.backpack.lint.check.HardcodedColorResourceDetector
+import net.skyscanner.backpack.lint.check.HardcodedColorUsageDetector
 
 @Suppress("unused", "UnstableApiUsage")
 class IssueRegistry : IssueRegistry() {
@@ -29,6 +32,10 @@ class IssueRegistry : IssueRegistry() {
   override val api: Int = CURRENT_API
 
   override val issues: List<Issue> = listOf(
-    BpkComponentUsageDetector.ISSUE
+    BpkComponentUsageDetector.ISSUE,
+    HardcodedColorUsageDetector.ISSUE,
+    HardcodedColorResourceDetector.ISSUE
   )
+
+  override val vendor: Vendor = Vendor(vendorName = "Skyscanner", identifier = "backpack-android")
 }

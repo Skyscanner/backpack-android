@@ -3,13 +3,15 @@
 > Place your changes below this line.
 >
 
-**Fixed:**
-- Updated `world--amer`, `world--apac`, `world--emea` icons to their latest version
-
 **Added:**
 - `BpkSwitch`:
   - Story with formatted label
   - Example in docs with formatted label
+
+- Lint check for colour usage
+
+**Fixed:**
+- Updated `world--amer`, `world--apac`, `world--emea` icons to their latest version
 
 ## How to write a good changelog entry
 
