@@ -26,41 +26,47 @@ import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity
 import com.android.tools.lint.detector.api.XmlContext
-import com.android.tools.lint.detector.api.XmlScannerConstants
-import org.w3c.dom.Attr
+import com.android.utils.text
+import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
+import org.w3c.dom.Element
 
 @Suppress("UnstableApiUsage")
-class HardcodedColorUsageDetector : ResourceXmlDetector() {
+class HardcodedColorResourceDetector : ResourceXmlDetector() {
 
   companion object {
-    private const val EXPLANATION = "Avoid using hardcoded colors. This may cause issues with theming and dark mode."
+
+    private const val EXPLANATION = "Use Backpack colors to improve consistency and dark mode support."
 
     val ISSUE = Issue.create(
-      id = "HardcodedColorUsage",
-      briefDescription = "Hardcoded color used",
-      explanation = EXPLANATION,
+      id = "HardcodedColorResourceDetector",
+      briefDescription = "Hardcoded color resource definition found",
+      explanation = "Use Backpack colors to improve consistency and dark mode support.",
       category = Category.CORRECTNESS,
       severity = Severity.WARNING,
       implementation = Implementation(
-        HardcodedColorUsageDetector::class.java,
+        HardcodedColorResourceDetector::class.java,
         Scope.RESOURCE_FILE_SCOPE
       )
     )
   }
 
   override fun appliesTo(folderType: ResourceFolderType): Boolean {
-    return folderType == ResourceFolderType.LAYOUT
+    return folderType == ResourceFolderType.VALUES
   }
 
-  override fun getApplicableAttributes(): Collection<String> {
-    return XmlScannerConstants.ALL
+  override fun getApplicableElements(): Collection<String> {
+    return listOf("color")
   }
 
-  override fun visitAttribute(context: XmlContext, attribute: Attr) {
-    if (attribute.value.startsWith("#")) {
+  override fun visitElement(context: XmlContext, element: Element) {
+    val value = element.text()
+    if (value.startsWith("#") && !value.endsWith("000000") && !value.toLowerCaseAsciiOnly().endsWith("ffffff")) {
+      /** check for colour resources specified directly - these will mostly be non-backpack colours.
+      Some colours for black/white may exist for alpha
+       **/
       context.report(
         ISSUE,
-        context.getValueLocation(attribute),
+        context.getElementLocation(element),
         EXPLANATION
       )
     }

@@ -26,7 +26,7 @@ import org.junit.Test
 class HardcodedColorUsageDetectorTest {
 
   @Test
-  fun `clean when layout is using color attribute hardcoded color`() {
+  fun `clean when layout is using color attribute`() {
     val layout = xml(
       "layout/color_layout.xml",
       """<?xml version="1.0" encoding="utf-8"?>
@@ -45,7 +45,7 @@ class HardcodedColorUsageDetectorTest {
   }
 
   @Test
-  fun `clean when layout is using color resource hardcoded color`() {
+  fun `clean when layout is using color resource`() {
     val layout = xml(
       "layout/color_layout.xml",
       """<?xml version="1.0" encoding="utf-8"?>
