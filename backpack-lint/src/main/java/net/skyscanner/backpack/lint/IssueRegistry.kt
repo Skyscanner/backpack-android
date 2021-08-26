@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.lint
 
 import com.android.tools.lint.client.api.IssueRegistry
+import com.android.tools.lint.client.api.Vendor
 import com.android.tools.lint.detector.api.CURRENT_API
 import com.android.tools.lint.detector.api.Issue
 import net.skyscanner.backpack.lint.check.BpkComponentUsageDetector
@@ -35,4 +36,6 @@ class IssueRegistry : IssueRegistry() {
     HardcodedColorUsageDetector.ISSUE,
     HardcodedColorResourceDetector.ISSUE
   )
+
+  override val vendor: Vendor = Vendor(vendorName = "Skyscanner", identifier = "backpack-android")
 }
