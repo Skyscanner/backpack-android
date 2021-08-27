@@ -57,14 +57,7 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        module: [app, Backpack]
-        include:
-          - module: app
-            flavour: 'oss'
-          - module: Backpack
-            flavour: ''
-
+      
     steps:
       - uses: actions/checkout@v2
 
@@ -78,16 +71,16 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Build
-        run: ./gradlew :${{ matrix.module }}:assemble${{ matrix.flavour }}${{ env.config }} -PdisablePreDex
+        run: ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
       - name: KtLint check
-        run: ./gradlew :${{ matrix.module }}:${{ env.module }}:ktlint -PdisablePreDex
+        run: ./gradlew ktlint -PdisablePreDex
 
       - name: Lint check
-        run: ./gradlew :${{ matrix.module }}:lint${{ matrix.flavour }}${{ env.config }} -PdisablePreDex
+        run: ./gradlew lint${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
       - name: Unit Tests
-        run: ./gradlew :${{ matrix.module }}:test${{ matrix.flavour }}${{ env.config }}UnitTest -PdisablePreDex
+        run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
 
   Android:
     name: Android
@@ -243,7 +236,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          
+
       - name: Get release tag
         if: contains('refs/tags/', github.ref)
         id: tag
