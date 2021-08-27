@@ -18,8 +18,12 @@
 
 package net.skyscanner.backpack.lint.check
 
+import com.android.tools.lint.checks.infrastructure.LintDetectorTest.java
+import com.android.tools.lint.checks.infrastructure.TestFile
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 import com.android.tools.lint.checks.infrastructure.TestFiles.xml
+import com.android.tools.lint.checks.infrastructure.TestLintResult
+import com.android.tools.lint.checks.infrastructure.TestLintTask
 import com.android.tools.lint.checks.infrastructure.TestLintTask.lint
 import org.junit.Test
 
@@ -32,17 +36,16 @@ class BpkComponentUsageDetectorTest {
       .files(
         kotlin(
           """import android.widget.Button
-import android.content.Context
 
 class CustomButton(context: Context) : Button(context)"""
-        )
+        ),
+        button()
       )
-      .issues(BpkComponentUsageDetector.ISSUE)
-      .run()
+      .runCheck()
       .expectWarningCount(1)
       .expect(
         """
-src/CustomButton.kt:4: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.button.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
+src/CustomButton.kt:3: Warning: Backpack component available for android.widget.Button. Use net.skyscanner.backpack.button.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComponentUsage]
 class CustomButton(context: Context) : Button(context)
       ~~~~~~~~~~~~
 0 errors, 1 warnings
@@ -60,10 +63,10 @@ class CustomButton(context: Context) : Button(context)
 class View(context: Context) {
   private val button = Button(context)
 }"""
-        )
+        ),
+        button()
       )
-      .issues(BpkComponentUsageDetector.ISSUE)
-      .run()
+      .runCheck()
       .expectWarningCount(1)
       .expect(
         """
@@ -87,8 +90,7 @@ src/View.kt:4: Warning: Backpack component available for android.widget.Button. 
   android:layout_height="wrap_content" />"""
         )
       )
-      .issues(BpkComponentUsageDetector.ISSUE)
-      .run()
+      .runCheck()
       .expectWarningCount(1)
       .expect(
         """
@@ -106,21 +108,20 @@ res/layout/native_button.xml:2: Warning: Backpack component available for Button
       .files(
         kotlin(
           """import android.widget.Toast
-import android.content.Context
 
 class View(private val context: Context) {
   fun showToast() {
     Toast.makeText(context, "Toast!", Toast.LENGTH_SHORT)
   }
 }"""
-        )
+        ),
+        toast()
       )
-      .issues(BpkComponentUsageDetector.ISSUE)
-      .run()
+      .runCheck()
       .expectWarningCount(1)
       .expect(
         """
-src/View.kt:6: Warning: Backpack component available for android.widget.Toast. Use net.skyscanner.backpack.toast.BpkToast instead. More info at https://backpack.github.io/components/toast [BpkComponentUsage]
+src/View.kt:5: Warning: Backpack component available for android.widget.Toast. Use net.skyscanner.backpack.toast.BpkToast instead. More info at https://backpack.github.io/components/toast [BpkComponentUsage]
     Toast.makeText(context, "Toast!", Toast.LENGTH_SHORT)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 0 errors, 1 warnings
@@ -134,13 +135,12 @@ src/View.kt:6: Warning: Backpack component available for android.widget.Toast. U
       .files(
         kotlin(
           """import net.skyscanner.backpack.button.BpkButton
-import android.content.Context
 
 class CustomButton(context: Context) : BpkButton(context)"""
-        )
+        ),
+        bpkButton()
       )
-      .issues(BpkComponentUsageDetector.ISSUE)
-      .run()
+      .runCheck()
       .expectClean()
   }
 
@@ -154,10 +154,10 @@ class CustomButton(context: Context) : BpkButton(context)"""
 class View(context: Context) {
 private val button = BpkButton(context)
 }"""
-        )
+        ),
+        bpkButton()
       )
-      .issues(BpkComponentUsageDetector.ISSUE)
-      .run()
+      .runCheck()
       .expectClean()
   }
 
@@ -168,13 +168,12 @@ private val button = BpkButton(context)
         xml(
           "res/layout/backpack_button.xml",
           """<?xml version="1.0" encoding="utf-8"?>
-<net.skyscanner.backpack.BpkButton xmlns:android="http://schemas.android.com/apk/res/android"
+<net.skyscanner.backpack.button.BpkButton xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content" />"""
         )
       )
-      .issues(BpkComponentUsageDetector.ISSUE)
-      .run()
+      .runCheck()
       .expectClean()
   }
 
@@ -184,17 +183,55 @@ private val button = BpkButton(context)
       .files(
         kotlin(
           """import net.skyscanner.backpack.toast.BpkToast
-import android.content.Context
 
 class View(private val context: Context) {
   fun showToast() {
     BpkToast.makeText(context, "Toast!", BpkToast.LENGTH_SHORT)
   }
 }"""
-        )
+        ),
+        bpkToast()
       )
-      .issues(BpkComponentUsageDetector.ISSUE)
-      .run()
+      .runCheck()
       .expectClean()
   }
+
+  private fun TestLintTask.runCheck(): TestLintResult =
+    issues(BpkComponentUsageDetector.ISSUE)
+      .allowMissingSdk()
+      .run()
+
+  private fun button(): TestFile =
+    kotlin(
+      """package android.widget
+
+class Button(context: Context) : View(context)"""
+    )
+
+  private fun bpkButton(): TestFile =
+    kotlin(
+      """package net.skyscanner.backpack.button
+
+class BpkButton(context: Context) : View(context)"""
+    )
+
+  private fun toast(): TestFile =
+    java(
+      """package android.widget;
+
+public class Toast {
+  public static int LENGTH_SHORT = 1;
+  public static void makeText(Context context, String text, Int length) {}
+}"""
+    )
+
+  private fun bpkToast(): TestFile =
+    java(
+      """package net.skyscanner.backpack.toast;
+
+public class BpkToast {
+  public static int LENGTH_SHORT = 1;
+  public static void makeText(Context context, String text, Int length) {}
+}"""
+    )
 }

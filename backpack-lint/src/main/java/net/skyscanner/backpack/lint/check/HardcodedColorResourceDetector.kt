@@ -62,7 +62,7 @@ class HardcodedColorResourceDetector : ResourceXmlDetector() {
     val value = element.text()
     if (value.startsWith("#") && !value.endsWith("000000") && !value.toLowerCaseAsciiOnly().endsWith("ffffff")) {
       /** check for colour resources specified directly - these will mostly be non-backpack colours.
-      Some colours for black/white may exist for alpha
+       Some colours for black/white may exist for alpha
        **/
       context.report(
         ISSUE,

@@ -79,3 +79,11 @@ dokka {
     suffix = "#L"
   }
 }
+
+task testOssDebugUnitTest {
+  dependsOn("testDebugUnitTest")
+}
+
+task lintOssDebug {
+  dependsOn("lintDebug")
+}
