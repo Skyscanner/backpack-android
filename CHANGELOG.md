@@ -2,6 +2,18 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 32.1.0
+
+**Added:**
+- `BpkSwitch`:
+  - Story with formatted label
+  - Example in docs with formatted label
+
+- Lint check for colour usage
+
+**Fixed:**
+- Updated `world--amer`, `world--apac`, `world--emea` icons to their latest version
+
 # 32.0.2
 
 **Fixed:**
