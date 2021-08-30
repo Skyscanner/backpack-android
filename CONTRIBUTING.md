@@ -43,13 +43,13 @@ Create an AVD using the following command
 $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 ```
 
-Create an SDCard for the screenshot tests (Linux)
+Create an SD card for the screenshot tests (Linux)
 
 ```
 $ANDROID_HOME/tools/mksdcard -l e 512M sd.img
 ```
 
-Create an SDCard for the screenshot tests (OSX)
+Create an SD card for the screenshot tests (OSX)
 
 ```
 hdiutil create -megabytes 512 -fs MS-DOS -layout NONE -o sd && mv sd.dmg sd.img
