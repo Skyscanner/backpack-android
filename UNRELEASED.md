@@ -1,7 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
->
+
+**Fixed:**
+
+- Fixed an issue with Calendar2, where current months with less days than the current day were incorrectly formatted to the next month.
 
 ## How to write a good changelog entry
 
