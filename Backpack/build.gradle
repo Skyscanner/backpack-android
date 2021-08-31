@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'org.jetbrains.dokka-android'
+apply plugin: 'org.jetbrains.dokka'
 
+apply from: 'dokka.gradle'
 apply from: 'gradle-maven-push.gradle'
 
 version = rootProject.ext.version
@@ -63,19 +64,26 @@ dependencies {
   lintPublish project(':backpack-lint')
 }
 
-dokka {
-  moduleName = "$rootProject.name"
-  outputFormat = 'html'
-  outputDirectory = "$rootProject.buildDir/docs"
-  reportUndocumented = false
+import org.jetbrains.dokka.gradle.DokkaTask
 
-  if (project.hasProperty("dokkaOutput")) {
-    outputDirectory = dokkaOutput
-  }
+task generateDokkaDocs(type: DokkaTask) {
+  def version = rootProject.ext.version
+  def out = "dokka"
 
-  linkMapping {
-    dir = "${project.projectDir}/src/main/java"
-    url = "https://github.com/Skyscanner/backpack-android/tree/main/${project.name}/src/main/java"
-    suffix = "#L"
+  configure {
+    outputDirectory = new File(rootProject.rootDir, "$out/versions/$version")
+
+    dokkaSourceSets {
+      named("main") {
+        moduleName = "Backpack"
+        reportUndocumented = false
+        sourceLink {
+          dir = "${project.projectDir}/src/main/java"
+          remoteUrl = new URL("https://github.com/Skyscanner/backpack-android/tree/main/${project.name}/src/main/java")
+          remoteLineSuffix = "#L"
+        }
+      }
+    }
   }
+  dependsOn("generateDokkaStatics")
 }
