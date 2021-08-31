@@ -81,8 +81,10 @@ internal inline fun CalendarMonth(
 // see https://github.com/ThreeTen/threetenbp/issues/55
 @Suppress("DEPRECATION")
 internal fun MonthTitle(yearMonth: YearMonth, formatter: SimpleDateFormat, locale: Locale): String {
-  val date = Date()
-  date.year = yearMonth.year - 1900
-  date.month = yearMonth.monthValue - 1
+  val date = Date(
+    yearMonth.year - 1900,
+    yearMonth.monthValue - 1,
+    2 // Lock the formatter date to 2nd, so it accounts for -12h tz and the month is predictable
+  )
   return formatter.format(date).capitalize(locale)
 }
