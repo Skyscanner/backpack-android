@@ -242,15 +242,21 @@ jobs:
         id: tag
         uses: dawidd6/action-get-tag@v1
 
-      - name: Build Dokka Docs
+      - name: Build Dokka docs
         if: contains('refs/tags/', github.ref)
-        run: |
-          nvm install
-          nvm use
-          set -e
-          ./scripts/build-docs-ci ${{steps.tag.outputs.tag}}
+        run: ./gradlew :Backpack:generateDokkaDocs
 
-      - name: Deploy Docs Site
+      - name: Deploy Dokka docs
+        uses: peaceiris/actions-gh-pages@v3
+        if: contains('refs/tags/', github.ref)
+        with:
+          deploy_key: ${{ secrets.DOKKA_DEPLOY_KEY }}
+          publish_dir: dokka/
+          keep_files: true
+          external_repository: backpack/android
+          publish_branch: main
+
+      - name: Trigger backpack.github.io CI
         if: github.ref == 'refs/heads/main'
         run: |
           curl -f -s -X POST -H "Content-Type: application/json" -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $GITHUB_TOKEN" -d "{\"ref\":\"main\",\"inputs\":{\"repo\":\"backpack-android\"}}" https://api.github.com/repos/Skyscanner/backpack-docs/actions/workflows/ci.yml/dispatches

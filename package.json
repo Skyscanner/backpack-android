@@ -23,8 +23,6 @@
     "build": "gulp && npm run spellcheck",
     "danger": "danger ci",
     "prettier": "prettier --config .prettierrc --write \"**/*.js\"",
-    "docs": "./gradlew Backpack:dokka",
-    "docs:clean": "./gradlew Backpack:cleanDokka",
     "spellcheck": "mdspell -r --en-gb --ignore-acronyms --ignore-numbers --no-suggestions '*.md' '**/*.md' '!**/node_modules/**/*.md'",
     "spellcheck:interactive": "mdspell --en-gb --ignore-acronyms --no-suggestions --ignore-numbers '*.md' '**/*.md' '!**/node_modules/**/*.md'",
     "prepare": "husky install"
