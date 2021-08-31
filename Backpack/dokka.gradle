@@ -18,38 +18,38 @@
 
 tasks.register("generateDokkaStatics") {
   doLast {
-    create404Page("dokka", rootProject.ext.version)
-    createVersionRedirectPage("dokka", rootProject.ext.version)
-    createIndexPage("dokka", rootProject.ext.version)
+    create404Page()
+    createVersionRedirectPage()
+    createIndexPage()
   }
 }
 
-def create404Page(dir, version) {
-  createNewFile(rootProject.rootDir, "$dir/404.html").text = """<!DOCTYPE html>
+def create404Page() {
+  createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/404.html").text = """<!DOCTYPE html>
 <html>
-  <meta http-equiv="refresh" content="1;url=/android/versions/$version" />
+  <meta http-equiv="refresh" content="1;url=/android/versions/$rootProject.ext.version" />
   <script type="text/javascript">
     const androidDocsPath = (window.location + '').split('android/versions/latest');
     if (androidDocsPath.length > 1) {
-      window.location = `/android/versions/$version\${androidDocsPath[1]}`;
+      window.location = `/android/versions/$rootProject.ext.version/$rootProject.name/\${androidDocsPath[1]}`;
     }
   </script>
 </html>
 """
 }
 
-def createVersionRedirectPage(dir, version) {
-  createNewFile(rootProject.rootDir, "$dir/versions/latest/index.html").text = """<!DOCTYPE html>
+def createVersionRedirectPage() {
+  createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/versions/latest/index.html").text = """<!DOCTYPE html>
 <html>
-  <meta http-equiv="refresh" content="0;url=/android/versions/$version" />
+  <meta http-equiv="refresh" content="0;url=/android/versions/$rootProject.ext.version" />
 </html>
 """
 }
 
-def createIndexPage(dir, version) {
-  createNewFile(rootProject.rootDir, "$dir/index.html").text = """<!DOCTYPE html>
+def createIndexPage() {
+  createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/index.html").text = """<!DOCTYPE html>
 <html>
-  <meta http-equiv="refresh" content="0;url=/android/versions/$version" />
+  <meta http-equiv="refresh" content="0;url=/android/versions/$rootProject.ext.version" />
 </html>
 """
 }

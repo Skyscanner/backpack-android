@@ -68,14 +68,13 @@ import org.jetbrains.dokka.gradle.DokkaTask
 
 task generateDokkaDocs(type: DokkaTask) {
   def version = rootProject.ext.version
-  def out = "dokka"
 
   configure {
-    outputDirectory = new File(rootProject.rootDir, "$out/versions/$version")
+    outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/versions/$version")
 
     dokkaSourceSets {
       named("main") {
-        moduleName = "Backpack"
+        moduleName = rootProject.name
         reportUndocumented = false
         sourceLink {
           dir = "${project.projectDir}/src/main/java"
