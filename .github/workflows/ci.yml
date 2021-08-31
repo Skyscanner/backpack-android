@@ -194,39 +194,39 @@ jobs:
             ~/.android/adb*
           key: avd-${{ env.api-level }}
 
-#      - name: create AVD and generate snapshot for caching
-#        if: steps.avd-cache.outputs.cache-hit != 'true'
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          target: google_apis
-#          profile: Nexus 4
-#          sdcard-path-or-size: 512M
-#          api-level: ${{ env.api-level }}
-#          force-avd-creation: false
-#          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-#          disable-animations: false
-#          script: echo "Generated AVD snapshot for caching."
-#
-#      - name: Screenshot Tests
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          target: google_apis
-#          profile: Nexus 4
-#          sdcard-path-or-size: 512M
-#          api-level: ${{ env.api-level }}
-#          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-#          script: |
-#            sudo easy_install Pillow==6.2.2
-#            ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
-#            ./scripts/check-no-changes.sh
-#
-#      - name: Upload Screenshot Tests Artifact
-#        if: ${{ failure() }}
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: ${{ env.flavour }}${{ env.config }}-screenshot-test-output
-#          path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
-#          retention-days: 5
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: google_apis
+          profile: Nexus 4
+          sdcard-path-or-size: 512M
+          api-level: ${{ env.api-level }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
+
+      - name: Screenshot Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: google_apis
+          profile: Nexus 4
+          sdcard-path-or-size: 512M
+          api-level: ${{ env.api-level }}
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: |
+            sudo easy_install Pillow==6.2.2
+            ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
+            ./scripts/check-no-changes.sh
+
+      - name: Upload Screenshot Tests Artifact
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.flavour }}${{ env.config }}-screenshot-test-output
+          path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
+          retention-days: 5
 
   Deploy:
     name: Deploy
@@ -250,18 +250,18 @@ jobs:
         uses: dawidd6/action-get-tag@v1
 
       - name: Build Dokka docs
-#        if: contains('refs/tags/', github.ref)
+        if: contains('refs/tags/', github.ref)
         run: ./gradlew :Backpack:generateDokkaDocs
 
       - name: Deploy Dokka docs
         uses: peaceiris/actions-gh-pages@v3
-#        if: contains('refs/tags/', github.ref)
+        if: contains('refs/tags/', github.ref)
         with:
           deploy_key: ${{ secrets.DOKKA_DEPLOY_KEY }}
           publish_dir: dokka/
           keep_files: true
           external_repository: backpack/android
-          publish_branch: test
+          publish_branch: main
 
       - name: Trigger backpack.github.io CI
         if: github.ref == 'refs/heads/main'
