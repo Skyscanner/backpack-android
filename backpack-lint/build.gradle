@@ -14,3 +14,7 @@ jar {
     attributes("Lint-Registry-v2": "net.skyscanner.backpack.lint.IssueRegistry")
   }
 }
+
+task testOssDebugUnitTest {
+  dependsOn("test")
+}

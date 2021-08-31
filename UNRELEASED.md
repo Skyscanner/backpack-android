@@ -1,17 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
->
-
-**Added:**
-- `BpkSwitch`:
-  - Story with formatted label
-  - Example in docs with formatted label
-
-- Lint check for colour usage
 
 **Fixed:**
-- Updated `world--amer`, `world--apac`, `world--emea` icons to their latest version
+
+- Fixed an issue with Calendar2, where current months with less days than the current day were incorrectly formatted to the next month.
 
 ## How to write a good changelog entry
 

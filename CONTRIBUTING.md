@@ -16,10 +16,12 @@ echo "export ANDROID_SDK_ROOT=\"$HOME/Library/Android/sdk\"" >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
+You may also have to install "Android SDK Command Line Tools" from the SDK tools screen in Android Studio.
+
 Install system images
 ```
-$ANDROID_HOME/tools/bin/sdkmanager "system-images;android-24;google_apis;x86"
-$ANDROID_HOME/tools/bin/sdkmanager "system-images;android-29;google_apis;x86"
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;google_apis;x86"
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;x86"
 ```
 
 ## Setup
@@ -38,7 +40,7 @@ Given that you have a compatible environment as stated above you can now set up 
 Create an AVD using the following commands
 
 ```
-$ANDROID_HOME/tools/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 $ANDROID_HOME/tools/mksdcard -l e 512M sd.img
 ```
 
@@ -85,8 +87,8 @@ implementation 'net.skyscanner.backpack.<github-username>:backpack-android:<bran
 Before running the script install and start the docs emulator.
 
 ```
-$ANDROID_HOME/tools/bin/avdmanager --verbose create avd --force --name "bpk-droid-avd" --device "pixel" --package "system-images;android-29;google_apis;x86" --tag "google_apis" --abi "x86"
-$ANDROID_HOME/emulator/emulator -avd bpk-droid-avd
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name "bpk-droid-screenshot-avd" --device "pixel" --package "system-images;android-30;google_apis;x86" --tag "google_apis" --abi "x86"
+$ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
 ```
 
 Run `./scripts/generate_screenshots.sh` to capture all screenshots. Files will be saved in the correct directory.

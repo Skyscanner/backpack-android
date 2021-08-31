@@ -86,3 +86,11 @@ task generateDokkaDocs(type: DokkaTask) {
   }
   dependsOn("generateDokkaStatics")
 }
+
+task testOssDebugUnitTest {
+  dependsOn("testDebugUnitTest")
+}
+
+task lintOssDebug {
+  dependsOn("lintDebug")
+}
