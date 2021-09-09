@@ -19,6 +19,7 @@
 apply plugin: 'kotlin'
 
 dependencies {
+  compileOnly "org.jetbrains.kotlin:kotlin-stdlib"
   compileOnly rootProject.ext.lintApi
 
   testImplementation rootProject.ext.lint
