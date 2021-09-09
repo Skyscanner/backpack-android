@@ -60,12 +60,13 @@ android {
 
 dependencies {
   api rootProject.ext.androidxAnnotations
+  api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   api rootProject.ext.coroutines
   api rootProject.ext.androidxAppCompat
   api rootProject.ext.androidMaterial
   api rootProject.ext.constraintLayout
   api rootProject.ext.cardView
-  api rootProject.ext.threeTenAbp
+  api rootProject.ext.threeTenAbpAndroid
   api rootProject.ext.googleMaps
   implementation rootProject.ext.swiperefreshLayout
   implementation rootProject.ext.ktx

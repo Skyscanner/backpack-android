@@ -113,7 +113,7 @@ dependencies {
   androidTestImplementation rootProject.ext.espressoCore
   androidTestImplementation rootProject.ext.espressoContrib
   androidTestImplementation rootProject.ext.testRules
-  androidTestImplementation rootProject.ext.coroutines
+  androidTestImplementation rootProject.ext.coroutinesTest
   implementation project(':Backpack')
 }
 screenshots {
