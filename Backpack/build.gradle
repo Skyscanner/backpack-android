@@ -1,3 +1,21 @@
+/**
+ * Backpack for Android - Skyscanner's Design System
+ *
+ * Copyright 2018-2021 Skyscanner Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.dokka'
@@ -41,25 +59,25 @@ android {
 }
 
 dependencies {
-  api "androidx.annotation:annotation:$rootProject.ext.androidxAnnotations"
+  api rootProject.ext.androidxAnnotations
   api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.ext.coroutines"
-  api "androidx.appcompat:appcompat:$rootProject.ext.androidxAppCompat"
-  api "com.google.android.material:material:$rootProject.ext.androidMaterial"
-  api "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintLayout"
-  api "androidx.cardview:cardview:$rootProject.ext.cardView"
-  api "com.jakewharton.threetenabp:threetenabp:$rootProject.ext.threeTenAbp"
-  api "com.google.android.gms:play-services-maps:$rootProject.ext.googleMaps"
-  implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.ext.swiperefreshLayout"
-  implementation "androidx.core:core-ktx:$rootProject.ext.ktx"
-  androidTestImplementation "androidx.test.ext:junit:$rootProject.ext.junitAndroid"
-  androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.ext.espressoCore"
-  androidTestImplementation "androidx.test:rules:$rootProject.ext.testRules"
-  androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$rootProject.ext.mockitoKotlin"
-  androidTestImplementation "org.mockito:mockito-android:$rootProject.ext.mockitoAndroid"
-  testImplementation "junit:junit:$rootProject.ext.junit"
-  testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$rootProject.ext.coroutines"
-  testImplementation "org.threeten:threetenbp:$rootProject.ext.threeTenAbp"
+  api rootProject.ext.coroutines
+  api rootProject.ext.androidxAppCompat
+  api rootProject.ext.androidMaterial
+  api rootProject.ext.constraintLayout
+  api rootProject.ext.cardView
+  api rootProject.ext.threeTenAbpAndroid
+  api rootProject.ext.googleMaps
+  implementation rootProject.ext.swiperefreshLayout
+  implementation rootProject.ext.ktx
+  androidTestImplementation rootProject.ext.junitAndroid
+  androidTestImplementation rootProject.ext.espressoCore
+  androidTestImplementation rootProject.ext.testRules
+  androidTestImplementation rootProject.ext.mockitoKotlin
+  androidTestImplementation rootProject.ext.mockitoAndroid
+  testImplementation rootProject.ext.junit
+  testImplementation rootProject.ext.coroutinesTest
+  testImplementation rootProject.ext.threeTenAbp
 
   lintPublish project(':backpack-lint')
 }
