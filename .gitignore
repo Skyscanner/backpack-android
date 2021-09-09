@@ -53,6 +53,7 @@ captures/
 .idea/copyright/
 .idea/markdown-navigator.xml
 .idea/markdown-navigator-*.xml
+.idea/deploymentTargetDropDown.xml
 
 
 # Keystore files

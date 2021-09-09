@@ -18,22 +18,28 @@
 
 package net.skyscanner.backpack.snackbar
 
+import android.view.View
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.test.espresso.Espresso
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
+import org.hamcrest.Matcher
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-@Ignore("These tests are flaky as sometimes the test is finished before the screenshot is generated")
 class BpkSnackbarTests : BpkSnapshotTest() {
 
   private lateinit var activity: AppCompatActivity
@@ -135,19 +141,38 @@ class BpkSnackbarTests : BpkSnapshotTest() {
 
   private inline fun capture(crossinline what: AsyncSnapshot.() -> BpkSnackbar) {
     val asyncScreenshot = prepareForAsyncTest()
+    var snackbar: BpkSnackbar? = null
     activity.runOnUiThread {
-      what(asyncScreenshot)
-        .addCallback(object : BpkSnackbar.Callback() {
-          override fun onShown(sb: BpkSnackbar) {
-            sb.rawSnackbar.view.postDelayed(
-              {
-                asyncScreenshot.record(sb.rawSnackbar.view)
-              },
-              70
-            )
-          }
-        })
-        .show()
+      snackbar = what(asyncScreenshot)
+      snackbar?.show()
+    }
+    Espresso.onView(ViewMatchers.withId(R.id.snackbar_text)).perform(waitForOpaque(300))
+      .check { _, _ ->
+        activity.runOnUiThread {
+          asyncScreenshot.record(snackbar!!.rawSnackbar.view)
+        }
+      }
+  }
+}
+
+fun waitForOpaque(timeout: Long): ViewAction {
+  return object : ViewAction {
+
+    override fun getConstraints(): Matcher<View> {
+      return isAssignableFrom(TextView::class.java)
+    }
+
+    override fun getDescription(): String {
+      return "wait up to $timeout milliseconds for the view to be opaque"
+    }
+
+    override fun perform(uiController: UiController, view: View) {
+      val endTime = System.currentTimeMillis() + timeout
+
+      do {
+        if (view.alpha == 1f) return
+        uiController.loopMainThreadForAtLeast(50)
+      } while (System.currentTimeMillis() < endTime)
     }
   }
 }
