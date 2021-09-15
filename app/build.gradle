@@ -97,6 +97,9 @@ android {
       "-Xopt-in=kotlin.RequiresOptIn",
     ]
   }
+  buildFeatures {
+    compose true
+  }
   composeOptions {
     kotlinCompilerExtensionVersion compose_version
     kotlinCompilerVersion kotlin_version
