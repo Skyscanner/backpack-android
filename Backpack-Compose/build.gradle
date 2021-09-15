@@ -18,13 +18,9 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'org.jetbrains.dokka'
-
-apply from: 'dokka.gradle'
-apply from: 'gradle-maven-push.gradle'
 
 version = rootProject.ext.version
-group = 'net.skyscanner.backpack'
+group = 'net.skyscanner.backpack-compose'
 
 repositories {
   google()
@@ -43,14 +39,17 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
   kotlinOptions {
+    useIR = true
     jvmTarget = JavaVersion.VERSION_1_8.toString()
     freeCompilerArgs += [
       "-Xopt-in=kotlin.RequiresOptIn",
-      "-Xuse-experimental=net.skyscanner.backpack.util.ExperimentalBackpackApi",
     ]
   }
+  composeOptions {
+    kotlinCompilerExtensionVersion compose_version
+    kotlinCompilerVersion kotlin_version
+  }
   lintOptions {
-    baseline file("lint-baseline.xml")
     lintConfig file("../lint.xml")
     checkReleaseBuilds false // we're already running lint separately
     warningsAsErrors true
@@ -62,48 +61,22 @@ dependencies {
   api rootProject.ext.androidxAnnotations
   api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   api rootProject.ext.coroutines
-  api rootProject.ext.androidxAppCompat
-  api rootProject.ext.androidMaterial
-  api rootProject.ext.constraintLayout
-  api rootProject.ext.cardView
-  api rootProject.ext.threeTenAbpAndroid
-  api rootProject.ext.googleMaps
-  implementation rootProject.ext.swiperefreshLayout
+  api rootProject.ext.composeUi
+  api rootProject.ext.composeMaterial
+  api rootProject.ext.composeUiToolingPreview
+
   implementation rootProject.ext.ktx
   androidTestImplementation rootProject.ext.junitAndroid
-  androidTestImplementation rootProject.ext.espressoCore
   androidTestImplementation rootProject.ext.testRules
   androidTestImplementation rootProject.ext.mockitoKotlin
   androidTestImplementation rootProject.ext.mockitoAndroid
+  androidTestImplementation rootProject.ext.composeTestJUnit
+  debugImplementation rootProject.ext.composeUiTooling
   testImplementation rootProject.ext.junit
   testImplementation rootProject.ext.coroutinesTest
-  testImplementation rootProject.ext.threeTenAbp
 
   lintPublish project(':backpack-lint')
   implementation project(':Backpack-Common')
-}
-
-import org.jetbrains.dokka.gradle.DokkaTask
-
-task generateDokkaDocs(type: DokkaTask) {
-  def version = rootProject.ext.version
-
-  configure {
-    outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/versions/$version")
-
-    dokkaSourceSets {
-      named("main") {
-        moduleName = rootProject.name
-        reportUndocumented = false
-        sourceLink {
-          dir = "${project.projectDir}/src/main/java"
-          remoteUrl = new URL("https://github.com/Skyscanner/backpack-android/tree/main/${project.name}/src/main/java")
-          remoteLineSuffix = "#L"
-        }
-      }
-    }
-  }
-  dependsOn("generateDokkaStatics")
 }
 
 task testOssDebugUnitTest {

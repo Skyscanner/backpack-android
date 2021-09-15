@@ -18,6 +18,7 @@
 
 buildscript {
   ext.kotlin_version = '1.5.30'
+  ext.compose_version = '1.0.2'
   repositories {
     google()
     mavenCentral()
@@ -109,4 +110,10 @@ ext {
   lint = "com.android.tools.lint:lint:$lintVersion"
   lintApi = "com.android.tools.lint:lint-api:$lintVersion"
   lintTests = "com.android.tools.lint:lint-tests:$lintVersion"
+
+  composeUi = "androidx.compose.ui:ui:$compose_version"
+  composeMaterial = "androidx.compose.material:material:$compose_version"
+  composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$compose_version"
+  composeTestJUnit = "androidx.compose.ui:ui-test-junit4:$compose_version"
+  composeUiTooling = "androidx.compose.ui:ui-tooling:$compose_version"
 }
