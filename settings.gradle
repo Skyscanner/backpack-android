@@ -1,5 +1,5 @@
 include ':Backpack',
-  ':Backpack-Common',
-  ':Backpack-Compose',
+  ':backpack-common',
+  ':backpack-compose',
   ':backpack-lint',
   ':app'

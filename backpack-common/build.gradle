@@ -24,3 +24,7 @@ dependencies {
   testImplementation rootProject.ext.junit
   testImplementation rootProject.ext.coroutinesTest
 }
+
+task testOssDebugUnitTest {
+  dependsOn("test")
+}

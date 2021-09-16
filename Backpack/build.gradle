@@ -24,12 +24,8 @@ apply from: 'dokka.gradle'
 apply from: 'gradle-maven-push.gradle'
 
 version = rootProject.ext.version
-group = 'net.skyscanner.backpack'
+group = rootProject.ext.group
 
-repositories {
-  google()
-  mavenCentral()
-}
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -80,7 +76,7 @@ dependencies {
   testImplementation rootProject.ext.threeTenAbp
 
   lintPublish project(':backpack-lint')
-  implementation project(':Backpack-Common')
+  implementation project(':backpack-common')
 }
 
 import org.jetbrains.dokka.gradle.DokkaTask

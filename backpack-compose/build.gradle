@@ -20,12 +20,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 version = rootProject.ext.version
-group = 'net.skyscanner.backpack-compose'
+group = rootProject.ext.group
 
-repositories {
-  google()
-  mavenCentral()
-}
 android {
   compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -39,7 +35,6 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
   kotlinOptions {
-    useIR = true
     jvmTarget = JavaVersion.VERSION_1_8.toString()
     freeCompilerArgs += [
       "-Xopt-in=kotlin.RequiresOptIn",
@@ -50,7 +45,6 @@ android {
   }
   composeOptions {
     kotlinCompilerExtensionVersion compose_version
-    kotlinCompilerVersion kotlin_version
   }
   lintOptions {
     lintConfig file("../lint.xml")
@@ -79,7 +73,7 @@ dependencies {
   testImplementation rootProject.ext.coroutinesTest
 
   lintPublish project(':backpack-lint')
-  implementation project(':Backpack-Common')
+  implementation project(':backpack-common')
 }
 
 task testOssDebugUnitTest {

@@ -91,7 +91,6 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
   kotlinOptions {
-    useIR = true
     jvmTarget = JavaVersion.VERSION_1_8.toString()
     freeCompilerArgs += [
       "-Xopt-in=kotlin.RequiresOptIn",
@@ -102,7 +101,6 @@ android {
   }
   composeOptions {
     kotlinCompilerExtensionVersion compose_version
-    kotlinCompilerVersion kotlin_version
   }
   packagingOptions {
     exclude "**/attach_hotspot_windows.dll"
@@ -123,7 +121,7 @@ dependencies {
   androidTestImplementation rootProject.ext.testRules
   androidTestImplementation rootProject.ext.coroutinesTest
   implementation project(':Backpack')
-  implementation project(':Backpack-Compose')
+  implementation project(':backpack-compose')
 }
 screenshots {
   multipleDevices false
