@@ -37,7 +37,7 @@ class StyleableButtonStory : Story() {
   }
 
   private fun setButtonType(type: Type) {
-    view!!.findViewById<ViewGroup>(R.id.buttonsContainer).run {
+    requireView().findViewById<ViewGroup>(R.id.buttonsContainer).run {
       for (i in 0 until childCount) {
         (getChildAt(i) as? BpkButton?)?.type = type
       }

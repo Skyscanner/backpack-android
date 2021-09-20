@@ -17,8 +17,8 @@
  */
 
 buildscript {
-  ext.kotlin_version = '1.5.21'
-  ext.compose_version = '1.0.2'
+  ext.kotlin_version = '1.5.30'
+  ext.compose_version = '1.1.0-alpha04'
   repositories {
     google()
     mavenCentral()
@@ -46,6 +46,11 @@ allprojects {
 
 subprojects {
   apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+  repositories {
+    google()
+    mavenCentral()
+  }
 
   ktlint {
     version = "0.39.0"
@@ -78,7 +83,7 @@ ext {
   version = "$BpkVersion"
   group = "net.skyscanner.backpack"
   dokkaOutputDir = "dokka"
-  compileSdkVersion = 30
+  compileSdkVersion = 31
   targetSdkVersion = 30
   minSdkVersion = 24
 
@@ -103,7 +108,7 @@ ext {
   mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
   mockitoAndroid = "org.mockito:mockito-android:3.12.4"
 
-  coroutinesVersion = "1.5.0"
+  coroutinesVersion = "1.5.2"
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
