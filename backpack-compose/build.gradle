@@ -19,45 +19,18 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-version = rootProject.ext.version
-group = rootProject.ext.group
+apply from: "$rootProject.projectDir/android-configuration.gradle"
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-
-  defaultConfig {
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-  }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8.toString()
-    freeCompilerArgs += [
-      "-Xopt-in=kotlin.RequiresOptIn",
-    ]
-  }
   buildFeatures {
     compose true
   }
   composeOptions {
     kotlinCompilerExtensionVersion compose_version
   }
-  lintOptions {
-    lintConfig file("../lint.xml")
-    checkReleaseBuilds false // we're already running lint separately
-    warningsAsErrors true
-    disable 'UnusedResources' // we're exposing resources for consumers
-  }
 }
 
 dependencies {
-  api rootProject.ext.androidxAnnotations
-  api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  api rootProject.ext.coroutines
   api rootProject.ext.composeUi
   api rootProject.ext.composeMaterial
   api rootProject.ext.composeUiToolingPreview
@@ -76,10 +49,5 @@ dependencies {
   implementation project(':backpack-common')
 }
 
-task testOssDebugUnitTest {
-  dependsOn("testDebugUnitTest")
-}
-
-task lintOssDebug {
-  dependsOn("lintDebug")
-}
+apply from: "$rootProject.projectDir/android-test-configuration.gradle"
+apply from: "$rootProject.projectDir/android-lint-configuration.gradle"

@@ -16,19 +16,15 @@
  * limitations under the License.
  */
 
-apply plugin: 'kotlin'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply from: "$rootProject.projectDir/android-configuration.gradle"
 
 dependencies {
-  api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  api rootProject.ext.coroutines
   testImplementation rootProject.ext.junit
   testImplementation rootProject.ext.coroutinesTest
 }
 
-task testOssDebugUnitTest {
-  dependsOn("testDebugUnitTest")
-}
-
-task lintOssDebug {
-  dependsOn("lintDebug")
-}
+apply from: "$rootProject.projectDir/android-test-configuration.gradle"
+apply from: "$rootProject.projectDir/android-lint-configuration.gradle"

@@ -16,21 +16,6 @@
  * limitations under the License.
  */
 
-apply plugin: 'kotlin'
-
-dependencies {
-  compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  compileOnly rootProject.ext.lintApi
-
-  testImplementation rootProject.ext.lint
-  testImplementation rootProject.ext.lintTests
-  testImplementation rootProject.ext.junit
+task lintOssDebug {
+  dependsOn("lintDebug")
 }
-
-jar {
-  manifest {
-    attributes("Lint-Registry-v2": "net.skyscanner.backpack.lint.IssueRegistry")
-  }
-}
-
-apply from: "$rootProject.projectDir/android-test-configuration.gradle"
