@@ -26,5 +26,9 @@ dependencies {
 }
 
 task testOssDebugUnitTest {
-  dependsOn("test")
+  dependsOn("testDebugUnitTest")
+}
+
+task lintOssDebug {
+  dependsOn("lintDebug")
 }
