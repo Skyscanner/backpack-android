@@ -18,63 +18,35 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'org.jetbrains.dokka'
-
-apply from: 'dokka.gradle'
-apply from: 'gradle-maven-push.gradle'
 
 apply from: "$rootProject.projectDir/android-configuration.gradle"
 
 android {
-  kotlinOptions {
-    freeCompilerArgs += [
-      "-Xuse-experimental=net.skyscanner.backpack.util.ExperimentalBackpackApi",
-    ]
+  buildFeatures {
+    compose true
+  }
+  composeOptions {
+    kotlinCompilerExtensionVersion compose_version
   }
 }
 
 dependencies {
-  api rootProject.ext.androidMaterial
-  api rootProject.ext.constraintLayout
-  api rootProject.ext.cardView
-  api rootProject.ext.threeTenAbpAndroid
-  api rootProject.ext.googleMaps
-  implementation rootProject.ext.swiperefreshLayout
+  api rootProject.ext.composeUi
+  api rootProject.ext.composeMaterial
+  api rootProject.ext.composeUiToolingPreview
+
   implementation rootProject.ext.ktx
   androidTestImplementation rootProject.ext.junitAndroid
-  androidTestImplementation rootProject.ext.espressoCore
   androidTestImplementation rootProject.ext.testRules
   androidTestImplementation rootProject.ext.mockitoKotlin
   androidTestImplementation rootProject.ext.mockitoAndroid
+  androidTestImplementation rootProject.ext.composeTestJUnit
+  debugImplementation rootProject.ext.composeUiTooling
   testImplementation rootProject.ext.junit
   testImplementation rootProject.ext.coroutinesTest
-  testImplementation rootProject.ext.threeTenAbp
 
   lintPublish project(':backpack-lint')
   implementation project(':backpack-common')
-}
-
-import org.jetbrains.dokka.gradle.DokkaTask
-
-task generateDokkaDocs(type: DokkaTask) {
-  def version = rootProject.ext.version
-
-  configure {
-    outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/versions/$version")
-
-    dokkaSourceSets {
-      named("main") {
-        moduleName = rootProject.name
-        reportUndocumented = false
-        sourceLink {
-          dir = "${project.projectDir}/src/main/java"
-          remoteUrl = new URL("https://github.com/Skyscanner/backpack-android/tree/main/${project.name}/src/main/java")
-          remoteLineSuffix = "#L"
-        }
-      }
-    }
-  }
-  dependsOn("generateDokkaStatics")
 }
 
 apply from: "$rootProject.projectDir/android-configuration-check.gradle"

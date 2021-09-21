@@ -17,7 +17,8 @@
  */
 
 buildscript {
-  ext.kotlin_version = '1.5.30'
+  ext.kotlin_version = '1.5.21'
+  ext.compose_version = '1.0.2'
   repositories {
     google()
     mavenCentral()
@@ -45,6 +46,11 @@ allprojects {
 
 subprojects {
   apply plugin: "org.jlleitschuh.gradle.ktlint"
+
+  repositories {
+    google()
+    mavenCentral()
+  }
 
   ktlint {
     version = "0.39.0"
@@ -75,12 +81,10 @@ def BpkVersion = '32.1.0'
 
 ext {
   version = "$BpkVersion"
+  group = "net.skyscanner.backpack"
   dokkaOutputDir = "dokka"
-  compileSdkVersion = 30
-  targetSdkVersion = 30
-  minSdkVersion = 24
 
-  androidxAppCompat = "androidx.appcompat:appcompat:1.2.0"
+  androidxAppCompat = "androidx.appcompat:appcompat:1.3.1"
   androidxAnnotations = "androidx.annotation:annotation:1.2.0"
   androidMaterial = "com.google.android.material:material:1.3.0"
   cardView = "androidx.cardview:cardview:1.0.0"
@@ -109,4 +113,10 @@ ext {
   lint = "com.android.tools.lint:lint:$lintVersion"
   lintApi = "com.android.tools.lint:lint-api:$lintVersion"
   lintTests = "com.android.tools.lint:lint-tests:$lintVersion"
+
+  composeUi = "androidx.compose.ui:ui:$compose_version"
+  composeMaterial = "androidx.compose.material:material:$compose_version"
+  composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$compose_version"
+  composeTestJUnit = "androidx.compose.ui:ui-test-junit4:$compose_version"
+  composeUiTooling = "androidx.compose.ui:ui-tooling:$compose_version"
 }

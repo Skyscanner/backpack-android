@@ -44,19 +44,19 @@ class TextSpansStory : Story() {
     textView.movementMethod = LinkMovementMethod.getInstance()
     textView.text = SpannableStringBuilder().apply {
       append("This is an example of \n")
-      append("primary color span \n", BpkPrimaryColorSpan(activity!!), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+      append("primary color span \n", BpkPrimaryColorSpan(requireActivity()), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
       append("This is an example of \n")
       append(
         "Backpack font span \n",
-        BpkFontSpan(activity!!, BpkText.LG, BpkText.Weight.EMPHASIZED),
+        BpkFontSpan(requireActivity(), BpkText.LG, BpkText.Weight.EMPHASIZED),
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
       )
 
       append("This is an example of \n")
       append(
         "Backpack link span \n",
-        BpkLinkSpan(activity!!, "Link clicked!", linksHandler),
+        BpkLinkSpan(requireActivity(), "Link clicked!", linksHandler),
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
       )
     }

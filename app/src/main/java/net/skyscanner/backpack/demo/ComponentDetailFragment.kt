@@ -35,7 +35,7 @@ open class ComponentDetailFragment : Fragment() {
   override fun onCreate(savedInstanceState: Bundle?) {
     if (arguments?.containsKey(ARG_ITEM_ID) == true) {
       val activity = this.activity as ComponentDetailActivity
-      activity.title = arguments!!.getString(ARG_ITEM_ID)
+      activity.title = requireArguments().getString(ARG_ITEM_ID)
     }
 
     super.onCreate(savedInstanceState)

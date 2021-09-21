@@ -31,12 +31,12 @@ class ToastStory : Story() {
 
     view.findViewById<TextView>(R.id.toast_short).setOnClickListener {
       it as TextView
-      BpkToast.makeText(activity!!, it.text, BpkToast.LENGTH_SHORT).show()
+      BpkToast.makeText(requireActivity(), it.text, BpkToast.LENGTH_SHORT).show()
     }
 
     view.findViewById<TextView>(R.id.toast_long).setOnClickListener {
       it as TextView
-      BpkToast.makeText(activity!!, it.text, BpkToast.LENGTH_LONG).show()
+      BpkToast.makeText(requireActivity(), it.text, BpkToast.LENGTH_LONG).show()
     }
   }
 

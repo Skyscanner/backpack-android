@@ -51,8 +51,8 @@ class SettingsActivity : AppCompatActivity() {
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     themes = listOf(
-      findViewById(R.id.theme_london),
-      findViewById(R.id.theme_doha)
+      findViewById<SettingsThemeOption>(R.id.theme_london).apply { setOnClickListener(::onThemeSelected) },
+      findViewById<SettingsThemeOption>(R.id.theme_doha).apply { setOnClickListener(::onThemeSelected) },
     )
 
     val themeToggle = findViewById<BpkSwitch>(R.id.theme_toggle)

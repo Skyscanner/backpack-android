@@ -91,14 +91,12 @@
       android:id="@+id/theme_london"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:onClick="onThemeSelected"
       app:themeName="@string/settings_theme_london" />
 
     <net.skyscanner.backpack.demo.components.SettingsThemeOption
       android:id="@+id/theme_doha"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:onClick="onThemeSelected"
       app:themeName="@string/settings_theme_doha" />
 
   </LinearLayout>

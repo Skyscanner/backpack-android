@@ -20,6 +20,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.facebook.testing.screenshot'
 
+apply from: "$rootProject.projectDir/android-configuration.gradle"
+
 def properties = new Properties()
 properties.putAll(System.getenv())
 if (rootProject.file("local.properties").exists()) {
@@ -27,12 +29,8 @@ if (rootProject.file("local.properties").exists()) {
 }
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-
   defaultConfig {
     applicationId 'net.skyscanner.backpack'
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
     versionCode 1
     versionName rootProject.ext.version
 
@@ -68,12 +66,6 @@ android {
       versionNameSuffix "-internal"
     }
   }
-  lintOptions {
-    baseline file("lint-baseline.xml")
-    lintConfig file("../lint.xml")
-    checkReleaseBuilds false // we're already running lint separately
-    warningsAsErrors true
-  }
   testOptions {
     animationsDisabled = true
   }
@@ -86,15 +78,11 @@ android {
       dimension "version"
     }
   }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+  buildFeatures {
+    compose true
   }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8.toString()
-    freeCompilerArgs += [
-      "-Xopt-in=kotlin.RequiresOptIn",
-    ]
+  composeOptions {
+    kotlinCompilerExtensionVersion compose_version
   }
   packagingOptions {
     exclude "**/attach_hotspot_windows.dll"
@@ -115,6 +103,7 @@ dependencies {
   androidTestImplementation rootProject.ext.testRules
   androidTestImplementation rootProject.ext.coroutinesTest
   implementation project(':Backpack')
+  implementation project(':backpack-compose')
 }
 screenshots {
   multipleDevices false

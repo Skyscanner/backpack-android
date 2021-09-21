@@ -55,8 +55,8 @@ class Calendar2Story : Story() {
     PreselectedRange,
   }
 
-  private val calendar by unsafeLazy { view!!.findViewById<BpkCalendar>(R.id.calendar2)!! }
-  private val type by unsafeLazy { arguments!!.getSerializable(TYPE) as Type }
+  private val calendar by unsafeLazy { requireView().findViewById<BpkCalendar>(R.id.calendar2)!! }
+  private val type by unsafeLazy { requireArguments().getSerializable(TYPE) as Type }
   private val now = LocalDate.of(2019, 1, 1)
   private val range = now..(now + Period.ofYears(2))
 
