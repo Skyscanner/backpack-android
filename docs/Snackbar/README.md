@@ -23,7 +23,7 @@ import net.skyscanner.backpack.snackbar.BpkSnackbar
 
 BpkSnackbar.make(view, "Message", BpkSnackbar.LENGTH_SHORT)
         .setTitle("Title")
-        .setIcon(R.drawable.bpk_tick_circle)
+        .setIcon(R.drawable.bpk_tick_circle, "Confirm")
         .setAction("Action") {}
         .show()
 ```
@@ -34,7 +34,7 @@ An example with icon-only action
 import net.skyscanner.backpack.snackbar.BpkSnackbar
 
 BpkSnackbar.make(view, "Message", BpkSnackbar.LENGTH_SHORT)
-        .setAction(R.drawable.bpk_close) {}
+        .setAction(R.drawable.bpk_close, "Close") {}
         .show()
 ```
 
