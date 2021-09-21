@@ -40,6 +40,7 @@ import net.skyscanner.backpack.snackbar.internal.customiseText
 import net.skyscanner.backpack.snackbar.internal.setBackgroundColorCompat
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.isScreenReaderOn
 import net.skyscanner.backpack.util.use
 
 /**
@@ -223,6 +224,8 @@ class BpkSnackbar private constructor(
 
     const val LENGTH_LONG = Snackbar.LENGTH_LONG
 
+    private const val LENGTH_SCREENREADER = 30 * 1000 // 30 seconds
+
     /**
      * Creates a new [Snackbar] instance using the given [text] and [duration].
      * [view] is used for accessing the themed context and hierarchy, to decide where to render the [Snackbar]
@@ -253,10 +256,16 @@ class BpkSnackbar private constructor(
         backgroundColor = it.getColor(R.styleable.BpkSnackbar_snackbarBackgroundColor, backgroundColor)
       }
 
+      val adjustedDuration = if (duration != BpkSnackbar.LENGTH_INDEFINITE && context.isScreenReaderOn()) {
+        LENGTH_SCREENREADER
+      } else {
+        duration
+      }
+
       return BpkSnackbar(
         context = context,
         view = view,
-        duration = duration,
+        duration = adjustedDuration,
         textColor = textColor,
         actionColor = actionColor,
         backgroundColor = backgroundColor
