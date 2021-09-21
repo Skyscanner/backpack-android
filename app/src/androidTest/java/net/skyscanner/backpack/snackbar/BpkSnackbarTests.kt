@@ -107,7 +107,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   fun screenshotTestSnackbar_iconOnly() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setAction(R.drawable.bpk_close) {}
+        .setAction(R.drawable.bpk_close, "Close") {}
     }
   }
 
@@ -116,7 +116,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setTitle("Title")
-        .setAction(R.drawable.bpk_close) {}
+        .setAction(R.drawable.bpk_close, "Close") {}
     }
   }
 
@@ -125,7 +125,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setIcon(R.drawable.bpk_tick_circle)
-        .setAction(R.drawable.bpk_close) {}
+        .setAction(R.drawable.bpk_close, "Close") {}
     }
   }
 
@@ -135,7 +135,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setTitle("Title")
         .setIcon(R.drawable.bpk_tick_circle)
-        .setAction(R.drawable.bpk_close) {}
+        .setAction(R.drawable.bpk_close, "Close") {}
     }
   }
 

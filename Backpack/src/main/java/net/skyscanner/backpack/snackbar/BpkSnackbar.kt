@@ -27,7 +27,6 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.AnyRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -122,18 +121,19 @@ class BpkSnackbar private constructor(
     setText(context.getString(resId))
 
   fun setAction(text: CharSequence, listener: View.OnClickListener): BpkSnackbar = apply {
-    setActionInternal(text = text, icon = null, callback = listener)
+    setActionInternal(text = text, icon = null, callback = listener, contentDescription = null)
   }
 
-  fun setAction(@AnyRes resId: Int, listener: View.OnClickListener): BpkSnackbar = apply {
-    if (context.resources.getResourceTypeName(resId) == "drawable") {
-      return setAction(AppCompatResources.getDrawable(context, resId)!!, listener)
-    }
+  fun setAction(@StringRes resId: Int, listener: View.OnClickListener): BpkSnackbar = apply {
     return setAction(context.getText(resId), listener)
   }
 
-  fun setAction(icon: Drawable, listener: View.OnClickListener): BpkSnackbar = apply {
-    setActionInternal(text = null, icon = icon, callback = listener)
+  fun setAction(@DrawableRes resId: Int, contentDescription: String, listener: View.OnClickListener): BpkSnackbar = apply {
+    return setAction(AppCompatResources.getDrawable(context, resId)!!, contentDescription, listener)
+  }
+
+  fun setAction(icon: Drawable, contentDescription: String, listener: View.OnClickListener): BpkSnackbar = apply {
+    setActionInternal(text = null, icon = icon, callback = listener, contentDescription = contentDescription)
   }
 
   val duration: Int
@@ -209,6 +209,7 @@ class BpkSnackbar private constructor(
   private fun setActionInternal(
     text: CharSequence?,
     icon: Drawable?,
+    contentDescription: String?,
     callback: View.OnClickListener
   ) {
     actionView.gravity = when {
@@ -218,7 +219,7 @@ class BpkSnackbar private constructor(
     snackbar.setAction(
       when {
         !text.isNullOrEmpty() -> text
-        icon != null -> customiseText(" ", ImageSpan(createIconDrawable(icon, textColor)!!))
+        icon != null -> customiseText(contentDescription ?: " ", ImageSpan(createIconDrawable(icon, textColor)!!))
         else -> ""
       },
       callback
