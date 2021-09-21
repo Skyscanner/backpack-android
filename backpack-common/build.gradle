@@ -26,5 +26,4 @@ dependencies {
   testImplementation rootProject.ext.coroutinesTest
 }
 
-apply from: "$rootProject.projectDir/android-test-configuration.gradle"
-apply from: "$rootProject.projectDir/android-lint-configuration.gradle"
+apply from: "$rootProject.projectDir/android-configuration-check.gradle"
