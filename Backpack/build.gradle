@@ -34,7 +34,6 @@ android {
 }
 
 dependencies {
-  api rootProject.ext.androidxAppCompat
   api rootProject.ext.androidMaterial
   api rootProject.ext.constraintLayout
   api rootProject.ext.cardView

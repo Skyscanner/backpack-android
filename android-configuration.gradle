@@ -49,4 +49,5 @@ dependencies {
   api rootProject.ext.androidxAnnotations
   api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   api rootProject.ext.coroutines
+  api rootProject.ext.androidxAppCompat
 }
