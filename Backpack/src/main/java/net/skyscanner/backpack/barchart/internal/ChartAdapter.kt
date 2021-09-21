@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.barchart.internal
 
-import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.barchart.BpkBarChart
@@ -33,7 +32,6 @@ internal class ChartAdapter(
   private var selectedId: Long = UNSELECTED_ID
   private var selectedPosition: Int = UNSELECTED_POSITION
 
-  @SuppressLint("NotifyDataSetChanged")
   private val onClickWrapper = { holder: ChartBarHolder ->
     if (!holder.itemView.isSelected) {
       selectedId = holder.model?.id ?: UNSELECTED_ID
@@ -47,7 +45,6 @@ internal class ChartAdapter(
     onClick(holder)
   }
 
-  @SuppressLint("NotifyDataSetChanged")
   override fun invoke(model: ChartData) {
     this.data = model
     selectedPosition = UNSELECTED_POSITION

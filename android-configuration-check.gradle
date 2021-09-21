@@ -16,6 +16,10 @@
  * limitations under the License.
  */
 
+task lintOssDebug {
+  dependsOn("lintDebug")
+}
+
 task testOssDebugUnitTest {
   dependsOn("testDebugUnitTest")
 }

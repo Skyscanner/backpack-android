@@ -25,8 +25,4 @@
   <!-- We're not accessing videos, so this is not relevant-->
   <issue id="MediaCapabilities" severity="ignore"/>
 
-  <!-- We're using this widely in our demo app, which is not suppored to be localised-->
-  <issue id="SetTextI18n" severity="ignore"/>
-  <issue id="HardcodedText" severity="ignore"/>
-
 </lint>
