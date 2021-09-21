@@ -33,4 +33,6 @@ jar {
   }
 }
 
-apply from: "$rootProject.projectDir/android-test-configuration.gradle"
+task testOssDebugUnitTest {
+  dependsOn("test")
+}
