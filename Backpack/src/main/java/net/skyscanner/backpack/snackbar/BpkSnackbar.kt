@@ -161,6 +161,15 @@ class BpkSnackbar private constructor(
     callback?.let(callbacks::add)
   }
 
+  fun setOnDismissed(ignoreDismissAfterAction: Boolean = true, callback: () -> Unit) =
+    addCallback(object : BpkSnackbar.Callback() {
+      override fun onDismissed(transientBottomBar: BpkSnackbar?, event: Int) {
+        super.onDismissed(transientBottomBar, event)
+        if (ignoreDismissAfterAction && event == DISMISS_EVENT_ACTION) return
+        callback()
+      }
+    })
+
   fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
     callbacks.remove(callback)
   }
