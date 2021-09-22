@@ -31,7 +31,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_LABELED
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
@@ -49,7 +49,7 @@ open class BpkBottomNav @JvmOverloads constructor(
   private val fontSpan = BottomNavSpan(context)
 
   init {
-    labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+    labelVisibilityMode = LABEL_VISIBILITY_LABELED
     background = AppCompatResources.getDrawable(context, R.drawable.bpk_bottom_nav_background)
     minimumHeight = resources.getDimensionPixelSize(R.dimen.bpk_bottom_nav_height)
     itemTextColor = context.getColorStateList(R.color.bpk_bottom_nav_selector)
