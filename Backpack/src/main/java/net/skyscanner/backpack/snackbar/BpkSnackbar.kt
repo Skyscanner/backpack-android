@@ -266,7 +266,7 @@ class BpkSnackbar private constructor(
         backgroundColor = it.getColor(R.styleable.BpkSnackbar_snackbarBackgroundColor, backgroundColor)
       }
 
-      val adjustedDuration = if (duration != BpkSnackbar.LENGTH_INDEFINITE && context.isScreenReaderOn()) {
+      val adjustedDuration = if (duration != LENGTH_INDEFINITE && context.isScreenReaderOn()) {
         LENGTH_SCREENREADER
       } else {
         duration

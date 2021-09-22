@@ -34,7 +34,7 @@ private fun Context.unwrapped(): Context {
   return context
 }
 
-fun Context.isScreenReaderOn(): Boolean {
+internal fun Context.isScreenReaderOn(): Boolean {
   val am = getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
   if (am != null && am.isEnabled) {
     val serviceInfoList =
