@@ -51,7 +51,6 @@ dependencies {
   testImplementation rootProject.ext.threeTenAbp
 
   lintPublish project(':backpack-lint')
-  implementation project(':backpack-common')
 }
 
 import org.jetbrains.dokka.gradle.DokkaTask
