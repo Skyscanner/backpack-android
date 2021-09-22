@@ -1,6 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
+>
+> **Fixed:**
+
+- Removed dependency onto `backpack-common`
 
 ## How to write a good changelog entry
 
