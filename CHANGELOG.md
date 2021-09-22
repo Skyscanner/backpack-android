@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 33.0.1
+
+**Fixed:**
+
+- Removed dependency onto `backpack-common`
+
 # 33.0.0
 
 **Breaking:**
