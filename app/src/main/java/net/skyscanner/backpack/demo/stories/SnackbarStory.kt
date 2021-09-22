@@ -23,7 +23,6 @@ import android.view.View
 import android.widget.TextView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.snackbar.BpkSnackbar
-import net.skyscanner.backpack.snackbar.setAction
 
 class SnackbarStory : Story() {
 
@@ -33,77 +32,77 @@ class SnackbarStory : Story() {
     view.findViewById<TextView>(R.id.snackbar_short).setOnClickListener {
       it as TextView
       BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_SHORT)
-        .setAction("Action!") {}
+        .setAction(R.string.snackbar_action) {}
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_long).setOnClickListener {
       it as TextView
       BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_LONG)
-        .setAction("Action!") {}
+        .setAction(R.string.snackbar_action) {}
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_indefinite).setOnClickListener {
       it as TextView
       BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_INDEFINITE)
-        .setAction("Action!") {}
+        .setAction(R.string.snackbar_action) {}
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_title).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
-        .setTitle("Title")
-        .setAction("Action!") {}
+      BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle(getString(R.string.snackbar_title))
+        .setAction(R.string.snackbar_action) {}
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_icon).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
+      BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
         .setIcon(R.drawable.bpk_tick_circle)
-        .setAction("Action!") {}
+        .setAction(R.string.snackbar_action) {}
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_title_icon).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
-        .setTitle("Title")
+      BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle(getString(R.string.snackbar_title))
         .setIcon(R.drawable.bpk_tick_circle)
-        .setAction("Action!") {}
+        .setAction(R.string.snackbar_action) {}
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_iconOnly).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
-        .setAction(R.drawable.bpk_close) { }
+      BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setAction(R.drawable.bpk_close, getString(R.string.snackbar_icon_content_description)) { }
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_title_iconOnly).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
-        .setTitle("Title")
-        .setAction(R.drawable.bpk_close) { }
+      BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle(getString(R.string.snackbar_title))
+        .setAction(R.drawable.bpk_close, getString(R.string.snackbar_icon_content_description)) { }
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_icon_iconOnly).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
+      BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
         .setIcon(R.drawable.bpk_tick_circle)
-        .setAction(R.drawable.bpk_close) { }
+        .setAction(R.drawable.bpk_close, getString(R.string.snackbar_icon_content_description)) { }
         .show()
     }
 
     view.findViewById<TextView>(R.id.snackbar_title_icon_iconOnly).setOnClickListener {
       it as TextView
-      BpkSnackbar.make(view, "message", BpkSnackbar.LENGTH_INDEFINITE)
-        .setTitle("Title")
-        .setAction(R.drawable.bpk_close) { }
+      BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle(getString(R.string.snackbar_title))
+        .setAction(R.drawable.bpk_close, getString(R.string.snackbar_icon_content_description)) { }
         .setIcon(R.drawable.bpk_tick_circle)
         .show()
     }

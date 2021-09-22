@@ -2,6 +2,12 @@
 
 > Place your changes below this line.
 
+**Breaking:**
+- BpkSnackbar
+  - Increased Snackbar duration to 30 seconds when screen-reader is enabled
+  - Add `contentDescription` for icon actions
+  - Removed `setAction` and `setOnDismissed` Kotlin extension functions - use same named member functions instead
+
 **Fixed:**
 
 - Fixed an issue with Calendar2, where current months with less days than the current day were incorrectly formatted to the next month.

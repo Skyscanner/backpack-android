@@ -27,7 +27,6 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.AnyRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -40,6 +39,7 @@ import net.skyscanner.backpack.snackbar.internal.customiseText
 import net.skyscanner.backpack.snackbar.internal.setBackgroundColorCompat
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.isScreenReaderOn
 import net.skyscanner.backpack.util.use
 
 /**
@@ -121,18 +121,19 @@ class BpkSnackbar private constructor(
     setText(context.getString(resId))
 
   fun setAction(text: CharSequence, listener: View.OnClickListener): BpkSnackbar = apply {
-    setActionInternal(text = text, icon = null, callback = listener)
+    setActionInternal(text = text, icon = null, callback = listener, contentDescription = null)
   }
 
-  fun setAction(@AnyRes resId: Int, listener: View.OnClickListener): BpkSnackbar = apply {
-    if (context.resources.getResourceTypeName(resId) == "drawable") {
-      return setAction(AppCompatResources.getDrawable(context, resId)!!, listener)
-    }
+  fun setAction(@StringRes resId: Int, listener: View.OnClickListener): BpkSnackbar = apply {
     return setAction(context.getText(resId), listener)
   }
 
-  fun setAction(icon: Drawable, listener: View.OnClickListener): BpkSnackbar = apply {
-    setActionInternal(text = null, icon = icon, callback = listener)
+  fun setAction(@DrawableRes resId: Int, contentDescription: String, listener: View.OnClickListener): BpkSnackbar = apply {
+    return setAction(AppCompatResources.getDrawable(context, resId)!!, contentDescription, listener)
+  }
+
+  fun setAction(icon: Drawable, contentDescription: String, listener: View.OnClickListener): BpkSnackbar = apply {
+    setActionInternal(text = null, icon = icon, callback = listener, contentDescription = contentDescription)
   }
 
   val duration: Int
@@ -159,6 +160,15 @@ class BpkSnackbar private constructor(
   fun addCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
     callback?.let(callbacks::add)
   }
+
+  fun setOnDismissed(ignoreDismissAfterAction: Boolean = true, callback: () -> Unit) =
+    addCallback(object : BpkSnackbar.Callback() {
+      override fun onDismissed(transientBottomBar: BpkSnackbar?, event: Int) {
+        super.onDismissed(transientBottomBar, event)
+        if (ignoreDismissAfterAction && event == DISMISS_EVENT_ACTION) return
+        callback()
+      }
+    })
 
   fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
     callbacks.remove(callback)
@@ -199,6 +209,7 @@ class BpkSnackbar private constructor(
   private fun setActionInternal(
     text: CharSequence?,
     icon: Drawable?,
+    contentDescription: String?,
     callback: View.OnClickListener
   ) {
     actionView.gravity = when {
@@ -208,7 +219,7 @@ class BpkSnackbar private constructor(
     snackbar.setAction(
       when {
         !text.isNullOrEmpty() -> text
-        icon != null -> customiseText(" ", ImageSpan(createIconDrawable(icon, textColor)!!))
+        icon != null -> customiseText(contentDescription ?: " ", ImageSpan(createIconDrawable(icon, textColor)!!))
         else -> ""
       },
       callback
@@ -222,6 +233,8 @@ class BpkSnackbar private constructor(
     const val LENGTH_SHORT = Snackbar.LENGTH_SHORT
 
     const val LENGTH_LONG = Snackbar.LENGTH_LONG
+
+    private const val LENGTH_SCREENREADER = 30 * 1000 // 30 seconds
 
     /**
      * Creates a new [Snackbar] instance using the given [text] and [duration].
@@ -253,10 +266,16 @@ class BpkSnackbar private constructor(
         backgroundColor = it.getColor(R.styleable.BpkSnackbar_snackbarBackgroundColor, backgroundColor)
       }
 
+      val adjustedDuration = if (duration != LENGTH_INDEFINITE && context.isScreenReaderOn()) {
+        LENGTH_SCREENREADER
+      } else {
+        duration
+      }
+
       return BpkSnackbar(
         context = context,
         view = view,
-        duration = duration,
+        duration = adjustedDuration,
         textColor = textColor,
         actionColor = actionColor,
         backgroundColor = backgroundColor

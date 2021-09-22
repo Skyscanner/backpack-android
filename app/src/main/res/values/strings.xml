@@ -66,4 +66,9 @@
   <string name="settings_theme_doha">Doha</string>
   <string name="settings_theme_london">London</string>
 
+  <string name="snackbar_title">Title</string>
+  <string name="snackbar_message">Message</string>
+  <string name="snackbar_icon_content_description">Close</string>
+  <string name="snackbar_action">Action!</string>
+
 </resources>
