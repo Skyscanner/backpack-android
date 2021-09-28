@@ -51,6 +51,7 @@ import net.skyscanner.backpack.demo.stories.Story.Companion.scrollable
 import net.skyscanner.backpack.demo.stories.Story.Companion.with
 import net.skyscanner.backpack.demo.stories.StyleableButtonStory
 import net.skyscanner.backpack.demo.stories.SubStory
+import net.skyscanner.backpack.demo.stories.TabStory
 import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
 
@@ -86,7 +87,7 @@ class NodeItem(
     var fullName = this.name
 
     while (parent != null) {
-      fullName = "${parent.name} - $name"
+      fullName = "${parent.name} - $fullName"
       parent = parent.getParent()
     }
 
@@ -284,6 +285,19 @@ object ComponentRegistry {
     "Text Field" story NodeData { Story of R.layout.fragment_text_fields },
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
     "Toast" story NodeData { ToastStory of R.layout.fragment_toasts },
+    "Sneak peek" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        "Compose" story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Very" story NodeData { Story of R.layout.fragment_text },
+            "Exciting" story NodeData { Story of R.layout.fragment_text_emphasized },
+          )
+        ),
+        "View" story NodeData { Story of R.layout.fragment_icons },
+      )
+    ),
   )
 
   private val TOKENS_MAP = mapOf(
@@ -324,7 +338,7 @@ object ComponentRegistry {
     story ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
 
     return rest.fold(story) { result, item ->
-      return result.subItems[item]
+      result.subItems[item] as? NodeItem
         ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
     }
   }
