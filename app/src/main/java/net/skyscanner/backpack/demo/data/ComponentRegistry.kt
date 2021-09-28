@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.demo.data
 
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
@@ -26,6 +28,7 @@ import net.skyscanner.backpack.demo.stories.ChangeableButtonsStory
 import net.skyscanner.backpack.demo.stories.ChipStory
 import net.skyscanner.backpack.demo.stories.ColorStory
 import net.skyscanner.backpack.demo.stories.ColoredCalendarStory
+import net.skyscanner.backpack.demo.stories.ComposeStory
 import net.skyscanner.backpack.demo.stories.DefaultCalendarStory
 import net.skyscanner.backpack.demo.stories.DialogStory
 import net.skyscanner.backpack.demo.stories.DisabledCalendarStory
@@ -63,7 +66,7 @@ interface RegistryItem {
   fun getFullyQualifiedName(): String
 }
 
-class NodeItem(
+open class NodeItem(
   override val name: String,
   private val creator: (items: Array<String>) -> Story,
   items: Map<String, RegistryItem> = emptyMap(),
@@ -95,12 +98,25 @@ class NodeItem(
   }
 }
 
+class ComposeNode(
+  name: String,
+  val composable: @Composable () -> Unit
+) : NodeItem(name, { Story() }) {
+  override fun createStory(): Story {
+    return ComposeStory of getFullyQualifiedName()
+  }
+}
+
 private class NodeData(
   val creator: (items: Array<String>) -> Story,
   val items: Map<String, RegistryItem> = emptyMap(),
 ) {
 
   constructor(creator: () -> Story) : this({ _ -> creator() })
+}
+
+private infix fun String.composeStory(composable: @Composable () -> Unit): Pair<String, NodeItem> {
+  return Pair(this, ComposeNode(this, composable))
 }
 
 private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
@@ -288,13 +304,7 @@ object ComponentRegistry {
     "Sneak peek" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        "Compose" story NodeData(
-          { children -> SubStory of children },
-          mapOf(
-            "Very" story NodeData { Story of R.layout.fragment_text },
-            "Exciting" story NodeData { Story of R.layout.fragment_text_emphasized },
-          )
-        ),
+        "Compose" composeStory { Text(text = ("Hello!")) },
         "View" story NodeData { Story of R.layout.fragment_icons },
       )
     ),
