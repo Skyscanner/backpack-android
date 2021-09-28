@@ -18,8 +18,13 @@
 
 package net.skyscanner.backpack.demo.data
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
@@ -127,6 +132,9 @@ private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
  * Helper class to register the fragments for components
  */
 object ComponentRegistry {
+
+  private val TAB_TITLE_COMPOSE = "Compose"
+  private val TAB_TITLE_VIEW = "View"
 
   private val COMPONENTS_TREE = mapOf(
     "Badge" story NodeData { Story of R.layout.fragment_badge },
@@ -304,8 +312,15 @@ object ComponentRegistry {
     "Sneak peek" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        "Compose" composeStory { Text(text = ("Hello!")) },
-        "View" story NodeData { Story of R.layout.fragment_icons },
+        TAB_TITLE_COMPOSE composeStory {
+          Text(
+            text = "Coming soon",
+            modifier = Modifier.padding(16.dp),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.h5
+          )
+        },
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
       )
     ),
   )
