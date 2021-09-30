@@ -18,6 +18,13 @@
 
 package net.skyscanner.backpack.demo.data
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
@@ -26,6 +33,7 @@ import net.skyscanner.backpack.demo.stories.ChangeableButtonsStory
 import net.skyscanner.backpack.demo.stories.ChipStory
 import net.skyscanner.backpack.demo.stories.ColorStory
 import net.skyscanner.backpack.demo.stories.ColoredCalendarStory
+import net.skyscanner.backpack.demo.stories.ComposeStory
 import net.skyscanner.backpack.demo.stories.DefaultCalendarStory
 import net.skyscanner.backpack.demo.stories.DialogStory
 import net.skyscanner.backpack.demo.stories.DisabledCalendarStory
@@ -51,6 +59,7 @@ import net.skyscanner.backpack.demo.stories.Story.Companion.scrollable
 import net.skyscanner.backpack.demo.stories.Story.Companion.with
 import net.skyscanner.backpack.demo.stories.StyleableButtonStory
 import net.skyscanner.backpack.demo.stories.SubStory
+import net.skyscanner.backpack.demo.stories.TabStory
 import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
 
@@ -62,7 +71,7 @@ interface RegistryItem {
   fun getFullyQualifiedName(): String
 }
 
-class NodeItem(
+open class NodeItem(
   override val name: String,
   private val creator: (items: Array<String>) -> Story,
   items: Map<String, RegistryItem> = emptyMap(),
@@ -86,11 +95,20 @@ class NodeItem(
     var fullName = this.name
 
     while (parent != null) {
-      fullName = "${parent.name} - $name"
+      fullName = "${parent.name} - $fullName"
       parent = parent.getParent()
     }
 
     return fullName
+  }
+}
+
+class ComposeNode(
+  name: String,
+  val composable: @Composable () -> Unit
+) : NodeItem(name, { Story() }) {
+  override fun createStory(): Story {
+    return ComposeStory of getFullyQualifiedName()
   }
 }
 
@@ -102,6 +120,10 @@ private class NodeData(
   constructor(creator: () -> Story) : this({ _ -> creator() })
 }
 
+private infix fun String.composeStory(composable: @Composable () -> Unit): Pair<String, NodeItem> {
+  return Pair(this, ComposeNode(this, composable))
+}
+
 private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
   return Pair(this, NodeItem(this, story.creator, story.items))
 }
@@ -110,6 +132,9 @@ private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
  * Helper class to register the fragments for components
  */
 object ComponentRegistry {
+
+  private val TAB_TITLE_COMPOSE = "Compose"
+  private val TAB_TITLE_VIEW = "View"
 
   private val COMPONENTS_TREE = mapOf(
     "Badge" story NodeData { Story of R.layout.fragment_badge },
@@ -284,6 +309,20 @@ object ComponentRegistry {
     "Text Field" story NodeData { Story of R.layout.fragment_text_fields },
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
     "Toast" story NodeData { ToastStory of R.layout.fragment_toasts },
+    "Sneak peek" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_COMPOSE composeStory {
+          Text(
+            text = "Coming soon",
+            modifier = Modifier.padding(16.dp),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.h5
+          )
+        },
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
+      )
+    ),
   )
 
   private val TOKENS_MAP = mapOf(
@@ -324,7 +363,7 @@ object ComponentRegistry {
     story ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
 
     return rest.fold(story) { result, item ->
-      return result.subItems[item]
+      result.subItems[item] as? NodeItem
         ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
     }
   }
