@@ -25,6 +25,9 @@ import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.HeaderItem
 import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.StoryItem
 import net.skyscanner.backpack.demo.data.ComponentRegistry
+import net.skyscanner.backpack.demo.data.ComposeNode
+import net.skyscanner.backpack.demo.data.NodeItem
+import net.skyscanner.backpack.demo.data.RegistryItem
 
 /**
  * An activity representing a list of Components. This activity
@@ -47,11 +50,22 @@ class MainActivity : BpkBaseActivity() {
     val componentsList = findViewById<View>(R.id.componentsList) as RecyclerView
     val allItems = mutableListOf<StoriesRecyclerViewAdapter.ListItem>()
     allItems.add(HeaderItem("Tokens"))
-    allItems.addAll(ComponentRegistry.TOKENS.map { StoryItem(it) })
+    allItems.addAll(ComponentRegistry.TOKENS.map { it.toStoryItem() })
     allItems.add(HeaderItem("Components"))
-    allItems.addAll(ComponentRegistry.COMPONENTS.map { StoryItem(it) })
+    allItems.addAll(ComponentRegistry.COMPONENTS.map { it.toStoryItem() })
 
     componentsList.adapter = StoriesRecyclerViewAdapter(allItems)
     componentsList.addItemDecoration(StoryItemDecoration(this))
+  }
+
+  private fun Map.Entry<String, NodeItem>.toStoryItem(): StoryItem {
+    return StoryItem(key, hasComposeNodes(value))
+  }
+
+  private fun hasComposeNodes(item: RegistryItem): Boolean {
+    if (item is ComposeNode) {
+      return true
+    }
+    return item is NodeItem && item.subItems.values.any { hasComposeNodes(it) }
   }
 }

@@ -55,11 +55,14 @@ class StoriesRecyclerViewAdapter internal constructor(
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.name.text = ComponentRegistry.getStoryName(values[position].getText())
-    holder.itemView.tag = values[position].getText()
+    holder.name.text = ComponentRegistry.getStoryName(values[position].text)
+    holder.itemView.tag = values[position].text
 
-    if (values[position] is StoryItem) {
+    val item = values[position]
+    if (item is StoryItem) {
       holder.itemView.setOnClickListener(onClickListener)
+      holder.itemView.findViewById<View>(R.id.compose_indicator).visibility =
+        if (item.showComposeIndicator) View.VISIBLE else View.GONE
     }
   }
 
@@ -75,16 +78,9 @@ class StoriesRecyclerViewAdapter internal constructor(
     val name: TextView = view.findViewById(R.id.component_name)
   }
 
-  interface ListItem {
-    fun getText(): String
-  }
-
-  class ListItemImpl(private val text: String) : ListItem {
-    override fun getText(): String = text
-  }
-
-  class HeaderItem(text: String) : ListItem by ListItemImpl(text)
-  class StoryItem(text: String) : ListItem by ListItemImpl(text)
+  sealed class ListItem(val text: String)
+  class HeaderItem(text: String) : ListItem(text)
+  class StoryItem(text: String, val showComposeIndicator: Boolean = false) : ListItem(text)
 
   companion object {
     private const val HEADER_VIEW_TYPE = 0
