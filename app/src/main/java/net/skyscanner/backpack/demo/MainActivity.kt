@@ -52,5 +52,6 @@ class MainActivity : BpkBaseActivity() {
     allItems.addAll(ComponentRegistry.COMPONENTS.map { StoryItem(it) })
 
     componentsList.adapter = StoriesRecyclerViewAdapter(allItems)
+    componentsList.addItemDecoration(StoryItemDecoration(this))
   }
 }

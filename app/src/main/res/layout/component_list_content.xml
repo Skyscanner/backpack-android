@@ -16,13 +16,4 @@
     android:background="?attr/selectableItemBackground"
     app:textStyle="lg" />
 
-  <View
-    android:id="@+id/component_divider"
-    android:layout_width="fill_parent"
-    android:layout_height="1dip"
-    android:layout_marginStart="@dimen/bpkSpacingLg"
-    android:layout_marginEnd="@dimen/bpkSpacingLg"
-    android:alpha="0.3"
-    android:background="@color/bpkTextTertiary" />
-
 </LinearLayout>

@@ -60,10 +60,6 @@ class StoriesRecyclerViewAdapter internal constructor(
 
     if (values[position] is StoryItem) {
       holder.itemView.setOnClickListener(onClickListener)
-
-      if (position + 1 == itemCount || values[position + 1] is HeaderItem) {
-        holder.view.findViewById<View>(R.id.component_divider).visibility = View.GONE
-      }
     }
   }
 
@@ -72,7 +68,7 @@ class StoriesRecyclerViewAdapter internal constructor(
   }
 
   override fun getItemViewType(position: Int): Int {
-    return if (values[position] is HeaderItem) 0 else 1
+    return if (values[position] is HeaderItem) HEADER_VIEW_TYPE else STORY_VIEW_TYPE
   }
 
   inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
@@ -89,4 +85,9 @@ class StoriesRecyclerViewAdapter internal constructor(
 
   class HeaderItem(text: String) : ListItem by ListItemImpl(text)
   class StoryItem(text: String) : ListItem by ListItemImpl(text)
+
+  companion object {
+    private const val HEADER_VIEW_TYPE = 0
+    const val STORY_VIEW_TYPE = 1
+  }
 }

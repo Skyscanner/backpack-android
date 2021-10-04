@@ -25,6 +25,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter
+import net.skyscanner.backpack.demo.StoryItemDecoration
 
 open class SubStory : Story() {
 
@@ -41,6 +42,7 @@ open class SubStory : Story() {
       allItems.addAll(stories.map { StoriesRecyclerViewAdapter.StoryItem(it) })
 
       componentsList.adapter = StoriesRecyclerViewAdapter(allItems)
+      componentsList.addItemDecoration(StoryItemDecoration(requireContext()))
       return view
     } else {
       throw IllegalStateException("Story has not been property initialized")
