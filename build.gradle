@@ -27,7 +27,7 @@ buildscript {
   dependencies {
     classpath 'com.android.tools.build:gradle:7.0.2' // keep in sync with lint version - If the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    classpath "org.jetbrains.dokka:dokka-gradle-plugin:1.5.0"
+    classpath "org.jetbrains.dokka:dokka-gradle-plugin:1.5.30"
     classpath 'com.facebook.testing.screenshot:plugin:0.14.0'
     classpath "org.jlleitschuh.gradle:ktlint-gradle:10.2.0"
     classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
