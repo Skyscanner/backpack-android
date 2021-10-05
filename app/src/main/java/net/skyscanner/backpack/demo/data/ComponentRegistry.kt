@@ -133,10 +133,10 @@ private infix fun String.story(story: NodeData): Pair<String, NodeItem> {
  */
 object ComponentRegistry {
 
-  private val TAB_TITLE_COMPOSE = "Compose"
-  private val TAB_TITLE_VIEW = "View"
+  private const val TAB_TITLE_COMPOSE = "Compose"
+  private const val TAB_TITLE_VIEW = "View"
 
-  private val COMPONENTS_TREE = mapOf(
+  val COMPONENTS = mapOf(
     "Badge" story NodeData { Story of R.layout.fragment_badge },
     "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
@@ -325,7 +325,7 @@ object ComponentRegistry {
     ),
   )
 
-  private val TOKENS_MAP = mapOf(
+  val TOKENS = mapOf(
     "All Icons" story NodeData(
       { children -> SubStory of children },
       mapOf(
@@ -350,16 +350,12 @@ object ComponentRegistry {
     "Spacing" story NodeData { SpacingStory() }
   )
 
-  val COMPONENTS = COMPONENTS_TREE.map { it.value.name }
-
-  val TOKENS = TOKENS_MAP.keys.toList()
-
   fun getStoryCreator(fullyQualifiedName: String): RegistryItem {
     val parts = fullyQualifiedName.split(" - ")
     val first = parts[0]
     val rest = parts.drop(1)
 
-    val story = TOKENS_MAP[first] ?: COMPONENTS_TREE[first]
+    val story = TOKENS[first] ?: COMPONENTS[first]
     story ?: throw IllegalArgumentException("Invalid story name - $fullyQualifiedName")
 
     return rest.fold(story) { result, item ->
