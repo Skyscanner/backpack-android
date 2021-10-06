@@ -18,6 +18,7 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'backpack-tokens'
 
 apply from: "$rootProject.projectDir/android-configuration.gradle"
 
