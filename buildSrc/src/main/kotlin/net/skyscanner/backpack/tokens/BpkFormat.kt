@@ -3,12 +3,18 @@ package net.skyscanner.backpack.tokens
 import com.google.gson.Gson
 import java.io.File
 
-fun File.asJsonMap(): Map<String, Any> {
-  if (!exists()) error("File $this does not exist!")
+fun <T> Pipeline<File>.readAs(format: BpkFormat<T>) : Pipeline<T> =
+  pipeTo(format)
 
-  val content = readText()
-  val map = Gson().fromJson(content, Map::class.java)
-  return map.toStringKeyMap()
+sealed class BpkFormat<T>: (File) -> T {
+
+  object Json : BpkFormat<Map<String, Any>>() {
+    override fun invoke(file: File): Map<String, Any> {
+      val content = file.readText()
+      val map = Gson().fromJson(content, Map::class.java)
+      return map.toStringKeyMap()
+    }
+  }
 }
 
 private fun Map<*, *>.toStringKeyMap(): Map<String, Any> {

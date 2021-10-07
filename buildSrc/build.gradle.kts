@@ -12,6 +12,7 @@ dependencies {
   implementation(kotlin("gradle-plugin"))
   implementation(gradleApi())
   implementation("com.squareup:kotlinpoet:1.10.1")
+  implementation("com.google.guava:guava:31.0.1-jre")
 }
 
 gradlePlugin {

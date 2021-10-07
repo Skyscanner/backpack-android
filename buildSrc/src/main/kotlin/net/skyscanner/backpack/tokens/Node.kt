@@ -3,21 +3,17 @@ package net.skyscanner.backpack.tokens
 import org.gradle.api.Project
 import java.io.File
 
-interface NodeModule {
+fun Project.nodeFileOf(module: String, file: String) : Pipeline<File> =
+  pipelineOf {
+    val nodeModules = project.rootDir.resolve("node_modules/")
+    if (!nodeModules.exists()) error("Run npm install first")
 
-  fun resolve(path: String) : File
 
-}
+    val resolvedModule = nodeModules.resolve(module)
+    if (!resolvedModule.exists()) error("Module $module is not found!")
 
-fun Project.nodeModuleOf(name: String): NodeModule {
-  val nodeModules = project.rootDir.resolve("node_modules/")
-  if (!nodeModules.exists()) error("Run npm install first")
+    val resolvedFile = resolvedModule.resolve(file)
+    if (!resolvedFile.exists()) error("File $file is not found in module $module")
 
-  val module = nodeModules.resolve(name)
-  if (!module.exists()) error("Module $name is not found!")
-
-  return object: NodeModule {
-    override fun resolve(path: String): File  =
-      module.resolve(path)
+    resolvedFile
   }
-}
