@@ -12,7 +12,7 @@ class BackpackTokensPlugin : Plugin<Project> {
           .readAs(BpkFormat.Json)
           .parseAs(BpkDimension.Category.Elevation)
           .transformTo(BpkDimension.Format.Compose(namespace = "BpkElevation"))
-          .saveTo(BpkOutput.KotlinFile(srcDir = "/Users/vitaliibabichev/Projects/backpack-android/backpack-compose/src/main/kotlin", "net.skyscanner.backpack.compose"))
+          .saveTo(BpkOutput.KotlinFile(srcDir = "", "net.skyscanner.backpack.compose"))
           .execute()
       }
     }
