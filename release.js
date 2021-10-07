@@ -61,8 +61,8 @@ const questions = [
 async function amendGradleFiles(version) {
   const options = {
     files: gradleFiles,
-    from: /BpkVersion = '.+'/g,
-    to: `BpkVersion = '${version}'`,
+    from: /BpkAndroidVersion = '.+'/g,
+    to: `BpkAndroidVersion = '${version}'`,
   };
 
   try {

@@ -32,7 +32,7 @@ android {
   defaultConfig {
     applicationId 'net.skyscanner.backpack'
     versionCode 1
-    versionName rootProject.ext.version
+    versionName "1.0.0"
 
     testInstrumentationRunner "net.skyscanner.backpack.BpkTestRunner"
     testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.docs.GenerateScreenshots"
