@@ -23,14 +23,15 @@ const semver = require('semver');
 const replace = require('replace-in-file');
 const releaseit = require('release-it');
 
-const pkg = require('./package.json');
+const versions = require('./versions.json');
 
-const major = semver.inc(pkg.version, 'major');
-const minor = semver.inc(pkg.version, 'minor');
-const patch = semver.inc(pkg.version, 'patch');
+const major = semver.inc(versions.android, 'major');
+const minor = semver.inc(versions.android, 'minor');
+const patch = semver.inc(versions.android, 'patch');
 
 const gradleFiles = [`${__dirname}/build.gradle`];
 const readmeFile = [`${__dirname}/README.md`];
+const versionsFile =  [`${__dirname}/versions.json`]
 
 const questions = [
   {
@@ -58,11 +59,11 @@ const questions = [
   },
 ];
 
-async function amendGradleFiles(version) {
+async function amendGradleFiles(key, version) {
   const options = {
     files: gradleFiles,
-    from: /BpkVersion = '.+'/g,
-    to: `BpkVersion = '${version}'`,
+    from: new RegExp(key + ' = .+', 'g'),
+    to: `${key} = '${version}'`,
   };
 
   try {
@@ -88,12 +89,31 @@ async function amendReadmeFiles(version) {
   }
 }
 
+async function amendVersionsFile(key, version) {
+  const options = {
+    files: versionsFile,
+    from: new RegExp('"' + key + '": ".+"', 'g'),
+    to: `"${key}": "${version}"`,
+  };
+
+  try {
+    console.log('🎉  Version amended in', await replace(options));
+    return true;
+  } catch (exc) {
+    throw new Error(exc);
+  }
+}
+
 async function release() {
   try {
     childProcess.execSync('./gradlew :Backpack:checkMavenCredentials');
     const { version } = await inquirer.prompt(questions);
+    const commonVersion = semver.inc(versions.common, 'minor')
 
-    await amendGradleFiles(version);
+    await amendGradleFiles('BpkAndroidVersion', version);
+    await amendGradleFiles('BpkCommonVersion', commonVersion);
+    await amendVersionsFile('android', version);
+    await amendVersionsFile('common', commonVersion);
     await amendReadmeFiles(version);
 
     const releaseOptions = {

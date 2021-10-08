@@ -14,15 +14,15 @@ afterEvaluate { project ->
   publishing {
     publications {
       maven(MavenPublication) {
-        groupId group
-        artifactId 'backpack-android'
-        version "$version"
+        groupId rootProject.ext.group
+        artifactId project.artifactId
+        version project.artifactVersion
 
         from components.release
         artifact sourceJar
 
         pom {
-          name = 'backpack-android'
+          name = project.artifactId
           description = "Backpack is a collection of design resources, reusable components and guidelines for creating Skyscanner's products."
           url = 'https://github.com/Skyscanner/backpack-android'
 

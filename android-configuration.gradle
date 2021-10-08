@@ -16,9 +16,6 @@
  * limitations under the License.
  */
 
-version = rootProject.ext.version
-group = rootProject.ext.group
-
 android {
   compileSdkVersion 30
 

@@ -27,11 +27,11 @@ tasks.register("generateDokkaStatics") {
 def create404Page() {
   createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/404.html").text = """<!DOCTYPE html>
 <html>
-  <meta http-equiv="refresh" content="1;url=/android/versions/$rootProject.ext.version" />
+  <meta http-equiv="refresh" content="1;url=/android/versions/$rootProject.ext.backpackAndroidVersion" />
   <script type="text/javascript">
     const androidDocsPath = (window.location + '').split('android/versions/latest');
     if (androidDocsPath.length > 1) {
-      window.location = `/android/versions/$rootProject.ext.version/$rootProject.name/\${androidDocsPath[1]}`;
+      window.location = `/android/versions/$rootProject.ext.backpackAndroidVersion/$rootProject.name/\${androidDocsPath[1]}`;
     }
   </script>
 </html>
@@ -41,7 +41,7 @@ def create404Page() {
 def createVersionRedirectPage() {
   createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/versions/latest/index.html").text = """<!DOCTYPE html>
 <html>
-  <meta http-equiv="refresh" content="0;url=/android/versions/$rootProject.ext.version" />
+  <meta http-equiv="refresh" content="0;url=/android/versions/$rootProject.ext.backpackAndroidVersion" />
 </html>
 """
 }
@@ -49,7 +49,7 @@ def createVersionRedirectPage() {
 def createIndexPage() {
   createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/index.html").text = """<!DOCTYPE html>
 <html>
-  <meta http-equiv="refresh" content="0;url=/android/versions/$rootProject.ext.version" />
+  <meta http-equiv="refresh" content="0;url=/android/versions/$rootProject.ext.backpackAndroidVersion" />
 </html>
 """
 }
