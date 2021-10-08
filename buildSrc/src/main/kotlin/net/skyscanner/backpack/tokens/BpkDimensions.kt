@@ -1,3 +1,20 @@
+/**
+ * Backpack for Android - Skyscanner's Design System
+ *
+ * Copyright 2018-2021 Skyscanner Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
@@ -12,17 +29,19 @@ object BpkDimension {
 
     object Spacing : Category() {
       override fun invoke(source: Map<String, Any>): BpkDimensions =
-        parseDimensions(source, "spacings")
+        parseDimensions(source, "spacings", "SPACING_") {
+          it.key.toLowerCase() in setOf("base", "lg", "md", "none", "sm", "xl", "xxl")
+        }
     }
 
     object Radii : Category() {
       override fun invoke(source: Map<String, Any>): BpkDimensions =
-        parseDimensions(source, "radii")
+        parseDimensions(source, "radii", "BORDER_RADIUS_")
     }
 
     object Elevation : Category() {
       override fun invoke(source: Map<String, Any>): BpkDimensions =
-        parseDimensions(source, "elevation")
+        parseDimensions(source, "elevation", "ELEVATION_")
     }
 
   }
@@ -44,7 +63,9 @@ private val JsEvaluator = ScriptEngineManager().getEngineByName("js")
 private fun parseDimensions(
   source: Map<String, Any>,
   category: String,
+  prefixToRemove: String,
   evaluate: Boolean = false,
+  filter: (Map.Entry<String, Int>) -> Boolean = { true },
 ): BpkDimensions {
 
   val props = source.getValue("props") as Map<String, Map<String, String>>
@@ -60,9 +81,10 @@ private fun parseDimensions(
       }
     }
     .mapValues { it.value.toIntOrNull() }
-    .mapKeys { it.key.removePrefix(category.toUpperCase() + "_") }
+    .mapKeys { it.key.removePrefix(prefixToRemove) }
     .filterValues { it != null }
     .let { it as Map<String, Int> }
+    .filter(filter)
 
   return object : BpkDimensions, Map<String, Int> by map {
     override fun toString(): String =

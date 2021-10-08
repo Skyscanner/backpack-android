@@ -12,7 +12,7 @@
 // Auto-generated: do not edit
 @file:Suppress("RedundantVisibilityModifier","unused")
 
-package net.skyscanner.backpack.compose
+package net.skyscanner.backpack.compose.tokens
 
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.Dp

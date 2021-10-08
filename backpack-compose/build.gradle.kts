@@ -51,3 +51,4 @@ dependencies {
 }
 
 apply(from = "${rootProject.projectDir}/android-configuration-check.gradle")
+apply(from = "tokens.gradle.kts")
