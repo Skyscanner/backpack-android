@@ -17,11 +17,25 @@
  */
 package net.skyscanner.backpack.tokens
 
+import java.io.File
+
 interface Pipeline<T> {
 
   fun execute(): T
 
 }
+
+fun <T> Pipeline<File>.readAs(format: BpkFormat<T>) : Pipeline<T> =
+  pipeTo(format)
+
+fun <T> Pipeline<T>.saveTo(output: BpkOutput<T>): Pipeline<Boolean> =
+  pipeTo(output)
+
+fun <T> Pipeline<Map<String, Any>>.parseAs(parser: BpkParser<T>): Pipeline<T> =
+  pipeTo(parser)
+
+fun <In, Out> Pipeline<In>.transformTo(transformer: BpkTransformer<In, Out>): Pipeline<Out> =
+  pipeTo(transformer)
 
 internal fun <T> pipelineOf(block: () -> T) : Pipeline<T> =
   object : Pipeline<T> {

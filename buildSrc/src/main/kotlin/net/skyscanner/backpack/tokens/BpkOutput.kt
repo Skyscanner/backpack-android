@@ -24,10 +24,8 @@ import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
 import java.nio.charset.StandardCharsets
-import java.util.*
+import java.util.Calendar
 
-fun <T> Pipeline<T>.saveTo(output: BpkOutput<T>): Pipeline<Boolean> =
-  pipeTo(output)
 
 sealed class BpkOutput<Input> : (Input) -> Boolean {
 

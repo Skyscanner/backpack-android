@@ -20,8 +20,6 @@ package net.skyscanner.backpack.tokens
 import com.google.gson.Gson
 import java.io.File
 
-fun <T> Pipeline<File>.readAs(format: BpkFormat<T>) : Pipeline<T> =
-  pipeTo(format)
 
 sealed class BpkFormat<T>: (File) -> T {
 

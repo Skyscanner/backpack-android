@@ -18,7 +18,11 @@
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
-import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.buildCodeBlock
+import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.MemberName
+import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
 import javax.script.ScriptEngineManager
 
 interface BpkDimensions : Map<String, Int>
@@ -104,7 +108,7 @@ private fun toCompose(
     .addProperties(
       source.map { (name, value) ->
         PropertySpec
-          .builder(name.changeCase(CaseFormat.UPPER_UNDERSCORE, CaseFormat.UPPER_CAMEL), DpClass)
+          .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), DpClass)
           .addAnnotation(StableAnnotation)
           .initializer(buildCodeBlock { add("%L.%M", value, dpExtension) })
           .build()
