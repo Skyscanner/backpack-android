@@ -23,7 +23,6 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
-import javax.script.ScriptEngineManager
 
 interface BpkDimensions : Map<String, Int>
 
@@ -61,14 +60,11 @@ object BpkDimension {
 
 }
 
-private val JsEvaluator = ScriptEngineManager().getEngineByName("js")
-
 @Suppress("UNCHECKED_CAST")
 private fun parseDimensions(
   source: Map<String, Any>,
   category: String,
   prefixToRemove: String,
-  evaluate: Boolean = false,
   filter: (Map.Entry<String, Int>) -> Boolean = { true },
 ): BpkDimensions {
 
@@ -76,15 +72,7 @@ private fun parseDimensions(
   val data = props.filter { (_, value) -> value["type"] == "size" && value["category"] == category }
 
   val map = data
-    .mapValues {
-      val value = it.value.getValue("value")
-      if (evaluate) {
-        JsEvaluator.eval(value).toString()
-      } else {
-        value
-      }
-    }
-    .mapValues { it.value.toIntOrNull() }
+    .mapValues { it.value.getValue("value").toIntOrNull() }
     .mapKeys { it.key.removePrefix(prefixToRemove) }
     .filterValues { it != null }
     .let { it as Map<String, Int> }
