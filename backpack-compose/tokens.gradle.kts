@@ -33,7 +33,7 @@ tasks {
   val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
     .readAs(BpkFormat.Json)
 
-  val elevationTokens by creating {
+  val generateElevationTokens by creating {
     this.group = group
     doLast {
       source
@@ -44,7 +44,7 @@ tasks {
     }
   }
 
-  val spacingTokens by creating {
+  val generateSpacingTokens by creating {
     this.group = group
     doLast {
       source
@@ -55,7 +55,7 @@ tasks {
     }
   }
 
-  val radiiTokens by creating {
+  val generateRadiiTokens by creating {
     this.group = group
     doLast {
       source
@@ -66,7 +66,13 @@ tasks {
     }
   }
 
-  val sizeTokens by creating {
-    dependsOn(elevationTokens, spacingTokens, radiiTokens)
+  val generateSizeTokens by creating {
+    this.group = group
+    dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens)
+  }
+
+  val generateTokens by creating {
+    this.group = group
+    dependsOn(generateSizeTokens)
   }
 }
