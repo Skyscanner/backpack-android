@@ -15,6 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import net.skyscanner.backpack.tokens.BpkColor
 import net.skyscanner.backpack.tokens.BpkDimension
 import net.skyscanner.backpack.tokens.BpkFormat
 import net.skyscanner.backpack.tokens.BpkOutput
@@ -66,13 +67,29 @@ tasks {
     }
   }
 
+  val generateStaticColors by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkColor.Parser)
+        .transformTo(BpkColor.Format.Compose(namespace = "BpkColor"))
+        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+        .execute()
+    }
+  }
+
   val generateSizeTokens by creating {
     this.group = group
     dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens)
   }
 
+  val generateColorTokens by creating {
+    this.group = group
+    dependsOn(generateStaticColors)
+  }
+
   val generateTokens by creating {
     this.group = group
-    dependsOn(generateSizeTokens)
+    dependsOn(generateSizeTokens, generateColorTokens)
   }
 }
