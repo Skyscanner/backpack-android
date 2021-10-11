@@ -26,7 +26,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.verifyZeroInteractions
+import org.mockito.Mockito.verifyNoInteractions
 
 @RunWith(AndroidJUnit4::class)
 class BpkInteractiveStarRatingTests {
@@ -44,7 +44,7 @@ class BpkInteractiveStarRatingTests {
   fun test_listenerIsNotInvoked_onSet() {
     val listener = mock(BpkInteractiveStarRating.OnRatingChangedListener::class.java)
     subject.onRatingChangedListener = listener
-    verifyZeroInteractions(listener)
+    verifyNoInteractions(listener)
   }
 
   @Test
@@ -53,7 +53,7 @@ class BpkInteractiveStarRatingTests {
     subject.maxRating = 5
     subject.onRatingChangedListener = listener
     subject.maxRating = 6
-    verifyZeroInteractions(listener)
+    verifyNoInteractions(listener)
   }
 
   @Test
@@ -82,6 +82,6 @@ class BpkInteractiveStarRatingTests {
     subject.maxRating = 5
     subject.onRatingChangedListener = listener
     subject.rating = 2.2f
-    verifyZeroInteractions(listener)
+    verifyNoInteractions(listener)
   }
 }
