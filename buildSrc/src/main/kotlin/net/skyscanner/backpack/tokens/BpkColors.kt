@@ -30,7 +30,7 @@ object BpkColor {
   object Parser : BpkParser<BpkColors> {
 
       override fun invoke(source: Map<String, Any>): BpkColors =
-        parseColors(source,"COLOR_")
+        parseColors(source)
 
   }
 
@@ -48,7 +48,6 @@ object BpkColor {
 @Suppress("UNCHECKED_CAST")
 private fun parseColors(
   source: Map<String, Any>,
-  prefixToRemove: String,
   filter: (Map.Entry<String, String>) -> Boolean = { true },
 ): BpkColors {
 
@@ -57,7 +56,7 @@ private fun parseColors(
 
   val map = data
     .mapValues { it.value.getValue("value").removePrefix("#").removeSuffix("ff") }
-    .mapKeys { it.key.removePrefix(prefixToRemove) }
+    .mapKeys { it.key.removePrefix("COLOR_").removeSuffix("_COLOR") }
     .filter(filter)
 
   return object : BpkColors, Map<String, String> by map {

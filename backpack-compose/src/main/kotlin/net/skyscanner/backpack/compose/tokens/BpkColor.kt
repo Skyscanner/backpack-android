@@ -19,52 +19,52 @@ import androidx.compose.ui.graphics.Color
 
 public object BpkColor {
   @Stable
-  public val BackgroundAlternativeDarkColor: Color = Color(0xFF000000)
+  public val BackgroundAlternativeDark: Color = Color(0xFF000000)
 
   @Stable
-  public val BackgroundAlternativeLightColor: Color = Color(0xFFF1F2F8)
+  public val BackgroundAlternativeLight: Color = Color(0xFFF1F2F8)
 
   @Stable
-  public val BackgroundAlternativeSecondaryDarkColor: Color = Color(0xFF1D1B20)
+  public val BackgroundAlternativeSecondaryDark: Color = Color(0xFF1D1B20)
 
   @Stable
-  public val BackgroundAlternativeSecondaryLightColor: Color = Color(0xFFFFFFFF)
+  public val BackgroundAlternativeSecondaryLight: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundDarkColor: Color = Color(0xFF000000)
+  public val BackgroundDark: Color = Color(0xFF000000)
 
   @Stable
-  public val BackgroundElevation01DarkColor: Color = Color(0xFF1D1B20)
+  public val BackgroundElevation01Dark: Color = Color(0xFF1D1B20)
 
   @Stable
-  public val BackgroundElevation01LightColor: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation01Light: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundElevation02DarkColor: Color = Color(0xFF2C2C2E)
+  public val BackgroundElevation02Dark: Color = Color(0xFF2C2C2E)
 
   @Stable
-  public val BackgroundElevation02LightColor: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation02Light: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundElevation03DarkColor: Color = Color(0xFF3A3A3C)
+  public val BackgroundElevation03Dark: Color = Color(0xFF3A3A3C)
 
   @Stable
-  public val BackgroundElevation03LightColor: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation03Light: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundLightColor: Color = Color(0xFFFFFFFF)
+  public val BackgroundLight: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundSecondaryDarkColor: Color = Color(0xFF1D1B20)
+  public val BackgroundSecondaryDark: Color = Color(0xFF1D1B20)
 
   @Stable
-  public val BackgroundSecondaryLightColor: Color = Color(0xFFF1F2F8)
+  public val BackgroundSecondaryLight: Color = Color(0xFFF1F2F8)
 
   @Stable
-  public val BackgroundTertiaryDarkColor: Color = Color(0xFF2C2C2E)
+  public val BackgroundTertiaryDark: Color = Color(0xFF2C2C2E)
 
   @Stable
-  public val BackgroundTertiaryLightColor: Color = Color(0xFFFFFFFF)
+  public val BackgroundTertiaryLight: Color = Color(0xFFFFFFFF)
 
   @Stable
   public val Abisko: Color = Color(0xFF5A489B)
@@ -190,80 +190,80 @@ public object BpkColor {
   public val White: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val LineDarkColor: Color = Color(0xFF48484A)
+  public val LineDark: Color = Color(0xFF48484A)
 
   @Stable
-  public val LineLightColor: Color = Color(0xFFCDCDD7)
+  public val LineLight: Color = Color(0xFFCDCDD7)
 
   @Stable
-  public val PrimaryDarkColor: Color = Color(0xFF6D9FEB)
+  public val PrimaryDark: Color = Color(0xFF6D9FEB)
 
   @Stable
-  public val PrimaryLightColor: Color = Color(0xFF0770E3)
+  public val PrimaryLight: Color = Color(0xFF0770E3)
 
   @Stable
-  public val TextPrimaryDarkColor: Color = Color(0xFFFFFFFF)
+  public val TextPrimaryDark: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val TextPrimaryLightColor: Color = Color(0xFF111236)
+  public val TextPrimaryLight: Color = Color(0xFF111236)
 
   @Stable
-  public val TextQuaternaryDarkColor: Color = Color(0xFF8E8E93)
+  public val TextQuaternaryDark: Color = Color(0xFF8E8E93)
 
   @Stable
-  public val TextQuaternaryLightColor: Color = Color(0xFF8F90A0)
+  public val TextQuaternaryLight: Color = Color(0xFF8F90A0)
 
   @Stable
-  public val TextSecondaryDarkColor: Color = Color(0xFF8E8E93)
+  public val TextSecondaryDark: Color = Color(0xFF8E8E93)
 
   @Stable
-  public val TextSecondaryLightColor: Color = Color(0xFF68697F)
+  public val TextSecondaryLight: Color = Color(0xFF68697F)
 
   @Stable
-  public val TextTertiaryDarkColor: Color = Color(0xFF8E8E93)
+  public val TextTertiaryDark: Color = Color(0xFF8E8E93)
 
   @Stable
-  public val TextTertiaryLightColor: Color = Color(0xFF8F90A0)
+  public val TextTertiaryLight: Color = Color(0xFF8F90A0)
 
   @Stable
-  public val BackgroundAlternativeColor: Color = Color(0xFFF1F2F8)
+  public val BackgroundAlternative: Color = Color(0xFFF1F2F8)
 
   @Stable
-  public val BackgroundAlternativeSecondaryColor: Color = Color(0xFFFFFFFF)
+  public val BackgroundAlternativeSecondary: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundColor: Color = Color(0xFFFFFFFF)
+  public val Background: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundElevation01Color: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation01: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundElevation02Color: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation02: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundElevation03Color: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation03: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val BackgroundSecondaryColor: Color = Color(0xFFF1F2F8)
+  public val BackgroundSecondary: Color = Color(0xFFF1F2F8)
 
   @Stable
-  public val BackgroundTertiaryColor: Color = Color(0xFFFFFFFF)
+  public val BackgroundTertiary: Color = Color(0xFFFFFFFF)
 
   @Stable
-  public val LineColor: Color = Color(0xFFCDCDD7)
+  public val Line: Color = Color(0xFFCDCDD7)
 
   @Stable
-  public val PrimaryColor: Color = Color(0xFF0770E3)
+  public val Primary: Color = Color(0xFF0770E3)
 
   @Stable
-  public val TextPrimaryColor: Color = Color(0xFF111236)
+  public val TextPrimary: Color = Color(0xFF111236)
 
   @Stable
-  public val TextQuaternaryColor: Color = Color(0xFF8F90A0)
+  public val TextQuaternary: Color = Color(0xFF8F90A0)
 
   @Stable
-  public val TextSecondaryColor: Color = Color(0xFF68697F)
+  public val TextSecondary: Color = Color(0xFF68697F)
 
   @Stable
-  public val TextTertiaryColor: Color = Color(0xFF8F90A0)
+  public val TextTertiary: Color = Color(0xFF8F90A0)
 }
