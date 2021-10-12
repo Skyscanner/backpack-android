@@ -14,29 +14,21 @@
 
 package net.skyscanner.backpack.compose.tokens
 
-import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 public object BpkSpacing {
-  @Stable
   public val Base: Dp = 16.dp
 
-  @Stable
   public val Lg: Dp = 24.dp
 
-  @Stable
   public val Md: Dp = 8.dp
 
-  @Stable
   public val None: Dp = 0.dp
 
-  @Stable
   public val Sm: Dp = 4.dp
 
-  @Stable
   public val Xl: Dp = 32.dp
 
-  @Stable
   public val Xxl: Dp = 40.dp
 }
