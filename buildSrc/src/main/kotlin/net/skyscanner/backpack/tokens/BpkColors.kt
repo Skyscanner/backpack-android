@@ -101,14 +101,27 @@ private fun toCompose(
   fun String.toComposeName() =
     CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
 
+  fun String.toHexColor() =
+    "0xFF${uppercase()}"
+
+  fun staticColorProperty(model: BpkColorModel) =
+    PropertySpec
+      .builder(model.name.toComposeName(), ColorClass)
+      .addAnnotation(StableAnnotation)
+      .initializer(buildCodeBlock { add("%T(%L)", ColorClass, model.value.toHexColor()) })
+      .build()
+
+  fun dynamicColorProperty(model: BpkColorModel) =
+    staticColorProperty(model)
+
   return TypeSpec.objectBuilder(namespace)
     .addProperties(
-      source.map { (name, value) ->
-        PropertySpec
-          .builder(name.toComposeName(), ColorClass)
-          .addAnnotation(StableAnnotation)
-          .initializer(buildCodeBlock { add("%T(%L)", ColorClass, "0xFF${value.value.uppercase()}") })
-          .build()
+      source.map { (_, value) ->
+        if (value.darkValue != null) {
+          dynamicColorProperty(value)
+        } else {
+          staticColorProperty(value)
+        }
       }
     )
     .build()
