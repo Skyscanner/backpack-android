@@ -23,7 +23,14 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 
-interface BpkColors : Map<String, String>
+data class BpkColorModel(
+  val name: String,
+  val value: String,
+  val darkName: String?,
+  val darkValue: String?,
+)
+
+interface BpkColors : Map<String, BpkColorModel>
 
 object BpkColor {
 
@@ -48,18 +55,35 @@ object BpkColor {
 @Suppress("UNCHECKED_CAST")
 private fun parseColors(
   source: Map<String, Any>,
-  filter: (Map.Entry<String, String>) -> Boolean = { true },
+  filter: (BpkColorModel) -> Boolean = { true },
 ): BpkColors {
 
   val props = source.getValue("props") as Map<String, Map<String, String>>
   val data = props.filter { (_, value) -> value["type"] == "color" }
 
-  val map = data
-    .mapValues { it.value.getValue("value").removePrefix("#").removeSuffix("ff") }
-    .mapKeys { it.key.removePrefix("COLOR_").removeSuffix("_COLOR") }
-    .filter(filter)
+  fun String.trimColor() : String =
+    removePrefix("#").removeSuffix("ff")
 
-  return object : BpkColors, Map<String, String> by map {
+  fun String.trimName() : String =
+    removePrefix("COLOR_").removeSuffix("_COLOR")
+
+  fun String.trimReference() : String =
+    removePrefix("{!").removeSuffix("}")
+
+  val map = data
+    .map {
+      BpkColorModel(
+        name = it.key.trimName(),
+        value = it.value.getValue("value").trimColor(),
+        darkName = it.value["originalDarkValue"]?.trimReference()?.trimName(),
+        darkValue = it.value["darkValue"]?.trimColor(),
+      )
+    }
+    .filter(filter)
+    .sortedBy { it.name }
+    .associateBy { it.name }
+
+  return object : BpkColors, Map<String, BpkColorModel> by map {
     override fun toString(): String =
       map.toString()
   }
@@ -72,15 +96,20 @@ private val StableAnnotation = ClassName("androidx.compose.runtime", "Stable")
 private fun toCompose(
   source: BpkColors,
   namespace: String,
-): TypeSpec =
-  TypeSpec.objectBuilder(namespace)
+): TypeSpec {
+
+  fun String.toComposeName() =
+    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
+
+  return TypeSpec.objectBuilder(namespace)
     .addProperties(
       source.map { (name, value) ->
         PropertySpec
-          .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), ColorClass)
+          .builder(name.toComposeName(), ColorClass)
           .addAnnotation(StableAnnotation)
-          .initializer(buildCodeBlock { add("%T(%L)", ColorClass, "0xFF${value.uppercase()}") })
+          .initializer(buildCodeBlock { add("%T(%L)", ColorClass, "0xFF${value.value.uppercase()}") })
           .build()
       }
     )
     .build()
+}
