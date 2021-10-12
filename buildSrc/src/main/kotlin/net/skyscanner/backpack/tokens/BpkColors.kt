@@ -27,7 +27,7 @@ import com.squareup.kotlinpoet.TypeSpec
 data class BpkColorModel(
   val name: String,
   val defaultValue: String,
-  val lightReference: String?,
+  val defaultReference: String?,
   val darkReference: String?,
   val darkValue: String?,
 )
@@ -77,7 +77,7 @@ private fun parseColors(
       BpkColorModel(
         name = it.key.trimName(),
         defaultValue = it.value.getValue("value").trimColor(),
-        lightReference = it.value.getValue("originalValue").trimReference().trimName(),
+        defaultReference = it.value.getValue("originalValue").trimReference().trimName(),
         darkReference = it.value["originalDarkValue"]?.trimReference()?.trimName(),
         darkValue = it.value["darkValue"]?.trimColor(),
       )
@@ -113,7 +113,7 @@ private fun toCompose(
       .builder(model.name.toComposeName(), ColorClass)
       .getter(
         FunSpec.getterBuilder()
-          .addStatement("return %N", model.lightReference!!.toComposeName())
+          .addStatement("return %N", model.defaultReference!!.toComposeName())
           .build()
       )
       .build()
@@ -133,7 +133,7 @@ private fun toCompose(
           .addStatement(
             "return if (%T.colors.isLight) %N else %N",
             MaterialTheme,
-            model.lightReference!!.toComposeName(),
+            model.defaultReference!!.toComposeName(),
             model.darkReference!!.toComposeName(),
           )
           .build()
@@ -145,7 +145,7 @@ private fun toCompose(
       source.map { (_, model) ->
         when {
           model.darkValue != null -> dynamicColorProperty(model)
-          model.lightReference != model.name -> referenceColorProperty(model)
+          model.defaultReference != model.name -> referenceColorProperty(model)
           else -> constantColorProperty(model)
         }
       }
