@@ -238,17 +238,17 @@ jobs:
           distribution: 'adopt'
 
       - name: Get release tag
-        if: contains('refs/tags/', github.ref)
+        if: contains(github.ref, 'refs/tags/')
         id: tag
         uses: dawidd6/action-get-tag@v1
 
       - name: Build Dokka docs
-        if: contains('refs/tags/', github.ref)
+        if: contains(github.ref, 'refs/tags/')
         run: ./gradlew :Backpack:generateDokkaDocs
 
       - name: Deploy Dokka docs
         uses: peaceiris/actions-gh-pages@v3
-        if: contains('refs/tags/', github.ref)
+        if: contains(github.ref, 'refs/tags/')
         with:
           deploy_key: ${{ secrets.DOKKA_DEPLOY_KEY }}
           publish_dir: dokka/
@@ -264,7 +264,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BACKPACK_DOCS_DEPLOY_TOKEN }}
 
       - name: Building release APK
-        if: contains('refs/tags/', github.ref)
+        if: contains(github.ref, 'refs/tags/')
         run: |
           openssl aes-256-cbc -K $KEYSTORE_DECRYPT_KEY -iv $KEYSTORE_DECRYPT_IV -in backpack.android.demo.key.enc -out backpack.android.demo.key -d;
           ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
@@ -277,7 +277,7 @@ jobs:
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
 
       - name: Publish Release APK to AppCenter
-        if: contains('refs/tags/', github.ref)
+        if: contains(github.ref, 'refs/tags/')
         uses: devussy/AppCenter-Distribute-Github-Action@v1.0.2
         with:
           app: Backpack/Backpack-Android
