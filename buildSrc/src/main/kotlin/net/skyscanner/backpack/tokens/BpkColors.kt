@@ -108,6 +108,9 @@ private fun toCompose(
   fun String.toHexColor() =
     "0xFF${uppercase()}"
 
+  // Generated code sample:
+  // public val ColorName: Color
+  //   get() = ReferencedColor
   fun referenceColorProperty(model: BpkColorModel) =
     PropertySpec
       .builder(model.name.toComposeName(), ColorClass)
@@ -118,12 +121,18 @@ private fun toCompose(
       )
       .build()
 
+  // Generated code sample:
+  // public val ColorName: Color = Color(0xFFXXXXXX)
   fun constantColorProperty(model: BpkColorModel) =
     PropertySpec
       .builder(model.name.toComposeName(), ColorClass)
       .initializer(buildCodeBlock { add("%T(%L)", ColorClass, model.defaultValue.toHexColor()) })
       .build()
 
+  // Generated code sample:
+  // public val Background: Color
+  //  @Composable
+  //  get() = if (MaterialTheme.colors.isLight) White else Black
   fun dynamicColorProperty(model: BpkColorModel) =
     PropertySpec
       .builder(model.name.toComposeName(), ColorClass)
