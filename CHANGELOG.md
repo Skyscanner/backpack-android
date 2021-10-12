@@ -2,6 +2,12 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 33.0.2
+
+**Fixed:**
+
+- Updated world icons
+
 # 33.0.1
 
 **Fixed:**
