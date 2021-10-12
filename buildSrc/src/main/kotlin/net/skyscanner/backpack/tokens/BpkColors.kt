@@ -130,9 +130,9 @@ private fun toCompose(
       .build()
 
   // Generated code sample:
-  // public val Background: Color
+  // public val ColorName: Color
   //  @Composable
-  //  get() = if (MaterialTheme.colors.isLight) White else Black
+  //  get() = if (MaterialTheme.colors.isLight) LightColor else DarkColor
   fun dynamicColorProperty(model: BpkColorModel) =
     PropertySpec
       .builder(model.name.toComposeName(), ColorClass)
