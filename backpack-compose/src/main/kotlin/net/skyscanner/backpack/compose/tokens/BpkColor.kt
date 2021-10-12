@@ -14,256 +14,233 @@
 
 package net.skyscanner.backpack.compose.tokens
 
-import androidx.compose.runtime.Stable
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 public object BpkColor {
-  @Stable
   public val Abisko: Color = Color(0xFF5A489B)
 
-  @Stable
-  public val Background: Color = Color(0xFFFFFFFF)
+  public val Background: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) White else Black
 
-  @Stable
-  public val BackgroundAlternative: Color = Color(0xFFF1F2F8)
+  public val BackgroundAlternative: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) SkyGrayTint07 else Black
 
-  @Stable
-  public val BackgroundAlternativeDark: Color = Color(0xFF000000)
+  public val BackgroundAlternativeDark: Color
+    get() = Black
 
-  @Stable
-  public val BackgroundAlternativeLight: Color = Color(0xFFF1F2F8)
+  public val BackgroundAlternativeLight: Color
+    get() = SkyGrayTint07
 
-  @Stable
-  public val BackgroundAlternativeSecondary: Color = Color(0xFFFFFFFF)
+  public val BackgroundAlternativeSecondary: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) White else BlackTint01
 
-  @Stable
-  public val BackgroundAlternativeSecondaryDark: Color = Color(0xFF1D1B20)
+  public val BackgroundAlternativeSecondaryDark: Color
+    get() = BlackTint01
 
-  @Stable
-  public val BackgroundAlternativeSecondaryLight: Color = Color(0xFFFFFFFF)
+  public val BackgroundAlternativeSecondaryLight: Color
+    get() = White
 
-  @Stable
-  public val BackgroundDark: Color = Color(0xFF000000)
+  public val BackgroundDark: Color
+    get() = Black
 
-  @Stable
-  public val BackgroundElevation01: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation01: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) White else BlackTint01
 
-  @Stable
-  public val BackgroundElevation01Dark: Color = Color(0xFF1D1B20)
+  public val BackgroundElevation01Dark: Color
+    get() = BlackTint01
 
-  @Stable
-  public val BackgroundElevation01Light: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation01Light: Color
+    get() = White
 
-  @Stable
-  public val BackgroundElevation02: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation02: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) White else BlackTint02
 
-  @Stable
-  public val BackgroundElevation02Dark: Color = Color(0xFF2C2C2E)
+  public val BackgroundElevation02Dark: Color
+    get() = BlackTint02
 
-  @Stable
-  public val BackgroundElevation02Light: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation02Light: Color
+    get() = White
 
-  @Stable
-  public val BackgroundElevation03: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation03: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) White else BlackTint03
 
-  @Stable
-  public val BackgroundElevation03Dark: Color = Color(0xFF3A3A3C)
+  public val BackgroundElevation03Dark: Color
+    get() = BlackTint03
 
-  @Stable
-  public val BackgroundElevation03Light: Color = Color(0xFFFFFFFF)
+  public val BackgroundElevation03Light: Color
+    get() = White
 
-  @Stable
-  public val BackgroundLight: Color = Color(0xFFFFFFFF)
+  public val BackgroundLight: Color
+    get() = White
 
-  @Stable
-  public val BackgroundSecondary: Color = Color(0xFFF1F2F8)
+  public val BackgroundSecondary: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) SkyGrayTint07 else BlackTint01
 
-  @Stable
-  public val BackgroundSecondaryDark: Color = Color(0xFF1D1B20)
+  public val BackgroundSecondaryDark: Color
+    get() = BlackTint01
 
-  @Stable
-  public val BackgroundSecondaryLight: Color = Color(0xFFF1F2F8)
+  public val BackgroundSecondaryLight: Color
+    get() = SkyGrayTint07
 
-  @Stable
-  public val BackgroundTertiary: Color = Color(0xFFFFFFFF)
+  public val BackgroundTertiary: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) White else BlackTint02
 
-  @Stable
-  public val BackgroundTertiaryDark: Color = Color(0xFF2C2C2E)
+  public val BackgroundTertiaryDark: Color
+    get() = BlackTint02
 
-  @Stable
-  public val BackgroundTertiaryLight: Color = Color(0xFFFFFFFF)
+  public val BackgroundTertiaryLight: Color
+    get() = White
 
-  @Stable
   public val Bagan: Color = Color(0xFFFFEBD0)
 
-  @Stable
   public val Black: Color = Color(0xFF000000)
 
-  @Stable
   public val BlackTint01: Color = Color(0xFF1D1B20)
 
-  @Stable
   public val BlackTint02: Color = Color(0xFF2C2C2E)
 
-  @Stable
   public val BlackTint03: Color = Color(0xFF3A3A3C)
 
-  @Stable
   public val BlackTint04: Color = Color(0xFF48484A)
 
-  @Stable
   public val BlackTint05: Color = Color(0xFF636366)
 
-  @Stable
   public val BlackTint06: Color = Color(0xFF8E8E93)
 
-  @Stable
   public val Bunol: Color = Color(0xFFFF7B59)
 
-  @Stable
   public val Erfoud: Color = Color(0xFFFFB54D)
 
-  @Stable
   public val Glencoe: Color = Color(0xFF73CEC6)
 
-  @Stable
   public val Harbour: Color = Color(0xFFF6DDE1)
 
-  @Stable
   public val Hillier: Color = Color(0xFFE18B96)
 
-  @Stable
   public val Kolkata: Color = Color(0xFFFF9400)
 
-  @Stable
-  public val Line: Color = Color(0xFFCDCDD7)
+  public val Line: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) SkyGrayTint05 else BlackTint04
 
-  @Stable
-  public val LineDark: Color = Color(0xFF48484A)
+  public val LineDark: Color
+    get() = BlackTint04
 
-  @Stable
-  public val LineLight: Color = Color(0xFFCDCDD7)
+  public val LineLight: Color
+    get() = SkyGrayTint05
 
-  @Stable
   public val Monteverde: Color = Color(0xFF00A698)
 
-  @Stable
   public val Nara: Color = Color(0xFFFFE7E0)
 
-  @Stable
   public val Panjin: Color = Color(0xFFD1435B)
 
-  @Stable
   public val Petra: Color = Color(0xFFFFAB95)
 
-  @Stable
-  public val Primary: Color = Color(0xFF0770E3)
+  public val Primary: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) SkyBlue else SkyBlueTint01
 
-  @Stable
-  public val PrimaryDark: Color = Color(0xFF6D9FEB)
+  public val PrimaryDark: Color
+    get() = SkyBlueTint01
 
-  @Stable
-  public val PrimaryGradientLight: Color = Color(0xFF0770E3)
+  public val PrimaryGradientLight: Color
+    get() = SkyBlue
 
-  @Stable
-  public val PrimaryLight: Color = Color(0xFF0770E3)
+  public val PrimaryLight: Color
+    get() = SkyBlue
 
-  @Stable
   public val Sagano: Color = Color(0xFFD0EEEC)
 
-  @Stable
   public val SkyBlue: Color = Color(0xFF0770E3)
 
-  @Stable
   public val SkyBlueShade01: Color = Color(0xFF084EB2)
 
-  @Stable
   public val SkyBlueShade02: Color = Color(0xFF042759)
 
-  @Stable
   public val SkyBlueShade03: Color = Color(0xFF02122C)
 
-  @Stable
   public val SkyBlueTint01: Color = Color(0xFF6D9FEB)
 
-  @Stable
   public val SkyBlueTint02: Color = Color(0xFF9DC0F2)
 
-  @Stable
   public val SkyBlueTint03: Color = Color(0xFFCDDFF8)
 
-  @Stable
   public val SkyGray: Color = Color(0xFF111236)
 
-  @Stable
   public val SkyGrayTint01: Color = Color(0xFF444560)
 
-  @Stable
   public val SkyGrayTint02: Color = Color(0xFF68697F)
 
-  @Stable
   public val SkyGrayTint03: Color = Color(0xFF8F90A0)
 
-  @Stable
   public val SkyGrayTint04: Color = Color(0xFFB2B2BF)
 
-  @Stable
   public val SkyGrayTint05: Color = Color(0xFFCDCDD7)
 
-  @Stable
   public val SkyGrayTint06: Color = Color(0xFFDDDDE5)
 
-  @Stable
   public val SkyGrayTint07: Color = Color(0xFFF1F2F8)
 
-  @Stable
-  public val SystemGreen: Color = Color(0xFF00A698)
+  public val SystemGreen: Color
+    get() = Monteverde
 
-  @Stable
-  public val SystemRed: Color = Color(0xFFD1435B)
+  public val SystemRed: Color
+    get() = Panjin
 
-  @Stable
-  public val TextPrimary: Color = Color(0xFF111236)
+  public val TextPrimary: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) SkyGray else White
 
-  @Stable
-  public val TextPrimaryDark: Color = Color(0xFFFFFFFF)
+  public val TextPrimaryDark: Color
+    get() = White
 
-  @Stable
-  public val TextPrimaryLight: Color = Color(0xFF111236)
+  public val TextPrimaryLight: Color
+    get() = SkyGray
 
-  @Stable
-  public val TextQuaternary: Color = Color(0xFF8F90A0)
+  public val TextQuaternary: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) SkyGrayTint03 else BlackTint06
 
-  @Stable
-  public val TextQuaternaryDark: Color = Color(0xFF8E8E93)
+  public val TextQuaternaryDark: Color
+    get() = BlackTint06
 
-  @Stable
-  public val TextQuaternaryLight: Color = Color(0xFF8F90A0)
+  public val TextQuaternaryLight: Color
+    get() = SkyGrayTint03
 
-  @Stable
-  public val TextSecondary: Color = Color(0xFF68697F)
+  public val TextSecondary: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) SkyGrayTint02 else BlackTint06
 
-  @Stable
-  public val TextSecondaryDark: Color = Color(0xFF8E8E93)
+  public val TextSecondaryDark: Color
+    get() = BlackTint06
 
-  @Stable
-  public val TextSecondaryLight: Color = Color(0xFF68697F)
+  public val TextSecondaryLight: Color
+    get() = SkyGrayTint02
 
-  @Stable
-  public val TextTertiary: Color = Color(0xFF8F90A0)
+  public val TextTertiary: Color
+    @Composable
+    get() = if (MaterialTheme.colors.isLight) SkyGrayTint03 else BlackTint06
 
-  @Stable
-  public val TextTertiaryDark: Color = Color(0xFF8E8E93)
+  public val TextTertiaryDark: Color
+    get() = BlackTint06
 
-  @Stable
-  public val TextTertiaryLight: Color = Color(0xFF8F90A0)
+  public val TextTertiaryLight: Color
+    get() = SkyGrayTint03
 
-  @Stable
   public val Tochigi: Color = Color(0xFFE1DDEC)
 
-  @Stable
   public val Valensole: Color = Color(0xFFA59BC8)
 
-  @Stable
   public val White: Color = Color(0xFFFFFFFF)
 }

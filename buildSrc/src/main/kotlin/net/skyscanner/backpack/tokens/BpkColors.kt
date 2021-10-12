@@ -20,13 +20,15 @@ package net.skyscanner.backpack.tokens
 import com.google.common.base.CaseFormat
 import com.squareup.kotlinpoet.buildCodeBlock
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 
 data class BpkColorModel(
   val name: String,
-  val value: String,
-  val darkName: String?,
+  val defaultValue: String,
+  val lightReference: String?,
+  val darkReference: String?,
   val darkValue: String?,
 )
 
@@ -36,8 +38,8 @@ object BpkColor {
 
   object Parser : BpkParser<BpkColors> {
 
-      override fun invoke(source: Map<String, Any>): BpkColors =
-        parseColors(source)
+    override fun invoke(source: Map<String, Any>): BpkColors =
+      parseColors(source)
 
   }
 
@@ -61,21 +63,22 @@ private fun parseColors(
   val props = source.getValue("props") as Map<String, Map<String, String>>
   val data = props.filter { (_, value) -> value["type"] == "color" }
 
-  fun String.trimColor() : String =
+  fun String.trimColor(): String =
     removePrefix("#").removeSuffix("ff")
 
-  fun String.trimName() : String =
+  fun String.trimName(): String =
     removePrefix("COLOR_").removeSuffix("_COLOR")
 
-  fun String.trimReference() : String =
+  fun String.trimReference(): String =
     removePrefix("{!").removeSuffix("}")
 
   val map = data
     .map {
       BpkColorModel(
         name = it.key.trimName(),
-        value = it.value.getValue("value").trimColor(),
-        darkName = it.value["originalDarkValue"]?.trimReference()?.trimName(),
+        defaultValue = it.value.getValue("value").trimColor(),
+        lightReference = it.value.getValue("originalValue").trimReference().trimName(),
+        darkReference = it.value["originalDarkValue"]?.trimReference()?.trimName(),
         darkValue = it.value["darkValue"]?.trimColor(),
       )
     }
@@ -90,7 +93,8 @@ private fun parseColors(
 }
 
 private val ColorClass = ClassName("androidx.compose.ui.graphics", "Color")
-private val StableAnnotation = ClassName("androidx.compose.runtime", "Stable")
+private val ComposableAnnotation = ClassName("androidx.compose.runtime", "Composable")
+private val MaterialTheme = ClassName("androidx.compose.material", "MaterialTheme")
 
 @OptIn(ExperimentalStdlibApi::class)
 private fun toCompose(
@@ -104,23 +108,45 @@ private fun toCompose(
   fun String.toHexColor() =
     "0xFF${uppercase()}"
 
-  fun staticColorProperty(model: BpkColorModel) =
+  fun referenceColorProperty(model: BpkColorModel) =
     PropertySpec
       .builder(model.name.toComposeName(), ColorClass)
-      .addAnnotation(StableAnnotation)
-      .initializer(buildCodeBlock { add("%T(%L)", ColorClass, model.value.toHexColor()) })
+      .getter(
+        FunSpec.getterBuilder()
+          .addStatement("return %N", model.lightReference!!.toComposeName())
+          .build()
+      )
+      .build()
+
+  fun constantColorProperty(model: BpkColorModel) =
+    PropertySpec
+      .builder(model.name.toComposeName(), ColorClass)
+      .initializer(buildCodeBlock { add("%T(%L)", ColorClass, model.defaultValue.toHexColor()) })
       .build()
 
   fun dynamicColorProperty(model: BpkColorModel) =
-    staticColorProperty(model)
+    PropertySpec
+      .builder(model.name.toComposeName(), ColorClass)
+      .getter(
+        FunSpec.getterBuilder()
+          .addAnnotation(ComposableAnnotation)
+          .addStatement(
+            "return if (%T.colors.isLight) %N else %N",
+            MaterialTheme,
+            model.lightReference!!.toComposeName(),
+            model.darkReference!!.toComposeName(),
+          )
+          .build()
+      )
+      .build()
 
   return TypeSpec.objectBuilder(namespace)
     .addProperties(
-      source.map { (_, value) ->
-        if (value.darkValue != null) {
-          dynamicColorProperty(value)
-        } else {
-          staticColorProperty(value)
+      source.map { (_, model) ->
+        when {
+          model.darkValue != null -> dynamicColorProperty(model)
+          model.lightReference != model.name -> referenceColorProperty(model)
+          else -> constantColorProperty(model)
         }
       }
     )
