@@ -34,7 +34,7 @@ data class BpkColorModel(
   val darkValue: String?,
 )
 
-interface BpkColors : Map<String, BpkColorModel>
+interface BpkColors : List<BpkColorModel>
 
 object BpkColor {
 
@@ -100,7 +100,7 @@ private fun parseColors(
     return resolveReference(referencing, isDark)
   }
 
-  val map = data
+  val list = data
     .map {
       BpkColorModel(
         name = it.key.trimName(),
@@ -112,11 +112,10 @@ private fun parseColors(
     }
     .filter(filter)
     .sortedBy { it.name }
-    .associateBy { it.name }
 
-  return object : BpkColors, Map<String, BpkColorModel> by map {
+  return object : BpkColors, List<BpkColorModel> by list {
     override fun toString(): String =
-      map.toString()
+      list.toString()
   }
 }
 
@@ -138,7 +137,7 @@ private fun toStaticCompose(
 
   return TypeSpec.objectBuilder(namespace)
     .addProperties(
-      source.map { (_, model) ->
+      source.map { model ->
         PropertySpec
           .builder(model.name.toComposeStaticName(), ColorClass)
           .initializer(buildCodeBlock { add("%T(%L)", ColorClass, model.defaultValue.toHexColor()) })
@@ -176,7 +175,7 @@ private fun toSemanticCompose(
         FunSpec.constructorBuilder()
           .addModifiers(KModifier.PRIVATE)
           .addParameter(isLightProperty, Boolean::class)
-          .addParameters(map { it.value.toParameter() })
+          .addParameters(map(BpkColorModel::toParameter))
           .build()
       )
       .addProperty(
@@ -185,7 +184,7 @@ private fun toSemanticCompose(
           .initializer(isLightProperty)
           .build()
       )
-      .addProperties(map { it.value.toProperty() })
+      .addProperties(map(BpkColorModel::toProperty))
       .build()
   }
 
@@ -198,9 +197,9 @@ private fun toSemanticCompose(
         .build()
 
     return FunSpec.builder(functionName)
-      .addParameters(map { it.value.toParameter() })
+      .addParameters(map(BpkColorModel::toParameter))
       .addStatement(
-        map { it.value }.joinToString(
+        joinToString(
           separator = ",\n    ",
           prefix = "return $className(\n" +
             "    $isLightProperty = $isLight,\n" +
