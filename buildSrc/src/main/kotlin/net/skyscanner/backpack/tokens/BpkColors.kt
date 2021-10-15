@@ -132,18 +132,19 @@ private fun toStaticCompose(
   namespace: String,
 ): TypeSpec {
 
-  fun String.toHexColor() =
-    "0xFF${uppercase()}"
+  fun BpkColorModel.toProperty() : PropertySpec {
+
+    fun String.toHexColor() =
+      "0xFF${uppercase()}"
+
+    return PropertySpec
+      .builder(name.toComposeStaticName(), ColorClass)
+      .initializer(buildCodeBlock { add("%T(%L)", ColorClass, defaultValue.toHexColor()) })
+      .build()
+  }
 
   return TypeSpec.objectBuilder(namespace)
-    .addProperties(
-      source.map { model ->
-        PropertySpec
-          .builder(model.name.toComposeStaticName(), ColorClass)
-          .initializer(buildCodeBlock { add("%T(%L)", ColorClass, model.defaultValue.toHexColor()) })
-          .build()
-      }
-    )
+    .addProperties(source.map(BpkColorModel::toProperty))
     .build()
 }
 
