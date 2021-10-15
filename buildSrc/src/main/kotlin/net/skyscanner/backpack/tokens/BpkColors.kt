@@ -121,8 +121,11 @@ private fun parseColors(
 }
 
 private val ColorClass = ClassName("androidx.compose.ui.graphics", "Color")
-private val ComposableAnnotation = ClassName("androidx.compose.runtime", "Composable")
-private val MaterialTheme = ClassName("androidx.compose.material", "MaterialTheme")
+
+private const val isLightProperty = "isLight"
+
+private fun String.toComposeStaticName() =
+  CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
 
 @OptIn(ExperimentalStdlibApi::class)
 private fun toStaticCompose(
@@ -130,20 +133,14 @@ private fun toStaticCompose(
   namespace: String,
 ): TypeSpec {
 
-  fun String.toComposeName() =
-    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
-
-
   fun String.toHexColor() =
     "0xFF${uppercase()}"
 
   return TypeSpec.objectBuilder(namespace)
     .addProperties(
       source.map { (_, model) ->
-        // Generated code sample:
-        // public val ColorName: Color = Color(0xFFXXXXXX)
         PropertySpec
-          .builder(model.name.toComposeName(), ColorClass)
+          .builder(model.name.toComposeStaticName(), ColorClass)
           .initializer(buildCodeBlock { add("%T(%L)", ColorClass, model.defaultValue.toHexColor()) })
           .build()
       }
@@ -158,89 +155,74 @@ private fun toSemanticCompose(
   className: String,
 ): TypeSpec {
 
-  fun String.toComposeName() =
+  fun String.toSemanticName() =
     CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, this)
 
-  fun String.toComposeStaticName() =
-    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
+  fun BpkColors.toColorsClass(): TypeSpec {
 
-  fun String.toHexColor() =
-    "0xFF${uppercase()}"
-
-  return TypeSpec.classBuilder(className)
-    .primaryConstructor(
-      FunSpec.constructorBuilder()
-        .addModifiers(KModifier.PRIVATE)
-        .addParameter("isLight", Boolean::class)
-        .addParameters(
-          source.map { (_, model) ->
-            // Generated code sample:
-            // public val ColorName: Color = Color(0xFFXXXXXX)
-            ParameterSpec
-              .builder(model.name.toComposeName(), ColorClass)
-              .build()
-          }
-        )
+    fun BpkColorModel.toParameter(): ParameterSpec =
+      ParameterSpec
+        .builder(name.toSemanticName(), ColorClass)
         .build()
-    )
-    .addProperty(PropertySpec.builder("isLight", Boolean::class).initializer("isLight").build())
-    .addProperties(
-      source.map { (_, model) ->
-        // Generated code sample:
-        // public val ColorName: Color = Color(0xFFXXXXXX)
-        PropertySpec
-          .builder(model.name.toComposeName(), ColorClass)
-          .initializer(model.name.toComposeName())
+
+    fun BpkColorModel.toProperty(): PropertySpec =
+      PropertySpec
+        .builder(name.toSemanticName(), ColorClass)
+        .initializer(name.toSemanticName())
+        .build()
+
+    return TypeSpec.classBuilder(className)
+      .primaryConstructor(
+        FunSpec.constructorBuilder()
+          .addModifiers(KModifier.PRIVATE)
+          .addParameter(isLightProperty, Boolean::class)
+          .addParameters(map { it.value.toParameter() })
           .build()
-      }
-    )
+      )
+      .addProperty(
+        PropertySpec
+          .builder(isLightProperty, Boolean::class)
+          .initializer(isLightProperty)
+          .build()
+      )
+      .addProperties(map { it.value.toProperty() })
+      .build()
+  }
+
+  fun BpkColors.toFactoryFunction(functionName: String, isLight: Boolean, reference: (BpkColorModel) -> String): FunSpec {
+
+    fun BpkColorModel.toParameter(): ParameterSpec =
+      ParameterSpec
+        .builder(name.toSemanticName(), ColorClass)
+        .defaultValue("$staticNameSpace.%N", reference(this).toComposeStaticName())
+        .build()
+
+    return FunSpec.builder(functionName)
+      .addParameters(map { it.value.toParameter() })
+      .addStatement(
+        map { it.value }.joinToString(
+          separator = ",\n    ",
+          prefix = "return $className(\n" +
+            "    $isLightProperty = $isLight,\n" +
+            "    ",
+          postfix = ",\n)",
+        ) {
+          "${it.name.toSemanticName()} = ${it.name.toSemanticName()}"
+        }
+      )
+      .build()
+  }
+
+
+  return source
+    .toColorsClass()
+    .toBuilder()
     .addType(TypeSpec.companionObjectBuilder()
       .addModifiers(KModifier.INTERNAL)
       .addFunction(
-        FunSpec.builder("light")
-          .addParameters(
-            source.map { (_, model) ->
-              // Generated code sample:
-              // public val ColorName: Color = Color(0xFFXXXXXX)
-              ParameterSpec
-                .builder(model.name.toComposeName(), ColorClass)
-                .defaultValue("$staticNameSpace.%N", model.defaultReference!!.toComposeStaticName())
-                .build()
-            }
-          )
-          .addStatement(
-            source.map { it.value }.joinToString(
-              separator = ",\n    ",
-              prefix = "return $className(\n    isLight = true,\n    ",
-              postfix = ",\n)",
-            ) {
-              it.name.toComposeName() + " = " + it.name.toComposeName()
-            }
-          )
-          .build()
-      )
+        source.toFactoryFunction("light", isLight = true) { it.defaultReference!! })
       .addFunction(
-        FunSpec.builder("dark")
-          .addParameters(
-            source.map { (_, model) ->
-              // Generated code sample:
-              // public val ColorName: Color = Color(0xFFXXXXXX)
-              ParameterSpec
-                .builder(model.name.toComposeName(), ColorClass)
-                .defaultValue("$staticNameSpace.%N", (model.darkReference ?: model.defaultReference!!).toComposeStaticName())
-                .build()
-            }
-          )
-          .addStatement(
-            source.map { it.value }.joinToString(
-              separator = ",\n    ",
-              prefix = "return $className(\n    isLight = false,\n    ",
-              postfix = ",\n)",
-            ) {
-              it.name.toComposeName() + " = " + it.name.toComposeName()
-            }
-          )
-          .build()
+        source.toFactoryFunction("dark", isLight = false) { it.darkReference ?: it.defaultReference!! }
       )
       .build()
     )
