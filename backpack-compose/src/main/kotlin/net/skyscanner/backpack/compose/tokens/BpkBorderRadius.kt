@@ -14,23 +14,17 @@
 
 package net.skyscanner.backpack.compose.tokens
 
-import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 public object BpkBorderRadius {
-  @Stable
   public val Lg: Dp = 24.dp
 
-  @Stable
   public val Md: Dp = 12.dp
 
-  @Stable
   public val Pill: Dp = 40.dp
 
-  @Stable
   public val Sm: Dp = 8.dp
 
-  @Stable
   public val Xs: Dp = 4.dp
 }

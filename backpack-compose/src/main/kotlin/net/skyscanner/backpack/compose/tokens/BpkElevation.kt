@@ -14,26 +14,19 @@
 
 package net.skyscanner.backpack.compose.tokens
 
-import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 public object BpkElevation {
-  @Stable
   public val Base: Dp = 4.dp
 
-  @Stable
   public val Lg: Dp = 8.dp
 
-  @Stable
   public val Sm: Dp = 2.dp
 
-  @Stable
   public val Xl: Dp = 16.dp
 
-  @Stable
   public val Xs: Dp = 1.dp
 
-  @Stable
   public val Xxl: Dp = 24.dp
 }

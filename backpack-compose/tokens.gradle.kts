@@ -71,8 +71,19 @@ tasks {
     this.group = group
     doLast {
       source
-        .parseAs(BpkColor.Parser)
-        .transformTo(BpkColor.Format.Compose(namespace = "BpkColor"))
+        .parseAs(BpkColor.Static)
+        .transformTo(BpkColor.Format.StaticCompose(namespace = "BpkColor"))
+        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+        .execute()
+    }
+  }
+
+  val generateSemanticColors by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkColor.Semantic)
+        .transformTo(BpkColor.Format.SemanticCompose(staticNameSpace = "BpkColor", className = "BpkColors"))
         .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
         .execute()
     }
@@ -85,7 +96,7 @@ tasks {
 
   val generateColorTokens by creating {
     this.group = group
-    dependsOn(generateStaticColors)
+    dependsOn(generateStaticColors, generateSemanticColors)
   }
 
   val generateTokens by creating {

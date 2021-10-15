@@ -85,7 +85,6 @@ private fun parseDimensions(
 }
 
 private val DpClass = ClassName("androidx.compose.ui.unit", "Dp")
-private val StableAnnotation = ClassName("androidx.compose.runtime", "Stable")
 private val dpExtension = MemberName("androidx.compose.ui.unit", "dp", isExtension = true)
 
 private fun toCompose(
@@ -97,7 +96,6 @@ private fun toCompose(
       source.map { (name, value) ->
         PropertySpec
           .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), DpClass)
-          .addAnnotation(StableAnnotation)
           .initializer(buildCodeBlock { add("%L.%M", value, dpExtension) })
           .build()
       }
