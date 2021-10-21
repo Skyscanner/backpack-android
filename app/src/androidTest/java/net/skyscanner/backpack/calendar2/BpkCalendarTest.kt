@@ -138,6 +138,70 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  fun screenshotTestCalendarLeapFebruary() {
+    val calendar = BpkCalendar(testContext)
+    val now = LocalDate.of(2020, 2, 1)
+    val params = CalendarParams(
+      locale = Locale.UK,
+      range = LocalDate.of(2020, 2, 1)..LocalDate.of(2020, 12, 31),
+      selectionMode = CalendarParams.SelectionMode.Single,
+      now = now,
+    )
+
+    calendar.setParams(params)
+    calendar.setSelection(CalendarSelection.Single(now))
+    snap(calendar)
+  }
+
+  @Test
+  fun screenshotTestCalendarNonLeapFebruary() {
+    val calendar = BpkCalendar(testContext)
+    val now = LocalDate.of(2021, 2, 1)
+    val params = CalendarParams(
+      locale = Locale.UK,
+      range = LocalDate.of(2021, 2, 1)..LocalDate.of(2021, 12, 31),
+      selectionMode = CalendarParams.SelectionMode.Single,
+      now = now,
+    )
+
+    calendar.setParams(params)
+    calendar.setSelection(CalendarSelection.Single(now))
+    snap(calendar)
+  }
+
+  @Test
+  fun screenshotTestCalendarTodayIsLastDayOfMonth() {
+    val calendar = BpkCalendar(testContext)
+    val now = LocalDate.of(2017, 1, 31)
+    val params = CalendarParams(
+      locale = Locale.UK,
+      range = LocalDate.of(2017, 1, 1)..LocalDate.of(2017, 12, 31),
+      selectionMode = CalendarParams.SelectionMode.Single,
+      now = now,
+    )
+
+    calendar.setParams(params)
+    calendar.setSelection(CalendarSelection.Single(now))
+    snap(calendar)
+  }
+
+  @Test
+  fun screenshotTestCalendarTodayIsNewYear() {
+    val calendar = BpkCalendar(testContext)
+    val now = LocalDate.of(2017, 12, 31)
+    val params = CalendarParams(
+      locale = Locale.UK,
+      range = LocalDate.of(2017, 12, 1)..LocalDate.of(2018, 12, 31),
+      selectionMode = CalendarParams.SelectionMode.Single,
+      now = now,
+    )
+
+    calendar.setParams(params)
+    calendar.setSelection(CalendarSelection.Single(now))
+    snap(calendar)
+  }
+
+  @Test
   fun screenshotTestCalendarWithStartDateSelected() {
     val calendar = BpkCalendar(testContext)
     val params = CalendarParams(
