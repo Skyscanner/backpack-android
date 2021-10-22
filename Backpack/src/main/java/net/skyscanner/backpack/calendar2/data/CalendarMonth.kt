@@ -58,7 +58,7 @@ internal inline fun CalendarMonth(
   val selectSpacingBefore = prevMonth.lastDay() in selection && firstDay in selection
   var spacePosition = 0
   while (currentDayOfWeek != firstDay.dayOfWeek) {
-    cells += CalendarCell.Space(selected = selectSpacingBefore, yearMonth = prevMonth, position = spacePosition++)
+    cells += CalendarCell.Space(selected = selectSpacingBefore, yearMonth = yearMonth, position = spacePosition++)
     currentDayOfWeek += 1
   }
 

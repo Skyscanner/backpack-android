@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.calendar2.data
 
 import net.skyscanner.backpack.calendar2.CalendarSettings
+import net.skyscanner.backpack.calendar2.extension.yearMonth
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -41,12 +42,10 @@ class CalendarCellsLayoutTests {
   fun `there are leading spaces in month`() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
-        assertTrue(state.cells[1] is CalendarCell.Space)
-        assertTrue(state.cells[2] is CalendarCell.Space)
-        assertTrue(state.cells[3] is CalendarCell.Space)
-        assertTrue(state.cells[4] is CalendarCell.Space)
-        assertTrue(state.cells[5] is CalendarCell.Space)
-        assertTrue(state.cells[6] is CalendarCell.Space)
+        for (i in 1..6) {
+          assertTrue(state.cells[i] is CalendarCell.Space)
+          assertEquals(CalendarSettings.Default.range.start.yearMonth(), state.cells[i].yearMonth)
+        }
         assertTrue(state.cells[7] is CalendarCell.Day)
       }
     }
@@ -57,11 +56,10 @@ class CalendarCellsLayoutTests {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         assertTrue(state.cells[37] is CalendarCell.Day)
-        assertTrue(state.cells[38] is CalendarCell.Space)
-        assertTrue(state.cells[39] is CalendarCell.Space)
-        assertTrue(state.cells[40] is CalendarCell.Space)
-        assertTrue(state.cells[41] is CalendarCell.Space)
-        assertTrue(state.cells[42] is CalendarCell.Space)
+        for (i in 38..42) {
+          assertTrue(state.cells[i] is CalendarCell.Space)
+          assertEquals(CalendarSettings.Default.range.start.yearMonth(), state.cells[i].yearMonth)
+        }
       }
     }
   }
