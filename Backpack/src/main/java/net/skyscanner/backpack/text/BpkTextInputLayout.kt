@@ -24,7 +24,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources
@@ -53,7 +52,7 @@ class BpkTextInputLayout @JvmOverloads constructor(
   private val errorTextColor: ColorStateList
   private val helperTextColor: ColorStateList
 
-  var editText: EditText? = null
+  var editText: BpkTextField? = null
 
   var errorIcon: Drawable? = null
     set(value) {
@@ -73,6 +72,7 @@ class BpkTextInputLayout @JvmOverloads constructor(
   var error: String? = null
     set(value) {
       field = value
+      editText?.hasError = value != null
       updateIndicator()
     }
 
@@ -122,8 +122,9 @@ class BpkTextInputLayout @JvmOverloads constructor(
   }
 
   override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
-    if (child is EditText) {
+    if (child is BpkTextField) {
       editText = child
+      child.hasError = error != null
       findViewById<FrameLayout>(R.id.bpk_input_placeholder).addView(child, params)
     } else {
       super.addView(child, index, params)

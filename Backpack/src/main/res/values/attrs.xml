@@ -259,6 +259,10 @@
     <attr name="sliderThumbColor" format="color" />
   </declare-styleable>
 
+  <declare-styleable name="ErrorState">
+    <attr name="state_error" format="boolean" />
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
