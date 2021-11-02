@@ -32,6 +32,7 @@
     <item name="bpkCalendarStyle">@style/LondonThemeCalendar</item>
 
     <item name="bpkTextFieldStyle">@style/LondonThemeTextField</item>
+    <item name="bpkTextInputLayoutStyle">@style/LondonThemeTextInputLayout</item>
     <item name="bpkRatingStyle">@style/LondonThemeRating</item>
     <item name="bpkBarChartStyle">@style/LondonThemeBarChart</item>
 
@@ -137,6 +138,11 @@
     <item name="textFieldBackground">@color/bpkWhite</item>
   </style>
 
+  <style name="LondonThemeTextInputLayout">
+    <item name="textInputErrorTextColor">#B1121C</item>
+    <item name="textInputHelperTextColor">#6392ce</item>
+  </style>
+
   <style name="LondonThemeRating">
     <item name="ratingColorLow">#6392ce</item>
     <item name="ratingColorMedium">#013A76</item>
@@ -180,6 +186,7 @@
     <item name="bpkCheckboxStyle">@style/DohaThemeCheckbox</item>
     <item name="bpkRadioButtonStyle">@style/DohaThemeRadioButton</item>
     <item name="bpkTextFieldStyle">@style/DohaThemeTextField</item>
+    <item name="bpkTextInputLayoutStyle">@style/DohaThemeTextInputLayout</item>
     <item name="bpkRatingStyle">@style/DohaThemeRating</item>
     <item name="bpkSliderStyle">@style/DohaThemeSlider</item>
 
@@ -266,6 +273,11 @@
     <item name="textFieldColorHintFocused">#ffca4c</item>
     <item name="textFieldColorIcon">?bpkPrimaryColor</item>
     <item name="textFieldBackground">@color/bpkWhite</item>
+  </style>
+
+  <style name="DohaThemeTextInputLayout">
+    <item name="textInputErrorTextColor">#B1121C</item>
+    <item name="textInputHelperTextColor">#ffa000</item>
   </style>
 
   <style name="DohaThemeRating">

@@ -26,7 +26,7 @@ internal fun ColorStateList.getColorForState(state: IntArray) =
 
 internal inline fun colorStateList(
   @ColorInt color: Int,
-  @ColorInt pressedColor: Int,
+  @ColorInt pressedColor: Int = color,
   @ColorInt focusedColor: Int = pressedColor,
   @ColorInt activatedColor: Int = pressedColor,
   @ColorInt disabledColor: Int

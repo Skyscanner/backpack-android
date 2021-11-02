@@ -306,7 +306,14 @@ object ComponentRegistry {
         "With links" story NodeData { Story of R.layout.fragment_text_links }
       )
     ),
-    "Text Field" story NodeData { Story of R.layout.fragment_text_fields },
+    "Text Field" story NodeData(
+      { children -> SubStory of children },
+      mapOf(
+        "Default" story NodeData { Story of R.layout.fragment_text_fields },
+        "RTL" story NodeData { Story of R.layout.fragment_text_fields_rtl },
+        "With labels" story NodeData { Story of R.layout.fragment_text_fields_labels },
+      )
+    ),
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
     "Toast" story NodeData { ToastStory of R.layout.fragment_toasts },
     "Sneak peek" story NodeData(

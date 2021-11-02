@@ -53,6 +53,15 @@
     <attr name="textFieldIconEnd" format="reference" />
   </declare-styleable>
 
+  <declare-styleable name="BpkTextInputLayout">
+    <attr name="android:label" format="string" />
+    <attr name="textInputHelperText" format="string" />
+    <attr name="textInputError" format="string" />
+    <attr name="textInputHelperTextColor" format="color" />
+    <attr name="textInputErrorTextColor" format="color" />
+    <attr name="textInputErrorIcon" format="reference" />
+  </declare-styleable>
+
   <declare-styleable name="BpkPanel">
     <attr name="padding" format="boolean" />
   </declare-styleable>
@@ -275,6 +284,7 @@
   <attr name="bpkHorizontalNavStyle" format="reference"/>
   <attr name="bpkHorizontalNavStyleAlternate" format="reference"/>
   <attr name="bpkTextFieldStyle" format="reference"/>
+  <attr name="bpkTextInputLayoutStyle" format="reference"/>
   <attr name="bpkSnackbarStyle" format="reference"/>
   <attr name="bpkRatingStyle" format="reference"/>
   <attr name="bpkBarChartStyle" format="reference"/>

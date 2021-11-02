@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  style="@style/App.Story"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/bpkBackgroundSecondary"
+  android:orientation="vertical">
+
+  <net.skyscanner.backpack.text.BpkTextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:label="@string/input_label">
+
+    <net.skyscanner.backpack.text.BpkTextField
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/input_placeholder" />
+  </net.skyscanner.backpack.text.BpkTextInputLayout>
+
+  <net.skyscanner.backpack.text.BpkTextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:label="@string/input_label">
+
+    <net.skyscanner.backpack.text.BpkTextField
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/input_placeholder"
+      app:textFieldIconStart="@drawable/bpk_search" />
+  </net.skyscanner.backpack.text.BpkTextInputLayout>
+
+  <net.skyscanner.backpack.text.BpkTextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:label="@string/input_label">
+
+    <net.skyscanner.backpack.text.BpkTextField
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/input_placeholder"
+      android:text="@string/input_entering"
+      app:textFieldIconStart="@drawable/bpk_search" />
+
+  </net.skyscanner.backpack.text.BpkTextInputLayout>
+
+  <net.skyscanner.backpack.text.BpkTextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:label="@string/input_label">
+
+    <net.skyscanner.backpack.text.BpkTextField
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/input_placeholder"
+      app:textFieldIconEnd="@drawable/bpk_search" />
+  </net.skyscanner.backpack.text.BpkTextInputLayout>
+
+  <net.skyscanner.backpack.text.BpkTextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:label="@string/input_label">
+
+    <net.skyscanner.backpack.text.BpkTextField
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:enabled="false"
+      android:hint="@string/input_disabled" />
+  </net.skyscanner.backpack.text.BpkTextInputLayout>
+
+  <net.skyscanner.backpack.text.BpkTextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:label="@string/input_label"
+    app:textInputError="@string/input_error">
+
+    <net.skyscanner.backpack.text.BpkTextField
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/input_placeholder"
+      app:textFieldIconStart="@drawable/bpk_search" />
+  </net.skyscanner.backpack.text.BpkTextInputLayout>
+
+  <net.skyscanner.backpack.text.BpkTextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:label="@string/input_label"
+    app:textInputHelperText="@string/input_helper">
+
+    <net.skyscanner.backpack.text.BpkTextField
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/input_placeholder"
+      app:textFieldIconStart="@drawable/bpk_search" />
+  </net.skyscanner.backpack.text.BpkTextInputLayout>
+
+  <net.skyscanner.backpack.text.BpkTextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingBase"
+    app:textInputError="@string/input_error">
+
+    <net.skyscanner.backpack.text.BpkTextField
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="@string/input_placeholder"
+      app:textFieldIconStart="@drawable/bpk_search" />
+  </net.skyscanner.backpack.text.BpkTextInputLayout>
+
+</LinearLayout>

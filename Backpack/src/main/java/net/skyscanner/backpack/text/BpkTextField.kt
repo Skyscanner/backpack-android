@@ -102,9 +102,6 @@ open class BpkTextField @JvmOverloads constructor(
     setTextColor(
       colorStateList(
         color = textColor,
-        pressedColor = textColor,
-        focusedColor = textColor,
-        activatedColor = textColor,
         disabledColor = textColorDisabled,
       )
     )
