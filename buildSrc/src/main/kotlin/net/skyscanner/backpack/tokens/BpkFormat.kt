@@ -38,7 +38,7 @@ private fun Map<*, *>.toStringKeyMap(): Map<String, Any> {
     if (value is Map<*, *>) {
       result[key.toString()] = value.toStringKeyMap()
     } else if (value != null) {
-      result[key.toString()] = value
+      result[key.toString()] = value.toString()
     }
   }
   return result
