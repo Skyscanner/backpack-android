@@ -19,6 +19,7 @@ import net.skyscanner.backpack.tokens.BpkColor
 import net.skyscanner.backpack.tokens.BpkDimension
 import net.skyscanner.backpack.tokens.BpkFormat
 import net.skyscanner.backpack.tokens.BpkOutput
+import net.skyscanner.backpack.tokens.BpkTextUnit
 import net.skyscanner.backpack.tokens.nodeFileOf
 import net.skyscanner.backpack.tokens.parseAs
 import net.skyscanner.backpack.tokens.readAs
@@ -67,6 +68,39 @@ tasks {
     }
   }
 
+  val generateFontSizeTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkTextUnit.Category.FontSize)
+        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkFontSize", internal = true))
+        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+        .execute()
+    }
+  }
+
+  val generateLetterSpacingTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkTextUnit.Category.LetterSpacing)
+        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLetterSpacing", internal = true))
+        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+        .execute()
+    }
+  }
+
+  val generateLineHeightTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkTextUnit.Category.LineHeight)
+        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLineHeight", internal = true))
+        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+        .execute()
+    }
+  }
+
   val generateStaticColors by creating {
     this.group = group
     doLast {
@@ -94,6 +128,11 @@ tasks {
     dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens)
   }
 
+  val generateTextTokens by creating {
+    this.group = group
+    dependsOn(generateFontSizeTokens, generateLetterSpacingTokens, generateLineHeightTokens)
+  }
+
   val generateColorTokens by creating {
     this.group = group
     dependsOn(generateStaticColors, generateSemanticColors)
@@ -101,6 +140,6 @@ tasks {
 
   val generateTokens by creating {
     this.group = group
-    dependsOn(generateSizeTokens, generateColorTokens)
+    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens)
   }
 }
