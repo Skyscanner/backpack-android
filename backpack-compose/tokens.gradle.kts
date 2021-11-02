@@ -73,7 +73,7 @@ tasks {
     doLast {
       source
         .parseAs(BpkTextUnit.Category.FontSize)
-        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkFontSize"))
+        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkFontSize", internal = true))
         .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
         .execute()
     }
@@ -84,7 +84,7 @@ tasks {
     doLast {
       source
         .parseAs(BpkTextUnit.Category.LetterSpacing)
-        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLetterSpacing"))
+        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLetterSpacing", internal = true))
         .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
         .execute()
     }
@@ -95,7 +95,7 @@ tasks {
     doLast {
       source
         .parseAs(BpkTextUnit.Category.LineHeight)
-        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLineHeight"))
+        .transformTo(BpkTextUnit.Format.Compose(namespace = "BpkLineHeight", internal = true))
         .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
         .execute()
     }

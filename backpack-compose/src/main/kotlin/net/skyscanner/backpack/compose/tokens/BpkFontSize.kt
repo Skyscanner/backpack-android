@@ -17,20 +17,20 @@ package net.skyscanner.backpack.compose.tokens
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
-public object BpkFontSize {
-  public val Base: TextUnit = 16.0.sp
+internal object BpkFontSize {
+  internal val Base: TextUnit = 16.0.sp
 
-  public val Caps: TextUnit = 10.0.sp
+  internal val Caps: TextUnit = 10.0.sp
 
-  public val Lg: TextUnit = 20.0.sp
+  internal val Lg: TextUnit = 20.0.sp
 
-  public val Sm: TextUnit = 14.0.sp
+  internal val Sm: TextUnit = 14.0.sp
 
-  public val Xl: TextUnit = 24.0.sp
+  internal val Xl: TextUnit = 24.0.sp
 
-  public val Xs: TextUnit = 12.0.sp
+  internal val Xs: TextUnit = 12.0.sp
 
-  public val Xxl: TextUnit = 30.0.sp
+  internal val Xxl: TextUnit = 30.0.sp
 
-  public val Xxxl: TextUnit = 36.0.sp
+  internal val Xxxl: TextUnit = 36.0.sp
 }

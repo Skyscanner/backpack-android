@@ -20,6 +20,7 @@ package net.skyscanner.backpack.tokens
 import com.google.common.base.CaseFormat
 import com.squareup.kotlinpoet.buildCodeBlock
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
@@ -51,9 +52,9 @@ object BpkTextUnit {
 
   sealed class Format : BpkTransformer<BpkTextUnits, TypeSpec> {
 
-    data class Compose(val namespace: String) : Format() {
+    data class Compose(val namespace: String, val internal: Boolean = false) : Format() {
       override fun invoke(source: BpkTextUnits): TypeSpec =
-        toCompose(source, namespace)
+        toCompose(source, namespace, internal)
     }
 
   }
@@ -91,12 +92,15 @@ private val spExtension = MemberName("androidx.compose.ui.unit", "sp", isExtensi
 private fun toCompose(
   source: BpkTextUnits,
   namespace: String,
+  internal: Boolean,
 ): TypeSpec =
   TypeSpec.objectBuilder(namespace)
+    .addModifiers(if (internal) KModifier.INTERNAL else KModifier.PUBLIC)
     .addProperties(
       source.map { (name, value) ->
         PropertySpec
           .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), TextUnitClass)
+          .addModifiers(if (internal) KModifier.INTERNAL else KModifier.PUBLIC)
           .initializer(buildCodeBlock {
             if (value < 0) {
               add("-(%L).%M", -value, spExtension)
