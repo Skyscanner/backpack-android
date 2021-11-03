@@ -33,7 +33,7 @@ import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
 
-class BpkTextInputLayout @JvmOverloads constructor(
+open class BpkTextInputLayout @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = R.attr.bpkTextInputLayoutStyle,
@@ -62,9 +62,9 @@ class BpkTextInputLayout @JvmOverloads constructor(
       updateIndicator()
     }
 
-  var label: String? = null
+  var label: CharSequence?
+    get() = labelView.text
     set(value) {
-      field = value
       labelView.text = value
       labelView.isVisible = value != null
     }
@@ -91,9 +91,9 @@ class BpkTextInputLayout @JvmOverloads constructor(
       defStyleAttr, 0
     ).use {
       errorTextColor = it.getColorStateList(R.styleable.BpkTextInputLayout_textInputErrorTextColor)
-        ?: ColorStateList.valueOf(context.getColor(R.color.bpkPanjin))
+        ?: context.getColorStateList(R.color.bpkPanjin)
       helperTextColor = it.getColorStateList(R.styleable.BpkTextInputLayout_textInputHelperTextColor)
-        ?: ColorStateList.valueOf(context.getColor(R.color.__textInputLayoutHelperColor))
+        ?: context.getColorStateList(R.color.__textInputLayoutHelperColor)
       label = it.getString(R.styleable.BpkTextInputLayout_android_label)
       error = it.getString(R.styleable.BpkTextInputLayout_textInputError)
       helperText = it.getString(R.styleable.BpkTextInputLayout_textInputHelperText)
@@ -111,7 +111,7 @@ class BpkTextInputLayout @JvmOverloads constructor(
 
   override fun childDrawableStateChanged(child: View?) {
     super.childDrawableStateChanged(child)
-    if (child is FrameLayout) {
+    if (child?.id == R.id.bpk_input_placeholder) {
       labelView.isEnabled = editText?.isEnabled ?: true
     }
   }
@@ -123,6 +123,9 @@ class BpkTextInputLayout @JvmOverloads constructor(
 
   override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
     if (child is BpkTextField) {
+      if (editText != null) {
+        throw IllegalStateException("Only one TextField supported")
+      }
       editText = child
       child.hasError = error != null
       findViewById<FrameLayout>(R.id.bpk_input_placeholder).addView(child, params)
