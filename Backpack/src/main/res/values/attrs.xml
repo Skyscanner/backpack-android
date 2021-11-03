@@ -60,6 +60,7 @@
     <attr name="textInputHelperTextColor" format="color" />
     <attr name="textInputErrorTextColor" format="color" />
     <attr name="textInputErrorIcon" format="reference" />
+    <attr name="textInputErrorEnabled" format="boolean" />
   </declare-styleable>
 
   <declare-styleable name="BpkPanel">

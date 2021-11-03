@@ -72,11 +72,25 @@ open class BpkTextInputLayout @JvmOverloads constructor(
   var error: String? = null
     set(value) {
       field = value
+      if (value != null) {
+        errorEnabled = true
+      }
       editText?.hasError = value != null
       updateIndicator()
     }
 
   var helperText: String? = null
+    set(value) {
+      field = value
+      updateIndicator()
+    }
+
+  /**
+   * Whether the error functionality is enabled or not in this layout.
+   * Enabling this functionality before setting an error message via setting error, will mean that this layout will not
+   * change size when an error is displayed.
+   */
+  var errorEnabled: Boolean = false
     set(value) {
       field = value
       updateIndicator()
@@ -94,9 +108,13 @@ open class BpkTextInputLayout @JvmOverloads constructor(
         ?: context.getColorStateList(R.color.bpkPanjin)
       helperTextColor = it.getColorStateList(R.styleable.BpkTextInputLayout_textInputHelperTextColor)
         ?: context.getColorStateList(R.color.__textInputLayoutHelperColor)
+
+      errorEnabled = it.getBoolean(R.styleable.BpkTextInputLayout_textInputErrorEnabled, errorEnabled)
+
       label = it.getString(R.styleable.BpkTextInputLayout_android_label)
       error = it.getString(R.styleable.BpkTextInputLayout_textInputError)
       helperText = it.getString(R.styleable.BpkTextInputLayout_textInputHelperText)
+
       errorIcon = it.getDrawable(R.styleable.BpkTextInputLayout_textInputErrorIcon)
         ?: AppCompatResources.getDrawable(context, R.drawable.bpk_information_circle_sm)
       labelView.setTextColor(
@@ -140,7 +158,7 @@ open class BpkTextInputLayout @JvmOverloads constructor(
 
   private fun updateIndicator() {
     when {
-      error != null -> {
+      error != null && errorEnabled -> {
         indicatorView.isVisible = true
         indicatorView.text = error
         indicatorView.weight = BpkText.Weight.EMPHASIZED
@@ -155,7 +173,7 @@ open class BpkTextInputLayout @JvmOverloads constructor(
         indicatorView.setCompoundDrawablesRelative(null, null, null, null)
       }
       else -> {
-        indicatorView.isVisible = false
+        indicatorView.visibility = if (errorEnabled) View.INVISIBLE else View.GONE
       }
     }
   }

@@ -71,6 +71,8 @@ BpkTextInputLayout(testContext).apply {
 
 **Note:** If both error message and helper text are supplied the error message takes precedence.
 
+By default the error view has a visibility of `GONE` until an error is set. To avoid the layout jumping set the `textFieldErrorEnabled` (XML) or `errorEnabled` (Java/Kotlin) flag to true, which will set visibility to `INVISIBLE`.
+
 ## Theme Props
 
 ### `BpkTextField`
