@@ -28,47 +28,6 @@
     <net.skyscanner.backpack.text.BpkTextField
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:hint="@string/input_placeholder"
-      app:textFieldIconStart="@drawable/bpk_search" />
-  </net.skyscanner.backpack.text.BpkTextInputLayout>
-
-  <net.skyscanner.backpack.text.BpkTextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingBase"
-    android:label="@string/input_label">
-
-    <net.skyscanner.backpack.text.BpkTextField
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="@string/input_placeholder"
-      android:text="@string/input_entering"
-      app:textFieldIconStart="@drawable/bpk_search" />
-
-  </net.skyscanner.backpack.text.BpkTextInputLayout>
-
-  <net.skyscanner.backpack.text.BpkTextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingBase"
-    android:label="@string/input_label">
-
-    <net.skyscanner.backpack.text.BpkTextField
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:hint="@string/input_placeholder"
-      app:textFieldIconEnd="@drawable/bpk_search" />
-  </net.skyscanner.backpack.text.BpkTextInputLayout>
-
-  <net.skyscanner.backpack.text.BpkTextInputLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingBase"
-    android:label="@string/input_label">
-
-    <net.skyscanner.backpack.text.BpkTextField
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
       android:enabled="false"
       android:hint="@string/input_disabled" />
   </net.skyscanner.backpack.text.BpkTextInputLayout>
@@ -84,6 +43,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:hint="@string/input_placeholder"
+      android:text="@string/input_entering"
       app:textFieldIconStart="@drawable/bpk_search" />
   </net.skyscanner.backpack.text.BpkTextInputLayout>
 
@@ -105,6 +65,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:text="@string/input_entering"
     app:textInputError="@string/input_error">
 
     <net.skyscanner.backpack.text.BpkTextField
