@@ -7,6 +7,7 @@
 **Fixed:**
 
 - Updated SDK version to 31
+- Updated `BpkBottomNav` unselected colour to improve accessibility
 
 ## How to write a good changelog entry
 
