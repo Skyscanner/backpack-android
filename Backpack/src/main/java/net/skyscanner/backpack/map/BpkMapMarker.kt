@@ -79,7 +79,7 @@ fun GoogleMap.addBpkMarker(
   pointerOnly: Boolean,
   @DrawableRes icon: Int = 0,
   tag: Any? = null,
-): Marker = addMarker(
+): Marker? = addMarker(
   MarkerOptions()
     .position(position)
     .title(title)
@@ -99,7 +99,7 @@ fun GoogleMap.addBpkMarker(
         )
       }
     }
-).apply {
+)?.apply {
   this.icon = icon
   this.bpkTag = tag
   this.pointerOnly = pointerOnly

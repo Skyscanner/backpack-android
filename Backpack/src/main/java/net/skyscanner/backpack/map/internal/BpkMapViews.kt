@@ -27,7 +27,7 @@ import net.skyscanner.backpack.text.BpkText
 
 internal fun createBpkMarkerView(
   context: Context,
-  title: String,
+  title: String?,
   icon: Int,
   showPointer: Boolean,
 ): View {

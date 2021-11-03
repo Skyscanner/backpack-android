@@ -90,7 +90,7 @@ ext {
   androidxAnnotations = "androidx.annotation:annotation:1.2.0"
   androidMaterial = "com.google.android.material:material:1.4.0"
   cardView = "androidx.cardview:cardview:1.0.0"
-  googleMaps = "com.google.android.gms:play-services-maps:17.0.1"
+  googleMaps = "com.google.android.gms:play-services-maps:18.0.0"
   constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.1"
   swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
   threeTenAbpVersion = "1.3.1"
