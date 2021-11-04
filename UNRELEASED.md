@@ -4,15 +4,6 @@
 >
 >
 
-**Added:**
-
-- New `BpkTextInputLayout` component for adding a label and/or error message or help text to an input field
-
-**Fixed:**
-
-- Updated SDK version to 31
-- Updated `BpkBottomNav` unselected colour to improve accessibility
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).

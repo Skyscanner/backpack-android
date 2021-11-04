@@ -2,6 +2,17 @@
 
 [Unreleased changes](./UNRELEASED.md).
 
+# 33.1.0
+
+**Added:**
+
+- New `BpkTextInputLayout` component for adding a label and/or error message or help text to an input field
+
+**Fixed:**
+
+- Updated SDK version to 31
+- Updated `BpkBottomNav` unselected colour to improve accessibility
+
 # 33.0.2
 
 **Fixed:**
