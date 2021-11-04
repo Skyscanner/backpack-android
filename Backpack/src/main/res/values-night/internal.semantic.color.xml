@@ -31,6 +31,7 @@
   <color name="__textFieldIcon">@color/bpkBlackTint06</color>
   <color name="__textFieldBorder">@color/bpkBlackTint05</color>
   <color name="__textFieldBorderDisabled">@color/bpkBlackTint03</color>
+  <color name="__textInputLayoutHelperColor">@color/bpkSkyGrayTint04</color>
   <color name="__bottomNavUnselected">@color/bpkTextSecondaryDark</color>
 
   <color name="__barChartInactivatedColor">@color/bpkSkyGrayTint04</color>

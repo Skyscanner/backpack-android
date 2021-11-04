@@ -4,6 +4,10 @@
 >
 >
 
+**Added:**
+
+- New `BpkTextInputLayout` component for adding a label and/or error message or help text to an input field
+
 **Fixed:**
 
 - Updated SDK version to 31

@@ -11,13 +11,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingBase"
-    android:hint="@string/input_placeholder" />
-
-  <net.skyscanner.backpack.text.BpkTextField
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingBase"
     android:hint="@string/input_placeholder"
+    android:layoutDirection="rtl"
     app:textFieldIconStart="@drawable/bpk_search" />
 
   <net.skyscanner.backpack.text.BpkTextField
@@ -25,6 +20,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingBase"
     android:hint="@string/input_placeholder"
+    android:layoutDirection="rtl"
     android:text="@string/input_entering"
     app:textFieldIconStart="@drawable/bpk_search" />
 
@@ -33,12 +29,14 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingBase"
     android:hint="@string/input_placeholder"
+    android:layoutDirection="rtl"
     app:textFieldIconEnd="@drawable/bpk_search" />
 
   <net.skyscanner.backpack.text.BpkTextField
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingBase"
+    android:layoutDirection="rtl"
     android:hint="@string/input_disabled"
     android:enabled="false"/>
 

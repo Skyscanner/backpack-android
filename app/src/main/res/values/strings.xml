@@ -58,6 +58,13 @@
   <string name="icons_car">Car icon</string>
   <string name="icons_hotel">Hotel icon</string>
 
+  <string name="input_placeholder">Placeholder</string>
+  <string name="input_entering">Entering…</string>
+  <string name="input_disabled">Disabled</string>
+  <string name="input_label">Label</string>
+  <string name="input_error">Error message</string>
+  <string name="input_helper">Help text</string>
+
   <string name="settings_title">Settings</string>
   <string name="settings_selected">Selected</string>
   <string name="settings_section_theme">Component Themes</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
   <item android:color="@color/__textFieldBorderDisabled" android:state_enabled="false" />
   <item android:color="@color/bpkSkyBlueTint01" android:state_focused="true" />
+  <item android:color="@color/bpkPanjin" app:state_error="true" />
   <item android:color="@color/__textFieldBorder" />
 </selector>

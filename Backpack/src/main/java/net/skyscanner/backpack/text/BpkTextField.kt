@@ -68,6 +68,12 @@ open class BpkTextField @JvmOverloads constructor(
       setCompoundDrawablesRelativeWithIntrinsicBounds(iconStart, null, iconEnd, null)
     }
 
+  var hasError: Boolean = false
+    set(value) {
+      field = value
+      refreshDrawableState()
+    }
+
   init {
     initialize(attrs, defStyleAttr)
   }
@@ -102,9 +108,6 @@ open class BpkTextField @JvmOverloads constructor(
     setTextColor(
       colorStateList(
         color = textColor,
-        pressedColor = textColor,
-        focusedColor = textColor,
-        activatedColor = textColor,
         disabledColor = textColorDisabled,
       )
     )
@@ -135,4 +138,14 @@ open class BpkTextField @JvmOverloads constructor(
     super.onRtlPropertiesChanged(layoutDirection)
     textDirection = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) View.TEXT_DIRECTION_RTL else View.TEXT_DIRECTION_LTR
   }
+
+  override fun onCreateDrawableState(extraSpace: Int): IntArray {
+    val drawableState = super.onCreateDrawableState(extraSpace + 1)
+    if (hasError) {
+      mergeDrawableStates(drawableState, ERROR_STATE_SET)
+    }
+    return drawableState
+  }
 }
+
+private val ERROR_STATE_SET = intArrayOf(R.attr.state_error)

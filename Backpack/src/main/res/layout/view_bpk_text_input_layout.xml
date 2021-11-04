@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  tools:orientation="vertical"
+  tools:parentTag="net.skyscanner.backpack.text.BpkTextInputLayout">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/bpk_input_label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingMd"
+    android:textColor="@color/bpkTextPrimary"
+    android:textAlignment="viewStart"
+    app:textStyle="sm"
+    app:weight="emphasized"
+    tools:text="Label" />
+
+  <FrameLayout
+    android:id="@+id/bpk_input_placeholder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:addStatesFromChildren="true" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/bpk_input_indicator"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/bpkSpacingMd"
+    android:drawablePadding="@dimen/bpkSpacingMd"
+    android:textAlignment="viewStart"
+    app:textStyle="sm"
+    tools:text="Error message"
+    tools:textColor="@color/bpkPanjin" />
+
+</merge>

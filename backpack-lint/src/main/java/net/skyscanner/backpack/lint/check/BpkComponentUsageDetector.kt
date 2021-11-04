@@ -223,6 +223,16 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
       webName = "text",
       componentsToReplace = setOf("android.widget.TextView", "TextView", "androidx.appcompat.widget.AppCompatTextView")
     ),
+    TEXT_FIELD(
+      fullName = "net.skyscanner.backpack.text.BpkTextField",
+      webName = "text-input",
+      componentsToReplace = setOf("android.widget.EditText", "EditText", "androidx.appcompat.widget.AppCompatEditText")
+    ),
+    TEXT_INPUT_LAYOUT(
+      fullName = "net.skyscanner.backpack.text.BpkTextInputLayout",
+      webName = "text-input",
+      componentsToReplace = setOf("com.google.android.material.textfield.TextInputLayout")
+    ),
     TOAST(
       fullName = "net.skyscanner.backpack.toast.BpkToast",
       webName = "toast",
