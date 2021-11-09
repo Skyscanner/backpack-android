@@ -1,8 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
->
->
+
+**Added:**
+
+  - New icon set "Self-serve pick-up", with sm and lg icons.
 
 ## How to write a good changelog entry
 
