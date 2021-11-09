@@ -19,12 +19,14 @@
 package net.skyscanner.backpack.demo.data
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
@@ -297,13 +299,44 @@ object ComponentRegistry {
     "Star Rating Interactive" story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
     "Switch" story NodeData { Story of R.layout.fragment_switch },
     "Text" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_text },
-        "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
-        "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
-        "With drawables" story NodeData { Story of R.layout.fragment_text_drawables },
-        "With links" story NodeData { Story of R.layout.fragment_text_links }
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_text },
+            "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
+            "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
+            "With drawables" story NodeData { Story of R.layout.fragment_text_drawables },
+            "With links" story NodeData { Story of R.layout.fragment_text_links }
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory {
+          val styles = listOf(
+            BpkTheme.typography.hero64 to "Hero 64/72",
+            BpkTheme.typography.hero48 to "Hero 48/56",
+            BpkTheme.typography.heading40 to "Heading 40/48",
+            BpkTheme.typography.heading32 to "Heading 32/40",
+            BpkTheme.typography.heading24 to "Heading 24/28",
+            BpkTheme.typography.heading20 to "Heading 20/24",
+            BpkTheme.typography.heading16 to "Heading 16/20",
+            BpkTheme.typography.subheading to "Subheading 24/32",
+            BpkTheme.typography.bodyLongform to "Body Longform 20/28",
+            BpkTheme.typography.bodyDefault to "Body Default 16/24",
+            BpkTheme.typography.footnote to "Footnote 14/20",
+            BpkTheme.typography.caption to "Caption 12/16",
+            BpkTheme.typography.label16 to "Label 16/24",
+            BpkTheme.typography.label14 to "Label 14/20"
+          )
+          LazyColumn(modifier = Modifier.padding(16.dp)) {
+            items(styles) { style ->
+              Text(
+                style = style.first,
+                text = style.second
+              )
+            }
+          }
+        },
       )
     ),
     "Text Field" story NodeData(
@@ -324,7 +357,7 @@ object ComponentRegistry {
             text = "Coming soon",
             modifier = Modifier.padding(16.dp),
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.h5
+            style = BpkTheme.typography.heading32
           )
         },
         TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
