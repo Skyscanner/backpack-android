@@ -23,7 +23,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
-import net.skyscanner.backpack.demo.AppBpkTheme
+import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 import net.skyscanner.backpack.demo.data.ComposeNode
 
@@ -38,7 +38,7 @@ open class ComposeStory : Story() {
     if (composable != null) {
       return ComposeView(requireContext()).apply {
         setContent {
-          AppBpkTheme {
+          BackpackDemoTheme {
             (ComponentRegistry.getStoryCreator(composable) as ComposeNode).composable()
           }
         }

@@ -28,7 +28,7 @@ import net.skyscanner.backpack.compose.theme.LocalBpkTypography
 import net.skyscanner.backpack.compose.tokens.BpkTypography
 
 @Composable
-fun AppBpkTheme(
+fun BackpackDemoTheme(
   content: @Composable () -> Unit,
 ) {
   val typography = BpkTypography(
