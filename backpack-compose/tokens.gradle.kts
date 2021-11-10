@@ -15,11 +15,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.squareup.kotlinpoet.ClassName
 import net.skyscanner.backpack.tokens.BpkColor
 import net.skyscanner.backpack.tokens.BpkDimension
 import net.skyscanner.backpack.tokens.BpkFormat
+import net.skyscanner.backpack.tokens.BpkIcon
 import net.skyscanner.backpack.tokens.BpkOutput
 import net.skyscanner.backpack.tokens.BpkTextUnit
+import net.skyscanner.backpack.tokens.androidFileOf
 import net.skyscanner.backpack.tokens.nodeFileOf
 import net.skyscanner.backpack.tokens.parseAs
 import net.skyscanner.backpack.tokens.readAs
@@ -141,5 +144,33 @@ tasks {
   val generateTokens by creating {
     this.group = group
     dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens)
+  }
+
+  val iconsClass = ClassName("net.skyscanner.backpack.compose.icons", "BpkIcons")
+  val iconsPackage = "net.skyscanner.backpack.compose.icons"
+  val rClass = ClassName("net.skyscanner.backpack.compose", "R")
+
+  val generateSmIcons by creating {
+    this.group = group
+    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
+      .readAs(BpkFormat.Folder)
+      .parseAs(BpkIcon.Parser)
+      .transformTo(BpkIcon.Format.ComposeSm(iconsClass, rClass))
+      .saveTo(BpkOutput.KotlinExtensionFiles(src, iconsPackage + ".sm"))
+      .execute()
+  }
+
+  val generateLgIcons by creating {
+    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
+      .readAs(BpkFormat.Folder)
+      .parseAs(BpkIcon.Parser)
+      .transformTo(BpkIcon.Format.ComposeLg(iconsClass, rClass))
+      .saveTo(BpkOutput.KotlinExtensionFiles(src, iconsPackage + ".lg"))
+      .execute()
+  }
+
+  val generateIcons by creating {
+    this.group = group
+    dependsOn(generateSmIcons, generateLgIcons)
   }
 }

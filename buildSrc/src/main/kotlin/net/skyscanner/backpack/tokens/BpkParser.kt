@@ -17,4 +17,4 @@
  */
 package net.skyscanner.backpack.tokens
 
-interface BpkParser<T> : (Map<String, Any>) -> T
+interface BpkParser<Input, Output> : (Input) -> Output

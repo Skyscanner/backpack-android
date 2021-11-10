@@ -34,3 +34,15 @@ fun Project.nodeFileOf(module: String, file: String) : Pipeline<File> =
 
     resolvedFile
   }
+
+fun Project.androidFileOf(module: String, file: String) : Pipeline<File>  =
+  pipelineOf {
+    val resolvedModule = project.rootDir.resolve("$module/")
+
+    if (!resolvedModule.exists() && !resolvedModule.isDirectory) error("Module $module is not found!")
+
+    val resolvedFile = resolvedModule.resolve(file)
+    if (!resolvedFile.exists()) error("File $file is not found in module $module")
+
+    resolvedFile
+  }

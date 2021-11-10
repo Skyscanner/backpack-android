@@ -28,7 +28,7 @@ interface BpkDimensions : Map<String, Int>
 
 object BpkDimension {
 
-  sealed class Category : BpkParser<BpkDimensions> {
+  sealed class Category : BpkParser<Map<String, Any>, BpkDimensions> {
 
     object Spacing : Category() {
       override fun invoke(source: Map<String, Any>): BpkDimensions =
