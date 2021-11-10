@@ -1,17 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
->
->
 
 **Added:**
 
-- New `BpkTextInputLayout` component for adding a label and/or error message or help text to an input field
-
-**Fixed:**
-
-- Updated SDK version to 31
-- Updated `BpkBottomNav` unselected colour to improve accessibility
+  - New icon set "Self-serve pick-up", with sm and lg icons.
 
 ## How to write a good changelog entry
 
