@@ -34,7 +34,7 @@ sealed class BpkFormat<T>: (File) -> T {
   object Folder : BpkFormat<List<File>>() {
 
     override fun invoke(file: File): List<File> =
-      file.listFiles()?.asList() ?: emptyList()
+      file.listFiles()?.toList().orEmpty()
 
   }
 

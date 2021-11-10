@@ -37,7 +37,7 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
 
     override fun invoke(typeSpec: TypeSpec): Boolean {
       FileSpec.builder(pkg, typeSpec.name!!)
-        .addCopyright()
+        .addFileHeader()
         .suppressWarningTypes("RedundantVisibilityModifier", "unused")
         .addType(typeSpec)
         .build()
@@ -55,7 +55,7 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
 
       properties.forEach { property ->
         FileSpec.builder(pkg, property.name)
-          .addCopyright()
+          .addFileHeader()
           .suppressWarningTypes("RedundantVisibilityModifier", "unused")
           .addProperty(property)
           .build()
@@ -69,7 +69,7 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
 
 }
 
-private fun FileSpec.Builder.addCopyright() : FileSpec.Builder {
+private fun FileSpec.Builder.addFileHeader() : FileSpec.Builder {
   val currentYear = Calendar.getInstance().get(Calendar.YEAR)
   val copyright = Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
     return this
