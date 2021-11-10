@@ -18,14 +18,12 @@
 
 package net.skyscanner.backpack.compose.tokens
 
-import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 
-@Immutable
 data class BpkTypography internal constructor(
   val hero64: TextStyle,
   val hero48: TextStyle,
@@ -103,23 +101,19 @@ data class BpkTypography internal constructor(
       fontSize = BpkFontSize.Sm,
     ),
   ) : this(
-    hero64 = hero64.withDefaultFontFamily(defaultFontFamily),
-    hero48 = hero48.withDefaultFontFamily(defaultFontFamily),
-    heading40 = heading40.withDefaultFontFamily(defaultFontFamily),
-    heading32 = heading32.withDefaultFontFamily(defaultFontFamily),
-    heading24 = heading24.withDefaultFontFamily(defaultFontFamily),
-    heading20 = heading20.withDefaultFontFamily(defaultFontFamily),
-    heading16 = heading16.withDefaultFontFamily(defaultFontFamily),
-    subheading = subheading.withDefaultFontFamily(defaultFontFamily),
-    bodyLongform = bodyLongform.withDefaultFontFamily(defaultFontFamily),
-    bodyDefault = bodyDefault.withDefaultFontFamily(defaultFontFamily),
-    footnote = footnote.withDefaultFontFamily(defaultFontFamily),
-    caption = caption12.withDefaultFontFamily(defaultFontFamily),
-    label16 = label16.withDefaultFontFamily(defaultFontFamily),
-    label14 = label14.withDefaultFontFamily(defaultFontFamily),
+    hero64 = hero64.copy(fontFamily = defaultFontFamily),
+    hero48 = hero48.copy(fontFamily = defaultFontFamily),
+    heading40 = heading40.copy(fontFamily = defaultFontFamily),
+    heading32 = heading32.copy(fontFamily = defaultFontFamily),
+    heading24 = heading24.copy(fontFamily = defaultFontFamily),
+    heading20 = heading20.copy(fontFamily = defaultFontFamily),
+    heading16 = heading16.copy(fontFamily = defaultFontFamily),
+    subheading = subheading.copy(fontFamily = defaultFontFamily),
+    bodyLongform = bodyLongform.copy(fontFamily = defaultFontFamily),
+    bodyDefault = bodyDefault.copy(fontFamily = defaultFontFamily),
+    footnote = footnote.copy(fontFamily = defaultFontFamily),
+    caption = caption12.copy(fontFamily = defaultFontFamily),
+    label16 = label16.copy(fontFamily = defaultFontFamily),
+    label14 = label14.copy(fontFamily = defaultFontFamily),
   )
-}
-
-private fun TextStyle.withDefaultFontFamily(default: FontFamily): TextStyle {
-  return if (fontFamily != null) this else copy(fontFamily = default)
 }
