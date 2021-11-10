@@ -29,12 +29,12 @@ import net.skyscanner.backpack.compose.tokens.BpkTypography
 
 @Composable
 fun AppBpkTheme(
-  content: @Composable () -> Unit
+  content: @Composable () -> Unit,
 ) {
   val typography = BpkTypography(
     defaultFontFamily = FontFamily(
       Font(R.font.skyscanner_relative_android_book),
-      Font(R.font.skyscanner_relative_android_bold, weight = FontWeight.Bold)
+      Font(R.font.skyscanner_relative_android_bold, weight = FontWeight.Bold),
     )
   )
   CompositionLocalProvider(
@@ -42,7 +42,7 @@ fun AppBpkTheme(
   ) {
     BpkTheme(
       typography = typography,
-      content = content
+      content = content,
     )
   }
 }

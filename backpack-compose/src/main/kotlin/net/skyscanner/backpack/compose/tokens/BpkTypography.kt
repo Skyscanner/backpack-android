@@ -40,7 +40,7 @@ data class BpkTypography internal constructor(
   val footnote: TextStyle,
   val caption: TextStyle,
   val label16: TextStyle,
-  val label14: TextStyle
+  val label14: TextStyle,
 ) {
   constructor(
     defaultFontFamily: FontFamily = FontFamily.Default,
@@ -101,7 +101,7 @@ data class BpkTypography internal constructor(
     label14: TextStyle = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Sm,
-    )
+    ),
   ) : this(
     hero64 = hero64.withDefaultFontFamily(defaultFontFamily),
     hero48 = hero48.withDefaultFontFamily(defaultFontFamily),

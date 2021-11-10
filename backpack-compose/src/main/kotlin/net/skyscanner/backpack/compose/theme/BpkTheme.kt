@@ -33,7 +33,7 @@ val LocalBpkTypography = staticCompositionLocalOf {
 @Composable
 fun BpkTheme(
   typography: BpkTypography = BpkTheme.typography,
-  content: @Composable () -> Unit
+  content: @Composable () -> Unit,
 ) {
   CompositionLocalProvider(
     LocalBpkTypography provides typography,
@@ -50,11 +50,11 @@ fun BpkTheme(
       body2 = typography.footnote,
       button = typography.label14,
       caption = typography.caption,
-      overline = typography.caption.copy(fontWeight = FontWeight.Bold)
+      overline = typography.caption.copy(fontWeight = FontWeight.Bold),
     )
     MaterialTheme(
       typography = materialTypography,
-      content = content
+      content = content,
     )
   }
 }

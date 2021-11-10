@@ -107,7 +107,7 @@ open class NodeItem(
 
 class ComposeNode(
   name: String,
-  val composable: @Composable () -> Unit
+  val composable: @Composable () -> Unit,
 ) : NodeItem(name, { Story() }) {
   override fun createStory(): Story {
     return ComposeStory of getFullyQualifiedName()
@@ -308,7 +308,7 @@ object ComponentRegistry {
             "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
             "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
             "With drawables" story NodeData { Story of R.layout.fragment_text_drawables },
-            "With links" story NodeData { Story of R.layout.fragment_text_links }
+            "With links" story NodeData { Story of R.layout.fragment_text_links },
           )
         ),
         TAB_TITLE_COMPOSE composeStory {
@@ -326,7 +326,7 @@ object ComponentRegistry {
             BpkTheme.typography.footnote to "Footnote 14/20",
             BpkTheme.typography.caption to "Caption 12/16",
             BpkTheme.typography.label16 to "Label 16/24",
-            BpkTheme.typography.label14 to "Label 14/20"
+            BpkTheme.typography.label14 to "Label 14/20",
           )
           LazyColumn(modifier = Modifier.padding(16.dp)) {
             items(styles) { style ->
@@ -357,7 +357,7 @@ object ComponentRegistry {
             text = "Coming soon",
             modifier = Modifier.padding(16.dp),
             textAlign = TextAlign.Center,
-            style = BpkTheme.typography.heading32
+            style = BpkTheme.typography.heading32,
           )
         },
         TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
