@@ -45,96 +45,96 @@ data class BpkTypography internal constructor(
 ) {
   constructor(
     defaultFontFamily: FontFamily = FontFamily.Default,
-    hero1: TextStyle = TextStyle(
+  ) : this(
+    hero1 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = 120.sp, // TODO - replace with token when available
       letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontFamily = defaultFontFamily,
     ),
-    hero2: TextStyle = TextStyle(
+    hero2 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = 96.sp, // TODO - replace with token when available
       letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontFamily = defaultFontFamily,
     ),
-    hero3: TextStyle = TextStyle(
+    hero3 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = 76.sp, // TODO - replace with token when available
       letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontFamily = defaultFontFamily,
     ),
-    hero4: TextStyle = TextStyle(
+    hero4 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = 64.sp, // TODO - replace with token when available
       letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontFamily = defaultFontFamily,
     ),
-    hero5: TextStyle = TextStyle(
+    hero5 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = 48.sp, // TODO - replace with token when available
       letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontFamily = defaultFontFamily,
     ),
-    heading1: TextStyle = TextStyle(
+    heading1 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Xxxl,
+      fontFamily = defaultFontFamily,
     ),
-    heading2: TextStyle = TextStyle(
+    heading2 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Xxl,
+      fontFamily = defaultFontFamily,
     ),
-    heading3: TextStyle = TextStyle(
+    heading3 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Xl,
+      fontFamily = defaultFontFamily,
     ),
-    heading4: TextStyle = TextStyle(
+    heading4 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Lg,
+      fontFamily = defaultFontFamily,
     ),
-    heading5: TextStyle = TextStyle(
+    heading5 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Base,
+      fontFamily = defaultFontFamily,
     ),
-    subheading: TextStyle = TextStyle(
+    subheading = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Xl,
+      fontFamily = defaultFontFamily,
     ),
-    bodyLongform: TextStyle = TextStyle(
+    bodyLongform = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Lg,
+      fontFamily = defaultFontFamily,
     ),
-    bodyDefault: TextStyle = TextStyle(
+    bodyDefault = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Base,
+      fontFamily = defaultFontFamily,
     ),
-    footnote: TextStyle = TextStyle(
+    footnote = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Sm,
+      fontFamily = defaultFontFamily,
     ),
-    caption12: TextStyle = TextStyle(
+    caption = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Xs,
+      fontFamily = defaultFontFamily,
     ),
-    label1: TextStyle = TextStyle(
+    label1 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Base,
+      fontFamily = defaultFontFamily,
     ),
-    label2: TextStyle = TextStyle(
+    label2 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Sm,
+      fontFamily = defaultFontFamily,
     ),
-  ) : this(
-    hero1 = hero1.copy(fontFamily = defaultFontFamily),
-    hero2 = hero2.copy(fontFamily = defaultFontFamily),
-    hero3 = hero3.copy(fontFamily = defaultFontFamily),
-    hero4 = hero4.copy(fontFamily = defaultFontFamily),
-    hero5 = hero5.copy(fontFamily = defaultFontFamily),
-    heading1 = heading1.copy(fontFamily = defaultFontFamily),
-    heading2 = heading2.copy(fontFamily = defaultFontFamily),
-    heading3 = heading3.copy(fontFamily = defaultFontFamily),
-    heading4 = heading4.copy(fontFamily = defaultFontFamily),
-    heading5 = heading5.copy(fontFamily = defaultFontFamily),
-    subheading = subheading.copy(fontFamily = defaultFontFamily),
-    bodyLongform = bodyLongform.copy(fontFamily = defaultFontFamily),
-    bodyDefault = bodyDefault.copy(fontFamily = defaultFontFamily),
-    footnote = footnote.copy(fontFamily = defaultFontFamily),
-    caption = caption12.copy(fontFamily = defaultFontFamily),
-    label1 = label1.copy(fontFamily = defaultFontFamily),
-    label2 = label2.copy(fontFamily = defaultFontFamily),
   )
 }
