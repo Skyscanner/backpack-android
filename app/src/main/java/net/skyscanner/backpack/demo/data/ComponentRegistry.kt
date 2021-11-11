@@ -19,8 +19,6 @@
 package net.skyscanner.backpack.demo.data
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.TypographyStyles
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
 import net.skyscanner.backpack.demo.stories.Calendar2Story
@@ -311,35 +310,7 @@ object ComponentRegistry {
             "With links" story NodeData { Story of R.layout.fragment_text_links },
           )
         ),
-        TAB_TITLE_COMPOSE composeStory {
-          val styles = listOf(
-            BpkTheme.typography.hero1 to "Hero 1",
-            BpkTheme.typography.hero2 to "Hero 2",
-            BpkTheme.typography.hero3 to "Hero 3",
-            BpkTheme.typography.hero4 to "Hero 4",
-            BpkTheme.typography.hero5 to "Hero 5",
-            BpkTheme.typography.heading1 to "Heading 1",
-            BpkTheme.typography.heading2 to "Heading 2",
-            BpkTheme.typography.heading3 to "Heading 3",
-            BpkTheme.typography.heading4 to "Heading 4",
-            BpkTheme.typography.heading5 to "Heading 5",
-            BpkTheme.typography.subheading to "Subheading",
-            BpkTheme.typography.bodyLongform to "Body Longform",
-            BpkTheme.typography.bodyDefault to "Body Default",
-            BpkTheme.typography.footnote to "Footnote",
-            BpkTheme.typography.caption to "Caption",
-            BpkTheme.typography.label1 to "Label 1",
-            BpkTheme.typography.label2 to "Label 2",
-          )
-          LazyColumn(modifier = Modifier.padding(16.dp)) {
-            items(styles) { style ->
-              Text(
-                style = style.first,
-                text = style.second
-              )
-            }
-          }
-        },
+        TAB_TITLE_COMPOSE composeStory { TypographyStyles() },
       )
     ),
     "Text Field" story NodeData(
