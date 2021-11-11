@@ -67,10 +67,13 @@ class Calendar2Story : Story() {
     scope?.cancel()
     scope = CoroutineScope(Dispatchers.Main)
 
+    val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
     calendar.state
       .filter { it.selection !is CalendarSelection.None }
       .onEach {
-        BpkToast.makeText(requireContext(), it.selection.toString(), BpkToast.LENGTH_SHORT).show()
+        if (!automationMode) {
+          BpkToast.makeText(requireContext(), it.selection.toString(), BpkToast.LENGTH_SHORT).show()
+        }
       }
       .launchIn(scope!!)
 

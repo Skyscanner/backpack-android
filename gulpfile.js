@@ -149,7 +149,7 @@ const getTextStyles = fontWeight => {
         name: `bpk${pascalCase(key)}${getFontWeightSuffix(fontWeight)}`,
         size: `@dimen/bpkText${pascalCase(sizeProp[0].name.split('_')[1])}Size`,
         fontFamily: fontFamilyMappings[fontWeight],
-        letterSpacing: letterSpacingProp[0].value,
+        letterSpacing: (letterSpacingProp.size == 1) ? letterSpacingProp[0].value : null,
       };
     })
     .value();

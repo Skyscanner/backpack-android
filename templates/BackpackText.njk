@@ -32,10 +32,9 @@
     <item name="android:fontFamily">{{text.fontFamily}}</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
     <item name="android:textSize">{{text.size}}</item>
-  </style>
-
-  <style name="{{text.name}}Serif" parent="{{text.name}}">
-    <item name="android:letterSpacing">{{text.letterSpacing}}</item>
+    {% if text.letterSpacing %}
+      <item name="android:letterSpacing">{{text.letterSpacing}}</item>
+    {% endif %}
   </style>
 {% endfor %}
 </resources>
