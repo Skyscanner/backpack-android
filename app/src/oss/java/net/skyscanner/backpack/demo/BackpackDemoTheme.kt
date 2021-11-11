@@ -19,22 +19,13 @@
 package net.skyscanner.backpack.demo
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.theme.LocalBpkTypography
-import net.skyscanner.backpack.compose.tokens.BpkTypography
 
 @Composable
 fun BackpackDemoTheme(
   content: @Composable () -> Unit,
 ) {
-  val typography = BpkTypography()
-  CompositionLocalProvider(
-    LocalBpkTypography provides typography,
-  ) {
-    BpkTheme(
-      typography = typography,
-      content = content,
-    )
-  }
+  BpkTheme(
+    content = content,
+  )
 }

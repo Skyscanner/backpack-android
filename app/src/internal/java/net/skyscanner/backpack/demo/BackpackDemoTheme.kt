@@ -19,30 +19,20 @@
 package net.skyscanner.backpack.demo
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.theme.LocalBpkTypography
-import net.skyscanner.backpack.compose.tokens.BpkTypography
 
 @Composable
 fun BackpackDemoTheme(
   content: @Composable () -> Unit,
 ) {
-  val typography = BpkTypography(
-    defaultFontFamily = FontFamily(
+  BpkTheme(
+    fontFamily = FontFamily(
       Font(R.font.skyscanner_relative_android_book),
       Font(R.font.skyscanner_relative_android_bold, weight = FontWeight.Bold),
-    )
+    ),
+    content = content,
   )
-  CompositionLocalProvider(
-    LocalBpkTypography provides typography,
-  ) {
-    BpkTheme(
-      typography = typography,
-      content = content,
-    )
-  }
 }

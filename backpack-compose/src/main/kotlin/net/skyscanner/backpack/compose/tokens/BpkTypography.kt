@@ -44,7 +44,7 @@ data class BpkTypography internal constructor(
   val label2: TextStyle,
 ) {
   constructor(
-    defaultFontFamily: FontFamily = FontFamily.Default,
+    defaultFontFamily: FontFamily = FontFamily.SansSerif,
   ) : this(
     hero1 = TextStyle(
       fontWeight = FontWeight.Bold,

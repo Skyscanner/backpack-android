@@ -23,6 +23,7 @@ import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import net.skyscanner.backpack.compose.tokens.BpkTypography
 
@@ -32,13 +33,15 @@ val LocalBpkTypography = staticCompositionLocalOf {
 
 @Composable
 fun BpkTheme(
-  typography: BpkTypography = BpkTheme.typography,
+  fontFamily: FontFamily = FontFamily.SansSerif,
   content: @Composable () -> Unit,
 ) {
+  val typography = BpkTypography(defaultFontFamily = fontFamily)
   CompositionLocalProvider(
     LocalBpkTypography provides typography,
   ) {
     val materialTypography = Typography(
+      defaultFontFamily = fontFamily,
       h1 = typography.hero2,
       h2 = typography.hero4,
       h3 = typography.hero5,
