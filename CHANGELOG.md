@@ -1,7 +1,12 @@
 # Backpack Android changelog
 
 [Unreleased changes](./UNRELEASED.md).
+# 33.1.1
 
+**Added:**
+
+  - New icon set "Self-serve pick-up", with sm and lg icons.
+  
 # 33.1.0
 
 **Added:**
