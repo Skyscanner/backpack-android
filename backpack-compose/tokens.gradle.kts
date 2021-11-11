@@ -161,6 +161,7 @@ tasks {
   }
 
   val generateLgIcons by creating {
+    this.group = group
     project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
       .readAs(BpkFormat.Folder)
       .parseAs(BpkIcon.Parser)
