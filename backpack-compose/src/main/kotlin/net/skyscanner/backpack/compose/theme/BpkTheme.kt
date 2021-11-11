@@ -39,16 +39,17 @@ fun BpkTheme(
     LocalBpkTypography provides typography,
   ) {
     val materialTypography = Typography(
-      h2 = typography.hero64,
-      h3 = typography.hero48,
-      h4 = typography.heading32,
-      h5 = typography.heading24,
-      h6 = typography.heading20,
+      h1 = typography.hero2,
+      h2 = typography.hero4,
+      h3 = typography.hero5,
+      h4 = typography.heading2,
+      h5 = typography.heading3,
+      h6 = typography.heading4,
       subtitle1 = typography.bodyDefault,
       subtitle2 = typography.footnote,
       body1 = typography.bodyDefault,
       body2 = typography.footnote,
-      button = typography.label14,
+      button = typography.label2,
       caption = typography.caption,
       overline = typography.caption.copy(fontWeight = FontWeight.Bold),
     )
