@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
-fun TypographyStyles() {
+fun TypographyStylesStory() {
   val styles = listOf(
     BpkTheme.typography.hero1 to "Hero 1",
     BpkTheme.typography.hero2 to "Hero 2",

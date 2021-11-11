@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.components.TypographyStyles
+import net.skyscanner.backpack.demo.components.TypographyStylesStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
 import net.skyscanner.backpack.demo.stories.Calendar2Story
@@ -310,7 +310,7 @@ object ComponentRegistry {
             "With links" story NodeData { Story of R.layout.fragment_text_links },
           )
         ),
-        TAB_TITLE_COMPOSE composeStory { TypographyStyles() },
+        TAB_TITLE_COMPOSE composeStory { TypographyStylesStory() },
       )
     ),
     "Text Field" story NodeData(
