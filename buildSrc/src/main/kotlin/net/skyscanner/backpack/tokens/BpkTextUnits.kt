@@ -29,7 +29,7 @@ interface BpkTextUnits : Map<String, Double>
 
 object BpkTextUnit {
 
-  sealed class Category : BpkParser<BpkTextUnits> {
+  sealed class Category : BpkParser<Map<String, Any>, BpkTextUnits> {
 
     object FontSize : Category() {
       override fun invoke(source: Map<String, Any>): BpkTextUnits =

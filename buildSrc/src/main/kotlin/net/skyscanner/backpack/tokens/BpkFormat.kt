@@ -30,6 +30,14 @@ sealed class BpkFormat<T>: (File) -> T {
       return map.toStringKeyMap()
     }
   }
+
+  object Folder : BpkFormat<List<File>>() {
+
+    override fun invoke(file: File): List<File> =
+      file.listFiles()?.toList().orEmpty()
+
+  }
+
 }
 
 private fun Map<*, *>.toStringKeyMap(): Map<String, Any> {

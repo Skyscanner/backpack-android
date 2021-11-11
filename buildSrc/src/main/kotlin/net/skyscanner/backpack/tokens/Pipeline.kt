@@ -31,7 +31,7 @@ fun <T> Pipeline<File>.readAs(format: BpkFormat<T>) : Pipeline<T> =
 fun <T> Pipeline<T>.saveTo(output: BpkOutput<T>): Pipeline<Boolean> =
   pipeTo(output)
 
-fun <T> Pipeline<Map<String, Any>>.parseAs(parser: BpkParser<T>): Pipeline<T> =
+fun <Input, Output> Pipeline<Input>.parseAs(parser: BpkParser<Input, Output>): Pipeline<Output> =
   pipeTo(parser)
 
 fun <In, Out> Pipeline<In>.transformTo(transformer: BpkTransformer<In, Out>): Pipeline<Out> =

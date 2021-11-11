@@ -21,6 +21,7 @@ import com.google.common.io.Resources
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
 import java.nio.charset.StandardCharsets
@@ -35,18 +36,45 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
   ) : BpkOutput<TypeSpec>() {
 
     override fun invoke(typeSpec: TypeSpec): Boolean {
-      val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-      val copyright = Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
       FileSpec.builder(pkg, typeSpec.name!!)
-        .addComment(copyright, currentYear)
+        .addFileHeader()
         .suppressWarningTypes("RedundantVisibilityModifier", "unused")
-        .addComment("Auto-generated: do not edit")
         .addType(typeSpec)
         .build()
         .writeTo(File(srcDir))
       return true
     }
   }
+
+  data class KotlinExtensionFiles(
+    val srcDir: String,
+    val pkg: String,
+  ) : BpkOutput<List<PropertySpec>>() {
+
+    override fun invoke(properties: List<PropertySpec>): Boolean {
+
+      properties.forEach { property ->
+        FileSpec.builder(pkg, property.name)
+          .addFileHeader()
+          .suppressWarningTypes("RedundantVisibilityModifier", "unused")
+          .addProperty(property)
+          .build()
+          .writeTo(File(srcDir))
+      }
+
+      return true
+    }
+
+  }
+
+}
+
+private fun FileSpec.Builder.addFileHeader() : FileSpec.Builder {
+  val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+  val copyright = Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
+    return this
+      .addComment(copyright, currentYear)
+    .addComment("Auto-generated: do not edit")
 }
 
 private fun FileSpec.Builder.suppressWarningTypes(vararg types: String) : FileSpec.Builder {

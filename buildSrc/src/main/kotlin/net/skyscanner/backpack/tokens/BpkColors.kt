@@ -38,7 +38,7 @@ interface BpkColors : List<BpkColorModel>
 
 object BpkColor {
 
-  object Static : BpkParser<BpkColors> {
+  object Static : BpkParser<Map<String, Any>, BpkColors> {
 
     override fun invoke(source: Map<String, Any>): BpkColors =
       parseColors(source, resolveReferences = false) {
@@ -47,7 +47,7 @@ object BpkColor {
 
   }
 
-  object Semantic : BpkParser<BpkColors> {
+  object Semantic : BpkParser<Map<String, Any>, BpkColors> {
 
     @OptIn(ExperimentalStdlibApi::class)
     override fun invoke(source: Map<String, Any>): BpkColors =
