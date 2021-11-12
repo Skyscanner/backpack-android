@@ -19,13 +19,14 @@
 package net.skyscanner.backpack.demo.data
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.TypographyStylesStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
 import net.skyscanner.backpack.demo.stories.Calendar2Story
@@ -105,7 +106,7 @@ open class NodeItem(
 
 class ComposeNode(
   name: String,
-  val composable: @Composable () -> Unit
+  val composable: @Composable () -> Unit,
 ) : NodeItem(name, { Story() }) {
   override fun createStory(): Story {
     return ComposeStory of getFullyQualifiedName()
@@ -297,13 +298,19 @@ object ComponentRegistry {
     "Star Rating Interactive" story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
     "Switch" story NodeData { Story of R.layout.fragment_switch },
     "Text" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_text },
-        "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
-        "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
-        "With drawables" story NodeData { Story of R.layout.fragment_text_drawables },
-        "With links" story NodeData { Story of R.layout.fragment_text_links }
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_text },
+            "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
+            "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
+            "With drawables" story NodeData { Story of R.layout.fragment_text_drawables },
+            "With links" story NodeData { Story of R.layout.fragment_text_links },
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { TypographyStylesStory() },
       )
     ),
     "Text Field" story NodeData(
@@ -324,7 +331,7 @@ object ComponentRegistry {
             text = "Coming soon",
             modifier = Modifier.padding(16.dp),
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.h5
+            style = BpkTheme.typography.heading2,
           )
         },
         TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
