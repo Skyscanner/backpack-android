@@ -3,6 +3,7 @@ name: Butler
 on:
   pull_request:
     branches: [main]
+    types: [labeled, opened]
 
 defaults:
   run:
