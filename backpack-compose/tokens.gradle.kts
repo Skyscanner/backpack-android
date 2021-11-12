@@ -174,4 +174,9 @@ tasks {
     this.group = group
     dependsOn(generateSmIcons, generateLgIcons)
   }
+
+  val generateEverything by creating {
+    this.group = group
+    dependsOn(generateTokens, generateIcons)
+  }
 }

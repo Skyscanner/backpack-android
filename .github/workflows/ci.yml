@@ -18,9 +18,12 @@ env:
 
 jobs:
 
-  Node:
-    name: Node
+  Java:
+    name: Build
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v2
@@ -29,9 +32,6 @@ jobs:
         run: |
           nvm install
           npm install --global gulp-cli
-
-      - name: NPM CI
-        run: |
           nvm use
           npm ci
 
@@ -43,25 +43,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build
-        run: npm run build
-
-      - name: Tokens check
-        run: |
-          gulp
-          ./scripts/check-no-changes.sh
-
-  Java:
-    name: Java
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           java-version: '11'
@@ -71,7 +53,13 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Build
-        run: ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
+        run: |
+          ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
+
+      - name: Tokens check
+        run: |
+          npm run build
+          ./scripts/check-no-changes.sh
 
       - name: KtLint check
         run: ./gradlew ktlint -PdisablePreDex
@@ -83,7 +71,7 @@ jobs:
         run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
 
   Android:
-    name: Android
+    name: Android tests
     runs-on: macos-latest
 
     strategy:
@@ -142,7 +130,7 @@ jobs:
           script: ./gradlew :Backpack:connected${{ env.config }}AndroidTest
 
   Screenshots:
-    name: Screenshots
+    name: Screenshots tests
     runs-on: macos-latest
 
     strategy:
@@ -224,7 +212,7 @@ jobs:
   Deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: [Node, Java, Android, Screenshots]
+    needs: [Java, Android, Screenshots]
 
     steps:
 
