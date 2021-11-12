@@ -20,6 +20,6 @@ import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.R
 import net.skyscanner.backpack.compose.icons.BpkIcons
 
-public val BpkIcons.Lg.Accessibility1: Painter
+public val BpkIcons.Lg.Accessibility: Painter
   @Composable
   get() = painterResource(id = R.drawable.bpk_accessibility)
