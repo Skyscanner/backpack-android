@@ -19,7 +19,7 @@ env:
 jobs:
 
   Java:
-    name: Java
+    name: Build
     runs-on: ubuntu-latest
 
     strategy:
@@ -27,6 +27,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup NPM
+        run: |
+          nvm install
+          npm install --global gulp-cli
+          nvm use
+          npm ci
+
+      - name: ESLint check
+        run: npm run lint
+
+      - name: Danger check
+        run: npm run danger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK
         uses: actions/setup-java@v2
@@ -37,30 +52,13 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
-      - name: Setup NPM
-        run: |
-          nvm install
-          npm install --global gulp-cli
-          nvm use
-          npm ci
-
       - name: Build
         run: |
-          npm run build
           ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
-
-      - name: ESLint check
-        run: npm run lint
-
-      - name: Danger check
-        run: npm run danger
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tokens check
         run: |
-          gulp
-          ./gradlew :backpack-compose:generateEverything
+          npm run build
           ./scripts/check-no-changes.sh
 
       - name: KtLint check
@@ -73,7 +71,7 @@ jobs:
         run: ./gradlew test${{ env.flavour }}${{ env.config }}UnitTest -PdisablePreDex
 
   Android:
-    name: Android
+    name: Android tests
     runs-on: macos-latest
 
     strategy:
@@ -132,7 +130,7 @@ jobs:
           script: ./gradlew :Backpack:connected${{ env.config }}AndroidTest
 
   Screenshots:
-    name: Screenshots
+    name: Screenshots tests
     runs-on: macos-latest
 
     strategy:
