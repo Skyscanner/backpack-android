@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 public object BpkElevation {
-  public val Base: Dp = 4.dp
+  public val Base: Dp = 5.dp
 
   public val Lg: Dp = 8.dp
 
