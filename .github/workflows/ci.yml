@@ -57,7 +57,7 @@ jobs:
 
     strategy:
       fail-fast: false
-      
+
     steps:
       - uses: actions/checkout@v2
 
@@ -72,6 +72,11 @@ jobs:
 
       - name: Build
         run: ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
+
+      - name: Tokens check
+        run: |
+          ./gradlew :backpack-compose:generateEverything
+          ./scripts/check-no-changes.sh
 
       - name: KtLint check
         run: ./gradlew ktlint -PdisablePreDex
