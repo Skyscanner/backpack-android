@@ -19,14 +19,17 @@
 package net.skyscanner.backpack.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Shapes
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkColors
 import net.skyscanner.backpack.compose.tokens.BpkTypography
@@ -53,6 +56,7 @@ fun BpkTheme(
     MaterialTheme(
       typography = typography.toMaterialTypography(fontFamily),
       colors = colors.toMaterialColors(),
+      shapes = bpkShapes(),
       content = content,
     )
   }
@@ -69,6 +73,13 @@ object BpkTheme {
     get() = LocalBpkColors.current
 
 }
+
+private fun bpkShapes() : Shapes =
+  Shapes(
+    small = RoundedCornerShape(BpkBorderRadius.Sm),
+    medium = RoundedCornerShape(BpkBorderRadius.Md),
+    large = RoundedCornerShape(BpkBorderRadius.Lg),
+  )
 
 private fun BpkTypography.toMaterialTypography(fontFamily: FontFamily) : Typography =
   Typography(
