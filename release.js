@@ -29,6 +29,21 @@ const gradleFiles = [`${__dirname}/build.gradle`];
 const readmeFile = [`${__dirname}/README.md`];
 const versionsFile =  [`${__dirname}/versions.json`]
 
+const compose = "compose"
+const android = "android"
+
+const package_questions = [
+    {
+      type: 'list',
+      name: 'type',
+      message: 'Which type do you want to release?',
+      choices: [
+        android,
+        compose,
+      ],
+    },
+  ];
+
 async function amendGradleFiles(key, version) {
   const options = {
     files: gradleFiles,
@@ -110,14 +125,25 @@ async function versionPrompt(currentVersion) {
 async function release() {
   try {
     childProcess.execSync('./gradlew :Backpack:checkMavenCredentials');
-    const { version } = await versionPrompt(versions.android);
+    const packageResult = await inquirer.prompt(package_questions);
+    const packageType = packageResult.type
+    const packageVersion = (packageType == android) ? versions.android : versions.compose
+    const { version } = await versionPrompt(packageVersion);
     const commonVersion = semver.inc(versions.common, 'minor')
 
-    await amendGradleFiles('BpkAndroidVersion', version);
+    if (packageType == android) {
+      await amendGradleFiles('BpkAndroidVersion', version);
+      await amendVersionsFile('android', version);
+    } else {
+      await amendGradleFiles('BpkComposeVersion', version);
+      await amendVersionsFile('compose', version);
+    }
     await amendGradleFiles('BpkCommonVersion', commonVersion);
-    await amendVersionsFile('android', version);
     await amendVersionsFile('common', commonVersion);
-    await amendReadmeFiles(version);
+
+    if (packageType == android) {
+      await amendReadmeFiles(version);
+    }
 
     const releaseOptions = {
       increment: version,
@@ -137,7 +163,8 @@ async function release() {
     await releaseit(releaseOptions);
     const publishTask = 'publishMavenPublicationToSonatypeRepository';
     const releaseTask = 'closeAndReleaseSonatypeStagingRepository';
-    childProcess.execSync(`./gradlew :backpack-common:${publishTask} :Backpack:${publishTask} ${releaseTask}`);
+    const publishModule = (packageType == android) ? 'Backpack' : 'backpack-compose'
+    childProcess.execSync(`./gradlew :backpack-common:${publishTask} :${publishModule}:${publishTask} ${releaseTask}`);
   } catch (exc) {
     console.error(exc);
     process.exit(1);

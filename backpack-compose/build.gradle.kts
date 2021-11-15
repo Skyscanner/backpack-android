@@ -20,6 +20,12 @@ plugins {
   kotlin("android")
 }
 
+ext {
+  set("artifactId", "backpack-compose")
+  set("artifactVersion", rootProject.ext.get("backpackComposeVersion" as String))
+}
+
+apply(from = "${rootProject.projectDir}/gradle-maven-push.gradle")
 apply(from = "${rootProject.projectDir}/android-configuration.gradle")
 
 android {
