@@ -25,39 +25,9 @@ const releaseit = require('release-it');
 
 const versions = require('./versions.json');
 
-const major = semver.inc(versions.android, 'major');
-const minor = semver.inc(versions.android, 'minor');
-const patch = semver.inc(versions.android, 'patch');
-
 const gradleFiles = [`${__dirname}/build.gradle`];
 const readmeFile = [`${__dirname}/README.md`];
 const versionsFile =  [`${__dirname}/versions.json`]
-
-const questions = [
-  {
-    type: 'list',
-    name: 'version',
-    message: 'What version do you want to release?',
-    choices: [
-      {
-        major,
-      },
-      {
-        minor,
-      },
-      {
-        patch,
-      },
-    ].map(i => {
-      const key = Object.keys(i)[0];
-      return {
-        key,
-        name: `${key} (${i[key]})`,
-        value: `${i[key]}`,
-      };
-    }),
-  },
-];
 
 async function amendGradleFiles(key, version) {
   const options = {
@@ -104,10 +74,43 @@ async function amendVersionsFile(key, version) {
   }
 }
 
+async function versionPrompt(currentVersion) {
+  const major = semver.inc(currentVersion, 'major');
+  const minor = semver.inc(currentVersion, 'minor');
+  const patch = semver.inc(currentVersion, 'patch');
+
+  const questions = [
+    {
+      type: 'list',
+      name: 'version',
+      message: 'What version do you want to release?',
+      choices: [
+        {
+          major,
+        },
+        {
+          minor,
+        },
+        {
+          patch,
+        },
+      ].map(i => {
+        const key = Object.keys(i)[0];
+        return {
+          key,
+          name: `${key} (${i[key]})`,
+          value: `${i[key]}`,
+        };
+      }),
+    },
+  ];
+  return await inquirer.prompt(questions);
+}
+
 async function release() {
   try {
     childProcess.execSync('./gradlew :Backpack:checkMavenCredentials');
-    const { version } = await inquirer.prompt(questions);
+    const { version } = await versionPrompt(versions.android);
     const commonVersion = semver.inc(versions.common, 'minor')
 
     await amendGradleFiles('BpkAndroidVersion', version);
