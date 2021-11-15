@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.compose.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
@@ -25,10 +27,15 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.tokens.BpkColors
 import net.skyscanner.backpack.compose.tokens.BpkTypography
 
 val LocalBpkTypography = staticCompositionLocalOf {
   BpkTypography()
+}
+val LocalBpkColors = staticCompositionLocalOf<BpkColors> {
+  error("Wrap you content with BpkTheme {} to get access to LocalBpkColors")
 }
 
 @Composable
@@ -37,34 +44,63 @@ fun BpkTheme(
   content: @Composable () -> Unit,
 ) {
   val typography = BpkTypography(defaultFontFamily = fontFamily)
+  val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
+
   CompositionLocalProvider(
     LocalBpkTypography provides typography,
+    LocalBpkColors provides colors,
   ) {
-    val materialTypography = Typography(
-      defaultFontFamily = fontFamily,
-      h1 = typography.hero2,
-      h2 = typography.hero4,
-      h3 = typography.hero5,
-      h4 = typography.heading2,
-      h5 = typography.heading3,
-      h6 = typography.heading4,
-      subtitle1 = typography.bodyDefault,
-      subtitle2 = typography.footnote,
-      body1 = typography.bodyDefault,
-      body2 = typography.footnote,
-      button = typography.label2,
-      caption = typography.caption,
-      overline = typography.caption.copy(fontWeight = FontWeight.Bold),
-    )
     MaterialTheme(
-      typography = materialTypography,
+      typography = typography.toMaterialTypography(fontFamily),
+      colors = colors.toMaterialColors(),
       content = content,
     )
   }
 }
 
 object BpkTheme {
+
   val typography: BpkTypography
     @Composable
     get() = LocalBpkTypography.current
+
+  val colors: BpkColors
+    @Composable
+    get() = LocalBpkColors.current
+
 }
+
+private fun BpkTypography.toMaterialTypography(fontFamily: FontFamily) : Typography =
+  Typography(
+    defaultFontFamily = fontFamily,
+    h1 = hero2,
+    h2 = hero4,
+    h3 = hero5,
+    h4 = heading2,
+    h5 = heading3,
+    h6 = heading4,
+    subtitle1 = bodyDefault,
+    subtitle2 = footnote,
+    body1 = bodyDefault,
+    body2 = footnote,
+    button = label2,
+    caption = caption,
+    overline = caption.copy(fontWeight = FontWeight.Bold),
+  )
+
+private fun BpkColors.toMaterialColors(): Colors =
+  Colors(
+    primary = primary,
+    primaryVariant = if (isLight) BpkColor.SkyBlueShade01 else BpkColor.SkyBlueTint01,
+    secondary = BpkColor.Monteverde,
+    secondaryVariant = BpkColor.Glencoe,
+    background = background,
+    surface = backgroundElevation01,
+    error = if (isLight) BpkColor.Panjin else BpkColor.Hillier,
+    onPrimary = BpkColor.White,
+    onSecondary = BpkColor.White,
+    onBackground = textPrimary,
+    onSurface = textPrimary,
+    onError = BpkColor.White,
+    isLight = isLight,
+  )
