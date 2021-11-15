@@ -34,10 +34,10 @@ import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkColors
 import net.skyscanner.backpack.compose.tokens.BpkTypography
 
-val LocalBpkTypography = staticCompositionLocalOf<BpkTypography> {
+private val LocalBpkTypography = staticCompositionLocalOf<BpkTypography> {
   error("Wrap you content with BpkTheme {} to get access to LocalBpkTypography")
 }
-val LocalBpkColors = staticCompositionLocalOf<BpkColors> {
+private val LocalBpkColors = staticCompositionLocalOf<BpkColors> {
   error("Wrap you content with BpkTheme {} to get access to LocalBpkColors")
 }
 
@@ -71,6 +71,10 @@ object BpkTheme {
   val colors: BpkColors
     @Composable
     get() = LocalBpkColors.current
+
+  val shapes: Shapes
+    @Composable
+    get() = MaterialTheme.shapes
 
 }
 
