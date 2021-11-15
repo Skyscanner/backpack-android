@@ -29,6 +29,13 @@ android {
   composeOptions {
     kotlinCompilerExtensionVersion = rootProject.ext.get("compose_version") as String
   }
+
+  packagingOptions {
+    resources.excludes.add("**/attach_hotspot_windows.dll")
+    resources.excludes.add("META-INF/licenses/**")
+    resources.excludes.add("META-INF/AL2.0")
+    resources.excludes.add("META-INF/LGPL2.1")
+  }
 }
 
 dependencies {
