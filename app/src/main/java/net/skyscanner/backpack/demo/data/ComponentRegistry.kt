@@ -18,15 +18,10 @@
 
 package net.skyscanner.backpack.demo.data
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.components.TypographyStylesStory
+import net.skyscanner.backpack.demo.compose.ThemeStory
+import net.skyscanner.backpack.demo.compose.TypographyStylesStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
 import net.skyscanner.backpack.demo.stories.Calendar2Story
@@ -326,14 +321,7 @@ object ComponentRegistry {
     "Sneak peek" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_COMPOSE composeStory {
-          Text(
-            text = "Coming soon",
-            modifier = Modifier.padding(16.dp),
-            textAlign = TextAlign.Center,
-            style = BpkTheme.typography.heading2,
-          )
-        },
+        TAB_TITLE_COMPOSE composeStory { ThemeStory() },
         TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
       )
     ),
