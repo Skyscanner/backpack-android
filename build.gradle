@@ -79,10 +79,12 @@ task clean(type: Delete) {
 
 def BpkAndroidVersion = '33.1.1'
 def BpkCommonVersion = '0.4.0'
+def BpkComposeVersion = '0.0.1'
 
 ext {
   backpackAndroidVersion = "$BpkAndroidVersion"
   backpackCommonVersion = "$BpkCommonVersion"
+  backpackComposeVersion = "$BpkComposeVersion"
   group = "net.skyscanner.backpack"
   dokkaOutputDir = "dokka"
 
