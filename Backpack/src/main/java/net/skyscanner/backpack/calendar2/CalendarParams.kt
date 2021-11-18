@@ -38,8 +38,8 @@ import org.threeten.bp.temporal.WeekFields
  * @param dateAccessibilityText [TextStyle] to format accessibility description of a date cell
  */
 data class CalendarParams(
-  val range: ClosedRange<LocalDate>,
   val selectionMode: SelectionMode,
+  val range: ClosedRange<LocalDate> = LocalDate.now()..LocalDate.now().plusYears(1),
   val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
