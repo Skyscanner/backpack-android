@@ -28,7 +28,6 @@ import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 
@@ -130,7 +129,6 @@ private fun setupCalendar() {
     }
 }
 
-@OptIn(ExperimentalBackpackApi::class)
 private fun setupCalendar2() {
   Espresso.onView(ViewMatchers.withId(R.id.calendar2))
     .check { view, _ ->

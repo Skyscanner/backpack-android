@@ -18,13 +18,11 @@
 
 package net.skyscanner.backpack.calendar2
 
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.LocalDate
 
 /**
  * Describes the current selection in the calendar
  */
-@ExperimentalBackpackApi
 sealed class CalendarSelection {
 
   /**
@@ -35,7 +33,6 @@ sealed class CalendarSelection {
   /**
    * No dates are selected
    */
-  @ExperimentalBackpackApi
   object None : CalendarSelection() {
     override fun contains(date: LocalDate): Boolean =
       false
@@ -44,7 +41,6 @@ sealed class CalendarSelection {
   /**
    * Single [date] is selected
    */
-  @ExperimentalBackpackApi
   data class Single(
     val date: LocalDate,
   ) : CalendarSelection() {
@@ -58,7 +54,6 @@ sealed class CalendarSelection {
    * @param start of range
    * @param end end of range. May be null if user haven't selected the end date yet
    */
-  @ExperimentalBackpackApi
   data class Range(
     val start: LocalDate,
     val end: LocalDate?,

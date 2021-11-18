@@ -37,7 +37,6 @@ import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.junit.Before
 import org.junit.Rule
@@ -47,7 +46,6 @@ import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 
 @RunWith(AndroidJUnit4::class)
-@OptIn(ExperimentalBackpackApi::class)
 class BpkCalendarTest : BpkSnapshotTest() {
 
   private val initialStartDate = LocalDate.of(2019, 1, 2)

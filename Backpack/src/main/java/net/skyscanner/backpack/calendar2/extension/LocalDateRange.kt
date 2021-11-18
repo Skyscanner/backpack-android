@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.calendar2.extension
 
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
 import org.threeten.bp.temporal.TemporalUnit
@@ -28,7 +27,6 @@ import org.threeten.bp.temporal.TemporalUnit
  * @param amount difference between dates in iterator
  * @param unit units of a difference
  */
-@ExperimentalBackpackApi
 fun ClosedRange<LocalDate>.toIterable(
   amount: Long = 1L,
   unit: TemporalUnit = ChronoUnit.DAYS,

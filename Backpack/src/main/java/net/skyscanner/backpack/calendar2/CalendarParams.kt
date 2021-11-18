@@ -20,7 +20,6 @@ package net.skyscanner.backpack.calendar2
 
 import java.text.SimpleDateFormat
 import java.util.Locale
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
@@ -38,7 +37,6 @@ import org.threeten.bp.temporal.WeekFields
  * @param dayOfWeekAccessibilityText [TextStyle] to format accessibility description of days of week in calendar header
  * @param dateAccessibilityText [TextStyle] to format accessibility description of a date cell
  */
-@ExperimentalBackpackApi
 data class CalendarParams(
   val range: ClosedRange<LocalDate>,
   val selectionMode: SelectionMode,
@@ -59,7 +57,6 @@ data class CalendarParams(
   /**
    * Describes the selection behaviour
    */
-  @ExperimentalBackpackApi
   enum class SelectionMode {
 
     /**
@@ -88,7 +85,6 @@ data class CalendarParams(
  * @param label adds the label to the bottom of the cell
  * @param style determines how colouring will work for this cell
  */
-@ExperimentalBackpackApi
 data class CellInfo(
   val disabled: Boolean = false,
   val status: CellStatus? = null,
@@ -104,7 +100,6 @@ data class CellInfo(
 /**
  * Describes the colouring of the cell
  */
-@ExperimentalBackpackApi
 enum class CellStatus {
 
   /**
@@ -131,7 +126,6 @@ enum class CellStatus {
 /**
  * Describes the colouring behaviour of the cell
  */
-@ExperimentalBackpackApi
 enum class CellStatusStyle {
 
   /**
