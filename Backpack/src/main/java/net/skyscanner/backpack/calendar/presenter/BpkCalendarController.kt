@@ -45,6 +45,7 @@ import net.skyscanner.backpack.calendar.view.CalendarUpdateCallback
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 
+@Deprecated("Use Calendar2 instead")
 abstract class BpkCalendarController(
   open val selectionType: SelectionType = SelectionType.RANGE,
   val currentDateProvider: CurrentDateProvider = LocalDateProvider,
@@ -152,14 +153,17 @@ abstract class BpkCalendarController(
   fun updateContent() = updateContentCallback?.updateContent()
 }
 
+@Deprecated("Use Calendar2 instead")
 enum class SelectionType {
   RANGE,
   SINGLE
 }
 
+@Deprecated("Use Calendar2 instead")
 typealias CurrentDateProvider = () -> LocalDate
 
 @VisibleForTesting
+@Deprecated("Use Calendar2 instead")
 private object LocalDateProvider : CurrentDateProvider {
 
   override fun invoke(): LocalDate = LocalDate.now()

@@ -21,10 +21,13 @@ package net.skyscanner.backpack.calendar.model
 import java.io.Serializable
 import org.threeten.bp.LocalDate
 
+@Deprecated("Use Calendar2 instead")
 open class CalendarSelection : Serializable
 
+@Deprecated("Use Calendar2 instead")
 data class SingleDay(val selectedDay: LocalDate) : CalendarSelection()
 
+@Deprecated("Use Calendar2 instead")
 data class CalendarRange(var start: LocalDate? = null, var end: LocalDate? = null) : CalendarSelection() {
   internal val isOnTheSameDate: Boolean
     get() = isRange && start == end
@@ -32,6 +35,7 @@ data class CalendarRange(var start: LocalDate? = null, var end: LocalDate? = nul
   internal val isRange: Boolean
     get() = start != null && end != null
 
+  @Deprecated("Use Calendar2 instead")
   enum class DrawType {
     NONE, RANGE, SELECTED
   }

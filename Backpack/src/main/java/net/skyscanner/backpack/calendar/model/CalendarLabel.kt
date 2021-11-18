@@ -18,11 +18,13 @@
 
 package net.skyscanner.backpack.calendar.model
 
+@Deprecated("Use Calendar2 instead")
 data class CalendarLabel(
   val text: String,
   val style: Style,
 ) {
 
+  @Deprecated("Use Calendar2 instead")
   enum class Style {
     PriceLow,
     PriceMedium,

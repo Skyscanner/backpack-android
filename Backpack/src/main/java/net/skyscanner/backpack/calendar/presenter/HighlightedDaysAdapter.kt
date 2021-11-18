@@ -27,8 +27,10 @@ import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 
+@Deprecated("Use Calendar2 instead")
 typealias DateFormatter = (LocalDate) -> String
 
+@Deprecated("Use Calendar2 instead")
 open class HighlightedDaysAdapter(
   val context: Context,
   val locale: Locale,
@@ -71,6 +73,7 @@ open class HighlightedDaysAdapter(
     return "$month-$year"
   }
 
+  @Deprecated("Use Calendar2 instead")
   data class HighlightedDay(
     val date: LocalDate,
     val description: String,

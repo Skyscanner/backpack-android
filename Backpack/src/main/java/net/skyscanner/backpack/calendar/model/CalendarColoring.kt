@@ -28,15 +28,18 @@ import net.skyscanner.backpack.calendar.model.CalendarCellStyle.TextStyle.Light
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 import org.threeten.bp.LocalDate
 
+@Deprecated("Use Calendar2 instead")
 data class CalendarColoring(
   val coloredBuckets: Set<ColoredBucket>,
 )
 
+@Deprecated("Use Calendar2 instead")
 data class ColoredBucket(
   val calendarCellStyle: CalendarCellStyle,
   val days: Set<LocalDate>,
 )
 
+@Deprecated("Use Calendar2 instead")
 sealed class CalendarCellStyle {
 
   /**
@@ -45,6 +48,7 @@ sealed class CalendarCellStyle {
    *  [Light] should be used to indicate the background is light and black text should be used.
    *  [Dark] should be used to indicate the background is dark and white text should be used.
    */
+  @Deprecated("Use Calendar2 instead")
   enum class TextStyle {
     Light,
     Dark
@@ -55,6 +59,7 @@ sealed class CalendarCellStyle {
    * a date which has a comparatively low price among the dates in
    * the calendar.
    */
+  @Deprecated("Use Calendar2 instead")
   object Positive : CalendarCellStyle() {
     override fun color(context: Context) =
       context.getColor(R.color.__calendarCellStylePositiveColor)
@@ -65,6 +70,7 @@ sealed class CalendarCellStyle {
    * a date which has a comparatively average price among the dates in
    * the calendar.
    */
+  @Deprecated("Use Calendar2 instead")
   object Neutral : CalendarCellStyle() {
     override fun color(context: Context) =
       context.getColor(R.color.__calendarCellStyleNeutralColor)
@@ -75,6 +81,7 @@ sealed class CalendarCellStyle {
    * a date which has a comparatively high price among the dates in
    * the calendar.
    */
+  @Deprecated("Use Calendar2 instead")
   object Negative : CalendarCellStyle() {
     override fun color(context: Context) =
       context.getColor(R.color.__calendarCellStyleNegativeColor)
@@ -97,6 +104,7 @@ sealed class CalendarCellStyle {
    *
    * @see HighlightedDaysAdapter
    */
+  @Deprecated("Use Calendar2 instead")
   object Hightlight : CalendarCellStyle() {
     override fun color(context: Context) =
       context.getColor(R.color.__calendarHighlightedDayDot)
@@ -105,6 +113,7 @@ sealed class CalendarCellStyle {
   /**
    * A custom cell style.
    */
+  @Deprecated("Use Calendar2 instead")
   data class Custom(
     @ColorInt private val color: Int,
     private val textStyle: TextStyle? = null,

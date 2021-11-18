@@ -47,6 +47,7 @@ import net.skyscanner.backpack.calendar.view.CalendarView
 import net.skyscanner.backpack.calendar.view.WeekdayHeaderView
 import net.skyscanner.backpack.util.unsafeLazy
 
+@Deprecated("Use Calendar2 instead")
 open class BpkCalendar @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
