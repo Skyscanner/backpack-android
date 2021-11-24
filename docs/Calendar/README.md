@@ -14,6 +14,8 @@ implementation 'com.jakewharton.threetenabp:threetenabp:$latestVersion'
 
 ## Usage
 
+> **_NOTE:_**  This component is deprecated and will be removed in the future.
+
 Be sure to initialize the `ThreeTenABP` library according to their [usage guidelines](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md) in your `Application`'s context:
 
 ```Kotlin
