@@ -1,7 +1,7 @@
 package net.skyscanner.backpack
 
 import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -13,22 +13,14 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.rule.ActivityTestRule
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.internal.TestNameDetector
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.demo.MainActivity
-import org.junit.Rule
 
 abstract class BpkComposeTest {
 
-  private lateinit var activity: AppCompatActivity
-
-  @get:Rule
-  var activityRule: ActivityTestRule<MainActivity> =
-    ActivityTestRule(MainActivity::class.java)
-
   fun composable(
+    activity: ComponentActivity,
     width: Dp = 100.dp,
     height: Dp = 100.dp,
     variant: BpkTestVariant = BpkTestVariant.current,
