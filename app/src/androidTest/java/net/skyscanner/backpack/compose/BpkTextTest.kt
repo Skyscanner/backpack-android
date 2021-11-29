@@ -7,7 +7,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkTextTest : BpkComposeTest() {
+class BpkTextTest : BpkComposeTest {
 
   @Test
   fun default() = composed {
