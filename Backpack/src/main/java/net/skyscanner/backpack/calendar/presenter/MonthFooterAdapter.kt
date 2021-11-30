@@ -60,6 +60,7 @@ import android.view.View
  *
  * @see [BpkCalendarController.monthFooterAdapter]
  */
+@Deprecated("Use Calendar2 instead")
 interface MonthFooterAdapter {
   /**
    * Indicate that a month/year combination has a footer view.

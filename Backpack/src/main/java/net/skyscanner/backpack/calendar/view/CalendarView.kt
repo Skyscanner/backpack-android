@@ -43,10 +43,12 @@ import android.widget.ListView
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
 import net.skyscanner.backpack.calendar.presenter.MonthAdapter
 
+@Deprecated("Use Calendar2 instead")
 interface CalendarUpdateCallback {
   fun updateContent()
 }
 
+@Deprecated("Use Calendar2 instead")
 interface BpkCalendarScrollListener {
   fun onScroll(
     view: AbsListView,

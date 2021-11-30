@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.calendar2
 
 import kotlinx.coroutines.flow.StateFlow
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 
 /**
  * Calendar public API.
@@ -27,7 +26,6 @@ import net.skyscanner.backpack.util.ExperimentalBackpackApi
  * It works like a state machine – calling each method updates its state in background and emits new state to [state].
  * The state could also be updated when some UI event (such as date selection) happens.
  */
-@ExperimentalBackpackApi
 interface CalendarComponent {
 
   /**

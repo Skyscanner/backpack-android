@@ -33,6 +33,7 @@ import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 
+@Deprecated("Use Calendar2 instead")
 @SuppressLint("ViewConstructor") // this view is only instantiated in code
 open class HighlightedDaysMonthFooter(
   context: Context,

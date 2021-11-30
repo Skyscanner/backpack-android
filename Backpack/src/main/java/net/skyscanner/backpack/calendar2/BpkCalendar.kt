@@ -26,10 +26,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.plus
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
@@ -37,14 +35,12 @@ import net.skyscanner.backpack.calendar2.list.CalendarAdapter
 import net.skyscanner.backpack.calendar2.list.CalendarLayoutManager
 import net.skyscanner.backpack.calendar2.list.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
 import org.threeten.bp.YearMonth
 
-@ExperimentalBackpackApi
 @OptIn(InternalBackpackApi::class)
 class BpkCalendar private constructor(
   context: Context,
@@ -66,7 +62,7 @@ class BpkCalendar private constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-  ) : this(context, attrs, defStyleAttr, GlobalScope + CalendarDispatchers.Main)
+  ) : this(context, attrs, defStyleAttr, CoroutineScope(CalendarDispatchers.Main))
 
   init {
     inflate(context, R.layout.view_bpk_calendar_2, this)

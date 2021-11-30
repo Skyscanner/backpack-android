@@ -36,13 +36,11 @@ import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.toast.BpkToast
-import net.skyscanner.backpack.util.ExperimentalBackpackApi
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
 
-@OptIn(ExperimentalBackpackApi::class)
 class Calendar2Story : Story() {
 
   enum class Type {
