@@ -22,13 +22,30 @@ import android.content.Context
 import android.graphics.Canvas
 import android.os.Looper
 import android.view.View
+import android.view.ViewGroup
+import androidx.activity.compose.setContent
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.DP
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ProvidedValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.takeOrElse
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
+import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.demo.MainActivity
+import org.junit.Assume
 
 open class BpkSnapshotTest {
 
@@ -71,6 +88,49 @@ open class BpkSnapshotTest {
     val testClass = TestNameDetector.getTestClass()
     val testName = TestNameDetector.getTestName()
     return AsyncSnapshot(testClass, testName)
+  }
+
+  protected fun composed(
+    size: IntSize = IntSize(width, height),
+    background: Color = Color.Unspecified,
+    vararg providers: ProvidedValue<*>,
+    content: @Composable () -> Unit,
+  ) {
+
+    // we don't run Compose tests in Themed variant – Compose uses it own theming engine
+    Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
+
+    val screenshotName = getScreenshotName()
+
+    ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+      scenario.onActivity { activity ->
+        with(activity) {
+          setContent {
+            BpkTheme {
+              CompositionLocalProvider(*providers) {
+                Surface(
+                  modifier = Modifier
+                    .size(size.width.dp, size.height.dp)
+                    .background(background.takeOrElse { BpkTheme.colors.background }),
+                  content = { content() },
+                )
+              }
+            }
+          }
+
+          val view = (window.decorView as ViewGroup).getChildAt(0)
+
+          ViewHelpers.setupView(view)
+            .setExactWidthDp(size.width)
+            .setExactHeightDp(size.height)
+            .layout()
+
+          Screenshot.snap(view)
+            .setName(screenshotName)
+            .record()
+        }
+      }
+    }
   }
 
   inner class AsyncSnapshot(private val testClass: String, private val testName: String) {
