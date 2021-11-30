@@ -1,5 +1,9 @@
 # Unreleased
 
+**Updated:**
+- Calendar 1 is deprecated in a favour of Calendar 2.
+- Calendar 2 is not experimental anymore.
+
 **Fixed:**
 
 - Updated letter spacing logic
