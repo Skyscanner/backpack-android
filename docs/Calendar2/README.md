@@ -14,6 +14,8 @@ implementation 'com.jakewharton.threetenabp:threetenabp:$latestVersion'
 
 ## Usage
 
+> **_NOTE:_**  The docs for the previous version of Calendar is available [here](https://github.com/Skyscanner/backpack-android/blob/main/docs/Calendar/README.md).
+
 Be sure to initialize the `ThreeTenABP` library according to their [usage guidelines](https://github.com/JakeWharton/ThreeTenABP/blob/master/README.md) in your `Application`'s context:
 
 ```Kotlin
@@ -35,6 +37,8 @@ The Calendar component can be used in both XML and Kotlin, but requires the basi
 Both single and range selection are supported.
 
 Example of a calendar declaration in XML
+
+> **_NOTE:_**  Note that the package name of new Calendar has been changed to `net.skyscanner.backpack.calendar2`.
 
 ```xml
 <net.skyscanner.backpack.calendar2.BpkCalendar
