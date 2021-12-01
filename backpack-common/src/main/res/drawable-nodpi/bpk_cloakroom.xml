@@ -1,5 +1,5 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
-    <path android:pathData="M7.5 6.39A4.41 4.41 0 0 1 12 2a4.41 4.41 0 0 1 4.5 4.39 4.7 4.7 0 0 1-1.63 3.48A6.03 6.03 0 0 1 13 11.03v1.7a1 1 0 0 1-2 0v-2.42a1 1 0 0 1 .86-.98 3.56 3.56 0 0 0 1.65-.88 2.77 2.77 0 0 0 .99-2.06A2.43 2.43 0 0 0 12 3.95 2.43 2.43 0 0 0 9.5 6.4a1 1 0 0 1-2 0z" android:fillColor="@color/bpkTextPrimary"/>
-    <path android:pathData="m12 13.78 7.89 6.25a.63.63 0 0 1-.15.02H4.26c-.05 0-.1 0-.15-.02zm0-2.51L2.73 18.6C1.22 19.81 2.2 22 4.26 22h15.48c2.06 0 3.04-2.19 1.52-3.39z" android:fillColor="@color/bpkTextPrimary"/>
-    <path android:pathData="M5.84 16.15 12 11.27l6.16 4.88z" android:fillColor="@color/bpkTextPrimary"/>
+    <path android:pathData="M7.5 6.39A4.41 4.41 0 0 1 12 2a4.41 4.41 0 0 1 4.5 4.39 4.7 4.7 0 0 1-1.63 3.48A6.03 6.03 0 0 1 13 11.03v1.7a1 1 0 0 1-2 0v-2.42a1 1 0 0 1 0.86-0.98 3.56 3.56 0 0 0 1.65-0.88 2.77 2.77 0 0 0 0.99-2.06A2.43 2.43 0 0 0 12 3.95 2.43 2.43 0 0 0 9.5 6.4a1 1 0 0 1-2 0z" android:fillColor="@color/bpkTextPrimary"/>
+    <path android:pathData="M12 13.78l7.89 6.25a0.63 0.63 0 0 1-0.15 0.02H4.26c-0.05 0-0.1 0-0.15-0.02z m0-2.51L2.73 18.6C1.22 19.81 2.2 22 4.26 22h15.48c2.06 0 3.04-2.19 1.52-3.39z" android:fillColor="@color/bpkTextPrimary"/>
+    <path android:pathData="M5.84 16.15L12 11.27l6.16 4.88z" android:fillColor="@color/bpkTextPrimary"/>
 </vector>
