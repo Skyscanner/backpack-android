@@ -6,6 +6,7 @@
 
 **Fixed:**
 
+- Updated text secondary dark colour to `skyGrayTint04`
 - Updated letter spacing logic
 
 

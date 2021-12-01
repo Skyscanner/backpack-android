@@ -89,7 +89,7 @@ public class BpkColors private constructor(
       systemRed: Color = BpkColor.Panjin,
       textPrimary: Color = BpkColor.White,
       textQuaternary: Color = BpkColor.BlackTint06,
-      textSecondary: Color = BpkColor.BlackTint06,
+      textSecondary: Color = BpkColor.SkyGrayTint04,
       textTertiary: Color = BpkColor.BlackTint06
     ) = BpkColors(
         isLight = false,
