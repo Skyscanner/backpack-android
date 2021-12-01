@@ -1,12 +1,24 @@
 # Backpack Android changelog
 
 [Unreleased changes](./UNRELEASED.md).
+
+# 33.2.0
+
+**Updated:**
+- Calendar 1 is deprecated in a favour of Calendar 2.
+- Calendar 2 is not experimental anymore.
+
+**Fixed:**
+
+- Updated text secondary dark colour to `skyGrayTint04`
+- Updated letter spacing logic
+
 # 33.1.1
 
 **Added:**
 
   - New icon set "Self-serve pick-up", with sm and lg icons.
-  
+
 # 33.1.0
 
 **Added:**

@@ -1,15 +1,5 @@
 # Unreleased
 
-**Updated:**
-- Calendar 1 is deprecated in a favour of Calendar 2.
-- Calendar 2 is not experimental anymore.
-
-**Fixed:**
-
-- Updated text secondary dark colour to `skyGrayTint04`
-- Updated letter spacing logic
-
-
 > Place your changes below this line.
 
 ## How to write a good changelog entry
