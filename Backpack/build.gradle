@@ -18,16 +18,14 @@
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'org.jetbrains.dokka'
 
 ext {
   artifactId = "backpack-android"
   artifactVersion = rootProject.ext.backpackAndroidVersion
 }
 
-apply from: 'dokka.gradle'
 apply from: "$rootProject.projectDir/gradle-maven-push.gradle"
-
+apply from: "$rootProject.projectDir/dokka.gradle"
 apply from: "$rootProject.projectDir/android-configuration.gradle"
 
 android {
@@ -57,29 +55,6 @@ dependencies {
 
   api project(':backpack-common')
   lintPublish project(':backpack-lint')
-}
-
-import org.jetbrains.dokka.gradle.DokkaTask
-
-task generateDokkaDocs(type: DokkaTask) {
-  def version = rootProject.ext.backpackAndroidVersion
-
-  configure {
-    outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/versions/$version")
-
-    dokkaSourceSets {
-      named("main") {
-        moduleName = rootProject.name
-        reportUndocumented = false
-        sourceLink {
-          dir = "${project.projectDir}/src/main/java"
-          remoteUrl = new URL("https://github.com/Skyscanner/backpack-android/tree/main/${project.name}/src/main/java")
-          remoteLineSuffix = "#L"
-        }
-      }
-    }
-  }
-  dependsOn("generateDokkaStatics")
 }
 
 apply from: "$rootProject.projectDir/android-configuration-check.gradle"

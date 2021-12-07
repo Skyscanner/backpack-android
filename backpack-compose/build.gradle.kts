@@ -26,6 +26,7 @@ ext {
 }
 
 apply(from = "${rootProject.projectDir}/gradle-maven-push.gradle")
+apply(from = "${rootProject.projectDir}/dokka.gradle")
 apply(from = "${rootProject.projectDir}/android-configuration.gradle")
 
 android {
