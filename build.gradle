@@ -132,4 +132,18 @@ ext {
 
 tasks.dokkaHtmlMultiModule.configure {
   outputDirectory = new File(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir")
+  doLast {
+    createNewFile(rootProject.rootDir, "$rootProject.ext.dokkaOutputDir/404.html").text = """<!DOCTYPE html>
+<html>
+  <meta http-equiv="refresh" content="1;url=/android" />
+</html>
+"""
+  }
+}
+
+static File createNewFile(File parent, String path) {
+  def file = new File(parent, path)
+  file.parentFile.mkdirs()
+  file.createNewFile()
+  return file
 }
