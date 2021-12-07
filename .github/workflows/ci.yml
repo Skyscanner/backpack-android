@@ -232,7 +232,7 @@ jobs:
 
       - name: Build Dokka docs
         if: contains(github.ref, 'refs/tags/')
-        run: ./gradlew :Backpack:generateDokkaDocs
+        run: ./gradlew dokkaHtmlMultiModule
 
       - name: Deploy Dokka docs
         uses: peaceiris/actions-gh-pages@v3
