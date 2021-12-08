@@ -93,6 +93,7 @@ object DocsRegistry {
     ViewScreenshot("Text - View - Default", "default"),
     ViewScreenshot("Text - View - Emphasized", "emphasized"),
     ViewScreenshot("Text - View - Heavy", "heavy"),
+    ComposeScreenshot("Text - Compose", "compose"),
     ViewScreenshot("Text Field - Default", "default"),
     ViewScreenshot("Text Field - With labels", "labels"),
     ViewScreenshot("Text Spans", "default"),
@@ -112,7 +113,7 @@ fun ComposeScreenshot(
   screenshotName: String,
   setup: (() -> Unit)? = null,
 ): Array<Any?> =
-  arrayOf(name, screenshotName, "compose", setup)
+  arrayOf(name, screenshotName, "docs/compose", setup)
 
 fun ViewScreenshot(
   name: String,
