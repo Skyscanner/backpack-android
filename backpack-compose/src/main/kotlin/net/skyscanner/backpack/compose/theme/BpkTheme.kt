@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Colors
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalElevationOverlay
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Shapes
@@ -53,6 +54,7 @@ fun BpkTheme(
   CompositionLocalProvider(
     LocalBpkTypography provides typography,
     LocalBpkColors provides colors,
+    LocalContentColor provides colors.textPrimary,
     LocalElevationOverlay provides null,
   ) {
     MaterialTheme(

@@ -33,6 +33,7 @@ import org.junit.runners.Parameterized
 open class GenerateScreenshots(
   private val componentPath: String,
   private val screenshotName: String,
+  private val path: String,
   private val setup: (() -> Unit)?
 ) {
 
@@ -86,6 +87,6 @@ open class GenerateScreenshots(
     } else {
       screenshotFullName
     }
-    screenGrab.takeScreenshot(name)
+    screenGrab.takeScreenshot(name, path)
   }
 }

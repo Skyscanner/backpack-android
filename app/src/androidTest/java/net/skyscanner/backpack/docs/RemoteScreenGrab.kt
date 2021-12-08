@@ -27,8 +27,8 @@ import java.net.URL
 class RemoteScreenGrab(
   private val serverIp: String
 ) {
-  fun takeScreenshot(name: String) {
-    val url = URL("http://$serverIp:8888?name=$name")
+  fun takeScreenshot(name: String, path: String) {
+    val url = URL("http://$serverIp:8888?name=$name&path=$path")
     val con = url.openConnection() as HttpURLConnection
     con.requestMethod = "POST"
     try {
