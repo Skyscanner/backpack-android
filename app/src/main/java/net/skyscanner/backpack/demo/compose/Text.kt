@@ -31,12 +31,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
-import net.skyscanner.backpack.demo.BackpackDemoTheme
 
 @Preview
 @Composable
 fun HeroStyleStory() {
-  BackpackDemoTheme {
+  BackpackPreview {
     val styles = listOf(
       BpkTheme.typography.hero1 to "Hero 1",
       BpkTheme.typography.hero2 to "Hero 2",
@@ -51,7 +50,7 @@ fun HeroStyleStory() {
 @Preview
 @Composable
 fun HeadingStyleStory() {
-  BackpackDemoTheme {
+  BackpackPreview {
     val styles = listOf(
       BpkTheme.typography.heading1 to "Heading 1",
       BpkTheme.typography.heading2 to "Heading 2",
@@ -66,7 +65,7 @@ fun HeadingStyleStory() {
 @Preview
 @Composable
 fun BodyStyleStory() {
-  BackpackDemoTheme {
+  BackpackPreview {
     val styles = listOf(
       BpkTheme.typography.subheading to "Subheading",
       BpkTheme.typography.bodyLongform to "Body Longform",
@@ -95,7 +94,7 @@ private fun TypographyStylesStory(styles: List<Pair<TextStyle, String>>) {
 @Preview
 @Composable
 fun DefaultText() {
-  BackpackDemoTheme {
+  BackpackPreview {
     BpkText(text = "Sample")
   }
 }
@@ -103,7 +102,7 @@ fun DefaultText() {
 @Preview
 @Composable
 fun ColoredText() {
-  BackpackDemoTheme {
+  BackpackPreview {
     BpkText(
       text = "Sample",
       color = BpkTheme.colors.primary,
@@ -114,7 +113,7 @@ fun ColoredText() {
 @Preview
 @Composable
 fun StyledText() {
-  BackpackDemoTheme {
+  BackpackPreview {
     BpkText(
       text = "Sample",
       style = BpkTheme.typography.heading4,
@@ -125,7 +124,7 @@ fun StyledText() {
 @Preview
 @Composable
 fun AnnotatedText() {
-  BackpackDemoTheme {
+  BackpackPreview {
     BpkText(
       text = buildAnnotatedString {
         append("Sample ")
