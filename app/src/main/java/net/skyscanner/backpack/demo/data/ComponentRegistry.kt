@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
 import net.skyscanner.backpack.demo.compose.TypographyStylesStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
@@ -160,18 +161,22 @@ object ComponentRegistry {
       )
     ),
     "Card" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_card },
-        "Without padding" story NodeData { Story of R.layout.fragment_card_without_padding },
-        "Selected" story NodeData { Story of R.layout.fragment_card_selected },
-        "Corner style large" story NodeData { Story of R.layout.fragment_card_cornerstyle_large },
-        "With divider" story NodeData { Story of R.layout.fragment_card_with_divider },
-        "With divider arranged vertically" story NodeData { Story of R.layout.fragment_card_with_divider_vertical },
-        "With divider without padding" story NodeData { Story of R.layout.fragment_card_with_divider_no_padding },
-        "With divider and corner style large" story NodeData {
-          Story of R.layout.fragment_card_with_divider_cornerstyle_large
-        }
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_card },
+            "Without padding" story NodeData { Story of R.layout.fragment_card_without_padding },
+            "Selected" story NodeData { Story of R.layout.fragment_card_selected },
+            "Corner style large" story NodeData { Story of R.layout.fragment_card_cornerstyle_large },
+            "With divider" story NodeData { Story of R.layout.fragment_card_with_divider },
+            "With divider arranged vertically" story NodeData { Story of R.layout.fragment_card_with_divider_vertical },
+            "With divider without padding" story NodeData { Story of R.layout.fragment_card_with_divider_no_padding },
+            "With divider and corner style large" story NodeData { Story of R.layout.fragment_card_with_divider_cornerstyle_large }
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { CardStory() },
       )
     ),
     "Calendar" story NodeData(
