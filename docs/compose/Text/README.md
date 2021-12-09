@@ -6,27 +6,22 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-Example of a text composable with `label1` style and secondary text color
+Example of a text composable with `label1` style and primary color
 
 ```Kotlin
-import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
-@Composable
-fun FlightText() {
-  BpkText(
-    text = "Flights to Edinburgh",
-    style = BpkTheme.typography.label1,
-    color = BpkTheme.colors.textSecondary,
-  )
-}
+BpkText(
+  text = "Flights to Edinburgh",
+  style = BpkTheme.typography.label1,
+  color = BpkTheme.colors.primary,
+)
 ```
 
 Example of a text composable with annotated text
 
 ```Kotlin
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -37,7 +32,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 BpkText(
   text = buildAnnotatedString {
     append("Sample ")
-    withStyle(style = SpanStyle(color = BpkTheme.colors.textSecondary)) {
+    withStyle(style = SpanStyle(color = BpkTheme.colors.primary)) {
       append("Text")
     }
   }

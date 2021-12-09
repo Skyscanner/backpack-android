@@ -29,7 +29,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
 fun BpkText(
@@ -62,7 +61,7 @@ fun BpkText(
 fun BpkText(
   text: AnnotatedString,
   modifier: Modifier = Modifier,
-  color: Color = BpkTheme.colors.textPrimary,
+  color: Color = Color.Unspecified,
   textDecoration: TextDecoration? = null,
   textAlign: TextAlign? = null,
   overflow: TextOverflow = TextOverflow.Clip,

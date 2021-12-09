@@ -106,7 +106,7 @@ fun ColoredText() {
   BackpackDemoTheme {
     BpkText(
       text = "Sample",
-      color = BpkTheme.colors.textSecondary,
+      color = BpkTheme.colors.primary,
     )
   }
 }
@@ -129,7 +129,7 @@ fun AnnotatedText() {
     BpkText(
       text = buildAnnotatedString {
         append("Sample ")
-        withStyle(style = SpanStyle(color = BpkTheme.colors.textSecondary)) {
+        withStyle(style = SpanStyle(color = BpkTheme.colors.primary)) {
           append("Text")
         }
       }

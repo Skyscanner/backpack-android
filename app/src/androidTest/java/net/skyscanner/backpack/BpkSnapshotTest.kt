@@ -44,6 +44,7 @@ import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.MainActivity
 import org.junit.Assume
 
@@ -106,7 +107,7 @@ open class BpkSnapshotTest {
       scenario.onActivity { activity ->
         with(activity) {
           setContent {
-            BpkTheme {
+            BackpackDemoTheme {
               CompositionLocalProvider(*providers) {
                 Surface(
                   modifier = Modifier
