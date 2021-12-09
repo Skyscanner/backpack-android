@@ -41,7 +41,6 @@ import androidx.compose.material.Snackbar
 import androidx.compose.material.Switch
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
-import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
@@ -57,6 +56,7 @@ import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.Flight
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -75,7 +75,7 @@ fun ThemeStory() {
   ) {
 
     TopAppBar {
-      Text(
+      BpkText(
         modifier = Modifier.padding(horizontal = BpkSpacing.Base),
         text = "Top app bar",
         style = BpkTheme.typography.heading5,
@@ -89,43 +89,43 @@ fun ThemeStory() {
           selected = i == selectedTabIndex,
           onClick = { selectedTabIndex = i },
         ) {
-          Text(text = "Tab ${i + 1}")
+          BpkText(text = "Tab ${i + 1}")
         }
       }
     }
 
     Button(onClick = { }) {
-      Text(text = "Primary button")
+      BpkText(text = "Primary button")
     }
 
     OutlinedButton(onClick = { }) {
-      Text(text = "Outlined button")
+      BpkText(text = "Outlined button")
     }
 
     TextButton(onClick = { }) {
-      Text(text = "Text button")
+      BpkText(text = "Text button")
     }
 
     var showAlertDialog by remember { mutableStateOf(false) }
     Button(onClick = { showAlertDialog = true }) {
-      Text(text = "Alert dialog")
+      BpkText(text = "Alert dialog")
     }
     if (showAlertDialog) {
       AlertDialog(
         onDismissRequest = { showAlertDialog = false },
-        title = { Text(text = "Alert dialog") },
+        title = { BpkText(text = "Alert dialog") },
         confirmButton = {
           TextButton(onClick = { showAlertDialog = false }) {
-            Text(text = "OK")
+            BpkText(text = "OK")
           }
         },
         dismissButton = {
           TextButton(onClick = { showAlertDialog = false }) {
-            Text(text = "Cancel")
+            BpkText(text = "Cancel")
           }
         },
         text = {
-          Text(text = stringResource(id = R.string.stub))
+          BpkText(text = stringResource(id = R.string.stub))
         },
       )
     }
@@ -151,20 +151,20 @@ fun ThemeStory() {
     }
 
     ExtendedFloatingActionButton(
-      text = { Text(text = "FloatingActionButton") },
+      text = { BpkText(text = "FloatingActionButton") },
       onClick = { },
     )
 
     Card(elevation = BpkElevation.Lg) {
-      Text(modifier = Modifier.padding(all = BpkSpacing.Base), text = "Card")
+      BpkText(modifier = Modifier.padding(all = BpkSpacing.Base), text = "Card")
     }
 
     Snackbar {
-      Text(text = "Snackbar")
+      BpkText(text = "Snackbar")
     }
 
     BottomAppBar {
-      Text(text = "Bottom app bar")
+      BpkText(text = "Bottom app bar")
     }
   }
 }

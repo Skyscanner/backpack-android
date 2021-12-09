@@ -16,11 +16,14 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose
+package net.skyscanner.backpack.compose.text
 
-import androidx.compose.material.Text
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.demo.compose.AnnotatedText
+import net.skyscanner.backpack.demo.compose.ColoredText
+import net.skyscanner.backpack.demo.compose.DefaultText
+import net.skyscanner.backpack.demo.compose.StyledText
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -29,6 +32,21 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun default() = composed {
-    Text(text = "Sample")
+    DefaultText()
+  }
+
+  @Test
+  fun colored() = composed {
+    ColoredText()
+  }
+
+  @Test
+  fun styled() = composed {
+    StyledText()
+  }
+
+  @Test
+  fun annotated() = composed {
+    AnnotatedText()
   }
 }

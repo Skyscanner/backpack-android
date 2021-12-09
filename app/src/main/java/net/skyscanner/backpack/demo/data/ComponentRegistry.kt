@@ -20,8 +20,10 @@ package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.compose.BodyStyleStory
+import net.skyscanner.backpack.demo.compose.HeadingStyleStory
+import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
-import net.skyscanner.backpack.demo.compose.TypographyStylesStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
 import net.skyscanner.backpack.demo.stories.Calendar2Story
@@ -305,7 +307,14 @@ object ComponentRegistry {
             "With links" story NodeData { Story of R.layout.fragment_text_links },
           )
         ),
-        TAB_TITLE_COMPOSE composeStory { TypographyStylesStory() },
+        TAB_TITLE_COMPOSE story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Hero" composeStory { HeroStyleStory() },
+            "Heading" composeStory { HeadingStyleStory() },
+            "Body" composeStory { BodyStyleStory() },
+          )
+        ),
       )
     ),
     "Text Field" story NodeData(
