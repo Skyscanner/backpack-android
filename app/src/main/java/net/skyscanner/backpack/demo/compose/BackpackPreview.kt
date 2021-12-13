@@ -41,7 +41,7 @@ fun BackpackPreview(
       Surface(
         modifier = modifier
           .background(background.takeOrElse { BpkTheme.colors.background }),
-        content = { content() },
+        content = content,
       )
     }
   }

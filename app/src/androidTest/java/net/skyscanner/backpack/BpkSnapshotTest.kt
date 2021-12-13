@@ -106,7 +106,7 @@ open class BpkSnapshotTest {
               modifier = Modifier.size(size.width.dp, size.height.dp),
               background = background,
               providers = providers,
-              content = { content() }
+              content = content,
             )
           }
 

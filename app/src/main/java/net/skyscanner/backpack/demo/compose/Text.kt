@@ -93,7 +93,7 @@ private fun TypographyStylesStory(styles: List<Pair<TextStyle, String>>) {
 
 @Preview
 @Composable
-fun DefaultText() {
+fun DefaultTextExample() {
   BackpackPreview {
     BpkText(text = "Sample")
   }
@@ -101,7 +101,7 @@ fun DefaultText() {
 
 @Preview
 @Composable
-fun ColoredText() {
+fun ColoredTextExample() {
   BackpackPreview {
     BpkText(
       text = "Sample",
@@ -112,7 +112,7 @@ fun ColoredText() {
 
 @Preview
 @Composable
-fun StyledText() {
+fun StyledTextExample() {
   BackpackPreview {
     BpkText(
       text = "Sample",
@@ -123,7 +123,7 @@ fun StyledText() {
 
 @Preview
 @Composable
-fun AnnotatedText() {
+fun AnnotatedTextExample() {
   BackpackPreview {
     BpkText(
       text = buildAnnotatedString {
