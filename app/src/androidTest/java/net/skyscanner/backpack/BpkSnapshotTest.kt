@@ -27,15 +27,11 @@ import androidx.activity.compose.setContent
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.DP
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ActivityScenario
@@ -43,8 +39,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.MainActivity
+import net.skyscanner.backpack.demo.compose.BackpackPreview
 import org.junit.Assume
 
 open class BpkSnapshotTest {
@@ -106,16 +102,12 @@ open class BpkSnapshotTest {
       scenario.onActivity { activity ->
         with(activity) {
           setContent {
-            BpkTheme {
-              CompositionLocalProvider(*providers) {
-                Surface(
-                  modifier = Modifier
-                    .size(size.width.dp, size.height.dp)
-                    .background(background.takeOrElse { BpkTheme.colors.background }),
-                  content = { content() },
-                )
-              }
-            }
+            BackpackPreview(
+              modifier = Modifier.size(size.width.dp, size.height.dp),
+              background = background,
+              providers = providers,
+              content = content,
+            )
           }
 
           val view = (window.decorView as ViewGroup).getChildAt(0)
