@@ -122,7 +122,7 @@ fun ViewScreenshot(
   screenshotName: String,
   setup: (() -> Unit)? = null,
 ): Array<Any?> =
-  arrayOf(name, screenshotName, "docs", setup)
+  arrayOf(name, screenshotName, "docs/view", setup)
 
 private fun setupCalendar() {
   Espresso.onView(ViewMatchers.withId(R.id.bpkCalendar))
