@@ -58,22 +58,26 @@ open class BpkNudger @JvmOverloads constructor(
 
   var minValue: Int = 0
     set(value) {
-      if (value > maxValue) {
-        throw IllegalArgumentException("Cannot set minValue $value when maxValue is $maxValue")
+      if (field != value) {
+        if (value > maxValue) {
+          throw IllegalArgumentException("Cannot set minValue $value when maxValue is $maxValue")
+        }
+        field = value
+        this.value = max(this.value, value)
+        update()
       }
-      field = value
-      this.value = max(this.value, value)
-      update()
     }
 
   var maxValue: Int = 100
     set(value) {
-      if (value < minValue) {
-        throw IllegalArgumentException("Cannot set maxValue $value when minValue is $minValue")
+      if (field != value) {
+        if (value < minValue) {
+          throw IllegalArgumentException("Cannot set maxValue $value when minValue is $minValue")
+        }
+        field = value
+        this.value = min(this.value, value)
+        update()
       }
-      field = value
-      this.value = min(this.value, value)
-      update()
     }
 
   var onChangeListener: ((Int) -> Unit)? = null
