@@ -1,9 +1,11 @@
 ## backpack-android architecture overview:
 
-`backpack-android` is a traditional Gradle Android lib project, composed of two modules.
+`backpack-android` is a traditional Gradle Android lib project, composed of the following modules.
 
 - app: The example app
-- Backpack: The Backpack Android components
+- Backpack: The Backpack Android components for the traditional view system
+- backpack-common: Common code shared between compose and traditional Backpack
+- backpack-lint: Custom lint rules to ensure backpack is used and conventions are followed
 
 ## App
 
@@ -11,7 +13,7 @@
 
 Stories are defined programmatically in  tree-like structure that is then used to build the UI.
 
-Important classes/packages are: 
+Important classes/packages are:
 
 - **`{javaSrc}/data/ComponentRegistry`**
 
@@ -35,19 +37,16 @@ Important classes/packages are:
 
 ### Theming
 
-Theming for the example app is set in the `Settings` view and saved in the local shared preferences 
-file. 
+Theming for the example app is set in the `Settings` view and saved in the local shared preferences
+file.
 
 Important classes/packages are:
 
 - **`{javaSrc}/SettingsActivity`**
   Activity that shows the theming configuration.
 
-- **`{javaSrc}/ThemeApplier`**
-  Implementation of a `onActivityCreated` callback that applies the current theme to the activity.
-
 - **`{javaSrc}/BackpackDemoApplication`**
-  Where all initialization logic resides, including registering the current theme.
+  Where all initialization logic resides.
 
 - **`{javaSrc}/data/SharedPreferences`**
   Used to read/write shared preferences for the example app, including the current theme.
@@ -55,14 +54,14 @@ Important classes/packages are:
 
 ## Backpack
 
-The `Backpack` lib is where all components live. All packages, except `utils` are Backpack components.
+The `Backpack` lib is where all traditional view components live. All packages, except `utils` are Backpack components.
 
 ### Component's architecture
 
-There are only a few things that should be observed about the architecture of the components: 
+There are only a few things that should be observed about the architecture of the components:
 
 1. Whenever possible the Backpack component should extend from the Android base component and add the additional extra functionality instead of wrapping the Android component inside another `ViewGroup`. This is to keep the view hierarchy as small as possible.
-2. All props should be available via XML and programmatically. Whenever a component is available in both XML and code all its properties should also be available in both. 
+2. All props should be available via XML and programmatically. Whenever a component is available in both XML and code all its properties should also be available in both.
 3. Changing a property programmatically should immediately reflect on the UI.
 4. Components should be "extensible", i.e. `open class` in Kotlin. It's also important to think about the component being used that way when writing/reviewing it.
 
@@ -98,7 +97,7 @@ More can be found here: https://github.com/Skyscanner/backpack-android/tree/main
       <item name="bpkChipStyle">@style/RedChip</item>
     </style>
     ```
-   
+
 - Themes can also be set programmatically using a `ContextThemeWrapper`:
 
   ```Kotlin
@@ -130,5 +129,5 @@ There are currently three types of tests in `backpack-android`:
   - Live inside the `Backpack` module and do not need an emulator to run. This includes all other unit tests that don't require an emulator.
 
 - Snapshot tests:
-  - Live inside the `app` module and run inside an emulator. Some of those tests are very flaky in the 
+  - Live inside the `app` module and run inside an emulator. Some of those tests are very flaky in the
   CI and will be annotated with `@FlakyTest`. This means they will not run on CI but still run locally before a release.
