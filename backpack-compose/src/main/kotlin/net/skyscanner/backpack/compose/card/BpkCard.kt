@@ -1,14 +1,14 @@
 package net.skyscanner.backpack.compose.card
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -35,50 +35,40 @@ fun BpkCard(
 ) {
 
   val focused by interactionSource.collectIsFocusedAsState()
-  val elevation by animateDpAsState(if (focused) BpkElevation.Lg else BpkElevation.Sm)
+  val pressed by interactionSource.collectIsPressedAsState()
+  val elevated = focused || pressed
 
-  CompositionLocalProvider(LocalBpkCardElevation provides LocalBpkCardElevation.current + 1) {
+  val elevation by animateDpAsState(
+    when {
+      elevated -> BpkElevation.Xl
+      else -> BpkElevation.Base
+    }
+  )
 
-    Card(
-      modifier = modifier,
-      shape = RoundedCornerShape(
-        size = when (corner) {
-          BpkCardCorner.Small -> BpkBorderRadius.Md
-          BpkCardCorner.Large -> BpkBorderRadius.Lg
-        },
-      ),
-      backgroundColor = when (LocalBpkCardElevation.current) {
-        BpkCardElevation.Zero -> BpkTheme.colors.background
-        BpkCardElevation.One -> BpkTheme.colors.backgroundElevation01
-        BpkCardElevation.Two -> BpkTheme.colors.backgroundElevation02
-        BpkCardElevation.Tree -> BpkTheme.colors.backgroundElevation03
-        BpkCardElevation.Max -> BpkTheme.colors.backgroundElevation03
-      },
-      contentColor = BpkTheme.colors.textPrimary,
-      elevation = elevation,
-      onClick = onClick ?: {},
-      onClickLabel = onClickLabel,
-      interactionSource = interactionSource,
-      enabled = onClick != null,
-      role = role,
-      content = content,
-    )
+  val backgroundColor by animateColorAsState(
+    when {
+      elevated -> BpkTheme.colors.backgroundElevation02
+      else -> BpkTheme.colors.backgroundElevation01
+    }
+  )
 
+  val size = when (corner) {
+    BpkCardCorner.Small -> BpkBorderRadius.Md
+    BpkCardCorner.Large -> BpkBorderRadius.Lg
   }
-}
 
-private val LocalBpkCardElevation = compositionLocalOf { BpkCardElevation.Zero }
-
-private enum class BpkCardElevation {
-  Zero,
-  One,
-  Two,
-  Tree,
-  Max;
-
-  operator fun plus(value: Int) : BpkCardElevation {
-    val index = (ordinal + value).coerceIn(0, Max.ordinal)
-    return values()[index]
-  }
+  Card(
+    modifier = modifier,
+    shape = RoundedCornerShape(size = size),
+    backgroundColor = backgroundColor,
+    contentColor = BpkTheme.colors.textPrimary,
+    elevation = elevation,
+    onClick = onClick ?: {},
+    onClickLabel = onClickLabel,
+    interactionSource = interactionSource,
+    enabled = onClick != null,
+    role = role,
+    content = content,
+  )
 
 }
