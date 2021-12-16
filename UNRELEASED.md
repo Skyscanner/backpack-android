@@ -1,6 +1,10 @@
 # Unreleased
 
 > Place your changes below this line.
+**Fixed:**
+
+- `net.skyscanner.backpack.nudger`:
+  - Added extra check on BpkNudger to improve its use with screen readers.
 
 ## How to write a good changelog entry
 
