@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -16,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
@@ -32,7 +32,7 @@ fun CardStory() {
       onClick = {},
     ) {
       Box(contentAlignment = Alignment.Center) {
-        Text("Small corners")
+        BpkText("Small corners")
       }
     }
 
@@ -44,7 +44,7 @@ fun CardStory() {
       corner = BpkCardCorner.Large,
     ) {
       Box(contentAlignment = Alignment.Center) {
-        Text("Large corners")
+        BpkText("Large corners")
       }
     }
 
@@ -66,7 +66,7 @@ fun CardStory() {
       },
     ) {
       Box(contentAlignment = Alignment.Center) {
-        Text(if (focused) "Tap to unfocus" else "Tap to focus")
+        BpkText(if (focused) "Tap to unfocus" else "Tap to focus")
       }
     }
   }
