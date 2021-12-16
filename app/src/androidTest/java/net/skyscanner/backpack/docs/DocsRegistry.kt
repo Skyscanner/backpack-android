@@ -93,7 +93,9 @@ object DocsRegistry {
     ViewScreenshot("Text - View - Default", "default"),
     ViewScreenshot("Text - View - Emphasized", "emphasized"),
     ViewScreenshot("Text - View - Heavy", "heavy"),
-    ComposeScreenshot("Text - Compose", "compose"),
+    ComposeScreenshot("Text - Compose - Hero", "hero"),
+    ComposeScreenshot("Text - Compose - Heading", "heading"),
+    ComposeScreenshot("Text - Compose - Body", "body"),
     ViewScreenshot("Text Field - Default", "default"),
     ViewScreenshot("Text Field - With labels", "labels"),
     ViewScreenshot("Text Spans", "default"),
@@ -120,7 +122,7 @@ fun ViewScreenshot(
   screenshotName: String,
   setup: (() -> Unit)? = null,
 ): Array<Any?> =
-  arrayOf(name, screenshotName, "docs", setup)
+  arrayOf(name, screenshotName, "docs/view", setup)
 
 private fun setupCalendar() {
   Espresso.onView(ViewMatchers.withId(R.id.bpkCalendar))

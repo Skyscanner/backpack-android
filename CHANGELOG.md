@@ -1276,13 +1276,13 @@ This version was breaking as we removed `onYearChanged` method from `BpkCalendar
 
 **Added:**
 
-- Added new property `cornerStyle` to `BpkCardView`. See usage in [README.md](docs/Card/README.md).
+- Added new property `cornerStyle` to `BpkCardView`. See usage in [README.md](docs/view/Card/README.md).
 
 # 1.2.0
 
 **Added:**
 
-- Introducing BpkChip component. See usage in [README.md](docs/Chip/README.md).
+- Introducing BpkChip component. See usage in [README.md](docs/view/Chip/README.md).
 
 # 1.1.0
 
@@ -1305,7 +1305,7 @@ This version was breaking as we removed `onYearChanged` method from `BpkCalendar
 
 **Added:**
 
-- Introducing `BpkDialog` component. See usage in [README.md](docs/Dialog/README.md).
+- Introducing `BpkDialog` component. See usage in [README.md](docs/view/Dialog/README.md).
 
 # 0.9.0
 
@@ -1321,7 +1321,7 @@ This version was breaking as we removed `onYearChanged` method from `BpkCalendar
 
 # 0.7.0
 
-- Introducing the `BpkSwitch` component. See usage in [README.md](docs/Switch/README.md).
+- Introducing the `BpkSwitch` component. See usage in [README.md](docs/view/Switch/README.md).
 
 # 0.6.0
 
@@ -1337,7 +1337,7 @@ Added new icons:
 
 # 0.5.0
 
-Introducing BpkSpinner component. See usage in [README.md](docs/Spinner/README.md).
+Introducing BpkSpinner component. See usage in [README.md](docs/view/Spinner/README.md).
 
 Update build tools to 28.0.3.
 
