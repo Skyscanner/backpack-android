@@ -21,12 +21,14 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 fun CardStory() {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Base).padding(vertical = BpkSpacing.Lg),
+    modifier = Modifier.padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
     BpkCard(
-      modifier = Modifier.fillMaxWidth().weight(1f),
+      modifier = Modifier
+        .fillMaxWidth()
+        .weight(1f),
       onClick = {},
     ) {
       Box(contentAlignment = Alignment.Center) {
@@ -35,7 +37,9 @@ fun CardStory() {
     }
 
     BpkCard(
-      modifier = Modifier.fillMaxWidth().weight(1f),
+      modifier = Modifier
+        .fillMaxWidth()
+        .weight(1f),
       onClick = {},
       corner = BpkCardCorner.Large,
     ) {
@@ -49,7 +53,9 @@ fun CardStory() {
     val focus = remember { FocusInteraction.Focus() }
 
     BpkCard(
-      modifier = Modifier.fillMaxWidth().weight(1f),
+      modifier = Modifier
+        .fillMaxWidth()
+        .weight(1f),
       interactionSource = interactionSource,
       onClick = {
         if (!focused) {
