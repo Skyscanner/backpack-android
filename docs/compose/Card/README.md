@@ -31,7 +31,6 @@ Example of a clickable Card with forced focus:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.card.BpkCard
-import net.skyscanner.backpack.compose.card.BpkCardCorner
 
 val interactionSource = remember {
   MutableInteractionSource().apply {
