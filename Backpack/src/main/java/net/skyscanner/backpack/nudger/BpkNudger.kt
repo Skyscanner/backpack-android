@@ -53,6 +53,7 @@ open class BpkNudger @JvmOverloads constructor(
       if (field != value) {
         field = value.coerceIn(minValue, maxValue)
         update()
+        updateEnabledFields()
       }
     }
 
@@ -66,6 +67,7 @@ open class BpkNudger @JvmOverloads constructor(
         this.value = max(this.value, value)
         update()
       }
+      updateEnabledFields()
     }
 
   var maxValue: Int = 100
@@ -78,6 +80,7 @@ open class BpkNudger @JvmOverloads constructor(
         this.value = min(this.value, value)
         update()
       }
+      updateEnabledFields()
     }
 
   var onChangeListener: ((Int) -> Unit)? = null
@@ -105,8 +108,11 @@ open class BpkNudger @JvmOverloads constructor(
   }
 
   private fun update() {
+    label.text = value.toString()
+  }
+
+  private fun updateEnabledFields() {
     decrementButton.isEnabled = value > minValue
     incrementButton.isEnabled = value < maxValue
-    label.text = value.toString()
   }
 }
