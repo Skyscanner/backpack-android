@@ -189,6 +189,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       - name: Screenshot Tests
+        id: screenshotTests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           target: google_apis
@@ -200,6 +201,7 @@ jobs:
             sudo easy_install Pillow==6.2.2
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
             ./scripts/check-no-changes.sh
+            echo "::set-output name=CHANGED_FILES::`git diff --name-only`"
 
       - name: Upload Screenshot Tests Artifact
         if: ${{ failure() }}
@@ -218,7 +220,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Screenshot tests failed.'
+              body: 'The following screenshots were chainged: \n${{ steps.screenshotTests.outputs.CHANGED_FILES }}'
             })
 
   Deploy:
