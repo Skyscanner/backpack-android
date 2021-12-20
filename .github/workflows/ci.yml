@@ -200,8 +200,9 @@ jobs:
           script: |
             sudo easy_install Pillow==6.2.2
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
-            ./scripts/check-no-changes.sh
             echo "::set-output name=CHANGED_FILES::`git diff --name-only`"
+            ./scripts/check-no-changes.sh
+
 
       - name: Upload Screenshot Tests Artifact
         if: ${{ failure() }}
@@ -220,7 +221,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'The following screenshots were chainged: \n${{ steps.screenshotTests.outputs.CHANGED_FILES }}'
+              body: 'The '${{ matrix.variant }}' screenshots were changed: \n${{ steps.screenshotTests.outputs.CHANGED_FILES }}'
             })
 
   Deploy:
