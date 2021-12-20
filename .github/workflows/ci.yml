@@ -209,6 +209,18 @@ jobs:
           path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
           retention-days: 5
 
+      - name: Notify PR of screenshots failure
+        if: ${{ failure() }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Screenshot tests failed.\n${{ git diff --name-only }}'
+            })
+
   Deploy:
     name: Deploy
     runs-on: ubuntu-latest
