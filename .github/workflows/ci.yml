@@ -200,7 +200,13 @@ jobs:
           script: |
             sudo easy_install Pillow==6.2.2
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
-            echo "::set-output name=CHANGED_FILES::`git diff --name-only`"
+            
+            changedFiles = git diff --name-only
+            changedFiles="${changedFiles//'%'/'%25'}"
+            changedFiles="${changedFiles//$'\n'/'%0A'}"
+            changedFiles="${changedFiles//$'\r'/'%0D'}"
+
+            echo "::set-output name=CHANGED_FILES::$changedFiles"
             ./scripts/check-no-changes.sh
 
 
