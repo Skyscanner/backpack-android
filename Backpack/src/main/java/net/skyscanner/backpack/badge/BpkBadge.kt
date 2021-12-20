@@ -127,7 +127,7 @@ open class BpkBadge @JvmOverloads constructor(
   private fun setup() {
     this.includeFontPadding = true
     this.textStyle = XS
-    this.weight = Weight.EMPHASIZED
+    this.weight = Weight.NORMAL
     this.minHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
     this.text = message
 
