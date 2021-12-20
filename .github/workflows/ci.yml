@@ -201,7 +201,7 @@ jobs:
             sudo easy_install Pillow==6.2.2
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
             
-            changedFiles = git diff --name-only
+            changedFiles = $(git diff --name-only)
             changedFiles="${changedFiles//'%'/'%25'}"
             changedFiles="${changedFiles//$'\n'/'%0A'}"
             changedFiles="${changedFiles//$'\r'/'%0D'}"
@@ -227,7 +227,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'The "${{ matrix.variant }}" screenshots were changed: \n${{ steps.screenshotTests.outputs.CHANGED_FILES }}'
+              body: 'The following "${{ matrix.variant }}" screenshots were changed: \n${{ steps.screenshotTests.outputs.CHANGED_FILES }}'
             })
 
   Deploy:
