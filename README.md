@@ -8,7 +8,7 @@
 [![license](https://img.shields.io/github/license/Skyscanner/backpack-android.svg)](https://github.com/Skyscanner/backpack-android)
 [![platform](https://img.shields.io/badge/platform-android-green.svg)](https://github.com/Skyscanner/backpack-android)
 
-Backpack for Android supports two targets: Android View system and Jetpack Compose.
+Backpack for Android supports two targets: **Android View** system and **Jetpack Compose**.
 
 Backpack is available through Maven Central. Thus, before adding Backpack to your project,
 make sure Maven Central is in your repositories list. Add this to your root `build.gradle`:
@@ -27,7 +27,14 @@ or by scanning the QR code below.
 
 ![QR code](qr.png)
 
-## Installation – Android View system
+## Android View system
+
+You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=android).
+
+All design system tokens exist as public Android resources.
+For instance, you can use colours by using `@color/bpkSkyBlue` in XML or using `R.color.bpkSkyBlue` in Java/Kotlin.
+
+### Installation
 
 Add the following dependency to your `build.gradle` (in your app module) in the `dependencies` block:
 
@@ -42,11 +49,18 @@ You also need to inherit your app theme from Backpack:
   </style>
 ```
 
-You can find the list of the available components, as well as code samples and its screenshots [here](https://backpack.github.io/components/text?platform=android).
-
-## Installation – Jetpack Compose
+## Jetpack Compose
 
 > Backpack for Jetpack Compose status is experimental.
+
+Backpack for Compose targets **stable Compose 1.0.0** release.
+
+You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=compose).
+
+The design system tokens are located in a `net.skyscanner.backpack.compose.tokens` package.
+For instance, you can refer to color using following syntax: `BpkColor.SkyBlue`.
+
+### Installation
 
 Add the following dependency to your `build.gradle` (in your app module) in the `dependencies` block:
 
@@ -54,17 +68,13 @@ Add the following dependency to your `build.gradle` (in your app module) in the 
 implementation 'net.skyscanner.backpack:backpack-compose:1.0.0'
 ```
 
-All Compose components need to be used in `BpkTheme` scope:
+All Compose components must to be used within `BpkTheme` scope:
 
 ```kotlin
 BpkTheme {
     BpkText("Hello from Compose!")
 }
 ```
-
-Backpack for Compose targets stable Compose 1.0.0 release.
-
-You can find the list of the available components, as well as code samples and its screenshots [here](https://backpack.github.io/components/text?platform=compose).
 
 ## Contributing to Backpack
 
