@@ -175,7 +175,9 @@ object ComponentRegistry {
             "With divider" story NodeData { Story of R.layout.fragment_card_with_divider },
             "With divider arranged vertically" story NodeData { Story of R.layout.fragment_card_with_divider_vertical },
             "With divider without padding" story NodeData { Story of R.layout.fragment_card_with_divider_no_padding },
-            "With divider and corner style large" story NodeData { Story of R.layout.fragment_card_with_divider_cornerstyle_large }
+            "With divider and corner style large" story NodeData {
+              Story of R.layout.fragment_card_with_divider_cornerstyle_large
+            },
           )
         ),
         TAB_TITLE_COMPOSE composeStory { CardStory() },
