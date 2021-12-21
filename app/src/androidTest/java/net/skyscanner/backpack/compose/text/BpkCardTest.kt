@@ -83,7 +83,7 @@ class BpkCardTest : BpkSnapshotTest() {
     }
 
     CardWrapper {
-      BpkCard(interactionSource = interactionSource) {
+      BpkCard(onClick = {}, interactionSource = interactionSource) {
         CardContent()
       }
     }
