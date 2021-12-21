@@ -205,7 +205,7 @@ jobs:
         if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.flavour }}${{ env.config }}-screenshot-test-output
+          name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-screenshot-test-output
           path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
           retention-days: 5
 
