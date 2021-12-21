@@ -43,10 +43,11 @@ enum class BpkCardCorner {
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BpkCard(
+  onClick: () -> Unit,
   modifier: Modifier = Modifier,
   corner: BpkCardCorner = BpkCardCorner.Small,
-  onClick: (() -> Unit)? = null,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  enabled: Boolean = true,
   onClickLabel: String? = null,
   role: Role? = null,
   content: @Composable () -> Unit,
@@ -81,11 +82,34 @@ fun BpkCard(
     backgroundColor = backgroundColor,
     contentColor = BpkTheme.colors.textPrimary,
     elevation = elevation,
-    onClick = onClick ?: {},
+    onClick = onClick,
     onClickLabel = onClickLabel,
     interactionSource = interactionSource,
-    enabled = onClick != null,
+    enabled = enabled,
     role = role,
+    content = content,
+  )
+
+}
+
+@Composable
+fun BpkCard(
+  modifier: Modifier = Modifier,
+  corner: BpkCardCorner = BpkCardCorner.Small,
+  content: @Composable () -> Unit,
+) {
+
+  val size = when (corner) {
+    BpkCardCorner.Small -> BpkBorderRadius.Md
+    BpkCardCorner.Large -> BpkBorderRadius.Lg
+  }
+
+  Card(
+    modifier = modifier,
+    shape = RoundedCornerShape(size = size),
+    backgroundColor = BpkTheme.colors.backgroundElevation01,
+    contentColor = BpkTheme.colors.textPrimary,
+    elevation = BpkElevation.Base,
     content = content,
   )
 

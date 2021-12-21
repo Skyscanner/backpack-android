@@ -43,10 +43,12 @@ fun CardStory() {
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
+    val cardModifier = Modifier
+      .fillMaxWidth()
+      .weight(1f)
+
     BpkCard(
-      modifier = Modifier
-        .fillMaxWidth()
-        .weight(1f),
+      modifier = cardModifier,
       onClick = {},
     ) {
       Box(contentAlignment = Alignment.Center) {
@@ -55,9 +57,7 @@ fun CardStory() {
     }
 
     BpkCard(
-      modifier = Modifier
-        .fillMaxWidth()
-        .weight(1f),
+      modifier = cardModifier,
       onClick = {},
       corner = BpkCardCorner.Large,
     ) {
@@ -66,14 +66,18 @@ fun CardStory() {
       }
     }
 
+    BpkCard(cardModifier) {
+      Box(contentAlignment = Alignment.Center) {
+        BpkText("Non clickable")
+      }
+    }
+
     val interactionSource = remember { MutableInteractionSource() }
     val focused by interactionSource.collectIsFocusedAsState()
     val focus = remember { FocusInteraction.Focus() }
 
     BpkCard(
-      modifier = Modifier
-        .fillMaxWidth()
-        .weight(1f),
+      modifier = cardModifier,
       interactionSource = interactionSource,
       onClick = {
         if (!focused) {

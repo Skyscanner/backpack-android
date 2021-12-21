@@ -27,18 +27,15 @@ BpkCard(corner = BpkCardCorner.Large) {
 }
 ```
 
-Example of a clickable Card with forced focus:
+Example of a clickable Card:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.card.BpkCard
 
-val interactionSource = remember {
-  MutableInteractionSource().apply {
-    tryEmit(FocusInteraction.Focus())
-  }
-}
-
-BpkCard(interfactionSource = interactionSource) {
+BpkCard(
+  onClick = {},
+  onClickLabel = "Semantic and accessibility label",
+) {
     // content
 }
 ```
