@@ -31,28 +31,23 @@ repositories {
 ```
 
 
-To set up **Backpack for Android View system**, add the following dependency
-to your `build.gradle` (in your app module) in the `dependencies` block:
+Add the following dependencies to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-implementation 'net.skyscanner.backpack:backpack-android:33.2.0'
+implementation 'net.skyscanner.backpack:backpack-android:33.2.0' // for Android View system
+implementation 'net.skyscanner.backpack:backpack-compose:x.x.x' // for Compose (not released yet)
 ```
 
-You also need to inherit your app theme from Backpack:
+All Backpack components must to be used within `BpkTheme` scope:
+
+Android View system:
 ```xml
   <style name="AppTheme" parent="BpkTheme">
     <!-- Customize your theme here. -->
   </style>
 ```
 
-To set up **Backpack for Jetpack Compose**, add the following dependency
-to your `build.gradle` (in your app module) in the `dependencies` block:
-
-```gradle
-implementation 'net.skyscanner.backpack:backpack-compose:x.x.x' // not released yet
-```
-
-All Compose components must to be used within `BpkTheme` scope:
+Compose:
 
 ```kotlin
 BpkTheme {
@@ -68,11 +63,12 @@ You can find the list of the available components, as well as the code samples a
 
 All design system tokens exist as public Android resources. Here's the list of the token types and the samples of its usage:
 
-* border radii – `@dimen/bpkBorderRadiusSm` (XML), `R.dimen.bpkBorderRadiusSm` (Java/Kotlin)
-* colours – `@color/bpkSkyBlue` (XML), `R.color.bpkSkyBlue` (Java/Kotlin)
-* elevations – `@dimen/bpkElevationSm` (XML), `R.dimen.bpkElevationSm` (Java/Kotlin)
-* spacings – `@dimen/bpkSpacingLg` (XML), `R.dimen.bpkSpacingLg` (Java/Kotlin)
-* text styles – `?bpkTextBaseSize` (XML)
+* [border radii](https://backpack.github.io/tokens/radius) – `@dimen/bpkBorderRadiusSm` (XML), `R.dimen.bpkBorderRadiusSm` (Java/Kotlin)
+* [colours](https://backpack.github.io/guidelines/colour) – `@color/bpkSkyBlue` (XML), `R.color.bpkSkyBlue` (Java/Kotlin)
+* [semantic colours](https://backpack.github.io/guidelines/colour) – `@color/bpkTextPrimary` (XML), `R.color.bpkTextPrimary` (Java/Kotlin)
+* [elevations](https://backpack.github.io/tokens/shadow) – `@dimen/bpkElevationSm` (XML), `R.dimen.bpkElevationSm` (Java/Kotlin)
+* [spacings](https://backpack.github.io/tokens/spacing) – `@dimen/bpkSpacingLg` (XML), `R.dimen.bpkSpacingLg` (Java/Kotlin)
+* [text styles](https://backpack.github.io/tokens/typesetting) – `?bpkTextBaseSize` (XML)
 
 ### Jetpack Compose
 
@@ -85,11 +81,12 @@ You can find the list of the available components, as well as the code samples a
 The design system tokens are located in a `net.skyscanner.backpack.compose.tokens` package.
 Here's the list of the token types and the samples of its usage:
 
-* border radii – `BpkBorderRadius.Lg`
-* colours – `BpkColor.SkyBlue`
-* elevations – `BpkElevation.Sm`
-* spacings – `BpkSpacing.Sm`
-* text styles – `BpkTheme.typography.heading4`
+* [border radii](https://backpack.github.io/tokens/radius) – `BpkBorderRadius.Lg`
+* [colours](https://backpack.github.io/guidelines/colour) – `BpkColor.SkyBlue`
+* [semantic colours](https://backpack.github.io/guidelines/colour) – `BpkTheme.colors.textPrimary`
+* [elevations](https://backpack.github.io/tokens/shadow) – `BpkElevation.Sm`
+* [spacings](https://backpack.github.io/tokens/spacing) – `BpkSpacing.Sm`
+* [text styles](https://backpack.github.io/tokens/typesetting) – `BpkTheme.typography.heading4`
 
 ## Contributing to Backpack
 
