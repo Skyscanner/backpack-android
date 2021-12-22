@@ -10,14 +10,6 @@
 
 Backpack for Android supports two targets: **Android View** system and **Jetpack Compose**.
 
-Backpack is available through Maven Central. Thus, before adding Backpack to your project,
-make sure Maven Central is in your repositories list. Add this to your root `build.gradle`:
-
-```gradle
-repositories {
-    mavenCentral()
-}
-```
 
 ### Demo application
 The Backpack demo application is a good way of referring to the variants available for a component and their correct usage.
@@ -27,16 +19,20 @@ or by scanning the QR code below.
 
 ![QR code](qr.png)
 
-## Android View system
+## Installation
 
-You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=android).
+Backpack is available through Maven Central. Thus, before adding Backpack to your project,
+make sure Maven Central is in your repositories list. Add this to your root `build.gradle`:
 
-All design system tokens exist as public Android resources.
-For instance, you can use colours by using `@color/bpkSkyBlue` in XML or using `R.color.bpkSkyBlue` in Java/Kotlin.
+```gradle
+repositories {
+    mavenCentral()
+}
+```
 
-### Installation
 
-Add the following dependency to your `build.gradle` (in your app module) in the `dependencies` block:
+To set up **Backpack for Android View system**, add the following dependency
+to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
 implementation 'net.skyscanner.backpack:backpack-android:33.2.0'
@@ -49,23 +45,11 @@ You also need to inherit your app theme from Backpack:
   </style>
 ```
 
-## Jetpack Compose
-
-> Backpack for Jetpack Compose status is experimental.
-
-Backpack for Compose targets **stable Compose 1.0.0** release.
-
-You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=compose).
-
-The design system tokens are located in a `net.skyscanner.backpack.compose.tokens` package.
-For instance, you can refer to color using following syntax: `BpkColor.SkyBlue`.
-
-### Installation
-
-Add the following dependency to your `build.gradle` (in your app module) in the `dependencies` block:
+To set up **Backpack for Jetpack Compose**, add the following dependency
+to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-implementation 'net.skyscanner.backpack:backpack-compose:1.0.0'
+implementation 'net.skyscanner.backpack:backpack-compose:x.x.x' // not released yet
 ```
 
 All Compose components must to be used within `BpkTheme` scope:
@@ -75,6 +59,37 @@ BpkTheme {
     BpkText("Hello from Compose!")
 }
 ```
+
+## Features
+
+### Android View system
+
+You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=android).
+
+All design system tokens exist as public Android resources. Here's the list of the token types and the samples of its usage:
+
+* border radii – `@dimen/bpkBorderRadiusSm` (XML), `R.dimen.bpkBorderRadiusSm` (Java/Kotlin)
+* colours – `@color/bpkSkyBlue` (XML), `R.color.bpkSkyBlue` (Java/Kotlin)
+* elevations – `@dimen/bpkElevationSm` (XML), `R.dimen.bpkElevationSm` (Java/Kotlin)
+* spacings – `@dimen/bpkSpacingLg` (XML), `R.dimen.bpkSpacingLg` (Java/Kotlin)
+* text styles – `?bpkTextBaseSize` (XML)
+
+### Jetpack Compose
+
+> Backpack for Jetpack Compose status is experimental.
+
+Backpack for Compose targets **stable Compose 1.0.0** release.
+
+You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=compose).
+
+The design system tokens are located in a `net.skyscanner.backpack.compose.tokens` package.
+Here's the list of the token types and the samples of its usage:
+
+* border radii – `BpkBorderRadius.Lg`
+* colours – `BpkColor.SkyBlue`
+* elevations – `BpkElevation.Sm`
+* spacings – `BpkSpacing.Sm`
+* text styles – `BpkTheme.typography.heading4`
 
 ## Contributing to Backpack
 
