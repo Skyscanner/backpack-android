@@ -63,12 +63,12 @@ You can find the list of the available components, as well as the code samples a
 
 All design system tokens exist as public Android resources. Here's the list of the token types and the samples of its usage:
 
-* [border radii](https://backpack.github.io/tokens/radius) – `@dimen/bpkBorderRadiusSm` (XML), `R.dimen.bpkBorderRadiusSm` (Java/Kotlin)
-* [colours](https://backpack.github.io/guidelines/colour) – `@color/bpkSkyBlue` (XML), `R.color.bpkSkyBlue` (Java/Kotlin)
-* [semantic colours](https://backpack.github.io/guidelines/colour) – `@color/bpkTextPrimary` (XML), `R.color.bpkTextPrimary` (Java/Kotlin)
-* [elevations](https://backpack.github.io/tokens/shadow) – `@dimen/bpkElevationSm` (XML), `R.dimen.bpkElevationSm` (Java/Kotlin)
-* [spacings](https://backpack.github.io/tokens/spacing) – `@dimen/bpkSpacingLg` (XML), `R.dimen.bpkSpacingLg` (Java/Kotlin)
-* [text styles](https://backpack.github.io/tokens/typesetting) – `?bpkTextBaseSize` (XML)
+* [border radii](Backpack/src/main/res/values/backpack.radii.xml) – `@dimen/bpkBorderRadiusSm` (XML), `R.dimen.bpkBorderRadiusSm` (Java/Kotlin)
+* [colours](Backpack/src/main/res/values/backpack.color.xml) – `@color/bpkSkyBlue` (XML), `R.color.bpkSkyBlue` (Java/Kotlin)
+* [semantic colours](Backpack/src/main/res/values/backpack.semantic.color.xml) – `@color/bpkTextPrimary` (XML), `R.color.bpkTextPrimary` (Java/Kotlin)
+* [elevations](Backpack/src/main/res/values/backpack.elevation.xml) – `@dimen/bpkElevationSm` (XML), `R.dimen.bpkElevationSm` (Java/Kotlin)
+* [spacings](Backpack/src/main/res/values/backpack.dimensions.spacing.xml) – `@dimen/bpkSpacingLg` (XML), `R.dimen.bpkSpacingLg` (Java/Kotlin)
+* [text styles](Backpack/src/main/res/values/backpack.text.xml) – `?bpkTextBaseSize` (XML)
 
 ### Jetpack Compose
 
@@ -81,12 +81,12 @@ You can find the list of the available components, as well as the code samples a
 The design system tokens are located in a `net.skyscanner.backpack.compose.tokens` package.
 Here's the list of the token types and the samples of its usage:
 
-* [border radii](https://backpack.github.io/tokens/radius) – `BpkBorderRadius.Lg`
-* [colours](https://backpack.github.io/guidelines/colour) – `BpkColor.SkyBlue`
-* [semantic colours](https://backpack.github.io/guidelines/colour) – `BpkTheme.colors.textPrimary`
-* [elevations](https://backpack.github.io/tokens/shadow) – `BpkElevation.Sm`
-* [spacings](https://backpack.github.io/tokens/spacing) – `BpkSpacing.Sm`
-* [text styles](https://backpack.github.io/tokens/typesetting) – `BpkTheme.typography.heading4`
+* [border radii](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkBorderRadius.kt) – `BpkBorderRadius.Lg`
+* [colours](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkColor.kt) – `BpkColor.SkyBlue`
+* [semantic colours](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkColors.kt) – `BpkTheme.colors.textPrimary`
+* [elevations](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkElevation.kt) – `BpkElevation.Sm`
+* [spacings](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkSpacing.kt) – `BpkSpacing.Sm`
+* [text styles](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkTypography.kt) – `BpkTheme.typography.heading4`
 
 ## Contributing to Backpack
 
