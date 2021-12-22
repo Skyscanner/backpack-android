@@ -90,7 +90,7 @@ ext {
   group = "net.skyscanner.backpack"
   dokkaOutputDir = "dokka"
 
-  androidxAppCompat = "androidx.appcompat:appcompat:1.3.1"
+  androidxAppCompat = "androidx.appcompat:appcompat:1.4.0"
   androidxAnnotations = "androidx.annotation:annotation:1.3.0"
   androidMaterial = "com.google.android.material:material:1.4.0"
   cardView = "androidx.cardview:cardview:1.0.0"
