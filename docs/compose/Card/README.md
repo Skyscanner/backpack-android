@@ -27,6 +27,17 @@ BpkCard(corner = BpkCardCorner.Large) {
 }
 ```
 
+Example of a Card with no padding:
+
+```Kotlin
+import net.skyscanner.backpack.compose.card.BpkCard
+import net.skyscanner.backpack.compose.card.BpkCardPadding
+
+BpkCard(padding = BpkCardPadding.None) {
+    // content
+}
+```
+
 Example of a clickable Card:
 
 ```Kotlin

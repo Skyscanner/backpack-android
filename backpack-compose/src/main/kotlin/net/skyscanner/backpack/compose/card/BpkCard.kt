@@ -23,21 +23,32 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 enum class BpkCardCorner {
   Small,
   Large,
+}
+
+enum class BpkCardPadding {
+  None,
+  Small,
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -46,11 +57,13 @@ fun BpkCard(
   onClick: () -> Unit,
   modifier: Modifier = Modifier,
   corner: BpkCardCorner = BpkCardCorner.Small,
+  padding: BpkCardPadding = BpkCardPadding.Small,
+  contentAlignment: Alignment = Alignment.TopStart,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   enabled: Boolean = true,
   onClickLabel: String? = null,
   role: Role? = null,
-  content: @Composable () -> Unit,
+  content: @Composable BoxScope.() -> Unit,
 ) {
 
   val focused by interactionSource.collectIsFocusedAsState()
@@ -71,14 +84,9 @@ fun BpkCard(
     }
   )
 
-  val size = when (corner) {
-    BpkCardCorner.Small -> BpkBorderRadius.Md
-    BpkCardCorner.Large -> BpkBorderRadius.Lg
-  }
-
   Card(
     modifier = modifier,
-    shape = RoundedCornerShape(size = size),
+    shape = BpkCardShape(corner),
     backgroundColor = backgroundColor,
     contentColor = BpkTheme.colors.textPrimary,
     elevation = elevation,
@@ -87,7 +95,7 @@ fun BpkCard(
     interactionSource = interactionSource,
     enabled = enabled,
     role = role,
-    content = content,
+    content = { BpkCardContent(padding, contentAlignment, content) },
   )
 
 }
@@ -96,21 +104,43 @@ fun BpkCard(
 fun BpkCard(
   modifier: Modifier = Modifier,
   corner: BpkCardCorner = BpkCardCorner.Small,
-  content: @Composable () -> Unit,
+  padding: BpkCardPadding = BpkCardPadding.Small,
+  contentAlignment: Alignment = Alignment.TopStart,
+  content: @Composable BoxScope.() -> Unit,
 ) {
-
-  val size = when (corner) {
-    BpkCardCorner.Small -> BpkBorderRadius.Md
-    BpkCardCorner.Large -> BpkBorderRadius.Lg
-  }
-
   Card(
     modifier = modifier,
-    shape = RoundedCornerShape(size = size),
+    shape = BpkCardShape(corner),
     backgroundColor = BpkTheme.colors.backgroundElevation01,
     contentColor = BpkTheme.colors.textPrimary,
     elevation = BpkElevation.Base,
-    content = content,
+    content = { BpkCardContent(padding, contentAlignment, content) },
   )
 
 }
+
+@Composable
+private inline fun BpkCardContent(
+  padding: BpkCardPadding,
+  contentAlignment: Alignment,
+  content: @Composable BoxScope.() -> Unit,
+) {
+  Box(
+    modifier = Modifier.padding(
+      all = when (padding) {
+        BpkCardPadding.None -> 0.dp
+        BpkCardPadding.Small -> BpkSpacing.Base
+      },
+    ),
+    contentAlignment = contentAlignment,
+    content = content,
+  )
+}
+
+private fun BpkCardShape(corner: BpkCardCorner) =
+  RoundedCornerShape(
+    size = when (corner) {
+      BpkCardCorner.Small -> BpkBorderRadius.Md
+      BpkCardCorner.Large -> BpkBorderRadius.Lg
+    }
+  )

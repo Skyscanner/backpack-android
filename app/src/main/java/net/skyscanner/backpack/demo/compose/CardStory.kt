@@ -22,7 +22,6 @@ import androidx.compose.foundation.interaction.FocusInteraction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -33,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
+import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
@@ -50,26 +50,31 @@ fun CardStory() {
     BpkCard(
       modifier = cardModifier,
       onClick = {},
+      contentAlignment = Alignment.Center,
     ) {
-      Box(contentAlignment = Alignment.Center) {
-        BpkText("Small corners")
-      }
+      BpkText("Small corners")
     }
 
     BpkCard(
       modifier = cardModifier,
       onClick = {},
       corner = BpkCardCorner.Large,
+      contentAlignment = Alignment.Center,
     ) {
-      Box(contentAlignment = Alignment.Center) {
-        BpkText("Large corners")
-      }
+      BpkText("Large corners")
     }
 
-    BpkCard(cardModifier) {
-      Box(contentAlignment = Alignment.Center) {
-        BpkText("Non clickable")
-      }
+    BpkCard(
+      modifier = Modifier.fillMaxWidth(),
+      onClick = {},
+      padding = BpkCardPadding.None,
+      contentAlignment = Alignment.Center,
+    ) {
+      BpkText("No padding")
+    }
+
+    BpkCard(cardModifier, contentAlignment = Alignment.Center) {
+      BpkText("Non clickable")
     }
 
     val interactionSource = remember { MutableInteractionSource() }
@@ -79,6 +84,7 @@ fun CardStory() {
     BpkCard(
       modifier = cardModifier,
       interactionSource = interactionSource,
+      contentAlignment = Alignment.Center,
       onClick = {
         if (!focused) {
           interactionSource.tryEmit(focus)
@@ -87,9 +93,7 @@ fun CardStory() {
         }
       },
     ) {
-      Box(contentAlignment = Alignment.Center) {
-        BpkText(if (focused) "Tap to unfocus" else "Tap to focus")
-      }
+      BpkText(if (focused) "Tap to unfocus" else "Tap to focus")
     }
   }
 }

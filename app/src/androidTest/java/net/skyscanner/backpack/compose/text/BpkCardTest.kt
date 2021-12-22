@@ -32,6 +32,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
+import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import org.junit.Before
@@ -49,8 +50,11 @@ class BpkCardTest : BpkSnapshotTest() {
   @Test
   fun smallCorner() = composed {
     CardWrapper {
-      BpkCard {
-        CardContent()
+      BpkCard(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+      ) {
+        BpkText("Small corners")
       }
     }
   }
@@ -58,8 +62,24 @@ class BpkCardTest : BpkSnapshotTest() {
   @Test
   fun largeCorner() = composed {
     CardWrapper {
-      BpkCard(corner = BpkCardCorner.Large) {
-        CardContent()
+      BpkCard(
+        modifier = Modifier.fillMaxSize(),
+        corner = BpkCardCorner.Large,
+        contentAlignment = Alignment.Center,
+      ) {
+        BpkText("Large corners")
+      }
+    }
+  }
+
+  @Test
+  fun noPadding() = composed {
+    CardWrapper {
+      BpkCard(
+        modifier = Modifier.fillMaxSize(),
+        padding = BpkCardPadding.None,
+      ) {
+        BpkText("No padding")
       }
     }
   }
@@ -67,8 +87,11 @@ class BpkCardTest : BpkSnapshotTest() {
   @Test
   fun unfocused() = composed {
     CardWrapper {
-      BpkCard {
-        CardContent()
+      BpkCard(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+      ) {
+        BpkText("Unfocused")
       }
     }
   }
@@ -83,8 +106,13 @@ class BpkCardTest : BpkSnapshotTest() {
     }
 
     CardWrapper {
-      BpkCard(onClick = {}, interactionSource = interactionSource) {
-        CardContent()
+      BpkCard(
+        onClick = {},
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+        interactionSource = interactionSource,
+      ) {
+        BpkText("Focused")
       }
     }
   }
@@ -98,12 +126,5 @@ private fun CardWrapper(content: @Composable () -> Unit) {
       .padding(BpkSpacing.Lg)
   ) {
     content()
-  }
-}
-
-@Composable
-private fun CardContent() {
-  Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-    BpkText("Card")
   }
 }
