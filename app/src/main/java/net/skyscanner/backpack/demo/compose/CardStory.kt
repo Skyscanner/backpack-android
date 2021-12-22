@@ -47,53 +47,88 @@ fun CardStory() {
       .fillMaxWidth()
       .weight(1f)
 
-    BpkCard(
-      modifier = cardModifier,
-      onClick = {},
-      contentAlignment = Alignment.Center,
-    ) {
-      BpkText("Small corners")
-    }
+    SmallCornersCardExample(cardModifier)
 
-    BpkCard(
-      modifier = cardModifier,
-      onClick = {},
-      corner = BpkCardCorner.Large,
-      contentAlignment = Alignment.Center,
-    ) {
-      BpkText("Large corners")
-    }
+    LargeCornersCardExample(cardModifier)
 
-    BpkCard(
-      modifier = Modifier.fillMaxWidth(),
-      onClick = {},
-      padding = BpkCardPadding.None,
-      contentAlignment = Alignment.Center,
-    ) {
-      BpkText("No padding")
-    }
+    NoPaddingCardExample(Modifier.fillMaxWidth())
 
-    BpkCard(cardModifier, contentAlignment = Alignment.Center) {
-      BpkText("Non clickable")
-    }
+    NonClickableCardExample(cardModifier)
 
-    val interactionSource = remember { MutableInteractionSource() }
-    val focused by interactionSource.collectIsFocusedAsState()
-    val focus = remember { FocusInteraction.Focus() }
+    FocusableCardExample(cardModifier)
+  }
+}
 
-    BpkCard(
-      modifier = cardModifier,
-      interactionSource = interactionSource,
-      contentAlignment = Alignment.Center,
-      onClick = {
-        if (!focused) {
-          interactionSource.tryEmit(focus)
-        } else {
-          interactionSource.tryEmit(FocusInteraction.Unfocus(focus))
-        }
-      },
-    ) {
-      BpkText(if (focused) "Tap to unfocus" else "Tap to focus")
-    }
+@Composable
+private fun SmallCornersCardExample(
+  modifier: Modifier = Modifier,
+) {
+  BpkCard(
+    modifier = modifier,
+    onClick = {},
+    contentAlignment = Alignment.Center,
+  ) {
+    BpkText("Small corners")
+  }
+}
+
+@Composable
+private fun LargeCornersCardExample(
+  modifier: Modifier = Modifier,
+) {
+  BpkCard(
+    modifier = modifier,
+    onClick = {},
+    corner = BpkCardCorner.Large,
+    contentAlignment = Alignment.Center,
+  ) {
+    BpkText("Large corners")
+  }
+}
+
+@Composable
+private fun NoPaddingCardExample(
+  modifier: Modifier = Modifier,
+) {
+  BpkCard(
+    modifier = modifier,
+    onClick = {},
+    padding = BpkCardPadding.None,
+    contentAlignment = Alignment.Center,
+  ) {
+    BpkText("No padding")
+  }
+}
+
+@Composable
+private fun NonClickableCardExample(
+  modifier: Modifier = Modifier,
+) {
+  BpkCard(modifier, contentAlignment = Alignment.Center) {
+    BpkText("Non clickable")
+  }
+}
+
+@Composable
+private fun FocusableCardExample(
+  modifier: Modifier = Modifier,
+) {
+  val interactionSource = remember { MutableInteractionSource() }
+  val focused by interactionSource.collectIsFocusedAsState()
+  val focus = remember { FocusInteraction.Focus() }
+
+  BpkCard(
+    modifier = modifier,
+    interactionSource = interactionSource,
+    contentAlignment = Alignment.Center,
+    onClick = {
+      if (!focused) {
+        interactionSource.tryEmit(focus)
+      } else {
+        interactionSource.tryEmit(FocusInteraction.Unfocus(focus))
+      }
+    },
+  ) {
+    BpkText(if (focused) "Tap to unfocus" else "Tap to focus")
   }
 }
