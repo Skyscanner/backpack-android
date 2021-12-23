@@ -21,7 +21,7 @@ jobs:
   Build:
     name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
 
     strategy:
       fail-fast: false
@@ -74,7 +74,7 @@ jobs:
   Android:
     name: Android tests
     runs-on: macos-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
 
     strategy:
       fail-fast: false
@@ -134,7 +134,7 @@ jobs:
   Screenshots:
     name: Screenshots tests
     runs-on: macos-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
 
     strategy:
       fail-fast: false
@@ -216,7 +216,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     needs: [Build, Android, Screenshots]
-    timeout-minutes: 45
+    timeout-minutes: 30
 
     steps:
 
