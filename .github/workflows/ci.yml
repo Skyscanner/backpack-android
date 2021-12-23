@@ -192,6 +192,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       - name: Screenshot Tests
+        id: screenshotTests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           target: google_apis
@@ -202,6 +203,8 @@ jobs:
           script: |
             sudo easy_install Pillow==6.2.2
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
+           
+            changedFiles=`git diff --name-only` && echo "::set-output name=CHANGED_FILES::${changedFiles//$'\n'/'%0A'}"
             ./scripts/check-no-changes.sh
 
       - name: Upload Screenshot Tests Artifact
@@ -210,7 +213,22 @@ jobs:
         with:
           name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-screenshot-test-output
           path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
-          retention-days: 5
+          retention-days: 5 
+
+      - name: Notify PR of screenshots failure
+        if: ${{ failure() }}
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `### '${{ matrix.variant }}' files were changed.
+              If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes.
+              
+              >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`
+            })
 
   Deploy:
     name: Deploy
