@@ -18,9 +18,10 @@ env:
 
 jobs:
 
-  Java:
+  Build:
     name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     strategy:
       fail-fast: false
@@ -73,6 +74,7 @@ jobs:
   Android:
     name: Android tests
     runs-on: macos-latest
+    timeout-minutes: 30
 
     strategy:
       fail-fast: false
@@ -132,6 +134,7 @@ jobs:
   Screenshots:
     name: Screenshots tests
     runs-on: macos-latest
+    timeout-minutes: 30
 
     strategy:
       fail-fast: false
@@ -212,7 +215,8 @@ jobs:
   Deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: [Java, Android, Screenshots]
+    needs: [Build, Android, Screenshots]
+    timeout-minutes: 30
 
     steps:
 
