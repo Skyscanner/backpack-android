@@ -18,10 +18,10 @@ env:
 
 jobs:
 
-  Java:
+  Build:
     name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 45
 
     strategy:
       fail-fast: false
