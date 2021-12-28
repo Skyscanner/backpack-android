@@ -19,7 +19,7 @@
 buildscript {
   ext.kotlin_version = '1.5.31'
   ext.compose_version = '1.0.5'
-  ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.5.31"
+  ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.6.10"
   repositories {
     google()
     mavenCentral()
