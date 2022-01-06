@@ -53,6 +53,7 @@
     "@babel/preset-env": "^7.9.6",
     "@skyscanner/bpk-foundations-android": "^2.0.1",
     "@skyscanner/bpk-svgs": "^14.0.10",
+    "@xmldom/xmldom": "^0.8.0",
     "babel-eslint": "^10.1.0",
     "danger": "^10.6.6",
     "del": "^6.0.0",
@@ -77,8 +78,7 @@
     "semver": "^7.3.5",
     "svg2vectordrawable": "^2.4.0",
     "through2": "^4.0.2",
-    "tinycolor2": "^1.4.1",
-    "xmldom": "^0.6.0"
+    "tinycolor2": "^1.4.1"
   },
   "dependencies": {}
 }
