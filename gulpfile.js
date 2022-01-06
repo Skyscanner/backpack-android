@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018-2021 Skyscanner Ltd
+ * Copyright 2018-2022 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ const tinycolor = require('tinycolor2');
 const _ = require('lodash');
 const through = require('through2');
 const svg2vectordrawable = require('svg2vectordrawable');
-const xmldom = require('xmldom');
+const xmldom = require('@xmldom/xmldom');
 const tokens = require('@skyscanner/bpk-foundations-android/tokens/base.raw.android.json');
 const iconsMetadata = require('@skyscanner/bpk-svgs/dist/metadata.json');
 
