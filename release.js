@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018-2021 Skyscanner Ltd
+ * Copyright 2018-2022 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -147,13 +147,15 @@ async function release() {
       await amendReadmeFiles('backpack-compose', version);
     }
 
+    const publishModule = (packageType == android) ? 'Backpack' : 'backpack-compose'
+    const tagName = `${publishModule}@${version}`
+
     const releaseOptions = {
       increment: version,
       requireCleanWorkingDir: false,
-      npm: {
-        publish: false,
-      },
+      npm: false,
       git: {
+        tagName: tagName,
         requireCleanWorkingDir: false,
       },
       prompt: {
@@ -165,7 +167,6 @@ async function release() {
     await releaseit(releaseOptions);
     const publishTask = 'publishMavenPublicationToSonatypeRepository';
     const releaseTask = 'closeAndReleaseSonatypeStagingRepository';
-    const publishModule = (packageType == android) ? 'Backpack' : 'backpack-compose'
     childProcess.execSync(`./gradlew :backpack-common:${publishTask} :${publishModule}:${publishTask} ${releaseTask}`);
   } catch (exc) {
     console.error(exc);
