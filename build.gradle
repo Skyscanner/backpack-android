@@ -80,8 +80,8 @@ task clean(type: Delete) {
 }
 
 def BpkAndroidVersion = '33.2.0'
-def BpkCommonVersion = '0.5.0'
-def BpkComposeVersion = '0.0.1'
+def BpkCommonVersion = '0.6.0'
+def BpkComposeVersion = '0.1.0'
 
 ext {
   backpackAndroidVersion = "$BpkAndroidVersion"
