@@ -22,7 +22,6 @@ import fs from 'fs';
 import { includes } from 'lodash';
 import { danger, fail, warn } from 'danger';
 
-const currentYear = new Date().getFullYear();
 const shouldContainLicensingInformation = filePath =>
   filePath.match(/\.(js|sh|kt|java)$/) && !filePath.includes('dist/') && !filePath.includes('build/');
 
@@ -64,16 +63,4 @@ const unlicensedFiles = createdFiles.filter(filePath => {
 });
 if (unlicensedFiles.length > 0) {
   fail(`These new files do not include the license heading: ${unlicensedFiles.join(', ')}`);
-}
-
-// Updated files should include the latest year in licensing header.
-const outdatedLicenses = fileChanges.filter(filePath => {
-  if (shouldContainLicensingInformation(filePath) && !unlicensedFiles.includes(filePath)) {
-    const fileContent = fs.readFileSync(filePath);
-    return !fileContent.includes(`Copyright 2018-${currentYear} Skyscanner Ltd`);
-  }
-  return false;
-});
-if (outdatedLicenses.length > 0) {
-  fail(`These files contain an outdated licensing header: ${outdatedLicenses.join(', ')}. Please update to ${currentYear}.`);
 }
