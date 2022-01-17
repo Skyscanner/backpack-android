@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018-2021 Skyscanner Ltd
+ * Copyright 2018 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,6 @@ import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
 import java.nio.charset.StandardCharsets
-import java.util.Calendar
-
 
 sealed class BpkOutput<Input> : (Input) -> Boolean {
 
@@ -70,10 +68,9 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
 }
 
 private fun FileSpec.Builder.addFileHeader() : FileSpec.Builder {
-  val currentYear = Calendar.getInstance().get(Calendar.YEAR)
   val copyright = Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
     return this
-      .addComment(copyright, currentYear)
+      .addComment(copyright)
     .addComment("Auto-generated: do not edit")
 }
 
