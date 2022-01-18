@@ -35,7 +35,7 @@ Add the following dependencies to your `build.gradle` (in your app module) in th
 
 ```gradle
 implementation 'net.skyscanner.backpack:backpack-android:33.2.0' // for Android View system
-implementation 'net.skyscanner.backpack:backpack-compose:x.x.x' // for Compose (not released yet)
+implementation 'net.skyscanner.backpack:backpack-compose:0.1.0' // for Compose (beta)
 ```
 
 All Backpack components must to be used within `BpkTheme` scope:
