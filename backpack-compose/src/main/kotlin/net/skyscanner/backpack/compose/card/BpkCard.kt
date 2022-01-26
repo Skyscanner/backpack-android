@@ -73,7 +73,7 @@ fun BpkCard(
   val elevation by animateDpAsState(
     when {
       elevated -> BpkElevation.Xl
-      else -> BpkElevation.Base
+      else -> BpkElevation.Sm
     }
   )
 
