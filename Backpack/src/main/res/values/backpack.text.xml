@@ -28,12 +28,17 @@
 
   <dimen name="bpkTextBaseSize">16sp</dimen>
   <dimen name="bpkTextCapsSize">10sp</dimen>
+  <dimen name="bpkTextHero1Size">120sp</dimen>
+  <dimen name="bpkTextHero2Size">96sp</dimen>
+  <dimen name="bpkTextHero3Size">76sp</dimen>
+  <dimen name="bpkTextHero4Size">64sp</dimen>
+  <dimen name="bpkTextHero5Size">48sp</dimen>
   <dimen name="bpkTextLgSize">20sp</dimen>
   <dimen name="bpkTextSmSize">14sp</dimen>
   <dimen name="bpkTextXlSize">24sp</dimen>
   <dimen name="bpkTextXsSize">12sp</dimen>
-  <dimen name="bpkTextXxlSize">30sp</dimen>
-  <dimen name="bpkTextXxxlSize">36sp</dimen>
+  <dimen name="bpkTextXxlSize">32sp</dimen>
+  <dimen name="bpkTextXxxlSize">40sp</dimen>
 
   <style name="bpkTextBase">
     <item name="android:fontFamily">?bpkFontFamilyBase</item>

@@ -30,7 +30,7 @@ internal object BpkFontSize {
 
   internal val Xs: TextUnit = 12.0.sp
 
-  internal val Xxl: TextUnit = 30.0.sp
+  internal val Xxl: TextUnit = 32.0.sp
 
-  internal val Xxxl: TextUnit = 36.0.sp
+  internal val Xxxl: TextUnit = 40.0.sp
 }
