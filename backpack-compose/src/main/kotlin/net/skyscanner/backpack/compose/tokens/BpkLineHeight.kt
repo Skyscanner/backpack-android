@@ -30,13 +30,13 @@ internal object BpkLineHeight {
 
   internal val Xxl: TextUnit = 32.0.sp
 
-  internal val `TextHero-1LineHeight`: TextUnit = 120.0.sp
+  internal val `8xl`: TextUnit = 120.0.sp
 
-  internal val `TextHero-2LineHeight`: TextUnit = 96.0.sp
+  internal val `7xl`: TextUnit = 96.0.sp
 
-  internal val `TextHero-3LineHeight`: TextUnit = 76.0.sp
+  internal val `6xl`: TextUnit = 76.0.sp
 
-  internal val `TextHero-4LineHeight`: TextUnit = 64.0.sp
+  internal val `5xl`: TextUnit = 64.0.sp
 
-  internal val `TextHero-5LineHeight`: TextUnit = 48.0.sp
+  internal val Xxxxl: TextUnit = 48.0.sp
 }

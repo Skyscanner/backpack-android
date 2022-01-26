@@ -18,12 +18,12 @@
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
-import com.squareup.kotlinpoet.buildCodeBlock
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.buildCodeBlock
 
 interface BpkTextUnits : Map<String, Double>
 
@@ -33,14 +33,12 @@ object BpkTextUnit {
 
     object FontSize : Category() {
       override fun invoke(source: Map<String, Any>): BpkTextUnits =
-        parseTextUnits(source, "font-size", "typesettings", "FONT_SIZE_")
+        parseTextUnits(source, "font-size", "font-sizes", "FONT_SIZE_")
     }
 
     object LetterSpacing : Category() {
       override fun invoke(source: Map<String, Any>): BpkTextUnits =
-        parseTextUnits(source, "letter-spacing", "letter-spacings", "LETTER_SPACING_") {
-          !it.key.startsWith("TEXT_")
-        }
+        parseTextUnits(source, "letter-spacing", "letter-spacings", "LETTER_SPACING_")
     }
 
     object LineHeight : Category() {
@@ -74,8 +72,12 @@ private fun parseTextUnits(
   val data = props.filter { (_, value) -> value["type"] == type && value["category"] == category }
 
   val map = data
+    .mapKeys {
+      val originValue = it.value["originalValue"]
+      val key = originValue?.removeSurrounding("{!", "}") ?: it.key
+      key.removePrefix(prefixToRemove)
+      }
     .mapValues { it.value.getValue("value").toDoubleOrNull() }
-    .mapKeys { it.key.removePrefix(prefixToRemove) }
     .filterValues { it != null }
     .let { it as Map<String, Double> }
     .filter(filter)
@@ -88,6 +90,7 @@ private fun parseTextUnits(
 
 private val TextUnitClass = ClassName("androidx.compose.ui.unit", "TextUnit")
 private val spExtension = MemberName("androidx.compose.ui.unit", "sp", isExtension = true)
+private val emExtension = MemberName("androidx.compose.ui.unit", "em", isExtension = true)
 
 private fun toCompose(
   source: BpkTextUnits,
@@ -102,10 +105,15 @@ private fun toCompose(
           .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), TextUnitClass)
           .addModifiers(if (internal) KModifier.INTERNAL else KModifier.PUBLIC)
           .initializer(buildCodeBlock {
-            if (value < 0) {
-              add("-(%L).%M", -value, spExtension)
+            val extension = if (namespace == "BpkLetterSpacing") {
+              emExtension
             } else {
-              add("%L.%M", value, spExtension)
+              spExtension
+            }
+            if (value < 0) {
+              add("-(%L).%M", -value, extension)
+            } else {
+              add("%L.%M", value, extension)
             }
           })
           .build()
