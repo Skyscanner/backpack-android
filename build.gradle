@@ -1,7 +1,7 @@
 /**
  * Backpack for Android - Skyscanner's Design System
  *
- * Copyright 2018-2021 Skyscanner Ltd
+ * Copyright 2018 Skyscanner Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,12 +90,12 @@ ext {
   group = "net.skyscanner.backpack"
   dokkaOutputDir = "dokka"
 
-  androidxAppCompat = "androidx.appcompat:appcompat:1.4.0"
+  androidxAppCompat = "androidx.appcompat:appcompat:1.4.1"
   androidxAnnotations = "androidx.annotation:annotation:1.3.0"
-  androidMaterial = "com.google.android.material:material:1.4.0"
+  androidMaterial = "com.google.android.material:material:1.5.0"
   cardView = "androidx.cardview:cardview:1.0.0"
   googleMaps = "com.google.android.gms:play-services-maps:18.0.2"
-  constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.2"
+  constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.3"
   swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
   threeTenAbpVersion = "1.3.1"
   threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
@@ -109,7 +109,7 @@ ext {
   espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
   testRules = "androidx.test:rules:1.4.0"
   mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-  mockitoAndroid = "org.mockito:mockito-android:4.2.0"
+  mockitoAndroid = "org.mockito:mockito-android:4.3.0"
 
   coroutinesVersion = "1.5.2"
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
