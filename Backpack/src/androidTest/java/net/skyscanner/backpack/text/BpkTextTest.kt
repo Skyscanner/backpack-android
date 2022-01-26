@@ -201,7 +201,7 @@ class BpkTextTest {
       val font = getFont.invoke(withCustomFont)
 
       val expectedFont = when {
-        message.contains("Emphasized") ->
+        message.contains("Emphasized") || message.contains("Hero") ->
           Typeface.create("cursive", Typeface.NORMAL)
         message.contains("Heavy") ->
           Typeface.create("casual", Typeface.NORMAL)
