@@ -204,6 +204,51 @@ class BpkTextTest : BpkSnapshotTest() {
   }
 
   @Test
+  fun screenshotTestTextHero1() {
+    setDimensions(150, 400)
+    val text = BpkText(testContext)
+    text.text = "Hero 1"
+    text.textStyle = BpkText.HERO1
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextHero2() {
+    setDimensions(150, 400)
+    val text = BpkText(testContext)
+    text.text = "Hero 2"
+    text.textStyle = BpkText.HERO2
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextHero3() {
+    setDimensions(150, 400)
+    val text = BpkText(testContext)
+    text.text = "Hero 3"
+    text.textStyle = BpkText.HERO3
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextHero4() {
+    setDimensions(150, 400)
+    val text = BpkText(testContext)
+    text.text = "Hero 4"
+    text.textStyle = BpkText.HERO4
+    snap(text)
+  }
+
+  @Test
+  fun screenshotTestTextHero5() {
+    setDimensions(150, 400)
+    val text = BpkText(testContext)
+    text.text = "Hero 5"
+    text.textStyle = BpkText.HERO5
+    snap(text)
+  }
+
+  @Test
   fun screenshotTestTextLink() {
     val text = BpkText(testContext)
     text.setText(R.string.txt_lorem_ipsum_link)

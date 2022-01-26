@@ -110,6 +110,41 @@
     
   </style>
 
+  <style name="bpkTextHero1">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextHero1Size</item>
+    
+  </style>
+
+  <style name="bpkTextHero2">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextHero2Size</item>
+    
+  </style>
+
+  <style name="bpkTextHero3">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextHero3Size</item>
+    
+  </style>
+
+  <style name="bpkTextHero4">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextHero4Size</item>
+    
+  </style>
+
+  <style name="bpkTextHero5">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextHero5Size</item>
+    
+  </style>
+
   <style name="bpkTextLgEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>

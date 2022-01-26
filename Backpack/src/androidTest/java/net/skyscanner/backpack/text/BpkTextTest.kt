@@ -133,8 +133,8 @@ class BpkTextTest {
       arrayOf("bpkTextSm", "sans-serif", 14, null, fontsAccessor(BpkText.SM, Weight.NORMAL)),
       arrayOf("bpkTextXl", "sans-serif", 24, null, fontsAccessor(BpkText.XL, Weight.NORMAL)),
       arrayOf("bpkTextXs", "sans-serif", 12, null, fontsAccessor(BpkText.XS, Weight.NORMAL)),
-      arrayOf("bpkTextXxl", "sans-serif", 30, null, fontsAccessor(BpkText.XXL, Weight.NORMAL)),
-      arrayOf("bpkTextXxxl", "sans-serif", 36, null, fontsAccessor(BpkText.XXXL, Weight.NORMAL)),
+      arrayOf("bpkTextXxl", "sans-serif", 32, null, fontsAccessor(BpkText.XXL, Weight.NORMAL)),
+      arrayOf("bpkTextXxxl", "sans-serif", 40, null, fontsAccessor(BpkText.XXXL, Weight.NORMAL)),
       arrayOf("bpkTextBaseEmphasized", "sans-serif-medium", 16, null, fontsAccessor(BpkText.BASE, Weight.EMPHASIZED)),
       arrayOf("bpkTextCapsEmphasized", "sans-serif-medium", 10, null, fontsAccessor(BpkText.CAPS, Weight.EMPHASIZED)),
       arrayOf("bpkTextLgEmphasized", "sans-serif-medium", 20, null, fontsAccessor(BpkText.LG, Weight.EMPHASIZED)),
@@ -150,20 +150,25 @@ class BpkTextTest {
       arrayOf(
         "bpkTextXxlEmphasized",
         "sans-serif-medium",
-        30,
+        32,
         null,
         fontsAccessor(BpkText.XXL, Weight.EMPHASIZED)
       ),
       arrayOf(
         "bpkTextXxxlEmphasized",
         "sans-serif-medium",
-        36,
+        40,
         null,
         fontsAccessor(BpkText.XXXL, Weight.EMPHASIZED)
       ),
       arrayOf("bpkTextXlHeavy", "sans-serif-black", 24, null, fontsAccessor(BpkText.XL, Weight.HEAVY)),
-      arrayOf("bpkTextXxlHeavy", "sans-serif-black", 30, null, fontsAccessor(BpkText.XXL, Weight.HEAVY)),
-      arrayOf("bpkTextXxxlHeavy", "sans-serif-black", 36, null, fontsAccessor(BpkText.XXXL, Weight.HEAVY))
+      arrayOf("bpkTextXxlHeavy", "sans-serif-black", 32, null, fontsAccessor(BpkText.XXL, Weight.HEAVY)),
+      arrayOf("bpkTextXxxlHeavy", "sans-serif-black", 40, null, fontsAccessor(BpkText.XXXL, Weight.HEAVY)),
+      arrayOf("bpkTextHero1", "sans-serif-medium", 120, null, fontsAccessor(BpkText.HERO1, Weight.EMPHASIZED)),
+      arrayOf("bpkTextHero2", "sans-serif-medium", 96, null, fontsAccessor(BpkText.HERO2, Weight.EMPHASIZED)),
+      arrayOf("bpkTextHero3", "sans-serif-medium", 76, null, fontsAccessor(BpkText.HERO3, Weight.EMPHASIZED)),
+      arrayOf("bpkTextHero4", "sans-serif-medium", 64, null, fontsAccessor(BpkText.HERO4, Weight.EMPHASIZED)),
+      arrayOf("bpkTextHero5", "sans-serif-medium", 48, null, fontsAccessor(BpkText.HERO5, Weight.EMPHASIZED)),
     )
   }
 

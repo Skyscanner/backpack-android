@@ -22,6 +22,11 @@
     <item name="bpkTextXsAppearance">@style/bpkTextXs</item>
     <item name="bpkTextXxlAppearance">@style/bpkTextXxl</item>
     <item name="bpkTextXxxlAppearance">@style/bpkTextXxxl</item>
+    <item name="bpkTextHero1Appearance">@style/bpkTextHero1</item>
+    <item name="bpkTextHero2Appearance">@style/bpkTextHero2</item>
+    <item name="bpkTextHero3Appearance">@style/bpkTextHero3</item>
+    <item name="bpkTextHero4Appearance">@style/bpkTextHero4</item>
+    <item name="bpkTextHero5Appearance">@style/bpkTextHero5</item>
     <item name="bpkTextBaseEmphasizedAppearance">@style/bpkTextBaseEmphasized</item>
     <item name="bpkTextCapsEmphasizedAppearance">@style/bpkTextCapsEmphasized</item>
     <item name="bpkTextLgEmphasizedAppearance">@style/bpkTextLgEmphasized</item>
