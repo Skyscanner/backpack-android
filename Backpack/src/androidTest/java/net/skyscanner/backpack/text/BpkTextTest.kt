@@ -20,18 +20,14 @@ package net.skyscanner.backpack.text
 
 import android.content.Context
 import android.graphics.Paint
-import android.graphics.Typeface
 import android.view.ContextThemeWrapper
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.test.R as TestR
 import net.skyscanner.backpack.text.BpkText.Weight
-import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.TestActivity
-import net.skyscanner.backpack.util.unsafeLazy
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -119,99 +115,6 @@ class BpkTextTest {
     BpkText(context).apply {
       textStyle = BpkText.SM
       weight = Weight.HEAVY
-    }
-  }
-
-  private val textDefinitions by unsafeLazy {
-    val fontsAccessor = { style: Int, weight: Weight ->
-      { context: Context -> BpkText.getFont(context, style, weight) }
-    }
-    arrayOf(
-      arrayOf("bpkTextBase", "sans-serif", 16, null, fontsAccessor(BpkText.BASE, Weight.NORMAL)),
-      arrayOf("bpkTextCaps", "sans-serif", 10, null, fontsAccessor(BpkText.CAPS, Weight.NORMAL)),
-      arrayOf("bpkTextLg", "sans-serif", 20, null, fontsAccessor(BpkText.LG, Weight.NORMAL)),
-      arrayOf("bpkTextSm", "sans-serif", 14, null, fontsAccessor(BpkText.SM, Weight.NORMAL)),
-      arrayOf("bpkTextXl", "sans-serif", 24, null, fontsAccessor(BpkText.XL, Weight.NORMAL)),
-      arrayOf("bpkTextXs", "sans-serif", 12, null, fontsAccessor(BpkText.XS, Weight.NORMAL)),
-      arrayOf("bpkTextXxl", "sans-serif", 32, null, fontsAccessor(BpkText.XXL, Weight.NORMAL)),
-      arrayOf("bpkTextXxxl", "sans-serif", 40, null, fontsAccessor(BpkText.XXXL, Weight.NORMAL)),
-      arrayOf("bpkTextBaseEmphasized", "sans-serif-medium", 16, null, fontsAccessor(BpkText.BASE, Weight.EMPHASIZED)),
-      arrayOf("bpkTextCapsEmphasized", "sans-serif-medium", 10, null, fontsAccessor(BpkText.CAPS, Weight.EMPHASIZED)),
-      arrayOf("bpkTextLgEmphasized", "sans-serif-medium", 20, null, fontsAccessor(BpkText.LG, Weight.EMPHASIZED)),
-      arrayOf("bpkTextSmEmphasized", "sans-serif-medium", 14, null, fontsAccessor(BpkText.SM, Weight.EMPHASIZED)),
-      arrayOf(
-        "bpkTextXlEmphasized",
-        "sans-serif-medium",
-        24,
-        null,
-        fontsAccessor(BpkText.XL, Weight.EMPHASIZED)
-      ),
-      arrayOf("bpkTextXsEmphasized", "sans-serif-medium", 12, null, fontsAccessor(BpkText.XS, Weight.EMPHASIZED)),
-      arrayOf(
-        "bpkTextXxlEmphasized",
-        "sans-serif-medium",
-        32,
-        null,
-        fontsAccessor(BpkText.XXL, Weight.EMPHASIZED)
-      ),
-      arrayOf(
-        "bpkTextXxxlEmphasized",
-        "sans-serif-medium",
-        40,
-        null,
-        fontsAccessor(BpkText.XXXL, Weight.EMPHASIZED)
-      ),
-      arrayOf("bpkTextXlHeavy", "sans-serif-black", 24, null, fontsAccessor(BpkText.XL, Weight.HEAVY)),
-      arrayOf("bpkTextXxlHeavy", "sans-serif-black", 32, null, fontsAccessor(BpkText.XXL, Weight.HEAVY)),
-      arrayOf("bpkTextXxxlHeavy", "sans-serif-black", 40, null, fontsAccessor(BpkText.XXXL, Weight.HEAVY)),
-      arrayOf("bpkTextHero1", "sans-serif-medium", 120, null, fontsAccessor(BpkText.HERO1, Weight.EMPHASIZED)),
-      arrayOf("bpkTextHero2", "sans-serif-medium", 96, null, fontsAccessor(BpkText.HERO2, Weight.EMPHASIZED)),
-      arrayOf("bpkTextHero3", "sans-serif-medium", 76, null, fontsAccessor(BpkText.HERO3, Weight.EMPHASIZED)),
-      arrayOf("bpkTextHero4", "sans-serif-medium", 64, null, fontsAccessor(BpkText.HERO4, Weight.EMPHASIZED)),
-      arrayOf("bpkTextHero5", "sans-serif-medium", 48, null, fontsAccessor(BpkText.HERO5, Weight.EMPHASIZED)),
-    )
-  }
-
-  @Test
-  fun getFont() {
-    textDefinitions.forEach { test ->
-      val message = test[0] as String
-      val fontFamily = test[1] as String
-      val fontSize = test[2] as Int
-      val letterSpacing = test[3] as Float?
-      val getFont = test[4] as (context: Context) -> BpkText.FontDefinition
-
-      val font = getFont.invoke(context)
-
-      Assert.assertEquals(message, Typeface.create(fontFamily, Typeface.NORMAL), font.typeface)
-      Assert.assertEquals(message, font.fontSize, ResourcesUtil.dpToPx(fontSize, context))
-      Assert.assertEquals(message, font.letterSpacing, letterSpacing)
-    }
-  }
-
-  @Test
-  fun getFont_withCustomFont() {
-    val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
-
-    textDefinitions.forEach { test ->
-      val message = test[0] as String
-      val fontSize = test[2] as Int
-      val getFont = test[4] as (context: Context) -> BpkText.FontDefinition
-
-      val font = getFont.invoke(withCustomFont)
-
-      val expectedFont = when {
-        message.contains("Emphasized") || message.contains("Hero") ->
-          Typeface.create("cursive", Typeface.NORMAL)
-        message.contains("Heavy") ->
-          Typeface.create("casual", Typeface.NORMAL)
-        else ->
-          ResourcesCompat.getFont(withCustomFont, TestR.font.shadows_into_light)
-      }
-
-      Assert.assertEquals(message, expectedFont, font.typeface)
-      Assert.assertEquals(message, font.fontSize, ResourcesUtil.dpToPx(fontSize, context))
-      Assert.assertEquals(message, font.letterSpacing, null)
     }
   }
 
