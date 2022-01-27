@@ -120,9 +120,11 @@ const convertToXml = (chunk, enc, cb) => {
 };
 
 const getTextDimensions = () =>
-  tokensWithCategory('font-sizes').map(({ value, name }) => ({
-    name: `bpkText${pascalCase(name.split('_')[1])}Size`,
-    size: Number.parseInt(value, 10),
+  tokensWithCategory('typesettings')
+    .filter(({ name }) => name.startsWith("FONT_SIZE"))
+    .map(({ value, name }) => ({
+      name: `bpkText${pascalCase(name.split('_')[2])}Size`,
+      size: Number.parseInt(value, 10),
   }));
 
 const getTextStyles = fontWeight => {
@@ -160,7 +162,7 @@ const getTextStyles = fontWeight => {
 
       return {
         name: `bpk${pascalCase(key)}${getFontWeightSuffix(fontWeight, styleName)}`,
-        size: `@dimen/bpkText${pascalCase(sizeProp[0].name.split('_')[1])}Size`,
+        size: `@dimen/bpkText${pascalCase(sizeProp[0].originalValue.split('_')[2])}Size`,
         fontFamily: fontFamilyMappings[fontWeight],
         letterSpacing: (letterSpacingProp.size == 1) ? letterSpacingProp[0].value : null,
       };

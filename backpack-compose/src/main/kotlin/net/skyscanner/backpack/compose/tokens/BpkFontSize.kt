@@ -18,19 +18,17 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 internal object BpkFontSize {
-  internal val Base: TextUnit = 16.0.sp
-
-  internal val Caps: TextUnit = 10.0.sp
-
-  internal val `8xl`: TextUnit = 120.0.sp
-
-  internal val `7xl`: TextUnit = 96.0.sp
+  internal val `5xl`: TextUnit = 64.0.sp
 
   internal val `6xl`: TextUnit = 76.0.sp
 
-  internal val `5xl`: TextUnit = 64.0.sp
+  internal val `7xl`: TextUnit = 96.0.sp
 
-  internal val Xxxxl: TextUnit = 48.0.sp
+  internal val `8xl`: TextUnit = 120.0.sp
+
+  internal val Base: TextUnit = 16.0.sp
+
+  internal val Caps: TextUnit = 10.0.sp
 
   internal val Lg: TextUnit = 20.0.sp
 
@@ -43,4 +41,6 @@ internal object BpkFontSize {
   internal val Xxl: TextUnit = 32.0.sp
 
   internal val Xxxl: TextUnit = 40.0.sp
+
+  internal val Xxxxl: TextUnit = 48.0.sp
 }

@@ -33,17 +33,21 @@ object BpkTextUnit {
 
     object FontSize : Category() {
       override fun invoke(source: Map<String, Any>): BpkTextUnits =
-        parseTextUnits(source, "font-size", "font-sizes", "FONT_SIZE_")
+        parseTextUnits(source, "font-size", "typesettings", "FONT_SIZE_")
     }
 
     object LetterSpacing : Category() {
       override fun invoke(source: Map<String, Any>): BpkTextUnits =
-        parseTextUnits(source, "letter-spacing", "letter-spacings", "LETTER_SPACING_")
+        parseTextUnits(source, "letter-spacing", "letter-spacings", "LETTER_SPACING_") {
+          !it.key.startsWith("TEXT_")
+        }
     }
 
     object LineHeight : Category() {
       override fun invoke(source: Map<String, Any>): BpkTextUnits =
-        parseTextUnits(source, "size", "typesettings", "LINE_HEIGHT_")
+        parseTextUnits(source, "size", "typesettings", "LINE_HEIGHT_") {
+          !it.key.startsWith("TEXT_")
+        }
     }
 
   }
@@ -72,12 +76,8 @@ private fun parseTextUnits(
   val data = props.filter { (_, value) -> value["type"] == type && value["category"] == category }
 
   val map = data
-    .mapKeys {
-      val originValue = it.value["originalValue"]
-      val key = originValue?.removeSurrounding("{!", "}") ?: it.key
-      key.removePrefix(prefixToRemove)
-      }
     .mapValues { it.value.getValue("value").toDoubleOrNull() }
+    .mapKeys { it.key.removePrefix(prefixToRemove) }
     .filterValues { it != null }
     .let { it as Map<String, Double> }
     .filter(filter)
