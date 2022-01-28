@@ -38,7 +38,8 @@ const PATHS = {
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
-const VALID_TEXT_STYLES = new Set(['caps', 'xs', 'sm', 'base', 'lg', 'xl', 'xxl', 'xxxl']);
+const VALID_TEXT_STYLES = new Set(['caps', 'xs', 'sm', 'base', 'lg', 'xl', 'xxl', 'xxxl', 'hero-1', 'hero-2', 'hero-3', 'hero-4', 'hero-5']);
+const TEXT_STYLES_WITH_WEIGHT = new Set(['hero-1', 'hero-2', 'hero-3', 'hero-4', 'hero-5']);
 const VALID_HEAVY_TEXT_STYLES = new Set(['xl', 'xxl', 'xxxl']);
 
 const FONT_WEIGHTS = {
@@ -53,14 +54,20 @@ const fontFamilyMappings = {
   [FONT_WEIGHTS.heavy]: '?bpkFontFamilyHeavy',
 };
 
+const fontWeightMappings = {
+  400: FONT_WEIGHTS.normal,
+  700: FONT_WEIGHTS.emphasized,
+  900: FONT_WEIGHTS.heavy,
+};
+
 const pascalCase = s =>
   _.flow(
     _.camelCase,
     _.upperFirst,
   )(s);
 
-const getFontWeightSuffix = fontWeight => {
-  if (fontWeight !== FONT_WEIGHTS.normal) {
+const getFontWeightSuffix = (fontWeight, styleName) => {
+  if (fontWeight !== FONT_WEIGHTS.normal && !TEXT_STYLES_WITH_WEIGHT.has(styleName)) {
     return pascalCase(fontWeight);
   }
   return '';
@@ -113,9 +120,11 @@ const convertToXml = (chunk, enc, cb) => {
 };
 
 const getTextDimensions = () =>
-  tokensWithCategory('font-sizes').map(({ value, name }) => ({
-    name: `bpkText${pascalCase(name.split('_')[1])}Size`,
-    size: Number.parseInt(value, 10),
+  tokensWithCategory('typesettings')
+    .filter(({ name }) => name.startsWith("FONT_SIZE"))
+    .map(({ value, name }) => ({
+      name: `bpkText${pascalCase(name.split('_')[2])}Size`,
+      size: Number.parseInt(value, 10),
   }));
 
 const getTextStyles = fontWeight => {
@@ -129,10 +138,15 @@ const getTextStyles = fontWeight => {
         .replace('LETTER_SPACING_', 'TEXT_'),
     )
     .map((values, key) => [values, key])
-    .filter(token =>
-      (fontWeight === FONT_WEIGHTS.heavy ? VALID_HEAVY_TEXT_STYLES : VALID_TEXT_STYLES).has(
-        token[1].replace('TEXT_', '').toLowerCase(),
-      ),
+    .filter(token => {
+      const weightProp = _.filter(token[0], ({ category }) => category === 'font-weights');
+      const styleName = token[1].replace('TEXT_', '').toLowerCase();
+      const isValidTextStyle = (fontWeight === FONT_WEIGHTS.heavy ? VALID_HEAVY_TEXT_STYLES : VALID_TEXT_STYLES)
+                                 .has(styleName);
+      const isValidWeight = (!TEXT_STYLES_WITH_WEIGHT.has(styleName)
+                              || fontWeight == fontWeightMappings[weightProp[0].value]);
+      return isValidTextStyle && isValidWeight;
+      }
     )
     .map(token => {
       const properties = token[0];
@@ -140,14 +154,15 @@ const getTextStyles = fontWeight => {
 
       const sizeProp = _.filter(properties, ({ category }) => category === 'font-sizes');
       const weightProp = _.filter(properties, ({ category }) => category === 'font-weights');
+      const styleName = key.replace('TEXT_', '').toLowerCase();
       const letterSpacingProp = _.filter(properties, ({ category }) => category === 'letter-spacings');
       if (sizeProp.length !== 1 || weightProp.length !== 1) {
         throw new Error('Expected all text sizes to have a weight and font size.');
       }
 
       return {
-        name: `bpk${pascalCase(key)}${getFontWeightSuffix(fontWeight)}`,
-        size: `@dimen/bpkText${pascalCase(sizeProp[0].name.split('_')[1])}Size`,
+        name: `bpk${pascalCase(key)}${getFontWeightSuffix(fontWeight, styleName)}`,
+        size: `@dimen/bpkText${pascalCase(sizeProp[0].originalValue.split('_')[2])}Size`,
         fontFamily: fontFamilyMappings[fontWeight],
         letterSpacing: (letterSpacingProp.size == 1) ? letterSpacingProp[0].value : null,
       };

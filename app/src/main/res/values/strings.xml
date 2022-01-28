@@ -80,4 +80,10 @@
 
   <string name="story_badge_compose">Compose</string>
 
+  <string name="text_hero1">Hero 1</string>
+  <string name="text_hero2">Hero 2</string>
+  <string name="text_hero3">Hero 3</string>
+  <string name="text_hero4">Hero 4</string>
+  <string name="text_hero5">Hero 5</string>
+
 </resources>

@@ -51,7 +51,12 @@ private val styleMapping = mapOf(
     R.attr.bpkTextXxxlAppearance,
     R.attr.bpkTextXxxlEmphasizedAppearance,
     R.attr.bpkTextXxxlHeavyAppearance
-  )
+  ),
+  BpkText.HERO1 to arrayOf(R.attr.bpkTextHero1Appearance, R.attr.bpkTextHero1Appearance, null),
+  BpkText.HERO2 to arrayOf(R.attr.bpkTextHero2Appearance, R.attr.bpkTextHero2Appearance, null),
+  BpkText.HERO3 to arrayOf(R.attr.bpkTextHero3Appearance, R.attr.bpkTextHero3Appearance, null),
+  BpkText.HERO4 to arrayOf(R.attr.bpkTextHero4Appearance, R.attr.bpkTextHero4Appearance, null),
+  BpkText.HERO5 to arrayOf(R.attr.bpkTextHero5Appearance, R.attr.bpkTextHero5Appearance, null),
 )
 
 open class BpkText @JvmOverloads constructor(
@@ -66,7 +71,7 @@ open class BpkText @JvmOverloads constructor(
     HEAVY
   }
 
-  @IntDef(XS, SM, BASE, LG, XL, XXL, XXXL, CAPS)
+  @IntDef(XS, SM, BASE, LG, XL, XXL, XXXL, CAPS, HERO1, HERO2, HERO3, HERO4, HERO5)
   annotation class Styles
 
   companion object {
@@ -78,6 +83,11 @@ open class BpkText @JvmOverloads constructor(
     const val XXL = 5
     const val XXXL = 6
     const val CAPS = 7
+    const val HERO1 = 8
+    const val HERO2 = 9
+    const val HERO3 = 10
+    const val HERO4 = 11
+    const val HERO5 = 12
 
     @JvmStatic
     fun getFont(

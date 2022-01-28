@@ -34,8 +34,8 @@ internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
 ) : CollapsingToolbarLayout(context, attrs, defStyleAttr) {
 
   init {
-    setExpandedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextXxxlHeavyAppearance))
-    setExpandedTitleTypeface(FontFamilyResolver.invoke(context, BpkText.Weight.HEAVY))
+    setExpandedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextXxlHeavyAppearance))
+    setExpandedTitleTypeface(FontFamilyResolver.invoke(context, BpkText.Weight.EMPHASIZED))
 
     setCollapsedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextBaseEmphasizedAppearance))
     setCollapsedTitleTypeface(FontFamilyResolver.invoke(context, BpkText.Weight.EMPHASIZED))

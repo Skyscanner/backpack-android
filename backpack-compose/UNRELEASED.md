@@ -6,6 +6,7 @@
 
 - Default `ContentAlpha` for `BpkTheme` is `1`
 - Card default elevation is `xm`
+- Updated hero and heading 1 text styles
 
 ## How to write a good changelog entry
 

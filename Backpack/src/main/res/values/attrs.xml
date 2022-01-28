@@ -34,6 +34,11 @@
       <enum name="xxl" value="5" />
       <enum name="xxxl" value="6" />
       <enum name="caps" value="7" />
+      <enum name="hero1" value="8" />
+      <enum name="hero2" value="9" />
+      <enum name="hero3" value="10" />
+      <enum name="hero4" value="11" />
+      <enum name="hero5" value="12" />
     </attr>
     <attr name="weight" format="enum">
       <enum name="normal" value="0" />
@@ -310,6 +315,11 @@
   <attr name="bpkTextXsAppearance" format="reference" />
   <attr name="bpkTextXxlAppearance" format="reference" />
   <attr name="bpkTextXxxlAppearance" format="reference" />
+  <attr name="bpkTextHero1Appearance" format="reference" />
+  <attr name="bpkTextHero2Appearance" format="reference" />
+  <attr name="bpkTextHero3Appearance" format="reference" />
+  <attr name="bpkTextHero4Appearance" format="reference" />
+  <attr name="bpkTextHero5Appearance" format="reference" />
   <attr name="bpkTextBaseEmphasizedAppearance" format="reference" />
   <attr name="bpkTextCapsEmphasizedAppearance" format="reference" />
   <attr name="bpkTextLgEmphasizedAppearance" format="reference" />

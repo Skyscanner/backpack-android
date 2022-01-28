@@ -14,4 +14,9 @@
 
 package net.skyscanner.backpack.compose.tokens
 
-internal object BpkLetterSpacing
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.em
+
+internal object BpkLetterSpacing {
+  internal val Tight: TextUnit = -(0.02).em
+}

@@ -18,15 +18,27 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 internal object BpkLineHeight {
-  internal val Base: TextUnit = 19.0.sp
+  internal val `5xl`: TextUnit = 64.0.sp
 
-  internal val Lg: TextUnit = 23.0.sp
+  internal val `6xl`: TextUnit = 76.0.sp
 
-  internal val Sm: TextUnit = 16.0.sp
+  internal val `7xl`: TextUnit = 96.0.sp
 
-  internal val Xl: TextUnit = 28.0.sp
+  internal val `8xl`: TextUnit = 120.0.sp
 
-  internal val Xs: TextUnit = 14.0.sp
+  internal val Base: TextUnit = 16.0.sp
 
-  internal val Xxl: TextUnit = 42.0.sp
+  internal val Lg: TextUnit = 20.0.sp
+
+  internal val Sm: TextUnit = 14.0.sp
+
+  internal val Xl: TextUnit = 24.0.sp
+
+  internal val Xs: TextUnit = 12.0.sp
+
+  internal val Xxl: TextUnit = 32.0.sp
+
+  internal val Xxxl: TextUnit = 40.0.sp
+
+  internal val Xxxxl: TextUnit = 48.0.sp
 }

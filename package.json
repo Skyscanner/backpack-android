@@ -51,7 +51,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
-    "@skyscanner/bpk-foundations-android": "^2.0.1",
+    "@skyscanner/bpk-foundations-android": "^3.1.1",
     "@skyscanner/bpk-svgs": "^14.0.10",
     "@xmldom/xmldom": "^0.8.0",
     "babel-eslint": "^10.1.0",

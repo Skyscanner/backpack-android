@@ -94,6 +94,7 @@ object DocsRegistry {
     ViewScreenshot("Text - View - Default", "default"),
     ViewScreenshot("Text - View - Emphasized", "emphasized"),
     ViewScreenshot("Text - View - Heavy", "heavy"),
+    ViewScreenshot("Text - View - Hero", "hero"),
     ComposeScreenshot("Text - Compose - Hero", "hero"),
     ComposeScreenshot("Text - Compose - Heading", "heading"),
     ComposeScreenshot("Text - Compose - Body", "body"),

@@ -21,8 +21,6 @@ package net.skyscanner.backpack.compose.tokens
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.em
-import androidx.compose.ui.unit.sp
 
 data class BpkTypography internal constructor(
   val hero1: TextStyle,
@@ -48,32 +46,37 @@ data class BpkTypography internal constructor(
   ) : this(
     hero1 = TextStyle(
       fontWeight = FontWeight.Bold,
-      fontSize = 120.sp, // TODO - replace with token when available
-      letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontSize = BpkFontSize.`8xl`,
+      lineHeight = BpkLineHeight.`8xl`,
+      letterSpacing = BpkLetterSpacing.Tight,
       fontFamily = defaultFontFamily,
     ),
     hero2 = TextStyle(
       fontWeight = FontWeight.Bold,
-      fontSize = 96.sp, // TODO - replace with token when available
-      letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontSize = BpkFontSize.`7xl`,
+      lineHeight = BpkLineHeight.`7xl`,
+      letterSpacing = BpkLetterSpacing.Tight,
       fontFamily = defaultFontFamily,
     ),
     hero3 = TextStyle(
       fontWeight = FontWeight.Bold,
-      fontSize = 76.sp, // TODO - replace with token when available
-      letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontSize = BpkFontSize.`6xl`,
+      lineHeight = BpkLineHeight.`6xl`,
+      letterSpacing = BpkLetterSpacing.Tight,
       fontFamily = defaultFontFamily,
     ),
     hero4 = TextStyle(
       fontWeight = FontWeight.Bold,
-      fontSize = 64.sp, // TODO - replace with token when available
-      letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontSize = BpkFontSize.`5xl`,
+      lineHeight = BpkLineHeight.`5xl`,
+      letterSpacing = BpkLetterSpacing.Tight,
       fontFamily = defaultFontFamily,
     ),
     hero5 = TextStyle(
       fontWeight = FontWeight.Bold,
-      fontSize = 48.sp, // TODO - replace with token when available
-      letterSpacing = (-0.02).em, // TODO - replace with token when available
+      fontSize = BpkFontSize.Xxxxl,
+      lineHeight = BpkLineHeight.Xxxxl,
+      letterSpacing = BpkLetterSpacing.Tight,
       fontFamily = defaultFontFamily,
     ),
     heading1 = TextStyle(
