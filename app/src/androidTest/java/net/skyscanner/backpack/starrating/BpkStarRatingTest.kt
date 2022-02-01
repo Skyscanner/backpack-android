@@ -105,28 +105,28 @@ class BpkStarRatingTest : BpkSnapshotTest() {
 
   @Test
   fun roundingDown() {
-    rating.rounding = RoundingType.DOWN
+    rating.rounding = RoundingType.Down
     rating.rating = 3.9f
     snap(rating)
   }
 
   @Test
   fun roundingUp() {
-    rating.rounding = RoundingType.UP
+    rating.rounding = RoundingType.Up
     rating.rating = 3.9f
     snap(rating)
   }
 
   @Test
   fun roundingNearestDown() {
-    rating.rounding = RoundingType.NEAREST
+    rating.rounding = RoundingType.Nearest
     rating.rating = 3.7f
     snap(rating)
   }
 
   @Test
   fun roundingNearestUp() {
-    rating.rounding = RoundingType.NEAREST
+    rating.rounding = RoundingType.Nearest
     rating.rating = 3.9f
     snap(rating)
   }

@@ -28,7 +28,7 @@ import net.skyscanner.backpack.starrating.RoundingType
 BpkStarRating(context).apply {
   maxRating = 5
   rating = 2.5f
-  rounding = RoundingType.UP
+  rounding = RoundingType.Up
 }
 ```
 

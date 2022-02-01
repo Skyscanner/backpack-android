@@ -69,7 +69,7 @@ open class BpkStarRatingBase internal constructor(
       update()
     }
 
-  private var _rounding: RoundingType = RoundingType.DOWN
+  private var _rounding: RoundingType = RoundingType.Down
   var rounding: RoundingType
     get() = _rounding
     set(value) {
@@ -97,7 +97,8 @@ open class BpkStarRatingBase internal constructor(
     ).use {
       _maxRating = it.getInt(R.styleable.BpkStarRating_maxRating, maxRating)
       _rating = it.getFloat(R.styleable.BpkStarRating_rating, maxRating / 2f)
-      _rounding = it.getInt(R.styleable.BpkStarRating_rounding, rounding.ordinal).let { id -> RoundingType.values()[id] }
+      _rounding = it.getInt(R.styleable.BpkStarRating_rounding, rounding.ordinal)
+        .let { id -> RoundingType.values().find { it.id == id } }!!
       starColor = it.getColor(R.styleable.BpkStarRating_starColor, starColor)
       starFilledColor = it.getColor(R.styleable.BpkStarRating_starFilledColor, starFilledColor)
       accessibilityStatusRes = it.getResourceId(R.styleable.BpkStarRating_accessibilityStatus, 0).takeIf { it != 0 }
@@ -134,9 +135,9 @@ open class BpkStarRatingBase internal constructor(
     }
 
     val roundedRating = when (rounding) {
-      RoundingType.DOWN -> floor(rating * 2) / 2
-      RoundingType.UP -> ceil(rating * 2) / 2
-      RoundingType.NEAREST -> round(rating * 2) / 2
+      RoundingType.Down -> floor(rating * 2) / 2
+      RoundingType.Up -> ceil(rating * 2) / 2
+      RoundingType.Nearest -> round(rating * 2) / 2
     }
 
     for (i in 0 until maxRating) {
