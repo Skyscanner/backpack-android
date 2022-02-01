@@ -1,6 +1,6 @@
 # Backpack Android changelog
 
-[Unreleased changes](./UNRELEASED.md).
+[Unreleased changes](UNRELEASED.md).
 
 # 33.2.0
 
@@ -1276,13 +1276,13 @@ This version was breaking as we removed `onYearChanged` method from `BpkCalendar
 
 **Added:**
 
-- Added new property `cornerStyle` to `BpkCardView`. See usage in [README.md](docs/view/Card/README.md).
+- Added new property `cornerStyle` to `BpkCardView`. See usage in [README.md](../docs/view/Card/README.md).
 
 # 1.2.0
 
 **Added:**
 
-- Introducing BpkChip component. See usage in [README.md](docs/view/Chip/README.md).
+- Introducing BpkChip component. See usage in [README.md](../docs/view/Chip/README.md).
 
 # 1.1.0
 
@@ -1305,7 +1305,7 @@ This version was breaking as we removed `onYearChanged` method from `BpkCalendar
 
 **Added:**
 
-- Introducing `BpkDialog` component. See usage in [README.md](docs/view/Dialog/README.md).
+- Introducing `BpkDialog` component. See usage in [README.md](../docs/view/Dialog/README.md).
 
 # 0.9.0
 
@@ -1321,7 +1321,7 @@ This version was breaking as we removed `onYearChanged` method from `BpkCalendar
 
 # 0.7.0
 
-- Introducing the `BpkSwitch` component. See usage in [README.md](docs/view/Switch/README.md).
+- Introducing the `BpkSwitch` component. See usage in [README.md](../docs/view/Switch/README.md).
 
 # 0.6.0
 
@@ -1337,7 +1337,7 @@ Added new icons:
 
 # 0.5.0
 
-Introducing BpkSpinner component. See usage in [README.md](docs/view/Spinner/README.md).
+Introducing BpkSpinner component. See usage in [README.md](../docs/view/Spinner/README.md).
 
 Update build tools to 28.0.3.
 
@@ -1375,11 +1375,11 @@ Introducing `BpkBadge` and BpkPanel component.
 
 ## 0.2.0
 
-Introducing `BpkGradients`. See usage in [README.md](README.md#gradient).
+Introducing `BpkGradients`. See usage in [README.md](../README.md#gradient).
 
 ## 0.1.0
 
-Adds Backpack text styles. See the full list in the [README.md](README.md#text-styles).
+Adds Backpack text styles. See the full list in the [README.md](../README.md#text-styles).
 
 Usage:
 
@@ -1388,7 +1388,7 @@ Usage:
   style="@style/bpkTextSm" />
 ```
 
-Adds Backpack radii tokens. See the full list in the [README.md](README.md#radii).
+Adds Backpack radii tokens. See the full list in the [README.md](../README.md#radii).
 
 Usage:
 
@@ -1396,7 +1396,7 @@ Usage:
 <corners android:radius="@dimen/bpkBorderRadiusPill" />
 ```
 
-Adds Backpack elevation tokens. See the full list in the [README.md](README.md#elevation).
+Adds Backpack elevation tokens. See the full list in the [README.md](../README.md#elevation).
 
 Usage:
 
