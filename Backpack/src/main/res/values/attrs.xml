@@ -137,6 +137,11 @@
     <attr name="rating" format="float" />
     <attr name="maxRating" format="integer" />
     <attr name="accessibilityStatus" format="reference" />
+    <attr name="rounding" format="enum">
+      <enum name="down" value="0" />
+      <enum name="up" value="1" />
+      <enum name="nearest" value="2" />
+    </attr>
   </declare-styleable>
 
   <declare-styleable name="BpkHorizontalNav">
