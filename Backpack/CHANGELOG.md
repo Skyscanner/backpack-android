@@ -2,6 +2,16 @@
 
 [Unreleased changes](UNRELEASED.md).
 
+# 33.3.0
+
+**Added:**
+- Added new hero typography styles
+
+**Fixed:**
+- Updated xxl & xxxl text sizes
+- Updated expanded nav bar text style to xxl emphasized
+- Added `rounding` property to `BpkStarRating`
+
 # 33.2.0
 
 **Updated:**
