@@ -1,22 +1,27 @@
 package net.skyscanner.backpack.compose.button.internal
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonColors
 import net.skyscanner.backpack.compose.button.BpkButtonIconPosition
 import net.skyscanner.backpack.compose.button.BpkButtonSize
@@ -60,8 +65,14 @@ internal fun BpkButtonImpl(
 private fun ButtonContent(content: BpkButtonContent, size: BpkButtonSize, loading: Boolean) {
 
   @Composable
-  fun Progress() {
-    CircularProgressIndicator(Modifier.requiredSize(size.iconSize))
+  fun Progress(
+    modifier: Modifier = Modifier,
+  ) {
+    CircularProgressIndicator(
+      modifier = modifier.requiredSize(size.iconSize),
+      strokeWidth = 2.dp,
+      color = LocalContentColor.current,
+    )
   }
 
   @Composable
@@ -75,35 +86,37 @@ private fun ButtonContent(content: BpkButtonContent, size: BpkButtonSize, loadin
     Icon(icon, contentDescription, Modifier.requiredSize(size.iconSize))
   }
 
-  @Composable
-  fun Spacer() {
-    Spacer(Modifier.requiredWidth(size.horizontalSpacing))
-  }
 
-
-  return when (loading) {
-    true -> Progress()
-    else -> when (content) {
-      is BpkButtonContent.Text -> {
-        Text(content.text)
-      }
-      is BpkButtonContent.Icon -> {
-        Icon(content.icon, content.contentDescription)
-      }
-      is BpkButtonContent.IconAndText -> when (content.position) {
-        BpkButtonIconPosition.Start -> {
-          Icon(content.icon, null)
-          Spacer()
+  Box {
+    Row(
+      modifier = Modifier.alpha(if (loading) 0f else 1f),
+      horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
+    ) {
+      when (content) {
+        is BpkButtonContent.Text -> {
           Text(content.text)
         }
-        BpkButtonIconPosition.End -> {
-          Text(content.text)
-          Spacer()
-          Icon(content.icon, null)
+        is BpkButtonContent.Icon -> {
+          Icon(content.icon, content.contentDescription)
+        }
+        is BpkButtonContent.IconAndText -> when (content.position) {
+          BpkButtonIconPosition.Start -> {
+            Icon(content.icon, null)
+            Text(content.text)
+          }
+          BpkButtonIconPosition.End -> {
+            Text(content.text)
+            Icon(content.icon, null)
+          }
         }
       }
     }
+
+    if (loading) {
+      Progress(Modifier.align(Alignment.Center))
+    }
   }
+
 }
 
 private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
