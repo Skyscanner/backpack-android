@@ -133,13 +133,19 @@ const getTextDimensions = () =>
 
 const getTextStyles = () => {
   const result = _.chain(
-    [].concat(tokensWithCategory('font-sizes'), tokensWithCategory('font-weights'), tokensWithCategory('letter-spacings')),
+    [].concat(
+      tokensWithCategory('font-sizes'),
+      tokensWithCategory('font-weights'),
+      tokensWithCategory('letter-spacings'),
+      tokensWithCategory('typesettings'),
+    ),
   )
     .groupBy(({ name }) =>
       name
         .replace('_FONT_SIZE', '')
         .replace('_FONT_WEIGHT', '')
-        .replace('_LETTER_SPACING', ''),
+        .replace('_LETTER_SPACING', '')
+        .replace('_LINE_HEIGHT', ''),
     )
     .map((values, key) => [values, key])
     .filter(token => {
@@ -154,6 +160,7 @@ const getTextStyles = () => {
       const sizeProp = _.filter(properties, ({ category }) => category === 'font-sizes');
       const weightProp = _.filter(properties, ({ category }) => category === 'font-weights');
       const letterSpacingProp = _.filter(properties, ({ category }) => category === 'letter-spacings');
+      const lineHeightProp = _.filter(properties, ({ category }) => category === 'typesettings');
       if (sizeProp.length !== 1 || weightProp.length !== 1) {
         throw new Error('Expected all text sizes to have a weight and font size.');
       }
@@ -163,7 +170,8 @@ const getTextStyles = () => {
         name: `bpk${pascalCase(key)}`,
         size: `@dimen/bpkText${pascalCase(sizeProp[0].originalValue.split('_')[2])}Size`,
         fontFamily: fontFamilyMappings[fontWeight],
-        letterSpacing: (letterSpacingProp.size == 1) ? letterSpacingProp[0].value : null,
+        lineHeight: (lineHeightProp.length == 1) ? lineHeightProp[0].value : null,
+        letterSpacing: (letterSpacingProp.length == 1) ? letterSpacingProp[0].value : null,
       };
     })
     .value();
