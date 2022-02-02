@@ -40,62 +40,6 @@
   <dimen name="bpkTextXxxlSize">40sp</dimen>
   <dimen name="bpkTextXxxxlSize">48sp</dimen>
 
-  <style name="bpkTextBase">
-    <item name="android:fontFamily">?bpkFontFamilyBase</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
-    
-  </style>
-
-  <style name="bpkTextCaps">
-    <item name="android:fontFamily">?bpkFontFamilyBase</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextCapsSize</item>
-    
-  </style>
-
-  <style name="bpkTextLg">
-    <item name="android:fontFamily">?bpkFontFamilyBase</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextLgSize</item>
-    
-  </style>
-
-  <style name="bpkTextSm">
-    <item name="android:fontFamily">?bpkFontFamilyBase</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextSmSize</item>
-    
-  </style>
-
-  <style name="bpkTextXl">
-    <item name="android:fontFamily">?bpkFontFamilyBase</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextXlSize</item>
-    
-  </style>
-
-  <style name="bpkTextXs">
-    <item name="android:fontFamily">?bpkFontFamilyBase</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextXsSize</item>
-    
-  </style>
-
-  <style name="bpkTextXxl">
-    <item name="android:fontFamily">?bpkFontFamilyBase</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextXxlSize</item>
-    
-  </style>
-
-  <style name="bpkTextXxxl">
-    <item name="android:fontFamily">?bpkFontFamilyBase</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextXxxlSize</item>
-    
-  </style>
-
   <style name="bpkTextBaseEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -103,8 +47,22 @@
     
   </style>
 
+  <style name="bpkTextBase">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
+    
+  </style>
+
   <style name="bpkTextCapsEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextCapsSize</item>
+    
+  </style>
+
+  <style name="bpkTextCaps">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
     <item name="android:textSize">@dimen/bpkTextCapsSize</item>
     
@@ -152,8 +110,22 @@
     
   </style>
 
+  <style name="bpkTextLg">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextLgSize</item>
+    
+  </style>
+
   <style name="bpkTextSmEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextSmSize</item>
+    
+  </style>
+
+  <style name="bpkTextSm">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
     <item name="android:textSize">@dimen/bpkTextSmSize</item>
     
@@ -166,8 +138,29 @@
     
   </style>
 
+  <style name="bpkTextXlHeavy">
+    <item name="android:fontFamily">?bpkFontFamilyHeavy</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXlSize</item>
+    
+  </style>
+
+  <style name="bpkTextXl">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXlSize</item>
+    
+  </style>
+
   <style name="bpkTextXsEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXsSize</item>
+    
+  </style>
+
+  <style name="bpkTextXs">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
     <item name="android:textSize">@dimen/bpkTextXsSize</item>
     
@@ -180,20 +173,6 @@
     
   </style>
 
-  <style name="bpkTextXxxlEmphasized">
-    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextXxxlSize</item>
-    
-  </style>
-
-  <style name="bpkTextXlHeavy">
-    <item name="android:fontFamily">?bpkFontFamilyHeavy</item>
-    <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">@dimen/bpkTextXlSize</item>
-    
-  </style>
-
   <style name="bpkTextXxlHeavy">
     <item name="android:fontFamily">?bpkFontFamilyHeavy</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -201,8 +180,29 @@
     
   </style>
 
+  <style name="bpkTextXxl">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxlSize</item>
+    
+  </style>
+
+  <style name="bpkTextXxxlEmphasized">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxxlSize</item>
+    
+  </style>
+
   <style name="bpkTextXxxlHeavy">
     <item name="android:fontFamily">?bpkFontFamilyHeavy</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxxlSize</item>
+    
+  </style>
+
+  <style name="bpkTextXxxl">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
     <item name="android:textSize">@dimen/bpkTextXxxlSize</item>
     

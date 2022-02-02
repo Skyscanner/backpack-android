@@ -38,9 +38,20 @@ const PATHS = {
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
-const VALID_TEXT_STYLES = new Set(['caps', 'xs', 'sm', 'base', 'lg', 'xl', 'xxl', 'xxxl', 'hero-1', 'hero-2', 'hero-3', 'hero-4', 'hero-5']);
-const TEXT_STYLES_WITH_WEIGHT = new Set(['hero-1', 'hero-2', 'hero-3', 'hero-4', 'hero-5']);
-const VALID_HEAVY_TEXT_STYLES = new Set(['xl', 'xxl', 'xxxl']);
+const FILTERED_TEXT_STYLES = new Set([
+  'caption',
+  'footnote',
+  'label-1',
+  'label-2',
+  'body-default',
+  'body-longform',
+  'heading-1',
+  'heading-2',
+  'heading-3',
+  'heading-4',
+  'heading-5',
+  'subheading',
+]);
 
 const FONT_WEIGHTS = {
   normal: 'normal',
@@ -65,13 +76,6 @@ const pascalCase = s =>
     _.camelCase,
     _.upperFirst,
   )(s);
-
-const getFontWeightSuffix = (fontWeight, styleName) => {
-  if (fontWeight !== FONT_WEIGHTS.normal && !TEXT_STYLES_WITH_WEIGHT.has(styleName)) {
-    return pascalCase(fontWeight);
-  }
-  return '';
-};
 
 const tokensWithType = type => Object.values(tokens.props).filter(i => i.type === type);
 
@@ -127,7 +131,7 @@ const getTextDimensions = () =>
       size: Number.parseInt(value, 10),
   }));
 
-const getTextStyles = fontWeight => {
+const getTextStyles = () => {
   const result = _.chain(
     [].concat(tokensWithCategory('font-sizes'), tokensWithCategory('font-weights'), tokensWithCategory('letter-spacings')),
   )
@@ -135,17 +139,12 @@ const getTextStyles = fontWeight => {
       name
         .replace('_FONT_SIZE', '')
         .replace('_FONT_WEIGHT', '')
-        .replace('LETTER_SPACING_', 'TEXT_'),
+        .replace('_LETTER_SPACING', ''),
     )
     .map((values, key) => [values, key])
     .filter(token => {
-      const weightProp = _.filter(token[0], ({ category }) => category === 'font-weights');
       const styleName = token[1].replace('TEXT_', '').toLowerCase();
-      const isValidTextStyle = (fontWeight === FONT_WEIGHTS.heavy ? VALID_HEAVY_TEXT_STYLES : VALID_TEXT_STYLES)
-                                 .has(styleName);
-      const isValidWeight = (!TEXT_STYLES_WITH_WEIGHT.has(styleName)
-                              || fontWeight == fontWeightMappings[weightProp[0].value]);
-      return isValidTextStyle && isValidWeight;
+      return !FILTERED_TEXT_STYLES.has(styleName) && token[1].startsWith('TEXT_');
       }
     )
     .map(token => {
@@ -154,14 +153,14 @@ const getTextStyles = fontWeight => {
 
       const sizeProp = _.filter(properties, ({ category }) => category === 'font-sizes');
       const weightProp = _.filter(properties, ({ category }) => category === 'font-weights');
-      const styleName = key.replace('TEXT_', '').toLowerCase();
       const letterSpacingProp = _.filter(properties, ({ category }) => category === 'letter-spacings');
       if (sizeProp.length !== 1 || weightProp.length !== 1) {
         throw new Error('Expected all text sizes to have a weight and font size.');
       }
+      const fontWeight = fontWeightMappings[weightProp[0].value];
 
       return {
-        name: `bpk${pascalCase(key)}${getFontWeightSuffix(fontWeight, styleName)}`,
+        name: `bpk${pascalCase(key)}`,
         size: `@dimen/bpkText${pascalCase(sizeProp[0].originalValue.split('_')[2])}Size`,
         fontFamily: fontFamilyMappings[fontWeight],
         letterSpacing: (letterSpacingProp.size == 1) ? letterSpacingProp[0].value : null,
@@ -271,11 +270,7 @@ gulp.task('template:text', () =>
     .pipe(
       nunjucks.compile({
         dimensions: [...getTextDimensions()],
-        data: [
-          ...getTextStyles(FONT_WEIGHTS.normal),
-          ...getTextStyles(FONT_WEIGHTS.emphasized),
-          ...getTextStyles(FONT_WEIGHTS.heavy),
-        ],
+        data: [...getTextStyles()],
       }),
     )
     .pipe(rename('values/backpack.text.xml'))
@@ -380,11 +375,7 @@ gulp.task(
 gulp.task('clean', () => del([PATHS.outputRes], { force: true }));
 
 gulp.task('printTextAttributes', done => {
-  [
-    ...getTextStyles(FONT_WEIGHTS.normal),
-    ...getTextStyles(FONT_WEIGHTS.emphasized),
-    ...getTextStyles(FONT_WEIGHTS.heavy),
-  ].forEach(({ name }) => {
+  getTextStyles().forEach(({ name }) => {
     console.log(`<attr name="${name}Appearance" format="reference" />`);
   });
   done();
@@ -400,11 +391,7 @@ gulp.task('printTextAttributes', done => {
 gulp.task('printTextAppearenceStyles', done => {
   const parseSuffix = _.flow([s => s.substring(2), _.capitalize]);
   const fontSuffix = parseSuffix(process.argv[3] || '');
-  [
-    ...getTextStyles(FONT_WEIGHTS.normal),
-    ...getTextStyles(FONT_WEIGHTS.emphasized),
-    ...getTextStyles(FONT_WEIGHTS.heavy),
-  ].forEach(({ name }) => {
+  getTextStyles().forEach(({ name }) => {
     console.log(`<item name="${name}Appearance">@style/${name}${fontSuffix}</item>`);
   });
   done();
