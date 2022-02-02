@@ -14,6 +14,7 @@ Example of a Star Rating in XML
 <net.skyscanner.backpack.starrating.BpkStarRating
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
+  app:rounding="up"
   app:maxRating="5"
   app:rating="2.5" />
 ```
@@ -22,12 +23,23 @@ Example of a Star Rating in Kotlin
 
 ```Kotlin
 import net.skyscanner.backpack.starrating.BpkStarRating
+import net.skyscanner.backpack.starrating.RoundingType
 
 BpkStarRating(context).apply {
   maxRating = 5
   rating = 2.5f
+  rounding = RoundingType.Up
 }
 ```
+
+# Props
+
+| Property              | Type              | Default Value       |
+| --------------------- | ----------------- | ------------------- |
+| `maxRating`           | `Int`             | 5                   |
+| `rating`              | `Float`           | `maxRating / 2`     |
+| `rounding`            | `RoundingType`    | `RoundingType.DOWN` |
+| `accessibilityStatus` | String resource   | -                   |
 
 ## Theme Props
 

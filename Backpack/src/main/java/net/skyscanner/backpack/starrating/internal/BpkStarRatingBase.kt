@@ -28,7 +28,11 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.round
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.starrating.RoundingType
 import net.skyscanner.backpack.util.use
 
 @SuppressLint("ViewConstructor")
@@ -65,6 +69,14 @@ open class BpkStarRatingBase internal constructor(
       update()
     }
 
+  private var _rounding: RoundingType = RoundingType.Down
+  var rounding: RoundingType
+    get() = _rounding
+    set(value) {
+      _rounding = value
+      update()
+    }
+
   var accessibilityStatusRes: Int? = null
     set(value) {
       field = value
@@ -85,6 +97,8 @@ open class BpkStarRatingBase internal constructor(
     ).use {
       _maxRating = it.getInt(R.styleable.BpkStarRating_maxRating, maxRating)
       _rating = it.getFloat(R.styleable.BpkStarRating_rating, maxRating / 2f)
+      _rounding = it.getInt(R.styleable.BpkStarRating_rounding, rounding.ordinal)
+        .let { id -> RoundingType.values().find { it.id == id } }!!
       starColor = it.getColor(R.styleable.BpkStarRating_starColor, starColor)
       starFilledColor = it.getColor(R.styleable.BpkStarRating_starFilledColor, starFilledColor)
       accessibilityStatusRes = it.getResourceId(R.styleable.BpkStarRating_accessibilityStatus, 0).takeIf { it != 0 }
@@ -120,10 +134,16 @@ open class BpkStarRatingBase internal constructor(
       }
     }
 
+    val roundedRating = when (rounding) {
+      RoundingType.Down -> floor(rating * 2) / 2
+      RoundingType.Up -> ceil(rating * 2) / 2
+      RoundingType.Nearest -> round(rating * 2) / 2
+    }
+
     for (i in 0 until maxRating) {
       val child = getChildAt(i)
       val background = child.background as BpkStar
-      val value = (rating - i).coerceIn(0f, 1f)
+      val value = (roundedRating - i).coerceIn(0f, 1f)
       background.value = when {
         (value >= 0.0f && value < 0.5f) -> BpkStar.Value.Empty
         (value >= 0.5f && value < 1.0f) -> BpkStar.Value.Half

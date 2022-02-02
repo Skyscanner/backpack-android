@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.text
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Paint
@@ -29,6 +30,7 @@ import android.widget.TextView
 import androidx.annotation.IntDef
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.internal.FontFamilyResolver
 import net.skyscanner.backpack.util.BpkTheme
@@ -170,20 +172,33 @@ open class BpkText @JvmOverloads constructor(
     }
 
     setTextAppearance(textAppearance)
+    applyLineHeight(textAppearance)
     _textColour?.let(::setTextColor)
     setLinkTextColor(_textColorLink)
+  }
+
+  @SuppressLint("CustomViewStyleable")
+  private fun applyLineHeight(textAppearance: Int) {
+    val textStyleAttributes = context.obtainStyledAttributes(textAppearance, R.styleable.BpkTextStyle)
+    val lineHeight = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
+      .let { if (it == -1) null else it }
+    lineHeight?.let { TextViewCompat.setLineHeight(this, lineHeight) }
+
+    textStyleAttributes.recycle()
   }
 
   data class FontDefinition(
     val typeface: Typeface,
     val fontSize: Int,
-    val letterSpacing: Float?
+    val letterSpacing: Float?,
+    val lineHeight: Int?,
   ) {
 
     fun applyTo(text: TextView) {
       text.typeface = typeface
       text.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize.toFloat())
       letterSpacing?.let { text.letterSpacing = it }
+      lineHeight?.let { TextViewCompat.setLineHeight(text, lineHeight) }
     }
 
     fun applyTo(paint: Paint) {
@@ -209,10 +224,13 @@ private fun internalGetFont(
   val letterSpacing = textStyleAttributes.getFloat(R.styleable.BpkTextStyle_android_letterSpacing, -1f)
     .let { if (it == -1f) null else it }
 
+  val lineHeight = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
+    .let { if (it == -1) null else it }
+
   textStyleAttributes.recycle()
 
   return FontFamilyResolver(context, weight)?.let {
-    BpkText.FontDefinition(it, fontSize, letterSpacing)
+    BpkText.FontDefinition(it, fontSize, letterSpacing, lineHeight)
   } ?: throw IllegalStateException("Bpk font not configured correctly")
 }
 

@@ -102,7 +102,7 @@ private fun toCompose(
     .addProperties(
       source.map { (name, value) ->
         PropertySpec
-          .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), TextUnitClass)
+          .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name.replace('-', '_')), TextUnitClass)
           .addModifiers(if (internal) KModifier.INTERNAL else KModifier.PUBLIC)
           .initializer(buildCodeBlock {
             val extension = if (namespace == "BpkLetterSpacing") {

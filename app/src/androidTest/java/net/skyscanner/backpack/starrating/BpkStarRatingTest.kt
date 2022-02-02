@@ -35,12 +35,12 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestStarRating_Default() {
+  fun default() {
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_CustomMaxRatingIncreasing() {
+  fun customMaxRatingIncreasing() {
     setDimensions(16, 160)
     rating.maxRating = 5
     rating.maxRating = 10
@@ -48,58 +48,86 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestStarRating_CustomMaxRatingDecreasing() {
+  fun customMaxRatingDecreasing() {
     rating.maxRating = 5
     rating.maxRating = 3
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_NegativeRating() {
+  fun negativeRating() {
     rating.maxRating = 5
     rating.rating = -0.5f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_ZeroRating() {
+  fun zeroRating() {
     rating.maxRating = 5
     rating.rating = 0.0f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_RatingValueBetween0And0_5() {
+  fun ratingValueBetween0And0_5() {
     rating.maxRating = 5
     rating.rating = 0.4999999f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_RatingValue0_5() {
+  fun ratingValue0_5() {
     rating.maxRating = 5
     rating.rating = 0.5f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_RatingValueBetween0_5And1() {
+  fun ratingValueBetween0_5And1() {
     rating.maxRating = 5
     rating.rating = 0.9999999f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_RatingValue1() {
+  fun ratingValue1() {
     rating.maxRating = 5
     rating.rating = 1.0f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestStarRating_6withMax5() {
+  fun aboveMaxValue() {
     rating.maxRating = 5
     rating.rating = 6.0f
+    snap(rating)
+  }
+
+  @Test
+  fun roundingDown() {
+    rating.rounding = RoundingType.Down
+    rating.rating = 3.9f
+    snap(rating)
+  }
+
+  @Test
+  fun roundingUp() {
+    rating.rounding = RoundingType.Up
+    rating.rating = 3.9f
+    snap(rating)
+  }
+
+  @Test
+  fun roundingNearestDown() {
+    rating.rounding = RoundingType.Nearest
+    rating.rating = 3.7f
+    snap(rating)
+  }
+
+  @Test
+  fun roundingNearestUp() {
+    rating.rounding = RoundingType.Nearest
+    rating.rating = 3.9f
     snap(rating)
   }
 }

@@ -1,13 +1,8 @@
 # Unreleased
+> Place your changes below this line.
 
 **Added:**
-- Added new hero typography styles
-
-**Fixed:**
-- Updated xxl & xxxl text sizes
-- Updated expanded nav bar text style to xxl emphasized
-
-> Place your changes below this line.
+- Text styles now include line height & letter spacing
 
 ## How to write a good changelog entry
 

@@ -79,9 +79,9 @@ task clean(type: Delete) {
   delete rootProject.buildDir
 }
 
-def BpkAndroidVersion = '33.2.0'
-def BpkCommonVersion = '0.6.0'
-def BpkComposeVersion = '0.1.0'
+def BpkAndroidVersion = '33.3.0'
+def BpkCommonVersion = '0.8.0'
+def BpkComposeVersion = '0.1.1'
 
 ext {
   backpackAndroidVersion = "$BpkAndroidVersion"

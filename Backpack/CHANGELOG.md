@@ -1,0 +1,1431 @@
+# Backpack Android changelog
+
+[Unreleased changes](UNRELEASED.md).
+
+# 33.3.0
+
+**Added:**
+- Added new hero typography styles
+
+**Fixed:**
+- Updated xxl & xxxl text sizes
+- Updated expanded nav bar text style to xxl emphasized
+- Added `rounding` property to `BpkStarRating`
+
+# 33.2.0
+
+**Updated:**
+- Calendar 1 is deprecated in a favour of Calendar 2.
+- Calendar 2 is not experimental anymore.
+
+**Fixed:**
+
+- Updated text secondary dark colour to `skyGrayTint04`
+- Updated letter spacing logic
+
+# 33.1.1
+
+**Added:**
+
+  - New icon set "Self-serve pick-up", with sm and lg icons.
+
+# 33.1.0
+
+**Added:**
+
+- New `BpkTextInputLayout` component for adding a label and/or error message or help text to an input field
+
+**Fixed:**
+
+- Updated SDK version to 31
+- Updated `BpkBottomNav` unselected colour to improve accessibility
+
+# 33.0.2
+
+**Fixed:**
+
+- Updated world icons
+
+# 33.0.1
+
+**Fixed:**
+
+- Removed dependency onto `backpack-common`
+
+# 33.0.0
+
+**Breaking:**
+- BpkSnackbar
+  - Increased Snackbar duration to 30 seconds when screen-reader is enabled
+  - Add `contentDescription` for icon actions
+  - Removed `setAction` and `setOnDismissed` Kotlin extension functions - use same named member functions instead
+
+**Fixed:**
+
+- Fixed an issue with Calendar2, where current months with less days than the current day were incorrectly formatted to the next month.
+
+
+# 32.1.0
+
+**Added:**
+- `BpkSwitch`:
+  - Story with formatted label
+  - Example in docs with formatted label
+
+- Lint check for colour usage
+
+**Fixed:**
+- Updated `world--amer`, `world--apac`, `world--emea` icons to their latest version
+
+# 32.0.2
+
+**Fixed:**
+
+- Updated `BpkButton` to match Design System:
+  - Updated various colours
+  - Updated icon spacing + horizontal padding
+  - All caps property is now false
+
+- Updated `BpkDialog` to match Design System:
+  - Updated flare radius to `12dp`
+
+- Updated `BpkHorizontalNav` to match Design System:
+  - Updated default text colour to primary text
+  - All caps property is now false
+  - Update icon spacing from `24dp` to `16dp` and fixed icon alignment and tinting
+
+- Updated `BpkChip` to match Design System:
+  - Updated icon spacing to `8dp`
+  - Icon size updated from `24dp` to `16dp`
+
+- Updated `BpkSwitch` to match Design System:
+  - Updated track checked colour to sky blue tint 03
+  - Updated unchecked thumb colour to sky white
+  - Updated dark unchecked track colour to black tint 3
+
+# 32.0.1
+
+**Fixed:**
+
+- Publish public dependencies with library
+
+# 32.0.0
+
+**Breaking:**
+
+- Now publishing on Maven Central
+
+**Added:**
+
+- Accessibility support for `BpkStarRating` and `BpkStarRatingInteractive` - set the new `accessibilityStatus` attribute for better announcements.
+
+# 31.0.1
+
+**Fixed:**
+
+- Updated font definition for relative theme
+
+# 31.0.0
+
+**Breaking:**
+
+- Removed separation of internal & OSS variant. Custom font now needs to be provided by app
+
+# 30.1.1
+
+**Fixed:**
+- Downgraded `core-ktx` version to 1.3.2 to fix test timeouts
+
+# 30.1.0
+
+**Added:**
+- Lint check for component usage
+
+**Changed:**
+- Migrated to new Backpack Foundations packages, `@skyscanner/bpk-ios` and `@skyscanner/bpk-svgs`.
+- Updated icons to newer versions.
+
+# 30.0.0
+
+**Breaking:**
+
+- New app theming behaviour
+  - Backpack now provides a base theme to be extended by the application
+  - `BpkTheme.applyDefaultsToContext` and `BpkTheme.wrapContextWithDefaults` were removed in favour of using the base theme
+
+**Added:**
+
+- Added `ratingScale` property to`BpkRating` to support a 0-5 scale
+
+**Fixed:**
+
+- Android Studio preview for components
+- Updated colours for `BpkRating` component for better accessibility
+
+# 29.0.0
+
+**Breaking:**
+  - `minSdk` has been bumped to 24
+
+**Added:**
+  - New `BpkSlider` component
+  - New `car-door` icon
+
+**Fixed:**
+  - `BpkButton` background changes when `iconPosition` property is updated
+
+# 28.1.0
+
+**Added:**
+  - `BpkNudger` component
+
+# 28.0.3
+
+**Updated:**
+  - `BpkRating` DM colours
+
+# 28.0.2
+
+**Updated:**
+  - Icons set
+  - `BpkDialog` design
+
+# 28.0.1
+
+**Updated:**
+  - `BpkRating` design
+
+# 28.0.0
+
+**Updated:**
+  - `BpkMapMarker` in selected state looks the same in all the cases
+
+**Breaking:**
+  - `BpkCalendar` removed `isRtl` property from `BpkCalendarController`
+
+# 27.0.0
+
+**Added:**
+  - `BpkRadioButton` component
+
+**Breaking:**
+  - `BpkDialog`
+    - renamed `BpkDialog.Icon.colorRes` property to `BpkDialog.Icon.color`
+    - `BpkDialog.Icon.color` now accepts `@ColorInt` instead of `@ColorRes`
+  - `BpkBadge`
+    - updated the design
+    - removed `bpkBadgeStyle` theme attribute
+    - removed `android:includeFontPadding` attribute
+    - `android:includeFontPadding` is set to true by default
+
+# 26.1.1
+
+**Fixed:**
+  - `BpkCalendar` - updated the design
+
+# 26.1.0
+
+**Added:**
+  - Custom Google Maps markers support
+
+**Fixed:**
+  - `BpkDialog` border radius
+
+# 26.0.0
+
+**Added:**
+  - `BpkBottomSheet`
+
+**Breaking:**
+  - Removed `ViewPump` dependency
+  - Removed `BpkInterceptor`, `BpkViewPumpContextWrapper`, `ElevationInterceptor`, `SpacingInterceptor`
+
+# 25.3.0
+
+**Updated:**
+  - `BpkTextField`
+    - New design.
+  - `BpkCalendar`
+    - Multiline labels support
+
+# 25.2.0
+
+**Added:**
+  - `BpkCalendar`
+    - New functionality – labels for each cell.
+
+# 25.1.0
+
+**Added:**
+  - `BpkChip`
+    - New property – `chipDisabledBackgroundColor`
+    - New property – `chipTextColor`
+
+**Fixed:**
+  - `BpkChip`
+    - Updated the designs
+
+# 25.0.0
+
+**Breaking:**
+  - `BpkRating`
+    - `ratingOrientation` XML attribute has been renamed to `ratingStyle`
+    - `BpkRating.Orientation` XML attribute has been renamed to `BpkRating.Style`
+ - `bpkBorderRadiusSm` has been changed from `4dp` to `8dp`
+ - `BpkButton` radius has been changed from `4dp` to `8dp`
+ - `BpkPanel` radius has been changed from `4dp` to `12dp`
+ - `BpkCard` radius has been changed from `4dp` to `12dp`
+
+**Added:**
+  - `BpkRating`
+    - New style – `pill`
+
+# 24.2.0
+
+**Added:**
+  - `BpkOverlay`
+
+# 24.1.0
+
+**Added:**
+  - `BpkButton`
+    - Type can now be changed programmatically.
+
+# 24.0.1
+
+**Fixed:**
+  - `BpkStarRating`
+    - Half-star icon is now not filled
+    - Colours update
+    - Empty icon is now outline
+
+# 24.0.0
+
+**Breaking:**
+  - Updated icons
+  - Removed:
+    - `bpk_close_small` icon
+
+**Added:**
+  - `BpkIcon`
+    - New icon dimension – `sm`.
+    - New icons:
+        - `bpk_account__female`
+        - `bpk_beach`
+        - `bpk_car_wash`
+        - `bpk_cars_flexible`
+        - `bpk_clean`
+        - `bpk_clean_policy`
+        - `bpk_cleaning_medical`
+        - `bpk_collapse`
+        - `bpk_education`
+        - `bpk_electric`
+        - `bpk_exclamation`
+        - `bpk_explore`
+        - `bpk_face_id`
+        - `bpk_face_mask`
+        - `bpk_fingerprint`
+        - `bpk_flight_flexible`
+        - `bpk_logout`
+        - `bpk_pause`
+        - `bpk_play`
+        - `bpk_ppe`
+        - `bpk_social_distancing`
+        - `bpk_sort_down`
+        - `bpk_sort_up`
+        - `bpk_swap`
+        - `bpk_virus`
+        - `bpk_weather__clear`
+        - `bpk_weather__cloudy`
+        - `bpk_weather__fog`
+        - `bpk_weather__partly_cloudy`
+        - `bpk_weather__rain`
+        - `bpk_weather__snow`
+        - `bpk_weather__thunderstorm`
+        - `bpk_weather__tornado`
+        - `bpk_weather__wind`
+
+**Fixed:**
+  - Improved vector assets support on `Android 5.X` for:
+    - `BpkBottomNav`
+    - `BpkChip`
+    - `BpkFlare`
+    - `BpkDialog`
+    - `BpkHorizontalHav`
+    - `BpkNavBar`
+    - `BpkStarRating`
+    - `BpkPanel`
+    - `BpkSnackbar`
+  - Updated samples using `BpkIcon`
+
+# 23.5.0
+
+**Added:**
+
+- Added `BpkOutlineChip` component.
+
+# 23.4.0
+
+**Added:**
+
+- Added new `account--name`, `ticket-flexible` and `hotel-flexible` icons.
+
+# 23.3.0
+
+**Added:**
+
+- `BpkBarChart`
+
+# 23.2.0
+
+**Added:**
+
+- `BpkCalendar`:
+  - Added new `descriptionOnly` prop to `HighlightedDay`.
+
+- `BpkChip`:
+  - Added new `chipIcon` prop.
+
+# 23.1.1
+
+**Fixed:**
+
+- `BpkCalendar`
+  - Added accessibility labels to `WeekDay` and `Month` views in `BpkCalendar`.
+  - Updated calendar pre defined cell styles to match latest design.
+
+# 23.1.0
+
+**Added:**
+
+- `BpkFlare`:
+  - Added `flarePointerDirection` attribute with `DOWN` and `UP` options.
+  - Added new `UP` option to `flareInsetPaddingMode`.
+
+# 23.0.0
+
+- **Breaking:**
+
+This release is to ratify an error in version `22.3.0`.
+This version was breaking as we removed `onYearChanged` method from `BpkCalendar` and classes overriding would break.
+
+# 22.4.0
+
+- **Added:**
+
+- `BpkHorizontalNav`
+  - `setBadge()` method
+
+# 22.3.0 - EDIT: This was a breaking change, update to 23.0.0 instead.
+
+**Added:**
+
+- `BpkCalendar`:
+  - Ability to add and remove `BpkCalendarScrollListener` scroll listeners of the calendar with `addScrollListener`, and `removeScrollListener`
+  - Ability to scroll to a specific position programmatically (with y offset) with `setSelectionFromTop(position: Int, y: Int = 0)`
+  - Added new `monthFooterAdapter` attribute to `BpkCalendarController` and new `HighlightedDaysAdapter` to add a list of holidays to each month.
+  - Added new `CalendarCellStyle.Highlight` style.
+
+# 22.2.2
+
+**Fixed:**
+
+- Updated `bpk_hotels` icon.
+
+# 22.2.1
+
+**Fixed:**
+
+- `BpkDialog`
+  - fixed `setCanceledOnTouchOutside()` behaviour.
+
+# 22.2.0
+
+**Fixed:**
+
+- BpkCalendar
+  - Updated selected background colour.
+
+**Added:**
+
+- `BpkHorizontalNav`
+  - `setNotificationDot()` method
+
+
+# 22.1.1
+
+**Changed:**
+
+- `BpkBadge`
+  - Made 'destructive' badges darker to match other platforms.
+
+# 22.1.0
+
+**Added:**
+
+- `BpkSnackbar`
+  - Title attribute
+  - Icon attribute
+  - Icon-only action.
+- `BpkBottomNav` component.
+
+# 22.0.0
+
+**Breaking:**
+
+- BpkCalendar
+  - Added pre defined `CalendarCellStyles` to standardize calendar colouring logic.
+  - `ColoredBucket` constructor was changed to use `CalendarCellStyles`.
+
+# 21.1.1
+
+**Fixed:**
+
+- `BpkNavBar`
+  - Fixed collapsed style for dark mode.
+
+- `BpkCalendar`
+  - Fixed line colour and disabled dates text colour for dark mode.
+
+# 21.1.0
+
+- **Added**:
+  - `BpkLinkSpan` span.
+  - `BpkText` now uses `bpkPrimary` colour for links.
+  - New elevation colours
+  - New black tints colours
+
+- **Fixed**:
+  - `bpkLine` color in the DM
+  - `BpkPanel` border color in the DM
+  - `BpkCard` elevation colour in the DM
+  - `BpkTextField` text, hint and icon colours in the DM
+  - `BpkStarRating` inactive star colour in the DM
+  - `BpkText` colour tokens
+  - `bpkBlackTint03` was renamed to `bpkBlackTint05`
+
+# 21.0.1
+
+- **Fixed:**
+  - `BpkCard`
+    * Set default background to `bpkBackgroundTertiary`
+  - `BpkBadge`
+    * Changed success, warning and error colours.
+
+
+# 21.0.0
+
+- **Breaking:**
+  - General
+    * Updated `AppCompat` to 1.1.0
+  - `BpkText`
+    * `drawableTint` is maintained now by `AppCompat` library
+
+# 20.2.0
+
+**Fixed:**
+
+- `BpkBadge`
+  - Fixed a crash when changing type in runtime.
+
+**Added**:
+
+- Add `bpkLine` semantic colour.
+
+# 20.1.0
+
+- **Added:**
+  - `BpkDialog`
+    * New flare style
+    * Image property
+
+# 20.0.0
+
+- **Breaking:**
+  - Button:
+    - removed `buttonCornerRadius` and `buttonAddElevation` attributes.
+
+- **Fixed:**
+  - Button
+    - the text cut when changing the text to a larger one
+
+# 19.1.0
+- **Added:**
+  - `BpkNavBar`
+    * Menu getter
+
+# 19.0.0
+
+- **Breaking:**
+  - `BpkPageTitle` was removed.
+
+- **Added:**
+  - `BpkNavBar`
+    * Menu and nav icon support.
+  - `BpkCalendar`
+    * Disabled dates customisation
+
+# 18.0.1
+
+**Fixed:**
+
+- Updated `bpk_cars`, `bpk_flights` and `bpk_hotels` icons.
+
+# 18.0.0
+
+- **Breaking:**
+  - `Checkbox` text color cannot be set now via `android:textColor` attribute.
+  - `Switch` text color cannot be set now via `android:textColor` attribute.
+
+- **Added:**
+  - Dark Mode support for `Checkbox`
+  - Dark Mode support for `Switch`
+  - Dark Mode support for `StarRating`
+  - Dark Mode support for `InteractiveStarRating`
+  - Dark Mode support for `HorizontalNav`
+  - Disabled state support for `Checkbox`
+  - Semantic color support for `bpkPrimaryColor`
+
+# 17.0.0
+
+**Breaking:**
+  - The library reacts to the Dark Mode now
+
+- **Added:**
+  - New semantic colours and the palette for the Dark Mode support
+  - Dark Mode support for icons
+  - Dark Mode support for `Badge`
+  - Dark Mode support for `Button`
+  - Dark Mode support for `ButtonLink`
+  - Dark Mode support for `Card`
+  - Dark Mode support for `Calendar`
+  - Dark Mode support for `Chip`
+  - Dark Mode support for `Dialog`
+  - Dark Mode support for `Flare`
+  - Dark Mode support for `PageTitle`
+  - Dark Mode support for `Panel`
+  - Dark Mode support for `Rating`
+  - Dark Mode support for `Snackbar`
+  - Dark Mode support for `Text`
+  - Dark Mode support for `TextField`
+  - Dark Mode support for `Toast`
+
+
+# 16.0.1
+
+**Fixed:**
+
+- BpkSpinner
+  - Fixed inline `style` support.
+
+# 16.0.0
+
+**Added:**
+
+- BpkButton:
+  - Added `loading` (`app:buttonLoading` in XML) property and loading style.
+
+- BpkIcon:
+  - Added file and printer icons
+
+**Breaking:**
+
+- Removed old brand colours.
+
+# 15.0.0
+
+**Breaking:**
+
+- Rename `bpkSegano` colour to `bpkSagano`.
+
+# 14.0.1
+
+**Fixed:**
+
+- BpkButton
+  - Fixed default border radius.
+
+# 14.0.0
+
+**Added:**
+
+- `compileSdk` and `targetSdk` updated to API 29
+- NEW BRAND COLOURS 🎉
+
+**Breaking:**
+
+- Updated all components to use new colours.
+- Removed unused `Bpk.chip` style.
+
+# 13.4.0
+
+**Added:**
+- `BpkCalendar`:
+  - `calendarDateSelectedSameDayBackgroundColor` attribute
+
+- `BpkIcon`:
+  - Added `bpk_single_booking`
+
+- `BpkChip`:
+  - `chipBackgroundColor` attribute
+
+**Fixed:**
+- `BpkCalendar`:
+  - Height calculation of range selection
+  - Increased `rowheight`
+  - Default font weight is `emphasized`
+  - Removed today marking circle
+  - Changed the day's colour appearance
+
+- `BpkChip`:
+  - Default font weight is `emphasized`
+  - Default font color is `bpkTextPrimaryLight`
+  - Default background color is `bpkGray50`
+  - Removed elevation
+
+# 13.3.0
+
+**Added:**
+
+- `BpkBadge`
+  - Added theme support
+  - Added `android:includeFontPadding` theme property
+
+# 13.2.1
+
+**Fixed:**
+
+- Switch
+  - Updated selected track colour to match platform standards.
+
+# 13.2.0
+
+**Fixed:**
+
+- `BpkTextEdit`
+  - Changed text size from SM to BASE.
+
+- `BpkPageTitle`
+  - Fixed wrong title alignment on RTL.
+  - Fixed wrong scrolling behaviour of `CoordinatorLayout` in some cases.
+
+**Added:**
+
+- New colours added:
+  - `bpkTextPrimaryLight`
+  - `bpkTextSecondaryLight`
+
+# 13.1.0
+
+**Added:**
+
+- `BpkPageTitle`
+
+# 13.0.0
+
+**Fixed:**
+
+- Updated gray colours `gray50`, `gray100`, `gray200`, `gray300`, `gray400`, `gray500`, `gray700`, `gray900`
+  - Deprecated `gray600` and `gray800` please update as these will be removed in the future.
+  - For these tokens please use either one token above or below your current value to suit your needs.
+
+- Updated icon borders to utilise updated gray color
+
+- `BpkText` now uses `bpkGray900` as default text colour.
+
+**Breaking:**
+
+- Removed themeable grey colours.
+  - `bpkGray50Color`
+  - `bpkGray100Color`
+  - `bpkGray300Color`
+  - `bpkGray500Color`
+  - `bpkGray700Color`
+  - `bpkGray900Color`
+
+- Removed function `BpkTheme.getColor`
+
+- Changed API of `BpkSnackbar` to be consistent with material `Snackbar`.
+
+# 12.3.0
+
+**Added:**
+
+- `BpkButton`
+  - Stroke width now increases when pressed for Secondary, Destructive and Outlined buttons
+  - Added `buttonStrokeColourPressed` theme property.
+
+# 12.2.0
+
+**Added**:
+  - `BpkSnackbar`
+  - `BpkDialog` now expands to full screen when it takes more than 75% of available height.
+
+**Fixed**:
+  - `BpkDialog` content is now scrollable.
+
+# 12.0.0
+
+**Breaking**:
+
+- `BpkIcon`:
+  - Renamed `bpk_swap` to `bpk_swap__horizontal`:
+
+**Added**:
+
+- Added `BpkFlare` component
+- `BpkIcon`:
+  - Added `bpk_swap__vertical`
+
+# 11.0.3
+
+**Fixed:**
+
+- Bumped `androidx.appcompat:appcompat` to `1.0.2`
+
+# 11.0.2
+
+**Fixed**:
+
+- Icons:
+  - Added `autoMirrored` props to the following icons:
+    - `arrow-left`
+    - `arrow-right`
+    - `long-arrow-left`
+    - `long-arrow-right`
+    - `chevron-left`
+    - `chevron-right`
+    - `fast-track`
+    - `list`
+    - `media`
+    - `native-android--back`
+    - `native-android--forward`
+    - `policy`
+    - `share`
+    - `star-half`
+    - `swap`
+    - `trend`
+    - `trend--down`
+    - `trend--steady`
+    - `trend--will-rise`
+
+# 11.0.1
+
+**Fixed**:
+
+- `BpkInteractiveStarRating` resets its value when receiving cancel touch event.
+
+# 11.0.0
+
+**Breaking**:
+
+- `BpkText`:
+  - Removed deprecated `emphasized` prop. You should use `weight="emphasized"` now.
+  - Introduced theme variables for all text styles. Those can be used to theme native components with Backpack's text style via code or `xml`.
+  - Previous text styles (e.g `@style/bpkTextBase`) should not be directly used any more.
+  - Text colour is now `gray700` by default.
+
+**Added**:
+
+- `BpkRating` component.
+
+# 10.0.1
+
+**Fixed**:
+
+- `BpkButton`, `BpkButtonLink`
+  - fixed icons alignment when text is too long.
+- `BpkTextField`
+  - open for extension
+
+# 10.0.0
+
+**Added**:
+
+- `BpkTextField`
+
+**Breaking:**
+
+- `BpkFab`:
+  - Changed base class to `FloatingActionButton`
+
+# 9.11.0
+
+**Added:**
+
+- New `flight-landing`, `flight-takeoff` and `aircraft` icons.
+
+**Fixed**:
+
+- `BpkInteractiveStarRating`
+  - Listener is being invoked when rating set programmatically or when user finishes the interaction.
+
+- `ButtonLink`
+  - setting `buttonTextColor` to white now works.
+
+# 9.10.1
+
+**Fixed**:
+
+- `BpkButton`
+  - Fixed icon only buttons to be always round.
+
+# 9.10.0
+
+**Added**:
+
+- `BpkHorizontalNav`
+
+# 9.9.0
+
+**Fixed**:
+
+- `BpkInteractiveStarRating`
+  - Fixed multiple listener invocations with the same values.
+
+**Added:**
+
+- `BpkDialog`:
+  - `addActionButton` now accepts any view as argument.
+
+# 9.8.0
+
+**Added**:
+
+- Added `BpkCheckbox` and `BpkButtonLink` components.
+- Added `BpkFontSpan` and `BpkPrimaryColorSpan` font spans.
+
+# 9.7.0
+
+**Added**:
+
+- `BpkToast`
+
+# 9.6.0
+
+**Added:**
+
+- BpkButton
+  - Primary and Featured buttons now have elevation by default
+  - `buttonAddElevation` attribute has no effect any more.
+
+- Added new component `BpkInteractiveStarRating`
+
+- Icons:
+  - New `paid`, `star-outline` icons
+  - Updated `meal`, `bar`, `star`, `star-half` `media` icons
+
+# 9.5.3
+
+**Fixed**:
+
+- `BpkButton`:
+  - Elevation is now disabled for API 21 as it causes native crashes in some edge cases.
+
+# 9.5.2
+
+**Fixed**:
+
+- `BpkButton`:
+  - Fixed a native crash on Galaxy S4 in some places
+
+
+# 9.5.1
+
+**Fixed**:
+
+- `BpkCalendar`:
+  - Fixed rendering of passed weeks before current week in month.
+  - Fixed invalid days of the week on some rare circumstances.
+
+# 9.5.0
+
+**Added:**
+- `BpkFab`
+
+# 9.4.1
+
+**Fixed**:
+
+- `BpkSpinner`:
+  - Disable spinner animation when `Global.ANIMATOR_DURATION_SCALE` is 0. This ensures it doesn't
+    cause timeouts in Espresso tests.
+
+# 9.4.0
+
+**Added:**
+
+- Added new smiley icons face--blank, face--happy, face--sad.
+
+**Updated:**
+
+- Updated world and heart icons.
+
+# 9.3.1
+
+**Updated:**
+
+- Updated icons `bpk_heart__outline`
+
+# 9.3.0
+
+**Added:**
+
+- Added new icons `bpk_filter`, `bpk_heart__outline`, `bpk_trend__down`, `bpk_trend__steady`, `bpk_trend__will_rise`, `bpk_world__amer`, `bpk_world__apac`, `bpk_world__emea`
+- `BpkText`:
+  - Added method `applyTo` to `BpkFontDefinition` and `JvmStatic` annotation to `getFont`.
+
+**Updated:**
+
+- Updated icons `bpk_family`, `bpk_heart`
+
+# 9.2.0
+
+**Added:**
+- `BpkStarRating`
+
+# 9.1.0
+
+**Added:**
+
+- Added the following new tokens/dimensions:
+  - `bpkTextBaseSize`
+  - `bpkTextCapsSize`
+  - `bpkTextLgSize`
+  - `bpkTextSmSize`
+  - `bpkTextXlSize`
+  - `bpkTextXsSize`
+  - `bpkTextXxlSize`
+  - `bpkTextXxxlSize`
+
+# 9.0.2
+
+**Fixed:**
+- `BpkPanel`
+  - Added missing rounding corners
+
+# 9.0.1
+
+**Changed:**
+
+- `BpkSwitch`
+  - Changed theming approach to not rely on constructor's default arguments.
+
+**Fixed:**
+
+- `BpkButton`:
+  - Fixed theming for stroke color.
+
+# 9.0.0
+
+**Added:**
+
+- Added the following themeable props:
+  - `bpkGray50Color`
+  - `bpkGray100Color`
+  - `bpkGray300Color`
+  - `bpkGray500Color`
+  - `bpkGray700Color`
+  - `bpkGray900Color`
+
+**Breaking:**
+
+- Renamed `ThemesUtil` to `BpkTheme`
+
+# 8.0.0
+
+**Breaking:**
+
+- Removed `ThemeOverlayEnforcement` class and `bpkThemeOverlay` attributes.
+
+**Added:**
+
+- `BpkGradients`:
+  - Added `bpkPrimaryGradientColorStart` and `bpkPrimaryGradientColorEnd` theme props for the `getPrimary` function.
+
+# 7.5.0
+
+**Added:**
+
+- BpkButton
+  - Added `buttonCornerRadius` and `buttonAddElevation` theme props
+
+# 7.4.1
+
+**Fixed:**
+
+- BpkCalendar
+  - Changed changed background color to transparent.
+  - Removed synthetic imports.
+
+# 7.4.0
+
+**Fixed**:
+
+- BpkButton
+  - Fixed icon alignment and size.
+  - Adjusted style to match current RN implementation.
+
+**Added:**
+
+- Added `BpkViewPumpContextWrapper` to wrap `ViewPump` functionality and disabled it for Android Q.
+
+# 7.3.1
+
+**Changed:**
+
+- Redesigned icons `bpk_alert__active`, `bpk_alert__add`, `bpk_alert__expired`, `bpk_alert__remove`, `bpk_price_alerts`.
+
+# 7.3.0
+
+**Fixed:**
+
+- Fixed text theming for buttons, calendar and badge
+- Fixed `BpkCalendar` to use the correct font definitions
+
+**Added:**
+
+- Added function `BpkText.getFont` to retrieve the current font definition programmatically
+
+# 7.2.0
+
+**Added:**
+
+- BpkChip
+  - Added theming support to BpkChip
+
+**Fixed:**
+
+- BpkChip
+  - Fixed text theming for BpkChip
+
+# 7.1.0
+
+**Added:**
+
+- Replaced `org.threeten:threetenbp` with `com.jakewharton.threetenabp:threetenabp` for date handling
+- BpkText
+  - Added theming support
+
+# 7.0.0
+
+**Breaking:**
+
+- BpkCalendar
+  - Replaced `java.util.Date` and `java.util.Calendar` with `JSR-310` date constructs (using `org.threeten.bp.*`)
+  - Added theming support
+  - Fixed `updateSelection` method for single selection
+
+# 6.3.0
+
+**Fixed:**
+
+- BpkCalendar now works with `height=wrap_content`
+
+**Added:**
+
+- BpkSpinner
+  - Added theming support
+
+# 6.2.0
+
+**Added:**
+
+- BpkCalendar
+  - Added ability to set the selected colour when using a `ColorBucket`
+  - The week header now respects the locale to pick the first day of the week
+
+- Added `bpkThemeOverlay` to the list of attributes and `ThemeOverlayEnforcement` to allow controlling themes during runtime.
+
+# 6.1.0
+
+**Added:**
+
+- Added animation tokens.
+- Removed all logic related to the RN bridge from BpkCalendar
+
+# 6.0.1
+
+**Fixed:**
+
+- Fix calendar year pill to show when the start date is in the past/future and to work in the RN bridge.
+
+# 6.0.0
+
+**Breaking:**
+
+- Added theme support to `BpkButton`.
+
+# 5.0.0
+
+**Breaking:**
+
+- Added single selection to `BpkCalendar`.
+
+# 4.0.0
+
+**Breaking:**
+
+- BpkChip now does not add a click listener by default any more, and now is up to users to add it.
+  - click listener was removed to avoid initialization problems if the chip is subclassed and the
+    `onClickListener` chip's state
+
+- class `BpkDismissableChip` was removed as it's not supported at the moment.
+
+# 3.2.0
+
+**Added:**
+
+- Added function `updateContent` to `BpkCalendarController`.
+
+# 3.1.0
+
+**Added:**
+
+- Added `bpkPrimaryColor` theme property and `ThemeUtils.getPrimaryColor` function.
+  - These should be used in place of `bpkBlue500`.
+
+# 3.0.0
+
+**Breaking:**
+
+- Added support for color markers in BpkCalendar
+
+# 2.8.0
+
+**Added:**
+
+- New icons `hide` and `eco-leaf`.
+
+# 2.7.1
+
+- BpkCalendar
+  - Selecting a new date after the end date has been selected now resets the range selection.
+
+# 2.7.0
+
+**Added:**
+
+- New icons `grid-layout` and `social-like`.
+
+- `BpkSwitch`
+  - New XML property `switchPrimaryColor` added.
+  - `BpkSwitch` styles can now be changed globally by setting the `bpkSwitchStyle` property in your current theme/style.
+
+# 2.6.0
+
+**Added:**
+
+- New `bpk_social_like` icon.
+- New `dark` variant of `BpkBadge`
+- Added year indicator badge on `BpkCalendar`
+- Support for distribution via HockeyApp
+
+# 2.5.0
+
+**Added:**
+
+- New `bpk_speaker` icon.
+
+- BpkCalendar
+  - Added ability to update the selected dates programmatically using `updateSelection` in `BpkCalendarController`.
+  - BpkCalendar can now be extended.
+  - Internal changes to allow usage from React Native.
+
+# 2.4.0
+
+**Added:**
+
+- Support for highlighting backpack components
+
+
+# 2.3.1
+
+**Fixed:**
+
+- Darken text and icon on press along with the background on `BpkButton`
+- Support `drawableTint` on Android API < v23
+
+# 2.3.0
+**Added:**
+
+- Added new component `BPKCalendar`
+
+# 2.2.0
+- Drop support for Android API level 19 and 20
+- Fixes a bug in `BpkButton` where button size was different when icon was present
+- Updates API for `BPKGradient`
+- Updates to Kotlin 1.3.10
+
+# 2.1.0
+
+**Added**
+
+* Added new `outline` type to `BpkButton`, which has white text and border on a transparent background. Designed to be used on coloured backgrounds.
+
+# 2.0.0
+
+**Breaking:**
+
+- Text style changes:
+  XXL: from `36sp` to `30sp`
+  XXXL: from `42sp` to `36sp`
+
+| Font size  | Old value  | New value  |
+|---|---|---|
+| XXL  | `36pt` | `30pt`  |
+| XXXL  | `42pt`  | `36pt`  |
+
+# 1.3.1
+
+**Fixed:**
+
+- Revert elevation tokens changes released in 1.3.0.
+
+# 1.3.0
+
+**Added:**
+
+- Added new property `cornerStyle` to `BpkCardView`. See usage in [README.md](../docs/view/Card/README.md).
+
+# 1.2.0
+
+**Added:**
+
+- Introducing BpkChip component. See usage in [README.md](../docs/view/Chip/README.md).
+
+# 1.1.0
+
+**Added:**
+
+* Added tokens for border sizes.
+* Added `bpkElevationXxl` token.
+
+**Changed:**
+
+* Changed elevation token values. See https://backpack.github.io/tokens/shadows.
+
+# 1.0.1
+
+**Fixed:**
+
+- Updated `bpk_send_message` icon.
+
+# 1.0.0
+
+**Added:**
+
+- Introducing `BpkDialog` component. See usage in [README.md](../docs/view/Dialog/README.md).
+
+# 0.9.0
+
+**Added:**
+
+- Added property `weight` to `BpkText` and support for new `heavy` weight.
+  - `emphasize` is now deprecated. Use `weight` instead.
+
+# 0.8.0
+
+- Type ramp changes for letter-spacing
+- Fix RTL bug for `BPKButton`
+
+# 0.7.0
+
+- Introducing the `BpkSwitch` component. See usage in [README.md](../docs/view/Switch/README.md).
+
+# 0.6.0
+
+Added new icons:
+
+- `bpk_call_back`
+- `bpk_end_call`
+- `bpk_keypad`
+- `bpk_mute`
+- `bpk_phone_call`
+- `bpk_send_message`
+- `bpk_unmute`
+
+# 0.5.0
+
+Introducing BpkSpinner component. See usage in [README.md](../docs/view/Spinner/README.md).
+
+Update build tools to 28.0.3.
+
+# 0.4.0
+
+Bump Kotlin version to 1.2.71
+
+New component `BpkCardView`
+
+# 0.3.1
+
+Fixes a bug to set button state from code
+
+# 0.3.0
+
+Change button API to accept `icon` and `iconPosition`.
+
+# 0.2.4
+
+Adds backpack icons to resources
+
+## 0.2.3
+
+Fix artifacts publishing
+
+## 0.2.3
+
+Changes the dependency signature from `com.github.Skyscanner:backpack-android` to `com.github.skyscanner:backpack-android`.
+
+Fixes a bug which prevented release artifacts from being uploaded.
+
+## 0.2.1
+
+Introducing `BpkBadge` and BpkPanel component.
+
+## 0.2.0
+
+Introducing `BpkGradients`. See usage in [README.md](../README.md#gradient).
+
+## 0.1.0
+
+Adds Backpack text styles. See the full list in the [README.md](../README.md#text-styles).
+
+Usage:
+
+```XML
+<TextView
+  style="@style/bpkTextSm" />
+```
+
+Adds Backpack radii tokens. See the full list in the [README.md](../README.md#radii).
+
+Usage:
+
+```XML
+<corners android:radius="@dimen/bpkBorderRadiusPill" />
+```
+
+Adds Backpack elevation tokens. See the full list in the [README.md](../README.md#elevation).
+
+Usage:
+
+```XML
+android:elevation="@dimen/bpkElevationXs"
+```
+
+## 0.0.3
+
+Update project id to "net.skyscanner.backpack"
+
+## 0.0.2
+
+Initial release of Backpack for Android featuring color tokens. Usage
+
+```XML
+<style name="AppTheme.Backpack" color="@color/bpkBlue500" />
+```
+
+## 0.0.1
+
+Dummy release to test, release automation. (not available for download)
