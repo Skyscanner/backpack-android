@@ -30,11 +30,11 @@ import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import android.view.accessibility.AccessibilityNodeInfo.RangeInfo
 import android.widget.RatingBar
 import android.widget.SeekBar
-import kotlin.math.max
-import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.starrating.internal.BpkStarRatingBase
 import net.skyscanner.backpack.util.createContextThemeWrapper
+import kotlin.math.max
+import kotlin.math.roundToInt
 
 open class BpkInteractiveStarRating @JvmOverloads constructor(
   context: Context,

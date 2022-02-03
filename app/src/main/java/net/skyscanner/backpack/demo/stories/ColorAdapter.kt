@@ -22,9 +22,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.lang.reflect.Field
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
+import java.lang.reflect.Field
 
 class ColorAdapter(private val colorResources: ArrayList<Field>) : RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
 

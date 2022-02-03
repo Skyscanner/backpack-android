@@ -25,8 +25,8 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDialog
 import androidx.test.platform.app.InstrumentationRegistry
-import java.util.Locale
 import net.skyscanner.backpack.demo.R
+import java.util.Locale
 
 sealed class BpkTestVariant(val id: String, val themeId: Int = R.style.AppTheme) {
 

@@ -20,7 +20,6 @@ package net.skyscanner.backpack.demo.data
 
 import android.content.Context
 import androidx.annotation.VisibleForTesting
-import java.util.Locale
 import net.skyscanner.backpack.calendar.model.CalendarCellStyle
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarLabel
@@ -35,6 +34,7 @@ import net.skyscanner.backpack.toast.BpkToast
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
+import java.util.Locale
 
 open class ExampleBpkCalendarController(
   private val context: Context,

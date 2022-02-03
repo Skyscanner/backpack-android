@@ -17,7 +17,6 @@
  */
 package net.skyscanner.backpack.calendar2.data
 
-import java.util.Locale
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.plus
@@ -27,6 +26,7 @@ import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
 import net.skyscanner.backpack.util.MutableStateMachine
 import net.skyscanner.backpack.util.StateMachine
+import java.util.Locale
 
 internal interface CalendarStateMachine : CalendarComponent, StateMachine<CalendarState, Nothing> {
 

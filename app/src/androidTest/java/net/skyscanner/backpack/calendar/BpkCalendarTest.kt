@@ -27,7 +27,6 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
-import java.util.Locale
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarLabel
@@ -48,6 +47,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
+import java.util.Locale
 
 private val today = LocalDate.of(2019, 1, 2)
 

@@ -26,8 +26,8 @@ import android.graphics.drawable.InsetDrawable
 import android.util.DisplayMetrics
 import android.view.ViewGroup.LayoutParams
 import android.view.WindowManager
-import kotlin.math.min
 import net.skyscanner.backpack.R
+import kotlin.math.min
 
 internal class FlareDialogImpl(
   dialog: Dialog

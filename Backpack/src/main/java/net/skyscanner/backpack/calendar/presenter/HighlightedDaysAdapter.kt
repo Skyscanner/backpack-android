@@ -21,11 +21,11 @@ package net.skyscanner.backpack.calendar.presenter
 import android.content.Context
 import android.view.View
 import androidx.annotation.ColorInt
-import java.util.Locale
 import net.skyscanner.backpack.calendar.view.HighlightedDaysMonthFooter
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.Locale
 
 @Deprecated("Use Calendar2 instead")
 typealias DateFormatter = (LocalDate) -> String

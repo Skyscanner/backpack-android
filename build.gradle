@@ -55,8 +55,7 @@ subprojects {
   }
 
   ktlint {
-    version = "0.39.0"
-    android = true
+    version = "0.43.2"
     enableExperimentalRules = false
     reporters {
       reporter "checkstyle"

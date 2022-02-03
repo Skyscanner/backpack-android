@@ -27,12 +27,12 @@ import android.graphics.PixelFormat
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.text.TextPaint
-import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.getColorForState
 import net.skyscanner.backpack.util.withSave
+import kotlin.math.roundToInt
 
 internal class ChartPopupDrawable(
   context: Context,
