@@ -58,7 +58,7 @@ hdiutil create -megabytes 512 -fs MS-DOS -layout NONE -o sd && mv sd.dmg sd.img
 Snapshot testing depends on a python package which can be installed as:
 
 ```
-easy_install Pillow
+pip3 install Pillow
 ```
 
 To start the emulator and attach an SD card to it, run
