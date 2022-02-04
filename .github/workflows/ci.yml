@@ -159,7 +159,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: '2.x'
+          python-version: '3.x'
 
       - name: Gradle cache
         uses: actions/cache@v2
@@ -203,7 +203,7 @@ jobs:
           script: |
             sudo easy_install Pillow==6.2.2
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
-           
+
             changedFiles=`git diff --name-only` && echo "::set-output name=CHANGED_FILES::${changedFiles//$'\n'/'%0A'}"
             ./scripts/check-no-changes.sh
 
@@ -213,7 +213,7 @@ jobs:
         with:
           name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-screenshot-test-output
           path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
-          retention-days: 5 
+          retention-days: 5
 
       - name: Notify PR of screenshots failure
         if: ${{ failure() }}
@@ -226,7 +226,7 @@ jobs:
               repo: context.repo.repo,
               body: `### '${{ matrix.variant }}' files were changed.
               If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes.
-              
+
               >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`
             })
 

@@ -109,6 +109,7 @@ dependencies {
 }
 screenshots {
   multipleDevices false
+  pythonExecutable 'python3'
   def variant = project.gradle.startParameter.projectProperties.get("android.testInstrumentationRunnerArguments.variant")
   if (variant == null || variant.isEmpty()) {
     variant = "default"
