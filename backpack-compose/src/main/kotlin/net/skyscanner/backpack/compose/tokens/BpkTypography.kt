@@ -82,61 +82,73 @@ data class BpkTypography internal constructor(
     heading1 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Xxxl,
+      lineHeight = BpkLineHeight.Xxxl,
       fontFamily = defaultFontFamily,
     ),
     heading2 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Xxl,
+      lineHeight = BpkLineHeight.Xxl,
       fontFamily = defaultFontFamily,
     ),
     heading3 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Xl,
+      lineHeight = BpkLineHeight.XlTight,
       fontFamily = defaultFontFamily,
     ),
     heading4 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Lg,
+      lineHeight = BpkLineHeight.LgTight,
       fontFamily = defaultFontFamily,
     ),
     heading5 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Base,
+      lineHeight = BpkLineHeight.BaseTight,
       fontFamily = defaultFontFamily,
     ),
     subheading = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Xl,
+      lineHeight = BpkLineHeight.Xl,
       fontFamily = defaultFontFamily,
     ),
     bodyLongform = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Lg,
+      lineHeight = BpkLineHeight.Lg,
       fontFamily = defaultFontFamily,
     ),
     bodyDefault = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Base,
+      lineHeight = BpkLineHeight.Base,
       fontFamily = defaultFontFamily,
     ),
     footnote = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Sm,
+      lineHeight = BpkLineHeight.Sm,
       fontFamily = defaultFontFamily,
     ),
     caption = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Xs,
+      lineHeight = BpkLineHeight.Xs,
       fontFamily = defaultFontFamily,
     ),
     label1 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Base,
+      lineHeight = BpkLineHeight.Base,
       fontFamily = defaultFontFamily,
     ),
     label2 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Sm,
+      lineHeight = BpkLineHeight.Sm,
       fontFamily = defaultFontFamily,
     ),
   )

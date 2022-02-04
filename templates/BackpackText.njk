@@ -24,6 +24,7 @@
     <attr name="android:fontFamily" />
     <attr name="android:textSize" />
     <attr name="android:letterSpacing" />
+    <attr name="lineHeight" />
   </declare-styleable>
 {% for dimen in dimensions %}
   <dimen name="{{dimen.name}}">{{dimen.size}}sp</dimen>{% endfor %}
@@ -31,10 +32,9 @@
   <style name="{{text.name}}">
     <item name="android:fontFamily">{{text.fontFamily}}</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
-    <item name="android:textSize">{{text.size}}</item>
-    {% if text.letterSpacing %}
-      <item name="android:letterSpacing">{{text.letterSpacing}}</item>
-    {% endif %}
+    <item name="android:textSize">{{text.size}}</item>{% if text.lineHeight != null %}
+    <item name="lineHeight">{{text.lineHeight}}sp</item>{% endif %}{% if text.letterSpacing %}
+    <item name="android:letterSpacing">{{text.letterSpacing}}</item>{% endif %}
   </style>
 {% endfor %}
 </resources>

@@ -1,6 +1,9 @@
 # Unreleased
 > Place your changes below this line.
 
+**Added:**
+- Text styles now include line height & letter spacing
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
