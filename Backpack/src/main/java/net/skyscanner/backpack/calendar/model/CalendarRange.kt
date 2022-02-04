@@ -18,8 +18,8 @@
 
 package net.skyscanner.backpack.calendar.model
 
-import java.io.Serializable
 import org.threeten.bp.LocalDate
+import java.io.Serializable
 
 @Deprecated("Use Calendar2 instead")
 open class CalendarSelection : Serializable

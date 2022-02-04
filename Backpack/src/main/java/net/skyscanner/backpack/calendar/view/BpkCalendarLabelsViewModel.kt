@@ -26,12 +26,12 @@ import android.text.StaticLayout
 import android.text.TextDirectionHeuristics
 import android.text.TextPaint
 import android.text.TextUtils
-import kotlin.math.roundToInt
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.withSave
 import org.threeten.bp.LocalDate
+import kotlin.math.roundToInt
 
 internal class BpkCalendarLabelsViewModel(
   context: Context,

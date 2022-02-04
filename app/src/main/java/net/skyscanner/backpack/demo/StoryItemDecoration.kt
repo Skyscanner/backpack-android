@@ -24,8 +24,8 @@ import android.graphics.Rect
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.math.roundToInt
 import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.Companion.STORY_VIEW_TYPE
+import kotlin.math.roundToInt
 
 class StoryItemDecoration(context: Context) : RecyclerView.ItemDecoration() {
 

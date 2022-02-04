@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.calendar2
 
-import java.util.Locale
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
 import net.skyscanner.backpack.util.TestStateMachineResult
@@ -26,6 +25,7 @@ import net.skyscanner.backpack.util.TestStateMachineScope
 import net.skyscanner.backpack.util.testStateMachine
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
+import java.util.Locale
 
 internal typealias CalendarTestScope = TestStateMachineScope<CalendarStateMachine, CalendarState>
 

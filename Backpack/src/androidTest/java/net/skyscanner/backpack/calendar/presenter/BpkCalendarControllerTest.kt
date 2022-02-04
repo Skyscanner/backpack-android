@@ -21,7 +21,6 @@ package net.skyscanner.backpack.calendar.presenter
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.jakewharton.threetenabp.AndroidThreeTen
-import java.util.Locale
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.SingleDay
@@ -30,6 +29,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.LocalDate
+import java.util.Locale
 
 internal open class BpkCalendarControllerTestImpl(
   selectionType: SelectionType = SelectionType.RANGE

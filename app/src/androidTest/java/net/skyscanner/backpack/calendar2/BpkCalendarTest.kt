@@ -29,7 +29,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
-import java.util.Locale
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -44,6 +43,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
+import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
 class BpkCalendarTest : BpkSnapshotTest() {

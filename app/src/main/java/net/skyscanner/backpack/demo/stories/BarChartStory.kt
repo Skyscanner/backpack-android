@@ -20,9 +20,9 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
-import java.util.Random
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.demo.R
+import java.util.Random
 
 class BarChartStory : Story() {
 

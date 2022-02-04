@@ -22,7 +22,6 @@ import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
-import java.util.Locale
 import net.skyscanner.backpack.calendar.model.CalendarDrawingParams
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.presenter.BpkCalendarController
@@ -34,6 +33,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.LocalDate
+import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
 class NonDrawnDaysOffset {
