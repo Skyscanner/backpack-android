@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,14 +28,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonColors
-import net.skyscanner.backpack.compose.button.BpkButtonIconPosition
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 
 @Composable
 internal fun BpkButtonImpl(
-  content: BpkButtonContent,
   modifier: Modifier = Modifier,
   size: BpkButtonSize = BpkButtonSize.Default,
   colors: BpkButtonColors = BpkButtonColors.Primary,
@@ -42,6 +41,7 @@ internal fun BpkButtonImpl(
   loading: Boolean = false,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   onClick: () -> Unit,
+  content: @Composable RowScope.() -> Unit,
 ) {
   CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(colors.rippleColor())) {
     Button(
@@ -60,7 +60,18 @@ internal fun BpkButtonImpl(
       elevation = null,
       content = {
         CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
-          ButtonContent(content, size, loading)
+          Box {
+            Row(
+              modifier = Modifier.alpha(if (loading) 0f else 1f),
+              horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
+              verticalAlignment = Alignment.CenterVertically,
+              content = content,
+            )
+
+            if (loading) {
+              ButtonProgress(size, Modifier.align(Alignment.Center))
+            }
+          }
         }
       },
     )
@@ -68,62 +79,27 @@ internal fun BpkButtonImpl(
 }
 
 @Composable
-private fun ButtonContent(content: BpkButtonContent, size: BpkButtonSize, loading: Boolean) {
+internal fun ButtonIcon(
+  icon: Painter,
+  contentDescription: String?,
+  size: BpkButtonSize,
+  modifier: Modifier = Modifier,
+) {
+  Icon(icon, contentDescription, modifier.requiredSize(size.iconSize))
+}
 
-  @Composable
-  fun Progress(
-    modifier: Modifier = Modifier,
-  ) {
-    CircularProgressIndicator(
-      modifier = modifier.requiredSize(size.iconSize),
-      strokeWidth = 2.dp,
-      color = LocalContentColor.current,
-    )
-  }
+@Composable
+internal fun ButtonText(text: String, modifier: Modifier = Modifier) {
+  BpkText(text, modifier)
+}
 
-  @Composable
-  fun Text(text: String) {
-    BpkText(text)
-  }
-
-
-  @Composable
-  fun Icon(icon: Painter, contentDescription: String?) {
-    Icon(icon, contentDescription, Modifier.requiredSize(size.iconSize))
-  }
-
-
-  Box {
-    Row(
-      modifier = Modifier.alpha(if (loading) 0f else 1f),
-      horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
-      verticalAlignment = Alignment.CenterVertically,
-    ) {
-      when (content) {
-        is BpkButtonContent.Text -> {
-          Text(content.text)
-        }
-        is BpkButtonContent.Icon -> {
-          Icon(content.icon, content.contentDescription)
-        }
-        is BpkButtonContent.IconAndText -> when (content.position) {
-          BpkButtonIconPosition.Start -> {
-            Icon(content.icon, null)
-            Text(content.text)
-          }
-          BpkButtonIconPosition.End -> {
-            Text(content.text)
-            Icon(content.icon, null)
-          }
-        }
-      }
-    }
-
-    if (loading) {
-      Progress(Modifier.align(Alignment.Center))
-    }
-  }
-
+@Composable
+internal fun ButtonProgress(size: BpkButtonSize, modifier: Modifier = Modifier) {
+  CircularProgressIndicator(
+    modifier = modifier.requiredSize(size.iconSize),
+    strokeWidth = 2.dp,
+    color = LocalContentColor.current,
+  )
 }
 
 private class ButtonRippleTheme(

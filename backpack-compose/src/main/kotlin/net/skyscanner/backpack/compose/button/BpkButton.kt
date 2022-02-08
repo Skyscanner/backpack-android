@@ -6,8 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
-import net.skyscanner.backpack.compose.button.internal.BpkButtonContent
 import net.skyscanner.backpack.compose.button.internal.BpkButtonImpl
+import net.skyscanner.backpack.compose.button.internal.ButtonIcon
+import net.skyscanner.backpack.compose.button.internal.ButtonText
 
 @Composable
 fun BpkButton(
@@ -21,7 +22,6 @@ fun BpkButton(
   onClick: () -> Unit,
 ) {
   BpkButtonImpl(
-    content = BpkButtonContent.Text(text),
     size = size,
     colors = colors,
     enabled = enabled,
@@ -29,6 +29,7 @@ fun BpkButton(
     interactionSource = interactionSource,
     modifier = modifier,
     onClick = onClick,
+    content = { ButtonText(text) },
   )
 }
 
@@ -45,7 +46,6 @@ fun BpkButton(
   onClick: () -> Unit,
 ) {
   BpkButtonImpl(
-    content = BpkButtonContent.Icon(icon, contentDescription),
     size = size,
     colors = colors,
     enabled = enabled,
@@ -53,6 +53,7 @@ fun BpkButton(
     interactionSource = interactionSource,
     modifier = modifier.requiredWidth(size.minHeight),
     onClick = onClick,
+    content = { ButtonIcon(icon, contentDescription, size) },
   )
 }
 
@@ -70,7 +71,6 @@ fun BpkButton(
   onClick: () -> Unit,
 ) {
   BpkButtonImpl(
-    content = BpkButtonContent.IconAndText(icon, text, position),
     size = size,
     colors = colors,
     enabled = enabled,
@@ -78,5 +78,16 @@ fun BpkButton(
     interactionSource = interactionSource,
     modifier = modifier,
     onClick = onClick,
-  )
+  ) {
+    when (position) {
+      BpkButtonIconPosition.Start -> {
+        ButtonIcon(icon, null, size)
+        ButtonText(text)
+      }
+      BpkButtonIconPosition.End -> {
+        ButtonText(text)
+        ButtonIcon(icon, null, size)
+      }
+    }
+  }
 }
