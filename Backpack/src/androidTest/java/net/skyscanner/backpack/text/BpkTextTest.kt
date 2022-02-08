@@ -25,7 +25,6 @@ import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.test.R as TestR
 import net.skyscanner.backpack.text.BpkText.Weight
 import net.skyscanner.backpack.util.TestActivity
 import org.junit.Assert
@@ -33,6 +32,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import net.skyscanner.backpack.test.R as TestR
 
 @RunWith(AndroidJUnit4::class)
 class BpkTextTest {

@@ -21,11 +21,11 @@ package net.skyscanner.backpack.barchart.internal
 import android.content.Context
 import android.graphics.Canvas
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.math.max
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.util.forEach
 import net.skyscanner.backpack.util.withSave
+import kotlin.math.max
 
 internal class ChartPopupDecoration(
   context: Context,

@@ -18,11 +18,11 @@
 
 package net.skyscanner.backpack.calendar2
 
-import java.text.SimpleDateFormat
-import java.util.Locale
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 /**
  * Describes the calendar configuration.

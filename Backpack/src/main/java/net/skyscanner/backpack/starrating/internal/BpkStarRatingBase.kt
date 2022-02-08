@@ -28,12 +28,12 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
-import kotlin.math.ceil
-import kotlin.math.floor
-import kotlin.math.round
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.starrating.RoundingType
 import net.skyscanner.backpack.util.use
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.round
 
 @SuppressLint("ViewConstructor")
 open class BpkStarRatingBase internal constructor(

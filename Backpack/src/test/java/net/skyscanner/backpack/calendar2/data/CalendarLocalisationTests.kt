@@ -18,12 +18,12 @@
 
 package net.skyscanner.backpack.calendar2.data
 
-import java.util.Locale
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.threeten.bp.DayOfWeek
+import java.util.Locale
 
 class CalendarLocalisationTests {
 

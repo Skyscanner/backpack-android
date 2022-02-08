@@ -20,10 +20,10 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
-import java.text.NumberFormat
-import java.util.Currency
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.slider.BpkSlider
+import java.text.NumberFormat
+import java.util.Currency
 
 class SliderStory : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

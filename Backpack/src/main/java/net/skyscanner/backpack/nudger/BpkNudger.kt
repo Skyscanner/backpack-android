@@ -24,11 +24,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
-import kotlin.math.max
-import kotlin.math.min
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
+import kotlin.math.max
+import kotlin.math.min
 
 open class BpkNudger @JvmOverloads constructor(
   context: Context,

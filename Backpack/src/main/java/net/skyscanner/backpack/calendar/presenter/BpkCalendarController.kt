@@ -35,7 +35,6 @@
 package net.skyscanner.backpack.calendar.presenter
 
 import androidx.annotation.VisibleForTesting
-import java.util.Locale
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.calendar.model.CalendarRange
@@ -44,6 +43,7 @@ import net.skyscanner.backpack.calendar.model.SingleDay
 import net.skyscanner.backpack.calendar.view.CalendarUpdateCallback
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.Locale
 
 @Deprecated("Use Calendar2 instead")
 abstract class BpkCalendarController(
