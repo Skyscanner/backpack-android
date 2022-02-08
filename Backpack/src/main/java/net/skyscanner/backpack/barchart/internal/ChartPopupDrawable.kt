@@ -68,7 +68,7 @@ internal class ChartPopupDrawable(
     isAntiAlias = true
     isDither = true
     style = Paint.Style.FILL_AND_STROKE
-    BpkText.getFont(context, BpkText.SM, BpkText.Weight.EMPHASIZED).applyTo(this)
+    BpkText.getFont(context, BpkText.TextStyle.LABEL2).applyTo(this)
   }
 
   var text: String = ""

@@ -45,14 +45,14 @@ class BpkFontSpanTests : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestFontSpan_Custom() {
-    val span = BpkFontSpan(testContext, BpkText.XXL, BpkText.Weight.EMPHASIZED)
+    val span = BpkFontSpan(testContext, BpkText.TextStyle.HEADING2)
     textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     snap(textView)
   }
 
   @Test
   fun screenshotTestFontSpan_Injected() {
-    val font = BpkText.getFont(testContext, BpkText.XXL, BpkText.Weight.EMPHASIZED)
+    val font = BpkText.getFont(testContext, BpkText.TextStyle.HEADING2)
     textView.text = SpannableStringBuilder().append("Test", BpkFontSpan(font), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     snap(textView)
   }

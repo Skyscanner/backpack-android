@@ -71,7 +71,7 @@ open class BpkRadioButton @JvmOverloads constructor(
       intArrayOf(radioButtonCheckedColor, radioButtonDefaultColor)
     )
     updateTint()
-    BpkText.getFont(context, BpkText.SM, BpkText.Weight.NORMAL).applyTo(this)
+    BpkText.getFont(context, BpkText.TextStyle.FOOTNOTE).applyTo(this)
     setTextColor(
       ColorStateList(
         arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),

@@ -67,11 +67,9 @@ internal class MonthView @JvmOverloads constructor(
   defStyle: Int = 0,
 ) : View(context, attrs, defStyle) {
 
-  private val monthNumberFont =
-    BpkText.getFont(context, BpkText.BASE, BpkText.Weight.EMPHASIZED)
+  private val monthNumberFont = BpkText.getFont(context, BpkText.TextStyle.HEADING5)
 
-  private val monthLabelFont =
-    BpkText.getFont(context, BpkText.LG, BpkText.Weight.EMPHASIZED)
+  private val monthLabelFont = BpkText.getFont(context, BpkText.TextStyle.HEADING4)
 
   private val colouredParams = mutableMapOf<LocalDate, ColoredBucket>()
   private var isDateDisabled: (LocalDate) -> Boolean = { false }

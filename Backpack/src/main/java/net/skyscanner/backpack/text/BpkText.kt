@@ -141,6 +141,7 @@ open class BpkText @JvmOverloads constructor(
     ) =
       internalGetFont(context, mapLegacyStyle(textStyle, weight))
 
+    @JvmStatic
     fun getFont(
       context: Context,
       textStyle: TextStyle,

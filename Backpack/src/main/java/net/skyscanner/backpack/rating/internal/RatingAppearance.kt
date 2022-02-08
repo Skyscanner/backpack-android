@@ -72,9 +72,9 @@ internal class RatingAppearance(
     this.size = size
     val styles = size.style
 
-    this.title = BpkText.getFont(context, styles.titleSize, BpkText.Weight.EMPHASIZED)
-    this.subtitle = styles.subtitleSize?.let { BpkText.getFont(context, it, BpkText.Weight.NORMAL) }
-    this.score = BpkText.getFont(context, styles.scoreSize, BpkText.Weight.EMPHASIZED)
+    this.title = BpkText.getFont(context, styles.titleStyle)
+    this.subtitle = styles.subtitleStyle?.let { BpkText.getFont(context, it) }
+    this.score = BpkText.getFont(context, styles.scoreStyle)
     this.spacing = when (style) {
       BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.spacingPill)
       BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.spacing)

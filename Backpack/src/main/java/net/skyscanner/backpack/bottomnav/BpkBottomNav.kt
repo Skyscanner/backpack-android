@@ -31,7 +31,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_LABELED
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
@@ -138,10 +137,9 @@ open class BpkBottomNav @JvmOverloads constructor(
 
     constructor(
       context: Context,
-      textStyle: Int = BpkText.BASE,
-      weight: BpkText.Weight = BpkText.Weight.NORMAL
+      textStyle: BpkText.TextStyle = BpkText.TextStyle.BODY_DEFAULT
     ) :
-      this(BpkText.getFont(context, textStyle, weight))
+      this(BpkText.getFont(context, textStyle))
 
     override fun updateDrawState(tp: TextPaint) {
       tp.typeface = font.typeface
