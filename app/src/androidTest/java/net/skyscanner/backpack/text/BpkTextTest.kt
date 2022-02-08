@@ -34,222 +34,155 @@ class BpkTextTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestTextDefault() {
+  fun default() {
     val text = BpkText(testContext)
     text.text = "Message"
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextLg() {
+  fun bodyDefault() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.LG
+    text.textStyle = BpkText.TextStyle.BODY_DEFAULT
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextBase() {
+  fun bodyLongform() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.BASE
+    text.textStyle = BpkText.TextStyle.BODY_LONGFORM
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextSm() {
+  fun caption() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.SM
+    text.textStyle = BpkText.TextStyle.CAPTION
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextXl() {
+  fun footnote() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.XL
+    text.textStyle = BpkText.TextStyle.FOOTNOTE
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextXs() {
+  fun subheading() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.XS
+    text.textStyle = BpkText.TextStyle.SUBHEADING
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextXXL() {
+  fun label1() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.XXL
+    text.textStyle = BpkText.TextStyle.LABEL1
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextXXXL() {
+  fun label2() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.XXXL
+    text.textStyle = BpkText.TextStyle.LABEL2
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextCaps() {
+  fun heading1() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.CAPS
+    text.textStyle = BpkText.TextStyle.HEADING1
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextXXLEmphasize() {
+  fun heading2() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.XXL
-    text.weight = BpkText.Weight.EMPHASIZED
+    text.textStyle = BpkText.TextStyle.HEADING2
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextXXXLEmphasize() {
+  fun heading3() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.XXXL
-    text.weight = BpkText.Weight.EMPHASIZED
+    text.textStyle = BpkText.TextStyle.HEADING3
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextLgEmphasize() {
+  fun heading4() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.LG
-    text.weight = BpkText.Weight.EMPHASIZED
+    text.textStyle = BpkText.TextStyle.HEADING4
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextBaseEmphasize() {
+  fun heading5() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.BASE
-    text.weight = BpkText.Weight.EMPHASIZED
+    text.textStyle = BpkText.TextStyle.HEADING5
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextSmEmphasize() {
-    val text = BpkText(testContext)
-    text.text = "Message"
-    text.textStyle = BpkText.SM
-    text.weight = BpkText.Weight.EMPHASIZED
-    snap(text)
-  }
-
-  @Test
-  fun screenshotTestTextXlEmphasize() {
-    val text = BpkText(testContext)
-    text.text = "Message"
-    text.textStyle = BpkText.XL
-    text.weight = BpkText.Weight.EMPHASIZED
-    snap(text)
-  }
-
-  @Test
-  fun screenshotTestTextXsEmphasize() {
-    val text = BpkText(testContext)
-    text.text = "Message"
-    text.textStyle = BpkText.XS
-    text.weight = BpkText.Weight.EMPHASIZED
-    snap(text)
-  }
-
-  @Test
-  fun screenshotTestTextCapsEmphasize() {
-    val text = BpkText(testContext)
-    text.text = "Message"
-    text.textStyle = BpkText.CAPS
-    text.weight = BpkText.Weight.EMPHASIZED
-    snap(text)
-  }
-
-  @Test
-  fun screenshotTestTextXLHeavy() {
-    val text = BpkText(testContext)
-    text.text = "Message"
-    text.textStyle = BpkText.XL
-    text.weight = BpkText.Weight.HEAVY
-    snap(text)
-  }
-
-  @Test
-  fun screenshotTestTextXXLHeavy() {
-    val text = BpkText(testContext)
-    text.text = "Message"
-    text.textStyle = BpkText.XXL
-    text.weight = BpkText.Weight.HEAVY
-    snap(text)
-  }
-
-  @Test
-  fun screenshotTestTextXXXLHeavy() {
-    val text = BpkText(testContext)
-    text.text = "Message"
-    text.textStyle = BpkText.XXXL
-    text.weight = BpkText.Weight.HEAVY
-    snap(text)
-  }
-
-  @Test
-  fun screenshotTestTextHero1() {
+  fun hero1() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 1"
-    text.textStyle = BpkText.HERO1
+    text.textStyle = BpkText.TextStyle.HERO1
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextHero2() {
+  fun hero2() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 2"
-    text.textStyle = BpkText.HERO2
+    text.textStyle = BpkText.TextStyle.HERO2
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextHero3() {
+  fun hero3() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 3"
-    text.textStyle = BpkText.HERO3
+    text.textStyle = BpkText.TextStyle.HERO3
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextHero4() {
+  fun hero4() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 4"
-    text.textStyle = BpkText.HERO4
+    text.textStyle = BpkText.TextStyle.HERO4
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextHero5() {
+  fun hero5() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 5"
-    text.textStyle = BpkText.HERO5
+    text.textStyle = BpkText.TextStyle.HERO5
     snap(text)
   }
 
   @Test
-  fun screenshotTestTextLink() {
+  fun link() {
     val text = BpkText(testContext)
     text.setText(R.string.txt_lorem_ipsum_link)
     snap(text)

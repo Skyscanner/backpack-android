@@ -54,7 +54,7 @@ class SpacingStory : Story() {
 
     dimenResources.forEach {
       val text: BpkText = BpkText(requireContext()).apply {
-        textStyle = BpkText.LG
+        textStyle = BpkText.TextStyle.BODY_LONGFORM
         text = it.name + " = " + resources.getString(it.getInt(null))
       }
       text.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL

@@ -30,91 +30,135 @@ import android.widget.TextView
 import androidx.annotation.IntDef
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.text.internal.FontFamilyResolver
 import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.use
 
-private val styleMapping = mapOf(
-  BpkText.XS to arrayOf(R.attr.bpkTextXsAppearance, R.attr.bpkTextXsEmphasizedAppearance, null),
-  BpkText.SM to arrayOf(R.attr.bpkTextSmAppearance, R.attr.bpkTextSmEmphasizedAppearance, null),
-  BpkText.CAPS to arrayOf(R.attr.bpkTextCapsAppearance, R.attr.bpkTextCapsEmphasizedAppearance, null),
-  BpkText.BASE to arrayOf(R.attr.bpkTextBaseAppearance, R.attr.bpkTextBaseEmphasizedAppearance, null),
-  BpkText.LG to arrayOf(R.attr.bpkTextLgAppearance, R.attr.bpkTextLgEmphasizedAppearance, null),
-  BpkText.XL to arrayOf(R.attr.bpkTextXlAppearance, R.attr.bpkTextXlEmphasizedAppearance, R.attr.bpkTextXlHeavyAppearance),
-  BpkText.XXL to arrayOf(
-    R.attr.bpkTextXxlAppearance,
-    R.attr.bpkTextXxlEmphasizedAppearance,
-    R.attr.bpkTextXxlHeavyAppearance
-  ),
-  BpkText.XXXL to arrayOf(
-    R.attr.bpkTextXxxlAppearance,
-    R.attr.bpkTextXxxlEmphasizedAppearance,
-    R.attr.bpkTextXxxlHeavyAppearance
-  ),
-  BpkText.HERO1 to arrayOf(R.attr.bpkTextHero1Appearance, R.attr.bpkTextHero1Appearance, null),
-  BpkText.HERO2 to arrayOf(R.attr.bpkTextHero2Appearance, R.attr.bpkTextHero2Appearance, null),
-  BpkText.HERO3 to arrayOf(R.attr.bpkTextHero3Appearance, R.attr.bpkTextHero3Appearance, null),
-  BpkText.HERO4 to arrayOf(R.attr.bpkTextHero4Appearance, R.attr.bpkTextHero4Appearance, null),
-  BpkText.HERO5 to arrayOf(R.attr.bpkTextHero5Appearance, R.attr.bpkTextHero5Appearance, null),
+private val legacyStyleMapping = mapOf(
+  BpkText.XS to arrayOf(BpkText.TextStyle.CAPTION, BpkText.TextStyle.CAPTION, null),
+  BpkText.SM to arrayOf(BpkText.TextStyle.FOOTNOTE, BpkText.TextStyle.LABEL2, null),
+  BpkText.CAPS to arrayOf(BpkText.TextStyle.CAPTION, BpkText.TextStyle.CAPTION, null),
+  BpkText.BASE to arrayOf(BpkText.TextStyle.BODY_DEFAULT, BpkText.TextStyle.LABEL1, null),
+  BpkText.LG to arrayOf(BpkText.TextStyle.BODY_LONGFORM, BpkText.TextStyle.HEADING4, null),
+  BpkText.XL to arrayOf(BpkText.TextStyle.SUBHEADING, BpkText.TextStyle.HEADING3, BpkText.TextStyle.HEADING3),
+  BpkText.XXL to arrayOf(BpkText.TextStyle.HEADING2, BpkText.TextStyle.HEADING2, BpkText.TextStyle.HEADING2),
+  BpkText.XXXL to arrayOf(BpkText.TextStyle.HEADING1, BpkText.TextStyle.HEADING1, BpkText.TextStyle.HEADING1),
 )
 
 open class BpkText @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
+  @Deprecated("Use new text styles instead")
   enum class Weight {
     NORMAL,
     EMPHASIZED,
     HEAVY
   }
 
-  @IntDef(XS, SM, BASE, LG, XL, XXL, XXXL, CAPS, HERO1, HERO2, HERO3, HERO4, HERO5)
+  enum class TextStyle(internal val id: Int) {
+    HERO1(8),
+    HERO2(9),
+    HERO3(10),
+    HERO4(11),
+    HERO5(12),
+    HEADING1(13),
+    HEADING2(14),
+    HEADING3(15),
+    HEADING4(16),
+    HEADING5(17),
+    SUBHEADING(18),
+    BODY_LONGFORM(19),
+    BODY_DEFAULT(20),
+    LABEL1(21),
+    LABEL2(22),
+    FOOTNOTE(23),
+    CAPTION(24),
+    ;
+
+    fun toStyle() =
+      when (this) {
+        HERO1 -> R.attr.bpkTextHero1Appearance
+        HERO2 -> R.attr.bpkTextHero2Appearance
+        HERO3 -> R.attr.bpkTextHero3Appearance
+        HERO4 -> R.attr.bpkTextHero4Appearance
+        HERO5 -> R.attr.bpkTextHero5Appearance
+        HEADING1 -> R.attr.bpkTextHeading1Appearance
+        HEADING2 -> R.attr.bpkTextHeading2Appearance
+        HEADING3 -> R.attr.bpkTextHeading3Appearance
+        HEADING4 -> R.attr.bpkTextHeading4Appearance
+        HEADING5 -> R.attr.bpkTextHeading5Appearance
+        SUBHEADING -> R.attr.bpkTextSubheadingAppearance
+        BODY_LONGFORM -> R.attr.bpkTextBodyLongformAppearance
+        BODY_DEFAULT -> R.attr.bpkTextBodyDefaultAppearance
+        LABEL1 -> R.attr.bpkTextLabel1Appearance
+        LABEL2 -> R.attr.bpkTextLabel2Appearance
+        FOOTNOTE -> R.attr.bpkTextFootnoteAppearance
+        CAPTION -> R.attr.bpkTextCaptionAppearance
+      }
+  }
+
+  @Deprecated("Use TextStyle instead")
+  @IntDef(XS, SM, BASE, LG, XL, XXL, XXXL, CAPS)
   annotation class Styles
 
   companion object {
+    @Deprecated("Use CAPTION")
     const val XS = 0
+
+    @Deprecated("Use FOOTNOTE or LABEL2 (emphasized)")
     const val SM = 1
+
+    @Deprecated("Use BODY_DEFAULT or HEADING5 (emphasized)")
     const val BASE = 2
+
+    @Deprecated("Use BODY_LONGFORM or HEADING4 (emphasized)")
     const val LG = 3
+
+    @Deprecated("Use SUBHEADING or HEADING3 (emphasized)")
     const val XL = 4
+
+    @Deprecated("Use HEADING2")
     const val XXL = 5
+
+    @Deprecated("Use HEADING1")
     const val XXXL = 6
+
+    @Deprecated("Use CAPTION")
     const val CAPS = 7
-    const val HERO1 = 8
-    const val HERO2 = 9
-    const val HERO3 = 10
-    const val HERO4 = 11
-    const val HERO5 = 12
 
     @JvmStatic
+    @Deprecated("Use new TextStyle instead")
     fun getFont(
       context: Context,
-      textStyle: Int = BpkText.BASE,
-      weight: BpkText.Weight = BpkText.Weight.NORMAL
+      textStyle: Int = BASE,
+      weight: Weight = Weight.NORMAL,
     ) =
-      internalGetFont(context, textStyle, weight)
+      internalGetFont(context, mapLegacyStyle(textStyle, weight))
+
+    fun getFont(
+      context: Context,
+      textStyle: TextStyle,
+    ) =
+      internalGetFont(context, textStyle)
+
+    private fun mapLegacyStyle(textStyle: Int, weight: Weight): TextStyle =
+      legacyStyleMapping[textStyle]
+        .let { if (it == null) throw IllegalStateException("Unsupported text style") else it[weight.ordinal] }
+        .let { it ?: throw IllegalStateException("Unsupported text style") }
   }
 
-  @Styles
-  private var _textStyle: Int = BASE
+  private var _textStyle: TextStyle = TextStyle.BODY_DEFAULT
   var textStyle
     get() = _textStyle
     set(value) {
       _textStyle = value
       this.setup()
-    }
-
-  private var _weight: Weight = Weight.NORMAL
-  var weight
-    get() = _weight
-    set(value) {
-      _weight = value
-      setup()
     }
 
   private var _textColour: ColorStateList? = null
@@ -132,11 +176,11 @@ open class BpkText @JvmOverloads constructor(
       R.styleable.BpkText,
       defStyleAttr, 0
     ).use {
-      _textStyle = it.getInt(R.styleable.BpkText_textStyle, BASE)
-      val weightArg = it.getInt(R.styleable.BpkText_weight, -1)
-      if (weightArg != -1) {
-        _weight = Weight.values()[weightArg]
-      }
+      // this needs to be base, rather than body default to ensure the legacy weight property is still working as expected
+      val textStyleArg = it.getInt(R.styleable.BpkText_textStyle, BASE)
+      val weight = it.getInt(R.styleable.BpkText_weight, -1)
+        .let { arg -> if (arg == -1) Weight.NORMAL else Weight.values()[arg] }
+      _textStyle = TextStyle.values().firstOrNull { it.id == textStyleArg } ?: mapLegacyStyle(textStyleArg, weight)
 
       if (it.hasValue(R.styleable.BpkText_android_textColor)) {
         _textColour = it.getColorStateList(R.styleable.BpkText_android_textColor)
@@ -166,10 +210,7 @@ open class BpkText @JvmOverloads constructor(
   }
 
   private fun setup() {
-    val textAppearance = getStyleId(context, textStyle, weight)
-    if (textStyle == CAPS) {
-      isAllCaps = true
-    }
+    val textAppearance = getStyleId(context, textStyle)
 
     setTextAppearance(textAppearance)
     applyLineHeight(textAppearance)
@@ -209,12 +250,8 @@ open class BpkText @JvmOverloads constructor(
   }
 }
 
-private fun internalGetFont(
-  context: Context,
-  textStyle: Int = BpkText.BASE,
-  weight: BpkText.Weight = BpkText.Weight.NORMAL
-): BpkText.FontDefinition {
-  val styleRes = getStyleId(context, textStyle, weight)
+private fun internalGetFont(context: Context, textStyle: BpkText.TextStyle): BpkText.FontDefinition {
+  val styleRes = getStyleId(context, textStyle)
 
   val textStyleAttributes = context.obtainStyledAttributes(styleRes, R.styleable.BpkTextStyle)
   val fontSize = textStyleAttributes.getDimensionPixelSize(
@@ -227,23 +264,24 @@ private fun internalGetFont(
   val lineHeight = textStyleAttributes.getDimensionPixelSize(R.styleable.BpkTextStyle_lineHeight, -1)
     .let { if (it == -1) null else it }
 
+  val typefaceResId = textStyleAttributes.getResourceId(R.styleable.BpkTextStyle_android_fontFamily, -1)
+  val typeface = if (typefaceResId == -1) {
+    textStyleAttributes.getString(R.styleable.BpkTextStyle_android_fontFamily)?.let { Typeface.create(it, Typeface.NORMAL) }
+  } else {
+    ResourcesCompat.getFont(context, typefaceResId)
+  } ?: throw IllegalStateException("Bpk font not configured correctly")
+
   textStyleAttributes.recycle()
 
-  return FontFamilyResolver(context, weight)?.let {
-    BpkText.FontDefinition(it, fontSize, letterSpacing, lineHeight)
-  } ?: throw IllegalStateException("Bpk font not configured correctly")
+  return BpkText.FontDefinition(typeface, fontSize, letterSpacing, lineHeight)
 }
 
 @StyleRes
-private fun getStyleId(context: Context, textStyle: Int, weight: BpkText.Weight): Int {
-  val styleProps = styleMapping[textStyle]
-    ?: throw IllegalStateException("Invalid textStyle")
-
-  val textAppearanceAttr = styleProps[weight.ordinal]
-    ?: throw IllegalStateException("Weight $weight is not supported for the current size")
+private fun getStyleId(context: Context, textStyle: BpkText.TextStyle): Int {
+  val styleProps = textStyle.toStyle()
 
   val outValue = TypedValue()
-  if (context.theme.resolveAttribute(textAppearanceAttr, outValue, true)) {
+  if (context.theme.resolveAttribute(styleProps, outValue, true)) {
     return outValue.resourceId
   }
 

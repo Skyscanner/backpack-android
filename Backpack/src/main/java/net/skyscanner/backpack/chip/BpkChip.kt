@@ -90,8 +90,7 @@ open class BpkChip @JvmOverloads constructor(
     this.style = provideStyle(this.context, attrs, defStyleAttr)
     this.compoundDrawablePadding = iconPadding
     this.gravity = Gravity.CENTER_VERTICAL
-    this.textStyle = SM
-    this.weight = Weight.NORMAL
+    this.textStyle = TextStyle.FOOTNOTE
     this.setTextColor(style.text)
     this.isSingleLine = true
     this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)

@@ -47,7 +47,7 @@ class BpkOverlayTest : BpkSnapshotTest() {
     )
     addView(
       BpkText(context).apply {
-        textStyle = BpkText.XS
+        textStyle = BpkText.TextStyle.CAPTION
         setTextColor(Color.WHITE)
         text = "Text"
       },
