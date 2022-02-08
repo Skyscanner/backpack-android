@@ -24,6 +24,7 @@ import net.skyscanner.backpack.compose.button.BpkButtonColors
 import net.skyscanner.backpack.compose.button.BpkButtonIconPosition
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.icons.BpkIcons
+import net.skyscanner.backpack.compose.icons.lg.LongArrowRight
 import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
@@ -64,6 +65,11 @@ private fun ButtonsRow(
   enabled: Boolean,
   modifier: Modifier = Modifier,
 ) {
+  val icon = when (size) {
+    BpkButtonSize.Default -> BpkIcons.Sm.LongArrowRight
+    BpkButtonSize.Large -> BpkIcons.Lg.LongArrowRight
+  }
+
   Row(
     modifier
       .fillMaxWidth()
@@ -85,7 +91,7 @@ private fun ButtonsRow(
     LoadingScope {
       BpkButton(
         text = ButtonText,
-        icon = BpkIcons.Sm.LongArrowRight,
+        icon = icon,
         position = BpkButtonIconPosition.Start,
         size = size,
         colors = colors,
@@ -98,7 +104,7 @@ private fun ButtonsRow(
     LoadingScope {
       BpkButton(
         text = ButtonText,
-        icon = BpkIcons.Sm.LongArrowRight,
+        icon = icon,
         position = BpkButtonIconPosition.End,
         size = size,
         colors = colors,
@@ -110,7 +116,7 @@ private fun ButtonsRow(
 
     LoadingScope {
       BpkButton(
-        icon = BpkIcons.Sm.LongArrowRight,
+        icon = icon,
         contentDescription = ButtonText,
         size = size,
         colors = colors,

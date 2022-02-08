@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.tokens.BpkColors
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
@@ -94,7 +95,12 @@ sealed class BpkButtonColors {
     override fun backgroundColor(interactionSource: InteractionSource): Color =
       interactionSource.animateAsColor(
         default = BpkTheme.colors.primary,
+        pressed = dynamicColorOf(BpkColor.SkyBlueShade01, dark = BpkColor.SkyBlue),
       )
+
+    @Composable
+    override fun rippleColor() : Color =
+      Color.Black.copy(alpha = 0.1f)
 
     @Composable
     override fun contentColor(interactionSource: InteractionSource): Color =
@@ -113,7 +119,7 @@ sealed class BpkButtonColors {
 
     @Composable
     override fun rippleColor() : Color =
-      dynamicColorOf(Color.White, dark = Color.Black).copy(alpha = 0.2f)
+      dynamicColorOf(Color.Black, Color.White).copy(alpha = 0.1f)
 
     @Composable
     override fun contentColor(interactionSource: InteractionSource): Color =
