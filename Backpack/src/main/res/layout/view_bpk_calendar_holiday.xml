@@ -25,7 +25,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toEndOf="@id/dot"
     android:layout_marginStart="@dimen/bpkSpacingSm"
-    app:textStyle="sm"
+    app:textStyle="footnote"
     tools:text="25 Dez"/>
 
   <net.skyscanner.backpack.text.BpkText
@@ -34,7 +34,7 @@
     android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toEndOf="@id/date"
-    app:textStyle="sm"
+    app:textStyle="footnote"
     tools:text="Christmas"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="0 out of 5"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.starrating.BpkInteractiveStarRating
     android:id="@+id/star_rating_empty"
@@ -26,7 +26,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="3 out of 5"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.starrating.BpkInteractiveStarRating
     android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="5 out of 5"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.starrating.BpkInteractiveStarRating
     android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
     android:layout_height="wrap_content"
     android:layoutDirection="rtl"
     android:text="2 out of 5 RTL"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.starrating.BpkInteractiveStarRating
     android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="5 out of 8"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.starrating.BpkInteractiveStarRating
     android:layout_width="wrap_content"

@@ -34,8 +34,7 @@
     android:ellipsize="end"
     android:singleLine="true"
     android:maxLines="1"
-    app:textStyle="sm"
-    app:weight="emphasized"
+    app:textStyle="label2"
     tools:text="3" />
 
   <net.skyscanner.backpack.text.BpkText
@@ -46,7 +45,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:textStyle="sm"
+    app:textStyle="footnote"
     android:ellipsize="end"
     android:singleLine="true"
     android:maxLines="1"

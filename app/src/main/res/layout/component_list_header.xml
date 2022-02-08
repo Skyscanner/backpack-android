@@ -10,5 +10,4 @@
   android:layout_marginBottom="@dimen/bpkSpacingBase"
   android:textAllCaps="true"
   android:textColor="@color/bpkTextSecondary"
-  app:weight="emphasized"
-  app:textStyle="sm" />
+  app:textStyle="label2" />

@@ -14,7 +14,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingSm"
-      app:textStyle="sm"
+      app:textStyle="footnote"
       android:text="Success"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,7 +76,7 @@
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:textStyle="sm"
+      app:textStyle="footnote"
       android:text="Warning"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,7 +138,7 @@
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:textStyle="sm"
+      app:textStyle="footnote"
       android:text="Destructive"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -200,7 +200,7 @@
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:textStyle="sm"
+      app:textStyle="footnote"
       android:text="Light"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -263,7 +263,7 @@
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:textStyle="sm"
+      app:textStyle="footnote"
       android:text="Dark"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -326,7 +326,7 @@
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:textStyle="sm"
+      app:textStyle="footnote"
       android:text="Inverse"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -389,7 +389,7 @@
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:textStyle="sm"
+      app:textStyle="footnote"
       android:text="Outline"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout

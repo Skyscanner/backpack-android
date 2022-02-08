@@ -33,7 +33,7 @@
     android:paddingStart="@dimen/bpkSpacingBase"
     android:text="@string/settings_section_theme"
     android:textColor="@color/bpkSkyGrayTint01"
-    app:textStyle="base"
+    app:textStyle="bodyDefault"
     tools:ignore="RtlSymmetry" />
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,7 +76,7 @@
       app:layout_constraintEnd_toStartOf="@id/theme_toggle"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/enable_theme"
-      app:textStyle="sm" />
+      app:textStyle="footnote" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

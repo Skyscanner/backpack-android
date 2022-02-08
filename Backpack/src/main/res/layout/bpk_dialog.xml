@@ -51,8 +51,7 @@
             android:layout_marginStart="@dimen/bpkSpacingMd"
             android:layout_marginEnd="@dimen/bpkSpacingMd"
             android:textAlignment="center"
-            app:textStyle="xl"
-            app:weight="emphasized"
+            app:textStyle="heading3"
             tools:text="Title" />
 
           <net.skyscanner.backpack.text.BpkText
