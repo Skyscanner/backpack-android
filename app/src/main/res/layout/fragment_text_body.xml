@@ -7,56 +7,42 @@
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="emphasized"
-    app:textStyle="xxxl" />
+    android:text="@string/text_subheading"
+    app:textStyle="subheading" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="emphasized"
-    app:textStyle="xxl" />
+    android:text="@string/text_body_longform"
+    app:textStyle="bodyLongform" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="emphasized"
-    app:textStyle="xl" />
+    android:text="@string/text_body_default"
+    app:textStyle="bodyDefault" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="emphasized"
-    app:textStyle="lg" />
+    android:text="@string/text_footnote"
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="emphasized"
-    app:textStyle="base" />
+    android:text="@string/text_caption"
+    app:textStyle="caption" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="emphasized"
-    app:textStyle="sm" />
+    android:text="@string/text_label1"
+    app:textStyle="label1" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="emphasized"
-    app:textStyle="xs" />
-
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="emphasized"
-    app:textStyle="caps" />
+    android:text="@string/text_label2"
+    app:textStyle="label2" />
 </LinearLayout>

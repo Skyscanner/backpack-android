@@ -7,21 +7,30 @@
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="heavy"
-    app:textStyle="xxxl" />
+    android:text="@string/text_heading1"
+    app:textStyle="heading1" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="heavy"
-    app:textStyle="xxl" />
+    android:text="@string/text_heading2"
+    app:textStyle="heading2" />
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:weight="heavy"
-    app:textStyle="xl" />
+    android:text="@string/text_heading3"
+    app:textStyle="heading3" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/text_heading4"
+    app:textStyle="heading4" />
+
+  <net.skyscanner.backpack.text.BpkText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/text_heading5"
+    app:textStyle="heading5" />
 </LinearLayout>

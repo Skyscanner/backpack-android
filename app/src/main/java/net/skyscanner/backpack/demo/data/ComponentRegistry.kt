@@ -307,9 +307,8 @@ object ComponentRegistry {
         TAB_TITLE_VIEW story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Default" story NodeData { Story of R.layout.fragment_text },
-            "Emphasized" story NodeData { Story of R.layout.fragment_text_emphasized },
-            "Heavy" story NodeData { Story of R.layout.fragment_text_heavy },
+            "Body" story NodeData { Story of R.layout.fragment_text_body },
+            "Heading" story NodeData { Story of R.layout.fragment_text_heading },
             "Hero" story NodeData { Story of R.layout.fragment_text_hero },
             "With drawables" story NodeData { Story of R.layout.fragment_text_drawables },
             "With links" story NodeData { Story of R.layout.fragment_text_links },
