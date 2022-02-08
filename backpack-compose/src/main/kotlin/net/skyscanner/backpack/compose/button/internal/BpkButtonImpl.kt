@@ -14,12 +14,16 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.ripple.LocalRippleTheme
+import androidx.compose.material.ripple.RippleAlpha
+import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonColors
@@ -39,26 +43,28 @@ internal fun BpkButtonImpl(
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   onClick: () -> Unit,
 ) {
-  Button(
-    onClick = onClick,
-    enabled = enabled && !loading,
-    modifier = modifier.requiredHeight(size.minHeight),
-    interactionSource = interactionSource,
-    colors = ButtonDefaults.buttonColors(
-      backgroundColor = colors.backgroundColor(interactionSource),
-      contentColor = colors.contentColor(interactionSource),
-      disabledBackgroundColor = colors.disabledBackgroundColor(),
-      disabledContentColor = colors.disabledContentColor(),
-    ),
-    shape = ButtonShape,
-    contentPadding = PaddingValues(horizontal = size.horizontalPadding),
-    elevation = null,
-    content = {
-      CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
-        ButtonContent(content, size, loading)
-      }
-    },
-  )
+  CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(colors.rippleColor())) {
+    Button(
+      onClick = onClick,
+      enabled = enabled && !loading,
+      modifier = modifier.requiredHeight(size.minHeight),
+      interactionSource = interactionSource,
+      colors = ButtonDefaults.buttonColors(
+        backgroundColor = colors.backgroundColor(interactionSource),
+        contentColor = colors.contentColor(interactionSource),
+        disabledBackgroundColor = colors.disabledBackgroundColor(),
+        disabledContentColor = colors.disabledContentColor(),
+      ),
+      shape = ButtonShape,
+      contentPadding = PaddingValues(horizontal = size.horizontalPadding),
+      elevation = null,
+      content = {
+        CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
+          ButtonContent(content, size, loading)
+        }
+      },
+    )
+  }
 }
 
 @Composable
@@ -91,6 +97,7 @@ private fun ButtonContent(content: BpkButtonContent, size: BpkButtonSize, loadin
     Row(
       modifier = Modifier.alpha(if (loading) 0f else 1f),
       horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
+      verticalAlignment = Alignment.CenterVertically,
     ) {
       when (content) {
         is BpkButtonContent.Text -> {
@@ -116,6 +123,22 @@ private fun ButtonContent(content: BpkButtonContent, size: BpkButtonSize, loadin
       Progress(Modifier.align(Alignment.Center))
     }
   }
+
+}
+
+private class ButtonRippleTheme(
+  private val color: Color = Color.Black,
+) : RippleTheme {
+
+  private val alpha = RippleAlpha(color.alpha, color.alpha, color.alpha, color.alpha)
+
+  @Composable
+  override fun defaultColor(): Color =
+    color
+
+  @Composable
+  override fun rippleAlpha(): RippleAlpha =
+    alpha
 
 }
 

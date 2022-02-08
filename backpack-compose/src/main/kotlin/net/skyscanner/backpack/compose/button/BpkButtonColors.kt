@@ -19,6 +19,10 @@ sealed class BpkButtonColors {
     dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)
 
   @Composable
+  internal open fun rippleColor(): Color =
+    Color.Black.copy(alpha = 0.2f)
+
+  @Composable
   internal abstract fun backgroundColor(interactionSource: InteractionSource): Color
 
   @Composable
@@ -30,7 +34,6 @@ sealed class BpkButtonColors {
     override fun backgroundColor(interactionSource: InteractionSource): Color =
       interactionSource.animateAsColor(
         default = BpkColor.Monteverde,
-        pressed = Color(0xFF006A61),
       )
 
     @Composable
@@ -45,7 +48,6 @@ sealed class BpkButtonColors {
     override fun backgroundColor(interactionSource: InteractionSource): Color =
       interactionSource.animateAsColor(
         default = dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint02),
-        pressed = dynamicColorOf(BpkColor.SkyGrayTint05, BpkColor.BlackTint01),
       )
 
     @Composable
@@ -60,7 +62,6 @@ sealed class BpkButtonColors {
     override fun backgroundColor(interactionSource: InteractionSource): Color =
       interactionSource.animateAsColor(
         default = BpkColor.White,
-        pressed = BpkColor.SkyGrayTint05,
       )
 
     @Composable
@@ -75,8 +76,11 @@ sealed class BpkButtonColors {
     override fun backgroundColor(interactionSource: InteractionSource): Color =
       interactionSource.animateAsColor(
         default = BpkColor.SkyGray,
-        pressed = BpkColor.SkyGrayTint01,
       )
+
+    @Composable
+    override fun rippleColor(): Color =
+      Color.White.copy(alpha = 0.2f)
 
     @Composable
     override fun contentColor(interactionSource: InteractionSource): Color =
@@ -90,7 +94,6 @@ sealed class BpkButtonColors {
     override fun backgroundColor(interactionSource: InteractionSource): Color =
       interactionSource.animateAsColor(
         default = BpkTheme.colors.primary,
-        pressed = BpkColor.SkyBlueShade01,
       )
 
     @Composable
@@ -107,6 +110,10 @@ sealed class BpkButtonColors {
         default = dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint02),
         pressed = dynamicColorOf(Color(0xFFB22E45), Color(0xFFF85C76)),
       )
+
+    @Composable
+    override fun rippleColor() : Color =
+      dynamicColorOf(Color.White, dark = Color.Black).copy(alpha = 0.2f)
 
     @Composable
     override fun contentColor(interactionSource: InteractionSource): Color =
@@ -126,6 +133,10 @@ sealed class BpkButtonColors {
     @Composable
     override fun backgroundColor(interactionSource: InteractionSource): Color =
       Color.Transparent
+
+    @Composable
+    override fun rippleColor() : Color =
+      dynamicColorOf(Color.Black, dark = Color.White).copy(alpha = 0.2f)
 
     @Composable
     override fun contentColor(interactionSource: InteractionSource): Color =

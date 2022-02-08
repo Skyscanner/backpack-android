@@ -12,7 +12,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 @Composable
 internal inline fun InteractionSource.animateAsColor(
   default: Color,
-  pressed: Color,
+  pressed: Color = default,
   focused: Color = pressed,
 ): Color {
   val isPressed by collectIsPressedAsState()

@@ -14,6 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -24,8 +26,6 @@ import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
 @Composable
 fun ButtonsStory(
@@ -120,7 +120,6 @@ private fun ButtonsRow(
       )
     }
   }
-
 }
 
 @Composable
@@ -144,7 +143,6 @@ private class LoadingScope(private val scope: CoroutineScope) {
       loading = false
     }
   }
-
 }
 
 private val ButtonText = "Button"
