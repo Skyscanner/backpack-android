@@ -18,9 +18,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.button.BpkButtonColors
 import net.skyscanner.backpack.compose.button.BpkButtonIconPosition
 import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.LongArrowRight
 import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
@@ -36,21 +36,21 @@ fun ButtonsStory(
   LazyColumn(modifier.fillMaxSize()) {
     item {
       ButtonsRow(
-        colors = BpkButtonColors.Primary,
+        type = BpkButtonType.Primary,
         size = size,
         enabled = false,
       )
     }
     items(Colors) {
       ButtonsRow(
-        colors = it,
+        type = it,
         size = size,
         enabled = true,
       )
     }
     item {
       ButtonsRow(
-        colors = BpkButtonColors.Link,
+        type = BpkButtonType.Link,
         size = size,
         enabled = false,
       )
@@ -60,7 +60,7 @@ fun ButtonsStory(
 
 @Composable
 private fun ButtonsRow(
-  colors: BpkButtonColors,
+  type: BpkButtonType,
   size: BpkButtonSize,
   enabled: Boolean,
   modifier: Modifier = Modifier,
@@ -81,7 +81,7 @@ private fun ButtonsRow(
       BpkButton(
         text = ButtonText,
         size = size,
-        colors = colors,
+        type = type,
         loading = loading,
         enabled = enabled,
         onClick = ::load,
@@ -94,7 +94,7 @@ private fun ButtonsRow(
         icon = icon,
         position = BpkButtonIconPosition.Start,
         size = size,
-        colors = colors,
+        type = type,
         enabled = enabled,
         loading = loading,
         onClick = ::load,
@@ -107,7 +107,7 @@ private fun ButtonsRow(
         icon = icon,
         position = BpkButtonIconPosition.End,
         size = size,
-        colors = colors,
+        type = type,
         enabled = enabled,
         loading = loading,
         onClick = ::load,
@@ -119,7 +119,7 @@ private fun ButtonsRow(
         icon = icon,
         contentDescription = ButtonText,
         size = size,
-        colors = colors,
+        type = type,
         enabled = enabled,
         loading = loading,
         onClick = ::load,
@@ -153,11 +153,11 @@ private class LoadingScope(private val scope: CoroutineScope) {
 
 private val ButtonText = "Button"
 private val Colors = listOf(
-  BpkButtonColors.Primary,
-  BpkButtonColors.Secondary,
-  BpkButtonColors.PrimaryOnDark,
-  BpkButtonColors.PrimaryOnLight,
-  BpkButtonColors.Featured,
-  BpkButtonColors.Destructive,
-  BpkButtonColors.Link,
+  BpkButtonType.Primary,
+  BpkButtonType.Secondary,
+  BpkButtonType.PrimaryOnDark,
+  BpkButtonType.PrimaryOnLight,
+  BpkButtonType.Featured,
+  BpkButtonType.Destructive,
+  BpkButtonType.Link,
 )

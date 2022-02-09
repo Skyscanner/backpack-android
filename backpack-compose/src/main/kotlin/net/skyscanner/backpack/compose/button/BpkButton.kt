@@ -15,7 +15,7 @@ fun BpkButton(
   text: String,
   modifier: Modifier = Modifier,
   size: BpkButtonSize = BpkButtonSize.Default,
-  colors: BpkButtonColors = BpkButtonColors.Primary,
+  type: BpkButtonType = BpkButtonType.Primary,
   enabled: Boolean = true,
   loading: Boolean = false,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -23,7 +23,7 @@ fun BpkButton(
 ) {
   BpkButtonImpl(
     size = size,
-    colors = colors,
+    type = type,
     enabled = enabled,
     loading = loading,
     interactionSource = interactionSource,
@@ -39,7 +39,7 @@ fun BpkButton(
   contentDescription: String,
   modifier: Modifier = Modifier,
   size: BpkButtonSize = BpkButtonSize.Default,
-  colors: BpkButtonColors = BpkButtonColors.Primary,
+  type: BpkButtonType = BpkButtonType.Primary,
   enabled: Boolean = true,
   loading: Boolean = false,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -47,7 +47,7 @@ fun BpkButton(
 ) {
   BpkButtonImpl(
     size = size,
-    colors = colors,
+    type = type,
     enabled = enabled,
     loading = loading,
     interactionSource = interactionSource,
@@ -64,7 +64,7 @@ fun BpkButton(
   position: BpkButtonIconPosition,
   modifier: Modifier = Modifier,
   size: BpkButtonSize = BpkButtonSize.Default,
-  colors: BpkButtonColors = BpkButtonColors.Primary,
+  type: BpkButtonType = BpkButtonType.Primary,
   enabled: Boolean = true,
   loading: Boolean = false,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -72,7 +72,7 @@ fun BpkButton(
 ) {
   BpkButtonImpl(
     size = size,
-    colors = colors,
+    type = type,
     enabled = enabled,
     loading = loading,
     interactionSource = interactionSource,

@@ -27,7 +27,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.button.BpkButtonColors
+import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -36,24 +36,24 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 internal fun BpkButtonImpl(
   modifier: Modifier = Modifier,
   size: BpkButtonSize = BpkButtonSize.Default,
-  colors: BpkButtonColors = BpkButtonColors.Primary,
+  type: BpkButtonType = BpkButtonType.Primary,
   enabled: Boolean = true,
   loading: Boolean = false,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   onClick: () -> Unit,
   content: @Composable RowScope.() -> Unit,
 ) {
-  CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(colors.rippleColor())) {
+  CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(type.rippleColor())) {
     Button(
       onClick = onClick,
       enabled = enabled && !loading,
       modifier = modifier.requiredHeight(size.minHeight),
       interactionSource = interactionSource,
       colors = ButtonDefaults.buttonColors(
-        backgroundColor = colors.backgroundColor(interactionSource),
-        contentColor = colors.contentColor(interactionSource),
-        disabledBackgroundColor = colors.disabledBackgroundColor(),
-        disabledContentColor = colors.disabledContentColor(),
+        backgroundColor = type.backgroundColor(interactionSource),
+        contentColor = type.contentColor(interactionSource),
+        disabledBackgroundColor = type.disabledBackgroundColor(),
+        disabledContentColor = type.disabledContentColor(),
       ),
       shape = ButtonShape,
       contentPadding = PaddingValues(horizontal = size.horizontalPadding),
