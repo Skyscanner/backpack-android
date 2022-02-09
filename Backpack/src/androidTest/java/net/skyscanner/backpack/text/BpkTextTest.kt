@@ -66,7 +66,7 @@ class BpkTextTest {
 
   @Test
   fun applyTo_TextView() {
-    val font = BpkText.getFont(context, BpkText.TextStyle.BODY_DEFAULT)
+    val font = BpkText.getFont(context, BpkText.TextStyle.BodyDefault)
     val subject = TextView(context)
     subject.text = "Foo"
 
@@ -81,7 +81,7 @@ class BpkTextTest {
   fun applyTo_TextView_withCustomFont() {
     val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
-    val font = BpkText.getFont(withCustomFont, BpkText.TextStyle.BODY_DEFAULT)
+    val font = BpkText.getFont(withCustomFont, BpkText.TextStyle.BodyDefault)
     val subject = TextView(withCustomFont)
     subject.text = "Foo"
 
@@ -94,7 +94,7 @@ class BpkTextTest {
 
   @Test
   fun applyTo_Paint() {
-    val font = BpkText.getFont(context, BpkText.TextStyle.BODY_DEFAULT)
+    val font = BpkText.getFont(context, BpkText.TextStyle.BodyDefault)
     val subject = Paint()
     font.applyTo(subject)
 
@@ -107,7 +107,7 @@ class BpkTextTest {
   fun applyTo_Paint_withCustomFont() {
     val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
-    val font = BpkText.getFont(withCustomFont, BpkText.TextStyle.BODY_DEFAULT)
+    val font = BpkText.getFont(withCustomFont, BpkText.TextStyle.BodyDefault)
     val subject = Paint()
     font.applyTo(subject)
 

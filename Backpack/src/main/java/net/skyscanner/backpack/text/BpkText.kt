@@ -40,14 +40,14 @@ import net.skyscanner.backpack.util.isInEditMode
 import net.skyscanner.backpack.util.use
 
 private val legacyStyleMapping = mapOf(
-  BpkText.XS to arrayOf(BpkText.TextStyle.CAPTION, BpkText.TextStyle.CAPTION, null),
-  BpkText.SM to arrayOf(BpkText.TextStyle.FOOTNOTE, BpkText.TextStyle.LABEL2, null),
-  BpkText.CAPS to arrayOf(BpkText.TextStyle.CAPTION, BpkText.TextStyle.CAPTION, null),
-  BpkText.BASE to arrayOf(BpkText.TextStyle.BODY_DEFAULT, BpkText.TextStyle.LABEL1, null),
-  BpkText.LG to arrayOf(BpkText.TextStyle.BODY_LONGFORM, BpkText.TextStyle.HEADING4, null),
-  BpkText.XL to arrayOf(BpkText.TextStyle.SUBHEADING, BpkText.TextStyle.HEADING3, BpkText.TextStyle.HEADING3),
-  BpkText.XXL to arrayOf(BpkText.TextStyle.HEADING2, BpkText.TextStyle.HEADING2, BpkText.TextStyle.HEADING2),
-  BpkText.XXXL to arrayOf(BpkText.TextStyle.HEADING1, BpkText.TextStyle.HEADING1, BpkText.TextStyle.HEADING1),
+  BpkText.XS to arrayOf(BpkText.TextStyle.Caption, BpkText.TextStyle.Caption, null),
+  BpkText.SM to arrayOf(BpkText.TextStyle.Footnote, BpkText.TextStyle.Label2, null),
+  BpkText.CAPS to arrayOf(BpkText.TextStyle.Caption, BpkText.TextStyle.Caption, null),
+  BpkText.BASE to arrayOf(BpkText.TextStyle.BodyDefault, BpkText.TextStyle.Label1, null),
+  BpkText.LG to arrayOf(BpkText.TextStyle.BodyLongform, BpkText.TextStyle.Heading4, null),
+  BpkText.XL to arrayOf(BpkText.TextStyle.Subheading, BpkText.TextStyle.Heading3, BpkText.TextStyle.Heading3),
+  BpkText.XXL to arrayOf(BpkText.TextStyle.Heading2, BpkText.TextStyle.Heading2, BpkText.TextStyle.Heading2),
+  BpkText.XXXL to arrayOf(BpkText.TextStyle.Heading1, BpkText.TextStyle.Heading1, BpkText.TextStyle.Heading1),
 )
 
 open class BpkText @JvmOverloads constructor(
@@ -64,44 +64,44 @@ open class BpkText @JvmOverloads constructor(
   }
 
   enum class TextStyle(internal val id: Int) {
-    HERO1(8),
-    HERO2(9),
-    HERO3(10),
-    HERO4(11),
-    HERO5(12),
-    HEADING1(13),
-    HEADING2(14),
-    HEADING3(15),
-    HEADING4(16),
-    HEADING5(17),
-    SUBHEADING(18),
-    BODY_LONGFORM(19),
-    BODY_DEFAULT(20),
-    LABEL1(21),
-    LABEL2(22),
-    FOOTNOTE(23),
-    CAPTION(24),
+    Hero1(8),
+    Hero2(9),
+    Hero3(10),
+    Hero4(11),
+    Hero5(12),
+    Heading1(13),
+    Heading2(14),
+    Heading3(15),
+    Heading4(16),
+    Heading5(17),
+    Subheading(18),
+    BodyLongform(19),
+    BodyDefault(20),
+    Label1(21),
+    Label2(22),
+    Footnote(23),
+    Caption(24),
     ;
 
     fun toStyle() =
       when (this) {
-        HERO1 -> R.attr.bpkTextHero1Appearance
-        HERO2 -> R.attr.bpkTextHero2Appearance
-        HERO3 -> R.attr.bpkTextHero3Appearance
-        HERO4 -> R.attr.bpkTextHero4Appearance
-        HERO5 -> R.attr.bpkTextHero5Appearance
-        HEADING1 -> R.attr.bpkTextHeading1Appearance
-        HEADING2 -> R.attr.bpkTextHeading2Appearance
-        HEADING3 -> R.attr.bpkTextHeading3Appearance
-        HEADING4 -> R.attr.bpkTextHeading4Appearance
-        HEADING5 -> R.attr.bpkTextHeading5Appearance
-        SUBHEADING -> R.attr.bpkTextSubheadingAppearance
-        BODY_LONGFORM -> R.attr.bpkTextBodyLongformAppearance
-        BODY_DEFAULT -> R.attr.bpkTextBodyDefaultAppearance
-        LABEL1 -> R.attr.bpkTextLabel1Appearance
-        LABEL2 -> R.attr.bpkTextLabel2Appearance
-        FOOTNOTE -> R.attr.bpkTextFootnoteAppearance
-        CAPTION -> R.attr.bpkTextCaptionAppearance
+        Hero1 -> R.attr.bpkTextHero1Appearance
+        Hero2 -> R.attr.bpkTextHero2Appearance
+        Hero3 -> R.attr.bpkTextHero3Appearance
+        Hero4 -> R.attr.bpkTextHero4Appearance
+        Hero5 -> R.attr.bpkTextHero5Appearance
+        Heading1 -> R.attr.bpkTextHeading1Appearance
+        Heading2 -> R.attr.bpkTextHeading2Appearance
+        Heading3 -> R.attr.bpkTextHeading3Appearance
+        Heading4 -> R.attr.bpkTextHeading4Appearance
+        Heading5 -> R.attr.bpkTextHeading5Appearance
+        Subheading -> R.attr.bpkTextSubheadingAppearance
+        BodyLongform -> R.attr.bpkTextBodyLongformAppearance
+        BodyDefault -> R.attr.bpkTextBodyDefaultAppearance
+        Label1 -> R.attr.bpkTextLabel1Appearance
+        Label2 -> R.attr.bpkTextLabel2Appearance
+        Footnote -> R.attr.bpkTextFootnoteAppearance
+        Caption -> R.attr.bpkTextCaptionAppearance
       }
   }
 
@@ -156,7 +156,7 @@ open class BpkText @JvmOverloads constructor(
         .let { it ?: throw IllegalStateException("Unsupported text style") }
   }
 
-  private var _textStyle: TextStyle = TextStyle.BODY_DEFAULT
+  private var _textStyle: TextStyle = TextStyle.BodyDefault
   var textStyle
     get() = _textStyle
     set(value) {

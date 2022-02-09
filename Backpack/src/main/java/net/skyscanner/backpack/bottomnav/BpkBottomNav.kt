@@ -137,7 +137,7 @@ open class BpkBottomNav @JvmOverloads constructor(
 
     constructor(
       context: Context,
-      textStyle: BpkText.TextStyle = BpkText.TextStyle.BODY_DEFAULT
+      textStyle: BpkText.TextStyle = BpkText.TextStyle.BodyDefault
     ) :
       this(BpkText.getFont(context, textStyle))
 

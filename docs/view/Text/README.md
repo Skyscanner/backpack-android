@@ -25,7 +25,7 @@ import net.skyscanner.backpack.text.BpkText
 
 BpkText(context).apply {
    text = 'Flights to Edinburgh'
-   textStyle = BpkText.TextStyle.HEADING4
+   textStyle = BpkText.TextStyle.Heading4
 }
 ```
 

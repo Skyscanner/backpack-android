@@ -33,7 +33,7 @@ public final class BpkToast {
 
   @NonNull
   private static BpkText.FontDefinition getToastFont(@NonNull Context context) {
-    return BpkText.getFont(context, BpkText.TextStyle.FOOTNOTE);
+    return BpkText.getFont(context, BpkText.TextStyle.Footnote);
   }
 
   @Nullable

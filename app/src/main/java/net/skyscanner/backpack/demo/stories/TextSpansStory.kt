@@ -49,7 +49,7 @@ class TextSpansStory : Story() {
       append("This is an example of \n")
       append(
         "Backpack font span \n",
-        BpkFontSpan(requireActivity(), BpkText.TextStyle.HEADING4),
+        BpkFontSpan(requireActivity(), BpkText.TextStyle.Heading4),
         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
       )
 

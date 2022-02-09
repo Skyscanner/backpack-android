@@ -126,7 +126,7 @@ internal class BpkCalendarLabelsViewModel(
     style = Paint.Style.FILL
     textAlign = Paint.Align.CENTER
 
-    BpkText.getFont(context, BpkText.TextStyle.CAPTION).applyTo(this)
+    BpkText.getFont(context, BpkText.TextStyle.Caption).applyTo(this)
 
     color = context.getColor(
       when (this@createTextPaint) {

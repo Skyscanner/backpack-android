@@ -49,7 +49,7 @@ internal class ChartGraphView constructor(
 
   private val title = BpkText(context).also {
     it.setTextColor(colors.groupTitle)
-    it.textStyle = BpkText.TextStyle.HEADING4
+    it.textStyle = BpkText.TextStyle.Heading4
     it.gravity = Gravity.START or Gravity.CENTER_VERTICAL
     addView(it, LayoutParams(LayoutParams.WRAP_CONTENT, titleHeight))
   }

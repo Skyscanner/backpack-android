@@ -32,7 +32,7 @@ abstract class BpkButtonBase internal constructor(
   defStyleAttr: Int
 ) : BpkButtonWithIcon(context, attrs, defStyleAttr) {
 
-  private val font = BpkText.getFont(this.context, BpkText.TextStyle.LABEL2)
+  private val font = BpkText.getFont(this.context, BpkText.TextStyle.Label2)
 
   abstract var iconPosition: Int
 

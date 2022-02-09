@@ -79,7 +79,7 @@ open class BpkTextField @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    BpkText.getFont(context, BpkText.TextStyle.BODY_DEFAULT).applyTo(paint)
+    BpkText.getFont(context, BpkText.TextStyle.BodyDefault).applyTo(paint)
 
     var textColor = context.getColor(R.color.bpkTextPrimary)
     var textColorDisabled = context.getColor(R.color.__textFieldTextDisabled)

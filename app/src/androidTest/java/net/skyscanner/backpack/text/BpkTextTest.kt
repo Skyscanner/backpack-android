@@ -44,7 +44,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun bodyDefault() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.BODY_DEFAULT
+    text.textStyle = BpkText.TextStyle.BodyDefault
     snap(text)
   }
 
@@ -52,7 +52,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun bodyLongform() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.BODY_LONGFORM
+    text.textStyle = BpkText.TextStyle.BodyLongform
     snap(text)
   }
 
@@ -60,7 +60,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun caption() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.CAPTION
+    text.textStyle = BpkText.TextStyle.Caption
     snap(text)
   }
 
@@ -68,7 +68,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun footnote() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.FOOTNOTE
+    text.textStyle = BpkText.TextStyle.Footnote
     snap(text)
   }
 
@@ -76,7 +76,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun subheading() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.SUBHEADING
+    text.textStyle = BpkText.TextStyle.Subheading
     snap(text)
   }
 
@@ -84,7 +84,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun label1() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.LABEL1
+    text.textStyle = BpkText.TextStyle.Label1
     snap(text)
   }
 
@@ -92,7 +92,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun label2() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.LABEL2
+    text.textStyle = BpkText.TextStyle.Label2
     snap(text)
   }
 
@@ -100,7 +100,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun heading1() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.HEADING1
+    text.textStyle = BpkText.TextStyle.Heading1
     snap(text)
   }
 
@@ -108,7 +108,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun heading2() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.HEADING2
+    text.textStyle = BpkText.TextStyle.Heading2
     snap(text)
   }
 
@@ -116,7 +116,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun heading3() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.HEADING3
+    text.textStyle = BpkText.TextStyle.Heading3
     snap(text)
   }
 
@@ -124,7 +124,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun heading4() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.HEADING4
+    text.textStyle = BpkText.TextStyle.Heading4
     snap(text)
   }
 
@@ -132,7 +132,7 @@ class BpkTextTest : BpkSnapshotTest() {
   fun heading5() {
     val text = BpkText(testContext)
     text.text = "Message"
-    text.textStyle = BpkText.TextStyle.HEADING5
+    text.textStyle = BpkText.TextStyle.Heading5
     snap(text)
   }
 
@@ -141,7 +141,7 @@ class BpkTextTest : BpkSnapshotTest() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 1"
-    text.textStyle = BpkText.TextStyle.HERO1
+    text.textStyle = BpkText.TextStyle.Hero1
     snap(text)
   }
 
@@ -150,7 +150,7 @@ class BpkTextTest : BpkSnapshotTest() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 2"
-    text.textStyle = BpkText.TextStyle.HERO2
+    text.textStyle = BpkText.TextStyle.Hero2
     snap(text)
   }
 
@@ -159,7 +159,7 @@ class BpkTextTest : BpkSnapshotTest() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 3"
-    text.textStyle = BpkText.TextStyle.HERO3
+    text.textStyle = BpkText.TextStyle.Hero3
     snap(text)
   }
 
@@ -168,7 +168,7 @@ class BpkTextTest : BpkSnapshotTest() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 4"
-    text.textStyle = BpkText.TextStyle.HERO4
+    text.textStyle = BpkText.TextStyle.Hero4
     snap(text)
   }
 
@@ -177,7 +177,7 @@ class BpkTextTest : BpkSnapshotTest() {
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 5"
-    text.textStyle = BpkText.TextStyle.HERO5
+    text.textStyle = BpkText.TextStyle.Hero5
     snap(text)
   }
 

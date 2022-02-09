@@ -105,7 +105,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
       }
     }
 
-  private val fontSpan = BpkFontSpan(context, BpkText.TextStyle.LABEL2)
+  private val fontSpan = BpkFontSpan(context, BpkText.TextStyle.Label2)
   private val texts = SparseArrayCompat<CharSequence?>()
   private val notificationDots = SparseBooleanArray()
   private val badges = SparseArray<CharSequence?>()
