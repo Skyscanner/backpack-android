@@ -1,9 +1,8 @@
 package net.skyscanner.backpack.compose.button
 
-sealed class BpkButtonIconPosition {
+enum class BpkButtonIconPosition {
 
-  object Start : BpkButtonIconPosition()
-
-  object End : BpkButtonIconPosition()
+  Start,
+  End,
 
 }

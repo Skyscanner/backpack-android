@@ -41,7 +41,7 @@ fun ButtonsStory(
         enabled = false,
       )
     }
-    items(Types) {
+    items(BpkButtonType.values()) {
       ButtonsRow(
         type = it,
         size = size,
@@ -152,12 +152,3 @@ private class LoadingScope(private val scope: CoroutineScope) {
 }
 
 private val ButtonText = "Button"
-private val Types = listOf(
-  BpkButtonType.Primary,
-  BpkButtonType.Secondary,
-  BpkButtonType.PrimaryOnDark,
-  BpkButtonType.PrimaryOnLight,
-  BpkButtonType.Featured,
-  BpkButtonType.Destructive,
-  BpkButtonType.Link,
-)
