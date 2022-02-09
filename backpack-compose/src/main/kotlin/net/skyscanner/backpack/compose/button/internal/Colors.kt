@@ -10,18 +10,18 @@ import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 @Composable
-internal fun BpkButtonType.disabledBackgroundColor() =
+internal fun BpkButtonType.disabledBackgroundColor(): Color =
   when (this) {
     BpkButtonType.Link -> Color.Transparent
     else -> dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint01)
   }
 
 @Composable
-internal fun BpkButtonType.disabledContentColor() =
+internal fun BpkButtonType.disabledContentColor(): Color =
   dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)
 
 @Composable
-internal fun BpkButtonType.rippleColor() =
+internal fun BpkButtonType.rippleColor(): Color =
   when (this) {
     BpkButtonType.Destructive -> dynamicColorOf(Color.Black, Color.White).copy(alpha = 0.1f)
     BpkButtonType.Featured -> Color.Black.copy(alpha = 0.1f)
@@ -31,7 +31,7 @@ internal fun BpkButtonType.rippleColor() =
   }
 
 @Composable
-internal fun BpkButtonType.backgroundColor(interactionSource: InteractionSource) =
+internal fun BpkButtonType.backgroundColor(interactionSource: InteractionSource): Color =
   when (this) {
     BpkButtonType.Destructive -> interactionSource.animateAsColor(
       default = dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint02),
@@ -50,7 +50,7 @@ internal fun BpkButtonType.backgroundColor(interactionSource: InteractionSource)
 
 
 @Composable
-internal fun BpkButtonType.contentColor(interactionSource: InteractionSource) =
+internal fun BpkButtonType.contentColor(interactionSource: InteractionSource): Color =
   when (this) {
     BpkButtonType.Destructive -> interactionSource.animateAsColor(
       default = dynamicColorOf(Color(0xFFB22E45), Color(0xFFF85C76)),

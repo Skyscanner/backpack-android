@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import net.skyscanner.backpack.compose.button.internal.BpkButtonImpl
 import net.skyscanner.backpack.compose.button.internal.ButtonIcon
 import net.skyscanner.backpack.compose.button.internal.ButtonText
+import net.skyscanner.backpack.compose.button.internal.minHeight
 
 @Composable
 fun BpkButton(
