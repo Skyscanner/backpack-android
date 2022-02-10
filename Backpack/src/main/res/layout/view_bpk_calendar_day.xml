@@ -16,8 +16,7 @@
     android:gravity="center"
     android:maxLines="1"
     android:singleLine="true"
-    app:textStyle="base"
-    app:weight="emphasized"
+    app:textStyle="heading5"
     tools:text="11" />
 
   <net.skyscanner.backpack.text.BpkText
@@ -30,8 +29,7 @@
     android:gravity="center_horizontal"
     android:maxLines="2"
     android:singleLine="false"
-    app:textStyle="xs"
-    app:weight="emphasized"
+    app:textStyle="caption"
     tools:text="£29" />
 
 </LinearLayout>

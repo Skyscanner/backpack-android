@@ -30,7 +30,7 @@
     <item name="android:background">?selectableItemBackground</item>
     <item name="android:clickable">true</item>
     <item name="android:gravity">start|center_vertical</item>
-    <item name="textStyle">lg</item>
+    <item name="textStyle">bodyLongform</item>
   </style>
 
 </resources>

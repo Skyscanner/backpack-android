@@ -55,6 +55,20 @@
     <item name="lineHeight">24sp</item>
   </style>
 
+  <style name="bpkTextBodyDefault">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
+    <item name="lineHeight">24sp</item>
+  </style>
+
+  <style name="bpkTextBodyLongform">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextLgSize</item>
+    <item name="lineHeight">28sp</item>
+  </style>
+
   <style name="bpkTextCapsEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -65,6 +79,55 @@
     <item name="android:fontFamily">?bpkFontFamilyBase</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
     <item name="android:textSize">@dimen/bpkTextCapsSize</item>
+  </style>
+
+  <style name="bpkTextCaption">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXsSize</item>
+    <item name="lineHeight">16sp</item>
+  </style>
+
+  <style name="bpkTextFootnote">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextSmSize</item>
+    <item name="lineHeight">20sp</item>
+  </style>
+
+  <style name="bpkTextHeading1">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxxlSize</item>
+    <item name="lineHeight">48sp</item>
+  </style>
+
+  <style name="bpkTextHeading2">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXxlSize</item>
+    <item name="lineHeight">40sp</item>
+  </style>
+
+  <style name="bpkTextHeading3">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXlSize</item>
+    <item name="lineHeight">28sp</item>
+  </style>
+
+  <style name="bpkTextHeading4">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextLgSize</item>
+    <item name="lineHeight">24sp</item>
+  </style>
+
+  <style name="bpkTextHeading5">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
+    <item name="lineHeight">20sp</item>
   </style>
 
   <style name="bpkTextHero1">
@@ -107,6 +170,20 @@
     <item name="android:letterSpacing">-0.02</item>
   </style>
 
+  <style name="bpkTextLabel1">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextBaseSize</item>
+    <item name="lineHeight">24sp</item>
+  </style>
+
+  <style name="bpkTextLabel2">
+    <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextSmSize</item>
+    <item name="lineHeight">20sp</item>
+  </style>
+
   <style name="bpkTextLgEmphasized">
     <item name="android:fontFamily">?bpkFontFamilyEmphasized</item>
     <item name="android:textColor">@color/bpkTextPrimary</item>
@@ -133,6 +210,13 @@
     <item name="android:textColor">@color/bpkTextPrimary</item>
     <item name="android:textSize">@dimen/bpkTextSmSize</item>
     <item name="lineHeight">20sp</item>
+  </style>
+
+  <style name="bpkTextSubheading">
+    <item name="android:fontFamily">?bpkFontFamilyBase</item>
+    <item name="android:textColor">@color/bpkTextPrimary</item>
+    <item name="android:textSize">@dimen/bpkTextXlSize</item>
+    <item name="lineHeight">32sp</item>
   </style>
 
   <style name="bpkTextXlEmphasized">

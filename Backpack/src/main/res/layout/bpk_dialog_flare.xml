@@ -53,8 +53,7 @@
         android:layout_marginEnd="@dimen/bpkSpacingBase"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/dialog_flare"
-        app:textStyle="xxl"
-        app:weight="emphasized"
+        app:textStyle="heading2"
         tools:text="Where will you go?" />
 
       <net.skyscanner.backpack.text.BpkText

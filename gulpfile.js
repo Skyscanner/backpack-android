@@ -38,20 +38,6 @@ const PATHS = {
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
-const FILTERED_TEXT_STYLES = new Set([
-  'caption',
-  'footnote',
-  'label-1',
-  'label-2',
-  'body-default',
-  'body-longform',
-  'heading-1',
-  'heading-2',
-  'heading-3',
-  'heading-4',
-  'heading-5',
-  'subheading',
-]);
 
 const FONT_WEIGHTS = {
   normal: 'normal',
@@ -148,11 +134,7 @@ const getTextStyles = () => {
         .replace('_LINE_HEIGHT', ''),
     )
     .map((values, key) => [values, key])
-    .filter(token => {
-      const styleName = token[1].replace('TEXT_', '').toLowerCase();
-      return !FILTERED_TEXT_STYLES.has(styleName) && token[1].startsWith('TEXT_');
-      }
-    )
+    .filter(token => token[1].startsWith('TEXT_'))
     .map(token => {
       const properties = token[0];
       const key = token[1];

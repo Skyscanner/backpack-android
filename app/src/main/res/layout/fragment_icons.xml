@@ -8,7 +8,7 @@
 
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
-    app:weight="emphasized"
+    app:textStyle="heading5"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/bpkSpacingMd"
     android:text="@string/icons_small"/>
@@ -42,7 +42,7 @@
   </LinearLayout>
 
   <net.skyscanner.backpack.text.BpkText
-    app:weight="emphasized"
+    app:textStyle="heading5"
     android:layout_width="wrap_content"
     android:layout_marginStart="@dimen/bpkSpacingMd"
     android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
       android:layout_height="wrap_content"/>
   </LinearLayout>
   <net.skyscanner.backpack.text.BpkText
-    app:weight="emphasized"
+    app:textStyle="heading5"
     android:layout_width="wrap_content"
     android:layout_marginStart="@dimen/bpkSpacingMd"
     android:layout_height="wrap_content"

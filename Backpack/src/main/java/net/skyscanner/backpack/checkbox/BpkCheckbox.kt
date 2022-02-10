@@ -71,7 +71,7 @@ open class BpkCheckbox @JvmOverloads constructor(
       intArrayOf(checkmarkCheckedColor, checkmarkDefaultColor)
     )
     updateTint()
-    BpkText.getFont(context, BpkText.SM, BpkText.Weight.NORMAL).applyTo(this)
+    BpkText.getFont(context, BpkText.TextStyle.Footnote).applyTo(this)
     setTextColor(
       ColorStateList(
         arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),

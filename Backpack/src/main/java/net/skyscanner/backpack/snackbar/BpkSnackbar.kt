@@ -81,8 +81,8 @@ class BpkSnackbar private constructor(
     })
   }
 
-  private val titleFontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.EMPHASIZED)
-  private val textFontSpan = BpkFontSpan(context, BpkText.SM, BpkText.Weight.NORMAL)
+  private val titleFontSpan = BpkFontSpan(context, BpkText.TextStyle.Label2)
+  private val textFontSpan = BpkFontSpan(context, BpkText.TextStyle.Footnote)
 
   private val textView = snackbar.view.findViewById<TextView>(R.id.snackbar_text).apply {
     gravity = Gravity.START or Gravity.CENTER_VERTICAL
@@ -93,7 +93,7 @@ class BpkSnackbar private constructor(
 
   private val actionView = snackbar.view.findViewById<TextView>(R.id.snackbar_action).apply {
     setTextColor(actionColor)
-    BpkText.getFont(context, BpkText.SM, BpkText.Weight.EMPHASIZED).applyTo(this)
+    BpkText.getFont(context, BpkText.TextStyle.Label2).applyTo(this)
     transformationMethod = null
   }
 

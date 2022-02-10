@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="@string/txt_lorem_ipsum"
         android:textColor="@color/bpkWhite"
-        app:textStyle="xxl" />
+        app:textStyle="heading2" />
 
       <net.skyscanner.backpack.text.BpkText
         android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:text="@string/txt_lorem_ipsum"
         android:textColor="@color/bpkWhite"
-        app:textStyle="xxl" />
+        app:textStyle="heading2" />
 
       <net.skyscanner.backpack.text.BpkText
         android:layout_width="wrap_content"

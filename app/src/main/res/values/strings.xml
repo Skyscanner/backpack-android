@@ -80,6 +80,18 @@
 
   <string name="story_badge_compose">Compose</string>
 
+  <string name="text_subheading">Subheading</string>
+  <string name="text_body_default">Body Default</string>
+  <string name="text_body_longform">Body Longform</string>
+  <string name="text_footnote">Footnote</string>
+  <string name="text_caption">Caption</string>
+  <string name="text_label1">Label 1</string>
+  <string name="text_label2">Label 2</string>
+  <string name="text_heading1">Heading 1</string>
+  <string name="text_heading2">Heading 2</string>
+  <string name="text_heading3">Heading 3</string>
+  <string name="text_heading4">Heading 4</string>
+  <string name="text_heading5">Heading 5</string>
   <string name="text_hero1">Hero 1</string>
   <string name="text_hero2">Hero 2</string>
   <string name="text_hero3">Hero 3</string>

@@ -25,7 +25,6 @@ import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.text.BpkText.Weight
 import net.skyscanner.backpack.util.TestActivity
 import org.junit.Assert
 import org.junit.Before
@@ -57,70 +56,17 @@ class BpkTextTest {
     val textSizePx = text.textSize
     val textSizeSp = textSizePx / context.resources.displayMetrics.scaledDensity
 
-    val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextBase, R.styleable.BpkTextStyle)
+    val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextBodyDefault, R.styleable.BpkTextStyle)
     val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) /
       context.resources.displayMetrics.scaledDensity
 
     Assert.assertEquals(expectedTextSizeSp, textSizeSp)
     Assert.assertEquals(testString, text.text)
-  }
-
-  @Test
-  fun emphasized() {
-    val text = BpkText(context).apply {
-      text = testString
-      weight = Weight.EMPHASIZED
-    }
-
-    val textSizePx = text.textSize
-    val textSizeSp = textSizePx / context.resources.displayMetrics.scaledDensity
-
-    val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextBaseEmphasized, R.styleable.BpkTextStyle)
-    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) /
-      context.resources.displayMetrics.scaledDensity
-
-    Assert.assertEquals(expectedTextSizeSp, textSizeSp)
-    Assert.assertEquals(testString, text.text)
-    Assert.assertEquals(Weight.EMPHASIZED, text.weight)
-  }
-
-  @Test
-  fun heavy() {
-    val text = BpkText(context).apply {
-      text = testString
-      textStyle = BpkText.XL
-      weight = Weight.HEAVY
-    }
-
-    val textSizePx = text.textSize
-    val textSizeSp = textSizePx / context.resources.displayMetrics.scaledDensity
-
-    val expectedAttributes = context.obtainStyledAttributes(R.style.bpkTextXlHeavy, R.styleable.BpkTextStyle)
-    val expectedTextSizeSp = expectedAttributes.getDimensionPixelOffset(R.styleable.BpkTextStyle_android_textSize, 0) /
-      context.resources.displayMetrics.scaledDensity
-
-    Assert.assertEquals(expectedTextSizeSp, textSizeSp)
-    Assert.assertEquals(testString, text.text)
-  }
-
-  @Test(expected = IllegalStateException::class)
-  fun throw_when_invalid_style() {
-    BpkText(context).apply {
-      textStyle = 99
-    }
-  }
-
-  @Test(expected = IllegalStateException::class)
-  fun throw_when_heavy_unsupported() {
-    BpkText(context).apply {
-      textStyle = BpkText.SM
-      weight = Weight.HEAVY
-    }
   }
 
   @Test
   fun applyTo_TextView() {
-    val font = BpkText.getFont(context, BpkText.BASE)
+    val font = BpkText.getFont(context, BpkText.TextStyle.BodyDefault)
     val subject = TextView(context)
     subject.text = "Foo"
 
@@ -135,7 +81,7 @@ class BpkTextTest {
   fun applyTo_TextView_withCustomFont() {
     val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
-    val font = BpkText.getFont(withCustomFont, BpkText.BASE)
+    val font = BpkText.getFont(withCustomFont, BpkText.TextStyle.BodyDefault)
     val subject = TextView(withCustomFont)
     subject.text = "Foo"
 
@@ -148,7 +94,7 @@ class BpkTextTest {
 
   @Test
   fun applyTo_Paint() {
-    val font = BpkText.getFont(context, BpkText.BASE)
+    val font = BpkText.getFont(context, BpkText.TextStyle.BodyDefault)
     val subject = Paint()
     font.applyTo(subject)
 
@@ -161,7 +107,7 @@ class BpkTextTest {
   fun applyTo_Paint_withCustomFont() {
     val withCustomFont = ContextThemeWrapper(context, TestR.style.TestTextCustomFont)
 
-    val font = BpkText.getFont(withCustomFont, BpkText.BASE)
+    val font = BpkText.getFont(withCustomFont, BpkText.TextStyle.BodyDefault)
     val subject = Paint()
     font.applyTo(subject)
 

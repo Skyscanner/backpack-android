@@ -1,8 +1,16 @@
 # Unreleased
 > Place your changes below this line.
 
-**Added:**
-- Text styles now include line height & letter spacing
+**Breaking:**
+- Upgraded to the new typography system
+  - Deprecated old size scale & weight
+  - Mapped deprecated styles to new consolidated style:
+    - CAPS regular & emphasized, XS emphasized -> Caption
+    - XL heavy -> Heading 3
+    - XXL regular & heavy -> Heading 2
+    - XXXL regular & heavy -> Heading 1
+  - Updated text style + weight property on `BpkText`, `BpkFontSpan` & `getFont` to use a combined `TextStyle` value
+  - Text styles now include line height & letter spacing
 
 ## How to write a good changelog entry
 

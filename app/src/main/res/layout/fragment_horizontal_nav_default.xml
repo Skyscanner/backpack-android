@@ -10,7 +10,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Default"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
     android:id="@+id/horizontal_nav"
@@ -22,7 +22,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Scrollable"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
     android:id="@+id/horizontal_nav_scrollable"
@@ -35,7 +35,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Small"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
     android:id="@+id/horizontal_nav_small"
@@ -48,7 +48,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Alternate"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
     android:id="@+id/horizontal_nav_alternate"
@@ -62,7 +62,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="RTL"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
     android:id="@+id/horizontal_nav_rtl"
@@ -75,7 +75,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="With badge"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
     android:id="@+id/horizontal_nav_badge"
@@ -88,7 +88,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="With icons"
-    app:textStyle="sm" />
+    app:textStyle="footnote" />
 
   <net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
     android:id="@+id/horizontal_nav_icons"

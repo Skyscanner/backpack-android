@@ -15,7 +15,7 @@ Here's an example:
 ```Kotlin
 import net.skyscanner.backpack.text.BpkFontSpan
 
-val span = BpkFontSpan(context, BpkText.XXL, BpkText.Weight.EMPHASIZED)
+val span = BpkFontSpan(context, BpkText.TextStyle.Heading2)
 textView.text = SpannableStringBuilder("Foo").append("bar", span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 ```
 

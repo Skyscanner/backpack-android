@@ -33,8 +33,7 @@
       android:gravity="center"
       android:textAlignment="center"
       android:textColor="@color/bpk_map_marker_content_color"
-      app:textStyle="sm"
-      app:weight="emphasized"
+      app:textStyle="label2"
       tools:text="£35+" />
 
   </LinearLayout>

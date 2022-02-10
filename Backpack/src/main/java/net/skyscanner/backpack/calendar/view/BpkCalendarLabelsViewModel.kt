@@ -126,14 +126,7 @@ internal class BpkCalendarLabelsViewModel(
     style = Paint.Style.FILL
     textAlign = Paint.Align.CENTER
 
-    BpkText.getFont(
-      context, BpkText.XS,
-      when (this@createTextPaint) {
-        CalendarLabel.Style.PriceLow -> BpkText.Weight.EMPHASIZED
-        CalendarLabel.Style.PriceMedium -> BpkText.Weight.NORMAL
-        CalendarLabel.Style.PriceHigh -> BpkText.Weight.NORMAL
-      }
-    ).applyTo(this)
+    BpkText.getFont(context, BpkText.TextStyle.Caption).applyTo(this)
 
     color = context.getColor(
       when (this@createTextPaint) {

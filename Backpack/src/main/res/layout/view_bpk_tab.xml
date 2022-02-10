@@ -41,7 +41,7 @@
     android:id="@+id/tab_badge"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:textStyle="sm"
+    app:textStyle="footnote"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toEndOf="@android:id/text1"

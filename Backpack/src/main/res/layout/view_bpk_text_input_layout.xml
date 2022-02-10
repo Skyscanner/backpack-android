@@ -14,8 +14,7 @@
     android:layout_marginBottom="@dimen/bpkSpacingMd"
     android:textColor="@color/bpkTextPrimary"
     android:textAlignment="viewStart"
-    app:textStyle="sm"
-    app:weight="emphasized"
+    app:textStyle="label2"
     tools:text="Label" />
 
   <FrameLayout
@@ -31,7 +30,7 @@
     android:layout_marginTop="@dimen/bpkSpacingMd"
     android:drawablePadding="@dimen/bpkSpacingMd"
     android:textAlignment="viewStart"
-    app:textStyle="sm"
+    app:textStyle="footnote"
     tools:text="Error message"
     tools:textColor="@color/bpkPanjin" />
 

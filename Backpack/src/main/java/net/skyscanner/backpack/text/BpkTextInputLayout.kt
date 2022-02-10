@@ -161,14 +161,14 @@ open class BpkTextInputLayout @JvmOverloads constructor(
       error != null && errorEnabled -> {
         indicatorView.isVisible = true
         indicatorView.text = error
-        indicatorView.weight = BpkText.Weight.EMPHASIZED
+        indicatorView.textStyle = BpkText.TextStyle.Label2
         indicatorView.setTextColor(errorTextColor)
         indicatorView.setCompoundDrawablesRelative(errorIcon, null, null, null)
       }
       helperText != null -> {
         indicatorView.isVisible = true
         indicatorView.text = helperText
-        indicatorView.weight = BpkText.Weight.NORMAL
+        indicatorView.textStyle = BpkText.TextStyle.Footnote
         indicatorView.setTextColor(helperTextColor)
         indicatorView.setCompoundDrawablesRelative(null, null, null, null)
       }

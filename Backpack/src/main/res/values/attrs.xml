@@ -39,6 +39,19 @@
       <enum name="hero3" value="10" />
       <enum name="hero4" value="11" />
       <enum name="hero5" value="12" />
+      <enum name="heading1" value="13" />
+      <enum name="heading2" value="14" />
+      <enum name="heading3" value="15" />
+      <enum name="heading4" value="16" />
+      <enum name="heading5" value="17" />
+      <enum name="subheading" value="18" />
+      <enum name="bodyLongform" value="19" />
+      <enum name="bodyDefault" value="20" />
+      <enum name="label1" value="21" />
+      <enum name="label2" value="22" />
+      <enum name="footnote" value="23" />
+      <enum name="caption" value="24" />
+
     </attr>
     <attr name="weight" format="enum">
       <enum name="normal" value="0" />
@@ -325,6 +338,18 @@
   <attr name="bpkTextHero3Appearance" format="reference" />
   <attr name="bpkTextHero4Appearance" format="reference" />
   <attr name="bpkTextHero5Appearance" format="reference" />
+  <attr name="bpkTextHeading1Appearance" format="reference" />
+  <attr name="bpkTextHeading2Appearance" format="reference" />
+  <attr name="bpkTextHeading3Appearance" format="reference" />
+  <attr name="bpkTextHeading4Appearance" format="reference" />
+  <attr name="bpkTextHeading5Appearance" format="reference" />
+  <attr name="bpkTextSubheadingAppearance" format="reference" />
+  <attr name="bpkTextBodyLongformAppearance" format="reference" />
+  <attr name="bpkTextBodyDefaultAppearance" format="reference" />
+  <attr name="bpkTextLabel1Appearance" format="reference" />
+  <attr name="bpkTextLabel2Appearance" format="reference" />
+  <attr name="bpkTextFootnoteAppearance" format="reference" />
+  <attr name="bpkTextCaptionAppearance" format="reference" />
   <attr name="bpkTextBaseEmphasizedAppearance" format="reference" />
   <attr name="bpkTextCapsEmphasizedAppearance" format="reference" />
   <attr name="bpkTextLgEmphasizedAppearance" format="reference" />

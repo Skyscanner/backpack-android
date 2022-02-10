@@ -25,7 +25,7 @@
     android:accessibilityLiveRegion="polite"
     android:gravity="center"
     android:minWidth="24sp"
-    app:weight="emphasized"
+    app:textStyle="heading5"
     tools:text="0" />
 
   <net.skyscanner.backpack.button.BpkButton

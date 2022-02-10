@@ -23,8 +23,6 @@ import android.util.AttributeSet
 import androidx.appcompat.content.res.AppCompatResources
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.text.internal.FontFamilyResolver
 import net.skyscanner.backpack.util.resolveThemeId
 
 internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
@@ -34,11 +32,8 @@ internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
 ) : CollapsingToolbarLayout(context, attrs, defStyleAttr) {
 
   init {
-    setExpandedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextXxlHeavyAppearance))
-    setExpandedTitleTypeface(FontFamilyResolver.invoke(context, BpkText.Weight.EMPHASIZED))
-
-    setCollapsedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextBaseEmphasizedAppearance))
-    setCollapsedTitleTypeface(FontFamilyResolver.invoke(context, BpkText.Weight.EMPHASIZED))
+    setExpandedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading2Appearance))
+    setCollapsedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading5Appearance))
 
     expandedTitleMarginStart = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small)
     expandedTitleMarginEnd = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small)
