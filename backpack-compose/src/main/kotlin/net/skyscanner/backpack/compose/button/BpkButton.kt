@@ -11,14 +11,35 @@ import net.skyscanner.backpack.compose.button.internal.ButtonIcon
 import net.skyscanner.backpack.compose.button.internal.ButtonText
 import net.skyscanner.backpack.compose.button.internal.minHeight
 
+enum class BpkButtonIconPosition {
+  Start,
+  End,
+}
+
+enum class BpkButtonSize {
+  Default,
+  Large,
+}
+
+enum class BpkButtonType {
+  Primary,
+  Secondary,
+  PrimaryOnDark,
+  PrimaryOnLight,
+  Featured,
+  Destructive,
+  Link,
+}
+
+
 @Composable
 fun BpkButton(
   text: String,
   modifier: Modifier = Modifier,
-  size: BpkButtonSize = BpkButtonSize.Default,
-  type: BpkButtonType = BpkButtonType.Primary,
-  enabled: Boolean = true,
-  loading: Boolean = false,
+  size: BpkButtonSize = DefaultSize,
+  type: BpkButtonType = DefaultType,
+  enabled: Boolean = DefaultEnabled,
+  loading: Boolean = DefaultLoading,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   onClick: () -> Unit,
 ) {
@@ -39,10 +60,10 @@ fun BpkButton(
   icon: Painter,
   contentDescription: String,
   modifier: Modifier = Modifier,
-  size: BpkButtonSize = BpkButtonSize.Default,
-  type: BpkButtonType = BpkButtonType.Primary,
-  enabled: Boolean = true,
-  loading: Boolean = false,
+  size: BpkButtonSize = DefaultSize,
+  type: BpkButtonType = DefaultType,
+  enabled: Boolean = DefaultEnabled,
+  loading: Boolean = DefaultLoading,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   onClick: () -> Unit,
 ) {
@@ -64,10 +85,10 @@ fun BpkButton(
   icon: Painter,
   position: BpkButtonIconPosition,
   modifier: Modifier = Modifier,
-  size: BpkButtonSize = BpkButtonSize.Default,
-  type: BpkButtonType = BpkButtonType.Primary,
-  enabled: Boolean = true,
-  loading: Boolean = false,
+  size: BpkButtonSize = DefaultSize,
+  type: BpkButtonType = DefaultType,
+  enabled: Boolean = DefaultEnabled,
+  loading: Boolean = DefaultLoading,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   onClick: () -> Unit,
 ) {
@@ -92,3 +113,8 @@ fun BpkButton(
     }
   }
 }
+
+private val DefaultSize = BpkButtonSize.Default
+private val DefaultType = BpkButtonType.Primary
+private const val DefaultEnabled = true
+private const val DefaultLoading = false
