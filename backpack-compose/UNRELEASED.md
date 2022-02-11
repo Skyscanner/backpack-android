@@ -5,6 +5,7 @@
 **Added:**
 
 - New `BpkButton` component
+- New `focused` property for `BpkCard`
 
 
 ## How to write a good changelog entry
