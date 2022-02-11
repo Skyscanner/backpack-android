@@ -27,7 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
-import net.skyscanner.backpack.compose.card.internal.CardConent
+import net.skyscanner.backpack.compose.card.internal.CardContent
 import net.skyscanner.backpack.compose.card.internal.cardBackgroundColor
 import net.skyscanner.backpack.compose.card.internal.cardElevation
 import net.skyscanner.backpack.compose.card.internal.cardShape
@@ -69,7 +69,7 @@ fun BpkCard(
     interactionSource = interactionSource,
     enabled = enabled,
     role = role,
-    content = { CardConent(padding, contentAlignment, content) },
+    content = { CardContent(padding, contentAlignment, content) },
   )
 }
 
@@ -88,6 +88,6 @@ fun BpkCard(
     backgroundColor = cardBackgroundColor(focused),
     contentColor = BpkTheme.colors.textPrimary,
     elevation = cardElevation(focused),
-    content = { CardConent(padding, contentAlignment, content) },
+    content = { CardContent(padding, contentAlignment, content) },
   )
 }

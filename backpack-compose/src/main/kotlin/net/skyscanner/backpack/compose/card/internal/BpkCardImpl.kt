@@ -38,7 +38,7 @@ import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
-internal inline fun CardConent(
+internal inline fun CardContent(
   padding: BpkCardPadding,
   contentAlignment: Alignment,
   content: @Composable BoxScope.() -> Unit,
