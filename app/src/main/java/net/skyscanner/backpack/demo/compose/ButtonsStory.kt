@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -25,6 +26,7 @@ import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.LongArrowRight
 import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
@@ -79,7 +81,7 @@ private fun ButtonsRow(
 
     LoadingScope {
       BpkButton(
-        text = ButtonText,
+        text = stringResource(R.string.button),
         size = size,
         type = type,
         loading = loading,
@@ -90,7 +92,7 @@ private fun ButtonsRow(
 
     LoadingScope {
       BpkButton(
-        text = ButtonText,
+        text = stringResource(R.string.button),
         icon = icon,
         position = BpkButtonIconPosition.Start,
         size = size,
@@ -103,7 +105,7 @@ private fun ButtonsRow(
 
     LoadingScope {
       BpkButton(
-        text = ButtonText,
+        text = stringResource(R.string.button),
         icon = icon,
         position = BpkButtonIconPosition.End,
         size = size,
@@ -117,7 +119,7 @@ private fun ButtonsRow(
     LoadingScope {
       BpkButton(
         icon = icon,
-        contentDescription = ButtonText,
+        contentDescription = stringResource(R.string.button),
         size = size,
         type = type,
         enabled = enabled,
@@ -150,5 +152,3 @@ private class LoadingScope(private val scope: CoroutineScope) {
     }
   }
 }
-
-private val ButtonText = "Button"
