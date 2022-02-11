@@ -1,5 +1,5 @@
 {
   "android": "34.0.0",
-  "common": "0.9.0",
-  "compose": "0.1.1"
+  "common": "0.10.0",
+  "compose": "0.2.0"
 }
