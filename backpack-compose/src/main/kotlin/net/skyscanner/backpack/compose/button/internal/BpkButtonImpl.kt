@@ -23,14 +23,14 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
 internal fun BpkButtonImpl(
@@ -62,7 +62,7 @@ internal fun BpkButtonImpl(
         CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
           Box {
             Row(
-              modifier = Modifier.alpha(if (loading) 0f else 1f),
+              modifier = Modifier.hideContentIf(loading),
               horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
               verticalAlignment = Alignment.CenterVertically,
               content = content,

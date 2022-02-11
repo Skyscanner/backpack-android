@@ -95,14 +95,19 @@ open class BpkSnapshotTest {
   protected fun composed(
     size: IntSize = IntSize(width, height),
     background: Color = Color.Unspecified,
-    className: String = TestNameDetector.getTestClass().removePrefix("net.skyscanner.backpack."),
-    methodName: String = TestNameDetector.getTestName(),
+    tags: List<Any> = emptyList(),
     vararg providers: ProvidedValue<*>,
     content: @Composable () -> Unit,
   ) {
 
     // we don't run Compose tests in Themed variant – Compose uses it own theming engine
     Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
+
+    val screenshotName = if (tags.isEmpty()) {
+      getScreenshotName()
+    } else {
+      tags.joinToString(separator = "_", prefix = getScreenshotName() + ".") { it.toString() }
+    }
 
     ActivityScenario.launch(MainActivity::class.java).use { scenario ->
       scenario.onActivity { activity ->
@@ -124,7 +129,7 @@ open class BpkSnapshotTest {
             .layout()
 
           Screenshot.snap(view)
-            .setName("${className}_$methodName")
+            .setName(screenshotName)
             .record()
         }
       }

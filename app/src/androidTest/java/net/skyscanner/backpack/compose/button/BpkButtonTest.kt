@@ -1,10 +1,11 @@
 package net.skyscanner.backpack.compose.button
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.compose.icons.BpkIcons
@@ -36,21 +37,6 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // different sizes have different text style
 
     BpkButton("Button", type = type, size = size, onClick = {})
-  }
-
-  @Test
-  fun pressed() = capture {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
-    assumeTrue(size == BpkButtonSize.Default) // colors will be the same on large size
-    // colors will be different for various button types
-
-    val interactionSource = remember {
-      MutableInteractionSource().apply {
-        tryEmit(PressInteraction.Press(Offset.Zero))
-      }
-    }
-
-    BpkButton("Button", type = type, size = size, interactionSource = interactionSource, onClick = {})
   }
 
   @Test
@@ -99,7 +85,14 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   }
 
   private fun capture(content: @Composable () -> Unit) {
-    composed(className = "BpkButton($type, $size)", content = content)
+    composed(
+      size = IntSize(160, 64),
+      tags = listOf(type, size),
+    ) {
+      Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        content()
+      }
+    }
   }
 
   companion object {
