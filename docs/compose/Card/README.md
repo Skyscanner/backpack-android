@@ -50,3 +50,14 @@ BpkCard(
     // content
 }
 ```
+
+Example of a focused Card:
+
+```Kotlin
+import net.skyscanner.backpack.compose.card.BpkCard
+
+
+BpkCard(focused = true) {
+    // content
+}
+```
