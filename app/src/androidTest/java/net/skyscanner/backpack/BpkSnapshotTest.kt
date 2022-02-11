@@ -41,7 +41,9 @@ import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
 import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.compose.BackpackPreview
+import org.hamcrest.Matchers
 import org.junit.Assume
+import org.junit.Assume.assumeThat
 
 open class BpkSnapshotTest {
 
@@ -86,9 +88,14 @@ open class BpkSnapshotTest {
     return AsyncSnapshot(testClass, testName)
   }
 
+  fun assumeVariant(vararg variants: BpkTestVariant) {
+    assumeThat(BpkTestVariant.current, Matchers.isOneOf(*variants))
+  }
+
   protected fun composed(
     size: IntSize = IntSize(width, height),
     background: Color = Color.Unspecified,
+    tags: List<Any> = emptyList(),
     vararg providers: ProvidedValue<*>,
     content: @Composable () -> Unit,
   ) {
@@ -96,7 +103,11 @@ open class BpkSnapshotTest {
     // we don't run Compose tests in Themed variant – Compose uses it own theming engine
     Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
 
-    val screenshotName = getScreenshotName()
+    val screenshotName = if (tags.isEmpty()) {
+      getScreenshotName()
+    } else {
+      tags.joinToString(separator = "_", prefix = getScreenshotName() + ".") { it.toString() }
+    }
 
     ActivityScenario.launch(MainActivity::class.java).use { scenario ->
       scenario.onActivity { activity ->

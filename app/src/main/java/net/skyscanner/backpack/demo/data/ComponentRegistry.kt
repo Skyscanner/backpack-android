@@ -19,8 +19,10 @@
 package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
+import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
+import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
@@ -141,18 +143,30 @@ object ComponentRegistry {
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
     "Bottom Sheet" story NodeData { Story of R.layout.fragment_bottom_sheet scrollable false },
     "Button" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Primary" story NodeData { Story of R.layout.fragment_button_primary },
-        "Secondary" story NodeData { Story of R.layout.fragment_button_secondary },
-        "Destructive" story NodeData { Story of R.layout.fragment_button_destructive },
-        "Featured" story NodeData { Story of R.layout.fragment_button_featured },
-        "Outline" story NodeData { Story of R.layout.fragment_button_outline },
-        "Icon alignment" story NodeData { Story of R.layout.fragment_button_icon_alignment },
-        "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment with Direction.RTL },
-        "Loading" story NodeData { LoadingButtonStory of R.layout.fragment_button_primary },
-        "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
-        "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable }
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Primary" story NodeData { Story of R.layout.fragment_button_primary },
+            "Secondary" story NodeData { Story of R.layout.fragment_button_secondary },
+            "Destructive" story NodeData { Story of R.layout.fragment_button_destructive },
+            "Featured" story NodeData { Story of R.layout.fragment_button_featured },
+            "Outline" story NodeData { Story of R.layout.fragment_button_outline },
+            "Icon alignment" story NodeData { Story of R.layout.fragment_button_icon_alignment },
+            "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment with Direction.RTL },
+            "Loading" story NodeData { LoadingButtonStory of R.layout.fragment_button_primary },
+            "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
+            "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable },
+          )
+        ),
+        TAB_TITLE_COMPOSE story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" composeStory { ButtonsStory(BpkButtonSize.Default) },
+            "Large" composeStory { ButtonsStory(BpkButtonSize.Large) },
+          )
+        ),
       )
     ),
     "ButtonLink" story NodeData(
