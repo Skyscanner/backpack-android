@@ -40,8 +40,6 @@ class BpkCardTest : BpkSnapshotTest() {
 
   @Test
   fun smallCorner() = capture {
-    assumeVariant(BpkTestVariant.Default)
-
     BpkCard(
       modifier = Modifier.fillMaxSize(),
       contentAlignment = Alignment.Center,
