@@ -4,8 +4,7 @@
 
 **Added:**
 
-- New `BpkButton` component
-- New `focused` property for `BpkCard`
+- Added lint check for compose component usage
 
 
 ## How to write a good changelog entry
