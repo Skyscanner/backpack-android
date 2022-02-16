@@ -32,7 +32,6 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       disabledBgColorRes = R.color.__buttonDisabledBackground,
       disabledTextColorRes = R.color.__buttonDisabledText,
       loadingTextColor = R.color.__buttonLoadingText,
-      stateListAnimatorRes = R.drawable.bpk_button_state_animator,
     )
   }
 
@@ -60,7 +59,6 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       disabledBgColorRes = R.color.__buttonDisabledBackground,
       disabledTextColorRes = R.color.__buttonDisabledText,
       loadingTextColor = R.color.__buttonLoadingText,
-      stateListAnimatorRes = R.drawable.bpk_button_state_animator,
     )
   }
 

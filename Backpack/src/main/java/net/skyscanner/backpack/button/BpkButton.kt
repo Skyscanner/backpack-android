@@ -177,12 +177,6 @@ open class BpkButton(
     this.style = style
     background = style.getButtonBackground(isEnabled, iconPosition)
     setTextColor(style.getContentColor(loading))
-
-    if (isEnabled) {
-      this.stateListAnimator = style.getStateListAnimator()
-    } else {
-      this.stateListAnimator = null
-    }
   }
 
   private fun updateIconState() {

@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.button.internal
 
-import android.animation.AnimatorInflater
-import android.animation.StateListAnimator
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
@@ -31,7 +29,6 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
-import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
@@ -50,7 +47,6 @@ internal class ButtonStyle(
   @ColorInt private val disabledTextColor: Int,
   @ColorInt private val loadingTextColor: Int,
   @Px private val strokeWidth: Int,
-  @DrawableRes private val stateListAnimatorRes: Int,
 ) {
 
   fun getContentColor(loading: Boolean): ColorStateList =
@@ -59,9 +55,6 @@ internal class ButtonStyle(
       pressedColor = darken(textColor, .1f),
       disabledColor = if (loading) loadingTextColor else disabledTextColor
     )
-
-  fun getStateListAnimator(): StateListAnimator? =
-    AnimatorInflater.loadStateListAnimator(context, stateListAnimatorRes)
 
   fun getButtonBackground(enabled: Boolean, @BpkButton.IconPosition iconPosition: Int): Drawable {
 
@@ -120,7 +113,6 @@ internal class ButtonStyle(
       @ColorInt disabledTextColor: Int,
       @ColorInt loadingTextColor: Int,
       @Px strokeWidth: Int,
-      @DrawableRes stateListAnimatorRes: Int,
     ): ButtonStyle {
       var bgColor = defaultBgColor
       var textColor = defaultTextColor
@@ -143,7 +135,6 @@ internal class ButtonStyle(
         disabledBgColor = disabledBgColor,
         disabledTextColor = disabledTextColor,
         loadingTextColor = loadingTextColor,
-        stateListAnimatorRes = stateListAnimatorRes,
         strokeWidth = strokeWidth
       )
     }
@@ -159,7 +150,6 @@ internal class ButtonStyle(
       @ColorRes disabledTextColorRes: Int,
       @ColorRes loadingTextColor: Int,
       @DimenRes strokeWidthRes: Int = R.dimen.bpk_internal_spacing_zero,
-      @DrawableRes stateListAnimatorRes: Int = R.drawable.bpk_button_state_animator_zero,
     ): ButtonStyle {
 
       var typedArray: TypedArray? = null
@@ -181,7 +171,6 @@ internal class ButtonStyle(
           disabledTextColor = context.getColor(disabledTextColorRes),
           loadingTextColor = context.getColor(loadingTextColor),
           strokeWidth = context.resources.getDimensionPixelSize(strokeWidthRes),
-          stateListAnimatorRes = stateListAnimatorRes
         )
       } finally {
         typedArray?.recycle()
@@ -203,7 +192,6 @@ internal class ButtonStyle(
       disabledTextColor = fallback.disabledTextColor,
       loadingTextColor = fallback.loadingTextColor,
       strokeWidth = fallback.strokeWidth,
-      stateListAnimatorRes = fallback.stateListAnimatorRes
     )
   }
 }
