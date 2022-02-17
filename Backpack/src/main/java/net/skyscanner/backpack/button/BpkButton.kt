@@ -65,7 +65,6 @@ open class BpkButton(
     set(value) {
       iconDrawablePosition = value
       var paddingHorizontal = paddingHorizontal
-      val paddingVertical = paddingVertical
 
       if (value == ICON_ONLY) {
         paddingHorizontal = paddingHorizontalIconOnly
@@ -74,7 +73,7 @@ open class BpkButton(
         iconPadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
       }
 
-      setPaddingRelative(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical)
+      setPaddingRelative(paddingHorizontal, 0, paddingHorizontal, 0)
       applyStyle(type.createStyle(context))
     }
 
@@ -85,15 +84,10 @@ open class BpkButton(
     }
 
   @Dimension
-  private val paddingHorizontalIconOnly = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
-    resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg)
+  private val paddingHorizontalIconOnly = resources.getDimensionPixelSize(R.dimen.bpk_button_default_icon_only_padding)
 
   @Dimension
   private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
-
-  @Dimension
-  private val paddingVertical = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
-    (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
 
   override fun setIcon(icon: Drawable?) {
     super.setIcon(icon)
@@ -158,6 +152,7 @@ open class BpkButton(
     this.loading = loading
     this.icon = icon
     this.iconPosition = iconPosition
+    this.minHeight = resources.getDimensionPixelSize(R.dimen.bpk_button_default_min_height)
     applyStyle(style)
   }
 
@@ -175,7 +170,7 @@ open class BpkButton(
 
   private fun applyStyle(style: ButtonStyle) {
     this.style = style
-    background = style.getButtonBackground(isEnabled, iconPosition)
+    background = style.getButtonBackground(isEnabled)
     setTextColor(style.getContentColor(loading))
   }
 
