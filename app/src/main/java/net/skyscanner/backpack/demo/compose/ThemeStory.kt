@@ -26,22 +26,18 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Button
-import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.OutlinedButton
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Slider
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Switch
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
-import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -54,11 +50,13 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
+import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.button.BpkButtonType
+import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.Flight
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
@@ -94,35 +92,21 @@ fun ThemeStory() {
       }
     }
 
-    Button(onClick = { }) {
-      BpkText(text = "Primary button")
-    }
+    BpkButton(text = "Primary button", onClick = { })
 
-    OutlinedButton(onClick = { }) {
-      BpkText(text = "Outlined button")
-    }
-
-    TextButton(onClick = { }) {
-      BpkText(text = "Text button")
-    }
+    BpkButton(text = "Secondary button", type = BpkButtonType.Secondary, onClick = { })
 
     var showAlertDialog by remember { mutableStateOf(false) }
-    Button(onClick = { showAlertDialog = true }) {
-      BpkText(text = "Alert dialog")
-    }
+    BpkButton(text = "Alert dialog", onClick = { showAlertDialog = true })
     if (showAlertDialog) {
       AlertDialog(
         onDismissRequest = { showAlertDialog = false },
         title = { BpkText(text = "Alert dialog") },
         confirmButton = {
-          TextButton(onClick = { showAlertDialog = false }) {
-            BpkText(text = "OK")
-          }
+          BpkButton(text = "OK", onClick = { showAlertDialog = false })
         },
         dismissButton = {
-          TextButton(onClick = { showAlertDialog = false }) {
-            BpkText(text = "Cancel")
-          }
+          BpkButton(text = "Cancel", type = BpkButtonType.Secondary, onClick = { showAlertDialog = false })
         },
         text = {
           BpkText(text = stringResource(id = R.string.stub))
@@ -155,7 +139,7 @@ fun ThemeStory() {
       onClick = { },
     )
 
-    Card(elevation = BpkElevation.Lg) {
+    BpkCard(focused = true) {
       BpkText(modifier = Modifier.padding(all = BpkSpacing.Base), text = "Card")
     }
 

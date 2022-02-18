@@ -2,6 +2,13 @@
 
 [Unreleased changes](UNRELEASED.md).
 
+# 0.2.0
+
+**Added:**
+
+- New `BpkButton` component
+- New `focused` property for `BpkCard`
+
 # 0.1.1
 
 **Fixed:**

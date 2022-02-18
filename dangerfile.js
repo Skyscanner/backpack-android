@@ -35,7 +35,7 @@ const unreleasedModified = includes(modifiedFiles, 'Backpack/UNRELEASED.md') ||
   includes(modifiedFiles, 'backpack-compose/UNRELEASED.md');
 const packagesModified = fileChanges.some(filePath =>
   filePath.startsWith('Backpack/src/main') ||
-  filePath.startsWith('backpack-compose/src/main') || 
+  filePath.startsWith('backpack-compose/src/main') ||
   filePath.startsWith('backpack-common/src/main')
 );
 if (packagesModified && !unreleasedModified && !declaredTrivial) {
@@ -50,6 +50,16 @@ const usageDetector = includes(
 const packageFilesCreated = createdFiles.some(filePath => filePath.startsWith('Backpack/src/main/java'));
 if (packageFilesCreated && !usageDetector && !declaredTrivial) {
   warn("One or more package files were created, but `BpkComponentUsageDetector.kt` wasn't updated.");
+}
+
+// If any files were created, the BpkComposeComponentUsageDetector should have been updated.
+const composeUsageDetector = includes(
+  modifiedFiles,
+  'backpack-lint/src/main/java/net/skyscanner/backpack/lint/check/BpkComposeComponentUsageDetector.kt',
+);
+const composePackageFilesCreated = createdFiles.some(filePath => filePath.startsWith('backpack-compose/src/main/java'));
+if (composePackageFilesCreated && !composeUsageDetector && !declaredTrivial) {
+  warn("One or more package files were created, but `BpkComposeComponentUsageDetector.kt` wasn't updated.");
 }
 
 // Ensure package-lock changes are intentional.
