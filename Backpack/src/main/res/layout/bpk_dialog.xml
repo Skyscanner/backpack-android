@@ -63,7 +63,7 @@
             android:layout_marginStart="@dimen/bpkSpacingMd"
             android:layout_marginEnd="@dimen/bpkSpacingMd"
             android:textAlignment="center"
-            app:textStyle="base"
+            app:textStyle="bodyDefault"
             tools:text="Message" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

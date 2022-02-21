@@ -26,14 +26,6 @@
 
   <declare-styleable name="BpkText">
     <attr name="textStyle" format="enum">
-      <enum name="xs" value="0" />
-      <enum name="sm" value="1" />
-      <enum name="base" value="2" />
-      <enum name="lg" value="3" />
-      <enum name="xl" value="4" />
-      <enum name="xxl" value="5" />
-      <enum name="xxxl" value="6" />
-      <enum name="caps" value="7" />
       <enum name="hero1" value="8" />
       <enum name="hero2" value="9" />
       <enum name="hero3" value="10" />
@@ -51,12 +43,6 @@
       <enum name="label2" value="22" />
       <enum name="footnote" value="23" />
       <enum name="caption" value="24" />
-
-    </attr>
-    <attr name="weight" format="enum">
-      <enum name="normal" value="0" />
-      <enum name="emphasized" value="1" />
-      <enum name="heavy" value="2" />
     </attr>
     <attr name="android:textColor" format="color" />
   </declare-styleable>
