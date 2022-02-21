@@ -28,7 +28,6 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.IntDef
 import androidx.annotation.StyleRes
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
@@ -39,29 +38,11 @@ import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.isInEditMode
 import net.skyscanner.backpack.util.use
 
-private val legacyStyleMapping = mapOf(
-  BpkText.XS to arrayOf(BpkText.TextStyle.Caption, BpkText.TextStyle.Caption, null),
-  BpkText.SM to arrayOf(BpkText.TextStyle.Footnote, BpkText.TextStyle.Label2, null),
-  BpkText.CAPS to arrayOf(BpkText.TextStyle.Caption, BpkText.TextStyle.Caption, null),
-  BpkText.BASE to arrayOf(BpkText.TextStyle.BodyDefault, BpkText.TextStyle.Label1, null),
-  BpkText.LG to arrayOf(BpkText.TextStyle.BodyLongform, BpkText.TextStyle.Heading4, null),
-  BpkText.XL to arrayOf(BpkText.TextStyle.Subheading, BpkText.TextStyle.Heading3, BpkText.TextStyle.Heading3),
-  BpkText.XXL to arrayOf(BpkText.TextStyle.Heading2, BpkText.TextStyle.Heading2, BpkText.TextStyle.Heading2),
-  BpkText.XXXL to arrayOf(BpkText.TextStyle.Heading1, BpkText.TextStyle.Heading1, BpkText.TextStyle.Heading1),
-)
-
 open class BpkText @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
-
-  @Deprecated("Use new text styles instead")
-  enum class Weight {
-    NORMAL,
-    EMPHASIZED,
-    HEAVY
-  }
 
   enum class TextStyle(internal val id: Int) {
     Hero1(8),
@@ -105,43 +86,7 @@ open class BpkText @JvmOverloads constructor(
       }
   }
 
-  @Deprecated("Use TextStyle instead")
-  @IntDef(XS, SM, BASE, LG, XL, XXL, XXXL, CAPS)
-  annotation class Styles
-
   companion object {
-    @Deprecated("Use CAPTION")
-    const val XS = 0
-
-    @Deprecated("Use FOOTNOTE or LABEL2 (emphasized)")
-    const val SM = 1
-
-    @Deprecated("Use BODY_DEFAULT or HEADING5 (emphasized)")
-    const val BASE = 2
-
-    @Deprecated("Use BODY_LONGFORM or HEADING4 (emphasized)")
-    const val LG = 3
-
-    @Deprecated("Use SUBHEADING or HEADING3 (emphasized)")
-    const val XL = 4
-
-    @Deprecated("Use HEADING2")
-    const val XXL = 5
-
-    @Deprecated("Use HEADING1")
-    const val XXXL = 6
-
-    @Deprecated("Use CAPTION")
-    const val CAPS = 7
-
-    @JvmStatic
-    @Deprecated("Use new TextStyle instead")
-    fun getFont(
-      context: Context,
-      textStyle: Int = BASE,
-      weight: Weight = Weight.NORMAL,
-    ) =
-      internalGetFont(context, mapLegacyStyle(textStyle, weight))
 
     @JvmStatic
     fun getFont(
@@ -149,11 +94,6 @@ open class BpkText @JvmOverloads constructor(
       textStyle: TextStyle,
     ) =
       internalGetFont(context, textStyle)
-
-    private fun mapLegacyStyle(textStyle: Int, weight: Weight): TextStyle =
-      legacyStyleMapping[textStyle]
-        .let { if (it == null) throw IllegalStateException("Unsupported text style") else it[weight.ordinal] }
-        .let { it ?: throw IllegalStateException("Unsupported text style") }
   }
 
   private var _textStyle: TextStyle = TextStyle.BodyDefault
@@ -179,11 +119,8 @@ open class BpkText @JvmOverloads constructor(
       R.styleable.BpkText,
       defStyleAttr, 0
     ).use {
-      // this needs to be base, rather than body default to ensure the legacy weight property is still working as expected
-      val textStyleArg = it.getInt(R.styleable.BpkText_textStyle, BASE)
-      val weight = it.getInt(R.styleable.BpkText_weight, -1)
-        .let { arg -> if (arg == -1) Weight.NORMAL else Weight.values()[arg] }
-      _textStyle = TextStyle.values().firstOrNull { it.id == textStyleArg } ?: mapLegacyStyle(textStyleArg, weight)
+      _textStyle = it.getInt(R.styleable.BpkText_textStyle, TextStyle.BodyDefault.id)
+        .let { textStyleArg -> TextStyle.values().first { it.id == textStyleArg } }
 
       if (it.hasValue(R.styleable.BpkText_android_textColor)) {
         _textColour = it.getColorStateList(R.styleable.BpkText_android_textColor)

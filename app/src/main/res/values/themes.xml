@@ -317,27 +317,6 @@
   <style name="CustomTextStyle" parent="AppTheme">
     <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
     <item name="bpkFontFamilyEmphasized">@font/shadows_into_light</item>
-    <item name="bpkFontFamilyHeavy">@font/shadows_into_light</item>
-
-    <item name="bpkTextBaseAppearance">@style/bpkTextBase</item>
-    <item name="bpkTextCapsAppearance">@style/bpkTextCaps</item>
-    <item name="bpkTextLgAppearance">@style/bpkTextLg</item>
-    <item name="bpkTextSmAppearance">@style/bpkTextSm</item>
-    <item name="bpkTextXlAppearance">@style/bpkTextXl</item>
-    <item name="bpkTextXsAppearance">@style/bpkTextXs</item>
-    <item name="bpkTextXxlAppearance">@style/bpkTextXxl</item>
-    <item name="bpkTextXxxlAppearance">@style/bpkTextXxxl</item>
-    <item name="bpkTextBaseEmphasizedAppearance">@style/bpkTextBaseEmphasized</item>
-    <item name="bpkTextCapsEmphasizedAppearance">@style/bpkTextCapsEmphasized</item>
-    <item name="bpkTextLgEmphasizedAppearance">@style/bpkTextLgEmphasized</item>
-    <item name="bpkTextSmEmphasizedAppearance">@style/bpkTextSmEmphasized</item>
-    <item name="bpkTextXlEmphasizedAppearance">@style/bpkTextXlEmphasized</item>
-    <item name="bpkTextXsEmphasizedAppearance">@style/bpkTextXsEmphasized</item>
-    <item name="bpkTextXxlEmphasizedAppearance">@style/bpkTextXxlEmphasized</item>
-    <item name="bpkTextXxxlEmphasizedAppearance">@style/bpkTextXxxlEmphasized</item>
-    <item name="bpkTextXlHeavyAppearance">@style/bpkTextXlHeavy</item>
-    <item name="bpkTextXxlHeavyAppearance">@style/bpkTextXxlHeavy</item>
-    <item name="bpkTextXxxlHeavyAppearance">@style/bpkTextXxxlHeavy</item>
   </style>
 
 </resources>

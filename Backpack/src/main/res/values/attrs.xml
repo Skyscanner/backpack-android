@@ -323,16 +323,7 @@
 
   <attr name="bpkFontFamilyBase" format="reference|string"/>
   <attr name="bpkFontFamilyEmphasized" format="reference|string"/>
-  <attr name="bpkFontFamilyHeavy" format="reference|string"/>
 
-  <attr name="bpkTextBaseAppearance" format="reference" />
-  <attr name="bpkTextCapsAppearance" format="reference" />
-  <attr name="bpkTextLgAppearance" format="reference" />
-  <attr name="bpkTextSmAppearance" format="reference" />
-  <attr name="bpkTextXlAppearance" format="reference" />
-  <attr name="bpkTextXsAppearance" format="reference" />
-  <attr name="bpkTextXxlAppearance" format="reference" />
-  <attr name="bpkTextXxxlAppearance" format="reference" />
   <attr name="bpkTextHero1Appearance" format="reference" />
   <attr name="bpkTextHero2Appearance" format="reference" />
   <attr name="bpkTextHero3Appearance" format="reference" />
@@ -350,17 +341,6 @@
   <attr name="bpkTextLabel2Appearance" format="reference" />
   <attr name="bpkTextFootnoteAppearance" format="reference" />
   <attr name="bpkTextCaptionAppearance" format="reference" />
-  <attr name="bpkTextBaseEmphasizedAppearance" format="reference" />
-  <attr name="bpkTextCapsEmphasizedAppearance" format="reference" />
-  <attr name="bpkTextLgEmphasizedAppearance" format="reference" />
-  <attr name="bpkTextSmEmphasizedAppearance" format="reference" />
-  <attr name="bpkTextXlEmphasizedAppearance" format="reference" />
-  <attr name="bpkTextXsEmphasizedAppearance" format="reference" />
-  <attr name="bpkTextXxlEmphasizedAppearance" format="reference" />
-  <attr name="bpkTextXxxlEmphasizedAppearance" format="reference" />
-  <attr name="bpkTextXlHeavyAppearance" format="reference" />
-  <attr name="bpkTextXxlHeavyAppearance" format="reference" />
-  <attr name="bpkTextXxxlHeavyAppearance" format="reference" />
 
   <!-- FONT THEMING END -->
 

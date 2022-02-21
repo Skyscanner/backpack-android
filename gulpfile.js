@@ -65,7 +65,7 @@ const pascalCase = s =>
 
 const tokensWithType = type => Object.values(tokens.props).filter(i => i.type === type);
 
-const tokensWithCategory = category => Object.values(tokens.props).filter(i => i.category === category);
+const tokensWithCategory = category => Object.values(tokens.props).filter(i => i.category === category && !i.deprecated);
 
 const shouldAutoMirror = chunk => {
   const iconMetadata = iconsMetadata[chunk.stem];
