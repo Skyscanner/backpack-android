@@ -7,6 +7,5 @@
   <style name="TestTextCustomFont" parent="BpkTheme">
     <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
     <item name="bpkFontFamilyEmphasized">cursive</item>
-    <item name="bpkFontFamilyHeavy">casual</item>
   </style>
 </resources>

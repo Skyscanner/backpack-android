@@ -22,7 +22,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.R
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -94,19 +93,5 @@ class BpkResources {
     assertEquals("8.0dip", appContext.getString(R.dimen.bpkElevationLg))
     assertEquals("16.0dip", appContext.getString(R.dimen.bpkElevationXl))
     assertEquals("24.0dip", appContext.getString(R.dimen.bpkElevationXxl))
-  }
-
-  @Test
-  fun bpkTextStyles() {
-    val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    val toTest = arrayOf(R.style.bpkTextSm, R.style.bpkTextSmEmphasized)
-
-    for (style in toTest) {
-      val result = appContext.obtainStyledAttributes(R.style.bpkTextLg, R.styleable.BpkTextStyle)
-
-      assertNotNull(result.getString(R.styleable.BpkTextStyle_android_textSize))
-
-      result.recycle()
-    }
   }
 }

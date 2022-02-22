@@ -4,8 +4,4 @@
     <attr name="android:fontFamily" />
     <attr name="android:textSize" />
   </declare-styleable>
-
-  <style name="bpkButtonBase" parent="bpkTextSmEmphasized">
-    <item name="textAllCaps">true</item>
-  </style>
 </resources>
