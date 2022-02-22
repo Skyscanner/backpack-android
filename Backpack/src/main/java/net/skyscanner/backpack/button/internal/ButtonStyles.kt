@@ -27,11 +27,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonPrimaryStyle,
-      bgColorRes = R.color.bpkMonteverde,
-      textColorRes = R.color.__buttonPrimaryContent,
-      disabledBgColorRes = R.color.__buttonDisabledBackground,
-      disabledTextColorRes = R.color.__buttonDisabledText,
-      loadingTextColor = R.color.__buttonLoadingText,
+      bgColorRes = R.color.bpk_button_bg_primary,
+      contentColorRes = R.color.bpk_button_content_primary,
+      rippleColorRes = R.color.__buttonDefaultRipple,
     )
   }
 
@@ -39,14 +37,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonSecondaryStyle,
-      bgColorRes = R.color.__buttonSecondaryBackground,
-      textColorRes = R.color.__buttonSecondaryContent,
-      strokeColorRes = R.color.__buttonSecondaryBorder,
-      strokeColorPressedRes = R.color.bpkPrimary,
-      strokeWidthRes = R.dimen.bpkBorderSizeLg,
-      disabledBgColorRes = R.color.__buttonDisabledBackground,
-      disabledTextColorRes = R.color.__buttonDisabledText,
-      loadingTextColor = R.color.__buttonLoadingText,
+      bgColorRes = R.color.bpk_button_bg_secondary,
+      contentColorRes = R.color.bpk_button_content_secondary,
+      rippleColorRes = R.color.__buttonDefaultRipple,
     )
   }
 
@@ -55,10 +48,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       context = context,
       style = R.attr.bpkButtonFeaturedStyle,
       bgColorRes = R.color.bpk_button_bg_featured,
-      textColorRes = R.color.bpkWhite,
-      disabledBgColorRes = R.color.__buttonDisabledBackground,
-      disabledTextColorRes = R.color.__buttonDisabledText,
-      loadingTextColor = R.color.__buttonLoadingText,
+      contentColorRes = R.color.bpk_button_content_featured,
+      rippleColorRes = R.color.__buttonFeaturedRipple,
     )
   }
 
@@ -67,13 +58,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       context = context,
       style = R.attr.bpkButtonDestructiveStyle,
       bgColorRes = R.color.bpk_button_bg_destructive,
-      textColorRes = R.color.bpk_button_content_destructive,
-      strokeColorRes = R.color.__buttonSecondaryBorder,
-      strokeColorPressedRes = R.color.bpkPanjin,
-      disabledBgColorRes = R.color.__buttonDisabledBackground,
-      disabledTextColorRes = R.color.__buttonDisabledText,
-      loadingTextColor = R.color.__buttonLoadingText,
-      strokeWidthRes = R.dimen.bpkBorderSizeLg,
+      contentColorRes = R.color.bpk_button_content_destructive,
+      rippleColorRes = R.color.__buttonDestructiveRipple,
     )
   }
 
@@ -82,12 +68,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       context = context,
       style = R.attr.bpkButtonOutlineStyle,
       bgColorRes = android.R.color.transparent,
-      textColorRes = R.color.bpkWhite,
-      strokeColorRes = R.color.bpkWhite,
-      disabledBgColorRes = R.color.bpkSkyGrayTint06,
-      disabledTextColorRes = R.color.bpkSkyGrayTint04,
-      loadingTextColor = R.color.__buttonLoadingText,
-      strokeWidthRes = R.dimen.bpkBorderSizeLg,
+      contentColorRes = R.color.bpkWhite,
+      rippleColorRes = R.color.__buttonDefaultRipple,
     )
   }
 
@@ -95,11 +77,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonLinkStyle,
-      bgColorRes = android.R.color.transparent,
-      textColorRes = R.color.bpkPrimary,
-      disabledBgColorRes = android.R.color.transparent,
-      disabledTextColorRes = R.color.__buttonDisabledText,
-      loadingTextColor = R.color.__buttonLoadingText,
+      bgColorRes = R.color.bpk_button_bg_link,
+      contentColorRes = R.color.bpk_button_content_link,
+      rippleColorRes = R.color.__buttonLinkRipple,
     )
   }
 }

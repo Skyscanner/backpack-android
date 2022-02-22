@@ -3,7 +3,6 @@
 
   <color name="__buttonDisabledBackground">@color/bpkSkyGrayTint06</color>
   <color name="__buttonDisabledText">@color/bpkSkyGrayTint04</color>
-  <color name="__buttonLoadingText">@color/bpkSkyGrayTint02</color>
   <color name="__buttonSecondaryBackground">@color/bpkSkyGrayTint06</color>
   <color name="__buttonFeaturedPressedBackground">@color/bpkSkyBlueShade01</color>
   <color name="__buttonDestructiveBackground">@color/bpkSkyGrayTint06</color>
@@ -13,8 +12,11 @@
   <color name="__buttonFeaturedContent">@color/bpkWhite</color>
   <color name="__buttonDestructiveContent">#B22E45</color>
   <color name="__buttonDestructivePressedContent">@color/bpkWhite</color>
-  <color name="__buttonLinkPressedContent">@color/bpkSkyBlueTint01</color>
-  <color name="__buttonSecondaryBorder">@color/bpkSkyGrayTint05</color>
+  <color name="__buttonLinkPressedContent">@color/bpkSkyBlueShade01</color>
+  <color name="__buttonDefaultRipple">#33000000</color>
+  <color name="__buttonDestructiveRipple">#19000000</color>
+  <color name="__buttonFeaturedRipple">#19000000</color>
+  <color name="__buttonLinkRipple">#33000000</color>
   <color name="__calendarSameDayBackground">@color/bpkSkyBlueTint02</color>
   <color name="__calendarRangeBackground">@color/bpkSkyBlueTint02</color>
   <color name="__calendarRangeText">@color/bpkTextPrimaryLight</color>

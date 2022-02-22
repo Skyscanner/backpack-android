@@ -102,8 +102,6 @@
     <attr name="buttonLoading" format="boolean" />
     <attr name="buttonBackgroundColor" format="color" />
     <attr name="buttonTextColor" format="color" />
-    <attr name="buttonStrokeColor" format="color" />
-    <attr name="buttonStrokeColorPressed" format="color" />
   </declare-styleable>
 
   <declare-styleable name="BpkButtonLink">

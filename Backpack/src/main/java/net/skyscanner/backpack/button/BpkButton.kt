@@ -170,8 +170,8 @@ open class BpkButton(
 
   private fun applyStyle(style: ButtonStyle) {
     this.style = style
-    background = style.getButtonBackground(isEnabled)
-    setTextColor(style.getContentColor(loading))
+    background = style.getButtonBackground()
+    setTextColor(style.getContentColor())
   }
 
   private fun updateIconState() {
