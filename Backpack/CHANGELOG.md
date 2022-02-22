@@ -2,6 +2,13 @@
 
 [Unreleased changes](UNRELEASED.md).
 
+# 35.0.0
+
+**Breaking:**
+- Remove deprecated text API
+  - Removed old text styles & token
+  - Removed Relative theme
+
 # 34.0.0
 
 **Breaking:**
