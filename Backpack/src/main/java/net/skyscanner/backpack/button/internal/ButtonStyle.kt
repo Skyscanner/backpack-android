@@ -54,7 +54,7 @@ internal class ButtonStyle(
       setColor(color)
       cornerRadius = radius
     }
-    val enabledBackground = colorStateList(bgColor, pressedColor = bgPressedColor, disabledColor = bgDisabledColor)
+    val enabledBackground = colorStateList(bgColor, pressedColor = bgPressedColor, disabledColor = bgColor)
 
     return rippleDrawable(
       context = context,
@@ -97,8 +97,8 @@ internal class ButtonStyle(
       context: Context,
       @AttrRes style: Int,
       @ColorRes bgColorRes: Int,
-      @ColorRes bgPressedColorRes: Int,
-      @ColorRes bgDisabledColorRes: Int,
+      @ColorRes bgPressedColorRes: Int = bgColorRes,
+      @ColorRes bgDisabledColorRes: Int = R.color.__buttonDisabledBackground,
       @ColorRes contentColorRes: Int,
       @ColorRes rippleColorRes: Int,
     ): ButtonStyle {

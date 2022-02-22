@@ -27,7 +27,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonPrimaryStyle,
-      bgColorRes = R.color.bpk_button_bg_primary,
+      bgColorRes = R.color.bpkMonteverde,
       contentColorRes = R.color.bpk_button_content_primary,
       rippleColorRes = R.color.__buttonDefaultRipple,
     )
@@ -37,7 +37,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonSecondaryStyle,
-      bgColorRes = R.color.bpk_button_bg_secondary,
+      bgColorRes = R.color.__buttonSecondaryBackground,
       contentColorRes = R.color.bpk_button_content_secondary,
       rippleColorRes = R.color.__buttonDefaultRipple,
     )
@@ -47,7 +47,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonFeaturedStyle,
-      bgColorRes = R.color.bpk_button_bg_featured,
+      bgColorRes = R.color.bpkPrimary,
+      bgPressedColorRes = R.color.__buttonFeaturedPressedBackground,
       contentColorRes = R.color.bpk_button_content_featured,
       rippleColorRes = R.color.__buttonFeaturedRipple,
     )
@@ -57,7 +58,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonDestructiveStyle,
-      bgColorRes = R.color.bpk_button_bg_destructive,
+      bgColorRes = R.color.__buttonDestructiveBackground,
+      bgPressedColorRes = R.color.__buttonDestructivePressedBackground,
       contentColorRes = R.color.bpk_button_content_destructive,
       rippleColorRes = R.color.__buttonDestructiveRipple,
     )
@@ -77,7 +79,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonLinkStyle,
-      bgColorRes = R.color.bpk_button_bg_link,
+      bgColorRes = android.R.color.transparent,
+      bgDisabledColorRes = android.R.color.transparent,
       contentColorRes = R.color.bpk_button_content_link,
       rippleColorRes = R.color.__buttonLinkRipple,
     )
