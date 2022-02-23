@@ -29,8 +29,8 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.rippleDrawable
+import net.skyscanner.backpack.util.stateListDrawable
 
 internal class ButtonStyle(
   private val context: Context,
@@ -49,19 +49,29 @@ internal class ButtonStyle(
     val radius = context.resources.getDimension(R.dimen.bpkBorderRadiusSm)
 
     fun roundRectDrawable(
-      color: ColorStateList,
+      @ColorInt color: Int,
     ): Drawable = GradientDrawable().apply {
       setColor(color)
       cornerRadius = radius
     }
-    val enabledBackground = colorStateList(bgColor, pressedColor = bgPressedColor, disabledColor = bgColor)
 
-    return rippleDrawable(
-      context = context,
-      mask = roundRectDrawable(ColorStateList.valueOf(Color.WHITE)),
-      content = roundRectDrawable(if (enabled) enabledBackground else ColorStateList.valueOf(bgDisabledColor)),
-      rippleColor = rippleColor,
-    )
+    if (enabled) {
+      return rippleDrawable(
+        context = context,
+        mask = roundRectDrawable(Color.WHITE),
+        content = stateListDrawable(
+          pressed = roundRectDrawable(bgPressedColor),
+          drawable = roundRectDrawable(bgColor),
+        ) {
+          val strokeAnimation = context.resources.getInteger(R.integer.bpkAnimationDurationSm)
+          setEnterFadeDuration(strokeAnimation)
+          setExitFadeDuration(strokeAnimation)
+        },
+        rippleColor = rippleColor,
+      )
+    } else {
+      return roundRectDrawable(bgDisabledColor)
+    }
   }
 
   companion object {
