@@ -1,20 +1,16 @@
-/**
- * Backpack for Android - Skyscanner's Design System
- *
- * Copyright 2018 Skyscanner Ltd
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Backpack for Android - Skyscanner's Design System
+// Copyright 2018 Skyscanner Ltd
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// Auto-generated: do not edit
+@file:Suppress("RedundantVisibilityModifier","unused")
 
 package net.skyscanner.backpack.compose.tokens
 
@@ -22,28 +18,80 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 
-data class BpkTypography internal constructor(
-  val hero1: TextStyle,
-  val hero2: TextStyle,
-  val hero3: TextStyle,
-  val hero4: TextStyle,
-  val hero5: TextStyle,
-  val heading1: TextStyle,
-  val heading2: TextStyle,
-  val heading3: TextStyle,
-  val heading4: TextStyle,
-  val heading5: TextStyle,
-  val subheading: TextStyle,
-  val bodyLongform: TextStyle,
-  val bodyDefault: TextStyle,
-  val footnote: TextStyle,
-  val caption: TextStyle,
-  val label1: TextStyle,
-  val label2: TextStyle,
+public data class BpkTypography internal constructor(
+  public val bodyDefault: TextStyle,
+  public val bodyLongform: TextStyle,
+  public val caption: TextStyle,
+  public val footnote: TextStyle,
+  public val heading1: TextStyle,
+  public val heading2: TextStyle,
+  public val heading3: TextStyle,
+  public val heading4: TextStyle,
+  public val heading5: TextStyle,
+  public val hero1: TextStyle,
+  public val hero2: TextStyle,
+  public val hero3: TextStyle,
+  public val hero4: TextStyle,
+  public val hero5: TextStyle,
+  public val label1: TextStyle,
+  public val label2: TextStyle,
+  public val subheading: TextStyle
 ) {
-  constructor(
-    defaultFontFamily: FontFamily = FontFamily.SansSerif,
-  ) : this(
+  public constructor(defaultFontFamily: FontFamily = FontFamily.SansSerif) : this(
+    bodyDefault = TextStyle(
+      fontWeight = FontWeight.Normal,
+      fontSize = BpkFontSize.Base,
+      lineHeight = BpkLineHeight.Base,
+      fontFamily = defaultFontFamily,
+    ),
+    bodyLongform = TextStyle(
+      fontWeight = FontWeight.Normal,
+      fontSize = BpkFontSize.Lg,
+      lineHeight = BpkLineHeight.Lg,
+      fontFamily = defaultFontFamily,
+    ),
+    caption = TextStyle(
+      fontWeight = FontWeight.Normal,
+      fontSize = BpkFontSize.Xs,
+      lineHeight = BpkLineHeight.Xs,
+      fontFamily = defaultFontFamily,
+    ),
+    footnote = TextStyle(
+      fontWeight = FontWeight.Normal,
+      fontSize = BpkFontSize.Sm,
+      lineHeight = BpkLineHeight.Sm,
+      fontFamily = defaultFontFamily,
+    ),
+    heading1 = TextStyle(
+      fontWeight = FontWeight.Bold,
+      fontSize = BpkFontSize.Xxxl,
+      lineHeight = BpkLineHeight.Xxxl,
+      fontFamily = defaultFontFamily,
+    ),
+    heading2 = TextStyle(
+      fontWeight = FontWeight.Bold,
+      fontSize = BpkFontSize.Xxl,
+      lineHeight = BpkLineHeight.Xxl,
+      fontFamily = defaultFontFamily,
+    ),
+    heading3 = TextStyle(
+      fontWeight = FontWeight.Bold,
+      fontSize = BpkFontSize.Xl,
+      lineHeight = BpkLineHeight.XlTight,
+      fontFamily = defaultFontFamily,
+    ),
+    heading4 = TextStyle(
+      fontWeight = FontWeight.Bold,
+      fontSize = BpkFontSize.Lg,
+      lineHeight = BpkLineHeight.LgTight,
+      fontFamily = defaultFontFamily,
+    ),
+    heading5 = TextStyle(
+      fontWeight = FontWeight.Bold,
+      fontSize = BpkFontSize.Base,
+      lineHeight = BpkLineHeight.BaseTight,
+      fontFamily = defaultFontFamily,
+    ),
     hero1 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.`8xl`,
@@ -79,66 +127,6 @@ data class BpkTypography internal constructor(
       letterSpacing = BpkLetterSpacing.Tight,
       fontFamily = defaultFontFamily,
     ),
-    heading1 = TextStyle(
-      fontWeight = FontWeight.Bold,
-      fontSize = BpkFontSize.Xxxl,
-      lineHeight = BpkLineHeight.Xxxl,
-      fontFamily = defaultFontFamily,
-    ),
-    heading2 = TextStyle(
-      fontWeight = FontWeight.Bold,
-      fontSize = BpkFontSize.Xxl,
-      lineHeight = BpkLineHeight.Xxl,
-      fontFamily = defaultFontFamily,
-    ),
-    heading3 = TextStyle(
-      fontWeight = FontWeight.Bold,
-      fontSize = BpkFontSize.Xl,
-      lineHeight = BpkLineHeight.XlTight,
-      fontFamily = defaultFontFamily,
-    ),
-    heading4 = TextStyle(
-      fontWeight = FontWeight.Bold,
-      fontSize = BpkFontSize.Lg,
-      lineHeight = BpkLineHeight.LgTight,
-      fontFamily = defaultFontFamily,
-    ),
-    heading5 = TextStyle(
-      fontWeight = FontWeight.Bold,
-      fontSize = BpkFontSize.Base,
-      lineHeight = BpkLineHeight.BaseTight,
-      fontFamily = defaultFontFamily,
-    ),
-    subheading = TextStyle(
-      fontWeight = FontWeight.Normal,
-      fontSize = BpkFontSize.Xl,
-      lineHeight = BpkLineHeight.Xl,
-      fontFamily = defaultFontFamily,
-    ),
-    bodyLongform = TextStyle(
-      fontWeight = FontWeight.Normal,
-      fontSize = BpkFontSize.Lg,
-      lineHeight = BpkLineHeight.Lg,
-      fontFamily = defaultFontFamily,
-    ),
-    bodyDefault = TextStyle(
-      fontWeight = FontWeight.Normal,
-      fontSize = BpkFontSize.Base,
-      lineHeight = BpkLineHeight.Base,
-      fontFamily = defaultFontFamily,
-    ),
-    footnote = TextStyle(
-      fontWeight = FontWeight.Normal,
-      fontSize = BpkFontSize.Sm,
-      lineHeight = BpkLineHeight.Sm,
-      fontFamily = defaultFontFamily,
-    ),
-    caption = TextStyle(
-      fontWeight = FontWeight.Normal,
-      fontSize = BpkFontSize.Xs,
-      lineHeight = BpkLineHeight.Xs,
-      fontFamily = defaultFontFamily,
-    ),
     label1 = TextStyle(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Base,
@@ -149,6 +137,12 @@ data class BpkTypography internal constructor(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Sm,
       lineHeight = BpkLineHeight.Sm,
+      fontFamily = defaultFontFamily,
+    ),
+    subheading = TextStyle(
+      fontWeight = FontWeight.Normal,
+      fontSize = BpkFontSize.Xl,
+      lineHeight = BpkLineHeight.Xl,
       fontFamily = defaultFontFamily,
     ),
   )
