@@ -207,9 +207,13 @@ open class BpkButton(
       id = 3,
       createStyle = ButtonStyles.Destructive
     ),
-    Outline(
+    PrimaryOnDark(
       id = 4,
-      createStyle = ButtonStyles.Outline
+      createStyle = ButtonStyles.PrimaryOnDark,
+    ),
+    PrimaryOnLight(
+      id = 4,
+      createStyle = ButtonStyles.PrimaryOnLight,
     );
 
     internal companion object {

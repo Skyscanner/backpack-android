@@ -110,7 +110,7 @@ internal class ButtonStyle(
       @ColorRes bgPressedColorRes: Int = bgColorRes,
       @ColorRes bgDisabledColorRes: Int = R.color.__buttonDisabledBackground,
       @ColorRes contentColorRes: Int,
-      @ColorRes rippleColorRes: Int,
+      @ColorRes rippleColorRes: Int = R.color.__buttonDefaultRipple,
     ): ButtonStyle {
 
       var typedArray: TypedArray? = null

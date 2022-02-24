@@ -91,7 +91,8 @@
       <enum name="secondary" value="1" />
       <enum name="featured" value="2" />
       <enum name="destructive" value="3" />
-      <enum name="outline" value="4" />
+      <enum name="primaryOnDark" value="4" />
+      <enum name="primaryOnLight" value="5" />
     </attr>
     <attr name="buttonIcon" format="reference" />
     <attr name="buttonIconPosition" format="enum">
@@ -298,7 +299,8 @@
   <attr name="bpkButtonPrimaryStyle" format="reference" />
   <attr name="bpkButtonFeaturedStyle" format="reference" />
   <attr name="bpkButtonDestructiveStyle" format="reference" />
-  <attr name="bpkButtonOutlineStyle" format="reference" />
+  <attr name="bpkButtonPrimaryOnDarkStyle" format="reference" />
+  <attr name="bpkButtonPrimaryOnLightStyle" format="reference" />
   <attr name="bpkFabStyle" format="reference" />
   <attr name="bpkButtonLinkStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
