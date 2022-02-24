@@ -68,7 +68,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       context = context,
       style = R.attr.bpkButtonPrimaryOnDarkStyle,
       bgColorRes = R.color.bpkWhite,
-      contentColorRes = R.color.bpkSkyGray,
+      contentColorRes = R.color.bpk_button_content_primary_on_dark,
     )
   }
 
@@ -77,7 +77,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       context = context,
       style = R.attr.bpkButtonPrimaryOnLightStyle,
       bgColorRes = R.color.bpkSkyGray,
-      contentColorRes = R.color.bpkWhite,
+      contentColorRes = R.color.bpk_button_content_primary_on_light,
       rippleColorRes = R.color.__buttonPrimaryOnLightRipple,
     )
   }

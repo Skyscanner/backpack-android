@@ -212,7 +212,7 @@ open class BpkButton(
       createStyle = ButtonStyles.PrimaryOnDark,
     ),
     PrimaryOnLight(
-      id = 4,
+      id = 5,
       createStyle = ButtonStyles.PrimaryOnLight,
     );
 
