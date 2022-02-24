@@ -132,6 +132,7 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
           "  )"
 
       return FunSpec.constructorBuilder()
+        .addModifiers(KModifier.INTERNAL)
         .addParameter(ParameterSpec
           .builder(defaultFontFamily, FontFamilyClass)
           .defaultValue("%T.SansSerif", FontFamilyClass)

@@ -37,7 +37,7 @@ public data class BpkTypography internal constructor(
   public val label2: TextStyle,
   public val subheading: TextStyle
 ) {
-  public constructor(defaultFontFamily: FontFamily = FontFamily.SansSerif) : this(
+  internal constructor(defaultFontFamily: FontFamily = FontFamily.SansSerif) : this(
     bodyDefault = TextStyle(
       fontWeight = FontWeight.Normal,
       fontSize = BpkFontSize.Base,
