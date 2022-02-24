@@ -28,7 +28,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Button"
-    app:buttonType="outline" />
+    app:buttonType="primaryOnDark" />
 
   <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/btn_loading"
@@ -36,7 +36,7 @@
     android:layout_height="wrap_content"
     android:text="Loading"
     app:buttonLoading="true"
-    app:buttonType="outline" />
+    app:buttonType="primaryOnDark" />
 
   <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/btn_disabled"
@@ -44,7 +44,7 @@
     android:layout_height="wrap_content"
     android:enabled="false"
     android:text="Disabled"
-    app:buttonType="outline" />
+    app:buttonType="primaryOnDark" />
 
   <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/btn_start_icon"
@@ -53,7 +53,7 @@
     android:text="With icon"
     app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonIconPosition="end"
-    app:buttonType="outline" />
+    app:buttonType="primaryOnDark" />
 
   <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/btn_end_icon"
@@ -62,7 +62,7 @@
     android:text="With icon"
     app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonIconPosition="start"
-    app:buttonType="outline" />
+    app:buttonType="primaryOnDark" />
 
   <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/btn_icon"
@@ -70,6 +70,6 @@
     android:layout_height="wrap_content"
     app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
     app:buttonIconPosition="icon_only"
-    app:buttonType="outline" />
+    app:buttonType="primaryOnDark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
