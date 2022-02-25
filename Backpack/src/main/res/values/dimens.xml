@@ -42,4 +42,7 @@
   <dimen name="bpk_calendar_border_width">1dp</dimen>
   <dimen name="bpk_calendar_date_size">36dp</dimen>
   <dimen name="bpk_internal_spacing_zero">0dp</dimen>
+  <dimen name="bpk_button_default_min_height">36dp</dimen>
+  <dimen name="bpk_button_default_icon_only_padding">10dp</dimen>
+  <dimen name="bpk_button_default_icon_size">@dimen/bpkSpacingBase</dimen>
 </resources>

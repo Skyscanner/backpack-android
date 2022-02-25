@@ -59,28 +59,6 @@ class BpkButtonTest {
     Assert.assertEquals("Message", button.text.toString())
   }
 
-  // The drawables are set as start,top,end,bottom and are accessible in the compoundDrawables array
-  @Test
-  fun test_icon_end() {
-    val trainIcon = AppCompatResources.getDrawable(activity, R.drawable.bpk_train)
-    val button = BpkButton(activity).apply {
-      icon = trainIcon
-      iconPosition = BpkButton.END
-    }
-
-    Assert.assertNotNull(button.compoundDrawablesRelative[2])
-  }
-
-  @Test
-  fun test_icon_start() {
-    val trainIcon = AppCompatResources.getDrawable(activity, R.drawable.bpk_train)
-    val button = BpkButton(activity).apply {
-      icon = trainIcon
-      iconPosition = BpkButton.START
-    }
-    Assert.assertNotNull(button.compoundDrawablesRelative[0])
-  }
-
   @Test
   fun test_icon_loading_state_toggle() {
     val trainIcon = AppCompatResources.getDrawable(activity, R.drawable.bpk_train)
