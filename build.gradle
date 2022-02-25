@@ -126,7 +126,7 @@ ext {
   composeUiTooling = "androidx.compose.ui:ui-tooling:$compose_version"
   composeActivity = "androidx.activity:activity-compose:1.3.0"
 
-  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.20.3"
+  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.23.1"
 }
 
 tasks.dokkaHtmlMultiModule.configure {
