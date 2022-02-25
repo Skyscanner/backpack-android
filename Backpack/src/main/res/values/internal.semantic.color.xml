@@ -17,6 +17,7 @@
   <color name="__buttonDestructiveRipple">#19000000</color>
   <color name="__buttonFeaturedRipple">#19000000</color>
   <color name="__buttonLinkRipple">#33000000</color>
+  <color name="__buttonPrimaryOnLightRipple">#33FFFFFF</color>
   <color name="__calendarSameDayBackground">@color/bpkSkyBlueTint02</color>
   <color name="__calendarRangeBackground">@color/bpkSkyBlueTint02</color>
   <color name="__calendarRangeText">@color/bpkTextPrimaryLight</color>

@@ -54,14 +54,24 @@
       app:buttonType="featured" />
 
     <net.skyscanner.backpack.button.BpkButton
-      android:id="@+id/outline"
+      android:id="@+id/primaryOnDark"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:layout_below="@+id/primary"
       android:layout_toEndOf="@id/featured"
-      android:text="Outline"
-      app:buttonType="outline" />
+      android:text="Primary on dark"
+      app:buttonType="primaryOnDark" />
+
+    <net.skyscanner.backpack.button.BpkButton
+      android:id="@+id/primaryOnLight"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:layout_below="@+id/primary"
+      android:layout_toEndOf="@id/primaryOnDark"
+      android:text="Primary on light"
+      app:buttonType="primaryOnLight" />
   </RelativeLayout>
 
   <net.skyscanner.backpack.text.BpkText

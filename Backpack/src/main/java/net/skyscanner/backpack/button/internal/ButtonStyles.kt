@@ -29,7 +29,6 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonPrimaryStyle,
       bgColorRes = R.color.bpkMonteverde,
       contentColorRes = R.color.bpk_button_content_primary,
-      rippleColorRes = R.color.__buttonDefaultRipple,
     )
   }
 
@@ -39,7 +38,6 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonSecondaryStyle,
       bgColorRes = R.color.__buttonSecondaryBackground,
       contentColorRes = R.color.bpk_button_content_secondary,
-      rippleColorRes = R.color.__buttonDefaultRipple,
     )
   }
 
@@ -65,13 +63,22 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     )
   }
 
-  object Outline : ButtonStyles() {
+  object PrimaryOnDark : ButtonStyles() {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
-      style = R.attr.bpkButtonOutlineStyle,
-      bgColorRes = android.R.color.transparent,
-      contentColorRes = R.color.bpkWhite,
-      rippleColorRes = R.color.__buttonDefaultRipple,
+      style = R.attr.bpkButtonPrimaryOnDarkStyle,
+      bgColorRes = R.color.bpkWhite,
+      contentColorRes = R.color.bpk_button_content_primary_on_dark,
+    )
+  }
+
+  object PrimaryOnLight : ButtonStyles() {
+    override fun invoke(context: Context) = ButtonStyle.fromTheme(
+      context = context,
+      style = R.attr.bpkButtonPrimaryOnLightStyle,
+      bgColorRes = R.color.bpkSkyGray,
+      contentColorRes = R.color.bpk_button_content_primary_on_light,
+      rippleColorRes = R.color.__buttonPrimaryOnLightRipple,
     )
   }
 

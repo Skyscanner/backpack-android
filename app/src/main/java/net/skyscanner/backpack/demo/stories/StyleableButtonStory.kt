@@ -33,7 +33,8 @@ class StyleableButtonStory : Story() {
     view.findViewById<View>(R.id.secondary).setOnClickListener { setButtonType(Type.Secondary) }
     view.findViewById<View>(R.id.destructive).setOnClickListener { setButtonType(Type.Destructive) }
     view.findViewById<View>(R.id.featured).setOnClickListener { setButtonType(Type.Featured) }
-    view.findViewById<View>(R.id.outline).setOnClickListener { setButtonType(Type.Outline) }
+    view.findViewById<View>(R.id.primaryOnDark).setOnClickListener { setButtonType(Type.PrimaryOnDark) }
+    view.findViewById<View>(R.id.primaryOnLight).setOnClickListener { setButtonType(Type.PrimaryOnLight) }
   }
 
   private fun setButtonType(type: Type) {

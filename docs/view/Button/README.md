@@ -49,7 +49,8 @@ BpkButton accepts the above themeable attributes for the following styles
 - `bpkButtonPrimary`
 - `bpkButtonSecondary`
 - `bpkButtonDestructive`
-- `bpkButtonOutline`
+- `bpkButtonPrimaryOnDark`
+- `bpkButtonPrimaryOnLight`
 - `bpkButtonFeatured`
 
 Example

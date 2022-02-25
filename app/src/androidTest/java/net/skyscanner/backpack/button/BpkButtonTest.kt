@@ -132,17 +132,17 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestButtonBasicOutline() {
+  fun screenshotTestButtonBasicPrimaryOnDark() {
     setBackground(R.color.bpkPrimary)
-    val button = BpkButton(testContext, BpkButton.Type.Outline)
+    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnDark)
     button.text = "Message"
     snap(wrap(button))
   }
 
   @Test
-  fun screenshotTestButtonBasicOutlineWithIcon() {
+  fun screenshotTestButtonBasicPrimaryOnDarkWithIcon() {
     setBackground(R.color.bpkPrimary)
-    val button = BpkButton(testContext, BpkButton.Type.Outline)
+    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnDark)
     button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.START
     button.text = "Message"
@@ -150,9 +150,36 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestButtonBasicOutlineOnlyIcon() {
+  fun screenshotTestButtonBasicPrimaryOnDarkOnlyIcon() {
     setBackground(R.color.bpkPrimary)
-    val button = BpkButton(testContext, BpkButton.Type.Outline)
+    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnDark)
+    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.ICON_ONLY
+    snap(wrap(button))
+  }
+
+  @Test
+  fun screenshotTestButtonBasicPrimaryOnLight() {
+    setBackground(R.color.bpkPrimary)
+    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnLight)
+    button.text = "Message"
+    snap(wrap(button))
+  }
+
+  @Test
+  fun screenshotTestButtonBasicPrimaryOnLightWithIcon() {
+    setBackground(R.color.bpkPrimary)
+    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnLight)
+    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
+    button.iconPosition = BpkButton.START
+    button.text = "Message"
+    snap(wrap(button))
+  }
+
+  @Test
+  fun screenshotTestButtonBasicPrimaryOnLightOnlyIcon() {
+    setBackground(R.color.bpkPrimary)
+    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnLight)
     button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
     button.iconPosition = BpkButton.ICON_ONLY
     snap(wrap(button))
