@@ -26,7 +26,7 @@ buildscript {
     maven { url 'https://plugins.gradle.org/m2/' }
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:7.0.4' // keep in sync with lint version - If the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+    classpath 'com.android.tools.build:gradle:7.1.2' // keep in sync with lint version - If the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath dokka
     classpath 'com.facebook.testing.screenshot:plugin:0.15.0'
@@ -114,7 +114,7 @@ ext {
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
-  lintVersion = "30.0.4"
+  lintVersion = "30.1.2"
   lint = "com.android.tools.lint:lint:$lintVersion"
   lintApi = "com.android.tools.lint:lint-api:$lintVersion"
   lintTests = "com.android.tools.lint:lint-tests:$lintVersion"
