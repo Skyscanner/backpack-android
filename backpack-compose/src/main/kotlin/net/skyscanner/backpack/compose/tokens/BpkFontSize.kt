@@ -28,8 +28,6 @@ internal object BpkFontSize {
 
   internal val Base: TextUnit = 16.0.sp
 
-  internal val Caps: TextUnit = 10.0.sp
-
   internal val Lg: TextUnit = 20.0.sp
 
   internal val Sm: TextUnit = 14.0.sp

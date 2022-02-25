@@ -73,7 +73,11 @@ private fun parseTextUnits(
 ): BpkTextUnits {
 
   val props = source.getValue("props") as Map<String, Map<String, String>>
-  val data = props.filter { (_, value) -> value["type"] == type && value["category"] == category }
+  val data = props.filter { (_, value) ->
+    value["type"] == type &&
+      value["category"] == category &&
+      value["deprecated"] != "true"
+  }
 
   val map = data
     .mapValues { it.value.getValue("value").toDoubleOrNull() }

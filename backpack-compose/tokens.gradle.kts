@@ -21,6 +21,7 @@ import net.skyscanner.backpack.tokens.BpkDimension
 import net.skyscanner.backpack.tokens.BpkFormat
 import net.skyscanner.backpack.tokens.BpkIcon
 import net.skyscanner.backpack.tokens.BpkOutput
+import net.skyscanner.backpack.tokens.BpkTextStyle
 import net.skyscanner.backpack.tokens.BpkTextUnit
 import net.skyscanner.backpack.tokens.androidFileOf
 import net.skyscanner.backpack.tokens.nodeFileOf
@@ -104,6 +105,17 @@ tasks {
     }
   }
 
+  val generateTypographyTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkTextStyle.Category)
+        .transformTo(BpkTextStyle.Format.Compose(className = "BpkTypography"))
+        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+        .execute()
+    }
+  }
+
   val generateStaticColors by creating {
     this.group = group
     doLast {
@@ -133,7 +145,7 @@ tasks {
 
   val generateTextTokens by creating {
     this.group = group
-    dependsOn(generateFontSizeTokens, generateLetterSpacingTokens, generateLineHeightTokens)
+    dependsOn(generateFontSizeTokens, generateLetterSpacingTokens, generateLineHeightTokens, generateTypographyTokens)
   }
 
   val generateColorTokens by creating {
