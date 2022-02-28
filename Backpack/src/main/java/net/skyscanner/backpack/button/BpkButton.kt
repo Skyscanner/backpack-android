@@ -40,15 +40,16 @@ open class BpkButton(
   attrs: AttributeSet?,
   defStyleAttr: Int,
   type: Type,
+  private val size: BpkButtonSize,
 ) : BpkButtonBase(context, attrs, defStyleAttr) {
 
-  constructor(context: Context) : this(context, null, 0, Type.Primary)
+  constructor(context: Context) : this(context, null, 0, Type.Primary, BpkButtonSize.Default)
 
-  constructor(context: Context, type: Type) : this(context, null, 0, type)
+  constructor(context: Context, type: Type, size: BpkButtonSize) : this(context, null, 0, type, size)
 
-  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0, getButtonType(context, attrs))
+  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0, getButtonType(context, attrs), getButtonSize(context, attrs))
 
-  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary)
+  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary, BpkButtonSize.Default)
 
   companion object {
     const val START = ICON_POSITION_START
@@ -230,4 +231,9 @@ open class BpkButton(
 private fun getButtonType(context: Context, attrs: AttributeSet?): BpkButton.Type {
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
   return BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+}
+
+private fun getButtonSize(context: Context, attrs: AttributeSet?): BpkButtonSize {
+  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
+  return BpkButtonSize.fromId(attr.getInt(R.styleable.BpkButton_buttonSize, 0))
 }

@@ -7,6 +7,16 @@ import net.skyscanner.backpack.text.BpkText
 enum class BpkButtonSize {
   Default,
   Large,
+  ;
+
+  internal companion object {
+    internal fun fromId(id: Int): BpkButtonSize =
+      when (id) {
+        0 -> Default
+        1 -> Large
+        else -> throw IllegalArgumentException()
+      }
+  }
 }
 
 internal val BpkButtonSize.textStyle: BpkText.TextStyle
