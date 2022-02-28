@@ -24,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import net.skyscanner.backpack.util.InternalBackpackApi
 
 @InternalBackpackApi
-@VisibleForTesting
 object CalendarDispatchers {
 
   private var main: CoroutineDispatcher = Dispatchers.Main
@@ -36,10 +35,12 @@ object CalendarDispatchers {
   val Background: CoroutineDispatcher
     get() = background
 
+  @VisibleForTesting
   fun setMain(dispatcher: CoroutineDispatcher) {
     this.main = dispatcher
   }
 
+  @VisibleForTesting
   fun setBackground(dispatcher: CoroutineDispatcher) {
     this.background = dispatcher
   }
