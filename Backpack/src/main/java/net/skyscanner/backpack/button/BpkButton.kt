@@ -32,6 +32,8 @@ import net.skyscanner.backpack.button.internal.ButtonStyles
 import net.skyscanner.backpack.button.internal.ICON_POSITION_END
 import net.skyscanner.backpack.button.internal.ICON_POSITION_ICON_ONLY
 import net.skyscanner.backpack.button.internal.ICON_POSITION_START
+import net.skyscanner.backpack.text.BpkText
+import net.skyscanner.backpack.util.sizedDrawable
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
 
@@ -40,16 +42,16 @@ open class BpkButton(
   attrs: AttributeSet?,
   defStyleAttr: Int,
   type: Type,
-  private val size: BpkButtonSize,
+  private val format: BpkButtonFormat = BpkButtonFormat.Small,
 ) : BpkButtonBase(context, attrs, defStyleAttr) {
 
-  constructor(context: Context) : this(context, null, 0, Type.Primary, BpkButtonSize.Default)
+  constructor(context: Context) : this(context, null, 0, Type.Primary, BpkButtonFormat.Small)
 
-  constructor(context: Context, type: Type, size: BpkButtonSize) : this(context, null, 0, type, size)
+  constructor(context: Context, type: Type, format: BpkButtonFormat = BpkButtonFormat.Small) : this(context, null, 0, type, format)
 
   constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0, getButtonType(context, attrs), getButtonSize(context, attrs))
 
-  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary, BpkButtonSize.Default)
+  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary, BpkButtonFormat.Small)
 
   companion object {
     const val START = ICON_POSITION_START
@@ -71,7 +73,7 @@ open class BpkButton(
         paddingHorizontal = paddingHorizontalIconOnly
         iconPadding = 0
       } else {
-        iconPadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+        iconPadding = resources.getDimensionPixelSize(format.horizontalSpacing)
       }
 
       setPaddingRelative(paddingHorizontal, 0, paddingHorizontal, 0)
@@ -88,11 +90,18 @@ open class BpkButton(
   private val paddingHorizontalIconOnly = resources.getDimensionPixelSize(R.dimen.bpk_button_default_icon_only_padding)
 
   @Dimension
-  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+  private val paddingHorizontal = resources.getDimensionPixelSize(format.horizontalPadding)
 
   override fun setIcon(icon: Drawable?) {
-    super.setIcon(icon)
-    iconDrawable = icon
+    val iconSize = resources.getDimensionPixelSize(format.iconSize)
+    if (icon != null) {
+      val sizedIcon = sizedDrawable(icon, iconSize, iconSize)
+      super.setIcon(sizedIcon)
+      iconDrawable = sizedIcon
+    } else {
+      super.setIcon(null)
+      iconDrawable = null
+    }
   }
 
   private val progress by unsafeLazy {
@@ -153,7 +162,8 @@ open class BpkButton(
     this.loading = loading
     this.icon = icon
     this.iconPosition = iconPosition
-    this.minHeight = resources.getDimensionPixelSize(R.dimen.bpk_button_default_min_height)
+    this.minHeight = resources.getDimensionPixelSize(format.minHeight)
+    BpkText.getFont(context, format.textStyle).applyTo(this)
     applyStyle(style)
   }
 
@@ -233,7 +243,7 @@ private fun getButtonType(context: Context, attrs: AttributeSet?): BpkButton.Typ
   return BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
 }
 
-private fun getButtonSize(context: Context, attrs: AttributeSet?): BpkButtonSize {
+private fun getButtonSize(context: Context, attrs: AttributeSet?): BpkButtonFormat {
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
-  return BpkButtonSize.fromId(attr.getInt(R.styleable.BpkButton_buttonSize, 0))
+  return BpkButtonFormat.fromId(attr.getInt(R.styleable.BpkButton_buttonFormat, 0))
 }

@@ -80,8 +80,8 @@
       <enum name="primaryOnDark" value="4" />
       <enum name="primaryOnLight" value="5" />
     </attr>
-    <attr name="buttonSize" format="enum">
-      <enum name="default" value="0" />
+    <attr name="buttonFormat" format="enum">
+      <enum name="small" value="0" />
       <enum name="large" value="1" />
     </attr>
     <attr name="buttonIcon" format="reference" />
