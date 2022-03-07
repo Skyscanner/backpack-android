@@ -33,7 +33,6 @@ import net.skyscanner.backpack.button.internal.ICON_POSITION_END
 import net.skyscanner.backpack.button.internal.ICON_POSITION_ICON_ONLY
 import net.skyscanner.backpack.button.internal.ICON_POSITION_START
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.sizedDrawable
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
 
@@ -93,15 +92,8 @@ open class BpkButton(
   private val paddingHorizontal = resources.getDimensionPixelSize(format.horizontalPadding)
 
   override fun setIcon(icon: Drawable?) {
-    val iconSize = resources.getDimensionPixelSize(format.iconSize)
-    if (icon != null) {
-      val sizedIcon = sizedDrawable(icon, iconSize, iconSize)
-      super.setIcon(sizedIcon)
-      iconDrawable = sizedIcon
-    } else {
-      super.setIcon(null)
-      iconDrawable = null
-    }
+    super.setIcon(icon)
+    iconDrawable = icon
   }
 
   private val progress by unsafeLazy {
@@ -163,6 +155,7 @@ open class BpkButton(
     this.icon = icon
     this.iconPosition = iconPosition
     this.minHeight = resources.getDimensionPixelSize(format.minHeight)
+    this.iconSize = resources.getDimensionPixelSize(format.iconSize)
     BpkText.getFont(context, format.textStyle).applyTo(this)
     applyStyle(style)
   }
