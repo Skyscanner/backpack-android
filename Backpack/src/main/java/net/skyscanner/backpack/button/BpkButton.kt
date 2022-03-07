@@ -35,6 +35,7 @@ import net.skyscanner.backpack.button.internal.ICON_POSITION_START
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
+import kotlin.math.roundToInt
 
 open class BpkButton(
   context: Context,
@@ -69,13 +70,15 @@ open class BpkButton(
       var paddingHorizontal = paddingHorizontal
 
       if (value == ICON_ONLY) {
-        paddingHorizontal = paddingHorizontalIconOnly
+        val requiredWidth = resources.getDimension(format.minHeight)
+        val iconSize = resources.getDimension(format.iconSize)
+        paddingHorizontal = (requiredWidth - iconSize) / 2
         iconPadding = 0
       } else {
         iconPadding = resources.getDimensionPixelSize(format.horizontalSpacing)
       }
 
-      setPaddingRelative(paddingHorizontal, 0, paddingHorizontal, 0)
+      setPaddingRelative(paddingHorizontal.roundToInt(), 0, paddingHorizontal.roundToInt(), 0)
       applyStyle(type.createStyle(context))
     }
 
@@ -86,10 +89,7 @@ open class BpkButton(
     }
 
   @Dimension
-  private val paddingHorizontalIconOnly = resources.getDimensionPixelSize(R.dimen.bpk_button_default_icon_only_padding)
-
-  @Dimension
-  private val paddingHorizontal = resources.getDimensionPixelSize(format.horizontalPadding)
+  private val paddingHorizontal = resources.getDimension(format.horizontalPadding)
 
   override fun setIcon(icon: Drawable?) {
     super.setIcon(icon)
