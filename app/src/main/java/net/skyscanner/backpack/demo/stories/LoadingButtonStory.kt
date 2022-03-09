@@ -21,25 +21,30 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.button.BpkButton
-import net.skyscanner.backpack.demo.R
+import kotlin.time.Duration.Companion.seconds
 
 class LoadingButtonStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val parent = view.findViewById<ViewGroup>(R.id.story_container)
+    makeButtonsLoadeable(view as ViewGroup)
+  }
+
+  private fun makeButtonsLoadeable(parent: ViewGroup) {
     for (i in 0 until parent.childCount) {
       val child = parent.getChildAt(i)
-      if (child is BpkButton) {
-        child.setOnClickListener {
-          child.loading = true
-          child.postDelayed(
-            {
-              child.loading = false
-            },
-            2500
-          )
+      when (child) {
+        is ViewGroup -> makeButtonsLoadeable(child)
+        is BpkButton -> child.setOnClickListener {
+          viewLifecycleOwner.lifecycleScope.launch {
+            child.loading = true
+            delay(2.5.seconds)
+            child.loading = false
+          }
         }
       }
     }
