@@ -38,13 +38,13 @@ import org.junit.runners.Parameterized
 class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
 
   private val type: BpkButton.Type = flavour.first
-  private val size: BpkButtonSize = flavour.second
+  private val size: BpkButton.Size = flavour.second
 
   private val icon
     get() = testContext.getDrawable(
       when (size) {
-        BpkButtonSize.Standard -> R.drawable.bpk_long_arrow_right_sm
-        BpkButtonSize.Large -> R.drawable.bpk_long_arrow_right
+        BpkButton.Size.Standard -> R.drawable.bpk_long_arrow_right_sm
+        BpkButton.Size.Large -> R.drawable.bpk_long_arrow_right
       }
     )
 
@@ -68,7 +68,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   fun disabled() = capture {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     // disabled/loading colors are not theme customisable
-    Assume.assumeTrue(size == BpkButtonSize.Standard) // colors will be the same on large size
+    Assume.assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
     Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all disabled buttons
 
     BpkButton(testContext, type, size).apply {
@@ -151,9 +151,9 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
     fun flavours(): List<Flavor> = ButtonTypes.flatMap { type ->
-      BpkButtonSize.values().map { size -> Flavor(type, size) }
+      BpkButton.Size.values().map { size -> Flavor(type, size) }
     }
   }
 }
 
-private typealias Flavor = Pair<BpkButton.Type, BpkButtonSize>
+private typealias Flavor = Pair<BpkButton.Type, BpkButton.Size>

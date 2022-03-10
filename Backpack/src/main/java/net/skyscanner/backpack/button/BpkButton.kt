@@ -32,6 +32,12 @@ import net.skyscanner.backpack.button.internal.ButtonStyles
 import net.skyscanner.backpack.button.internal.ICON_POSITION_END
 import net.skyscanner.backpack.button.internal.ICON_POSITION_ICON_ONLY
 import net.skyscanner.backpack.button.internal.ICON_POSITION_START
+import net.skyscanner.backpack.button.internal.fromAttrs
+import net.skyscanner.backpack.button.internal.horizontalPadding
+import net.skyscanner.backpack.button.internal.horizontalSpacing
+import net.skyscanner.backpack.button.internal.iconSize
+import net.skyscanner.backpack.button.internal.minHeight
+import net.skyscanner.backpack.button.internal.textStyle
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
@@ -42,29 +48,29 @@ open class BpkButton(
   attrs: AttributeSet?,
   defStyleAttr: Int,
   type: Type,
-  private val size: BpkButtonSize = BpkButtonSize.Standard,
+  private val size: Size = Size.Standard,
 ) : BpkButtonBase(context, attrs, defStyleAttr) {
 
   constructor(
     context: Context,
-  ) : this(context, null, 0, Type.Primary, BpkButtonSize.Standard)
+  ) : this(context, null, 0, Type.Primary, Size.Standard)
 
   constructor(
     context: Context,
     type: Type,
-    size: BpkButtonSize = BpkButtonSize.Standard,
+    size: Size = Size.Standard,
   ) : this(context, null, 0, type, size)
 
   constructor(
     context: Context,
     attrs: AttributeSet?,
-  ) : this(context, attrs, 0, getButtonType(context, attrs), getButtonSize(context, attrs))
+  ) : this(context, attrs, 0, getButtonType(context, attrs), Size.fromAttrs(context, attrs))
 
   constructor(
     context: Context,
     attrs: AttributeSet?,
     defStyleAttr: Int,
-  ) : this(context, attrs, defStyleAttr, Type.Primary, BpkButtonSize.Standard)
+  ) : this(context, attrs, defStyleAttr, Type.Primary, Size.Standard)
 
   companion object {
     const val START = ICON_POSITION_START
@@ -242,14 +248,17 @@ open class BpkButton(
       }
     }
   }
+
+  enum class Size {
+    Standard,
+    Large,
+    ;
+
+    internal companion object
+  }
 }
 
 private fun getButtonType(context: Context, attrs: AttributeSet?): BpkButton.Type {
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
   return BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
-}
-
-private fun getButtonSize(context: Context, attrs: AttributeSet?): BpkButtonSize {
-  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
-  return BpkButtonSize.fromId(attr.getInt(R.styleable.BpkButton_bpkButtonSize, 0))
 }
