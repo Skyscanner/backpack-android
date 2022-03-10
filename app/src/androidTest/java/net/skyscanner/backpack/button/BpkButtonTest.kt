@@ -18,17 +18,35 @@
 
 package net.skyscanner.backpack.button
 
-import android.widget.FrameLayout
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import android.view.View
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.viewinterop.AndroidView
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.demo.R
+import org.junit.Assume
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 
-@RunWith(AndroidJUnit4::class)
-class BpkButtonTest : BpkSnapshotTest() {
+@RunWith(Parameterized::class)
+class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
+
+  private val type: BpkButton.Type = flavour.first
+  private val format: BpkButtonFormat = flavour.second
+
+  private val icon
+    get() = testContext.getDrawable(
+      when (format) {
+        BpkButtonFormat.Small -> R.drawable.bpk_long_arrow_right_sm
+        BpkButtonFormat.Large -> R.drawable.bpk_long_arrow_right
+      }
+    )
 
   @Before
   fun setup() {
@@ -36,207 +54,106 @@ class BpkButtonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestButtonBasicPrimary() {
-    val button = BpkButton(testContext, BpkButton.Type.Primary)
-    button.text = "Message"
-    snap(wrap(button))
+  fun text() = capture {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed) // no need to test text on Rtl
+    // we want to see colors of all types
+    // different sizes have different text style
+
+    BpkButton(testContext, type, format).apply {
+      text = "Button"
+    }
   }
 
   @Test
-  fun screenshotTestButtonBasicPrimaryWithIcon() {
-    val button = BpkButton(testContext, BpkButton.Type.Primary)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.START
-    button.text = "Message"
-    snap(wrap(button))
+  fun disabled() = capture {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
+    // disabled/loading colors are not theme customisable
+    Assume.assumeTrue(format == BpkButtonFormat.Small) // colors will be the same on large size
+    Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all disabled buttons
+
+    BpkButton(testContext, type, format).apply {
+      text = "Button"
+      isEnabled = false
+    }
   }
 
   @Test
-  fun screenshotTestButtonBasicPrimaryOnlyIcon() {
-    val button = BpkButton(testContext, BpkButton.Type.Primary)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.ICON_ONLY
-    snap(wrap(button))
+  fun loading() = capture {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
+    // disabled/loading colors are not theme customisable
+    Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
+    // we need to run it on large size as well and the progress size will be different
+
+    BpkButton(testContext, type, format).apply {
+      text = "Button"
+      loading = true
+    }
   }
 
   @Test
-  fun screenshotTestButtonBasicSecondary() {
-    val button = BpkButton(testContext, BpkButton.Type.Secondary)
-    button.text = "Message"
-    snap(wrap(button))
+  fun iconAtStart() = capture {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
+    Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
+    // icon is bigger on large size, so we need to test this
+
+    BpkButton(testContext, type, format).apply {
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.START
+    }
   }
 
   @Test
-  fun screenshotTestButtonBasicSecondaryWithIcon() {
-    val button = BpkButton(testContext, BpkButton.Type.Secondary)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.END
-    button.text = "Message"
-    snap(wrap(button))
+  fun iconAtEnd() = capture {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
+    Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
+    // icon is bigger on large size, so we need to test this
+
+    BpkButton(testContext, type, format).apply {
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.END
+    }
   }
 
   @Test
-  fun screenshotTestButtonBasicSecondaryOnlyIcon() {
-    val button = BpkButton(testContext, BpkButton.Type.Secondary)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.ICON_ONLY
-    snap(wrap(button))
+  fun iconOnly() = capture {
+    assumeVariant(BpkTestVariant.Default) // since its only icon, RTL doesn't matter
+    Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
+    // icon is bigger on large size, so we need to test this
+
+    BpkButton(testContext, type, format).apply {
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.ICON_ONLY
+    }
   }
 
-  @Test
-  fun screenshotTestButtonBasicFeatured() {
-    val button = BpkButton(testContext, BpkButton.Type.Featured)
-    button.text = "Message"
-    snap(wrap(button))
+  private fun capture(content: () -> View) {
+    composed(
+      size = IntSize(160, 64),
+      tags = listOf(type, format),
+    ) {
+      Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        AndroidView(factory = { content() })
+      }
+    }
   }
 
-  @Test
-  fun screenshotTestButtonBasicFeaturedWithIcon() {
-    val button = BpkButton(testContext, BpkButton.Type.Featured)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.START
-    button.text = "Message"
-    snap(wrap(button))
-  }
+  companion object {
 
-  @Test
-  fun screenshotTestButtonBasicFeaturedOnlyIcon() {
-    val button = BpkButton(testContext, BpkButton.Type.Featured)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.ICON_ONLY
-    snap(wrap(button))
-  }
+    private val ButtonTypes = listOf(
+      BpkButton.Type.Primary,
+      BpkButton.Type.Secondary,
+      BpkButton.Type.PrimaryOnDark,
+      BpkButton.Type.PrimaryOnLight,
+      BpkButton.Type.Featured,
+      BpkButton.Type.Destructive,
+    )
 
-  @Test
-  fun screenshotTestButtonBasicDestructive() {
-    val button = BpkButton(testContext, BpkButton.Type.Destructive)
-    button.text = "Message"
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicDestructiveWithIcon() {
-    val button = BpkButton(testContext, BpkButton.Type.Destructive)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.START
-    button.text = "Message"
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicDestructiveOnlyIcon() {
-    val button = BpkButton(testContext, BpkButton.Type.Destructive)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.ICON_ONLY
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicPrimaryOnDark() {
-    setBackground(R.color.bpkPrimary)
-    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnDark)
-    button.text = "Message"
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicPrimaryOnDarkWithIcon() {
-    setBackground(R.color.bpkPrimary)
-    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnDark)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.START
-    button.text = "Message"
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicPrimaryOnDarkOnlyIcon() {
-    setBackground(R.color.bpkPrimary)
-    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnDark)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.ICON_ONLY
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicPrimaryOnLight() {
-    setBackground(R.color.bpkPrimary)
-    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnLight)
-    button.text = "Message"
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicPrimaryOnLightWithIcon() {
-    setBackground(R.color.bpkPrimary)
-    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnLight)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.START
-    button.text = "Message"
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonBasicPrimaryOnLightOnlyIcon() {
-    setBackground(R.color.bpkPrimary)
-    val button = BpkButton(testContext, BpkButton.Type.PrimaryOnLight)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.ICON_ONLY
-    snap(wrap(button))
-  }
-
-  @Test
-  fun screenshotTestButtonLargeWithIcon() {
-    val button = BpkButton(testContext, BpkButton.Type.Primary)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.START
-    button.text = "Message"
-    snap(wrap(button, 500))
-  }
-
-  @Test
-  fun screenshotTestButtonLargeWithIconTrailing() {
-    val button = BpkButton(testContext, BpkButton.Type.Primary)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.END
-    button.text = "Message"
-    snap(wrap(button, 500))
-  }
-
-  @Test
-  fun screenshotTestButtonTypeChange() {
-    val button = BpkButton(testContext, BpkButton.Type.Primary)
-    button.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_tick)
-    button.iconPosition = BpkButton.END
-    button.text = "Message"
-    button.type = BpkButton.Type.Secondary
-    snap(wrap(button, 500))
-  }
-
-  @Test
-  fun screenshotTestButton_TextIncreasing() {
-    val button = BpkButton(testContext, BpkButton.Type.Primary)
-    button.text = "Message"
-    button.text = "Long long long long long long long long long long long text"
-    snap(wrap(button, 500))
-  }
-
-  @Test
-  fun screenshotTestButton_TextDecreasing() {
-    val button = BpkButton(testContext, BpkButton.Type.Primary)
-    button.text = "Long long long long long long long long long long long text"
-    button.text = "Message"
-    snap(wrap(button, 500))
-  }
-
-  private fun wrap(
-    button: BpkButton,
-    width: Int = FrameLayout.LayoutParams.WRAP_CONTENT,
-    height: Int = FrameLayout.LayoutParams.WRAP_CONTENT
-  ): FrameLayout {
-    return FrameLayout(testContext).apply {
-      button.layoutParams = FrameLayout.LayoutParams(width, height)
-      addView(button)
+    @JvmStatic
+    @Parameterized.Parameters(name = "{0} Screenshot")
+    fun flavours(): List<Flavor> = ButtonTypes.flatMap { type ->
+      BpkButtonFormat.values().map { size -> Flavor(type, size) }
     }
   }
 }
+
+private typealias Flavor = Pair<BpkButton.Type, BpkButtonFormat>

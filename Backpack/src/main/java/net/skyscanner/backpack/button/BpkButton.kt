@@ -45,13 +45,26 @@ open class BpkButton(
   private val format: BpkButtonFormat = BpkButtonFormat.Small,
 ) : BpkButtonBase(context, attrs, defStyleAttr) {
 
-  constructor(context: Context) : this(context, null, 0, Type.Primary, BpkButtonFormat.Small)
+  constructor(
+    context: Context,
+  ) : this(context, null, 0, Type.Primary, BpkButtonFormat.Small)
 
-  constructor(context: Context, type: Type, format: BpkButtonFormat = BpkButtonFormat.Small) : this(context, null, 0, type, format)
+  constructor(
+    context: Context,
+    type: Type,
+    format: BpkButtonFormat = BpkButtonFormat.Small,
+  ) : this(context, null, 0, type, format)
 
-  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0, getButtonType(context, attrs), getButtonSize(context, attrs))
+  constructor(
+    context: Context,
+    attrs: AttributeSet?,
+  ) : this(context, attrs, 0, getButtonType(context, attrs), getButtonSize(context, attrs))
 
-  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary, BpkButtonFormat.Small)
+  constructor(
+    context: Context,
+    attrs: AttributeSet?,
+    defStyleAttr: Int,
+  ) : this(context, attrs, defStyleAttr, Type.Primary, BpkButtonFormat.Small)
 
   companion object {
     const val START = ICON_POSITION_START
