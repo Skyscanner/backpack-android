@@ -148,7 +148,7 @@ object ComponentRegistry {
         TAB_TITLE_VIEW story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Small" story NodeData { LoadingButtonStory of R.layout.fragment_button_small },
+            "Standard" story NodeData { LoadingButtonStory of R.layout.fragment_button_standard },
             "Large" story NodeData { LoadingButtonStory of R.layout.fragment_button_large },
             "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
             "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable },

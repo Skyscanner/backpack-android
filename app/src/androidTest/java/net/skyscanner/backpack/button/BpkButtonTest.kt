@@ -38,13 +38,13 @@ import org.junit.runners.Parameterized
 class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
 
   private val type: BpkButton.Type = flavour.first
-  private val format: BpkButtonFormat = flavour.second
+  private val size: BpkButtonSize = flavour.second
 
   private val icon
     get() = testContext.getDrawable(
-      when (format) {
-        BpkButtonFormat.Small -> R.drawable.bpk_long_arrow_right_sm
-        BpkButtonFormat.Large -> R.drawable.bpk_long_arrow_right
+      when (size) {
+        BpkButtonSize.Standard -> R.drawable.bpk_long_arrow_right_sm
+        BpkButtonSize.Large -> R.drawable.bpk_long_arrow_right
       }
     )
 
@@ -59,7 +59,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // we want to see colors of all types
     // different sizes have different text style
 
-    BpkButton(testContext, type, format).apply {
+    BpkButton(testContext, type, size).apply {
       text = "Button"
     }
   }
@@ -68,10 +68,10 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   fun disabled() = capture {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     // disabled/loading colors are not theme customisable
-    Assume.assumeTrue(format == BpkButtonFormat.Small) // colors will be the same on large size
+    Assume.assumeTrue(size == BpkButtonSize.Standard) // colors will be the same on large size
     Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all disabled buttons
 
-    BpkButton(testContext, type, format).apply {
+    BpkButton(testContext, type, size).apply {
       text = "Button"
       isEnabled = false
     }
@@ -84,7 +84,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
 
-    BpkButton(testContext, type, format).apply {
+    BpkButton(testContext, type, size).apply {
       text = "Button"
       loading = true
     }
@@ -96,7 +96,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
-    BpkButton(testContext, type, format).apply {
+    BpkButton(testContext, type, size).apply {
       icon = this@BpkButtonTest.icon
       iconPosition = BpkButton.START
     }
@@ -108,7 +108,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
-    BpkButton(testContext, type, format).apply {
+    BpkButton(testContext, type, size).apply {
       icon = this@BpkButtonTest.icon
       iconPosition = BpkButton.END
     }
@@ -120,7 +120,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
-    BpkButton(testContext, type, format).apply {
+    BpkButton(testContext, type, size).apply {
       icon = this@BpkButtonTest.icon
       iconPosition = BpkButton.ICON_ONLY
     }
@@ -129,7 +129,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   private fun capture(content: () -> View) {
     composed(
       size = IntSize(160, 64),
-      tags = listOf(type, format),
+      tags = listOf(type, size),
     ) {
       Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         AndroidView(factory = { content() })
@@ -151,9 +151,9 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
     fun flavours(): List<Flavor> = ButtonTypes.flatMap { type ->
-      BpkButtonFormat.values().map { size -> Flavor(type, size) }
+      BpkButtonSize.values().map { size -> Flavor(type, size) }
     }
   }
 }
 
-private typealias Flavor = Pair<BpkButton.Type, BpkButtonFormat>
+private typealias Flavor = Pair<BpkButton.Type, BpkButtonSize>

@@ -42,18 +42,18 @@ open class BpkButton(
   attrs: AttributeSet?,
   defStyleAttr: Int,
   type: Type,
-  private val format: BpkButtonFormat = BpkButtonFormat.Small,
+  private val size: BpkButtonSize = BpkButtonSize.Standard,
 ) : BpkButtonBase(context, attrs, defStyleAttr) {
 
   constructor(
     context: Context,
-  ) : this(context, null, 0, Type.Primary, BpkButtonFormat.Small)
+  ) : this(context, null, 0, Type.Primary, BpkButtonSize.Standard)
 
   constructor(
     context: Context,
     type: Type,
-    format: BpkButtonFormat = BpkButtonFormat.Small,
-  ) : this(context, null, 0, type, format)
+    size: BpkButtonSize = BpkButtonSize.Standard,
+  ) : this(context, null, 0, type, size)
 
   constructor(
     context: Context,
@@ -64,7 +64,7 @@ open class BpkButton(
     context: Context,
     attrs: AttributeSet?,
     defStyleAttr: Int,
-  ) : this(context, attrs, defStyleAttr, Type.Primary, BpkButtonFormat.Small)
+  ) : this(context, attrs, defStyleAttr, Type.Primary, BpkButtonSize.Standard)
 
   companion object {
     const val START = ICON_POSITION_START
@@ -83,12 +83,12 @@ open class BpkButton(
       var paddingHorizontal = paddingHorizontal
 
       if (value == ICON_ONLY) {
-        val requiredWidth = resources.getDimension(format.minHeight)
-        val iconSize = resources.getDimension(format.iconSize)
+        val requiredWidth = resources.getDimension(size.minHeight)
+        val iconSize = resources.getDimension(size.iconSize)
         paddingHorizontal = (requiredWidth - iconSize) / 2
         iconPadding = 0
       } else {
-        iconPadding = resources.getDimensionPixelSize(format.horizontalSpacing)
+        iconPadding = resources.getDimensionPixelSize(size.horizontalSpacing)
       }
 
       setPaddingRelative(paddingHorizontal.roundToInt(), 0, paddingHorizontal.roundToInt(), 0)
@@ -102,7 +102,7 @@ open class BpkButton(
     }
 
   @Dimension
-  private val paddingHorizontal = resources.getDimension(format.horizontalPadding)
+  private val paddingHorizontal = resources.getDimension(size.horizontalPadding)
 
   override fun setIcon(icon: Drawable?) {
     super.setIcon(icon)
@@ -167,9 +167,9 @@ open class BpkButton(
     this.loading = loading
     this.icon = icon
     this.iconPosition = iconPosition
-    this.minHeight = resources.getDimensionPixelSize(format.minHeight)
-    this.iconSize = resources.getDimensionPixelSize(format.iconSize)
-    BpkText.getFont(context, format.textStyle).applyTo(this)
+    this.minHeight = resources.getDimensionPixelSize(size.minHeight)
+    this.iconSize = resources.getDimensionPixelSize(size.iconSize)
+    BpkText.getFont(context, size.textStyle).applyTo(this)
     applyStyle(style)
   }
 
@@ -249,7 +249,7 @@ private fun getButtonType(context: Context, attrs: AttributeSet?): BpkButton.Typ
   return BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
 }
 
-private fun getButtonSize(context: Context, attrs: AttributeSet?): BpkButtonFormat {
+private fun getButtonSize(context: Context, attrs: AttributeSet?): BpkButtonSize {
   val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
-  return BpkButtonFormat.fromId(attr.getInt(R.styleable.BpkButton_buttonFormat, 0))
+  return BpkButtonSize.fromId(attr.getInt(R.styleable.BpkButton_bpkButtonSize, 0))
 }
