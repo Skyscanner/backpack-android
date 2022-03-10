@@ -19,22 +19,54 @@
 package net.skyscanner.backpack.button.internal
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
+import com.google.android.material.button.MaterialButton
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.text.BpkText
 
-// mainly exists here for compatibility reasons
+internal const val ICON_POSITION_START = 0
+internal const val ICON_POSITION_END = 1
+internal const val ICON_POSITION_ICON_ONLY = 2
+
 abstract class BpkButtonBase internal constructor(
   context: Context,
   attrs: AttributeSet?,
-  defStyleAttr: Int
-) : BpkButtonWithIcon(context, attrs, defStyleAttr) {
+  defStyleAttr: Int,
+) : MaterialButton(context, attrs, defStyleAttr) {
 
-  private val font = BpkText.getFont(this.context, BpkText.TextStyle.Label2)
+  internal var iconDrawablePosition: Int = ICON_POSITION_END
+    set(value) {
+      field = value
+      iconGravity = when (value) {
+        ICON_POSITION_START -> ICON_GRAVITY_TEXT_START
+        else -> ICON_GRAVITY_TEXT_END
+      }
+      if (value == ICON_POSITION_ICON_ONLY) {
+        text = ""
+      }
+    }
 
   abstract var iconPosition: Int
+
+  override fun setText(text: CharSequence, type: BufferType) {
+    if (iconDrawablePosition == ICON_POSITION_ICON_ONLY) {
+      super.setText("", type)
+    } else {
+      super.setText(text, type)
+    }
+  }
+
+  override fun setTextColor(color: Int) {
+    super.setTextColor(color)
+    iconTint = ColorStateList.valueOf(color)
+  }
+
+  override fun setTextColor(colors: ColorStateList) {
+    super.setTextColor(colors)
+    iconTint = colors
+  }
 
   init {
     maxLines = 1
@@ -43,6 +75,5 @@ abstract class BpkButtonBase internal constructor(
     isClickable = isEnabled
     iconSize = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
     backgroundTintList = null
-    font.applyTo(this)
   }
 }

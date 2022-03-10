@@ -28,6 +28,7 @@ import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ButtonStyles
 import net.skyscanner.backpack.button.internal.ICON_POSITION_END
 import net.skyscanner.backpack.button.internal.ICON_POSITION_START
+import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
@@ -93,5 +94,6 @@ open class BpkButtonLink @JvmOverloads constructor(
       (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
 
     setPadding(0, paddingVertical, 0, paddingVertical)
+    BpkText.getFont(this.context, BpkText.TextStyle.Label2).applyTo(this)
   }
 }
