@@ -28,11 +28,12 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ButtonStyle
-import net.skyscanner.backpack.button.internal.ButtonStyles
 import net.skyscanner.backpack.button.internal.ICON_POSITION_END
 import net.skyscanner.backpack.button.internal.ICON_POSITION_ICON_ONLY
 import net.skyscanner.backpack.button.internal.ICON_POSITION_START
+import net.skyscanner.backpack.button.internal.createStyle
 import net.skyscanner.backpack.button.internal.fromAttrs
+import net.skyscanner.backpack.button.internal.fromId
 import net.skyscanner.backpack.button.internal.horizontalPadding
 import net.skyscanner.backpack.button.internal.horizontalSpacing
 import net.skyscanner.backpack.button.internal.iconSize
@@ -64,7 +65,7 @@ open class BpkButton(
   constructor(
     context: Context,
     attrs: AttributeSet?,
-  ) : this(context, attrs, 0, getButtonType(context, attrs), Size.fromAttrs(context, attrs))
+  ) : this(context, attrs, 0, Type.fromAttrs(context, attrs), Size.fromAttrs(context, attrs))
 
   constructor(
     context: Context,
@@ -210,43 +211,16 @@ open class BpkButton(
     iconTint = textColors
   }
 
-  enum class Type(
-    internal val id: Int,
-    internal val createStyle: (Context) -> ButtonStyle,
-  ) {
-    Primary(
-      id = 0,
-      createStyle = ButtonStyles.Primary
-    ),
-    Secondary(
-      id = 1,
-      createStyle = ButtonStyles.Secondary
-    ),
-    Featured(
-      id = 2,
-      createStyle = ButtonStyles.Featured
-    ),
-    Destructive(
-      id = 3,
-      createStyle = ButtonStyles.Destructive
-    ),
-    PrimaryOnDark(
-      id = 4,
-      createStyle = ButtonStyles.PrimaryOnDark,
-    ),
-    PrimaryOnLight(
-      id = 5,
-      createStyle = ButtonStyles.PrimaryOnLight,
-    );
+  enum class Type {
+    Primary,
+    Secondary,
+    Featured,
+    Destructive,
+    PrimaryOnDark,
+    PrimaryOnLight,
+    ;
 
-    internal companion object {
-      internal fun fromId(id: Int): Type {
-        for (f in values()) {
-          if (f.id == id) return f
-        }
-        throw IllegalArgumentException()
-      }
-    }
+    internal companion object
   }
 
   enum class Size {
@@ -256,9 +230,4 @@ open class BpkButton(
 
     internal companion object
   }
-}
-
-private fun getButtonType(context: Context, attrs: AttributeSet?): BpkButton.Type {
-  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
-  return BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
 }
