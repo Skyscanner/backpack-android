@@ -28,27 +28,50 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ButtonStyle
-import net.skyscanner.backpack.button.internal.ButtonStyles
 import net.skyscanner.backpack.button.internal.ICON_POSITION_END
 import net.skyscanner.backpack.button.internal.ICON_POSITION_ICON_ONLY
 import net.skyscanner.backpack.button.internal.ICON_POSITION_START
+import net.skyscanner.backpack.button.internal.createStyle
+import net.skyscanner.backpack.button.internal.fromAttrs
+import net.skyscanner.backpack.button.internal.fromId
+import net.skyscanner.backpack.button.internal.horizontalPadding
+import net.skyscanner.backpack.button.internal.horizontalSpacing
+import net.skyscanner.backpack.button.internal.iconSize
+import net.skyscanner.backpack.button.internal.minHeight
+import net.skyscanner.backpack.button.internal.textStyle
+import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.unsafeLazy
 import net.skyscanner.backpack.util.use
+import kotlin.math.roundToInt
 
 open class BpkButton(
   context: Context,
   attrs: AttributeSet?,
   defStyleAttr: Int,
   type: Type,
+  private val size: Size = Size.Standard,
 ) : BpkButtonBase(context, attrs, defStyleAttr) {
 
-  constructor(context: Context) : this(context, null, 0, Type.Primary)
+  constructor(
+    context: Context,
+  ) : this(context, null, 0, Type.Primary, Size.Standard)
 
-  constructor(context: Context, type: Type) : this(context, null, 0, type)
+  constructor(
+    context: Context,
+    type: Type,
+    size: Size = Size.Standard,
+  ) : this(context, null, 0, type, size)
 
-  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0, getButtonType(context, attrs))
+  constructor(
+    context: Context,
+    attrs: AttributeSet?,
+  ) : this(context, attrs, 0, Type.fromAttrs(context, attrs), Size.fromAttrs(context, attrs))
 
-  constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : this(context, attrs, defStyleAttr, Type.Primary)
+  constructor(
+    context: Context,
+    attrs: AttributeSet?,
+    defStyleAttr: Int,
+  ) : this(context, attrs, defStyleAttr, Type.Primary, Size.Standard)
 
   companion object {
     const val START = ICON_POSITION_START
@@ -67,13 +90,15 @@ open class BpkButton(
       var paddingHorizontal = paddingHorizontal
 
       if (value == ICON_ONLY) {
-        paddingHorizontal = paddingHorizontalIconOnly
+        val requiredWidth = resources.getDimension(size.minHeight)
+        val iconSize = resources.getDimension(size.iconSize)
+        paddingHorizontal = (requiredWidth - iconSize) / 2
         iconPadding = 0
       } else {
-        iconPadding = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+        iconPadding = resources.getDimensionPixelSize(size.horizontalSpacing)
       }
 
-      setPaddingRelative(paddingHorizontal, 0, paddingHorizontal, 0)
+      setPaddingRelative(paddingHorizontal.roundToInt(), 0, paddingHorizontal.roundToInt(), 0)
       applyStyle(type.createStyle(context))
     }
 
@@ -84,10 +109,7 @@ open class BpkButton(
     }
 
   @Dimension
-  private val paddingHorizontalIconOnly = resources.getDimensionPixelSize(R.dimen.bpk_button_default_icon_only_padding)
-
-  @Dimension
-  private val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+  private val paddingHorizontal = resources.getDimension(size.horizontalPadding)
 
   override fun setIcon(icon: Drawable?) {
     super.setIcon(icon)
@@ -152,7 +174,9 @@ open class BpkButton(
     this.loading = loading
     this.icon = icon
     this.iconPosition = iconPosition
-    this.minHeight = resources.getDimensionPixelSize(R.dimen.bpk_button_default_min_height)
+    this.minHeight = resources.getDimensionPixelSize(size.minHeight)
+    this.iconSize = resources.getDimensionPixelSize(size.iconSize)
+    BpkText.getFont(context, size.textStyle).applyTo(this)
     applyStyle(style)
   }
 
@@ -187,47 +211,23 @@ open class BpkButton(
     iconTint = textColors
   }
 
-  enum class Type(
-    internal val id: Int,
-    internal val createStyle: (Context) -> ButtonStyle,
-  ) {
-    Primary(
-      id = 0,
-      createStyle = ButtonStyles.Primary
-    ),
-    Secondary(
-      id = 1,
-      createStyle = ButtonStyles.Secondary
-    ),
-    Featured(
-      id = 2,
-      createStyle = ButtonStyles.Featured
-    ),
-    Destructive(
-      id = 3,
-      createStyle = ButtonStyles.Destructive
-    ),
-    PrimaryOnDark(
-      id = 4,
-      createStyle = ButtonStyles.PrimaryOnDark,
-    ),
-    PrimaryOnLight(
-      id = 5,
-      createStyle = ButtonStyles.PrimaryOnLight,
-    );
+  enum class Type {
+    Primary,
+    Secondary,
+    Featured,
+    Destructive,
+    PrimaryOnDark,
+    PrimaryOnLight,
+    ;
 
-    internal companion object {
-      internal fun fromId(id: Int): Type {
-        for (f in values()) {
-          if (f.id == id) return f
-        }
-        throw IllegalArgumentException()
-      }
-    }
+    internal companion object
   }
-}
 
-private fun getButtonType(context: Context, attrs: AttributeSet?): BpkButton.Type {
-  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
-  return BpkButton.Type.fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+  enum class Size {
+    Standard,
+    Large,
+    ;
+
+    internal companion object
+  }
 }

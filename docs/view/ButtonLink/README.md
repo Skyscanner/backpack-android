@@ -8,7 +8,7 @@ Backpack Android is available through [Maven Central](https://search.maven.org/a
 
 The `ButtonLink` component can be used in both XML and Kotlin/Java
 
-Example of a primary button in XML
+Example of a button link in XML
 
 ```xml
 <net.skyscanner.backpack.button.BpkButtonLink
@@ -20,12 +20,39 @@ Example of a primary button in XML
   app:uppercase="true"/>
 ```
 
-Example of a primary button in Kotlin
+Example of a button link in Kotlin
 
 ```Kotlin
 import net.skyscanner.backpack.button.BpkButton
 
 BpkButtonLink(context).apply {
+   icon = AppCompatResources.getDrawable(context, R.drawable.bpk_weather)
+   iconPosition = BpkButton.END
+   text = "Button"
+}
+```
+
+### Large
+
+Example of a large button link in XML
+
+```xml
+<net.skyscanner.backpack.button.BpkButtonLink
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:text="Button"
+  app:buttonIconPosition="end"
+  app:buttonIcon="@drawable/bpk_long_arrow_right"
+  app:bpkButtonSize="large"
+  app:uppercase="true"/>
+```
+
+Example of a large button link in Kotlin
+
+```Kotlin
+import net.skyscanner.backpack.button.BpkButton
+
+BpkButtonLink(context, size = BpkButton.Size.Large).apply {
    icon = AppCompatResources.getDrawable(context, R.drawable.bpk_weather)
    iconPosition = BpkButton.END
    text = "Button"

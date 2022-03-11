@@ -148,15 +148,8 @@ object ComponentRegistry {
         TAB_TITLE_VIEW story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Primary" story NodeData { Story of R.layout.fragment_button_primary },
-            "Secondary" story NodeData { Story of R.layout.fragment_button_secondary },
-            "Destructive" story NodeData { Story of R.layout.fragment_button_destructive },
-            "Featured" story NodeData { Story of R.layout.fragment_button_featured },
-            "Primary on dark" story NodeData { Story of R.layout.fragment_button_primary_on_dark },
-            "Primary on light" story NodeData { Story of R.layout.fragment_button_primary_on_light },
-            "Icon alignment" story NodeData { Story of R.layout.fragment_button_icon_alignment },
-            "Icon alignment with RTL" story NodeData { Story of R.layout.fragment_button_icon_alignment with Direction.RTL },
-            "Loading" story NodeData { LoadingButtonStory of R.layout.fragment_button_primary },
+            "Standard" story NodeData { LoadingButtonStory of R.layout.fragment_button_standard },
+            "Large" story NodeData { LoadingButtonStory of R.layout.fragment_button_large },
             "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
             "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable },
           )

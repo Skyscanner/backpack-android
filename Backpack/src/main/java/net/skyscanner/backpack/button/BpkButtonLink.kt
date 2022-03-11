@@ -28,18 +28,44 @@ import net.skyscanner.backpack.button.internal.BpkButtonBase
 import net.skyscanner.backpack.button.internal.ButtonStyles
 import net.skyscanner.backpack.button.internal.ICON_POSITION_END
 import net.skyscanner.backpack.button.internal.ICON_POSITION_START
+import net.skyscanner.backpack.button.internal.fromAttrs
+import net.skyscanner.backpack.button.internal.iconSize
+import net.skyscanner.backpack.button.internal.minHeight
+import net.skyscanner.backpack.button.internal.textStyle
+import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
-open class BpkButtonLink @JvmOverloads constructor(
+open class BpkButtonLink(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
+  size: BpkButton.Size = BpkButton.Size.Standard,
 ) : BpkButtonBase(
   createContextThemeWrapper(context, attrs, R.attr.bpkButtonLinkStyle),
   attrs,
   defStyleAttr
 ) {
+
+  constructor(
+    context: Context,
+  ) : this(context, null, 0, BpkButton.Size.Standard)
+
+  constructor(
+    context: Context,
+    size: BpkButton.Size = BpkButton.Size.Standard,
+  ) : this(context, null, 0, size)
+
+  constructor(
+    context: Context,
+    attrs: AttributeSet?,
+  ) : this(context, attrs, 0, BpkButton.Size.fromAttrs(context, attrs))
+
+  constructor(
+    context: Context,
+    attrs: AttributeSet?,
+    defStyleAttr: Int,
+  ) : this(context, attrs, defStyleAttr, BpkButton.Size.Standard)
 
   companion object {
     const val START = ICON_POSITION_START
@@ -93,5 +119,9 @@ open class BpkButtonLink @JvmOverloads constructor(
       (resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg) / 2)
 
     setPadding(0, paddingVertical, 0, paddingVertical)
+
+    this.minHeight = resources.getDimensionPixelSize(size.minHeight)
+    this.iconSize = resources.getDimensionPixelSize(size.iconSize)
+    BpkText.getFont(context, size.textStyle).applyTo(this)
   }
 }

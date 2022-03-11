@@ -71,6 +71,13 @@
     <attr name="padding" format="boolean" />
   </declare-styleable>
 
+  <declare-styleable name="BpkBaseButton">
+    <attr name="bpkButtonSize" format="enum">
+      <enum name="standard" value="0" />
+      <enum name="large" value="1" />
+    </attr>
+  </declare-styleable>
+
   <declare-styleable name="BpkButton">
     <attr name="buttonType" format="enum">
       <enum name="primary" value="0" />
@@ -98,7 +105,7 @@
   <declare-styleable name="BpkCardView">
     <attr name="focused" format="boolean" />
     <attr name="padded" format="boolean" />
-    <attr name="cardBackgroundColor" format="color"/>
+    <attr name="cardBackgroundColor" format="color" />
     <attr name="cornerStyle" format="enum">
       <enum name="small" value="0" />
       <enum name="large" value="1" />
@@ -184,38 +191,38 @@
     <attr name="ratingValue" format="float" />
 
     <attr name="ratingStyle" format="enum">
-      <enum value="0" name="horizontal" />
-      <enum value="1" name="vertical" />
-      <enum value="2" name="pill" />
+      <enum name="horizontal" value="0" />
+      <enum name="vertical" value="1" />
+      <enum name="pill" value="2" />
     </attr>
     <attr name="ratingSize" format="enum">
-      <enum value="0" name="icon" />
-      <enum value="1" name="extra_small" />
-      <enum value="2" name="small" />
-      <enum value="3" name="base" />
-      <enum value="4" name="large" />
+      <enum name="icon" value="0" />
+      <enum name="extra_small" value="1" />
+      <enum name="small" value="2" />
+      <enum name="base" value="3" />
+      <enum name="large" value="4" />
     </attr>
     <attr name="ratingScale" format="enum">
-      <enum value="0" name="zeroToTen" />
-      <enum value="1" name="zeroToFive" />
+      <enum name="zeroToTen" value="0" />
+      <enum name="zeroToFive" value="1" />
     </attr>
   </declare-styleable>
 
   <declare-styleable name="BpkFlare">
     <attr name="flareRound" format="boolean" />
     <attr name="flareInsetPaddingMode" format="enum">
-      <enum value="0" name="none" />
-      <enum value="1" name="bottom" />
-      <enum value="2" name="top" />
+      <enum name="none" value="0" />
+      <enum name="bottom" value="1" />
+      <enum name="top" value="2" />
     </attr>
-    <attr name="flarePointerPosition" format="enum" >
-      <enum value="0" name="start" />
-      <enum value="1" name="middle" />
-      <enum value="2" name="end" />
+    <attr name="flarePointerPosition" format="enum">
+      <enum name="start" value="0" />
+      <enum name="middle" value="1" />
+      <enum name="end" value="2" />
     </attr>
-    <attr name="flarePointerDirection" format="enum" >
-      <enum value="0" name="down" />
-      <enum value="1" name="up" />
+    <attr name="flarePointerDirection" format="enum">
+      <enum name="down" value="0" />
+      <enum name="up" value="1" />
     </attr>
   </declare-styleable>
 
@@ -229,7 +236,7 @@
     <attr name="navBarExpandedTextColor" format="color" />
     <attr name="navBarCollapsedTextColor" format="color" />
     <attr name="navBarTitle" format="string" />
-    <attr name="navBarIcon" format="reference"/>
+    <attr name="navBarIcon" format="reference" />
     <attr name="navBarMenu" format="reference" />
   </declare-styleable>
 
@@ -290,25 +297,25 @@
   <attr name="bpkFabStyle" format="reference" />
   <attr name="bpkButtonLinkStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
-  <attr name="bpkOutlineChipStyle" format="reference"/>
-  <attr name="bpkChipStyle" format="reference"/>
+  <attr name="bpkOutlineChipStyle" format="reference" />
+  <attr name="bpkChipStyle" format="reference" />
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
-  <attr name="bpkCheckboxStyle" format="reference"/>
-  <attr name="bpkRadioButtonStyle" format="reference"/>
-  <attr name="bpkHorizontalNavStyle" format="reference"/>
-  <attr name="bpkHorizontalNavStyleAlternate" format="reference"/>
-  <attr name="bpkTextFieldStyle" format="reference"/>
-  <attr name="bpkTextInputLayoutStyle" format="reference"/>
-  <attr name="bpkSnackbarStyle" format="reference"/>
-  <attr name="bpkRatingStyle" format="reference"/>
-  <attr name="bpkBarChartStyle" format="reference"/>
-  <attr name="bpkNavBarStyle" format="reference"/>
-  <attr name="bpkSliderStyle" format="reference"/>
+  <attr name="bpkCheckboxStyle" format="reference" />
+  <attr name="bpkRadioButtonStyle" format="reference" />
+  <attr name="bpkHorizontalNavStyle" format="reference" />
+  <attr name="bpkHorizontalNavStyleAlternate" format="reference" />
+  <attr name="bpkTextFieldStyle" format="reference" />
+  <attr name="bpkTextInputLayoutStyle" format="reference" />
+  <attr name="bpkSnackbarStyle" format="reference" />
+  <attr name="bpkRatingStyle" format="reference" />
+  <attr name="bpkBarChartStyle" format="reference" />
+  <attr name="bpkNavBarStyle" format="reference" />
+  <attr name="bpkSliderStyle" format="reference" />
 
   <!-- FONT THEMING START -->
 
-  <attr name="bpkFontFamilyBase" format="reference|string"/>
-  <attr name="bpkFontFamilyEmphasized" format="reference|string"/>
+  <attr name="bpkFontFamilyBase" format="reference|string" />
+  <attr name="bpkFontFamilyEmphasized" format="reference|string" />
 
   <attr name="bpkTextHero1Appearance" format="reference" />
   <attr name="bpkTextHero2Appearance" format="reference" />

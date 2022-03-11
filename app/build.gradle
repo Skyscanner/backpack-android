@@ -96,6 +96,7 @@ dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation rootProject.ext.picasso
   implementation rootProject.ext.accompanistFlowLayout
+  implementation rootProject.ext.androidXLifecycleKtx
   testImplementation rootProject.ext.junit
   implementation rootProject.ext.stetho
   androidTestImplementation rootProject.ext.junitAndroid
