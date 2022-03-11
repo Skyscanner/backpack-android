@@ -97,6 +97,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // icon is bigger on large size, so we need to test this
 
     BpkButton(testContext, type, size).apply {
+      text = "Button"
       icon = this@BpkButtonTest.icon
       iconPosition = BpkButton.START
     }
@@ -109,6 +110,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // icon is bigger on large size, so we need to test this
 
     BpkButton(testContext, type, size).apply {
+      text = "Button"
       icon = this@BpkButtonTest.icon
       iconPosition = BpkButton.END
     }
