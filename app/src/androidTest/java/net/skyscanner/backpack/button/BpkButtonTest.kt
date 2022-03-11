@@ -29,7 +29,6 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.demo.R
 import org.junit.Assume
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -47,11 +46,6 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
         BpkButton.Size.Large -> R.drawable.bpk_long_arrow_right
       }
     )
-
-  @Before
-  fun setup() {
-    setDimensions(40, 300)
-  }
 
   @Test
   fun text() = capture {
