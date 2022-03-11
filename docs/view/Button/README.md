@@ -34,6 +34,35 @@ BpkButton(context,BpkButton.Type.Primary).apply {
 }
 ```
 
+### Large
+
+Example of a large secondary button in XML
+
+```xml
+<net.skyscanner.backpack.button.BpkButton
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:text="Button"
+  app:buttonIconPosition="end"
+  app:buttonIcon="@drawable/bpk_long_arrow_right"
+  app:buttonType="primary"
+  app:bpkButtonSize="large"
+  app:buttonLoading="false" />
+```
+
+Example of a large secondary button in Kotlin
+
+```Kotlin
+import net.skyscanner.backpack.button.BpkButton
+
+BpkButton(context, BpkButton.Type.Secondary, size = BpkButton.Size.Large).apply {
+   icon = AppCompatResources.getDrawable(context, R.drawable.bpk_weather)
+   iconPosition = BpkButton.END
+   text = "Button"
+   loading = false
+}
+```
+
 ### Icon
 
 The icon prop only supports `VectorDrawables` or `BitmapDrawables`. If you provide a different `drawable` make sure
@@ -63,7 +92,6 @@ Example
   <style name="BlueButton">
     <item name="buttonBackground">@color/bpkSkyBlueShade03</item>
     <item name="buttonTextColor">@color/bpkSkyGrayTint05</item>
-    <item name="buttonStrokeColor">@color/bpkKolkata</item>
   </style>
 
 ```

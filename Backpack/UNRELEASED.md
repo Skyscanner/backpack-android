@@ -11,7 +11,7 @@
 
 **Added:**
 - `PrimaryOnLight` type for `BpkButton`
-- `Large` variant of `BpkButton`
+- `Large` variant of `BpkButton` and `BpkButtonLink`
 
 ## How to write a good changelog entry
 
