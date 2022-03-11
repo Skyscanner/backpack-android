@@ -4,12 +4,14 @@
 **Breaking:**
 - Removed `buttonStrokeColor` and `buttonStrokeColorPressed` theming properties
 - Replaced `Outline` type to `PrimaryOnDark` for `BpkButton`
+- Removed `BpkButtonWithIcon` base class
 
 **Updated:**
 - `BpkButton` design
 
 **Added:**
 - `PrimaryOnLight` type for `BpkButton`
+- `Large` variant of `BpkButton`
 
 ## How to write a good changelog entry
 
