@@ -26,8 +26,8 @@ import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.text.BpkText
 
 internal fun BpkButton.Size.Companion.fromAttrs(context: Context, attrs: AttributeSet?): BpkButton.Size {
-  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
-  return when (attr.getInt(R.styleable.BpkButton_bpkButtonSize, 0)) {
+  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkBaseButton, 0, 0)
+  return when (attr.getInt(R.styleable.BpkBaseButton_bpkButtonSize, 0)) {
     0 -> BpkButton.Size.Standard
     1 -> BpkButton.Size.Large
     else -> throw IllegalArgumentException()

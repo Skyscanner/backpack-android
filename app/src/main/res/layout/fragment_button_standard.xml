@@ -310,19 +310,6 @@
       app:buttonIconPosition="icon_only"
       app:buttonType="destructive" />
 
-    <net.skyscanner.backpack.button.BpkButtonLink
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
-      app:buttonIconPosition="icon_only" />
-
-    <net.skyscanner.backpack.button.BpkButtonLink
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:enabled="false"
-      app:buttonIcon="@drawable/bpk_long_arrow_right_sm"
-      app:buttonIconPosition="icon_only" />
-
   </LinearLayout>
 
 </LinearLayout>
