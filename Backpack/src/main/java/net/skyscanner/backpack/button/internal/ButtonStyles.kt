@@ -28,7 +28,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       context = context,
       style = R.attr.bpkButtonPrimaryStyle,
       bgColorRes = R.color.bpkMonteverde,
-      contentColorRes = R.color.bpk_button_content_primary,
+      contentColorRes = R.color.__buttonPrimaryContent,
     )
   }
 
@@ -37,7 +37,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       context = context,
       style = R.attr.bpkButtonSecondaryStyle,
       bgColorRes = R.color.__buttonSecondaryBackground,
-      contentColorRes = R.color.bpk_button_content_secondary,
+      contentColorRes = R.color.__buttonSecondaryContent,
     )
   }
 
@@ -47,7 +47,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonFeaturedStyle,
       bgColorRes = R.color.bpkPrimary,
       bgPressedColorRes = R.color.__buttonFeaturedPressedBackground,
-      contentColorRes = R.color.bpk_button_content_featured,
+      contentColorRes = R.color.__buttonFeaturedContent,
       rippleColorRes = R.color.__buttonFeaturedRipple,
     )
   }
@@ -58,7 +58,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonDestructiveStyle,
       bgColorRes = R.color.__buttonDestructiveBackground,
       bgPressedColorRes = R.color.__buttonDestructivePressedBackground,
-      contentColorRes = R.color.bpk_button_content_destructive,
+      contentColorRes = R.color.__buttonDestructiveContent,
+      contentPressedColorRes = R.color.__buttonDestructivePressedContent,
       rippleColorRes = R.color.__buttonDestructiveRipple,
     )
   }
@@ -68,7 +69,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       context = context,
       style = R.attr.bpkButtonPrimaryOnDarkStyle,
       bgColorRes = R.color.bpkWhite,
-      contentColorRes = R.color.bpk_button_content_primary_on_dark,
+      contentColorRes = R.color.bpkSkyGray,
     )
   }
 
@@ -77,7 +78,7 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       context = context,
       style = R.attr.bpkButtonPrimaryOnLightStyle,
       bgColorRes = R.color.bpkSkyGray,
-      contentColorRes = R.color.bpk_button_content_primary_on_light,
+      contentColorRes = R.color.bpkWhite,
       rippleColorRes = R.color.__buttonPrimaryOnLightRipple,
     )
   }
@@ -88,7 +89,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonLinkStyle,
       bgColorRes = android.R.color.transparent,
       bgDisabledColorRes = android.R.color.transparent,
-      contentColorRes = R.color.bpk_button_content_link,
+      contentColorRes = R.color.bpkPrimary,
+      contentPressedColorRes = R.color.__buttonLinkPressedContent,
       rippleColorRes = R.color.__buttonLinkRipple,
     )
   }
