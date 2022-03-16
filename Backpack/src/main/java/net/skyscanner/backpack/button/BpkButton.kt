@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.button
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.Drawable
@@ -114,9 +113,14 @@ open class BpkButton(
   var loading: Boolean = false
     set(value) {
       field = value
+
+      if (value) {
+        progress.start()
+      } else {
+        progress.stop()
+      }
+
       updateEnabledState()
-      updateContentColorState()
-      updateProgressState()
       if (this::style.isInitialized) {
         applyStyle(style)
       }
@@ -131,7 +135,6 @@ open class BpkButton(
     }
 
   private var enabled = isEnabled
-  private var contentColors = textColors
 
   init {
     var type = type
@@ -174,16 +177,6 @@ open class BpkButton(
     updateEnabledState()
   }
 
-  override fun setTextColor(color: Int) {
-    contentColors = ColorStateList.valueOf(color)
-    updateContentColorState()
-  }
-
-  override fun setTextColor(colors: ColorStateList) {
-    contentColors = colors
-    updateContentColorState()
-  }
-
   override fun invalidateDrawable(drawable: Drawable) {
     super.invalidateDrawable(drawable)
     if (loading && drawable == progress) {
@@ -213,22 +206,6 @@ open class BpkButton(
     }
   }
 
-  private fun updateContentColorState() {
-    if (loading) {
-      super.setTextColor(Color.TRANSPARENT)
-    } else {
-      super.setTextColor(contentColors)
-    }
-  }
-
-  private fun updateProgressState() {
-    if (loading) {
-      progress.start()
-    } else {
-      progress.stop()
-    }
-  }
-
   private fun applyStyle(style: ButtonStyle) {
     this.style = style
     background = style.getButtonBackground(isEnabled)
@@ -236,8 +213,13 @@ open class BpkButton(
     val contentColor = style.getContentColor()
     val contentDisabledColor = contentColor.getColorForState(StateDisabled, textColors.defaultColor)
 
-    setTextColor(contentColor)
     progress.setColorSchemeColors(contentDisabledColor)
+
+    if (loading) {
+      setTextColor(Color.TRANSPARENT)
+    } else {
+      setTextColor(style.getContentColor())
+    }
   }
 
   enum class Type {
