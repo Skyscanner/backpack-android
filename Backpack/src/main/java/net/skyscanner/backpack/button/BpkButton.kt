@@ -19,7 +19,8 @@
 package net.skyscanner.backpack.button
 
 import android.content.Context
-import android.graphics.drawable.Drawable
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.AttributeSet
 import androidx.annotation.Dimension
 import androidx.annotation.IntDef
@@ -102,19 +103,8 @@ open class BpkButton(
       applyStyle(type.createStyle(context))
     }
 
-  private var iconDrawable: Drawable? = icon
-    set(value) {
-      field = value
-      updateIconState()
-    }
-
   @Dimension
   private val paddingHorizontal = resources.getDimension(size.horizontalPadding)
-
-  override fun setIcon(icon: Drawable?) {
-    super.setIcon(icon)
-    iconDrawable = icon
-  }
 
   private val progress by unsafeLazy {
     CircularProgressDrawable(context).apply {
@@ -129,7 +119,7 @@ open class BpkButton(
     set(value) {
       field = value
       updateEnabledState()
-      updateIconState()
+      updateContentColorState()
       if (this::style.isInitialized) {
         applyStyle(style)
       }
@@ -144,6 +134,7 @@ open class BpkButton(
     }
 
   private var enabled = isEnabled
+  private var contentColors = textColors
 
   init {
     var type = type
@@ -185,6 +176,16 @@ open class BpkButton(
     updateEnabledState()
   }
 
+  override fun setTextColor(color: Int) {
+    contentColors = ColorStateList.valueOf(color)
+    updateContentColorState()
+  }
+
+  override fun setTextColor(colors: ColorStateList) {
+    contentColors = colors
+    updateContentColorState()
+  }
+
   private fun updateEnabledState() {
     super.setEnabled(enabled && !loading)
     if (this::style.isInitialized) {
@@ -192,23 +193,18 @@ open class BpkButton(
     }
   }
 
+  private fun updateContentColorState() {
+    if (loading) {
+      super.setTextColor(Color.TRANSPARENT)
+    } else {
+      super.setTextColor(contentColors)
+    }
+  }
+
   private fun applyStyle(style: ButtonStyle) {
     this.style = style
     background = style.getButtonBackground(isEnabled)
     setTextColor(style.getContentColor())
-  }
-
-  private fun updateIconState() {
-    super.setIcon(
-      if (loading) {
-        val disabledColour = textColors.getColorForState(intArrayOf(-android.R.attr.state_enabled), textColors.defaultColor)
-        progress.setColorSchemeColors(disabledColour)
-        progress
-      } else {
-        iconDrawable
-      }
-    )
-    iconTint = textColors
   }
 
   enum class Type {
