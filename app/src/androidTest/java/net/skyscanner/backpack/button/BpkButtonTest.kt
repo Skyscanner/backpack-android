@@ -85,6 +85,33 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   }
 
   @Test
+  fun loadingWithIcon() = capture {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
+    Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
+    // we need to run it on large size as well and the progress size will be different
+
+    BpkButton(testContext, type, size).apply {
+      text = "Button"
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.START
+      loading = true
+    }
+  }
+
+  @Test
+  fun loadingWithIconOnly() = capture {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
+    Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
+    // we need to run it on large size as well and the progress size will be different
+
+    BpkButton(testContext, type, size).apply {
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.ICON_ONLY
+      loading = true
+    }
+  }
+
+  @Test
   fun iconAtStart() = capture {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
     Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types

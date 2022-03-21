@@ -29,6 +29,7 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.util.colorStateList
 import net.skyscanner.backpack.util.rippleDrawable
 import net.skyscanner.backpack.util.stateListDrawable
 
@@ -37,12 +38,18 @@ internal class ButtonStyle(
   @ColorInt private val bgColor: Int,
   @ColorInt private val bgPressedColor: Int,
   @ColorInt private val bgDisabledColor: Int,
-  private val contentColor: ColorStateList,
+  @ColorInt private val contentColor: Int,
+  @ColorInt private val contentPressedColor: Int,
+  @ColorInt private val contentDisabledColor: Int,
   @ColorInt private val rippleColor: Int,
 ) {
 
   fun getContentColor(): ColorStateList =
-    contentColor
+    colorStateList(
+      color = contentColor,
+      pressedColor = contentPressedColor,
+      disabledColor = contentDisabledColor,
+    )
 
   fun getButtonBackground(enabled: Boolean): Drawable {
 
@@ -82,7 +89,9 @@ internal class ButtonStyle(
       @ColorInt defaultBgColor: Int,
       @ColorInt defaultBgPressedColor: Int,
       @ColorInt defaultBgDisabledColor: Int,
-      defaultContentColor: ColorStateList,
+      @ColorInt defaultContentColor: Int,
+      @ColorInt defaultContentPressedColor: Int,
+      @ColorInt defaultContentDisabledColor: Int,
       @ColorInt rippleColor: Int,
     ): ButtonStyle {
       var bgColor = defaultBgColor
@@ -90,7 +99,7 @@ internal class ButtonStyle(
 
       typedArray?.let {
         bgColor = it.getColor(R.styleable.BpkButton_buttonBackgroundColor, bgColor)
-        contentColor = it.getColorStateList(R.styleable.BpkButton_buttonTextColor) ?: contentColor
+        contentColor = it.getColor(R.styleable.BpkButton_buttonTextColor, contentColor)
       }
 
       return ButtonStyle(
@@ -99,6 +108,8 @@ internal class ButtonStyle(
         bgPressedColor = defaultBgPressedColor,
         bgDisabledColor = defaultBgDisabledColor,
         contentColor = contentColor,
+        contentPressedColor = defaultContentPressedColor,
+        contentDisabledColor = defaultContentDisabledColor,
         rippleColor = rippleColor,
       )
     }
@@ -109,8 +120,10 @@ internal class ButtonStyle(
       @ColorRes bgColorRes: Int,
       @ColorRes bgPressedColorRes: Int = bgColorRes,
       @ColorRes bgDisabledColorRes: Int = R.color.__buttonDisabledBackground,
-      @ColorRes contentColorRes: Int,
       @ColorRes rippleColorRes: Int = R.color.__buttonDefaultRipple,
+      @ColorRes contentColorRes: Int,
+      @ColorRes contentPressedColorRes: Int = contentColorRes,
+      @ColorRes contentDisabledColorRes: Int = R.color.__buttonDisabledText,
     ): ButtonStyle {
 
       var typedArray: TypedArray? = null
@@ -127,7 +140,9 @@ internal class ButtonStyle(
           defaultBgColor = context.getColor(bgColorRes),
           defaultBgPressedColor = context.getColor(bgPressedColorRes),
           defaultBgDisabledColor = context.getColor(bgDisabledColorRes),
-          defaultContentColor = context.getColorStateList(contentColorRes),
+          defaultContentColor = context.getColor(contentColorRes),
+          defaultContentPressedColor = context.getColor(contentPressedColorRes),
+          defaultContentDisabledColor = context.getColor(contentDisabledColorRes),
           rippleColor = context.getColor(rippleColorRes),
         )
       } finally {
@@ -146,6 +161,8 @@ internal class ButtonStyle(
       defaultBgPressedColor = fallback.bgPressedColor,
       defaultBgDisabledColor = fallback.bgDisabledColor,
       defaultContentColor = fallback.contentColor,
+      defaultContentPressedColor = fallback.contentPressedColor,
+      defaultContentDisabledColor = fallback.contentDisabledColor,
       rippleColor = fallback.rippleColor,
     )
   }
