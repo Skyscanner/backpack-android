@@ -14,7 +14,7 @@ We use Node in this project. To manage the language runtime we recommend using [
 
 With `nvm`, use `nvm use` to set the correct Node version in your machine.
 
-To set up the Android environment, install Android Studio. Once installed, use the following commands to set up the Android SDK:
+To set up the Android environment, install Android Studio. Make sure that "Android SDK Command-line Tools (latest)" are installed as well (in Android SDK manager). Once installed, use the following commands to set up the Android SDK:
 
 ```
 echo "export ANDROID_HOME=\"$HOME/Library/Android/sdk\"" >> ~/.bash_profile
@@ -26,8 +26,13 @@ You may also have to install "Android SDK Command Line Tools" from the SDK tools
 
 Install system images
 ```
+# x86
 $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;google_apis;x86"
 $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;x86"
+
+# ARM
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;google_apis;arm64-v8a"
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;arm64-v8a"
 ```
 
 ## Setup
