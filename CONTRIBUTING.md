@@ -51,7 +51,12 @@ Given that you have a compatible environment as stated above you can now set up 
 Create an AVD using the following command
 
 ```
+# x86
 $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
+
+
+# ARM
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;arm64-v8a" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 ```
 
 Create an SD card for the screenshot tests (Linux)
@@ -114,7 +119,13 @@ implementation 'net.skyscanner.backpack:backpack-android:x.x.x-SNAPSHOT'
 Before running the script install and start the docs emulator.
 
 ```
+# x86
 $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name "bpk-droid-screenshot-avd" --device "pixel" --package "system-images;android-30;google_apis;x86" --tag "google_apis" --abi "x86"
+$ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
+
+
+# ARM
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name "bpk-droid-screenshot-avd" --device "pixel" --package "system-images;android-30;google_apis;arm64-v8a" --tag "google_apis" --abi "arm64-v8a"
 $ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
 ```
 
