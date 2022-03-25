@@ -3,11 +3,10 @@
   "name": "backpack-android",
   "version": "0.0.0",
   "engines": {
-    "node": "^12.13.0",
-    "npm": "^6.12.0"
+    "node": "^16.13.0",
+    "npm": "^8.1.0"
   },
   "scripts": {
-    "preinstall": "npx ensure-node-env",
     "emulator:build": "./gradlew build",
     "emulator:instrumentation": "./gradlew Backpack:connectedDebugAndroidTest backpack-compose:connectedDebugAndroidTest -PlocalTests=true",
     "emulator:screenshots": "./scripts/verify_screenshot_tests.sh",
@@ -49,20 +48,19 @@
   },
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
-    "@babel/core": "^7.9.6",
+    "@babel/core": "^7.17.8",
+    "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.9.6",
     "@skyscanner/bpk-foundations-android": "^3.2.1",
     "@skyscanner/bpk-svgs": "^14.0.10",
     "@xmldom/xmldom": "^0.8.0",
-    "babel-eslint": "^10.1.0",
     "danger": "^11.0.2",
     "del": "^6.0.0",
-    "ensure-node-env": "^1.2.2",
+    "eslint": "^8.11.0",
     "eslint-config-airbnb": "^19.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint_d": "^11.0.0",
     "gulp": "^4.0.2",
     "gulp-nunjucks": "^5.1.0",
     "gulp-rename": "^2.0.0",
@@ -79,6 +77,5 @@
     "svg2vectordrawable": "^2.4.0",
     "through2": "^4.0.2",
     "tinycolor2": "^1.4.1"
-  },
-  "dependencies": {}
+  }
 }
