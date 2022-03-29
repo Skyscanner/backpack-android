@@ -1,0 +1,19 @@
+name: PR
+
+on:
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:
+
+  Build:
+    name: Build
+    uses: ./.github/workflows/build.yml
