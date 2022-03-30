@@ -15,7 +15,7 @@ jobs:
 
   Build:
     name: Build
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/_build.yml
 
   Deploy:
     name: Deploy
