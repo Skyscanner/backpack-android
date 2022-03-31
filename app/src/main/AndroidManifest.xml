@@ -9,6 +9,7 @@
       android:supportsRtl="true"
       android:name="net.skyscanner.backpack.demo.BackpackDemoApplication"
       android:usesCleartextTraffic="true"
+      android:requestLegacyExternalStorage="true"
       android:theme="@style/AppTheme">
 
     <meta-data
