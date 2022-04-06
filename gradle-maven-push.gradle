@@ -16,7 +16,7 @@ afterEvaluate { project ->
       maven(MavenPublication) {
         groupId rootProject.ext.group
         artifactId project.artifactId
-        version project.artifactVersion
+        version rootProject.ext.version
 
         from components.release
         artifact sourceJar

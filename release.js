@@ -29,26 +29,11 @@ const gradleFiles = [`${__dirname}/build.gradle`];
 const readmeFile = [`${__dirname}/README.md`];
 const versionsFile =  [`${__dirname}/versions.json`]
 
-const compose = "compose"
-const android = "android"
-
-const package_questions = [
-    {
-      type: 'list',
-      name: 'type',
-      message: 'Which type do you want to release?',
-      choices: [
-        android,
-        compose,
-      ],
-    },
-  ];
-
-async function amendGradleFiles(key, version) {
+async function amendGradleFiles(version) {
   const options = {
     files: gradleFiles,
-    from: new RegExp(key + ' = .+', 'g'),
-    to: `${key} = '${version}'`,
+    from: new RegExp('BpkVersion = .+', 'g'),
+    to: `BpkVersion = '${version}'`,
   };
 
   try {
@@ -74,11 +59,11 @@ async function amendReadmeFiles(key, version) {
   }
 }
 
-async function amendVersionsFile(key, version) {
+async function amendVersionsFile(version) {
   const options = {
     files: versionsFile,
-    from: new RegExp('"' + key + '": ".+"', 'g'),
-    to: `"${key}": "${version}"`,
+    from: new RegExp('"backpack": ".+"', 'g'),
+    to: `"backpack": "${version}"`,
   };
 
   try {
@@ -125,37 +110,20 @@ async function versionPrompt(currentVersion) {
 async function release() {
   try {
     childProcess.execSync('./gradlew :Backpack:checkMavenCredentials');
-    const packageResult = await inquirer.prompt(package_questions);
-    const packageType = packageResult.type
-    const packageVersion = (packageType == android) ? versions.android : versions.compose
+    const packageVersion = versions.backpack
     const { version } = await versionPrompt(packageVersion);
-    const commonVersion = semver.inc(versions.common, 'minor')
 
-    if (packageType == android) {
-      await amendGradleFiles('BpkAndroidVersion', version);
-      await amendVersionsFile('android', version);
-    } else {
-      await amendGradleFiles('BpkComposeVersion', version);
-      await amendVersionsFile('compose', version);
-    }
-    await amendGradleFiles('BpkCommonVersion', commonVersion);
-    await amendVersionsFile('common', commonVersion);
-
-    if (packageType == android) {
-      await amendReadmeFiles('backpack-android', version);
-    } else {
-      await amendReadmeFiles('backpack-compose', version);
-    }
-
-    const publishModule = (packageType == android) ? 'Backpack' : 'backpack-compose'
-    const tagName = `${publishModule}@${version}`
+    await amendGradleFiles(version);
+    await amendVersionsFile(version);
+    await amendReadmeFiles('backpack-android', version);
+    await amendReadmeFiles('backpack-compose', version);
 
     const releaseOptions = {
       increment: version,
       requireCleanWorkingDir: false,
       npm: false,
       git: {
-        tagName: tagName,
+        tagName: version,
         requireCleanWorkingDir: false,
       },
       prompt: {
@@ -167,7 +135,7 @@ async function release() {
     await releaseit(releaseOptions);
     const publishTask = 'publishMavenPublicationToSonatypeRepository';
     const releaseTask = 'closeAndReleaseSonatypeStagingRepository';
-    childProcess.execSync(`./gradlew :backpack-common:${publishTask} :${publishModule}:${publishTask} ${releaseTask}`);
+    childProcess.execSync(`./gradlew ${publishTask} ${releaseTask}`);
   } catch (exc) {
     console.error(exc);
     process.exit(1);

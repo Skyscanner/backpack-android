@@ -21,7 +21,6 @@ apply plugin: 'kotlin-android'
 
 ext {
   artifactId = "backpack-common"
-  artifactVersion = rootProject.ext.backpackCommonVersion
 }
 
 apply from: "$rootProject.projectDir/gradle-maven-push.gradle"
