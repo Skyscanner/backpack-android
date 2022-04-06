@@ -31,8 +31,7 @@ const fileChanges = [...modifiedFiles, ...createdFiles];
 const declaredTrivial = danger.github.pr.title.includes('#trivial');
 
 // If any code have changed, the UNRELEASED log should have been updated.
-const unreleasedModified = includes(modifiedFiles, 'Backpack/UNRELEASED.md') ||
-  includes(modifiedFiles, 'backpack-compose/UNRELEASED.md');
+const unreleasedModified = includes(modifiedFiles, 'UNRELEASED.md');
 const packagesModified = fileChanges.some(filePath =>
   filePath.startsWith('Backpack/src/main') ||
   filePath.startsWith('backpack-compose/src/main') ||
