@@ -1,6 +1,15 @@
 # Unreleased
 > Place your changes below this line.
 
+**Added:**
+
+- Added lint check for compose component usage
+
+**Fixed:**
+
+- Publish all three packages under a single version
+- Upgraded backpack-compose to production ready
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
