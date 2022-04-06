@@ -2,8 +2,6 @@
 
 [Unreleased changes](UNRELEASED.md).
 
-You can find pre-production changelogs for compose [here](backpack-compose/CHANGELOG.md)
-
 # 36.0.0
 
 **Breaking:**
@@ -38,6 +36,13 @@ You can find pre-production changelogs for compose [here](backpack-compose/CHANG
   - Updated text style + weight property on `BpkText`, `BpkFontSpan` & `getFont` to use a combined `TextStyle` value
   - Text styles now include line height & letter spacing
 
+# backpack-compose 0.2.0
+
+**Added:**
+
+- New `BpkButton` component
+- New `focused` property for `BpkCard`
+
 # 33.3.0
 
 **Added:**
@@ -47,6 +52,18 @@ You can find pre-production changelogs for compose [here](backpack-compose/CHANG
 - Updated xxl & xxxl text sizes
 - Updated expanded nav bar text style to xxl emphasized
 - Added `rounding` property to `BpkStarRating`
+
+# backpack-compose 0.1.1
+
+**Fixed:**
+
+- Default `ContentAlpha` for `BpkTheme` is `1`
+- Card default elevation is `xm`
+- Updated hero and heading 1 text styles
+
+# backpack-compose 0.1.0
+
+- Initial release
 
 # 33.2.0
 
