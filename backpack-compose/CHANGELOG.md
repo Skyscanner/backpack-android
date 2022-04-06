@@ -1,6 +1,6 @@
 # Backpack Compose changelog
 
-[Unreleased changes](UNRELEASED.md).
+Newer changes see [here](./../CHANGELOG.md).
 
 # 0.2.0
 
