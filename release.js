@@ -44,11 +44,11 @@ async function amendGradleFiles(version) {
   }
 }
 
-async function amendReadmeFiles(key, version) {
+async function amendReadmeFiles(version) {
   const options = {
     files: readmeFile,
-    from: new RegExp(`${key}:([0-9]+\\.[0-9]+\\.[0-9]+)`, 'g'),
-    to: `${key}:${version}`,
+    from: new RegExp('bpkVersion = ".+"', 'g'),
+    to: `bpkVersion = "${version}"`,
   };
 
   try {
@@ -115,8 +115,7 @@ async function release() {
 
     await amendGradleFiles(version);
     await amendVersionsFile(version);
-    await amendReadmeFiles('backpack-android', version);
-    await amendReadmeFiles('backpack-compose', version);
+    await amendReadmeFiles(version);
 
     const releaseOptions = {
       increment: version,
