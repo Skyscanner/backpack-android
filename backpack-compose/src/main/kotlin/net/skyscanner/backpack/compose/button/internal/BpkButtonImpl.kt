@@ -24,18 +24,21 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.Surface
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -43,6 +46,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
@@ -50,6 +54,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.utils.hideContentIf
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun BpkButtonImpl(
   modifier: Modifier = Modifier,
@@ -61,38 +66,51 @@ internal fun BpkButtonImpl(
   onClick: () -> Unit,
   content: @Composable RowScope.() -> Unit,
 ) {
-  CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(type.rippleColor())) {
-    Button(
-      onClick = onClick,
-      enabled = enabled && !loading,
-      modifier = modifier.requiredHeight(size.minHeight),
-      interactionSource = interactionSource,
-      colors = ButtonDefaults.buttonColors(
-        backgroundColor = type.backgroundColor(interactionSource),
-        contentColor = type.contentColor(interactionSource),
-        disabledBackgroundColor = type.disabledBackgroundColor(),
-        disabledContentColor = type.disabledContentColor(),
-      ),
-      shape = ButtonShape,
-      contentPadding = PaddingValues(horizontal = size.horizontalPadding),
-      elevation = null,
-      content = {
-        CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
-          Box {
-            Row(
-              modifier = Modifier.hideContentIf(loading),
-              horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
-              verticalAlignment = Alignment.CenterVertically,
-              content = content,
-            )
 
-            if (loading) {
-              ButtonProgress(size, Modifier.align(Alignment.Center))
-            }
+  val buttonEnabled = enabled && !loading
+
+  CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(type.rippleColor())) {
+
+    val colors = ButtonDefaults.buttonColors(
+      backgroundColor = type.backgroundColor(interactionSource),
+      contentColor = type.contentColor(interactionSource),
+      disabledBackgroundColor = type.disabledBackgroundColor(),
+      disabledContentColor = type.disabledContentColor(),
+    )
+
+    Surface(
+      modifier = modifier,
+      shape = ButtonShape,
+      color = colors.backgroundColor(enabled = buttonEnabled).value,
+      contentColor = colors.contentColor(enabled = buttonEnabled).value,
+      elevation = 0.dp,
+      onClick = onClick,
+      enabled = buttonEnabled,
+      role = Role.Button,
+      interactionSource = interactionSource,
+      indication = rememberRipple(),
+    ) {
+      CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
+
+        Box(
+          modifier = Modifier
+            .requiredHeight(size.minHeight)
+            .padding(PaddingValues(horizontal = size.horizontalPadding)),
+          contentAlignment = Alignment.Center,
+        ) {
+          Row(
+            modifier = Modifier.hideContentIf(loading),
+            horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
+            verticalAlignment = Alignment.CenterVertically,
+            content = content,
+          )
+
+          if (loading) {
+            ButtonProgress(size)
           }
         }
-      },
-    )
+      }
+    }
   }
 }
 
