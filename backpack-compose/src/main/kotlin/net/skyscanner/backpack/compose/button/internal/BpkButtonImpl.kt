@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -48,6 +49,7 @@ import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
@@ -65,7 +67,7 @@ internal fun BpkButtonImpl(
     Button(
       onClick = onClick,
       enabled = enabled && !loading,
-      modifier = modifier.requiredHeight(size.minHeight),
+      modifier = modifier.defaultMinSize(BpkSpacing.Sm, size.minHeight).requiredHeight(size.minHeight),
       interactionSource = interactionSource,
       colors = ButtonDefaults.buttonColors(
         backgroundColor = type.backgroundColor(interactionSource),
@@ -74,7 +76,7 @@ internal fun BpkButtonImpl(
         disabledContentColor = type.disabledContentColor(),
       ),
       shape = ButtonShape,
-      contentPadding = PaddingValues(horizontal = size.horizontalPadding),
+      contentPadding = ButtonPaddings(size, type),
       elevation = null,
       content = {
         CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
@@ -137,3 +139,9 @@ private class ButtonRippleTheme(
 }
 
 private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
+
+private fun ButtonPaddings(size: BpkButtonSize, type: BpkButtonType) : PaddingValues =
+  when (type) {
+    BpkButtonType.Link -> PaddingValues(0.dp)
+    else -> PaddingValues(horizontal = size.horizontalPadding)
+  }
