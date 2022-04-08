@@ -34,7 +34,7 @@ repositories {
 Add the following dependencies to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-bpkVersion = "36.0.0"
+bpkVersion = "36.1.0"
 implementation "net.skyscanner.backpack:backpack-android:bpkVersion" // for Android View system
 implementation "net.skyscanner.backpack:backpack-compose:bpkVersion" // for Compose
 ```

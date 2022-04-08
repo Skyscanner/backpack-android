@@ -2,6 +2,20 @@
 
 [Unreleased changes](UNRELEASED.md).
 
+# 36.1.0
+
+**Added:**
+
+- backpack-compose
+-   Added lint check for compose component usage
+
+**Fixed:**
+- Common
+  - Publish all three packages under a single version
+- backpack-compose
+-   Upgraded backpack-compose to production ready
+-   Removed horizontal link Button padding
+
 # 36.0.0
 
 **Breaking:**
