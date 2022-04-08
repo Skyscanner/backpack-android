@@ -21,12 +21,14 @@ package net.skyscanner.backpack.button
 import android.view.View
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.viewinterop.AndroidView
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import org.junit.Assume
 import org.junit.Test
@@ -154,7 +156,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
       size = IntSize(160, 64),
       tags = listOf(type, size),
     ) {
-      Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+      Box(Modifier.fillMaxSize().padding(BpkSpacing.Md), contentAlignment = Alignment.TopStart) {
         AndroidView(factory = { content() })
       }
     }
