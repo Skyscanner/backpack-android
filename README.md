@@ -34,8 +34,9 @@ repositories {
 Add the following dependencies to your `build.gradle` (in your app module) in the `dependencies` block:
 
 ```gradle
-implementation 'net.skyscanner.backpack:backpack-android:36.0.0' // for Android View system
-implementation 'net.skyscanner.backpack:backpack-compose:0.2.0' // for Compose (beta)
+bpkVersion = "36.0.0"
+implementation "net.skyscanner.backpack:backpack-android:bpkVersion" // for Android View system
+implementation "net.skyscanner.backpack:backpack-compose:bpkVersion" // for Compose
 ```
 
 All Backpack components must to be used within `BpkTheme` scope:
@@ -71,8 +72,6 @@ All design system tokens exist as public Android resources. Here's the list of t
 * [text styles](Backpack/src/main/res/values/backpack.text.xml) – `?bpkTextBaseSize` (XML)
 
 ### Jetpack Compose
-
-> Backpack for Jetpack Compose status is experimental.
 
 Backpack for Compose targets **stable Compose 1.0.0** release.
 

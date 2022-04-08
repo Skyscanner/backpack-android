@@ -1,6 +1,15 @@
 # Unreleased
 > Place your changes below this line.
 
+**Added:**
+
+- Added lint check for compose component usage
+
+**Fixed:**
+
+- Publish all three packages under a single version
+- Upgraded backpack-compose to production ready
+
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
@@ -15,17 +24,17 @@ See [`CHANGELOG.md`](CHANGELOG.md) for real-world examples of good changelog ent
 
 **Breaking:**
 
-- `bpk-svgs`:
+- `backpack-android`:
   - Replaced `charmeleon` icon with new `charizard` icon. To upgrade, replace your references to `charmeleon` with `charizard`.
   - Upgraded `fire` dependency to `3.0.0`.
 
 **Added:**
 
-- `bpk-component-infinity-gauntlet`:
+- `backpack-compose`:
   - New `timeStone` prop for controlling time. See &lt;link to docs site&gt;.
 
 **Fixed:**
 
-- `bpk-component-horcrux`:
+- `backpack-android`:
   - Fixed issue where `BpkHorcrux` would occasionally possess the living.
 

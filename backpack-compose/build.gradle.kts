@@ -22,7 +22,6 @@ plugins {
 
 ext {
   set("artifactId", "backpack-compose")
-  set("artifactVersion", rootProject.ext.get("backpackComposeVersion" as String))
 }
 
 apply(from = "${rootProject.projectDir}/gradle-maven-push.gradle")

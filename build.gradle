@@ -78,14 +78,10 @@ task clean(type: Delete) {
   delete rootProject.buildDir
 }
 
-def BpkAndroidVersion = '36.0.0'
-def BpkCommonVersion = '0.12.0'
-def BpkComposeVersion = '0.2.0'
+def BpkVersion = '36.0.0'
 
 ext {
-  backpackAndroidVersion = "$BpkAndroidVersion"
-  backpackCommonVersion = "$BpkCommonVersion"
-  backpackComposeVersion = "$BpkComposeVersion"
+  version = "$BpkVersion"
   group = "net.skyscanner.backpack"
   dokkaOutputDir = "dokka"
 
