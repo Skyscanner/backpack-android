@@ -19,18 +19,18 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.CoroutineScope
@@ -45,7 +45,7 @@ import net.skyscanner.backpack.compose.icons.lg.LongArrowRight
 import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
-import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
 
 @Composable
@@ -53,27 +53,95 @@ fun ButtonsStory(
   size: BpkButtonSize,
   modifier: Modifier = Modifier,
 ) {
-  LazyColumn(modifier.fillMaxSize()) {
-    item {
-      ButtonsRow(
-        type = BpkButtonType.Primary,
+
+  val icon = when (size) {
+    BpkButtonSize.Default -> BpkIcons.Sm.LongArrowRight
+    BpkButtonSize.Large -> BpkIcons.Lg.LongArrowRight
+  }
+
+  Row(
+    modifier = modifier
+      .fillMaxSize()
+      .padding(horizontal = BpkSpacing.Base)
+      .padding(top = BpkSpacing.Md),
+    verticalAlignment = Alignment.Top,
+    horizontalArrangement = Arrangement.SpaceBetween,
+  ) {
+
+    ButtonsColumn { type, enabled ->
+      BpkButton(
+        text = stringResource(R.string.button),
         size = size,
-        enabled = false,
+        type = type,
+        loading = loading,
+        enabled = enabled,
+        onClick = ::load,
       )
     }
-    items(BpkButtonType.values()) {
-      ButtonsRow(
-        type = it,
+
+    ButtonsColumn { type, enabled ->
+      BpkButton(
+        text = stringResource(R.string.button),
+        icon = icon,
+        position = BpkButtonIconPosition.Start,
         size = size,
-        enabled = true,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        onClick = ::load,
       )
     }
-    item {
-      ButtonsRow(
-        type = BpkButtonType.Link,
+
+    ButtonsColumn { type, enabled ->
+      BpkButton(
+        text = stringResource(R.string.button),
+        icon = icon,
+        position = BpkButtonIconPosition.End,
         size = size,
-        enabled = false,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        onClick = ::load,
       )
+    }
+
+    ButtonsColumn { type, enabled ->
+      BpkButton(
+        icon = icon,
+        contentDescription = stringResource(R.string.button),
+        size = size,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        onClick = ::load,
+      )
+    }
+  }
+}
+
+@Composable
+private fun ButtonsColumn(
+  modifier: Modifier = Modifier,
+  factory: @Composable LoadingScope.(type: BpkButtonType, enabled: Boolean) -> Unit,
+) {
+  Column(
+    modifier = modifier,
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.Top),
+    horizontalAlignment = Alignment.CenterHorizontally,
+  ) {
+
+    LoadingScope {
+      factory(type = BpkButtonType.Primary, enabled = false)
+    }
+
+    BpkButtonType.values().forEach { type ->
+      LoadingScope {
+        factory(type = type, enabled = true)
+      }
+    }
+
+    LoadingScope {
+      factory(type = BpkButtonType.Link, enabled = false)
     }
   }
 }
@@ -165,7 +233,7 @@ private class LoadingScope(private val scope: CoroutineScope) {
   fun load() {
     scope.launch {
       loading = true
-      delay(Duration.seconds(2))
+      delay(2.seconds)
       loading = false
     }
   }

@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.button
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +30,7 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.LongArrowRight
 import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import org.hamcrest.Matchers.isOneOf
 import org.junit.Assume.assumeThat
 import org.junit.Assume.assumeTrue
@@ -107,7 +109,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
       size = IntSize(160, 64),
       tags = listOf(type, size),
     ) {
-      Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+      Box(Modifier.fillMaxSize().padding(BpkSpacing.Md), contentAlignment = Alignment.TopStart) {
         content()
       }
     }
