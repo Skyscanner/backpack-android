@@ -44,6 +44,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
@@ -110,7 +111,12 @@ internal fun ButtonIcon(
 
 @Composable
 internal fun ButtonText(text: String, modifier: Modifier = Modifier) {
-  BpkText(text, modifier)
+  BpkText(
+    text = text,
+    modifier = modifier,
+    maxLines = 1,
+    overflow = TextOverflow.Ellipsis,
+  )
 }
 
 @Composable
