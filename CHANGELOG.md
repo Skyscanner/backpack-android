@@ -5,6 +5,11 @@
 # 36.1.0
 
 **Added:**
+- New `label3` typography style
+
+# 36.1.0
+
+**Added:**
 
 - backpack-compose
 -   Added lint check for compose component usage
