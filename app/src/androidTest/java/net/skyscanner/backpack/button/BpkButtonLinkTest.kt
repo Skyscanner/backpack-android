@@ -45,56 +45,66 @@ class BpkButtonLinkTest(private val size: BpkButton.Size) : BpkSnapshotTest() {
     )
 
   @Test
-  fun text() = capture {
+  fun text() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed) // no need to test text on Rtl
 
-    BpkButtonLink(testContext, size).apply {
-      text = "Button"
+    capture {
+      BpkButtonLink(testContext, size).apply {
+        text = "Button"
+      }
     }
   }
 
   @Test
-  fun noUppercase() = capture {
+  fun noUppercase() {
     assumeVariant(BpkTestVariant.Default) // this just tests text size
 
-    BpkButtonLink(testContext, size).apply {
-      text = "Button"
+    capture {
+      BpkButtonLink(testContext, size).apply {
+        text = "Button"
+      }
     }
   }
 
   @Test
-  fun disabled() = capture {
+  fun disabled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     // disabled colors are not theme customisable
     Assume.assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
 
-    BpkButtonLink(testContext, size).apply {
-      text = "Button"
-      isEnabled = false
+    capture {
+      BpkButtonLink(testContext, size).apply {
+        text = "Button"
+        isEnabled = false
+      }
     }
   }
 
   @Test
-  fun iconAtStart() = capture {
+  fun iconAtStart() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
     // icon is bigger on large size, so we need to test this
 
-    BpkButtonLink(testContext, size).apply {
-      text = "Button"
-      icon = this@BpkButtonLinkTest.icon
-      iconPosition = BpkButton.START
+    capture {
+      BpkButtonLink(testContext, size).apply {
+        text = "Button"
+        icon = this@BpkButtonLinkTest.icon
+        iconPosition = BpkButton.START
+      }
     }
   }
 
   @Test
-  fun iconAtEnd() = capture {
+  fun iconAtEnd() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
     // icon is bigger on large size, so we need to test this
 
-    BpkButtonLink(testContext, size).apply {
-      text = "Button"
-      icon = this@BpkButtonLinkTest.icon
-      iconPosition = BpkButton.END
+    capture {
+      BpkButtonLink(testContext, size).apply {
+        text = "Button"
+        icon = this@BpkButtonLinkTest.icon
+        iconPosition = BpkButton.END
+      }
     }
   }
 

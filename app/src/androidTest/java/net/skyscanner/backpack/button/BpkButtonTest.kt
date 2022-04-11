@@ -50,104 +50,120 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     )
 
   @Test
-  fun text() = capture {
+  fun text() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed) // no need to test text on Rtl
     // we want to see colors of all types
     // different sizes have different text style
 
-    BpkButton(testContext, type, size).apply {
-      text = "Button"
+    capture {
+      BpkButton(testContext, type, size).apply {
+        text = "Button"
+      }
     }
   }
 
   @Test
-  fun disabled() = capture {
+  fun disabled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     // disabled/loading colors are not theme customisable
     Assume.assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
     Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all disabled buttons
 
-    BpkButton(testContext, type, size).apply {
-      text = "Button"
-      isEnabled = false
+    capture {
+      BpkButton(testContext, type, size).apply {
+        text = "Button"
+        isEnabled = false
+      }
     }
   }
 
   @Test
-  fun loading() = capture {
+  fun loading() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     // disabled/loading colors are not theme customisable
     Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
 
-    BpkButton(testContext, type, size).apply {
-      text = "Button"
-      loading = true
+    capture {
+      BpkButton(testContext, type, size).apply {
+        text = "Button"
+        loading = true
+      }
     }
   }
 
   @Test
-  fun loadingWithIcon() = capture {
+  fun loadingWithIcon() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
     Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
 
-    BpkButton(testContext, type, size).apply {
-      text = "Button"
-      icon = this@BpkButtonTest.icon
-      iconPosition = BpkButton.START
-      loading = true
+    capture {
+      BpkButton(testContext, type, size).apply {
+        text = "Button"
+        icon = this@BpkButtonTest.icon
+        iconPosition = BpkButton.START
+        loading = true
+      }
     }
   }
 
   @Test
-  fun loadingWithIconOnly() = capture {
+  fun loadingWithIconOnly() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
     Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
 
-    BpkButton(testContext, type, size).apply {
-      icon = this@BpkButtonTest.icon
-      iconPosition = BpkButton.ICON_ONLY
-      loading = true
+    capture {
+      BpkButton(testContext, type, size).apply {
+        icon = this@BpkButtonTest.icon
+        iconPosition = BpkButton.ICON_ONLY
+        loading = true
+      }
     }
   }
 
   @Test
-  fun iconAtStart() = capture {
+  fun iconAtStart() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
     Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
-    BpkButton(testContext, type, size).apply {
-      text = "Button"
-      icon = this@BpkButtonTest.icon
-      iconPosition = BpkButton.START
+    capture {
+      BpkButton(testContext, type, size).apply {
+        text = "Button"
+        icon = this@BpkButtonTest.icon
+        iconPosition = BpkButton.START
+      }
     }
   }
 
   @Test
-  fun iconAtEnd() = capture {
+  fun iconAtEnd() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
     Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
-    BpkButton(testContext, type, size).apply {
-      text = "Button"
-      icon = this@BpkButtonTest.icon
-      iconPosition = BpkButton.END
+    capture {
+      BpkButton(testContext, type, size).apply {
+        text = "Button"
+        icon = this@BpkButtonTest.icon
+        iconPosition = BpkButton.END
+      }
     }
   }
 
   @Test
-  fun iconOnly() = capture {
+  fun iconOnly() {
     assumeVariant(BpkTestVariant.Default) // since its only icon, RTL doesn't matter
     Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
-    BpkButton(testContext, type, size).apply {
-      icon = this@BpkButtonTest.icon
-      iconPosition = BpkButton.ICON_ONLY
+    capture {
+      BpkButton(testContext, type, size).apply {
+        icon = this@BpkButtonTest.icon
+        iconPosition = BpkButton.ICON_ONLY
+      }
     }
   }
 

@@ -49,53 +49,61 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun largeCorner() = capture {
+  fun largeCorner() {
     assumeVariant(BpkTestVariant.Default)
 
-    BpkCard(
-      modifier = Modifier.fillMaxSize(),
-      corner = BpkCardCorner.Large,
-      contentAlignment = Alignment.Center,
-    ) {
-      BpkText("Large corners")
+    capture {
+      BpkCard(
+        modifier = Modifier.fillMaxSize(),
+        corner = BpkCardCorner.Large,
+        contentAlignment = Alignment.Center,
+      ) {
+        BpkText("Large corners")
+      }
     }
   }
 
   @Test
-  fun noPadding() = capture {
+  fun noPadding() {
     assumeVariant(BpkTestVariant.Default)
 
-    BpkCard(
-      modifier = Modifier.fillMaxSize(),
-      padding = BpkCardPadding.None,
-    ) {
-      BpkText("No padding")
+    capture {
+      BpkCard(
+        modifier = Modifier.fillMaxSize(),
+        padding = BpkCardPadding.None,
+      ) {
+        BpkText("No padding")
+      }
     }
   }
 
   @Test
-  fun unfocused() = capture {
+  fun unfocused() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
 
-    BpkCard(
-      modifier = Modifier.fillMaxSize(),
-      contentAlignment = Alignment.Center,
-    ) {
-      BpkText("Unfocused")
+    capture {
+      BpkCard(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+      ) {
+        BpkText("Unfocused")
+      }
     }
   }
 
   @Test
-  fun focused() = capture {
+  fun focused() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
 
-    BpkCard(
-      onClick = {},
-      modifier = Modifier.fillMaxSize(),
-      focused = true,
-      contentAlignment = Alignment.Center,
-    ) {
-      BpkText("Focused")
+    capture {
+      BpkCard(
+        onClick = {},
+        modifier = Modifier.fillMaxSize(),
+        focused = true,
+        contentAlignment = Alignment.Center,
+      ) {
+        BpkText("Focused")
+      }
     }
   }
 
