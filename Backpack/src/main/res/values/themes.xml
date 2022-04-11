@@ -27,6 +27,7 @@
     <item name="bpkTextBodyDefaultAppearance">@style/bpkTextBodyDefault</item>
     <item name="bpkTextLabel1Appearance">@style/bpkTextLabel1</item>
     <item name="bpkTextLabel2Appearance">@style/bpkTextLabel2</item>
+    <item name="bpkTextLabel3Appearance">@style/bpkTextLabel3</item>
     <item name="bpkTextFootnoteAppearance">@style/bpkTextFootnote</item>
     <item name="bpkTextCaptionAppearance">@style/bpkTextCaption</item>
   </style>

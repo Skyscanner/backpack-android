@@ -76,6 +76,7 @@ fun BodyStyleStory() {
       BpkTheme.typography.caption to stringResource(R.string.text_caption),
       BpkTheme.typography.label1 to stringResource(R.string.text_label1),
       BpkTheme.typography.label2 to stringResource(R.string.text_label2),
+      BpkTheme.typography.label3 to stringResource(R.string.text_label3),
     )
     TypographyStylesStory(styles = styles)
   }

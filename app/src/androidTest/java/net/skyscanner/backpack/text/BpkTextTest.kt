@@ -97,6 +97,14 @@ class BpkTextTest : BpkSnapshotTest() {
   }
 
   @Test
+  fun label3() {
+    val text = BpkText(testContext)
+    text.text = "Message"
+    text.textStyle = BpkText.TextStyle.Label3
+    snap(text)
+  }
+
+  @Test
   fun heading1() {
     val text = BpkText(testContext)
     text.text = "Message"
