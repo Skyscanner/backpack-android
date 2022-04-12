@@ -234,7 +234,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/bpkSpacingBase"
-    android:paddingHorizontal="@dimen/bpkSpacingBase"
+    android:paddingHorizontal="@dimen/bpkSpacingMd"
     android:text="@string/icons_large"
     app:textStyle="heading4"/>
 
