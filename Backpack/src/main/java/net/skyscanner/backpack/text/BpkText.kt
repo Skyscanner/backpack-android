@@ -60,8 +60,9 @@ open class BpkText @JvmOverloads constructor(
     BodyDefault(12),
     Label1(13),
     Label2(14),
-    Footnote(15),
-    Caption(16),
+    Label3(15),
+    Footnote(16),
+    Caption(17),
     ;
 
     fun toStyle() =
@@ -81,6 +82,7 @@ open class BpkText @JvmOverloads constructor(
         BodyDefault -> R.attr.bpkTextBodyDefaultAppearance
         Label1 -> R.attr.bpkTextLabel1Appearance
         Label2 -> R.attr.bpkTextLabel2Appearance
+        Label3 -> R.attr.bpkTextLabel3Appearance
         Footnote -> R.attr.bpkTextFootnoteAppearance
         Caption -> R.attr.bpkTextCaptionAppearance
       }

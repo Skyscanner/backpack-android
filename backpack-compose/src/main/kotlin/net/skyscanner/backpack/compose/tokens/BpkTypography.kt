@@ -35,6 +35,7 @@ public data class BpkTypography internal constructor(
   public val hero5: TextStyle,
   public val label1: TextStyle,
   public val label2: TextStyle,
+  public val label3: TextStyle,
   public val subheading: TextStyle
 ) {
   internal constructor(defaultFontFamily: FontFamily = FontFamily.SansSerif) : this(
@@ -137,6 +138,12 @@ public data class BpkTypography internal constructor(
       fontWeight = FontWeight.Bold,
       fontSize = BpkFontSize.Sm,
       lineHeight = BpkLineHeight.Sm,
+      fontFamily = defaultFontFamily,
+    ),
+    label3 = TextStyle(
+      fontWeight = FontWeight.Bold,
+      fontSize = BpkFontSize.Xs,
+      lineHeight = BpkLineHeight.Xs,
       fontFamily = defaultFontFamily,
     ),
     subheading = TextStyle(

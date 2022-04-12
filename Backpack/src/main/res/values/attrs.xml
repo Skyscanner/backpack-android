@@ -41,8 +41,9 @@
       <enum name="bodyDefault" value="12" />
       <enum name="label1" value="13" />
       <enum name="label2" value="14" />
-      <enum name="footnote" value="15" />
-      <enum name="caption" value="16" />
+      <enum name="label3" value="15" />
+      <enum name="footnote" value="16" />
+      <enum name="caption" value="17" />
     </attr>
     <attr name="android:textColor" format="color" />
   </declare-styleable>
@@ -332,6 +333,7 @@
   <attr name="bpkTextBodyDefaultAppearance" format="reference" />
   <attr name="bpkTextLabel1Appearance" format="reference" />
   <attr name="bpkTextLabel2Appearance" format="reference" />
+  <attr name="bpkTextLabel3Appearance" format="reference" />
   <attr name="bpkTextFootnoteAppearance" format="reference" />
   <attr name="bpkTextCaptionAppearance" format="reference" />
 
