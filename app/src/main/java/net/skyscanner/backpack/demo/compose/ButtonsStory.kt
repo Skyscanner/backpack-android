@@ -61,7 +61,7 @@ fun ButtonsStory(
   size: BpkButtonSize,
   modifier: Modifier = Modifier,
 ) {
-  LazyColumn(modifier.fillMaxSize()) {
+  LazyColumn(modifier.fillMaxSize().padding(top = BpkDimension.Spacing.Md)) {
     item {
       ButtonsRow(
         type = BpkButtonType.Primary,
@@ -83,7 +83,7 @@ fun ButtonsStory(
 fun ButtonLinkStory(
   modifier: Modifier = Modifier,
 ) {
-  LazyColumn(modifier.fillMaxSize()) {
+  LazyColumn(modifier.fillMaxSize().padding(top = BpkDimension.Spacing.Md)) {
     LinkRows(BpkButtonSize.Default)
     item {
       BpkText(
