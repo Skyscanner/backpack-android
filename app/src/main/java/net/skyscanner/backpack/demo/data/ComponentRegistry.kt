@@ -164,13 +164,6 @@ object ComponentRegistry {
         ),
       )
     ),
-    "ButtonLink" story NodeData(
-      { children -> SubStory of children },
-      mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_button_link },
-        "Icon alignment" story NodeData { Story of R.layout.fragment_button_link_icon_alignment }
-      )
-    ),
     "Card" story NodeData(
       { children -> TabStory of children },
       mapOf(

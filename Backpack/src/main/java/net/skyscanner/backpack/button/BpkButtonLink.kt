@@ -36,6 +36,7 @@ import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
+@Deprecated("Use BpkButton with link type instead")
 open class BpkButtonLink(
   context: Context,
   attrs: AttributeSet? = null,
