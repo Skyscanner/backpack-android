@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
+import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
@@ -160,6 +161,7 @@ object ComponentRegistry {
           mapOf(
             "Default" composeStory { ButtonsStory(BpkButtonSize.Default) },
             "Large" composeStory { ButtonsStory(BpkButtonSize.Large) },
+            "Link" composeStory { ButtonLinkStory() }
           )
         ),
       )
