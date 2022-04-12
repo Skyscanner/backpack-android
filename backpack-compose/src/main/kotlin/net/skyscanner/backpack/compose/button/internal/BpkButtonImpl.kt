@@ -76,7 +76,7 @@ internal fun BpkButtonImpl(
         disabledContentColor = type.disabledContentColor(),
       ),
       shape = ButtonShape,
-      contentPadding = type.contentPadding(size),
+      contentPadding = type.contentPadding,
       elevation = null,
       content = {
         CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {

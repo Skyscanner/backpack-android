@@ -49,16 +49,13 @@ internal val BpkButtonSize.minHeight: Dp
       BpkButtonSize.Large -> 48.dp
     }
 
-internal val BpkButtonSize.horizontalPadding: Dp
-  get() =
-    BpkSpacing.Base
-
 internal val BpkButtonSize.horizontalSpacing: Dp
   get() =
     BpkSpacing.Md
 
-internal fun BpkButtonType.contentPadding(size: BpkButtonSize) : PaddingValues =
-  when (this) {
-    BpkButtonType.Link, BpkButtonType.LinkOnDark -> PaddingValues(0.dp)
-    else -> PaddingValues(horizontal = size.horizontalPadding)
-  }
+internal val BpkButtonType.contentPadding: PaddingValues
+  get() =
+    when (this) {
+      BpkButtonType.Link, BpkButtonType.LinkOnDark -> PaddingValues(0.dp)
+      else -> PaddingValues(horizontal = BpkSpacing.Base)
+    }
