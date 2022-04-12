@@ -84,18 +84,6 @@ open class BpkButton(
     get() = iconDrawablePosition
     set(value) {
       iconDrawablePosition = value
-      var paddingHorizontal = paddingHorizontal
-
-      if (value == ICON_ONLY) {
-        val requiredWidth = resources.getDimension(size.minHeight)
-        val iconSize = resources.getDimension(size.iconSize)
-        paddingHorizontal = (requiredWidth - iconSize) / 2
-        iconPadding = 0
-      } else {
-        iconPadding = resources.getDimensionPixelSize(size.horizontalSpacing)
-      }
-
-      setPaddingRelative(paddingHorizontal.roundToInt(), 0, paddingHorizontal.roundToInt(), 0)
       applyStyle(type.createStyle(context))
     }
 
@@ -220,6 +208,22 @@ open class BpkButton(
     } else {
       setTextColor(style.getContentColor())
     }
+
+    var paddingHorizontal = paddingHorizontal
+
+    if (iconDrawablePosition == ICON_ONLY) {
+      val requiredWidth = resources.getDimension(size.minHeight)
+      val iconSize = resources.getDimension(size.iconSize)
+      paddingHorizontal = (requiredWidth - iconSize) / 2
+      iconPadding = 0
+    } else {
+      iconPadding = resources.getDimensionPixelSize(size.horizontalSpacing)
+      if (type == Type.Link || type == Type.LinkOnDark) {
+        paddingHorizontal = 0f
+      }
+    }
+
+    setPaddingRelative(paddingHorizontal.roundToInt(), 0, paddingHorizontal.roundToInt(), 0)
   }
 
   enum class Type {
@@ -229,6 +233,9 @@ open class BpkButton(
     Destructive,
     PrimaryOnDark,
     PrimaryOnLight,
+    SecondaryOnDark,
+    Link,
+    LinkOnDark,
     ;
 
     internal companion object

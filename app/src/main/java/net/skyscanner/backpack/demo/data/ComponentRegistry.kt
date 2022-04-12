@@ -150,6 +150,7 @@ object ComponentRegistry {
           mapOf(
             "Standard" story NodeData { LoadingButtonStory of R.layout.fragment_button_standard },
             "Large" story NodeData { LoadingButtonStory of R.layout.fragment_button_large },
+            "Link" story NodeData { LoadingButtonStory of R.layout.fragment_button_link },
             "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
             "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable },
           )

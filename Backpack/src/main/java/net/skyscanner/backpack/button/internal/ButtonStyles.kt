@@ -83,6 +83,16 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     )
   }
 
+  object SecondaryOnDark : ButtonStyles() {
+    override fun invoke(context: Context) = ButtonStyle.fromTheme(
+      context = context,
+      style = R.attr.bpkButtonSecondaryOnDarkStyle,
+      bgColorRes = R.color.__buttonSecondaryOnDarkBackground,
+      contentColorRes = R.color.bpkWhite,
+      rippleColorRes = R.color.__buttonPrimaryOnLightRipple,
+    )
+  }
+
   object Link : ButtonStyles() {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
@@ -92,6 +102,18 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       contentColorRes = R.color.bpkPrimary,
       contentPressedColorRes = R.color.__buttonLinkPressedContent,
       rippleColorRes = R.color.__buttonLinkRipple,
+    )
+  }
+
+  object LinkOnDark : ButtonStyles() {
+    override fun invoke(context: Context) = ButtonStyle.fromTheme(
+      context = context,
+      style = R.attr.bpkButtonLinkOnDarkStyle,
+      bgColorRes = android.R.color.transparent,
+      bgDisabledColorRes = android.R.color.transparent,
+      contentColorRes = R.color.bpkWhite,
+      contentPressedColorRes = R.color.__buttonLinkOnDarkContent,
+      rippleColorRes = R.color.__buttonPrimaryOnLightRipple,
     )
   }
 }
