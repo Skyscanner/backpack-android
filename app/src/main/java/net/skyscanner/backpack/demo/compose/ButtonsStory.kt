@@ -86,11 +86,13 @@ fun ButtonLinkStory(
   LazyColumn(modifier.fillMaxSize()) {
     LinkRows(BpkButtonSize.Default)
     item {
-      BpkText(text = stringResource(R.string.icons_large),
+      BpkText(
+        text = stringResource(R.string.icons_large),
         style = BpkTheme.typography.heading4,
         modifier = Modifier
           .padding(horizontal = BpkDimension.Spacing.Base)
-          .padding(top = BpkDimension.Spacing.Md))
+          .padding(top = BpkDimension.Spacing.Md)
+      )
     }
     LinkRows(BpkButtonSize.Large)
   }
