@@ -47,6 +47,8 @@ enum class BpkButtonType {
   Featured,
   Destructive,
   Link,
+  SecondaryOnDark,
+  LinkOnDark,
 }
 
 

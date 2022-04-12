@@ -21,7 +21,6 @@ package net.skyscanner.backpack.compose.button.internal
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
@@ -77,7 +76,7 @@ internal fun BpkButtonImpl(
         disabledContentColor = type.disabledContentColor(),
       ),
       shape = ButtonShape,
-      contentPadding = ButtonPaddings(size, type),
+      contentPadding = type.contentPadding(size),
       elevation = null,
       content = {
         CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
@@ -145,9 +144,3 @@ private class ButtonRippleTheme(
 }
 
 private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
-
-private fun ButtonPaddings(size: BpkButtonSize, type: BpkButtonType) : PaddingValues =
-  when (type) {
-    BpkButtonType.Link -> PaddingValues(0.dp)
-    else -> PaddingValues(horizontal = size.horizontalPadding)
-  }
