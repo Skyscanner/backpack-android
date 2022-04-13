@@ -87,6 +87,9 @@
       <enum name="destructive" value="3" />
       <enum name="primaryOnDark" value="4" />
       <enum name="primaryOnLight" value="5" />
+      <enum name="secondaryOnDark" value="6" />
+      <enum name="link" value="7" />
+      <enum name="linkOnDark" value="8" />
     </attr>
     <attr name="buttonIcon" format="reference" />
     <attr name="buttonIconPosition" format="enum">
@@ -295,8 +298,10 @@
   <attr name="bpkButtonDestructiveStyle" format="reference" />
   <attr name="bpkButtonPrimaryOnDarkStyle" format="reference" />
   <attr name="bpkButtonPrimaryOnLightStyle" format="reference" />
+  <attr name="bpkButtonSecondaryOnDarkStyle" format="reference" />
   <attr name="bpkFabStyle" format="reference" />
   <attr name="bpkButtonLinkStyle" format="reference" />
+  <attr name="bpkButtonLinkOnDarkStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
   <attr name="bpkOutlineChipStyle" format="reference" />
   <attr name="bpkChipStyle" format="reference" />

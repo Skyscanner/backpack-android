@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
+import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
@@ -150,6 +151,7 @@ object ComponentRegistry {
           mapOf(
             "Standard" story NodeData { LoadingButtonStory of R.layout.fragment_button_standard },
             "Large" story NodeData { LoadingButtonStory of R.layout.fragment_button_large },
+            "Link" story NodeData { LoadingButtonStory of R.layout.fragment_button_link },
             "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
             "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable },
           )
@@ -159,15 +161,9 @@ object ComponentRegistry {
           mapOf(
             "Default" composeStory { ButtonsStory(BpkButtonSize.Default) },
             "Large" composeStory { ButtonsStory(BpkButtonSize.Large) },
+            "Link" composeStory { ButtonLinkStory() }
           )
         ),
-      )
-    ),
-    "ButtonLink" story NodeData(
-      { children -> SubStory of children },
-      mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_button_link },
-        "Icon alignment" story NodeData { Story of R.layout.fragment_button_link_icon_alignment }
       )
     ),
     "Card" story NodeData(

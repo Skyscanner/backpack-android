@@ -31,7 +31,6 @@ import androidx.test.rule.ActivityTestRule
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.button.BpkButton
-import net.skyscanner.backpack.button.BpkButtonLink
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Rule
@@ -160,7 +159,8 @@ class BpkDialogTest : BpkSnapshotTest() {
       )
 
       addActionButton(
-        BpkButtonLink(context).apply {
+        BpkButton(context).apply {
+          type = BpkButton.Type.Link
           text = "No, Thanks!"
         }
       )

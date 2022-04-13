@@ -7,12 +7,15 @@
   <color name="__buttonFeaturedPressedBackground">@color/bpkSkyBlueShade01</color>
   <color name="__buttonDestructiveBackground">@color/bpkSkyGrayTint06</color>
   <color name="__buttonDestructivePressedBackground">#B22E45</color>
+  <color name="__buttonSecondaryOnDarkBackground">#1AFFFFFF</color>
   <color name="__buttonPrimaryContent">@color/bpkWhite</color>
   <color name="__buttonSecondaryContent">@color/bpkSkyBlueShade01</color>
   <color name="__buttonFeaturedContent">@color/bpkWhite</color>
   <color name="__buttonDestructiveContent">#B22E45</color>
   <color name="__buttonDestructivePressedContent">@color/bpkWhite</color>
   <color name="__buttonLinkPressedContent">@color/bpkSkyBlueShade01</color>
+  <color name="__buttonLinkOnDarkContent">#99FFFFFF</color>
+  <color name="__buttonLinkOnDarkContentDisabled">#33FFFFFF</color>
   <color name="__buttonDefaultRipple">#33000000</color>
   <color name="__buttonDestructiveRipple">#19000000</color>
   <color name="__buttonFeaturedRipple">#19000000</color>

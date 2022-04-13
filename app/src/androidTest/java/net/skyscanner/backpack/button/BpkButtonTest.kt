@@ -19,18 +19,23 @@
 package net.skyscanner.backpack.button
 
 import android.view.View
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.viewinterop.AndroidView
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
-import org.junit.Assume
+import org.hamcrest.Matchers.isOneOf
+import org.junit.Assume.assumeThat
+import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -55,7 +60,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // we want to see colors of all types
     // different sizes have different text style
 
-    capture {
+    capture(background = type.rowBackground()) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
       }
@@ -66,10 +71,13 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   fun disabled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     // disabled/loading colors are not theme customisable
-    Assume.assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
-    Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all disabled buttons
+    assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
+    assumeThat(
+      type,
+      isOneOf(BpkButton.Type.Primary, BpkButton.Type.Link, BpkButton.Type.LinkOnDark)
+    ) // colors are different only for links
 
-    capture {
+    capture(background = type.rowBackground()) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
         isEnabled = false
@@ -81,10 +89,13 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   fun loading() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     // disabled/loading colors are not theme customisable
-    Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
+    assumeThat(
+      type,
+      isOneOf(BpkButton.Type.Primary, BpkButton.Type.Link, BpkButton.Type.LinkOnDark)
+    ) // colors are different only for links
     // we need to run it on large size as well and the progress size will be different
 
-    capture {
+    capture(background = type.rowBackground()) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
         loading = true
@@ -95,7 +106,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   fun loadingWithIcon() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
-    Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
+    assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
 
     capture {
@@ -111,7 +122,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   fun loadingWithIconOnly() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
-    Assume.assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
+    assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
 
     capture {
@@ -126,7 +137,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   fun iconAtStart() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
-    Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
+    assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
     capture {
@@ -141,7 +152,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   fun iconAtEnd() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
-    Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
+    assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
     capture {
@@ -156,7 +167,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   fun iconOnly() {
     assumeVariant(BpkTestVariant.Default) // since its only icon, RTL doesn't matter
-    Assume.assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
+    assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
     capture {
@@ -167,12 +178,18 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     }
   }
 
-  private fun capture(content: () -> View) {
+  private fun capture(background: Color = Color.Unspecified, content: () -> View) {
     composed(
       size = IntSize(160, 64),
       tags = listOf(type, size),
     ) {
-      Box(Modifier.fillMaxSize().padding(BpkSpacing.Md), contentAlignment = Alignment.TopStart) {
+      Box(
+        Modifier
+          .fillMaxSize()
+          .background(background)
+          .padding(BpkSpacing.Md),
+        contentAlignment = Alignment.TopStart
+      ) {
         AndroidView(factory = { content() })
       }
     }
@@ -180,21 +197,19 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
 
   companion object {
 
-    private val ButtonTypes = listOf(
-      BpkButton.Type.Primary,
-      BpkButton.Type.Secondary,
-      BpkButton.Type.PrimaryOnDark,
-      BpkButton.Type.PrimaryOnLight,
-      BpkButton.Type.Featured,
-      BpkButton.Type.Destructive,
-    )
-
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
-    fun flavours(): List<Flavor> = ButtonTypes.flatMap { type ->
+    fun flavours(): List<Flavor> = BpkButton.Type.values().flatMap { type ->
       BpkButton.Size.values().map { size -> Flavor(type, size) }
     }
   }
 }
 
 private typealias Flavor = Pair<BpkButton.Type, BpkButton.Size>
+
+private fun BpkButton.Type.rowBackground() =
+  when (this) {
+    BpkButton.Type.SecondaryOnDark, BpkButton.Type.PrimaryOnDark, BpkButton.Type.LinkOnDark -> BpkColor.SkyGray
+    BpkButton.Type.PrimaryOnLight -> Color.White
+    else -> Color.Unspecified
+  }

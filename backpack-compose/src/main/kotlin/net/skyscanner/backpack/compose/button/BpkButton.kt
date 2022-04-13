@@ -42,11 +42,13 @@ enum class BpkButtonSize {
 enum class BpkButtonType {
   Primary,
   Secondary,
+  Featured,
   PrimaryOnDark,
   PrimaryOnLight,
-  Featured,
+  SecondaryOnDark,
   Destructive,
   Link,
+  LinkOnDark,
 }
 
 

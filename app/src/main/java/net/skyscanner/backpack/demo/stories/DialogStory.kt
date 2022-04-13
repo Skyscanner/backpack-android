@@ -23,7 +23,6 @@ import android.os.Bundle
 import android.view.View
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.button.BpkButton
-import net.skyscanner.backpack.button.BpkButtonLink
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.dialog.BpkDialog
 
@@ -75,7 +74,8 @@ class DialogStory : Story() {
         )
 
         addActionButton(
-          BpkButtonLink(context).apply {
+          BpkButton(context).apply {
+            type = BpkButton.Type.Link
             text = "Skip"
             setOnClickListener {
               println("skipped")
@@ -97,7 +97,8 @@ class DialogStory : Story() {
         )
 
         addActionButton(
-          BpkButtonLink(context).apply {
+          BpkButton(context).apply {
+            type = BpkButton.Type.Link
             text = "Skip"
             setOnClickListener {
               println("skipped")
@@ -134,7 +135,8 @@ class DialogStory : Story() {
         )
 
         addActionButton(
-          BpkButtonLink(context).apply {
+          BpkButton(context).apply {
+            type = BpkButton.Type.Link
             text = "Cancel"
             setOnClickListener {
               println("canceled")
@@ -185,7 +187,8 @@ Safe travels!"""
         )
 
         addActionButton(
-          BpkButtonLink(context).apply {
+          BpkButton(context).apply {
+            type = BpkButton.Type.Link
             text = "Direct flights only"
             setOnClickListener {
               dialog.dismiss()
@@ -194,7 +197,8 @@ Safe travels!"""
         )
 
         addActionButton(
-          BpkButtonLink(context).apply {
+          BpkButton(context).apply {
+            type = BpkButton.Type.Link
             text = "No, Thanks!"
             setOnClickListener {
               dialog.dismiss()
@@ -225,7 +229,8 @@ Safe travels!"""
         )
 
         addActionButton(
-          BpkButtonLink(context).apply {
+          BpkButton(context).apply {
+            type = BpkButton.Type.Link
             text = "Skip"
             setOnClickListener {
               println("skipped")
@@ -253,7 +258,8 @@ Safe travels!"""
         )
 
         addActionButton(
-          BpkButtonLink(context).apply {
+          BpkButton(context).apply {
+            type = BpkButton.Type.Link
             text = "Whatev's"
             setOnClickListener {
               println("skipped")
@@ -283,7 +289,8 @@ Safe travels!"""
         )
 
         addActionButton(
-          BpkButtonLink(context).apply {
+          BpkButton(context).apply {
+            type = BpkButton.Type.Link
             text = "Ok, got it"
             setOnClickListener {
               println("skipped")

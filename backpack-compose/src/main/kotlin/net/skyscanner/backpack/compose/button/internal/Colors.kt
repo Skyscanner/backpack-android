@@ -30,13 +30,16 @@ import net.skyscanner.backpack.compose.utils.dynamicColorOf
 @Composable
 internal fun BpkButtonType.disabledBackgroundColor(): Color =
   when (this) {
-    BpkButtonType.Link -> Color.Transparent
+    BpkButtonType.Link, BpkButtonType.LinkOnDark -> Color.Transparent
     else -> dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint01)
   }
 
 @Composable
 internal fun BpkButtonType.disabledContentColor(): Color =
-  dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)
+  when (this) {
+    BpkButtonType.LinkOnDark -> Color.White.copy(alpha = 0.2f)
+    else -> dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)
+  }
 
 @Composable
 internal fun BpkButtonType.rippleColor(): Color =
@@ -44,7 +47,7 @@ internal fun BpkButtonType.rippleColor(): Color =
     BpkButtonType.Destructive -> dynamicColorOf(Color.Black, Color.White).copy(alpha = 0.1f)
     BpkButtonType.Featured -> Color.Black.copy(alpha = 0.1f)
     BpkButtonType.Link -> dynamicColorOf(Color.Black, dark = Color.White).copy(alpha = 0.2f)
-    BpkButtonType.PrimaryOnLight -> Color.White.copy(alpha = 0.2f)
+    BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark, BpkButtonType.LinkOnDark -> Color.White.copy(alpha = 0.2f)
     else -> Color.Black.copy(alpha = 0.2f)
   }
 
@@ -59,11 +62,12 @@ internal fun BpkButtonType.backgroundColor(interactionSource: InteractionSource)
       default = BpkTheme.colors.primary,
       pressed = dynamicColorOf(BpkColor.SkyBlueShade01, dark = BpkColor.SkyBlue),
     )
-    BpkButtonType.Link -> Color.Transparent
+    BpkButtonType.Link, BpkButtonType.LinkOnDark -> Color.Transparent
     BpkButtonType.Primary -> BpkColor.Monteverde
     BpkButtonType.PrimaryOnDark -> BpkColor.White
     BpkButtonType.PrimaryOnLight -> BpkColor.SkyGray
     BpkButtonType.Secondary -> dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint02)
+    BpkButtonType.SecondaryOnDark -> Color.White.copy(alpha = 0.1f)
   }
 
 
@@ -79,8 +83,16 @@ internal fun BpkButtonType.contentColor(interactionSource: InteractionSource): C
       default = BpkTheme.colors.primary,
       pressed = dynamicColorOf(BpkColor.SkyBlueShade01, BpkColor.SkyBlue),
     )
+    BpkButtonType.LinkOnDark -> interactionSource.animateAsColor(
+      default = Color.White,
+      pressed = Color.White.copy(alpha = 0.6f),
+    )
     BpkButtonType.Primary -> dynamicColorOf(BpkColor.White, BpkColor.Black)
     BpkButtonType.PrimaryOnDark -> BpkColor.SkyGray
-    BpkButtonType.PrimaryOnLight -> BpkColor.White
+    BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkColor.White
     BpkButtonType.Secondary -> dynamicColorOf(BpkColor.SkyBlueShade01, BpkColor.SkyBlueTint01)
   }
+
+@Composable
+internal fun loadingSpinnerColor(): Color =
+  dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)

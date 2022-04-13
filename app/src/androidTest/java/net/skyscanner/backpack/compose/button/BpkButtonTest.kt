@@ -18,12 +18,14 @@
 
 package net.skyscanner.backpack.compose.button
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
@@ -31,6 +33,7 @@ import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.LongArrowRight
 import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.compose.rowBackground
 import org.hamcrest.Matchers.isOneOf
 import org.junit.Assume.assumeThat
 import org.junit.Assume.assumeTrue
@@ -56,7 +59,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // we want to see colors of all types
     // different sizes have different text style
 
-    capture {
+    capture(background = type.rowBackground()) {
       BpkButton("Button", type = type, size = size, onClick = {})
     }
   }
@@ -65,9 +68,12 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   fun disabled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     assumeTrue(size == BpkButtonSize.Default) // colors will be the same on large size
-    assumeThat(type, isOneOf(BpkButtonType.Primary, BpkButtonType.Link)) // colors are different only for link
+    assumeThat(
+      type,
+      isOneOf(BpkButtonType.Primary, BpkButtonType.Link, BpkButtonType.LinkOnDark)
+    ) // colors are different only for links
 
-    capture {
+    capture(background = type.rowBackground()) {
       BpkButton("Button", type = type, size = size, enabled = false, onClick = {})
     }
   }
@@ -75,10 +81,13 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   fun loading() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
-    assumeThat(type, isOneOf(BpkButtonType.Primary, BpkButtonType.Link)) // colors are different only for link
+    assumeThat(
+      type,
+      isOneOf(BpkButtonType.Primary, BpkButtonType.Link, BpkButtonType.LinkOnDark)
+    ) // colors are different only for links
     // we need to run it on large size as well and the progress size will be different
 
-    capture {
+    capture(background = type.rowBackground()) {
       BpkButton("Button", type = type, size = size, loading = true, onClick = {})
     }
   }
@@ -116,12 +125,18 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     }
   }
 
-  private fun capture(content: @Composable () -> Unit) {
+  private fun capture(background: Color = Color.Unspecified, content: @Composable () -> Unit) {
     composed(
       size = IntSize(160, 64),
       tags = listOf(type, size),
     ) {
-      Box(Modifier.fillMaxSize().padding(BpkSpacing.Md), contentAlignment = Alignment.TopStart) {
+      Box(
+        Modifier
+          .fillMaxSize()
+          .background(background)
+          .padding(BpkSpacing.Md),
+        contentAlignment = Alignment.TopStart,
+      ) {
         content()
       }
     }

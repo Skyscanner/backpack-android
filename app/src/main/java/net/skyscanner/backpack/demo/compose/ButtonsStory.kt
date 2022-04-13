@@ -18,20 +18,24 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -43,6 +47,10 @@ import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.LongArrowRight
 import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import kotlin.time.Duration.Companion.seconds
@@ -53,95 +61,56 @@ fun ButtonsStory(
   size: BpkButtonSize,
   modifier: Modifier = Modifier,
 ) {
-
-  val icon = when (size) {
-    BpkButtonSize.Default -> BpkIcons.Sm.LongArrowRight
-    BpkButtonSize.Large -> BpkIcons.Lg.LongArrowRight
-  }
-
-  Row(
-    modifier = modifier
-      .fillMaxSize()
-      .padding(horizontal = BpkSpacing.Base)
-      .padding(top = BpkSpacing.Md),
-    verticalAlignment = Alignment.Top,
-    horizontalArrangement = Arrangement.SpaceBetween,
-  ) {
-
-    ButtonsColumn { type, enabled ->
-      BpkButton(
-        text = stringResource(R.string.button),
+  LazyColumn(modifier.fillMaxSize().padding(top = BpkDimension.Spacing.Md)) {
+    item {
+      ButtonsRow(
+        type = BpkButtonType.Primary,
         size = size,
-        type = type,
-        loading = loading,
-        enabled = enabled,
-        onClick = ::load,
+        enabled = false,
       )
     }
-
-    ButtonsColumn { type, enabled ->
-      BpkButton(
-        text = stringResource(R.string.button),
-        icon = icon,
-        position = BpkButtonIconPosition.Start,
+    items(BpkButtonType.values().filter { !it.linkType() }) {
+      ButtonsRow(
+        type = it,
         size = size,
-        type = type,
-        enabled = enabled,
-        loading = loading,
-        onClick = ::load,
-      )
-    }
-
-    ButtonsColumn { type, enabled ->
-      BpkButton(
-        text = stringResource(R.string.button),
-        icon = icon,
-        position = BpkButtonIconPosition.End,
-        size = size,
-        type = type,
-        enabled = enabled,
-        loading = loading,
-        onClick = ::load,
-      )
-    }
-
-    ButtonsColumn { type, enabled ->
-      BpkButton(
-        icon = icon,
-        contentDescription = stringResource(R.string.button),
-        size = size,
-        type = type,
-        enabled = enabled,
-        loading = loading,
-        onClick = ::load,
+        enabled = true,
       )
     }
   }
 }
 
 @Composable
-private fun ButtonsColumn(
+fun ButtonLinkStory(
   modifier: Modifier = Modifier,
-  factory: @Composable LoadingScope.(type: BpkButtonType, enabled: Boolean) -> Unit,
 ) {
-  Column(
-    modifier = modifier,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.Top),
-    horizontalAlignment = Alignment.CenterHorizontally,
-  ) {
-
-    LoadingScope {
-      factory(type = BpkButtonType.Primary, enabled = false)
+  LazyColumn(modifier.fillMaxSize().padding(top = BpkDimension.Spacing.Md)) {
+    LinkRows(BpkButtonSize.Default)
+    item {
+      BpkText(
+        text = stringResource(R.string.icons_large),
+        style = BpkTheme.typography.heading4,
+        modifier = Modifier
+          .padding(horizontal = BpkDimension.Spacing.Base)
+          .padding(top = BpkDimension.Spacing.Md)
+      )
     }
+    LinkRows(BpkButtonSize.Large)
+  }
+}
 
-    BpkButtonType.values().forEach { type ->
-      LoadingScope {
-        factory(type = type, enabled = true)
-      }
-    }
-
-    LoadingScope {
-      factory(type = BpkButtonType.Link, enabled = false)
+private fun LazyListScope.LinkRows(size: BpkButtonSize) {
+  items(BpkButtonType.values().filter { it.linkType() }) {
+    Column {
+      ButtonsRow(
+        type = it,
+        size = size,
+        enabled = true,
+      )
+      ButtonsRow(
+        type = it,
+        size = size,
+        enabled = false,
+      )
     }
   }
 }
@@ -161,6 +130,7 @@ private fun ButtonsRow(
   Row(
     modifier
       .fillMaxWidth()
+      .background(type.rowBackground())
       .padding(vertical = BpkSpacing.Md, horizontal = BpkSpacing.Base),
     horizontalArrangement = Arrangement.SpaceBetween,
   ) {
@@ -238,3 +208,16 @@ private class LoadingScope(private val scope: CoroutineScope) {
     }
   }
 }
+
+private fun BpkButtonType.linkType() =
+  when (this) {
+    BpkButtonType.Link, BpkButtonType.LinkOnDark -> true
+    else -> false
+  }
+
+internal fun BpkButtonType.rowBackground() =
+  when (this) {
+    BpkButtonType.SecondaryOnDark, BpkButtonType.LinkOnDark, BpkButtonType.PrimaryOnDark -> BpkColor.SkyGray
+    BpkButtonType.PrimaryOnLight -> Color.White
+    else -> Color.Transparent
+  }

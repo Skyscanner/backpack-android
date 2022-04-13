@@ -84,18 +84,6 @@ open class BpkButton(
     get() = iconDrawablePosition
     set(value) {
       iconDrawablePosition = value
-      var paddingHorizontal = paddingHorizontal
-
-      if (value == ICON_ONLY) {
-        val requiredWidth = resources.getDimension(size.minHeight)
-        val iconSize = resources.getDimension(size.iconSize)
-        paddingHorizontal = (requiredWidth - iconSize) / 2
-        iconPadding = 0
-      } else {
-        iconPadding = resources.getDimensionPixelSize(size.horizontalSpacing)
-      }
-
-      setPaddingRelative(paddingHorizontal.roundToInt(), 0, paddingHorizontal.roundToInt(), 0)
       applyStyle(type.createStyle(context))
     }
 
@@ -107,6 +95,7 @@ open class BpkButton(
       setStyle(CircularProgressDrawable.DEFAULT)
       strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
       callback = this@BpkButton
+      setColorSchemeColors(context.getColor(R.color.__buttonDisabledText))
     }
   }
 
@@ -210,16 +199,27 @@ open class BpkButton(
     this.style = style
     background = style.getButtonBackground(isEnabled)
 
-    val contentColor = style.getContentColor()
-    val contentDisabledColor = contentColor.getColorForState(StateDisabled, textColors.defaultColor)
-
-    progress.setColorSchemeColors(contentDisabledColor)
-
     if (loading) {
       setTextColor(Color.TRANSPARENT)
     } else {
       setTextColor(style.getContentColor())
     }
+
+    var paddingHorizontal = paddingHorizontal
+
+    if (iconDrawablePosition == ICON_ONLY) {
+      val requiredWidth = resources.getDimension(size.minHeight)
+      val iconSize = resources.getDimension(size.iconSize)
+      paddingHorizontal = (requiredWidth - iconSize) / 2
+      iconPadding = 0
+    } else {
+      iconPadding = resources.getDimensionPixelSize(size.horizontalSpacing)
+      if (type == Type.Link || type == Type.LinkOnDark) {
+        paddingHorizontal = 0f
+      }
+    }
+
+    setPaddingRelative(paddingHorizontal.roundToInt(), 0, paddingHorizontal.roundToInt(), 0)
   }
 
   enum class Type {
@@ -229,6 +229,9 @@ open class BpkButton(
     Destructive,
     PrimaryOnDark,
     PrimaryOnLight,
+    SecondaryOnDark,
+    Link,
+    LinkOnDark,
     ;
 
     internal companion object
@@ -246,7 +249,5 @@ open class BpkButton(
     const val START = ICON_POSITION_START
     const val END = ICON_POSITION_END
     const val ICON_ONLY = ICON_POSITION_ICON_ONLY
-
-    private val StateDisabled = intArrayOf(-android.R.attr.state_enabled)
   }
 }

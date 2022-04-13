@@ -18,11 +18,13 @@
 
 package net.skyscanner.backpack.compose.button.internal
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
@@ -47,10 +49,13 @@ internal val BpkButtonSize.minHeight: Dp
       BpkButtonSize.Large -> 48.dp
     }
 
-internal val BpkButtonSize.horizontalPadding: Dp
-  get() =
-    BpkSpacing.Base
-
 internal val BpkButtonSize.horizontalSpacing: Dp
   get() =
     BpkSpacing.Md
+
+internal val BpkButtonType.contentPadding: PaddingValues
+  get() =
+    when (this) {
+      BpkButtonType.Link, BpkButtonType.LinkOnDark -> PaddingValues(0.dp)
+      else -> PaddingValues(horizontal = BpkSpacing.Base)
+    }
