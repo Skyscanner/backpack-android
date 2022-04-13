@@ -31,7 +31,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
@@ -123,7 +122,7 @@ internal fun ButtonProgress(size: BpkButtonSize, modifier: Modifier = Modifier) 
   CircularProgressIndicator(
     modifier = modifier.requiredSize(size.iconSize),
     strokeWidth = 2.dp,
-    color = LocalContentColor.current,
+    color = loadingSpinnerColor(),
   )
 }
 

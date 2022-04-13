@@ -36,7 +36,10 @@ internal fun BpkButtonType.disabledBackgroundColor(): Color =
 
 @Composable
 internal fun BpkButtonType.disabledContentColor(): Color =
-  dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)
+  when (this) {
+    BpkButtonType.LinkOnDark -> Color.White.copy(alpha = 0.2f)
+    else -> dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)
+  }
 
 @Composable
 internal fun BpkButtonType.rippleColor(): Color =
@@ -89,3 +92,7 @@ internal fun BpkButtonType.contentColor(interactionSource: InteractionSource): C
     BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkColor.White
     BpkButtonType.Secondary -> dynamicColorOf(BpkColor.SkyBlueShade01, BpkColor.SkyBlueTint01)
   }
+
+@Composable
+internal fun loadingSpinnerColor(): Color =
+  dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)

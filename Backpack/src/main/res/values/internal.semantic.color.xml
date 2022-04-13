@@ -15,6 +15,7 @@
   <color name="__buttonDestructivePressedContent">@color/bpkWhite</color>
   <color name="__buttonLinkPressedContent">@color/bpkSkyBlueShade01</color>
   <color name="__buttonLinkOnDarkContent">#99FFFFFF</color>
+  <color name="__buttonLinkOnDarkContentDisabled">#33FFFFFF</color>
   <color name="__buttonDefaultRipple">#33000000</color>
   <color name="__buttonDestructiveRipple">#19000000</color>
   <color name="__buttonFeaturedRipple">#19000000</color>

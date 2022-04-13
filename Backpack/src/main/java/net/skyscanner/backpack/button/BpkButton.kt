@@ -95,6 +95,7 @@ open class BpkButton(
       setStyle(CircularProgressDrawable.DEFAULT)
       strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
       callback = this@BpkButton
+      setColorSchemeColors(context.getColor(R.color.__buttonDisabledText))
     }
   }
 
@@ -198,11 +199,6 @@ open class BpkButton(
     this.style = style
     background = style.getButtonBackground(isEnabled)
 
-    val contentColor = style.getContentColor()
-    val contentDisabledColor = contentColor.getColorForState(StateDisabled, textColors.defaultColor)
-
-    progress.setColorSchemeColors(contentDisabledColor)
-
     if (loading) {
       setTextColor(Color.TRANSPARENT)
     } else {
@@ -253,7 +249,5 @@ open class BpkButton(
     const val START = ICON_POSITION_START
     const val END = ICON_POSITION_END
     const val ICON_ONLY = ICON_POSITION_ICON_ONLY
-
-    private val StateDisabled = intArrayOf(-android.R.attr.state_enabled)
   }
 }
