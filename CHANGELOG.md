@@ -2,6 +2,12 @@
 
 [Unreleased changes](UNRELEASED.md).
 
+# 36.2.0
+
+**Added:**
+- New `link`, `primaryOnDark` and `linkOnDark` button styles
+- Deprecated `BpkButtonLink` in favour of `link` button style
+
 # 36.1.0
 
 **Added:**

@@ -1,10 +1,6 @@
 # Unreleased
 > Place your changes below this line.
 
-**Added:**
-- New `link`, `primaryOnDark` and `linkOnDark` button styles
-- Deprecated `BpkButtonLink` in favour of `link` button style
-
 ## How to write a good changelog entry
 
 1. Add 'Breaking', 'Added' or 'Fixed' in bold depending on if the change will be major, minor or patch according to [semver](semver.org).
