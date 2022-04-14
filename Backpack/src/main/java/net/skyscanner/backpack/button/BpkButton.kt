@@ -95,7 +95,6 @@ open class BpkButton(
       setStyle(CircularProgressDrawable.DEFAULT)
       strokeWidth = resources.getDimension(R.dimen.bpkSpacingSm) * 0.5f
       callback = this@BpkButton
-      setColorSchemeColors(context.getColor(R.color.__buttonDisabledText))
     }
   }
 
@@ -157,6 +156,7 @@ open class BpkButton(
     this.minHeight = resources.getDimensionPixelSize(size.minHeight)
     this.iconSize = resources.getDimensionPixelSize(size.iconSize)
     this.progress.centerRadius = iconSize / 2f - this.progress.strokeWidth
+    this.progress.setColorSchemeColors(context.getColor(R.color.__buttonDisabledText))
     BpkText.getFont(context, size.textStyle).applyTo(this)
     applyStyle(style)
   }
