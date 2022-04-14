@@ -2,6 +2,12 @@
 
 [Unreleased changes](UNRELEASED.md).
 
+# 36.2.1
+
+**Fixed:**
+- backpack-android
+  - Fixed crash for loading button
+
 # 36.2.0
 
 **Added:**
