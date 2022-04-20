@@ -52,7 +52,7 @@ open class BpkButton(
   attrs: AttributeSet?,
   defStyleAttr: Int,
   type: Type,
-  private val size: Size = Size.Standard,
+  size: Size = Size.Standard,
 ) : BpkButtonBase(context, attrs, defStyleAttr) {
 
   constructor(
@@ -122,6 +122,12 @@ open class BpkButton(
       applyStyle(type.createStyle(context))
     }
 
+  var size: Size = size
+    set(value) {
+      field = value
+      updateSize()
+    }
+
   private var enabled = isEnabled
 
   init {
@@ -153,11 +159,8 @@ open class BpkButton(
     this.loading = loading
     this.icon = icon
     this.iconPosition = iconPosition
-    this.minHeight = resources.getDimensionPixelSize(size.minHeight)
-    this.iconSize = resources.getDimensionPixelSize(size.iconSize)
-    this.progress.centerRadius = iconSize / 2f - this.progress.strokeWidth
     this.progress.setColorSchemeColors(context.getColor(R.color.__buttonDisabledText))
-    BpkText.getFont(context, size.textStyle).applyTo(this)
+    updateSize()
     applyStyle(style)
   }
 
@@ -220,6 +223,13 @@ open class BpkButton(
     }
 
     setPaddingRelative(paddingHorizontal.roundToInt(), 0, paddingHorizontal.roundToInt(), 0)
+  }
+
+  private fun updateSize() {
+    minHeight = resources.getDimensionPixelSize(size.minHeight)
+    iconSize = resources.getDimensionPixelSize(size.iconSize)
+    progress.centerRadius = iconSize / 2f - progress.strokeWidth
+    BpkText.getFont(context, size.textStyle).applyTo(this)
   }
 
   enum class Type {
