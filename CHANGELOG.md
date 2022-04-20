@@ -2,6 +2,12 @@
 
 [Unreleased changes](UNRELEASED.md).
 
+# 36.3.0
+
+**Added:**
+- `backpack-android`:
+  - Added `size` property to change button size after creation
+
 # 36.2.1
 
 **Fixed:**
