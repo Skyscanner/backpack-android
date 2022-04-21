@@ -26,7 +26,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.button.BpkButton
 import kotlin.time.Duration.Companion.seconds
-import kotlin.time.ExperimentalTime
 
 class LoadingButtonStory : Story() {
 
@@ -35,7 +34,6 @@ class LoadingButtonStory : Story() {
     makeButtonsLoadeable(view as ViewGroup)
   }
 
-  @OptIn(ExperimentalTime::class)
   private fun makeButtonsLoadeable(parent: ViewGroup) {
     for (i in 0 until parent.childCount) {
       val child = parent.getChildAt(i)
