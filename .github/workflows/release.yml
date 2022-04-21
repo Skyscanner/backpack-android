@@ -34,6 +34,13 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
+      - name: Publish release
+        uses: release-drafter/release-drafter@v5
+        with:
+          publish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Get release tag
         id: tag
         uses: dawidd6/action-get-tag@v1

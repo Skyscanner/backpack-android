@@ -27,19 +27,7 @@ const shouldContainLicensingInformation = filePath =>
 
 const createdFiles = danger.git.created_files;
 const modifiedFiles = danger.git.modified_files;
-const fileChanges = [...modifiedFiles, ...createdFiles];
 const declaredTrivial = danger.github.pr.title.includes('#trivial');
-
-// If any code have changed, the UNRELEASED log should have been updated.
-const unreleasedModified = includes(modifiedFiles, 'UNRELEASED.md');
-const packagesModified = fileChanges.some(filePath =>
-  filePath.startsWith('Backpack/src/main') ||
-  filePath.startsWith('backpack-compose/src/main') ||
-  filePath.startsWith('backpack-common/src/main')
-);
-if (packagesModified && !unreleasedModified && !declaredTrivial) {
-  warn("One or more packages have changed, but `UNRELEASED.md` wasn't updated.");
-}
 
 // If any files were created, the BpkComponentUsageDetector should have been updated.
 const usageDetector = includes(
