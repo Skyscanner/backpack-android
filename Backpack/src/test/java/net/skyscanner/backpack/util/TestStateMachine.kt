@@ -23,8 +23,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.plus
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.TestCoroutineScheduler
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 
 interface TestStateMachineResult
 
@@ -52,10 +53,11 @@ fun <SM : StateMachine<State, *>, State> testStateMachine(
   creator: CoroutineScope.(CoroutineDispatcher) -> SM,
   block: suspend TestStateMachineScope<SM, State>.() -> TestStateMachineResult
 ) {
-  val coroutineDispatcher = TestCoroutineDispatcher()
-  val coroutineScope = TestCoroutineScope() + coroutineDispatcher
+  val testCoroutineScheduler = TestCoroutineScheduler()
+  val coroutineDispatcher = UnconfinedTestDispatcher(testCoroutineScheduler)
+  val coroutineScope = TestScope(testCoroutineScheduler) + coroutineDispatcher
 
-  runBlocking(coroutineDispatcher) {
+  runBlocking(testCoroutineScheduler) {
     val stateMachine = coroutineScope.creator(coroutineDispatcher)
     val testScope = TestStateMachineScope(stateMachine)
     testScope.block()
