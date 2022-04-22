@@ -1,6 +1,8 @@
 # Backpack Android changelog
 
-[Unreleased changes](UNRELEASED.md).
+For latest changelogs check the [releases page](https://github.com/Skyscanner/backpack-android/releases).
+
+# Previous changelogs
 
 # 36.3.0
 

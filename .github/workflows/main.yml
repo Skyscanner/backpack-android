@@ -18,6 +18,14 @@ jobs:
     name: Build
     uses: ./.github/workflows/_build.yml
 
+  ReleaseDraft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Draft release notes
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   Deploy:
     name: Deploy
     runs-on: ubuntu-latest
