@@ -9,8 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: jesusvasquez333/verify-pr-label-action@v1.4.0
+      - uses: docker://agilepathway/pull-request-label-checker:latest
         with:
-          github-token: '${{ secrets.GITHUB_TOKEN }}'
-          valid-labels: 'major, minor, patch, dependencies, skip-changelog'
-          pull-request-number: '${{ github.event.pull_request.number }}'
+          one_of: major, minor, patch, dependencies, skip-changelog
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
