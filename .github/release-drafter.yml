@@ -27,3 +27,5 @@ version-resolver:
 template: |
   ## What’s Changed
   $CHANGES
+
+  **Contributors:** $CONTRIBUTORS
