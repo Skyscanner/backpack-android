@@ -11,7 +11,6 @@ categories:
     label: 'dependencies'
 exclude-labels:
   - 'skip-changelog'
-change-template: '- $TITLE (#$NUMBER)'
 version-resolver:
   major:
     labels:
@@ -27,5 +26,3 @@ version-resolver:
 template: |
   ## What’s Changed
   $CHANGES
-
-  **Contributors:** $CONTRIBUTORS
