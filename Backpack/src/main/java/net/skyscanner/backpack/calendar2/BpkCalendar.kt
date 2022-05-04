@@ -21,10 +21,13 @@ package net.skyscanner.backpack.calendar2
 import android.content.Context
 import android.content.res.Configuration
 import android.util.AttributeSet
+import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -81,6 +84,7 @@ class BpkCalendar private constructor(
     recyclerView.layoutManager = calendarLayoutManager
     recyclerView.adapter = calendarAdapter
     recyclerView.itemAnimator = null
+    recyclerView.setAccessibilityDelegateCompat(NoCellPositionAccessibilityInfo(recyclerView))
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
@@ -130,4 +134,16 @@ class BpkCalendar private constructor(
       recyclerView.smoothScrollToPosition(index)
     }
   }
+
+  private class NoCellPositionAccessibilityInfo(
+    recyclerView: RecyclerView
+  ) : RecyclerViewAccessibilityDelegate(recyclerView) {
+
+    override fun onInitializeAccessibilityNodeInfo(host: View?, info: AccessibilityNodeInfoCompat?) {
+      super.onInitializeAccessibilityNodeInfo(host, info)
+      info?.setCollectionInfo(null)
+    }
+
+  }
+
 }

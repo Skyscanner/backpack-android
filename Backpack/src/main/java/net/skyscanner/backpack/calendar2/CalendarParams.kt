@@ -46,6 +46,7 @@ data class CalendarParams(
   val dayOfWeekAccessibilityText: TextStyle = TextStyle.FULL_STANDALONE,
 //  val monthsText: TextStyle = TextStyle.FULL_STANDALONE, inaccessible for now,
 //  see https://github.com/ThreeTen/threetenbp/issues/55
+  @Deprecated("This parameter is ignored in a favour of Android's TtsSpan")
   val dateAccessibilityText: TextStyle = TextStyle.FULL,
   val now: LocalDate = LocalDate.now(),
 ) {
