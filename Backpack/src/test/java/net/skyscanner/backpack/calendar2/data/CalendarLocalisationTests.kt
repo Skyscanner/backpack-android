@@ -18,12 +18,16 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import android.text.Spanned
+import android.text.style.TtsSpan
+import androidx.core.text.getSpans
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.threeten.bp.DayOfWeek
-import java.util.Locale
+import java.util.*
 
 class CalendarLocalisationTests {
 
@@ -60,10 +64,19 @@ class CalendarLocalisationTests {
   }
 
   @Test
-  fun `days content description depends on locale`() {
-    testCalendarWith(russianLocale) {
+  fun `days content description is a correct Tts span`() {
+    testCalendarWith(CalendarSettings.Default) {
       verify {
-        assertEquals("1 января", (state.cells[6] as CalendarCell.Day).contentDescription)
+        val cell = state.cells[6] as CalendarCell.Day
+        val text = cell.text as Spanned
+        val spans = text.getSpans<TtsSpan>()
+        assertTrue(spans.size == 1)
+
+        val ttsSpan = spans.first()
+
+        assertEquals(1, ttsSpan.args.get(TtsSpan.ARG_DAY)) // 1st
+        assertEquals(0, ttsSpan.args.get(TtsSpan.ARG_MONTH)) // of Jan
+        assertEquals(6, ttsSpan.args.get(TtsSpan.ARG_WEEKDAY)) // Saturday
       }
     }
   }
