@@ -31,7 +31,7 @@ import org.junit.Test
 class CalendarSelectionTests {
 
   @Test
-  fun `no date selected by default`() {
+  fun no_date_selected_by_default() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         assertTrue(state.selection is CalendarSelection.None)
@@ -40,7 +40,7 @@ class CalendarSelectionTests {
   }
 
   @Test
-  fun `if selection is disabled no date can be selected`() {
+  fun if_selection_is_disabled_no_date_can_be_selected() {
     val disabledDates = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Disabled,
     )

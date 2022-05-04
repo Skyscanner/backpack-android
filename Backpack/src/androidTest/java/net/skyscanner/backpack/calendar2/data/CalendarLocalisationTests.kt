@@ -36,7 +36,7 @@ class CalendarLocalisationTests {
   )
 
   @Test
-  fun `month titles depend on locale`() {
+  fun month_titles_depend_on_locale() {
     testCalendarWith(russianLocale) {
       verify {
         assertEquals("Январь", (state.cells[0] as CalendarCell.Header).title)
@@ -45,7 +45,7 @@ class CalendarLocalisationTests {
   }
 
   @Test
-  fun `week fields order depends on locale`() {
+  fun week_fields_order_depends_on_locale() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         assertEquals(DayOfWeek.SUNDAY, state.params.weekFields.firstDayOfWeek)
@@ -54,7 +54,7 @@ class CalendarLocalisationTests {
   }
 
   @Test
-  fun `when locale changes week fields order is updated`() {
+  fun when_locale_changes_week_fields_order_is_updated() {
     testCalendarWith(CalendarSettings.Default) {
       stateMachine.onLocaleChanged(russianLocale.locale)
       verify {
@@ -64,7 +64,7 @@ class CalendarLocalisationTests {
   }
 
   @Test
-  fun `days content description is a correct Tts span`() {
+  fun days_content_description_is_a_correct_Tts_span() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         val cell = state.cells[6] as CalendarCell.Day

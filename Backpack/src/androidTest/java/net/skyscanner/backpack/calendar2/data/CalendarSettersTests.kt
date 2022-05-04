@@ -33,7 +33,7 @@ import org.junit.Test
 class CalendarSettersTests {
 
   @Test
-  fun `setParams() changes params`() {
+  fun setParams_changes_params() {
     testCalendarWith(CalendarSettings.Default) {
       stateMachine.setParams(CalendarSettings.Default.copy(selectionMode = CalendarParams.SelectionMode.Disabled))
       verify {
@@ -43,7 +43,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Single) changes selection`() {
+  fun setSelection_of_single_changes_selection() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Single,
     )
@@ -57,7 +57,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Range) changes selection`() {
+  fun setSelection_of_range_changes_selection() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Range,
     )
@@ -71,7 +71,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Single) ignores change when selectionMode is disabled`() {
+  fun setSelection_of_single_ignores_change_when_selectionMode_is_disabled() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Disabled,
     )
@@ -86,7 +86,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Range) ignores change when selectionMode is disabled`() {
+  fun setSelection_of_range_ignores_change_when_selectionMode_is_disabled() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Disabled,
     )
@@ -101,7 +101,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Single) ignores change when date is disabled`() {
+  fun setSelection_of_single_ignores_change_when_date_is_disabled() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Single,
       cellsInfo = mapOf(
@@ -118,7 +118,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Range) ignores change when start date is disabled`() {
+  fun setSelection_of_range_ignores_change_when_start_date_is_disabled() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Range,
       cellsInfo = mapOf(
@@ -135,7 +135,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Range) ignores change when end date is disabled`() {
+  fun setSelection_of_range_ignores_change_when_end_date_is_disabled() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Range,
       cellsInfo = mapOf(
@@ -152,7 +152,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Single) ignores change when date is out of range`() {
+  fun setSelection_of_single_ignores_change_when_date_is_out_of_range() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Single,
     )
@@ -166,7 +166,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Range) ignores change when start date is out of range`() {
+  fun setSelection_of_range_ignores_change_when_start_date_is_out_of_range() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Range,
     )
@@ -180,7 +180,7 @@ class CalendarSettersTests {
   }
 
   @Test
-  fun `setSelection(Range) ignores change when end date is out of range`() {
+  fun setSelection_of_range_ignores_change_when_end_date_is_out_of_range() {
     val disabledParams = CalendarSettings.Default.copy(
       selectionMode = CalendarParams.SelectionMode.Range,
     )

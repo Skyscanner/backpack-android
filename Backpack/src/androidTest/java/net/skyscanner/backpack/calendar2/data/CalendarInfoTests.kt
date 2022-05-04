@@ -33,7 +33,7 @@ import org.junit.Test
 class CalendarInfoTests {
 
   @Test
-  fun `if date is disabled cell has correct state`() {
+  fun if_date_is_disabled_cell_has_correct_state() {
     val params = CalendarSettings.Default.copy(
       cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
         CellInfo(disabled = true)
@@ -52,7 +52,7 @@ class CalendarInfoTests {
   }
 
   @Test
-  fun `if date with label cell has correct state`() {
+  fun if_date_with_label_cell_has_correct_state() {
     val params = CalendarSettings.Default.copy(
       cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
         CellInfo(label = it.dayOfMonth.toString())
@@ -72,7 +72,7 @@ class CalendarInfoTests {
   }
 
   @Test
-  fun `if date with status as label cell has correct state`() {
+  fun if_date_with_status_as_label_cell_has_correct_state() {
     val statuses = CellStatus.values()
     val params = CalendarSettings.Default.copy(
       cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
@@ -94,7 +94,7 @@ class CalendarInfoTests {
   }
 
   @Test
-  fun `if date with status as background cell has correct state`() {
+  fun if_date_with_status_as_background_cell_has_correct_state() {
     val statuses = CellStatus.values()
     val params = CalendarSettings.Default.copy(
       cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {

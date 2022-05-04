@@ -39,7 +39,7 @@ class CalendarRangeSelectionTests {
   )
 
   @Test
-  fun `when range is opened selection is correct`() {
+  fun when_range_is_opened_selection_is_correct() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
 
@@ -50,7 +50,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun `when range is closed selection is correct`() {
+  fun when_range_is_closed_selection_is_correct() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(lastDay)
@@ -62,7 +62,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun `when range is withing the same date selection is correct`() {
+  fun when_range_is_withing_the_same_date_selection_is_correct() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(firstDay)
@@ -74,7 +74,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun `when range is closing before start a new range is created`() {
+  fun when_range_is_closing_before_start_a_new_range_is_created() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(lastDay)
       stateMachine.onClick(firstDay)
@@ -86,7 +86,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun `range can be reselected`() {
+  fun range_can_be_reselected() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(lastDay)
@@ -99,7 +99,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun `when range is selected cells have correct state`() {
+  fun when_range_is_selected_cells_have_correct_state() {
     val disabledDates = mapOf(
       rangeSelection.range.start.plusDays(1) to CellInfo(disabled = true),
     )
@@ -123,7 +123,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun `when range is withing the same date cells have correct state`() {
+  fun when_range_is_withing_the_same_date_cells_have_correct_state() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(firstDay)
@@ -135,7 +135,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun `disabled date cannot be selected`() {
+  fun disabled_date_cannot_be_selected() {
     val disabledDates = mapOf(
       rangeSelection.range.start to CellInfo(disabled = true),
     )

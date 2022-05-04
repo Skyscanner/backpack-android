@@ -38,7 +38,7 @@ class CalendarSingleSelectionTests {
   )
 
   @Test
-  fun `date can be selected`() {
+  fun date_can_be_selected() {
     testCalendarWith(singleSelection) {
       stateMachine.onClick(firstDay)
 
@@ -49,7 +49,7 @@ class CalendarSingleSelectionTests {
   }
 
   @Test
-  fun `when selection is in place cells have correct state`() {
+  fun when_selection_is_in_place_cells_have_correct_state() {
     testCalendarWith(singleSelection) {
       stateMachine.onClick(firstDay)
 
@@ -60,7 +60,7 @@ class CalendarSingleSelectionTests {
   }
 
   @Test
-  fun `selected date can be changed`() {
+  fun selected_date_can_be_changed() {
     testCalendarWith(singleSelection) {
       stateMachine.onClick(firstDay)
       stateMachine.onClick(lastDay)
@@ -72,7 +72,7 @@ class CalendarSingleSelectionTests {
   }
 
   @Test
-  fun `disabled date cannot be selected`() {
+  fun disabled_date_cannot_be_selected() {
     val disabledDates = mapOf(
       singleSelection.range.start to CellInfo(disabled = true),
     )
