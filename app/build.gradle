@@ -97,14 +97,14 @@ dependencies {
   implementation rootProject.ext.picasso
   implementation rootProject.ext.accompanistFlowLayout
   implementation rootProject.ext.androidXLifecycleKtx
-  testImplementation rootProject.ext.junit
+  implementation rootProject.ext.composeActivity
   implementation rootProject.ext.stetho
+  testImplementation rootProject.ext.junit
   androidTestImplementation rootProject.ext.junitAndroid
   androidTestImplementation rootProject.ext.espressoCore
   androidTestImplementation rootProject.ext.espressoContrib
   androidTestImplementation rootProject.ext.testRules
   androidTestImplementation rootProject.ext.coroutinesTest
-  androidTestImplementation rootProject.ext.composeActivity
   implementation project(':Backpack')
   implementation project(':backpack-compose')
 }
