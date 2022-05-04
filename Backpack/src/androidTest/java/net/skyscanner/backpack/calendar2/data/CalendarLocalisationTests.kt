@@ -27,7 +27,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.threeten.bp.DayOfWeek
-import java.util.*
+import java.util.Locale
 
 class CalendarLocalisationTests {
 
