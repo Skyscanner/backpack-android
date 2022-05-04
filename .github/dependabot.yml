@@ -21,6 +21,21 @@ updates:
   versioning-strategy: increase-if-necessary
   allow:
     - dependency-type: "direct"
+  ignore:
+    - dependency-name: "bpk-*"
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
+  versioning-strategy: increase-if-necessary
+  labels:
+    - "bpk"
+    - "depencdencies"
+  allow:
+    - dependency-type: "direct"
+    - dependency-name: "bpk-*"
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
