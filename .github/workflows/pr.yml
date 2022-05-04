@@ -17,3 +17,18 @@ jobs:
   Build:
     name: Build
     uses: ./.github/workflows/_build.yml
+
+  Dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Fetch Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v1.3.1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Add bpk label
+        if: contains(steps.dependabot-metadata.outputs.dependency-names[0], 'bpk-')
+        run: gh pr edit "$PR_URL" --add-label "bpk" --remove-label "javascript"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
