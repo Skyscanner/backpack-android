@@ -76,7 +76,7 @@ class CalendarLocalisationTests {
 
         assertEquals(1, ttsSpan.args.get(TtsSpan.ARG_DAY)) // 1st
         assertEquals(0, ttsSpan.args.get(TtsSpan.ARG_MONTH)) // of Jan
-        assertEquals(7, ttsSpan.args.get(TtsSpan.ARG_WEEKDAY)) // Saturday
+        assertEquals(6, ttsSpan.args.get(TtsSpan.ARG_WEEKDAY)) // Saturday
       }
     }
   }
