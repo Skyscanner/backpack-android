@@ -58,9 +58,8 @@ internal class CalendarCellDayHolder(
   override fun bind(model: CalendarCell.Day) {
     view.isEnabled = !model.inactive
     view.isSelected = model.selection != null
-    view.contentDescription = model.contentDescription + " " + (model.info.label ?: "")
 
-    day.text = model.date.dayOfMonth.toString()
+    day.text = model.text
     label.text = model.info.label
 
     when {

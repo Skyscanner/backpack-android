@@ -23,6 +23,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.forEach
@@ -54,6 +55,7 @@ internal class CalendarHeaderView @JvmOverloads constructor(
       text.maxLines = 1
       text.isSingleLine = true
       text.isAllCaps = true
+      text.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
       addView(text, LayoutParams(0, LayoutParams.MATCH_PARENT, 1f))
     }
   }
@@ -63,7 +65,6 @@ internal class CalendarHeaderView @JvmOverloads constructor(
     forEach {
       it as TextView
       it.text = current.getDisplayName(params.dayOfWeekText, params.locale)
-      it.contentDescription = current.getDisplayName(params.dayOfWeekAccessibilityText, params.locale)
       current += 1
     }
   }

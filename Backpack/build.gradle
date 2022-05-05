@@ -48,9 +48,8 @@ dependencies {
   androidTestImplementation rootProject.ext.testRules
   androidTestImplementation rootProject.ext.mockitoKotlin
   androidTestImplementation rootProject.ext.mockitoAndroid
-  testImplementation rootProject.ext.junit
-  testImplementation rootProject.ext.coroutinesTest
-  testImplementation rootProject.ext.threeTenAbp
+  androidTestImplementation rootProject.ext.junit
+  androidTestImplementation rootProject.ext.coroutinesTest
 
   api project(':backpack-common')
   lintPublish project(':backpack-lint')

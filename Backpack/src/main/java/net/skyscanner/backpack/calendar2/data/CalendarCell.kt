@@ -18,6 +18,9 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import android.text.Spannable
+import android.text.style.TtsSpan
+import androidx.core.text.buildSpannedString
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
@@ -43,7 +46,7 @@ internal sealed class CalendarCell {
     val date: LocalDate,
     val info: CellInfo,
     val selection: Selection?,
-    val contentDescription: String,
+    val text: CharSequence,
     val outOfRange: Boolean,
     override val yearMonth: YearMonth,
   ) : CalendarCell() {
@@ -71,7 +74,14 @@ internal fun CalendarCellDay(
   yearMonth = yearMonth,
   info = params.cellsInfo[date] ?: CellInfo.Default,
   outOfRange = date !in params.range,
-  contentDescription = "${date.dayOfMonth} ${date.month.getDisplayName(params.dateAccessibilityText, params.locale)}",
+  text = buildSpannedString {
+    val span = TtsSpan.DateBuilder()
+      .setDay(date.dayOfMonth)
+      .setMonth(date.month.ordinal)
+      .setWeekday(date.dayOfWeek.value)
+      .build()
+    append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+  },
   selection = when (selection) {
     is CalendarSelection.None -> null
     is CalendarSelection.Single -> when (date) {

@@ -18,9 +18,13 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import android.text.Spanned
+import android.text.style.TtsSpan
+import androidx.core.text.getSpans
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.threeten.bp.DayOfWeek
 import java.util.Locale
@@ -32,7 +36,7 @@ class CalendarLocalisationTests {
   )
 
   @Test
-  fun `month titles depend on locale`() {
+  fun month_titles_depend_on_locale() {
     testCalendarWith(russianLocale) {
       verify {
         assertEquals("Январь", (state.cells[0] as CalendarCell.Header).title)
@@ -41,7 +45,7 @@ class CalendarLocalisationTests {
   }
 
   @Test
-  fun `week fields order depends on locale`() {
+  fun week_fields_order_depends_on_locale() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         assertEquals(DayOfWeek.SUNDAY, state.params.weekFields.firstDayOfWeek)
@@ -50,7 +54,7 @@ class CalendarLocalisationTests {
   }
 
   @Test
-  fun `when locale changes week fields order is updated`() {
+  fun when_locale_changes_week_fields_order_is_updated() {
     testCalendarWith(CalendarSettings.Default) {
       stateMachine.onLocaleChanged(russianLocale.locale)
       verify {
@@ -60,10 +64,19 @@ class CalendarLocalisationTests {
   }
 
   @Test
-  fun `days content description depends on locale`() {
-    testCalendarWith(russianLocale) {
+  fun days_content_description_is_a_correct_Tts_span() {
+    testCalendarWith(CalendarSettings.Default) {
       verify {
-        assertEquals("1 января", (state.cells[6] as CalendarCell.Day).contentDescription)
+        val cell = state.cells[7] as CalendarCell.Day
+        val text = cell.text as Spanned
+        val spans = text.getSpans<TtsSpan>()
+        assertTrue(spans.size == 1)
+
+        val ttsSpan = spans.first()
+
+        assertEquals(1, ttsSpan.args.get(TtsSpan.ARG_DAY)) // 1st
+        assertEquals(0, ttsSpan.args.get(TtsSpan.ARG_MONTH)) // of Jan
+        assertEquals(6, ttsSpan.args.get(TtsSpan.ARG_WEEKDAY)) // Saturday
       }
     }
   }

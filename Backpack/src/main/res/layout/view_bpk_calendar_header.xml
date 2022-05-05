@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <net.skyscanner.backpack.text.BpkText xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
+  android:accessibilityHeading="true"
   android:maxLines="1"
   android:textColor="@color/bpkTextPrimary"
   android:paddingStart="@dimen/bpkSpacingBase"
@@ -11,4 +13,5 @@
   android:paddingBottom="@dimen/bpkSpacingLg"
   android:singleLine="true"
   android:gravity="start|center_vertical"
-  app:textStyle="heading4" />
+  app:textStyle="heading4"
+  tools:targetApi="p" />

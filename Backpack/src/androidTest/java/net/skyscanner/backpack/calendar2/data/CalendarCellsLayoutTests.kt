@@ -30,7 +30,7 @@ import org.threeten.bp.Month
 class CalendarCellsLayoutTests {
 
   @Test
-  fun `header is the first cell in month`() {
+  fun header_is_the_first_cell_in_month() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         assertEquals("January", (state.cells[0] as CalendarCell.Header).title)
@@ -39,7 +39,7 @@ class CalendarCellsLayoutTests {
   }
 
   @Test
-  fun `there are leading spaces in month`() {
+  fun there_are_leading_spaces_in_month() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         for (i in 1..6) {
@@ -52,7 +52,7 @@ class CalendarCellsLayoutTests {
   }
 
   @Test
-  fun `there are trailing spaces in month`() {
+  fun there_are_trailing_spaces_in_month() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         assertTrue(state.cells[37] is CalendarCell.Day)
@@ -65,7 +65,7 @@ class CalendarCellsLayoutTests {
   }
 
   @Test
-  fun `there are leading dates in first month of range`() {
+  fun there_are_leading_dates_in_first_month_of_range() {
     testCalendarWith(
       CalendarSettings.Default.copy(
         range = CalendarSettings.Default.range.start.plusDays(3)..CalendarSettings.Default.range.endInclusive,
@@ -85,7 +85,7 @@ class CalendarCellsLayoutTests {
   }
 
   @Test
-  fun `there are trailing dates in last month of range`() {
+  fun there_are_trailing_dates_in_last_month_of_range() {
     testCalendarWith(
       CalendarSettings.Default.copy(
         range = CalendarSettings.Default.range.start..CalendarSettings.Default.range.start.plusDays(27),
@@ -105,7 +105,7 @@ class CalendarCellsLayoutTests {
   }
 
   @Test
-  fun `there are correct days in month`() {
+  fun there_are_correct_days_in_month() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         val numDaysInJan = 31
@@ -122,7 +122,7 @@ class CalendarCellsLayoutTests {
   }
 
   @Test
-  fun `header is the first cell in secondary month`() {
+  fun header_is_the_first_cell_in_secondary_month() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         assertEquals("February", (state.cells[43] as CalendarCell.Header).title)

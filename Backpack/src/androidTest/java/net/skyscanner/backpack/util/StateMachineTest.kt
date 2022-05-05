@@ -40,20 +40,20 @@ class StateMachineTest {
   private val scope = TestCoroutineScope()
 
   @Test
-  fun `SM holds its initial state when created`() {
+  fun sm_holds_its_initial_state_when_created() {
     val sm = MutableStateMachine<Int, Unit>(scope, 1)
     assertEquals(1, sm.state.value)
   }
 
   @Test
-  fun `SM holds its new state when updated`() {
+  fun sm_holds_its_new_state_when_updated() {
     val sm = MutableStateMachine<Int, Unit>(scope, 1)
     sm.commit { 2 }
     assertEquals(2, sm.state.value)
   }
 
   @Test
-  fun `SM emits its new state when updated`() {
+  fun sm_emits_its_new_state_when_updated() {
     val sm = MutableStateMachine<Int, Unit>(scope, 1)
     val result = mutableListOf<Int>()
     sm.state.onEach { result += it }.launchIn(scope)
@@ -62,7 +62,7 @@ class StateMachineTest {
   }
 
   @Test
-  fun `SM emits effect`() {
+  fun sm_emits_effect() {
     val sm = MutableStateMachine<Int, Int>(scope, 1)
     val result = mutableListOf<Int>()
     sm.effects.onEach { result += it }.launchIn(scope)
@@ -74,7 +74,7 @@ class StateMachineTest {
   }
 
   @Test
-  fun `SM emits effect sequentially`() {
+  fun sm_emits_effect_sequentially() {
     val sm = MutableStateMachine<Int, Int>(scope, 1)
     val result = mutableListOf<Int>()
     sm.effects.onEach { result += it }.launchIn(scope)
@@ -88,7 +88,7 @@ class StateMachineTest {
   }
 
   @Test
-  fun `SM cancels its job when scope cancelled`() {
+  fun sm_cancels_its_job_when_scope_cancelled() {
     val scope = CoroutineScope(TestCoroutineDispatcher())
     val sm = MutableStateMachine<Int, Unit>(scope, 1)
 
