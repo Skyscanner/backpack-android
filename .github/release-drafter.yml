@@ -11,6 +11,8 @@ categories:
     label: 'dependencies'
 exclude-labels:
   - 'skip-changelog'
+  - 'javascript'
+  - 'github-actions'
 version-resolver:
   major:
     labels:
