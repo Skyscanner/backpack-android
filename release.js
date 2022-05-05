@@ -20,110 +20,34 @@ const childProcess = require('child_process');
 
 const inquirer = require('inquirer');
 const semver = require('semver');
-const replace = require('replace-in-file');
 const releaseit = require('release-it');
 
-const versions = require('./versions.json');
 
-const gradleFiles = [`${__dirname}/build.gradle`];
-const readmeFile = [`${__dirname}/README.md`];
-const versionsFile =  [`${__dirname}/versions.json`]
+async function versionPrompt() {
 
-async function amendGradleFiles(version) {
-  const options = {
-    files: gradleFiles,
-    from: new RegExp('BpkVersion = .+', 'g'),
-    to: `BpkVersion = '${version}'`,
-  };
-
-  try {
-    console.log('🎉  Version amended in', await replace(options));
-    return true;
-  } catch (exc) {
-    throw new Error(exc);
-  }
-}
-
-async function amendReadmeFiles(version) {
-  const options = {
-    files: readmeFile,
-    from: new RegExp('bpkVersion = ".+"', 'g'),
-    to: `bpkVersion = "${version}"`,
-  };
-
-  try {
-    console.log('🎉  Version amended in', await replace(options));
-    return true;
-  } catch (exc) {
-    throw new Error(exc);
-  }
-}
-
-async function amendVersionsFile(version) {
-  const options = {
-    files: versionsFile,
-    from: new RegExp('"backpack": ".+"', 'g'),
-    to: `"backpack": "${version}"`,
-  };
-
-  try {
-    console.log('🎉  Version amended in', await replace(options));
-    return true;
-  } catch (exc) {
-    throw new Error(exc);
-  }
-}
-
-async function versionPrompt(currentVersion) {
-  const major = semver.inc(currentVersion, 'major');
-  const minor = semver.inc(currentVersion, 'minor');
-  const patch = semver.inc(currentVersion, 'patch');
-
-  const questions = [
+  const question =
     {
-      type: 'list',
+      type: 'input',
       name: 'version',
-      message: 'What version do you want to release?',
-      choices: [
-        {
-          major,
-        },
-        {
-          minor,
-        },
-        {
-          patch,
-        },
-      ].map(i => {
-        const key = Object.keys(i)[0];
-        return {
-          key,
-          name: `${key} (${i[key]})`,
-          value: `${i[key]}`,
-        };
-      }),
-    },
-  ];
-  return await inquirer.prompt(questions);
+      message: 'What version do you want to release? (see https://github.com/Skyscanner/backpack-android/releases)',
+      validate: async (input) => { return semver.valid(input) == input; }
+    };
+  return await inquirer.prompt(question);
 }
 
 async function release() {
   try {
     childProcess.execSync('./gradlew :Backpack:checkMavenCredentials');
-    const packageVersion = versions.backpack
-    const { version } = await versionPrompt(packageVersion);
-
-    await amendGradleFiles(version);
-    await amendVersionsFile(version);
-    await amendReadmeFiles(version);
+    const { version } = await versionPrompt();
 
     const releaseOptions = {
       increment: version,
-      requireCleanWorkingDir: false,
+      requireCleanWorkingDir: true,
       npm: false,
       git: {
+      commit: false,
         tagName: version,
-        requireCleanWorkingDir: false,
+        requireCleanWorkingDir: true,
       },
       prompt: {
         src: {
@@ -134,7 +58,7 @@ async function release() {
     await releaseit(releaseOptions);
     const publishTask = 'publishMavenPublicationToSonatypeRepository';
     const releaseTask = 'closeAndReleaseSonatypeStagingRepository';
-    childProcess.execSync(`./gradlew ${publishTask} ${releaseTask}`);
+    childProcess.execSync(`./gradlew ${publishTask} ${releaseTask} -Pversion=${version}`);
   } catch (exc) {
     console.error(exc);
     process.exit(1);
