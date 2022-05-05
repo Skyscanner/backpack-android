@@ -67,7 +67,7 @@ class CalendarLocalisationTests {
   fun days_content_description_is_a_correct_Tts_span() {
     testCalendarWith(CalendarSettings.Default) {
       verify {
-        val cell = state.cells[6] as CalendarCell.Day
+        val cell = state.cells[7] as CalendarCell.Day
         val text = cell.text as Spanned
         val spans = text.getSpans<TtsSpan>()
         assertTrue(spans.size == 1)
