@@ -143,7 +143,5 @@ class BpkCalendar private constructor(
       super.onInitializeAccessibilityNodeInfo(host, info)
       info?.setCollectionInfo(null)
     }
-
   }
-
 }
