@@ -42,9 +42,3 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-
-      - name: Trigger backpack.github.io CI
-        run: |
-          curl -f -s -X POST -H "Content-Type: application/json" -H "Accept: application/vnd.github.v3+json" -H "Authorization: token $GITHUB_TOKEN" -d "{\"ref\":\"main\",\"inputs\":{\"repo\":\"backpack-android\"}}" https://api.github.com/repos/Skyscanner/backpack-docs/actions/workflows/ci.yml/dispatches
-        env:
-          GITHUB_TOKEN: ${{ secrets.BACKPACK_DOCS_DEPLOY_TOKEN }}
