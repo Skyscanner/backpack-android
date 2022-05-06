@@ -43,6 +43,11 @@ jobs:
       - name: Get release tag
         id: tag
         uses: dawidd6/action-get-tag@v1
+#
+#      - name: Create Sonatype key
+#        run: base64 -d <<< $SONATYPE_SINGING_KEY_BASE64 > sonatype.gpg
+#        env:
+#          SONATYPE_SINGING_KEY_BASE64: ${{ secrets.SONATYPE_SINGING_KEY_BASE64 }}
 
       - name: Build Dokka docs
         run: ./gradlew dokkaHtmlMultiModule
@@ -77,3 +82,6 @@ jobs:
           file: app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk
           silent: true
           releaseNotes: Version ${{steps.tag.outputs.tag}}
+#
+#      - name: Remove Sonatype key
+#        run: rm -rf sonatype.gpg

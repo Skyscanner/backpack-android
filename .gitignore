@@ -59,7 +59,7 @@ captures/
 # Keystore files
 *.jks
 
-# GPG keys
+# GPG keys – used on the CI for Sonatype signing
 *.gpg
 
 # External native build folder generated in Android Studio 2.2 and later
