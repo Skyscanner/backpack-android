@@ -64,7 +64,7 @@
     "gulp": "^4.0.2",
     "gulp-nunjucks": "^5.1.0",
     "gulp-rename": "^2.0.0",
-    "husky": "^7.0.0",
+    "husky": "^8.0.1",
     "inquirer": "^8.1.2",
     "lint-staged": "^12.1.5",
     "lodash": "^4.17.21",
