@@ -102,10 +102,6 @@
     <attr name="buttonTextColor" format="color" />
   </declare-styleable>
 
-  <declare-styleable name="BpkButtonLink">
-    <attr name="uppercase" format="boolean" />
-  </declare-styleable>
-
   <declare-styleable name="BpkCardView">
     <attr name="focused" format="boolean" />
     <attr name="padded" format="boolean" />
