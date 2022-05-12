@@ -28,7 +28,7 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Add bpk label
-        if: contains(steps.dependabot-metadata.outputs.dependency-names[0], 'bpk-')
+        if: contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-')
         run: gh pr edit "$PR_URL" --add-label "bpk" --remove-label "javascript"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
