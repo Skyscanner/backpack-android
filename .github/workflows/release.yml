@@ -40,7 +40,11 @@ jobs:
           SONATYPE_SINGING_KEY_BASE64: ${{ secrets.SONATYPE_SINGING_KEY_BASE64 }}
 
       - name: Publish artifacts
-        run: ./gradlew checkMavenCredentials publishMavenPublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository -Pversion=${{ github.event.release.tag_name }}
+        run: >
+          ./gradlew checkMavenCredentials 
+          publishMavenPublicationToSonatypeRepository
+          closeAndReleaseSonatypeStagingRepository
+          -Pversion=${{ github.event.release.tag_name }}
         env:
           SONATYPE_SINGING_KEY_ID: ${{ secrets.SONATYPE_SINGING_KEY_ID }}
           SONATYPE_SINGING_KEY_PASSWORD: ${{ secrets.SONATYPE_SINGING_KEY_PASSWORD }}
