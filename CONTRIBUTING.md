@@ -128,9 +128,9 @@ Please see the [code review guidelines](https://github.com/Skyscanner/backpack/b
 
 > Backpack team only
 
- - Search the internal documentation for "Guide – Setup Internal Backpack Android Builds" and follow the instructions.
- - Get the version to release based on the latest draft version in the [releases pages](https://github.com/Skyscanner/backpack-android/releases)
- - Run `npm run release` and follow the process through, you'll be asked which semantic version to release - select the one from above. Once released verify the artifacts are available.
+ - Publish the latest draft on the [releases pages](https://github.com/Skyscanner/backpack-android/releases)
+ - Ensure CI runs the release workflow successfully
+ - Once released verify the artifacts are available
 
 ## Docs
 
