@@ -31,4 +31,5 @@ jobs:
         if: contains(steps.dependabot-metadata.outputs.dependency-names, 'bpk-')
         run: gh pr edit "$PR_URL" --add-label "bpk" --remove-label "javascript"
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{github.event.pull_request.html_url}}
