@@ -10,6 +10,29 @@ if (localProps.exists()) {
   Properties p = new Properties()
   new FileInputStream(localProps).withCloseable { is -> p.load(is) }
   p.each { name, value -> ext[name] = value }
+} else {
+  Properties p = new Properties()
+  p.putAll(System.getenv())
+  ext["signing.secretKeyRingFile"] = "${project.rootDir}/sonatype.gpg"
+  p.each { name, value ->
+    switch (name) {
+      case "OSSRH_USERNAME":
+        ext["ossrhUsername"] = value
+        break
+      case "OSSRH_PASSWORD":
+        ext["ossrhPassword"] = value
+        break
+      case "SONATYPE_SINGING_KEY_ID":
+        ext["signing.keyId"] = value
+        break
+      case "SONATYPE_SINGING_KEY_PASSWORD":
+        ext["signing.password"] = value
+        break
+      case "SONATYPE_STAGING_PROFILE_ID":
+        ext["sonatypeStagingProfileId"] = value
+        break
+    }
+  }
 }
 
 // Set up Sonatype repository
