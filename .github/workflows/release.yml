@@ -48,6 +48,9 @@ jobs:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
 
+      - name: Remove Sonatype key
+        run: rm -rf sonatype.gpg
+
       - name: Build Dokka docs
         run: ./gradlew dokkaHtmlMultiModule
 
@@ -81,6 +84,3 @@ jobs:
           file: app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk
           silent: true
           releaseNotes: Version ${{github.event.release.tag_name}}
-
-      - name: Remove Sonatype key
-        run: rm -rf sonatype.gpg
