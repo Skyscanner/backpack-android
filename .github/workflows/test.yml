@@ -25,7 +25,7 @@ jobs:
       - name: Building release APK
         run: |
           openssl aes-256-cbc -K $KEYSTORE_DECRYPT_KEY -iv $KEYSTORE_DECRYPT_IV -in backpack.android.demo.key.enc -out backpack.android.demo.key -d;
-          ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
+          ./gradlew :app:assembleOssRelease -PdisablePreDex
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
