@@ -20,6 +20,7 @@ jobs:
   Deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    environment: Publishing
     needs: [Build]
     timeout-minutes: 30
 
@@ -41,7 +42,7 @@ jobs:
 
       - name: Publish artifacts
         run: >
-          ./gradlew checkMavenCredentials 
+          ./gradlew checkMavenCredentials
           publishMavenPublicationToSonatypeRepository
           closeAndReleaseSonatypeStagingRepository
           -Pversion=${{ github.event.release.tag_name }}
