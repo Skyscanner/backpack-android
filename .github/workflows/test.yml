@@ -1,0 +1,27 @@
+name: PR
+
+on:
+  pull_request:
+    branches: [ main ]
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:
+
+  Test:
+    runs-on: ubuntu-latest
+    environment: Publishing
+    steps:
+      - name: Building release APK
+        run: |
+          openssl aes-256-cbc -K $KEYSTORE_DECRYPT_KEY -iv $KEYSTORE_DECRYPT_IV -in backpack.android.demo.key.enc -out backpack.android.demo.key -d;
+          ./gradlew :app:assemble${{ env.flavour }}Release -PdisablePreDex
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_ALIAS_PASSWORD: ${{ secrets.KEYSTORE_ALIAS_PASSWORD }}
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+          KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
+          KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
