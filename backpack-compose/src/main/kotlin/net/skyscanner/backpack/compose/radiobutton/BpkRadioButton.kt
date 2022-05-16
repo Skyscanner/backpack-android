@@ -46,6 +46,8 @@ fun BpkRadioButton(
   enabled: Boolean = true,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
+  // our design system isn't designed with the minimum touch target in mind at the moment.
+  // Disable the enforcement to avoid the extra padding
   CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
     RadioButton(
       selected = selected,
