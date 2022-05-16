@@ -25,6 +25,7 @@ import net.skyscanner.backpack.demo.compose.BodyStyleStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
+import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
@@ -222,7 +223,13 @@ object ComponentRegistry {
         "With icon RTL" story NodeData { ChipStory of R.layout.fragment_chip_with_icon with Direction.RTL }
       )
     ),
-    "Checkbox" story NodeData { Story of R.layout.fragment_checkbox },
+    "Checkbox" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_checkbox },
+        TAB_TITLE_COMPOSE composeStory { CheckboxStory() },
+      )
+    ),
     "Dialog" story NodeData(
       { children -> SubStory of children },
       mapOf(
