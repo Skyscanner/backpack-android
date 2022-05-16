@@ -56,7 +56,7 @@ fun DefaultUncheckedRadioButtonExample(selected: Boolean = false, onClick: (() -
     BpkRadioButton(
       text = stringResource(id = R.string.radiobutton_default_unchecked),
       selected = selected,
-      onClick = onClick
+      onClick = onClick,
     )
   }
 }
@@ -68,7 +68,7 @@ fun DefaultCheckedRadioButtonExample(selected: Boolean = true, onClick: (() -> U
     BpkRadioButton(
       text = stringResource(id = R.string.radiobutton_default_checked),
       selected = selected,
-      onClick = onClick
+      onClick = onClick,
     )
   }
 }
@@ -81,7 +81,7 @@ fun DisabledUnCheckedRadioButtonExample() {
       text = stringResource(id = R.string.radiobutton_disabled_unchecked),
       enabled = false,
       selected = false,
-      onClick = null
+      onClick = null,
     )
   }
 }
@@ -94,7 +94,7 @@ fun DisabledCheckedRadioButtonExample() {
       text = stringResource(id = R.string.radiobutton_disabled_checked),
       enabled = false,
       selected = true,
-      onClick = null
+      onClick = null,
     )
   }
 }

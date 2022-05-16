@@ -56,7 +56,8 @@ fun BpkRadioButton(
       colors = RadioButtonDefaults.colors(
         selectedColor = BpkTheme.colors.primary,
         unselectedColor = BpkTheme.colors.textSecondary,
-        disabledColor = BpkColor.SkyGrayTint04)
+        disabledColor = BpkColor.SkyGrayTint04,
+      ),
     )
   }
 }
@@ -78,13 +79,13 @@ fun BpkRadioButton(
   Row(
     horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Sm),
     modifier = rowModifier,
-    verticalAlignment = Alignment.CenterVertically
+    verticalAlignment = Alignment.CenterVertically,
   ) {
     BpkRadioButton(selected = selected, onClick = onClick, enabled = enabled, interactionSource = interactionSource)
     BpkText(
       text = text,
       style = BpkTheme.typography.footnote,
-      color = if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)
+      color = if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03),
     )
   }
 }
