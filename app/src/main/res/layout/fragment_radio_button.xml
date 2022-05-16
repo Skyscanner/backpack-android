@@ -15,21 +15,21 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingLg"
-      android:text="Default Unchecked" />
+      android:text="@string/radiobutton_default_unchecked" />
 
     <net.skyscanner.backpack.radiobutton.BpkRadioButton
       android:id="@+id/radio_button_checked"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingLg"
-      android:text="Default Checked" />
+      android:text="@string/radiobutton_default_checked" />
 
     <net.skyscanner.backpack.radiobutton.BpkRadioButton
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingLg"
       android:layoutDirection="rtl"
-      android:text="Default RTL" />
+      android:text="@string/radiobutton_default_rtl" />
 
   </RadioGroup>
 
@@ -38,7 +38,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingLg"
       android:enabled="false"
-      android:text="Disabled Unchecked" />
+      android:text="@string/radiobutton_disabled_unchecked" />
 
     <net.skyscanner.backpack.radiobutton.BpkRadioButton
       android:layout_width="wrap_content"
@@ -46,6 +46,6 @@
       android:layout_marginBottom="@dimen/bpkSpacingLg"
       android:checked="true"
       android:enabled="false"
-      android:text="Disabled Checked" />
+      android:text="@string/radiobutton_disabled_checked" />
 
 </LinearLayout>
