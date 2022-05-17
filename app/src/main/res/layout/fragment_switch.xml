@@ -7,27 +7,27 @@
   android:orientation="vertical">
 
   <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:text="@string/toggle_default_unchecked" />
 
   <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:checked="true"
     android:text="@string/toggle_default_checked" />
 
   <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:enabled="false"
     android:text="@string/toggle_disabled_unchecked" />
 
   <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:checked="true"
@@ -35,7 +35,7 @@
     android:text="@string/toggle_disabled_checked" />
 
   <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:layoutDirection="rtl"
