@@ -49,4 +49,6 @@
   <color name="__barChartPopupTextColor">@color/bpkSkyBlueShade03</color>
   <color name="__chipSolidBackground">@color/bpkBlackTint03</color>
   <color name="__chipDisabled">@color/bpkBlackTint06</color>
+
+  <color name="__textDisabled">@color/bpkBlackTint06</color>
 </resources>

@@ -53,7 +53,7 @@ open class BpkSwitch @JvmOverloads constructor(
   }
 
   fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val textDisabledColor = context.getColor(R.color.bpkSkyGrayTint04)
+    val textDisabledColor = context.getColor(R.color.__textDisabled)
     val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
       val primaryColor = context.getColor(R.color.bpkPrimary)
@@ -73,6 +73,7 @@ open class BpkSwitch @JvmOverloads constructor(
         intArrayOf(textDisabledColor, textEnabledColor)
       )
     )
+    switchMinWidth = resources.getDimensionPixelSize(R.dimen.bpk_switch_min_width)
   }
 
   private fun getColorStateList(checkedColor: Int, uncheckedColor: Int) =

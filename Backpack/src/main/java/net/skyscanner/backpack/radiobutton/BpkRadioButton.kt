@@ -51,7 +51,7 @@ open class BpkRadioButton @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     var radioButtonDefaultColor = context.getColor(R.color.bpkTextSecondary)
     var radioButtonCheckedColor = BpkTheme.getPrimaryColor(context)
-    var radioButtonDisabledColor = context.getColor(R.color.bpkSkyGrayTint04)
+    var radioButtonDisabledColor = context.getColor(R.color.__textDisabled)
     val textDisabledColor = context.getColor(R.color.bpkSkyGrayTint04)
     val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(
