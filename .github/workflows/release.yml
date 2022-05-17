@@ -1,8 +1,8 @@
 name: Release
 
 on:
-  push:
-    tags: ['*.*.*']
+  release:
+    types: [ published ]
 
 defaults:
   run:
@@ -20,6 +20,8 @@ jobs:
   Deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    environment: Publishing
+    needs: [Build]
     timeout-minutes: 30
 
     steps:
@@ -33,33 +35,10 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Publish release
-        uses: release-drafter/release-drafter@v5
-        with:
-          publish: true
+      - name: Create Sonatype key
+        run: base64 -d <<< $SONATYPE_SINGING_KEY_BASE64 > sonatype.gpg
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Get release tag
-        id: tag
-        uses: dawidd6/action-get-tag@v1
-#
-#      - name: Create Sonatype key
-#        run: base64 -d <<< $SONATYPE_SINGING_KEY_BASE64 > sonatype.gpg
-#        env:
-#          SONATYPE_SINGING_KEY_BASE64: ${{ secrets.SONATYPE_SINGING_KEY_BASE64 }}
-
-      - name: Build Dokka docs
-        run: ./gradlew dokkaHtmlMultiModule
-
-      - name: Deploy Dokka docs
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          deploy_key: ${{ secrets.DOKKA_DEPLOY_KEY }}
-          publish_dir: dokka/
-          keep_files: true
-          external_repository: backpack/android
-          publish_branch: main
+          SONATYPE_SINGING_KEY_BASE64: ${{ secrets.SONATYPE_SINGING_KEY_BASE64 }}
 
       - name: Building release APK
         run: |
@@ -73,6 +52,34 @@ jobs:
           KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
 
+      - name: Publish artifacts
+        run: >
+          ./gradlew checkMavenCredentials
+          publishMavenPublicationToSonatypeRepository
+          closeAndReleaseSonatypeStagingRepository
+          -Pversion=${{ github.event.release.tag_name }}
+        env:
+          SONATYPE_SINGING_KEY_ID: ${{ secrets.SONATYPE_SINGING_KEY_ID }}
+          SONATYPE_SINGING_KEY_PASSWORD: ${{ secrets.SONATYPE_SINGING_KEY_PASSWORD }}
+          SONATYPE_STAGING_PROFILE_ID: ${{ secrets.SONATYPE_STAGING_PROFILE_ID }}
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+
+      - name: Remove Sonatype key
+        run: rm -rf sonatype.gpg
+
+      - name: Build Dokka docs
+        run: ./gradlew dokkaHtmlMultiModule
+
+      - name: Deploy Dokka docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.DOKKA_DEPLOY_KEY }}
+          publish_dir: dokka/
+          keep_files: true
+          external_repository: backpack/android
+          publish_branch: main
+
       - name: Publish Release APK to AppCenter
         uses: devussy/AppCenter-Distribute-Github-Action@v1.0.2
         with:
@@ -81,7 +88,4 @@ jobs:
           group: Everyone
           file: app/build/outputs/apk/oss/release/app-${{ env.flavour }}-release.apk
           silent: true
-          releaseNotes: Version ${{steps.tag.outputs.tag}}
-#
-#      - name: Remove Sonatype key
-#        run: rm -rf sonatype.gpg
+          releaseNotes: Version ${{github.event.release.tag_name}}
