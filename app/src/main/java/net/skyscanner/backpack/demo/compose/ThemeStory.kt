@@ -32,7 +32,6 @@ import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.RadioButton
 import androidx.compose.material.Slider
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Switch
@@ -55,6 +54,7 @@ import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.Flight
+import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -115,7 +115,7 @@ fun ThemeStory() {
     }
 
     var radioSelected by remember { mutableStateOf(true) }
-    RadioButton(selected = radioSelected, onClick = { radioSelected = !radioSelected })
+    BpkRadioButton(selected = radioSelected, onClick = { radioSelected = !radioSelected })
 
     var checkboxChecked by remember { mutableStateOf(true) }
     Checkbox(checked = checkboxChecked, onCheckedChange = { checkboxChecked = it })

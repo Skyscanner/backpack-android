@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.background
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -39,8 +38,8 @@ fun BackpackPreview(
   BackpackDemoTheme {
     CompositionLocalProvider(*providers) {
       Surface(
-        modifier = modifier
-          .background(background.takeOrElse { BpkTheme.colors.background }),
+        color = background.takeOrElse { BpkTheme.colors.background },
+        modifier = modifier,
         content = content,
       )
     }
