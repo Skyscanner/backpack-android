@@ -54,7 +54,7 @@ fun RadioButtonStory() {
 fun DefaultUncheckedRadioButtonExample(selected: Boolean = false, onClick: (() -> Unit)? = null) {
   BackpackPreview {
     BpkRadioButton(
-      text = stringResource(id = R.string.radiobutton_default_unchecked),
+      text = stringResource(id = R.string.toggle_default_unchecked),
       selected = selected,
       onClick = onClick,
     )
@@ -66,7 +66,7 @@ fun DefaultUncheckedRadioButtonExample(selected: Boolean = false, onClick: (() -
 fun DefaultCheckedRadioButtonExample(selected: Boolean = true, onClick: (() -> Unit)? = null) {
   BackpackPreview {
     BpkRadioButton(
-      text = stringResource(id = R.string.radiobutton_default_checked),
+      text = stringResource(id = R.string.toggle_default_checked),
       selected = selected,
       onClick = onClick,
     )
@@ -78,7 +78,7 @@ fun DefaultCheckedRadioButtonExample(selected: Boolean = true, onClick: (() -> U
 fun DisabledUnCheckedRadioButtonExample() {
   BackpackPreview {
     BpkRadioButton(
-      text = stringResource(id = R.string.radiobutton_disabled_unchecked),
+      text = stringResource(id = R.string.toggle_disabled_unchecked),
       enabled = false,
       selected = false,
       onClick = null,
@@ -91,7 +91,7 @@ fun DisabledUnCheckedRadioButtonExample() {
 fun DisabledCheckedRadioButtonExample() {
   BackpackPreview {
     BpkRadioButton(
-      text = stringResource(id = R.string.radiobutton_disabled_checked),
+      text = stringResource(id = R.string.toggle_disabled_checked),
       enabled = false,
       selected = true,
       onClick = null,

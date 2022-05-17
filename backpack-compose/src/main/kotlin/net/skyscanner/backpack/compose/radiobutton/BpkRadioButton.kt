@@ -87,7 +87,7 @@ fun BpkRadioButton(
     BpkText(
       text = text,
       style = BpkTheme.typography.footnote,
-      color = if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03),
+      color = if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06),
     )
   }
 }

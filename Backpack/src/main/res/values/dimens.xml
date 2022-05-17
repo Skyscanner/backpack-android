@@ -46,4 +46,5 @@
   <dimen name="bpk_button_default_icon_size">@dimen/bpkSpacingBase</dimen>
   <dimen name="bpk_button_default_height">36dp</dimen>
   <dimen name="bpk_button_large_height">48dp</dimen>
+  <dimen name="bpk_switch_min_width">48dp</dimen>
 </resources>
