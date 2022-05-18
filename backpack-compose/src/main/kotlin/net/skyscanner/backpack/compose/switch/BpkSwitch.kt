@@ -41,6 +41,8 @@ import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.utils.BpkToggleableContent
+import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 @Composable
@@ -72,28 +74,20 @@ fun BpkSwitch(
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   content: @Composable RowScope.(Boolean) -> Unit,
 ) {
-  val rowModifier = if (onCheckedChange != null) {
-    modifier.toggleable(
-      value = checked,
-      role = Role.Switch,
-      interactionSource = interactionSource,
-      indication = null,
-      onValueChange = onCheckedChange,
-    )
-  } else {
-    modifier
-  }
   Row(
-    horizontalArrangement = Arrangement.SpaceBetween,
-    modifier = rowModifier,
     verticalAlignment = Alignment.CenterVertically,
+    horizontalArrangement = Arrangement.SpaceBetween,
+    modifier = modifier.applyIf(onCheckedChange != null) {
+      toggleable(
+        value = checked,
+        role = Role.Switch,
+        interactionSource = interactionSource,
+        indication = null,
+        onValueChange = onCheckedChange!!,
+      )
+    },
   ) {
-    val contentColor =
-      if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)
-    CompositionLocalProvider(
-      LocalContentColor provides contentColor,
-      LocalTextStyle provides BpkTheme.typography.footnote,
-    ) {
+    BpkToggleableContent(enabled) {
       content(checked)
     }
     BpkSwitchImpl(

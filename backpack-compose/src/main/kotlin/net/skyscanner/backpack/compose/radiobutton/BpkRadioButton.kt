@@ -24,9 +24,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
-import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.runtime.Composable
@@ -42,7 +40,8 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkDimension
-import net.skyscanner.backpack.compose.utils.dynamicColorOf
+import net.skyscanner.backpack.compose.utils.BpkToggleableContent
+import net.skyscanner.backpack.compose.utils.applyIf
 
 @Composable
 fun BpkRadioButton(
@@ -73,25 +72,31 @@ fun BpkRadioButton(
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   content: @Composable RowScope.(Boolean) -> Unit,
 ) {
-  val rowModifier = if (onClick != null) {
-    modifier.clickable(interactionSource = interactionSource, indication = null, role = Role.RadioButton, onClick = onClick)
-  } else {
-    modifier
-  }
+
   Row(
-    horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Sm),
-    modifier = rowModifier,
     verticalAlignment = Alignment.CenterVertically,
+    horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Sm),
+    modifier = modifier.applyIf(onClick != null) {
+      clickable(
+        interactionSource = interactionSource,
+        indication = null,
+        role = Role.RadioButton,
+        onClick = onClick!!,
+      )
+    },
   ) {
-    BpkRadioButtonImpl(selected = selected, onClick = onClick, enabled = enabled, interactionSource = interactionSource)
-    val contentColor =
-      if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)
-    CompositionLocalProvider(
-      LocalContentColor provides contentColor,
-      LocalTextStyle provides BpkTheme.typography.footnote,
-    ) {
+
+    BpkRadioButtonImpl(
+      selected = selected,
+      onClick = onClick,
+      enabled = enabled,
+      interactionSource = interactionSource,
+    )
+
+    BpkToggleableContent(enabled) {
       content(selected)
     }
+
   }
 }
 
