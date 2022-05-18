@@ -57,10 +57,9 @@ fun BpkRadioButton(
     onClick = onClick,
     modifier = modifier,
     enabled = enabled,
-    interactionSource = interactionSource
-  ) {
-    BpkText(text = text)
-  }
+    interactionSource = interactionSource,
+    content = { BpkText(text) },
+  )
 }
 
 @Composable
@@ -93,9 +92,10 @@ fun BpkRadioButton(
       interactionSource = interactionSource,
     )
 
-    BpkToggleableContent(enabled) {
-      content(selected)
-    }
+    BpkToggleableContent(
+      enabled = enabled,
+      content = { content(selected) },
+    )
 
   }
 }

@@ -24,9 +24,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
-import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.runtime.Composable
@@ -60,9 +58,8 @@ fun BpkSwitch(
     modifier = modifier,
     enabled = enabled,
     interactionSource = interactionSource,
-  ) {
-    BpkText(text = text)
-  }
+    content = { BpkText(text) },
+  )
 }
 
 @Composable
@@ -87,15 +84,19 @@ fun BpkSwitch(
       )
     },
   ) {
-    BpkToggleableContent(enabled) {
-      content(checked)
-    }
+
+    BpkToggleableContent(
+      enabled = enabled,
+      content = { content(checked) },
+    )
+
     BpkSwitchImpl(
       checked = checked,
       onCheckedChange = onCheckedChange,
       enabled = enabled,
       interactionSource = interactionSource,
     )
+
   }
 }
 
