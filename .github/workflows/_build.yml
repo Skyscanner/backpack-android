@@ -19,9 +19,8 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     timeout-minutes: 30
-
-    strategy:
-      fail-fast: false
+    permissions:
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v3
@@ -72,9 +71,6 @@ jobs:
     name: Android tests
     runs-on: macos-latest
     timeout-minutes: 30
-
-    strategy:
-      fail-fast: false
 
     steps:
 
@@ -131,6 +127,8 @@ jobs:
   Screenshots:
     name: Screenshots tests
     runs-on: macos-latest
+    permissions:
+      pull-requests: write
     timeout-minutes: 30
 
     strategy:
