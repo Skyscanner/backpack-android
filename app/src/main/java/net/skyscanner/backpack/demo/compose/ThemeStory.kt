@@ -51,10 +51,8 @@ import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
-import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.Flight
-import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -92,10 +90,6 @@ fun ThemeStory() {
       }
     }
 
-    BpkButton(text = "Primary button", onClick = { })
-
-    BpkButton(text = "Secondary button", type = BpkButtonType.Secondary, onClick = { })
-
     var showAlertDialog by remember { mutableStateOf(false) }
     BpkButton(text = "Alert dialog", onClick = { showAlertDialog = true })
     if (showAlertDialog) {
@@ -113,9 +107,6 @@ fun ThemeStory() {
         },
       )
     }
-
-    var radioSelected by remember { mutableStateOf(true) }
-    BpkRadioButton(selected = radioSelected, onClick = { radioSelected = !radioSelected })
 
     var checkboxChecked by remember { mutableStateOf(true) }
     Checkbox(checked = checkboxChecked, onCheckedChange = { checkboxChecked = it })
@@ -138,10 +129,6 @@ fun ThemeStory() {
       text = { BpkText(text = "FloatingActionButton") },
       onClick = { },
     )
-
-    BpkCard(focused = true) {
-      BpkText(modifier = Modifier.padding(all = BpkSpacing.Base), text = "Card")
-    }
 
     Snackbar {
       BpkText(text = "Snackbar")
