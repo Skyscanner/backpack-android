@@ -86,9 +86,14 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       componentsToReplace = setOf("androidx.compose.material.Card")
     ),
     RADIO_BUTTON(
-      fullName = "net.skyscanner.backpack.compose.text.BpkRadioButton",
+      fullName = "net.skyscanner.backpack.compose.radiobutton.BpkRadioButton",
       webName = "radio-button",
       componentsToReplace = setOf("androidx.compose.material.RadioButton")
+    ),
+    SWITCH(
+      fullName = "net.skyscanner.backpack.compose.switch.BpkSwitch",
+      webName = "switch",
+      componentsToReplace = setOf("androidx.compose.material.Switch")
     ),
     TEXT(
       fullName = "net.skyscanner.backpack.compose.text.BpkText",
