@@ -16,6 +16,7 @@ jobs:
   Build:
     name: Build
     permissions:
+      discussions: write
       contents: read
       statuses: write
       pull-requests: write
