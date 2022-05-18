@@ -18,11 +18,11 @@
 
 package net.skyscanner.backpack.compose.radiobutton
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
 import androidx.compose.material.RadioButton
@@ -76,7 +76,8 @@ fun BpkRadioButton(
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Sm),
     modifier = modifier.applyIf(onClick != null) {
-      clickable(
+      selectable(
+        selected = selected,
         interactionSource = interactionSource,
         indication = null,
         role = Role.RadioButton,
