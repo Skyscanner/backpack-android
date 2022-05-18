@@ -30,6 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
@@ -46,6 +48,7 @@ fun RadioButtonStory() {
 
     DisabledUnCheckedRadioButtonExample()
     DisabledCheckedRadioButtonExample()
+    CustomContentRadioButtonExample()
   }
 }
 
@@ -96,5 +99,22 @@ fun DisabledCheckedRadioButtonExample() {
       selected = true,
       onClick = null,
     )
+  }
+}
+
+@Preview
+@Composable
+fun CustomContentRadioButtonExample() {
+  BackpackPreview {
+    var selected by remember { mutableStateOf(false) }
+    BpkRadioButton(
+      selected = selected,
+      onClick = { selected = !selected },
+    ) {
+      Column {
+        BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
+        BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
+      }
+    }
   }
 }

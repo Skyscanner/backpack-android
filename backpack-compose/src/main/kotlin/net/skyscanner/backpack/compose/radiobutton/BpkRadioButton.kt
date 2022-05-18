@@ -22,24 +22,82 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
+import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BpkRadioButton(
+  text: String,
+  selected: Boolean,
+  onClick: (() -> Unit)?,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+  BpkRadioButton(
+    selected = selected,
+    onClick = onClick,
+    modifier = modifier,
+    enabled = enabled,
+    interactionSource = interactionSource
+  ) {
+    BpkText(text = text)
+  }
+}
+
+@Composable
+fun BpkRadioButton(
+  selected: Boolean,
+  onClick: (() -> Unit)?,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  content: @Composable RowScope.(Boolean) -> Unit,
+) {
+  val rowModifier = if (onClick != null) {
+    modifier.clickable(interactionSource = interactionSource, indication = null, role = Role.RadioButton, onClick = onClick)
+  } else {
+    modifier
+  }
+  Row(
+    horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Sm),
+    modifier = rowModifier,
+    verticalAlignment = Alignment.CenterVertically,
+  ) {
+    BpkRadioButtonImpl(selected = selected, onClick = onClick, enabled = enabled, interactionSource = interactionSource)
+    val contentColor =
+      if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)
+    CompositionLocalProvider(
+      LocalContentColor provides contentColor,
+      LocalTextStyle provides BpkTheme.typography.footnote,
+    ) {
+      content(selected)
+    }
+  }
+}
+
+@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
+@Composable
+private fun BpkRadioButtonImpl(
   selected: Boolean,
   onClick: (() -> Unit)?,
   modifier: Modifier = Modifier,
@@ -52,7 +110,7 @@ fun BpkRadioButton(
     RadioButton(
       selected = selected,
       onClick = onClick,
-      modifier = modifier,
+      modifier = modifier.semantics { invisibleToUser() },
       enabled = enabled,
       interactionSource = interactionSource,
       colors = RadioButtonDefaults.colors(
@@ -60,34 +118,6 @@ fun BpkRadioButton(
         unselectedColor = BpkTheme.colors.textSecondary,
         disabledColor = BpkColor.SkyGrayTint04,
       ),
-    )
-  }
-}
-
-@Composable
-fun BpkRadioButton(
-  selected: Boolean,
-  text: String,
-  onClick: (() -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-) {
-  val rowModifier = if (onClick != null) {
-    modifier.clickable(interactionSource = interactionSource, indication = null, onClick = onClick)
-  } else {
-    modifier
-  }
-  Row(
-    horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Sm),
-    modifier = rowModifier,
-    verticalAlignment = Alignment.CenterVertically,
-  ) {
-    BpkRadioButton(selected = selected, onClick = onClick, enabled = enabled, interactionSource = interactionSource)
-    BpkText(
-      text = text,
-      style = BpkTheme.typography.footnote,
-      color = if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06),
     )
   }
 }
