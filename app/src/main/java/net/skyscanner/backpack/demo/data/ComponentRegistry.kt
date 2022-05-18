@@ -283,8 +283,8 @@ object ComponentRegistry {
     "RadioButton" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_COMPOSE composeStory { RadioButtonStory() },
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_radio_button },
+        TAB_TITLE_COMPOSE composeStory { RadioButtonStory() },
       )
     ),
     "Rating" story NodeData(
@@ -322,8 +322,8 @@ object ComponentRegistry {
     "Switch" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_COMPOSE composeStory { SwitchStory() },
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_switch },
+        TAB_TITLE_COMPOSE composeStory { SwitchStory() },
       )
     ),
     "Text" story NodeData(
