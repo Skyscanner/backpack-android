@@ -17,6 +17,7 @@ jobs:
   Build:
     name: Build
     permissions:
+      contents: read
       statuses: write
       pull-requests: write
     uses: ./.github/workflows/_build.yml
