@@ -44,41 +44,6 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
-@Composable
-private fun BpkSwitchImpl(
-  checked: Boolean,
-  onCheckedChange: ((Boolean) -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-) {
-  // our design system isn't designed with the minimum touch target in mind at the moment.
-  // Disable the enforcement to avoid the extra padding
-  CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-    val uncheckedTrackColor = dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint03)
-    Switch(
-      checked = checked,
-      onCheckedChange = onCheckedChange,
-      modifier = modifier.semantics { invisibleToUser() },
-      enabled = enabled,
-      interactionSource = interactionSource,
-      colors = SwitchDefaults.colors(
-        checkedThumbColor = BpkTheme.colors.primary,
-        checkedTrackColor = BpkColor.SkyBlueTint03,
-        checkedTrackAlpha = 1f,
-        uncheckedThumbColor = BpkColor.White,
-        uncheckedTrackColor = uncheckedTrackColor,
-        uncheckedTrackAlpha = 1f,
-        disabledCheckedThumbColor = BpkTheme.colors.primary,
-        disabledCheckedTrackColor = BpkColor.SkyBlueTint03,
-        disabledUncheckedThumbColor = BpkColor.White,
-        disabledUncheckedTrackColor = uncheckedTrackColor,
-      ),
-    )
-  }
-}
-
 @Composable
 fun BpkSwitch(
   checked: Boolean,
@@ -138,6 +103,41 @@ fun BpkSwitch(
       onCheckedChange = onCheckedChange,
       enabled = enabled,
       interactionSource = interactionSource,
+    )
+  }
+}
+
+@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
+@Composable
+private fun BpkSwitchImpl(
+  checked: Boolean,
+  onCheckedChange: ((Boolean) -> Unit)?,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+  // our design system isn't designed with the minimum touch target in mind at the moment.
+  // Disable the enforcement to avoid the extra padding
+  CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
+    val uncheckedTrackColor = dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint03)
+    Switch(
+      checked = checked,
+      onCheckedChange = onCheckedChange,
+      modifier = modifier.semantics { invisibleToUser() },
+      enabled = enabled,
+      interactionSource = interactionSource,
+      colors = SwitchDefaults.colors(
+        checkedThumbColor = BpkTheme.colors.primary,
+        checkedTrackColor = BpkColor.SkyBlueTint03,
+        checkedTrackAlpha = 1f,
+        uncheckedThumbColor = BpkColor.White,
+        uncheckedTrackColor = uncheckedTrackColor,
+        uncheckedTrackAlpha = 1f,
+        disabledCheckedThumbColor = BpkTheme.colors.primary,
+        disabledCheckedTrackColor = BpkColor.SkyBlueTint03,
+        disabledUncheckedThumbColor = BpkColor.White,
+        disabledUncheckedTrackColor = uncheckedTrackColor,
+      ),
     )
   }
 }
