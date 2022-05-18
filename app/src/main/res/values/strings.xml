@@ -105,6 +105,6 @@
   <string name="toggle_default_rtl">Default RTL</string>
   <string name="toggle_disabled_unchecked">Disabled Unchecked</string>
   <string name="toggle_disabled_checked">Disabled Checked</string>
-  <string name="toggle_custom_title">Title</string>
-  <string name="toggle_custom_subtitle">Subtitle</string>
+  <string name="toggle_custom_title">Custom</string>
+  <string name="toggle_custom_subtitle">Content</string>
 </resources>

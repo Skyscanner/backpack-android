@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
 import androidx.compose.material.LocalTextStyle
@@ -47,8 +46,8 @@ import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 @Composable
 fun BpkRadioButton(
-  selected: Boolean,
   text: String,
+  selected: Boolean,
   onClick: (() -> Unit)?,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
@@ -89,7 +88,6 @@ fun BpkRadioButton(
       if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)
     CompositionLocalProvider(
       LocalContentColor provides contentColor,
-      LocalContentAlpha provides 1f,
       LocalTextStyle provides BpkTheme.typography.footnote,
     ) {
       content(selected)
