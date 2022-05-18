@@ -17,10 +17,6 @@ jobs:
   Build:
     name: Build
     permissions:
-      actions: write
-      checks: write
-      contents: write
-      issues: write
       statuses: write
       pull-requests: write
     uses: ./.github/workflows/_build.yml
