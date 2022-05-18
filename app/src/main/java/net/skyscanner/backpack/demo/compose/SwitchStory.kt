@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,87 +30,93 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
+import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
-fun RadioButtonStory() {
+fun SwitchStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
-    var selectedIndex by remember { mutableStateOf(1) }
-    DefaultUncheckedRadioButtonExample(selected = selectedIndex == 0, onClick = { selectedIndex = 0 })
-    DefaultCheckedRadioButtonExample(selected = selectedIndex == 1, onClick = { selectedIndex = 1 })
+    DefaultUncheckedSwitchExample()
+    DefaultCheckedSwitchExample()
 
-    DisabledUnCheckedRadioButtonExample()
-    DisabledCheckedRadioButtonExample()
-    CustomContentRadioButtonExample()
+    DisabledUncheckedSwitchExample()
+    DisabledCheckedSwitchExample()
+    CustomContentSwitchExample()
   }
 }
 
 @Preview
 @Composable
-fun DefaultUncheckedRadioButtonExample(selected: Boolean = false, onClick: (() -> Unit)? = null) {
+fun DefaultUncheckedSwitchExample() {
   BackpackPreview {
-    BpkRadioButton(
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+      modifier = Modifier.fillMaxWidth(),
       text = stringResource(id = R.string.toggle_default_unchecked),
-      selected = selected,
-      onClick = onClick,
+      checked = checked,
+      onCheckedChange = { checked = it },
     )
   }
 }
 
 @Preview
 @Composable
-fun DefaultCheckedRadioButtonExample(selected: Boolean = true, onClick: (() -> Unit)? = null) {
+fun DefaultCheckedSwitchExample() {
   BackpackPreview {
-    BpkRadioButton(
+    var checked by remember { mutableStateOf(true) }
+    BpkSwitch(
+      modifier = Modifier.fillMaxWidth(),
       text = stringResource(id = R.string.toggle_default_checked),
-      selected = selected,
-      onClick = onClick,
+      checked = checked,
+      onCheckedChange = { checked = it },
     )
   }
 }
 
 @Preview
 @Composable
-fun DisabledUnCheckedRadioButtonExample() {
+fun DisabledUncheckedSwitchExample() {
   BackpackPreview {
-    BpkRadioButton(
+    BpkSwitch(
+      modifier = Modifier.fillMaxWidth(),
       text = stringResource(id = R.string.toggle_disabled_unchecked),
       enabled = false,
-      selected = false,
-      onClick = null,
+      checked = false,
+      onCheckedChange = null
     )
   }
 }
 
 @Preview
 @Composable
-fun DisabledCheckedRadioButtonExample() {
+fun DisabledCheckedSwitchExample() {
   BackpackPreview {
-    BpkRadioButton(
+    BpkSwitch(
+      modifier = Modifier.fillMaxWidth(),
       text = stringResource(id = R.string.toggle_disabled_checked),
       enabled = false,
-      selected = true,
-      onClick = null,
+      checked = true,
+      onCheckedChange = null,
     )
   }
 }
 
 @Preview
 @Composable
-fun CustomContentRadioButtonExample() {
+fun CustomContentSwitchExample() {
   BackpackPreview {
-    var selected by remember { mutableStateOf(false) }
-    BpkRadioButton(
-      selected = selected,
-      onClick = { selected = !selected },
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+      modifier = Modifier.fillMaxWidth(),
+      checked = checked,
+      onCheckedChange = { checked = it },
     ) {
       Column {
         BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)

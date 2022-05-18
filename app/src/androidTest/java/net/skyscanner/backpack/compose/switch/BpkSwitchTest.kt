@@ -16,22 +16,22 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.radiobutton
+package net.skyscanner.backpack.compose.switch
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.demo.compose.CustomContentRadioButtonExample
-import net.skyscanner.backpack.demo.compose.DefaultCheckedRadioButtonExample
-import net.skyscanner.backpack.demo.compose.DefaultUncheckedRadioButtonExample
-import net.skyscanner.backpack.demo.compose.DisabledCheckedRadioButtonExample
-import net.skyscanner.backpack.demo.compose.DisabledUnCheckedRadioButtonExample
+import net.skyscanner.backpack.demo.compose.CustomContentSwitchExample
+import net.skyscanner.backpack.demo.compose.DefaultCheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.DefaultUncheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.DisabledCheckedSwitchExample
+import net.skyscanner.backpack.demo.compose.DisabledUncheckedSwitchExample
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkRadioButtonTest : BpkSnapshotTest() {
+class BpkSwitchTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
@@ -40,14 +40,14 @@ class BpkRadioButtonTest : BpkSnapshotTest() {
 
   @Test
   fun defaultUnchecked() = composed {
-    DefaultUncheckedRadioButtonExample()
+    DefaultUncheckedSwitchExample()
   }
 
   @Test
   fun defaultChecked() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      DefaultCheckedRadioButtonExample()
+      DefaultCheckedSwitchExample()
     }
   }
 
@@ -55,7 +55,7 @@ class BpkRadioButtonTest : BpkSnapshotTest() {
   fun disabledUnchecked() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      DisabledUnCheckedRadioButtonExample()
+      DisabledUncheckedSwitchExample()
     }
   }
 
@@ -63,7 +63,7 @@ class BpkRadioButtonTest : BpkSnapshotTest() {
   fun disabledChecked() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      DisabledCheckedRadioButtonExample()
+      DisabledCheckedSwitchExample()
     }
   }
 
@@ -71,7 +71,7 @@ class BpkRadioButtonTest : BpkSnapshotTest() {
   fun customContent() {
     assumeVariant(BpkTestVariant.Default)
     composed {
-      CustomContentRadioButtonExample()
+      CustomContentSwitchExample()
     }
   }
 }

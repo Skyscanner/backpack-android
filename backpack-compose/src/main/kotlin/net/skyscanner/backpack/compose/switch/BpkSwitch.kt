@@ -16,19 +16,19 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.radiobutton
+package net.skyscanner.backpack.compose.switch
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.RadioButton
-import androidx.compose.material.RadioButtonDefaults
+import androidx.compose.material.Switch
+import androidx.compose.material.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -41,65 +41,75 @@ import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
-import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 @Composable
-fun BpkRadioButton(
+fun BpkSwitch(
   text: String,
-  selected: Boolean,
-  onClick: (() -> Unit)?,
+  checked: Boolean,
+  onCheckedChange: ((Boolean) -> Unit)?,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-  BpkRadioButton(
-    selected = selected,
-    onClick = onClick,
+  BpkSwitch(
+    checked = checked,
+    onCheckedChange = onCheckedChange,
     modifier = modifier,
     enabled = enabled,
-    interactionSource = interactionSource
+    interactionSource = interactionSource,
   ) {
     BpkText(text = text)
   }
 }
 
 @Composable
-fun BpkRadioButton(
-  selected: Boolean,
-  onClick: (() -> Unit)?,
+fun BpkSwitch(
+  checked: Boolean,
+  onCheckedChange: ((Boolean) -> Unit)?,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   content: @Composable RowScope.(Boolean) -> Unit,
 ) {
-  val rowModifier = if (onClick != null) {
-    modifier.clickable(interactionSource = interactionSource, indication = null, role = Role.RadioButton, onClick = onClick)
+  val rowModifier = if (onCheckedChange != null) {
+    modifier.toggleable(
+      value = checked,
+      role = Role.Switch,
+      interactionSource = interactionSource,
+      indication = null,
+      onValueChange = onCheckedChange,
+    )
   } else {
     modifier
   }
   Row(
-    horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Sm),
+    horizontalArrangement = Arrangement.SpaceBetween,
     modifier = rowModifier,
     verticalAlignment = Alignment.CenterVertically,
   ) {
-    BpkRadioButtonImpl(selected = selected, onClick = onClick, enabled = enabled, interactionSource = interactionSource)
     val contentColor =
       if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)
     CompositionLocalProvider(
       LocalContentColor provides contentColor,
       LocalTextStyle provides BpkTheme.typography.footnote,
     ) {
-      content(selected)
+      content(checked)
     }
+    BpkSwitchImpl(
+      checked = checked,
+      onCheckedChange = onCheckedChange,
+      enabled = enabled,
+      interactionSource = interactionSource,
+    )
   }
 }
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
 @Composable
-private fun BpkRadioButtonImpl(
-  selected: Boolean,
-  onClick: (() -> Unit)?,
+private fun BpkSwitchImpl(
+  checked: Boolean,
+  onCheckedChange: ((Boolean) -> Unit)?,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -107,16 +117,24 @@ private fun BpkRadioButtonImpl(
   // our design system isn't designed with the minimum touch target in mind at the moment.
   // Disable the enforcement to avoid the extra padding
   CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-    RadioButton(
-      selected = selected,
-      onClick = onClick,
+    val uncheckedTrackColor = dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint03)
+    Switch(
+      checked = checked,
+      onCheckedChange = onCheckedChange,
       modifier = modifier.semantics { invisibleToUser() },
       enabled = enabled,
       interactionSource = interactionSource,
-      colors = RadioButtonDefaults.colors(
-        selectedColor = BpkTheme.colors.primary,
-        unselectedColor = BpkTheme.colors.textSecondary,
-        disabledColor = BpkColor.SkyGrayTint04,
+      colors = SwitchDefaults.colors(
+        checkedThumbColor = BpkTheme.colors.primary,
+        checkedTrackColor = BpkColor.SkyBlueTint03,
+        checkedTrackAlpha = 1f,
+        uncheckedThumbColor = BpkColor.White,
+        uncheckedTrackColor = uncheckedTrackColor,
+        uncheckedTrackAlpha = 1f,
+        disabledCheckedThumbColor = BpkTheme.colors.primary,
+        disabledCheckedTrackColor = BpkColor.SkyBlueTint03,
+        disabledUncheckedThumbColor = BpkColor.White,
+        disabledUncheckedTrackColor = uncheckedTrackColor,
       ),
     )
   }

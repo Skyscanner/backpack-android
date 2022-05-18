@@ -7,38 +7,38 @@
   android:orientation="vertical">
 
   <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
-    android:text="Default Unchecked" />
+    android:text="@string/toggle_default_unchecked" />
 
   <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingLg"
-    android:checked="true"
-    android:text="Default Checked" />
-
-  <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/bpkSpacingLg"
-    android:enabled="false"
-    android:text="Disabled Unchecked" />
-
-  <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:checked="true"
-    android:enabled="false"
-    android:text="Disabled Checked" />
+    android:text="@string/toggle_default_checked" />
 
   <net.skyscanner.backpack.toggle.BpkSwitch
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:enabled="false"
+    android:text="@string/toggle_disabled_unchecked" />
+
+  <net.skyscanner.backpack.toggle.BpkSwitch
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/bpkSpacingLg"
+    android:checked="true"
+    android:enabled="false"
+    android:text="@string/toggle_disabled_checked" />
+
+  <net.skyscanner.backpack.toggle.BpkSwitch
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/bpkSpacingLg"
     android:layoutDirection="rtl"
-    android:text="Default RTL" />
+    android:text="@string/toggle_default_rtl" />
 
 </LinearLayout>

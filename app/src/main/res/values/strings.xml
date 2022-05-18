@@ -100,9 +100,11 @@
   <string name="text_hero5">Hero 5</string>
   <string name="button">Button</string>
 
-  <string name="radiobutton_default_unchecked">Default Unchecked</string>
-  <string name="radiobutton_default_checked">Default Checked</string>
-  <string name="radiobutton_default_rtl">Default RTL</string>
-  <string name="radiobutton_disabled_unchecked">Disabled Unchecked</string>
-  <string name="radiobutton_disabled_checked">Disabled Checked</string>
+  <string name="toggle_default_unchecked">Default Unchecked</string>
+  <string name="toggle_default_checked">Default Checked</string>
+  <string name="toggle_default_rtl">Default RTL</string>
+  <string name="toggle_disabled_unchecked">Disabled Unchecked</string>
+  <string name="toggle_disabled_checked">Disabled Checked</string>
+  <string name="toggle_custom_title">Custom</string>
+  <string name="toggle_custom_subtitle">Content</string>
 </resources>

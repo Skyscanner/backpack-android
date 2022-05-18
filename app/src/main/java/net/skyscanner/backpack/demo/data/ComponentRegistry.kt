@@ -29,6 +29,7 @@ import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
+import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
@@ -318,7 +319,13 @@ object ComponentRegistry {
       )
     ),
     "Star Rating Interactive" story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
-    "Switch" story NodeData { Story of R.layout.fragment_switch },
+    "Switch" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_COMPOSE composeStory { SwitchStory() },
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_switch },
+      )
+    ),
     "Text" story NodeData(
       { children -> TabStory of children },
       mapOf(
