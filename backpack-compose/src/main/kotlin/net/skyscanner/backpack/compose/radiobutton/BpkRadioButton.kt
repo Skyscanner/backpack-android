@@ -18,11 +18,11 @@
 
 package net.skyscanner.backpack.compose.radiobutton
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
@@ -74,7 +74,13 @@ fun BpkRadioButton(
   content: @Composable RowScope.(Boolean) -> Unit,
 ) {
   val rowModifier = if (onClick != null) {
-    modifier.clickable(interactionSource = interactionSource, indication = null, role = Role.RadioButton, onClick = onClick)
+    modifier.selectable(
+      selected = selected,
+      interactionSource = interactionSource,
+      indication = null,
+      role = Role.RadioButton,
+      onClick = onClick,
+    )
   } else {
     modifier
   }
