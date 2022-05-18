@@ -22,6 +22,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.ExperimentalMaterialApi
@@ -39,6 +40,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
 
@@ -117,23 +119,25 @@ fun BpkCheckbox(
         interactionSource = interactionSource,
         indication = null,
         enabled = enabled,
-        role = Role.Switch,
+        role = Role.Checkbox,
         onClick = onClick!!,
       )
     },
   ) {
+
+    BpkCheckboxImpl(
+      modifier = Modifier.padding(end = BpkSpacing.Sm),
+      state = state,
+      enabled = enabled,
+      interactionSource = interactionSource,
+      onClick = onClick ?: {},
+    )
 
     BpkToggleableContent(
       enabled = enabled,
       content = { content(state) }
     )
 
-    BpkCheckboxImpl(
-      state = state,
-      enabled = enabled,
-      interactionSource = interactionSource,
-      onClick = onClick ?: {},
-    )
   }
 }
 

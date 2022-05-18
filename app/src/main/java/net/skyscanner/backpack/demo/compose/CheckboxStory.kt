@@ -27,65 +27,69 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.state.ToggleableState
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
 import net.skyscanner.backpack.compose.checkbox.BpkCheckbox
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 
 @Composable
 fun CheckboxStory() {
   Column(
-    modifier = Modifier.padding(horizontal = BpkSpacing.Md, vertical = BpkSpacing.Md),
+    modifier = Modifier.padding(BpkSpacing.Base),
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
     var checked by remember { mutableStateOf(true) }
 
     BpkCheckbox(
-      text = "Default",
+      text = stringResource(id = R.string.toggle_default),
       checked = checked,
       onCheckedChange = { checked = it },
     )
 
-    AndroidView(
-      modifier = Modifier.padding(start = 8.dp),
-      factory = {
-      net.skyscanner.backpack.checkbox.BpkCheckbox(it).apply {
-        text = "Default"
-        checked = true
-      }
-    })
-
     BpkCheckbox(
-      text = "Indeterminate",
+      text = stringResource(id = R.string.toggle_indeterminate),
       state = ToggleableState.Indeterminate,
       onClick = { },
     )
 
     BpkCheckbox(
-      text = "Default Unchecked",
+      text = stringResource(id = R.string.toggle_default_unchecked),
       checked = false,
       onCheckedChange = {},
     )
 
     BpkCheckbox(
-      text = "Default Checked",
+      text = stringResource(id = R.string.toggle_default_checked),
       checked = true,
       onCheckedChange = {},
     )
 
     BpkCheckbox(
-      text = "Disabled Unchecked",
+      text = stringResource(id = R.string.toggle_disabled_unchecked),
       checked = false,
       enabled = false,
       onCheckedChange = {},
     )
 
     BpkCheckbox(
-      text = "Disabled Checked",
+      text = stringResource(id = R.string.toggle_disabled_checked),
       checked = true,
       enabled = false,
       onCheckedChange = {},
     )
+
+    BpkCheckbox(
+      checked = true,
+      onCheckedChange = {},
+    ) {
+      Column {
+        BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
+        BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
+      }
+    }
   }
 }
