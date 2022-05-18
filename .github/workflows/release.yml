@@ -16,6 +16,7 @@ jobs:
   Build:
     name: Build
     permissions:
+      repository-projects: read
       discussions: write
       contents: read
       statuses: write

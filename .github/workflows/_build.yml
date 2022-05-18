@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
+      repository-projects: read
       discussions: write
       contents: read
       statuses: write
