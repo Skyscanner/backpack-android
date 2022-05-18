@@ -95,11 +95,7 @@ fun BpkSwitch(
     enabled = enabled,
     interactionSource = interactionSource,
   ) {
-    BpkText(
-      text = text,
-      style = BpkTheme.typography.footnote,
-      color = if (enabled) BpkTheme.colors.textPrimary else dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06),
-    )
+    BpkText(text = text)
   }
 }
 
