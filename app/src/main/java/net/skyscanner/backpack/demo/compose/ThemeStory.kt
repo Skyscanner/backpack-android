@@ -34,7 +34,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Slider
 import androidx.compose.material.Snackbar
-import androidx.compose.material.Switch
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.material.TopAppBar
@@ -110,9 +109,6 @@ fun ThemeStory() {
 
     var checkboxChecked by remember { mutableStateOf(true) }
     Checkbox(checked = checkboxChecked, onCheckedChange = { checkboxChecked = it })
-
-    var switchChecked by remember { mutableStateOf(true) }
-    Switch(checked = switchChecked, onCheckedChange = { switchChecked = it })
 
     CircularProgressIndicator()
 
