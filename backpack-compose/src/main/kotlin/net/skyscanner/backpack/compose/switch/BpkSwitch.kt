@@ -106,8 +106,8 @@ private fun BpkSwitchImpl(
   checked: Boolean,
   onCheckedChange: ((Boolean) -> Unit)?,
   modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  enabled: Boolean,
+  interactionSource: MutableInteractionSource,
 ) {
   // our design system isn't designed with the minimum touch target in mind at the moment.
   // Disable the enforcement to avoid the extra padding
