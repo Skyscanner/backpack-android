@@ -77,7 +77,7 @@ fun DefaultPanelExample(
 }
 
 @Composable
-private fun NoPaddingPanelExample(
+fun NoPaddingPanelExample(
   modifier: Modifier = Modifier,
 ) {
   BpkPanel(
