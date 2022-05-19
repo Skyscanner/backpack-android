@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Checkbox
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FloatingActionButton
@@ -106,9 +105,6 @@ fun ThemeStory() {
         },
       )
     }
-
-    var checkboxChecked by remember { mutableStateOf(true) }
-    Checkbox(checked = checkboxChecked, onCheckedChange = { checkboxChecked = it })
 
     CircularProgressIndicator()
 
