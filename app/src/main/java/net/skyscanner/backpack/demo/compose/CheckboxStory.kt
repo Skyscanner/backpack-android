@@ -56,7 +56,7 @@ fun CheckboxStory() {
 
 @Composable
 @Preview
-private fun DefaultCheckboxSample() {
+fun DefaultCheckboxSample() {
   BackpackPreview {
     var checked by remember { mutableStateOf(true) }
 
@@ -71,7 +71,7 @@ private fun DefaultCheckboxSample() {
 
 @Composable
 @Preview
-private fun IntermediateCheckboxSample() {
+fun IntermediateCheckboxSample() {
   BackpackPreview {
     BpkCheckbox(
       text = stringResource(id = R.string.toggle_indeterminate),
@@ -82,7 +82,7 @@ private fun IntermediateCheckboxSample() {
 }
 
 @Composable
-private fun UncheckedCheckboxSample() {
+fun UncheckedCheckboxSample() {
   BackpackPreview {
     BpkCheckbox(
       text = stringResource(id = R.string.toggle_default_unchecked),
@@ -94,7 +94,7 @@ private fun UncheckedCheckboxSample() {
 
 @Composable
 @Preview
-private fun CheckedCheckboxSample() {
+fun CheckedCheckboxSample() {
   BackpackPreview {
     BpkCheckbox(
       text = stringResource(id = R.string.toggle_default_checked),
@@ -106,7 +106,7 @@ private fun CheckedCheckboxSample() {
 
 @Composable
 @Preview
-private fun DisabledUncheckedCheckboxSample() {
+fun DisabledUncheckedCheckboxSample() {
   BackpackPreview {
     BpkCheckbox(
       text = stringResource(id = R.string.toggle_disabled_unchecked),
@@ -119,7 +119,7 @@ private fun DisabledUncheckedCheckboxSample() {
 
 @Composable
 @Preview
-private fun DisabledCheckedCheckboxSample() {
+fun DisabledCheckedCheckboxSample() {
   BackpackPreview {
     BpkCheckbox(
       text = stringResource(id = R.string.toggle_disabled_checked),
@@ -132,7 +132,7 @@ private fun DisabledCheckedCheckboxSample() {
 
 @Composable
 @Preview
-private fun CustomContentCheckboxSample() {
+fun CustomContentCheckboxSample() {
   BackpackPreview {
     BpkCheckbox(
       checked = true,
