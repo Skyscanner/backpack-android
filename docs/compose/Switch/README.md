@@ -11,17 +11,22 @@ Example of a Switch:
 ```Kotlin
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 
-BpkSwitch(checked = true, text = "Switch text") { checked ->
-    // onCheckedChange
-}
+BpkSwitch(
+  text = "Switch text",
+  checked = true,
+  onCheckedChange = { checked -> },
+)
 ```
 
-Example of a Switch with custom text content:
+Example of a Switch with custom content:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 
-BpkSwitch(checked = true, onCheckedChange = {}) { checked ->
-  // content
+BpkSwitch(
+  checked = true,
+  onCheckedChange = { checked -> },
+) { checked ->
+  MyCustomContent()
 }
 ```
