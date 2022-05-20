@@ -40,9 +40,11 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.state.ToggleableState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
+import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 @Composable
 fun BpkCheckbox(
@@ -130,7 +132,7 @@ fun BpkCheckbox(
       state = state,
       enabled = enabled,
       interactionSource = interactionSource,
-      onClick = onClick ?: {},
+      onClick = onClick,
     )
 
     BpkToggleableContent(
@@ -145,7 +147,7 @@ fun BpkCheckbox(
 @Composable
 private fun BpkCheckboxImpl(
   state: ToggleableState,
-  onClick: () -> Unit,
+  onClick: (() -> Unit)?,
   modifier: Modifier = Modifier,
   enabled: Boolean,
   interactionSource : MutableInteractionSource,
@@ -161,6 +163,10 @@ private fun BpkCheckboxImpl(
       interactionSource = interactionSource,
       colors = CheckboxDefaults.colors(
         checkedColor = BpkTheme.colors.primary,
+        uncheckedColor = BpkTheme.colors.textSecondary,
+        checkmarkColor = BpkTheme.colors.background,
+        disabledColor = dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06),
+        disabledIndeterminateColor = dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06),
       ),
     )
   }
