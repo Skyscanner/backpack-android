@@ -71,7 +71,7 @@ fun DefaultPanelExample(
   ) {
     BpkText(
       text = stringResource(R.string.stub),
-      overflow = TextOverflow.Ellipsis,
+      overflow = TextOverflow.Clip,
     )
   }
 }
@@ -87,7 +87,7 @@ fun NoPaddingPanelExample(
   ) {
     BpkText(
       text = stringResource(R.string.stub),
-      overflow = TextOverflow.Ellipsis,
+      overflow = TextOverflow.Clip,
     )
   }
 }
