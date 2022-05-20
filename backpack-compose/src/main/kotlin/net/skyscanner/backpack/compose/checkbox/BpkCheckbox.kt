@@ -159,7 +159,7 @@ private fun BpkCheckboxImpl(
       state = state,
       onClick = onClick,
       enabled = enabled,
-      modifier = modifier.scale(0.89f).semantics { invisibleToUser() },
+      modifier = modifier.scale(BackpackCheckboxScale).semantics { invisibleToUser() },
       interactionSource = interactionSource,
       colors = CheckboxDefaults.colors(
         checkedColor = BpkTheme.colors.primary,
@@ -171,3 +171,5 @@ private fun BpkCheckboxImpl(
     )
   }
 }
+
+private const val BackpackCheckboxScale = 0.89f
