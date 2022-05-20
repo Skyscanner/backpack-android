@@ -51,7 +51,6 @@ fun CheckboxStory() {
     DisabledCheckedCheckboxSample()
     CustomContentCheckboxSample()
   }
-
 }
 
 @Composable
@@ -67,7 +66,6 @@ fun DefaultCheckboxSample() {
     )
   }
 }
-
 
 @Composable
 @Preview
