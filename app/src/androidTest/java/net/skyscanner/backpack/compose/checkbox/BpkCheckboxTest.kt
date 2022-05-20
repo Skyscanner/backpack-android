@@ -77,7 +77,6 @@ class BpkCheckboxTest : BpkSnapshotTest() {
     }
   }
 
-
   @Test
   fun disabledChecked() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
