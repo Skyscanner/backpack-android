@@ -11,17 +11,22 @@ Example of a RadioButton:
 ```Kotlin
 import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
 
-BpkRadioButton(selected = true) {
-    // onClick
-}
+BpkRadioButton(
+  text = "Radiobutton text",
+  selected = true,
+  onClick = { },
+)
 ```
 
-Example of a RadioButton with text:
+Example of a RadioButton with custom content:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
 
-BpkRadioButton(selected = true, text = "Radiobutton text") {
-  // onClick
+BpkRadioButton(
+  selected = true,
+  onClick = { },
+) { selected ->
+  MyCustomContent()
 }
 ```

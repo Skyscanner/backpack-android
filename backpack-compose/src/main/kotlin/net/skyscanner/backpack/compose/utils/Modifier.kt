@@ -20,6 +20,9 @@ package net.skyscanner.backpack.compose.utils
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 internal fun Modifier.hideContentIf(hide: Boolean): Modifier =
   layout { measurable, constraints ->
@@ -30,3 +33,12 @@ internal fun Modifier.hideContentIf(hide: Boolean): Modifier =
       }
     }
   }
+
+
+@OptIn(ExperimentalContracts::class)
+internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> Modifier): Modifier {
+  contract {
+    callsInPlace(block, InvocationKind.AT_MOST_ONCE)
+  }
+  return if (predicate) block() else this
+}

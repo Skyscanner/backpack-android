@@ -100,6 +100,8 @@
   <string name="text_hero5">Hero 5</string>
   <string name="button">Button</string>
 
+  <string name="toggle_default">Default</string>
+  <string name="toggle_indeterminate">Indeterminate</string>
   <string name="toggle_default_unchecked">Default Unchecked</string>
   <string name="toggle_default_checked">Default Checked</string>
   <string name="toggle_default_rtl">Default RTL</string>

@@ -16,35 +16,38 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.switch
+package net.skyscanner.backpack.compose.checkbox
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.triStateToggleable
+import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
-import androidx.compose.material.Switch
-import androidx.compose.material.SwitchDefaults
+import androidx.compose.material.TriStateCheckbox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.state.ToggleableState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 @Composable
-fun BpkSwitch(
+fun BpkCheckbox(
   text: String,
   checked: Boolean,
   onCheckedChange: ((Boolean) -> Unit)?,
@@ -52,9 +55,28 @@ fun BpkSwitch(
   enabled: Boolean = true,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-  BpkSwitch(
+  BpkCheckbox(
     checked = checked,
     onCheckedChange = onCheckedChange,
+    interactionSource = interactionSource,
+    enabled = enabled,
+    modifier = modifier,
+    content = { BpkText(text) },
+  )
+}
+
+@Composable
+fun BpkCheckbox(
+  text: String,
+  state: ToggleableState,
+  onClick: (() -> Unit)?,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+  BpkCheckbox(
+    state = state,
+    onClick = onClick,
     modifier = modifier,
     enabled = enabled,
     interactionSource = interactionSource,
@@ -63,7 +85,7 @@ fun BpkSwitch(
 }
 
 @Composable
-fun BpkSwitch(
+fun BpkCheckbox(
   checked: Boolean,
   onCheckedChange: ((Boolean) -> Unit)?,
   modifier: Modifier = Modifier,
@@ -71,66 +93,83 @@ fun BpkSwitch(
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   content: @Composable RowScope.(Boolean) -> Unit,
 ) {
+  BpkCheckbox(
+    state = ToggleableState(checked),
+    onClick = if (onCheckedChange != null) { { onCheckedChange(!checked) } } else null,
+    interactionSource = interactionSource,
+    enabled = enabled,
+    modifier = modifier,
+    content = { content(checked) },
+  )
+}
+
+@Composable
+fun BpkCheckbox(
+  state: ToggleableState,
+  onClick: (() -> Unit)?,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  content: @Composable RowScope.(ToggleableState) -> Unit,
+) {
   Row(
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.SpaceBetween,
-    modifier = modifier.applyIf(onCheckedChange != null) {
-      toggleable(
-        value = checked,
-        role = Role.Switch,
+    modifier = modifier.applyIf(onClick != null) {
+      triStateToggleable(
+        state = state,
         interactionSource = interactionSource,
         indication = null,
-        onValueChange = onCheckedChange!!,
+        enabled = enabled,
+        role = Role.Checkbox,
+        onClick = onClick!!,
       )
     },
   ) {
 
-    BpkToggleableContent(
-      enabled = enabled,
-      content = { content(checked) },
-    )
-
-    BpkSwitchImpl(
-      checked = checked,
-      onCheckedChange = onCheckedChange,
+    BpkCheckboxImpl(
+      modifier = Modifier.padding(end = BpkSpacing.Sm),
+      state = state,
       enabled = enabled,
       interactionSource = interactionSource,
+      onClick = onClick,
+    )
+
+    BpkToggleableContent(
+      enabled = enabled,
+      content = { content(state) }
     )
 
   }
 }
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterialApi::class, androidx.compose.ui.ExperimentalComposeUiApi::class)
 @Composable
-private fun BpkSwitchImpl(
-  checked: Boolean,
-  onCheckedChange: ((Boolean) -> Unit)?,
+private fun BpkCheckboxImpl(
+  state: ToggleableState,
+  onClick: (() -> Unit)?,
   modifier: Modifier = Modifier,
   enabled: Boolean,
-  interactionSource: MutableInteractionSource,
+  interactionSource : MutableInteractionSource,
 ) {
   // our design system isn't designed with the minimum touch target in mind at the moment.
   // Disable the enforcement to avoid the extra padding
   CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-    val uncheckedTrackColor = dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint03)
-    Switch(
-      checked = checked,
-      onCheckedChange = onCheckedChange,
-      modifier = modifier.semantics { invisibleToUser() },
+    TriStateCheckbox(
+      state = state,
+      onClick = onClick,
       enabled = enabled,
+      modifier = modifier.scale(BackpackCheckboxScale).semantics { invisibleToUser() },
       interactionSource = interactionSource,
-      colors = SwitchDefaults.colors(
-        checkedThumbColor = BpkTheme.colors.primary,
-        checkedTrackColor = BpkColor.SkyBlueTint03,
-        checkedTrackAlpha = 1f,
-        uncheckedThumbColor = BpkColor.White,
-        uncheckedTrackColor = uncheckedTrackColor,
-        uncheckedTrackAlpha = 1f,
-        disabledCheckedThumbColor = BpkTheme.colors.primary,
-        disabledCheckedTrackColor = BpkColor.SkyBlueTint03,
-        disabledUncheckedThumbColor = BpkColor.White,
-        disabledUncheckedTrackColor = uncheckedTrackColor,
+      colors = CheckboxDefaults.colors(
+        checkedColor = BpkTheme.colors.primary,
+        uncheckedColor = BpkTheme.colors.textSecondary,
+        checkmarkColor = BpkTheme.colors.background,
+        disabledColor = dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06),
+        disabledIndeterminateColor = dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06),
       ),
     )
   }
 }
+
+private const val BackpackCheckboxScale = 0.89f
