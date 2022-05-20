@@ -27,6 +27,7 @@ import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
+import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
@@ -272,7 +273,13 @@ object ComponentRegistry {
     ),
     "Nudger" story NodeData { Story of R.layout.fragment_nudger },
     "Overlay" story NodeData { Story of R.layout.fragment_overlay },
-    "Panel" story NodeData { Story of R.layout.fragment_panel },
+    "Panel" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_panel },
+        TAB_TITLE_COMPOSE composeStory { PanelStory() },
+      )
+    ),
     "RadioButton" story NodeData(
       { children -> TabStory of children },
       mapOf(
