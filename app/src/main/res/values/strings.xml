@@ -112,4 +112,12 @@
 
   <string name="panel_default">Default</string>
   <string name="panel_no_padding">No padding</string>
+
+  <string name="dialog_title">Title in here</string>
+  <string name="dialog_text">Description that goes two lines ideally, but sometimes it can go longer</string>
+  <string name="dialog_confirmation">Confirmation</string>
+  <string name="dialog_skip">Skip</string>
+  <string name="dialog_link_optional">Link optional</string>
+  <string name="dialog_delete">Delete</string>
+  <string name="dialog_cancel">Cancel</string>
 </resources>
