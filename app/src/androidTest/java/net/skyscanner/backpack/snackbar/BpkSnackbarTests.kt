@@ -30,7 +30,6 @@ import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
 import org.hamcrest.Matcher
@@ -45,8 +44,8 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   private lateinit var activity: AppCompatActivity
 
   @get:Rule
-  var activityRule: ActivityTestRule<MainActivity> =
-    ActivityTestRule(MainActivity::class.java)
+  var activityRule: ActivityTestRule<AppCompatActivity> =
+    ActivityTestRule(AppCompatActivity::class.java)
 
   @Before
   fun setUp() {

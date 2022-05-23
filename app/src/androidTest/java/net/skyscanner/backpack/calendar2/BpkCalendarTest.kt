@@ -34,7 +34,6 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.calendar2.extension.toIterable
-import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.junit.Before
@@ -56,8 +55,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
   private lateinit var activity: AppCompatActivity
 
   @get:Rule
-  var activityRule: ActivityTestRule<MainActivity> =
-    ActivityTestRule(MainActivity::class.java)
+  var activityRule: ActivityTestRule<AppCompatActivity> =
+    ActivityTestRule(AppCompatActivity::class.java)
 
   @OptIn(InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
   @Before

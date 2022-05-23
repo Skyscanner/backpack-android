@@ -27,11 +27,13 @@ import androidx.activity.compose.setContent
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.DP
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.ActivityScenario
@@ -39,7 +41,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
-import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.compose.BackpackPreview
 import org.hamcrest.Matchers
 import org.junit.Assume
@@ -109,7 +110,7 @@ open class BpkSnapshotTest {
       tags.joinToString(separator = "_", prefix = getScreenshotName() + ".") { it.toString() }
     }
 
-    ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+    ActivityScenario.launch(AppCompatActivity::class.java).use { scenario ->
       scenario.onActivity { activity ->
         with(activity) {
           setContent {
@@ -121,7 +122,7 @@ open class BpkSnapshotTest {
             )
           }
 
-          val view = (window.decorView as ViewGroup).getChildAt(0)
+          val view = window.decorView.findComposeView()
 
           ViewHelpers.setupView(view)
             .setExactWidthDp(size.width)
@@ -134,6 +135,22 @@ open class BpkSnapshotTest {
         }
       }
     }
+  }
+
+  private fun View.findComposeView(): ComposeView? {
+    if (this !is ViewGroup) return null
+    for (i in 0..childCount) {
+      val child = getChildAt(i)
+      if (child is ComposeView) {
+        return child
+      } else if (child is ViewGroup) {
+        val view = child.findComposeView()
+        if (view != null) {
+          return view
+        }
+      }
+    }
+    return null
   }
 
   inner class AsyncSnapshot(private val testClass: String, private val testName: String) {
