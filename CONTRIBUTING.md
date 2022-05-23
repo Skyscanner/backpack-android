@@ -46,7 +46,7 @@ $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-a
 Create an SD card for the screenshot tests (Linux)
 
 ```
-$ANDROID_HOME/tools/mksdcard -l e 512M sd.img
+$ANDROID_HOME/emulator/mksdcard -l e 512M sd.img
 ```
 
 Create an SD card for the screenshot tests (OSX)
