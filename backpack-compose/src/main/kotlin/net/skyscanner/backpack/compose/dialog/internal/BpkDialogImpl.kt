@@ -25,7 +25,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -119,7 +119,6 @@ private fun DialogIcon(icon: Dialog.Icon?) {
   }
 }
 
-private val CircleShape = RoundedCornerShape(percent = 50)
 private val IconSize = 64.dp
 private val IconBorder = 4.dp
 private val IconPadding = 40.dp
