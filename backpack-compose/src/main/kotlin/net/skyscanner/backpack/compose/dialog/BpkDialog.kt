@@ -74,7 +74,7 @@ fun BpkSuccessDialog(
 }
 
 @Composable
-fun BpkAlertDialog(
+fun BpkWarningDialog(
   onDismissRequest: () -> Unit,
   icon: Painter?,
   title: String,
@@ -84,7 +84,7 @@ fun BpkAlertDialog(
   properties: DialogProperties = DialogProperties(),
 ) {
   BpkDialogImpl(
-    icon = icon?.let { Dialog.Icon.Alert(icon) },
+    icon = icon?.let { Dialog.Icon.Warning(icon) },
     title = title,
     text = text,
     buttons = listOfNotNull(
@@ -97,7 +97,7 @@ fun BpkAlertDialog(
 }
 
 @Composable
-fun BpkAlertDialog(
+fun BpkWarningDialog(
   onDismissRequest: () -> Unit,
   icon: Painter?,
   title: String,
@@ -108,7 +108,7 @@ fun BpkAlertDialog(
   properties: DialogProperties = DialogProperties(),
 ) {
   BpkDialogImpl(
-    icon = icon?.let { Dialog.Icon.Alert(icon) },
+    icon = icon?.let { Dialog.Icon.Warning(icon) },
     title = title,
     text = text,
     buttons = listOfNotNull(

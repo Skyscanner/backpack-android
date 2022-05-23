@@ -33,7 +33,7 @@ internal object Dialog {
       override val backgroundColor = BpkColor.Monteverde
     }
 
-    data class Alert(override val icon: Painter) : Icon() {
+    data class Warning(override val icon: Painter) : Icon() {
       override val backgroundColor = BpkColor.Kolkata
     }
 

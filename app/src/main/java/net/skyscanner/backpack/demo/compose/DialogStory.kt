@@ -30,9 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.dialog.BpkAlertDialog
 import net.skyscanner.backpack.compose.dialog.BpkDestructiveDialog
 import net.skyscanner.backpack.compose.dialog.BpkSuccessDialog
+import net.skyscanner.backpack.compose.dialog.BpkWarningDialog
 import net.skyscanner.backpack.compose.dialog.DialogButton
 import net.skyscanner.backpack.compose.icons.BpkIcons
 import net.skyscanner.backpack.compose.icons.lg.AlertAdd
@@ -58,7 +58,7 @@ fun DialogStory() {
       Dialog.SuccessOneButton -> SuccessOneButtonDialogExample { dialogShown = null }
       Dialog.SuccessTwoButtons -> SuccessTwoButtonsDialogExample { dialogShown = null }
       Dialog.SuccessThreeButtons -> SuccessThreeButtonsDialogExample { dialogShown = null }
-      Dialog.Alert -> AlertDialogExample { dialogShown = null }
+      Dialog.Warning -> WarningDialogExample { dialogShown = null }
       Dialog.Destructive -> DestructiveDialogExample { dialogShown = null }
       Dialog.NoIcon -> NoIconDialogExample { dialogShown = null }
       null -> {}
@@ -70,7 +70,7 @@ enum class Dialog(val buttonText: String) {
   SuccessOneButton("Success One Button"),
   SuccessTwoButtons("Success Two Buttons"),
   SuccessThreeButtons("Success Three Buttons"),
-  Alert("Alert"),
+  Warning("Warning"),
   Destructive("Destructive"),
   NoIcon("No Icon"),
 }
@@ -122,9 +122,9 @@ fun SuccessThreeButtonsDialogExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun AlertDialogExample(onDismiss: () -> Unit = {}) {
+fun WarningDialogExample(onDismiss: () -> Unit = {}) {
   BackpackPreview {
-    BpkAlertDialog(
+    BpkWarningDialog(
       icon = BpkIcons.Lg.AlertAdd,
       title = stringResource(id = R.string.dialog_title),
       text = stringResource(id = R.string.dialog_text),
