@@ -47,32 +47,35 @@ fun DialogStory() {
     modifier = Modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
-    var dialogShown by rememberSaveable { mutableStateOf<Dialog?>(null) }
-    Dialog.values().forEach {
-      BpkButton(it.buttonText) {
-        dialogShown = it
+    var shownDialog by rememberSaveable { mutableStateOf(ShownDialog.None) }
+    ShownDialog.values().forEach {
+      if (it != ShownDialog.None) {
+        BpkButton(it.buttonText) {
+          shownDialog = it
+        }
       }
     }
 
-    when (dialogShown) {
-      Dialog.SuccessOneButton -> SuccessOneButtonDialogExample { dialogShown = null }
-      Dialog.SuccessTwoButtons -> SuccessTwoButtonsDialogExample { dialogShown = null }
-      Dialog.SuccessThreeButtons -> SuccessThreeButtonsDialogExample { dialogShown = null }
-      Dialog.Warning -> WarningDialogExample { dialogShown = null }
-      Dialog.Destructive -> DestructiveDialogExample { dialogShown = null }
-      Dialog.NoIcon -> NoIconDialogExample { dialogShown = null }
-      null -> {}
+    when (shownDialog) {
+      ShownDialog.SuccessOneButton -> SuccessOneButtonDialogExample { shownDialog = ShownDialog.None }
+      ShownDialog.SuccessTwoButtons -> SuccessTwoButtonsDialogExample { shownDialog = ShownDialog.None }
+      ShownDialog.SuccessThreeButtons -> SuccessThreeButtonsDialogExample { shownDialog = ShownDialog.None }
+      ShownDialog.Warning -> WarningDialogExample { shownDialog = ShownDialog.None }
+      ShownDialog.Destructive -> DestructiveDialogExample { shownDialog = ShownDialog.None }
+      ShownDialog.NoIcon -> NoIconDialogExample { shownDialog = ShownDialog.None }
+      ShownDialog.None -> {}
     }
   }
 }
 
-enum class Dialog(val buttonText: String) {
+enum class ShownDialog(val buttonText: String) {
   SuccessOneButton("Success One Button"),
   SuccessTwoButtons("Success Two Buttons"),
   SuccessThreeButtons("Success Three Buttons"),
   Warning("Warning"),
   Destructive("Destructive"),
   NoIcon("No Icon"),
+  None(""),
 }
 
 @Preview
