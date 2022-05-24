@@ -9,7 +9,7 @@ plugins {
 
 dependencies {
   implementation(gradleApi())
-  implementation("com.android.tools.build:gradle:7.1.3")
+  implementation("com.android.tools.build:gradle:7.2.0")
   implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
   implementation("com.squareup:kotlinpoet:1.10.2")
   implementation("com.google.guava:guava:31.1-jre")
