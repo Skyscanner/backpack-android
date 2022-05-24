@@ -34,7 +34,7 @@ public class BpkColors private constructor(
   public val textPrimary: Color,
   public val textQuaternary: Color,
   public val textSecondary: Color,
-  public val textTertiary: Color
+  public val textTertiary: Color,
 ) {
   internal companion object {
     public fun light(
@@ -53,7 +53,7 @@ public class BpkColors private constructor(
       textPrimary: Color = BpkColor.SkyGray,
       textQuaternary: Color = BpkColor.SkyGrayTint03,
       textSecondary: Color = BpkColor.SkyGrayTint02,
-      textTertiary: Color = BpkColor.SkyGrayTint03
+      textTertiary: Color = BpkColor.SkyGrayTint03,
     ) = BpkColors(
         isLight = true,
         background = background,
@@ -90,7 +90,7 @@ public class BpkColors private constructor(
       textPrimary: Color = BpkColor.White,
       textQuaternary: Color = BpkColor.BlackTint06,
       textSecondary: Color = BpkColor.SkyGrayTint04,
-      textTertiary: Color = BpkColor.BlackTint06
+      textTertiary: Color = BpkColor.BlackTint06,
     ) = BpkColors(
         isLight = false,
         background = background,
