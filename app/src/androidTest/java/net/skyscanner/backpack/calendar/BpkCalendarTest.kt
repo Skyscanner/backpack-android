@@ -38,7 +38,6 @@ import net.skyscanner.backpack.calendar.presenter.CurrentDateProvider
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 import net.skyscanner.backpack.calendar.presenter.MonthFooterAdapter
 import net.skyscanner.backpack.calendar.presenter.SelectionType
-import net.skyscanner.backpack.demo.MainActivity
 import net.skyscanner.backpack.demo.data.multiColoredExampleCalendarColoring
 import org.hamcrest.CoreMatchers
 import org.junit.Before
@@ -85,8 +84,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
   private lateinit var activity: AppCompatActivity
 
   @get:Rule
-  var activityRule: ActivityTestRule<MainActivity> =
-    ActivityTestRule(MainActivity::class.java)
+  var activityRule: ActivityTestRule<AppCompatActivity> =
+    ActivityTestRule(AppCompatActivity::class.java)
 
   @Before
   fun setup() {
