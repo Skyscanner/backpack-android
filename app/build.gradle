@@ -105,6 +105,7 @@ dependencies {
   androidTestImplementation rootProject.ext.espressoContrib
   androidTestImplementation rootProject.ext.testRules
   androidTestImplementation rootProject.ext.coroutinesTest
+  androidTestImplementation rootProject.ext.composeTestJUnit
   implementation project(':Backpack')
   implementation project(':backpack-compose')
 }
