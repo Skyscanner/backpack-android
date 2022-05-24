@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="net.skyscanner.backpack" >
   <application>
-    <activity android:name=".util.TestActivity" android:theme="@style/BpkTheme" />
+    <activity android:name="net.skyscanner.backpack.util.TestActivity" android:theme="@style/BpkTheme" />
   </application>
 </manifest>
