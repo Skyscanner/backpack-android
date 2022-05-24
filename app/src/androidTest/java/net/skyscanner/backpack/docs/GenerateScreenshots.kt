@@ -20,6 +20,8 @@ package net.skyscanner.backpack.docs
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.demo.ComponentDetailActivity
@@ -34,7 +36,7 @@ open class GenerateScreenshots(
   private val componentPath: String,
   private val screenshotName: String,
   private val path: String,
-  private val setup: (() -> Unit)?
+  private val setup: ((ComposeTestRule) -> Unit)?
 ) {
 
   companion object {
@@ -45,6 +47,9 @@ open class GenerateScreenshots(
 
   @get:Rule
   var activityRule = ActivityTestRule(ComponentDetailActivity::class.java, true, false)
+
+  @get:Rule
+  val composeTestRule = AndroidComposeTestRule(activityRule) { it.activity }
 
   private val screenshotFullName: String
     get() {
@@ -76,7 +81,7 @@ open class GenerateScreenshots(
     intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, componentPath)
     intent.putExtra(ComponentDetailFragment.AUTOMATION_MODE, true)
     activityRule.launchActivity(intent)
-    setup?.invoke()
+    setup?.invoke(composeTestRule)
     takeScreenshot(suffix)
     activityRule.finishActivity()
   }

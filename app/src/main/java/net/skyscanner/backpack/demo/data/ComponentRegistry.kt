@@ -68,6 +68,7 @@ import net.skyscanner.backpack.demo.stories.SubStory
 import net.skyscanner.backpack.demo.stories.TabStory
 import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
+import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
 
 interface RegistryItem {
   val name: String
@@ -234,17 +235,23 @@ object ComponentRegistry {
       )
     ),
     "Dialog" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "With call to action" story NodeData { DialogStory of "Normal" },
-        "Warning" story NodeData { DialogStory of "Warning" },
-        "Delete confirmation" story NodeData { DialogStory of "Delete" },
-        "Success" story NodeData { DialogStory of "Confirmation" },
-        "With Links" story NodeData { DialogStory of "Links" },
-        "Long Text" story NodeData { DialogStory of "Long" },
-        "Flare" story NodeData { DialogStory of "Flare" },
-        "Flare with image" story NodeData { DialogStory of "FlareWithImage" }
-      )
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "With call to action" story NodeData { DialogStory of "Normal" },
+            "Warning" story NodeData { DialogStory of "Warning" },
+            "Delete confirmation" story NodeData { DialogStory of "Delete" },
+            "Success" story NodeData { DialogStory of "Confirmation" },
+            "With Links" story NodeData { DialogStory of "Links" },
+            "Long Text" story NodeData { DialogStory of "Long" },
+            "Flare" story NodeData { DialogStory of "Flare" },
+            "Flare with image" story NodeData { DialogStory of "FlareWithImage" }
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { ComposeDialogStory() },
+      ),
     ),
     "Flare" story NodeData(
       { children -> SubStory of children },

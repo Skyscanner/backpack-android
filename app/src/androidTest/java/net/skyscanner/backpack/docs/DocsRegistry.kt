@@ -18,6 +18,10 @@
 
 package net.skyscanner.backpack.docs
 
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.ComposeTestRule
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -28,6 +32,7 @@ import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.compose.ShownDialog
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 
@@ -44,12 +49,12 @@ object DocsRegistry {
     ComposeScreenshot("Button - Compose - Default", "default"),
     ComposeScreenshot("Button - Compose - Large", "large"),
     ComposeScreenshot("Button - Compose - Link", "link"),
-    ViewScreenshot("Calendar - Default", "range", ::setupCalendar),
-    ViewScreenshot("Calendar - Colored", "colored", ::setupCalendar),
-    ViewScreenshot("Calendar - Labeled", "labeled", ::setupCalendar),
-    ViewScreenshot("Calendar 2 - Pre-selected range", "range", ::setupCalendar2),
-    ViewScreenshot("Calendar 2 - Day colours", "colored", ::setupCalendar2),
-    ViewScreenshot("Calendar 2 - Day labels", "labeled", ::setupCalendar2),
+    ViewScreenshot("Calendar - Default", "range") { setupCalendar() },
+    ViewScreenshot("Calendar - Colored", "colored") { setupCalendar() },
+    ViewScreenshot("Calendar - Labeled", "labeled") { setupCalendar() },
+    ViewScreenshot("Calendar 2 - Pre-selected range", "range") { setupCalendar2() },
+    ViewScreenshot("Calendar 2 - Day colours", "colored") { setupCalendar2() },
+    ViewScreenshot("Calendar 2 - Day labels", "labeled") { setupCalendar2() },
     ViewScreenshot("Card - View - Default", "default"),
     ViewScreenshot("Card - View - Without padding", "without-padding"),
     ViewScreenshot("Card - View - Selected", "selected"),
@@ -65,9 +70,12 @@ object DocsRegistry {
     ViewScreenshot("Chip - With icon", "with-icon"),
     ViewScreenshot("Checkbox - View", "default"),
     ComposeScreenshot("Checkbox - Compose", "default"),
-    ViewScreenshot("Dialog - With call to action", "with-cta", ::setupDialog),
-    ViewScreenshot("Dialog - Delete confirmation", "delete-confirmation", ::setupDialog),
-    ViewScreenshot("Dialog - Flare", "with-flare", ::setupDialog),
+    ViewScreenshot("Dialog - View - With call to action", "with-cta") { setupDialog() },
+    ViewScreenshot("Dialog - View - Delete confirmation", "delete-confirmation") { setupDialog() },
+    ViewScreenshot("Dialog - View - Flare", "with-flare") { setupDialog() },
+    ComposeScreenshot("Dialog - Compose", "success") { setupComposeDialog(it, ShownDialog.SuccessThreeButtons) },
+    ComposeScreenshot("Dialog - Compose", "warning") { setupComposeDialog(it, ShownDialog.Warning) },
+    ComposeScreenshot("Dialog - Compose", "destructive") { setupComposeDialog(it, ShownDialog.Destructive) },
     ViewScreenshot("Flare - Default", "default"),
     ViewScreenshot("Flare - Pointing up", "pointing-up"),
     ViewScreenshot("Flare - Pointer offset", "pointer-offset"),
@@ -76,8 +84,8 @@ object DocsRegistry {
     ViewScreenshot("Horizontal Nav", "default"),
     ViewScreenshot("Floating Action Button", "default"),
     ViewScreenshot("Nav Bar - Default", "expanded"),
-    ViewScreenshot("Nav Bar - Default", "collapsed", ::setupNavBarCollapsed),
-    ViewScreenshot("Nav Bar - With Menu", "navigation", ::setupNavBarCollapsed),
+    ViewScreenshot("Nav Bar - Default", "collapsed") { setupNavBarCollapsed() },
+    ViewScreenshot("Nav Bar - With Menu", "navigation") { setupNavBarCollapsed() },
     ViewScreenshot("Nudger", "all"),
     ViewScreenshot("Overlay", "all"),
     ViewScreenshot("Panel - View", "all"),
@@ -89,8 +97,8 @@ object DocsRegistry {
     ViewScreenshot("Rating - Vertical", "vertical"),
     ViewScreenshot("Rating - Pill", "pill"),
     ViewScreenshot("Slider", "all"),
-    ViewScreenshot("Snackbar", "default", ::setupSnackbar),
-    ViewScreenshot("Snackbar", "icon", ::setupSnackbarIconAction),
+    ViewScreenshot("Snackbar", "default") { setupSnackbar() },
+    ViewScreenshot("Snackbar", "icon") { setupSnackbarIconAction() },
     ViewScreenshot("Star Rating - Default", "default"),
     ViewScreenshot("Star Rating Interactive", "default"),
     ViewScreenshot("Switch - View", "default"),
@@ -107,7 +115,7 @@ object DocsRegistry {
     ViewScreenshot("Spinner - Default", "default"),
     ViewScreenshot("Spinner - Small", "small"),
     // Leave toast last as it stays visible in the screen for a while
-    ViewScreenshot("Toast", "default", ::setupToast)
+    ViewScreenshot("Toast", "default") { setupToast() }
   )
 
   init {
@@ -118,14 +126,14 @@ object DocsRegistry {
 fun ComposeScreenshot(
   name: String,
   screenshotName: String,
-  setup: (() -> Unit)? = null,
+  setup: ((ComposeTestRule) -> Unit)? = null,
 ): Array<Any?> =
   arrayOf(name, screenshotName, "docs/compose", setup)
 
 fun ViewScreenshot(
   name: String,
   screenshotName: String,
-  setup: (() -> Unit)? = null,
+  setup: ((ComposeTestRule) -> Unit)? = null,
 ): Array<Any?> =
   arrayOf(name, screenshotName, "docs/view", setup)
 
@@ -168,6 +176,10 @@ private fun setupDialog() {
     .perform(ViewActions.click())
 
   Thread.sleep(50)
+}
+
+private fun setupComposeDialog(testRule: ComposeTestRule, dialog: ShownDialog) {
+  testRule.onNodeWithText(dialog.buttonText).performClick().assertIsDisplayed()
 }
 
 private fun setupSnackbar() {
