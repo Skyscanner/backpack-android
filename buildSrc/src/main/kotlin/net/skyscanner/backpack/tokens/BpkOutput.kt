@@ -70,8 +70,8 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
 private fun FileSpec.Builder.addFileHeader() : FileSpec.Builder {
   val copyright = Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
     return this
-      .addComment(copyright)
-    .addComment("Auto-generated: do not edit")
+      .addFileComment(copyright)
+    .addFileComment("Auto-generated: do not edit")
 }
 
 private fun FileSpec.Builder.suppressWarningTypes(vararg types: String) : FileSpec.Builder {
