@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
+import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -59,7 +60,7 @@ fun CardStory() {
 }
 
 @Composable
-private fun SmallCornersCardExample(
+fun SmallCornersCardExample(
   modifier: Modifier = Modifier,
 ) {
   BpkCard(
@@ -72,7 +73,7 @@ private fun SmallCornersCardExample(
 }
 
 @Composable
-private fun LargeCornersCardExample(
+fun LargeCornersCardExample(
   modifier: Modifier = Modifier,
 ) {
   BpkCard(
@@ -86,7 +87,7 @@ private fun LargeCornersCardExample(
 }
 
 @Composable
-private fun NoPaddingCardExample(
+fun NoPaddingCardExample(
   modifier: Modifier = Modifier,
 ) {
   BpkCard(
@@ -100,7 +101,7 @@ private fun NoPaddingCardExample(
 }
 
 @Composable
-private fun NonClickableCardExample(
+fun NonClickableCardExample(
   modifier: Modifier = Modifier,
 ) {
   BpkCard(modifier, contentAlignment = Alignment.Center) {
@@ -109,18 +110,22 @@ private fun NonClickableCardExample(
 }
 
 @Composable
-private fun FocusableCardExample(
+fun FocusableCardExample(
   modifier: Modifier = Modifier,
 ) {
-
-  var focused by remember { mutableStateOf(false) }
+  var elevation by remember { mutableStateOf(BpkCardElevation.Focus) }
 
   BpkCard(
     modifier = modifier,
-    focused = focused,
+    elevation = elevation,
     contentAlignment = Alignment.Center,
-    onClick = { focused = !focused },
+    onClick = {
+      elevation = when (elevation) {
+        BpkCardElevation.Default -> BpkCardElevation.Focus
+        BpkCardElevation.Focus -> BpkCardElevation.Default
+      }
+    },
   ) {
-    BpkText(if (focused) "Tap to unfocus" else "Tap to focus")
+    BpkText(if (elevation == BpkCardElevation.Focus) "Tap to unfocus" else "Tap to focus")
   }
 }

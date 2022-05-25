@@ -23,15 +23,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.compose.FocusableCardExample
+import net.skyscanner.backpack.demo.compose.LargeCornersCardExample
+import net.skyscanner.backpack.demo.compose.NoPaddingCardExample
+import net.skyscanner.backpack.demo.compose.NonClickableCardExample
+import net.skyscanner.backpack.demo.compose.SmallCornersCardExample
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -40,12 +43,7 @@ class BpkCardTest : BpkSnapshotTest() {
 
   @Test
   fun smallCorner() = capture {
-    BpkCard(
-      modifier = Modifier.fillMaxSize(),
-      contentAlignment = Alignment.Center,
-    ) {
-      BpkText("Small corners")
-    }
+    SmallCornersCardExample(Modifier.fillMaxSize())
   }
 
   @Test
@@ -53,13 +51,7 @@ class BpkCardTest : BpkSnapshotTest() {
     assumeVariant(BpkTestVariant.Default)
 
     capture {
-      BpkCard(
-        modifier = Modifier.fillMaxSize(),
-        corner = BpkCardCorner.Large,
-        contentAlignment = Alignment.Center,
-      ) {
-        BpkText("Large corners")
-      }
+      LargeCornersCardExample(Modifier.fillMaxSize())
     }
   }
 
@@ -68,12 +60,7 @@ class BpkCardTest : BpkSnapshotTest() {
     assumeVariant(BpkTestVariant.Default)
 
     capture {
-      BpkCard(
-        modifier = Modifier.fillMaxSize(),
-        padding = BpkCardPadding.None,
-      ) {
-        BpkText("No padding")
-      }
+      NoPaddingCardExample(Modifier.fillMaxSize())
     }
   }
 
@@ -82,12 +69,7 @@ class BpkCardTest : BpkSnapshotTest() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
 
     capture {
-      BpkCard(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
-      ) {
-        BpkText("Unfocused")
-      }
+      NonClickableCardExample(Modifier.fillMaxSize())
     }
   }
 
@@ -96,14 +78,7 @@ class BpkCardTest : BpkSnapshotTest() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
 
     capture {
-      BpkCard(
-        onClick = {},
-        modifier = Modifier.fillMaxSize(),
-        focused = true,
-        contentAlignment = Alignment.Center,
-      ) {
-        BpkText("Focused")
-      }
+      FocusableCardExample(Modifier.fillMaxSize())
     }
   }
 

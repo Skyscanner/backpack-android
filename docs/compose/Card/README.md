@@ -55,9 +55,9 @@ Example of a focused Card:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.card.BpkCard
+import net.skyscanner.backpack.compose.card.BpkCardElevation
 
-
-BpkCard(focused = true) {
+BpkCard(elevation = BpkCardElevation.Focus) {
     // content
 }
 ```
