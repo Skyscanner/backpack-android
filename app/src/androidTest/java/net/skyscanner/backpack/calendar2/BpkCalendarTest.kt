@@ -42,6 +42,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
+import org.threeten.bp.Month
+import org.threeten.bp.Period
+import org.threeten.bp.YearMonth
 import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
@@ -73,7 +76,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val calendar = BpkCalendar(testContext)
     val params = CalendarParams(
       locale = Locale.UK,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       range = initialRange,
       now = now,
     )
@@ -86,7 +89,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val calendar = BpkCalendar(testContext)
     val params = CalendarParams(
       locale = Locale.UK,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       range = initialRange,
       now = now,
       cellsInfo = multiColoredExampleCalendarColoring(initialRange),
@@ -100,7 +103,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val calendar = BpkCalendar(testContext)
     val params = CalendarParams(
       locale = Locale.UK,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       range = initialRange,
       now = now,
       cellsInfo = mapOf(
@@ -126,7 +129,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = LocalDate.of(2017, 1, 2)..LocalDate.of(2017, 12, 31),
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       now = now,
     )
 
@@ -204,7 +207,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       now = now,
     )
 
@@ -233,7 +236,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       now = now,
     )
 
@@ -266,7 +269,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       now = now,
     )
 
@@ -283,7 +286,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       cellsInfo = multiColoredExampleCalendarColoring(initialRange),
       now = now,
     )
@@ -353,11 +356,11 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       now = now,
     )
     calendar.setParams(params)
-    calendar.setSelection(CalendarSelection.Range(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9)))
+    calendar.setSelection(CalendarSelection.Range.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9)))
     snap(calendar)
   }
 
@@ -413,12 +416,12 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
+      selectionMode = CalendarParams.SelectionMode.Range(),
       cellsInfo = disabledDayOfTheWeekInfo(initialRange, DayOfWeek.WEDNESDAY),
       now = now,
     )
     calendar.setParams(params)
-    calendar.setSelection(CalendarSelection.Range(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10)))
+    calendar.setSelection(CalendarSelection.Range.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10)))
     snap(calendar)
   }
 
@@ -435,6 +438,40 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setParams(params)
     calendar.setSelection(CalendarSelection.Single(LocalDate.of(2019, 1, 9)))
+    snap(calendar)
+  }
+
+  @Test
+  fun screenshotTestCalendarWithWholeMonthButtonEnabled() {
+    val calendar = BpkCalendar(testContext)
+    val params = CalendarParams(
+      locale = Locale.UK,
+      range = initialRange,
+      selectionMode = CalendarParams.SelectionMode.Range(true),
+      wholeMonthSelectionLabel = "Select whole month",
+      now = now
+    )
+
+    calendar.setParams(params)
+    snap(calendar)
+  }
+
+  @Test
+  fun screenshotTestCalendarWithWholeMonthSetProgrammatically() {
+    val calendar = BpkCalendar(testContext)
+    val now = LocalDate.of(2019, 1, 1)
+    val range = now..(now + Period.ofYears(2))
+
+    val params = CalendarParams(
+      locale = Locale.UK,
+      range = range,
+      selectionMode = CalendarParams.SelectionMode.Range(true),
+      wholeMonthSelectionLabel = "Select whole month",
+      now = now
+    )
+
+    calendar.setParams(params)
+    calendar.setSelection(CalendarSelection.Range.Month(YearMonth.of(2019, Month.JANUARY)))
     snap(calendar)
   }
 

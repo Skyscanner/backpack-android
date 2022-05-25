@@ -24,6 +24,7 @@ import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.firstDay
+import net.skyscanner.backpack.calendar2.header
 import net.skyscanner.backpack.calendar2.lastDay
 import net.skyscanner.backpack.calendar2.rangeOf
 import net.skyscanner.backpack.calendar2.testCalendarWith
@@ -35,16 +36,21 @@ import org.junit.Test
 class CalendarRangeSelectionTests {
 
   private val rangeSelection = CalendarSettings.Default.copy(
-    selectionMode = CalendarParams.SelectionMode.Range,
+    selectionMode = CalendarParams.SelectionMode.Range(),
+  )
+
+  private val monthSelection = CalendarSettings.Default.copy(
+    selectionMode = CalendarParams.SelectionMode.Range(true),
+    wholeMonthSelectionLabel = "Select whole month"
   )
 
   @Test
   fun when_range_is_opened_selection_is_correct() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(firstDay)
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
 
       verify {
-        assertEquals(CalendarSelection.Range(start = firstDay.date, end = null), state.selection)
+        assertEquals(CalendarSelection.Range.Dates(start = firstDay.date, end = null), state.selection)
       }
     }
   }
@@ -52,11 +58,11 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_range_is_closed_selection_is_correct() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(firstDay)
-      stateMachine.onClick(lastDay)
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
 
       verify {
-        assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), state.selection)
+        assertEquals(CalendarSelection.Range.Dates(firstDay.date, lastDay.date), state.selection)
       }
     }
   }
@@ -64,11 +70,11 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_range_is_withing_the_same_date_selection_is_correct() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(firstDay)
-      stateMachine.onClick(firstDay)
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
 
       verify {
-        assertEquals(CalendarSelection.Range(firstDay.date, firstDay.date), state.selection)
+        assertEquals(CalendarSelection.Range.Dates(firstDay.date, firstDay.date), state.selection)
       }
     }
   }
@@ -76,11 +82,11 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_range_is_closing_before_start_a_new_range_is_created() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(lastDay)
-      stateMachine.onClick(firstDay)
-      stateMachine.onClick(lastDay)
+      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
       verify {
-        assertEquals(CalendarSelection.Range(firstDay.date, lastDay.date), state.selection)
+        assertEquals(CalendarSelection.Range.Dates(firstDay.date, lastDay.date), state.selection)
       }
     }
   }
@@ -88,12 +94,12 @@ class CalendarRangeSelectionTests {
   @Test
   fun range_can_be_reselected() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(firstDay)
-      stateMachine.onClick(lastDay)
-      stateMachine.onClick(firstDay)
-      stateMachine.onClick(firstDay)
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
       verify {
-        assertEquals(CalendarSelection.Range(firstDay.date, firstDay.date), state.selection)
+        assertEquals(CalendarSelection.Range.Dates(firstDay.date, firstDay.date), state.selection)
       }
     }
   }
@@ -104,8 +110,8 @@ class CalendarRangeSelectionTests {
       rangeSelection.range.start.plusDays(1) to CellInfo(disabled = true),
     )
     testCalendarWith(rangeSelection.copy(cellsInfo = disabledDates)) {
-      stateMachine.onClick(firstDay)
-      stateMachine.onClick(lastDay)
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
 
       verify {
         for (i in rangeOf(firstDay, lastDay)) {
@@ -125,8 +131,8 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_range_is_withing_the_same_date_cells_have_correct_state() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(firstDay)
-      stateMachine.onClick(firstDay)
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
 
       verify {
         assertEquals(CalendarCell.Selection.Double, firstDay.selection)
@@ -141,10 +147,45 @@ class CalendarRangeSelectionTests {
     )
 
     testCalendarWith(rangeSelection.copy(cellsInfo = disabledDates)) {
-      stateMachine.onClick(firstDay)
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
 
       verify {
         assertTrue(state.selection is CalendarSelection.None)
+      }
+    }
+  }
+
+  @Test
+  fun when_select_whole_month_is_withing_the_same_date_selection_is_correct() {
+    testCalendarWith(monthSelection) {
+      stateMachine.onClick(CalendarAction.CalendarHeaderAction(header))
+      verify {
+        assertEquals(CalendarSelection.Range.Month(header.yearMonth), state.selection)
+      }
+    }
+  }
+
+  @Test
+  fun given_whole_month_is_selected_and_a_range_selection_is_made_on_same_date_then_correct_state_should_return() {
+    testCalendarWith(monthSelection) {
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+
+      verify {
+        assertEquals(CalendarCell.Selection.Double, firstDay.selection)
+      }
+    }
+  }
+
+  @Test
+  fun given_whole_month_is_selected_and_a_range_selection_is_made_selection_then_correct_state_should_return() {
+    testCalendarWith(monthSelection) {
+      stateMachine.onClick(CalendarAction.CalendarHeaderAction(header))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
+
+      verify {
+        assertEquals(CalendarSelection.Range.Dates(firstDay.date, lastDay.date), state.selection)
       }
     }
   }

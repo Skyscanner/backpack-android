@@ -211,6 +211,7 @@ object ComponentRegistry {
         "Selection Disabled" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionDisabled },
         "Selection Single" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionSingle },
         "Selection Range" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionRange },
+        "Selection Whole Month" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionWholeMonth },
         "Disabled weekends" story NodeData { Calendar2Story of Calendar2Story.Type.WithDisabledDates },
         "Day colours" story NodeData { Calendar2Story of Calendar2Story.Type.WithColors },
         "Day labels" story NodeData { Calendar2Story of Calendar2Story.Type.WithLabels },

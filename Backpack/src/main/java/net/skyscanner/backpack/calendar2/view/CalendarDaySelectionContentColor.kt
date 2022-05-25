@@ -47,8 +47,10 @@ internal fun CalendarDaySelectionContentColor(
       CalendarCell.Selection.Single -> selected
       CalendarCell.Selection.Double -> selected
       CalendarCell.Selection.Start -> selected
+      CalendarCell.Selection.StartMonth -> range
       CalendarCell.Selection.Middle -> range
       CalendarCell.Selection.End -> selected
+      CalendarCell.Selection.EndMonth -> range
       null -> default
     }
   }

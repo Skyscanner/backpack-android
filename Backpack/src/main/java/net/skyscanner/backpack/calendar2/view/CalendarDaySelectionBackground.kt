@@ -94,12 +94,20 @@ private class CalendarDaySelectionDrawable(context: Context) : Drawable() {
         canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, if (rtl) 0f else 0.5f, if (rtl) 0.5f else 1f)
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
       }
+      CalendarCell.Selection.StartMonth -> {
+        canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, if (rtl) 0f else 0.5f, if (rtl) 0.5f else 1f)
+        canvas.drawCircle(rangeBackgroundColor, Style.FILL_AND_STROKE)
+      }
       CalendarCell.Selection.Middle -> {
         canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, 0f, 1f)
       }
       CalendarCell.Selection.End -> {
         canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, if (rtl) 0.5f else 0f, if (rtl) 1f else 0.5f)
         canvas.drawCircle(selectedDayCircleFillColor, Style.FILL_AND_STROKE)
+      }
+      CalendarCell.Selection.EndMonth -> {
+        canvas.drawRect(rangeBackgroundColor, Style.FILL_AND_STROKE, if (rtl) 0.5f else 0f, if (rtl) 1f else 0.5f)
+        canvas.drawCircle(rangeBackgroundColor, Style.FILL_AND_STROKE)
       }
       null -> return
     }

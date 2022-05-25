@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import net.skyscanner.backpack.calendar2.BpkCalendar
+import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CellInfo
@@ -38,7 +39,9 @@ import net.skyscanner.backpack.toast.BpkToast
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
+import org.threeten.bp.Month
 import org.threeten.bp.Period
+import org.threeten.bp.YearMonth
 import kotlin.math.roundToInt
 
 class Calendar2Story : Story() {
@@ -47,6 +50,7 @@ class Calendar2Story : Story() {
     SelectionDisabled,
     SelectionSingle,
     SelectionRange,
+    SelectionWholeMonth,
     WithDisabledDates,
     WithLabels,
     WithColors,
@@ -75,6 +79,14 @@ class Calendar2Story : Story() {
       }
       .launchIn(scope!!)
 
+    calendar.effects
+      .filter { it is CalendarEffect.MonthSelected }
+      .onEach {
+        if (!automationMode) {
+          BpkToast.makeText(requireContext(), it.toString(), BpkToast.LENGTH_SHORT).show()
+        }
+      }
+      .launchIn(scope!!)
     when (type) {
       Type.SelectionDisabled -> {
         calendar.setParams(
@@ -99,16 +111,27 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range,
+            selectionMode = CalendarParams.SelectionMode.Range(),
           )
         )
+      }
+      Type.SelectionWholeMonth -> {
+        calendar.setParams(
+          CalendarParams(
+            now = now,
+            range = range,
+            selectionMode = CalendarParams.SelectionMode.Range(true),
+            wholeMonthSelectionLabel = "Select whole month"
+          ),
+        )
+        calendar.setSelection(CalendarSelection.Range.Month(YearMonth.of(2019, Month.JANUARY)))
       }
       Type.WithDisabledDates -> {
         calendar.setParams(
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range,
+            selectionMode = CalendarParams.SelectionMode.Range(),
             cellsInfo = range
               .toIterable()
               .associateWith { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
@@ -120,7 +143,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range,
+            selectionMode = CalendarParams.SelectionMode.Range(),
             cellsInfo = range
               .toIterable()
               .associateWith {
@@ -149,7 +172,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range,
+            selectionMode = CalendarParams.SelectionMode.Range(),
             cellsInfo = range
               .toIterable()
               .associateWith {
@@ -174,11 +197,11 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range,
+            selectionMode = CalendarParams.SelectionMode.Range(),
           )
         )
         calendar.setSelection(
-          CalendarSelection.Range(
+          CalendarSelection.Range.Dates(
             start = range.start.plusDays(10),
             end = range.start.plusDays(20),
           )

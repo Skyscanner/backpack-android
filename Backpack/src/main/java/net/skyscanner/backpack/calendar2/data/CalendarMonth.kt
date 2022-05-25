@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.extension.firstDay
 import net.skyscanner.backpack.calendar2.extension.lastDay
@@ -27,6 +28,7 @@ import net.skyscanner.backpack.calendar2.extension.prevMonth
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.temporal.WeekFields
+import java.lang.IllegalStateException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -43,16 +45,27 @@ internal inline fun CalendarMonth(
   monthsFormatter: SimpleDateFormat,
   weekFields: WeekFields,
   selection: CalendarSelection,
+  selectionMode: CalendarParams.SelectionMode,
+  selectWholeMonthLabel: String?,
   day: (YearMonth, LocalDate) -> CalendarCell.Day,
 ): CalendarMonth {
 
   val firstDay = days.first()
+  val allowWholeMonthSelection = (selectionMode as? CalendarParams.SelectionMode.Range)?.allowSelectWholeMonth ?: false
+
+  if (allowWholeMonthSelection && selectWholeMonthLabel.isNullOrEmpty()) {
+    throw IllegalStateException("No label found for Select whole month button. Please add the label in your CalendarParams.")
+  }
 
   val prevMonth = yearMonth.prevMonth()
   val nextMonth = yearMonth.nextMonth()
-
   val cells = mutableListOf<CalendarCell>()
-  cells += CalendarCell.Header(title = MonthTitle(yearMonth, monthsFormatter, locale), yearMonth = yearMonth)
+  cells += CalendarCell.Header(
+    title = MonthTitle(yearMonth, monthsFormatter, locale),
+    yearMonth = yearMonth,
+    selectWholeMonthLabel = selectWholeMonthLabel,
+    allowSelectWholeMonth = allowWholeMonthSelection
+  )
 
   var currentDayOfWeek = weekFields.firstDayOfWeek
   val selectSpacingBefore = prevMonth.lastDay() in selection && firstDay in selection

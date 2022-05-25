@@ -67,6 +67,18 @@ calendar.setParams(
 )
 ```
 
+> **_NOTE:_** Note that the *Select whole month* button is disable by default. To enable this button, you need to setup the calendar like the following:.
+
+````kotlin
+calendar.setParams(
+  CalendarParams(
+    range = LocalDate.of(2019, 1, 2)..LocalDate.of(2019, 12, 31), // start and end dates in the range
+    selectionMode = CalendarParams.SelectionMode.Range(allowSelectWholeMonth = true),
+    wholeMonthSelectionLabel = "Select Whole Month"
+  )
+)
+````
+
 Now the component is ready. You can listen for the selection change using its state:
 
 ```Kotlin
