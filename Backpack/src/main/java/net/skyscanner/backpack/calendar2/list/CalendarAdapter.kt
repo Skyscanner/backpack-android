@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.skyscanner.backpack.calendar2.data.CalendarAction
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCells
 import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
@@ -33,7 +34,7 @@ import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarAdapter(
   private val scope: CoroutineScope,
-  private val output: Consumer<CalendarCell.Day>,
+  private val output: Consumer<CalendarAction>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<CalendarCells> {
 
   private var data: CalendarCells = CalendarCells(emptyList())
@@ -63,7 +64,7 @@ internal class CalendarAdapter(
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
-    TYPE_HEADER -> CalendarCellHeaderHolder(parent)
+    TYPE_HEADER -> CalendarCellHeaderHolder(parent, output)
     TYPE_DAY -> CalendarCellDayHolder(parent, output)
     else -> CalendarCellSpaceHolder(parent)
   }

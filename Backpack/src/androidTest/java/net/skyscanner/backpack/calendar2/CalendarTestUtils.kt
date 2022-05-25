@@ -41,6 +41,9 @@ internal val CalendarTestScope.lastDay: CalendarCell.Day
     return state.cells[index] as CalendarCell.Day
   }
 
+internal val CalendarTestScope.header: CalendarCell.Header
+  get() = state.cells[0] as CalendarCell.Header
+
 internal fun CalendarTestScope.rangeOf(start: CalendarCell.Day, end: CalendarCell.Day): IntRange {
   val indexOfFirst = state.cells.indexOf(start.date)
   val indexOfLast = state.cells.indexOf(end.date)

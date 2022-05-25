@@ -50,6 +50,7 @@ data class CalendarParams(
   @Deprecated("This parameter is ignored in a favour of Android's TtsSpan")
   val dateAccessibilityText: TextStyle = TextStyle.FULL,
   val now: LocalDate = LocalDate.now(),
+  val wholeMonthSelectionLabel: String? = null
 ) {
 
   internal val weekFields = WeekFields.of(locale)
@@ -59,23 +60,24 @@ data class CalendarParams(
   /**
    * Describes the selection behaviour
    */
-  enum class SelectionMode {
-
+  sealed interface SelectionMode {
     /**
      * No date can be selected
      */
-    Disabled,
+    object Disabled : SelectionMode
 
     /**
      * Only a single, non-disabled date can be selected.
      */
-    Single,
+    object Single : SelectionMode
 
     /**
      * Only a range can be selected.
      * The boundaries of range are always non-disabled dates, but there could be disabled dates within the range.
+     *
+     * @param allowSelectWholeMonth allows a whole month selection.
      */
-    Range,
+    data class Range(val allowSelectWholeMonth: Boolean = false) : SelectionMode
   }
 }
 

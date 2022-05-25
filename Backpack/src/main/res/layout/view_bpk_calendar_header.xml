@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<net.skyscanner.backpack.text.BpkText xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:accessibilityHeading="true"
-  android:maxLines="1"
-  android:textColor="@color/bpkTextPrimary"
-  android:paddingStart="@dimen/bpkSpacingBase"
-  android:paddingEnd="@dimen/bpkSpacingBase"
-  android:paddingTop="@dimen/bpkSpacingLg"
-  android:paddingBottom="@dimen/bpkSpacingLg"
-  android:singleLine="true"
-  android:gravity="start|center_vertical"
-  app:textStyle="heading4"
-  tools:targetApi="p" />
+  android:clipToPadding="false"
+  android:clipChildren="false"
+  android:paddingTop="@dimen/bpkSpacingMd"
+  android:paddingBottom="@dimen/bpkSpacingMd">
+
+  <net.skyscanner.backpack.text.BpkText
+    android:id="@+id/bpk_calendar_cell_month"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:accessibilityHeading="true"
+    android:gravity="start|center_vertical"
+    android:maxLines="1"
+    android:paddingStart="@dimen/bpkSpacingBase"
+    android:paddingTop="@dimen/bpkSpacingLg"
+    android:paddingEnd="@dimen/bpkSpacingBase"
+    android:paddingBottom="@dimen/bpkSpacingLg"
+    android:singleLine="true"
+    android:textColor="@color/bpkTextPrimary"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:textStyle="heading4"
+    tools:targetApi="p"
+    tools:text="January"
+    />
+
+  <net.skyscanner.backpack.button.BpkButton
+    android:id="@+id/bpk_calendar_cell_whole_month_selection"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:accessibilityHeading="true"
+    android:layout_margin="@dimen/bpkSpacingBase"
+    android:singleLine="true"
+    app:buttonType="link"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:targetApi="p"
+    />
+</androidx.constraintlayout.widget.ConstraintLayout>

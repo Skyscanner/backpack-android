@@ -39,6 +39,8 @@ internal sealed class CalendarCell {
 
   internal data class Header(
     val title: String,
+    val selectWholeMonthLabel: String?,
+    val allowSelectWholeMonth: Boolean,
     override val yearMonth: YearMonth,
   ) : CalendarCell()
 
@@ -61,7 +63,14 @@ internal sealed class CalendarCell {
     Start,
     Middle,
     End,
+    StartMonth,
+    EndMonth
   }
+}
+
+internal sealed interface CalendarAction {
+  data class CalendarDayAction(val day: CalendarCell.Day) : CalendarAction
+  data class CalendarHeaderAction(val header: CalendarCell.Header) : CalendarAction
 }
 
 internal fun CalendarCellDay(
@@ -88,12 +97,18 @@ internal fun CalendarCellDay(
       selection.date -> CalendarCell.Selection.Single
       else -> null
     }
-    is CalendarSelection.Range -> when {
+    is CalendarSelection.Range.Dates -> when {
       selection.start == date && selection.end == date -> CalendarCell.Selection.Double
       selection.start == date && selection.end == null -> CalendarCell.Selection.Single
       selection.start == date && selection.end != null -> CalendarCell.Selection.Start
       selection.end == date -> CalendarCell.Selection.End
       selection.end != null && date in selection -> CalendarCell.Selection.Middle
+      else -> null
+    }
+    is CalendarSelection.Range.Month -> when {
+      selection.start == date -> CalendarCell.Selection.StartMonth
+      selection.end == date -> CalendarCell.Selection.EndMonth
+      date in selection -> CalendarCell.Selection.Middle
       else -> null
     }
   },
