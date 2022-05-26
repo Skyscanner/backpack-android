@@ -2,6 +2,12 @@
 
 In this document we describe how to set up this repository for development and the release process.
 
+## Access
+
+> Skyscanner employees only
+
+Please ensure you have push rights to this repository, rather than forking the repository for contributions. Follow the "Engineering Contribution" guide in the Backpack space in confluence to get access. 
+
 ## Environment
 
 We use Node in this project. To manage the language runtime we recommend using [`nvm`][1]. The required Node version is in `.nvmrc`.
