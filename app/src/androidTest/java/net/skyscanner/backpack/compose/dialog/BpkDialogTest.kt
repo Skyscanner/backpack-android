@@ -18,13 +18,14 @@
 
 package net.skyscanner.backpack.compose.dialog
 
+import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.FrameLayout
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -44,7 +45,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.lang.reflect.Field
 
 @RunWith(AndroidJUnit4::class)
 class BpkDialogTest : BpkSnapshotTest() {
@@ -119,13 +119,11 @@ class BpkDialogTest : BpkSnapshotTest() {
         }
       }
 
-      composeTestRule.onNode(isDialog()).assertIsDisplayed()
+      val view = composeTestRule.onNode(isDialog()).fetchRootView()
 
       runOnUiThread {
         // This is not ideal but we need to see the background contrast as well
-        val viewRoot = getViewRoots().first { it.hasWindowFocus() }
-        val view = viewRoot.getChildAt(0)
-
+        val viewRoot = view.parent as ViewGroup
         viewRoot.removeView(view)
 
         val wrapper = FrameLayout(this)
@@ -143,33 +141,8 @@ class BpkDialogTest : BpkSnapshotTest() {
     }
   }
 
-  // we need this to be able to get the dialog root, rather than the window root
-  private fun getViewRoots(): List<ViewGroup> {
-    val viewRoots: MutableList<ViewGroup> = ArrayList()
-    try {
-      val windowManager: Any = Class.forName("android.view.WindowManagerGlobal")
-        .getMethod("getInstance").invoke(null) as Any
-      val rootsField: Field = windowManager.javaClass.getDeclaredField("mRoots")
-      rootsField.isAccessible = true
-      val stoppedField: Field = Class.forName("android.view.ViewRootImpl")
-        .getDeclaredField("mStopped")
-      stoppedField.isAccessible = true
-
-      val viewField: Field = Class.forName("android.view.ViewRootImpl")
-        .getDeclaredField("mView")
-      viewField.isAccessible = true
-      val viewParents = rootsField.get(windowManager) as List<ViewParent>
-      // Filter out inactive view roots
-      for (viewParent in viewParents) {
-        val stopped = stoppedField.get(viewParent) as Boolean
-        val view = viewField.get(viewParent) as ViewGroup?
-        if (!stopped && view != null) {
-          viewRoots.add(view)
-        }
-      }
-    } catch (e: Exception) {
-      e.printStackTrace()
-    }
-    return viewRoots
+  private fun SemanticsNodeInteraction.fetchRootView(): View {
+    val node = fetchSemanticsNode()
+    return (node.root as ViewRootForTest).view
   }
 }
