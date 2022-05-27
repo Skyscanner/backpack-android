@@ -92,11 +92,16 @@ To run connected tests run
 ./gradlew Backpack:connectedCheck
 ```
 
-#### Deploying a branch
-To test your branch in a codebase, use the dependency in the below format.
+#### Deploying locally
+To test your branch/implementation in a codebase, publish the dependency locally (replacing the version with your desired version):
 
 ```
-implementation 'net.skyscanner.backpack.<github-username>:backpack-android:<branch-name>'
+./gradlew publishToMavenLocal -Pversion=x.x.x-SNAPSHOT
+```
+
+To use this dependency make sure to add `mavenLocal()` to your repository list in your codebase, as well as updating backpack to the snapshot version.
+```
+implementation 'net.skyscanner.backpack:backpack-android:x.x.x-SNAPSHOT'
 ```
 
 ## Taking screenshots
