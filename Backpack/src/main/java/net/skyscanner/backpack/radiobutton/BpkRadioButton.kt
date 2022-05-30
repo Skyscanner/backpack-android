@@ -78,6 +78,8 @@ open class BpkRadioButton @JvmOverloads constructor(
         intArrayOf(textDisabledColor, textEnabledColor),
       )
     )
+
+    setPaddingRelative(resources.getDimensionPixelSize(R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)
   }
 
   override fun setEnabled(enabled: Boolean) {

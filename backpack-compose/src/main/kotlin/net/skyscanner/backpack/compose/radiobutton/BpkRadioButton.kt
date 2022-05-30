@@ -74,7 +74,7 @@ fun BpkRadioButton(
 
   Row(
     verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Sm),
+    horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Md),
     modifier = modifier.applyIf(onClick != null) {
       selectable(
         selected = selected,
