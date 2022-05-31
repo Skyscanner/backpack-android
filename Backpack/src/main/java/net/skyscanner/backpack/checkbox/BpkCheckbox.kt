@@ -31,7 +31,7 @@ import net.skyscanner.backpack.util.use
 open class BpkCheckbox @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : AppCompatCheckBox(
   createContextThemeWrapper(
     createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.checkboxStyle),
@@ -78,6 +78,8 @@ open class BpkCheckbox @JvmOverloads constructor(
         intArrayOf(textDisabledColor, textEnabledColor)
       )
     )
+
+    setPaddingRelative(resources.getDimensionPixelSize(R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)
   }
 
   override fun setEnabled(enabled: Boolean) {

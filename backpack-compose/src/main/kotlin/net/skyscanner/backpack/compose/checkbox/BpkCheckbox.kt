@@ -128,7 +128,7 @@ fun BpkCheckbox(
   ) {
 
     BpkCheckboxImpl(
-      modifier = Modifier.padding(end = BpkSpacing.Sm),
+      modifier = Modifier.padding(end = BpkSpacing.Md),
       state = state,
       enabled = enabled,
       interactionSource = interactionSource,
