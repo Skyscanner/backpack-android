@@ -5,9 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:clipToPadding="false"
-  android:clipChildren="false"
-  android:paddingTop="@dimen/bpkSpacingMd"
-  android:paddingBottom="@dimen/bpkSpacingMd">
+  android:clipChildren="false">
 
   <net.skyscanner.backpack.text.BpkText
     android:id="@+id/bpk_calendar_cell_month"
