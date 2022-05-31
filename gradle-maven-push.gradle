@@ -67,3 +67,6 @@ signing {
   sign publishing.publications
 }
 
+tasks.withType(Sign) {
+  onlyIf { !project.version.endsWith("SNAPSHOT") }
+}
