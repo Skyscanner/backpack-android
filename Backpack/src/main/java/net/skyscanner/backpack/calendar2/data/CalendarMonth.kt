@@ -54,7 +54,7 @@ internal inline fun CalendarMonth(
   val allowWholeMonthSelection = (selectionMode as? CalendarParams.SelectionMode.Range)?.allowSelectWholeMonth ?: false
 
   if (allowWholeMonthSelection && selectWholeMonthLabel.isNullOrEmpty()) {
-    throw IllegalStateException("No label found for Select Whole Month button. Please add the label in your CalendarParams.")
+    throw IllegalStateException("No label found for Select whole month button. Please add the label in your CalendarParams.")
   }
 
   val prevMonth = yearMonth.prevMonth()
