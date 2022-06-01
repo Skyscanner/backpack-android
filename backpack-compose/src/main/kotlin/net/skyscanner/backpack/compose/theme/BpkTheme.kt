@@ -89,7 +89,7 @@ object BpkTheme {
     get() = if (LocalInspectionMode.current) {
       // when in preview mode return a default colour object to ensure previews work
       // without wrapping it in another composable
-      BpkColors.light()
+      if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
     } else {
       LocalBpkColors.current
     }
