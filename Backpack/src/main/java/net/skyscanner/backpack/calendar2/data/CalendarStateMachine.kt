@@ -23,6 +23,7 @@ import kotlinx.coroutines.plus
 import net.skyscanner.backpack.calendar2.CalendarComponent
 import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.calendar2.CalendarParams.SelectionMode
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
 import net.skyscanner.backpack.util.MutableStateMachine
@@ -83,16 +84,16 @@ internal fun CalendarState.dispatchClick(date: CalendarCell.Day): CalendarState 
   if (date.inactive) return this
 
   val selection = when (params.selectionMode) {
-    CalendarParams.SelectionMode.Disabled -> selection
-    CalendarParams.SelectionMode.Single -> CalendarSelection.Single(date.date)
-    is CalendarParams.SelectionMode.Range -> {
+    SelectionMode.Disabled -> selection
+    SelectionMode.Single -> CalendarSelection.Single(date.date)
+    is SelectionMode.Rangeable -> {
       val rangeStart = (selection as? CalendarSelection.Range)?.start
       val rangeEnd = (selection as? CalendarSelection.Range)?.end
       when {
-        rangeStart != null && rangeEnd != null -> CalendarSelection.Range.Dates(start = date.date, end = null)
-        rangeStart == null -> CalendarSelection.Range.Dates(start = date.date, end = null)
-        date.date < rangeStart -> CalendarSelection.Range.Dates(start = date.date, end = null)
-        else -> CalendarSelection.Range.Dates(start = rangeStart, end = date.date)
+        rangeStart != null && rangeEnd != null -> CalendarSelection.Dates(start = date.date, end = null)
+        rangeStart == null -> CalendarSelection.Dates(start = date.date, end = null)
+        date.date < rangeStart -> CalendarSelection.Dates(start = date.date, end = null)
+        else -> CalendarSelection.Dates(start = rangeStart, end = date.date)
       }
     }
   }
@@ -116,14 +117,15 @@ internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): C
   when (selection) {
     is CalendarSelection.None -> Unit
     is CalendarSelection.Range -> when {
-      params.selectionMode !is CalendarParams.SelectionMode.Range -> return this
+      params.selectionMode !is SelectionMode.Rangeable -> return this
+      params.selectionMode is SelectionMode.Dates && selection is CalendarSelection.Month -> return this
       params.cellsInfo[selection.start]?.disabled == true -> return this
       params.cellsInfo[selection.end]?.disabled == true -> return this
       selection.start !in params.range -> return this
       selection.end?.let { it !in params.range } == true -> return this
     }
     is CalendarSelection.Single -> when {
-      params.selectionMode != CalendarParams.SelectionMode.Single -> return this
+      params.selectionMode != SelectionMode.Single -> return this
       params.cellsInfo[selection.date]?.disabled == true -> return this
       selection.date !in params.range -> return this
     }
@@ -134,13 +136,12 @@ internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): C
   )
 }
 
-internal fun CalendarState.dispatchClick(date: CalendarCell.Header): CalendarState {
-  if (!date.allowSelectWholeMonth) return this
-
+internal fun CalendarState.dispatchClick(data: CalendarCell.Header): CalendarState {
+  if (data.selectWholeMonthLabel.isNullOrEmpty()) return this
   val selection = when (params.selectionMode) {
-    CalendarParams.SelectionMode.Disabled -> selection
-    CalendarParams.SelectionMode.Single -> selection
-    is CalendarParams.SelectionMode.Range -> CalendarSelection.Range.Month(month = date.yearMonth)
+    SelectionMode.Disabled -> selection
+    SelectionMode.Single -> selection
+    is SelectionMode.Rangeable -> CalendarSelection.Month(month = data.yearMonth)
   }
 
   return copy(

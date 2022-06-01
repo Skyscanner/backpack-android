@@ -48,8 +48,8 @@ internal class CalendarCellHeaderHolder(
   override fun bind(model: CalendarCell.Header) {
     month.text = model.title
     btnSelectWholeMonth.apply {
-      isVisible = model.allowSelectWholeMonth
       model.selectWholeMonthLabel?.let { text = it }
+      isVisible = !model.selectWholeMonthLabel.isNullOrEmpty()
     }
   }
 }

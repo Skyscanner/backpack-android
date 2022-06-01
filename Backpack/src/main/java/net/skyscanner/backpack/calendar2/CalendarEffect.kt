@@ -20,7 +20,7 @@ package net.skyscanner.backpack.calendar2
 import org.threeten.bp.YearMonth
 
 /**
- * Describes the current effect selection in the calendar.
+ * Describes any side effects from the calendar.
  */
 sealed interface CalendarEffect {
   /**

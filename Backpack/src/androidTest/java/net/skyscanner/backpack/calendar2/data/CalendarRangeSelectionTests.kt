@@ -36,12 +36,11 @@ import org.junit.Test
 class CalendarRangeSelectionTests {
 
   private val rangeSelection = CalendarSettings.Default.copy(
-    selectionMode = CalendarParams.SelectionMode.Range(),
+    selectionMode = CalendarParams.SelectionMode.Dates,
   )
 
   private val monthSelection = CalendarSettings.Default.copy(
-    selectionMode = CalendarParams.SelectionMode.Range(true),
-    wholeMonthSelectionLabel = "Select whole month"
+    selectionMode = CalendarParams.SelectionMode.Month("Select whole month"),
   )
 
   @Test
@@ -50,7 +49,7 @@ class CalendarRangeSelectionTests {
       stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
 
       verify {
-        assertEquals(CalendarSelection.Range.Dates(start = firstDay.date, end = null), state.selection)
+        assertEquals(CalendarSelection.Dates(start = firstDay.date, end = null), state.selection)
       }
     }
   }
@@ -62,7 +61,7 @@ class CalendarRangeSelectionTests {
       stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
 
       verify {
-        assertEquals(CalendarSelection.Range.Dates(firstDay.date, lastDay.date), state.selection)
+        assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
       }
     }
   }
@@ -74,7 +73,7 @@ class CalendarRangeSelectionTests {
       stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
 
       verify {
-        assertEquals(CalendarSelection.Range.Dates(firstDay.date, firstDay.date), state.selection)
+        assertEquals(CalendarSelection.Dates(firstDay.date, firstDay.date), state.selection)
       }
     }
   }
@@ -86,7 +85,7 @@ class CalendarRangeSelectionTests {
       stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
       stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
       verify {
-        assertEquals(CalendarSelection.Range.Dates(firstDay.date, lastDay.date), state.selection)
+        assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
       }
     }
   }
@@ -99,7 +98,7 @@ class CalendarRangeSelectionTests {
       stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
       stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
       verify {
-        assertEquals(CalendarSelection.Range.Dates(firstDay.date, firstDay.date), state.selection)
+        assertEquals(CalendarSelection.Dates(firstDay.date, firstDay.date), state.selection)
       }
     }
   }
@@ -160,7 +159,7 @@ class CalendarRangeSelectionTests {
     testCalendarWith(monthSelection) {
       stateMachine.onClick(CalendarAction.CalendarHeaderAction(header))
       verify {
-        assertEquals(CalendarSelection.Range.Month(header.yearMonth), state.selection)
+        assertEquals(CalendarSelection.Month(header.yearMonth), state.selection)
       }
     }
   }
@@ -185,7 +184,7 @@ class CalendarRangeSelectionTests {
       stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
 
       verify {
-        assertEquals(CalendarSelection.Range.Dates(firstDay.date, lastDay.date), state.selection)
+        assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
       }
     }
   }

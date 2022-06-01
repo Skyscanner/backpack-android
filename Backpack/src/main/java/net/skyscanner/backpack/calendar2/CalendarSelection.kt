@@ -59,27 +59,25 @@ sealed class CalendarSelection {
     abstract val start: LocalDate
     abstract val end: LocalDate?
 
-    /**
-     * A whole [month] is selected.
-     */
-    data class Month(val month: YearMonth) : Range() {
-      override val start: LocalDate
-        get() = month.firstDay()
-      override val end: LocalDate
-        get() = month.lastDay()
-    }
-
-    /**
-     * A range of dates is selected.
-     * @param start of range
-     * @param end end of range. May be null if user haven't selected the end date yet
-     */
-    data class Dates(override val start: LocalDate, override val end: LocalDate?) : Range()
-
     override fun contains(date: LocalDate): Boolean =
       when (end) {
         null -> date == start
         else -> date >= start && date <= end
       }
   }
+
+  /**
+   * A whole [month] is selected.
+   */
+  data class Month(val month: YearMonth) : Range() {
+    override val start: LocalDate = month.firstDay()
+    override val end: LocalDate = month.lastDay()
+  }
+
+  /**
+   * A range of dates is selected.
+   * @param start of range
+   * @param end end of range. May be null if user haven't selected the end date yet
+   */
+  data class Dates(override val start: LocalDate, override val end: LocalDate?) : Range()
 }

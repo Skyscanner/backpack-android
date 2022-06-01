@@ -111,7 +111,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range(),
+            selectionMode = CalendarParams.SelectionMode.Dates,
           )
         )
       }
@@ -120,18 +120,17 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range(true),
-            wholeMonthSelectionLabel = "Select whole month"
+            selectionMode = CalendarParams.SelectionMode.Month(wholeMonthSelectionLabel = "Select whole month"),
           ),
         )
-        calendar.setSelection(CalendarSelection.Range.Month(YearMonth.of(2019, Month.JANUARY)))
+        calendar.setSelection(CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY)))
       }
       Type.WithDisabledDates -> {
         calendar.setParams(
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range(),
+            selectionMode = CalendarParams.SelectionMode.Dates,
             cellsInfo = range
               .toIterable()
               .associateWith { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
@@ -143,7 +142,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range(),
+            selectionMode = CalendarParams.SelectionMode.Dates,
             cellsInfo = range
               .toIterable()
               .associateWith {
@@ -172,7 +171,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range(),
+            selectionMode = CalendarParams.SelectionMode.Dates,
             cellsInfo = range
               .toIterable()
               .associateWith {
@@ -197,11 +196,11 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Range(),
+            selectionMode = CalendarParams.SelectionMode.Dates,
           )
         )
         calendar.setSelection(
-          CalendarSelection.Range.Dates(
+          CalendarSelection.Dates(
             start = range.start.plusDays(10),
             end = range.start.plusDays(20),
           )

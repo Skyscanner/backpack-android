@@ -159,7 +159,7 @@ private fun setupCalendar2() {
     .check { view, _ ->
       view as net.skyscanner.backpack.calendar2.BpkCalendar
       view.setSelection(
-        CalendarSelection.Range.Dates(
+        CalendarSelection.Dates(
           view.state.value.params.now.plusDays(5),
           view.state.value.params.now.plusDays(10)
         )
@@ -172,7 +172,7 @@ private fun setupWholeMonthCalendar() {
     .check { view, _ ->
       view as net.skyscanner.backpack.calendar2.BpkCalendar
       view.setSelection(
-        CalendarSelection.Range.Month(YearMonth.of(2019, Month.JANUARY))
+        CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
       )
     }
 }

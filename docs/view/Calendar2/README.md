@@ -62,22 +62,10 @@ Once you've declared the calendar, you need to setup it like following:
 calendar.setParams(
   CalendarParams(
     range = LocalDate.of(2019, 1, 2)..LocalDate.of(2019, 12, 31), // start and end dates in the range
-    selectionMode = CalendarParams.SelectionMode.Single, // selection mode - can be Single, Range or Disabled
+    selectionMode = CalendarParams.SelectionMode.Single, // selection mode - can be Single, Dates, Months or Disabled
   )
 )
 ```
-
-> **_NOTE:_** Note that the *Select whole month* button is disable by default. To enable this button, you need to setup the calendar like the following:.
-
-````kotlin
-calendar.setParams(
-  CalendarParams(
-    range = LocalDate.of(2019, 1, 2)..LocalDate.of(2019, 12, 31), // start and end dates in the range
-    selectionMode = CalendarParams.SelectionMode.Range(allowSelectWholeMonth = true),
-    wholeMonthSelectionLabel = "Select Whole Month"
-  )
-)
-````
 
 Now the component is ready. You can listen for the selection change using its state:
 
@@ -88,8 +76,9 @@ calendar
   .onEach { selection ->
     when (selection) {
       is CalendarSelection.None -> showToast("No date is selected")
-      is CalendarSelection.Range -> showToast("${selection.start} to {${selection.end} is selected")
       is CalendarSelection.Single -> showToast("${selection.date} is selected")
+      is CalendarSelection.Dates -> showToast("${selection.start} to {${selection.end} is selected")
+      is CalendarSelection.Month -> showToast("${selection.month} is selected")
     }
   }
   .launchIn(myCoroutineScope)
