@@ -81,90 +81,78 @@ enum class ShownDialog(val buttonText: String) {
 @Preview
 @Composable
 fun SuccessOneButtonDialogExample(onDismiss: () -> Unit = {}) {
-  BackpackPreview {
-    BpkSuccessDialog(
-      icon = BpkIcons.Lg.Tick,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+  BpkSuccessDialog(
+    icon = BpkIcons.Lg.Tick,
+    title = stringResource(id = R.string.dialog_title),
+    text = stringResource(id = R.string.dialog_text),
+    confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+    onDismissRequest = onDismiss,
+  )
 }
 
 @Preview
 @Composable
 fun SuccessTwoButtonsDialogExample(onDismiss: () -> Unit = {}) {
-  BackpackPreview {
-    BpkSuccessDialog(
-      icon = BpkIcons.Lg.Tick,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+  BpkSuccessDialog(
+    icon = BpkIcons.Lg.Tick,
+    title = stringResource(id = R.string.dialog_title),
+    text = stringResource(id = R.string.dialog_text),
+    confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+    secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+    onDismissRequest = onDismiss,
+  )
 }
 
 @Preview
 @Composable
 fun SuccessThreeButtonsDialogExample(onDismiss: () -> Unit = {}) {
-  BackpackPreview {
-    BpkSuccessDialog(
-      icon = BpkIcons.Lg.Tick,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      linkButton = DialogButton(stringResource(id = R.string.dialog_link_optional), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+  BpkSuccessDialog(
+    icon = BpkIcons.Lg.Tick,
+    title = stringResource(id = R.string.dialog_title),
+    text = stringResource(id = R.string.dialog_text),
+    confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+    secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+    linkButton = DialogButton(stringResource(id = R.string.dialog_link_optional), onDismiss),
+    onDismissRequest = onDismiss,
+  )
 }
 
 @Preview
 @Composable
 fun WarningDialogExample(onDismiss: () -> Unit = {}) {
-  BackpackPreview {
-    BpkWarningDialog(
-      icon = BpkIcons.Lg.AlertAdd,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      linkButton = DialogButton(stringResource(id = R.string.dialog_link_optional), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+  BpkWarningDialog(
+    icon = BpkIcons.Lg.AlertAdd,
+    title = stringResource(id = R.string.dialog_title),
+    text = stringResource(id = R.string.dialog_text),
+    confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+    secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+    linkButton = DialogButton(stringResource(id = R.string.dialog_link_optional), onDismiss),
+    onDismissRequest = onDismiss,
+  )
 }
 
 @Preview
 @Composable
 fun DestructiveDialogExample(onDismiss: () -> Unit = {}) {
-  BackpackPreview {
-    BpkDestructiveDialog(
-      icon = BpkIcons.Lg.Trash,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_delete), onDismiss),
-      linkButton = DialogButton(stringResource(id = R.string.dialog_cancel), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+  BpkDestructiveDialog(
+    icon = BpkIcons.Lg.Trash,
+    title = stringResource(id = R.string.dialog_title),
+    text = stringResource(id = R.string.dialog_text),
+    confirmButton = DialogButton(stringResource(id = R.string.dialog_delete), onDismiss),
+    linkButton = DialogButton(stringResource(id = R.string.dialog_cancel), onDismiss),
+    onDismissRequest = onDismiss,
+  )
 }
 
 @Preview
 @Composable
 fun NoIconDialogExample(onDismiss: () -> Unit = {}) {
-  BackpackPreview {
-    BpkSuccessDialog(
-      icon = null,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+  BpkSuccessDialog(
+    icon = null,
+    title = stringResource(id = R.string.dialog_title),
+    text = stringResource(id = R.string.dialog_text),
+    confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+    secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+    onDismissRequest = onDismiss,
+  )
 }

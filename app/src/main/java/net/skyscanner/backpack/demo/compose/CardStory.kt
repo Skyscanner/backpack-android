@@ -29,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
@@ -60,6 +61,7 @@ fun CardStory() {
 }
 
 @Composable
+@Preview
 fun SmallCornersCardExample(
   modifier: Modifier = Modifier,
 ) {
@@ -73,6 +75,7 @@ fun SmallCornersCardExample(
 }
 
 @Composable
+@Preview
 fun LargeCornersCardExample(
   modifier: Modifier = Modifier,
 ) {
@@ -87,6 +90,7 @@ fun LargeCornersCardExample(
 }
 
 @Composable
+@Preview
 fun NoPaddingCardExample(
   modifier: Modifier = Modifier,
 ) {
@@ -101,6 +105,7 @@ fun NoPaddingCardExample(
 }
 
 @Composable
+@Preview
 fun NonClickableCardExample(
   modifier: Modifier = Modifier,
 ) {
@@ -110,6 +115,7 @@ fun NonClickableCardExample(
 }
 
 @Composable
+@Preview
 fun FocusableCardExample(
   modifier: Modifier = Modifier,
 ) {

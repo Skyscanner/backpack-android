@@ -30,6 +30,7 @@ import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -75,11 +76,23 @@ object BpkTheme {
 
   val typography: BpkTypography
     @Composable
-    get() = LocalBpkTypography.current
+    get() = if (LocalInspectionMode.current) {
+      // when in preview mode return a default typography object to ensure previews work
+      // without wrapping it in another composable
+      BpkTypography(defaultFontFamily = FontFamily.SansSerif)
+    } else {
+      LocalBpkTypography.current
+    }
 
   val colors: BpkColors
     @Composable
-    get() = LocalBpkColors.current
+    get() = if (LocalInspectionMode.current) {
+      // when in preview mode return a default colour object to ensure previews work
+      // without wrapping it in another composable
+      if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
+    } else {
+      LocalBpkColors.current
+    }
 
   val shapes: Shapes
     @Composable
