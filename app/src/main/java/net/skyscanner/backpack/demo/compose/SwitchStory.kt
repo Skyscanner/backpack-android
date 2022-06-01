@@ -55,73 +55,63 @@ fun SwitchStory() {
 @Preview
 @Composable
 fun DefaultUncheckedSwitchExample() {
-  BackpackPreview {
-    var checked by remember { mutableStateOf(false) }
-    BpkSwitch(
-      modifier = Modifier.fillMaxWidth(),
-      text = stringResource(id = R.string.toggle_default_unchecked),
-      checked = checked,
-      onCheckedChange = { checked = it },
-    )
-  }
+  var checked by remember { mutableStateOf(false) }
+  BpkSwitch(
+    modifier = Modifier.fillMaxWidth(),
+    text = stringResource(id = R.string.toggle_default_unchecked),
+    checked = checked,
+    onCheckedChange = { checked = it },
+  )
 }
 
 @Preview
 @Composable
 fun DefaultCheckedSwitchExample() {
-  BackpackPreview {
-    var checked by remember { mutableStateOf(true) }
-    BpkSwitch(
-      modifier = Modifier.fillMaxWidth(),
-      text = stringResource(id = R.string.toggle_default_checked),
-      checked = checked,
-      onCheckedChange = { checked = it },
-    )
-  }
+  var checked by remember { mutableStateOf(true) }
+  BpkSwitch(
+    modifier = Modifier.fillMaxWidth(),
+    text = stringResource(id = R.string.toggle_default_checked),
+    checked = checked,
+    onCheckedChange = { checked = it },
+  )
 }
 
 @Preview
 @Composable
 fun DisabledUncheckedSwitchExample() {
-  BackpackPreview {
-    BpkSwitch(
-      modifier = Modifier.fillMaxWidth(),
-      text = stringResource(id = R.string.toggle_disabled_unchecked),
-      enabled = false,
-      checked = false,
-      onCheckedChange = null
-    )
-  }
+  BpkSwitch(
+    modifier = Modifier.fillMaxWidth(),
+    text = stringResource(id = R.string.toggle_disabled_unchecked),
+    enabled = false,
+    checked = false,
+    onCheckedChange = null
+  )
 }
 
 @Preview
 @Composable
 fun DisabledCheckedSwitchExample() {
-  BackpackPreview {
-    BpkSwitch(
-      modifier = Modifier.fillMaxWidth(),
-      text = stringResource(id = R.string.toggle_disabled_checked),
-      enabled = false,
-      checked = true,
-      onCheckedChange = null,
-    )
-  }
+  BpkSwitch(
+    modifier = Modifier.fillMaxWidth(),
+    text = stringResource(id = R.string.toggle_disabled_checked),
+    enabled = false,
+    checked = true,
+    onCheckedChange = null,
+  )
 }
 
 @Preview
 @Composable
 fun CustomContentSwitchExample() {
-  BackpackPreview {
-    var checked by remember { mutableStateOf(false) }
-    BpkSwitch(
-      modifier = Modifier.fillMaxWidth(),
-      checked = checked,
-      onCheckedChange = { checked = it },
-    ) {
-      Column {
-        BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
-        BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
-      }
+  var checked by remember { mutableStateOf(false) }
+  BpkSwitch(
+    modifier = Modifier.fillMaxWidth(),
+    checked = checked,
+    onCheckedChange = { checked = it },
+  ) {
+    Column {
+      BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
+      BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
     }
   }
 }

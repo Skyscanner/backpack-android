@@ -56,90 +56,76 @@ fun CheckboxStory() {
 @Composable
 @Preview
 fun DefaultCheckboxSample() {
-  BackpackPreview {
-    var checked by remember { mutableStateOf(true) }
+  var checked by remember { mutableStateOf(true) }
 
-    BpkCheckbox(
-      text = stringResource(id = R.string.toggle_default),
-      checked = checked,
-      onCheckedChange = { checked = it },
-    )
-  }
+  BpkCheckbox(
+    text = stringResource(id = R.string.toggle_default),
+    checked = checked,
+    onCheckedChange = { checked = it },
+  )
 }
 
 @Composable
 @Preview
 fun IntermediateCheckboxSample() {
-  BackpackPreview {
-    BpkCheckbox(
-      text = stringResource(id = R.string.toggle_indeterminate),
-      state = ToggleableState.Indeterminate,
-      onClick = { },
-    )
-  }
+  BpkCheckbox(
+    text = stringResource(id = R.string.toggle_indeterminate),
+    state = ToggleableState.Indeterminate,
+    onClick = { },
+  )
 }
 
 @Composable
 fun UncheckedCheckboxSample() {
-  BackpackPreview {
-    BpkCheckbox(
-      text = stringResource(id = R.string.toggle_default_unchecked),
-      checked = false,
-      onCheckedChange = {},
-    )
-  }
+  BpkCheckbox(
+    text = stringResource(id = R.string.toggle_default_unchecked),
+    checked = false,
+    onCheckedChange = {},
+  )
 }
 
 @Composable
 @Preview
 fun CheckedCheckboxSample() {
-  BackpackPreview {
-    BpkCheckbox(
-      text = stringResource(id = R.string.toggle_default_checked),
-      checked = true,
-      onCheckedChange = {},
-    )
-  }
+  BpkCheckbox(
+    text = stringResource(id = R.string.toggle_default_checked),
+    checked = true,
+    onCheckedChange = {},
+  )
 }
 
 @Composable
 @Preview
 fun DisabledUncheckedCheckboxSample() {
-  BackpackPreview {
-    BpkCheckbox(
-      text = stringResource(id = R.string.toggle_disabled_unchecked),
-      checked = false,
-      enabled = false,
-      onCheckedChange = {},
-    )
-  }
+  BpkCheckbox(
+    text = stringResource(id = R.string.toggle_disabled_unchecked),
+    checked = false,
+    enabled = false,
+    onCheckedChange = {},
+  )
 }
 
 @Composable
 @Preview
 fun DisabledCheckedCheckboxSample() {
-  BackpackPreview {
-    BpkCheckbox(
-      text = stringResource(id = R.string.toggle_disabled_checked),
-      checked = true,
-      enabled = false,
-      onCheckedChange = {},
-    )
-  }
+  BpkCheckbox(
+    text = stringResource(id = R.string.toggle_disabled_checked),
+    checked = true,
+    enabled = false,
+    onCheckedChange = {},
+  )
 }
 
 @Composable
 @Preview
 fun CustomContentCheckboxSample() {
-  BackpackPreview {
-    BpkCheckbox(
-      checked = true,
-      onCheckedChange = {},
-    ) {
-      Column {
-        BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
-        BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
-      }
+  BpkCheckbox(
+    checked = true,
+    onCheckedChange = {},
+  ) {
+    Column {
+      BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
+      BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
     }
   }
 }

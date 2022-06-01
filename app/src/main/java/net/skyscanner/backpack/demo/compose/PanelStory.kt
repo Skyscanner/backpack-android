@@ -77,6 +77,7 @@ fun DefaultPanelExample(
 }
 
 @Composable
+@Preview
 fun NoPaddingPanelExample(
   modifier: Modifier = Modifier,
 ) {
