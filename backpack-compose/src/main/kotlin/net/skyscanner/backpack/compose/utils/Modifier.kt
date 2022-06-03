@@ -19,7 +19,10 @@
 package net.skyscanner.backpack.compose.utils
 
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.unit.LayoutDirection
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -34,7 +37,6 @@ internal fun Modifier.hideContentIf(hide: Boolean): Modifier =
     }
   }
 
-
 @OptIn(ExperimentalContracts::class)
 internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> Modifier): Modifier {
   contract {
@@ -42,3 +44,12 @@ internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> M
   }
   return if (predicate) block() else this
 }
+
+internal fun Modifier.autoMirror(enabled: Boolean = true): Modifier =
+  drawWithContent {
+    val scaleX = if (enabled && layoutDirection == LayoutDirection.Rtl) -1f else 1f
+
+    scale(scaleX = scaleX, scaleY = 1f) {
+      this@drawWithContent.drawContent()
+    }
+  }
