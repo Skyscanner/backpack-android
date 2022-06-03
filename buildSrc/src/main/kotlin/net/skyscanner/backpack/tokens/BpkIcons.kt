@@ -20,14 +20,15 @@ package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.PropertySpec
 import java.io.File
 
 data class BpkIcon(
-  val name: String,
-  val type: Type,
+  val name1: String,
+  val flavors: Map<Type, String>,
 ) {
 
   enum class Type {
@@ -36,18 +37,38 @@ data class BpkIcon(
   }
 
   object Parser : BpkParser<List<File>, BpkIcons> {
-    override fun invoke(files: List<File>): BpkIcons =
-      files
-        .filter { it.extension == "xml" }
-        .map {
+    override fun invoke(files: List<File>): BpkIcons {
+
+      val iconFiles = files.filter { it.extension == "xml" }
+
+      return iconFiles
+        .map { it.nameWithoutExtension.removeSuffix("_sm") }
+        .distinct()
+        .map { name ->
           BpkIcon(
-            name = it.nameWithoutExtension,
-            type = when {
-              it.nameWithoutExtension.endsWith("_sm") -> Type.Sm
-              else -> Type.Lg
-            }
+            name1 = transformIconName(name),
+            flavors = Type.values()
+              .associateWith { type ->
+                iconFiles.find {
+                  when (type) {
+                    Type.Sm -> it.nameWithoutExtension == "${name}_sm"
+                    Type.Lg -> it.nameWithoutExtension == name
+                  }
+                }?.nameWithoutExtension
+              }
+              .filterValues { it != null }
+              .let { it as Map<Type, String> },
           )
         }
+    }
+
+    private fun transformIconName(name: String): String =
+      CaseFormat.UPPER_UNDERSCORE.to(
+        CaseFormat.UPPER_CAMEL,
+        name.removePrefix("bpk_")
+          .removeSuffix("_sm")
+          .replace("__", "_"),
+      )
   }
 
   sealed class Format : BpkTransformer<BpkIcons, List<PropertySpec>> {
@@ -62,8 +83,11 @@ data class BpkIcon(
         toCompose(parent, rClass, source, Type.Lg)
     }
 
+    data class ComposeAdaptive(val parent: ClassName, val rClass: ClassName) : Format() {
+      override fun invoke(source: BpkIcons): List<PropertySpec> =
+        toComposeAdaptive(parent, rClass, source)
+    }
   }
-
 }
 
 typealias BpkIcons = List<BpkIcon>
@@ -71,7 +95,9 @@ typealias BpkIcons = List<BpkIcon>
 private val PainterClass = ClassName("androidx.compose.ui.graphics.painter", "Painter")
 private val ComposableAnnotation = ClassName("androidx.compose.runtime", "Composable")
 private val PainterResource = MemberName("androidx.compose.ui.res", "painterResource")
-
+private val DelegatesClass = ClassName("kotlin.properties", "Delegates")
+private val SingletonMethod = MemberName("net.skyscanner.backpack.compose.utils", "singleton")
+private val BpkIconClass = ClassName("net.skyscanner.backpack.compose.icon", "BpkIcon")
 
 private fun toCompose(
   parent: ClassName,
@@ -80,24 +106,55 @@ private fun toCompose(
   type: BpkIcon.Type,
 ): List<PropertySpec> {
 
-  fun transformName(name: String): String =
-    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name.removePrefix("bpk_").removeSuffix("_sm").replace("__", "_"))
-
   val receiverClass = parent.nestedClass(type.toString())
 
   return source
-    .filter { it.type == type }
+    .filter { type in it.flavors }
     .map { icon ->
       PropertySpec.builder(
-        name = transformName(icon.name),
+        name = icon.name1,
         type = PainterClass,
       )
         .receiver(receiverClass)
-        .getter(FunSpec
-          .getterBuilder()
-          .addAnnotation(ComposableAnnotation)
-          .addStatement("return %M(id = %T.drawable.${icon.name})", PainterResource, rClass)
-          .build()
+        .getter(
+          FunSpec
+            .getterBuilder()
+            .addAnnotation(ComposableAnnotation)
+            .addStatement("return %M(id = %T.drawable.%N)", PainterResource, rClass, icon.flavors[type]!!)
+            .build()
+        )
+        .build()
+    }
+}
+
+private fun toComposeAdaptive(
+  parent: ClassName,
+  rClass: ClassName,
+  source: BpkIcons,
+): List<PropertySpec> {
+
+  return source
+    .filter { it.flavors.keys.containsAll(BpkIcon.Type.values().toList()) }
+    .map { icon ->
+      PropertySpec.builder(
+        name = icon.name1,
+        type = BpkIconClass,
+      )
+        .receiver(parent)
+        .delegate(
+          CodeBlock
+            .builder()
+            .addStatement("%T.%M(", DelegatesClass, SingletonMethod)
+            .indent()
+            .addStatement("%T(", BpkIconClass)
+            .indent()
+            .addStatement("small = %T.drawable.%N,", rClass, icon.flavors[BpkIcon.Type.Sm])
+            .addStatement("large = %T.drawable.%N,", rClass, icon.flavors[BpkIcon.Type.Lg])
+            .unindent()
+            .addStatement(")")
+            .unindent()
+            .addStatement(")")
+            .build()
         )
         .build()
     }

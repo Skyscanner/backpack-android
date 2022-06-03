@@ -182,9 +182,19 @@ tasks {
       .execute()
   }
 
+  val generateAdaptiveIcons by creating {
+    this.group = group
+    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
+      .readAs(BpkFormat.Folder)
+      .parseAs(BpkIcon.Parser)
+      .transformTo(BpkIcon.Format.ComposeAdaptive(iconsClass, rClass))
+      .saveTo(BpkOutput.KotlinExtensionFiles(src, iconsPackage + ".adaptive"))
+      .execute()
+  }
+
   val generateIcons by creating {
     this.group = group
-    dependsOn(generateSmIcons, generateLgIcons)
+    dependsOn(generateSmIcons, generateLgIcons, generateAdaptiveIcons)
   }
 
   val generateEverything by creating {
