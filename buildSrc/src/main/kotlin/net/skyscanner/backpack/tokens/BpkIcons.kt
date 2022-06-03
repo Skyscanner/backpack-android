@@ -29,6 +29,7 @@ import java.io.File
 data class BpkIcon(
   val name: String,
   val types: Map<Type, String>,
+  val autoMirror: Boolean,
 ) {
 
   enum class Type {
@@ -58,6 +59,9 @@ data class BpkIcon(
               }
               .filterValues { it != null }
               .let { it as Map<Type, String> },
+            autoMirror = files
+              .filter { it.nameWithoutExtension.startsWith(name) }
+              .any { it.readText().contains("android:automirrored=\"true\"", ignoreCase = true) },
           )
         }
     }
@@ -150,6 +154,7 @@ private fun toComposeAdaptive(
             .indent()
             .addStatement("small = %T.drawable.%N,", rClass, icon.types[BpkIcon.Type.Sm])
             .addStatement("large = %T.drawable.%N,", rClass, icon.types[BpkIcon.Type.Lg])
+            .addStatement("autoMirror = %L,", icon.autoMirror)
             .unindent()
             .addStatement(")")
             .unindent()
