@@ -27,8 +27,8 @@ import com.squareup.kotlinpoet.PropertySpec
 import java.io.File
 
 data class BpkIcon(
-  val name1: String,
-  val flavors: Map<Type, String>,
+  val name: String,
+  val types: Map<Type, String>,
 ) {
 
   enum class Type {
@@ -46,8 +46,8 @@ data class BpkIcon(
         .distinct()
         .map { name ->
           BpkIcon(
-            name1 = transformIconName(name),
-            flavors = Type.values()
+            name = transformIconName(name),
+            types = Type.values()
               .associateWith { type ->
                 iconFiles.find {
                   when (type) {
@@ -109,10 +109,10 @@ private fun toCompose(
   val receiverClass = parent.nestedClass(type.toString())
 
   return source
-    .filter { type in it.flavors }
+    .filter { type in it.types }
     .map { icon ->
       PropertySpec.builder(
-        name = icon.name1,
+        name = icon.name,
         type = PainterClass,
       )
         .receiver(receiverClass)
@@ -120,7 +120,7 @@ private fun toCompose(
           FunSpec
             .getterBuilder()
             .addAnnotation(ComposableAnnotation)
-            .addStatement("return %M(id = %T.drawable.%N)", PainterResource, rClass, icon.flavors[type]!!)
+            .addStatement("return %M(id = %T.drawable.%N)", PainterResource, rClass, icon.types[type]!!)
             .build()
         )
         .build()
@@ -134,10 +134,10 @@ private fun toComposeAdaptive(
 ): List<PropertySpec> {
 
   return source
-    .filter { it.flavors.keys.containsAll(BpkIcon.Type.values().toList()) }
+    .filter { it.types.keys.containsAll(BpkIcon.Type.values().toList()) }
     .map { icon ->
       PropertySpec.builder(
-        name = icon.name1,
+        name = icon.name,
         type = BpkIconClass,
       )
         .receiver(parent)
@@ -148,8 +148,8 @@ private fun toComposeAdaptive(
             .indent()
             .addStatement("%T(", BpkIconClass)
             .indent()
-            .addStatement("small = %T.drawable.%N,", rClass, icon.flavors[BpkIcon.Type.Sm])
-            .addStatement("large = %T.drawable.%N,", rClass, icon.flavors[BpkIcon.Type.Lg])
+            .addStatement("small = %T.drawable.%N,", rClass, icon.types[BpkIcon.Type.Sm])
+            .addStatement("large = %T.drawable.%N,", rClass, icon.types[BpkIcon.Type.Lg])
             .unindent()
             .addStatement(")")
             .unindent()
