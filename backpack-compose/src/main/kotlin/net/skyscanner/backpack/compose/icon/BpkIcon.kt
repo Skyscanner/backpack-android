@@ -37,9 +37,10 @@ enum class BpkIconSize {
   Large,
 }
 
-data class BpkIcon(
+data class BpkIcon internal constructor(
   @DrawableRes internal val small: Int,
   @DrawableRes internal val large: Int,
+  internal val autoMirror: Boolean,
 )
 
 @Composable
@@ -49,7 +50,6 @@ fun BpkIcon(
   modifier: Modifier = Modifier,
   size: BpkIconSize = LocalBpkIconSize.current,
   tint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
-  autoMirror: Boolean = true,
 ) {
   Icon(
     painter = painterResource(id = icon[size]),
@@ -57,7 +57,7 @@ fun BpkIcon(
     tint = tint,
     modifier = modifier
       .defaultMinSize(size)
-      .autoMirror(autoMirror),
+      .autoMirror(icon.autoMirror),
   )
 }
 
