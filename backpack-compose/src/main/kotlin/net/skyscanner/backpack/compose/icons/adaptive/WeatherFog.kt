@@ -24,6 +24,7 @@ public val BpkIcons.WeatherFog: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_weather__fog_sm,
     large = R.drawable.bpk_weather__fog,
+    autoMirror = false,
   )
 )
 

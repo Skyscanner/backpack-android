@@ -24,6 +24,7 @@ public val BpkIcons.Play: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_play_sm,
     large = R.drawable.bpk_play,
+    autoMirror = false,
   )
 )
 

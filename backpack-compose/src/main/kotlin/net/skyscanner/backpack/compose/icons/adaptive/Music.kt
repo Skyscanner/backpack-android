@@ -24,6 +24,7 @@ public val BpkIcons.Music: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_music_sm,
     large = R.drawable.bpk_music,
+    autoMirror = false,
   )
 )
 

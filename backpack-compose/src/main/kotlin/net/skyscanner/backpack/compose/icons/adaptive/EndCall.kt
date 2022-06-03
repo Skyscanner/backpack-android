@@ -24,6 +24,7 @@ public val BpkIcons.EndCall: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_end_call_sm,
     large = R.drawable.bpk_end_call,
+    autoMirror = false,
   )
 )
 

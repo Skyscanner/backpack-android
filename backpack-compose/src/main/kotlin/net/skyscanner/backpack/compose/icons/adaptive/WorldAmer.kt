@@ -24,6 +24,7 @@ public val BpkIcons.WorldAmer: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_world__amer_sm,
     large = R.drawable.bpk_world__amer,
+    autoMirror = false,
   )
 )
 

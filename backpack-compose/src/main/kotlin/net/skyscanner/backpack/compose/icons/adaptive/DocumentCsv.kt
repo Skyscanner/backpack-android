@@ -24,6 +24,7 @@ public val BpkIcons.DocumentCsv: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_document_csv_sm,
     large = R.drawable.bpk_document_csv,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.Hide: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_hide_sm,
     large = R.drawable.bpk_hide,
+    autoMirror = false,
   )
 )
 

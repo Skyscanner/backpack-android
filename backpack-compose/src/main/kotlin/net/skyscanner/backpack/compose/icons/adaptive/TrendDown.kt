@@ -24,6 +24,7 @@ public val BpkIcons.TrendDown: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_trend__down_sm,
     large = R.drawable.bpk_trend__down,
+    autoMirror = true,
   )
 )
 

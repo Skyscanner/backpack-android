@@ -24,6 +24,7 @@ public val BpkIcons.SendMessage: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_send_message_sm,
     large = R.drawable.bpk_send_message,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.StarHalf: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_star_half_sm,
     large = R.drawable.bpk_star_half,
+    autoMirror = true,
   )
 )
 

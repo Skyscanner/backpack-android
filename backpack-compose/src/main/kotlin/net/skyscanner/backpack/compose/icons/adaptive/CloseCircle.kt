@@ -24,6 +24,7 @@ public val BpkIcons.CloseCircle: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_close_circle_sm,
     large = R.drawable.bpk_close_circle,
+    autoMirror = false,
   )
 )
 

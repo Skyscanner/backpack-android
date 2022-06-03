@@ -24,6 +24,7 @@ public val BpkIcons.Duration: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_duration_sm,
     large = R.drawable.bpk_duration,
+    autoMirror = false,
   )
 )
 

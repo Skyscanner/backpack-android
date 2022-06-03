@@ -24,6 +24,7 @@ public val BpkIcons.GridLayout: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_grid_layout_sm,
     large = R.drawable.bpk_grid_layout,
+    autoMirror = false,
   )
 )
 

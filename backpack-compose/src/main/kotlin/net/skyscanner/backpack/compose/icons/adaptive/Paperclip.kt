@@ -24,6 +24,7 @@ public val BpkIcons.Paperclip: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_paperclip_sm,
     large = R.drawable.bpk_paperclip,
+    autoMirror = false,
   )
 )
 

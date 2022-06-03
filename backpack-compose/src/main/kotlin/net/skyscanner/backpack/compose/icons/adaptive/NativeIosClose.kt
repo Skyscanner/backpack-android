@@ -24,6 +24,7 @@ public val BpkIcons.NativeIosClose: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_native_ios_close_sm,
     large = R.drawable.bpk_native_ios_close,
+    autoMirror = false,
   )
 )
 

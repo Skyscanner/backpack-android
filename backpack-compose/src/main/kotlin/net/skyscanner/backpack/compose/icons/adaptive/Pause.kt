@@ -24,6 +24,7 @@ public val BpkIcons.Pause: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_pause_sm,
     large = R.drawable.bpk_pause,
+    autoMirror = false,
   )
 )
 

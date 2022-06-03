@@ -24,6 +24,7 @@ public val BpkIcons.ThumbsDown: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_thumbs_down_sm,
     large = R.drawable.bpk_thumbs_down,
+    autoMirror = false,
   )
 )
 

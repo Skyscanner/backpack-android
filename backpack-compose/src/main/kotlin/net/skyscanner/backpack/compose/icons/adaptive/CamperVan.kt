@@ -24,6 +24,7 @@ public val BpkIcons.CamperVan: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_camper_van_sm,
     large = R.drawable.bpk_camper_van,
+    autoMirror = false,
   )
 )
 

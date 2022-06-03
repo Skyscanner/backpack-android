@@ -24,6 +24,7 @@ public val BpkIcons.FastTrain: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_fast_train_sm,
     large = R.drawable.bpk_fast_train,
+    autoMirror = false,
   )
 )
 

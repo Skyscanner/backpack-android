@@ -24,6 +24,7 @@ public val BpkIcons.DeviceWide: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_device_wide_sm,
     large = R.drawable.bpk_device_wide,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.SocialDistancing: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_social_distancing_sm,
     large = R.drawable.bpk_social_distancing,
+    autoMirror = false,
   )
 )
 

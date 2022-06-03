@@ -24,6 +24,7 @@ public val BpkIcons.HotelsPetsAllowed: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_hotels__pets_allowed_sm,
     large = R.drawable.bpk_hotels__pets_allowed,
+    autoMirror = false,
   )
 )
 

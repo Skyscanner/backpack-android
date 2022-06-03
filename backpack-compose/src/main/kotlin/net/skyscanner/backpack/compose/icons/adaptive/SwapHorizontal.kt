@@ -24,6 +24,7 @@ public val BpkIcons.SwapHorizontal: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_swap__horizontal_sm,
     large = R.drawable.bpk_swap__horizontal,
+    autoMirror = true,
   )
 )
 

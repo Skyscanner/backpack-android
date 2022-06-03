@@ -24,6 +24,7 @@ public val BpkIcons.Undo: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_undo_sm,
     large = R.drawable.bpk_undo,
+    autoMirror = false,
   )
 )
 

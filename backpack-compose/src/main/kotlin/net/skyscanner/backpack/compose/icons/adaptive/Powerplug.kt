@@ -24,6 +24,7 @@ public val BpkIcons.Powerplug: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_powerplug_sm,
     large = R.drawable.bpk_powerplug,
+    autoMirror = false,
   )
 )
 

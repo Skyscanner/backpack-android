@@ -24,6 +24,7 @@ public val BpkIcons.Download: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_download_sm,
     large = R.drawable.bpk_download,
+    autoMirror = false,
   )
 )
 

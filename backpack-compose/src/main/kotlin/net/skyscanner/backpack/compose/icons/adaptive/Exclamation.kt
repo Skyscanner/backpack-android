@@ -24,6 +24,7 @@ public val BpkIcons.Exclamation: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_exclamation_sm,
     large = R.drawable.bpk_exclamation,
+    autoMirror = false,
   )
 )
 

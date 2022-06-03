@@ -24,6 +24,7 @@ public val BpkIcons.Refresh: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_refresh_sm,
     large = R.drawable.bpk_refresh,
+    autoMirror = false,
   )
 )
 

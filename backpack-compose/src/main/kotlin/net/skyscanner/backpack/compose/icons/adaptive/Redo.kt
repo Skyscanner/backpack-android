@@ -24,6 +24,7 @@ public val BpkIcons.Redo: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_redo_sm,
     large = R.drawable.bpk_redo,
+    autoMirror = false,
   )
 )
 

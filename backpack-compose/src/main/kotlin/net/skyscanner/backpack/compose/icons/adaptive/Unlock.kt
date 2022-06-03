@@ -24,6 +24,7 @@ public val BpkIcons.Unlock: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_unlock_sm,
     large = R.drawable.bpk_unlock,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.Logout: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_logout_sm,
     large = R.drawable.bpk_logout,
+    autoMirror = false,
   )
 )
 

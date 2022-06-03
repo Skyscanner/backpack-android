@@ -24,6 +24,7 @@ public val BpkIcons.UseLocation: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_use_location_sm,
     large = R.drawable.bpk_use_location,
+    autoMirror = false,
   )
 )
 

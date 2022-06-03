@@ -24,6 +24,7 @@ public val BpkIcons.Search: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_search_sm,
     large = R.drawable.bpk_search,
+    autoMirror = false,
   )
 )
 

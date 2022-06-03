@@ -24,6 +24,7 @@ public val BpkIcons.FaceHappy: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_face__happy_sm,
     large = R.drawable.bpk_face__happy,
+    autoMirror = false,
   )
 )
 

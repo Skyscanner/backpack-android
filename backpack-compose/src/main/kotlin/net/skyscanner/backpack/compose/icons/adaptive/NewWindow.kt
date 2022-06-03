@@ -24,6 +24,7 @@ public val BpkIcons.NewWindow: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_new_window_sm,
     large = R.drawable.bpk_new_window,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.Mute: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_mute_sm,
     large = R.drawable.bpk_mute,
+    autoMirror = false,
   )
 )
 

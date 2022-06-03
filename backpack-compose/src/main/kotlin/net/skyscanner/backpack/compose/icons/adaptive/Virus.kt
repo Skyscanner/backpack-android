@@ -24,6 +24,7 @@ public val BpkIcons.Virus: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_virus_sm,
     large = R.drawable.bpk_virus,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.EcoLeaf: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_eco_leaf_sm,
     large = R.drawable.bpk_eco_leaf,
+    autoMirror = false,
   )
 )
 

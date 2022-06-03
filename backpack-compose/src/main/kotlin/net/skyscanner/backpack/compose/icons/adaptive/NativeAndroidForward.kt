@@ -24,6 +24,7 @@ public val BpkIcons.NativeAndroidForward: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_native_android__forward_sm,
     large = R.drawable.bpk_native_android__forward,
+    autoMirror = true,
   )
 )
 

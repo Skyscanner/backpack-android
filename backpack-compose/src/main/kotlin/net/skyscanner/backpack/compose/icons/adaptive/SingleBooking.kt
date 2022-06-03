@@ -24,6 +24,7 @@ public val BpkIcons.SingleBooking: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_single_booking_sm,
     large = R.drawable.bpk_single_booking,
+    autoMirror = false,
   )
 )
 

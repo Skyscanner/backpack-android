@@ -24,6 +24,7 @@ public val BpkIcons.Estimated: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_estimated_sm,
     large = R.drawable.bpk_estimated,
+    autoMirror = false,
   )
 )
 

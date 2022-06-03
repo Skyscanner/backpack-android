@@ -24,6 +24,7 @@ public val BpkIcons.LongArrowRight: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_long_arrow_right_sm,
     large = R.drawable.bpk_long_arrow_right,
+    autoMirror = true,
   )
 )
 

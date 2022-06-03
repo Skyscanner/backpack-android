@@ -24,6 +24,7 @@ public val BpkIcons.Headset: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_headset_sm,
     large = R.drawable.bpk_headset,
+    autoMirror = false,
   )
 )
 

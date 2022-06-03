@@ -24,6 +24,7 @@ public val BpkIcons.Onsen: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_onsen_sm,
     large = R.drawable.bpk_onsen,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.GearsAutomaticCircle: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_gears_automatic_circle_sm,
     large = R.drawable.bpk_gears_automatic_circle,
+    autoMirror = false,
   )
 )
 

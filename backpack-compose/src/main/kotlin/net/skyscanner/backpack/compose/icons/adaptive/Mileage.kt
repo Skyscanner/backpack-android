@@ -24,6 +24,7 @@ public val BpkIcons.Mileage: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_mileage_sm,
     large = R.drawable.bpk_mileage,
+    autoMirror = false,
   )
 )
 

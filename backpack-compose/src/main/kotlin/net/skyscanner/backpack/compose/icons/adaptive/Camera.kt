@@ -24,6 +24,7 @@ public val BpkIcons.Camera: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_camera_sm,
     large = R.drawable.bpk_camera,
+    autoMirror = false,
   )
 )
 

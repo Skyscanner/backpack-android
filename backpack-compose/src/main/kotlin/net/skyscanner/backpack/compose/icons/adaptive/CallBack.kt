@@ -24,6 +24,7 @@ public val BpkIcons.CallBack: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_call_back_sm,
     large = R.drawable.bpk_call_back,
+    autoMirror = false,
   )
 )
 

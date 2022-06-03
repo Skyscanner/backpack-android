@@ -24,6 +24,7 @@ public val BpkIcons.DocumentPdf: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_document_pdf_sm,
     large = R.drawable.bpk_document_pdf,
+    autoMirror = false,
   )
 )
 

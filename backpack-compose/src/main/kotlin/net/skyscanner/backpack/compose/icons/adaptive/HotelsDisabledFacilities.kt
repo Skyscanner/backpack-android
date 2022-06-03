@@ -24,6 +24,7 @@ public val BpkIcons.HotelsDisabledFacilities: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_hotels__disabled_facilities_sm,
     large = R.drawable.bpk_hotels__disabled_facilities,
+    autoMirror = false,
   )
 )
 

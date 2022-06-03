@@ -24,6 +24,7 @@ public val BpkIcons.BaggageAdd: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_baggage__add_sm,
     large = R.drawable.bpk_baggage__add,
+    autoMirror = false,
   )
 )
 

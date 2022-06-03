@@ -24,6 +24,7 @@ public val BpkIcons.Trash: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_trash_sm,
     large = R.drawable.bpk_trash,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.Chauffeur: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_chauffeur_sm,
     large = R.drawable.bpk_chauffeur,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.Cloakroom: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_cloakroom_sm,
     large = R.drawable.bpk_cloakroom,
+    autoMirror = false,
   )
 )
 

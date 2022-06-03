@@ -24,6 +24,7 @@ public val BpkIcons.FlightLanding: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_flight_landing_sm,
     large = R.drawable.bpk_flight_landing,
+    autoMirror = false,
   )
 )
 

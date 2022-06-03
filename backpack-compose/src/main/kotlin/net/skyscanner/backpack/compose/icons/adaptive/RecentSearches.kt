@@ -24,6 +24,7 @@ public val BpkIcons.RecentSearches: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_recent_searches_sm,
     large = R.drawable.bpk_recent_searches,
+    autoMirror = false,
   )
 )
 

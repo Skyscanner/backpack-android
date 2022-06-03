@@ -24,6 +24,7 @@ public val BpkIcons.SortUp: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_sort_up_sm,
     large = R.drawable.bpk_sort_up,
+    autoMirror = false,
   )
 )
 

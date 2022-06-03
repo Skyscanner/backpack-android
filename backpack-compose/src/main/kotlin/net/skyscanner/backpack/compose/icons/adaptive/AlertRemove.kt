@@ -24,6 +24,7 @@ public val BpkIcons.AlertRemove: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_alert__remove_sm,
     large = R.drawable.bpk_alert__remove,
+    autoMirror = false,
   )
 )
 

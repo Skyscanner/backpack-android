@@ -24,6 +24,7 @@ public val BpkIcons.TransmissionAutomatic: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_transmission_automatic_sm,
     large = R.drawable.bpk_transmission_automatic,
+    autoMirror = false,
   )
 )
 

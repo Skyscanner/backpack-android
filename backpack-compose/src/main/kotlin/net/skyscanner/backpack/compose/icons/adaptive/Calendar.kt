@@ -24,6 +24,7 @@ public val BpkIcons.Calendar: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_calendar_sm,
     large = R.drawable.bpk_calendar,
+    autoMirror = false,
   )
 )
 

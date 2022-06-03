@@ -24,6 +24,7 @@ public val BpkIcons.Upgrade: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_upgrade_sm,
     large = R.drawable.bpk_upgrade,
+    autoMirror = false,
   )
 )
 

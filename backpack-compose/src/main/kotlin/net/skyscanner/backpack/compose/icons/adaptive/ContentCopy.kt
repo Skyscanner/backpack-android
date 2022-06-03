@@ -24,6 +24,7 @@ public val BpkIcons.ContentCopy: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_content__copy_sm,
     large = R.drawable.bpk_content__copy,
+    autoMirror = false,
   )
 )
 

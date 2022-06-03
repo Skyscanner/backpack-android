@@ -24,6 +24,7 @@ public val BpkIcons.Wifi: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_wifi_sm,
     large = R.drawable.bpk_wifi,
+    autoMirror = false,
   )
 )
 

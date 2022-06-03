@@ -24,6 +24,7 @@ public val BpkIcons.CityCenter: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_city_center_sm,
     large = R.drawable.bpk_city_center,
+    autoMirror = false,
   )
 )
 

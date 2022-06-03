@@ -24,6 +24,7 @@ public val BpkIcons.ContentEvent: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_content__event_sm,
     large = R.drawable.bpk_content__event,
+    autoMirror = false,
   )
 )
 

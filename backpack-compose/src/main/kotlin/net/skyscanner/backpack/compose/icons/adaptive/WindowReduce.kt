@@ -24,6 +24,7 @@ public val BpkIcons.WindowReduce: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_window__reduce_sm,
     large = R.drawable.bpk_window__reduce,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.Night: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_night_sm,
     large = R.drawable.bpk_night,
+    autoMirror = false,
   )
 )
 

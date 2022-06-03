@@ -24,6 +24,7 @@ public val BpkIcons.FaceMask: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_face_mask_sm,
     large = R.drawable.bpk_face_mask,
+    autoMirror = false,
   )
 )
 

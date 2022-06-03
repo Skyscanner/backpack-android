@@ -24,6 +24,7 @@ public val BpkIcons.MenuHorizontal: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_menu__horizontal_sm,
     large = R.drawable.bpk_menu__horizontal,
+    autoMirror = false,
   )
 )
 

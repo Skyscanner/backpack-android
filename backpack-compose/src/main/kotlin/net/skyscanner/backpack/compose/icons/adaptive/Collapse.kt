@@ -24,6 +24,7 @@ public val BpkIcons.Collapse: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_collapse_sm,
     large = R.drawable.bpk_collapse,
+    autoMirror = false,
   )
 )
 

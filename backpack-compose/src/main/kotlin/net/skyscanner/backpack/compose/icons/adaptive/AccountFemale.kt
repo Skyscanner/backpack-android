@@ -24,6 +24,7 @@ public val BpkIcons.AccountFemale: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_account__female_sm,
     large = R.drawable.bpk_account__female,
+    autoMirror = false,
   )
 )
 

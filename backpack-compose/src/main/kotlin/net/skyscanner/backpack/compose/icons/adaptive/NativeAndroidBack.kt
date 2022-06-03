@@ -24,6 +24,7 @@ public val BpkIcons.NativeAndroidBack: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_native_android__back_sm,
     large = R.drawable.bpk_native_android__back,
+    autoMirror = true,
   )
 )
 

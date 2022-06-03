@@ -24,6 +24,7 @@ public val BpkIcons.Accessibility: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_accessibility_sm,
     large = R.drawable.bpk_accessibility,
+    autoMirror = false,
   )
 )
 

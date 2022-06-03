@@ -24,6 +24,7 @@ public val BpkIcons.Beach: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_beach_sm,
     large = R.drawable.bpk_beach,
+    autoMirror = false,
   )
 )
 

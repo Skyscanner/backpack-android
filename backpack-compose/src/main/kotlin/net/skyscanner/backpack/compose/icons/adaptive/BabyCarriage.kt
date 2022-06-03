@@ -24,6 +24,7 @@ public val BpkIcons.BabyCarriage: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_baby_carriage_sm,
     large = R.drawable.bpk_baby_carriage,
+    autoMirror = false,
   )
 )
 

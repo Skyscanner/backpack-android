@@ -24,6 +24,7 @@ public val BpkIcons.Keypad: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_keypad_sm,
     large = R.drawable.bpk_keypad,
+    autoMirror = false,
   )
 )
 

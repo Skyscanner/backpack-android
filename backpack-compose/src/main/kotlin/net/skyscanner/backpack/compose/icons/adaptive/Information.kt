@@ -24,6 +24,7 @@ public val BpkIcons.Information: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_information_sm,
     large = R.drawable.bpk_information,
+    autoMirror = false,
   )
 )
 

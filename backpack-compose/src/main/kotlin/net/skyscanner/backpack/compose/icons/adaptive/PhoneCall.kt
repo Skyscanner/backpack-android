@@ -24,6 +24,7 @@ public val BpkIcons.PhoneCall: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_phone_call_sm,
     large = R.drawable.bpk_phone_call,
+    autoMirror = false,
   )
 )
 

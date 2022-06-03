@@ -24,6 +24,7 @@ public val BpkIcons.SocialLike: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_social_like_sm,
     large = R.drawable.bpk_social_like,
+    autoMirror = false,
   )
 )
 

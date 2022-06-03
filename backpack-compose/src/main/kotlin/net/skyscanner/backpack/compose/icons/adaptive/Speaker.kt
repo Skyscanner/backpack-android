@@ -24,6 +24,7 @@ public val BpkIcons.Speaker: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_speaker_sm,
     large = R.drawable.bpk_speaker,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.Stops: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_stops_sm,
     large = R.drawable.bpk_stops,
+    autoMirror = false,
   )
 )
 

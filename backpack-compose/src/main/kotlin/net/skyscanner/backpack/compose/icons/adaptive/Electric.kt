@@ -24,6 +24,7 @@ public val BpkIcons.Electric: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_electric_sm,
     large = R.drawable.bpk_electric,
+    autoMirror = false,
   )
 )
 

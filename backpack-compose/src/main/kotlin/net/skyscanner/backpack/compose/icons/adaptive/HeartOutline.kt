@@ -24,6 +24,7 @@ public val BpkIcons.HeartOutline: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_heart__outline_sm,
     large = R.drawable.bpk_heart__outline,
+    autoMirror = false,
   )
 )
 

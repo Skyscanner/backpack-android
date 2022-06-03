@@ -24,6 +24,7 @@ public val BpkIcons.Policy: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_policy_sm,
     large = R.drawable.bpk_policy,
+    autoMirror = true,
   )
 )
 

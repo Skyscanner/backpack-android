@@ -24,6 +24,7 @@ public val BpkIcons.BreakfastCross: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_breakfast_cross_sm,
     large = R.drawable.bpk_breakfast_cross,
+    autoMirror = false,
   )
 )
 

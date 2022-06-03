@@ -24,6 +24,7 @@ public val BpkIcons.Unmute: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_unmute_sm,
     large = R.drawable.bpk_unmute,
+    autoMirror = false,
   )
 )
 

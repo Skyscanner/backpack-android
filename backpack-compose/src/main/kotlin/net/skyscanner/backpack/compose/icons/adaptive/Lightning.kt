@@ -24,6 +24,7 @@ public val BpkIcons.Lightning: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_lightning_sm,
     large = R.drawable.bpk_lightning,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.InformationLanguage: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_information__language_sm,
     large = R.drawable.bpk_information__language,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.Mail: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_mail_sm,
     large = R.drawable.bpk_mail,
+    autoMirror = false,
   )
 )
 

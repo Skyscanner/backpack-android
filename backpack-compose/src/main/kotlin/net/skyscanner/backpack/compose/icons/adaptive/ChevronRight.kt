@@ -24,6 +24,7 @@ public val BpkIcons.ChevronRight: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_chevron_right_sm,
     large = R.drawable.bpk_chevron_right,
+    autoMirror = true,
   )
 )
 

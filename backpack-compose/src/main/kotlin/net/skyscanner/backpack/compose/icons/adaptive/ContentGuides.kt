@@ -24,6 +24,7 @@ public val BpkIcons.ContentGuides: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_content__guides_sm,
     large = R.drawable.bpk_content__guides,
+    autoMirror = false,
   )
 )
 

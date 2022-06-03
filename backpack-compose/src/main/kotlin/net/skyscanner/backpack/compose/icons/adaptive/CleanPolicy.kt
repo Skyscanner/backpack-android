@@ -24,6 +24,7 @@ public val BpkIcons.CleanPolicy: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_clean_policy_sm,
     large = R.drawable.bpk_clean_policy,
+    autoMirror = false,
   )
 )
 

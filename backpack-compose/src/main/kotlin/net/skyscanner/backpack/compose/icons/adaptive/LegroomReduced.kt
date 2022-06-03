@@ -24,6 +24,7 @@ public val BpkIcons.LegroomReduced: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_legroom__reduced_sm,
     large = R.drawable.bpk_legroom__reduced,
+    autoMirror = false,
   )
 )
 

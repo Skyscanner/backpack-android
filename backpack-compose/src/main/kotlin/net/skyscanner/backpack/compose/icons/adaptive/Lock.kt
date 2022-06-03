@@ -24,6 +24,7 @@ public val BpkIcons.Lock: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_lock_sm,
     large = R.drawable.bpk_lock,
+    autoMirror = false,
   )
 )
 

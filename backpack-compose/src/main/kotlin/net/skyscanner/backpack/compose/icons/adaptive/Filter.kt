@@ -24,6 +24,7 @@ public val BpkIcons.Filter: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_filter_sm,
     large = R.drawable.bpk_filter,
+    autoMirror = false,
   )
 )
 

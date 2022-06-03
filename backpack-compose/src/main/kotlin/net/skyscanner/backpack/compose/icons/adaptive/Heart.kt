@@ -24,6 +24,7 @@ public val BpkIcons.Heart: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_heart_sm,
     large = R.drawable.bpk_heart,
+    autoMirror = false,
   )
 )
 

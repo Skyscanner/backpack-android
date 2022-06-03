@@ -24,6 +24,7 @@ public val BpkIcons.AlertAdd: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_alert__add_sm,
     large = R.drawable.bpk_alert__add,
+    autoMirror = false,
   )
 )
 

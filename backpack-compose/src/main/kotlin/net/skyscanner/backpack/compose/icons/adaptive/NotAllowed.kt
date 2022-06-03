@@ -24,6 +24,7 @@ public val BpkIcons.NotAllowed: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_not_allowed_sm,
     large = R.drawable.bpk_not_allowed,
+    autoMirror = false,
   )
 )
 

@@ -24,6 +24,7 @@ public val BpkIcons.AlertExpired: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_alert__expired_sm,
     large = R.drawable.bpk_alert__expired,
+    autoMirror = false,
   )
 )
 

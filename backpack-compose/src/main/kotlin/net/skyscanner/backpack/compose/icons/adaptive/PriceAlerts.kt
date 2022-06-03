@@ -24,6 +24,7 @@ public val BpkIcons.PriceAlerts: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_price_alerts_sm,
     large = R.drawable.bpk_price_alerts,
+    autoMirror = false,
   )
 )
 

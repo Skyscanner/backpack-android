@@ -24,6 +24,7 @@ public val BpkIcons.TickCircle: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_tick_circle_sm,
     large = R.drawable.bpk_tick_circle,
+    autoMirror = false,
   )
 )
 

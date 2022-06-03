@@ -24,6 +24,7 @@ public val BpkIcons.Business: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_business_sm,
     large = R.drawable.bpk_business,
+    autoMirror = false,
   )
 )
 

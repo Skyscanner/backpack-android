@@ -24,6 +24,7 @@ public val BpkIcons.CarWash: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_car_wash_sm,
     large = R.drawable.bpk_car_wash,
+    autoMirror = false,
   )
 )
 

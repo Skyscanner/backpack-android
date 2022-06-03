@@ -24,6 +24,7 @@ public val BpkIcons.HealthFitness: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_health_fitness_sm,
     large = R.drawable.bpk_health_fitness,
+    autoMirror = false,
   )
 )
 

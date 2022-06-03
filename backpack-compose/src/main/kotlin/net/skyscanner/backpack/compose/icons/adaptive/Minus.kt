@@ -24,6 +24,7 @@ public val BpkIcons.Minus: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_minus_sm,
     large = R.drawable.bpk_minus,
+    autoMirror = false,
   )
 )
 

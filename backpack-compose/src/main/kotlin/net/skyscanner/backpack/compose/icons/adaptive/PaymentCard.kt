@@ -24,6 +24,7 @@ public val BpkIcons.PaymentCard: BpkIcon by Delegates.singleton(
   BpkIcon(
     small = R.drawable.bpk_payment_card_sm,
     large = R.drawable.bpk_payment_card,
+    autoMirror = false,
   )
 )
 
