@@ -35,11 +35,10 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
 
     override fun invoke(typeSpec: TypeSpec): Boolean {
       FileSpec.builder(pkg, typeSpec.name!!)
-        .addFileHeader()
         .suppressWarningTypes("RedundantVisibilityModifier", "unused")
         .addType(typeSpec)
         .build()
-        .writeTo(File(srcDir))
+        .writeWithCopyright(File(srcDir))
       return true
     }
   }
@@ -53,28 +52,33 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
 
       properties.forEach { property ->
         FileSpec.builder(pkg, property.name)
-          .addFileHeader()
           .suppressWarningTypes("RedundantVisibilityModifier", "unused")
           .addProperty(property)
           .build()
-          .writeTo(File(srcDir))
+          .writeWithCopyright(File(srcDir))
       }
 
       return true
     }
-
   }
-
 }
 
-private fun FileSpec.Builder.addFileHeader() : FileSpec.Builder {
-  val copyright = Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
-    return this
-      .addFileComment(copyright)
+private fun FileSpec.writeWithCopyright(directory: File) {
+  toBuilder()
     .addFileComment("Auto-generated: do not edit")
+    .build()
+    .writeTo(directory)
+
+  val target = File(File(directory, packageName.replace(".", "/")), "$name.kt")
+  require(target.exists()) { "Unable to write copyright header" }
+
+  val source = target.readText()
+  val copyright = Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
+
+  target.writeText(copyright + source)
 }
 
-private fun FileSpec.Builder.suppressWarningTypes(vararg types: String) : FileSpec.Builder {
+private fun FileSpec.Builder.suppressWarningTypes(vararg types: String): FileSpec.Builder {
   if (types.isEmpty()) {
     return this
   }
