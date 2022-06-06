@@ -159,7 +159,7 @@ tasks {
     project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
       .readAs(BpkFormat.Folder)
       .parseAs(BpkIcon.Parser)
-      .transformTo(BpkIcon.Format.Compose("BpkIcons", rClass))
+      .transformTo(BpkIcon.Format.Compose("BpkIcon", rClass))
       .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
       .execute()
   }

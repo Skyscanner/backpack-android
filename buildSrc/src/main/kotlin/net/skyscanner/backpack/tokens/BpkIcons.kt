@@ -76,9 +76,9 @@ data class BpkIcon(
 
   sealed class Format : BpkTransformer<BpkIcons, TypeSpec> {
 
-    data class Compose(val namespace: String, val rClass: ClassName) : Format() {
+    data class Compose(val enumName: String, val rClass: ClassName) : Format() {
       override fun invoke(source: BpkIcons): TypeSpec =
-        toCompose(namespace, rClass, source)
+        toCompose(enumName, rClass, source)
     }
   }
 }

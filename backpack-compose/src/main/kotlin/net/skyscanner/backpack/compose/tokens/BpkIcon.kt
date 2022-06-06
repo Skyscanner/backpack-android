@@ -25,7 +25,7 @@ import kotlin.Boolean
 import kotlin.Int
 import net.skyscanner.backpack.compose.R
 
-public enum class BpkIcons {
+public enum class BpkIcon {
   Accessibility {
     public override val small: Int = R.drawable.bpk_accessibility_sm
 
