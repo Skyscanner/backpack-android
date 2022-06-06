@@ -33,6 +33,7 @@ import net.skyscanner.backpack.tokens.transformTo
 tasks {
 
   val tokensPackage = "net.skyscanner.backpack.compose.tokens"
+  val rClass = ClassName("net.skyscanner.backpack.compose", "R")
   val group = "tokens"
   val src = project.projectDir.resolve("src/main/kotlin").path
 
@@ -158,43 +159,14 @@ tasks {
     dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens)
   }
 
-  val iconsClass = ClassName("net.skyscanner.backpack.compose.icons", "BpkIcons")
-  val iconsPackage = "net.skyscanner.backpack.compose.icons"
-  val rClass = ClassName("net.skyscanner.backpack.compose", "R")
-
-  val generateSmIcons by creating {
-    this.group = group
-    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
-      .readAs(BpkFormat.Folder)
-      .parseAs(BpkIcon.Parser)
-      .transformTo(BpkIcon.Format.ComposeSm(iconsClass, rClass))
-      .saveTo(BpkOutput.KotlinExtensionFiles(src, iconsPackage + ".sm"))
-      .execute()
-  }
-
-  val generateLgIcons by creating {
-    this.group = group
-    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
-      .readAs(BpkFormat.Folder)
-      .parseAs(BpkIcon.Parser)
-      .transformTo(BpkIcon.Format.ComposeLg(iconsClass, rClass))
-      .saveTo(BpkOutput.KotlinExtensionFiles(src, iconsPackage + ".lg"))
-      .execute()
-  }
-
-  val generateAdaptiveIcons by creating {
-    this.group = group
-    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
-      .readAs(BpkFormat.Folder)
-      .parseAs(BpkIcon.Parser)
-      .transformTo(BpkIcon.Format.ComposeAdaptive(iconsClass, rClass))
-      .saveTo(BpkOutput.KotlinExtensionFiles(src, iconsPackage + ".adaptive"))
-      .execute()
-  }
-
   val generateIcons by creating {
     this.group = group
-    dependsOn(generateSmIcons, generateLgIcons, generateAdaptiveIcons)
+    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
+      .readAs(BpkFormat.Folder)
+      .parseAs(BpkIcon.Parser)
+      .transformTo(BpkIcon.Format.Compose("BpkIcons", rClass))
+      .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+      .execute()
   }
 
   val generateEverything by creating {

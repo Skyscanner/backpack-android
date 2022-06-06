@@ -20,10 +20,9 @@ package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
 import com.squareup.kotlinpoet.ClassName
-import com.squareup.kotlinpoet.CodeBlock
-import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.MemberName
+import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
 
 data class BpkIcon(
@@ -75,92 +74,61 @@ data class BpkIcon(
       )
   }
 
-  sealed class Format : BpkTransformer<BpkIcons, List<PropertySpec>> {
+  sealed class Format : BpkTransformer<BpkIcons, TypeSpec> {
 
-    data class ComposeSm(val parent: ClassName, val rClass: ClassName) : Format() {
-      override fun invoke(source: BpkIcons): List<PropertySpec> =
-        toCompose(parent, rClass, source, Type.Sm)
-    }
-
-    data class ComposeLg(val parent: ClassName, val rClass: ClassName) : Format() {
-      override fun invoke(source: BpkIcons): List<PropertySpec> =
-        toCompose(parent, rClass, source, Type.Lg)
-    }
-
-    data class ComposeAdaptive(val parent: ClassName, val rClass: ClassName) : Format() {
-      override fun invoke(source: BpkIcons): List<PropertySpec> =
-        toComposeAdaptive(parent, rClass, source)
+    data class Compose(val namespace: String, val rClass: ClassName) : Format() {
+      override fun invoke(source: BpkIcons): TypeSpec =
+        toCompose(namespace, rClass, source)
     }
   }
 }
 
 typealias BpkIcons = List<BpkIcon>
 
-private val PainterClass = ClassName("androidx.compose.ui.graphics.painter", "Painter")
-private val ComposableAnnotation = ClassName("androidx.compose.runtime", "Composable")
-private val PainterResource = MemberName("androidx.compose.ui.res", "painterResource")
-private val DelegatesClass = ClassName("kotlin.properties", "Delegates")
-private val SingletonMethod = MemberName("net.skyscanner.backpack.compose.utils", "singleton")
-private val BpkIconClass = ClassName("net.skyscanner.backpack.compose.icon", "BpkIcon")
-
 private fun toCompose(
-  parent: ClassName,
+  namespace: String,
   rClass: ClassName,
   source: BpkIcons,
-  type: BpkIcon.Type,
-): List<PropertySpec> {
-
-  val receiverClass = parent.nestedClass(type.toString())
-
-  return source
-    .filter { type in it.types }
-    .map { icon ->
-      PropertySpec.builder(
-        name = icon.name,
-        type = PainterClass,
-      )
-        .receiver(receiverClass)
-        .getter(
-          FunSpec
-            .getterBuilder()
-            .addAnnotation(ComposableAnnotation)
-            .addStatement("return %M(id = %T.drawable.%N)", PainterResource, rClass, icon.types[type]!!)
-            .build()
-        )
+): TypeSpec =
+  TypeSpec
+    .enumBuilder(namespace)
+    .addProperty("small", Int::class, KModifier.INTERNAL, KModifier.ABSTRACT)
+    .addProperty("large", Int::class, KModifier.INTERNAL, KModifier.ABSTRACT)
+    .addProperty(
+      PropertySpec.builder("autoMirror", Boolean::class, KModifier.INTERNAL, KModifier.OPEN)
+        .initializer("%L", false)
         .build()
-    }
-}
+    )
+    .apply {
+      source.sortedBy { it.name }.forEach { icon ->
 
-private fun toComposeAdaptive(
-  parent: ClassName,
-  rClass: ClassName,
-  source: BpkIcons,
-): List<PropertySpec> {
+        val small = icon.types[BpkIcon.Type.Sm] ?: icon.types[BpkIcon.Type.Lg] ?: error("Invalid icon format! : $icon")
+        val large = icon.types[BpkIcon.Type.Lg] ?: icon.types[BpkIcon.Type.Sm] ?: error("Invalid icon format! : $icon")
 
-  return source
-    .filter { it.types.keys.containsAll(BpkIcon.Type.values().toList()) }
-    .map { icon ->
-      PropertySpec.builder(
-        name = icon.name,
-        type = BpkIconClass,
-      )
-        .receiver(parent)
-        .delegate(
-          CodeBlock
-            .builder()
-            .addStatement("%T.%M(", DelegatesClass, SingletonMethod)
-            .indent()
-            .addStatement("%T(", BpkIconClass)
-            .indent()
-            .addStatement("small = %T.drawable.%N,", rClass, icon.types[BpkIcon.Type.Sm])
-            .addStatement("large = %T.drawable.%N,", rClass, icon.types[BpkIcon.Type.Lg])
-            .addStatement("autoMirror = %L,", icon.autoMirror)
-            .unindent()
-            .addStatement(")")
-            .unindent()
-            .addStatement(")")
-            .build()
+        addEnumConstant(
+          name = icon.name,
+          typeSpec = TypeSpec.anonymousClassBuilder()
+            .addProperty(
+              PropertySpec.builder("small", Int::class, KModifier.OVERRIDE)
+                .initializer("%T.drawable.%N", rClass, small)
+                .build()
+            )
+            .addProperty(
+              PropertySpec.builder("large", Int::class, KModifier.OVERRIDE)
+                .initializer("%T.drawable.%N", rClass, large)
+                .build()
+            )
+            .apply {
+              if (icon.autoMirror) {
+                addProperty(
+                  PropertySpec.builder("autoMirror", Boolean::class, KModifier.OVERRIDE)
+                    .initializer("%L", icon.autoMirror)
+                    .build()
+                )
+              }
+            }
+            .build(),
         )
-        .build()
+      }
     }
-}
+    .build()
