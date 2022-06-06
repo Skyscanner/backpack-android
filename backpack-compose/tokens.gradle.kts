@@ -154,11 +154,6 @@ tasks {
     dependsOn(generateStaticColors, generateSemanticColors)
   }
 
-  val generateTokens by creating {
-    this.group = group
-    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens)
-  }
-
   val generateIcons by creating {
     this.group = group
     project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
@@ -171,6 +166,6 @@ tasks {
 
   val generateEverything by creating {
     this.group = group
-    dependsOn(generateTokens, generateIcons)
+    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateIcons)
   }
 }
