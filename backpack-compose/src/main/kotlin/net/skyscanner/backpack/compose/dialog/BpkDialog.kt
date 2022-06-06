@@ -19,16 +19,16 @@
 package net.skyscanner.backpack.compose.dialog
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.dialog.internal.BpkDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.Dialog
+import net.skyscanner.backpack.compose.tokens.BpkIcon
 
 @Composable
 fun BpkSuccessDialog(
   onDismissRequest: () -> Unit,
-  icon: Painter?,
+  icon: BpkIcon?,
   title: String,
   text: String,
   confirmButton: DialogButton,
@@ -51,7 +51,7 @@ fun BpkSuccessDialog(
 @Composable
 fun BpkSuccessDialog(
   onDismissRequest: () -> Unit,
-  icon: Painter?,
+  icon: BpkIcon?,
   title: String,
   text: String,
   confirmButton: DialogButton,
@@ -76,7 +76,7 @@ fun BpkSuccessDialog(
 @Composable
 fun BpkWarningDialog(
   onDismissRequest: () -> Unit,
-  icon: Painter?,
+  icon: BpkIcon?,
   title: String,
   text: String,
   confirmButton: DialogButton,
@@ -99,7 +99,7 @@ fun BpkWarningDialog(
 @Composable
 fun BpkWarningDialog(
   onDismissRequest: () -> Unit,
-  icon: Painter?,
+  icon: BpkIcon?,
   title: String,
   text: String,
   confirmButton: DialogButton,
@@ -124,7 +124,7 @@ fun BpkWarningDialog(
 @Composable
 fun BpkDestructiveDialog(
   onDismissRequest: () -> Unit,
-  icon: Painter?,
+  icon: BpkIcon?,
   title: String,
   text: String,
   confirmButton: DialogButton,

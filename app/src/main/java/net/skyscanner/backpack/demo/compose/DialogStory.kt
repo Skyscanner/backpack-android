@@ -34,10 +34,7 @@ import net.skyscanner.backpack.compose.dialog.BpkDestructiveDialog
 import net.skyscanner.backpack.compose.dialog.BpkSuccessDialog
 import net.skyscanner.backpack.compose.dialog.BpkWarningDialog
 import net.skyscanner.backpack.compose.dialog.DialogButton
-import net.skyscanner.backpack.compose.icons.BpkIcons
-import net.skyscanner.backpack.compose.icons.lg.AlertAdd
-import net.skyscanner.backpack.compose.icons.lg.Tick
-import net.skyscanner.backpack.compose.icons.lg.Trash
+import net.skyscanner.backpack.compose.tokens.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
@@ -82,7 +79,7 @@ enum class ShownDialog(val buttonText: String) {
 @Composable
 fun SuccessOneButtonDialogExample(onDismiss: () -> Unit = {}) {
   BpkSuccessDialog(
-    icon = BpkIcons.Lg.Tick,
+    icon = BpkIcon.Tick,
     title = stringResource(id = R.string.dialog_title),
     text = stringResource(id = R.string.dialog_text),
     confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
@@ -94,7 +91,7 @@ fun SuccessOneButtonDialogExample(onDismiss: () -> Unit = {}) {
 @Composable
 fun SuccessTwoButtonsDialogExample(onDismiss: () -> Unit = {}) {
   BpkSuccessDialog(
-    icon = BpkIcons.Lg.Tick,
+    icon = BpkIcon.Tick,
     title = stringResource(id = R.string.dialog_title),
     text = stringResource(id = R.string.dialog_text),
     confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
@@ -107,7 +104,7 @@ fun SuccessTwoButtonsDialogExample(onDismiss: () -> Unit = {}) {
 @Composable
 fun SuccessThreeButtonsDialogExample(onDismiss: () -> Unit = {}) {
   BpkSuccessDialog(
-    icon = BpkIcons.Lg.Tick,
+    icon = BpkIcon.Tick,
     title = stringResource(id = R.string.dialog_title),
     text = stringResource(id = R.string.dialog_text),
     confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
@@ -121,7 +118,7 @@ fun SuccessThreeButtonsDialogExample(onDismiss: () -> Unit = {}) {
 @Composable
 fun WarningDialogExample(onDismiss: () -> Unit = {}) {
   BpkWarningDialog(
-    icon = BpkIcons.Lg.AlertAdd,
+    icon = BpkIcon.AlertAdd,
     title = stringResource(id = R.string.dialog_title),
     text = stringResource(id = R.string.dialog_text),
     confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
@@ -135,7 +132,7 @@ fun WarningDialogExample(onDismiss: () -> Unit = {}) {
 @Composable
 fun DestructiveDialogExample(onDismiss: () -> Unit = {}) {
   BpkDestructiveDialog(
-    icon = BpkIcons.Lg.Trash,
+    icon = BpkIcon.Trash,
     title = stringResource(id = R.string.dialog_title),
     text = stringResource(id = R.string.dialog_text),
     confirmButton = DialogButton(stringResource(id = R.string.dialog_delete), onDismiss),

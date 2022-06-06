@@ -23,11 +23,11 @@ import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import net.skyscanner.backpack.compose.button.internal.BpkButtonImpl
 import net.skyscanner.backpack.compose.button.internal.ButtonIcon
 import net.skyscanner.backpack.compose.button.internal.ButtonText
 import net.skyscanner.backpack.compose.button.internal.minHeight
+import net.skyscanner.backpack.compose.tokens.BpkIcon
 
 enum class BpkButtonIconPosition {
   Start,
@@ -50,7 +50,6 @@ enum class BpkButtonType {
   Link,
   LinkOnDark,
 }
-
 
 @Composable
 fun BpkButton(
@@ -77,7 +76,7 @@ fun BpkButton(
 
 @Composable
 fun BpkButton(
-  icon: Painter,
+  icon: BpkIcon,
   contentDescription: String,
   modifier: Modifier = Modifier,
   size: BpkButtonSize = DefaultSize,
@@ -102,7 +101,7 @@ fun BpkButton(
 @Composable
 fun BpkButton(
   text: String,
-  icon: Painter,
+  icon: BpkIcon,
   position: BpkButtonIconPosition,
   modifier: Modifier = Modifier,
   size: BpkButtonSize = DefaultSize,

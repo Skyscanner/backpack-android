@@ -18,17 +18,16 @@
 
 package net.skyscanner.backpack.compose.icon
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import net.skyscanner.backpack.compose.tokens.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.autoMirror
 
@@ -37,11 +36,7 @@ enum class BpkIconSize {
   Large,
 }
 
-data class BpkIcon internal constructor(
-  @DrawableRes internal val small: Int,
-  @DrawableRes internal val large: Int,
-  internal val autoMirror: Boolean,
-)
+val LocalBpkIconSize = staticCompositionLocalOf { BpkIconSize.Small }
 
 @Composable
 fun BpkIcon(
@@ -60,13 +55,6 @@ fun BpkIcon(
       .autoMirror(icon.autoMirror),
   )
 }
-
-@Composable
-fun ProvideIconSize(size: BpkIconSize, content: @Composable () -> Unit) {
-  CompositionLocalProvider(LocalBpkIconSize provides size, content = content)
-}
-
-private val LocalBpkIconSize = staticCompositionLocalOf { BpkIconSize.Small }
 
 private operator fun BpkIcon.get(size: BpkIconSize): Int =
   when (size) {

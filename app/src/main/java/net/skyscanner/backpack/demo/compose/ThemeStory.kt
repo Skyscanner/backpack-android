@@ -29,7 +29,6 @@ import androidx.compose.material.BottomAppBar
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Slider
 import androidx.compose.material.Snackbar
@@ -49,10 +48,10 @@ import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
-import net.skyscanner.backpack.compose.icons.BpkIcons
-import net.skyscanner.backpack.compose.icons.lg.Flight
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
@@ -114,7 +113,7 @@ fun ThemeStory() {
     Slider(modifier = Modifier.width(144.dp), value = sliderValue, onValueChange = { sliderValue = it })
 
     FloatingActionButton(onClick = { }) {
-      Icon(painter = BpkIcons.Lg.Flight, contentDescription = "Flight")
+      BpkIcon(BpkIcon.Flight, contentDescription = "Flight")
     }
 
     ExtendedFloatingActionButton(
