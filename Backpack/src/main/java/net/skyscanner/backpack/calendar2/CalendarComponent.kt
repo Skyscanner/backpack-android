@@ -35,7 +35,7 @@ interface CalendarComponent {
   val state: StateFlow<CalendarState>
 
   /**
-   * The current effects the calendar emmit.
+   * The side effects the calendar emits.
    */
   val effects: SharedFlow<CalendarEffect>
 

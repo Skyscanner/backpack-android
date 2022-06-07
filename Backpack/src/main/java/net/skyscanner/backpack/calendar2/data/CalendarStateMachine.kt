@@ -139,8 +139,8 @@ internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): C
 internal fun CalendarState.dispatchClick(data: CalendarCell.Header): CalendarState {
   if (data.selectWholeMonthLabel.isNullOrEmpty()) return this
   val selection = when (params.selectionMode) {
-    SelectionMode.Disabled -> selection
-    SelectionMode.Single -> selection
+    is SelectionMode.Disabled -> selection
+    is SelectionMode.Single -> selection
     is SelectionMode.Rangeable -> CalendarSelection.Month(month = data.yearMonth)
   }
 

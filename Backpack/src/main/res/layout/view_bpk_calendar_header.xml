@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
+  android:orientation="horizontal"
   android:clipToPadding="false"
   android:clipChildren="false">
 
   <net.skyscanner.backpack.text.BpkText
     android:id="@+id/bpk_calendar_cell_month"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
+    android:layout_weight="1"
     android:accessibilityHeading="true"
     android:gravity="start|center_vertical"
     android:maxLines="1"
@@ -20,9 +23,6 @@
     android:paddingBottom="@dimen/bpkSpacingLg"
     android:singleLine="true"
     android:textColor="@color/bpkTextPrimary"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
     app:textStyle="heading4"
     tools:targetApi="p"
     tools:text="January"
@@ -33,12 +33,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:accessibilityHeading="true"
-    android:layout_margin="@dimen/bpkSpacingBase"
+    android:layout_marginRight="@dimen/bpkSpacingBase"
+    android:layout_gravity="center"
     android:singleLine="true"
     app:buttonType="link"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
     tools:targetApi="p"
     />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

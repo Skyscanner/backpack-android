@@ -80,6 +80,7 @@ data class CalendarParams(
      * A range of dates can be selected.
      */
     object Dates : Rangeable
+
     /**
      * A whole month can be selected, but [Dates] could also be selected if desired.
      *
