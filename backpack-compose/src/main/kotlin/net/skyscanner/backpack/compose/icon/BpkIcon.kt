@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.icon
 
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
@@ -64,6 +65,6 @@ private operator fun BpkIcon.get(size: BpkIconSize): Int =
 
 private fun Modifier.defaultMinSize(size: BpkIconSize): Modifier =
   when (size) {
-    BpkIconSize.Small -> defaultMinSize(BpkSpacing.Base, BpkSpacing.Base)
-    BpkIconSize.Large -> defaultMinSize(BpkSpacing.Lg, BpkSpacing.Lg)
+    BpkIconSize.Small -> requiredSize(BpkSpacing.Base, BpkSpacing.Base)
+    BpkIconSize.Large -> requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
   }
