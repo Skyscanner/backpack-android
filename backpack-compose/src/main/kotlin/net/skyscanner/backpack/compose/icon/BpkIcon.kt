@@ -18,19 +18,38 @@
 
 package net.skyscanner.backpack.compose.icon
 
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import net.skyscanner.backpack.compose.tokens.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.autoMirror
+
+@Immutable
+class BpkIcon internal constructor(
+  val name: String,
+  val autoMirror: Boolean = false,
+  internal val small: Int,
+  internal val large: Int,
+) {
+
+  override fun equals(other: Any?): Boolean =
+    this === other // all the icons are expected to be singletons
+
+  override fun hashCode(): Int =
+    name.hashCode() // all the names are expected to be unique
+
+  override fun toString(): String =
+    name
+
+  companion object // the receiver for static extensions
+}
 
 enum class BpkIconSize {
   Small,
