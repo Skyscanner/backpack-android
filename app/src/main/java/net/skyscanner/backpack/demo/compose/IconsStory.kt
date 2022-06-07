@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -28,6 +29,7 @@ import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,11 +38,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import com.google.accompanist.flowlayout.FlowRow
+import net.skyscanner.backpack.compose.checkbox.BpkCheckbox
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
@@ -61,6 +66,7 @@ fun IconsStoryCompose() {
   ) {
 
     var size by remember { mutableStateOf(BpkIconSize.Small) }
+    var layoutDirection by remember { mutableStateOf(LayoutDirection.Ltr) }
 
     Row(
       horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
@@ -78,6 +84,17 @@ fun IconsStoryCompose() {
         selected = size == BpkIconSize.Large,
         onClick = { size = BpkIconSize.Large },
       )
+
+      BpkCheckbox(
+        text = stringResource(R.string.icons_force_rtl),
+        checked = layoutDirection == LayoutDirection.Rtl,
+        onCheckedChange = {
+          layoutDirection = when {
+            it -> LayoutDirection.Rtl
+            else -> LayoutDirection.Ltr
+          }
+        },
+      )
     }
 
     val context = LocalContext.current
@@ -90,23 +107,32 @@ fun IconsStoryCompose() {
     )
 
     FlowRow(Modifier.verticalScroll(rememberScrollState())) {
-      BpkIcon.values().forEach {
-        BpkIcon(
-          icon = it,
-          contentDescription = null,
-          size = size,
-          modifier = Modifier
-            .border(Dp.Hairline, BpkTheme.colors.line)
-            .clickable {
-              clipboardManager.setText(AnnotatedString(it.name))
-              BpkToast.makeText(
-                context,
-                context.getString(R.string.copied_to_clipboard, it.name),
-                BpkToast.LENGTH_SHORT,
-              ).show()
-            }
-            .requiredSize(BpkSpacing.Lg),
-        )
+      BpkIcon.values().forEach { icon ->
+
+        CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
+
+          Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+              .border(Dp.Hairline, BpkTheme.colors.line)
+              .clickable {
+                clipboardManager.setText(AnnotatedString(icon.name))
+                BpkToast.makeText(
+                  context,
+                  context.getString(R.string.copied_to_clipboard, icon.name),
+                  BpkToast.LENGTH_SHORT,
+                ).show()
+              }
+              .requiredSize(BpkSpacing.Lg)
+          ) {
+
+            BpkIcon(
+              icon = icon,
+              contentDescription = null,
+              size = size,
+            )
+          }
+        }
       }
     }
   }
