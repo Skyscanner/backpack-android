@@ -18,12 +18,6 @@
 
 package net.skyscanner.backpack.compose.flare.internal
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.RoundRect
@@ -33,38 +27,9 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
 import net.skyscanner.backpack.compose.flare.BpkFlareRadius
 import net.skyscanner.backpack.compose.tokens.BpkDimension
-
-@Composable
-internal fun FlareContent(
-  pointerDirection: BpkFlarePointerDirection,
-  insetContent: Boolean,
-  contentAlignment: Alignment,
-  content: @Composable BoxScope.() -> Unit,
-) {
-  val contentPadding = when (insetContent) {
-    true -> FlareHeight.dp
-    false -> 0.dp
-  }
-  Box(
-    modifier = Modifier.padding(
-      top = when (pointerDirection) {
-        BpkFlarePointerDirection.Up -> contentPadding
-        BpkFlarePointerDirection.Down -> 0.dp
-      },
-      bottom = when (pointerDirection) {
-        BpkFlarePointerDirection.Up -> 0.dp
-        BpkFlarePointerDirection.Down -> contentPadding
-      }
-    ),
-    propagateMinConstraints = true,
-    contentAlignment = contentAlignment,
-    content = content,
-  )
-}
 
 internal class FlareShape(
   private val radius: BpkFlareRadius,
@@ -150,4 +115,4 @@ private fun Path.addFlare(
 
 private const val FlareVectorHeight = 53
 private const val FlareVectorWidth = 234
-private const val FlareHeight = 11f
+internal const val FlareHeight = 11f
