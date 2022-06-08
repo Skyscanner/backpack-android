@@ -29,10 +29,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.compose.icons.BpkIcons
-import net.skyscanner.backpack.compose.icons.lg.LongArrowRight
-import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.LongArrowRight
 import net.skyscanner.backpack.demo.compose.rowBackground
 import org.hamcrest.Matchers.isOneOf
 import org.junit.Assume.assumeThat
@@ -46,12 +45,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
 
   private val type: BpkButtonType = flavour.first
   private val size: BpkButtonSize = flavour.second
-
-  private val icon
-    @Composable get() = when (size) {
-      BpkButtonSize.Default -> BpkIcons.Sm.LongArrowRight
-      BpkButtonSize.Large -> BpkIcons.Lg.LongArrowRight
-    }
+  private val icon = BpkIcon.LongArrowRight
 
   @Test
   fun text() {

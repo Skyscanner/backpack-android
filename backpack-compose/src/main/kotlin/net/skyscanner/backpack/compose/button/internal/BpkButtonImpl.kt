@@ -30,7 +30,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
@@ -41,11 +40,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -99,12 +98,12 @@ internal fun BpkButtonImpl(
 
 @Composable
 internal fun ButtonIcon(
-  icon: Painter,
+  icon: BpkIcon,
   contentDescription: String?,
   size: BpkButtonSize,
   modifier: Modifier = Modifier,
 ) {
-  Icon(icon, contentDescription, modifier.requiredSize(size.iconSize))
+  BpkIcon(icon, contentDescription, size = size.iconSize, modifier = modifier)
 }
 
 @Composable
@@ -120,7 +119,7 @@ internal fun ButtonText(text: String, modifier: Modifier = Modifier) {
 @Composable
 internal fun ButtonProgress(size: BpkButtonSize, modifier: Modifier = Modifier) {
   CircularProgressIndicator(
-    modifier = modifier.requiredSize(size.iconSize),
+    modifier = modifier.requiredSize(size.loadingIndicatorSize),
     strokeWidth = 2.dp,
     color = loadingSpinnerColor(),
   )

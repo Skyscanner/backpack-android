@@ -28,6 +28,7 @@ import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
+import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
@@ -384,12 +385,18 @@ object ComponentRegistry {
 
   val TOKENS = mapOf(
     "All Icons" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { IconsStory of IconType.Default },
-        "RTL" story NodeData { IconsStory of IconType.Default with Direction.RTL },
-        "Small" story NodeData { IconsStory of IconType.Small },
-        "Small RTL" story NodeData { IconsStory of IconType.Small with Direction.RTL }
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { IconsStory of IconType.Default },
+            "RTL" story NodeData { IconsStory of IconType.Default with Direction.RTL },
+            "Small" story NodeData { IconsStory of IconType.Small },
+            "Small RTL" story NodeData { IconsStory of IconType.Small with Direction.RTL }
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { IconsStoryCompose() },
       )
     ),
     "Color" story NodeData { ColorStory() },

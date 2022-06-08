@@ -93,6 +93,13 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.material.TriStateCheckbox",
       )
     ),
+    ICON(
+      fullName = "net.skyscanner.backpack.compose.icon.BpkIcon",
+      webName = "icon",
+      componentsToReplace = setOf(
+        "androidx.compose.material.Icon",
+      )
+    ),
     RADIO_BUTTON(
       fullName = "net.skyscanner.backpack.compose.radiobutton.BpkRadioButton",
       webName = "radio-button",
