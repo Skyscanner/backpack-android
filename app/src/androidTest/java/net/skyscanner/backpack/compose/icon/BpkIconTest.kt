@@ -22,7 +22,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.LongArrowLeft
 import org.junit.Before
 import org.junit.Test
@@ -63,7 +63,7 @@ class BpkIconTest : BpkSnapshotTest() {
   fun tinted() {
     assumeVariant(BpkTestVariant.Default)
     composed {
-      BpkIcon(icon = icon, contentDescription = null, tint = BpkColor.Nara)
+      BpkIcon(icon = icon, contentDescription = null, tint = BpkTheme.colors.systemRed)
     }
   }
 
