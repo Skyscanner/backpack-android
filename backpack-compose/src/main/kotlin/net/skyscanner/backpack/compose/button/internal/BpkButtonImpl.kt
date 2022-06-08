@@ -119,7 +119,7 @@ internal fun ButtonText(text: String, modifier: Modifier = Modifier) {
 @Composable
 internal fun ButtonProgress(size: BpkButtonSize, modifier: Modifier = Modifier) {
   CircularProgressIndicator(
-    modifier = modifier.requiredSize(size.boxSize),
+    modifier = modifier.requiredSize(size.loadingIndicatorSize),
     strokeWidth = 2.dp,
     color = loadingSpinnerColor(),
   )

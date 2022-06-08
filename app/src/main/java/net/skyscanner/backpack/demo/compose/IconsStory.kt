@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -36,6 +37,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -115,6 +117,7 @@ fun IconsStoryCompose() {
             contentAlignment = Alignment.Center,
             modifier = Modifier
               .border(Dp.Hairline, BpkTheme.colors.line)
+              .background(if (icon.autoMirror) BpkTheme.colors.systemGreen else Color.Transparent)
               .clickable {
                 clipboardManager.setText(AnnotatedString(icon.name))
                 BpkToast.makeText(

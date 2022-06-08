@@ -23,7 +23,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.compose.tokens.BpkColor
-import net.skyscanner.backpack.compose.tokens.BpkIcon
+import net.skyscanner.backpack.compose.tokens.LongArrowLeft
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
