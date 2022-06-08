@@ -139,9 +139,9 @@ class BpkCalendar private constructor(
     recyclerView: RecyclerView
   ) : RecyclerViewAccessibilityDelegate(recyclerView) {
 
-    override fun onInitializeAccessibilityNodeInfo(host: View?, info: AccessibilityNodeInfoCompat?) {
+    override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfoCompat) {
       super.onInitializeAccessibilityNodeInfo(host, info)
-      info?.setCollectionInfo(null)
+      info.setCollectionInfo(null)
     }
   }
 }

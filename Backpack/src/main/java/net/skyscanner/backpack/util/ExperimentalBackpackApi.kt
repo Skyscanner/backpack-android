@@ -28,7 +28,6 @@ package net.skyscanner.backpack.util
  * or to mark the features which are currently in progress.
  */
 @Suppress("DEPRECATION")
-@Experimental(level = Experimental.Level.ERROR)
 @RequiresOptIn(level = RequiresOptIn.Level.ERROR)
 @Retention(AnnotationRetention.BINARY)
 @Target(
