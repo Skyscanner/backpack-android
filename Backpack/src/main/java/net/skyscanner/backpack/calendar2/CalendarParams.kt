@@ -84,9 +84,9 @@ data class CalendarParams(
     /**
      * A whole month can be selected, but [Dates] could also be selected if desired.
      *
-     * @param wholeMonthSelectionLabel the label for the whole month selection button.
+     * @param selectWholeMonthLabel the label for the whole month selection button.
      */
-    data class Month(val wholeMonthSelectionLabel: String) : Rangeable
+    data class Month(val selectWholeMonthLabel: String) : Rangeable
   }
 }
 
