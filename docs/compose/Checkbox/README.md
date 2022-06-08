@@ -9,7 +9,7 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of a Checkbox:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.checkbox.BpkChecbox
+import net.skyscanner.backpack.compose.checkbox.BpkCheckbox
 
 BpkCheckbox(
   text = "Checkbox text",
@@ -21,7 +21,7 @@ BpkCheckbox(
 Example of a Checkbox with intermediate state:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.checkbox.BpkChecbox
+import net.skyscanner.backpack.compose.checkbox.BpkCheckbox
 
 BpkCheckbox(
   text = "Checkbox text",
@@ -33,7 +33,7 @@ BpkCheckbox(
 Example of a Checkbox with custom content:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.checkbox.BpkChecbox
+import net.skyscanner.backpack.compose.checkbox.BpkCheckbox
 
 BpkCheckbox(
   checked = true,
