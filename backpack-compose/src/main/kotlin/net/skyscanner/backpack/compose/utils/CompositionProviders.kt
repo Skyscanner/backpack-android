@@ -26,9 +26,9 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
 
 @Composable
-internal inline fun BpkToggleableContent(
+internal fun BpkToggleableContent(
   enabled: Boolean,
-  noinline content: @Composable () -> Unit,
+  content: @Composable () -> Unit,
 ) {
 
   val contentColor = when {
