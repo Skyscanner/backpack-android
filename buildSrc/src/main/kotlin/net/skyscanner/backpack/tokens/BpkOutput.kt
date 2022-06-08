@@ -21,6 +21,7 @@ import com.google.common.io.Resources
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import java.io.File
 import java.nio.charset.StandardCharsets
@@ -36,6 +37,24 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
       FileSpec.builder(pkg, typeSpec.name!!)
         .suppressWarningTypes("RedundantVisibilityModifier", "unused")
         .addType(typeSpec)
+        .build()
+        .writeWithCopyright(File(srcDir))
+      return true
+    }
+  }
+
+  data class KotlinExtensionFile(
+    val srcDir: String,
+    val pkg: String,
+    val name: String,
+  ) : BpkOutput<List<PropertySpec>>() {
+
+    override fun invoke(properties: List<PropertySpec>): Boolean {
+      FileSpec.builder(pkg, name)
+        .suppressWarningTypes("RedundantVisibilityModifier", "unused")
+        .apply {
+          properties.forEach { addProperty(it) }
+        }
         .build()
         .writeWithCopyright(File(srcDir))
       return true
