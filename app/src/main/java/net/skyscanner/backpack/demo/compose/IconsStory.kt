@@ -51,8 +51,8 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.radiobutton.BpkRadioButton
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.values
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.toast.BpkToast
 
@@ -107,7 +107,7 @@ fun IconsStoryCompose() {
     )
 
     FlowRow(Modifier.verticalScroll(rememberScrollState())) {
-      BpkIcon.values().forEach { icon ->
+      BpkIcon.values.forEach { icon ->
 
         CompositionLocalProvider(LocalLayoutDirection provides layoutDirection) {
 

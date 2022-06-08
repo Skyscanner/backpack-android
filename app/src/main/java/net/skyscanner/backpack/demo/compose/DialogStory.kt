@@ -34,8 +34,11 @@ import net.skyscanner.backpack.compose.dialog.BpkDestructiveDialog
 import net.skyscanner.backpack.compose.dialog.BpkSuccessDialog
 import net.skyscanner.backpack.compose.dialog.BpkWarningDialog
 import net.skyscanner.backpack.compose.dialog.DialogButton
-import net.skyscanner.backpack.compose.tokens.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.AlertAdd
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.Tick
+import net.skyscanner.backpack.compose.tokens.Trash
 import net.skyscanner.backpack.demo.R
 
 @Composable

@@ -23,7 +23,7 @@ import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.dialog.internal.BpkDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.Dialog
-import net.skyscanner.backpack.compose.tokens.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIcon
 
 @Composable
 fun BpkSuccessDialog(

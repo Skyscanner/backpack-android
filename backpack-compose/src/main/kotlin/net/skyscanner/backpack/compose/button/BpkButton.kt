@@ -27,7 +27,7 @@ import net.skyscanner.backpack.compose.button.internal.BpkButtonImpl
 import net.skyscanner.backpack.compose.button.internal.ButtonIcon
 import net.skyscanner.backpack.compose.button.internal.ButtonText
 import net.skyscanner.backpack.compose.button.internal.minHeight
-import net.skyscanner.backpack.compose.tokens.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIcon
 
 enum class BpkButtonIconPosition {
   Start,

@@ -21,8 +21,8 @@ package net.skyscanner.backpack.compose.dialog.internal
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.dialog.DialogButton
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkColor
-import net.skyscanner.backpack.compose.tokens.BpkIcon
 
 internal object Dialog {
   internal sealed class Icon {
