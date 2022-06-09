@@ -24,6 +24,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -42,7 +44,9 @@ import net.skyscanner.backpack.demo.R
 @Composable
 fun FlareStory() {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = Modifier
+      .padding(BpkSpacing.Base)
+      .verticalScroll(rememberScrollState()),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
@@ -83,7 +87,7 @@ fun RadiusFlareExample(modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun ContentPaddingFlareExample(modifier: Modifier = Modifier) {
-  BpkFlare(modifier, background = BpkTheme.colors.primary, insetContent = true) {
+  BpkFlare(modifier, background = BpkTheme.colors.primary, radius = BpkFlareRadius.Medium, insetContent = true) {
     BpkText(text = stringResource(R.string.stub), color = BpkTheme.colors.background)
   }
 }
