@@ -23,8 +23,8 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar2.CellStatusStyle
-import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.calendar2.data.CalendarCell
+import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.calendar2.view.CalendarDayLabelContentColor
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionBackground
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionContentColor
@@ -34,8 +34,8 @@ import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarCellDayHolder(
-    parent: ViewGroup,
-    output: Consumer<CalendarInteraction>,
+  parent: ViewGroup,
+  output: Consumer<CalendarInteraction>,
 ) : ItemHolder<CalendarCell.Day>(parent, R.layout.view_bpk_calendar_day) {
 
   private val day = findViewById<TextView>(R.id.bpk_calendar_cell_date)

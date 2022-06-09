@@ -24,10 +24,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCells
 import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
+import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.ItemHolder
