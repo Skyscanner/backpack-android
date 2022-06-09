@@ -46,7 +46,7 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_range_is_opened_selection_is_correct() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
       verify {
         assertEquals(CalendarSelection.Dates(start = firstDay.date, end = null), state.selection)
@@ -57,8 +57,8 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_range_is_closed_selection_is_correct() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
 
       verify {
         assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
@@ -69,8 +69,8 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_range_is_withing_the_same_date_selection_is_correct() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
       verify {
         assertEquals(CalendarSelection.Dates(firstDay.date, firstDay.date), state.selection)
@@ -81,9 +81,9 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_range_is_closing_before_start_a_new_range_is_created() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
       verify {
         assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
       }
@@ -93,10 +93,10 @@ class CalendarRangeSelectionTests {
   @Test
   fun range_can_be_reselected() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
       verify {
         assertEquals(CalendarSelection.Dates(firstDay.date, firstDay.date), state.selection)
       }
@@ -109,8 +109,8 @@ class CalendarRangeSelectionTests {
       rangeSelection.range.start.plusDays(1) to CellInfo(disabled = true),
     )
     testCalendarWith(rangeSelection.copy(cellsInfo = disabledDates)) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
 
       verify {
         for (i in rangeOf(firstDay, lastDay)) {
@@ -130,8 +130,8 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_range_is_withing_the_same_date_cells_have_correct_state() {
     testCalendarWith(rangeSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
       verify {
         assertEquals(CalendarCell.Selection.Double, firstDay.selection)
@@ -146,7 +146,7 @@ class CalendarRangeSelectionTests {
     )
 
     testCalendarWith(rangeSelection.copy(cellsInfo = disabledDates)) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
       verify {
         assertTrue(state.selection is CalendarSelection.None)
@@ -157,7 +157,7 @@ class CalendarRangeSelectionTests {
   @Test
   fun when_select_whole_month_is_withing_the_same_date_selection_is_correct() {
     testCalendarWith(monthSelection) {
-      stateMachine.onClick(CalendarAction.CalendarHeaderAction(header))
+      stateMachine.onClick(CalendarInteraction.SelectMonthClicked(header))
       verify {
         assertEquals(CalendarSelection.Month(header.yearMonth), state.selection)
       }
@@ -167,8 +167,8 @@ class CalendarRangeSelectionTests {
   @Test
   fun given_whole_month_is_selected_and_a_range_selection_is_made_on_same_date_then_correct_state_should_return() {
     testCalendarWith(monthSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
       verify {
         assertEquals(CalendarCell.Selection.Double, firstDay.selection)
@@ -179,9 +179,9 @@ class CalendarRangeSelectionTests {
   @Test
   fun given_whole_month_is_selected_and_a_range_selection_is_made_selection_then_correct_state_should_return() {
     testCalendarWith(monthSelection) {
-      stateMachine.onClick(CalendarAction.CalendarHeaderAction(header))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
+      stateMachine.onClick(CalendarInteraction.SelectMonthClicked(header))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
 
       verify {
         assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)

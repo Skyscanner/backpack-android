@@ -32,7 +32,7 @@ import java.util.Locale
 
 internal interface CalendarStateMachine : CalendarComponent, StateMachine<CalendarState, CalendarEffect> {
 
-  fun onClick(calendarAction: CalendarAction)
+  fun onClick(calendarInteraction: CalendarInteraction)
   fun onLocaleChanged(locale: Locale)
 }
 
@@ -52,9 +52,9 @@ internal fun CalendarStateMachine(
       }
     }
 
-    override fun onClick(calendarAction: CalendarAction) = when (calendarAction) {
-      is CalendarAction.CalendarDayAction -> onCalendarDayCellClick(calendarAction.day)
-      is CalendarAction.CalendarHeaderAction -> onCalendarHeaderCellClick(calendarAction.header)
+    override fun onClick(calendarInteraction: CalendarInteraction) = when (calendarInteraction) {
+      is CalendarInteraction.DateClicked -> onCalendarDayCellClick(calendarInteraction.day)
+      is CalendarInteraction.SelectMonthClicked -> onCalendarHeaderCellClick(calendarInteraction.header)
     }
 
     private fun onCalendarHeaderCellClick(header: CalendarCell.Header) {

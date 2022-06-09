@@ -40,7 +40,7 @@ class CalendarSingleSelectionTests {
   @Test
   fun date_can_be_selected() {
     testCalendarWith(singleSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
       verify {
         assertEquals(CalendarSelection.Single(firstDay.date), state.selection)
@@ -51,7 +51,7 @@ class CalendarSingleSelectionTests {
   @Test
   fun when_selection_is_in_place_cells_have_correct_state() {
     testCalendarWith(singleSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
       verify {
         assertEquals(CalendarCell.Selection.Single, firstDay.selection)
@@ -62,8 +62,8 @@ class CalendarSingleSelectionTests {
   @Test
   fun selected_date_can_be_changed() {
     testCalendarWith(singleSelection) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
-      stateMachine.onClick(CalendarAction.CalendarDayAction(lastDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
 
       verify {
         assertEquals(CalendarSelection.Single(lastDay.date), state.selection)
@@ -78,7 +78,7 @@ class CalendarSingleSelectionTests {
     )
 
     testCalendarWith(singleSelection.copy(cellsInfo = disabledDates)) {
-      stateMachine.onClick(CalendarAction.CalendarDayAction(firstDay))
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
       verify {
         assertTrue(state.selection is CalendarSelection.None)

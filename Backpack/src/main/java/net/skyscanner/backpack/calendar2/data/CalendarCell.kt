@@ -67,9 +67,9 @@ internal sealed class CalendarCell {
   }
 }
 
-internal sealed interface CalendarAction {
-  data class CalendarDayAction(val day: CalendarCell.Day) : CalendarAction
-  data class CalendarHeaderAction(val header: CalendarCell.Header) : CalendarAction
+internal sealed interface CalendarInteraction {
+  data class DateClicked(val day: CalendarCell.Day) : CalendarInteraction
+  data class SelectMonthClicked(val header: CalendarCell.Header) : CalendarInteraction
 }
 
 internal fun CalendarCellDay(

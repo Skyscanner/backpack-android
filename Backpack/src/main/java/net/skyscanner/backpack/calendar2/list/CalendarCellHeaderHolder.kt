@@ -23,14 +23,14 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
-import net.skyscanner.backpack.calendar2.data.CalendarAction
+import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarCellHeaderHolder(
   parent: ViewGroup,
-  private val output: Consumer<CalendarAction>
+  private val output: Consumer<CalendarInteraction>
 ) : ItemHolder<CalendarCell.Header>(parent, R.layout.view_bpk_calendar_header) {
 
   private val month = findViewById<TextView>(R.id.bpk_calendar_cell_month)
@@ -39,7 +39,7 @@ internal class CalendarCellHeaderHolder(
   init {
     btnSelectWholeMonth.setOnClickListener {
       model?.let {
-        CalendarAction.CalendarHeaderAction(it)
+        CalendarInteraction.SelectMonthClicked(it)
       }?.let { header ->
         output.invoke(header)
       }
