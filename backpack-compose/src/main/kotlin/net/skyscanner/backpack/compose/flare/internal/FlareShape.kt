@@ -38,25 +38,16 @@ internal class FlareShape(
 
   override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
     return Outline.Generic(
-      path = drawFlarePath(size, density.density, radius, pointerDirection)
-    )
-  }
-
-  private fun drawFlarePath(
-    size: Size,
-    density: Float,
-    radius: BpkFlareRadius,
-    pointerDirection: BpkFlarePointerDirection,
-  ): Path {
-    return Path().apply {
-      val flareHeight = FlareHeight * density
-      var scale = flareHeight / FlareVectorHeight
-      if (pointerDirection == BpkFlarePointerDirection.Up) {
-        scale *= -1
+      path = Path().apply {
+        val flareHeight = FlareHeight * density.density
+        var scale = flareHeight / FlareVectorHeight
+        if (pointerDirection == BpkFlarePointerDirection.Up) {
+          scale *= -1
+        }
+        addRect(flareHeight, size, density.density, radius, pointerDirection)
+        addFlare(flareHeight, scale, size, pointerDirection)
       }
-      addRect(flareHeight, size, density, radius, pointerDirection)
-      addFlare(flareHeight, scale, size, pointerDirection)
-    }
+    )
   }
 }
 
