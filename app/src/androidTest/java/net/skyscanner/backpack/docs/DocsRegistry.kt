@@ -41,6 +41,7 @@ import org.threeten.bp.YearMonth
 @OptIn(InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
 object DocsRegistry {
   val screenshots = listOf(
+    ComposeScreenshot("All Icons - Compose", "default"),
     ViewScreenshot("Badge", "all"),
     ViewScreenshot("Bar Chart", "default"),
     ViewScreenshot("Bottom Nav", "default"),

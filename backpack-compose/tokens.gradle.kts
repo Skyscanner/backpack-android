@@ -33,6 +33,7 @@ import net.skyscanner.backpack.tokens.transformTo
 tasks {
 
   val tokensPackage = "net.skyscanner.backpack.compose.tokens"
+  val rClass = ClassName("net.skyscanner.backpack.compose", "R")
   val group = "tokens"
   val src = project.projectDir.resolve("src/main/kotlin").path
 
@@ -153,42 +154,18 @@ tasks {
     dependsOn(generateStaticColors, generateSemanticColors)
   }
 
-  val generateTokens by creating {
-    this.group = group
-    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens)
-  }
-
-  val iconsClass = ClassName("net.skyscanner.backpack.compose.icons", "BpkIcons")
-  val iconsPackage = "net.skyscanner.backpack.compose.icons"
-  val rClass = ClassName("net.skyscanner.backpack.compose", "R")
-
-  val generateSmIcons by creating {
-    this.group = group
-    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
-      .readAs(BpkFormat.Folder)
-      .parseAs(BpkIcon.Parser)
-      .transformTo(BpkIcon.Format.ComposeSm(iconsClass, rClass))
-      .saveTo(BpkOutput.KotlinExtensionFiles(src, iconsPackage + ".sm"))
-      .execute()
-  }
-
-  val generateLgIcons by creating {
-    this.group = group
-    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
-      .readAs(BpkFormat.Folder)
-      .parseAs(BpkIcon.Parser)
-      .transformTo(BpkIcon.Format.ComposeLg(iconsClass, rClass))
-      .saveTo(BpkOutput.KotlinExtensionFiles(src, iconsPackage + ".lg"))
-      .execute()
-  }
-
   val generateIcons by creating {
     this.group = group
-    dependsOn(generateSmIcons, generateLgIcons)
+    project.androidFileOf("backpack-common", "src/main/res/drawable-nodpi")
+      .readAs(BpkFormat.Folder)
+      .parseAs(BpkIcon.Parser)
+      .transformTo(BpkIcon.Format.Compose(rClass))
+      .saveTo(BpkOutput.KotlinExtensionFile(src, tokensPackage, "BpkIcon"))
+      .execute()
   }
 
   val generateEverything by creating {
     this.group = group
-    dependsOn(generateTokens, generateIcons)
+    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateIcons)
   }
 }

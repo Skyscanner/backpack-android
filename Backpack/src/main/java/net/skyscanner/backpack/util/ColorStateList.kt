@@ -24,7 +24,7 @@ import androidx.annotation.ColorInt
 internal fun ColorStateList.getColorForState(state: IntArray) =
   getColorForState(state, defaultColor)
 
-internal inline fun colorStateList(
+internal fun colorStateList(
   @ColorInt color: Int,
   @ColorInt pressedColor: Int = color,
   @ColorInt focusedColor: Int = pressedColor,

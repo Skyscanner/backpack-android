@@ -28,7 +28,7 @@ import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
-internal inline fun InteractionSource.animateAsColor(
+internal fun InteractionSource.animateAsColor(
   default: Color,
   pressed: Color = default,
   focused: Color = pressed,
@@ -44,5 +44,5 @@ internal inline fun InteractionSource.animateAsColor(
 }
 
 @Composable
-internal inline fun dynamicColorOf(light: Color, dark: Color): Color =
+internal fun dynamicColorOf(light: Color, dark: Color): Color =
   if (BpkTheme.colors.isLight) light else dark

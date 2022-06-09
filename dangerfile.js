@@ -44,7 +44,7 @@ const composeUsageDetector = includes(
   modifiedFiles,
   'backpack-lint/src/main/java/net/skyscanner/backpack/lint/check/BpkComposeComponentUsageDetector.kt',
 );
-const composePackageFilesCreated = createdFiles.some(filePath => filePath.startsWith('backpack-compose/src/main/java'));
+const composePackageFilesCreated = createdFiles.some(filePath => filePath.startsWith('backpack-compose/src/main/kotlin'));
 if (composePackageFilesCreated && !composeUsageDetector && !declaredTrivial) {
   warn("One or more package files were created, but `BpkComposeComponentUsageDetector.kt` wasn't updated.");
 }

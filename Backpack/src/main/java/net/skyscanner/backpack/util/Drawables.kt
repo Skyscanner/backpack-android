@@ -51,7 +51,7 @@ internal inline fun stateListDrawable(
   block()
 }
 
-internal inline fun rippleDrawable(
+internal fun rippleDrawable(
   context: Context,
   content: Drawable,
   mask: Drawable,
@@ -73,7 +73,7 @@ internal inline fun rippleDrawable(
   )
 }
 
-internal inline fun sizedDrawable(
+internal fun sizedDrawable(
   drawable: Drawable,
   width: Int,
   height: Int,

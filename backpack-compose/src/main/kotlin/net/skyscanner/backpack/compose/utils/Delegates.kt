@@ -1,4 +1,4 @@
-/**
+/*
  * Backpack for Android - Skyscanner's Design System
  *
  * Copyright 2018 Skyscanner Ltd
@@ -16,22 +16,10 @@
  * limitations under the License.
  */
 
-// Auto-generated: do not edit
-@file:Suppress("RedundantVisibilityModifier","unused")
+package net.skyscanner.backpack.compose.utils
 
-package net.skyscanner.backpack.compose.tokens
+import kotlin.properties.Delegates
+import kotlin.properties.ReadOnlyProperty
 
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-
-public object BpkBorderRadius {
-  public val Lg: Dp = 24.dp
-
-  public val Md: Dp = 12.dp
-
-  public val Pill: Dp = 40.dp
-
-  public val Sm: Dp = 8.dp
-
-  public val Xs: Dp = 4.dp
-}
+internal fun <T> Delegates.singleton(value: T): ReadOnlyProperty<Any?, T> =
+  ReadOnlyProperty { _, _ -> value }

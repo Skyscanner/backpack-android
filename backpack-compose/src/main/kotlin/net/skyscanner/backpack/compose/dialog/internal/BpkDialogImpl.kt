@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,6 +37,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
@@ -114,7 +115,7 @@ private fun DialogIcon(icon: Dialog.Icon?) {
         .defaultMinSize(minWidth = IconSize, minHeight = IconSize),
       contentAlignment = Alignment.Center,
     ) {
-      Icon(painter = icon.icon, contentDescription = null, tint = BpkColor.White)
+      BpkIcon(icon = icon.icon, contentDescription = null, tint = BpkColor.White, size = BpkIconSize.Large)
     }
   }
 }

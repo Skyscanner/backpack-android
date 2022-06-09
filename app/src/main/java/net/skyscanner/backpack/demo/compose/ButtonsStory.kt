@@ -44,14 +44,13 @@ import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonIconPosition
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
-import net.skyscanner.backpack.compose.icons.BpkIcons
-import net.skyscanner.backpack.compose.icons.lg.LongArrowRight
-import net.skyscanner.backpack.compose.icons.sm.LongArrowRight
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.LongArrowRight
 import net.skyscanner.backpack.demo.R
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.ExperimentalTime
@@ -122,11 +121,6 @@ private fun ButtonsRow(
   enabled: Boolean,
   modifier: Modifier = Modifier,
 ) {
-  val icon = when (size) {
-    BpkButtonSize.Default -> BpkIcons.Sm.LongArrowRight
-    BpkButtonSize.Large -> BpkIcons.Lg.LongArrowRight
-  }
-
   Row(
     modifier
       .fillMaxWidth()
@@ -149,7 +143,7 @@ private fun ButtonsRow(
     LoadingScope {
       BpkButton(
         text = stringResource(R.string.button),
-        icon = icon,
+        icon = BpkIcon.LongArrowRight,
         position = BpkButtonIconPosition.Start,
         size = size,
         type = type,
@@ -162,7 +156,7 @@ private fun ButtonsRow(
     LoadingScope {
       BpkButton(
         text = stringResource(R.string.button),
-        icon = icon,
+        icon = BpkIcon.LongArrowRight,
         position = BpkButtonIconPosition.End,
         size = size,
         type = type,
@@ -174,7 +168,7 @@ private fun ButtonsRow(
 
     LoadingScope {
       BpkButton(
-        icon = icon,
+        icon = BpkIcon.LongArrowRight,
         contentDescription = stringResource(R.string.button),
         size = size,
         type = type,

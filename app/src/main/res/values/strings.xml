@@ -120,4 +120,8 @@
   <string name="dialog_link_optional">Link optional</string>
   <string name="dialog_delete">Delete</string>
   <string name="dialog_cancel">Cancel</string>
+  <string name="copied_to_clipboard">\'%s\' has been copied to the clipboard</string>
+  <string name="icons_story_guide">Click on icon to copy its name</string>
+  <string name="icons_story_content_description">Icon \'%s\'</string>
+  <string name="icons_force_rtl">Force RTL</string>
 </resources>

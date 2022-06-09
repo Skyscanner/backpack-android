@@ -19,25 +19,25 @@
 package net.skyscanner.backpack.compose.dialog.internal
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.dialog.DialogButton
+import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkColor
 
 internal object Dialog {
   internal sealed class Icon {
-    abstract val icon: Painter
+    abstract val icon: BpkIcon
     abstract val backgroundColor: Color
 
-    data class Success(override val icon: Painter) : Icon() {
+    data class Success(override val icon: BpkIcon) : Icon() {
       override val backgroundColor = BpkColor.Monteverde
     }
 
-    data class Warning(override val icon: Painter) : Icon() {
+    data class Warning(override val icon: BpkIcon) : Icon() {
       override val backgroundColor = BpkColor.Kolkata
     }
 
-    data class Destructive(override val icon: Painter) : Icon() {
+    data class Destructive(override val icon: BpkIcon) : Icon() {
       override val backgroundColor = BpkColor.Panjin
     }
   }
