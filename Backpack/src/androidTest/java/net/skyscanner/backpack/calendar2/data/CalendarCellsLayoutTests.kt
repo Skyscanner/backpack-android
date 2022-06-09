@@ -18,11 +18,13 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.extension.yearMonth
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.threeten.bp.Month
@@ -126,6 +128,31 @@ class CalendarCellsLayoutTests {
     testCalendarWith(CalendarSettings.Default) {
       verify {
         assertEquals("February", (state.cells[43] as CalendarCell.Header).title)
+      }
+    }
+  }
+
+  @Test
+  fun select_whole_month_button_is_shown_when_whole_month_selection_is_enabled() {
+    val label = "Select whole month"
+    val calenderParams = CalendarSettings.Default.copy(
+      selectionMode = CalendarParams.SelectionMode.Month(label),
+    )
+    testCalendarWith(calenderParams) {
+      verify {
+        assertEquals(label, (state.cells[0] as CalendarCell.Header).selectWholeMonthLabel)
+      }
+    }
+  }
+
+  @Test
+  fun select_whole_month_button_is_hidden_when_whole_month_selection_is_disabled() {
+    val calenderParams = CalendarSettings.Default.copy(
+      selectionMode = CalendarParams.SelectionMode.Dates,
+    )
+    testCalendarWith(calenderParams) {
+      verify {
+        assertNull((state.cells[0] as CalendarCell.Header).selectWholeMonthLabel)
       }
     }
   }

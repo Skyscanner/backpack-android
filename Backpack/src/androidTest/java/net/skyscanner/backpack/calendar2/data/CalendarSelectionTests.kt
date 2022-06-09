@@ -45,7 +45,7 @@ class CalendarSelectionTests {
       selectionMode = CalendarParams.SelectionMode.Disabled,
     )
     testCalendarWith(disabledDates) {
-      stateMachine.onClick(firstDay)
+      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
       verify {
         assertTrue(state.selection is CalendarSelection.None)

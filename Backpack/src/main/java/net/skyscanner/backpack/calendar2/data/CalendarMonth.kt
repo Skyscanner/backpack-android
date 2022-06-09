@@ -43,6 +43,7 @@ internal inline fun CalendarMonth(
   monthsFormatter: SimpleDateFormat,
   weekFields: WeekFields,
   selection: CalendarSelection,
+  selectWholeMonthLabel: String?,
   day: (YearMonth, LocalDate) -> CalendarCell.Day,
 ): CalendarMonth {
 
@@ -50,9 +51,12 @@ internal inline fun CalendarMonth(
 
   val prevMonth = yearMonth.prevMonth()
   val nextMonth = yearMonth.nextMonth()
-
   val cells = mutableListOf<CalendarCell>()
-  cells += CalendarCell.Header(title = MonthTitle(yearMonth, monthsFormatter, locale), yearMonth = yearMonth)
+  cells += CalendarCell.Header(
+    title = MonthTitle(yearMonth, monthsFormatter, locale),
+    yearMonth = yearMonth,
+    selectWholeMonthLabel = selectWholeMonthLabel,
+  )
 
   var currentDayOfWeek = weekFields.firstDayOfWeek
   val selectSpacingBefore = prevMonth.lastDay() in selection && firstDay in selection

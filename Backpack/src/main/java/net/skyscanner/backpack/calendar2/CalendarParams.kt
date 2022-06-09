@@ -59,23 +59,34 @@ data class CalendarParams(
   /**
    * Describes the selection behaviour
    */
-  enum class SelectionMode {
-
+  sealed interface SelectionMode {
     /**
      * No date can be selected
      */
-    Disabled,
+    object Disabled : SelectionMode
 
     /**
      * Only a single, non-disabled date can be selected.
      */
-    Single,
+    object Single : SelectionMode
 
     /**
-     * Only a range can be selected.
+     * Describes the rangeable selection behaviour
      * The boundaries of range are always non-disabled dates, but there could be disabled dates within the range.
      */
-    Range,
+    sealed interface Rangeable : SelectionMode
+
+    /**
+     * A range of dates can be selected.
+     */
+    object Dates : Rangeable
+
+    /**
+     * A whole month can be selected, but [Dates] could also be selected if desired.
+     *
+     * @param selectWholeMonthLabel the label for the whole month selection button.
+     */
+    data class Month(val selectWholeMonthLabel: String) : Rangeable
   }
 }
 

@@ -35,6 +35,8 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.ShownDialog
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
+import org.threeten.bp.Month
+import org.threeten.bp.YearMonth
 
 @OptIn(InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
 object DocsRegistry {
@@ -56,6 +58,7 @@ object DocsRegistry {
     ViewScreenshot("Calendar 2 - Pre-selected range", "range") { setupCalendar2() },
     ViewScreenshot("Calendar 2 - Day colours", "colored") { setupCalendar2() },
     ViewScreenshot("Calendar 2 - Day labels", "labeled") { setupCalendar2() },
+    ViewScreenshot("Calendar 2 - Selection Whole Month", "month") { setupWholeMonthCalendar() },
     ViewScreenshot("Card - View - Default", "default"),
     ViewScreenshot("Card - View - Without padding", "without-padding"),
     ViewScreenshot("Card - View - Selected", "selected"),
@@ -157,10 +160,20 @@ private fun setupCalendar2() {
     .check { view, _ ->
       view as net.skyscanner.backpack.calendar2.BpkCalendar
       view.setSelection(
-        CalendarSelection.Range(
+        CalendarSelection.Dates(
           view.state.value.params.now.plusDays(5),
           view.state.value.params.now.plusDays(10)
         )
+      )
+    }
+}
+
+private fun setupWholeMonthCalendar() {
+  Espresso.onView(ViewMatchers.withId(R.id.calendar2))
+    .check { view, _ ->
+      view as net.skyscanner.backpack.calendar2.BpkCalendar
+      view.setSelection(
+        CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
       )
     }
 }
