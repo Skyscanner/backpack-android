@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.flare.internal.FlareHeight
 import net.skyscanner.backpack.compose.flare.internal.FlareShape
+import net.skyscanner.backpack.compose.flare.internal.RoundedRectShape
 
 enum class BpkFlareRadius {
   None,
@@ -53,11 +54,12 @@ fun BpkFlare(
   content: @Composable BoxScope.() -> Unit,
 ) {
   val contentPadding = when (insetContent) {
-    true -> FlareHeight.dp
+    true -> FlareHeight
     false -> 0.dp
   }
   Box(
     modifier = modifier
+      .clip(RoundedRectShape(radius)) // this exists to improve anti-aliasing on < sdk 30. remove when dropping support
       .clip(FlareShape(radius, pointerDirection))
       .background(background)
       .padding(

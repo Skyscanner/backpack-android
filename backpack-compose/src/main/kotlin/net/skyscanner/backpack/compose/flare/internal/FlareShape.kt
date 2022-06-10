@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
 import net.skyscanner.backpack.compose.flare.BpkFlareRadius
 import net.skyscanner.backpack.compose.tokens.BpkDimension
@@ -39,12 +40,12 @@ internal class FlareShape(
   override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
     return Outline.Generic(
       path = Path().apply {
-        val flareHeight = FlareHeight * density.density
+        val flareHeight = with(density) { FlareHeight.toPx() }
         var scale = flareHeight / FlareVectorHeight
         if (pointerDirection == BpkFlarePointerDirection.Up) {
           scale *= -1
         }
-        addRect(flareHeight, size, density.density, radius, pointerDirection)
+        addRect(flareHeight, size, density, radius, pointerDirection)
         addFlare(flareHeight, scale, size, pointerDirection)
       }
     )
@@ -54,18 +55,18 @@ internal class FlareShape(
 private fun Path.addRect(
   flareHeight: Float,
   size: Size,
-  density: Float,
+  density: Density,
   radius: BpkFlareRadius,
   pointerDirection: BpkFlarePointerDirection,
 ) {
   val borderRect = when (pointerDirection) {
-    BpkFlarePointerDirection.Up -> Rect(0f, flareHeight, size.width, size.height)
-    BpkFlarePointerDirection.Down -> Rect(0f, 0f, size.width, size.height - flareHeight)
+    BpkFlarePointerDirection.Up -> Rect(0f, flareHeight, size.width, size.height + RectOffset)
+    BpkFlarePointerDirection.Down -> Rect(0f, -RectOffset, size.width, size.height - flareHeight)
   }
   when (radius) {
     BpkFlareRadius.None -> addRect(borderRect)
     BpkFlareRadius.Medium -> {
-      val cornerRadius = BpkDimension.BorderRadius.Md.value * density
+      val cornerRadius = with(density) { BpkDimension.BorderRadius.Md.toPx() }
       addRoundRect(RoundRect(borderRect, CornerRadius(cornerRadius, cornerRadius)))
     }
   }
@@ -106,4 +107,5 @@ private fun Path.addFlare(
 
 private const val FlareVectorHeight = 53
 private const val FlareVectorWidth = 234
-internal const val FlareHeight = 11f
+internal val FlareHeight = 11f.dp
+internal const val RectOffset = 10f // this offset exists to improve anti-aliasing on < sdk 30. remove when dropping support
