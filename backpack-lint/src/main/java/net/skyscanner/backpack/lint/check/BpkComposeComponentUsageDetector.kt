@@ -115,6 +115,11 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       webName = "text",
       componentsToReplace = setOf("androidx.compose.material.Text")
     ),
+    SPINNER(
+      fullName = "net.skyscanner.backpack.compose.spinner.BpkSpinner",
+      webName = "spinner",
+      componentsToReplace = setOf("androidx.compose.material.CircularProgressIndicator")
+    ),
     ;
 
     val url: String = "https://backpack.github.io/components/$webName"
