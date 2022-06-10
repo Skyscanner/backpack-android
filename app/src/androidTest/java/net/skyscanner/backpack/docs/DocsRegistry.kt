@@ -116,8 +116,9 @@ object DocsRegistry {
     ViewScreenshot("Text Field - Default", "default"),
     ViewScreenshot("Text Field - With labels", "labels"),
     ViewScreenshot("Text Spans", "default"),
-    ViewScreenshot("Spinner - Default", "default"),
-    ViewScreenshot("Spinner - Small", "small"),
+    ViewScreenshot("Spinner - View - Default", "default"),
+    ViewScreenshot("Spinner - View - Small", "small"),
+    ComposeScreenshot("Spinner - Compose", "default"),
     // Leave toast last as it stays visible in the screen for a while
     ViewScreenshot("Toast", "default") { setupToast() }
   )
