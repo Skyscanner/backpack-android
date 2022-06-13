@@ -18,13 +18,13 @@
 
 package net.skyscanner.backpack.compose.badge
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,35 +57,31 @@ fun BpkBadge(
   modifier: Modifier = Modifier,
   icon: BpkIcon? = null,
 ) {
-  Surface(
+  Row(
     modifier = modifier
-      .requiredHeight(BpkSpacing.Lg),
-    shape = BadgeShape,
-    elevation = 0.dp,
-    color = type.backgroundColor,
-    contentColor = type.contentColor,
+      .requiredHeight(BpkSpacing.Lg)
+      .border(1.dp, type.borderColor, BadgeShape)
+      .background(type.backgroundColor, BadgeShape)
+      .padding(horizontal = BpkSpacing.Md),
+    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+    verticalAlignment = Alignment.CenterVertically,
   ) {
-    Row(
-      modifier = Modifier
-        .border(1.dp, type.borderColor, BadgeShape)
-        .padding(horizontal = BpkSpacing.Md),
-      horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
-      verticalAlignment = Alignment.CenterVertically,
-    ) {
-      if (icon != null) {
-        BpkIcon(
-          icon = icon,
-          contentDescription = null,
-          size = BpkIconSize.Small,
-        )
-      }
-      BpkText(
-        text = text,
-        style = BpkTheme.typography.caption,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
+    val contentColor = type.contentColor
+    if (icon != null) {
+      BpkIcon(
+        icon = icon,
+        contentDescription = null,
+        size = BpkIconSize.Small,
+        tint = contentColor,
       )
     }
+    BpkText(
+      text = text,
+      color = contentColor,
+      style = BpkTheme.typography.caption,
+      maxLines = 1,
+      overflow = TextOverflow.Ellipsis,
+    )
   }
 }
 
