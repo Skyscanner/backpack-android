@@ -38,6 +38,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 enum class BpkBadgeType {
   Normal,
@@ -89,9 +90,10 @@ fun BpkBadge(
 }
 
 private val BpkBadgeType.contentColor: Color
+  @Composable
   get() = when (this) {
-    BpkBadgeType.Normal -> BpkColor.SkyGray
-    BpkBadgeType.Strong -> BpkColor.White
+    BpkBadgeType.Normal -> dynamicColorOf(BpkColor.SkyGray, BpkColor.White)
+    BpkBadgeType.Strong -> dynamicColorOf(BpkColor.White, BpkColor.SkyGray)
     BpkBadgeType.Success -> BpkColor.SkyGray
     BpkBadgeType.Warning -> BpkColor.SkyGray
     BpkBadgeType.Destructive -> BpkColor.White
@@ -100,9 +102,10 @@ private val BpkBadgeType.contentColor: Color
   }
 
 private val BpkBadgeType.backgroundColor: Color
+  @Composable
   get() = when (this) {
-    BpkBadgeType.Normal -> BpkColor.SkyGrayTint07
-    BpkBadgeType.Strong -> BpkColor.SkyGray
+    BpkBadgeType.Normal -> dynamicColorOf(BpkColor.SkyGrayTint07, BpkColor.BlackTint02)
+    BpkBadgeType.Strong -> dynamicColorOf(BpkColor.SkyGray, BpkColor.White)
     BpkBadgeType.Success -> BpkColor.Glencoe
     BpkBadgeType.Warning -> BpkColor.Erfoud
     BpkBadgeType.Destructive -> BpkColor.Panjin
@@ -113,7 +116,7 @@ private val BpkBadgeType.backgroundColor: Color
 private val BpkBadgeType.borderColor: Color
   get() = when (this) {
     BpkBadgeType.Outline -> BpkColor.White
-    else -> backgroundColor
+    else -> Color.Transparent
   }
 
 private val BadgeShape = RoundedCornerShape(BpkBorderRadius.Xs)
