@@ -71,6 +71,14 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
     val webName: String,
     val componentsToReplace: Set<String>,
   ) {
+    BADGE(
+      fullName = "net.skyscanner.backpack.compose.badge.BpkBadge",
+      webName = "badge",
+      componentsToReplace = setOf(
+        "androidx.compose.material.Badge",
+        "androidx.compose.material.BadgedBox",
+      )
+    ),
     BUTTON(
       fullName = "net.skyscanner.backpack.compose.button.BpkButton",
       webName = "button",
