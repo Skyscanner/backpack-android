@@ -18,12 +18,14 @@
 
 package net.skyscanner.backpack.compose.flare.internal
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.RoundRect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
@@ -37,8 +39,8 @@ internal class FlareShape(
   private val pointerDirection: BpkFlarePointerDirection,
 ) : Shape {
 
-  override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
-    return Outline.Generic(
+  override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline =
+    Outline.Generic(
       path = Path().apply {
         val flareHeight = with(density) { FlareHeight.toPx() }
         var scale = flareHeight / FlareVectorHeight
@@ -49,7 +51,6 @@ internal class FlareShape(
         addFlare(flareHeight, scale, size, pointerDirection)
       }
     )
-  }
 }
 
 private fun Path.addRect(
@@ -105,7 +106,18 @@ private fun Path.addFlare(
   lineTo(flareX + 238f * scale, flareY + 0f * scale)
 }
 
+internal fun FlareRectShape(radius: BpkFlareRadius): Shape = when (radius) {
+  BpkFlareRadius.None -> RectangleShape
+  BpkFlareRadius.Medium -> RoundedCornerShape(BpkDimension.BorderRadius.Md)
+}
+
+internal fun FlareContentPadding(insetContent: Boolean = false) =
+  when (insetContent) {
+    true -> FlareHeight
+    false -> 0.dp
+  }
+
 private const val FlareVectorHeight = 53
 private const val FlareVectorWidth = 234
-internal val FlareHeight = 11f.dp
-internal const val RectOffset = 10f // this offset exists to improve anti-aliasing on < sdk 30. remove when dropping support
+private val FlareHeight = 11.dp
+private const val RectOffset = 10f // this offset exists to improve anti-aliasing on < sdk 30. remove when dropping support
