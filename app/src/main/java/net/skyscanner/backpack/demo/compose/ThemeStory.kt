@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.LinearProgressIndicator
@@ -49,6 +48,8 @@ import com.google.accompanist.flowlayout.FlowRow
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.spinner.BpkSpinner
+import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -105,7 +106,7 @@ fun ThemeStory() {
       )
     }
 
-    CircularProgressIndicator()
+    BpkSpinner(size = BpkSpinnerSize.Medium)
 
     LinearProgressIndicator(Modifier.width(144.dp))
 
