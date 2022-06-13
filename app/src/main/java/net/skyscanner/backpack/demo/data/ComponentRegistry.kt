@@ -70,6 +70,7 @@ import net.skyscanner.backpack.demo.stories.SubStory
 import net.skyscanner.backpack.demo.stories.TabStory
 import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
+import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
 
 interface RegistryItem {
@@ -227,13 +228,19 @@ object ComponentRegistry {
       )
     ),
     "Chip" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { ChipStory of R.layout.fragment_chip },
-        "Outline" story NodeData { ChipStory of R.layout.fragment_outline_chip },
-        "Custom" story NodeData { ChipStory of R.layout.fragment_chip_custom },
-        "With icon" story NodeData { ChipStory of R.layout.fragment_chip_with_icon },
-        "With icon RTL" story NodeData { ChipStory of R.layout.fragment_chip_with_icon with Direction.RTL }
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { ChipStory of R.layout.fragment_chip },
+            "Outline" story NodeData { ChipStory of R.layout.fragment_outline_chip },
+            "Custom" story NodeData { ChipStory of R.layout.fragment_chip_custom },
+            "With icon" story NodeData { ChipStory of R.layout.fragment_chip_with_icon },
+            "With icon RTL" story NodeData { ChipStory of R.layout.fragment_chip_with_icon with Direction.RTL }
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { ComposeChipStory() },
       )
     ),
     "Checkbox" story NodeData(
