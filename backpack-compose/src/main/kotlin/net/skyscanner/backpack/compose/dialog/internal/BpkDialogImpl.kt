@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.dialog.internal
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,6 +38,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.flare.BpkFlare
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -61,18 +63,49 @@ internal fun BpkDialogImpl(
         shape = BpkTheme.shapes.medium,
         color = BpkTheme.colors.backgroundElevation01,
       ) {
-        Column(
-          modifier = Modifier
-            .padding(top = DialogPaddingTop, bottom = BpkDimension.Spacing.Lg)
-            .padding(horizontal = BpkDimension.Spacing.Lg),
-          horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-          DialogTextContent(title = title, text = text)
-          DialogButtons(buttons)
-        }
+        DialogContent(
+          title = title,
+          text = text,
+          buttons = buttons,
+          modifier = Modifier.padding(top = BpkDimension.Spacing.Base),
+        )
       }
       DialogIcon(icon = icon)
     }
+  }
+}
+
+@Composable
+internal fun BpkFlareDialogImpl(
+  onDismissRequest: () -> Unit,
+  title: String,
+  text: String,
+  buttons: List<Dialog.Button>,
+  properties: DialogProperties,
+  flareContent: @Composable BoxScope.() -> Unit,
+) {
+  Dialog(onDismissRequest = onDismissRequest, properties = properties) {
+    Surface(
+      modifier = Modifier.padding(top = IconPadding),
+      shape = BpkTheme.shapes.medium,
+      color = BpkTheme.colors.backgroundElevation01,
+    ) {
+      Column {
+        BpkFlare(content = flareContent)
+        DialogContent(title = title, text = text, buttons = buttons)
+      }
+    }
+  }
+}
+
+@Composable
+private fun DialogContent(title: String, text: String, buttons: List<Dialog.Button>, modifier: Modifier = Modifier) {
+  Column(
+    modifier = modifier.padding(BpkDimension.Spacing.Lg),
+    horizontalAlignment = Alignment.CenterHorizontally,
+  ) {
+    DialogTextContent(title = title, text = text)
+    DialogButtons(buttons)
   }
 }
 
@@ -123,4 +156,3 @@ private fun DialogIcon(icon: Dialog.Icon?) {
 private val IconSize = 64.dp
 private val IconBorder = 4.dp
 private val IconPadding = 40.dp
-private val DialogPaddingTop = 40.dp
