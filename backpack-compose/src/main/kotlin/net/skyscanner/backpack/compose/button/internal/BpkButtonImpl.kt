@@ -25,11 +25,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
@@ -41,10 +39,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.spinner.BpkSpinner
+import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
+import net.skyscanner.backpack.compose.spinner.BpkSpinnerStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -87,7 +87,13 @@ internal fun BpkButtonImpl(
             )
 
             if (loading) {
-              ButtonProgress(size, Modifier.align(Alignment.Center))
+              BpkSpinner(
+                style = BpkSpinnerStyle.Disabled,
+                size = when (size) {
+                  BpkButtonSize.Default -> BpkSpinnerSize.Small
+                  BpkButtonSize.Large -> BpkSpinnerSize.Medium
+                },
+              )
             }
           }
         }
@@ -116,15 +122,6 @@ internal fun ButtonText(text: String, modifier: Modifier = Modifier) {
   )
 }
 
-@Composable
-internal fun ButtonProgress(size: BpkButtonSize, modifier: Modifier = Modifier) {
-  CircularProgressIndicator(
-    modifier = modifier.requiredSize(size.loadingIndicatorSize),
-    strokeWidth = 2.dp,
-    color = loadingSpinnerColor(),
-  )
-}
-
 private class ButtonRippleTheme(
   private val color: Color = Color.Black,
 ) : RippleTheme {
@@ -138,7 +135,6 @@ private class ButtonRippleTheme(
   @Composable
   override fun rippleAlpha(): RippleAlpha =
     alpha
-
 }
 
 private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
