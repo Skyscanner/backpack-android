@@ -88,6 +88,7 @@ internal fun BpkButtonImpl(
 
             if (loading) {
               BpkSpinner(
+                modifier = Modifier.align(Alignment.Center),
                 style = BpkSpinnerStyle.Disabled,
                 size = when (size) {
                   BpkButtonSize.Default -> BpkSpinnerSize.Small
