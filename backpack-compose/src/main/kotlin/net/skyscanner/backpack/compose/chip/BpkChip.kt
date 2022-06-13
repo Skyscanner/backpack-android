@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.chip
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -29,8 +30,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -67,6 +70,7 @@ fun BpkChip(
   style: BpkChipStyle = BpkChipStyle.Default,
   icon: BpkIcon? = null,
   type: BpkChipType = BpkChipType.Option,
+  onClick: (BpkChipState) -> Unit = {},
 ) {
 
   val backgroundColor by animateColorAsState(targetValue = state.backgroundColor.takeOrElse { style.backgroundColor })
@@ -77,7 +81,19 @@ fun BpkChip(
     horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
     modifier = modifier
       .height(BpkSpacing.Xl)
-      .background(backgroundColor, ChipShape)
+      .clip(ChipShape)
+      .background(backgroundColor)
+      .clickable(
+        enabled = state != BpkChipState.Disabled,
+        role = Role.Checkbox,
+        onClick = {
+          when (state) {
+            BpkChipState.Off -> onClick(BpkChipState.On)
+            BpkChipState.On -> onClick(BpkChipState.Off)
+            BpkChipState.Disabled -> Unit // do nothing
+          }
+        }
+      )
       .padding(horizontal = BpkSpacing.Base),
   ) {
 

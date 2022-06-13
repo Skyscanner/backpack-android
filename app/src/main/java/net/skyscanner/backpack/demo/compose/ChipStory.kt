@@ -119,6 +119,7 @@ private fun ChipSample(
     style = style,
     icon = icon,
     type = type,
+    onClick = { state = it },
   )
 }
 
