@@ -20,11 +20,11 @@ package net.skyscanner.backpack.compose.chip
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,7 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -83,9 +82,9 @@ fun BpkChip(
       .height(BpkSpacing.Xl)
       .clip(ChipShape)
       .background(backgroundColor)
-      .clickable(
+      .selectable(
+        selected = state == BpkChipState.On,
         enabled = state != BpkChipState.Disabled,
-        role = Role.Checkbox,
         onClick = {
           when (state) {
             BpkChipState.Off -> onClick(BpkChipState.On)
