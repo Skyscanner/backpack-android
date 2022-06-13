@@ -53,7 +53,8 @@ enum class BpkChipStyle {
   OnDark,
 }
 
-enum class BpkChipAction {
+enum class BpkChipType {
+  Option,
   Select,
   Dismiss,
 }
@@ -65,7 +66,7 @@ fun BpkChip(
   state: BpkChipState = BpkChipState.Off,
   style: BpkChipStyle = BpkChipStyle.Default,
   icon: BpkIcon? = null,
-  action: BpkChipAction? = null,
+  type: BpkChipType = BpkChipType.Option,
 ) {
 
   val backgroundColor by animateColorAsState(targetValue = state.backgroundColor.takeOrElse { style.backgroundColor })
@@ -97,9 +98,10 @@ fun BpkChip(
       overflow = TextOverflow.Ellipsis,
     )
 
-    if (action != null) {
+    val trailingIcon = type.icon
+    if (trailingIcon != null) {
       BpkIcon(
-        icon = action.icon,
+        icon = trailingIcon,
         size = BpkIconSize.Small,
         contentDescription = null,
         tint = contentColor,
@@ -135,10 +137,11 @@ private val BpkChipStyle.contentColor: Color
   @Composable
   get() = dynamicColorOf(BpkColor.SkyGray, BpkColor.White)
 
-private val BpkChipAction.icon: BpkIcon
+private val BpkChipType.icon: BpkIcon?
   get() = when (this) {
-    BpkChipAction.Select -> BpkIcon.Tick
-    BpkChipAction.Dismiss -> BpkIcon.CloseCircle
+    BpkChipType.Option -> null
+    BpkChipType.Select -> BpkIcon.Tick
+    BpkChipType.Dismiss -> BpkIcon.CloseCircle
   }
 
 private val ChipShape = RoundedCornerShape(50)
