@@ -19,18 +19,19 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
@@ -40,45 +41,48 @@ import net.skyscanner.backpack.compose.tokens.TickCircle
 @Composable
 @Preview
 fun BadgeStory() {
-  Row(
-    modifier = Modifier
-      .background(if (BpkTheme.colors.isLight) Color(0xFFEBEBEB) else BpkColor.Black)
-      .padding(BpkSpacing.Base),
-    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
-
-    BadgeColumn { type ->
-      BpkBadge(
-        text = type.toString(),
-        type = type,
-      )
-    }
-
-    BadgeColumn { type ->
-      BpkBadge(
-        text = type.toString(),
-        type = type,
-        icon = when (type) {
-          BpkBadgeType.Warning -> BpkIcon.HelpCircle
-          BpkBadgeType.Destructive -> BpkIcon.CloseCircle
-          else -> BpkIcon.TickCircle
-        }
-      )
+  Column {
+    BpkBadgeType.values().forEach { type ->
+      BadgeRow(type = type)
     }
   }
 }
 
 @Composable
-private fun BadgeColumn(
+private fun BadgeRow(
+  type: BpkBadgeType,
   modifier: Modifier = Modifier,
-  content: @Composable (BpkBadgeType) -> Unit,
 ) {
-  Column(
-    modifier = modifier,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)
+  Row(
+    verticalAlignment = Alignment.CenterVertically,
+    modifier = modifier
+      .fillMaxWidth()
+      .background(
+        when (type) {
+          BpkBadgeType.Outline -> BpkColor.SkyBlue
+          BpkBadgeType.Inverse -> BpkColor.BlackTint01
+          else -> Color.Transparent
+        }
+      )
+      .padding(vertical = BpkSpacing.Sm)
+      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md)
   ) {
-    BpkBadgeType.values().forEach { type ->
-      content(type)
-    }
+
+    BpkBadge(
+      text = type.toString(),
+      type = type,
+      modifier = Modifier.weight(1f).wrapContentWidth(align = Alignment.CenterHorizontally),
+    )
+
+    BpkBadge(
+      text = type.toString(),
+      modifier = Modifier.weight(1f).wrapContentWidth(align = Alignment.CenterHorizontally),
+      type = type,
+      icon = when (type) {
+        BpkBadgeType.Warning -> BpkIcon.HelpCircle
+        BpkBadgeType.Destructive -> BpkIcon.CloseCircle
+        else -> BpkIcon.TickCircle
+      }
+    )
   }
 }
