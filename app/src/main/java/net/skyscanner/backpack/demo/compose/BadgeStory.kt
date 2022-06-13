@@ -18,16 +18,20 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.HelpCircle
@@ -37,17 +41,20 @@ import net.skyscanner.backpack.compose.tokens.TickCircle
 @Preview
 fun BadgeStory() {
   Row(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = Modifier
+      .background(if (BpkTheme.colors.isLight) Color(0xFFEBEBEB) else BpkColor.Black)
+      .padding(BpkSpacing.Base),
+    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
-    BadgeColumn(Modifier.weight(1f)) { type ->
+    BadgeColumn { type ->
       BpkBadge(
         text = type.toString(),
         type = type,
       )
     }
 
-    BadgeColumn(Modifier.weight(1f)) { type ->
+    BadgeColumn { type ->
       BpkBadge(
         text = type.toString(),
         type = type,
