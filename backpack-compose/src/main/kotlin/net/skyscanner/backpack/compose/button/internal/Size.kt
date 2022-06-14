@@ -36,13 +36,6 @@ internal fun BpkButtonSize.textStyle(): TextStyle =
     BpkButtonSize.Large -> BpkTheme.typography.label1
   }
 
-internal val BpkButtonSize.loadingIndicatorSize: Dp
-  get() =
-    when (this) {
-      BpkButtonSize.Default -> BpkSpacing.Base
-      BpkButtonSize.Large -> BpkSpacing.Lg
-    }
-
 internal val BpkButtonSize.iconSize: BpkIconSize
   get() =
     when (this) {

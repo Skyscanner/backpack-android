@@ -92,7 +92,3 @@ internal fun BpkButtonType.contentColor(interactionSource: InteractionSource): C
     BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkColor.White
     BpkButtonType.Secondary -> dynamicColorOf(BpkColor.SkyBlueShade01, BpkColor.SkyBlueTint01)
   }
-
-@Composable
-internal fun loadingSpinnerColor(): Color =
-  dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)

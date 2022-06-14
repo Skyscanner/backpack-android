@@ -32,6 +32,7 @@ import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
+import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
@@ -326,10 +327,16 @@ object ComponentRegistry {
     "Slider" story NodeData { SliderStory of R.layout.fragment_slider },
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Spinner" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_spinner },
-        "Small" story NodeData { Story of R.layout.fragment_spinner_small }
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_spinner },
+            "Small" story NodeData { Story of R.layout.fragment_spinner_small }
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { SpinnerStory() },
       )
     ),
     "Star Rating" story NodeData(
