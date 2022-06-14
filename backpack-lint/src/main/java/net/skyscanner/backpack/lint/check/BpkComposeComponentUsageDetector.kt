@@ -101,6 +101,11 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.material.TriStateCheckbox",
       )
     ),
+    DIALOG(
+      fullName = "net.skyscanner.backpack.compose.dialog.BpkDialog",
+      webName = "dialog",
+      componentsToReplace = setOf("androidx.compose.ui.window.Dialog", "androidx.compose.material.AlertDialog")
+    ),
     ICON(
       fullName = "net.skyscanner.backpack.compose.icon.BpkIcon",
       webName = "icon",
@@ -122,6 +127,11 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       fullName = "net.skyscanner.backpack.compose.text.BpkText",
       webName = "text",
       componentsToReplace = setOf("androidx.compose.material.Text")
+    ),
+    SPINNER(
+      fullName = "net.skyscanner.backpack.compose.spinner.BpkSpinner",
+      webName = "spinner",
+      componentsToReplace = setOf("androidx.compose.material.CircularProgressIndicator")
     ),
     ;
 

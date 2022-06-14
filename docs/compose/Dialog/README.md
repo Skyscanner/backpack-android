@@ -60,3 +60,25 @@ BpkDestructiveDialog(
   // onDismiss
 }
 ```
+
+Example of a flare dialog
+
+```Kotlin
+import androidx.compose.foundation.Image
+import net.skyscanner.backpack.compose.dialog.BpkDialog
+import net.skyscanner.backpack.compose.icons.BpkIcons
+
+BpkFlareDialog(
+  title = stringResource(id = R.string.dialog_title),
+  text = stringResource(id = R.string.dialog_text),
+  confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation)) { /** onClick **/ },
+  secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip)) { /** onClick **/ },
+  onDismissRequest = { /** onDismiss **/ },
+) {
+  Image(
+    painter = painterResource(R.drawable.flare_image),
+    contentDescription = stringResource(R.string.flare_image_content_description),
+    contentScale = ContentScale.Crop,
+  )
+}
+```

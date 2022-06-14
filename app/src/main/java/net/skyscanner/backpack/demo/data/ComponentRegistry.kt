@@ -27,11 +27,13 @@ import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
+import net.skyscanner.backpack.demo.compose.FlareStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
+import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
@@ -270,15 +272,21 @@ object ComponentRegistry {
       ),
     ),
     "Flare" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_flare },
-        "Pointing up" story NodeData { Story of R.layout.fragment_flare_up },
-        "Pointer offset" story NodeData { Story of R.layout.fragment_flare_pointer_offset },
-        "Pointer offset RTL" story NodeData { Story of R.layout.fragment_flare_pointer_offset with Direction.RTL },
-        "Rounded" story NodeData { Story of R.layout.fragment_flare_rounded },
-        "Inset padding mode" story NodeData { Story of R.layout.fragment_flare_inset_padding_mode }
-      )
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_flare },
+            "Pointing up" story NodeData { Story of R.layout.fragment_flare_up },
+            "Pointer offset" story NodeData { Story of R.layout.fragment_flare_pointer_offset },
+            "Pointer offset RTL" story NodeData { Story of R.layout.fragment_flare_pointer_offset with Direction.RTL },
+            "Rounded" story NodeData { Story of R.layout.fragment_flare_rounded },
+            "Inset padding mode" story NodeData { Story of R.layout.fragment_flare_inset_padding_mode }
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { FlareStory() },
+      ),
     ),
     "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
@@ -333,10 +341,16 @@ object ComponentRegistry {
     "Slider" story NodeData { SliderStory of R.layout.fragment_slider },
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Spinner" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_spinner },
-        "Small" story NodeData { Story of R.layout.fragment_spinner_small }
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_spinner },
+            "Small" story NodeData { Story of R.layout.fragment_spinner_small }
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { SpinnerStory() },
       )
     ),
     "Star Rating" story NodeData(
