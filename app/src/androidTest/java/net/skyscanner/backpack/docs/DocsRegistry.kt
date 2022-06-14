@@ -42,7 +42,8 @@ import org.threeten.bp.YearMonth
 object DocsRegistry {
   val screenshots = listOf(
     ComposeScreenshot("All Icons - Compose", "default"),
-    ViewScreenshot("Badge", "all"),
+    ViewScreenshot("Badge - View", "all"),
+    ComposeScreenshot("Badge - Compose", "default"),
     ViewScreenshot("Bar Chart", "default"),
     ViewScreenshot("Bottom Nav", "default"),
     ViewScreenshot("Bottom Sheet", "default"),

@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.data
 import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
@@ -147,7 +148,13 @@ object ComponentRegistry {
   private const val TAB_TITLE_VIEW = "View"
 
   val COMPONENTS = mapOf(
-    "Badge" story NodeData { Story of R.layout.fragment_badge },
+    "Badge" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_badge },
+        TAB_TITLE_COMPOSE composeStory { BadgeStory() },
+      )
+    ),
     "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
     "Bottom Sheet" story NodeData { Story of R.layout.fragment_bottom_sheet scrollable false },
