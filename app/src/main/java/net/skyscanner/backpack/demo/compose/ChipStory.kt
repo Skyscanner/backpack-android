@@ -18,12 +18,13 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.LocalContentColor
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -61,20 +62,29 @@ private fun ChipsColumn(
   style: BpkChipStyle,
   modifier: Modifier = Modifier,
 ) {
-  Column(
-    modifier = modifier
-      .background(style.storyBackground)
-      .padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+
+  val forceDarkBackground = style == BpkChipStyle.OnDark && BpkTheme.colors.isLight
+
+  Surface(
+    modifier = modifier,
+    color = if (forceDarkBackground) BpkColor.SkyBlueShade02 else Color.Transparent,
+    contentColor = if (forceDarkBackground) BpkColor.White else LocalContentColor.current,
   ) {
 
-    BpkText(text = style.toString(), style = BpkTheme.typography.heading5)
+    Column(
+      modifier =
+      Modifier.padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
+      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    BpkChipType.values().forEach { type ->
-      ChipsRow(style, type, null)
+      BpkText(text = style.toString(), style = BpkTheme.typography.heading5)
+
+      BpkChipType.values().forEach { type ->
+        ChipsRow(style, type, null)
+      }
+
+      ChipsRow(style, BpkChipType.Option, BpkIcon.Deals, text = stringResource(R.string.with_icon))
     }
-
-    ChipsRow(style, BpkChipType.Option, BpkIcon.Deals, text = stringResource(R.string.with_icon))
   }
 }
 
@@ -122,10 +132,3 @@ private fun ChipSample(
     onClick = { state = it },
   )
 }
-
-private val BpkChipStyle.storyBackground: Color
-  @Composable
-  get() = when {
-    this == BpkChipStyle.OnDark && BpkTheme.colors.isLight -> BpkColor.SkyGrayTint07
-    else -> Color.Transparent
-  }
