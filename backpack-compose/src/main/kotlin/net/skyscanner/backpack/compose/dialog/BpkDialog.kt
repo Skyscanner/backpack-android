@@ -18,10 +18,12 @@
 
 package net.skyscanner.backpack.compose.dialog
 
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.dialog.internal.BpkDialogImpl
+import net.skyscanner.backpack.compose.dialog.internal.BpkFlareDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.Dialog
 import net.skyscanner.backpack.compose.icon.BpkIcon
 
@@ -141,6 +143,54 @@ fun BpkDestructiveDialog(
     ),
     onDismissRequest = onDismissRequest,
     properties = properties
+  )
+}
+
+@Composable
+fun BpkFlareDialog(
+  onDismissRequest: () -> Unit,
+  title: String,
+  text: String,
+  confirmButton: DialogButton,
+  secondaryButton: DialogButton? = null,
+  properties: DialogProperties = DialogProperties(),
+  content: @Composable BoxScope.() -> Unit,
+) {
+  BpkFlareDialogImpl(
+    title = title,
+    text = text,
+    buttons = listOfNotNull(
+      Dialog.Button(BpkButtonType.Primary, confirmButton),
+      secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
+    ),
+    onDismissRequest = onDismissRequest,
+    properties = properties,
+    content = content,
+  )
+}
+
+@Composable
+fun BpkFlareDialog(
+  onDismissRequest: () -> Unit,
+  title: String,
+  text: String,
+  confirmButton: DialogButton,
+  secondaryButton: DialogButton,
+  linkButton: DialogButton? = null,
+  properties: DialogProperties = DialogProperties(),
+  content: @Composable BoxScope.() -> Unit,
+) {
+  BpkFlareDialogImpl(
+    title = title,
+    text = text,
+    buttons = listOfNotNull(
+      Dialog.Button(BpkButtonType.Primary, confirmButton),
+      Dialog.Button(BpkButtonType.Secondary, secondaryButton),
+      linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
+    ),
+    onDismissRequest = onDismissRequest,
+    properties = properties,
+    content = content,
   )
 }
 

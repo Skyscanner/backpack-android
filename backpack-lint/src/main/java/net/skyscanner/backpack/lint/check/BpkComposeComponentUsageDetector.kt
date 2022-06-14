@@ -93,6 +93,11 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.material.TriStateCheckbox",
       )
     ),
+    DIALOG(
+      fullName = "net.skyscanner.backpack.compose.dialog.BpkDialog",
+      webName = "dialog",
+      componentsToReplace = setOf("androidx.compose.ui.window.Dialog", "androidx.compose.material.AlertDialog")
+    ),
     ICON(
       fullName = "net.skyscanner.backpack.compose.icon.BpkIcon",
       webName = "icon",
