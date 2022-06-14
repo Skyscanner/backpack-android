@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -27,10 +28,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.dialog.BpkDestructiveDialog
+import net.skyscanner.backpack.compose.dialog.BpkFlareDialog
 import net.skyscanner.backpack.compose.dialog.BpkSuccessDialog
 import net.skyscanner.backpack.compose.dialog.BpkWarningDialog
 import net.skyscanner.backpack.compose.dialog.DialogButton
@@ -56,13 +60,15 @@ fun DialogStory() {
       }
     }
 
+    val onDismiss = { shownDialog = ShownDialog.None }
     when (shownDialog) {
-      ShownDialog.SuccessOneButton -> SuccessOneButtonDialogExample { shownDialog = ShownDialog.None }
-      ShownDialog.SuccessTwoButtons -> SuccessTwoButtonsDialogExample { shownDialog = ShownDialog.None }
-      ShownDialog.SuccessThreeButtons -> SuccessThreeButtonsDialogExample { shownDialog = ShownDialog.None }
-      ShownDialog.Warning -> WarningDialogExample { shownDialog = ShownDialog.None }
-      ShownDialog.Destructive -> DestructiveDialogExample { shownDialog = ShownDialog.None }
-      ShownDialog.NoIcon -> NoIconDialogExample { shownDialog = ShownDialog.None }
+      ShownDialog.SuccessOneButton -> SuccessOneButtonDialogExample(onDismiss)
+      ShownDialog.SuccessTwoButtons -> SuccessTwoButtonsDialogExample(onDismiss)
+      ShownDialog.SuccessThreeButtons -> SuccessThreeButtonsDialogExample(onDismiss)
+      ShownDialog.Warning -> WarningDialogExample(onDismiss)
+      ShownDialog.Destructive -> DestructiveDialogExample(onDismiss)
+      ShownDialog.NoIcon -> NoIconDialogExample(onDismiss)
+      ShownDialog.Flare -> FlareDialogExample(onDismiss)
       ShownDialog.None -> {}
     }
   }
@@ -75,6 +81,7 @@ enum class ShownDialog(val buttonText: String) {
   Warning("Warning"),
   Destructive("Destructive"),
   NoIcon("No Icon"),
+  Flare("Flare"),
   None(""),
 }
 
@@ -155,4 +162,22 @@ fun NoIconDialogExample(onDismiss: () -> Unit = {}) {
     secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
     onDismissRequest = onDismiss,
   )
+}
+
+@Preview
+@Composable
+fun FlareDialogExample(onDismiss: () -> Unit = {}) {
+  BpkFlareDialog(
+    title = stringResource(id = R.string.dialog_title),
+    text = stringResource(id = R.string.dialog_text),
+    confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+    secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+    onDismissRequest = onDismiss,
+  ) {
+    Image(
+      painter = painterResource(R.drawable.canadian_rockies_canada),
+      contentDescription = stringResource(R.string.image_rockies_content_description),
+      contentScale = ContentScale.Crop,
+    )
+  }
 }

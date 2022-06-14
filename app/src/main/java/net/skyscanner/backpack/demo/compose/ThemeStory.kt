@@ -24,7 +24,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.AlertDialog
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.ExtendedFloatingActionButton
 import androidx.compose.material.FloatingActionButton
@@ -40,19 +39,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
-import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Flight
-import net.skyscanner.backpack.demo.R
 
 @Composable
 fun ThemeStory() {
@@ -84,24 +79,6 @@ fun ThemeStory() {
           BpkText(text = "Tab ${i + 1}")
         }
       }
-    }
-
-    var showAlertDialog by remember { mutableStateOf(false) }
-    BpkButton(text = "Alert dialog", onClick = { showAlertDialog = true })
-    if (showAlertDialog) {
-      AlertDialog(
-        onDismissRequest = { showAlertDialog = false },
-        title = { BpkText(text = "Alert dialog") },
-        confirmButton = {
-          BpkButton(text = "OK", onClick = { showAlertDialog = false })
-        },
-        dismissButton = {
-          BpkButton(text = "Cancel", type = BpkButtonType.Secondary, onClick = { showAlertDialog = false })
-        },
-        text = {
-          BpkText(text = stringResource(id = R.string.stub))
-        },
-      )
     }
 
     LinearProgressIndicator(Modifier.width(144.dp))
