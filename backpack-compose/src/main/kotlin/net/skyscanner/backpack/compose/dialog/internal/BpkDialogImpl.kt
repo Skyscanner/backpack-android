@@ -82,7 +82,7 @@ internal fun BpkFlareDialogImpl(
   text: String,
   buttons: List<Dialog.Button>,
   properties: DialogProperties,
-  flareContent: @Composable BoxScope.() -> Unit,
+  content: @Composable BoxScope.() -> Unit,
 ) {
   Dialog(onDismissRequest = onDismissRequest, properties = properties) {
     Surface(
@@ -91,7 +91,7 @@ internal fun BpkFlareDialogImpl(
       color = BpkTheme.colors.backgroundElevation01,
     ) {
       Column {
-        BpkFlare(content = flareContent)
+        BpkFlare(content = content)
         DialogContent(title = title, text = text, buttons = buttons)
       }
     }

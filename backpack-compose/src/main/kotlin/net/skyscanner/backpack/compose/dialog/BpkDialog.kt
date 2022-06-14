@@ -154,7 +154,7 @@ fun BpkFlareDialog(
   confirmButton: DialogButton,
   secondaryButton: DialogButton? = null,
   properties: DialogProperties = DialogProperties(),
-  flareContent: @Composable BoxScope.() -> Unit,
+  content: @Composable BoxScope.() -> Unit,
 ) {
   BpkFlareDialogImpl(
     title = title,
@@ -165,7 +165,7 @@ fun BpkFlareDialog(
     ),
     onDismissRequest = onDismissRequest,
     properties = properties,
-    flareContent = flareContent,
+    content = content,
   )
 }
 
@@ -178,7 +178,7 @@ fun BpkFlareDialog(
   secondaryButton: DialogButton,
   linkButton: DialogButton? = null,
   properties: DialogProperties = DialogProperties(),
-  flareContent: @Composable BoxScope.() -> Unit,
+  content: @Composable BoxScope.() -> Unit,
 ) {
   BpkFlareDialogImpl(
     title = title,
@@ -190,7 +190,7 @@ fun BpkFlareDialog(
     ),
     onDismissRequest = onDismissRequest,
     properties = properties,
-    flareContent = flareContent,
+    content = content,
   )
 }
 

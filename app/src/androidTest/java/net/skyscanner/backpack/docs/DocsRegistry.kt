@@ -80,6 +80,7 @@ object DocsRegistry {
     ComposeScreenshot("Dialog - Compose", "success") { setupComposeDialog(it, ShownDialog.SuccessThreeButtons) },
     ComposeScreenshot("Dialog - Compose", "warning") { setupComposeDialog(it, ShownDialog.Warning) },
     ComposeScreenshot("Dialog - Compose", "destructive") { setupComposeDialog(it, ShownDialog.Destructive) },
+    ComposeScreenshot("Dialog - Compose", "flare") { setupComposeDialog(it, ShownDialog.Flare) },
     ViewScreenshot("Flare - View - Default", "default"),
     ViewScreenshot("Flare - View - Pointing up", "pointing-up"),
     ViewScreenshot("Flare - View - Pointer offset", "pointer-offset"),
