@@ -108,6 +108,7 @@ class BpkDialogTest : BpkSnapshotTest() {
 
   @Test
   fun flare() {
+    setDimensions(height = 700, width = 420)
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     record {
       FlareDialogExample()
