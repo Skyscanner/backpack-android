@@ -48,8 +48,6 @@ import com.google.accompanist.flowlayout.FlowRow
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.spinner.BpkSpinner
-import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -105,8 +103,6 @@ fun ThemeStory() {
         },
       )
     }
-
-    BpkSpinner(size = BpkSpinnerSize.Medium)
 
     LinearProgressIndicator(Modifier.width(144.dp))
 
