@@ -31,6 +31,7 @@ import net.skyscanner.backpack.demo.compose.FlareStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
+import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
@@ -299,14 +300,20 @@ object ComponentRegistry {
       )
     ),
     "Nav Bar" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { NavBarStory of R.layout.fragment_nav_bar },
-        "RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar with Direction.RTL },
-        "With Icon" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon },
-        "With Icon RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon with Direction.RTL },
-        "With Menu" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu },
-        "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL }
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { NavBarStory of R.layout.fragment_nav_bar },
+            "RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar with Direction.RTL },
+            "With Icon" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon },
+            "With Icon RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon with Direction.RTL },
+            "With Menu" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu },
+            "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL }
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { NavigationBarStory() },
       )
     ),
     "Nudger" story NodeData { Story of R.layout.fragment_nudger },

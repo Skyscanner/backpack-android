@@ -125,4 +125,13 @@
   <string name="icons_story_content_description">Icon \'%s\'</string>
   <string name="icons_force_rtl">Force RTL</string>
   <string name="with_icon">With icon</string>
+
+  <string name="navigation_bar_title">Page title</string>
+  <string name="navigation_back">Back</string>
+  <string name="navigation_close">Close</string>
+  <string name="navigation_id_card">ID Card</string>
+  <string name="navigation_accessibility">Accessibility</string>
+  <string name="navigation_account">Account</string>
+  <string name="navigation_text_action">Text</string>
+  <string name="navigation_search">Search</string>
 </resources>
