@@ -50,7 +50,7 @@ Given that you have a compatible environment as stated above you can now set up 
 #### Snapshot testing
 Create an AVD using the following command
 
-> Note: Currently, screenshot testing doesn't work properly on M1 chips.
+> Note: Currently, screenshot testing doesn't work properly on M1 chips. Consider recording screenshots on Intel-based macs.
 
 ```
 # x86
