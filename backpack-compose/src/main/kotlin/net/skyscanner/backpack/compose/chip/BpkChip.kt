@@ -20,7 +20,6 @@ package net.skyscanner.backpack.compose.chip
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -33,8 +32,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.dismiss
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -44,7 +41,6 @@ import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.Tick
-import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 enum class BpkChipStyle {
@@ -93,27 +89,7 @@ fun BpkChip(
       .height(BpkSpacing.Xl)
       .clip(ChipShape)
       .background(backgroundColor)
-      .applyIf(type == BpkChipType.Option || type == BpkChipType.Select) {
-        selectable(
-          enabled = enabled,
-          selected = selected,
-          onClick = { onClick(!selected) }
-        )
-      }
-      .applyIf(type == BpkChipType.Dismiss) {
-        clickable(
-          enabled = enabled,
-          onClick = { onClick(!selected) }
-        )
-          .semantics {
-            if (enabled) {
-              dismiss {
-                onClick(!selected)
-                true
-              }
-            }
-          }
-      }
+      .selectable(selected, enabled) { onClick(!selected) }
       .padding(horizontal = BpkSpacing.Base),
   ) {
 
