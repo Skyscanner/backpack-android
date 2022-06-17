@@ -6,7 +6,7 @@ In this document we describe how to set up this repository for development and t
 
 > Skyscanner employees only
 
-Please ensure you have push rights to this repository, rather than forking the repository for contributions. Follow the "Engineering Contribution" guide in the Backpack space in confluence to get access. 
+Please ensure you have push rights to this repository, rather than forking the repository for contributions. Follow the "Engineering Contribution" guide in the Backpack space in confluence to get access.
 
 ## Environment
 
@@ -14,7 +14,7 @@ We use Node in this project. To manage the language runtime we recommend using [
 
 With `nvm`, use `nvm use` to set the correct Node version in your machine.
 
-To set up the Android environment, install Android Studio. Once installed, use the following commands to set up the Android SDK:
+To set up the Android environment, install Android Studio. Make sure that "Android SDK Command-line Tools (latest)" are installed as well (in Android SDK manager). Once installed, use the following commands to set up the Android SDK:
 
 ```
 echo "export ANDROID_HOME=\"$HOME/Library/Android/sdk\"" >> ~/.bash_profile
@@ -26,8 +26,13 @@ You may also have to install "Android SDK Command Line Tools" from the SDK tools
 
 Install system images
 ```
+# x86
 $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;google_apis;x86"
 $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;x86"
+
+# ARM
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;google_apis;arm64-v8a"
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;arm64-v8a"
 ```
 
 ## Setup
@@ -45,8 +50,15 @@ Given that you have a compatible environment as stated above you can now set up 
 #### Snapshot testing
 Create an AVD using the following command
 
+> Note: Currently, screenshot testing doesn't work properly on M1 chips. Consider recording screenshots on Intel-based macs.
+
 ```
+# x86
 $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
+
+
+# ARM
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;arm64-v8a" --device "Nexus 4" && cp bpk-droid-local-arm.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 ```
 
 Create an SD card for the screenshot tests (Linux)
@@ -109,7 +121,13 @@ implementation 'net.skyscanner.backpack:backpack-android:x.x.x-SNAPSHOT'
 Before running the script install and start the docs emulator.
 
 ```
+# x86
 $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name "bpk-droid-screenshot-avd" --device "pixel" --package "system-images;android-30;google_apis;x86" --tag "google_apis" --abi "x86"
+$ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
+
+
+# ARM
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name "bpk-droid-screenshot-avd" --device "pixel" --package "system-images;android-30;google_apis;arm64-v8a" --tag "google_apis" --abi "arm64-v8a"
 $ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
 ```
 
