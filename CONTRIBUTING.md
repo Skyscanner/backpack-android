@@ -50,6 +50,8 @@ Given that you have a compatible environment as stated above you can now set up 
 #### Snapshot testing
 Create an AVD using the following command
 
+> Note: Currently, screenshot testing doesn't work properly on M1 chips.
+
 ```
 # x86
 $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
