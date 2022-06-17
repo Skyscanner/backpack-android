@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.chip
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -32,7 +33,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.takeOrElse
+import androidx.compose.ui.semantics.dismiss
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
@@ -42,13 +44,8 @@ import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.Tick
+import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
-
-enum class BpkChipState {
-  Off,
-  On,
-  Disabled,
-}
 
 enum class BpkChipStyle {
   Default,
@@ -65,15 +62,29 @@ enum class BpkChipType {
 fun BpkChip(
   text: String,
   modifier: Modifier = Modifier,
-  state: BpkChipState = BpkChipState.Off,
+  selected: Boolean = false,
+  enabled: Boolean = true,
   style: BpkChipStyle = BpkChipStyle.Default,
   icon: BpkIcon? = null,
   type: BpkChipType = BpkChipType.Option,
-  onClick: (BpkChipState) -> Unit = {},
+  onClick: (Boolean) -> Unit = {},
 ) {
 
-  val backgroundColor by animateColorAsState(targetValue = state.backgroundColor.takeOrElse { style.backgroundColor })
-  val contentColor by animateColorAsState(targetValue = state.contentColor.takeOrElse { style.contentColor })
+  val backgroundColor by animateColorAsState(
+    targetValue = when {
+      !enabled -> dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint03)
+      selected -> BpkTheme.colors.primary
+      else -> style.backgroundColor
+    }
+  )
+
+  val contentColor by animateColorAsState(
+    targetValue = when {
+      !enabled -> dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)
+      selected -> BpkTheme.colors.background
+      else -> style.contentColor
+    }
+  )
 
   Row(
     verticalAlignment = Alignment.CenterVertically,
@@ -82,17 +93,27 @@ fun BpkChip(
       .height(BpkSpacing.Xl)
       .clip(ChipShape)
       .background(backgroundColor)
-      .selectable(
-        selected = state == BpkChipState.On,
-        enabled = state != BpkChipState.Disabled,
-        onClick = {
-          when (state) {
-            BpkChipState.Off -> onClick(BpkChipState.On)
-            BpkChipState.On -> onClick(BpkChipState.Off)
-            BpkChipState.Disabled -> Unit // do nothing
+      .applyIf(type == BpkChipType.Option || type == BpkChipType.Select) {
+        selectable(
+          enabled = enabled,
+          selected = selected,
+          onClick = { onClick(!selected) }
+        )
+      }
+      .applyIf(type == BpkChipType.Dismiss) {
+        clickable(
+          enabled = enabled,
+          onClick = { onClick(!selected) }
+        )
+          .semantics {
+            if (enabled) {
+              dismiss {
+                onClick(!selected)
+                true
+              }
+            }
           }
-        }
-      )
+      }
       .padding(horizontal = BpkSpacing.Base),
   ) {
 
@@ -124,22 +145,6 @@ fun BpkChip(
     }
   }
 }
-
-private val BpkChipState.backgroundColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipState.Off -> Color.Unspecified // color from BpkChipStyle will be used instead
-    BpkChipState.On -> BpkTheme.colors.primary
-    BpkChipState.Disabled -> dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint03)
-  }
-
-private val BpkChipState.contentColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipState.Off -> Color.Unspecified // color from BpkChipStyle will be used instead
-    BpkChipState.On -> BpkTheme.colors.background
-    BpkChipState.Disabled -> dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)
-  }
 
 private val BpkChipStyle.backgroundColor: Color
   @Composable

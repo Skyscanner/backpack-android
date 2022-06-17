@@ -36,7 +36,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.chip.BpkChip
-import net.skyscanner.backpack.compose.chip.BpkChipState
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkChipType
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -97,16 +96,33 @@ private fun ChipsRow(
   text: String = type.toString(),
 ) {
   Row(modifier) {
-    BpkChipState.values().forEach { state ->
-      ChipSample(
-        text = text,
-        modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
-        initialState = state,
-        style = style,
-        icon = icon,
-        type = type,
-      )
-    }
+    ChipSample(
+      text = text,
+      modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
+      initialState = false,
+      enabled = true,
+      style = style,
+      icon = icon,
+      type = type,
+    )
+    ChipSample(
+      text = text,
+      modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
+      initialState = true,
+      enabled = true,
+      style = style,
+      icon = icon,
+      type = type,
+    )
+    ChipSample(
+      text = text,
+      modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
+      initialState = false,
+      enabled = false,
+      style = style,
+      icon = icon,
+      type = type,
+    )
   }
 }
 
@@ -114,21 +130,23 @@ private fun ChipsRow(
 private fun ChipSample(
   text: String,
   modifier: Modifier = Modifier,
-  initialState: BpkChipState,
+  initialState: Boolean,
+  enabled: Boolean,
   style: BpkChipStyle,
   icon: BpkIcon?,
   type: BpkChipType,
 ) {
 
-  var state by rememberSaveable { mutableStateOf(initialState) }
+  var selected by rememberSaveable { mutableStateOf(initialState) }
 
   BpkChip(
     text = text,
     modifier = modifier,
-    state = state,
+    selected = selected,
+    enabled = enabled,
     style = style,
     icon = icon,
     type = type,
-    onClick = { state = it },
+    onClick = { selected = it },
   )
 }
