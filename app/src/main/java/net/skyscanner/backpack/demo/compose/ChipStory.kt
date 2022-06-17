@@ -147,6 +147,6 @@ private fun ChipSample(
     style = style,
     icon = icon,
     type = type,
-    onClick = { selected = it },
+    onSelectedChange = { selected = it },
   )
 }

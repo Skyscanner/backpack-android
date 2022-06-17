@@ -41,6 +41,7 @@ import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.Tick
+import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 enum class BpkChipStyle {
@@ -59,11 +60,11 @@ fun BpkChip(
   text: String,
   modifier: Modifier = Modifier,
   selected: Boolean = false,
+  onSelectedChange: ((Boolean) -> Unit)? = null,
   enabled: Boolean = true,
   style: BpkChipStyle = BpkChipStyle.Default,
   icon: BpkIcon? = null,
   type: BpkChipType = BpkChipType.Option,
-  onClick: (Boolean) -> Unit = {},
 ) {
 
   val backgroundColor by animateColorAsState(
@@ -89,7 +90,9 @@ fun BpkChip(
       .height(BpkSpacing.Xl)
       .clip(ChipShape)
       .background(backgroundColor)
-      .selectable(selected, enabled) { onClick(!selected) }
+      .applyIf(onSelectedChange != null) {
+        selectable(selected, enabled) { onSelectedChange!!.invoke(!selected) }
+      }
       .padding(horizontal = BpkSpacing.Base),
   ) {
 
