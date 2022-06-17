@@ -60,11 +60,11 @@ internal fun Modifier.autoMirror(enabled: Boolean = true): Modifier =
     }
   }
 
-internal fun Modifier.unboundClickable(role: Role? = null, onClick: () -> Unit): Modifier =
+internal fun Modifier.clickable(bounded: Boolean = true, role: Role? = null, onClick: () -> Unit): Modifier =
   composed {
     clickable(
       interactionSource = remember { MutableInteractionSource() },
-      indication = rememberRipple(bounded = false),
+      indication = rememberRipple(bounded = bounded),
       role = role,
       onClick = onClick,
     )

@@ -45,7 +45,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.NativeAndroidBack
 import net.skyscanner.backpack.compose.tokens.NativeAndroidClose
-import net.skyscanner.backpack.compose.utils.unboundClickable
+import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 internal fun BpkTopNavBarImpl(
@@ -85,7 +85,7 @@ private fun IconAction(action: IconAction, modifier: Modifier = Modifier) {
   Box(
     modifier = modifier
       .size(IconActionSize)
-      .unboundClickable(role = Role.Button) { action.onClick() },
+      .clickable(bounded = false, role = Role.Button) { action.onClick() },
     contentAlignment = Alignment.Center,
   ) {
     BpkIcon(icon = action.icon, contentDescription = action.contentDescription, size = BpkIconSize.Large)
@@ -98,7 +98,7 @@ private fun TextAction(action: TextAction, modifier: Modifier = Modifier) {
     modifier = modifier
       .fillMaxHeight()
       .padding(horizontal = BpkDimension.Spacing.Md)
-      .unboundClickable(role = Role.Button) { action.onClick() },
+      .clickable(bounded = false, role = Role.Button) { action.onClick() },
     contentAlignment = Alignment.Center,
   ) {
     BpkText(
