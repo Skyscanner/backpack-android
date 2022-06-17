@@ -17,6 +17,6 @@
 
 set -e
 ./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=default
-./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=themed
-./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=rtl
 ./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=dm
+./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=rtl
+./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=themed
