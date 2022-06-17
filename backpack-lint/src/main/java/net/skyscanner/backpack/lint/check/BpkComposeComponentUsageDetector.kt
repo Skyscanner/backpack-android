@@ -105,6 +105,11 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.material.Icon",
       )
     ),
+    NAV_BAR(
+      fullName = "net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar",
+      webName = "navigation-bar",
+      componentsToReplace = setOf("androidx.compose.material.TopAppBar")
+    ),
     RADIO_BUTTON(
       fullName = "net.skyscanner.backpack.compose.radiobutton.BpkRadioButton",
       webName = "radio-button",

@@ -18,10 +18,16 @@
 
 package net.skyscanner.backpack.compose.utils
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.LayoutDirection
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
@@ -53,3 +59,15 @@ internal fun Modifier.autoMirror(enabled: Boolean = true): Modifier =
       this@drawWithContent.drawContent()
     }
   }
+
+internal fun Modifier.clickable(bounded: Boolean = true, role: Role? = null, onClick: () -> Unit): Modifier =
+  composed {
+    clickable(
+      interactionSource = remember { MutableInteractionSource() },
+      indication = rememberRipple(bounded = bounded),
+      role = role,
+      onClick = onClick,
+    )
+  }
+
+

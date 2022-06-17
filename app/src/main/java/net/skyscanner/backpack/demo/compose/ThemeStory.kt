@@ -32,7 +32,6 @@ import androidx.compose.material.Slider
 import androidx.compose.material.Snackbar
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,7 +44,6 @@ import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Flight
 
@@ -60,14 +58,6 @@ fun ThemeStory() {
     crossAxisSpacing = BpkSpacing.Base,
     crossAxisAlignment = FlowCrossAxisAlignment.Center,
   ) {
-
-    TopAppBar {
-      BpkText(
-        modifier = Modifier.padding(horizontal = BpkSpacing.Base),
-        text = "Top app bar",
-        style = BpkTheme.typography.heading5,
-      )
-    }
 
     var selectedTabIndex by remember { mutableStateOf(1) }
     TabRow(modifier = Modifier.height(BpkSpacing.Xxl), selectedTabIndex = selectedTabIndex) {
