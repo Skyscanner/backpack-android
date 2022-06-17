@@ -48,7 +48,7 @@ fun BpkTopNavBar(
     title = title,
     modifier = modifier,
     navigationIcon = navIcon.toAction(),
-    actions = actions
+    actions = actions,
   )
 }
 
@@ -63,6 +63,6 @@ fun BpkTopNavBar(
     title = title,
     modifier = modifier,
     navigationIcon = navigationIcon.toAction(),
-    actions = listOf(action)
+    actions = listOf(action),
   )
 }

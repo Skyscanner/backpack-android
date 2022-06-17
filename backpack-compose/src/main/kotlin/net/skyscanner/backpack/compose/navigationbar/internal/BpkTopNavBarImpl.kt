@@ -86,7 +86,7 @@ private fun IconAction(action: IconAction, modifier: Modifier = Modifier) {
     modifier = modifier
       .size(IconActionSize)
       .unboundClickable(role = Role.Button) { action.onClick() },
-    contentAlignment = Alignment.Center
+    contentAlignment = Alignment.Center,
   ) {
     BpkIcon(icon = action.icon, contentDescription = action.contentDescription, size = BpkIconSize.Large)
   }
@@ -99,7 +99,7 @@ private fun TextAction(action: TextAction, modifier: Modifier = Modifier) {
       .fillMaxHeight()
       .padding(horizontal = BpkDimension.Spacing.Md)
       .unboundClickable(role = Role.Button) { action.onClick() },
-    contentAlignment = Alignment.Center
+    contentAlignment = Alignment.Center,
   ) {
     BpkText(
       text = action.text,
