@@ -143,4 +143,4 @@ private val BpkChipType.icon: BpkIcon?
     BpkChipType.Dismiss -> BpkIcon.CloseCircle
   }
 
-private val ChipShape = RoundedCornerShape(50)
+private val ChipShape = RoundedCornerShape(BpkSpacing.Base)
