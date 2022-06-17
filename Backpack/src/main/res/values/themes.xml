@@ -9,6 +9,7 @@
     <item name="windowNoTitle">true</item>
     <item name="windowActionBar">false</item>
     <item name="colorButtonNormal">@android:color/white</item>
+    <item name="toolbarStyle">@style/BpkToolbarStyle</item>
 
     <item name="bpkFontFamilyBase">sans-serif</item>
     <item name="bpkFontFamilyEmphasized">sans-serif-medium</item>
@@ -32,4 +33,7 @@
     <item name="bpkTextCaptionAppearance">@style/bpkTextCaption</item>
   </style>
 
+  <style name="BpkToolbarStyle" parent="Widget.AppCompat.Toolbar">
+    <item name="contentInsetStartWithNavigation">56dp</item>
+  </style>
 </resources>
