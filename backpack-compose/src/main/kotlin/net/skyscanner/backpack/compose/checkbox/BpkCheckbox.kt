@@ -95,7 +95,9 @@ fun BpkCheckbox(
 ) {
   BpkCheckbox(
     state = ToggleableState(checked),
-    onClick = if (onCheckedChange != null) { { onCheckedChange(!checked) } } else null,
+    onClick = if (onCheckedChange != null) {
+      { onCheckedChange(!checked) }
+    } else null,
     interactionSource = interactionSource,
     enabled = enabled,
     modifier = modifier,
@@ -139,7 +141,6 @@ fun BpkCheckbox(
       enabled = enabled,
       content = { content(state) }
     )
-
   }
 }
 
@@ -150,7 +151,7 @@ private fun BpkCheckboxImpl(
   onClick: (() -> Unit)?,
   modifier: Modifier = Modifier,
   enabled: Boolean,
-  interactionSource : MutableInteractionSource,
+  interactionSource: MutableInteractionSource,
 ) {
   // our design system isn't designed with the minimum touch target in mind at the moment.
   // Disable the enforcement to avoid the extra padding

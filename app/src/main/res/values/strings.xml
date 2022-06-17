@@ -124,4 +124,5 @@
   <string name="icons_story_guide">Click on icon to copy its name</string>
   <string name="icons_story_content_description">Icon \'%s\'</string>
   <string name="icons_force_rtl">Force RTL</string>
+  <string name="with_icon">With icon</string>
 </resources>
