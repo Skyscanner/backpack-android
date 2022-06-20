@@ -17,7 +17,7 @@
  */
 
 buildscript {
-  ext.kotlin_version = '1.6.10'
+  ext.kotlin_version = '1.7.0'
   ext.compose_version = '1.1.1'
   ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:$kotlin_version"
   repositories {
