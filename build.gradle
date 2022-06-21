@@ -104,7 +104,7 @@ ext {
   mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
   mockitoAndroid = "org.mockito:mockito-android:4.6.1"
 
-  coroutinesVersion = "1.6.2"
+  coroutinesVersion = "1.6.3"
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
