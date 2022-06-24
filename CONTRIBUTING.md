@@ -120,7 +120,7 @@ To test changes use
 
 If the check fails you either need to fix the issue if a change was unintended or record script above instead to update the screenshots.
 
-#### Espresso tests
+### Espresso tests
 If your component contains logic that can't be verified via screenshot tests you can use espresso to test the logic. These tests live in the `Backpack` or `backpack-compose` module, depending on the component.
 
 To run connected tests run
@@ -130,7 +130,7 @@ To run connected tests run
 ./gradlew backpack-compose:connectedCheck // for compose components
 ```
 
-#### Deploying locally
+### Deploying locally
 To test your branch/implementation in a codebase, publish the dependency locally (replacing the version with your desired version):
 
 ```
@@ -166,7 +166,7 @@ $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force -
 $ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
 ```
 
-#### Generating screenshots
+### Generating screenshots
 
 To add a new screenshot open `net/skyscanner/backpack/docs/DocsRegistry.kt` and add the screenshot to the `screenshots` list. 
 **Important**: For the screenshot to be generated the name must match the title of the page. 
