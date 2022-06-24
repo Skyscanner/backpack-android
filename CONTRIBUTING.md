@@ -47,7 +47,11 @@ Given that you have a compatible environment as stated above you can now set up 
 
 ## Testing
 
-#### Snapshot testing
+### Snapshot testing
+We use snapshot testing to ensure there are no unintended changes to UI components. 
+
+#### Setup
+
 Create an AVD using the following command
 
 > Note: Currently, screenshot testing doesn't work properly on M1 chips. Consider recording screenshots on Intel-based macs.
@@ -85,11 +89,28 @@ To start the emulator and attach an SD card to it, run
 $ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &
 ```
 
-After adding new snapshot tests, run
+#### Creating tests
+
+Snapshot tests live in the `app` module. For a new test class extend from `BpkSnapshotTest`.
+Each test function will result in a separate test function - try to add a test for each state of a component.
+Use the `setDimensions` function in the `setup()` function to set the right dimension for the snapshots.
+
+For `View` components you can create the component, set the states and then call `snap` to take the screenshots.
+For `Compose` components use the `composed` function to wrap your component - this will generate the screenshot.
+
+By default screenshot tests run on 4 variants - default, dark mode, RTL and themed (skipped for compose). In some cases you may want to only run a snapshot test on some variants - for example if a component has many different states without layout changes you may want to consider skipping RTL.
+
+You can do this by adding the `assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)` function with the desired variants. 
+**IMPORTANT**: Make sure this is called _before_ the test activity is run to avoid unnecessary delay. In a view test make it the first line of your test. In a compose test call it before the `composed` function, rather than inside it.
+
+#### Verifying changes
+After adding new snapshot tests or making UI changes, run
 
 ```
  ./scripts/record_screenshot_tests.sh
 ```
+
+This will generate the latest screenshot. Verify the changes & generated screenshots are as expected and commit the changes.
 
 To test changes use
 
@@ -97,11 +118,16 @@ To test changes use
 ./scripts/verify_screenshot_tests.sh
 ```
 
+If the check fails you either need to fix the issue if a change was unintended or record script above instead to update the screenshots.
+
 #### Espresso tests
+If your component contains logic that can't be verified via screenshot tests you can use espresso to test the logic. These tests live in the `Backpack` or `backpack-compose` module, depending on the component.
+
 To run connected tests run
 
 ```
-./gradlew Backpack:connectedCheck
+./gradlew Backpack:connectedCheck // for view components
+./gradlew backpack-compose:connectedCheck // for compose components
 ```
 
 #### Deploying locally
@@ -116,7 +142,16 @@ To use this dependency make sure to add `mavenLocal()` to your repository list i
 implementation 'net.skyscanner.backpack:backpack-android:x.x.x-SNAPSHOT'
 ```
 
-## Taking screenshots
+## Demo app screens
+
+To verify changes during development, generate docs screenshots and showcase our components internally & externally we provide a demo app with all our components.
+To add a new component open `net/skyscanner/backpack/demo/data/ComponentRegistry.kt` and add your component to the list. For compose components use `composeStory` and use a newly created component story from the `compose` package. For view components you can add `story NodeData { Story of R.layout.fragment_x }` for simple components, or use a custom story instead of `Story` for more complex stories.
+
+## Docs screenshots
+
+To make our documentation clearer we include screenshots on the docs site for each components.
+
+### Setup
 
 Before running the script install and start the docs emulator.
 
@@ -131,13 +166,18 @@ $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force -
 $ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
 ```
 
+#### Generating screenshots
+
+To add a new screenshot open `net/skyscanner/backpack/docs/DocsRegistry.kt` and add the screenshot to the `screenshots` list. 
+**Important**: For the screenshot to be generated the name must match the title of the page. 
+
 Run `./scripts/generate_screenshots.sh` to capture all screenshots. Files will be saved in the correct directory.
 
 > Note: Python is required.
 
-### Adding new screenshots
+Verify the screenshots and commit the changes.
 
-To add new screenshots, add a new entry to `net/skyscanner/backpack/docs/DocsRegistry.kt`
+> Note: Unfortuantely the screenshot generation may also contain changes to other screenshots. Unless they are intended remove these changes and only commit the ones with intended changes.
 
 ## Demo app shortcuts
 
