@@ -43,7 +43,7 @@ internal inline fun CalendarMonth(
   monthsFormatter: SimpleDateFormat,
   weekFields: WeekFields,
   selection: CalendarSelection,
-  selectWholeMonthLabel: String?,
+  selectWholeMonthLabel: String,
   day: (YearMonth, LocalDate) -> CalendarCell.Day,
 ): CalendarMonth {
 

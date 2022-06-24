@@ -111,7 +111,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Dates,
+            selectionMode = CalendarParams.SelectionMode.Range,
           )
         )
       }
@@ -120,7 +120,8 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Month(selectWholeMonthLabel = "Select whole month"),
+            selectionMode = CalendarParams.SelectionMode.Range,
+            wholeMonthSelectionLabel = "Select whole month"
           ),
         )
         calendar.setSelection(CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY)))
@@ -130,7 +131,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Dates,
+            selectionMode = CalendarParams.SelectionMode.Range,
             cellsInfo = range
               .toIterable()
               .associateWith { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
@@ -142,7 +143,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Dates,
+            selectionMode = CalendarParams.SelectionMode.Range,
             cellsInfo = range
               .toIterable()
               .associateWith {
@@ -171,7 +172,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Dates,
+            selectionMode = CalendarParams.SelectionMode.Range,
             cellsInfo = range
               .toIterable()
               .associateWith {
@@ -196,7 +197,7 @@ class Calendar2Story : Story() {
           CalendarParams(
             now = now,
             range = range,
-            selectionMode = CalendarParams.SelectionMode.Dates,
+            selectionMode = CalendarParams.SelectionMode.Range,
           )
         )
         calendar.setSelection(

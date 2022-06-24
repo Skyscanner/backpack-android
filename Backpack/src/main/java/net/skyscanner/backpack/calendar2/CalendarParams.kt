@@ -44,6 +44,7 @@ data class CalendarParams(
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
   val now: LocalDate = LocalDate.now(),
+  val wholeMonthSelectionLabel: String = "",
 ) {
 
   internal val weekFields = WeekFields.of(locale)
@@ -53,34 +54,21 @@ data class CalendarParams(
   /**
    * Describes the selection behaviour
    */
-  sealed interface SelectionMode {
+  enum class SelectionMode {
     /**
      * No date can be selected
      */
-    object Disabled : SelectionMode
+    Disabled,
 
     /**
      * Only a single, non-disabled date can be selected.
      */
-    object Single : SelectionMode
-
-    /**
-     * Describes the rangeable selection behaviour
-     * The boundaries of range are always non-disabled dates, but there could be disabled dates within the range.
-     */
-    sealed interface Rangeable : SelectionMode
+    Single,
 
     /**
      * A range of dates can be selected.
      */
-    object Dates : Rangeable
-
-    /**
-     * A whole month can be selected, but [Dates] could also be selected if desired.
-     *
-     * @param selectWholeMonthLabel the label for the whole month selection button.
-     */
-    data class Month(val selectWholeMonthLabel: String) : Rangeable
+    Range
   }
 }
 

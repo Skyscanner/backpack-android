@@ -39,7 +39,7 @@ internal sealed class CalendarCell {
 
   internal data class Header(
     val title: String,
-    val selectWholeMonthLabel: String?,
+    val selectWholeMonthLabel: String,
     override val yearMonth: YearMonth,
   ) : CalendarCell()
 
