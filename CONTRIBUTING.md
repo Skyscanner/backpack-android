@@ -92,7 +92,7 @@ $ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &
 #### Creating tests
 
 Snapshot tests live in the `app` module. For a new test class extend from `BpkSnapshotTest`.
-Each test function will result in a separate test function - try to add a test for each state of a component.
+Each test function will result in a separate screenshot test - try to  keep the tests simple and add a test for each state of a component.
 Use the `setDimensions` function in the `setup()` function to set the right dimension for the snapshots.
 
 For `View` components you can create the component, set the states and then call `snap` to take the screenshots.
@@ -121,7 +121,7 @@ To test changes use
 If the check fails you either need to fix the issue if a change was unintended or record script above instead to update the screenshots.
 
 ### Espresso tests
-If your component contains logic that can't be verified via screenshot tests you can use espresso to test the logic. These tests live in the `Backpack` or `backpack-compose` module, depending on the component.
+If your component contains logic that can't be verified via screenshot tests you can use espresso to test the logic. These tests live in the `Backpack` (for View components) or `backpack-compose` (for Compose components) module, depending on the component.
 
 To run connected tests run
 
