@@ -47,6 +47,7 @@ open class BpkChip @JvmOverloads constructor(
 
   private val style: BpkChipStyle
 
+  @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var chipBackgroundColor: Int
     get() = style.backgroundColor
     set(value) {
@@ -54,6 +55,7 @@ open class BpkChip @JvmOverloads constructor(
       updateStyle()
     }
 
+  @Deprecated("Custom text colour is no longer supported. Use existing styles")
   var chipTextColor: Int
     get() = style.textColor
     set(value) {
@@ -61,6 +63,7 @@ open class BpkChip @JvmOverloads constructor(
       updateStyle()
     }
 
+  @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var selectedBackgroundColor: Int
     get() = style.selectedBackgroundColor
     set(value) {
@@ -68,6 +71,7 @@ open class BpkChip @JvmOverloads constructor(
       updateStyle()
     }
 
+  @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var disabledBackgroundColor: Int
     get() = style.disabledBackgroundColor
     set(value) {

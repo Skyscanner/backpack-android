@@ -25,6 +25,7 @@ import net.skyscanner.backpack.chip.internal.BpkChipStyle
 import net.skyscanner.backpack.chip.internal.BpkChipStyles
 import net.skyscanner.backpack.util.createContextThemeWrapper
 
+@Deprecated("Outline chip deprecated - please use default or on dark style")
 class BpkOutlineChip @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
