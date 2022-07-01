@@ -79,13 +79,11 @@ open class BpkChip @JvmOverloads constructor(
       updateStyle()
     }
 
-  var style: Style?
+  var style: Style
     get() = _style.style
     set(value) {
-      if (value != null) {
-        _style = BpkChipStyles.Solid.fromTheme(context, value)
-        updateStyle()
-      }
+      _style = BpkChipStyles.Solid.fromTheme(context, value)
+      updateStyle()
     }
 
   var type: Type = Type.Option

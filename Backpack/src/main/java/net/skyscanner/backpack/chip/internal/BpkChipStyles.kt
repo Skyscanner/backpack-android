@@ -41,7 +41,7 @@ internal sealed class BpkChipStyles : BpkChipStyle {
     override var backgroundColor: Int = context.getColor(R.color.bpkBackgroundElevation03)
     override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
     override var disabledBackgroundColor: Int = Color.TRANSPARENT
-    override val style: BpkChip.Style? = null
+    override val style = BpkChip.Style.Default // use default here to avoid breaking changes when `outline` is removed
 
     override val background: Drawable
       get() = chipRoundedRect(
