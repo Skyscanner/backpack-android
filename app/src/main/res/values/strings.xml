@@ -134,4 +134,8 @@
   <string name="navigation_account">Account</string>
   <string name="navigation_text_action">Text</string>
   <string name="navigation_search">Search</string>
+
+  <string name="chip_option">Option</string>
+  <string name="chip_select">Select</string>
+  <string name="chip_dismiss">Dismiss</string>
 </resources>

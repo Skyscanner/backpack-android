@@ -88,15 +88,21 @@ open class BpkChip @JvmOverloads constructor(
       }
     }
 
+  var type: Type = Type.Option
+    set(value) {
+      field = value
+      updateIcons()
+    }
+
   var icon: Drawable? = null
     set(value) {
       field = value
         ?.mutate()
-        ?.apply { setBounds(0, 0, iconSize, iconSize) }
-        ?.also {
-          it.setTintList(textColors)
-          this.setCompoundDrawablesRelative(it, null, null, null)
+        ?.apply {
+          setBounds(0, 0, iconSize, iconSize)
+          setTintList(textColors)
         }
+      updateIcons()
     }
 
   init {
@@ -126,6 +132,7 @@ open class BpkChip @JvmOverloads constructor(
         if (iconId != 0) {
           icon = AppCompatResources.getDrawable(context, iconId)
         }
+        type = Type.fromAttr(it.getInt(R.styleable.BpkChip_chipType, 0))
       }
 
     updateStyle()
@@ -146,6 +153,19 @@ open class BpkChip @JvmOverloads constructor(
     compoundDrawableTintList = _style.text
   }
 
+  private fun updateIcons() {
+    val endIcon = when (type) {
+      Type.Option -> null
+      Type.Select -> AppCompatResources.getDrawable(context, R.drawable.bpk_tick)
+      Type.Dismiss -> AppCompatResources.getDrawable(context, R.drawable.bpk_close_circle)
+    }?.mutate()
+      ?.apply {
+        setBounds(0, 0, iconSize, iconSize)
+        setTintList(textColors)
+      }
+    this.setCompoundDrawablesRelative(icon, null, endIcon, null)
+  }
+
   enum class Style {
     Default,
     OnDark,
@@ -157,6 +177,23 @@ open class BpkChip @JvmOverloads constructor(
           0 -> Default
           1 -> OnDark
           else -> throw IllegalStateException("Unknown chip style")
+        }
+    }
+  }
+
+  enum class Type {
+    Option,
+    Select,
+    Dismiss,
+    ;
+
+    companion object {
+      internal fun fromAttr(value: Int): Type =
+        when (value) {
+          0 -> Option
+          1 -> Select
+          2 -> Dismiss
+          else -> throw IllegalStateException("Unknown chip type")
         }
     }
   }

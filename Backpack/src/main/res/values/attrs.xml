@@ -129,6 +129,11 @@
       <enum name="normal" value="0" />
       <enum name="onDark" value="1" />
     </attr>
+    <attr name="chipType" format="enum">
+      <enum name="option" value="0" />
+      <enum name="select" value="1" />
+      <enum name="dismiss" value="2" />
+    </attr>
     <attr name="chipSelectedBackgroundColor" format="color" />
     <attr name="chipDisabledBackgroundColor" format="color" />
     <attr name="chipBackgroundColor" format="color" />
