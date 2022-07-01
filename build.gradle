@@ -84,7 +84,7 @@ ext {
 
   androidxAppCompat = "androidx.appcompat:appcompat:1.4.2"
   androidxAnnotations = "androidx.annotation:annotation:1.4.0"
-  androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+  androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
   androidMaterial = "com.google.android.material:material:1.6.1"
   cardView = "androidx.cardview:cardview:1.0.0"
   googleMaps = "com.google.android.gms:play-services-maps:18.0.2"
