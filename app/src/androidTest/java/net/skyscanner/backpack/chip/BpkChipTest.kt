@@ -21,6 +21,7 @@ package net.skyscanner.backpack.chip
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Test
@@ -52,6 +53,27 @@ class BpkChipTest : BpkSnapshotTest() {
   fun screenshotTestSelected() {
     val view = BpkChip(testContext)
     view.text = "tag"
+    view.isSelected = true
+    snap(view.wrapInParent())
+  }
+
+  @Test
+  fun screenshotTestOnDark() {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    setBackground(R.color.bpkSkyBlueShade02)
+    val view = BpkChip(testContext)
+    view.text = "tag"
+    view.style = BpkChip.Style.OnDark
+    snap(view.wrapInParent())
+  }
+
+  @Test
+  fun screenshotTestOnDarkSelected() {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    setBackground(R.color.bpkSkyBlueShade02)
+    val view = BpkChip(testContext)
+    view.text = "tag"
+    view.style = BpkChip.Style.OnDark
     view.isSelected = true
     snap(view.wrapInParent())
   }

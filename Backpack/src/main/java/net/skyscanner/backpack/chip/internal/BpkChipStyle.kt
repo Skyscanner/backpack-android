@@ -21,8 +21,10 @@ package net.skyscanner.backpack.chip.internal
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import androidx.annotation.ColorInt
+import net.skyscanner.backpack.chip.BpkChip
 
 internal interface BpkChipStyle {
+  val style: BpkChip.Style?
 
   val background: Drawable
 

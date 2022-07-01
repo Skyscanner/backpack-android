@@ -45,38 +45,47 @@ open class BpkChip @JvmOverloads constructor(
       this.isEnabled = !disabled
     }
 
-  private val style: BpkChipStyle
+  private var _style: BpkChipStyle
 
   @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var chipBackgroundColor: Int
-    get() = style.backgroundColor
+    get() = _style.backgroundColor
     set(value) {
-      style.backgroundColor = value
+      _style.backgroundColor = value
       updateStyle()
     }
 
   @Deprecated("Custom text colour is no longer supported. Use existing styles")
   var chipTextColor: Int
-    get() = style.textColor
+    get() = _style.textColor
     set(value) {
-      style.textColor = value
+      _style.textColor = value
       updateStyle()
     }
 
   @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var selectedBackgroundColor: Int
-    get() = style.selectedBackgroundColor
+    get() = _style.selectedBackgroundColor
     set(value) {
-      style.selectedBackgroundColor = value
+      _style.selectedBackgroundColor = value
       updateStyle()
     }
 
   @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var disabledBackgroundColor: Int
-    get() = style.disabledBackgroundColor
+    get() = _style.disabledBackgroundColor
     set(value) {
-      style.disabledBackgroundColor = value
+      _style.disabledBackgroundColor = value
       updateStyle()
+    }
+
+  var style: Style?
+    get() = _style.style
+    set(value) {
+      if (value != null) {
+        _style = BpkChipStyles.Solid.fromTheme(context, value)
+        updateStyle()
+      }
     }
 
   var icon: Drawable? = null
@@ -91,11 +100,11 @@ open class BpkChip @JvmOverloads constructor(
     }
 
   init {
-    this.style = provideStyle(this.context, attrs, defStyleAttr)
+    this._style = provideStyle(this.context, attrs, defStyleAttr)
     this.compoundDrawablePadding = iconPadding
     this.gravity = Gravity.CENTER_VERTICAL
     this.textStyle = TextStyle.Footnote
-    this.setTextColor(style.text)
+    this.setTextColor(_style.text)
     this.isSingleLine = true
     this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
 
@@ -129,11 +138,26 @@ open class BpkChip @JvmOverloads constructor(
   }
 
   internal open fun provideStyle(context: Context, attrs: AttributeSet?, defStyleAttr: Int): BpkChipStyle =
-    BpkChipStyles.Solid(context, attrs, defStyleAttr)
+    BpkChipStyles.Solid.fromAttrs(context, attrs, defStyleAttr)
 
   private fun updateStyle() {
-    this.background = style.background
-    setTextColor(style.text)
-    compoundDrawableTintList = style.text
+    this.background = _style.background
+    setTextColor(_style.text)
+    compoundDrawableTintList = _style.text
+  }
+
+  enum class Style {
+    Default,
+    OnDark,
+    ;
+
+    companion object {
+      internal fun fromAttr(value: Int): Style =
+        when (value) {
+          0 -> Default
+          1 -> OnDark
+          else -> throw IllegalStateException("Unknown chip style")
+        }
+    }
   }
 }
