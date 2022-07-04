@@ -29,13 +29,13 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.chip.BpkChip
 import net.skyscanner.backpack.util.use
 
-internal sealed class BpkChipStyles : BpkChipStyle {
+internal sealed class BpkChipAppearances : BpkChipAppearance {
 
   internal class Stroke(
     private val context: Context,
     attrs: AttributeSet?,
     defStyleAttr: Int,
-  ) : BpkChipStyles() {
+  ) : BpkChipAppearances() {
 
     override var selectedBackgroundColor: Int = context.getColor(R.color.bpkPrimaryLight)
     override var backgroundColor: Int = context.getColor(R.color.bpkBackgroundElevation03)
@@ -79,7 +79,7 @@ internal sealed class BpkChipStyles : BpkChipStyle {
 
   internal sealed class Solid(
     private val context: Context,
-  ) : BpkChipStyles() {
+  ) : BpkChipAppearances() {
 
     override val background: Drawable
       get() = chipRoundedRect(
@@ -157,7 +157,7 @@ internal sealed class BpkChipStyles : BpkChipStyle {
         context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int,
-      ): BpkChipStyle =
+      ): BpkChipAppearance =
         context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
           .use {
             when (BpkChip.Style.fromAttr(it.getInt(R.styleable.BpkChip_chipsStyle, 0))) {
@@ -169,7 +169,7 @@ internal sealed class BpkChipStyles : BpkChipStyle {
       fun fromTheme(
         context: Context,
         style: BpkChip.Style,
-      ): BpkChipStyle {
+      ): BpkChipAppearance {
         var typedArray: TypedArray? = null
         try {
           val tv = TypedValue()

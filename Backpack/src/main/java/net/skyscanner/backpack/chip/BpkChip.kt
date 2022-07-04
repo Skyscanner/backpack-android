@@ -24,8 +24,8 @@ import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.chip.internal.BpkChipStyle
-import net.skyscanner.backpack.chip.internal.BpkChipStyles
+import net.skyscanner.backpack.chip.internal.BpkChipAppearance
+import net.skyscanner.backpack.chip.internal.BpkChipAppearances
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -45,44 +45,44 @@ open class BpkChip @JvmOverloads constructor(
       this.isEnabled = !disabled
     }
 
-  private var _style: BpkChipStyle
+  private var appearance: BpkChipAppearance
 
   @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var chipBackgroundColor: Int
-    get() = _style.backgroundColor
+    get() = appearance.backgroundColor
     set(value) {
-      _style.backgroundColor = value
+      appearance.backgroundColor = value
       updateStyle()
     }
 
   @Deprecated("Custom text colour is no longer supported. Use existing styles")
   var chipTextColor: Int
-    get() = _style.textColor
+    get() = appearance.textColor
     set(value) {
-      _style.textColor = value
+      appearance.textColor = value
       updateStyle()
     }
 
   @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var selectedBackgroundColor: Int
-    get() = _style.selectedBackgroundColor
+    get() = appearance.selectedBackgroundColor
     set(value) {
-      _style.selectedBackgroundColor = value
+      appearance.selectedBackgroundColor = value
       updateStyle()
     }
 
   @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var disabledBackgroundColor: Int
-    get() = _style.disabledBackgroundColor
+    get() = appearance.disabledBackgroundColor
     set(value) {
-      _style.disabledBackgroundColor = value
+      appearance.disabledBackgroundColor = value
       updateStyle()
     }
 
   var style: Style
-    get() = _style.style
+    get() = appearance.style
     set(value) {
-      _style = BpkChipStyles.Solid.fromTheme(context, value)
+      appearance = BpkChipAppearances.Solid.fromTheme(context, value)
       updateStyle()
     }
 
@@ -104,11 +104,11 @@ open class BpkChip @JvmOverloads constructor(
     }
 
   init {
-    this._style = provideStyle(this.context, attrs, defStyleAttr)
+    this.appearance = provideAppearance(this.context, attrs, defStyleAttr)
     this.compoundDrawablePadding = iconPadding
     this.gravity = Gravity.CENTER_VERTICAL
     this.textStyle = TextStyle.Footnote
-    this.setTextColor(_style.text)
+    this.setTextColor(appearance.text)
     this.isSingleLine = true
     this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
 
@@ -142,13 +142,13 @@ open class BpkChip @JvmOverloads constructor(
     }
   }
 
-  internal open fun provideStyle(context: Context, attrs: AttributeSet?, defStyleAttr: Int): BpkChipStyle =
-    BpkChipStyles.Solid.fromAttrs(context, attrs, defStyleAttr)
+  internal open fun provideAppearance(context: Context, attrs: AttributeSet?, defStyleAttr: Int): BpkChipAppearance =
+    BpkChipAppearances.Solid.fromAttrs(context, attrs, defStyleAttr)
 
   private fun updateStyle() {
-    this.background = _style.background
-    setTextColor(_style.text)
-    compoundDrawableTintList = _style.text
+    this.background = appearance.background
+    setTextColor(appearance.text)
+    compoundDrawableTintList = appearance.text
   }
 
   private fun updateIcons() {
