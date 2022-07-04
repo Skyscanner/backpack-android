@@ -43,6 +43,7 @@ import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.Tick
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
+import net.skyscanner.backpack.compose.utils.textDisabled
 
 enum class BpkChipStyle {
   Default,
@@ -77,7 +78,7 @@ fun BpkChip(
 
   val contentColor by animateColorAsState(
     targetValue = when {
-      !enabled -> dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)
+      !enabled -> BpkTheme.colors.textDisabled
       selected -> BpkTheme.colors.background
       else -> style.contentColor
     }

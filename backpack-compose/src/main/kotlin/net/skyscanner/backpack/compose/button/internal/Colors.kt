@@ -26,6 +26,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
+import net.skyscanner.backpack.compose.utils.textDisabled
 
 @Composable
 internal fun BpkButtonType.disabledBackgroundColor(): Color =
@@ -38,7 +39,7 @@ internal fun BpkButtonType.disabledBackgroundColor(): Color =
 internal fun BpkButtonType.disabledContentColor(): Color =
   when (this) {
     BpkButtonType.LinkOnDark -> Color.White.copy(alpha = 0.2f)
-    else -> dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)
+    else -> BpkTheme.colors.textDisabled
   }
 
 @Composable
