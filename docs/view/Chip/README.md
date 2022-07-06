@@ -18,7 +18,9 @@ Example of a chip in XML
       android:text="Message"
       app:disabled="true"
       app:selected="true"
-      app:chipIcon="@drawable/bpk_close" />
+      app:chipIcon="@drawable/bpk_close"
+      app:chipStyle="onDark"
+      app:chipType="select" />
 ```
 
 Example of a chip in Kotlin
@@ -35,6 +37,8 @@ BpkChip(context).apply {
   chipSelectedBackgroundColor = context.getColor(R.color.bpkSkyBlue)
   disabledBackgroundColor = context.getColor(R.color.bpkSkyGrayTint07)
   chipIcon = AppCompatResources.getDrawable(context, R.drawable.bpk_account)
+  style = BpkChip.Style.OnDark
+  type = BpkChip.Type.Select
 }
 ```
 
@@ -45,39 +49,6 @@ To do so add a click listener:
 
 ```Kotlin
 chip.setOnClickListener { chip.toggle() }
-```
-
-## BpkOutlineChip
-
-Chip with outline style, supports the same properties as a normal chip except changing the background colour.
-
-Example of a outline chip in XML
-
-```xml
-    <net.skyscanner.backpack.chip.BpkOutlineChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Message"
-      app:disabled="true"
-      app:selected="true" />
-```
-
-Example of a outline chip in Kotlin
-
-```Kotlin
-import net.skyscanner.backpack.chip.BpkOutlineChip
-
-BpkOutlineChip(context).apply {
-  text = "Message"
-  isSelected = true
-  disabled = false
-  chipBackgroundColor = context.getColor(R.color.bpkSkyGrayTint07)
-  chipTextColor = context.getColor(R.color.bpkTextPrimary)
-  chipSelectedBackgroundColor = context.getColor(R.color.bpkSkyBlue)
-  disabledBackgroundColor = context.getColor(R.color.bpkSkyGrayTint07)
-  chipIcon = AppCompatResources.getDrawable(context, R.drawable.bpk_account)
-}
 ```
 
 ## Theme Props
