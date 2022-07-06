@@ -53,7 +53,8 @@
   <color name="__barChartActivatedColor">@color/bpkMonteverde</color>
   <color name="__barChartPopupBackgroundColor">@color/bpkSkyBlueShade02</color>
   <color name="__barChartPopupTextColor">@color/bpkWhite</color>
-  <color name="__chipSolidBackground">@color/bpkSkyGrayTint07</color>
+  <color name="__chipSolidBackground">@color/bpkSkyGrayTint06</color>
+  <color name="__chipOnDarkBackground">@color/bpkWhite</color>
   <color name="__chipDisabled">@color/bpkSkyGrayTint04</color>
 
   <color name="__textDisabled">@color/bpkSkyGrayTint04</color>

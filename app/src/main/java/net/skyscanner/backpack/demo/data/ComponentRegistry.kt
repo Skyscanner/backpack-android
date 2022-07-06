@@ -237,10 +237,9 @@ object ComponentRegistry {
           { children -> SubStory of children },
           mapOf(
             "Default" story NodeData { ChipStory of R.layout.fragment_chip },
-            "Outline" story NodeData { ChipStory of R.layout.fragment_outline_chip },
-            "Custom" story NodeData { ChipStory of R.layout.fragment_chip_custom },
+            "On Dark" story NodeData { ChipStory of R.layout.fragment_chip_ondark },
             "With icon" story NodeData { ChipStory of R.layout.fragment_chip_with_icon },
-            "With icon RTL" story NodeData { ChipStory of R.layout.fragment_chip_with_icon with Direction.RTL }
+            "With icon RTL" story NodeData { ChipStory of R.layout.fragment_chip_with_icon with Direction.RTL },
           )
         ),
         TAB_TITLE_COMPOSE composeStory { ComposeChipStory() },

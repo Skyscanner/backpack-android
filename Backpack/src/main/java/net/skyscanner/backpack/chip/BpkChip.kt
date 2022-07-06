@@ -24,8 +24,8 @@ import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.chip.internal.BpkChipStyle
-import net.skyscanner.backpack.chip.internal.BpkChipStyles
+import net.skyscanner.backpack.chip.internal.BpkChipAppearance
+import net.skyscanner.backpack.chip.internal.BpkChipAppearances
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -45,53 +45,70 @@ open class BpkChip @JvmOverloads constructor(
       this.isEnabled = !disabled
     }
 
-  private val style: BpkChipStyle
+  private var appearance: BpkChipAppearance
 
+  @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var chipBackgroundColor: Int
-    get() = style.backgroundColor
+    get() = appearance.backgroundColor
     set(value) {
-      style.backgroundColor = value
+      appearance.backgroundColor = value
       updateStyle()
     }
 
+  @Deprecated("Custom text colour is no longer supported. Use existing styles")
   var chipTextColor: Int
-    get() = style.textColor
+    get() = appearance.textColor
     set(value) {
-      style.textColor = value
+      appearance.textColor = value
       updateStyle()
     }
 
+  @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var selectedBackgroundColor: Int
-    get() = style.selectedBackgroundColor
+    get() = appearance.selectedBackgroundColor
     set(value) {
-      style.selectedBackgroundColor = value
+      appearance.selectedBackgroundColor = value
       updateStyle()
     }
 
+  @Deprecated("Custom background colour is no longer supported. Use existing styles")
   var disabledBackgroundColor: Int
-    get() = style.disabledBackgroundColor
+    get() = appearance.disabledBackgroundColor
     set(value) {
-      style.disabledBackgroundColor = value
+      appearance.disabledBackgroundColor = value
       updateStyle()
+    }
+
+  var style: Style
+    get() = appearance.style
+    set(value) {
+      appearance = BpkChipAppearances.Solid.fromTheme(context, value)
+      updateStyle()
+    }
+
+  var type: Type = Type.Option
+    set(value) {
+      field = value
+      updateIcons()
     }
 
   var icon: Drawable? = null
     set(value) {
       field = value
         ?.mutate()
-        ?.apply { setBounds(0, 0, iconSize, iconSize) }
-        ?.also {
-          it.setTintList(textColors)
-          this.setCompoundDrawablesRelative(it, null, null, null)
+        ?.apply {
+          setBounds(0, 0, iconSize, iconSize)
+          setTintList(textColors)
         }
+      updateIcons()
     }
 
   init {
-    this.style = provideStyle(this.context, attrs, defStyleAttr)
+    this.appearance = provideAppearance(this.context, attrs, defStyleAttr)
     this.compoundDrawablePadding = iconPadding
     this.gravity = Gravity.CENTER_VERTICAL
     this.textStyle = TextStyle.Footnote
-    this.setTextColor(style.text)
+    this.setTextColor(appearance.text)
     this.isSingleLine = true
     this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
 
@@ -113,6 +130,7 @@ open class BpkChip @JvmOverloads constructor(
         if (iconId != 0) {
           icon = AppCompatResources.getDrawable(context, iconId)
         }
+        type = Type.fromAttr(it.getInt(R.styleable.BpkChip_chipType, 0))
       }
 
     updateStyle()
@@ -124,12 +142,57 @@ open class BpkChip @JvmOverloads constructor(
     }
   }
 
-  internal open fun provideStyle(context: Context, attrs: AttributeSet?, defStyleAttr: Int): BpkChipStyle =
-    BpkChipStyles.Solid(context, attrs, defStyleAttr)
+  internal open fun provideAppearance(context: Context, attrs: AttributeSet?, defStyleAttr: Int): BpkChipAppearance =
+    BpkChipAppearances.Solid.fromAttrs(context, attrs, defStyleAttr)
 
   private fun updateStyle() {
-    this.background = style.background
-    setTextColor(style.text)
-    compoundDrawableTintList = style.text
+    this.background = appearance.background
+    setTextColor(appearance.text)
+    compoundDrawableTintList = appearance.text
+  }
+
+  private fun updateIcons() {
+    val endIcon = when (type) {
+      Type.Option -> null
+      Type.Select -> AppCompatResources.getDrawable(context, R.drawable.bpk_tick)
+      Type.Dismiss -> AppCompatResources.getDrawable(context, R.drawable.bpk_close_circle)
+    }?.mutate()
+      ?.apply {
+        setBounds(0, 0, iconSize, iconSize)
+        setTintList(textColors)
+      }
+    this.setCompoundDrawablesRelative(icon, null, endIcon, null)
+  }
+
+  enum class Style {
+    Default,
+    OnDark,
+    ;
+
+    companion object {
+      internal fun fromAttr(value: Int): Style =
+        when (value) {
+          0 -> Default
+          1 -> OnDark
+          else -> throw IllegalStateException("Unknown chip style")
+        }
+    }
+  }
+
+  enum class Type {
+    Option,
+    Select,
+    Dismiss,
+    ;
+
+    companion object {
+      internal fun fromAttr(value: Int): Type =
+        when (value) {
+          0 -> Option
+          1 -> Select
+          2 -> Dismiss
+          else -> throw IllegalStateException("Unknown chip type")
+        }
+    }
   }
 }
