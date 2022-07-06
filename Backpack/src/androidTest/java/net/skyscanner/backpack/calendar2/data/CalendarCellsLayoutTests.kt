@@ -23,6 +23,7 @@ import net.skyscanner.backpack.calendar2.extension.yearMonth
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.threeten.bp.Month
@@ -146,11 +147,11 @@ class CalendarCellsLayoutTests {
   @Test
   fun select_whole_month_button_is_hidden_when_whole_month_selection_is_disabled() {
     val calenderParams = CalendarSettings.Default.copy(
-      wholeMonthSelectionLabel = "",
+      wholeMonthSelectionLabel = null,
     )
     testCalendarWith(calenderParams) {
       verify {
-        assertEquals("", (state.cells[0] as CalendarCell.Header).selectWholeMonthLabel)
+        assertNull((state.cells[0] as CalendarCell.Header).selectWholeMonthLabel)
       }
     }
   }

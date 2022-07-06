@@ -34,8 +34,8 @@ import java.util.Locale
  * @param cellsInfo additional information to be added to dates cell
  * @param locale locale used for formatting and locale-specific behaviour, e.g. finding first day of week
  * @param dayOfWeekText [TextStyle] to format days of week in calendar header
- * @param dayOfWeekAccessibilityText [TextStyle] to format accessibility description of days of week in calendar header
- * @param dateAccessibilityText [TextStyle] to format accessibility description of a date cell
+ * @param now [LocalDate] a date for the calendar to consider as current
+ * @param wholeMonthSelectionLabel [String] the label to be shown in the whole month selection button. A null label hides this option
  */
 data class CalendarParams(
   val selectionMode: SelectionMode,
@@ -44,7 +44,7 @@ data class CalendarParams(
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
   val now: LocalDate = LocalDate.now(),
-  val wholeMonthSelectionLabel: String = "",
+  val wholeMonthSelectionLabel: String? = null,
 ) {
 
   internal val weekFields = WeekFields.of(locale)
