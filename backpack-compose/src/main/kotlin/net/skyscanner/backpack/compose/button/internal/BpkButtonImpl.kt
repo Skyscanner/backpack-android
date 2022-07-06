@@ -92,7 +92,7 @@ internal fun BpkButtonImpl(
                 style = BpkSpinnerStyle.Disabled,
                 size = when (size) {
                   BpkButtonSize.Default -> BpkSpinnerSize.Small
-                  BpkButtonSize.Large -> BpkSpinnerSize.Medium
+                  BpkButtonSize.Large -> BpkSpinnerSize.Large
                 },
               )
             }

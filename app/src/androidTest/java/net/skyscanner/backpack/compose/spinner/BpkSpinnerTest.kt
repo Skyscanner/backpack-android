@@ -38,7 +38,7 @@ class BpkSpinnerTest : BpkSnapshotTest() {
 
   @Test
   fun default() = composed {
-    BpkSpinner(size = BpkSpinnerSize.Medium)
+    BpkSpinner(size = BpkSpinnerSize.Large)
   }
 
   @Test
@@ -53,7 +53,7 @@ class BpkSpinnerTest : BpkSnapshotTest() {
   fun textPrimary() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      BpkSpinner(size = BpkSpinnerSize.Medium, style = BpkSpinnerStyle.TextPrimary)
+      BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.TextPrimary)
     }
   }
 
@@ -61,7 +61,7 @@ class BpkSpinnerTest : BpkSnapshotTest() {
   fun disabled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      BpkSpinner(size = BpkSpinnerSize.Medium, style = BpkSpinnerStyle.Disabled)
+      BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.Disabled)
     }
   }
 
@@ -69,7 +69,7 @@ class BpkSpinnerTest : BpkSnapshotTest() {
   fun onDarkSurface() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed(background = BpkColor.Black) {
-      BpkSpinner(size = BpkSpinnerSize.Medium, style = BpkSpinnerStyle.OnDarkSurface)
+      BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.OnDarkSurface)
     }
   }
 
@@ -78,7 +78,7 @@ class BpkSpinnerTest : BpkSnapshotTest() {
     assumeVariant(BpkTestVariant.Default)
     composed(background = BpkColor.Black) {
       CompositionLocalProvider(LocalContentColor provides BpkColor.White) {
-        BpkSpinner(size = BpkSpinnerSize.Medium)
+        BpkSpinner(size = BpkSpinnerSize.Large)
       }
     }
   }
@@ -88,7 +88,7 @@ class BpkSpinnerTest : BpkSnapshotTest() {
     assumeVariant(BpkTestVariant.Default)
     composed(background = BpkColor.White) {
       CompositionLocalProvider(LocalContentColor provides BpkColor.Black) {
-        BpkSpinner(size = BpkSpinnerSize.Medium)
+        BpkSpinner(size = BpkSpinnerSize.Large)
       }
     }
   }
