@@ -23,7 +23,6 @@ import net.skyscanner.backpack.calendar2.extension.yearMonth
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.threeten.bp.Month
@@ -151,7 +150,7 @@ class CalendarCellsLayoutTests {
     )
     testCalendarWith(calenderParams) {
       verify {
-        assertNull((state.cells[0] as CalendarCell.Header).selectWholeMonthLabel)
+        assertEquals("", (state.cells[0] as CalendarCell.Header).selectWholeMonthLabel)
       }
     }
   }

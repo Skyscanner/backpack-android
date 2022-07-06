@@ -39,6 +39,10 @@ class CalendarRangeSelectionTests {
     selectionMode = CalendarParams.SelectionMode.Range,
   )
 
+  private val monthSelection = CalendarSettings.Default.copy(
+    wholeMonthSelectionLabel = "Select whole month",
+  )
+
   @Test
   fun when_range_is_opened_selection_is_correct() {
     testCalendarWith(rangeSelection) {
@@ -63,7 +67,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun when_range_is_withing_the_same_date_selection_is_correct() {
+  fun when_range_is_within_the_same_date_selection_is_correct() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
@@ -124,7 +128,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun when_range_is_withing_the_same_date_cells_have_correct_state() {
+  fun when_range_is_within_the_same_date_cells_have_correct_state() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
@@ -151,8 +155,8 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun when_select_whole_month_is_withing_the_same_date_selection_is_correct() {
-    testCalendarWith(rangeSelection) {
+  fun when_select_whole_month_is_within_the_same_date_selection_is_correct() {
+    testCalendarWith(monthSelection) {
       stateMachine.onClick(CalendarInteraction.SelectMonthClicked(header))
       verify {
         assertEquals(CalendarSelection.Month(header.yearMonth), state.selection)
@@ -162,7 +166,7 @@ class CalendarRangeSelectionTests {
 
   @Test
   fun given_whole_month_is_selected_and_a_range_selection_is_made_on_same_date_then_correct_state_should_return() {
-    testCalendarWith(rangeSelection) {
+    testCalendarWith(monthSelection) {
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
 
@@ -174,7 +178,7 @@ class CalendarRangeSelectionTests {
 
   @Test
   fun given_whole_month_is_selected_and_a_range_selection_is_made_selection_then_correct_state_should_return() {
-    testCalendarWith(rangeSelection) {
+    testCalendarWith(monthSelection) {
       stateMachine.onClick(CalendarInteraction.SelectMonthClicked(header))
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
       stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
