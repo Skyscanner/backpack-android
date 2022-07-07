@@ -40,7 +40,7 @@ class CalendarRangeSelectionTests {
   )
 
   private val monthSelection = CalendarSettings.Default.copy(
-    wholeMonthSelectionLabel = "Select whole month",
+    monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
     selectionMode = CalendarParams.SelectionMode.Range
   )
 

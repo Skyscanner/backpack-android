@@ -35,7 +35,7 @@ import java.util.Locale
  * @param locale locale used for formatting and locale-specific behaviour, e.g. finding first day of week
  * @param dayOfWeekText [TextStyle] to format days of week in calendar header
  * @param now [LocalDate] a date for the calendar to consider as current
- * @param wholeMonthSelectionLabel [String] the label to be shown in the whole month selection button. A null label hides this option
+ * @param monthSelectionMode [MonthSelectionMode] setting describing the month selection behaviour
  */
 data class CalendarParams(
   val selectionMode: SelectionMode,
@@ -44,7 +44,7 @@ data class CalendarParams(
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
   val now: LocalDate = LocalDate.now(),
-  val wholeMonthSelectionLabel: String? = null,
+  val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
 ) {
 
   internal val weekFields = WeekFields.of(locale)
@@ -54,21 +54,36 @@ data class CalendarParams(
   /**
    * Describes the selection behaviour
    */
-  enum class SelectionMode {
+  sealed interface SelectionMode {
     /**
      * No date can be selected
      */
-    Disabled,
+    object Disabled : SelectionMode
 
     /**
      * Only a single, non-disabled date can be selected.
      */
-    Single,
+    object Single : SelectionMode
 
     /**
      * A range of dates can be selected.
      */
-    Range
+    object Range : SelectionMode
+  }
+
+  /**
+   * Describes the month selection behaviour
+   */
+  sealed interface MonthSelectionMode {
+    /**
+     * No whole month selection is allowed.
+     */
+    object Disabled : MonthSelectionMode
+
+    /**
+     * Only an entire month can be selected, by tapping on the [label] next to its name.
+     */
+    data class SelectWholeMonth(val label: String) : MonthSelectionMode
   }
 }
 

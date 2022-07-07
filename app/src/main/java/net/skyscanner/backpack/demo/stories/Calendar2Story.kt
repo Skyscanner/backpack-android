@@ -121,7 +121,7 @@ class Calendar2Story : Story() {
             now = now,
             range = range,
             selectionMode = CalendarParams.SelectionMode.Range,
-            wholeMonthSelectionLabel = "Select whole month"
+            monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
           ),
         )
         calendar.setSelection(CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY)))

@@ -449,7 +449,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       range = initialRange,
       selectionMode = CalendarParams.SelectionMode.Range,
       now = now,
-      wholeMonthSelectionLabel = "Select whole month"
+      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
     )
 
     calendar.setParams(params)
@@ -467,7 +467,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       range = range,
       selectionMode = CalendarParams.SelectionMode.Range,
       now = now,
-      wholeMonthSelectionLabel = "Select whole month"
+      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
     )
 
     calendar.setParams(params)

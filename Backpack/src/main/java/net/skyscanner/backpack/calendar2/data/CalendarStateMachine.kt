@@ -128,7 +128,9 @@ internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): C
       params.cellsInfo[selection.date]?.disabled == true -> return this
       selection.date !in params.range -> return this
     }
-    is CalendarSelection.Month -> {}
+    is CalendarSelection.Month -> {
+      if (params.selectionMode == SelectionMode.Disabled) return this
+    }
   }
   return copy(
     selection = selection,
@@ -137,7 +139,7 @@ internal fun CalendarState.dispatchSetSelection(selection: CalendarSelection): C
 }
 
 internal fun CalendarState.dispatchClick(data: CalendarCell.Header): CalendarState {
-  if (data.selectWholeMonthLabel.isNullOrEmpty()) return this
+  if (data.monthSelectionMode is CalendarParams.MonthSelectionMode.Disabled) return this
   val selection = when (params.selectionMode) {
     SelectionMode.Disabled -> selection
     else -> CalendarSelection.Month(month = data.yearMonth)

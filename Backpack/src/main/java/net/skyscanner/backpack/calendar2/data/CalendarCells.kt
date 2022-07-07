@@ -78,7 +78,7 @@ internal fun CalendarCells(
         monthsFormatter = params.monthsFormatter,
         weekFields = params.weekFields,
         selection = selection,
-        selectWholeMonthLabel = params.wholeMonthSelectionLabel,
+        monthSelectionMode = params.monthSelectionMode,
       ) { yearMonth, date ->
         CalendarCellDay(
           date = date,
