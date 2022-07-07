@@ -98,6 +98,7 @@ dependencies {
   implementation rootProject.ext.accompanistFlowLayout
   implementation rootProject.ext.androidXLifecycleKtx
   implementation rootProject.ext.composeActivity
+  implementation rootProject.ext.kotlinReflection
   implementation rootProject.ext.stetho
   testImplementation rootProject.ext.junit
   androidTestImplementation rootProject.ext.junitAndroid
