@@ -192,6 +192,7 @@ object ComponentRegistry {
             "Default" story NodeData { Story of R.layout.fragment_card },
             "Without padding" story NodeData { Story of R.layout.fragment_card_without_padding },
             "Selected" story NodeData { Story of R.layout.fragment_card_selected },
+            "No elevation" story NodeData { Story of R.layout.fragment_card_no_elevation },
             "Corner style large" story NodeData { Story of R.layout.fragment_card_cornerstyle_large },
             "With divider" story NodeData { Story of R.layout.fragment_card_with_divider },
             "With divider arranged vertically" story NodeData { Story of R.layout.fragment_card_with_divider_vertical },

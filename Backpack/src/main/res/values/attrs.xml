@@ -110,6 +110,11 @@
       <enum name="small" value="0" />
       <enum name="large" value="1" />
     </attr>
+    <attr name="elevationLevel" format="enum">
+      <enum name="none" value="0" />
+      <enum name="normal" value="1" />
+      <enum name="focused" value="2" />
+    </attr>
   </declare-styleable>
 
   <declare-styleable name="BpkSpinner">

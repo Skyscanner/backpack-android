@@ -36,7 +36,7 @@ import net.skyscanner.backpack.util.use
 open class BpkCardView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_card
+  defStyleAttr: Int = R.style.Bpk_card,
 ) : CardView(context, attrs, defStyleAttr) {
 
   /**
@@ -51,12 +51,45 @@ open class BpkCardView @JvmOverloads constructor(
     LARGE(R.dimen.bpkBorderRadiusLg)
   }
 
+  enum class ElevationLevel {
+    NONE,
+    DEFAULT,
+    FOCUSED,
+    ;
+
+    fun toDimension(context: Context): Float =
+      when (this) {
+        NONE -> 0f
+        DEFAULT -> context.resources.getDimension(R.dimen.bpkElevationSm)
+        FOCUSED -> context.resources.getDimension(R.dimen.bpkElevationLg)
+      }
+
+    fun toBackgroundColor(context: Context): ColorStateList {
+      val background = when (this) {
+        NONE, DEFAULT -> context.getColor(R.color.bpkBackgroundElevation01)
+        FOCUSED -> context.getColor(R.color.bpkBackgroundElevation02)
+      }
+      return ColorStateList.valueOf(background)
+    }
+
+    companion object {
+      fun fromAttr(attr: Int) = when (attr) {
+        0 -> NONE
+        1 -> DEFAULT
+        2 -> FOCUSED
+        else -> throw IllegalStateException("Wrong elevation value")
+      }
+    }
+  }
+
   init {
     initialize(attrs, defStyleAttr)
   }
 
   @Dimension
   private var paddingSize: Int = 0
+
+  private var customBackgroundColor: ColorStateList? = null
 
   /**
    * Sets the card to padded or not
@@ -73,10 +106,11 @@ open class BpkCardView @JvmOverloads constructor(
    * Sets the card to focused or not
    * @property focused
    */
+  @Deprecated("Use elevation instead")
   var focused: Boolean = false
     set(value) {
       field = value
-      cardElevation = context.resources.getDimension(if (value) R.dimen.bpkElevationLg else R.dimen.bpkElevationSm)
+      elevationLevel = if (value) ElevationLevel.FOCUSED else ElevationLevel.DEFAULT
     }
 
   /**
@@ -91,18 +125,27 @@ open class BpkCardView @JvmOverloads constructor(
       radius = context.resources.getDimension(value.tokenRes)
     }
 
+  var elevationLevel: ElevationLevel = ElevationLevel.DEFAULT
+    set(value) {
+      field = value
+      cardElevation = value.toDimension(context)
+      val background = customBackgroundColor ?: elevationLevel.toBackgroundColor(context)
+      setCardBackgroundColor(background)
+    }
+
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     paddingSize = context.resources.getDimension(R.dimen.bpkSpacingBase).toInt()
     maxCardElevation = context.resources.getDimension(R.dimen.bpkElevationLg)
 
     context.obtainStyledAttributes(attrs, R.styleable.BpkCardView, defStyleAttr, 0).use {
       padded = it.getBoolean(R.styleable.BpkCardView_padded, true)
-      focused = it.getBoolean(R.styleable.BpkCardView_focused, false)
+      customBackgroundColor = it.getColorStateList(R.styleable.BpkCardView_cardBackgroundColor)
+      if (it.hasValue(R.styleable.BpkCardView_elevationLevel)) {
+        elevationLevel = ElevationLevel.fromAttr(it.getInt(R.styleable.BpkCardView_elevationLevel, 1))
+      } else {
+        focused = it.getBoolean(R.styleable.BpkCardView_focused, false)
+      }
       cornerStyle = CornerStyle.values()[it.getInt(R.styleable.BpkCardView_cornerStyle, 0)]
-
-      val background = it.getColorStateList(R.styleable.BpkCardView_cardBackgroundColor)
-        ?: ColorStateList.valueOf(context.getColor(R.color.bpkBackgroundElevation01))
-      setCardBackgroundColor(background)
     }
   }
 }
