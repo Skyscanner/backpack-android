@@ -61,7 +61,7 @@ internal fun cardBackgroundColor(elevation: BpkCardElevation): Color =
   animateColorAsState(
     when(elevation) {
       BpkCardElevation.Focus -> BpkTheme.colors.backgroundElevation02
-      BpkCardElevation.Default -> BpkTheme.colors.backgroundElevation01
+      BpkCardElevation.None, BpkCardElevation.Default -> BpkTheme.colors.backgroundElevation01
     }
   ).value
 
@@ -70,6 +70,7 @@ internal fun cardBackgroundColor(elevation: BpkCardElevation): Color =
 internal fun cardElevation(elevation: BpkCardElevation): Dp =
   animateDpAsState(
     when(elevation) {
+      BpkCardElevation.None -> 0.dp
       BpkCardElevation.Focus -> BpkElevation.Xl
       BpkCardElevation.Default -> BpkElevation.Sm
     }
