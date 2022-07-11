@@ -19,7 +19,7 @@ Example of a padded and focused card in XML
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:focused="true"
+    app:elevationLevel="focused"
     app:cornerStyle="small">
 
     <net.skyscanner.backpack.text.BpkText
@@ -37,7 +37,7 @@ import net.skyscanner.backpack.card.BpkCardView
 
 BpkCardView(context).apply {
    padded = true
-   focused = true
+   elevationLevel = BpkCardView.ElevationLevel.Focused
    cornerStyle = BpkCardView.CornerStyle.SMALL
 }
 ```
