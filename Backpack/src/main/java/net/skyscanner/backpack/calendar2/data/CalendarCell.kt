@@ -39,6 +39,7 @@ internal sealed class CalendarCell {
 
   internal data class Header(
     val title: String,
+    val calendarSelectionMode: CalendarParams.SelectionMode,
     val monthSelectionMode: CalendarParams.MonthSelectionMode,
     override val yearMonth: YearMonth,
   ) : CalendarCell()

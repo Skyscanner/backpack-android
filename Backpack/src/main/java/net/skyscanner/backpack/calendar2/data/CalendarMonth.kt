@@ -45,6 +45,7 @@ internal inline fun CalendarMonth(
   weekFields: WeekFields,
   selection: CalendarSelection,
   monthSelectionMode: CalendarParams.MonthSelectionMode,
+  calendarSelectionMode: CalendarParams.SelectionMode,
   day: (YearMonth, LocalDate) -> CalendarCell.Day,
 ): CalendarMonth {
 
@@ -57,6 +58,7 @@ internal inline fun CalendarMonth(
     title = MonthTitle(yearMonth, monthsFormatter, locale),
     yearMonth = yearMonth,
     monthSelectionMode = monthSelectionMode,
+    calendarSelectionMode = calendarSelectionMode
   )
 
   var currentDayOfWeek = weekFields.firstDayOfWeek
