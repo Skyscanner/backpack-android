@@ -49,15 +49,10 @@ internal class CalendarCellHeaderHolder(
   override fun bind(model: CalendarCell.Header) {
     month.text = model.title
     btnSelectWholeMonth.apply {
-      when {
-        model.calendarSelectionMode == CalendarParams.SelectionMode.Disabled ||
-          model.monthSelectionMode == CalendarParams.MonthSelectionMode.Disabled -> {
-          isVisible = false
-        }
-        model.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth -> {
-          isVisible = true
-          text = model.monthSelectionMode.label
-        }
+      isVisible = model.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth
+      isEnabled = model.calendarSelectionMode !is CalendarParams.SelectionMode.Disabled
+      if (model.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth) {
+        text = model.monthSelectionMode.label
       }
     }
   }
