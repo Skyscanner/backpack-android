@@ -32,6 +32,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.compose.FocusableCardExample
 import net.skyscanner.backpack.demo.compose.LargeCornersCardExample
+import net.skyscanner.backpack.demo.compose.NoElevationCardExample
 import net.skyscanner.backpack.demo.compose.NoPaddingCardExample
 import net.skyscanner.backpack.demo.compose.NonClickableCardExample
 import net.skyscanner.backpack.demo.compose.SmallCornersCardExample
@@ -79,6 +80,15 @@ class BpkCardTest : BpkSnapshotTest() {
 
     capture {
       FocusableCardExample(Modifier.fillMaxSize())
+    }
+  }
+
+  @Test
+  fun noElevation() {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+
+    capture {
+      NoElevationCardExample(Modifier.fillMaxSize())
     }
   }
 
