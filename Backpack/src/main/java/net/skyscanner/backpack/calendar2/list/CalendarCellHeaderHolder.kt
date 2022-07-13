@@ -23,6 +23,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.util.Consumer
@@ -48,8 +49,11 @@ internal class CalendarCellHeaderHolder(
   override fun bind(model: CalendarCell.Header) {
     month.text = model.title
     btnSelectWholeMonth.apply {
-      model.selectWholeMonthLabel?.let { text = it }
-      isVisible = !model.selectWholeMonthLabel.isNullOrEmpty()
+      isVisible = model.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth
+      isEnabled = model.calendarSelectionMode !is CalendarParams.SelectionMode.Disabled
+      if (model.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth) {
+        text = model.monthSelectionMode.label
+      }
     }
   }
 }

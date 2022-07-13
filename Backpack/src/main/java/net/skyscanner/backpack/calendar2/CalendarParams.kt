@@ -34,8 +34,8 @@ import java.util.Locale
  * @param cellsInfo additional information to be added to dates cell
  * @param locale locale used for formatting and locale-specific behaviour, e.g. finding first day of week
  * @param dayOfWeekText [TextStyle] to format days of week in calendar header
- * @param dayOfWeekAccessibilityText [TextStyle] to format accessibility description of days of week in calendar header
- * @param dateAccessibilityText [TextStyle] to format accessibility description of a date cell
+ * @param now [LocalDate] a date for the calendar to consider as current
+ * @param monthSelectionMode [MonthSelectionMode] setting describing the month selection behaviour
  */
 data class CalendarParams(
   val selectionMode: SelectionMode,
@@ -44,6 +44,7 @@ data class CalendarParams(
   val locale: Locale = Locale.getDefault(),
   val dayOfWeekText: TextStyle = TextStyle.NARROW,
   val now: LocalDate = LocalDate.now(),
+  val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
 ) {
 
   internal val weekFields = WeekFields.of(locale)
@@ -65,22 +66,24 @@ data class CalendarParams(
     object Single : SelectionMode
 
     /**
-     * Describes the rangeable selection behaviour
-     * The boundaries of range are always non-disabled dates, but there could be disabled dates within the range.
-     */
-    sealed interface Rangeable : SelectionMode
-
-    /**
      * A range of dates can be selected.
      */
-    object Dates : Rangeable
+    object Range : SelectionMode
+  }
+
+  /**
+   * Describes the month selection behaviour
+   */
+  sealed interface MonthSelectionMode {
+    /**
+     * No whole month selection is allowed.
+     */
+    object Disabled : MonthSelectionMode
 
     /**
-     * A whole month can be selected, but [Dates] could also be selected if desired.
-     *
-     * @param selectWholeMonthLabel the label for the whole month selection button.
+     * Only an entire month can be selected, by tapping on the [label] next to its name.
      */
-    data class Month(val selectWholeMonthLabel: String) : Rangeable
+    data class SelectWholeMonth(val label: String) : MonthSelectionMode
   }
 }
 

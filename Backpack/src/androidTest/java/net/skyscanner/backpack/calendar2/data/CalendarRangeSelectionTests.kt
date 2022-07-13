@@ -36,11 +36,12 @@ import org.junit.Test
 class CalendarRangeSelectionTests {
 
   private val rangeSelection = CalendarSettings.Default.copy(
-    selectionMode = CalendarParams.SelectionMode.Dates,
+    selectionMode = CalendarParams.SelectionMode.Range,
   )
 
   private val monthSelection = CalendarSettings.Default.copy(
-    selectionMode = CalendarParams.SelectionMode.Month("Select whole month"),
+    monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
+    selectionMode = CalendarParams.SelectionMode.Range
   )
 
   @Test
@@ -67,7 +68,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun when_range_is_withing_the_same_date_selection_is_correct() {
+  fun when_range_is_within_the_same_date_selection_is_correct() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
@@ -128,7 +129,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun when_range_is_withing_the_same_date_cells_have_correct_state() {
+  fun when_range_is_within_the_same_date_cells_have_correct_state() {
     testCalendarWith(rangeSelection) {
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
       stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
@@ -155,7 +156,7 @@ class CalendarRangeSelectionTests {
   }
 
   @Test
-  fun when_select_whole_month_is_withing_the_same_date_selection_is_correct() {
+  fun when_select_whole_month_is_within_the_same_date_selection_is_correct() {
     testCalendarWith(monthSelection) {
       stateMachine.onClick(CalendarInteraction.SelectMonthClicked(header))
       verify {

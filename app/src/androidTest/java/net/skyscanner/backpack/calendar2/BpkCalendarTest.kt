@@ -76,7 +76,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val calendar = BpkCalendar(testContext)
     val params = CalendarParams(
       locale = Locale.UK,
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       range = initialRange,
       now = now,
     )
@@ -89,7 +89,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val calendar = BpkCalendar(testContext)
     val params = CalendarParams(
       locale = Locale.UK,
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       range = initialRange,
       now = now,
       cellsInfo = multiColoredExampleCalendarColoring(initialRange),
@@ -103,7 +103,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val calendar = BpkCalendar(testContext)
     val params = CalendarParams(
       locale = Locale.UK,
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       range = initialRange,
       now = now,
       cellsInfo = mapOf(
@@ -129,7 +129,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = LocalDate.of(2017, 1, 2)..LocalDate.of(2017, 12, 31),
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       now = now,
     )
 
@@ -207,7 +207,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       now = now,
     )
 
@@ -236,7 +236,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       now = now,
     )
 
@@ -269,7 +269,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       now = now,
     )
 
@@ -286,7 +286,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       cellsInfo = multiColoredExampleCalendarColoring(initialRange),
       now = now,
     )
@@ -356,7 +356,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       now = now,
     )
     calendar.setParams(params)
@@ -416,7 +416,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Dates,
+      selectionMode = CalendarParams.SelectionMode.Range,
       cellsInfo = disabledDayOfTheWeekInfo(initialRange, DayOfWeek.WEDNESDAY),
       now = now,
     )
@@ -447,8 +447,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Month("Select whole month"),
-      now = now
+      selectionMode = CalendarParams.SelectionMode.Range,
+      now = now,
+      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
     )
 
     calendar.setParams(params)
@@ -464,8 +465,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val params = CalendarParams(
       locale = Locale.UK,
       range = range,
-      selectionMode = CalendarParams.SelectionMode.Month("Select whole month"),
-      now = now
+      selectionMode = CalendarParams.SelectionMode.Range,
+      now = now,
+      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
     )
 
     calendar.setParams(params)
