@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -47,7 +47,8 @@ private fun ColorSampleRow(token: Token<Color>) {
     )
     Box(
       modifier = Modifier
-        .size(56.dp)
+        .height(56.dp)
+        .width(112.dp)
         .padding(1.dp)
         .background(token.value)
     ) {
