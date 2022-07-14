@@ -2,11 +2,12 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,9 +23,9 @@ import net.skyscanner.backpack.demo.data.values
 @Composable
 @Preview
 fun ColorsComposeStory() {
-  Column {
+  LazyColumn() {
     val data: List<Token<Color>> = BpkColor.values
-    for (item: Token<Color> in data) {
+    items(data) { item ->
       ColorSampleRow(token = item)
     }
   }
