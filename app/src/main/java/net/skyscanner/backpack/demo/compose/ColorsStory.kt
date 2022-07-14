@@ -46,7 +46,8 @@ private fun ColorSampleRow(token: Token<Color>) {
     Box(
       modifier = Modifier
         .size(56.dp)
-        .background(Color.Red)
+        .padding(1.dp)
+        .background(token.value)
     )
   }
 }
