@@ -26,11 +26,9 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.ShownDialog
 import net.skyscanner.backpack.util.InternalBackpackApi
@@ -126,10 +124,6 @@ object DocsRegistry {
     // Leave toast last as it stays visible in the screen for a while
     ViewScreenshot("Toast", "default") { setupToast() }
   )
-
-  init {
-    CalendarDispatchers.setBackground(TestCoroutineDispatcher())
-  }
 }
 
 fun ComposeScreenshot(
