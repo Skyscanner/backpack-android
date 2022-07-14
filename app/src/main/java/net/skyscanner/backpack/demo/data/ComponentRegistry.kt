@@ -27,6 +27,7 @@ import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
+import net.skyscanner.backpack.demo.compose.ColorsComposeStory
 import net.skyscanner.backpack.demo.compose.FlareStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
@@ -435,7 +436,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { IconsStoryCompose() },
       )
     ),
-    "Color" story NodeData { ColorStory() },
+    "Color" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { ColorStory() },
+        TAB_TITLE_COMPOSE composeStory { ColorsComposeStory() },
+      )
+    ),
     "Elevation" story NodeData { ElevationStory() },
     "Gradient" story NodeData(
       { children -> SubStory of children },
