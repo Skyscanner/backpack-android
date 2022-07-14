@@ -50,7 +50,8 @@ private fun ColorSampleRow(token: Token<Color>) {
         .height(56.dp)
         .width(112.dp)
         .padding(1.dp)
-        .background(token.value)
+        .background(token.value),
+      contentAlignment = Alignment.Center
     ) {
       BpkText(text = colorToHex(color = token.value))
     }
