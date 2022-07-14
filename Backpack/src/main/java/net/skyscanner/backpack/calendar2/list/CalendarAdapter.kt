@@ -21,19 +21,14 @@ package net.skyscanner.backpack.calendar2.list
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCells
-import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarAdapter(
-  private val scope: CoroutineScope,
   private val output: Consumer<CalendarInteraction>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<CalendarCells> {
 
@@ -42,13 +37,9 @@ internal class CalendarAdapter(
   @OptIn(InternalBackpackApi::class)
   override fun invoke(data: CalendarCells) {
     val calculator = CalendarDiffCalculator(this.data, data)
-    scope.launch(CalendarDispatchers.Background) {
-      val diff = DiffUtil.calculateDiff(calculator, false)
-      withContext(CalendarDispatchers.Main) {
-        this@CalendarAdapter.data = data
-        diff.dispatchUpdatesTo(this@CalendarAdapter)
-      }
-    }
+    val diff = DiffUtil.calculateDiff(calculator, false)
+    this.data = data
+    diff.dispatchUpdatesTo(this)
   }
 
   operator fun get(position: Int): CalendarCell =
