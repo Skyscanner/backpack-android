@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,7 +54,10 @@ private fun ColorSampleRow(token: Token<Color>) {
         .background(token.value),
       contentAlignment = Alignment.Center
     ) {
-      BpkText(text = colorToHex(color = token.value))
+      BpkText(
+        text = colorToHex(color = token.value),
+        color = if (token.value.luminance() > 0.5) Color.Black else Color.White
+      )
     }
   }
 }
