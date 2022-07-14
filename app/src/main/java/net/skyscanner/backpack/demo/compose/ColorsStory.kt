@@ -1,6 +1,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -15,7 +16,14 @@ fun ColorsComposeStory() {
   Column {
     val data: List<Token<Color>> = BpkColor.values
     for (item: Token<Color> in data) {
-      Text(text = item.name)
+      ColorSampleRow(token = item)
     }
+  }
+}
+
+@Composable
+private fun ColorSampleRow(token: Token<Color>) {
+  Row() {
+    Text(text = token.name)
   }
 }
