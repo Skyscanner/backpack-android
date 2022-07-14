@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.text.BpkText
@@ -49,6 +50,15 @@ private fun ColorSampleRow(token: Token<Color>) {
         .size(56.dp)
         .padding(1.dp)
         .background(token.value)
-    )
+    ) {
+      BpkText(text = colorToHex(color = token.value))
+    }
   }
+}
+
+private fun colorToHex(color: Color): String {
+  val argb = color.toArgb()
+  val hexString = Integer.toHexString(argb)
+  val truncatedHexString = hexString.removeRange(0..1)
+  return "#$truncatedHexString".uppercase()
 }
