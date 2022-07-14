@@ -30,9 +30,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.InternalBackpackApi
@@ -64,8 +62,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   @OptIn(InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
   @Before
   fun setup() {
-    CalendarDispatchers.setMain(TestCoroutineDispatcher())
-    CalendarDispatchers.setBackground(TestCoroutineDispatcher())
     setDimensions(700, 400)
     activity = activityRule.activity
     AndroidThreeTen.init(activity)

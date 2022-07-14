@@ -29,10 +29,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.calendar2.data.CalendarDispatchers
 import net.skyscanner.backpack.calendar2.data.CalendarStateMachine
 import net.skyscanner.backpack.calendar2.list.CalendarAdapter
 import net.skyscanner.backpack.calendar2.list.CalendarLayoutManager
@@ -52,7 +52,6 @@ class BpkCalendar private constructor(
   private val scope: CoroutineScope,
   private val stateMachine: CalendarStateMachine = CalendarStateMachine(
     scope = scope,
-    dispatcher = CalendarDispatchers.Background,
     initialParams = CalendarParams(
       range = LocalDate.now() - Period.ofYears(1)..LocalDate.now() + Period.ofYears(1),
       selectionMode = CalendarParams.SelectionMode.Range,
@@ -65,7 +64,7 @@ class BpkCalendar private constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-  ) : this(context, attrs, defStyleAttr, CoroutineScope(CalendarDispatchers.Main))
+  ) : this(context, attrs, defStyleAttr, CoroutineScope(Dispatchers.Unconfined))
 
   init {
     inflate(context, R.layout.view_bpk_calendar_2, this)
@@ -76,7 +75,7 @@ class BpkCalendar private constructor(
   private val badge by unsafeLazy { findViewById<TextView>(R.id.bpk_calendar_badge) }
 
   private val scrollListeners = mutableListOf<(YearMonth) -> Unit>()
-  private val calendarAdapter = CalendarAdapter(scope, stateMachine::onClick)
+  private val calendarAdapter = CalendarAdapter(stateMachine::onClick)
   private val spanSizeLookup = CalendarSpanSizeLookup(calendarAdapter)
   private val calendarLayoutManager = CalendarLayoutManager(context, spanSizeLookup)
 
