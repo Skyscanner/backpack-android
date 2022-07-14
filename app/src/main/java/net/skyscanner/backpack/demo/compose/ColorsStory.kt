@@ -1,9 +1,12 @@
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,11 +33,20 @@ fun ColorsComposeStory() {
 @Composable
 private fun ColorSampleRow(token: Token<Color>) {
   Row(
-    modifier = Modifier.height(48.dp)
-      .padding(BpkSpacing.Base),
+    modifier = Modifier
+      .height(56.dp),
     verticalAlignment = Alignment.CenterVertically,
-
   ) {
-    BpkText(text = token.name)
+    BpkText(
+      text = token.name,
+      modifier = Modifier
+        .weight(1f)
+        .padding(BpkSpacing.Base)
+    )
+    Box(
+      modifier = Modifier
+        .size(56.dp)
+        .background(Color.Red)
+    )
   }
 }
