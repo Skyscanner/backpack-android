@@ -35,6 +35,7 @@ import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
+import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
@@ -454,7 +455,13 @@ object ComponentRegistry {
     ),
     "Icons" story NodeData { Story of R.layout.fragment_icons },
     "Radii" story NodeData { Story of R.layout.fragment_radii },
-    "Spacing" story NodeData { SpacingStory() }
+    "Spacing" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { SpacingStory() },
+        TAB_TITLE_COMPOSE composeStory { SpacingComposeStory() },
+      )
+    ),
   )
 
   fun getStoryCreator(fullyQualifiedName: String): RegistryItem {
