@@ -43,8 +43,8 @@ import net.skyscanner.backpack.demo.data.values
 @Preview
 fun SpacingComposeStory() {
   LazyColumn() {
-    val spacingData: List<Token<Dp>> = BpkSpacing.values.sortedBy { it.value }
-    items(spacingData) { item ->
+    val data: List<Token<Dp>> = BpkSpacing.values.sortedBy { it.value }
+    items(data) { item ->
       SpacingSampleRow(token = item)
     }
   }
@@ -60,8 +60,7 @@ private fun SpacingSampleRow(token: Token<Dp>) {
   ) {
     BpkText(
       text = "${token.name} = ${token.value}",
-      modifier = Modifier
-        .weight(1f)
+      modifier = Modifier.weight(1f),
     )
     Box(
       modifier = Modifier
