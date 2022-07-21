@@ -56,7 +56,7 @@ sealed interface BpkFieldStatus {
 }
 
 @Composable
-fun BpkField(
+fun BpkFieldSet(
   modifier: Modifier = Modifier,
   label: String? = null,
   description: String? = null,
