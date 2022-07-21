@@ -51,6 +51,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.fieldset.LocalFieldStatus
@@ -178,6 +179,7 @@ fun BpkTextField(
         maxLines = maxLines,
         modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
         style = BpkTheme.typography.bodyDefault,
+        overflow = TextOverflow.Ellipsis,
       )
 
       BasicTextField(

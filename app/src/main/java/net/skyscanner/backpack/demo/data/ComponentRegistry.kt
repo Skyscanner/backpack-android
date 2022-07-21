@@ -36,6 +36,7 @@ import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
+import net.skyscanner.backpack.demo.compose.TextFiledStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
@@ -400,11 +401,17 @@ object ComponentRegistry {
       )
     ),
     "Text Field" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_text_fields },
-        "RTL" story NodeData { Story of R.layout.fragment_text_fields_rtl },
-        "With labels" story NodeData { Story of R.layout.fragment_text_fields_labels },
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_text_fields },
+            "RTL" story NodeData { Story of R.layout.fragment_text_fields_rtl },
+            "With labels" story NodeData { Story of R.layout.fragment_text_fields_labels },
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { TextFiledStory() },
       )
     ),
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
