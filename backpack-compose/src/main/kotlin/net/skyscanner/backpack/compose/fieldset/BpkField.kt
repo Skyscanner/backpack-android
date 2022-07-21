@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -55,7 +56,7 @@ sealed interface BpkFieldStatus {
 }
 
 @Composable
-fun BpkFieldSet(
+fun BpkField(
   modifier: Modifier = Modifier,
   label: String? = null,
   description: String? = null,
@@ -63,16 +64,13 @@ fun BpkFieldSet(
   content: @Composable ColumnScope.() -> Unit,
 ) {
 
-  Column(
-    modifier = modifier,
-    horizontalAlignment = Alignment.Start,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-  ) {
+  Column(modifier) {
 
     if (label != null) {
       BpkText(
         text = label,
         style = BpkTheme.typography.label2,
+        modifier = Modifier.padding(bottom = BpkSpacing.Md),
         color = animateColorAsState(
           when (status) {
             is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
@@ -93,6 +91,7 @@ fun BpkFieldSet(
         text = description,
         style = BpkTheme.typography.footnote,
         color = BpkTheme.colors.textSecondary,
+        modifier = Modifier.padding(top = BpkSpacing.Md),
       )
     }
 
@@ -101,10 +100,12 @@ fun BpkFieldSet(
       lastErrorText = status.text
     }
 
-    AnimatedVisibility(
-      visible = status is BpkFieldStatus.Error,
-    ) {
-      Row {
+    AnimatedVisibility(status is BpkFieldStatus.Error) {
+      Row(
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.padding(top = BpkSpacing.Md),
+      ) {
         BpkIcon(
           icon = BpkIcon.ExclamationCircle,
           contentDescription = null,
