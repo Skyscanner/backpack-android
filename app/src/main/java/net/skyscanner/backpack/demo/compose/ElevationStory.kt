@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.max
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkColor
@@ -69,7 +70,10 @@ private fun ElevationCard(token: Token<Dp>) {
 
 @Composable
 private fun ElevationSample(token: Token<Dp>) {
-  Box(modifier = Modifier.padding(BpkSpacing.Base)) {
+  Box(
+    modifier = Modifier
+      .padding(horizontal = max(BpkSpacing.Base, token.value), vertical = max(BpkSpacing.Base, token.value))
+  ) {
     ElevationCard(token)
   }
 }
