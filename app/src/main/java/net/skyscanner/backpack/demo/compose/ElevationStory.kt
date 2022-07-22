@@ -43,9 +43,9 @@ import net.skyscanner.backpack.demo.data.values
 @Preview
 fun ElevationComposeStory() {
   Column() {
-    val data: List<Token<Dp>> = BpkElevation.values
+    val data: List<Token<Dp>> = BpkElevation.values.sortedBy { it.value }
     for (item in data) {
-      ElevationCard(token = item)
+      ElevationSample(token = item)
     }
   }
 }
@@ -62,7 +62,14 @@ private fun ElevationCard(token: Token<Dp>) {
       text = "${token.name} = ${token.value}",
       modifier = Modifier
         .align(Alignment.Center)
-        .padding(BpkSpacing.Base)
+        .padding(BpkSpacing.Base),
     )
+  }
+}
+
+@Composable
+private fun ElevationSample(token: Token<Dp>) {
+  Box(modifier = Modifier.padding(BpkSpacing.Base)) {
+    ElevationCard(token)
   }
 }
