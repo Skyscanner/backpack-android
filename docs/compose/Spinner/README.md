@@ -13,7 +13,7 @@ import net.skyscanner.backpack.compose.spinner.BpkSpinner
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 
 BpkSpinner(
-  size = BpkSpinnerSize.Medium,
+  size = BpkSpinnerSize.Large,
 )
 ```
 
@@ -25,7 +25,7 @@ import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerStype
 
 BpkSpinner(
-  size = BpkSpinnerSize.Medium,
+  size = BpkSpinnerSize.Large,
   style = BpkSpinnerStyle.OnDarkSurface,
 )
 ```

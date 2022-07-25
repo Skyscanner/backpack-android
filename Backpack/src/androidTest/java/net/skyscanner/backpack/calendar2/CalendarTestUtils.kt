@@ -54,7 +54,7 @@ internal fun testCalendarWith(
   params: CalendarParams,
   block: suspend CalendarTestScope.() -> TestStateMachineResult,
 ) =
-  testStateMachine(creator = { CalendarStateMachine(this, params, it) }, block = block)
+  testStateMachine(creator = { CalendarStateMachine(this, params) }, block = block)
 
 object CalendarSettings {
 

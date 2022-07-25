@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/App.Story"
+  android:background="@color/bpkBackgroundAlternative"
   android:padding="0dp">
 
   <net.skyscanner.backpack.card.BpkCardView
@@ -11,7 +12,7 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:elevationLevel="focused">
+    app:elevationLevel="none">
 
     <net.skyscanner.backpack.text.BpkText
       android:layout_width="match_parent"

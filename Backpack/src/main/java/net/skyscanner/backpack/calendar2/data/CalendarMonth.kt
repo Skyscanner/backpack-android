@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.extension.firstDay
 import net.skyscanner.backpack.calendar2.extension.lastDay
@@ -43,7 +44,8 @@ internal inline fun CalendarMonth(
   monthsFormatter: SimpleDateFormat,
   weekFields: WeekFields,
   selection: CalendarSelection,
-  selectWholeMonthLabel: String?,
+  monthSelectionMode: CalendarParams.MonthSelectionMode,
+  calendarSelectionMode: CalendarParams.SelectionMode,
   day: (YearMonth, LocalDate) -> CalendarCell.Day,
 ): CalendarMonth {
 
@@ -55,7 +57,8 @@ internal inline fun CalendarMonth(
   cells += CalendarCell.Header(
     title = MonthTitle(yearMonth, monthsFormatter, locale),
     yearMonth = yearMonth,
-    selectWholeMonthLabel = selectWholeMonthLabel,
+    monthSelectionMode = monthSelectionMode,
+    calendarSelectionMode = calendarSelectionMode
   )
 
   var currentDayOfWeek = weekFields.firstDayOfWeek

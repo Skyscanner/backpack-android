@@ -33,8 +33,8 @@ import net.skyscanner.backpack.compose.utils.textDisabled
 
 enum class BpkSpinnerSize {
   Small,
-  Medium,
   Large,
+  XLarge,
 }
 
 enum class BpkSpinnerStyle {
@@ -63,8 +63,8 @@ fun BpkSpinner(
 private val BpkSpinnerSize.dp: Dp
   get() = when (this) {
     BpkSpinnerSize.Small -> BpkSpacing.Base
-    BpkSpinnerSize.Medium -> BpkSpacing.Lg
-    BpkSpinnerSize.Large -> BpkSpacing.Xl
+    BpkSpinnerSize.Large -> BpkSpacing.Lg
+    BpkSpinnerSize.XLarge -> BpkSpacing.Xl
   }
 
 private fun findBestSpinnerStyleFor(contentColor: Color, lightMode: Boolean): BpkSpinnerStyle =

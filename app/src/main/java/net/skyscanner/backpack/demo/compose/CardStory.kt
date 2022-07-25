@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -35,12 +36,15 @@ import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 fun CardStory() {
   Column(
-    modifier = Modifier.padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+    modifier = Modifier
+      .background(BpkTheme.colors.backgroundAlternative)
+      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
@@ -55,6 +59,8 @@ fun CardStory() {
     NoPaddingCardExample(Modifier.fillMaxWidth())
 
     NonClickableCardExample(cardModifier)
+
+    NoElevationCardExample(cardModifier)
 
     FocusableCardExample(cardModifier)
   }
@@ -127,11 +133,26 @@ fun FocusableCardExample(
     contentAlignment = Alignment.Center,
     onClick = {
       elevation = when (elevation) {
-        BpkCardElevation.Default -> BpkCardElevation.Focus
+        BpkCardElevation.None, BpkCardElevation.Default -> BpkCardElevation.Focus
         BpkCardElevation.Focus -> BpkCardElevation.Default
       }
     },
   ) {
     BpkText(if (elevation == BpkCardElevation.Focus) "Tap to unfocus" else "Tap to focus")
+  }
+}
+
+@Composable
+@Preview
+fun NoElevationCardExample(
+  modifier: Modifier = Modifier,
+) {
+  BpkCard(
+    modifier = modifier,
+    onClick = {},
+    contentAlignment = Alignment.Center,
+    elevation = BpkCardElevation.None,
+  ) {
+    BpkText("No elevation")
   }
 }

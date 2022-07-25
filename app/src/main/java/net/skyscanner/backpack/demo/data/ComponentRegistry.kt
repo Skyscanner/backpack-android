@@ -27,6 +27,7 @@ import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
+import net.skyscanner.backpack.demo.compose.ColorsComposeStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
@@ -35,6 +36,7 @@ import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
+import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.TextFiledStory
@@ -194,6 +196,7 @@ object ComponentRegistry {
             "Default" story NodeData { Story of R.layout.fragment_card },
             "Without padding" story NodeData { Story of R.layout.fragment_card_without_padding },
             "Selected" story NodeData { Story of R.layout.fragment_card_selected },
+            "No elevation" story NodeData { Story of R.layout.fragment_card_no_elevation },
             "Corner style large" story NodeData { Story of R.layout.fragment_card_cornerstyle_large },
             "With divider" story NodeData { Story of R.layout.fragment_card_with_divider },
             "With divider arranged vertically" story NodeData { Story of R.layout.fragment_card_with_divider_vertical },
@@ -443,7 +446,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { IconsStoryCompose() },
       )
     ),
-    "Color" story NodeData { ColorStory() },
+    "Color" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { ColorStory() },
+        TAB_TITLE_COMPOSE composeStory { ColorsComposeStory() },
+      )
+    ),
     "Elevation" story NodeData { ElevationStory() },
     "Gradient" story NodeData(
       { children -> SubStory of children },
@@ -455,7 +464,13 @@ object ComponentRegistry {
     ),
     "Icons" story NodeData { Story of R.layout.fragment_icons },
     "Radii" story NodeData { Story of R.layout.fragment_radii },
-    "Spacing" story NodeData { SpacingStory() }
+    "Spacing" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { SpacingStory() },
+        TAB_TITLE_COMPOSE composeStory { SpacingComposeStory() },
+      )
+    ),
   )
 
   fun getStoryCreator(fullyQualifiedName: String): RegistryItem {

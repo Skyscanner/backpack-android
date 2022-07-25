@@ -21,6 +21,7 @@ package net.skyscanner.backpack.card
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.R
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,7 +37,7 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCardDefault() {
+  fun default() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -45,7 +46,7 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCardWithPadding() {
+  fun withPadding() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -55,7 +56,7 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCardWithoutPadding() {
+  fun withoutPadding() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -65,17 +66,28 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCardWithFocus() {
+  fun withFocus() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
     card.addView(text)
-    card.focused = true
+    card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
     snap(card)
   }
 
   @Test
-  fun screenshotTestCardWithoutPaddingAndFocus() {
+  fun noElevation() {
+    setBackground(R.color.bpkBackgroundAlternative)
+    val card = BpkCardView(testContext)
+    val text = TextView(testContext)
+    text.text = "message"
+    card.addView(text)
+    card.elevationLevel = BpkCardView.ElevationLevel.NONE
+    snap(card)
+  }
+
+  @Test
+  fun withoutPaddingAndFocus() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -86,7 +98,7 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCardWithCornerStyleLarge() {
+  fun withCornerStyleLarge() {
     val card = BpkCardView(testContext).apply {
       addView(
         TextView(testContext).apply {
@@ -99,14 +111,14 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCardWithCornerStyleLargeAndFocus() {
+  fun withCornerStyleLargeAndFocus() {
     val card = BpkCardView(testContext).apply {
       addView(
         TextView(testContext).apply {
           text = "message"
         }
       )
-      focused = true
+      elevationLevel = BpkCardView.ElevationLevel.FOCUSED
       cornerStyle = BpkCardView.CornerStyle.LARGE
     }
     snap(card)

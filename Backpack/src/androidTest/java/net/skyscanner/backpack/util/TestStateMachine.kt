@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.util
 
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.plus
@@ -50,15 +49,14 @@ class TestStateMachineResultScope<State>(
 
 @OptIn(ExperimentalCoroutinesApi::class)
 fun <SM : StateMachine<State, *>, State> testStateMachine(
-  creator: CoroutineScope.(CoroutineDispatcher) -> SM,
+  creator: CoroutineScope.() -> SM,
   block: suspend TestStateMachineScope<SM, State>.() -> TestStateMachineResult
 ) {
   val testCoroutineScheduler = TestCoroutineScheduler()
-  val coroutineDispatcher = UnconfinedTestDispatcher(testCoroutineScheduler)
-  val coroutineScope = TestScope(testCoroutineScheduler) + coroutineDispatcher
+  val coroutineScope = TestScope(testCoroutineScheduler) + UnconfinedTestDispatcher(testCoroutineScheduler)
 
   runBlocking(testCoroutineScheduler) {
-    val stateMachine = coroutineScope.creator(coroutineDispatcher)
+    val stateMachine = coroutineScope.creator()
     val testScope = TestStateMachineScope(stateMachine)
     testScope.block()
   }
