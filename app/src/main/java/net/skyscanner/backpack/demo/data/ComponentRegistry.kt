@@ -27,6 +27,7 @@ import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
+import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
@@ -272,6 +273,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { ComposeDialogStory() },
       ),
     ),
+    "FieldSet" composeStory { FieldSetStory() },
     "Flare" story NodeData(
       { children -> TabStory of children },
       mapOf(
