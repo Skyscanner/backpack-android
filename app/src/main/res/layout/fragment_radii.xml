@@ -56,7 +56,7 @@
     android:text="\@dimen/bpkBorderRadiusPill"
     android:textColor="@color/bpkWhite"
     android:textAlignment="center"
-    android:padding="@dimen/bpkSpacingBase"
+    android:padding="@dimen/bpkSpacingLg"
     app:textStyle="bodyLongform"/>
 
 </LinearLayout>
