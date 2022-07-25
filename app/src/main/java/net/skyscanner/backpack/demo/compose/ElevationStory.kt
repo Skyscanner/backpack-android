@@ -28,6 +28,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.max
@@ -35,6 +36,7 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.Token
 import net.skyscanner.backpack.demo.data.values
 
@@ -58,7 +60,7 @@ private fun ElevationCard(token: Token<Dp>) {
   ) {
     Box(contentAlignment = Alignment.Center) {
       BpkText(
-        text = "${token.name} = ${token.value}",
+        text = stringResource(R.string.token_placeholder, token.name, token.value),
         modifier = Modifier.padding(BpkSpacing.Base),
       )
     }
@@ -67,7 +69,7 @@ private fun ElevationCard(token: Token<Dp>) {
 
 @Composable
 private fun ElevationSample(token: Token<Dp>) {
-  Box(Modifier.padding(horizontal = max(BpkSpacing.Base, token.value), vertical = max(BpkSpacing.Base, token.value))) {
+  Box(Modifier.padding(max(BpkSpacing.Base, token.value))) {
     ElevationCard(token)
   }
 }
