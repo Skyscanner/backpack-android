@@ -90,7 +90,12 @@ fun BpkFieldSet(
       BpkText(
         text = description,
         style = BpkTheme.typography.footnote,
-        color = BpkTheme.colors.textSecondary,
+        color = animateColorAsState(
+          when (status) {
+            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
+            else -> BpkTheme.colors.textSecondary
+          }
+        ).value,
         modifier = Modifier.padding(top = BpkSpacing.Md),
       )
     }
