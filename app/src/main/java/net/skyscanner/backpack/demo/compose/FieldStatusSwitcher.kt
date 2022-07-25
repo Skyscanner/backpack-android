@@ -37,7 +37,7 @@ import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 @Composable
 internal fun FieldStatusSwitcher(
   modifier: Modifier = Modifier,
-  initialStatus: BpkFieldStatus = BpkFieldStatus.None,
+  initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
   errorText: String = "Error text",
   verticalArrangement: Arrangement.Vertical = Arrangement.Top,
   horizontalAlignment: Alignment.Horizontal = Alignment.Start,
@@ -53,8 +53,8 @@ internal fun FieldStatusSwitcher(
   ) {
 
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-      BpkButton(text = "None", type = BpkButtonType.Featured) {
-        status = BpkFieldStatus.None
+      BpkButton(text = "Default", type = BpkButtonType.Featured) {
+        status = BpkFieldStatus.Default
       }
       BpkButton(text = "Disabled", type = BpkButtonType.Secondary) {
         status = BpkFieldStatus.Disabled

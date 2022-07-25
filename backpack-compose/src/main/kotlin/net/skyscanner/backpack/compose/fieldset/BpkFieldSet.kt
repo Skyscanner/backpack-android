@@ -42,11 +42,11 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.ExclamationCircle
 import net.skyscanner.backpack.compose.utils.textDisabled
 
-internal val LocalFieldStatus = staticCompositionLocalOf<BpkFieldStatus> { BpkFieldStatus.None }
+internal val LocalFieldStatus = staticCompositionLocalOf<BpkFieldStatus> { BpkFieldStatus.Default }
 
 sealed interface BpkFieldStatus {
 
-  object None : BpkFieldStatus
+  object Default : BpkFieldStatus
 
   object Disabled : BpkFieldStatus
 
@@ -60,7 +60,7 @@ fun BpkFieldSet(
   modifier: Modifier = Modifier,
   label: String? = null,
   description: String? = null,
-  status: BpkFieldStatus = BpkFieldStatus.None,
+  status: BpkFieldStatus = BpkFieldStatus.Default,
   content: @Composable ColumnScope.() -> Unit,
 ) {
 
@@ -76,7 +76,7 @@ fun BpkFieldSet(
             is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
             is BpkFieldStatus.Error -> BpkTheme.colors.systemRed
             is BpkFieldStatus.Validated -> BpkTheme.colors.textPrimary
-            is BpkFieldStatus.None -> BpkTheme.colors.textPrimary
+            is BpkFieldStatus.Default -> BpkTheme.colors.textPrimary
           }
         ).value,
       )

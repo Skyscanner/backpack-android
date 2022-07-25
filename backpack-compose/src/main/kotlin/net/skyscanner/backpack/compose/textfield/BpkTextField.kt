@@ -80,7 +80,7 @@ fun BpkTextField(
   visualTransformation: VisualTransformation = VisualTransformation.None,
   keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
   keyboardActions: KeyboardActions = KeyboardActions(),
-  maxLines: Int = Int.MAX_VALUE,
+  maxLines: Int = 1,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
 
@@ -121,7 +121,7 @@ fun BpkTextField(
   visualTransformation: VisualTransformation = VisualTransformation.None,
   keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
   keyboardActions: KeyboardActions = KeyboardActions(),
-  maxLines: Int = Int.MAX_VALUE,
+  maxLines: Int = 1,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
 
