@@ -138,4 +138,5 @@
   <string name="chip_option">Option</string>
   <string name="chip_select">Select</string>
   <string name="chip_dismiss">Dismiss</string>
+  <string name="token_placeholder">%1$s = %2$s</string>
 </resources>
