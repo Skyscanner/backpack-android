@@ -30,6 +30,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.text.BpkText
@@ -37,6 +38,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.Token
 import net.skyscanner.backpack.demo.data.values
 
@@ -74,7 +76,7 @@ private fun RadiiCard(token: Token<Dp>) {
         .padding(BpkSpacing.Base),
     ) {
       BpkText(
-        text = "${token.name} = ${token.value}",
+        text = stringResource(R.string.token_placeholder, token.name, token.value),
         style = BpkTheme.typography.bodyLongform,
       )
     }
