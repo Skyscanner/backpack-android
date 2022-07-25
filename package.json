@@ -45,7 +45,7 @@
     "@skyscanner/bpk-svgs": "^14.0.10",
     "@xmldom/xmldom": "^0.8.0",
     "danger": "^11.0.2",
-    "del": "^6.0.0",
+    "del": "^7.0.0",
     "eslint": "^8.11.0",
     "eslint-config-airbnb": "^19.0.0",
     "eslint-config-prettier": "^8.3.0",
