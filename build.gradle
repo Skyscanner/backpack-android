@@ -87,7 +87,7 @@ ext {
   androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
   androidMaterial = "com.google.android.material:material:1.6.1"
   cardView = "androidx.cardview:cardview:1.0.0"
-  googleMaps = "com.google.android.gms:play-services-maps:18.0.2"
+  googleMaps = "com.google.android.gms:play-services-maps:18.1.0"
   constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
   swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
   threeTenAbpVersion = "1.4.0"
