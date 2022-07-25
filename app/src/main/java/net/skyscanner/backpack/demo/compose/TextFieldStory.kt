@@ -31,6 +31,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.textfield.BpkTextField
@@ -42,8 +44,6 @@ import net.skyscanner.backpack.demo.R
 @Composable
 fun TextFiledStory() {
 
-  val loremIpsum = stringResource(R.string.stub_sm)
-
   FieldStatusSwitcher(
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     modifier = Modifier
@@ -53,52 +53,84 @@ fun TextFiledStory() {
     CompositionLocalProvider(LocalTextStyle provides BpkTheme.typography.label2) {
 
       BpkText(text = "Default")
-      var defaultValue by remember { mutableStateOf("") }
-      BpkTextField(
-        value = defaultValue,
-        status = status,
-        onValueChange = { defaultValue = it },
-        placeholder = "Placeholder",
-      )
+      TextFieldDefaultExample(status)
 
       BpkText("Read only")
-      BpkTextField(
-        readOnly = true,
-        value = "Read only value",
-        onValueChange = { },
-        placeholder = "Placeholder",
-        status = status,
-      )
+      TextFieldReadOnlyExample(status)
 
       BpkText("With leading icon")
-      var withLeadingIconValue by remember { mutableStateOf("") }
-      BpkTextField(
-        value = withLeadingIconValue,
-        onValueChange = { withLeadingIconValue = it },
-        placeholder = "Placeholder",
-        icon = BpkIcon.Accessibility,
-        status = status,
-      )
+      TextFieldLeadingIconExample(status)
 
       BpkText("Single line")
-      var forcedSingleLine by remember { mutableStateOf("") }
-      BpkTextField(
-        value = forcedSingleLine,
-        onValueChange = { forcedSingleLine = it },
-        placeholder = loremIpsum,
-        status = status,
-      )
+      TextFieldSingleLineExample(status)
 
       BpkText("Multiline")
-      var withLongTextValue by remember { mutableStateOf(loremIpsum) }
-      BpkTextField(
-        value = withLongTextValue,
-        onValueChange = { withLongTextValue = it },
-        placeholder = "Placeholder",
-        icon = BpkIcon.Accessibility,
-        status = status,
-        maxLines = Int.MAX_VALUE,
-      )
+      TextFieldMultilineExample(status)
     }
   }
+}
+
+@Preview
+@Composable
+fun TextFieldDefaultExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+  var value by remember { mutableStateOf("") }
+  BpkTextField(
+    value = value,
+    status = status,
+    onValueChange = { value = it },
+    placeholder = "Placeholder",
+  )
+}
+
+@Preview
+@Composable
+fun TextFieldReadOnlyExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+  BpkTextField(
+    readOnly = true,
+    value = "Read only value",
+    onValueChange = { },
+    placeholder = "Placeholder",
+    status = status,
+  )
+}
+
+@Preview
+@Composable
+fun TextFieldLeadingIconExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+  var value by remember { mutableStateOf("") }
+  BpkTextField(
+    value = value,
+    onValueChange = { value = it },
+    placeholder = "Placeholder",
+    icon = BpkIcon.Accessibility,
+    status = status,
+  )
+}
+
+@Preview
+@Composable
+fun TextFieldSingleLineExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+  val loremIpsum = stringResource(R.string.stub_sm)
+  var value by remember { mutableStateOf("") }
+  BpkTextField(
+    value = value,
+    onValueChange = { value = it },
+    placeholder = loremIpsum,
+    status = status,
+  )
+}
+
+@Preview
+@Composable
+fun TextFieldMultilineExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+  val loremIpsum = stringResource(R.string.stub_sm)
+  var value by remember { mutableStateOf(loremIpsum) }
+  BpkTextField(
+    value = value,
+    onValueChange = { value = it },
+    placeholder = "Placeholder",
+    icon = BpkIcon.Accessibility,
+    status = status,
+    maxLines = Int.MAX_VALUE,
+  )
 }
