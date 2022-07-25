@@ -70,16 +70,6 @@ fun TextFiledStory() {
         status = status,
       )
 
-      BpkText("Forced single line")
-      var forcedSingleLine by remember { mutableStateOf("") }
-      BpkTextField(
-        maxLines = 1,
-        value = forcedSingleLine,
-        onValueChange = { forcedSingleLine = it },
-        placeholder = loremIpsum,
-        status = status,
-      )
-
       BpkText("With leading icon")
       var withLeadingIconValue by remember { mutableStateOf("") }
       BpkTextField(
@@ -90,7 +80,16 @@ fun TextFiledStory() {
         status = status,
       )
 
-      BpkText("With long text")
+      BpkText("Single line")
+      var forcedSingleLine by remember { mutableStateOf("") }
+      BpkTextField(
+        value = forcedSingleLine,
+        onValueChange = { forcedSingleLine = it },
+        placeholder = loremIpsum,
+        status = status,
+      )
+
+      BpkText("Multiline")
       var withLongTextValue by remember { mutableStateOf(loremIpsum) }
       BpkTextField(
         value = withLongTextValue,
@@ -98,6 +97,7 @@ fun TextFiledStory() {
         placeholder = "Placeholder",
         icon = BpkIcon.Accessibility,
         status = status,
+        maxLines = Int.MAX_VALUE,
       )
     }
   }
