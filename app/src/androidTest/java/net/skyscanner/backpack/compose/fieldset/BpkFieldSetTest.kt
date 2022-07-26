@@ -31,7 +31,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 128, width = 200)
+    setDimensions(height = 140, width = 200)
   }
 
   @Test
