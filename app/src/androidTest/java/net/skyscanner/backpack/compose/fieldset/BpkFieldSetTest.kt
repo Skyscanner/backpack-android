@@ -18,20 +18,10 @@
 
 package net.skyscanner.backpack.compose.fieldset
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.textfield.BpkTextField
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,7 +41,11 @@ class BpkFieldSetTest : BpkSnapshotTest() {
       description = "Description",
       status = BpkFieldStatus.Default,
     ) {
-      DemoContent(status = it)
+      BpkTextField(
+        value = "",
+        onValueChange = { },
+        placeholder = "Placeholder",
+      )
     }
   }
 
@@ -63,7 +57,11 @@ class BpkFieldSetTest : BpkSnapshotTest() {
         description = "Description",
         status = BpkFieldStatus.Default,
       ) {
-        DemoContent(status = it)
+        BpkTextField(
+          value = "",
+          onValueChange = { },
+          placeholder = "Placeholder",
+        )
       }
     }
   }
@@ -76,7 +74,11 @@ class BpkFieldSetTest : BpkSnapshotTest() {
         description = "Description",
         status = BpkFieldStatus.Default,
       ) {
-        DemoContent(status = it)
+        BpkTextField(
+          value = "",
+          onValueChange = { },
+          placeholder = "Placeholder",
+        )
       }
     }
   }
@@ -88,7 +90,11 @@ class BpkFieldSetTest : BpkSnapshotTest() {
       BpkFieldSet(
         status = BpkFieldStatus.Default,
       ) {
-        DemoContent(status = it)
+        BpkTextField(
+          value = "",
+          onValueChange = { },
+          placeholder = "Placeholder",
+        )
       }
     }
   }
@@ -102,7 +108,11 @@ class BpkFieldSetTest : BpkSnapshotTest() {
         description = "Description",
         status = BpkFieldStatus.Disabled,
       ) {
-        DemoContent(status = it)
+        BpkTextField(
+          value = "",
+          onValueChange = { },
+          placeholder = "Placeholder",
+        )
       }
     }
   }
@@ -116,7 +126,11 @@ class BpkFieldSetTest : BpkSnapshotTest() {
         description = "Description",
         status = BpkFieldStatus.Validated,
       ) {
-        DemoContent(status = it)
+        BpkTextField(
+          value = "",
+          onValueChange = { },
+          placeholder = "Placeholder",
+        )
       }
     }
   }
@@ -130,33 +144,10 @@ class BpkFieldSetTest : BpkSnapshotTest() {
         description = "Description",
         status = BpkFieldStatus.Error("Error text"),
       ) {
-        DemoContent(status = it)
-      }
-    }
-  }
-
-  @Composable
-  private fun DemoContent(
-    status: BpkFieldStatus,
-    modifier: Modifier = Modifier,
-  ) {
-    Surface(
-      modifier = modifier,
-      color = when (status) {
-        is BpkFieldStatus.Default -> BpkTheme.colors.primary
-        is BpkFieldStatus.Disabled -> BpkTheme.colors.backgroundSecondary
-        is BpkFieldStatus.Error -> BpkTheme.colors.systemRed
-        is BpkFieldStatus.Validated -> BpkColor.Monteverde
-      },
-    ) {
-      Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl)) {
-        BpkText(
-          text = when (status) {
-            is BpkFieldStatus.Default -> "Default"
-            is BpkFieldStatus.Disabled -> "Disabled"
-            is BpkFieldStatus.Error -> "Error(text=${status.text})"
-            is BpkFieldStatus.Validated -> "Validated"
-          }
+        BpkTextField(
+          value = "",
+          onValueChange = { },
+          placeholder = "Placeholder",
         )
       }
     }
