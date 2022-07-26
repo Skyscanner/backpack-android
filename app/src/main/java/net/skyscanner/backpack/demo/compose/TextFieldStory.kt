@@ -52,19 +52,19 @@ fun TextFiledStory() {
   ) { status ->
     CompositionLocalProvider(LocalTextStyle provides BpkTheme.typography.label2) {
 
-      BpkText(text = "Default")
+      BpkText(text = stringResource(R.string.default_text))
       TextFieldDefaultExample(status)
 
-      BpkText("Read only")
+      BpkText(stringResource(R.string.read_only))
       TextFieldReadOnlyExample(status)
 
-      BpkText("With leading icon")
+      BpkText(stringResource(R.string.with_leading_icon))
       TextFieldLeadingIconExample(status)
 
-      BpkText("Single line")
+      BpkText(stringResource(R.string.single_line))
       TextFieldSingleLineExample(status)
 
-      BpkText("Multiline")
+      BpkText(stringResource(R.string.multiline))
       TextFieldMultilineExample(status)
     }
   }
@@ -78,7 +78,7 @@ fun TextFieldDefaultExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
     value = value,
     status = status,
     onValueChange = { value = it },
-    placeholder = "Placeholder",
+    placeholder = stringResource(R.string.placeholder),
   )
 }
 
@@ -87,9 +87,9 @@ fun TextFieldDefaultExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
 fun TextFieldReadOnlyExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkTextField(
     readOnly = true,
-    value = "Read only value",
+    value = stringResource(R.string.read_only_value),
     onValueChange = { },
-    placeholder = "Placeholder",
+    placeholder = stringResource(R.string.placeholder),
     status = status,
   )
 }
@@ -101,7 +101,7 @@ fun TextFieldLeadingIconExample(status: BpkFieldStatus = BpkFieldStatus.Default)
   BpkTextField(
     value = value,
     onValueChange = { value = it },
-    placeholder = "Placeholder",
+    placeholder = stringResource(R.string.placeholder),
     icon = BpkIcon.Accessibility,
     status = status,
   )
@@ -128,7 +128,7 @@ fun TextFieldMultilineExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkTextField(
     value = value,
     onValueChange = { value = it },
-    placeholder = "Placeholder",
+    placeholder = stringResource(R.string.placeholder),
     icon = BpkIcon.Accessibility,
     status = status,
     maxLines = Int.MAX_VALUE,

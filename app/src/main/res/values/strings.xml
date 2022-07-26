@@ -138,4 +138,15 @@
   <string name="chip_option">Option</string>
   <string name="chip_select">Select</string>
   <string name="chip_dismiss">Dismiss</string>
+  <string name="default_text">Default</string>
+  <string name="with_description">With description</string>
+  <string name="description">Description</string>
+  <string name="placeholder">Placeholder</string>
+  <string name="no_label">No label</string>
+  <string name="no_description">No description</string>
+  <string name="read_only">Read only</string>
+  <string name="with_leading_icon">With leading icon</string>
+  <string name="single_line">Single line</string>
+  <string name="multiline">Multiline</string>
+  <string name="read_only_value">Read only value</string>
 </resources>

@@ -26,11 +26,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.fieldset.BpkFieldSet
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 
 @Composable
 fun FieldSetStory() {
@@ -48,15 +50,15 @@ fun FieldSetStory() {
 @Composable
 fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
-    label = "With description",
-    description = "Description",
+    label = stringResource(R.string.with_description),
+    description = stringResource(R.string.description),
     status = status,
   ) {
     var value by remember { mutableStateOf("") }
     BpkTextField(
       value = value,
       onValueChange = { value = it },
-      placeholder = "Placeholder"
+      placeholder = stringResource(R.string.placeholder)
     )
   }
 }
@@ -65,14 +67,14 @@ fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Defau
 @Composable
 fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
-    label = "No description",
+    label = stringResource(R.string.no_description),
     status = status,
   ) {
     var value by remember { mutableStateOf("") }
     BpkTextField(
       value = value,
       onValueChange = { value = it },
-      placeholder = "Placeholder"
+      placeholder = stringResource(R.string.placeholder)
     )
   }
 }
@@ -87,7 +89,7 @@ fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
     BpkTextField(
       value = value,
       onValueChange = { value = it },
-      placeholder = "No label"
+      placeholder = stringResource(R.string.no_label)
     )
   }
 }

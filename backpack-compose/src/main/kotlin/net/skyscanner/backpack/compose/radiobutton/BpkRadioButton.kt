@@ -38,10 +38,10 @@ import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
-import net.skyscanner.backpack.compose.utils.textDisabled
 
 @Composable
 fun BpkRadioButton(
@@ -121,7 +121,7 @@ private fun BpkRadioButtonImpl(
       colors = RadioButtonDefaults.colors(
         selectedColor = BpkTheme.colors.primary,
         unselectedColor = BpkTheme.colors.textSecondary,
-        disabledColor = BpkTheme.colors.textDisabled,
+        disabledColor = BpkColor.SkyGrayTint04,
       ),
     )
   }
