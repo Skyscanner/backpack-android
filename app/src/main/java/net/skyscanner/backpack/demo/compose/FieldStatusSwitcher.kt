@@ -30,15 +30,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
+import net.skyscanner.backpack.demo.R
 
 @Composable
 internal fun FieldStatusSwitcher(
   modifier: Modifier = Modifier,
   initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
-  errorText: String = "Error text",
+  errorText: String = stringResource(R.string.error_text),
   verticalArrangement: Arrangement.Vertical = Arrangement.Top,
   horizontalAlignment: Alignment.Horizontal = Alignment.Start,
   content: @Composable ColumnScope.(status: BpkFieldStatus) -> Unit,
@@ -53,16 +55,16 @@ internal fun FieldStatusSwitcher(
   ) {
 
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-      BpkButton(text = "Default", type = BpkButtonType.Featured) {
+      BpkButton(text = BpkFieldStatus.Default::class.simpleName!!, type = BpkButtonType.Featured) {
         status = BpkFieldStatus.Default
       }
-      BpkButton(text = "Disabled", type = BpkButtonType.Secondary) {
+      BpkButton(text = BpkFieldStatus.Disabled::class.simpleName!!, type = BpkButtonType.Secondary) {
         status = BpkFieldStatus.Disabled
       }
-      BpkButton(text = "Validated", type = BpkButtonType.Primary) {
+      BpkButton(text = BpkFieldStatus.Validated::class.simpleName!!, type = BpkButtonType.Primary) {
         status = BpkFieldStatus.Validated
       }
-      BpkButton(text = "Error", type = BpkButtonType.Destructive) {
+      BpkButton(text = BpkFieldStatus.Error::class.simpleName!!, type = BpkButtonType.Destructive) {
         status = BpkFieldStatus.Error(errorText)
       }
     }
