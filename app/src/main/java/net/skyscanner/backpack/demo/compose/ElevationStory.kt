@@ -19,23 +19,22 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.Token
@@ -43,32 +42,34 @@ import net.skyscanner.backpack.demo.data.values
 
 @Composable
 @Preview
-fun SpacingComposeStory() {
-  LazyColumn() {
-    val data: List<Token<Dp>> = BpkSpacing.values.sortedBy { it.value }
-    items(data) { item ->
-      SpacingSampleRow(token = item)
+fun ElevationComposeStory() {
+  Column(modifier = Modifier.padding(vertical = BpkSpacing.Base)) {
+    val data = BpkElevation.values.sortedBy { it.value }
+    for (item in data) {
+      ElevationSample(token = item)
     }
   }
 }
 
 @Composable
-private fun SpacingSampleRow(token: Token<Dp>) {
-  Row(
-    modifier = Modifier
-      .height(56.dp)
-      .padding(BpkSpacing.Base),
-    verticalAlignment = Alignment.CenterVertically,
+private fun ElevationCard(token: Token<Dp>) {
+  Surface(
+    modifier = Modifier.fillMaxWidth(),
+    shape = RoundedCornerShape(BpkBorderRadius.Md),
+    elevation = token.value,
   ) {
-    BpkText(
-      text = stringResource(R.string.token_placeholder, token.name, token.value),
-      modifier = Modifier.weight(1f),
-    )
-    Box(
-      modifier = Modifier
-        .height(BpkSpacing.Base)
-        .width(token.value)
-        .background(color = BpkColor.Monteverde),
-    )
+    Box(contentAlignment = Alignment.Center) {
+      BpkText(
+        text = stringResource(R.string.token_placeholder, token.name, token.value),
+        modifier = Modifier.padding(BpkSpacing.Base),
+      )
+    }
+  }
+}
+
+@Composable
+private fun ElevationSample(token: Token<Dp>) {
+  Box(Modifier.padding(max(BpkSpacing.Base, token.value))) {
+    ElevationCard(token)
   }
 }

@@ -150,4 +150,5 @@
   <string name="multiline">Multiline</string>
   <string name="read_only_value">Read only value</string>
   <string name="error_text">Error text</string>
+  <string name="token_placeholder">%1$s = %2$s</string>
 </resources>

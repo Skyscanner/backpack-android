@@ -19,22 +19,23 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
@@ -43,32 +44,41 @@ import net.skyscanner.backpack.demo.data.values
 
 @Composable
 @Preview
-fun SpacingComposeStory() {
+fun RadiiComposeStory() {
   LazyColumn() {
-    val data: List<Token<Dp>> = BpkSpacing.values.sortedBy { it.value }
+    val data: List<Token<Dp>> = BpkBorderRadius.values.sortedBy { it.value }
     items(data) { item ->
-      SpacingSampleRow(token = item)
+      RadiiSample(token = item)
     }
   }
 }
 
 @Composable
-private fun SpacingSampleRow(token: Token<Dp>) {
-  Row(
-    modifier = Modifier
-      .height(56.dp)
-      .padding(BpkSpacing.Base),
-    verticalAlignment = Alignment.CenterVertically,
+private fun RadiiSample(token: Token<Dp>) {
+  Box(
+    modifier = Modifier.padding(BpkSpacing.Base),
   ) {
-    BpkText(
-      text = stringResource(R.string.token_placeholder, token.name, token.value),
-      modifier = Modifier.weight(1f),
-    )
+    RadiiCard(token = token)
+  }
+}
+
+@Composable
+private fun RadiiCard(token: Token<Dp>) {
+  Surface(
+    modifier = Modifier.sizeIn(minHeight = token.value * 2),
+    color = BpkColor.SkyBlueShade01,
+    shape = RoundedCornerShape(token.value),
+  ) {
     Box(
+      contentAlignment = Alignment.Center,
       modifier = Modifier
-        .height(BpkSpacing.Base)
-        .width(token.value)
-        .background(color = BpkColor.Monteverde),
-    )
+        .fillMaxWidth()
+        .padding(BpkSpacing.Base),
+    ) {
+      BpkText(
+        text = stringResource(R.string.token_placeholder, token.name, token.value),
+        style = BpkTheme.typography.bodyLongform,
+      )
+    }
   }
 }
