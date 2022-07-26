@@ -138,7 +138,7 @@
   <string name="chip_option">Option</string>
   <string name="chip_select">Select</string>
   <string name="chip_dismiss">Dismiss</string>
-  <string name="default_text">Default</string>
+  <string name="generic_default">Default</string>
   <string name="with_description">With description</string>
   <string name="description">Description</string>
   <string name="placeholder">Placeholder</string>

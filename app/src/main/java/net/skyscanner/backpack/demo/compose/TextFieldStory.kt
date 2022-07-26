@@ -52,7 +52,7 @@ fun TextFiledStory() {
   ) { status ->
     CompositionLocalProvider(LocalTextStyle provides BpkTheme.typography.label2) {
 
-      BpkText(text = stringResource(R.string.default_text))
+      BpkText(text = stringResource(R.string.generic_default))
       TextFieldDefaultExample(status)
 
       BpkText(stringResource(R.string.read_only))
