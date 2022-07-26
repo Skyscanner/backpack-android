@@ -28,9 +28,8 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.dynamicColorOf
+import net.skyscanner.backpack.compose.utils.textDisabled
 
 enum class BpkSpinnerSize {
   Small,
@@ -55,7 +54,7 @@ fun BpkSpinner(
     strokeWidth = 2.dp,
     color = when (style) {
       BpkSpinnerStyle.TextPrimary -> BpkTheme.colors.textPrimary
-      BpkSpinnerStyle.Disabled -> dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)
+      BpkSpinnerStyle.Disabled -> BpkTheme.colors.textDisabled
       BpkSpinnerStyle.OnDarkSurface -> Color.White
     }
   )

@@ -138,5 +138,17 @@
   <string name="chip_option">Option</string>
   <string name="chip_select">Select</string>
   <string name="chip_dismiss">Dismiss</string>
+  <string name="generic_default">Default</string>
+  <string name="generic_with_description">With description</string>
+  <string name="generic_description">Description</string>
+  <string name="generic_placeholder">Placeholder</string>
+  <string name="generic_no_label">No label</string>
+  <string name="generic_no_description">No description</string>
+  <string name="generic_read_only">Read only</string>
+  <string name="generic_with_leading_icon">With leading icon</string>
+  <string name="generic_single_line">Single line</string>
+  <string name="generic_multiline">Multiline</string>
+  <string name="generic_read_only_value">Read only value</string>
+  <string name="generic_error_text">Error text</string>
   <string name="token_placeholder">%1$s = %2$s</string>
 </resources>

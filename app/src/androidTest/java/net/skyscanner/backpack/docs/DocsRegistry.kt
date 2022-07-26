@@ -29,6 +29,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar2.CalendarSelection
+import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.ShownDialog
 import net.skyscanner.backpack.util.InternalBackpackApi
@@ -80,6 +81,10 @@ object DocsRegistry {
     ComposeScreenshot("Dialog - Compose", "warning") { setupComposeDialog(it, ShownDialog.Warning) },
     ComposeScreenshot("Dialog - Compose", "destructive") { setupComposeDialog(it, ShownDialog.Destructive) },
     ComposeScreenshot("Dialog - Compose", "flare") { setupComposeDialog(it, ShownDialog.Flare) },
+    ComposeScreenshot("FieldSet", "default"),
+    ComposeScreenshot("FieldSet", "disabled") { it.switchFieldStatus(BpkFieldStatus.Disabled) },
+    ComposeScreenshot("FieldSet", "validated") { it.switchFieldStatus(BpkFieldStatus.Validated) },
+    ComposeScreenshot("FieldSet", "error") { it.switchFieldStatus(BpkFieldStatus.Error("Error text")) },
     ViewScreenshot("Flare - View - Default", "default"),
     ViewScreenshot("Flare - View - Pointing up", "pointing-up"),
     ViewScreenshot("Flare - View - Pointer offset", "pointer-offset"),
@@ -115,8 +120,12 @@ object DocsRegistry {
     ComposeScreenshot("Text - Compose - Hero", "hero"),
     ComposeScreenshot("Text - Compose - Heading", "heading"),
     ComposeScreenshot("Text - Compose - Body", "body"),
-    ViewScreenshot("Text Field - Default", "default"),
-    ViewScreenshot("Text Field - With labels", "labels"),
+    ViewScreenshot("Text Field - View - Default", "default"),
+    ViewScreenshot("Text Field - View - With labels", "labels"),
+    ComposeScreenshot("Text Field - Compose", "default"),
+    ComposeScreenshot("Text Field - Compose", "disabled") { it.switchFieldStatus(BpkFieldStatus.Disabled) },
+    ComposeScreenshot("Text Field - Compose", "validated") { it.switchFieldStatus(BpkFieldStatus.Validated) },
+    ComposeScreenshot("Text Field - Compose", "error") { it.switchFieldStatus(BpkFieldStatus.Error("Error text")) },
     ViewScreenshot("Text Spans", "default"),
     ViewScreenshot("Spinner - View - Default", "default"),
     ViewScreenshot("Spinner - View - Small", "small"),
@@ -214,4 +223,8 @@ private fun setupToast() {
     .perform(ViewActions.click())
 
   Thread.sleep(50)
+}
+
+private fun ComposeTestRule.switchFieldStatus(to: BpkFieldStatus) {
+  onNodeWithText(to::class.simpleName!!).performClick().assertIsDisplayed()
 }

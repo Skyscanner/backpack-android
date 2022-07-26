@@ -97,7 +97,6 @@ fun BpkRadioButton(
       enabled = enabled,
       content = { content(selected) },
     )
-
   }
 }
 

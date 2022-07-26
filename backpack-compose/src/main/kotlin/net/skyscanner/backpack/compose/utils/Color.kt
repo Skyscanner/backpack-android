@@ -26,6 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.tokens.BpkColors
 
 @Composable
 internal fun InteractionSource.animateAsColor(
@@ -46,3 +48,7 @@ internal fun InteractionSource.animateAsColor(
 @Composable
 internal fun dynamicColorOf(light: Color, dark: Color): Color =
   if (BpkTheme.colors.isLight) light else dark
+
+internal val BpkColors.textDisabled: Color
+  @Composable
+  get() = dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint06)

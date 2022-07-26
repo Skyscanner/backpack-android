@@ -29,6 +29,7 @@ import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
 import net.skyscanner.backpack.demo.compose.ElevationComposeStory
+import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
@@ -40,6 +41,7 @@ import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
+import net.skyscanner.backpack.demo.compose.TextFiledStory
 import net.skyscanner.backpack.demo.compose.ThemeStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
@@ -276,6 +278,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { ComposeDialogStory() },
       ),
     ),
+    "FieldSet" composeStory { FieldSetStory() },
     "Flare" story NodeData(
       { children -> TabStory of children },
       mapOf(
@@ -405,11 +408,17 @@ object ComponentRegistry {
       )
     ),
     "Text Field" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_text_fields },
-        "RTL" story NodeData { Story of R.layout.fragment_text_fields_rtl },
-        "With labels" story NodeData { Story of R.layout.fragment_text_fields_labels },
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_text_fields },
+            "RTL" story NodeData { Story of R.layout.fragment_text_fields_rtl },
+            "With labels" story NodeData { Story of R.layout.fragment_text_fields_labels },
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { TextFiledStory() },
       )
     ),
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },

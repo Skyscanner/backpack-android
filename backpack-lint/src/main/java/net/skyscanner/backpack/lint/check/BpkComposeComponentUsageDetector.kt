@@ -125,6 +125,15 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       webName = "text",
       componentsToReplace = setOf("androidx.compose.material.Text")
     ),
+    TEXT_FIELD(
+      fullName = "net.skyscanner.backpack.compose.textfield.BpkTextField",
+      webName = "text-input",
+      componentsToReplace = setOf(
+        "androidx.compose.foundation.text.BasicTextField",
+        "androidx.compose.material.OutlinedTextField",
+        "androidx.compose.material.TextField",
+      )
+    ),
     SPINNER(
       fullName = "net.skyscanner.backpack.compose.spinner.BpkSpinner",
       webName = "spinner",
