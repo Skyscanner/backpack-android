@@ -9,7 +9,7 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 FieldSet is a component which wraps its content (user input or form element) and adds optional title, description and
 error labels around it depending on the field status.
 
-The statuses available are Default, Disabled, Error and Validated. The statuses automatically dispatched to
+The statuses available are Default, Disabled, Error and Validated. The statuses are automatically dispatched to
 the child element (if the children support it).
 
 Example of a FieldSet with Validated status:

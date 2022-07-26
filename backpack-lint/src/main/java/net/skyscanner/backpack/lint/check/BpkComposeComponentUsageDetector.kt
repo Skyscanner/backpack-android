@@ -130,6 +130,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       webName = "text-input",
       componentsToReplace = setOf(
         "androidx.compose.foundation.text.BasicTextField",
+        "androidx.compose.material.OutlinedTextField",
         "androidx.compose.material.TextField",
       )
     ),
