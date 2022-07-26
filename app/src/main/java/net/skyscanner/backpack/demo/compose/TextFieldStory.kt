@@ -55,16 +55,16 @@ fun TextFiledStory() {
       BpkText(text = stringResource(R.string.generic_default))
       TextFieldDefaultExample(status)
 
-      BpkText(stringResource(R.string.read_only))
+      BpkText(stringResource(R.string.generic_read_only))
       TextFieldReadOnlyExample(status)
 
-      BpkText(stringResource(R.string.with_leading_icon))
+      BpkText(stringResource(R.string.generic_with_leading_icon))
       TextFieldLeadingIconExample(status)
 
-      BpkText(stringResource(R.string.single_line))
+      BpkText(stringResource(R.string.generic_single_line))
       TextFieldSingleLineExample(status)
 
-      BpkText(stringResource(R.string.multiline))
+      BpkText(stringResource(R.string.generic_multiline))
       TextFieldMultilineExample(status)
     }
   }
@@ -78,7 +78,7 @@ fun TextFieldDefaultExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
     value = value,
     status = status,
     onValueChange = { value = it },
-    placeholder = stringResource(R.string.placeholder),
+    placeholder = stringResource(R.string.generic_placeholder),
   )
 }
 
@@ -87,9 +87,9 @@ fun TextFieldDefaultExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
 fun TextFieldReadOnlyExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkTextField(
     readOnly = true,
-    value = stringResource(R.string.read_only_value),
+    value = stringResource(R.string.generic_read_only_value),
     onValueChange = { },
-    placeholder = stringResource(R.string.placeholder),
+    placeholder = stringResource(R.string.generic_placeholder),
     status = status,
   )
 }
@@ -101,7 +101,7 @@ fun TextFieldLeadingIconExample(status: BpkFieldStatus = BpkFieldStatus.Default)
   BpkTextField(
     value = value,
     onValueChange = { value = it },
-    placeholder = stringResource(R.string.placeholder),
+    placeholder = stringResource(R.string.generic_placeholder),
     icon = BpkIcon.Accessibility,
     status = status,
   )
@@ -128,7 +128,7 @@ fun TextFieldMultilineExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkTextField(
     value = value,
     onValueChange = { value = it },
-    placeholder = stringResource(R.string.placeholder),
+    placeholder = stringResource(R.string.generic_placeholder),
     icon = BpkIcon.Accessibility,
     status = status,
     maxLines = Int.MAX_VALUE,

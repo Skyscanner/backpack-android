@@ -50,15 +50,15 @@ fun FieldSetStory() {
 @Composable
 fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
-    label = stringResource(R.string.with_description),
-    description = stringResource(R.string.description),
+    label = stringResource(R.string.generic_with_description),
+    description = stringResource(R.string.generic_description),
     status = status,
   ) {
     var value by remember { mutableStateOf("") }
     BpkTextField(
       value = value,
       onValueChange = { value = it },
-      placeholder = stringResource(R.string.placeholder)
+      placeholder = stringResource(R.string.generic_placeholder)
     )
   }
 }
@@ -67,14 +67,14 @@ fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Defau
 @Composable
 fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
-    label = stringResource(R.string.no_description),
+    label = stringResource(R.string.generic_no_description),
     status = status,
   ) {
     var value by remember { mutableStateOf("") }
     BpkTextField(
       value = value,
       onValueChange = { value = it },
-      placeholder = stringResource(R.string.placeholder)
+      placeholder = stringResource(R.string.generic_placeholder)
     )
   }
 }
@@ -89,7 +89,7 @@ fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
     BpkTextField(
       value = value,
       onValueChange = { value = it },
-      placeholder = stringResource(R.string.no_label)
+      placeholder = stringResource(R.string.generic_no_label)
     )
   }
 }

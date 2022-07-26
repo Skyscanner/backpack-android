@@ -40,7 +40,7 @@ import net.skyscanner.backpack.demo.R
 internal fun FieldStatusSwitcher(
   modifier: Modifier = Modifier,
   initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
-  errorText: String = stringResource(R.string.error_text),
+  errorText: String = stringResource(R.string.generic_error_text),
   verticalArrangement: Arrangement.Vertical = Arrangement.Top,
   horizontalAlignment: Alignment.Horizontal = Alignment.Start,
   content: @Composable ColumnScope.(status: BpkFieldStatus) -> Unit,
