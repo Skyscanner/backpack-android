@@ -19,7 +19,8 @@
 package net.skyscanner.backpack.compose.fieldset
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,6 +31,7 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,7 +41,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 50, width = 200)
+    setDimensions(height = 128, width = 200)
   }
 
   @Test
@@ -147,7 +149,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
         is BpkFieldStatus.Validated -> BpkColor.Monteverde
       },
     ) {
-      Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+      Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl)) {
         BpkText(
           text = when (status) {
             is BpkFieldStatus.Default -> "Default"
