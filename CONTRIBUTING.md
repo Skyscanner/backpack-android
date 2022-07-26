@@ -48,7 +48,7 @@ Given that you have a compatible environment as stated above you can now set up 
 ## Testing
 
 ### Snapshot testing
-We use snapshot testing to ensure there are no unintended changes to UI components. 
+We use snapshot testing to ensure there are no unintended changes to UI components.
 
 #### Setup
 
@@ -100,7 +100,7 @@ For `Compose` components use the `composed` function to wrap your component - th
 
 By default screenshot tests run on 4 variants - default, dark mode, RTL and themed (skipped for compose). In some cases you may want to only run a snapshot test on some variants - for example if a component has many different states without layout changes you may want to consider skipping RTL.
 
-You can do this by adding the `assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)` function with the desired variants. 
+You can do this by adding the `assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)` function with the desired variants.
 **IMPORTANT**: Make sure this is called _before_ the test activity is run to avoid unnecessary delay. In a view test make it the first line of your test. In a compose test call it before the `composed` function, rather than inside it.
 
 #### Verifying changes
@@ -168,8 +168,8 @@ $ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
 
 ### Generating screenshots
 
-To add a new screenshot open `net/skyscanner/backpack/docs/DocsRegistry.kt` and add the screenshot to the `screenshots` list. 
-**Important**: For the screenshot to be generated the name must match the title of the page. 
+To add a new screenshot open `net/skyscanner/backpack/docs/DocsRegistry.kt` and add the screenshot to the `screenshots` list.
+**Important**: For the screenshot to be generated the name must match the title of the page.
 
 Run `./scripts/generate_screenshots.sh` to capture all screenshots. Files will be saved in the correct directory.
 
@@ -177,7 +177,7 @@ Run `./scripts/generate_screenshots.sh` to capture all screenshots. Files will b
 
 Verify the screenshots and commit the changes.
 
-> Note: Unfortuantely the screenshot generation may also contain changes to other screenshots. Unless they are intended remove these changes and only commit the ones with intended changes.
+> Note: Unfortunately the screenshot generation may also contain changes to other screenshots. Unless they are intended remove these changes and only commit the ones with intended changes.
 
 ## Demo app shortcuts
 

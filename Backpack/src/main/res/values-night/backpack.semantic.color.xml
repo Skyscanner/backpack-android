@@ -34,9 +34,47 @@
 
 	<color name="bpkBackgroundTertiary">#2c2c2e</color>
 
+	<color name="bpkCanvasContrast">#2c2c2e</color>
+
+	<color name="bpkCanvas">#000000</color>
+
+	<color name="bpkCoreAccent">#6d9feb</color>
+
+	<color name="bpkCoreEco">#0fa1a9</color>
+
+	<color name="bpkCorePrimary">#054184</color>
+
 	<color name="bpkLine">#48484a</color>
 
 	<color name="bpkPrimary">#6d9feb</color>
+
+	<color name="bpkScrim">#48484a</color>
+
+	<color name="bpkStatusDangerFill">#ffcadd</color>
+
+	<color name="bpkStatusDangerSpot">#d1435b</color>
+
+	<color name="bpkStatusSuccessFill">#b1ffe7</color>
+
+	<color name="bpkStatusSuccessSpot">#00a698</color>
+
+	<color name="bpkStatusWarningFill">#fbf1bb</color>
+
+	<color name="bpkStatusWarningSpot">#ffb54d</color>
+
+	<color name="bpkSurfaceContrast">#2c2c2e</color>
+
+	<color name="bpkSurfaceDefault">#2c2c2e</color>
+
+	<color name="bpkSurfaceElevated">#1b2839</color>
+
+	<color name="bpkSurfaceHighlight">#b1ffe7</color>
+
+	<color name="bpkTextDisabled">#ffffff</color>
+
+	<color name="bpkTextError">#d1435b</color>
+
+	<color name="bpkTextLink">#6d9feb</color>
 
 	<color name="bpkTextPrimary">#ffffff</color>
 

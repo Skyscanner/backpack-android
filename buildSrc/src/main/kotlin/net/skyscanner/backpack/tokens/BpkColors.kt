@@ -18,13 +18,13 @@
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
-import com.squareup.kotlinpoet.buildCodeBlock
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.buildCodeBlock
 
 data class BpkColorModel(
   val name: String,
@@ -49,11 +49,18 @@ object BpkColor {
 
   object Semantic : BpkParser<Map<String, Any>, BpkColors> {
 
-    @OptIn(ExperimentalStdlibApi::class)
     override fun invoke(source: Map<String, Any>): BpkColors =
       parseColors(source, resolveReferences = true) {
-        it.name != it.defaultReference && !it.name.lowercase().endsWith("light") && !it.name.lowercase().endsWith("dark")
+        it.name != it.defaultReference && !it.hasSemanticSuffix()
       }
+
+    @OptIn(ExperimentalStdlibApi::class)
+    private fun BpkColorModel.hasSemanticSuffix(): Boolean {
+      val name = name.lowercase()
+      return semanticSuffixes.any { name.endsWith(it) }
+    }
+
+    private val semanticSuffixes = listOf("light", "dark", "day", "night")
 
   }
 
