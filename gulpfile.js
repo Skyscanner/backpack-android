@@ -22,7 +22,11 @@ const gulp = require('gulp');
 const merge = require('merge-stream');
 const nunjucks = require('gulp-nunjucks');
 const rename = require('gulp-rename');
-const del = require('del');
+// As del is now an ESM module unless/until we migrate this file to ESM this and want to do the major version bump
+// we use the following format to import from CommonJS instead of ESM. See https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+const del = async () => {
+  await import('del');
+}
 const tinycolor = require('tinycolor2');
 const _ = require('lodash');
 const through = require('through2');
