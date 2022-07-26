@@ -61,7 +61,7 @@ fun BpkFieldSet(
   label: String? = null,
   description: String? = null,
   status: BpkFieldStatus = BpkFieldStatus.Default,
-  content: @Composable ColumnScope.() -> Unit,
+  content: @Composable ColumnScope.(BpkFieldStatus) -> Unit,
 ) {
 
   Column(modifier) {
@@ -83,7 +83,7 @@ fun BpkFieldSet(
     }
 
     CompositionLocalProvider(LocalFieldStatus provides status) {
-      content()
+      content(status)
     }
 
     if (description != null) {
