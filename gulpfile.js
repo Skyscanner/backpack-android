@@ -166,6 +166,8 @@ const getTextStyles = () => {
 
 const isSemanticColor = entity => entity.value && entity.darkValue;
 
+const hasNewSemanticSuffix = entity => entity.name.endsWith("Day") || entity.name.endsWith("Night");
+
 gulp.task('template:color', () => {
   const getColors = () =>
     tokensWithType('color')
@@ -175,7 +177,7 @@ gulp.task('template:color', () => {
         colorObject.value = tinycolor(colorObject.value).toHexString();
         return colorObject;
       })
-      .filter(entry => !isSemanticColor(entry));
+      .filter(entry => !isSemanticColor(entry) && !hasNewSemanticSuffix(entry));
 
   return gulp
     .src(`${PATHS.templates}/BackpackColor.njk`)
