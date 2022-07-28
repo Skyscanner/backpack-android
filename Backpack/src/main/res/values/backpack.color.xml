@@ -62,6 +62,8 @@
 
 	<color name="bpkBlackAlpha20">#b2b2bf</color>
 
+	<color name="bpkBlackAlpha70">#02122c</color>
+
 	<color name="bpkBlackTint01">#1d1b20</color>
 
 	<color name="bpkBlackTint02">#2c2c2e</color>
@@ -155,8 +157,6 @@
 	<color name="bpkPurple">#8e47ba</color>
 
 	<color name="bpkSagano">#d0eeec</color>
-
-	<color name="bpkScrim">#02122c</color>
 
 	<color name="bpkSkyBlue">#0770e3</color>
 

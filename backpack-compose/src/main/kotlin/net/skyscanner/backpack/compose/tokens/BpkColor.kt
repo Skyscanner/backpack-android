@@ -36,6 +36,8 @@ public object BpkColor {
 
   public val BlackAlpha20: Color = Color(0xFFB2B2BF)
 
+  public val BlackAlpha70: Color = Color(0xFF02122C)
+
   public val BlackTint01: Color = Color(0xFF1D1B20)
 
   public val BlackTint02: Color = Color(0xFF2C2C2E)
@@ -127,10 +129,6 @@ public object BpkColor {
   public val Purple: Color = Color(0xFF8E47BA)
 
   public val Sagano: Color = Color(0xFFD0EEEC)
-
-  public val Scrim: Color = Color(0xFF02122C)
-
-  public val Scrim: Color = Color(0xFF02122C)
 
   public val SkyBlue: Color = Color(0xFF0770E3)
 
