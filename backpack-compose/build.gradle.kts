@@ -33,7 +33,7 @@ android {
     compose = true
   }
   composeOptions {
-    kotlinCompilerExtensionVersion = rootProject.ext.get("compose_version") as String
+    kotlinCompilerExtensionVersion = rootProject.ext.get("compose_compiler_version") as String
   }
 
   packagingOptions {
