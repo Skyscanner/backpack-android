@@ -122,6 +122,7 @@ class CalendarRangeSelectionTests {
               else -> assertEquals(CalendarCell.Selection.Middle, cell.selection)
             }
             is CalendarCell.Space -> assertTrue(cell.selected)
+            is CalendarCell.Header -> {}
           }
         }
       }
