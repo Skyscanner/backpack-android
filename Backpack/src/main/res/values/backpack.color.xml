@@ -60,6 +60,10 @@
 
 	<color name="bpkBlack">#000000</color>
 
+	<color name="bpkBlackAlpha20">#b2b2bf</color>
+
+	<color name="bpkBlackAlpha70">#02122c</color>
+
 	<color name="bpkBlackTint01">#1d1b20</color>
 
 	<color name="bpkBlackTint02">#2c2c2e</color>
@@ -193,6 +197,10 @@
 	<color name="bpkValensole">#a59bc8</color>
 
 	<color name="bpkWhite">#ffffff</color>
+
+	<color name="bpkWhiteAlpha20">#8e8e93</color>
+
+	<color name="bpkWhiteAlpha80">#8e8e93</color>
 
 	<color name="bpkYellow">#feeb87</color>
 

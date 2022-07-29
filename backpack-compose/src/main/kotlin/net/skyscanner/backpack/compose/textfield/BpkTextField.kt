@@ -66,7 +66,6 @@ import net.skyscanner.backpack.compose.tokens.ExclamationCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 import net.skyscanner.backpack.compose.utils.hideContentIf
-import net.skyscanner.backpack.compose.utils.textDisabled
 
 @Composable
 fun BpkTextField(

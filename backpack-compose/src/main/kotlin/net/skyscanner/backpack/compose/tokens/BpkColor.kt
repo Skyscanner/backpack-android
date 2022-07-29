@@ -34,6 +34,10 @@ public object BpkColor {
 
   public val Black: Color = Color(0xFF000000)
 
+  public val BlackAlpha20: Color = Color(0xFFB2B2BF)
+
+  public val BlackAlpha70: Color = Color(0xFF02122C)
+
   public val BlackTint01: Color = Color(0xFF1D1B20)
 
   public val BlackTint02: Color = Color(0xFF2C2C2E)
@@ -161,6 +165,10 @@ public object BpkColor {
   public val Valensole: Color = Color(0xFFA59BC8)
 
   public val White: Color = Color(0xFFFFFFFF)
+
+  public val WhiteAlpha20: Color = Color(0xFF8E8E93)
+
+  public val WhiteAlpha80: Color = Color(0xFF8E8E93)
 
   public val Yellow: Color = Color(0xFFFEEB87)
 
