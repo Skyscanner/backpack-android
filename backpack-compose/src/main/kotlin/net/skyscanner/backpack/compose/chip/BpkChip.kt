@@ -43,7 +43,6 @@ import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.Tick
 import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
-import net.skyscanner.backpack.compose.utils.textDisabled
 
 enum class BpkChipStyle {
   Default,

@@ -48,7 +48,7 @@
 
 	<color name="bpkPrimary">#6d9feb</color>
 
-	<color name="bpkScrim">#48484a</color>
+	<color name="bpkScrim">#02122c</color>
 
 	<color name="bpkStatusDangerFill">#ffcadd</color>
 
@@ -70,7 +70,7 @@
 
 	<color name="bpkSurfaceHighlight">#b1ffe7</color>
 
-	<color name="bpkTextDisabled">#ffffff</color>
+	<color name="bpkTextDisabled">#8e8e93</color>
 
 	<color name="bpkTextError">#d1435b</color>
 
@@ -78,9 +78,13 @@
 
 	<color name="bpkTextPrimary">#ffffff</color>
 
+	<color name="bpkTextPrimaryOnContrast">#ffffff</color>
+
 	<color name="bpkTextQuaternary">#8e8e93</color>
 
 	<color name="bpkTextSecondary">#b2b2bf</color>
+
+	<color name="bpkTextSecondaryOnContrast">#8e8e93</color>
 
 	<color name="bpkTextTertiary">#8e8e93</color>
 
