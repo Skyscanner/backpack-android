@@ -447,7 +447,7 @@ public val BpkIcon.Companion.CarsFlexible: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.CenterLocation: BpkIcon by Delegates.singleton(
   BpkIcon(
     name = "CenterLocation",
-    small = R.drawable.bpk_center_location,
+    small = R.drawable.bpk_center_location_sm,
     large = R.drawable.bpk_center_location,
   )
 )
@@ -845,7 +845,7 @@ public val BpkIcon.Companion.FaceHappy: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.FaceId: BpkIcon by Delegates.singleton(
   BpkIcon(
     name = "FaceId",
-    small = R.drawable.bpk_face_id,
+    small = R.drawable.bpk_face_id_sm,
     large = R.drawable.bpk_face_id,
   )
 )
@@ -909,7 +909,7 @@ public val BpkIcon.Companion.Filter: BpkIcon by Delegates.singleton(
 public val BpkIcon.Companion.Fingerprint: BpkIcon by Delegates.singleton(
   BpkIcon(
     name = "Fingerprint",
-    small = R.drawable.bpk_fingerprint,
+    small = R.drawable.bpk_fingerprint_sm,
     large = R.drawable.bpk_fingerprint,
   )
 )

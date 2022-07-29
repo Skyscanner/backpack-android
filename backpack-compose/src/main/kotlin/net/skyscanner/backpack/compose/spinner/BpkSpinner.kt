@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.textDisabled
 
 enum class BpkSpinnerSize {
   Small,

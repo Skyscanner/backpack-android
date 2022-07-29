@@ -40,7 +40,6 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.ExclamationCircle
-import net.skyscanner.backpack.compose.utils.textDisabled
 
 internal val LocalFieldStatus = staticCompositionLocalOf<BpkFieldStatus> { BpkFieldStatus.Default }
 

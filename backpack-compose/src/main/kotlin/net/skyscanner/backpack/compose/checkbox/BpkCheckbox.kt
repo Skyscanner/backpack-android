@@ -43,7 +43,6 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
-import net.skyscanner.backpack.compose.utils.textDisabled
 
 @Composable
 fun BpkCheckbox(
