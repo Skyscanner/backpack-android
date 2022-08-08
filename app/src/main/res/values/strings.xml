@@ -151,4 +151,10 @@
   <string name="generic_read_only_value">Read only value</string>
   <string name="generic_error_text">Error text</string>
   <string name="token_placeholder">%1$s = %2$s</string>
+    <string name="tabs_small">Small</string>
+  <string name="tabs_small_with_icon">Small with icon</string>
+  <string name="tabs_large">Large</string>
+  <string name="tabs_large_with_icon">Large with icon</string>
+  <string name="tabs_one">One</string>
+  <string name="tabs_two">Two</string>
 </resources>
