@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
+import androidx.compose.material.TabRowDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,16 +52,20 @@ fun BpkHorizontalNav(
   size: BpkHorizontalNavSize = BpkHorizontalNavSize.Default,
 ) {
   TabRow(
-    divider = {}, // divider draws a line for inactive tabs, which we're not using in our design
+    contentColor = BpkTheme.colors.textLink,
+    backgroundColor = BpkTheme.colors.backgroundElevation01,
     selectedTabIndex = tabs.indexOf(activeTab),
+    divider = {
+      if (BpkTheme.colors.isLight) {
+        TabRowDefaults.Divider(color = BpkTheme.colors.line)
+      }
+    },
     modifier = modifier.height(
       when (size) {
         BpkHorizontalNavSize.Default -> 48.dp
         BpkHorizontalNavSize.Small -> 36.dp
       }
     ),
-    backgroundColor = BpkTheme.colors.backgroundElevation01,
-    contentColor = BpkTheme.colors.textLink,
   ) {
     tabs.forEach { tab ->
       Tab(
