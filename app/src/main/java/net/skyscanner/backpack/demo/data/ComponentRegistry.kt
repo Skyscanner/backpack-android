@@ -33,6 +33,7 @@ import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
+import net.skyscanner.backpack.demo.compose.HorizontalNavComposeStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.PanelStory
@@ -296,7 +297,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { FlareStory() },
       ),
     ),
-    "Horizontal Nav" story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
+    "Horizontal Nav" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
+        TAB_TITLE_COMPOSE composeStory { HorizontalNavComposeStory() },
+      )
+    ),
     "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
     "Map Markers" story NodeData(
       { children -> SubStory of children },

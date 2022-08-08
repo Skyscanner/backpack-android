@@ -57,7 +57,7 @@ fun BpkHorizontalNav(
     backgroundColor = BpkTheme.colors.backgroundElevation01,
     contentColor = BpkTheme.colors.textPrimary,
   ) {
-    for (tab in tabs) {
+    tabs.forEach { tab ->
       Tab(
         selected = tab == activeTab,
         onClick = { onChanged(tab) },
