@@ -51,6 +51,7 @@ fun BpkHorizontalNav(
   size: BpkHorizontalNavSize = BpkHorizontalNavSize.Default,
 ) {
   TabRow(
+    divider = {}, // divider draws a line for inactive tabs, which we're not using in our design
     selectedTabIndex = tabs.indexOf(activeTab),
     modifier = modifier.height(
       when (size) {
