@@ -105,6 +105,15 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.material.Icon",
       )
     ),
+    HORIZONTAL_NAV(
+      fullName = "net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav",
+      webName = "horizontal-nav",
+      componentsToReplace = setOf(
+        "androidx.compose.material.Tab",
+        "androidx.compose.material.TabRow",
+        "androidx.compose.material.ScrollableTabRow",
+      )
+    ),
     NAV_BAR(
       fullName = "net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar",
       webName = "navigation-bar",
