@@ -46,15 +46,15 @@ data class BpkHorizontalNavTab(
 @Composable
 fun BpkHorizontalNav(
   tabs: List<BpkHorizontalNavTab>,
-  activeTab: BpkHorizontalNavTab,
-  onChanged: (BpkHorizontalNavTab) -> Unit,
+  activeIndex: Int,
+  onChanged: (Int) -> Unit,
   modifier: Modifier = Modifier,
   size: BpkHorizontalNavSize = BpkHorizontalNavSize.Default,
 ) {
   TabRow(
     contentColor = BpkTheme.colors.textLink,
     backgroundColor = BpkTheme.colors.backgroundElevation01,
-    selectedTabIndex = tabs.indexOf(activeTab),
+    selectedTabIndex = activeIndex,
     divider = {
       if (BpkTheme.colors.isLight) {
         TabRowDefaults.Divider(color = BpkTheme.colors.line)
@@ -67,10 +67,10 @@ fun BpkHorizontalNav(
       }
     ),
   ) {
-    tabs.forEach { tab ->
+    tabs.forEachIndexed { index, tab ->
       Tab(
-        selected = tab == activeTab,
-        onClick = { onChanged(tab) },
+        selected = index == activeIndex,
+        onClick = { onChanged(index) },
         selectedContentColor = BpkTheme.colors.textLink,
         unselectedContentColor = BpkTheme.colors.textPrimary,
         text = {

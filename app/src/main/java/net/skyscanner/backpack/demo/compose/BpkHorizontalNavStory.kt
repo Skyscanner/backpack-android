@@ -18,18 +18,23 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav
+import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavSize
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavTab
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
@@ -38,25 +43,109 @@ import net.skyscanner.backpack.compose.tokens.TickCircle
 @Composable
 fun HorizontalNavComposeStory() {
 
-  Column(Modifier.padding(BpkSpacing.Base)) {
+  Column(
+    modifier = Modifier
+      .background(BpkTheme.colors.backgroundAlternative)
+      .padding(BpkSpacing.Base),
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+  ) {
 
-    val tabs = listOf(
-      BpkHorizontalNavTab(
-        title = "One",
-        icon = BpkIcon.TickCircle,
-      ),
-      BpkHorizontalNavTab(
-        title = "Two",
-        icon = BpkIcon.CloseCircle,
-      ),
-    )
+    BpkText(text = "Small")
+    BpkHorizontalNav_Small_Sample()
 
-    var activeTab by remember { mutableStateOf(tabs[0]) }
+    BpkText(text = "Small with icon")
+    BpkHorizontalNav_SmallWithIcon_Sample()
 
-    BpkHorizontalNav(
-      tabs = tabs,
-      activeTab = activeTab,
-      onChanged = { activeTab = it },
-    )
+    BpkText(text = "Large")
+    BpkHorizontalNav_Large_Sample()
+
+    BpkText(text = "Large with icon")
+    BpkHorizontalNav_LargeWithIcon_Sample()
   }
+}
+
+@Composable
+internal fun BpkHorizontalNav_Small_Sample() {
+  val tabs = listOf(
+    BpkHorizontalNavTab(
+      title = "One",
+    ),
+    BpkHorizontalNavTab(
+      title = "Two",
+    ),
+  )
+
+  var activeIndex by rememberSaveable { mutableStateOf(0) }
+
+  BpkHorizontalNav(
+    tabs = tabs,
+    activeIndex = activeIndex,
+    size = BpkHorizontalNavSize.Small,
+    onChanged = { activeIndex = it },
+  )
+}
+
+@Composable
+internal fun BpkHorizontalNav_SmallWithIcon_Sample() {
+  val tabs = listOf(
+    BpkHorizontalNavTab(
+      title = "One",
+      icon = BpkIcon.TickCircle,
+    ),
+    BpkHorizontalNavTab(
+      title = "Two",
+      icon = BpkIcon.CloseCircle,
+    ),
+  )
+
+  var activeIndex by rememberSaveable { mutableStateOf(0) }
+
+  BpkHorizontalNav(
+    tabs = tabs,
+    activeIndex = activeIndex,
+    size = BpkHorizontalNavSize.Small,
+    onChanged = { activeIndex = it },
+  )
+}
+
+@Composable
+internal fun BpkHorizontalNav_Large_Sample() {
+  val tabs = listOf(
+    BpkHorizontalNavTab(
+      title = "One",
+    ),
+    BpkHorizontalNavTab(
+      title = "Two",
+    ),
+  )
+
+  var activeIndex by rememberSaveable { mutableStateOf(0) }
+
+  BpkHorizontalNav(
+    tabs = tabs,
+    activeIndex = activeIndex,
+    onChanged = { activeIndex = it },
+  )
+}
+
+@Composable
+internal fun BpkHorizontalNav_LargeWithIcon_Sample() {
+  val tabs = listOf(
+    BpkHorizontalNavTab(
+      title = "One",
+      icon = BpkIcon.TickCircle,
+    ),
+    BpkHorizontalNavTab(
+      title = "Two",
+      icon = BpkIcon.CloseCircle,
+    ),
+  )
+
+  var activeIndex by rememberSaveable { mutableStateOf(0) }
+
+  BpkHorizontalNav(
+    tabs = tabs,
+    activeIndex = activeIndex,
+    onChanged = { activeIndex = it },
+  )
 }
