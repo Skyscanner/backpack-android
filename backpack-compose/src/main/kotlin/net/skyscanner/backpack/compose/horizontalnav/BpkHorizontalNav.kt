@@ -59,13 +59,14 @@ fun BpkHorizontalNav(
       }
     ),
     backgroundColor = BpkTheme.colors.backgroundElevation01,
-    contentColor = BpkTheme.colors.textPrimary,
+    contentColor = BpkTheme.colors.textLink,
   ) {
     tabs.forEach { tab ->
       Tab(
         selected = tab == activeTab,
         onClick = { onChanged(tab) },
         selectedContentColor = BpkTheme.colors.textLink,
+        unselectedContentColor = BpkTheme.colors.textPrimary,
         text = {
           Row(
             verticalAlignment = Alignment.CenterVertically,
