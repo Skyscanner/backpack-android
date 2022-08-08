@@ -18,15 +18,19 @@
 
 package net.skyscanner.backpack.compose.horizontalnav
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 enum class BpkHorizontalNavSize {
   Default,
@@ -62,17 +66,26 @@ fun BpkHorizontalNav(
         selected = tab == activeTab,
         onClick = { onChanged(tab) },
         selectedContentColor = BpkTheme.colors.textLink,
-        icon = if (tab.icon != null) { ->
-          BpkIcon(icon = tab.icon, contentDescription = null)
-        } else null,
         text = {
-          BpkText(
-            text = tab.title,
-            style = when (size) {
-              BpkHorizontalNavSize.Default -> BpkTheme.typography.label1
-              BpkHorizontalNavSize.Small -> BpkTheme.typography.label2
+          Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+          ) {
+            if (tab.icon != null) {
+              BpkIcon(
+                icon = tab.icon,
+                contentDescription = null,
+              )
             }
-          )
+
+            BpkText(
+              text = tab.title,
+              style = when (size) {
+                BpkHorizontalNavSize.Default -> BpkTheme.typography.label1
+                BpkHorizontalNavSize.Small -> BpkTheme.typography.label2
+              }
+            )
+          }
         },
       )
     }

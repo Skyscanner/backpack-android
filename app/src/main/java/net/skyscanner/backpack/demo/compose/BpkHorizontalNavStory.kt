@@ -46,7 +46,7 @@ fun HorizontalNavComposeStory() {
         icon = BpkIcon.TickCircle,
       ),
       BpkHorizontalNavTab(
-        title = "One",
+        title = "Two",
         icon = BpkIcon.CloseCircle,
       ),
     )
