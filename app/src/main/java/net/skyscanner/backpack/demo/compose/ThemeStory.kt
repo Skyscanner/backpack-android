@@ -20,7 +20,6 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -30,8 +29,6 @@ import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Slider
 import androidx.compose.material.Snackbar
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -58,18 +55,6 @@ fun ThemeStory() {
     crossAxisSpacing = BpkSpacing.Base,
     crossAxisAlignment = FlowCrossAxisAlignment.Center,
   ) {
-
-    var selectedTabIndex by remember { mutableStateOf(1) }
-    TabRow(modifier = Modifier.height(BpkSpacing.Xxl), selectedTabIndex = selectedTabIndex) {
-      for (i in 0 until 3) {
-        Tab(
-          selected = i == selectedTabIndex,
-          onClick = { selectedTabIndex = i },
-        ) {
-          BpkText(text = "Tab ${i + 1}")
-        }
-      }
-    }
 
     LinearProgressIndicator(Modifier.width(144.dp))
 
