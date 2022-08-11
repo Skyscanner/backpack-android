@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import net.skyscanner.backpack.compose.card.internal.CardContent
+import net.skyscanner.backpack.compose.card.internal.cardBackgroundColor
 import net.skyscanner.backpack.compose.card.internal.cardElevation
 import net.skyscanner.backpack.compose.card.internal.cardShape
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -66,7 +67,7 @@ fun BpkCard(
   Card(
     modifier = modifier,
     shape = cardShape(corner),
-    backgroundColor = BpkTheme.colors.surfaceDefault,
+    backgroundColor = cardBackgroundColor(elevation),
     contentColor = BpkTheme.colors.textPrimary,
     elevation = cardElevation(elevation),
     onClick = onClick,
@@ -90,7 +91,7 @@ fun BpkCard(
   Card(
     modifier = modifier,
     shape = cardShape(corner),
-    backgroundColor = BpkTheme.colors.surfaceDefault,
+    backgroundColor = cardBackgroundColor(elevation),
     contentColor = BpkTheme.colors.textPrimary,
     elevation = cardElevation(elevation),
     content = { CardContent(padding, contentAlignment, content) },

@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.card.internal
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -26,11 +27,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -52,6 +55,16 @@ internal inline fun CardContent(
     content = content,
   )
 }
+
+@Composable
+internal fun cardBackgroundColor(elevation: BpkCardElevation): Color =
+  animateColorAsState(
+    when(elevation) {
+      BpkCardElevation.Focus -> BpkTheme.colors.surfaceElevated
+      BpkCardElevation.None, BpkCardElevation.Default -> BpkTheme.colors.surfaceDefault
+    }
+  ).value
+
 
 @Composable
 internal fun cardElevation(elevation: BpkCardElevation): Dp =
