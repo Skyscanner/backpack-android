@@ -31,7 +31,6 @@
   <color name="__calendarCellEmptyTextColor">@color/bpkBlack</color>
   <color name="__calendarCellDisabledTextColor">@color/bpkSkyGrayTint03</color>
   <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
-  <color name="__panelBorder">@color/bpkLineDark</color>
   <color name="__switchTrackDisabled">@color/bpkBlackTint03</color>
   <color name="__starRatingStarColor">@color/bpkBlackTint05</color>
   <color name="__starRatingStarColorFilled">@color/bpkErfoud</color>

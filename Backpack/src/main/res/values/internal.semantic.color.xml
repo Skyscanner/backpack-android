@@ -37,7 +37,6 @@
   <color name="__calendarCellEmptyTextColor">@color/bpkWhite</color>
   <color name="__calendarCellDisabledTextColor">@color/bpkSkyGrayTint04</color>
   <color name="__dialogBackground">@color/bpkWhite</color>
-  <color name="__panelBorder">@color/bpkSkyGrayTint06</color>
   <color name="__switchTrackDisabled">@color/bpkSkyGrayTint06</color>
   <color name="__starRatingStarColor">@color/bpkSkyGrayTint04</color>
   <color name="__starRatingStarColorFilled">@color/bpkKolkata</color>
