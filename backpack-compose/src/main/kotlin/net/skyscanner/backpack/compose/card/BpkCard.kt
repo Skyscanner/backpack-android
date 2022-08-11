@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import net.skyscanner.backpack.compose.card.internal.CardContent
-import net.skyscanner.backpack.compose.card.internal.cardBackgroundColor
 import net.skyscanner.backpack.compose.card.internal.cardElevation
 import net.skyscanner.backpack.compose.card.internal.cardShape
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -46,7 +45,7 @@ enum class BpkCardPadding {
 enum class BpkCardElevation {
   None,
   Default,
-  Focus
+  Focus,
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -67,7 +66,7 @@ fun BpkCard(
   Card(
     modifier = modifier,
     shape = cardShape(corner),
-    backgroundColor = cardBackgroundColor(elevation),
+    backgroundColor = BpkTheme.colors.surfaceDefault,
     contentColor = BpkTheme.colors.textPrimary,
     elevation = cardElevation(elevation),
     onClick = onClick,
@@ -91,7 +90,7 @@ fun BpkCard(
   Card(
     modifier = modifier,
     shape = cardShape(corner),
-    backgroundColor = cardBackgroundColor(elevation),
+    backgroundColor = BpkTheme.colors.surfaceDefault,
     contentColor = BpkTheme.colors.textPrimary,
     elevation = cardElevation(elevation),
     content = { CardContent(padding, contentAlignment, content) },
