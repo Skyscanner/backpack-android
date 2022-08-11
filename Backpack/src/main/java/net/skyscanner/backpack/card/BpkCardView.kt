@@ -64,14 +64,6 @@ open class BpkCardView @JvmOverloads constructor(
         FOCUSED -> context.resources.getDimension(R.dimen.bpkElevationLg)
       }
 
-    fun toBackgroundColor(context: Context): ColorStateList {
-      val background = when (this) {
-        NONE, DEFAULT -> context.getColor(R.color.bpkBackgroundElevation01)
-        FOCUSED -> context.getColor(R.color.bpkBackgroundElevation02)
-      }
-      return ColorStateList.valueOf(background)
-    }
-
     companion object {
       fun fromAttr(attr: Int) = when (attr) {
         0 -> NONE
@@ -129,7 +121,7 @@ open class BpkCardView @JvmOverloads constructor(
     set(value) {
       field = value
       cardElevation = value.toDimension(context)
-      val background = customBackgroundColor ?: elevationLevel.toBackgroundColor(context)
+      val background = customBackgroundColor ?: context.getColorStateList(R.color.bpkSurfaceDefault)
       setCardBackgroundColor(background)
     }
 
