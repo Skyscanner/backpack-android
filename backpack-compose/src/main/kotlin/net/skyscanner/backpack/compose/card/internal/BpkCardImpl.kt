@@ -59,17 +59,16 @@ internal inline fun CardContent(
 @Composable
 internal fun cardBackgroundColor(elevation: BpkCardElevation): Color =
   animateColorAsState(
-    when(elevation) {
+    when (elevation) {
       BpkCardElevation.Focus -> BpkTheme.colors.surfaceElevated
       BpkCardElevation.None, BpkCardElevation.Default -> BpkTheme.colors.surfaceDefault
     }
   ).value
 
-
 @Composable
 internal fun cardElevation(elevation: BpkCardElevation): Dp =
   animateDpAsState(
-    when(elevation) {
+    when (elevation) {
       BpkCardElevation.None -> 0.dp
       BpkCardElevation.Focus -> BpkElevation.Xl
       BpkCardElevation.Default -> BpkElevation.Sm
