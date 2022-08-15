@@ -30,7 +30,7 @@ class BpkHeadlineSkeletonTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(32, 96)
+    setDimensions(50, 100)
   }
 
   @Test
