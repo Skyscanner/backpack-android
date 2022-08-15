@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/bpk_skeleton_container"
+    android:layout_width="@dimen/bpk_image_skeleton_width"
+    android:layout_height="@dimen/bpk_image_skeleton_height"
+    >
+    <View
+        android:id="@+id/bpk_skeleton_shimmer"
+        android:layout_width="@dimen/bpk_skeleton_shimmer_width"
+        android:layout_height="@dimen/bpk_skeleton_shimmer_height"
+        tools:ignore="UnusedAttribute"
+        android:orientation="vertical"
+        android:background="@drawable/bpk_skeleton_shimmer_bg"
+        >
+    </View>
+</RelativeLayout>

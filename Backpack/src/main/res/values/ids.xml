@@ -7,4 +7,7 @@
   <item name="fifthWeekdayLabel" type="id"/>
   <item name="sixthWeekdayLabel" type="id"/>
   <item name="seventhWeekdayLabel" type="id"/>
+  <item name="bpk_skeleton_container" type="id" />
+  <item name="bpk_skeleton_view" type="id" />
+  <item name="bpk_skeleton_shimmer" type="id" />
 </resources>

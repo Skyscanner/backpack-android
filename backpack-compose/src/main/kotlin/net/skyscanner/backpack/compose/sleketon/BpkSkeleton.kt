@@ -1,0 +1,151 @@
+package net.skyscanner.backpack.compose.sleketon
+
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.animation.core.animateValue
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+
+private val BpkImageSkeletonSize = 96.dp
+private val BpkCircleSkeletonSizeSm = 32.dp
+private val BpkCircleSkeletonSizeLg = 48.dp
+private val BpkSkeletonBorderRadiusXXS = 2.dp
+private val BpkHeadlineSkeletonWidth = 80.dp
+private val BpkHeadlineSkeletonHeightSm = 8.dp
+private val BpkHeadlineSkeletonHeightMd = 16.dp
+private val BpkHeadlineSkeletonHeightLg = 32.dp
+
+enum class BpkSkeletonSizeType {
+    Small,
+    Medium,
+    Large
+}
+
+enum class BpkCircleSkeletonSizeType {
+    Small,
+    Large
+}
+
+enum class BpkSkeletonCornerType {
+    Square,
+    Rounded
+}
+
+@Composable
+private fun shimmerAnimation(): State<Dp> {
+    var inifiniteTransition = rememberInfiniteTransition()
+    return inifiniteTransition.animateValue(initialValue = (-500).dp, targetValue = 500.dp, typeConverter = Dp.VectorConverter,
+        animationSpec = infiniteRepeatable(animation = tween(durationMillis = 1000, delayMillis = 200, easing = LinearEasing)))
+
+}
+@Composable
+private fun ShimmerBox () {
+    return Box(modifier = Modifier
+        .size(1000.dp, 1000.dp)
+        .background(
+            brush = Brush.horizontalGradient(
+                listOf(
+                    BpkTheme.colors.skeletonShimmerPrimary,
+                    BpkTheme.colors.skeletonShimmerSecondary,
+                    BpkTheme.colors.skeletonShimmerPrimary,
+                )
+            )
+        )
+    )
+}
+
+@Preview
+@Composable
+fun BpkImageSkeleton (
+    modifier: Modifier = Modifier,
+    cornerType: BpkSkeletonCornerType = BpkSkeletonCornerType.Square
+) {
+    val offsetX by shimmerAnimation()
+    Box(modifier = modifier
+        .size(BpkImageSkeletonSize, BpkImageSkeletonSize)
+        .background(BpkTheme.colors.skeletonBackground,
+            RoundedCornerShape(if (cornerType === BpkSkeletonCornerType.Rounded) BpkBorderRadius.Sm else 0.dp))
+        .offset(Dp(offsetX.value), 0.dp)) {
+        ShimmerBox()
+    }
+}
+
+@Preview
+@Composable
+fun BpkBodyTextSkeleton (
+    modifier: Modifier = Modifier,
+    skeletonSize:  BpkSkeletonSizeType= BpkSkeletonSizeType.Small
+) {
+    val offsetX by shimmerAnimation()
+
+    val skeletonWidthPercentage = when (skeletonSize) {
+        BpkSkeletonSizeType.Small -> 0.42F
+        BpkSkeletonSizeType.Medium -> 0.62F
+        BpkSkeletonSizeType.Large -> 0.73F
+    }
+
+    Box(modifier = modifier){
+        Box(modifier = modifier
+            .fillMaxWidth(skeletonWidthPercentage)
+            .height(8.dp)
+            .background(BpkTheme.colors.skeletonBackground, RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
+            .offset(Dp(offsetX.value), 0.dp)) {
+            ShimmerBox()
+        }
+    }
+}
+
+@Preview
+@Composable
+fun BpkHeadlineSkeleton (
+    modifier: Modifier = Modifier,
+    skeletonSize:  BpkSkeletonSizeType= BpkSkeletonSizeType.Small
+) {
+    val offsetX by shimmerAnimation()
+    val skeletonHeight = when (skeletonSize) {
+        BpkSkeletonSizeType.Small -> BpkHeadlineSkeletonHeightSm
+        BpkSkeletonSizeType.Medium -> BpkHeadlineSkeletonHeightMd
+        BpkSkeletonSizeType.Large -> BpkHeadlineSkeletonHeightLg
+    }
+
+    Box(modifier = modifier
+        .size(BpkHeadlineSkeletonWidth, skeletonHeight)
+        .background(BpkTheme.colors.skeletonBackground, RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
+        .offset(Dp(offsetX.value), 0.dp)) {
+        ShimmerBox()
+    }
+}
+
+@Preview
+@Composable
+fun BpkCircleSkeleton (
+    modifier: Modifier = Modifier,
+    circleSize:  BpkCircleSkeletonSizeType= BpkCircleSkeletonSizeType.Small
+) {
+    val offsetX by shimmerAnimation()
+    val circleSizeDp = if(circleSize === BpkCircleSkeletonSizeType.Large) BpkCircleSkeletonSizeLg else BpkCircleSkeletonSizeSm
+    Box(modifier = modifier
+        .size(circleSizeDp, circleSizeDp)
+        .background(BpkTheme.colors.skeletonBackground, RoundedCornerShape(circleSizeDp.div(2)))
+        .offset(Dp(offsetX.value), 0.dp)) {
+        ShimmerBox()
+    }
+}

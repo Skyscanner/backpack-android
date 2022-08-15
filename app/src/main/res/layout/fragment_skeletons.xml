@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/App.Story"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    android:orientation="vertical"
+    >
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingXl"
+      android:layoutDirection="locale"
+      android:orientation="horizontal"
+      >
+
+    <net.skyscanner.backpack.skeleton.BpkCircleSkeleton
+        android:id="@+id/skeletonCircleSm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/skeletonCircleLg"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        />
+
+    <net.skyscanner.backpack.skeleton.BpkCircleSkeleton
+        android:id="@+id/skeletonCircleLg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/skeletonCircleSm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:circleSize="Large"
+        />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingXl"
+      android:layoutDirection="locale"
+      android:orientation="horizontal"
+      >
+
+    <net.skyscanner.backpack.skeleton.BpkImageSkeleton
+        android:id="@+id/skeletonImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/skeletonImageRounded"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        />
+
+    <net.skyscanner.backpack.skeleton.BpkImageSkeleton
+        android:id="@+id/skeletonImageRounded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/skeletonImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cornerType="Rounded"
+        />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingXl"
+      android:layoutDirection="locale"
+      android:orientation="horizontal"
+      >
+    <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
+        android:id="@+id/skeletonHeadlineSm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/skeletonHeadlineMd"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:skeletonSize="Small"
+        />
+
+    <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
+        android:id="@+id/skeletonHeadlineMd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/skeletonHeadlineSm"
+        app:layout_constraintEnd_toStartOf="@id/skeletonHeadlineLg"
+        app:skeletonSize="Medium"
+        />
+
+    <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
+        android:id="@+id/skeletonHeadlineLg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/skeletonHeadlineMd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:skeletonSize="Large"
+        />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layoutDirection="locale"
+      android:orientation="vertical"
+    >
+    <net.skyscanner.backpack.skeleton.BpkBodyTextSkeleton
+        android:id="@+id/skeletonBodyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bpkSpacingBase"
+        app:skeletonSize="Small"
+        />
+
+    <net.skyscanner.backpack.skeleton.BpkBodyTextSkeleton
+        android:id="@+id/skeletonBodyTextLg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bpkSpacingBase"
+        app:skeletonSize="Medium"
+        />
+
+    <net.skyscanner.backpack.skeleton.BpkBodyTextSkeleton
+        android:id="@+id/skeletonBodyTextSm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bpkSpacingBase"
+        app:skeletonSize="Large"
+        />
+  </LinearLayout>
+</LinearLayout>

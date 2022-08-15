@@ -293,6 +293,34 @@
     <attr name="state_error" format="boolean" />
   </declare-styleable>
 
+  <declare-styleable name="BpkImageSkeleton">
+    <attr name="cornerType" format="enum">
+      <enum name="Square" value="0" />
+      <enum name="Rounded" value="1" />
+    </attr>
+  </declare-styleable>
+
+  <attr name="skeletonSize" format="enum">
+    <enum name="Small" value="0" />
+    <enum name="Medium" value="1" />
+    <enum name="Large" value="2" />
+  </attr>
+  <declare-styleable name="BpkBodyTextSkeleton">
+    <attr name="skeletonSize" />
+    <attr name="withShimmer" format="boolean" />
+  </declare-styleable>
+
+  <declare-styleable name="BpkHeadlineSkeleton">
+    <attr name="skeletonSize" />
+  </declare-styleable>
+
+  <declare-styleable name="BpkCircleSkeleton">
+    <attr name="circleSize" format="enum">
+      <enum name="Small" value="0" />
+      <enum name="Large" value="1" />
+    </attr>
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />

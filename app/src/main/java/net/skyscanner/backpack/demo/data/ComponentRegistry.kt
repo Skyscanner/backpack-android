@@ -39,6 +39,7 @@ import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadiiComposeStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
+import net.skyscanner.backpack.demo.compose.SkeletonStory
 import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
@@ -435,6 +436,13 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_COMPOSE composeStory { ThemeStory() },
         TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
+      )
+    ),
+    "Skeleton" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_COMPOSE composeStory { SkeletonStory() },
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_skeletons }
       )
     ),
   )

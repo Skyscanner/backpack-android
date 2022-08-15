@@ -62,6 +62,9 @@ public class BpkColors private constructor(
   public val textSecondary: Color,
   public val textSecondaryOnContrast: Color,
   public val textTertiary: Color,
+  public val skeletonBackground: Color,
+  public val skeletonShimmerPrimary: Color,
+  public val skeletonShimmerSecondary: Color,
 ) {
   internal companion object {
     public fun light(
@@ -101,6 +104,9 @@ public class BpkColors private constructor(
       textSecondary: Color = BpkColor.SkyGrayTint02,
       textSecondaryOnContrast: Color = BpkColor.WhiteAlpha80,
       textTertiary: Color = BpkColor.SkyGrayTint03,
+      skeletonBackground: Color = BpkColor.SkyGrayTint06,
+      skeletonShimmerPrimary: Color = BpkColor.SkeletonShimmerPrimaryLight,
+      skeletonShimmerSecondary: Color = BpkColor.SkeletonShimmerSecondaryLight,
     ) = BpkColors(
         isLight = true,
         background = background,
@@ -139,6 +145,9 @@ public class BpkColors private constructor(
         textSecondary = textSecondary,
         textSecondaryOnContrast = textSecondaryOnContrast,
         textTertiary = textTertiary,
+        skeletonBackground = skeletonBackground,
+        skeletonShimmerPrimary = skeletonShimmerPrimary,
+        skeletonShimmerSecondary = skeletonShimmerSecondary,
     )
 
     public fun dark(
@@ -178,6 +187,9 @@ public class BpkColors private constructor(
       textSecondary: Color = BpkColor.SkyGrayTint04,
       textSecondaryOnContrast: Color = BpkColor.NightGrey40,
       textTertiary: Color = BpkColor.BlackTint06,
+      skeletonBackground: Color = BpkColor.BlackTint02,
+      skeletonShimmerPrimary: Color = BpkColor.SkeletonShimmerPrimaryDark,
+      skeletonShimmerSecondary: Color = BpkColor.SkeletonShimmerSecondaryDark,
     ) = BpkColors(
         isLight = false,
         background = background,
@@ -216,6 +228,9 @@ public class BpkColors private constructor(
         textSecondary = textSecondary,
         textSecondaryOnContrast = textSecondaryOnContrast,
         textTertiary = textTertiary,
+        skeletonBackground = skeletonBackground,
+        skeletonShimmerPrimary = skeletonShimmerPrimary,
+        skeletonShimmerSecondary = skeletonShimmerSecondary,
     )
   }
 }
