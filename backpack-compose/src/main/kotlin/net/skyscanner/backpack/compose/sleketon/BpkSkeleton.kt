@@ -36,11 +36,13 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 private val BpkImageSkeletonSize = 96.dp
 private val BpkCircleSkeletonSizeSm = 32.dp
@@ -68,6 +70,21 @@ enum class BpkSkeletonCornerType {
 }
 
 @Composable
+private fun shimmerBackgroundColor() : Color {
+    return dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint02)
+}
+
+@Composable
+private fun shimmerPrimaryColor() : Color {
+    return dynamicColorOf(Color(0x00FFFFFF), Color(0x00000000))
+}
+
+@Composable
+private fun shimmerSecondaryColor() : Color {
+    return dynamicColorOf(Color(0x99FFFFFF), Color(0x33000000))
+}
+
+@Composable
 private fun shimmerAnimation(): State<Dp> {
     var inifiniteTransition = rememberInfiniteTransition()
     return inifiniteTransition.animateValue(initialValue = (-500).dp, targetValue = 500.dp, typeConverter = Dp.VectorConverter,
@@ -81,9 +98,9 @@ private fun ShimmerBox () {
         .background(
             brush = Brush.horizontalGradient(
                 listOf(
-                    BpkTheme.colors.skeletonShimmerPrimary,
-                    BpkTheme.colors.skeletonShimmerSecondary,
-                    BpkTheme.colors.skeletonShimmerPrimary,
+                    shimmerPrimaryColor(),
+                    shimmerSecondaryColor(),
+                    shimmerPrimaryColor(),
                 )
             )
         )
@@ -99,7 +116,7 @@ fun BpkImageSkeleton (
     val offsetX by shimmerAnimation()
     Box(modifier = modifier
         .size(BpkImageSkeletonSize, BpkImageSkeletonSize)
-        .background(BpkTheme.colors.skeletonBackground,
+        .background(shimmerBackgroundColor(),
             RoundedCornerShape(if (cornerType === BpkSkeletonCornerType.Rounded) BpkBorderRadius.Sm else 0.dp))
         .offset(Dp(offsetX.value), 0.dp)) {
         ShimmerBox()
@@ -124,7 +141,7 @@ fun BpkBodyTextSkeleton (
         Box(modifier = modifier
             .fillMaxWidth(skeletonWidthPercentage)
             .height(8.dp)
-            .background(BpkTheme.colors.skeletonBackground, RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
+            .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
             .offset(Dp(offsetX.value), 0.dp)) {
             ShimmerBox()
         }
@@ -146,7 +163,7 @@ fun BpkHeadlineSkeleton (
 
     Box(modifier = modifier
         .size(BpkHeadlineSkeletonWidth, skeletonHeight)
-        .background(BpkTheme.colors.skeletonBackground, RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
+        .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
         .offset(Dp(offsetX.value), 0.dp)) {
         ShimmerBox()
     }
@@ -162,7 +179,7 @@ fun BpkCircleSkeleton (
     val circleSizeDp = if(circleSize === BpkCircleSkeletonSizeType.Large) BpkCircleSkeletonSizeLg else BpkCircleSkeletonSizeSm
     Box(modifier = modifier
         .size(circleSizeDp, circleSizeDp)
-        .background(BpkTheme.colors.skeletonBackground, RoundedCornerShape(circleSizeDp.div(2)))
+        .background(shimmerBackgroundColor(), RoundedCornerShape(circleSizeDp.div(2)))
         .offset(Dp(offsetX.value), 0.dp)) {
         ShimmerBox()
     }

@@ -173,12 +173,4 @@ public object BpkColor {
   public val Yellow: Color = Color(0xFFFEEB87)
 
   public val YellowMuted: Color = Color(0xFFFFEBD0)
-
-  public val SkeletonShimmerPrimaryLight: Color = Color(0x00FFFFFF)
-
-  public val SkeletonShimmerSecondaryLight: Color = Color(0x99FFFFFF)
-
-  public val SkeletonShimmerPrimaryDark: Color = Color(0x00000000)
-
-  public val SkeletonShimmerSecondaryDark: Color = Color(0x33000000)
 }
