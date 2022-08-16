@@ -239,6 +239,15 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
       componentsToReplace = setOf("android.widget.Toast"),
       staticMethodsToReplace = setOf("makeText")
     ),
+    SKELETON(
+      fullName = "net.skyscanner.backpack.skeleton.BpkSkeleton",
+      webName = "skeleton",
+      componentsToReplace = setOf(
+        "android.view.View",
+        "com.cooltechworks.views.shimmer.ShimmerRecyclerView",
+        "io.supercharge.shimmerlayout.ShimmerLayout"
+      )
+    ),
     ;
 
     val url: String = "https://backpack.github.io/components/$webName"
