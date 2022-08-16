@@ -148,11 +148,6 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       webName = "spinner",
       componentsToReplace = setOf("androidx.compose.material.CircularProgressIndicator")
     ),
-    SKELETON(
-      fullName = "net.skyscanner.backpack.compose.skeleton.BpkSkeleton",
-      webName = "skeleton",
-      componentsToReplace = setOf("androidx.compose.foundation.layout.Box")
-    ),
     ;
 
     val url: String = "https://backpack.github.io/components/$webName"
