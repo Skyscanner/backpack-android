@@ -55,6 +55,9 @@ jobs:
           KEYSTORE_DECRYPT_KEY: ${{ secrets.KEYSTORE_DECRYPT_KEY }}
           KEYSTORE_DECRYPT_IV: ${{ secrets.KEYSTORE_DECRYPT_IV }}
 
+      - name: Build Dokka docs
+        run: ./gradlew dokkaHtmlMultiModule
+        
       - name: Publish artifacts
         run: >
           ./gradlew checkMavenCredentials
@@ -70,9 +73,6 @@ jobs:
 
       - name: Remove Sonatype key
         run: rm -rf sonatype.gpg
-
-      - name: Build Dokka docs
-        run: ./gradlew dokkaHtmlMultiModule
 
       - name: Deploy Dokka docs
         uses: peaceiris/actions-gh-pages@v3
