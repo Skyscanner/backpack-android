@@ -76,10 +76,6 @@
 
 	<color name="bpkBlackTint06">#8e8e93</color>
 
-	<color name="bpkBlueBright">#a1eeff</color>
-
-	<color name="bpkBlueMuted">#d9f8ff</color>
-
 	<color name="bpkBunol">#ff7b59</color>
 
 	<color name="bpkCharcoal">#111236</color>
@@ -91,8 +87,6 @@
 	<color name="bpkErfoud">#ffb54d</color>
 
 	<color name="bpkGlencoe">#73cec6</color>
-
-	<color name="bpkGreenBright">#93ffde</color>
 
 	<color name="bpkGreenMuted">#d0eeec</color>
 
@@ -126,9 +120,9 @@
 
 	<color name="bpkNightGrey10">#000000</color>
 
-	<color name="bpkNightGrey20">#2c2c2e</color>
+	<color name="bpkNightGrey20">#1d1b20</color>
 
-	<color name="bpkNightGrey25">#1b2839</color>
+	<color name="bpkNightGrey25">#2c2c2e</color>
 
 	<color name="bpkNightGrey30">#48484a</color>
 
@@ -142,19 +136,13 @@
 
 	<color name="bpkNightYellowSpot">#ffb54d</color>
 
-	<color name="bpkOrange">#ff7b59</color>
-
 	<color name="bpkPanjin">#d1435b</color>
 
 	<color name="bpkPetra">#ffab95</color>
 
-	<color name="bpkPink">#ffa3e5</color>
-
 	<color name="bpkPinkMuted">#f6dde1</color>
 
 	<color name="bpkPrimaryGradientLight">#0770e3</color>
-
-	<color name="bpkPurple">#8e47ba</color>
 
 	<color name="bpkSagano">#d0eeec</color>
 
@@ -202,13 +190,45 @@
 
 	<color name="bpkWhiteAlpha80">#8e8e93</color>
 
-	<color name="bpkYellow">#feeb87</color>
-
 	<color name="bpkYellowMuted">#ffebd0</color>
 
 	<color name="bpkLineDark">#48484a</color>
 
 	<color name="bpkLineLight">#cdcdd7</color>
+
+	<color name="bpkMarcommsBerry">#d1435b</color>
+
+	<color name="bpkMarcommsBlueBright">#a1eeff</color>
+
+	<color name="bpkMarcommsBlueMuted">#d9f8ff</color>
+
+	<color name="bpkMarcommsCharcoal">#111236</color>
+
+	<color name="bpkMarcommsDarkSky">#02122c</color>
+
+	<color name="bpkMarcommsEcoGreen">#0fa1a9</color>
+
+	<color name="bpkMarcommsGreenBright">#93ffde</color>
+
+	<color name="bpkMarcommsGreenMuted">#d0eeec</color>
+
+	<color name="bpkMarcommsGrey40">#68697f</color>
+
+	<color name="bpkMarcommsOrange">#ff7b59</color>
+
+	<color name="bpkMarcommsPink">#ffa3e5</color>
+
+	<color name="bpkMarcommsPinkMuted">#f6dde1</color>
+
+	<color name="bpkMarcommsPurple">#8e47ba</color>
+
+	<color name="bpkMarcommsSkyBlue">#0770e3</color>
+
+	<color name="bpkMarcommsWhite">#ffffff</color>
+
+	<color name="bpkMarcommsYellow">#feeb87</color>
+
+	<color name="bpkMarcommsYellowMuted">#ffebd0</color>
 
 	<color name="bpkPrimaryDark">#6d9feb</color>
 

@@ -66,8 +66,8 @@ open class BpkCardView @JvmOverloads constructor(
 
     fun toBackgroundColor(context: Context): ColorStateList {
       val background = when (this) {
-        NONE, DEFAULT -> context.getColor(R.color.bpkBackgroundElevation01)
-        FOCUSED -> context.getColor(R.color.bpkBackgroundElevation02)
+        NONE, DEFAULT -> context.getColor(R.color.bpkSurfaceDefault)
+        FOCUSED -> context.getColor(R.color.bpkSurfaceElevated)
       }
       return ColorStateList.valueOf(background)
     }

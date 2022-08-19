@@ -50,10 +50,6 @@ public object BpkColor {
 
   public val BlackTint06: Color = Color(0xFF8E8E93)
 
-  public val BlueBright: Color = Color(0xFFA1EEFF)
-
-  public val BlueMuted: Color = Color(0xFFD9F8FF)
-
   public val Bunol: Color = Color(0xFFFF7B59)
 
   public val Charcoal: Color = Color(0xFF111236)
@@ -65,8 +61,6 @@ public object BpkColor {
   public val Erfoud: Color = Color(0xFFFFB54D)
 
   public val Glencoe: Color = Color(0xFF73CEC6)
-
-  public val GreenBright: Color = Color(0xFF93FFDE)
 
   public val GreenMuted: Color = Color(0xFFD0EEEC)
 
@@ -100,9 +94,9 @@ public object BpkColor {
 
   public val NightGrey10: Color = Color(0xFF000000)
 
-  public val NightGrey20: Color = Color(0xFF2C2C2E)
+  public val NightGrey20: Color = Color(0xFF1D1B20)
 
-  public val NightGrey25: Color = Color(0xFF1B2839)
+  public val NightGrey25: Color = Color(0xFF2C2C2E)
 
   public val NightGrey30: Color = Color(0xFF48484A)
 
@@ -116,17 +110,11 @@ public object BpkColor {
 
   public val NightYellowSpot: Color = Color(0xFFFFB54D)
 
-  public val Orange: Color = Color(0xFFFF7B59)
-
   public val Panjin: Color = Color(0xFFD1435B)
 
   public val Petra: Color = Color(0xFFFFAB95)
 
-  public val Pink: Color = Color(0xFFFFA3E5)
-
   public val PinkMuted: Color = Color(0xFFF6DDE1)
-
-  public val Purple: Color = Color(0xFF8E47BA)
 
   public val Sagano: Color = Color(0xFFD0EEEC)
 
@@ -169,8 +157,6 @@ public object BpkColor {
   public val WhiteAlpha20: Color = Color(0xFF8E8E93)
 
   public val WhiteAlpha80: Color = Color(0xFF8E8E93)
-
-  public val Yellow: Color = Color(0xFFFEEB87)
 
   public val YellowMuted: Color = Color(0xFFFFEBD0)
 }

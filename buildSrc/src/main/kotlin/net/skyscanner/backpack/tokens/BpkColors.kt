@@ -42,16 +42,23 @@ object BpkColor {
 
     override fun invoke(source: Map<String, Any>): BpkColors =
       parseColors(source, resolveReferences = false) {
-        it.name == it.defaultReference
+        it.name == it.defaultReference && !it.isMarcomms()
       }
+  }
 
+  object Marcomms : BpkParser<Map<String, Any>, BpkColors> {
+
+    override fun invoke(source: Map<String, Any>): BpkColors =
+      parseColors(source, resolveReferences = false) {
+       it.isMarcomms()
+      }
   }
 
   object Semantic : BpkParser<Map<String, Any>, BpkColors> {
 
     override fun invoke(source: Map<String, Any>): BpkColors =
       parseColors(source, resolveReferences = true) {
-        it.name != it.defaultReference && !it.hasSemanticSuffix()
+        it.name != it.defaultReference && !it.hasSemanticSuffix() && !it.isMarcomms()
       }
 
     @OptIn(ExperimentalStdlibApi::class)
@@ -78,6 +85,7 @@ object BpkColor {
 
   }
 
+  private fun BpkColorModel.isMarcomms(): Boolean = name.startsWith("MARCOMMS_")
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -131,7 +139,7 @@ private val ColorClass = ClassName("androidx.compose.ui.graphics", "Color")
 private const val isLightProperty = "isLight"
 
 private fun String.toComposeStaticName() =
-  CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
+  CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, removePrefix("MARCOMMS_"))
 
 @OptIn(ExperimentalStdlibApi::class)
 private fun toStaticCompose(
