@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.skeleton
 
-import androidx.test.annotation.UiThreadTest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -34,7 +33,6 @@ class BpkCircleSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  @UiThreadTest
   fun screenshotTestSmallCircle() {
     val skeleton = BpkCircleSkeleton(testContext)
     skeleton.size = BpkCircleSkeleton.CircleSize.Small
@@ -42,10 +40,16 @@ class BpkCircleSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  @UiThreadTest
   fun screenshotTestLargeCircle() {
     val skeleton = BpkCircleSkeleton(testContext)
     skeleton.size = BpkCircleSkeleton.CircleSize.Large
+    snap(skeleton)
+  }
+
+  @Test
+  fun screenshotTestCustomSizeCircle() {
+    val skeleton = BpkCircleSkeleton(testContext)
+    skeleton.diameter = (50 * testContext.resources.displayMetrics.density).toInt()
     snap(skeleton)
   }
 }

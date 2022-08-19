@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/bpk_skeleton_container"
+    android:id="@+id/bpk_skeleton_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/bpkSpacingXxl"
     android:orientation="horizontal"
     >
-    <RelativeLayout
-        android:id="@id/bpk_skeleton_view"
+    <View
+        android:id="@+id/firstLine"
         android:layout_width="0dp"
-        android:layout_height="@dimen/bpk_body_text_skeleton_height"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="@dimen/bpkSpacingMd"
+        app:flow_horizontalAlign="start"
+        app:layout_constraintWidth_percent="0.85"
+        android:layout_marginBottom="@dimen/bpkSpacingMd"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/secondLine"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <View
+        android:id="@+id/secondLine"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bpkSpacingMd"
+        app:flow_horizontalAlign="start"
+        app:layout_constraintWidth_percent="1"
+        android:layout_marginBottom="@dimen/bpkSpacingMd"
+        app:layout_constraintTop_toBottomOf="@+id/firstLine"
+        app:layout_constraintBottom_toTopOf="@+id/thirdLine"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <View
+        android:id="@+id/thirdLine"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/bpkSpacingMd"
+        app:flow_horizontalAlign="start"
+        app:layout_constraintWidth_percent="0.57"
+        app:layout_constraintTop_toBottomOf="@+id/secondLine"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
-        <View
-            android:id="@+id/bpk_skeleton_shimmer"
-            android:layout_width="@dimen/bpk_skeleton_shimmer_width"
-            android:layout_height="@dimen/bpk_skeleton_shimmer_height"
-            tools:ignore="UnusedAttribute"
-            android:orientation="vertical"
-            android:background="@drawable/bpk_skeleton_shimmer_bg"
-            >
-        </View>
-    </RelativeLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
-

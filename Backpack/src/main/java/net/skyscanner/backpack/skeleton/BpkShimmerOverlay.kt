@@ -22,30 +22,44 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.widget.RelativeLayout
+import android.widget.FrameLayout
 import androidx.annotation.AttrRes
 import net.skyscanner.backpack.R
 
-open class BpkSkeletonBase @JvmOverloads constructor(
+class BpkShimmerOverlay @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   @AttrRes defStyleAttr: Int = 0,
-) : RelativeLayout(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr) {
 
-  enum class SkeletonSize(
-    internal val id: Int,
-  ) {
-    Small(0),
-    Medium(1),
-    Large(2),
+  private var inflatingInProgress = false
+  init {
+    inflatingInProgress = true
+    inflate(this.context, R.layout.bpk_shimmer_skeleton, this)
+    inflatingInProgress = false
+    startShimmer()
   }
 
-  fun setShimmerBackgroundColor(backGroundView: View) {
-    backGroundView.setBackgroundColor(context.getColor(R.color.__skeletonBackground))
+  override fun addView(child: View?) {
+    if (inflatingInProgress) {
+      super.addView(child)
+    } else {
+      val container = findViewById<FrameLayout>(R.id.bpk_skeleton_container)
+      container.addView(child)
+      container.bringChildToFront(findViewById(R.id.bpk_skeleton_shimmer))
+    }
   }
-  fun startShimmer(shimmerView: View) {
+
+  override fun onViewAdded(child: View?) {
+    super.onViewAdded(child)
+    if (child?.id !== R.id.bpk_skeleton_container) {
+      this.bringChildToFront(findViewById(R.id.bpk_skeleton_container))
+    }
+  }
+
+  private fun startShimmer() {
     // Use ObjectAnimator to draw the animation for translationX, translate the position from left to right.
-    ObjectAnimator.ofFloat(shimmerView, "translationX", -500f, 500f).apply {
+    ObjectAnimator.ofFloat(findViewById(R.id.bpk_skeleton_shimmer), "translationX", -500f, 500f).apply {
       duration = 1000 // Per specification.
       repeatCount = ObjectAnimator.INFINITE
       startDelay = 200 // Per specification.

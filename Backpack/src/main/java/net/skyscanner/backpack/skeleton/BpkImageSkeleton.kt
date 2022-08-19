@@ -21,6 +21,7 @@ package net.skyscanner.backpack.skeleton
 import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.AttrRes
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.overlay.internal.CornerRadiusViewOutlineProvider
@@ -31,7 +32,7 @@ class BpkImageSkeleton @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   @AttrRes defStyleAttr: Int = 0,
-) : BpkSkeletonBase(context, attrs, defStyleAttr) {
+) : View(context, attrs, defStyleAttr) {
 
   enum class CornerType(
     internal val id: Int,
@@ -53,13 +54,10 @@ class BpkImageSkeleton @JvmOverloads constructor(
     }
 
   init {
-    inflate(this.context, R.layout.view_bpk_skeleton_image, this)
-
-    setShimmerBackgroundColor(this)
     context.obtainStyledAttributes(attrs, R.styleable.BpkImageSkeleton, defStyleAttr, 0).use {
       cornerType = parseCornerAttribute(it, cornerType)
     }
-    startShimmer(findViewById(R.id.bpk_skeleton_shimmer))
+    this.setBackgroundColor(context.getColor(R.color.__skeletonBackground))
   }
 
   private companion object {

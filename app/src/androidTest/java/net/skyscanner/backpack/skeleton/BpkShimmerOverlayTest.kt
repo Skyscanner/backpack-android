@@ -18,27 +18,26 @@
 
 package net.skyscanner.backpack.skeleton
 
-import android.graphics.drawable.ColorDrawable
-import android.widget.RelativeLayout
-import androidx.test.annotation.UiThreadTest
+import android.view.ViewGroup
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import net.skyscanner.backpack.R
-import org.junit.Assert
+import net.skyscanner.backpack.BpkSnapshotTest
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkBodyTextSkeletonTest {
+class BpkShimmerOverlayTest : BpkSnapshotTest() {
+
+  @Before
+  fun setup() {
+    setDimensions(200, 200)
+  }
 
   @Test
-  @UiThreadTest
-  fun test_bodyTextSkeleton() {
-    val context = InstrumentationRegistry.getInstrumentation().targetContext
-    val skeleton = BpkBodyTextSkeleton(context)
-    var skeletonView = skeleton.findViewById<RelativeLayout>(R.id.bpk_skeleton_view)
-    var background = skeletonView.background as ColorDrawable
-
-    Assert.assertEquals(context.getColor(R.color.__skeletonBackground), background.color)
+  fun screenshotTestShimmerOverlay() {
+    val skeleton = BpkShimmerOverlay(testContext)
+    val view = BpkBodyTextSkeleton(testContext)
+    skeleton.addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+    snap(skeleton)
   }
 }

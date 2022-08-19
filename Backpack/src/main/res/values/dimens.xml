@@ -47,19 +47,5 @@
   <dimen name="bpk_button_default_height">36dp</dimen>
   <dimen name="bpk_button_large_height">48dp</dimen>
   <dimen name="bpk_switch_min_width">49dp</dimen>
-  <dimen name="bpk_body_text_skeleton_height">8dp</dimen>
-  <dimen name="bpk_body_text_skeleton_sm_width">320dp</dimen>
-  <dimen name="bpk_body_text_skeleton_md_width">480dp</dimen>
-  <dimen name="bpk_body_text_skeleton_lg_width">560dp</dimen>
-  <dimen name="bpk_image_skeleton_width">96dp</dimen>
-  <dimen name="bpk_image_skeleton_height">96dp</dimen>
-  <dimen name="bpk_headline_skeleton_width">80dp</dimen>
-  <dimen name="bpk_headline_skeleton_sm_height">8dp</dimen>
-  <dimen name="bpk_headline_skeleton_md_height">16dp</dimen>
-  <dimen name="bpk_headline_skeleton_lg_height">32dp</dimen>
-  <dimen name="bpk_circle_skeleton_sm_width">32dp</dimen>
-  <dimen name="bpk_circle_skeleton_lg_width">48dp</dimen>
-  <dimen name="bpk_skeleton_shimmer_width">1000dp</dimen>
-  <dimen name="bpk_skeleton_shimmer_height">200dp</dimen>
   <dimen name="bpk_skeleton_xxs_border_radius">2dp</dimen>
 </resources>

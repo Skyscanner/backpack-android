@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.skeleton
 
-import androidx.test.annotation.UiThreadTest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -34,7 +33,6 @@ class BpkImageSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  @UiThreadTest
   fun screenshotTestSquareImageSkeleton() {
     val skeleton = BpkImageSkeleton(testContext)
     skeleton.cornerType = BpkImageSkeleton.CornerType.Square
@@ -42,7 +40,6 @@ class BpkImageSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  @UiThreadTest
   fun screenshotTestRoundedImageSkeleton() {
     val skeleton = BpkImageSkeleton(testContext)
     skeleton.cornerType = BpkImageSkeleton.CornerType.Rounded

@@ -20,14 +20,11 @@ package net.skyscanner.backpack.skeleton
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.Outline
+import android.graphics.Canvas
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import android.view.ViewOutlineProvider
-import android.widget.RelativeLayout
 import androidx.annotation.AttrRes
-import androidx.annotation.DimenRes
-import androidx.core.view.updateLayoutParams
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 
@@ -35,54 +32,63 @@ class BpkCircleSkeleton @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   @AttrRes defStyleAttr: Int = 0,
-) : BpkSkeletonBase(context, attrs, defStyleAttr) {
+) : View(context, attrs, defStyleAttr) {
+  val paint = Paint().apply {
+    color = context.getColor(R.color.__skeletonBackground)
+    style = Paint.Style.FILL
+  }
+
   enum class CircleSize(
     internal val id: Int,
   ) {
-    Small(0),
-    Large(1),
+    None(0),
+    Small(1),
+    Large(2),
   }
 
-  var size = CircleSize.Small
+  var diameter = 0
     set(value) {
       field = value
-
-      val skeletonView = findViewById<RelativeLayout>(R.id.bpk_skeleton_container)
-      val diameterSize = context.resources.getDimensionPixelSize(getDiameterSize(value))
-      skeletonView.updateLayoutParams {
-        width = diameterSize
-        height = diameterSize
-      }
-      outlineProvider = object : ViewOutlineProvider() {
-        override fun getOutline(view: View?, outline: Outline?) {
-          outline?.setRoundRect(0, 0, view!!.width, view!!.height, diameterSize.toFloat() / 2)
-        }
-      }
-      clipToOutline = true
+      invalidate()
     }
 
-  @DimenRes
-  private fun getDiameterSize(size: CircleSize): Int {
-    return when (size) {
-      CircleSize.Small -> R.dimen.bpk_circle_skeleton_sm_width
-      CircleSize.Large -> R.dimen.bpk_circle_skeleton_lg_width
+  var size = CircleSize.None
+    set(value) {
+      field = value
+      diameter = when (value) {
+        CircleSize.None -> diameter
+        CircleSize.Small -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
+        CircleSize.Large -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg) * 2
+      }
+      invalidate()
+    }
+
+  init {
+    context.obtainStyledAttributes(attrs, R.styleable.BpkCircleSkeleton, defStyleAttr, 0).use {
+      diameter = parseDiameterAttribute(it, diameter)
+      size = parseCircleSizeAttribute(it, size)
     }
   }
 
-  init {
-    inflate(this.context, R.layout.view_bpk_skeleton_circle, this)
+  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    setMeasuredDimension(diameter, diameter)
+  }
 
-    setShimmerBackgroundColor(this)
-    context.obtainStyledAttributes(attrs, R.styleable.BpkCircleSkeleton, defStyleAttr, 0).use {
-      size = parseSizeAttribute(it, size)
-    }
+  override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+    super.onLayout(changed, 0, 0, diameter, diameter)
+  }
 
-    startShimmer(findViewById(R.id.bpk_skeleton_shimmer))
+  override fun onDraw(canvas: Canvas?) {
+    val radius = diameter.toFloat().div(2)
+    canvas?.drawCircle(radius, radius, radius, paint)
   }
 
   private companion object {
-    private fun parseSizeAttribute(it: TypedArray, fallback: CircleSize) =
-      it.getInt(R.styleable.BpkCircleSkeleton_circleSize, fallback.id).let { id ->
+    private fun parseDiameterAttribute(it: TypedArray, fallback: Int) =
+      it.getDimensionPixelSize(R.styleable.BpkCircleSkeleton_diameter, fallback)
+    private fun parseCircleSizeAttribute(it: TypedArray, fallback: CircleSize) =
+      it.getInt(R.styleable.BpkHeadlineSkeleton_skeletonSize, fallback.id).let { id ->
         CircleSize.values().find { it.id == id } ?: fallback
       }
   }

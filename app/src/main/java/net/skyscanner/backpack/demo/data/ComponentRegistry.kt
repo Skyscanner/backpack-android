@@ -441,8 +441,8 @@ object ComponentRegistry {
     "Skeleton" story NodeData(
       { children -> TabStory of children },
       mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_skeletons },
         TAB_TITLE_COMPOSE composeStory { SkeletonStory() },
-        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_skeletons }
       )
     ),
   )

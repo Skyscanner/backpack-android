@@ -8,12 +8,19 @@
     android:layout_height="match_parent"
     android:gravity="top"
     android:orientation="vertical"
+    tools:ignore="HardcodedText"
     >
 
+  <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingSm"
+      app:textStyle="footnote"
+      android:text="Circle Skeleton"/>
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/bpkSpacingXl"
+      android:layout_marginBottom="@dimen/bpkSpacingMd"
       android:layoutDirection="locale"
       android:orientation="horizontal"
       >
@@ -27,6 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/skeletonCircleLg"
         app:layout_constraintHorizontal_chainStyle="spread"
+        app:diameter="48dp"
         />
 
     <net.skyscanner.backpack.skeleton.BpkCircleSkeleton
@@ -41,18 +49,24 @@
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
+  <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingSm"
+      app:textStyle="footnote"
+      android:text="Image Skeleton"/>
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/bpkSpacingXl"
+      android:layout_marginBottom="@dimen/bpkSpacingMd"
       android:layoutDirection="locale"
       android:orientation="horizontal"
       >
 
     <net.skyscanner.backpack.skeleton.BpkImageSkeleton
         android:id="@+id/skeletonImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,8 +76,8 @@
 
     <net.skyscanner.backpack.skeleton.BpkImageSkeleton
         android:id="@+id/skeletonImageRounded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="96dp"
+        android:layout_height="64dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/skeletonImage"
@@ -72,16 +86,22 @@
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
+  <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingSm"
+      app:textStyle="footnote"
+      android:text="Headline Skeleton"/>
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/bpkSpacingXl"
+      android:layout_marginBottom="@dimen/bpkSpacingMd"
       android:layoutDirection="locale"
       android:orientation="horizontal"
       >
     <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
         android:id="@+id/skeletonHeadlineSm"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -93,7 +113,7 @@
 
     <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
         android:id="@+id/skeletonHeadlineMd"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -104,44 +124,53 @@
 
     <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
         android:id="@+id/skeletonHeadlineLg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/skeletonHeadlineMd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:skeletonSize="Large"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
+  <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingSm"
+      app:textStyle="footnote"
+      android:text="Body Text Skeleton"/>
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layoutDirection="locale"
       android:orientation="vertical"
+      android:layout_marginBottom="@dimen/bpkSpacingMd"
     >
     <net.skyscanner.backpack.skeleton.BpkBodyTextSkeleton
         android:id="@+id/skeletonBodyText"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/bpkSpacingBase"
-        app:skeletonSize="Small"
         />
+  </LinearLayout>
 
-    <net.skyscanner.backpack.skeleton.BpkBodyTextSkeleton
-        android:id="@+id/skeletonBodyTextLg"
-        android:layout_width="match_parent"
+  <net.skyscanner.backpack.text.BpkText
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/bpkSpacingSm"
+      app:textStyle="footnote"
+      android:text="Shimmer Skeleton"/>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:gravity="center_horizontal"
+      >
+    <net.skyscanner.backpack.skeleton.BpkShimmerOverlay
+        android:id="@+id/shimmerSkeleton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/bpkSpacingBase"
-        app:skeletonSize="Medium"
-        />
-
-    <net.skyscanner.backpack.skeleton.BpkBodyTextSkeleton
-        android:id="@+id/skeletonBodyTextSm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/bpkSpacingBase"
-        app:skeletonSize="Large"
-        />
+        >
+      <include layout="@layout/skeleton_overlay_sample" />
+    </net.skyscanner.backpack.skeleton.BpkShimmerOverlay>
   </LinearLayout>
 </LinearLayout>

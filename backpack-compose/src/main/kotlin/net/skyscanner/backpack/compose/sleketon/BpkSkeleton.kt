@@ -25,7 +25,11 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -35,31 +39,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
-private val BpkImageSkeletonSize = 96.dp
-private val BpkCircleSkeletonSizeSm = 32.dp
-private val BpkCircleSkeletonSizeLg = 48.dp
-private val BpkSkeletonBorderRadiusXXS = 2.dp
-private val BpkHeadlineSkeletonWidth = 80.dp
-private val BpkHeadlineSkeletonHeightSm = 8.dp
-private val BpkHeadlineSkeletonHeightMd = 16.dp
-private val BpkHeadlineSkeletonHeightLg = 32.dp
+private val BpkSkeletonBorderRadiusXXS = BpkBorderRadius.Xs.div(2)
+private val BpkHeadlineSkeletonHeightSm = BpkSpacing.Md
+private val BpkHeadlineSkeletonHeightMd = BpkSpacing.Base
+private val BpkHeadlineSkeletonHeightLg = BpkSpacing.Xl
+private val BpkCircleSizeSm = BpkSpacing.Xl
+private val BpkCircleSizeLg = BpkSpacing.Lg.times(2)
 
 enum class BpkSkeletonSizeType {
+    None,
     Small,
     Medium,
     Large
 }
 
-enum class BpkCircleSkeletonSizeType {
+enum class BpkCircleSizeType {
+    None,
     Small,
     Large
 }
@@ -67,6 +72,20 @@ enum class BpkCircleSkeletonSizeType {
 enum class BpkSkeletonCornerType {
     Square,
     Rounded
+}
+private fun Modifier.enhanceHeadlineSize(skeletonSize: BpkSkeletonSizeType) : Modifier {
+    if (skeletonSize === BpkSkeletonSizeType.None) {
+        return this
+    }
+
+    val height = when (skeletonSize) {
+        BpkSkeletonSizeType.Small -> BpkHeadlineSkeletonHeightSm
+        BpkSkeletonSizeType.Medium -> BpkHeadlineSkeletonHeightMd
+        BpkSkeletonSizeType.Large -> BpkHeadlineSkeletonHeightLg
+        BpkSkeletonSizeType.None -> 0.dp
+    }
+
+    return this.height(height)
 }
 
 @Composable
@@ -86,15 +105,14 @@ private fun shimmerSecondaryColor() : Color {
 
 @Composable
 private fun shimmerAnimation(): State<Dp> {
-    var inifiniteTransition = rememberInfiniteTransition()
-    return inifiniteTransition.animateValue(initialValue = (-500).dp, targetValue = 500.dp, typeConverter = Dp.VectorConverter,
+    val infiniteTransition = rememberInfiniteTransition()
+    return infiniteTransition.animateValue(initialValue = (-500).dp, targetValue = 500.dp, typeConverter = Dp.VectorConverter,
         animationSpec = infiniteRepeatable(animation = tween(durationMillis = 1000, delayMillis = 200, easing = LinearEasing)))
 
 }
 @Composable
-private fun ShimmerBox () {
-    return Box(modifier = Modifier
-        .size(1000.dp, 1000.dp)
+private fun ShimmerBox (modifier: Modifier) {
+    return Box(modifier = modifier
         .background(
             brush = Brush.horizontalGradient(
                 listOf(
@@ -107,80 +125,65 @@ private fun ShimmerBox () {
     )
 }
 
-@Preview
 @Composable
 fun BpkImageSkeleton (
     modifier: Modifier = Modifier,
     cornerType: BpkSkeletonCornerType = BpkSkeletonCornerType.Square
 ) {
-    val offsetX by shimmerAnimation()
+    val cornerRadius = if (cornerType === BpkSkeletonCornerType.Rounded) BpkBorderRadius.Sm else 0.dp
     Box(modifier = modifier
-        .size(BpkImageSkeletonSize, BpkImageSkeletonSize)
-        .background(shimmerBackgroundColor(),
-            RoundedCornerShape(if (cornerType === BpkSkeletonCornerType.Rounded) BpkBorderRadius.Sm else 0.dp))
-        .offset(Dp(offsetX.value), 0.dp)) {
-        ShimmerBox()
-    }
+        .background(
+            shimmerBackgroundColor(),
+            RoundedCornerShape(cornerRadius)
+        ))
 }
 
-@Preview
 @Composable
 fun BpkBodyTextSkeleton (
     modifier: Modifier = Modifier,
-    skeletonSize:  BpkSkeletonSizeType= BpkSkeletonSizeType.Small
 ) {
-    val offsetX by shimmerAnimation()
-
-    val skeletonWidthPercentage = when (skeletonSize) {
-        BpkSkeletonSizeType.Small -> 0.42F
-        BpkSkeletonSizeType.Medium -> 0.62F
-        BpkSkeletonSizeType.Large -> 0.73F
-    }
-
-    Box(modifier = modifier){
-        Box(modifier = modifier
-            .fillMaxWidth(skeletonWidthPercentage)
-            .height(8.dp)
-            .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
-            .offset(Dp(offsetX.value), 0.dp)) {
-            ShimmerBox()
+    Box(modifier = modifier.height(BpkSpacing.Xxl)) {
+        Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md)) {
+            Box(modifier = Modifier.height(BpkSpacing.Md).fillMaxWidth(0.85f)
+                .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS)))
+            Box(modifier = Modifier.height(BpkSpacing.Md).fillMaxWidth()
+                .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS)))
+            Box(modifier = Modifier.height(BpkSpacing.Md).fillMaxWidth(0.57f)
+                .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS)))
         }
     }
 }
 
-@Preview
 @Composable
 fun BpkHeadlineSkeleton (
     modifier: Modifier = Modifier,
-    skeletonSize:  BpkSkeletonSizeType= BpkSkeletonSizeType.Small
+    skeletonSize: BpkSkeletonSizeType = BpkSkeletonSizeType.None
 ) {
-    val offsetX by shimmerAnimation()
-    val skeletonHeight = when (skeletonSize) {
-        BpkSkeletonSizeType.Small -> BpkHeadlineSkeletonHeightSm
-        BpkSkeletonSizeType.Medium -> BpkHeadlineSkeletonHeightMd
-        BpkSkeletonSizeType.Large -> BpkHeadlineSkeletonHeightLg
-    }
-
-    Box(modifier = modifier
-        .size(BpkHeadlineSkeletonWidth, skeletonHeight)
-        .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
-        .offset(Dp(offsetX.value), 0.dp)) {
-        ShimmerBox()
-    }
+    Box(modifier = modifier.enhanceHeadlineSize(skeletonSize)
+        .background(shimmerBackgroundColor(), RoundedCornerShape(BpkBorderRadius.Sm)))
 }
 
-@Preview
 @Composable
 fun BpkCircleSkeleton (
-    modifier: Modifier = Modifier,
-    circleSize:  BpkCircleSkeletonSizeType= BpkCircleSkeletonSizeType.Small
+    circleDiameter:  Dp = BpkSpacing.Xl,
+    circleSize: BpkCircleSizeType = BpkCircleSizeType.None
 ) {
+    val diameter : Dp = when (circleSize) {
+        BpkCircleSizeType.Small -> BpkCircleSizeSm
+        BpkCircleSizeType.Large -> BpkCircleSizeLg
+        BpkCircleSizeType.None -> circleDiameter
+    }
+
+    Box(modifier = Modifier
+        .size(diameter, diameter)
+        .background(shimmerBackgroundColor(), RoundedCornerShape(diameter.div(2))))
+}
+
+@Composable
+fun BpkShimmerOverlay(modifier: Modifier, content: @Composable BoxScope.() -> Unit) {
     val offsetX by shimmerAnimation()
-    val circleSizeDp = if(circleSize === BpkCircleSkeletonSizeType.Large) BpkCircleSkeletonSizeLg else BpkCircleSkeletonSizeSm
-    Box(modifier = modifier
-        .size(circleSizeDp, circleSizeDp)
-        .background(shimmerBackgroundColor(), RoundedCornerShape(circleSizeDp.div(2)))
-        .offset(Dp(offsetX.value), 0.dp)) {
-        ShimmerBox()
+    Box(modifier = modifier) {
+        content()
+        ShimmerBox(modifier = Modifier.fillMaxSize().clipToBounds().offset(Dp(offsetX.value), 0.dp))
     }
 }

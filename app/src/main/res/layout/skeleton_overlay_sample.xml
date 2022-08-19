@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <net.skyscanner.backpack.skeleton.BpkImageSkeleton
+        android:layout_width="@dimen/bpkSpacingXxl"
+        android:layout_height="@dimen/bpkSpacingXxl"
+        />
+    <net.skyscanner.backpack.skeleton.BpkBodyTextSkeleton
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/bpkSpacingMd"
+        />
+</LinearLayout>

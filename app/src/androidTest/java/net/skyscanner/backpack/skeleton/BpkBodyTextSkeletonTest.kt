@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.skeleton
 
-import androidx.test.annotation.UiThreadTest
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -30,30 +29,12 @@ class BpkBodyTextSkeletonTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(50, 400)
+    setDimensions(80, 200)
   }
 
   @Test
-  @UiThreadTest
-  fun screenshotTestSmallBodyTextSkeleton() {
+  fun screenshotTestBodyTextSkeleton() {
     val skeleton = BpkBodyTextSkeleton(testContext)
-    skeleton.size = BpkSkeletonBase.SkeletonSize.Small
-    snap(skeleton)
-  }
-
-  @Test
-  @UiThreadTest
-  fun screenshotTestMediumBodyTextSkeleton() {
-    val skeleton = BpkBodyTextSkeleton(testContext)
-    skeleton.size = BpkSkeletonBase.SkeletonSize.Medium
-    snap(skeleton)
-  }
-
-  @Test
-  @UiThreadTest
-  fun screenshotTestLargeBodyTextSkeleton() {
-    val skeleton = BpkBodyTextSkeleton(testContext)
-    skeleton.size = BpkSkeletonBase.SkeletonSize.Large
     snap(skeleton)
   }
 }
