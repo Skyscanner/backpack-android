@@ -42,6 +42,14 @@ BpkCardView(context).apply {
 }
 ```
 
+## Properties
+
+| Property         | PropType                                 | Required | Default Value |
+| ---------------- | ---------------------------------------- | -------- | ------------- |
+| `padded`         | Boolean                                  | false    | true          |
+| `cornerStyle`    | `CornerStyle`: Small, Large              | false    | Small         |
+| `elevationLevel` | `ElevationLevel`: None, Default, Focused | false    | Default       |
+
 ## Accessibility
 
 Consider if your card should be atomic or non-atomic. If the copy inside your card is lengthy, consider making it non-atomic and providing a CTA inside. The entire card will still be clickable/tappable, but will be ignored by TalkBack.
