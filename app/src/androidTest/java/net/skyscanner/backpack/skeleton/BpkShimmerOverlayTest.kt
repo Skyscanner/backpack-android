@@ -34,7 +34,7 @@ class BpkShimmerOverlayTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestShimmerOverlay() {
+  fun default() {
     val skeleton = BpkShimmerOverlay(testContext)
     val view = BpkBodyTextSkeleton(testContext)
     skeleton.addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)

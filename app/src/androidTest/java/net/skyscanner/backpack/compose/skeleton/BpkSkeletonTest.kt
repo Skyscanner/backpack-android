@@ -58,11 +58,8 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun circleWithSizeType() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
-      BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
-    }
+  fun circleWithSizeType() = composed {
+    BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
   }
 
   @Test
@@ -74,19 +71,16 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun smallHeadline() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
-      BpkHeadlineSkeleton(
-        modifier = Modifier.width(BpkSpacing.Xxl.times(2)),
-        skeletonHeightSize = BpkSkeletonHeightSizeType.Medium
-      )
-    }
+  fun smallHeadline() = composed {
+    BpkHeadlineSkeleton(
+      modifier = Modifier.width(BpkSpacing.Xxl.times(2)),
+      skeletonHeightSize = BpkSkeletonHeightSizeType.Medium
+    )
   }
 
   @Test
   fun headlineWithCustomHeight() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    assumeVariant(BpkTestVariant.Default)
     composed {
       BpkHeadlineSkeleton(
         modifier = Modifier
@@ -98,20 +92,14 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun bodyText() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
-      BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
-    }
+  fun bodyText() = composed {
+    BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
   }
 
   @Test
-  fun shimmerOverlay() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
-      BpkShimmerOverlay(modifier = Modifier.wrapContentSize()) {
-        BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
-      }
+  fun shimmerOverlay() = composed {
+    BpkShimmerOverlay(modifier = Modifier.wrapContentSize()) {
+      BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
     }
   }
 }

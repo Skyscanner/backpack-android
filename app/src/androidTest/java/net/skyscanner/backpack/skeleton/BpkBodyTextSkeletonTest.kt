@@ -33,7 +33,7 @@ class BpkBodyTextSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBodyTextSkeleton() {
+  fun default() {
     val skeleton = BpkBodyTextSkeleton(testContext)
     snap(skeleton)
   }

@@ -24,7 +24,6 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.AttrRes
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.overlay.internal.CornerRadiusViewOutlineProvider
 
 class BpkBodyTextSkeleton @JvmOverloads constructor(
   context: Context,
@@ -42,9 +41,7 @@ class BpkBodyTextSkeleton @JvmOverloads constructor(
 
   private fun initSubBlock(view: View) {
     view.apply {
-      setBackgroundColor(context.getColor(R.color.__skeletonBackground))
-      outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpk_skeleton_xxs_border_radius)
-      clipToOutline = true
+      setBackgroundResource(R.drawable.bpk_skeleton_bg)
     }
   }
 }

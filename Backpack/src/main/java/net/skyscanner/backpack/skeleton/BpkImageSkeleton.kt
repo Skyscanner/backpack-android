@@ -20,12 +20,12 @@ package net.skyscanner.backpack.skeleton
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.AttrRes
+import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.overlay.internal.CornerRadiusViewOutlineProvider
-import net.skyscanner.backpack.overlay.internal.EmptyViewOutlineProvider
 import net.skyscanner.backpack.util.use
 
 class BpkImageSkeleton @JvmOverloads constructor(
@@ -45,19 +45,20 @@ class BpkImageSkeleton @JvmOverloads constructor(
     set(value) {
       field = value
       if (value === CornerType.Rounded) {
-        outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusSm)
-        clipToOutline = true
+        backgroundDrawable.cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusSm)
       } else {
-        outlineProvider = EmptyViewOutlineProvider
-        clipToOutline = false
+        backgroundDrawable.cornerRadius = 0f
       }
     }
 
+  private val backgroundDrawable: GradientDrawable
+
   init {
+    backgroundDrawable = AppCompatResources.getDrawable(context, R.drawable.bpk_skeleton_bg) as GradientDrawable
+    background = backgroundDrawable
     context.obtainStyledAttributes(attrs, R.styleable.BpkImageSkeleton, defStyleAttr, 0).use {
       cornerType = parseCornerAttribute(it, cornerType)
     }
-    this.setBackgroundColor(context.getColor(R.color.__skeletonBackground))
   }
 
   private companion object {

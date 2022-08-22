@@ -38,6 +38,7 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
   val paint = Paint().apply {
     color = context.getColor(R.color.__skeletonBackground)
     style = Paint.Style.FILL
+    isAntiAlias = true
   }
 
   enum class SkeletonHeightSizeType(

@@ -34,28 +34,28 @@ class BpkHeadlineSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSmallHeadlineSkeleton() {
+  fun small() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Small
     snap(skeleton)
   }
 
   @Test
-  fun screenshotTestMediumHeadlineSkeleton() {
+  fun medium() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Medium
     snap(skeleton)
   }
 
   @Test
-  fun screenshotTestLargeHeadlineSkeleton() {
+  fun large() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Large
     snap(skeleton)
   }
 
   @Test
-  fun screenshotTestCustomHeightHeadlineSkeleton() {
+  fun customHeight() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Custom
     skeleton.layoutParams = ViewGroup.LayoutParams(

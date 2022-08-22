@@ -33,7 +33,7 @@ class BpkImageSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSquareImageSkeleton() {
+  fun square() {
     val skeleton = BpkImageSkeleton(testContext)
     skeleton.cornerType = BpkImageSkeleton.CornerType.Square
     snap(skeleton)
