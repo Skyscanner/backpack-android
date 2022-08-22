@@ -25,6 +25,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.AttrRes
+import androidx.annotation.Dimension
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 
@@ -41,17 +42,33 @@ class BpkCircleSkeleton @JvmOverloads constructor(
   enum class CircleSize(
     internal val id: Int,
   ) {
+    /**
+     * Small size: 32.dp
+     */
     Small(0),
+    /**
+     * Large size: 48.dp
+     */
     Large(1),
+    /**
+     * Custom. Need decide the size by diameter property.
+     */
     Custom(2),
   }
 
+  /**
+   * Only for CircleSize.Custom
+   */
+  @Dimension
   var diameter = 0
     set(value) {
       field = value
       invalidate()
     }
 
+  /**
+   * Small: 32dp, Large: 48dp, or use Custom and then set diameter property.
+   */
   var size = CircleSize.Small
     set(value) {
       field = value
@@ -85,6 +102,7 @@ class BpkCircleSkeleton @JvmOverloads constructor(
   }
 
   private companion object {
+    @Dimension
     private fun parseDiameterAttribute(it: TypedArray, fallback: Int) =
       it.getDimensionPixelSize(R.styleable.BpkCircleSkeleton_skeletonDiameter, fallback)
 

@@ -57,15 +57,37 @@ private val BpkCircleSizeSm = BpkSpacing.Xl
 private val BpkCircleSizeLg = BpkSpacing.Lg.times(2)
 
 enum class BpkSkeletonHeightSizeType {
+  /**
+   * Small size: 8.dp
+   */
   Small,
+  /**
+   * Medium size: 16.dp
+   */
   Medium,
+  /**
+   * Large size: 32.dp
+   */
   Large,
+  /**
+   * Custom size, need set a detail height of the component.
+   */
   Custom
 }
 
 sealed class BpkCircleSizeType {
+  /**
+   * Small size: 32.dp
+   */
   object Small : BpkCircleSizeType()
+  /**
+   * Large size: 48.dp
+   */
   object Large : BpkCircleSizeType()
+  /**
+   * Custom size width dimension.
+   * @param diameter unit: Dp
+   */
   class Custom(val diameter: Dp) : BpkCircleSizeType()
 }
 
@@ -130,6 +152,11 @@ private fun ShimmerBox(modifier: Modifier) {
   )
 }
 
+/**
+ * Image skeleton.
+ * @param modifier To set some common attrs such as width, height.
+ * @param cornerType To decode if it is square corner or rounded corner.
+ */
 @Composable
 fun BpkImageSkeleton(
   modifier: Modifier = Modifier,
@@ -145,6 +172,10 @@ fun BpkImageSkeleton(
   )
 }
 
+/**
+ * Body text skeleton.
+ * @param modifier To set some common attrs such as width, height, please set height to wrap content.
+ */
 @Composable
 fun BpkBodyTextSkeleton(
   modifier: Modifier = Modifier,
@@ -173,6 +204,11 @@ fun BpkBodyTextSkeleton(
   }
 }
 
+/**
+ * Headline skeleton.
+ * @param modifier To set some common attrs such as width, height.
+ * @param skeletonHeightSize Small: 8.dp, Medium: 16.dp, Large: 32.dp, or set to Custom and set height of the modifier.
+ */
 @Composable
 fun BpkHeadlineSkeleton(
   modifier: Modifier = Modifier,
@@ -185,6 +221,10 @@ fun BpkHeadlineSkeleton(
   )
 }
 
+/**
+ * Circle skeleton.
+ * @param circleSize Small: 32.dp, Large: 48.dp, or use Custom(xx.dp).
+ */
 @Composable
 fun BpkCircleSkeleton(
   circleSize: BpkCircleSizeType
@@ -202,6 +242,11 @@ fun BpkCircleSkeleton(
   )
 }
 
+/**
+ * Shimmer Overlay
+ * @param modifier To set some common attrs.
+ * @param content Child component.
+ */
 @Composable
 fun BpkShimmerOverlay(modifier: Modifier, content: @Composable BoxScope.() -> Unit) {
   val offsetX by shimmerAnimation()

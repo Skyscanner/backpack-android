@@ -43,12 +43,27 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
   enum class SkeletonHeightSizeType(
     internal val id: Int,
   ) {
+    /**
+     * Small size: 8dp
+     */
     Small(0),
+    /**
+     * Medium size: 16dp
+     */
     Medium(1),
+    /**
+     * Large size: 32dp
+     */
     Large(2),
+    /**
+     * Custom size, need set a detail height of the component.
+     */
     Custom(3),
   }
 
+  /**
+   * Small: 8dp, Medium: 16dp, Large: 32dp, or set to Custom and set height of the component.
+   */
   var heightSize = SkeletonHeightSizeType.Small
 
   @DimenRes

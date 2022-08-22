@@ -315,8 +315,9 @@
   </declare-styleable>
 
   <declare-styleable name="BpkCircleSkeleton">
+    <!-- Specify skeleton circle diameter, only set it when skeletonCircleSize is "custom".-->
     <attr name="skeletonDiameter" format="dimension" />
-    <!-- Specifies skeleton circle size, default value is "small".<br/>
+    <!-- Specify skeleton circle size, default value is "small".<br/>
      Values: small -> 32dp, large -> 48dp.<br/>
      We recommend you to use this attr to size the component's size, but if a custom height is needed,
      just set this value to "custom" and specify the skeletonDiameter attr.
