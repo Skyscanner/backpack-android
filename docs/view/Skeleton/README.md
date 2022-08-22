@@ -14,7 +14,7 @@ Example of a Circle Skeleton with large size in XML
 <net.skyscanner.backpack.skeleton.BpkCircleSkeleton
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  app:circleSize="Large" />
+  app:skeletonCircleSize="large" />
 ```
 
 Example of a Circle Skeleton with custom size in XML
@@ -23,7 +23,8 @@ Example of a Circle Skeleton with custom size in XML
 <net.skyscanner.backpack.skeleton.BpkCircleSkeleton
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  app:diameter="48dp" />
+  app:skeletonCircleSize="custom"
+  app:skeletonDiameter="48dp" />
 ```
 
 Example of a Image Skeleton with rounded corner in XML
@@ -32,7 +33,7 @@ Example of a Image Skeleton with rounded corner in XML
 <net.skyscanner.backpack.skeleton.BpkImageSkeleton
   android:layout_width="80dp"
   android:layout_height="80dp" 
-  app:cornerType="Rounded" />
+  app:skeletonCornerType="rounded" />
 ```
 
 Example of a Headline Skeleton with medium size in XML
@@ -41,7 +42,7 @@ Example of a Headline Skeleton with medium size in XML
 <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
   android:layout_width="80dp"
   android:layout_height="wrap_content"
-  app:skeletonSize="Medium" />
+  app:skeletonHeadlineHeightSize="medium" />
 ```
 
 Example of a Headline Skeleton with custom size in XML
@@ -49,7 +50,8 @@ Example of a Headline Skeleton with custom size in XML
 ```xml
 <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
   android:layout_width="80dp"
-  android:layout_height="48dp" />
+  android:layout_height="48dp" 
+  app:skeletonHeadlineHeightSize="custom" />
 ```
 
 Example of a Body Text Skeleton in XML
@@ -86,7 +88,7 @@ Example of a Circle Skeleton with large size in Kotlin
 import net.skyscanner.backpack.skeleton.BpkCircleSkeleton
 
 BpkCircleSkeleton(context).apply {
-    size = BpkCircleSkeleton.CircleSize.Large
+  size = BpkCircleSkeleton.CircleSize.Large
 }
 ```
 
@@ -96,7 +98,7 @@ Example of a Circle Skeleton with custom size in Kotlin
 import net.skyscanner.backpack.skeleton.BpkCircleSkeleton
 
 BpkCircleSkeleton(context).apply {
-    diameter = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
+  diameter = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
 }
 ```
 
@@ -106,7 +108,7 @@ Example of a Image Skeleton with rounded corner in Kotlin
 import net.skyscanner.backpack.skeleton.BpkImageSkeleton
 
 BpkImageSkeleton(context).apply {
-    cornerType = BpkImageSkeleton.CornerType.Rounded
+  cornerType = BpkImageSkeleton.CornerType.Rounded
 }
 ```
 
@@ -116,7 +118,7 @@ Example of a Headline Skeleton with medium size in Kotlin
 import net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
 
 BpkHeadlineSkeleton(context).apply {
-    size = BpkHeadlineSkeleton.SkeletonSize.Medium
+  heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Medium
 }
 ```
 
@@ -136,5 +138,5 @@ import net.skyscanner.backpack.skeleton.BpkImageSkeleton
 val skeleton = BpkShimmerOverlay(context)
 val image = BpkImageSkeleton(context)
 skeleton.addView(image, context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl),
-    context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl))
+  context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl))
 ```

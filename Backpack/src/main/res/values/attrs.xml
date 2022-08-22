@@ -294,27 +294,37 @@
   </declare-styleable>
 
   <declare-styleable name="BpkImageSkeleton">
-    <attr name="cornerType" format="enum">
-      <enum name="Square" value="0" />
-      <enum name="Rounded" value="1" />
+    <attr name="skeletonCornerType" format="enum">
+      <enum name="square" value="0" />
+      <enum name="rounded" value="1" />
     </attr>
   </declare-styleable>
 
   <declare-styleable name="BpkHeadlineSkeleton">
-    <attr name="skeletonSize" format="enum">
-      <enum name="None" value="0" />
-      <enum name="Small" value="1" />
-      <enum name="Medium" value="2" />
-      <enum name="Large" value="3" />
+    <!-- Specifies skeleton headline height size, default value is "small".<br/>
+     Values: small -> 8dp, medium -> 16dp, large -> 32dp.<br/>
+     We recommend you to use this attr to size the component's height, but if a custom height is needed,
+     just set this value to "custom" and specify the height of the component.
+    -->
+    <attr name="skeletonHeadlineHeightSize" format="enum">
+      <enum name="small" value="0" />
+      <enum name="medium" value="1" />
+      <enum name="large" value="2" />
+      <enum name="custom" value="3" />
     </attr>
   </declare-styleable>
 
   <declare-styleable name="BpkCircleSkeleton">
-    <attr name="diameter" format="dimension" />
-    <attr name="circleSize" format="enum">
-      <enum name="None" value="0" />
-      <enum name="Small" value="1" />
-      <enum name="Large" value="2" />
+    <attr name="skeletonDiameter" format="dimension" />
+    <!-- Specifies skeleton circle size, default value is "small".<br/>
+     Values: small -> 32dp, large -> 48dp.<br/>
+     We recommend you to use this attr to size the component's size, but if a custom height is needed,
+     just set this value to "custom" and specify the skeletonDiameter attr.
+    -->
+    <attr name="skeletonCircleSize" format="enum">
+      <enum name="small" value="0" />
+      <enum name="large" value="1" />
+      <enum name="custom" value="2" />
     </attr>
   </declare-styleable>
 

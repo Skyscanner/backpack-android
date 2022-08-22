@@ -40,30 +40,30 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
     style = Paint.Style.FILL
   }
 
-  enum class SkeletonSize(
+  enum class SkeletonHeightSizeType(
     internal val id: Int,
   ) {
-    None(0),
-    Small(1),
-    Medium(2),
-    Large(3),
+    Small(0),
+    Medium(1),
+    Large(2),
+    Custom(3),
   }
 
-  var size = SkeletonSize.None
+  var heightSize = SkeletonHeightSizeType.Small
 
   @DimenRes
-  private fun getHeightSize(size: SkeletonSize): Int {
+  private fun getHeightSize(size: SkeletonHeightSizeType): Int {
     return when (size) {
-      SkeletonSize.None -> 0
-      SkeletonSize.Small -> R.dimen.bpkSpacingMd
-      SkeletonSize.Medium -> R.dimen.bpkSpacingBase
-      SkeletonSize.Large -> R.dimen.bpkSpacingXl
+      SkeletonHeightSizeType.Custom -> 0
+      SkeletonHeightSizeType.Small -> R.dimen.bpkSpacingMd
+      SkeletonHeightSizeType.Medium -> R.dimen.bpkSpacingBase
+      SkeletonHeightSizeType.Large -> R.dimen.bpkSpacingXl
     }
   }
 
   init {
     context.obtainStyledAttributes(attrs, R.styleable.BpkHeadlineSkeleton, defStyleAttr, 0).use {
-      size = parseSizeAttribute(it, size)
+      heightSize = parseHeightTypeAttribute(it, heightSize)
     }
 
     outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs)
@@ -73,8 +73,8 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
   override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-    if (size === SkeletonSize.None) return
-    val heightSize = context.resources.getDimensionPixelSize(getHeightSize(size))
+    if (heightSize === SkeletonHeightSizeType.Custom) return
+    val heightSize = context.resources.getDimensionPixelSize(getHeightSize(heightSize))
     setMeasuredDimension(widthMeasureSpec, heightSize)
   }
 
@@ -84,9 +84,9 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
   }
 
   private companion object {
-    private fun parseSizeAttribute(it: TypedArray, fallback: SkeletonSize) =
-      it.getInt(R.styleable.BpkHeadlineSkeleton_skeletonSize, fallback.id).let { id ->
-        SkeletonSize.values().find { it.id == id } ?: fallback
+    private fun parseHeightTypeAttribute(it: TypedArray, fallback: SkeletonHeightSizeType) =
+      it.getInt(R.styleable.BpkHeadlineSkeleton_skeletonHeadlineHeightSize, fallback.id).let { id ->
+        SkeletonHeightSizeType.values().find { it.id == id } ?: fallback
       }
   }
 }

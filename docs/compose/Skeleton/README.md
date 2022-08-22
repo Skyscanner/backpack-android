@@ -12,7 +12,7 @@ Example of a Image Skeleton:
 import net.skyscanner.backpack.compose.sleketon.BpkImageSkeleton
 
 BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xxl.times(2), BpkSpacing.Xxl.times(2)),
-    cornerType = BpkSkeletonCornerType.Rounded)
+  cornerType = BpkSkeletonCornerType.Rounded)
 ```
 
 Example of a Circle Skeleton:
@@ -25,8 +25,8 @@ Row(
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.SpaceAround
 ) {
-    BpkCircleSkeleton(circleDiameter=BpkSpacing.Xl)
-    BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
+  BpkCircleSkeleton(circleSize = BpkCircleSizeType.Custom(BpkSpacing.Xl))
+  BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
 }
 ```
 
@@ -36,13 +36,13 @@ Example of a Headline Skeleton:
 import net.skyscanner.backpack.compose.sleketon.BpkHeadlineSkeleton
 
 Row(
-    modifier = Modifier.fillMaxWidth(),
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.SpaceEvenly
+  modifier = Modifier.fillMaxWidth(),
+  verticalAlignment = Alignment.CenterVertically,
+  horizontalArrangement = Arrangement.SpaceEvenly
 ) {
-    BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonSizeType.Small)
-    BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonSizeType.Medium)
-    BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)).height(50.dp))
+  BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonSizeType.Small)
+  BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonSizeType.Medium)
+  BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)).height(50.dp))
 }
 ```
 
@@ -62,9 +62,9 @@ import net.skyscanner.backpack.compose.sleketon.BpkBodyTextSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkShimmerOverlay
 
 BpkShimmerOverlay(modifier = Modifier.width(200.dp).wrapContentHeight()){
-    Row() {
-        BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xxl, BpkSpacing.Xxl))
-        BpkBodyTextSkeleton(modifier = Modifier.padding(start=BpkSpacing.Md).width(152.dp))
-    }
+  Row() {
+    BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xxl, BpkSpacing.Xxl))
+    BpkBodyTextSkeleton(modifier = Modifier.padding(start=BpkSpacing.Md).width(152.dp))
+  }
 }
 ```

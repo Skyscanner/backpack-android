@@ -32,16 +32,13 @@ class BpkShimmerOverlay @JvmOverloads constructor(
   @AttrRes defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-  private var inflatingInProgress = false
   init {
-    inflatingInProgress = true
     inflate(this.context, R.layout.bpk_shimmer_skeleton, this)
-    inflatingInProgress = false
     startShimmer()
   }
 
   override fun addView(child: View?) {
-    if (inflatingInProgress) {
+    if (child?.id !== R.id.bpk_skeleton_container) {
       super.addView(child)
     } else {
       val container = findViewById<FrameLayout>(R.id.bpk_skeleton_container)

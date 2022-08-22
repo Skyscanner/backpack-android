@@ -49,6 +49,7 @@ class BpkCircleSkeletonTest : BpkSnapshotTest() {
   @Test
   fun screenshotTestCustomSizeCircle() {
     val skeleton = BpkCircleSkeleton(testContext)
+    skeleton.size = BpkCircleSkeleton.CircleSize.Custom
     skeleton.diameter = (50 * testContext.resources.displayMetrics.density).toInt()
     snap(skeleton)
   }

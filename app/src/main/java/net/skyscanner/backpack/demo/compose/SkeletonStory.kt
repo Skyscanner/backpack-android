@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.sleketon.BpkBodyTextSkeleton
@@ -39,10 +40,11 @@ import net.skyscanner.backpack.compose.sleketon.BpkHeadlineSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkImageSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkShimmerOverlay
 import net.skyscanner.backpack.compose.sleketon.BpkSkeletonCornerType
-import net.skyscanner.backpack.compose.sleketon.BpkSkeletonSizeType
+import net.skyscanner.backpack.compose.sleketon.BpkSkeletonHeightSizeType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 
 @Composable
 fun SkeletonStory() {
@@ -64,7 +66,7 @@ fun ImageSkeletonExample() {
   Column() {
     BpkText(
       modifier = Modifier.padding(bottom = BpkSpacing.Sm),
-      text = "Image Skeleton",
+      text = stringResource(id = R.string.image_skeleton_title),
       style = BpkTheme.typography.footnote
     )
     Row(
@@ -89,7 +91,7 @@ fun CircleSkeletonExample() {
   Column() {
     BpkText(
       modifier = Modifier.padding(bottom = BpkSpacing.Sm),
-      text = "Circle Skeleton",
+      text = stringResource(id = R.string.circle_skeleton_title),
       style = BpkTheme.typography.footnote
     )
     Row(
@@ -97,7 +99,7 @@ fun CircleSkeletonExample() {
       verticalAlignment = Alignment.CenterVertically,
       horizontalArrangement = Arrangement.SpaceAround
     ) {
-      BpkCircleSkeleton(circleDiameter = BpkSpacing.Xl)
+      BpkCircleSkeleton(circleSize = BpkCircleSizeType.Custom(BpkSpacing.Xl))
       BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
     }
   }
@@ -109,7 +111,7 @@ fun BodyTextSkeletonExample() {
   Column() {
     BpkText(
       modifier = Modifier.padding(bottom = BpkSpacing.Sm),
-      text = "Body Text Skeleton",
+      text = stringResource(id = R.string.body_text_skeleton_title),
       style = BpkTheme.typography.footnote
     )
     Column() {
@@ -122,15 +124,20 @@ fun BodyTextSkeletonExample() {
 @Preview
 fun HeadlineSkeletonExample() {
   Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
-    BpkText(text = "Headline Skeleton", style = BpkTheme.typography.footnote)
+    BpkText(text = stringResource(id = R.string.headline_skeleton_title), style = BpkTheme.typography.footnote)
     Row(
       modifier = Modifier.fillMaxWidth(),
       verticalAlignment = Alignment.CenterVertically,
       horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-      BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonSizeType.Small)
-      BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonSizeType.Medium)
-      BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)).height(50.dp))
+      BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonHeightSizeType.Small)
+      BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonHeightSizeType.Medium)
+      BpkHeadlineSkeleton(
+        modifier = Modifier
+          .width(BpkSpacing.Xxl.times(2))
+          .height(50.dp),
+        skeletonHeightSize = BpkSkeletonHeightSizeType.Custom
+      )
     }
   }
 }
@@ -139,14 +146,22 @@ fun HeadlineSkeletonExample() {
 @Preview
 fun BpkShimmerSkeletonExample() {
   Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
-    BpkText(text = "Shimmer Skeleton", style = BpkTheme.typography.footnote)
+    BpkText(text = stringResource(id = R.string.shimmer_overlay_title), style = BpkTheme.typography.footnote)
     Row(
       modifier = Modifier.fillMaxWidth(),
     ) {
-      BpkShimmerOverlay(modifier = Modifier.width(200.dp).wrapContentHeight()) {
+      BpkShimmerOverlay(
+        modifier = Modifier
+          .width(200.dp)
+          .wrapContentHeight()
+      ) {
         Row() {
           BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xxl, BpkSpacing.Xxl))
-          BpkBodyTextSkeleton(modifier = Modifier.padding(start = BpkSpacing.Md).width(152.dp))
+          BpkBodyTextSkeleton(
+            modifier = Modifier
+              .padding(start = BpkSpacing.Md)
+              .width(152.dp)
+          )
         }
       }
     }

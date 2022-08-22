@@ -2,13 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     style="@style/App.Story"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="top"
     android:orientation="vertical"
-    tools:ignore="HardcodedText"
     >
 
   <net.skyscanner.backpack.text.BpkText
@@ -16,7 +14,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingSm"
       app:textStyle="footnote"
-      android:text="Circle Skeleton"/>
+      android:text="@string/circle_skeleton_title"/>
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -34,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/skeletonCircleLg"
         app:layout_constraintHorizontal_chainStyle="spread"
-        app:diameter="48dp"
+        app:skeletonDiameter="@dimen/bpkSpacingXl"
         />
 
     <net.skyscanner.backpack.skeleton.BpkCircleSkeleton
@@ -45,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/skeletonCircleSm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:circleSize="Large"
+        app:skeletonCircleSize="large"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -54,7 +52,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingSm"
       app:textStyle="footnote"
-      android:text="Image Skeleton"/>
+      android:text="@string/image_skeleton_title"/>
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -82,7 +80,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/skeletonImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:cornerType="Rounded"
+        app:skeletonCornerType="rounded"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -91,7 +89,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingSm"
       app:textStyle="footnote"
-      android:text="Headline Skeleton"/>
+      android:text="@string/headline_skeleton_title"/>
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -108,7 +106,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/skeletonHeadlineMd"
         app:layout_constraintHorizontal_chainStyle="spread"
-        app:skeletonSize="Small"
+        app:skeletonHeadlineHeightSize="small"
         />
 
     <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
@@ -119,7 +117,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/skeletonHeadlineSm"
         app:layout_constraintEnd_toStartOf="@id/skeletonHeadlineLg"
-        app:skeletonSize="Medium"
+        app:skeletonHeadlineHeightSize="medium"
         />
 
     <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
@@ -130,6 +128,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/skeletonHeadlineMd"
         app:layout_constraintEnd_toEndOf="parent"
+        app:skeletonHeadlineHeightSize="custom"
         />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -138,7 +137,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingSm"
       app:textStyle="footnote"
-      android:text="Body Text Skeleton"/>
+      android:text="@string/body_text_skeleton_title"/>
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -158,7 +157,7 @@
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/bpkSpacingSm"
       app:textStyle="footnote"
-      android:text="Shimmer Skeleton"/>
+      android:text="@string/shimmer_overlay_title"/>
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"

@@ -41,9 +41,9 @@ class BpkCircleSkeleton @JvmOverloads constructor(
   enum class CircleSize(
     internal val id: Int,
   ) {
-    None(0),
-    Small(1),
-    Large(2),
+    Small(0),
+    Large(1),
+    Custom(2),
   }
 
   var diameter = 0
@@ -52,11 +52,11 @@ class BpkCircleSkeleton @JvmOverloads constructor(
       invalidate()
     }
 
-  var size = CircleSize.None
+  var size = CircleSize.Small
     set(value) {
       field = value
       diameter = when (value) {
-        CircleSize.None -> diameter
+        CircleSize.Custom -> diameter
         CircleSize.Small -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
         CircleSize.Large -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg) * 2
       }
@@ -86,9 +86,10 @@ class BpkCircleSkeleton @JvmOverloads constructor(
 
   private companion object {
     private fun parseDiameterAttribute(it: TypedArray, fallback: Int) =
-      it.getDimensionPixelSize(R.styleable.BpkCircleSkeleton_diameter, fallback)
+      it.getDimensionPixelSize(R.styleable.BpkCircleSkeleton_skeletonDiameter, fallback)
+
     private fun parseCircleSizeAttribute(it: TypedArray, fallback: CircleSize) =
-      it.getInt(R.styleable.BpkHeadlineSkeleton_skeletonSize, fallback.id).let { id ->
+      it.getInt(R.styleable.BpkCircleSkeleton_skeletonCircleSize, fallback.id).let { id ->
         CircleSize.values().find { it.id == id } ?: fallback
       }
   }

@@ -33,7 +33,7 @@ import net.skyscanner.backpack.compose.sleketon.BpkHeadlineSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkImageSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkShimmerOverlay
 import net.skyscanner.backpack.compose.sleketon.BpkSkeletonCornerType
-import net.skyscanner.backpack.compose.sleketon.BpkSkeletonSizeType
+import net.skyscanner.backpack.compose.sleketon.BpkSkeletonHeightSizeType
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import org.junit.Before
 import org.junit.Test
@@ -48,17 +48,17 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun imageSkeletonSquare() = composed {
+  fun imageSquare() = composed {
     BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xl, BpkSpacing.Xl))
   }
 
   @Test
-  fun imageSkeletonRounded() = composed {
+  fun imageRounded() = composed {
     BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xl, BpkSpacing.Xl), cornerType = BpkSkeletonCornerType.Rounded)
   }
 
   @Test
-  fun circleSkeletonWithSizeType() {
+  fun circleWithSizeType() {
     assumeVariant(BpkTestVariant.Default)
     composed {
       BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
@@ -66,34 +66,39 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun circleSkeletonWithCustomDiameter() {
+  fun circleWithCustomDiameter() {
     assumeVariant(BpkTestVariant.Default)
     composed {
-      BpkCircleSkeleton(circleDiameter = BpkSpacing.Xl)
+      BpkCircleSkeleton(circleSize = BpkCircleSizeType.Custom(BpkSpacing.Xl))
     }
   }
 
   @Test
-  fun headlineSkeletonSmall() {
+  fun smallHeadline() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
       BpkHeadlineSkeleton(
         modifier = Modifier.width(BpkSpacing.Xxl.times(2)),
-        skeletonSize = BpkSkeletonSizeType.Medium
+        skeletonHeightSize = BpkSkeletonHeightSizeType.Medium
       )
     }
   }
 
   @Test
-  fun headlineSkeletonWithCustomHeight() {
+  fun headlineWithCustomHeight() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)).height(BpkSpacing.Xxl))
+      BpkHeadlineSkeleton(
+        modifier = Modifier
+          .width(BpkSpacing.Xxl.times(2))
+          .height(BpkSpacing.Xxl),
+        skeletonHeightSize = BpkSkeletonHeightSizeType.Custom
+      )
     }
   }
 
   @Test
-  fun bodyTextSkeleton() {
+  fun bodyText() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
       BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
