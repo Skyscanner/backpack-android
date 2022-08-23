@@ -21,7 +21,6 @@ package net.skyscanner.backpack.compose.skeleton
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.ui.Modifier
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -31,7 +30,6 @@ import net.skyscanner.backpack.compose.sleketon.BpkCircleSizeType
 import net.skyscanner.backpack.compose.sleketon.BpkCircleSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkHeadlineSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkImageSkeleton
-import net.skyscanner.backpack.compose.sleketon.BpkShimmerOverlay
 import net.skyscanner.backpack.compose.sleketon.BpkSkeletonCornerType
 import net.skyscanner.backpack.compose.sleketon.BpkSkeletonHeightSizeType
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -94,12 +92,5 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   @Test
   fun bodyText() = composed {
     BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
-  }
-
-  @Test
-  fun shimmerOverlay() = composed {
-    BpkShimmerOverlay(modifier = Modifier.wrapContentSize()) {
-      BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
-    }
   }
 }
