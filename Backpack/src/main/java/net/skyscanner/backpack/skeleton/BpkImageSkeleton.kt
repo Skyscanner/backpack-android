@@ -55,7 +55,7 @@ class BpkImageSkeleton @JvmOverloads constructor(
 
   init {
     backgroundDrawable = AppCompatResources.getDrawable(context, R.drawable.bpk_skeleton_bg) as GradientDrawable
-    background = backgroundDrawable
+    background = backgroundDrawable.mutate()
     context.obtainStyledAttributes(attrs, R.styleable.BpkImageSkeleton, defStyleAttr, 0).use {
       cornerType = parseCornerAttribute(it, cornerType)
     }
