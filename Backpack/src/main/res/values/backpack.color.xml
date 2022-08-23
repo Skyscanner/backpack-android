@@ -136,40 +136,6 @@
 
 	<color name="bpkLineLight">#cdcdd7</color>
 
-	<color name="bpkMarcommsBerry">#d1435b</color>
-
-	<color name="bpkMarcommsBlueBright">#a1eeff</color>
-
-	<color name="bpkMarcommsBlueMuted">#d9f8ff</color>
-
-	<color name="bpkMarcommsCharcoal">#111236</color>
-
-	<color name="bpkMarcommsDarkSky">#02122c</color>
-
-	<color name="bpkMarcommsEcoGreen">#0fa1a9</color>
-
-	<color name="bpkMarcommsGreenBright">#93ffde</color>
-
-	<color name="bpkMarcommsGreenMuted">#d0eeec</color>
-
-	<color name="bpkMarcommsGrey40">#68697f</color>
-
-	<color name="bpkMarcommsOrange">#ff7b59</color>
-
-	<color name="bpkMarcommsPink">#ffa3e5</color>
-
-	<color name="bpkMarcommsPinkMuted">#f6dde1</color>
-
-	<color name="bpkMarcommsPurple">#8e47ba</color>
-
-	<color name="bpkMarcommsSkyBlue">#0770e3</color>
-
-	<color name="bpkMarcommsWhite">#ffffff</color>
-
-	<color name="bpkMarcommsYellow">#feeb87</color>
-
-	<color name="bpkMarcommsYellowMuted">#ffebd0</color>
-
 	<color name="bpkPrimaryDark">#6d9feb</color>
 
 	<color name="bpkPrimaryLight">#0770e3</color>

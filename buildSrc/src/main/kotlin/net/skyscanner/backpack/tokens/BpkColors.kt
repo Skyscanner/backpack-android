@@ -47,14 +47,6 @@ object BpkColor {
       }
   }
 
-  object Marcomms : BpkParser<Map<String, Any>, BpkColors> {
-
-    override fun invoke(source: Map<String, Any>): BpkColors =
-      parseColors(source, resolveReferences = false) {
-        it.isMarcomms()
-      }
-  }
-
   object Semantic : BpkParser<Map<String, Any>, BpkColors> {
 
     override fun invoke(source: Map<String, Any>): BpkColors =
@@ -154,7 +146,7 @@ private fun toStaticCompose(
   fun BpkColorModel.toProperty(): PropertySpec {
 
     fun String.toComposeStaticName() =
-      CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, removePrefix("MARCOMMS_"))
+      CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
 
     return PropertySpec
       .builder(name.toComposeStaticName(), ColorClass)

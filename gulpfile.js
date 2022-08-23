@@ -166,6 +166,8 @@ const getTextStyles = () => {
 
 const isSemanticColor = entity => entity.value && entity.darkValue;
 
+const isMarcommsColor = entity => entity.name.startsWith("bpkMarcomms")
+
 const hasNewSemanticSuffix = entity => entity.name.endsWith("Day") || entity.name.endsWith("Night");
 
 gulp.task('template:color', () => {
@@ -177,7 +179,7 @@ gulp.task('template:color', () => {
         colorObject.value = tinycolor(colorObject.value).toHexString();
         return colorObject;
       })
-      .filter(entry => !isSemanticColor(entry) && !hasNewSemanticSuffix(entry));
+      .filter(entry => !isSemanticColor(entry) && !hasNewSemanticSuffix(entry) && !isMarcommsColor(entry));
 
   return gulp
     .src(`${PATHS.templates}/BackpackColor.njk`)
