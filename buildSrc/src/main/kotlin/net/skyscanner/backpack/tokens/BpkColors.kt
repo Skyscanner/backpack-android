@@ -19,6 +19,7 @@ package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.ParameterSpec
@@ -50,7 +51,7 @@ object BpkColor {
 
     override fun invoke(source: Map<String, Any>): BpkColors =
       parseColors(source, resolveReferences = false) {
-       it.isMarcomms()
+        it.isMarcomms()
       }
   }
 
@@ -80,7 +81,7 @@ object BpkColor {
 
     data class SemanticCompose(val staticNameSpace: String, val className: String) : Format() {
       override fun invoke(source: BpkColors): TypeSpec =
-        toSemanticCompose(source, staticNameSpace, className)
+        toSemanticCompose(source, staticNameSpace)
     }
 
   }
@@ -138,23 +139,26 @@ private val ColorClass = ClassName("androidx.compose.ui.graphics", "Color")
 
 private const val isLightProperty = "isLight"
 
-private fun String.toComposeStaticName() =
-  CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, removePrefix("MARCOMMS_"))
+private fun String.toHexColorBlock() =
+  buildCodeBlock { add("%T(%L)", ColorClass, toHexColor()) }
 
 @OptIn(ExperimentalStdlibApi::class)
+private fun String.toHexColor() =
+  "0xFF${uppercase()}"
+
 private fun toStaticCompose(
   source: BpkColors,
   namespace: String,
 ): TypeSpec {
 
-  fun BpkColorModel.toProperty() : PropertySpec {
+  fun BpkColorModel.toProperty(): PropertySpec {
 
-    fun String.toHexColor() =
-      "0xFF${uppercase()}"
+    fun String.toComposeStaticName() =
+      CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, removePrefix("MARCOMMS_"))
 
     return PropertySpec
       .builder(name.toComposeStaticName(), ColorClass)
-      .initializer(buildCodeBlock { add("%T(%L)", ColorClass, defaultValue.toHexColor()) })
+      .initializer(defaultValue.toHexColorBlock())
       .build()
   }
 
@@ -163,10 +167,8 @@ private fun toStaticCompose(
     .build()
 }
 
-@OptIn(ExperimentalStdlibApi::class)
 private fun toSemanticCompose(
   source: BpkColors,
-  staticNameSpace: String,
   className: String,
 ): TypeSpec {
 
@@ -204,12 +206,22 @@ private fun toSemanticCompose(
       .build()
   }
 
-  fun BpkColors.toFactoryFunction(functionName: String, isLight: Boolean, reference: (BpkColorModel) -> String): FunSpec {
+  fun BpkColors.toFactoryFunction(isLight: Boolean): FunSpec {
+
+    val functionName = if (isLight) "light" else "dark"
+
+    fun BpkColorModel.value() = if (isLight) {
+      defaultValue
+    } else {
+      darkValue ?: defaultValue
+    }
+
+    fun BpkColorModel.toDefaultValue(): CodeBlock = value().toHexColorBlock()
 
     fun BpkColorModel.toParameter(): ParameterSpec =
       ParameterSpec
         .builder(name.toSemanticName(), ColorClass)
-        .defaultValue("$staticNameSpace.%N", reference(this).toComposeStaticName())
+        .defaultValue(toDefaultValue())
         .build()
 
     return FunSpec.builder(functionName)
@@ -228,17 +240,13 @@ private fun toSemanticCompose(
       .build()
   }
 
-
   return source
     .toColorsClass()
     .toBuilder()
     .addType(TypeSpec.companionObjectBuilder()
       .addModifiers(KModifier.INTERNAL)
-      .addFunction(
-        source.toFactoryFunction("light", isLight = true) { it.defaultReference!! })
-      .addFunction(
-        source.toFactoryFunction("dark", isLight = false) { it.darkReference ?: it.defaultReference!! }
-      )
+      .addFunction(source.toFactoryFunction(isLight = true))
+      .addFunction(source.toFactoryFunction(isLight = false))
       .build()
     )
     .build()
