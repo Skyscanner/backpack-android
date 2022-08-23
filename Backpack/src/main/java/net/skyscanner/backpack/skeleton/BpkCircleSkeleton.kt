@@ -47,10 +47,12 @@ class BpkCircleSkeleton @JvmOverloads constructor(
      * Small size: 32.dp
      */
     Small(0),
+
     /**
      * Large size: 48.dp
      */
     Large(1),
+
     /**
      * Custom. Need decide the size by diameter property.
      */
@@ -73,11 +75,6 @@ class BpkCircleSkeleton @JvmOverloads constructor(
   var size = CircleSize.Small
     set(value) {
       field = value
-      diameter = when (value) {
-        CircleSize.Custom -> diameter
-        CircleSize.Small -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
-        CircleSize.Large -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg) * 2
-      }
       invalidate()
     }
 
@@ -88,17 +85,29 @@ class BpkCircleSkeleton @JvmOverloads constructor(
     }
   }
 
+  @Dimension
+  private fun getInternalSize(): Int {
+    return when (size) {
+      CircleSize.Custom -> diameter
+      CircleSize.Small -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
+      CircleSize.Large -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg) * 2
+    }
+  }
+
   override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-    setMeasuredDimension(diameter, diameter)
+    val internalSize = getInternalSize()
+    setMeasuredDimension(internalSize, internalSize)
   }
 
   override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-    super.onLayout(changed, 0, 0, diameter, diameter)
+    val internalSize = getInternalSize()
+    super.onLayout(changed, 0, 0, internalSize, internalSize)
   }
 
   override fun onDraw(canvas: Canvas?) {
-    val radius = diameter.toFloat().div(2)
+    val internalSize = getInternalSize()
+    val radius = internalSize.toFloat().div(2)
     canvas?.drawCircle(radius, radius, radius, paint)
   }
 
