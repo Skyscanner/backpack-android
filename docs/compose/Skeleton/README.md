@@ -7,7 +7,7 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 ## Usage
 Skeleton components is built for an composition with shimmer animation. It is often used for a loading screen or loading cards.
 There is a shimmer overlay which is to wrap the whole composition.
-There are 4 base elements with pre-selected size or custom size support: image skeleton, circle Skeleton, headline skeleton and body text skeleton,
+There are 4 base elements with pre-selected size or custom size support: image skeleton, circle skeleton, headline skeleton and body text skeleton,
 they represent the real block as their name in a composition.
 You should put the whole composition into a shimmer overlay to add shimmer animation.
 
@@ -27,6 +27,7 @@ BpkShimmerOverlay(modifier = Modifier.width(200.dp).wrapContentHeight()){
 ```
 
 Image skeleton requires width and height dimension, you should specify them to get an expected size.
+
 Example of a image skeleton:
 
 ```Kotlin
@@ -39,6 +40,7 @@ BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xxl.times(2), BpkSpacing.Xx
 Circle skeleton have pre-selected size.
 `circleSize`: `small(32 dp), large(48 dp), custom(xx dp)`
 You could specify a pre-selected size or a custom size.
+
 Example of a circle skeleton:
 
 ```Kotlin
@@ -58,6 +60,7 @@ Headline skeleton have pre-selected height.
 `skeletonHeightSize`: `small(8 dp), medium(16 dp), large(32 dp), custom`.
 You could specify a pre-selected height or a custom height.
 You should specify the width to any size to keep consistent with your design.
+
 Example of a headline skeleton:
 
 ```Kotlin
@@ -75,6 +78,7 @@ Row(
 ```
 
 Body text skeleton have its own height(`40 dp`), you should never to reset it. You should only specify width for it.
+
 Example of a body text skeleton:
 
 ```Kotlin
