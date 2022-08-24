@@ -34,7 +34,7 @@
 
 	<color name="bpkBackgroundTertiary">#2c2c2e</color>
 
-	<color name="bpkCanvasContrast">#2c2c2e</color>
+	<color name="bpkCanvasContrast">#1d1b20</color>
 
 	<color name="bpkCanvas">#000000</color>
 
@@ -62,13 +62,13 @@
 
 	<color name="bpkStatusWarningSpot">#ffb54d</color>
 
-	<color name="bpkSurfaceContrast">#2c2c2e</color>
+	<color name="bpkSurfaceContrast">#1d1b20</color>
 
-	<color name="bpkSurfaceDefault">#2c2c2e</color>
+	<color name="bpkSurfaceDefault">#1d1b20</color>
 
-	<color name="bpkSurfaceElevated">#1b2839</color>
+	<color name="bpkSurfaceElevated">#2c2c2e</color>
 
-	<color name="bpkSurfaceHighlight">#b1ffe7</color>
+	<color name="bpkSurfaceHighlight">#2c2c2e</color>
 
 	<color name="bpkTextDisabled">#8e8e93</color>
 
@@ -76,15 +76,17 @@
 
 	<color name="bpkTextLink">#6d9feb</color>
 
+	<color name="bpkTextOnDark">#ffffff</color>
+
+	<color name="bpkTextOnLight">#111236</color>
+
 	<color name="bpkTextPrimary">#ffffff</color>
 
-	<color name="bpkTextPrimaryOnContrast">#ffffff</color>
+	<color name="bpkTextPrimaryInverse">#111236</color>
 
 	<color name="bpkTextQuaternary">#8e8e93</color>
 
 	<color name="bpkTextSecondary">#b2b2bf</color>
-
-	<color name="bpkTextSecondaryOnContrast">#8e8e93</color>
 
 	<color name="bpkTextTertiary">#8e8e93</color>
 

@@ -46,7 +46,7 @@ enum class BpkCardPadding {
 enum class BpkCardElevation {
   None,
   Default,
-  Focus
+  Focus,
 }
 
 @OptIn(ExperimentalMaterialApi::class)

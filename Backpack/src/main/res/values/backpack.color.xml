@@ -52,17 +52,9 @@
 
 	<color name="bpkAbisko">#5a489b</color>
 
-	<color name="bpkAmberSpot">#ff9400</color>
-
 	<color name="bpkBagan">#ffebd0</color>
 
-	<color name="bpkBerry">#d1435b</color>
-
 	<color name="bpkBlack">#000000</color>
-
-	<color name="bpkBlackAlpha20">#b2b2bf</color>
-
-	<color name="bpkBlackAlpha70">#02122c</color>
 
 	<color name="bpkBlackTint01">#1d1b20</color>
 
@@ -76,35 +68,11 @@
 
 	<color name="bpkBlackTint06">#8e8e93</color>
 
-	<color name="bpkBlueBright">#a1eeff</color>
-
-	<color name="bpkBlueMuted">#d9f8ff</color>
-
 	<color name="bpkBunol">#ff7b59</color>
-
-	<color name="bpkCharcoal">#111236</color>
-
-	<color name="bpkDarkSky">#02122c</color>
-
-	<color name="bpkEcoGreen">#0fa1a9</color>
 
 	<color name="bpkErfoud">#ffb54d</color>
 
 	<color name="bpkGlencoe">#73cec6</color>
-
-	<color name="bpkGreenBright">#93ffde</color>
-
-	<color name="bpkGreenMuted">#d0eeec</color>
-
-	<color name="bpkGreenSpot">#00a698</color>
-
-	<color name="bpkGrey10">#f1f2f8</color>
-
-	<color name="bpkGrey20">#dddde5</color>
-
-	<color name="bpkGrey30">#cdcdd7</color>
-
-	<color name="bpkGrey40">#68697f</color>
 
 	<color name="bpkHarbour">#f6dde1</color>
 
@@ -116,45 +84,11 @@
 
 	<color name="bpkNara">#ffe7e0</color>
 
-	<color name="bpkNightBerry">#d1435b</color>
-
-	<color name="bpkNightBlue">#6d9feb</color>
-
-	<color name="bpkNightGreenFill">#b1ffe7</color>
-
-	<color name="bpkNightGreenSpot">#00a698</color>
-
-	<color name="bpkNightGrey10">#000000</color>
-
-	<color name="bpkNightGrey20">#2c2c2e</color>
-
-	<color name="bpkNightGrey25">#1b2839</color>
-
-	<color name="bpkNightGrey30">#48484a</color>
-
-	<color name="bpkNightGrey40">#8e8e93</color>
-
-	<color name="bpkNightPink">#ffcadd</color>
-
-	<color name="bpkNightSky">#054184</color>
-
-	<color name="bpkNightYellowFill">#fbf1bb</color>
-
-	<color name="bpkNightYellowSpot">#ffb54d</color>
-
-	<color name="bpkOrange">#ff7b59</color>
-
 	<color name="bpkPanjin">#d1435b</color>
 
 	<color name="bpkPetra">#ffab95</color>
 
-	<color name="bpkPink">#ffa3e5</color>
-
-	<color name="bpkPinkMuted">#f6dde1</color>
-
 	<color name="bpkPrimaryGradientLight">#0770e3</color>
-
-	<color name="bpkPurple">#8e47ba</color>
 
 	<color name="bpkSagano">#d0eeec</color>
 
@@ -197,14 +131,6 @@
 	<color name="bpkValensole">#a59bc8</color>
 
 	<color name="bpkWhite">#ffffff</color>
-
-	<color name="bpkWhiteAlpha20">#8e8e93</color>
-
-	<color name="bpkWhiteAlpha80">#8e8e93</color>
-
-	<color name="bpkYellow">#feeb87</color>
-
-	<color name="bpkYellowMuted">#ffebd0</color>
 
 	<color name="bpkLineDark">#48484a</color>
 

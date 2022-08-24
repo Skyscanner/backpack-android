@@ -76,15 +76,17 @@
 
 	<color name="bpkTextLink">#0770e3</color>
 
+	<color name="bpkTextOnDark">#ffffff</color>
+
+	<color name="bpkTextOnLight">#111236</color>
+
 	<color name="bpkTextPrimary">#111236</color>
 
-	<color name="bpkTextPrimaryOnContrast">#ffffff</color>
+	<color name="bpkTextPrimaryInverse">#ffffff</color>
 
 	<color name="bpkTextQuaternary">#8f90a0</color>
 
 	<color name="bpkTextSecondary">#68697f</color>
-
-	<color name="bpkTextSecondaryOnContrast">#8e8e93</color>
 
 	<color name="bpkTextTertiary">#8f90a0</color>
 
