@@ -57,4 +57,7 @@
   <color name="__chipDisabled">@color/bpkSkyGrayTint04</color>
 
   <color name="__textDisabled">@color/bpkSkyGrayTint04</color>
+  <color name="__skeletonBackground">@color/bpkSkyGrayTint06</color>
+  <color name="__skeletonShimmerPrimary">#00FFFFFF</color>
+  <color name="__skeletonShimmerSecondary">#99FFFFFF</color>
 </resources>

@@ -108,9 +108,14 @@ object DocsRegistry {
     ViewScreenshot("Rating - Horizontal", "sizes"),
     ViewScreenshot("Rating - Vertical", "vertical"),
     ViewScreenshot("Rating - Pill", "pill"),
+    ViewScreenshot("Skeleton - View", "default"),
+    ComposeScreenshot("Skeleton - Compose", "default"),
     ViewScreenshot("Slider", "all"),
     ViewScreenshot("Snackbar", "default") { setupSnackbar() },
     ViewScreenshot("Snackbar", "icon") { setupSnackbarIconAction() },
+    ViewScreenshot("Spinner - View - Default", "default"),
+    ViewScreenshot("Spinner - View - Small", "small"),
+    ComposeScreenshot("Spinner - Compose", "default"),
     ViewScreenshot("Star Rating - Default", "default"),
     ViewScreenshot("Star Rating Interactive", "default"),
     ViewScreenshot("Switch - View", "default"),
@@ -128,9 +133,6 @@ object DocsRegistry {
     ComposeScreenshot("Text Field - Compose", "validated") { it.switchFieldStatus(BpkFieldStatus.Validated) },
     ComposeScreenshot("Text Field - Compose", "error") { it.switchFieldStatus(BpkFieldStatus.Error("Error text")) },
     ViewScreenshot("Text Spans", "default"),
-    ViewScreenshot("Spinner - View - Default", "default"),
-    ViewScreenshot("Spinner - View - Small", "small"),
-    ComposeScreenshot("Spinner - Compose", "default"),
     // Leave toast last as it stays visible in the screen for a while
     ViewScreenshot("Toast", "default") { setupToast() }
   )

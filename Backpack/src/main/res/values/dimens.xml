@@ -47,4 +47,5 @@
   <dimen name="bpk_button_default_height">36dp</dimen>
   <dimen name="bpk_button_large_height">48dp</dimen>
   <dimen name="bpk_switch_min_width">49dp</dimen>
+  <dimen name="bpk_skeleton_xxs_border_radius">2dp</dimen>
 </resources>
