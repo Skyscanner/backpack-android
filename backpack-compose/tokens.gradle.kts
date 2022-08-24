@@ -133,7 +133,7 @@ tasks {
     doLast {
       source
         .parseAs(BpkColor.Semantic)
-        .transformTo(BpkColor.Format.SemanticCompose(staticNameSpace = "BpkColor", className = "BpkColors"))
+        .transformTo(BpkColor.Format.SemanticCompose(className = "BpkColors"))
         .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
         .execute()
     }

@@ -23,23 +23,34 @@ package net.skyscanner.backpack.compose.tokens
 
 import androidx.compose.ui.graphics.Color
 import kotlin.Boolean
+import kotlin.Deprecated
 
 public class BpkColors private constructor(
   public val isLight: Boolean,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val background: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val backgroundAlternative: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val backgroundAlternativeSecondary: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val backgroundElevation01: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val backgroundElevation02: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val backgroundElevation03: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val backgroundSecondary: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val backgroundTertiary: Color,
   public val canvas: Color,
   public val canvasContrast: Color,
   public val coreAccent: Color,
   public val coreEco: Color,
   public val corePrimary: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val line: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val primary: Color,
   public val scrim: Color,
   public val statusDangerFill: Color,
@@ -51,15 +62,21 @@ public class BpkColors private constructor(
   public val surfaceContrast: Color,
   public val surfaceDefault: Color,
   public val surfaceElevated: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val systemGreen: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val systemRed: Color,
   public val textDisabled: Color,
   public val textError: Color,
   public val textLink: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val textPrimary: Color,
   public val textPrimaryInverse: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val textQuaternary: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val textSecondary: Color,
+  @Deprecated("This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
   public val textTertiary: Color,
 ) {
   internal companion object {
