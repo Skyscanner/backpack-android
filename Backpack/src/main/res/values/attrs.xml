@@ -293,6 +293,42 @@
     <attr name="state_error" format="boolean" />
   </declare-styleable>
 
+  <declare-styleable name="BpkImageSkeleton">
+    <attr name="skeletonCornerType" format="enum">
+      <enum name="square" value="0" />
+      <enum name="rounded" value="1" />
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="BpkHeadlineSkeleton">
+    <!-- Specifies skeleton headline height size, default value is "small".<br/>
+     Values: small -> 8dp, medium -> 16dp, large -> 32dp.<br/>
+     We recommend you to use this attr to size the component's height, but if a custom height is needed,
+     just set this value to "custom" and specify the height of the component.
+    -->
+    <attr name="skeletonHeadlineHeightSize" format="enum">
+      <enum name="small" value="0" />
+      <enum name="medium" value="1" />
+      <enum name="large" value="2" />
+      <enum name="custom" value="3" />
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="BpkCircleSkeleton">
+    <!-- Specify skeleton circle diameter, only set it when skeletonCircleSize is "custom".-->
+    <attr name="skeletonDiameter" format="dimension" />
+    <!-- Specify skeleton circle size, default value is "small".<br/>
+     Values: small -> 32dp, large -> 48dp.<br/>
+     We recommend you to use this attr to size the component's size, but if a custom height is needed,
+     just set this value to "custom" and specify the skeletonDiameter attr.
+    -->
+    <attr name="skeletonCircleSize" format="enum">
+      <enum name="small" value="0" />
+      <enum name="large" value="1" />
+      <enum name="custom" value="2" />
+    </attr>
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />

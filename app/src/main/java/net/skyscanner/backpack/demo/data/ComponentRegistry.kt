@@ -39,6 +39,7 @@ import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadiiComposeStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
+import net.skyscanner.backpack.demo.compose.SkeletonStory
 import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
@@ -359,8 +360,22 @@ object ComponentRegistry {
         "Zero to Five Scale" story NodeData { Story of R.layout.fragment_rating_zero_to_five },
       )
     ),
+    "Skeleton" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_skeletons },
+        TAB_TITLE_COMPOSE composeStory { SkeletonStory() },
+      )
+    ),
     "Slider" story NodeData { SliderStory of R.layout.fragment_slider },
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
+    "Sneak peek" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_COMPOSE composeStory { ThemeStory() },
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
+      )
+    ),
     "Spinner" story NodeData(
       { children -> TabStory of children },
       mapOf(
@@ -430,13 +445,6 @@ object ComponentRegistry {
     ),
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
     "Toast" story NodeData { ToastStory of R.layout.fragment_toasts },
-    "Sneak peek" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_COMPOSE composeStory { ThemeStory() },
-        TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
-      )
-    ),
   )
 
   val TOKENS = mapOf(

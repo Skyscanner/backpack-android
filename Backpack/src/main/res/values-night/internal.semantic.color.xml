@@ -51,4 +51,7 @@
   <color name="__chipDisabled">@color/bpkBlackTint06</color>
 
   <color name="__textDisabled">@color/bpkBlackTint06</color>
+  <color name="__skeletonBackground">@color/bpkBlackTint02</color>
+  <color name="__skeletonShimmerPrimary">#00000000</color>
+  <color name="__skeletonShimmerSecondary">#33000000</color>
 </resources>
