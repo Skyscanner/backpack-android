@@ -3,14 +3,14 @@
   <item android:state_selected="true">
     <shape android:shape="rectangle">
       <corners android:radius="@dimen/bpkBorderRadiusXs" />
-      <stroke android:width="2dp" android:color="@color/bpkSkyBlue" />
-      <solid android:color="@color/bpkWhite" />
+      <stroke android:width="2dp" android:color="@color/bpkCoreAccent" />
+      <solid android:color="@color/bpkSurfaceDefault" />
     </shape>
   </item>
   <item>
     <shape android:shape="rectangle">
       <corners android:radius="@dimen/bpkBorderRadiusXs" />
-      <solid android:color="@color/bpkSkyBlue" />
+      <solid android:color="@color/bpkCoreAccent" />
     </shape>
   </item>
 </selector>
