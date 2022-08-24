@@ -4,9 +4,9 @@
   <size
     android:width="@dimen/bpkSpacingBase"
     android:height="@dimen/bpkSpacingBase" />
-  <solid android:color="@color/bpkSkyBlue" />
+  <solid android:color="@color/bpkCoreAccent" />
   <stroke
     android:width="2dp"
-    android:color="@color/bpkWhite" />
+    android:color="@color/bpkSurfaceDefault" />
 </shape>
 

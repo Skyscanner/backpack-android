@@ -43,7 +43,7 @@
     android:layout_height="wrap_content"
     android:importantForAccessibility="no"
     android:src="@drawable/bpk_map_marker_flare"
-    app:tint="@color/bpkSkyBlue" />
+    app:tint="@color/bpkCoreAccent" />
 
   <ImageView
     android:id="@+id/pointer"
