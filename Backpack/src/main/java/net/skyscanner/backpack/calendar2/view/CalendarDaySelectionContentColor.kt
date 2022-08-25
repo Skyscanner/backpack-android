@@ -36,10 +36,10 @@ internal fun CalendarDaySelectionContentColor(
 
   context.obtainStyledAttributes(null, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0).use {
     selected = it.getColorStateList(R.styleable.BpkCalendar_calendarDateSelectedTextColor)
-      ?: context.getColorStateList(R.color.__calendarSelectedTextColor)
+      ?: context.getColorStateList(R.color.bpkTextPrimaryInverse)
 
     range = it.getColorStateList(R.styleable.BpkCalendar_calendarRangeTextColor)
-      ?: context.getColorStateList(R.color.__calendarRangeText)
+      ?: context.getColorStateList(R.color.bpkTextPrimary)
   }
 
   return { selection ->
