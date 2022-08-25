@@ -1,5 +1,610 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="5" by="lint 4.2.2" client="gradle" variant="ossDebug" version="4.2.2">
+<issues format="6" by="lint 7.2.2" type="baseline" client="gradle" dependencies="false" name="AGP (7.2.2)" variant="all" version="7.2.2">
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      holder.name.setTextColor(holder.name.context.getColor(R.color.bpkSkyGrayTint06))"
+        errorLine2="                                                                    ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/ColorAdapter.kt"
+            line="45"
+            column="69"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      holder.colorValue.setTextColor(holder.colorValue.context.getColor(R.color.bpkSkyGrayTint06))"
+        errorLine2="                                                                                ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/ColorAdapter.kt"
+            line="46"
+            column="81"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="          context.getColor(R.color.bpkMonteverde),"
+        errorLine2="                                   ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="63"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="          context.getColor(R.color.bpkErfoud),"
+        errorLine2="                                   ~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="96"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="          context.getColor(R.color.bpkPanjin),"
+        errorLine2="                                   ~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="119"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="          context.getColor(R.color.bpkMonteverde),"
+        errorLine2="                                   ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="165"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="          context.getColor(R.color.bpkMonteverde),"
+        errorLine2="                                   ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="177"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="          context.getColor(R.color.bpkMonteverde),"
+        errorLine2="                                   ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
+            line="218"
+            column="36"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="        CalendarCellStyle.Custom(context.getColor(R.color.bpkBackgroundSecondary)),"
+        errorLine2="                                                          ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/data/ExampleBpkCalendarController.kt"
+            line="122"
+            column="59"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="        requireContext().getColor(R.color.bpkMonteverde),"
+        errorLine2="                                          ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/GradientStory.kt"
+            line="45"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="        requireContext().getColor(R.color.bpkMonteverde),"
+        errorLine2="                                          ~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/GradientStory.kt"
+            line="45"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="        requireContext().getColor(R.color.bpkSagano),"
+        errorLine2="                                          ~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/GradientStory.kt"
+            line="46"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="        requireContext().getColor(R.color.bpkSagano),"
+        errorLine2="                                          ~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/GradientStory.kt"
+            line="46"
+            column="43"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    rtlIconBackgroundColor = parent.context.getColor(R.color.bpkSkyGrayTint04)"
+        errorLine2="                                                             ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/net/skyscanner/backpack/demo/stories/IconsAdapter.kt"
+            line="44"
+            column="62"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkBackgroundSecondary&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="31"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:textColor=&quot;@color/bpkSkyGrayTint01&quot;"
+        errorLine2="                       ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="35"
+            column="24"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      android:textColor=&quot;@color/bpkTextSecondary&quot;"
+        errorLine2="                         ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="74"
+            column="26"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGrayTint06&quot; />"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_settings.xml"
+            line="110"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="  android:textColor=&quot;@color/bpkTextSecondary&quot;"
+        errorLine2="                     ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/component_list_header.xml"
+            line="12"
+            column="22"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      android:background=&quot;@color/bpkSkyGrayTint01&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_badge.xml"
+            line="209"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      android:background=&quot;@color/bpkSkyGrayTint01&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_badge.xml"
+            line="335"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      android:background=&quot;@color/bpkSkyGrayTint01&quot;"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_badge.xml"
+            line="398"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkBackgroundSecondary&quot; />"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_bottom_sheet.xml"
+            line="10"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGray&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_button_large.xml"
+            line="246"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGray&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_button_large.xml"
+            line="362"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGray&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_button_link.xml"
+            line="124"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGray&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_button_link.xml"
+            line="178"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGray&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_button_link.xml"
+            line="362"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGray&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_button_link.xml"
+            line="420"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGray&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_button_standard.xml"
+            line="230"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGray&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_button_standard.xml"
+            line="338"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="  android:background=&quot;@color/bpkSkyBlueTint02&quot;>"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_buttons_styleable.xml"
+            line="9"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="  android:background=&quot;@color/bpkBackgroundAlternative&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_card_no_elevation.xml"
+            line="5"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="  android:background=&quot;@color/bpkBackgroundAlternativeSecondary&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_chip.xml"
+            line="6"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="  android:background=&quot;@color/bpkSkyBlueShade02&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_chip_ondark.xml"
+            line="6"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    android:background=&quot;@color/bpkSkyGray&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_horizontal_nav_default.xml"
+            line="58"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      app:tint=&quot;@color/bpkTextPrimary&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="23"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      app:tint=&quot;@color/bpkTextPrimary&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="31"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      app:tint=&quot;@color/bpkTextPrimary&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="38"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      app:tint=&quot;@color/bpkTextPrimary&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="58"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      app:tint=&quot;@color/bpkTextPrimary&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="66"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      app:tint=&quot;@color/bpkTextPrimary&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="72"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      app:tint=&quot;@color/bpkPrimary&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="93"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      app:tint=&quot;@color/bpkMonteverde&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="101"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      app:tint=&quot;@color/bpkErfoud&quot;"
+        errorLine2="                ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_icons.xml"
+            line="109"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    app:navBarExpandedTextColor=&quot;@color/bpkErfoud&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_nav_bar.xml"
+            line="12"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    app:navBarExpandedTextColor=&quot;@color/bpkErfoud&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_nav_bar_with_icon.xml"
+            line="13"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    app:navBarExpandedTextColor=&quot;@color/bpkErfoud&quot;/>"
+        errorLine2="                                 ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_nav_bar_with_menu.xml"
+            line="14"
+            column="34"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      android:background=&quot;@color/bpkSkyGray&quot;>"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_spinner.xml"
+            line="52"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="      android:background=&quot;@color/bpkSkyGray&quot;>"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_spinner_small.xml"
+            line="53"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    app:drawableTint=&quot;@color/bpkMonteverde&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_drawables.xml"
+            line="11"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="    app:drawableTint=&quot;@color/bpkMonteverde&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_drawables.xml"
+            line="20"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="  android:background=&quot;@color/bpkBackgroundSecondary&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields.xml"
+            line="7"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="  android:background=&quot;@color/bpkBackgroundSecondary&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields_labels.xml"
+            line="7"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="BpkDeprecatedColorUsage"
+        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+        errorLine1="  android:background=&quot;@color/bpkBackgroundSecondary&quot;"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/fragment_text_fields_rtl.xml"
+            line="7"
+            column="23"/>
+    </issue>
 
     <issue
         id="SetTextI18n"
@@ -74,7 +679,7 @@
         errorLine2="                    ~~~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="69"
+            line="68"
             column="21"/>
     </issue>
 
@@ -96,7 +701,7 @@
         errorLine2="                    ~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="101"
+            line="102"
             column="21"/>
     </issue>
 
@@ -107,7 +712,7 @@
         errorLine2="                    ~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="128"
+            line="129"
             column="21"/>
     </issue>
 
@@ -118,7 +723,7 @@
         errorLine2="                    ~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="138"
+            line="140"
             column="21"/>
     </issue>
 
@@ -129,7 +734,7 @@
         errorLine2="                    ~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="180"
+            line="182"
             column="21"/>
     </issue>
 
@@ -140,7 +745,7 @@
         errorLine2="                    ~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="189"
+            line="192"
             column="21"/>
     </issue>
 
@@ -151,7 +756,7 @@
         errorLine2="                    ~~~~~~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="198"
+            line="202"
             column="21"/>
     </issue>
 
@@ -162,7 +767,7 @@
         errorLine2="                    ~~~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="219"
+            line="223"
             column="21"/>
     </issue>
 
@@ -173,7 +778,7 @@
         errorLine2="                    ~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="229"
+            line="234"
             column="21"/>
     </issue>
 
@@ -184,7 +789,7 @@
         errorLine2="                    ~~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="247"
+            line="252"
             column="21"/>
     </issue>
 
@@ -195,7 +800,7 @@
         errorLine2="                    ~~~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="257"
+            line="263"
             column="21"/>
     </issue>
 
@@ -206,7 +811,7 @@
         errorLine2="                    ~~~~~~~~~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="277"
+            line="283"
             column="21"/>
     </issue>
 
@@ -217,7 +822,7 @@
         errorLine2="                    ~~~~~~~~~~">
         <location
             file="src/main/java/net/skyscanner/backpack/demo/stories/DialogStory.kt"
-            line="287"
+            line="294"
             column="21"/>
     </issue>
 
@@ -608,61 +1213,6 @@
 
     <issue
         id="HardcodedText"
-        message="Hardcoded string &quot;Default Unchecked&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Default Unchecked&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_checkbox.xml"
-            line="13"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Default Checked&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Default Checked&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_checkbox.xml"
-            line="20"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Disabled Unchecked&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Disabled Unchecked&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_checkbox.xml"
-            line="27"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Disabled Checked&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Disabled Checked&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_checkbox.xml"
-            line="35"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Default RTL&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Default RTL&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_checkbox.xml"
-            line="42"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
         message="Hardcoded string &quot;Show&quot;, should use `@string` resource"
         errorLine1="    android:text=&quot;Show&quot; />"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~">
@@ -725,61 +1275,6 @@
             file="src/main/res/layout/fragment_radii.xml"
             line="56"
             column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Default Unchecked&quot;, should use `@string` resource"
-        errorLine1="      android:text=&quot;Default Unchecked&quot; />"
-        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_radio_button.xml"
-            line="18"
-            column="7"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Default Checked&quot;, should use `@string` resource"
-        errorLine1="      android:text=&quot;Default Checked&quot; />"
-        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_radio_button.xml"
-            line="25"
-            column="7"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Default RTL&quot;, should use `@string` resource"
-        errorLine1="      android:text=&quot;Default RTL&quot; />"
-        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_radio_button.xml"
-            line="32"
-            column="7"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Disabled Unchecked&quot;, should use `@string` resource"
-        errorLine1="      android:text=&quot;Disabled Unchecked&quot; />"
-        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_radio_button.xml"
-            line="41"
-            column="7"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Disabled Checked&quot;, should use `@string` resource"
-        errorLine1="      android:text=&quot;Disabled Checked&quot; />"
-        errorLine2="      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_radio_button.xml"
-            line="49"
-            column="7"/>
     </issue>
 
     <issue
@@ -1285,61 +1780,6 @@
         <location
             file="src/main/res/layout/fragment_star_rating_values.xml"
             line="74"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Default Unchecked&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Default Unchecked&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_switch.xml"
-            line="13"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Default Checked&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Default Checked&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_switch.xml"
-            line="20"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Disabled Unchecked&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Disabled Unchecked&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_switch.xml"
-            line="27"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Disabled Checked&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Disabled Checked&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_switch.xml"
-            line="35"
-            column="5"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        message="Hardcoded string &quot;Default RTL&quot;, should use `@string` resource"
-        errorLine1="    android:text=&quot;Default RTL&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_switch.xml"
-            line="42"
             column="5"/>
     </issue>
 

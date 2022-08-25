@@ -39,6 +39,7 @@ const PATHS = {
   templates: path.join(__dirname, 'templates'),
   outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res'),
   drawableRes: path.join(__dirname, 'backpack-common', 'src', 'main', 'res', 'drawable-nodpi'),
+  lintSrc: path.join(__dirname, 'backpack-lint', 'src', 'main', 'java', 'net', 'skyscanner', 'backpack', 'lint', 'check'),
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
@@ -240,6 +241,27 @@ gulp.task('template:semanticColor', () => {
   return merge(light, dark);
 });
 
+gulp.task('template:deprecatedTokens', () => {
+  const getColors = () =>
+    tokensWithType('color')
+      .map(color => {
+        const colorObject = JSON.parse(JSON.stringify(color));
+        colorObject.name = `bpk${pascalCase(colorObject.name.replace(colorObject.type.toUpperCase(), ''))}`;
+        return colorObject;
+      })
+      .filter(entry => entry.deprecated);
+
+  return gulp
+    .src(`${PATHS.templates}/BackpackDeprecation.njk`)
+    .pipe(
+      nunjucks.compile({
+        colors: getColors(),
+      }),
+    )
+    .pipe(rename('BpkDeprecatedTokens.kt'))
+    .pipe(gulp.dest(PATHS.lintSrc));
+});
+
 gulp.task('template:spacing', () => {
   const getSpacing = () =>
     tokensWithCategory('spacings')
@@ -366,6 +388,7 @@ gulp.task(
     'template:radii',
     'template:spacing',
     'template:text',
+    'template:deprecatedTokens',
   ),
   () => {},
 );
