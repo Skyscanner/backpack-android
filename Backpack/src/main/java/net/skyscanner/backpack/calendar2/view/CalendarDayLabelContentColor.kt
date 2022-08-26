@@ -30,8 +30,8 @@ internal fun CalendarDayLabelContentColor(
 ): CalendarDayLabelContentColor {
 
   val default = context.getColorStateList(R.color.bpkTextSecondary)
-  val positive = context.getColorStateList(R.color.bpkMonteverde)
-  val empty = context.getColorStateList(R.color.__calendarCellDisabledTextColor)
+  val positive = context.getColorStateList(R.color.bpkStatusSuccessSpot)
+  val empty = context.getColorStateList(R.color.bpkTextDisabled)
 
   return { status ->
     when (status) {

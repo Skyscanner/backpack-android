@@ -4,5 +4,5 @@
   <size
     android:width="@dimen/bpkSpacingMd"
     android:height="@dimen/bpkSpacingMd" />
-  <solid android:color="@color/__calendarHighlightedDayDot" />
+  <solid android:color="@color/bpkSurfaceHighlight" />
 </shape>
