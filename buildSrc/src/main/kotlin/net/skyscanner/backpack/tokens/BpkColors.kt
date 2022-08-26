@@ -133,24 +133,27 @@ private fun parseColors(
 private val ColorClass = ClassName("androidx.compose.ui.graphics", "Color")
 
 private const val isLightProperty = "isLight"
+private const val deprecationMessageProperty = "DEPRECATION_MESSAGE"
 
 private fun String.toHexColorBlock() =
   buildCodeBlock { add("%T(%L)", ColorClass, toHexColor()) }
 
 private fun PropertySpec.Builder.withDeprecation(model: BpkColorModel): PropertySpec.Builder {
   return if (model.deprecated) {
-    addAnnotation(
-      AnnotationSpec.builder(Deprecated::class).addMember(
-        CodeBlock.Builder().addNamed(
-          "%message:S",
-          mapOf("message" to "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation")
-        ).build()
-      ).build()
-    )
+    addAnnotation(AnnotationSpec.builder(Deprecated::class).addMember(deprecationMessageProperty).build())
   } else {
     this
   }
 }
+
+private fun deprecationProperty() : PropertySpec =
+  PropertySpec.builder(deprecationMessageProperty, String::class)
+    .initializer(
+      "%S",
+      "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
+    )
+    .addModifiers(KModifier.CONST, KModifier.PRIVATE)
+    .build()
 
 @OptIn(ExperimentalStdlibApi::class)
 private fun String.toHexColor() =
@@ -175,6 +178,7 @@ private fun toStaticCompose(
 
   return TypeSpec.objectBuilder(namespace)
     .addProperties(source.map(BpkColorModel::toProperty))
+    .addProperty(deprecationProperty())
     .build()
 }
 
@@ -260,6 +264,7 @@ private fun toSemanticCompose(
         .addModifiers(KModifier.INTERNAL)
         .addFunction(source.toFactoryFunction(isLight = true))
         .addFunction(source.toFactoryFunction(isLight = false))
+        .addProperty(deprecationProperty())
         .build()
     )
     .build()
