@@ -107,7 +107,7 @@ sealed class CalendarCellStyle {
   @Deprecated("Use Calendar2 instead")
   object Hightlight : CalendarCellStyle() {
     override fun color(context: Context) =
-      context.getColor(R.color.__calendarHighlightedDayDot)
+      context.getColor(R.color.bpkLine)
   }
 
   /**

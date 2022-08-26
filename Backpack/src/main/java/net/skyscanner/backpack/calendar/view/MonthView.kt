@@ -122,7 +122,7 @@ internal class MonthView @JvmOverloads constructor(
 
     selectedDaySameDayCircleFillColor = a.getColor(
       R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
-      context.getColor(R.color.__calendarSameDayBackground)
+      context.getColor(R.color.bpkLine)
     )
 
     rangeBackgroundColor = a.getColor(
