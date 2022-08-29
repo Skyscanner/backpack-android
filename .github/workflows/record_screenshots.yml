@@ -38,7 +38,7 @@ jobs:
         id: check
         with:
           trigger: 'record snapshots'
-          reaction: +1
+          reaction: '+1'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
@@ -90,3 +90,33 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
+
+      - name: Recording snapshots
+        if: steps.check.outputs.triggered == 'true'
+        id: snaoshotsTests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: google_apis
+          profile: Nexus 4
+          sdcard-path-or-size: 512M
+          api-level: ${{ env.api-level }}
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: |
+            sudo pip3 install Pillow==9.0.1
+            ./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
+
+      - name: Commit changes
+        if: steps.check.outputs.triggered == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add app/screenshots/*
+          git pull
+          git commit -m "Updated screenshots"
+
+      - name: Push changes
+        if: steps.check.outputs.triggered == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
