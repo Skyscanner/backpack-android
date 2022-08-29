@@ -19,6 +19,7 @@ jobs:
     name: Record screenshot tests
     runs-on: macos-latest
     permissions:
+      statuses: write
       pull-requests: write
     timeout-minutes: 30
 
