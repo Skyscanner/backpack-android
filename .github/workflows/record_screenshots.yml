@@ -1,0 +1,92 @@
+name: Record snapshots
+
+on:
+  pull_request:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+env:
+  api-level: 24
+
+jobs:
+
+  Snapshots:
+    name: Record snapshot tests
+    runs-on: macos-latest
+    permissions:
+      statuses: write
+      pull-requests: write
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        variant:
+          - default
+          - themed
+          - rtl
+          - dm
+
+    steps:
+
+      - uses: khan/pull-request-comment-trigger@v1.1.0
+        id: check
+        with:
+          trigger: 'record snapshots'
+          reaction: +1
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: Checkout
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Setup Python
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Gradle cache
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+      - name: AVD cache
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ env.api-level }}
+
+      - name: create AVD and generate snapshot for caching
+        if: steps.check.outputs.triggered == 'true' && steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: google_apis
+          profile: Nexus 4
+          sdcard-path-or-size: 512M
+          api-level: ${{ env.api-level }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
