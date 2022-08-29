@@ -34,13 +34,13 @@ jobs:
 
     steps:
 
-      - uses: khan/pull-request-comment-trigger@v1.1.0
-        id: check
-        with:
-          trigger: 'record snapshots'
-          reaction: 'hooray'
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+#      - uses: khan/pull-request-comment-trigger@v1.1.0
+#        id: check
+#        with:
+#          trigger: 'record snapshots'
+#          reaction: 'hooray'
+#        env:
+#          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
       - name: Checkout
         if: steps.check.outputs.triggered == 'true'
