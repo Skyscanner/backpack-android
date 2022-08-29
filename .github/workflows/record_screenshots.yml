@@ -110,8 +110,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add app/screenshots/*
           git pull
+          git add app/screenshots/*
           git commit -m "Updated screenshots"
 
       - name: Push changes
