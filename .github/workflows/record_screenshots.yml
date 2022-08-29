@@ -38,7 +38,7 @@ jobs:
         id: check
         with:
           trigger: 'record snapshots'
-          reaction: 'hooray'
+#          reaction: 'hooray'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
