@@ -42,7 +42,7 @@ class BpkFabTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestFab_CustomIcon() {
-    fab.setImageResource(R.drawable.bpk_search)
+    fab.setImageResource(R.drawable.bpk_star)
     snap(fab)
   }
 
