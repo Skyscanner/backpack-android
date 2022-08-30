@@ -49,7 +49,6 @@ public class BpkColors private constructor(
   public val coreAccent: Color,
   public val coreEco: Color,
   public val corePrimary: Color,
-  @Deprecated(DEPRECATION_MESSAGE)
   public val line: Color,
   @Deprecated(DEPRECATION_MESSAGE)
   public val primary: Color,
@@ -70,12 +69,10 @@ public class BpkColors private constructor(
   public val textDisabled: Color,
   public val textError: Color,
   public val textLink: Color,
-  @Deprecated(DEPRECATION_MESSAGE)
   public val textPrimary: Color,
   public val textPrimaryInverse: Color,
   @Deprecated(DEPRECATION_MESSAGE)
   public val textQuaternary: Color,
-  @Deprecated(DEPRECATION_MESSAGE)
   public val textSecondary: Color,
   @Deprecated(DEPRECATION_MESSAGE)
   public val textTertiary: Color,

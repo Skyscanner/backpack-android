@@ -18,49 +18,27 @@
 -->
 <resources>
 
-	<color name="bpkBackgroundAlternative">#f1f2f8</color>
-
-	<color name="bpkBackgroundAlternativeSecondary">#ffffff</color>
-
-	<color name="bpkBackground">#ffffff</color>
-
-	<color name="bpkBackgroundElevation01">#ffffff</color>
-
-	<color name="bpkBackgroundElevation02">#ffffff</color>
-
-	<color name="bpkBackgroundElevation03">#ffffff</color>
-
-	<color name="bpkBackgroundSecondary">#f1f2f8</color>
-
-	<color name="bpkBackgroundTertiary">#ffffff</color>
+	<color name="bpkCanvas">#ffffff</color>
 
 	<color name="bpkCanvasContrast">#f1f2f8</color>
 
-	<color name="bpkCanvas">#ffffff</color>
+	<color name="bpkCoreEco">#0fa1a9</color>
 
 	<color name="bpkCoreAccent">#0770e3</color>
 
-	<color name="bpkCoreEco">#0fa1a9</color>
-
 	<color name="bpkCorePrimary">#02122c</color>
-
-	<color name="bpkLine">#cdcdd7</color>
-
-	<color name="bpkPrimary">#0770e3</color>
-
-	<color name="bpkScrim">#02122c</color>
-
-	<color name="bpkStatusDangerFill">#f6dde1</color>
-
-	<color name="bpkStatusDangerSpot">#d1435b</color>
-
-	<color name="bpkStatusSuccessFill">#d0eeec</color>
 
 	<color name="bpkStatusSuccessSpot">#00a698</color>
 
-	<color name="bpkStatusWarningFill">#ffebd0</color>
+	<color name="bpkStatusSuccessFill">#d0eeec</color>
+
+	<color name="bpkStatusDangerSpot">#d1435b</color>
 
 	<color name="bpkStatusWarningSpot">#ff9400</color>
+
+	<color name="bpkStatusDangerFill">#f6dde1</color>
+
+	<color name="bpkStatusWarningFill">#ffebd0</color>
 
 	<color name="bpkSurfaceContrast">#02122c</color>
 
@@ -70,24 +48,46 @@
 
 	<color name="bpkSurfaceHighlight">#dddde5</color>
 
-	<color name="bpkTextDisabled">#b2b2bf</color>
-
-	<color name="bpkTextError">#d1435b</color>
-
-	<color name="bpkTextLink">#0770e3</color>
-
 	<color name="bpkTextOnDark">#ffffff</color>
 
 	<color name="bpkTextOnLight">#111236</color>
 
-	<color name="bpkTextPrimary">#111236</color>
+	<color name="bpkTextLink">#0770e3</color>
 
-	<color name="bpkTextPrimaryInverse">#ffffff</color>
+	<color name="bpkTextDisabled">#b2b2bf</color>
+
+	<color name="bpkTextPrimary">#111236</color>
 
 	<color name="bpkTextQuaternary">#8f90a0</color>
 
-	<color name="bpkTextSecondary">#68697f</color>
+	<color name="bpkTextError">#d1435b</color>
 
 	<color name="bpkTextTertiary">#8f90a0</color>
+
+	<color name="bpkTextSecondary">#68697f</color>
+
+	<color name="bpkTextPrimaryInverse">#ffffff</color>
+
+	<color name="bpkScrim">#02122c</color>
+
+	<color name="bpkBackgroundElevation03">#ffffff</color>
+
+	<color name="bpkBackgroundElevation02">#ffffff</color>
+
+	<color name="bpkLine">#cdcdd7</color>
+
+	<color name="bpkBackgroundElevation01">#ffffff</color>
+
+	<color name="bpkBackgroundAlternativeSecondary">#ffffff</color>
+
+	<color name="bpkBackground">#ffffff</color>
+
+	<color name="bpkBackgroundTertiary">#ffffff</color>
+
+	<color name="bpkBackgroundSecondary">#f1f2f8</color>
+
+	<color name="bpkBackgroundAlternative">#f1f2f8</color>
+
+	<color name="bpkPrimary">#0770e3</color>
 
  </resources>
