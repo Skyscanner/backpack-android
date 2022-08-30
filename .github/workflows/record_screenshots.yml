@@ -104,15 +104,11 @@ jobs:
           script: |
             sudo pip3 install Pillow==9.0.1
             ./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
-
-      - name: Commit changes
-        if: steps.check.outputs.triggered == 'true'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git pull
-          git add app/screenshots/*
-          git commit -m "Updated screenshots"
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git pull
+            git add app/screenshots/*
+            git commit -m "Updated screenshots"
 
       - name: Push changes
         if: steps.check.outputs.triggered == 'true'
