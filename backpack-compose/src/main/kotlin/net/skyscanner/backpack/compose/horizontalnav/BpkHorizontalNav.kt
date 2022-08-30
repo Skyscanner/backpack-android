@@ -53,7 +53,7 @@ fun BpkHorizontalNav(
 ) {
   TabRow(
     contentColor = BpkTheme.colors.textLink,
-    backgroundColor = BpkTheme.colors.backgroundElevation01,
+    backgroundColor = BpkTheme.colors.surfaceDefault,
     selectedTabIndex = activeIndex,
     divider = {
       if (BpkTheme.colors.isLight) {
