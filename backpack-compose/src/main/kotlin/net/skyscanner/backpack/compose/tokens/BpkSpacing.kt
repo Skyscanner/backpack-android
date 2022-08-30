@@ -25,17 +25,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 public object BpkSpacing {
+  public val Sm: Dp = 4.dp
+
+  public val Md: Dp = 8.dp
+
   public val Base: Dp = 16.dp
 
   public val Lg: Dp = 24.dp
 
-  public val Md: Dp = 8.dp
-
-  public val None: Dp = 0.dp
-
-  public val Sm: Dp = 4.dp
-
   public val Xl: Dp = 32.dp
 
   public val Xxl: Dp = 40.dp
+
+  public val None: Dp = 0.dp
 }

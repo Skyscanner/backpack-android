@@ -18,6 +18,7 @@
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
+import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
@@ -33,6 +34,7 @@ data class BpkColorModel(
   val defaultReference: String?,
   val darkReference: String?,
   val darkValue: String?,
+  val deprecated: Boolean,
 )
 
 interface BpkColors : List<BpkColorModel>
@@ -71,9 +73,9 @@ object BpkColor {
         toStaticCompose(source, namespace)
     }
 
-    data class SemanticCompose(val staticNameSpace: String, val className: String) : Format() {
+    data class SemanticCompose(val className: String) : Format() {
       override fun invoke(source: BpkColors): TypeSpec =
-        toSemanticCompose(source, staticNameSpace)
+        toSemanticCompose(source, className)
     }
 
   }
@@ -116,6 +118,7 @@ private fun parseColors(
         darkValue = it.value["darkValue"]?.trimColor(),
         defaultReference = resolveReference(it.value["originalValue"], isDark = false)?.trimReference()?.trimName(),
         darkReference = resolveReference(it.value["originalDarkValue"], isDark = true)?.trimReference()?.trimName(),
+        deprecated = it.value["deprecated"].toBoolean()
       )
     }
     .filter(filter)
@@ -130,9 +133,27 @@ private fun parseColors(
 private val ColorClass = ClassName("androidx.compose.ui.graphics", "Color")
 
 private const val isLightProperty = "isLight"
+private const val deprecationMessageProperty = "DEPRECATION_MESSAGE"
 
 private fun String.toHexColorBlock() =
   buildCodeBlock { add("%T(%L)", ColorClass, toHexColor()) }
+
+private fun PropertySpec.Builder.withDeprecation(model: BpkColorModel): PropertySpec.Builder {
+  return if (model.deprecated) {
+    addAnnotation(AnnotationSpec.builder(Deprecated::class).addMember(deprecationMessageProperty).build())
+  } else {
+    this
+  }
+}
+
+private fun deprecationProperty() : PropertySpec =
+  PropertySpec.builder(deprecationMessageProperty, String::class)
+    .initializer(
+      "%S",
+      "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
+    )
+    .addModifiers(KModifier.CONST, KModifier.PRIVATE)
+    .build()
 
 @OptIn(ExperimentalStdlibApi::class)
 private fun String.toHexColor() =
@@ -151,11 +172,13 @@ private fun toStaticCompose(
     return PropertySpec
       .builder(name.toComposeStaticName(), ColorClass)
       .initializer(defaultValue.toHexColorBlock())
+      .withDeprecation(this)
       .build()
   }
 
   return TypeSpec.objectBuilder(namespace)
     .addProperties(source.map(BpkColorModel::toProperty))
+    .addProperty(deprecationProperty())
     .build()
 }
 
@@ -178,6 +201,7 @@ private fun toSemanticCompose(
       PropertySpec
         .builder(name.toSemanticName(), ColorClass)
         .initializer(name.toSemanticName())
+        .withDeprecation(this)
         .build()
 
     return TypeSpec.classBuilder(className)
@@ -235,11 +259,13 @@ private fun toSemanticCompose(
   return source
     .toColorsClass()
     .toBuilder()
-    .addType(TypeSpec.companionObjectBuilder()
-      .addModifiers(KModifier.INTERNAL)
-      .addFunction(source.toFactoryFunction(isLight = true))
-      .addFunction(source.toFactoryFunction(isLight = false))
-      .build()
+    .addType(
+      TypeSpec.companionObjectBuilder()
+        .addModifiers(KModifier.INTERNAL)
+        .addFunction(source.toFactoryFunction(isLight = true))
+        .addFunction(source.toFactoryFunction(isLight = false))
+        .addProperty(deprecationProperty())
+        .build()
     )
     .build()
 }

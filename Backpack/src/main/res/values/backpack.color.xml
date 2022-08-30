@@ -18,142 +18,142 @@
 -->
 <resources>
 
-	<color name="bpkBackgroundAlternativeDark">#000000</color>
-
-	<color name="bpkBackgroundAlternativeLight">#f1f2f8</color>
-
-	<color name="bpkBackgroundAlternativeSecondaryDark">#1d1b20</color>
-
-	<color name="bpkBackgroundAlternativeSecondaryLight">#ffffff</color>
-
-	<color name="bpkBackgroundDark">#000000</color>
-
-	<color name="bpkBackgroundElevation01Dark">#1d1b20</color>
-
-	<color name="bpkBackgroundElevation01Light">#ffffff</color>
-
-	<color name="bpkBackgroundElevation02Dark">#2c2c2e</color>
-
-	<color name="bpkBackgroundElevation02Light">#ffffff</color>
-
-	<color name="bpkBackgroundElevation03Dark">#3a3a3c</color>
-
-	<color name="bpkBackgroundElevation03Light">#ffffff</color>
-
-	<color name="bpkBackgroundLight">#ffffff</color>
-
-	<color name="bpkBackgroundSecondaryDark">#1d1b20</color>
-
-	<color name="bpkBackgroundSecondaryLight">#f1f2f8</color>
-
-	<color name="bpkBackgroundTertiaryDark">#2c2c2e</color>
-
-	<color name="bpkBackgroundTertiaryLight">#ffffff</color>
-
-	<color name="bpkAbisko">#5a489b</color>
-
-	<color name="bpkBagan">#ffebd0</color>
-
-	<color name="bpkBlack">#000000</color>
-
-	<color name="bpkBlackTint01">#1d1b20</color>
-
-	<color name="bpkBlackTint02">#2c2c2e</color>
-
-	<color name="bpkBlackTint03">#3a3a3c</color>
-
-	<color name="bpkBlackTint04">#48484a</color>
-
-	<color name="bpkBlackTint05">#636366</color>
-
-	<color name="bpkBlackTint06">#8e8e93</color>
-
-	<color name="bpkBunol">#ff7b59</color>
-
-	<color name="bpkErfoud">#ffb54d</color>
-
-	<color name="bpkGlencoe">#73cec6</color>
-
-	<color name="bpkHarbour">#f6dde1</color>
-
-	<color name="bpkHillier">#e18b96</color>
-
-	<color name="bpkKolkata">#ff9400</color>
-
-	<color name="bpkMonteverde">#00a698</color>
-
-	<color name="bpkNara">#ffe7e0</color>
-
-	<color name="bpkPanjin">#d1435b</color>
-
-	<color name="bpkPetra">#ffab95</color>
+	<color name="bpkSkyBlueShade03">#02122c</color>
 
 	<color name="bpkPrimaryGradientLight">#0770e3</color>
 
-	<color name="bpkSagano">#d0eeec</color>
+	<color name="bpkErfoud">#ffb54d</color>
 
-	<color name="bpkSkyBlue">#0770e3</color>
+	<color name="bpkValensole">#a59bc8</color>
 
-	<color name="bpkSkyBlueShade01">#084eb2</color>
-
-	<color name="bpkSkyBlueShade02">#042759</color>
-
-	<color name="bpkSkyBlueShade03">#02122c</color>
-
-	<color name="bpkSkyBlueTint01">#6d9feb</color>
-
-	<color name="bpkSkyBlueTint02">#9dc0f2</color>
-
-	<color name="bpkSkyBlueTint03">#cddff8</color>
-
-	<color name="bpkSkyGray">#111236</color>
+	<color name="bpkMonteverde">#00a698</color>
 
 	<color name="bpkSkyGrayTint01">#444560</color>
 
+	<color name="bpkBlack">#000000</color>
+
 	<color name="bpkSkyGrayTint02">#68697f</color>
+
+	<color name="bpkSagano">#d0eeec</color>
 
 	<color name="bpkSkyGrayTint03">#8f90a0</color>
 
 	<color name="bpkSkyGrayTint04">#b2b2bf</color>
 
+	<color name="bpkHarbour">#f6dde1</color>
+
 	<color name="bpkSkyGrayTint05">#cdcdd7</color>
 
 	<color name="bpkSkyGrayTint06">#dddde5</color>
 
+	<color name="bpkBlackTint01">#1d1b20</color>
+
 	<color name="bpkSkyGrayTint07">#f1f2f8</color>
 
-	<color name="bpkSystemGreen">#00a698</color>
+	<color name="bpkBlackTint02">#2c2c2e</color>
 
-	<color name="bpkSystemRed">#d1435b</color>
+	<color name="bpkAbisko">#5a489b</color>
 
-	<color name="bpkTochigi">#e1ddec</color>
+	<color name="bpkBlackTint03">#3a3a3c</color>
 
-	<color name="bpkValensole">#a59bc8</color>
+	<color name="bpkBlackTint04">#48484a</color>
 
 	<color name="bpkWhite">#ffffff</color>
 
-	<color name="bpkLineDark">#48484a</color>
+	<color name="bpkBlackTint05">#636366</color>
 
-	<color name="bpkLineLight">#cdcdd7</color>
+	<color name="bpkBlackTint06">#8e8e93</color>
 
-	<color name="bpkPrimaryDark">#6d9feb</color>
+	<color name="bpkPanjin">#d1435b</color>
 
-	<color name="bpkPrimaryLight">#0770e3</color>
+	<color name="bpkKolkata">#ff9400</color>
+
+	<color name="bpkGlencoe">#73cec6</color>
+
+	<color name="bpkTochigi">#e1ddec</color>
+
+	<color name="bpkPetra">#ffab95</color>
+
+	<color name="bpkSkyBlue">#0770e3</color>
+
+	<color name="bpkBagan">#ffebd0</color>
+
+	<color name="bpkHillier">#e18b96</color>
+
+	<color name="bpkSkyBlueTint01">#6d9feb</color>
+
+	<color name="bpkSkyBlueTint02">#9dc0f2</color>
+
+	<color name="bpkBunol">#ff7b59</color>
+
+	<color name="bpkSkyBlueTint03">#cddff8</color>
+
+	<color name="bpkSkyGray">#111236</color>
+
+	<color name="bpkNara">#ffe7e0</color>
+
+	<color name="bpkSkyBlueShade01">#084eb2</color>
+
+	<color name="bpkSkyBlueShade02">#042759</color>
 
 	<color name="bpkTextPrimaryDark">#ffffff</color>
-
-	<color name="bpkTextPrimaryLight">#111236</color>
 
 	<color name="bpkTextQuaternaryDark">#8e8e93</color>
 
 	<color name="bpkTextQuaternaryLight">#8f90a0</color>
 
+	<color name="bpkTextPrimaryLight">#111236</color>
+
+	<color name="bpkTextTertiaryDark">#8e8e93</color>
+
 	<color name="bpkTextSecondaryDark">#b2b2bf</color>
 
 	<color name="bpkTextSecondaryLight">#68697f</color>
 
-	<color name="bpkTextTertiaryDark">#8e8e93</color>
-
 	<color name="bpkTextTertiaryLight">#8f90a0</color>
+
+	<color name="bpkBackgroundElevation03Dark">#3a3a3c</color>
+
+	<color name="bpkBackgroundElevation02Dark">#2c2c2e</color>
+
+	<color name="bpkLineDark">#48484a</color>
+
+	<color name="bpkBackgroundElevation01Dark">#1d1b20</color>
+
+	<color name="bpkBackgroundAlternativeSecondaryDark">#1d1b20</color>
+
+	<color name="bpkBackgroundLight">#ffffff</color>
+
+	<color name="bpkBackgroundDark">#000000</color>
+
+	<color name="bpkBackgroundAlternativeSecondaryLight">#ffffff</color>
+
+	<color name="bpkSystemGreen">#00a698</color>
+
+	<color name="bpkBackgroundElevation01Light">#ffffff</color>
+
+	<color name="bpkLineLight">#cdcdd7</color>
+
+	<color name="bpkBackgroundElevation02Light">#ffffff</color>
+
+	<color name="bpkBackgroundElevation03Light">#ffffff</color>
+
+	<color name="bpkBackgroundTertiaryDark">#2c2c2e</color>
+
+	<color name="bpkBackgroundSecondaryDark">#1d1b20</color>
+
+	<color name="bpkBackgroundAlternativeLight">#f1f2f8</color>
+
+	<color name="bpkPrimaryDark">#6d9feb</color>
+
+	<color name="bpkSystemRed">#d1435b</color>
+
+	<color name="bpkBackgroundAlternativeDark">#000000</color>
+
+	<color name="bpkPrimaryLight">#0770e3</color>
+
+	<color name="bpkBackgroundTertiaryLight">#ffffff</color>
+
+	<color name="bpkBackgroundSecondaryLight">#f1f2f8</color>
 
  </resources>

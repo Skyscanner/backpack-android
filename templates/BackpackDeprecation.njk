@@ -16,24 +16,12 @@
  * limitations under the License.
  */
 
-// Auto-generated: do not edit
-@file:Suppress("RedundantVisibilityModifier","unused")
+/** THIS FILE IS AUTO GENERATED. DO NOT MODIFY! **/
 
-package net.skyscanner.backpack.compose.tokens
+package net.skyscanner.backpack.lint.check
 
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-
-public object BpkElevation {
-  public val Xs: Dp = 1.dp
-
-  public val Sm: Dp = 2.dp
-
-  public val Base: Dp = 4.dp
-
-  public val Lg: Dp = 8.dp
-
-  public val Xl: Dp = 16.dp
-
-  public val Xxl: Dp = 24.dp
+internal object BpkDeprecatedTokens {
+  val deprecatedColors = listOf({% for color in colors %}
+    "{{color.name}}",{% endfor %}
+  )
 }

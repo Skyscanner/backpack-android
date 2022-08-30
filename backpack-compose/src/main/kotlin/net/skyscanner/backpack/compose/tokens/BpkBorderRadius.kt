@@ -25,13 +25,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 public object BpkBorderRadius {
-  public val Lg: Dp = 24.dp
-
-  public val Md: Dp = 12.dp
-
-  public val Pill: Dp = 40.dp
+  public val Xs: Dp = 4.dp
 
   public val Sm: Dp = 8.dp
 
-  public val Xs: Dp = 4.dp
+  public val Md: Dp = 12.dp
+
+  public val Lg: Dp = 24.dp
+
+  public val Pill: Dp = 40.dp
 }

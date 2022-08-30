@@ -23,16 +23,26 @@ package net.skyscanner.backpack.compose.tokens
 
 import androidx.compose.ui.graphics.Color
 import kotlin.Boolean
+import kotlin.Deprecated
+import kotlin.String
 
 public class BpkColors private constructor(
   public val isLight: Boolean,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val background: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val backgroundAlternative: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val backgroundAlternativeSecondary: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val backgroundElevation01: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val backgroundElevation02: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val backgroundElevation03: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val backgroundSecondary: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val backgroundTertiary: Color,
   public val canvas: Color,
   public val canvasContrast: Color,
@@ -40,6 +50,7 @@ public class BpkColors private constructor(
   public val coreEco: Color,
   public val corePrimary: Color,
   public val line: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val primary: Color,
   public val scrim: Color,
   public val statusDangerFill: Color,
@@ -51,18 +62,25 @@ public class BpkColors private constructor(
   public val surfaceContrast: Color,
   public val surfaceDefault: Color,
   public val surfaceElevated: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val systemGreen: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val systemRed: Color,
   public val textDisabled: Color,
   public val textError: Color,
   public val textLink: Color,
   public val textPrimary: Color,
   public val textPrimaryInverse: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val textQuaternary: Color,
   public val textSecondary: Color,
+  @Deprecated(DEPRECATION_MESSAGE)
   public val textTertiary: Color,
 ) {
   internal companion object {
+    private const val DEPRECATION_MESSAGE: String =
+        "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
+
     public fun light(
       background: Color = Color(0xFFFFFFFF),
       backgroundAlternative: Color = Color(0xFFF1F2F8),
