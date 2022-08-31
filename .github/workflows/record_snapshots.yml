@@ -49,6 +49,7 @@ jobs:
       - name: Switch to branch
         if: steps.check.outputs.triggered == 'true'
         run: |
+          git config --global hub.protocol https
           hub pr checkout ${{ github.event.issue.number }}
 
       - name: Set up JDK 11
