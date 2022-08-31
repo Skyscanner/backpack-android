@@ -48,6 +48,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : TabLayout(context, attrs, defStyleAttr) {
 
+  @Deprecated("Alternate styling is no longer supported - please remove usages")
   enum class Appearance(
     internal val id: Int,
     @AttrRes internal val styleAttribute: Int,
@@ -59,8 +60,8 @@ open class BpkHorizontalNav @JvmOverloads constructor(
       id = 0,
       styleAttribute = R.attr.bpkHorizontalNavStyle,
       defaultTextColor = R.color.bpkTextPrimary,
-      defaultTextSelectedColor = R.color.bpkPrimary,
-      defaultIndicatorColor = R.color.bpkPrimary
+      defaultTextSelectedColor = R.color.bpkTextLink,
+      defaultIndicatorColor = R.color.bpkTextLink
     ),
     Alternate(
       id = 1,
@@ -86,6 +87,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   }
 
   private var _appearance: Appearance = Appearance.Normal
+  @Deprecated("Alternate styling is no longer supported - please remove usages")
   var appearance: Appearance
     get() = _appearance
     set(value) {
