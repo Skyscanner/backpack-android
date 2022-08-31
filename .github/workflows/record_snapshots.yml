@@ -50,6 +50,8 @@ jobs:
         if: steps.check.outputs.triggered == 'true'
         run: |
           hub pr checkout ${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up JDK 11
         if: steps.check.outputs.triggered == 'true'
