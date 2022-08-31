@@ -24,6 +24,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -83,11 +84,15 @@ class MainActivity : BpkBaseActivity() {
               IconAction(icon = BpkIcon.Settings, contentDescription = stringResource(R.string.settings_title), onClick = {})
             )
           )
-          LazyColumn(modifier = Modifier.padding(horizontal = 24.dp)) {
+          LazyColumn(
+            modifier = Modifier
+              .padding(horizontal = 24.dp)
+              .fillMaxWidth()
+          ) {
             item {
               BpkText(
                 text = "Tokens".uppercase(),
-                modifier = Modifier.padding(start = 24.dp, top = 16.dp, bottom = 16.dp),
+                modifier = Modifier.padding(top = 16.dp, bottom = 16.dp),
                 color = BpkTheme.colors.textSecondary,
               )
             }
@@ -96,7 +101,7 @@ class MainActivity : BpkBaseActivity() {
               Row(
                 modifier = Modifier
                   .padding(
-                    top = 16.dp
+                    top = 16.dp,
                   )
                   .clickable {
                     val intent = Intent(context, ComponentDetailActivity::class.java)
@@ -113,7 +118,7 @@ class MainActivity : BpkBaseActivity() {
             item {
               BpkText(
                 text = "Components".uppercase(),
-                modifier = Modifier.padding(start = 24.dp, top = 16.dp, bottom = 16.dp),
+                modifier = Modifier.padding(top = 26.dp, bottom = 16.dp),
                 color = BpkTheme.colors.textSecondary,
               )
             }
