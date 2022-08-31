@@ -72,19 +72,19 @@ open class BpkText @JvmOverloads constructor(
         Hero3 -> R.attr.bpkTextHero3Appearance
         Hero4 -> R.attr.bpkTextHero4Appearance
         Hero5 -> R.attr.bpkTextHero5Appearance
-        Heading1 -> R.attr.bpkTextHero4Appearance
-        Heading2 -> R.attr.bpkTextHero4Appearance
-        Heading3 -> R.attr.bpkTextHero4Appearance
-        Heading4 -> R.attr.bpkTextHero4Appearance
-        Heading5 -> R.attr.bpkTextHero4Appearance
-        Subheading -> R.attr.bpkTextHero4Appearance
-        BodyLongform -> R.attr.bpkTextHero4Appearance
-        BodyDefault -> R.attr.bpkTextHero4Appearance
-        Label1 -> R.attr.bpkTextHero4Appearance
-        Label2 -> R.attr.bpkTextHero4Appearance
-        Label3 -> R.attr.bpkTextHero4Appearance
-        Footnote -> R.attr.bpkTextHero4Appearance
-        Caption -> R.attr.bpkTextHero4Appearance
+        Heading1 -> R.attr.bpkTextHeading1Appearance
+        Heading2 -> R.attr.bpkTextHeading2Appearance
+        Heading3 -> R.attr.bpkTextHeading3Appearance
+        Heading4 -> R.attr.bpkTextHeading4Appearance
+        Heading5 -> R.attr.bpkTextHeading5Appearance
+        Subheading -> R.attr.bpkTextSubheadingAppearance
+        BodyLongform -> R.attr.bpkTextBodyLongformAppearance
+        BodyDefault -> R.attr.bpkTextBodyDefaultAppearance
+        Label1 -> R.attr.bpkTextLabel1Appearance
+        Label2 -> R.attr.bpkTextLabel2Appearance
+        Label3 -> R.attr.bpkTextLabel3Appearance
+        Footnote -> R.attr.bpkTextFootnoteAppearance
+        Caption -> R.attr.bpkTextCaptionAppearance
       }
   }
 
