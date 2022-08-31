@@ -84,15 +84,13 @@ class MainActivity : BpkBaseActivity() {
               IconAction(icon = BpkIcon.Settings, contentDescription = stringResource(R.string.settings_title), onClick = {})
             )
           )
-          LazyColumn(
-            modifier = Modifier
-              .padding(horizontal = 24.dp)
-              .fillMaxWidth()
-          ) {
+          LazyColumn() {
             item {
               BpkText(
                 text = "Tokens".uppercase(),
-                modifier = Modifier.padding(top = 16.dp, bottom = 16.dp),
+                modifier = Modifier
+                  .fillMaxWidth()
+                  .padding(start = 16.dp, top = 16.dp, end = 16.dp),
                 color = BpkTheme.colors.textSecondary,
               )
             }
@@ -100,9 +98,8 @@ class MainActivity : BpkBaseActivity() {
               val context = LocalContext.current
               Row(
                 modifier = Modifier
-                  .padding(
-                    top = 16.dp,
-                  )
+                  .fillMaxWidth()
+                  .padding(start = 16.dp, top = 16.dp, end = 16.dp)
                   .clickable {
                     val intent = Intent(context, ComponentDetailActivity::class.java)
                     intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, it.name)
@@ -118,7 +115,9 @@ class MainActivity : BpkBaseActivity() {
             item {
               BpkText(
                 text = "Components".uppercase(),
-                modifier = Modifier.padding(top = 26.dp, bottom = 16.dp),
+                modifier = Modifier
+                  .fillMaxWidth()
+                  .padding(start = 16.dp, top = 16.dp, end = 16.dp),
                 color = BpkTheme.colors.textSecondary,
               )
             }
@@ -126,7 +125,8 @@ class MainActivity : BpkBaseActivity() {
               val context = LocalContext.current
               Row(
                 modifier = Modifier
-                  .padding(top = 16.dp)
+                  .fillMaxWidth()
+                  .padding(start = 16.dp, top = 16.dp, end = 16.dp)
                   .clickable {
                     val intent = Intent(context, ComponentDetailActivity::class.java)
                     intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, it.name)
@@ -160,12 +160,3 @@ class MainActivity : BpkBaseActivity() {
     return item is NodeItem && item.subItems.values.any { hasComposeNodes(it) }
   }
 }
-
-//  @Composable
-//  private fun hasComposeNodes(item: RegistryItem): Boolean {
-//    if (item is ComposeNode) {
-//      return true
-//    }
-//    return item is NodeItem && item.subItems.values.any { hasComposeNodes(it) }
-//  }
-// }
