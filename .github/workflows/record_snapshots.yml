@@ -21,8 +21,8 @@ jobs:
     name: Record snapshot tests
     runs-on: macos-latest
     permissions:
-      statuses: write
       pull-requests: write
+      contents: write
     timeout-minutes: 30
 
     strategy:
