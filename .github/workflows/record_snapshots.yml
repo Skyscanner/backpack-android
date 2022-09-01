@@ -1,10 +1,8 @@
 name: Record snapshots
 
 on:
-  pull_request:
-    types: [opened]
   issue_comment:
-    types: [created]
+    types: [created, edited]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -46,16 +44,30 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
+      - name: Find PR branch
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/github-script@v3
+        id: get-pr
+        with:
+          script: |
+            const request = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            }
+            core.info(`Getting PR #${request.pull_number} from ${request.owner}/${request.repo}`)
+            try {
+              const result = await github.pulls.get(request)
+              return result.data
+            } catch (err) {
+              core.setFailed(`Request failed with error ${err}`)
+            }
+
       - name: Checkout
         if: steps.check.outputs.triggered == 'true'
         uses: actions/checkout@v3
-
-      - name: Switch to branch
-        if: steps.check.outputs.triggered == 'true'
-        run: |
-          hub pr checkout ${{ github.event.issue.number }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          ref: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
 
       - name: Set up JDK 11
         if: steps.check.outputs.triggered == 'true'
@@ -129,4 +141,5 @@ jobs:
         if: steps.check.outputs.triggered == 'true'
         uses: ad-m/github-push-action@master
         with:
+          branch: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
