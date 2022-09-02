@@ -23,6 +23,7 @@ jobs:
     permissions:
       pull-requests: write
       contents: write
+      issues: write
     timeout-minutes: 30
 
     strategy:
@@ -39,7 +40,7 @@ jobs:
       - uses: khan/pull-request-comment-trigger@v1.1.0
         id: check
         with:
-          trigger: 'record snapshots'
+          trigger: 'Record snapshots'
           reaction: '+1'
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
@@ -116,7 +117,7 @@ jobs:
 
       - name: Recording snapshots
         if: steps.check.outputs.triggered == 'true'
-        id: snaoshotsTests
+        id: snapshotsTests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           target: google_apis
@@ -127,6 +128,7 @@ jobs:
           script: |
             sudo pip3 install Pillow==9.0.1
             ./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
+            changedFiles=`git diff --name-only` && echo "::set-output name=CHANGED_FILES::${changedFiles//$'\n'/'%0A'}"
 
       - name: Commit changes
         if: steps.check.outputs.triggered == 'true'
@@ -135,7 +137,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git pull
           git add app/screenshots/*
-          git commit -m "Updated screenshots"
+          git commit -m "Updated snapshots for '${{ matrix.variant }}'"
 
       - name: Push changes
         if: steps.check.outputs.triggered == 'true'
@@ -143,3 +145,18 @@ jobs:
         with:
           branch: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify PR of snapshots success
+        if: steps.check.outputs.triggered == 'true' && ${{ success() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `### '${{ matrix.variant }}' snapshots were updated. Please review it.
+
+              >'${{ steps.snapshotsTests.outputs.CHANGED_FILES }}'`
+            })
+
