@@ -137,7 +137,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git pull
           git add app/screenshots/*
-          git commit -m "Updated snapshots for '${{ matrix.variant }}'"
+          git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
 
       - name: Push changes
         if: steps.check.outputs.triggered == 'true'
@@ -155,7 +155,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `### '${{ matrix.variant }}' snapshots were updated. Please review it.
+              body: `'${{ matrix.variant }}' snapshots were updated. Please review it.
 
               >'${{ steps.snapshotsTests.outputs.CHANGED_FILES }}'`
             })
