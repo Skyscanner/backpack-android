@@ -14,7 +14,6 @@ env:
   api-level: 24
 
 jobs:
-
   Build:
     name: Build
     runs-on: ubuntu-latest
