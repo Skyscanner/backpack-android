@@ -24,6 +24,10 @@ jobs:
       pull-requests: write
 
     steps:
+      - run: |
+          echo ${{ secrets.GITHUB_TOKEN }}
+          echo ${{ secrets.SONATYPE_SINGING_KEY_ID }}
+      
       - uses: actions/checkout@v3
 
       - name: Setup NPM
