@@ -64,19 +64,6 @@ class MainActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-//    setContentView(R.layout.activity_component_list)
-//
-//    val toolbar = findViewById<Toolbar>(R.id.toolbar)
-//    setSupportActionBar(toolbar)
-//    toolbar.title = title
-
-//    val componentsList = findViewById<View>(R.id.componentsList) as RecyclerView
-//    val allItems = mutableListOf<StoriesRecyclerViewAdapter.ListItem>()
-//    allItems.add(HeaderItem("Tokens"))
-//    allItems.addAll(ComponentRegistry.TOKENS.map { it.toStoryItem() })
-//    allItems.add(HeaderItem("Components"))
-//    allItems.addAll(ComponentRegistry.COMPONENTS.map { it.toStoryItem() })
-
     setContent {
       BpkTheme {
         Column {
@@ -107,8 +94,6 @@ class MainActivity : BpkBaseActivity() {
           }
         }
       }
-//    componentsList.adapter = StoriesRecyclerViewAdapter(allItems)
-//    componentsList.addItemDecoration(StoryItemDecoration(this))
     }
   }
 
