@@ -24,6 +24,7 @@ jobs:
       pull-requests: write
       contents: write
       issues: write
+      statuses: write
     timeout-minutes: 30
 
     strategy:
@@ -137,7 +138,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git pull
           git add app/screenshots/*
-          git commit -m "Updated snapshots for '${{ matrix.variant }}'"
+          git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
 
       - name: Push changes
         if: steps.check.outputs.triggered == 'true'
@@ -145,18 +146,3 @@ jobs:
         with:
           branch: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Notify PR of snapshots success
-        if: steps.check.outputs.triggered == 'true' && ${{ success() }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `### '${{ matrix.variant }}' snapshots were updated. Please review it.
-
-              >'${{ steps.snapshotsTests.outputs.CHANGED_FILES }}'`
-            })
-
