@@ -25,10 +25,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -41,6 +44,7 @@ import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.StoryItem
 import net.skyscanner.backpack.demo.data.ComponentRegistry
@@ -75,69 +79,30 @@ class MainActivity : BpkBaseActivity() {
 
     setContent {
       BpkTheme {
-        Column() {
+        Column {
+          val context = LocalContext.current
           BpkTopNavBar(
             navIcon = NavIcon.None,
             title = stringResource(R.string.app_name),
-//            modifier = Modifier.background(color = BpkColor.SkyBlue),
             actions = listOf(
-              IconAction(icon = BpkIcon.Settings, contentDescription = stringResource(R.string.settings_title), onClick = {})
+              IconAction(icon = BpkIcon.Settings, contentDescription = stringResource(R.string.settings_title), onClick = {
+                val intent = Intent(context, SettingsActivity::class.java)
+                context.startActivity(intent)
+              })
             )
           )
-          LazyColumn() {
+          LazyColumn {
             item {
-              BpkText(
-                text = "Tokens".uppercase(),
-                modifier = Modifier
-                  .fillMaxWidth()
-                  .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-                color = BpkTheme.colors.textSecondary,
-              )
+              ComponentsTitle(stringResource(R.string.tokens_title))
             }
             items(ComponentRegistry.TOKENS.values.toList()) {
-              val context = LocalContext.current
-              Row(
-                modifier = Modifier
-                  .fillMaxWidth()
-                  .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                  .clickable {
-                    val intent = Intent(context, ComponentDetailActivity::class.java)
-                    intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, it.name)
-                    context.startActivity(intent)
-                  }
-              ) {
-                BpkText(text = it.name)
-                if (hasComposeNodes(item = it)) {
-                  BpkBadge(text = "Compose", type = BpkBadgeType.Success, modifier = Modifier.padding(start = 16.dp))
-                }
-              }
+              ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
             }
             item {
-              BpkText(
-                text = "Components".uppercase(),
-                modifier = Modifier
-                  .fillMaxWidth()
-                  .padding(start = 16.dp, top = 16.dp, end = 16.dp),
-                color = BpkTheme.colors.textSecondary,
-              )
+              ComponentsTitle(title = stringResource(R.string.components_title))
             }
             items(ComponentRegistry.COMPONENTS.values.toList()) {
-              val context = LocalContext.current
-              Row(
-                modifier = Modifier
-                  .fillMaxWidth()
-                  .padding(start = 16.dp, top = 16.dp, end = 16.dp)
-                  .clickable {
-                    val intent = Intent(context, ComponentDetailActivity::class.java)
-                    intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, it.name)
-                    context.startActivity(intent)
-                  }
-              ) {
-                BpkText(text = it.name)
-                if (hasComposeNodes(item = it)) {
-                  BpkBadge(text = "Compose", type = BpkBadgeType.Success, modifier = Modifier.padding(start = 16.dp))
-                }
-              }
+              ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
             }
           }
         }
@@ -148,11 +113,62 @@ class MainActivity : BpkBaseActivity() {
   }
 
   @Composable
+  fun ComponentItem(
+    title: String,
+    showComposeBadge: Boolean,
+    modifier: Modifier = Modifier,
+  ) {
+    val context = LocalContext.current
+    Column(
+      modifier = modifier
+        .clickable {
+          val intent = Intent(context, ComponentDetailActivity::class.java)
+          intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, title)
+          context.startActivity(intent)
+        }
+        .height(56.dp)
+        .fillMaxWidth()
+        .padding(horizontal = BpkDimension.Spacing.Lg),
+    ) {
+
+      Row(
+        modifier = Modifier.weight(1f),
+        verticalAlignment = Alignment.CenterVertically,
+      ) {
+        BpkText(text = title, style = BpkTheme.typography.bodyLongform)
+        if (showComposeBadge) {
+          BpkBadge(
+            text = stringResource(R.string.story_badge_compose),
+            type = BpkBadgeType.Success,
+            modifier = Modifier.padding(start = BpkDimension.Spacing.Base)
+          )
+        }
+      }
+      Divider()
+    }
+  }
+
+  @Composable
+  fun ComponentsTitle(title: String, modifier: Modifier = Modifier) {
+    BpkText(
+      text = title.uppercase(),
+      modifier = modifier
+        .fillMaxWidth()
+        .padding(
+          start = BpkDimension.Spacing.Lg,
+          top = BpkDimension.Spacing.Lg,
+          end = BpkDimension.Spacing.Base,
+          bottom = BpkDimension.Spacing.Lg
+        ),
+      color = BpkTheme.colors.textSecondary,
+      style = BpkTheme.typography.label2,
+    )
+  }
+
   private fun Map.Entry<String, NodeItem>.toStoryItem(): StoryItem {
     return StoryItem(key, hasComposeNodes(value))
   }
 
-  @Composable
   private fun hasComposeNodes(item: RegistryItem): Boolean {
     if (item is ComposeNode) {
       return true
