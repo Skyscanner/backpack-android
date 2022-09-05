@@ -146,18 +146,3 @@ jobs:
         with:
           branch: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Notify PR of snapshots success
-        if: steps.check.outputs.triggered == 'true' && ${{ success() }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `'${{ matrix.variant }}' snapshots were updated. Please review it.
-
-              >'${{ steps.snapshotsTests.outputs.CHANGED_FILES }}'`
-            })
-
