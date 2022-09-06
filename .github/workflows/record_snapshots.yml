@@ -24,7 +24,6 @@ jobs:
       pull-requests: write
       contents: write
       issues: write
-      statuses: write
     timeout-minutes: 30
 
     strategy:
@@ -147,10 +146,3 @@ jobs:
           branch: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-  Build:
-    name: Build
-    needs: [Snapshots]
-    permissions:
-      statuses: write
-      pull-requests: write
-    uses: ./.github/workflows/_build.yml
