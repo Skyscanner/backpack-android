@@ -7,7 +7,7 @@ root = true
 [*]
 # Indentation style
 # Possible values - tab, space
-indent_style = space
+indent_style = tab
 
 # Indentation size in single-spaced characters
 # Possible values - an integer, tab
