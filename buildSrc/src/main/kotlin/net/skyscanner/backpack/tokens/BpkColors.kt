@@ -59,7 +59,7 @@ object BpkColor {
     @OptIn(ExperimentalStdlibApi::class)
     private fun BpkColorModel.hasSemanticSuffix(): Boolean {
       val name = name.lowercase()
-      return semanticSuffixes.any { name.endsWith(it) }
+      return semanticSuffixes.any { name.endsWith("_$it") && !name.endsWith("_on_$it") }
     }
 
     private val semanticSuffixes = listOf("light", "dark", "day", "night")

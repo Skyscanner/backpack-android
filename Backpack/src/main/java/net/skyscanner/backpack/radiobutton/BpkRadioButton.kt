@@ -24,7 +24,6 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatRadioButton
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
@@ -50,9 +49,8 @@ open class BpkRadioButton @JvmOverloads constructor(
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     var radioButtonDefaultColor = context.getColor(R.color.bpkTextSecondary)
-    var radioButtonCheckedColor = BpkTheme.getPrimaryColor(context)
-    var radioButtonDisabledColor = context.getColor(R.color.__textDisabled)
-    val textDisabledColor = context.getColor(R.color.bpkSkyGrayTint04)
+    var radioButtonCheckedColor = context.getColor(R.color.bpkCoreAccent)
+    var radioButtonDisabledColor = context.getColor(R.color.bpkTextDisabled)
     val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(
       attrs,
@@ -75,7 +73,7 @@ open class BpkRadioButton @JvmOverloads constructor(
     setTextColor(
       ColorStateList(
         arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
-        intArrayOf(textDisabledColor, textEnabledColor),
+        intArrayOf(radioButtonDisabledColor, textEnabledColor),
       )
     )
 
