@@ -2,7 +2,7 @@
 <resources>
 
   <style name="BpkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-    <item name="bpkPrimaryColor">@color/bpkPrimary</item>
+    <item name="bpkPrimaryColor">@color/bpkCoreAccent</item>
     <item name="colorPrimary">?attr/bpkPrimaryColor</item>
     <item name="colorPrimaryDark">@color/bpkSkyBlueShade01</item>
     <item name="colorAccent">?attr/bpkPrimaryColor</item>

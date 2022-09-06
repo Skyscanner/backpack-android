@@ -22,8 +22,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.graphics.ColorUtils
-import com.google.android.material.color.MaterialColors
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -53,19 +51,14 @@ open class BpkSwitch @JvmOverloads constructor(
   }
 
   fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val textDisabledColor = context.getColor(R.color.__textDisabled)
+    val textDisabledColor = context.getColor(R.color.bpkTextDisabled)
     val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
-      val primaryColor = context.getColor(R.color.bpkPrimary)
+      val primaryColor = context.getColor(R.color.bpkCoreAccent)
       val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, primaryColor)
-      val trackCheckedColor = if (checkedColor == primaryColor) {
-        context.getColor(R.color.bpkSkyBlueTint03)
-      } else {
-        ColorUtils.setAlphaComponent(checkedColor, (MaterialColors.ALPHA_DISABLED * 255).toInt())
-      }
 
-      trackTintList = getColorStateList(trackCheckedColor, context.getColor(R.color.__switchTrackDisabled))
-      thumbTintList = getColorStateList(checkedColor, context.getColor(R.color.bpkWhite))
+      trackTintList = context.getColorStateList(R.color.bpkSurfaceHighlight)
+      thumbTintList = getColorStateList(checkedColor, context.getColor(R.color.bpkTextOnDark))
     }
     setTextColor(
       ColorStateList(

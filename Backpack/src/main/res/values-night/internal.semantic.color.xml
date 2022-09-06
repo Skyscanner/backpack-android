@@ -16,7 +16,6 @@
   <color name="__buttonDestructiveRipple">#19FFFFFF</color>
   <color name="__buttonLinkRipple">#33FFFFFF</color>
   <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
-  <color name="__switchTrackDisabled">@color/bpkBlackTint03</color>
   <color name="__starRatingStarColor">@color/bpkBlackTint05</color>
   <color name="__starRatingStarColorFilled">@color/bpkErfoud</color>
   <color name="__textFieldTextDisabled">@color/bpkBlackTint06</color>
@@ -35,7 +34,6 @@
   <color name="__chipOnDarkBackground">@color/bpkBlackTint04</color>
   <color name="__chipDisabled">@color/bpkBlackTint06</color>
 
-  <color name="__textDisabled">@color/bpkBlackTint06</color>
   <color name="__skeletonBackground">@color/bpkBlackTint02</color>
   <color name="__skeletonShimmerPrimary">#00000000</color>
   <color name="__skeletonShimmerSecondary">#33000000</color>

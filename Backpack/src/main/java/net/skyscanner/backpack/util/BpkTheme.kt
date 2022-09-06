@@ -46,6 +46,7 @@ class BpkTheme {
      */
     @JvmStatic
     @ColorInt
+    @Deprecated("Use bpkCoreAccent instead")
     fun getPrimaryColor(context: Context) =
       resolveThemeColor(context, R.attr.bpkPrimaryColor)
         // This should only ever happen if the value defined for the color is wrong as the property
