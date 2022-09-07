@@ -82,10 +82,10 @@ open class BpkTextField @JvmOverloads constructor(
     BpkText.getFont(context, BpkText.TextStyle.BodyDefault).applyTo(paint)
 
     var textColor = context.getColor(R.color.bpkTextPrimary)
-    var textColorDisabled = context.getColor(R.color.__textFieldTextDisabled)
-    var hintNormalColor = context.getColor(R.color.__textFieldHint)
-    var hintFocusedColor = context.getColor(R.color.__textFieldHint)
-    var iconColor = context.getColor(R.color.__textFieldIcon)
+    var textColorDisabled = context.getColor(R.color.bpkTextDisabled)
+    var hintNormalColor = context.getColor(R.color.bpkTextDisabled)
+    var hintFocusedColor = context.getColor(R.color.bpkTextDisabled)
+    var iconColor = context.getColor(R.color.bpkTextSecondary)
 
     var background: Drawable = AppCompatResources.getDrawable(context, R.drawable.bpk_text_field_background)!!
 
@@ -117,7 +117,7 @@ open class BpkTextField @JvmOverloads constructor(
         pressedColor = hintNormalColor,
         focusedColor = hintFocusedColor,
         activatedColor = hintFocusedColor,
-        disabledColor = textColorDisabled,
+        disabledColor = context.getColor(R.color.bpkTextDisabled),
       )
     )
 

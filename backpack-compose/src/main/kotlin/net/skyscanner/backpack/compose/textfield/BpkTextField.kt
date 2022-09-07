@@ -60,11 +60,9 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.ExclamationCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
-import net.skyscanner.backpack.compose.utils.dynamicColorOf
 import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
@@ -135,14 +133,14 @@ fun BpkTextField(
         width = 1.dp, shape = Shape,
         color = animateColorAsState(
           when {
-            status is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-            status is BpkFieldStatus.Error -> BpkTheme.colors.systemRed
-            isFocused -> FocusedColor
-            else -> dynamicColorOf(BpkColor.SkyGrayTint03, BpkColor.BlackTint05)
+            status is BpkFieldStatus.Disabled -> BpkTheme.colors.canvasContrast
+            status is BpkFieldStatus.Error -> BpkTheme.colors.textError
+            isFocused -> BpkTheme.colors.coreAccent
+            else -> BpkTheme.colors.line
           }
         ).value,
       )
-      .background(dynamicColorOf(BpkColor.White, BpkColor.BlackTint02), Shape)
+      .background(BpkTheme.colors.surfaceDefault, Shape)
       .padding(horizontal = BpkSpacing.Md),
   ) {
 
@@ -172,7 +170,7 @@ fun BpkTextField(
         color = animateColorAsState(
           when (status) {
             is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-            else -> BpkTheme.colors.textSecondary
+            else -> BpkTheme.colors.textDisabled
           }
         ).value,
         maxLines = maxLines,
@@ -200,14 +198,14 @@ fun BpkTextField(
         maxLines = maxLines,
         visualTransformation = visualTransformation,
         interactionSource = interactionSource,
-        cursorBrush = SolidColor(FocusedColor),
+        cursorBrush = SolidColor(BpkTheme.colors.coreAccent),
       )
     }
 
     var lastIcon by remember { mutableStateOf<Pair<BpkIcon, Color>?>(null) }
     when (status) {
-      is BpkFieldStatus.Validated -> lastIcon = Pair(BpkIcon.TickCircle, BpkColor.Monteverde)
-      is BpkFieldStatus.Error -> lastIcon = Pair(BpkIcon.ExclamationCircle, BpkTheme.colors.systemRed)
+      is BpkFieldStatus.Validated -> lastIcon = Pair(BpkIcon.TickCircle, BpkTheme.colors.statusSuccessSpot)
+      is BpkFieldStatus.Error -> lastIcon = Pair(BpkIcon.ExclamationCircle, BpkTheme.colors.statusDangerSpot)
       else -> Unit // do nothing
     }
 
@@ -231,4 +229,3 @@ fun BpkTextField(
 }
 
 private val Shape = RoundedCornerShape(BpkBorderRadius.Sm)
-private val FocusedColor = BpkColor.SkyBlueTint01
