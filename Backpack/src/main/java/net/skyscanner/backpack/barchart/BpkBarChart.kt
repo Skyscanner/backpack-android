@@ -109,6 +109,11 @@ open class BpkBarChart @JvmOverloads constructor(
   data class Legend(
 
     /**
+     * This label will be used to represent selected bars and will use the selected colours from the palette.
+     */
+    val selectedTitle: CharSequence,
+
+    /**
      * This label will be used to represent inactive bars and will use the inactive colours from the palette.
      */
     val activeTitle: CharSequence,
@@ -116,7 +121,7 @@ open class BpkBarChart @JvmOverloads constructor(
     /**
      * This label will be used to represent active bars and will use the active colours from the palette.
      */
-    val inactiveTitle: CharSequence
+    val inactiveTitle: CharSequence,
   )
 
   /**
@@ -147,7 +152,7 @@ open class BpkBarChart @JvmOverloads constructor(
     val chartForeground: ColorStateList,
     val chartLine: ColorStateList,
     val popupBackground: ColorStateList,
-    val popupText: ColorStateList
+    val popupText: ColorStateList,
   )
 
   interface OnBarClickListener : Consumer<Column> {
@@ -167,11 +172,11 @@ open class BpkBarChart @JvmOverloads constructor(
     var columnTitle = context.getColorStateList(R.color.bpk_barchart_title_selector)
     var columnSubtitle = context.getColorStateList(R.color.bpk_barchart_subtitle_selector)
     var groupTitle = context.getColorStateList(R.color.bpkTextPrimary)
-    var chartBackground = context.getColorStateList(R.color.bpkBackgroundSecondary)
+    var chartBackground = context.getColorStateList(R.color.bpkSurfaceHighlight)
     var chartForeground = context.getColorStateList(R.color.bpk_barchart_bar_selector)
-    var chartLine = context.getColorStateList(R.color.__barChartActivatedColor)
-    var popupBackground = context.getColorStateList(R.color.__barChartPopupBackgroundColor)
-    var popupText = context.getColorStateList(R.color.__barChartPopupTextColor)
+    var chartLine = context.getColorStateList(R.color.bpkCoreAccent)
+    var popupBackground = context.getColorStateList(R.color.bpkCoreAccent)
+    var popupText = context.getColorStateList(R.color.bpkTextPrimaryInverse)
 
     themedContext.theme.obtainStyledAttributes(
       attrs,

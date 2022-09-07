@@ -26,10 +26,6 @@
   <color name="__textInputLayoutHelperColor">@color/bpkSkyGrayTint04</color>
   <color name="__bottomNavUnselected">@color/bpkTextSecondaryDark</color>
 
-  <color name="__barChartInactivatedColor">@color/bpkSkyGrayTint04</color>
-  <color name="__barChartActivatedColor">@color/bpkGlencoe</color>
-  <color name="__barChartPopupBackgroundColor">@color/bpkSkyGrayTint04</color>
-  <color name="__barChartPopupTextColor">@color/bpkSkyBlueShade03</color>
   <color name="__chipSolidBackground">@color/bpkBlackTint03</color>
   <color name="__chipOnDarkBackground">@color/bpkBlackTint04</color>
   <color name="__chipDisabled">@color/bpkBlackTint06</color>
