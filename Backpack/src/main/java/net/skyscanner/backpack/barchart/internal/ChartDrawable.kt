@@ -22,9 +22,7 @@ import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.graphics.ColorFilter
 import android.graphics.Paint
-import android.graphics.Path
 import android.graphics.PixelFormat
-import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import net.skyscanner.backpack.util.getColorForState
 import net.skyscanner.backpack.util.withSave
@@ -46,8 +44,6 @@ internal class ChartDrawable(
     isDither = true
     style = Paint.Style.FILL_AND_STROKE
   }
-
-  private val triangle = Path()
 
   var value: Float = 0f
     set(value) {
@@ -98,18 +94,6 @@ internal class ChartDrawable(
   override fun onStateChange(state: IntArray?): Boolean =
     isStateful
 
-  override fun onBoundsChange(bounds: Rect) {
-    super.onBoundsChange(bounds)
-
-    val width = bounds.width().toFloat()
-
-    triangle.reset()
-    triangle.moveTo(0f, radius)
-    triangle.lineTo(bounds.centerX().toFloat(), 0f)
-    triangle.lineTo(width, radius)
-    triangle.lineTo(0f, radius)
-  }
-
   override fun draw(canvas: Canvas) {
     val width = bounds.width().toFloat()
     val height = bounds.height().toFloat()
@@ -118,12 +102,6 @@ internal class ChartDrawable(
     foregroundPaint.color = foreground.getColorForState(state)
 
     canvas.withSave {
-
-      if (value > 1.0f) {
-        canvas.drawPath(triangle, foregroundPaint)
-        canvas.clipRect(0f, radius, width, height)
-      }
-
       canvas.drawRoundRect(0f, 0f, width, height, radius, radius, backgroundPaint)
       val foregroundTop = totalRange - valueInPixels
       canvas.drawRoundRect(0f, foregroundTop, width, height, radius, radius, foregroundPaint)
