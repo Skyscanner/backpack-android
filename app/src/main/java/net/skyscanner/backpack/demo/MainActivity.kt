@@ -46,7 +46,6 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.Settings
-import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.StoryItem
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 import net.skyscanner.backpack.demo.data.ComposeNode
 import net.skyscanner.backpack.demo.data.NodeItem
@@ -66,32 +65,41 @@ class MainActivity : BpkBaseActivity() {
     super.onCreate(savedInstanceState)
     setContent {
       BpkTheme {
-        Column {
-          val context = LocalContext.current
-          BpkTopNavBar(
-            navIcon = NavIcon.None,
-            title = stringResource(R.string.app_name),
-            actions = listOf(
-              IconAction(icon = BpkIcon.Settings, contentDescription = stringResource(R.string.settings_title), onClick = {
-                val intent = Intent(context, SettingsActivity::class.java)
-                context.startActivity(intent)
-              })
-            )
+        ComponentScreen()
+      }
+    }
+  }
+
+  @Composable
+  fun ComponentScreen(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+      val context = LocalContext.current
+      BpkTopNavBar(
+        navIcon = NavIcon.None,
+        title = stringResource(R.string.app_name),
+        actions = listOf(
+          IconAction(
+            icon = BpkIcon.Settings,
+            contentDescription = stringResource(R.string.settings_title),
+            onClick = {
+              val intent = Intent(context, SettingsActivity::class.java)
+              context.startActivity(intent)
+            }
           )
-          LazyColumn {
-            item {
-              ComponentsTitle(stringResource(R.string.tokens_title))
-            }
-            items(ComponentRegistry.TOKENS.values.toList()) {
-              ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
-            }
-            item {
-              ComponentsTitle(title = stringResource(R.string.components_title))
-            }
-            items(ComponentRegistry.COMPONENTS.values.toList()) {
-              ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
-            }
-          }
+        )
+      )
+      LazyColumn {
+        item {
+          ComponentsTitle(stringResource(R.string.tokens_title))
+        }
+        items(ComponentRegistry.TOKENS.values.toList()) {
+          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
+        }
+        item {
+          ComponentsTitle(title = stringResource(R.string.components_title))
+        }
+        items(ComponentRegistry.COMPONENTS.values.toList()) {
+          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
         }
       }
     }
@@ -140,18 +148,12 @@ class MainActivity : BpkBaseActivity() {
       modifier = modifier
         .fillMaxWidth()
         .padding(
-          start = BpkDimension.Spacing.Lg,
-          top = BpkDimension.Spacing.Lg,
-          end = BpkDimension.Spacing.Base,
-          bottom = BpkDimension.Spacing.Lg
+          vertical = BpkDimension.Spacing.Base,
+          horizontal = BpkDimension.Spacing.Lg
         ),
       color = BpkTheme.colors.textSecondary,
       style = BpkTheme.typography.label2,
     )
-  }
-
-  private fun Map.Entry<String, NodeItem>.toStoryItem(): StoryItem {
-    return StoryItem(key, hasComposeNodes(value))
   }
 
   private fun hasComposeNodes(item: RegistryItem): Boolean {
