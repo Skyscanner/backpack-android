@@ -71,7 +71,7 @@ class MainActivity : BpkBaseActivity() {
   }
 
   @Composable
-  fun ComponentScreen(modifier: Modifier = Modifier) {
+  private fun ComponentScreen(modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
       val context = LocalContext.current
       BpkTopNavBar(
