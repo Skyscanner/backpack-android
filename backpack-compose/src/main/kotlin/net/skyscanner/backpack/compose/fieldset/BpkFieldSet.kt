@@ -95,7 +95,7 @@ fun BpkFieldSet(
             else -> BpkTheme.colors.textSecondary
           }
         ).value,
-        modifier = Modifier.padding(top = BpkSpacing.Md),
+        modifier = Modifier.padding(top =BpkSpacing.Md),
       )
     }
 
