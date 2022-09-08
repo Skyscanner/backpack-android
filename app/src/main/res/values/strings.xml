@@ -162,4 +162,6 @@
   <string name="body_text_skeleton_title">Body Text Skeleton</string>
   <string name="headline_skeleton_title">Headline Skeleton</string>
   <string name="shimmer_overlay_title">Shimmer Overlay</string>
+  <string name="tokens_title">Tokens</string>
+  <string name="components_title">Components</string>
 </resources>
