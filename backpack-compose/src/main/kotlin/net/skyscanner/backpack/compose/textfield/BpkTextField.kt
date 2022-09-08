@@ -133,7 +133,7 @@ fun BpkTextField(
         width = 1.dp, shape = Shape,
         color = animateColorAsState(
           when {
-            status is BpkFieldStatus.Disabled -> BpkTheme.colors.canvasContrast
+            status is BpkFieldStatus.Disabled -> BpkTheme.colors.surfaceHighlight
             status is BpkFieldStatus.Error -> BpkTheme.colors.textError
             isFocused -> BpkTheme.colors.coreAccent
             else -> BpkTheme.colors.line
@@ -167,12 +167,7 @@ fun BpkTextField(
 
       BpkText(
         text = placeholder ?: "",
-        color = animateColorAsState(
-          when (status) {
-            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-            else -> BpkTheme.colors.textDisabled
-          }
-        ).value,
+        color = BpkTheme.colors.textDisabled,
         maxLines = maxLines,
         modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
         style = BpkTheme.typography.bodyDefault,

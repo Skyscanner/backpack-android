@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-  <item android:color="@color/bpkCanvasContrast" android:state_enabled="false" />
+  <item android:color="@color/bpkSurfaceHighlight" android:state_enabled="false" />
   <item android:color="@color/bpkCoreAccent" android:state_focused="true" />
   <item android:color="@color/bpkTextError" app:state_error="true" />
   <item android:color="@color/bpkLine" />
