@@ -22,10 +22,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter
-import net.skyscanner.backpack.demo.StoryItemDecoration
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.platform.ComposeView
+import net.skyscanner.backpack.demo.BackpackDemoTheme
+import net.skyscanner.backpack.demo.compose.ComponentItem
 
 open class SubStory : Story() {
 
@@ -36,14 +37,17 @@ open class SubStory : Story() {
   ): View? {
     val stories = arguments?.getStringArray(STORIES) ?: savedInstanceState?.getStringArray(STORIES)
     if (stories != null) {
-      val view = inflater.inflate(R.layout.component_list, container, false)
-      val componentsList = view.findViewById<View>(R.id.componentsList) as RecyclerView
-      val allItems = mutableListOf<StoriesRecyclerViewAdapter.ListItem>()
-      allItems.addAll(stories.map { StoriesRecyclerViewAdapter.StoryItem(it) })
-
-      componentsList.adapter = StoriesRecyclerViewAdapter(allItems)
-      componentsList.addItemDecoration(StoryItemDecoration(requireContext()))
-      return view
+      return ComposeView(requireContext()).apply {
+        setContent {
+          BackpackDemoTheme {
+            LazyColumn() {
+              items(stories) {
+                ComponentItem(title = it)
+              }
+            }
+          }
+        }
+      }
     } else {
       throw IllegalStateException("Story has not been property initialized")
     }

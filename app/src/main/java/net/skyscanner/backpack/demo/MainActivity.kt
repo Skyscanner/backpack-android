@@ -21,31 +21,20 @@ package net.skyscanner.backpack.demo
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import net.skyscanner.backpack.compose.badge.BpkBadge
-import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.Settings
+import net.skyscanner.backpack.demo.compose.ComponentItem
+import net.skyscanner.backpack.demo.compose.ComponentsTitle
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 import net.skyscanner.backpack.demo.data.ComposeNode
 import net.skyscanner.backpack.demo.data.NodeItem
@@ -103,57 +92,6 @@ class MainActivity : BpkBaseActivity() {
         }
       }
     }
-  }
-
-  @Composable
-  fun ComponentItem(
-    title: String,
-    showComposeBadge: Boolean,
-    modifier: Modifier = Modifier,
-  ) {
-    val context = LocalContext.current
-    Column(
-      modifier = modifier
-        .clickable {
-          val intent = Intent(context, ComponentDetailActivity::class.java)
-          intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, title)
-          context.startActivity(intent)
-        }
-        .height(56.dp)
-        .fillMaxWidth()
-        .padding(horizontal = BpkDimension.Spacing.Lg),
-    ) {
-
-      Row(
-        modifier = Modifier.weight(1f),
-        verticalAlignment = Alignment.CenterVertically,
-      ) {
-        BpkText(text = title, style = BpkTheme.typography.bodyLongform)
-        if (showComposeBadge) {
-          BpkBadge(
-            text = stringResource(R.string.story_badge_compose),
-            type = BpkBadgeType.Success,
-            modifier = Modifier.padding(start = BpkDimension.Spacing.Base)
-          )
-        }
-      }
-      Divider()
-    }
-  }
-
-  @Composable
-  fun ComponentsTitle(title: String, modifier: Modifier = Modifier) {
-    BpkText(
-      text = title.uppercase(),
-      modifier = modifier
-        .fillMaxWidth()
-        .padding(
-          vertical = BpkDimension.Spacing.Base,
-          horizontal = BpkDimension.Spacing.Lg
-        ),
-      color = BpkTheme.colors.textSecondary,
-      style = BpkTheme.typography.label2,
-    )
   }
 
   private fun hasComposeNodes(item: RegistryItem): Boolean {

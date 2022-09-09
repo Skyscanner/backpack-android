@@ -373,7 +373,6 @@ object ComponentRegistry {
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_COMPOSE composeStory { ThemeStory() },
-        TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
       )
     ),
     "Spinner" story NodeData(
