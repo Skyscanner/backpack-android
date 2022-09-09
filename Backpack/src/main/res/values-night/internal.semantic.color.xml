@@ -18,12 +18,6 @@
   <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
   <color name="__starRatingStarColor">@color/bpkBlackTint05</color>
   <color name="__starRatingStarColorFilled">@color/bpkErfoud</color>
-  <color name="__textFieldTextDisabled">@color/bpkBlackTint06</color>
-  <color name="__textFieldHint">@color/bpkSkyGrayTint04</color>
-  <color name="__textFieldIcon">@color/bpkBlackTint06</color>
-  <color name="__textFieldBorder">@color/bpkBlackTint05</color>
-  <color name="__textFieldBorderDisabled">@color/bpkBlackTint03</color>
-  <color name="__textInputLayoutHelperColor">@color/bpkSkyGrayTint04</color>
   <color name="__bottomNavUnselected">@color/bpkTextSecondaryDark</color>
 
   <color name="__chipSolidBackground">@color/bpkBlackTint03</color>
