@@ -22,8 +22,6 @@
   <color name="__buttonLinkRipple">#33000000</color>
   <color name="__buttonPrimaryOnLightRipple">#33FFFFFF</color>
   <color name="__dialogBackground">@color/bpkWhite</color>
-  <color name="__starRatingStarColor">@color/bpkSkyGrayTint04</color>
-  <color name="__starRatingStarColorFilled">@color/bpkKolkata</color>
 
   <color name="__chipSolidBackground">@color/bpkSkyGrayTint06</color>
   <color name="__chipOnDarkBackground">@color/bpkWhite</color>
