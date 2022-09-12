@@ -111,7 +111,7 @@ public class BpkColors private constructor(
       privateChipDefaultOnBackground: Color = Color(0xFF05203C),
       privateChipDefaultPressedBackground: Color = Color(0xFFC6CCD4),
       privateChipDisabledBackground: Color = Color(0xFFDDE1E4),
-      privateChipOnDarkNormalBackground: Color = Color(0xFFFFFFFF33),
+      privateChipOnDarkNormalBackground: Color = Color(0x33FFFFFF),
       privateChipOnDarkOnBackground: Color = Color(0xFFFFFFFF),
       privateChipOnDarkPressedBackground: Color = Color(0xFFC6CCD4),
       scrim: Color = Color(0xFF02122C),

@@ -93,9 +93,6 @@ private fun parseColors(
   val props = source.getValue("props") as Map<String, Map<String, String>>
   val data = props.filter { (_, value) -> value["type"] == "color" }
 
-  fun String.trimColor(): String =
-    removePrefix("#").removeSuffix("ff")
-
   fun String.trimName(): String =
     removePrefix("COLOR_").removeSuffix("_COLOR")
 
@@ -114,8 +111,8 @@ private fun parseColors(
     .map {
       BpkColorModel(
         name = it.key.trimName(),
-        defaultValue = it.value.getValue("value").trimColor(),
-        darkValue = it.value["darkValue"]?.trimColor(),
+        defaultValue = it.value.getValue("value"),
+        darkValue = it.value["darkValue"],
         defaultReference = resolveReference(it.value["originalValue"], isDark = false)?.trimReference()?.trimName(),
         darkReference = resolveReference(it.value["originalDarkValue"], isDark = true)?.trimReference()?.trimName(),
         deprecated = it.value["deprecated"].toBoolean()
@@ -156,8 +153,7 @@ private fun deprecationProperty() : PropertySpec =
     .build()
 
 @OptIn(ExperimentalStdlibApi::class)
-private fun String.toHexColor() =
-  "0xFF${uppercase()}"
+private fun String.toHexColor() = uppercase().run {"0x${substring(7)}${substring(1, 7)}" }
 
 private fun toStaticCompose(
   source: BpkColors,
