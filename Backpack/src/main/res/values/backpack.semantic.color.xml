@@ -90,4 +90,18 @@
 
 	<color name="bpkPrimary">#0770e3</color>
 
+	<color name="bpkPrivateChipOnDarkNormalBackground">#ffffff</color>
+
+	<color name="bpkPrivateChipOnDarkPressedBackground">#c6ccd4</color>
+
+	<color name="bpkPrivateChipOnDarkOnBackground">#ffffff</color>
+
+	<color name="bpkPrivateChipDefaultNormalBackground">#dddde5</color>
+
+	<color name="bpkPrivateChipDefaultOnBackground">#05203c</color>
+
+	<color name="bpkPrivateChipDisabledBackground">#dde1e4</color>
+
+	<color name="bpkPrivateChipDefaultPressedBackground">#c6ccd4</color>
+
  </resources>
