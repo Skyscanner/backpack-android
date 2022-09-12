@@ -61,7 +61,6 @@
     "merge-stream": "^2.0.0",
     "prettier": "^2.3.2",
     "svg2vectordrawable": "^2.4.0",
-    "through2": "^4.0.2",
-    "tinycolor2": "^1.4.1"
+    "through2": "^4.0.2"
   }
 }
