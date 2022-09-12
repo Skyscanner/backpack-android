@@ -54,7 +54,7 @@ fun BpkSpinner(
     color = when (style) {
       BpkSpinnerStyle.TextPrimary -> BpkTheme.colors.textPrimary
       BpkSpinnerStyle.Disabled -> BpkTheme.colors.textDisabled
-      BpkSpinnerStyle.OnDarkSurface -> Color.White
+      BpkSpinnerStyle.OnDarkSurface -> BpkTheme.colors.textOnDark
     }
   )
 }

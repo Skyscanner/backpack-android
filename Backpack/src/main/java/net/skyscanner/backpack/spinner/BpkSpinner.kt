@@ -59,9 +59,9 @@ open class BpkSpinner @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
   private val colors = arrayOf(
-    R.color.bpkPrimary,
-    R.color.bpkWhite,
-    R.color.bpkSkyGrayTint01
+    R.color.bpkCoreAccent,
+    R.color.bpkTextOnDark,
+    R.color.bpkTextPrimary
   )
 
   private val animationsEnabled =
