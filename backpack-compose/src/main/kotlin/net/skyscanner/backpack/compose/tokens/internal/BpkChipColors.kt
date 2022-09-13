@@ -48,7 +48,7 @@ internal object BpkChipColors {
 
   internal val onDarkOnBackground: Color
     @Composable
-    get() = dynamicColorOf(Color(0xFFFFFFFF), Color(0xFF0B121D))
+    get() = dynamicColorOf(Color(0xFFFFFFFF), Color(0xFF054184))
 
   internal val onDarkPressedBackground: Color
     @Composable
