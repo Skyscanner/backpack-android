@@ -43,6 +43,17 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
     }
   }
 
+  data class KotlinFiles(
+    val srcDir: String,
+    val pkg: String,
+  ) : BpkOutput<List<TypeSpec>>() {
+
+    override fun invoke(typeSpecs: List<TypeSpec>): Boolean {
+      typeSpecs.forEach { typeSpec -> KotlinFile(srcDir, pkg).invoke(typeSpec) }
+      return true
+    }
+  }
+
   data class KotlinExtensionFile(
     val srcDir: String,
     val pkg: String,
