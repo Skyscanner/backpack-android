@@ -164,4 +164,8 @@
   <string name="shimmer_overlay_title">Shimmer Overlay</string>
   <string name="tokens_title">Tokens</string>
   <string name="components_title">Components</string>
+  <string name="spinner_textPrimary">TextPrimary</string>
+  <string name="spinner_disabled">Disabled</string>
+  <string name="spinner_onDarkSurface">OnDarkSurface</string>
+  <string name="generic_small">Small</string>
 </resources>

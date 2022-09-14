@@ -378,13 +378,7 @@ object ComponentRegistry {
     "Spinner" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData(
-          { children -> SubStory of children },
-          mapOf(
-            "Default" story NodeData { Story of R.layout.fragment_spinner },
-            "Small" story NodeData { Story of R.layout.fragment_spinner_small }
-          )
-        ),
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_spinner },
         TAB_TITLE_COMPOSE composeStory { SpinnerStory() },
       )
     ),
