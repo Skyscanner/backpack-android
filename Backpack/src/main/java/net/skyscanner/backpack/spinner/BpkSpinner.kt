@@ -59,9 +59,9 @@ open class BpkSpinner @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
   private val colors = arrayOf(
-    R.color.bpkCoreAccent,
-    R.color.bpkTextPrimary,
-    R.color.bpkTextOnDark,
+    R.color.bpkPrimary,
+    R.color.bpkWhite,
+    R.color.bpkSkyGrayTint01,
     R.color.bpkTextPrimary,
     R.color.bpkTextDisabled,
     R.color.bpkTextOnDark,
@@ -144,8 +144,8 @@ open class BpkSpinner @JvmOverloads constructor(
 
   enum class Type {
     @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) PRIMARY,
-    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) LIGHT,
-    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("OnDarkSurface")) DARK,
+    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("OnDarkSurface")) LIGHT,
+    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) DARK,
     TextPrimary,
     Disabled,
     OnDarkSurface,
