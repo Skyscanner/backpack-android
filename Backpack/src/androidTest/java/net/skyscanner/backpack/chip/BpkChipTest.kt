@@ -91,27 +91,4 @@ class BpkChipTest {
     chip.toggle()
     Assert.assertEquals(context.getColor(R.color.bpkSkyGrayTint04), chip.currentTextColor)
   }
-
-  @Test
-  fun test_set_chipBackgroundColor() {
-
-    val chip = BpkChip(context).apply {
-      Assert.assertEquals(context.getColor(R.color.__chipSolidBackground), chipBackgroundColor)
-      Assert.assertNotEquals(context.getColor(R.color.bpkTextSecondary), chipBackgroundColor)
-      chipBackgroundColor = context.getColor(R.color.bpkTextSecondary)
-    }
-
-    Assert.assertEquals(context.getColor(R.color.bpkTextSecondary), chip.chipBackgroundColor)
-  }
-
-  @Test
-  fun chipSelectedBackgroundColor() {
-
-    val chip = BpkChip(context).apply {
-      Assert.assertEquals(context.getColor(R.color.bpkSkyBlue), selectedBackgroundColor)
-      selectedBackgroundColor = context.getColor(R.color.bpkErfoud)
-    }
-
-    Assert.assertEquals(context.getColor(R.color.bpkErfoud), chip.selectedBackgroundColor)
-  }
 }
