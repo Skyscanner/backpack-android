@@ -21,7 +21,6 @@ package net.skyscanner.backpack.chip
 import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.TestActivity
 import org.junit.Assert
 import org.junit.Before
@@ -44,41 +43,16 @@ class BpkChipTest {
   }
 
   @Test
-  fun test_message() {
-    val chip = BpkChip(context).apply {
-      text = "Message"
-    }
-    Assert.assertEquals("Message", chip.text.toString())
-    Assert.assertEquals(context.getColor(R.color.bpkTextPrimary), chip.currentTextColor)
-  }
-
-  @Test
-  fun test_selected_state() {
-    val chip = BpkChip(context).apply {
-      isSelected = true
-    }
-    Assert.assertEquals(context.getColor(R.color.bpkWhite), chip.currentTextColor)
-  }
-
-  @Test
-  fun test_disabled_state() {
-    val chip = BpkChip(context).apply {
-      disabled = true
-    }
-    Assert.assertEquals(context.getColor(R.color.bpkSkyGrayTint04), chip.currentTextColor)
-  }
-
-  @Test
   fun test_toggle() {
     val chip = BpkChip(context).apply {
       isSelected = false
     }
 
     chip.toggle()
-    Assert.assertEquals(context.getColor(R.color.bpkWhite), chip.currentTextColor)
+    Assert.assertTrue(chip.isSelected)
 
     chip.toggle()
-    Assert.assertEquals(context.getColor(R.color.bpkTextPrimary), chip.currentTextColor)
+    Assert.assertFalse(chip.isSelected)
   }
 
   @Test
@@ -89,6 +63,6 @@ class BpkChipTest {
     }
 
     chip.toggle()
-    Assert.assertEquals(context.getColor(R.color.bpkSkyGrayTint04), chip.currentTextColor)
+    Assert.assertFalse(chip.isSelected)
   }
 }
