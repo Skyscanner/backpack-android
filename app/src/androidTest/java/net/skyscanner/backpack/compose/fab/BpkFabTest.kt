@@ -30,7 +30,7 @@ import org.junit.runner.RunWith
 class BpkFabTest : BpkSnapshotTest() {
   @Before
   fun setup() {
-    setDimensions(height = 100, width = 200)
+    setDimensions(height = 200, width = 200)
   }
 
   @Test
