@@ -40,16 +40,19 @@ internal fun chipRoundedRect(
 internal fun chipColors(
   selected: Int,
   default: Int,
+  pressed: Int,
   disabled: Int,
 ) = ColorStateList(
   arrayOf(
     intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
-    intArrayOf(android.R.attr.state_enabled),
     intArrayOf(-android.R.attr.state_enabled),
+    intArrayOf(android.R.attr.state_pressed),
+    intArrayOf(android.R.attr.state_enabled),
   ),
   intArrayOf(
     selected,
-    default,
     disabled,
+    pressed,
+    default,
   )
 )

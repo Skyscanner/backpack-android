@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -49,7 +50,10 @@ import net.skyscanner.backpack.demo.R
 @Composable
 @Preview
 fun ChipStory() {
-  Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+  Column(
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    modifier = Modifier.background(BpkTheme.colors.surfaceElevated),
+  ) {
     BpkChipStyle.values().forEach { style ->
       ChipsColumn(style)
     }
@@ -66,7 +70,7 @@ private fun ChipsColumn(
 
   Surface(
     modifier = modifier,
-    color = if (forceDarkBackground) BpkColor.SkyBlueShade02 else Color.Transparent,
+    color = if (forceDarkBackground) BpkTheme.colors.textOnLight else Color.Transparent,
     contentColor = if (forceDarkBackground) BpkColor.White else LocalContentColor.current,
   ) {
 

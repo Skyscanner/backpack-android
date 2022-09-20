@@ -31,52 +31,6 @@ import net.skyscanner.backpack.util.use
 
 internal sealed class BpkChipAppearances : BpkChipAppearance {
 
-  internal class Stroke(
-    private val context: Context,
-    attrs: AttributeSet?,
-    defStyleAttr: Int,
-  ) : BpkChipAppearances() {
-
-    override var selectedBackgroundColor: Int = context.getColor(R.color.bpkPrimaryLight)
-    override var backgroundColor: Int = context.getColor(R.color.bpkBackgroundElevation03)
-    override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
-    override var disabledBackgroundColor: Int = Color.TRANSPARENT
-    override val style = BpkChip.Style.Default // use default here to avoid breaking changes when `outline` is removed
-
-    override val background: Drawable
-      get() = chipRoundedRect(
-        context = context,
-        borderWidthDp = 1,
-        background = chipColors(
-          selected = selectedBackgroundColor,
-          default = backgroundColor,
-          disabled = disabledBackgroundColor,
-        ),
-        border = chipColors(
-          selected = selectedBackgroundColor,
-          default = context.getColor(R.color.bpkTextTertiary),
-          disabled = context.getColor(R.color.__chipDisabled),
-        ),
-      )
-
-    override val text: ColorStateList
-      get() = chipColors(
-        selected = context.getColor(R.color.bpkWhite),
-        default = textColor,
-        disabled = context.getColor(R.color.__chipDisabled),
-      )
-
-    init {
-      context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
-        .use {
-          backgroundColor = it.getColor(R.styleable.BpkChip_chipBackgroundColor, backgroundColor)
-          selectedBackgroundColor = it.getColor(R.styleable.BpkChip_chipSelectedBackgroundColor, selectedBackgroundColor)
-          disabledBackgroundColor = it.getColor(R.styleable.BpkChip_chipDisabledBackgroundColor, disabledBackgroundColor)
-          textColor = it.getColor(R.styleable.BpkChip_chipTextColor, textColor)
-        }
-    }
-  }
-
   internal sealed class Solid(
     private val context: Context,
   ) : BpkChipAppearances() {
@@ -88,6 +42,7 @@ internal sealed class BpkChipAppearances : BpkChipAppearance {
         background = chipColors(
           selected = selectedBackgroundColor,
           default = backgroundColor,
+          pressed = pressedBackgroundColor,
           disabled = disabledBackgroundColor,
         ),
         border = ColorStateList.valueOf(Color.TRANSPARENT),
@@ -95,9 +50,10 @@ internal sealed class BpkChipAppearances : BpkChipAppearance {
 
     override val text: ColorStateList
       get() = chipColors(
-        selected = context.getColor(R.color.bpkWhite),
+        selected = selectedTextColor,
         default = textColor,
-        disabled = context.getColor(R.color.__chipDisabled),
+        pressed = pressedTextColor,
+        disabled = context.getColor(R.color.bpkTextDisabled),
       )
 
     internal class Default(context: Context, typedArray: TypedArray?) : Solid(context) {
@@ -107,10 +63,13 @@ internal sealed class BpkChipAppearances : BpkChipAppearance {
         defStyleAttr: Int,
       ) : this(context, context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0))
 
-      override var selectedBackgroundColor: Int = context.getColor(R.color.bpkPrimaryLight)
-      override var backgroundColor: Int = context.getColor(R.color.__chipSolidBackground)
+      override var selectedBackgroundColor: Int = context.getColor(R.color.__privateChipDefaultOnBackground)
+      override var backgroundColor: Int = context.getColor(R.color.__privateChipDefaultNormalBackground)
+      override var pressedBackgroundColor: Int = context.getColor(R.color.__privateChipDefaultPressedBackground)
       override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
-      override var disabledBackgroundColor: Int = context.getColor(R.color.__chipSolidBackground)
+      override var pressedTextColor: Int = context.getColor(R.color.bpkTextPrimary)
+      override var selectedTextColor: Int = context.getColor(R.color.bpkTextOnDark)
+      override var disabledBackgroundColor: Int = context.getColor(R.color.__privateChipDisabledBackground)
       override val style = BpkChip.Style.Default
 
       init {
@@ -133,10 +92,13 @@ internal sealed class BpkChipAppearances : BpkChipAppearance {
         defStyleAttr: Int,
       ) : this(context, context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0))
 
-      override var selectedBackgroundColor: Int = context.getColor(R.color.bpkPrimaryLight)
-      override var backgroundColor: Int = context.getColor(R.color.__chipOnDarkBackground)
-      override var textColor: Int = context.getColor(R.color.bpkTextPrimary)
-      override var disabledBackgroundColor: Int = context.getColor(R.color.__chipSolidBackground)
+      override var selectedBackgroundColor: Int = context.getColor(R.color.__privateChipOnDarkOnBackground)
+      override var backgroundColor: Int = context.getColor(R.color.__privateChipOnDarkNormalBackground)
+      override var pressedBackgroundColor: Int = context.getColor(R.color.__privateChipOnDarkPressedBackground)
+      override var textColor: Int = context.getColor(R.color.bpkTextOnDark)
+      override var pressedTextColor: Int = context.getColor(R.color.bpkTextPrimary)
+      override var selectedTextColor: Int = context.getColor(R.color.bpkTextPrimary)
+      override var disabledBackgroundColor: Int = context.getColor(R.color.__privateChipDisabledBackground)
       override val style = BpkChip.Style.Default
 
       init {

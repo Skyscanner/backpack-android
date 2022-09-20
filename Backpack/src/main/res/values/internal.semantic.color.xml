@@ -23,10 +23,6 @@
   <color name="__buttonPrimaryOnLightRipple">#33FFFFFF</color>
   <color name="__dialogBackground">@color/bpkWhite</color>
 
-  <color name="__chipSolidBackground">@color/bpkSkyGrayTint06</color>
-  <color name="__chipOnDarkBackground">@color/bpkWhite</color>
-  <color name="__chipDisabled">@color/bpkSkyGrayTint04</color>
-
   <color name="__skeletonBackground">@color/bpkSkyGrayTint06</color>
   <color name="__skeletonShimmerPrimary">#00FFFFFF</color>
   <color name="__skeletonShimmerSecondary">#99FFFFFF</color>

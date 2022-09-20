@@ -18,10 +18,17 @@
 
 package net.skyscanner.backpack.compose.chip
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Deals
 import org.junit.Before
 import org.junit.Test
@@ -68,7 +75,9 @@ class BpkChipTest : BpkSnapshotTest() {
   fun notSelected_OnDark() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      BpkChip(text = "Chip", selected = false, style = BpkChipStyle.OnDark)
+      OnDarkBox {
+        BpkChip(text = "Chip", selected = false, style = BpkChipStyle.OnDark)
+      }
     }
   }
 
@@ -76,7 +85,9 @@ class BpkChipTest : BpkSnapshotTest() {
   fun selected_OnDark() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      BpkChip(text = "Chip", selected = true, style = BpkChipStyle.OnDark)
+      OnDarkBox {
+        BpkChip(text = "Chip", selected = true, style = BpkChipStyle.OnDark)
+      }
     }
   }
 
@@ -84,7 +95,9 @@ class BpkChipTest : BpkSnapshotTest() {
   fun disabled_OnDark() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      BpkChip(text = "Chip", enabled = false, style = BpkChipStyle.OnDark)
+      OnDarkBox {
+        BpkChip(text = "Chip", enabled = false, style = BpkChipStyle.OnDark)
+      }
     }
   }
 
@@ -118,5 +131,10 @@ class BpkChipTest : BpkSnapshotTest() {
     composed {
       BpkChip(text = "Chip", icon = BpkIcon.Deals, type = BpkChipType.Dismiss)
     }
+  }
+
+  @Composable
+  private fun OnDarkBox(modifier: Modifier = Modifier, content: @Composable BoxScope.() -> Unit) {
+    Box(modifier = modifier.background(BpkTheme.colors.textOnLight).fillMaxSize(), content = content)
   }
 }
