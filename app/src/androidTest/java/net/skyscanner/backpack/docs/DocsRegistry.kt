@@ -94,6 +94,7 @@ object DocsRegistry {
     ViewScreenshot("Horizontal Nav - View", "default"),
     ComposeScreenshot("Horizontal Nav - Compose", "default"),
     ViewScreenshot("Floating Action Button", "default"),
+    ComposeScreenshot("Fab - Compose", "default"),
     ViewScreenshot("Nav Bar - View - Default", "expanded"),
     ViewScreenshot("Nav Bar - View - Default", "collapsed") { setupNavBarCollapsed() },
     ViewScreenshot("Nav Bar - View - With Menu", "navigation") { setupNavBarCollapsed() },
