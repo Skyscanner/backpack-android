@@ -135,6 +135,18 @@
   <string name="navigation_text_action">Text</string>
   <string name="navigation_search">Search</string>
 
+  <string name="badge_success">Success</string>
+  <string name="badge_warning">Warning</string>
+  <string name="badge_destructive">Destructive</string>
+  <string name="badge_normal">Normal</string>
+  <string name="badge_strong">Strong</string>
+  <string name="badge_inverse">Inverse</string>
+  <string name="badge_outline">Outline</string>
+  <string name="badge_apples">Apples</string>
+  <string name="badge_bananas">Bananas</string>
+  <string name="badge_strawberries">Strawberries</string>
+  <string name="badge_pears">Pears</string>
+
   <string name="chip_option">Option</string>
   <string name="chip_select">Select</string>
   <string name="chip_dismiss">Dismiss</string>

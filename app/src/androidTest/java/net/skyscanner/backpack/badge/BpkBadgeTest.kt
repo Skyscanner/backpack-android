@@ -34,14 +34,14 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBadgeDefault() {
+  fun default() {
     val badge = BpkBadge(testContext)
     badge.text = "Message"
     snap(badge)
   }
 
   @Test
-  fun screenshotTestBadgeSuccess() {
+  fun success() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Success
     badge.text = "Message"
@@ -49,7 +49,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBadgeDestructive() {
+  fun destructive() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Destructive
     badge.text = "Message"
@@ -57,36 +57,41 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBadgeInverse() {
+  fun inverse() {
+    setBackground(R.color.bpkCorePrimary)
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Inverse
     badge.text = "Message"
     snap(badge)
   }
+
   @Test
-  fun screenshotTestBadgeLight() {
+  fun normal() {
     val badge = BpkBadge(testContext)
-    badge.type = BpkBadge.Type.Light
+    badge.type = BpkBadge.Type.Normal
     badge.text = "Message"
     snap(badge)
   }
+
   @Test
-  fun screenshotTestBadgeDark() {
+  fun strong() {
     val badge = BpkBadge(testContext)
-    badge.type = BpkBadge.Type.Dark
+    badge.type = BpkBadge.Type.Strong
     badge.text = "Message"
     snap(badge)
   }
+
   @Test
-  fun screenshotTestBadgeWarning() {
+  fun warning() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Warning
     badge.text = "Message"
     snap(badge)
   }
+
   @Test
-  fun screenshotTestBadgeOutline() {
-    setBackground(R.color.bpkPrimary)
+  fun outline() {
+    setBackground(R.color.bpkCorePrimary)
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Outline
     badge.text = "Message"

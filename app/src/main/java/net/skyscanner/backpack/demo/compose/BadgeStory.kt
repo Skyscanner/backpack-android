@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.HelpCircle
@@ -59,8 +59,7 @@ private fun BadgeRow(
       .fillMaxWidth()
       .background(
         when (type) {
-          BpkBadgeType.Outline -> BpkColor.SkyBlue
-          BpkBadgeType.Inverse -> BpkColor.BlackTint01
+          BpkBadgeType.Outline, BpkBadgeType.Inverse -> BpkTheme.colors.corePrimary
           else -> Color.Transparent
         }
       )

@@ -11,6 +11,8 @@
       <enum name="inverse" value="5" />
       <enum name="outline" value="6" />
       <enum name="dark" value="7" />
+      <enum name="normal" value="8" />
+      <enum name="strong" value="9" />
     </attr>
     <!-- message to be displayed -->
     <attr name="message" format="string" />
