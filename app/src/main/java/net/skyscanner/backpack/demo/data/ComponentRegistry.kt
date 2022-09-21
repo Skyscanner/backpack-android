@@ -298,6 +298,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { FlareStory() },
       ),
     ),
+    "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
     "Horizontal Nav" story NodeData(
       { children -> TabStory of children },
       mapOf(
@@ -305,7 +306,6 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { HorizontalNavComposeStory() },
       )
     ),
-    "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
     "Map Markers" story NodeData(
       { children -> SubStory of children },
       mapOf(
