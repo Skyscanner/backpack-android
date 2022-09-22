@@ -37,15 +37,26 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 @Composable
 fun FloatingActionButton(
   onClick: () -> Unit,
-  icon: BpkIcon,
   contentDescription: String,
+  icon: BpkIcon,
   modifier: Modifier = Modifier,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   shape: Shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
   backgroundColor: Color = BpkTheme.colors.coreAccent,
   contentColor: Color = contentColorFor(backgroundColor),
 ) {
-  androidx.compose.material.FloatingActionButton(onClick = { /*TODO*/ }) {
-    BpkIcon(icon = icon, contentDescription = contentDescription, modifier = Modifier.padding(2.dp), size = BpkIconSize.Large)
+  androidx.compose.material.FloatingActionButton(
+    onClick = onClick,
+    interactionSource = interactionSource,
+    modifier = modifier,
+    shape = shape,
+    contentColor = contentColor
+  ) {
+    BpkIcon(
+      icon = icon,
+      contentDescription = contentDescription,
+      modifier = Modifier.padding(2.dp),
+      size = BpkIconSize.Large
+    )
   }
 }

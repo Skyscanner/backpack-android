@@ -6,7 +6,7 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-Example of a Fab:
+Example of a Floating Action Button:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.button.FloatingActionButton
