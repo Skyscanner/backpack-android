@@ -309,9 +309,7 @@ object ComponentRegistry {
     "Floating Action Button" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData {
-          Story of R.layout.fragment_fab
-        },
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_fab },
         TAB_TITLE_COMPOSE composeStory { BpkFabStory() },
       )
     ),

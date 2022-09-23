@@ -26,23 +26,40 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.button.FloatingActionButton
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import net.skyscanner.backpack.compose.fab.BpkFab
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Flight
 import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.compose.tokens.Star
+import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 fun BpkFabStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Xl),
-    verticalArrangement = Arrangement.Center
+    verticalArrangement = Arrangement.Center,
   ) {
-    FloatingActionButton(onClick = { /*TODO*/ }, icon = BpkIcon.Search, contentDescription = "Localised description")
+    val context = LocalContext.current
+    BpkFab(
+      onClick = { BpkToast.makeText(context, "Message", BpkToast.LENGTH_SHORT).show() },
+      icon = BpkIcon.Search,
+      contentDescription = stringResource(R.string.content_description),
+    )
     Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
-    FloatingActionButton(onClick = { /*TODO*/ }, icon = BpkIcon.Star, contentDescription = "Localised description")
+    BpkFab(
+      onClick = { BpkToast.makeText(context, "Message", BpkToast.LENGTH_SHORT).show() },
+      icon = BpkIcon.Star,
+      contentDescription = stringResource(R.string.content_description),
+    )
     Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
-    FloatingActionButton(onClick = { /*TODO*/ }, icon = BpkIcon.Flight, contentDescription = "Localised description")
+    BpkFab(
+      onClick = { BpkToast.makeText(context, "Message", BpkToast.LENGTH_SHORT).show() },
+      icon = BpkIcon.Flight,
+      contentDescription = stringResource(R.string.content_description),
+    )
   }
 }

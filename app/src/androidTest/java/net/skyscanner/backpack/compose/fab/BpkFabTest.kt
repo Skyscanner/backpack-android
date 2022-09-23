@@ -21,13 +21,15 @@ package net.skyscanner.backpack.compose.fab
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.BpkFabStory
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.Search
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkFabTest : BpkSnapshotTest() {
+
   @Before
   fun setup() {
     setDimensions(height = 200, width = 200)
@@ -35,6 +37,10 @@ class BpkFabTest : BpkSnapshotTest() {
 
   @Test
   fun default() = composed {
-    BpkFabStory()
+    BpkFab(
+      onClick = {},
+      icon = BpkIcon.Search,
+      contentDescription = "Localised description",
+    )
   }
 }

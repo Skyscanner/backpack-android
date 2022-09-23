@@ -17,46 +17,40 @@
  *
  */
 
-package net.skyscanner.backpack.compose.button
+package net.skyscanner.backpack.compose.fab
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
-fun FloatingActionButton(
+fun BpkFab(
   onClick: () -> Unit,
   contentDescription: String,
   icon: BpkIcon,
   modifier: Modifier = Modifier,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  shape: Shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
-  backgroundColor: Color = BpkTheme.colors.coreAccent,
-  contentColor: Color = contentColorFor(backgroundColor),
 ) {
-  androidx.compose.material.FloatingActionButton(
+  FloatingActionButton(
     onClick = onClick,
     interactionSource = interactionSource,
     modifier = modifier,
-    shape = shape,
-    contentColor = contentColor
+    shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
+    backgroundColor = BpkTheme.colors.coreAccent,
+    contentColor = contentColorFor(backgroundColor = BpkTheme.colors.coreAccent),
   ) {
     BpkIcon(
       icon = icon,
       contentDescription = contentDescription,
-      modifier = Modifier.padding(2.dp),
-      size = BpkIconSize.Large
+      size = BpkIconSize.Large,
     )
   }
 }

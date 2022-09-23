@@ -9,9 +9,13 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of a Floating Action Button:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.button.FloatingActionButton
+import net.skyscanner.backpack.compose.button.BpkFab
 
-FloatingActionButton {
+BpkFab(
+  onClick = { BpkToast.makeText(context, "Message", BpkToast.LENGTH_SHORT).show() },
+  icon = BpkIcon.Search,
+  contentDescription = stringResource(R.string.content_description),
+) {
     content()
 }
 ```
