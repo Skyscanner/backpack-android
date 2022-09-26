@@ -61,7 +61,7 @@ internal fun BpkDialogImpl(
       Surface(
         modifier = Modifier.padding(top = IconPadding),
         shape = BpkTheme.shapes.medium,
-        color = BpkTheme.colors.backgroundElevation01,
+        color = BpkTheme.colors.surfaceDefault,
       ) {
         DialogContent(
           title = title,
@@ -88,7 +88,7 @@ internal fun BpkFlareDialogImpl(
     Surface(
       modifier = Modifier.padding(top = IconPadding),
       shape = BpkTheme.shapes.medium,
-      color = BpkTheme.colors.backgroundElevation01,
+      color = BpkTheme.colors.surfaceDefault,
     ) {
       Column {
         BpkFlare(content = content)
@@ -111,11 +111,17 @@ private fun DialogContent(title: String, text: String, buttons: List<Dialog.Butt
 
 @Composable
 private fun DialogTextContent(title: String, text: String) {
-  BpkText(text = title, style = BpkTheme.typography.heading3, textAlign = TextAlign.Center)
+  BpkText(
+    text = title,
+    style = BpkTheme.typography.heading3,
+    textAlign = TextAlign.Center,
+    color = BpkTheme.colors.textPrimary,
+  )
   BpkText(
     modifier = Modifier.padding(top = BpkDimension.Spacing.Base, bottom = BpkDimension.Spacing.Lg),
     text = text,
     textAlign = TextAlign.Center,
+    color = BpkTheme.colors.textPrimary,
   )
 }
 
@@ -142,13 +148,18 @@ private fun DialogIcon(icon: Dialog.Icon?) {
     Box(
       modifier = Modifier
         .clip(CircleShape)
-        .background(BpkTheme.colors.backgroundElevation01)
+        .background(BpkTheme.colors.surfaceDefault)
         .padding(IconBorder)
         .background(icon.backgroundColor, CircleShape)
         .defaultMinSize(minWidth = IconSize, minHeight = IconSize),
       contentAlignment = Alignment.Center,
     ) {
-      BpkIcon(icon = icon.icon, contentDescription = null, tint = BpkColor.White, size = BpkIconSize.Large)
+      BpkIcon(
+        icon = icon.icon,
+        contentDescription = null,
+        tint = BpkTheme.colors.textPrimaryInverse,
+        size = BpkIconSize.Large,
+      )
     }
   }
 }
