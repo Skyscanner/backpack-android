@@ -42,7 +42,7 @@ fun BpkSuccessDialog(
     title = title,
     text = text,
     buttons = listOfNotNull(
-      Dialog.Button(BpkButtonType.Primary, confirmButton),
+      Dialog.Button(BpkButtonType.Featured, confirmButton),
       secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
     ),
     onDismissRequest = onDismissRequest,
@@ -66,7 +66,7 @@ fun BpkSuccessDialog(
     title = title,
     text = text,
     buttons = listOfNotNull(
-      Dialog.Button(BpkButtonType.Primary, confirmButton),
+      Dialog.Button(BpkButtonType.Featured, confirmButton),
       Dialog.Button(BpkButtonType.Secondary, secondaryButton),
       linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
     ),
@@ -90,7 +90,7 @@ fun BpkWarningDialog(
     title = title,
     text = text,
     buttons = listOfNotNull(
-      Dialog.Button(BpkButtonType.Primary, confirmButton),
+      Dialog.Button(BpkButtonType.Featured, confirmButton),
       secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
     ),
     onDismissRequest = onDismissRequest,
@@ -114,7 +114,7 @@ fun BpkWarningDialog(
     title = title,
     text = text,
     buttons = listOfNotNull(
-      Dialog.Button(BpkButtonType.Primary, confirmButton),
+      Dialog.Button(BpkButtonType.Featured, confirmButton),
       Dialog.Button(BpkButtonType.Secondary, secondaryButton),
       linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
     ),
@@ -160,7 +160,7 @@ fun BpkFlareDialog(
     title = title,
     text = text,
     buttons = listOfNotNull(
-      Dialog.Button(BpkButtonType.Primary, confirmButton),
+      Dialog.Button(BpkButtonType.Featured, confirmButton),
       secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
     ),
     onDismissRequest = onDismissRequest,
@@ -184,7 +184,7 @@ fun BpkFlareDialog(
     title = title,
     text = text,
     buttons = listOfNotNull(
-      Dialog.Button(BpkButtonType.Primary, confirmButton),
+      Dialog.Button(BpkButtonType.Featured, confirmButton),
       Dialog.Button(BpkButtonType.Secondary, secondaryButton),
       linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
     ),
