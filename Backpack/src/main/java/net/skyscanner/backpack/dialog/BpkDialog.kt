@@ -20,11 +20,11 @@ package net.skyscanner.backpack.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
-import net.skyscanner.backpack.R
 import net.skyscanner.backpack.dialog.internal.AlertDialogImpl
 import net.skyscanner.backpack.dialog.internal.FlareDialogImpl
 
@@ -33,34 +33,35 @@ open class BpkDialog(
   val style: Style = Style.ALERT
 ) : Dialog(context, 0) {
 
-  data class Icon
-  @Deprecated("Custom icon background are not supported now and will be removed from public API soon")
-  constructor(
+  data class Icon internal constructor(
     @DrawableRes val drawableRes: Int,
     @ColorInt val color: Int,
+    internal val background: IconBackground,
   ) {
 
-    @Suppress("FunctionName", "DEPRECATION")
+    @Deprecated("Custom icon background are not supported now and will be removed from public API soon")
+    constructor(drawableRes: Int, @ColorInt color: Int) :
+      this(drawableRes, color, IconBackground.UseColor)
+
+    @Suppress("FunctionName")
     companion object {
 
-      fun Success(context: Context, @DrawableRes drawableRes: Int): Icon =
-        Icon(
-          drawableRes = drawableRes,
-          color = context.getColor(R.color.bpkCoreAccent),
-        )
+      fun Success(@DrawableRes drawableRes: Int): Icon =
+        Icon(drawableRes = drawableRes, color = Color.TRANSPARENT, background = IconBackground.Success)
 
-      fun Warning(context: Context, @DrawableRes drawableRes: Int): Icon =
-        Icon(
-          drawableRes = drawableRes,
-          color = context.getColor(R.color.bpkStatusWarningSpot),
-        )
+      fun Warning(@DrawableRes drawableRes: Int): Icon =
+        Icon(drawableRes = drawableRes, color = Color.TRANSPARENT, background = IconBackground.Warning)
 
-      fun Danger(context: Context, @DrawableRes drawableRes: Int): Icon =
-        Icon(
-          drawableRes = drawableRes,
-          color = context.getColor(R.color.bpkStatusDangerSpot),
-        )
+      fun Danger(@DrawableRes drawableRes: Int): Icon =
+        Icon(drawableRes = drawableRes, color = Color.TRANSPARENT, background = IconBackground.Danger)
     }
+  }
+
+  internal enum class IconBackground {
+    UseColor,
+    Success,
+    Warning,
+    Danger,
   }
 
   enum class Style {

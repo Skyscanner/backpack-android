@@ -58,7 +58,7 @@ class DialogStory : Story() {
       dialog.apply {
         title = "You are going to Tokyo!"
         description = "Your flight is all booked. Why not check out some hotels now?"
-        icon = BpkDialog.Icon.Success(context, R.drawable.bpk_tick)
+        icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
 
         addActionButton(
           BpkButton(context).apply {
@@ -88,7 +88,7 @@ class DialogStory : Story() {
       dialog.apply {
         title = """!#\$\Warning-0-1!#\$#\$?"""
         description = "Engine Overload.!^R? Please do something. Throw me into the freezer or something!!"
-        icon = BpkDialog.Icon.Warning(context, R.drawable.bpk_lightning)
+        icon = BpkDialog.Icon.Warning(R.drawable.bpk_lightning)
 
         addActionButton(
           BpkButton(context).apply {
@@ -108,7 +108,7 @@ class DialogStory : Story() {
       dialog.apply {
         title = "Delete?"
         description = "Are you sure you want to delete your avatar?"
-        icon = BpkDialog.Icon.Danger(context, R.drawable.bpk_trash)
+        icon = BpkDialog.Icon.Danger(R.drawable.bpk_trash)
 
         setCancelable(false)
         setCanceledOnTouchOutside(false)
@@ -152,7 +152,7 @@ Remember to check your junk mail folder
 Please note down your reference number and contact Trip.com if you need to track, change or cancel your booking
 
 Safe travels!"""
-        icon = BpkDialog.Icon.Success(context, R.drawable.bpk_tick)
+        icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
       }
     },
 
@@ -161,7 +161,7 @@ Safe travels!"""
       dialog.apply {
         title = "Want to know when prices change?"
         description = "Create a price alert and we'll let you know changes for this route"
-        icon = BpkDialog.Icon.Success(context, R.drawable.bpk_alert__active)
+        icon = BpkDialog.Icon.Success(R.drawable.bpk_alert__active)
 
         addActionButton(
           BpkButton(context).apply {
@@ -199,7 +199,7 @@ Safe travels!"""
       dialog.apply {
         title = "You are going to Tokyo!"
         description = Array(3) { getString(R.string.stub) }.joinToString()
-        icon = BpkDialog.Icon.Success(context, R.drawable.bpk_tick)
+        icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
 
         addActionButton(
           BpkButton(context).apply {

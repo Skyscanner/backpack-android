@@ -50,16 +50,23 @@ internal class BpkDialogIcon @JvmOverloads constructor(
       field = value
       if (value != null) {
         setImageDrawable(AppCompatResources.getDrawable(context, value.drawableRes))
-        background = createBackground(value.color)
+        background = createBackground(value.background, value.color)
       }
     }
 
-  private fun createBackground(@ColorInt backgroundColor: Int) = GradientDrawable().apply {
-    cornerRadius = size / 2f
-    color = ColorStateList.valueOf(backgroundColor)
-    setStroke(
-      resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
-      context.getColorStateList(R.color.bpkSurfaceDefault)
-    )
-  }
+  private fun createBackground(background: BpkDialog.IconBackground, @ColorInt backgroundColor: Int) =
+    GradientDrawable().apply {
+      cornerRadius = size / 2f
+      color = when (background) {
+        BpkDialog.IconBackground.UseColor -> ColorStateList.valueOf(backgroundColor)
+        BpkDialog.IconBackground.Success -> context.getColorStateList(R.color.bpkCoreAccent)
+        BpkDialog.IconBackground.Warning -> context.getColorStateList(R.color.bpkStatusWarningSpot)
+        BpkDialog.IconBackground.Danger -> context.getColorStateList(R.color.bpkStatusDangerSpot)
+      }
+
+      setStroke(
+        resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
+        context.getColorStateList(R.color.bpkSurfaceDefault)
+      )
+    }
 }
