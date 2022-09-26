@@ -264,19 +264,7 @@ object ComponentRegistry {
     "Dialog" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData(
-          { children -> SubStory of children },
-          mapOf(
-            "With call to action" story NodeData { DialogStory of "Normal" },
-            "Warning" story NodeData { DialogStory of "Warning" },
-            "Delete confirmation" story NodeData { DialogStory of "Delete" },
-            "Success" story NodeData { DialogStory of "Confirmation" },
-            "With Links" story NodeData { DialogStory of "Links" },
-            "Long Text" story NodeData { DialogStory of "Long" },
-            "Flare" story NodeData { DialogStory of "Flare" },
-            "Flare with image" story NodeData { DialogStory of "FlareWithImage" }
-          )
-        ),
+        TAB_TITLE_VIEW story NodeData { DialogStory() },
         TAB_TITLE_COMPOSE composeStory { ComposeDialogStory() },
       ),
     ),

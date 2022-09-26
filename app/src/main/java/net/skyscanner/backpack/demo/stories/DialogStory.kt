@@ -1,4 +1,4 @@
-/**
+/*
  * Backpack for Android - Skyscanner's Design System
  *
  * Copyright 2018 Skyscanner Ltd
@@ -18,220 +18,190 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.forEach
 import com.squareup.picasso.Picasso
-import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.dialog.BpkDialog
 
 class DialogStory : Story() {
 
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? = inflater.inflate(R.layout.fragment_dialog, container, false)
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val dialogType = arguments?.getString(TYPE)
-      ?: savedInstanceState?.getInt(TYPE)
-
-    val btn = view.findViewById<BpkButton>(R.id.open_dialog)
-    btn.setOnClickListener {
-      dialogsByType[dialogType]?.let {
-        it.invoke(view.context).show()
+    view.findViewById<ViewGroup>(R.id.dialog_root).forEach { view ->
+      view.setOnClickListener {
+        handleOnClick(view)
       }
     }
   }
 
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-    const val TYPE = "type"
-
-    infix fun of(type: String) = DialogStory().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, R.layout.fragment_dialog)
-      arguments?.putString(TYPE, type)
+  private fun handleOnClick(view: View) {
+    when (view.id) {
+      R.id.dialog_success_one_button -> successOneButtonDialogExample()
+      R.id.dialog_success_two_buttons -> successTwoButtonsDialogExample()
+      R.id.dialog_success_three_buttons -> successThreeButtonsDialogExample()
+      R.id.dialog_warning -> warningDialogExample()
+      R.id.dialog_destructive -> destructiveDialogExample()
+      R.id.dialog_no_icon -> noIconDialogExample()
+      R.id.dialog_long_text -> longDialogExample()
+      R.id.dialog_flare -> flareDialogExample()
     }
   }
 
-  private val dialogsByType = mapOf(
-    "Normal" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Type.Success)
-      dialog.apply {
-        title = "You are going to Tokyo!"
-        description = "Your flight is all booked. Why not check out some hotels now?"
-        icon = BpkDialog.Icon(R.drawable.bpk_tick)
-
-        addActionButton(
-          BpkDialog.Button("Continue") {
-            println("confirmed")
-            dialog.dismiss()
-          }
-        )
-
-        addActionButton(
-          BpkDialog.Button("Skip") {
-            println("skipped")
-            dialog.dismiss()
-          }
-        )
-      }
-    },
-
-    "Warning" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Type.Warning)
-      dialog.apply {
-        title = """!#\$\Warning-0-1!#\$#\$?"""
-        description = "Engine Overload.!^R? Please do something. Throw me into the freezer or something!!"
-        icon = BpkDialog.Icon(R.drawable.bpk_lightning)
-
-        addActionButton(
-          BpkDialog.Button("Skip") {
-            println("skipped")
-            dialog.dismiss()
-          }
-        )
-      }
-    },
-
-    "Delete" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Type.Danger)
-      dialog.apply {
-        title = "Delete?"
-        description = "Are you sure you want to delete your avatar?"
-        icon = BpkDialog.Icon(R.drawable.bpk_trash)
-
-        setCancelable(false)
-        setCanceledOnTouchOutside(false)
-        setOnCancelListener {
-          println("canceled")
+  private fun successOneButtonDialogExample() {
+    BpkDialog(requireContext(), BpkDialog.Type.Success).apply {
+      title = getString(R.string.dialog_title)
+      description = getString(R.string.dialog_text)
+      icon = BpkDialog.Icon(R.drawable.bpk_tick)
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_confirmation)) {
+          dismiss()
         }
+      )
+    }.show()
+  }
 
-        addActionButton(
-          BpkDialog.Button("Delete") {
-            println("deleted")
-            dialog.dismiss()
-          }
-        )
+  private fun successTwoButtonsDialogExample() {
+    BpkDialog(requireContext(), BpkDialog.Type.Success).apply {
+      title = getString(R.string.dialog_title)
+      description = getString(R.string.dialog_text)
+      icon = BpkDialog.Icon(R.drawable.bpk_tick)
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_confirmation)) {
+          dismiss()
+        }
+      )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_skip)) {
+          dismiss()
+        }
+      )
+    }.show()
+  }
 
-        addActionButton(
-          BpkDialog.Button("Cancel") {
-            println("canceled")
-            dialog.dismiss()
-          }
-        )
-      }
-    },
+  private fun successThreeButtonsDialogExample() {
+    BpkDialog(requireContext(), BpkDialog.Type.Success).apply {
+      title = getString(R.string.dialog_title)
+      description = getString(R.string.dialog_text)
+      icon = BpkDialog.Icon(R.drawable.bpk_tick)
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_confirmation)) {
+          dismiss()
+        }
+      )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_skip)) {
+          dismiss()
+        }
+      )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_link_optional)) {
+          dismiss()
+        }
+      )
+    }.show()
+  }
 
-    "Confirmation" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Type.Success)
-      dialog.apply {
-        title = "You're almost ready to pack your bags!"
-        description = """Your booking is being processed with Trip.com
+  private fun warningDialogExample() {
+    BpkDialog(requireContext(), BpkDialog.Type.Warning).apply {
+      title = getString(R.string.dialog_title)
+      description = getString(R.string.dialog_text)
+      icon = BpkDialog.Icon(R.drawable.bpk_alert__add)
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_confirmation)) {
+          dismiss()
+        }
+      )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_skip)) {
+          dismiss()
+        }
+      )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_link_optional)) {
+          dismiss()
+        }
+      )
+    }.show()
+  }
 
-As soon as your booking has been completed, your confirmation email will be sent to your email account.
+  private fun destructiveDialogExample() {
+    BpkDialog(requireContext(), BpkDialog.Type.Danger).apply {
+      title = getString(R.string.dialog_title)
+      description = getString(R.string.dialog_text)
+      icon = BpkDialog.Icon(R.drawable.bpk_trash)
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_delete)) {
+          dismiss()
+        }
+      )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_cancel)) {
+          dismiss()
+        }
+      )
+    }.show()
+  }
 
-Remember to check your junk mail folder
+  fun longDialogExample() {
+    BpkDialog(requireContext(), BpkDialog.Type.NoIcon).apply {
+      title = getString(R.string.dialog_title)
+      description = getString(R.string.stub).repeat(3)
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_continue)) {
+          dismiss()
+        }
+      )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_skip)) {
+          dismiss()
+        }
+      )
+    }.show()
+  }
 
-Please note down your reference number and contact Trip.com if you need to track, change or cancel your booking
+  fun noIconDialogExample() {
+    BpkDialog(requireContext(), BpkDialog.Type.NoIcon).apply {
+      title = getString(R.string.dialog_title)
+      description = getString(R.string.dialog_text)
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_confirmation)) {
+          dismiss()
+        }
+      )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_skip)) {
+          dismiss()
+        }
+      )
+    }.show()
+  }
 
-Safe travels!"""
-        icon = BpkDialog.Icon(R.drawable.bpk_tick)
-      }
-    },
+  fun flareDialogExample() {
+    BpkDialog(requireContext(), BpkDialog.Type.Flare).apply {
+      title = getString(R.string.dialog_title)
+      description = getString(R.string.dialog_text)
+      Picasso.get().load("file:///android_asset/dialog_sample.jpg").into(image)
 
-    "Links" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Type.Success)
-      dialog.apply {
-        title = "Want to know when prices change?"
-        description = "Create a price alert and we'll let you know changes for this route"
-        icon = BpkDialog.Icon(R.drawable.bpk_alert__active)
-
-        addActionButton(
-          BpkDialog.Button("Create") {
-            dialog.dismiss()
-          }
-        )
-
-        addActionButton(
-          BpkDialog.Button("Direct flights only") {
-            dialog.dismiss()
-          }
-        )
-
-        addActionButton(
-          BpkDialog.Button("No, Thanks!") {
-            dialog.dismiss()
-          }
-        )
-      }
-    },
-
-    "Long" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Type.Success)
-      dialog.apply {
-        title = "You are going to Tokyo!"
-        description = Array(3) { getString(R.string.stub) }.joinToString()
-        icon = BpkDialog.Icon(R.drawable.bpk_tick)
-
-        addActionButton(
-          BpkDialog.Button("Continue") {
-            println("confirmed")
-            dialog.dismiss()
-          }
-        )
-
-        addActionButton(
-          BpkDialog.Button("Skip") {
-            println("skipped")
-            dialog.dismiss()
-          }
-        )
-      }
-    },
-
-    "Flare" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Type.Flare)
-      dialog.apply {
-        title = "What is Backpack?"
-        description = "The design system provides a single source of truth for the design language used at Skyscanner."
-
-        addActionButton(
-          BpkDialog.Button("Got it!") {
-            println("confirmed")
-            dialog.dismiss()
-          }
-        )
-
-        addActionButton(
-          BpkDialog.Button("Whatev's") {
-            println("skipped")
-            dialog.dismiss()
-          }
-        )
-      }
-    },
-
-    "FlareWithImage" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Type.Flare)
-      dialog.apply {
-        title = "Where will you go?"
-        description = "See the best Black Friday deals from out 1,200 travel partners. " +
-          "Remember to keep checking back as we update deals throughput the weekend."
-        Picasso.get().load("file:///android_asset/dialog_sample.jpg").into(image)
-
-        addActionButton(
-          BpkDialog.Button("Find your deal") {
-            println("confirmed")
-            dialog.dismiss()
-          }
-        )
-
-        addActionButton(
-          BpkDialog.Button("Ok, got it") {
-            println("skipped")
-            dialog.dismiss()
-          }
-        )
-      }
-    }
-  )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_confirmation)) {
+          dismiss()
+        }
+      )
+      addActionButton(
+        BpkDialog.Button(getString(R.string.dialog_skip)) {
+          dismiss()
+        }
+      )
+    }.show()
+  }
 }
