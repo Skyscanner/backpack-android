@@ -27,6 +27,7 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.dialog.BpkDialog
@@ -47,7 +48,8 @@ internal interface BpkDialogImpl {
 
   abstract class Base(
     @LayoutRes layout: Int,
-    dialog: Dialog
+    dialog: Dialog,
+    private val type: BpkDialog.Type?,
   ) : BpkDialogImpl {
 
     protected val root: View = LayoutInflater.from(dialog.context).inflate(layout, null)
@@ -65,6 +67,10 @@ internal interface BpkDialogImpl {
     init {
       dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
       dialog.setContentView(root)
+      iconView?.type = type
+      if (type == BpkDialog.Type.NoIcon || type == BpkDialog.Type.Flare) {
+        iconView?.isVisible = false
+      }
     }
 
     override var title: String = ""
@@ -83,7 +89,6 @@ internal interface BpkDialogImpl {
       set(value) {
         field = value
         iconView?.icon = icon
-        updateButtonStyles()
       }
 
     override var isCanceledOnTouchOutside: Boolean = true
@@ -96,11 +101,18 @@ internal interface BpkDialogImpl {
       val buttonsRoot = buttonsRoot
       if (buttonsRoot != null) {
         when (buttonsRoot.childCount) {
-          0 -> addActionButton(createButton(BpkButton.Type.Featured, button))
+          0 -> addActionButton(
+            createButton(
+              button = button,
+              type = when (type) {
+                BpkDialog.Type.Danger -> BpkButton.Type.Destructive
+                else -> BpkButton.Type.Featured
+              },
+            )
+          )
           1 -> addActionButton(createButton(BpkButton.Type.Secondary, button))
           else -> addActionButton(createButton(BpkButton.Type.Link, button))
         }
-        updateButtonStyles()
       }
     }
 
@@ -112,20 +124,5 @@ internal interface BpkDialogImpl {
           button.onClick()
         }
       }
-
-    private fun updateButtonStyles() {
-      val buttonsRoot = buttonsRoot
-      if (buttonsRoot != null) {
-        if (buttonsRoot.childCount > 0) {
-          val child = buttonsRoot.getChildAt(0)
-          if (child is BpkButton) {
-            child.type = when {
-              icon?.background == BpkDialog.IconBackground.Danger -> BpkButton.Type.Destructive
-              else -> BpkButton.Type.Featured
-            }
-          }
-        }
-      }
-    }
   }
 }

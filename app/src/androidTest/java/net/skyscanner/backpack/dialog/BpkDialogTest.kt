@@ -55,10 +55,10 @@ class BpkDialogTest : BpkSnapshotTest() {
   fun screenshotTestDialog() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
       title = "You are going to Tokyo!"
       description = "Your flight is all booked. Why not check out some hotels now?"
-      icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
+      icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
       addActionButton(
         BpkDialog.Button("Continue") { }
@@ -76,13 +76,13 @@ class BpkDialogTest : BpkSnapshotTest() {
   fun screenshotTestDialogFullScreen() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
       title = "You are going to Tokyo!"
       description = Array(30) {
         "Your flight is all booked. Why not check out some hotels now?"
       }.joinToString(separator = "\n")
 
-      icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
+      icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
       addActionButton(
         BpkDialog.Button("Continue") { }
@@ -100,10 +100,10 @@ class BpkDialogTest : BpkSnapshotTest() {
   fun screenshotTestDialogBottomSheet() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity, BpkDialog.Style.BOTTOM_SHEET).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Type.Danger).apply {
       title = "Delete?"
       description = "Delete your profile?"
-      icon = BpkDialog.Icon.Danger(R.drawable.bpk_trash)
+      icon = BpkDialog.Icon(R.drawable.bpk_trash)
 
       addActionButton(
         BpkDialog.Button("Delete") { }
@@ -121,11 +121,11 @@ class BpkDialogTest : BpkSnapshotTest() {
   fun screenshotTestDialogWithButtonLinks() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity)
+    val dialog = BpkDialog(activity, BpkDialog.Type.Warning)
     dialog.apply {
       title = "Want to know when prices change?"
       description = "Create a price alert and we'll let you know changes for this route"
-      icon = BpkDialog.Icon.Warning(R.drawable.bpk_alert__active)
+      icon = BpkDialog.Icon(R.drawable.bpk_alert__active)
 
       addActionButton(
         BpkDialog.Button("Create") { }
@@ -144,10 +144,10 @@ class BpkDialogTest : BpkSnapshotTest() {
     val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity, BpkDialog.Style.FLARE).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Type.Flare).apply {
       title = "You are going to Tokyo!"
       description = "Your flight is all booked."
-      icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
+      icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
       image!!.setImageBitmap(bitmap)
 

@@ -34,6 +34,8 @@ internal class BpkDialogIcon @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
+  var type: BpkDialog.Type? = null
+
   private val size = resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_size)
 
   init {
@@ -50,18 +52,18 @@ internal class BpkDialogIcon @JvmOverloads constructor(
       field = value
       if (value != null) {
         setImageDrawable(AppCompatResources.getDrawable(context, value.drawableRes))
-        background = createBackground(value.background, value.color)
+        background = createBackground(value.color)
       }
     }
 
-  private fun createBackground(background: BpkDialog.IconBackground, @ColorInt backgroundColor: Int) =
+  private fun createBackground(@ColorInt backgroundColor: Int) =
     GradientDrawable().apply {
       cornerRadius = size / 2f
-      color = when (background) {
-        BpkDialog.IconBackground.UseColor -> ColorStateList.valueOf(backgroundColor)
-        BpkDialog.IconBackground.Success -> context.getColorStateList(R.color.bpkCoreAccent)
-        BpkDialog.IconBackground.Warning -> context.getColorStateList(R.color.bpkStatusWarningSpot)
-        BpkDialog.IconBackground.Danger -> context.getColorStateList(R.color.bpkStatusDangerSpot)
+      color = when (type) {
+        BpkDialog.Type.Success -> context.getColorStateList(R.color.bpkCoreAccent)
+        BpkDialog.Type.Warning -> context.getColorStateList(R.color.bpkStatusWarningSpot)
+        BpkDialog.Type.Danger -> context.getColorStateList(R.color.bpkStatusDangerSpot)
+        else -> ColorStateList.valueOf(backgroundColor)
       }
 
       setStroke(

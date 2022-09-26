@@ -54,11 +54,11 @@ class DialogStory : Story() {
 
   private val dialogsByType = mapOf(
     "Normal" to { context: Context ->
-      val dialog = BpkDialog(context)
+      val dialog = BpkDialog(context, BpkDialog.Type.Success)
       dialog.apply {
         title = "You are going to Tokyo!"
         description = "Your flight is all booked. Why not check out some hotels now?"
-        icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
+        icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
         addActionButton(
           BpkDialog.Button("Continue") {
@@ -77,11 +77,11 @@ class DialogStory : Story() {
     },
 
     "Warning" to { context: Context ->
-      val dialog = BpkDialog(context)
+      val dialog = BpkDialog(context, BpkDialog.Type.Warning)
       dialog.apply {
         title = """!#\$\Warning-0-1!#\$#\$?"""
         description = "Engine Overload.!^R? Please do something. Throw me into the freezer or something!!"
-        icon = BpkDialog.Icon.Warning(R.drawable.bpk_lightning)
+        icon = BpkDialog.Icon(R.drawable.bpk_lightning)
 
         addActionButton(
           BpkDialog.Button("Skip") {
@@ -93,11 +93,11 @@ class DialogStory : Story() {
     },
 
     "Delete" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Style.BOTTOM_SHEET)
+      val dialog = BpkDialog(context, BpkDialog.Type.Danger)
       dialog.apply {
         title = "Delete?"
         description = "Are you sure you want to delete your avatar?"
-        icon = BpkDialog.Icon.Danger(R.drawable.bpk_trash)
+        icon = BpkDialog.Icon(R.drawable.bpk_trash)
 
         setCancelable(false)
         setCanceledOnTouchOutside(false)
@@ -122,7 +122,7 @@ class DialogStory : Story() {
     },
 
     "Confirmation" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Style.BOTTOM_SHEET)
+      val dialog = BpkDialog(context, BpkDialog.Type.Success)
       dialog.apply {
         title = "You're almost ready to pack your bags!"
         description = """Your booking is being processed with Trip.com
@@ -134,16 +134,16 @@ Remember to check your junk mail folder
 Please note down your reference number and contact Trip.com if you need to track, change or cancel your booking
 
 Safe travels!"""
-        icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
+        icon = BpkDialog.Icon(R.drawable.bpk_tick)
       }
     },
 
     "Links" to { context: Context ->
-      val dialog = BpkDialog(context)
+      val dialog = BpkDialog(context, BpkDialog.Type.Success)
       dialog.apply {
         title = "Want to know when prices change?"
         description = "Create a price alert and we'll let you know changes for this route"
-        icon = BpkDialog.Icon.Success(R.drawable.bpk_alert__active)
+        icon = BpkDialog.Icon(R.drawable.bpk_alert__active)
 
         addActionButton(
           BpkDialog.Button("Create") {
@@ -166,11 +166,11 @@ Safe travels!"""
     },
 
     "Long" to { context: Context ->
-      val dialog = BpkDialog(context)
+      val dialog = BpkDialog(context, BpkDialog.Type.Success)
       dialog.apply {
         title = "You are going to Tokyo!"
         description = Array(3) { getString(R.string.stub) }.joinToString()
-        icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
+        icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
         addActionButton(
           BpkDialog.Button("Continue") {
@@ -189,7 +189,7 @@ Safe travels!"""
     },
 
     "Flare" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Style.FLARE)
+      val dialog = BpkDialog(context, BpkDialog.Type.Flare)
       dialog.apply {
         title = "What is Backpack?"
         description = "The design system provides a single source of truth for the design language used at Skyscanner."
@@ -211,7 +211,7 @@ Safe travels!"""
     },
 
     "FlareWithImage" to { context: Context ->
-      val dialog = BpkDialog(context, BpkDialog.Style.FLARE)
+      val dialog = BpkDialog(context, BpkDialog.Type.Flare)
       dialog.apply {
         title = "Where will you go?"
         description = "See the best Black Friday deals from out 1,200 travel partners. " +
