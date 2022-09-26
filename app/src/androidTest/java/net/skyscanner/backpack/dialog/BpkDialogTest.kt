@@ -59,10 +59,7 @@ class BpkDialogTest : BpkSnapshotTest() {
     val dialog = BpkDialog(activity).apply {
       title = "You are going to Tokyo!"
       description = "Your flight is all booked. Why not check out some hotels now?"
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        context.getColor(R.color.bpkMonteverde),
-      )
+      icon = BpkDialog.Icon.Success(testContext, R.drawable.bpk_tick)
 
       addActionButton(
         BpkButton(context).apply {
@@ -90,10 +87,7 @@ class BpkDialogTest : BpkSnapshotTest() {
         "Your flight is all booked. Why not check out some hotels now?"
       }.joinToString(separator = "\n")
 
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        context.getColor(R.color.bpkMonteverde),
-      )
+      icon = BpkDialog.Icon.Success(testContext, R.drawable.bpk_tick)
 
       addActionButton(
         BpkButton(context).apply {
@@ -118,10 +112,7 @@ class BpkDialogTest : BpkSnapshotTest() {
     val dialog = BpkDialog(activity, BpkDialog.Style.BOTTOM_SHEET).apply {
       title = "Delete?"
       description = "Delete your profile?"
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_trash,
-        context.getColor(R.color.bpkPanjin),
-      )
+      icon = BpkDialog.Icon.Danger(testContext, R.drawable.bpk_trash)
 
       addActionButton(
         BpkButton(context, BpkButton.Type.Destructive).apply {
@@ -147,10 +138,7 @@ class BpkDialogTest : BpkSnapshotTest() {
     dialog.apply {
       title = "Want to know when prices change?"
       description = "Create a price alert and we'll let you know changes for this route"
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_alert__active,
-        context.getColor(R.color.bpkMonteverde),
-      )
+      icon = BpkDialog.Icon.Warning(testContext, R.drawable.bpk_alert__active)
 
       addActionButton(
         BpkButton(context).apply {
@@ -177,10 +165,7 @@ class BpkDialogTest : BpkSnapshotTest() {
     val dialog = BpkDialog(activity, BpkDialog.Style.FLARE).apply {
       title = "You are going to Tokyo!"
       description = "Your flight is all booked."
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        context.getColor(R.color.bpkMonteverde),
-      )
+      icon = BpkDialog.Icon.Success(testContext, R.drawable.bpk_tick)
 
       image!!.setImageBitmap(bitmap)
 

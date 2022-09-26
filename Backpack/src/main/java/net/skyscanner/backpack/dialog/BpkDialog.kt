@@ -24,6 +24,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
+import net.skyscanner.backpack.R
 import net.skyscanner.backpack.dialog.internal.AlertDialogImpl
 import net.skyscanner.backpack.dialog.internal.FlareDialogImpl
 
@@ -32,7 +33,35 @@ open class BpkDialog(
   val style: Style = Style.ALERT
 ) : Dialog(context, 0) {
 
-  data class Icon(@DrawableRes val drawableRes: Int, @ColorInt val color: Int)
+  data class Icon
+  @Deprecated("Custom icon background are not supported now and will be removed from public API soon")
+  constructor(
+    @DrawableRes val drawableRes: Int,
+    @ColorInt val color: Int,
+  ) {
+
+    @Suppress("FunctionName", "DEPRECATION")
+    companion object {
+
+      fun Success(context: Context, @DrawableRes drawableRes: Int): Icon =
+        Icon(
+          drawableRes = drawableRes,
+          color = context.getColor(R.color.bpkCoreAccent),
+        )
+
+      fun Warning(context: Context, @DrawableRes drawableRes: Int): Icon =
+        Icon(
+          drawableRes = drawableRes,
+          color = context.getColor(R.color.bpkStatusWarningSpot),
+        )
+
+      fun Danger(context: Context, @DrawableRes drawableRes: Int): Icon =
+        Icon(
+          drawableRes = drawableRes,
+          color = context.getColor(R.color.bpkStatusDangerSpot),
+        )
+    }
+  }
 
   enum class Style {
     ALERT, BOTTOM_SHEET, FLARE
