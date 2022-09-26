@@ -33,6 +33,8 @@ open class BpkDialog(
   val style: Style = Style.ALERT
 ) : Dialog(context, 0) {
 
+  data class Button(internal val text: String, internal val onClick: () -> Unit)
+
   data class Icon internal constructor(
     @DrawableRes val drawableRes: Int,
     @Deprecated(
@@ -99,8 +101,13 @@ open class BpkDialog(
       impl.icon = value
     }
 
+  @Deprecated("Use addActionButton(BpkDialog.Button) instead")
   fun addActionButton(view: View) {
     impl.addActionButton(view)
+  }
+
+  fun addActionButton(button: Button) {
+    impl.addActionButton(button)
   }
 
   override fun setCanceledOnTouchOutside(cancel: Boolean) {

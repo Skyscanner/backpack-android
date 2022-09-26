@@ -30,7 +30,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Rule
@@ -62,15 +61,11 @@ class BpkDialogTest : BpkSnapshotTest() {
       icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
 
       addActionButton(
-        BpkButton(context).apply {
-          text = "Continue"
-        }
+        BpkDialog.Button("Continue") { }
       )
 
       addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-        }
+        BpkDialog.Button("Skip") { }
       )
     }
 
@@ -90,15 +85,11 @@ class BpkDialogTest : BpkSnapshotTest() {
       icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
 
       addActionButton(
-        BpkButton(context).apply {
-          text = "Continue"
-        }
+        BpkDialog.Button("Continue") { }
       )
 
       addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-        }
+        BpkDialog.Button("Skip") { }
       )
     }
 
@@ -115,15 +106,11 @@ class BpkDialogTest : BpkSnapshotTest() {
       icon = BpkDialog.Icon.Danger(R.drawable.bpk_trash)
 
       addActionButton(
-        BpkButton(context, BpkButton.Type.Destructive).apply {
-          text = "Delete"
-        }
+        BpkDialog.Button("Delete") { }
       )
 
       addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Cancel"
-        }
+        BpkDialog.Button("Cancel") { }
       )
     }
 
@@ -141,16 +128,11 @@ class BpkDialogTest : BpkSnapshotTest() {
       icon = BpkDialog.Icon.Warning(R.drawable.bpk_alert__active)
 
       addActionButton(
-        BpkButton(context).apply {
-          text = "Create"
-        }
+        BpkDialog.Button("Create") { }
       )
 
       addActionButton(
-        BpkButton(context).apply {
-          type = BpkButton.Type.Link
-          text = "No, Thanks!"
-        }
+        BpkDialog.Button("No, Thanks!") { }
       )
     }
 
@@ -170,15 +152,11 @@ class BpkDialogTest : BpkSnapshotTest() {
       image!!.setImageBitmap(bitmap)
 
       addActionButton(
-        BpkButton(context).apply {
-          text = "Continue"
-        }
+        BpkDialog.Button("Continue") { }
       )
 
       addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-        }
+        BpkDialog.Button("Skip") { }
       )
     }
 

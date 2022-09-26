@@ -28,7 +28,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.FlakyTest
 import androidx.test.rule.ActivityTestRule
-import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.util.TestActivity
 import org.junit.Before
 import org.junit.Rule
@@ -90,9 +89,7 @@ class BpkDialogTest {
   fun test_with_buttons() {
     val dialog = BpkDialog(mActivity).apply {
       addActionButton(
-        BpkButton(mActivity).apply {
-          text = "Confirm"
-        }
+        BpkDialog.Button("Confirm") { }
       )
     }
 

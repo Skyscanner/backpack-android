@@ -61,23 +61,16 @@ class DialogStory : Story() {
         icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
 
         addActionButton(
-          BpkButton(context).apply {
-            text = "Continue"
-            setOnClickListener {
-              println("confirmed")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Continue") {
+            println("confirmed")
+            dialog.dismiss()
           }
         )
 
         addActionButton(
-          BpkButton(context).apply {
-            type = BpkButton.Type.Link
-            text = "Skip"
-            setOnClickListener {
-              println("skipped")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Skip") {
+            println("skipped")
+            dialog.dismiss()
           }
         )
       }
@@ -91,13 +84,9 @@ class DialogStory : Story() {
         icon = BpkDialog.Icon.Warning(R.drawable.bpk_lightning)
 
         addActionButton(
-          BpkButton(context).apply {
-            type = BpkButton.Type.Link
-            text = "Skip"
-            setOnClickListener {
-              println("skipped")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Skip") {
+            println("skipped")
+            dialog.dismiss()
           }
         )
       }
@@ -117,23 +106,16 @@ class DialogStory : Story() {
         }
 
         addActionButton(
-          BpkButton(context, BpkButton.Type.Destructive).apply {
-            text = "Delete"
-            setOnClickListener {
-              println("deleted")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Delete") {
+            println("deleted")
+            dialog.dismiss()
           }
         )
 
         addActionButton(
-          BpkButton(context).apply {
-            type = BpkButton.Type.Link
-            text = "Cancel"
-            setOnClickListener {
-              println("canceled")
-              dialog.cancel()
-            }
+          BpkDialog.Button("Cancel") {
+            println("canceled")
+            dialog.dismiss()
           }
         )
       }
@@ -164,31 +146,20 @@ Safe travels!"""
         icon = BpkDialog.Icon.Success(R.drawable.bpk_alert__active)
 
         addActionButton(
-          BpkButton(context).apply {
-            text = "Create"
-            setOnClickListener {
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Create") {
+            dialog.dismiss()
           }
         )
 
         addActionButton(
-          BpkButton(context).apply {
-            type = BpkButton.Type.Link
-            text = "Direct flights only"
-            setOnClickListener {
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Direct flights only") {
+            dialog.dismiss()
           }
         )
 
         addActionButton(
-          BpkButton(context).apply {
-            type = BpkButton.Type.Link
-            text = "No, Thanks!"
-            setOnClickListener {
-              dialog.dismiss()
-            }
+          BpkDialog.Button("No, Thanks!") {
+            dialog.dismiss()
           }
         )
       }
@@ -202,23 +173,16 @@ Safe travels!"""
         icon = BpkDialog.Icon.Success(R.drawable.bpk_tick)
 
         addActionButton(
-          BpkButton(context).apply {
-            text = "Continue"
-            setOnClickListener {
-              println("confirmed")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Continue") {
+            println("confirmed")
+            dialog.dismiss()
           }
         )
 
         addActionButton(
-          BpkButton(context).apply {
-            type = BpkButton.Type.Link
-            text = "Skip"
-            setOnClickListener {
-              println("skipped")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Skip") {
+            println("skipped")
+            dialog.dismiss()
           }
         )
       }
@@ -231,23 +195,16 @@ Safe travels!"""
         description = "The design system provides a single source of truth for the design language used at Skyscanner."
 
         addActionButton(
-          BpkButton(context).apply {
-            text = "Got it!"
-            setOnClickListener {
-              println("confirmed")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Got it!") {
+            println("confirmed")
+            dialog.dismiss()
           }
         )
 
         addActionButton(
-          BpkButton(context).apply {
-            type = BpkButton.Type.Link
-            text = "Whatev's"
-            setOnClickListener {
-              println("skipped")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Whatev's") {
+            println("skipped")
+            dialog.dismiss()
           }
         )
       }
@@ -262,23 +219,16 @@ Safe travels!"""
         Picasso.get().load("file:///android_asset/dialog_sample.jpg").into(image)
 
         addActionButton(
-          BpkButton(context).apply {
-            text = "Find your deal"
-            setOnClickListener {
-              println("confirmed")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Find your deal") {
+            println("confirmed")
+            dialog.dismiss()
           }
         )
 
         addActionButton(
-          BpkButton(context).apply {
-            type = BpkButton.Type.Link
-            text = "Ok, got it"
-            setOnClickListener {
-              println("skipped")
-              dialog.dismiss()
-            }
+          BpkDialog.Button("Ok, got it") {
+            println("skipped")
+            dialog.dismiss()
           }
         )
       }

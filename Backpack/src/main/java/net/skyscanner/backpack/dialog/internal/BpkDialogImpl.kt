@@ -28,6 +28,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.dialog.BpkDialog
 
 internal interface BpkDialogImpl {
@@ -82,12 +83,49 @@ internal interface BpkDialogImpl {
       set(value) {
         field = value
         iconView?.icon = icon
+        updateButtonStyles()
       }
 
     override var isCanceledOnTouchOutside: Boolean = true
 
     override fun addActionButton(view: View) {
       buttonsRoot?.addView(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+    }
+
+    fun addActionButton(button: BpkDialog.Button) {
+      val buttonsRoot = buttonsRoot
+      if (buttonsRoot != null) {
+        when (buttonsRoot.childCount) {
+          0 -> addActionButton(createButton(BpkButton.Type.Featured, button))
+          1 -> addActionButton(createButton(BpkButton.Type.Secondary, button))
+          else -> addActionButton(createButton(BpkButton.Type.Link, button))
+        }
+        updateButtonStyles()
+      }
+    }
+
+    private fun createButton(type: BpkButton.Type, button: BpkDialog.Button): View =
+      BpkButton(root.context).apply {
+        this.type = type
+        this.text = button.text
+        this.setOnClickListener {
+          button.onClick()
+        }
+      }
+
+    private fun updateButtonStyles() {
+      val buttonsRoot = buttonsRoot
+      if (buttonsRoot != null) {
+        if (buttonsRoot.childCount > 0) {
+          val child = buttonsRoot.getChildAt(0)
+          if (child is BpkButton) {
+            child.type = when {
+              icon?.background == BpkDialog.IconBackground.Danger -> BpkButton.Type.Destructive
+              else -> BpkButton.Type.Featured
+            }
+          }
+        }
+      }
     }
   }
 }
