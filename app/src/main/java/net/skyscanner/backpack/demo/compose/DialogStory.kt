@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -54,7 +55,7 @@ fun DialogStory() {
     var shownDialog by rememberSaveable { mutableStateOf(ShownDialog.None) }
     ShownDialog.values().forEach {
       if (it != ShownDialog.None) {
-        BpkButton(it.buttonText) {
+        BpkButton(stringResource(it.buttonText)) {
           shownDialog = it
         }
       }
@@ -74,15 +75,15 @@ fun DialogStory() {
   }
 }
 
-enum class ShownDialog(val buttonText: String) {
-  SuccessOneButton("Success One Button"),
-  SuccessTwoButtons("Success Two Buttons"),
-  SuccessThreeButtons("Success Three Buttons"),
-  Warning("Warning"),
-  Destructive("Destructive"),
-  NoIcon("No Icon"),
-  Flare("Flare"),
-  None(""),
+enum class ShownDialog(@StringRes val buttonText: Int) {
+  SuccessOneButton(R.string.dialog_success_one_button),
+  SuccessTwoButtons(R.string.dialog_success_two_buttons),
+  SuccessThreeButtons(R.string.dialog_success_three_buttons),
+  Warning(R.string.dialog_warning),
+  Destructive(R.string.dialog_destructive),
+  NoIcon(R.string.dialog_no_icon),
+  Flare(R.string.dialog_flare),
+  None(R.string.generic_empty),
 }
 
 @Preview

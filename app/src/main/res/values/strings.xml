@@ -180,4 +180,16 @@
   <string name="spinner_disabled">Disabled</string>
   <string name="spinner_onDarkSurface">OnDarkSurface</string>
   <string name="generic_small">Small</string>
+
+  <string name="dialog_success_one_button">Success One Button</string>
+  <string name="dialog_success_two_buttons">Success Two Buttons</string>
+  <string name="dialog_success_three_buttons">Success Three Buttons</string>
+  <string name="dialog_warning">Warning</string>
+  <string name="dialog_destructive">Destructive</string>
+  <string name="dialog_no_icon">No Icon</string>
+  <string name="dialog_flare">Flare</string>
+  <string name="generic_empty" />
+  <string name="dialog_long_text">Long text</string>
+  <string name="dialog_flare_with_image">Flare with image</string>
+
 </resources>
