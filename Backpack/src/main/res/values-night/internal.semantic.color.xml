@@ -15,7 +15,6 @@
   <color name="__buttonLinkPressedContent">@color/bpkSkyBlue</color>
   <color name="__buttonDestructiveRipple">#19FFFFFF</color>
   <color name="__buttonLinkRipple">#33FFFFFF</color>
-  <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
 
   <color name="__skeletonBackground">@color/bpkBlackTint02</color>
   <color name="__skeletonShimmerPrimary">#00000000</color>

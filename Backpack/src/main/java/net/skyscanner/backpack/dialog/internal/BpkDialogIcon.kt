@@ -42,7 +42,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
     maxWidth = size
     maxHeight = size
     scaleType = ScaleType.CENTER
-    imageTintList = context.getColorStateList(R.color.bpkWhite)
+    imageTintList = context.getColorStateList(R.color.bpkTextPrimaryInverse)
   }
 
   var icon: BpkDialog.Icon? = null
@@ -59,7 +59,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
     color = ColorStateList.valueOf(backgroundColor)
     setStroke(
       resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
-      context.getColorStateList(R.color.__dialogBackground)
+      context.getColorStateList(R.color.bpkSurfaceDefault)
     )
   }
 }
