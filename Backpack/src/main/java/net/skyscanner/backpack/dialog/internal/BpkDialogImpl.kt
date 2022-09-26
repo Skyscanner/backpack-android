@@ -27,7 +27,6 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
-import androidx.core.view.isVisible
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.dialog.BpkDialog
@@ -69,7 +68,7 @@ internal interface BpkDialogImpl {
       dialog.setContentView(root)
       iconView?.type = type
       if (type == BpkDialog.Type.NoIcon || type == BpkDialog.Type.Flare) {
-        iconView?.isVisible = false
+        iconView?.visibility = View.INVISIBLE
       }
     }
 
