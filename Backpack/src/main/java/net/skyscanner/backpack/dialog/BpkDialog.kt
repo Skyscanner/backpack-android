@@ -35,7 +35,11 @@ open class BpkDialog(
 
   data class Icon internal constructor(
     @DrawableRes val drawableRes: Int,
-    @ColorInt val color: Int,
+    @Deprecated(
+      "Icon background is semantic now. This field will not contain any useful data if semantic constructor is used"
+    )
+    @ColorInt
+    val color: Int,
     internal val background: IconBackground,
   ) {
 
