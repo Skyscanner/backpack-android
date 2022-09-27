@@ -3,5 +3,5 @@
   android:shape="rectangle">
   <corners android:radius="@dimen/bpk_skeleton_xxs_border_radius" />
   <solid
-    android:color="@color/__skeletonBackground" />
+    android:color="@color/bpkSurfaceHighlight" />
 </shape>

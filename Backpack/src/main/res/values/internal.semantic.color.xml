@@ -22,8 +22,4 @@
   <color name="__buttonLinkRipple">#33000000</color>
   <color name="__buttonPrimaryOnLightRipple">#33FFFFFF</color>
   <color name="__dialogBackground">@color/bpkWhite</color>
-
-  <color name="__skeletonBackground">@color/bpkSkyGrayTint06</color>
-  <color name="__skeletonShimmerPrimary">#00FFFFFF</color>
-  <color name="__skeletonShimmerSecondary">#99FFFFFF</color>
 </resources>
