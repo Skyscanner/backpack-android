@@ -56,7 +56,7 @@ internal fun BpkTopNavBarImpl(
 ) {
   TopAppBar(
     modifier = modifier,
-    backgroundColor = BpkTheme.colors.canvas,
+    backgroundColor = BpkTheme.colors.surfaceDefault,
     contentColor = BpkTheme.colors.textPrimary,
     elevation = BpkDimension.Elevation.Sm,
     contentPadding = PaddingValues(horizontal = BpkDimension.Spacing.Md),
