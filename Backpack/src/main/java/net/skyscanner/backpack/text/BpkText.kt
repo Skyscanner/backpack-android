@@ -33,7 +33,6 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.TextViewCompat
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.isInEditMode
 import net.skyscanner.backpack.util.use
@@ -127,7 +126,7 @@ open class BpkText @JvmOverloads constructor(
       if (it.hasValue(R.styleable.BpkText_android_textColor)) {
         _textColour = it.getColorStateList(R.styleable.BpkText_android_textColor)
       }
-      _textColorLink = ColorStateList.valueOf(BpkTheme.getPrimaryColor(context))
+      _textColorLink = ColorStateList.valueOf(context.getColor(R.color.bpkTextLink))
 
       // Adding tint and compoundDrawables does not work. Converting compoundDrawables to compoundDrawablesRelative
       var start = compoundDrawablesRelative[0] ?: compoundDrawables[0]

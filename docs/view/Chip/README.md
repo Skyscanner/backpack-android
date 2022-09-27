@@ -59,4 +59,4 @@ chip.setOnClickListener { chip.toggle() }
 - `chipTextColor`
 
 
-Styles can be changed globally through `bpkChipStyle` or `bpkOutlineChipStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/view/THEMING.md) for more information.
+Styles can be changed globally through `bpkChipStyle`. Check [theming](https://github.com/Skyscanner/backpack-android/blob/main/docs/view/THEMING.md) for more information.
