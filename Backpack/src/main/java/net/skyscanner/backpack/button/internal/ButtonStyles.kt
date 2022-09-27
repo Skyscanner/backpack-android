@@ -27,8 +27,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonPrimaryStyle,
-      bgColorRes = R.color.bpkMonteverde,
-      contentColorRes = R.color.__buttonPrimaryContent,
+      bgColorRes = R.color.__privateButtonPrimaryNormalBackground,
+      bgPressedColorRes = R.color.__privateButtonPrimaryPressedBackground,
+      contentColorRes = R.color.bpkTextOnDark,
     )
   }
 
@@ -36,8 +37,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonSecondaryStyle,
-      bgColorRes = R.color.__buttonSecondaryBackground,
-      contentColorRes = R.color.__buttonSecondaryContent,
+      bgColorRes = R.color.__privateButtonSecondaryNormalBackground,
+      bgPressedColorRes = R.color.__privateButtonSecondaryPressedBackground,
+      contentColorRes = R.color.bpkTextPrimary,
     )
   }
 
@@ -45,10 +47,9 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonFeaturedStyle,
-      bgColorRes = R.color.bpkPrimary,
-      bgPressedColorRes = R.color.__buttonFeaturedPressedBackground,
-      contentColorRes = R.color.__buttonFeaturedContent,
-      rippleColorRes = R.color.__buttonFeaturedRipple,
+      bgColorRes = R.color.__privateButtonFeaturedNormalBackground,
+      bgPressedColorRes = R.color.__privateButtonFeaturedPressedBackground,
+      contentColorRes = R.color.bpkTextPrimaryInverse,
     )
   }
 
@@ -56,11 +57,10 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonDestructiveStyle,
-      bgColorRes = R.color.__buttonDestructiveBackground,
-      bgPressedColorRes = R.color.__buttonDestructivePressedBackground,
-      contentColorRes = R.color.__buttonDestructiveContent,
-      contentPressedColorRes = R.color.__buttonDestructivePressedContent,
-      rippleColorRes = R.color.__buttonDestructiveRipple,
+      bgColorRes = R.color.__privateButtonDestructiveNormalBackground,
+      bgPressedColorRes = R.color.__privateButtonDestructivePressedBackground,
+      contentColorRes = R.color.__privateButtonDestructiveNormalForeground,
+      contentPressedColorRes = R.color.bpkTextPrimaryInverse,
     )
   }
 
@@ -68,8 +68,12 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonPrimaryOnDarkStyle,
-      bgColorRes = R.color.bpkWhite,
-      contentColorRes = R.color.bpkSkyGray,
+      bgColorRes = R.color.__privateButtonPrimaryOnDarkNormalBackground,
+      bgPressedColorRes = R.color.__privateButtonPrimaryOnDarkPressedBackground,
+      bgDisabledColorRes = R.color.__privateButtonPrimaryOnDarkDisabledBackground,
+      contentColorRes = R.color.bpkTextOnLight,
+      contentDisabledColorRes = R.color.__privateButtonPrimaryOnDarkDisabledForeground,
+      rippleColorRes = R.color.__buttonOnDarkRipple,
     )
   }
 
@@ -77,9 +81,12 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonPrimaryOnLightStyle,
-      bgColorRes = R.color.bpkSkyGray,
-      contentColorRes = R.color.bpkWhite,
-      rippleColorRes = R.color.__buttonPrimaryOnLightRipple,
+      bgColorRes = R.color.__privateButtonPrimaryOnLightNormalBackground,
+      bgPressedColorRes = R.color.__privateButtonPrimaryOnLightPressedBackground,
+      bgDisabledColorRes = R.color.__privateButtonPrimaryOnLightDisabledBackground,
+      contentColorRes = R.color.bpkTextOnDark,
+      contentDisabledColorRes = R.color.__privateButtonPrimaryOnLightDisabledForeground,
+      rippleColorRes = R.color.__buttonOnLightRipple,
     )
   }
 
@@ -87,9 +94,12 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
     override fun invoke(context: Context) = ButtonStyle.fromTheme(
       context = context,
       style = R.attr.bpkButtonSecondaryOnDarkStyle,
-      bgColorRes = R.color.__buttonSecondaryOnDarkBackground,
-      contentColorRes = R.color.bpkWhite,
-      rippleColorRes = R.color.__buttonPrimaryOnLightRipple,
+      bgColorRes = R.color.__privateButtonSecondaryOnDarkNormalBackground,
+      bgPressedColorRes = R.color.__privateButtonSecondaryOnDarkPressedBackground,
+      bgDisabledColorRes = R.color.__privateButtonSecondaryOnDarkDisabledBackground,
+      contentColorRes = R.color.bpkTextOnDark,
+      contentDisabledColorRes = R.color.__privateButtonSecondaryOnDarkDisabledForeground,
+      rippleColorRes = R.color.__buttonOnDarkRipple,
     )
   }
 
@@ -99,8 +109,8 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonLinkStyle,
       bgColorRes = android.R.color.transparent,
       bgDisabledColorRes = android.R.color.transparent,
-      contentColorRes = R.color.bpkPrimary,
-      contentPressedColorRes = R.color.__buttonLinkPressedContent,
+      contentColorRes = R.color.bpkTextLink,
+      contentPressedColorRes = R.color.__privateButtonLinkPressedForeground,
       rippleColorRes = R.color.__buttonLinkRipple,
     )
   }
@@ -111,10 +121,10 @@ internal sealed class ButtonStyles : (Context) -> ButtonStyle {
       style = R.attr.bpkButtonLinkOnDarkStyle,
       bgColorRes = android.R.color.transparent,
       bgDisabledColorRes = android.R.color.transparent,
-      contentColorRes = R.color.bpkWhite,
-      contentPressedColorRes = R.color.__buttonLinkOnDarkContent,
-      contentDisabledColorRes = R.color.__buttonLinkOnDarkContentDisabled,
-      rippleColorRes = R.color.__buttonPrimaryOnLightRipple,
+      contentColorRes = R.color.bpkTextOnDark,
+      contentPressedColorRes = R.color.__privateButtonLinkOnDarkPressedForeground,
+      contentDisabledColorRes = R.color.__privateButtonLinkOnDarkDisabledForeground,
+      rippleColorRes = R.color.__buttonLinkOnDarkRipple,
     )
   }
 }
