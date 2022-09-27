@@ -2,13 +2,13 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
   <item>
     <shape android:shape="rectangle">
-      <solid android:color="@color/bpkBackground" />
+      <solid android:color="@color/bpkSurfaceDefault" />
       <stroke android:color="@color/bpkLine" android:width="@dimen/bpkBorderSizeSm"/>
     </shape>
   </item>
   <item android:bottom="@dimen/bpkBorderSizeSm">
     <shape android:shape="rectangle">
-      <solid android:color="@color/bpkBackgroundElevation01"/>
+      <solid android:color="@color/bpkSurfaceDefault"/>
     </shape>
   </item>
 </layer-list>

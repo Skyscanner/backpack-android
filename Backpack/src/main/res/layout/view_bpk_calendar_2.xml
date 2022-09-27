@@ -34,7 +34,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bpkSpacingBase"
     android:visibility="gone"
-    app:badgeType="dark"
+    app:badgeType="strong"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/bpk_calendar_header"
