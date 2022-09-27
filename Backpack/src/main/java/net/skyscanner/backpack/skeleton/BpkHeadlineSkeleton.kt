@@ -36,7 +36,7 @@ class BpkHeadlineSkeleton @JvmOverloads constructor(
   @AttrRes defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
   val paint = Paint().apply {
-    color = context.getColor(R.color.__skeletonBackground)
+    color = context.getColor(R.color.bpkSurfaceHighlight)
     style = Paint.Style.FILL
     isAntiAlias = true
   }
