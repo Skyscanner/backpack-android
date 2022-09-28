@@ -23,72 +23,108 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.tokens.internal.BpkButtonColors
 import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 @Composable
 internal fun BpkButtonType.disabledBackgroundColor(): Color =
   when (this) {
+    BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkDisabledBackground
+    BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightDisabledBackground
+    BpkButtonType.SecondaryOnDark -> BpkButtonColors.secondaryOnDarkDisabledBackground
     BpkButtonType.Link, BpkButtonType.LinkOnDark -> Color.Transparent
-    else -> dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint01)
+    else -> BpkButtonColors.disabledBackground
   }
 
 @Composable
 internal fun BpkButtonType.disabledContentColor(): Color =
   when (this) {
-    BpkButtonType.LinkOnDark -> Color.White.copy(alpha = 0.2f)
-    else -> dynamicColorOf(BpkColor.SkyGrayTint04, BpkColor.BlackTint03)
+    BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkDisabledForeground
+    BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightDisabledForeground
+    BpkButtonType.SecondaryOnDark -> BpkButtonColors.secondaryOnDarkDisabledForeground
+    BpkButtonType.LinkOnDark -> BpkButtonColors.linkOnDarkDisabledForeground
+    else -> BpkTheme.colors.textDisabled
   }
 
 @Composable
 internal fun BpkButtonType.rippleColor(): Color =
   when (this) {
-    BpkButtonType.Destructive -> dynamicColorOf(Color.Black, Color.White).copy(alpha = 0.1f)
-    BpkButtonType.Featured -> Color.Black.copy(alpha = 0.1f)
+    BpkButtonType.PrimaryOnLight -> Color.White.copy(alpha = 0.1f)
+    BpkButtonType.PrimaryOnDark, BpkButtonType.SecondaryOnDark -> Color.Black.copy(alpha = 0.1f)
     BpkButtonType.Link -> dynamicColorOf(Color.Black, dark = Color.White).copy(alpha = 0.2f)
-    BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark, BpkButtonType.LinkOnDark -> Color.White.copy(alpha = 0.2f)
-    else -> Color.Black.copy(alpha = 0.2f)
+    BpkButtonType.LinkOnDark -> Color.White.copy(alpha = 0.2f)
+    else -> dynamicColorOf(Color.Black, Color.White).copy(alpha = 0.1f)
   }
 
 @Composable
 internal fun BpkButtonType.backgroundColor(interactionSource: InteractionSource): Color =
+  interactionSource.animateAsColor(
+    default = defaultBackgroundColor(),
+    pressed = pressedBackgroundColor(),
+  )
+
+@Composable
+private fun BpkButtonType.defaultBackgroundColor(): Color =
   when (this) {
-    BpkButtonType.Destructive -> interactionSource.animateAsColor(
-      default = dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint02),
-      pressed = dynamicColorOf(Color(0xFFB22E45), Color(0xFFF85C76)),
-    )
-    BpkButtonType.Featured -> interactionSource.animateAsColor(
-      default = BpkTheme.colors.primary,
-      pressed = dynamicColorOf(BpkColor.SkyBlueShade01, dark = BpkColor.SkyBlue),
-    )
+    BpkButtonType.Primary -> BpkButtonColors.primaryNormalBackground
+    BpkButtonType.Secondary -> BpkButtonColors.secondaryNormalBackground
+    BpkButtonType.Featured -> BpkButtonColors.featuredNormalBackground
+    BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkNormalBackground
+    BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightNormalBackground
+    BpkButtonType.SecondaryOnDark -> BpkButtonColors.secondaryOnDarkNormalBackground
+    BpkButtonType.Destructive -> BpkButtonColors.destructiveNormalBackground
     BpkButtonType.Link, BpkButtonType.LinkOnDark -> Color.Transparent
-    BpkButtonType.Primary -> BpkColor.Monteverde
-    BpkButtonType.PrimaryOnDark -> BpkColor.White
-    BpkButtonType.PrimaryOnLight -> BpkColor.SkyGray
-    BpkButtonType.Secondary -> dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint02)
-    BpkButtonType.SecondaryOnDark -> Color.White.copy(alpha = 0.1f)
   }
 
+@Composable
+private fun BpkButtonType.pressedBackgroundColor(): Color =
+  when (this) {
+    BpkButtonType.Primary -> BpkButtonColors.primaryPressedBackground
+    BpkButtonType.Secondary -> BpkButtonColors.secondaryPressedBackground
+    BpkButtonType.Featured -> BpkButtonColors.featuredPressedBackground
+    BpkButtonType.PrimaryOnDark -> BpkButtonColors.primaryOnDarkPressedBackground
+    BpkButtonType.PrimaryOnLight -> BpkButtonColors.primaryOnLightPressedBackground
+    BpkButtonType.SecondaryOnDark -> BpkButtonColors.secondaryOnDarkPressedBackground
+    BpkButtonType.Destructive -> BpkButtonColors.destructivePressedBackground
+    BpkButtonType.Link, BpkButtonType.LinkOnDark -> Color.Transparent
+  }
 
 @Composable
 internal fun BpkButtonType.contentColor(interactionSource: InteractionSource): Color =
+  interactionSource.animateAsColor(
+    default = defaultContentColor(),
+    pressed = pressedContentColor(),
+  )
+
+@Composable
+private fun BpkButtonType.defaultContentColor(): Color =
   when (this) {
-    BpkButtonType.Destructive -> interactionSource.animateAsColor(
-      default = dynamicColorOf(Color(0xFFB22E45), Color(0xFFF85C76)),
-      pressed = dynamicColorOf(BpkColor.White, BpkColor.Black),
-    )
-    BpkButtonType.Featured -> dynamicColorOf(BpkColor.White, BpkColor.SkyGray)
-    BpkButtonType.Link -> interactionSource.animateAsColor(
-      default = BpkTheme.colors.primary,
-      pressed = dynamicColorOf(BpkColor.SkyBlueShade01, BpkColor.SkyBlue),
-    )
-    BpkButtonType.LinkOnDark -> interactionSource.animateAsColor(
-      default = Color.White,
-      pressed = Color.White.copy(alpha = 0.6f),
-    )
-    BpkButtonType.Primary -> dynamicColorOf(BpkColor.White, BpkColor.Black)
-    BpkButtonType.PrimaryOnDark -> BpkColor.SkyGray
-    BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkColor.White
-    BpkButtonType.Secondary -> dynamicColorOf(BpkColor.SkyBlueShade01, BpkColor.SkyBlueTint01)
+    BpkButtonType.Primary -> BpkTheme.colors.textOnDark
+    BpkButtonType.Secondary -> BpkTheme.colors.textPrimary
+    BpkButtonType.Featured -> BpkTheme.colors.textPrimaryInverse
+    BpkButtonType.PrimaryOnDark -> BpkTheme.colors.textOnLight
+    BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkTheme.colors.textOnDark
+    BpkButtonType.Destructive -> BpkButtonColors.destructiveNormalForeground
+    BpkButtonType.Link -> BpkTheme.colors.textLink
+    BpkButtonType.LinkOnDark -> BpkTheme.colors.textOnDark
   }
+
+@Composable
+private fun BpkButtonType.pressedContentColor(): Color =
+  when (this) {
+    BpkButtonType.Primary -> BpkTheme.colors.textOnDark
+    BpkButtonType.Secondary -> BpkTheme.colors.textPrimary
+    BpkButtonType.Featured -> BpkTheme.colors.textPrimaryInverse
+    BpkButtonType.PrimaryOnDark -> BpkTheme.colors.textOnLight
+    BpkButtonType.PrimaryOnLight, BpkButtonType.SecondaryOnDark -> BpkTheme.colors.textOnDark
+    BpkButtonType.Destructive -> BpkTheme.colors.textPrimaryInverse
+    BpkButtonType.Link -> BpkButtonColors.linkPressedForeground
+    BpkButtonType.LinkOnDark -> BpkButtonColors.linkOnDarkPressedForeground
+  }
+
+@Composable
+internal fun BpkButtonType.loadingBackgroundColor(): Color = pressedBackgroundColor()
+
+@Composable
+internal fun BpkButtonType.loadingContentColor(): Color = pressedContentColor()

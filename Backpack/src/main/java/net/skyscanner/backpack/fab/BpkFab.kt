@@ -68,7 +68,7 @@ open class BpkFab @JvmOverloads constructor(
     this.elevation = resources.getDimensionPixelSize(R.dimen.bpkElevationBase).toFloat()
     this.backgroundTintList = getColorSelector(
       backgroundColour,
-      context.getColor(R.color.__buttonDisabledBackground)
+      context.getColor(R.color.__privateButtonDisabledBackground)
     )
   }
 

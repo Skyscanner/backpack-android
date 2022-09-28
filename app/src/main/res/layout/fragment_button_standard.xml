@@ -227,7 +227,7 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bpkSkyGray"
+    android:background="@color/bpkSurfaceContrast"
     android:gravity="center_horizontal|top"
     android:orientation="horizontal"
     android:paddingHorizontal="@dimen/bpkSpacingBase"
@@ -281,7 +281,7 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bpkWhite"
+    android:background="@color/bpkTextOnDark"
     android:gravity="center_horizontal|top"
     android:orientation="horizontal"
     android:paddingHorizontal="@dimen/bpkSpacingBase"
@@ -335,7 +335,7 @@
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bpkSkyGray"
+    android:background="@color/bpkSurfaceContrast"
     android:gravity="center_horizontal|top"
     android:orientation="horizontal"
     android:paddingHorizontal="@dimen/bpkSpacingBase"

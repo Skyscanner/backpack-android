@@ -47,13 +47,11 @@ import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.LongArrowRight
 import net.skyscanner.backpack.demo.R
 import kotlin.time.Duration.Companion.seconds
-import kotlin.time.ExperimentalTime
 
 @Composable
 fun ButtonsStory(
@@ -193,7 +191,6 @@ private class LoadingScope(private val scope: CoroutineScope) {
 
   var loading by mutableStateOf(false)
 
-  @OptIn(ExperimentalTime::class)
   fun load() {
     scope.launch {
       loading = true
@@ -209,9 +206,10 @@ private fun BpkButtonType.linkType() =
     else -> false
   }
 
+@Composable
 internal fun BpkButtonType.rowBackground() =
   when (this) {
-    BpkButtonType.SecondaryOnDark, BpkButtonType.LinkOnDark, BpkButtonType.PrimaryOnDark -> BpkColor.SkyGray
-    BpkButtonType.PrimaryOnLight -> Color.White
+    BpkButtonType.SecondaryOnDark, BpkButtonType.LinkOnDark, BpkButtonType.PrimaryOnDark -> BpkTheme.colors.surfaceContrast
+    BpkButtonType.PrimaryOnLight -> BpkTheme.colors.textOnDark
     else -> Color.Transparent
   }
