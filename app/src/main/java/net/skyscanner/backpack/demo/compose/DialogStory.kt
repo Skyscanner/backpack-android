@@ -30,6 +30,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,7 +56,7 @@ fun DialogStory() {
     var shownDialog by rememberSaveable { mutableStateOf(ShownDialog.None) }
     ShownDialog.values().forEach {
       if (it != ShownDialog.None) {
-        BpkButton(stringResource(it.buttonText)) {
+        BpkButton(stringResource(it.buttonText), modifier = Modifier.testTag(it.buttonText.toString())) {
           shownDialog = it
         }
       }
