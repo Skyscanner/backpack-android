@@ -159,7 +159,6 @@ open class BpkButton(
     this.loading = loading
     this.icon = icon
     this.iconPosition = iconPosition
-    this.progress.setColorSchemeColors(context.getColor(R.color.__buttonDisabledText))
     updateSize()
     applyStyle(style)
   }
@@ -200,13 +199,14 @@ open class BpkButton(
 
   private fun applyStyle(style: ButtonStyle) {
     this.style = style
-    background = style.getButtonBackground(isEnabled)
+    background = style.getButtonBackground(enabled = isEnabled, loading = loading)
 
     if (loading) {
       setTextColor(Color.TRANSPARENT)
     } else {
       setTextColor(style.getContentColor())
     }
+    this.progress.setColorSchemeColors(style.getLoadingColor())
 
     var paddingHorizontal = paddingHorizontal
 

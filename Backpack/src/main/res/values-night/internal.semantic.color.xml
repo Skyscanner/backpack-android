@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-  <color name="__buttonDisabledBackground">@color/bpkBlackTint01</color>
-  <color name="__buttonDisabledText">@color/bpkBlackTint03</color>
-  <color name="__buttonSecondaryBackground">@color/bpkBlackTint02</color>
-  <color name="__buttonFeaturedPressedBackground">@color/bpkSkyBlue</color>
-  <color name="__buttonDestructiveBackground">@color/bpkBlackTint02</color>
-  <color name="__buttonDestructivePressedBackground">#F85C76</color>
-  <color name="__buttonPrimaryContent">@color/bpkBlack</color>
-  <color name="__buttonSecondaryContent">@color/bpkSkyBlueTint01</color>
-  <color name="__buttonFeaturedContent">@color/bpkSkyGray</color>
-  <color name="__buttonDestructiveContent">#F85C76</color>
-  <color name="__buttonDestructivePressedContent">@color/bpkBlack</color>
-  <color name="__buttonLinkPressedContent">@color/bpkSkyBlue</color>
-  <color name="__buttonDestructiveRipple">#19FFFFFF</color>
+  <color name="__buttonDefaultRipple">#19FFFFFF</color>
   <color name="__buttonLinkRipple">#33FFFFFF</color>
-
-  <color name="__skeletonBackground">@color/bpkBlackTint02</color>
-  <color name="__skeletonShimmerPrimary">#00000000</color>
-  <color name="__skeletonShimmerSecondary">#33000000</color>
 </resources>

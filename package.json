@@ -41,7 +41,7 @@
     "@babel/core": "^7.17.8",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.9.6",
-    "@skyscanner/bpk-foundations-android": "^4.2.1",
+    "@skyscanner/bpk-foundations-android": "^4.4.1",
     "@skyscanner/bpk-svgs": "^14.0.10",
     "@xmldom/xmldom": "^0.8.0",
     "danger": "^11.0.2",

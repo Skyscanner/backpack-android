@@ -35,9 +35,6 @@
     <item name="bpkTextInputLayoutStyle">@style/LondonThemeTextInputLayout</item>
     <item name="bpkRatingStyle">@style/LondonThemeRating</item>
     <item name="bpkBarChartStyle">@style/LondonThemeBarChart</item>
-
-    <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
-    <item name="bpkPrimaryGradientColorEnd">#002E61</item>
   </style>
 
   <style name="LondonThemeBpkStarRating" parent="">
@@ -188,8 +185,6 @@
     <item name="bpkRatingStyle">@style/DohaThemeRating</item>
     <item name="bpkSliderStyle">@style/DohaThemeSlider</item>
 
-    <item name="bpkPrimaryGradientColorStart">?bpkPrimaryColor</item>
-    <item name="bpkPrimaryGradientColorEnd">#ffb600</item>
     <item name="bpkHorizontalNavStyle">@style/DohaThemeHorizontalNav</item>
     <item name="bpkHorizontalNavStyleAlternate">@style/DohaThemeHorizontalNavAlternate</item>
     <item name="bpkSnackbarStyle">@style/DohaThemeSnackbar</item>

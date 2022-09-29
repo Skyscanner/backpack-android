@@ -337,8 +337,6 @@
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
-  <attr name="bpkPrimaryGradientColorStart" format="color" />
-  <attr name="bpkPrimaryGradientColorEnd" format="color" />
 
   <attr name="bpkStarRatingStyle" format="reference" />
   <attr name="bpkInteractiveStarRatingStyle" format="reference" />
@@ -354,7 +352,6 @@
   <attr name="bpkButtonLinkStyle" format="reference" />
   <attr name="bpkButtonLinkOnDarkStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
-  <attr name="bpkOutlineChipStyle" format="reference" />
   <attr name="bpkChipStyle" format="reference" />
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
   <attr name="bpkCheckboxStyle" format="reference" />

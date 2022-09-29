@@ -30,7 +30,7 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath dokka
     classpath 'com.facebook.testing.screenshot:plugin:0.15.0'
-    classpath "org.jlleitschuh.gradle:ktlint-gradle:10.3.0"
+    classpath "org.jlleitschuh.gradle:ktlint-gradle:11.0.0"
     classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
   }
 }
@@ -90,7 +90,7 @@ ext {
   googleMaps = "com.google.android.gms:play-services-maps:18.1.0"
   constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
   swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-  threeTenAbpVersion = "1.4.0"
+  threeTenAbpVersion = "1.4.1"
   threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
   threeTenAbpAndroid = "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
   picasso = "com.squareup.picasso:picasso:2.71828"

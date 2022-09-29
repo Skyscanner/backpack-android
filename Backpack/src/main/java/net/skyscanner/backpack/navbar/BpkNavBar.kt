@@ -143,7 +143,7 @@ class BpkNavBar @JvmOverloads constructor(
 
     this.expandedTitleColor = expandedTitleColor
     this.collapsedTitleColor = collapsedTextColor
-    this.background = ColorDrawable(context.getColor(R.color.bpkCanvas))
+    this.background = ColorDrawable(context.getColor(R.color.bpkSurfaceDefault))
     this.title = title
     this.icon = navIcon
     this.navAction = navAction

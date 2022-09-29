@@ -127,17 +127,17 @@ private fun BpkTypography.toMaterialTypography(fontFamily: FontFamily): Typograp
 
 private fun BpkColors.toMaterialColors(): Colors =
   Colors(
-    primary = primary,
-    primaryVariant = if (isLight) BpkColor.SkyBlueShade01 else BpkColor.SkyBlueTint01,
-    secondary = BpkColor.Monteverde,
-    secondaryVariant = BpkColor.Glencoe,
-    background = background,
-    surface = backgroundElevation01,
-    error = if (isLight) BpkColor.Panjin else BpkColor.Hillier,
-    onPrimary = BpkColor.White,
-    onSecondary = BpkColor.White,
+    primary = corePrimary,
+    primaryVariant = corePrimary,
+    secondary = coreAccent,
+    secondaryVariant = coreAccent,
+    background = canvas,
+    surface = surfaceDefault,
+    error = textError,
+    onPrimary = textOnDark,
+    onSecondary = textPrimaryInverse,
     onBackground = textPrimary,
     onSurface = textPrimary,
-    onError = BpkColor.White,
+    onError = textOnDark,
     isLight = isLight,
   )

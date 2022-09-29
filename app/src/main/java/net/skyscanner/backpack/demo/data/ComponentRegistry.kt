@@ -58,9 +58,6 @@ import net.skyscanner.backpack.demo.stories.DialogStory
 import net.skyscanner.backpack.demo.stories.DisabledCalendarStory
 import net.skyscanner.backpack.demo.stories.ElevationStory
 import net.skyscanner.backpack.demo.stories.FooterViewCalendarStory
-import net.skyscanner.backpack.demo.stories.GradientStoryCustom
-import net.skyscanner.backpack.demo.stories.GradientStoryPrimary
-import net.skyscanner.backpack.demo.stories.GradientStoryWithDirection
 import net.skyscanner.backpack.demo.stories.HorizontalNavStory
 import net.skyscanner.backpack.demo.stories.IconType
 import net.skyscanner.backpack.demo.stories.IconsStory
@@ -456,14 +453,6 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { ElevationStory() },
         TAB_TITLE_COMPOSE composeStory { ElevationComposeStory() },
-      )
-    ),
-    "Gradient" story NodeData(
-      { children -> SubStory of children },
-      mapOf(
-        "Primary" story NodeData { GradientStoryPrimary() },
-        "With direction" story NodeData { GradientStoryWithDirection() },
-        "Custom" story NodeData { GradientStoryCustom() }
       )
     ),
     "Icons" story NodeData { Story of R.layout.fragment_icons },

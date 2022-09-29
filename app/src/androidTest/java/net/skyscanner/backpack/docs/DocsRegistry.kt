@@ -25,19 +25,16 @@ import androidx.compose.ui.test.performClick
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.ShownDialog
-import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.YearMonth
 
-@OptIn(InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
 object DocsRegistry {
   val screenshots = listOf(
     ComposeScreenshot("All Icons - Compose", "default"),

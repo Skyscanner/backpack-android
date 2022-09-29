@@ -29,7 +29,7 @@
     android:layout_marginTop="@dimen/bpkSpacingBase"
     android:visibility="gone"
     android:layout_centerHorizontal="true"
-    app:badgeType="dark"
+    app:badgeType="strong"
     android:layout_below="@+id/weekday_header_view"
     app:message="9999" />
 </RelativeLayout>

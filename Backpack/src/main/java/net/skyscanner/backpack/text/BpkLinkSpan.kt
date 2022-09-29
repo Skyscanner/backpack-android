@@ -22,7 +22,7 @@ import android.content.Context
 import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.view.View
-import net.skyscanner.backpack.util.BpkTheme
+import net.skyscanner.backpack.R
 
 class BpkLinkSpan<T>(
   context: Context,
@@ -30,7 +30,7 @@ class BpkLinkSpan<T>(
   private val linkHandler: (T) -> Unit
 ) : ClickableSpan() {
 
-  private val color = BpkTheme.getPrimaryColor(context)
+  private val color = context.getColor(R.color.bpkTextLink)
 
   override fun updateDrawState(tp: TextPaint) {
     tp.color = color
