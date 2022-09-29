@@ -37,9 +37,9 @@ class DialogStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    view.findViewById<ViewGroup>(R.id.dialog_root).forEach { view ->
-      view.setOnClickListener {
-        handleOnClick(view)
+    view.findViewById<ViewGroup>(R.id.dialog_root).forEach { buttonView ->
+      buttonView.setOnClickListener {
+        handleOnClick(buttonView)
       }
     }
   }
@@ -152,7 +152,7 @@ class DialogStory : Story() {
     }.show()
   }
 
-  fun longDialogExample() {
+  private fun longDialogExample() {
     BpkDialog(requireContext(), BpkDialog.Type.Success).apply {
       title = getString(R.string.dialog_title)
       description = getString(R.string.stub).repeat(3)
@@ -169,7 +169,7 @@ class DialogStory : Story() {
     }.show()
   }
 
-  fun noIconDialogExample() {
+  private fun noIconDialogExample() {
     BpkDialog(requireContext(), BpkDialog.Type.Success).apply {
       title = getString(R.string.dialog_title)
       description = getString(R.string.dialog_text)
@@ -186,7 +186,7 @@ class DialogStory : Story() {
     }.show()
   }
 
-  fun flareDialogExample() {
+  private fun flareDialogExample() {
     BpkDialog(requireContext(), BpkDialog.Type.Flare).apply {
       title = getString(R.string.dialog_title)
       description = getString(R.string.dialog_text)

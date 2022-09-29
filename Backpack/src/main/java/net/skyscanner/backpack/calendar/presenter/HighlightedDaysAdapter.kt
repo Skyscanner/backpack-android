@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.calendar.presenter
 
 import android.content.Context
@@ -45,7 +47,7 @@ open class HighlightedDaysAdapter(
   private val groupedHolidays by unsafeLazy {
     holidays.fold(mutableMapOf<String, MutableSet<HighlightedDay>>()) { grouped, holiday ->
       val key = getId(holiday)
-      val group = grouped.getOrElse(key, { mutableSetOf<HighlightedDay>() })
+      val group = grouped.getOrElse(key) { mutableSetOf() }
       group.add(holiday)
       grouped[key] = group
       grouped

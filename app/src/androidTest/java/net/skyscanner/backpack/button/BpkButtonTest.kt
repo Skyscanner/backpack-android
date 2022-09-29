@@ -23,6 +23,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,7 +31,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.viewinterop.AndroidView
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import org.junit.Assume.assumeTrue
@@ -58,7 +59,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // we want to see colors of all types
     // different sizes have different text style
 
-    capture(background = type.rowBackground()) {
+    capture(background = { type.rowBackground() }) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
       }
@@ -71,7 +72,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // disabled/loading colors are not theme customisable
     assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
 
-    capture(background = type.rowBackground()) {
+    capture(background = { type.rowBackground() }) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
         isEnabled = false
@@ -85,7 +86,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // disabled/loading colors are not theme customisable
     // we need to run it on large size as well and the progress size will be different
 
-    capture(background = type.rowBackground()) {
+    capture(background = { type.rowBackground() }) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
         loading = true
@@ -168,7 +169,10 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     }
   }
 
-  private fun capture(background: Color = Color.Unspecified, content: () -> View) {
+  private fun capture(
+    background: @Composable () -> Color = { Color.Unspecified },
+    content: () -> View
+  ) {
     composed(
       size = IntSize(160, 64),
       tags = listOf(type, size),
@@ -176,7 +180,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
       Box(
         Modifier
           .fillMaxSize()
-          .background(background)
+          .background(background())
           .padding(BpkSpacing.Md),
         contentAlignment = Alignment.TopStart
       ) {
@@ -197,9 +201,12 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
 
 private typealias Flavor = Pair<BpkButton.Type, BpkButton.Size>
 
+@Composable
 private fun BpkButton.Type.rowBackground() =
   when (this) {
-    BpkButton.Type.SecondaryOnDark, BpkButton.Type.PrimaryOnDark, BpkButton.Type.LinkOnDark -> BpkColor.SkyGray
-    BpkButton.Type.PrimaryOnLight -> Color.White
+    BpkButton.Type.SecondaryOnDark,
+    BpkButton.Type.PrimaryOnDark,
+    BpkButton.Type.LinkOnDark -> BpkTheme.colors.surfaceContrast
+    BpkButton.Type.PrimaryOnLight -> BpkTheme.colors.textOnDark
     else -> Color.Unspecified
   }

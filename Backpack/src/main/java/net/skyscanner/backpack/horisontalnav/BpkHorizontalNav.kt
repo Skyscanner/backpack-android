@@ -86,7 +86,9 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     )
   }
 
+  @Suppress("DEPRECATION")
   private var _appearance: Appearance = Appearance.Normal
+  @Suppress("DEPRECATION")
   @Deprecated("Alternate styling is no longer supported - please remove usages")
   var appearance: Appearance
     get() = _appearance
@@ -118,6 +120,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     updateSize()
   }
 
+  @Suppress("DEPRECATION")
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(
       attrs,
@@ -132,6 +135,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     }
   }
 
+  @Suppress("DEPRECATION")
   private fun updateAppearance(attrs: AttributeSet? = null, defStyleAttr: Int = 0) {
     var textColor: Int = context.getColor(appearance.defaultTextColor)
     var textSelectedColor: Int = context.getColor(appearance.defaultTextSelectedColor)
@@ -147,7 +151,6 @@ open class BpkHorizontalNav @JvmOverloads constructor(
         indicatorColor = it.getColor(R.styleable.BpkHorizontalNav_horizontalNavIndicatorColor, indicatorColor)
       }
 
-    @Suppress("DEPRECATION")
     setSelectedTabIndicatorHeight(resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg))
     setTabTextColors(textColor, textSelectedColor)
     setSelectedTabIndicatorColor(indicatorColor)

@@ -43,7 +43,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 fun CardStory() {
   Column(
     modifier = Modifier
-      .background(BpkTheme.colors.backgroundAlternative)
+      .background(BpkTheme.colors.line)
       .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {

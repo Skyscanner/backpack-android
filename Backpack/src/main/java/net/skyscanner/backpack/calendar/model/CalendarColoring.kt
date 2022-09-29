@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.calendar.model
 
 import android.content.Context

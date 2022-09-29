@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.demo.stories
 
 import android.content.Context
@@ -31,9 +33,9 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
 
 private class FooterViewCalendarController(
-  val context: Context,
+  context: Context,
 ) : ExampleBpkCalendarController(context) {
-  override val calendarColoring: CalendarColoring? = CalendarColoring(
+  override val calendarColoring: CalendarColoring = CalendarColoring(
     coloredBuckets = setOf(
       ColoredBucket(
         CalendarCellStyle.Hightlight,

@@ -28,11 +28,11 @@
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="match_parent"
     android:layout_height="@dimen/bpkSpacingXxl"
-    android:background="@color/bpkBackgroundSecondary"
+    android:background="@color/bpkSurfaceHighlight"
     android:gravity="center_vertical|start"
     android:paddingStart="@dimen/bpkSpacingBase"
     android:text="@string/settings_section_theme"
-    android:textColor="@color/bpkSkyGrayTint01"
+    android:textColor="@color/bpkTextSecondary"
     app:textStyle="bodyDefault"
     tools:ignore="RtlSymmetry" />
 
@@ -107,7 +107,7 @@
     android:layout_marginStart="@dimen/bpkSpacingBase"
     android:layout_marginTop="@dimen/bpkSpacingSm"
     android:layout_marginEnd="@dimen/bpkSpacingBase"
-    android:background="@color/bpkSkyGrayTint06" />
+    android:background="@color/bpkLine" />
 
 
 </LinearLayout>

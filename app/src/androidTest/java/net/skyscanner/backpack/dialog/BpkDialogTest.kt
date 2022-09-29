@@ -118,6 +118,7 @@ class BpkDialogTest : BpkSnapshotTest() {
     record(dialog, asyncScreenshot)
   }
 
+  @Suppress("DEPRECATION")
   @Test
   fun deprecated() {
     val asyncScreenshot = prepareForAsyncTest()

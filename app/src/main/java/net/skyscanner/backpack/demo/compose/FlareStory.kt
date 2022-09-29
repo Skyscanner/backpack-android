@@ -83,8 +83,8 @@ fun RadiusFlareExample(modifier: Modifier = Modifier) {
 @Composable
 @Preview
 fun ContentPaddingFlareExample(modifier: Modifier = Modifier) {
-  BpkFlare(modifier, background = BpkTheme.colors.primary, insetContent = true) {
-    BpkText(text = stringResource(R.string.stub), color = BpkTheme.colors.background)
+  BpkFlare(modifier, background = BpkTheme.colors.coreAccent, insetContent = true) {
+    BpkText(text = stringResource(R.string.stub), color = BpkTheme.colors.textPrimaryInverse)
   }
 }
 

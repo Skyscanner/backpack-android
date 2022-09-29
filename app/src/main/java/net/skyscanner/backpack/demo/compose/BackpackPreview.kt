@@ -38,7 +38,7 @@ fun BackpackPreview(
 ) {
   BackpackDemoTheme {
     CompositionLocalProvider(*providers) {
-      Box(modifier.background(background.takeOrElse { BpkTheme.colors.background })) {
+      Box(modifier.background(background.takeOrElse { BpkTheme.colors.canvas })) {
         content()
       }
     }

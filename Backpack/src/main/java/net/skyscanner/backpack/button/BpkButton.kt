@@ -131,17 +131,13 @@ open class BpkButton(
   private var enabled = isEnabled
 
   init {
-    var type = type
     var style: ButtonStyle = type.createStyle(context)
-    var loading = loading
-    var icon = getIcon()
-    var iconPosition = iconPosition
 
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       .use {
         if (it.hasValue(R.styleable.BpkButton_buttonType)) {
-          type = Type.fromId(it.getInt(R.styleable.BpkButton_buttonType, 0))
-          style = type.createStyle(context)
+          this.type = Type.fromId(it.getInt(R.styleable.BpkButton_buttonType, 0))
+          style = this.type.createStyle(context)
         }
 
         style = ButtonStyle.fromAttributes(context, it, style)
@@ -156,9 +152,6 @@ open class BpkButton(
 
     this.clipToOutline = true
     this.type = type
-    this.loading = loading
-    this.icon = icon
-    this.iconPosition = iconPosition
     updateSize()
     applyStyle(style)
   }

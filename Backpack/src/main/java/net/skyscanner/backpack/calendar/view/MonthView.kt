@@ -32,6 +32,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.calendar.view
 
 import android.annotation.SuppressLint
@@ -86,8 +88,8 @@ internal class MonthView @JvmOverloads constructor(
   private var monthHeaderString = ""
 
   private val defaultTextColor: Int = context.getColor(R.color.bpkTextPrimary)
-  private val defaultTextColorLight: Int = context.getColor(R.color.bpkTextPrimaryLight)
-  private val defaultTextColorDark: Int = context.getColor(R.color.bpkTextPrimaryDark)
+  private val defaultTextColorLight: Int = context.getColor(R.color.bpkTextOnLight)
+  private val defaultTextColorDark: Int = context.getColor(R.color.bpkTextOnDark)
   private val disabledTextColor: Int = context.getColor(R.color.bpkTextDisabled)
 
   private val miniDayNumberTextSize: Int = monthNumberFont.fontSize

@@ -102,7 +102,7 @@ fun IconsStoryCompose() {
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
 
-    val autoMirrorBackground = BpkTheme.colors.systemGreen
+    val autoMirrorBackground = BpkTheme.colors.statusSuccessSpot
     val autoMirrorAlpha by animateFloatAsState(
       targetValue = when (layoutDirection) {
         LayoutDirection.Ltr -> 0f

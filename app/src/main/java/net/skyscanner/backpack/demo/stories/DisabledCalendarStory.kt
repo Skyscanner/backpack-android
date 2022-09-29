@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle

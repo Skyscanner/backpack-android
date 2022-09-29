@@ -35,7 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.data.Token
@@ -68,7 +68,7 @@ private fun SpacingSampleRow(token: Token<Dp>) {
       modifier = Modifier
         .height(BpkSpacing.Base)
         .width(token.value)
-        .background(color = BpkColor.Monteverde),
+        .background(color = BpkTheme.colors.coreAccent),
     )
   }
 }

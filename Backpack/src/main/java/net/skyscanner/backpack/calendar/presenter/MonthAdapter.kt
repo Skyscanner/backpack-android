@@ -32,6 +32,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.calendar.presenter
 
 import android.content.Context
@@ -154,14 +156,14 @@ internal class MonthAdapter(
     // be we want to show all three here.
     val totalMonths = Period.between(controller.startDate, controller.endDate).toTotalMonths().toInt() + 1
 
-    return (0 until totalMonths).fold(mutableListOf<PositionMetadata>()) { acc, position ->
+    return (0 until totalMonths).fold(mutableListOf()) { acc, position ->
       val positionWithStart = position + controller.startDate.month.value - 1
       val month = positionWithStart % MONTHS_IN_YEAR + 1
       val year = positionWithStart / MONTHS_IN_YEAR + controller.startDate.year
 
       acc.add(PositionMetadata(month, year, VIEW_TYPE_MONTH))
 
-      if (controller.monthFooterAdapter?.hasFooterForMonth(month.toInt(), year.toInt()) == true) {
+      if (controller.monthFooterAdapter?.hasFooterForMonth(month, year) == true) {
         acc.add(PositionMetadata(month, year, VIEW_TYPE_FOOTER))
       }
 

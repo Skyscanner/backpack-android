@@ -98,7 +98,7 @@ class BpkCardTest : BpkSnapshotTest() {
     ) {
       Box(
         Modifier
-          .background(BpkTheme.colors.backgroundAlternative)
+          .background(BpkTheme.colors.textSecondary)
           .padding(BpkSpacing.Lg)
       ) {
         content()

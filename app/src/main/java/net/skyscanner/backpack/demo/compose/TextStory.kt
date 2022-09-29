@@ -99,7 +99,7 @@ fun DefaultTextExample() {
 fun ColoredTextExample() {
   BpkText(
     text = "Sample",
-    color = BpkTheme.colors.primary,
+    color = BpkTheme.colors.textLink,
   )
 }
 
@@ -118,7 +118,7 @@ fun AnnotatedTextExample() {
   BpkText(
     text = buildAnnotatedString {
       append("Sample ")
-      withStyle(style = SpanStyle(color = BpkTheme.colors.primary)) {
+      withStyle(style = SpanStyle(color = BpkTheme.colors.textLink)) {
         append("Text")
       }
     }
