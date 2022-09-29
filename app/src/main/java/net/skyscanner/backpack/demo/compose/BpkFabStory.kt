@@ -19,12 +19,12 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -41,25 +41,29 @@ import net.skyscanner.backpack.toast.BpkToast
 fun BpkFabStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Xl),
-    verticalArrangement = Arrangement.Center,
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Xxl, Alignment.CenterVertically),
   ) {
     val context = LocalContext.current
     BpkFab(
-      onClick = { BpkToast.makeText(context, "Message", BpkToast.LENGTH_SHORT).show() },
+      onClick = { showToast(context = context) },
       icon = BpkIcon.Search,
       contentDescription = stringResource(R.string.content_description),
     )
-    Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+
     BpkFab(
-      onClick = { BpkToast.makeText(context, "Message", BpkToast.LENGTH_SHORT).show() },
+      onClick = { showToast(context = context) },
       icon = BpkIcon.Star,
       contentDescription = stringResource(R.string.content_description),
     )
-    Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+
     BpkFab(
-      onClick = { BpkToast.makeText(context, "Message", BpkToast.LENGTH_SHORT).show() },
+      onClick = { showToast(context = context) },
       icon = BpkIcon.Flight,
       contentDescription = stringResource(R.string.content_description),
     )
   }
+}
+
+private fun showToast(context: Context) {
+  BpkToast.makeText(context, context.getString(R.string.generic_message), BpkToast.LENGTH_SHORT).show()
 }

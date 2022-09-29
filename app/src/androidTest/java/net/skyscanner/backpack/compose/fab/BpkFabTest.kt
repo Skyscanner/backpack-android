@@ -32,7 +32,7 @@ class BpkFabTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 200, width = 200)
+    setDimensions(height = 50, width = 200)
   }
 
   @Test
@@ -40,7 +40,7 @@ class BpkFabTest : BpkSnapshotTest() {
     BpkFab(
       onClick = {},
       icon = BpkIcon.Search,
-      contentDescription = "Localised description",
+      contentDescription = "Content description",
     )
   }
 }

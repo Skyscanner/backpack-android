@@ -165,4 +165,5 @@
   <string name="tokens_title">Tokens</string>
   <string name="components_title">Components</string>
   <string name="content_description">Content description</string>
+  <string name="generic_message">Message</string>
 </resources>

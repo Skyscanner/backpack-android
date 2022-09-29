@@ -9,10 +9,12 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of a `BpkFab`:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.button.BpkFab
+import net.skyscanner.backpack.compose.fab.BpkFab
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.Search
 
 BpkFab(
-  onClick = { BpkToast.makeText(context, "Message", BpkToast.LENGTH_SHORT).show() },
+  onClick = { showToast(context = context) },
   icon = BpkIcon.Search,
   contentDescription = stringResource(R.string.content_description),
 ) {
