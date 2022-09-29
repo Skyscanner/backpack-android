@@ -30,6 +30,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Rule
@@ -111,6 +112,37 @@ class BpkDialogTest : BpkSnapshotTest() {
 
       addActionButton(
         BpkDialog.Button("Cancel") { }
+      )
+    }
+
+    record(dialog, asyncScreenshot)
+  }
+
+  @Test
+  fun deprecated() {
+    val asyncScreenshot = prepareForAsyncTest()
+    val dialog = BpkDialog(activity, BpkDialog.Style.ALERT).apply {
+      title = "Delete?"
+      description = "Delete your profile?"
+      icon = BpkDialog.Icon(R.drawable.bpk_trash, activity.getColor(R.color.bpkValensole))
+
+      addActionButton(
+        BpkButton(activity).apply {
+          type = BpkButton.Type.Secondary
+          text = "Secondary"
+        }
+      )
+      addActionButton(
+        BpkButton(activity).apply {
+          type = BpkButton.Type.Destructive
+          text = "Destructive"
+        }
+      )
+      addActionButton(
+        BpkButton(activity).apply {
+          type = BpkButton.Type.Featured
+          text = "Featured"
+        }
       )
     }
 
