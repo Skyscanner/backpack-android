@@ -103,7 +103,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       webName = "floating-action-button",
       componentsToReplace = setOf(
         "androidx.compose.material.FloatingActionButton",
-        "androidx.compose.material.ExtendedFloatingActionButton"
+        "androidx.compose.material.ExtendedFloatingActionButton",
       )
     ),
     ICON(

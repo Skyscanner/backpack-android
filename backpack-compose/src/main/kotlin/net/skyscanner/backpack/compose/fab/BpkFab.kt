@@ -46,7 +46,7 @@ fun BpkFab(
     shape = CircleShape,
     backgroundColor = BpkTheme.colors.coreAccent,
     contentColor = BpkTheme.colors.textPrimaryInverse,
-    elevation = FloatingActionButtonDefaults.elevation(BpkElevation.Xl),
+    elevation = FloatingActionButtonDefaults.elevation(BpkElevation.Xl, BpkElevation.Xl, BpkElevation.Xl, BpkElevation.Xl),
   ) {
     BpkIcon(
       icon = icon,

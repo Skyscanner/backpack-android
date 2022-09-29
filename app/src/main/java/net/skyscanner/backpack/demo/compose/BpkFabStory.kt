@@ -45,25 +45,25 @@ fun BpkFabStory() {
   ) {
     val context = LocalContext.current
     BpkFab(
-      onClick = { showToast(context = context) },
+      onClick = { showGenericMessageToast(context) },
       icon = BpkIcon.Search,
       contentDescription = stringResource(R.string.content_description),
     )
 
     BpkFab(
-      onClick = { showToast(context = context) },
+      onClick = { showGenericMessageToast(context) },
       icon = BpkIcon.Star,
       contentDescription = stringResource(R.string.content_description),
     )
 
     BpkFab(
-      onClick = { showToast(context = context) },
+      onClick = { showGenericMessageToast(context) },
       icon = BpkIcon.Flight,
       contentDescription = stringResource(R.string.content_description),
     )
   }
 }
 
-private fun showToast(context: Context) {
+private fun showGenericMessageToast(context: Context) {
   BpkToast.makeText(context, context.getString(R.string.generic_message), BpkToast.LENGTH_SHORT).show()
 }

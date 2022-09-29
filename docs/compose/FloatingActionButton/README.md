@@ -14,10 +14,10 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Search
 
 BpkFab(
-  onClick = { showToast(context = context) },
+  onClick = {},
   icon = BpkIcon.Search,
-  contentDescription = stringResource(R.string.content_description),
+  contentDescription = "Content description",
 ) {
-    content()
+    //content
 }
 ```
