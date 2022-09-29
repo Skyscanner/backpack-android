@@ -71,10 +71,9 @@ open class BpkDialog private constructor(
   }
 
   enum class Type {
-    NoIcon,
     Success,
     Warning,
-    Danger,
+    Destructive,
     Flare,
   }
 

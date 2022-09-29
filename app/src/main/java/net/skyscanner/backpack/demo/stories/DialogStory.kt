@@ -135,7 +135,7 @@ class DialogStory : Story() {
   }
 
   private fun destructiveDialogExample() {
-    BpkDialog(requireContext(), BpkDialog.Type.Danger).apply {
+    BpkDialog(requireContext(), BpkDialog.Type.Destructive).apply {
       title = getString(R.string.dialog_title)
       description = getString(R.string.dialog_text)
       icon = BpkDialog.Icon(R.drawable.bpk_trash)
@@ -153,7 +153,7 @@ class DialogStory : Story() {
   }
 
   fun longDialogExample() {
-    BpkDialog(requireContext(), BpkDialog.Type.NoIcon).apply {
+    BpkDialog(requireContext(), BpkDialog.Type.Success).apply {
       title = getString(R.string.dialog_title)
       description = getString(R.string.stub).repeat(3)
       addActionButton(
@@ -170,7 +170,7 @@ class DialogStory : Story() {
   }
 
   fun noIconDialogExample() {
-    BpkDialog(requireContext(), BpkDialog.Type.NoIcon).apply {
+    BpkDialog(requireContext(), BpkDialog.Type.Success).apply {
       title = getString(R.string.dialog_title)
       description = getString(R.string.dialog_text)
       addActionButton(

@@ -67,9 +67,6 @@ internal interface BpkDialogImpl {
       dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
       dialog.setContentView(root)
       iconView?.type = type
-      if (type == BpkDialog.Type.NoIcon || type == BpkDialog.Type.Flare) {
-        iconView?.visibility = View.INVISIBLE
-      }
     }
 
     override var title: String = ""
@@ -99,17 +96,14 @@ internal interface BpkDialogImpl {
     fun addActionButton(button: BpkDialog.Button) {
       val buttonsRoot = buttonsRoot
       if (buttonsRoot != null) {
+        val dangerButton = type == BpkDialog.Type.Destructive
         when (buttonsRoot.childCount) {
           0 -> addActionButton(
-            createButton(
-              button = button,
-              type = when (type) {
-                BpkDialog.Type.Danger -> BpkButton.Type.Destructive
-                else -> BpkButton.Type.Featured
-              },
-            )
+            createButton(if (dangerButton) BpkButton.Type.Destructive else BpkButton.Type.Featured, button)
           )
-          1 -> addActionButton(createButton(BpkButton.Type.Secondary, button))
+          1 -> addActionButton(
+            createButton(if (dangerButton) BpkButton.Type.Link else BpkButton.Type.Secondary, button)
+          )
           else -> addActionButton(createButton(BpkButton.Type.Link, button))
         }
       }

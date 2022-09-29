@@ -62,7 +62,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
       color = when (type) {
         BpkDialog.Type.Success -> context.getColorStateList(R.color.bpkCoreAccent)
         BpkDialog.Type.Warning -> context.getColorStateList(R.color.bpkStatusWarningSpot)
-        BpkDialog.Type.Danger -> context.getColorStateList(R.color.bpkStatusDangerSpot)
+        BpkDialog.Type.Destructive -> context.getColorStateList(R.color.bpkStatusDangerSpot)
         else -> ColorStateList.valueOf(backgroundColor)
       }
 

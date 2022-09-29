@@ -52,7 +52,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestDialog() {
+  fun default() {
     val asyncScreenshot = prepareForAsyncTest()
 
     val dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
@@ -73,7 +73,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestDialogFullScreen() {
+  fun fullscreen() {
     val asyncScreenshot = prepareForAsyncTest()
 
     val dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
@@ -97,10 +97,10 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestDialogBottomSheet() {
+  fun destructive() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity, BpkDialog.Type.Danger).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Type.Destructive).apply {
       title = "Delete?"
       description = "Delete your profile?"
       icon = BpkDialog.Icon(R.drawable.bpk_trash)
@@ -118,7 +118,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestDialogWithButtonLinks() {
+  fun buttonLinks() {
     val asyncScreenshot = prepareForAsyncTest()
 
     val dialog = BpkDialog(activity, BpkDialog.Type.Warning)
@@ -140,7 +140,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestFlareDialog() {
+  fun flare() {
     val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
     val asyncScreenshot = prepareForAsyncTest()
 
