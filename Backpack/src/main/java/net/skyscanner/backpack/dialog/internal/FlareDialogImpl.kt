@@ -35,7 +35,6 @@ internal class FlareDialogImpl(
 ) : BpkDialogImpl.Base(R.layout.bpk_dialog_flare, dialog, BpkDialog.Type.Flare) {
 
   init {
-    println()
     dialog.window?.let {
       val maxWidth = dialog.context.resources.getDimensionPixelSize(R.dimen.bpk_dialog_flare_max_width)
       val displayWidth = getScreenWidth(dialog)
