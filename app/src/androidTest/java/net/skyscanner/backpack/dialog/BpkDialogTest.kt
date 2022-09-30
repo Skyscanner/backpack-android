@@ -150,14 +150,14 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun buttonLinks() {
+  fun warning() {
     val asyncScreenshot = prepareForAsyncTest()
 
     val dialog = BpkDialog(activity, BpkDialog.Type.Warning)
     dialog.apply {
       title = "Want to know when prices change?"
       description = "Create a price alert and we'll let you know changes for this route"
-      icon = BpkDialog.Icon(R.drawable.bpk_alert__active)
+      icon = BpkDialog.Icon(R.drawable.bpk_trash)
 
       addActionButton(
         BpkDialog.Button("Create") { }
