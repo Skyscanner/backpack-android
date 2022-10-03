@@ -28,6 +28,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.dialog.BpkDialog
 
 internal interface BpkDialogImpl {
@@ -46,7 +47,8 @@ internal interface BpkDialogImpl {
 
   abstract class Base(
     @LayoutRes layout: Int,
-    dialog: Dialog
+    dialog: Dialog,
+    private val type: BpkDialog.Type?,
   ) : BpkDialogImpl {
 
     protected val root: View = LayoutInflater.from(dialog.context).inflate(layout, null)
@@ -64,6 +66,7 @@ internal interface BpkDialogImpl {
     init {
       dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
       dialog.setContentView(root)
+      iconView?.type = type
     }
 
     override var title: String = ""
@@ -89,5 +92,30 @@ internal interface BpkDialogImpl {
     override fun addActionButton(view: View) {
       buttonsRoot?.addView(view, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
     }
+
+    fun addActionButton(button: BpkDialog.Button) {
+      val buttonsRoot = buttonsRoot
+      if (buttonsRoot != null) {
+        val dangerButton = type == BpkDialog.Type.Destructive
+        when (buttonsRoot.childCount) {
+          0 -> addActionButton(
+            createButton(if (dangerButton) BpkButton.Type.Destructive else BpkButton.Type.Featured, button)
+          )
+          1 -> addActionButton(
+            createButton(if (dangerButton) BpkButton.Type.Link else BpkButton.Type.Secondary, button)
+          )
+          else -> addActionButton(createButton(BpkButton.Type.Link, button))
+        }
+      }
+    }
+
+    private fun createButton(type: BpkButton.Type, button: BpkDialog.Button): View =
+      BpkButton(root.context).apply {
+        this.type = type
+        this.text = button.text
+        this.setOnClickListener {
+          button.onClick()
+        }
+      }
   }
 }

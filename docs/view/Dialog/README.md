@@ -12,32 +12,28 @@ Example of dialog in Kotlin
 
 ```Kotlin
 import net.skyscanner.backpack.dialog.BpkDialog
+import net.skyscanner.backpack.dialog.BpkDialog.Type
+import net.skyscanner.backpack.dialog.BpkDialog.Button
 
-val dialog = BpkDialog(context, BpkDialog.Style.ALERT)
+val dialog = BpkDialog(context, BpkDialog.Type.Success)
 dialog.apply {
     title = "You are going to Tokyo!"
     description = "Your flight is all booked. Why not check out some hotels now?"
-    icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        context.getColor(R.color.bpkMonteverde),
+    icon = BpkDialog.Icon(R.drawable.bpk_tick)
+
+    addActionButton(
+      BpkDialog.Button("Continue") {
+          println("confirmed")
+          dialog.dismiss()
+      }
     )
 
-    addActionButton(BpkButton(context).apply {
-        text = "Continue"
-        setOnClickListener({
-            println("confirmed")
-            dialog.dismiss()
-        })
-    })
-
-    addActionButton(BpkButton(context).apply {
-        text = "Skip"
-        type = BpkButton.Type.Secondary
-        setOnClickListener({
-            println("skipped")
-            dialog.dismiss()
-        })
-    })
+    addActionButton(
+      BpkDialog.Button("Skip") {
+        println("skipped")
+        dialog.dismiss()
+      }
+    )
 }
 ```
 
@@ -45,30 +41,29 @@ Example of flare dialog in Kotlin
 
 ```Kotlin
 import net.skyscanner.backpack.dialog.BpkDialog
+import net.skyscanner.backpack.dialog.BpkDialog.Type
+import net.skyscanner.backpack.dialog.BpkDialog.Button
 
-val dialog = BpkDialog(context, BpkDialog.Style.FLARE)
+val dialog = BpkDialog(context, BpkDialog.Type.Flare)
 dialog.apply {
     title = "You are going to Tokyo!"
     description = "Your flight is all booked. Why not check out some hotels now?"
 
     Picasso.get().load(url).into(image)
 
-    addActionButton(BpkButton(context).apply {
-        text = "Continue"
-        setOnClickListener({
-            println("confirmed")
-            dialog.dismiss()
-        })
-    })
+    addActionButton(
+      BpkDialog.Button("Continue") {
+        println("confirmed")
+        dialog.dismiss()
+      }
+    )
 
-    addActionButton(BpkButton(context).apply {
-        text = "Skip"
-        type = BpkButton.Type.Secondary
-        setOnClickListener({
-            println("skipped")
-            dialog.dismiss()
-        })
-    })
+    addActionButton(
+      BpkDialog.Button("Skip") {
+        println("skipped")
+        dialog.dismiss()
+      }
+    )
 }
 ```
 

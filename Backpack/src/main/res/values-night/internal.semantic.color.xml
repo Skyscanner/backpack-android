@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
   <color name="__buttonDefaultRipple">#19FFFFFF</color>
   <color name="__buttonLinkRipple">#33FFFFFF</color>
-  <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
 </resources>

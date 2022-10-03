@@ -18,27 +18,42 @@
 
 package net.skyscanner.backpack.compose.dialog.internal
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.dialog.DialogButton
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.theme.BpkTheme
 
 internal object Dialog {
   internal sealed class Icon {
     abstract val icon: BpkIcon
+
+    @get:Composable
     abstract val backgroundColor: Color
 
     data class Success(override val icon: BpkIcon) : Icon() {
-      override val backgroundColor = BpkColor.Monteverde
+
+      override val backgroundColor
+        @Composable
+        get() = BpkTheme.colors.coreAccent
+
     }
 
     data class Warning(override val icon: BpkIcon) : Icon() {
-      override val backgroundColor = BpkColor.Kolkata
+
+      override val backgroundColor
+        @Composable
+        get() = BpkTheme.colors.statusWarningSpot
+
     }
 
     data class Destructive(override val icon: BpkIcon) : Icon() {
-      override val backgroundColor = BpkColor.Panjin
+
+      override val backgroundColor
+        @Composable
+        get() = BpkTheme.colors.statusDangerSpot
+
     }
   }
 

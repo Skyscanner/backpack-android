@@ -53,27 +53,20 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestDialog() {
+  fun default() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
       title = "You are going to Tokyo!"
       description = "Your flight is all booked. Why not check out some hotels now?"
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        context.getColor(R.color.bpkMonteverde),
+      icon = BpkDialog.Icon(R.drawable.bpk_tick)
+
+      addActionButton(
+        BpkDialog.Button("Continue") { }
       )
 
       addActionButton(
-        BpkButton(context).apply {
-          text = "Continue"
-        }
-      )
-
-      addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-        }
+        BpkDialog.Button("Skip") { }
       )
     }
 
@@ -81,30 +74,23 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestDialogFullScreen() {
+  fun fullscreen() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
       title = "You are going to Tokyo!"
       description = Array(30) {
         "Your flight is all booked. Why not check out some hotels now?"
       }.joinToString(separator = "\n")
 
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        context.getColor(R.color.bpkMonteverde),
+      icon = BpkDialog.Icon(R.drawable.bpk_tick)
+
+      addActionButton(
+        BpkDialog.Button("Continue") { }
       )
 
       addActionButton(
-        BpkButton(context).apply {
-          text = "Continue"
-        }
-      )
-
-      addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-        }
+        BpkDialog.Button("Skip") { }
       )
     }
 
@@ -112,26 +98,50 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestDialogBottomSheet() {
+  fun destructive() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity, BpkDialog.Style.BOTTOM_SHEET).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Type.Destructive).apply {
       title = "Delete?"
       description = "Delete your profile?"
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_trash,
-        context.getColor(R.color.bpkPanjin),
+      icon = BpkDialog.Icon(R.drawable.bpk_trash)
+
+      addActionButton(
+        BpkDialog.Button("Delete") { }
       )
 
       addActionButton(
-        BpkButton(context, BpkButton.Type.Destructive).apply {
-          text = "Delete"
+        BpkDialog.Button("Cancel") { }
+      )
+    }
+
+    record(dialog, asyncScreenshot)
+  }
+
+  @Test
+  fun deprecated() {
+    val asyncScreenshot = prepareForAsyncTest()
+    val dialog = BpkDialog(activity, BpkDialog.Style.ALERT).apply {
+      title = "Delete?"
+      description = "Delete your profile?"
+      icon = BpkDialog.Icon(R.drawable.bpk_trash, activity.getColor(R.color.bpkValensole))
+
+      addActionButton(
+        BpkButton(activity).apply {
+          type = BpkButton.Type.Secondary
+          text = "Secondary"
         }
       )
-
       addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Cancel"
+        BpkButton(activity).apply {
+          type = BpkButton.Type.Destructive
+          text = "Destructive"
+        }
+      )
+      addActionButton(
+        BpkButton(activity).apply {
+          type = BpkButton.Type.Featured
+          text = "Featured"
         }
       )
     }
@@ -140,29 +150,21 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestDialogWithButtonLinks() {
+  fun warning() {
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity)
+    val dialog = BpkDialog(activity, BpkDialog.Type.Warning)
     dialog.apply {
       title = "Want to know when prices change?"
       description = "Create a price alert and we'll let you know changes for this route"
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_alert__active,
-        context.getColor(R.color.bpkMonteverde),
+      icon = BpkDialog.Icon(R.drawable.bpk_trash)
+
+      addActionButton(
+        BpkDialog.Button("Create") { }
       )
 
       addActionButton(
-        BpkButton(context).apply {
-          text = "Create"
-        }
-      )
-
-      addActionButton(
-        BpkButton(context).apply {
-          type = BpkButton.Type.Link
-          text = "No, Thanks!"
-        }
+        BpkDialog.Button("No, Thanks!") { }
       )
     }
 
@@ -170,30 +172,23 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestFlareDialog() {
+  fun flare() {
     val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
     val asyncScreenshot = prepareForAsyncTest()
 
-    val dialog = BpkDialog(activity, BpkDialog.Style.FLARE).apply {
+    val dialog = BpkDialog(activity, BpkDialog.Type.Flare).apply {
       title = "You are going to Tokyo!"
       description = "Your flight is all booked."
-      icon = BpkDialog.Icon(
-        R.drawable.bpk_tick,
-        context.getColor(R.color.bpkMonteverde),
-      )
+      icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
       image!!.setImageBitmap(bitmap)
 
       addActionButton(
-        BpkButton(context).apply {
-          text = "Continue"
-        }
+        BpkDialog.Button("Continue") { }
       )
 
       addActionButton(
-        BpkButton(context, BpkButton.Type.Secondary).apply {
-          text = "Skip"
-        }
+        BpkDialog.Button("Skip") { }
       )
     }
 

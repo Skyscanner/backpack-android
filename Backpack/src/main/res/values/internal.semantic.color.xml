@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
   <color name="__buttonDefaultRipple">#19000000</color>
   <color name="__buttonLinkRipple">#33000000</color>
   <color name="__buttonLinkOnDarkRipple">#33FFFFFF</color>
   <color name="__buttonOnLightRipple">#19FFFFFF</color>
   <color name="__buttonOnDarkRipple">#19000000</color>
-  <color name="__dialogBackground">@color/bpkWhite</color>
 </resources>
