@@ -17,7 +17,5 @@ BpkFab(
   onClick = {},
   icon = BpkIcon.Search,
   contentDescription = "Content description",
-) {
-    //content
-}
+)
 ```
