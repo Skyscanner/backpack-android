@@ -46,8 +46,8 @@ open class BpkFab @JvmOverloads constructor(
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var backgroundColour = context.getColor(R.color.bpkMonteverde)
-    var iconColour = context.getColor(R.color.bpkWhite)
+    var backgroundColour = context.getColor(R.color.bpkCoreAccent)
+    var iconColour = context.getColor(R.color.bpkTextPrimaryInverse)
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -59,14 +59,16 @@ open class BpkFab @JvmOverloads constructor(
       iconColour = it.getColor(R.styleable.BpkFab_fabIconColor, iconColour)
     }
 
-    this.imageTintList = ColorStateList.valueOf(iconColour)
+    this.imageTintList = getColorSelector(
+      iconColour,
+      context.getColor(R.color.bpkTextDisabled)
+    )
     this.isClickable = isEnabled
     this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
     this.elevation = resources.getDimensionPixelSize(R.dimen.bpkElevationBase).toFloat()
     this.backgroundTintList = getColorSelector(
       backgroundColour,
-      backgroundColour,
-      context.getColor(R.color.bpkSkyGrayTint06)
+      context.getColor(R.color.__privateButtonDisabledBackground)
     )
   }
 
@@ -77,16 +79,12 @@ open class BpkFab @JvmOverloads constructor(
 
   private fun getColorSelector(
     @ColorInt normalColor: Int,
-    @ColorInt pressedColor: Int,
     @ColorInt disabledColor: Int
   ) = ColorStateList(
     arrayOf(
       intArrayOf(-android.R.attr.state_enabled),
-      intArrayOf(android.R.attr.state_pressed),
-      intArrayOf(android.R.attr.state_focused),
-      intArrayOf(android.R.attr.state_activated),
       intArrayOf()
     ),
-    intArrayOf(disabledColor, pressedColor, pressedColor, pressedColor, normalColor)
+    intArrayOf(disabledColor, normalColor)
   )
 }

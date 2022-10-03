@@ -61,14 +61,18 @@ open class BpkSpinner @JvmOverloads constructor(
   private val colors = arrayOf(
     R.color.bpkPrimary,
     R.color.bpkWhite,
-    R.color.bpkSkyGrayTint01
+    R.color.bpkSkyGrayTint01,
+    R.color.bpkTextPrimary,
+    R.color.bpkTextDisabled,
+    R.color.bpkTextOnDark,
   )
 
   private val animationsEnabled =
     Global.getFloat(context.contentResolver, Global.ANIMATOR_DURATION_SCALE, 1f) != 0f
 
   private var progressBar: ProgressBar? = null
-  @ColorInt private var themePrimaryColor: Int = INVALID_RES
+  @ColorInt
+  private var themePrimaryColor: Int = INVALID_RES
 
   /**
    * Updates the Spinner's type.
@@ -139,6 +143,15 @@ open class BpkSpinner @JvmOverloads constructor(
   }
 
   enum class Type {
-    PRIMARY, LIGHT, DARK
+    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) PRIMARY,
+    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("OnDarkSurface")) LIGHT,
+    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) DARK,
+    TextPrimary,
+    Disabled,
+    OnDarkSurface,
+    ;
+    private companion object {
+      const val DeprecatedMessage = "These styles are not supported anymore and will be removed soon"
+    }
   }
 }

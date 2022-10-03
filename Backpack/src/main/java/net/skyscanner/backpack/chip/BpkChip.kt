@@ -47,38 +47,6 @@ open class BpkChip @JvmOverloads constructor(
 
   private var appearance: BpkChipAppearance
 
-  @Deprecated("Custom background colour is no longer supported. Use existing styles")
-  var chipBackgroundColor: Int
-    get() = appearance.backgroundColor
-    set(value) {
-      appearance.backgroundColor = value
-      updateStyle()
-    }
-
-  @Deprecated("Custom text colour is no longer supported. Use existing styles")
-  var chipTextColor: Int
-    get() = appearance.textColor
-    set(value) {
-      appearance.textColor = value
-      updateStyle()
-    }
-
-  @Deprecated("Custom background colour is no longer supported. Use existing styles")
-  var selectedBackgroundColor: Int
-    get() = appearance.selectedBackgroundColor
-    set(value) {
-      appearance.selectedBackgroundColor = value
-      updateStyle()
-    }
-
-  @Deprecated("Custom background colour is no longer supported. Use existing styles")
-  var disabledBackgroundColor: Int
-    get() = appearance.disabledBackgroundColor
-    set(value) {
-      appearance.disabledBackgroundColor = value
-      updateStyle()
-    }
-
   var style: Style
     get() = appearance.style
     set(value) {

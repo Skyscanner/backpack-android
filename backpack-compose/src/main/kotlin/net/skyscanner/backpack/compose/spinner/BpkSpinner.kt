@@ -48,14 +48,27 @@ fun BpkSpinner(
   modifier: Modifier = Modifier,
   style: BpkSpinnerStyle = findBestSpinnerStyleFor(LocalContentColor.current, BpkTheme.colors.isLight),
 ) {
-  CircularProgressIndicator(
-    modifier = modifier.requiredSize(size.dp, size.dp),
-    strokeWidth = 2.dp,
+  BpkSpinner(
+    size = size,
+    modifier = modifier,
     color = when (style) {
       BpkSpinnerStyle.TextPrimary -> BpkTheme.colors.textPrimary
       BpkSpinnerStyle.Disabled -> BpkTheme.colors.textDisabled
-      BpkSpinnerStyle.OnDarkSurface -> Color.White
-    }
+      BpkSpinnerStyle.OnDarkSurface -> BpkTheme.colors.textOnDark
+    },
+  )
+}
+
+@Composable
+internal fun BpkSpinner(
+  size: BpkSpinnerSize,
+  color: Color,
+  modifier: Modifier = Modifier,
+) {
+  CircularProgressIndicator(
+    modifier = modifier.requiredSize(size.dp, size.dp),
+    strokeWidth = 2.dp,
+    color = color,
   )
 }
 

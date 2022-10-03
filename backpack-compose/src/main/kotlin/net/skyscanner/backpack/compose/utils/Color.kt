@@ -33,6 +33,9 @@ internal fun InteractionSource.animateAsColor(
   pressed: Color = default,
   focused: Color = pressed,
 ): Color {
+  if (default == pressed && default == focused) {
+    return default
+  }
   val isPressed by collectIsPressedAsState()
   val isFocused by collectIsFocusedAsState()
   val target = when {

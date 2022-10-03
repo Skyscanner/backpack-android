@@ -105,9 +105,9 @@ open class BpkTextInputLayout @JvmOverloads constructor(
       defStyleAttr, 0
     ).use {
       errorTextColor = it.getColorStateList(R.styleable.BpkTextInputLayout_textInputErrorTextColor)
-        ?: context.getColorStateList(R.color.bpkPanjin)
+        ?: context.getColorStateList(R.color.bpkTextError)
       helperTextColor = it.getColorStateList(R.styleable.BpkTextInputLayout_textInputHelperTextColor)
-        ?: context.getColorStateList(R.color.__textInputLayoutHelperColor)
+        ?: context.getColorStateList(R.color.bpkTextSecondary)
 
       errorEnabled = it.getBoolean(R.styleable.BpkTextInputLayout_textInputErrorEnabled, errorEnabled)
 
@@ -120,7 +120,7 @@ open class BpkTextInputLayout @JvmOverloads constructor(
       labelView.setTextColor(
         colorStateList(
           color = context.getColor(R.color.bpkTextPrimary),
-          disabledColor = context.getColor(R.color.__textFieldTextDisabled)
+          disabledColor = context.getColor(R.color.bpkTextDisabled)
         )
       )
       updateErrorIconTint()

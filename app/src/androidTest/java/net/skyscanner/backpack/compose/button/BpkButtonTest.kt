@@ -33,8 +33,6 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.LongArrowRight
 import net.skyscanner.backpack.demo.compose.rowBackground
-import org.hamcrest.Matchers.isOneOf
-import org.junit.Assume.assumeThat
 import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,7 +51,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // we want to see colors of all types
     // different sizes have different text style
 
-    capture(background = type.rowBackground()) {
+    capture(background = { type.rowBackground() }) {
       BpkButton("Button", type = type, size = size, onClick = {})
     }
   }
@@ -62,12 +60,8 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   fun disabled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     assumeTrue(size == BpkButtonSize.Default) // colors will be the same on large size
-    assumeThat(
-      type,
-      isOneOf(BpkButtonType.Primary, BpkButtonType.Link, BpkButtonType.LinkOnDark)
-    ) // colors are different only for links
 
-    capture(background = type.rowBackground()) {
+    capture(background = { type.rowBackground() }) {
       BpkButton("Button", type = type, size = size, enabled = false, onClick = {})
     }
   }
@@ -75,13 +69,8 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   fun loading() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
-    assumeThat(
-      type,
-      isOneOf(BpkButtonType.Primary, BpkButtonType.Link, BpkButtonType.LinkOnDark)
-    ) // colors are different only for links
-    // we need to run it on large size as well and the progress size will be different
 
-    capture(background = type.rowBackground()) {
+    capture(background = { type.rowBackground() }) {
       BpkButton("Button", type = type, size = size, loading = true, onClick = {})
     }
   }
@@ -119,7 +108,10 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     }
   }
 
-  private fun capture(background: Color = Color.Unspecified, content: @Composable () -> Unit) {
+  private fun capture(
+    background: @Composable () -> Color = { Color.Unspecified },
+    content: @Composable () -> Unit,
+  ) {
     composed(
       size = IntSize(160, 64),
       tags = listOf(type, size),
@@ -127,7 +119,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
       Box(
         Modifier
           .fillMaxSize()
-          .background(background)
+          .background(background())
           .padding(BpkSpacing.Md),
         contentAlignment = Alignment.TopStart,
       ) {

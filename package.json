@@ -41,7 +41,7 @@
     "@babel/core": "^7.17.8",
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.9.6",
-    "@skyscanner/bpk-foundations-android": "^4.1.1",
+    "@skyscanner/bpk-foundations-android": "^4.4.1",
     "@skyscanner/bpk-svgs": "^14.0.10",
     "@xmldom/xmldom": "^0.8.0",
     "danger": "^11.0.2",
@@ -61,7 +61,6 @@
     "merge-stream": "^2.0.0",
     "prettier": "^2.3.2",
     "svg2vectordrawable": "^2.4.0",
-    "through2": "^4.0.2",
-    "tinycolor2": "^1.4.1"
+    "through2": "^4.0.2"
   }
 }

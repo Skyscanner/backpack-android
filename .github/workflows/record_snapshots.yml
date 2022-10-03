@@ -47,7 +47,7 @@ jobs:
 
       - name: Find PR branch
         if: steps.check.outputs.triggered == 'true'
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         id: get-pr
         with:
           script: |

@@ -36,6 +36,10 @@ internal interface BpkChipAppearance {
 
   @get:ColorInt
   @setparam:ColorInt
+  var pressedBackgroundColor: Int
+
+  @get:ColorInt
+  @setparam:ColorInt
   var backgroundColor: Int
 
   @get:ColorInt
@@ -45,4 +49,12 @@ internal interface BpkChipAppearance {
   @get:ColorInt
   @setparam:ColorInt
   var textColor: Int
+
+  @get:ColorInt
+  @setparam:ColorInt
+  var pressedTextColor: Int
+
+  @get:ColorInt
+  @setparam:ColorInt
+  var selectedTextColor: Int
 }

@@ -213,39 +213,6 @@
     <issue
         id="BpkDeprecatedColorUsage"
         message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
-        errorLine1="      android:background=&quot;@color/bpkSkyGrayTint01&quot;"
-        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_badge.xml"
-            line="209"
-            column="27"/>
-    </issue>
-
-    <issue
-        id="BpkDeprecatedColorUsage"
-        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
-        errorLine1="      android:background=&quot;@color/bpkSkyGrayTint01&quot;"
-        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_badge.xml"
-            line="335"
-            column="27"/>
-    </issue>
-
-    <issue
-        id="BpkDeprecatedColorUsage"
-        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
-        errorLine1="      android:background=&quot;@color/bpkSkyGrayTint01&quot;"
-        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/res/layout/fragment_badge.xml"
-            line="398"
-            column="27"/>
-    </issue>
-
-    <issue
-        id="BpkDeprecatedColorUsage"
-        message="This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
         errorLine1="    android:background=&quot;@color/bpkBackgroundSecondary&quot; />"
         errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location

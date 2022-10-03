@@ -59,9 +59,6 @@ import net.skyscanner.backpack.demo.stories.DialogStory
 import net.skyscanner.backpack.demo.stories.DisabledCalendarStory
 import net.skyscanner.backpack.demo.stories.ElevationStory
 import net.skyscanner.backpack.demo.stories.FooterViewCalendarStory
-import net.skyscanner.backpack.demo.stories.GradientStoryCustom
-import net.skyscanner.backpack.demo.stories.GradientStoryPrimary
-import net.skyscanner.backpack.demo.stories.GradientStoryWithDirection
 import net.skyscanner.backpack.demo.stories.HorizontalNavStory
 import net.skyscanner.backpack.demo.stories.IconType
 import net.skyscanner.backpack.demo.stories.IconsStory
@@ -265,19 +262,7 @@ object ComponentRegistry {
     "Dialog" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData(
-          { children -> SubStory of children },
-          mapOf(
-            "With call to action" story NodeData { DialogStory of "Normal" },
-            "Warning" story NodeData { DialogStory of "Warning" },
-            "Delete confirmation" story NodeData { DialogStory of "Delete" },
-            "Success" story NodeData { DialogStory of "Confirmation" },
-            "With Links" story NodeData { DialogStory of "Links" },
-            "Long Text" story NodeData { DialogStory of "Long" },
-            "Flare" story NodeData { DialogStory of "Flare" },
-            "Flare with image" story NodeData { DialogStory of "FlareWithImage" }
-          )
-        ),
+        TAB_TITLE_VIEW story NodeData { DialogStory() },
         TAB_TITLE_COMPOSE composeStory { ComposeDialogStory() },
       ),
     ),
@@ -299,18 +284,18 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { FlareStory() },
       ),
     ),
-    "Horizontal Nav" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_VIEW story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
-        TAB_TITLE_COMPOSE composeStory { HorizontalNavComposeStory() },
-      )
-    ),
     "Floating Action Button" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_fab },
         TAB_TITLE_COMPOSE composeStory { BpkFabStory() },
+      )
+    ),
+    "Horizontal Nav" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
+        TAB_TITLE_COMPOSE composeStory { HorizontalNavComposeStory() },
       )
     ),
     "Map Markers" story NodeData(
@@ -380,19 +365,12 @@ object ComponentRegistry {
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_COMPOSE composeStory { ThemeStory() },
-        TAB_TITLE_VIEW story NodeData { Story of R.layout.component_list },
       )
     ),
     "Spinner" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData(
-          { children -> SubStory of children },
-          mapOf(
-            "Default" story NodeData { Story of R.layout.fragment_spinner },
-            "Small" story NodeData { Story of R.layout.fragment_spinner_small }
-          )
-        ),
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_spinner },
         TAB_TITLE_COMPOSE composeStory { SpinnerStory() },
       )
     ),
@@ -482,14 +460,6 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { ElevationStory() },
         TAB_TITLE_COMPOSE composeStory { ElevationComposeStory() },
-      )
-    ),
-    "Gradient" story NodeData(
-      { children -> SubStory of children },
-      mapOf(
-        "Primary" story NodeData { GradientStoryPrimary() },
-        "With direction" story NodeData { GradientStoryWithDirection() },
-        "Custom" story NodeData { GradientStoryCustom() }
       )
     ),
     "Icons" story NodeData { Story of R.layout.fragment_icons },

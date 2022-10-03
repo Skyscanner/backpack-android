@@ -26,11 +26,11 @@ buildscript {
     maven { url 'https://plugins.gradle.org/m2/' }
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:7.2.2' // keep in sync with lint version - If the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
+    classpath 'com.android.tools.build:gradle:7.3.0' // keep in sync with lint version - If the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath dokka
     classpath 'com.facebook.testing.screenshot:plugin:0.15.0'
-    classpath "org.jlleitschuh.gradle:ktlint-gradle:10.3.0"
+    classpath "org.jlleitschuh.gradle:ktlint-gradle:11.0.0"
     classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
   }
 }
@@ -90,7 +90,7 @@ ext {
   googleMaps = "com.google.android.gms:play-services-maps:18.1.0"
   constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
   swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-  threeTenAbpVersion = "1.4.0"
+  threeTenAbpVersion = "1.4.1"
   threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
   threeTenAbpAndroid = "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
   picasso = "com.squareup.picasso:picasso:2.71828"
@@ -103,13 +103,13 @@ ext {
   espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
   testRules = "androidx.test:rules:1.4.0"
   mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-  mockitoAndroid = "org.mockito:mockito-android:4.7.0"
+  mockitoAndroid = "org.mockito:mockito-android:4.8.0"
 
   coroutinesVersion = "1.6.4"
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
-  lintVersion = "30.2.2"
+  lintVersion = "30.3.0"
   lint = "com.android.tools.lint:lint:$lintVersion"
   lintApi = "com.android.tools.lint:lint-api:$lintVersion"
   lintTests = "com.android.tools.lint:lint-tests:$lintVersion"

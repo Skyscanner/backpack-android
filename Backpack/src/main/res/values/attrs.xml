@@ -11,6 +11,8 @@
       <enum name="inverse" value="5" />
       <enum name="outline" value="6" />
       <enum name="dark" value="7" />
+      <enum name="normal" value="8" />
+      <enum name="strong" value="9" />
     </attr>
     <!-- message to be displayed -->
     <attr name="message" format="string" />
@@ -123,6 +125,9 @@
       <enum name="primary" value="0" />
       <enum name="light" value="1" />
       <enum name="dark" value="2" />
+      <enum name="textPrimary" value="3" />
+      <enum name="disabled" value="4" />
+      <enum name="onDarkSurface" value="5" />
     </attr>
     <attr name="spinnerColor" format="color" />
   </declare-styleable>
@@ -332,8 +337,6 @@
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
-  <attr name="bpkPrimaryGradientColorStart" format="color" />
-  <attr name="bpkPrimaryGradientColorEnd" format="color" />
 
   <attr name="bpkStarRatingStyle" format="reference" />
   <attr name="bpkInteractiveStarRatingStyle" format="reference" />
@@ -349,7 +352,6 @@
   <attr name="bpkButtonLinkStyle" format="reference" />
   <attr name="bpkButtonLinkOnDarkStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
-  <attr name="bpkOutlineChipStyle" format="reference" />
   <attr name="bpkChipStyle" format="reference" />
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
   <attr name="bpkCheckboxStyle" format="reference" />

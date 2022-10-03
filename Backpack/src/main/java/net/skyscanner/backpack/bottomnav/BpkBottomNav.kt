@@ -41,8 +41,8 @@ open class BpkBottomNav @JvmOverloads constructor(
 ) : BottomNavigationView(context, attrs, defStyleAttr) {
 
   private val listeners = ListenersDelegate(menu).also {
-    super.setOnNavigationItemReselectedListener(it)
-    super.setOnNavigationItemSelectedListener(it)
+    super.setOnItemReselectedListener(it)
+    super.setOnItemSelectedListener(it)
   }
 
   private val fontSpan = BottomNavSpan(context)
@@ -88,21 +88,21 @@ open class BpkBottomNav @JvmOverloads constructor(
     "Use add/remove OnNavigationItemSelectedListener instead",
     replaceWith = ReplaceWith("addOnNavigationItemSelectedListener")
   )
-  override fun setOnNavigationItemSelectedListener(listener: OnNavigationItemSelectedListener?) {
-    TODO("Not supported")
+  override fun setOnItemSelectedListener(listener: OnItemSelectedListener?) {
+    throw UnsupportedOperationException("Not supported")
   }
 
   @Deprecated(
     "Use add/remove OnNavigationItemSelectedListener instead",
     replaceWith = ReplaceWith("addOnNavigationItemReselectedListener")
   )
-  override fun setOnNavigationItemReselectedListener(listener: OnNavigationItemReselectedListener?) {
-    TODO("Not supported")
+  override fun setOnItemReselectedListener(listener: OnItemReselectedListener?) {
+    throw UnsupportedOperationException("Not supported")
   }
 
   private class ListenersDelegate(
     private val menu: Menu
-  ) : OnNavigationItemSelectedListener, OnNavigationItemReselectedListener {
+  ) : OnItemSelectedListener, OnItemReselectedListener {
 
     val reselected = mutableListOf<(MenuItem, Int) -> Unit>()
     val selected = mutableListOf<(MenuItem, Int) -> Unit>()

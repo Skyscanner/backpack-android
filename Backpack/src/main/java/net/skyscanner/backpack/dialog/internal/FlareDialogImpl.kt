@@ -27,11 +27,12 @@ import android.util.DisplayMetrics
 import android.view.ViewGroup.LayoutParams
 import android.view.WindowManager
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.dialog.BpkDialog
 import kotlin.math.min
 
 internal class FlareDialogImpl(
-  dialog: Dialog
-) : BpkDialogImpl.Base(R.layout.bpk_dialog_flare, dialog) {
+  dialog: Dialog,
+) : BpkDialogImpl.Base(R.layout.bpk_dialog_flare, dialog, BpkDialog.Type.Flare) {
 
   init {
     dialog.window?.let {

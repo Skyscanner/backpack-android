@@ -139,6 +139,17 @@ tasks {
     }
   }
 
+  val generateInternalColors by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkColor.Internal)
+        .transformTo(BpkColor.Format.InternalCompose)
+        .saveTo(BpkOutput.KotlinFiles(src, tokensPackage + ".internal"))
+        .execute()
+    }
+  }
+
   val generateSizeTokens by creating {
     this.group = group
     dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens)
@@ -151,7 +162,7 @@ tasks {
 
   val generateColorTokens by creating {
     this.group = group
-    dependsOn(generateStaticColors, generateSemanticColors)
+    dependsOn(generateStaticColors, generateSemanticColors, generateInternalColors)
   }
 
   val generateIcons by creating {

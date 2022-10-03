@@ -44,10 +44,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.dynamicColorOf
+import net.skyscanner.backpack.compose.tokens.internal.BpkSkeletonColors
 
 private val BpkSkeletonBorderRadiusXXS = BpkBorderRadius.Xs.div(2)
 private val BpkHeadlineSkeletonHeightSm = BpkSpacing.Md
@@ -112,19 +112,13 @@ private fun Modifier.enhanceHeadlineHeight(skeletonHeightSize: BpkSkeletonHeight
 }
 
 @Composable
-private fun shimmerBackgroundColor(): Color {
-  return dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint02)
-}
+private fun shimmerBackgroundColor(): Color = BpkTheme.colors.surfaceHighlight
 
 @Composable
-private fun shimmerPrimaryColor(): Color {
-  return Color.Transparent
-}
+private fun shimmerPrimaryColor(): Color = BpkSkeletonColors.shimmerStartEnd
 
 @Composable
-private fun shimmerSecondaryColor(): Color {
-  return dynamicColorOf(Color(0x99FFFFFF), Color(0x33000000))
-}
+private fun shimmerSecondaryColor(): Color = BpkSkeletonColors.shimmerCenter
 
 @Composable
 private fun shimmerAnimation(): State<Dp> {

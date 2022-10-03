@@ -33,8 +33,6 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
-import org.hamcrest.Matchers.isOneOf
-import org.junit.Assume.assumeThat
 import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -72,10 +70,6 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     // disabled/loading colors are not theme customisable
     assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
-    assumeThat(
-      type,
-      isOneOf(BpkButton.Type.Primary, BpkButton.Type.Link, BpkButton.Type.LinkOnDark)
-    ) // colors are different only for links
 
     capture(background = type.rowBackground()) {
       BpkButton(testContext, type, size).apply {
@@ -89,10 +83,6 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   fun loading() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
     // disabled/loading colors are not theme customisable
-    assumeThat(
-      type,
-      isOneOf(BpkButton.Type.Primary, BpkButton.Type.Link, BpkButton.Type.LinkOnDark)
-    ) // colors are different only for links
     // we need to run it on large size as well and the progress size will be different
 
     capture(background = type.rowBackground()) {

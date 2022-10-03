@@ -27,7 +27,6 @@ const rename = require('gulp-rename');
 const del = async () => {
   await import('del');
 }
-const tinycolor = require('tinycolor2');
 const _ = require('lodash');
 const through = require('through2');
 const svg2vectordrawable = require('svg2vectordrawable');
@@ -171,13 +170,15 @@ const isMarcommsColor = entity => entity.name.startsWith("bpkMarcomms")
 
 const hasNewSemanticSuffix = entity => entity.name.endsWith("Day") || entity.name.endsWith("Night");
 
+const asArgb = color => `#${color.substring(7)}${color.substring(1, 7)}`;
+
 gulp.task('template:color', () => {
   const getColors = () =>
     tokensWithType('color')
       .map(color => {
         const colorObject = JSON.parse(JSON.stringify(color));
         colorObject.name = `bpk${pascalCase(colorObject.name.replace(colorObject.type.toUpperCase(), ''))}`;
-        colorObject.value = tinycolor(colorObject.value).toHexString();
+        colorObject.value = asArgb(colorObject.value);
         return colorObject;
       })
       .filter(entry => !isSemanticColor(entry) && !hasNewSemanticSuffix(entry) && !isMarcommsColor(entry));
@@ -198,17 +199,22 @@ gulp.task('template:semanticColor', () => {
     tokensWithType('color').reduce(
       (out, color) => {
         const colorObject = JSON.parse(JSON.stringify(color));
-        colorObject.name = `bpk${pascalCase(colorObject.name.replace(colorObject.type.toUpperCase(), ''))}`;
+        const tokenName = colorObject.name.replace(colorObject.type.toUpperCase(), '');
+        if (tokenName.startsWith("PRIVATE")) {
+        colorObject.name = `__${_.camelCase(tokenName)}`;
+        } else {
+          colorObject.name = `bpk${pascalCase(tokenName)}`;
+        }
 
         if (isSemanticColor(colorObject)) {
           const light = {
             ...colorObject,
-            value: tinycolor(colorObject.value).toHexString(),
+            value: asArgb(colorObject.value),
           };
           out.light.push(light);
           const dark = {
             ...colorObject,
-            value: tinycolor(colorObject.darkValue).toHexString(),
+            value: asArgb(colorObject.darkValue),
           };
           out.dark.push(dark);
         }
