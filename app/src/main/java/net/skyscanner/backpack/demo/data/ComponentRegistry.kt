@@ -23,6 +23,7 @@ import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
+import net.skyscanner.backpack.demo.compose.BpkFabStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
@@ -283,7 +284,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { FlareStory() },
       ),
     ),
-    "Floating Action Button" story NodeData { Story of R.layout.fragment_fab },
+    "Floating Action Button" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_fab },
+        TAB_TITLE_COMPOSE composeStory { BpkFabStory() },
+      )
+    ),
     "Horizontal Nav" story NodeData(
       { children -> TabStory of children },
       mapOf(

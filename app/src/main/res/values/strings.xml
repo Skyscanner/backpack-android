@@ -192,4 +192,6 @@
   <string name="dialog_long_text">Long text</string>
   <string name="dialog_continue">Continue</string>
 
+  <string name="content_description">Content description</string>
+  <string name="generic_message">Message</string>
 </resources>
