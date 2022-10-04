@@ -33,8 +33,10 @@ internal class AlertDialogImpl(
 
   init {
     dialog.window?.let {
+      @Suppress("DEPRECATION")
       it.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
       it.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+      @Suppress("DEPRECATION")
       it.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
       it.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
       it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

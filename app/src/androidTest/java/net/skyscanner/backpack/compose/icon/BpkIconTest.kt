@@ -63,7 +63,7 @@ class BpkIconTest : BpkSnapshotTest() {
   fun tinted() {
     assumeVariant(BpkTestVariant.Default)
     composed {
-      BpkIcon(icon = icon, contentDescription = null, tint = BpkTheme.colors.systemRed)
+      BpkIcon(icon = icon, contentDescription = null, tint = BpkTheme.colors.statusDangerSpot)
     }
   }
 

@@ -20,13 +20,14 @@ package net.skyscanner.backpack.demo
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.util.unsafeLazy
 
@@ -58,8 +59,9 @@ open class BpkBaseActivity : AppCompatActivity() {
     val drawable = menu.findItem(R.id.settings_button).icon
     if (drawable != null) {
       drawable.mutate()
-      val bpkWhite = getColor(R.color.bpkWhite)
-      drawable.setColorFilter(bpkWhite, PorterDuff.Mode.SRC_ATOP)
+      val bpkWhite = getColor(R.color.bpkTextOnDark)
+      drawable.colorFilter =
+        BlendModeColorFilterCompat.createBlendModeColorFilterCompat(bpkWhite, BlendModeCompat.SRC_ATOP)
     }
     return super.onCreateOptionsMenu(menu)
   }

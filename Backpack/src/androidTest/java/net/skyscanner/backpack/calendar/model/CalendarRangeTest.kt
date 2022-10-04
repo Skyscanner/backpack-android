@@ -24,6 +24,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.LocalDate
 
+@Suppress("DEPRECATION")
 @RunWith(AndroidJUnit4::class)
 class CalendarRangeTest {
 

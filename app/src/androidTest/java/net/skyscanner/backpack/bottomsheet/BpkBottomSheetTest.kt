@@ -36,7 +36,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
   init {
     val frameLayout = FrameLayout(root.context)
-    frameLayout.background = AppCompatResources.getDrawable(frameLayout.context, R.color.bpkBackgroundSecondary)
+    frameLayout.background = AppCompatResources.getDrawable(frameLayout.context, R.color.bpkSurfaceHighlight)
     frameLayout.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
     root.addView(frameLayout)
 

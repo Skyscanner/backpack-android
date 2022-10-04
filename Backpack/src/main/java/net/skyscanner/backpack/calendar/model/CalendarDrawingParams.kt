@@ -20,6 +20,7 @@ package net.skyscanner.backpack.calendar.model
 
 import org.threeten.bp.LocalDate
 
+@Suppress("DEPRECATION")
 internal data class CalendarDrawingParams(
   val year: Int,
   val month: Int,

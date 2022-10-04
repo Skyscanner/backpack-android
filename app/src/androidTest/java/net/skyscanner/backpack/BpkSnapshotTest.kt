@@ -50,7 +50,7 @@ open class BpkSnapshotTest {
 
   private var height = 100
   private var width = 100
-  private var background = R.color.bpkBackground
+  private var background = R.color.bpkCanvas
 
   private val variant = BpkTestVariant.current
   var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)

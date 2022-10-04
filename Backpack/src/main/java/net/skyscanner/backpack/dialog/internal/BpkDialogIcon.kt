@@ -52,6 +52,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
       field = value
       if (value != null) {
         setImageDrawable(AppCompatResources.getDrawable(context, value.drawableRes))
+        @Suppress("DEPRECATION")
         background = createBackground(value.color)
       }
     }

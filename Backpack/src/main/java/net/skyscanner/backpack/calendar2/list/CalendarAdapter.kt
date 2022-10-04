@@ -60,6 +60,7 @@ internal class CalendarAdapter(
     else -> CalendarCellSpaceHolder(parent)
   }
 
+  @Suppress("UNCHECKED_CAST")
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
     (holder as ItemHolder<CalendarCell>).invoke(data[position])
 

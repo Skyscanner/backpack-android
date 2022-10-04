@@ -150,6 +150,7 @@ fun ViewScreenshot(
 ): Array<Any?> =
   arrayOf(name, screenshotName, "docs/view", setup)
 
+@Suppress("DEPRECATION")
 private fun setupCalendar() {
   Espresso.onView(ViewMatchers.withId(R.id.bpkCalendar))
     .check { view, _ ->

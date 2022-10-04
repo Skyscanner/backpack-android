@@ -38,7 +38,7 @@ class BpkShimmerOverlay @JvmOverloads constructor(
   }
 
   override fun addView(child: View?) {
-    if (child?.id !== R.id.bpk_skeleton_container) {
+    if (child?.id != R.id.bpk_skeleton_container) {
       super.addView(child)
     } else {
       val container = findViewById<FrameLayout>(R.id.bpk_skeleton_container)
@@ -49,7 +49,7 @@ class BpkShimmerOverlay @JvmOverloads constructor(
 
   override fun onViewAdded(child: View?) {
     super.onViewAdded(child)
-    if (child?.id !== R.id.bpk_skeleton_container) {
+    if (child?.id != R.id.bpk_skeleton_container) {
       this.bringChildToFront(findViewById(R.id.bpk_skeleton_container))
     }
   }

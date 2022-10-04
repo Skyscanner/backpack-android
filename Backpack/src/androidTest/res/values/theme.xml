@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="TestThemeUtilsCustomColors">
-    <item name="bpkPrimaryColor">#9B104A</item>
-  </style>
-
   <style name="TestTextCustomFont" parent="BpkTheme">
     <item name="bpkFontFamilyBase">@font/shadows_into_light</item>
     <item name="bpkFontFamilyEmphasized">cursive</item>

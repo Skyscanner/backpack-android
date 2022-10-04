@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:navBarIcon="@drawable/bpk_native_android__back"
-    app:navBarExpandedTextColor="@color/bpkErfoud"/>
+    app:navBarExpandedTextColor="@color/bpkStatusWarningSpot"/>
 
   <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"

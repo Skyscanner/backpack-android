@@ -35,7 +35,7 @@ class BpkTextInputLayoutTest {
   private lateinit var subject: BpkTextInputLayout
 
   private val indicatorView: View
-    get() = subject.findViewById<View>(R.id.bpk_input_indicator)
+    get() = subject.findViewById(R.id.bpk_input_indicator)
 
   @get:Rule
   internal var activityRule: ActivityScenarioRule<TestActivity> =

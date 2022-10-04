@@ -143,6 +143,7 @@ open class BpkCardView @JvmOverloads constructor(
       if (it.hasValue(R.styleable.BpkCardView_elevationLevel)) {
         elevationLevel = ElevationLevel.fromAttr(it.getInt(R.styleable.BpkCardView_elevationLevel, 1))
       } else {
+        @Suppress("DEPRECATION")
         focused = it.getBoolean(R.styleable.BpkCardView_focused, false)
       }
       cornerStyle = CornerStyle.values()[it.getInt(R.styleable.BpkCardView_cornerStyle, 0)]

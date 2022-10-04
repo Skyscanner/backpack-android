@@ -90,7 +90,7 @@
     android:layout_height="wrap_content">
     <ImageView
       android:layout_width="wrap_content"
-      app:tint="@color/bpkPrimary"
+      app:tint="@color/bpkCoreAccent"
       app:srcCompat="@drawable/bpk_flight"
       android:padding="@dimen/bpkSpacingMd"
       android:contentDescription="@string/icons_flight"
@@ -98,7 +98,7 @@
     <ImageView
       android:layout_width="wrap_content"
       app:srcCompat="@drawable/bpk_cars"
-      app:tint="@color/bpkMonteverde"
+      app:tint="@color/bpkStatusSuccessSpot"
       android:padding="@dimen/bpkSpacingMd"
       android:contentDescription="@string/icons_car"
       android:layout_height="wrap_content"/>
@@ -106,7 +106,7 @@
       android:layout_width="wrap_content"
       app:srcCompat="@drawable/bpk_hotels"
       android:padding="@dimen/bpkSpacingMd"
-      app:tint="@color/bpkErfoud"
+      app:tint="@color/bpkStatusWarningSpot"
       android:contentDescription="@string/icons_hotel"
       android:layout_height="wrap_content"/>
   </LinearLayout>

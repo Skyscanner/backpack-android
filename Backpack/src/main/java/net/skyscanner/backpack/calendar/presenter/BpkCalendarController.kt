@@ -32,6 +32,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.calendar.presenter
 
 import androidx.annotation.VisibleForTesting

@@ -62,14 +62,6 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotHorizontalNav_alternate() {
-    val horizontalNav = BpkHorizontalNav(testContext).init()
-    horizontalNav.setBackgroundResource(R.color.bpkSkyBlueTint03)
-    horizontalNav.appearance = BpkHorizontalNav.Appearance.Alternate
-    snap(horizontalNav)
-  }
-
-  @Test
   fun screenshotHorizontalNav_notificationDot() {
     horizontalNav.setNotificationDot(0, true)
     snap(horizontalNav)

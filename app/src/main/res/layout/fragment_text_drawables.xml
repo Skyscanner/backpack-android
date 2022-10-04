@@ -8,7 +8,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_lorem_ipsum"
-    app:drawableTint="@color/bpkMonteverde"
+    app:drawableTint="@color/bpkStatusSuccessSpot"
     android:drawableStart="@drawable/bpk_flight"
     android:drawableEnd="@drawable/bpk_arrow_right"
     app:textStyle="bodyLongform" />
@@ -17,7 +17,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/txt_lorem_ipsum"
-    app:drawableTint="@color/bpkMonteverde"
+    app:drawableTint="@color/bpkStatusSuccessSpot"
     android:drawableEnd="@drawable/bpk_arrow_right"
     android:drawableStart="@drawable/bpk_flight"
     app:textStyle="bodyLongform" />
