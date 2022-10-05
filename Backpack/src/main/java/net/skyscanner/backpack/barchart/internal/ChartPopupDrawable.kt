@@ -100,6 +100,7 @@ internal class ChartPopupDrawable(
     backgroundPaint.alpha = alpha
   }
 
+  @Deprecated("Deprecated in Java")
   override fun getOpacity(): Int =
     PixelFormat.TRANSPARENT
 
@@ -114,7 +115,7 @@ internal class ChartPopupDrawable(
   override fun isStateful(): Boolean =
     colors.popupBackground.isStateful || colors.popupText.isStateful
 
-  override fun onStateChange(state: IntArray?): Boolean =
+  override fun onStateChange(state: IntArray): Boolean =
     isStateful
 
   override fun draw(canvas: Canvas) {
