@@ -31,7 +31,7 @@ internal fun CalendarDayStatusContentColor(
 
   val default = context.getColorStateList(R.color.bpkTextPrimary)
   val positive = context.getColorStateList(R.color.bpkTextPrimaryInverse)
-  val neutral = context.getColorStateList(R.color.bpkTextPrimary)
+  val neutral = context.getColorStateList(R.color.bpkTextOnLight)
   val negative = context.getColorStateList(R.color.bpkTextPrimaryInverse)
   val empty = context.getColorStateList(R.color.bpkTextPrimary)
 
