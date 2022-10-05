@@ -54,7 +54,7 @@ We use snapshot testing to ensure there are no unintended changes to UI componen
 
 Create an AVD using the following command
 
-> Note: Currently, screenshot testing doesn't work properly on M1 chips. Consider recording screenshots on Intel-based macs.
+> Note: Currently, snapshot testing doesn't work properly on M1 chips. Consider recording snapshots on Intel-based macs or using Github Actions.
 
 ```
 # x86
@@ -65,15 +65,12 @@ $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-a
 $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;arm64-v8a" --device "Nexus 4" && cp bpk-droid-local-arm.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 ```
 
-Create an SD card for the screenshot tests (Linux)
+Create an SD card for the snapshot tests ()
 
 ```
+# Linux
 $ANDROID_HOME/emulator/mksdcard -l e 512M sd.img
-```
-
-Create an SD card for the screenshot tests (OSX)
-
-```
+# OSX
 hdiutil create -megabytes 512 -fs MS-DOS -layout NONE -o sd && mv sd.dmg sd.img
 ```
 
@@ -92,13 +89,13 @@ $ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &
 #### Creating tests
 
 Snapshot tests live in the `app` module. For a new test class extend from `BpkSnapshotTest`.
-Each test function will result in a separate screenshot test - try to  keep the tests simple and add a test for each state of a component.
+Each test function will result in a separate snapshot test - try to  keep the tests simple and add a test for each state of a component.
 Use the `setDimensions` function in the `setup()` function to set the right dimension for the snapshots.
 
-For `View` components you can create the component, set the states and then call `snap` to take the screenshots.
-For `Compose` components use the `composed` function to wrap your component - this will generate the screenshot.
+For `View` components you can create the component, set the states and then call `snap` to take the snapshots.
+For `Compose` components use the `composed` function to wrap your component - this will generate the snapshot.
 
-By default screenshot tests run on 4 variants - default, dark mode, RTL and themed (skipped for compose). In some cases you may want to only run a snapshot test on some variants - for example if a component has many different states without layout changes you may want to consider skipping RTL.
+By default snapshot tests run on 4 variants - default, dark mode, RTL and themed (skipped for compose). In some cases you may want to only run a snapshot test on some variants - for example if a component has many different states without layout changes you may want to consider skipping RTL.
 
 You can do this by adding the `assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)` function with the desired variants.
 **IMPORTANT**: Make sure this is called _before_ the test activity is run to avoid unnecessary delay. In a view test make it the first line of your test. In a compose test call it before the `composed` function, rather than inside it.
@@ -110,7 +107,7 @@ After adding new snapshot tests or making UI changes, run
  ./scripts/record_screenshot_tests.sh
 ```
 
-This will generate the latest screenshot. Verify the changes & generated screenshots are as expected and commit the changes.
+This will generate the latest snapshots. Verify the changes & generated snapshots are as expected and commit the changes.
 
 To test changes use
 
@@ -118,10 +115,16 @@ To test changes use
 ./scripts/verify_screenshot_tests.sh
 ```
 
-If the check fails you either need to fix the issue if a change was unintended or record script above instead to update the screenshots.
+If the check fails you either need to fix the issue if a change was unintended or record script above instead to update the snapshots.
+
+Alternatively, you can use Github Actions CI to generate the snapshots.
+"Record snapshots" command in PR comments will trigger the CI and lead to new snapshot commits pushed to your PR.
+Notice that this run must be approved for external contributors.
+Since CI run cannot trigger CI checks again,
+you need to commit something after the snapshots have been generated to trigger the CI check.
 
 ### Espresso tests
-If your component contains logic that can't be verified via screenshot tests you can use espresso to test the logic. These tests live in the `Backpack` (for View components) or `backpack-compose` (for Compose components) module, depending on the component.
+If your component contains logic that can't be verified via snapshot tests you can use espresso to test the logic. These tests live in the `Backpack` (for View components) or `backpack-compose` (for Compose components) module, depending on the component.
 
 To run connected tests run
 
