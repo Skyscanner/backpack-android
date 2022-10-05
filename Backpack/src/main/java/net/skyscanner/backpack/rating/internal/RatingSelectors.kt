@@ -26,7 +26,6 @@ import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.annotation.StyleableRes
-import androidx.core.graphics.ColorUtils
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.rating.BpkRating
 import net.skyscanner.backpack.util.use
@@ -70,12 +69,11 @@ internal class RatingSelectors(
   }
 
   val backgroundColor: (BpkRating.Score) -> ColorStateList
-  val contentColor: (BpkRating.Score) -> ColorStateList
 
   init {
-    var colorLow = context.getColorStateList(R.color.bpkHillier)
-    var colorMedium = context.getColorStateList(R.color.bpkErfoud)
-    var colorHigh = context.getColorStateList(R.color.bpkGlencoe)
+    var colorLow = context.getColorStateList(R.color.bpkStatusDangerFill)
+    var colorMedium = context.getColorStateList(R.color.bpkStatusWarningFill)
+    var colorHigh = context.getColorStateList(R.color.bpkStatusSuccessFill)
 
     context.theme.obtainStyledAttributes(
       attrs,
@@ -99,17 +97,6 @@ internal class RatingSelectors(
 
     backgroundColor = {
       backgroundColors[it.index]
-    }
-
-    val lightContentColor = context.getColorStateList(R.color.bpkWhite)
-    val darkContentColor = context.getColorStateList(R.color.bpkBlack)
-    contentColor = {
-      // use dark or light text color depending on contrast ratio for accessibility
-      if (ColorUtils.calculateContrast(backgroundColors[it.index].defaultColor, darkContentColor.defaultColor) >= 4.5) {
-        darkContentColor
-      } else {
-        lightContentColor
-      }
     }
   }
 
