@@ -83,7 +83,7 @@ ext {
   dokkaOutputDir = "dokka"
 
   androidxAppCompat = "androidx.appcompat:appcompat:1.4.2"
-  androidxAnnotations = "androidx.annotation:annotation:1.4.0"
+  androidxAnnotations = "androidx.annotation:annotation:1.5.0"
   androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
   androidMaterial = "com.google.android.material:material:1.6.1"
   cardView = "androidx.cardview:cardview:1.0.0"
