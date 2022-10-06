@@ -27,113 +27,113 @@ import kotlin.String
 
 public object BpkColor {
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Abisko: Color = Color(0xFF5A489B)
+  public val Abisko: Color = Color(0xFF05203C)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Bagan: Color = Color(0xFFFFEBD0)
+  public val Bagan: Color = Color(0xFFFFF7CF)
 
-  public val Black: Color = Color(0xFF000000)
-
-  @Deprecated(DEPRECATION_MESSAGE)
-  public val BlackTint01: Color = Color(0xFF1D1B20)
+  public val Black: Color = Color(0xFF010913)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val BlackTint02: Color = Color(0xFF2C2C2E)
+  public val BlackTint01: Color = Color(0xFF131D2B)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val BlackTint03: Color = Color(0xFF3A3A3C)
+  public val BlackTint02: Color = Color(0xFF131D2B)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val BlackTint04: Color = Color(0xFF48484A)
+  public val BlackTint03: Color = Color(0xFF243346)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val BlackTint05: Color = Color(0xFF636366)
+  public val BlackTint04: Color = Color(0xFF44505F)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val BlackTint06: Color = Color(0xFF8E8E93)
+  public val BlackTint05: Color = Color(0xFF44505F)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Bunol: Color = Color(0xFFFF7B59)
+  public val BlackTint06: Color = Color(0xFFBDC4CB)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Erfoud: Color = Color(0xFFFFB54D)
+  public val Bunol: Color = Color(0xFFF55D42)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Glencoe: Color = Color(0xFF73CEC6)
+  public val Erfoud: Color = Color(0xFFFEEB87)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Harbour: Color = Color(0xFFF6DDE1)
+  public val Glencoe: Color = Color(0xFF62F1C6)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Hillier: Color = Color(0xFFE18B96)
+  public val Harbour: Color = Color(0xFFFFE9F9)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Kolkata: Color = Color(0xFFFF9400)
+  public val Hillier: Color = Color(0xFFFF649C)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Monteverde: Color = Color(0xFF00A698)
+  public val Kolkata: Color = Color(0xFFF55D42)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Nara: Color = Color(0xFFFFE7E0)
+  public val Monteverde: Color = Color(0xFF0C838A)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Panjin: Color = Color(0xFFD1435B)
+  public val Nara: Color = Color(0xFFFFF7CF)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Petra: Color = Color(0xFFFFAB95)
+  public val Panjin: Color = Color(0xFFE70866)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Sagano: Color = Color(0xFFD0EEEC)
-
-  public val SkyBlue: Color = Color(0xFF0770E3)
+  public val Petra: Color = Color(0xFFFEEB87)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyBlueShade01: Color = Color(0xFF084EB2)
+  public val Sagano: Color = Color(0xFFD4FFF2)
+
+  public val SkyBlue: Color = Color(0xFF0062E3)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyBlueShade02: Color = Color(0xFF042759)
+  public val SkyBlueShade01: Color = Color(0xFF0062E3)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyBlueShade03: Color = Color(0xFF02122C)
+  public val SkyBlueShade02: Color = Color(0xFF05203C)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyBlueTint01: Color = Color(0xFF6D9FEB)
+  public val SkyBlueShade03: Color = Color(0xFF05203C)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyBlueTint02: Color = Color(0xFF9DC0F2)
+  public val SkyBlueTint01: Color = Color(0xFF84E9FF)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyBlueTint03: Color = Color(0xFFCDDFF8)
+  public val SkyBlueTint02: Color = Color(0xFFE0E3E5)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyGray: Color = Color(0xFF111236)
+  public val SkyBlueTint03: Color = Color(0xFFE0E3E5)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyGrayTint01: Color = Color(0xFF444560)
+  public val SkyGray: Color = Color(0xFF161616)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyGrayTint02: Color = Color(0xFF68697F)
+  public val SkyGrayTint01: Color = Color(0xFF545860)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyGrayTint03: Color = Color(0xFF8F90A0)
+  public val SkyGrayTint02: Color = Color(0xFF545860)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyGrayTint04: Color = Color(0xFFB2B2BF)
+  public val SkyGrayTint03: Color = Color(0xFF545860)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyGrayTint05: Color = Color(0xFFCDCDD7)
+  public val SkyGrayTint04: Color = Color(0xFFC2C9CD)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyGrayTint06: Color = Color(0xFFDDDDE5)
+  public val SkyGrayTint05: Color = Color(0xFFC2C9CD)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val SkyGrayTint07: Color = Color(0xFFF1F2F8)
+  public val SkyGrayTint06: Color = Color(0xFFE0E3E5)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Tochigi: Color = Color(0xFFE1DDEC)
+  public val SkyGrayTint07: Color = Color(0xFFEFF1F2)
 
   @Deprecated(DEPRECATION_MESSAGE)
-  public val Valensole: Color = Color(0xFFA59BC8)
+  public val Tochigi: Color = Color(0xFFEFF1F2)
+
+  @Deprecated(DEPRECATION_MESSAGE)
+  public val Valensole: Color = Color(0xFFE0E3E5)
 
   public val White: Color = Color(0xFFFFFFFF)
 

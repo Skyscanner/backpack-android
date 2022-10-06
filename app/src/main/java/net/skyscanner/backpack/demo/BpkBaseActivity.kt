@@ -26,8 +26,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
 import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.util.unsafeLazy
 
@@ -56,13 +54,6 @@ open class BpkBaseActivity : AppCompatActivity() {
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     menuInflater.inflate(R.menu.settings, menu)
-    val drawable = menu.findItem(R.id.settings_button).icon
-    if (drawable != null) {
-      drawable.mutate()
-      val bpkWhite = getColor(R.color.bpkTextOnDark)
-      drawable.colorFilter =
-        BlendModeColorFilterCompat.createBlendModeColorFilterCompat(bpkWhite, BlendModeCompat.SRC_ATOP)
-    }
     return super.onCreateOptionsMenu(menu)
   }
 
