@@ -92,13 +92,13 @@
 
 	<color name="bpkPrimary">#ff84e9ff</color>
 
-	<color name="__privateChipOnDarkNormalBackground">#ff0b121d</color>
+	<color name="__privateChipOnDarkNormalBackground">#ff243346</color>
 
 	<color name="__privateChipOnDarkPressedBackground">#ff002b5b</color>
 
 	<color name="__privateChipOnDarkOnBackground">#ff054184</color>
 
-	<color name="__privateChipDefaultNormalBackground">#ff0b121d</color>
+	<color name="__privateChipDefaultNormalBackground">#ff243346</color>
 
 	<color name="__privateChipDefaultOnBackground">#ff054184</color>
 

@@ -26,6 +26,7 @@ import androidx.compose.ui.test.performClick
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar2.CalendarSelection
@@ -172,7 +173,7 @@ private fun setupCalendar2() {
       view.setSelection(
         CalendarSelection.Dates(
           view.state.value.params.now.plusDays(5),
-          view.state.value.params.now.plusDays(10)
+          view.state.value.params.now.plusDays(10),
         )
       )
     }
@@ -192,14 +193,14 @@ private fun setupNavBarCollapsed() {
   Espresso.onView(ViewMatchers.withId(R.id.navBarCoordinator))
     .perform(ViewActions.swipeUp())
 
-  Thread.sleep(100)
+  InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 }
 
 private fun setupDialog(text: String) {
   Espresso.onView(ViewMatchers.withText(text))
     .perform(ViewActions.click())
 
-  Thread.sleep(50)
+  InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 }
 
 private fun setupComposeDialog(testRule: ComposeTestRule, dialog: ShownDialog) {
@@ -210,21 +211,21 @@ private fun setupSnackbar() {
   Espresso.onView(ViewMatchers.withText("Message (Duration Indefinite)"))
     .perform(ViewActions.click())
 
-  Thread.sleep(50)
+  InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 }
 
 private fun setupSnackbarIconAction() {
   Espresso.onView(ViewMatchers.withText("Icon + title + message (Icon Action)"))
     .perform(ViewActions.click())
 
-  Thread.sleep(50)
+  InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 }
 
 private fun setupToast() {
   Espresso.onView(ViewMatchers.withText("Short Toast"))
     .perform(ViewActions.click())
 
-  Thread.sleep(50)
+  InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 }
 
 private fun ComposeTestRule.switchFieldStatus(to: BpkFieldStatus) {

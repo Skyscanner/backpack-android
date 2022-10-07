@@ -28,7 +28,7 @@ import net.skyscanner.backpack.compose.utils.dynamicColorOf
 internal object BpkChipColors {
   internal val defaultNormalBackground: Color
     @Composable
-    get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFF0B121D))
+    get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFF243346))
 
   internal val defaultOnBackground: Color
     @Composable
@@ -44,7 +44,7 @@ internal object BpkChipColors {
 
   internal val onDarkNormalBackground: Color
     @Composable
-    get() = dynamicColorOf(Color(0x33FFFFFF), Color(0xFF0B121D))
+    get() = dynamicColorOf(Color(0x33FFFFFF), Color(0xFF243346))
 
   internal val onDarkOnBackground: Color
     @Composable
