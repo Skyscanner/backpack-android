@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
@@ -44,7 +45,6 @@ import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.spinner.BpkSpinner
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
-import net.skyscanner.backpack.compose.spinner.BpkSpinnerStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -65,13 +65,15 @@ internal fun BpkButtonImpl(
     Button(
       onClick = onClick,
       enabled = enabled && !loading,
-      modifier = modifier.defaultMinSize(BpkSpacing.Sm, size.minHeight).requiredHeight(size.minHeight),
+      modifier = modifier
+        .defaultMinSize(BpkSpacing.Sm, size.minHeight)
+        .requiredHeight(size.minHeight),
       interactionSource = interactionSource,
       colors = ButtonDefaults.buttonColors(
         backgroundColor = type.backgroundColor(interactionSource),
         contentColor = type.contentColor(interactionSource),
-        disabledBackgroundColor = type.disabledBackgroundColor(),
-        disabledContentColor = type.disabledContentColor(),
+        disabledBackgroundColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
+        disabledContentColor = if (loading) type.loadingContentColor() else type.disabledContentColor(),
       ),
       shape = ButtonShape,
       contentPadding = type.contentPadding,
@@ -89,7 +91,7 @@ internal fun BpkButtonImpl(
             if (loading) {
               BpkSpinner(
                 modifier = Modifier.align(Alignment.Center),
-                style = BpkSpinnerStyle.Disabled,
+                color = LocalContentColor.current,
                 size = when (size) {
                   BpkButtonSize.Default -> BpkSpinnerSize.Small
                   BpkButtonSize.Large -> BpkSpinnerSize.Large

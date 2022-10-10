@@ -30,16 +30,16 @@ import kotlin.reflect.full.memberProperties
 import kotlin.reflect.full.starProjectedType
 
 val BpkSpacing.values: List<Token<Dp>>
-  get() = BpkSpacing.values()
+  get() = values()
 
 val BpkBorderRadius.values: List<Token<Dp>>
-  get() = BpkBorderRadius.values()
+  get() = values()
 
 val BpkElevation.values: List<Token<Dp>>
-  get() = BpkElevation.values()
+  get() = values()
 
 val BpkColor.values: List<Token<Color>>
-  get() = BpkColor.values()
+  get() = values()
 
 val BpkColors.values: List<Token<Color>>
   get() = BpkColors::class.memberProperties.mapNotNull {
@@ -49,4 +49,7 @@ val BpkColors.values: List<Token<Color>>
 data class Token<T>(val name: String, val value: T)
 
 private inline fun <reified T, reified R> T.values(): List<Token<R>> =
-  T::class.members.filterIsInstance<KProperty1<*, *>>().map { Token(it.name, it.call(this) as R) }
+  T::class.members
+    .filterIsInstance<KProperty1<*, *>>()
+    .filter { it.returnType == R::class.starProjectedType }
+    .map { Token(it.name, it.call(this) as R) }

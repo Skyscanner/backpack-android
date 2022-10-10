@@ -161,9 +161,9 @@ private fun BpkCheckboxImpl(
       modifier = modifier.scale(BackpackCheckboxScale).semantics { invisibleToUser() },
       interactionSource = interactionSource,
       colors = CheckboxDefaults.colors(
-        checkedColor = BpkTheme.colors.primary,
+        checkedColor = BpkTheme.colors.coreAccent,
         uncheckedColor = BpkTheme.colors.textSecondary,
-        checkmarkColor = BpkTheme.colors.background,
+        checkmarkColor = BpkTheme.colors.textPrimaryInverse,
         disabledColor = BpkTheme.colors.textDisabled,
         disabledIndeterminateColor = BpkTheme.colors.textDisabled,
       ),

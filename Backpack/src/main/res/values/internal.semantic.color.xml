@@ -1,61 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-  <color name="__buttonDisabledBackground">@color/bpkSkyGrayTint06</color>
-  <color name="__buttonDisabledText">@color/bpkSkyGrayTint04</color>
-  <color name="__buttonSecondaryBackground">@color/bpkSkyGrayTint06</color>
-  <color name="__buttonFeaturedPressedBackground">@color/bpkSkyBlueShade01</color>
-  <color name="__buttonDestructiveBackground">@color/bpkSkyGrayTint06</color>
-  <color name="__buttonDestructivePressedBackground">#B22E45</color>
-  <color name="__buttonSecondaryOnDarkBackground">#1AFFFFFF</color>
-  <color name="__buttonPrimaryContent">@color/bpkWhite</color>
-  <color name="__buttonSecondaryContent">@color/bpkSkyBlueShade01</color>
-  <color name="__buttonFeaturedContent">@color/bpkWhite</color>
-  <color name="__buttonDestructiveContent">#B22E45</color>
-  <color name="__buttonDestructivePressedContent">@color/bpkWhite</color>
-  <color name="__buttonLinkPressedContent">@color/bpkSkyBlueShade01</color>
-  <color name="__buttonLinkOnDarkContent">#99FFFFFF</color>
-  <color name="__buttonLinkOnDarkContentDisabled">#33FFFFFF</color>
-  <color name="__buttonDefaultRipple">#33000000</color>
-  <color name="__buttonDestructiveRipple">#19000000</color>
-  <color name="__buttonFeaturedRipple">#19000000</color>
+  <color name="__buttonDefaultRipple">#19000000</color>
   <color name="__buttonLinkRipple">#33000000</color>
-  <color name="__buttonPrimaryOnLightRipple">#33FFFFFF</color>
-  <color name="__calendarSameDayBackground">@color/bpkSkyBlueTint02</color>
-  <color name="__calendarRangeBackground">@color/bpkSkyBlueTint02</color>
-  <color name="__calendarRangeText">@color/bpkTextPrimaryLight</color>
-  <color name="__calendarDisabledColour">@color/bpkSkyGrayTint06</color>
-  <color name="__calendarSelectedTextColor">@color/bpkWhite</color>
-  <color name="__calendarHighlightedDayDot">@color/bpkSkyGrayTint05</color>
-  <color name="__calendarCellStylePositiveColor">@color/bpkMonteverde</color>
-  <color name="__calendarCellStyleNeutralColor">@color/bpkKolkata</color>
-  <color name="__calendarCellStyleNegativeColor">@color/bpkPanjin</color>
-  <color name="__calendarCellStyleEmptyColor">@color/bpkSkyGrayTint03</color>
-  <color name="__calendarCellPositiveTextColor">@color/bpkWhite</color>
-  <color name="__calendarCellNeutralTextColor">@color/bpkSkyGray</color>
-  <color name="__calendarCellNegativeTextColor">@color/bpkWhite</color>
-  <color name="__calendarCellEmptyTextColor">@color/bpkWhite</color>
-  <color name="__calendarCellDisabledTextColor">@color/bpkSkyGrayTint04</color>
-  <color name="__dialogBackground">@color/bpkWhite</color>
-  <color name="__panelBorder">@color/bpkSkyGrayTint06</color>
-  <color name="__switchTrackDisabled">@color/bpkSkyGrayTint06</color>
-  <color name="__starRatingStarColor">@color/bpkSkyGrayTint04</color>
-  <color name="__starRatingStarColorFilled">@color/bpkKolkata</color>
-  <color name="__textFieldTextDisabled">@color/bpkSkyGrayTint04</color>
-  <color name="__textFieldHint">@color/bpkTextSecondaryLight</color>
-  <color name="__textFieldIcon">@color/bpkSkyGrayTint02</color>
-  <color name="__textFieldBorder">@color/bpkSkyGrayTint04</color>
-  <color name="__textFieldBorderDisabled">@color/bpkSkyGrayTint06</color>
-  <color name="__textInputLayoutHelperColor">@color/bpkSkyGrayTint02</color>
-  <color name="__bottomNavUnselected">@color/bpkSkyGrayTint03</color>
-
-  <color name="__barChartInactivatedColor">@color/bpkSkyGrayTint03</color>
-  <color name="__barChartActivatedColor">@color/bpkMonteverde</color>
-  <color name="__barChartPopupBackgroundColor">@color/bpkSkyBlueShade02</color>
-  <color name="__barChartPopupTextColor">@color/bpkWhite</color>
-  <color name="__chipSolidBackground">@color/bpkSkyGrayTint06</color>
-  <color name="__chipOnDarkBackground">@color/bpkWhite</color>
-  <color name="__chipDisabled">@color/bpkSkyGrayTint04</color>
-
-  <color name="__textDisabled">@color/bpkSkyGrayTint04</color>
+  <color name="__buttonLinkOnDarkRipple">#33FFFFFF</color>
+  <color name="__buttonOnLightRipple">#19FFFFFF</color>
+  <color name="__buttonOnDarkRipple">#19000000</color>
 </resources>

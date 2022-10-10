@@ -26,8 +26,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.job
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -37,7 +37,7 @@ import kotlin.coroutines.coroutineContext
 @OptIn(ExperimentalCoroutinesApi::class)
 class StateMachineTest {
 
-  private val scope = TestCoroutineScope()
+  private val scope = TestScope(UnconfinedTestDispatcher())
 
   @Test
   fun sm_holds_its_initial_state_when_created() {
@@ -89,7 +89,7 @@ class StateMachineTest {
 
   @Test
   fun sm_cancels_its_job_when_scope_cancelled() {
-    val scope = CoroutineScope(TestCoroutineDispatcher())
+    val scope = CoroutineScope(UnconfinedTestDispatcher())
     val sm = MutableStateMachine<Int, Unit>(scope, 1)
 
     var job: Job = Job()

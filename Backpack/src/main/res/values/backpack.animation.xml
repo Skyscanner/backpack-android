@@ -18,10 +18,10 @@
 -->
 <resources>
 
-	<integer name="bpkAnimationDurationBase">400</integer>
+	<integer name="bpkAnimationDurationXs">50</integer>
 
 	<integer name="bpkAnimationDurationSm">200</integer>
 
-	<integer name="bpkAnimationDurationXs">50</integer>
+	<integer name="bpkAnimationDurationBase">400</integer>
 
 </resources>

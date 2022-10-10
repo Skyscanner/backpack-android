@@ -101,7 +101,7 @@ class BpkSnackbar private constructor(
   private var text: CharSequence? = null
 
   fun setTitle(title: CharSequence): BpkSnackbar = apply {
-    this.title = title.toString().toUpperCase(context.resources.configuration.locales[0])
+    this.title = title.toString().uppercase(context.resources.configuration.locales[0])
     updateTitleIfShown(isShown)
   }
 
@@ -162,7 +162,7 @@ class BpkSnackbar private constructor(
   }
 
   fun setOnDismissed(ignoreDismissAfterAction: Boolean = true, callback: () -> Unit) =
-    addCallback(object : BpkSnackbar.Callback() {
+    addCallback(object : Callback() {
       override fun onDismissed(transientBottomBar: BpkSnackbar?, event: Int) {
         super.onDismissed(transientBottomBar, event)
         if (ignoreDismissAfterAction && event == DISMISS_EVENT_ACTION) return
@@ -253,9 +253,9 @@ class BpkSnackbar private constructor(
     fun make(view: View, text: CharSequence, duration: Int): BpkSnackbar {
       val context = view.context
 
-      @ColorInt var textColor = context.getColor(R.color.bpkBackground)
-      @ColorInt var actionColor = context.getColor(R.color.bpkMonteverde)
-      @ColorInt var backgroundColor = context.getColor(R.color.bpkTextPrimary)
+      @ColorInt var textColor = context.getColor(R.color.bpkTextOnDark)
+      @ColorInt var actionColor = context.getColor(R.color.bpkTextOnDark)
+      @ColorInt var backgroundColor = context.getColor(R.color.bpkCorePrimary)
 
       val outValue = TypedValue()
       context.theme.resolveAttribute(R.attr.bpkSnackbarStyle, outValue, true)

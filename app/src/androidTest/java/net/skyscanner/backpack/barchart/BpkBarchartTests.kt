@@ -115,8 +115,9 @@ class BpkBarchartTests : BpkSnapshotTest() {
           createMonth(0)
         ),
         legend = BpkBarChart.Legend(
+          selectedTitle = "Selected",
           activeTitle = "Enabled",
-          inactiveTitle = "Disabled"
+          inactiveTitle = "Disabled",
         )
       )
     }

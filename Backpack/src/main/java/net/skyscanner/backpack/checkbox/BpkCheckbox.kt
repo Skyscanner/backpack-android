@@ -24,7 +24,6 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatCheckBox
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
@@ -50,9 +49,9 @@ open class BpkCheckbox @JvmOverloads constructor(
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     var checkmarkDefaultColor = context.getColor(R.color.bpkTextSecondary)
-    var checkmarkCheckedColor = BpkTheme.getPrimaryColor(context)
-    var checkmarkDisabledColor = context.getColor(R.color.bpkSkyGrayTint04)
-    val textDisabledColor = context.getColor(R.color.__textDisabled)
+    var checkmarkCheckedColor = context.getColor(R.color.bpkCoreAccent)
+    var checkmarkDisabledColor = context.getColor(R.color.bpkTextDisabled)
+    val textDisabledColor = context.getColor(R.color.bpkTextDisabled)
     val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
     context.theme.obtainStyledAttributes(
       attrs,

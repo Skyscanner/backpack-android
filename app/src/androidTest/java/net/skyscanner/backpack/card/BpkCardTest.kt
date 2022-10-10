@@ -77,7 +77,7 @@ class BpkCardTest : BpkSnapshotTest() {
 
   @Test
   fun noElevation() {
-    setBackground(R.color.bpkBackgroundAlternative)
+    setBackground(R.color.bpkSurfaceHighlight)
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -93,7 +93,7 @@ class BpkCardTest : BpkSnapshotTest() {
     text.text = "message"
     card.addView(text)
     card.padded = true
-    card.focused = true
+    card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
     snap(card)
   }
 

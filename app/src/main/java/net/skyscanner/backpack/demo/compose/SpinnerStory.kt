@@ -59,7 +59,7 @@ private fun SpinnersRow(
     BpkText(style.name)
 
     Surface(
-      color = if (style == BpkSpinnerStyle.OnDarkSurface) BpkColor.Black else Color.Transparent,
+      color = if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.surfaceContrast else Color.Transparent,
       contentColor = if (style == BpkSpinnerStyle.OnDarkSurface) BpkColor.White else LocalContentColor.current,
     ) {
 

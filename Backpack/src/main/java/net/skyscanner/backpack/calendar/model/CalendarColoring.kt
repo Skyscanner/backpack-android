@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.calendar.model
 
 import android.content.Context
@@ -62,7 +64,7 @@ sealed class CalendarCellStyle {
   @Deprecated("Use Calendar2 instead")
   object Positive : CalendarCellStyle() {
     override fun color(context: Context) =
-      context.getColor(R.color.__calendarCellStylePositiveColor)
+      context.getColor(R.color.bpkStatusSuccessSpot)
   }
 
   /**
@@ -73,7 +75,7 @@ sealed class CalendarCellStyle {
   @Deprecated("Use Calendar2 instead")
   object Neutral : CalendarCellStyle() {
     override fun color(context: Context) =
-      context.getColor(R.color.__calendarCellStyleNeutralColor)
+      context.getColor(R.color.bpkStatusWarningSpot)
   }
 
   /**
@@ -84,7 +86,7 @@ sealed class CalendarCellStyle {
   @Deprecated("Use Calendar2 instead")
   object Negative : CalendarCellStyle() {
     override fun color(context: Context) =
-      context.getColor(R.color.__calendarCellStyleNegativeColor)
+      context.getColor(R.color.bpkStatusDangerSpot)
 
     override fun textStyle(context: Context): TextStyle {
       val nightModeFlags: Int = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
@@ -107,7 +109,7 @@ sealed class CalendarCellStyle {
   @Deprecated("Use Calendar2 instead")
   object Hightlight : CalendarCellStyle() {
     override fun color(context: Context) =
-      context.getColor(R.color.__calendarHighlightedDayDot)
+      context.getColor(R.color.bpkLine)
   }
 
   /**

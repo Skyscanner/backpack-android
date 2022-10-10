@@ -56,7 +56,7 @@ fun NavigationBarStory() {
 @Preview
 @Composable
 internal fun NoNavIconTopNavBar(modifier: Modifier = Modifier) {
-  BpkTopNavBar(navIcon = NavIcon.None, title = stringResource(R.string.navigation_bar_title))
+  BpkTopNavBar(navIcon = NavIcon.None, title = stringResource(R.string.navigation_bar_title), modifier = modifier)
 }
 
 @Preview
@@ -65,6 +65,7 @@ internal fun BackTopNavBar(modifier: Modifier = Modifier) {
   BpkTopNavBar(
     title = stringResource(R.string.navigation_bar_title),
     navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {},
+    modifier = modifier,
   )
 }
 
@@ -74,6 +75,7 @@ internal fun CloseTopNavBar(modifier: Modifier = Modifier) {
   BpkTopNavBar(
     title = stringResource(R.string.navigation_bar_title),
     navIcon = NavIcon.Close(contentDescription = stringResource(R.string.navigation_close)) {},
+    modifier = modifier,
   )
 }
 
@@ -88,6 +90,7 @@ internal fun ActionsTopNavBar(modifier: Modifier = Modifier) {
       IconAction(icon = BpkIcon.Accessibility, contentDescription = stringResource(R.string.navigation_accessibility)) {},
       IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
     ),
+    modifier = modifier,
   )
 }
 
@@ -98,5 +101,6 @@ internal fun TextActionTopNavBar(modifier: Modifier = Modifier) {
     navigationIcon = NavIcon.None,
     title = stringResource(R.string.navigation_bar_title),
     action = TextAction(text = stringResource(R.string.navigation_text_action)) {},
+    modifier = modifier,
   )
 }

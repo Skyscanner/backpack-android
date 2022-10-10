@@ -50,32 +50,42 @@ open class BpkBadge @JvmOverloads constructor(
     /**
      * Style for badges with positive messages
      */
-    Success(1, R.color.bpkGlencoe, R.color.bpkSkyBlueShade03),
+    Success(1, R.color.bpkStatusSuccessFill, R.color.bpkTextOnLight),
     /**
      *  Style for badges with warning messages
      */
-    Warning(2, R.color.bpkErfoud, R.color.bpkSkyBlueShade03),
+    Warning(2, R.color.bpkStatusWarningFill, R.color.bpkTextOnLight),
     /**
      * Style for badges with error messages
      */
-    Destructive(3, R.color.bpkPanjin, R.color.bpkWhite),
+    Destructive(3, R.color.bpkStatusDangerFill, R.color.bpkTextOnLight),
     /**
      *  Light themed style for badges
      */
+    @Deprecated("Switch to a different badge style")
     Light(4, R.color.bpkSkyGrayTint07, R.color.bpkSkyBlueShade03),
     /**
      *  Style for badges on dark themes
      */
-    Inverse(5, R.color.bpkWhite, R.color.bpkSkyBlueShade03),
+    Inverse(5, R.color.bpkSurfaceDefault, R.color.bpkTextPrimary),
     /**
      * Style for badges with a thin white outline
      */
-    Outline(6, R.color.bpkWhite, R.color.bpkWhite),
-
+    Outline(6, R.color.bpkTextOnDark, R.color.bpkTextOnDark),
     /**
      * Style for badges with a dark background
      */
-    Dark(7, R.color.bpkSkyGray, R.color.bpkWhite);
+    @Deprecated("Switch to a different badge style")
+    Dark(7, R.color.bpkSkyGray, R.color.bpkWhite),
+    /**
+     * Style for badges
+     */
+    Normal(8, R.color.bpkSurfaceHighlight, R.color.bpkTextPrimary),
+    /**
+     * Style for badges with emphasis
+     */
+    Strong(9, R.color.bpkCorePrimary, R.color.bpkTextOnDark),
+    ;
 
     internal companion object {
 

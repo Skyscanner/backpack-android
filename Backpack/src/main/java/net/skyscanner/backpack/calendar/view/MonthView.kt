@@ -32,6 +32,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.calendar.view
 
 import android.annotation.SuppressLint
@@ -86,9 +88,9 @@ internal class MonthView @JvmOverloads constructor(
   private var monthHeaderString = ""
 
   private val defaultTextColor: Int = context.getColor(R.color.bpkTextPrimary)
-  private val defaultTextColorLight: Int = context.getColor(R.color.bpkTextPrimaryLight)
-  private val defaultTextColorDark: Int = context.getColor(R.color.bpkTextPrimaryDark)
-  private val disabledTextColor: Int = context.getColor(R.color.__calendarDisabledColour)
+  private val defaultTextColorLight: Int = context.getColor(R.color.bpkTextOnLight)
+  private val defaultTextColorDark: Int = context.getColor(R.color.bpkTextOnDark)
+  private val disabledTextColor: Int = context.getColor(R.color.bpkTextDisabled)
 
   private val miniDayNumberTextSize: Int = monthNumberFont.fontSize
   private val monthLabelTextSize: Int = monthLabelFont.fontSize
@@ -117,27 +119,27 @@ internal class MonthView @JvmOverloads constructor(
 
     selectedDayCircleFillColor = a.getColor(
       R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
-      context.getColor(R.color.bpkPrimary)
+      context.getColor(R.color.bpkCoreAccent)
     )
 
     selectedDaySameDayCircleFillColor = a.getColor(
       R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
-      context.getColor(R.color.__calendarSameDayBackground)
+      context.getColor(R.color.bpkLine)
     )
 
     rangeBackgroundColor = a.getColor(
       R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
-      context.getColor(R.color.__calendarRangeBackground)
+      context.getColor(R.color.bpkSurfaceHighlight)
     )
 
     selectedTextColor = a.getColor(
       R.styleable.BpkCalendar_calendarDateSelectedTextColor,
-      context.getColor(R.color.__calendarSelectedTextColor)
+      context.getColor(R.color.bpkTextPrimaryInverse)
     )
 
     rangeTextColor = a.getColor(
       R.styleable.BpkCalendar_calendarRangeTextColor,
-      context.getColor(R.color.__calendarRangeText)
+      context.getColor(R.color.bpkTextPrimary)
     )
 
     a.recycle()

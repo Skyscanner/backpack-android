@@ -38,13 +38,11 @@ import net.skyscanner.backpack.calendar2.list.CalendarAdapter
 import net.skyscanner.backpack.calendar2.list.CalendarLayoutManager
 import net.skyscanner.backpack.calendar2.list.CalendarSpanSizeLookup
 import net.skyscanner.backpack.calendar2.view.CalendarHeaderView
-import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.unsafeLazy
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Period
 import org.threeten.bp.YearMonth
 
-@OptIn(InternalBackpackApi::class)
 class BpkCalendar private constructor(
   context: Context,
   attrs: AttributeSet? = null,

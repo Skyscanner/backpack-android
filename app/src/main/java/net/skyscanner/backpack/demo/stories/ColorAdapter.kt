@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.stories
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
@@ -35,16 +36,19 @@ class ColorAdapter(private val colorResources: ArrayList<Field>) : RecyclerView.
   }
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.background.setBackgroundColor(
-      holder.itemView.context.getColor(colorResources[position].getInt(null))
-    )
+    val color = holder.itemView.context.getColor(colorResources[position].getInt(null))
+    val lightTextColor = holder.name.context.getColor(R.color.bpkTextOnLight)
+    holder.background.setBackgroundColor(color)
     holder.name.text = colorResources[position].name.replace("bpk", "", true)
     holder.colorValue.text = holder.itemView.resources.getString(colorResources[position].getInt(null))
       .replace("#ff", "")
-    if (colorResources[position].name.contains("900") || colorResources[position].name.contains("800")) {
-      holder.name.setTextColor(holder.name.context.getColor(R.color.bpkSkyGrayTint06))
-      holder.colorValue.setTextColor(holder.colorValue.context.getColor(R.color.bpkSkyGrayTint06))
+    val textColor = if (ColorUtils.calculateContrast(color, lightTextColor) >= 4.5) {
+      lightTextColor
+    } else {
+      holder.name.context.getColor(R.color.bpkTextOnDark)
     }
+    holder.name.setTextColor(textColor)
+    holder.colorValue.setTextColor(textColor)
   }
 
   override fun getItemCount(): Int {

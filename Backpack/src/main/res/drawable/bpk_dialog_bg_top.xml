@@ -3,7 +3,7 @@
   <item android:top="36dp">
     <shape android:shape="rectangle">
       <corners android:topLeftRadius="@dimen/bpkBorderRadiusMd" android:topRightRadius="@dimen/bpkBorderRadiusMd" />
-      <solid android:color="@color/__dialogBackground" />
+      <solid android:color="@color/bpkSurfaceDefault" />
       <padding android:left="@dimen/bpk_dialog_padding_horizontal" android:right="@dimen/bpk_dialog_padding_horizontal"  />
     </shape>
   </item>

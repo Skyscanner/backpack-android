@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.spinner
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Build
 import android.provider.Settings.Global
 import android.util.AttributeSet
@@ -27,6 +26,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import androidx.annotation.ColorInt
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
@@ -61,19 +62,24 @@ open class BpkSpinner @JvmOverloads constructor(
   private val colors = arrayOf(
     R.color.bpkPrimary,
     R.color.bpkWhite,
-    R.color.bpkSkyGrayTint01
+    R.color.bpkSkyGrayTint01,
+    R.color.bpkTextPrimary,
+    R.color.bpkTextDisabled,
+    R.color.bpkTextOnDark,
   )
 
   private val animationsEnabled =
     Global.getFloat(context.contentResolver, Global.ANIMATOR_DURATION_SCALE, 1f) != 0f
 
   private var progressBar: ProgressBar? = null
-  @ColorInt private var themePrimaryColor: Int = INVALID_RES
+  @ColorInt
+  private var themePrimaryColor: Int = INVALID_RES
 
   /**
    * Updates the Spinner's type.
    * @see [BpkSpinner.Type]
    */
+  @Suppress("DEPRECATION")
   var type = Type.PRIMARY
     set(value) {
       field = value
@@ -95,6 +101,7 @@ open class BpkSpinner @JvmOverloads constructor(
 
   @ColorInt
   fun getColor(): Int {
+    @Suppress("DEPRECATION")
     if (type === Type.PRIMARY && themePrimaryColor != INVALID_RES) {
       return themePrimaryColor
     }
@@ -111,7 +118,8 @@ open class BpkSpinner @JvmOverloads constructor(
   }
 
   private fun updateColor() {
-    progressBar?.indeterminateDrawable?.mutate()?.setColorFilter(getColor(), PorterDuff.Mode.SRC_IN)
+    progressBar?.indeterminateDrawable?.mutate()?.colorFilter =
+      BlendModeColorFilterCompat.createBlendModeColorFilterCompat(getColor(), BlendModeCompat.SRC_IN)
   }
 
   private fun updateSize() {
@@ -139,6 +147,15 @@ open class BpkSpinner @JvmOverloads constructor(
   }
 
   enum class Type {
-    PRIMARY, LIGHT, DARK
+    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) PRIMARY,
+    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("OnDarkSurface")) LIGHT,
+    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) DARK,
+    TextPrimary,
+    Disabled,
+    OnDarkSurface,
+    ;
+    private companion object {
+      const val DeprecatedMessage = "These styles are not supported anymore and will be removed soon"
+    }
   }
 }

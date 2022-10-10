@@ -90,7 +90,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   @Test
   fun inverse() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    composed(background = BpkColor.SkyBlue) {
       BpkBadge(text = BpkBadgeType.Inverse.toString(), type = BpkBadgeType.Inverse)
     }
   }

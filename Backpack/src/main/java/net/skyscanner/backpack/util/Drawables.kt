@@ -18,18 +18,15 @@
 
 package net.skyscanner.backpack.util
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.RippleDrawable
 import android.graphics.drawable.StateListDrawable
 import android.util.StateSet
 import androidx.annotation.ColorInt
-import net.skyscanner.backpack.R
 
 internal inline fun stateListDrawable(
   drawable: Drawable,
@@ -52,45 +49,18 @@ internal inline fun stateListDrawable(
 }
 
 internal fun rippleDrawable(
-  context: Context,
   content: Drawable,
   mask: Drawable,
-  @ColorInt rippleColor: Int? = null,
+  @ColorInt rippleColor: Int,
 ): RippleDrawable {
 
-  val rippleColorStateList = if (rippleColor == null) {
-    val colorControlHighlight = resolveThemeColor(context, R.attr.colorControlHighlight)
-      ?: context.getColor(R.color.bpkSkyGrayTint06)
-    ColorStateList.valueOf(colorControlHighlight)
-  } else {
-    ColorStateList.valueOf(rippleColor)
-  }
+  val rippleColorStateList = ColorStateList.valueOf(rippleColor)
 
   return RippleDrawable(
     rippleColorStateList,
     content,
     mask
   )
-}
-
-internal fun sizedDrawable(
-  drawable: Drawable,
-  width: Int,
-  height: Int,
-) = object : LayerDrawable(
-  arrayOf(drawable)
-) {
-
-  init {
-    setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-    setLayerSize(0, intrinsicWidth, intrinsicHeight)
-  }
-
-  override fun getIntrinsicWidth(): Int =
-    width
-
-  override fun getIntrinsicHeight(): Int =
-    height
 }
 
 internal fun Drawable.rasterize(

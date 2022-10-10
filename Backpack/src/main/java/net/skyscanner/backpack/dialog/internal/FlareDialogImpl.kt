@@ -23,15 +23,17 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.InsetDrawable
+import android.os.Build
 import android.util.DisplayMetrics
 import android.view.ViewGroup.LayoutParams
 import android.view.WindowManager
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.dialog.BpkDialog
 import kotlin.math.min
 
 internal class FlareDialogImpl(
-  dialog: Dialog
-) : BpkDialogImpl.Base(R.layout.bpk_dialog_flare, dialog) {
+  dialog: Dialog,
+) : BpkDialogImpl.Base(R.layout.bpk_dialog_flare, dialog, BpkDialog.Type.Flare) {
 
   init {
     dialog.window?.let {
@@ -46,9 +48,15 @@ internal class FlareDialogImpl(
   }
 
   private fun getScreenWidth(dialog: Dialog): Int {
-    val metrics = DisplayMetrics()
     val windowManager = dialog.context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-    windowManager.defaultDisplay.getMetrics(metrics)
-    return metrics.widthPixels
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      val metrics = windowManager.currentWindowMetrics
+      metrics.bounds.width()
+    } else {
+      val metrics = DisplayMetrics()
+      @Suppress("DEPRECATION")
+      windowManager.defaultDisplay.getMetrics(metrics)
+      metrics.widthPixels
+    }
   }
 }

@@ -135,6 +135,18 @@
   <string name="navigation_text_action">Text</string>
   <string name="navigation_search">Search</string>
 
+  <string name="badge_success">Success</string>
+  <string name="badge_warning">Warning</string>
+  <string name="badge_destructive">Destructive</string>
+  <string name="badge_normal">Normal</string>
+  <string name="badge_strong">Strong</string>
+  <string name="badge_inverse">Inverse</string>
+  <string name="badge_outline">Outline</string>
+  <string name="badge_apples">Apples</string>
+  <string name="badge_bananas">Bananas</string>
+  <string name="badge_strawberries">Strawberries</string>
+  <string name="badge_pears">Pears</string>
+
   <string name="chip_option">Option</string>
   <string name="chip_select">Select</string>
   <string name="chip_dismiss">Dismiss</string>
@@ -157,4 +169,29 @@
   <string name="tabs_large_with_icon">Large with icon</string>
   <string name="tabs_one">One</string>
   <string name="tabs_two">Two</string>
+  <string name="image_skeleton_title">Image Skeleton</string>
+  <string name="circle_skeleton_title">Circle Skeleton</string>
+  <string name="body_text_skeleton_title">Body Text Skeleton</string>
+  <string name="headline_skeleton_title">Headline Skeleton</string>
+  <string name="shimmer_overlay_title">Shimmer Overlay</string>
+  <string name="tokens_title">Tokens</string>
+  <string name="components_title">Components</string>
+  <string name="spinner_textPrimary">TextPrimary</string>
+  <string name="spinner_disabled">Disabled</string>
+  <string name="spinner_onDarkSurface">OnDarkSurface</string>
+  <string name="generic_small">Small</string>
+
+  <string name="dialog_success_one_button">Success One Button</string>
+  <string name="dialog_success_two_buttons">Success Two Buttons</string>
+  <string name="dialog_success_three_buttons">Success Three Buttons</string>
+  <string name="dialog_warning">Warning</string>
+  <string name="dialog_destructive">Destructive</string>
+  <string name="dialog_no_icon">No Icon</string>
+  <string name="dialog_flare">Flare</string>
+  <string name="generic_empty" />
+  <string name="dialog_long_text">Long text</string>
+  <string name="dialog_continue">Continue</string>
+
+  <string name="content_description">Content description</string>
+  <string name="generic_message">Message</string>
 </resources>

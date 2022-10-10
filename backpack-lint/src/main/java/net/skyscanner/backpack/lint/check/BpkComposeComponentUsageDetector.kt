@@ -98,6 +98,14 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       webName = "dialog",
       componentsToReplace = setOf("androidx.compose.ui.window.Dialog", "androidx.compose.material.AlertDialog")
     ),
+    FAB(
+      fullName = "net.skyscanner.backpack.compose.fab.BpkFab",
+      webName = "floating-action-button",
+      componentsToReplace = setOf(
+        "androidx.compose.material.FloatingActionButton",
+        "androidx.compose.material.ExtendedFloatingActionButton",
+      )
+    ),
     ICON(
       fullName = "net.skyscanner.backpack.compose.icon.BpkIcon",
       webName = "icon",

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/App.Story"
-  android:background="@color/bpkBackgroundAlternative"
+  android:background="@color/bpkSurfaceHighlight"
   android:padding="0dp">
 
   <net.skyscanner.backpack.card.BpkCardView

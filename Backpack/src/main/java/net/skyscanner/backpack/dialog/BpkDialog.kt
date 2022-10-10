@@ -20,6 +20,7 @@ package net.skyscanner.backpack.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorInt
@@ -27,21 +28,62 @@ import androidx.annotation.DrawableRes
 import net.skyscanner.backpack.dialog.internal.AlertDialogImpl
 import net.skyscanner.backpack.dialog.internal.FlareDialogImpl
 
-open class BpkDialog(
+open class BpkDialog private constructor(
   context: Context,
-  val style: Style = Style.ALERT
+  val style: Style,
+  val type: Type?,
 ) : Dialog(context, 0) {
 
-  data class Icon(@DrawableRes val drawableRes: Int, @ColorInt val color: Int)
+  @Deprecated("Use BpkDialog(Context, Type) instead")
+  constructor(
+    context: Context,
+    style: Style = Style.ALERT,
+  ) : this(
+    context = context,
+    style = style,
+    type = if (style == Style.FLARE) Type.Flare else null,
+  )
 
-  enum class Style {
-    ALERT, BOTTOM_SHEET, FLARE
+  constructor(
+    context: Context,
+    type: Type,
+  ) : this(
+    context = context,
+    type = type,
+    style = when (type) {
+      Type.Flare -> Style.FLARE
+      else -> Style.ALERT
+    }
+  )
+
+  data class Button(internal val text: String, internal val onClick: () -> Unit)
+
+  data class Icon
+  @Deprecated("Custom icon background are not supported now and will be removed from public API soon")
+  constructor(
+    @DrawableRes val drawableRes: Int,
+    @Deprecated("Icon background is semantic now. This field will not contain any useful data if Type is used")
+    @ColorInt val color: Int,
+  ) {
+
+    @Suppress("DEPRECATION")
+    constructor(@DrawableRes drawableRes: Int) : this(drawableRes, Color.TRANSPARENT)
   }
 
-  private val impl = when (style) {
-    Style.ALERT -> AlertDialogImpl(this, false)
-    Style.BOTTOM_SHEET -> AlertDialogImpl(this, true)
-    Style.FLARE -> FlareDialogImpl(this)
+  enum class Type {
+    Success,
+    Warning,
+    Destructive,
+    Flare,
+  }
+
+  enum class Style {
+    ALERT, FLARE,
+  }
+
+  private val impl = when (type) {
+    Type.Flare -> FlareDialogImpl(this)
+    else -> AlertDialogImpl(this, type)
   }
 
   var title: String
@@ -65,8 +107,13 @@ open class BpkDialog(
       impl.icon = value
     }
 
+  @Deprecated("Use addActionButton(BpkDialog.Button) instead")
   fun addActionButton(view: View) {
     impl.addActionButton(view)
+  }
+
+  fun addActionButton(button: Button) {
+    impl.addActionButton(button)
   }
 
   override fun setCanceledOnTouchOutside(cancel: Boolean) {

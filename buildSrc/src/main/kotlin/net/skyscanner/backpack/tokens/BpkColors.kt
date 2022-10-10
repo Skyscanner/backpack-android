@@ -18,9 +18,12 @@
 package net.skyscanner.backpack.tokens
 
 import com.google.common.base.CaseFormat
+import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
+import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
@@ -28,10 +31,13 @@ import com.squareup.kotlinpoet.buildCodeBlock
 
 data class BpkColorModel(
   val name: String,
+  val category: String,
+  val isPrivate: Boolean,
   val defaultValue: String,
   val defaultReference: String?,
   val darkReference: String?,
   val darkValue: String?,
+  val deprecated: Boolean,
 )
 
 interface BpkColors : List<BpkColorModel>
@@ -42,42 +48,65 @@ object BpkColor {
 
     override fun invoke(source: Map<String, Any>): BpkColors =
       parseColors(source, resolveReferences = false) {
-        it.name == it.defaultReference
-      }
-
+        it.name == it.defaultReference && !it.isMarcomms()
+      }.toBpkColors()
   }
 
   object Semantic : BpkParser<Map<String, Any>, BpkColors> {
 
     override fun invoke(source: Map<String, Any>): BpkColors =
-      parseColors(source, resolveReferences = true) {
-        it.name != it.defaultReference && !it.hasSemanticSuffix()
-      }
-
-    @OptIn(ExperimentalStdlibApi::class)
-    private fun BpkColorModel.hasSemanticSuffix(): Boolean {
-      val name = name.lowercase()
-      return semanticSuffixes.any { name.endsWith(it) }
-    }
-
-    private val semanticSuffixes = listOf("light", "dark", "day", "night")
-
+      parseColors(source, resolveReferences = true) { it.isSemanticColor() && !it.isPrivate }.toBpkColors()
   }
 
-  sealed class Format : BpkTransformer<BpkColors, TypeSpec> {
+  object Internal : BpkParser<Map<String, Any>, Map<String, BpkColors>> {
 
-    data class StaticCompose(val namespace: String) : Format() {
+    override fun invoke(source: Map<String, Any>): Map<String, BpkColors> =
+      parseColors(source, resolveReferences = true) { it.isSemanticColor() && it.isPrivate }
+        .groupBy { it.fileName() }.mapValues { it.value.toBpkColors() }
+
+    private fun BpkColorModel.fileName(): String = "Bpk${category.toCamelCase()}Colors"
+
+    private fun String.toCamelCase() =
+      CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_CAMEL, this)
+  }
+
+  sealed class Format<In, Out> : BpkTransformer<In, Out> {
+
+    data class StaticCompose(val namespace: String) : Format<BpkColors, TypeSpec>() {
       override fun invoke(source: BpkColors): TypeSpec =
         toStaticCompose(source, namespace)
     }
 
-    data class SemanticCompose(val staticNameSpace: String, val className: String) : Format() {
+    data class SemanticCompose(val className: String) : Format<BpkColors, TypeSpec>() {
       override fun invoke(source: BpkColors): TypeSpec =
-        toSemanticCompose(source, staticNameSpace, className)
+        toSemanticCompose(source, className)
+    }
+
+    object InternalCompose : Format<Map<String, BpkColors>, List<TypeSpec>>() {
+      override fun invoke(source: Map<String, BpkColors>): List<TypeSpec> =
+        source.map { toInternalCompose(it.value, it.key) }
     }
 
   }
 
+  private fun BpkColorModel.isMarcomms(): Boolean = name.startsWith("MARCOMMS_")
+
+  private fun BpkColorModel.isSemanticColor(): Boolean =
+    name != defaultReference && !hasSemanticSuffix() && !isMarcomms()
+
+  @OptIn(ExperimentalStdlibApi::class)
+  private fun BpkColorModel.hasSemanticSuffix(): Boolean {
+    val name = name.lowercase()
+    return semanticSuffixes.any { name.endsWith("_$it") && !name.endsWith("_on_$it") }
+  }
+
+  private val semanticSuffixes = listOf("light", "dark", "day", "night")
+
+  private fun List<BpkColorModel>.toBpkColors(): BpkColors =
+    object : BpkColors, List<BpkColorModel> by this {
+      override fun toString(): String =
+        this.toString()
+    }
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -85,16 +114,13 @@ private fun parseColors(
   source: Map<String, Any>,
   resolveReferences: Boolean,
   filter: (BpkColorModel) -> Boolean = { true },
-): BpkColors {
+): List<BpkColorModel> {
 
   val props = source.getValue("props") as Map<String, Map<String, String>>
   val data = props.filter { (_, value) -> value["type"] == "color" }
 
-  fun String.trimColor(): String =
-    removePrefix("#").removeSuffix("ff")
-
   fun String.trimName(): String =
-    removePrefix("COLOR_").removeSuffix("_COLOR")
+    removePrefix("PRIVATE_").removePrefix("COLOR_").removeSuffix("_COLOR")
 
   fun String.trimReference(): String =
     removePrefix("{!").removeSuffix("}")
@@ -107,58 +133,76 @@ private fun parseColors(
     return resolveReference(referencing, isDark)
   }
 
-  val list = data
+  return data
     .map {
       BpkColorModel(
         name = it.key.trimName(),
-        defaultValue = it.value.getValue("value").trimColor(),
-        darkValue = it.value["darkValue"]?.trimColor(),
+        category = it.value.getValue("category").removeSuffix("-colors"),
+        isPrivate = it.key.startsWith("PRIVATE_"),
+        defaultValue = it.value.getValue("value"),
+        darkValue = it.value["darkValue"],
         defaultReference = resolveReference(it.value["originalValue"], isDark = false)?.trimReference()?.trimName(),
         darkReference = resolveReference(it.value["originalDarkValue"], isDark = true)?.trimReference()?.trimName(),
+        deprecated = it.value["deprecated"].toBoolean()
       )
     }
     .filter(filter)
     .sortedBy { it.name }
-
-  return object : BpkColors, List<BpkColorModel> by list {
-    override fun toString(): String =
-      list.toString()
-  }
 }
 
 private val ColorClass = ClassName("androidx.compose.ui.graphics", "Color")
 
 private const val isLightProperty = "isLight"
+private const val deprecationMessageProperty = "DEPRECATION_MESSAGE"
 
-private fun String.toComposeStaticName() =
-  CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
+private fun String.toHexColorBlock() =
+  buildCodeBlock { add("%T(%L)", ColorClass, toHexColor()) }
+
+private fun PropertySpec.Builder.withDeprecation(model: BpkColorModel): PropertySpec.Builder {
+  return if (model.deprecated) {
+    addAnnotation(AnnotationSpec.builder(Deprecated::class).addMember(deprecationMessageProperty).build())
+  } else {
+    this
+  }
+}
+
+private fun deprecationProperty(): PropertySpec =
+  PropertySpec.builder(deprecationMessageProperty, String::class)
+    .initializer(
+      "%S",
+      "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
+    )
+    .addModifiers(KModifier.CONST, KModifier.PRIVATE)
+    .build()
 
 @OptIn(ExperimentalStdlibApi::class)
+private fun String.toHexColor() = uppercase().run { "0x${substring(7)}${substring(1, 7)}" }
+
 private fun toStaticCompose(
   source: BpkColors,
   namespace: String,
 ): TypeSpec {
 
-  fun BpkColorModel.toProperty() : PropertySpec {
+  fun BpkColorModel.toProperty(): PropertySpec {
 
-    fun String.toHexColor() =
-      "0xFF${uppercase()}"
+    fun String.toComposeStaticName() =
+      CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
 
     return PropertySpec
       .builder(name.toComposeStaticName(), ColorClass)
-      .initializer(buildCodeBlock { add("%T(%L)", ColorClass, defaultValue.toHexColor()) })
+      .initializer(defaultValue.toHexColorBlock())
+      .withDeprecation(this)
       .build()
   }
 
   return TypeSpec.objectBuilder(namespace)
     .addProperties(source.map(BpkColorModel::toProperty))
+    .addProperty(deprecationProperty())
     .build()
 }
 
-@OptIn(ExperimentalStdlibApi::class)
 private fun toSemanticCompose(
   source: BpkColors,
-  staticNameSpace: String,
   className: String,
 ): TypeSpec {
 
@@ -176,6 +220,7 @@ private fun toSemanticCompose(
       PropertySpec
         .builder(name.toSemanticName(), ColorClass)
         .initializer(name.toSemanticName())
+        .withDeprecation(this)
         .build()
 
     return TypeSpec.classBuilder(className)
@@ -196,12 +241,22 @@ private fun toSemanticCompose(
       .build()
   }
 
-  fun BpkColors.toFactoryFunction(functionName: String, isLight: Boolean, reference: (BpkColorModel) -> String): FunSpec {
+  fun BpkColors.toFactoryFunction(isLight: Boolean): FunSpec {
+
+    val functionName = if (isLight) "light" else "dark"
+
+    fun BpkColorModel.value() = if (isLight) {
+      defaultValue
+    } else {
+      darkValue ?: defaultValue
+    }
+
+    fun BpkColorModel.toDefaultValue(): CodeBlock = value().toHexColorBlock()
 
     fun BpkColorModel.toParameter(): ParameterSpec =
       ParameterSpec
         .builder(name.toSemanticName(), ColorClass)
-        .defaultValue("$staticNameSpace.%N", reference(this).toComposeStaticName())
+        .defaultValue(toDefaultValue())
         .build()
 
     return FunSpec.builder(functionName)
@@ -220,18 +275,59 @@ private fun toSemanticCompose(
       .build()
   }
 
-
   return source
     .toColorsClass()
     .toBuilder()
-    .addType(TypeSpec.companionObjectBuilder()
-      .addModifiers(KModifier.INTERNAL)
-      .addFunction(
-        source.toFactoryFunction("light", isLight = true) { it.defaultReference!! })
-      .addFunction(
-        source.toFactoryFunction("dark", isLight = false) { it.darkReference ?: it.defaultReference!! }
-      )
-      .build()
+    .addType(
+      TypeSpec.companionObjectBuilder()
+        .addModifiers(KModifier.INTERNAL)
+        .addFunction(source.toFactoryFunction(isLight = true))
+        .addFunction(source.toFactoryFunction(isLight = false))
+        .addProperty(deprecationProperty())
+        .build()
     )
+    .build()
+}
+
+private fun toInternalCompose(
+  source: BpkColors,
+  className: String,
+): TypeSpec {
+
+  fun BpkColorModel.toProperty(): PropertySpec {
+
+    fun BpkColorModel.trimmedName() =
+      if (isPrivate) {
+        name.removePrefix("${CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_UNDERSCORE, category)}_")
+      } else {
+        name
+      }
+
+    fun BpkColorModel.toComposeInternalName() =
+      CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, trimmedName())
+
+    fun PropertySpec.Builder.addColorContent(): PropertySpec.Builder =
+      if (darkValue != null) {
+        getter(FunSpec.getterBuilder()
+          .addAnnotation(ClassName("androidx.compose.runtime", "Composable"))
+          .addCode(buildCodeBlock {
+            val dynamicColorOf = MemberName("net.skyscanner.backpack.compose.utils", "dynamicColorOf")
+            add("return %M(%T(%L), %T(%L))", dynamicColorOf, ColorClass, defaultValue.toHexColor(), ColorClass, darkValue.toHexColor())
+          })
+          .build()
+        )
+      } else {
+        initializer(defaultValue.toHexColorBlock())
+      }
+
+    return PropertySpec
+      .builder(toComposeInternalName(), ColorClass, KModifier.INTERNAL)
+      .addColorContent()
+      .build()
+  }
+
+  return TypeSpec.objectBuilder(className)
+    .addModifiers(KModifier.INTERNAL)
+    .addProperties(source.map(BpkColorModel::toProperty))
     .build()
 }

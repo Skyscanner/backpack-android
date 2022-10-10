@@ -66,15 +66,15 @@ private class CalendarDaySelectionDrawable(context: Context) : Drawable() {
 
       selectedDayCircleFillColor = it.getColorStateList(
         R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
-      ) ?: context.getColorStateList(R.color.bpkPrimary)
+      ) ?: context.getColorStateList(R.color.bpkCoreAccent)
 
       selectedDaySameDayCircleFillColor = it.getColorStateList(
         R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
-      ) ?: context.getColorStateList(R.color.__calendarSameDayBackground)
+      ) ?: context.getColorStateList(R.color.bpkCoreAccent)
 
       rangeBackgroundColor = it.getColorStateList(
         R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
-      ) ?: context.getColorStateList(R.color.__calendarRangeBackground)
+      ) ?: context.getColorStateList(R.color.bpkSurfaceHighlight)
     }
     paint.strokeWidth = context.resources.getDimension(R.dimen.bpk_calendar_border_width)
   }

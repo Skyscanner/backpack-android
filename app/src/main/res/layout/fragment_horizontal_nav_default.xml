@@ -55,7 +55,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:horizontalNavAppearance="alternate"
-    android:background="@color/bpkSkyGray"
+    android:background="@color/bpkSurfaceContrast"
     android:layout_marginBottom="@dimen/bpkSpacingXxl" />
 
   <net.skyscanner.backpack.text.BpkText

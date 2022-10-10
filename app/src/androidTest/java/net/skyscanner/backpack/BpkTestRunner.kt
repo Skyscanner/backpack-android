@@ -26,6 +26,7 @@ import android.os.Bundle
 import androidx.test.runner.AndroidJUnitRunner
 import com.facebook.testing.screenshot.ScreenshotRunner
 
+@Suppress("unused")
 class BpkTestRunner : AndroidJUnitRunner() {
 
   override fun onCreate(args: Bundle?) {

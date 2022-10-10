@@ -112,7 +112,6 @@ private fun BpkSwitchImpl(
   // our design system isn't designed with the minimum touch target in mind at the moment.
   // Disable the enforcement to avoid the extra padding
   CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-    val uncheckedTrackColor = dynamicColorOf(BpkColor.SkyGrayTint06, BpkColor.BlackTint03)
     Switch(
       checked = checked,
       onCheckedChange = onCheckedChange,
@@ -120,16 +119,16 @@ private fun BpkSwitchImpl(
       enabled = enabled,
       interactionSource = interactionSource,
       colors = SwitchDefaults.colors(
-        checkedThumbColor = BpkTheme.colors.primary,
-        checkedTrackColor = BpkColor.SkyBlueTint03,
+        checkedThumbColor = BpkTheme.colors.coreAccent,
+        checkedTrackColor = BpkTheme.colors.surfaceHighlight,
         checkedTrackAlpha = 1f,
-        uncheckedThumbColor = BpkColor.White,
-        uncheckedTrackColor = uncheckedTrackColor,
+        uncheckedThumbColor = BpkTheme.colors.textOnDark,
+        uncheckedTrackColor = BpkTheme.colors.surfaceHighlight,
         uncheckedTrackAlpha = 1f,
-        disabledCheckedThumbColor = BpkTheme.colors.primary,
-        disabledCheckedTrackColor = BpkColor.SkyBlueTint03,
-        disabledUncheckedThumbColor = BpkColor.White,
-        disabledUncheckedTrackColor = uncheckedTrackColor,
+        disabledCheckedThumbColor = BpkTheme.colors.coreAccent,
+        disabledCheckedTrackColor = BpkTheme.colors.surfaceHighlight,
+        disabledUncheckedThumbColor = BpkTheme.colors.textOnDark,
+        disabledUncheckedTrackColor = BpkTheme.colors.surfaceHighlight,
       ),
     )
   }

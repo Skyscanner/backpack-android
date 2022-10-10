@@ -32,6 +32,6 @@
     android:textAlignment="viewStart"
     app:textStyle="footnote"
     tools:text="Error message"
-    tools:textColor="@color/bpkPanjin" />
+    tools:textColor="@color/bpkTextError" />
 
 </merge>

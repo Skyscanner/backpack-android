@@ -94,6 +94,7 @@ private fun parseTextStyles(source: Map<String, Any>): BpkTextStyles {
         letterSpacing = it.value.findTokenName("LETTER_SPACING"),
       )
     }
+    .sortedBy { it.name }
 
   return object : BpkTextStyles, List<BpkTextStyleModel> by list {
     override fun toString(): String =

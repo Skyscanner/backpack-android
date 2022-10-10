@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.calendar2.data
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarSettings
@@ -30,7 +29,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class CalendarSingleSelectionTests {
 
   private val singleSelection = CalendarSettings.Default.copy(

@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.demo.data
 
 import android.content.Context
@@ -119,7 +121,7 @@ internal fun multiColoredExampleCalendarColoring(
       ColoredBucket(CalendarCellStyle.Neutral, yellowSet),
       ColoredBucket(CalendarCellStyle.Positive, greenSet),
       ColoredBucket(
-        CalendarCellStyle.Custom(context.getColor(R.color.bpkBackgroundSecondary)),
+        CalendarCellStyle.Custom(context.getColor(R.color.bpkSurfaceHighlight)),
         greySet
       )
     )

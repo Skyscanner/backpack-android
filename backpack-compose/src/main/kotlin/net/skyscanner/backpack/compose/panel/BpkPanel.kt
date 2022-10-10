@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.panel
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -37,7 +38,6 @@ sealed interface BpkPanelPadding {
   object None : BpkPanelPadding
 
   object Base : BpkPanelPadding
-
 }
 
 @Composable
@@ -54,6 +54,7 @@ fun BpkPanel(
     content = content,
     modifier = modifier
       .clip(PanelShape)
+      .background(BpkTheme.colors.surfaceDefault)
       .border(1.dp, BpkTheme.colors.line, PanelShape)
       .padding(
         all = when (padding) {

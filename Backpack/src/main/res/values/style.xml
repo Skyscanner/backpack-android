@@ -16,17 +16,12 @@
     <item name="android:layout_height">wrap_content</item>
   </style>
 
-  <style name="Bpk.dialog.animation" parent="">
-    <item name="android:windowEnterAnimation">@anim/dialog_slide_up</item>
-    <item name="android:windowExitAnimation">@anim/dialog_slide_out_down</item>
-  </style>
-
   <style name="Bpk.Calendar.Day" parent="android:Widget">
     <item name="android:gravity">center</item>
     <item name="android:layout_weight">1</item>
     <item name="android:lines">1</item>
     <item name="android:ellipsize">end</item>
-    <item name="android:textColor">@color/bpkTextQuaternary</item>
+    <item name="android:textColor">@color/bpkTextSecondary</item>
     <item name="textStyle">footnote</item>
   </style>
 </resources>

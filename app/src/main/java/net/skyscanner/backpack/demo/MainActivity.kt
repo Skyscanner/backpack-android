@@ -18,12 +18,23 @@
 
 package net.skyscanner.backpack.demo
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.RecyclerView
-import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.HeaderItem
-import net.skyscanner.backpack.demo.StoriesRecyclerViewAdapter.StoryItem
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
+import net.skyscanner.backpack.compose.navigationbar.IconAction
+import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.tokens.Settings
+import net.skyscanner.backpack.demo.compose.ComponentItem
+import net.skyscanner.backpack.demo.compose.ComponentsTitle
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 import net.skyscanner.backpack.demo.data.ComposeNode
 import net.skyscanner.backpack.demo.data.NodeItem
@@ -41,25 +52,46 @@ class MainActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_component_list)
-
-    val toolbar = findViewById<Toolbar>(R.id.toolbar)
-    setSupportActionBar(toolbar)
-    toolbar.title = title
-
-    val componentsList = findViewById<View>(R.id.componentsList) as RecyclerView
-    val allItems = mutableListOf<StoriesRecyclerViewAdapter.ListItem>()
-    allItems.add(HeaderItem("Tokens"))
-    allItems.addAll(ComponentRegistry.TOKENS.map { it.toStoryItem() })
-    allItems.add(HeaderItem("Components"))
-    allItems.addAll(ComponentRegistry.COMPONENTS.map { it.toStoryItem() })
-
-    componentsList.adapter = StoriesRecyclerViewAdapter(allItems)
-    componentsList.addItemDecoration(StoryItemDecoration(this))
+    setContent {
+      BackpackDemoTheme {
+        ComponentScreen()
+      }
+    }
   }
 
-  private fun Map.Entry<String, NodeItem>.toStoryItem(): StoryItem {
-    return StoryItem(key, hasComposeNodes(value))
+  @Composable
+  private fun ComponentScreen(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+      val context = LocalContext.current
+      BpkTopNavBar(
+        navIcon = NavIcon.None,
+        title = stringResource(R.string.app_name),
+        actions = listOf(
+          IconAction(
+            icon = BpkIcon.Settings,
+            contentDescription = stringResource(R.string.settings_title),
+            onClick = {
+              val intent = Intent(context, SettingsActivity::class.java)
+              context.startActivity(intent)
+            }
+          )
+        )
+      )
+      LazyColumn {
+        item {
+          ComponentsTitle(stringResource(R.string.tokens_title))
+        }
+        items(ComponentRegistry.TOKENS.values.toList()) {
+          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
+        }
+        item {
+          ComponentsTitle(title = stringResource(R.string.components_title))
+        }
+        items(ComponentRegistry.COMPONENTS.values.toList()) {
+          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
+        }
+      }
+    }
   }
 
   private fun hasComposeNodes(item: RegistryItem): Boolean {

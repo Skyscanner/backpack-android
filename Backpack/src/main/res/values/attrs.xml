@@ -11,6 +11,8 @@
       <enum name="inverse" value="5" />
       <enum name="outline" value="6" />
       <enum name="dark" value="7" />
+      <enum name="normal" value="8" />
+      <enum name="strong" value="9" />
     </attr>
     <!-- message to be displayed -->
     <attr name="message" format="string" />
@@ -123,6 +125,9 @@
       <enum name="primary" value="0" />
       <enum name="light" value="1" />
       <enum name="dark" value="2" />
+      <enum name="textPrimary" value="3" />
+      <enum name="disabled" value="4" />
+      <enum name="onDarkSurface" value="5" />
     </attr>
     <attr name="spinnerColor" format="color" />
   </declare-styleable>
@@ -293,11 +298,45 @@
     <attr name="state_error" format="boolean" />
   </declare-styleable>
 
+  <declare-styleable name="BpkImageSkeleton">
+    <attr name="skeletonCornerType" format="enum">
+      <enum name="square" value="0" />
+      <enum name="rounded" value="1" />
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="BpkHeadlineSkeleton">
+    <!-- Specifies skeleton headline height size, default value is "small".<br/>
+     Values: small -> 8dp, medium -> 16dp, large -> 32dp.<br/>
+     We recommend you to use this attr to size the component's height, but if a custom height is needed,
+     just set this value to "custom" and specify the height of the component.
+    -->
+    <attr name="skeletonHeadlineHeightSize" format="enum">
+      <enum name="small" value="0" />
+      <enum name="medium" value="1" />
+      <enum name="large" value="2" />
+      <enum name="custom" value="3" />
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="BpkCircleSkeleton">
+    <!-- Specify skeleton circle diameter, only set it when skeletonCircleSize is "custom".-->
+    <attr name="skeletonDiameter" format="dimension" />
+    <!-- Specify skeleton circle size, default value is "small".<br/>
+     Values: small -> 32dp, large -> 48dp.<br/>
+     We recommend you to use this attr to size the component's size, but if a custom height is needed,
+     just set this value to "custom" and specify the skeletonDiameter attr.
+    -->
+    <attr name="skeletonCircleSize" format="enum">
+      <enum name="small" value="0" />
+      <enum name="large" value="1" />
+      <enum name="custom" value="2" />
+    </attr>
+  </declare-styleable>
+
   <attr name="bpkThemeOverlay" format="reference" />
 
   <attr name="bpkPrimaryColor" format="color" />
-  <attr name="bpkPrimaryGradientColorStart" format="color" />
-  <attr name="bpkPrimaryGradientColorEnd" format="color" />
 
   <attr name="bpkStarRatingStyle" format="reference" />
   <attr name="bpkInteractiveStarRatingStyle" format="reference" />
@@ -313,7 +352,6 @@
   <attr name="bpkButtonLinkStyle" format="reference" />
   <attr name="bpkButtonLinkOnDarkStyle" format="reference" />
   <attr name="bpkCalendarStyle" format="reference" />
-  <attr name="bpkOutlineChipStyle" format="reference" />
   <attr name="bpkChipStyle" format="reference" />
   <attr name="bpkSpinnerPrimaryStyle" format="reference" />
   <attr name="bpkCheckboxStyle" format="reference" />

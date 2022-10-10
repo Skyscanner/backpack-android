@@ -1,0 +1,148 @@
+name: Record snapshots
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+env:
+  api-level: 24
+
+jobs:
+
+  Snapshots:
+    name: Record snapshot tests
+    runs-on: macos-latest
+    permissions:
+      pull-requests: write
+      contents: write
+      issues: write
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        variant:
+          - default
+          - themed
+          - rtl
+          - dm
+
+    steps:
+
+      - uses: khan/pull-request-comment-trigger@v1.1.0
+        id: check
+        with:
+          trigger: 'Record snapshots'
+          reaction: '+1'
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: Find PR branch
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/github-script@v6
+        id: get-pr
+        with:
+          script: |
+            const request = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            }
+            core.info(`Getting PR #${request.pull_number} from ${request.owner}/${request.repo}`)
+            try {
+              const result = await github.pulls.get(request)
+              return result.data
+            } catch (err) {
+              core.setFailed(`Request failed with error ${err}`)
+            }
+
+      - name: Checkout
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
+
+      - name: Set up JDK 11
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Setup Python
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Gradle cache
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+      - name: AVD cache
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ env.api-level }}
+
+      - name: create AVD and generate snapshot for caching
+        if: steps.check.outputs.triggered == 'true' && steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: google_apis
+          profile: Nexus 4
+          sdcard-path-or-size: 512M
+          api-level: ${{ env.api-level }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
+
+      - name: Recording snapshots
+        if: steps.check.outputs.triggered == 'true'
+        id: snapshotsTests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: google_apis
+          profile: Nexus 4
+          sdcard-path-or-size: 512M
+          api-level: ${{ env.api-level }}
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: |
+            sudo pip3 install Pillow==9.0.1
+            ./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
+            changedFiles=`git diff --name-only` && echo "::set-output name=CHANGED_FILES::${changedFiles//$'\n'/'%0A'}"
+
+      - name: Commit changes
+        if: steps.check.outputs.triggered == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git pull
+          git add app/screenshots/*
+          git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
+
+      - name: Push changes
+        if: steps.check.outputs.triggered == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ fromJSON(steps.get-pr.outputs.result).head.ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+

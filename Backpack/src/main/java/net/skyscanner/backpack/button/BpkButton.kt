@@ -131,17 +131,13 @@ open class BpkButton(
   private var enabled = isEnabled
 
   init {
-    var type = type
     var style: ButtonStyle = type.createStyle(context)
-    var loading = loading
-    var icon = getIcon()
-    var iconPosition = iconPosition
 
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, defStyleAttr, 0)
       .use {
         if (it.hasValue(R.styleable.BpkButton_buttonType)) {
-          type = Type.fromId(it.getInt(R.styleable.BpkButton_buttonType, 0))
-          style = type.createStyle(context)
+          this.type = Type.fromId(it.getInt(R.styleable.BpkButton_buttonType, 0))
+          style = this.type.createStyle(context)
         }
 
         style = ButtonStyle.fromAttributes(context, it, style)
@@ -156,10 +152,6 @@ open class BpkButton(
 
     this.clipToOutline = true
     this.type = type
-    this.loading = loading
-    this.icon = icon
-    this.iconPosition = iconPosition
-    this.progress.setColorSchemeColors(context.getColor(R.color.__buttonDisabledText))
     updateSize()
     applyStyle(style)
   }
@@ -200,13 +192,14 @@ open class BpkButton(
 
   private fun applyStyle(style: ButtonStyle) {
     this.style = style
-    background = style.getButtonBackground(isEnabled)
+    background = style.getButtonBackground(enabled = isEnabled, loading = loading)
 
     if (loading) {
       setTextColor(Color.TRANSPARENT)
     } else {
       setTextColor(style.getContentColor())
     }
+    this.progress.setColorSchemeColors(style.getLoadingColor())
 
     var paddingHorizontal = paddingHorizontal
 

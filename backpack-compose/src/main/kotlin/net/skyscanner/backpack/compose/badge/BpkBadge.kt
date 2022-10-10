@@ -90,30 +90,31 @@ fun BpkBadge(
 private val BpkBadgeType.contentColor: Color
   @Composable
   get() = when (this) {
-    BpkBadgeType.Normal -> dynamicColorOf(BpkColor.SkyGray, BpkColor.White)
-    BpkBadgeType.Strong -> dynamicColorOf(BpkColor.White, BpkColor.SkyGray)
-    BpkBadgeType.Success -> BpkColor.SkyGray
-    BpkBadgeType.Warning -> BpkColor.SkyGray
-    BpkBadgeType.Destructive -> BpkColor.White
-    BpkBadgeType.Inverse -> BpkColor.SkyGray
+    BpkBadgeType.Normal -> BpkTheme.colors.textPrimary
+    BpkBadgeType.Strong -> BpkTheme.colors.textOnDark
+    BpkBadgeType.Success -> BpkTheme.colors.textOnLight
+    BpkBadgeType.Warning -> BpkTheme.colors.textOnLight
+    BpkBadgeType.Destructive -> BpkTheme.colors.textOnLight
+    BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
     BpkBadgeType.Outline -> BpkColor.White
   }
 
 private val BpkBadgeType.backgroundColor: Color
   @Composable
   get() = when (this) {
-    BpkBadgeType.Normal -> dynamicColorOf(BpkColor.SkyGrayTint07, BpkColor.BlackTint02)
-    BpkBadgeType.Strong -> dynamicColorOf(BpkColor.SkyGray, BpkColor.White)
-    BpkBadgeType.Success -> BpkColor.Glencoe
-    BpkBadgeType.Warning -> BpkColor.Erfoud
-    BpkBadgeType.Destructive -> BpkColor.Panjin
-    BpkBadgeType.Inverse -> BpkColor.White
+    BpkBadgeType.Normal -> BpkTheme.colors.surfaceHighlight
+    BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
+    BpkBadgeType.Success -> BpkTheme.colors.statusSuccessFill
+    BpkBadgeType.Warning -> BpkTheme.colors.statusWarningFill
+    BpkBadgeType.Destructive -> BpkTheme.colors.statusDangerFill
+    BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
     BpkBadgeType.Outline -> Color.Transparent
   }
 
 private val BpkBadgeType.borderColor: Color
+  @Composable
   get() = when (this) {
-    BpkBadgeType.Outline -> BpkColor.White
+    BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
     else -> Color.Transparent
   }
 

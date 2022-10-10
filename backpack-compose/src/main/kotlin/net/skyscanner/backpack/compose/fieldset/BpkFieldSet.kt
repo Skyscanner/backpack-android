@@ -73,7 +73,7 @@ fun BpkFieldSet(
         color = animateColorAsState(
           when (status) {
             is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-            is BpkFieldStatus.Error -> BpkTheme.colors.systemRed
+            is BpkFieldStatus.Error -> BpkTheme.colors.textError
             is BpkFieldStatus.Validated -> BpkTheme.colors.textPrimary
             is BpkFieldStatus.Default -> BpkTheme.colors.textPrimary
           }
@@ -114,12 +114,12 @@ fun BpkFieldSet(
           icon = BpkIcon.ExclamationCircle,
           contentDescription = null,
           size = BpkIconSize.Small,
-          tint = BpkTheme.colors.systemRed,
+          tint = BpkTheme.colors.textError,
         )
         BpkText(
           text = lastErrorText,
           style = BpkTheme.typography.label2,
-          color = BpkTheme.colors.systemRed,
+          color = BpkTheme.colors.textError,
         )
       }
     }

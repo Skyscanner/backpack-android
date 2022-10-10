@@ -66,8 +66,8 @@ open class BpkCardView @JvmOverloads constructor(
 
     fun toBackgroundColor(context: Context): ColorStateList {
       val background = when (this) {
-        NONE, DEFAULT -> context.getColor(R.color.bpkBackgroundElevation01)
-        FOCUSED -> context.getColor(R.color.bpkBackgroundElevation02)
+        NONE, DEFAULT -> context.getColor(R.color.bpkSurfaceDefault)
+        FOCUSED -> context.getColor(R.color.bpkSurfaceElevated)
       }
       return ColorStateList.valueOf(background)
     }
@@ -143,6 +143,7 @@ open class BpkCardView @JvmOverloads constructor(
       if (it.hasValue(R.styleable.BpkCardView_elevationLevel)) {
         elevationLevel = ElevationLevel.fromAttr(it.getInt(R.styleable.BpkCardView_elevationLevel, 1))
       } else {
+        @Suppress("DEPRECATION")
         focused = it.getBoolean(R.styleable.BpkCardView_focused, false)
       }
       cornerStyle = CornerStyle.values()[it.getInt(R.styleable.BpkCardView_cornerStyle, 0)]

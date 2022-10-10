@@ -40,14 +40,15 @@ class BarChartStory : Story() {
           createMonth(5)
         ),
         legend = BpkBarChart.Legend(
-          "£",
-          "No Price"
+          selectedTitle = "Selected",
+          inactiveTitle = "No Price",
+          activeTitle = "Price",
         )
       )
     }
   }
 
-  private val random = Random()
+  private val random = Random(18735)
 
   private fun createMonth(month: Int) = BpkBarChart.Group(
     title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],

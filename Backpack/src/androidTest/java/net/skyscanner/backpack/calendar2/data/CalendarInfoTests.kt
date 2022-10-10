@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.calendar2.data
 
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.CellStatus
@@ -29,7 +28,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class CalendarInfoTests {
 
   @Test

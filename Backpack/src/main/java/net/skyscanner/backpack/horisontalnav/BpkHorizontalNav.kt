@@ -48,6 +48,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
   defStyleAttr: Int = 0
 ) : TabLayout(context, attrs, defStyleAttr) {
 
+  @Deprecated("Alternate styling is no longer supported - please remove usages")
   enum class Appearance(
     internal val id: Int,
     @AttrRes internal val styleAttribute: Int,
@@ -59,8 +60,8 @@ open class BpkHorizontalNav @JvmOverloads constructor(
       id = 0,
       styleAttribute = R.attr.bpkHorizontalNavStyle,
       defaultTextColor = R.color.bpkTextPrimary,
-      defaultTextSelectedColor = R.color.bpkPrimary,
-      defaultIndicatorColor = R.color.bpkPrimary
+      defaultTextSelectedColor = R.color.bpkTextLink,
+      defaultIndicatorColor = R.color.bpkTextLink
     ),
     Alternate(
       id = 1,
@@ -85,7 +86,10 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     )
   }
 
+  @Suppress("DEPRECATION")
   private var _appearance: Appearance = Appearance.Normal
+  @Suppress("DEPRECATION")
+  @Deprecated("Alternate styling is no longer supported - please remove usages")
   var appearance: Appearance
     get() = _appearance
     set(value) {
@@ -116,6 +120,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     updateSize()
   }
 
+  @Suppress("DEPRECATION")
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(
       attrs,
@@ -130,6 +135,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     }
   }
 
+  @Suppress("DEPRECATION")
   private fun updateAppearance(attrs: AttributeSet? = null, defStyleAttr: Int = 0) {
     var textColor: Int = context.getColor(appearance.defaultTextColor)
     var textSelectedColor: Int = context.getColor(appearance.defaultTextSelectedColor)
@@ -145,7 +151,6 @@ open class BpkHorizontalNav @JvmOverloads constructor(
         indicatorColor = it.getColor(R.styleable.BpkHorizontalNav_horizontalNavIndicatorColor, indicatorColor)
       }
 
-    @Suppress("DEPRECATION")
     setSelectedTabIndicatorHeight(resources.getDimensionPixelSize(R.dimen.bpkBorderSizeLg))
     setTabTextColors(textColor, textSelectedColor)
     setSelectedTabIndicatorColor(indicatorColor)

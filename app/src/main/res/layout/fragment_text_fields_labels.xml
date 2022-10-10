@@ -4,7 +4,7 @@
   style="@style/App.Story"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/bpkBackgroundSecondary"
+  android:background="@color/bpkSurfaceHighlight"
   android:orientation="vertical">
 
   <net.skyscanner.backpack.text.BpkTextInputLayout

@@ -119,9 +119,9 @@ private fun BpkRadioButtonImpl(
       enabled = enabled,
       interactionSource = interactionSource,
       colors = RadioButtonDefaults.colors(
-        selectedColor = BpkTheme.colors.primary,
+        selectedColor = BpkTheme.colors.coreAccent,
         unselectedColor = BpkTheme.colors.textSecondary,
-        disabledColor = BpkColor.SkyGrayTint04,
+        disabledColor = BpkTheme.colors.textDisabled,
       ),
     )
   }

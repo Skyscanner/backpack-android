@@ -20,24 +20,22 @@ package net.skyscanner.backpack.docs
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.ComposeTestRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.ShownDialog
-import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.YearMonth
 
-@OptIn(InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
 object DocsRegistry {
   val screenshots = listOf(
     ComposeScreenshot("All Icons - Compose", "default"),
@@ -74,9 +72,9 @@ object DocsRegistry {
     ComposeScreenshot("Chip - Compose", "default"),
     ViewScreenshot("Checkbox - View", "default"),
     ComposeScreenshot("Checkbox - Compose", "default"),
-    ViewScreenshot("Dialog - View - With call to action", "with-cta") { setupDialog() },
-    ViewScreenshot("Dialog - View - Delete confirmation", "delete-confirmation") { setupDialog() },
-    ViewScreenshot("Dialog - View - Flare", "with-flare") { setupDialog() },
+    ViewScreenshot("Dialog - View", "with-cta") { setupDialog("Success Three Buttons") },
+    ViewScreenshot("Dialog - View", "delete-confirmation") { setupDialog("Destructive") },
+    ViewScreenshot("Dialog - View", "with-flare") { setupDialog("Flare") },
     ComposeScreenshot("Dialog - Compose", "success") { setupComposeDialog(it, ShownDialog.SuccessThreeButtons) },
     ComposeScreenshot("Dialog - Compose", "warning") { setupComposeDialog(it, ShownDialog.Warning) },
     ComposeScreenshot("Dialog - Compose", "destructive") { setupComposeDialog(it, ShownDialog.Destructive) },
@@ -93,7 +91,8 @@ object DocsRegistry {
     ComposeScreenshot("Flare - Compose", "default"),
     ViewScreenshot("Horizontal Nav - View", "default"),
     ComposeScreenshot("Horizontal Nav - Compose", "default"),
-    ViewScreenshot("Floating Action Button", "default"),
+    ViewScreenshot("Floating Action Button - View", "default"),
+    ComposeScreenshot("Floating Action Button - Compose", "default"),
     ViewScreenshot("Nav Bar - View - Default", "expanded"),
     ViewScreenshot("Nav Bar - View - Default", "collapsed") { setupNavBarCollapsed() },
     ViewScreenshot("Nav Bar - View - With Menu", "navigation") { setupNavBarCollapsed() },
@@ -108,9 +107,13 @@ object DocsRegistry {
     ViewScreenshot("Rating - Horizontal", "sizes"),
     ViewScreenshot("Rating - Vertical", "vertical"),
     ViewScreenshot("Rating - Pill", "pill"),
+    ViewScreenshot("Skeleton - View", "default"),
+    ComposeScreenshot("Skeleton - Compose", "default"),
     ViewScreenshot("Slider", "all"),
     ViewScreenshot("Snackbar", "default") { setupSnackbar() },
     ViewScreenshot("Snackbar", "icon") { setupSnackbarIconAction() },
+    ViewScreenshot("Spinner - View", "default"),
+    ComposeScreenshot("Spinner - Compose", "default"),
     ViewScreenshot("Star Rating - Default", "default"),
     ViewScreenshot("Star Rating Interactive", "default"),
     ViewScreenshot("Switch - View", "default"),
@@ -128,9 +131,6 @@ object DocsRegistry {
     ComposeScreenshot("Text Field - Compose", "validated") { it.switchFieldStatus(BpkFieldStatus.Validated) },
     ComposeScreenshot("Text Field - Compose", "error") { it.switchFieldStatus(BpkFieldStatus.Error("Error text")) },
     ViewScreenshot("Text Spans", "default"),
-    ViewScreenshot("Spinner - View - Default", "default"),
-    ViewScreenshot("Spinner - View - Small", "small"),
-    ComposeScreenshot("Spinner - Compose", "default"),
     // Leave toast last as it stays visible in the screen for a while
     ViewScreenshot("Toast", "default") { setupToast() }
   )
@@ -150,6 +150,7 @@ fun ViewScreenshot(
 ): Array<Any?> =
   arrayOf(name, screenshotName, "docs/view", setup)
 
+@Suppress("DEPRECATION")
 private fun setupCalendar() {
   Espresso.onView(ViewMatchers.withId(R.id.bpkCalendar))
     .check { view, _ ->
@@ -194,15 +195,15 @@ private fun setupNavBarCollapsed() {
   Thread.sleep(100)
 }
 
-private fun setupDialog() {
-  Espresso.onView(ViewMatchers.withText("Show"))
+private fun setupDialog(text: String) {
+  Espresso.onView(ViewMatchers.withText(text))
     .perform(ViewActions.click())
 
   Thread.sleep(50)
 }
 
 private fun setupComposeDialog(testRule: ComposeTestRule, dialog: ShownDialog) {
-  testRule.onNodeWithText(dialog.buttonText).performClick().assertIsDisplayed()
+  testRule.onNodeWithTag(dialog.buttonText.toString()).performClick().assertIsDisplayed()
 }
 
 private fun setupSnackbar() {

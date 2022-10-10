@@ -48,7 +48,7 @@ internal class CalendarCellDayHolder(
   private val statusContentColor = CalendarDayStatusContentColor(context)
   private val labelColor = CalendarDayLabelContentColor(context)
 
-  private val disabledTextColor = context.getColorStateList(R.color.__calendarCellDisabledTextColor)
+  private val disabledTextColor = context.getColorStateList(R.color.bpkTextDisabled)
 
   init {
     view.setOnClickListener {

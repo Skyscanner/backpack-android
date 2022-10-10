@@ -1,55 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-  <color name="__buttonDisabledBackground">@color/bpkBlackTint01</color>
-  <color name="__buttonDisabledText">@color/bpkBlackTint03</color>
-  <color name="__buttonSecondaryBackground">@color/bpkBlackTint02</color>
-  <color name="__buttonFeaturedPressedBackground">@color/bpkSkyBlue</color>
-  <color name="__buttonDestructiveBackground">@color/bpkBlackTint02</color>
-  <color name="__buttonDestructivePressedBackground">#F85C76</color>
-  <color name="__buttonPrimaryContent">@color/bpkBlack</color>
-  <color name="__buttonSecondaryContent">@color/bpkSkyBlueTint01</color>
-  <color name="__buttonFeaturedContent">@color/bpkSkyGray</color>
-  <color name="__buttonDestructiveContent">#F85C76</color>
-  <color name="__buttonDestructivePressedContent">@color/bpkBlack</color>
-  <color name="__buttonLinkPressedContent">@color/bpkSkyBlue</color>
-  <color name="__buttonDestructiveRipple">#19FFFFFF</color>
+  <color name="__buttonDefaultRipple">#19FFFFFF</color>
   <color name="__buttonLinkRipple">#33FFFFFF</color>
-  <color name="__calendarSameDayBackground">@color/bpkSkyBlueShade01</color>
-  <color name="__calendarRangeBackground">@color/bpkSkyBlueTint02</color>
-  <color name="__calendarRangeText">@color/bpkSkyGray</color>
-  <color name="__calendarDisabledColour">@color/bpkTextSecondary</color>
-  <color name="__calendarSelectedTextColor">@color/bpkTextPrimaryLight</color>
-  <color name="__calendarHighlightedDayDot">@color/bpkBlackTint04</color>
-  <color name="__calendarCellStylePositiveColor">@color/bpkGlencoe</color>
-  <color name="__calendarCellStyleNeutralColor">@color/bpkErfoud</color>
-  <color name="__calendarCellStyleNegativeColor">@color/bpkHillier</color>
-  <color name="__calendarCellStyleEmptyColor">@color/bpkBlackTint06</color>
-  <color name="__calendarCellPositiveTextColor">@color/bpkBlack</color>
-  <color name="__calendarCellNeutralTextColor">@color/bpkBlack</color>
-  <color name="__calendarCellNegativeTextColor">@color/bpkBlack</color>
-  <color name="__calendarCellEmptyTextColor">@color/bpkBlack</color>
-  <color name="__calendarCellDisabledTextColor">@color/bpkSkyGrayTint03</color>
-  <color name="__dialogBackground">@color/bpkBackgroundElevation01Dark</color>
-  <color name="__panelBorder">@color/bpkLineDark</color>
-  <color name="__switchTrackDisabled">@color/bpkBlackTint03</color>
-  <color name="__starRatingStarColor">@color/bpkBlackTint05</color>
-  <color name="__starRatingStarColorFilled">@color/bpkErfoud</color>
-  <color name="__textFieldTextDisabled">@color/bpkBlackTint06</color>
-  <color name="__textFieldHint">@color/bpkSkyGrayTint04</color>
-  <color name="__textFieldIcon">@color/bpkBlackTint06</color>
-  <color name="__textFieldBorder">@color/bpkBlackTint05</color>
-  <color name="__textFieldBorderDisabled">@color/bpkBlackTint03</color>
-  <color name="__textInputLayoutHelperColor">@color/bpkSkyGrayTint04</color>
-  <color name="__bottomNavUnselected">@color/bpkTextSecondaryDark</color>
-
-  <color name="__barChartInactivatedColor">@color/bpkSkyGrayTint04</color>
-  <color name="__barChartActivatedColor">@color/bpkGlencoe</color>
-  <color name="__barChartPopupBackgroundColor">@color/bpkSkyGrayTint04</color>
-  <color name="__barChartPopupTextColor">@color/bpkSkyBlueShade03</color>
-  <color name="__chipSolidBackground">@color/bpkBlackTint03</color>
-  <color name="__chipOnDarkBackground">@color/bpkBlackTint04</color>
-  <color name="__chipDisabled">@color/bpkBlackTint06</color>
-
-  <color name="__textDisabled">@color/bpkBlackTint06</color>
 </resources>

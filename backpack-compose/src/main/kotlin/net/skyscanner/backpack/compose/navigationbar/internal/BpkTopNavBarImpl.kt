@@ -56,7 +56,7 @@ internal fun BpkTopNavBarImpl(
 ) {
   TopAppBar(
     modifier = modifier,
-    backgroundColor = BpkTheme.colors.backgroundAlternativeSecondary,
+    backgroundColor = BpkTheme.colors.surfaceDefault,
     contentColor = BpkTheme.colors.textPrimary,
     elevation = BpkDimension.Elevation.Sm,
     contentPadding = PaddingValues(horizontal = BpkDimension.Spacing.Md),
@@ -103,7 +103,7 @@ private fun TextAction(action: TextAction, modifier: Modifier = Modifier) {
   ) {
     BpkText(
       text = action.text,
-      color = BpkTheme.colors.primary,
+      color = BpkTheme.colors.textLink,
       style = BpkTheme.typography.label1,
       maxLines = 1,
       overflow = TextOverflow.Ellipsis,

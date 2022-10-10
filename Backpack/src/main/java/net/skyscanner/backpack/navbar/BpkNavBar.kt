@@ -125,9 +125,9 @@ class BpkNavBar @JvmOverloads constructor(
   init {
     var expandedTitleColor = expandedTitleColor
     var collapsedTextColor = collapsedTitleColor
-    var title: CharSequence? = null
-    var navIcon: Drawable? = null
-    var menu: Int = 0
+    var title: CharSequence?
+    var navIcon: Drawable?
+    var menu = 0
 
     createContextThemeWrapper(context, attrs, R.attr.bpkNavBarStyle).theme.obtainStyledAttributes(
       attrs,
@@ -143,7 +143,7 @@ class BpkNavBar @JvmOverloads constructor(
 
     this.expandedTitleColor = expandedTitleColor
     this.collapsedTitleColor = collapsedTextColor
-    this.background = ColorDrawable(context.getColor(R.color.bpkBackground))
+    this.background = ColorDrawable(context.getColor(R.color.bpkSurfaceDefault))
     this.title = title
     this.icon = navIcon
     this.navAction = navAction

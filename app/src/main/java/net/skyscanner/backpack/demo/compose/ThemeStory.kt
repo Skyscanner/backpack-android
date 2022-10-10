@@ -24,8 +24,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.BottomAppBar
-import androidx.compose.material.ExtendedFloatingActionButton
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Slider
 import androidx.compose.material.Snackbar
@@ -39,10 +37,8 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
-import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Flight
 
 @Composable
 fun ThemeStory() {
@@ -60,15 +56,6 @@ fun ThemeStory() {
 
     var sliderValue by remember { mutableStateOf(0.5f) }
     Slider(modifier = Modifier.width(144.dp), value = sliderValue, onValueChange = { sliderValue = it })
-
-    FloatingActionButton(onClick = { }) {
-      BpkIcon(BpkIcon.Flight, contentDescription = "Flight")
-    }
-
-    ExtendedFloatingActionButton(
-      text = { BpkText(text = "FloatingActionButton") },
-      onClick = { },
-    )
 
     Snackbar {
       BpkText(text = "Snackbar")

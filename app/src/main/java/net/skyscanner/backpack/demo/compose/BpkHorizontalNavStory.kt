@@ -46,7 +46,7 @@ fun HorizontalNavComposeStory() {
 
   Column(
     modifier = Modifier
-      .background(BpkTheme.colors.backgroundAlternative)
+      .background(BpkTheme.colors.surfaceHighlight)
       .padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {

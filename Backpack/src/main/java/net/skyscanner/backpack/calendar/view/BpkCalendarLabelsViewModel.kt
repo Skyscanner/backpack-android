@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package net.skyscanner.backpack.calendar.view
 
 import android.content.Context
@@ -130,7 +132,7 @@ internal class BpkCalendarLabelsViewModel(
 
     color = context.getColor(
       when (this@createTextPaint) {
-        CalendarLabel.Style.PriceLow -> R.color.bpkMonteverde
+        CalendarLabel.Style.PriceLow -> R.color.bpkStatusSuccessSpot
         CalendarLabel.Style.PriceMedium -> R.color.bpkTextSecondary
         CalendarLabel.Style.PriceHigh -> R.color.bpkTextSecondary
       }

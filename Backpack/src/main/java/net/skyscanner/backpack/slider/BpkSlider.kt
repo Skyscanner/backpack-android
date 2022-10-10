@@ -19,11 +19,9 @@
 package net.skyscanner.backpack.slider
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import com.google.android.material.slider.RangeSlider
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.BpkTheme
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
@@ -55,8 +53,8 @@ open class BpkSlider @JvmOverloads constructor(
       defStyleAttr,
       0
     ).use {
-      val primaryColor = ColorStateList.valueOf(BpkTheme.getPrimaryColor(context))
-      val lineColor = ColorStateList.valueOf(context.getColor(R.color.bpkLine))
+      val primaryColor = context.getColorStateList(R.color.bpkCoreAccent)
+      val lineColor = context.getColorStateList(R.color.bpkLine)
 
       thumbTintList = it.getColorStateList(R.styleable.BpkSlider_sliderThumbColor) ?: primaryColor
       trackActiveTintList = it.getColorStateList(R.styleable.BpkSlider_sliderTrackColorActive) ?: primaryColor

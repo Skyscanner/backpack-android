@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   style="@style/App.Story"
   android:orientation="vertical"
@@ -25,6 +24,7 @@
     android:layout_height="56dp"
     android:layout_margin="@dimen/bpkSpacingLg"
     android:contentDescription="Flight"
-    android:src="@drawable/bpk_flight" />
+    android:src="@drawable/bpk_flight"
+    android:enabled="false"/>
 
 </LinearLayout>

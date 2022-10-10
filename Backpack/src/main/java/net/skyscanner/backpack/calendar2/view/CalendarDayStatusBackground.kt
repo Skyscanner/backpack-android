@@ -51,10 +51,10 @@ private class CalendarDayStatusDrawable(context: Context) : Drawable() {
       invalidateSelf()
     }
 
-  private val colorPositive = context.getColorStateList(R.color.__calendarCellStylePositiveColor)
-  private val colorNeutral = context.getColorStateList(R.color.__calendarCellStyleNeutralColor)
-  private val colorNegative = context.getColorStateList(R.color.__calendarCellStyleNegativeColor)
-  private val colorEmpty = context.getColorStateList(R.color.__calendarCellStyleEmptyColor)
+  private val colorPositive = context.getColorStateList(R.color.bpkStatusSuccessSpot)
+  private val colorNeutral = context.getColorStateList(R.color.bpkStatusWarningSpot)
+  private val colorNegative = context.getColorStateList(R.color.bpkStatusDangerSpot)
+  private val colorEmpty = context.getColorStateList(R.color.bpkSurfaceHighlight)
 
   private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
 

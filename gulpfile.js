@@ -27,7 +27,6 @@ const rename = require('gulp-rename');
 const del = async () => {
   await import('del');
 }
-const tinycolor = require('tinycolor2');
 const _ = require('lodash');
 const through = require('through2');
 const svg2vectordrawable = require('svg2vectordrawable');
@@ -39,6 +38,7 @@ const PATHS = {
   templates: path.join(__dirname, 'templates'),
   outputRes: path.join(__dirname, 'Backpack', 'src', 'main', 'res'),
   drawableRes: path.join(__dirname, 'backpack-common', 'src', 'main', 'res', 'drawable-nodpi'),
+  lintSrc: path.join(__dirname, 'backpack-lint', 'src', 'main', 'java', 'net', 'skyscanner', 'backpack', 'lint', 'check'),
 };
 
 const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
@@ -166,7 +166,11 @@ const getTextStyles = () => {
 
 const isSemanticColor = entity => entity.value && entity.darkValue;
 
+const isMarcommsColor = entity => entity.name.startsWith("bpkMarcomms")
+
 const hasNewSemanticSuffix = entity => entity.name.endsWith("Day") || entity.name.endsWith("Night");
+
+const asArgb = color => `#${color.substring(7)}${color.substring(1, 7)}`;
 
 gulp.task('template:color', () => {
   const getColors = () =>
@@ -174,10 +178,10 @@ gulp.task('template:color', () => {
       .map(color => {
         const colorObject = JSON.parse(JSON.stringify(color));
         colorObject.name = `bpk${pascalCase(colorObject.name.replace(colorObject.type.toUpperCase(), ''))}`;
-        colorObject.value = tinycolor(colorObject.value).toHexString();
+        colorObject.value = asArgb(colorObject.value);
         return colorObject;
       })
-      .filter(entry => !isSemanticColor(entry) && !hasNewSemanticSuffix(entry));
+      .filter(entry => !isSemanticColor(entry) && !hasNewSemanticSuffix(entry) && !isMarcommsColor(entry));
 
   return gulp
     .src(`${PATHS.templates}/BackpackColor.njk`)
@@ -195,17 +199,22 @@ gulp.task('template:semanticColor', () => {
     tokensWithType('color').reduce(
       (out, color) => {
         const colorObject = JSON.parse(JSON.stringify(color));
-        colorObject.name = `bpk${pascalCase(colorObject.name.replace(colorObject.type.toUpperCase(), ''))}`;
+        const tokenName = colorObject.name.replace(colorObject.type.toUpperCase(), '');
+        if (tokenName.startsWith("PRIVATE")) {
+        colorObject.name = `__${_.camelCase(tokenName)}`;
+        } else {
+          colorObject.name = `bpk${pascalCase(tokenName)}`;
+        }
 
         if (isSemanticColor(colorObject)) {
           const light = {
             ...colorObject,
-            value: tinycolor(colorObject.value).toHexString(),
+            value: asArgb(colorObject.value),
           };
           out.light.push(light);
           const dark = {
             ...colorObject,
-            value: tinycolor(colorObject.darkValue).toHexString(),
+            value: asArgb(colorObject.darkValue),
           };
           out.dark.push(dark);
         }
@@ -236,6 +245,27 @@ gulp.task('template:semanticColor', () => {
     .pipe(gulp.dest(PATHS.outputRes));
 
   return merge(light, dark);
+});
+
+gulp.task('template:deprecatedTokens', () => {
+  const getColors = () =>
+    tokensWithType('color')
+      .map(color => {
+        const colorObject = JSON.parse(JSON.stringify(color));
+        colorObject.name = `bpk${pascalCase(colorObject.name.replace(colorObject.type.toUpperCase(), ''))}`;
+        return colorObject;
+      })
+      .filter(entry => entry.deprecated);
+
+  return gulp
+    .src(`${PATHS.templates}/BackpackDeprecation.njk`)
+    .pipe(
+      nunjucks.compile({
+        colors: getColors(),
+      }),
+    )
+    .pipe(rename('BpkDeprecatedTokens.kt'))
+    .pipe(gulp.dest(PATHS.lintSrc));
 });
 
 gulp.task('template:spacing', () => {
@@ -364,6 +394,7 @@ gulp.task(
     'template:radii',
     'template:spacing',
     'template:text',
+    'template:deprecatedTokens',
   ),
   () => {},
 );
