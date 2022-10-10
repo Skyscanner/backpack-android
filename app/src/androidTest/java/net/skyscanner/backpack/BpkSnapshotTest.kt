@@ -26,6 +26,7 @@ import android.view.ViewGroup
 import androidx.activity.compose.setContent
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
+import androidx.annotation.Dimension.Companion.DP
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -44,7 +45,6 @@ import net.skyscanner.backpack.demo.compose.BackpackPreview
 import org.hamcrest.Matchers
 import org.junit.Assume
 import org.junit.Assume.assumeThat
-import androidx.annotation.Dimension.DP as DP1
 
 open class BpkSnapshotTest {
 
@@ -70,7 +70,7 @@ open class BpkSnapshotTest {
       .record()
   }
 
-  protected fun setDimensions(@Dimension(unit = DP1) height: Int, @Dimension(unit = DP1) width: Int) {
+  protected fun setDimensions(@Dimension(unit = DP) height: Int, @Dimension(unit = DP) width: Int) {
     this.height = height
     this.width = width
   }
