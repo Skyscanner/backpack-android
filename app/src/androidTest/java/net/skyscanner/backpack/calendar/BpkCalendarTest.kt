@@ -24,9 +24,9 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
-import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -43,6 +43,7 @@ import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.data.multiColoredExampleCalendarColoring
 import org.hamcrest.CoreMatchers
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.DayOfWeek
@@ -82,6 +83,9 @@ private class BpkCalendarControllerImpl(
 
 @RunWith(AndroidJUnit4::class)
 class BpkCalendarTest : BpkSnapshotTest() {
+
+  @get:Rule
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   @Before
   fun setup() {
@@ -173,8 +177,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     val asyncScreenshot = prepareForAsyncTest()
 
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
+    rule.scenario.onActivity { activity ->
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
       rootLayout.addView(calendar)
     }
@@ -201,8 +204,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     val asyncScreenshot = prepareForAsyncTest()
 
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
+    rule.scenario.onActivity { activity ->
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
       rootLayout.addView(calendar)
     }
@@ -269,8 +271,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     val asyncScreenshot = prepareForAsyncTest()
 
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
+    rule.scenario.onActivity { activity ->
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
       rootLayout.addView(calendar)
     }
@@ -439,8 +440,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   private fun selectStartEnd(view: View, asyncScreenshot: AsyncSnapshot) {
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
+    rule.scenario.onActivity { activity ->
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
       rootLayout.addView(view)
     }

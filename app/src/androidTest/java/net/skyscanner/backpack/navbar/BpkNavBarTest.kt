@@ -19,19 +19,23 @@
 package net.skyscanner.backpack.navbar
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkNavBarTest : BpkSnapshotTest() {
+
+  @get:Rule
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   @Before
   fun setup() {
@@ -140,8 +144,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
     icon: Boolean = false,
     menu: Boolean = false,
   ) {
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity {
+    rule.scenario.onActivity {
       with(it) {
         setContentView(R.layout.fragment_nav_bar)
         val navBar = findViewById<BpkNavBar>(R.id.appBar)

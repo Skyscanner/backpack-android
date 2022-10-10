@@ -22,36 +22,36 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.test.core.app.ActivityScenario
-import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
 import org.hamcrest.Matcher
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkSnackbarTests : BpkSnapshotTest() {
 
-  private lateinit var scenario: ActivityScenario<AppCompatActivity>
+  @get:Rule
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   @Before
   fun setUp() {
     setDimensions(400, 350)
-    scenario = launchActivity()
   }
 
   private val root by unsafeLazy {
     FrameLayout(testContext).apply {
-      scenario.onActivity { activity ->
+      rule.scenario.onActivity { activity ->
         activity.setContentView(this)
       }
     }
@@ -139,13 +139,13 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   private inline fun capture(crossinline what: AsyncSnapshot.() -> BpkSnackbar) {
     val asyncScreenshot = prepareForAsyncTest()
     var snackbar: BpkSnackbar? = null
-    scenario.onActivity {
+    rule.scenario.onActivity {
       snackbar = what(asyncScreenshot)
       snackbar?.show()
     }
     Espresso.onView(ViewMatchers.withId(R.id.snackbar_text)).perform(waitForOpaque(300))
       .check { _, _ ->
-        scenario.onActivity {
+        rule.scenario.onActivity {
           asyncScreenshot.record(snackbar!!.rawSnackbar.view)
         }
       }

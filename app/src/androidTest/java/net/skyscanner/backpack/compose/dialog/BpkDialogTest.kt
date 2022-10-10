@@ -28,7 +28,7 @@ import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
-import androidx.test.core.app.launchActivity
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
@@ -49,6 +49,9 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkDialogTest : BpkSnapshotTest() {
+
+  @get:Rule
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   @get:Rule
   val composeTestRule = createEmptyComposeRule()
@@ -117,8 +120,7 @@ class BpkDialogTest : BpkSnapshotTest() {
     Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
 
     val asyncScreenshot = prepareForAsyncTest()
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
+    rule.scenario.onActivity { activity ->
       activity.setContent {
         BackpackPreview(
           content = content,
@@ -128,7 +130,7 @@ class BpkDialogTest : BpkSnapshotTest() {
 
     val view = composeTestRule.onNode(isDialog()).fetchRootView()
 
-    scenario.onActivity { activity ->
+    rule.scenario.onActivity { activity ->
       // This is not ideal but we need to see the background contrast as well
       val viewRoot = view.parent as ViewGroup
       viewRoot.removeView(view)

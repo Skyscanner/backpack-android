@@ -134,6 +134,7 @@ open class BpkSnapshotTest {
           .record()
       }
     }
+    scenario.close()
   }
 
   private fun View.findComposeView(): ComposeView? {

@@ -21,16 +21,20 @@ package net.skyscanner.backpack.map.internal
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.test.core.app.launchActivity
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkMapMarkerTest : BpkSnapshotTest() {
+
+  @get:Rule
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   private val bridge = BpkMapMarkersTestBridge.Instance
 
@@ -80,8 +84,7 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
 
   private fun createMarker(@DrawableRes icon: Int, showPointer: Boolean): View {
     var view: View? = null
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
+    rule.scenario.onActivity { activity ->
       view = bridge.create(activity, "Title", icon, showPointer)
     }
     return view!!

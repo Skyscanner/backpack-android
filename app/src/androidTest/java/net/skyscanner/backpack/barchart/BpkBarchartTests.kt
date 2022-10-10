@@ -19,20 +19,24 @@
 package net.skyscanner.backpack.barchart
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkBarchartTests : BpkSnapshotTest() {
+
+  @get:Rule
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   @Before
   fun setup() {
@@ -146,8 +150,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   private inline fun init(crossinline block: BpkBarChart.() -> Unit) {
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
+    rule.scenario.onActivity { activity ->
       activity.runOnUiThread {
         activity.setContentView(R.layout.fragment_bar_chart)
         val barChart = activity.findViewById<BpkBarChart>(R.id.bar_chart)
