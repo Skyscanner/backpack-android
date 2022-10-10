@@ -120,7 +120,7 @@ ext {
   composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
   composeTestJUnit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
   composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
-  composeActivity = "androidx.activity:activity-compose:1.5.1"
+  composeActivity = "androidx.activity:activity-compose:1.6.0"
 
   accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.23.1"
 }
