@@ -22,20 +22,17 @@ import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.util.InternalBackpackApi
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.DayOfWeek
@@ -53,18 +50,10 @@ class BpkCalendarTest : BpkSnapshotTest() {
   private val initialRange = initialStartDate..initialEndDate
   private val now = initialStartDate
 
-  private lateinit var activity: AppCompatActivity
-
-  @get:Rule
-  var activityRule: ActivityTestRule<AppCompatActivity> =
-    ActivityTestRule(AppCompatActivity::class.java)
-
-  @OptIn(InternalBackpackApi::class, ExperimentalCoroutinesApi::class)
   @Before
   fun setup() {
     setDimensions(700, 400)
-    activity = activityRule.activity
-    AndroidThreeTen.init(activity)
+    AndroidThreeTen.init(testContext)
   }
 
   @Test
@@ -211,7 +200,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     val asyncScreenshot = prepareForAsyncTest()
 
-    activity.runOnUiThread {
+    val scenario = launchActivity<AppCompatActivity>()
+    scenario.onActivity { activity ->
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
       rootLayout.addView(calendar)
     }
@@ -240,7 +230,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     val asyncScreenshot = prepareForAsyncTest()
 
-    activity.runOnUiThread {
+    val scenario = launchActivity<AppCompatActivity>()
+    scenario.onActivity { activity ->
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
       rootLayout.addView(calendar)
     }
@@ -307,7 +298,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     val asyncScreenshot = prepareForAsyncTest()
 
-    activity.runOnUiThread {
+    val scenario = launchActivity<AppCompatActivity>()
+    scenario.onActivity { activity ->
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
       rootLayout.addView(calendar)
     }
@@ -472,7 +464,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   private fun selectStartEnd(view: View, asyncScreenshot: AsyncSnapshot) {
-    activity.runOnUiThread {
+    val scenario = launchActivity<AppCompatActivity>()
+    scenario.onActivity { activity ->
       val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
       rootLayout.addView(view)
     }
