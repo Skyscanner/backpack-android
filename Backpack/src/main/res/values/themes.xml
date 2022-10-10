@@ -4,7 +4,7 @@
   <style name="BpkTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
     <item name="bpkPrimaryColor">@color/bpkCoreAccent</item>
     <item name="colorPrimary">?attr/bpkPrimaryColor</item>
-    <item name="colorPrimaryDark">@color/bpkSkyBlueShade01</item>
+    <item name="colorPrimaryDark">@color/bpkCorePrimary</item>
     <item name="colorAccent">?attr/bpkPrimaryColor</item>
     <item name="windowNoTitle">true</item>
     <item name="windowActionBar">false</item>
@@ -35,5 +35,21 @@
 
   <style name="BpkToolbarStyle" parent="Widget.AppCompat.Toolbar">
     <item name="contentInsetStartWithNavigation">56dp</item>
+  </style>
+
+  <style name="BpkToolbarTheme">
+    <item name="toolbarStyle">@style/BpkToolbarStyle.White</item>
+    <item name="toolbarNavigationButtonStyle">@style/BpkToolbarNavigationButtonStyle.White</item>
+  </style>
+
+  <style name="BpkToolbarStyle.White" parent="Widget.MaterialComponents.Toolbar.Surface">
+    <item name="contentInsetStartWithNavigation">56dp</item>
+    <item name="titleTextColor">@color/bpkTextPrimary</item>
+    <item name="android:background">@color/bpkSurfaceDefault</item>
+  </style>
+
+
+  <style name="BpkToolbarNavigationButtonStyle.White" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+    <item name="tint">@color/bpkTextPrimary</item>
   </style>
 </resources>

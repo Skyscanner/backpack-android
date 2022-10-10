@@ -10,7 +10,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/border_radius_xs"
     android:text="\@dimen/bpkBorderRadiusXs"
-    android:textColor="@color/bpkWhite"
+    android:textColor="@color/bpkTextOnDark"
     android:textAlignment="center"
     android:padding="@dimen/bpkSpacingBase"
     app:textStyle="bodyLongform"/>
@@ -21,7 +21,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/border_radius_sm"
     android:text="\@dimen/bpkBorderRadiusSm"
-    android:textColor="@color/bpkWhite"
+    android:textColor="@color/bpkTextOnDark"
     android:textAlignment="center"
     android:padding="@dimen/bpkSpacingBase"
     app:textStyle="bodyLongform"/>
@@ -32,7 +32,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/border_radius_md"
     android:text="\@dimen/bpkBorderRadiusMd"
-    android:textColor="@color/bpkWhite"
+    android:textColor="@color/bpkTextOnDark"
     android:textAlignment="center"
     android:padding="@dimen/bpkSpacingBase"
     app:textStyle="bodyLongform"/>
@@ -43,7 +43,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/border_radius_lg"
     android:text="\@dimen/bpkBorderRadiusLg"
-    android:textColor="@color/bpkWhite"
+    android:textColor="@color/bpkTextOnDark"
     android:textAlignment="center"
     android:padding="@dimen/bpkSpacingBase"
     app:textStyle="bodyLongform"/>
@@ -54,7 +54,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/border_radius_pill"
     android:text="\@dimen/bpkBorderRadiusPill"
-    android:textColor="@color/bpkWhite"
+    android:textColor="@color/bpkTextOnDark"
     android:textAlignment="center"
     android:padding="@dimen/bpkSpacingLg"
     app:textStyle="bodyLongform"/>

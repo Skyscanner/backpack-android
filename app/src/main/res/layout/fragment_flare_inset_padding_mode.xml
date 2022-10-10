@@ -23,14 +23,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_lorem_ipsum"
-        android:textColor="@color/bpkWhite"
+        android:textColor="@color/bpkTextPrimaryInverse"
         app:textStyle="heading2" />
 
       <net.skyscanner.backpack.text.BpkText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stub_sm"
-        android:textColor="@color/bpkWhite" />
+        android:textColor="@color/bpkTextPrimaryInverse" />
     </androidx.appcompat.widget.LinearLayoutCompat>
   </net.skyscanner.backpack.flare.BpkFlare>
 
@@ -50,14 +50,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_lorem_ipsum"
-        android:textColor="@color/bpkWhite"
+        android:textColor="@color/bpkTextPrimaryInverse"
         app:textStyle="heading2" />
 
       <net.skyscanner.backpack.text.BpkText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stub_sm"
-        android:textColor="@color/bpkWhite" />
+        android:textColor="@color/bpkTextPrimaryInverse" />
     </androidx.appcompat.widget.LinearLayoutCompat>
   </net.skyscanner.backpack.flare.BpkFlare>
 </androidx.appcompat.widget.LinearLayoutCompat>

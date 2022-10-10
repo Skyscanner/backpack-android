@@ -21,7 +21,7 @@
       android:ellipsize="end"
       android:gravity="center"
       android:maxLines="1"
-      android:textColor="@color/bpkWhite"
+      android:textColor="@color/bpkTextOnDark"
       tools:backgroundTint="@color/bpkMonteverde"
       tools:layout_height="@dimen/bpk_rating_score_badge_size_large"
       tools:layout_width="@dimen/bpk_rating_score_badge_size_large"
