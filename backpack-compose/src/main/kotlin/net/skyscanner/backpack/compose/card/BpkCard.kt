@@ -64,19 +64,15 @@ fun BpkCard(
   role: Role? = null,
   content: @Composable BoxScope.() -> Unit,
 ) {
-  Card(
+  Card(onClick = onClick,
     modifier = modifier,
+    enabled = enabled,
     shape = cardShape(corner),
     backgroundColor = cardBackgroundColor(elevation),
     contentColor = BpkTheme.colors.textPrimary,
     elevation = cardElevation(elevation),
-    onClick = onClick,
-    onClickLabel = onClickLabel,
     interactionSource = interactionSource,
-    enabled = enabled,
-    role = role,
-    content = { CardContent(padding, contentAlignment, content) },
-  )
+    content = { CardContent(padding, contentAlignment, content) })
 }
 
 @Composable
