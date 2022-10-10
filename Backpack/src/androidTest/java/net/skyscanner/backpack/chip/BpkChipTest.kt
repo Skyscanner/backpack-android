@@ -18,29 +18,16 @@
 
 package net.skyscanner.backpack.chip
 
-import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import net.skyscanner.backpack.util.TestActivity
+import net.skyscanner.backpack.util.TestContext
 import org.junit.Assert
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkChipTest {
 
-  @get:Rule
-  internal var activityRule: ActivityTestRule<TestActivity> =
-    ActivityTestRule(TestActivity::class.java)
-
-  private lateinit var context: Context
-
-  @Before
-  fun beforeAll() {
-    context = activityRule.activity
-  }
+  private val context = TestContext
 
   @Test
   fun test_toggle() {

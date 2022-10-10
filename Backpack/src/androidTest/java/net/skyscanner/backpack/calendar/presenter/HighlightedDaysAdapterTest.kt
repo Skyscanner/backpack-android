@@ -20,15 +20,13 @@
 
 package net.skyscanner.backpack.calendar.presenter
 
-import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter.HighlightedDay
 import net.skyscanner.backpack.calendar.view.HighlightedDaysMonthFooter
 import net.skyscanner.backpack.text.BpkText
-import net.skyscanner.backpack.util.TestActivity
+import net.skyscanner.backpack.util.TestContext
 import org.hamcrest.Matchers.instanceOf
 import org.hamcrest.Matchers.`is`
 import org.junit.Assert.assertArrayEquals
@@ -38,7 +36,6 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertThat
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.LocalDate
@@ -47,18 +44,13 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 class HighlightedDaysAdapterTest {
 
-  @get:Rule
-  internal var activityRule: ActivityTestRule<TestActivity> =
-    ActivityTestRule(TestActivity::class.java)
-
-  private lateinit var context: Context
+  private val context = TestContext
 
   private lateinit var subject: HighlightedDaysAdapter
   private lateinit var holidays: Map<String, Set<HighlightedDay>>
 
   @Before
   fun setup() {
-    context = activityRule.activity
     AndroidThreeTen.init(context)
 
     holidays = mapOf(

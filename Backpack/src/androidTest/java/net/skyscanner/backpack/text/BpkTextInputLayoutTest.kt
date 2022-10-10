@@ -19,13 +19,11 @@
 package net.skyscanner.backpack.text
 
 import android.view.View
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import junit.framework.Assert.assertEquals
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.TestActivity
+import net.skyscanner.backpack.util.TestContext
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -37,21 +35,17 @@ class BpkTextInputLayoutTest {
   private val indicatorView: View
     get() = subject.findViewById(R.id.bpk_input_indicator)
 
-  @get:Rule
-  internal var activityRule: ActivityScenarioRule<TestActivity> =
-    ActivityScenarioRule(TestActivity::class.java)
+  private val context = TestContext
 
   @Before
   fun setUp() {
-    activityRule.scenario.onActivity {
-      val textField = BpkTextField(it).apply {
-        hint = "Hint"
-        setText("Text")
-      }
-      subject = BpkTextInputLayout(it).apply {
-        label = "Label"
-        addView(textField)
-      }
+    val textField = BpkTextField(context).apply {
+      hint = "Hint"
+      setText("Text")
+    }
+    subject = BpkTextInputLayout(context).apply {
+      label = "Label"
+      addView(textField)
     }
   }
 

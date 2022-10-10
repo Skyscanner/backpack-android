@@ -18,34 +18,22 @@
 
 package net.skyscanner.backpack.text
 
-import android.content.Context
 import android.graphics.Paint
 import android.view.ContextThemeWrapper
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.util.TestActivity
+import net.skyscanner.backpack.util.TestContext
 import org.junit.Assert
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import net.skyscanner.backpack.test.R as TestR
 
 @RunWith(AndroidJUnit4::class)
 class BpkTextTest {
+
   private val testString: String = "Test"
-  private lateinit var context: Context
-
-  @get:Rule
-  internal var activityRule: ActivityTestRule<TestActivity> =
-    ActivityTestRule(TestActivity::class.java)
-
-  @Before
-  fun setUp() {
-    context = activityRule.activity
-  }
+  private val context = TestContext
 
   @Test
   fun default() {
