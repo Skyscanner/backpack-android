@@ -27,8 +27,8 @@ import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
@@ -41,21 +41,19 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkSnackbarTests : BpkSnapshotTest() {
 
-  private lateinit var activity: AppCompatActivity
-
   @get:Rule
-  var activityRule: ActivityTestRule<AppCompatActivity> =
-    ActivityTestRule(AppCompatActivity::class.java)
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   @Before
   fun setUp() {
     setDimensions(400, 350)
-    activity = activityRule.activity
   }
 
   private val root by unsafeLazy {
     FrameLayout(testContext).apply {
-      activity.setContentView(this)
+      rule.scenario.onActivity { activity ->
+        activity.setContentView(this)
+      }
     }
   }
 
@@ -141,13 +139,13 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   private inline fun capture(crossinline what: AsyncSnapshot.() -> BpkSnackbar) {
     val asyncScreenshot = prepareForAsyncTest()
     var snackbar: BpkSnackbar? = null
-    activity.runOnUiThread {
+    rule.scenario.onActivity {
       snackbar = what(asyncScreenshot)
       snackbar?.show()
     }
     Espresso.onView(ViewMatchers.withId(R.id.snackbar_text)).perform(waitForOpaque(300))
       .check { _, _ ->
-        activity.runOnUiThread {
+        rule.scenario.onActivity {
           asyncScreenshot.record(snackbar!!.rawSnackbar.view)
         }
       }

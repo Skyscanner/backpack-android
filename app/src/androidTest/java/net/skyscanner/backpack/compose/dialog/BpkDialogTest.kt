@@ -27,9 +27,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.isDialog
-import androidx.compose.ui.test.junit4.AndroidComposeTestRule
+import androidx.compose.ui.test.junit4.createEmptyComposeRule
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.demo.R
@@ -51,10 +51,10 @@ import org.junit.runner.RunWith
 class BpkDialogTest : BpkSnapshotTest() {
 
   @get:Rule
-  var activityRule = ActivityTestRule(AppCompatActivity::class.java, true, false)
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   @get:Rule
-  val composeTestRule = AndroidComposeTestRule(activityRule) { it.activity }
+  val composeTestRule = createEmptyComposeRule()
 
   @Before
   fun setup() {
@@ -120,34 +120,32 @@ class BpkDialogTest : BpkSnapshotTest() {
     Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
 
     val asyncScreenshot = prepareForAsyncTest()
-    with(activityRule.launchActivity(null)) {
-      runOnUiThread {
-        setContent {
-          BackpackPreview(
-            content = content,
-          )
-        }
-      }
-
-      val view = composeTestRule.onNode(isDialog()).fetchRootView()
-
-      runOnUiThread {
-        // This is not ideal but we need to see the background contrast as well
-        val viewRoot = view.parent as ViewGroup
-        viewRoot.removeView(view)
-
-        val wrapper = FrameLayout(this)
-        wrapper.layoutParams = FrameLayout.LayoutParams(
-          FrameLayout.LayoutParams.WRAP_CONTENT,
-          FrameLayout.LayoutParams.WRAP_CONTENT
+    rule.scenario.onActivity { activity ->
+      activity.setContent {
+        BackpackPreview(
+          content = content,
         )
-        wrapper.setPadding(20, 20, 20, 20)
-        wrapper.setBackgroundColor(getColor(R.color.bpkTextSecondary))
-        wrapper.addView(view)
-
-        setupView(wrapper)
-        asyncScreenshot.record(wrapper)
       }
+    }
+
+    val view = composeTestRule.onNode(isDialog()).fetchRootView()
+
+    rule.scenario.onActivity { activity ->
+      // This is not ideal but we need to see the background contrast as well
+      val viewRoot = view.parent as ViewGroup
+      viewRoot.removeView(view)
+
+      val wrapper = FrameLayout(activity)
+      wrapper.layoutParams = FrameLayout.LayoutParams(
+        FrameLayout.LayoutParams.WRAP_CONTENT,
+        FrameLayout.LayoutParams.WRAP_CONTENT
+      )
+      wrapper.setPadding(20, 20, 20, 20)
+      wrapper.setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
+      wrapper.addView(view)
+
+      setupView(wrapper)
+      asyncScreenshot.record(wrapper)
     }
   }
 

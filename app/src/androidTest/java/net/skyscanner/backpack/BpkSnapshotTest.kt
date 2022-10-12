@@ -36,7 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import androidx.test.core.app.ActivityScenario
+import androidx.test.core.app.launchActivity
 import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
@@ -110,31 +110,31 @@ open class BpkSnapshotTest {
       tags.joinToString(separator = "_", prefix = getScreenshotName() + ".") { it.toString() }
     }
 
-    ActivityScenario.launch(AppCompatActivity::class.java).use { scenario ->
-      scenario.onActivity { activity ->
-        with(activity) {
-          setContent {
-            BackpackPreview(
-              modifier = Modifier.size(size.width.dp, size.height.dp),
-              background = background,
-              providers = providers,
-              content = content,
-            )
-          }
-
-          val view = window.decorView.findComposeView()
-
-          ViewHelpers.setupView(view)
-            .setExactWidthDp(size.width)
-            .setExactHeightDp(size.height)
-            .layout()
-
-          Screenshot.snap(view)
-            .setName(screenshotName)
-            .record()
+    val scenario = launchActivity<AppCompatActivity>()
+    scenario.onActivity { activity ->
+      with(activity) {
+        setContent {
+          BackpackPreview(
+            modifier = Modifier.size(size.width.dp, size.height.dp),
+            background = background,
+            providers = providers,
+            content = content,
+          )
         }
+
+        val view = window.decorView.findComposeView()
+
+        ViewHelpers.setupView(view)
+          .setExactWidthDp(size.width)
+          .setExactHeightDp(size.height)
+          .layout()
+
+        Screenshot.snap(view)
+          .setName(screenshotName)
+          .record()
       }
     }
+    scenario.close()
   }
 
   private fun View.findComposeView(): ComposeView? {

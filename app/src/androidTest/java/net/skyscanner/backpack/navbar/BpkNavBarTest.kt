@@ -18,13 +18,12 @@
 
 package net.skyscanner.backpack.navbar
 
-import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
@@ -35,21 +34,17 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkNavBarTest : BpkSnapshotTest() {
 
-  private lateinit var activity: AppCompatActivity
-
   @get:Rule
-  var activityRule: ActivityTestRule<AppCompatActivity> =
-    ActivityTestRule(AppCompatActivity::class.java)
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   @Before
   fun setup() {
-    activity = activityRule.activity
     setDimensions(400, 400)
   }
 
   @Test
   fun screenshotNavBar_default() {
-    activity.init()
+    init()
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ ->
@@ -59,7 +54,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotNavBar_collapsed() {
-    activity.init()
+    init()
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
@@ -70,7 +65,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotNavBar_expanded() {
-    activity.init()
+    init()
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
@@ -81,7 +76,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotNavBar_collapsed_icon() {
-    activity.init(icon = true)
+    init(icon = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
@@ -92,7 +87,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotNavBar_expanded_icon() {
-    activity.init(icon = true)
+    init(icon = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
@@ -103,7 +98,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotNavBar_collapsed_menu() {
-    activity.init(menu = true)
+    init(menu = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
@@ -114,7 +109,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotNavBar_expanded_menu() {
-    activity.init(menu = true)
+    init(menu = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
@@ -125,7 +120,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotNavBar_collapsed_iconAndMenu() {
-    activity.init(icon = true, menu = true)
+    init(icon = true, menu = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
@@ -136,7 +131,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotNavBar_expanded_iconAndMenu() {
-    activity.init(icon = true, menu = true)
+    init(icon = true, menu = true)
     val asyncSnapshot = prepareForAsyncTest()
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
@@ -145,24 +140,26 @@ class BpkNavBarTest : BpkSnapshotTest() {
       }
   }
 
-  private fun Activity.init(
+  private fun init(
     icon: Boolean = false,
     menu: Boolean = false,
   ) {
-    runOnUiThread {
-      setContentView(R.layout.fragment_nav_bar)
-      val navBar = findViewById<BpkNavBar>(R.id.appBar)
-      navBar.title = "Nav Bar"
+    rule.scenario.onActivity {
+      with(it) {
+        setContentView(R.layout.fragment_nav_bar)
+        val navBar = findViewById<BpkNavBar>(R.id.appBar)
+        navBar.title = "Nav Bar"
 
-      if (icon) {
-        navBar.icon = getDrawable(R.drawable.bpk_native_android__back)
-      } else {
-        navBar.icon = null
-      }
-      if (menu) {
-        navBar.menu = R.menu.settings
-      } else {
-        navBar.menu = 0
+        if (icon) {
+          navBar.icon = getDrawable(R.drawable.bpk_native_android__back)
+        } else {
+          navBar.icon = null
+        }
+        if (menu) {
+          navBar.menu = R.menu.settings
+        } else {
+          navBar.menu = 0
+        }
       }
     }
   }
