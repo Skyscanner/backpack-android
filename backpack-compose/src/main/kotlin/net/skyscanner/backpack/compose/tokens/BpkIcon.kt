@@ -273,11 +273,74 @@ public val BpkIcon.Companion.BaggageAdd: BpkIcon by Delegates.singleton(
 )
 
 
+public val BpkIcon.Companion.BaggageCabin: BpkIcon by Delegates.singleton(
+  BpkIcon(
+    name = "BaggageCabin",
+    small = R.drawable.bpk_baggage_cabin_sm,
+    large = R.drawable.bpk_baggage_cabin,
+  )
+)
+
+
+public val BpkIcon.Companion.BaggageCabinAdd: BpkIcon by Delegates.singleton(
+  BpkIcon(
+    name = "BaggageCabinAdd",
+    small = R.drawable.bpk_baggage_cabin_add_sm,
+    large = R.drawable.bpk_baggage_cabin_add,
+  )
+)
+
+
+public val BpkIcon.Companion.BaggageCabinNotIncluded: BpkIcon by Delegates.singleton(
+  BpkIcon(
+    name = "BaggageCabinNotIncluded",
+    small = R.drawable.bpk_baggage_cabin_not_included_sm,
+    large = R.drawable.bpk_baggage_cabin_not_included,
+  )
+)
+
+
+public val BpkIcon.Companion.BaggageChecked: BpkIcon by Delegates.singleton(
+  BpkIcon(
+    name = "BaggageChecked",
+    small = R.drawable.bpk_baggage_checked_sm,
+    large = R.drawable.bpk_baggage_checked,
+  )
+)
+
+
+public val BpkIcon.Companion.BaggageCheckedAdd: BpkIcon by Delegates.singleton(
+  BpkIcon(
+    name = "BaggageCheckedAdd",
+    small = R.drawable.bpk_baggage_checked_add_sm,
+    large = R.drawable.bpk_baggage_checked_add,
+  )
+)
+
+
+public val BpkIcon.Companion.BaggageCheckedNotIncluded: BpkIcon by Delegates.singleton(
+  BpkIcon(
+    name = "BaggageCheckedNotIncluded",
+    small = R.drawable.bpk_baggage_checked_not_included_sm,
+    large = R.drawable.bpk_baggage_checked_not_included,
+  )
+)
+
+
 public val BpkIcon.Companion.BaggageCross: BpkIcon by Delegates.singleton(
   BpkIcon(
     name = "BaggageCross",
     small = R.drawable.bpk_baggage_cross_sm,
     large = R.drawable.bpk_baggage_cross,
+  )
+)
+
+
+public val BpkIcon.Companion.BaggageGeneric: BpkIcon by Delegates.singleton(
+  BpkIcon(
+    name = "BaggageGeneric",
+    small = R.drawable.bpk_baggage_generic_sm,
+    large = R.drawable.bpk_baggage_generic,
   )
 )
 
@@ -2424,17 +2487,19 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.AirlineMultiple, BpkIcon.Airports, BpkIcon.AlertActive, BpkIcon.AlertAdd,
         BpkIcon.AlertExpired, BpkIcon.AlertRemove, BpkIcon.ArrowDown, BpkIcon.ArrowLeft,
         BpkIcon.ArrowRight, BpkIcon.ArrowUp, BpkIcon.Award, BpkIcon.BabyCarriage, BpkIcon.Baggage,
-        BpkIcon.BaggageAdd, BpkIcon.BaggageCross, BpkIcon.BaggageRemove, BpkIcon.BaggageTick,
-        BpkIcon.Bar, BpkIcon.Beach, BpkIcon.Beer, BpkIcon.BreakfastCross, BpkIcon.BreakfastTick,
-        BpkIcon.Bus, BpkIcon.Business, BpkIcon.Cafe, BpkIcon.Calendar, BpkIcon.CallBack,
-        BpkIcon.Camera, BpkIcon.CamperVan, BpkIcon.CarDoor, BpkIcon.CarWash, BpkIcon.Cars,
-        BpkIcon.CarsFlexible, BpkIcon.CenterLocation, BpkIcon.Chart, BpkIcon.Chauffeur,
-        BpkIcon.ChevronDown, BpkIcon.ChevronLeft, BpkIcon.ChevronRight, BpkIcon.ChevronUp,
-        BpkIcon.Child, BpkIcon.ChildSeat, BpkIcon.City, BpkIcon.CityCenter, BpkIcon.Clean,
-        BpkIcon.CleanPolicy, BpkIcon.CleaningMedical, BpkIcon.Cloakroom, BpkIcon.Close,
-        BpkIcon.CloseCircle, BpkIcon.Collapse, BpkIcon.ContentCopy, BpkIcon.ContentEvent,
-        BpkIcon.ContentGuides, BpkIcon.Currency, BpkIcon.Data, BpkIcon.Deals, BpkIcon.Depart,
-        BpkIcon.DeviceMid, BpkIcon.DeviceWide, BpkIcon.Direct, BpkIcon.DocumentCsv,
+        BpkIcon.BaggageAdd, BpkIcon.BaggageCabin, BpkIcon.BaggageCabinAdd,
+        BpkIcon.BaggageCabinNotIncluded, BpkIcon.BaggageChecked, BpkIcon.BaggageCheckedAdd,
+        BpkIcon.BaggageCheckedNotIncluded, BpkIcon.BaggageCross, BpkIcon.BaggageGeneric,
+        BpkIcon.BaggageRemove, BpkIcon.BaggageTick, BpkIcon.Bar, BpkIcon.Beach, BpkIcon.Beer,
+        BpkIcon.BreakfastCross, BpkIcon.BreakfastTick, BpkIcon.Bus, BpkIcon.Business, BpkIcon.Cafe,
+        BpkIcon.Calendar, BpkIcon.CallBack, BpkIcon.Camera, BpkIcon.CamperVan, BpkIcon.CarDoor,
+        BpkIcon.CarWash, BpkIcon.Cars, BpkIcon.CarsFlexible, BpkIcon.CenterLocation, BpkIcon.Chart,
+        BpkIcon.Chauffeur, BpkIcon.ChevronDown, BpkIcon.ChevronLeft, BpkIcon.ChevronRight,
+        BpkIcon.ChevronUp, BpkIcon.Child, BpkIcon.ChildSeat, BpkIcon.City, BpkIcon.CityCenter,
+        BpkIcon.Clean, BpkIcon.CleanPolicy, BpkIcon.CleaningMedical, BpkIcon.Cloakroom,
+        BpkIcon.Close, BpkIcon.CloseCircle, BpkIcon.Collapse, BpkIcon.ContentCopy,
+        BpkIcon.ContentEvent, BpkIcon.ContentGuides, BpkIcon.Currency, BpkIcon.Data, BpkIcon.Deals,
+        BpkIcon.Depart, BpkIcon.DeviceMid, BpkIcon.DeviceWide, BpkIcon.Direct, BpkIcon.DocumentCsv,
         BpkIcon.DocumentPdf, BpkIcon.Download, BpkIcon.Duration, BpkIcon.EcoLeaf, BpkIcon.Edit,
         BpkIcon.Education, BpkIcon.Electric, BpkIcon.EndCall, BpkIcon.Estimated,
         BpkIcon.Exclamation, BpkIcon.ExclamationCircle, BpkIcon.Expand, BpkIcon.Explore,
