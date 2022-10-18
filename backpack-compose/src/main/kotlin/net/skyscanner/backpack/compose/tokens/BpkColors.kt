@@ -178,7 +178,7 @@ public class BpkColors private constructor(
       backgroundSecondary: Color = Color(0xFF131D2B),
       backgroundTertiary: Color = Color(0xFF010913),
       canvas: Color = Color(0xFF010913),
-      canvasContrast: Color = Color(0xFF131D2B),
+      canvasContrast: Color = Color(0xFF010913),
       coreAccent: Color = Color(0xFF84E9FF),
       coreEco: Color = Color(0xFF0FA1A9),
       corePrimary: Color = Color(0xFF054184),
