@@ -20,9 +20,11 @@ package net.skyscanner.backpack.compose.navigationbar.internal
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Surface
@@ -53,6 +55,7 @@ internal fun BpkTopNavBarImpl(
   fraction: Float,
   title: String,
   modifier: Modifier = Modifier,
+  insets: WindowInsets? = null,
   navigationIcon: IconAction? = null,
   actions: List<Action> = emptyList(),
 ) {
@@ -76,6 +79,7 @@ internal fun BpkTopNavBarImpl(
 
       TopAppBarLayout(
         fraction = fraction,
+        modifier = if (insets != null) Modifier.windowInsetsPadding(insets) else Modifier,
         navIcon = {
           if (navigationIcon != null) {
             IconAction(action = navigationIcon)

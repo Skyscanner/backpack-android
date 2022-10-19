@@ -32,6 +32,8 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.navigationbar.nestedScroll
+import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.compose.ComponentItem
 import net.skyscanner.backpack.demo.compose.ComponentsTitle
@@ -61,9 +63,11 @@ class MainActivity : BpkBaseActivity() {
 
   @Composable
   private fun ComponentScreen(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
+    val state = rememberTopAppBarState()
+    Column(modifier = modifier.nestedScroll(state)) {
       val context = LocalContext.current
       BpkTopNavBar(
+        state = state,
         navIcon = NavIcon.None,
         title = stringResource(R.string.app_name),
         actions = listOf(
