@@ -19,8 +19,13 @@
 package net.skyscanner.backpack.compose.navigationbar.internal
 
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 internal object TopNavBarTokens {
-  internal val ExpandedHeight = 152.dp
-  internal val CollapsedHeight = 64.dp
+  val ExpandedHeight = 92.dp
+  val CollapsedHeight = 56.dp
+  val InternalSpacing = BpkSpacing.Md
+  val ExpandedTitlePaddingStartWithoutNavIcon = BpkSpacing.Md
+  val ExpandedTitlePaddingStartWithNavIcon = BpkSpacing.Base
+  val ExpandedTitlePaddingEnd = BpkSpacing.Base
 }

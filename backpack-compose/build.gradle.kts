@@ -49,6 +49,7 @@ dependencies {
   api(rootProject.ext.get("composeUi")!!)
   api(rootProject.ext.get("composeMaterial")!!)
   api(rootProject.ext.get("composeUiToolingPreview")!!)
+  api(rootProject.ext.get("composeUtil")!!)
 
   implementation(rootProject.ext.get("ktx")!!)
   androidTestImplementation(rootProject.ext.get("junitAndroid")!!)
