@@ -18,10 +18,11 @@
 
 package net.skyscanner.backpack.map.internal
 
-import android.app.Activity
+import android.view.View
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
@@ -32,14 +33,10 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkMapMarkerTest : BpkSnapshotTest() {
 
-  private val bridge = BpkMapMarkersTestBridge.Instance
-
   @get:Rule
-  var activityRule: ActivityTestRule<AppCompatActivity> =
-    ActivityTestRule(AppCompatActivity::class.java)
+  val rule = activityScenarioRule<AppCompatActivity>()
 
-  private val activity: Activity
-    get() = activityRule.activity
+  private val bridge = BpkMapMarkersTestBridge.Instance
 
   @Before
   fun setup() {
@@ -49,39 +46,47 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestMapMarker_Default() {
-    val view = bridge.create(activity, "Title", 0, true)
+    val view = createMarker(0, true)
     snap(view)
   }
 
   @Test
   fun screenshotTestMapMarker_Default_Selected() {
-    val view = bridge.create(activity, "Title", 0, true)
+    val view = createMarker(0, true)
     view.isSelected = true
     snap(view)
   }
 
   @Test
   fun screenshotTestMapMarker_Default_NoPointer() {
-    val view = bridge.create(activity, "Title", 0, false)
+    val view = createMarker(0, false)
     snap(view)
   }
 
   @Test
   fun screenshotTestMapMarker_WithIcon() {
-    val view = bridge.create(activity, "Title", R.drawable.bpk_map, true)
+    val view = createMarker(R.drawable.bpk_map, true)
     snap(view)
   }
 
   @Test
   fun screenshotTestMapMarker_WithIcon_Selected() {
-    val view = bridge.create(activity, "Title", R.drawable.bpk_map, true)
+    val view = createMarker(R.drawable.bpk_map, true)
     view.isSelected = true
     snap(view)
   }
 
   @Test
   fun screenshotTestMapMarker_WithIcon_NoPointer() {
-    val view = bridge.create(activity, "Title", R.drawable.bpk_map, false)
+    val view = createMarker(R.drawable.bpk_map, false)
     snap(view)
+  }
+
+  private fun createMarker(@DrawableRes icon: Int, showPointer: Boolean): View {
+    var view: View? = null
+    rule.scenario.onActivity { activity ->
+      view = bridge.create(activity, "Title", icon, showPointer)
+    }
+    return view!!
   }
 }

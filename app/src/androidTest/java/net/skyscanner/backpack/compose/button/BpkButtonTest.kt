@@ -49,7 +49,8 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   fun text() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // no need to test text on Rtl
     // we want to see colors of all types
-    // different sizes have different text style
+    // we want to test 1 large button type
+    assumeTrue(size == BpkButtonSize.Default || type == BpkButtonType.Primary)
 
     capture(background = { type.rowBackground() }) {
       BpkButton("Button", type = type, size = size, onClick = {})
@@ -69,6 +70,8 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   fun loading() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode) // we're testing just colors here – no rtl is needed
+    // we want to test 1 large button type
+    assumeTrue(size == BpkButtonSize.Default || type == BpkButtonType.Primary)
 
     capture(background = { type.rowBackground() }) {
       BpkButton("Button", type = type, size = size, loading = true, onClick = {})

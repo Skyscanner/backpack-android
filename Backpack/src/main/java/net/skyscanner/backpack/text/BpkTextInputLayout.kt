@@ -127,9 +127,9 @@ open class BpkTextInputLayout @JvmOverloads constructor(
     }
   }
 
-  override fun childDrawableStateChanged(child: View?) {
+  override fun childDrawableStateChanged(child: View) {
     super.childDrawableStateChanged(child)
-    if (child?.id == R.id.bpk_input_placeholder) {
+    if (child.id == R.id.bpk_input_placeholder) {
       labelView.isEnabled = editText?.isEnabled ?: true
     }
   }

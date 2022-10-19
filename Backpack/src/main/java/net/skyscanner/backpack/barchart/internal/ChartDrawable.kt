@@ -77,6 +77,7 @@ internal class ChartDrawable(
     foregroundPaint.alpha = alpha
   }
 
+  @Deprecated("Deprecated in Java")
   override fun getOpacity(): Int =
     PixelFormat.TRANSPARENT
 
@@ -91,7 +92,7 @@ internal class ChartDrawable(
   override fun isStateful(): Boolean =
     background.isStateful || foreground.isStateful
 
-  override fun onStateChange(state: IntArray?): Boolean =
+  override fun onStateChange(state: IntArray): Boolean =
     isStateful
 
   override fun draw(canvas: Canvas) {

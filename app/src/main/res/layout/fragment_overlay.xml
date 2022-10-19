@@ -29,7 +29,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:text="@string/overlay_rounded_corners"
-      android:textColor="@color/bpkWhite"
+      android:textColor="@color/bpkTextOnDark"
       app:textStyle="bodyLongform" />
 
   </net.skyscanner.backpack.overlay.BpkOverlay>
@@ -56,7 +56,7 @@
       android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:text="@string/overlay_no_rounded_corners"
-      android:textColor="@color/bpkWhite"
+      android:textColor="@color/bpkTextOnDark"
       app:textStyle="bodyLongform" />
 
   </net.skyscanner.backpack.overlay.BpkOverlay>

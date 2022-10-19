@@ -20,11 +20,11 @@
 package net.skyscanner.backpack.calendar.presenter
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar.model.CalendarSelection
 import net.skyscanner.backpack.calendar.model.SingleDay
+import net.skyscanner.backpack.util.TestContext
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -49,7 +49,7 @@ class BpkCalendarControllerTest {
 
   @Before
   fun setUp() {
-    AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().targetContext)
+    AndroidThreeTen.init(TestContext)
     subject = BpkCalendarControllerTestImpl()
   }
 

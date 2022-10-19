@@ -102,6 +102,8 @@ dependencies {
   implementation rootProject.ext.kotlinReflection
   implementation rootProject.ext.stetho
   testImplementation rootProject.ext.junit
+  androidTestImplementation rootProject.ext.testCoreKtx
+  androidTestImplementation rootProject.ext.junitKtx
   androidTestImplementation rootProject.ext.junitAndroid
   androidTestImplementation rootProject.ext.espressoCore
   androidTestImplementation rootProject.ext.espressoContrib

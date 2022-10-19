@@ -85,12 +85,7 @@ jobs:
 
       - name: Gradle cache
         if: steps.check.outputs.triggered == 'true'
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+        uses: gradle/gradle-build-action@v2
 
       - name: AVD cache
         if: steps.check.outputs.triggered == 'true'
@@ -124,7 +119,9 @@ jobs:
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
+          force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
           script: |
             sudo pip3 install Pillow==9.0.1
             ./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}

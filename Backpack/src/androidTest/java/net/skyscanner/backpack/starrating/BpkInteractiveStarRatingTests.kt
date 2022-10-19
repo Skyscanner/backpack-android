@@ -18,9 +18,8 @@
 
 package net.skyscanner.backpack.starrating
 
-import android.content.Context
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
+import net.skyscanner.backpack.util.TestContext
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -32,11 +31,10 @@ import org.mockito.Mockito.verifyNoInteractions
 class BpkInteractiveStarRatingTests {
 
   private lateinit var subject: BpkInteractiveStarRating
-  private lateinit var context: Context
+  private val context = TestContext
 
   @Before
   fun setUp() {
-    context = InstrumentationRegistry.getInstrumentation().targetContext
     subject = BpkInteractiveStarRating(context)
   }
 

@@ -23,8 +23,8 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
@@ -35,15 +35,11 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkBarchartTests : BpkSnapshotTest() {
 
-  private lateinit var activity: AppCompatActivity
-
   @get:Rule
-  var activityRule: ActivityTestRule<AppCompatActivity> =
-    ActivityTestRule(AppCompatActivity::class.java)
+  val rule = activityScenarioRule<AppCompatActivity>()
 
   @Before
   fun setup() {
-    activity = activityRule.activity
     setDimensions(400, 400)
   }
 
@@ -154,10 +150,12 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   private inline fun init(crossinline block: BpkBarChart.() -> Unit) {
-    activity.runOnUiThread {
-      activity.setContentView(R.layout.fragment_bar_chart)
-      val barChart = activity.findViewById<BpkBarChart>(R.id.bar_chart)
-      block(barChart)
+    rule.scenario.onActivity { activity ->
+      activity.runOnUiThread {
+        activity.setContentView(R.layout.fragment_bar_chart)
+        val barChart = activity.findViewById<BpkBarChart>(R.id.bar_chart)
+        block(barChart)
+      }
     }
   }
 
