@@ -18,20 +18,21 @@
 
 package net.skyscanner.backpack.compose.navigationbar.internal
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.lerp
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -49,33 +50,49 @@ import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 internal fun BpkTopNavBarImpl(
+  fraction: Float,
   title: String,
   modifier: Modifier = Modifier,
   navigationIcon: IconAction? = null,
   actions: List<Action> = emptyList(),
 ) {
-  TopAppBar(
-    modifier = modifier,
-    backgroundColor = BpkTheme.colors.surfaceDefault,
+  Surface(
+    color = BpkTheme.colors.surfaceDefault,
     contentColor = BpkTheme.colors.textPrimary,
-    elevation = BpkDimension.Elevation.Sm,
-    contentPadding = PaddingValues(horizontal = BpkDimension.Spacing.Md),
+    elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
+    shape = RectangleShape,
+    modifier = modifier,
   ) {
+    val titleStyle = lerp(
+      start = BpkTheme.typography.heading5,
+      stop = BpkTheme.typography.heading2,
+      fraction = fraction,
+    )
+
     CompositionLocalProvider(
       LocalContentAlpha provides 1f,
+      LocalTextStyle provides titleStyle,
     ) {
-      if (navigationIcon != null) {
-        IconAction(action = navigationIcon, modifier = Modifier.padding(end = BpkDimension.Spacing.Md))
-      } else {
-        Spacer(modifier = Modifier.width(BpkDimension.Spacing.Md))
-      }
-      BpkText(modifier = Modifier.weight(1f), text = title, style = BpkTheme.typography.heading4)
-      actions.forEach { action ->
-        when (action) {
-          is IconAction -> IconAction(action)
-          is TextAction -> TextAction(action)
+
+      TopAppBarLayout(
+        fraction = fraction,
+        navIcon = {
+          if (navigationIcon != null) {
+            IconAction(action = navigationIcon)
+          }
+        },
+        title = {
+          BpkText(text = title, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        },
+        actions = {
+          actions.forEach { action ->
+            when (action) {
+              is IconAction -> IconAction(action)
+              is TextAction -> TextAction(action)
+            }
+          }
         }
-      }
+      )
     }
   }
 }
@@ -84,7 +101,7 @@ internal fun BpkTopNavBarImpl(
 private fun IconAction(action: IconAction, modifier: Modifier = Modifier) {
   Box(
     modifier = modifier
-      .size(IconActionSize)
+      .size(TopNavBarTokens.IconActionSize)
       .clickable(bounded = false, role = Role.Button) { action.onClick() },
     contentAlignment = Alignment.Center,
   ) {
@@ -118,4 +135,3 @@ internal fun NavIcon.toAction(): IconAction? =
     is NavIcon.None -> null
   }
 
-private val IconActionSize = 40.dp

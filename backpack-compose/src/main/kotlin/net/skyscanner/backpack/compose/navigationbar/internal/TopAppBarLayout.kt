@@ -88,6 +88,7 @@ private fun TopNavBarMeasuringPolicy(fraction: Float): MeasurePolicy =
 
     val title = measurables.first { it.layoutId == TopAppBarLayoutId.Title }.measure(
       constraints = constraints.copy(
+        minWidth = 0,
         maxWidth = constraints.maxWidth - titlePaddingStart(navIcon, fraction) - titlePaddingEnd(actions, fraction),
       ),
     )

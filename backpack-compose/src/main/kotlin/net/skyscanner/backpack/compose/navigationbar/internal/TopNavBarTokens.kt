@@ -28,4 +28,5 @@ internal object TopNavBarTokens {
   val ExpandedTitlePaddingStartWithoutNavIcon = BpkSpacing.Md
   val ExpandedTitlePaddingStartWithNavIcon = BpkSpacing.Base
   val ExpandedTitlePaddingEnd = BpkSpacing.Base
+  val IconActionSize = 40.dp
 }

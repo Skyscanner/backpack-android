@@ -45,6 +45,7 @@ fun BpkTopNavBar(
   actions: List<IconAction> = emptyList(),
 ) {
   BpkTopNavBarImpl(
+    fraction = 0f,
     title = title,
     modifier = modifier,
     navigationIcon = navIcon.toAction(),
@@ -60,6 +61,41 @@ fun BpkTopNavBar(
   modifier: Modifier = Modifier,
 ) {
   BpkTopNavBarImpl(
+    fraction = 0f,
+    title = title,
+    modifier = modifier,
+    navigationIcon = navigationIcon.toAction(),
+    actions = listOf(action),
+  )
+}
+
+@Composable
+fun BpkTopNavBar(
+  state: TopNavBarState,
+  navIcon: NavIcon,
+  title: String,
+  modifier: Modifier = Modifier,
+  actions: List<IconAction> = emptyList(),
+) {
+  BpkTopNavBarImpl(
+    fraction = state.asInternalState().fraction,
+    title = title,
+    modifier = modifier,
+    navigationIcon = navIcon.toAction(),
+    actions = actions,
+  )
+}
+
+@Composable
+fun BpkTopNavBar(
+  state: TopNavBarState,
+  navigationIcon: NavIcon,
+  title: String,
+  action: TextAction,
+  modifier: Modifier = Modifier,
+) {
+  BpkTopNavBarImpl(
+    fraction = state.asInternalState().fraction,
     title = title,
     modifier = modifier,
     navigationIcon = navigationIcon.toAction(),
