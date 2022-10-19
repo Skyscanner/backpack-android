@@ -66,6 +66,7 @@ internal fun BpkTopNavBarImpl(
     shape = RectangleShape,
     modifier = modifier,
   ) {
+
     val titleStyle = lerp(
       start = BpkTheme.typography.heading5,
       stop = BpkTheme.typography.heading2,

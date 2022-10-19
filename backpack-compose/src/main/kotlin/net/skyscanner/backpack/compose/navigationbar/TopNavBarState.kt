@@ -29,6 +29,11 @@ import androidx.compose.ui.platform.LocalDensity
 import net.skyscanner.backpack.compose.navigationbar.internal.TopNavBarStateImpl
 import net.skyscanner.backpack.compose.navigationbar.internal.TopNavBarTokens
 
+enum class TopNavBarStatus {
+  Expanded,
+  Collapsed,
+}
+
 @Stable
 sealed interface TopNavBarState
 
@@ -36,13 +41,13 @@ fun Modifier.nestedScroll(state: TopNavBarState): Modifier =
   nestedScroll(state.asInternalState().nestedScrollConnection)
 
 @Composable
-fun rememberTopAppBarState(): TopNavBarState {
+fun rememberTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded): TopNavBarState {
   val offsetRange = with(LocalDensity.current) { (TopNavBarTokens.ExpandedHeight - TopNavBarTokens.CollapsedHeight).toPx() }
   val flingBehavior = ScrollableDefaults.flingBehavior()
   return rememberSaveable(
     offsetRange, flingBehavior,
-    init = { TopNavBarStateImpl(0f, offsetRange, flingBehavior) },
     saver = TopNavBarStateImpl.saver(offsetRange, flingBehavior),
+    init = { TopNavBarStateImpl(initialStatus, offsetRange = offsetRange, flingBehavior = flingBehavior) },
   )
 }
 
@@ -56,6 +61,6 @@ internal interface TopNavBarInternalState : TopNavBarState {
 }
 
 internal fun TopNavBarState.asInternalState(): TopNavBarInternalState =
-  when(this) {
+  when (this) {
     is TopNavBarInternalState -> this
   }

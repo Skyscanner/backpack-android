@@ -30,13 +30,27 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.unit.Velocity
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarInternalState
+import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
 
 @Stable
-internal class TopNavBarStateImpl(
+internal class TopNavBarStateImpl private constructor(
   initialOffset: Float,
   offsetRange: Float,
   private val flingBehavior: FlingBehavior,
 ) : TopNavBarInternalState {
+
+  constructor(
+    initialStatus: TopNavBarStatus,
+    offsetRange: Float,
+    flingBehavior: FlingBehavior,
+  ) : this(
+    initialOffset = when (initialStatus) {
+      TopNavBarStatus.Expanded -> 0f
+      TopNavBarStatus.Collapsed -> -offsetRange
+    },
+    offsetRange = offsetRange,
+    flingBehavior = flingBehavior,
+  )
 
   private val minOffset = -offsetRange
   private var currentOffset by mutableStateOf(initialOffset)
