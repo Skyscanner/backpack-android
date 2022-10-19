@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.autoMirror
 
 @Immutable
 class BpkIcon internal constructor(
@@ -72,7 +71,6 @@ fun BpkIcon(
     tint = tint,
     modifier = modifier
       .defaultMinSize(size)
-      .autoMirror(icon.autoMirror),
   )
 }
 
