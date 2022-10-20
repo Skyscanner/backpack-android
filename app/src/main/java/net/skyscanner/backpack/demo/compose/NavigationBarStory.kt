@@ -36,6 +36,7 @@ import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TextAction
+import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.text.BpkText
@@ -117,34 +118,42 @@ internal fun TextActionTopNavBar(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-internal fun CollapsingNavBar(modifier: Modifier = Modifier) {
-  val state = rememberTopAppBarState()
+internal fun CollapsingNavBar(
+  modifier: Modifier = Modifier,
+  initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,
+  showList: Boolean = true,
+  showActions: Boolean = true,
+  showNav: Boolean = true,
+) {
+  val state = rememberTopAppBarState(initialStatus)
   Column(modifier.nestedScroll(state)) {
     BpkTopNavBar(
       state = state,
       title = stringResource(R.string.navigation_bar_title),
-      navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {},
-      actions = listOf(
+      navIcon = if (showNav) NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {} else NavIcon.None,
+      actions = if (showActions) listOf(
         IconAction(icon = BpkIcon.AccountIdCard, contentDescription = stringResource(R.string.navigation_id_card)) {},
         IconAction(icon = BpkIcon.Accessibility, contentDescription = stringResource(R.string.navigation_accessibility)) {},
         IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
-      ),
+      ) else emptyList(),
     )
-    LazyColumn(Modifier.fillMaxWidth()) {
-      val itemModifier = Modifier.height(48.dp).padding(horizontal = BpkSpacing.Base)
-      item {
-        Box(itemModifier, contentAlignment = Alignment.Center) {
-          BpkText(text = "Scroll the list...")
+    if (showList) {
+      LazyColumn(Modifier.fillMaxWidth()) {
+        val itemModifier = Modifier.height(48.dp).padding(horizontal = BpkSpacing.Base)
+        item {
+          Box(itemModifier, contentAlignment = Alignment.Center) {
+            BpkText(text = "Scroll the list...")
+          }
         }
-      }
-      item {
-        Box(itemModifier, contentAlignment = Alignment.Center) {
-          BpkText(text = "to see the effect")
+        item {
+          Box(itemModifier, contentAlignment = Alignment.Center) {
+            BpkText(text = "to see the effect")
+          }
         }
-      }
-      items(10) {
-        Box(itemModifier, contentAlignment = Alignment.Center) {
-          BpkText(text = "Item #$it")
+        items(10) {
+          Box(itemModifier, contentAlignment = Alignment.Center) {
+            BpkText(text = "Item #$it")
+          }
         }
       }
     }

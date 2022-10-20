@@ -53,9 +53,7 @@ dependencies {
 
   implementation(rootProject.ext.get("ktx")!!)
 
-  // todo: this is a temp solution to solve nested scrolling issues which exists on 1.2.1
-  // once foundation becomes stable we can do a global migration
-  implementation("androidx.compose.foundation:foundation:1.3.0-rc01")
+  implementation(rootProject.ext.get("composeFoundationV3")!!)
   androidTestImplementation(rootProject.ext.get("junitAndroid")!!)
   androidTestImplementation(rootProject.ext.get("testRules")!!)
   androidTestImplementation(rootProject.ext.get("mockitoKotlin")!!)
