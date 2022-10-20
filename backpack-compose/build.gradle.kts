@@ -48,7 +48,7 @@ android {
 dependencies {
   val lifecycleVersion = "2.5.1"
   implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion")
-  implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
   api(rootProject.ext.get("composeUi")!!)
   api(rootProject.ext.get("composeMaterial")!!)
   api(rootProject.ext.get("composeUiToolingPreview")!!)
