@@ -60,7 +60,7 @@ fun NavigationBarStory() {
     CloseTopNavBar(modifier)
     ActionsTopNavBar(modifier)
     TextActionTopNavBar(modifier)
-    CollapsingNavBar(modifier)
+    CollapsibleNavBar(modifier, showList = true)
   }
 }
 
@@ -118,10 +118,10 @@ internal fun TextActionTopNavBar(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-internal fun CollapsingNavBar(
+internal fun CollapsibleNavBar(
   modifier: Modifier = Modifier,
   initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,
-  showList: Boolean = true,
+  showList: Boolean = false,
   showActions: Boolean = true,
   showNav: Boolean = true,
 ) {

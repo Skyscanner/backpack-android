@@ -18,8 +18,8 @@
 
 package net.skyscanner.backpack.compose.navigationbar
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -28,7 +28,7 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.demo.compose.ActionsTopNavBar
 import net.skyscanner.backpack.demo.compose.BackTopNavBar
 import net.skyscanner.backpack.demo.compose.CloseTopNavBar
-import net.skyscanner.backpack.demo.compose.CollapsingNavBar
+import net.skyscanner.backpack.demo.compose.CollapsibleNavBar
 import net.skyscanner.backpack.demo.compose.NoNavIconTopNavBar
 import net.skyscanner.backpack.demo.compose.TextActionTopNavBar
 import org.junit.Before
@@ -79,14 +79,14 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun expanded() = composed(IntSize(100, 400)) {
-    CollapsingNavBar(initialStatus = TopNavBarStatus.Expanded, showList = false)
+    CollapsibleNavBar(initialStatus = TopNavBarStatus.Expanded, showList = false)
   }
 
   @Test
   fun collapsed() {
     assumeVariant(BpkTestVariant.Default)
     composed {
-      CollapsingNavBar(initialStatus = TopNavBarStatus.Collapsed, showList = false)
+      CollapsibleNavBar(initialStatus = TopNavBarStatus.Collapsed)
     }
   }
 
@@ -94,7 +94,7 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
   fun expandedNoNavIcon() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
     composed(IntSize(100, 400)) {
-      CollapsingNavBar(initialStatus = TopNavBarStatus.Expanded, showList = false, showNav = false)
+      CollapsibleNavBar(initialStatus = TopNavBarStatus.Expanded, showNav = false)
     }
   }
 
@@ -102,7 +102,7 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
   fun expandedNoActions() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
     composed(IntSize(100, 400)) {
-      CollapsingNavBar(initialStatus = TopNavBarStatus.Expanded, showList = false, showActions = false)
+      CollapsibleNavBar(initialStatus = TopNavBarStatus.Expanded, showActions = false)
     }
   }
 
@@ -111,8 +111,7 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
     assumeVariant(BpkTestVariant.Default)
     composed {
       WindowInsets.setUseTestInsets()
-      CollapsingNavBar(initialStatus = TopNavBarStatus.Expanded, showList = false, showActions = false)
+      CollapsibleNavBar(initialStatus = TopNavBarStatus.Expanded, showActions = false)
     }
   }
-
 }
