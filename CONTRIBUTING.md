@@ -65,7 +65,7 @@ $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-a
 $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;arm64-v8a" --device "Nexus 4" && cp bpk-droid-local-arm.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 ```
 
-Create an SD card for the snapshot tests ()
+Create an SD card for the snapshot tests
 
 ```
 # Linux
@@ -116,6 +116,8 @@ To test changes use
 ```
 
 If the check fails you either need to fix the issue if a change was unintended or record script above instead to update the snapshots.
+
+### Using CI for generating snapshot
 
 Alternatively, you can use Github Actions CI to generate the snapshots.
 "Record snapshots" command in PR comments will trigger the CI and lead to new snapshot commits pushed to your PR.
