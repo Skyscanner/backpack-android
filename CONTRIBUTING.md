@@ -125,6 +125,12 @@ Notice that this run must be approved for external contributors.
 Since CI run cannot trigger CI checks again,
 you need to commit something after the snapshots have been generated to trigger the CI check.
 
+If you don't have anything to commit, you can use this to trigger the CI:
+
+```
+git commit --allow-empty -m "Trigger CI" --no-verify && git push
+```
+
 ### Espresso tests
 If your component contains logic that can't be verified via snapshot tests you can use espresso to test the logic. These tests live in the `Backpack` (for View components) or `backpack-compose` (for Compose components) module, depending on the component.
 
