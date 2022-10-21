@@ -19,12 +19,12 @@
 package net.skyscanner.backpack.button
 
 import android.os.Looper
-import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.ColorRes
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.R
 import org.junit.Assume.assumeTrue
 import org.junit.Before
@@ -171,24 +171,17 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
 
   private fun capture(
     @ColorRes background: Int? = null,
-    content: () -> View,
+    content: () -> View
   ) {
     if (Looper.myLooper() == null) {
       Looper.prepare()
     }
-    val wrapper = FrameLayout(testContext).apply {
-      layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-        .apply { gravity = Gravity.TOP or Gravity.START }
-    }
-    if (background != null) {
-      wrapper.setBackgroundColor(testContext.getColor(background))
-    }
-    val padding = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
-    wrapper.setPaddingRelative(padding, padding, padding, padding)
-    wrapper.addView(
-      content(),
-      FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
-    )
+    background?.let { setBackground(background) }
+    val wrapper = FrameLayout(testContext)
+    val padding = testContext.resources.getDimensionPixelSize(R.dimen.bpkBorderRadiusMd)
+    wrapper.setPadding(padding, padding, padding, padding)
+    val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+    wrapper.addView(content(), params)
     snap(wrapper, tags = listOf(type, size))
   }
 

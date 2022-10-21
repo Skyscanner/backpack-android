@@ -21,6 +21,7 @@ package net.skyscanner.backpack.text
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Test

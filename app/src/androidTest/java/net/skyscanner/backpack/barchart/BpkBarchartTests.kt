@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.barchart
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
@@ -160,12 +161,12 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   private inline fun capture(crossinline block: ViewInteraction.() -> ViewInteraction = { this }) {
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.bar_chart))
       .block()
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+
+    snap(view!!)
   }
 
   private fun createMonth(

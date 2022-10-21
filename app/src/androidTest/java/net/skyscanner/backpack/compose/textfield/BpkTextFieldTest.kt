@@ -18,9 +18,11 @@
 
 package net.skyscanner.backpack.compose.textfield
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Accessibility
@@ -29,11 +31,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkTextFieldTest : BpkSnapshotTest() {
+class BpkTextFieldTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 128, width = 200)
+    snapshotSize = IntSize(height = 128, width = 200)
   }
 
   @Test

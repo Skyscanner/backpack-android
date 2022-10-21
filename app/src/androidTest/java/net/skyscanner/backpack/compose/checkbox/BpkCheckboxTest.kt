@@ -18,9 +18,11 @@
 
 package net.skyscanner.backpack.compose.checkbox
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.compose.CheckedCheckboxSample
 import net.skyscanner.backpack.demo.compose.CustomContentCheckboxSample
 import net.skyscanner.backpack.demo.compose.DefaultCheckboxSample
@@ -33,11 +35,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkCheckboxTest : BpkSnapshotTest() {
+class BpkCheckboxTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 50, width = 200)
+    snapshotSize = IntSize(width = 200, height = 50)
   }
 
   @Test

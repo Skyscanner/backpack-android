@@ -20,9 +20,11 @@ package net.skyscanner.backpack.compose.flare
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.compose.ContentPaddingFlareExample
 import net.skyscanner.backpack.demo.compose.DefaultFlareExample
 import net.skyscanner.backpack.demo.compose.RadiusFlareExample
@@ -32,11 +34,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkFlareTest : BpkSnapshotTest() {
+class BpkFlareTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 150, width = 200)
+    snapshotSize = IntSize(height = 150, width = 200)
   }
 
   @Test

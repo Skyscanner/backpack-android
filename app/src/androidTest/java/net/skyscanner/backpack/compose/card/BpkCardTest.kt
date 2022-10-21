@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.card
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -26,9 +25,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.compose.FocusableCardExample
 import net.skyscanner.backpack.demo.compose.LargeCornersCardExample
@@ -40,7 +39,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkCardTest : BpkSnapshotTest() {
+class BpkCardTest : BpkComposeSnapshotTest() {
 
   @Test
   fun smallCorner() = capture {
@@ -98,7 +97,6 @@ class BpkCardTest : BpkSnapshotTest() {
     ) {
       Box(
         Modifier
-          .background(BpkTheme.colors.textSecondary)
           .padding(BpkSpacing.Lg)
       ) {
         content()

@@ -18,7 +18,7 @@
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.facebook.testing.screenshot'
+apply plugin: 'shot'
 
 apply from: "$rootProject.projectDir/android-configuration.gradle"
 
@@ -102,7 +102,7 @@ dependencies {
   implementation rootProject.ext.kotlinReflection
   implementation rootProject.ext.stetho
   testImplementation rootProject.ext.junit
-  androidTestImplementation rootProject.ext.composeFoundation
+  debugImplementation rootProject.ext.composeTestManifest
   androidTestImplementation rootProject.ext.testCoreKtx
   androidTestImplementation rootProject.ext.junitKtx
   androidTestImplementation rootProject.ext.junitAndroid
@@ -111,15 +111,7 @@ dependencies {
   androidTestImplementation rootProject.ext.testRules
   androidTestImplementation rootProject.ext.coroutinesTest
   androidTestImplementation rootProject.ext.composeTestJUnit
+  androidTestImplementation "com.facebook.testing.screenshot:core:0.14.0"
   implementation project(':Backpack')
   implementation project(':backpack-compose')
-}
-screenshots {
-  multipleDevices false
-  pythonExecutable 'python3'
-  def variant = project.gradle.startParameter.projectProperties.get("android.testInstrumentationRunnerArguments.variant")
-  if (variant == null || variant.isEmpty()) {
-    variant = "default"
-  }
-  recordDir = "screenshots/$variant"
 }

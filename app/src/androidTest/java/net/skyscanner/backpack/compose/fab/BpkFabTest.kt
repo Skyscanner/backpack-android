@@ -19,8 +19,9 @@
 
 package net.skyscanner.backpack.compose.fab
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Search
 import org.junit.Before
@@ -28,11 +29,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkFabTest : BpkSnapshotTest() {
+class BpkFabTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 80, width = 80)
+    snapshotSize = IntSize(height = 80, width = 80)
   }
 
   @Test

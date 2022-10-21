@@ -19,9 +19,11 @@
 package net.skyscanner.backpack.compose.spinner
 
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import org.junit.Before
@@ -29,11 +31,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkSpinnerTest : BpkSnapshotTest() {
+class BpkSpinnerTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 24, width = 24)
+    snapshotSize = IntSize(height = 24, width = 24)
   }
 
   @Test

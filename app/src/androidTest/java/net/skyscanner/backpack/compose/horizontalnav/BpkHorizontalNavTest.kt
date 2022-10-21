@@ -18,9 +18,11 @@
 
 package net.skyscanner.backpack.compose.horizontalnav
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.compose.BpkHorizontalNav_LargeWithIcon_Sample
 import net.skyscanner.backpack.demo.compose.BpkHorizontalNav_Large_Sample
 import net.skyscanner.backpack.demo.compose.BpkHorizontalNav_SmallWithIcon_Sample
@@ -30,11 +32,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkHorizontalNavTest : BpkSnapshotTest() {
+class BpkHorizontalNavTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 50, width = 200)
+    snapshotSize = IntSize(height = 50, width = 200)
   }
 
   @Test

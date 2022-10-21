@@ -28,6 +28,7 @@ import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.button.BpkButton
@@ -50,198 +51,205 @@ class BpkDialogTest : BpkSnapshotTest() {
 
   @Test
   fun default() {
-    val asyncScreenshot = prepareForAsyncTest()
+    rule.scenario.waitForActivity().also { activity ->
+      var dialog: BpkDialog?= null
+      runOnUi {
+        dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
+          title = "You are going to Tokyo!"
+          description = "Your flight is all booked. Why not check out some hotels now?"
+          icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
-    var dialog: BpkDialog? = null
-    rule.scenario.onActivity { activity ->
-      dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
-        title = "You are going to Tokyo!"
-        description = "Your flight is all booked. Why not check out some hotels now?"
-        icon = BpkDialog.Icon(R.drawable.bpk_tick)
+          addActionButton(
+            BpkDialog.Button("Continue") { }
+          )
 
-        addActionButton(
-          BpkDialog.Button("Continue") { }
-        )
-
-        addActionButton(
-          BpkDialog.Button("Skip") { }
-        )
+          addActionButton(
+            BpkDialog.Button("Skip") { }
+          )
+        }
       }
+
+      record(dialog!!)
     }
 
-    record(dialog!!, asyncScreenshot)
   }
 
   @Test
   fun fullscreen() {
-    val asyncScreenshot = prepareForAsyncTest()
+    rule.scenario.waitForActivity().also { activity ->
+      var dialog: BpkDialog?= null
+      runOnUi {
+        dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
+          title = "You are going to Tokyo!"
+          description = Array(30) {
+            "Your flight is all booked. Why not check out some hotels now?"
+          }.joinToString(separator = "\n")
 
-    var dialog: BpkDialog? = null
-    rule.scenario.onActivity { activity ->
-      dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
-        title = "You are going to Tokyo!"
-        description = Array(30) {
-          "Your flight is all booked. Why not check out some hotels now?"
-        }.joinToString(separator = "\n")
+          icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
-        icon = BpkDialog.Icon(R.drawable.bpk_tick)
+          addActionButton(
+            BpkDialog.Button("Continue") { }
+          )
 
-        addActionButton(
-          BpkDialog.Button("Continue") { }
-        )
+          addActionButton(
+            BpkDialog.Button("Skip") { }
+          )
 
-        addActionButton(
-          BpkDialog.Button("Skip") { }
-        )
+        }
       }
-    }
 
-    record(dialog!!, asyncScreenshot)
+      record(dialog!!)
+    }
   }
 
   @Test
   fun destructive() {
-    val asyncScreenshot = prepareForAsyncTest()
+    rule.scenario.waitForActivity().also { activity ->
+      var dialog: BpkDialog?= null
+      runOnUi {
+        dialog = BpkDialog(activity, BpkDialog.Type.Destructive).apply {
+          title = "Delete?"
+          description = "Delete your profile?"
+          icon = BpkDialog.Icon(R.drawable.bpk_trash)
 
-    var dialog: BpkDialog? = null
-    rule.scenario.onActivity { activity ->
-      dialog = BpkDialog(activity, BpkDialog.Type.Destructive).apply {
-        title = "Delete?"
-        description = "Delete your profile?"
-        icon = BpkDialog.Icon(R.drawable.bpk_trash)
+          addActionButton(
+            BpkDialog.Button("Delete") { }
+          )
 
-        addActionButton(
-          BpkDialog.Button("Delete") { }
-        )
-
-        addActionButton(
-          BpkDialog.Button("Cancel") { }
-        )
+          addActionButton(
+            BpkDialog.Button("Cancel") { }
+          )
+        }
       }
-    }
 
-    record(dialog!!, asyncScreenshot)
+      record(dialog!!)
+    }
   }
 
   @Suppress("DEPRECATION")
   @Test
   fun deprecated() {
-    val asyncScreenshot = prepareForAsyncTest()
+    rule.scenario.waitForActivity().also { activity ->
+      var dialog: BpkDialog?= null
+      runOnUi {
+        dialog = BpkDialog(activity, BpkDialog.Style.ALERT).apply {
+          title = "Delete?"
+          description = "Delete your profile?"
+          icon = BpkDialog.Icon(R.drawable.bpk_trash, activity.getColor(R.color.bpkValensole))
 
-    var dialog: BpkDialog? = null
-    rule.scenario.onActivity { activity ->
-      dialog = BpkDialog(activity, BpkDialog.Style.ALERT).apply {
-        title = "Delete?"
-        description = "Delete your profile?"
-        icon = BpkDialog.Icon(R.drawable.bpk_trash, activity.getColor(R.color.bpkValensole))
-
-        addActionButton(
-          BpkButton(activity).apply {
-            type = BpkButton.Type.Secondary
-            text = "Secondary"
-          }
-        )
-        addActionButton(
-          BpkButton(activity).apply {
-            type = BpkButton.Type.Destructive
-            text = "Destructive"
-          }
-        )
-        addActionButton(
-          BpkButton(activity).apply {
-            type = BpkButton.Type.Featured
-            text = "Featured"
-          }
-        )
+          addActionButton(
+            BpkButton(activity).apply {
+              type = BpkButton.Type.Secondary
+              text = "Secondary"
+            }
+          )
+          addActionButton(
+            BpkButton(activity).apply {
+              type = BpkButton.Type.Destructive
+              text = "Destructive"
+            }
+          )
+          addActionButton(
+            BpkButton(activity).apply {
+              type = BpkButton.Type.Featured
+              text = "Featured"
+            }
+          )
+        }
       }
+      record(dialog!!)
     }
-
-    record(dialog!!, asyncScreenshot)
   }
 
   @Test
   fun warning() {
-    val asyncScreenshot = prepareForAsyncTest()
+    rule.scenario.waitForActivity().also { activity ->
+      var dialog: BpkDialog?= null
+      runOnUi {
+        dialog = BpkDialog(activity, BpkDialog.Type.Warning)
+        dialog!!.apply {
+          title = "Want to know when prices change?"
+          description = "Create a price alert and we'll let you know changes for this route"
+          icon = BpkDialog.Icon(R.drawable.bpk_trash)
 
-    var dialog: BpkDialog? = null
-    rule.scenario.onActivity { activity ->
-      dialog = BpkDialog(activity, BpkDialog.Type.Warning)
-      dialog!!.apply {
-        title = "Want to know when prices change?"
-        description = "Create a price alert and we'll let you know changes for this route"
-        icon = BpkDialog.Icon(R.drawable.bpk_trash)
+          addActionButton(
+            BpkDialog.Button("Create") { }
+          )
 
-        addActionButton(
-          BpkDialog.Button("Create") { }
-        )
-
-        addActionButton(
-          BpkDialog.Button("No, Thanks!") { }
-        )
+          addActionButton(
+            BpkDialog.Button("No, Thanks!") { }
+          )
+        }
       }
-    }
 
-    record(dialog!!, asyncScreenshot)
+      record(dialog!!)
+    }
   }
 
   @Test
   fun flare() {
     val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
-    val asyncScreenshot = prepareForAsyncTest()
 
-    var dialog: BpkDialog? = null
-    rule.scenario.onActivity { activity ->
-      dialog = BpkDialog(activity, BpkDialog.Type.Flare).apply {
-        title = "You are going to Tokyo!"
-        description = "Your flight is all booked."
-        icon = BpkDialog.Icon(R.drawable.bpk_tick)
+    rule.scenario.waitForActivity().also { activity ->
+      var dialog: BpkDialog?= null
+      runOnUi {
+        dialog = BpkDialog(activity, BpkDialog.Type.Flare).apply {
+          title = "You are going to Tokyo!"
+          description = "Your flight is all booked."
+          icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
-        image!!.setImageBitmap(bitmap)
+          image!!.setImageBitmap(bitmap)
 
-        addActionButton(
-          BpkDialog.Button("Continue") { }
-        )
+          addActionButton(
+            BpkDialog.Button("Continue") { }
+          )
 
-        addActionButton(
-          BpkDialog.Button("Skip") { }
-        )
+          addActionButton(
+            BpkDialog.Button("Skip") { }
+          )
+        }
       }
-    }
 
-    record(dialog!!, asyncScreenshot)
+      record(dialog!!)
+    }
   }
 
-  private fun record(dialog: BpkDialog, asyncScreenshot: AsyncSnapshot) {
+  private fun record(dialog: BpkDialog) {
     // not ideal, but the scrollbar disappears too early when running on CI causing test failures if visible
     dialog.window?.decorView?.findScrollView()?.scrollBarDefaultDelayBeforeFade = 5000
 
-    rule.scenario.onActivity {
-      dialog.show()
+    rule.scenario.waitForActivity().also {
+      runOnUi {
+        dialog.show()
+      }
     }
 
+    var wrapper : FrameLayout ?= null
     onView(withId(R.id.dialog_buttons_root))
       .inRoot(isDialog())
       .check { _, _ ->
         // This is not ideal but I couldn't find a way to snapshot the whole window and we need contrast to
         // see the rounded corners
 
-        rule.scenario.onActivity { activity ->
-          val rootView = dialog.window!!.decorView
-          activity.windowManager.removeView(rootView)
+        rule.scenario.waitForActivity().also { activity ->
+          runOnUi {
+            val rootView = dialog.window!!.decorView
+            activity.windowManager.removeView(rootView)
 
-          val wrapper = FrameLayout(activity)
-          wrapper.layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT,
-            FrameLayout.LayoutParams.WRAP_CONTENT
-          )
-          wrapper.setPadding(20, 20, 20, 20)
-          wrapper.setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
-          wrapper.addView(rootView)
+            wrapper = FrameLayout(activity).apply {
+              layoutParams = FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
+              )
+              setPadding(20, 20, 20, 20)
+              setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
+              addView(rootView)
+            }
 
-          setupView(wrapper)
-          asyncScreenshot.record(wrapper)
+          }
         }
       }
+    snap(wrapper!!)
   }
 
   private fun View.findScrollView(): ScrollView? {

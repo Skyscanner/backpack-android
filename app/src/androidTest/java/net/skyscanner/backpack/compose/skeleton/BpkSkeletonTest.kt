@@ -22,9 +22,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.compose.sleketon.BpkBodyTextSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkCircleSizeType
 import net.skyscanner.backpack.compose.sleketon.BpkCircleSkeleton
@@ -38,11 +40,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkSkeletonTest : BpkSnapshotTest() {
+class BpkSkeletonTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 200, width = 200)
+    snapshotSize = IntSize(height = 200, width = 200)
   }
 
   @Test

@@ -30,8 +30,10 @@ import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BackpackPreview
 import net.skyscanner.backpack.demo.compose.DestructiveDialogExample
@@ -56,7 +58,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   val rule = activityScenarioRule<AppCompatActivity>()
 
   @get:Rule
-  val composeTestRule = createEmptyComposeRule()
+  val composeRule = createEmptyComposeRule()
 
   @Before
   fun setup() {
@@ -137,7 +139,6 @@ class BpkDialogTest : BpkSnapshotTest() {
     // we don't run Compose tests in Themed variant – Compose uses it own theming engine
     Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
 
-    val asyncScreenshot = prepareForAsyncTest()
     rule.scenario.onActivity { activity ->
       activity.setContent {
         BackpackPreview(
@@ -146,24 +147,26 @@ class BpkDialogTest : BpkSnapshotTest() {
       }
     }
 
-    val view = composeTestRule.onNode(isDialog()).fetchRootView()
+    val view = composeRule.onNode(isDialog()).fetchRootView()
 
-    rule.scenario.onActivity { activity ->
+    rule.scenario.waitForActivity().also { activity ->
       // This is not ideal but we need to see the background contrast as well
-      val viewRoot = view.parent as ViewGroup
-      viewRoot.removeView(view)
+      var wrapper: FrameLayout? = null
+      runOnUi {
+        val viewRoot = view.parent as ViewGroup
+        viewRoot.removeView(view)
 
-      val wrapper = FrameLayout(activity)
-      wrapper.layoutParams = FrameLayout.LayoutParams(
-        FrameLayout.LayoutParams.WRAP_CONTENT,
-        FrameLayout.LayoutParams.WRAP_CONTENT
-      )
-      wrapper.setPadding(20, 20, 20, 20)
-      wrapper.setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
-      wrapper.addView(view)
-
-      setupView(wrapper)
-      asyncScreenshot.record(wrapper)
+        wrapper = FrameLayout(activity).apply {
+          layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.WRAP_CONTENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+          )
+          setPadding(20, 20, 20, 20)
+          setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
+          addView(view)
+        }
+      }
+      snap(wrapper!!)
     }
   }
 

@@ -23,16 +23,10 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.test.runner.AndroidJUnitRunner
-import com.facebook.testing.screenshot.ScreenshotRunner
+import com.karumi.shot.ShotTestRunner
 
 @Suppress("unused")
-class BpkTestRunner : AndroidJUnitRunner() {
-
-  override fun onCreate(args: Bundle?) {
-    ScreenshotRunner.onCreate(this, args)
-    super.onCreate(args)
-  }
+class BpkTestRunner : ShotTestRunner() {
 
   override fun newApplication(cl: ClassLoader?, className: String?, context: Context?): Application =
     super.newApplication(cl, className, context).apply {
@@ -51,9 +45,4 @@ class BpkTestRunner : AndroidJUnitRunner() {
 
   override fun newActivity(cl: ClassLoader?, className: String?, intent: Intent?): Activity =
     BpkTestVariant.current.newActivity(super.newActivity(cl, className, intent))
-
-  override fun finish(resultCode: Int, results: Bundle) {
-    ScreenshotRunner.onDestroy()
-    super.finish(resultCode, results)
-  }
 }
