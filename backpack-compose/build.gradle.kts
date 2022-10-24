@@ -50,6 +50,8 @@ dependencies {
   api(rootProject.ext.get("composeMaterial")!!)
   api(rootProject.ext.get("composeUiToolingPreview")!!)
 
+  implementation(rootProject.ext.get("androidXLifecycleViewmodel")!!)
+  implementation(rootProject.ext.get("androidXLifecycleViewmodelKtx")!!)
   implementation(rootProject.ext.get("ktx")!!)
   androidTestImplementation(rootProject.ext.get("junitAndroid")!!)
   androidTestImplementation(rootProject.ext.get("testRules")!!)
