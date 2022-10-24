@@ -49,10 +49,13 @@ dependencies {
   api(rootProject.ext.get("composeUi")!!)
   api(rootProject.ext.get("composeMaterial")!!)
   api(rootProject.ext.get("composeUiToolingPreview")!!)
+  api(rootProject.ext.get("composeUtil")!!)
 
   implementation(rootProject.ext.get("androidXLifecycleViewmodel")!!)
   implementation(rootProject.ext.get("androidXLifecycleViewmodelKtx")!!)
   implementation(rootProject.ext.get("ktx")!!)
+
+  implementation(rootProject.ext.get("composeFoundationV3")!!)
   androidTestImplementation(rootProject.ext.get("junitAndroid")!!)
   androidTestImplementation(rootProject.ext.get("testRules")!!)
   androidTestImplementation(rootProject.ext.get("mockitoKotlin")!!)

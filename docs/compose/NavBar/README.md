@@ -8,6 +8,9 @@ main [Readme](https://github.com/skyscanner/backpack-android#installation) for a
 
 ## Usage
 
+> Note: By default, navigation bar will include (and consume) window insets. If you don't want this, set `insets` param to
+> null.
+
 Example of a navigation bar with back navigation icon
 
 ```Kotlin
@@ -77,4 +80,47 @@ BpkTopNavBar(
   navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) { /** onClick **/ },
   action = TextAction(text = stringResource(R.string.navigation_text_action)) { /** onClick **/ },
 )
+```
+
+Example of a collapsible navigation bar:
+
+```Kotlin
+import androidx.compose.foundation.lazy.LazyColumn
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
+import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.navigationbar.IconAction
+import net.skyscanner.backpack.compose.navigationbar.nestedScroll
+import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
+import net.skyscanner.backpack.compose.text.BpkText
+
+val state = rememberTopAppBarState()
+
+Column(modifier.nestedScroll(state)) {
+  BpkTopNavBar(
+    state = state,
+    title = stringResource(R.string.navigation_bar_title),
+    navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) { /** onClick **/ },
+    actions = listOf(
+      IconAction(
+        icon = BpkIcon.AccountIdCard,
+        contentDescription = stringResource(R.string.navigation_id_card)
+      ) { /** onClick **/ },
+      IconAction(
+        icon = BpkIcon.Accessibility,
+        contentDescription = stringResource(R.string.navigation_accessibility)
+      ) { /** onClick **/ },
+      IconAction(
+        icon = BpkIcon.Account,
+        contentDescription = stringResource(R.string.navigation_account)
+      ) { /** onClick **/ },
+    ),
+  )
+
+  LazyColumn {
+    items(10) {
+      BpkText(text = "Item #$it")
+    }
+  }
+}
 ```
