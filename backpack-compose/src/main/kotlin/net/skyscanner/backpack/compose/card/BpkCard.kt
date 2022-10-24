@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import net.skyscanner.backpack.compose.card.internal.CardContent
 import net.skyscanner.backpack.compose.card.internal.cardBackgroundColor
@@ -82,12 +83,13 @@ fun BpkCard(
   padding: BpkCardPadding = BpkCardPadding.Small,
   contentAlignment: Alignment = Alignment.TopStart,
   elevation: BpkCardElevation = BpkCardElevation.Default,
+  backgroundColor: Color? = null,
   content: @Composable BoxScope.() -> Unit,
 ) {
   Card(
     modifier = modifier,
     shape = cardShape(corner),
-    backgroundColor = cardBackgroundColor(elevation),
+    backgroundColor = backgroundColor ?: cardBackgroundColor(elevation),
     contentColor = BpkTheme.colors.textPrimary,
     elevation = cardElevation(elevation),
     content = { CardContent(padding, contentAlignment, content) },

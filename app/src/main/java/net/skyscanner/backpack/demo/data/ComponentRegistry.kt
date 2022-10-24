@@ -32,6 +32,7 @@ import net.skyscanner.backpack.demo.compose.ColorsComposeStory
 import net.skyscanner.backpack.demo.compose.ElevationComposeStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
+import net.skyscanner.backpack.demo.compose.FloatingNotificationStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.HorizontalNavComposeStory
@@ -289,6 +290,12 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_fab },
         TAB_TITLE_COMPOSE composeStory { BpkFabStory() },
+      )
+    ),
+    "Floating Notification" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_COMPOSE composeStory { FloatingNotificationStory() },
       )
     ),
     "Horizontal Nav" story NodeData(
