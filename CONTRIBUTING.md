@@ -54,7 +54,7 @@ We use snapshot testing to ensure there are no unintended changes to UI componen
 
 Create an AVD using the following command
 
-> Note: Currently, snapshot testing doesn't work properly on M1 chips. Consider recording snapshots on Intel-based macs or using Github Actions.
+> Note: Currently, snapshot testing doesn't work properly on M1 chips. Consider recording snapshots on Intel-based macs or using GitHub Actions.
 
 ```
 # x86
@@ -119,7 +119,7 @@ If the check fails you either need to fix the issue if a change was unintended o
 
 ### Using CI for generating snapshot
 
-Alternatively, you can use Github Actions CI to generate the snapshots.
+Alternatively, you can use GitHub Actions CI to generate the snapshots.
 "Record snapshots" command in PR comments will trigger the CI and lead to new snapshot commits pushed to your PR.
 Notice that this run must be approved for external contributors.
 Since CI run cannot trigger CI checks again,
