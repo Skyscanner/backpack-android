@@ -194,7 +194,7 @@
 
   <string name="content_description">Content description</string>
   <string name="generic_message">Message</string>
-  <string name="generic_scroll_the_list">Scroll the list...</string>
+  <string name="generic_scroll_the_list">Scroll the list…</string>
   <string name="generic_to_see_the_effect">to see the effect</string>
   <string name="generic_list_item">Item #%d</string>
 </resources>
