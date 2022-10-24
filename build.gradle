@@ -124,9 +124,7 @@ ext {
   composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
   composeActivity = "androidx.activity:activity-compose:1.6.0"
   composeUtil = "androidx.compose.ui:ui-util:$composeVersion"
-  // todo: this is a temp solution to solve nested scrolling issues which exists on 1.2.1
-  // once foundation becomes stable we can do a global migration
-  composeFoundationV3 = "androidx.compose.foundation:foundation:1.3.0-rc01"
+  composeFoundationV3 = "androidx.compose.foundation:foundation:1.3.0"
 
   accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.25.1"
 }

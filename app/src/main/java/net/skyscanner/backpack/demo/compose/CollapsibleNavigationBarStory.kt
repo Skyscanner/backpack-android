@@ -77,17 +77,17 @@ fun CollapsibleNavigationBarStory(
         val itemModifier = Modifier.height(48.dp).padding(horizontal = BpkSpacing.Base)
         item {
           Box(itemModifier, contentAlignment = Alignment.Center) {
-            BpkText(text = "Scroll the list...")
+            BpkText(text = stringResource(R.string.generic_scroll_the_list))
           }
         }
         item {
           Box(itemModifier, contentAlignment = Alignment.Center) {
-            BpkText(text = "to see the effect")
+            BpkText(text = stringResource(R.string.generic_to_see_the_effect))
           }
         }
         items(100) {
           Box(itemModifier, contentAlignment = Alignment.Center) {
-            BpkText(text = "Item #$it")
+            BpkText(text = stringResource(R.string.generic_list_item, it))
           }
         }
       }
