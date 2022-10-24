@@ -28,6 +28,7 @@ import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
+import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
 import net.skyscanner.backpack.demo.compose.ElevationComposeStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
@@ -320,7 +321,13 @@ object ComponentRegistry {
             "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL }
           )
         ),
-        TAB_TITLE_COMPOSE composeStory { NavigationBarStory() },
+        TAB_TITLE_COMPOSE story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" composeStory { NavigationBarStory() },
+            "Collapsible" composeStory { CollapsibleNavigationBarStory() },
+          )
+        ),
       )
     ),
     "Nudger" story NodeData { Story of R.layout.fragment_nudger },

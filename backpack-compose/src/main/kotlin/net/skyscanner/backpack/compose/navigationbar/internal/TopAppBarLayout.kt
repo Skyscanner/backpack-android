@@ -51,30 +51,30 @@ internal fun TopAppBarLayout(
   Layout(
     measurePolicy = TopNavBarMeasuringPolicy(fraction),
     modifier = modifier
-      .requiredHeight(lerp(TopNavBarTokens.CollapsedHeight, TopNavBarTokens.ExpandedHeight, fraction)),
+      .requiredHeight(lerp(TopNavBarSizes.CollapsedHeight, TopNavBarSizes.ExpandedHeight, fraction)),
     content = {
       Box(
         content = navIcon,
         contentAlignment = Alignment.Center,
         modifier = Modifier
           .layoutId(TopAppBarLayoutId.Nav)
-          .padding(vertical = TopNavBarTokens.InternalSpacing)
-          .padding(start = TopNavBarTokens.InternalSpacing),
+          .padding(vertical = TopNavBarSizes.InternalSpacing)
+          .padding(start = TopNavBarSizes.InternalSpacing),
       )
       Box(
         content = title,
         contentAlignment = Alignment.Center,
         modifier = Modifier
           .layoutId(TopAppBarLayoutId.Title)
-          .padding(all = TopNavBarTokens.InternalSpacing),
+          .padding(all = TopNavBarSizes.InternalSpacing),
       )
       Row(
         content = actions,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
           .layoutId(TopAppBarLayoutId.Actions)
-          .padding(vertical = TopNavBarTokens.InternalSpacing)
-          .padding(end = TopNavBarTokens.InternalSpacing),
+          .padding(vertical = TopNavBarSizes.InternalSpacing)
+          .padding(end = TopNavBarSizes.InternalSpacing),
       )
     },
   )
@@ -101,17 +101,17 @@ private fun TopNavBarMeasuringPolicy(fraction: Float): MeasurePolicy =
   }
 
 private fun Density.titlePaddingStart(navIcon: Placeable, fraction: Float) : Int {
-  val isNavIconSet = navIcon.measuredWidth >= TopNavBarTokens.InternalSpacing.toPx()
+  val isNavIconSet = navIcon.measuredWidth >= TopNavBarSizes.InternalSpacing.toPx()
   val extraPadding = when {
-      isNavIconSet -> TopNavBarTokens.ExpandedTitlePaddingStartWithNavIcon
-      else -> TopNavBarTokens.ExpandedTitlePaddingStartWithoutNavIcon
+      isNavIconSet -> TopNavBarSizes.ExpandedTitlePaddingStartWithNavIcon
+      else -> TopNavBarSizes.ExpandedTitlePaddingStartWithoutNavIcon
   }.roundToPx()
 
   return lerp(navIcon.measuredWidth, navIcon.measuredWidth + extraPadding, fraction)
 }
 
 private fun Density.titlePaddingEnd(actions: Placeable, fraction: Float) : Int =
-  lerp(actions.measuredWidth, TopNavBarTokens.ExpandedTitlePaddingEnd.roundToPx(), fraction)
+  lerp(actions.measuredWidth, TopNavBarSizes.ExpandedTitlePaddingEnd.roundToPx(), fraction)
 
 private fun Density.iconConstrains(): Constraints =
-  Constraints.fixedHeight(TopNavBarTokens.CollapsedHeight.roundToPx())
+  Constraints.fixedHeight(TopNavBarSizes.CollapsedHeight.roundToPx())

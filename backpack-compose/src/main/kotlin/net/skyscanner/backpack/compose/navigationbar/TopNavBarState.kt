@@ -27,7 +27,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import net.skyscanner.backpack.compose.navigationbar.internal.TopNavBarStateImpl
-import net.skyscanner.backpack.compose.navigationbar.internal.TopNavBarTokens
+import net.skyscanner.backpack.compose.navigationbar.internal.TopNavBarSizes
 
 enum class TopNavBarStatus {
   Expanded,
@@ -42,7 +42,7 @@ fun Modifier.nestedScroll(state: TopNavBarState): Modifier =
 
 @Composable
 fun rememberTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded): TopNavBarState {
-  val offsetRange = with(LocalDensity.current) { (TopNavBarTokens.ExpandedHeight - TopNavBarTokens.CollapsedHeight).toPx() }
+  val offsetRange = with(LocalDensity.current) { (TopNavBarSizes.ExpandedHeight - TopNavBarSizes.CollapsedHeight).toPx() }
   val flingBehavior = ScrollableDefaults.flingBehavior()
   return rememberSaveable(
     offsetRange, flingBehavior,

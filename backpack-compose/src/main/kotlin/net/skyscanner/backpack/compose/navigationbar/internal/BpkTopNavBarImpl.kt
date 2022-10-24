@@ -68,7 +68,7 @@ internal fun BpkTopNavBarImpl(
   ) {
 
     val titleStyle = lerp(
-      start = BpkTheme.typography.heading5,
+      start = BpkTheme.typography.heading4,
       stop = BpkTheme.typography.heading2,
       fraction = fraction,
     )
@@ -106,7 +106,7 @@ internal fun BpkTopNavBarImpl(
 private fun IconAction(action: IconAction, modifier: Modifier = Modifier) {
   Box(
     modifier = modifier
-      .size(TopNavBarTokens.IconActionSize)
+      .size(TopNavBarSizes.IconActionSize)
       .clickable(bounded = false, role = Role.Button) { action.onClick() },
     contentAlignment = Alignment.Center,
   ) {
