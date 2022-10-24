@@ -87,6 +87,7 @@ ext {
 
   lifecycleVersion = "2.5.1"
   androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+  // The below dependencies can be removed once the following issue is fixed: https://issuetracker.google.com/issues/238425626
   androidXLifecycleViewmodel = "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
   androidXLifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
