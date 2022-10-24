@@ -79,7 +79,7 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun expanded() = composed(IntSize(100, 400)) {
+  fun expanded() = composed(IntSize(400, 100)) {
     CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Expanded, showList = false)
   }
 
@@ -94,7 +94,7 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
   @Test
   fun expandedNoNavIcon() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    composed(IntSize(100, 400)) {
+    composed(IntSize(400, 100)) {
       CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Expanded, showNav = false)
     }
   }
@@ -102,7 +102,7 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
   @Test
   fun expandedNoActions() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    composed(IntSize(100, 400)) {
+    composed(IntSize(400, 100)) {
       CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Expanded, showActions = false, showList = false)
     }
   }
@@ -110,7 +110,7 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
   @Test
   fun windowInsets() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    composed(IntSize(400, 100)) {
       CollapsibleNavigationBarStory(
         initialStatus = TopNavBarStatus.Expanded,
         showActions = false,
