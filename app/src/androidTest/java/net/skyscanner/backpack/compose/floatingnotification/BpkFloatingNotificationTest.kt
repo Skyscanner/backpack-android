@@ -54,7 +54,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
   @Test
   fun withIconAndCTA() {
-    assumeVariant(BpkTestVariant.Default)
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     composed {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
