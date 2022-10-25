@@ -20,7 +20,6 @@ package net.skyscanner.backpack.compose.floatingnotification
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Heart
 import org.junit.Before
@@ -32,12 +31,11 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 52, width = 288)
+    setDimensions(height = 100, width = 400)
   }
 
   @Test
   fun textOnly() {
-    assumeVariant(BpkTestVariant.Default)
     composed {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
@@ -48,7 +46,6 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
   @Test
   fun withIcon() {
-    assumeVariant(BpkTestVariant.Default)
     composed {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
@@ -60,7 +57,6 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
   @Test
   fun withCta() {
-    assumeVariant(BpkTestVariant.Default)
     composed {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
@@ -72,7 +68,6 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
   @Test
   fun withIconAndCta() {
-    assumeVariant(BpkTestVariant.Default)
     composed {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
