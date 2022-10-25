@@ -18,7 +18,10 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
+import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -26,36 +29,39 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeightIn
-import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.requiredWidthIn
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.compose.utils.clickable
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.DurationUnit
 
 @Composable
 fun BpkFloatingNotification(
@@ -64,46 +70,62 @@ fun BpkFloatingNotification(
   show: Boolean,
   icon: BpkIcon? = null,
   animation: Animation = Animation(),
-  cta: CTA? = null
-) {
-  val (internalShow, setInternalShow) = remember { mutableStateOf(false) }
+  cta: Cta? = null,
+  onExit: (() -> Unit)? = null,
+  ) {
+  val transitionDuration = 400
+  var internalShow by remember { mutableStateOf(true) }
   if (show) {
     LaunchedEffect(key1 = Unit) {
-      setInternalShow(true)
-      delay(animation.showDuration)
-      setInternalShow(false)
-      animation.onFinished?.invoke()
+      internalShow = true
+      delay(animation.hideAfter.toLong())
+      internalShow = false
+      onExit?.invoke()
     }
   }
-  val animationDuration = if (animation.enabled) animation.transitionDuration.toInt(DurationUnit.MILLISECONDS) else 0
-  val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = animationDuration, easing = LinearEasing)
-  val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = animationDuration, easing = LinearEasing)
+  val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = transitionDuration, easing = LinearEasing)
+  val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = transitionDuration, easing = LinearEasing)
   AnimatedVisibility(
+    modifier = modifier,
     visible = internalShow,
-    enter = slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec),
-    exit = slideOutVertically(slideAnimationSpec, targetOffsetY = { it / 2 }) + fadeOut(animationSpec = fadeAnimationSpec)
+    enter = if (animation.animateOnEnter) {
+      slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec)
+    } else {
+      EnterTransition.None
+    },
+    exit = if (animation.animateOnExit) {
+      slideOutVertically(slideAnimationSpec, targetOffsetY = { it / 2 }) + fadeOut(animationSpec = fadeAnimationSpec)
+    } else {
+      ExitTransition.None
+    }
   ) {
     Box(
-      modifier = modifier
-        .requiredHeightIn(min = 52.dp, max = 72.dp)
-        .requiredWidthIn(min = 288.dp, max = 400.dp)
+      modifier = Modifier
+        .fillMaxWidth()
         .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
       contentAlignment = Alignment.BottomCenter
     ) {
-      BpkCard(
-        modifier = modifier.fillMaxWidth(),
-        backgroundColor = BpkTheme.colors.corePrimary
+      Box(
+        modifier = Modifier
+          .clip(RoundedCornerShape(BpkBorderRadius.Md))
+          .background(color = BpkTheme.colors.corePrimary)
+          .sizeIn(
+            minHeight = 52.dp,
+            maxHeight = 72.dp,
+            minWidth = if (LocalConfiguration.current.screenWidthDp < 360) 288.dp else 312.dp,
+            maxWidth = 400.dp
+          )
+          .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+        contentAlignment = Alignment.CenterStart
       ) {
         Row(
-          modifier = Modifier.wrapContentSize(),
           horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
           verticalAlignment = Alignment.CenterVertically
         ) {
           icon?.let { icon ->
             BpkIcon(
-              modifier = Modifier,
               icon = icon,
-              contentDescription = "",
+              contentDescription = null,
               size = BpkIconSize.Small,
               tint = BpkTheme.colors.textOnDark
             )
@@ -111,15 +133,15 @@ fun BpkFloatingNotification(
           BpkText(
             modifier = Modifier.weight(0.8f),
             text = text,
+            maxLines = 2,
             color = BpkTheme.colors.textOnDark,
             style = BpkTheme.typography.footnote
           )
-          cta?.let {
+          cta?.let { cta ->
             Box(
               modifier = Modifier
-                .requiredSize(BpkSpacing.Xxl)
-                .clip(CircleShape)
-                .weight(0.1f)
+                .weight(0.2f)
+                .sizeIn(minHeight = BpkSpacing.Xxl, minWidth = BpkSpacing.Xxl)
                 .clickable { cta.onClick.invoke() },
               contentAlignment = Alignment.Center
             ) {
@@ -136,13 +158,115 @@ fun BpkFloatingNotification(
   }
 }
 
-data class CTA(
+data class Cta(
   val text: String,
-  val onClick: (() -> Unit)
+  val onClick: () -> Unit,
 )
+
 data class Animation(
-  val enabled: Boolean = true,
-  val showDuration: Duration = 4000.milliseconds,
-  val transitionDuration: Duration = 400.milliseconds,
-  val onFinished: (() -> Unit)? = null
+  val animateOnEnter: Boolean = true,
+  val animateOnExit: Boolean = true,
+  val hideAfter: Int = 4000,
 )
+
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
+@Composable
+private fun LightMode_TextOnly() {
+  // run in Interactive Mode
+  val (show, setShow) = remember { mutableStateOf(false) }
+  BpkFloatingNotification(
+    text = "Lorem",
+    show = show
+  )
+  LaunchedEffect(key1 = Unit) {
+    delay(1000)
+    setShow(true)
+  }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
+@Composable
+private fun LightMode_Icon() {
+  val (show, setShow) = remember { mutableStateOf(false) }
+  BpkFloatingNotification(
+    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon = BpkIcon.Heart,
+    show = show
+  )
+  LaunchedEffect(key1 = Unit) {
+    delay(1000)
+    setShow(true)
+  }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
+@Composable
+private fun LightMode_CTA() {
+  val (show, setShow) = remember { mutableStateOf(false) }
+  BpkFloatingNotification(
+    text = "Lorem ipsum dolor sit amet sdfs fsfsd fsdfsdf dsdfs fsdfs",
+    icon = BpkIcon.Heart,
+    cta = Cta("open whatever", onClick = {}),
+    show = show
+  )
+  LaunchedEffect(key1 = Unit) {
+    delay(1000)
+    setShow(true)
+  }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
+@Composable
+private fun LightMode_CTA_NoAnimation() {
+  val (show, setShow) = remember { mutableStateOf(false) }
+  BpkFloatingNotification(
+    text = "Lorem ipsum dolor sit amet",
+    icon = BpkIcon.Heart,
+    cta = Cta("View", onClick = {}),
+    animation = Animation(
+      animateOnEnter = false,
+      animateOnExit = false
+    ),
+    show = show
+  )
+  LaunchedEffect(key1 = Unit) {
+    delay(1000)
+    setShow(true)
+  }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, backgroundColor = 0x000000)
+@Composable
+private fun NightMode_CTA() {
+  val (show, setShow) = remember { mutableStateOf(false) }
+  BpkFloatingNotification(
+    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    icon = BpkIcon.Heart,
+    cta = Cta("Open", onClick = {}),
+    show = show
+  )
+  LaunchedEffect(key1 = Unit) {
+    delay(1000)
+    setShow(true)
+  }
+}
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
+@Composable
+private fun LightMode_TextOnly_RTL() {
+  CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+    // run in Interactive Mode
+    val (show, setShow) = remember { mutableStateOf(false) }
+    BpkFloatingNotification(
+      text = "خسیر خسی س خسهد ی سخهسیخ عسی سخیه دسخهی د سسخی دس خحهسید سیمسی  ",
+      icon = BpkIcon.Heart,
+      cta = Cta("تماشا", onClick = {}),
+      show = show
+    )
+    LaunchedEffect(key1 = Unit) {
+      delay(1000)
+      setShow(true)
+    }
+  }
+}

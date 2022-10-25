@@ -78,6 +78,8 @@
   <string name="snackbar_icon_content_description">Close</string>
   <string name="snackbar_action">Action!</string>
 
+  <string name="floating_notification_show">Show Notifications!</string>
+
   <string name="story_badge_compose">Compose</string>
 
   <string name="text_subheading">Subheading</string>
@@ -163,7 +165,7 @@
   <string name="generic_read_only_value">Read only value</string>
   <string name="generic_error_text">Error text</string>
   <string name="token_placeholder">%1$s = %2$s</string>
-    <string name="tabs_small">Small</string>
+  <string name="tabs_small">Small</string>
   <string name="tabs_small_with_icon">Small with icon</string>
   <string name="tabs_large">Large</string>
   <string name="tabs_large_with_icon">Large with icon</string>

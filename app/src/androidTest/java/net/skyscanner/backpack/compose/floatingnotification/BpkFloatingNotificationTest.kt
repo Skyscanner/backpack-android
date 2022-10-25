@@ -59,24 +59,24 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun withCTA() {
+  fun withCta() {
     assumeVariant(BpkTestVariant.Default)
     composed {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
-        cta = CTA("Open", onClick = {}),
+        cta = Cta("Open", onClick = {}),
         show = true
       )
     }
   }
 
   @Test
-  fun withIconAndCTA() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+  fun withIconAndCta() {
+    assumeVariant(BpkTestVariant.Default)
     composed {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
-        cta = CTA("Open", onClick = {}),
+        cta = Cta("Open", onClick = {}),
         icon = BpkIcon.Heart,
         show = true
       )
