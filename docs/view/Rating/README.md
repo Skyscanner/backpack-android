@@ -1,5 +1,33 @@
 # Rating
 
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
+[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/Backpack/net.skyscanner.backpack.rating)
+[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/Backpack/src/main/java/net/skyscanner/backpack/rating)
+
+## Default
+
+| Day | Night |
+| --- | --- |
+| ![Rating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/default.png) |![Rating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/default_dm.png) |
+
+## Pill
+
+| Day | Night |
+| --- | --- |
+| ![Pill Rating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/pill.png) |![Pill Rating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/pill_dm.png) |
+
+## Sizes
+
+| Day | Night |
+| --- | --- |
+| ![Sizes Rating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/sizes.png) |![Sizes Rating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/sizes_dm.png) |
+
+## Vertical
+
+| Day | Night |
+| --- | --- |
+| ![Vertical Rating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/vertical.png) |![Vertical Rating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/vertical_dm.png) |
+
 ## Installation
 
 Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.

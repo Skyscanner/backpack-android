@@ -1,5 +1,19 @@
 # Icon
 
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
+
+## All
+
+| Day | Night |
+| --- | --- |
+| ![Icon component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/all.png) |![Icon component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/all_dm.png) |
+
+## Small
+
+| Day | Night |
+| --- | --- |
+| ![Sm Icon component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/small.png) |![Sm Icon component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/small_dm.png) |
+
 ## Installation
 
 Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main Readme for a complete installation guide.
