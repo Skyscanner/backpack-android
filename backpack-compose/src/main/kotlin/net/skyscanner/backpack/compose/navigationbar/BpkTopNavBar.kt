@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.compose.navigationbar
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -42,11 +44,14 @@ fun BpkTopNavBar(
   navIcon: NavIcon,
   title: String,
   modifier: Modifier = Modifier,
+  insets: WindowInsets? = WindowInsets.statusBars,
   actions: List<IconAction> = emptyList(),
 ) {
   BpkTopNavBarImpl(
+    fraction = 0f,
     title = title,
     modifier = modifier,
+    insets = insets,
     navigationIcon = navIcon.toAction(),
     actions = actions,
   )
@@ -58,10 +63,51 @@ fun BpkTopNavBar(
   title: String,
   action: TextAction,
   modifier: Modifier = Modifier,
+  insets: WindowInsets? = WindowInsets.statusBars,
 ) {
   BpkTopNavBarImpl(
+    fraction = 0f,
     title = title,
     modifier = modifier,
+    insets = insets,
+    navigationIcon = navigationIcon.toAction(),
+    actions = listOf(action),
+  )
+}
+
+@Composable
+fun BpkTopNavBar(
+  state: TopNavBarState,
+  navIcon: NavIcon,
+  title: String,
+  modifier: Modifier = Modifier,
+  insets: WindowInsets? = WindowInsets.statusBars,
+  actions: List<IconAction> = emptyList(),
+) {
+  BpkTopNavBarImpl(
+    fraction = state.asInternalState().fraction,
+    title = title,
+    modifier = modifier,
+    insets = insets,
+    navigationIcon = navIcon.toAction(),
+    actions = actions,
+  )
+}
+
+@Composable
+fun BpkTopNavBar(
+  state: TopNavBarState,
+  navigationIcon: NavIcon,
+  title: String,
+  action: TextAction,
+  modifier: Modifier = Modifier,
+  insets: WindowInsets? = WindowInsets.statusBars,
+) {
+  BpkTopNavBarImpl(
+    fraction = state.asInternalState().fraction,
+    title = title,
+    modifier = modifier,
+    insets = insets,
     navigationIcon = navigationIcon.toAction(),
     actions = listOf(action),
   )

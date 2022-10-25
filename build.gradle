@@ -82,9 +82,15 @@ ext {
   group = "net.skyscanner.backpack"
   dokkaOutputDir = "dokka"
 
-  androidxAppCompat = "androidx.appcompat:appcompat:1.4.2"
+  androidxAppCompat = "androidx.appcompat:appcompat:1.5.1"
   androidxAnnotations = "androidx.annotation:annotation:1.5.0"
-  androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+
+  lifecycleVersion = "2.5.1"
+  androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+  // The below dependencies can be removed once the following issue is fixed: https://issuetracker.google.com/issues/238425626
+  androidXLifecycleViewmodel = "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
+  androidXLifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+
   androidMaterial = "com.google.android.material:material:1.7.0"
   cardView = "androidx.cardview:cardview:1.0.0"
   googleMaps = "com.google.android.gms:play-services-maps:18.1.0"
@@ -123,6 +129,8 @@ ext {
   composeTestJUnit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
   composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
   composeActivity = "androidx.activity:activity-compose:1.6.0"
+  composeUtil = "androidx.compose.ui:ui-util:$composeVersion"
+  composeFoundationV3 = "androidx.compose.foundation:foundation:1.3.0"
 
   accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.25.1"
 }

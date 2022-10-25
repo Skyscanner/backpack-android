@@ -7,6 +7,7 @@
   <style name="AppTheme" parent="AppThemeBase">
     <!-- Customize your theme here. -->
     <item name="android:windowBackground">@color/bpkCanvas</item>
+    <item name="android:windowTranslucentStatus">true</item>
   </style>
 
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
