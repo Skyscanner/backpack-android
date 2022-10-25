@@ -74,7 +74,7 @@ fun BpkFloatingNotification(
   onExit: (() -> Unit)? = null,
   ) {
   val transitionDuration = 400
-  var internalShow by remember { mutableStateOf(true) }
+  var internalShow by remember { mutableStateOf(false) }
   if (show) {
     LaunchedEffect(key1 = Unit) {
       internalShow = true
