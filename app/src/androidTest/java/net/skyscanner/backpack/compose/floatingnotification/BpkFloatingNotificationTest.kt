@@ -39,6 +39,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
     composed {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
+        animation = Animation(animateOnExit = false, animateOnEnter = false),
         show = true
       )
     }
@@ -50,6 +51,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
         icon = BpkIcon.Heart,
+        animation = Animation(animateOnExit = false, animateOnEnter = false),
         show = true
       )
     }
@@ -61,6 +63,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
       BpkFloatingNotification(
         text = "Lorem ipsum dolor sit amet",
         cta = Cta("Open", onClick = {}),
+        animation = Animation(animateOnExit = false, animateOnEnter = false),
         show = true
       )
     }
@@ -73,6 +76,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
         text = "Lorem ipsum dolor sit amet",
         cta = Cta("Open", onClick = {}),
         icon = BpkIcon.Heart,
+        animation = Animation(animateOnExit = false, animateOnEnter = false),
         show = true
       )
     }
