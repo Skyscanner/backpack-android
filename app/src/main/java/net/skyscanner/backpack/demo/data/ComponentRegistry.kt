@@ -366,7 +366,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { SkeletonStory() },
       )
     ),
-    "Slider" story NodeData { SliderStory of R.layout.fragment_slider },
+    "Slider" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_slider },
+        TAB_TITLE_COMPOSE composeStory { SliderStory() },
+      )
+    ),
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Sneak peek" story NodeData(
       { children -> TabStory of children },
