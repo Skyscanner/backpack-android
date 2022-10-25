@@ -195,7 +195,7 @@ public class BpkColors private constructor(
       statusSuccessSpot: Color = Color(0xFF62F1C6),
       statusWarningFill: Color = Color(0xFFFBF1BB),
       statusWarningSpot: Color = Color(0xFFFEEB87),
-      surfaceContrast: Color = Color(0xFF131D2B),
+      surfaceContrast: Color = Color(0xFF010913),
       surfaceDefault: Color = Color(0xFF131D2B),
       surfaceElevated: Color = Color(0xFF243346),
       surfaceHighlight: Color = Color(0xFF243346),
