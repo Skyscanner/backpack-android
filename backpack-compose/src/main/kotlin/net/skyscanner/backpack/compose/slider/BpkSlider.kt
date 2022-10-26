@@ -19,27 +19,41 @@
 
 package net.skyscanner.backpack.compose.slider
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.Slider
+import androidx.compose.material.SliderDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 
 @Composable
-fun BpkSlider() {
+fun BpkSlider(
+  modifier: Modifier
+) {
   var sliderValue by remember {
     mutableStateOf(0f) }
 
-  Card(shape = RoundedCornerShape(4.dp), modifier = androidx.compose.ui.Modifier.padding(8.dp)) {
-    Slider(value = sliderValue, onValueChange = { newValue ->
-      sliderValue = newValue
-    })
+  Box(
+//    shape = RoundedCornerShape(4.dp),
+    modifier = Modifier.padding(BpkSpacing.Xl),
+//    elevation = 0.dp
+  ) {
+    Slider(
+      value = sliderValue,
+      onValueChange = { newValue -> sliderValue = newValue },
+      modifier = Modifier.padding(vertical = 0.dp),
+      colors = SliderDefaults.colors(
+      thumbColor = BpkTheme.colors.coreAccent,
+      activeTrackColor = BpkTheme.colors.coreAccent,
+      inactiveTrackColor = BpkTheme.colors.line))
 
   }
 
