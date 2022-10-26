@@ -50,7 +50,7 @@
 
 	<color name="bpkTextOnDark">#ffffffff</color>
 
-	<color name="bpkTextOnLight">#ff161616</color>
+	<color name="bpkTextOnLight">#ff010913</color>
 
 	<color name="bpkTextDisabledOnDark">#80ffffff</color>
 
@@ -68,7 +68,7 @@
 
 	<color name="bpkTextSecondary">#ffbdc4cb</color>
 
-	<color name="bpkTextPrimaryInverse">#ff161616</color>
+	<color name="bpkTextPrimaryInverse">#ff010913</color>
 
 	<color name="bpkScrim">#b3000000</color>
 
