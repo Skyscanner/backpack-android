@@ -8,19 +8,19 @@
 
 | Day | Night |
 | --- | --- |
-| ![Colored Calendar component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/colored.png) |![Colored Calendar component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/colored_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/colored.png" alt="Colored Calendar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/colored_dm.png" alt="Colored Calendar component - dark mode" width="375" /> |
 
 ## Labeled
 
 | Day | Night |
 | --- | --- |
-| ![Labeled Calendar component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/labeled.png) |![Labeled Calendar component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/labeled_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/labeled.png" alt="Labeled Calendar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/labeled_dm.png" alt="Labeled Calendar component - dark mode" width="375" /> |
 
 ## Range
 
 | Day | Night |
 | --- | --- |
-| ![Range Calendar component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/range.png) |![Range Calendar component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/range_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/range.png" alt="Range Calendar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar/screenshots/range_dm.png" alt="Range Calendar component - dark mode" width="375" /> |
 
 ## Installation
 

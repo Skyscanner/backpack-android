@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Icon component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AllIcons/screenshots/default.png) |![Icon component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AllIcons/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AllIcons/screenshots/default.png" alt="Icon component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/AllIcons/screenshots/default_dm.png" alt="Icon component - dark mode" width="375" /> |
 
 ## Installation
 

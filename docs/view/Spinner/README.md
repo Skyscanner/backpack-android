@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Spinner component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Spinner/screenshots/default.png) |![Spinner component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Spinner/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Spinner/screenshots/default.png" alt="Spinner component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Spinner/screenshots/default_dm.png" alt="Spinner component - dark mode" width="375" /> |
 
 ## Installation
 

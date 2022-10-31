@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![TextSpans component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextSpans/screenshots/default.png) |![TextSpans component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextSpans/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextSpans/screenshots/default.png" alt="TextSpans component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextSpans/screenshots/default_dm.png" alt="TextSpans component - dark mode" width="375" /> |
 
 ## Installation
 

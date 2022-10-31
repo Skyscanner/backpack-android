@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Flare component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Flare/screenshots/default.png) |![Flare component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Flare/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Flare/screenshots/default.png" alt="Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Flare/screenshots/default_dm.png" alt="Flare component - dark mode" width="375" /> |
 
 ## Installation
 

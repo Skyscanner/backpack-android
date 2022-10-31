@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Card component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/default.png) |![Card component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/default.png" alt="Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/default_dm.png" alt="Card component - dark mode" width="375" /> |
 
 
 ## Installation

@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Badge component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Badge/screenshots/all.png) |![Badge component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Badge/screenshots/all_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Badge/screenshots/all.png" alt="Badge component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Badge/screenshots/all_dm.png" alt="Badge component - dark mode" width="375" /> |
 
 ## Installation
 

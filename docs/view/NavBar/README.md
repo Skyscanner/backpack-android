@@ -8,19 +8,19 @@
 
 | Day | Night |
 | --- | --- |
-| ![Collapsed NavBar component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/collapsed.png) |![Collapsed NavBar component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/collapsed_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/collapsed.png" alt="Collapsed NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/collapsed_dm.png" alt="Collapsed NavBar component - dark mode" width="375" /> |
 
 ## Expanded
 
 | Day | Night |
 | --- | --- |
-| ![Expanded NavBar component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/expanded.png) |![Expanded NavBar component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/expanded_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/expanded.png" alt="Expanded NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/expanded_dm.png" alt="Expanded NavBar component - dark mode" width="375" /> |
 
 ## Navigation
 
 | Day | Night |
 | --- | --- |
-| ![Navigation NavBar component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/navigation.png) |![Navigation NavBar component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/navigation_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/navigation.png" alt="Navigation NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/navigation_dm.png" alt="Navigation NavBar component - dark mode" width="375" /> |
 
 ## Installation
 

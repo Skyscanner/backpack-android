@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Toast component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Toast/screenshots/default.png) |![Toast component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Toast/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Toast/screenshots/default.png" alt="Toast component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Toast/screenshots/default_dm.png" alt="Toast component - dark mode" width="375" /> |
 
 ## Installation
 

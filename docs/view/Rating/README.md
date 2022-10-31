@@ -8,25 +8,25 @@
 
 | Day | Night |
 | --- | --- |
-| ![Rating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/default.png) |![Rating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/default.png" alt="Rating component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/default_dm.png" alt="Rating component - dark mode" width="375" /> |
 
 ## Pill
 
 | Day | Night |
 | --- | --- |
-| ![Pill Rating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/pill.png) |![Pill Rating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/pill_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/pill.png" alt="Pill Rating component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/pill_dm.png" alt="Pill Rating component - dark mode" width="375" /> |
 
 ## Sizes
 
 | Day | Night |
 | --- | --- |
-| ![Sizes Rating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/sizes.png) |![Sizes Rating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/sizes_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/sizes.png" alt="Sizes Rating component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/sizes_dm.png" alt="Sizes Rating component - dark mode" width="375" /> |
 
 ## Vertical
 
 | Day | Night |
 | --- | --- |
-| ![Vertical Rating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/vertical.png) |![Vertical Rating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/vertical_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/vertical.png" alt="Vertical Rating component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/vertical_dm.png" alt="Vertical Rating component - dark mode" width="375" /> |
 
 ## Installation
 

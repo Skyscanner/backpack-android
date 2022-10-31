@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Checkbox component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Checkbox/screenshots/default.png) |![Checkbox component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Checkbox/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Checkbox/screenshots/default.png" alt="Checkbox component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Checkbox/screenshots/default_dm.png" alt="Checkbox component - dark mode" width="375" /> |
 
 ## Installation
 

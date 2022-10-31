@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Panel component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Panel/screenshots/all.png) |![Panel component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Panel/screenshots/all_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Panel/screenshots/all.png" alt="Panel component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Panel/screenshots/all_dm.png" alt="Panel component - dark mode" width="375" /> |
 
 ## Installation
 
