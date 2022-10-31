@@ -18,18 +18,16 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.floatingnotification.Animation
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationState
 import net.skyscanner.backpack.compose.floatingnotification.Cta
 import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -39,73 +37,47 @@ import net.skyscanner.backpack.demo.R
 
 @Composable
 fun FloatingNotificationStory() {
-  val state = rememberBpkFloatingNotificationState()
-  Column(
+  val scope = rememberCoroutineScope()
+  val textOnlyState = rememberBpkFloatingNotificationState()
+  val longTextWithIconState = rememberBpkFloatingNotificationState()
+  val textWithCtaState = rememberBpkFloatingNotificationState()
+  val longTextWithIconWithCtaState = rememberBpkFloatingNotificationState()
+  val textWithNoAnimationState = rememberBpkFloatingNotificationState()
+
+  BpkButton(
     modifier = Modifier
       .fillMaxWidth()
       .padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)
+    text = stringResource(id = R.string.floating_notification_show),
+    enabled = !textOnlyState.visible && !longTextWithIconState.visible && !textWithCtaState.visible &&
+      !longTextWithIconWithCtaState.visible && !textWithNoAnimationState.visible
   ) {
-    BpkButton(
-      text = stringResource(id = R.string.floating_notification_show),
-      enabled = !state.visible
-    ) {
-      state.show()
+    scope.launch {
+      textOnlyState.show(
+        text = "Lorem ipsum dolor sit amet."
+      )
+      longTextWithIconState.show(
+        text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+        icon = BpkIcon.Heart,
+      )
+      textWithCtaState.show(
+        text = "Lorem ipsum dolor sit amet.",
+        cta = Cta("Open", onClick = {})
+      )
+      longTextWithIconWithCtaState.show(
+        text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+        icon = BpkIcon.Heart,
+        cta = Cta("Open", onClick = {})
+      )
+      textWithNoAnimationState.show(
+        text = "Lorem ipsum dolor sit amet.",
+        animation = Animation(animateOnEnter = false, animateOnExit = false)
+      )
     }
-    TextOnlyExample(state)
-    LongTextWithIconExample(state)
-    TextWithCtaExample(state)
-    LongTextWithIconWithCtaExample(state)
-    TextWithNoAnimationsExample(state)
   }
-}
-
-@Composable
-@Preview
-fun TextOnlyExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
-  BpkFloatingNotification(
-    hostState = state,
-    text = stringResource(id = R.string.stub_xs),
-  )
-}
-
-@Composable
-@Preview
-fun LongTextWithIconExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
-  BpkFloatingNotification(
-    hostState = state,
-    text = stringResource(id = R.string.stub_sm),
-    icon = BpkIcon.Heart,
-  )
-}
-
-@Composable
-@Preview
-fun TextWithCtaExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
-  BpkFloatingNotification(
-    hostState = state,
-    text = stringResource(id = R.string.stub_xs),
-    cta = Cta("Open", onClick = {}),
-  )
-}
-
-@Composable
-@Preview
-fun LongTextWithIconWithCtaExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
-  BpkFloatingNotification(
-    hostState = state,
-    text = stringResource(id = R.string.stub_sm),
-    cta = Cta("Open", onClick = {}),
-    icon = BpkIcon.Heart,
-  )
-}
-
-@Composable
-@Preview
-fun TextWithNoAnimationsExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
-  BpkFloatingNotification(
-    hostState = state,
-    text = stringResource(id = R.string.stub_xs),
-    animation = Animation(animateOnEnter = false, animateOnExit = false),
-  )
+  BpkFloatingNotification(hostState = textOnlyState)
+  BpkFloatingNotification(hostState = longTextWithIconState)
+  BpkFloatingNotification(hostState = textWithCtaState)
+  BpkFloatingNotification(hostState = longTextWithIconWithCtaState)
+  BpkFloatingNotification(hostState = textWithNoAnimationState)
 }

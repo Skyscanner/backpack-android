@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -38,10 +39,12 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun textOnly() {
     composed {
       val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(
-        hostState = state,
-        text = "Lorem ipsum dolor sit amet",
-      )
+      BpkFloatingNotification(hostState = state)
+      LaunchedEffect(key1 = Unit) {
+        state.show(
+          text = "Lorem ipsum dolor sit amet"
+        )
+      }
     }
   }
 
@@ -49,11 +52,13 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun withIcon() {
     composed {
       val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(
-        hostState = state,
-        text = "Lorem ipsum dolor sit amet",
-        icon = BpkIcon.Heart,
-      )
+      BpkFloatingNotification(hostState = state)
+      LaunchedEffect(key1 = Unit) {
+        state.show(
+          text = "Lorem ipsum dolor sit amet",
+          icon = BpkIcon.Heart,
+        )
+      }
     }
   }
 
@@ -61,11 +66,13 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun withCta() {
     composed {
       val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(
-        hostState = state,
-        text = "Lorem ipsum dolor sit amet",
-        cta = Cta("Open", onClick = {}),
-      )
+      BpkFloatingNotification(hostState = state)
+      LaunchedEffect(key1 = Unit) {
+        state.show(
+          text = "Lorem ipsum dolor sit amet",
+          cta = Cta("Open", onClick = {}),
+        )
+      }
     }
   }
 
@@ -73,12 +80,14 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun withIconAndCta() {
     composed {
       val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(
-        hostState = state,
-        text = "Lorem ipsum dolor sit amet",
-        cta = Cta("Open", onClick = {}),
-        icon = BpkIcon.Heart,
-      )
+      BpkFloatingNotification(hostState = state)
+      LaunchedEffect(key1 = Unit) {
+        state.show(
+          text = "Lorem ipsum dolor sit amet",
+          cta = Cta("Open", onClick = {}),
+          icon = BpkIcon.Heart,
+        )
+      }
     }
   }
 }

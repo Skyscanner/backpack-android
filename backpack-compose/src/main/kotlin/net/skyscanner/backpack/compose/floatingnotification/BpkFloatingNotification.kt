@@ -40,9 +40,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,9 +50,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -66,12 +62,9 @@ import net.skyscanner.backpack.compose.utils.clickable
 @Composable
 fun BpkFloatingNotification(
   hostState: BpkFloatingNotificationState,
-  text: String,
   modifier: Modifier = Modifier,
-  icon: BpkIcon? = null,
-  cta: Cta? = null,
-  animation: Animation = Animation(),
 ) {
+  val data = hostState.data
   val transitionDuration = 400
   val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = transitionDuration)
   val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = transitionDuration)
@@ -86,12 +79,12 @@ fun BpkFloatingNotification(
   AnimatedVisibility(
     modifier = modifier,
     visible = hostState.visible,
-    enter = if (animation.animateOnEnter) {
+    enter = if (data?.animation?.animateOnEnter == true) {
       slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec)
     } else {
       EnterTransition.None
     },
-    exit = if (animation.animateOnExit) {
+    exit = if (data?.animation?.animateOnExit == true) {
       slideOutVertically(slideAnimationSpec, targetOffsetY = { it / 2 }) + fadeOut(animationSpec = fadeAnimationSpec)
     } else {
       ExitTransition.None
@@ -115,7 +108,7 @@ fun BpkFloatingNotification(
           horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
           verticalAlignment = Alignment.CenterVertically
         ) {
-          icon?.let { icon ->
+          data?.icon?.let { icon ->
             BpkIcon(
               icon = icon,
               contentDescription = null,
@@ -125,12 +118,12 @@ fun BpkFloatingNotification(
           }
           BpkText(
             modifier = Modifier.weight(0.8f),
-            text = text,
+            text = data?.text ?: "",
             maxLines = 2,
             color = BpkTheme.colors.textOnDark,
             style = BpkTheme.typography.footnote
           )
-          cta?.let { cta ->
+          data?.cta?.let { cta ->
             Box(
               modifier = Modifier
                 .weight(0.2f)
@@ -162,22 +155,33 @@ data class Animation(
   val animateOnExit: Boolean = true,
 )
 
-@Stable
-class BpkFloatingNotificationState(
-  initiallyVisible: Boolean,
-  private val coroutineScope: CoroutineScope,
-) {
+internal data class BpkFloatingNotificationData(
+  val text: String,
+  val icon: BpkIcon? = null,
+  val cta: Cta? = null,
+  val animation: Animation = Animation()
+)
 
-  private val animationDuration = 1000L
+@Stable
+class BpkFloatingNotificationState(initiallyVisible: Boolean) {
+
+  internal var data by mutableStateOf<BpkFloatingNotificationData?>(null)
+    private set
+  private val animationDuration = 4000L
   var visible by mutableStateOf(initiallyVisible)
     private set
 
-  fun show() {
+  suspend fun show(
+    text: String,
+    icon: BpkIcon? = null,
+    cta: Cta? = null,
+    animation: Animation = Animation()
+  ) {
+    data = BpkFloatingNotificationData(text, icon, cta, animation)
     visible = true
-    coroutineScope.launch {
-      delay(animationDuration)
-      visible = false
-    }
+    delay(animationDuration)
+    visible = false
+    data = null
   }
 }
 
@@ -185,23 +189,9 @@ class BpkFloatingNotificationState(
 fun rememberBpkFloatingNotificationState(
   initiallyVisible: Boolean = false
 ): BpkFloatingNotificationState {
-  val scope = rememberCoroutineScope()
-  return rememberSaveable(
-    scope,
-    saver = Saver(
-      save = { it.visible },
-      restore = {
-        BpkFloatingNotificationState(initiallyVisible = it, scope).apply {
-          if (it) {
-            show()
-          }
-        }
-      }
-    )
-  ) {
-    BpkFloatingNotificationState(initiallyVisible = initiallyVisible, coroutineScope = scope)
-  }
+    return remember {
+      BpkFloatingNotificationState(initiallyVisible = initiallyVisible)
+    }
 }
 
 private data class RequiredSize(val width: Dp, val height: Dp)
-
