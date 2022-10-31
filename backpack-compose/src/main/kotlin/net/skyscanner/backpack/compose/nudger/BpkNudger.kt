@@ -22,9 +22,16 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.progressSemantics
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.disabled
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.setProgress
+import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.style.TextAlign
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
@@ -37,7 +44,9 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Minus
 import net.skyscanner.backpack.compose.tokens.Plus
+import kotlin.math.roundToInt
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BpkNudger(
   value: Int,
@@ -47,28 +56,32 @@ fun BpkNudger(
   enabled: Boolean = LocalFieldStatus.current != BpkFieldStatus.Disabled,
 ) {
 
-  val trimmedValue = value.coerceIn(range)
+  val coerced = value.coerceIn(range)
+
+  fun setValue(value: Int) =
+    onValueChange(value.coerceIn(range))
 
   Row(
-    modifier = modifier,
+    modifier = modifier.nudgerSemantics(value, ::setValue, range, enabled),
     verticalAlignment = Alignment.CenterVertically,
   ) {
 
     BpkButton(
       icon = BpkIcon.Minus,
-      contentDescription = "-",
-      enabled = enabled && trimmedValue > range.first,
+      contentDescription = "", // handled by semantics modifier
+      enabled = enabled && coerced > range.first,
       size = BpkButtonSize.Default,
       type = BpkButtonType.Secondary,
-      onClick = { onValueChange(trimmedValue - 1) },
+      onClick = { setValue(coerced - 1) },
     )
 
     BpkText(
-      text = trimmedValue.toString(),
+      text = coerced.toString(),
       style = BpkTheme.typography.heading5,
       maxLines = 1,
       textAlign = TextAlign.Center,
       modifier = Modifier
+        .semantics { invisibleToUser() }
         .padding(horizontal = BpkSpacing.Md)
         .widthIn(min = BpkSpacing.Lg),
       color = animateColorAsState(
@@ -81,11 +94,46 @@ fun BpkNudger(
 
     BpkButton(
       icon = BpkIcon.Plus,
-      contentDescription = "+",
-      enabled = enabled && trimmedValue < range.last,
+      contentDescription = "", // handled by semantics modifier
+      enabled = enabled && coerced < range.last,
       size = BpkButtonSize.Default,
       type = BpkButtonType.Secondary,
-      onClick = { onValueChange(trimmedValue + 1) },
+      onClick = { setValue(coerced + 1) },
     )
   }
 }
+
+private fun Modifier.nudgerSemantics(
+  value: Int,
+  onValueChange: (Int) -> Unit,
+  range: IntRange,
+  enabled: Boolean,
+): Modifier =
+    semantics(mergeDescendants = true) {
+
+    // this is needed to use volume keys
+    setProgress { targetValue ->
+      // without this rounding the values will only decrease
+      val newValue = targetValue
+        .roundToInt()
+        .coerceIn(range)
+      if (newValue != value) {
+        onValueChange(newValue)
+        true
+      } else {
+        false
+      }
+    }
+
+    // override describing percents
+    stateDescription = value.toString()
+
+    if (!enabled) disabled()
+  }
+    .progressSemantics(
+      // this is needed to use volume keys
+      value = value.toFloat(),
+      valueRange = range.first.toFloat()..range.last.toFloat(),
+      steps = range.last - range.first,
+    )
+

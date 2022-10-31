@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,23 +44,21 @@ fun NudgerStory() {
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
   ) {
-    ProvideTextStyle(BpkTheme.typography.footnote) {
 
-      NudgerExample(name = stringResource(R.string.generic_default)) {
-        NudgerExample()
-      }
+    NudgerExample(name = stringResource(R.string.generic_default)) {
+      NudgerExample()
+    }
 
-      NudgerExample(name = stringResource(R.string.nudger_minus_disabled)) {
-        NudgerExample(initialValue = NudgerStoryRange.first)
-      }
+    NudgerExample(name = stringResource(R.string.nudger_minus_disabled)) {
+      NudgerExample(initialValue = NudgerStoryRange.first)
+    }
 
-      NudgerExample(name = stringResource(R.string.nudger_plus_disabled)) {
-        NudgerExample(initialValue = NudgerStoryRange.last)
-      }
+    NudgerExample(name = stringResource(R.string.nudger_plus_disabled)) {
+      NudgerExample(initialValue = NudgerStoryRange.last)
+    }
 
-      NudgerExample(name = stringResource(R.string.generic_disabled)) {
-        NudgerExample(enabled = false)
-      }
+    NudgerExample(name = stringResource(R.string.generic_disabled)) {
+      NudgerExample(enabled = false)
     }
   }
 }
@@ -94,7 +91,7 @@ private fun NudgerExample(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
   ) {
-    BpkText(text = name)
+    BpkText(text = name, style = BpkTheme.typography.footnote)
     content()
   }
 }
