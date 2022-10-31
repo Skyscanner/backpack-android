@@ -19,8 +19,6 @@
 
 package net.skyscanner.backpack.compose.slider
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
 import androidx.compose.runtime.Composable
@@ -29,9 +27,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 
 @Composable
@@ -39,23 +35,15 @@ fun BpkSlider(
   modifier: Modifier
 ) {
   var sliderValue by remember {
-    mutableStateOf(0f) }
-
-  Box(
-//    shape = RoundedCornerShape(4.dp),
-    modifier = Modifier.padding(BpkSpacing.Xl),
-//    elevation = 0.dp
-  ) {
+    mutableStateOf(0.5f) }
     Slider(
       value = sliderValue,
       onValueChange = { newValue -> sliderValue = newValue },
-      modifier = Modifier.padding(vertical = 0.dp),
+//      modifier = Modifier.padding(vertical = 0.dp),
+//      steps = 10,
       colors = SliderDefaults.colors(
       thumbColor = BpkTheme.colors.coreAccent,
       activeTrackColor = BpkTheme.colors.coreAccent,
       inactiveTrackColor = BpkTheme.colors.line))
 
   }
-
-
-}

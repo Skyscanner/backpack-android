@@ -21,28 +21,30 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import net.skyscanner.backpack.compose.slider.BpkSlider
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 fun BpkSliderStory() {
   Column(
-//    modifier = Modifier.padding(vertical = 0.dp),
+    modifier = Modifier.padding(BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically)
   ) {
     val context = LocalContext.current
-    Text(text = "Standard")
+    Text(text = "Standard", fontSize = BpkTheme.typography.label2.fontSize)
     BpkSlider(modifier = Modifier)
-    Text(text = "Stepped")
+    Text(text = "Stepped", fontSize = BpkTheme.typography.label2.fontSize)
     BpkSlider(modifier = Modifier)
-    Text(text = "Formatted")
+    Text(text = "Formatted", fontSize = BpkTheme.typography.label2.fontSize)
     BpkSlider(modifier = Modifier)
-    Text(text = "Range")
+    Text(text = "Range", fontSize = BpkTheme.typography.label2.fontSize)
     BpkSlider(modifier = Modifier)
   }
 }
