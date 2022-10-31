@@ -8,19 +8,19 @@
 
 | Day | Night |
 | --- | --- |
-| ![Body Text component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/body.png) |![Body Text component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/body_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/body.png" alt="Body Text component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/body_dm.png" alt="Body Text component - dark mode" width="375" /> |
 
 ## Heading
 
 | Day | Night |
 | --- | --- |
-| ![Heading Text component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/heading.png) |![Heading Text component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/heading_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/heading.png" alt="Heading Text component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/heading_dm.png" alt="Heading Text component - dark mode" width="375" /> |
 
 ## Hero
 
 | Day | Night |
 | --- | --- |
-| ![Hero Text component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/hero.png) |![Hero Text component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/hero_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/hero.png" alt="Hero Text component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Text/screenshots/hero_dm.png" alt="Hero Text component - dark mode" width="375" /> |
 
 ## Installation
 

@@ -8,49 +8,49 @@
 
 | Day | Night |
 | --- | --- |
-| ![Card component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/default.png) |![Card component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/default.png" alt="Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/default_dm.png" alt="Card component - dark mode" width="375" /> |
 
 ## Corner style large
 
 | Day | Night |
 | --- | --- |
-| ![Corner style large Card component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/corner-style-large.png) |![Corner style large Card component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/corner-style-large_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/corner-style-large.png" alt="Corner style large Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/corner-style-large_dm.png" alt="Corner style large Card component - dark mode" width="375" /> |
 
 ## Selected
 
 | Day | Night |
 | --- | --- |
-| ![Selected Card component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/selected.png) |![Selected Card component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/selected_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/selected.png" alt="Selected Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/selected_dm.png" alt="Selected Card component - dark mode" width="375" /> |
 
 ## With divider and corner style large
 
 | Day | Night |
 | --- | --- |
-| ![With divider and corner style large Card component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-and-corner-style-large.png) |![With divider and corner style large Card component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-and-corner-style-large_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-and-corner-style-large.png" alt="With divider and corner style large Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-and-corner-style-large_dm.png" alt="With divider and corner style large Card component - dark mode" width="375" /> |
 
 ## With divider arranged vertically
 
 | Day | Night |
 | --- | --- |
-| ![With divider arranged verticy Card component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-arranged-vertically.png) |![With divider arranged verticy Card component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-arranged-vertically_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-arranged-vertically.png" alt="With divider arranged verticy Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-arranged-vertically_dm.png" alt="With divider arranged verticy Card component - dark mode" width="375" /> |
 
 ## With divider without padding
 
 | Day | Night |
 | --- | --- |
-| ![With divider without padding Card component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-without-padding.png) |![With divider without padding Card component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-without-padding_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-without-padding.png" alt="With divider without padding Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-without-padding_dm.png" alt="With divider without padding Card component - dark mode" width="375" /> |
 
 ## With divider
 
 | Day | Night |
 | --- | --- |
-| ![With divider Card component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider.png) |![With divider Card component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider.png" alt="With divider Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider_dm.png" alt="With divider Card component - dark mode" width="375" /> |
 
 ## Without padding
 
 | Day | Night |
 | --- | --- |
-| ![Without padding Card component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/without-padding.png) |![Without padding Card component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/without-padding_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/without-padding.png" alt="Without padding Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/without-padding_dm.png" alt="Without padding Card component - dark mode" width="375" /> |
 
 ## Installation
 

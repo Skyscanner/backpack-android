@@ -8,19 +8,19 @@
 
 | Day | Night |
 | --- | --- |
-| ![Delete confirmation Dialog component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/delete-confirmation.png) |![Delete confirmation Dialog component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/delete-confirmation_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/delete-confirmation.png" alt="Delete confirmation Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/delete-confirmation_dm.png" alt="Delete confirmation Dialog component - dark mode" width="375" /> |
 
 ## With CTA
 
 | Day | Night |
 | --- | --- |
-| ![With cta Dialog component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/with-cta.png) |![With cta Dialog component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/with-cta_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/with-cta.png" alt="With cta Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/with-cta_dm.png" alt="With cta Dialog component - dark mode" width="375" /> |
 
 ## With flare
 
 | Day | Night |
 | --- | --- |
-| ![With flare Dialog component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/with-flare.png) |![With flare Dialog component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/with-flare_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/with-flare.png" alt="With flare Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/with-flare_dm.png" alt="With flare Dialog component - dark mode" width="375" /> |
 
 ## Installation
 

@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![HorizontalNav component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/HorizontalNav/screenshots/default.png) |![HorizontalNav component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/HorizontalNav/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/HorizontalNav/screenshots/default.png" alt="HorizontalNav component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/HorizontalNav/screenshots/default_dm.png" alt="HorizontalNav component - dark mode" width="375" /> |
 
 ## Installation
 

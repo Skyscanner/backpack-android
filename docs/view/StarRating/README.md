@@ -8,13 +8,13 @@
 
 | Day | Night |
 | --- | --- |
-| ![StarRating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/StarRating/screenshots/default.png) |![StarRating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/StarRating/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/StarRating/screenshots/default.png" alt="StarRating component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/StarRating/screenshots/default_dm.png" alt="StarRating component - dark mode" width="375" /> |
 
 ## Interactive
 
 | Day | Night |
 | --- | --- |
-| ![StarRating component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/StarRatingInteractive/screenshots/default.png) |![StarRating component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/StarRatingInteractive/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/StarRatingInteractive/screenshots/default.png" alt="StarRating component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/StarRatingInteractive/screenshots/default_dm.png" alt="StarRating component - dark mode" width="375" /> |
 
 ## Installation
 

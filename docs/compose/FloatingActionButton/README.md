@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![FloatingActionButton component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FloatingActionButton/screenshots/default.png) |![FloatingActionButton component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FloatingActionButton/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FloatingActionButton/screenshots/default.png" alt="FloatingActionButton component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FloatingActionButton/screenshots/default_dm.png" alt="FloatingActionButton component - dark mode" width="375" /> |
 
 ## Installation
 

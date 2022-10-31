@@ -6,13 +6,13 @@
 
 | Day | Night |
 | --- | --- |
-| ![Icon component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/all.png) |![Icon component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/all_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/all.png" alt="Icon component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/all_dm.png" alt="Icon component - dark mode" width="375" /> |
 
 ## Small
 
 | Day | Night |
 | --- | --- |
-| ![Sm Icon component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/small.png) |![Sm Icon component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/small_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/small.png" alt="Sm Icon component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Icon/screenshots/small_dm.png" alt="Sm Icon component - dark mode" width="375" /> |
 
 ## Installation
 
