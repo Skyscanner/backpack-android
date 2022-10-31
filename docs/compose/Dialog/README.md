@@ -8,25 +8,25 @@
 
 | Day | Night |
 | --- | --- |
-| ![Success Dialog component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/success.png) |![Success Dialog component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/success_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/success.png" alt="Success Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/success_dm.png" alt="Success Dialog component - dark mode" width="375" /> |
 
 ## Warning
 
 | Day | Night |
 | --- | --- |
-| ![Warning Dialog component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/warning.png) |![Warning Dialog component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/warning_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/warning.png" alt="Warning Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/warning_dm.png" alt="Warning Dialog component - dark mode" width="375" /> |
 
 ## Destructive
 
 | Day | Night |
 | --- | --- |
-| ![Destructive Dialog component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/destructive.png) |![Destructive Dialog component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/destructive_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/destructive.png" alt="Destructive Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/destructive_dm.png" alt="Destructive Dialog component - dark mode" width="375" /> |
 
 ## Flare
 
 | Day | Night |
 | --- | --- |
-| ![Flare Dialog component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/flare.png) |![Flare Dialog component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/flare_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/flare.png" alt="Flare Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/flare_dm.png" alt="Flare Dialog component - dark mode" width="375" /> |
 
 ## Installation
 

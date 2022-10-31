@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Switch component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Switch/screenshots/default.png) |![Switch component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Switch/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Switch/screenshots/default.png" alt="Switch component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Switch/screenshots/default_dm.png" alt="Switch component - dark mode" width="375" /> |
 
 ## Installation
 

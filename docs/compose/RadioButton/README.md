@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![RadioButton component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/RadioButton/screenshots/default.png) |![RadioButton component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/RadioButton/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/RadioButton/screenshots/default.png" alt="RadioButton component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/RadioButton/screenshots/default_dm.png" alt="RadioButton component - dark mode" width="375" /> |
 
 ## Installation
 

@@ -8,13 +8,13 @@
 
 | Day | Night |
 | --- | --- |
-| ![Snackbar component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Snackbar/screenshots/default.png) |![Snackbar component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Snackbar/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Snackbar/screenshots/default.png" alt="Snackbar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Snackbar/screenshots/default_dm.png" alt="Snackbar component - dark mode" width="375" /> |
 
 ## Icon
 
 | Day | Night |
 | --- | --- |
-| ![Icon Snackbar component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Snackbar/screenshots/icon.png) |![Icon Snackbar component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Snackbar/screenshots/icon_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Snackbar/screenshots/icon.png" alt="Icon Snackbar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Snackbar/screenshots/icon_dm.png" alt="Icon Snackbar component - dark mode" width="375" /> |
 
 ## Installation
 

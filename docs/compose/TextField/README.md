@@ -8,25 +8,25 @@
 
 | Day | Night |
 | --- | --- |
-| ![TextField component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/default.png) |![TextField component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/default.png" alt="TextField component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/default_dm.png" alt="TextField component - dark mode" width="375" /> |
 
 ## Error
 
 | Day | Night |
 | --- | --- |
-| ![Error TextField component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/error.png) |![Error TextField component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/error_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/error.png" alt="Error TextField component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/error_dm.png" alt="Error TextField component - dark mode" width="375" /> |
 
 ## Validated
 
 | Day | Night |
 | --- | --- |
-| ![Validated TextField component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/validated.png) |![Validated TextField component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/validated_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/validated.png" alt="Validated TextField component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/validated_dm.png" alt="Validated TextField component - dark mode" width="375" /> |
 
 ## Disabled
 
 | Day | Night |
 | --- | --- |
-| ![Disabled TextField component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled.png) |![Disabled TextField component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled.png" alt="Disabled TextField component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/TextField/screenshots/disabled_dm.png" alt="Disabled TextField component - dark mode" width="375" /> |
 
 ## Installation
 

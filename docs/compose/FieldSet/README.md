@@ -8,25 +8,25 @@
 
 | Day | Night |
 | --- | --- |
-| ![FieldSet component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/default.png) |![FieldSet component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/default.png" alt="FieldSet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/default_dm.png" alt="FieldSet component - dark mode" width="375" /> |
 
 ## Error
 
 | Day | Night |
 | --- | --- |
-| ![Error FieldSet component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/error.png) |![Error FieldSet component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/error_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/error.png" alt="Error FieldSet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/error_dm.png" alt="Error FieldSet component - dark mode" width="375" /> |
 
 ## Validated
 
 | Day | Night |
 | --- | --- |
-| ![Validated FieldSet component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/validated.png) |![Validated FieldSet component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/validated_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/validated.png" alt="Validated FieldSet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/validated_dm.png" alt="Validated FieldSet component - dark mode" width="375" /> |
 
 ## Disabled
 
 | Day | Night |
 | --- | --- |
-| ![Disabled FieldSet component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/disabled.png) |![Disabled FieldSet component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/disabled_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/disabled.png" alt="Disabled FieldSet component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FieldSet/screenshots/disabled_dm.png" alt="Disabled FieldSet component - dark mode" width="375" /> |
 
 ## Installation
 

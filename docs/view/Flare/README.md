@@ -6,31 +6,31 @@
 
 | Day | Night |
 | --- | --- |
-| ![Flare component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/default.png) |![Flare component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/default.png" alt="Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/default_dm.png" alt="Flare component - dark mode" width="375" /> |
 
 ## Inset padding
 
 | Day | Night |
 | --- | --- |
-| ![Inset padding Flare component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding.png) |![Inset padding Flare component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding.png" alt="Inset padding Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding_dm.png" alt="Inset padding Flare component - dark mode" width="375" /> |
 
 ## Pointer offset
 
 | Day | Night |
 | --- | --- |
-| ![Pointer offset Flare component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointer-offset.png) |![Pointer offset Flare component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointer-offset_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointer-offset.png" alt="Pointer offset Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointer-offset_dm.png" alt="Pointer offset Flare component - dark mode" width="375" /> |
 
 ## Pointing up
 
 | Day | Night |
 | --- | --- |
-| ![Pointing up Flare component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointing-up.png) |![Pointing up Flare component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointing-up_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointing-up.png" alt="Pointing up Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointing-up_dm.png" alt="Pointing up Flare component - dark mode" width="375" /> |
 
 ## Rounded
 
 | Day | Night |
 | --- | --- |
-| ![Rounded Flare component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/rounded.png) |![Rounded Flare component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/rounded_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/rounded.png" alt="Rounded Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/rounded_dm.png" alt="Rounded Flare component - dark mode" width="375" /> |
 
 ## Installation
 

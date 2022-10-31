@@ -8,19 +8,19 @@
 
 | Day | Night |
 | --- | --- |
-| ![Chip component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/all.png) |![Chip component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/all_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/all.png" alt="Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/all_dm.png" alt="Chip component - dark mode" width="375" /> |
 
 ## On dark
 
 | Day | Night |
 | --- | --- |
-| ![On dark Chip component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/on-dark.png) |![On dark Chip component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/on-dark_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/on-dark.png" alt="On dark Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/on-dark_dm.png" alt="On dark Chip component - dark mode" width="375" /> |
 
 ## With icon
 
 | Day | Night |
 | --- | --- |
-| ![With icon Chip component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/with-icon.png) |![With icon Chip component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/with-icon_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/with-icon.png" alt="With icon Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/with-icon_dm.png" alt="With icon Chip component - dark mode" width="375" /> |
 
 ## Installation
 
