@@ -31,7 +31,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 100, width = 400)
+    setDimensions(height = 110, width = 450)
   }
 
   @Test
