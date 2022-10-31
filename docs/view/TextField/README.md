@@ -1,5 +1,21 @@
 # Text Field
 
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
+[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/Backpack/net.skyscanner.backpack.textfield)
+[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/Backpack/src/main/java/net/skyscanner/backpack/textfield)
+
+## Default
+
+| Day | Night |
+| --- | --- |
+| ![TextField component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextField/screenshots/default.png) |![TextField component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextField/screenshots/default_dm.png) |
+
+## Labels
+
+| Day | Night |
+| --- | --- |
+| ![Labels TextField component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextField/screenshots/labels.png) |![Labels TextField component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextField/screenshots/labels_dm.png) |
+
 ## Installation
 
 Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
