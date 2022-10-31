@@ -19,8 +19,6 @@
 package net.skyscanner.backpack.compose.floatingnotification
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -79,16 +77,8 @@ fun BpkFloatingNotification(
   AnimatedVisibility(
     modifier = modifier,
     visible = hostState.visible,
-    enter = if (data?.animation?.animateOnEnter == true) {
-      slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec)
-    } else {
-      EnterTransition.None
-    },
-    exit = if (data?.animation?.animateOnExit == true) {
-      slideOutVertically(slideAnimationSpec, targetOffsetY = { it / 2 }) + fadeOut(animationSpec = fadeAnimationSpec)
-    } else {
-      ExitTransition.None
-    }
+    enter = slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec),
+    exit = slideOutVertically(slideAnimationSpec, targetOffsetY = { it / 2 }) + fadeOut(animationSpec = fadeAnimationSpec)
   ) {
     Box(
       modifier = Modifier
@@ -150,16 +140,10 @@ data class Cta(
   val onClick: () -> Unit,
 )
 
-data class Animation(
-  val animateOnEnter: Boolean = true,
-  val animateOnExit: Boolean = true,
-)
-
 internal data class BpkFloatingNotificationData(
   val text: String,
   val icon: BpkIcon? = null,
   val cta: Cta? = null,
-  val animation: Animation = Animation()
 )
 
 @Stable
@@ -175,9 +159,8 @@ class BpkFloatingNotificationState(initiallyVisible: Boolean) {
     text: String,
     icon: BpkIcon? = null,
     cta: Cta? = null,
-    animation: Animation = Animation()
   ) {
-    data = BpkFloatingNotificationData(text, icon, cta, animation)
+    data = BpkFloatingNotificationData(text, icon, cta)
     visible = true
     delay(animationDuration)
     visible = false

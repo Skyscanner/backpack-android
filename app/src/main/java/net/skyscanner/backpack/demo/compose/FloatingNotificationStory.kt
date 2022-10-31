@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.floatingnotification.Animation
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
 import net.skyscanner.backpack.compose.floatingnotification.Cta
 import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
@@ -41,16 +40,14 @@ fun FloatingNotificationStory() {
   val textOnlyState = rememberBpkFloatingNotificationState()
   val longTextWithIconState = rememberBpkFloatingNotificationState()
   val textWithCtaState = rememberBpkFloatingNotificationState()
-  val longTextWithIconWithCtaState = rememberBpkFloatingNotificationState()
-  val textWithNoAnimationState = rememberBpkFloatingNotificationState()
+  val allState = rememberBpkFloatingNotificationState()
 
   BpkButton(
     modifier = Modifier
       .fillMaxWidth()
       .padding(BpkSpacing.Base),
     text = stringResource(id = R.string.floating_notification_show),
-    enabled = !textOnlyState.visible && !longTextWithIconState.visible && !textWithCtaState.visible &&
-      !longTextWithIconWithCtaState.visible && !textWithNoAnimationState.visible
+    enabled = !textOnlyState.visible && !longTextWithIconState.visible && !textWithCtaState.visible && !allState.visible
   ) {
     scope.launch {
       textOnlyState.show(
@@ -64,20 +61,15 @@ fun FloatingNotificationStory() {
         text = "Lorem ipsum dolor sit amet.",
         cta = Cta("Open", onClick = {})
       )
-      longTextWithIconWithCtaState.show(
+      allState.show(
         text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
         icon = BpkIcon.Heart,
         cta = Cta("Open", onClick = {})
-      )
-      textWithNoAnimationState.show(
-        text = "Lorem ipsum dolor sit amet.",
-        animation = Animation(animateOnEnter = false, animateOnExit = false)
       )
     }
   }
   BpkFloatingNotification(hostState = textOnlyState)
   BpkFloatingNotification(hostState = longTextWithIconState)
   BpkFloatingNotification(hostState = textWithCtaState)
-  BpkFloatingNotification(hostState = longTextWithIconWithCtaState)
-  BpkFloatingNotification(hostState = textWithNoAnimationState)
+  BpkFloatingNotification(hostState = allState)
 }

@@ -38,17 +38,3 @@ scope.launch {
   )
 }
 ```
-
-Example of a Floating Notification with disabled animation:
-
-```Kotlin
-val scope = rememberCoroutineScope()
-val state = rememberBpkFloatingNotificationState()
-BpkFloatingNotification(hostState = state)
-scope.launch {
-  state.show(
-    text = "Lorem ipsum dolor sit amet.",
-    animation = Animation(animateOnEnter = false, animateOnExit = false)
-  )
-}
-```
