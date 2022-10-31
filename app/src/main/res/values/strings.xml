@@ -197,4 +197,7 @@
   <string name="generic_scroll_the_list">Scroll the list…</string>
   <string name="generic_to_see_the_effect">to see the effect</string>
   <string name="generic_list_item">Item #%d</string>
+  <string name="nudger_minus_disabled">Minus Disabled</string>
+  <string name="nudger_plus_disabled">Plus Disabled</string>
+  <string name="generic_disabled">Disabled</string>
 </resources>

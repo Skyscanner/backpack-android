@@ -11,7 +11,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginBottom="@dimen/bpkSpacingMd"
-    android:text="Standard"
+    android:text="@string/generic_default"
     app:textStyle="footnote" />
 
   <net.skyscanner.backpack.nudger.BpkNudger
@@ -26,7 +26,7 @@
     android:layout_gravity="center"
     android:layout_marginTop="@dimen/bpkSpacingLg"
     android:layout_marginBottom="@dimen/bpkSpacingMd"
-    android:text="Minus Disabled"
+    android:text="@string/nudger_minus_disabled"
     app:textStyle="footnote" />
 
   <net.skyscanner.backpack.nudger.BpkNudger
@@ -40,7 +40,7 @@
     android:layout_gravity="center"
     android:layout_marginTop="@dimen/bpkSpacingLg"
     android:layout_marginBottom="@dimen/bpkSpacingMd"
-    android:text="Plus Disabled"
+    android:text="@string/nudger_plus_disabled"
     app:textStyle="footnote" />
 
   <net.skyscanner.backpack.nudger.BpkNudger
