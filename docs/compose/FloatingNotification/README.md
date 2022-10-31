@@ -10,56 +10,45 @@ Example of a Floating Notification:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
+import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
+import androidx.compose.runtime.rememberCoroutineScope
 
-BpkFloatingNotification(
-  text = "Lorem ipsum dolor sit amet",
-  show = true // set to true when you want to show the notification
-)
+val scope = rememberCoroutineScope()
+val state = rememberBpkFloatingNotificationState()
+BpkFloatingNotification(hostState = state)
+scope.launch {
+  state.show(
+    text = "Lorem ipsum dolor sit amet."
+  )
+}
 ```
 
 Example of a Floating Notification with icon and CTA:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
 
-BpkFloatingNotification(
-  text = "Lorem ipsum dolor sit amet",
-  icon = BpkIcon.Heart,
-  cta = CTA("View", onClick = {}),
-  show = true
-)
+val scope = rememberCoroutineScope()
+val state = rememberBpkFloatingNotificationState()
+BpkFloatingNotification(hostState = state)
+scope.launch {
+  state.show(
+    text = "Lorem ipsum dolor sit amet.",
+    icon = BpkIcon.Heart,
+    cta = CTA("View", onClick = {}),
+  )
+}
 ```
 
-Example of a Floating Notification with custom animation:
+Example of a Floating Notification with disabled animation:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
-
-BpkFloatingNotification(
-  text = "Lorem ipsum dolor sit amet",
-  animation = Animation(
-    enabled = true,
-    showDuration = 2000.milliseconds,
-    transitionDuration = 200.milliseconds,
-    onFinished = {}
-  ),
-  show = true
-)
-```
-
-Example of a Floating Notification with real usage:
-
-```Kotlin
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
-import net.skyscanner.backpack.compose.button.BpkButton
-
-val (show, setShow) = remember { mutableStateOf(false) }
-BpkFloatingNotification(
-  text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  icon = BpkIcon.Heart,
-  show = show
-)
-BpkButton(text = "Show Notification") {
-  setShow(true)
+val scope = rememberCoroutineScope()
+val state = rememberBpkFloatingNotificationState()
+BpkFloatingNotification(hostState = state)
+scope.launch {
+  state.show(
+    text = "Lorem ipsum dolor sit amet.",
+    animation = Animation(animateOnEnter = false, animateOnExit = false)
+  )
 }
 ```
