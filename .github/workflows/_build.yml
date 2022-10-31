@@ -75,6 +75,8 @@ jobs:
     name: Android tests
     runs-on: macos-latest
     timeout-minutes: 30
+    env:
+      JAVA_TOOL_OPTIONS: -Xmx4g
 
     steps:
 
@@ -89,9 +91,6 @@ jobs:
 
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
-
-      - name: Install Haxm
-        run: brew install --cask intel-haxm
 
       - name: AVD cache
         uses: actions/cache@v3
@@ -133,6 +132,8 @@ jobs:
     permissions:
       pull-requests: write
     timeout-minutes: 30
+    env:
+      JAVA_TOOL_OPTIONS: -Xmx4g
 
     strategy:
       fail-fast: false
@@ -162,20 +163,17 @@ jobs:
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
 
-      - name: Install Haxm
-        run: brew install --cask intel-haxm
-
-#      - name: AVD cache
-#        uses: actions/cache@v3
-#        id: avd-cache
-#        with:
-#          path: |
-#            ~/.android/avd/*
-#            ~/.android/adb*
-#          key: avd-${{ env.api-level }}
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ env.api-level }}
 
       - name: create AVD and generate snapshot for caching
-#        if: steps.avd-cache.outputs.cache-hit != 'true'
+        if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
           target: google_apis
