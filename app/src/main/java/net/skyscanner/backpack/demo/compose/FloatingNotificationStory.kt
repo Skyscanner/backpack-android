@@ -23,17 +23,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.floatingnotification.Animation
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationState
 import net.skyscanner.backpack.compose.floatingnotification.Cta
+import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Heart
@@ -41,7 +39,7 @@ import net.skyscanner.backpack.demo.R
 
 @Composable
 fun FloatingNotificationStory() {
-  var show by remember { mutableStateOf(false) }
+  val state = rememberBpkFloatingNotificationState()
   Column(
     modifier = Modifier
       .fillMaxWidth()
@@ -50,67 +48,64 @@ fun FloatingNotificationStory() {
   ) {
     BpkButton(
       text = stringResource(id = R.string.floating_notification_show),
-      enabled = !show
+      enabled = !state.visible
     ) {
-      show = true
+      state.show()
     }
-    TextOnlyExample(show)
-    TextWithIconExample(show)
-    TextWithCtaExample(show)
-    TextWithIconWithCtaExample(show)
-    TextWithNoAnimationsExample(show) {
-      show = false
-    }
+    TextOnlyExample(state)
+    LongTextWithIconExample(state)
+    TextWithCtaExample(state)
+    LongTextWithIconWithCtaExample(state)
+    TextWithNoAnimationsExample(state)
   }
 }
 
 @Composable
 @Preview
-fun TextOnlyExample(show: Boolean = false) {
+fun TextOnlyExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
   BpkFloatingNotification(
+    hostState = state,
     text = stringResource(id = R.string.stub_xs),
-    show = show
   )
 }
 
 @Composable
 @Preview
-fun TextWithIconExample(show: Boolean = false) {
+fun LongTextWithIconExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
   BpkFloatingNotification(
-    text = stringResource(id = R.string.stub_xs),
+    hostState = state,
+    text = stringResource(id = R.string.stub_sm),
     icon = BpkIcon.Heart,
-    show = show
   )
 }
 
 @Composable
 @Preview
-fun TextWithCtaExample(show: Boolean = false) {
+fun TextWithCtaExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
   BpkFloatingNotification(
+    hostState = state,
     text = stringResource(id = R.string.stub_xs),
     cta = Cta("Open", onClick = {}),
-    show = show
   )
 }
 
 @Composable
 @Preview
-fun TextWithIconWithCtaExample(show: Boolean = false) {
+fun LongTextWithIconWithCtaExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
   BpkFloatingNotification(
-    text = stringResource(id = R.string.stub_xs),
+    hostState = state,
+    text = stringResource(id = R.string.stub_sm),
     cta = Cta("Open", onClick = {}),
     icon = BpkIcon.Heart,
-    show = show
   )
 }
 
 @Composable
 @Preview
-fun TextWithNoAnimationsExample(show: Boolean = false, onExit: () -> Unit = {}) {
+fun TextWithNoAnimationsExample(state: BpkFloatingNotificationState = rememberBpkFloatingNotificationState()) {
   BpkFloatingNotification(
+    hostState = state,
     text = stringResource(id = R.string.stub_xs),
     animation = Animation(animateOnEnter = false, animateOnExit = false),
-    onExit = onExit,
-    show = show
   )
 }

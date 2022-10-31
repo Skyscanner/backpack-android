@@ -18,12 +18,10 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
-import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.FiniteAnimationSpec
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -35,60 +33,59 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 fun BpkFloatingNotification(
-  modifier: Modifier = Modifier,
+  hostState: BpkFloatingNotificationState,
   text: String,
-  show: Boolean,
+  modifier: Modifier = Modifier,
   icon: BpkIcon? = null,
-  animation: Animation = Animation(),
   cta: Cta? = null,
-  onExit: (() -> Unit)? = null,
-  ) {
+  animation: Animation = Animation(),
+) {
   val transitionDuration = 400
-  var internalShow by remember { mutableStateOf(true) }
-  if (show) {
-    LaunchedEffect(key1 = Unit) {
-      internalShow = true
-      delay(animation.hideAfter.toLong())
-      internalShow = false
-      onExit?.invoke()
-    }
+  val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = transitionDuration)
+  val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = transitionDuration)
+  val requiredSize = if (LocalConfiguration.current.screenWidthDp < 360) {
+    RequiredSize(width = 288.dp, height = 52.dp)
+  } else if (LocalConfiguration.current.screenWidthDp in 360..512) {
+    RequiredSize(width = 312.dp, height = 52.dp)
+  } else {
+    RequiredSize(width = 400.dp, height = 72.dp)
   }
-  val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = transitionDuration, easing = LinearEasing)
-  val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = transitionDuration, easing = LinearEasing)
+
   AnimatedVisibility(
     modifier = modifier,
-    visible = internalShow,
+    visible = hostState.visible,
     enter = if (animation.animateOnEnter) {
       slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec)
     } else {
@@ -110,12 +107,7 @@ fun BpkFloatingNotification(
         modifier = Modifier
           .clip(RoundedCornerShape(BpkBorderRadius.Md))
           .background(color = BpkTheme.colors.corePrimary)
-          .sizeIn(
-            minHeight = 52.dp,
-            maxHeight = 72.dp,
-            minWidth = if (LocalConfiguration.current.screenWidthDp < 360) 288.dp else 312.dp,
-            maxWidth = 400.dp
-          )
+          .requiredSize(height = requiredSize.height, width = requiredSize.width)
           .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
         contentAlignment = Alignment.CenterStart
       ) {
@@ -168,107 +160,48 @@ data class Cta(
 data class Animation(
   val animateOnEnter: Boolean = true,
   val animateOnExit: Boolean = true,
-  val hideAfter: Int = 4000,
 )
 
+@Stable
+class BpkFloatingNotificationState(
+  initiallyVisible: Boolean,
+  private val coroutineScope: CoroutineScope,
+) {
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
-@Composable
-private fun LightMode_TextOnly() {
-  // run in Interactive Mode
-  val (show, setShow) = remember { mutableStateOf(false) }
-  BpkFloatingNotification(
-    text = "Lorem",
-    show = show
-  )
-  LaunchedEffect(key1 = Unit) {
-    delay(1000)
-    setShow(true)
-  }
-}
+  private val animationDuration = 1000L
+  var visible by mutableStateOf(initiallyVisible)
+    private set
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
-@Composable
-private fun LightMode_Icon() {
-  val (show, setShow) = remember { mutableStateOf(false) }
-  BpkFloatingNotification(
-    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    icon = BpkIcon.Heart,
-    show = show
-  )
-  LaunchedEffect(key1 = Unit) {
-    delay(1000)
-    setShow(true)
-  }
-}
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
-@Composable
-private fun LightMode_CTA() {
-  val (show, setShow) = remember { mutableStateOf(false) }
-  BpkFloatingNotification(
-    text = "Lorem ipsum dolor sit amet sdfs fsfsd fsdfsdf dsdfs fsdfs",
-    icon = BpkIcon.Heart,
-    cta = Cta("longer text", onClick = {}),
-    show = show
-  )
-  LaunchedEffect(key1 = Unit) {
-    delay(1000)
-    setShow(true)
-  }
-}
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
-@Composable
-private fun LightMode_CTA_NoAnimation() {
-  val (show, setShow) = remember { mutableStateOf(false) }
-  BpkFloatingNotification(
-    text = "Lorem ipsum dolor sit amet",
-    icon = BpkIcon.Heart,
-    cta = Cta("View", onClick = {}),
-    animation = Animation(
-      animateOnEnter = false,
-      animateOnExit = false
-    ),
-    show = show
-  )
-  LaunchedEffect(key1 = Unit) {
-    delay(1000)
-    setShow(true)
-  }
-}
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, backgroundColor = 0x000000)
-@Composable
-private fun NightMode_CTA() {
-  val (show, setShow) = remember { mutableStateOf(false) }
-  BpkFloatingNotification(
-    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    icon = BpkIcon.Heart,
-    cta = Cta("Open", onClick = {}),
-    show = show
-  )
-  LaunchedEffect(key1 = Unit) {
-    delay(1000)
-    setShow(true)
-  }
-}
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
-@Composable
-private fun LightMode_TextOnly_RTL() {
-  CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-    // run in Interactive Mode
-    val (show, setShow) = remember { mutableStateOf(false) }
-    BpkFloatingNotification(
-      text = "خسیر خسی س خسهد ی سخهسیخ عسی سخیه دسخهی د سسخی دس خحهسید سیمسی  ",
-      icon = BpkIcon.Heart,
-      cta = Cta("تماشا", onClick = {}),
-      show = show
-    )
-    LaunchedEffect(key1 = Unit) {
-      delay(1000)
-      setShow(true)
+  fun show() {
+    visible = true
+    coroutineScope.launch {
+      delay(animationDuration)
+      visible = false
     }
   }
 }
+
+@Composable
+fun rememberBpkFloatingNotificationState(
+  initiallyVisible: Boolean = false
+): BpkFloatingNotificationState {
+  val scope = rememberCoroutineScope()
+  return rememberSaveable(
+    scope,
+    saver = Saver(
+      save = { it.visible },
+      restore = {
+        BpkFloatingNotificationState(initiallyVisible = it, scope).apply {
+          if (it) {
+            show()
+          }
+        }
+      }
+    )
+  ) {
+    BpkFloatingNotificationState(initiallyVisible = initiallyVisible, coroutineScope = scope)
+  }
+}
+
+private data class RequiredSize(val width: Dp, val height: Dp)
+

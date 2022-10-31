@@ -37,10 +37,10 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   @Test
   fun textOnly() {
     composed {
+      val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
       BpkFloatingNotification(
+        hostState = state,
         text = "Lorem ipsum dolor sit amet",
-        animation = Animation(animateOnExit = false, animateOnEnter = false),
-        show = true
       )
     }
   }
@@ -48,11 +48,11 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   @Test
   fun withIcon() {
     composed {
+      val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
       BpkFloatingNotification(
+        hostState = state,
         text = "Lorem ipsum dolor sit amet",
         icon = BpkIcon.Heart,
-        animation = Animation(animateOnExit = false, animateOnEnter = false),
-        show = true
       )
     }
   }
@@ -60,11 +60,11 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   @Test
   fun withCta() {
     composed {
+      val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
       BpkFloatingNotification(
+        hostState = state,
         text = "Lorem ipsum dolor sit amet",
         cta = Cta("Open", onClick = {}),
-        animation = Animation(animateOnExit = false, animateOnEnter = false),
-        show = true
       )
     }
   }
@@ -72,12 +72,12 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   @Test
   fun withIconAndCta() {
     composed {
+      val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
       BpkFloatingNotification(
+        hostState = state,
         text = "Lorem ipsum dolor sit amet",
         cta = Cta("Open", onClick = {}),
         icon = BpkIcon.Heart,
-        animation = Animation(animateOnExit = false, animateOnEnter = false),
-        show = true
       )
     }
   }
