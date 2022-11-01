@@ -19,8 +19,14 @@
 package net.skyscanner.backpack.compose.floatingnotification
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -73,6 +79,7 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.clickable
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BpkFloatingNotification(
   hostState: BpkFloatingNotificationState,
@@ -112,8 +119,27 @@ fun BpkFloatingNotification(
     ) {
 
       lastAvailableData?.let { lastData ->
-        BpkFloatingNotificationImpl(data = lastData)
+
+        AnimatedContent(targetState = lastData) { it ->
+          BpkFloatingNotificationImpl(
+            data = it,
+            modifier = Modifier.animateEnterExit(
+              enter = EnterTransition.None,
+              exit = ExitTransition.None,
+//              enter = slideInVertically(
+//                slideAnimationSpec,
+//                initialOffsetY = { it }) + fadeIn(animationSpec = tween(durationMillis = TRANSITION_DURATION * 5)),
+//              exit = slideOutVertically(
+//                slideAnimationSpec,
+//                targetOffsetY = { -it }) + fadeOut(animationSpec = tween(durationMillis = TRANSITION_DURATION * 5)),
+            ),
+          )
+        }
+
       }
+
+
+//      }
 
     }
 
