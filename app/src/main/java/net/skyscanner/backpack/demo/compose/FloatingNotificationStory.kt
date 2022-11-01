@@ -49,7 +49,7 @@ fun FloatingNotificationStory(
 
     val stubXs = stringResource(id = R.string.stub_xs)
     val stubSm = stringResource(id = R.string.stub_sm)
-    val open = stringResource(id = R.string.floating_notification_open)
+    val dismiss = stringResource(id = R.string.generic_dismiss)
 
     Column(
       modifier = Modifier.padding(BpkSpacing.Base),
@@ -77,7 +77,7 @@ fun FloatingNotificationStory(
         scope.launch {
           state.show(
             message = stubXs,
-            action = open,
+            action = dismiss,
             onClick = {},
           )
         }
@@ -88,7 +88,7 @@ fun FloatingNotificationStory(
           state.show(
             message = stubSm,
             icon = BpkIcon.Heart,
-            action = open,
+            action = dismiss,
             onClick = {},
           )
         }

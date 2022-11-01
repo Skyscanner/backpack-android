@@ -27,28 +27,31 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Snackbar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 internal fun BpkFloatingNotificationImpl(
@@ -80,28 +83,21 @@ internal fun BpkFloatingNotificationImpl(
       }
 
       BpkText(
-        modifier = Modifier.weight(0.8f),
+        modifier = Modifier.weight(1f),
         text = data.message,
         maxLines = 2,
-        style = BpkTheme.typography.footnote
+        style = BpkTheme.typography.footnote,
+        overflow = TextOverflow.Ellipsis,
       )
 
       data.action?.let { action ->
-        Box(
-          modifier = Modifier
-            .weight(0.2f)
-            .sizeIn(minHeight = BpkSpacing.Xxl, minWidth = BpkSpacing.Xxl)
-            .clickable { data.performAction() },
-          contentAlignment = Alignment.Center
-        ) {
-          BpkText(
-            text = action,
-            textAlign = TextAlign.Center,
-            style = BpkTheme.typography.label2
-          )
-        }
+        BpkButton(
+          text = action,
+          type = BpkButtonType.LinkOnDark,
+          onClick = { data.performAction() },
+          size = BpkButtonSize.Default,
+        )
       }
-
     }
   }
 }

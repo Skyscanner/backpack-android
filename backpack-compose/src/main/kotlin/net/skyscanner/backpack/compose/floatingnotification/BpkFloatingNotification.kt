@@ -94,15 +94,16 @@ class BpkFloatingNotificationState {
     action: String? = null,
     onClick: (() -> Unit)? = null,
     icon: BpkIcon? = null,
-  ): SnackbarResult = mutex.withLock {
-    try {
-      return suspendCancellableCoroutine { continuation ->
-        currentData = BpkFloatingNotificationData(message, action, onClick, icon, continuation)
+  ): SnackbarResult =
+    mutex.withLock {
+      try {
+        return suspendCancellableCoroutine { continuation ->
+          currentData = BpkFloatingNotificationData(message, icon, action, onClick, continuation)
+        }
+      } finally {
+        currentData = null
       }
-    } finally {
-      currentData = null
     }
-  }
 }
 
 @Composable

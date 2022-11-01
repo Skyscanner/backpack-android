@@ -78,8 +78,6 @@
   <string name="snackbar_icon_content_description">Close</string>
   <string name="snackbar_action">Action!</string>
 
-  <string name="floating_notification_show">Show Notifications!</string>
-  <string name="floating_notification_open">Open</string>
 
   <string name="story_badge_compose">Compose</string>
 
@@ -204,4 +202,5 @@
   <string name="floating_notification_text_with_icon">Text with icon</string>
   <string name="floating_notification_with_action">With action</string>
   <string name="floating_notification_with_icon_and_action">With icon and action</string>
+  <string name="generic_dismiss">Dismiss</string>
 </resources>

@@ -26,9 +26,9 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 @Stable
 internal data class BpkFloatingNotificationData(
   val message: String,
-  val action: String?,
-  val onClick: (() -> Unit)?,
   val icon: BpkIcon?,
+  val action: String?,
+  private val onClick: (() -> Unit)?,
   private val continuation: CancellableContinuation<SnackbarResult>
 ) {
 
