@@ -42,6 +42,9 @@ fun FloatingNotificationStory() {
   val textWithCtaState = rememberBpkFloatingNotificationState()
   val allState = rememberBpkFloatingNotificationState()
 
+  val stubXs = stringResource(id = R.string.stub_xs)
+  val stubSm = stringResource(id = R.string.stub_sm)
+  val open = stringResource(id = R.string.floating_notification_open)
   BpkButton(
     modifier = Modifier
       .fillMaxWidth()
@@ -51,20 +54,20 @@ fun FloatingNotificationStory() {
   ) {
     scope.launch {
       textOnlyState.show(
-        text = "Lorem ipsum dolor sit amet."
+        text = stubXs
       )
       longTextWithIconState.show(
-        text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+        text = stubSm,
         icon = BpkIcon.Heart,
       )
       textWithCtaState.show(
-        text = "Lorem ipsum dolor sit amet.",
-        cta = Cta("Open", onClick = {})
+        text = stubXs,
+        cta = Cta(open, onClick = {})
       )
       allState.show(
-        text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
+        text = stubSm,
         icon = BpkIcon.Heart,
-        cta = Cta("Open", onClick = {})
+        cta = Cta(open, onClick = {})
       )
     }
   }

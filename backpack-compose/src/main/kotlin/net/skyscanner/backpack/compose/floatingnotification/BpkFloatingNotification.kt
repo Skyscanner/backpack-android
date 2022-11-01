@@ -49,6 +49,14 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.MOBILE_MAX_WIDTH
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.MOBILE_REQUIRED_HEIGHT
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.MOBILE_REQUIRED_WIDTH
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.SMALL_MOBILE_REQUIRED_HEIGHT
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.SMALL_MOBILE_REQUIRED_WIDTH
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.TABLET_REQUIRED_HEIGHT
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.TABLET_REQUIRED_WIDTH
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -62,16 +70,15 @@ fun BpkFloatingNotification(
   hostState: BpkFloatingNotificationState,
   modifier: Modifier = Modifier,
 ) {
-  val data = hostState.data
-  val transitionDuration = 400
-  val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = transitionDuration)
-  val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = transitionDuration)
-  val requiredSize = if (LocalConfiguration.current.screenWidthDp < 360) {
-    RequiredSize(width = 288.dp, height = 52.dp)
-  } else if (LocalConfiguration.current.screenWidthDp in 360..512) {
-    RequiredSize(width = 312.dp, height = 52.dp)
+  val data = hostState.data ?: return
+  val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = TRANSITION_DURATION)
+  val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = TRANSITION_DURATION)
+  val requiredSize = if (LocalConfiguration.current.screenWidthDp < SMALL_MOBILE_MAX_WIDTH) {
+    RequiredSize(width = SMALL_MOBILE_REQUIRED_WIDTH, height = SMALL_MOBILE_REQUIRED_HEIGHT)
+  } else if (LocalConfiguration.current.screenWidthDp in SMALL_MOBILE_MAX_WIDTH..MOBILE_MAX_WIDTH) {
+    RequiredSize(width = MOBILE_REQUIRED_WIDTH, height = MOBILE_REQUIRED_HEIGHT)
   } else {
-    RequiredSize(width = 400.dp, height = 72.dp)
+    RequiredSize(width = TABLET_REQUIRED_WIDTH, height = TABLET_REQUIRED_HEIGHT)
   }
 
   AnimatedVisibility(
@@ -98,7 +105,7 @@ fun BpkFloatingNotification(
           horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
           verticalAlignment = Alignment.CenterVertically
         ) {
-          data?.icon?.let { icon ->
+          data.icon?.let { icon ->
             BpkIcon(
               icon = icon,
               contentDescription = null,
@@ -108,12 +115,12 @@ fun BpkFloatingNotification(
           }
           BpkText(
             modifier = Modifier.weight(0.8f),
-            text = data?.text ?: "",
+            text = data.text,
             maxLines = 2,
             color = BpkTheme.colors.textOnDark,
             style = BpkTheme.typography.footnote
           )
-          data?.cta?.let { cta ->
+          data.cta?.let { cta ->
             Box(
               modifier = Modifier
                 .weight(0.2f)
@@ -154,16 +161,17 @@ class BpkFloatingNotificationState(initiallyVisible: Boolean) {
   private val animationDuration = 4000L
   var visible by mutableStateOf(initiallyVisible)
     private set
-
   suspend fun show(
     text: String,
     icon: BpkIcon? = null,
     cta: Cta? = null,
   ) {
     data = BpkFloatingNotificationData(text, icon, cta)
+    delay(TRANSITION_DURATION / 2L)
     visible = true
     delay(animationDuration)
     visible = false
+    delay(TRANSITION_DURATION / 2L)
     data = null
   }
 }
@@ -177,4 +185,17 @@ fun rememberBpkFloatingNotificationState(
     }
 }
 
+internal object BpkFloatingNotificationSizes {
+  const val SMALL_MOBILE_MAX_WIDTH = 360
+  const val MOBILE_MAX_WIDTH = 512
+
+  val SMALL_MOBILE_REQUIRED_WIDTH = 288.dp
+  val SMALL_MOBILE_REQUIRED_HEIGHT = 52.dp
+  val MOBILE_REQUIRED_WIDTH = 312.dp
+  val MOBILE_REQUIRED_HEIGHT = 52.dp
+  val TABLET_REQUIRED_WIDTH = 400.dp
+  val TABLET_REQUIRED_HEIGHT = 72.dp
+}
+
+private const val TRANSITION_DURATION = 400
 private data class RequiredSize(val width: Dp, val height: Dp)

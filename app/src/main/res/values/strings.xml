@@ -79,6 +79,7 @@
   <string name="snackbar_action">Action!</string>
 
   <string name="floating_notification_show">Show Notifications!</string>
+  <string name="floating_notification_open">Open</string>
 
   <string name="story_badge_compose">Compose</string>
 
