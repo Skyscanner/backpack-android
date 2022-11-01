@@ -19,6 +19,13 @@
 package net.skyscanner.backpack.compose.floatingnotification
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -43,6 +50,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.delay
@@ -80,15 +88,36 @@ fun BpkFloatingNotification(
     }
   }
 
-  val data = hostState.currentData ?: return
-
   Box(
     modifier = modifier
       .fillMaxWidth()
       .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = 30.dp),
     contentAlignment = Alignment.BottomCenter,
   ) {
-    BpkFloatingNotificationImpl(data = data)
+
+    val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = TRANSITION_DURATION)
+    val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = TRANSITION_DURATION)
+
+
+    var lastAvailableData by remember { mutableStateOf(currentData) }
+    if (currentData != null) {
+      lastAvailableData = currentData
+    }
+
+    AnimatedVisibility(
+      modifier = modifier,
+      visible = currentData != null,
+      enter = slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec),
+      exit = slideOutVertically(slideAnimationSpec, targetOffsetY = { it / 2 }) + fadeOut(animationSpec = fadeAnimationSpec),
+    ) {
+
+      lastAvailableData?.let { lastData ->
+        BpkFloatingNotificationImpl(data = lastData)
+      }
+
+    }
+
+
   }
 
 

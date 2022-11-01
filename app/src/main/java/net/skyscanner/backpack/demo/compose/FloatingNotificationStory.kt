@@ -36,10 +36,10 @@ import net.skyscanner.backpack.demo.R
 @Composable
 fun FloatingNotificationStory() {
   val scope = rememberCoroutineScope()
-  val textOnlyState = rememberBpkFloatingNotificationState(initiallyVisible = true)
-  val longTextWithIconState = rememberBpkFloatingNotificationState(initiallyVisible = true)
-  val textWithCtaState = rememberBpkFloatingNotificationState(initiallyVisible = true)
-  val allState = rememberBpkFloatingNotificationState(initiallyVisible = true)
+  val textOnlyState = rememberBpkFloatingNotificationState()
+  val longTextWithIconState = rememberBpkFloatingNotificationState()
+  val textWithCtaState = rememberBpkFloatingNotificationState()
+  val allState = rememberBpkFloatingNotificationState()
 
   val stubXs = stringResource(id = R.string.stub_xs)
   val stubSm = stringResource(id = R.string.stub_sm)
