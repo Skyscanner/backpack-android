@@ -39,7 +39,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun textOnly() {
     composed {
       val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(hostState = state)
+      BpkFloatingNotification(state = state)
       LaunchedEffect(key1 = Unit) {
         state.show(
           message = "Lorem ipsum dolor sit amet"
@@ -52,7 +52,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun withIcon() {
     composed {
       val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(hostState = state)
+      BpkFloatingNotification(state = state)
       LaunchedEffect(key1 = Unit) {
         state.show(
           message = "Lorem ipsum dolor sit amet",
@@ -66,7 +66,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun withCta() {
     composed {
       val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(hostState = state)
+      BpkFloatingNotification(state = state)
       LaunchedEffect(key1 = Unit) {
         state.show(
           message = "Lorem ipsum dolor sit amet",
@@ -81,7 +81,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun withIconAndCta() {
     composed {
       val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(hostState = state)
+      BpkFloatingNotification(state = state)
       LaunchedEffect(key1 = Unit) {
         state.show(
           message = "Lorem ipsum dolor sit amet",

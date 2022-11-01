@@ -72,7 +72,7 @@ fun FloatingNotificationStory() {
 //      )
     }
   }
-  BpkFloatingNotification(hostState = textOnlyState)
+  BpkFloatingNotification(state = textOnlyState)
 //  BpkFloatingNotification(hostState = longTextWithIconState)
 //  BpkFloatingNotification(hostState = textWithCtaState)
 //  BpkFloatingNotification(hostState = allState)

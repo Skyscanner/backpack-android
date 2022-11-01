@@ -20,13 +20,8 @@ package net.skyscanner.backpack.compose.floatingnotification
 
 import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.Crossfade
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.FiniteAnimationSpec
-import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -55,8 +50,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.delay
@@ -82,11 +75,11 @@ import net.skyscanner.backpack.compose.utils.clickable
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BpkFloatingNotification(
-  hostState: BpkFloatingNotificationState,
+  state: BpkFloatingNotificationState,
   modifier: Modifier = Modifier,
 ) {
 
-  val currentData = hostState.currentData
+  val currentData = state.currentData
   LaunchedEffect(currentData) {
     if (currentData != null) {
       val duration = 4000L
@@ -95,57 +88,30 @@ fun BpkFloatingNotification(
     }
   }
 
-  Box(
-    modifier = modifier
-      .fillMaxWidth()
-      .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = 30.dp),
-    contentAlignment = Alignment.BottomCenter,
-  ) {
+  AnimatedContent(
+    targetState = currentData,
+    modifier = modifier,
+    transitionSpec = {
+      ContentTransform(
+        targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { it / 2 },
+        initialContentExit = fadeOut(tween(TRANSITION_DURATION)) + slideOutVertically(tween(TRANSITION_DURATION)) { it / 2 },
+      )
+    },
+  ) { data ->
 
-    val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = TRANSITION_DURATION)
-    val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = TRANSITION_DURATION)
-
-
-    var lastAvailableData by remember { mutableStateOf(currentData) }
-    if (currentData != null) {
-      lastAvailableData = currentData
-    }
-
-    AnimatedVisibility(
-      modifier = modifier,
-      visible = currentData != null,
-      enter = slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec),
-      exit = slideOutVertically(slideAnimationSpec, targetOffsetY = { it / 2 }) + fadeOut(animationSpec = fadeAnimationSpec),
+    Box(
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = 30.dp),
+      contentAlignment = Alignment.BottomCenter,
     ) {
 
-      lastAvailableData?.let { lastData ->
-
-        AnimatedContent(targetState = lastData) { it ->
-          BpkFloatingNotificationImpl(
-            data = it,
-            modifier = Modifier.animateEnterExit(
-              enter = EnterTransition.None,
-              exit = ExitTransition.None,
-//              enter = slideInVertically(
-//                slideAnimationSpec,
-//                initialOffsetY = { it }) + fadeIn(animationSpec = tween(durationMillis = TRANSITION_DURATION * 5)),
-//              exit = slideOutVertically(
-//                slideAnimationSpec,
-//                targetOffsetY = { -it }) + fadeOut(animationSpec = tween(durationMillis = TRANSITION_DURATION * 5)),
-            ),
-          )
-        }
-
+      if (data != null) {
+        BpkFloatingNotificationImpl(data = data)
       }
 
-
-//      }
-
     }
-
-
   }
-
 
 }
 
@@ -155,17 +121,10 @@ private fun BpkFloatingNotificationImpl(
   data: BpkFloatingNotificationData,
   modifier: Modifier = Modifier,
 ) {
-  val requiredSize = if (LocalConfiguration.current.screenWidthDp < SMALL_MOBILE_MAX_WIDTH) {
-    RequiredSize(width = SMALL_MOBILE_REQUIRED_WIDTH, height = SMALL_MOBILE_REQUIRED_HEIGHT)
-  } else if (LocalConfiguration.current.screenWidthDp in SMALL_MOBILE_MAX_WIDTH..MOBILE_MAX_WIDTH) {
-    RequiredSize(width = MOBILE_REQUIRED_WIDTH, height = MOBILE_REQUIRED_HEIGHT)
-  } else {
-    RequiredSize(width = TABLET_REQUIRED_WIDTH, height = TABLET_REQUIRED_HEIGHT)
-  }
 
   Snackbar(
     modifier = modifier
-      .requiredSize(height = requiredSize.height, width = requiredSize.width)
+      .floatingNotificationSize(LocalConfiguration.current)
       .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
     shape = RoundedCornerShape(BpkBorderRadius.Md),
     backgroundColor = BpkTheme.colors.corePrimary,
@@ -208,6 +167,17 @@ private fun BpkFloatingNotificationImpl(
     }
   }
 }
+
+private fun Modifier.floatingNotificationSize(configuration: Configuration): Modifier =
+  run {
+    if (configuration.screenWidthDp < SMALL_MOBILE_MAX_WIDTH) {
+      requiredSize(width = SMALL_MOBILE_REQUIRED_WIDTH, height = SMALL_MOBILE_REQUIRED_HEIGHT)
+    } else if (configuration.screenWidthDp in SMALL_MOBILE_MAX_WIDTH..MOBILE_MAX_WIDTH) {
+      requiredSize(width = MOBILE_REQUIRED_WIDTH, height = MOBILE_REQUIRED_HEIGHT)
+    } else {
+      requiredSize(width = TABLET_REQUIRED_WIDTH, height = TABLET_REQUIRED_HEIGHT)
+    }
+  }
 
 data class Cta(
   val text: String,
@@ -278,16 +248,14 @@ internal object BpkFloatingNotificationSizes {
   val TABLET_REQUIRED_HEIGHT = 72.dp
 }
 
-private const val TRANSITION_DURATION = 400
-
-private data class RequiredSize(val width: Dp, val height: Dp)
+private const val TRANSITION_DURATION = 300
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
 @Composable
 private fun LightMode_TextOnly() {
   // run in Interactive Mode
   val state = rememberBpkFloatingNotificationState()
-  BpkFloatingNotification(hostState = state)
+  BpkFloatingNotification(state = state)
   LaunchedEffect(key1 = Unit) {
     state.show(message = "Lorem ipsum dolor sit amet")
   }
