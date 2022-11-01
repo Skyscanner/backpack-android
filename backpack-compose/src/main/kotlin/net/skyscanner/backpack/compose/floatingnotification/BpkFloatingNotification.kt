@@ -70,7 +70,6 @@ fun BpkFloatingNotification(
   hostState: BpkFloatingNotificationState,
   modifier: Modifier = Modifier,
 ) {
-  val data = hostState.data ?: return
   val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = TRANSITION_DURATION)
   val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = TRANSITION_DURATION)
   val requiredSize = if (LocalConfiguration.current.screenWidthDp < SMALL_MOBILE_MAX_WIDTH) {
@@ -87,6 +86,7 @@ fun BpkFloatingNotification(
     enter = slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec),
     exit = slideOutVertically(slideAnimationSpec, targetOffsetY = { it / 2 }) + fadeOut(animationSpec = fadeAnimationSpec)
   ) {
+    val data = hostState.data ?: return@AnimatedVisibility
     Box(
       modifier = Modifier
         .fillMaxWidth()
@@ -161,17 +161,17 @@ class BpkFloatingNotificationState(initiallyVisible: Boolean) {
   private val animationDuration = 4000L
   var visible by mutableStateOf(initiallyVisible)
     private set
+
   suspend fun show(
     text: String,
     icon: BpkIcon? = null,
     cta: Cta? = null,
   ) {
     data = BpkFloatingNotificationData(text, icon, cta)
-    delay(TRANSITION_DURATION / 2L)
     visible = true
     delay(animationDuration)
     visible = false
-    delay(TRANSITION_DURATION / 2L)
+    delay(TRANSITION_DURATION.toLong())
     data = null
   }
 }
@@ -180,9 +180,9 @@ class BpkFloatingNotificationState(initiallyVisible: Boolean) {
 fun rememberBpkFloatingNotificationState(
   initiallyVisible: Boolean = false
 ): BpkFloatingNotificationState {
-    return remember {
-      BpkFloatingNotificationState(initiallyVisible = initiallyVisible)
-    }
+  return remember {
+    BpkFloatingNotificationState(initiallyVisible = initiallyVisible)
+  }
 }
 
 internal object BpkFloatingNotificationSizes {
@@ -198,4 +198,5 @@ internal object BpkFloatingNotificationSizes {
 }
 
 private const val TRANSITION_DURATION = 400
+
 private data class RequiredSize(val width: Dp, val height: Dp)
