@@ -18,12 +18,16 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
@@ -34,39 +38,63 @@ import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.demo.R
 
 @Composable
-fun FloatingNotificationStory() {
-  val scope = rememberCoroutineScope()
-  val state = rememberBpkFloatingNotificationState()
+@Preview
+fun FloatingNotificationStory(
+  modifier: Modifier = Modifier,
+) {
+  Box(modifier) {
 
-  val stubXs = stringResource(id = R.string.stub_xs)
-  val stubSm = stringResource(id = R.string.stub_sm)
-  val open = stringResource(id = R.string.floating_notification_open)
-  BpkButton(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(BpkSpacing.Base),
-    text = stringResource(id = R.string.floating_notification_show),
-  ) {
-    scope.launch {
-      state.show(
-        message = stubXs
-      )
-      state.show(
-        message = stubSm,
-        icon = BpkIcon.Heart,
-      )
-      state.show(
-        message = stubXs,
-        action = open,
-        onClick = {}
-      )
-      state.show(
-        message = stubSm,
-        icon = BpkIcon.Heart,
-        action = open,
-        onClick = {}
-      )
+    val state = rememberBpkFloatingNotificationState()
+    val scope: CoroutineScope = rememberCoroutineScope()
+
+    val stubXs = stringResource(id = R.string.stub_xs)
+    val stubSm = stringResource(id = R.string.stub_sm)
+    val open = stringResource(id = R.string.floating_notification_open)
+
+    Column(
+      modifier = Modifier.padding(BpkSpacing.Base),
+      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+
+      BpkButton(text = stringResource(R.string.floating_notification_just_text)) {
+        scope.launch {
+          state.show(
+            message = stubXs,
+          )
+        }
+      }
+
+      BpkButton(text = stringResource(R.string.floating_notification_text_with_icon)) {
+        scope.launch {
+          state.show(
+            message = stubSm,
+            icon = BpkIcon.Heart,
+          )
+        }
+      }
+
+      BpkButton(text = stringResource(R.string.floating_notification_with_action)) {
+        scope.launch {
+          state.show(
+            message = stubXs,
+            action = open,
+            onClick = {},
+          )
+        }
+      }
+
+      BpkButton(text = stringResource(R.string.floating_notification_with_icon_and_action)) {
+        scope.launch {
+          state.show(
+            message = stubSm,
+            icon = BpkIcon.Heart,
+            action = open,
+            onClick = {},
+          )
+        }
+      }
     }
+
+    BpkFloatingNotification(state)
   }
-  BpkFloatingNotification(state = state)
 }

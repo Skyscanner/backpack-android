@@ -19,16 +19,9 @@
 package net.skyscanner.backpack.compose.floatingnotification
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.AnimatedContentScope
-import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.SnackbarResult
 import androidx.compose.runtime.Composable
@@ -41,7 +34,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.sync.Mutex
@@ -76,7 +68,7 @@ fun BpkFloatingNotification(
 
     Box(
       modifier = Modifier
-        .fillMaxWidth()
+        .fillMaxSize()
         .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = 30.dp),
       contentAlignment = Alignment.BottomCenter,
     ) {

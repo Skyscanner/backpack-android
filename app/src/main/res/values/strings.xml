@@ -200,4 +200,8 @@
   <string name="generic_scroll_the_list">Scroll the list…</string>
   <string name="generic_to_see_the_effect">to see the effect</string>
   <string name="generic_list_item">Item #%d</string>
+  <string name="floating_notification_just_text">Just text</string>
+  <string name="floating_notification_text_with_icon">Text with icon</string>
+  <string name="floating_notification_with_action">With action</string>
+  <string name="floating_notification_with_icon_and_action">With icon and action</string>
 </resources>

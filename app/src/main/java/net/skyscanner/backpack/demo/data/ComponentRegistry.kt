@@ -293,12 +293,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { BpkFabStory() },
       )
     ),
-    "Floating Notification" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_COMPOSE composeStory { FloatingNotificationStory() },
-      )
-    ),
+    "Floating Notification" composeStory { FloatingNotificationStory() },
     "Horizontal Nav" story NodeData(
       { children -> TabStory of children },
       mapOf(
