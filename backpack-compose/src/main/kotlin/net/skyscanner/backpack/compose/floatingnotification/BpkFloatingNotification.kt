@@ -144,7 +144,7 @@ private fun BpkFloatingNotificationImpl(
           modifier = Modifier
             .weight(0.2f)
             .sizeIn(minHeight = BpkSpacing.Xxl, minWidth = BpkSpacing.Xxl)
-            .clickable { data.onClick?.invoke() },
+            .clickable { data.performAction() },
           contentAlignment = Alignment.Center
         ) {
           BpkText(
@@ -174,6 +174,7 @@ data class BpkFloatingNotificationData(
 
   fun performAction() {
     if (continuation.isActive) continuation.resume(SnackbarResult.ActionPerformed, onCancellation = null)
+    onClick?.invoke()
   }
 
   fun dismiss() {
