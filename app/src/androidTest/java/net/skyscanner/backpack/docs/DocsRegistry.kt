@@ -90,6 +90,7 @@ object DocsRegistry {
     ViewScreenshot("Flare - View - Rounded", "rounded"),
     ViewScreenshot("Flare - View - Inset padding mode", "inset-padding"),
     ComposeScreenshot("Flare - Compose", "default"),
+    ComposeScreenshot("Floating Notification", "default") { setupFloatingNotification(it) },
     ViewScreenshot("Horizontal Nav - View", "default"),
     ComposeScreenshot("Horizontal Nav - Compose", "default"),
     ViewScreenshot("Floating Action Button - View", "default"),
@@ -213,6 +214,10 @@ private fun setupSnackbar() {
     .perform(ViewActions.click())
 
   InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+}
+
+private fun setupFloatingNotification(testRule: ComposeTestRule) {
+  testRule.onNodeWithTag("Trigger").performClick().assertIsDisplayed()
 }
 
 private fun setupSnackbarIconAction() {
