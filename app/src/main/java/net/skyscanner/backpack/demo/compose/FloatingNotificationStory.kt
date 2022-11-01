@@ -36,10 +36,7 @@ import net.skyscanner.backpack.demo.R
 @Composable
 fun FloatingNotificationStory() {
   val scope = rememberCoroutineScope()
-  val textOnlyState = rememberBpkFloatingNotificationState()
-//  val longTextWithIconState = rememberBpkFloatingNotificationState()
-//  val textWithCtaState = rememberBpkFloatingNotificationState()
-//  val allState = rememberBpkFloatingNotificationState()
+  val state = rememberBpkFloatingNotificationState()
 
   val stubXs = stringResource(id = R.string.stub_xs)
   val stubSm = stringResource(id = R.string.stub_sm)
@@ -49,31 +46,27 @@ fun FloatingNotificationStory() {
       .fillMaxWidth()
       .padding(BpkSpacing.Base),
     text = stringResource(id = R.string.floating_notification_show),
-    // enabled = !textOnlyState.visible && !longTextWithIconState.visible && !textWithCtaState.visible && !allState.visible
   ) {
     scope.launch {
-      textOnlyState.show(
+      state.show(
         message = stubXs
       )
-      textOnlyState.show(
+      state.show(
         message = stubSm,
         icon = BpkIcon.Heart,
       )
-//      textWithCtaState.show(
-//        message = stubXs,
-//        action = open,
-//        onClick = {}
-//      )
-//      allState.show(
-//        message = stubSm,
-//        icon = BpkIcon.Heart,
-//        action = open,
-//        onClick = {}
-//      )
+      state.show(
+        message = stubXs,
+        action = open,
+        onClick = {}
+      )
+      state.show(
+        message = stubSm,
+        icon = BpkIcon.Heart,
+        action = open,
+        onClick = {}
+      )
     }
   }
-  BpkFloatingNotification(state = textOnlyState)
-//  BpkFloatingNotification(hostState = longTextWithIconState)
-//  BpkFloatingNotification(hostState = textWithCtaState)
-//  BpkFloatingNotification(hostState = allState)
+  BpkFloatingNotification(state = state)
 }

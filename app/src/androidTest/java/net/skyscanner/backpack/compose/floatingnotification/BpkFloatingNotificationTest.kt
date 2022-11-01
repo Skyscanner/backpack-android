@@ -18,8 +18,11 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
-import androidx.compose.runtime.LaunchedEffect
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Heart
@@ -28,7 +31,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 class BpkFloatingNotificationTest : BpkSnapshotTest() {
+
+  private val state = BpkFloatingNotificationState()
+  private val scope = TestScope(UnconfinedTestDispatcher())
 
   @Before
   fun setup() {
@@ -37,59 +44,53 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
   @Test
   fun textOnly() {
-    composed {
-      val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(state = state)
-      LaunchedEffect(key1 = Unit) {
-        state.show(
-          message = "Lorem ipsum dolor sit amet"
-        )
-      }
+    scope.launch {
+      state.show(
+        message = "Lorem ipsum dolor sit amet"
+      )
     }
+    composed { BpkFloatingNotification(state) }
   }
 
   @Test
   fun withIcon() {
+    scope.launch {
+      state.show(
+        message = "Lorem ipsum dolor sit amet",
+        icon = BpkIcon.Heart,
+      )
+    }
     composed {
-      val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(state = state)
-      LaunchedEffect(key1 = Unit) {
-        state.show(
-          message = "Lorem ipsum dolor sit amet",
-          icon = BpkIcon.Heart,
-        )
-      }
+      BpkFloatingNotification(state)
     }
   }
 
   @Test
   fun withCta() {
+    scope.launch {
+      state.show(
+        message = "Lorem ipsum dolor sit amet",
+        action = "Open",
+        onClick = {},
+      )
+    }
     composed {
-      val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(state = state)
-      LaunchedEffect(key1 = Unit) {
-        state.show(
-          message = "Lorem ipsum dolor sit amet",
-          action = "Open",
-          onClick = {},
-        )
-      }
+      BpkFloatingNotification(state)
     }
   }
 
   @Test
   fun withIconAndCta() {
+    scope.launch {
+      state.show(
+        message = "Lorem ipsum dolor sit amet",
+        action = "Open",
+        onClick = {},
+        icon = BpkIcon.Heart,
+      )
+    }
     composed {
-      val state = rememberBpkFloatingNotificationState(initiallyVisible = true)
-      BpkFloatingNotification(state = state)
-      LaunchedEffect(key1 = Unit) {
-        state.show(
-          message = "Lorem ipsum dolor sit amet",
-          action = "Open",
-          onClick = {},
-          icon = BpkIcon.Heart,
-        )
-      }
+      BpkFloatingNotification(state)
     }
   }
 }
