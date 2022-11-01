@@ -23,6 +23,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
@@ -40,6 +41,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalAccessibilityManager
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
@@ -73,16 +75,7 @@ fun BpkFloatingNotification(
   modifier: Modifier = Modifier,
 ) {
 
-  val requiredSize = if (LocalConfiguration.current.screenWidthDp < SMALL_MOBILE_MAX_WIDTH) {
-    RequiredSize(width = SMALL_MOBILE_REQUIRED_WIDTH, height = SMALL_MOBILE_REQUIRED_HEIGHT)
-  } else if (LocalConfiguration.current.screenWidthDp in SMALL_MOBILE_MAX_WIDTH..MOBILE_MAX_WIDTH) {
-    RequiredSize(width = MOBILE_REQUIRED_WIDTH, height = MOBILE_REQUIRED_HEIGHT)
-  } else {
-    RequiredSize(width = TABLET_REQUIRED_WIDTH, height = TABLET_REQUIRED_HEIGHT)
-  }
-
   val currentData = hostState.currentData
-  val accessibilityManager = LocalAccessibilityManager.current
   LaunchedEffect(currentData) {
     if (currentData != null) {
       val duration = 4000L
@@ -93,56 +86,72 @@ fun BpkFloatingNotification(
 
   val data = hostState.currentData ?: return
 
-  Snackbar {
-    Box(
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = 30.dp),
-      contentAlignment = Alignment.BottomCenter
+  Box(
+    modifier = modifier
+      .fillMaxWidth()
+      .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = 30.dp),
+    contentAlignment = Alignment.BottomCenter,
+  ) {
+    BpkFloatingNotificationImpl(data = data)
+  }
+
+
+}
+
+
+@Composable
+private fun BpkFloatingNotificationImpl(
+  data: BpkFloatingNotificationData,
+  modifier: Modifier = Modifier,
+) {
+  val requiredSize = if (LocalConfiguration.current.screenWidthDp < SMALL_MOBILE_MAX_WIDTH) {
+    RequiredSize(width = SMALL_MOBILE_REQUIRED_WIDTH, height = SMALL_MOBILE_REQUIRED_HEIGHT)
+  } else if (LocalConfiguration.current.screenWidthDp in SMALL_MOBILE_MAX_WIDTH..MOBILE_MAX_WIDTH) {
+    RequiredSize(width = MOBILE_REQUIRED_WIDTH, height = MOBILE_REQUIRED_HEIGHT)
+  } else {
+    RequiredSize(width = TABLET_REQUIRED_WIDTH, height = TABLET_REQUIRED_HEIGHT)
+  }
+
+  Snackbar(
+    modifier = modifier
+      .requiredSize(height = requiredSize.height, width = requiredSize.width)
+      .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+    shape = RoundedCornerShape(BpkBorderRadius.Md),
+    backgroundColor = BpkTheme.colors.corePrimary,
+    contentColor = BpkTheme.colors.textOnDark,
+  ) {
+
+    Row(
+      modifier = Modifier.fillMaxHeight(),
+      horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+      verticalAlignment = Alignment.CenterVertically,
     ) {
-      Box(
-        modifier = Modifier
-          .clip(RoundedCornerShape(BpkBorderRadius.Md))
-          .background(color = BpkTheme.colors.corePrimary)
-          .requiredSize(height = requiredSize.height, width = requiredSize.width)
-          .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
-        contentAlignment = Alignment.CenterStart
-      ) {
-        Row(
-          horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-          verticalAlignment = Alignment.CenterVertically
+      data.icon?.let { icon ->
+        BpkIcon(
+          icon = icon,
+          contentDescription = null,
+          size = BpkIconSize.Small,
+        )
+      }
+      BpkText(
+        modifier = Modifier.weight(0.8f),
+        text = data.message,
+        maxLines = 2,
+        style = BpkTheme.typography.footnote
+      )
+      data.action?.let { action ->
+        Box(
+          modifier = Modifier
+            .weight(0.2f)
+            .sizeIn(minHeight = BpkSpacing.Xxl, minWidth = BpkSpacing.Xxl)
+            .clickable { data.onClick?.invoke() },
+          contentAlignment = Alignment.Center
         ) {
-          data.icon?.let { icon ->
-            BpkIcon(
-              icon = icon,
-              contentDescription = null,
-              size = BpkIconSize.Small,
-              tint = BpkTheme.colors.textOnDark
-            )
-          }
           BpkText(
-            modifier = Modifier.weight(0.8f),
-            text = data.message,
-            maxLines = 2,
-            color = BpkTheme.colors.textOnDark,
-            style = BpkTheme.typography.footnote
+            text = action,
+            textAlign = TextAlign.Center,
+            style = BpkTheme.typography.label2
           )
-          data.action?.let { action ->
-            Box(
-              modifier = Modifier
-                .weight(0.2f)
-                .sizeIn(minHeight = BpkSpacing.Xxl, minWidth = BpkSpacing.Xxl)
-                .clickable { data.onClick?.invoke() },
-              contentAlignment = Alignment.Center
-            ) {
-              BpkText(
-                text = action,
-                textAlign = TextAlign.Center,
-                color = BpkTheme.colors.textOnDark,
-                style = BpkTheme.typography.label2
-              )
-            }
-          }
         }
       }
     }
@@ -161,7 +170,7 @@ data class BpkFloatingNotificationData(
   val onClick: (() -> Unit)?,
   val icon: BpkIcon?,
   private val continuation: CancellableContinuation<SnackbarResult>
-)  {
+) {
 
   fun performAction() {
     if (continuation.isActive) continuation.resume(SnackbarResult.ActionPerformed, onCancellation = null)
