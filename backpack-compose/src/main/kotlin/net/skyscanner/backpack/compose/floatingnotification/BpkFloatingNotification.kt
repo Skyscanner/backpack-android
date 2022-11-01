@@ -18,8 +18,8 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
-import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -27,16 +27,9 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Snackbar
 import androidx.compose.material.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -47,30 +40,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.MOBILE_MAX_WIDTH
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.MOBILE_REQUIRED_HEIGHT
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.MOBILE_REQUIRED_WIDTH
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.SMALL_MOBILE_REQUIRED_HEIGHT
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.SMALL_MOBILE_REQUIRED_WIDTH
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.TABLET_REQUIRED_HEIGHT
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.TABLET_REQUIRED_WIDTH
+import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloatingNotificationData
+import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloatingNotificationImpl
+import net.skyscanner.backpack.compose.floatingnotification.internal.floatingNotificationTransforms
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.clickable
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -91,12 +71,7 @@ fun BpkFloatingNotification(
   AnimatedContent(
     targetState = currentData,
     modifier = modifier,
-    transitionSpec = {
-      ContentTransform(
-        targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { it / 2 },
-        initialContentExit = fadeOut(tween(TRANSITION_DURATION)) + slideOutVertically(tween(TRANSITION_DURATION)) { it / 2 },
-      )
-    },
+    transitionSpec = floatingNotificationTransforms(),
   ) { data ->
 
     Box(
@@ -107,109 +82,19 @@ fun BpkFloatingNotification(
     ) {
 
       if (data != null) {
-        BpkFloatingNotificationImpl(data = data)
-      }
-
-    }
-  }
-
-}
-
-
-@Composable
-private fun BpkFloatingNotificationImpl(
-  data: BpkFloatingNotificationData,
-  modifier: Modifier = Modifier,
-) {
-
-  Snackbar(
-    modifier = modifier
-      .floatingNotificationSize(LocalConfiguration.current)
-      .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
-    shape = RoundedCornerShape(BpkBorderRadius.Md),
-    backgroundColor = BpkTheme.colors.corePrimary,
-    contentColor = BpkTheme.colors.textOnDark,
-  ) {
-
-    Row(
-      modifier = Modifier.fillMaxHeight(),
-      horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-      verticalAlignment = Alignment.CenterVertically,
-    ) {
-      data.icon?.let { icon ->
-        BpkIcon(
-          icon = icon,
-          contentDescription = null,
-          size = BpkIconSize.Small,
-        )
-      }
-      BpkText(
-        modifier = Modifier.weight(0.8f),
-        text = data.message,
-        maxLines = 2,
-        style = BpkTheme.typography.footnote
-      )
-      data.action?.let { action ->
-        Box(
-          modifier = Modifier
-            .weight(0.2f)
-            .sizeIn(minHeight = BpkSpacing.Xxl, minWidth = BpkSpacing.Xxl)
-            .clickable { data.performAction() },
-          contentAlignment = Alignment.Center
-        ) {
-          BpkText(
-            text = action,
-            textAlign = TextAlign.Center,
-            style = BpkTheme.typography.label2
-          )
-        }
+        BpkFloatingNotificationImpl(data)
       }
     }
   }
 }
 
-private fun Modifier.floatingNotificationSize(configuration: Configuration): Modifier =
-  run {
-    if (configuration.screenWidthDp < SMALL_MOBILE_MAX_WIDTH) {
-      requiredSize(width = SMALL_MOBILE_REQUIRED_WIDTH, height = SMALL_MOBILE_REQUIRED_HEIGHT)
-    } else if (configuration.screenWidthDp in SMALL_MOBILE_MAX_WIDTH..MOBILE_MAX_WIDTH) {
-      requiredSize(width = MOBILE_REQUIRED_WIDTH, height = MOBILE_REQUIRED_HEIGHT)
-    } else {
-      requiredSize(width = TABLET_REQUIRED_WIDTH, height = TABLET_REQUIRED_HEIGHT)
-    }
-  }
-
-data class Cta(
-  val text: String,
-  val onClick: () -> Unit,
-)
-
-@Stable
-data class BpkFloatingNotificationData(
-  val message: String,
-  val action: String?,
-  val onClick: (() -> Unit)?,
-  val icon: BpkIcon?,
-  private val continuation: CancellableContinuation<SnackbarResult>
-) {
-
-  fun performAction() {
-    if (continuation.isActive) continuation.resume(SnackbarResult.ActionPerformed, onCancellation = null)
-    onClick?.invoke()
-  }
-
-  fun dismiss() {
-    if (continuation.isActive) continuation.resume(SnackbarResult.Dismissed, onCancellation = null)
-  }
-
-}
 
 @Stable
 class BpkFloatingNotificationState {
 
   private val mutex = Mutex()
 
-  var currentData by mutableStateOf<BpkFloatingNotificationData?>(null)
+  internal var currentData by mutableStateOf<BpkFloatingNotificationData?>(null)
     private set
 
   suspend fun show(
@@ -226,8 +111,6 @@ class BpkFloatingNotificationState {
       currentData = null
     }
   }
-
-
 }
 
 @Composable
@@ -235,28 +118,3 @@ fun rememberBpkFloatingNotificationState(): BpkFloatingNotificationState =
   remember {
     BpkFloatingNotificationState()
   }
-
-internal object BpkFloatingNotificationSizes {
-  const val SMALL_MOBILE_MAX_WIDTH = 360
-  const val MOBILE_MAX_WIDTH = 512
-
-  val SMALL_MOBILE_REQUIRED_WIDTH = 288.dp
-  val SMALL_MOBILE_REQUIRED_HEIGHT = 52.dp
-  val MOBILE_REQUIRED_WIDTH = 312.dp
-  val MOBILE_REQUIRED_HEIGHT = 52.dp
-  val TABLET_REQUIRED_WIDTH = 400.dp
-  val TABLET_REQUIRED_HEIGHT = 72.dp
-}
-
-private const val TRANSITION_DURATION = 300
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
-@Composable
-private fun LightMode_TextOnly() {
-  // run in Interactive Mode
-  val state = rememberBpkFloatingNotificationState()
-  BpkFloatingNotification(state = state)
-  LaunchedEffect(key1 = Unit) {
-    state.show(message = "Lorem ipsum dolor sit amet")
-  }
-}
