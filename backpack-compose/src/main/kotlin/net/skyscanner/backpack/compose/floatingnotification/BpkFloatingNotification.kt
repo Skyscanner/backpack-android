@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.compose.floatingnotification
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -40,9 +39,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalAccessibilityManager
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -184,7 +180,7 @@ data class BpkFloatingNotificationData(
 }
 
 @Stable
-class BpkFloatingNotificationState(initiallyVisible: Boolean) {
+class BpkFloatingNotificationState {
 
   private val mutex = Mutex()
 
@@ -206,16 +202,14 @@ class BpkFloatingNotificationState(initiallyVisible: Boolean) {
     }
   }
 
+
 }
 
 @Composable
-fun rememberBpkFloatingNotificationState(
-  initiallyVisible: Boolean = false
-): BpkFloatingNotificationState {
-  return remember {
-    BpkFloatingNotificationState(initiallyVisible = initiallyVisible)
+fun rememberBpkFloatingNotificationState(): BpkFloatingNotificationState =
+  remember {
+    BpkFloatingNotificationState()
   }
-}
 
 internal object BpkFloatingNotificationSizes {
   const val SMALL_MOBILE_MAX_WIDTH = 360
