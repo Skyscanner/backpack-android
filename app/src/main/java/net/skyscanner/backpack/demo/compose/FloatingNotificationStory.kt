@@ -27,7 +27,6 @@ import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
-import net.skyscanner.backpack.compose.floatingnotification.Cta
 import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -37,10 +36,10 @@ import net.skyscanner.backpack.demo.R
 @Composable
 fun FloatingNotificationStory() {
   val scope = rememberCoroutineScope()
-  val textOnlyState = rememberBpkFloatingNotificationState()
-  val longTextWithIconState = rememberBpkFloatingNotificationState()
-  val textWithCtaState = rememberBpkFloatingNotificationState()
-  val allState = rememberBpkFloatingNotificationState()
+  val textOnlyState = rememberBpkFloatingNotificationState(initiallyVisible = true)
+  val longTextWithIconState = rememberBpkFloatingNotificationState(initiallyVisible = true)
+  val textWithCtaState = rememberBpkFloatingNotificationState(initiallyVisible = true)
+  val allState = rememberBpkFloatingNotificationState(initiallyVisible = true)
 
   val stubXs = stringResource(id = R.string.stub_xs)
   val stubSm = stringResource(id = R.string.stub_sm)
@@ -50,24 +49,26 @@ fun FloatingNotificationStory() {
       .fillMaxWidth()
       .padding(BpkSpacing.Base),
     text = stringResource(id = R.string.floating_notification_show),
-    enabled = !textOnlyState.visible && !longTextWithIconState.visible && !textWithCtaState.visible && !allState.visible
+    // enabled = !textOnlyState.visible && !longTextWithIconState.visible && !textWithCtaState.visible && !allState.visible
   ) {
     scope.launch {
       textOnlyState.show(
-        text = stubXs
+        message = stubXs
       )
       longTextWithIconState.show(
-        text = stubSm,
+        message = stubSm,
         icon = BpkIcon.Heart,
       )
       textWithCtaState.show(
-        text = stubXs,
-        cta = Cta(open, onClick = {})
+        message = stubXs,
+        action = open,
+        onClick = {}
       )
       allState.show(
-        text = stubSm,
+        message = stubSm,
         icon = BpkIcon.Heart,
-        cta = Cta(open, onClick = {})
+        action = open,
+        onClick = {}
       )
     }
   }

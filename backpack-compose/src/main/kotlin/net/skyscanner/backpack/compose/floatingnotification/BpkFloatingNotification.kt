@@ -18,13 +18,7 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.FiniteAnimationSpec
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,7 +28,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Snackbar
+import androidx.compose.material.SnackbarResult
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,12 +40,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalAccessibilityManager
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.MOBILE_MAX_WIDTH
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.MOBILE_REQUIRED_HEIGHT
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationSizes.MOBILE_REQUIRED_WIDTH
@@ -70,8 +72,7 @@ fun BpkFloatingNotification(
   hostState: BpkFloatingNotificationState,
   modifier: Modifier = Modifier,
 ) {
-  val fadeAnimationSpec: FiniteAnimationSpec<Float> = tween(durationMillis = TRANSITION_DURATION)
-  val slideAnimationSpec: FiniteAnimationSpec<IntOffset> = tween(durationMillis = TRANSITION_DURATION)
+
   val requiredSize = if (LocalConfiguration.current.screenWidthDp < SMALL_MOBILE_MAX_WIDTH) {
     RequiredSize(width = SMALL_MOBILE_REQUIRED_WIDTH, height = SMALL_MOBILE_REQUIRED_HEIGHT)
   } else if (LocalConfiguration.current.screenWidthDp in SMALL_MOBILE_MAX_WIDTH..MOBILE_MAX_WIDTH) {
@@ -80,13 +81,19 @@ fun BpkFloatingNotification(
     RequiredSize(width = TABLET_REQUIRED_WIDTH, height = TABLET_REQUIRED_HEIGHT)
   }
 
-  AnimatedVisibility(
-    modifier = modifier,
-    visible = hostState.visible,
-    enter = slideInVertically(slideAnimationSpec, initialOffsetY = { it / 2 }) + fadeIn(animationSpec = fadeAnimationSpec),
-    exit = slideOutVertically(slideAnimationSpec, targetOffsetY = { it / 2 }) + fadeOut(animationSpec = fadeAnimationSpec)
-  ) {
-    val data = hostState.data ?: return@AnimatedVisibility
+  val currentData = hostState.currentData
+  val accessibilityManager = LocalAccessibilityManager.current
+  LaunchedEffect(currentData) {
+    if (currentData != null) {
+      val duration = 4000L
+      delay(duration)
+      currentData.dismiss()
+    }
+  }
+
+  val data = hostState.currentData ?: return
+
+  Snackbar {
     Box(
       modifier = Modifier
         .fillMaxWidth()
@@ -115,21 +122,21 @@ fun BpkFloatingNotification(
           }
           BpkText(
             modifier = Modifier.weight(0.8f),
-            text = data.text,
+            text = data.message,
             maxLines = 2,
             color = BpkTheme.colors.textOnDark,
             style = BpkTheme.typography.footnote
           )
-          data.cta?.let { cta ->
+          data.action?.let { action ->
             Box(
               modifier = Modifier
                 .weight(0.2f)
                 .sizeIn(minHeight = BpkSpacing.Xxl, minWidth = BpkSpacing.Xxl)
-                .clickable { cta.onClick.invoke() },
+                .clickable { data.onClick?.invoke() },
               contentAlignment = Alignment.Center
             ) {
               BpkText(
-                text = cta.text,
+                text = action,
                 textAlign = TextAlign.Center,
                 color = BpkTheme.colors.textOnDark,
                 style = BpkTheme.typography.label2
@@ -147,33 +154,48 @@ data class Cta(
   val onClick: () -> Unit,
 )
 
-internal data class BpkFloatingNotificationData(
-  val text: String,
-  val icon: BpkIcon? = null,
-  val cta: Cta? = null,
-)
+@Stable
+data class BpkFloatingNotificationData(
+  val message: String,
+  val action: String?,
+  val onClick: (() -> Unit)?,
+  val icon: BpkIcon?,
+  private val continuation: CancellableContinuation<SnackbarResult>
+)  {
+
+  fun performAction() {
+    if (continuation.isActive) continuation.resume(SnackbarResult.ActionPerformed, onCancellation = null)
+  }
+
+  fun dismiss() {
+    if (continuation.isActive) continuation.resume(SnackbarResult.Dismissed, onCancellation = null)
+  }
+
+}
 
 @Stable
 class BpkFloatingNotificationState(initiallyVisible: Boolean) {
 
-  internal var data by mutableStateOf<BpkFloatingNotificationData?>(null)
-    private set
-  private val animationDuration = 4000L
-  var visible by mutableStateOf(initiallyVisible)
+  private val mutex = Mutex()
+
+  var currentData by mutableStateOf<BpkFloatingNotificationData?>(null)
     private set
 
   suspend fun show(
-    text: String,
+    message: String,
+    action: String? = null,
+    onClick: (() -> Unit)? = null,
     icon: BpkIcon? = null,
-    cta: Cta? = null,
-  ) {
-    data = BpkFloatingNotificationData(text, icon, cta)
-    visible = true
-    delay(animationDuration)
-    visible = false
-    delay(TRANSITION_DURATION.toLong())
-    data = null
+  ): SnackbarResult = mutex.withLock {
+    try {
+      return suspendCancellableCoroutine { continuation ->
+        currentData = BpkFloatingNotificationData(message, action, onClick, icon, continuation)
+      }
+    } finally {
+      currentData = null
+    }
   }
+
 }
 
 @Composable
@@ -200,3 +222,14 @@ internal object BpkFloatingNotificationSizes {
 private const val TRANSITION_DURATION = 400
 
 private data class RequiredSize(val width: Dp, val height: Dp)
+
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, backgroundColor = 0xffffff)
+@Composable
+private fun LightMode_TextOnly() {
+  // run in Interactive Mode
+  val state = rememberBpkFloatingNotificationState()
+  BpkFloatingNotification(hostState = state)
+  LaunchedEffect(key1 = Unit) {
+    state.show(message = "Lorem ipsum dolor sit amet")
+  }
+}

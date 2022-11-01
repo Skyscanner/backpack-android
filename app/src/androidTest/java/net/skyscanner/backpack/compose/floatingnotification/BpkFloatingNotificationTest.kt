@@ -42,7 +42,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
       BpkFloatingNotification(hostState = state)
       LaunchedEffect(key1 = Unit) {
         state.show(
-          text = "Lorem ipsum dolor sit amet"
+          message = "Lorem ipsum dolor sit amet"
         )
       }
     }
@@ -55,7 +55,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
       BpkFloatingNotification(hostState = state)
       LaunchedEffect(key1 = Unit) {
         state.show(
-          text = "Lorem ipsum dolor sit amet",
+          message = "Lorem ipsum dolor sit amet",
           icon = BpkIcon.Heart,
         )
       }
@@ -69,8 +69,9 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
       BpkFloatingNotification(hostState = state)
       LaunchedEffect(key1 = Unit) {
         state.show(
-          text = "Lorem ipsum dolor sit amet",
-          cta = Cta("Open", onClick = {}),
+          message = "Lorem ipsum dolor sit amet",
+          action = "Open",
+          onClick = {},
         )
       }
     }
@@ -83,8 +84,9 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
       BpkFloatingNotification(hostState = state)
       LaunchedEffect(key1 = Unit) {
         state.show(
-          text = "Lorem ipsum dolor sit amet",
-          cta = Cta("Open", onClick = {}),
+          message = "Lorem ipsum dolor sit amet",
+          action = "Open",
+          onClick = {},
           icon = BpkIcon.Heart,
         )
       }
