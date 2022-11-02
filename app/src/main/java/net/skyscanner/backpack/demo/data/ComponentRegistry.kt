@@ -42,6 +42,7 @@ import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadiiComposeStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
+import net.skyscanner.backpack.demo.compose.RatingStory
 import net.skyscanner.backpack.demo.compose.SkeletonStory
 import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
@@ -349,17 +350,23 @@ object ComponentRegistry {
       )
     ),
     "Rating" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_rating_default },
-        "Icons" story NodeData { Story of R.layout.fragment_rating_icons },
-        "No selectors" story NodeData { Story of R.layout.fragment_rating_no_selectors },
-        "Horizontal" story NodeData { Story of R.layout.fragment_rating_sizes },
-        "Horizontal RTL" story NodeData { Story of R.layout.fragment_rating_sizes with Direction.RTL },
-        "Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical },
-        "Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill },
-        "Zero to Five Scale" story NodeData { Story of R.layout.fragment_rating_zero_to_five },
-      )
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_rating_default },
+            "Icons" story NodeData { Story of R.layout.fragment_rating_icons },
+            "No selectors" story NodeData { Story of R.layout.fragment_rating_no_selectors },
+            "Horizontal" story NodeData { Story of R.layout.fragment_rating_sizes },
+            "Horizontal RTL" story NodeData { Story of R.layout.fragment_rating_sizes with Direction.RTL },
+            "Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical },
+            "Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill },
+            "Zero to Five Scale" story NodeData { Story of R.layout.fragment_rating_zero_to_five },
+          )
+        ),
+        TAB_TITLE_COMPOSE composeStory { RatingStory() },
+      ),
     ),
     "Skeleton" story NodeData(
       { children -> TabStory of children },
