@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.docs
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -90,6 +91,7 @@ object DocsRegistry {
     ViewScreenshot("Flare - View - Rounded", "rounded"),
     ViewScreenshot("Flare - View - Inset padding mode", "inset-padding"),
     ComposeScreenshot("Flare - Compose", "default"),
+    ComposeScreenshot("Floating Notification", "default") { setupFloatingNotification(it) },
     ViewScreenshot("Horizontal Nav - View", "default"),
     ComposeScreenshot("Horizontal Nav - Compose", "default"),
     ViewScreenshot("Floating Action Button - View", "default"),
@@ -141,7 +143,7 @@ object DocsRegistry {
 fun ComposeScreenshot(
   name: String,
   screenshotName: String,
-  setup: ((ComposeTestRule) -> Unit)? = null,
+  setup: ((AndroidComposeTestRule<*, *>) -> Unit)? = null,
 ): Array<Any?> =
   arrayOf(name, screenshotName, "docs/compose", setup)
 
@@ -213,6 +215,13 @@ private fun setupSnackbar() {
     .perform(ViewActions.click())
 
   InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+}
+
+private fun setupFloatingNotification(testRule: AndroidComposeTestRule<*, *>) {
+  testRule
+    .onNodeWithText(testRule.activity.getString(R.string.floating_notification_with_icon_and_action))
+    .performClick()
+    .assertIsDisplayed()
 }
 
 private fun setupSnackbarIconAction() {

@@ -21,7 +21,6 @@ package net.skyscanner.backpack.docs
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
-import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.demo.ComponentDetailActivity
@@ -36,7 +35,7 @@ open class GenerateScreenshots(
   private val componentPath: String,
   private val screenshotName: String,
   private val path: String,
-  private val setup: ((ComposeTestRule) -> Unit)?
+  private val setup: ((AndroidComposeTestRule<*, *>) -> Unit)?
 ) {
 
   companion object {
