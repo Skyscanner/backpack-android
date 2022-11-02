@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.compose.rating.internal
 
-import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
@@ -27,6 +27,7 @@ import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.rating.BpkRatingScale
 import net.skyscanner.backpack.compose.rating.BpkRatingSize
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BpkRatingLayout(
@@ -35,10 +36,13 @@ internal fun BpkRatingLayout(
   scale: BpkRatingScale?,
   size: BpkRatingSize,
   subtitle: String?,
-  title: @Composable BoxScope.() -> Unit,
+  title: @Composable () -> Unit,
 ) {
 
-  Row(modifier = modifier.semantics(mergeDescendants = true) { }) {
+  Row(
+    modifier = modifier.semantics(mergeDescendants = true) { },
+    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+  ) {
 
     BpkRatingNumbers(
       modifier = Modifier.alignByBaseline(),
@@ -50,9 +54,9 @@ internal fun BpkRatingLayout(
     when (size) {
 
       BpkRatingSize.Base -> {
-        BpkRatingTitle(content = title)
+        BpkRatingTitle(Modifier.alignByBaseline(), title)
         if (subtitle != null) {
-          BpkRatingSubtitle(subtitle = subtitle)
+          BpkRatingSubtitle(subtitle, Modifier.alignByBaseline())
         }
       }
 
@@ -62,7 +66,7 @@ internal fun BpkRatingLayout(
         ) {
           BpkRatingTitle(content = title)
           if (subtitle != null) {
-            BpkRatingSubtitle(subtitle = subtitle)
+            BpkRatingSubtitle(subtitle)
           }
         }
 

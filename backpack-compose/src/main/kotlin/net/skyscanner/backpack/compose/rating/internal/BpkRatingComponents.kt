@@ -19,20 +19,25 @@
 package net.skyscanner.backpack.compose.rating.internal
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.rating.BpkRatingScale
 import net.skyscanner.backpack.compose.rating.BpkRatingSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import kotlin.math.roundToInt
 
 @Composable
@@ -78,17 +83,28 @@ internal fun BpkRatingNumbers(
   }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BpkRatingTitle(
   modifier: Modifier = Modifier,
-  content: @Composable BoxScope.() -> Unit,
+  content: @Composable () -> Unit,
 ) {
   CompositionLocalProvider(
     LocalTextStyle provides BpkTheme.typography.heading5,
     LocalContentColor provides BpkTheme.colors.textPrimary,
     LocalContentAlpha provides 1f,
   ) {
-    Box(modifier = modifier, contentAlignment = Alignment.CenterStart, content = content)
+    Box(
+      modifier = modifier.heightIn(max = BpkSpacing.Lg),
+      contentAlignment = Alignment.CenterStart,
+    ) {
+      // a little trick to provide baseline params for the custom layouts with invisible text
+  BpkText(text = "", modifier = modifier
+    .alpha(0f)
+    .semantics { invisibleToUser() },
+  )
+      content()
+    }
   }
 }
 
