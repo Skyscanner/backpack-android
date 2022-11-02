@@ -54,7 +54,7 @@ fun BpkFloatingNotification(
   val currentData = state.currentData
   LaunchedEffect(currentData) {
     if (currentData != null) {
-      val duration = 4000L
+      val duration = currentData.hideAfter
       delay(duration)
       currentData.dismiss()
     }
@@ -90,15 +90,17 @@ class BpkFloatingNotificationState {
     private set
 
   suspend fun show(
-    message: String,
+    text: String,
     action: String? = null,
     onClick: (() -> Unit)? = null,
     icon: BpkIcon? = null,
+    hideAfter: Long = 4000L,
+    onExit: (() -> Unit)? = null,
   ): SnackbarResult =
     mutex.withLock {
       try {
         return suspendCancellableCoroutine { continuation ->
-          currentData = BpkFloatingNotificationData(message, icon, action, onClick, continuation)
+          currentData = BpkFloatingNotificationData(text, icon, action, hideAfter, onExit, onClick, continuation)
         }
       } finally {
         currentData = null

@@ -59,7 +59,7 @@ fun FloatingNotificationStory(
       BpkButton(text = stringResource(R.string.floating_notification_just_text)) {
         scope.launch {
           state.show(
-            message = stubXs,
+            text = stubXs,
           )
         }
       }
@@ -67,7 +67,7 @@ fun FloatingNotificationStory(
       BpkButton(text = stringResource(R.string.floating_notification_text_with_icon)) {
         scope.launch {
           state.show(
-            message = stubSm,
+            text = stubSm,
             icon = BpkIcon.Heart,
           )
         }
@@ -76,7 +76,7 @@ fun FloatingNotificationStory(
       BpkButton(text = stringResource(R.string.floating_notification_with_action)) {
         scope.launch {
           state.show(
-            message = stubXs,
+            text = stubXs,
             action = dismiss,
             onClick = {},
           )
@@ -86,10 +86,11 @@ fun FloatingNotificationStory(
       BpkButton(text = stringResource(R.string.floating_notification_with_icon_and_action)) {
         scope.launch {
           state.show(
-            message = stubSm,
+            text = stubSm,
             icon = BpkIcon.Heart,
             action = dismiss,
             onClick = {},
+            onExit = {},
           )
         }
       }

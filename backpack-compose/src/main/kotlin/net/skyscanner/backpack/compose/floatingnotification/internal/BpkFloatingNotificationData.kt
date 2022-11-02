@@ -25,9 +25,11 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 
 @Stable
 internal data class BpkFloatingNotificationData(
-  val message: String,
+  val text: String,
   val icon: BpkIcon?,
   val action: String?,
+  val hideAfter: Long,
+  val onExit: (() -> Unit)?,
   private val onClick: (() -> Unit)?,
   private val continuation: CancellableContinuation<SnackbarResult>
 ) {
@@ -39,6 +41,7 @@ internal data class BpkFloatingNotificationData(
 
   fun dismiss() {
     if (continuation.isActive) continuation.resume(SnackbarResult.Dismissed, onCancellation = null)
+    onExit?.invoke()
   }
 
 }

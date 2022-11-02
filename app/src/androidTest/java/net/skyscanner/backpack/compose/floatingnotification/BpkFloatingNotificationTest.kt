@@ -46,7 +46,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun textOnly() {
     scope.launch {
       state.show(
-        message = "Lorem ipsum dolor sit amet"
+        text = "Lorem ipsum dolor sit amet"
       )
     }
     composed { BpkFloatingNotification(state) }
@@ -56,7 +56,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun withIcon() {
     scope.launch {
       state.show(
-        message = "Lorem ipsum dolor sit amet",
+        text = "Lorem ipsum dolor sit amet",
         icon = BpkIcon.Heart,
       )
     }
@@ -69,7 +69,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun withCta() {
     scope.launch {
       state.show(
-        message = "Lorem ipsum dolor sit amet",
+        text = "Lorem ipsum dolor sit amet",
         action = "Open",
         onClick = {},
       )
@@ -83,7 +83,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun withIconAndCta() {
     scope.launch {
       state.show(
-        message = "Lorem ipsum dolor sit amet",
+        text = "Lorem ipsum dolor sit amet",
         action = "Open",
         onClick = {},
         icon = BpkIcon.Heart,

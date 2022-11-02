@@ -65,7 +65,8 @@ Box {
         text = "Lorem ipsum dolor sit amet.",
         icon = BpkIcon.Heart,
         action = "View",
-        onClick = {},
+        onClick = { println("action performed") },
+        onExit = { println("notification dismissed") },
       )
     }
   }
