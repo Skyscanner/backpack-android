@@ -39,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
@@ -112,33 +113,21 @@ private object BpkFloatingNotificationSizes {
   const val SMALL_MOBILE_MAX_WIDTH = 360
   const val MOBILE_MAX_WIDTH = 512
 
-  val SMALL_MOBILE_REQUIRED_WIDTH = 288.dp
-  val SMALL_MOBILE_REQUIRED_HEIGHT = 52.dp
-  val MOBILE_REQUIRED_WIDTH = 312.dp
-  val MOBILE_REQUIRED_HEIGHT = 52.dp
-  val TABLET_REQUIRED_WIDTH = 400.dp
-  val TABLET_REQUIRED_HEIGHT = 72.dp
+  val SMALL_MOBILE_REQUIRED_SIZE = DpSize(288.dp, 52.dp)
+  val MOBILE_REQUIRED_SIZE = DpSize(312.dp, 52.dp)
+  val TABLET_REQUIRED_SIZE = DpSize(400.dp, 72.dp)
 }
 
-private fun Modifier.floatingNotificationSize(configuration: Configuration): Modifier =
-  run {
-    if (configuration.screenWidthDp < BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH) {
-      requiredSize(
-        width = BpkFloatingNotificationSizes.SMALL_MOBILE_REQUIRED_WIDTH,
-        height = BpkFloatingNotificationSizes.SMALL_MOBILE_REQUIRED_HEIGHT
-      )
-    } else if (configuration.screenWidthDp in BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH..BpkFloatingNotificationSizes.MOBILE_MAX_WIDTH) {
-      requiredSize(
-        width = BpkFloatingNotificationSizes.MOBILE_REQUIRED_WIDTH,
-        height = BpkFloatingNotificationSizes.MOBILE_REQUIRED_HEIGHT
-      )
-    } else {
-      requiredSize(
-        width = BpkFloatingNotificationSizes.TABLET_REQUIRED_WIDTH,
-        height = BpkFloatingNotificationSizes.TABLET_REQUIRED_HEIGHT
-      )
-    }
+private fun Modifier.floatingNotificationSize(configuration: Configuration): Modifier {
+  val dpSize = when {
+    configuration.screenWidthDp < BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH ->
+      BpkFloatingNotificationSizes.SMALL_MOBILE_REQUIRED_SIZE
+    configuration.screenWidthDp in BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH..BpkFloatingNotificationSizes.MOBILE_MAX_WIDTH ->
+      BpkFloatingNotificationSizes.MOBILE_REQUIRED_SIZE
+    else -> BpkFloatingNotificationSizes.TABLET_REQUIRED_SIZE
   }
+  return requiredSize(dpSize)
+}
 
 
 private const val TRANSITION_DURATION = 300
