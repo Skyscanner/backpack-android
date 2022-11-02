@@ -113,21 +113,18 @@ private object BpkFloatingNotificationSizes {
   const val SMALL_MOBILE_MAX_WIDTH = 360
   const val MOBILE_MAX_WIDTH = 512
 
-  val SMALL_MOBILE_REQUIRED_SIZE = DpSize(288.dp, 52.dp)
-  val MOBILE_REQUIRED_SIZE = DpSize(312.dp, 52.dp)
-  val TABLET_REQUIRED_SIZE = DpSize(400.dp, 72.dp)
+  val SmallMobileRequiredSize = DpSize(288.dp, 52.dp)
+  val MobileRequiredSize = DpSize(312.dp, 52.dp)
+  val TabletRequiredSize = DpSize(400.dp, 72.dp)
 }
 
-private fun Modifier.floatingNotificationSize(configuration: Configuration): Modifier {
-  val dpSize = when {
+private fun Modifier.floatingNotificationSize(configuration: Configuration): Modifier =
+  when {
     configuration.screenWidthDp < BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH ->
-      BpkFloatingNotificationSizes.SMALL_MOBILE_REQUIRED_SIZE
+      requiredSize(BpkFloatingNotificationSizes.SmallMobileRequiredSize)
     configuration.screenWidthDp in BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH..BpkFloatingNotificationSizes.MOBILE_MAX_WIDTH ->
-      BpkFloatingNotificationSizes.MOBILE_REQUIRED_SIZE
-    else -> BpkFloatingNotificationSizes.TABLET_REQUIRED_SIZE
+      requiredSize(BpkFloatingNotificationSizes.MobileRequiredSize)
+    else -> requiredSize(BpkFloatingNotificationSizes.TabletRequiredSize)
   }
-  return requiredSize(dpSize)
-}
-
 
 private const val TRANSITION_DURATION = 300
