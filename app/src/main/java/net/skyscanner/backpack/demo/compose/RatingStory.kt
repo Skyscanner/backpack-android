@@ -45,6 +45,7 @@ fun RatingStory(
     ) {
       BpkRatingDefaultSample()
       BpkRatingLargeSample()
+      BpkRatingLargeNoSubtitleSample()
       BpkRatingTitleOnlySample()
       BpkRatingNoScaleSample()
       BpkRatingTenScaleSample()
@@ -74,6 +75,18 @@ internal fun BpkRatingLargeSample(
     value = 4.74f,
     size = BpkRatingSize.Large,
     subtitle = stringResource(R.string.generic_subtitle),
+  )
+}
+
+@Composable
+@Preview
+internal fun BpkRatingLargeNoSubtitleSample(
+  modifier: Modifier = Modifier
+) {
+  BpkRating(
+    title = stringResource(R.string.generic_title),
+    value = 4.74f,
+    size = BpkRatingSize.Large,
   )
 }
 
