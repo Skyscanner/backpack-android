@@ -69,7 +69,7 @@ fun BpkFloatingNotification(
     Box(
       modifier = Modifier
         .fillMaxSize()
-        .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = 30.dp),
+        .padding(start = BpkSpacing.Base, end = BpkSpacing.Base, bottom = BpkSpacing.Lg),
       contentAlignment = Alignment.BottomCenter,
     ) {
 
@@ -91,7 +91,7 @@ class BpkFloatingNotificationState {
 
   suspend fun show(
     text: String,
-    action: String? = null,
+    cta: String? = null,
     onClick: (() -> Unit)? = null,
     icon: BpkIcon? = null,
     hideAfter: Long = 4000L,
@@ -100,7 +100,7 @@ class BpkFloatingNotificationState {
     mutex.withLock {
       try {
         return suspendCancellableCoroutine { continuation ->
-          currentData = BpkFloatingNotificationData(text, icon, action, hideAfter, onExit, onClick, continuation)
+          currentData = BpkFloatingNotificationData(text, icon, cta, hideAfter, onExit, onClick, continuation)
         }
       } finally {
         currentData = null

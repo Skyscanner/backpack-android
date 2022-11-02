@@ -77,7 +77,7 @@ fun FloatingNotificationStory(
         scope.launch {
           state.show(
             text = stubXs,
-            action = dismiss,
+            cta = dismiss,
             onClick = {},
           )
         }
@@ -88,7 +88,7 @@ fun FloatingNotificationStory(
           state.show(
             text = stubSm,
             icon = BpkIcon.Heart,
-            action = dismiss,
+            cta = dismiss,
             onClick = {},
             onExit = {},
           )

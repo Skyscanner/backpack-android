@@ -64,7 +64,7 @@ Box {
       state.show(
         text = "Lorem ipsum dolor sit amet.",
         icon = BpkIcon.Heart,
-        action = "View",
+        cta = "View",
         onClick = { println("action performed") },
         onExit = { println("notification dismissed") },
       )

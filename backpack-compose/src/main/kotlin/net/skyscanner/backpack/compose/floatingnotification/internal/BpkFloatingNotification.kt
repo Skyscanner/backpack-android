@@ -87,9 +87,9 @@ internal fun BpkFloatingNotificationImpl(
         overflow = TextOverflow.Ellipsis,
       )
 
-      data.action?.let { action ->
+      data.cta?.let { cta ->
         BpkButton(
-          text = action,
+          text = cta,
           type = BpkButtonType.LinkOnDark,
           onClick = { data.performAction() },
           size = BpkButtonSize.Default,

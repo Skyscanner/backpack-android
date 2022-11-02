@@ -27,7 +27,7 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 internal data class BpkFloatingNotificationData(
   val text: String,
   val icon: BpkIcon?,
-  val action: String?,
+  val cta: String?,
   val hideAfter: Long,
   val onExit: (() -> Unit)?,
   private val onClick: (() -> Unit)?,

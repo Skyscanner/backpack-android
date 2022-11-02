@@ -70,7 +70,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
     scope.launch {
       state.show(
         text = "Lorem ipsum dolor sit amet",
-        action = "Open",
+        cta = "Open",
         onClick = {},
       )
     }
@@ -84,7 +84,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
     scope.launch {
       state.show(
         text = "Lorem ipsum dolor sit amet",
-        action = "Open",
+        cta = "Open",
         onClick = {},
         icon = BpkIcon.Heart,
       )
