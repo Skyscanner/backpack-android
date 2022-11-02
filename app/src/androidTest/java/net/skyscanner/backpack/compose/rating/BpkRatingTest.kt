@@ -40,7 +40,7 @@ class BpkRatingTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 100, width = 200)
+    setDimensions(height = 75, width = 250)
   }
 
   @Test
