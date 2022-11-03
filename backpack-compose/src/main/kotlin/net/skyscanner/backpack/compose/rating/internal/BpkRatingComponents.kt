@@ -55,7 +55,7 @@ internal fun BpkRatingNumbers(
 
     BpkText(
       modifier = Modifier.alignByBaseline(),
-      text = numberFormat.format(value),
+      text = formatValue(value, scale, numberFormat),
       style = when (size) {
         BpkRatingSize.Base -> BpkTheme.typography.label1
         BpkRatingSize.Large -> BpkTheme.typography.hero5
@@ -68,10 +68,7 @@ internal fun BpkRatingNumbers(
     if (scale != null) {
       BpkText(
         modifier = Modifier.alignByBaseline(),
-        text = when (scale) {
-          BpkRatingScale.ZeroToFive -> "/5"
-          BpkRatingScale.ZeroToTen -> "/10"
-        },
+        text = "/${scale.range.endInclusive.toInt()}",
         style = when (size) {
           BpkRatingSize.Base -> BpkTheme.typography.caption
           BpkRatingSize.Large -> BpkTheme.typography.bodyDefault
@@ -101,10 +98,12 @@ internal fun BpkRatingTitle(
       contentAlignment = Alignment.CenterStart,
     ) {
       // a little trick to provide baseline params for the custom layouts with invisible text
-  BpkText(text = "", modifier = modifier
-    .alpha(0f)
-    .semantics { invisibleToUser() },
-  )
+      BpkText(
+        text = "",
+        modifier = modifier
+            .alpha(0f)
+            .semantics { invisibleToUser() },
+      )
       content()
     }
   }
@@ -124,3 +123,14 @@ internal fun BpkRatingSubtitle(
     overflow = TextOverflow.Ellipsis,
   )
 }
+
+private fun formatValue(value: Float, scale: BpkRatingScale?, format: DecimalFormat): String {
+  val coerced = if (scale != null) value.coerceIn(scale.range) else value
+  return format.format(coerced)
+}
+
+private val BpkRatingScale.range: ClosedFloatingPointRange<Float>
+  get() = when (this) {
+    BpkRatingScale.ZeroToFive -> 0f..5f
+    BpkRatingScale.ZeroToTen -> 0f..10f
+  }
