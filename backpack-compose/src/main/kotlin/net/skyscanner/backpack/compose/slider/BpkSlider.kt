@@ -19,31 +19,65 @@
 
 package net.skyscanner.backpack.compose.slider
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.RangeSlider
 import androidx.compose.material.Slider
 import androidx.compose.material.SliderDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
-
 @Composable
 fun BpkSlider(
-  modifier: Modifier
+  value: Float,
+  onValueChange: (Float) -> Unit,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
+  onValueChangeFinished: (() -> Unit)? = null,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-  var sliderValue by remember {
-    mutableStateOf(0.5f) }
-    Slider(
-      value = sliderValue,
-      onValueChange = { newValue -> sliderValue = newValue },
-//      modifier = Modifier.padding(vertical = 0.dp),
-//      steps = 10,
-      colors = SliderDefaults.colors(
-      thumbColor = BpkTheme.colors.coreAccent,
-      activeTrackColor = BpkTheme.colors.coreAccent,
-      inactiveTrackColor = BpkTheme.colors.line))
+  Slider(
+    value = value,
+    onValueChange = onValueChange,
+    modifier = modifier,
+    enabled = enabled,
+    valueRange = valueRange,
+    steps = 0,
+    onValueChangeFinished = onValueChangeFinished,
+    interactionSource = interactionSource,
+    colors = sliderColors(),
+  )
+}
 
-  }
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun BpkRangeSlider(
+  values: ClosedFloatingPointRange<Float>,
+  onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
+  modifier: Modifier = Modifier,
+  enabled: Boolean = true,
+  valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
+  onValueChangeFinished: (() -> Unit)? = null,
+) {
+  RangeSlider(
+    values = values,
+    onValueChange = onValueChange,
+    modifier = modifier,
+    enabled = enabled,
+    valueRange = valueRange,
+    onValueChangeFinished = onValueChangeFinished,
+    colors = sliderColors(),
+  )
+}
+
+@Composable
+private fun sliderColors() = SliderDefaults.colors(
+  thumbColor = BpkTheme.colors.coreAccent,
+  activeTrackColor = BpkTheme.colors.coreAccent,
+  inactiveTrackColor = BpkTheme.colors.line,
+)
+
+// Extract colours into its own private function and create a disabled slider
