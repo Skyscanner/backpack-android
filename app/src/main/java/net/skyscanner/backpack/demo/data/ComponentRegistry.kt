@@ -39,6 +39,7 @@ import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.HorizontalNavComposeStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
+import net.skyscanner.backpack.demo.compose.NudgerStory
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.RadiiComposeStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
@@ -332,7 +333,13 @@ object ComponentRegistry {
         ),
       )
     ),
-    "Nudger" story NodeData { Story of R.layout.fragment_nudger },
+    "Nudger" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_nudger },
+        TAB_TITLE_COMPOSE composeStory { NudgerStory() },
+      )
+    ),
     "Overlay" story NodeData { Story of R.layout.fragment_overlay },
     "Panel" story NodeData(
       { children -> TabStory of children },
