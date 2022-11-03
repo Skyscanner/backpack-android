@@ -31,7 +31,6 @@ import androidx.compose.ui.viewinterop.AndroidView
 import net.skyscanner.backpack.compose.rating.BpkRating
 import net.skyscanner.backpack.compose.rating.BpkRatingScale
 import net.skyscanner.backpack.compose.rating.BpkRatingSize
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.starrating.BpkStarRating
@@ -41,24 +40,22 @@ import net.skyscanner.backpack.starrating.BpkStarRating
 fun RatingStory(
   modifier: Modifier = Modifier,
 ) {
-  BpkTheme {
-    Column(
-      modifier = modifier
-        .verticalScroll(rememberScrollState())
-        .padding(BpkSpacing.Base),
-      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
-      BpkRatingDefaultSample()
-      BpkRatingTitleOnlySample()
-      BpkRatingNoScaleSample()
-      BpkRatingCustomContentSample()
+  Column(
+    modifier = modifier
+      .verticalScroll(rememberScrollState())
+      .padding(BpkSpacing.Base),
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+  ) {
+    BpkRatingDefaultSample()
+    BpkRatingTitleOnlySample()
+    BpkRatingNoScaleSample()
+    BpkRatingCustomContentSample()
 
-      BpkRatingLargeSample()
-      BpkRatingLargeTitleOnlySample()
-      BpkRatingLargeNoScaleSample()
-      BpkRatingLargeCustomContentSample()
-      BpkRatingLargeCustomContentNoSubtitleSample()
-    }
+    BpkRatingLargeSample()
+    BpkRatingLargeTitleOnlySample()
+    BpkRatingLargeNoScaleSample()
+    BpkRatingLargeCustomContentSample()
+    BpkRatingLargeCustomContentNoSubtitleSample()
   }
 }
 
