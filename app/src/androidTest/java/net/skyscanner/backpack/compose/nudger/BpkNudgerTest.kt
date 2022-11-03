@@ -22,7 +22,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.demo.compose.NudgerExample
-import net.skyscanner.backpack.demo.compose.NudgerStoryRange
+import net.skyscanner.backpack.demo.compose.NudgerStoryAvg
+import net.skyscanner.backpack.demo.compose.NudgerStoryMax
+import net.skyscanner.backpack.demo.compose.NudgerStoryMin
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,14 +39,14 @@ class BpkNudgerTest : BpkSnapshotTest() {
 
   @Test
   fun default() = composed {
-    NudgerExample(initialValue = NudgerStoryRange.average().toInt())
+    NudgerExample(initialValue = NudgerStoryAvg)
   }
 
   @Test
   fun disabled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     composed {
-      NudgerExample(initialValue = NudgerStoryRange.average().toInt(), enabled = false)
+      NudgerExample(initialValue = NudgerStoryAvg, enabled = false)
     }
   }
 
@@ -52,7 +54,7 @@ class BpkNudgerTest : BpkSnapshotTest() {
   fun minusDisabled() {
     assumeVariant(BpkTestVariant.Default)
     composed {
-      NudgerExample(initialValue = NudgerStoryRange.first)
+      NudgerExample(initialValue = NudgerStoryMin)
     }
   }
 
@@ -60,7 +62,7 @@ class BpkNudgerTest : BpkSnapshotTest() {
   fun plusDisabled() {
     assumeVariant(BpkTestVariant.Default)
     composed {
-      NudgerExample(initialValue = NudgerStoryRange.last)
+      NudgerExample(initialValue = NudgerStoryMax)
     }
   }
 
@@ -68,7 +70,7 @@ class BpkNudgerTest : BpkSnapshotTest() {
   fun positiveOverflow() {
     assumeVariant(BpkTestVariant.Default)
     composed {
-      NudgerExample(initialValue = NudgerStoryRange.last + NudgerStoryRange.last)
+      NudgerExample(initialValue = NudgerStoryMax + NudgerStoryMax)
     }
   }
 
@@ -76,7 +78,7 @@ class BpkNudgerTest : BpkSnapshotTest() {
   fun negativeOverflow() {
     assumeVariant(BpkTestVariant.Default)
     composed {
-      NudgerExample(initialValue = NudgerStoryRange.first - NudgerStoryRange.last)
+      NudgerExample(initialValue = NudgerStoryMin - NudgerStoryMax)
     }
   }
 }

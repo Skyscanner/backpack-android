@@ -35,7 +35,6 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
-import kotlin.math.roundToInt
 
 @Composable
 @Preview
@@ -50,11 +49,11 @@ fun NudgerStory() {
     }
 
     NudgerExample(name = stringResource(R.string.nudger_minus_disabled)) {
-      NudgerExample(initialValue = NudgerStoryRange.first)
+      NudgerExample(initialValue = NudgerStoryMin)
     }
 
     NudgerExample(name = stringResource(R.string.nudger_plus_disabled)) {
-      NudgerExample(initialValue = NudgerStoryRange.last)
+      NudgerExample(initialValue = NudgerStoryMax)
     }
 
     NudgerExample(name = stringResource(R.string.generic_disabled)) {
@@ -67,7 +66,7 @@ fun NudgerStory() {
 @Preview
 fun NudgerExample(
   modifier: Modifier = Modifier,
-  initialValue: Int = NudgerStoryRange.average().roundToInt(),
+  initialValue: Int = NudgerStoryAvg,
   enabled: Boolean = true,
 ) {
   var value by remember { mutableStateOf(initialValue) }
@@ -75,7 +74,8 @@ fun NudgerExample(
   BpkNudger(
     value = value,
     onValueChange = { value = it },
-    range = NudgerStoryRange,
+    min = NudgerStoryMin,
+    max = NudgerStoryMax,
     enabled = enabled,
   )
 }
@@ -96,4 +96,6 @@ private fun NudgerExample(
   }
 }
 
-internal val NudgerStoryRange = 0..10
+internal val NudgerStoryMin = 0
+internal val NudgerStoryAvg = 5
+internal val NudgerStoryMax = 10

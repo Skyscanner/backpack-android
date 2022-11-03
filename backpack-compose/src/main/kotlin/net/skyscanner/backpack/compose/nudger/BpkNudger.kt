@@ -51,11 +51,12 @@ import kotlin.math.roundToInt
 fun BpkNudger(
   value: Int,
   onValueChange: (Int) -> Unit,
-  range: IntRange,
+  min: Int,
+  max: Int,
   modifier: Modifier = Modifier,
   enabled: Boolean = LocalFieldStatus.current != BpkFieldStatus.Disabled,
 ) {
-
+  val range = min..max
   val coerced = value.coerceIn(range)
 
   fun setValue(value: Int) =
@@ -109,7 +110,7 @@ private fun Modifier.nudgerSemantics(
   range: IntRange,
   enabled: Boolean,
 ): Modifier =
-    semantics(mergeDescendants = true) {
+  semantics(mergeDescendants = true) {
 
     // this is needed to use volume keys
     setProgress { targetValue ->

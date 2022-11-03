@@ -24,6 +24,7 @@ import net.skyscanner.backpack.compose.nudger.BpkNudger
 BpkNudger(
   value = currentValue,
   onValueChange = { /* update the value */ },
-  range = minValue..maxValue,
+  min = minValue,
+  max = maxValue,
 )
 ```
