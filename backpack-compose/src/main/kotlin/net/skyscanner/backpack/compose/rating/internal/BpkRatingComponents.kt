@@ -125,8 +125,8 @@ internal fun BpkRatingSubtitle(
   )
 }
 
-private fun formatValue(value: Float, scale: BpkRatingScale?, format: DecimalFormat): String {
-  val coerced = if (scale != null) value.coerceIn(scale.range) else value
+private fun formatValue(value: Float, scale: BpkRatingScale, format: DecimalFormat): String {
+  val coerced = value.coerceIn(scale.range)
   val rounded = (coerced * 10).toInt() / 10f // rounding to one decimal
   return format.format(rounded)
 }
