@@ -36,8 +36,6 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
   @get:Rule
   val rule = activityScenarioRule<AppCompatActivity>()
 
-  private val bridge = BpkMapMarkersTestBridge.Instance
-
   @Before
   fun setup() {
     setBackground(android.R.color.transparent)
@@ -85,7 +83,7 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
   private fun createMarker(@DrawableRes icon: Int, showPointer: Boolean): View {
     var view: View? = null
     rule.scenario.onActivity { activity ->
-      view = bridge.create(activity, "Title", icon, showPointer)
+      view = BpkMapMarkersTestBridge.create(activity, "Title", icon, showPointer)
     }
     return view!!
   }

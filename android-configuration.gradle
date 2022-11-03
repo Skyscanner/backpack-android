@@ -41,6 +41,10 @@ android {
     warningsAsErrors true
     disable 'UnusedResources' // we're exposing resources for consumers
   }
+
+  buildFeatures {
+    buildConfig = false
+  }
 }
 
 dependencies {
