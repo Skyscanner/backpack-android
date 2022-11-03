@@ -8,19 +8,19 @@
 
 | Day | Night |
 | --- | --- |
-| ![Badges Maps component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/badges.png) |![Badges Maps component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/badges_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/badges.png" alt="Badges Maps component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/badges_dm.png" alt="Badges Maps component - dark mode" width="375" /> |
 
 ## Pointers
 
 | Day | Night |
 | --- | --- |
-| ![Pointers Maps component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/pointers.png) |![Pointers Maps component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/pointers_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/pointers.png" alt="Pointers Maps component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/pointers_dm.png" alt="Pointers Maps component - dark mode" width="375" /> |
 
 ## With Icons
 
 | Day | Night |
 | --- | --- |
-| ![With Icons Maps component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/with_icons) |![With Icons Maps component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/with_icons_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/with_icons" alt="With Icons Maps component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Maps/screenshots/with_icons_dm.png" alt="With Icons Maps component - dark mode" width="375" /> |
 
 ## Installation
 

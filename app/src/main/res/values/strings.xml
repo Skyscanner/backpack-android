@@ -163,7 +163,7 @@
   <string name="generic_read_only_value">Read only value</string>
   <string name="generic_error_text">Error text</string>
   <string name="token_placeholder">%1$s = %2$s</string>
-    <string name="tabs_small">Small</string>
+  <string name="tabs_small">Small</string>
   <string name="tabs_small_with_icon">Small with icon</string>
   <string name="tabs_large">Large</string>
   <string name="tabs_large_with_icon">Large with icon</string>
@@ -200,4 +200,9 @@
   <string name="nudger_minus_disabled">Minus Disabled</string>
   <string name="nudger_plus_disabled">Plus Disabled</string>
   <string name="generic_disabled">Disabled</string>
+  <string name="floating_notification_just_text">Just text</string>
+  <string name="floating_notification_text_with_icon">Text with icon</string>
+  <string name="floating_notification_with_action">With action</string>
+  <string name="floating_notification_with_icon_and_action">With icon and action</string>
+  <string name="generic_dismiss">Dismiss</string>
 </resources>

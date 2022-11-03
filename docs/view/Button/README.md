@@ -8,19 +8,19 @@
 
 | Day | Night |
 | --- | --- |
-| ![Standard Button component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/standard.png) |![Standard Button component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/standard_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/standard.png" alt="Standard Button component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/standard_dm.png" alt="Standard Button component - dark mode" width="375" /> |
 
 ## Large
 
 | Day | Night |
 | --- | --- |
-| ![Large Button component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/large.png) |![Large Button component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/large_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/large.png" alt="Large Button component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/large_dm.png" alt="Large Button component - dark mode" width="375" /> |
 
 ## Link
 
 | Day | Night |
 | --- | --- |
-| ![Link Button component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/link.png) |![Link Button component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/link_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/link.png" alt="Link Button component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Button/screenshots/link_dm.png" alt="Link Button component - dark mode" width="375" /> |
 
 ## Installation
 

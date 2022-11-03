@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| ![Chip component](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/default.png) |![Chip component - dark mode](https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/default_dm.png) |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/default.png" alt="Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/default_dm.png" alt="Chip component - dark mode" width="375" /> |
 
 ## Installation
 

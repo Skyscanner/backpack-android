@@ -33,6 +33,7 @@ import net.skyscanner.backpack.demo.compose.ColorsComposeStory
 import net.skyscanner.backpack.demo.compose.ElevationComposeStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
+import net.skyscanner.backpack.demo.compose.FloatingNotificationStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.HorizontalNavComposeStory
@@ -293,6 +294,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { BpkFabStory() },
       )
     ),
+    "Floating Notification" composeStory { FloatingNotificationStory() },
     "Horizontal Nav" story NodeData(
       { children -> TabStory of children },
       mapOf(

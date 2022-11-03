@@ -35,7 +35,7 @@ class InteractiveStarRatingStory : Story() {
       val child = view.getChildAt(idx)
       if (child is BpkInteractiveStarRating) {
         child.onRatingChangedListener = { current, max ->
-          BpkToast.makeText(context, "$current/$max", BpkToast.LENGTH_SHORT).show()
+          BpkToast.makeText(requireContext(), "$current/$max", BpkToast.LENGTH_SHORT).show()
         }
       }
     }
