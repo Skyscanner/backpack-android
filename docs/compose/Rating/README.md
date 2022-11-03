@@ -69,7 +69,7 @@ BpkRating {
     title = "Title",
     subtitle = "Subtitle",
     value = 4.5,
-    scale = null,
+    showScale = false,
   )
 }
 ```

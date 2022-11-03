@@ -45,8 +45,9 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 internal fun BpkRatingNumbers(
   value: Float,
-  scale: BpkRatingScale?,
+  scale: BpkRatingScale,
   size: BpkRatingSize,
+  showScale: Boolean,
   modifier: Modifier = Modifier,
 ) {
   Row(modifier = modifier) {
@@ -65,7 +66,7 @@ internal fun BpkRatingNumbers(
       overflow = TextOverflow.Ellipsis,
     )
 
-    if (scale != null) {
+    if (showScale) {
       BpkText(
         modifier = Modifier.alignByBaseline(),
         text = "/${scale.range.endInclusive.toInt()}",
@@ -126,7 +127,8 @@ internal fun BpkRatingSubtitle(
 
 private fun formatValue(value: Float, scale: BpkRatingScale?, format: DecimalFormat): String {
   val coerced = if (scale != null) value.coerceIn(scale.range) else value
-  return format.format(coerced)
+  val rounded = (coerced * 10).toInt() / 10f // rounding to one decimal
+  return format.format(rounded)
 }
 
 private val BpkRatingScale.range: ClosedFloatingPointRange<Float>

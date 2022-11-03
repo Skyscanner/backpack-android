@@ -33,9 +33,10 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 internal fun BpkRatingLayout(
   value: Float,
   modifier: Modifier = Modifier,
-  scale: BpkRatingScale?,
+  scale: BpkRatingScale,
   size: BpkRatingSize,
   subtitle: String?,
+  showScale: Boolean,
   title: @Composable () -> Unit,
 ) {
 
@@ -49,6 +50,7 @@ internal fun BpkRatingLayout(
       value = value,
       scale = scale,
       size = size,
+      showScale = showScale,
     )
 
     when (size) {

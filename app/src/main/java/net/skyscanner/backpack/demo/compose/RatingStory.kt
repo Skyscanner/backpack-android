@@ -92,7 +92,7 @@ internal fun BpkRatingNoScaleSample(
     title = stringResource(R.string.rating_title),
     subtitle = stringResource(R.string.rating_subtitle),
     value = RatingValue,
-    scale = null,
+    showScale = false,
   )
 }
 
@@ -145,7 +145,7 @@ internal fun BpkRatingLargeNoScaleSample(
     subtitle = stringResource(R.string.rating_subtitle),
     value = RatingValue,
     size = BpkRatingSize.Large,
-    scale = null,
+    showScale = false,
   )
 }
 
@@ -191,4 +191,4 @@ private fun CustomContent(
   )
 }
 
-private const val RatingValue = 4.4666f
+private const val RatingValue = 4.57f

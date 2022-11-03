@@ -39,16 +39,18 @@ fun BpkRating(
   title: String,
   value: Float,
   modifier: Modifier = Modifier,
-  scale: BpkRatingScale? = BpkRatingScale.ZeroToFive,
+  scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
   size: BpkRatingSize = BpkRatingSize.Base,
   subtitle: String? = null,
+  showScale: Boolean = true,
 ) {
   BpkRatingLayout(
     value = value,
+    modifier = modifier,
     scale = scale,
     size = size,
     subtitle = subtitle,
-    modifier = modifier
+    showScale = showScale,
   ) {
     BpkText(
       text = title,
@@ -62,17 +64,19 @@ fun BpkRating(
 fun BpkRating(
   value: Float,
   modifier: Modifier = Modifier,
-  scale: BpkRatingScale? = BpkRatingScale.ZeroToFive,
+  scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
   size: BpkRatingSize = BpkRatingSize.Base,
   subtitle: String? = null,
+  showScale: Boolean = true,
   title: @Composable () -> Unit,
 ) {
   BpkRatingLayout(
     value = value,
+    modifier = modifier,
     scale = scale,
     size = size,
     subtitle = subtitle,
-    modifier = modifier
+    showScale = showScale,
   ) {
     title()
   }
