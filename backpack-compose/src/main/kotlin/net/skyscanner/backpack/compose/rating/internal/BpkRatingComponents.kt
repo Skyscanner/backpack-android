@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.rating.internal
 
+import android.icu.text.DecimalFormat
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.heightIn
@@ -26,10 +27,12 @@ import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
@@ -38,7 +41,6 @@ import net.skyscanner.backpack.compose.rating.BpkRatingSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import kotlin.math.roundToInt
 
 @Composable
 internal fun BpkRatingNumbers(
@@ -47,13 +49,13 @@ internal fun BpkRatingNumbers(
   size: BpkRatingSize,
   modifier: Modifier = Modifier,
 ) {
-  Row(
-    modifier = modifier,
-  ) {
+  Row(modifier = modifier) {
+
+    val numberFormat = remember(LocalConfiguration.current.locales) { DecimalFormat("#0.0") }
 
     BpkText(
       modifier = Modifier.alignByBaseline(),
-      text = value.roundToOneDecimal().toString(),
+      text = numberFormat.format(value),
       style = when (size) {
         BpkRatingSize.Base -> BpkTheme.typography.label1
         BpkRatingSize.Large -> BpkTheme.typography.hero5
@@ -122,6 +124,3 @@ internal fun BpkRatingSubtitle(
     overflow = TextOverflow.Ellipsis,
   )
 }
-
-private fun Float.roundToOneDecimal(): Float =
-  (this * 10f).roundToInt() / 10f
