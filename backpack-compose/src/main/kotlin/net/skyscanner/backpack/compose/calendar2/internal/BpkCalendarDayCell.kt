@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.calendar2.internal
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
@@ -136,7 +138,10 @@ private fun Modifier.cellDayBackground(
   when {
     selection != null ->
       when (selection) {
-        Selection.Double -> background(BpkTheme.colors.coreAccent, CircleShape) // todo
+        Selection.Double -> this
+          .border(1.dp, BpkTheme.colors.coreAccent, CircleShape)
+          .padding(3.dp)
+          .background(BpkTheme.colors.coreAccent, CircleShape)
 
         Selection.StartMonth,
         Selection.Middle,
