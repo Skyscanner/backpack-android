@@ -19,11 +19,10 @@
 
 package net.skyscanner.backpack.compose.slider
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.demo.compose.DefaultSliderSample
+import net.skyscanner.backpack.demo.compose.RangeSliderSample
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,10 +37,11 @@ class BpkSliderTest : BpkSnapshotTest() {
 
   @Test
   fun default() = composed {
-    val sliderValue by remember { mutableStateOf(0.5f) }
-    BpkSlider(
-      value = sliderValue,
-      onValueChange = {}
-    )
+    DefaultSliderSample()
+  }
+
+  @Test
+  fun range() = composed {
+    RangeSliderSample()
   }
 }

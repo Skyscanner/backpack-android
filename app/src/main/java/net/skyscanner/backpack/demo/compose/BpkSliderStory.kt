@@ -41,18 +41,27 @@ fun BpkSliderStory() {
     modifier = Modifier.padding(BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically)
   ) {
-    Text(text = "Standard", fontSize = BpkTheme.typography.label2.fontSize)
-    var sliderValue by remember { mutableStateOf(0.5f) }
-    BpkSlider(
-      value = sliderValue,
-      onValueChange = { newValue -> sliderValue = newValue }
-    )
-
-    Text(text = "Range", fontSize = BpkTheme.typography.label2.fontSize)
-    var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
-    BpkRangeSlider(
-      values = rangeSliderValue,
-      onValueChange = { newValue -> rangeSliderValue = newValue }
-    )
+    DefaultSliderSample()
+    RangeSliderSample()
   }
+}
+
+@Composable
+fun RangeSliderSample() {
+  Text(text = "Range", fontSize = BpkTheme.typography.label2.fontSize)
+  var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
+  BpkRangeSlider(
+    values = rangeSliderValue,
+    onValueChange = { newValue -> rangeSliderValue = newValue }
+  )
+}
+
+@Composable
+fun DefaultSliderSample() {
+  Text(text = "Standard", fontSize = BpkTheme.typography.label2.fontSize)
+  var sliderValue by remember { mutableStateOf(0.5f) }
+  BpkSlider(
+    value = sliderValue,
+    onValueChange = { newValue -> sliderValue = newValue }
+  )
 }
