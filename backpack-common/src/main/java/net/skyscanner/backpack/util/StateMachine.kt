@@ -44,7 +44,8 @@ interface StateMachine<State, Effect> {
   val effects: SharedFlow<Effect>
 }
 
-internal interface MutableStateMachine<State, Effect> : StateMachine<State, Effect> {
+@InternalBackpackApi
+interface MutableStateMachine<State, Effect> : StateMachine<State, Effect> {
 
   interface CommitScope<Effect> {
 
@@ -54,8 +55,9 @@ internal interface MutableStateMachine<State, Effect> : StateMachine<State, Effe
   fun commit(block: suspend CommitScope<Effect>.(State) -> State)
 }
 
+@InternalBackpackApi
 @Suppress("FunctionName")
-internal fun <State, Effect> MutableStateMachine(
+fun <State, Effect> MutableStateMachine(
   scope: CoroutineScope,
   initial: State,
 ): MutableStateMachine<State, Effect> {

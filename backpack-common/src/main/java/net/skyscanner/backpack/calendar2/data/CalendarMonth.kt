@@ -25,6 +25,7 @@ import net.skyscanner.backpack.calendar2.extension.lastDay
 import net.skyscanner.backpack.calendar2.extension.lastDayOfWeek
 import net.skyscanner.backpack.calendar2.extension.nextMonth
 import net.skyscanner.backpack.calendar2.extension.prevMonth
+import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 import org.threeten.bp.temporal.WeekFields
@@ -32,7 +33,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-internal data class CalendarMonth(
+@InternalBackpackApi
+data class CalendarMonth internal constructor(
   val yearMonth: YearMonth,
   val cells: List<CalendarCell>,
 )

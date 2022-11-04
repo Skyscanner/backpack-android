@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
@@ -29,9 +31,14 @@ apply from: "$rootProject.projectDir/android-configuration.gradle"
 
 android {
   namespace 'net.skyscanner.backpack.common'
+  kotlinOptions {
+    freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi"
+    freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi"
+  }
 }
 
 dependencies {
+  api rootProject.ext.threeTenAbpAndroid
   testImplementation rootProject.ext.junit
   testImplementation rootProject.ext.coroutinesTest
 }

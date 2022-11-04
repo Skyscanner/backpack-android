@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2
 
+import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.TextStyle
 import org.threeten.bp.temporal.WeekFields
@@ -47,7 +48,8 @@ data class CalendarParams(
   val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
 ) {
 
-  internal val weekFields = WeekFields.of(locale)
+  @InternalBackpackApi
+  val weekFields = WeekFields.of(locale)
 
   internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
 

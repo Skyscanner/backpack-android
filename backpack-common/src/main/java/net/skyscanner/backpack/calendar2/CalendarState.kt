@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.calendar2
 
 import net.skyscanner.backpack.calendar2.data.CalendarCells
+import net.skyscanner.backpack.util.InternalBackpackApi
 
 /**
  * The model containing all the information describing [BpkCalendar] in the moment.
@@ -28,5 +29,5 @@ import net.skyscanner.backpack.calendar2.data.CalendarCells
 data class CalendarState internal constructor(
   val params: CalendarParams,
   val selection: CalendarSelection = CalendarSelection.None,
-  internal val cells: CalendarCells = CalendarCells(params, selection),
+  @InternalBackpackApi val cells: CalendarCells = CalendarCells(params, selection),
 )

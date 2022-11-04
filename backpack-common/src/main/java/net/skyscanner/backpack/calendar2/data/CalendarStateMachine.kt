@@ -24,17 +24,20 @@ import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarParams.SelectionMode
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.CalendarState
+import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.MutableStateMachine
 import net.skyscanner.backpack.util.StateMachine
 import java.util.Locale
 
-internal interface CalendarStateMachine : CalendarComponent, StateMachine<CalendarState, CalendarEffect> {
+@InternalBackpackApi
+interface CalendarStateMachine : CalendarComponent, StateMachine<CalendarState, CalendarEffect> {
 
   fun onClick(calendarInteraction: CalendarInteraction)
   fun onLocaleChanged(locale: Locale)
 }
 
-internal fun CalendarStateMachine(
+@InternalBackpackApi
+fun CalendarStateMachine(
   scope: CoroutineScope,
   initialParams: CalendarParams,
 ): CalendarStateMachine {
