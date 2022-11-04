@@ -22,11 +22,12 @@ import net.skyscanner.backpack.calendar2.extension.firstDay
 import net.skyscanner.backpack.calendar2.extension.lastDay
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
+import java.io.Serializable
 
 /**
  * Describes the current selection in the calendar
  */
-sealed class CalendarSelection {
+sealed class CalendarSelection : Serializable {
 
   /**
    * Check whether selection contains the date
