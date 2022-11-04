@@ -2,7 +2,7 @@
 
 > Backpack is a collection of design resources, reusable components and guidelines for creating Skyscanner's products.
 
-[![CI Status](https://github.com/Skyscanner/backpack-android/workflows/CI/badge.svg)](https://github.com/Skyscanner/backpack-android/actions)
+[![CI Status](https://github.com/Skyscanner/backpack-android/workflows/Main/badge.svg)](https://github.com/Skyscanner/backpack-android/actions)
 
 [![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
 [![license](https://img.shields.io/github/license/Skyscanner/backpack-android.svg)](https://github.com/Skyscanner/backpack-android)
@@ -72,7 +72,7 @@ All design system tokens exist as public Android resources. Here's the list of t
 
 ### Jetpack Compose
 
-Backpack for Compose targets **stable Compose 1.0.0** release.
+Backpack for Compose targets **stable Compose** releases.
 
 You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=compose).
 
