@@ -53,7 +53,7 @@ internal fun BpkCalendarGrid(
         when (val item = state.cells[index]) {
           is CalendarCell.Day -> item.date
           is CalendarCell.Header -> item.yearMonth
-          is CalendarCell.Space -> item
+          is CalendarCell.Space -> index
         }
       },
       contentType = { index ->

@@ -51,7 +51,7 @@ internal class CalendarCellHeaderHolder(
     btnSelectWholeMonth.apply {
       isVisible = model.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth
       isEnabled = model.calendarSelectionMode !is CalendarParams.SelectionMode.Disabled
-      text = (model.monthSelectionMode as? CalendarParams.MonthSelectionMode.SelectWholeMonth)?.label
+      text = (model.monthSelectionMode as? CalendarParams.MonthSelectionMode.SelectWholeMonth)?.label ?: ""
     }
   }
 }
