@@ -189,14 +189,6 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     updateTab(position)
   }
 
-  @Deprecated("This is not supported anymore in the design and will be removed soon")
-  fun setNotificationDot(position: Int, value: Boolean) {
-  }
-
-  @Deprecated("This is not supported anymore in the design and will be removed soon")
-  fun setBadge(position: Int, value: CharSequence) {
-  }
-
   private fun updateTab(position: Int) {
     val tab = getTabAt(position) ?: return
     if (texts.get(position) != null) {
