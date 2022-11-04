@@ -72,7 +72,7 @@ All design system tokens exist as public Android resources. Here's the list of t
 
 ### Jetpack Compose
 
-Backpack for Compose targets **stable Compose 1.0.0** release.
+Backpack for Compose targets **stable Compose** releases.
 
 You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=compose).
 
