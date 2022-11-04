@@ -20,13 +20,9 @@ package net.skyscanner.backpack.horisontalnav
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.util.AttributeSet
-import android.util.SparseArray
-import android.util.SparseBooleanArray
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.AttrRes
@@ -35,8 +31,6 @@ import androidx.annotation.DimenRes
 import androidx.collection.SparseArrayCompat
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.R
-import net.skyscanner.backpack.badge.BpkBadge
-import net.skyscanner.backpack.horisontalnav.internal.NotificationDotSpan
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -111,8 +105,6 @@ open class BpkHorizontalNav @JvmOverloads constructor(
 
   private val fontSpan = BpkFontSpan(context, BpkText.TextStyle.Label2)
   private val texts = SparseArrayCompat<CharSequence?>()
-  private val notificationDots = SparseBooleanArray()
-  private val badges = SparseArray<CharSequence?>()
 
   init {
     initialize(attrs, defStyleAttr)
@@ -197,14 +189,12 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     updateTab(position)
   }
 
+  @Deprecated("This is not supported anymore in the design and will be removed soon")
   fun setNotificationDot(position: Int, value: Boolean) {
-    notificationDots.put(position, value)
-    updateTab(position)
   }
 
+  @Deprecated("This is not supported anymore in the design and will be removed soon")
   fun setBadge(position: Int, value: CharSequence) {
-    badges.put(position, value)
-    updateTab(position)
   }
 
   private fun updateTab(position: Int) {
@@ -212,18 +202,9 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     if (texts.get(position) != null) {
       tab.text = SpannableStringBuilder().apply {
         append(texts.get(position), fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-        if (notificationDots.get(position)) {
-          append(" ", NotificationDotSpan(context), Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-        }
       }
     }
     tab.customView?.apply {
-      findViewById<BpkBadge>(R.id.tab_badge)?.let {
-        it.text = badges.get(position)
-        it.visibility = if (it.length() > 0) View.VISIBLE else View.GONE
-        it.setBackground(ColorStateList.valueOf(Color.TRANSPARENT), tabTextColors!!)
-        it.setTextColor(tabTextColors)
-      }
       findViewById<TextView>(android.R.id.text1)?.setTextColor(tabTextColors)
       findViewById<ImageView>(android.R.id.icon)?.imageTintList = tabTextColors
     }
