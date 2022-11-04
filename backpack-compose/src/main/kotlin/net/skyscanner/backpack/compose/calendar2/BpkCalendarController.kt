@@ -22,6 +22,8 @@ import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -35,8 +37,8 @@ import java.io.Serializable
 
 @Stable
 class BpkCalendarController private constructor(
-  private val lazyGirdState: LazyGridState,
-  private val stateMachine: CalendarStateMachine,
+  internal val lazyGirdState: LazyGridState,
+  internal val stateMachine: CalendarStateMachine,
 ) : CalendarComponent by stateMachine {
 
   constructor(
@@ -65,6 +67,10 @@ class BpkCalendarController private constructor(
     if (index >= 0) {
       lazyGirdState.animateScrollToItem(index)
     }
+  }
+
+  internal val firstVisibleItemYear by derivedStateOf {
+    state.value.cells[lazyGirdState.firstVisibleItemIndex].yearMonth.year
   }
 
 }
