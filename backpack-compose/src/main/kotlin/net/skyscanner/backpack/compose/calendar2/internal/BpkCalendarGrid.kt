@@ -74,8 +74,7 @@ internal fun BpkCalendarGrid(
   }
 }
 
-private const val DAYS_IN_WEEK = 7
-private const val COLUMN_COUNT = DAYS_IN_WEEK
+private const val COLUMN_COUNT = 7
 private const val CONTENT_TYPE_HEADER = 1
 private const val CONTENT_TYPE_DAY = 2
 private const val CONTENT_TYPE_SPACE = 3
