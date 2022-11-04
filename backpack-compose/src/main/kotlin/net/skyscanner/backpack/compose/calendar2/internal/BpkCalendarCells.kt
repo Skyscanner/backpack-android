@@ -18,8 +18,11 @@
 
 package net.skyscanner.backpack.compose.calendar2.internal
 
+import android.view.View
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,6 +36,7 @@ import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.applyIf
 import org.threeten.bp.YearMonth
 
 @Composable
@@ -69,4 +73,19 @@ internal fun BpkCalendarHeaderCell(
       )
     }
   }
+}
+
+@Composable
+internal fun BpkCalendarSpaceCell(
+  cell: CalendarCell.Space,
+  modifier: Modifier = Modifier,
+) {
+  Spacer(
+    modifier = modifier.applyIf(cell.selected) {
+      background(
+        brush = CalendarDayBackgroundBrushes.selectionTop(CalendarCell.Selection.Middle),
+        shape = CalendarBackgroundDayShapes.selectionTop(CalendarCell.Selection.Middle),
+      )
+    }
+  )
 }
