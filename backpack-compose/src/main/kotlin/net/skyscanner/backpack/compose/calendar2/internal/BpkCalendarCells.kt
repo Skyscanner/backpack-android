@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.compose.calendar2.internal
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,6 +28,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.heading
@@ -50,7 +52,7 @@ internal fun BpkCalendarHeaderCell(
   onSelectWholeMonth: (CalendarCell.Header) -> Unit,
 ) {
   Row(
-    modifier = modifier,
+    modifier = modifier.padding(horizontal = BpkSpacing.Base),
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
@@ -90,9 +92,11 @@ internal fun BpkCalendarDayCell(
     modifier = modifier
       .padding(bottom = BpkSpacing.Lg)
       .selectable(
+        indication = null,
         selected = model.selection != null,
         enabled = !model.inactive,
-        onClick = { onClick(model) }
+        onClick = { onClick(model) },
+        interactionSource = remember { MutableInteractionSource() },
       ),
   ) {
 

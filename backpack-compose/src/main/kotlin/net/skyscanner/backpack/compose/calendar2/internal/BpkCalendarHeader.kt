@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.calendar2.internal
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
@@ -43,7 +44,7 @@ internal fun BpkCalendarHeader(
 ) {
   Column(modifier = modifier.semantics { invisibleToUser() }) {
     Row(
-      modifier = Modifier.fillMaxWidth(),
+      modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 50.dp),
       verticalAlignment = Alignment.CenterVertically,
       horizontalArrangement = Arrangement.SpaceAround,
     ) {
