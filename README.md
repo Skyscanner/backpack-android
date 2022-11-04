@@ -2,7 +2,7 @@
 
 > Backpack is a collection of design resources, reusable components and guidelines for creating Skyscanner's products.
 
-[![CI Status](https://github.com/Skyscanner/backpack-android/workflows/CI/badge.svg)](https://github.com/Skyscanner/backpack-android/actions)
+[![CI Status](https://github.com/Skyscanner/backpack-android/workflows/Main/badge.svg)](https://github.com/Skyscanner/backpack-android/actions)
 
 [![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
 [![license](https://img.shields.io/github/license/Skyscanner/backpack-android.svg)](https://github.com/Skyscanner/backpack-android)
