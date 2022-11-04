@@ -44,6 +44,15 @@ Given that you have a compatible environment as stated above you can now set up 
 +  Open the project in Android Studio
 + If you are a Skyscanner employee, search the internal documentation for _"Guide – Setup Internal Backpack Android Builds"_ and follow the instructions.
 
+## Creating components
+
+To create a new component in Compose you can use the following script to setup the most common required parts of a component:
+
+```
+python3 scripts/generate-component.py NameOfComponent
+```
+
+Note: This currently is not supported for creating components using the view system.
 
 ## Testing
 
