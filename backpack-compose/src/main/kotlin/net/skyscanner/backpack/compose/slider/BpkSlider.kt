@@ -79,5 +79,3 @@ private fun sliderColors() = SliderDefaults.colors(
   activeTrackColor = BpkTheme.colors.coreAccent,
   inactiveTrackColor = BpkTheme.colors.line,
 )
-
-// Extract colours into its own private function and create a disabled slider

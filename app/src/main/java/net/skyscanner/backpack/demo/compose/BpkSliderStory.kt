@@ -54,13 +54,5 @@ fun BpkSliderStory() {
       values = rangeSliderValue,
       onValueChange = { newValue -> rangeSliderValue = newValue }
     )
-
-    Text(text = "Disabled", fontSize = BpkTheme.typography.label2.fontSize)
-    var disabledSliderValue by remember { mutableStateOf(0.5f) }
-    BpkSlider(
-      value = disabledSliderValue,
-      onValueChange = { newValue -> disabledSliderValue = newValue },
-      enabled = false,
-    )
   }
 }
