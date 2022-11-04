@@ -18,17 +18,22 @@
 
 package net.skyscanner.backpack.compose.calendar2.internal
 
-import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -37,13 +42,12 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.applyIf
-import org.threeten.bp.YearMonth
 
 @Composable
 internal fun BpkCalendarHeaderCell(
   model: CalendarCell.Header,
   modifier: Modifier = Modifier,
-  onSelectWholeMonth: (YearMonth) -> Unit,
+  onSelectWholeMonth: (CalendarCell.Header) -> Unit,
 ) {
   Row(
     modifier = modifier,
@@ -59,8 +63,7 @@ internal fun BpkCalendarHeaderCell(
       modifier = Modifier
         .weight(1f)
         .semantics { heading() }
-        .padding(vertical = BpkSpacing.Lg)
-      ,
+        .padding(vertical = BpkSpacing.Lg),
     )
 
     val monthSelectionMode = model.monthSelectionMode
@@ -69,7 +72,54 @@ internal fun BpkCalendarHeaderCell(
         text = monthSelectionMode.label,
         enabled = model.calendarSelectionMode !is CalendarParams.SelectionMode.Disabled,
         type = BpkButtonType.Link,
-        onClick = { onSelectWholeMonth(model.yearMonth) },
+        onClick = { onSelectWholeMonth(model) },
+      )
+    }
+  }
+}
+
+@Composable
+internal fun BpkCalendarDayCell(
+  model: CalendarCell.Day,
+  modifier: Modifier = Modifier,
+  onClick: (CalendarCell.Day) -> Unit,
+) {
+  Column(
+    verticalArrangement = Arrangement.Top,
+    horizontalAlignment = Alignment.CenterHorizontally,
+    modifier = modifier
+      .padding(bottom = BpkSpacing.Lg)
+      .selectable(
+        selected = model.selection != null,
+        enabled = !model.inactive,
+        onClick = { onClick(model) }
+      ),
+  ) {
+
+    BpkText(
+      text = model.text.toString(),
+      overflow = TextOverflow.Ellipsis,
+      textAlign = TextAlign.Center,
+      maxLines = 1,
+      style = BpkTheme.typography.heading5,
+      color = CalendarDayContentColors.dateColor(model),
+      modifier = with(CalendarBackgroundDay) {
+        Modifier
+          .height(36.dp)
+          .dateBackground(model)
+      },
+    )
+
+    val label = model.info.label
+    if (!model.inactive && !label.isNullOrEmpty()) {
+      BpkText(
+        text = label,
+        modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
+        overflow = TextOverflow.Ellipsis,
+        textAlign = TextAlign.Center,
+        maxLines = 2,
+        style = BpkTheme.typography.caption,
+        color = CalendarDayContentColors.labelColor(model)
       )
     }
   }
@@ -77,14 +127,14 @@ internal fun BpkCalendarHeaderCell(
 
 @Composable
 internal fun BpkCalendarSpaceCell(
-  cell: CalendarCell.Space,
+  model: CalendarCell.Space,
   modifier: Modifier = Modifier,
 ) {
   Spacer(
-    modifier = modifier.applyIf(cell.selected) {
+    modifier = modifier.applyIf(model.selected) {
       background(
-        brush = CalendarDayBackgroundBrushes.selectionTop(CalendarCell.Selection.Middle),
-        shape = CalendarBackgroundDayShapes.selectionTop(CalendarCell.Selection.Middle),
+        brush = CalendarBackgroundDay.selectionTopBrush(CalendarCell.Selection.Middle),
+        shape = CalendarBackgroundDay.selectionTopShape(CalendarCell.Selection.Middle),
       )
     }
   )

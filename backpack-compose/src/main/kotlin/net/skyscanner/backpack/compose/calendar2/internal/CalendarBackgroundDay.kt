@@ -18,28 +18,54 @@
 
 package net.skyscanner.backpack.compose.calendar2.internal
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.toRect
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.calendar2.CellStatus
+import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
+import net.skyscanner.backpack.compose.theme.BpkTheme
 
-internal object CalendarBackgroundDayShapes {
+internal object CalendarBackgroundDay {
 
-  fun status(): Shape =
-    CircleShape
+  fun Modifier.dateBackground(
+    model: CalendarCell.Day,
+  ): Modifier = composed {
+    val selection = model.selection
+    val info = model.info
+    val status = model.info.status
 
-  fun selectionTop(selection: CalendarCell.Selection): Shape =
+    when {
+      selection != null ->
+        this
+          .background(selectionBottomBrush(selection), selectionBottomShape(selection))
+          .background(selectionTopBrush(selection), selectionTopShape(selection))
+
+      model.inactive -> this
+      info.style == CellStatusStyle.Background -> background(statusColor(status), CircleShape)
+      else -> this
+    }
+  }
+
+  internal fun selectionTopShape(selection: CalendarCell.Selection): Shape =
     when (selection) {
       CalendarCell.Selection.Single -> CircleShape
       CalendarCell.Selection.Double -> PaddedCircleShape(3.dp)
@@ -50,9 +76,9 @@ internal object CalendarBackgroundDayShapes {
       CalendarCell.Selection.EndMonth -> CircleShape
     }
 
-  fun selectionBottom(selection: CalendarCell.Selection): Shape? =
+  private fun selectionBottomShape(selection: CalendarCell.Selection): Shape =
     when (selection) {
-      CalendarCell.Selection.Single -> null
+      CalendarCell.Selection.Single -> RectangleShape
       CalendarCell.Selection.Double -> CircleShape
       CalendarCell.Selection.Start -> EndSemiRect
       CalendarCell.Selection.StartMonth -> EndSemiRect
@@ -61,6 +87,40 @@ internal object CalendarBackgroundDayShapes {
       CalendarCell.Selection.EndMonth -> StartSemiRect
     }
 
+  @Composable
+  private fun statusColor(status: CellStatus?): Color =
+    when (status) {
+      CellStatus.Positive -> BpkTheme.colors.statusSuccessSpot
+      CellStatus.Neutral -> BpkTheme.colors.statusWarningSpot
+      CellStatus.Negative -> BpkTheme.colors.statusDangerSpot
+      CellStatus.Empty -> BpkTheme.colors.surfaceHighlight
+      null -> Color.Transparent
+    }
+
+  @Composable
+  internal fun selectionTopBrush(selection: CalendarCell.Selection): Brush =
+    when (selection) {
+      CalendarCell.Selection.Single -> BpkTheme.colors.coreAccent
+      CalendarCell.Selection.Double -> BpkTheme.colors.coreAccent
+      CalendarCell.Selection.Start -> BpkTheme.colors.coreAccent
+      CalendarCell.Selection.StartMonth -> BpkTheme.colors.surfaceHighlight
+      CalendarCell.Selection.Middle -> BpkTheme.colors.surfaceHighlight
+      CalendarCell.Selection.End -> BpkTheme.colors.coreAccent
+      CalendarCell.Selection.EndMonth -> BpkTheme.colors.surfaceHighlight
+    }.let(::SolidColor)
+
+  @Composable
+  private fun selectionBottomBrush(selection: CalendarCell.Selection): Brush =
+    when (selection) {
+      CalendarCell.Selection.Single -> Color.Unspecified
+      CalendarCell.Selection.Double -> BpkTheme.colors.coreAccent
+      CalendarCell.Selection.Start -> BpkTheme.colors.surfaceHighlight
+      CalendarCell.Selection.StartMonth -> BpkTheme.colors.surfaceHighlight
+      CalendarCell.Selection.Middle -> Color.Unspecified
+      CalendarCell.Selection.End -> BpkTheme.colors.surfaceHighlight
+      CalendarCell.Selection.EndMonth -> BpkTheme.colors.surfaceHighlight
+    }.let(::SolidColor)
+
   private val StartSemiRect = GenericShape { size, layoutDirection ->
     addRect(
       when (layoutDirection) {
@@ -68,6 +128,7 @@ internal object CalendarBackgroundDayShapes {
           topLeft = Offset.Zero,
           bottomRight = Offset(size.width / 2, size.height),
         )
+
         LayoutDirection.Rtl -> Rect(
           topLeft = Offset(size.width / 2, 0f),
           bottomRight = Offset(size.width, size.height),
@@ -83,6 +144,7 @@ internal object CalendarBackgroundDayShapes {
           topLeft = Offset(size.width / 2, 0f),
           bottomRight = Offset(size.width, size.height),
         )
+
         LayoutDirection.Rtl -> Rect(
           topLeft = Offset.Zero,
           bottomRight = Offset(size.width / 2, size.height),
@@ -91,7 +153,7 @@ internal object CalendarBackgroundDayShapes {
     )
   }
 
-  private fun PaddedCircleShape(padding: Dp) : Shape =
+  private fun PaddedCircleShape(padding: Dp): Shape =
     object : Shape {
       override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline {
         val deflateBy = with(density) { padding.toPx() }

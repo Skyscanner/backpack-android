@@ -21,23 +21,44 @@ package net.skyscanner.backpack.compose.calendar2.internal
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.calendar2.CellStatus
+import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 internal object CalendarDayContentColors {
 
   @Composable
-  fun label(status: CellStatus?): Color =
-    when (status) {
-      CellStatus.Positive -> BpkTheme.colors.statusSuccessSpot
-      CellStatus.Neutral -> BpkTheme.colors.textSecondary
-      CellStatus.Negative -> BpkTheme.colors.textSecondary
-      CellStatus.Empty -> BpkTheme.colors.textDisabled
-      null -> BpkTheme.colors.textSecondary
+  fun labelColor(model: CalendarCell.Day): Color {
+    val info = model.info
+    val status = model.info.status
+
+    return when {
+      info.style == CellStatusStyle.Label && status != null ->
+        when (status) {
+          CellStatus.Positive -> BpkTheme.colors.statusSuccessSpot
+          CellStatus.Neutral -> BpkTheme.colors.textSecondary
+          CellStatus.Negative -> BpkTheme.colors.textSecondary
+          CellStatus.Empty -> BpkTheme.colors.textDisabled
+        }
+      else -> BpkTheme.colors.textSecondary
     }
+  }
 
   @Composable
-  fun selection(selection: CalendarCell.Selection?): Color =
+  fun dateColor(model: CalendarCell.Day): Color {
+    val selection = model.selection
+    val info = model.info
+    val status = model.info.status
+    return when {
+      selection != null -> selectedColor(selection)
+      model.inactive -> BpkTheme.colors.textDisabled
+      info.style == CellStatusStyle.Background && status != null -> statusColor(status)
+      else -> BpkTheme.colors.textPrimary
+    }
+  }
+
+  @Composable
+  private fun selectedColor(selection: CalendarCell.Selection): Color =
     when (selection) {
       CalendarCell.Selection.Single -> BpkTheme.colors.textPrimaryInverse
       CalendarCell.Selection.Double -> BpkTheme.colors.textPrimaryInverse
@@ -46,17 +67,15 @@ internal object CalendarDayContentColors {
       CalendarCell.Selection.Middle -> BpkTheme.colors.textPrimary
       CalendarCell.Selection.End -> BpkTheme.colors.textPrimaryInverse
       CalendarCell.Selection.EndMonth -> BpkTheme.colors.textPrimary
-      null -> BpkTheme.colors.textPrimary
     }
 
   @Composable
-  fun status(status: CellStatus?): Color =
+  private fun statusColor(status: CellStatus): Color =
     when (status) {
       CellStatus.Positive -> BpkTheme.colors.textPrimaryInverse
       CellStatus.Neutral -> BpkTheme.colors.textOnLight
       CellStatus.Negative -> BpkTheme.colors.textPrimaryInverse
       CellStatus.Empty -> BpkTheme.colors.textPrimary
-      null -> BpkTheme.colors.textPrimary
     }
 
 }
