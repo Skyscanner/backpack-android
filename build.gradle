@@ -96,7 +96,7 @@ ext {
   googleMaps = "com.google.android.gms:play-services-maps:18.1.0"
   constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
   swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-  threeTenAbpVersion = "1.4.1"
+  threeTenAbpVersion = "1.4.3"
   threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
   threeTenAbpAndroid = "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
   picasso = "com.squareup.picasso:picasso:2.71828"
