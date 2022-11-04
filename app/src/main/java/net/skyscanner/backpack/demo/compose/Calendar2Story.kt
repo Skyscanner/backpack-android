@@ -31,6 +31,8 @@ import net.skyscanner.backpack.compose.calendar2.rememberCalendarController
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.toast.BpkToast
+import org.threeten.bp.Month
+import org.threeten.bp.YearMonth
 
 @Composable
 fun Calendar2Story(
@@ -41,11 +43,26 @@ fun Calendar2Story(
   val automationMode = LocalInspectionMode.current
   val controller = rememberCalendarController(initialParams = CalendarStoryType.createInitialParams(type))
 
-  LaunchedEffect(type, controller) {
+  LaunchedEffect(type, controller, automationMode) {
     when (type) {
       CalendarStoryType.SelectionWholeMonth -> controller.setSelection(CalendarStorySelection.WholeMonthRange)
       CalendarStoryType.PreselectedRange -> controller.setSelection(CalendarStorySelection.PreselectedRange)
       else -> Unit
+    }
+
+    if (automationMode) {
+      if (type == CalendarStoryType.SelectionWholeMonth) {
+        controller.setSelection(
+          CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
+        )
+      } else {
+        controller.setSelection(
+          CalendarSelection.Dates(
+            controller.state.value.params.now.plusDays(5),
+            controller.state.value.params.now.plusDays(10),
+          )
+        )
+      }
     }
 
     controller.state
