@@ -18,24 +18,14 @@
 
 package net.skyscanner.backpack.compose.calendar2.internal
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectable
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -43,7 +33,6 @@ import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.applyIf
 
 @Composable
 internal fun BpkCalendarHeaderCell(
@@ -78,68 +67,4 @@ internal fun BpkCalendarHeaderCell(
       )
     }
   }
-}
-
-@Composable
-internal fun BpkCalendarDayCell(
-  model: CalendarCell.Day,
-  modifier: Modifier = Modifier,
-  onClick: (CalendarCell.Day) -> Unit,
-) {
-  Column(
-    verticalArrangement = Arrangement.Top,
-    horizontalAlignment = Alignment.CenterHorizontally,
-    modifier = modifier
-      .padding(bottom = BpkSpacing.Lg)
-      .selectable(
-        indication = null,
-        selected = model.selection != null,
-        enabled = !model.inactive,
-        onClick = { onClick(model) },
-        interactionSource = remember { MutableInteractionSource() },
-      ),
-  ) {
-
-    BpkText(
-      text = model.text.toString(),
-      overflow = TextOverflow.Ellipsis,
-      textAlign = TextAlign.Center,
-      maxLines = 1,
-      style = BpkTheme.typography.heading5,
-      color = CalendarDayContentColors.dateColor(model),
-      modifier = with(CalendarBackgroundDay) {
-        Modifier
-          .height(36.dp)
-          .dateBackground(model)
-      },
-    )
-
-    val label = model.info.label
-    if (!model.inactive && !label.isNullOrEmpty()) {
-      BpkText(
-        text = label,
-        modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
-        overflow = TextOverflow.Ellipsis,
-        textAlign = TextAlign.Center,
-        maxLines = 2,
-        style = BpkTheme.typography.caption,
-        color = CalendarDayContentColors.labelColor(model)
-      )
-    }
-  }
-}
-
-@Composable
-internal fun BpkCalendarSpaceCell(
-  model: CalendarCell.Space,
-  modifier: Modifier = Modifier,
-) {
-  Spacer(
-    modifier = modifier.applyIf(model.selected) {
-      background(
-        brush = CalendarBackgroundDay.selectionTopBrush(CalendarCell.Selection.Middle),
-        shape = CalendarBackgroundDay.selectionTopShape(CalendarCell.Selection.Middle),
-      )
-    }
-  )
 }

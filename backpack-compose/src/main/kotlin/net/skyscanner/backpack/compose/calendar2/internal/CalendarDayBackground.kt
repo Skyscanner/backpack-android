@@ -44,7 +44,7 @@ import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
-internal object CalendarBackgroundDay {
+internal object CalendarDayBackground {
 
   fun Modifier.dateBackground(
     model: CalendarCell.Day,
