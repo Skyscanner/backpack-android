@@ -34,8 +34,6 @@ import net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
 BpkHorizontalNav(context).apply {
   addTab(newTab().setText("1"))
   addTab(newTab().setText("2"))
-  setNotificationDot(0, true)
-  setBadge(1, "Beta")
 }
 ```
 

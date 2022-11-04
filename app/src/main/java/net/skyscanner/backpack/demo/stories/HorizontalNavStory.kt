@@ -33,7 +33,6 @@ class HorizontalNavStory : Story() {
     init(view.findViewById(R.id.horizontal_nav_small))
     init(view.findViewById(R.id.horizontal_nav_alternate))
     init(view.findViewById(R.id.horizontal_nav_rtl))
-    init(view.findViewById(R.id.horizontal_nav_badge))
     init(view.findViewById(R.id.horizontal_nav_icons))
   }
 
@@ -41,11 +40,6 @@ class HorizontalNavStory : Story() {
     horizontalNav.addTab("Flights", R.drawable.bpk_flight_sm)
     horizontalNav.addTab("Hotels", R.drawable.bpk_hotels_sm)
     horizontalNav.addTab("Car Hire", R.drawable.bpk_cars_sm)
-    if (horizontalNav.id == R.id.horizontal_nav_badge) {
-      horizontalNav.setBadge(0, "BETA")
-    } else if (horizontalNav.id != R.id.horizontal_nav_icons) {
-      horizontalNav.setNotificationDot(0, true)
-    }
   }
 
   private fun BpkHorizontalNav.addTab(tabText: String, @DrawableRes icon: Int) {

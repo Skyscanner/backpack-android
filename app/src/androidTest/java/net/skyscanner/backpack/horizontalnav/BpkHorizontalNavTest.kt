@@ -62,19 +62,6 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotHorizontalNav_notificationDot() {
-    horizontalNav.setNotificationDot(0, true)
-    snap(horizontalNav)
-  }
-
-  @Test
-  fun screenshotHorizontalNav_badge() {
-    horizontalNav.tabMode = TabLayout.MODE_SCROLLABLE
-    horizontalNav.setBadge(0, "Beta")
-    snap(horizontalNav)
-  }
-
-  @Test
   fun screenshotHorizontalNav_icons() {
     val horizontalNav = BpkHorizontalNav(testContext).apply {
       addTab(newTab().setText("Tab 1").setIcon(R.drawable.bpk_cars))
