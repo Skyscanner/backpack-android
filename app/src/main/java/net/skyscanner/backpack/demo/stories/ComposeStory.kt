@@ -22,8 +22,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.ComposeView
 import net.skyscanner.backpack.demo.BackpackDemoTheme
+import net.skyscanner.backpack.demo.compose.LocalAutomationMode
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 import net.skyscanner.backpack.demo.data.ComposeNode
 
@@ -35,11 +37,14 @@ open class ComposeStory : Story() {
     savedInstanceState: Bundle?
   ): View? {
     val composable = arguments?.getString(ID) ?: savedInstanceState?.getString(ID)
+    val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
     if (composable != null) {
       return ComposeView(requireContext()).apply {
         setContent {
           BackpackDemoTheme {
-            (ComponentRegistry.getStoryCreator(composable) as ComposeNode).composable()
+            CompositionLocalProvider(LocalAutomationMode provides automationMode) {
+              (ComponentRegistry.getStoryCreator(composable) as ComposeNode).composable()
+            }
           }
         }
       }

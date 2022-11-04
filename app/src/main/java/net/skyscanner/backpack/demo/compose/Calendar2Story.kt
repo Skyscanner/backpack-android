@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalInspectionMode
 import kotlinx.coroutines.flow.filter
 import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarSelection
@@ -31,8 +30,6 @@ import net.skyscanner.backpack.compose.calendar2.rememberCalendarController
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.toast.BpkToast
-import org.threeten.bp.Month
-import org.threeten.bp.YearMonth
 
 @Composable
 fun Calendar2Story(
@@ -40,7 +37,7 @@ fun Calendar2Story(
   modifier: Modifier = Modifier,
 ) {
   val context = LocalContext.current
-  val automationMode = LocalInspectionMode.current
+  val automationMode = LocalAutomationMode.current
   val controller = rememberCalendarController(initialParams = CalendarStoryType.createInitialParams(type))
 
   LaunchedEffect(type, controller, automationMode) {
@@ -48,21 +45,6 @@ fun Calendar2Story(
       CalendarStoryType.SelectionWholeMonth -> controller.setSelection(CalendarStorySelection.WholeMonthRange)
       CalendarStoryType.PreselectedRange -> controller.setSelection(CalendarStorySelection.PreselectedRange)
       else -> Unit
-    }
-
-    if (automationMode) {
-      if (type == CalendarStoryType.SelectionWholeMonth) {
-        controller.setSelection(
-          CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
-        )
-      } else {
-        controller.setSelection(
-          CalendarSelection.Dates(
-            controller.state.value.params.now.plusDays(5),
-            controller.state.value.params.now.plusDays(10),
-          )
-        )
-      }
     }
 
     controller.state
