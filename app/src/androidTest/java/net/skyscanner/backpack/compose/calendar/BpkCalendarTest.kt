@@ -30,9 +30,11 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollToIndex
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -44,7 +46,6 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
 import net.skyscanner.backpack.compose.calendar2.BpkCalendar
 import net.skyscanner.backpack.compose.calendar2.BpkCalendarController
-import net.skyscanner.backpack.compose.calendar2.internal.CALENDAR_GRID_TEST_TAG
 import net.skyscanner.backpack.demo.compose.BackpackPreview
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.junit.Assume
@@ -127,11 +128,9 @@ class BpkCalendarTest : BpkSnapshotTest() {
   fun screenshotTestCalendarWithStartDateSelected() {
     val controller = BpkCalendarController(BpkCalendarTestCases.Params.WithStartDateSelected, scope)
 
-    val indexOfSelectedItem = BpkCalendarTestCases.Indices.WithStartDateSelected_OfSelectedItem
     snap(controller) {
-      it
-        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-        .performScrollToIndex(indexOfSelectedItem)
+      it.onAllNodesWithText("17")
+        .onFirst()
         .performClick()
         .assertIsDisplayed()
     }
@@ -141,11 +140,15 @@ class BpkCalendarTest : BpkSnapshotTest() {
   fun screenshotTestCalendarWithSameStartAndEndDateSelected() {
     val controller = BpkCalendarController(BpkCalendarTestCases.Params.WithSameStartAndEndDateSelected, scope)
 
-    val indexOfSelectedItem = BpkCalendarTestCases.Indices.WithSameStartAndEndDateSelected_OfSelectedItem
     snap(controller) {
-      it
-        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-        .performScrollToIndex(indexOfSelectedItem)
+
+      it.onAllNodesWithText("17")
+        .onFirst()
+        .performClick()
+        .assertIsDisplayed()
+
+      it.onAllNodesWithText("17")
+        .onFirst()
         .performClick()
         .assertIsDisplayed()
     }
@@ -167,19 +170,15 @@ class BpkCalendarTest : BpkSnapshotTest() {
   fun screenshotTestCalendarWithSingleDaySelected() {
     val controller = BpkCalendarController(BpkCalendarTestCases.Params.WithSingleDaySelected, scope)
 
-    val indexOfInitialSelectedItem = BpkCalendarTestCases.Indices.WithSingleDaySelectedParams_OfInitialSelectedItem
-    val indexOfFinalSelectedItem = BpkCalendarTestCases.Indices.WithSingleDaySelectedParams_OfFinalSelectedItem
-
     snap(controller) {
-      it
-        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-        .performScrollToIndex(indexOfInitialSelectedItem)
+
+      it.onAllNodesWithText("13")
+        .onLast()
         .performClick()
         .assertIsDisplayed()
 
-      it
-        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-        .performScrollToIndex(indexOfFinalSelectedItem)
+      it.onAllNodesWithText("14")
+        .onLast()
         .performClick()
         .assertIsDisplayed()
     }
@@ -240,22 +239,15 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   private fun selectStartEnd(controller: BpkCalendarController) {
-
-    val indexOfRangeStart = BpkCalendarTestCases.Indices.SelectStartEnd_OfRangeStart
-    val indexOfRangeEnd = BpkCalendarTestCases.Indices.SelectStartEnd_OfRangeEnd
-
     snap(controller) {
-      it
-        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-        .performScrollToIndex(indexOfRangeStart)
+      it.onAllNodesWithText("17")
+        .onFirst()
         .performClick()
         .assertIsDisplayed()
 
-      it
-        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-        .performScrollToIndex(indexOfRangeEnd)
+      it.onAllNodesWithText("14")
+        .onLast()
         .performClick()
-        .performScrollToIndex(indexOfRangeStart)
         .assertIsDisplayed()
     }
   }
@@ -277,12 +269,15 @@ class BpkCalendarTest : BpkSnapshotTest() {
           BpkCalendar(controller = controller, modifier = Modifier.testTag("CalendarRoot"))
         }
       }
-      setupView(activity.window.decorView)
-      asyncScreenshot.record(activity.window.decorView)
     }
 
-    val view = composeTestRule.onNodeWithTag("CalendarRoot").fetchRootView()
     content(composeTestRule)
+    val view = composeTestRule.onNodeWithTag("CalendarRoot").fetchRootView()
+
+    rule.scenario.onActivity { activity ->
+      setupView(view)
+      asyncScreenshot.record(view)
+    }
   }
 
   private fun SemanticsNodeInteraction.fetchRootView(): View {
