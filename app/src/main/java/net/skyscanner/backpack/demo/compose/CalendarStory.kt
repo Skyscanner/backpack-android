@@ -25,14 +25,14 @@ import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.flow.filter
 import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarSelection
-import net.skyscanner.backpack.compose.calendar2.BpkCalendar
-import net.skyscanner.backpack.compose.calendar2.rememberCalendarController
+import net.skyscanner.backpack.compose.calendar.BpkCalendar
+import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
-fun Calendar2Story(
+fun CalendarStory(
   type: CalendarStoryType,
   modifier: Modifier = Modifier,
 ) {

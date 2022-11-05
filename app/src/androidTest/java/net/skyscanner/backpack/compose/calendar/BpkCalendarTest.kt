@@ -46,9 +46,7 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
 import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.compose.calendar2.BpkCalendar
-import net.skyscanner.backpack.compose.calendar2.BpkCalendarController
-import net.skyscanner.backpack.compose.calendar2.internal.CALENDAR_GRID_TEST_TAG
+import net.skyscanner.backpack.compose.calendar.internal.CALENDAR_GRID_TEST_TAG
 import net.skyscanner.backpack.demo.compose.BackpackPreview
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.junit.Assume

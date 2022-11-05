@@ -26,7 +26,7 @@ import net.skyscanner.backpack.demo.compose.BodyStyleStory
 import net.skyscanner.backpack.demo.compose.BpkFabStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
-import net.skyscanner.backpack.demo.compose.Calendar2Story
+import net.skyscanner.backpack.demo.compose.CalendarStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
@@ -248,14 +248,14 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Selection Disabled" composeStory { Calendar2Story(CalendarStoryType.SelectionDisabled) },
-            "Selection Single" composeStory { Calendar2Story(CalendarStoryType.SelectionSingle) },
-            "Selection Range" composeStory { Calendar2Story(CalendarStoryType.SelectionRange) },
-            "Selection Whole Month" composeStory { Calendar2Story(CalendarStoryType.SelectionWholeMonth) },
-            "Disabled weekends" composeStory { Calendar2Story(CalendarStoryType.WithDisabledDates) },
-            "Day colours" composeStory { Calendar2Story(CalendarStoryType.WithColors) },
-            "Day labels" composeStory { Calendar2Story(CalendarStoryType.WithLabels) },
-            "Pre-selected range" composeStory { Calendar2Story(CalendarStoryType.PreselectedRange) },
+            "Selection Disabled" composeStory { CalendarStory(CalendarStoryType.SelectionDisabled) },
+            "Selection Single" composeStory { CalendarStory(CalendarStoryType.SelectionSingle) },
+            "Selection Range" composeStory { CalendarStory(CalendarStoryType.SelectionRange) },
+            "Selection Whole Month" composeStory { CalendarStory(CalendarStoryType.SelectionWholeMonth) },
+            "Disabled weekends" composeStory { CalendarStory(CalendarStoryType.WithDisabledDates) },
+            "Day colours" composeStory { CalendarStory(CalendarStoryType.WithColors) },
+            "Day labels" composeStory { CalendarStory(CalendarStoryType.WithLabels) },
+            "Pre-selected range" composeStory { CalendarStory(CalendarStoryType.PreselectedRange) },
           )
         ),
       )

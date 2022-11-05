@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.calendar2
+package net.skyscanner.backpack.compose.calendar
 
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -37,8 +37,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
-import net.skyscanner.backpack.compose.calendar2.internal.BpkCalendarGrid
-import net.skyscanner.backpack.compose.calendar2.internal.BpkCalendarHeader
+import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarGrid
+import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarHeader
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable

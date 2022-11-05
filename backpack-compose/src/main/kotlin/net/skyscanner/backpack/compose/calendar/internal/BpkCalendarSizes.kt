@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.calendar2.internal
+package net.skyscanner.backpack.compose.calendar.internal
 
 import androidx.compose.ui.unit.dp
 
