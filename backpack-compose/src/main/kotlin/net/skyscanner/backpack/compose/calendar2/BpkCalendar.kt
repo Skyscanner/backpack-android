@@ -58,7 +58,7 @@ fun BpkCalendar(
       modifier = Modifier.fillMaxWidth(),
     )
 
-    Box(modifier = modifier.weight(1f)) {
+    Box(modifier = Modifier.weight(1f)) {
 
       BpkCalendarGrid(
         state = state,

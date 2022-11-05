@@ -18,15 +18,18 @@
 
 package net.skyscanner.backpack.compose.calendar2.internal
 
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import net.skyscanner.backpack.calendar2.CalendarState
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarInteraction
+import net.skyscanner.backpack.util.InternalBackpackApi
 
 @Composable
 internal fun BpkCalendarGrid(
@@ -36,7 +39,7 @@ internal fun BpkCalendarGrid(
   onClick: (CalendarInteraction) -> Unit,
 ) {
   LazyVerticalGrid(
-    modifier = modifier,
+    modifier = modifier.testTag(CALENDAR_GRID_TEST_TAG),
     state = lazyGridState,
     columns = GridCells.Fixed(COLUMN_COUNT),
   ) {
@@ -78,3 +81,7 @@ private const val COLUMN_COUNT = 7
 private const val CONTENT_TYPE_HEADER = 1
 private const val CONTENT_TYPE_DAY = 2
 private const val CONTENT_TYPE_SPACE = 3
+
+@VisibleForTesting(otherwise = VisibleForTesting.NONE)
+@InternalBackpackApi
+const val CALENDAR_GRID_TEST_TAG = "BpkCalendarGrid"
