@@ -16,8 +16,6 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
@@ -39,7 +37,7 @@ android {
 
 dependencies {
   api rootProject.ext.threeTenAbpAndroid
-  
+
   androidTestImplementation rootProject.ext.junit
   androidTestImplementation rootProject.ext.junitAndroid
   androidTestImplementation rootProject.ext.coroutinesTest
