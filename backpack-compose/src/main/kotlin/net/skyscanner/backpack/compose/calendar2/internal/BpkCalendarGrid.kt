@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.calendar2.internal
 
+import android.annotation.SuppressLint
 import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -31,6 +32,7 @@ import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.util.InternalBackpackApi
 
+@SuppressLint("RestrictedApi")
 @Composable
 internal fun BpkCalendarGrid(
   state: CalendarState,

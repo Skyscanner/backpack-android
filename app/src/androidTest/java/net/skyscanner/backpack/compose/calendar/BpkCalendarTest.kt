@@ -21,14 +21,14 @@
 package net.skyscanner.backpack.compose.calendar
 
 import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
@@ -44,14 +44,16 @@ import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
 import net.skyscanner.backpack.compose.calendar2.BpkCalendar
 import net.skyscanner.backpack.compose.calendar2.BpkCalendarController
-import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.compose.calendar2.internal.CALENDAR_GRID_TEST_TAG
 import net.skyscanner.backpack.demo.compose.BackpackPreview
+import net.skyscanner.backpack.util.InternalBackpackApi
 import org.junit.Assume
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@OptIn(InternalBackpackApi::class)
 @RunWith(AndroidJUnit4::class)
 class BpkCalendarTest : BpkSnapshotTest() {
 
@@ -128,8 +130,10 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val indexOfSelectedItem = BpkCalendarTestCases.Indices.WithStartDateSelected_OfSelectedItem
     snap(controller) {
       it
+        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
         .performScrollToIndex(indexOfSelectedItem)
         .performClick()
+        .assertIsDisplayed()
     }
   }
 
@@ -140,8 +144,10 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val indexOfSelectedItem = BpkCalendarTestCases.Indices.WithSameStartAndEndDateSelected_OfSelectedItem
     snap(controller) {
       it
+        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
         .performScrollToIndex(indexOfSelectedItem)
         .performClick()
+        .assertIsDisplayed()
     }
   }
 
@@ -166,10 +172,16 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     snap(controller) {
       it
+        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
         .performScrollToIndex(indexOfInitialSelectedItem)
         .performClick()
+        .assertIsDisplayed()
+
+      it
+        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
         .performScrollToIndex(indexOfFinalSelectedItem)
         .performClick()
+        .assertIsDisplayed()
     }
   }
 
@@ -234,11 +246,17 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     snap(controller) {
       it
+        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
         .performScrollToIndex(indexOfRangeStart)
         .performClick()
+        .assertIsDisplayed()
+
+      it
+        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
         .performScrollToIndex(indexOfRangeEnd)
         .performClick()
         .performScrollToIndex(indexOfRangeStart)
+        .assertIsDisplayed()
     }
   }
 
@@ -247,7 +265,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
       BpkCalendar(controller = controller)
     }
 
-  private fun snap(controller: BpkCalendarController, content: (SemanticsNodeInteraction) -> SemanticsNodeInteraction) {
+  private fun snap(controller: BpkCalendarController, content: (ComposeTestRule) -> Unit) {
+
     // we don't run Compose tests in Themed variant – Compose uses it own theming engine
     Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
 
@@ -258,29 +277,12 @@ class BpkCalendarTest : BpkSnapshotTest() {
           BpkCalendar(controller = controller, modifier = Modifier.testTag("CalendarRoot"))
         }
       }
+      setupView(activity.window.decorView)
+      asyncScreenshot.record(activity.window.decorView)
     }
 
-    val view = composeTestRule.onNodeWithTag("CalendarRoot")
-      .let(content)
-      .fetchRootView()
-
-    rule.scenario.onActivity { activity ->
-      // This is not ideal but we need to see the background contrast as well
-      val viewRoot = view.parent as ViewGroup
-      viewRoot.removeView(view)
-
-      val wrapper = FrameLayout(activity)
-      wrapper.layoutParams = FrameLayout.LayoutParams(
-        FrameLayout.LayoutParams.WRAP_CONTENT,
-        FrameLayout.LayoutParams.WRAP_CONTENT
-      )
-      wrapper.setPadding(20, 20, 20, 20)
-      wrapper.setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
-      wrapper.addView(view)
-
-      setupView(wrapper)
-      asyncScreenshot.record(wrapper)
-    }
+    val view = composeTestRule.onNodeWithTag("CalendarRoot").fetchRootView()
+    content(composeTestRule)
   }
 
   private fun SemanticsNodeInteraction.fetchRootView(): View {
