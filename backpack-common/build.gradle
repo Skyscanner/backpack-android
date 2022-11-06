@@ -37,7 +37,7 @@ android {
 
 dependencies {
   api rootProject.ext.threeTenAbpAndroid
-
+  androidTestImplementation rootProject.ext.espressoCore
   androidTestImplementation rootProject.ext.junit
   androidTestImplementation rootProject.ext.junitAndroid
   androidTestImplementation rootProject.ext.coroutinesTest

@@ -21,14 +21,21 @@ package net.skyscanner.backpack.calendar2.data
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSettings
 import net.skyscanner.backpack.calendar2.extension.yearMonth
+import net.skyscanner.backpack.calendar2.initAndroidThreeTen
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
 import org.threeten.bp.Month
 
 class CalendarCellsLayoutTests {
+
+  @Before
+  fun setup() {
+    initAndroidThreeTen()
+  }
 
   @Test
   fun header_is_the_first_cell_in_month() {

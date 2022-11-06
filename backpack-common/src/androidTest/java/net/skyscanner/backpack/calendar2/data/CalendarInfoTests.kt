@@ -23,12 +23,19 @@ import net.skyscanner.backpack.calendar2.CellInfo
 import net.skyscanner.backpack.calendar2.CellStatus
 import net.skyscanner.backpack.calendar2.CellStatusStyle
 import net.skyscanner.backpack.calendar2.extension.toIterable
+import net.skyscanner.backpack.calendar2.initAndroidThreeTen
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
 
 class CalendarInfoTests {
+
+  @Before
+  fun setup() {
+    initAndroidThreeTen()
+  }
 
   @Test
   fun if_date_is_disabled_cell_has_correct_state() {

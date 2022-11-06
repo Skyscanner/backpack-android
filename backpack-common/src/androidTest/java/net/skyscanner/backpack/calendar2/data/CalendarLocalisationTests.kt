@@ -22,9 +22,11 @@ import android.text.Spanned
 import android.text.style.TtsSpan
 import androidx.core.text.getSpans
 import net.skyscanner.backpack.calendar2.CalendarSettings
+import net.skyscanner.backpack.calendar2.initAndroidThreeTen
 import net.skyscanner.backpack.calendar2.testCalendarWith
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
 import org.threeten.bp.DayOfWeek
 import java.util.Locale
@@ -34,6 +36,11 @@ class CalendarLocalisationTests {
   private val russianLocale = CalendarSettings.Default.copy(
     locale = Locale.forLanguageTag("ru-RU"),
   )
+
+  @Before
+  fun setup() {
+    initAndroidThreeTen()
+  }
 
   @Test
   fun month_titles_depend_on_locale() {
