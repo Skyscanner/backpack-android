@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2
 
+import androidx.compose.runtime.Stable
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -27,6 +28,7 @@ import kotlinx.coroutines.flow.StateFlow
  * It works like a state machine – calling each method updates its state in background and emits new state to [state].
  * The state could also be updated when some UI event (such as date selection) happens.
  */
+@Stable
 interface CalendarComponent {
 
   /**

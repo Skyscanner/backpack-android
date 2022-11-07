@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import androidx.compose.runtime.Immutable
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.extension.firstDay
@@ -27,6 +28,7 @@ import net.skyscanner.backpack.calendar2.extension.yearMonth
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 
+@Immutable
 @InternalBackpackApi
 data class CalendarCells(
   private val months: List<CalendarMonth>,

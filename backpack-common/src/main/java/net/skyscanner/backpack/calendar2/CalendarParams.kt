@@ -18,6 +18,9 @@
 
 package net.skyscanner.backpack.calendar2
 
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
+import net.skyscanner.backpack.calendar2.CalendarParams.MonthSelectionMode
 import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.TextStyle
@@ -38,6 +41,7 @@ import java.util.Locale
  * @param now [LocalDate] a date for the calendar to consider as current
  * @param monthSelectionMode [MonthSelectionMode] setting describing the month selection behaviour
  */
+@Immutable
 data class CalendarParams(
   val selectionMode: SelectionMode,
   val range: ClosedRange<LocalDate> = LocalDate.now()..LocalDate.now().plusYears(1),
@@ -56,6 +60,7 @@ data class CalendarParams(
   /**
    * Describes the selection behaviour
    */
+  @Stable
   sealed interface SelectionMode {
     /**
      * No date can be selected
@@ -76,6 +81,7 @@ data class CalendarParams(
   /**
    * Describes the month selection behaviour
    */
+  @Stable
   sealed interface MonthSelectionMode {
     /**
      * No whole month selection is allowed.
@@ -97,6 +103,7 @@ data class CalendarParams(
  * @param label adds the label to the bottom of the cell
  * @param style determines how colouring will work for this cell
  */
+@Immutable
 data class CellInfo(
   val disabled: Boolean = false,
   val status: CellStatus? = null,

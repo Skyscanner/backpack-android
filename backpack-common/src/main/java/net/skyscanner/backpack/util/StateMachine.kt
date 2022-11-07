@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.util
 
+import androidx.compose.runtime.Stable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,6 +38,7 @@ import kotlinx.coroutines.sync.withLock
  * The widget decided itself when the state needs to be changed. It may also provide some public methods
  * to have limited control over the state changes (e.g. settings the params).
  */
+@Stable
 interface StateMachine<State, Effect> {
 
   val state: StateFlow<State>
@@ -44,6 +46,7 @@ interface StateMachine<State, Effect> {
   val effects: SharedFlow<Effect>
 }
 
+@Stable
 @InternalBackpackApi
 interface MutableStateMachine<State, Effect> : StateMachine<State, Effect> {
 

@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2.data
 
+import androidx.compose.runtime.Immutable
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.calendar2.extension.firstDay
@@ -33,6 +34,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+@Immutable
 @InternalBackpackApi
 data class CalendarMonth internal constructor(
   val yearMonth: YearMonth,

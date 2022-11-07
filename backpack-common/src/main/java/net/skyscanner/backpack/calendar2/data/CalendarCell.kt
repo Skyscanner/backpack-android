@@ -20,6 +20,8 @@ package net.skyscanner.backpack.calendar2.data
 
 import android.text.Spannable
 import android.text.style.TtsSpan
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.core.text.buildSpannedString
 import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
@@ -28,11 +30,13 @@ import net.skyscanner.backpack.util.InternalBackpackApi
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 
+@Stable
 @InternalBackpackApi
 sealed class CalendarCell {
 
   abstract val yearMonth: YearMonth
 
+  @Immutable
   @InternalBackpackApi
   data class Space internal constructor(
     val selected: Boolean,
@@ -40,6 +44,7 @@ sealed class CalendarCell {
     override val yearMonth: YearMonth,
   ) : CalendarCell()
 
+  @Immutable
   @InternalBackpackApi
   data class Header internal constructor(
     val title: String,
@@ -48,6 +53,7 @@ sealed class CalendarCell {
     override val yearMonth: YearMonth,
   ) : CalendarCell()
 
+  @Immutable
   @InternalBackpackApi
   data class Day internal constructor(
     val date: LocalDate,
@@ -73,10 +79,17 @@ sealed class CalendarCell {
   }
 }
 
+@Stable
 @InternalBackpackApi
 sealed interface CalendarInteraction {
-  @InternalBackpackApi data class DateClicked(val day: CalendarCell.Day) : CalendarInteraction
-  @InternalBackpackApi data class SelectMonthClicked(val header: CalendarCell.Header) : CalendarInteraction
+
+  @Immutable
+  @InternalBackpackApi
+  data class DateClicked(val day: CalendarCell.Day) : CalendarInteraction
+
+  @Immutable
+  @InternalBackpackApi
+  data class SelectMonthClicked(val header: CalendarCell.Header) : CalendarInteraction
 }
 
 internal fun CalendarCellDay(

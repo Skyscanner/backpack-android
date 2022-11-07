@@ -18,6 +18,8 @@
 
 package net.skyscanner.backpack.calendar2
 
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import net.skyscanner.backpack.calendar2.extension.firstDay
 import net.skyscanner.backpack.calendar2.extension.lastDay
 import org.threeten.bp.LocalDate
@@ -27,6 +29,7 @@ import java.io.Serializable
 /**
  * Describes the current selection in the calendar
  */
+@Stable
 sealed class CalendarSelection : Serializable {
 
   /**
@@ -45,6 +48,7 @@ sealed class CalendarSelection : Serializable {
   /**
    * Single [date] is selected
    */
+  @Immutable
   data class Single(
     val date: LocalDate,
   ) : CalendarSelection() {
@@ -56,6 +60,7 @@ sealed class CalendarSelection : Serializable {
   /**
    * Describes the current range selection in the calendar.
    */
+  @Stable
   sealed class Range : CalendarSelection() {
     abstract val start: LocalDate
     abstract val end: LocalDate?
@@ -70,6 +75,7 @@ sealed class CalendarSelection : Serializable {
   /**
    * A whole [month] is selected.
    */
+  @Immutable
   data class Month(val month: YearMonth) : Range() {
     override val start: LocalDate = month.firstDay()
     override val end: LocalDate = month.lastDay()
@@ -80,5 +86,6 @@ sealed class CalendarSelection : Serializable {
    * @param start of range
    * @param end end of range. May be null if user haven't selected the end date yet
    */
+  @Immutable
   data class Dates(override val start: LocalDate, override val end: LocalDate?) : Range()
 }

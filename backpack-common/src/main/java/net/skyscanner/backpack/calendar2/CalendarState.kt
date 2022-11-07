@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.calendar2
 
+import androidx.compose.runtime.Immutable
 import net.skyscanner.backpack.calendar2.data.CalendarCells
 import net.skyscanner.backpack.util.InternalBackpackApi
 
@@ -26,6 +27,7 @@ import net.skyscanner.backpack.util.InternalBackpackApi
  * @param params parameters used to configure the calendar
  * @param selection the current Calendar selection
  */
+@Immutable
 data class CalendarState internal constructor(
   val params: CalendarParams,
   val selection: CalendarSelection = CalendarSelection.None,
