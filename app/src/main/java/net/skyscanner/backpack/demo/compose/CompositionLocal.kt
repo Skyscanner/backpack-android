@@ -19,5 +19,10 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.runtime.staticCompositionLocalOf
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationState
 
 val LocalAutomationMode = staticCompositionLocalOf { false }
+
+val LocalFloatingNotification = staticCompositionLocalOf<BpkFloatingNotificationState> {
+  error("LocalFloatingNotification must be injected from ComposeStory")
+}

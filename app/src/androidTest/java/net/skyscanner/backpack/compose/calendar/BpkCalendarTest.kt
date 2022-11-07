@@ -72,59 +72,59 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarDefault() {
+  fun default() {
     val controller = createController(BpkCalendarTestCases.Params.Default)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestColoredCalendarDefault() {
+  fun colored() {
     val controller = createController(BpkCalendarTestCases.Params.Colored)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestLabeledCalendarDefault() {
+  fun labeled() {
     val controller = createController(BpkCalendarTestCases.Params.Labeled)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarPast() {
+  fun past() {
     val controller = createController(BpkCalendarTestCases.Params.Past)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarLeapFebruary() {
+  fun leapFebruary() {
     val controller = createController(BpkCalendarTestCases.Params.LeapFebruary)
     controller.setSelection(BpkCalendarTestCases.Selection.LeapFebruary)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarNonLeapFebruary() {
+  fun nonLeapFebruary() {
     val controller = createController(BpkCalendarTestCases.Params.NonLeapFebruary)
     controller.setSelection(BpkCalendarTestCases.Selection.NonLeapFebruary)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarTodayIsLastDayOfMonth() {
+  fun todayIsLastDayOfMonth() {
     val controller = createController(BpkCalendarTestCases.Params.TodayIsLastDayOfMonth)
     controller.setSelection(BpkCalendarTestCases.Selection.TodayIsLastDayOfMonth)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarTodayIsNewYear() {
+  fun todayIsNewYear() {
     val controller = createController(BpkCalendarTestCases.Params.TodayIsNewYear)
     controller.setSelection(BpkCalendarTestCases.Selection.TodayIsNewYear)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarWithStartDateSelected() {
+  fun withStartDateSelected() {
     val controller = createController(BpkCalendarTestCases.Params.WithStartDateSelected)
 
     snap(controller) {
@@ -136,7 +136,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarWithSameStartAndEndDateSelected() {
+  fun withSameStartAndEndDateSelected() {
     val controller = createController(BpkCalendarTestCases.Params.WithSameStartAndEndDateSelected)
 
     snap(controller) {
@@ -154,19 +154,19 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarWithStartAndEndDateSelected() {
+  fun withStartAndEndDateSelected() {
     val controller = createController(BpkCalendarTestCases.Params.WithStartAndEndDateSelected)
     selectStartEnd(controller)
   }
 
   @Test
-  fun screenshotTestColoredCalendarWithStartAndEndDateSelected() {
+  fun coloredWithStartAndEndDateSelected() {
     val controller = createController(BpkCalendarTestCases.Params.ColoredWithStartAndEndDateSelected)
     selectStartEnd(controller)
   }
 
   @Test
-  fun screenshotTestCalendarWithSingleDaySelected() {
+  fun withSingleDaySelected() {
     val controller = createController(BpkCalendarTestCases.Params.WithSingleDaySelected)
 
     snap(controller) {
@@ -189,54 +189,54 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarWithRangeSetProgrammatically() {
+  fun withRangeSetProgrammatically() {
     val controller = createController(BpkCalendarTestCases.Params.WithRangeSetProgrammatically)
     controller.setSelection(BpkCalendarTestCases.Selection.WithRangeSetProgrammatically)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarWithSingleDaySetProgrammatically() {
+  fun withSingleDaySetProgrammatically() {
     val controller = createController(BpkCalendarTestCases.Params.WithSingleDaySetProgrammatically)
     controller.setSelection(BpkCalendarTestCases.Selection.WithSingleDaySetProgrammatically)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarWithDisabledDates() {
+  fun withDisabledDates() {
     val controller = createController(BpkCalendarTestCases.Params.WithDisabledDates)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarWithDisabledDates_SelectSingle() {
+  fun withDisabledDates_SelectSingle() {
     val controller = createController(BpkCalendarTestCases.Params.WithDisabledDates_SelectSingle)
     controller.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectSingle)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarWithDisabledDates_SelectRange() {
+  fun withDisabledDates_SelectRange() {
     val controller = createController(BpkCalendarTestCases.Params.WithDisabledDates_SelectRange)
     controller.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectRange)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarWithDisabledDates_SelectDisabledDate() {
+  fun withDisabledDates_SelectDisabledDate() {
     val controller = createController(BpkCalendarTestCases.Params.WithDisabledDates_SelectDisabledDate)
     controller.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectDisabledDate)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarWithWholeMonthButtonEnabled() {
+  fun withWholeMonthButtonEnabled() {
     val controller = createController(BpkCalendarTestCases.Params.WithWholeMonthButtonEnabled)
     snap(controller)
   }
 
   @Test
-  fun screenshotTestCalendarWithWholeMonthSetProgrammatically() {
+  fun withWholeMonthSetProgrammatically() {
     val controller = createController(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
     controller.setSelection(BpkCalendarTestCases.Selection.WithWholeMonthSetProgrammatically)
     snap(controller)
@@ -283,7 +283,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     content(composeTestRule)
     val view = composeTestRule.onNodeWithTag("CalendarRoot").fetchRootView()
 
-    rule.scenario.onActivity { activity ->
+    rule.scenario.onActivity {
       setupView(view)
       asyncScreenshot.record(view)
     }

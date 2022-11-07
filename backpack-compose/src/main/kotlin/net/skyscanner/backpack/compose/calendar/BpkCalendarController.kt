@@ -37,7 +37,7 @@ import java.io.Serializable
 
 @Stable
 class BpkCalendarController private constructor(
-  internal val lazyGirdState: LazyGridState,
+  internal val lazyGridState: LazyGridState,
   internal val stateMachine: CalendarStateMachine,
 ) : CalendarComponent by stateMachine {
 
@@ -54,7 +54,7 @@ class BpkCalendarController private constructor(
   suspend fun scrollToDate(date: LocalDate) {
     val index = state.value.cells.indexOf(date)
     if (index >= 0) {
-      lazyGirdState.scrollToItem(index)
+      lazyGridState.scrollToItem(index)
     }
   }
 
@@ -65,12 +65,12 @@ class BpkCalendarController private constructor(
   suspend fun smoothScrollToDate(date: LocalDate) {
     val index = state.value.cells.indexOf(date)
     if (index >= 0) {
-      lazyGirdState.animateScrollToItem(index)
+      lazyGridState.animateScrollToItem(index)
     }
   }
 
   internal val firstVisibleItemYear by derivedStateOf {
-    state.value.cells[lazyGirdState.firstVisibleItemIndex].yearMonth.year
+    state.value.cells[lazyGridState.firstVisibleItemIndex].yearMonth.year
   }
 
 }

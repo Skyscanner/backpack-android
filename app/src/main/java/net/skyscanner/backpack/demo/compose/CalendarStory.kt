@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.flow.filter
 import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarSelection
@@ -29,15 +28,14 @@ import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStoryType
-import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 fun CalendarStory(
   type: CalendarStoryType,
   modifier: Modifier = Modifier,
 ) {
-  val context = LocalContext.current
   val automationMode = LocalAutomationMode.current
+  val floatingNotification = LocalFloatingNotification.current
   val controller = rememberCalendarController(initialParams = CalendarStoryType.createInitialParams(type))
 
   LaunchedEffect(type, controller, automationMode) {
@@ -51,7 +49,7 @@ fun CalendarStory(
       .filter { it.selection !is CalendarSelection.None }
       .collect {
         if (!automationMode) {
-          BpkToast.makeText(context, it.selection.toString(), BpkToast.LENGTH_SHORT).show()
+          floatingNotification.show(it.selection.toString())
         }
       }
 
@@ -59,7 +57,7 @@ fun CalendarStory(
       .filter { it is CalendarEffect.MonthSelected }
       .collect {
         if (!automationMode) {
-          BpkToast.makeText(context, it.toString(), BpkToast.LENGTH_SHORT).show()
+          floatingNotification.show(it.toString())
         }
       }
   }

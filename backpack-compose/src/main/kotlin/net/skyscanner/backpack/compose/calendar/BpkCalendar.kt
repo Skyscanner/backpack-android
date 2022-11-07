@@ -18,10 +18,6 @@
 
 package net.skyscanner.backpack.compose.calendar
 
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,13 +26,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.badge.BpkBadge
-import net.skyscanner.backpack.compose.badge.BpkBadgeType
+import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarBadge
 import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarGrid
 import net.skyscanner.backpack.compose.calendar.internal.BpkCalendarHeader
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -49,9 +41,7 @@ fun BpkCalendar(
 
   val state by controller.state.collectAsState()
 
-  Column(
-    modifier = modifier,
-  ) {
+  Column(modifier = modifier) {
 
     BpkCalendarHeader(
       params = state.params,
@@ -62,29 +52,18 @@ fun BpkCalendar(
 
       BpkCalendarGrid(
         state = state,
-        lazyGridState = controller.lazyGirdState,
+        lazyGridState = controller.lazyGridState,
         onClick = controller.stateMachine::onClick,
         modifier = Modifier.fillMaxSize(),
       )
 
-      var yearToBadge by remember { mutableStateOf(controller.firstVisibleItemYear) }
-      if (controller.firstVisibleItemYear != state.params.now.year) {
-        yearToBadge = controller.firstVisibleItemYear
-      }
-
-      androidx.compose.animation.AnimatedVisibility(
-        visible = controller.firstVisibleItemYear != state.params.now.year,
-        enter = fadeIn() + slideInVertically(),
-        exit = slideOutVertically() + fadeOut(),
+      BpkCalendarBadge(
+        firstVisibleItemYear = controller.firstVisibleItemYear,
+        params = state.params,
         modifier = Modifier
           .align(Alignment.TopCenter)
-          .padding(top = BpkSpacing.Base),
-      ) {
-        BpkBadge(
-          text = yearToBadge.toString(),
-          type = BpkBadgeType.Strong,
-        )
-      }
+          .padding(top = BpkSpacing.Base)
+      )
     }
   }
 }

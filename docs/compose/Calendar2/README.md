@@ -85,7 +85,7 @@ controller
   .map { it.selection }
   .onEach { selection ->
     when (selection) {
-      is CalendarSelection.None -> showToast("No date is selected")
+      is CalendarSelection.None -> Unit // do nothing
       is CalendarSelection.Single -> showToast("${selection.date} is selected")
       is CalendarSelection.Dates -> showToast("${selection.start} to {${selection.end} is selected")
       is CalendarSelection.Month -> showToast("${selection.month} is selected")
