@@ -23,6 +23,7 @@ import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
+import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import net.skyscanner.backpack.demo.compose.BpkFabStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
@@ -169,7 +170,13 @@ object ComponentRegistry {
     ),
     "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
-    "Bottom Sheet" story NodeData { Story of R.layout.fragment_bottom_sheet scrollable false },
+    "Bottom Sheet" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_bottom_sheet scrollable false },
+        TAB_TITLE_COMPOSE composeStory { BottomSheetStory() },
+      )
+    ),
     "Button" story NodeData(
       { children -> TabStory of children },
       mapOf(
