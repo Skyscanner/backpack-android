@@ -48,12 +48,12 @@ fun BottomSheetStory(
         }
       }
     },
-    content = {
+    content = { contentPadding ->
       Spacer(
         modifier = Modifier
           .fillMaxSize()
           .background(BpkTheme.colors.surfaceHighlight)
-          .padding(it),
+          .padding(contentPadding),
       )
     }
   )
