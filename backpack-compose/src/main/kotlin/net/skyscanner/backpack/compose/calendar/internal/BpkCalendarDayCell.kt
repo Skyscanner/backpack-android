@@ -47,7 +47,7 @@ import net.skyscanner.backpack.calendar2.data.CalendarCell.Selection
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.DeflatedRect
+import net.skyscanner.backpack.compose.utils.RectangleShape
 
 @Composable
 internal fun BpkCalendarDayCell(
@@ -213,5 +213,5 @@ private fun labelColor(status: CellStatus?, style: CellStatusStyle?): Color =
     else -> BpkTheme.colors.textSecondary
   }
 
-private val StartSemiRect = DeflatedRect(horizontal = 0f..0.5f)
-private val EndSemiRect = DeflatedRect(horizontal = 0.5f..1f)
+private val StartSemiRect = RectangleShape(relativeLeft = 0f, relativeRight = 0.5f)
+private val EndSemiRect = RectangleShape(relativeLeft = 0.5f, relativeRight = 1f)

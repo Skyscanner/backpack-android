@@ -24,18 +24,20 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.util.lerp
 
-internal fun DeflatedRect(
-  horizontal: ClosedFloatingPointRange<Float> = 0f..1f,
-  vertical: ClosedFloatingPointRange<Float> = 0f..1f,
+internal fun RectangleShape(
+  relativeLeft: Float = 0f,
+  relativeTop: Float = 0f,
+  relativeRight: Float = 1f,
+  relativeBottom: Float = 1f,
   autoMirror: Boolean = true,
 ): Shape =
   GenericShape { size, layoutDirection ->
-    val mirror = layoutDirection == LayoutDirection.Rtl && autoMirror
-    val top = lerp(0f, size.height, vertical.start)
-    val bottom = lerp(0f, size.height, vertical.endInclusive)
+    val top = lerp(0f, size.height, relativeTop)
+    val bottom = lerp(0f, size.height, relativeBottom)
 
-    val left = lerp(0f, size.width, if (mirror) 1f - horizontal.start else horizontal.start)
-    val right = lerp(0f, size.width, if (mirror) 1f - horizontal.endInclusive else horizontal.endInclusive)
+    val mirror = layoutDirection == LayoutDirection.Rtl && autoMirror
+    val left = lerp(0f, size.width, if (mirror) 1f - relativeLeft else relativeLeft)
+    val right = lerp(0f, size.width, if (mirror) 1f - relativeRight else relativeRight)
 
     addRect(Rect(left, top, right, bottom))
   }
