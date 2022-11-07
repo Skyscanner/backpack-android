@@ -23,11 +23,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetScaffoldDefaults
-import androidx.compose.material.BottomSheetState
-import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.rememberBottomSheetScaffoldState
-import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,7 +40,7 @@ import net.skyscanner.backpack.compose.tokens.BpkElevation
 fun BpkBottomSheet(
   sheetContent: @Composable ColumnScope.() -> Unit,
   modifier: Modifier = Modifier,
-  state: BottomSheetState = rememberBottomSheetState(BottomSheetValue.Collapsed),
+  state: BpkBottomSheetState = rememberBpkBottomSheetState(BpkBottomSheetValue.Collapsed),
   sheetGesturesEnabled: Boolean = true,
   sheetPeekHeight: Dp = BottomSheetScaffoldDefaults.SheetPeekHeight,
   content: @Composable (PaddingValues) -> Unit
@@ -51,7 +48,7 @@ fun BpkBottomSheet(
   BottomSheetScaffold(
     sheetContent = sheetContent,
     modifier = modifier,
-    scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = state),
+    scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = state.delegate),
     topBar = null,
     snackbarHost = {},
     floatingActionButton = null,
