@@ -122,10 +122,10 @@ private fun BpkSwitchImpl(
       colors = SwitchDefaults.colors(
         checkedThumbColor = BpkTheme.colors.coreAccent,
         checkedTrackColor = BpkTheme.colors.textDisabled,
-        checkedTrackAlpha = 1f,
+        checkedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
         uncheckedThumbColor = BpkTheme.colors.textOnDark,
         uncheckedTrackColor = BpkTheme.colors.textDisabled,
-        uncheckedTrackAlpha = 1f,
+        uncheckedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
         disabledCheckedThumbColor = BpkTheme.colors.coreAccent,
         disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
         disabledUncheckedThumbColor = BpkTheme.colors.textOnDark,
