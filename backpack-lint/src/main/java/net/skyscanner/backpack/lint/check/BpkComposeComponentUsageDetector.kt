@@ -151,6 +151,13 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.material.TextField",
       )
     ),
+    SLIDER(
+      fullName = "net.skyscanner.backpack.compose.slider.BpkSlider",
+      webName = "slider",
+      componentsToReplace = setOf(
+        "androidx.compose.material.Slider",
+      )
+    ),
     SPINNER(
       fullName = "net.skyscanner.backpack.compose.spinner.BpkSpinner",
       webName = "spinner",
