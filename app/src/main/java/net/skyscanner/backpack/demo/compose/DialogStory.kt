@@ -33,10 +33,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.dialog.BpkDestructiveDialog
 import net.skyscanner.backpack.compose.dialog.BpkFlareDialog
+import net.skyscanner.backpack.compose.dialog.BpkImageDialog
 import net.skyscanner.backpack.compose.dialog.BpkSuccessDialog
 import net.skyscanner.backpack.compose.dialog.BpkWarningDialog
 import net.skyscanner.backpack.compose.dialog.DialogButton
@@ -71,6 +73,7 @@ fun DialogStory() {
       ShownDialog.Destructive -> DestructiveDialogExample(onDismiss)
       ShownDialog.NoIcon -> NoIconDialogExample(onDismiss)
       ShownDialog.Flare -> FlareDialogExample(onDismiss)
+      ShownDialog.Image -> ImageDialogExample(onDismiss)
       ShownDialog.None -> {}
     }
   }
@@ -84,6 +87,7 @@ enum class ShownDialog(@StringRes val buttonText: Int) {
   Destructive(R.string.dialog_destructive),
   NoIcon(R.string.dialog_no_icon),
   Flare(R.string.dialog_flare),
+  Image(R.string.dialog_flare),
   None(R.string.generic_empty),
 }
 
@@ -175,6 +179,25 @@ fun FlareDialogExample(onDismiss: () -> Unit = {}) {
     confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
     secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
     onDismissRequest = onDismiss,
+  ) {
+    Image(
+      painter = painterResource(R.drawable.canadian_rockies_canada),
+      contentDescription = stringResource(R.string.image_rockies_content_description),
+      contentScale = ContentScale.Crop,
+    )
+  }
+}
+
+@Preview
+@Composable
+fun ImageDialogExample(onDismiss: () -> Unit = {}) {
+  BpkImageDialog(
+    title = stringResource(id = R.string.dialog_title),
+    text = stringResource(id = R.string.dialog_text),
+    confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+    secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+    onDismissRequest = onDismiss,
+    textAlign = TextAlign.Start
   ) {
     Image(
       painter = painterResource(R.drawable.canadian_rockies_canada),

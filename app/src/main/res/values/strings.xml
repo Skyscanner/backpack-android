@@ -188,6 +188,7 @@
   <string name="dialog_destructive">Destructive</string>
   <string name="dialog_no_icon">No Icon</string>
   <string name="dialog_flare">Flare</string>
+  <string name="dialog_image">Image</string>
   <string name="generic_empty" />
   <string name="dialog_long_text">Long text</string>
   <string name="dialog_continue">Continue</string>

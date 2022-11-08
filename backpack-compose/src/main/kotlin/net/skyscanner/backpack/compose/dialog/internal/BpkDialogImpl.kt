@@ -43,7 +43,6 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
@@ -99,28 +98,60 @@ internal fun BpkFlareDialogImpl(
 }
 
 @Composable
+internal fun BpkImageDialogImpl(
+  onDismissRequest: () -> Unit,
+  title: String,
+  text: String,
+  buttons: List<Dialog.Button>,
+  properties: DialogProperties,
+  textAlign: TextAlign,
+  content: @Composable BoxScope.() -> Unit,
+) {
+  Dialog(onDismissRequest = onDismissRequest, properties = properties) {
+    Surface(
+      modifier = Modifier.padding(top = IconPadding),
+      shape = BpkTheme.shapes.medium,
+      color = BpkTheme.colors.surfaceDefault,
+    ) {
+      Column {
+        Box(content = content)
+        DialogContent(title = title, text = text, textAlign = textAlign, buttons = buttons)
+      }
+    }
+  }
+}
+
+@Composable
 private fun DialogContent(title: String, text: String, buttons: List<Dialog.Button>, modifier: Modifier = Modifier) {
+  DialogContent(title = title, text = text, textAlign = TextAlign.Center, buttons = buttons, modifier = modifier)
+}
+
+@Composable
+private fun DialogContent(title: String, text: String, textAlign: TextAlign, buttons: List<Dialog.Button>, modifier: Modifier = Modifier) {
   Column(
     modifier = modifier.padding(BpkDimension.Spacing.Lg),
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    DialogTextContent(title = title, text = text)
+    DialogTextContent(title = title, text = text, textAlign = textAlign)
     DialogButtons(buttons)
   }
 }
 
 @Composable
-private fun DialogTextContent(title: String, text: String) {
+private fun DialogTextContent(title: String, text: String, textAlign: TextAlign) {
   BpkText(
+    modifier = Modifier.fillMaxWidth(),
     text = title,
     style = BpkTheme.typography.heading3,
-    textAlign = TextAlign.Center,
+    textAlign = textAlign,
     color = BpkTheme.colors.textPrimary,
   )
   BpkText(
-    modifier = Modifier.padding(top = BpkDimension.Spacing.Base, bottom = BpkDimension.Spacing.Lg),
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(top = BpkDimension.Spacing.Base, bottom = BpkDimension.Spacing.Lg),
     text = text,
-    textAlign = TextAlign.Center,
+    textAlign = textAlign,
     color = BpkTheme.colors.textPrimary,
   )
 }

@@ -20,10 +20,12 @@ package net.skyscanner.backpack.compose.dialog
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.window.DialogProperties
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.dialog.internal.BpkDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.BpkFlareDialogImpl
+import net.skyscanner.backpack.compose.dialog.internal.BpkImageDialogImpl
 import net.skyscanner.backpack.compose.dialog.internal.Dialog
 import net.skyscanner.backpack.compose.icon.BpkIcon
 
@@ -190,6 +192,33 @@ fun BpkFlareDialog(
     ),
     onDismissRequest = onDismissRequest,
     properties = properties,
+    content = content,
+  )
+}
+
+@Composable
+fun BpkImageDialog(
+  onDismissRequest: () -> Unit,
+  title: String,
+  text: String,
+  confirmButton: DialogButton,
+  secondaryButton: DialogButton,
+  linkButton: DialogButton? = null,
+  textAlign: TextAlign = TextAlign.Center,
+  properties: DialogProperties = DialogProperties(),
+  content: @Composable BoxScope.() -> Unit,
+) {
+  BpkImageDialogImpl(
+    title = title,
+    text = text,
+    buttons = listOfNotNull(
+      Dialog.Button(BpkButtonType.Featured, confirmButton),
+      Dialog.Button(BpkButtonType.Secondary, secondaryButton),
+      linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
+    ),
+    onDismissRequest = onDismissRequest,
+    properties = properties,
+    textAlign = textAlign,
     content = content,
   )
 }
