@@ -13,7 +13,7 @@ import net.skyscanner.backpack.compose.slider.BpkSlider
 
 BpkSlider {
   value = 0.5f
-  onValueChange = {} // Handle update
+  onValueChange = { newValue -> } // Handle update
 }
 ```
 
@@ -24,6 +24,6 @@ import net.skyscanner.backpack.compose.slider.BpkSlider
 
 BpkRangeSlider {
   values = 0.2f..0.8f
-  onValueChange = {} // Handle update
+  onValueChange = { newValue -> } // Handle update
 }
 ```
