@@ -84,11 +84,11 @@ controller
   .state
   .map { it.selection }
   .onEach { selection ->
-    when (selection) {
-      is CalendarSelection.None -> {} // do nothing
-      is CalendarSelection.Single -> showToast("${selection.date} is selected")
-      is CalendarSelection.Dates -> showToast("${selection.start} to {${selection.end} is selected")
-      is CalendarSelection.Month -> showToast("${selection.month} is selected")
+    when (selection) { // reacting to the selection
+      is CalendarSelection.None -> {}
+      is CalendarSelection.Single -> {}
+      is CalendarSelection.Dates -> {}
+      is CalendarSelection.Month -> {}
     }
   }
   .launchIn(myCoroutineScope)
