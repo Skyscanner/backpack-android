@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
+import androidx.compose.material.RangeSlider
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.runtime.Composable
@@ -120,15 +121,15 @@ private fun BpkSwitchImpl(
       interactionSource = interactionSource,
       colors = SwitchDefaults.colors(
         checkedThumbColor = BpkTheme.colors.coreAccent,
-        checkedTrackColor = BpkTheme.colors.surfaceHighlight,
+        checkedTrackColor = BpkTheme.colors.textDisabled,
         checkedTrackAlpha = 1f,
         uncheckedThumbColor = BpkTheme.colors.textOnDark,
-        uncheckedTrackColor = BpkTheme.colors.surfaceHighlight,
+        uncheckedTrackColor = BpkTheme.colors.textDisabled,
         uncheckedTrackAlpha = 1f,
         disabledCheckedThumbColor = BpkTheme.colors.coreAccent,
-        disabledCheckedTrackColor = BpkTheme.colors.surfaceHighlight,
+        disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
         disabledUncheckedThumbColor = BpkTheme.colors.textOnDark,
-        disabledUncheckedTrackColor = BpkTheme.colors.surfaceHighlight,
+        disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
       ),
     )
   }
