@@ -39,7 +39,7 @@ main [Readme](https://github.com/skyscanner/backpack-android#installation) for a
 Example of a success dialog with three buttons
 
 ```Kotlin
-import net.skyscanner.backpack.compose.dialog.BpkDialog
+import net.skyscanner.backpack.compose.dialog.BpkSuccessDialog
 import net.skyscanner.backpack.compose.icons.BpkIcons
 
 BpkSuccessDialog(
@@ -57,7 +57,7 @@ BpkSuccessDialog(
 Example of a warning dialog with two buttons
 
 ```Kotlin
-import net.skyscanner.backpack.compose.dialog.BpkDialog
+import net.skyscanner.backpack.compose.dialog.BpkWarningDialog
 import net.skyscanner.backpack.compose.icons.BpkIcons
 
 BpkWarningDialog(
@@ -74,7 +74,7 @@ BpkWarningDialog(
 Example of a destructive dialog with two buttons
 
 ```Kotlin
-import net.skyscanner.backpack.compose.dialog.BpkDialog
+import net.skyscanner.backpack.compose.dialog.BpkDestructiveDialog
 import net.skyscanner.backpack.compose.icons.BpkIcons
 
 BpkDestructiveDialog(
@@ -93,7 +93,7 @@ Example of a flare dialog
 
 ```Kotlin
 import androidx.compose.foundation.Image
-import net.skyscanner.backpack.compose.dialog.BpkDialog
+import net.skyscanner.backpack.compose.dialog.BpkFlareDialog
 import net.skyscanner.backpack.compose.icons.BpkIcons
 
 BpkFlareDialog(
@@ -106,6 +106,30 @@ BpkFlareDialog(
   Image(
     painter = painterResource(R.drawable.flare_image),
     contentDescription = stringResource(R.string.flare_image_content_description),
+    contentScale = ContentScale.Crop,
+  )
+}
+```
+
+Example of an image dialog
+
+```Kotlin
+import androidx.compose.foundation.Image
+import net.skyscanner.backpack.compose.dialog.BpkImageDialog
+import net.skyscanner.backpack.compose.icons.BpkIcons
+import androidx.compose.ui.text.style.TextAlign
+
+BpkImageDialog(
+  title = stringResource(id = R.string.dialog_title),
+  text = stringResource(id = R.string.dialog_text),
+  confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+  secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+  onDismissRequest = onDismiss,
+  textAlign = TextAlign.Start
+) {
+  Image(
+    painter = painterResource(R.drawable.canadian_rockies_canada),
+    contentDescription = stringResource(R.string.image_rockies_content_description),
     contentScale = ContentScale.Crop,
   )
 }

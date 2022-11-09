@@ -87,7 +87,7 @@ enum class ShownDialog(@StringRes val buttonText: Int) {
   Destructive(R.string.dialog_destructive),
   NoIcon(R.string.dialog_no_icon),
   Flare(R.string.dialog_flare),
-  Image(R.string.dialog_flare),
+  Image(R.string.dialog_image),
   None(R.string.generic_empty),
 }
 
