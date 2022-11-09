@@ -57,7 +57,7 @@ open class BpkSwitch @JvmOverloads constructor(
       val primaryColor = context.getColor(R.color.bpkCoreAccent)
       val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, primaryColor)
 
-      trackTintList = context.getColorStateList(R.color.bpkSurfaceHighlight)
+      trackTintList = context.getColorStateList(R.color.bpkTextDisabled)
       thumbTintList = getColorStateList(checkedColor, context.getColor(R.color.bpkTextOnDark))
     }
     setTextColor(
