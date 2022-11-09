@@ -1,5 +1,15 @@
 # Skeleton
 
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
+[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/Backpack/net.skyscanner.backpack.skeleton)
+[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/Backpack/src/main/java/net/skyscanner/backpack/skeleton)
+
+## Default
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Skeleton/screenshots/default.png" alt="Skeleton component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Skeleton/screenshots/default_dm.png" alt="Skeleton component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
@@ -35,7 +45,7 @@ Example of a shimmer overlay with  in XML
 </net.skyscanner.backpack.skeleton.BpkShimmerOverlay>
 ```
 
-Circle skeleton have pre-selected size. 
+Circle skeleton have pre-selected size.
 `skeletonCircleSize`: `small(32 dp), large(48 dp), custom`.
 You could also specify a custom size by `skeletonDiameter`.
 
@@ -65,11 +75,11 @@ Example of a Image Skeleton with rounded corner in XML
 ```xml
 <net.skyscanner.backpack.skeleton.BpkImageSkeleton
   android:layout_width="80dp"
-  android:layout_height="80dp" 
+  android:layout_height="80dp"
   app:skeletonCornerType="rounded" />
 ```
 
-Headline skeleton have pre-selected height. 
+Headline skeleton have pre-selected height.
 `skeletonHeadlineHeightSize`: `small(8 dp), medium(16 dp), large(32 dp), custom`.
 Please set height to `wrap_content` if you want to use pre-selected height otherwise you could specify a custom height.
 If you want to set the height to a custom size, please set `skeletonHeadlineHeightSize` to custom and then set height to a dimension value.
@@ -89,7 +99,7 @@ Example of a headline skeleton with custom size in XML
 ```xml
 <net.skyscanner.backpack.skeleton.BpkHeadlineSkeleton
   android:layout_width="80dp"
-  android:layout_height="48dp" 
+  android:layout_height="48dp"
   app:skeletonHeadlineHeightSize="custom" />
 ```
 

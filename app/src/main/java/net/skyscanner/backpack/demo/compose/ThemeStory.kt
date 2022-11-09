@@ -26,7 +26,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Slider
-import androidx.compose.material.Snackbar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -56,10 +55,6 @@ fun ThemeStory() {
 
     var sliderValue by remember { mutableStateOf(0.5f) }
     Slider(modifier = Modifier.width(144.dp), value = sliderValue, onValueChange = { sliderValue = it })
-
-    Snackbar {
-      BpkText(text = "Snackbar")
-    }
 
     BottomAppBar {
       BpkText(text = "Bottom app bar")

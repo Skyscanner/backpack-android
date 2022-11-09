@@ -32,21 +32,9 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toEndOf="@android:id/icon"
-    app:layout_constraintEnd_toStartOf="@+id/tab_badge"
+    app:layout_constraintEnd_toEndOf="parent"
     android:layout_marginHorizontal="@dimen/bpkSpacingSm"
     tools:text="Tab"
     tools:textAllCaps="true"/>
-
-  <net.skyscanner.backpack.badge.BpkBadge
-    android:id="@+id/tab_badge"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:textStyle="footnote"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toEndOf="@android:id/text1"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginHorizontal="@dimen/bpkSpacingSm"
-    tools:message="BETA" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

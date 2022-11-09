@@ -31,6 +31,7 @@ apply(from = "${rootProject.projectDir}/android-configuration.gradle")
 android {
   buildFeatures {
     compose = true
+    resValues = false
   }
   composeOptions {
     kotlinCompilerExtensionVersion = rootProject.ext.get("compose_compiler_version") as String

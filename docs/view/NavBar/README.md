@@ -1,5 +1,27 @@
 # Nav Bar
 
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
+[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/Backpack/net.skyscanner.backpack.navbar)
+[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/Backpack/src/main/java/net/skyscanner/backpack/navbar)
+
+## Collapsed
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/collapsed.png" alt="Collapsed NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/collapsed_dm.png" alt="Collapsed NavBar component - dark mode" width="375" /> |
+
+## Expanded
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/expanded.png" alt="Expanded NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/expanded_dm.png" alt="Expanded NavBar component - dark mode" width="375" /> |
+
+## Navigation
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/navigation.png" alt="Navigation NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/navigation_dm.png" alt="Navigation NavBar component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.

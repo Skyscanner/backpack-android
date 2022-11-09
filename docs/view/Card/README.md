@@ -1,5 +1,57 @@
 # Card
 
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
+[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/Backpack/net.skyscanner.backpack.card)
+[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/Backpack/src/main/java/net/skyscanner/backpack/card)
+
+## Default
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/default.png" alt="Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/default_dm.png" alt="Card component - dark mode" width="375" /> |
+
+## Corner style large
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/corner-style-large.png" alt="Corner style large Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/corner-style-large_dm.png" alt="Corner style large Card component - dark mode" width="375" /> |
+
+## Selected
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/selected.png" alt="Selected Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/selected_dm.png" alt="Selected Card component - dark mode" width="375" /> |
+
+## With divider and corner style large
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-and-corner-style-large.png" alt="With divider and corner style large Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-and-corner-style-large_dm.png" alt="With divider and corner style large Card component - dark mode" width="375" /> |
+
+## With divider arranged vertically
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-arranged-vertically.png" alt="With divider arranged verticy Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-arranged-vertically_dm.png" alt="With divider arranged verticy Card component - dark mode" width="375" /> |
+
+## With divider without padding
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-without-padding.png" alt="With divider without padding Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider-without-padding_dm.png" alt="With divider without padding Card component - dark mode" width="375" /> |
+
+## With divider
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider.png" alt="With divider Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/with-divider_dm.png" alt="With divider Card component - dark mode" width="375" /> |
+
+## Without padding
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/without-padding.png" alt="Without padding Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Card/screenshots/without-padding_dm.png" alt="Without padding Card component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.

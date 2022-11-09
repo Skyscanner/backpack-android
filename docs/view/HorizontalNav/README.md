@@ -1,5 +1,14 @@
-
 # Horizontal Nav
+
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
+[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/Backpack/net.skyscanner.backpack.horisontalnav)
+[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/Backpack/src/main/java/net/skyscanner/backpack/horisontalnav)
+
+## Default
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/HorizontalNav/screenshots/default.png" alt="HorizontalNav component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/HorizontalNav/screenshots/default_dm.png" alt="HorizontalNav component - dark mode" width="375" /> |
 
 ## Installation
 
@@ -25,8 +34,6 @@ import net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
 BpkHorizontalNav(context).apply {
   addTab(newTab().setText("1"))
   addTab(newTab().setText("2"))
-  setNotificationDot(0, true)
-  setBadge(1, "Beta")
 }
 ```
 

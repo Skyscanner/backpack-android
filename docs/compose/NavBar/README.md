@@ -1,5 +1,21 @@
 # Navigation Bar
 
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-compose)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose)
+[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.navigationbar)
+[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/navigationbar)
+
+## Default
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/default.png" alt="NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/default_dm.png" alt="NavBar component - dark mode" width="375" /> |
+
+## Collapsible
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/collapsible.png" alt="Collapsible NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/NavBar/screenshots/collapsible_dm.png" alt="Collapsible NavBar component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available
@@ -8,8 +24,8 @@ main [Readme](https://github.com/skyscanner/backpack-android#installation) for a
 
 ## Usage
 
-> Note: By default, navigation bar will include (and consume) window insets. If you don't want this, set `insets` param to
-> null.
+> Note: By default, navigation bar will include (and consume) window insets. If you don't want this, set `insets` parameter
+> to null.
 
 Example of a navigation bar with back navigation icon
 

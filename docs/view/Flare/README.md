@@ -1,5 +1,37 @@
 # Flare
 
+[![Maven Central](https://img.shields.io/maven-central/v/net.skyscanner.backpack/backpack-android)](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android)
+[![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/Backpack/net.skyscanner.backpack.flare)
+[![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/Backpack/src/main/java/net/skyscanner/backpack/flare)
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/default.png" alt="Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/default_dm.png" alt="Flare component - dark mode" width="375" /> |
+
+## Inset padding
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding.png" alt="Inset padding Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding_dm.png" alt="Inset padding Flare component - dark mode" width="375" /> |
+
+## Pointer offset
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointer-offset.png" alt="Pointer offset Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointer-offset_dm.png" alt="Pointer offset Flare component - dark mode" width="375" /> |
+
+## Pointing up
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointing-up.png" alt="Pointing up Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/pointing-up_dm.png" alt="Pointing up Flare component - dark mode" width="375" /> |
+
+## Rounded
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/rounded.png" alt="Rounded Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/rounded_dm.png" alt="Rounded Flare component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Android is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-android). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.

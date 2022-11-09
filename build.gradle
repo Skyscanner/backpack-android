@@ -96,7 +96,7 @@ ext {
   googleMaps = "com.google.android.gms:play-services-maps:18.1.0"
   constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
   swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-  threeTenAbpVersion = "1.4.1"
+  threeTenAbpVersion = "1.4.3"
   threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
   threeTenAbpAndroid = "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
   picasso = "com.squareup.picasso:picasso:2.71828"
@@ -122,17 +122,17 @@ ext {
   lintApi = "com.android.tools.lint:lint-api:$lintVersion"
   lintTests = "com.android.tools.lint:lint-tests:$lintVersion"
 
-  composeVersion = "1.2.1"
+  composeVersion = "1.3.0"
   composeUi = "androidx.compose.ui:ui:$composeVersion"
   composeMaterial = "androidx.compose.material:material:$composeVersion"
   composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
   composeTestJUnit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
   composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
-  composeActivity = "androidx.activity:activity-compose:1.6.0"
+  composeActivity = "androidx.activity:activity-compose:1.6.1"
   composeUtil = "androidx.compose.ui:ui-util:$composeVersion"
   composeFoundationV3 = "androidx.compose.foundation:foundation:1.3.0"
 
-  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.25.1"
+  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.27.0"
 }
 
 tasks.dokkaHtmlMultiModule.configure {

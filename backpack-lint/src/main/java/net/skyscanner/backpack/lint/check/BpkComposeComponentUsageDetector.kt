@@ -106,6 +106,14 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.material.ExtendedFloatingActionButton",
       )
     ),
+    FLOATING_NOTIFICATION(
+      fullName = "net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification",
+      webName = "floating-notification",
+      componentsToReplace = setOf(
+        "androidx.compose.material.Snackbar",
+        "androidx.compose.material.SnackbarHost",
+      )
+    ),
     ICON(
       fullName = "net.skyscanner.backpack.compose.icon.BpkIcon",
       webName = "icon",

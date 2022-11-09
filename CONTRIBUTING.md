@@ -77,13 +77,14 @@ hdiutil create -megabytes 512 -fs MS-DOS -layout NONE -o sd && mv sd.dmg sd.img
 Snapshot testing depends on a python package which can be installed as:
 
 ```
-pip3 install Pillow
+pip3 install Pillow==9.0.1
 ```
 
+Make sure no emulator or physical devices are attached, otherwise tests will fail.
 To start the emulator and attach an SD card to it, run
 
 ```
-$ANDROID_HOME/tools/emulator -avd bpk-droid-avd -sdcard sd.img &
+$ANDROID_HOME/emulator/emulator -avd bpk-droid-avd -sdcard sd.img &
 ```
 
 #### Creating tests
@@ -174,7 +175,7 @@ $ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
 
 # ARM
 $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name "bpk-droid-screenshot-avd" --device "pixel" --package "system-images;android-30;google_apis;arm64-v8a" --tag "google_apis" --abi "arm64-v8a"
-$ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
+$ANDROID_HOME/emulator/emulator -avd bpk-droid-screenshot-avd
 ```
 
 ### Generating screenshots

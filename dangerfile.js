@@ -49,6 +49,15 @@ if (composePackageFilesCreated && !composeUsageDetector && !declaredTrivial) {
   warn("One or more package files were created, but `BpkComposeComponentUsageDetector.kt` wasn't updated.");
 }
 
+// If any screenshots were created, README should've updated.
+const screenshotsCreated = createdFiles.some(filePath => filePath.startsWith('docs') && filePath.includes('/screenshots/'));
+if (screenshotsCreated) {
+  const readmeUpdated = modifiedFiles.concat(createdFiles).some(filePath => filePath.startsWith('docs') && filePath.endsWith('README.md'));
+  if (!readmeUpdated) {
+  warn("One or more screenshot created, but `README.md` wasn't updated. Please include screenshots in README");
+  }
+}
+
 // Ensure package-lock changes are intentional.
 const lockFileUpdated = includes(modifiedFiles, 'package-lock.json');
 if (lockFileUpdated) {

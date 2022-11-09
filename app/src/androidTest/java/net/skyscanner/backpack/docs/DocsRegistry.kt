@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.docs
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -90,6 +91,7 @@ object DocsRegistry {
     ViewScreenshot("Flare - View - Rounded", "rounded"),
     ViewScreenshot("Flare - View - Inset padding mode", "inset-padding"),
     ComposeScreenshot("Flare - Compose", "default"),
+    ComposeScreenshot("Floating Notification", "default") { setupFloatingNotification(it) },
     ViewScreenshot("Horizontal Nav - View", "default"),
     ComposeScreenshot("Horizontal Nav - Compose", "default"),
     ViewScreenshot("Floating Action Button - View", "default"),
@@ -99,16 +101,18 @@ object DocsRegistry {
     ViewScreenshot("Nav Bar - View - With Menu", "navigation") { setupNavBarCollapsed() },
     ComposeScreenshot("Nav Bar - Compose - Default", "default"),
     ComposeScreenshot("Nav Bar - Compose - Collapsible", "collapsible"),
-    ViewScreenshot("Nudger", "all"),
+    ViewScreenshot("Nudger - View", "all"),
+    ComposeScreenshot("Nudger - Compose", "all"),
     ViewScreenshot("Overlay", "all"),
     ViewScreenshot("Panel - View", "all"),
     ComposeScreenshot("Panel - Compose", "all"),
     ViewScreenshot("RadioButton - View", "default"),
     ComposeScreenshot("RadioButton - Compose", "default"),
-    ViewScreenshot("Rating - Default", "default"),
-    ViewScreenshot("Rating - Horizontal", "sizes"),
-    ViewScreenshot("Rating - Vertical", "vertical"),
-    ViewScreenshot("Rating - Pill", "pill"),
+    ViewScreenshot("Rating - View - Default", "default"),
+    ViewScreenshot("Rating - View - Horizontal", "sizes"),
+    ViewScreenshot("Rating - View - Vertical", "vertical"),
+    ViewScreenshot("Rating - View - Pill", "pill"),
+    ComposeScreenshot("Rating - Compose", "default"),
     ViewScreenshot("Skeleton - View", "default"),
     ComposeScreenshot("Skeleton - Compose", "default"),
     ViewScreenshot("Slider - View", "default"),
@@ -142,7 +146,7 @@ object DocsRegistry {
 fun ComposeScreenshot(
   name: String,
   screenshotName: String,
-  setup: ((ComposeTestRule) -> Unit)? = null,
+  setup: ((AndroidComposeTestRule<*, *>) -> Unit)? = null,
 ): Array<Any?> =
   arrayOf(name, screenshotName, "docs/compose", setup)
 
@@ -214,6 +218,13 @@ private fun setupSnackbar() {
     .perform(ViewActions.click())
 
   InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+}
+
+private fun setupFloatingNotification(testRule: AndroidComposeTestRule<*, *>) {
+  testRule
+    .onNodeWithText(testRule.activity.getString(R.string.floating_notification_with_icon_and_action))
+    .performClick()
+    .assertIsDisplayed()
 }
 
 private fun setupSnackbarIconAction() {
