@@ -30,10 +30,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.slider.BpkRangeSlider
 import net.skyscanner.backpack.compose.slider.BpkSlider
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 
 @Composable
 fun BpkSliderStory() {
@@ -42,13 +44,14 @@ fun BpkSliderStory() {
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically)
   ) {
     DefaultSliderSample()
+    SteppedSliderSample()
     RangeSliderSample()
   }
 }
 
 @Composable
 fun RangeSliderSample() {
-  Text(text = "Range", fontSize = BpkTheme.typography.label2.fontSize)
+  Text(text = stringResource(R.string.generic_range), fontSize = BpkTheme.typography.label2.fontSize)
   var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
   BpkRangeSlider(
     value = rangeSliderValue,
@@ -58,10 +61,22 @@ fun RangeSliderSample() {
 
 @Composable
 fun DefaultSliderSample() {
-  Text(text = "Standard", fontSize = BpkTheme.typography.label2.fontSize)
+  Text(text = stringResource(R.string.generic_standard), fontSize = BpkTheme.typography.label2.fontSize)
   var sliderValue by remember { mutableStateOf(0.5f) }
   BpkSlider(
     value = sliderValue,
-    onValueChange = { newValue -> sliderValue = newValue }
+    onValueChange = { newValue -> sliderValue = newValue },
+    steps = 0,
+  )
+}
+
+@Composable
+fun SteppedSliderSample() {
+  Text(text = stringResource(R.string.generic_stepped), fontSize = BpkTheme.typography.label2.fontSize)
+  var sliderValue by remember { mutableStateOf(0.5f) }
+  BpkSlider(
+    value = sliderValue,
+    onValueChange = { newValue -> sliderValue = newValue },
+    steps = 10,
   )
 }

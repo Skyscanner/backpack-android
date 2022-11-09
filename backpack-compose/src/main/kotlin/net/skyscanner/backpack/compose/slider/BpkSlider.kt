@@ -35,7 +35,10 @@ fun BpkSlider(
   onValueChange: (Float) -> Unit,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
-  valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
+  minValue: Float = 0f,
+  maxValue: Float = 1f,
+  valueRange: ClosedFloatingPointRange<Float> = minValue..maxValue,
+  steps: Int,
   onValueChangeFinished: (() -> Unit)? = null,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -45,7 +48,7 @@ fun BpkSlider(
     modifier = modifier,
     enabled = enabled,
     valueRange = valueRange,
-    steps = 0,
+    steps = steps,
     onValueChangeFinished = onValueChangeFinished,
     interactionSource = interactionSource,
     colors = sliderColors(),
@@ -59,7 +62,9 @@ fun BpkRangeSlider(
   onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
-  valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
+  minValue: Float = 0f,
+  maxValue: Float = 1f,
+  valueRange: ClosedFloatingPointRange<Float> = minValue..maxValue,
   onValueChangeFinished: (() -> Unit)? = null,
 ) {
   RangeSlider(
@@ -78,4 +83,6 @@ private fun sliderColors() = SliderDefaults.colors(
   thumbColor = BpkTheme.colors.coreAccent,
   activeTrackColor = BpkTheme.colors.coreAccent,
   inactiveTrackColor = BpkTheme.colors.line,
+  activeTickColor = BpkTheme.colors.coreAccent,
+  inactiveTickColor = BpkTheme.colors.line,
 )
