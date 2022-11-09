@@ -59,13 +59,13 @@ fun BpkBottomSheet(
   modifier: Modifier = Modifier,
   state: BpkBottomSheetState = rememberBpkBottomSheetState(BpkBottomSheetValue.Collapsed),
   sheetGesturesEnabled: Boolean = true,
-  sheetPeekHeight: Dp = BottomSheetScaffoldDefaults.SheetPeekHeight,
+  peekHeight: Dp = BottomSheetScaffoldDefaults.SheetPeekHeight,
   content: @Composable (PaddingValues) -> Unit,
 ) {
 
   BoxWithConstraints(modifier) {
     val fullHeight = constraints.maxHeight.toFloat()
-    val peekHeightPx = with(LocalDensity.current) { sheetPeekHeight.toPx() }
+    val peekHeightPx = with(LocalDensity.current) { peekHeight.toPx() }
     var bottomSheetHeight by remember { mutableStateOf(fullHeight) }
 
     val radius = when (state.progress.to) {
@@ -73,14 +73,14 @@ fun BpkBottomSheet(
       BpkBottomSheetValue.Collapsed -> BpkBorderRadius.Lg * state.progress.fraction
     }
 
-    content(PaddingValues(bottom = sheetPeekHeight))
+    content(PaddingValues(bottom = peekHeight))
 
     Surface(
       modifier = Modifier
         .bottomSheetSwipeable(state, fullHeight, peekHeightPx, bottomSheetHeight, sheetGesturesEnabled)
         .bottomSheetSemantics(state, peekHeightPx, bottomSheetHeight)
         .fillMaxWidth()
-        .requiredHeightIn(min = sheetPeekHeight)
+        .requiredHeightIn(min = peekHeight)
         .onGloballyPositioned { bottomSheetHeight = it.size.height.toFloat() }
         .offset { IntOffset(0, state.offset.value.roundToInt()) },
       shape = RoundedCornerShape(topStart = radius, topEnd = radius),

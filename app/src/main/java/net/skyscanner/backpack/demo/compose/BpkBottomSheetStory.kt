@@ -38,7 +38,7 @@ fun BottomSheetStory(
   modifier: Modifier = Modifier,
 ) {
   BpkBottomSheet(
-    sheetPeekHeight = 56.dp * 3,
+    peekHeight = 56.dp * 3,
     sheetContent = {
       LazyColumn {
         items(100) {
