@@ -199,7 +199,7 @@ fun ImageDialogStartAlignmentExample(onDismiss: () -> Unit = {}) {
     confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
     secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
     onDismissRequest = onDismiss,
-    textAlign = TextAlign.Start
+    textAlign = TextAlign.Start,
   ) {
     Image(
       painter = painterResource(R.drawable.canadian_rockies_canada),
@@ -218,7 +218,7 @@ fun ImageDialogEndAlignmentExample(onDismiss: () -> Unit = {}) {
     confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
     secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
     onDismissRequest = onDismiss,
-    textAlign = TextAlign.End
+    textAlign = TextAlign.End,
   ) {
     Image(
       painter = painterResource(R.drawable.canadian_rockies_canada),
