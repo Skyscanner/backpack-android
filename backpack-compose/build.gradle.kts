@@ -44,6 +44,12 @@ android {
     resources.excludes.add("META-INF/LGPL2.1")
   }
   namespace = "net.skyscanner.backpack.compose"
+  kotlinOptions {
+    freeCompilerArgs = freeCompilerArgs + listOf(
+      "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi",
+      "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi",
+    )
+  }
 }
 
 dependencies {
