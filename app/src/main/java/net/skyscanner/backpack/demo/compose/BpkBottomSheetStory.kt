@@ -50,7 +50,7 @@ fun BottomSheetStory(
       Spacer(
         modifier = Modifier
           .fillMaxSize()
-          .background(BpkTheme.colors.surfaceHighlight)
+          .background(BpkTheme.colors.canvasContrast)
           .padding(contentPadding),
       )
     }
