@@ -51,7 +51,7 @@ fun RangeSliderSample() {
   Text(text = "Range", fontSize = BpkTheme.typography.label2.fontSize)
   var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
   BpkRangeSlider(
-    values = rangeSliderValue,
+    value = rangeSliderValue,
     onValueChange = { newValue -> rangeSliderValue = newValue }
   )
 }

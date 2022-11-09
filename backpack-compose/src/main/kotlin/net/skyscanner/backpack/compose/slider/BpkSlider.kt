@@ -55,7 +55,7 @@ fun BpkSlider(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BpkRangeSlider(
-  values: ClosedFloatingPointRange<Float>,
+  value: ClosedFloatingPointRange<Float>,
   onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
   modifier: Modifier = Modifier,
   enabled: Boolean = true,
@@ -63,7 +63,7 @@ fun BpkRangeSlider(
   onValueChangeFinished: (() -> Unit)? = null,
 ) {
   RangeSlider(
-    values = values,
+    value = value,
     onValueChange = onValueChange,
     modifier = modifier,
     enabled = enabled,
