@@ -120,12 +120,7 @@ internal fun BpkImageDialogImpl(
 }
 
 @Composable
-private fun DialogContent(title: String, text: String, buttons: List<Dialog.Button>, modifier: Modifier = Modifier) {
-  DialogContent(title = title, text = text, textAlign = TextAlign.Center, buttons = buttons, modifier = modifier)
-}
-
-@Composable
-private fun DialogContent(title: String, text: String, textAlign: TextAlign, buttons: List<Dialog.Button>, modifier: Modifier = Modifier) {
+private fun DialogContent(title: String, text: String, buttons: List<Dialog.Button>, modifier: Modifier = Modifier, textAlign: TextAlign = TextAlign.Center) {
   Column(
     modifier = modifier.padding(BpkDimension.Spacing.Lg),
     horizontalAlignment = Alignment.CenterHorizontally,
