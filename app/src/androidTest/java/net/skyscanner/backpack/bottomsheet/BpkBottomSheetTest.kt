@@ -55,7 +55,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestFab_Default() {
+  fun default() {
     snap(root)
   }
 }
