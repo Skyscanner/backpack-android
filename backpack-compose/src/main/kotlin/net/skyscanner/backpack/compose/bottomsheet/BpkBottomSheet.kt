@@ -170,9 +170,10 @@ private fun BpkBottomSheetHandle(
     modifier = modifier
       .height(HandleHeight)
       .padding(BpkSpacing.Md)
-      .width(36.dp)
+      .width(HandleWidth)
       .background(BpkTheme.colors.line, CircleShape)
   )
 }
 
+private val HandleWidth = 36.dp
 private val HandleHeight = 20.dp
