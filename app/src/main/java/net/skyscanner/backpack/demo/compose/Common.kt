@@ -37,6 +37,7 @@ import net.skyscanner.backpack.compose.tokens.BpkDimension
 fun ListItem(
   title: String,
   modifier: Modifier = Modifier,
+  showDivider: Boolean = true,
   trailing: @Composable RowScope.() -> Unit = {},
 ) {
   Column(
@@ -54,6 +55,8 @@ fun ListItem(
       trailing()
     }
 
-    Divider()
+    if (showDivider) {
+      Divider()
+    }
   }
 }

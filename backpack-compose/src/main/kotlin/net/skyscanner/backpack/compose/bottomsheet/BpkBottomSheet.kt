@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.bottomsheet
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -45,6 +46,7 @@ import androidx.compose.ui.semantics.expand
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -75,11 +77,9 @@ fun BpkBottomSheet(
         .bottomSheetSemantics(state, peekHeightPx, bottomSheetHeight)
         .fillMaxWidth()
         .requiredHeightIn(min = sheetPeekHeight)
-        .onGloballyPositioned {
-          bottomSheetHeight = it.size.height.toFloat()
-        }
+        .onGloballyPositioned { bottomSheetHeight = it.size.height.toFloat() }
         .offset { IntOffset(0, state.offset.value.roundToInt()) },
-      shape = RoundedCornerShape(BpkBorderRadius.Lg),
+      shape = RoundedCornerShape(animateDpAsState(if (state.offset.value != 0f) BpkBorderRadius.Lg else 0.dp).value),
       elevation = BpkElevation.Lg,
       color = BpkTheme.colors.surfaceElevated,
       contentColor = BpkTheme.colors.textPrimary,

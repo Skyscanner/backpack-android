@@ -42,7 +42,7 @@ fun BottomSheetStory(
     sheetContent = {
       LazyColumn {
         items(100) {
-          ListItem(title = stringResource(R.string.generic_list_item, it))
+          ListItem(title = stringResource(R.string.generic_list_item, it), showDivider = false)
         }
       }
     },
