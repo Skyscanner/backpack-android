@@ -104,12 +104,12 @@ ext {
   testCoreKtx = "androidx.test:core-ktx:1.4.0"
   kotlinReflection = "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
   junit = "junit:junit:4.13.2"
-  junitKtx = 'androidx.test.ext:junit-ktx:1.1.3'
+  junitKtx = 'androidx.test.ext:junit-ktx:1.1.4'
   stetho = "com.facebook.stetho:stetho:1.6.0"
   junitAndroid = "androidx.test.ext:junit:1.1.3"
   espressoCore = "androidx.test.espresso:espresso-core:3.4.0"
   espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
-  testRules = "androidx.test:rules:1.4.0"
+  testRules = "androidx.test:rules:1.5.0"
   mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
   mockitoAndroid = "org.mockito:mockito-android:4.8.1"
 
@@ -124,6 +124,7 @@ ext {
 
   composeVersion = "1.3.0"
   composeUi = "androidx.compose.ui:ui:$composeVersion"
+  composeRuntime = "androidx.compose.runtime:runtime:$composeVersion"
   composeMaterial = "androidx.compose.material:material:$composeVersion"
   composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
   composeTestJUnit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
