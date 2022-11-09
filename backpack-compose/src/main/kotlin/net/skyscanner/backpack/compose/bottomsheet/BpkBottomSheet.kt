@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.bottomsheet
 
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -46,7 +45,6 @@ import androidx.compose.ui.semantics.expand
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
@@ -54,6 +52,7 @@ import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.utils.nestedScrollFixedSwipeable
 import kotlin.math.roundToInt
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BpkBottomSheet(
   sheetContent: @Composable ColumnScope.() -> Unit,
@@ -69,6 +68,11 @@ fun BpkBottomSheet(
     val peekHeightPx = with(LocalDensity.current) { sheetPeekHeight.toPx() }
     var bottomSheetHeight by remember { mutableStateOf(fullHeight) }
 
+    val radius = when (state.progress.to) {
+      BpkBottomSheetValue.Expanded -> BpkBorderRadius.Lg * (1f - state.progress.fraction)
+      BpkBottomSheetValue.Collapsed -> BpkBorderRadius.Lg * state.progress.fraction
+    }
+
     content(PaddingValues(bottom = sheetPeekHeight))
 
     Surface(
@@ -79,7 +83,7 @@ fun BpkBottomSheet(
         .requiredHeightIn(min = sheetPeekHeight)
         .onGloballyPositioned { bottomSheetHeight = it.size.height.toFloat() }
         .offset { IntOffset(0, state.offset.value.roundToInt()) },
-      shape = RoundedCornerShape(animateDpAsState(if (state.offset.value != 0f) BpkBorderRadius.Lg else 0.dp).value),
+      shape = RoundedCornerShape(topStart = radius, topEnd = radius),
       elevation = BpkElevation.Lg,
       color = BpkTheme.colors.surfaceElevated,
       contentColor = BpkTheme.colors.textPrimary,
