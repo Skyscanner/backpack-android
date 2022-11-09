@@ -120,6 +120,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   @Test
   fun imageStartAlignment() {
     setDimensions(height = 700, width = 420)
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     record {
       ImageDialogStartAlignmentExample()
     }
@@ -128,6 +129,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   @Test
   fun imageEndAlignment() {
     setDimensions(height = 700, width = 420)
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
     record {
       ImageDialogEndAlignmentExample()
     }
