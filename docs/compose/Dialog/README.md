@@ -28,6 +28,12 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/flare.png" alt="Flare Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/flare_dm.png" alt="Flare Dialog component - dark mode" width="375" /> |
 
+## Image
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/image-start-alignment.png" alt="Image Dialog component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/image-start-alignment_dm.png" alt="Image Dialog component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available
