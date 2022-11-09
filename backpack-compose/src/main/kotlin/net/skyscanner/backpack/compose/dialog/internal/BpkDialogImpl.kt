@@ -85,6 +85,7 @@ internal fun BpkFlareDialogImpl(
 ) {
   Dialog(onDismissRequest = onDismissRequest, properties = properties) {
     Surface(
+      modifier = Modifier.padding(top = IconPadding),
       shape = BpkTheme.shapes.medium,
       color = BpkTheme.colors.surfaceDefault,
     ) {
@@ -108,6 +109,7 @@ internal fun BpkImageDialogImpl(
 ) {
   Dialog(onDismissRequest = onDismissRequest, properties = properties) {
     Surface(
+      modifier = Modifier.padding(top = IconPadding),
       shape = BpkTheme.shapes.medium,
       color = BpkTheme.colors.surfaceDefault,
     ) {
