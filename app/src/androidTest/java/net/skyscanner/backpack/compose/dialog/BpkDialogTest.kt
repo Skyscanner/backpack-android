@@ -36,7 +36,8 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BackpackPreview
 import net.skyscanner.backpack.demo.compose.DestructiveDialogExample
 import net.skyscanner.backpack.demo.compose.FlareDialogExample
-import net.skyscanner.backpack.demo.compose.ImageDialogExample
+import net.skyscanner.backpack.demo.compose.ImageDialogEndAlignmentExample
+import net.skyscanner.backpack.demo.compose.ImageDialogStartAlignmentExample
 import net.skyscanner.backpack.demo.compose.NoIconDialogExample
 import net.skyscanner.backpack.demo.compose.SuccessOneButtonDialogExample
 import net.skyscanner.backpack.demo.compose.SuccessThreeButtonsDialogExample
@@ -117,11 +118,18 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun image() {
+  fun imageStartAlignment() {
     setDimensions(height = 700, width = 420)
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     record {
-      ImageDialogExample()
+      ImageDialogStartAlignmentExample()
+    }
+  }
+
+  @Test
+  fun imageEndAlignment() {
+    setDimensions(height = 700, width = 420)
+    record {
+      ImageDialogEndAlignmentExample()
     }
   }
 

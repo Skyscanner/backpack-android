@@ -81,6 +81,12 @@ object DocsRegistry {
     ComposeScreenshot("Dialog - Compose", "warning") { setupComposeDialog(it, ShownDialog.Warning) },
     ComposeScreenshot("Dialog - Compose", "destructive") { setupComposeDialog(it, ShownDialog.Destructive) },
     ComposeScreenshot("Dialog - Compose", "flare") { setupComposeDialog(it, ShownDialog.Flare) },
+    ComposeScreenshot("Dialog - Compose", "image-start-alignment") {
+      setupComposeDialog(it, ShownDialog.ImageStartAlignment)
+    },
+    ComposeScreenshot("Dialog - Compose", "image-end-alignment") {
+      setupComposeDialog(it, ShownDialog.ImageEndAlignment)
+    },
     ComposeScreenshot("FieldSet", "default"),
     ComposeScreenshot("FieldSet", "disabled") { it.switchFieldStatus(BpkFieldStatus.Disabled) },
     ComposeScreenshot("FieldSet", "validated") { it.switchFieldStatus(BpkFieldStatus.Validated) },

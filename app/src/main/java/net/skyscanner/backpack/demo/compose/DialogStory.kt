@@ -73,7 +73,8 @@ fun DialogStory() {
       ShownDialog.Destructive -> DestructiveDialogExample(onDismiss)
       ShownDialog.NoIcon -> NoIconDialogExample(onDismiss)
       ShownDialog.Flare -> FlareDialogExample(onDismiss)
-      ShownDialog.Image -> ImageDialogExample(onDismiss)
+      ShownDialog.ImageStartAlignment -> ImageDialogStartAlignmentExample(onDismiss)
+      ShownDialog.ImageEndAlignment -> ImageDialogEndAlignmentExample(onDismiss)
       ShownDialog.None -> {}
     }
   }
@@ -87,7 +88,8 @@ enum class ShownDialog(@StringRes val buttonText: Int) {
   Destructive(R.string.dialog_destructive),
   NoIcon(R.string.dialog_no_icon),
   Flare(R.string.dialog_flare),
-  Image(R.string.dialog_image),
+  ImageStartAlignment(R.string.dialog_image_start),
+  ImageEndAlignment(R.string.dialog_image_end),
   None(R.string.generic_empty),
 }
 
@@ -190,7 +192,7 @@ fun FlareDialogExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun ImageDialogExample(onDismiss: () -> Unit = {}) {
+fun ImageDialogStartAlignmentExample(onDismiss: () -> Unit = {}) {
   BpkImageDialog(
     title = stringResource(id = R.string.dialog_title),
     text = stringResource(id = R.string.dialog_text),
@@ -198,6 +200,25 @@ fun ImageDialogExample(onDismiss: () -> Unit = {}) {
     secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
     onDismissRequest = onDismiss,
     textAlign = TextAlign.Start
+  ) {
+    Image(
+      painter = painterResource(R.drawable.canadian_rockies_canada),
+      contentDescription = stringResource(R.string.image_rockies_content_description),
+      contentScale = ContentScale.Crop,
+    )
+  }
+}
+
+@Preview
+@Composable
+fun ImageDialogEndAlignmentExample(onDismiss: () -> Unit = {}) {
+  BpkImageDialog(
+    title = stringResource(id = R.string.dialog_title),
+    text = stringResource(id = R.string.dialog_text),
+    confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+    secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+    onDismissRequest = onDismiss,
+    textAlign = TextAlign.End
   ) {
     Image(
       painter = painterResource(R.drawable.canadian_rockies_canada),
