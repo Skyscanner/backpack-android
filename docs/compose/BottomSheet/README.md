@@ -29,8 +29,13 @@ val state = rememberBpkBottomSheetState()
 BpkBottomSheet(
   state = state,
   peekHeight = HeightOfCollapsedBottomSheet,
-  sheetContent = {
+  sheetContent = { contentPadding ->
     // content of the bottom sheet
+    // you need to apply content padding to avoid displaying content behind the handle
+    // here's an example:
+    Box(Modifier.padding(contentPadding)) {
+      // this content will respect the paddings
+    }
   },
   content = { contentPadding ->
     // content displayed behind bottom sheet

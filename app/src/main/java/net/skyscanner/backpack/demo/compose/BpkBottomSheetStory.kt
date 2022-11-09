@@ -39,8 +39,8 @@ fun BottomSheetStory(
 ) {
   BpkBottomSheet(
     peekHeight = 56.dp * 3,
-    sheetContent = {
-      LazyColumn {
+    sheetContent = { contentPadding ->
+      LazyColumn(contentPadding = contentPadding) {
         items(100) {
           ListItem(title = stringResource(R.string.generic_list_item, it), showDivider = false)
         }
