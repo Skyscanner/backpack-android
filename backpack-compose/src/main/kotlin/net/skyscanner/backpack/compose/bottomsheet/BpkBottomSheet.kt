@@ -18,24 +18,40 @@
 
 package net.skyscanner.backpack.compose.bottomsheet
 
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetScaffoldDefaults
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.rememberBottomSheetScaffoldState
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.composed
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.collapse
+import androidx.compose.ui.semantics.expand
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.IntOffset
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkElevation
+import net.skyscanner.backpack.compose.utils.nestedScrollFixedSwipeable
+import kotlin.math.roundToInt
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BpkBottomSheet(
   sheetContent: @Composable ColumnScope.() -> Unit,
@@ -43,30 +59,77 @@ fun BpkBottomSheet(
   state: BpkBottomSheetState = rememberBpkBottomSheetState(BpkBottomSheetValue.Collapsed),
   sheetGesturesEnabled: Boolean = true,
   sheetPeekHeight: Dp = BottomSheetScaffoldDefaults.SheetPeekHeight,
-  content: @Composable (PaddingValues) -> Unit
+  content: @Composable (PaddingValues) -> Unit,
 ) {
-  BottomSheetScaffold(
-    sheetContent = sheetContent,
-    modifier = modifier,
-    scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = state.delegate),
-    topBar = null,
-    snackbarHost = {},
-    floatingActionButton = null,
-    sheetGesturesEnabled = sheetGesturesEnabled,
-    sheetShape = RoundedCornerShape(BpkBorderRadius.Lg),
-    sheetElevation = BpkElevation.Lg,
-    sheetBackgroundColor = BpkTheme.colors.surfaceElevated,
-    sheetContentColor = BpkTheme.colors.textPrimary,
-    sheetPeekHeight = sheetPeekHeight,
-    drawerContent = null,
-    drawerGesturesEnabled = false,
-    drawerShape = RectangleShape,
-    drawerElevation = 0.dp,
-    drawerBackgroundColor = Color.Transparent,
-    drawerContentColor = Color.Transparent,
-    drawerScrimColor = Color.Transparent,
-    backgroundColor = BpkTheme.colors.surfaceDefault,
-    contentColor = BpkTheme.colors.textPrimary,
-    content = content,
+
+  BoxWithConstraints(modifier) {
+    val fullHeight = constraints.maxHeight.toFloat()
+    val peekHeightPx = with(LocalDensity.current) { sheetPeekHeight.toPx() }
+    var bottomSheetHeight by remember { mutableStateOf(fullHeight) }
+
+    content(PaddingValues(bottom = sheetPeekHeight))
+
+    Surface(
+      modifier = Modifier
+        .bottomSheetSwipeable(state, fullHeight, peekHeightPx, bottomSheetHeight, sheetGesturesEnabled)
+        .bottomSheetSemantics(state, peekHeightPx, bottomSheetHeight)
+        .fillMaxWidth()
+        .requiredHeightIn(min = sheetPeekHeight)
+        .onGloballyPositioned {
+          bottomSheetHeight = it.size.height.toFloat()
+        }
+        .offset { IntOffset(0, state.offset.value.roundToInt()) },
+      shape = RoundedCornerShape(BpkBorderRadius.Lg),
+      elevation = BpkElevation.Lg,
+      color = BpkTheme.colors.surfaceElevated,
+      contentColor = BpkTheme.colors.textPrimary,
+      content = { Column(content = sheetContent) },
+    )
+  }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+private fun Modifier.bottomSheetSwipeable(
+  state: BpkBottomSheetState,
+  fullHeight: Float,
+  peekHeightPx: Float,
+  bottomSheetHeight: Float,
+  sheetGesturesEnabled: Boolean,
+): Modifier =
+  nestedScrollFixedSwipeable(
+    state = state,
+    anchors = mapOf(
+      fullHeight - peekHeightPx to BpkBottomSheetValue.Collapsed,
+      fullHeight - bottomSheetHeight to BpkBottomSheetValue.Expanded
+    ),
+    orientation = Orientation.Vertical,
+    enabled = sheetGesturesEnabled,
+    resistance = null,
   )
+
+private fun Modifier.bottomSheetSemantics(
+  state: BpkBottomSheetState,
+  peekHeightPx: Float,
+  bottomSheetHeight: Float,
+): Modifier = composed {
+  val scope = rememberCoroutineScope()
+  semantics {
+    if (peekHeightPx != bottomSheetHeight) {
+      if (state.isCollapsed) {
+        expand {
+          if (state.confirmStateChange(BpkBottomSheetValue.Expanded)) {
+            scope.launch { state.expand() }
+          }
+          true
+        }
+      } else {
+        collapse {
+          if (state.confirmStateChange(BpkBottomSheetValue.Collapsed)) {
+            scope.launch { state.collapse() }
+          }
+          true
+        }
+      }
+    }
+  }
 }

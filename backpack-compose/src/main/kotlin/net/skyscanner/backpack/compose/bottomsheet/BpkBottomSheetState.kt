@@ -16,78 +16,78 @@
  * limitations under the License.
  */
 
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package net.skyscanner.backpack.compose.bottomsheet
 
 import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.material.BottomSheetState
-import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.SwipeableDefaults
-import androidx.compose.material.rememberBottomSheetState
+import androidx.compose.material.SwipeableState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import net.skyscanner.backpack.compose.utils.SwipeableState
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 
 @Composable
 fun rememberBpkBottomSheetState(
   initialValue: BpkBottomSheetValue,
   animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
-  confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true }
-): BpkBottomSheetState {
-  val delegate = rememberBottomSheetState(
-    initialValue = initialValue.map(),
-    animationSpec = animationSpec,
-    confirmStateChange = { confirmStateChange(it.unmap()) },
-  )
-  return remember(delegate) { BpkBottomSheetState(delegate) }
-}
+  confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
+): BpkBottomSheetState =
+  rememberSaveable(
+    animationSpec,
+    saver = BpkBottomSheetState.Saver(
+      animationSpec = animationSpec,
+      confirmStateChange = confirmStateChange,
+    )
+  ) {
+    BpkBottomSheetState(
+      initialValue = initialValue,
+      animationSpec = animationSpec,
+      confirmStateChange = confirmStateChange,
+    )
+  }
 
 enum class BpkBottomSheetValue {
   Collapsed,
   Expanded,
 }
 
-class BpkBottomSheetState internal constructor(
-  internal val delegate: BottomSheetState,
-) : SwipeableState<BpkBottomSheetValue> by SwipeableState(
-  delegate = delegate,
-  map = BpkBottomSheetValue::map,
-  unmap = BottomSheetValue::unmap,
+@Stable
+@OptIn(ExperimentalMaterialApi::class)
+class BpkBottomSheetState(
+  initialValue: BpkBottomSheetValue,
+  animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
+  internal val confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
+) : SwipeableState<BpkBottomSheetValue>(
+  initialValue = initialValue,
+  animationSpec = animationSpec,
+  confirmStateChange = confirmStateChange,
 ) {
 
-  constructor(
-    initialValue: BpkBottomSheetValue,
-    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
-    confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true }
-  ) : this(
-    delegate = BottomSheetState(
-      initialValue = initialValue.map(),
-      animationSpec = animationSpec,
-      confirmStateChange = { confirmStateChange(it.unmap()) },
-    )
-  )
-
   val isExpanded: Boolean
-    get() = delegate.isExpanded
+    get() = currentValue == BpkBottomSheetValue.Expanded
 
   val isCollapsed: Boolean
-    get() = delegate.isCollapsed
+    get() = currentValue == BpkBottomSheetValue.Collapsed
 
-  suspend fun expand() = delegate.expand()
+  suspend fun expand() = animateTo(BpkBottomSheetValue.Expanded)
 
-  suspend fun collapse() = delegate.collapse()
+  suspend fun collapse() = animateTo(BpkBottomSheetValue.Collapsed)
 
-}
+  companion object {
 
-
-private fun BottomSheetValue.unmap() = when (this) {
-  BottomSheetValue.Collapsed -> BpkBottomSheetValue.Collapsed
-  BottomSheetValue.Expanded -> BpkBottomSheetValue.Expanded
-}
-
-private fun BpkBottomSheetValue.map() = when (this) {
-  BpkBottomSheetValue.Collapsed -> BottomSheetValue.Collapsed
-  BpkBottomSheetValue.Expanded -> BottomSheetValue.Expanded
+    fun Saver(
+      animationSpec: AnimationSpec<Float>,
+      confirmStateChange: (BpkBottomSheetValue) -> Boolean,
+    ): Saver<BpkBottomSheetState, *> = Saver(
+      save = { it.currentValue },
+      restore = {
+        BpkBottomSheetState(
+          initialValue = it,
+          animationSpec = animationSpec,
+          confirmStateChange = confirmStateChange,
+        )
+      }
+    )
+  }
 }

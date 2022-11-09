@@ -18,90 +18,96 @@
 
 package net.skyscanner.backpack.compose.utils
 
-import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.SwipeProgress
+import androidx.compose.material.FixedThreshold
+import androidx.compose.material.ResistanceConfig
 import androidx.compose.material.SwipeableDefaults
 import androidx.compose.material.SwipeableState
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.State
+import androidx.compose.material.ThresholdConfig
+import androidx.compose.material.swipeable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.Velocity
+import androidx.compose.ui.unit.dp
 
-@Stable
-interface SwipeableState<T> {
-
-  val currentValue: T
-
-  val isAnimationRunning: Boolean
-
-  val offset: State<Float>
-
-  val overflow: State<Float>
-
-  val targetValue: T
-
-  @OptIn(ExperimentalMaterialApi::class)
-  val progress: SwipeProgress<T>
-
-  val direction: Float
-
-  suspend fun snapTo(targetValue: T)
-
-  suspend fun animateTo(targetValue: T, anim: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec)
-
-  suspend fun performFling(velocity: Float)
-
-  fun performDrag(delta: Float): Float
-
-}
+// to resolve one of the issues in Material Design library, see
+// https://github.com/androidx/androidx/blob/133b57f4ff1506abeda479a95c357b8e7bdca2d7/compose/material/material/src/commonMain/kotlin/androidx/compose/material/Swipeable.kt#L845
+@OptIn(ExperimentalMaterialApi::class)
+internal fun <T> Modifier.nestedScrollFixedSwipeable(
+  state: SwipeableState<T>,
+  anchors: Map<Float, T>,
+  orientation: Orientation,
+  enabled: Boolean = true,
+  reverseDirection: Boolean = false,
+  interactionSource: MutableInteractionSource? = null,
+  thresholds: (from: T, to: T) -> ThresholdConfig = { _, _ -> FixedThreshold(56.dp) },
+  resistance: ResistanceConfig? = SwipeableDefaults.resistanceConfig(anchors.keys),
+  velocityThreshold: Dp = SwipeableDefaults.VelocityThreshold
+): Modifier = this
+  .nestedScroll(
+    connection = state.preUpPostDownNestedScrollConnection(anchors.keys.minOrNull() ?: Float.NEGATIVE_INFINITY)
+  )
+  .swipeable(
+    state = state,
+    anchors = anchors,
+    orientation = orientation,
+    enabled = enabled,
+    reverseDirection = reverseDirection,
+    interactionSource = interactionSource,
+    thresholds = thresholds,
+    resistance = resistance,
+    velocityThreshold = velocityThreshold,
+  )
 
 @OptIn(ExperimentalMaterialApi::class)
-@Stable
-internal fun <F, T> SwipeableState(
-  delegate: SwipeableState<F>,
-  map: (T) -> F,
-  unmap: (F) -> T,
-): net.skyscanner.backpack.compose.utils.SwipeableState<T> =
-
-  @Stable
-  object : net.skyscanner.backpack.compose.utils.SwipeableState<T> {
-
-    override val currentValue: T
-      get() = delegate.currentValue.let(unmap)
-
-    override val isAnimationRunning: Boolean
-      get() = delegate.isAnimationRunning
-
-    override val offset: State<Float>
-      get() = delegate.offset
-
-    override val overflow: State<Float>
-      get() = delegate.overflow
-
-    override val targetValue: T
-      get() = delegate.targetValue.let(unmap)
-
-    override val progress: SwipeProgress<T>
-      get() = delegate.progress.let {
-        SwipeProgress(
-          from = it.from.let(unmap),
-          to = it.to.let(unmap),
-          fraction = it.fraction,
-        )
+private fun <T> SwipeableState<T>.preUpPostDownNestedScrollConnection(
+  minBound: Float,
+): NestedScrollConnection =
+  object : NestedScrollConnection {
+    override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+      val delta = available.toFloat()
+      return if (delta < 0 && source == NestedScrollSource.Drag) {
+        performDrag(delta).toOffset()
+      } else {
+        Offset.Zero
       }
+    }
 
-    override val direction: Float
-      get() = delegate.direction
+    override fun onPostScroll(
+      consumed: Offset,
+      available: Offset,
+      source: NestedScrollSource
+    ): Offset {
+      return if (source == NestedScrollSource.Drag) {
+        performDrag(available.toFloat()).toOffset()
+      } else {
+        Offset.Zero
+      }
+    }
 
-    override suspend fun performFling(velocity: Float) =
-      delegate.performFling(velocity)
+    override suspend fun onPreFling(available: Velocity): Velocity {
+      val toFling = Offset(available.x, available.y).toFloat()
+      return if (toFling < 0 && offset.value > minBound) {
+        performFling(velocity = toFling)
+        // since we go to the anchor with tween settling, consume all for the best UX
+        available
+      } else {
+        Velocity.Zero
+      }
+    }
 
-    override fun performDrag(delta: Float): Float =
-      delegate.performDrag(delta)
+    override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity {
+      performFling(velocity = Offset(available.x, available.y).toFloat())
+      return available
+    }
 
-    override suspend fun animateTo(targetValue: T, anim: AnimationSpec<Float>) =
-      delegate.animateTo(targetValue.let(map))
+    private fun Float.toOffset(): Offset = Offset(0f, this)
 
-    override suspend fun snapTo(targetValue: T) =
-      delegate.snapTo(targetValue.let(map))
-
+    private fun Offset.toFloat(): Float = this.y
   }
