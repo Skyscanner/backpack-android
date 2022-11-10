@@ -66,7 +66,7 @@ class BarChartStory : Story() {
     badge = "£" + random.nextInt(100),
     value = random.nextInt(120) / 100f,
     inactive = random.nextInt(5) == 0,
-    id = dayOfTheYear,
+    id = dayOfTheYear, // todo: use proper ids
   )
 
   companion object {
