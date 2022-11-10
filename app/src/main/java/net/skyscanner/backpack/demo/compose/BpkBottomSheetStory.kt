@@ -29,6 +29,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheet
+import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheetValue
+import net.skyscanner.backpack.compose.bottomsheet.rememberBpkBottomSheetState
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
 
@@ -36,8 +38,11 @@ import net.skyscanner.backpack.demo.R
 @Composable
 fun BottomSheetStory(
   modifier: Modifier = Modifier,
+  initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
 ) {
+  val state = rememberBpkBottomSheetState(initialValue)
   BpkBottomSheet(
+    state = state,
     peekHeight = 56.dp * 3,
     sheetContent = { contentPadding ->
       LazyColumn(contentPadding = contentPadding) {

@@ -30,13 +30,20 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(200, 200)
+    setDimensions(400, 300)
   }
 
   @Test
   fun default() {
     composed {
       BottomSheetStory()
+    }
+  }
+
+  @Test
+  fun expanded() {
+    composed {
+      BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)
     }
   }
 }
