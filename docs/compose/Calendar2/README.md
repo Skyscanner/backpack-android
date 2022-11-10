@@ -111,7 +111,6 @@ controller.setParams(
         disabled = true, // marks date as disabled
         status = CellStatus.Positive, // adds green colour to cell, you can use Neutral, Negative, Empty and null as well
         label = "£30", // adds label below the date
-        style = CellStatusStyle.Background, // specifies application of the colour: Background or Label
       ),
     )
   )

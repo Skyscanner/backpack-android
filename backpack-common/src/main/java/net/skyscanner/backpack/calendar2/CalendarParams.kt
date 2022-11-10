@@ -108,7 +108,7 @@ data class CellInfo(
   val disabled: Boolean = false,
   val status: CellStatus? = null,
   val label: String? = null,
-  val style: CellStatusStyle = CellStatusStyle.Background,
+  val style: CellStatusStyle = CellStatusStyle.Label,
 ) {
 
   internal companion object {
@@ -146,11 +146,6 @@ enum class CellStatus {
  * Describes the colouring behaviour of the cell
  */
 enum class CellStatusStyle {
-
-  /**
-   * The colour will be used for background
-   */
-  Background,
 
   /**
    * The colour will be used as [CellInfo.label] text colour

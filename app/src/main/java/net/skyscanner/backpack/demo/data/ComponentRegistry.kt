@@ -240,7 +240,6 @@ object ComponentRegistry {
             "Selection Range" story NodeData { Calendar2Story of CalendarStoryType.SelectionRange },
             "Selection Whole Month" story NodeData { Calendar2Story of CalendarStoryType.SelectionWholeMonth },
             "Disabled weekends" story NodeData { Calendar2Story of CalendarStoryType.WithDisabledDates },
-            "Day colours" story NodeData { Calendar2Story of CalendarStoryType.WithColors },
             "Day labels" story NodeData { Calendar2Story of CalendarStoryType.WithLabels },
             "Pre-selected range" story NodeData { Calendar2Story of CalendarStoryType.PreselectedRange },
           )
@@ -253,7 +252,6 @@ object ComponentRegistry {
             "Selection Range" composeStory { CalendarStory(CalendarStoryType.SelectionRange) },
             "Selection Whole Month" composeStory { CalendarStory(CalendarStoryType.SelectionWholeMonth) },
             "Disabled weekends" composeStory { CalendarStory(CalendarStoryType.WithDisabledDates) },
-            "Day colours" composeStory { CalendarStory(CalendarStoryType.WithColors) },
             "Day labels" composeStory { CalendarStory(CalendarStoryType.WithLabels) },
             "Pre-selected range" composeStory { CalendarStory(CalendarStoryType.PreselectedRange) },
           )

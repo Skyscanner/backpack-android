@@ -41,7 +41,6 @@ enum class CalendarStoryType {
   SelectionWholeMonth,
   WithDisabledDates,
   WithLabels,
-  WithColors,
   PreselectedRange;
 
   companion object {
@@ -114,28 +113,6 @@ enum class CalendarStoryType {
                 style = CellStatusStyle.Label,
               )
             },
-        )
-
-        WithColors -> CalendarParams(
-          now = now,
-          range = range,
-          selectionMode = CalendarParams.SelectionMode.Range,
-          cellsInfo = range
-            .toIterable()
-            .associateWith {
-              val price = it.dayOfMonth % maxPrice
-              CellInfo(
-                status = when (price) {
-                  noPriceThreshold -> null
-                  emptyPriceThreshold -> CellStatus.Empty
-                  positivePriceThreshold -> CellStatus.Positive
-                  neutralPriceThreshold -> CellStatus.Neutral
-                  negativePriceThreshold -> CellStatus.Negative
-                  else -> CellStatus.Empty
-                },
-                style = CellStatusStyle.Background,
-              )
-            }
         )
 
         PreselectedRange -> CalendarParams(
