@@ -46,10 +46,6 @@ object BpkCalendarTestCases {
 
     val Default = DefaultRange
 
-    val Colored = DefaultRange.copy(
-      cellsInfo = multiColoredExampleCalendarColoring(initialRange),
-    )
-
     val Labeled = DefaultRange.copy(
       cellsInfo = mapOf(
         LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 1) to
@@ -95,10 +91,6 @@ object BpkCalendarTestCases {
 
     val WithStartAndEndDateSelected = Default
 
-    val ColoredWithStartAndEndDateSelected = DefaultRange.copy(
-      cellsInfo = multiColoredExampleCalendarColoring(initialRange),
-    )
-
     val WithSingleDaySelected = DefaultSingle
 
     val WithRangeSetProgrammatically = Default
@@ -126,21 +118,6 @@ object BpkCalendarTestCases {
       now = LocalDate.of(2019, 1, 1),
       monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
     )
-
-    private fun multiColoredExampleCalendarColoring(range: ClosedRange<LocalDate>): Map<LocalDate, CellInfo> =
-      range
-        .toIterable()
-        .associateWith {
-          CellInfo(
-            status = when (it.dayOfYear % 5) {
-              0 -> CellStatus.Negative
-              1 -> CellStatus.Neutral
-              2 -> CellStatus.Positive
-              3 -> CellStatus.Empty
-              else -> null
-            }
-          )
-        }
 
     private fun disabledDayOfTheWeekInfo(
       range: ClosedRange<LocalDate>,

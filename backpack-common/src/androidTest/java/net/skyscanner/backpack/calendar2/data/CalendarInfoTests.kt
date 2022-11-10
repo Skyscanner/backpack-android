@@ -97,26 +97,4 @@ class CalendarInfoTests {
       }
     }
   }
-
-  @Test
-  fun if_date_with_status_as_background_cell_has_correct_state() {
-    val statuses = CellStatus.values()
-    val params = CalendarSettings.Default.copy(
-      cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
-        CellInfo(status = statuses[it.dayOfMonth % statuses.size], style = CellStatusStyle.Background)
-      }
-    )
-
-    testCalendarWith(params) {
-      verify {
-        for (i in 0 until state.cells.size) {
-          val cell = state.cells[i]
-          if (cell is CalendarCell.Day) {
-            assertEquals(statuses[cell.date.dayOfMonth % statuses.size], cell.info.status)
-            assertEquals(CellStatusStyle.Background, cell.info.style)
-          }
-        }
-      }
-    }
-  }
 }

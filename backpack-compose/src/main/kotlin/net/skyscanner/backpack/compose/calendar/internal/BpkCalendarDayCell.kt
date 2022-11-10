@@ -152,14 +152,6 @@ private fun Modifier.cellDayBackground(
         Selection.End -> background(BpkTheme.colors.coreAccent, CircleShape)
       }
 
-    style == CellStatusStyle.Background && status != null && !inactive ->
-      when (status) {
-        CellStatus.Positive -> background(BpkTheme.colors.statusSuccessSpot, CircleShape)
-        CellStatus.Neutral -> background(BpkTheme.colors.statusWarningSpot, CircleShape)
-        CellStatus.Negative -> background(BpkTheme.colors.statusDangerSpot, CircleShape)
-        CellStatus.Empty -> background(BpkTheme.colors.surfaceHighlight, CircleShape)
-      }
-
     else -> this
   }
 }
@@ -185,15 +177,6 @@ private fun dateColor(
       }
 
     inactive -> BpkTheme.colors.textDisabled
-
-    style == CellStatusStyle.Background && status != null ->
-      when (status) {
-        CellStatus.Positive,
-        CellStatus.Negative -> BpkTheme.colors.textPrimaryInverse
-
-        CellStatus.Neutral -> BpkTheme.colors.textOnLight
-        CellStatus.Empty -> BpkTheme.colors.textPrimary
-      }
 
     else -> BpkTheme.colors.textPrimary
   }

@@ -4,12 +4,6 @@
 [![Class reference](https://img.shields.io/badge/Class%20reference-Android-blue)](https://backpack.github.io/android/backpack-compose/net.skyscanner.backpack.compose.calendar)
 [![Source code](https://img.shields.io/badge/Source%20code-GitHub-lightgrey)](https://github.com/Skyscanner/backpack-android/tree/main/backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/calendar)
 
-## Coloured
-
-| Day                                                                                                                                                                           | Night |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/colored.png" alt="Colored Calendar2 component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Calendar2/screenshots/colored_dm.png" alt="Colored Calendar2 component - dark mode" width="375" /> |
-
 ## Labeled
 
 | Day | Night |
@@ -111,7 +105,6 @@ controller.setParams(
         disabled = true, // marks date as disabled
         status = CellStatus.Positive, // adds green colour to cell, you can use Neutral, Negative, Empty and null as well
         label = "£30", // adds label below the date
-        style = CellStatusStyle.Background, // specifies application of the colour: Background or Label
       ),
     )
   )
