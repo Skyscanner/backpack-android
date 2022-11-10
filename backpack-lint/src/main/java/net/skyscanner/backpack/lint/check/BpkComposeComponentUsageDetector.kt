@@ -164,6 +164,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       webName = "slider",
       componentsToReplace = setOf(
         "androidx.compose.material.Slider",
+        "androidx.compose.material.RangeSlider",
       )
     ),
     SPINNER(

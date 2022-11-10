@@ -65,6 +65,7 @@ fun BpkRangeSlider(
   minValue: Float = 0f,
   maxValue: Float = 1f,
   valueRange: ClosedFloatingPointRange<Float> = minValue..maxValue,
+  steps: Int,
   onValueChangeFinished: (() -> Unit)? = null,
 ) {
   RangeSlider(
@@ -73,6 +74,7 @@ fun BpkRangeSlider(
     modifier = modifier,
     enabled = enabled,
     valueRange = valueRange,
+    steps = steps,
     onValueChangeFinished = onValueChangeFinished,
     colors = sliderColors(),
   )
