@@ -55,7 +55,8 @@ fun RangeSliderSample() {
   var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
   BpkRangeSlider(
     value = rangeSliderValue,
-    onValueChange = { newValue -> rangeSliderValue = newValue }
+    onValueChange = { newValue -> rangeSliderValue = newValue },
+    steps = 0,
   )
 }
 
