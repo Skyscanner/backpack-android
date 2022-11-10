@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import net.skyscanner.backpack.barchart.BpkBarChart
+import net.skyscanner.backpack.barchart.BpkBarChartModel
 import net.skyscanner.backpack.demo.R
 import java.util.Random
 
@@ -30,7 +31,7 @@ class BarChartStory : Story() {
     super.onViewCreated(view, savedInstanceState)
 
     view.findViewById<BpkBarChart>(R.id.bar_chart).apply {
-      model = BpkBarChart.Model(
+      model = BpkBarChartModel(
         groups = listOf(
           createMonth(0),
           createMonth(1),
@@ -39,7 +40,7 @@ class BarChartStory : Story() {
           createMonth(4),
           createMonth(5)
         ),
-        legend = BpkBarChart.Legend(
+        legend = BpkBarChartModel.Legend(
           selectedTitle = "Selected",
           inactiveTitle = "No Price",
           activeTitle = "Price",
@@ -50,21 +51,22 @@ class BarChartStory : Story() {
 
   private val random = Random(18735)
 
-  private fun createMonth(month: Int) = BpkBarChart.Group(
+  private fun createMonth(month: Int) = BpkBarChartModel.Group(
     title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
-    items = mutableListOf<BpkBarChart.Column>().apply {
+    items = mutableListOf<BpkBarChartModel.Column>().apply {
       for (dayOfTheMonth in 0 until 30) {
         add(createBar(month * 30 + dayOfTheMonth))
       }
     }
   )
 
-  private fun createBar(dayOfTheYear: Int) = BpkBarChart.Column(
+  private fun createBar(dayOfTheYear: Int) = BpkBarChartModel.Column(
     title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
     subtitle = (dayOfTheYear % 30 + 1).toString(),
     badge = "£" + random.nextInt(100),
     value = random.nextInt(120) / 100f,
-    inactive = random.nextInt(5) == 0
+    inactive = random.nextInt(5) == 0,
+    id = dayOfTheYear,
   )
 
   companion object {

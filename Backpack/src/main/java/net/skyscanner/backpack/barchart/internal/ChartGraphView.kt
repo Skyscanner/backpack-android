@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.barchart.BpkBarChart
+import net.skyscanner.backpack.barchart.BpkBarChartModel
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
 
@@ -34,8 +35,8 @@ import net.skyscanner.backpack.util.Consumer
 internal class ChartGraphView constructor(
   context: Context,
   colors: BpkBarChart.Colors,
-  onClick: Consumer<BpkBarChart.Column>
-) : FrameLayout(context), Consumer<List<BpkBarChart.Group>?> {
+  onClick: Consumer<BpkBarChartModel.Column>
+) : FrameLayout(context), Consumer<List<BpkBarChartModel.Group>?> {
 
   private val onClickWrapper = { holder: ChartBarHolder ->
     onClick(holder.model!!)
@@ -89,7 +90,7 @@ internal class ChartGraphView constructor(
 
   private var model: ChartData = ChartData()
 
-  override fun invoke(groups: List<BpkBarChart.Group>?) {
+  override fun invoke(groups: List<BpkBarChartModel.Group>?) {
     this.model = ChartData(groups)
     adapter.invoke(model)
   }

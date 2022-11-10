@@ -18,10 +18,10 @@
 
 package net.skyscanner.backpack.barchart.internal
 
-import net.skyscanner.backpack.barchart.BpkBarChart
+import net.skyscanner.backpack.barchart.BpkBarChartModel
 
 internal class ChartData(
-  groups: List<BpkBarChart.Group>? = null
+  groups: List<BpkBarChartModel.Group>? = null
 ) {
 
   private val data: List<Item> =
@@ -30,14 +30,14 @@ internal class ChartData(
   val size: Int
     get() = data.size
 
-  fun getItem(index: Int): BpkBarChart.Column =
+  fun getItem(index: Int): BpkBarChartModel.Column =
     data[index].column
 
-  fun getGroup(index: Int): BpkBarChart.Group =
+  fun getGroup(index: Int): BpkBarChartModel.Group =
     data[index].group
 
   private data class Item(
-    val group: BpkBarChart.Group,
-    val column: BpkBarChart.Column
+    val group: BpkBarChartModel.Group,
+    val column: BpkBarChartModel.Column
   )
 }

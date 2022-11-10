@@ -46,7 +46,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Empty() {
     init {
-      model = BpkBarChart.Model(
+      model = BpkBarChartModel(
         groups = listOf(
           createMonth(0, value = 0.0f)
         )
@@ -58,7 +58,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Half() {
     init {
-      model = BpkBarChart.Model(
+      model = BpkBarChartModel(
         groups = listOf(
           createMonth(0, value = 0.5f)
         )
@@ -70,7 +70,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Full() {
     init {
-      model = BpkBarChart.Model(
+      model = BpkBarChartModel(
         groups = listOf(
           createMonth(0, value = 1.0f)
         )
@@ -82,7 +82,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Overfilled() {
     init {
-      model = BpkBarChart.Model(
+      model = BpkBarChartModel(
         groups = listOf(
           createMonth(0, value = 1.1f)
         )
@@ -94,7 +94,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Inactive() {
     init {
-      model = BpkBarChart.Model(
+      model = BpkBarChartModel(
         groups = listOf(
           createMonth(0, inactive = true)
         )
@@ -106,11 +106,11 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_WithLegend() {
     init {
-      model = BpkBarChart.Model(
+      model = BpkBarChartModel(
         groups = listOf(
           createMonth(0)
         ),
-        legend = BpkBarChart.Legend(
+        legend = BpkBarChartModel.Legend(
           selectedTitle = "Selected",
           activeTitle = "Enabled",
           inactiveTitle = "Disabled",
@@ -123,7 +123,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_WithBadge() {
     init {
-      model = BpkBarChart.Model(
+      model = BpkBarChartModel(
         groups = listOf(
           createMonth(0)
         )
@@ -137,7 +137,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_WithoutBadge() {
     init {
-      model = BpkBarChart.Model(
+      model = BpkBarChartModel(
         groups = listOf(
           createMonth(0)
         )
@@ -173,9 +173,9 @@ class BpkBarchartTests : BpkSnapshotTest() {
     badge: Int = 100,
     value: Float = 0.5f,
     inactive: Boolean = false
-  ) = BpkBarChart.Group(
+  ) = BpkBarChartModel.Group(
     title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
-    items = ArrayList<BpkBarChart.Column>(10).apply {
+    items = ArrayList<BpkBarChartModel.Column>(10).apply {
       for (dayOfTheMonth in 0 until 30) {
         add(
           createBar(
@@ -192,7 +192,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
     badge: Int = 100,
     value: Float = 0.5f,
     inactive: Boolean = false
-  ) = BpkBarChart.Column(
+  ) = BpkBarChartModel.Column(
     title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
     subtitle = (dayOfTheYear % 30 + 1).toString(),
     badge = "£$badge",
