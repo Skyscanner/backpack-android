@@ -159,12 +159,18 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.material.TextField",
       )
     ),
+    RANGE_SLIDER(
+      fullName = "net.skyscanner.backpack.compose.slider.BpkSlider",
+      webName = "slider",
+      componentsToReplace = setOf(
+        "androidx.compose.material.RangeSlider",
+      )
+    ),
     SLIDER(
       fullName = "net.skyscanner.backpack.compose.slider.BpkSlider",
       webName = "slider",
       componentsToReplace = setOf(
         "androidx.compose.material.Slider",
-        "androidx.compose.material.RangeSlider",
       )
     ),
     SPINNER(

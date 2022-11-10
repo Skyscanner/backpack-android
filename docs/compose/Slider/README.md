@@ -23,7 +23,7 @@ Example of a `BpkRangeSlider`:
 import net.skyscanner.backpack.compose.slider.BpkSlider
 
 BpkRangeSlider {
-  values = 0.2f..0.8f
+  value = 0.2f..0.8f
   onValueChange = { newValue -> } // Handle update
 }
 ```
