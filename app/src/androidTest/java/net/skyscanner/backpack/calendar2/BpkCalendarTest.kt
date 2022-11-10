@@ -56,13 +56,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestColoredCalendarDefault() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.Colored)
-    snap(calendar)
-  }
-
-  @Test
   fun screenshotTestLabeledCalendarDefault() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.Labeled)
@@ -162,13 +155,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   fun screenshotTestCalendarWithStartAndEndDateSelected() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithStartAndEndDateSelected)
-    selectStartEnd(calendar, prepareForAsyncTest())
-  }
-
-  @Test
-  fun screenshotTestColoredCalendarWithStartAndEndDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.ColoredWithStartAndEndDateSelected)
     selectStartEnd(calendar, prepareForAsyncTest())
   }
 

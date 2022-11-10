@@ -71,6 +71,11 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
     val webName: String,
     val componentsToReplace: Set<String>,
   ) {
+    BOTTOM_SHEET(
+      fullName = "net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheet",
+      webName = "bottom-sheet",
+      componentsToReplace = setOf("androidx.compose.material.BottomSheetScaffold"),
+    ),
     BUTTON(
       fullName = "net.skyscanner.backpack.compose.button.BpkButton",
       webName = "button",

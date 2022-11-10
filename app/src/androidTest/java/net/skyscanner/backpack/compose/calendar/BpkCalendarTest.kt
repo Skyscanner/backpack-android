@@ -78,12 +78,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun colored() {
-    val controller = createController(BpkCalendarTestCases.Params.Colored)
-    snap(controller)
-  }
-
-  @Test
   fun labeled() {
     val controller = createController(BpkCalendarTestCases.Params.Labeled)
     snap(controller)
@@ -156,12 +150,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   @Test
   fun withStartAndEndDateSelected() {
     val controller = createController(BpkCalendarTestCases.Params.WithStartAndEndDateSelected)
-    selectStartEnd(controller)
-  }
-
-  @Test
-  fun coloredWithStartAndEndDateSelected() {
-    val controller = createController(BpkCalendarTestCases.Params.ColoredWithStartAndEndDateSelected)
     selectStartEnd(controller)
   }
 

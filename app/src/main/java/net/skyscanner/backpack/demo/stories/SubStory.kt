@@ -40,7 +40,7 @@ open class SubStory : Story() {
       return ComposeView(requireContext()).apply {
         setContent {
           BackpackDemoTheme {
-            LazyColumn() {
+            LazyColumn {
               items(stories) {
                 ComponentItem(title = it)
               }
