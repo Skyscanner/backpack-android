@@ -207,7 +207,7 @@
   <string name="generic_dismiss">Dismiss</string>
   <string name="rating_title">Excellent</string>
   <string name="rating_subtitle">1532 reviews</string>
-  <string name="generic_range">Range</string>
-  <string name="generic_standard">Standard</string>
-  <string name="generic_stepped">Stepped</string>
+  <string name="slider_range">Range</string>
+  <string name="slider_standard">Standard</string>
+  <string name="slider_stepped">Stepped</string>
 </resources>

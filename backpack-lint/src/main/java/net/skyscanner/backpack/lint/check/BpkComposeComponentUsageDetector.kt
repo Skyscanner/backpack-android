@@ -160,7 +160,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       )
     ),
     RANGE_SLIDER(
-      fullName = "net.skyscanner.backpack.compose.slider.BpkSlider",
+      fullName = "net.skyscanner.backpack.compose.slider.BpkRangeSlider",
       webName = "slider",
       componentsToReplace = setOf(
         "androidx.compose.material.RangeSlider",
