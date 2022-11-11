@@ -21,18 +21,12 @@ package net.skyscanner.backpack.demo.compose
 
 import android.content.Intent
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.text.BpkText
@@ -64,31 +58,21 @@ fun ComponentItem(
   showComposeBadge: Boolean = false,
 ) {
   val context = LocalContext.current
-  Column(
+  ListItem(
+    title = title,
     modifier = modifier
       .clickable {
         val intent = Intent(context, ComponentDetailActivity::class.java)
         intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, title)
         context.startActivity(intent)
-      }
-      .height(56.dp)
-      .fillMaxWidth()
-      .padding(horizontal = BpkDimension.Spacing.Lg),
+      },
   ) {
-
-    Row(
-      modifier = Modifier.weight(1f),
-      verticalAlignment = Alignment.CenterVertically,
-    ) {
-      BpkText(text = title, style = BpkTheme.typography.bodyLongform)
-      if (showComposeBadge) {
-        BpkBadge(
-          text = stringResource(R.string.story_badge_compose),
-          type = BpkBadgeType.Success,
-          modifier = Modifier.padding(start = BpkDimension.Spacing.Base)
-        )
-      }
+    if (showComposeBadge) {
+      BpkBadge(
+        text = stringResource(R.string.story_badge_compose),
+        type = BpkBadgeType.Success,
+        modifier = Modifier.padding(start = BpkDimension.Spacing.Base)
+      )
     }
-    Divider()
   }
 }
