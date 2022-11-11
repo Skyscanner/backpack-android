@@ -39,7 +39,6 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 enum class BpkBadgeType {
   Normal,
@@ -58,17 +57,35 @@ fun BpkBadge(
   modifier: Modifier = Modifier,
   icon: BpkIcon? = null,
 ) {
+  BpkBadge(
+    text = text,
+    backgroundColor = type.backgroundColor,
+    contentColor = type.contentColor,
+    borderColor = type.borderColor,
+    modifier = modifier,
+    icon = icon,
+  )
+}
+
+@Composable
+internal fun BpkBadge(
+  text: String,
+  backgroundColor: Color,
+  contentColor: Color,
+  borderColor: Color,
+  modifier: Modifier = Modifier,
+  icon: BpkIcon? = null,
+) {
   Row(
     modifier = modifier
       .semantics(mergeDescendants = true) { }
       .requiredHeight(BpkSpacing.Lg)
-      .border(1.dp, type.borderColor, BadgeShape)
-      .background(type.backgroundColor, BadgeShape)
+      .border(1.dp, borderColor, BadgeShape)
+      .background(backgroundColor, BadgeShape)
       .padding(horizontal = BpkSpacing.Md),
     horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
     verticalAlignment = Alignment.CenterVertically,
   ) {
-    val contentColor = type.contentColor
     if (icon != null) {
       BpkIcon(
         icon = icon,
