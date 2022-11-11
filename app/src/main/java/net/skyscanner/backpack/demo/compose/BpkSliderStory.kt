@@ -51,8 +51,10 @@ fun BpkSliderStory() {
 
 @Composable
 fun RangeSliderSample() {
-  BpkText(text = stringResource(R.string.slider_range))
-  BpkTheme.typography.label2.fontSize
+  BpkText(
+    text = stringResource(R.string.slider_range),
+    style = BpkTheme.typography.label2,
+  )
   var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
   BpkRangeSlider(
     value = rangeSliderValue,
@@ -63,8 +65,10 @@ fun RangeSliderSample() {
 
 @Composable
 fun DefaultSliderSample() {
-  BpkText(text = stringResource(R.string.slider_standard))
-  BpkTheme.typography.label2.fontSize
+  BpkText(
+    text = stringResource(R.string.slider_range),
+    style = BpkTheme.typography.label2,
+  )
   var sliderValue by remember { mutableStateOf(0.5f) }
   BpkSlider(
     value = sliderValue,
@@ -75,8 +79,10 @@ fun DefaultSliderSample() {
 
 @Composable
 fun SteppedSliderSample() {
-  BpkText(text = stringResource(R.string.slider_stepped))
-  BpkTheme.typography.label2.fontSize
+  BpkText(
+    text = stringResource(R.string.slider_range),
+    style = BpkTheme.typography.label2,
+  )
   var sliderValue by remember { mutableStateOf(0.5f) }
   BpkSlider(
     value = sliderValue,
