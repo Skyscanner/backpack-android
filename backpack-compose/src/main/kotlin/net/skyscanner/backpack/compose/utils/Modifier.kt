@@ -22,12 +22,18 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.layout.IntrinsicMeasureScope
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntRect
+import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.round
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -69,3 +75,17 @@ internal fun Modifier.inset(inset: (IntRect) -> IntRect): Modifier =
     }
   }
 
+internal fun Modifier.offsetWithSize(offset: IntrinsicMeasureScope.(IntSize) -> IntOffset): Modifier =
+  layout { measurable, constraints ->
+    val placeable = measurable.measure(constraints)
+    val size = IntSize(placeable.width, placeable.height)
+    layout(size.width, size.height) {
+      val offsetValue = offset(size)
+      placeable.placeRelativeWithLayer(offsetValue.x, offsetValue.y)
+    }
+  }
+
+internal fun Modifier.anchor(point: Offset, alignment: Alignment) : Modifier =
+  offsetWithSize { size ->
+    point.round() - alignment.align(IntSize.Zero, size, layoutDirection)
+  }

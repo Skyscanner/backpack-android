@@ -29,12 +29,12 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
-import net.skyscanner.backpack.compose.tokens.BpkDimension
 
 internal fun FlareShape(
   borderRadius: Dp,
   flareHeight: Dp,
   pointerDirection: BpkFlarePointerDirection,
+  applyAntialiasFix: Boolean = false,
 ): Shape = object : Shape {
 
   override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline =
@@ -46,7 +46,7 @@ internal fun FlareShape(
         if (pointerDirection == BpkFlarePointerDirection.Up) {
           scale *= -1
         }
-        addFlareRect(flareHeightPx, size, density, borderRadiusPx, pointerDirection)
+        addFlareRect(flareHeightPx, size, borderRadiusPx, pointerDirection, applyAntialiasFix)
         addFlarePointer(flareHeightPx, scale, size, pointerDirection)
       }
     )
@@ -55,21 +55,21 @@ internal fun FlareShape(
 private fun Path.addFlareRect(
   flareHeight: Float,
   size: Size,
-  density: Density,
   borderRadius: Float,
   pointerDirection: BpkFlarePointerDirection,
+  applyAntialiasFix: Boolean,
 ) {
 
+  val antialiasOffset = if (applyAntialiasFix) RectOffset else 0f
   val borderRect = when (pointerDirection) {
-    BpkFlarePointerDirection.Up -> Rect(0f, flareHeight, size.width, size.height + RectOffset)
-    BpkFlarePointerDirection.Down -> Rect(0f, -RectOffset, size.width, size.height - flareHeight)
+    BpkFlarePointerDirection.Up -> Rect(0f, flareHeight, size.width, size.height + antialiasOffset)
+    BpkFlarePointerDirection.Down -> Rect(0f, -antialiasOffset, size.width, size.height - flareHeight)
   }
 
   when (borderRadius) {
     0f -> addRect(borderRect)
     else -> {
-      val cornerRadius = with(density) { BpkDimension.BorderRadius.Md.toPx() }
-      addRoundRect(RoundRect(borderRect, CornerRadius(cornerRadius, cornerRadius)))
+      addRoundRect(RoundRect(borderRect, CornerRadius(borderRadius, borderRadius)))
     }
   }
 }

@@ -19,7 +19,9 @@
 package net.skyscanner.backpack.compose.barchart.internal
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
@@ -29,15 +31,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.isSpecified
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.barchart.BpkBarChartModel
+import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.anchor
 
 @Composable
 internal fun BarChartList(
@@ -48,39 +56,56 @@ internal fun BarChartList(
   modifier: Modifier = Modifier,
 ) {
 
-  var selectedTopOffset by remember { mutableStateOf(0) }
+  var rootLayoutCoordinates: LayoutCoordinates? = null
+  var badgeAnchor by remember { mutableStateOf(Offset.Unspecified) }
 
-  LazyRow(
-    state = state,
-    modifier = modifier.drawSelectionLine(selected, selectedTopOffset),
-    contentPadding = PaddingValues(horizontal = BpkSpacing.Base),
+  Box(
+    modifier = modifier.onGloballyPositioned { rootLayoutCoordinates = it },
   ) {
-    items(
-      items = model.items,
-      key = { it.key },
-    ) { item ->
-      BarChartColumn(
-        modifier = Modifier.requiredSize(ItemWidth, ItemHeight),
-        model = item,
-        selected = item == selected,
-        onSelected = { it, topOffset ->
-          selectedTopOffset = topOffset
-          onSelected(it)
-        },
+
+    LazyRow(
+      state = state,
+      modifier = Modifier.drawSelectionLine(selected, badgeAnchor),
+      contentPadding = PaddingValues(horizontal = BpkSpacing.Base),
+    ) {
+      items(
+        items = model.items,
+        key = { it.key },
+      ) { item ->
+        BarChartColumn(
+          modifier = Modifier.requiredSize(ItemWidth, ItemHeight),
+          model = item,
+          selected = item == selected,
+          onSelected = onSelected,
+          onSelectedAndPositioned = { bar ->
+            rootLayoutCoordinates?.let { root ->
+              badgeAnchor = root.localPositionOf(bar, Offset(x = bar.size.width / 2f, y = 0f))
+            }
+          }
+        )
+      }
+    }
+
+    if (badgeAnchor.isSpecified) {
+      BarChartBadge(
+        selected = selected,
+        direction = BpkFlarePointerDirection.Down,
+        modifier = Modifier
+          .anchor(badgeAnchor, Alignment.BottomCenter)
+          .padding(bottom = BpkSpacing.Sm),
       )
     }
+
   }
 }
 
-
 private fun Modifier.drawSelectionLine(
   selected: BpkBarChartModel.Item?,
-  topOffset: Int,
+  badgeOffset: Offset,
   strokeWidth: Dp = 1.dp,
 ): Modifier =
   composed {
-
-    val y = if (topOffset != 0) animateFloatAsState(topOffset.toFloat()).value else 0f
+    val y = if (badgeOffset.isSpecified) animateFloatAsState(badgeOffset.y).value else 0f
     val alpha by animateFloatAsState(if (selected != null) 1f else 0f)
     val color = BpkTheme.colors.coreAccent
 

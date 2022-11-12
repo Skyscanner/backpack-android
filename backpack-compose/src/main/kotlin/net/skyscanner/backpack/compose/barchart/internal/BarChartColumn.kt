@@ -48,12 +48,12 @@ import kotlin.math.roundToInt
 internal fun BarChartColumn(
   model: BpkBarChartModel.Item,
   selected: Boolean,
-  onSelected: (BpkBarChartModel.Item, LayoutCoordinates?) -> Unit,
+  onSelected: (BpkBarChartModel.Item) -> Unit,
+  onSelectedAndPositioned: (LayoutCoordinates) -> Unit,
   modifier: Modifier = Modifier,
 ) {
 
   val percent by animateFloatAsState(model.value)
-  var barCoordinates: LayoutCoordinates? = remember { null }
 
   val primaryColor by animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.corePrimary)
   val secondaryColor by animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textSecondary)
@@ -66,7 +66,7 @@ internal fun BarChartColumn(
         enabled = true,
         indication = null,
         interactionSource = remember { MutableInteractionSource() },
-        onClick = { onSelected(model, barCoordinates) },
+        onClick = { onSelected(model) },
       ),
   ) {
 
@@ -78,7 +78,7 @@ internal fun BarChartColumn(
         .background(BpkTheme.colors.surfaceHighlight, CircleShape)
         .inset { it.copy(top = it.height - max((it.height * percent).roundToInt(), it.width)) }
         .background(primaryColor, CircleShape)
-        .onGloballyPositioned { barCoordinates = it },
+        .onGloballyPositioned { if (selected) onSelectedAndPositioned(it) },
     )
 
     BpkText(

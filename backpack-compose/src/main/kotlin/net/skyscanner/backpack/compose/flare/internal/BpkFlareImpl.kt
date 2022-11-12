@@ -34,6 +34,7 @@ internal fun FlareShape(
   FlareShape(
     flareHeight = FlareHeight,
     pointerDirection = pointerDirection,
+    applyAntialiasFix = true,
     borderRadius = when (radius) {
       BpkFlareRadius.None -> 0.dp
       BpkFlareRadius.Medium -> BpkDimension.BorderRadius.Md
