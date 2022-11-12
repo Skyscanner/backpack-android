@@ -19,20 +19,25 @@
 package net.skyscanner.backpack.demo.data
 
 import net.skyscanner.backpack.barchart.BpkBarChartModel
+import net.skyscanner.backpack.calendar2.extension.toIterable
+import org.threeten.bp.LocalDate
+import org.threeten.bp.Month
+import org.threeten.bp.YearMonth
+import org.threeten.bp.format.TextStyle
+import java.util.Locale
 import java.util.Random
 
 object BarChartData {
 
+  private val random = Random(18735)
+
   fun generateModel(): BpkBarChartModel =
     BpkBarChartModel(
-      groups = listOf(
-        createMonth(0),
-        createMonth(1),
-        createMonth(2),
-        createMonth(3),
-        createMonth(4),
-        createMonth(5)
-      ),
+      items = createMonth(Month.JANUARY) +
+        createMonth(Month.FEBRUARY) +
+        createMonth(Month.MARCH) +
+        createMonth(Month.APRIL) +
+        createMonth(Month.MAY),
       legend = BpkBarChartModel.Legend(
         selectedTitle = "Selected",
         inactiveTitle = "No Price",
@@ -40,23 +45,20 @@ object BarChartData {
       )
     )
 
-  private val random = Random(18735)
+  private fun createMonth(month: Month) =
+    YearMonth.of(2019, month)
+      .let { LocalDate.of(it.year, it.month, 0)..LocalDate.of(it.year, it.month, it.lengthOfMonth()) }
+      .toIterable()
+      .map { createBar(it) }
 
-  private fun createMonth(month: Int) = BpkBarChartModel.Group(
-    title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
-    items = mutableListOf<BpkBarChartModel.Column>().apply {
-      for (dayOfTheMonth in 0 until 30) {
-        add(createBar(month * 30 + dayOfTheMonth))
-      }
-    }
-  )
-
-  private fun createBar(dayOfTheYear: Int) = BpkBarChartModel.Column(
-    title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
-    subtitle = (dayOfTheYear % 30 + 1).toString(),
-    badge = "£" + random.nextInt(100),
-    value = random.nextInt(100) / 100f,
-    inactive = random.nextInt(5) == 0,
-    id = dayOfTheYear, // todo: use proper ids
-  )
+  private fun createBar(date: LocalDate) =
+    BpkBarChartModel.Item(
+      key = date,
+      title = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()),
+      subtitle = date.dayOfMonth.toString(),
+      group = date.month.getDisplayName(TextStyle.FULL, Locale.getDefault()),
+      badge = "£" + random.nextInt(100),
+      value = random.nextInt(100) / 100f,
+      inactive = random.nextInt(5) == 0,
+    )
 }
