@@ -21,7 +21,6 @@ package net.skyscanner.backpack.compose.barchart.internal
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
@@ -31,7 +30,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
@@ -42,10 +40,8 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.barchart.BpkBarChartModel
-import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.compose.utils.anchor
 
 @Composable
 internal fun BarChartList(
@@ -86,17 +82,12 @@ internal fun BarChartList(
       }
     }
 
-    if (badgeAnchor.isSpecified) {
-      BarChartBadge(
-        selected = selected,
-        direction = BpkFlarePointerDirection.Down,
-        modifier = Modifier
-          .anchor(badgeAnchor, Alignment.BottomCenter)
-          .padding(bottom = BpkSpacing.Sm),
-      )
-    }
-
+    BarChartBadge(
+      selected = selected,
+      anchor = badgeAnchor,
+    )
   }
+
 }
 
 private fun Modifier.drawSelectionLine(
