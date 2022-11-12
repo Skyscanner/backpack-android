@@ -63,10 +63,13 @@ internal fun BarChartBadge(
     }
   }
 
+  var displayedBadgeText by remember { mutableStateOf(selected.badge) }
+
   val animatable = remember { Animatable(0f) }
   LaunchedEffect(selected, isInRage) {
     if (isInRage) {
       animatable.snapTo(0f)
+      displayedBadgeText = selected.badge
       animatable.animateTo(1f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
     } else {
       animatable.animateTo(0f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
@@ -74,7 +77,7 @@ internal fun BarChartBadge(
   }
 
   BpkText(
-    text = selected.badge,
+    text = displayedBadgeText,
     color = BpkTheme.colors.textPrimaryInverse,
     style = BpkTheme.typography.label2,
     textAlign = TextAlign.Center,
