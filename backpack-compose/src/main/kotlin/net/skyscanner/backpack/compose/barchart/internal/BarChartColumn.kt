@@ -40,6 +40,7 @@ import net.skyscanner.backpack.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.applyIf
 import net.skyscanner.backpack.compose.utils.inset
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -78,7 +79,7 @@ internal fun BarChartColumn(
         .background(BpkTheme.colors.surfaceHighlight, CircleShape)
         .inset { it.copy(top = it.height - max((it.height * percent).roundToInt(), it.width)) }
         .background(primaryColor, CircleShape)
-        .onGloballyPositioned { if (selected) onSelectedAndPositioned(it) },
+        .applyIf(selected) { onGloballyPositioned(onSelectedAndPositioned) },
     )
 
     BpkText(
