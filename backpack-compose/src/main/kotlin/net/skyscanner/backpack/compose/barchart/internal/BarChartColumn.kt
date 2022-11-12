@@ -33,6 +33,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.text.BpkText
@@ -46,12 +48,15 @@ import kotlin.math.roundToInt
 internal fun BarChartColumn(
   model: BpkBarChartModel.Item,
   selected: Boolean,
-  onSelected: (BpkBarChartModel.Item, topOffset: Int) -> Unit,
+  onSelected: (BpkBarChartModel.Item, LayoutCoordinates?) -> Unit,
   modifier: Modifier = Modifier,
 ) {
 
   val percent by animateFloatAsState(model.value)
-  var topOffset = remember { 0 }
+  var barCoordinates: LayoutCoordinates? = remember { null }
+
+  val primaryColor by animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.corePrimary)
+  val secondaryColor by animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textSecondary)
 
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
@@ -61,7 +66,7 @@ internal fun BarChartColumn(
         enabled = true,
         indication = null,
         interactionSource = remember { MutableInteractionSource() },
-        onClick = { onSelected(model, topOffset) },
+        onClick = { onSelected(model, barCoordinates) },
       ),
   ) {
 
@@ -71,14 +76,9 @@ internal fun BarChartColumn(
         .width(BpkSpacing.Base)
         .weight(1f, fill = false)
         .background(BpkTheme.colors.surfaceHighlight, CircleShape)
-        .inset {
-          topOffset = it.height - max((it.height * percent).roundToInt(), it.width)
-          it.copy(top = topOffset)
-        }
-        .background(
-          shape = CircleShape,
-          color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.corePrimary).value,
-        ),
+        .inset { it.copy(top = it.height - max((it.height * percent).roundToInt(), it.width)) }
+        .background(primaryColor, CircleShape)
+        .onGloballyPositioned { barCoordinates = it },
     )
 
     BpkText(
@@ -86,7 +86,7 @@ internal fun BarChartColumn(
       style = BpkTheme.typography.label2,
       maxLines = 1,
       overflow = TextOverflow.Ellipsis,
-      color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textPrimary).value,
+      color = primaryColor,
     )
 
     BpkText(
@@ -94,7 +94,7 @@ internal fun BarChartColumn(
       style = BpkTheme.typography.footnote,
       maxLines = 1,
       overflow = TextOverflow.Ellipsis,
-      color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textSecondary).value,
+      color = secondaryColor,
     )
   }
 }
