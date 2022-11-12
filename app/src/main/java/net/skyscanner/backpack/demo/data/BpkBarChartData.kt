@@ -27,7 +27,7 @@ import org.threeten.bp.format.TextStyle
 import java.util.Locale
 import java.util.Random
 
-object BarChartData {
+object BpkBarChartData {
 
   private val random = Random(18735)
   private val year = 2018
@@ -51,7 +51,7 @@ object BarChartData {
     create: (LocalDate) -> BpkBarChartModel.Item = { createBar(it) },
   ) =
     YearMonth.of(year, month)
-      .let { LocalDate.of(it.year, it.month, 0)..LocalDate.of(it.year, it.month, it.lengthOfMonth()) }
+      .let { LocalDate.of(it.year, it.month, 1)..LocalDate.of(it.year, it.month, it.lengthOfMonth()) }
       .toIterable()
       .map(create)
 

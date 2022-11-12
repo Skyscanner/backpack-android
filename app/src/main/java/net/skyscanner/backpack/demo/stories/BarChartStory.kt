@@ -22,13 +22,13 @@ import android.os.Bundle
 import android.view.View
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.data.BarChartData
+import net.skyscanner.backpack.demo.data.BpkBarChartData
 
 class BarChartStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    view.findViewById<BpkBarChart>(R.id.bar_chart).model = BarChartData.generateModel()
+    view.findViewById<BpkBarChart>(R.id.bar_chart).model = BpkBarChartData.generateModel()
   }
 
   companion object {

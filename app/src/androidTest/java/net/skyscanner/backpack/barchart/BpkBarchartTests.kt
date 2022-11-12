@@ -27,7 +27,7 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.data.BarChartData
+import net.skyscanner.backpack.demo.data.BpkBarChartData
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -160,7 +160,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
     value: Float = 0.5f,
     inactive: Boolean = false,
   ): List<BpkBarChartModel.Item> =
-    BarChartData.createMonth(month) {
-      BarChartData.createBar(it, badge.toString(), value, inactive)
+    BpkBarChartData.createMonth(month) {
+      BpkBarChartData.createBar(it, badge.toString(), value, inactive)
     }
 }
