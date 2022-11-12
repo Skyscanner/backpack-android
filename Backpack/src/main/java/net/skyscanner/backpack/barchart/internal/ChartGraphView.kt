@@ -35,8 +35,8 @@ import net.skyscanner.backpack.util.Consumer
 internal class ChartGraphView constructor(
   context: Context,
   colors: BpkBarChart.Colors,
-  onClick: Consumer<BpkBarChartModel.Column>
-) : FrameLayout(context), Consumer<List<BpkBarChartModel.Group>?> {
+  onClick: Consumer<BpkBarChartModel.Item>
+) : FrameLayout(context), Consumer<List<BpkBarChartModel.Item>> {
 
   private val onClickWrapper = { holder: ChartBarHolder ->
     onClick(holder.model!!)
@@ -62,9 +62,9 @@ internal class ChartGraphView constructor(
     it.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         val position = layoutManager.findFirstVisibleItemPosition()
-        val group = model.getGroup(position)
-        if (title.text != group.title) {
-          title.text = group.title
+        val group = model[position].group
+        if (title.text != group) {
+          title.text = group
         }
       }
     })
@@ -88,10 +88,10 @@ internal class ChartGraphView constructor(
     recyclerView.adapter = it
   }
 
-  private var model: ChartData = ChartData()
+  private var model: List<BpkBarChartModel.Item> = emptyList()
 
-  override fun invoke(groups: List<BpkBarChartModel.Group>?) {
-    this.model = ChartData(groups)
+  override fun invoke(items: List<BpkBarChartModel.Item>) {
+    this.model = items
     adapter.invoke(model)
   }
 }

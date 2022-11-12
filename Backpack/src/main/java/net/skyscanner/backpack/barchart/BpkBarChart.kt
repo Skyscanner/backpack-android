@@ -49,12 +49,12 @@ open class BpkBarChart @JvmOverloads constructor(
     val popupText: ColorStateList,
   )
 
-  interface OnBarClickListener : Consumer<BpkBarChartModel.Column> {
+  interface OnBarClickListener : Consumer<BpkBarChartModel.Item> {
 
-    override fun invoke(column: BpkBarChartModel.Column)
+    override fun invoke(item: BpkBarChartModel.Item)
   }
 
-  var listener: Consumer<BpkBarChartModel.Column>? = null
+  var listener: Consumer<BpkBarChartModel.Item>? = null
 
   private val graphView: ChartGraphView
   private val legendView: ChartLegend
@@ -124,7 +124,7 @@ open class BpkBarChart @JvmOverloads constructor(
   var model: BpkBarChartModel? = null
     set(value) {
       field = value
-      graphView.invoke(model?.groups)
+      graphView.invoke(model?.items ?: emptyList())
       legendView.invoke(model?.legend)
     }
 

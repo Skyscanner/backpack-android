@@ -31,7 +31,7 @@ internal class ChartBarHolder(
   parent: ViewGroup,
   private val colors: BpkBarChart.Colors,
   private val onClick: Consumer<ChartBarHolder>
-) : ItemHolder<BpkBarChartModel.Column>(parent, R.layout.view_bpk_barchart_column) {
+) : ItemHolder<BpkBarChartModel.Item>(parent, R.layout.view_bpk_barchart_column) {
 
   init {
     view.setOnClickListener {
@@ -56,7 +56,7 @@ internal class ChartBarHolder(
   val chartRoundedTopPosition
     get() = chartView.bottom - chart.valueInPixels - chart.diameter
 
-  override fun bind(model: BpkBarChartModel.Column) {
+  override fun bind(model: BpkBarChartModel.Item) {
     title.text = model.title
     subtitle.text = model.subtitle
     chart.value = model.value
