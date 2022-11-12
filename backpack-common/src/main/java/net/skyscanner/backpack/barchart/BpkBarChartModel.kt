@@ -23,62 +23,45 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 
 /**
- * Represents the view model used to provide data to the chart.
- * @param groups list of bar groups to render.
+ * Represents the view model used to provide data to the bar chart.
+ * @param items list of bar items to render.
  * @param legend an optional legend.
+ * @param caption an optional caption.
  */
 @Immutable
 data class BpkBarChartModel(
-  val groups: List<Group>,
-  val legend: Legend? = null
+  val items: List<Item>,
+  val legend: Legend? = null,
+  val caption: String? = null,
 ) {
 
   /**
    * Represents a single bar in the chart.
-   * @param id an optional identifier of the bar. This allows to save the selected element each time the model is updated.
+   * @param key an unique identifier of the bar. This allows to save the selected element each time the model is updated.
    * @param title a primary text placed just below the bar itself.
    * @param subtitle a secondary text placed just below the title.
    * @param badge text to be shown in the popup when the item is selected.
+   * @param group name of the group in which the item exists. The name is rendered above the bars and updated as the chart scrolls horizontally.
    * @param inactive indicates whether the item is inactive. The item remains clickable.
    * @param value the value of the bar itself, should be a range between 0.0f and 1.0f. If it exceeds, it'll be clamped
    */
   @Immutable
-  data class Column(
-    @Stable val id: Any,
+  data class Item(
+    @Stable val key: Any,
     val title: String,
     val subtitle: String,
     val badge: String,
+    val group: String,
     val inactive: Boolean,
     @FloatRange(from = 0.0, to = 1.0) val value: Float,
   ) {
 
-    override fun equals(other: Any?): Boolean {
-      if (this === other) return true
-      if (javaClass != other?.javaClass) return false
+    override fun equals(other: Any?): Boolean =
+      this === other || (other as? Item)?.key == key
 
-      other as Column
-
-      if (id != other.id) return false
-
-      return true
-    }
-
-    override fun hashCode(): Int {
-      return id.hashCode()
-    }
+    override fun hashCode(): Int =
+      key.hashCode()
   }
-
-  /**
-   * Represents a group of the items sharing the same title.
-   * The title is rendered above the bars and is updated as the chart scrolls horizontally.
-   * @param title label of this group to be renderer above the bars.
-   * @param items bars in the group.
-   */
-  @Immutable
-  data class Group(
-    val title: String,
-    val items: List<Column>
-  )
 
   /**
    * Represents a legend for the chart.
@@ -89,7 +72,7 @@ data class BpkBarChartModel(
    * @param selectedTitle label to represent selected bars and will use the selected colours from the palette.
    * @param activeTitle label to represent inactive bars and will use the inactive colours from the palette.
    * @param inactiveTitle label to represent active bars and will use the active colours from the palette.
-   * @see Column.inactive
+   * @see Item.inactive
    */
   @Immutable
   data class Legend(
