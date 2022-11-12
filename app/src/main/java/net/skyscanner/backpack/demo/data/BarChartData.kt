@@ -30,6 +30,7 @@ import java.util.Random
 object BarChartData {
 
   private val random = Random(18735)
+  private val year = 2018
 
   fun generateModel(): BpkBarChartModel =
     BpkBarChartModel(
@@ -45,20 +46,28 @@ object BarChartData {
       )
     )
 
-  private fun createMonth(month: Month) =
-    YearMonth.of(2019, month)
+  fun createMonth(
+    month: Month,
+    create: (LocalDate) -> BpkBarChartModel.Item = { createBar(it) },
+  ) =
+    YearMonth.of(year, month)
       .let { LocalDate.of(it.year, it.month, 0)..LocalDate.of(it.year, it.month, it.lengthOfMonth()) }
       .toIterable()
-      .map { createBar(it) }
+      .map(create)
 
-  private fun createBar(date: LocalDate) =
+  fun createBar(
+    date: LocalDate,
+    badge: String = "£" + random.nextInt(100),
+    value: Float = random.nextFloat(),
+    inactive: Boolean = random.nextInt(5) == 0,
+  ) =
     BpkBarChartModel.Item(
       key = date,
       title = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()),
       subtitle = date.dayOfMonth.toString(),
       group = date.month.getDisplayName(TextStyle.FULL, Locale.getDefault()),
-      badge = "£" + random.nextInt(100),
-      value = random.nextInt(100) / 100f,
-      inactive = random.nextInt(5) == 0,
+      badge = badge,
+      value = value,
+      inactive = inactive,
     )
 }
