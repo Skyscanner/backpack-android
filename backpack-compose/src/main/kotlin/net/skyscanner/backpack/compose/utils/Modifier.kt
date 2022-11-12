@@ -26,6 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.IntRect
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -58,4 +60,12 @@ internal fun Modifier.clickable(bounded: Boolean = true, role: Role? = null, onC
     )
   }
 
+internal fun Modifier.inset(inset: (IntRect) -> IntRect): Modifier =
+  layout { measurable, constraints ->
+    val rect = inset(IntRect(left = 0, right = constraints.maxWidth, top = 0, bottom = constraints.maxHeight))
+    val placeable = measurable.measure(Constraints.fixed(rect.width, rect.height))
+    layout(constraints.maxWidth, constraints.maxHeight) {
+      placeable.place(x = rect.left, y = rect.top)
+    }
+  }
 
