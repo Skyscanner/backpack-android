@@ -82,10 +82,14 @@ internal fun BarChartList(
       }
     }
 
-    BarChartBadge(
-      selected = selected,
-      anchor = badgeAnchor,
-    )
+    if (badgeAnchor.isSpecified && selected != null) {
+      BarChartBadge(
+        model = model,
+        state = state,
+        selected = selected,
+        anchor = badgeAnchor,
+      )
+    }
   }
 
 }

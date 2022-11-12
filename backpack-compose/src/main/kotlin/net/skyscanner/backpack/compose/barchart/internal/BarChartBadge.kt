@@ -25,13 +25,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.isUnspecified
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
@@ -50,15 +48,29 @@ import kotlin.math.roundToInt
 @Composable
 internal fun BarChartBadge(
   anchor: Offset,
-  selected: BpkBarChartModel.Item?,
+  model: BpkBarChartModel,
+  state: LazyListState,
+  selected: BpkBarChartModel.Item,
   modifier: Modifier = Modifier,
 ) {
-  if (anchor.isUnspecified || selected == null) return
+
+  val isInRage by remember(model, selected, state) {
+    derivedStateOf {
+      val selectedIndex = model.items.indexOf(selected)
+      val first = state.layoutInfo.visibleItemsInfo.first().index
+      val last = state.layoutInfo.visibleItemsInfo.last().index
+      selectedIndex in first..last
+    }
+  }
 
   val animatable = remember { Animatable(0f) }
-  LaunchedEffect(selected) {
-    animatable.snapTo(0f)
-    animatable.animateTo(1f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+  LaunchedEffect(selected, isInRage) {
+    if (isInRage) {
+      animatable.snapTo(0f)
+      animatable.animateTo(1f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+    } else {
+      animatable.animateTo(0f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+    }
   }
 
   BpkText(
