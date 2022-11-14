@@ -202,6 +202,31 @@ fun BpkImageDialog(
   title: String,
   text: String,
   confirmButton: DialogButton,
+  secondaryButton: DialogButton? = null,
+  textAlign: TextAlign = TextAlign.Center,
+  properties: DialogProperties = DialogProperties(),
+  content: @Composable BoxScope.() -> Unit,
+) {
+  BpkImageDialogImpl(
+    title = title,
+    text = text,
+    buttons = listOfNotNull(
+      Dialog.Button(BpkButtonType.Featured, confirmButton),
+      secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
+    ),
+    onDismissRequest = onDismissRequest,
+    properties = properties,
+    textAlign = textAlign,
+    content = content,
+  )
+}
+
+@Composable
+fun BpkImageDialog(
+  onDismissRequest: () -> Unit,
+  title: String,
+  text: String,
+  confirmButton: DialogButton,
   secondaryButton: DialogButton,
   linkButton: DialogButton? = null,
   textAlign: TextAlign = TextAlign.Center,
