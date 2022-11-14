@@ -18,20 +18,14 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
@@ -39,11 +33,9 @@ import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
-import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.Accessibility
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.AccountIdCard
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
@@ -73,22 +65,15 @@ fun CollapsibleNavigationBarStory(
       ) else emptyList(),
     )
     if (showList) {
-      LazyColumn(Modifier.fillMaxWidth()) {
-        val itemModifier = Modifier.height(48.dp).padding(horizontal = BpkSpacing.Base)
+      LazyColumn {
         item {
-          Box(itemModifier, contentAlignment = Alignment.Center) {
-            BpkText(text = stringResource(R.string.generic_scroll_the_list))
-          }
+          ListItem(title = stringResource(R.string.generic_scroll_the_list))
         }
         item {
-          Box(itemModifier, contentAlignment = Alignment.Center) {
-            BpkText(text = stringResource(R.string.generic_to_see_the_effect))
-          }
+          ListItem(title = stringResource(R.string.generic_scroll_the_list))
         }
         items(100) {
-          Box(itemModifier, contentAlignment = Alignment.Center) {
-            BpkText(text = stringResource(R.string.generic_list_item, it))
-          }
+          ListItem(title = stringResource(R.string.generic_scroll_the_list))
         }
       }
     }

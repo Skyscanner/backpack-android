@@ -29,11 +29,19 @@ apply from: "$rootProject.projectDir/android-configuration.gradle"
 
 android {
   namespace 'net.skyscanner.backpack.common'
+  kotlinOptions {
+    freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi"
+    freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi"
+  }
 }
 
 dependencies {
-  testImplementation rootProject.ext.junit
-  testImplementation rootProject.ext.coroutinesTest
+  api rootProject.ext.threeTenAbpAndroid
+  implementation rootProject.ext.composeRuntime
+  androidTestImplementation rootProject.ext.espressoCore
+  androidTestImplementation rootProject.ext.junit
+  androidTestImplementation rootProject.ext.junitAndroid
+  androidTestImplementation rootProject.ext.coroutinesTest
 }
 
 apply from: "$rootProject.projectDir/android-configuration-check.gradle"

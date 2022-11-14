@@ -23,10 +23,12 @@ import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
+import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import net.skyscanner.backpack.demo.compose.BpkFabStory
 import net.skyscanner.backpack.demo.compose.BpkSliderStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
+import net.skyscanner.backpack.demo.compose.CalendarStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
@@ -169,7 +171,13 @@ object ComponentRegistry {
     ),
     "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
-    "Bottom Sheet" story NodeData { Story of R.layout.fragment_bottom_sheet scrollable false },
+    "Bottom Sheet" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_bottom_sheet scrollable false },
+        TAB_TITLE_COMPOSE composeStory { BottomSheetStory() },
+      )
+    ),
     "Button" story NodeData(
       { children -> TabStory of children },
       mapOf(
@@ -229,16 +237,32 @@ object ComponentRegistry {
       )
     ),
     "Calendar 2" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Selection Disabled" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionDisabled },
-        "Selection Single" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionSingle },
-        "Selection Range" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionRange },
-        "Selection Whole Month" story NodeData { Calendar2Story of Calendar2Story.Type.SelectionWholeMonth },
-        "Disabled weekends" story NodeData { Calendar2Story of Calendar2Story.Type.WithDisabledDates },
-        "Day colours" story NodeData { Calendar2Story of Calendar2Story.Type.WithColors },
-        "Day labels" story NodeData { Calendar2Story of Calendar2Story.Type.WithLabels },
-        "Pre-selected range" story NodeData { Calendar2Story of Calendar2Story.Type.PreselectedRange },
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Selection Disabled" story NodeData { Calendar2Story of CalendarStoryType.SelectionDisabled },
+            "Selection Single" story NodeData { Calendar2Story of CalendarStoryType.SelectionSingle },
+            "Selection Range" story NodeData { Calendar2Story of CalendarStoryType.SelectionRange },
+            "Selection Whole Month" story NodeData { Calendar2Story of CalendarStoryType.SelectionWholeMonth },
+            "Disabled weekends" story NodeData { Calendar2Story of CalendarStoryType.WithDisabledDates },
+            "Day labels" story NodeData { Calendar2Story of CalendarStoryType.WithLabels },
+            "Pre-selected range" story NodeData { Calendar2Story of CalendarStoryType.PreselectedRange },
+          )
+        ),
+        TAB_TITLE_COMPOSE story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Selection Disabled" composeStory { CalendarStory(CalendarStoryType.SelectionDisabled) },
+            "Selection Single" composeStory { CalendarStory(CalendarStoryType.SelectionSingle) },
+            "Selection Range" composeStory { CalendarStory(CalendarStoryType.SelectionRange) },
+            "Selection Whole Month" composeStory { CalendarStory(CalendarStoryType.SelectionWholeMonth) },
+            "Disabled weekends" composeStory { CalendarStory(CalendarStoryType.WithDisabledDates) },
+            "Day labels" composeStory { CalendarStory(CalendarStoryType.WithLabels) },
+            "Pre-selected range" composeStory { CalendarStory(CalendarStoryType.PreselectedRange) },
+          )
+        ),
       )
     ),
     "Chip" story NodeData(

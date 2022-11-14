@@ -30,9 +30,8 @@ apply from: "$rootProject.projectDir/android-configuration.gradle"
 android {
   namespace 'net.skyscanner.backpack'
   kotlinOptions {
-    freeCompilerArgs += [
-      "-Xuse-experimental=net.skyscanner.backpack.util.ExperimentalBackpackApi",
-    ]
+    freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi"
+    freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi"
   }
 }
 

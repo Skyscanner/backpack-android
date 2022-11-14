@@ -28,8 +28,6 @@ import net.skyscanner.backpack.calendar2.data.CalendarInteraction
 import net.skyscanner.backpack.calendar2.view.CalendarDayLabelContentColor
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionBackground
 import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionContentColor
-import net.skyscanner.backpack.calendar2.view.CalendarDayStatusBackground
-import net.skyscanner.backpack.calendar2.view.CalendarDayStatusContentColor
 import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 
@@ -42,12 +40,11 @@ internal class CalendarCellDayHolder(
   private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label)
 
   private val selectionBackground = CalendarDaySelectionBackground(context)
-  private val statusBackground = CalendarDayStatusBackground(context)
 
   private val selectionContentColor = CalendarDaySelectionContentColor(context)
-  private val statusContentColor = CalendarDayStatusContentColor(context)
   private val labelColor = CalendarDayLabelContentColor(context)
 
+  private val defaultTextColor = context.getColorStateList(R.color.bpkTextPrimary)
   private val disabledTextColor = context.getColorStateList(R.color.bpkTextDisabled)
 
   init {
@@ -72,12 +69,8 @@ internal class CalendarCellDayHolder(
         day.setTextColor(disabledTextColor)
         day.background = null
       }
-      model.info.style == CellStatusStyle.Background -> {
-        day.setTextColor(statusContentColor(model.info.status))
-        day.background = statusBackground(model.info.status)
-      }
       else -> {
-        day.setTextColor(statusContentColor(null))
+        day.setTextColor(defaultTextColor)
         day.background = null
       }
     }

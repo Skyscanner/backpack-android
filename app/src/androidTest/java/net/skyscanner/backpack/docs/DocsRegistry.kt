@@ -21,6 +21,8 @@ package net.skyscanner.backpack.docs
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.ComposeTestRule
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -45,7 +47,8 @@ object DocsRegistry {
     ComposeScreenshot("Badge - Compose", "default"),
     ViewScreenshot("Bar Chart", "default"),
     ViewScreenshot("Bottom Nav", "default"),
-    ViewScreenshot("Bottom Sheet", "default"),
+    ViewScreenshot("Bottom Sheet - View", "default"),
+    ComposeScreenshot("Bottom Sheet - Compose", "default"),
     ViewScreenshot("Button - View - Standard", "standard"),
     ViewScreenshot("Button - View - Large", "large"),
     ViewScreenshot("Button - View - Link", "link"),
@@ -55,10 +58,12 @@ object DocsRegistry {
     ViewScreenshot("Calendar - Default", "range") { setupCalendar() },
     ViewScreenshot("Calendar - Colored", "colored") { setupCalendar() },
     ViewScreenshot("Calendar - Labeled", "labeled") { setupCalendar() },
-    ViewScreenshot("Calendar 2 - Pre-selected range", "range") { setupCalendar2() },
-    ViewScreenshot("Calendar 2 - Day colours", "colored") { setupCalendar2() },
-    ViewScreenshot("Calendar 2 - Day labels", "labeled") { setupCalendar2() },
-    ViewScreenshot("Calendar 2 - Selection Whole Month", "month") { setupWholeMonthCalendar() },
+    ViewScreenshot("Calendar 2 - View - Pre-selected range", "range") { setupCalendar2() },
+    ViewScreenshot("Calendar 2 - View - Day labels", "labeled") { setupCalendar2() },
+    ViewScreenshot("Calendar 2 - View - Selection Whole Month", "month") { setupWholeMonthCalendar() },
+    ComposeScreenshot("Calendar 2 - Compose - Pre-selected range", "range") { setupCalendar2(it) },
+    ComposeScreenshot("Calendar 2 - Compose - Day labels", "labeled") { setupCalendar2(it) },
+    ComposeScreenshot("Calendar 2 - Compose - Selection Whole Month", "month") { setupWholeMonthCalendar(it) },
     ViewScreenshot("Card - View - Default", "default"),
     ViewScreenshot("Card - View - Without padding", "without-padding"),
     ViewScreenshot("Card - View - Selected", "selected"),
@@ -81,6 +86,12 @@ object DocsRegistry {
     ComposeScreenshot("Dialog - Compose", "warning") { setupComposeDialog(it, ShownDialog.Warning) },
     ComposeScreenshot("Dialog - Compose", "destructive") { setupComposeDialog(it, ShownDialog.Destructive) },
     ComposeScreenshot("Dialog - Compose", "flare") { setupComposeDialog(it, ShownDialog.Flare) },
+    ComposeScreenshot("Dialog - Compose", "image-start-alignment") {
+      setupComposeDialog(it, ShownDialog.ImageStartAlignment)
+    },
+    ComposeScreenshot("Dialog - Compose", "image-end-alignment") {
+      setupComposeDialog(it, ShownDialog.ImageEndAlignment)
+    },
     ComposeScreenshot("FieldSet", "default"),
     ComposeScreenshot("FieldSet", "disabled") { it.switchFieldStatus(BpkFieldStatus.Disabled) },
     ComposeScreenshot("FieldSet", "validated") { it.switchFieldStatus(BpkFieldStatus.Validated) },
@@ -193,6 +204,28 @@ private fun setupWholeMonthCalendar() {
         CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
       )
     }
+}
+
+private fun setupCalendar2(rule: AndroidComposeTestRule<*, *>) {
+  rule
+    .onAllNodesWithText("6")
+    .onFirst()
+    .performClick()
+    .assertIsDisplayed()
+
+  rule
+    .onAllNodesWithText("11")
+    .onFirst()
+    .performClick()
+    .assertIsDisplayed()
+}
+
+private fun setupWholeMonthCalendar(rule: AndroidComposeTestRule<*, *>) {
+  rule
+    .onAllNodesWithText("Select whole month")
+    .onFirst()
+    .performClick()
+    .assertIsDisplayed()
 }
 
 private fun setupNavBarCollapsed() {
