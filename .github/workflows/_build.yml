@@ -208,7 +208,7 @@ jobs:
           retention-days: 5
 
       - name: Notify PR of screenshots failure
-        if: ${{ failure() }}
+        if: ${{ failure() && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
         uses: actions/github-script@v6
         with:
           script: |
