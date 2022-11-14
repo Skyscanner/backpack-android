@@ -118,6 +118,18 @@ To test changes use
 
 If the check fails you either need to fix the issue if a change was unintended or record script above instead to update the snapshots.
 
+### Running individual test classes
+
+While you're creating your snapshot tests or are debugging an issue it may be helpful to run an individual test class. You can do that with the following command:
+
+```
+./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=default -Pandroid.testInstrumentationRunnerArguments.class=net.skyscanner.backpack.package.YourClassTest
+```
+
+You can replace the `variant` variable with `dm`, `rtl` or `themed` depending on what you're trying to test.
+
+> Note: This will delete any other snapshots, so please run the full snapshot test suite afterwards or use the CI method below.
+
 ### Using CI for generating snapshot
 
 Alternatively, you can use GitHub Actions CI to generate the snapshots.

@@ -31,5 +31,6 @@ open class BpkBottomSheet @JvmOverloads constructor(
 
   init {
     cardElevation = resources.getDimension(R.dimen.bpkElevationLg)
+    setBackgroundResource(R.drawable.bpk_bottom_sheet_background)
   }
 }
