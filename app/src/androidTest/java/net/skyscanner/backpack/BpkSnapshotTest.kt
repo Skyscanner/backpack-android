@@ -104,6 +104,8 @@ open class BpkSnapshotTest {
     // we don't run Compose tests in Themed variant – Compose uses it own theming engine
     Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
 
+    val screenshotName = getScreenshotName(tags = tags)
+
     val scenario = launchActivity<AppCompatActivity>()
     scenario.onActivity { activity ->
       with(activity) {
@@ -124,7 +126,7 @@ open class BpkSnapshotTest {
           .layout()
 
         Screenshot.snap(view)
-          .setName(getScreenshotName(tags = tags))
+          .setName(screenshotName)
           .record()
       }
     }
