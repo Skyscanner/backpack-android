@@ -61,8 +61,8 @@ dependencies {
   implementation(rootProject.ext.get("androidXLifecycleViewmodel")!!)
   implementation(rootProject.ext.get("androidXLifecycleViewmodelKtx")!!)
   implementation(rootProject.ext.get("ktx")!!)
+  implementation(rootProject.ext.get("composeFoundation")!!)
 
-  implementation(rootProject.ext.get("composeFoundationV3")!!)
   androidTestImplementation(rootProject.ext.get("junitAndroid")!!)
   androidTestImplementation(rootProject.ext.get("testRules")!!)
   androidTestImplementation(rootProject.ext.get("mockitoKotlin")!!)
