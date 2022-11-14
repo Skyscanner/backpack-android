@@ -129,6 +129,7 @@ ext {
   composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
   composeTestJUnit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
   composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
+  composeUiTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
   composeActivity = "androidx.activity:activity-compose:1.6.1"
   composeUtil = "androidx.compose.ui:ui-util:$composeVersion"
   composeFoundation = "androidx.compose.foundation:foundation:$composeVersion"

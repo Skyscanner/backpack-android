@@ -68,7 +68,10 @@ dependencies {
   androidTestImplementation(rootProject.ext.get("mockitoKotlin")!!)
   androidTestImplementation(rootProject.ext.get("mockitoAndroid")!!)
   androidTestImplementation(rootProject.ext.get("composeTestJUnit")!!)
+
   debugImplementation(rootProject.ext.get("composeUiTooling")!!)
+  debugImplementation(rootProject.ext.get("composeUiTestManifest")!!)
+
   testImplementation(rootProject.ext.get("junit")!!)
   testImplementation(rootProject.ext.get("coroutinesTest")!!)
 
