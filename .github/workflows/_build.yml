@@ -153,7 +153,7 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -logcat-output "logcat.txt"
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
@@ -166,10 +166,14 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -logcat-output "logcat.txt"
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
             sudo pip3 install Pillow==9.0.1
+            adb logcat -c
+            touch logcat.log
+            chmod 777 logcat.log
+            adb logcat > logcat.log &
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
 
             changedFiles=`git diff --name-only` && echo "::set-output name=CHANGED_FILES::${changedFiles//$'\n'/'%0A'}"
@@ -188,7 +192,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-logcat-output
-          path: logcat.txt
+          path: logcat.log
           retention-days: 5
 
       - name: Notify PR of screenshots failure

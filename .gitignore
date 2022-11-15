@@ -224,4 +224,6 @@ sd.img.*
 *.ttf
 font/
 backpack.android.demo.key
+
 .idea/androidTestResultsUserPreferences.xml
+logcat.log
