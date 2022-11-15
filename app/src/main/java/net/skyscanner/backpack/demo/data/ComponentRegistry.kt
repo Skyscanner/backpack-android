@@ -24,6 +24,7 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
+import net.skyscanner.backpack.demo.compose.BpkBottomNavStory
 import net.skyscanner.backpack.demo.compose.BpkFabStory
 import net.skyscanner.backpack.demo.compose.BpkSliderStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
@@ -170,7 +171,13 @@ object ComponentRegistry {
       )
     ),
     "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
-    "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
+    "Bottom Nav" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
+        TAB_TITLE_COMPOSE composeStory { BpkBottomNavStory() },
+      )
+    ),
     "Bottom Sheet" story NodeData(
       { children -> TabStory of children },
       mapOf(
