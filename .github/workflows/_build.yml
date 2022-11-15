@@ -9,8 +9,8 @@ defaults:
     shell: bash -l {0}
 
 env:
-  flavour: oss
-  config: debug
+  flavour: Oss
+  config: Debug
   api-level: 24
 
 jobs:
@@ -175,7 +175,7 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -logcat-output "logcat.txt"
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
@@ -188,7 +188,7 @@ jobs:
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -logcat-output "logcat.txt"
           disable-animations: true
           script: |
             sudo pip3 install Pillow==9.0.1
@@ -203,6 +203,14 @@ jobs:
         with:
           name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-screenshot-test-output
           path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
+          retention-days: 5
+
+      - name: Upload Logcat Logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-logcat-output
+          path: logcat.txt
           retention-days: 5
 
       - name: Notify PR of screenshots failure
