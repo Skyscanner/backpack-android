@@ -150,14 +150,12 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          cache: gradle
 
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
 
       - name: AVD cache
         uses: actions/cache@v3

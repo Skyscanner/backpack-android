@@ -76,16 +76,13 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          cache: gradle
 
       - name: Setup Python
         if: steps.check.outputs.triggered == 'true'
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-
-      - name: Gradle cache
-        if: steps.check.outputs.triggered == 'true'
-        uses: gradle/gradle-build-action@v2
 
       - name: AVD cache
         if: steps.check.outputs.triggered == 'true'
