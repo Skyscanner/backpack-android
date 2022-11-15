@@ -18,29 +18,15 @@
 
 package net.skyscanner.backpack.calendar2
 
-import android.view.View
-import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkCalendarTest : BpkSnapshotTest() {
-
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
 
   @Before
   fun setup() {
@@ -102,111 +88,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarWithStartDateSelected() {
-    val calendar = BpkCalendar(testContext)
-
-    calendar.setParams(BpkCalendarTestCases.Params.WithStartDateSelected)
-
-    val asyncScreenshot = prepareForAsyncTest()
-
-    rule.scenario.onActivity { activity ->
-      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(calendar)
-    }
-
-    val indexOfSelectedItem = BpkCalendarTestCases.Indices.WithStartDateSelected_OfSelectedItem
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfSelectedItem, ViewActions.click()))
-      .check { _, _ ->
-        setupView(calendar)
-        asyncScreenshot.record(calendar)
-      }
-  }
-
-  @Test
-  fun screenshotTestCalendarWithSameStartAndEndDateSelected() {
-    val calendar = BpkCalendar(testContext)
-
-    calendar.setParams(BpkCalendarTestCases.Params.WithSameStartAndEndDateSelected)
-
-    val asyncScreenshot = prepareForAsyncTest()
-
-    rule.scenario.onActivity { activity ->
-      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(calendar)
-    }
-
-    val indexOfSelectedItem = BpkCalendarTestCases.Indices.WithSameStartAndEndDateSelected_OfSelectedItem
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfSelectedItem, ViewActions.click()))
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfSelectedItem, ViewActions.click()))
-      .check { _, _ ->
-        setupView(calendar)
-        asyncScreenshot.record(calendar)
-      }
-  }
-
-  @Test
-  fun screenshotTestCalendarWithStartAndEndDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithStartAndEndDateSelected)
-    selectStartEnd(calendar, prepareForAsyncTest())
-  }
-
-  @Test
-  fun screenshotTestCalendarWithSingleDaySelected() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithSingleDaySelected)
-
-    val asyncScreenshot = prepareForAsyncTest()
-
-    rule.scenario.onActivity { activity ->
-      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(calendar)
-    }
-
-    val indexOfInitialSelectedItem = BpkCalendarTestCases.Indices.WithSingleDaySelectedParams_OfInitialSelectedItem
-    val indexOfFinalSelectedItem = BpkCalendarTestCases.Indices.WithSingleDaySelectedParams_OfFinalSelectedItem
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(
-        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-          indexOfInitialSelectedItem,
-          ViewActions.click()
-        )
-      )
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(
-        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-          indexOfFinalSelectedItem,
-          ViewActions.click()
-        )
-      )
-
-    Espresso // Clicking on multiple dates should result in only one selected
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(
-        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-          indexOfFinalSelectedItem,
-          ViewActions.scrollTo()
-        )
-      )
-      .check { _, _ ->
-        setupView(calendar)
-        asyncScreenshot.record(calendar)
-      }
-  }
-
-  @Test
-  fun screenshotTestCalendarWithRangeSetProgrammatically() {
+  fun screenshotTestCalendarWithRangeSet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithRangeSetProgrammatically)
     calendar.setSelection(BpkCalendarTestCases.Selection.WithRangeSetProgrammatically)
@@ -214,7 +96,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarWithSingleDaySetProgrammatically() {
+  fun screenshotTestCalendarWithSingleDaySet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithSingleDaySetProgrammatically)
     calendar.setSelection(BpkCalendarTestCases.Selection.WithSingleDaySetProgrammatically)
@@ -260,41 +142,10 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarWithWholeMonthSetProgrammatically() {
+  fun screenshotTestCalendarWithWholeMonthSet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
     calendar.setSelection(BpkCalendarTestCases.Selection.WithWholeMonthSetProgrammatically)
     snap(calendar)
-  }
-
-  private fun selectStartEnd(view: View, asyncScreenshot: AsyncSnapshot) {
-    rule.scenario.onActivity { activity ->
-      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(view)
-    }
-
-    val indexOfRangeStart = BpkCalendarTestCases.Indices.SelectStartEnd_OfRangeStart
-    val indexOfRangeEnd = BpkCalendarTestCases.Indices.SelectStartEnd_OfRangeEnd
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfRangeStart, ViewActions.click()))
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfRangeEnd, ViewActions.click()))
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(
-        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-          indexOfRangeStart,
-          ViewActions.scrollTo()
-        )
-      )
-      .check { _, _ ->
-        setupView(view)
-        asyncScreenshot.record(view)
-      }
   }
 }
