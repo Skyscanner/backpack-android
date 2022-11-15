@@ -9,8 +9,8 @@ defaults:
     shell: bash -l {0}
 
 env:
-  flavour: Oss
-  config: Debug
+  flavour: oss
+  config: debug
   api-level: 24
 
 jobs:
