@@ -152,6 +152,8 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+          cache: 'pip'
+        run: pip3 install -r snapshot-requirements.txt
 
       - name: AVD cache
         uses: actions/cache@v3
@@ -187,7 +189,6 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            sudo pip3 install Pillow==9.0.1
             adb logcat -c
             touch logcat.log
             chmod 777 logcat.log
