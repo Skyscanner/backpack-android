@@ -11,7 +11,7 @@ defaults:
 env:
   flavour: oss
   config: debug
-  api-level: 24
+  api-level: 26
 
 jobs:
 
@@ -99,7 +99,6 @@ jobs:
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -111,7 +110,6 @@ jobs:
       - name: Android Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -168,7 +166,6 @@ jobs:
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -181,7 +178,6 @@ jobs:
         id: screenshotTests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
