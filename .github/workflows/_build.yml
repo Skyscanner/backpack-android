@@ -46,12 +46,10 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          cache: gradle
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
-
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
 
       - name: Build
         run: |
@@ -86,9 +84,29 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          cache: gradle
 
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ env.api-level }}
+
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: google_apis
+          profile: Nexus 4
+          sdcard-path-or-size: 512M
+          api-level: ${{ env.api-level }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
 
       - name: Android Tests
         uses: reactivecircus/android-emulator-runner@v2
