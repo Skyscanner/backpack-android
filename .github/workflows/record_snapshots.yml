@@ -84,7 +84,7 @@ jobs:
           python-version: '3.x'
           cache: 'pip'
           cache-dependency-path: 'snapshot-requirements.txt'
-          - run: pip3 install -r snapshot-requirements.txt
+      - run: pip3 install -r snapshot-requirements.txt
 
       - name: AVD cache
         if: steps.check.outputs.triggered == 'true'
