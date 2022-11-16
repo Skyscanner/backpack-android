@@ -186,7 +186,6 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            adb logcat -c
             touch logcat.log
             chmod 777 logcat.log
             adb logcat > logcat.log &
