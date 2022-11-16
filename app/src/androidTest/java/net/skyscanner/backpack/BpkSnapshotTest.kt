@@ -63,10 +63,10 @@ open class BpkSnapshotTest {
       .layout()
   }
 
-  protected fun snap(view: View) {
+  protected fun snap(view: View, tags: List<Any> = emptyList()) {
     setupView(view)
     Screenshot.snap(wrapMeasuredViewWithBackground(view))
-      .setName(getScreenshotName())
+      .setName(getScreenshotName(tags = tags))
       .record()
   }
 
@@ -104,11 +104,7 @@ open class BpkSnapshotTest {
     // we don't run Compose tests in Themed variant – Compose uses it own theming engine
     Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
 
-    val screenshotName = if (tags.isEmpty()) {
-      getScreenshotName()
-    } else {
-      tags.joinToString(separator = "_", prefix = getScreenshotName() + ".") { it.toString() }
-    }
+    val screenshotName = getScreenshotName(tags = tags)
 
     val scenario = launchActivity<AppCompatActivity>()
     scenario.onActivity { activity ->
@@ -164,8 +160,15 @@ open class BpkSnapshotTest {
   private fun getScreenshotName(
     testClass: String = TestNameDetector.getTestClass(),
     testName: String = TestNameDetector.getTestName(),
-  ): String =
-    "${testClass.removePrefix("net.skyscanner.backpack.")}_$testName"
+    tags: List<Any> = emptyList(),
+  ): String {
+    val screenshotTestName = "${testClass.removePrefix("net.skyscanner.backpack.")}_$testName"
+    return if (tags.isEmpty()) {
+      screenshotTestName
+    } else {
+      tags.joinToString(separator = "_", prefix = screenshotTestName + ".") { it.toString() }
+    }
+  }
 
   private fun wrapMeasuredViewWithBackground(view: View): View {
     val result = ViewMirror(view.context, view)

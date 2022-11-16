@@ -44,7 +44,9 @@ dependencies {
   implementation rootProject.ext.swiperefreshLayout
   implementation rootProject.ext.ktx
   androidTestImplementation rootProject.ext.junitAndroid
+  androidTestImplementation rootProject.ext.junitKtx
   androidTestImplementation rootProject.ext.espressoCore
+  androidTestImplementation rootProject.ext.espressoContrib
   androidTestImplementation rootProject.ext.testRules
   androidTestImplementation rootProject.ext.mockitoKotlin
   androidTestImplementation rootProject.ext.mockitoAndroid
