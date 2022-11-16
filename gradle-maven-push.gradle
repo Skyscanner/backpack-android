@@ -3,6 +3,7 @@ apply plugin: 'signing'
 
 task sourceJar(type: Jar) {
   from android.sourceSets.main.java.srcDirs
+  from android.sourceSets.main.kotlin.srcDirs
   classifier "source"
 }
 
