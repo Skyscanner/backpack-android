@@ -18,23 +18,16 @@
 
 package net.skyscanner.backpack.button
 
+import android.os.Looper
+import android.view.Gravity
 import android.view.View
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.viewinterop.AndroidView
+import android.widget.FrameLayout
+import androidx.annotation.ColorRes
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import org.junit.Assume.assumeTrue
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -53,6 +46,11 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
       }
     )
 
+  @Before
+  fun setup() {
+    setDimensions(64, 160)
+  }
+
   @Test
   fun text() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed) // no need to test text on Rtl
@@ -60,7 +58,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // we want to test 1 large button type
     assumeTrue(size == BpkButton.Size.Standard || type == BpkButton.Type.Primary)
 
-    capture(background = { type.rowBackground() }) {
+    capture(background = type.rowBackground()) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
       }
@@ -73,7 +71,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // disabled/loading colors are not theme customisable
     assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
 
-    capture(background = { type.rowBackground() }) {
+    capture(background = type.rowBackground()) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
         isEnabled = false
@@ -88,7 +86,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // we want to test 1 large button type
     assumeTrue(size == BpkButton.Size.Standard || type == BpkButton.Type.Primary)
 
-    capture(background = { type.rowBackground() }) {
+    capture(background = type.rowBackground()) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
         loading = true
@@ -172,23 +170,26 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   }
 
   private fun capture(
-    background: @Composable () -> Color = { Color.Unspecified },
-    content: () -> View
+    @ColorRes background: Int? = null,
+    content: () -> View,
   ) {
-    composed(
-      size = IntSize(160, 64),
-      tags = listOf(type, size),
-    ) {
-      Box(
-        Modifier
-          .fillMaxSize()
-          .background(background())
-          .padding(BpkSpacing.Md),
-        contentAlignment = Alignment.TopStart
-      ) {
-        AndroidView(factory = { content() })
-      }
+    if (Looper.myLooper() == null) {
+      Looper.prepare()
     }
+    val wrapper = FrameLayout(testContext).apply {
+      layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
+        .apply { gravity = Gravity.TOP or Gravity.START }
+    }
+    if (background != null) {
+      wrapper.setBackgroundColor(testContext.getColor(background))
+    }
+    val padding = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+    wrapper.setPaddingRelative(padding, padding, padding, padding)
+    wrapper.addView(
+      content(),
+      FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+    )
+    snap(wrapper, tags = listOf(type, size))
   }
 
   companion object {
@@ -203,12 +204,11 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
 
 private typealias Flavor = Pair<BpkButton.Type, BpkButton.Size>
 
-@Composable
 private fun BpkButton.Type.rowBackground() =
   when (this) {
     BpkButton.Type.SecondaryOnDark,
     BpkButton.Type.PrimaryOnDark,
-    BpkButton.Type.LinkOnDark -> BpkTheme.colors.surfaceContrast
-    BpkButton.Type.PrimaryOnLight -> BpkTheme.colors.textOnDark
-    else -> Color.Unspecified
+    BpkButton.Type.LinkOnDark -> R.color.bpkSurfaceContrast
+    BpkButton.Type.PrimaryOnLight -> R.color.bpkTextOnDark
+    else -> null
   }

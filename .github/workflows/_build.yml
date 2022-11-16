@@ -11,7 +11,7 @@ defaults:
 env:
   flavour: oss
   config: debug
-  api-level: 24
+  api-level: 26
 
 jobs:
 
@@ -46,12 +46,10 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          cache: gradle
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
-
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
 
       - name: Build
         run: |
@@ -86,9 +84,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
+          cache: gradle
 
       - name: AVD cache
         uses: actions/cache@v3
@@ -103,7 +99,6 @@ jobs:
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -115,7 +110,6 @@ jobs:
       - name: Android Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -150,14 +144,15 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          cache: gradle
 
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
+          cache: 'pip'
+          cache-dependency-path: 'snapshot-requirements.txt'
+      - run: pip3 install -r snapshot-requirements.txt
 
       - name: AVD cache
         uses: actions/cache@v3
@@ -172,7 +167,6 @@ jobs:
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -185,7 +179,6 @@ jobs:
         id: screenshotTests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -193,7 +186,9 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            sudo pip3 install Pillow==9.0.1
+            touch logcat.log
+            chmod 777 logcat.log
+            adb logcat > logcat.log &
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
 
             changedFiles=`git diff --name-only` && echo "::set-output name=CHANGED_FILES::${changedFiles//$'\n'/'%0A'}"
@@ -207,8 +202,16 @@ jobs:
           path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
           retention-days: 5
 
-      - name: Notify PR of screenshots failure
+      - name: Upload Logcat Logs
         if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-logcat-output
+          path: logcat.log
+          retention-days: 5
+
+      - name: Notify PR of screenshots failure
+        if: ${{ failure() && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
         uses: actions/github-script@v6
         with:
           script: |

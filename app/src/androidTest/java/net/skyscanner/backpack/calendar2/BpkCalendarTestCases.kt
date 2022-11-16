@@ -85,17 +85,9 @@ object BpkCalendarTestCases {
       now = LocalDate.of(2017, 12, 31),
     )
 
-    val WithStartDateSelected = Default
-
-    val WithSameStartAndEndDateSelected = Default
-
-    val WithStartAndEndDateSelected = Default
-
-    val WithSingleDaySelected = DefaultSingle
-
     val WithRangeSetProgrammatically = Default
 
-    val WithSingleDaySetProgrammatically = WithSingleDaySelected
+    val WithSingleDaySetProgrammatically = DefaultSingle
 
     val WithDisabledDates = DefaultSingle.copy(
       cellsInfo = disabledDayOfTheWeekInfo(initialRange, DayOfWeek.WEDNESDAY),
@@ -151,18 +143,5 @@ object BpkCalendarTestCases {
     val WithDisabledDates_SelectDisabledDate = CalendarSelection.Single(LocalDate.of(2019, 1, 9))
 
     val WithWholeMonthSetProgrammatically = CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
-  }
-
-  object Indices {
-
-    val WithStartDateSelected_OfSelectedItem = 18
-
-    val WithSameStartAndEndDateSelected_OfSelectedItem = WithStartDateSelected_OfSelectedItem
-
-    val SelectStartEnd_OfRangeStart = WithStartDateSelected_OfSelectedItem
-    val SelectStartEnd_OfRangeEnd = 54
-
-    val WithSingleDaySelectedParams_OfInitialSelectedItem = 53
-    val WithSingleDaySelectedParams_OfFinalSelectedItem = SelectStartEnd_OfRangeEnd
   }
 }
