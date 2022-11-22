@@ -250,7 +250,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git pull
           git add app/screenshots/*
           git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
-          git push
+          sha=git rev-parse HEAD
+          git push origin $sha:${{ github.ref_name }}
