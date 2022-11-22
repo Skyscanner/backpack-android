@@ -154,6 +154,10 @@ jobs:
           cache-dependency-path: 'snapshot-requirements.txt'
       - run: pip3 install -r snapshot-requirements.txt
 
+      - name: Print head git commit message
+        id: get_head_commit_message
+        run: echo "::set-output name=headCommitMsg::$(git show -s --format=%s)"
+
       - name: AVD cache
         uses: actions/cache@v3
         id: avd-cache
@@ -192,6 +196,13 @@ jobs:
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
 
             changedFiles=`git diff --name-only` && echo "::set-output name=CHANGED_FILES::${changedFiles//$'\n'/'%0A'}"
+
+      - name: Check snapshot changes
+        id: checkSnapshotChanges
+        if: ${{ !contains(steps.get_head_commit_message.outputs.headCommitMsg, 'Record snapshots') }}
+        uses: actions/github-script@v6
+        with:
+          script: |
             ./scripts/check-no-changes.sh
 
       - name: Upload Screenshot Tests Artifact
@@ -220,7 +231,17 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `### '${{ matrix.variant }}' files were changed.
-              If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes.
+              If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.
 
               >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`
             })
+
+      - name: Commit changes
+        if: ${{ contains(steps.get_head_commit_message.outputs.headCommitMsg, 'Record snapshots') }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git pull
+          git add app/screenshots/*
+          git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
+          git push
