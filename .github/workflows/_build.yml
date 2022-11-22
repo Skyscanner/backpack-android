@@ -201,10 +201,7 @@ jobs:
       - name: Check snapshot changes
         id: checkSnapshotChanges
         if: ${{ !contains(steps.get_head_commit_message.outputs.headCommitMsg, 'Record snapshots') }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            ./scripts/check-no-changes.sh
+        run: ./scripts/check-no-changes.sh
 
       - name: Upload Screenshot Tests Artifact
         if: ${{ failure() }}
