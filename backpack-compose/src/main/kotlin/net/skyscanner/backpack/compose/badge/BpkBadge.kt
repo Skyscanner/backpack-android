@@ -90,7 +90,7 @@ fun BpkBadge(
 private val BpkBadgeType.contentColor: Color
   @Composable
   get() = when (this) {
-    BpkBadgeType.Normal -> BpkTheme.colors.textPrimary
+    BpkBadgeType.Normal -> BpkTheme.colors.textSecondary
     BpkBadgeType.Strong -> BpkTheme.colors.textOnDark
     BpkBadgeType.Success -> BpkTheme.colors.textOnLight
     BpkBadgeType.Warning -> BpkTheme.colors.textOnLight
