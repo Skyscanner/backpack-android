@@ -252,5 +252,4 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add app/screenshots/*
           git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
-          sha=git rev-parse HEAD
-          git push origin $sha:${{ github.ref_name }}
+          git push origin $(git rev-parse HEAD):${{ github.ref_name }}
