@@ -118,9 +118,24 @@ jobs:
           disable-animations: true
           script: ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest
 
+  CheckCommitMessage:
+    name: Check commit message
+    runs-on: ubuntu-latest
+    outputs:
+      head-commit-message: ${{ steps.get_head_commit_message.outputs.headCommitMsg }}
+    steps:
+      - name: Get repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Print head git commit message
+        id: get_head_commit_message
+        run: echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
+
   Screenshots:
     name: Screenshots tests
     runs-on: macos-latest
+    needs: CheckCommitMessage
     permissions:
       pull-requests: write
     timeout-minutes: 30
@@ -154,10 +169,6 @@ jobs:
           cache-dependency-path: 'snapshot-requirements.txt'
       - name: Install Python dependencies
         run: pip3 install -r snapshot-requirements.txt
-
-      - name: Print head git commit message
-        id: get_head_commit_message
-        run: echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
 
       - name: AVD cache
         uses: actions/cache@v3
@@ -200,7 +211,7 @@ jobs:
 
       - name: Check snapshot changes
         id: checkSnapshotChanges
-        if: ${{ !contains(steps.get_head_commit_message.outputs.headCommitMsg, 'Record snapshots') }}
+        if: ${{ !contains(needs.CheckCommitMessage.outputs.headCommitMsg, 'Record snapshots') }}
         run: ./scripts/check-no-changes.sh
 
       - name: Upload Screenshot Tests Artifact
@@ -235,7 +246,7 @@ jobs:
             })
 
       - name: Commit changes
-        if: ${{ contains(steps.get_head_commit_message.outputs.headCommitMsg, 'Record snapshots') }}
+        if: ${{ contains(needs.CheckCommitMessage.outputs.headCommitMsg, 'Record snapshots') }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
