@@ -152,7 +152,8 @@ jobs:
           python-version: '3.x'
           cache: 'pip'
           cache-dependency-path: 'snapshot-requirements.txt'
-      - run: pip3 install -r snapshot-requirements.txt
+      - name: Install Python dependencies
+        run: pip3 install -r snapshot-requirements.txt
 
       - name: Print head git commit message
         id: get_head_commit_message
