@@ -232,23 +232,28 @@ jobs:
           path: logcat.log
           retention-days: 5
 
-      - name: Notify PR of screenshots failure
-        if: ${{ failure() && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+      - name: Notify PR of screenshots changes
+        if: ${{ (failure() || contains(needs.CheckCommitMessage.outputs.head-commit-message, 'Record snapshots')) && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
         uses: actions/github-script@v6
         with:
           script: |
+            if [ ${{ (failure() }} ]
+            then
+              contentWarning="If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'."
+            else
+              contentWarning=""
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `### '${{ matrix.variant }}' files were changed.
-              If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.
+              $contentWarning
 
               >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`
             })
 
       - name: Commit changes
-        if: ${{ contains(needs.CheckCommitMessage.outputs.head-commit-message, 'Record snapshots') }}
+        if: ${{ contains(needs.CheckCommitMessage.outputs.head-commit-message, 'Record snapshots') && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
