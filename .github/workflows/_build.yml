@@ -22,8 +22,6 @@ jobs:
     permissions:
       statuses: write
       pull-requests: write
-      issues: write
-      contents: write
 
     steps:
       - uses: actions/checkout@v3
@@ -140,6 +138,8 @@ jobs:
     needs: CheckCommitMessage
     permissions:
       pull-requests: write
+      issues: write
+      contents: write
     timeout-minutes: 30
 
     strategy:
