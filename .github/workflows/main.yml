@@ -19,6 +19,7 @@ jobs:
     permissions:
       statuses: write
       pull-requests: write
+      issues: write
     uses: ./.github/workflows/_build.yml
 
   ReleaseDraft:
