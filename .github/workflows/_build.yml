@@ -235,9 +235,11 @@ jobs:
       - name: Notify PR of screenshots changes
         if: ${{ (failure() || contains(needs.CheckCommitMessage.outputs.head-commit-message, 'Record snapshots')) && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
         uses: actions/github-script@v6
+        env:
+          FAILURE: ${{ (failure() }}
         with:
           script: |
-            if [ ${{ (failure() }} ]
+            if [ $FAILURE ]
             then
               contentWarning="If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'."
             else
