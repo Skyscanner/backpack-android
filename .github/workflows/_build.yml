@@ -256,4 +256,5 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add app/screenshots/*
           git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
-          git push origin $(git rev-parse HEAD):${{ github.ref_name }}
+          remote_repo="https://${{ env.GITHUB_ACTOR }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ env.GITHUB_REPOSITORY }}.git"
+          git push $remote_repo $(git rev-parse HEAD):${{ github.ref_name }}
