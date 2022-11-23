@@ -23,6 +23,7 @@ jobs:
       statuses: write
       pull-requests: write
       issues: write
+      contents: write
 
     steps:
       - uses: actions/checkout@v3
