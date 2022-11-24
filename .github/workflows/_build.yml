@@ -238,7 +238,7 @@ jobs:
         with:
           script: |
             var body;
-            if (${{ needs.CheckCommitMessage.outputs.head-commit-message }} != "Record snapshots") {
+            if ("${{ needs.CheckCommitMessage.outputs.head-commit-message }}" != "Record snapshots") {
               body = `### '${{ matrix.variant }}' files were changed.\nIf these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.\n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
             } else {
               body = `### '${{ matrix.variant }}' snapshots were updated. Please verify the changes match the expected layout. \n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
