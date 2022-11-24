@@ -260,4 +260,4 @@ jobs:
           git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}
           git add app/screenshots/*
           git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
-          git push origin $(git rev-parse HEAD):GITHUB_HEAD_REF
+          git push origin $(git rev-parse HEAD):$GITHUB_HEAD_REF
