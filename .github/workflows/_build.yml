@@ -237,25 +237,21 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const commitMessage = ${{ needs.CheckCommitMessage.outputs.head-commit-message }};
-            let body;
-            if (commitMessage != "Record snapshots") {
-              body = `### '${{ matrix.variant }}' files were changed.
-                If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.
-
-                >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
-            } else {
-              body = `### '${{ matrix.variant }}' snapshots were updated.
-                Please verify the changes match the expected layout.
-
-                >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
-            }
-
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: body
+              body: if (${{ needs.CheckCommitMessage.outputs.head-commit-message }} != "Record snapshots") {
+                `### '${{ matrix.variant }}' files were changed.
+                If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.
+
+                >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
+              } else {
+                  `### '${{ matrix.variant }}' snapshots were updated.
+                  Please verify the changes match the expected layout.
+
+                  >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
+              }
             })
 
       - name: Commit changes
