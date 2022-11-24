@@ -237,15 +237,18 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            var contentWarning = "";
-            if(${{ needs.CheckCommitMessage.outputs.head-commit-message }} != 'Record snapshots') {
-              contentWarning = "If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.";
+            if( ${{ needs.CheckCommitMessage.outputs.head-commit-message }} != 'Record snapshots') {
+               const body = `### '${{ matrix.variant }}' files were changed.
+                 If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.
+
+                 >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`
+            } else {
+              const body = `### '${{ matrix.variant }}' snapshots were updated.
+                 Please verify the changes match the expected layout.
+
+                 >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`
             }
 
-            const body = `### '${{ matrix.variant }}' files were changed.
-              $contentWarning
-
-              >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
