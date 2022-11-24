@@ -237,9 +237,9 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            var contentWarning =  ""
+            var contentWarning = "";
             if(${{ needs.CheckCommitMessage.outputs.head-commit-message }} != 'Record snapshots') {
-              contentWarning = `If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.`
+              contentWarning = `If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.`;
             }
             github.rest.issues.createComment({
               issue_number: context.issue.number,
