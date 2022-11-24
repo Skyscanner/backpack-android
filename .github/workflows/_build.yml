@@ -258,7 +258,6 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}
-          git checkout origin/$GITHUB_REF_NAME
           git add app/screenshots/*
           git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
-          git push
+          git push origin $(git rev-parse HEAD):GITHUB_HEAD_REF
