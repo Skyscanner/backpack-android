@@ -138,7 +138,6 @@ jobs:
     needs: CheckCommitMessage
     permissions:
       pull-requests: write
-#      issues: write
       contents: write
     timeout-minutes: 30
 
