@@ -46,10 +46,15 @@ Given that you have a compatible environment as stated above you can now set up 
 
 ## Creating components
 
-To create a new component in Compose you can use the following script to setup the most common required parts of a component:
+To create a new component in Compose you can use the following script to setup the most common required parts of a component.
 
+To run it execute:
 ```
-python3 scripts/generate-component.py NameOfComponent
+./scripts/generate-component.py
+```
+and follow instructions, or provide arguments directly:
+```
+./scripts/generate-component.py [NameOfComponent] [packagename]
 ```
 
 Note: This currently is not supported for creating components using the view system.
