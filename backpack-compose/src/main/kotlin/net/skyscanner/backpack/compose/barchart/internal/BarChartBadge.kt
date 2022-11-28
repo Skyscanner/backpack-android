@@ -89,13 +89,12 @@ internal fun BarChartBadge(
     textAlign = TextAlign.Center,
     maxLines = 1,
     modifier = modifier
-      .alignBy(anchor, Alignment.Center)
+      .alignBy(anchor, Alignment.BottomCenter)
       .padding(bottom = BpkSpacing.Sm)
-      .graphicsLayer { alpha = animatable.value }
-      .height(36.dp * 2)
-      .padding(bottom = 36.dp)
-      .offsetWithSize { IntOffset(x = 0, y = ((1f - animatable.value) * it.height).roundToInt()) }
       .widthIn(min = 48.dp)
+      .height(36.dp)
+      .offsetWithSize { IntOffset(x = 0, y = ((1f - animatable.value) * it.height).roundToInt()) }
+      .graphicsLayer { alpha = animatable.value }
       .background(
         color = BpkTheme.colors.coreAccent,
         shape = FlareShape(
