@@ -146,16 +146,17 @@ You can replace the `variant` variable with `dm`, `rtl` or `themed` depending on
 
 ### Using CI for generating snapshot
 
-Alternatively, you can use GitHub Actions CI to generate the snapshots.
-"Record snapshots" command in PR comments will trigger the CI and lead to new snapshot commits pushed to your PR.
-Notice that this run must be approved for external contributors.
-Since CI run cannot trigger CI checks again,
-you need to commit something after the snapshots have been generated to trigger the CI check.
-
-If you don't have anything to commit, you can use this to trigger the CI:
+Alternatively, you can use GitHub Actions CI to generate the snapshots. Simply add an empty commit with "Record snapshots" as a commit message:
 
 ```
-git commit --allow-empty -m "Trigger CI" --no-verify && git push
+git commit --allow-empty -m "Record snapshots" && git push
+```
+Since CI run cannot trigger CI checks again, you need to commit something after the snapshots have been generated to trigger the CI check.
+
+If you don't have any pending changes, you can use an empty commit again to trigger the CI:
+
+```
+git commit --allow-empty -m "Trigger CI" && git push
 ```
 
 ### Espresso tests
