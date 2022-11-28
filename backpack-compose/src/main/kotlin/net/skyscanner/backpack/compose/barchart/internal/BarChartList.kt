@@ -55,9 +55,7 @@ internal fun BarChartList(
   var rootLayoutCoordinates: LayoutCoordinates? = null
   var badgeAnchor by remember { mutableStateOf(Offset.Unspecified) }
 
-  Box(
-    modifier = modifier.onGloballyPositioned { rootLayoutCoordinates = it },
-  ) {
+  Box(modifier = modifier.onGloballyPositioned { rootLayoutCoordinates = it }) {
 
     LazyRow(
       state = state,

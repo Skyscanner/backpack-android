@@ -54,8 +54,7 @@ internal fun BarChartColumn(
   modifier: Modifier = Modifier,
 ) {
 
-  val percent by animateFloatAsState(model.value)
-
+  val value by animateFloatAsState(model.value)
   val primaryColor by animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.corePrimary)
   val secondaryColor by animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textSecondary)
 
@@ -77,7 +76,7 @@ internal fun BarChartColumn(
         .width(BpkSpacing.Base)
         .weight(1f, fill = false)
         .background(BpkTheme.colors.surfaceHighlight, CircleShape)
-        .inset { it.copy(top = it.height - max((it.height * percent).roundToInt(), it.width)) }
+        .inset { bounds -> bounds.copy(top = bounds.height - max((bounds.height * value).roundToInt(), bounds.width)) }
         .background(primaryColor, CircleShape)
         .applyIf(selected) { onGloballyPositioned(onSelectedAndPositioned) },
     )

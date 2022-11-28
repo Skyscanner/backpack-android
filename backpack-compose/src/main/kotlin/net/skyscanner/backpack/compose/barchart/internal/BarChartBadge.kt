@@ -26,7 +26,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -41,7 +47,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.FlareShape
-import net.skyscanner.backpack.compose.utils.anchor
+import net.skyscanner.backpack.compose.utils.alignBy
 import net.skyscanner.backpack.compose.utils.offsetWithSize
 import kotlin.math.roundToInt
 
@@ -54,7 +60,7 @@ internal fun BarChartBadge(
   modifier: Modifier = Modifier,
 ) {
 
-  val isInRage by remember(model, selected, state) {
+  val isInVisibleRage by remember(model, selected, state) {
     derivedStateOf {
       val selectedIndex = model.items.indexOf(selected)
       val first = state.layoutInfo.visibleItemsInfo.first().index
@@ -64,10 +70,10 @@ internal fun BarChartBadge(
   }
 
   var displayedBadgeText by remember { mutableStateOf(selected.badge) }
-
   val animatable = remember { Animatable(0f) }
-  LaunchedEffect(selected, isInRage) {
-    if (isInRage) {
+
+  LaunchedEffect(selected, isInVisibleRage) {
+    if (isInVisibleRage) {
       animatable.snapTo(0f)
       displayedBadgeText = selected.badge
       animatable.animateTo(1f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
@@ -83,7 +89,7 @@ internal fun BarChartBadge(
     textAlign = TextAlign.Center,
     maxLines = 1,
     modifier = modifier
-      .anchor(anchor, Alignment.Center)
+      .alignBy(anchor, Alignment.Center)
       .padding(bottom = BpkSpacing.Sm)
       .graphicsLayer { alpha = animatable.value }
       .height(36.dp * 2)
@@ -99,6 +105,6 @@ internal fun BarChartBadge(
         ),
       )
       .padding(bottom = BpkSpacing.Sm)
-      .padding(BpkSpacing.Md),
+      .padding(all = BpkSpacing.Md),
   )
 }

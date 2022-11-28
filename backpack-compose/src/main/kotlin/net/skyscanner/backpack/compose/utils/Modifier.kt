@@ -66,7 +66,7 @@ internal fun Modifier.clickable(bounded: Boolean = true, role: Role? = null, onC
     )
   }
 
-internal fun Modifier.inset(inset: (IntRect) -> IntRect): Modifier =
+internal fun Modifier.inset(inset: (bounds: IntRect) -> IntRect): Modifier =
   layout { measurable, constraints ->
     val rect = inset(IntRect(left = 0, right = constraints.maxWidth, top = 0, bottom = constraints.maxHeight))
     val placeable = measurable.measure(Constraints.fixed(rect.width, rect.height))
@@ -75,7 +75,7 @@ internal fun Modifier.inset(inset: (IntRect) -> IntRect): Modifier =
     }
   }
 
-internal fun Modifier.offsetWithSize(offset: IntrinsicMeasureScope.(IntSize) -> IntOffset): Modifier =
+internal fun Modifier.offsetWithSize(offset: IntrinsicMeasureScope.(size: IntSize) -> IntOffset): Modifier =
   layout { measurable, constraints ->
     val placeable = measurable.measure(constraints)
     val size = IntSize(placeable.width, placeable.height)
@@ -85,7 +85,7 @@ internal fun Modifier.offsetWithSize(offset: IntrinsicMeasureScope.(IntSize) -> 
     }
   }
 
-internal fun Modifier.anchor(point: Offset, alignment: Alignment) : Modifier =
+internal fun Modifier.alignBy(anchor: Offset, alignment: Alignment) : Modifier =
   offsetWithSize { size ->
-    point.round() - alignment.align(IntSize.Zero, size, layoutDirection)
+    anchor.round() - alignment.align(IntSize.Zero, size, layoutDirection)
   }

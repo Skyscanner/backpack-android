@@ -49,7 +49,7 @@ object BpkBarChartData {
   fun createMonth(
     month: Month,
     create: (LocalDate) -> BpkBarChartModel.Item = { createBar(it) },
-  ) =
+  ): List<BpkBarChartModel.Item> =
     YearMonth.of(year, month)
       .let { LocalDate.of(it.year, it.month, 1)..LocalDate.of(it.year, it.month, it.lengthOfMonth()) }
       .toIterable()
@@ -60,7 +60,7 @@ object BpkBarChartData {
     badge: String = "£" + random.nextInt(100),
     value: Float = random.nextFloat(),
     inactive: Boolean = random.nextInt(5) == 0,
-  ) =
+  ): BpkBarChartModel.Item =
     BpkBarChartModel.Item(
       key = date,
       title = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()),

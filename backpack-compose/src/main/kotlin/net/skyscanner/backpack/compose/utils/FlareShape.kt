@@ -35,22 +35,22 @@ internal fun FlareShape(
   flareHeight: Dp,
   pointerDirection: BpkFlarePointerDirection,
   applyAntialiasFix: Boolean = false,
-): Shape = object : Shape {
-
-  override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline =
-    Outline.Generic(
-      path = Path().apply {
-        val flareHeightPx = with(density) { flareHeight.toPx() }
-        val borderRadiusPx = with(density) { borderRadius.toPx() }
-        var scale = flareHeightPx / FlareVectorHeight
-        if (pointerDirection == BpkFlarePointerDirection.Up) {
-          scale *= -1
+): Shape =
+  object : Shape {
+    override fun createOutline(size: Size, layoutDirection: LayoutDirection, density: Density): Outline =
+      Outline.Generic(
+        path = Path().apply {
+          val flareHeightPx = with(density) { flareHeight.toPx() }
+          val borderRadiusPx = with(density) { borderRadius.toPx() }
+          var scale = flareHeightPx / FlareVectorHeight
+          if (pointerDirection == BpkFlarePointerDirection.Up) {
+            scale *= -1
+          }
+          addFlareRect(flareHeightPx, size, borderRadiusPx, pointerDirection, applyAntialiasFix)
+          addFlarePointer(flareHeightPx, scale, size, pointerDirection)
         }
-        addFlareRect(flareHeightPx, size, borderRadiusPx, pointerDirection, applyAntialiasFix)
-        addFlarePointer(flareHeightPx, scale, size, pointerDirection)
-      }
-    )
-}
+      )
+  }
 
 private fun Path.addFlareRect(
   flareHeight: Float,
