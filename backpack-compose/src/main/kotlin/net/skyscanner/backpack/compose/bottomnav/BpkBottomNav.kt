@@ -19,25 +19,45 @@
 
 package net.skyscanner.backpack.compose.bottomnav
 
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationDefaults
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+
+data class TabItem(val icon: BpkIcon, val title: String)
 
 @Composable
 fun BpkBottomNav(
   modifier: Modifier = Modifier,
   elevation: Dp = BottomNavigationDefaults.Elevation,
-  content: @Composable RowScope.() -> Unit
+  actions: List<TabItem> = emptyList(),
 ) {
   BottomNavigation(
     modifier = modifier,
     backgroundColor = BpkTheme.colors.surfaceDefault,
-    contentColor = BpkTheme.colors.textLink,
+    contentColor = BpkTheme.colors.textSecondary,
     elevation = elevation,
-    content = content,
-  )
+  ) {
+    actions.forEach { tabItem ->
+      BottomNavigationItem(
+        selected = false,
+        onClick = { /*TODO*/ },
+        icon = { BpkIcon(icon = tabItem.icon, contentDescription = null) },
+        label = {
+          BpkText(
+            text = tabItem.title
+          )
+        },
+        selectedContentColor = BpkTheme.colors.textLink,
+        unselectedContentColor = BpkTheme.colors.textSecondary)
+
+    }
+
+
+  }
 }

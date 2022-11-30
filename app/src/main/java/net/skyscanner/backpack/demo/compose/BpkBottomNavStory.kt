@@ -19,19 +19,32 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material.BottomNavigationDefaults
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNav
+import net.skyscanner.backpack.compose.bottomnav.TabItem
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.AccountCircle
+import net.skyscanner.backpack.compose.tokens.Explore
+import net.skyscanner.backpack.compose.tokens.Hotels
+import net.skyscanner.backpack.compose.tokens.Trips
 
 @Composable
 fun BpkBottomNavStory() {
-  Row() {
+  Column(
+    modifier = Modifier.fillMaxSize(),
+    verticalArrangement = Arrangement.Bottom,
+  ) {
     BpkBottomNav(
-      modifier = Modifier,
-      content = {},
-      elevation = BottomNavigationDefaults.Elevation,
+      actions = listOf(
+        TabItem(icon = BpkIcon.Hotels, title = "Home"),
+        TabItem(icon = BpkIcon.Explore, title = "Explore"),
+        TabItem(icon = BpkIcon.Trips, title = "Trips"),
+        TabItem(icon = BpkIcon.AccountCircle, title = "Profile"),
+      )
     )
   }
 }
