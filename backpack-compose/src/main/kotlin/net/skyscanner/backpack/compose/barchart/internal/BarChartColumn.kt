@@ -55,13 +55,14 @@ internal fun BarChartColumn(
 ) {
 
   val value by animateFloatAsState(model.value)
+  val inactive = model.badge == null
 
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
     modifier = modifier
       .selectable(
         selected = selected,
-        enabled = true,
+        enabled = !inactive,
         indication = null,
         interactionSource = remember { MutableInteractionSource() },
         onClick = { onSelected(model) },
@@ -74,13 +75,19 @@ internal fun BarChartColumn(
         .width(BpkSpacing.Base)
         .weight(1f, fill = false)
         .background(BpkTheme.colors.surfaceHighlight, CircleShape)
-        .inset { bounds -> bounds.copy(top = bounds.height - max((bounds.height * value).roundToInt(), bounds.width)) }
+        .inset { bounds ->
+          val barHeight = when {
+            inactive -> BpkSpacing.Lg.roundToPx()
+            else -> max((bounds.height * value).roundToInt(), bounds.width)
+          }
+          bounds.copy(top = bounds.height - barHeight)
+        }
         .applyIf(selected) { onGloballyPositioned(onSelectedAndPositioned) }
         .background(
           shape = CircleShape,
           color = animateColorAsState(
             targetValue = when {
-              model.inactive -> BpkTheme.colors.line
+              inactive -> BpkTheme.colors.line
               selected -> BpkTheme.colors.coreAccent
               else -> BpkTheme.colors.corePrimary
             }

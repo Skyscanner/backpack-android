@@ -69,7 +69,8 @@ internal fun BarChartBadge(
     }
   }
 
-  var displayedBadgeText by remember { mutableStateOf(selected.badge) }
+  val badgeText = selected.badge ?: return
+  var displayedBadgeText by remember { mutableStateOf(badgeText) }
   val animatable = remember { Animatable(0f) }
 
   LaunchedEffect(selected, isInVisibleRage) {

@@ -66,7 +66,7 @@ internal fun Modifier.clickable(bounded: Boolean = true, role: Role? = null, onC
     )
   }
 
-internal fun Modifier.inset(inset: (bounds: IntRect) -> IntRect): Modifier =
+internal fun Modifier.inset(inset: IntrinsicMeasureScope.(bounds: IntRect) -> IntRect): Modifier =
   layout { measurable, constraints ->
     val rect = inset(IntRect(left = 0, right = constraints.maxWidth, top = 0, bottom = constraints.maxHeight))
     val placeable = measurable.measure(Constraints.fixed(rect.width, rect.height))

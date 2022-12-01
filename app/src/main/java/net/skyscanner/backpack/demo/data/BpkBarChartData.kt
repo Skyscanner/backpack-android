@@ -68,8 +68,7 @@ object BpkBarChartData {
       title = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()),
       subtitle = date.dayOfMonth.toString(),
       group = date.month.getDisplayName(TextStyle.FULL, Locale.getDefault()),
-      badge = badge,
+      badge = if (inactive) null else badge,
       value = value,
-      inactive = inactive,
     )
 }

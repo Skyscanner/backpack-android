@@ -40,9 +40,8 @@ data class BpkBarChartModel(
    * @param key an unique identifier of the bar. This allows to save the selected element each time the model is updated.
    * @param title a primary text placed just below the bar itself.
    * @param subtitle a secondary text placed just below the title.
-   * @param badge text to be shown in the popup when the item is selected.
+   * @param badge text to be shown in the popup when the item is selected. If null, the item becomes inactive.
    * @param group name of the group in which the item exists. The name is rendered above the bars and updated as the chart scrolls horizontally.
-   * @param inactive indicates whether the item is inactive. The item remains clickable.
    * @param value the value of the bar itself, should be a range between 0.0f and 1.0f. If it exceeds, it'll be clamped
    */
   @Immutable
@@ -50,9 +49,8 @@ data class BpkBarChartModel(
     @Stable val key: Any,
     val title: String,
     val subtitle: String,
-    val badge: String,
+    val badge: String? = null,
     val group: String,
-    val inactive: Boolean,
     @FloatRange(from = 0.0, to = 1.0) val value: Float,
   ) {
 
@@ -70,9 +68,8 @@ data class BpkBarChartModel(
    * `active` legend.
    *
    * @param selectedTitle label to represent selected bars and will use the selected colours from the palette.
-   * @param activeTitle label to represent inactive bars and will use the inactive colours from the palette.
-   * @param inactiveTitle label to represent active bars and will use the active colours from the palette.
-   * @see Item.inactive
+   * @param activeTitle label to represent active bars and will use the active colours from the palette.
+   * @param inactiveTitle label to represent inactive bars and will use the inactive colours from the palette.
    */
   @Immutable
   data class Legend(
