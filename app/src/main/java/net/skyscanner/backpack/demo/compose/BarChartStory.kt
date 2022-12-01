@@ -18,7 +18,9 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,7 +37,7 @@ import net.skyscanner.backpack.demo.data.BpkBarChartData
 @Preview
 @Composable
 fun BarChartStory(modifier: Modifier = Modifier) {
-  Column(modifier) {
+  Column(modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
     var selectedItem by remember { mutableStateOf<BpkBarChartModel.Item?>(null) }
     BpkBarChart(
       model = remember { BpkBarChartData.generateModel() },
