@@ -18,7 +18,12 @@
 
 package net.skyscanner.backpack.compose.barchart.internal
 
-import androidx.compose.animation.Crossfade
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -28,7 +33,10 @@ import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.utils.ScrollingDirection
+import net.skyscanner.backpack.compose.utils.lastScrollingDirection
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun BarChartTitle(
   model: BpkBarChartModel,
@@ -37,16 +45,34 @@ internal fun BarChartTitle(
 ) {
 
   val title by remember { derivedStateOf { model.items[state.firstVisibleItemIndex].group } }
+  val scrollingDirection = state.lastScrollingDirection()
 
-  Crossfade(
+  AnimatedContent(
     targetState = title,
     modifier = modifier,
-  ) {
-    BpkText(
-      text = it,
-      maxLines = 1,
-      style = BpkTheme.typography.heading4,
-      color = BpkTheme.colors.textPrimary,
-    )
-  }
+    content = {
+      BpkText(
+        text = it,
+        maxLines = 1,
+        style = BpkTheme.typography.heading4,
+        color = BpkTheme.colors.textPrimary,
+      )
+    },
+    transitionSpec = {
+      when (scrollingDirection) {
+        ScrollingDirection.Increasing ->
+          ContentTransform(
+            targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.Start),
+            initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.Start),
+          )
+
+        ScrollingDirection.Decreasing ->
+          ContentTransform(
+            targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.End),
+            initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.End),
+          )
+      }
+    },
+  )
 }
+
