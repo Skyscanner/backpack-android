@@ -27,8 +27,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import net.skyscanner.backpack.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.barchart.BpkBarChart
+import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.data.BpkBarChartData
 

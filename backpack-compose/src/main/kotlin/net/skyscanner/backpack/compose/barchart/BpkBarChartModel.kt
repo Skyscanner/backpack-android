@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.barchart
+package net.skyscanner.backpack.compose.barchart
 
 import androidx.annotation.FloatRange
 import androidx.compose.runtime.Immutable

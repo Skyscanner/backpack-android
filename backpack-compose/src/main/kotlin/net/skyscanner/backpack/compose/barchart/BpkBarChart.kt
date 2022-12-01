@@ -25,7 +25,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.barchart.internal.BarChartLegend
 import net.skyscanner.backpack.compose.barchart.internal.BarChartList
 import net.skyscanner.backpack.compose.barchart.internal.BarChartTitle

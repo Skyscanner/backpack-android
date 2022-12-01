@@ -18,8 +18,8 @@
 
 package net.skyscanner.backpack.demo.data
 
-import net.skyscanner.backpack.barchart.BpkBarChartModel
 import net.skyscanner.backpack.calendar2.extension.toIterable
+import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.YearMonth
