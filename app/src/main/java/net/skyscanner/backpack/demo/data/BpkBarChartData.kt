@@ -26,6 +26,7 @@ import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
 import java.util.Locale
 import java.util.Random
+import kotlin.math.roundToInt
 
 object BpkBarChartData {
 
@@ -57,8 +58,8 @@ object BpkBarChartData {
 
   fun createBar(
     date: LocalDate,
-    badge: String = "£" + random.nextInt(100),
     value: Float = random.nextFloat(),
+    badge: String = "£" + (value * 100f).roundToInt(),
     inactive: Boolean = random.nextInt(5) == 0,
   ): BpkBarChartModel.Item =
     BpkBarChartModel.Item(
