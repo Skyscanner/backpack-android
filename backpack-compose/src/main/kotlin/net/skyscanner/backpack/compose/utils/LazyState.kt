@@ -27,8 +27,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 
 internal enum class ScrollingDirection {
-  Increasing,
-  Decreasing,
+  Forward,
+  Backward,
 }
 
 @Composable
@@ -41,13 +41,13 @@ internal fun LazyListState.lastScrollingDirection(): ScrollingDirection {
     derivedStateOf {
       val direction = when {
         previousIndex != firstVisibleItemIndex -> when {
-          previousIndex <= firstVisibleItemIndex -> ScrollingDirection.Increasing
-          else -> ScrollingDirection.Decreasing
+          previousIndex <= firstVisibleItemIndex -> ScrollingDirection.Forward
+          else -> ScrollingDirection.Backward
         }
 
         else -> when {
-          previousScrollOffset < firstVisibleItemScrollOffset -> ScrollingDirection.Increasing
-          else -> ScrollingDirection.Decreasing
+          previousScrollOffset < firstVisibleItemScrollOffset -> ScrollingDirection.Forward
+          else -> ScrollingDirection.Backward
         }
       }
 

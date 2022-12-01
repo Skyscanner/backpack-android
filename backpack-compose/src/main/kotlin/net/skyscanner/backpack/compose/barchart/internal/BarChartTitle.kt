@@ -60,13 +60,13 @@ internal fun BarChartTitle(
     },
     transitionSpec = {
       when (scrollingDirection) {
-        ScrollingDirection.Increasing ->
+        ScrollingDirection.Forward ->
           ContentTransform(
             targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.Start),
             initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.Start),
           )
 
-        ScrollingDirection.Decreasing ->
+        ScrollingDirection.Backward ->
           ContentTransform(
             targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.End),
             initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.End),
