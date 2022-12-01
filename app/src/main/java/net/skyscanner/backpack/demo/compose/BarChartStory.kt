@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.barchart.BpkBarChart
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
@@ -39,8 +40,9 @@ import net.skyscanner.backpack.demo.data.BpkBarChartData
 fun BarChartStory(modifier: Modifier = Modifier) {
   Column(modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
     var selectedItem by remember { mutableStateOf<BpkBarChartModel.Item?>(null) }
+    val context = LocalContext.current
     BpkBarChart(
-      model = remember { BpkBarChartData.generateModel() },
+      model = remember(context) { BpkBarChartData.generateModel(context) },
       selected = selectedItem,
       onSelectionChange = { selectedItem = it },
       modifier = Modifier.padding(vertical = BpkSpacing.Md),

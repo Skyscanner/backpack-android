@@ -209,4 +209,8 @@
   <string name="generic_dismiss">Dismiss</string>
   <string name="rating_title">Excellent</string>
   <string name="rating_subtitle">1532 reviews</string>
+    <string name="generic_selected">Selected</string>
+  <string name="generic_no_price">No Price</string>
+  <string name="generic_price">Price</string>
+  <string name="generic_departures">Departures</string>
 </resources>

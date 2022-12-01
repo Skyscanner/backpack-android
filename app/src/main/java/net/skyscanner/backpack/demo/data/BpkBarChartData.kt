@@ -18,35 +18,52 @@
 
 package net.skyscanner.backpack.demo.data
 
+import android.content.Context
+import android.icu.text.NumberFormat
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
+import net.skyscanner.backpack.demo.R
 import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
 import java.util.Locale
 import java.util.Random
-import kotlin.math.roundToInt
 
 object BpkBarChartData {
 
   private val random = Random(18735)
   private val year = 2018
 
-  fun generateModel(): BpkBarChartModel =
-    BpkBarChartModel(
-      caption = "Departures",
-      items = createMonth(Month.JANUARY) +
-        createMonth(Month.FEBRUARY) +
-        createMonth(Month.MARCH) +
-        createMonth(Month.APRIL) +
-        createMonth(Month.MAY),
+  fun generateModel(
+    context: Context,
+  ): BpkBarChartModel {
+
+    val locale = context.resources.configuration.locales.get(0)
+    val formatter = NumberFormat.getCurrencyInstance(locale)
+    formatter.maximumFractionDigits = 0
+
+    return BpkBarChartModel(
+      caption = context.getString(R.string.generic_departures),
+      items = Month.values().flatMap { month ->
+        createMonth(month) { date ->
+          val value = random.nextFloat()
+          createBar(
+            date = date,
+            locale = locale,
+            value = value,
+            badge = formatter.format(value * 100),
+            inactive = random.nextInt(5) == 0,
+          )
+        }
+      },
       legend = BpkBarChartModel.Legend(
-        selectedTitle = "Selected",
-        inactiveTitle = "No Price",
-        activeTitle = "Price",
+        selectedTitle = context.getString(R.string.generic_selected),
+        inactiveTitle = context.getString(R.string.generic_no_price),
+        activeTitle = context.getString(R.string.generic_price),
       )
     )
+  }
 
   fun createMonth(
     month: Month,
@@ -59,15 +76,16 @@ object BpkBarChartData {
 
   fun createBar(
     date: LocalDate,
-    value: Float = random.nextFloat(),
-    badge: String = "£" + (value * 100f).roundToInt(),
-    inactive: Boolean = random.nextInt(5) == 0,
+    locale: Locale = Locale.getDefault(),
+    badge: String? = null,
+    value: Float = 0.5f,
+    inactive: Boolean = false,
   ): BpkBarChartModel.Item =
     BpkBarChartModel.Item(
       key = date,
-      title = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()),
+      title = date.dayOfWeek.getDisplayName(TextStyle.SHORT, locale),
       subtitle = date.dayOfMonth.toString(),
-      group = date.month.getDisplayName(TextStyle.FULL, Locale.getDefault()),
+      group = date.month.getDisplayName(TextStyle.FULL, locale),
       badge = if (inactive) null else badge,
       value = value,
     )
