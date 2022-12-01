@@ -23,11 +23,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
@@ -40,12 +38,7 @@ internal fun BarChartLegend(
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
   ) {
-    BpkBadge(
-      text = legend.selectedTitle,
-      backgroundColor = BpkTheme.colors.coreAccent,
-      contentColor = BpkTheme.colors.textPrimaryInverse,
-      borderColor = Color.Transparent,
-    )
+    BpkBadge(text = legend.selectedTitle, type = BpkBadgeType.Brand)
     BpkBadge(text = legend.inactiveTitle, type = BpkBadgeType.Normal)
     BpkBadge(text = legend.activeTitle, type = BpkBadgeType.Strong)
   }

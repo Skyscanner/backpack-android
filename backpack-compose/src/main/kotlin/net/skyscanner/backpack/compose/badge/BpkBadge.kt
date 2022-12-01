@@ -97,7 +97,7 @@ private val BpkBadgeType.contentColor: Color
     BpkBadgeType.Destructive -> BpkTheme.colors.textOnLight
     BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
     BpkBadgeType.Outline -> BpkColor.White
-    BpkBadgeType.Brand -> BpkColor.White
+    BpkBadgeType.Brand -> BpkTheme.colors.textPrimaryInverse
   }
 
 private val BpkBadgeType.backgroundColor: Color
