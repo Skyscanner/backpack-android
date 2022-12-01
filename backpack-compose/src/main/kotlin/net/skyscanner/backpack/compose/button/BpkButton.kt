@@ -18,12 +18,14 @@
 
 package net.skyscanner.backpack.compose.button
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.button.internal.BpkButtonImpl
+import net.skyscanner.backpack.compose.button.internal.ButtonDrawable
 import net.skyscanner.backpack.compose.button.internal.ButtonIcon
 import net.skyscanner.backpack.compose.button.internal.ButtonText
 import net.skyscanner.backpack.compose.button.internal.minHeight
@@ -132,6 +134,66 @@ fun BpkButton(
     }
   }
 }
+
+@Composable
+fun BpkButton(
+  @DrawableRes iconResource: Int,
+  contentDescription: String,
+  modifier: Modifier = Modifier,
+  size: BpkButtonSize = DefaultSize,
+  type: BpkButtonType = DefaultType,
+  enabled: Boolean = DefaultEnabled,
+  loading: Boolean = DefaultLoading,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  onClick: () -> Unit,
+) {
+  BpkButtonImpl(
+    size = size,
+    type = type,
+    enabled = enabled,
+    loading = loading,
+    interactionSource = interactionSource,
+    modifier = modifier.requiredWidth(size.minHeight),
+    onClick = onClick,
+    content = { ButtonDrawable(iconResource, contentDescription, size) },
+  )
+}
+
+@Composable
+fun BpkButton(
+  text: String,
+  @DrawableRes iconResource: Int,
+  position: BpkButtonIconPosition,
+  modifier: Modifier = Modifier,
+  size: BpkButtonSize = DefaultSize,
+  type: BpkButtonType = DefaultType,
+  enabled: Boolean = DefaultEnabled,
+  loading: Boolean = DefaultLoading,
+  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  onClick: () -> Unit,
+) {
+  BpkButtonImpl(
+    size = size,
+    type = type,
+    enabled = enabled,
+    loading = loading,
+    interactionSource = interactionSource,
+    modifier = modifier,
+    onClick = onClick,
+  ) {
+    when (position) {
+      BpkButtonIconPosition.Start -> {
+        ButtonDrawable(iconResource, null, size)
+        ButtonText(text)
+      }
+      BpkButtonIconPosition.End -> {
+        ButtonText(text)
+        ButtonDrawable(iconResource, null, size)
+      }
+    }
+  }
+}
+
 
 private val DefaultSize = BpkButtonSize.Default
 private val DefaultType = BpkButtonType.Primary
