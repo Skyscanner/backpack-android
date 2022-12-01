@@ -29,13 +29,15 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
-data class TabItem(val icon: BpkIcon, val title: String)
+data class TabItem(val icon: @Composable () -> Unit, val title: String, val id: Int)
 
 @Composable
 fun BpkBottomNav(
+  onTabClicked: (Int) -> Unit,
+  selectedItemId: Int,
   modifier: Modifier = Modifier,
   elevation: Dp = BottomNavigationDefaults.Elevation,
-  actions: List<TabItem> = emptyList(),
+  tabItems: List<TabItem> = emptyList(),
 ) {
   BottomNavigation(
     modifier = modifier,
@@ -43,21 +45,22 @@ fun BpkBottomNav(
     contentColor = BpkTheme.colors.textSecondary,
     elevation = elevation,
   ) {
-    actions.forEach { tabItem ->
+    tabItems.forEach { tabItem ->
       BottomNavigationItem(
-        selected = false,
-        onClick = { /*TODO*/ },
-        icon = { BpkIcon(icon = tabItem.icon, contentDescription = null) },
+        selected = selectedItemId == tabItem.id,
+        onClick = { onTabClicked(tabItem.id) },
+        icon = tabItem.icon,
         label = {
           BpkText(
             text = tabItem.title
           )
         },
         selectedContentColor = BpkTheme.colors.textLink,
-        unselectedContentColor = BpkTheme.colors.textSecondary)
-
+        unselectedContentColor = BpkTheme.colors.textSecondary
+      )
     }
-
-
   }
 }
+
+@Composable
+fun BpkBottomNavIcon(icon: BpkIcon, modifier: Modifier = Modifier) { BpkIcon(modifier = modifier, icon = icon, contentDescription = null) }

@@ -23,8 +23,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNav
+import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavIcon
 import net.skyscanner.backpack.compose.bottomnav.TabItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.AccountCircle
@@ -34,17 +39,20 @@ import net.skyscanner.backpack.compose.tokens.Trips
 
 @Composable
 fun BpkBottomNavStory() {
+  var selectedItemId by remember { mutableStateOf(1) }
   Column(
     modifier = Modifier.fillMaxSize(),
     verticalArrangement = Arrangement.Bottom,
   ) {
     BpkBottomNav(
-      actions = listOf(
-        TabItem(icon = BpkIcon.Hotels, title = "Home"),
-        TabItem(icon = BpkIcon.Explore, title = "Explore"),
-        TabItem(icon = BpkIcon.Trips, title = "Trips"),
-        TabItem(icon = BpkIcon.AccountCircle, title = "Profile"),
-      )
+      tabItems = listOf(
+        TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.Hotels) }, title = "Home", id = 1),
+        TabItem(icon = { BpkIcon(icon = BpkIcon.Explore, contentDescription = null) }, title = "Explore", id = 2),
+        TabItem(icon = { BpkIcon(icon = BpkIcon.Trips, contentDescription = null) }, title = "Trips", id = 3),
+        TabItem(icon = { BpkIcon(icon = BpkIcon.AccountCircle, contentDescription = null) }, title = "Profile", id = 4),
+      ),
+      selectedItemId = selectedItemId,
+      onTabClicked = { selectedItemId = it },
     )
   }
 }
