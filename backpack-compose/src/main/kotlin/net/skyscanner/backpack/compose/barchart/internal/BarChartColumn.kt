@@ -78,7 +78,13 @@ internal fun BarChartColumn(
         .applyIf(selected) { onGloballyPositioned(onSelectedAndPositioned) }
         .background(
           shape = CircleShape,
-          color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.corePrimary).value,
+          color = animateColorAsState(
+            targetValue = when {
+              model.inactive -> BpkTheme.colors.line
+              selected -> BpkTheme.colors.coreAccent
+              else -> BpkTheme.colors.corePrimary
+            }
+          ).value,
         ),
     )
 
