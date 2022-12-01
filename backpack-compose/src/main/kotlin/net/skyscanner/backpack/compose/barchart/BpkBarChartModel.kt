@@ -24,15 +24,15 @@ import androidx.compose.runtime.Stable
 
 /**
  * Represents the view model used to provide data to the bar chart.
+ * @param caption a chart caption.
  * @param items list of bar items to render.
  * @param legend an optional legend.
- * @param caption an optional caption.
  */
 @Immutable
 data class BpkBarChartModel(
+  val caption: String,
   val items: List<Item>,
   val legend: Legend? = null,
-  val caption: String? = null,
 ) {
 
   /**

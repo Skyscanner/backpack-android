@@ -35,6 +35,7 @@ object BpkBarChartData {
 
   fun generateModel(): BpkBarChartModel =
     BpkBarChartModel(
+      caption = "Departures",
       items = createMonth(Month.JANUARY) +
         createMonth(Month.FEBRUARY) +
         createMonth(Month.MARCH) +

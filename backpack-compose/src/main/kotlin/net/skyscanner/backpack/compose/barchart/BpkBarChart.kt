@@ -18,16 +18,19 @@
 
 package net.skyscanner.backpack.compose.barchart
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.barchart.internal.BarChartLegend
 import net.skyscanner.backpack.compose.barchart.internal.BarChartList
 import net.skyscanner.backpack.compose.barchart.internal.BarChartTitle
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
@@ -40,20 +43,35 @@ fun BpkBarChart(
 ) {
   Column(modifier = modifier) {
 
-    model.legend?.let { legend ->
-      BarChartLegend(
-        legend = legend,
-        modifier = Modifier
-          .align(Alignment.End)
-          .padding(horizontal = BpkSpacing.Base),
-      )
-    }
+    Row(
+      horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+      modifier = Modifier
+        .padding(horizontal = BpkSpacing.Base)
+        .padding(top = BpkSpacing.Base)
+    ) {
 
-    BarChartTitle(
-      model = model,
-      state = state,
-      modifier = Modifier.padding(horizontal = BpkSpacing.Base),
-    )
+      Column(Modifier.weight(1f)) {
+
+        BpkText(
+          text = model.caption,
+          maxLines = 1,
+          color = BpkTheme.colors.textSecondary,
+          style = BpkTheme.typography.label2,
+        )
+
+        BarChartTitle(
+          model = model,
+          state = state,
+        )
+      }
+
+      model.legend?.let { legend ->
+        BarChartLegend(
+          legend = legend,
+        )
+      }
+
+    }
 
     BarChartList(
       modifier = Modifier.padding(top = BpkSpacing.Lg, bottom = BpkSpacing.Xl),
