@@ -27,12 +27,10 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.data.BpkBarChartData
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.threeten.bp.Month
 
 @RunWith(AndroidJUnit4::class)
 class BpkBarchartTests : BpkSnapshotTest() {
@@ -48,8 +46,10 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Empty() {
     init {
-      model = BpkBarChartModel(
-        items = createMonth(Month.JANUARY, value = 0.0f),
+      model = BpkBarChart.Model(
+        groups = listOf(
+          createMonth(0, value = 0.0f)
+        )
       )
     }
     capture()
@@ -58,8 +58,10 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Half() {
     init {
-      model = BpkBarChartModel(
-        items = createMonth(Month.JANUARY, value = 0.5f),
+      model = BpkBarChart.Model(
+        groups = listOf(
+          createMonth(0, value = 0.5f)
+        )
       )
     }
     capture()
@@ -68,8 +70,10 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Full() {
     init {
-      model = BpkBarChartModel(
-        items = createMonth(Month.JANUARY, value = 1.0f),
+      model = BpkBarChart.Model(
+        groups = listOf(
+          createMonth(0, value = 1.0f)
+        )
       )
     }
     capture()
@@ -78,8 +82,10 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Overfilled() {
     init {
-      model = BpkBarChartModel(
-        items = createMonth(Month.JANUARY, value = 1.1f),
+      model = BpkBarChart.Model(
+        groups = listOf(
+          createMonth(0, value = 1.1f)
+        )
       )
     }
     capture()
@@ -88,8 +94,10 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_Inactive() {
     init {
-      model = BpkBarChartModel(
-        items = createMonth(Month.JANUARY, inactive = true),
+      model = BpkBarChart.Model(
+        groups = listOf(
+          createMonth(0, inactive = true)
+        )
       )
     }
     capture()
@@ -98,9 +106,11 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_WithLegend() {
     init {
-      model = BpkBarChartModel(
-        items = createMonth(Month.JANUARY),
-        legend = BpkBarChartModel.Legend(
+      model = BpkBarChart.Model(
+        groups = listOf(
+          createMonth(0)
+        ),
+        legend = BpkBarChart.Legend(
           selectedTitle = "Selected",
           activeTitle = "Enabled",
           inactiveTitle = "Disabled",
@@ -113,8 +123,10 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_WithBadge() {
     init {
-      model = BpkBarChartModel(
-        items = createMonth(Month.JANUARY),
+      model = BpkBarChart.Model(
+        groups = listOf(
+          createMonth(0)
+        )
       )
     }
     capture {
@@ -125,8 +137,10 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun screenshotTestBarChart_WithoutBadge() {
     init {
-      model = BpkBarChartModel(
-        items = createMonth(Month.JANUARY),
+      model = BpkBarChart.Model(
+        groups = listOf(
+          createMonth(0)
+        )
       )
     }
     capture {
@@ -155,12 +169,34 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   private fun createMonth(
-    month: Month,
+    month: Int,
     badge: Int = 100,
     value: Float = 0.5f,
-    inactive: Boolean = false,
-  ): List<BpkBarChartModel.Item> =
-    BpkBarChartData.createMonth(month) {
-      BpkBarChartData.createBar(it, badge.toString(), value, inactive)
+    inactive: Boolean = false
+  ) = BpkBarChart.Group(
+    title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
+    items = ArrayList<BpkBarChart.Column>(10).apply {
+      for (dayOfTheMonth in 0 until 30) {
+        add(
+          createBar(
+            month * 30 + dayOfTheMonth,
+            badge, value, inactive
+          )
+        )
+      }
     }
+  )
+
+  private fun createBar(
+    dayOfTheYear: Int,
+    badge: Int = 100,
+    value: Float = 0.5f,
+    inactive: Boolean = false
+  ) = BpkBarChart.Column(
+    title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
+    subtitle = (dayOfTheYear % 30 + 1).toString(),
+    badge = "£$badge",
+    value = value,
+    inactive = inactive
+  )
 }

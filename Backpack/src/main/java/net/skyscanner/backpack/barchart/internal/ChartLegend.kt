@@ -26,14 +26,13 @@ import android.widget.LinearLayout
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.badge.BpkBadge
 import net.skyscanner.backpack.barchart.BpkBarChart
-import net.skyscanner.backpack.barchart.BpkBarChartModel
 import net.skyscanner.backpack.util.Consumer
 
 @SuppressLint("ViewConstructor")
 internal class ChartLegend constructor(
   context: Context,
   colors: BpkBarChart.Colors
-) : LinearLayout(context), Consumer<BpkBarChartModel.Legend?> {
+) : LinearLayout(context), Consumer<BpkBarChart.Legend?> {
 
   init {
     orientation = HORIZONTAL
@@ -57,7 +56,7 @@ internal class ChartLegend constructor(
     setTextColor(context.getColor(R.color.bpkTextPrimary))
   }
 
-  override fun invoke(legend: BpkBarChartModel.Legend?) {
+  override fun invoke(legend: BpkBarChart.Legend?) {
     if (legend == null) {
       activated.visibility = View.GONE
       inactivated.visibility = View.GONE

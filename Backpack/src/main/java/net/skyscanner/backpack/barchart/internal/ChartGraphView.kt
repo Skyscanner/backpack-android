@@ -27,7 +27,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.barchart.BpkBarChart
-import net.skyscanner.backpack.barchart.BpkBarChartModel
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.Consumer
 
@@ -35,8 +34,8 @@ import net.skyscanner.backpack.util.Consumer
 internal class ChartGraphView constructor(
   context: Context,
   colors: BpkBarChart.Colors,
-  onClick: Consumer<BpkBarChartModel.Item>
-) : FrameLayout(context), Consumer<List<BpkBarChartModel.Item>> {
+  onClick: Consumer<BpkBarChart.Column>
+) : FrameLayout(context), Consumer<List<BpkBarChart.Group>?> {
 
   private val onClickWrapper = { holder: ChartBarHolder ->
     onClick(holder.model!!)
@@ -62,9 +61,9 @@ internal class ChartGraphView constructor(
     it.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         val position = layoutManager.findFirstVisibleItemPosition()
-        val group = model[position].group
-        if (title.text != group) {
-          title.text = group
+        val group = model.getGroup(position)
+        if (title.text != group.title) {
+          title.text = group.title
         }
       }
     })
@@ -88,10 +87,10 @@ internal class ChartGraphView constructor(
     recyclerView.adapter = it
   }
 
-  private var model: List<BpkBarChartModel.Item> = emptyList()
+  private var model: ChartData = ChartData()
 
-  override fun invoke(items: List<BpkBarChartModel.Item>) {
-    this.model = items
+  override fun invoke(groups: List<BpkBarChart.Group>?) {
+    this.model = ChartData(groups)
     adapter.invoke(model)
   }
 }

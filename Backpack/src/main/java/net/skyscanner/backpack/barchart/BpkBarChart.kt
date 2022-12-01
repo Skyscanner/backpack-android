@@ -1,4 +1,4 @@
-/*
+/**
  * Backpack for Android - Skyscanner's Design System
  *
  * Copyright 2018 Skyscanner Ltd
@@ -36,7 +36,113 @@ open class BpkBarChart @JvmOverloads constructor(
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
 ) : FrameLayout(createContextThemeWrapper(context, attrs, R.attr.bpkBarChartStyle), attrs, defStyleAttr),
-  Consumer<BpkBarChartModel> {
+  Consumer<BpkBarChart.Model> {
+
+  /**
+   * Represents a single bar in the chart.
+   */
+  data class Column(
+
+    /**
+     * An optional identifier of the bar.
+     * This allows to save the selected element each time the model is updated.
+     *
+     * If not set, the selection will be dropped each time when you set new model.
+     */
+    val id: Long = 0L,
+
+    /**
+     * A primary text placed just below the bar itself.
+     */
+    val title: CharSequence,
+
+    /**
+     * A secondary text placed just below the title.
+     */
+    val subtitle: CharSequence,
+
+    /**
+     * Text to be shown in the popup when the item is selected.
+     */
+    val badge: CharSequence,
+
+    /**
+     * Marking the item inactive means inactive colours from the palette, will be used to draw this item.
+     *
+     * This can be used to show that there's no data available for this bar.
+     *
+     * The item will remain clickable.
+     */
+    val inactive: Boolean,
+
+    /**
+     * The value of the bar itself, should be a range between 0.0f and 1.0f.
+     * When a value bigger than 1.0f  is set, a "peak" indicator will be show at the top of the bar.
+     */
+    val value: Float
+  )
+
+  /**
+   * Represents a group of the items sharing the same title.
+   * The title is rendered above the bars and is updated as the chart scrolls horizontally.
+   */
+  data class Group(
+
+    /**
+     * Label of this group to be renderer above the bars.
+     */
+    val title: CharSequence,
+
+    /**
+     * Bars in the group.
+     */
+    val items: List<Column>
+  )
+
+  /**
+   * Represents a legend for the chart.
+   * Two types of legends are available, `active` and `inactive`. Those relate to the `inactive` prop of the bar.
+   * `Inactive` bars will have the same style as the `inactive` legend and `active` bars the same style as the
+   * `active` legend.
+   * @see Column.inactive
+   */
+  data class Legend(
+
+    /**
+     * This label will be used to represent selected bars and will use the selected colours from the palette.
+     */
+    val selectedTitle: CharSequence,
+
+    /**
+     * This label will be used to represent inactive bars and will use the inactive colours from the palette.
+     */
+    val activeTitle: CharSequence,
+
+    /**
+     * This label will be used to represent active bars and will use the active colours from the palette.
+     */
+    val inactiveTitle: CharSequence,
+  )
+
+  /**
+   * Represents the view model used to provide data to the chart.
+   *
+   * @see BpkBarChart.model
+   * @see BpkBarChart.invoke
+   */
+  data class Model(
+
+    /**
+     * List of bar groups to render.
+     */
+    val groups: List<Group>,
+
+    /**
+     * An optional legend.
+     * @see Legend
+     */
+    val legend: Legend? = null
+  )
 
   data class Colors(
     val columnTitle: ColorStateList,
@@ -49,12 +155,12 @@ open class BpkBarChart @JvmOverloads constructor(
     val popupText: ColorStateList,
   )
 
-  interface OnBarClickListener : Consumer<BpkBarChartModel.Item> {
+  interface OnBarClickListener : Consumer<Column> {
 
-    override fun invoke(item: BpkBarChartModel.Item)
+    override fun invoke(column: Column)
   }
 
-  var listener: Consumer<BpkBarChartModel.Item>? = null
+  var listener: Consumer<Column>? = null
 
   private val graphView: ChartGraphView
   private val legendView: ChartLegend
@@ -121,14 +227,14 @@ open class BpkBarChart @JvmOverloads constructor(
     addView(graphView, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
   }
 
-  var model: BpkBarChartModel? = null
+  var model: Model? = null
     set(value) {
       field = value
-      graphView.invoke(model?.items ?: emptyList())
+      graphView.invoke(model?.groups)
       legendView.invoke(model?.legend)
     }
 
-  override fun invoke(model: BpkBarChartModel) {
+  override fun invoke(model: Model) {
     this.model = model
   }
 }
