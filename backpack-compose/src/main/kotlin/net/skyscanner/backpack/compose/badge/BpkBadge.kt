@@ -48,6 +48,7 @@ enum class BpkBadgeType {
   Destructive,
   Inverse,
   Outline,
+  Brand,
 }
 
 @Composable
@@ -96,6 +97,7 @@ private val BpkBadgeType.contentColor: Color
     BpkBadgeType.Destructive -> BpkTheme.colors.textOnLight
     BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
     BpkBadgeType.Outline -> BpkColor.White
+    BpkBadgeType.Brand -> BpkColor.White
   }
 
 private val BpkBadgeType.backgroundColor: Color
@@ -108,6 +110,7 @@ private val BpkBadgeType.backgroundColor: Color
     BpkBadgeType.Destructive -> BpkTheme.colors.statusDangerFill
     BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
     BpkBadgeType.Outline -> Color.Transparent
+    BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
   }
 
 private val BpkBadgeType.borderColor: Color
