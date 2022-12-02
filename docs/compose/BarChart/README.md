@@ -39,7 +39,7 @@ To render data you need to create a model for `BarChart` in code.
 Detailed documentation on each property of the model is
 available [here](https://backpack.github.io/android/Backpack/net.skyscanner.backpack.compose.barchart).
 
-Here's some an example which generates a model for one single month in Kotlin:
+Here's an example which generates a model for one single month in Kotlin:
 
 ```kotlin
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
