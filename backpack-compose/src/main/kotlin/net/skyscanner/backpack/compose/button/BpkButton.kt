@@ -18,12 +18,12 @@
 
 package net.skyscanner.backpack.compose.button
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import net.skyscanner.backpack.compose.button.internal.BpkButtonImpl
 import net.skyscanner.backpack.compose.button.internal.ButtonDrawable
 import net.skyscanner.backpack.compose.button.internal.ButtonIcon
@@ -137,7 +137,7 @@ fun BpkButton(
 
 @Composable
 fun BpkButton(
-  @DrawableRes iconResource: Int,
+  icon: Painter,
   contentDescription: String,
   modifier: Modifier = Modifier,
   size: BpkButtonSize = DefaultSize,
@@ -155,14 +155,14 @@ fun BpkButton(
     interactionSource = interactionSource,
     modifier = modifier.requiredWidth(size.minHeight),
     onClick = onClick,
-    content = { ButtonDrawable(iconResource, contentDescription, size) },
+    content = { ButtonDrawable(icon, contentDescription, size) },
   )
 }
 
 @Composable
 fun BpkButton(
   text: String,
-  @DrawableRes iconResource: Int,
+  icon: Painter,
   position: BpkButtonIconPosition,
   modifier: Modifier = Modifier,
   size: BpkButtonSize = DefaultSize,
@@ -183,12 +183,12 @@ fun BpkButton(
   ) {
     when (position) {
       BpkButtonIconPosition.Start -> {
-        ButtonDrawable(iconResource, null, size)
+        ButtonDrawable(icon, null, size)
         ButtonText(text)
       }
       BpkButtonIconPosition.End -> {
         ButtonText(text)
-        ButtonDrawable(iconResource, null, size)
+        ButtonDrawable(icon, null, size)
       }
     }
   }

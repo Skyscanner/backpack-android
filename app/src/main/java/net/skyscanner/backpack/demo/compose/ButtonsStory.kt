@@ -36,6 +36,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -242,7 +243,7 @@ private fun DrawableButtonsRow(
     LoadingScope {
       BpkButton(
         text = stringResource(R.string.button),
-        iconResource = R.drawable.button_sample_icon,
+        icon = painterResource(id = R.drawable.button_sample_icon),
         position = BpkButtonIconPosition.Start,
         size = size,
         type = type,
@@ -255,7 +256,7 @@ private fun DrawableButtonsRow(
     LoadingScope {
       BpkButton(
         text = stringResource(R.string.button),
-        iconResource = R.drawable.button_sample_icon,
+        icon = painterResource(id = R.drawable.button_sample_icon),
         position = BpkButtonIconPosition.End,
         size = size,
         type = type,
@@ -267,7 +268,7 @@ private fun DrawableButtonsRow(
 
     LoadingScope {
       BpkButton(
-        iconResource = R.drawable.button_sample_icon,
+        icon = painterResource(id = R.drawable.button_sample_icon),
         contentDescription = stringResource(R.string.button),
         size = size,
         type = type,

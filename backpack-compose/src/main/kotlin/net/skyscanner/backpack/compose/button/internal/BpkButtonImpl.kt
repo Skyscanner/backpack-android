@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.button.internal
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -42,7 +41,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
@@ -132,14 +131,14 @@ internal fun ButtonText(text: String, modifier: Modifier = Modifier) {
 
 @Composable
 internal fun ButtonDrawable(
-  @DrawableRes id: Int,
+  icon: Painter,
   contentDescription: String?,
   size: BpkButtonSize,
   modifier: Modifier = Modifier,
 ) {
   size.iconSize
   Image(
-    painter = painterResource(id = id),
+    painter = icon,
     contentDescription = contentDescription,
     modifier = modifier.defaultIconSize(size.iconSize)
   )

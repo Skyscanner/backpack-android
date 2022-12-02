@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
@@ -120,7 +121,14 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // icon is bigger on large size, so we need to test this
 
     capture {
-      BpkButton("Button", iconDrawableRes, BpkButtonIconPosition.Start, type = type, size = size, onClick = {})
+      BpkButton(
+        text = "Button",
+        icon = painterResource(id = iconDrawableRes),
+        position = BpkButtonIconPosition.Start,
+        type = type,
+        size = size,
+        onClick = {}
+      )
     }
   }
 
@@ -131,7 +139,14 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // icon is bigger on large size, so we need to test this
 
     capture {
-      BpkButton("Button", iconDrawableRes, BpkButtonIconPosition.End, type = type, size = size, onClick = {})
+      BpkButton(
+        text = "Button",
+        icon = painterResource(id = iconDrawableRes),
+        position = BpkButtonIconPosition.Start,
+        type = type,
+        size = size,
+        onClick = {}
+      )
     }
   }
 
