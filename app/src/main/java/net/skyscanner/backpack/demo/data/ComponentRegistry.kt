@@ -74,6 +74,7 @@ import net.skyscanner.backpack.demo.stories.LabeledCalendarStory
 import net.skyscanner.backpack.demo.stories.LoadingButtonStory
 import net.skyscanner.backpack.demo.stories.MapStory
 import net.skyscanner.backpack.demo.stories.NavBarStory
+import net.skyscanner.backpack.demo.stories.RadiiStory
 import net.skyscanner.backpack.demo.stories.SnackbarStory
 import net.skyscanner.backpack.demo.stories.SpacingStory
 import net.skyscanner.backpack.demo.stories.Story
@@ -87,7 +88,6 @@ import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
 import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
-import net.skyscanner.backpack.demo.stories.RadiiStory
 
 interface RegistryItem {
   val name: String
