@@ -51,7 +51,6 @@ object BpkBarChartData {
             BpkBarChartModel.Values(
               text = formatter.format(it * 100),
               percent = it,
-              accessibilityLabel = context.getString(R.string.generic_price_placeholder, formatter.format(it * 100)),
             )
           }
           createBar(

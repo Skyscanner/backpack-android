@@ -42,7 +42,6 @@ class BpkBarchartTests : BpkSnapshotTest() {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
-          legend = createLegend(),
           items = createMonth(Month.JANUARY, value = 0.0f),
         ),
         selected = null,
@@ -58,7 +57,6 @@ class BpkBarchartTests : BpkSnapshotTest() {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
-          legend = createLegend(),
           items = createMonth(Month.JANUARY, value = 0.5f),
         ),
         selected = null,
@@ -74,7 +72,6 @@ class BpkBarchartTests : BpkSnapshotTest() {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
-          legend = createLegend(),
           items = createMonth(Month.JANUARY, value = 1.0f),
         ),
         selected = null,
@@ -90,7 +87,6 @@ class BpkBarchartTests : BpkSnapshotTest() {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
-          legend = createLegend(),
           items = createMonth(Month.JANUARY, value = 1.1f),
         ),
         selected = null,
@@ -106,8 +102,26 @@ class BpkBarchartTests : BpkSnapshotTest() {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
-          legend = createLegend(),
           items = createMonth(Month.JANUARY, value = null),
+        ),
+        selected = null,
+        onSelectionChange = {},
+      )
+    }
+  }
+
+  @Test
+  fun withLegend() {
+    composed {
+      BpkBarChart(
+        model = BpkBarChartModel(
+          caption = "Bar chart",
+          legend = BpkBarChartModel.Legend(
+            selectedTitle = "Selected",
+            activeTitle = "Enabled",
+            inactiveTitle = "Disabled",
+          ),
+          items = createMonth(Month.JANUARY),
         ),
         selected = null,
         onSelectionChange = {},
@@ -118,11 +132,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun selected() {
     composed {
-      val model = BpkBarChartModel(
-        caption = "Bar chart",
-        legend = createLegend(),
-        items = createMonth(Month.JANUARY),
-      )
+      val model = BpkBarChartModel(caption = "Bar chart", items = createMonth(Month.JANUARY))
       BpkBarChart(
         model = model,
         selected = model.items[10],
@@ -141,16 +151,9 @@ class BpkBarchartTests : BpkSnapshotTest() {
         values = value?.let {
           BpkBarChartModel.Values(
             percent = it,
-            accessibilityLabel = "Accessibility label",
             text = (it * 100).roundToInt().toString(),
           )
         },
       )
     }
-
-  private fun createLegend() = BpkBarChartModel.Legend(
-    inactiveTitle = "Inactive",
-    selectedTitle = "Selected",
-    activeTitle = "Active",
-  )
 }

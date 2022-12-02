@@ -226,5 +226,4 @@
   <string name="slider_range">Range</string>
   <string name="slider_standard">Standard</string>
   <string name="slider_stepped">Stepped</string>
-  <string name="generic_price_placeholder">The price is %s</string>
 </resources>
