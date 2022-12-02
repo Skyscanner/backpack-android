@@ -142,7 +142,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
       BpkButton(
         text = "Button",
         icon = painterResource(id = iconDrawableRes),
-        position = BpkButtonIconPosition.Start,
+        position = BpkButtonIconPosition.End,
         type = type,
         size = size,
         onClick = {}
