@@ -69,14 +69,14 @@ internal fun BarChartBadge(
     }
   }
 
-  val badgeText = selected.badge ?: return
-  var displayedBadgeText by remember { mutableStateOf(badgeText) }
+  val values = selected.values ?: return
+  var displayedBadgeText by remember { mutableStateOf(values.text) }
   val animatable = remember { Animatable(0f) }
 
   LaunchedEffect(selected, isInVisibleRage) {
     if (isInVisibleRage) {
       animatable.snapTo(0f)
-      displayedBadgeText = selected.badge
+      displayedBadgeText = values.text
       animatable.animateTo(1f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
     } else {
       animatable.animateTo(0f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))

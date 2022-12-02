@@ -26,6 +26,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.Month
+import kotlin.math.roundToInt
 
 @RunWith(AndroidJUnit4::class)
 class BpkBarchartTests : BpkSnapshotTest() {
@@ -101,7 +102,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
-          items = createMonth(Month.JANUARY, inactive = true),
+          items = createMonth(Month.JANUARY, value = null),
         ),
         selected = null,
         onSelectionChange = {},
@@ -142,16 +143,17 @@ class BpkBarchartTests : BpkSnapshotTest() {
 
   private fun createMonth(
     month: Month,
-    badge: Int = 100,
-    value: Float = 0.5f,
-    inactive: Boolean = false,
+    value: Float? = 0.5f,
   ): List<BpkBarChartModel.Item> =
-    BpkBarChartData.createMonth(month) {
+    BpkBarChartData.createMonth(month) { date ->
       BpkBarChartData.createBar(
-        date = it,
-        badge = badge.toString(),
-        value = value,
-        inactive = inactive
+        date = date,
+        values = value?.let {
+          BpkBarChartModel.Values(
+            percent = it,
+            text = (it * 100).roundToInt().toString(),
+          )
+        },
       )
     }
 }

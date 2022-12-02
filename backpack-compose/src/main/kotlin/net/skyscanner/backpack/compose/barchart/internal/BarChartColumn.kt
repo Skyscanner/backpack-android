@@ -33,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.style.TextOverflow
@@ -54,19 +55,15 @@ internal fun BarChartColumn(
   modifier: Modifier = Modifier,
 ) {
 
-  val value by animateFloatAsState(model.value)
-  val inactive = model.badge == null
-
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
-    modifier = modifier
-      .selectable(
-        selected = selected,
-        enabled = !inactive,
-        indication = null,
-        interactionSource = remember { MutableInteractionSource() },
-        onClick = { onSelected(model) },
-      ),
+    modifier = modifier.selectable(
+      selected = selected,
+      enabled = model.values != null,
+      indication = null,
+      interactionSource = remember { MutableInteractionSource() },
+      onClick = { onSelected(model) },
+    ),
   ) {
 
     Spacer(
@@ -75,19 +72,26 @@ internal fun BarChartColumn(
         .width(BpkSpacing.Base)
         .weight(1f, fill = false)
         .background(BpkTheme.colors.surfaceHighlight, CircleShape)
-        .inset { bounds ->
-          val barHeight = when {
-            inactive -> BpkSpacing.Lg.roundToPx()
-            else -> max((bounds.height * value).roundToInt(), bounds.width)
+        .run {
+          when (model.values) {
+            null -> inset { bounds ->
+              bounds.copy(top = bounds.height - BpkSpacing.Lg.roundToPx())
+            }
+
+            else -> composed {
+              val value by animateFloatAsState(model.values.percent)
+              inset { bounds ->
+                bounds.copy(top = bounds.height - max((bounds.height * value).roundToInt(), bounds.width))
+              }
+            }
           }
-          bounds.copy(top = bounds.height - barHeight)
         }
         .applyIf(selected) { onGloballyPositioned(onSelectedAndPositioned) }
         .background(
           shape = CircleShape,
           color = animateColorAsState(
             targetValue = when {
-              inactive -> BpkTheme.colors.line
+              model.values == null -> BpkTheme.colors.line
               selected -> BpkTheme.colors.coreAccent
               else -> BpkTheme.colors.corePrimary
             }

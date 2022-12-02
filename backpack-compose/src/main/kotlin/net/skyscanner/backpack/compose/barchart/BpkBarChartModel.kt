@@ -40,18 +40,16 @@ data class BpkBarChartModel(
    * @param key an unique identifier of the bar. This allows to save the selected element each time the model is updated.
    * @param title a primary text placed just below the bar itself.
    * @param subtitle a secondary text placed just below the title.
-   * @param badge text to be shown in the popup when the item is selected. If null, the item becomes inactive.
    * @param group name of the group in which the item exists. The name is rendered above the bars and updated as the chart scrolls horizontally.
-   * @param value the value of the bar itself, should be a range between 0.0f and 1.0f. If it exceeds, it'll be clamped
+   * @param values the values  of the bar itself. If null, the item becomes inactive.
    */
   @Immutable
   data class Item(
     @Stable val key: Any,
     val title: String,
     val subtitle: String,
-    val badge: String? = null,
     val group: String,
-    @FloatRange(from = 0.0, to = 1.0) val value: Float,
+    val values: Values? = null,
   ) {
 
     override fun equals(other: Any?): Boolean =
@@ -60,6 +58,16 @@ data class BpkBarChartModel(
     override fun hashCode(): Int =
       key.hashCode()
   }
+
+  /**
+   * Represents a set of values of a single bar in chart
+   * @param text text to be shown in the popup when the item is selected
+   * @param percent the value of the bar itself, should be a range between 0.0f and 1.0f. If it exceeds, it'll be clamped
+   */
+  data class Values(
+    val text: String,
+    @FloatRange(from = 0.0, to = 1.0) val percent: Float,
+  )
 
   /**
    * Represents a legend for the chart.
@@ -71,7 +79,6 @@ data class BpkBarChartModel(
    * @param activeTitle label to represent active bars and will use the active colours from the palette.
    * @param inactiveTitle label to represent inactive bars and will use the inactive colours from the palette.
    */
-  @Immutable
   data class Legend(
     val selectedTitle: String,
     val activeTitle: String,

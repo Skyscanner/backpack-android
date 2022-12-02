@@ -47,13 +47,16 @@ object BpkBarChartData {
       caption = context.getString(R.string.generic_departures),
       items = Month.values().flatMap { month ->
         createMonth(month) { date ->
-          val value = random.nextFloat()
+          val values = random.nextFloat().let {
+            BpkBarChartModel.Values(
+              text = formatter.format(it * 100),
+              percent = it,
+            )
+          }
           createBar(
             date = date,
             locale = locale,
-            value = value,
-            badge = formatter.format(value * 100),
-            inactive = random.nextInt(5) == 0,
+            values = values.takeIf { random.nextInt(5) != 0 },
           )
         }
       },
@@ -77,16 +80,13 @@ object BpkBarChartData {
   fun createBar(
     date: LocalDate,
     locale: Locale = Locale.getDefault(),
-    badge: String? = null,
-    value: Float = 0.5f,
-    inactive: Boolean = false,
+    values: BpkBarChartModel.Values? = null,
   ): BpkBarChartModel.Item =
     BpkBarChartModel.Item(
       key = date,
       title = date.dayOfWeek.getDisplayName(TextStyle.SHORT, locale),
       subtitle = date.dayOfMonth.toString(),
       group = date.month.getDisplayName(TextStyle.FULL, locale),
-      badge = if (inactive) null else badge,
-      value = value,
+      values = values,
     )
 }
