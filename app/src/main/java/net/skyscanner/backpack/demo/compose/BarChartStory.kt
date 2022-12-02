@@ -31,18 +31,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.barchart.BpkBarChart
-import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.data.BpkBarChartData
 
 @Preview
 @Composable
 fun BarChartStory(modifier: Modifier = Modifier) {
+
+  val automationMode = LocalAutomationMode.current
+  val context = LocalContext.current
+  val model = remember(context) { BpkBarChartData.generateModel(context) }
+  var selectedItem by remember { mutableStateOf(model.items[10].takeIf { automationMode }) }
+
   Column(modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-    var selectedItem by remember { mutableStateOf<BpkBarChartModel.Item?>(null) }
-    val context = LocalContext.current
+
     BpkBarChart(
-      model = remember(context) { BpkBarChartData.generateModel(context) },
+      model = model,
       selected = selectedItem,
       onSelectionChange = { selectedItem = it },
       modifier = Modifier.padding(vertical = BpkSpacing.Md),

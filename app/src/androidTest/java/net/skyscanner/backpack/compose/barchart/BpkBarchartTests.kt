@@ -18,10 +18,6 @@
 
 package net.skyscanner.backpack.compose.barchart
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
@@ -135,14 +131,11 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @Test
   fun selected() {
     composed {
-      var selectedItem by remember { mutableStateOf<BpkBarChartModel.Item?>(null) }
+      val model = BpkBarChartModel(caption = "Bar chart", items = createMonth(Month.JANUARY))
       BpkBarChart(
-        model = BpkBarChartModel(
-          caption = "Bar chart",
-          items = createMonth(Month.JANUARY),
-        ),
-        selected = selectedItem,
-        onSelectionChange = { selectedItem = it },
+        model = model,
+        selected = model.items[10],
+        onSelectionChange = {},
       )
     }
   }
