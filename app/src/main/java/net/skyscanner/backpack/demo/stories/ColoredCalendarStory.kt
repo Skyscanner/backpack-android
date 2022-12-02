@@ -59,8 +59,8 @@ class ColoredCalendarStory : Story() {
     val selectionType = requireView().findViewById<RadioGroup>(R.id.selection_type)
     val bpkCalendar = requireView().findViewById<BpkCalendar>(R.id.bpkCalendar)
 
-    single.text = "Single"
-    range.text = "Range"
+    single.text = getString(R.string.calendar_single)
+    range.text = getString(R.string.calendar_range)
     range.isChecked = true
 
     selectionType.visibility = View.VISIBLE
