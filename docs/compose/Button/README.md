@@ -22,6 +22,13 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Button/screenshots/link.png" alt="Link Button component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Button/screenshots/link_dm.png" alt="Link Button component - dark mode" width="375" /> |
 
+## Drawable Icon
+
+| Day                                                                                                                                                                                 | Night                                                                                                                                                                                              |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Button/screenshots/drawable-icon.png" alt="Drawable Icon Button component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Button/screenshots/drawable-icon_dm.png" alt="Drawable Icon Button component - dark mode" width="375" /> |
+
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
