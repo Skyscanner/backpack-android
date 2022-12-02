@@ -129,3 +129,17 @@ BpkButton(
   // onClick
 }
 ```
+
+Example of a button with custom icon and text:
+
+```Kotlin
+import net.skyscanner.backpack.compose.button.BpkButton
+import androidx.compose.ui.res.painterResource
+
+BpkButton(
+  text = stringResource(R.string.my_button_text),
+  icon = painterResource(id = R.drwable.custom_icon),
+) {
+  // onClick
+}
+```
