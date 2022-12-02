@@ -36,6 +36,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -58,7 +59,11 @@ fun ButtonsStory(
   size: BpkButtonSize,
   modifier: Modifier = Modifier,
 ) {
-  LazyColumn(modifier.fillMaxSize().padding(top = BpkDimension.Spacing.Md)) {
+  LazyColumn(
+    modifier
+      .fillMaxSize()
+      .padding(top = BpkDimension.Spacing.Md)
+  ) {
     item {
       ButtonsRow(
         type = BpkButtonType.Primary,
@@ -80,11 +85,15 @@ fun ButtonsStory(
 fun ButtonLinkStory(
   modifier: Modifier = Modifier,
 ) {
-  LazyColumn(modifier.fillMaxSize().padding(top = BpkDimension.Spacing.Md)) {
+  LazyColumn(
+    modifier
+      .fillMaxSize()
+      .padding(top = BpkDimension.Spacing.Md)
+  ) {
     LinkRows(BpkButtonSize.Default)
     item {
       BpkText(
-        text = stringResource(R.string.icons_large),
+        text = stringResource(BpkButtonSize.Large.labelResource()),
         style = BpkTheme.typography.heading4,
         modifier = Modifier
           .padding(horizontal = BpkDimension.Spacing.Base)
@@ -92,6 +101,44 @@ fun ButtonLinkStory(
       )
     }
     LinkRows(BpkButtonSize.Large)
+  }
+}
+
+@Composable
+fun ButtonDrawableIconStory(
+  modifier: Modifier = Modifier,
+) {
+  LazyColumn(
+    modifier
+      .fillMaxSize()
+      .padding(top = BpkDimension.Spacing.Md)
+  ) {
+
+    BpkButtonSize.values().map { size ->
+      item {
+        BpkText(
+          text = stringResource(size.labelResource()),
+          style = BpkTheme.typography.heading4,
+          modifier = Modifier
+            .padding(horizontal = BpkDimension.Spacing.Base)
+            .padding(top = BpkDimension.Spacing.Md)
+        )
+      }
+      item {
+        DrawableButtonsRow(
+          type = BpkButtonType.Primary,
+          size = size,
+          enabled = false,
+        )
+      }
+      items(BpkButtonType.values().filter { !it.linkType() }) {
+        DrawableButtonsRow(
+          type = it,
+          size = size,
+          enabled = true,
+        )
+      }
+    }
   }
 }
 
@@ -179,6 +226,61 @@ private fun ButtonsRow(
 }
 
 @Composable
+private fun DrawableButtonsRow(
+  type: BpkButtonType,
+  size: BpkButtonSize,
+  enabled: Boolean,
+  modifier: Modifier = Modifier,
+) {
+  Row(
+    modifier
+      .fillMaxWidth()
+      .background(type.rowBackground())
+      .padding(vertical = BpkSpacing.Md, horizontal = BpkSpacing.Base),
+    horizontalArrangement = Arrangement.SpaceEvenly,
+  ) {
+
+    LoadingScope {
+      BpkButton(
+        text = stringResource(R.string.button),
+        icon = painterResource(id = R.drawable.button_sample_icon),
+        position = BpkButtonIconPosition.Start,
+        size = size,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        onClick = ::load,
+      )
+    }
+
+    LoadingScope {
+      BpkButton(
+        text = stringResource(R.string.button),
+        icon = painterResource(id = R.drawable.button_sample_icon),
+        position = BpkButtonIconPosition.End,
+        size = size,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        onClick = ::load,
+      )
+    }
+
+    LoadingScope {
+      BpkButton(
+        icon = painterResource(id = R.drawable.button_sample_icon),
+        contentDescription = stringResource(R.string.button),
+        size = size,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        onClick = ::load,
+      )
+    }
+  }
+}
+
+@Composable
 private inline fun LoadingScope(
   content: @Composable LoadingScope.() -> Unit,
 ) {
@@ -204,6 +306,12 @@ private fun BpkButtonType.linkType() =
   when (this) {
     BpkButtonType.Link, BpkButtonType.LinkOnDark -> true
     else -> false
+  }
+
+private fun BpkButtonSize.labelResource() =
+  when (this) {
+    BpkButtonSize.Default -> R.string.generic_default
+    BpkButtonSize.Large -> R.string.icons_large
   }
 
 @Composable

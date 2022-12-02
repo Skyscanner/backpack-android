@@ -22,6 +22,13 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Button/screenshots/link.png" alt="Link Button component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Button/screenshots/link_dm.png" alt="Link Button component - dark mode" width="375" /> |
 
+## Drawable Icon
+
+| Day                                                                                                                                                                                 | Night                                                                                                                                                                                              |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Button/screenshots/drawable-icon.png" alt="Drawable Icon Button component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Button/screenshots/drawable-icon_dm.png" alt="Drawable Icon Button component - dark mode" width="375" /> |
+
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
@@ -125,6 +132,20 @@ BpkButton(
   text = stringResource(R.string.my_button_text),
   icon = BpkIcons.Sm.LongArrowRight,
   position = BpkButtonIconPosition.Start,
+) {
+  // onClick
+}
+```
+
+Example of a button with custom icon and text:
+
+```Kotlin
+import net.skyscanner.backpack.compose.button.BpkButton
+import androidx.compose.ui.res.painterResource
+
+BpkButton(
+  text = stringResource(R.string.my_button_text),
+  icon = painterResource(id = R.drwable.custom_icon),
 ) {
   // onClick
 }

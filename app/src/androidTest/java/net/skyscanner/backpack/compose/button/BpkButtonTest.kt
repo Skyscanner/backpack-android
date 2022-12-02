@@ -26,12 +26,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.LongArrowRight
+import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.rowBackground
 import org.junit.Assume.assumeTrue
 import org.junit.Test
@@ -44,6 +46,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   private val type: BpkButtonType = flavour.first
   private val size: BpkButtonSize = flavour.second
   private val icon = BpkIcon.LongArrowRight
+  private val iconDrawableRes = R.drawable.button_sample_icon
 
   @Test
   fun text() {
@@ -96,7 +99,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     // icon is bigger on large size, so we need to test this
 
     capture {
-      BpkButton("Button", icon, BpkButtonIconPosition.Start, type = type, size = size, onClick = {})
+      BpkButton("Button", icon, BpkButtonIconPosition.End, type = type, size = size, onClick = {})
     }
   }
 
@@ -108,6 +111,42 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
 
     capture {
       BpkButton(icon, "contentDescription", type = type, size = size, onClick = {})
+    }
+  }
+
+  @Test
+  fun drawableAtStart() {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
+    assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
+    // icon is bigger on large size, so we need to test this
+
+    capture {
+      BpkButton(
+        text = "Button",
+        icon = painterResource(id = iconDrawableRes),
+        position = BpkButtonIconPosition.Start,
+        type = type,
+        size = size,
+        onClick = {}
+      )
+    }
+  }
+
+  @Test
+  fun drawableAtEnd() {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl) // this just tests layout, so RTL is required
+    assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
+    // icon is bigger on large size, so we need to test this
+
+    capture {
+      BpkButton(
+        text = "Button",
+        icon = painterResource(id = iconDrawableRes),
+        position = BpkButtonIconPosition.End,
+        type = type,
+        size = size,
+        onClick = {}
+      )
     }
   }
 

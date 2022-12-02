@@ -26,6 +26,7 @@ import net.skyscanner.backpack.demo.compose.BodyStyleStory
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import net.skyscanner.backpack.demo.compose.BpkFabStory
 import net.skyscanner.backpack.demo.compose.BpkSliderStory
+import net.skyscanner.backpack.demo.compose.ButtonDrawableIconStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CalendarStory
@@ -196,7 +197,8 @@ object ComponentRegistry {
           mapOf(
             "Default" composeStory { ButtonsStory(BpkButtonSize.Default) },
             "Large" composeStory { ButtonsStory(BpkButtonSize.Large) },
-            "Link" composeStory { ButtonLinkStory() }
+            "Link" composeStory { ButtonLinkStory() },
+            "Drawable Icon" composeStory { ButtonDrawableIconStory() }
           )
         ),
       )

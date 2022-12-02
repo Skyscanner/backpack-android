@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.button.internal
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +26,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -39,10 +41,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.spinner.BpkSpinner
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -125,6 +129,21 @@ internal fun ButtonText(text: String, modifier: Modifier = Modifier) {
   )
 }
 
+@Composable
+internal fun ButtonDrawable(
+  icon: Painter,
+  contentDescription: String?,
+  size: BpkButtonSize,
+  modifier: Modifier = Modifier,
+) {
+  size.iconSize
+  Image(
+    painter = icon,
+    contentDescription = contentDescription,
+    modifier = modifier.defaultIconSize(size.iconSize)
+  )
+}
+
 private class ButtonRippleTheme(
   private val color: Color = Color.Black,
 ) : RippleTheme {
@@ -141,3 +160,9 @@ private class ButtonRippleTheme(
 }
 
 private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
+
+private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
+  when (size) {
+    BpkIconSize.Small -> requiredSize(BpkSpacing.Base, BpkSpacing.Base)
+    BpkIconSize.Large -> requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
+  }
