@@ -19,15 +19,50 @@
 package net.skyscanner.backpack.bottomsheet
 
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import net.skyscanner.backpack.R
 
-class BpkBottomSheetBehaviour<V : View> : BottomSheetBehavior<V> {
+class BpkBottomSheetBehaviour<V : View>(context: Context, attrs: AttributeSet? = null) :
+  BottomSheetBehavior<V>(context, attrs) {
 
-  @Suppress("unused")
-  constructor() : super()
+  private val maxRadius: Float
+  private val background: LayerDrawable
 
-  @Suppress("unused")
-  constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+  init {
+    maxRadius = context.resources.getDimension(R.dimen.bpkBorderRadiusLg)
+    background =
+      ResourcesCompat.getDrawable(context.resources, R.drawable.bpk_bottom_sheet_background, null) as LayerDrawable
+
+    addBottomSheetCallback(object : BottomSheetCallback() {
+      override fun onStateChanged(bottomSheet: View, newState: Int) {
+        bottomSheet.background = background
+        (bottomSheet as? ViewGroup)?.apply {
+          clipToPadding = false
+          clipChildren = false
+        }
+        when (newState) {
+          STATE_COLLAPSED -> updateBackground(0f)
+          STATE_EXPANDED -> updateBackground(1f)
+          else -> {}
+        }
+      }
+
+      override fun onSlide(bottomSheet: View, slideOffset: Float) {
+        updateBackground(slideOffset)
+      }
+    })
+  }
+
+  private fun updateBackground(slideOffset: Float) {
+    val radius = maxRadius * (1 - slideOffset)
+    val radii = floatArrayOf(radius, radius, radius, radius, 0f, 0f, 0f, 0f)
+    (background.findDrawableByLayerId(R.id.bottomSheetSurface) as GradientDrawable).cornerRadii = radii
+    background.findDrawableByLayerId(R.id.bottomSheetHandle).alpha = ((1 - slideOffset) * 255).toInt()
+  }
 }

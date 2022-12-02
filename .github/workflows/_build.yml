@@ -11,7 +11,7 @@ defaults:
 env:
   flavour: oss
   config: debug
-  api-level: 24
+  api-level: 26
 
 jobs:
 
@@ -46,12 +46,10 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          cache: gradle
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
-
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
 
       - name: Build
         run: |
@@ -86,9 +84,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
+          cache: gradle
 
       - name: AVD cache
         uses: actions/cache@v3
@@ -103,7 +99,6 @@ jobs:
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -115,7 +110,6 @@ jobs:
       - name: Android Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -124,11 +118,27 @@ jobs:
           disable-animations: true
           script: ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest
 
+  CheckCommitMessage:
+    name: Check commit message
+    runs-on: ubuntu-latest
+    outputs:
+      head-commit-message: ${{ steps.get_head_commit_message.outputs.headCommitMsg }}
+    steps:
+      - name: Get repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Print head git commit message
+        id: get_head_commit_message
+        run: echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
+
   Screenshots:
     name: Screenshots tests
     runs-on: macos-latest
+    needs: CheckCommitMessage
     permissions:
       pull-requests: write
+      contents: write
     timeout-minutes: 30
 
     strategy:
@@ -150,14 +160,16 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          cache: gradle
 
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-
-      - name: Gradle cache
-        uses: gradle/gradle-build-action@v2
+          cache: 'pip'
+          cache-dependency-path: 'snapshot-requirements.txt'
+      - name: Install Python dependencies
+        run: pip3 install -r snapshot-requirements.txt
 
       - name: AVD cache
         uses: actions/cache@v3
@@ -172,7 +184,6 @@ jobs:
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -185,7 +196,6 @@ jobs:
         id: screenshotTests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          target: google_apis
           profile: Nexus 4
           sdcard-path-or-size: 512M
           api-level: ${{ env.api-level }}
@@ -193,11 +203,17 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            sudo pip3 install Pillow==9.0.1
+            touch logcat.log
+            chmod 777 logcat.log
+            adb logcat > logcat.log &
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
 
-            changedFiles=`git diff --name-only` && echo "::set-output name=CHANGED_FILES::${changedFiles//$'\n'/'%0A'}"
-            ./scripts/check-no-changes.sh
+            changedFiles=`git diff --name-only` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
+
+      - name: Check snapshot changes
+        id: checkSnapshotChanges
+        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message != 'Record snapshots' }}
+        run: ./scripts/check-no-changes.sh
 
       - name: Upload Screenshot Tests Artifact
         if: ${{ failure() }}
@@ -207,17 +223,42 @@ jobs:
           path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
           retention-days: 5
 
-      - name: Notify PR of screenshots failure
+      - name: Upload Logcat Logs
         if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-logcat-output
+          path: logcat.log
+          retention-days: 5
+
+      - name: Notify PR of screenshots changes
+        if: ${{ (failure() || needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots') && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
         uses: actions/github-script@v6
         with:
           script: |
+            var body;
+            if ("${{ needs.CheckCommitMessage.outputs.head-commit-message }}" != "Record snapshots") {
+              body = `### '${{ matrix.variant }}' files were changed.\nIf these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.\n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
+            } else {
+              body = `### '${{ matrix.variant }}' snapshots were updated. Please verify the changes match the expected layout. \n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
+            }
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `### '${{ matrix.variant }}' files were changed.
-              If these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes.
-
-              >'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`
+              body: body
             })
+
+      - name: Commit changes
+        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}
+          git fetch origin $GITHUB_HEAD_REF
+          git checkout $GITHUB_HEAD_REF
+          git add app/screenshots/*
+          git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
+          git push

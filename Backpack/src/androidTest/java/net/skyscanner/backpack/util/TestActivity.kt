@@ -18,14 +18,9 @@
 
 package net.skyscanner.backpack.util
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 /**
  * Activity only used for test purposes
  */
-internal class TestActivity : AppCompatActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-  }
-}
+class TestActivity : AppCompatActivity()

@@ -25,6 +25,7 @@ import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import net.skyscanner.backpack.demo.compose.BpkFabStory
+import net.skyscanner.backpack.demo.compose.BpkSliderStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CalendarStory
@@ -73,7 +74,6 @@ import net.skyscanner.backpack.demo.stories.LabeledCalendarStory
 import net.skyscanner.backpack.demo.stories.LoadingButtonStory
 import net.skyscanner.backpack.demo.stories.MapStory
 import net.skyscanner.backpack.demo.stories.NavBarStory
-import net.skyscanner.backpack.demo.stories.SliderStory
 import net.skyscanner.backpack.demo.stories.SnackbarStory
 import net.skyscanner.backpack.demo.stories.SpacingStory
 import net.skyscanner.backpack.demo.stories.Story
@@ -412,7 +412,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { SkeletonStory() },
       )
     ),
-    "Slider" story NodeData { SliderStory of R.layout.fragment_slider },
+    "Slider" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_slider },
+        TAB_TITLE_COMPOSE composeStory { BpkSliderStory() },
+      )
+    ),
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Sneak peek" story NodeData(
       { children -> TabStory of children },

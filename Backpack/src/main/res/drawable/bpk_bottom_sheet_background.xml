@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:id="@+id/bottomSheetSurface">
+    <shape>
+      <solid android:color="@color/bpkSurfaceElevated" />
+      <corners
+        android:topLeftRadius="@dimen/bpkBorderRadiusLg"
+        android:topRightRadius="@dimen/bpkBorderRadiusLg" />
+      <padding android:top="@dimen/bpkSpacingLg" />
+    </shape>
+  </item>
+  <item
+    android:gravity="center_horizontal|top"  android:id="@+id/bottomSheetHandle">
+    <shape>
+      <solid android:color="@color/bpkLine" />
+      <corners android:radius="@dimen/bpkBorderRadiusSm" />
+      <size
+        android:width="35dp"
+        android:height="2dp" />
+      <padding android:top="12dp" />
+    </shape>
+  </item>
+</layer-list>
+

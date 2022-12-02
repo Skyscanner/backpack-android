@@ -18,6 +18,7 @@ jobs:
     permissions:
       statuses: write
       pull-requests: write
+      contents: write
     uses: ./.github/workflows/_build.yml
 
   Deploy:
@@ -57,7 +58,7 @@ jobs:
 
       - name: Build Dokka docs
         run: ./gradlew dokkaHtmlMultiModule
-        
+
       - name: Publish artifacts
         run: >
           ./gradlew checkMavenCredentials
