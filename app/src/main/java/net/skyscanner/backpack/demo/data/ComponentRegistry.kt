@@ -87,6 +87,7 @@ import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
 import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
+import net.skyscanner.backpack.demo.stories.RadiiStory
 
 interface RegistryItem {
   val name: String
@@ -519,7 +520,7 @@ object ComponentRegistry {
     "Radii" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_radii },
+        TAB_TITLE_VIEW story NodeData { RadiiStory() },
         TAB_TITLE_COMPOSE composeStory { RadiiComposeStory() },
       )
     ),

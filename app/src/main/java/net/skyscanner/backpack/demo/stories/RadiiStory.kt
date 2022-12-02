@@ -19,17 +19,20 @@
 package net.skyscanner.backpack.demo.stories
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ShapeDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import net.skyscanner.backpack.card.BpkCardView
+import android.view.ViewGroup.MarginLayoutParams
+import android.widget.TextView
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
 import java.lang.reflect.Field
 
-class ElevationStory : Story() {
+class RadiiStory : Story() {
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -43,28 +46,36 @@ class ElevationStory : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val elevationResources = arrayListOf<Field>()
+    val radiiResources = arrayListOf<Field>()
 
     R.dimen::class.java.fields.forEach {
-      if (it.name.startsWith("bpkElevation")) {
-        elevationResources.add(it)
+      if (it.name.startsWith("bpkBorderRadius")) {
+        radiiResources.add(it)
       }
     }
 
-    elevationResources.sortBy { resources.getDimension(it.getInt(null)) }
+    radiiResources.sortBy { resources.getDimension(it.getInt(null)) }
 
-    elevationResources.forEach {
-      val card: BpkCardView = BpkCardView(requireContext()).apply {
-        elevation = resources.getDimension(it.getInt(null))
-        useCompatPadding = true
-      }
+    val params = MarginLayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+      topMargin = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+      bottomMargin = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+    }
+
+    radiiResources.forEach {
       val text: BpkText = BpkText(requireContext()).apply {
         textStyle = BpkText.TextStyle.BodyLongform
         text = it.name + " = " + resources.getString(it.getInt(null))
+        setTextColor(context.getColor(R.color.bpkTextOnDark))
+        textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+        background = GradientDrawable().apply {
+          color = context.getColorStateList(R.color.bpkCorePrimary)
+          cornerRadius = resources.getDimension(it.getInt(null))
+        }
+        val padding = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+        setPaddingRelative(padding, padding, padding, padding)
       }
-      text.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
-      card.addView(text)
-      view.findViewById<ViewGroup>(R.id.layout_story_container).addView(card)
+
+      view.findViewById<ViewGroup>(R.id.layout_story_container).addView(text, params)
     }
   }
 }
