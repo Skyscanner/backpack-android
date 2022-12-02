@@ -39,7 +39,7 @@
   <net.skyscanner.backpack.text.BpkText
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="star_rating_5_5"
+    android:text="@string/star_rating_5_5"
     app:textStyle="footnote" />
 
   <net.skyscanner.backpack.starrating.BpkStarRating
