@@ -75,6 +75,7 @@ import net.skyscanner.backpack.demo.stories.LabeledCalendarStory
 import net.skyscanner.backpack.demo.stories.LoadingButtonStory
 import net.skyscanner.backpack.demo.stories.MapStory
 import net.skyscanner.backpack.demo.stories.NavBarStory
+import net.skyscanner.backpack.demo.stories.RadiiStory
 import net.skyscanner.backpack.demo.stories.SnackbarStory
 import net.skyscanner.backpack.demo.stories.SpacingStory
 import net.skyscanner.backpack.demo.stories.Story
@@ -521,7 +522,7 @@ object ComponentRegistry {
     "Radii" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_radii },
+        TAB_TITLE_VIEW story NodeData { RadiiStory() },
         TAB_TITLE_COMPOSE composeStory { RadiiComposeStory() },
       )
     ),
