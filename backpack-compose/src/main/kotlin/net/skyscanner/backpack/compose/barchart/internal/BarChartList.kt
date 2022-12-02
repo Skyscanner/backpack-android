@@ -69,6 +69,7 @@ internal fun BarChartList(
         BarChartColumn(
           modifier = Modifier.requiredSize(ItemWidth, ItemHeight),
           model = item,
+          legend = model.legend,
           selected = item == selected,
           onSelected = onSelected,
           onSelectedAndPositioned = { bar ->

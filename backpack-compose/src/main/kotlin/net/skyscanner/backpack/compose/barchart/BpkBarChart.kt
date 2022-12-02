@@ -65,11 +65,9 @@ fun BpkBarChart(
         )
       }
 
-      model.legend?.let { legend ->
-        BarChartLegend(
-          legend = legend,
-        )
-      }
+      BarChartLegend(
+        legend = model.legend,
+      )
 
     }
 

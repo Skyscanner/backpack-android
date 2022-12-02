@@ -25,14 +25,14 @@ import androidx.compose.runtime.Stable
 /**
  * Represents the view model used to provide data to the bar chart.
  * @param caption a chart caption.
+ * @param legend chart's legend.
  * @param items list of bar items to render.
- * @param legend an optional legend.
  */
 @Immutable
 data class BpkBarChartModel(
   val caption: String,
+  val legend: Legend,
   val items: List<Item>,
-  val legend: Legend? = null,
 ) {
 
   /**
@@ -63,10 +63,12 @@ data class BpkBarChartModel(
    * Represents a set of values of a single bar in chart
    * @param text text to be shown in the popup when the item is selected
    * @param percent the value of the bar itself, should be a range between 0.0f and 1.0f. If it exceeds, it'll be clamped
+   * @param accessibilityLabel the label to be used for screen readers to read the values (e.g. "The price is £100")
    */
   data class Values(
     val text: String,
     @FloatRange(from = 0.0, to = 1.0) val percent: Float,
+    val accessibilityLabel: String,
   )
 
   /**
