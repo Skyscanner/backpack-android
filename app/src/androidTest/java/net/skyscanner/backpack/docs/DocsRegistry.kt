@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.docs
 
+import android.icu.text.NumberFormat
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.ComposeTestRule
@@ -46,7 +47,7 @@ object DocsRegistry {
     ViewScreenshot("Badge - View", "all"),
     ComposeScreenshot("Badge - Compose", "default"),
     ViewScreenshot("Bar Chart - View", "default"),
-    ComposeScreenshot("Bar Chart - Compose", "default"),
+    ComposeScreenshot("Bar Chart - Compose", "default", ::setupBarChart),
     ViewScreenshot("Bottom Nav", "default"),
     ViewScreenshot("Bottom Sheet - View", "default"),
     ComposeScreenshot("Bottom Sheet - Compose", "default"),
@@ -225,6 +226,13 @@ private fun setupWholeMonthCalendar(rule: AndroidComposeTestRule<*, *>) {
     .onAllNodesWithText("Select whole month")
     .onFirst()
     .performClick()
+    .assertIsDisplayed()
+}
+
+private fun setupBarChart(rule: AndroidComposeTestRule<*, *>) {
+  rule
+    .onAllNodesWithText(NumberFormat.getCurrencyInstance().currency.symbol, substring = true)
+    .onFirst()
     .assertIsDisplayed()
 }
 
