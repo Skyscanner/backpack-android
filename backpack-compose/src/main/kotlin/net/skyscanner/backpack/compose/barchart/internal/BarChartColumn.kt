@@ -32,10 +32,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.text.BpkText
@@ -46,6 +50,7 @@ import net.skyscanner.backpack.compose.utils.inset
 import kotlin.math.max
 import kotlin.math.roundToInt
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BarChartColumn(
   model: BpkBarChartModel.Item,
@@ -57,7 +62,9 @@ internal fun BarChartColumn(
 
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
-    modifier = modifier.selectable(
+    modifier = modifier
+      .semantics { contentDescription = model.accessibilityLabel }
+      .selectable(
       selected = selected,
       enabled = model.values != null,
       indication = null,
@@ -105,6 +112,7 @@ internal fun BarChartColumn(
       maxLines = 1,
       overflow = TextOverflow.Ellipsis,
       color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textPrimary).value,
+      modifier = Modifier.semantics { invisibleToUser() },
     )
 
     BpkText(
@@ -113,6 +121,7 @@ internal fun BarChartColumn(
       maxLines = 1,
       overflow = TextOverflow.Ellipsis,
       color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textSecondary).value,
+      modifier = Modifier.semantics { invisibleToUser() },
     )
   }
 }

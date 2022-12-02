@@ -145,9 +145,10 @@ class BpkBarchartTests : BpkSnapshotTest() {
     month: Month,
     value: Float? = 0.5f,
   ): List<BpkBarChartModel.Item> =
-    BpkBarChartData.createMonth(month) { date ->
+    BpkBarChartData.createMonth(month, testContext.resources) { date ->
       BpkBarChartData.createBar(
         date = date,
+        resources = testContext.resources,
         values = value?.let {
           BpkBarChartModel.Values(
             percent = it,

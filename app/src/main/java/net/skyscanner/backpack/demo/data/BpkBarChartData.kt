@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.data
 
 import android.content.Context
+import android.content.res.Resources
 import android.icu.text.NumberFormat
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
@@ -27,7 +28,6 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.YearMonth
 import org.threeten.bp.format.TextStyle
-import java.util.Locale
 import java.util.Random
 
 object BpkBarChartData {
@@ -46,7 +46,7 @@ object BpkBarChartData {
     return BpkBarChartModel(
       caption = context.getString(R.string.generic_departures),
       items = Month.values().flatMap { month ->
-        createMonth(month) { date ->
+        createMonth(month, context.resources) { date ->
           val values = random.nextFloat().let {
             BpkBarChartModel.Values(
               text = formatter.format(it * 100),
@@ -55,7 +55,7 @@ object BpkBarChartData {
           }
           createBar(
             date = date,
-            locale = locale,
+            resources = context.resources,
             values = values.takeIf { random.nextInt(5) != 0 },
           )
         }
@@ -70,7 +70,8 @@ object BpkBarChartData {
 
   fun createMonth(
     month: Month,
-    create: (LocalDate) -> BpkBarChartModel.Item = { createBar(it) },
+    resources: Resources,
+    create: (LocalDate) -> BpkBarChartModel.Item = { createBar(it, resources) },
   ): List<BpkBarChartModel.Item> =
     YearMonth.of(year, month)
       .let { LocalDate.of(it.year, it.month, 1)..LocalDate.of(it.year, it.month, it.lengthOfMonth()) }
@@ -79,14 +80,24 @@ object BpkBarChartData {
 
   fun createBar(
     date: LocalDate,
-    locale: Locale = Locale.getDefault(),
+    resources: Resources,
     values: BpkBarChartModel.Values? = null,
-  ): BpkBarChartModel.Item =
-    BpkBarChartModel.Item(
+  ): BpkBarChartModel.Item {
+    val locale = resources.configuration.locales.get(0)
+    val dayOfMonth = date.dayOfMonth.toString()
+    val dayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.SHORT, locale)
+    val fullDayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.FULL, locale)
+    return BpkBarChartModel.Item(
       key = date,
-      title = date.dayOfWeek.getDisplayName(TextStyle.SHORT, locale),
-      subtitle = date.dayOfMonth.toString(),
+      title = dayOfWeek,
+      subtitle = dayOfMonth,
       group = date.month.getDisplayName(TextStyle.FULL, locale),
       values = values,
+      accessibilityLabel = if (values != null) {
+        resources.getString(R.string.bar_chart_accessibility_label, fullDayOfWeek, dayOfMonth, values.text)
+      } else {
+        resources.getString(R.string.bar_chart_accessibility_label_price_is_unknown, fullDayOfWeek, dayOfMonth)
+      },
     )
+  }
 }

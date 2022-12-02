@@ -226,4 +226,6 @@
   <string name="slider_range">Range</string>
   <string name="slider_standard">Standard</string>
   <string name="slider_stepped">Stepped</string>
+  <string name="bar_chart_accessibility_label">%1$s the %2$s price is %3$s</string>
+  <string name="bar_chart_accessibility_label_price_is_unknown">%1$s the %2$s price is unknown</string>
 </resources>

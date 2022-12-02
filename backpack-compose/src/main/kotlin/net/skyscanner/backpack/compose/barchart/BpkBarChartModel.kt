@@ -41,6 +41,7 @@ data class BpkBarChartModel(
    * @param title a primary text placed just below the bar itself.
    * @param subtitle a secondary text placed just below the title.
    * @param group name of the group in which the item exists. The name is rendered above the bars and updated as the chart scrolls horizontally.
+   * @param accessibilityLabel the label to be used for screen readers to read the values (e.g. "Monday 7, price is £100")
    * @param values the values  of the bar itself. If null, the item becomes inactive.
    */
   @Immutable
@@ -49,6 +50,7 @@ data class BpkBarChartModel(
     val title: String,
     val subtitle: String,
     val group: String,
+    val accessibilityLabel: String,
     val values: Values? = null,
   ) {
 

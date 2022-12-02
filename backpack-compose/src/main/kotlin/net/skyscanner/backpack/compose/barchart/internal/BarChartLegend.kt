@@ -22,19 +22,23 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BarChartLegend(
   legend: BpkBarChartModel.Legend,
   modifier: Modifier = Modifier,
 ) {
   Row(
-    modifier = modifier,
+    modifier = modifier.semantics { invisibleToUser() },
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
   ) {
