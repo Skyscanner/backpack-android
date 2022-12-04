@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.data
 import android.content.Context
 import android.content.res.Resources
 import android.icu.text.NumberFormat
+import androidx.compose.ui.text.buildAnnotatedString
 import net.skyscanner.backpack.calendar2.extension.toIterable
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import net.skyscanner.backpack.demo.R
@@ -32,7 +33,7 @@ import java.util.Random
 
 object BpkBarChartData {
 
-  private val random = Random(18735)
+  private val random = Random(42)
   private val year = 2018
 
   fun generateModel(
@@ -93,10 +94,12 @@ object BpkBarChartData {
       subtitle = dayOfMonth,
       group = date.month.getDisplayName(TextStyle.FULL, locale),
       values = values,
-      accessibilityLabel = if (values != null) {
-        resources.getString(R.string.bar_chart_accessibility_label, fullDayOfWeek, dayOfMonth, values.text)
-      } else {
-        resources.getString(R.string.bar_chart_accessibility_label_price_is_unknown, fullDayOfWeek, dayOfMonth)
+      accessibilityLabel = buildAnnotatedString {
+        if (values != null) {
+          resources.getString(R.string.bar_chart_accessibility_label, fullDayOfWeek, dayOfMonth, values.text)
+        } else {
+          resources.getString(R.string.bar_chart_accessibility_label_price_is_unknown, fullDayOfWeek, dayOfMonth)
+        }.let(::append)
       },
     )
   }

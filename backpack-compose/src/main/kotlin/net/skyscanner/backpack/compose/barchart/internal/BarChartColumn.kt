@@ -63,7 +63,7 @@ internal fun BarChartColumn(
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
     modifier = modifier
-      .semantics { contentDescription = model.accessibilityLabel }
+      .semantics { contentDescription = model.accessibilityLabel.toString() }
       .selectable(
       selected = selected,
       enabled = model.values != null,

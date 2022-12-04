@@ -21,6 +21,7 @@ package net.skyscanner.backpack.compose.barchart
 import androidx.annotation.FloatRange
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.text.AnnotatedString
 
 /**
  * Represents the view model used to provide data to the bar chart.
@@ -50,7 +51,7 @@ data class BpkBarChartModel(
     val title: String,
     val subtitle: String,
     val group: String,
-    val accessibilityLabel: String,
+    val accessibilityLabel: AnnotatedString,
     val values: Values? = null,
   ) {
 
