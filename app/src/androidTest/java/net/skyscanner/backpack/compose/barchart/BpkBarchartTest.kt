@@ -18,9 +18,8 @@
 
 package net.skyscanner.backpack.compose.barchart
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -34,10 +33,10 @@ import org.threeten.bp.Month
 import kotlin.math.roundToInt
 
 @RunWith(AndroidJUnit4::class)
-class BpkBarchartTests : BpkSnapshotTest() {
+class BpkBarchartTest : BpkSnapshotTest() {
 
   @get:Rule
-  val composeTestRule = createAndroidComposeRule<AppCompatActivity>()
+  val composeTestRule = createEmptyComposeRule()
 
   @Before
   fun setup() {
