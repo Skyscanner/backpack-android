@@ -40,7 +40,7 @@ class BpkBarchartTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(400, 400)
+    setDimensions(300, 400)
   }
 
   @Test
