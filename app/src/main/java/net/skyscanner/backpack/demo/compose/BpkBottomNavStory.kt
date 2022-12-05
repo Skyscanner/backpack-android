@@ -33,7 +33,6 @@ import net.skyscanner.backpack.compose.bottomnav.TabItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.AccountCircle
 import net.skyscanner.backpack.compose.tokens.Explore
-import net.skyscanner.backpack.compose.tokens.Hotels
 import net.skyscanner.backpack.compose.tokens.Trips
 
 @Composable
@@ -52,10 +51,9 @@ fun BpkBottomNavSample(selectedItemId: Int) {
   var selectedItemId1 = selectedItemId
   BpkBottomNav(
     tabItems = listOf(
-      TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.Hotels) }, title = "Home", id = 1),
-      TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.Explore) }, title = "Explore", id = 2),
-      TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.Trips) }, title = "Trips", id = 3),
-      TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.AccountCircle) }, title = "Profile", id = 4),
+      TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.Explore) }, title = "Explore", id = 1),
+      TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.Trips) }, title = "Trips", id = 2),
+      TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.AccountCircle) }, title = "Profile", id = 3),
     ),
     selectedItemId = selectedItemId1,
     onTabClicked = { selectedItemId1 = it },
