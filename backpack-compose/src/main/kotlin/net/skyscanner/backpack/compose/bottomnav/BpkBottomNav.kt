@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
@@ -63,4 +64,6 @@ fun BpkBottomNav(
 }
 
 @Composable
-fun BpkBottomNavIcon(icon: BpkIcon, modifier: Modifier = Modifier) { BpkIcon(modifier = modifier, icon = icon, contentDescription = null) }
+fun BpkBottomNavIcon(icon: BpkIcon, modifier: Modifier = Modifier) {
+  BpkIcon(modifier = modifier, icon = icon, contentDescription = null, size = BpkIconSize.Large)
+}

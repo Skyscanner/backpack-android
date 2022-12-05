@@ -47,9 +47,9 @@ fun BpkBottomNavStory() {
     BpkBottomNav(
       tabItems = listOf(
         TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.Hotels) }, title = "Home", id = 1),
-        TabItem(icon = { BpkIcon(icon = BpkIcon.Explore, contentDescription = null) }, title = "Explore", id = 2),
-        TabItem(icon = { BpkIcon(icon = BpkIcon.Trips, contentDescription = null) }, title = "Trips", id = 3),
-        TabItem(icon = { BpkIcon(icon = BpkIcon.AccountCircle, contentDescription = null) }, title = "Profile", id = 4),
+        TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.Explore) }, title = "Explore", id = 2),
+        TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.Trips) }, title = "Trips", id = 3),
+        TabItem(icon = { BpkBottomNavIcon(icon = BpkIcon.AccountCircle) }, title = "Profile", id = 4),
       ),
       selectedItemId = selectedItemId,
       onTabClicked = { selectedItemId = it },
