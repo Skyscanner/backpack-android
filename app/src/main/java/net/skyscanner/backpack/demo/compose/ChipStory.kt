@@ -23,8 +23,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,10 +33,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkChipType
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.surface.BpkSurface
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
@@ -66,7 +66,7 @@ private fun ChipsColumn(
 
   val forceDarkBackground = style == BpkChipStyle.OnDark && BpkTheme.colors.isLight
 
-  Surface(
+  BpkSurface(
     modifier = modifier,
     color = if (forceDarkBackground) BpkTheme.colors.textOnLight else Color.Transparent,
     contentColor = if (forceDarkBackground) BpkColor.White else LocalContentColor.current,

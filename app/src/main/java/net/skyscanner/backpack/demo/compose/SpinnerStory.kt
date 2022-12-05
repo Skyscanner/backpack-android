@@ -24,16 +24,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.spinner.BpkSpinner
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerStyle
+import net.skyscanner.backpack.compose.surface.BpkSurface
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
@@ -58,7 +58,7 @@ private fun SpinnersRow(
 
     BpkText(style.name)
 
-    Surface(
+    BpkSurface(
       color = if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.surfaceContrast else Color.Transparent,
       contentColor = if (style == BpkSpinnerStyle.OnDarkSurface) BpkColor.White else LocalContentColor.current,
     ) {
