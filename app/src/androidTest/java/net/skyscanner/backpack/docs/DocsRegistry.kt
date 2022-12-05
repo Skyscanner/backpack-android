@@ -57,6 +57,7 @@ object DocsRegistry {
     ComposeScreenshot("Button - Compose - Default", "default"),
     ComposeScreenshot("Button - Compose - Large", "large"),
     ComposeScreenshot("Button - Compose - Link", "link"),
+    ComposeScreenshot("Button - Compose - Drawable Icon", "drawable-icon"),
     ViewScreenshot("Calendar - Default", "range") { setupCalendar() },
     ViewScreenshot("Calendar - Colored", "colored") { setupCalendar() },
     ViewScreenshot("Calendar - Labeled", "labeled") { setupCalendar() },

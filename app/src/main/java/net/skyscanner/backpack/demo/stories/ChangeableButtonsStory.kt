@@ -31,7 +31,7 @@ class ChangeableButtonsStory : Story() {
 
     view.findViewById<TextView>(R.id.button_increase).setOnClickListener {
       it as TextView
-      it.text = it.text.toString() + " increased"
+      it.text = getString(R.string.button_increased, it.text.toString())
     }
 
     view.findViewById<TextView>(R.id.button_decrease).setOnClickListener {
