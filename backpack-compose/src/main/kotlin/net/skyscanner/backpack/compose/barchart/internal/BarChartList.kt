@@ -30,6 +30,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
@@ -38,6 +39,7 @@ import androidx.compose.ui.geometry.isSpecified
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -86,6 +88,8 @@ internal fun BarChartList(
         state = state,
         selected = selected,
         anchor = badgeAnchor,
+        // we align badge by absolute coordinates, so no auto-RTL is needed
+        modifier = Modifier.align { size, space, _ -> Alignment.TopStart.align(size, space, LayoutDirection.Ltr) },
       )
     }
   }

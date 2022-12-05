@@ -21,7 +21,6 @@ package net.skyscanner.backpack.compose.barchart
 import androidx.annotation.FloatRange
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.text.AnnotatedString
 
 /**
  * Represents the view model used to provide data to the bar chart.
@@ -42,7 +41,8 @@ data class BpkBarChartModel(
    * @param title a primary text placed just below the bar itself.
    * @param subtitle a secondary text placed just below the title.
    * @param group name of the group in which the item exists. The name is rendered above the bars and updated as the chart scrolls horizontally.
-   * @param accessibilityLabel the label to be used for screen readers to read the values (e.g. "Monday 7, price is £100")
+   * @param contentDescription the content description to be used for screen readers to read the values (e.g. "Monday 7, price is £100")
+   * It must include all important information, such as title, subtitle, text value and group – there's no information re-used by default.
    * @param values the values  of the bar itself. If null, the item becomes inactive.
    */
   @Immutable
@@ -51,7 +51,7 @@ data class BpkBarChartModel(
     val title: String,
     val subtitle: String,
     val group: String,
-    val accessibilityLabel: AnnotatedString,
+    val contentDescription: String,
     val values: Values? = null,
   ) {
 

@@ -63,14 +63,14 @@ internal fun BarChartColumn(
   Column(
     horizontalAlignment = Alignment.CenterHorizontally,
     modifier = modifier
-      .semantics { contentDescription = model.accessibilityLabel.toString() }
+      .semantics { contentDescription = model.contentDescription }
       .selectable(
-      selected = selected,
-      enabled = model.values != null,
-      indication = null,
-      interactionSource = remember { MutableInteractionSource() },
-      onClick = { onSelected(model) },
-    ),
+        selected = selected,
+        enabled = model.values != null,
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() },
+        onClick = { onSelected(model) },
+      ),
   ) {
 
     Spacer(

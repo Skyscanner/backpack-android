@@ -42,7 +42,6 @@ available [here](https://backpack.github.io/android/Backpack/net.skyscanner.back
 Here's an example which generates a model for one single month in Kotlin:
 
 ```kotlin
-import androidx.compose.ui.text.buildAnnotatedString
 import net.skyscanner.backpack.compose.barchart.BpkBarChartModel
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
@@ -69,11 +68,10 @@ fun createBarChartModel(locale: Locale, yearMonth: YearMonth) =
           text = "£42", // text to be displayed when selected,
           percent = 0.5f, // fill bar by 50%
         ),
-        accessibilityLabel = buildAnnotatedString {
-          // provide accessibility information here to be used with screen readers
-          // make sure it's formatted properly – the example below is for general concept purposes
-          append("${date.dayOfMonth}, price is $42")
-        },
+        // provides accessibility information here to be used with screen readers
+        // make sure it's formatted properly and includes all the relevant information needed (title, subtitle, text value, group)
+        // the example below is just for general purposes
+        accessibilityLabel = "${date.dayOfMonth} of ${date.month.getDisplayName(TextStyle.FULL, locale)}, the price is $42",
       )
     }
   )
