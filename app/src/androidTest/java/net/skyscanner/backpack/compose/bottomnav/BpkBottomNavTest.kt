@@ -36,6 +36,6 @@ class BpkBottomNavTest : BpkSnapshotTest() {
 
   @Test
   fun default() = composed {
-    BpkBottomNavSample(selectedItemId = 1)
+    BpkBottomNavSample()
   }
 }
