@@ -29,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNav
 import net.skyscanner.backpack.compose.bottomnav.TabIcon
 import net.skyscanner.backpack.compose.bottomnav.TabItem
@@ -52,9 +53,13 @@ fun BpkBottomNavSample(defaultItemId: Int = 1) {
   var selectedItemId by remember { mutableStateOf(defaultItemId) }
   BpkBottomNav(
     tabItems = listOf(
-      TabItem(icon = TabIcon.Custom(painter = painterResource(id = R.drawable.bpk_explore)), title = "Explore", id = 1),
-      TabItem(icon = TabIcon.Bpk(icon = BpkIcon.Trips), title = "Trips", id = 2),
-      TabItem(icon = TabIcon.Bpk(icon = BpkIcon.AccountCircle), title = "Profile", id = 3),
+      TabItem(
+        icon = TabIcon.Custom(painter = painterResource(id = R.drawable.sample_icon)),
+        title = stringResource(R.string.bottom_nav_explore),
+        id = 1
+      ),
+      TabItem(icon = TabIcon.Bpk(icon = BpkIcon.Trips), title = stringResource(R.string.bottom_nav_trips), id = 2),
+      TabItem(icon = TabIcon.Bpk(icon = BpkIcon.AccountCircle), title = stringResource(R.string.navigation_account), id = 3),
     ),
     selectedItemId = selectedItemId,
     onTabClicked = { selectedItemId = it },
