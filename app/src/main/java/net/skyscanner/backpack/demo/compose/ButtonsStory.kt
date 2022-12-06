@@ -243,7 +243,7 @@ private fun DrawableButtonsRow(
     LoadingScope {
       BpkButton(
         text = stringResource(R.string.button),
-        icon = painterResource(id = R.drawable.button_sample_icon),
+        icon = painterResource(id = R.drawable.sample_icon),
         position = BpkButtonIconPosition.Start,
         size = size,
         type = type,
@@ -256,7 +256,7 @@ private fun DrawableButtonsRow(
     LoadingScope {
       BpkButton(
         text = stringResource(R.string.button),
-        icon = painterResource(id = R.drawable.button_sample_icon),
+        icon = painterResource(id = R.drawable.sample_icon),
         position = BpkButtonIconPosition.End,
         size = size,
         type = type,
@@ -268,7 +268,7 @@ private fun DrawableButtonsRow(
 
     LoadingScope {
       BpkButton(
-        icon = painterResource(id = R.drawable.button_sample_icon),
+        icon = painterResource(id = R.drawable.sample_icon),
         contentDescription = stringResource(R.string.button),
         size = size,
         type = type,
