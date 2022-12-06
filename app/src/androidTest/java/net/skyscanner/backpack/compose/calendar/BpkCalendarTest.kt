@@ -20,50 +20,20 @@
 
 package net.skyscanner.backpack.compose.calendar
 
-import android.view.View
-import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.ViewRootForTest
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.test.SemanticsNodeInteraction
-import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.ComposeTestRule
-import androidx.compose.ui.test.junit4.createEmptyComposeRule
-import androidx.compose.ui.test.onAllNodesWithText
-import androidx.compose.ui.test.onFirst
-import androidx.compose.ui.test.onLast
-import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollToIndex
-import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import net.skyscanner.backpack.BpkSnapshotTest
-import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
 import net.skyscanner.backpack.calendar2.CalendarParams
-import net.skyscanner.backpack.compose.calendar.internal.CALENDAR_GRID_TEST_TAG
-import net.skyscanner.backpack.demo.compose.BackpackPreview
-import net.skyscanner.backpack.util.InternalBackpackApi
-import org.junit.Assume
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-@OptIn(InternalBackpackApi::class)
 @RunWith(AndroidJUnit4::class)
 class BpkCalendarTest : BpkSnapshotTest() {
-
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
-
-  @get:Rule
-  val composeTestRule = createEmptyComposeRule()
 
   @Before
   fun setup() {
@@ -118,73 +88,14 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun withStartDateSelected() {
-    val controller = createController(BpkCalendarTestCases.Params.WithStartDateSelected)
-
-    snap(controller) {
-      it.onAllNodesWithText("17")
-        .onFirst()
-        .performClick()
-        .assertIsDisplayed()
-    }
-  }
-
-  @Test
-  fun withSameStartAndEndDateSelected() {
-    val controller = createController(BpkCalendarTestCases.Params.WithSameStartAndEndDateSelected)
-
-    snap(controller) {
-
-      it.onAllNodesWithText("17")
-        .onFirst()
-        .performClick()
-        .assertIsDisplayed()
-
-      it.onAllNodesWithText("17")
-        .onFirst()
-        .performClick()
-        .assertIsDisplayed()
-    }
-  }
-
-  @Test
-  fun withStartAndEndDateSelected() {
-    val controller = createController(BpkCalendarTestCases.Params.WithStartAndEndDateSelected)
-    selectStartEnd(controller)
-  }
-
-  @Test
-  fun withSingleDaySelected() {
-    val controller = createController(BpkCalendarTestCases.Params.WithSingleDaySelected)
-
-    snap(controller) {
-
-      it
-        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-        .performScrollToIndex(8)
-        .assertIsDisplayed()
-
-      it.onAllNodesWithText("13")
-        .onLast()
-        .performClick()
-        .assertIsDisplayed()
-
-      it.onAllNodesWithText("14")
-        .onLast()
-        .performClick()
-        .assertIsDisplayed()
-    }
-  }
-
-  @Test
-  fun withRangeSetProgrammatically() {
+  fun withRangeSet() {
     val controller = createController(BpkCalendarTestCases.Params.WithRangeSetProgrammatically)
     controller.setSelection(BpkCalendarTestCases.Selection.WithRangeSetProgrammatically)
     snap(controller)
   }
 
   @Test
-  fun withSingleDaySetProgrammatically() {
+  fun withSingleDaySet() {
     val controller = createController(BpkCalendarTestCases.Params.WithSingleDaySetProgrammatically)
     controller.setSelection(BpkCalendarTestCases.Selection.WithSingleDaySetProgrammatically)
     snap(controller)
@@ -224,63 +135,16 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun withWholeMonthSetProgrammatically() {
+  fun withWholeMonthSet() {
     val controller = createController(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
     controller.setSelection(BpkCalendarTestCases.Selection.WithWholeMonthSetProgrammatically)
     snap(controller)
-  }
-
-  private fun selectStartEnd(controller: BpkCalendarController) {
-    snap(controller) {
-      it
-        .onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-        .performScrollToIndex(8)
-        .assertIsDisplayed()
-
-      it.onAllNodesWithText("17")
-        .onFirst()
-        .performClick()
-        .assertIsDisplayed()
-
-      it.onAllNodesWithText("14")
-        .onLast()
-        .performClick()
-        .assertIsDisplayed()
-    }
   }
 
   private fun snap(controller: BpkCalendarController) =
     composed {
       BpkCalendar(controller = controller)
     }
-
-  private fun snap(controller: BpkCalendarController, content: (ComposeTestRule) -> Unit) {
-
-    // we don't run Compose tests in Themed variant – Compose uses it own theming engine
-    Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
-
-    val asyncScreenshot = prepareForAsyncTest()
-    rule.scenario.onActivity { activity ->
-      activity.setContent {
-        BackpackPreview {
-          BpkCalendar(controller = controller, modifier = Modifier.testTag("CalendarRoot"))
-        }
-      }
-    }
-
-    content(composeTestRule)
-    val view = composeTestRule.onNodeWithTag("CalendarRoot").fetchRootView()
-
-    rule.scenario.onActivity {
-      setupView(view)
-      asyncScreenshot.record(view)
-    }
-  }
-
-  private fun SemanticsNodeInteraction.fetchRootView(): View {
-    val node = fetchSemanticsNode()
-    return (node.root as ViewRootForTest).view
-  }
 
   private fun createController(params: CalendarParams): BpkCalendarController =
     BpkCalendarController(initialParams = params, coroutineScope = TestScope(UnconfinedTestDispatcher()))

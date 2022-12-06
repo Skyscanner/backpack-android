@@ -27,11 +27,11 @@ You may also have to install "Android SDK Command Line Tools" from the SDK tools
 Install system images
 ```
 # x86
-$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;google_apis;x86"
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-26;google_apis;x86"
 $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;x86"
 
 # ARM
-$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-24;google_apis;arm64-v8a"
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-26;google_apis;arm64-v8a"
 $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;arm64-v8a"
 ```
 
@@ -44,6 +44,20 @@ Given that you have a compatible environment as stated above you can now set up 
 +  Open the project in Android Studio
 + If you are a Skyscanner employee, search the internal documentation for _"Guide – Setup Internal Backpack Android Builds"_ and follow the instructions.
 
+## Creating components
+
+To create a new component in Compose you can use the following script to setup the most common required parts of a component.
+
+To run it execute:
+```
+./scripts/generate-component.py
+```
+and follow instructions, or provide arguments directly:
+```
+./scripts/generate-component.py [NameOfComponent] [packagename]
+```
+
+Note: This currently is not supported for creating components using the view system.
 
 ## Testing
 
@@ -58,11 +72,11 @@ Create an AVD using the following command
 
 ```
 # x86
-$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-26;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 
 
 # ARM
-$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-24;google_apis;arm64-v8a" --device "Nexus 4" && cp bpk-droid-local-arm.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-26;google_apis;arm64-v8a" --device "Nexus 4" && cp bpk-droid-local-arm.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 ```
 
 Create an SD card for the snapshot tests
@@ -118,18 +132,31 @@ To test changes use
 
 If the check fails you either need to fix the issue if a change was unintended or record script above instead to update the snapshots.
 
-### Using CI for generating snapshot
+### Running individual test classes
 
-Alternatively, you can use GitHub Actions CI to generate the snapshots.
-"Record snapshots" command in PR comments will trigger the CI and lead to new snapshot commits pushed to your PR.
-Notice that this run must be approved for external contributors.
-Since CI run cannot trigger CI checks again,
-you need to commit something after the snapshots have been generated to trigger the CI check.
-
-If you don't have anything to commit, you can use this to trigger the CI:
+While you're creating your snapshot tests or are debugging an issue it may be helpful to run an individual test class. You can do that with the following command:
 
 ```
-git commit --allow-empty -m "Trigger CI" --no-verify && git push
+./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=default -Pandroid.testInstrumentationRunnerArguments.class=net.skyscanner.backpack.package.YourClassTest
+```
+
+You can replace the `variant` variable with `dm`, `rtl` or `themed` depending on what you're trying to test.
+
+> Note: This will delete any other snapshots, so please run the full snapshot test suite afterwards or use the CI method below.
+
+### Using CI for generating snapshot
+
+Alternatively, you can use GitHub Actions CI to generate the snapshots. Simply add an empty commit with "Record snapshots" as a commit message:
+
+```
+git commit --allow-empty -m "Record snapshots" && git push
+```
+Since CI run cannot trigger CI checks again, you need to commit something after the snapshots have been generated to trigger the CI check.
+
+If you don't have any pending changes, you can use an empty commit again to trigger the CI:
+
+```
+git commit --allow-empty -m "Trigger CI" && git push
 ```
 
 ### Espresso tests

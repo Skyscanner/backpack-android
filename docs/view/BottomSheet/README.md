@@ -45,6 +45,7 @@ Example of a Bottom Sheet in XML
     <!-- Bottom sheet content -->
 
   </net.skyscanner.backpack.bottomsheet.BpkBottomSheet>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 ```
 
 Example of a Bottom Sheet in Kotlin
@@ -63,7 +64,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout.*
 
   val bottomSheet = BpkBottomSheet(context)
   val bottomSheetParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-  val bottomSheetBehaviour = BpkBottomSheetBehaviour<BpkBottomSheet>()
+  val bottomSheetBehaviour = BpkBottomSheetBehaviour<BpkBottomSheet>(context)
   bottomSheetBehaviour.peekHeight = bottomSheet.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl)
   bottomSheetParams.behavior = bottomSheetBehaviour
   bottomSheet.layoutParams = bottomSheetParams

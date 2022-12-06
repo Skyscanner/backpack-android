@@ -27,6 +27,7 @@ import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import net.skyscanner.backpack.demo.compose.BpkBottomNavStory
 import net.skyscanner.backpack.demo.compose.BpkFabStory
 import net.skyscanner.backpack.demo.compose.BpkSliderStory
+import net.skyscanner.backpack.demo.compose.ButtonDrawableIconStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CalendarStory
@@ -75,6 +76,7 @@ import net.skyscanner.backpack.demo.stories.LabeledCalendarStory
 import net.skyscanner.backpack.demo.stories.LoadingButtonStory
 import net.skyscanner.backpack.demo.stories.MapStory
 import net.skyscanner.backpack.demo.stories.NavBarStory
+import net.skyscanner.backpack.demo.stories.RadiiStory
 import net.skyscanner.backpack.demo.stories.SnackbarStory
 import net.skyscanner.backpack.demo.stories.SpacingStory
 import net.skyscanner.backpack.demo.stories.Story
@@ -203,7 +205,8 @@ object ComponentRegistry {
           mapOf(
             "Default" composeStory { ButtonsStory(BpkButtonSize.Default) },
             "Large" composeStory { ButtonsStory(BpkButtonSize.Large) },
-            "Link" composeStory { ButtonLinkStory() }
+            "Link" composeStory { ButtonLinkStory() },
+            "Drawable Icon" composeStory { ButtonDrawableIconStory() }
           )
         ),
       )
@@ -526,7 +529,7 @@ object ComponentRegistry {
     "Radii" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_radii },
+        TAB_TITLE_VIEW story NodeData { RadiiStory() },
         TAB_TITLE_COMPOSE composeStory { RadiiComposeStory() },
       )
     ),

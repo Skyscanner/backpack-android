@@ -36,7 +36,7 @@ class ElevationStory : Story() {
     container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return inflater.inflate(R.layout.fragment_elevation, container, false)
+    return inflater.inflate(R.layout.fragment_story, container, false)
   }
 
   @SuppressLint("SetTextI18n")
@@ -64,7 +64,7 @@ class ElevationStory : Story() {
       }
       text.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
       card.addView(text)
-      view.findViewById<ViewGroup>(R.id.layout_elevation_container).addView(card)
+      view.findViewById<ViewGroup>(R.id.layout_story_container).addView(card)
     }
   }
 }

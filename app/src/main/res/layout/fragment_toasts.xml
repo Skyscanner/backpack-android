@@ -9,14 +9,14 @@
     android:id="@+id/toast_short"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Short Toast"
+    android:text="@string/toast_short"
     android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
   <net.skyscanner.backpack.button.BpkButton
     android:id="@+id/toast_long"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Long Toast"
+    android:text="@string/toast_long"
     android:layout_marginBottom="@dimen/bpkSpacingBase" />
 
 </LinearLayout>

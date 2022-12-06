@@ -24,7 +24,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.rating.internal.RatingAppearance
 import net.skyscanner.backpack.rating.internal.RatingScore
@@ -90,7 +89,6 @@ open class BpkRating private constructor(
   private val badge by unsafeLazy {
     findViewById<BpkText>(R.id.bpk_rating_badge).apply {
       appearance.score.applyTo(this)
-      setTextColor(ContextCompat.getColor(context, R.color.bpkTextOnLight))
       appearance.badgeWidth.let {
         minWidth = it
         maxWidth = it

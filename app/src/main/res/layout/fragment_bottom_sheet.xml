@@ -4,11 +4,6 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bpkSurfaceHighlight" />
-
   <net.skyscanner.backpack.bottomsheet.BpkBottomSheet
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,119 +23,119 @@
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
         <net.skyscanner.backpack.text.BpkText
           style="@style/App.ListItem"
-          android:text="List item" />
+          android:text="@string/generic_item" />
 
       </LinearLayout>
 

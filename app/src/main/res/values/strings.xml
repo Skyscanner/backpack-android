@@ -20,8 +20,11 @@
   <string name="txt_lorem_ipsum">Lorem ipsum</string>
   <string name="txt_lorem_ipsum_link">Lorem ipsum <a href="https://backpack.github.io/">Click me!</a></string>
   <string name="preference_file_key">bpk_preferences</string>
+
   <string name="calendar_colored_switch">Shift colors</string>
   <string name="calendar_disabled_switch">Shift dates</string>
+  <string name="calendar_single">Single</string>
+  <string name="calendar_range">Range</string>
 
   <string name="rating_sample_const_title">Constant Title</string>
   <string name="rating_sample_const_subtitle">Constant Subtitle</string>
@@ -38,8 +41,15 @@
     <item>High Subtitle</item>
   </string-array>
 
+  <string name="star_rating_description">Rating</string>
   <string name="star_rating_accessibility_status">%.0f out of %d</string>
   <string name="star_rating_decimal_accessibility_status">%.1f out of %d</string>
+  <string name="star_rating_0_5">0 out of 5</string>
+  <string name="star_rating_25_5">2.5 out of 5</string>
+  <string name="star_rating_3_5">3 out of 5</string>
+  <string name="star_rating_5_5">5 out of 5</string>
+  <string name="star_rating_2_5_rtl">2 out of 5 RTL</string>
+  <string name="star_rating_5_8">5 out of 8</string>
 
   <string name="bottom_nav_home">Home</string>
   <string name="bottom_nav_explore">Explore</string>
@@ -98,7 +108,11 @@
   <string name="text_hero3">Hero 3</string>
   <string name="text_hero4">Hero 4</string>
   <string name="text_hero5">Hero 5</string>
+
   <string name="button">Button</string>
+  <string name="button_increased">%s increased</string>
+  <string name="button_short_text">Short Text</string>
+  <string name="button_long_text">Long Text Long Text Long Text Long Text Long</string>
 
   <string name="toggle_default">Default</string>
   <string name="toggle_indeterminate">Indeterminate</string>
@@ -150,6 +164,43 @@
   <string name="chip_option">Option</string>
   <string name="chip_select">Select</string>
   <string name="chip_dismiss">Dismiss</string>
+
+  <string name="tabs_small">Small</string>
+  <string name="tabs_small_with_icon">Small with icon</string>
+  <string name="tabs_large">Large</string>
+  <string name="tabs_large_with_icon">Large with icon</string>
+  <string name="tabs_one">One</string>
+  <string name="tabs_two">Two</string>
+
+  <string name="image_skeleton_title">Image Skeleton</string>
+  <string name="circle_skeleton_title">Circle Skeleton</string>
+  <string name="body_text_skeleton_title">Body Text Skeleton</string>
+  <string name="headline_skeleton_title">Headline Skeleton</string>
+
+  <string name="shimmer_overlay_title">Shimmer Overlay</string>
+  <string name="tokens_title">Tokens</string>
+  <string name="token_placeholder">%1$s = %2$s</string>
+
+  <string name="components_title">Components</string>
+
+  <string name="spinner_textPrimary">TextPrimary</string>
+  <string name="spinner_disabled">Disabled</string>
+  <string name="spinner_onDarkSurface">OnDarkSurface</string>
+
+  <string name="dialog_success_one_button">Success One Button</string>
+  <string name="dialog_success_two_buttons">Success Two Buttons</string>
+  <string name="dialog_success_three_buttons">Success Three Buttons</string>
+  <string name="dialog_warning">Warning</string>
+  <string name="dialog_destructive">Destructive</string>
+  <string name="dialog_no_icon">No Icon</string>
+  <string name="dialog_flare">Flare</string>
+  <string name="dialog_image_start">Image Start alignment</string>
+  <string name="dialog_image_end">Image End alignment</string>
+  <string name="dialog_long_text">Long text</string>
+  <string name="dialog_continue">Continue</string>
+
+  <string name="content_description">Content description</string>
+
   <string name="generic_default">Default</string>
   <string name="generic_with_description">With description</string>
   <string name="generic_description">Description</string>
@@ -162,54 +213,42 @@
   <string name="generic_multiline">Multiline</string>
   <string name="generic_read_only_value">Read only value</string>
   <string name="generic_error_text">Error text</string>
-  <string name="token_placeholder">%1$s = %2$s</string>
-  <string name="tabs_small">Small</string>
-  <string name="tabs_small_with_icon">Small with icon</string>
-  <string name="tabs_large">Large</string>
-  <string name="tabs_large_with_icon">Large with icon</string>
-  <string name="tabs_one">One</string>
-  <string name="tabs_two">Two</string>
-  <string name="image_skeleton_title">Image Skeleton</string>
-  <string name="circle_skeleton_title">Circle Skeleton</string>
-  <string name="body_text_skeleton_title">Body Text Skeleton</string>
-  <string name="headline_skeleton_title">Headline Skeleton</string>
-  <string name="shimmer_overlay_title">Shimmer Overlay</string>
-  <string name="tokens_title">Tokens</string>
-  <string name="components_title">Components</string>
-  <string name="spinner_textPrimary">TextPrimary</string>
-  <string name="spinner_disabled">Disabled</string>
-  <string name="spinner_onDarkSurface">OnDarkSurface</string>
-  <string name="generic_small">Small</string>
-
-  <string name="dialog_success_one_button">Success One Button</string>
-  <string name="dialog_success_two_buttons">Success Two Buttons</string>
-  <string name="dialog_success_three_buttons">Success Three Buttons</string>
-  <string name="dialog_warning">Warning</string>
-  <string name="dialog_destructive">Destructive</string>
-  <string name="dialog_no_icon">No Icon</string>
-  <string name="dialog_flare">Flare</string>
-  <string name="dialog_image_start">Image Start alignment</string>
-  <string name="dialog_image_end">Image End alignment</string>
-  <string name="generic_empty" />
-  <string name="dialog_long_text">Long text</string>
-  <string name="dialog_continue">Continue</string>
-
-  <string name="content_description">Content description</string>
   <string name="generic_message">Message</string>
   <string name="generic_scroll_the_list">Scroll the list…</string>
   <string name="generic_to_see_the_effect">to see the effect</string>
   <string name="generic_list_item">Item #%d</string>
+  <string name="generic_disabled">Disabled</string>
+  <string name="generic_dismiss">Dismiss</string>
+  <string name="generic_empty" />
+  <string name="generic_small">Small</string>
+  <string name="generic_item">List item</string>
+
   <string name="nudger_minus_disabled">Minus Disabled</string>
   <string name="nudger_plus_disabled">Plus Disabled</string>
-  <string name="generic_disabled">Disabled</string>
+
   <string name="floating_notification_just_text">Just text</string>
   <string name="floating_notification_text_with_icon">Text with icon</string>
   <string name="floating_notification_with_action">With action</string>
   <string name="floating_notification_with_icon_and_action">With icon and action</string>
-  <string name="generic_dismiss">Dismiss</string>
+
   <string name="rating_title">Excellent</string>
   <string name="rating_subtitle">1532 reviews</string>
+
   <string name="slider_range">Range</string>
   <string name="slider_standard">Standard</string>
   <string name="slider_stepped">Stepped</string>
+
+  <string name="toast_long">Long Toast</string>
+  <string name="toast_short">Short Toast</string>
+
+  <string name="snackbar_short">Message (Duration Short)</string>
+  <string name="snackbar_long">Message (Duration Long)</string>
+  <string name="snackbar_indefinite">Message (Duration Indefinite)</string>
+  <string name="snackbar_title_message">Title + Message</string>
+  <string name="snackbar_icon_message">Icon + Message</string>
+  <string name="snackbar_icon_title_message">Icon + Title + Message</string>
+  <string name="snackbar_icon_action">Message (Icon Action)</string>
+  <string name="snackbar_title_icon_action">Title + Message (Icon Action)</string>
+  <string name="snackbar_icon_icon_action">Icon + Message (Icon Action)</string>
+  <string name="snackbar_icon_title_icon_action">Icon + title + message (Icon Action)</string>
 </resources>

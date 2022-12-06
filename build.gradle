@@ -91,27 +91,30 @@ ext {
   androidXLifecycleViewmodel = "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
   androidXLifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
+  threeTenAbpVersion = "1.4.3"
+  threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
+  threeTenAbpAndroid = "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
+
+  androidXJunitVersion = "1.1.4"
+  junitKtx = "androidx.test.ext:junit-ktx:$androidXJunitVersion"
+  junitAndroid = "androidx.test.ext:junit:$androidXJunitVersion"
+
   androidMaterial = "com.google.android.material:material:1.7.0"
   cardView = "androidx.cardview:cardview:1.0.0"
   googleMaps = "com.google.android.gms:play-services-maps:18.1.0"
   constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
   swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-  threeTenAbpVersion = "1.4.3"
-  threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
-  threeTenAbpAndroid = "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
   picasso = "com.squareup.picasso:picasso:2.71828"
   ktx = "androidx.core:core-ktx:1.9.0"
   testCoreKtx = "androidx.test:core-ktx:1.5.0"
   kotlinReflection = "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
   junit = "junit:junit:4.13.2"
-  junitKtx = 'androidx.test.ext:junit-ktx:1.1.4'
   stetho = "com.facebook.stetho:stetho:1.6.0"
-  junitAndroid = "androidx.test.ext:junit:1.1.3"
   espressoCore = "androidx.test.espresso:espresso-core:3.5.0"
   espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
   testRules = "androidx.test:rules:1.5.0"
   mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-  mockitoAndroid = "org.mockito:mockito-android:4.8.1"
+  mockitoAndroid = "org.mockito:mockito-android:4.9.0"
 
   coroutinesVersion = "1.6.4"
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
@@ -129,11 +132,12 @@ ext {
   composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview:$composeVersion"
   composeTestJUnit = "androidx.compose.ui:ui-test-junit4:$composeVersion"
   composeUiTooling = "androidx.compose.ui:ui-tooling:$composeVersion"
+  composeUiTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
   composeActivity = "androidx.activity:activity-compose:1.6.1"
   composeUtil = "androidx.compose.ui:ui-util:$composeVersion"
   composeFoundation = "androidx.compose.foundation:foundation:$composeVersion"
 
-  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.27.0"
+  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
 }
 
 tasks.dokkaHtmlMultiModule.configure {
