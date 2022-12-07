@@ -78,11 +78,6 @@ fun BpkFloatingNotification(
   }
 }
 
-enum class BpkFloatingNotificationResult {
-  Dismissed,
-  ActionPerformed,
-}
-
 @Stable
 class BpkFloatingNotificationState {
 
@@ -98,7 +93,7 @@ class BpkFloatingNotificationState {
     icon: BpkIcon? = null,
     hideAfter: Long = 4000L,
     onExit: (() -> Unit)? = null,
-  ): BpkFloatingNotificationResult =
+  ): Boolean =
     mutex.withLock {
       try {
         return suspendCancellableCoroutine { continuation ->
