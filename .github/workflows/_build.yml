@@ -208,7 +208,7 @@ jobs:
             adb logcat > logcat.log &
             ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
 
-            changedFiles=`git diff --name-only` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
+            changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
       - name: Check snapshot changes
         id: checkSnapshotChanges

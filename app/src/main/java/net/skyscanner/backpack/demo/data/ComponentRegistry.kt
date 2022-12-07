@@ -171,7 +171,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { BadgeStory() },
       )
     ),
-    "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
+    "Bar Chart" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { BarChartStory of R.layout.fragment_bar_chart },
+        TAB_TITLE_COMPOSE composeStory { net.skyscanner.backpack.demo.compose.BarChartStory() },
+      )
+    ),
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
     "Bottom Sheet" story NodeData(
       { children -> TabStory of children },

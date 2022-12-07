@@ -102,4 +102,12 @@ class BpkBadgeTest : BpkSnapshotTest() {
       BpkBadge(text = BpkBadgeType.Outline.toString(), type = BpkBadgeType.Outline)
     }
   }
+
+  @Test
+  fun brand() {
+    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    composed {
+      BpkBadge(text = BpkBadgeType.Brand.toString(), type = BpkBadgeType.Brand)
+    }
+  }
 }

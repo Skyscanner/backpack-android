@@ -34,6 +34,9 @@ import androidx.compose.runtime.ProvidedValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewRootForTest
+import androidx.compose.ui.test.junit4.ComposeTestRule
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.launchActivity
@@ -131,6 +134,36 @@ open class BpkSnapshotTest {
       }
     }
     scenario.close()
+  }
+
+  protected fun ComposeTestRule.setScreenshotContent(
+    size: IntSize = IntSize(width, height),
+    background: Color = Color.Unspecified,
+    vararg providers: ProvidedValue<*>,
+    content: @Composable () -> Unit,
+  ) {
+    Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
+
+    val asyncScreenshot = prepareForAsyncTest()
+
+    val scenario = launchActivity<AppCompatActivity>()
+    scenario.onActivity { activity ->
+      activity.setContent {
+        BackpackPreview(
+          modifier = Modifier.size(size.width.dp, size.height.dp),
+          background = background,
+          providers = providers,
+          content = content,
+        )
+      }
+    }
+
+    val node = onRoot().fetchSemanticsNode()
+    val view = (node.root as ViewRootForTest).view
+    scenario.onActivity {
+      setupView(view)
+      asyncScreenshot.record(view)
+    }
   }
 
   private fun View.findComposeView(): ComposeView? {
