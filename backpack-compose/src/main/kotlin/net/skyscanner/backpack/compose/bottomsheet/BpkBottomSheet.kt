@@ -79,9 +79,10 @@ fun BpkBottomSheet(
     val peekHeightWithHandle = peekHeight + HandleHeight
     val peekHeightPx = with(LocalDensity.current) { peekHeightWithHandle.toPx() }
     var bottomSheetHeight by remember { mutableStateOf(fullHeight) }
-    val openingPercent = when (state.progress.to) {
-      BpkBottomSheetValue.Expanded -> (1f - state.progress.fraction)
-      BpkBottomSheetValue.Collapsed -> state.progress.fraction
+    val progress = state.wrapped.progress
+    val openingPercent = when (progress.to) {
+      BpkBottomSheetValue.Expanded -> (1f - progress.fraction)
+      BpkBottomSheetValue.Collapsed -> progress.fraction
     }
 
     val radius = BpkBorderRadius.Lg * openingPercent
@@ -95,7 +96,7 @@ fun BpkBottomSheet(
         .fillMaxWidth()
         .requiredHeightIn(min = peekHeightWithHandle)
         .onGloballyPositioned { bottomSheetHeight = it.size.height.toFloat() }
-        .offset { IntOffset(0, state.offset.value.roundToInt()) },
+        .offset { IntOffset(0, state.wrapped.offset.value.roundToInt()) },
       shape = RoundedCornerShape(topStart = radius, topEnd = radius),
       elevation = BpkElevation.Lg,
       color = BpkTheme.colors.surfaceElevated,
@@ -125,7 +126,7 @@ private fun Modifier.bottomSheetSwipeable(
   sheetGesturesEnabled: Boolean,
 ): Modifier =
   nestedScrollFixedSwipeable(
-    state = state,
+    state = state.wrapped,
     anchors = mapOf(
       fullHeight - peekHeightPx to BpkBottomSheetValue.Collapsed,
       fullHeight - bottomSheetHeight to BpkBottomSheetValue.Expanded
