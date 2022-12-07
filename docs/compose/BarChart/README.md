@@ -71,7 +71,7 @@ fun createBarChartModel(locale: Locale, yearMonth: YearMonth) =
         // provides accessibility information here to be used with screen readers
         // make sure it's formatted properly and includes all the relevant information needed (title, subtitle, text value, group)
         // the example below is just for general purposes
-        accessibilityLabel = "${date.dayOfMonth} of ${date.month.getDisplayName(TextStyle.FULL, locale)}, the price is $42",
+        contentDescription = "${date.dayOfMonth} of ${date.month.getDisplayName(TextStyle.FULL, locale)}, the price is $42",
       )
     }
   )
