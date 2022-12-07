@@ -23,11 +23,13 @@ import androidx.compose.material.Colors
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalElevationOverlay
+import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Shapes
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontFamily
@@ -55,23 +57,21 @@ fun BpkTheme(
   val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
   val shapes = BpkShapes()
 
-  CompositionLocalProvider(
-    LocalBpkTypography provides typography,
-    LocalBpkColors provides colors,
-    LocalBpkShapes provides shapes,
-    LocalContentColor provides colors.textPrimary,
-    LocalElevationOverlay provides null,
+  MaterialTheme(
+    typography = typography.toMaterialTypography(fontFamily),
+    colors = colors.toMaterialColors(),
+    shapes = shapes.toMaterialShapes(),
   ) {
-    MaterialTheme(
-      typography = typography.toMaterialTypography(fontFamily),
-      colors = colors.toMaterialColors(),
-      shapes = shapes.toMaterialShapes(),
-    ) {
-      CompositionLocalProvider(
-        LocalContentAlpha provides 1f,
-        content = content,
-      )
-    }
+    CompositionLocalProvider(
+      LocalBpkTypography provides typography,
+      LocalBpkColors provides colors,
+      LocalBpkShapes provides shapes,
+      LocalContentColor provides colors.textPrimary,
+      LocalElevationOverlay provides null,
+      LocalTextStyle provides typography.bodyDefault,
+      LocalContentAlpha provides 1f,
+      content = content,
+    )
   }
 }
 
@@ -79,6 +79,7 @@ object BpkTheme {
 
   val typography: BpkTypography
     @Composable
+    @ReadOnlyComposable
     get() = if (LocalInspectionMode.current) {
       // when in preview mode return a default typography object to ensure previews work
       // without wrapping it in another composable
@@ -89,6 +90,7 @@ object BpkTheme {
 
   val colors: BpkColors
     @Composable
+    @ReadOnlyComposable
     get() = if (LocalInspectionMode.current) {
       // when in preview mode return a default colour object to ensure previews work
       // without wrapping it in another composable
@@ -99,6 +101,7 @@ object BpkTheme {
 
   val shapes: BpkShapes
     @Composable
+    @ReadOnlyComposable
     get() = if (LocalInspectionMode.current) {
       // when in preview mode return a default typography object to ensure previews work
       // without wrapping it in another composable
@@ -144,7 +147,7 @@ private fun BpkColors.toMaterialColors(): Colors =
     isLight = isLight,
   )
 
-private fun BpkShapes.toMaterialShapes() : Shapes =
+private fun BpkShapes.toMaterialShapes(): Shapes =
   Shapes(
     small = small,
     medium = medium,
