@@ -18,19 +18,6 @@
 
 package net.skyscanner.backpack.compose
 
-import androidx.compose.material.ExperimentalMaterialApi
-
 val LocalContentColor = androidx.compose.material.LocalContentColor
 
 val LocalTextStyle = androidx.compose.material.LocalTextStyle
-
-val LocalContentAlpha = androidx.compose.material.LocalContentAlpha
-
-val LocalAbsoluteElevation = androidx.compose.material.LocalAbsoluteElevation
-
-private val LocalRippleTheme = androidx.compose.material.ripple.LocalRippleTheme
-
-private val LocalElevationOverlay = androidx.compose.material.LocalElevationOverlay
-
-@OptIn(ExperimentalMaterialApi::class)
-private val LocalMinimumTouchTargetEnforcement = androidx.compose.material.LocalMinimumTouchTargetEnforcement
