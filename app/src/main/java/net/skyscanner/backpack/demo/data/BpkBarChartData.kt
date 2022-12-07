@@ -87,6 +87,7 @@ object BpkBarChartData {
     val dayOfMonth = date.dayOfMonth.toString()
     val dayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.SHORT, locale)
     val fullDayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.FULL, locale)
+    val fullMonth = date.month.getDisplayName(TextStyle.FULL, locale)
     return BpkBarChartModel.Item(
       key = date,
       title = dayOfWeek,
@@ -94,9 +95,9 @@ object BpkBarChartData {
       group = date.month.getDisplayName(TextStyle.FULL, locale),
       values = values,
       contentDescription = if (values != null) {
-        resources.getString(R.string.bar_chart_accessibility_label, fullDayOfWeek, dayOfMonth, values.text)
+        resources.getString(R.string.bar_chart_accessibility_label, fullDayOfWeek, dayOfMonth, fullMonth, values.text)
       } else {
-        resources.getString(R.string.bar_chart_accessibility_label_price_is_unknown, fullDayOfWeek, dayOfMonth)
+        resources.getString(R.string.bar_chart_accessibility_label_price_is_unknown, fullDayOfWeek, dayOfMonth, fullMonth)
       },
     )
   }

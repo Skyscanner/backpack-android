@@ -71,7 +71,7 @@ fun createBarChartModel(locale: Locale, yearMonth: YearMonth) =
         // provides accessibility information here to be used with screen readers
         // make sure it's formatted properly and includes all the relevant information needed (title, subtitle, text value, group)
         // the example below is just for general purposes
-        contentDescription = "Monday the 7th, price is £142",
+        contentDescription = "Monday the 7th of January, price is £142",
       )
     }
   )
