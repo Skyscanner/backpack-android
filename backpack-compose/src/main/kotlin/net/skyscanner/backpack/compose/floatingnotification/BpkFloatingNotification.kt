@@ -93,7 +93,7 @@ class BpkFloatingNotificationState {
     icon: BpkIcon? = null,
     hideAfter: Long = 4000L,
     onExit: (() -> Unit)? = null,
-  ): Boolean =
+  ): Unit =
     mutex.withLock {
       try {
         return suspendCancellableCoroutine { continuation ->
