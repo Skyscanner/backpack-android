@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,7 +34,6 @@ import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.spinner.BpkSpinner
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerStyle
-import net.skyscanner.backpack.compose.surface.BpkSurface
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
@@ -58,25 +58,27 @@ private fun SpinnersRow(
 
     BpkText(style.name)
 
-    BpkSurface(
-      color = if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.surfaceContrast else Color.Transparent,
-      contentColor = if (style == BpkSpinnerStyle.OnDarkSurface) BpkColor.White else LocalContentColor.current,
+    Row(
+      modifier = Modifier.background(
+        if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.surfaceContrast else Color.Transparent
+      ),
     ) {
+      BpkSpinnerSize.values().forEach { size ->
 
-      Row {
-        BpkSpinnerSize.values().forEach { size ->
+        Column(
+          modifier = Modifier.weight(1f),
+          horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
 
-          Column(
-            modifier = Modifier.weight(1f),
-            horizontalAlignment = Alignment.CenterHorizontally,
-          ) {
-
-            Box(Modifier.height(BpkSpacing.Xxl), contentAlignment = Alignment.Center) {
-              BpkSpinner(size = size, style = style)
-            }
-
-            BpkText(text = size.name, style = BpkTheme.typography.caption)
+          Box(Modifier.height(BpkSpacing.Xxl), contentAlignment = Alignment.Center) {
+            BpkSpinner(size = size, style = style)
           }
+
+          BpkText(
+            text = size.name,
+            style = BpkTheme.typography.caption,
+            color = if (style == BpkSpinnerStyle.OnDarkSurface) BpkColor.White else LocalContentColor.current,
+          )
         }
       }
     }

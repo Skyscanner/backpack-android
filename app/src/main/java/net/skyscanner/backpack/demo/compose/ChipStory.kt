@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,7 +39,6 @@ import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkChipType
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.surface.BpkSurface
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkColor
@@ -66,26 +66,24 @@ private fun ChipsColumn(
 
   val forceDarkBackground = style == BpkChipStyle.OnDark && BpkTheme.colors.isLight
 
-  BpkSurface(
-    modifier = modifier,
-    color = if (forceDarkBackground) BpkTheme.colors.textOnLight else Color.Transparent,
-    contentColor = if (forceDarkBackground) BpkColor.White else LocalContentColor.current,
+  Column(
+    modifier = modifier
+      .background(if (forceDarkBackground) BpkTheme.colors.textOnLight else Color.Transparent)
+      .padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
-    Column(
-      modifier =
-      Modifier.padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
-      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
+    BpkText(
+      text = style.toString(),
+      style = BpkTheme.typography.heading5,
+      color = if (forceDarkBackground) BpkColor.White else LocalContentColor.current,
+    )
 
-      BpkText(text = style.toString(), style = BpkTheme.typography.heading5)
-
-      BpkChipType.values().forEach { type ->
-        ChipsRow(style, type, null)
-      }
-
-      ChipsRow(style, BpkChipType.Option, BpkIcon.Deals, text = stringResource(R.string.with_icon))
+    BpkChipType.values().forEach { type ->
+      ChipsRow(style, type, null)
     }
+
+    ChipsRow(style, BpkChipType.Option, BpkIcon.Deals, text = stringResource(R.string.with_icon))
   }
 }
 
@@ -100,7 +98,9 @@ private fun ChipsRow(
   Row(modifier) {
     ChipSample(
       text = text,
-      modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
+      modifier = Modifier
+        .weight(1f)
+        .wrapContentWidth(Alignment.CenterHorizontally),
       initialState = false,
       enabled = true,
       style = style,
@@ -109,7 +109,9 @@ private fun ChipsRow(
     )
     ChipSample(
       text = text,
-      modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
+      modifier = Modifier
+        .weight(1f)
+        .wrapContentWidth(Alignment.CenterHorizontally),
       initialState = true,
       enabled = true,
       style = style,
@@ -118,7 +120,9 @@ private fun ChipsRow(
     )
     ChipSample(
       text = text,
-      modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
+      modifier = Modifier
+        .weight(1f)
+        .wrapContentWidth(Alignment.CenterHorizontally),
       initialState = false,
       enabled = false,
       style = style,
