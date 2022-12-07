@@ -41,7 +41,7 @@ data class BpkBarChartModel(
    * @param title a primary text placed just below the bar itself.
    * @param subtitle a secondary text placed just below the title.
    * @param group name of the group in which the item exists. The name is rendered above the bars and updated as the chart scrolls horizontally.
-   * @param contentDescription the content description to be used for screen readers to read the values (e.g. "Monday 7, price is £100")
+   * @param contentDescription the content description to be used for screen readers to read the values (e.g. "Monday the 7th of January, price is £142")
    * It must include all important information, such as title, subtitle, text value and group – there's no information re-used by default.
    * @param values the values  of the bar itself. If null, the item becomes inactive.
    */
