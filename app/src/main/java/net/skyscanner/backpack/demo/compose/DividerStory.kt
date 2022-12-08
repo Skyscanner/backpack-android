@@ -18,45 +18,49 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkDimension
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 
 @Composable
-fun ListItem(
-  title: String,
-  modifier: Modifier = Modifier,
-  showDivider: Boolean = true,
-  trailing: @Composable RowScope.() -> Unit = {},
-) {
-  Column(
-    modifier = modifier
-      .defaultMinSize(minHeight = 56.dp)
-      .fillMaxWidth()
-      .padding(horizontal = BpkDimension.Spacing.Lg),
-  ) {
+@Preview
+fun DividerStory(modifier: Modifier = Modifier) {
+  Column(modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
 
-    Row(
-      modifier = Modifier.weight(1f),
-      verticalAlignment = Alignment.CenterVertically,
-    ) {
-      BpkText(text = title, style = BpkTheme.typography.bodyLongform)
-      trailing()
+    Column {
+      BpkText(
+        text = stringResource(R.string.divider_no_indent),
+        modifier = Modifier.padding(BpkSpacing.Base),
+      )
+      DividerSampleNoIndent()
     }
 
-    if (showDivider) {
-      BpkDivider()
+    Column {
+      BpkText(
+        text = stringResource(R.string.divider_indent),
+        modifier = Modifier.padding(BpkSpacing.Base),
+      )
+      DividerSample_WithIndent()
     }
   }
+}
+
+@Preview
+@Composable
+fun DividerSampleNoIndent(modifier: Modifier = Modifier) {
+  BpkDivider(modifier = modifier)
+}
+
+@Preview
+@Composable
+fun DividerSample_WithIndent(modifier: Modifier = Modifier) {
+  BpkDivider(modifier = modifier, startIndent = BpkSpacing.Base)
 }
