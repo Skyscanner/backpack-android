@@ -16,7 +16,7 @@ Backpack Android is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-E.g. The Bar Chart component can be used in both XML and Kotlin/Java,
+The Bar Chart component can be used in both XML and Kotlin/Java,
 however, feeding the component with data can only be done programmatically.
 
 Example of a Bar Chart in XML

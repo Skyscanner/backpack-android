@@ -34,6 +34,7 @@ import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
+import net.skyscanner.backpack.demo.compose.DividerStory
 import net.skyscanner.backpack.demo.compose.ElevationComposeStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
@@ -170,7 +171,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { BadgeStory() },
       )
     ),
-    "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
+    "Bar Chart" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { BarChartStory of R.layout.fragment_bar_chart },
+        TAB_TITLE_COMPOSE composeStory { net.skyscanner.backpack.demo.compose.BarChartStory() },
+      )
+    ),
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
     "Bottom Sheet" story NodeData(
       { children -> TabStory of children },
@@ -296,6 +303,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { ComposeDialogStory() },
       ),
     ),
+    "Divider" composeStory { DividerStory() },
     "FieldSet" composeStory { FieldSetStory() },
     "Flare" story NodeData(
       { children -> TabStory of children },

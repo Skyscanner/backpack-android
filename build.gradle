@@ -91,7 +91,7 @@ ext {
   androidXLifecycleViewmodel = "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
   androidXLifecycleViewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
-  threeTenAbpVersion = "1.4.3"
+  threeTenAbpVersion = "1.4.4"
   threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
   threeTenAbpAndroid = "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
 
