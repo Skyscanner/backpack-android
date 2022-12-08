@@ -103,6 +103,11 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       webName = "dialog",
       componentsToReplace = setOf("androidx.compose.ui.window.Dialog", "androidx.compose.material.AlertDialog")
     ),
+    DIVIDER(
+      fullName = "net.skyscanner.backpack.compose.divider.BpkDivider",
+      webName = "divider",
+      componentsToReplace = setOf("androidx.compose.material.Divider")
+    ),
     FAB(
       fullName = "net.skyscanner.backpack.compose.fab.BpkFab",
       webName = "floating-action-button",

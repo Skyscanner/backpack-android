@@ -95,6 +95,7 @@ object DocsRegistry {
     ComposeScreenshot("Dialog - Compose", "image-end-alignment") {
       setupComposeDialog(it, ShownDialog.ImageEndAlignment)
     },
+    ComposeScreenshot("Divider", "default"),
     ComposeScreenshot("FieldSet", "default"),
     ComposeScreenshot("FieldSet", "disabled") { it.switchFieldStatus(BpkFieldStatus.Disabled) },
     ComposeScreenshot("FieldSet", "validated") { it.switchFieldStatus(BpkFieldStatus.Validated) },
@@ -129,7 +130,7 @@ object DocsRegistry {
     ComposeScreenshot("Rating - Compose", "default"),
     ViewScreenshot("Skeleton - View", "default"),
     ComposeScreenshot("Skeleton - Compose", "default"),
-    ViewScreenshot("Slider - View", "default"),
+    ViewScreenshot("Slider - View", "all"),
     ComposeScreenshot("Slider - Compose", "default"),
     ViewScreenshot("Snackbar", "default") { setupSnackbar() },
     ViewScreenshot("Snackbar", "icon") { setupSnackbarIconAction() },
