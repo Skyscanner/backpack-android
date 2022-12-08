@@ -55,12 +55,12 @@ fun DividerStory(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun DividerSampleNoIndent(modifier: Modifier = Modifier) {
+internal fun DividerSampleNoIndent(modifier: Modifier = Modifier) {
   BpkDivider(modifier = modifier)
 }
 
 @Preview
 @Composable
-fun DividerSample_WithIndent(modifier: Modifier = Modifier) {
+internal fun DividerSample_WithIndent(modifier: Modifier = Modifier) {
   BpkDivider(modifier = modifier, startIndent = BpkSpacing.Base)
 }
