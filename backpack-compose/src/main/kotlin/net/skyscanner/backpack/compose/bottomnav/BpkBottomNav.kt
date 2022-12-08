@@ -54,7 +54,7 @@ fun BpkBottomNavItem(
   id: Int,
   showBadge: Boolean,
   icon: BpkIcon,
-) : BpkBottomNavItem =
+): BpkBottomNavItem =
   IconBottomNavItem(title, id, showBadge, icon)
 
 fun BpkBottomNavItem(
@@ -62,7 +62,7 @@ fun BpkBottomNavItem(
   id: Int,
   showBadge: Boolean,
   painter: Painter,
-) : BpkBottomNavItem =
+): BpkBottomNavItem =
   PainterBottomNavItem(title, id, showBadge, painter)
 
 
@@ -74,53 +74,52 @@ fun BpkBottomNav(
   elevation: Dp = BottomNavigationDefaults.Elevation,
   tabItems: List<BpkBottomNavItem> = emptyList(),
 ) {
-  Box {
-    Box() {
-      BottomNavigation(
-        modifier = modifier,
-        backgroundColor = BpkTheme.colors.surfaceDefault,
-        contentColor = BpkTheme.colors.textSecondary,
-        elevation = elevation,
-      ) {
-        tabItems.forEach { tabItem ->
-          BottomNavigationItem(
-            selected = selectedItemId == tabItem.id,
-            onClick = { onTabClicked(tabItem.id) },
-            icon = {
-              Box {
-                when (tabItem) {
-                  is IconBottomNavItem -> BpkIcon(icon = tabItem.icon, contentDescription = null, size = BpkIconSize.Large)
-                  is PainterBottomNavItem -> Icon(
-                    modifier = Modifier.height(24.dp),
-                    painter = tabItem.painter,
-                    contentDescription = null
-                  )
-                }
-                NotificationDot(Modifier.align(Alignment.BottomEnd))
+  Box() {
+    BottomNavigation(
+      modifier = modifier,
+      backgroundColor = BpkTheme.colors.surfaceDefault,
+      contentColor = BpkTheme.colors.textSecondary,
+      elevation = elevation,
+    ) {
+      tabItems.forEach { tabItem ->
+        BottomNavigationItem(
+          selected = selectedItemId == tabItem.id,
+          onClick = { onTabClicked(tabItem.id) },
+          icon = {
+            Box {
+              when (tabItem) {
+                is IconBottomNavItem -> BpkIcon(icon = tabItem.icon, contentDescription = null, size = BpkIconSize.Large)
+                is PainterBottomNavItem -> Icon(
+                  modifier = Modifier.height(24.dp),
+                  painter = tabItem.painter,
+                  contentDescription = null
+                )
               }
-            },
-            label = {
-              BpkText(
-                text = tabItem.title
-              )
-            },
-            selectedContentColor = BpkTheme.colors.textLink,
-            unselectedContentColor = BpkTheme.colors.textSecondary
-          )
-        }
+              NotificationDot(Modifier.align(Alignment.BottomEnd))
+            }
+          },
+          label = {
+            BpkText(
+              text = tabItem.title
+            )
+          },
+          selectedContentColor = BpkTheme.colors.textLink,
+          unselectedContentColor = BpkTheme.colors.textSecondary
+        )
       }
     }
   }
 }
 
+
 @Composable
 private fun NotificationDot(modifier: Modifier = Modifier) {
   Box(
     modifier = modifier
-        .size(12.dp)
-        .border(width = 2.dp, color = BpkTheme.colors.surfaceDefault, shape = CircleShape)
-        .padding(2.dp)
-        .background(color = BpkTheme.colors.coreAccent, shape = CircleShape)
+      .size(12.dp)
+      .border(width = 2.dp, color = BpkTheme.colors.surfaceDefault, shape = CircleShape)
+      .padding(2.dp)
+      .background(color = BpkTheme.colors.coreAccent, shape = CircleShape)
   )
 }
 
