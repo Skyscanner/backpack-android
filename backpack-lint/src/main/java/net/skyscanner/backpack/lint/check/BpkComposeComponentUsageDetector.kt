@@ -105,7 +105,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
     ),
     DIVIDER(
       fullName = "net.skyscanner.backpack.compose.divider.BpkDivider",
-      webName = "dialog",
+      webName = "divider",
       componentsToReplace = setOf("androidx.compose.material.Divider")
     ),
     FAB(
