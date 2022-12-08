@@ -71,6 +71,11 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
     val webName: String,
     val componentsToReplace: Set<String>,
   ) {
+    BOTTOM_NAV(
+      fullName = "net.skyscanner.backpack.compose.bottomnav.BpkBottomNav",
+      webName = "bottom-nav",
+      componentsToReplace = setOf("androidx.compose.material.BottomNavigation"),
+    ),
     BOTTOM_SHEET(
       fullName = "net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheet",
       webName = "bottom-sheet",
