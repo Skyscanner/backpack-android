@@ -31,8 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNav
-import net.skyscanner.backpack.compose.bottomnav.TabIcon
-import net.skyscanner.backpack.compose.bottomnav.TabItem
+import net.skyscanner.backpack.compose.bottomnav.BpkBottomNavItem
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.AccountCircle
 import net.skyscanner.backpack.compose.tokens.Trips
@@ -53,13 +52,19 @@ fun BpkBottomNavSample(defaultItemId: Int = 1) {
   var selectedItemId by remember { mutableStateOf(defaultItemId) }
   BpkBottomNav(
     tabItems = listOf(
-      TabItem(
-        icon = TabIcon.Custom(painter = painterResource(id = R.drawable.sample_icon)),
+      BpkBottomNavItem(
+        painter = painterResource(id = R.drawable.sample_icon),
         title = stringResource(R.string.bottom_nav_explore),
-        id = 1
+        id = 1,
+        showBadge = true
       ),
-      TabItem(icon = TabIcon.Bpk(icon = BpkIcon.Trips), title = stringResource(R.string.bottom_nav_trips), id = 2),
-      TabItem(icon = TabIcon.Bpk(icon = BpkIcon.AccountCircle), title = stringResource(R.string.navigation_account), id = 3),
+      BpkBottomNavItem(icon = BpkIcon.Trips, title = stringResource(R.string.bottom_nav_trips), id = 2, showBadge = false),
+      BpkBottomNavItem(
+        icon = BpkIcon.AccountCircle,
+        title = stringResource(R.string.navigation_account),
+        id = 3,
+        showBadge = false
+      ),
     ),
     selectedItemId = selectedItemId,
     onTabClicked = { selectedItemId = it },
