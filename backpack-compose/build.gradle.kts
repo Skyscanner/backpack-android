@@ -54,9 +54,10 @@ android {
 
 dependencies {
   api(rootProject.ext.get("composeUi")!!)
-  api(rootProject.ext.get("composeMaterial")!!)
+  api(rootProject.ext.get("composeFoundation")!!)
   api(rootProject.ext.get("composeUiToolingPreview")!!)
   api(rootProject.ext.get("composeUtil")!!)
+  implementation(rootProject.ext.get("composeMaterial")!!)
 
   implementation(rootProject.ext.get("androidXLifecycleViewmodel")!!)
   implementation(rootProject.ext.get("androidXLifecycleViewmodelKtx")!!)

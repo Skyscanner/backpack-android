@@ -19,21 +19,21 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.max
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
@@ -53,17 +53,17 @@ fun ElevationComposeStory() {
 
 @Composable
 private fun ElevationCard(token: Token<Dp>) {
-  Surface(
-    modifier = Modifier.fillMaxWidth(),
-    shape = RoundedCornerShape(BpkBorderRadius.Md),
-    elevation = token.value,
+  Box(
+    modifier = Modifier
+      .fillMaxWidth()
+      .shadow(token.value, BpkTheme.shapes.medium)
+      .background(BpkTheme.colors.surfaceElevated, BpkTheme.shapes.medium),
+    contentAlignment = Alignment.Center,
   ) {
-    Box(contentAlignment = Alignment.Center) {
-      BpkText(
-        text = stringResource(R.string.token_placeholder, token.name, token.value),
-        modifier = Modifier.padding(BpkSpacing.Base),
-      )
-    }
+    BpkText(
+      text = stringResource(R.string.token_placeholder, token.name, token.value),
+      modifier = Modifier.padding(BpkSpacing.Base),
+    )
   }
 }
 

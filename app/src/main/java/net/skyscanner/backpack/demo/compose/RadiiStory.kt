@@ -19,6 +19,7 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,7 +27,6 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -63,22 +63,18 @@ private fun RadiiSample(token: Token<Dp>) {
 
 @Composable
 private fun RadiiCard(token: Token<Dp>) {
-  Surface(
-    modifier = Modifier.sizeIn(minHeight = token.value * 2),
-    color = BpkTheme.colors.coreAccent,
-    shape = RoundedCornerShape(token.value),
+  Box(
+    contentAlignment = Alignment.Center,
+    modifier = Modifier
+      .fillMaxWidth()
+      .sizeIn(minHeight = token.value * 2)
+      .background(BpkTheme.colors.coreAccent, RoundedCornerShape(token.value))
+      .padding(BpkSpacing.Base),
   ) {
-    Box(
-      contentAlignment = Alignment.Center,
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(BpkSpacing.Base),
-    ) {
-      BpkText(
-        text = stringResource(R.string.token_placeholder, token.name, token.value),
-        style = BpkTheme.typography.bodyLongform,
-        color = BpkTheme.colors.textPrimaryInverse
-      )
-    }
+    BpkText(
+      text = stringResource(R.string.token_placeholder, token.name, token.value),
+      style = BpkTheme.typography.bodyLongform,
+      color = BpkTheme.colors.textPrimaryInverse,
+    )
   }
 }

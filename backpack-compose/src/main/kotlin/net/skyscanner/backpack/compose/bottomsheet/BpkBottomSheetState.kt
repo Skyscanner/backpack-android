@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
+import net.skyscanner.backpack.compose.BpkSwipeableState
 
 @Composable
 fun rememberBpkBottomSheetState(
@@ -52,17 +53,18 @@ enum class BpkBottomSheetValue {
   Expanded,
 }
 
-@Stable
 @OptIn(ExperimentalMaterialApi::class)
-class BpkBottomSheetState(
-  initialValue: BpkBottomSheetValue,
-  animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
-  internal val confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
-) : SwipeableState<BpkBottomSheetValue>(
-  initialValue = initialValue,
-  animationSpec = animationSpec,
-  confirmStateChange = confirmStateChange,
-) {
+@Stable
+class BpkBottomSheetState private constructor(
+  internal val wrapped: SwipeableState<BpkBottomSheetValue>,
+  internal val confirmStateChange: (BpkBottomSheetValue) -> Boolean,
+) : BpkSwipeableState<BpkBottomSheetValue> by BpkSwipeableState(wrapped) {
+
+  constructor(
+    initialValue: BpkBottomSheetValue,
+    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
+    confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
+  ) : this(SwipeableState(initialValue, animationSpec, confirmStateChange), confirmStateChange)
 
   val isExpanded: Boolean
     get() = currentValue == BpkBottomSheetValue.Expanded

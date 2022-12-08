@@ -54,7 +54,6 @@ import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.TextFiledStory
-import net.skyscanner.backpack.demo.compose.ThemeStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
 import net.skyscanner.backpack.demo.stories.Calendar2Story
@@ -425,12 +424,6 @@ object ComponentRegistry {
       )
     ),
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
-    "Sneak peek" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_COMPOSE composeStory { ThemeStory() },
-      )
-    ),
     "Spinner" story NodeData(
       { children -> TabStory of children },
       mapOf(

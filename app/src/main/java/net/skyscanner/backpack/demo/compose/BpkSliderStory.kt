@@ -67,7 +67,6 @@ fun RangeSliderSample() {
   BpkRangeSlider(
     value = rangeSliderValue,
     onValueChange = { newValue -> rangeSliderValue = newValue },
-    steps = 0,
   )
 }
 
@@ -77,7 +76,6 @@ fun DefaultSliderSample() {
   BpkSlider(
     value = sliderValue,
     onValueChange = { newValue -> sliderValue = newValue },
-    steps = 0,
   )
 }
 
