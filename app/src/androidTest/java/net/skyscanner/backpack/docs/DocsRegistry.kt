@@ -95,6 +95,7 @@ object DocsRegistry {
     ComposeScreenshot("Dialog - Compose", "image-end-alignment") {
       setupComposeDialog(it, ShownDialog.ImageEndAlignment)
     },
+    ComposeScreenshot("Divider", "default"),
     ComposeScreenshot("FieldSet", "default"),
     ComposeScreenshot("FieldSet", "disabled") { it.switchFieldStatus(BpkFieldStatus.Disabled) },
     ComposeScreenshot("FieldSet", "validated") { it.switchFieldStatus(BpkFieldStatus.Validated) },
