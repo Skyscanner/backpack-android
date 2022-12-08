@@ -130,7 +130,7 @@ object DocsRegistry {
     ComposeScreenshot("Rating - Compose", "default"),
     ViewScreenshot("Skeleton - View", "default"),
     ComposeScreenshot("Skeleton - Compose", "default"),
-    ViewScreenshot("Slider - View", "default"),
+    ViewScreenshot("Slider - View", "all"),
     ComposeScreenshot("Slider - Compose", "default"),
     ViewScreenshot("Snackbar", "default") { setupSnackbar() },
     ViewScreenshot("Snackbar", "icon") { setupSnackbarIconAction() },
