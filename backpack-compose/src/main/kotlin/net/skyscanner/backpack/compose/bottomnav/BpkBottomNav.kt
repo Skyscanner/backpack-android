@@ -23,6 +23,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -72,7 +73,7 @@ fun BpkBottomNav(
   selectedItemId: Int,
   modifier: Modifier = Modifier,
   elevation: Dp = BottomNavigationDefaults.Elevation,
-  tabItems: List<BpkBottomNavItem> = emptyList(),
+  items: List<BpkBottomNavItem>,
 ) {
   Box() {
     BottomNavigation(
@@ -81,7 +82,7 @@ fun BpkBottomNav(
       contentColor = BpkTheme.colors.textSecondary,
       elevation = elevation,
     ) {
-      tabItems.forEach { tabItem ->
+      items.forEach { tabItem ->
         BottomNavigationItem(
           selected = selectedItemId == tabItem.id,
           onClick = { onTabClicked(tabItem.id) },
@@ -95,7 +96,7 @@ fun BpkBottomNav(
                   contentDescription = null
                 )
               }
-              NotificationDot(Modifier.align(Alignment.BottomEnd))
+                if (tabItem.showBadge) NotificationDot(Modifier.align(Alignment.BottomEnd) .offset(x = 1.dp, y = (-2).dp))
             }
           },
           label = {

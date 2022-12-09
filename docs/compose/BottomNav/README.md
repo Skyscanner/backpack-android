@@ -22,6 +22,7 @@ Example of a `BpkBottomNav`:
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNav
 
 BpkBottomNav(
+  items = listOf(BpkBottomNavItem),
   selectedItemId = 1,
   onTabClicked = {} // Handle update
 )

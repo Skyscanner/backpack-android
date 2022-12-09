@@ -51,19 +51,19 @@ fun BpkBottomNavStory() {
 fun BpkBottomNavSample(defaultItemId: Int = 1) {
   var selectedItemId by remember { mutableStateOf(defaultItemId) }
   BpkBottomNav(
-    tabItems = listOf(
+    items = listOf(
       BpkBottomNavItem(
         painter = painterResource(id = R.drawable.sample_icon),
         title = stringResource(R.string.bottom_nav_explore),
         id = 1,
-        showBadge = true
+        showBadge = false
       ),
       BpkBottomNavItem(icon = BpkIcon.Trips, title = stringResource(R.string.bottom_nav_trips), id = 2, showBadge = false),
       BpkBottomNavItem(
         icon = BpkIcon.AccountCircle,
         title = stringResource(R.string.navigation_account),
         id = 3,
-        showBadge = false
+        showBadge = true
       ),
     ),
     selectedItemId = selectedItemId,
