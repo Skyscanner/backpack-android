@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.floatingnotification.internal
 
-import androidx.compose.material.SnackbarResult
 import androidx.compose.runtime.Stable
 import kotlinx.coroutines.CancellableContinuation
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -31,16 +30,16 @@ internal data class BpkFloatingNotificationData(
   val hideAfter: Long,
   val onExit: (() -> Unit)?,
   private val onClick: (() -> Unit)?,
-  private val continuation: CancellableContinuation<SnackbarResult>
+  private val continuation: CancellableContinuation<Unit>
 ) {
 
   fun performAction() {
-    if (continuation.isActive) continuation.resume(SnackbarResult.ActionPerformed, onCancellation = null)
+    if (continuation.isActive) continuation.resume(Unit, onCancellation = null)
     onClick?.invoke()
   }
 
   fun dismiss() {
-    if (continuation.isActive) continuation.resume(SnackbarResult.Dismissed, onCancellation = null)
+    if (continuation.isActive) continuation.resume(Unit, onCancellation = null)
     onExit?.invoke()
   }
 

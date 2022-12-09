@@ -18,11 +18,11 @@
 
 package net.skyscanner.backpack.compose.spinner
 
-import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import org.junit.Before
 import org.junit.Test

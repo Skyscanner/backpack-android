@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.docs
 
+import android.icu.text.NumberFormat
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.ComposeTestRule
@@ -48,6 +49,9 @@ object DocsRegistry {
     ViewScreenshot("Bar Chart", "default"),
     ViewScreenshot("Bottom Nav - View", "default"),
     ComposeScreenshot("Bottom Nav - Compose", "default"),
+    ViewScreenshot("Bar Chart - View", "default"),
+    ComposeScreenshot("Bar Chart - Compose", "default", ::setupBarChart),
+    ViewScreenshot("Bottom Nav", "default"),
     ViewScreenshot("Bottom Sheet - View", "default"),
     ComposeScreenshot("Bottom Sheet - Compose", "default"),
     ViewScreenshot("Button - View - Standard", "standard"),
@@ -94,6 +98,7 @@ object DocsRegistry {
     ComposeScreenshot("Dialog - Compose", "image-end-alignment") {
       setupComposeDialog(it, ShownDialog.ImageEndAlignment)
     },
+    ComposeScreenshot("Divider", "default"),
     ComposeScreenshot("FieldSet", "default"),
     ComposeScreenshot("FieldSet", "disabled") { it.switchFieldStatus(BpkFieldStatus.Disabled) },
     ComposeScreenshot("FieldSet", "validated") { it.switchFieldStatus(BpkFieldStatus.Validated) },
@@ -128,7 +133,7 @@ object DocsRegistry {
     ComposeScreenshot("Rating - Compose", "default"),
     ViewScreenshot("Skeleton - View", "default"),
     ComposeScreenshot("Skeleton - Compose", "default"),
-    ViewScreenshot("Slider - View", "default"),
+    ViewScreenshot("Slider - View", "all"),
     ComposeScreenshot("Slider - Compose", "default"),
     ViewScreenshot("Snackbar", "default") { setupSnackbar() },
     ViewScreenshot("Snackbar", "icon") { setupSnackbarIconAction() },
@@ -227,6 +232,13 @@ private fun setupWholeMonthCalendar(rule: AndroidComposeTestRule<*, *>) {
     .onAllNodesWithText("Select whole month")
     .onFirst()
     .performClick()
+    .assertIsDisplayed()
+}
+
+private fun setupBarChart(rule: AndroidComposeTestRule<*, *>) {
+  rule
+    .onAllNodesWithText(NumberFormat.getCurrencyInstance().currency.symbol, substring = true)
+    .onFirst()
     .assertIsDisplayed()
 }
 

@@ -37,7 +37,7 @@ fun BpkSlider(
   enabled: Boolean = true,
   minValue: Float = 0f,
   maxValue: Float = 1f,
-  steps: Int,
+  steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -63,7 +63,7 @@ fun BpkRangeSlider(
   enabled: Boolean = true,
   minValue: Float = 0f,
   maxValue: Float = 1f,
-  steps: Int,
+  steps: Int = 0,
   onValueChangeFinished: (() -> Unit)? = null,
 ) {
   RangeSlider(

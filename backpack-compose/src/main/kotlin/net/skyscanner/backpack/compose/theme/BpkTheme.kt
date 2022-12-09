@@ -19,23 +19,23 @@
 package net.skyscanner.backpack.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Colors
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalElevationOverlay
+import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Shapes
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkColors
+import net.skyscanner.backpack.compose.tokens.BpkShapes
 import net.skyscanner.backpack.compose.tokens.BpkTypography
 
 private val LocalBpkTypography = staticCompositionLocalOf<BpkTypography> {
@@ -43,6 +43,9 @@ private val LocalBpkTypography = staticCompositionLocalOf<BpkTypography> {
 }
 private val LocalBpkColors = staticCompositionLocalOf<BpkColors> {
   error("Wrap you content with BpkTheme {} to get access to Backpack colors")
+}
+private val LocalBpkShapes = staticCompositionLocalOf<BpkShapes> {
+  error("Wrap you content with BpkTheme {} to get access to Backpack shapes")
 }
 
 @Composable
@@ -52,23 +55,23 @@ fun BpkTheme(
 ) {
   val typography = BpkTypography(defaultFontFamily = fontFamily)
   val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
+  val shapes = BpkShapes()
 
-  CompositionLocalProvider(
-    LocalBpkTypography provides typography,
-    LocalBpkColors provides colors,
-    LocalContentColor provides colors.textPrimary,
-    LocalElevationOverlay provides null,
+  MaterialTheme(
+    typography = typography.toMaterialTypography(fontFamily),
+    colors = colors.toMaterialColors(),
+    shapes = shapes.toMaterialShapes(),
   ) {
-    MaterialTheme(
-      typography = typography.toMaterialTypography(fontFamily),
-      colors = colors.toMaterialColors(),
-      shapes = bpkShapes(),
-    ) {
-      CompositionLocalProvider(
-        LocalContentAlpha provides 1f,
-        content = content,
-      )
-    }
+    CompositionLocalProvider(
+      LocalBpkTypography provides typography,
+      LocalBpkColors provides colors,
+      LocalBpkShapes provides shapes,
+      LocalContentColor provides colors.textPrimary,
+      LocalElevationOverlay provides null,
+      LocalTextStyle provides typography.bodyDefault,
+      LocalContentAlpha provides 1f,
+      content = content,
+    )
   }
 }
 
@@ -76,6 +79,7 @@ object BpkTheme {
 
   val typography: BpkTypography
     @Composable
+    @ReadOnlyComposable
     get() = if (LocalInspectionMode.current) {
       // when in preview mode return a default typography object to ensure previews work
       // without wrapping it in another composable
@@ -86,6 +90,7 @@ object BpkTheme {
 
   val colors: BpkColors
     @Composable
+    @ReadOnlyComposable
     get() = if (LocalInspectionMode.current) {
       // when in preview mode return a default colour object to ensure previews work
       // without wrapping it in another composable
@@ -94,18 +99,18 @@ object BpkTheme {
       LocalBpkColors.current
     }
 
-  val shapes: Shapes
+  val shapes: BpkShapes
     @Composable
-    get() = MaterialTheme.shapes
+    @ReadOnlyComposable
+    get() = if (LocalInspectionMode.current) {
+      // when in preview mode return a default typography object to ensure previews work
+      // without wrapping it in another composable
+      BpkShapes()
+    } else {
+      LocalBpkShapes.current
+    }
 
 }
-
-private fun bpkShapes(): Shapes =
-  Shapes(
-    small = RoundedCornerShape(BpkBorderRadius.Sm),
-    medium = RoundedCornerShape(BpkBorderRadius.Md),
-    large = RoundedCornerShape(BpkBorderRadius.Lg),
-  )
 
 private fun BpkTypography.toMaterialTypography(fontFamily: FontFamily): Typography =
   Typography(
@@ -140,4 +145,11 @@ private fun BpkColors.toMaterialColors(): Colors =
     onSurface = textPrimary,
     onError = textOnDark,
     isLight = isLight,
+  )
+
+private fun BpkShapes.toMaterialShapes(): Shapes =
+  Shapes(
+    small = small,
+    medium = medium,
+    large = large,
   )

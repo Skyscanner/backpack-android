@@ -35,6 +35,7 @@ import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
+import net.skyscanner.backpack.demo.compose.DividerStory
 import net.skyscanner.backpack.demo.compose.ElevationComposeStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
@@ -54,7 +55,6 @@ import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.TextFiledStory
-import net.skyscanner.backpack.demo.compose.ThemeStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
 import net.skyscanner.backpack.demo.stories.Calendar2Story
@@ -172,6 +172,14 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { BadgeStory() },
       )
     ),
+    "Bar Chart" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { BarChartStory of R.layout.fragment_bar_chart },
+        TAB_TITLE_COMPOSE composeStory { net.skyscanner.backpack.demo.compose.BarChartStory() },
+      )
+    ),
+    "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
     "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
     "Bottom Nav" story NodeData(
       { children -> TabStory of children },
@@ -304,6 +312,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { ComposeDialogStory() },
       ),
     ),
+    "Divider" composeStory { DividerStory() },
     "FieldSet" composeStory { FieldSetStory() },
     "Flare" story NodeData(
       { children -> TabStory of children },
@@ -424,12 +433,6 @@ object ComponentRegistry {
       )
     ),
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
-    "Sneak peek" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_COMPOSE composeStory { ThemeStory() },
-      )
-    ),
     "Spinner" story NodeData(
       { children -> TabStory of children },
       mapOf(

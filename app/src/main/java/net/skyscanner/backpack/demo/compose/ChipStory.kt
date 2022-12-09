@@ -18,13 +18,12 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkChipType
@@ -66,26 +66,24 @@ private fun ChipsColumn(
 
   val forceDarkBackground = style == BpkChipStyle.OnDark && BpkTheme.colors.isLight
 
-  Surface(
-    modifier = modifier,
-    color = if (forceDarkBackground) BpkTheme.colors.textOnLight else Color.Transparent,
-    contentColor = if (forceDarkBackground) BpkColor.White else LocalContentColor.current,
+  Column(
+    modifier = modifier
+      .background(if (forceDarkBackground) BpkTheme.colors.textOnLight else Color.Transparent)
+      .padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
-    Column(
-      modifier =
-      Modifier.padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
-      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
+    BpkText(
+      text = style.toString(),
+      style = BpkTheme.typography.heading5,
+      color = if (forceDarkBackground) BpkColor.White else LocalContentColor.current,
+    )
 
-      BpkText(text = style.toString(), style = BpkTheme.typography.heading5)
-
-      BpkChipType.values().forEach { type ->
-        ChipsRow(style, type, null)
-      }
-
-      ChipsRow(style, BpkChipType.Option, BpkIcon.Deals, text = stringResource(R.string.with_icon))
+    BpkChipType.values().forEach { type ->
+      ChipsRow(style, type, null)
     }
+
+    ChipsRow(style, BpkChipType.Option, BpkIcon.Deals, text = stringResource(R.string.with_icon))
   }
 }
 
@@ -100,7 +98,9 @@ private fun ChipsRow(
   Row(modifier) {
     ChipSample(
       text = text,
-      modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
+      modifier = Modifier
+        .weight(1f)
+        .wrapContentWidth(Alignment.CenterHorizontally),
       initialState = false,
       enabled = true,
       style = style,
@@ -109,7 +109,9 @@ private fun ChipsRow(
     )
     ChipSample(
       text = text,
-      modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
+      modifier = Modifier
+        .weight(1f)
+        .wrapContentWidth(Alignment.CenterHorizontally),
       initialState = true,
       enabled = true,
       style = style,
@@ -118,7 +120,9 @@ private fun ChipsRow(
     )
     ChipSample(
       text = text,
-      modifier = Modifier.weight(1f).wrapContentWidth(Alignment.CenterHorizontally),
+      modifier = Modifier
+        .weight(1f)
+        .wrapContentWidth(Alignment.CenterHorizontally),
       initialState = false,
       enabled = false,
       style = style,
