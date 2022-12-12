@@ -18,23 +18,11 @@
 
 package net.skyscanner.backpack.calendar2
 
-import android.view.View
-import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
-import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar2.extension.toIterable
-import net.skyscanner.backpack.demo.R
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.DayOfWeek
@@ -52,9 +40,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   private val initialRange = initialStartDate..initialEndDate
   private val now = initialStartDate
 
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
-
   @Before
   fun setup() {
     setDimensions(700, 400)
@@ -69,20 +54,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
       selectionMode = CalendarParams.SelectionMode.Range,
       range = initialRange,
       now = now,
-    )
-    calendar.setParams(params)
-    snap(calendar)
-  }
-
-  @Test
-  fun screenshotTestColoredCalendarDefault() {
-    val calendar = BpkCalendar(testContext)
-    val params = CalendarParams(
-      locale = Locale.UK,
-      selectionMode = CalendarParams.SelectionMode.Range,
-      range = initialRange,
-      now = now,
-      cellsInfo = multiColoredExampleCalendarColoring(initialRange),
     )
     calendar.setParams(params)
     snap(calendar)
@@ -192,146 +163,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarWithStartDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    val params = CalendarParams(
-      locale = Locale.UK,
-      range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
-      now = now,
-    )
-
-    calendar.setParams(params)
-
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-        rootLayout.addView(calendar)
-      }
-    }
-
-    val indexOfSelectedItem = 18
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfSelectedItem, ViewActions.click()))
-      .check { _, _ -> }
-    snap(calendar)
-  }
-
-  @Test
-  fun screenshotTestCalendarWithSameStartAndEndDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    val params = CalendarParams(
-      locale = Locale.UK,
-      range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
-      now = now,
-    )
-
-    calendar.setParams(params)
-
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-        rootLayout.addView(calendar)
-      }
-    }
-
-    val indexOfSelectedItem = 18
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfSelectedItem, ViewActions.click()))
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfSelectedItem, ViewActions.click()))
-      .check { _, _ -> }
-    snap(calendar)
-  }
-
-  @Test
-  fun screenshotTestCalendarWithStartAndEndDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    val params = CalendarParams(
-      locale = Locale.UK,
-      range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
-      now = now,
-    )
-
-    calendar.setParams(params)
-
-    selectStartEnd(calendar)
-  }
-
-  @Test
-  fun screenshotTestColoredCalendarWithStartAndEndDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    val params = CalendarParams(
-      locale = Locale.UK,
-      range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Range,
-      cellsInfo = multiColoredExampleCalendarColoring(initialRange),
-      now = now,
-    )
-
-    calendar.setParams(params)
-
-    selectStartEnd(calendar)
-  }
-
-  @Test
-  fun screenshotTestCalendarWithSingleDaySelected() {
-    val calendar = BpkCalendar(testContext)
-    val params = CalendarParams(
-      locale = Locale.UK,
-      range = initialRange,
-      selectionMode = CalendarParams.SelectionMode.Single,
-      now = now,
-    )
-    calendar.setParams(params)
-
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-        rootLayout.addView(calendar)
-      }
-    }
-
-    val indexOfInitialSelectedItem = 53
-    val indexOfFinalSelectedItem = 54
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(
-        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-          indexOfInitialSelectedItem,
-          ViewActions.click()
-        )
-      )
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(
-        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-          indexOfFinalSelectedItem,
-          ViewActions.click()
-        )
-      )
-
-    Espresso // Clicking on multiple dates should result in only one selected
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(
-        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-          indexOfFinalSelectedItem,
-          ViewActions.scrollTo()
-        )
-      )
-      .check { _, _ -> }
-    snap(calendar)
-  }
-
-  @Test
-  fun screenshotTestCalendarWithRangeSetProgrammatically() {
+  fun screenshotTestCalendarWithRangeSet() {
     val calendar = BpkCalendar(testContext)
     val params = CalendarParams(
       locale = Locale.UK,
@@ -345,7 +177,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarWithSingleDaySetProgrammatically() {
+  fun screenshotTestCalendarWithSingleDaySet() {
     val calendar = BpkCalendar(testContext)
     val params = CalendarParams(
       locale = Locale.UK,
@@ -437,7 +269,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestCalendarWithWholeMonthSetProgrammatically() {
+  fun screenshotTestCalendarWithWholeMonthSet() {
     val calendar = BpkCalendar(testContext)
     val now = LocalDate.of(2019, 1, 1)
     val range = now..(now + Period.ofYears(2))
@@ -454,51 +286,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
     calendar.setSelection(CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY)))
     snap(calendar)
   }
-
-  private fun selectStartEnd(view: View) {
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-        rootLayout.addView(view)
-      }
-    }
-
-    val indexOfRangeStart = 18
-    val indexOfRangeEnd = 54
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfRangeStart, ViewActions.click()))
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(indexOfRangeEnd, ViewActions.click()))
-
-    Espresso
-      .onView(withId(R.id.bpk_calendar_recycler_view))
-      .perform(
-        RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-          indexOfRangeStart,
-          ViewActions.scrollTo()
-        )
-      )
-      .check { _, _ -> }
-    snap(view)
-  }
-
-  private fun multiColoredExampleCalendarColoring(range: ClosedRange<LocalDate>): Map<LocalDate, CellInfo> =
-    range
-      .toIterable()
-      .associateWith {
-        CellInfo(
-          status = when (it.dayOfYear % 5) {
-            0 -> CellStatus.Negative
-            1 -> CellStatus.Neutral
-            2 -> CellStatus.Positive
-            3 -> CellStatus.Empty
-            else -> null
-          }
-        )
-      }
 
   private fun disabledDayOfTheWeekInfo(
     range: ClosedRange<LocalDate>,
