@@ -22,7 +22,21 @@ Example of a `BpkBottomNav`:
 import net.skyscanner.backpack.compose.bottomnav.BpkBottomNav
 
 BpkBottomNav(
-  items = listOf(BpkBottomNavItem),
+  items = listOf(
+    BpkBottomNavItem(
+      painter = painterResource(id = R.drawable.sample_icon),
+      title = stringResource(R.string.bottom_nav_explore),
+      id = 1,
+      showBadge = false
+    ),
+    BpkBottomNavItem(icon = BpkIcon.Trips, title = stringResource(R.string.bottom_nav_trips), id = 2, showBadge = false),
+    BpkBottomNavItem(
+      icon = BpkIcon.AccountCircle,
+      title = stringResource(R.string.navigation_account),
+      id = 3,
+      showBadge = true
+    ),
+  ),
   selectedItemId = 1,
   onTabClicked = {} // Handle update
 )
