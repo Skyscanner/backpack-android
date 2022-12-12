@@ -53,17 +53,17 @@ sealed interface BpkBottomNavItem {
 fun BpkBottomNavItem(
   title: String,
   id: Int,
-  showBadge: Boolean,
   icon: BpkIcon,
-): BpkBottomNavItem =
+  showBadge: Boolean = false,
+  ): BpkBottomNavItem =
   IconBottomNavItem(title, id, showBadge, icon)
 
 fun BpkBottomNavItem(
   title: String,
   id: Int,
-  showBadge: Boolean,
   painter: Painter,
-): BpkBottomNavItem =
+  showBadge: Boolean = false,
+  ): BpkBottomNavItem =
   PainterBottomNavItem(title, id, showBadge, painter)
 
 
@@ -93,15 +93,19 @@ fun BpkBottomNav(
                 is PainterBottomNavItem -> Icon(
                   modifier = Modifier.height(24.dp),
                   painter = tabItem.painter,
-                  contentDescription = null
+                  contentDescription = null,
                 )
               }
-                if (tabItem.showBadge) NotificationDot(Modifier.align(Alignment.BottomEnd) .offset(x = 1.dp, y = (-2).dp))
+                if (tabItem.showBadge) NotificationDot(
+                  Modifier
+                    .align(Alignment.BottomEnd)
+                    .offset(x = 1.dp, y = (-2).dp))
             }
           },
           label = {
             BpkText(
-              text = tabItem.title
+              text = tabItem.title,
+              style = BpkTheme.typography.label3,
             )
           },
           selectedContentColor = BpkTheme.colors.textLink,
