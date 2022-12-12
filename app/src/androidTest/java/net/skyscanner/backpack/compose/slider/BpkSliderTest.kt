@@ -19,8 +19,9 @@
 
 package net.skyscanner.backpack.compose.slider
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.demo.compose.DefaultSliderSample
 import net.skyscanner.backpack.demo.compose.RangeSliderSample
 import org.junit.Before
@@ -28,11 +29,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkSliderTest : BpkSnapshotTest() {
+class BpkSliderTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 200, width = 200)
+    snapshotSize = IntSize(200, 200)
   }
 
   @Test

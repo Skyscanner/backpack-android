@@ -36,8 +36,10 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.R
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matchers.greaterThanOrEqualTo
@@ -68,24 +70,24 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
   @Test
   fun expanded() {
     assumeVariant(BpkTestVariant.Default)
-    val asyncScreenshot = prepareForAsyncTest()
-
-    rule.scenario.onActivity { activity ->
-      val root = setupBottomSheet()
-      activity.setContentView(root)
-      root.post {
-        bottomSheetBehaviour.state = STATE_EXPANDED
+    rule.scenario.waitForActivity().also { activity ->
+      runOnUi {
+        val root = setupBottomSheet()
+        activity.setContentView(root)
+        root.post {
+          bottomSheetBehaviour.state = STATE_EXPANDED
+        }
       }
     }
     val callback = Callback(bottomSheetBehaviour)
     IdlingRegistry.getInstance().register(callback)
 
     InstrumentationRegistry.getInstrumentation().waitForIdleSync()
+    var bottomSheet: View? = null
     Espresso.onView(withId(TEST_ID)).check { view, _ ->
-      rule.scenario.onActivity {
-        asyncScreenshot.record(view)
-      }
+      bottomSheet = view
     }
+    snap(bottomSheet!!)
     IdlingRegistry.getInstance().unregister(callback)
   }
 

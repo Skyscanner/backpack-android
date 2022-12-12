@@ -52,7 +52,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   @Test
   fun default() {
     rule.scenario.waitForActivity().also { activity ->
-      var dialog: BpkDialog?= null
+      var dialog: BpkDialog? = null
       runOnUi {
         dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
           title = "You are going to Tokyo!"
@@ -71,13 +71,12 @@ class BpkDialogTest : BpkSnapshotTest() {
 
       record(dialog!!)
     }
-
   }
 
   @Test
   fun fullscreen() {
     rule.scenario.waitForActivity().also { activity ->
-      var dialog: BpkDialog?= null
+      var dialog: BpkDialog? = null
       runOnUi {
         dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
           title = "You are going to Tokyo!"
@@ -94,10 +93,8 @@ class BpkDialogTest : BpkSnapshotTest() {
           addActionButton(
             BpkDialog.Button("Skip") { }
           )
-
         }
       }
-
       record(dialog!!)
     }
   }
@@ -105,7 +102,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   @Test
   fun destructive() {
     rule.scenario.waitForActivity().also { activity ->
-      var dialog: BpkDialog?= null
+      var dialog: BpkDialog? = null
       runOnUi {
         dialog = BpkDialog(activity, BpkDialog.Type.Destructive).apply {
           title = "Delete?"
@@ -121,7 +118,6 @@ class BpkDialogTest : BpkSnapshotTest() {
           )
         }
       }
-
       record(dialog!!)
     }
   }
@@ -130,7 +126,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   @Test
   fun deprecated() {
     rule.scenario.waitForActivity().also { activity ->
-      var dialog: BpkDialog?= null
+      var dialog: BpkDialog? = null
       runOnUi {
         dialog = BpkDialog(activity, BpkDialog.Style.ALERT).apply {
           title = "Delete?"
@@ -164,7 +160,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   @Test
   fun warning() {
     rule.scenario.waitForActivity().also { activity ->
-      var dialog: BpkDialog?= null
+      var dialog: BpkDialog? = null
       runOnUi {
         dialog = BpkDialog(activity, BpkDialog.Type.Warning)
         dialog!!.apply {
@@ -191,7 +187,7 @@ class BpkDialogTest : BpkSnapshotTest() {
     val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
 
     rule.scenario.waitForActivity().also { activity ->
-      var dialog: BpkDialog?= null
+      var dialog: BpkDialog? = null
       runOnUi {
         dialog = BpkDialog(activity, BpkDialog.Type.Flare).apply {
           title = "You are going to Tokyo!"
@@ -209,7 +205,6 @@ class BpkDialogTest : BpkSnapshotTest() {
           )
         }
       }
-
       record(dialog!!)
     }
   }
@@ -224,7 +219,7 @@ class BpkDialogTest : BpkSnapshotTest() {
       }
     }
 
-    var wrapper : FrameLayout ?= null
+    var wrapper: FrameLayout? = null
     onView(withId(R.id.dialog_buttons_root))
       .inRoot(isDialog())
       .check { _, _ ->
@@ -245,7 +240,6 @@ class BpkDialogTest : BpkSnapshotTest() {
               setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
               addView(rootView)
             }
-
           }
         }
       }

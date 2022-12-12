@@ -18,12 +18,13 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Heart
 import org.junit.Before
@@ -32,14 +33,14 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @OptIn(ExperimentalCoroutinesApi::class)
-class BpkFloatingNotificationTest : BpkSnapshotTest() {
+class BpkFloatingNotificationTest : BpkComposeSnapshotTest() {
 
   private val state = BpkFloatingNotificationState()
   private val scope = TestScope(UnconfinedTestDispatcher())
 
   @Before
   fun setup() {
-    setDimensions(height = 110, width = 450)
+    snapshotSize = IntSize(450, 110)
   }
 
   @Test

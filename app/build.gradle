@@ -115,3 +115,7 @@ dependencies {
   implementation project(':Backpack')
   implementation project(':backpack-compose')
 }
+
+shot {
+  tolerance = 2
+}

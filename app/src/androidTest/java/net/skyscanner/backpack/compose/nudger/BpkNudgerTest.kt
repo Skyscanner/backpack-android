@@ -18,9 +18,11 @@
 
 package net.skyscanner.backpack.compose.nudger
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.compose.NudgerExample
 import net.skyscanner.backpack.demo.compose.NudgerStoryAvg
 import net.skyscanner.backpack.demo.compose.NudgerStoryMax
@@ -30,11 +32,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkNudgerTest : BpkSnapshotTest() {
+class BpkNudgerTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(50, 150)
+    snapshotSize = IntSize(150, 50)
   }
 
   @Test

@@ -19,9 +19,11 @@
 
 package net.skyscanner.backpack.compose.rating
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.compose.BpkRatingCustomContentSample
 import net.skyscanner.backpack.demo.compose.BpkRatingDefaultSample
 import net.skyscanner.backpack.demo.compose.BpkRatingLargeCustomContentNoSubtitleSample
@@ -36,11 +38,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkRatingTest : BpkSnapshotTest() {
+class BpkRatingTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 75, width = 250)
+    snapshotSize = IntSize(250, 75)
   }
 
   @Test

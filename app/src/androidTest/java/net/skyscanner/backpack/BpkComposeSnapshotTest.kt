@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack
 
+import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.size
@@ -25,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
@@ -51,6 +53,7 @@ open class BpkComposeSnapshotTest : ScreenshotTest {
     background: Color = Color.Unspecified,
     tags: List<Any> = emptyList(),
     vararg providers: ProvidedValue<*>,
+    assertion: ComposeTestRule.() -> Unit = {},
     content: @Composable () -> Unit,
   ) {
 
@@ -60,6 +63,7 @@ open class BpkComposeSnapshotTest : ScreenshotTest {
     val scenario = launchActivity<AppCompatActivity>()
     scenario.onActivity { activity ->
       activity.setContent {
+        activity.window.clearFlags(FLAG_TRANSLUCENT_STATUS)
         BackpackPreview(
           modifier = Modifier.size(size.width.dp, size.height.dp),
           background = background,
@@ -68,7 +72,10 @@ open class BpkComposeSnapshotTest : ScreenshotTest {
         )
       }
     }
+    composeTestRule.assertion()
 
     compareScreenshot(composeTestRule, screenshotName(tags))
+
+    scenario.close()
   }
 }

@@ -19,28 +19,25 @@
 package net.skyscanner.backpack.compose.barchart
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.data.BpkBarChartData
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.Month
 import kotlin.math.roundToInt
 
 @RunWith(AndroidJUnit4::class)
-class BpkBarchartTest : BpkSnapshotTest() {
-
-  @get:Rule
-  val composeTestRule = createEmptyComposeRule()
+class BpkBarchartTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(300, 400)
+    snapshotSize = IntSize(400, 300)
   }
 
   @Test
@@ -139,14 +136,13 @@ class BpkBarchartTest : BpkSnapshotTest() {
   @Test
   fun selected() {
     val model = BpkBarChartModel(caption = "Bar chart", items = createMonth(Month.JANUARY))
-    composeTestRule.setScreenshotContent {
+    composed(assertion = { onNodeWithText(model.items[10].values?.text!!).assertIsDisplayed() }) {
       BpkBarChart(
         model = model,
         selected = model.items[10],
         onSelectionChange = {},
       )
     }
-    composeTestRule.onNodeWithText(model.items[10].values?.text!!).assertIsDisplayed()
   }
 
   private fun createMonth(

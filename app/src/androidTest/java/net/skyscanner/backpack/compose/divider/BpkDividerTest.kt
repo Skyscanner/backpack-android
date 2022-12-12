@@ -19,8 +19,9 @@
 
 package net.skyscanner.backpack.compose.divider
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkComposeSnapshotTest
 import net.skyscanner.backpack.demo.compose.DividerSampleNoIndent
 import net.skyscanner.backpack.demo.compose.DividerSample_WithIndent
 import org.junit.Before
@@ -28,11 +29,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkDividerTest : BpkSnapshotTest() {
+class BpkDividerTest : BpkComposeSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 20, width = 100)
+    snapshotSize = IntSize(100, 20)
   }
 
   @Test
