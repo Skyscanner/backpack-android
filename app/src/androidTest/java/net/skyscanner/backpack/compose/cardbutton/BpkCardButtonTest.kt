@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -23,8 +25,29 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   private val style: BpkCardButtonStyle = flavor.style
 
   @Test
-  fun all() {
+  fun default() {
+    assumeTrue(style == BpkCardButtonStyle.Default)
     capture {
+      BpkCardButton(type = type, contentDescription = "", style = style, size = size)
+    }
+  }
+
+  @Test
+  fun onDark() {
+    assumeTrue(style == BpkCardButtonStyle.OnDark)
+    capture(
+      background = { BpkTheme.colors.textPrimary }
+    ) {
+      BpkCardButton(type = type, contentDescription = "", style = style, size = size)
+    }
+  }
+
+  @Test
+  fun contained() {
+    assumeTrue(style == BpkCardButtonStyle.Contained)
+    capture(
+      background = { BpkTheme.colors.textPrimary }
+    ) {
       BpkCardButton(type = type, contentDescription = "", style = style, size = size)
     }
   }
@@ -34,8 +57,8 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
     content: @Composable () -> Unit,
   ) {
     composed(
-      size = IntSize(160, 64),
-      tags = listOf(type, size),
+      size = IntSize(100, 100),
+      tags = listOf(type, size, style),
     ) {
       Box(
         Modifier
