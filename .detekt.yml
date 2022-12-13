@@ -199,6 +199,7 @@ formatting:
   NoBlankLineBeforeRbrace:
     active: true
     autoCorrect: true
+    excludes: [ '**/tokens/**' ]
   NoConsecutiveBlankLines:
     active: true
     autoCorrect: true
