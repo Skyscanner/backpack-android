@@ -136,9 +136,11 @@ ext {
   composeUiTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
   composeActivity = "androidx.activity:activity-compose:1.6.1"
   composeUtil = "androidx.compose.ui:ui-util:$composeVersion"
-  composeFoundation = "androidx.compose.foundation:foundation:$composeVersion"
 
-  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
+  accompanistVersion = "0.28.0"
+  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
+  accompanistPager = "com.google.accompanist:accompanist-pager:$accompanistVersion"
+  accompanistPagerIndicators = "com.google.accompanist:accompanist-pager-indicators:$accompanistVersion"
 }
 
 tasks.dokkaHtmlMultiModule.configure {

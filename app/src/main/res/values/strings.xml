@@ -259,4 +259,10 @@
   <string name="bar_chart_accessibility_label_price_is_unknown">%1$s the %2$s of %3$s, price is unknown</string>
   <string name="divider_no_indent">No indent</string>
   <string name="divider_indent">With indent</string>
+
+  <string name="page_indicator_less_than_5">Less than 5 pages</string>
+  <string name="page_indicator_more_than_5">More than 5 pages</string>
+  <string name="page_indicator_over_image">Over Image</string>
+  <string name="page_indicator_next">Next</string>
+  <string name="page_indicator_prev">Prev</string>
 </resources>
