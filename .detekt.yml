@@ -331,7 +331,7 @@ naming:
     active: false
   TopLevelPropertyNaming:
     active: true
-    constantPattern: '[A-Z][_A-Z0-9]*'
+    constantPattern: '[A-Z][_A-Z0-9a-z]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '_?[A-Za-z][_A-Za-z0-9]*'
   VariableMaxLength:
@@ -470,7 +470,8 @@ style:
   MaxChainedCallsOnSameLine:
     active: false
   MaxLineLength:
-    active: false
+    maxLineLength: 125
+    excludeCommentStatements: true
   MayBeConst:
     active: false
   ModifierOrder:
