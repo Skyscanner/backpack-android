@@ -1,0 +1,82 @@
+naming:
+  FunctionNaming:
+    functionPattern: '[a-zA-Z][a-zA-Z0-9]*'
+    excludes: ['**/tokens/**']
+  TopLevelPropertyNaming:
+    constantPattern: '[A-Z][A-Za-z0-9]*'
+  ObjectPropertyNaming:
+    excludes: ['**/tokens/**']
+  InvalidPackageDeclaration:
+    excludes: ['**/tokens/**']
+  MatchingDeclarationName:
+    active: false
+  MemberNameEqualsClassName:
+    active: false
+
+complexity:
+  LongParameterList:
+    functionThreshold: 13
+    excludes: ['**/tokens/**']
+  LongMethod:
+    threshold: 200
+  TooManyFunctions:
+    thresholdInFiles: 15
+  CyclomaticComplexMethod:
+    threshold: 20
+
+style:
+  MagicNumber:
+    excludes: ['**/tokens/**']
+    ignoreNumbers:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+      - '5'
+      - '10'
+      - '0.5'
+      - '0.01'
+      - '-0.5'
+  UnusedPrivateMember:
+    ignoreAnnotated: ['Preview']
+  MaxLineLength:
+    maxLineLength: 125
+    excludeCommentStatements: true
+  ReturnCount:
+    max: 5
+
+TwitterCompose:
+  CompositionLocalAllowlist:
+    active: true
+  CompositionLocalNaming:
+    active: true
+  ContentEmitterReturningValues:
+    active: true
+  ModifierComposable:
+    active: true
+  ModifierMissing:
+    active: true
+  ModifierReused:
+    active: true
+  ModifierWithoutDefault:
+    active: true
+  MultipleEmitters:
+    active: true
+  MutableParams:
+    active: true
+  ComposableNaming:
+    active: true
+  ComposableParamOrder:
+    active: true
+  PreviewNaming:
+    active: true
+  PreviewPublic:
+    active: true
+  RememberMissing:
+    active: true
+  UnstableCollections:
+    active: true
+  ViewModelForwarding:
+    active: true
+  ViewModelInjection:
+    active: true
