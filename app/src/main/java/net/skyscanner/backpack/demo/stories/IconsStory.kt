@@ -39,7 +39,7 @@ internal enum class IconType {
   },
   Small {
     override fun matchesName(name: String) = name.endsWith("_sm")
-  };
+  }, ;
 
   abstract fun matchesName(name: String): Boolean
 }
@@ -49,7 +49,7 @@ class IconsStory : Story() {
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View? =
     super.onCreateView(inflater, container, savedInstanceState)?.apply {
       // we force LTR layout here as we need to show LTR grid alignment with LTR/RTL icons
@@ -84,7 +84,7 @@ class IconsStory : Story() {
     iconsGridView.adapter = IconsAdapter(
       drawableResources,
       iconNames,
-      if (isRtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+      if (isRtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR,
     )
   }
 

@@ -53,12 +53,12 @@ open class ExampleBpkCalendarController(
       is SingleDay -> BpkToast.makeText(
         context,
         String.format("%s", range.selectedDay.toString()),
-        BpkToast.LENGTH_SHORT
+        BpkToast.LENGTH_SHORT,
       ).show()
       is CalendarRange -> BpkToast.makeText(
         context,
         String.format("%s - %s", range.start.toString(), range.end.toString()),
-        BpkToast.LENGTH_SHORT
+        BpkToast.LENGTH_SHORT,
       ).show()
     }
   }
@@ -122,8 +122,8 @@ internal fun multiColoredExampleCalendarColoring(
       ColoredBucket(CalendarCellStyle.Positive, greenSet),
       ColoredBucket(
         CalendarCellStyle.Custom(context.getColor(R.color.bpkSurfaceHighlight)),
-        greySet
-      )
-    )
+        greySet,
+      ),
+    ),
   )
 }

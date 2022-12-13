@@ -84,7 +84,7 @@ fun DisabledUncheckedSwitchExample() {
     text = stringResource(id = R.string.toggle_disabled_unchecked),
     enabled = false,
     checked = false,
-    onCheckedChange = null
+    onCheckedChange = null,
   )
 }
 

@@ -62,7 +62,7 @@ fun ButtonsStory(
   LazyColumn(
     modifier
       .fillMaxSize()
-      .padding(top = BpkDimension.Spacing.Md)
+      .padding(top = BpkDimension.Spacing.Md),
   ) {
     item {
       ButtonsRow(
@@ -88,7 +88,7 @@ fun ButtonLinkStory(
   LazyColumn(
     modifier
       .fillMaxSize()
-      .padding(top = BpkDimension.Spacing.Md)
+      .padding(top = BpkDimension.Spacing.Md),
   ) {
     LinkRows(BpkButtonSize.Default)
     item {
@@ -97,7 +97,7 @@ fun ButtonLinkStory(
         style = BpkTheme.typography.heading4,
         modifier = Modifier
           .padding(horizontal = BpkDimension.Spacing.Base)
-          .padding(top = BpkDimension.Spacing.Md)
+          .padding(top = BpkDimension.Spacing.Md),
       )
     }
     LinkRows(BpkButtonSize.Large)
@@ -111,7 +111,7 @@ fun ButtonDrawableIconStory(
   LazyColumn(
     modifier
       .fillMaxSize()
-      .padding(top = BpkDimension.Spacing.Md)
+      .padding(top = BpkDimension.Spacing.Md),
   ) {
 
     BpkButtonSize.values().map { size ->
@@ -121,7 +121,7 @@ fun ButtonDrawableIconStory(
           style = BpkTheme.typography.heading4,
           modifier = Modifier
             .padding(horizontal = BpkDimension.Spacing.Base)
-            .padding(top = BpkDimension.Spacing.Md)
+            .padding(top = BpkDimension.Spacing.Md),
         )
       }
       item {

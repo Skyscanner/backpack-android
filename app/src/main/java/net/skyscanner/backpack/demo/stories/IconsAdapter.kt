@@ -32,7 +32,7 @@ import net.skyscanner.backpack.toast.BpkToast
 class IconsAdapter(
   private var icons: ArrayList<Drawable>,
   private var names: ArrayList<String>,
-  private val direction: Int
+  private val direction: Int,
 ) : RecyclerView.Adapter<ViewHolder>() {
 
   private var rtlIconBackgroundColor: Int = 0

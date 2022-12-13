@@ -38,7 +38,7 @@ open class ComposeStory : Story() {
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View? {
     val composable = arguments?.getString(ID) ?: savedInstanceState?.getString(ID)
     val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false

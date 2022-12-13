@@ -41,7 +41,7 @@ import net.skyscanner.backpack.demo.R
 fun BpkSliderStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Xxl),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically)
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
   ) {
     BpkText(
       text = stringResource(R.string.slider_standard),

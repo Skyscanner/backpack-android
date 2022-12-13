@@ -33,7 +33,7 @@ class SettingsActivity : AppCompatActivity() {
   private val themeMapping = mapOf(
     "AppTheme" to R.style.AppTheme,
     "London" to R.style.LondonTheme,
-    "Doha" to R.style.DohaTheme
+    "Doha" to R.style.DohaTheme,
   )
 
   override fun onCreate(savedInstanceState: Bundle?) {

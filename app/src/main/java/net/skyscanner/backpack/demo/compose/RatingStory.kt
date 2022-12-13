@@ -62,7 +62,7 @@ fun RatingStory(
 @Composable
 @Preview
 internal fun BpkRatingDefaultSample(
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   BpkRating(
     title = stringResource(R.string.rating_title),
@@ -74,7 +74,7 @@ internal fun BpkRatingDefaultSample(
 @Composable
 @Preview
 internal fun BpkRatingTitleOnlySample(
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   BpkRating(
     title = stringResource(R.string.rating_title),
@@ -187,7 +187,7 @@ private fun CustomContent(
         maxRating = 5
         rating = RatingValue
       }
-    }
+    },
   )
 }
 
