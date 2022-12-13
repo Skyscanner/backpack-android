@@ -48,7 +48,7 @@ internal fun FlareShape(
           }
           addFlareRect(flareHeightPx, size, borderRadiusPx, pointerDirection, applyAntialiasFix)
           addFlarePointer(flareHeightPx, scale, size, pointerDirection)
-        }
+        },
       )
   }
 

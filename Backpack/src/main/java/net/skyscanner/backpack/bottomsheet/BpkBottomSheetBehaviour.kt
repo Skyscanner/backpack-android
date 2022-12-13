@@ -56,7 +56,7 @@ class BpkBottomSheetBehaviour<V : View>(context: Context, attrs: AttributeSet? =
       override fun onSlide(bottomSheet: View, slideOffset: Float) {
         updateBackground(slideOffset)
       }
-    })
+    },)
   }
 
   private fun updateBackground(slideOffset: Float) {

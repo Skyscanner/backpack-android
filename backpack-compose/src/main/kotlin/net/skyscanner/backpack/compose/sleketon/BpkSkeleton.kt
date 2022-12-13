@@ -72,7 +72,7 @@ enum class BpkSkeletonHeightSizeType {
   /**
    * Custom size, need set a detail height of the component.
    */
-  Custom
+  Custom,
 }
 
 sealed class BpkCircleSizeType {
@@ -93,7 +93,7 @@ sealed class BpkCircleSizeType {
 
 enum class BpkSkeletonCornerType {
   Square,
-  Rounded
+  Rounded,
 }
 
 private fun Modifier.enhanceHeadlineHeight(skeletonHeightSize: BpkSkeletonHeightSizeType): Modifier {
@@ -125,9 +125,8 @@ private fun shimmerAnimation(): State<Dp> {
   val infiniteTransition = rememberInfiniteTransition()
   return infiniteTransition.animateValue(
     initialValue = (-500).dp, targetValue = 500.dp, typeConverter = Dp.VectorConverter,
-    animationSpec = infiniteRepeatable(animation = tween(durationMillis = 1000, delayMillis = 200, easing = LinearEasing))
+    animationSpec = infiniteRepeatable(animation = tween(durationMillis = 1000, delayMillis = 200, easing = LinearEasing)),
   )
-
 }
 
 @Composable
@@ -140,9 +139,9 @@ private fun ShimmerBox(modifier: Modifier) {
             shimmerPrimaryColor(),
             shimmerSecondaryColor(),
             shimmerPrimaryColor(),
-          )
-        )
-      )
+          ),
+        ),
+      ),
   )
 }
 
@@ -154,15 +153,15 @@ private fun ShimmerBox(modifier: Modifier) {
 @Composable
 fun BpkImageSkeleton(
   modifier: Modifier = Modifier,
-  cornerType: BpkSkeletonCornerType = BpkSkeletonCornerType.Square
+  cornerType: BpkSkeletonCornerType = BpkSkeletonCornerType.Square,
 ) {
   val cornerRadius = if (cornerType === BpkSkeletonCornerType.Rounded) BpkBorderRadius.Sm else 0.dp
   Box(
     modifier = modifier
       .background(
         shimmerBackgroundColor(),
-        RoundedCornerShape(cornerRadius)
-      )
+        RoundedCornerShape(cornerRadius),
+      ),
   )
 }
 
@@ -180,19 +179,19 @@ fun BpkBodyTextSkeleton(
         modifier = Modifier
           .height(BpkSpacing.Md)
           .fillMaxWidth(0.85f)
-          .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
+          .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS)),
       )
       Box(
         modifier = Modifier
           .height(BpkSpacing.Md)
           .fillMaxWidth()
-          .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
+          .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS)),
       )
       Box(
         modifier = Modifier
           .height(BpkSpacing.Md)
           .fillMaxWidth(0.57f)
-          .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS))
+          .background(shimmerBackgroundColor(), RoundedCornerShape(BpkSkeletonBorderRadiusXXS)),
       )
     }
   }
@@ -206,12 +205,12 @@ fun BpkBodyTextSkeleton(
 @Composable
 fun BpkHeadlineSkeleton(
   modifier: Modifier = Modifier,
-  skeletonHeightSize: BpkSkeletonHeightSizeType = BpkSkeletonHeightSizeType.Small
+  skeletonHeightSize: BpkSkeletonHeightSizeType = BpkSkeletonHeightSizeType.Small,
 ) {
   Box(
     modifier = modifier
       .enhanceHeadlineHeight(skeletonHeightSize)
-      .background(shimmerBackgroundColor(), RoundedCornerShape(BpkBorderRadius.Sm))
+      .background(shimmerBackgroundColor(), RoundedCornerShape(BpkBorderRadius.Sm)),
   )
 }
 
@@ -221,7 +220,7 @@ fun BpkHeadlineSkeleton(
  */
 @Composable
 fun BpkCircleSkeleton(
-  circleSize: BpkCircleSizeType
+  circleSize: BpkCircleSizeType,
 ) {
   val diameter: Dp = when (circleSize) {
     is BpkCircleSizeType.Small -> BpkCircleSizeSm
@@ -232,7 +231,7 @@ fun BpkCircleSkeleton(
   Box(
     modifier = Modifier
       .size(diameter, diameter)
-      .background(shimmerBackgroundColor(), RoundedCornerShape(diameter.div(2)))
+      .background(shimmerBackgroundColor(), RoundedCornerShape(diameter.div(2))),
   )
 }
 
@@ -250,7 +249,7 @@ fun BpkShimmerOverlay(modifier: Modifier, content: @Composable BoxScope.() -> Un
       modifier = Modifier
         .fillMaxSize()
         .clipToBounds()
-        .offset(Dp(offsetX.value), 0.dp)
+        .offset(Dp(offsetX.value), 0.dp),
     )
   }
 }

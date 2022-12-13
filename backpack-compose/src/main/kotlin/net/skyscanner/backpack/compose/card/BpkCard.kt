@@ -72,7 +72,7 @@ fun BpkCard(
     contentColor = BpkTheme.colors.textPrimary,
     elevation = cardElevation(elevation),
     interactionSource = interactionSource,
-    content = { CardContent(padding, contentAlignment, content) })
+    content = { CardContent(padding, contentAlignment, content) },)
 }
 
 @Composable

@@ -80,7 +80,7 @@ fun BpkChip(
         default = style.backgroundColor,
         pressed = style.pressedBackgroundColor,
       )
-    }
+    },
   )
 
   val contentColor by animateColorAsState(
@@ -91,7 +91,7 @@ fun BpkChip(
         default = style.contentColor,
         pressed = BpkTheme.colors.textPrimary,
       )
-    }
+    },
   )
 
   Row(

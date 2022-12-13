@@ -36,6 +36,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
+@Preview
 fun PanelStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Base),

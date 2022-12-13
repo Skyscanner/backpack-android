@@ -30,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.slider.BpkRangeSlider
 import net.skyscanner.backpack.compose.slider.BpkSlider
 import net.skyscanner.backpack.compose.text.BpkText
@@ -38,6 +39,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
+@Preview
 fun BpkSliderStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Xxl),

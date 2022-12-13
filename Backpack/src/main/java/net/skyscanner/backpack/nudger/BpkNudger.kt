@@ -33,7 +33,7 @@ import kotlin.math.min
 open class BpkNudger @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
   private val decrementButton by unsafeLazy<View> {
@@ -83,7 +83,7 @@ open class BpkNudger @JvmOverloads constructor(
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkNudger,
-      defStyleAttr, 0
+      defStyleAttr, 0,
     ).use {
       minValue = it.getInt(R.styleable.BpkNudger_nudgerMinValue, minValue)
       maxValue = it.getInt(R.styleable.BpkNudger_nudgerMaxValue, maxValue)

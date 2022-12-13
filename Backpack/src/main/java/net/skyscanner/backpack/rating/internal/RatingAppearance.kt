@@ -31,7 +31,7 @@ internal class RatingAppearance(
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
   defaultStyle: BpkRating.Style,
-  defaultSize: BpkRating.Size
+  defaultSize: BpkRating.Size,
 ) {
 
   val style: BpkRating.Style
@@ -59,7 +59,7 @@ internal class RatingAppearance(
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkRating,
-      defStyleAttr, 0
+      defStyleAttr, 0,
     ).use { ta ->
       style = ta.getInt(R.styleable.BpkRating_ratingStyle, style.xmlId)
         .let(::mapXmlToStyle) ?: style

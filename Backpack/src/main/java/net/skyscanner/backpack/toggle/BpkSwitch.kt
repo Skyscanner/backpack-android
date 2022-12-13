@@ -43,7 +43,7 @@ private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
 open class BpkSwitch @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : SwitchCompat(wrapContext(context, attrs), attrs, defStyleAttr) {
 
   init {
@@ -63,8 +63,8 @@ open class BpkSwitch @JvmOverloads constructor(
     setTextColor(
       ColorStateList(
         arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
-        intArrayOf(textDisabledColor, textEnabledColor)
-      )
+        intArrayOf(textDisabledColor, textEnabledColor),
+      ),
     )
     switchMinWidth = resources.getDimensionPixelSize(R.dimen.bpk_switch_min_width)
   }
@@ -78,6 +78,6 @@ open class BpkSwitch @JvmOverloads constructor(
       intArrayOf(
         checkedColor,
         uncheckedColor,
-      )
+      ),
     )
 }

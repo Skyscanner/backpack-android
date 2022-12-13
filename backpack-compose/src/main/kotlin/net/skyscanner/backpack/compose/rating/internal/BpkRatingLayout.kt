@@ -71,7 +71,6 @@ internal fun BpkRatingLayout(
             BpkRatingSubtitle(subtitle)
           }
         }
-
     }
   }
 }

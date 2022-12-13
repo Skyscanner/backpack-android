@@ -34,7 +34,7 @@ import net.skyscanner.backpack.util.Consumer
 internal class ChartGraphView constructor(
   context: Context,
   colors: BpkBarChart.Colors,
-  onClick: Consumer<BpkBarChart.Column>
+  onClick: Consumer<BpkBarChart.Column>,
 ) : FrameLayout(context), Consumer<List<BpkBarChart.Group>?> {
 
   private val onClickWrapper = { holder: ChartBarHolder ->
@@ -66,7 +66,7 @@ internal class ChartGraphView constructor(
           title.text = group.title
         }
       }
-    })
+    },)
     it.addItemDecoration(ChartPopupDecoration(context, colors))
     addView(it, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
   }

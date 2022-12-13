@@ -53,7 +53,7 @@ sealed class CalendarCellStyle {
   @Deprecated("Use Calendar2 instead")
   enum class TextStyle {
     Light,
-    Dark
+    Dark,
   }
 
   /**

@@ -48,7 +48,7 @@ fun BpkSuccessDialog(
       secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 
@@ -73,7 +73,7 @@ fun BpkSuccessDialog(
       linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 
@@ -96,7 +96,7 @@ fun BpkWarningDialog(
       secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 
@@ -121,7 +121,7 @@ fun BpkWarningDialog(
       linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 
@@ -144,7 +144,7 @@ fun BpkDestructiveDialog(
       linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 

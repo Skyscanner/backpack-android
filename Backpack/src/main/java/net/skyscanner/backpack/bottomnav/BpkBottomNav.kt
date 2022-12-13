@@ -37,7 +37,7 @@ import net.skyscanner.backpack.text.BpkText
 open class BpkBottomNav @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : BottomNavigationView(context, attrs, defStyleAttr) {
 
   private val listeners = ListenersDelegate(menu).also {
@@ -61,7 +61,7 @@ open class BpkBottomNav @JvmOverloads constructor(
       Menu.NONE,
       id,
       menu.size(),
-      SpannableStringBuilder().append(title, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+      SpannableStringBuilder().append(title, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE),
     )
       .setIcon(icon)
 
@@ -86,7 +86,7 @@ open class BpkBottomNav @JvmOverloads constructor(
 
   @Deprecated(
     "Use add/remove OnNavigationItemSelectedListener instead",
-    replaceWith = ReplaceWith("addOnNavigationItemSelectedListener")
+    replaceWith = ReplaceWith("addOnNavigationItemSelectedListener"),
   )
   override fun setOnItemSelectedListener(listener: OnItemSelectedListener?) {
     throw UnsupportedOperationException("Not supported")
@@ -94,14 +94,14 @@ open class BpkBottomNav @JvmOverloads constructor(
 
   @Deprecated(
     "Use add/remove OnNavigationItemSelectedListener instead",
-    replaceWith = ReplaceWith("addOnNavigationItemReselectedListener")
+    replaceWith = ReplaceWith("addOnNavigationItemReselectedListener"),
   )
   override fun setOnItemReselectedListener(listener: OnItemReselectedListener?) {
     throw UnsupportedOperationException("Not supported")
   }
 
   private class ListenersDelegate(
-    private val menu: Menu
+    private val menu: Menu,
   ) : OnItemSelectedListener, OnItemReselectedListener {
 
     val reselected = mutableListOf<(MenuItem, Int) -> Unit>()
@@ -137,7 +137,7 @@ open class BpkBottomNav @JvmOverloads constructor(
 
     constructor(
       context: Context,
-      textStyle: BpkText.TextStyle = BpkText.TextStyle.BodyDefault
+      textStyle: BpkText.TextStyle = BpkText.TextStyle.BodyDefault,
     ) :
       this(BpkText.getFont(context, textStyle))
 

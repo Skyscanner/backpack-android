@@ -35,6 +35,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
+@Preview
 fun FieldSetStory() {
   FieldStatusSwitcher(
     modifier = Modifier.padding(BpkSpacing.Base),

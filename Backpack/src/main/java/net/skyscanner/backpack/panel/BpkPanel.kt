@@ -28,7 +28,7 @@ import net.skyscanner.backpack.R
 open class BpkPanel @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_panel
+  defStyleAttr: Int = R.style.Bpk_panel,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
   @Dimension

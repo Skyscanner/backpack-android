@@ -36,7 +36,7 @@ open class BpkStarRating @JvmOverloads constructor(
   empty = R.drawable.bpk_star_outline,
   half = R.drawable.bpk_star_half,
   full = R.drawable.bpk_star,
-  starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+  starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
 ) {
 
   override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {

@@ -53,7 +53,7 @@ class BpkCalendar private constructor(
     initialParams = CalendarParams(
       range = LocalDate.now() - Period.ofYears(1)..LocalDate.now() + Period.ofYears(1),
       selectionMode = CalendarParams.SelectionMode.Range,
-    )
+    ),
   ),
 ) : ConstraintLayout(context, attrs, defStyleAttr), CalendarComponent by stateMachine {
 
@@ -92,7 +92,7 @@ class BpkCalendar private constructor(
           it.invoke(item.yearMonth)
         }
       }
-    })
+    },)
 
     state.onEach {
       headerView(it.params)
@@ -133,7 +133,7 @@ class BpkCalendar private constructor(
   }
 
   private class NoCellPositionAccessibilityInfo(
-    recyclerView: RecyclerView
+    recyclerView: RecyclerView,
   ) : RecyclerViewAccessibilityDelegate(recyclerView) {
 
     override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfoCompat) {

@@ -31,14 +31,14 @@ import net.skyscanner.backpack.util.use
 open class BpkFab @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : FloatingActionButton(
   createContextThemeWrapper(
     createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.floatingActionButtonStyle),
-    attrs, R.attr.bpkFabStyle
+    attrs, R.attr.bpkFabStyle,
   ),
   attrs,
-  defStyleAttr
+  defStyleAttr,
 ) {
 
   init {
@@ -53,7 +53,7 @@ open class BpkFab @JvmOverloads constructor(
       attrs,
       R.styleable.BpkFab,
       defStyleAttr,
-      0
+      0,
     ).use {
       backgroundColour = it.getColor(R.styleable.BpkFab_fabBackgroundColor, backgroundColour)
       iconColour = it.getColor(R.styleable.BpkFab_fabIconColor, iconColour)
@@ -61,14 +61,14 @@ open class BpkFab @JvmOverloads constructor(
 
     this.imageTintList = getColorSelector(
       iconColour,
-      context.getColor(R.color.bpkTextDisabled)
+      context.getColor(R.color.bpkTextDisabled),
     )
     this.isClickable = isEnabled
     this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
     this.elevation = resources.getDimensionPixelSize(R.dimen.bpkElevationBase).toFloat()
     this.backgroundTintList = getColorSelector(
       backgroundColour,
-      context.getColor(R.color.__privateButtonDisabledBackground)
+      context.getColor(R.color.__privateButtonDisabledBackground),
     )
   }
 
@@ -79,12 +79,12 @@ open class BpkFab @JvmOverloads constructor(
 
   private fun getColorSelector(
     @ColorInt normalColor: Int,
-    @ColorInt disabledColor: Int
+    @ColorInt disabledColor: Int,
   ) = ColorStateList(
     arrayOf(
       intArrayOf(-android.R.attr.state_enabled),
-      intArrayOf()
+      intArrayOf(),
     ),
-    intArrayOf(disabledColor, normalColor)
+    intArrayOf(disabledColor, normalColor),
   )
 }

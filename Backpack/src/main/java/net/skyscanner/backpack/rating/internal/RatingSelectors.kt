@@ -78,7 +78,7 @@ internal class RatingSelectors(
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkRating,
-      defStyleAttr, 0
+      defStyleAttr, 0,
     ).use {
       colorLow = it.getColorStateList(R.styleable.BpkRating_ratingColorLow) ?: colorLow
       colorMedium = it.getColorStateList(R.styleable.BpkRating_ratingColorMedium) ?: colorMedium
@@ -92,7 +92,7 @@ internal class RatingSelectors(
     val backgroundColors = arrayOf(
       colorLow,
       colorMedium,
-      colorHigh
+      colorHigh,
     )
 
     backgroundColor = {

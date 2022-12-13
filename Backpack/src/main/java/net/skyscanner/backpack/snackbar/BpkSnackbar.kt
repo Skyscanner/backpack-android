@@ -63,7 +63,7 @@ class BpkSnackbar private constructor(
   duration: Int,
   @ColorInt private val textColor: Int,
   @ColorInt actionColor: Int,
-  @ColorInt backgroundColor: Int
+  @ColorInt backgroundColor: Int,
 ) {
 
   private val callbacks = ArrayList<BaseTransientBottomBar.BaseCallback<BpkSnackbar>>()
@@ -78,7 +78,7 @@ class BpkSnackbar private constructor(
       override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
         callbacks.forEach { it.onDismissed(this@BpkSnackbar, event) }
       }
-    })
+    },)
   }
 
   private val titleFontSpan = BpkFontSpan(context, BpkText.TextStyle.Label2)
@@ -168,7 +168,7 @@ class BpkSnackbar private constructor(
         if (ignoreDismissAfterAction && event == DISMISS_EVENT_ACTION) return
         callback()
       }
-    })
+    },)
 
   fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
     callbacks.remove(callback)
@@ -210,7 +210,7 @@ class BpkSnackbar private constructor(
     text: CharSequence?,
     icon: Drawable?,
     contentDescription: String?,
-    callback: View.OnClickListener
+    callback: View.OnClickListener,
   ) {
     actionView.gravity = when {
       icon != null -> Gravity.CENTER
@@ -222,7 +222,7 @@ class BpkSnackbar private constructor(
         icon != null -> customiseText(contentDescription ?: " ", ImageSpan(createIconDrawable(icon, textColor)!!))
         else -> ""
       },
-      callback
+      callback,
     )
   }
 
@@ -278,7 +278,7 @@ class BpkSnackbar private constructor(
         duration = adjustedDuration,
         textColor = textColor,
         actionColor = actionColor,
-        backgroundColor = backgroundColor
+        backgroundColor = backgroundColor,
       )
         .setText(text)
     }

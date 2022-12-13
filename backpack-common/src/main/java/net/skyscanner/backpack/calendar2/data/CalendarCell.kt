@@ -75,7 +75,7 @@ sealed class CalendarCell {
     Middle,
     End,
     StartMonth,
-    EndMonth
+    EndMonth,
   }
 }
 

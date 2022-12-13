@@ -101,7 +101,7 @@ internal fun BarChartColumn(
               model.values == null -> BpkTheme.colors.line
               selected -> BpkTheme.colors.coreAccent
               else -> BpkTheme.colors.corePrimary
-            }
+            },
           ).value,
         ),
     )

@@ -31,7 +31,7 @@ import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarCellHeaderHolder(
   parent: ViewGroup,
-  private val output: Consumer<CalendarInteraction>
+  private val output: Consumer<CalendarInteraction>,
 ) : ItemHolder<CalendarCell.Header>(parent, R.layout.view_bpk_calendar_header) {
 
   private val month = findViewById<TextView>(R.id.bpk_calendar_cell_month)

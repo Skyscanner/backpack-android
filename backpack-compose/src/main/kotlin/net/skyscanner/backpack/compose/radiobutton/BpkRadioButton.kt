@@ -38,7 +38,6 @@ import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf

@@ -76,7 +76,7 @@ fun BpkFieldSet(
             is BpkFieldStatus.Error -> BpkTheme.colors.textError
             is BpkFieldStatus.Validated -> BpkTheme.colors.textPrimary
             is BpkFieldStatus.Default -> BpkTheme.colors.textPrimary
-          }
+          },
         ).value,
       )
     }
@@ -93,7 +93,7 @@ fun BpkFieldSet(
           when (status) {
             is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
             else -> BpkTheme.colors.textSecondary
-          }
+          },
         ).value,
         modifier = Modifier.padding(top = BpkSpacing.Md),
       )

@@ -88,17 +88,17 @@ fun GoogleMap.addBpkMarker(
         it.icon(
           context.generatePointer { x, y ->
             it.anchor(x, y)
-          }
+          },
         )
       } else {
         it.icon(
           context.generateLabelIcon(title, icon) { x, y ->
             it.anchor(x, y)
             it.infoWindowAnchor(0.5f, 1f)
-          }
+          },
         )
       }
-    }
+    },
 )?.apply {
   this.icon = icon
   this.bpkTag = tag
@@ -106,7 +106,7 @@ fun GoogleMap.addBpkMarker(
 }
 
 internal inline fun Context.generatePointer(
-  onAnchorPositionCalculated: (Float, Float) -> Unit
+  onAnchorPositionCalculated: (Float, Float) -> Unit,
 ): BitmapDescriptor {
   val drawable = AppCompatResources.getDrawable(this, R.drawable.bpk_map_marker_pointer)!!
   val bitmap = drawable.rasterize()
@@ -117,7 +117,7 @@ internal inline fun Context.generatePointer(
 internal inline fun Context.generateLabelIcon(
   title: String,
   icon: Int = 0,
-  onAnchorPositionCalculated: (Float, Float) -> Unit
+  onAnchorPositionCalculated: (Float, Float) -> Unit,
 ): BitmapDescriptor {
 
   val bitmap = createBpkMarkerView(this, title, icon, true).rasterize {

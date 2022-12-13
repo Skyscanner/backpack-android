@@ -140,7 +140,7 @@ internal fun ButtonDrawable(
   Image(
     painter = icon,
     contentDescription = contentDescription,
-    modifier = modifier.defaultIconSize(size.iconSize)
+    modifier = modifier.defaultIconSize(size.iconSize),
   )
 }
 

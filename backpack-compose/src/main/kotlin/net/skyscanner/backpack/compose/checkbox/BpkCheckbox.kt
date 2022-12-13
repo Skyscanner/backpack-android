@@ -137,7 +137,7 @@ fun BpkCheckbox(
 
     BpkToggleableContent(
       enabled = enabled,
-      content = { content(state) }
+      content = { content(state) },
     )
   }
 }

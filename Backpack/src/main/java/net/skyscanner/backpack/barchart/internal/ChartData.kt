@@ -21,7 +21,7 @@ package net.skyscanner.backpack.barchart.internal
 import net.skyscanner.backpack.barchart.BpkBarChart
 
 internal class ChartData(
-  groups: List<BpkBarChart.Group>? = null
+  groups: List<BpkBarChart.Group>? = null,
 ) {
 
   private val data: List<Item> =
@@ -38,6 +38,6 @@ internal class ChartData(
 
   private data class Item(
     val group: BpkBarChart.Group,
-    val column: BpkBarChart.Column
+    val column: BpkBarChart.Column,
   )
 }

@@ -32,10 +32,10 @@ open class BpkSlider @JvmOverloads constructor(
 ) : RangeSlider(
   createContextThemeWrapper(
     createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.sliderStyle),
-    attrs, R.attr.bpkSliderStyle
+    attrs, R.attr.bpkSliderStyle,
   ),
   attrs,
-  defStyleAttr
+  defStyleAttr,
 ) {
 
   var value: Float
@@ -51,7 +51,7 @@ open class BpkSlider @JvmOverloads constructor(
       attrs,
       R.styleable.BpkSlider,
       defStyleAttr,
-      0
+      0,
     ).use {
       val primaryColor = context.getColorStateList(R.color.bpkCoreAccent)
       val lineColor = context.getColorStateList(R.color.bpkLine)

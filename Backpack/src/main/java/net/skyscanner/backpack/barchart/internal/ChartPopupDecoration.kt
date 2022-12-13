@@ -29,7 +29,7 @@ import kotlin.math.max
 
 internal class ChartPopupDecoration(
   context: Context,
-  colors: BpkBarChart.Colors
+  colors: BpkBarChart.Colors,
 ) : RecyclerView.ItemDecoration() {
 
   private val drawable = ChartPopupDrawable(context, colors)
@@ -55,7 +55,7 @@ internal class ChartPopupDecoration(
       val dx = anchor.itemView.left + (anchor.itemView.width - drawable.bounds.width()) / 2f
       val dy = max(
         parent.paddingTop + anchor.chartRoundedTopPosition - bottomSpacing - drawable.bounds.height(),
-        parent.paddingTop.toFloat() + topSpacing
+        parent.paddingTop.toFloat() + topSpacing,
       )
 
       translate(dx, dy)

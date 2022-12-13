@@ -79,7 +79,6 @@ internal fun BpkRatingNumbers(
         overflow = TextOverflow.Ellipsis,
       )
     }
-
   }
 }
 
@@ -102,8 +101,8 @@ internal fun BpkRatingTitle(
       BpkText(
         text = "",
         modifier = modifier
-            .alpha(0f)
-            .semantics { invisibleToUser() },
+          .alpha(0f)
+          .semantics { invisibleToUser() },
       )
       content()
     }

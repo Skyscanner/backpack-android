@@ -41,33 +41,33 @@ import kotlin.math.roundToInt
 open class BpkOverlay @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
   enum class CornerType(
     internal val id: Int,
     internal val clipToOutline: Boolean = false,
-    internal val outlineProvider: ViewOutlineProvider = EmptyViewOutlineProvider
+    internal val outlineProvider: ViewOutlineProvider = EmptyViewOutlineProvider,
   ) {
     None(0),
     Rounded(
       id = 1,
       clipToOutline = true,
-      outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs)
+      outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs),
     ),
   }
 
   enum class OverlayType(
     internal val id: Int,
     internal val colorRes: Int = android.R.color.transparent,
-    internal val opacity: Float = 0.0f
+    internal val opacity: Float = 0.0f,
   ) {
     None(0),
     Tint(
       id = 1,
       colorRes = R.color.bpkBlack,
-      opacity = 0.56f
-    )
+      opacity = 0.56f,
+    ),
   }
 
   var cornerType: CornerType = CornerType.None
@@ -89,7 +89,7 @@ open class BpkOverlay @JvmOverloads constructor(
         (field.opacity * 255).roundToInt(),
         Color.red(color),
         Color.green(color),
-        Color.blue(color)
+        Color.blue(color),
       )
 
       invalidate()

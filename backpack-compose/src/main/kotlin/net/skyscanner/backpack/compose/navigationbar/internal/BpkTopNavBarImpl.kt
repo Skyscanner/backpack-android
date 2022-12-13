@@ -96,7 +96,7 @@ internal fun BpkTopNavBarImpl(
               is TextAction -> TextAction(action)
             }
           }
-        }
+        },
       )
     }
   }
@@ -139,4 +139,3 @@ internal fun NavIcon.toAction(): IconAction? =
     is NavIcon.Close -> IconAction(BpkIcon.NativeAndroidClose, contentDescription, onClick)
     is NavIcon.None -> null
   }
-

@@ -119,27 +119,27 @@ internal class MonthView @JvmOverloads constructor(
 
     selectedDayCircleFillColor = a.getColor(
       R.styleable.BpkCalendar_calendarDateSelectedBackgroundColor,
-      context.getColor(R.color.bpkCoreAccent)
+      context.getColor(R.color.bpkCoreAccent),
     )
 
     selectedDaySameDayCircleFillColor = a.getColor(
       R.styleable.BpkCalendar_calendarDateSelectedSameDayBackgroundColor,
-      context.getColor(R.color.bpkLine)
+      context.getColor(R.color.bpkLine),
     )
 
     rangeBackgroundColor = a.getColor(
       R.styleable.BpkCalendar_calendarDateSelectedRangeBackgroundColor,
-      context.getColor(R.color.bpkSurfaceHighlight)
+      context.getColor(R.color.bpkSurfaceHighlight),
     )
 
     selectedTextColor = a.getColor(
       R.styleable.BpkCalendar_calendarDateSelectedTextColor,
-      context.getColor(R.color.bpkTextPrimaryInverse)
+      context.getColor(R.color.bpkTextPrimaryInverse),
     )
 
     rangeTextColor = a.getColor(
       R.styleable.BpkCalendar_calendarRangeTextColor,
-      context.getColor(R.color.bpkTextPrimary)
+      context.getColor(R.color.bpkTextPrimary),
     )
 
     a.recycle()
@@ -238,7 +238,7 @@ internal class MonthView @JvmOverloads constructor(
     val rowHeight = if (labelsViewModel.isEmpty()) rowHeight else rowHeightLabeled
     setMeasuredDimension(
       MeasureSpec.getSize(widthMeasureSpec),
-      rowHeight * numberOfRows + monthHeaderSize + selectedDayCircleRadius
+      rowHeight * numberOfRows + monthHeaderSize + selectedDayCircleRadius,
     )
   }
 
@@ -369,7 +369,7 @@ internal class MonthView @JvmOverloads constructor(
                 startX - 1 + paddingX,
                 startYBase - selectedDayCircleRadius,
                 stopX + 1,
-                startYBase + selectedDayCircleRadius
+                startYBase + selectedDayCircleRadius,
               )
             } else {
               drawRect(
@@ -377,7 +377,7 @@ internal class MonthView @JvmOverloads constructor(
                 startX - 1,
                 startYBase - selectedDayCircleRadius,
                 stopX - paddingX + 1,
-                startYBase + selectedDayCircleRadius
+                startYBase + selectedDayCircleRadius,
               )
             }
           }
@@ -390,7 +390,7 @@ internal class MonthView @JvmOverloads constructor(
               miniDayNumberTextSize / 3,
               x,
               y,
-              selectedDayCircleRadius
+              selectedDayCircleRadius,
             )
             selectedCirclePaint.alpha = 255
           } else {
@@ -401,7 +401,7 @@ internal class MonthView @JvmOverloads constructor(
               x,
               startYBase,
               selectedDayCircleRadius,
-              selectedCirclePaint
+              selectedCirclePaint,
             )
           }
         }
@@ -418,7 +418,7 @@ internal class MonthView @JvmOverloads constructor(
               x,
               startYBase,
               selectedDayCircleRadius,
-              colouredBucketPaint
+              colouredBucketPaint,
             )
           }
         }
@@ -451,7 +451,7 @@ internal class MonthView @JvmOverloads constructor(
       String.format(controller.locale, "%d", calendarDay.dayOfMonth),
       x.toFloat(),
       y.toFloat(),
-      monthNumberPaint
+      monthNumberPaint,
     )
 
     labelsViewModel.draw(
@@ -513,7 +513,7 @@ internal class MonthView @JvmOverloads constructor(
     val x1 = if (isRtl) viewWidth - stopX else startX
     val x2 = if (isRtl) viewWidth - startX else stopX
     canvas.drawRect(
-      x1.toFloat(), startY.toFloat(), x2.toFloat(), stopY.toFloat(), rangeBackPaint
+      x1.toFloat(), startY.toFloat(), x2.toFloat(), stopY.toFloat(), rangeBackPaint,
     )
   }
 
@@ -555,7 +555,7 @@ internal class MonthView @JvmOverloads constructor(
     isBeforeMin(calendarDay.year, calendarDay.month.value, calendarDay.dayOfMonth) || isAfterMax(
       calendarDay.year,
       calendarDay.month.value,
-      calendarDay.dayOfMonth
+      calendarDay.dayOfMonth,
     )
 
   private fun isDisabledDate(calendarDay: LocalDate) =

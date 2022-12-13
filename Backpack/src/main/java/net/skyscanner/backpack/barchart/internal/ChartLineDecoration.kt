@@ -29,7 +29,7 @@ import net.skyscanner.backpack.util.getColorForState
 
 internal class ChartLineDecoration(
   private val resources: Resources,
-  private val colors: BpkBarChart.Colors
+  private val colors: BpkBarChart.Colors,
 ) : RecyclerView.ItemDecoration(), Consumer<ChartBarHolder> {
 
   private val paint = Paint().apply {

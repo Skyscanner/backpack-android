@@ -93,7 +93,7 @@ open class BpkStarRatingBase internal constructor(
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkStarRating,
-      defStyleAttr, 0
+      defStyleAttr, 0,
     ).use {
       _maxRating = it.getInt(R.styleable.BpkStarRating_maxRating, maxRating)
       _rating = it.getFloat(R.styleable.BpkStarRating_rating, maxRating / 2f)

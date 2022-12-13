@@ -29,14 +29,14 @@ internal fun colorStateList(
   @ColorInt pressedColor: Int = color,
   @ColorInt focusedColor: Int = pressedColor,
   @ColorInt activatedColor: Int = pressedColor,
-  @ColorInt disabledColor: Int
+  @ColorInt disabledColor: Int,
 ) = ColorStateList(
   arrayOf(
     intArrayOf(-android.R.attr.state_enabled),
     intArrayOf(android.R.attr.state_pressed),
     intArrayOf(android.R.attr.state_focused),
     intArrayOf(android.R.attr.state_activated),
-    intArrayOf()
+    intArrayOf(),
   ),
-  intArrayOf(disabledColor, pressedColor, focusedColor, activatedColor, color)
+  intArrayOf(disabledColor, pressedColor, focusedColor, activatedColor, color),
 )

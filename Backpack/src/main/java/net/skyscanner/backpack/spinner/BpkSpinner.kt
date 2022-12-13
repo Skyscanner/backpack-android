@@ -56,7 +56,7 @@ private const val INVALID_RES = -1
 open class BpkSpinner @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
   private val colors = arrayOf(
@@ -138,8 +138,8 @@ open class BpkSpinner @JvmOverloads constructor(
         progressBar,
         ViewGroup.LayoutParams(
           ViewGroup.LayoutParams.MATCH_PARENT,
-          ViewGroup.LayoutParams.MATCH_PARENT
-        )
+          ViewGroup.LayoutParams.MATCH_PARENT,
+        ),
       )
 
       updateColor()

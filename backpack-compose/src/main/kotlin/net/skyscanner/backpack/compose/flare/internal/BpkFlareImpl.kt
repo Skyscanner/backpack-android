@@ -29,7 +29,7 @@ import net.skyscanner.backpack.compose.utils.FlareShape
 
 internal fun FlareShape(
   radius: BpkFlareRadius,
-  pointerDirection: BpkFlarePointerDirection
+  pointerDirection: BpkFlarePointerDirection,
 ): Shape =
   FlareShape(
     flareHeight = FlareHeight,

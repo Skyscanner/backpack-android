@@ -68,8 +68,8 @@ open class HighlightedDaysMonthFooter(
         },
         LayoutParams(
           LayoutParams.WRAP_CONTENT,
-          LayoutParams.WRAP_CONTENT
-        )
+          LayoutParams.WRAP_CONTENT,
+        ),
       )
     }
   }

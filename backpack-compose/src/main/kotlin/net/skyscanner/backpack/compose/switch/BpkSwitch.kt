@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LocalMinimumTouchTargetEnforcement
-import androidx.compose.material.RangeSlider
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.runtime.Composable
@@ -39,10 +38,8 @@ import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
-import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 @Composable
 fun BpkSwitch(
@@ -97,7 +94,6 @@ fun BpkSwitch(
       enabled = enabled,
       interactionSource = interactionSource,
     )
-
   }
 }
 

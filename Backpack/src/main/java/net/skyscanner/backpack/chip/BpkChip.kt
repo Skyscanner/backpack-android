@@ -84,7 +84,7 @@ open class BpkChip @JvmOverloads constructor(
       resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
       0,
       resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
-      0
+      0,
     )
     initialize(attrs, defStyleAttr)
   }

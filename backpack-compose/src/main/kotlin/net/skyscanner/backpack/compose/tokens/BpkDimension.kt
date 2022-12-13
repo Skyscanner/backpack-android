@@ -30,5 +30,4 @@ object BpkDimension {
 
   @Stable
   val Spacing = BpkSpacing
-
 }

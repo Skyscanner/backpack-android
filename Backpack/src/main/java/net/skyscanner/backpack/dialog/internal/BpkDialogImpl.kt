@@ -99,10 +99,10 @@ internal interface BpkDialogImpl {
         val dangerButton = type == BpkDialog.Type.Destructive
         when (buttonsRoot.childCount) {
           0 -> addActionButton(
-            createButton(if (dangerButton) BpkButton.Type.Destructive else BpkButton.Type.Featured, button)
+            createButton(if (dangerButton) BpkButton.Type.Destructive else BpkButton.Type.Featured, button),
           )
           1 -> addActionButton(
-            createButton(if (dangerButton) BpkButton.Type.Link else BpkButton.Type.Secondary, button)
+            createButton(if (dangerButton) BpkButton.Type.Link else BpkButton.Type.Secondary, button),
           )
           else -> addActionButton(createButton(BpkButton.Type.Link, button))
         }

@@ -1,6 +1,6 @@
 TwitterCompose:
   CompositionLocalAllowlist:
-    active: true
+    active: false
   CompositionLocalNaming:
     active: true
   ContentEmitterReturningValues:
