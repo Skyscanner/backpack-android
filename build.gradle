@@ -32,7 +32,6 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath dokka
     classpath 'com.facebook.testing.screenshot:plugin:0.15.0'
-    classpath "org.jlleitschuh.gradle:ktlint-gradle:11.0.0"
     classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
     classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
   }
@@ -50,20 +49,11 @@ allprojects {
 }
 
 subprojects {
-  apply plugin: "org.jlleitschuh.gradle.ktlint"
   apply plugin: "io.gitlab.arturbosch.detekt"
 
   repositories {
     google()
     mavenCentral()
-  }
-
-  ktlint {
-    version = "0.43.2"
-    enableExperimentalRules = false
-    reporters {
-      reporter "checkstyle"
-    }
   }
 
   detekt {
@@ -76,17 +66,6 @@ subprojects {
     detektPlugins "com.twitter.compose.rules:detekt:0.0.26"
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-rules-libraries:$detekt_version"
-  }
-
-  afterEvaluate { project ->
-
-    // for backward compatibility, will be removed in another task
-    task ktlint(type: SourceTask, group: "verification") {
-      description = "Check Kotlin code style."
-      dependsOn(ktlintCheck)
-    }
-
-    check.dependsOn("ktlint")
   }
 }
 

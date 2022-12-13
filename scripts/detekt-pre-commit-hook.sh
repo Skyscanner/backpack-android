@@ -15,15 +15,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-# Transforms the list of files provided by lint-staged into a format ktlint understands
-
-ALL_FILES=$*
-
-./gradlew ktlintCheck -Pfiles="$ALL_FILES"
-
-if [ $? -ne 0 ]; then
-  echo "Run './gradlew ktlintFormat' to fix issues"
-  exit 1
+echo "Running detekt check..."
+OUTPUT="/tmp/detekt-$(date +%s)"
+./gradlew detekt > $OUTPUT
+EXIT_CODE=$?
+if [ $EXIT_CODE -ne 0 ]; then
+  cat $OUTPUT
+  rm $OUTPUT
+  echo "***********************************************"
+  echo "                 Detekt failed                 "
+  echo " Please fix the above issues before committing "
+  echo "***********************************************"
+  exit $EXIT_CODE
 fi
-exit 0
+rm $OUTPUT
