@@ -41,7 +41,7 @@ complexity:
     active: false
   ComplexInterface:
     active: false
-  ComplexMethod:
+  CyclomaticComplexMethod:
     active: false
   LabeledExpression:
     active: false
@@ -183,7 +183,7 @@ formatting:
   Indentation:
     active: true
     autoCorrect: true
-    indentSize: 4
+    indentSize: 2
   KdocWrapping:
     active: false
   MaximumLineLength:
@@ -236,7 +236,7 @@ formatting:
   ParameterListWrapping:
     active: true
     autoCorrect: true
-    maxLineLength: 160
+    maxLineLength: 125
   SpacingAroundAngleBrackets:
     active: false
   SpacingAroundColon:
@@ -274,13 +274,23 @@ formatting:
   StringTemplate:
     active: true
     autoCorrect: true
-  TrailingComma:
-    active: false
+  TrailingCommaOnCallSite:
+    active: true
+  TrailingCommaOnDeclarationSite:
+    active: true
   TypeArgumentListSpacing:
     active: false
   UnnecessaryParenthesesBeforeTrailingLambda:
     active: false
   Wrapping:
+    active: false
+
+libraries:
+  ForbiddenPublicDataClass:
+    active: false
+  LibraryCodeMustSpecifyReturnType:
+    active: false
+  LibraryEntitiesShouldNotBePublic:
     active: false
 
 naming:
@@ -356,8 +366,6 @@ potential-bugs:
     active: false
   DoubleMutabilityForCollection:
     active: false
-  DuplicateCaseInWhenExpression:
-    active: false
   ElseCaseInsteadOfExhaustiveWhen:
     active: false
   EqualsAlwaysReturnsTrueOrFalse:
@@ -388,13 +396,9 @@ potential-bugs:
     active: false
   MissingPackageDeclaration:
     active: false
-  MissingWhenCase:
-    active: false
   NullCheckOnMutableProperty:
     active: false
   NullableToStringCall:
-    active: false
-  RedundantElseInWhen:
     active: false
   UnconditionalJumpStatementInLoop:
     active: false
@@ -449,17 +453,11 @@ style:
     active: false
   ForbiddenMethodCall:
     active: false
-  ForbiddenPublicDataClass:
-    active: false
   ForbiddenSuppress:
     active: false
   ForbiddenVoid:
     active: false
   FunctionOnlyReturningConstant:
-    active: false
-  LibraryCodeMustSpecifyReturnType:
-    active: false
-  LibraryEntitiesShouldNotBePublic:
     active: false
   LoopWithTooManyJumpStatements:
     active: false

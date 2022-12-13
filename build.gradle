@@ -19,6 +19,7 @@
 buildscript {
   ext.kotlin_version = '1.7.20'
   ext.compose_compiler_version = '1.3.2'
+  ext.detekt_version = '1.22.0'
   ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:$kotlin_version"
   repositories {
     google()
@@ -33,7 +34,7 @@ buildscript {
     classpath 'com.facebook.testing.screenshot:plugin:0.15.0'
     classpath "org.jlleitschuh.gradle:ktlint-gradle:11.0.0"
     classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
-    classpath 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.22.0'
+    classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
   }
 }
 
@@ -72,6 +73,8 @@ subprojects {
 
   dependencies {
     detektPlugins "com.twitter.compose.rules:detekt:0.0.26"
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-rules-libraries:$detekt_version"
   }
 
   afterEvaluate { project ->
