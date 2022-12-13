@@ -4,11 +4,6 @@ import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.compose.cardbutton.internal.BpkSaveCardButtonImpl
 import net.skyscanner.backpack.compose.cardbutton.internal.BpkShareCardButtonImpl
 
-sealed class BpkCardButtonType {
-  data class Save(val checked: Boolean, val onCheckedChange: (Boolean) -> Unit) : BpkCardButtonType()
-  data class Share(val onClick: () -> Unit) : BpkCardButtonType()
-}
-
 enum class BpkCardButtonStyle {
   Default,
   Contained,
@@ -21,25 +16,33 @@ enum class BpkCardButtonSize {
 }
 
 @Composable
-fun BpkCardButton(
-  type: BpkCardButtonType,
+fun BpkSaveButton(
+  checked: Boolean,
   contentDescription: String,
-  style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
+  onCheckedChange: (Boolean) -> Unit,
   size: BpkCardButtonSize = BpkCardButtonSize.Default,
+  style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
 ) {
-  when (type) {
-    is BpkCardButtonType.Save -> BpkSaveCardButtonImpl(
-      checked = type.checked,
-      contentDescription = contentDescription,
-      style = style,
-      size = size,
-      onCheckedChange = type.onCheckedChange
-    )
-    is BpkCardButtonType.Share -> BpkShareCardButtonImpl(
-      contentDescription = contentDescription,
-      style = style,
-      size = size,
-      onClick = type.onClick
-    )
-  }
+  BpkSaveCardButtonImpl(
+    checked = checked,
+    contentDescription = contentDescription,
+    style = style,
+    size = size,
+    onCheckedChange = onCheckedChange
+  )
+}
+
+@Composable
+fun BpkShareButton(
+  contentDescription: String,
+  onClick: () -> Unit,
+  size: BpkCardButtonSize = BpkCardButtonSize.Default,
+  style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
+) {
+  BpkShareCardButtonImpl(
+    contentDescription = contentDescription,
+    style = style,
+    size = size,
+    onClick = onClick
+  )
 }

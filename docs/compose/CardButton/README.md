@@ -25,33 +25,27 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of a Save Button on light background:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.cardbutton
-import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonType
+import net.skyscanner.backpack.compose.cardbutton.BpkSaveButton
 
-val (isChecked, setChecked) = remember { mutableStateOf(false) }
-BpkCardButton(
-  type = BpkCardButtonType.Save(
-    checked = isChecked,
-    onCheckedChange = { checked -> setChecked(checked) }
-  ),
+var checked1 by remember { mutableStateOf(false) }
+BpkSaveButton(
+  checked = checked1,
   contentDescription = "",
+  onCheckedChange = { checked1 = !checked1 }
 )
 ```
 
 Example of a Share Button on an image:
 
 ```Kotlin
-import net.skyscanner.backpack.compose.cardbutton
-import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonType
+import net.skyscanner.backpack.compose.cardbutton.BpkShareButton
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonStyle
 
-BpkCardButton(
-  type = BpkCardButtonType.Share(
-    onClick = {  }
-  ),
-  contentDescription = "",
+BpkShareButton(
   size = BpkCardButtonSize.Small,
   style = BpkCardButtonStyle.Contained,
+  contentDescription = "",
+  onClick = {}
 )
 ```

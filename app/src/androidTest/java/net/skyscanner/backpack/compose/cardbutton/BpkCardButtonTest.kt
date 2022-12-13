@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import org.junit.Assume.assumeTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
@@ -20,35 +19,93 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
 
-  private val type: BpkCardButtonType = flavor.type
   private val size: BpkCardButtonSize = flavor.size
-  private val style: BpkCardButtonStyle = flavor.style
+  private val checked = flavor.checked
 
   @Test
-  fun default() {
-    assumeTrue(style == BpkCardButtonStyle.Default)
-    capture {
-      BpkCardButton(type = type, contentDescription = "", style = style, size = size)
+  fun defaultSaveButton() {
+    capture(
+      background = { BpkTheme.colors.textPrimaryInverse }
+    ) {
+      BpkSaveButton(
+        checked = checked,
+        contentDescription = "",
+        style = BpkCardButtonStyle.Default,
+        size = size,
+        onCheckedChange = {}
+      )
     }
   }
 
   @Test
-  fun onDark() {
-    assumeTrue(style == BpkCardButtonStyle.OnDark)
+  fun onDarkSaveButton() {
     capture(
-      background = { BpkTheme.colors.textPrimary }
+      background = { BpkTheme.colors.surfaceContrast }
     ) {
-      BpkCardButton(type = type, contentDescription = "", style = style, size = size)
+      BpkSaveButton(
+        checked = checked,
+        contentDescription = "",
+        style = BpkCardButtonStyle.OnDark,
+        size = size,
+        onCheckedChange = {}
+      )
     }
   }
 
   @Test
-  fun contained() {
-    assumeTrue(style == BpkCardButtonStyle.Contained)
+  fun containedSaveButton() {
     capture(
-      background = { BpkTheme.colors.textPrimary }
+      background = { BpkTheme.colors.surfaceContrast }
     ) {
-      BpkCardButton(type = type, contentDescription = "", style = style, size = size)
+      BpkSaveButton(
+        checked = checked,
+        contentDescription = "",
+        style = BpkCardButtonStyle.Contained,
+        size = size,
+        onCheckedChange = {}
+      )
+    }
+  }
+
+  @Test
+  fun defaultShareButton() {
+    capture(
+      background = { BpkTheme.colors.textPrimaryInverse }
+    ) {
+      BpkShareButton(
+        contentDescription = "",
+        style = BpkCardButtonStyle.Default,
+        size = size,
+        onClick = {}
+      )
+    }
+  }
+
+  @Test
+  fun onDarkShareButton() {
+    capture(
+      background = { BpkTheme.colors.textPrimaryInverse }
+    ) {
+      BpkShareButton(
+        contentDescription = "",
+        style = BpkCardButtonStyle.OnDark,
+        size = size,
+        onClick = {}
+      )
+    }
+  }
+
+  @Test
+  fun containedShareButton() {
+    capture(
+      background = { BpkTheme.colors.textPrimaryInverse }
+    ) {
+      BpkShareButton(
+        contentDescription = "",
+        style = BpkCardButtonStyle.Contained,
+        size = size,
+        onClick = {}
+      )
     }
   }
 
@@ -58,7 +115,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   ) {
     composed(
       size = IntSize(100, 100),
-      tags = listOf(type, size, style),
+      tags = listOf(size, checked),
     ) {
       Box(
         Modifier
@@ -75,24 +132,13 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   companion object {
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
-    fun flavours(): List<Flavor> = BpkCardButtonSize.values().flatMap { size ->
-      BpkCardButtonStyle.values().map { style ->
-        Flavor(BpkCardButtonType.Save(checked = false, onCheckedChange = {}), size, style)
-      }
-    } + BpkCardButtonSize.values().flatMap { size ->
-      BpkCardButtonStyle.values().map { style ->
-        Flavor(BpkCardButtonType.Save(checked = true, onCheckedChange = {}), size, style)
-      }
-    } + BpkCardButtonSize.values().flatMap { size ->
-      BpkCardButtonStyle.values().map { style ->
-        Flavor(BpkCardButtonType.Share(onClick = {}), size, style)
-      }
-    }
+    fun flavours(): List<Flavor> = BpkCardButtonSize.values().map { size ->
+      listOf(Flavor(size, true), Flavor(size, false))
+    }.flatten()
   }
 }
 
 data class Flavor(
-  val type: BpkCardButtonType,
   val size: BpkCardButtonSize,
-  val style: BpkCardButtonStyle,
+  val checked: Boolean
 )
