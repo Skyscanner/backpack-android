@@ -17,7 +17,7 @@
  */
 
 // Auto-generated: do not edit
-@file:Suppress("RedundantVisibilityModifier", "unused")
+@file:Suppress("RedundantVisibilityModifier","unused")
 
 package net.skyscanner.backpack.compose.tokens
 
@@ -138,5 +138,5 @@ public object BpkColor {
   public val White: Color = Color(0xFFFFFFFF)
 
   private const val DEPRECATION_MESSAGE: String =
-    "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
+      "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
 }
