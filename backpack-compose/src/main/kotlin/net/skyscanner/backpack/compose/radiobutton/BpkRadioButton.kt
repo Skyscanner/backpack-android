@@ -104,9 +104,9 @@ fun BpkRadioButton(
 private fun BpkRadioButtonImpl(
   selected: Boolean,
   onClick: (() -> Unit)?,
-  modifier: Modifier = Modifier,
   enabled: Boolean,
   interactionSource: MutableInteractionSource,
+  modifier: Modifier = Modifier,
 ) {
   // our design system isn't designed with the minimum touch target in mind at the moment.
   // Disable the enforcement to avoid the extra padding

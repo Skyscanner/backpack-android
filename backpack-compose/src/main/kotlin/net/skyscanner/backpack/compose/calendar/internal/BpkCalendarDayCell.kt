@@ -149,12 +149,12 @@ private fun Modifier.cellDayBackground(
         Selection.StartMonth,
         Selection.Middle,
         Selection.EndMonth,
-    -> background(BpkTheme.colors.surfaceHighlight, CircleShape)
+        -> background(BpkTheme.colors.surfaceHighlight, CircleShape)
 
         Selection.Single,
         Selection.Start,
         Selection.End,
-    -> background(BpkTheme.colors.coreAccent, CircleShape)
+        -> background(BpkTheme.colors.coreAccent, CircleShape)
       }
 
     else -> this
@@ -175,12 +175,12 @@ private fun dateColor(
         Selection.Double,
         Selection.Start,
         Selection.End,
-    -> BpkTheme.colors.textPrimaryInverse
+        -> BpkTheme.colors.textPrimaryInverse
 
         Selection.StartMonth,
         Selection.Middle,
         Selection.EndMonth,
-    -> BpkTheme.colors.textPrimary
+        -> BpkTheme.colors.textPrimary
       }
 
     inactive -> BpkTheme.colors.textDisabled

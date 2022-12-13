@@ -56,13 +56,13 @@ import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
 internal fun BpkButtonImpl(
+  onClick: () -> Unit,
   modifier: Modifier = Modifier,
   size: BpkButtonSize = BpkButtonSize.Default,
   type: BpkButtonType = BpkButtonType.Primary,
   enabled: Boolean = true,
   loading: Boolean = false,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  onClick: () -> Unit,
   content: @Composable RowScope.() -> Unit,
 ) {
   CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(type.rippleColor())) {

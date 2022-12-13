@@ -36,7 +36,7 @@ class BpkComposeComponentUsageDetectorTest {
           """import androidx.compose.material.Button
 
 @Composable
-fun CustomButton() { Button() }"""
+fun CustomButton() { Button() }""",
         ),
         button(),
       )
@@ -48,7 +48,7 @@ src/test.kt:4: Warning: Backpack component available for androidx.compose.materi
 fun CustomButton() { Button() }
                      ~~~~~~~~
 0 errors, 1 warnings
-      """
+      """,
       )
   }
 
@@ -60,7 +60,7 @@ fun CustomButton() { Button() }
           """import net.skyscanner.backpack.compose.button.BpkButton
 
 @Composable
-fun CustomButton() { BpkButton() }"""
+fun CustomButton() { BpkButton() }""",
         ),
         bpkButton(),
       )
@@ -73,7 +73,7 @@ fun CustomButton() { BpkButton() }"""
       """package net.skyscanner.backpack.compose.button
 
 @Composable
-fun BpkButton() {}"""
+fun BpkButton() {}""",
     )
 
   private fun button(): TestFile =
@@ -81,7 +81,7 @@ fun BpkButton() {}"""
       """package androidx.compose.material
 
 @Composable
-fun Button() {}"""
+fun Button() {}""",
     )
 
   private fun TestLintTask.runCheck(): TestLintResult =

@@ -184,6 +184,7 @@ formatting:
     active: true
     autoCorrect: true
     indentSize: 2
+    excludes: [ '**/tokens/**' ]
   KdocWrapping:
     active: false
   MaximumLineLength:
@@ -201,6 +202,7 @@ formatting:
   NoConsecutiveBlankLines:
     active: true
     autoCorrect: true
+    excludes: [ '**/tokens/**' ]
   NoEmptyClassBody:
     active: true
     autoCorrect: true
@@ -245,6 +247,7 @@ formatting:
   SpacingAroundComma:
     active: true
     autoCorrect: true
+    excludes: [ '**/tokens/**' ]
   SpacingAroundCurly:
     active: true
     autoCorrect: true
@@ -262,6 +265,7 @@ formatting:
   SpacingAroundParens:
     active: true
     autoCorrect: true
+    excludes: [ '**/tokens/**' ]
   SpacingAroundRangeOperator:
     active: true
     autoCorrect: true
@@ -276,6 +280,7 @@ formatting:
     autoCorrect: true
   TrailingCommaOnCallSite:
     active: true
+    excludes: [ '**/tokens/**' ]
   TrailingCommaOnDeclarationSite:
     active: true
   TypeArgumentListSpacing:

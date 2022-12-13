@@ -61,14 +61,17 @@ enum class BpkSkeletonHeightSizeType {
    * Small size: 8.dp
    */
   Small,
+
   /**
    * Medium size: 16.dp
    */
   Medium,
+
   /**
    * Large size: 32.dp
    */
   Large,
+
   /**
    * Custom size, need set a detail height of the component.
    */
@@ -80,10 +83,12 @@ sealed class BpkCircleSizeType {
    * Small size: 32.dp
    */
   object Small : BpkCircleSizeType()
+
   /**
    * Large size: 48.dp
    */
   object Large : BpkCircleSizeType()
+
   /**
    * Custom size width dimension.
    * @param diameter unit: Dp
@@ -130,7 +135,9 @@ private fun shimmerAnimation(): State<Dp> {
 }
 
 @Composable
-private fun ShimmerBox(modifier: Modifier) {
+private fun ShimmerBox(
+  modifier: Modifier = Modifier,
+) {
   return Box(
     modifier = modifier
       .background(
@@ -221,6 +228,7 @@ fun BpkHeadlineSkeleton(
 @Composable
 fun BpkCircleSkeleton(
   circleSize: BpkCircleSizeType,
+  modifier: Modifier = Modifier,
 ) {
   val diameter: Dp = when (circleSize) {
     is BpkCircleSizeType.Small -> BpkCircleSizeSm
@@ -229,7 +237,7 @@ fun BpkCircleSkeleton(
   }
 
   Box(
-    modifier = Modifier
+    modifier = modifier
       .size(diameter, diameter)
       .background(shimmerBackgroundColor(), RoundedCornerShape(diameter.div(2))),
   )
@@ -241,7 +249,10 @@ fun BpkCircleSkeleton(
  * @param content Child component.
  */
 @Composable
-fun BpkShimmerOverlay(modifier: Modifier, content: @Composable BoxScope.() -> Unit) {
+fun BpkShimmerOverlay(
+  modifier: Modifier = Modifier,
+  content: @Composable BoxScope.() -> Unit,
+) {
   val offsetX by shimmerAnimation()
   Box(modifier = modifier) {
     content()

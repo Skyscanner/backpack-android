@@ -100,7 +100,7 @@ internal fun BpkRatingTitle(
       // a little trick to provide baseline params for the custom layouts with invisible text
       BpkText(
         text = "",
-        modifier = modifier
+        modifier = Modifier
           .alpha(0f)
           .semantics { invisibleToUser() },
       )

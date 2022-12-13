@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -139,9 +140,14 @@ private fun DialogContent(
 }
 
 @Composable
-private fun DialogTextContent(title: String, text: String, textAlign: TextAlign) {
+private fun ColumnScope.DialogTextContent(
+  title: String,
+  text: String,
+  textAlign: TextAlign,
+  modifier: Modifier = Modifier,
+) {
   BpkText(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier.fillMaxWidth(),
     text = title,
     style = BpkTheme.typography.heading3,
     textAlign = textAlign,
