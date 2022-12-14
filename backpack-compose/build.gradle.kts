@@ -64,7 +64,6 @@ dependencies {
   implementation(rootProject.ext.get("ktx")!!)
   implementation(rootProject.ext.get("composeFoundation")!!)
   implementation(rootProject.ext.get("accompanistPager")!!)
-  implementation(rootProject.ext.get("accompanistPagerIndicators")!!)
 
   androidTestImplementation(rootProject.ext.get("junitAndroid")!!)
   androidTestImplementation(rootProject.ext.get("testRules")!!)

@@ -140,7 +140,6 @@ ext {
   accompanistVersion = "0.28.0"
   accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
   accompanistPager = "com.google.accompanist:accompanist-pager:$accompanistVersion"
-  accompanistPagerIndicators = "com.google.accompanist:accompanist-pager-indicators:$accompanistVersion"
 }
 
 tasks.dokkaHtmlMultiModule.configure {

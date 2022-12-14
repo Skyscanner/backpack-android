@@ -67,7 +67,6 @@ internal fun BpkPageIndicatorImpl(
 
   val currentItem by remember { derivedStateOf { pagerState.currentPage } }
   val itemCount = pagerState.pageCount
-  println("currentItem = $currentItem")
 
   LaunchedEffect(key1 = currentItem) {
     val viewportSize = listState.layoutInfo.viewportSize
