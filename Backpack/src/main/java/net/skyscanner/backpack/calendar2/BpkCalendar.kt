@@ -82,17 +82,19 @@ class BpkCalendar private constructor(
     recyclerView.adapter = calendarAdapter
     recyclerView.itemAnimator = null
     recyclerView.setAccessibilityDelegateCompat(NoCellPositionAccessibilityInfo(recyclerView))
-    recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-      override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+    recyclerView.addOnScrollListener(
+      object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
-        val firstItemPosition = calendarLayoutManager.findFirstVisibleItemPosition()
-        val item = state.value.cells[firstItemPosition]
+          val firstItemPosition = calendarLayoutManager.findFirstVisibleItemPosition()
+          val item = state.value.cells[firstItemPosition]
 
-        scrollListeners.forEach {
-          it.invoke(item.yearMonth)
+          scrollListeners.forEach {
+            it.invoke(item.yearMonth)
+          }
         }
-      }
-    },)
+      },
+    )
 
     state.onEach {
       headerView(it.params)

@@ -70,15 +70,17 @@ class BpkSnackbar private constructor(
 
   private val snackbar = Snackbar.make(view, "", duration).apply {
     setBackgroundColorCompat(backgroundColor)
-    addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-      override fun onShown(transientBottomBar: Snackbar?) {
-        callbacks.forEach { it.onShown(this@BpkSnackbar) }
-      }
+    addCallback(
+      object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+        override fun onShown(transientBottomBar: Snackbar?) {
+          callbacks.forEach { it.onShown(this@BpkSnackbar) }
+        }
 
-      override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-        callbacks.forEach { it.onDismissed(this@BpkSnackbar, event) }
-      }
-    },)
+        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+          callbacks.forEach { it.onDismissed(this@BpkSnackbar, event) }
+        }
+      },
+    )
   }
 
   private val titleFontSpan = BpkFontSpan(context, BpkText.TextStyle.Label2)
@@ -162,13 +164,15 @@ class BpkSnackbar private constructor(
   }
 
   fun setOnDismissed(ignoreDismissAfterAction: Boolean = true, callback: () -> Unit) =
-    addCallback(object : Callback() {
-      override fun onDismissed(transientBottomBar: BpkSnackbar?, event: Int) {
-        super.onDismissed(transientBottomBar, event)
-        if (ignoreDismissAfterAction && event == DISMISS_EVENT_ACTION) return
-        callback()
-      }
-    },)
+    addCallback(
+      object : Callback() {
+        override fun onDismissed(transientBottomBar: BpkSnackbar?, event: Int) {
+          super.onDismissed(transientBottomBar, event)
+          if (ignoreDismissAfterAction && event == DISMISS_EVENT_ACTION) return
+          callback()
+        }
+      },
+    )
 
   fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
     callbacks.remove(callback)

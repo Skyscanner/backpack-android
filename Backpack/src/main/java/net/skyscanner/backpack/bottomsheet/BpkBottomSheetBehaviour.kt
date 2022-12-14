@@ -39,24 +39,26 @@ class BpkBottomSheetBehaviour<V : View>(context: Context, attrs: AttributeSet? =
     background =
       ResourcesCompat.getDrawable(context.resources, R.drawable.bpk_bottom_sheet_background, null) as LayerDrawable
 
-    addBottomSheetCallback(object : BottomSheetCallback() {
-      override fun onStateChanged(bottomSheet: View, newState: Int) {
-        bottomSheet.background = background
-        (bottomSheet as? ViewGroup)?.apply {
-          clipToPadding = false
-          clipChildren = false
+    addBottomSheetCallback(
+      object : BottomSheetCallback() {
+        override fun onStateChanged(bottomSheet: View, newState: Int) {
+          bottomSheet.background = background
+          (bottomSheet as? ViewGroup)?.apply {
+            clipToPadding = false
+            clipChildren = false
+          }
+          when (newState) {
+            STATE_COLLAPSED -> updateBackground(0f)
+            STATE_EXPANDED -> updateBackground(1f)
+            else -> {}
+          }
         }
-        when (newState) {
-          STATE_COLLAPSED -> updateBackground(0f)
-          STATE_EXPANDED -> updateBackground(1f)
-          else -> {}
-        }
-      }
 
-      override fun onSlide(bottomSheet: View, slideOffset: Float) {
-        updateBackground(slideOffset)
-      }
-    },)
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {
+          updateBackground(slideOffset)
+        }
+      },
+    )
   }
 
   private fun updateBackground(slideOffset: Float) {

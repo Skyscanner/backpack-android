@@ -60,11 +60,13 @@ internal class MonthAdapter(
   private var positionMetadata = computeMetadata()
 
   init {
-    registerDataSetObserver(object : DataSetObserver() {
-      override fun onChanged() {
-        positionMetadata = computeMetadata()
-      }
-    },)
+    registerDataSetObserver(
+      object : DataSetObserver() {
+        override fun onChanged() {
+          positionMetadata = computeMetadata()
+        }
+      },
+    )
   }
 
   override fun onDayClick(view: MonthView?, day: LocalDate) {
