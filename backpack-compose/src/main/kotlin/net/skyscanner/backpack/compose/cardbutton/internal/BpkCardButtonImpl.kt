@@ -19,7 +19,7 @@
 package net.skyscanner.backpack.compose.cardbutton.internal
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,7 +36,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
+import kotlinx.coroutines.delay
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -61,14 +64,27 @@ fun BpkSaveCardButtonImpl(
   onCheckedChange: (Boolean) -> Unit
 ) {
   var state by remember { mutableStateOf(BpkCardButtonState.Default) }
-  val scaleAnimation by animateFloatAsState(
-    targetValue = if (state == BpkCardButtonState.Transition) 30f / 24f else 1f,
-    animationSpec = spring(
-      dampingRatio = 0.4f,
-      stiffness = 800f,
-    ),
-    finishedListener = { state = BpkCardButtonState.Default }
-  )
+  val scaleAnimation = remember { Animatable(1f) }
+  if (state == BpkCardButtonState.Transition) {
+    LaunchedEffect(key1 = Unit) {
+      scaleAnimation.animateTo(
+        targetValue = 30f / 24f,
+        animationSpec = spring(
+          dampingRatio = 0.4f,
+          stiffness = 800f,
+        )
+      )
+      delay(500)
+      scaleAnimation.animateTo(
+        targetValue = 1f,
+        animationSpec = spring(
+          dampingRatio = 0.4f,
+          stiffness = 1200f,
+        )
+      )
+      state = BpkCardButtonState.Default
+    }
+  }
   val colorAnimation by animateColorAsState(
     targetValue = when (style) {
       BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
@@ -86,7 +102,7 @@ fun BpkSaveCardButtonImpl(
         .background(
           color = when (style) {
             BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
-            else -> BpkTheme.colors.textOnDark.copy(alpha = 0.0F)
+            else -> Color.Transparent
           },
         )
         .toggleable(
@@ -99,7 +115,7 @@ fun BpkSaveCardButtonImpl(
         ),
       contentAlignment = Alignment.Center,
     ) {
-      Box(modifier = Modifier.scale(scaleAnimation)) {
+      Box(modifier = Modifier.scale(scaleAnimation.value)) {
         BpkIcon(
           icon = if (checked) BpkIcon.Heart else BpkIcon.HeartOutline,
           contentDescription = contentDescription,
