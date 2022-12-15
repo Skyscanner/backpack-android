@@ -20,13 +20,13 @@ package net.skyscanner.backpack.compose.inventorydividedcard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.requiredWidthIn
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
@@ -35,29 +35,33 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
-fun InventoryDividedCard(
+fun BpkInventoryDividedCard(
   primaryContent: @Composable () -> Unit,
   secondaryContent: @Composable () -> Unit,
+  modifier: Modifier = Modifier,
   onClick: (() -> Unit)? = null,
 ) {
   BpkCard(
-    modifier = Modifier
-      .clickable { onClick?.invoke() },
+    modifier = modifier
+      .then(onClick?.let { Modifier.clickable { it.invoke() } } ?: Modifier),
     corner = BpkCardCorner.Small,
     padding = BpkCardPadding.None,
   ) {
-    Column(
-      modifier = Modifier
-        .requiredWidthIn(min = 240.dp)
-    ) {
+    Column {
       primaryContent.invoke()
       Spacer(
         modifier = Modifier
           .height(1.dp)
-          .width(IntrinsicSize.Max)
+          .fillMaxWidth()
           .background(color = BpkTheme.colors.surfaceHighlight)
       )
       secondaryContent.invoke()
     }
   }
+}
+
+fun Modifier.inventoryDividedCardWidth(cardWidth: Dp): Modifier {
+  val minWidth = 240.dp
+  val width = if (cardWidth < minWidth) minWidth else cardWidth
+  return requiredWidth(width)
 }

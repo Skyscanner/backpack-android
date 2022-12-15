@@ -19,22 +19,22 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import net.skyscanner.backpack.compose.inventorydividedcard.InventoryDividedCard
+import net.skyscanner.backpack.compose.inventorydividedcard.BpkInventoryDividedCard
+import net.skyscanner.backpack.compose.inventorydividedcard.inventoryDividedCardWidth
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -46,56 +46,53 @@ fun InventoryDividedCardStory() {
   Column(
     modifier = Modifier
       .fillMaxSize()
-      .padding(BpkSpacing.Base)
+      .padding(BpkSpacing.Base),
+    horizontalAlignment = Alignment.CenterHorizontally
   ) {
-    InventoryDividedCard(
+    BpkInventoryDividedCard(
+      modifier = Modifier.fillMaxWidth(),
       primaryContent = {
         Image(
           modifier = Modifier
-            .fillMaxWidth()
-            .height(BpkSpacing.Xxl * 2),
+            .height(BpkSpacing.Xxl * 2)
+            .fillMaxWidth(),
           painter = painterResource(id = R.drawable.canadian_rockies_canada),
           contentDescription = "",
           contentScale = ContentScale.Crop
         )
       },
       secondaryContent = {
-        Box(
+        BpkText(
           modifier = Modifier.fillMaxWidth(),
-          contentAlignment = Alignment.Center
-        ) {
-          BpkText(
-            text = stringResource(id = R.string.inventory_divided_card_with_more_than_minimum),
-            style = BpkTheme.typography.bodyDefault
-          )
-        }
+          text = stringResource(id = R.string.inventory_divided_card_with_more_than_minimum),
+          style = BpkTheme.typography.bodyDefault,
+          textAlign = TextAlign.Center
+        )
       },
       onClick = {}
     )
 
-    Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+    Spacer(modifier = Modifier.height(BpkSpacing.Base))
 
-    InventoryDividedCard(
+    BpkInventoryDividedCard(
+      modifier = Modifier.inventoryDividedCardWidth(BpkSpacing.Xxl),
       primaryContent = {
         Image(
           modifier = Modifier
-            .width(BpkSpacing.Xxl * 4)
-            .height(BpkSpacing.Xxl * 4),
+            .height(BpkSpacing.Xxl * 2)
+            .fillMaxWidth(),
           painter = painterResource(id = R.drawable.canadian_rockies_canada),
           contentDescription = "",
           contentScale = ContentScale.Crop
         )
       },
       secondaryContent = {
-        Box(
-          modifier = Modifier.width(BpkSpacing.Xxl * 4),
-          contentAlignment = Alignment.Center
-        ) {
-          BpkText(
-            text = stringResource(id = R.string.inventory_divided_card_with_less_than_minimum),
-            style = BpkTheme.typography.bodyDefault
-          )
-        }
+        BpkText(
+          modifier = Modifier.fillMaxWidth(),
+          text = stringResource(id = R.string.inventory_divided_card_with_less_than_minimum),
+          style = BpkTheme.typography.bodyDefault,
+          textAlign = TextAlign.Center
+        )
       },
       onClick = {}
     )
