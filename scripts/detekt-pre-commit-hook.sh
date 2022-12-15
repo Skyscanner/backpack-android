@@ -19,7 +19,7 @@
 if git diff --cached --name-only | grep --quiet "\.kt$" ; then
   echo "Running detekt check..."
   OUTPUT="/tmp/detekt-$(date +%s)"
-  ./gradlew detekt -PstagedOnly=true 2> $OUTPUT
+  ./gradlew detekt --auto-correct -PstagedOnly=true 2> $OUTPUT
   EXIT_CODE=$?
   if [ $EXIT_CODE -ne 0 ]; then
     cat $OUTPUT

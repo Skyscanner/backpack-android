@@ -75,8 +75,8 @@ class MainActivity : BpkBaseActivity() {
             icon = BpkIcon.Settings,
             contentDescription = stringResource(R.string.settings_title),
             onClick = {
-              val intent = Intent(context, SettingsActivity::class.java)
-              context.startActivity(intent)
+              val intent1 = Intent(context, SettingsActivity::class.java)
+              context.startActivity(intent1)
             },
           ),
         ),
