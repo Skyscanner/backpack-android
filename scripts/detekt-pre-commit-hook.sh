@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Backpack for Android - Skyscanner's Design System
 #
 # Copyright 2018 Skyscanner Ltd
@@ -15,17 +15,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-echo "Running detekt check..."
-OUTPUT="/tmp/detekt-$(date +%s)"
-./gradlew detekt > $OUTPUT
-EXIT_CODE=$?
-if [ $EXIT_CODE -ne 0 ]; then
-  cat $OUTPUT
+# only run detekt if kotlin files changed
+if git diff --cached --name-only | grep --quiet "\.kt$" ; then
+  echo "Running detekt check..."
+  OUTPUT="/tmp/detekt-$(date +%s)"
+  ./gradlew detekt -PstagedOnly=true 2> $OUTPUT
+  EXIT_CODE=$?
+  if [ $EXIT_CODE -ne 0 ]; then
+    cat $OUTPUT
+    rm $OUTPUT
+    echo "***********************************************"
+    echo "                 Detekt failed                 "
+    echo " Please fix the above issues before committing "
+    echo "***********************************************"
+    exit $EXIT_CODE
+  fi
   rm $OUTPUT
-  echo "***********************************************"
-  echo "                 Detekt failed                 "
-  echo " Please fix the above issues before committing "
-  echo "***********************************************"
-  exit $EXIT_CODE
 fi
-rm $OUTPUT
