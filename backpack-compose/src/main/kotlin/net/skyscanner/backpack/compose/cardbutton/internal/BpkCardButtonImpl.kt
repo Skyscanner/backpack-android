@@ -18,9 +18,11 @@
 
 package net.skyscanner.backpack.compose.cardbutton.internal
 
-import androidx.compose.animation.animateColorAsState
+import android.view.animation.OvershootInterpolator
+import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.EaseInOut
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -51,8 +53,9 @@ import net.skyscanner.backpack.compose.tokens.ShareIos
 import net.skyscanner.backpack.compose.utils.clickable
 
 internal enum class BpkCardButtonState {
-  Default,
-  Transition
+  Rest,
+  TransitionToChecked,
+  TransitionToUnChecked,
 }
 
 @Composable
@@ -63,34 +66,70 @@ fun BpkSaveCardButtonImpl(
   size: BpkCardButtonSize,
   onCheckedChange: (Boolean) -> Unit
 ) {
-  var state by remember { mutableStateOf(BpkCardButtonState.Default) }
+  var state: BpkCardButtonState by remember { mutableStateOf(BpkCardButtonState.Rest) }
   val scaleAnimation = remember { Animatable(1f) }
-  if (state == BpkCardButtonState.Transition) {
-    LaunchedEffect(key1 = Unit) {
-      scaleAnimation.animateTo(
-        targetValue = 30f / 24f,
-        animationSpec = spring(
-          dampingRatio = 0.4f,
-          stiffness = 800f,
-        )
-      )
-      delay(500)
-      scaleAnimation.animateTo(
-        targetValue = 1f,
-        animationSpec = spring(
-          dampingRatio = 0.4f,
-          stiffness = 1200f,
-        )
-      )
-      state = BpkCardButtonState.Default
-    }
+  val onDarkColor = BpkTheme.colors.textOnDark
+  val checkedColor = BpkTheme.colors.coreAccent
+  val unCheckedColor = BpkTheme.colors.textPrimary
+  val colorAnimation = remember {
+    Animatable(
+      initialValue = when (style) {
+        BpkCardButtonStyle.OnDark -> onDarkColor
+        else -> if (checked) checkedColor else unCheckedColor
+      }
+    )
   }
-  val colorAnimation by animateColorAsState(
-    targetValue = when (style) {
-      BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
-      else -> if (checked) BpkTheme.colors.coreAccent else BpkTheme.colors.textPrimary
+  when (state) {
+    BpkCardButtonState.TransitionToChecked -> {
+      LaunchedEffect(key1 = Unit) {
+        colorAnimation.animateTo(
+          targetValue = when (style) {
+            BpkCardButtonStyle.OnDark -> onDarkColor
+            else -> checkedColor
+          },
+          animationSpec = tween(
+            durationMillis = 400,
+            easing = EaseInOut
+          )
+        )
+      }
+      LaunchedEffect(key1 = Unit) {
+        scaleAnimation.animateTo(
+          targetValue = 30f / 24f,
+          animationSpec = tween(
+            durationMillis = 400,
+            easing = { OvershootInterpolator().getInterpolation(it) }
+          )
+        )
+        delay(500)
+        scaleAnimation.animateTo(
+          targetValue = 1f,
+          animationSpec = tween(
+            durationMillis = 300,
+            easing = { OvershootInterpolator().getInterpolation(it) }
+          )
+        )
+        state = BpkCardButtonState.Rest
+      }
     }
-  )
+    BpkCardButtonState.TransitionToUnChecked -> {
+      LaunchedEffect(key1 = Unit) {
+        colorAnimation.animateTo(
+          targetValue = when (style) {
+            BpkCardButtonStyle.OnDark -> onDarkColor
+            else -> unCheckedColor
+          },
+          animationSpec = tween(
+            durationMillis = 400,
+            easing = EaseInOut
+          )
+        )
+        state = BpkCardButtonState.Rest
+      }
+    }
+    else -> {}
+  }
+
   Box(
     modifier = Modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
     contentAlignment = Alignment.Center
@@ -105,13 +144,17 @@ fun BpkSaveCardButtonImpl(
             else -> Color.Transparent
           },
         )
-        .toggleable(
-          value = checked,
-          role = Role.Switch,
-          onValueChange = {
-            if (it) state = BpkCardButtonState.Transition
-            onCheckedChange.invoke(it)
-          },
+        .then(
+          if (state == BpkCardButtonState.Rest) {
+            Modifier.toggleable(
+              value = checked,
+              role = Role.Switch,
+              onValueChange = { checked ->
+                if (checked) state = BpkCardButtonState.TransitionToChecked else BpkCardButtonState.TransitionToUnChecked
+                onCheckedChange.invoke(checked)
+              },
+            )
+          } else Modifier
         ),
       contentAlignment = Alignment.Center,
     ) {
@@ -120,7 +163,7 @@ fun BpkSaveCardButtonImpl(
           icon = if (checked) BpkIcon.Heart else BpkIcon.HeartOutline,
           contentDescription = contentDescription,
           size = if (size == BpkCardButtonSize.Default) BpkIconSize.Large else BpkIconSize.Small,
-          tint = colorAnimation
+          tint = colorAnimation.value
         )
       }
     }
