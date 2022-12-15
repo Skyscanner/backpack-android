@@ -32,7 +32,7 @@ class HardcodedColorResourceDetectorTest {
       """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">@color/bpkBlack</color>
-</resources>"""
+</resources>""",
     )
       .indented()
       .within("res")
@@ -50,7 +50,7 @@ class HardcodedColorResourceDetectorTest {
       """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">#18000000</color>
-</resources>"""
+</resources>""",
     )
       .indented()
       .within("res")
@@ -68,7 +68,7 @@ class HardcodedColorResourceDetectorTest {
       """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">#18FFFFFF</color>
-</resources>"""
+</resources>""",
     )
       .indented()
       .within("res")
@@ -92,7 +92,7 @@ class HardcodedColorResourceDetectorTest {
       """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">#18f1f2f8</color>
-</resources>"""
+</resources>""",
     )
       .indented()
       .within("res")
@@ -117,7 +117,7 @@ class HardcodedColorResourceDetectorTest {
       """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">#f1f2f8</color>
-</resources>"""
+</resources>""",
     )
       .indented()
       .within("res")

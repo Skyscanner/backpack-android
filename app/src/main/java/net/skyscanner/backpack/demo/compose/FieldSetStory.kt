@@ -35,6 +35,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
+@Preview
 fun FieldSetStory() {
   FieldStatusSwitcher(
     modifier = Modifier.padding(BpkSpacing.Base),
@@ -58,7 +59,7 @@ fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Defau
     BpkTextField(
       value = value,
       onValueChange = { value = it },
-      placeholder = stringResource(R.string.generic_placeholder)
+      placeholder = stringResource(R.string.generic_placeholder),
     )
   }
 }
@@ -74,7 +75,7 @@ fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus
     BpkTextField(
       value = value,
       onValueChange = { value = it },
-      placeholder = stringResource(R.string.generic_placeholder)
+      placeholder = stringResource(R.string.generic_placeholder),
     )
   }
 }
@@ -89,7 +90,7 @@ fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
     BpkTextField(
       value = value,
       onValueChange = { value = it },
-      placeholder = stringResource(R.string.generic_no_label)
+      placeholder = stringResource(R.string.generic_no_label),
     )
   }
 }

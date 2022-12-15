@@ -50,6 +50,7 @@ import net.skyscanner.backpack.compose.tokens.Trash
 import net.skyscanner.backpack.demo.R
 
 @Composable
+@Preview
 fun DialogStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Base),

@@ -32,7 +32,7 @@ import net.skyscanner.backpack.text.BpkText
 open class BpkBadge @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : BpkText(context, attrs, defStyleAttr) {
 
   private var initialized = false
@@ -45,7 +45,7 @@ open class BpkBadge @JvmOverloads constructor(
   enum class Type(
     internal var id: Int,
     @ColorRes internal var bgColor: Int,
-    @ColorRes internal var textColor: Int
+    @ColorRes internal var textColor: Int,
   ) {
     /**
      * Style for badges with positive messages
@@ -123,7 +123,7 @@ open class BpkBadge @JvmOverloads constructor(
       attrs,
       R.styleable.BpkBadge,
       defStyleAttr,
-      0
+      0,
     )
 
     type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
@@ -160,7 +160,7 @@ open class BpkBadge @JvmOverloads constructor(
 
   internal fun setBackground(
     solid: ColorStateList,
-    stroke: ColorStateList = solid
+    stroke: ColorStateList = solid,
   ) {
     val drawable = GradientDrawable()
     drawable.color = solid

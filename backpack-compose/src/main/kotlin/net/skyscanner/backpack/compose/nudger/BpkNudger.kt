@@ -89,7 +89,7 @@ fun BpkNudger(
         when {
           enabled -> BpkTheme.colors.textPrimary
           else -> BpkTheme.colors.textDisabled
-        }
+        },
       ).value,
     )
 
@@ -137,4 +137,3 @@ private fun Modifier.nudgerSemantics(
       valueRange = range.first.toFloat()..range.last.toFloat(),
       steps = range.last - range.first,
     )
-

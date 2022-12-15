@@ -41,7 +41,8 @@ enum class CalendarStoryType {
   SelectionWholeMonth,
   WithDisabledDates,
   WithLabels,
-  PreselectedRange;
+  PreselectedRange,
+  ;
 
   companion object {
 
@@ -77,7 +78,7 @@ enum class CalendarStoryType {
           now = now,
           range = range,
           selectionMode = CalendarParams.SelectionMode.Range,
-          monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
+          monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
         )
 
         WithDisabledDates -> CalendarParams(

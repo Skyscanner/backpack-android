@@ -37,7 +37,6 @@ internal object Dialog {
       override val backgroundColor
         @Composable
         get() = BpkTheme.colors.coreAccent
-
     }
 
     data class Warning(override val icon: BpkIcon) : Icon() {
@@ -45,7 +44,6 @@ internal object Dialog {
       override val backgroundColor
         @Composable
         get() = BpkTheme.colors.statusWarningSpot
-
     }
 
     data class Destructive(override val icon: BpkIcon) : Icon() {
@@ -53,7 +51,6 @@ internal object Dialog {
       override val backgroundColor
         @Composable
         get() = BpkTheme.colors.statusDangerSpot
-
     }
   }
 

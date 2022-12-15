@@ -47,7 +47,7 @@ fun BpkBarChart(
       horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
       modifier = Modifier
         .padding(horizontal = BpkSpacing.Base)
-        .padding(top = BpkSpacing.Base)
+        .padding(top = BpkSpacing.Base),
     ) {
 
       Column(Modifier.weight(1f)) {
@@ -70,7 +70,6 @@ fun BpkBarChart(
           legend = legend,
         )
       }
-
     }
 
     BarChartList(

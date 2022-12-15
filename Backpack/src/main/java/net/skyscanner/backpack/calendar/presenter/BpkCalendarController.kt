@@ -158,7 +158,7 @@ abstract class BpkCalendarController(
 @Deprecated("Use Calendar2 instead")
 enum class SelectionType {
   RANGE,
-  SINGLE
+  SINGLE,
 }
 
 @Deprecated("Use Calendar2 instead")

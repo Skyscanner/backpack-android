@@ -29,7 +29,7 @@ import net.skyscanner.backpack.util.ItemHolder
 internal class ChartBarHolder(
   parent: ViewGroup,
   private val colors: BpkBarChart.Colors,
-  private val onClick: Consumer<ChartBarHolder>
+  private val onClick: Consumer<ChartBarHolder>,
 ) : ItemHolder<BpkBarChart.Column>(parent, R.layout.view_bpk_barchart_column) {
 
   init {

@@ -40,7 +40,7 @@ open class BpkRating private constructor(
   defaultSize: Size,
   defaultScale: Scale,
 ) : ConstraintLayout(
-  createContextThemeWrapper(context, attrs, R.attr.bpkRatingStyle), attrs, defStyleAttr
+  createContextThemeWrapper(context, attrs, R.attr.bpkRatingStyle), attrs, defStyleAttr,
 ) {
 
   @JvmOverloads
@@ -60,7 +60,7 @@ open class BpkRating private constructor(
   enum class Score {
     Low,
     Medium,
-    High
+    High,
   }
 
   enum class Size {

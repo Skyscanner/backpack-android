@@ -39,7 +39,7 @@ import net.skyscanner.backpack.util.use
 open class BpkHorizontalNav @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : TabLayout(context, attrs, defStyleAttr) {
 
   @Deprecated("Alternate styling is no longer supported - please remove usages")
@@ -48,36 +48,36 @@ open class BpkHorizontalNav @JvmOverloads constructor(
     @AttrRes internal val styleAttribute: Int,
     @ColorRes internal val defaultTextColor: Int,
     @ColorRes internal val defaultTextSelectedColor: Int,
-    @ColorRes internal val defaultIndicatorColor: Int
+    @ColorRes internal val defaultIndicatorColor: Int,
   ) {
     Normal(
       id = 0,
       styleAttribute = R.attr.bpkHorizontalNavStyle,
       defaultTextColor = R.color.bpkTextPrimary,
       defaultTextSelectedColor = R.color.bpkTextLink,
-      defaultIndicatorColor = R.color.bpkTextLink
+      defaultIndicatorColor = R.color.bpkTextLink,
     ),
     Alternate(
       id = 1,
       styleAttribute = R.attr.bpkHorizontalNavStyleAlternate,
       defaultTextColor = R.color.bpkSkyGrayTint07,
       defaultTextSelectedColor = R.color.bpkWhite,
-      defaultIndicatorColor = R.color.bpkWhite
-    )
+      defaultIndicatorColor = R.color.bpkWhite,
+    ),
   }
 
   enum class Size(
     internal val id: Int,
-    @DimenRes internal val value: Int
+    @DimenRes internal val value: Int,
   ) {
     Small(
       id = 0,
-      value = R.dimen.bpk_horizontal_nav_size_small
+      value = R.dimen.bpk_horizontal_nav_size_small,
     ),
     Normal(
       id = 1,
-      value = R.dimen.bpk_horizontal_nav_size_normal
-    )
+      value = R.dimen.bpk_horizontal_nav_size_normal,
+    ),
   }
 
   @Suppress("DEPRECATION")
@@ -118,7 +118,7 @@ open class BpkHorizontalNav @JvmOverloads constructor(
       attrs,
       R.styleable.BpkHorizontalNav,
       defStyleAttr,
-      0
+      0,
     ).use {
       _appearance = it.getInt(R.styleable.BpkHorizontalNav_horizontalNavAppearance, appearance.id)
         .let { id -> Appearance.values().find { it.id == id } }!!

@@ -723,7 +723,7 @@ drawables
 configs
 HockeyApp
 AndroidX
-ktlint
+detekt
 net.skyscanner.backpack
 README.md
 v23

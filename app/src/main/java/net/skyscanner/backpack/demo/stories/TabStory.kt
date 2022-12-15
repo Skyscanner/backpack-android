@@ -35,7 +35,7 @@ open class TabStory : Story() {
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View? {
     val stories = arguments?.getStringArray(STORIES) ?: savedInstanceState?.getStringArray(STORIES)
     if (stories != null) {

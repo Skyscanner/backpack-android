@@ -83,7 +83,7 @@ internal fun CalendarCells(
         weekFields = params.weekFields,
         selection = selection,
         monthSelectionMode = params.monthSelectionMode,
-        calendarSelectionMode = params.selectionMode
+        calendarSelectionMode = params.selectionMode,
       ) { yearMonth, date ->
         CalendarCellDay(
           date = date,

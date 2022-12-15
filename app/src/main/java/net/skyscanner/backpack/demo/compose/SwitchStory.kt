@@ -37,6 +37,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
+@Preview
 fun SwitchStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Base),
@@ -84,7 +85,7 @@ fun DisabledUncheckedSwitchExample() {
     text = stringResource(id = R.string.toggle_disabled_unchecked),
     enabled = false,
     checked = false,
-    onCheckedChange = null
+    onCheckedChange = null,
   )
 }
 

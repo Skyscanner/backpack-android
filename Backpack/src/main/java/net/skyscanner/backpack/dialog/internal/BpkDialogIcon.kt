@@ -31,7 +31,7 @@ import net.skyscanner.backpack.dialog.BpkDialog
 internal class BpkDialogIcon @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
   var type: BpkDialog.Type? = null
@@ -69,7 +69,7 @@ internal class BpkDialogIcon @JvmOverloads constructor(
 
       setStroke(
         resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
-        context.getColorStateList(R.color.bpkSurfaceDefault)
+        context.getColorStateList(R.color.bpkSurfaceDefault),
       )
     }
 }

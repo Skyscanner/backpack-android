@@ -100,17 +100,17 @@ private fun TopNavBarMeasuringPolicy(fraction: Float): MeasurePolicy =
     }
   }
 
-private fun Density.titlePaddingStart(navIcon: Placeable, fraction: Float) : Int {
+private fun Density.titlePaddingStart(navIcon: Placeable, fraction: Float): Int {
   val isNavIconSet = navIcon.measuredWidth >= TopNavBarSizes.InternalSpacing.toPx()
   val extraPadding = when {
-      isNavIconSet -> TopNavBarSizes.ExpandedTitlePaddingStartWithNavIcon
-      else -> TopNavBarSizes.ExpandedTitlePaddingStartWithoutNavIcon
+    isNavIconSet -> TopNavBarSizes.ExpandedTitlePaddingStartWithNavIcon
+    else -> TopNavBarSizes.ExpandedTitlePaddingStartWithoutNavIcon
   }.roundToPx()
 
   return lerp(navIcon.measuredWidth, navIcon.measuredWidth + extraPadding, fraction)
 }
 
-private fun Density.titlePaddingEnd(actions: Placeable, fraction: Float) : Int =
+private fun Density.titlePaddingEnd(actions: Placeable, fraction: Float): Int =
   lerp(actions.measuredWidth, TopNavBarSizes.ExpandedTitlePaddingEnd.roundToPx(), fraction)
 
 private fun Density.iconConstrains(): Constraints =

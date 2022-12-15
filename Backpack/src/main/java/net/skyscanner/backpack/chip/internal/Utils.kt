@@ -54,5 +54,5 @@ internal fun chipColors(
     disabled,
     pressed,
     default,
-  )
+  ),
 )

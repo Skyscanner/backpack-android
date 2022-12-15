@@ -82,7 +82,7 @@ private fun TypographyStylesStory(styles: List<Pair<TextStyle, String>>) {
     items(styles) { style ->
       BpkText(
         style = style.first,
-        text = style.second
+        text = style.second,
       )
     }
   }
@@ -121,6 +121,6 @@ fun AnnotatedTextExample() {
       withStyle(style = SpanStyle(color = BpkTheme.colors.textLink)) {
         append("Text")
       }
-    }
+    },
   )
 }

@@ -77,9 +77,9 @@ class MainActivity : BpkBaseActivity() {
             onClick = {
               val intent = Intent(context, SettingsActivity::class.java)
               context.startActivity(intent)
-            }
-          )
-        )
+            },
+          ),
+        ),
       )
       LazyColumn {
         item {
