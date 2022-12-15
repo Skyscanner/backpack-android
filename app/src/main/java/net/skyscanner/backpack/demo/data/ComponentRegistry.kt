@@ -43,6 +43,7 @@ import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.HorizontalNavComposeStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
+import net.skyscanner.backpack.demo.compose.InventoryDividedCardStory
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.NudgerStory
 import net.skyscanner.backpack.demo.compose.PanelStory
@@ -335,6 +336,12 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
         TAB_TITLE_COMPOSE composeStory { HorizontalNavComposeStory() },
+      )
+    ),
+    "Inventory Divided Card" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_COMPOSE composeStory { InventoryDividedCardStory() },
       )
     ),
     "Map Markers" story NodeData(
