@@ -34,13 +34,13 @@ import kotlin.math.roundToInt
 internal class DialogWindowLayout @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
   enum class Gravity {
     Top,
     Center,
-    Bottom
+    Bottom,
   }
 
   private val content by unsafeLazy { getChildAt(0) }

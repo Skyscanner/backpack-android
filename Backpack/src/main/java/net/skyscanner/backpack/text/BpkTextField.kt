@@ -37,7 +37,7 @@ open class BpkTextField @JvmOverloads constructor(
 ) : AppCompatEditText(
   createContextThemeWrapper(
     createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.editTextStyle),
-    attrs, R.attr.bpkTextFieldStyle
+    attrs, R.attr.bpkTextFieldStyle,
   ),
   attrs,
   defStyleAttr,
@@ -93,7 +93,7 @@ open class BpkTextField @JvmOverloads constructor(
       attrs,
       R.styleable.BpkTextField,
       defStyleAttr,
-      0
+      0,
     ).use {
       textColor = it.getColor(R.styleable.BpkTextField_textFieldColor, textColor)
       hintNormalColor = it.getColor(R.styleable.BpkTextField_textFieldColorHintNormal, hintNormalColor)
@@ -109,7 +109,7 @@ open class BpkTextField @JvmOverloads constructor(
       colorStateList(
         color = textColor,
         disabledColor = textColorDisabled,
-      )
+      ),
     )
     setHintTextColor(
       colorStateList(
@@ -118,7 +118,7 @@ open class BpkTextField @JvmOverloads constructor(
         focusedColor = hintFocusedColor,
         activatedColor = hintFocusedColor,
         disabledColor = context.getColor(R.color.bpkTextDisabled),
-      )
+      ),
     )
 
     val paddingHorizontal = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)

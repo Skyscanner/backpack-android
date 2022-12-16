@@ -61,10 +61,10 @@ private fun BadgeRow(
         when (type) {
           BpkBadgeType.Outline, BpkBadgeType.Inverse -> BpkTheme.colors.corePrimary
           else -> Color.Transparent
-        }
+        },
       )
       .padding(vertical = BpkSpacing.Sm)
-      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md)
+      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
   ) {
 
     BpkBadge(
@@ -81,7 +81,7 @@ private fun BadgeRow(
         BpkBadgeType.Warning -> BpkIcon.HelpCircle
         BpkBadgeType.Destructive -> BpkIcon.CloseCircle
         else -> BpkIcon.TickCircle
-      }
+      },
     )
   }
 }

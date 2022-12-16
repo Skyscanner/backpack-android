@@ -32,11 +32,11 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 internal fun BpkRatingLayout(
   value: Float,
-  modifier: Modifier = Modifier,
   scale: BpkRatingScale,
   size: BpkRatingSize,
   subtitle: String?,
   showScale: Boolean,
+  modifier: Modifier = Modifier,
   title: @Composable () -> Unit,
 ) {
 
@@ -71,7 +71,6 @@ internal fun BpkRatingLayout(
             BpkRatingSubtitle(subtitle)
           }
         }
-
     }
   }
 }

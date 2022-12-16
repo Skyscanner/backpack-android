@@ -60,8 +60,8 @@ jobs:
           npm run build
           ./scripts/check-no-changes.sh
 
-      - name: KtLint check
-        run: ./gradlew ktlint -PdisablePreDex
+      - name: Detekt check
+        run: ./gradlew detekt -PdisablePreDex
 
       - name: Lint check
         run: ./gradlew lint${{ env.flavour }}${{ env.config }} -PdisablePreDex

@@ -34,10 +34,10 @@ open class BpkCheckbox @JvmOverloads constructor(
 ) : AppCompatCheckBox(
   createContextThemeWrapper(
     createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.checkboxStyle),
-    attrs, R.attr.bpkCheckboxStyle
+    attrs, R.attr.bpkCheckboxStyle,
   ),
   attrs,
-  defStyleAttr
+  defStyleAttr,
 ) {
 
   private lateinit var disabledTint: ColorStateList
@@ -57,7 +57,7 @@ open class BpkCheckbox @JvmOverloads constructor(
       attrs,
       R.styleable.BpkCheckbox,
       defStyleAttr,
-      0
+      0,
     ).use {
       checkmarkDefaultColor = it.getInt(R.styleable.BpkCheckbox_checkboxColor, checkmarkDefaultColor)
       checkmarkCheckedColor = it.getInt(R.styleable.BpkCheckbox_checkboxColorChecked, checkmarkCheckedColor)
@@ -67,15 +67,15 @@ open class BpkCheckbox @JvmOverloads constructor(
     this.disabledTint = ColorStateList.valueOf(checkmarkDisabledColor)
     this.enabledTint = ColorStateList(
       arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
-      intArrayOf(checkmarkCheckedColor, checkmarkDefaultColor)
+      intArrayOf(checkmarkCheckedColor, checkmarkDefaultColor),
     )
     updateTint()
     BpkText.getFont(context, BpkText.TextStyle.Footnote).applyTo(this)
     setTextColor(
       ColorStateList(
         arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
-        intArrayOf(textDisabledColor, textEnabledColor)
-      )
+        intArrayOf(textDisabledColor, textEnabledColor),
+      ),
     )
 
     setPaddingRelative(resources.getDimensionPixelSize(R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)

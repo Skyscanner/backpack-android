@@ -62,7 +62,7 @@ internal inline fun CalendarMonth(
     title = MonthTitle(yearMonth, monthsFormatter, locale),
     yearMonth = yearMonth,
     monthSelectionMode = monthSelectionMode,
-    calendarSelectionMode = calendarSelectionMode
+    calendarSelectionMode = calendarSelectionMode,
   )
 
   var currentDayOfWeek = weekFields.firstDayOfWeek
@@ -95,7 +95,7 @@ internal fun MonthTitle(yearMonth: YearMonth, formatter: SimpleDateFormat, local
   val date = Date(
     yearMonth.year - 1900,
     yearMonth.monthValue - 1,
-    2 // Lock the formatter date to 2nd, so it accounts for -12h tz and the month is predictable
+    2, // Lock the formatter date to 2nd, so it accounts for -12h tz and the month is predictable
   )
   return formatter.format(date).capitalize(locale)
 }

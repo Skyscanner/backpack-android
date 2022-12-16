@@ -41,7 +41,7 @@ class NavBarStory : Story() {
       BpkToast.makeText(
         requireContext(),
         "${it.itemId.let(resources::getResourceEntryName)} is clicked!",
-        BpkToast.LENGTH_SHORT
+        BpkToast.LENGTH_SHORT,
       ).show()
     }
   }

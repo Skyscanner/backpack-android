@@ -137,7 +137,7 @@ fun BpkTextField(
             status is BpkFieldStatus.Error -> BpkTheme.colors.textError
             isFocused -> BpkTheme.colors.coreAccent
             else -> BpkTheme.colors.line
-          }
+          },
         ).value,
       )
       .background(BpkTheme.colors.surfaceDefault, Shape)
@@ -154,7 +154,7 @@ fun BpkTextField(
           when (status) {
             is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
             else -> BpkTheme.colors.textSecondary
-          }
+          },
         ).value,
       )
     }
@@ -162,7 +162,7 @@ fun BpkTextField(
     Box(
       modifier = Modifier
         .weight(1f)
-        .padding(BpkSpacing.Md)
+        .padding(BpkSpacing.Md),
     ) {
 
       BpkText(
@@ -184,7 +184,7 @@ fun BpkTextField(
             when (status) {
               is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
               else -> BpkTheme.colors.textPrimary
-            }
+            },
           ).value,
         ),
         keyboardOptions = keyboardOptions,

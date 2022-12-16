@@ -29,7 +29,7 @@ import net.skyscanner.backpack.text.BpkText
 class SettingsThemeOption @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
   init {

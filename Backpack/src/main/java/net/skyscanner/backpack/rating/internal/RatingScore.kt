@@ -29,7 +29,7 @@ internal class RatingScore(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
-  defaultScale: BpkRating.Scale
+  defaultScale: BpkRating.Scale,
 ) : () -> BpkRating.Score {
 
   var rating: Float = 0f
@@ -54,7 +54,7 @@ internal class RatingScore(
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkRating,
-      defStyleAttr, 0
+      defStyleAttr, 0,
     ).use {
       scale = it.getInt(R.styleable.BpkRating_ratingScale, scale.xmlId)
         .let(::mapXmlToScale) ?: scale

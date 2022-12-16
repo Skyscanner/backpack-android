@@ -45,7 +45,7 @@ class LabeledCalendarStory : Story() {
       SelectionType.RANGE,
       disableDates = false,
       calendarLabels = createLabels(),
-      automationMode = automationMode
+      automationMode = automationMode,
     )
     calendar.setController(controller)
     initSelectionTypeSwitcher()

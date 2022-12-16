@@ -37,9 +37,9 @@ class BpkComponentUsageDetectorTest {
         kotlin(
           """import android.widget.Button
 
-class CustomButton(context: Context) : Button(context)"""
+class CustomButton(context: Context) : Button(context)""",
         ),
-        button()
+        button(),
       )
       .runCheck()
       .expectWarningCount(1)
@@ -49,7 +49,7 @@ src/CustomButton.kt:3: Warning: Backpack component available for android.widget.
 class CustomButton(context: Context) : Button(context)
       ~~~~~~~~~~~~
 0 errors, 1 warnings
-      """
+      """,
       )
   }
 
@@ -62,9 +62,9 @@ class CustomButton(context: Context) : Button(context)
 
 class View(context: Context) {
   private val button = Button(context)
-}"""
+}""",
         ),
-        button()
+        button(),
       )
       .runCheck()
       .expectWarningCount(1)
@@ -74,7 +74,7 @@ src/View.kt:4: Warning: Backpack component available for android.widget.Button. 
   private val button = Button(context)
                        ~~~~~~~~~~~~~~~
 0 errors, 1 warnings
-      """
+      """,
       )
   }
 
@@ -87,8 +87,8 @@ src/View.kt:4: Warning: Backpack component available for android.widget.Button. 
           """<?xml version="1.0" encoding="utf-8"?>
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="wrap_content"
-  android:layout_height="wrap_content" />"""
-        )
+  android:layout_height="wrap_content" />""",
+        ),
       )
       .runCheck()
       .expectWarningCount(1)
@@ -98,7 +98,7 @@ res/layout/native_button.xml:2: Warning: Backpack component available for Button
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
 ^
 0 errors, 1 warnings
-      """
+      """,
       )
   }
 
@@ -113,9 +113,9 @@ class View(private val context: Context) {
   fun showToast() {
     Toast.makeText(context, "Toast!", Toast.LENGTH_SHORT)
   }
-}"""
+}""",
         ),
-        toast()
+        toast(),
       )
       .runCheck()
       .expectWarningCount(1)
@@ -125,7 +125,7 @@ src/View.kt:5: Warning: Backpack component available for android.widget.Toast. U
     Toast.makeText(context, "Toast!", Toast.LENGTH_SHORT)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 0 errors, 1 warnings
-      """
+      """,
       )
   }
 
@@ -136,9 +136,9 @@ src/View.kt:5: Warning: Backpack component available for android.widget.Toast. U
         kotlin(
           """import net.skyscanner.backpack.button.BpkButton
 
-class CustomButton(context: Context) : BpkButton(context)"""
+class CustomButton(context: Context) : BpkButton(context)""",
         ),
-        bpkButton()
+        bpkButton(),
       )
       .runCheck()
       .expectClean()
@@ -153,9 +153,9 @@ class CustomButton(context: Context) : BpkButton(context)"""
 
 class View(context: Context) {
 private val button = BpkButton(context)
-}"""
+}""",
         ),
-        bpkButton()
+        bpkButton(),
       )
       .runCheck()
       .expectClean()
@@ -170,8 +170,8 @@ private val button = BpkButton(context)
           """<?xml version="1.0" encoding="utf-8"?>
 <net.skyscanner.backpack.button.BpkButton xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="wrap_content"
-  android:layout_height="wrap_content" />"""
-        )
+  android:layout_height="wrap_content" />""",
+        ),
       )
       .runCheck()
       .expectClean()
@@ -188,9 +188,9 @@ class View(private val context: Context) {
   fun showToast() {
     BpkToast.makeText(context, "Toast!", BpkToast.LENGTH_SHORT)
   }
-}"""
+}""",
         ),
-        bpkToast()
+        bpkToast(),
       )
       .runCheck()
       .expectClean()
@@ -205,14 +205,14 @@ class View(private val context: Context) {
     kotlin(
       """package android.widget
 
-class Button(context: Context) : View(context)"""
+class Button(context: Context) : View(context)""",
     )
 
   private fun bpkButton(): TestFile =
     kotlin(
       """package net.skyscanner.backpack.button
 
-class BpkButton(context: Context) : View(context)"""
+class BpkButton(context: Context) : View(context)""",
     )
 
   private fun toast(): TestFile =
@@ -222,7 +222,7 @@ class BpkButton(context: Context) : View(context)"""
 public class Toast {
   public static int LENGTH_SHORT = 1;
   public static void makeText(Context context, String text, Int length) {}
-}"""
+}""",
     )
 
   private fun bpkToast(): TestFile =
@@ -232,6 +232,6 @@ public class Toast {
 public class BpkToast {
   public static int LENGTH_SHORT = 1;
   public static void makeText(Context context, String text, Int length) {}
-}"""
+}""",
     )
 }

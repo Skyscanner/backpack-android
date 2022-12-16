@@ -28,7 +28,7 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
 internal abstract class ItemHolder<T>(
-  protected val view: View
+  protected val view: View,
 ) : RecyclerView.ViewHolder(view), Consumer<T> {
 
   val context: Context

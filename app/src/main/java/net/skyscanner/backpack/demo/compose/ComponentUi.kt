@@ -44,7 +44,7 @@ fun ComponentsTitle(title: String, modifier: Modifier = Modifier) {
       .fillMaxWidth()
       .padding(
         vertical = BpkDimension.Spacing.Base,
-        horizontal = BpkDimension.Spacing.Lg
+        horizontal = BpkDimension.Spacing.Lg,
       ),
     color = BpkTheme.colors.textSecondary,
     style = BpkTheme.typography.label2,
@@ -71,7 +71,7 @@ fun ComponentItem(
       BpkBadge(
         text = stringResource(R.string.story_badge_compose),
         type = BpkBadgeType.Success,
-        modifier = Modifier.padding(start = BpkDimension.Spacing.Base)
+        modifier = Modifier.padding(start = BpkDimension.Spacing.Base),
       )
     }
   }

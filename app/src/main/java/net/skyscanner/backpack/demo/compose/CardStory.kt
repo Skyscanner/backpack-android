@@ -40,6 +40,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
+@Preview
 fun CardStory() {
   Column(
     modifier = Modifier

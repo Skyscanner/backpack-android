@@ -38,7 +38,6 @@ import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.utils.BpkToggleableContent
 import net.skyscanner.backpack.compose.utils.applyIf
@@ -105,9 +104,9 @@ fun BpkRadioButton(
 private fun BpkRadioButtonImpl(
   selected: Boolean,
   onClick: (() -> Unit)?,
-  modifier: Modifier = Modifier,
   enabled: Boolean,
   interactionSource: MutableInteractionSource,
+  modifier: Modifier = Modifier,
 ) {
   // our design system isn't designed with the minimum touch target in mind at the moment.
   // Disable the enforcement to avoid the extra padding

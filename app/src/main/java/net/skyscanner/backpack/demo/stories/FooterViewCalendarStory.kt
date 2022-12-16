@@ -41,16 +41,16 @@ private class FooterViewCalendarController(
         CalendarCellStyle.Hightlight,
         setOf(
           startDate.plusDays(2),
-          endDate.minusDays(1)
-        )
+          endDate.minusDays(1),
+        ),
       ),
       ColoredBucket(
         CalendarCellStyle.Negative,
         setOf(
-          startDate.plusDays(1)
-        )
-      )
-    )
+          startDate.plusDays(1),
+        ),
+      ),
+    ),
   )
 
   override val monthFooterAdapter =
@@ -61,18 +61,18 @@ private class FooterViewCalendarController(
         HighlightedDay(
           startDate.plusDays(1),
           "Do nothing day",
-          CalendarCellStyle.Negative.color(context)
+          CalendarCellStyle.Negative.color(context),
         ),
         HighlightedDay(
           startDate.plusDays(2),
           "Tea day",
-          descriptionOnly = true
+          descriptionOnly = true,
         ),
         HighlightedDay(
           endDate.minusDays(1),
-          "I wish it was Friday day"
-        )
-      )
+          "I wish it was Friday day",
+        ),
+      ),
     )
 }
 

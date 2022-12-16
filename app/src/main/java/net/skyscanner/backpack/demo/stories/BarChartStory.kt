@@ -37,13 +37,13 @@ class BarChartStory : Story() {
           createMonth(2),
           createMonth(3),
           createMonth(4),
-          createMonth(5)
+          createMonth(5),
         ),
         legend = BpkBarChart.Legend(
           selectedTitle = "Selected",
           inactiveTitle = "No Price",
           activeTitle = "Price",
-        )
+        ),
       )
     }
   }
@@ -56,7 +56,7 @@ class BarChartStory : Story() {
       for (dayOfTheMonth in 0 until 30) {
         add(createBar(month * 30 + dayOfTheMonth))
       }
-    }
+    },
   )
 
   private fun createBar(dayOfTheYear: Int) = BpkBarChart.Column(
@@ -64,7 +64,7 @@ class BarChartStory : Story() {
     subtitle = (dayOfTheYear % 30 + 1).toString(),
     badge = "£" + random.nextInt(100),
     value = random.nextInt(120) / 100f,
-    inactive = random.nextInt(5) == 0
+    inactive = random.nextInt(5) == 0,
   )
 
   companion object {

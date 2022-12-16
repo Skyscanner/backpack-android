@@ -60,7 +60,7 @@ private fun SpinnersRow(
 
     Row(
       modifier = Modifier.background(
-        if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.surfaceContrast else Color.Transparent
+        if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.surfaceContrast else Color.Transparent,
       ),
     ) {
       BpkSpinnerSize.values().forEach { size ->

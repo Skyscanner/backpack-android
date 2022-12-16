@@ -42,5 +42,4 @@ internal fun BpkToggleableContent(
     LocalTextStyle provides BpkTheme.typography.footnote,
     content = content,
   )
-
 }

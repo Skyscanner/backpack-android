@@ -30,6 +30,7 @@ import net.skyscanner.backpack.compose.dialog.internal.Dialog
 import net.skyscanner.backpack.compose.icon.BpkIcon
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkSuccessDialog(
   onDismissRequest: () -> Unit,
   icon: BpkIcon?,
@@ -48,11 +49,12 @@ fun BpkSuccessDialog(
       secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkSuccessDialog(
   onDismissRequest: () -> Unit,
   icon: BpkIcon?,
@@ -73,11 +75,12 @@ fun BpkSuccessDialog(
       linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkWarningDialog(
   onDismissRequest: () -> Unit,
   icon: BpkIcon?,
@@ -96,11 +99,12 @@ fun BpkWarningDialog(
       secondaryButton?.let { Dialog.Button(BpkButtonType.Secondary, secondaryButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkWarningDialog(
   onDismissRequest: () -> Unit,
   icon: BpkIcon?,
@@ -121,11 +125,12 @@ fun BpkWarningDialog(
       linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkDestructiveDialog(
   onDismissRequest: () -> Unit,
   icon: BpkIcon?,
@@ -144,11 +149,12 @@ fun BpkDestructiveDialog(
       linkButton?.let { Dialog.Button(BpkButtonType.Link, linkButton) },
     ),
     onDismissRequest = onDismissRequest,
-    properties = properties
+    properties = properties,
   )
 }
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkFlareDialog(
   onDismissRequest: () -> Unit,
   title: String,
@@ -172,6 +178,7 @@ fun BpkFlareDialog(
 }
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkFlareDialog(
   onDismissRequest: () -> Unit,
   title: String,
@@ -197,6 +204,7 @@ fun BpkFlareDialog(
 }
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkImageDialog(
   onDismissRequest: () -> Unit,
   title: String,
@@ -222,6 +230,7 @@ fun BpkImageDialog(
 }
 
 @Composable
+@Suppress("ModifierMissing")
 fun BpkImageDialog(
   onDismissRequest: () -> Unit,
   title: String,

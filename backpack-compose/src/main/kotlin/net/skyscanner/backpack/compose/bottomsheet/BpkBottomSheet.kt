@@ -106,7 +106,7 @@ fun BpkBottomSheet(
           BpkBottomSheetHandle(
             modifier = Modifier
               .align(Alignment.TopCenter)
-              .alpha(openingPercent)
+              .alpha(openingPercent),
           )
           Column {
             sheetContent(PaddingValues(top = HandleHeight * openingPercent))
@@ -129,7 +129,7 @@ private fun Modifier.bottomSheetSwipeable(
     state = state.wrapped,
     anchors = mapOf(
       fullHeight - peekHeightPx to BpkBottomSheetValue.Collapsed,
-      fullHeight - bottomSheetHeight to BpkBottomSheetValue.Expanded
+      fullHeight - bottomSheetHeight to BpkBottomSheetValue.Expanded,
     ),
     orientation = Orientation.Vertical,
     enabled = sheetGesturesEnabled,
@@ -172,7 +172,7 @@ private fun BpkBottomSheetHandle(
       .height(HandleHeight)
       .padding(BpkSpacing.Md)
       .width(HandleWidth)
-      .background(BpkTheme.colors.line, CircleShape)
+      .background(BpkTheme.colors.line, CircleShape),
   )
 }
 

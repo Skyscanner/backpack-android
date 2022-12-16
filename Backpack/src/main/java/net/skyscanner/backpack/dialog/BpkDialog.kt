@@ -53,7 +53,7 @@ open class BpkDialog private constructor(
     style = when (type) {
       Type.Flare -> Style.FLARE
       else -> Style.ALERT
-    }
+    },
   )
 
   data class Button(internal val text: String, internal val onClick: () -> Unit)

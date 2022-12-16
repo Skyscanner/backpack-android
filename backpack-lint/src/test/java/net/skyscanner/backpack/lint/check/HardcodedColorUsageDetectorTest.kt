@@ -33,7 +33,7 @@ class HardcodedColorUsageDetectorTest {
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:background="?colorPrimary"
   android:layout_width="match_parent"
-  android:layout_height="match_parent" />"""
+  android:layout_height="match_parent" />""",
     )
       .indented()
       .within("res")
@@ -52,7 +52,7 @@ class HardcodedColorUsageDetectorTest {
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:background="@color/bpk_black"
   android:layout_width="match_parent"
-  android:layout_height="match_parent" />"""
+  android:layout_height="match_parent" />""",
     )
       .indented()
       .within("res")
@@ -77,7 +77,7 @@ class HardcodedColorUsageDetectorTest {
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:background="#fff"
   android:layout_width="match_parent"
-  android:layout_height="match_parent" />"""
+  android:layout_height="match_parent" />""",
     )
       .indented()
       .within("res")

@@ -36,7 +36,7 @@ import kotlin.math.roundToInt
 
 internal class ChartPopupDrawable(
   context: Context,
-  private val colors: BpkBarChart.Colors
+  private val colors: BpkBarChart.Colors,
 ) : Drawable() {
 
   private val resources = context.resources
@@ -123,7 +123,7 @@ internal class ChartPopupDrawable(
 
     canvas.drawRoundRect(
       0f, 0f, bounds.width().toFloat(), blockHeight,
-      borderRadius, borderRadius, backgroundPaint
+      borderRadius, borderRadius, backgroundPaint,
     )
 
     canvas.withSave {

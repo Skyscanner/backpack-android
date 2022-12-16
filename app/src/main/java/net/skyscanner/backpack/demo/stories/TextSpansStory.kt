@@ -50,14 +50,14 @@ class TextSpansStory : Story() {
       append(
         "Backpack font span \n",
         BpkFontSpan(requireActivity(), BpkText.TextStyle.Heading4),
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
       )
 
       append("This is an example of \n")
       append(
         "Backpack link span \n",
         BpkLinkSpan(requireActivity(), "Link clicked!", linksHandler),
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
       )
     }
   }
