@@ -49,8 +49,8 @@ import net.skyscanner.backpack.demo.R
 @Composable
 @Preview
 fun CardButtonsStory(
-  size: BpkCardButtonSize = BpkCardButtonSize.Default,
   modifier: Modifier = Modifier,
+  size: BpkCardButtonSize = BpkCardButtonSize.Default,
 ) {
   LazyColumn(
     modifier

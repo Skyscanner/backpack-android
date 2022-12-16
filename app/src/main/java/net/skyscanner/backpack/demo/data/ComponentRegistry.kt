@@ -235,15 +235,10 @@ object ComponentRegistry {
       )
     ),
     "Card Button" story NodeData(
-      { children -> TabStory of children },
+      { children -> SubStory of children },
       mapOf(
-        TAB_TITLE_COMPOSE story NodeData(
-          { children -> SubStory of children },
-          mapOf(
-            "Default" composeStory { CardButtonsStory(BpkCardButtonSize.Default) },
-            "Small" composeStory { CardButtonsStory(BpkCardButtonSize.Small) },
-          )
-        ),
+        "Default" composeStory { CardButtonsStory(size = BpkCardButtonSize.Default) },
+        "Small" composeStory { CardButtonsStory(size = BpkCardButtonSize.Small) },
       )
     ),
     "Calendar" story NodeData(
