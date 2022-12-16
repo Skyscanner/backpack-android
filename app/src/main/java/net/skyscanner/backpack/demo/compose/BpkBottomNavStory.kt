@@ -43,7 +43,7 @@ fun BpkBottomNavStory(modifier: Modifier = Modifier) {
     modifier = modifier.fillMaxSize(),
     contentAlignment = Alignment.BottomEnd,
   ) {
-    BpkBottomNavSample(modifier = modifier)
+    BpkBottomNavSample()
   }
 }
 
