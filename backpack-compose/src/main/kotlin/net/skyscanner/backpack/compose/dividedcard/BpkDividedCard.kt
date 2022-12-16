@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.inventorydividedcard
+package net.skyscanner.backpack.compose.dividedcard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -35,7 +35,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
-fun BpkInventoryDividedCard(
+fun BpkDividedCard(
   primaryContent: @Composable () -> Unit,
   secondaryContent: @Composable () -> Unit,
   modifier: Modifier = Modifier,
@@ -60,7 +60,7 @@ fun BpkInventoryDividedCard(
   }
 }
 
-fun Modifier.inventoryDividedCardWidth(cardWidth: Dp): Modifier {
+fun Modifier.dividedCardWidth(cardWidth: Dp): Modifier {
   val minWidth = 240.dp
   val width = if (cardWidth < minWidth) minWidth else cardWidth
   return requiredWidth(width)

@@ -95,6 +95,7 @@ object DocsRegistry {
     ComposeScreenshot("Dialog - Compose", "image-end-alignment") {
       setupComposeDialog(it, ShownDialog.ImageEndAlignment)
     },
+    ComposeScreenshot("Divided Card - Compose", "default"),
     ComposeScreenshot("Divider", "default"),
     ComposeScreenshot("FieldSet", "default"),
     ComposeScreenshot("FieldSet", "disabled") { it.switchFieldStatus(BpkFieldStatus.Disabled) },
@@ -111,7 +112,6 @@ object DocsRegistry {
     ComposeScreenshot("Floating Action Button - Compose", "default"),
     ViewScreenshot("Horizontal Nav - View", "default"),
     ComposeScreenshot("Horizontal Nav - Compose", "default"),
-    ComposeScreenshot("Inventory Divided Card - Compose", "default"),
     ViewScreenshot("Nav Bar - View - Default", "expanded"),
     ViewScreenshot("Nav Bar - View - Default", "collapsed") { setupNavBarCollapsed() },
     ViewScreenshot("Nav Bar - View - With Menu", "navigation") { setupNavBarCollapsed() },

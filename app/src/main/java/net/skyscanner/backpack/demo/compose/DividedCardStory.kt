@@ -33,8 +33,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import net.skyscanner.backpack.compose.inventorydividedcard.BpkInventoryDividedCard
-import net.skyscanner.backpack.compose.inventorydividedcard.inventoryDividedCardWidth
+import net.skyscanner.backpack.compose.dividedcard.BpkDividedCard
+import net.skyscanner.backpack.compose.dividedcard.dividedCardWidth
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -42,7 +42,7 @@ import net.skyscanner.backpack.demo.R
 
 @Composable
 @Preview
-fun InventoryDividedCardStory(
+fun DividedCardStory(
   modifier: Modifier = Modifier,
 ) {
   Column(
@@ -51,7 +51,7 @@ fun InventoryDividedCardStory(
       .padding(BpkSpacing.Base),
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    BpkInventoryDividedCard(
+    BpkDividedCard(
       modifier = Modifier.fillMaxWidth(),
       primaryContent = {
         Image(
@@ -76,8 +76,8 @@ fun InventoryDividedCardStory(
 
     Spacer(modifier = Modifier.height(BpkSpacing.Base))
 
-    BpkInventoryDividedCard(
-      modifier = Modifier.inventoryDividedCardWidth(BpkSpacing.Xxl),
+    BpkDividedCard(
+      modifier = Modifier.dividedCardWidth(BpkSpacing.Xxl),
       primaryContent = {
         Image(
           modifier = Modifier
@@ -101,7 +101,7 @@ fun InventoryDividedCardStory(
 
     Spacer(modifier = Modifier.height(BpkSpacing.Base))
 
-    BpkInventoryDividedCard(
+    BpkDividedCard(
       modifier = Modifier.fillMaxWidth(),
       primaryContent = {
         Spacer(modifier = Modifier.height(BpkSpacing.Xxl * 4))

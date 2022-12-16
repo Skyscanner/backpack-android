@@ -16,9 +16,10 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.inventorydividedcard
+package net.skyscanner.backpack.compose.dividedcard
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.ui.Modifier
@@ -37,7 +38,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BpkInventoryDividedCardTest : BpkSnapshotTest() {
+class BpkDividedCardTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
@@ -47,8 +48,8 @@ class BpkInventoryDividedCardTest : BpkSnapshotTest() {
   @Test
   fun cardWidthSmallerThanMinimum() {
     composed {
-      BpkInventoryDividedCard(
-        modifier = Modifier.inventoryDividedCardWidth(BpkSpacing.Xxl),
+      BpkDividedCard(
+        modifier = Modifier.dividedCardWidth(BpkSpacing.Xxl),
         primaryContent = {
           Image(
             modifier = Modifier
@@ -75,7 +76,7 @@ class BpkInventoryDividedCardTest : BpkSnapshotTest() {
   @Test
   fun cardWidthGreaterThanMinimum() {
     composed {
-      BpkInventoryDividedCard(
+      BpkDividedCard(
         modifier = Modifier.fillMaxWidth(),
         primaryContent = {
           Image(
@@ -96,6 +97,28 @@ class BpkInventoryDividedCardTest : BpkSnapshotTest() {
           )
         },
         onClick = {}
+      )
+    }
+  }
+
+  @Test
+  fun emptyCard() {
+    composed {
+      BpkDividedCard(
+        modifier = Modifier.fillMaxWidth(),
+        primaryContent = {
+          Spacer(modifier = Modifier.height(BpkSpacing.Xxl * 2))
+        },
+        secondaryContent = {
+          Spacer(modifier = Modifier.height(BpkSpacing.Xxl * 2))
+          BpkText(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.inventory_divided_card_empty_card),
+            style = BpkTheme.typography.bodyDefault,
+            textAlign = TextAlign.Center,
+          )
+        },
+        onClick = {},
       )
     }
   }
