@@ -25,19 +25,22 @@ BpkBottomNav(
   items = listOf(
     BpkBottomNavItem(
       painter = painterResource(id = R.drawable.sample_icon),
-      title = stringResource(R.string.bottom_nav_explore),
+      title = "Explore",
       id = 1,
-      showBadge = false
     ),
-    BpkBottomNavItem(icon = BpkIcon.Trips, title = stringResource(R.string.bottom_nav_trips), id = 2, showBadge = false),
+    BpkBottomNavItem(
+      icon = BpkIcon.Trips,
+      title = "Trips",
+      id = 2,
+    ),
     BpkBottomNavItem(
       icon = BpkIcon.AccountCircle,
-      title = stringResource(R.string.navigation_account),
+      title = "Account",
       id = 3,
-      showBadge = true
+      showBadge = true,
     ),
   ),
   selectedItemId = 1,
-  onTabClicked = {} // Handle update
+  onTabClicked = {}, // Handle update
 )
 ```

@@ -36,12 +36,14 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Stable
 sealed interface BpkBottomNavItem {
@@ -55,7 +57,7 @@ fun BpkBottomNavItem(
   id: Int,
   icon: BpkIcon,
   showBadge: Boolean = false,
-  ): BpkBottomNavItem =
+): BpkBottomNavItem =
   IconBottomNavItem(title, id, showBadge, icon)
 
 fun BpkBottomNavItem(
@@ -63,7 +65,7 @@ fun BpkBottomNavItem(
   id: Int,
   painter: Painter,
   showBadge: Boolean = false,
-  ): BpkBottomNavItem =
+): BpkBottomNavItem =
   PainterBottomNavItem(title, id, showBadge, painter)
 
 
@@ -75,7 +77,6 @@ fun BpkBottomNav(
   elevation: Dp = BottomNavigationDefaults.Elevation,
   items: List<BpkBottomNavItem>,
 ) {
-  Box() {
     BottomNavigation(
       modifier = modifier,
       backgroundColor = BpkTheme.colors.surfaceDefault,
@@ -89,31 +90,39 @@ fun BpkBottomNav(
           icon = {
             Box {
               when (tabItem) {
-                is IconBottomNavItem -> BpkIcon(icon = tabItem.icon, contentDescription = null, size = BpkIconSize.Large)
+                is IconBottomNavItem -> BpkIcon(
+                  icon = tabItem.icon,
+                  contentDescription = null,
+                  size = BpkIconSize.Large
+                )
                 is PainterBottomNavItem -> Icon(
-                  modifier = Modifier.height(24.dp),
+                  modifier = Modifier.height(BpkSpacing.Lg),
                   painter = tabItem.painter,
                   contentDescription = null,
                 )
               }
-                if (tabItem.showBadge) NotificationDot(
+              if (tabItem.showBadge) {
+                NotificationDot(
                   Modifier
                     .align(Alignment.BottomEnd)
-                    .offset(x = 1.dp, y = (-2).dp))
+                    .offset(x = 1.dp, y = (-2).dp)
+                )
+              }
             }
           },
           label = {
             BpkText(
               text = tabItem.title,
               style = BpkTheme.typography.label3,
+              maxLines = 1,
+              overflow = TextOverflow.Ellipsis,
             )
           },
           selectedContentColor = BpkTheme.colors.textLink,
-          unselectedContentColor = BpkTheme.colors.textSecondary
+          unselectedContentColor = BpkTheme.colors.textSecondary,
         )
       }
     }
-  }
 }
 
 

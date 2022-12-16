@@ -31,7 +31,7 @@ class BpkBottomNavTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 80, width = 200)
+    setDimensions(height = 80, width = 250)
   }
 
   @Test

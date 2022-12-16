@@ -19,14 +19,14 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -38,32 +38,39 @@ import net.skyscanner.backpack.compose.tokens.Trips
 import net.skyscanner.backpack.demo.R
 
 @Composable
-fun BpkBottomNavStory() {
-  Column(
+fun BpkBottomNavStory(modifier: Modifier = Modifier) {
+  Box(
     modifier = Modifier.fillMaxSize(),
-    verticalArrangement = Arrangement.Bottom,
+    contentAlignment = Alignment.BottomEnd,
   ) {
-    BpkBottomNavSample()
+    BpkBottomNavSample(modifier = modifier)
   }
 }
 
 @Composable
-fun BpkBottomNavSample(defaultItemId: Int = 1) {
+fun BpkBottomNavSample(
+  modifier: Modifier = Modifier,
+  defaultItemId: Int = 1,
+) {
   var selectedItemId by remember { mutableStateOf(defaultItemId) }
   BpkBottomNav(
+    modifier = modifier,
     items = listOf(
       BpkBottomNavItem(
         painter = painterResource(id = R.drawable.sample_icon),
         title = stringResource(R.string.bottom_nav_explore),
         id = 1,
-        showBadge = false
       ),
-      BpkBottomNavItem(icon = BpkIcon.Trips, title = stringResource(R.string.bottom_nav_trips), id = 2, showBadge = false),
+      BpkBottomNavItem(
+        icon = BpkIcon.Trips,
+        title = stringResource(R.string.bottom_nav_trips),
+        id = 2,
+      ),
       BpkBottomNavItem(
         icon = BpkIcon.AccountCircle,
         title = stringResource(R.string.navigation_account),
         id = 3,
-        showBadge = true
+        showBadge = true,
       ),
     ),
     selectedItemId = selectedItemId,
