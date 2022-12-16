@@ -239,7 +239,7 @@ object ComponentRegistry {
       mapOf(
         "Default" composeStory { CardButtonsStory(size = BpkCardButtonSize.Default) },
         "Small" composeStory { CardButtonsStory(size = BpkCardButtonSize.Small) },
-      )
+      ),
     ),
     "Calendar" story NodeData(
       { children -> SubStory of children },

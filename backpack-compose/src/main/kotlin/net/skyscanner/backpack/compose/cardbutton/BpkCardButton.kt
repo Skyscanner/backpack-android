@@ -19,18 +19,19 @@
 package net.skyscanner.backpack.compose.cardbutton
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.cardbutton.internal.BpkSaveCardButtonImpl
 import net.skyscanner.backpack.compose.cardbutton.internal.BpkShareCardButtonImpl
 
 enum class BpkCardButtonStyle {
   Default,
   Contained,
-  OnDark
+  OnDark,
 }
 
 enum class BpkCardButtonSize {
   Default,
-  Small
+  Small,
 }
 
 @Composable
@@ -38,6 +39,7 @@ fun BpkSaveButton(
   checked: Boolean,
   contentDescription: String,
   onCheckedChange: (Boolean) -> Unit,
+  modifier: Modifier = Modifier,
   size: BpkCardButtonSize = BpkCardButtonSize.Default,
   style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
 ) {
@@ -46,7 +48,8 @@ fun BpkSaveButton(
     contentDescription = contentDescription,
     style = style,
     size = size,
-    onCheckedChange = onCheckedChange
+    onCheckedChange = onCheckedChange,
+    modifier = modifier,
   )
 }
 
@@ -54,6 +57,7 @@ fun BpkSaveButton(
 fun BpkShareButton(
   contentDescription: String,
   onClick: () -> Unit,
+  modifier: Modifier = Modifier,
   size: BpkCardButtonSize = BpkCardButtonSize.Default,
   style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
 ) {
@@ -61,6 +65,7 @@ fun BpkShareButton(
     contentDescription = contentDescription,
     style = style,
     size = size,
-    onClick = onClick
+    onClick = onClick,
+    modifier = modifier,
   )
 }

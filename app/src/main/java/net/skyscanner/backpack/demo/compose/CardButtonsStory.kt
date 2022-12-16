@@ -55,39 +55,39 @@ fun CardButtonsStory(
   LazyColumn(
     modifier
       .fillMaxSize()
-      .padding(top = BpkDimension.Spacing.Md)
+      .padding(top = BpkDimension.Spacing.Md),
   ) {
     item {
       Row(
-        modifier = modifier
+        modifier = Modifier
           .background(BpkTheme.colors.textPrimaryInverse)
           .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.SpaceEvenly,
       ) {
         CardRow(size = size, style = BpkCardButtonStyle.Default)
       }
     }
     item {
       Row(
-        modifier = modifier
+        modifier = Modifier
           .background(BpkTheme.colors.surfaceContrast)
           .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.SpaceEvenly,
       ) {
         CardRow(size = size, style = BpkCardButtonStyle.OnDark)
       }
     }
     item {
-      Box(modifier = modifier.height(BpkSpacing.Xxl + BpkSpacing.Md)) {
+      Box(modifier = Modifier.height(BpkSpacing.Xxl + BpkSpacing.Md)) {
         Image(
-          modifier = modifier.fillMaxWidth(),
+          modifier = Modifier.fillMaxWidth(),
           painter = painterResource(id = R.drawable.canadian_rockies_canada),
           contentScale = ContentScale.FillWidth,
-          contentDescription = ""
+          contentDescription = "",
         )
         Row(
-          modifier = modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceEvenly
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceEvenly,
         ) {
           CardRow(size = size, style = BpkCardButtonStyle.Contained)
         }
@@ -104,7 +104,7 @@ private fun CardRow(size: BpkCardButtonSize, style: BpkCardButtonStyle) {
     size = size,
     style = style,
     contentDescription = "",
-    onCheckedChange = { checked1 = !checked1 }
+    onCheckedChange = { checked1 = !checked1 },
   )
   var checked2 by remember { mutableStateOf(true) }
   BpkSaveButton(
@@ -112,12 +112,12 @@ private fun CardRow(size: BpkCardButtonSize, style: BpkCardButtonStyle) {
     size = size,
     style = style,
     contentDescription = "",
-    onCheckedChange = { checked2 = !checked2 }
+    onCheckedChange = { checked2 = !checked2 },
   )
   BpkShareButton(
     size = size,
     style = style,
     contentDescription = "",
-    onClick = {}
+    onClick = {},
   )
 }

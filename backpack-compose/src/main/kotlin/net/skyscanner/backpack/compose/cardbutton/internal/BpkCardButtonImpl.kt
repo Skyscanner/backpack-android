@@ -53,16 +53,17 @@ import net.skyscanner.backpack.compose.utils.clickable
 
 private enum class BpkCardButtonState {
   Rest,
-  Transition
+  Transition,
 }
 
 @Composable
 fun BpkSaveCardButtonImpl(
   checked: Boolean,
   contentDescription: String,
-  style: BpkCardButtonStyle,
-  size: BpkCardButtonSize,
-  onCheckedChange: (Boolean) -> Unit
+  onCheckedChange: (Boolean) -> Unit,
+  modifier: Modifier = Modifier,
+  size: BpkCardButtonSize = BpkCardButtonSize.Default,
+  style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
 ) {
   var state by remember { mutableStateOf(BpkCardButtonState.Rest) }
   val scaleAnimation = remember { Animatable(1f) }
@@ -72,16 +73,16 @@ fun BpkSaveCardButtonImpl(
         targetValue = 30f / 24f,
         animationSpec = tween(
           durationMillis = 400,
-          easing = { OvershootInterpolator().getInterpolation(it) }
-        )
+          easing = { OvershootInterpolator().getInterpolation(it) },
+        ),
       )
       delay(500)
       scaleAnimation.animateTo(
         targetValue = 1f,
         animationSpec = tween(
           durationMillis = 300,
-          easing = { OvershootInterpolator().getInterpolation(it) }
-        )
+          easing = { OvershootInterpolator().getInterpolation(it) },
+        ),
       )
       state = BpkCardButtonState.Rest
     }
@@ -91,11 +92,11 @@ fun BpkSaveCardButtonImpl(
       BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
       else -> if (checked) BpkTheme.colors.coreAccent else BpkTheme.colors.textPrimary
     },
-    animationSpec = tween(300)
+    animationSpec = tween(300),
   )
   Box(
-    modifier = Modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
-    contentAlignment = Alignment.Center
+    modifier = modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
+    contentAlignment = Alignment.Center,
   ) {
     Box(
       modifier = Modifier
@@ -117,7 +118,7 @@ fun BpkSaveCardButtonImpl(
                 onCheckedChange.invoke(checked)
               },
             )
-          } else Modifier
+          } else Modifier,
         ),
       contentAlignment = Alignment.Center,
     ) {
@@ -126,24 +127,24 @@ fun BpkSaveCardButtonImpl(
           icon = if (checked) BpkIcon.Heart else BpkIcon.HeartOutline,
           contentDescription = contentDescription,
           size = if (size == BpkCardButtonSize.Default) BpkIconSize.Large else BpkIconSize.Small,
-          tint = colorAnimation
+          tint = colorAnimation,
         )
       }
     }
   }
 }
 
-
 @Composable
 fun BpkShareCardButtonImpl(
   contentDescription: String,
-  style: BpkCardButtonStyle,
-  size: BpkCardButtonSize,
-  onClick: () -> Unit
+  onClick: () -> Unit,
+  modifier: Modifier = Modifier,
+  size: BpkCardButtonSize = BpkCardButtonSize.Default,
+  style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
 ) {
   Box(
-    modifier = Modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
-    contentAlignment = Alignment.Center
+    modifier = modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
+    contentAlignment = Alignment.Center,
   ) {
     Box(
       modifier = Modifier
@@ -166,7 +167,7 @@ fun BpkShareCardButtonImpl(
         tint = when (style) {
           BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
           else -> BpkTheme.colors.textPrimary
-        }
+        },
       )
     }
   }
