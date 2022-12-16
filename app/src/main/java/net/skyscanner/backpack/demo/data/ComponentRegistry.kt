@@ -48,6 +48,7 @@ import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.NudgerStory
 import net.skyscanner.backpack.demo.compose.PanelStory
+import net.skyscanner.backpack.demo.compose.PriceStory
 import net.skyscanner.backpack.demo.compose.RadiiComposeStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.RatingStory
@@ -392,6 +393,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { PanelStory() },
       ),
     ),
+    "Price" composeStory { PriceStory() },
     "RadioButton" story NodeData(
       { children -> TabStory of children },
       mapOf(
