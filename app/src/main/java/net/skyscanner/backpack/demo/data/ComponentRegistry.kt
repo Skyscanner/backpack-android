@@ -338,12 +338,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { HorizontalNavComposeStory() },
       )
     ),
-    "Inventory Divided Card" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_COMPOSE composeStory { InventoryDividedCardStory() },
-      )
-    ),
+    "Inventory Divided Card" composeStory { InventoryDividedCardStory() },
     "Map Markers" story NodeData(
       { children -> SubStory of children },
       mapOf(

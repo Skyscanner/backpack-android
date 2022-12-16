@@ -42,9 +42,11 @@ import net.skyscanner.backpack.demo.R
 
 @Composable
 @Preview
-fun InventoryDividedCardStory() {
+fun InventoryDividedCardStory(
+  modifier: Modifier = Modifier
+) {
   Column(
-    modifier = Modifier
+    modifier = modifier
       .fillMaxSize()
       .padding(BpkSpacing.Base),
     horizontalAlignment = Alignment.CenterHorizontally
@@ -90,6 +92,25 @@ fun InventoryDividedCardStory() {
         BpkText(
           modifier = Modifier.fillMaxWidth(),
           text = stringResource(id = R.string.inventory_divided_card_with_less_than_minimum),
+          style = BpkTheme.typography.bodyDefault,
+          textAlign = TextAlign.Center
+        )
+      },
+      onClick = {}
+    )
+
+    Spacer(modifier = Modifier.height(BpkSpacing.Base))
+
+    BpkInventoryDividedCard(
+      modifier = Modifier.fillMaxWidth(),
+      primaryContent = {
+        Spacer(modifier = Modifier.height(BpkSpacing.Xxl * 4))
+      },
+      secondaryContent = {
+        Spacer(modifier = Modifier.height(BpkSpacing.Xxl * 2))
+        BpkText(
+          modifier = Modifier.fillMaxWidth(),
+          text = stringResource(id = R.string.inventory_divided_card_empty_card),
           style = BpkTheme.typography.bodyDefault,
           textAlign = TextAlign.Center
         )

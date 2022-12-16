@@ -41,7 +41,7 @@ class BpkInventoryDividedCardTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 450, width = 450)
+    setDimensions(height = 200, width = 450)
   }
 
   @Test

@@ -261,4 +261,5 @@
   <string name="divider_indent">With indent</string>
   <string name="inventory_divided_card_with_more_than_minimum"><![CDATA[Card width >= 240 Dp]]></string>
   <string name="inventory_divided_card_with_less_than_minimum"><![CDATA[Card width < 240 Dp]]></string>
+  <string name="inventory_divided_card_empty_card">Empty Card</string>
 </resources>
