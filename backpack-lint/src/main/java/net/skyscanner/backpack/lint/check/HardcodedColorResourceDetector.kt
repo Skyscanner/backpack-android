@@ -45,8 +45,8 @@ class HardcodedColorResourceDetector : ResourceXmlDetector() {
       severity = Severity.WARNING,
       implementation = Implementation(
         HardcodedColorResourceDetector::class.java,
-        Scope.RESOURCE_FILE_SCOPE
-      )
+        Scope.RESOURCE_FILE_SCOPE,
+      ),
     )
   }
 
@@ -67,7 +67,7 @@ class HardcodedColorResourceDetector : ResourceXmlDetector() {
       context.report(
         ISSUE,
         context.getElementLocation(element),
-        EXPLANATION
+        EXPLANATION,
       )
     }
   }

@@ -97,13 +97,13 @@ internal class BpkCalendarLabelsViewModel(
             0,
             label.text.length,
             paint,
-            outerWidth
+            outerWidth,
           )
             .setAlignment(Layout.Alignment.ALIGN_NORMAL)
             .setTextDirection(TextDirectionHeuristics.FIRSTSTRONG_LTR)
             .setLineSpacing(
               0f,
-              1f
+              1f,
             )
             .setIncludePad(true)
             .setEllipsize(TextUtils.TruncateAt.END)
@@ -135,7 +135,7 @@ internal class BpkCalendarLabelsViewModel(
         CalendarLabel.Style.PriceLow -> R.color.bpkStatusSuccessSpot
         CalendarLabel.Style.PriceMedium -> R.color.bpkTextSecondary
         CalendarLabel.Style.PriceHigh -> R.color.bpkTextSecondary
-      }
+      },
     )
   }
 }

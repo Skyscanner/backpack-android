@@ -64,7 +64,7 @@ fun BpkHorizontalNav(
       when (size) {
         BpkHorizontalNavSize.Default -> 48.dp
         BpkHorizontalNavSize.Small -> 36.dp
-      }
+      },
     ),
   ) {
     tabs.forEachIndexed { index, tab ->
@@ -90,7 +90,7 @@ fun BpkHorizontalNav(
               style = when (size) {
                 BpkHorizontalNavSize.Default -> BpkTheme.typography.label1
                 BpkHorizontalNavSize.Small -> BpkTheme.typography.label2
-              }
+              },
             )
           }
         },

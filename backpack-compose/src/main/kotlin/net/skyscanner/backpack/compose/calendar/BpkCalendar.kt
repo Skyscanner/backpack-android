@@ -62,7 +62,7 @@ fun BpkCalendar(
         params = state.params,
         modifier = Modifier
           .align(Alignment.TopCenter)
-          .padding(top = BpkSpacing.Base)
+          .padding(top = BpkSpacing.Base),
       )
     }
   }

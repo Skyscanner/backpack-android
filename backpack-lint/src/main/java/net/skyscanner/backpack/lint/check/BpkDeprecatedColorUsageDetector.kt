@@ -50,8 +50,8 @@ class BpkDeprecatedColorUsageDetector : Detector(), SourceCodeScanner, XmlScanne
       severity = Severity.WARNING,
       implementation = Implementation(
         BpkDeprecatedColorUsageDetector::class.java,
-        Scope.JAVA_AND_RESOURCE_FILES
-      )
+        Scope.JAVA_AND_RESOURCE_FILES,
+      ),
     )
 
     private const val COLOR_RES_PREFIX = "@color/"
@@ -70,7 +70,7 @@ class BpkDeprecatedColorUsageDetector : Detector(), SourceCodeScanner, XmlScanne
       context.report(
         ISSUE,
         context.getValueLocation(attribute),
-        EXPLANATION
+        EXPLANATION,
       )
     }
   }
@@ -82,7 +82,7 @@ class BpkDeprecatedColorUsageDetector : Detector(), SourceCodeScanner, XmlScanne
       context.report(
         ISSUE,
         context.getElementLocation(element),
-        EXPLANATION
+        EXPLANATION,
       )
     }
   }
@@ -94,13 +94,13 @@ class BpkDeprecatedColorUsageDetector : Detector(), SourceCodeScanner, XmlScanne
     node: UElement,
     type: ResourceType,
     name: String,
-    isFramework: Boolean
+    isFramework: Boolean,
   ) {
     if (BpkDeprecatedTokens.deprecatedColors.contains(name)) {
       context.report(
         ISSUE,
         context.getLocation(node),
-        EXPLANATION
+        EXPLANATION,
       )
     }
   }

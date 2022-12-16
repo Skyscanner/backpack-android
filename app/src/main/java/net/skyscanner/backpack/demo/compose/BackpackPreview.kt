@@ -31,9 +31,9 @@ import net.skyscanner.backpack.demo.BackpackDemoTheme
 
 @Composable
 fun BackpackPreview(
+  vararg providers: ProvidedValue<*>,
   modifier: Modifier = Modifier,
   background: Color = Color.Unspecified,
-  vararg providers: ProvidedValue<*>,
   content: @Composable () -> Unit,
 ) {
   BackpackDemoTheme {

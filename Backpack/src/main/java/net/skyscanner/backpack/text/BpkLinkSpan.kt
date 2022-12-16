@@ -27,7 +27,7 @@ import net.skyscanner.backpack.R
 class BpkLinkSpan<T>(
   context: Context,
   private val link: T,
-  private val linkHandler: (T) -> Unit
+  private val linkHandler: (T) -> Unit,
 ) : ClickableSpan() {
 
   private val color = context.getColor(R.color.bpkTextLink)

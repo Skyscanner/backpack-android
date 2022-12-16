@@ -75,4 +75,3 @@ internal fun BarChartTitle(
     },
   )
 }
-

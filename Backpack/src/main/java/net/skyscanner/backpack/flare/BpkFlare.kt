@@ -52,7 +52,7 @@ import net.skyscanner.backpack.util.use
 open class BpkFlare @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
   enum class PointerPosition(internal val id: Int, internal val offset: Float) {
@@ -219,7 +219,7 @@ open class BpkFlare @JvmOverloads constructor(
     height: Float,
     canvas: Canvas,
     width: Float,
-    pointerXEnd: Float
+    pointerXEnd: Float,
   ) {
     clipRect.set(0f, pointerYStart, pointerXStart, height)
     canvas.clipOutRectCompat(clipRect)

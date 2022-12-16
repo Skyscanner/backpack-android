@@ -31,7 +31,7 @@ import net.skyscanner.backpack.util.Consumer
 @SuppressLint("ViewConstructor")
 internal class ChartLegend constructor(
   context: Context,
-  colors: BpkBarChart.Colors
+  colors: BpkBarChart.Colors,
 ) : LinearLayout(context), Consumer<BpkBarChart.Legend?> {
 
   init {

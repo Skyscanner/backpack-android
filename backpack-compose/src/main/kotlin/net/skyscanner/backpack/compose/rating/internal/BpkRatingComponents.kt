@@ -79,7 +79,6 @@ internal fun BpkRatingNumbers(
         overflow = TextOverflow.Ellipsis,
       )
     }
-
   }
 }
 
@@ -101,9 +100,9 @@ internal fun BpkRatingTitle(
       // a little trick to provide baseline params for the custom layouts with invisible text
       BpkText(
         text = "",
-        modifier = modifier
-            .alpha(0f)
-            .semantics { invisibleToUser() },
+        modifier = Modifier
+          .alpha(0f)
+          .semantics { invisibleToUser() },
       )
       content()
     }

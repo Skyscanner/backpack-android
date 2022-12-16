@@ -30,7 +30,7 @@ import kotlin.math.min
 
 internal class ChartDrawable(
   private val background: ColorStateList,
-  private val foreground: ColorStateList
+  private val foreground: ColorStateList,
 ) : Drawable() {
 
   private val backgroundPaint = Paint().apply {

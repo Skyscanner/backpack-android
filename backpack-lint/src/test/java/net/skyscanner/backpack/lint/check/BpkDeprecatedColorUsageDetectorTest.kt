@@ -38,8 +38,8 @@ class BpkDeprecatedColorUsageDetectorTest {
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  android:background="@color/bpkBackground"/>"""
-        )
+  android:background="@color/bpkBackground"/>""",
+        ),
       )
       .runCheck()
       .expectWarningCount(1)
@@ -49,7 +49,7 @@ res/layout/colour_attribute.xml:5: Warning: This colour is now deprecated. Pleas
   android:background="@color/bpkBackground"/>
                       ~~~~~~~~~~~~~~~~~~~~
 0 errors, 1 warnings
-      """
+      """,
       )
   }
 
@@ -62,8 +62,8 @@ res/layout/colour_attribute.xml:5: Warning: This colour is now deprecated. Pleas
           """<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="fancyColor">@color/bpkBackground</color>
-</resources>"""
-        )
+</resources>""",
+        ),
       )
       .runCheck()
       .expectWarningCount(1)
@@ -73,7 +73,7 @@ res/values/colors.xml:3: Warning: This colour is now deprecated. Please switch t
     <color name="fancyColor">@color/bpkBackground</color>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 0 errors, 1 warnings
-      """
+      """,
       )
   }
 
@@ -86,8 +86,8 @@ res/values/colors.xml:3: Warning: This colour is now deprecated. Please switch t
     fun someFunction() {
         val color = context.getColor(R.color.bpkBackground)
     }
-}"""
-        )
+}""",
+        ),
       )
       .runCheck()
       .expectWarningCount(1)
@@ -97,7 +97,7 @@ src/SomeClass.kt:3: Warning: This colour is now deprecated. Please switch to the
         val color = context.getColor(R.color.bpkBackground)
                                      ~~~~~~~~~~~~~~~~~~~~~
 0 errors, 1 warnings
-      """
+      """,
       )
   }
 
@@ -111,8 +111,8 @@ src/SomeClass.kt:3: Warning: This colour is now deprecated. Please switch to the
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="wrap_content"
   android:layout_height="wrap_content"
-  android:background="@color/bpkCorePrimary"/>"""
-        )
+  android:background="@color/bpkCorePrimary"/>""",
+        ),
       )
       .runCheck()
       .expectClean()
@@ -127,8 +127,8 @@ src/SomeClass.kt:3: Warning: This colour is now deprecated. Please switch to the
           """<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="fancyColor">@color/bpkCorePrimary</color>
-</resources>"""
-        )
+</resources>""",
+        ),
       )
       .runCheck()
       .expectClean()
@@ -143,8 +143,8 @@ src/SomeClass.kt:3: Warning: This colour is now deprecated. Please switch to the
     fun someFunction() {
         val color = context.getColor(R.color.bpkCorePrimary)
     }
-}"""
-        )
+}""",
+        ),
       )
       .runCheck()
       .expectClean()

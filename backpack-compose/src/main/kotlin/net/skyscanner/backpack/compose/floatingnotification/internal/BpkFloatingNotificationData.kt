@@ -30,7 +30,7 @@ internal data class BpkFloatingNotificationData(
   val hideAfter: Long,
   val onExit: (() -> Unit)?,
   private val onClick: (() -> Unit)?,
-  private val continuation: CancellableContinuation<Unit>
+  private val continuation: CancellableContinuation<Unit>,
 ) {
 
   fun performAction() {
@@ -42,5 +42,4 @@ internal data class BpkFloatingNotificationData(
     if (continuation.isActive) continuation.resume(Unit, onCancellation = null)
     onExit?.invoke()
   }
-
 }

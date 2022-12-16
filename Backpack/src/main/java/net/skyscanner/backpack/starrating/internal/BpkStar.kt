@@ -25,19 +25,19 @@ import android.graphics.drawable.LayerDrawable
 internal class BpkStar(
   private val empty: Drawable,
   private val half: Drawable,
-  private val full: Drawable
+  private val full: Drawable,
 ) : LayerDrawable(
   arrayOf(
     empty,
     half,
-    full
-  )
+    full,
+  ),
 ) {
 
   enum class Value {
     Empty,
     Half,
-    Full
+    Full,
   }
 
   internal var value = Value.Empty

@@ -136,7 +136,7 @@ fun IconsStoryCompose() {
                   BpkToast.LENGTH_SHORT,
                 ).show()
               }
-              .requiredSize(BpkSpacing.Lg)
+              .requiredSize(BpkSpacing.Lg),
           ) {
 
             BpkIcon(

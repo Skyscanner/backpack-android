@@ -64,7 +64,7 @@ object BpkBarChartData {
         selectedTitle = context.getString(R.string.generic_selected),
         inactiveTitle = context.getString(R.string.generic_no_price),
         activeTitle = context.getString(R.string.generic_price),
-      )
+      ),
     )
   }
 

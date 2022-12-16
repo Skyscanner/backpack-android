@@ -48,8 +48,8 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
       severity = Severity.WARNING,
       implementation = Implementation(
         BpkComponentUsageDetector::class.java,
-        Scope.JAVA_AND_RESOURCE_FILES
-      )
+        Scope.JAVA_AND_RESOURCE_FILES,
+      ),
     )
 
     private val APPLICABLE_TYPES = Component.values().flatMap { it.componentsToReplace }
@@ -111,7 +111,7 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     report(
       ISSUE,
       location,
-      "Backpack component available for $existingComponent. Use ${component.fullName} instead. More info at ${component.url}"
+      "Backpack component available for $existingComponent. Use ${component.fullName} instead. More info at ${component.url}",
     )
   }
 
@@ -124,58 +124,58 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     BOTTOM_NAV(
       fullName = "net.skyscanner.backpack.bottomnav.BpkBottomNav",
       webName = "bottom-nav",
-      componentsToReplace = setOf("com.google.android.material.bottomnavigation.BottomNavigationView")
+      componentsToReplace = setOf("com.google.android.material.bottomnavigation.BottomNavigationView"),
     ),
     BOTTOM_SHEET(
       fullName = "net.skyscanner.backpack.bottomsheet.BpkBottomSheetBehaviour",
       webName = "bottom-sheet",
-      componentsToReplace = setOf("com.google.android.material.bottomsheet.BottomSheetBehaviour")
+      componentsToReplace = setOf("com.google.android.material.bottomsheet.BottomSheetBehaviour"),
     ),
     BUTTON(
       fullName = "net.skyscanner.backpack.button.BpkButton",
       webName = "button",
-      componentsToReplace = setOf("android.widget.Button", "Button", "androidx.appcompat.widget.AppCompatButton")
+      componentsToReplace = setOf("android.widget.Button", "Button", "androidx.appcompat.widget.AppCompatButton"),
     ),
     CALENDAR(
       fullName = "net.skyscanner.backpack.calendar.BpkCalendar",
       webName = "calendar",
       componentsToReplace = setOf("java.util.Calendar", "com.google.android.material.datepicker.MaterialDatePicker.Builder"),
-      staticMethodsToReplace = setOf("datePicker", "dateRangePicker")
+      staticMethodsToReplace = setOf("datePicker", "dateRangePicker"),
     ),
     CARD(
       fullName = "net.skyscanner.backpack.card.BpkCardView",
       webName = "card",
-      componentsToReplace = setOf("androidx.cardview.widget.CardView")
+      componentsToReplace = setOf("androidx.cardview.widget.CardView"),
     ),
     CHECKBOX(
       fullName = "net.skyscanner.backpack.checkbox.BpkCheckbox",
       webName = "checkbox",
-      componentsToReplace = setOf("android.widget.Checkbox", "Checkbox", "androidx.appcompat.widget.AppCompatCheckBox")
+      componentsToReplace = setOf("android.widget.Checkbox", "Checkbox", "androidx.appcompat.widget.AppCompatCheckBox"),
     ),
     CHIP(
       fullName = "net.skyscanner.backpack.chip.BpkChip",
       webName = "chip",
-      componentsToReplace = setOf("com.google.android.material.chip.Chip")
+      componentsToReplace = setOf("com.google.android.material.chip.Chip"),
     ),
     DIALOG(
       fullName = "net.skyscanner.backpack.dialog.BpkDialog",
       webName = "dialog",
-      componentsToReplace = setOf("android.app.Dialog")
+      componentsToReplace = setOf("android.app.Dialog"),
     ),
     FAB(
       fullName = "net.skyscanner.backpack.fab.BpkFab",
       webName = "floating-action-button",
-      componentsToReplace = setOf("com.google.android.material.floatingactionbutton.FloatingActionButton")
+      componentsToReplace = setOf("com.google.android.material.floatingactionbutton.FloatingActionButton"),
     ),
     HORIZONTAL_NAV(
       fullName = "net.skyscanner.backpack.horisontalnav.BpkHorizontalNav",
       webName = "horizontal-nav",
-      componentsToReplace = setOf("com.google.android.material.tabs.TabLayout")
+      componentsToReplace = setOf("com.google.android.material.tabs.TabLayout"),
     ),
     NAV_BAR(
       fullName = "net.skyscanner.backpack.navbar.BpkNavBar",
       webName = "navigation-bar",
-      componentsToReplace = setOf("com.google.android.material.appbar.CollapsingToolbarLayout")
+      componentsToReplace = setOf("com.google.android.material.appbar.CollapsingToolbarLayout"),
     ),
     RADIO_BUTTON(
       fullName = "net.skyscanner.backpack.radiobutton.BpkRadioButton",
@@ -183,8 +183,8 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
       componentsToReplace = setOf(
         "android.widget.RadioButton",
         "RadioButton",
-        "androidx.appcompat.widget.AppCompatRadioButton"
-      )
+        "androidx.appcompat.widget.AppCompatRadioButton",
+      ),
     ),
     SLIDER(
       fullName = "net.skyscanner.backpack.slider.BpkSlider",
@@ -194,19 +194,19 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
         "com.google.android.material.slider.Slider",
         "android.widget.SeekBar",
         "SeekBar",
-        "androidx.appcompat.widget.AppCompatSeekBar"
-      )
+        "androidx.appcompat.widget.AppCompatSeekBar",
+      ),
     ),
     SNACKBAR(
       fullName = "net.skyscanner.backpack.snackbar.BpkSnackbar",
       webName = "snackbar",
       componentsToReplace = setOf("com.google.android.material.snackbar.Snackbar"),
-      staticMethodsToReplace = setOf("make")
+      staticMethodsToReplace = setOf("make"),
     ),
     SPINNER(
       fullName = "net.skyscanner.backpack.spinner.BpkSpinner",
       webName = "spinner",
-      componentsToReplace = setOf("android.widget.ProgressBar", "ProgressBar")
+      componentsToReplace = setOf("android.widget.ProgressBar", "ProgressBar"),
     ),
     SWITCH(
       fullName = "net.skyscanner.backpack.toggle.BpkSwitch",
@@ -215,29 +215,29 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
         "android.widget.Switch",
         "Switch",
         "androidx.appcompat.widget.SwitchCompat",
-        "com.google.android.material.switchmaterial.SwitchMaterial"
-      )
+        "com.google.android.material.switchmaterial.SwitchMaterial",
+      ),
     ),
     TEXT(
       fullName = "net.skyscanner.backpack.text.BpkText",
       webName = "text",
-      componentsToReplace = setOf("android.widget.TextView", "TextView", "androidx.appcompat.widget.AppCompatTextView")
+      componentsToReplace = setOf("android.widget.TextView", "TextView", "androidx.appcompat.widget.AppCompatTextView"),
     ),
     TEXT_FIELD(
       fullName = "net.skyscanner.backpack.text.BpkTextField",
       webName = "text-input",
-      componentsToReplace = setOf("android.widget.EditText", "EditText", "androidx.appcompat.widget.AppCompatEditText")
+      componentsToReplace = setOf("android.widget.EditText", "EditText", "androidx.appcompat.widget.AppCompatEditText"),
     ),
     TEXT_INPUT_LAYOUT(
       fullName = "net.skyscanner.backpack.text.BpkTextInputLayout",
       webName = "text-input",
-      componentsToReplace = setOf("com.google.android.material.textfield.TextInputLayout")
+      componentsToReplace = setOf("com.google.android.material.textfield.TextInputLayout"),
     ),
     TOAST(
       fullName = "net.skyscanner.backpack.toast.BpkToast",
       webName = "toast",
       componentsToReplace = setOf("android.widget.Toast"),
-      staticMethodsToReplace = setOf("makeText")
+      staticMethodsToReplace = setOf("makeText"),
     ),
     ;
 

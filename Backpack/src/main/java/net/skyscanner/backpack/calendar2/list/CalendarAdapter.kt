@@ -29,7 +29,7 @@ import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarAdapter(
-  private val output: Consumer<CalendarInteraction>
+  private val output: Consumer<CalendarInteraction>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<CalendarCells> {
 
   private var data: CalendarCells = CalendarCells(emptyList())

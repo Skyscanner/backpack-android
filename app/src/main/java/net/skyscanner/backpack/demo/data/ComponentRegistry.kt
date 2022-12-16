@@ -170,14 +170,14 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_badge },
         TAB_TITLE_COMPOSE composeStory { BadgeStory() },
-      )
+      ),
     ),
     "Bar Chart" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { BarChartStory of R.layout.fragment_bar_chart },
         TAB_TITLE_COMPOSE composeStory { net.skyscanner.backpack.demo.compose.BarChartStory() },
-      )
+      ),
     ),
     "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
     "Bottom Sheet" story NodeData(
@@ -185,7 +185,7 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_bottom_sheet scrollable false },
         TAB_TITLE_COMPOSE composeStory { BottomSheetStory() },
-      )
+      ),
     ),
     "Button" story NodeData(
       { children -> TabStory of children },
@@ -198,7 +198,7 @@ object ComponentRegistry {
             "Link" story NodeData { LoadingButtonStory of R.layout.fragment_button_link },
             "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
             "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable },
-          )
+          ),
         ),
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
@@ -206,10 +206,10 @@ object ComponentRegistry {
             "Default" composeStory { ButtonsStory(BpkButtonSize.Default) },
             "Large" composeStory { ButtonsStory(BpkButtonSize.Large) },
             "Link" composeStory { ButtonLinkStory() },
-            "Drawable Icon" composeStory { ButtonDrawableIconStory() }
-          )
+            "Drawable Icon" composeStory { ButtonDrawableIconStory() },
+          ),
         ),
-      )
+      ),
     ),
     "Card" story NodeData(
       { children -> TabStory of children },
@@ -228,10 +228,10 @@ object ComponentRegistry {
             "With divider and corner style large" story NodeData {
               Story of R.layout.fragment_card_with_divider_cornerstyle_large
             },
-          )
+          ),
         ),
         TAB_TITLE_COMPOSE composeStory { CardStory() },
-      )
+      ),
     ),
     "Calendar" story NodeData(
       { children -> SubStory of children },
@@ -244,7 +244,7 @@ object ComponentRegistry {
           FooterViewCalendarStory of R.layout.fragment_calendar_footer_view with Direction.RTL
         },
         "Labeled" story NodeData { LabeledCalendarStory of R.layout.fragment_calendar_default },
-      )
+      ),
     ),
     "Calendar 2" story NodeData(
       { children -> TabStory of children },
@@ -259,7 +259,7 @@ object ComponentRegistry {
             "Disabled weekends" story NodeData { Calendar2Story of CalendarStoryType.WithDisabledDates },
             "Day labels" story NodeData { Calendar2Story of CalendarStoryType.WithLabels },
             "Pre-selected range" story NodeData { Calendar2Story of CalendarStoryType.PreselectedRange },
-          )
+          ),
         ),
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
@@ -271,9 +271,9 @@ object ComponentRegistry {
             "Disabled weekends" composeStory { CalendarStory(CalendarStoryType.WithDisabledDates) },
             "Day labels" composeStory { CalendarStory(CalendarStoryType.WithLabels) },
             "Pre-selected range" composeStory { CalendarStory(CalendarStoryType.PreselectedRange) },
-          )
+          ),
         ),
-      )
+      ),
     ),
     "Chip" story NodeData(
       { children -> TabStory of children },
@@ -285,17 +285,17 @@ object ComponentRegistry {
             "On Dark" story NodeData { ChipStory of R.layout.fragment_chip_ondark },
             "With icon" story NodeData { ChipStory of R.layout.fragment_chip_with_icon },
             "With icon RTL" story NodeData { ChipStory of R.layout.fragment_chip_with_icon with Direction.RTL },
-          )
+          ),
         ),
         TAB_TITLE_COMPOSE composeStory { ComposeChipStory() },
-      )
+      ),
     ),
     "Checkbox" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_checkbox },
         TAB_TITLE_COMPOSE composeStory { CheckboxStory() },
-      )
+      ),
     ),
     "Dialog" story NodeData(
       { children -> TabStory of children },
@@ -317,8 +317,8 @@ object ComponentRegistry {
             "Pointer offset" story NodeData { Story of R.layout.fragment_flare_pointer_offset },
             "Pointer offset RTL" story NodeData { Story of R.layout.fragment_flare_pointer_offset with Direction.RTL },
             "Rounded" story NodeData { Story of R.layout.fragment_flare_rounded },
-            "Inset padding mode" story NodeData { Story of R.layout.fragment_flare_inset_padding_mode }
-          )
+            "Inset padding mode" story NodeData { Story of R.layout.fragment_flare_inset_padding_mode },
+          ),
         ),
         TAB_TITLE_COMPOSE composeStory { FlareStory() },
       ),
@@ -328,7 +328,7 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_fab },
         TAB_TITLE_COMPOSE composeStory { BpkFabStory() },
-      )
+      ),
     ),
     "Floating Notification" composeStory { FloatingNotificationStory() },
     "Horizontal Nav" story NodeData(
@@ -336,7 +336,7 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
         TAB_TITLE_COMPOSE composeStory { HorizontalNavComposeStory() },
-      )
+      ),
     ),
     "Inventory Divided Card" composeStory { InventoryDividedCardStory() },
     "Map Markers" story NodeData(
@@ -345,7 +345,7 @@ object ComponentRegistry {
         "Pointers" story NodeData { MapStory of MapStory.Type.PointersOnly },
         "Badges " story NodeData { MapStory of MapStory.Type.Badges },
         "With icons" story NodeData { MapStory of MapStory.Type.BadgesWithIcons },
-      )
+      ),
     ),
     "Nav Bar" story NodeData(
       { children -> TabStory of children },
@@ -358,24 +358,24 @@ object ComponentRegistry {
             "With Icon" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon },
             "With Icon RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon with Direction.RTL },
             "With Menu" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu },
-            "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL }
-          )
+            "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL },
+          ),
         ),
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
           mapOf(
             "Default" composeStory { NavigationBarStory() },
             "Collapsible" composeStory { CollapsibleNavigationBarStory() },
-          )
+          ),
         ),
-      )
+      ),
     ),
     "Nudger" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_nudger },
         TAB_TITLE_COMPOSE composeStory { NudgerStory() },
-      )
+      ),
     ),
     "Overlay" story NodeData { Story of R.layout.fragment_overlay },
     "Panel" story NodeData(
@@ -383,14 +383,14 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_panel },
         TAB_TITLE_COMPOSE composeStory { PanelStory() },
-      )
+      ),
     ),
     "RadioButton" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_radio_button },
         TAB_TITLE_COMPOSE composeStory { RadioButtonStory() },
-      )
+      ),
     ),
     "Rating" story NodeData(
       { children -> TabStory of children },
@@ -406,7 +406,7 @@ object ComponentRegistry {
             "Vertical" story NodeData { Story of R.layout.fragment_rating_sizes_vertical },
             "Pill" story NodeData { Story of R.layout.fragment_rating_sizes_pill },
             "Zero to Five Scale" story NodeData { Story of R.layout.fragment_rating_zero_to_five },
-          )
+          ),
         ),
         TAB_TITLE_COMPOSE composeStory { RatingStory() },
       ),
@@ -416,14 +416,14 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_skeletons },
         TAB_TITLE_COMPOSE composeStory { SkeletonStory() },
-      )
+      ),
     ),
     "Slider" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_slider },
         TAB_TITLE_COMPOSE composeStory { BpkSliderStory() },
-      )
+      ),
     ),
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
     "Spinner" story NodeData(
@@ -431,7 +431,7 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_spinner },
         TAB_TITLE_COMPOSE composeStory { SpinnerStory() },
-      )
+      ),
     ),
     "Star Rating" story NodeData(
       { children -> SubStory of children },
@@ -439,8 +439,8 @@ object ComponentRegistry {
         "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
         "RTL" story NodeData { Story of R.layout.fragment_star_rating_default with Direction.RTL },
         "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
-        "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max }
-      )
+        "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max },
+      ),
     ),
     "Star Rating Interactive" story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
     "Switch" story NodeData(
@@ -448,7 +448,7 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_switch },
         TAB_TITLE_COMPOSE composeStory { SwitchStory() },
-      )
+      ),
     ),
     "Text" story NodeData(
       { children -> TabStory of children },
@@ -461,7 +461,7 @@ object ComponentRegistry {
             "Hero" story NodeData { Story of R.layout.fragment_text_hero },
             "With drawables" story NodeData { Story of R.layout.fragment_text_drawables },
             "With links" story NodeData { Story of R.layout.fragment_text_links },
-          )
+          ),
         ),
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
@@ -469,9 +469,9 @@ object ComponentRegistry {
             "Hero" composeStory { HeroStyleStory() },
             "Heading" composeStory { HeadingStyleStory() },
             "Body" composeStory { BodyStyleStory() },
-          )
+          ),
         ),
-      )
+      ),
     ),
     "Text Field" story NodeData(
       { children -> TabStory of children },
@@ -482,10 +482,10 @@ object ComponentRegistry {
             "Default" story NodeData { Story of R.layout.fragment_text_fields },
             "RTL" story NodeData { Story of R.layout.fragment_text_fields_rtl },
             "With labels" story NodeData { Story of R.layout.fragment_text_fields_labels },
-          )
+          ),
         ),
         TAB_TITLE_COMPOSE composeStory { TextFiledStory() },
-      )
+      ),
     ),
     "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
     "Toast" story NodeData { ToastStory of R.layout.fragment_toasts },
@@ -501,25 +501,25 @@ object ComponentRegistry {
             "Default" story NodeData { IconsStory of IconType.Default },
             "RTL" story NodeData { IconsStory of IconType.Default with Direction.RTL },
             "Small" story NodeData { IconsStory of IconType.Small },
-            "Small RTL" story NodeData { IconsStory of IconType.Small with Direction.RTL }
-          )
+            "Small RTL" story NodeData { IconsStory of IconType.Small with Direction.RTL },
+          ),
         ),
         TAB_TITLE_COMPOSE composeStory { IconsStoryCompose() },
-      )
+      ),
     ),
     "Color" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { ColorStory() },
         TAB_TITLE_COMPOSE composeStory { ColorsComposeStory() },
-      )
+      ),
     ),
     "Elevation" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { ElevationStory() },
         TAB_TITLE_COMPOSE composeStory { ElevationComposeStory() },
-      )
+      ),
     ),
     "Icons" story NodeData { Story of R.layout.fragment_icons },
     "Radii" story NodeData(
@@ -527,14 +527,14 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { RadiiStory() },
         TAB_TITLE_COMPOSE composeStory { RadiiComposeStory() },
-      )
+      ),
     ),
     "Spacing" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { SpacingStory() },
         TAB_TITLE_COMPOSE composeStory { SpacingComposeStory() },
-      )
+      ),
     ),
   )
 

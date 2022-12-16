@@ -87,7 +87,7 @@ internal fun BpkCalendarDayCell(
       Spacer(
         Modifier
           .size(BpkCalendarSizes.SelectionHeight)
-          .cellDayBackground(selection, status, inactive, style)
+          .cellDayBackground(selection, status, inactive, style),
       )
 
       BpkText(
@@ -107,7 +107,7 @@ internal fun BpkCalendarDayCell(
         textAlign = TextAlign.Center,
         maxLines = 2,
         style = BpkTheme.typography.caption,
-        color = labelColor(status, style)
+        color = labelColor(status, style),
       )
     }
   }
@@ -116,16 +116,19 @@ internal fun BpkCalendarDayCell(
 private fun Modifier.cellSelectionBackground(selection: Selection?): Modifier = composed {
   when (selection) {
     Selection.Start,
-    Selection.StartMonth -> background(BpkTheme.colors.surfaceHighlight, EndSemiRect)
+    Selection.StartMonth,
+    -> background(BpkTheme.colors.surfaceHighlight, EndSemiRect)
 
     Selection.End,
-    Selection.EndMonth -> background(BpkTheme.colors.surfaceHighlight, StartSemiRect)
+    Selection.EndMonth,
+    -> background(BpkTheme.colors.surfaceHighlight, StartSemiRect)
 
     Selection.Middle -> background(BpkTheme.colors.surfaceHighlight, RectangleShape)
 
     Selection.Single,
     Selection.Double,
-    null -> this
+    null,
+    -> this
   }
 }
 
@@ -145,11 +148,13 @@ private fun Modifier.cellDayBackground(
 
         Selection.StartMonth,
         Selection.Middle,
-        Selection.EndMonth -> background(BpkTheme.colors.surfaceHighlight, CircleShape)
+        Selection.EndMonth,
+        -> background(BpkTheme.colors.surfaceHighlight, CircleShape)
 
         Selection.Single,
         Selection.Start,
-        Selection.End -> background(BpkTheme.colors.coreAccent, CircleShape)
+        Selection.End,
+        -> background(BpkTheme.colors.coreAccent, CircleShape)
       }
 
     else -> this
@@ -169,11 +174,13 @@ private fun dateColor(
         Selection.Single,
         Selection.Double,
         Selection.Start,
-        Selection.End -> BpkTheme.colors.textPrimaryInverse
+        Selection.End,
+        -> BpkTheme.colors.textPrimaryInverse
 
         Selection.StartMonth,
         Selection.Middle,
-        Selection.EndMonth -> BpkTheme.colors.textPrimary
+        Selection.EndMonth,
+        -> BpkTheme.colors.textPrimary
       }
 
     inactive -> BpkTheme.colors.textDisabled

@@ -30,7 +30,7 @@ class SharedPreferences {
       return context
         .getSharedPreferences(
           context.getString(R.string.preference_file_key),
-          Context.MODE_PRIVATE
+          Context.MODE_PRIVATE,
         )
         .getInt(THEME, R.style.AppTheme)
     }
@@ -39,7 +39,7 @@ class SharedPreferences {
       val sharedPref = context
         .getSharedPreferences(
           context.getString(R.string.preference_file_key),
-          Context.MODE_PRIVATE
+          Context.MODE_PRIVATE,
         )
 
       with(sharedPref.edit()) {

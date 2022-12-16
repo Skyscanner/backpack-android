@@ -59,7 +59,7 @@ internal fun rippleDrawable(
   return RippleDrawable(
     rippleColorStateList,
     content,
-    mask
+    mask,
   )
 }
 

@@ -37,6 +37,6 @@ internal fun BpkCalendarSpaceCell(
       .height(BpkCalendarSizes.SelectionHeight)
       .applyIf(model.selected) {
         background(BpkTheme.colors.surfaceHighlight)
-      }
+      },
   )
 }

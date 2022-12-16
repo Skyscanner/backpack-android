@@ -48,10 +48,10 @@ internal fun <T> Modifier.nestedScrollFixedSwipeable(
   interactionSource: MutableInteractionSource? = null,
   thresholds: (from: T, to: T) -> ThresholdConfig = { _, _ -> FixedThreshold(56.dp) },
   resistance: ResistanceConfig? = SwipeableDefaults.resistanceConfig(anchors.keys),
-  velocityThreshold: Dp = SwipeableDefaults.VelocityThreshold
+  velocityThreshold: Dp = SwipeableDefaults.VelocityThreshold,
 ): Modifier = this
   .nestedScroll(
-    connection = state.preUpPostDownNestedScrollConnection(anchors.keys.minOrNull() ?: Float.NEGATIVE_INFINITY)
+    connection = state.preUpPostDownNestedScrollConnection(anchors.keys.minOrNull() ?: Float.NEGATIVE_INFINITY),
   )
   .swipeable(
     state = state,
@@ -82,7 +82,7 @@ private fun <T> SwipeableState<T>.preUpPostDownNestedScrollConnection(
     override fun onPostScroll(
       consumed: Offset,
       available: Offset,
-      source: NestedScrollSource
+      source: NestedScrollSource,
     ): Offset {
       return if (source == NestedScrollSource.Drag) {
         performDrag(available.toFloat()).toOffset()

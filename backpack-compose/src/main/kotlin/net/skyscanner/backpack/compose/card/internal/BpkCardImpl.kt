@@ -62,7 +62,7 @@ internal fun cardBackgroundColor(elevation: BpkCardElevation): Color =
     when (elevation) {
       BpkCardElevation.Focus -> BpkTheme.colors.surfaceElevated
       BpkCardElevation.None, BpkCardElevation.Default -> BpkTheme.colors.surfaceDefault
-    }
+    },
   ).value
 
 @Composable
@@ -72,7 +72,7 @@ internal fun cardElevation(elevation: BpkCardElevation): Dp =
       BpkCardElevation.None -> 0.dp
       BpkCardElevation.Focus -> BpkElevation.Xl
       BpkCardElevation.Default -> BpkElevation.Sm
-    }
+    },
   ).value
 
 internal fun cardShape(corner: BpkCardCorner) =
@@ -80,5 +80,5 @@ internal fun cardShape(corner: BpkCardCorner) =
     size = when (corner) {
       BpkCardCorner.Small -> BpkBorderRadius.Md
       BpkCardCorner.Large -> BpkBorderRadius.Lg
-    }
+    },
   )

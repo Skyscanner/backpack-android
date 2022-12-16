@@ -58,6 +58,6 @@ fun BottomSheetStory(
           .background(BpkTheme.colors.canvasContrast)
           .padding(contentPadding),
       )
-    }
+    },
   )
 }

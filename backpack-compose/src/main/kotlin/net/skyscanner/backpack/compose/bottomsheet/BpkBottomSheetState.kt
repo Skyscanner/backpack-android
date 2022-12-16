@@ -39,7 +39,7 @@ fun rememberBpkBottomSheetState(
     saver = BpkBottomSheetState.Saver(
       animationSpec = animationSpec,
       confirmStateChange = confirmStateChange,
-    )
+    ),
   ) {
     BpkBottomSheetState(
       initialValue = initialValue,
@@ -89,7 +89,7 @@ class BpkBottomSheetState private constructor(
           animationSpec = animationSpec,
           confirmStateChange = confirmStateChange,
         )
-      }
+      },
     )
   }
 }

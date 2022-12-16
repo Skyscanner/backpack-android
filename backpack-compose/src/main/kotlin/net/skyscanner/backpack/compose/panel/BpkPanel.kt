@@ -46,7 +46,7 @@ fun BpkPanel(
   contentAlignment: Alignment = Alignment.TopStart,
   propagateMinConstraints: Boolean = false,
   padding: BpkPanelPadding = BpkPanelPadding.Base,
-  content: @Composable BoxScope.() -> Unit
+  content: @Composable BoxScope.() -> Unit,
 ) {
   Box(
     contentAlignment = contentAlignment,
