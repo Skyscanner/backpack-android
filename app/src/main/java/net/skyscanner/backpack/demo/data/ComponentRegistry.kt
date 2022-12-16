@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.compose.button.BpkButtonSize
+import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
@@ -30,6 +31,7 @@ import net.skyscanner.backpack.demo.compose.ButtonDrawableIconStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CalendarStory
+import net.skyscanner.backpack.demo.compose.CardButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
@@ -230,6 +232,13 @@ object ComponentRegistry {
           ),
         ),
         TAB_TITLE_COMPOSE composeStory { CardStory() },
+      ),
+    ),
+    "Card Button" story NodeData(
+      { children -> SubStory of children },
+      mapOf(
+        "Default" composeStory { CardButtonsStory(size = BpkCardButtonSize.Default) },
+        "Small" composeStory { CardButtonsStory(size = BpkCardButtonSize.Small) },
       ),
     ),
     "Calendar" story NodeData(

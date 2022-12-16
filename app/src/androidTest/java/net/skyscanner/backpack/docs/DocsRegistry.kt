@@ -76,6 +76,8 @@ object DocsRegistry {
     ViewScreenshot("Card - View - With divider without padding", "with-divider-without-padding"),
     ViewScreenshot("Card - View - With divider and corner style large", "with-divider-and-corner-style-large"),
     ComposeScreenshot("Card - Compose", "default"),
+    ComposeScreenshot("Card Button - Default", "default"),
+    ComposeScreenshot("Card Button - Small", "small"),
     ViewScreenshot("Chip - View - Default", "all"),
     ViewScreenshot("Chip - View - On Dark", "on-dark"),
     ViewScreenshot("Chip - View - With icon", "with-icon"),
