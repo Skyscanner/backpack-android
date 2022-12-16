@@ -40,7 +40,7 @@ import net.skyscanner.backpack.demo.R
 @Composable
 fun BpkBottomNavStory(modifier: Modifier = Modifier) {
   Box(
-    modifier = Modifier.fillMaxSize(),
+    modifier = modifier.fillMaxSize(),
     contentAlignment = Alignment.BottomEnd,
   ) {
     BpkBottomNavSample(modifier = modifier)
