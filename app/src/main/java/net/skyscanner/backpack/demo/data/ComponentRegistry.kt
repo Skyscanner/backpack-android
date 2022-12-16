@@ -34,7 +34,6 @@ import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
-import net.skyscanner.backpack.demo.compose.DividedCardStory
 import net.skyscanner.backpack.demo.compose.DividerStory
 import net.skyscanner.backpack.demo.compose.ElevationComposeStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
@@ -304,7 +303,6 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { ComposeDialogStory() },
       ),
     ),
-    "Divided Card" composeStory { DividedCardStory() },
     "Divider" composeStory { DividerStory() },
     "FieldSet" composeStory { FieldSetStory() },
     "Flare" story NodeData(

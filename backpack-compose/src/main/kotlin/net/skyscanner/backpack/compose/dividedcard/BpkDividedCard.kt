@@ -32,7 +32,6 @@ import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 fun BpkDividedCard(
@@ -41,22 +40,46 @@ fun BpkDividedCard(
   modifier: Modifier = Modifier,
   onClick: (() -> Unit)? = null,
 ) {
-  BpkCard(
-    modifier = modifier
-      .then(onClick?.let { Modifier.clickable { it.invoke() } } ?: Modifier),
-    corner = BpkCardCorner.Small,
-    padding = BpkCardPadding.None,
-  ) {
-    Column {
-      primaryContent.invoke()
-      Spacer(
-        modifier = Modifier
-          .height(1.dp)
-          .fillMaxWidth()
-          .background(color = BpkTheme.colors.surfaceHighlight),
+  onClick?.let {
+    BpkCard(
+      onClick = it,
+      modifier = modifier,
+      corner = BpkCardCorner.Small,
+      padding = BpkCardPadding.None,
+    ) {
+      Content(
+        primaryContent = primaryContent,
+        secondaryContent = secondaryContent,
       )
-      secondaryContent.invoke()
     }
+  } ?: run {
+    BpkCard(
+      modifier = modifier,
+      corner = BpkCardCorner.Small,
+      padding = BpkCardPadding.None,
+    ) {
+      Content(
+        primaryContent = primaryContent,
+        secondaryContent = secondaryContent,
+      )
+    }
+  }
+}
+
+@Composable
+private fun Content(
+  primaryContent: @Composable () -> Unit,
+  secondaryContent: @Composable () -> Unit,
+) {
+  Column {
+    primaryContent.invoke()
+    Spacer(
+      modifier = Modifier
+        .height(1.dp)
+        .fillMaxWidth()
+        .background(color = BpkTheme.colors.surfaceHighlight),
+    )
+    secondaryContent.invoke()
   }
 }
 

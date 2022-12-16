@@ -72,3 +72,31 @@ BpkCard(elevation = BpkCardElevation.Focus) {
     // content
 }
 ```
+
+Example of a Divided Card:
+
+```Kotlin
+import net.skyscanner.backpack.compose.dividedcard.BpkDividedCard
+import net.skyscanner.backpack.compose.dividedcard.dividedCardWidth
+
+BpkDividedCard(
+  modifier = Modifier.fillMaxWidth(),
+  primaryContent = {
+    Image(
+      modifier = Modifier
+        .height(BpkSpacing.Xxl * 2)
+        .dividedCardWidth(BpkSpacing.Xxl),
+      painter = painterResource(id = R.drawable.image),
+      contentDescription = "content description",
+      contentScale = ContentScale.Crop
+    )
+  },
+  secondaryContent = {
+    BpkText(
+      modifier = Modifier.fillMaxWidth(),
+      text = stringResource("BpkDividedCard sample"),
+    )
+  },
+  onClick = {}
+)
+```

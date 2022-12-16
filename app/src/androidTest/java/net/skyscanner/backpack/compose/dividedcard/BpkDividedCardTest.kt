@@ -63,7 +63,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
         secondaryContent = {
           BpkText(
             modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.inventory_divided_card_with_less_than_minimum),
+            text = stringResource(id = R.string.divided_card_width_less_than_minimum),
             style = BpkTheme.typography.bodyDefault,
             textAlign = TextAlign.Center
           )
@@ -91,7 +91,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
         secondaryContent = {
           BpkText(
             modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.inventory_divided_card_with_more_than_minimum),
+            text = stringResource(id = R.string.divided_card_width_more_than_minimum),
             style = BpkTheme.typography.bodyDefault,
             textAlign = TextAlign.Center
           )
@@ -107,18 +107,23 @@ class BpkDividedCardTest : BpkSnapshotTest() {
       BpkDividedCard(
         modifier = Modifier.fillMaxWidth(),
         primaryContent = {
-          Spacer(modifier = Modifier.height(BpkSpacing.Xxl * 2))
-        },
-        secondaryContent = {
-          Spacer(modifier = Modifier.height(BpkSpacing.Xxl * 2))
+          Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
           BpkText(
             modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.inventory_divided_card_empty_card),
+            text = stringResource(id = R.string.divided_card_primary_content),
             style = BpkTheme.typography.bodyDefault,
             textAlign = TextAlign.Center,
           )
         },
-        onClick = {},
+        secondaryContent = {
+          Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+          BpkText(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.divided_card_secondary_content),
+            style = BpkTheme.typography.bodyDefault,
+            textAlign = TextAlign.Center,
+          )
+        },
       )
     }
   }
