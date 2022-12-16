@@ -53,7 +53,7 @@ fun BpkInventoryDividedCard(
         modifier = Modifier
           .height(1.dp)
           .fillMaxWidth()
-          .background(color = BpkTheme.colors.surfaceHighlight)
+          .background(color = BpkTheme.colors.surfaceHighlight),
       )
       secondaryContent.invoke()
     }

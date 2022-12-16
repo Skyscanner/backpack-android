@@ -43,13 +43,13 @@ import net.skyscanner.backpack.demo.R
 @Composable
 @Preview
 fun InventoryDividedCardStory(
-  modifier: Modifier = Modifier
+  modifier: Modifier = Modifier,
 ) {
   Column(
     modifier = modifier
       .fillMaxSize()
       .padding(BpkSpacing.Base),
-    horizontalAlignment = Alignment.CenterHorizontally
+    horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     BpkInventoryDividedCard(
       modifier = Modifier.fillMaxWidth(),
@@ -60,7 +60,7 @@ fun InventoryDividedCardStory(
             .fillMaxWidth(),
           painter = painterResource(id = R.drawable.canadian_rockies_canada),
           contentDescription = "",
-          contentScale = ContentScale.Crop
+          contentScale = ContentScale.Crop,
         )
       },
       secondaryContent = {
@@ -68,10 +68,10 @@ fun InventoryDividedCardStory(
           modifier = Modifier.fillMaxWidth(),
           text = stringResource(id = R.string.inventory_divided_card_with_more_than_minimum),
           style = BpkTheme.typography.bodyDefault,
-          textAlign = TextAlign.Center
+          textAlign = TextAlign.Center,
         )
       },
-      onClick = {}
+      onClick = {},
     )
 
     Spacer(modifier = Modifier.height(BpkSpacing.Base))
@@ -85,7 +85,7 @@ fun InventoryDividedCardStory(
             .fillMaxWidth(),
           painter = painterResource(id = R.drawable.canadian_rockies_canada),
           contentDescription = "",
-          contentScale = ContentScale.Crop
+          contentScale = ContentScale.Crop,
         )
       },
       secondaryContent = {
@@ -93,10 +93,10 @@ fun InventoryDividedCardStory(
           modifier = Modifier.fillMaxWidth(),
           text = stringResource(id = R.string.inventory_divided_card_with_less_than_minimum),
           style = BpkTheme.typography.bodyDefault,
-          textAlign = TextAlign.Center
+          textAlign = TextAlign.Center,
         )
       },
-      onClick = {}
+      onClick = {},
     )
 
     Spacer(modifier = Modifier.height(BpkSpacing.Base))
@@ -112,10 +112,10 @@ fun InventoryDividedCardStory(
           modifier = Modifier.fillMaxWidth(),
           text = stringResource(id = R.string.inventory_divided_card_empty_card),
           style = BpkTheme.typography.bodyDefault,
-          textAlign = TextAlign.Center
+          textAlign = TextAlign.Center,
         )
       },
-      onClick = {}
+      onClick = {},
     )
   }
 }
