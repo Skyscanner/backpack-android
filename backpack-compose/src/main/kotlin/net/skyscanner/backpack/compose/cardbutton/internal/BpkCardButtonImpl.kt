@@ -39,6 +39,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import kotlinx.coroutines.delay
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonStyle
@@ -108,6 +110,7 @@ fun BpkSaveCardButtonImpl(
             else -> Color.Transparent
           },
         )
+        .semantics { this.contentDescription = contentDescription }
         .then(
           if (state == BpkCardButtonState.Rest) {
             Modifier.toggleable(
@@ -125,7 +128,7 @@ fun BpkSaveCardButtonImpl(
       Box(modifier = Modifier.scale(scaleAnimation.value)) {
         BpkIcon(
           icon = if (checked) BpkIcon.Heart else BpkIcon.HeartOutline,
-          contentDescription = contentDescription,
+          contentDescription = null,
           size = if (size == BpkCardButtonSize.Default) BpkIconSize.Large else BpkIconSize.Small,
           tint = colorAnimation,
         )
