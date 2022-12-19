@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.data
 import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
+import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
@@ -48,6 +49,7 @@ import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.NudgerStory
 import net.skyscanner.backpack.demo.compose.PanelStory
+import net.skyscanner.backpack.demo.compose.PriceStory
 import net.skyscanner.backpack.demo.compose.RadiiComposeStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.RatingStory
@@ -390,6 +392,13 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_panel },
         TAB_TITLE_COMPOSE composeStory { PanelStory() },
+      ),
+    ),
+    "Price" story NodeData(
+      { children -> SubStory of children },
+      mapOf(
+        "Small" composeStory { PriceStory(size = BpkPriceSize.Small) },
+        "Large" composeStory { PriceStory(size = BpkPriceSize.Large) },
       ),
     ),
     "RadioButton" story NodeData(

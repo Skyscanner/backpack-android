@@ -123,6 +123,8 @@ object DocsRegistry {
     ViewScreenshot("Overlay", "all"),
     ViewScreenshot("Panel - View", "all"),
     ComposeScreenshot("Panel - Compose", "all"),
+    ComposeScreenshot("Price - Small", "small"),
+    ComposeScreenshot("Price - Large", "large"),
     ViewScreenshot("RadioButton - View", "default"),
     ComposeScreenshot("RadioButton - Compose", "default"),
     ViewScreenshot("Rating - View - Default", "default"),
