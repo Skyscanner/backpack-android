@@ -22,7 +22,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.os.Looper
 import android.view.View
-import android.view.ViewGroup
+import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import androidx.activity.compose.setContent
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
@@ -33,23 +33,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.test.junit4.ComposeTestRule
-import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.test.core.app.launchActivity
 import androidx.test.platform.app.InstrumentationRegistry
-import com.facebook.testing.screenshot.Screenshot
 import com.facebook.testing.screenshot.ViewHelpers
 import com.facebook.testing.screenshot.internal.TestNameDetector
+import com.karumi.shot.ScreenshotTest
 import net.skyscanner.backpack.demo.compose.BackpackPreview
 import org.hamcrest.Matchers
 import org.junit.Assume
 import org.junit.Assume.assumeThat
+import org.junit.Rule
 
-open class BpkSnapshotTest {
+open class BpkSnapshotTest : ScreenshotTest {
 
   private var height = 100
   private var width = 100
@@ -58,19 +57,25 @@ open class BpkSnapshotTest {
   private val variant = BpkTestVariant.current
   var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
 
+  @get:Rule
+  val composeTestRule = createEmptyComposeRule()
+
   protected fun setupView(view: View) {
-    view.layoutDirection = testContext.resources.configuration.layoutDirection
-    ViewHelpers.setupView(view)
-      .setExactHeightDp(height)
-      .setExactWidthDp(width)
-      .layout()
+    runOnUi {
+      view.layoutDirection = testContext.resources.configuration.layoutDirection
+      ViewHelpers.setupView(view)
+        .setExactHeightDp(height)
+        .setExactWidthDp(width)
+        .layout()
+    }
   }
 
   protected fun snap(view: View, tags: List<Any> = emptyList()) {
+    if (Looper.myLooper() == null) {
+      Looper.prepare()
+    }
     setupView(view)
-    Screenshot.snap(wrapMeasuredViewWithBackground(view))
-      .setName(getScreenshotName(tags = tags))
-      .record()
+    compareScreenshot(wrapMeasuredViewWithBackground(view), height, width, getScreenshotName(tags))
   }
 
   protected fun setDimensions(@Dimension(unit = DP) height: Int, @Dimension(unit = DP) width: Int) {
@@ -82,16 +87,6 @@ open class BpkSnapshotTest {
     this.background = background
   }
 
-  protected fun prepareForAsyncTest(): AsyncSnapshot {
-    if (Looper.myLooper() == null) {
-      Looper.prepare()
-    }
-
-    val testClass = TestNameDetector.getTestClass()
-    val testName = TestNameDetector.getTestName()
-    return AsyncSnapshot(testClass, testName)
-  }
-
   fun assumeVariant(vararg variants: BpkTestVariant) {
     assumeThat(BpkTestVariant.current, Matchers.isOneOf(*variants))
   }
@@ -101,54 +96,17 @@ open class BpkSnapshotTest {
     background: Color = Color.Unspecified,
     tags: List<Any> = emptyList(),
     vararg providers: ProvidedValue<*>,
+    assertion: ComposeTestRule.() -> Unit = {},
     content: @Composable () -> Unit,
   ) {
 
     // we don't run Compose tests in Themed variant – Compose uses it own theming engine
     Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
 
-    val screenshotName = getScreenshotName(tags = tags)
-
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
-      with(activity) {
-        setContent {
-          BackpackPreview(
-            modifier = Modifier.size(size.width.dp, size.height.dp),
-            background = background,
-            providers = providers,
-            content = content,
-          )
-        }
-
-        val view = window.decorView.findComposeView()
-
-        ViewHelpers.setupView(view)
-          .setExactWidthDp(size.width)
-          .setExactHeightDp(size.height)
-          .layout()
-
-        Screenshot.snap(view)
-          .setName(screenshotName)
-          .record()
-      }
-    }
-    scenario.close()
-  }
-
-  protected fun ComposeTestRule.setScreenshotContent(
-    size: IntSize = IntSize(width, height),
-    background: Color = Color.Unspecified,
-    vararg providers: ProvidedValue<*>,
-    content: @Composable () -> Unit,
-  ) {
-    Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
-
-    val asyncScreenshot = prepareForAsyncTest()
-
     val scenario = launchActivity<AppCompatActivity>()
     scenario.onActivity { activity ->
       activity.setContent {
+        activity.window.clearFlags(FLAG_TRANSLUCENT_STATUS)
         BackpackPreview(
           modifier = Modifier.size(size.width.dp, size.height.dp),
           background = background,
@@ -157,60 +115,26 @@ open class BpkSnapshotTest {
         )
       }
     }
+    composeTestRule.assertion()
 
-    val node = onRoot().fetchSemanticsNode()
-    val view = (node.root as ViewRootForTest).view
-    scenario.onActivity {
-      setupView(view)
-      asyncScreenshot.record(view)
-    }
-  }
+    compareScreenshot(composeTestRule, getScreenshotName(tags))
 
-  private fun View.findComposeView(): ComposeView? {
-    if (this !is ViewGroup) return null
-    for (i in 0..childCount) {
-      val child = getChildAt(i)
-      if (child is ComposeView) {
-        return child
-      } else if (child is ViewGroup) {
-        val view = child.findComposeView()
-        if (view != null) {
-          return view
-        }
-      }
-    }
-    return null
-  }
-
-  inner class AsyncSnapshot(private val testClass: String, private val testName: String) {
-    fun record(view: View) {
-      Screenshot.snap(wrapMeasuredViewWithBackground(view))
-        .setName(getScreenshotName(testClass, testName))
-        .record()
-    }
+    scenario.close()
   }
 
   private fun getScreenshotName(
-    testClass: String = TestNameDetector.getTestClass(),
-    testName: String = TestNameDetector.getTestName(),
     tags: List<Any> = emptyList(),
-  ): String {
-    val screenshotTestName = "${testClass.removePrefix("net.skyscanner.backpack.")}_$testName"
+  ): String? {
     return if (tags.isEmpty()) {
-      screenshotTestName
+      null
     } else {
-      tags.joinToString(separator = "_", prefix = screenshotTestName + ".") { it.toString() }
+      tags.joinToString(separator = "_", prefix = TestNameDetector.getTestName() + ".") { it.toString() }
     }
   }
 
   private fun wrapMeasuredViewWithBackground(view: View): View {
     val result = ViewMirror(view.context, view)
     result.setBackgroundResource(background)
-
-    ViewHelpers.setupView(result)
-      .setExactHeightDp(height)
-      .setExactWidthDp(width)
-      .layout()
 
     return result
   }

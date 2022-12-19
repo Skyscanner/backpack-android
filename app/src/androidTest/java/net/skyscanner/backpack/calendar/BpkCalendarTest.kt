@@ -29,6 +29,7 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jakewharton.threetenabp.AndroidThreeTen
+import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.calendar.model.CalendarColoring
 import net.skyscanner.backpack.calendar.model.CalendarLabel
@@ -175,20 +176,18 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
 
-    val asyncScreenshot = prepareForAsyncTest()
-
-    rule.scenario.onActivity { activity ->
-      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(calendar)
+    rule.scenario.waitForActivity().also { activity ->
+      runOnUi {
+        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+        rootLayout.addView(calendar)
+      }
     }
 
     Espresso.onData(CoreMatchers.anything())
       .atPosition(0)
       .perform(ViewActions.click())
-      .check { _, _ ->
-        setupView(calendar)
-        asyncScreenshot.record(calendar)
-      }
+
+    snap(calendar)
   }
 
   @Test
@@ -202,11 +201,11 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
 
-    val asyncScreenshot = prepareForAsyncTest()
-
-    rule.scenario.onActivity { activity ->
-      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(calendar)
+    rule.scenario.waitForActivity().also { activity ->
+      runOnUi {
+        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+        rootLayout.addView(calendar)
+      }
     }
 
     Espresso.onData(CoreMatchers.anything())
@@ -216,10 +215,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
     Espresso.onData(CoreMatchers.anything())
       .atPosition(0)
       .perform(ViewActions.click())
-      .check { _, _ ->
-        setupView(calendar)
-        asyncScreenshot.record(calendar)
-      }
+
+    snap(calendar)
   }
 
   @Test
@@ -233,9 +230,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
 
-    val asyncScreenshot = prepareForAsyncTest()
-
-    selectStartEnd(calendar, asyncScreenshot)
+    selectStartEnd(calendar)
   }
 
   @Test
@@ -253,9 +248,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
     calendar.setController(controller)
 
-    val asyncScreenshot = prepareForAsyncTest()
-
-    selectStartEnd(calendar, asyncScreenshot)
+    selectStartEnd(calendar)
   }
 
   @Test
@@ -269,11 +262,11 @@ class BpkCalendarTest : BpkSnapshotTest() {
     )
     calendar.setController(controller)
 
-    val asyncScreenshot = prepareForAsyncTest()
-
-    rule.scenario.onActivity { activity ->
-      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(calendar)
+    rule.scenario.waitForActivity().also { activity ->
+      runOnUi {
+        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+        rootLayout.addView(calendar)
+      }
     }
 
     Espresso.onData(CoreMatchers.anything())
@@ -287,10 +280,8 @@ class BpkCalendarTest : BpkSnapshotTest() {
     Espresso.onData(CoreMatchers.anything()) // Clicking on multiple dates should result in only one selected
       .atPosition(1)
       .perform(ViewActions.scrollTo())
-      .check { _, _ ->
-        setupView(calendar)
-        asyncScreenshot.record(calendar)
-      }
+
+    snap(calendar)
   }
 
   @Test
@@ -439,10 +430,12 @@ class BpkCalendarTest : BpkSnapshotTest() {
     snap(calendar)
   }
 
-  private fun selectStartEnd(view: View, asyncScreenshot: AsyncSnapshot) {
-    rule.scenario.onActivity { activity ->
-      val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-      rootLayout.addView(view)
+  private fun selectStartEnd(view: View) {
+    rule.scenario.waitForActivity().also { activity ->
+      runOnUi {
+        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+        rootLayout.addView(view)
+      }
     }
 
     Espresso.onData(CoreMatchers.anything())
@@ -456,9 +449,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     Espresso.onData(CoreMatchers.anything())
       .atPosition(0)
       .perform(ViewActions.scrollTo())
-      .check { _, _ ->
-        setupView(view)
-        asyncScreenshot.record(view)
-      }
+
+    snap(view)
   }
 }

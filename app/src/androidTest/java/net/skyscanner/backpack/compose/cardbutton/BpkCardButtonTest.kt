@@ -43,7 +43,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun defaultSaveButton() {
     capture(
-      background = { BpkTheme.colors.textPrimaryInverse }
+      background = { BpkTheme.colors.surfaceDefault }
     ) {
       BpkSaveButton(
         checked = checked,
@@ -73,7 +73,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun containedSaveButton() {
     capture(
-      background = { BpkTheme.colors.surfaceContrast }
+      background = { BpkTheme.colors.surfaceHighlight }
     ) {
       BpkSaveButton(
         checked = checked,
@@ -88,7 +88,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun defaultShareButton() {
     capture(
-      background = { BpkTheme.colors.textPrimaryInverse }
+      background = { BpkTheme.colors.surfaceDefault }
     ) {
       BpkShareButton(
         contentDescription = "",
@@ -102,7 +102,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun onDarkShareButton() {
     capture(
-      background = { BpkTheme.colors.textPrimaryInverse }
+      background = { BpkTheme.colors.surfaceContrast }
     ) {
       BpkShareButton(
         contentDescription = "",
@@ -116,7 +116,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun containedShareButton() {
     capture(
-      background = { BpkTheme.colors.textPrimaryInverse }
+      background = { BpkTheme.colors.surfaceHighlight }
     ) {
       BpkShareButton(
         contentDescription = "",

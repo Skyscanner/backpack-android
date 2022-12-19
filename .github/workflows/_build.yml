@@ -206,7 +206,7 @@ jobs:
             touch logcat.log
             chmod 777 logcat.log
             adb logcat > logcat.log &
-            ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
+            ./gradlew ${{ env.flavour }}${{ env.config }}ExecuteScreenshotTests -Precord -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }} -PdirectorySuffix=${{ matrix.variant }}
 
             changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
@@ -220,7 +220,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-screenshot-test-output
-          path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
+          path: app/build/reports/shot/
           retention-days: 5
 
       - name: Upload Logcat Logs

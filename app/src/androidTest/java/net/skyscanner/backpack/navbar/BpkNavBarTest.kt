@@ -18,12 +18,14 @@
 
 package net.skyscanner.backpack.navbar
 
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
@@ -45,107 +47,98 @@ class BpkNavBarTest : BpkSnapshotTest() {
   @Test
   fun screenshotNavBar_default() {
     init()
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+    snap(view!!)
   }
 
   @Test
   fun screenshotNavBar_collapsed() {
     init()
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+    snap(view!!)
   }
 
   @Test
   fun screenshotNavBar_expanded() {
     init()
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+    snap(view!!)
   }
 
   @Test
   fun screenshotNavBar_collapsed_icon() {
     init(icon = true)
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+    snap(view!!)
   }
 
   @Test
   fun screenshotNavBar_expanded_icon() {
     init(icon = true)
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+    snap(view!!)
   }
 
   @Test
   fun screenshotNavBar_collapsed_menu() {
     init(menu = true)
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+    snap(view!!)
   }
 
   @Test
   fun screenshotNavBar_expanded_menu() {
     init(menu = true)
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+    snap(view!!)
   }
 
   @Test
   fun screenshotNavBar_collapsed_iconAndMenu() {
     init(icon = true, menu = true)
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeUp())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+    snap(view!!)
   }
 
   @Test
   fun screenshotNavBar_expanded_iconAndMenu() {
     init(icon = true, menu = true)
-    val asyncSnapshot = prepareForAsyncTest()
+    var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .perform(ViewActions.swipeDown())
-      .check { v, _ ->
-        asyncSnapshot.record(v)
-      }
+      .check { v, _ -> view = v }
+    snap(view!!)
   }
 
   private fun init(
     icon: Boolean = false,
     menu: Boolean = false,
   ) {
-    rule.scenario.onActivity {
-      with(it) {
+    rule.scenario.waitForActivity().apply {
+      runOnUi {
         setContentView(R.layout.fragment_nav_bar)
         val navBar = findViewById<BpkNavBar>(R.id.appBar)
         navBar.title = "Nav Bar"
