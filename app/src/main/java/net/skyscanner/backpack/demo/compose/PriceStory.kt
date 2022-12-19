@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -45,54 +46,39 @@ fun PriceStory(
       .fillMaxSize(),
     verticalArrangement = Arrangement.SpaceEvenly,
   ) {
-    PriceRow(
-      price = "£1,830",
-      size = BpkPriceSize.Small,
-    )
-    PriceRow(
-      price = "£1,830",
-      trailingText = "per day",
-      size = BpkPriceSize.Small,
-    )
-    PriceRow(
-      price = "£1,830",
-      lineThroughText = "£2,033",
-      trailingText = "per day",
-      size = BpkPriceSize.Small,
-    )
-    PriceRow(
-      price = "£1,830",
-      lineThroughText = "£2,033",
-      leadingText = "App only deal",
-      trailingText = "per day",
-      size = BpkPriceSize.Small,
-    )
+
+    PriceRowWithSize(size = BpkPriceSize.Small)
 
     Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
 
-    PriceRow(
-      price = "£1,830",
-      size = BpkPriceSize.Large,
-    )
-    PriceRow(
-      price = "£1,830",
-      trailingText = "per day",
-      size = BpkPriceSize.Large,
-    )
-    PriceRow(
-      price = "£1,830",
-      lineThroughText = "£2,033",
-      trailingText = "per day",
-      size = BpkPriceSize.Large,
-    )
-    PriceRow(
-      price = "£1,830",
-      lineThroughText = "£2,033",
-      leadingText = "App only deal",
-      trailingText = "per day",
-      size = BpkPriceSize.Large,
-    )
+    PriceRowWithSize(size = BpkPriceSize.Large)
   }
+}
+
+@Composable
+private fun ColumnScope.PriceRowWithSize(size: BpkPriceSize) {
+  PriceRow(
+    price = "£1,830",
+    size = size,
+  )
+  PriceRow(
+    price = "£1,830",
+    trailingText = "per day",
+    size = size,
+  )
+  PriceRow(
+    price = "£1,830",
+    lineThroughText = "£2,033",
+    trailingText = "per day",
+    size = size,
+  )
+  PriceRow(
+    price = "£1,830",
+    lineThroughText = "£2,033",
+    leadingText = "App only deal",
+    trailingText = "per day",
+    size = size,
+  )
 }
 
 @Composable
@@ -104,8 +90,10 @@ private fun PriceRow(
   trailingText: String? = null,
 ) {
   Row(
-    modifier = Modifier.fillMaxWidth(),
-    horizontalArrangement = Arrangement.SpaceEvenly,
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+    horizontalArrangement = Arrangement.SpaceBetween,
   ) {
     BpkPrice(
       price = price,
