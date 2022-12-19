@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkFontSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
@@ -47,36 +46,38 @@ internal fun BpkPriceAlignStart(
         BpkText(
           text = it,
           color = BpkTheme.colors.textSecondary,
-          style = BpkTheme.typography.caption.copy(
-            fontSize = if (size == BpkPriceSize.Large) BpkFontSize.Sm else BpkFontSize.Xs,
-          ),
+          style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
           textDecoration = TextDecoration.LineThrough,
         )
       }
       leadingText?.let {
+        val builder = StringBuilder()
+        lineThroughText?.let { builder.append(" • ") }
+        builder.append(it)
         BpkText(
-          text = StringBuilder().append(" • ").append(it).toString(),
+          text = builder.toString(),
           color = BpkTheme.colors.textSecondary,
-          style = BpkTheme.typography.caption.copy(
-            fontSize = if (size == BpkPriceSize.Large) BpkFontSize.Sm else BpkFontSize.Xs,
-          ),
+          style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
         )
       }
     }
     Row(verticalAlignment = Alignment.Bottom) {
       BpkText(
+        modifier = Modifier.alignByBaseline(),
         text = price,
         color = BpkTheme.colors.textPrimary,
         style = if (size == BpkPriceSize.Large) BpkTheme.typography.heading2 else BpkTheme.typography.heading4,
       )
-      Box(modifier = Modifier.padding(start = BpkSpacing.Sm, bottom = BpkSpacing.Sm)) {
-        trailingText?.let {
+      trailingText?.let {
+        Box(
+          modifier = Modifier
+            .padding(start = BpkSpacing.Sm)
+            .alignByBaseline(),
+        ) {
           BpkText(
             text = it,
             color = BpkTheme.colors.textSecondary,
-            style = BpkTheme.typography.footnote.copy(
-              fontSize = if (size == BpkPriceSize.Large) BpkFontSize.Sm else BpkFontSize.Xs,
-            ),
+            style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
           )
         }
       }
@@ -99,21 +100,20 @@ internal fun BpkPriceAlignEnd(
   ) {
     Row {
       leadingText?.let {
+        val builder = StringBuilder()
+        lineThroughText?.let { builder.append(" • ") }
+        builder.append(it)
         BpkText(
-          text = StringBuilder().append(it).append(" • ").toString(),
+          text = builder.toString(),
           color = BpkTheme.colors.textSecondary,
-          style = BpkTheme.typography.caption.copy(
-            fontSize = if (size == BpkPriceSize.Large) BpkFontSize.Sm else BpkFontSize.Xs,
-          ),
+          style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
         )
       }
       lineThroughText?.let {
         BpkText(
           text = it,
           color = BpkTheme.colors.textSecondary,
-          style = BpkTheme.typography.caption.copy(
-            fontSize = if (size == BpkPriceSize.Large) BpkFontSize.Sm else BpkFontSize.Xs,
-          ),
+          style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
           textDecoration = TextDecoration.LineThrough,
         )
       }
@@ -127,9 +127,7 @@ internal fun BpkPriceAlignEnd(
       BpkText(
         text = it,
         color = BpkTheme.colors.textSecondary,
-        style = BpkTheme.typography.footnote.copy(
-          fontSize = if (size == BpkPriceSize.Large) BpkFontSize.Sm else BpkFontSize.Xs,
-        ),
+        style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
       )
     }
   }

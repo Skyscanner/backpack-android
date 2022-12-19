@@ -76,6 +76,12 @@ private fun ColumnScope.PriceRowWithSize(size: BpkPriceSize) {
   )
   PriceRow(
     price = stringResource(id = R.string.price_price),
+    leadingText = stringResource(id = R.string.price_leading_text),
+    trailingText = stringResource(id = R.string.price_trailing_text),
+    size = size,
+  )
+  PriceRow(
+    price = stringResource(id = R.string.price_price),
     lineThroughText = stringResource(id = R.string.price_line_through_text),
     leadingText = stringResource(id = R.string.price_leading_text),
     trailingText = stringResource(id = R.string.price_trailing_text),
