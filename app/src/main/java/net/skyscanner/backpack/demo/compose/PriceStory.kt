@@ -29,11 +29,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.price.BpkPrice
 import net.skyscanner.backpack.compose.price.BpkPriceAlign
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 
 @Composable
 @Preview
@@ -58,25 +60,25 @@ fun PriceStory(
 @Composable
 private fun ColumnScope.PriceRowWithSize(size: BpkPriceSize) {
   PriceRow(
-    price = "£1,830",
+    price = stringResource(id = R.string.price_price),
     size = size,
   )
   PriceRow(
-    price = "£1,830",
-    trailingText = "per day",
+    price = stringResource(id = R.string.price_price),
+    trailingText = stringResource(id = R.string.price_trailing_text),
     size = size,
   )
   PriceRow(
-    price = "£1,830",
-    lineThroughText = "£2,033",
-    trailingText = "per day",
+    price = stringResource(id = R.string.price_price),
+    lineThroughText = stringResource(id = R.string.price_line_through_text),
+    trailingText = stringResource(id = R.string.price_trailing_text),
     size = size,
   )
   PriceRow(
-    price = "£1,830",
-    lineThroughText = "£2,033",
-    leadingText = "App only deal",
-    trailingText = "per day",
+    price = stringResource(id = R.string.price_price),
+    lineThroughText = stringResource(id = R.string.price_line_through_text),
+    leadingText = stringResource(id = R.string.price_leading_text),
+    trailingText = stringResource(id = R.string.price_trailing_text),
     size = size,
   )
 }
