@@ -25,6 +25,7 @@ import android.widget.FrameLayout
 import androidx.annotation.ColorRes
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.R
 import org.junit.Assume.assumeTrue
 import org.junit.Before

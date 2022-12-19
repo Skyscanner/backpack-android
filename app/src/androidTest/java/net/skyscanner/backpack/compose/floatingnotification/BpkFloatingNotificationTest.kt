@@ -18,12 +18,13 @@
 
 package net.skyscanner.backpack.compose.floatingnotification
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Heart
 import org.junit.Before
@@ -39,7 +40,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 110, width = 450)
+    snapshotSize = IntSize(450, 100)
   }
 
   @Test
@@ -49,7 +50,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
         text = "Lorem ipsum dolor sit amet"
       )
     }
-    composed { BpkFloatingNotification(state) }
+    snap { BpkFloatingNotification(state) }
   }
 
   @Test
@@ -60,7 +61,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
         icon = BpkIcon.Heart,
       )
     }
-    composed {
+    snap {
       BpkFloatingNotification(state)
     }
   }
@@ -74,7 +75,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
         onClick = {},
       )
     }
-    composed {
+    snap {
       BpkFloatingNotification(state)
     }
   }
@@ -89,7 +90,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
         icon = BpkIcon.Heart,
       )
     }
-    composed {
+    snap {
       BpkFloatingNotification(state)
     }
   }

@@ -22,31 +22,13 @@ import android.content.Context
 import android.graphics.Canvas
 import android.os.Looper
 import android.view.View
-import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-import androidx.activity.compose.setContent
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.Companion.DP
-import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.size
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ProvidedValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.test.junit4.ComposeTestRule
-import androidx.compose.ui.test.junit4.createEmptyComposeRule
-import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.dp
-import androidx.test.core.app.launchActivity
 import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.ViewHelpers
-import com.facebook.testing.screenshot.internal.TestNameDetector
 import com.karumi.shot.ScreenshotTest
-import net.skyscanner.backpack.demo.compose.BackpackPreview
-import org.hamcrest.Matchers
-import org.junit.Assume
-import org.junit.Assume.assumeThat
-import org.junit.Rule
+import net.skyscanner.backpack.SnapshotUtil.screenshotName
 
 open class BpkSnapshotTest : ScreenshotTest {
 
@@ -57,10 +39,7 @@ open class BpkSnapshotTest : ScreenshotTest {
   private val variant = BpkTestVariant.current
   var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
 
-  @get:Rule
-  val composeTestRule = createEmptyComposeRule()
-
-  protected fun setupView(view: View) {
+  private fun setupView(view: View) {
     runOnUi {
       view.layoutDirection = testContext.resources.configuration.layoutDirection
       ViewHelpers.setupView(view)
@@ -75,7 +54,7 @@ open class BpkSnapshotTest : ScreenshotTest {
       Looper.prepare()
     }
     setupView(view)
-    compareScreenshot(wrapMeasuredViewWithBackground(view), height, width, getScreenshotName(tags))
+    compareScreenshot(wrapMeasuredViewWithBackground(view), height, width, screenshotName(tags))
   }
 
   protected fun setDimensions(@Dimension(unit = DP) height: Int, @Dimension(unit = DP) width: Int) {
@@ -85,51 +64,6 @@ open class BpkSnapshotTest : ScreenshotTest {
 
   protected fun setBackground(@ColorRes background: Int) {
     this.background = background
-  }
-
-  fun assumeVariant(vararg variants: BpkTestVariant) {
-    assumeThat(BpkTestVariant.current, Matchers.isOneOf(*variants))
-  }
-
-  protected fun composed(
-    size: IntSize = IntSize(width, height),
-    background: Color = Color.Unspecified,
-    tags: List<Any> = emptyList(),
-    vararg providers: ProvidedValue<*>,
-    assertion: ComposeTestRule.() -> Unit = {},
-    content: @Composable () -> Unit,
-  ) {
-
-    // we don't run Compose tests in Themed variant – Compose uses it own theming engine
-    Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
-
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
-      activity.setContent {
-        activity.window.clearFlags(FLAG_TRANSLUCENT_STATUS)
-        BackpackPreview(
-          modifier = Modifier.size(size.width.dp, size.height.dp),
-          background = background,
-          providers = providers,
-          content = content,
-        )
-      }
-    }
-    composeTestRule.assertion()
-
-    compareScreenshot(composeTestRule, getScreenshotName(tags))
-
-    scenario.close()
-  }
-
-  private fun getScreenshotName(
-    tags: List<Any> = emptyList(),
-  ): String? {
-    return if (tags.isEmpty()) {
-      null
-    } else {
-      tags.joinToString(separator = "_", prefix = TestNameDetector.getTestName() + ".") { it.toString() }
-    }
   }
 
   private fun wrapMeasuredViewWithBackground(view: View): View {

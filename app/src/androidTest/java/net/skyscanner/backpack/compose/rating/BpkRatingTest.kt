@@ -19,9 +19,11 @@
 
 package net.skyscanner.backpack.compose.rating
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.compose.BpkRatingCustomContentSample
 import net.skyscanner.backpack.demo.compose.BpkRatingDefaultSample
 import net.skyscanner.backpack.demo.compose.BpkRatingLargeCustomContentNoSubtitleSample
@@ -40,18 +42,18 @@ class BpkRatingTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 75, width = 250)
+    snapshotSize = IntSize(250, 75)
   }
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     BpkRatingDefaultSample()
   }
 
   @Test
   fun titleOnly() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkRatingTitleOnlySample()
     }
   }
@@ -59,7 +61,7 @@ class BpkRatingTest : BpkSnapshotTest() {
   @Test
   fun noScale() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkRatingNoScaleSample()
     }
   }
@@ -67,20 +69,20 @@ class BpkRatingTest : BpkSnapshotTest() {
   @Test
   fun customContent() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkRatingCustomContentSample()
     }
   }
 
   @Test
-  fun large() = composed {
+  fun large() = snap {
     BpkRatingLargeSample()
   }
 
   @Test
   fun largeTitleOnly() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkRatingLargeTitleOnlySample()
     }
   }
@@ -88,7 +90,7 @@ class BpkRatingTest : BpkSnapshotTest() {
   @Test
   fun largeNoScale() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkRatingLargeNoScaleSample()
     }
   }
@@ -96,7 +98,7 @@ class BpkRatingTest : BpkSnapshotTest() {
   @Test
   fun largeCustomContent() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkRatingLargeCustomContentSample()
     }
   }
@@ -104,7 +106,7 @@ class BpkRatingTest : BpkSnapshotTest() {
   @Test
   fun largeCustomContentMoSubtitle() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkRatingLargeCustomContentNoSubtitleSample()
     }
   }

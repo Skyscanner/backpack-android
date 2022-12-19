@@ -16,35 +16,22 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.compose.bottomsheet
+package net.skyscanner.backpack
 
-import androidx.compose.ui.unit.IntSize
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.BottomSheetStory
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import com.facebook.testing.screenshot.internal.TestNameDetector
+import org.hamcrest.Matchers
+import org.junit.Assume
 
-@RunWith(AndroidJUnit4::class)
-class BpkBottomSheetTest : BpkSnapshotTest() {
+object SnapshotUtil {
 
-  @Before
-  fun setup() {
-    snapshotSize = IntSize(300, 400)
+  fun assumeVariant(vararg variants: BpkTestVariant) {
+    Assume.assumeThat(BpkTestVariant.current, Matchers.isOneOf(*variants))
   }
 
-  @Test
-  fun default() {
-    snap {
-      BottomSheetStory()
+  fun screenshotName(tags: List<Any>): String? =
+    if (tags.isEmpty()) {
+      null
+    } else {
+      tags.joinToString(separator = "_", prefix = TestNameDetector.getTestName() + ".") { it.toString() }
     }
-  }
-
-  @Test
-  fun expanded() {
-    snap {
-      BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)
-    }
-  }
 }

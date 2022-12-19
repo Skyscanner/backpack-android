@@ -20,9 +20,11 @@ package net.skyscanner.backpack.compose.flare
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.compose.ContentPaddingFlareExample
 import net.skyscanner.backpack.demo.compose.DefaultFlareExample
 import net.skyscanner.backpack.demo.compose.RadiusFlareExample
@@ -36,18 +38,18 @@ class BpkFlareTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 150, width = 200)
+    snapshotSize = IntSize(200, 150)
   }
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     DefaultFlareExample(Modifier.fillMaxSize())
   }
 
   @Test
   fun up() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       UpFlareExample(Modifier.fillMaxSize())
     }
   }
@@ -55,7 +57,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   @Test
   fun radius() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       RadiusFlareExample(Modifier.fillMaxSize())
     }
   }
@@ -63,7 +65,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   @Test
   fun contentPadding() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       ContentPaddingFlareExample(Modifier.fillMaxSize())
     }
   }

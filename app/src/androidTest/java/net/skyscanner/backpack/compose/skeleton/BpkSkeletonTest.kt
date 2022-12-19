@@ -22,9 +22,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.compose.sleketon.BpkBodyTextSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkCircleSizeType
 import net.skyscanner.backpack.compose.sleketon.BpkCircleSkeleton
@@ -42,34 +44,34 @@ class BpkSkeletonTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 200, width = 200)
+    snapshotSize = IntSize(200, 200)
   }
 
   @Test
-  fun imageSquare() = composed {
+  fun imageSquare() = snap {
     BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xl, BpkSpacing.Xl))
   }
 
   @Test
-  fun imageRounded() = composed {
+  fun imageRounded() = snap {
     BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xl, BpkSpacing.Xl), cornerType = BpkSkeletonCornerType.Rounded)
   }
 
   @Test
-  fun circleWithSizeType() = composed {
+  fun circleWithSizeType() = snap {
     BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
   }
 
   @Test
   fun circleWithCustomDiameter() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkCircleSkeleton(circleSize = BpkCircleSizeType.Custom(BpkSpacing.Xl))
     }
   }
 
   @Test
-  fun smallHeadline() = composed {
+  fun smallHeadline() = snap {
     BpkHeadlineSkeleton(
       modifier = Modifier.width(BpkSpacing.Xxl.times(2)),
       skeletonHeightSize = BpkSkeletonHeightSizeType.Medium
@@ -79,7 +81,7 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   @Test
   fun headlineWithCustomHeight() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkHeadlineSkeleton(
         modifier = Modifier
           .width(BpkSpacing.Xxl.times(2))
@@ -90,7 +92,7 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun bodyText() = composed {
+  fun bodyText() = snap {
     BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
   }
 }

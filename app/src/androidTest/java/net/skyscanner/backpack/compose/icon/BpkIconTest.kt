@@ -19,9 +19,11 @@
 package net.skyscanner.backpack.compose.icon
 
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.LongArrowLeft
 import org.junit.Before
@@ -35,18 +37,18 @@ class BpkIconTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 24, width = 24)
+    snapshotSize = IntSize(24, 24)
   }
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     BpkIcon(icon = icon, contentDescription = null)
   }
 
   @Test
   fun small() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkIcon(icon = icon, contentDescription = null, size = BpkIconSize.Small)
     }
   }
@@ -54,7 +56,7 @@ class BpkIconTest : BpkSnapshotTest() {
   @Test
   fun large() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkIcon(icon = icon, contentDescription = null, size = BpkIconSize.Large)
     }
   }
@@ -62,7 +64,7 @@ class BpkIconTest : BpkSnapshotTest() {
   @Test
   fun tinted() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkIcon(icon = icon, contentDescription = null, tint = BpkTheme.colors.statusDangerSpot)
     }
   }
@@ -70,7 +72,7 @@ class BpkIconTest : BpkSnapshotTest() {
   @Test
   fun compositionLocalProviderOverride() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       CompositionLocalProvider(LocalBpkIconSize provides BpkIconSize.Large) {
         BpkIcon(icon = icon, contentDescription = null)
       }

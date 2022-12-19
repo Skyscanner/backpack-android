@@ -19,14 +19,14 @@
 package net.skyscanner.backpack.compose.barchart
 
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.data.BpkBarChartData
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.Month
@@ -37,12 +37,12 @@ class BpkBarchartTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(300, 400)
+    snapshotSize = IntSize(400, 300)
   }
 
   @Test
   fun default() {
-    composed {
+    snap {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
@@ -57,7 +57,7 @@ class BpkBarchartTest : BpkSnapshotTest() {
   @Test
   fun halfFilled() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
@@ -72,7 +72,7 @@ class BpkBarchartTest : BpkSnapshotTest() {
   @Test
   fun fullyFilled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
@@ -87,7 +87,7 @@ class BpkBarchartTest : BpkSnapshotTest() {
   @Test
   fun overfilled() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
@@ -102,7 +102,7 @@ class BpkBarchartTest : BpkSnapshotTest() {
   @Test
   fun inactive() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
@@ -116,7 +116,7 @@ class BpkBarchartTest : BpkSnapshotTest() {
 
   @Test
   fun withLegend() {
-    composed {
+    snap {
       BpkBarChart(
         model = BpkBarChartModel(
           caption = "Bar chart",
@@ -136,7 +136,7 @@ class BpkBarchartTest : BpkSnapshotTest() {
   @Test
   fun selected() {
     val model = BpkBarChartModel(caption = "Bar chart", items = createMonth(Month.JANUARY))
-    composed(assertion = { onNodeWithText(model.items[10].values?.text!!).assertIsDisplayed() }) {
+    snap(assertion = { onNodeWithText(model.items[10].values?.text!!).assertIsDisplayed() }) {
       BpkBarChart(
         model = model,
         selected = model.items[10],

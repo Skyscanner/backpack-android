@@ -25,7 +25,7 @@ import org.junit.Test
 class Bpk${name}Test : BpkSnapshotTest() {
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     ${name}Story()
   }
 }

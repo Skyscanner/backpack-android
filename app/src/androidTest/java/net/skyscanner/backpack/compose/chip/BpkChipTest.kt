@@ -24,9 +24,11 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Deals
@@ -39,18 +41,18 @@ class BpkChipTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 32, width = 100)
+    snapshotSize = IntSize(100, 32)
   }
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     BpkChip(text = "Chip")
   }
 
   @Test
   fun notSelected() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkChip(text = "Chip", selected = false)
     }
   }
@@ -58,7 +60,7 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun selected() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkChip(text = "Chip", selected = true)
     }
   }
@@ -66,7 +68,7 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun disabled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkChip(text = "Chip", enabled = false)
     }
   }
@@ -74,7 +76,7 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun notSelected_OnDark() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       OnDarkBox {
         BpkChip(text = "Chip", selected = false, style = BpkChipStyle.OnDark)
       }
@@ -84,7 +86,7 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun selected_OnDark() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       OnDarkBox {
         BpkChip(text = "Chip", selected = true, style = BpkChipStyle.OnDark)
       }
@@ -94,7 +96,7 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun disabled_OnDark() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       OnDarkBox {
         BpkChip(text = "Chip", enabled = false, style = BpkChipStyle.OnDark)
       }
@@ -104,7 +106,7 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun withIcon() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    composed {
+    snap {
       BpkChip(text = "Chip", icon = BpkIcon.Deals)
     }
   }
@@ -112,7 +114,7 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun typeSelected() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    composed {
+    snap {
       BpkChip(text = "Chip", type = BpkChipType.Select)
     }
   }
@@ -120,7 +122,7 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun typeDismiss() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    composed {
+    snap {
       BpkChip(text = "Chip", type = BpkChipType.Dismiss)
     }
   }
@@ -128,7 +130,7 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   fun typeSelected_WithIcon() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    composed {
+    snap {
       BpkChip(text = "Chip", icon = BpkIcon.Deals, type = BpkChipType.Dismiss)
     }
   }

@@ -18,9 +18,11 @@
 
 package net.skyscanner.backpack.compose.fieldset
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import org.junit.Before
 import org.junit.Test
@@ -31,11 +33,11 @@ class BpkFieldSetTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 140, width = 200)
+    snapshotSize = IntSize(200, 140)
   }
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     BpkFieldSet(
       label = "Title",
       description = "Description",
@@ -52,7 +54,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
   @Test
   fun noTitle() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkFieldSet(
         description = "Description",
         status = BpkFieldStatus.Default,
@@ -69,7 +71,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
   @Test
   fun noDescription() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkFieldSet(
         description = "Description",
         status = BpkFieldStatus.Default,
@@ -86,7 +88,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
   @Test
   fun noTitleAndDescription() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkFieldSet(
         status = BpkFieldStatus.Default,
       ) {
@@ -102,7 +104,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
   @Test
   fun disabled() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkFieldSet(
         label = "Title",
         description = "Description",
@@ -120,7 +122,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
   @Test
   fun validated() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkFieldSet(
         label = "Title",
         description = "Description",
@@ -138,7 +140,7 @@ class BpkFieldSetTest : BpkSnapshotTest() {
   @Test
   fun error() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    composed {
+    snap {
       BpkFieldSet(
         label = "Title",
         description = "Description",

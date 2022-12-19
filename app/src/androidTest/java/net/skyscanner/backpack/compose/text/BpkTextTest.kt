@@ -21,8 +21,9 @@ package net.skyscanner.backpack.compose.text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.compose.AnnotatedTextExample
 import net.skyscanner.backpack.demo.compose.ColoredTextExample
@@ -36,7 +37,7 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun default() {
-    composed {
+    snap {
       DefaultTextExample()
     }
   }
@@ -148,7 +149,7 @@ class BpkTextTest : BpkSnapshotTest() {
 
   private fun capture(size: IntSize = IntSize(150, 50), content: @Composable () -> Unit) {
     assumeVariant(BpkTestVariant.Default)
-    composed(size = size) {
+    snap(size = size) {
       content()
     }
   }

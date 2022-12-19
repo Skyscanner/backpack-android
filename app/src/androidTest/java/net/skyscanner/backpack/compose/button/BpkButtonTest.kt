@@ -28,8 +28,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.IntSize
-import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.LongArrowRight
@@ -154,7 +155,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     background: @Composable () -> Color = { Color.Unspecified },
     content: @Composable () -> Unit,
   ) {
-    composed(
+    snap(
       size = IntSize(160, 64),
       tags = listOf(type, size),
     ) {

@@ -19,34 +19,29 @@
 package net.skyscanner.backpack.compose.radiobutton
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.SnapshotUtil.assumeVariant
 import net.skyscanner.backpack.demo.compose.CustomContentRadioButtonExample
 import net.skyscanner.backpack.demo.compose.DefaultCheckedRadioButtonExample
 import net.skyscanner.backpack.demo.compose.DefaultUncheckedRadioButtonExample
 import net.skyscanner.backpack.demo.compose.DisabledCheckedRadioButtonExample
 import net.skyscanner.backpack.demo.compose.DisabledUnCheckedRadioButtonExample
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkRadioButtonTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(height = 50, width = 200)
-  }
-
   @Test
-  fun defaultUnchecked() = composed {
+  fun defaultUnchecked() = snap {
     DefaultUncheckedRadioButtonExample()
   }
 
   @Test
   fun defaultChecked() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       DefaultCheckedRadioButtonExample()
     }
   }
@@ -54,7 +49,7 @@ class BpkRadioButtonTest : BpkSnapshotTest() {
   @Test
   fun disabledUnchecked() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       DisabledUnCheckedRadioButtonExample()
     }
   }
@@ -62,7 +57,7 @@ class BpkRadioButtonTest : BpkSnapshotTest() {
   @Test
   fun disabledChecked() {
     assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       DisabledCheckedRadioButtonExample()
     }
   }
@@ -70,7 +65,7 @@ class BpkRadioButtonTest : BpkSnapshotTest() {
   @Test
   fun customContent() {
     assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       CustomContentRadioButtonExample()
     }
   }
