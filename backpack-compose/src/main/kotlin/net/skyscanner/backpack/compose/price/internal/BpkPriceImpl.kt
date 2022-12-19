@@ -101,8 +101,8 @@ internal fun BpkPriceAlignEnd(
     Row {
       leadingText?.let {
         val builder = StringBuilder()
-        lineThroughText?.let { builder.append(" • ") }
         builder.append(it)
+        lineThroughText?.let { builder.append(" • ") }
         BpkText(
           text = builder.toString(),
           color = BpkTheme.colors.textSecondary,

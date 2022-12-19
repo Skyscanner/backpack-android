@@ -22,10 +22,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -41,19 +39,15 @@ import net.skyscanner.backpack.demo.R
 @Preview
 fun PriceStory(
   modifier: Modifier = Modifier,
+  size: BpkPriceSize = BpkPriceSize.Large,
 ) {
   Column(
     modifier = Modifier
       .padding(BpkSpacing.Base)
       .fillMaxSize(),
-    verticalArrangement = Arrangement.SpaceEvenly,
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
-
-    PriceRowWithSize(size = BpkPriceSize.Small)
-
-    Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
-
-    PriceRowWithSize(size = BpkPriceSize.Large)
+    PriceRowWithSize(size = size)
   }
 }
 

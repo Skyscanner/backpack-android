@@ -6,9 +6,9 @@
 
 ## Default
 
-| Day                                                                                                                                                       | Night                                                                                                                                                                    |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Price/screenshots/all.png" alt="Price component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Price/screenshots/all_dm.png" alt="Price component - dark mode" width="375" /> |
+| Day                                                                                                                                                         | Night                                                                                                                                                                      |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Price/screenshots/small.png" alt="Price component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Price/screenshots/small_dm.png" alt="Price component - dark mode" width="375" /> |
 
 ## Installation
 
