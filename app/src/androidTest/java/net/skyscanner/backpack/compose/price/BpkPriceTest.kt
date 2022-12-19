@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntSize
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
@@ -95,7 +95,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest() {
     background: @Composable () -> Color = { Color.Unspecified },
     content: @Composable () -> Unit,
   ) {
-    composed(
+    snap(
       size = IntSize(200, 200),
       tags = listOf(size, align),
     ) {
