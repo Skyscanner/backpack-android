@@ -21,7 +21,6 @@ package net.skyscanner.backpack.navbar
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -45,7 +44,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotNavBar_default() {
+  fun default() {
     init()
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
@@ -54,81 +53,64 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotNavBar_collapsed() {
-    init()
+  fun collapsed() {
+    init(expanded = false)
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeUp())
       .check { v, _ -> view = v }
     snap(view!!)
   }
 
   @Test
-  fun screenshotNavBar_expanded() {
-    init()
+  fun collapsed_icon() {
+    init(icon = true, expanded = false)
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeDown())
       .check { v, _ -> view = v }
     snap(view!!)
   }
 
   @Test
-  fun screenshotNavBar_collapsed_icon() {
+  fun expanded_icon() {
     init(icon = true)
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeUp())
       .check { v, _ -> view = v }
     snap(view!!)
   }
 
   @Test
-  fun screenshotNavBar_expanded_icon() {
-    init(icon = true)
+  fun collapsed_menu() {
+    init(menu = true, expanded = false)
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeDown())
       .check { v, _ -> view = v }
     snap(view!!)
   }
 
   @Test
-  fun screenshotNavBar_collapsed_menu() {
+  fun expanded_menu() {
     init(menu = true)
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeUp())
       .check { v, _ -> view = v }
     snap(view!!)
   }
 
   @Test
-  fun screenshotNavBar_expanded_menu() {
-    init(menu = true)
+  fun collapsed_iconAndMenu() {
+    init(icon = true, menu = true, expanded = false)
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeDown())
       .check { v, _ -> view = v }
     snap(view!!)
   }
 
   @Test
-  fun screenshotNavBar_collapsed_iconAndMenu() {
+  fun expanded_iconAndMenu() {
     init(icon = true, menu = true)
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeUp())
-      .check { v, _ -> view = v }
-    snap(view!!)
-  }
-
-  @Test
-  fun screenshotNavBar_expanded_iconAndMenu() {
-    init(icon = true, menu = true)
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.appBar))
-      .perform(ViewActions.swipeDown())
       .check { v, _ -> view = v }
     snap(view!!)
   }
@@ -136,6 +118,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
   private fun init(
     icon: Boolean = false,
     menu: Boolean = false,
+    expanded: Boolean = true,
   ) {
     rule.scenario.waitForActivity().apply {
       runOnUi {
@@ -153,6 +136,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
         } else {
           navBar.menu = 0
         }
+        navBar.setExpanded(expanded, false)
       }
     }
   }
