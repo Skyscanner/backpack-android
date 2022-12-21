@@ -28,10 +28,11 @@ import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.R
-import org.junit.Assume.assumeTrue
+import net.skyscanner.backpack.Variants
 import org.junit.Before
 import org.junit.Test
 
+@Variants(BpkTestVariant.Default)
 class BpkIconTest : BpkSnapshotTest() {
 
   @Before
@@ -41,8 +42,6 @@ class BpkIconTest : BpkSnapshotTest() {
 
   @Test
   fun testAllSmallIcons() {
-    assumeTrue(BpkTestVariant.current == BpkTestVariant.Default)
-
     val icons = getIcons(true)
     val layout = setupLayout(icons)
 
@@ -51,8 +50,6 @@ class BpkIconTest : BpkSnapshotTest() {
 
   @Test
   fun testAllLargeIcons() {
-    assumeTrue(BpkTestVariant.current == BpkTestVariant.Default)
-
     val icons = getIcons(false)
     val layout = setupLayout(icons)
 
