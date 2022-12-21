@@ -206,7 +206,7 @@ jobs:
             touch logcat.log
             chmod 777 logcat.log
             adb logcat > logcat.log &
-            ./gradlew ${{ env.flavour }}${{ env.config }}ExecuteScreenshotTests -Precord -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }} -PdirectorySuffix=${{ matrix.variant }}
+            ./gradlew ${{ env.flavour }}${{ env.config }}ExecuteScreenshotTests -Precord -PdirectorySuffix=${{ matrix.variant }}
 
             changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
