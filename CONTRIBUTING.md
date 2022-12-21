@@ -226,7 +226,7 @@ Verify the screenshots and commit the changes.
 ## Code Style
 Code style is ensured by [detekt](https://github.com/detekt/detekt). It runs automatically during the `check` phase but can also be executed by running `./gradlew detekt`.
 
-To auto fix problems run `./gradlew detekt` again.
+To auto fix problems run `./gradlew detekt --auto-correct`.
 
 ## How we review Backpack contributions
 
