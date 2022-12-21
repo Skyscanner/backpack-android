@@ -180,6 +180,9 @@ jobs:
             ~/.android/adb*
           key: avd-${{ env.api-level }}
 
+      - name: Delete existing snapshots
+        run: rm -rf app/screenshots/oss/${{ matrix.variant }}
+
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
