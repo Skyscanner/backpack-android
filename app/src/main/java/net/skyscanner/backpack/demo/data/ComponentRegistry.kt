@@ -190,7 +190,7 @@ object ComponentRegistry {
       mapOf(
         TAB_TITLE_VIEW story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
         TAB_TITLE_COMPOSE composeStory { BpkBottomNavStory() },
-      )
+      ),
     ),
     "Bottom Sheet" story NodeData(
       { children -> TabStory of children },
