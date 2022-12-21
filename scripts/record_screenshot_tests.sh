@@ -16,6 +16,7 @@
 # limitations under the License.
 
 set -e
+rm -rf app/screenshots/oss
 ./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=default
 ./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=dm
 ./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=rtl
