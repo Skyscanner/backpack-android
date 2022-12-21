@@ -181,7 +181,7 @@ jobs:
           key: avd-${{ env.api-level }}
 
       - name: Delete existing snapshots
-        run: rm -rf app/screenshots/oss/${{ matrix.variant }}
+        run: rm -rf app/screenshots/oss/${{ env.config }}/${{ matrix.variant }}
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
