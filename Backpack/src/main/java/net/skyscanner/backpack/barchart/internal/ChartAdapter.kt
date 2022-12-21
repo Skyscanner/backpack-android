@@ -25,7 +25,7 @@ import net.skyscanner.backpack.util.Consumer
 
 internal class ChartAdapter(
   private val colors: BpkBarChart.Colors,
-  private val onClick: Consumer<ChartBarHolder>
+  private val onClick: Consumer<ChartBarHolder>,
 ) : RecyclerView.Adapter<ChartBarHolder>(), Consumer<ChartData> {
 
   private var data: ChartData = ChartData()

@@ -41,8 +41,8 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       severity = Severity.WARNING,
       implementation = Implementation(
         BpkComposeComponentUsageDetector::class.java,
-        Scope.JAVA_FILE_SCOPE
-      )
+        Scope.JAVA_FILE_SCOPE,
+      ),
     )
 
     private val APPLICABLE_TYPES =
@@ -61,7 +61,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       context.report(
         ISSUE,
         context.getLocation(node),
-        "Backpack component available for $qualifiedName. Use ${component.fullName} instead. More info at ${component.url}"
+        "Backpack component available for $qualifiedName. Use ${component.fullName} instead. More info at ${component.url}",
       )
     }
   }
@@ -87,13 +87,13 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       componentsToReplace = setOf(
         "androidx.compose.material.Button",
         "androidx.compose.material.TextButton",
-        "androidx.compose.material.OutlinedButton"
-      )
+        "androidx.compose.material.OutlinedButton",
+      ),
     ),
     CARD(
       fullName = "net.skyscanner.backpack.compose.card.BpkCard",
       webName = "card",
-      componentsToReplace = setOf("androidx.compose.material.Card")
+      componentsToReplace = setOf("androidx.compose.material.Card"),
     ),
     CHECKBOX(
       fullName = "net.skyscanner.backpack.compose.checkbox.BpkCheckbox",
@@ -101,17 +101,17 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       componentsToReplace = setOf(
         "androidx.compose.material.Checkbox",
         "androidx.compose.material.TriStateCheckbox",
-      )
+      ),
     ),
     DIALOG(
       fullName = "net.skyscanner.backpack.compose.dialog.BpkDialog",
       webName = "dialog",
-      componentsToReplace = setOf("androidx.compose.ui.window.Dialog", "androidx.compose.material.AlertDialog")
+      componentsToReplace = setOf("androidx.compose.ui.window.Dialog", "androidx.compose.material.AlertDialog"),
     ),
     DIVIDER(
       fullName = "net.skyscanner.backpack.compose.divider.BpkDivider",
       webName = "divider",
-      componentsToReplace = setOf("androidx.compose.material.Divider")
+      componentsToReplace = setOf("androidx.compose.material.Divider"),
     ),
     FAB(
       fullName = "net.skyscanner.backpack.compose.fab.BpkFab",
@@ -119,7 +119,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       componentsToReplace = setOf(
         "androidx.compose.material.FloatingActionButton",
         "androidx.compose.material.ExtendedFloatingActionButton",
-      )
+      ),
     ),
     FLOATING_NOTIFICATION(
       fullName = "net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification",
@@ -127,14 +127,14 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
       componentsToReplace = setOf(
         "androidx.compose.material.Snackbar",
         "androidx.compose.material.SnackbarHost",
-      )
+      ),
     ),
     ICON(
       fullName = "net.skyscanner.backpack.compose.icon.BpkIcon",
       webName = "icon",
       componentsToReplace = setOf(
         "androidx.compose.material.Icon",
-      )
+      ),
     ),
     HORIZONTAL_NAV(
       fullName = "net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav",
@@ -143,27 +143,27 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.material.Tab",
         "androidx.compose.material.TabRow",
         "androidx.compose.material.ScrollableTabRow",
-      )
+      ),
     ),
     NAV_BAR(
       fullName = "net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar",
       webName = "navigation-bar",
-      componentsToReplace = setOf("androidx.compose.material.TopAppBar")
+      componentsToReplace = setOf("androidx.compose.material.TopAppBar"),
     ),
     RADIO_BUTTON(
       fullName = "net.skyscanner.backpack.compose.radiobutton.BpkRadioButton",
       webName = "radio-button",
-      componentsToReplace = setOf("androidx.compose.material.RadioButton")
+      componentsToReplace = setOf("androidx.compose.material.RadioButton"),
     ),
     SWITCH(
       fullName = "net.skyscanner.backpack.compose.switch.BpkSwitch",
       webName = "switch",
-      componentsToReplace = setOf("androidx.compose.material.Switch")
+      componentsToReplace = setOf("androidx.compose.material.Switch"),
     ),
     TEXT(
       fullName = "net.skyscanner.backpack.compose.text.BpkText",
       webName = "text",
-      componentsToReplace = setOf("androidx.compose.material.Text")
+      componentsToReplace = setOf("androidx.compose.material.Text"),
     ),
     TEXT_FIELD(
       fullName = "net.skyscanner.backpack.compose.textfield.BpkTextField",
@@ -172,26 +172,26 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
         "androidx.compose.foundation.text.BasicTextField",
         "androidx.compose.material.OutlinedTextField",
         "androidx.compose.material.TextField",
-      )
+      ),
     ),
     RANGE_SLIDER(
       fullName = "net.skyscanner.backpack.compose.slider.BpkRangeSlider",
       webName = "slider",
       componentsToReplace = setOf(
         "androidx.compose.material.RangeSlider",
-      )
+      ),
     ),
     SLIDER(
       fullName = "net.skyscanner.backpack.compose.slider.BpkSlider",
       webName = "slider",
       componentsToReplace = setOf(
         "androidx.compose.material.Slider",
-      )
+      ),
     ),
     SPINNER(
       fullName = "net.skyscanner.backpack.compose.spinner.BpkSpinner",
       webName = "spinner",
-      componentsToReplace = setOf("androidx.compose.material.CircularProgressIndicator")
+      componentsToReplace = setOf("androidx.compose.material.CircularProgressIndicator"),
     ),
     ;
 

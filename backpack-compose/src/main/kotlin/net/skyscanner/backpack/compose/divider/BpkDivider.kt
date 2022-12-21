@@ -28,7 +28,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 @Composable
 fun BpkDivider(
   modifier: Modifier = Modifier,
-  startIndent: Dp = 0.dp
+  startIndent: Dp = 0.dp,
 ) {
   Divider(
     modifier = modifier,

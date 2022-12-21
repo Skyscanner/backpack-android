@@ -109,7 +109,6 @@ object BpkTheme {
     } else {
       LocalBpkShapes.current
     }
-
 }
 
 private fun BpkTypography.toMaterialTypography(fontFamily: FontFamily): Typography =

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Backpack for Android - Skyscanner's Design System
 #
 # Copyright 2018 Skyscanner Ltd
@@ -15,15 +15,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-# Transforms the list of files provided by lint-staged into a format ktlint understands
-
-ALL_FILES=$*
-
-./gradlew ktlintCheck -Pfiles="$ALL_FILES"
-
-if [ $? -ne 0 ]; then
-  echo "Run './gradlew ktlintFormat' to fix issues"
-  exit 1
+# only run detekt if kotlin files changed
+if git diff --cached --name-only | grep --quiet "\.kt$" ; then
+  echo "Running detekt check..."
+  OUTPUT="/tmp/detekt-$(date +%s)"
+  ./gradlew detekt --auto-correct -PstagedOnly=true 2> $OUTPUT
+  EXIT_CODE=$?
+  if [ $EXIT_CODE -ne 0 ]; then
+    cat $OUTPUT
+    rm $OUTPUT
+    echo "***********************************************"
+    echo "                 Detekt failed                 "
+    echo " Please fix the above issues before committing "
+    echo "***********************************************"
+    exit $EXIT_CODE
+  fi
+  rm $OUTPUT
 fi
-exit 0

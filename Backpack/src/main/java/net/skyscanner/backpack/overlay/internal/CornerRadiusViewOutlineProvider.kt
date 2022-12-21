@@ -24,7 +24,7 @@ import android.view.ViewOutlineProvider
 import androidx.annotation.DimenRes
 
 internal class CornerRadiusViewOutlineProvider(
-  @DimenRes private val radiusRes: Int
+  @DimenRes private val radiusRes: Int,
 ) : ViewOutlineProvider() {
 
   override fun getOutline(view: View, outline: Outline) {

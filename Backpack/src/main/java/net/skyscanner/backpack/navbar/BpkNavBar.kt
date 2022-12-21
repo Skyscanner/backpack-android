@@ -40,7 +40,7 @@ import net.skyscanner.backpack.util.use
 class BpkNavBar @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : AppBarLayout(context, attrs) {
 
   private val collapsingLayout = BpkCollapsingToolbarLayout(context).also {
@@ -87,7 +87,7 @@ class BpkNavBar @JvmOverloads constructor(
           when (field) {
             null -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small
             else -> R.dimen.bpk_nav_bar_expanded_spacing_horizontal_large
-          }
+          },
         )
       }
     }
@@ -132,7 +132,7 @@ class BpkNavBar @JvmOverloads constructor(
     createContextThemeWrapper(context, attrs, R.attr.bpkNavBarStyle).theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkNavBar,
-      defStyleAttr, 0
+      defStyleAttr, 0,
     ).use {
       expandedTitleColor = it.getColor(R.styleable.BpkNavBar_navBarExpandedTextColor, expandedTitleColor)
       collapsedTextColor = it.getColor(R.styleable.BpkNavBar_navBarCollapsedTextColor, collapsedTextColor)

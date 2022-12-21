@@ -57,7 +57,6 @@ internal interface TopNavBarInternalState : TopNavBarState {
   val fraction: Float
 
   val nestedScrollConnection: NestedScrollConnection
-
 }
 
 internal fun TopNavBarState.asInternalState(): TopNavBarInternalState =

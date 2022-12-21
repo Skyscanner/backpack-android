@@ -224,9 +224,9 @@ Verify the screenshots and commit the changes.
 - `Shift + T` : Hide the toolbar
 
 ## Code Style
-Code style is ensured by [ktlint](https://github.com/shyiko/ktlint). It runs automatically during the `check` phase but can also be executed by running `gradlew ktlint`.
+Code style is ensured by [detekt](https://github.com/detekt/detekt). It runs automatically during the `check` phase but can also be executed by running `gradlew detekt`.
 
-To auto fix problems run `gradlew ktlintFormat`.
+To auto fix problems run `gradlew detekt` again.
 
 ## How we review Backpack contributions
 

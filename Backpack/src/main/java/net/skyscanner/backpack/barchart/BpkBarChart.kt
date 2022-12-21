@@ -34,7 +34,7 @@ import net.skyscanner.backpack.util.use
 open class BpkBarChart @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : FrameLayout(createContextThemeWrapper(context, attrs, R.attr.bpkBarChartStyle), attrs, defStyleAttr),
   Consumer<BpkBarChart.Model> {
 
@@ -79,7 +79,7 @@ open class BpkBarChart @JvmOverloads constructor(
      * The value of the bar itself, should be a range between 0.0f and 1.0f.
      * When a value bigger than 1.0f  is set, a "peak" indicator will be show at the top of the bar.
      */
-    val value: Float
+    val value: Float,
   )
 
   /**
@@ -96,7 +96,7 @@ open class BpkBarChart @JvmOverloads constructor(
     /**
      * Bars in the group.
      */
-    val items: List<Column>
+    val items: List<Column>,
   )
 
   /**
@@ -141,7 +141,7 @@ open class BpkBarChart @JvmOverloads constructor(
      * An optional legend.
      * @see Legend
      */
-    val legend: Legend? = null
+    val legend: Legend? = null,
   )
 
   data class Colors(
@@ -181,7 +181,7 @@ open class BpkBarChart @JvmOverloads constructor(
     themedContext.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkBarChart,
-      defStyleAttr, 0
+      defStyleAttr, 0,
     ).use {
       columnTitle = it.getColorStateList(R.styleable.BpkBarChart_barChartColumnTitleColor)
         ?: columnTitle
@@ -207,7 +207,7 @@ open class BpkBarChart @JvmOverloads constructor(
       chartForeground = chartForeground,
       chartLine = chartLine,
       popupBackground = popupBackground,
-      popupText = popupText
+      popupText = popupText,
     )
 
     graphView = ChartGraphView(themedContext, colors) {
@@ -220,8 +220,8 @@ open class BpkBarChart @JvmOverloads constructor(
       LayoutParams(
         LayoutParams.WRAP_CONTENT,
         ViewGroup.LayoutParams.WRAP_CONTENT,
-        Gravity.END or Gravity.TOP
-      )
+        Gravity.END or Gravity.TOP,
+      ),
     )
 
     addView(graphView, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))

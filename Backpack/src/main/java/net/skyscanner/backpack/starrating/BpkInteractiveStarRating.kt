@@ -47,7 +47,7 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
   empty = R.drawable.bpk_star_outline,
   half = R.drawable.bpk_star,
   full = R.drawable.bpk_star,
-  starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl)
+  starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl),
 ) {
 
   init {
@@ -127,7 +127,7 @@ open class BpkInteractiveStarRating @JvmOverloads constructor(
   override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
     super.onInitializeAccessibilityNodeInfo(info)
     val rangeInfo = RangeInfo.obtain(
-      RangeInfo.RANGE_TYPE_INT, 0f, maxRating.toFloat(), rating
+      RangeInfo.RANGE_TYPE_INT, 0f, maxRating.toFloat(), rating,
     )
     info.rangeInfo = rangeInfo
     if (rating > 0) {

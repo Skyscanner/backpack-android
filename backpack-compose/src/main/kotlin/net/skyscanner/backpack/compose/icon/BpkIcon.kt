@@ -70,7 +70,7 @@ fun BpkIcon(
     contentDescription = contentDescription,
     tint = tint,
     modifier = modifier
-      .defaultMinSize(size)
+      .defaultMinSize(size),
   )
 }
 

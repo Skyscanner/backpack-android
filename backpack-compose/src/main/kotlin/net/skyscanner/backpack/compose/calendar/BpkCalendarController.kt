@@ -72,7 +72,6 @@ class BpkCalendarController private constructor(
   internal val firstVisibleItemYear by derivedStateOf {
     state.value.cells[lazyGridState.firstVisibleItemIndex].yearMonth.year
   }
-
 }
 
 @Composable
@@ -93,5 +92,5 @@ fun rememberCalendarController(
     ),
     init = {
       BpkCalendarController(initialParams, coroutineScope, lazyGridState)
-    }
+    },
   )

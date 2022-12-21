@@ -42,6 +42,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
+@Preview
 fun TextFiledStory() {
 
   FieldStatusSwitcher(

@@ -135,12 +135,12 @@ private fun ChipsRow(
 @Composable
 private fun ChipSample(
   text: String,
-  modifier: Modifier = Modifier,
   initialState: Boolean,
   enabled: Boolean,
   style: BpkChipStyle,
   icon: BpkIcon?,
   type: BpkChipType,
+  modifier: Modifier = Modifier,
 ) {
 
   var selected by rememberSaveable { mutableStateOf(initialState) }

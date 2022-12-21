@@ -34,7 +34,6 @@ interface BpkSwipeableState<T> {
   suspend fun snapTo(targetValue: T)
 
   suspend fun animateTo(targetValue: T)
-
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -56,5 +55,4 @@ internal fun <T> BpkSwipeableState(
 
   override suspend fun snapTo(targetValue: T) =
     wrapped.snapTo(targetValue)
-
 }

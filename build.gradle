@@ -19,10 +19,12 @@
 buildscript {
   ext.kotlin_version = '1.7.20'
   ext.compose_compiler_version = '1.3.2'
+  ext.detekt_version = '1.22.0'
   ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:$kotlin_version"
   repositories {
     google()
     mavenCentral()
+    gradlePluginPortal()
     maven { url 'https://plugins.gradle.org/m2/' }
   }
   dependencies {
@@ -30,8 +32,8 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath dokka
     classpath 'com.facebook.testing.screenshot:plugin:0.15.0'
-    classpath "org.jlleitschuh.gradle:ktlint-gradle:11.0.0"
     classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
+    classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
   }
 }
 
@@ -47,30 +49,22 @@ allprojects {
 }
 
 subprojects {
-  apply plugin: "org.jlleitschuh.gradle.ktlint"
+  apply plugin: "io.gitlab.arturbosch.detekt"
 
   repositories {
     google()
     mavenCentral()
   }
 
-  ktlint {
-    version = "0.43.2"
-    enableExperimentalRules = false
-    reporters {
-      reporter "checkstyle"
-    }
+  detekt {
+    config = files("$rootDir/.detekt.yml", "$rootDir/.detekt-compose.yml")
+    buildUponDefaultConfig = true
   }
 
-  afterEvaluate { project ->
-
-    // for backward compatibility, will be removed in another task
-    task ktlint(type: SourceTask, group: "verification") {
-      description = "Check Kotlin code style."
-      dependsOn(ktlintCheck)
-    }
-
-    check.dependsOn("ktlint")
+  dependencies {
+    detektPlugins "com.twitter.compose.rules:detekt:0.0.26"
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-rules-libraries:$detekt_version"
   }
 }
 
@@ -114,7 +108,7 @@ ext {
   espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
   testRules = "androidx.test:rules:1.5.0"
   mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
-  mockitoAndroid = "org.mockito:mockito-android:4.9.0"
+  mockitoAndroid = "org.mockito:mockito-android:4.10.0"
 
   coroutinesVersion = "1.6.4"
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"

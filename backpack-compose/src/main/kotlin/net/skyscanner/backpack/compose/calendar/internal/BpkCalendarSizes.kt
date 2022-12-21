@@ -23,5 +23,4 @@ import androidx.compose.ui.unit.dp
 internal object BpkCalendarSizes {
 
   val SelectionHeight = 36.dp
-
 }

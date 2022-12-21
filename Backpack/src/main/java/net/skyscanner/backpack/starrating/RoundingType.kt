@@ -21,5 +21,5 @@ package net.skyscanner.backpack.starrating
 enum class RoundingType(internal val id: Int) {
   Down(0),
   Up(1),
-  Nearest(2)
+  Nearest(2),
 }

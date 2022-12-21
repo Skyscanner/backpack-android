@@ -34,7 +34,7 @@ import net.skyscanner.backpack.util.Consumer
 internal class ChartGraphView constructor(
   context: Context,
   colors: BpkBarChart.Colors,
-  onClick: Consumer<BpkBarChart.Column>
+  onClick: Consumer<BpkBarChart.Column>,
 ) : FrameLayout(context), Consumer<List<BpkBarChart.Group>?> {
 
   private val onClickWrapper = { holder: ChartBarHolder ->
@@ -58,15 +58,17 @@ internal class ChartGraphView constructor(
     it.clipToPadding = false
     it.clipChildren = false
     it.setPadding(0, titleHeight + titleSpacing, 0, 0)
-    it.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-      override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        val position = layoutManager.findFirstVisibleItemPosition()
-        val group = model.getGroup(position)
-        if (title.text != group.title) {
-          title.text = group.title
+    it.addOnScrollListener(
+      object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+          val position = layoutManager.findFirstVisibleItemPosition()
+          val group = model.getGroup(position)
+          if (title.text != group.title) {
+            title.text = group.title
+          }
         }
-      }
-    })
+      },
+    )
     it.addItemDecoration(ChartPopupDecoration(context, colors))
     addView(it, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
   }

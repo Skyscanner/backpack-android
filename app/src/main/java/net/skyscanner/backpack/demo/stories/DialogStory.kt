@@ -32,7 +32,7 @@ class DialogStory : Story() {
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View? = inflater.inflate(R.layout.fragment_dialog, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,7 +65,7 @@ class DialogStory : Story() {
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_confirmation)) {
           dismiss()
-        }
+        },
       )
     }.show()
   }
@@ -78,12 +78,12 @@ class DialogStory : Story() {
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_confirmation)) {
           dismiss()
-        }
+        },
       )
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_skip)) {
           dismiss()
-        }
+        },
       )
     }.show()
   }
@@ -96,17 +96,17 @@ class DialogStory : Story() {
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_confirmation)) {
           dismiss()
-        }
+        },
       )
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_skip)) {
           dismiss()
-        }
+        },
       )
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_link_optional)) {
           dismiss()
-        }
+        },
       )
     }.show()
   }
@@ -119,17 +119,17 @@ class DialogStory : Story() {
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_confirmation)) {
           dismiss()
-        }
+        },
       )
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_skip)) {
           dismiss()
-        }
+        },
       )
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_link_optional)) {
           dismiss()
-        }
+        },
       )
     }.show()
   }
@@ -142,12 +142,12 @@ class DialogStory : Story() {
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_delete)) {
           dismiss()
-        }
+        },
       )
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_cancel)) {
           dismiss()
-        }
+        },
       )
     }.show()
   }
@@ -159,12 +159,12 @@ class DialogStory : Story() {
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_continue)) {
           dismiss()
-        }
+        },
       )
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_skip)) {
           dismiss()
-        }
+        },
       )
     }.show()
   }
@@ -176,12 +176,12 @@ class DialogStory : Story() {
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_confirmation)) {
           dismiss()
-        }
+        },
       )
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_skip)) {
           dismiss()
-        }
+        },
       )
     }.show()
   }
@@ -195,12 +195,12 @@ class DialogStory : Story() {
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_confirmation)) {
           dismiss()
-        }
+        },
       )
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_skip)) {
           dismiss()
-        }
+        },
       )
     }.show()
   }

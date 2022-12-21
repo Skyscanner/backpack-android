@@ -77,7 +77,7 @@ internal fun BarChartList(
             rootLayoutCoordinates?.let { root ->
               badgeAnchor = root.localPositionOf(bar, Offset(x = bar.size.width / 2f, y = 0f))
             }
-          }
+          },
         )
       }
     }
@@ -93,7 +93,6 @@ internal fun BarChartList(
       )
     }
   }
-
 }
 
 private fun Modifier.drawSelectionLine(

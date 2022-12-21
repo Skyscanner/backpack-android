@@ -118,7 +118,7 @@ open class BpkText @JvmOverloads constructor(
     context.theme.obtainStyledAttributes(
       attrs,
       R.styleable.BpkText,
-      defStyleAttr, 0
+      defStyleAttr, 0,
     ).use {
       _textStyle = it.getInt(R.styleable.BpkText_textStyle, TextStyle.BodyDefault.id)
         .let { textStyleArg -> TextStyle.values().first { it.id == textStyleArg } }
@@ -197,7 +197,7 @@ private fun internalGetFont(context: Context, textStyle: BpkText.TextStyle): Bpk
   val textStyleAttributes = context.obtainStyledAttributes(styleRes, R.styleable.BpkTextStyle)
   val fontSize = textStyleAttributes.getDimensionPixelSize(
     R.styleable.BpkTextStyle_android_textSize,
-    ResourcesUtil.dpToPx(16, context)
+    ResourcesUtil.dpToPx(16, context),
   )
   val letterSpacing = textStyleAttributes.getFloat(R.styleable.BpkTextStyle_android_letterSpacing, -1f)
     .let { if (it == -1f) null else it }

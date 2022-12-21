@@ -66,7 +66,7 @@ fun BpkFlare(
         bottom = when (pointerDirection) {
           BpkFlarePointerDirection.Up -> 0.dp
           BpkFlarePointerDirection.Down -> FlareContentPadding(insetContent)
-        }
+        },
       ),
     propagateMinConstraints = propagateMinConstraints,
     contentAlignment = contentAlignment,

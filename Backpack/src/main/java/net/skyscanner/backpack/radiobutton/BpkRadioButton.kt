@@ -30,14 +30,14 @@ import net.skyscanner.backpack.util.use
 open class BpkRadioButton @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  defStyleAttr: Int = 0,
 ) : AppCompatRadioButton(
   createContextThemeWrapper(
     createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.radioButtonStyle),
-    attrs, R.attr.bpkRadioButtonStyle
+    attrs, R.attr.bpkRadioButtonStyle,
   ),
   attrs,
-  defStyleAttr
+  defStyleAttr,
 ) {
 
   private lateinit var disabledTint: ColorStateList
@@ -56,7 +56,7 @@ open class BpkRadioButton @JvmOverloads constructor(
       attrs,
       R.styleable.BpkRadioButton,
       defStyleAttr,
-      0
+      0,
     ).use {
       radioButtonDefaultColor = it.getInt(R.styleable.BpkRadioButton_radioButtonColor, radioButtonDefaultColor)
       radioButtonCheckedColor = it.getInt(R.styleable.BpkRadioButton_radioButtonColorChecked, radioButtonCheckedColor)
@@ -66,7 +66,7 @@ open class BpkRadioButton @JvmOverloads constructor(
     this.disabledTint = ColorStateList.valueOf(radioButtonDisabledColor)
     this.enabledTint = ColorStateList(
       arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()),
-      intArrayOf(radioButtonCheckedColor, radioButtonDefaultColor)
+      intArrayOf(radioButtonCheckedColor, radioButtonDefaultColor),
     )
     updateTint()
     BpkText.getFont(context, BpkText.TextStyle.Footnote).applyTo(this)
@@ -74,7 +74,7 @@ open class BpkRadioButton @JvmOverloads constructor(
       ColorStateList(
         arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
         intArrayOf(radioButtonDisabledColor, textEnabledColor),
-      )
+      ),
     )
 
     setPaddingRelative(resources.getDimensionPixelSize(R.dimen.bpkSpacingSm), paddingTop, paddingEnd, paddingBottom)
