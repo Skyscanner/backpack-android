@@ -21,10 +21,10 @@ Example of a `BpkSlider`:
 ```Kotlin
 import net.skyscanner.backpack.compose.slider.BpkSlider
 
-BpkSlider {
-  value = 0.5f
+BpkSlider(
+  value = 0.5f,
   onValueChange = { newValue -> } // Handle update
-}
+)
 ```
 
 Example of a `BpkRangeSlider`:
@@ -32,8 +32,8 @@ Example of a `BpkRangeSlider`:
 ```Kotlin
 import net.skyscanner.backpack.compose.slider.BpkSlider
 
-BpkRangeSlider {
-  value = 0.2f..0.8f
+BpkRangeSlider(
+  value = 0.2f..0.8f,
   onValueChange = { newValue -> } // Handle update
-}
+)
 ```

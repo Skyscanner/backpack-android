@@ -46,7 +46,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   private val type: BpkButtonType = flavour.first
   private val size: BpkButtonSize = flavour.second
   private val icon = BpkIcon.LongArrowRight
-  private val iconDrawableRes = R.drawable.button_sample_icon
+  private val iconDrawableRes = R.drawable.sample_icon
 
   @Test
   fun text() {
