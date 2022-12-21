@@ -18,16 +18,17 @@
 
 package net.skyscanner.backpack.text
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
+@Variants(BpkTestVariant.Default)
 class BpkTextTest : BpkSnapshotTest() {
 
   @Before
@@ -36,6 +37,7 @@ class BpkTextTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl, BpkTestVariant.Themed)
   fun default() {
     val text = BpkText(testContext)
     text.text = "Message"
@@ -44,8 +46,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun bodyDefault() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.BodyDefault
@@ -54,8 +54,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun bodyLongform() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.BodyLongform
@@ -64,8 +62,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun caption() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Caption
@@ -74,8 +70,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun footnote() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Footnote
@@ -84,8 +78,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun subheading() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Subheading
@@ -94,8 +86,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun label1() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Label1
@@ -104,8 +94,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun label2() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Label2
@@ -114,8 +102,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun label3() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Label3
@@ -124,8 +110,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun heading1() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Heading1
@@ -134,8 +118,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun heading2() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Heading2
@@ -144,8 +126,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun heading3() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Heading3
@@ -154,8 +134,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun heading4() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Heading4
@@ -164,8 +142,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun heading5() {
-    assumeVariant(BpkTestVariant.Default)
-
     val text = BpkText(testContext)
     text.text = "Message"
     text.textStyle = BpkText.TextStyle.Heading5
@@ -174,8 +150,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero1() {
-    assumeVariant(BpkTestVariant.Default)
-
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 1"
@@ -185,8 +159,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero2() {
-    assumeVariant(BpkTestVariant.Default)
-
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 2"
@@ -196,8 +168,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero3() {
-    assumeVariant(BpkTestVariant.Default)
-
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 3"
@@ -207,8 +177,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero4() {
-    assumeVariant(BpkTestVariant.Default)
-
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 4"
@@ -218,8 +186,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero5() {
-    assumeVariant(BpkTestVariant.Default)
-
     setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 5"

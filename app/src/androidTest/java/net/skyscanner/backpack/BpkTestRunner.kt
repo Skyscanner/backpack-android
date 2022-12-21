@@ -28,6 +28,14 @@ import com.karumi.shot.ShotTestRunner
 @Suppress("unused")
 class BpkTestRunner : ShotTestRunner() {
 
+  override fun onCreate(args: Bundle) {
+    if (args.getString("variant") == "themed") {
+      args.putString("notPackage", "net.skyscanner.backpack.compose")
+    }
+    args.putString("filter", "net.skyscanner.backpack.VariantFilter")
+    super.onCreate(args)
+  }
+
   override fun newApplication(cl: ClassLoader?, className: String?, context: Context?): Application =
     super.newApplication(cl, className, context).apply {
       registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {

@@ -39,7 +39,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDE
 import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matchers.greaterThanOrEqualTo
@@ -68,8 +68,8 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun expanded() {
-    assumeVariant(BpkTestVariant.Default)
     rule.scenario.waitForActivity().also { activity ->
       runOnUi {
         val root = setupBottomSheet()

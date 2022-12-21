@@ -36,7 +36,6 @@ import com.karumi.shot.ScreenshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.SnapshotUtil.screenshotName
 import net.skyscanner.backpack.demo.compose.BackpackPreview
-import org.junit.Assume
 import org.junit.Rule
 
 open class BpkSnapshotTest : ScreenshotTest {
@@ -57,10 +56,6 @@ open class BpkSnapshotTest : ScreenshotTest {
     assertion: ComposeTestRule.() -> Unit = {},
     content: @Composable () -> Unit,
   ) {
-
-    // we don't run Compose tests in Themed variant – Compose uses it own theming engine
-    Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
-
     val scenario = launchActivity<AppCompatActivity>()
     scenario.onActivity { activity ->
       activity.setContent {

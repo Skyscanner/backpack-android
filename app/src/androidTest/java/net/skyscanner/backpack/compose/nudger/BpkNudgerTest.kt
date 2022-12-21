@@ -18,10 +18,10 @@
 
 package net.skyscanner.backpack.compose.nudger
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.compose.NudgerExample
 import net.skyscanner.backpack.demo.compose.NudgerStoryAvg
 import net.skyscanner.backpack.demo.compose.NudgerStoryMax
@@ -38,40 +38,40 @@ class BpkNudgerTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabled() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     snap {
       NudgerExample(initialValue = NudgerStoryAvg, enabled = false)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun minusDisabled() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       NudgerExample(initialValue = NudgerStoryMin)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun plusDisabled() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       NudgerExample(initialValue = NudgerStoryMax)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun positiveOverflow() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       NudgerExample(initialValue = NudgerStoryMax + NudgerStoryMax)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun negativeOverflow() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       NudgerExample(initialValue = NudgerStoryMin - NudgerStoryMax)
     }

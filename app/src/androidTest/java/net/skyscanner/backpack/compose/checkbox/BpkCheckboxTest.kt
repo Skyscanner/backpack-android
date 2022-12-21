@@ -18,10 +18,10 @@
 
 package net.skyscanner.backpack.compose.checkbox
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.compose.CheckedCheckboxSample
 import net.skyscanner.backpack.demo.compose.CustomContentCheckboxSample
 import net.skyscanner.backpack.demo.compose.DefaultCheckboxSample
@@ -41,48 +41,48 @@ class BpkCheckboxTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun intermediate() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     snap {
       IntermediateCheckboxSample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun unchecked() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     snap {
       UncheckedCheckboxSample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun checked() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     snap {
       CheckedCheckboxSample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabledUnchecked() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     snap {
       DisabledUncheckedCheckboxSample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabledChecked() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     snap {
       DisabledCheckedCheckboxSample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun customContent() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       CustomContentCheckboxSample()
     }

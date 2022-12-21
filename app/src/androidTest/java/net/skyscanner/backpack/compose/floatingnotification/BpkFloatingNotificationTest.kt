@@ -40,7 +40,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    snapshotSize = IntSize(450, 100)
+    snapshotSize = IntSize(450, 110)
   }
 
   @Test

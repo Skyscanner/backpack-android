@@ -23,10 +23,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.sleketon.BpkBodyTextSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkCircleSizeType
 import net.skyscanner.backpack.compose.sleketon.BpkCircleSkeleton
@@ -63,8 +63,8 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun circleWithCustomDiameter() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkCircleSkeleton(circleSize = BpkCircleSizeType.Custom(BpkSpacing.Xl))
     }
@@ -79,8 +79,8 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun headlineWithCustomHeight() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkHeadlineSkeleton(
         modifier = Modifier

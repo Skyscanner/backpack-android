@@ -29,11 +29,11 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.test.ext.junit.rules.activityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BackpackPreview
 import net.skyscanner.backpack.demo.compose.DestructiveDialogExample
@@ -45,7 +45,6 @@ import net.skyscanner.backpack.demo.compose.SuccessOneButtonDialogExample
 import net.skyscanner.backpack.demo.compose.SuccessThreeButtonsDialogExample
 import net.skyscanner.backpack.demo.compose.SuccessTwoButtonsDialogExample
 import net.skyscanner.backpack.demo.compose.WarningDialogExample
-import org.junit.Assume
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -71,49 +70,49 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun successTwoButtons() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     record {
       SuccessTwoButtonsDialogExample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun successThreeButtons() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     record {
       SuccessThreeButtonsDialogExample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun warning() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     record {
       WarningDialogExample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun destructive() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     record {
       DestructiveDialogExample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun noIcon() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     record {
       NoIconDialogExample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun flare() {
     setDimensions(height = 700, width = 420)
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     record {
       FlareDialogExample()
     }
@@ -136,9 +135,6 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   private fun record(content: @Composable () -> Unit) {
-    // we don't run Compose tests in Themed variant – Compose uses it own theming engine
-    Assume.assumeFalse(BpkTestVariant.current == BpkTestVariant.Themed)
-
     rule.scenario.onActivity { activity ->
       activity.setContent {
         BackpackPreview(

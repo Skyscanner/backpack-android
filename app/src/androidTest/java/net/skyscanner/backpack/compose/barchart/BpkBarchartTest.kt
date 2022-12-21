@@ -21,9 +21,9 @@ package net.skyscanner.backpack.compose.barchart
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.unit.IntSize
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.data.BpkBarChartData
 import org.junit.Before
@@ -55,8 +55,8 @@ class BpkBarchartTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun halfFilled() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkBarChart(
         model = BpkBarChartModel(
@@ -70,8 +70,8 @@ class BpkBarchartTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun fullyFilled() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     snap {
       BpkBarChart(
         model = BpkBarChartModel(
@@ -85,8 +85,8 @@ class BpkBarchartTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun overfilled() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkBarChart(
         model = BpkBarChartModel(
@@ -100,8 +100,8 @@ class BpkBarchartTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun inactive() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
     snap {
       BpkBarChart(
         model = BpkBarChartModel(

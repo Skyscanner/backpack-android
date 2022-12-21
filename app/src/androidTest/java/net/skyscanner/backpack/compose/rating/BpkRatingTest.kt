@@ -20,10 +20,10 @@
 package net.skyscanner.backpack.compose.rating
 
 import androidx.compose.ui.unit.IntSize
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
-import net.skyscanner.backpack.SnapshotUtil.assumeVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.compose.BpkRatingCustomContentSample
 import net.skyscanner.backpack.demo.compose.BpkRatingDefaultSample
 import net.skyscanner.backpack.demo.compose.BpkRatingLargeCustomContentNoSubtitleSample
@@ -51,24 +51,24 @@ class BpkRatingTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun titleOnly() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkRatingTitleOnlySample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun noScale() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkRatingNoScaleSample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun customContent() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkRatingCustomContentSample()
     }
@@ -80,32 +80,32 @@ class BpkRatingTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun largeTitleOnly() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkRatingLargeTitleOnlySample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun largeNoScale() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkRatingLargeNoScaleSample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun largeCustomContent() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkRatingLargeCustomContentSample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun largeCustomContentMoSubtitle() {
-    assumeVariant(BpkTestVariant.Default)
     snap {
       BpkRatingLargeCustomContentNoSubtitleSample()
     }

@@ -111,9 +111,7 @@ For `View` components you can create the component, set the states and then call
 For `Compose` components use the `composed` function to wrap your component - this will generate the snapshot.
 
 By default snapshot tests run on 4 variants - default, dark mode, RTL and themed (skipped for compose). In some cases you may want to only run a snapshot test on some variants - for example if a component has many different states without layout changes you may want to consider skipping RTL.
-
-You can do this by adding the `assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)` function with the desired variants.
-**IMPORTANT**: Make sure this is called _before_ the test activity is run to avoid unnecessary delay. In a view test make it the first line of your test. In a compose test call it before the `composed` function, rather than inside it.
+You can do this by adding the `@Variant(BpkTestVariant.Default, BpkTestVariant.DarkMode)` annotation to either the test class (applies to all tests in class) or function with the desired variants.
 
 #### Verifying changes
 After adding new snapshot tests or making UI changes, run

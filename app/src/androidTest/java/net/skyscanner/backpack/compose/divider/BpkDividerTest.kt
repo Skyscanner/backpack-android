@@ -33,7 +33,7 @@ class BpkDividerTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    snapshotSize = IntSize(100, 200)
+    snapshotSize = IntSize(100, 20)
   }
 
   @Test

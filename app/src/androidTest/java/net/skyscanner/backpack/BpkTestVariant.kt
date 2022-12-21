@@ -21,77 +21,50 @@ package net.skyscanner.backpack
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
-import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDialog
 import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.demo.R
 import java.util.Locale
 
-sealed class BpkTestVariant(val id: String, val themeId: Int = R.style.AppTheme) {
+enum class BpkTestVariant(val id: String, private val themeId: Int = R.style.AppTheme) {
 
-  open fun applyToActivity(activity: Activity): Activity =
+  Default("default"),
+  Themed("themed", R.style.LondonTheme),
+  DarkMode("dm"),
+  Rtl("rtl"),
+  ;
+
+  fun applyToActivity(activity: Activity): Activity =
     activity.apply { setTheme(themeId) }
 
-  open fun newActivity(activity: Activity): Activity =
-    activity
+  fun newActivity(activity: Activity): Activity {
+    activity.applyOverrideConfiguration(setup(Configuration()))
+    return activity
+  }
 
-  open fun newContext(context: Context): Context =
-    context.apply {
+  fun newContext(context: Context): Context =
+    context.createConfigurationContext(setup(Configuration(context.resources.configuration))).apply {
       setTheme(themeId)
     }
 
-  object Default : BpkTestVariant("default")
-
-  object Themed : BpkTestVariant("themed", R.style.LondonTheme)
-
-  object DarkMode : BpkTestVariant("dm") {
-
-    override fun newActivity(activity: Activity): Activity {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-      val config = Configuration().apply {
-        uiMode = uiMode or Configuration.UI_MODE_NIGHT_YES
+  private fun setup(configuration: Configuration) =
+    when (this) {
+      Default, Themed -> configuration
+      DarkMode -> {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        configuration.apply {
+          uiMode = (uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or Configuration.UI_MODE_NIGHT_YES
+        }
       }
-      activity.applyOverrideConfiguration(config)
-      return activity
+      Rtl -> {
+        val rtlLocale = Locale("ar")
+        Locale.setDefault(rtlLocale)
+        configuration.apply {
+          setLayoutDirection(rtlLocale)
+          setLocale(rtlLocale)
+        }
+      }
     }
-
-    override fun newContext(context: Context): Context {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-      if (Looper.myLooper() == null) {
-        Looper.prepare()
-      }
-      val config = Configuration(context.resources.configuration).apply {
-        uiMode = uiMode or Configuration.UI_MODE_NIGHT_YES
-      }
-      val dialog = AppCompatDialog(super.newContext(context.createConfigurationContext(config)))
-      return dialog.context
-    }
-  }
-
-  object Rtl : BpkTestVariant("rtl") {
-
-    private val rtlLocale = Locale("ar")
-
-    override fun newActivity(activity: Activity): Activity {
-      Locale.setDefault(rtlLocale)
-      val config = Configuration().apply {
-        setLayoutDirection(rtlLocale)
-        setLocale(rtlLocale)
-      }
-      activity.applyOverrideConfiguration(config)
-      return activity
-    }
-
-    override fun newContext(context: Context): Context {
-      Locale.setDefault(rtlLocale)
-      val config = Configuration(context.resources.configuration).apply {
-        setLayoutDirection(rtlLocale)
-        setLocale(rtlLocale)
-      }
-      return super.newContext(context.createConfigurationContext(config))
-    }
-  }
 
   companion object {
 

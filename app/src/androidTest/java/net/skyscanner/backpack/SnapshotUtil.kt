@@ -19,14 +19,8 @@
 package net.skyscanner.backpack
 
 import com.facebook.testing.screenshot.internal.TestNameDetector
-import org.hamcrest.Matchers
-import org.junit.Assume
 
 object SnapshotUtil {
-
-  fun assumeVariant(vararg variants: BpkTestVariant) {
-    Assume.assumeThat(BpkTestVariant.current, Matchers.isOneOf(*variants))
-  }
 
   fun screenshotName(tags: List<Any>): String? =
     if (tags.isEmpty()) {
