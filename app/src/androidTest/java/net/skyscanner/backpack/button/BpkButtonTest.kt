@@ -55,10 +55,6 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun text() {
-    // we want to see colors of all types
-    // we want to test 1 large button type
-    assumeTrue(size == BpkButton.Size.Standard || type == BpkButton.Type.Primary)
-
     capture(background = type.rowBackground()) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
@@ -82,9 +78,6 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun loading() {
-    // we want to test 1 large button type
-    assumeTrue(size == BpkButton.Size.Standard || type == BpkButton.Type.Primary)
-
     capture(background = type.rowBackground()) {
       BpkButton(testContext, type, size).apply {
         text = "Button"
@@ -196,7 +189,13 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
     fun flavours(): List<Flavor> = BpkButton.Type.values().flatMap { type ->
-      BpkButton.Size.values().map { size -> Flavor(type, size) }
+      BpkButton.Size.values().mapNotNull { size ->
+        if (type == BpkButton.Type.Primary || size == BpkButton.Size.Standard) {
+          Flavor(type, size)
+        } else {
+          null
+        }
+      }
     }
   }
 }
