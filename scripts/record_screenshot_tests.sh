@@ -16,7 +16,7 @@
 # limitations under the License.
 
 set -e
-./gradlew ossDebugExecuteScreenshotTests -Precord -Pandroid.testInstrumentationRunnerArguments.variant=default -PdirectorySuffix=default
-./gradlew ossDebugExecuteScreenshotTests -Precord -Pandroid.testInstrumentationRunnerArguments.variant=dm -PdirectorySuffix=dm
-./gradlew ossDebugExecuteScreenshotTests -Precord -Pandroid.testInstrumentationRunnerArguments.variant=rtl -PdirectorySuffix=rtl
-./gradlew ossDebugExecuteScreenshotTests -Precord -Pandroid.testInstrumentationRunnerArguments.variant=themed -PdirectorySuffix=themed
+./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=default
+./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=dm
+./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=rtl
+./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=themed

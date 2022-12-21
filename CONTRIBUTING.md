@@ -66,9 +66,10 @@ We use snapshot testing to ensure there are no unintended changes to UI componen
 
 #### Setup
 
-Create an AVD using the following command
+> Note: Currently, snapshot tests run on Apple chips will result in a different snapshot to Intel-based laptops or CI.
+> Consider recording snapshots on Intel-based macs or using GitHub Actions (see [below](#using-ci-for-generating-snapshot)).
 
-> Note: Currently, snapshot testing doesn't work properly on M1 chips. Consider recording snapshots on Intel-based macs or using GitHub Actions.
+Create an AVD using the following command
 
 ```
 # x86
@@ -105,13 +106,21 @@ $ANDROID_HOME/emulator/emulator -avd bpk-droid-avd -sdcard sd.img &
 
 Snapshot tests live in the `app` module. For a new test class extend from `BpkSnapshotTest`.
 Each test function will result in a separate snapshot test - try to  keep the tests simple and add a test for each state of a component.
-Use the `setDimensions` function in the `setup()` function to set the right dimension for the snapshots.
 
-For `View` components you can create the component, set the states and then call `snap` to take the snapshots.
-For `Compose` components use the `composed` function to wrap your component - this will generate the snapshot.
+Wrap your component with the correct states in the `snap` function to take the snapshot. There are various configurations supported:
+
+To set the dimension for your snapshot use the `setDimensions` function for View or `snapshotSize` property for Compose in the `setup()` or test function. In compose you can alternatively use the `size` property on the `snap` function.
+
+To set the background colour use the `setBackground` function for View or `background` property on the `snap` function for Compose. By default the snapshots will have the `canvas` background.
 
 By default snapshot tests run on 4 variants - default, dark mode, RTL and themed (skipped for compose). In some cases you may want to only run a snapshot test on some variants - for example if a component has many different states without layout changes you may want to consider skipping RTL.
-You can do this by adding the `@Variant(BpkTestVariant.Default, BpkTestVariant.DarkMode)` annotation to either the test class (applies to all tests in class) or function with the desired variants.
+You can do this by adding the `@Variant` annotation to either the test class (applies to all tests in class) or function with the desired variants, like this:
+
+```
+@Variant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+```
+
+For some more complex components with many different types you may want to make use of the `Parameterized` test runner to test all variants. To ensure snapshots get saved for all parameters use the `tags` property on the `snap` function. For an example look at `BpkButtonTest`.
 
 #### Verifying changes
 After adding new snapshot tests or making UI changes, run
@@ -135,12 +144,12 @@ If the check fails you either need to fix the issue if a change was unintended o
 While you're creating your snapshot tests or are debugging an issue it may be helpful to run an individual test class. You can do that with the following command:
 
 ```
-./gradlew :app:recordOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=default -Pandroid.testInstrumentationRunnerArguments.class=net.skyscanner.backpack.package.YourClassTest
+./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=default -Pandroid.testInstrumentationRunnerArguments.class=net.skyscanner.backpack.package.YourClassTest
 ```
 
-You can replace the `variant` variable with `dm`, `rtl` or `themed` depending on what you're trying to test.
+You can replace the `directorySuffix` property with `dm`, `rtl` or `themed` depending on what you're trying to test.
 
-> Note: This will delete any other snapshots, so please run the full snapshot test suite afterwards or use the CI method below.
+> Note: Please do not commit these changes when using an Apple Chip machine - use the CI method below instead.
 
 ### Using CI for generating snapshot
 
@@ -149,6 +158,9 @@ Alternatively, you can use GitHub Actions CI to generate the snapshots. Simply a
 ```
 git commit --allow-empty -m "Record snapshots" && git push
 ```
+
+> Note: Please wait until all snapshots are updated before pushing any further changes as they'll cancel the updates.
+
 Since CI run cannot trigger CI checks again, you need to commit something after the snapshots have been generated to trigger the CI check.
 
 If you don't have any pending changes, you can use an empty commit again to trigger the CI:

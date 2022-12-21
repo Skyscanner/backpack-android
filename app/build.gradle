@@ -36,6 +36,7 @@ android {
 
     testInstrumentationRunner "net.skyscanner.backpack.BpkTestRunner"
     testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.docs.GenerateScreenshots"
+    testInstrumentationRunnerArgument "variant", project.findProperty("directorySuffix") ?: "default"
 
     manifestPlaceholders = [ MAPS_API_KEY : properties.getProperty("MAPS_API_KEY", "") ]
   }
