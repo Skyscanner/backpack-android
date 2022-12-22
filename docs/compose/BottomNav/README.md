@@ -6,9 +6,9 @@
 
 ## Default
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/bottomnav/screenshots/default.png" alt="BottomNav component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/bottomnav/screenshots/default_dm.png" alt="BottomNav component - dark mode" width="375" /> |
+| Day                                                                                                                                                                   | Night                                                                                                                                                                                |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomNav/screenshots/default.png" alt="BottomNav component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BottomNav/screenshots/default_dm.png" alt="BottomNav component - dark mode" width="375" /> |
 
 ## Installation
 
