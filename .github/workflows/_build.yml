@@ -139,6 +139,7 @@ jobs:
     permissions:
       pull-requests: write
       contents: write
+      id-token: write
     timeout-minutes: 30
 
     strategy:
@@ -168,55 +169,40 @@ jobs:
           python-version: '3.x'
           cache: 'pip'
           cache-dependency-path: 'snapshot-requirements.txt'
+
       - name: Install Python dependencies
         run: pip3 install -r snapshot-requirements.txt
 
-      - name: AVD cache
-        uses: actions/cache@v3
-        id: avd-cache
+      - name: Gcloud Login
+        id: auth
+        uses: 'google-github-actions/auth@v1'
+        env:
+          GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: avd-${{ env.api-level }}
+          credentials_json: ${{ env.GCP_CREDENTIALS }}
+
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: Set current project
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: gcloud config set project ${{ env.FIREBASE_PROJECT_ID }}
 
       - name: Delete existing snapshots
         run: rm -rf app/screenshots/oss/${{ env.config }}/${{ matrix.variant }}
 
-      - name: create AVD and generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          profile: Nexus 4
-          sdcard-path-or-size: 512M
-          api-level: ${{ env.api-level }}
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: echo "Generated AVD snapshot for caching."
+      - name: Build
+        run: |
+          ./gradlew assemble${{ env.flavour }}${{ env.config }} :app:assemble${{ env.flavour }}${{ env.config }}AndroidTest -PdisablePreDex
 
       - name: Screenshot Tests
-        id: screenshotTests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          profile: Nexus 4
-          sdcard-path-or-size: 512M
-          api-level: ${{ env.api-level }}
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: |
-            touch logcat.log
-            chmod 777 logcat.log
-            adb logcat > logcat.log &
-            ./gradlew ${{ env.flavour }}${{ env.config }}ExecuteScreenshotTests -Precord -PdirectorySuffix=${{ matrix.variant }}
-
-            changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
-
-      - name: Check snapshot changes
-        id: checkSnapshotChanges
-        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message != 'Record snapshots' }}
-        run: ./scripts/check-no-changes.sh
+        run: |
+          gcloud firebase test android run \
+            --type instrumentation \
+            --app ./app/build/outputs/apk/oss/debug/app-oss-debug.apk \
+            --test ./app/build/outputs/apk/androidTest/debug/app-oss-debug-androidTest.apk \
+            --device model=Nexus4,version=26
 
       - name: Upload Screenshot Tests Artifact
         if: ${{ failure() }}

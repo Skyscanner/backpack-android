@@ -20,6 +20,7 @@ jobs:
       statuses: write
       pull-requests: write
       contents: write
+      id-token: write
     uses: ./.github/workflows/_build.yml
 
   Dependabot:
