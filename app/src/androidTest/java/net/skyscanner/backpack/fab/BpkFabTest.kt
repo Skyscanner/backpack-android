@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.fab
 
-import android.os.Looper
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
@@ -49,9 +48,6 @@ class BpkFabTest : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestFab_CustomIcon_Disabled() {
-    if (Looper.myLooper() == null) {
-      Looper.prepare()
-    }
     fab.setImageResource(R.drawable.bpk_search)
     fab.isEnabled = false
     snap(fab)

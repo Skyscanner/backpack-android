@@ -29,6 +29,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.facebook.testing.screenshot.ViewHelpers
 import com.karumi.shot.ScreenshotTest
 import net.skyscanner.backpack.SnapshotUtil.screenshotName
+import org.junit.Before
 
 open class BpkSnapshotTest : ScreenshotTest {
 
@@ -38,6 +39,13 @@ open class BpkSnapshotTest : ScreenshotTest {
 
   private val variant = BpkTestVariant.current
   var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
+
+  @Before
+  fun initLooper() {
+    if (Looper.myLooper() == null) {
+      Looper.prepare()
+    }
+  }
 
   private fun setupView(view: View) {
     runOnUi {
@@ -50,9 +58,6 @@ open class BpkSnapshotTest : ScreenshotTest {
   }
 
   protected fun snap(view: View, tags: List<Any> = emptyList()) {
-    if (Looper.myLooper() == null) {
-      Looper.prepare()
-    }
     setupView(view)
     compareScreenshot(wrapMeasuredViewWithBackground(view), height, width, screenshotName(tags))
   }

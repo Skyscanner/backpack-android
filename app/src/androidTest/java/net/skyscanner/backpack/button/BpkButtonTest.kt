@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.button
 
-import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
@@ -165,9 +164,6 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     @ColorRes background: Int? = null,
     content: () -> View,
   ) {
-    if (Looper.myLooper() == null) {
-      Looper.prepare()
-    }
     val wrapper = FrameLayout(testContext).apply {
       layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
         .apply { gravity = Gravity.TOP or Gravity.START }

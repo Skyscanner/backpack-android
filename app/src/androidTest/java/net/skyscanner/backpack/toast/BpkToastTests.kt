@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.toast
 
-import android.os.Looper
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -36,9 +35,6 @@ class BpkToastTests : BpkSnapshotTest() {
 
   @Test
   fun screenshotTestToast_Default() {
-    if (Looper.myLooper() == null) {
-      Looper.prepare()
-    }
     val toast = BpkToast.makeText(testContext, "Test", BpkToast.LENGTH_SHORT)
     toast.show()
     snap(toast.view!!)

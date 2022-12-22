@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.nudger
 
-import android.os.Looper
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import org.junit.Before
@@ -32,9 +31,6 @@ class BpkNudgerTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    if (Looper.myLooper() == null) {
-      Looper.prepare()
-    }
     nudger = BpkNudger(testContext)
     setDimensions(50, 150)
   }
