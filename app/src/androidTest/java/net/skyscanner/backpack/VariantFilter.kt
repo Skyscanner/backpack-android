@@ -24,14 +24,16 @@ import org.junit.runner.Description
 @Suppress("unused")
 internal class VariantFilter : AbstractFilter() {
   override fun evaluateTest(description: Description): Boolean {
-    return if (description.annotations.filterIsInstance<Variants>().isNotEmpty()) {
-      val condition = description.getAnnotation(Variants::class.java)!!
-      condition.variants.contains(BpkTestVariant.current)
-    } else if (description.testClass.annotations.filterIsInstance<Variants>().isNotEmpty()) {
-      val condition = description.testClass.getAnnotation(Variants::class.java)!!
-      condition.variants.contains(BpkTestVariant.current)
-    } else {
-      true
+    return when {
+        description.annotations.filterIsInstance<Variants>().isNotEmpty() -> {
+          val condition = description.getAnnotation(Variants::class.java)!!
+          condition.variants.contains(BpkTestVariant.current)
+        }
+        description.testClass.annotations.filterIsInstance<Variants>().isNotEmpty() -> {
+          val condition = description.testClass.getAnnotation(Variants::class.java)!!
+          condition.variants.contains(BpkTestVariant.current)
+        }
+        else -> true
     }
   }
 
