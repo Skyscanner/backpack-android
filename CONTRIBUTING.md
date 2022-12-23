@@ -103,9 +103,9 @@ Each test function will result in a separate snapshot test - try to  keep the te
 
 Wrap your component with the correct states in the `snap` function to take the snapshot. There are various configurations supported:
 
-To set the dimension for your snapshot use the `setDimensions` function for View or `snapshotSize` property for Compose in the `setup()` or test function. In compose you can alternatively use the `size` property on the `snap` function.
+To set the dimension for your snapshot use the `width` and/or `height` property on the `snap()` function.
 
-To set the background colour use the `setBackground` function for View or `background` property on the `snap` function for Compose. By default the snapshots will have the `canvas` background.
+To set the background colour use the `background` property on the `snap` function. By default the snapshots will have the `canvas` background.
 
 By default snapshot tests run on 4 variants - default, dark mode, RTL and themed (skipped for compose). In some cases you may want to only run a snapshot test on some variants - for example if a component has many different states without layout changes you may want to consider skipping RTL.
 You can do this by adding the `@Variant` annotation to either the test class (applies to all tests in class) or function with the desired variants, like this:
@@ -114,7 +114,8 @@ You can do this by adding the `@Variant` annotation to either the test class (ap
 @Variant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
 ```
 
-For some more complex components with many different types you may want to make use of the `Parameterized` test runner to test all variants. To ensure snapshots get saved for all parameters use the `tags` property on the `snap` function. For an example look at `BpkButtonTest`.
+For some more complex components with many different types you may want to make use of the `Parameterized` test runner to test all variants.
+To ensure snapshots get saved for all parameters pass the `tags` property in the `BpkSnapshotTest` constructor. For an example look at `BpkButtonTest`.
 
 #### Verifying changes
 After adding new snapshot tests or making UI changes, run
