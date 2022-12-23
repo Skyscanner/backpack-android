@@ -120,7 +120,7 @@ For some more complex components with many different types you may want to make 
 After adding new snapshot tests or making UI changes, run
 
 ```
- ./scripts/record_screenshot_tests.sh
+ ./scripts/record_snapshot_tests.sh
 ```
 
 This will generate the latest snapshots. Verify the changes & generated snapshots are as expected and commit the changes.

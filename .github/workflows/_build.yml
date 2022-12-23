@@ -132,8 +132,8 @@ jobs:
         id: get_head_commit_message
         run: echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
 
-  Screenshots:
-    name: Screenshots tests
+  Snapshots:
+    name: Snapshot tests
     runs-on: macos-latest
     needs: CheckCommitMessage
     permissions:
@@ -186,8 +186,8 @@ jobs:
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
-      - name: Screenshot Tests
-        id: screenshotTests
+      - name: Snapshots Tests
+        id: snapshotTests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           profile: Nexus 4
@@ -209,7 +209,7 @@ jobs:
         if: ${{ needs.CheckCommitMessage.outputs.head-commit-message != 'Record snapshots' }}
         run: ./scripts/check-no-changes.sh
 
-      - name: Upload Screenshot Tests Artifact
+      - name: Upload Snapshot Tests Artifact
         if: ${{ failure() }}
         uses: actions/upload-artifact@v3
         with:
@@ -225,16 +225,16 @@ jobs:
           path: logcat.log
           retention-days: 5
 
-      - name: Notify PR of screenshots changes
-        if: ${{ (failure() || needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots') && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+      - name: Notify PR of snapshot changes
+        if: ${{ (failure() || needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots') && steps.snapshotTests.outputs.CHANGED_FILES != '' }}
         uses: actions/github-script@v6
         with:
           script: |
             var body;
             if ("${{ needs.CheckCommitMessage.outputs.head-commit-message }}" != "Record snapshots") {
-              body = `### '${{ matrix.variant }}' files were changed.\nIf these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.\n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
+              body = `### '${{ matrix.variant }}' files were changed.\nIf these changes are intentional please run \`./scripts/record_snapshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.\n\n>'${{ steps.snapshotTests.outputs.CHANGED_FILES }}'`;
             } else {
-              body = `### '${{ matrix.variant }}' snapshots were updated. Please verify the changes match the expected layout. \n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
+              body = `### '${{ matrix.variant }}' snapshots were updated. Please verify the changes match the expected layout. \n\n>'${{ steps.snapshotTests.outputs.CHANGED_FILES }}'`;
             }
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -244,7 +244,7 @@ jobs:
             })
 
       - name: Commit changes
-        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots' && steps.snapshotTests.outputs.CHANGED_FILES != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
