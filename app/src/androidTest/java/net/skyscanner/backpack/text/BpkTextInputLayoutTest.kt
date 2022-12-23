@@ -20,7 +20,6 @@ package net.skyscanner.backpack.text
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -37,44 +36,38 @@ class BpkTextInputLayoutTest : BpkSnapshotTest() {
     addView(textField)
   }
 
-  @Before
-  fun setup() {
-    setBackground(android.R.color.transparent)
-    setDimensions(120, 200)
-  }
-
   @Test
-  fun screenshotTestTextInputLayout_Default() {
+  fun default() {
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextInputLayout_Disabled() {
+  fun disabled() {
     textField.isEnabled = false
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextInputLayout_Error() {
+  fun error() {
     subject.error = "Error"
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextInputLayout_Helper() {
+  fun helper() {
     subject.helperText = "Helper"
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextInputLayout_HelperAndError() {
+  fun helperAndError() {
     subject.error = "Error"
     subject.helperText = "Helper"
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextInputLayout_ErrorNoLabel() {
+  fun errorNoLabel() {
     subject.label = null
     subject.error = "Error"
     snap(subject)

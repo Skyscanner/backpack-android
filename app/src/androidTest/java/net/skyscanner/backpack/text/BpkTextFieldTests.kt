@@ -22,7 +22,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -36,50 +35,44 @@ class BpkTextFieldTests : BpkSnapshotTest() {
     it.setText("Text")
   }
 
-  @Before
-  fun setup() {
-    setBackground(android.R.color.transparent)
-    setDimensions(60, 200)
-  }
-
   @Test
-  fun screenshotTestTextField_Default() {
+  fun default() {
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextField_Hint() {
+  fun hint() {
     subject.setText("")
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextField_Disabled() {
+  fun disabled() {
     subject.isEnabled = false
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextField_IconStart() {
+  fun iconStart() {
     subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextField_IconEnd() {
+  fun iconEnd() {
     subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextField_IconStart_withTint() {
+  fun iconStart_withTint() {
     subject.setText("")
     subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestTextField_IconEnd_withTint() {
+  fun iconEnd_withTint() {
     subject.setText("")
     subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)

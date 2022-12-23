@@ -20,7 +20,6 @@ package net.skyscanner.backpack.slider
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -29,29 +28,24 @@ class BpkSliderTest : BpkSnapshotTest() {
 
   private val slider = BpkSlider(testContext)
 
-  @Before
-  fun setup() {
-    setDimensions(40, 300)
-  }
-
   @Test
-  fun screenshotTestSlider_Default() {
+  fun default() {
     slider.value = 0.5f
-    snap(slider)
+    snap(slider, width = 200)
   }
 
   @Test
-  fun screenshotTestSlider_Stepped() {
+  fun stepped() {
     slider.valueTo = 100f
     slider.value = 10f
     slider.stepSize = 10f
-    snap(slider)
+    snap(slider, width = 200)
   }
 
   @Test
-  fun screenshotTestSlider_Range() {
+  fun range() {
     slider.valueTo = 100f
     slider.setValues(25f, 75f)
-    snap(slider)
+    snap(slider, width = 200)
   }
 }

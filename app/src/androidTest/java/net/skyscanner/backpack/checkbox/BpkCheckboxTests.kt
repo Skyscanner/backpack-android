@@ -20,7 +20,6 @@ package net.skyscanner.backpack.checkbox
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -31,30 +30,25 @@ class BpkCheckboxTests : BpkSnapshotTest() {
     text = "Checkbox"
   }
 
-  @Before
-  fun setup() {
-    setDimensions(40, 120)
-  }
-
   @Test
-  fun screenshotTestCheckbox_Default() {
+  fun default() {
     snap(checkbox)
   }
 
   @Test
-  fun screenshotTestCheckbox_Checked() {
+  fun checked() {
     checkbox.isChecked = true
     snap(checkbox)
   }
 
   @Test
-  fun screenshotTestCheckbox_Disabled() {
+  fun disabled() {
     checkbox.isEnabled = false
     snap(checkbox)
   }
 
   @Test
-  fun screenshotTestCheckbox_CheckedDisabled() {
+  fun checkedDisabled() {
     checkbox.isEnabled = false
     checkbox.isChecked = true
     snap(checkbox)

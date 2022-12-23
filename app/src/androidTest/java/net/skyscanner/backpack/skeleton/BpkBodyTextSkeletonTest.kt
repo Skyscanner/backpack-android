@@ -20,21 +20,15 @@ package net.skyscanner.backpack.skeleton
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkBodyTextSkeletonTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(80, 200)
-  }
-
   @Test
   fun default() {
     val skeleton = BpkBodyTextSkeleton(testContext)
-    snap(skeleton)
+    snap(skeleton, width = 200, height = 80)
   }
 }

@@ -21,21 +21,14 @@ package net.skyscanner.backpack.panel
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkPanelTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setBackground(android.R.color.transparent)
-    setDimensions(100, 100)
-  }
-
   @Test
-  fun screenshotTestPanelDefault() {
+  fun default() {
     val panel = BpkPanel(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -44,7 +37,7 @@ class BpkPanelTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestPanelWithPadding() {
+  fun withPadding() {
     val panel = BpkPanel(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -54,7 +47,7 @@ class BpkPanelTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestPanelWithoutPadding() {
+  fun withoutPadding() {
     val panel = BpkPanel(testContext)
     val text = TextView(testContext)
     text.text = "message"

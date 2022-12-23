@@ -33,7 +33,6 @@ import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -43,11 +42,6 @@ class BpkDialogTest : BpkSnapshotTest() {
 
   @get:Rule
   val rule = activityScenarioRule<AppCompatActivity>()
-
-  @Before
-  fun setUp() {
-    setDimensions(600, 420)
-  }
 
   @Test
   fun default() {
@@ -223,31 +217,20 @@ class BpkDialogTest : BpkSnapshotTest() {
       }
     }
 
-    var wrapper: FrameLayout? = null
+    var view: View? = null
     onView(withId(R.id.dialog_buttons_root))
       .inRoot(isDialog())
       .check { _, _ ->
-        // This is not ideal but I couldn't find a way to snapshot the whole window and we need contrast to
-        // see the rounded corners
-
         rule.scenario.waitForActivity().also { activity ->
           runOnUi {
             val rootView = dialog.window!!.decorView
             activity.windowManager.removeView(rootView)
 
-            wrapper = FrameLayout(activity).apply {
-              layoutParams = FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT
-              )
-              setPadding(20, 20, 20, 20)
-              setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
-              addView(rootView)
-            }
+            view = rootView
           }
         }
       }
-    snap(wrapper!!)
+    snap(view!!, background = R.color.bpkTextSecondary, padding = 0, width = 420, height = 600)
   }
 
   private fun View.findScrollView(): ScrollView? {

@@ -20,68 +20,62 @@ package net.skyscanner.backpack.rating
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkRatingScaleTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(100, 200)
-  }
-
   @Test
-  fun screenshotTestRating_ZeroToFive_Zero() {
+  fun zeroToFive_Zero() {
     val subject = createTestRating(testContext, scale = BpkRating.Scale.ZeroToFive, value = 0.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_ZeroToFive_Low() {
+  fun zeroToFive_Low() {
     val subject = createTestRating(testContext, scale = BpkRating.Scale.ZeroToFive, value = 1.5f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_ZeroToFive_LowBoundary() {
+  fun zeroToFive_LowBoundary() {
     val subject = createTestRating(testContext, scale = BpkRating.Scale.ZeroToFive, value = 2.999999f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_ZeroToFive_Medium() {
+  fun zeroToFive_Medium() {
     val subject = createTestRating(testContext, scale = BpkRating.Scale.ZeroToFive, value = 3.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_ZeroToFive_MediumBoundary() {
+  fun zeroToFive_MediumBoundary() {
     val subject = createTestRating(testContext, scale = BpkRating.Scale.ZeroToFive, value = 3.999999f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_ZeroToFive_High() {
+  fun zeroToFive_High() {
     val subject = createTestRating(testContext, scale = BpkRating.Scale.ZeroToFive, value = 4.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_ZeroToFive_Max() {
+  fun zeroToFive_Max() {
     val subject = createTestRating(testContext, scale = BpkRating.Scale.ZeroToFive, value = 5.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_ZeroToFive_clampsDown() {
+  fun zeroToFive_clampsDown() {
     val subject = createTestRating(testContext, scale = BpkRating.Scale.ZeroToFive, value = -10.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_ZeroToFive_clampsUp() {
+  fun zeroToFive_clampsUp() {
     val subject = createTestRating(testContext, scale = BpkRating.Scale.ZeroToFive, value = 10.0f)
     snap(subject)
   }

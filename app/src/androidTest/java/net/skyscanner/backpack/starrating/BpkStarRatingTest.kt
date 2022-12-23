@@ -20,7 +20,6 @@ package net.skyscanner.backpack.starrating
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -29,11 +28,6 @@ class BpkStarRatingTest : BpkSnapshotTest() {
 
   private val rating = BpkStarRating(testContext)
 
-  @Before
-  fun setup() {
-    setDimensions(16, 80)
-  }
-
   @Test
   fun default() {
     snap(rating)
@@ -41,7 +35,6 @@ class BpkStarRatingTest : BpkSnapshotTest() {
 
   @Test
   fun customMaxRatingIncreasing() {
-    setDimensions(16, 160)
     rating.maxRating = 5
     rating.maxRating = 10
     snap(rating)

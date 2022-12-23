@@ -27,7 +27,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -38,18 +37,13 @@ class BpkNavBarTest : BpkSnapshotTest() {
   @get:Rule
   val rule = activityScenarioRule<AppCompatActivity>()
 
-  @Before
-  fun setup() {
-    setDimensions(400, 400)
-  }
-
   @Test
   fun default() {
     init()
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ -> view = v }
-    snap(view!!)
+    snap(view!!, width = 400)
   }
 
   @Test
@@ -58,7 +52,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ -> view = v }
-    snap(view!!)
+    snap(view!!, width = 400)
   }
 
   @Test
@@ -67,7 +61,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ -> view = v }
-    snap(view!!)
+    snap(view!!, width = 400)
   }
 
   @Test
@@ -76,7 +70,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ -> view = v }
-    snap(view!!)
+    snap(view!!, width = 400)
   }
 
   @Test
@@ -85,7 +79,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ -> view = v }
-    snap(view!!)
+    snap(view!!, width = 400)
   }
 
   @Test
@@ -94,7 +88,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ -> view = v }
-    snap(view!!)
+    snap(view!!, width = 400)
   }
 
   @Test
@@ -103,7 +97,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ -> view = v }
-    snap(view!!)
+    snap(view!!, width = 400)
   }
 
   @Test
@@ -112,7 +106,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
     var view: View? = null
     onView(ViewMatchers.withId(R.id.appBar))
       .check { v, _ -> view = v }
-    snap(view!!)
+    snap(view!!, width = 400)
   }
 
   private fun init(

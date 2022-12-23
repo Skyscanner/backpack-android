@@ -44,7 +44,6 @@ import net.skyscanner.backpack.demo.R
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matchers.greaterThanOrEqualTo
 import org.hamcrest.Matchers.lessThanOrEqualTo
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -57,14 +56,9 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
   private lateinit var bottomSheetBehaviour: BpkBottomSheetBehaviour<BpkBottomSheet>
 
-  @Before
-  fun setup() {
-    setDimensions(200, 200)
-  }
-
   @Test
   fun default() {
-    snap(setupBottomSheet())
+    snap(setupBottomSheet(), width = 200, height = 200, padding = 0)
   }
 
   @Test
@@ -85,7 +79,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
     InstrumentationRegistry.getInstrumentation().waitForIdleSync()
     var bottomSheet: View? = null
     Espresso.onView(withId(TEST_ID)).check { view, _ -> bottomSheet = view }
-    snap(bottomSheet!!)
+    snap(bottomSheet!!, width = 200, height = 200, padding = 0)
     IdlingRegistry.getInstance().unregister(callback)
   }
 

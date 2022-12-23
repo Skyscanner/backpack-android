@@ -21,17 +21,11 @@ package net.skyscanner.backpack.badge
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkBadgeTest : BpkSnapshotTest() {
-
-  @Before
-  fun setup() {
-    setDimensions(32, 96)
-  }
 
   @Test
   fun default() {
@@ -58,11 +52,10 @@ class BpkBadgeTest : BpkSnapshotTest() {
 
   @Test
   fun inverse() {
-    setBackground(R.color.bpkCorePrimary)
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Inverse
     badge.text = "Message"
-    snap(badge)
+    snap(badge, background = R.color.bpkCorePrimary)
   }
 
   @Test
@@ -91,10 +84,9 @@ class BpkBadgeTest : BpkSnapshotTest() {
 
   @Test
   fun outline() {
-    setBackground(R.color.bpkCorePrimary)
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Outline
     badge.text = "Message"
-    snap(badge)
+    snap(badge, background = R.color.bpkCorePrimary)
   }
 }

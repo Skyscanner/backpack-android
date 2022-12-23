@@ -18,24 +18,21 @@
 
 package net.skyscanner.backpack
 
-import android.content.Context
-import android.graphics.Canvas
 import android.os.Looper
 import android.view.View
+import android.view.View.MeasureSpec.makeMeasureSpec
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.annotation.Dimension.Companion.DP
+import androidx.core.view.setPadding
 import androidx.test.platform.app.InstrumentationRegistry
-import com.facebook.testing.screenshot.ViewHelpers
 import com.karumi.shot.ScreenshotTest
 import net.skyscanner.backpack.SnapshotUtil.screenshotName
 import org.junit.Before
 
-open class BpkSnapshotTest : ScreenshotTest {
-
-  private var height = 100
-  private var width = 100
-  private var background = R.color.bpkCanvas
+open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : ScreenshotTest {
 
   private val variant = BpkTestVariant.current
   var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
@@ -47,55 +44,57 @@ open class BpkSnapshotTest : ScreenshotTest {
     }
   }
 
-  private fun setupView(view: View) {
+  protected fun snap(
+    view: View,
+    @ColorRes background: Int = R.color.bpkCanvas,
+    @Dimension(unit = DP) width: Int? = null,
+    @Dimension(unit = DP) height: Int? = null,
+    @Dimension(unit = DP) padding: Int = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd),
+    // wrapView should almost always be true - in some rare cases (like Snackbar) wrapping the view may break.
+    // padding + background won't be applied if used
+    wrapView: Boolean = true,
+  ) {
     runOnUi {
       view.layoutDirection = testContext.resources.configuration.layoutDirection
-      ViewHelpers.setupView(view)
-        .setExactHeightDp(height)
-        .setExactWidthDp(width)
-        .layout()
     }
+    val wrappedView = wrapMeasuredViewWithBackground(
+      view = view,
+      background = background,
+      padding = padding,
+      wrapView = wrapView,
+    )
+    wrappedView.measure(measureSpec(width), measureSpec(height))
+    compareScreenshot(
+      view = wrappedView,
+      widthInPx = wrappedView.measuredWidth,
+      heightInPx = wrappedView.measuredHeight,
+      name = screenshotName(tags),
+    )
   }
 
-  protected fun snap(view: View, tags: List<Any> = emptyList()) {
-    setupView(view)
-    compareScreenshot(wrapMeasuredViewWithBackground(view), height, width, screenshotName(tags))
+  private fun measureSpec(size: Int?): Int {
+    val dimenSize = if (size == null) {
+      0
+    } else {
+      (size * testContext.resources.displayMetrics.density).toInt()
+    }
+    return makeMeasureSpec(dimenSize, if (size == null) View.MeasureSpec.UNSPECIFIED else View.MeasureSpec.EXACTLY)
   }
 
-  protected fun setDimensions(@Dimension(unit = DP) height: Int, @Dimension(unit = DP) width: Int) {
-    this.height = height
-    this.width = width
-  }
-
-  protected fun setBackground(@ColorRes background: Int) {
-    this.background = background
-  }
-
-  private fun wrapMeasuredViewWithBackground(view: View): View {
-    val result = ViewMirror(view.context, view)
+  private fun wrapMeasuredViewWithBackground(view: View, background: Int, padding: Int, wrapView: Boolean): View {
+    if (!wrapView) {
+      return view
+    }
+    val result = FrameLayout(view.context)
+    if (view.parent != null) {
+      runOnUi {
+        (view.parent as ViewGroup).removeView(view)
+      }
+    }
+    result.addView(view)
     result.setBackgroundResource(background)
+    result.setPadding(padding)
 
     return result
-  }
-
-  // adding view to FrameLayout or creating custom ViewGroup breaks many tests for some reason.
-  // instead we use custom drawing here via proxy view
-  private class ViewMirror constructor(
-    context: Context,
-    private val view: View,
-  ) : View(context) {
-
-    init {
-      view.jumpDrawablesToCurrentState() // this is for views with custom drawable state, such as checkboxes, radios, etc
-    }
-
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-      setMeasuredDimension(view.measuredWidth, view.measuredHeight) // we want the canvas to have the exact same size
-    }
-
-    override fun dispatchDraw(canvas: Canvas) {
-      super.dispatchDraw(canvas)
-      view.draw(canvas)
-    }
   }
 }

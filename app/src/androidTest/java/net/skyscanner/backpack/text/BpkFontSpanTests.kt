@@ -23,7 +23,6 @@ import android.text.SpannableStringBuilder
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -32,26 +31,21 @@ class BpkFontSpanTests : BpkSnapshotTest() {
 
   private val textView = TextView(testContext)
 
-  @Before
-  fun setup() {
-    setDimensions(40, 120)
-  }
-
   @Test
-  fun screenshotTestFontSpan_Default() {
+  fun default() {
     textView.text = "Test"
     snap(textView)
   }
 
   @Test
-  fun screenshotTestFontSpan_Custom() {
+  fun custom() {
     val span = BpkFontSpan(testContext, BpkText.TextStyle.Heading2)
     textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     snap(textView)
   }
 
   @Test
-  fun screenshotTestFontSpan_Injected() {
+  fun injected() {
     val font = BpkText.getFont(testContext, BpkText.TextStyle.Heading2)
     textView.text = SpannableStringBuilder().append("Test", BpkFontSpan(font), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     snap(textView)

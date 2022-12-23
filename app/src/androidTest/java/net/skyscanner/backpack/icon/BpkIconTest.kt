@@ -29,19 +29,13 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.Variants
-import org.junit.Before
 import org.junit.Test
 
 @Variants(BpkTestVariant.Default)
 class BpkIconTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(600, 300)
-  }
-
   @Test
-  fun testAllSmallIcons() {
+  fun allSmallIcons() {
     val icons = getIcons(true)
     val layout = setupLayout(icons)
 
@@ -49,7 +43,7 @@ class BpkIconTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun testAllLargeIcons() {
+  fun allLargeIcons() {
     val icons = getIcons(false)
     val layout = setupLayout(icons)
 

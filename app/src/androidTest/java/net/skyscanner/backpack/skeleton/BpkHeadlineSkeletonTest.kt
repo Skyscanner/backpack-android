@@ -21,37 +21,31 @@ package net.skyscanner.backpack.skeleton
 import android.view.ViewGroup
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkHeadlineSkeletonTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(50, 100)
-  }
-
   @Test
   fun small() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Small
-    snap(skeleton)
+    snap(skeleton, width = 100, height = 30)
   }
 
   @Test
   fun medium() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Medium
-    snap(skeleton)
+    snap(skeleton, width = 100, height = 40)
   }
 
   @Test
   fun large() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Large
-    snap(skeleton)
+    snap(skeleton, width = 100, height = 50)
   }
 
   @Test
@@ -62,6 +56,6 @@ class BpkHeadlineSkeletonTest : BpkSnapshotTest() {
       ViewGroup.LayoutParams.MATCH_PARENT,
       (testContext.resources.displayMetrics.density * 30).toInt()
     )
-    snap(skeleton)
+    snap(skeleton, width = 100, height = 50)
   }
 }

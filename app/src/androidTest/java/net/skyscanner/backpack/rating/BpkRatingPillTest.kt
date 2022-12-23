@@ -20,7 +20,6 @@ package net.skyscanner.backpack.rating
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -29,58 +28,53 @@ class BpkRatingPillTest : BpkSnapshotTest() {
 
   private val style = BpkRating.Style.Pill
 
-  @Before
-  fun setup() {
-    setDimensions(150, 300)
-  }
-
   @Test
-  fun screenshotTestRating_Default() {
+  fun default() {
     val subject = createTestRating(testContext, style = style)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_Icon() {
+  fun icon() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Icon)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_ExtraSmall() {
+  fun extraSmall() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.ExtraSmall)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_Small() {
+  fun small() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Small)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_Base() {
+  fun base() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Base)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_Large() {
+  fun large() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_TitleOverflow() {
+  fun titleOverflow() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
     subject.title = { "Loooooooooooooooong title" }
-    snap(subject)
+    snap(subject, width = 150)
   }
 
   @Test
-  fun screenshotTestRating_SubtitleOverflow() {
+  fun subtitleOverflow() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
     subject.subtitle = { "Looooooooooooooooooooooooooooong subtitle" }
-    snap(subject)
+    snap(subject, width = 150)
   }
 }

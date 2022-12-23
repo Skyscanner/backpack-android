@@ -18,29 +18,23 @@
 
 package net.skyscanner.backpack.chip
 
-import android.widget.FrameLayout
 import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkChipTest : BpkSnapshotTest() {
-  @Before
-  fun setup() {
-    setDimensions(36, 100)
-  }
 
   @Test
   fun default() {
     val view = BpkChip(testContext)
     view.text = "tag"
-    snap(view.wrapInParent())
+    snap(view)
   }
 
   @Test
@@ -48,7 +42,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "tag"
     view.disabled = true
-    snap(view.wrapInParent())
+    snap(view)
   }
 
   @Test
@@ -56,28 +50,26 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "tag"
     view.isSelected = true
-    snap(view.wrapInParent())
+    snap(view)
   }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun onDark() {
-    setBackground(R.color.bpkTextOnLight)
     val view = BpkChip(testContext)
     view.text = "tag"
     view.style = BpkChip.Style.OnDark
-    snap(view.wrapInParent())
+    snap(view, background = R.color.bpkTextOnLight)
   }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun onDarkSelected() {
-    setBackground(R.color.bpkTextOnLight)
     val view = BpkChip(testContext)
     view.text = "tag"
     view.style = BpkChip.Style.OnDark
     view.isSelected = true
-    snap(view.wrapInParent())
+    snap(view, R.color.bpkTextOnLight)
   }
 
   @Test
@@ -85,7 +77,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "tag"
     view.type = BpkChip.Type.Select
-    snap(view.wrapInParent())
+    snap(view)
   }
 
   @Test
@@ -93,7 +85,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "tag"
     view.type = BpkChip.Type.Dismiss
-    snap(view.wrapInParent())
+    snap(view)
   }
 
   @Test
@@ -101,7 +93,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
-    snap(view.wrapInParent())
+    snap(view)
   }
 
   @Test
@@ -110,7 +102,7 @@ class BpkChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.type = BpkChip.Type.Select
-    snap(view.wrapInParent())
+    snap(view)
   }
 
   @Test
@@ -119,7 +111,7 @@ class BpkChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.isSelected = true
-    snap(view.wrapInParent())
+    snap(view)
   }
 
   @Test
@@ -129,7 +121,7 @@ class BpkChipTest : BpkSnapshotTest() {
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.type = BpkChip.Type.Select
     view.isSelected = true
-    snap(view.wrapInParent())
+    snap(view)
   }
 
   @Test
@@ -138,15 +130,6 @@ class BpkChipTest : BpkSnapshotTest() {
     view.text = "tag"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.disabled = true
-    snap(view.wrapInParent())
-  }
-
-  private fun BpkChip.wrapInParent(): FrameLayout {
-    val parent = FrameLayout(context)
-    parent.addView(
-      this,
-      FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
-    )
-    return parent
+    snap(view)
   }
 }

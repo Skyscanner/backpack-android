@@ -23,7 +23,6 @@ import android.text.SpannableStringBuilder
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -36,13 +35,8 @@ class BpkLinksSpanTests : BpkSnapshotTest() {
 
   private val textView = TextView(testContext)
 
-  @Before
-  fun setup() {
-    setDimensions(20, 50)
-  }
-
   @Test
-  fun screenshotTestLinkSpan_Custom() {
+  fun custom() {
     val span = BpkLinkSpan(testContext, link, handler)
     textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
     snap(textView)

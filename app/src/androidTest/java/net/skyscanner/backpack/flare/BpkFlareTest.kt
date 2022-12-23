@@ -31,7 +31,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -48,13 +47,8 @@ class BpkFlareTest : BpkSnapshotTest() {
     scaleType = ImageView.ScaleType.CENTER_CROP
   }
 
-  @Before
-  fun setup() {
-    setDimensions(100, 300)
-  }
-
   @Test
-  fun screenshotTestFlareDefault() {
+  fun default() {
     snap(
       subject.apply {
         addView(imageView)
@@ -63,7 +57,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestFlareRounded() {
+  fun rounded() {
     snap(
       subject.apply {
         addView(imageView)
@@ -73,7 +67,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestFlarePointerPositionStart() {
+  fun pointerPositionStart() {
     snap(
       subject.apply {
         addView(imageView)
@@ -83,7 +77,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestFlarePointerPositionEnd() {
+  fun pointerPositionEnd() {
     snap(
       subject.apply {
         addView(imageView)
@@ -93,16 +87,17 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestFlareInsetPaddingMode() {
+  fun insetPaddingMode() {
     snap(
       setupViewForInsetPaddingTest(testContext) {
         subject.insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
-      }
+      },
+      width = 300,
     )
   }
 
   @Test
-  fun screenshotTestFlare_withPointerDirectionUP() {
+  fun withPointerDirectionUP() {
     snap(
       subject.apply {
         addView(imageView)
@@ -112,12 +107,13 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestFlare_withPaddingModeTop_andPointerDirectionUP() {
+  fun withPaddingModeTop_andPointerDirectionUP() {
     snap(
       setupViewForInsetPaddingTest(testContext) {
         subject.pointerDirection = BpkFlare.PointerDirection.UP
         subject.insetPaddingMode = BpkFlare.InsetPaddingMode.TOP
-      }
+      },
+      width = 300,
     )
   }
 
