@@ -62,7 +62,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, fl
     snap(background = { style.background() }) {
       BpkShareButton(
         contentDescription = "",
-        style = BpkCardButtonStyle.Default,
+        style = style,
         size = size,
         onClick = {}
       )
