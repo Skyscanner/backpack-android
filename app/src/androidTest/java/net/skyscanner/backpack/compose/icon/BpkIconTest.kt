@@ -19,14 +19,12 @@
 package net.skyscanner.backpack.compose.icon
 
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.LongArrowLeft
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -34,11 +32,6 @@ import org.junit.runner.RunWith
 class BpkIconTest : BpkSnapshotTest() {
 
   private val icon = BpkIcon.LongArrowLeft
-
-  @Before
-  fun setup() {
-    snapshotSize = IntSize(24, 24)
-  }
 
   @Test
   fun default() = snap {

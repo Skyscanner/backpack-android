@@ -34,8 +34,8 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.compose.BackpackPreview
 import net.skyscanner.backpack.demo.compose.DestructiveDialogExample
 import net.skyscanner.backpack.demo.compose.FlareDialogExample
 import net.skyscanner.backpack.demo.compose.ImageDialogEndAlignmentExample
@@ -137,7 +137,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   private fun record(content: @Composable () -> Unit) {
     rule.scenario.onActivity { activity ->
       activity.setContent {
-        BackpackPreview(
+        BackpackDemoTheme(
           content = content,
         )
       }

@@ -22,29 +22,24 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkDividedCardTest : BpkSnapshotTest() {
-
-  @Before
-  fun setup() {
-    snapshotSize = IntSize(450, 200)
-  }
 
   @Test
   fun cardWidthSmallerThanMinimum() {
@@ -78,7 +73,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
   fun cardWidthGreaterThanMinimum() {
     snap {
       BpkDividedCard(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.width(400.dp),
         primaryContent = {
           Image(
             modifier = Modifier
@@ -106,7 +101,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
   fun emptyCard() {
     snap {
       BpkDividedCard(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.width(400.dp),
         primaryContent = {
           Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
           BpkText(

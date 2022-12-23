@@ -18,31 +18,18 @@
 
 package net.skyscanner.backpack.compose.chip
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.IntSize
-import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Deals
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkChipTest : BpkSnapshotTest() {
-
-  @Before
-  fun setup() {
-    snapshotSize = IntSize(100, 32)
-  }
 
   @Test
   fun default() = snap {
@@ -76,30 +63,24 @@ class BpkChipTest : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun notSelected_OnDark() {
-    snap {
-      OnDarkBox {
-        BpkChip(text = "Chip", selected = false, style = BpkChipStyle.OnDark)
-      }
+    snap(background = { BpkTheme.colors.surfaceContrast }) {
+      BpkChip(text = "Chip", selected = false, style = BpkChipStyle.OnDark)
     }
   }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun selected_OnDark() {
-    snap {
-      OnDarkBox {
-        BpkChip(text = "Chip", selected = true, style = BpkChipStyle.OnDark)
-      }
+    snap(background = { BpkTheme.colors.surfaceContrast }) {
+      BpkChip(text = "Chip", selected = true, style = BpkChipStyle.OnDark)
     }
   }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabled_OnDark() {
-    snap {
-      OnDarkBox {
-        BpkChip(text = "Chip", enabled = false, style = BpkChipStyle.OnDark)
-      }
+    snap(background = { BpkTheme.colors.surfaceContrast }) {
+      BpkChip(text = "Chip", enabled = false, style = BpkChipStyle.OnDark)
     }
   }
 
@@ -133,10 +114,5 @@ class BpkChipTest : BpkSnapshotTest() {
     snap {
       BpkChip(text = "Chip", icon = BpkIcon.Deals, type = BpkChipType.Dismiss)
     }
-  }
-
-  @Composable
-  private fun OnDarkBox(modifier: Modifier = Modifier, content: @Composable BoxScope.() -> Unit) {
-    Box(modifier = modifier.background(BpkTheme.colors.textOnLight).fillMaxSize(), content = content)
   }
 }

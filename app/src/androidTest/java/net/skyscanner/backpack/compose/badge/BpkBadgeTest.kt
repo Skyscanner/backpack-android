@@ -23,7 +23,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -85,7 +85,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun inverse() {
-    snap(background = BpkColor.SkyBlue) {
+    snap(background = { BpkTheme.colors.surfaceContrast }) {
       BpkBadge(text = BpkBadgeType.Inverse.toString(), type = BpkBadgeType.Inverse)
     }
   }
@@ -93,7 +93,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun outline() {
-    snap(background = BpkColor.SkyBlue) {
+    snap(background = { BpkTheme.colors.surfaceContrast }) {
       BpkBadge(text = BpkBadgeType.Outline.toString(), type = BpkBadgeType.Outline)
     }
   }
