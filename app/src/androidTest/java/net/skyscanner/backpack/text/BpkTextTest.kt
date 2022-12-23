@@ -23,18 +23,12 @@ import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @Variants(BpkTestVariant.Default)
 class BpkTextTest : BpkSnapshotTest() {
-
-  @Before
-  fun setup() {
-    setDimensions(72, 180)
-  }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl, BpkTestVariant.Themed)
@@ -150,7 +144,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero1() {
-    setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 1"
     text.textStyle = BpkText.TextStyle.Hero1
@@ -159,7 +152,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero2() {
-    setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 2"
     text.textStyle = BpkText.TextStyle.Hero2
@@ -168,7 +160,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero3() {
-    setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 3"
     text.textStyle = BpkText.TextStyle.Hero3
@@ -177,7 +168,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero4() {
-    setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 4"
     text.textStyle = BpkText.TextStyle.Hero4
@@ -186,7 +176,6 @@ class BpkTextTest : BpkSnapshotTest() {
 
   @Test
   fun hero5() {
-    setDimensions(150, 400)
     val text = BpkText(testContext)
     text.text = "Hero 5"
     text.textStyle = BpkText.TextStyle.Hero5

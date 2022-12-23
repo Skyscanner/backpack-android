@@ -18,32 +18,22 @@
 
 package net.skyscanner.backpack.compose.price
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest() {
+class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.align)) {
 
   private val size = flavor.size
   private val align = flavor.align
 
   @Test
   fun priceOnly() {
-    capture {
+    snap {
       BpkPrice(
         price = stringResource(id = R.string.price_price),
         size = size,
@@ -54,7 +44,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest() {
 
   @Test
   fun priceTrailing() {
-    capture {
+    snap {
       BpkPrice(
         price = stringResource(id = R.string.price_price),
         trailingText = stringResource(id = R.string.price_trailing_text),
@@ -66,7 +56,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest() {
 
   @Test
   fun priceLineThroughTrailing() {
-    capture {
+    snap {
       BpkPrice(
         price = stringResource(id = R.string.price_price),
         trailingText = stringResource(id = R.string.price_trailing_text),
@@ -79,7 +69,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest() {
 
   @Test
   fun priceFull() {
-    capture {
+    snap {
       BpkPrice(
         price = stringResource(id = R.string.price_price),
         trailingText = stringResource(id = R.string.price_trailing_text),
@@ -88,26 +78,6 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest() {
         size = size,
         align = align
       )
-    }
-  }
-
-  private fun capture(
-    background: @Composable () -> Color = { Color.Unspecified },
-    content: @Composable () -> Unit,
-  ) {
-    snap(
-      size = IntSize(200, 200),
-      tags = listOf(size, align),
-    ) {
-      Box(
-        Modifier
-          .fillMaxSize()
-          .background(background())
-          .padding(BpkSpacing.Md),
-        contentAlignment = Alignment.TopStart,
-      ) {
-        content()
-      }
     }
   }
 

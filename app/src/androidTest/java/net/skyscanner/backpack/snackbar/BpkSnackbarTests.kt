@@ -34,7 +34,6 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
 import org.hamcrest.Matcher
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -45,11 +44,6 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   @get:Rule
   val rule = activityScenarioRule<AppCompatActivity>()
 
-  @Before
-  fun setUp() {
-    setDimensions(400, 350)
-  }
-
   private val root by unsafeLazy {
     FrameLayout(testContext).apply {
       rule.scenario.onActivity { activity ->
@@ -59,14 +53,14 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSnackbar_Default() {
+  fun default() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
     }
   }
 
   @Test
-  fun screenshotTestSnackbar_DefaultWithAction() {
+  fun defaultWithAction() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setAction("Action") {}
@@ -74,7 +68,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSnackbar_withTitle() {
+  fun withTitle() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setTitle("Title")
@@ -83,7 +77,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSnackbar_withIcon() {
+  fun withIcon() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setIcon(R.drawable.bpk_tick_circle)
@@ -92,7 +86,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSnackbar_withTitleAndIcon() {
+  fun withTitleAndIcon() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setTitle("Title")
@@ -102,7 +96,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSnackbar_iconOnly() {
+  fun iconOnly() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setAction(R.drawable.bpk_close, "Close") {}
@@ -110,7 +104,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSnackbar_iconOnly_withTitle() {
+  fun iconOnly_withTitle() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setTitle("Title")
@@ -119,7 +113,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSnackbar_iconOnly_withIcon() {
+  fun iconOnly_withIcon() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setIcon(R.drawable.bpk_tick_circle)
@@ -128,7 +122,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestSnackbar_iconOnly_withTitleAndIcon() {
+  fun iconOnly_withTitleAndIcon() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setTitle("Title")
@@ -150,7 +144,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
         rule.scenario.waitForActivity()
       }
 
-    snap(snackbar!!.rawSnackbar.view)
+    snap(snackbar!!.rawSnackbar.view, wrapView = false, width = 350)
   }
 }
 

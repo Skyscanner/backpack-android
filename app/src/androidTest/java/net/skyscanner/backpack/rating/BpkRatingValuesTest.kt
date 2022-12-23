@@ -20,68 +20,62 @@ package net.skyscanner.backpack.rating
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkRatingValuesTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(100, 200)
-  }
-
   @Test
-  fun screenshotTestRating_Zero() {
+  fun zero() {
     val subject = createTestRating(testContext, value = 0.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_Low() {
+  fun low() {
     val subject = createTestRating(testContext, value = 3.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_LowBoundary() {
+  fun lowBoundary() {
     val subject = createTestRating(testContext, value = 5.999999f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_Medium() {
+  fun medium() {
     val subject = createTestRating(testContext, value = 6.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_MediumBoundary() {
+  fun mediumBoundary() {
     val subject = createTestRating(testContext, value = 7.999999f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_High() {
+  fun high() {
     val subject = createTestRating(testContext, value = 8.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_Max() {
+  fun max() {
     val subject = createTestRating(testContext, value = 10.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_clampsDown() {
+  fun clampsDown() {
     val subject = createTestRating(testContext, value = -10.0f)
     snap(subject)
   }
 
   @Test
-  fun screenshotTestRating_clampsUp() {
+  fun clampsUp() {
     val subject = createTestRating(testContext, value = 20.0f)
     snap(subject)
   }

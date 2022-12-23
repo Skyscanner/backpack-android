@@ -20,29 +20,23 @@ package net.skyscanner.backpack.skeleton
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkImageSkeletonTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(200, 200)
-  }
-
   @Test
   fun square() {
     val skeleton = BpkImageSkeleton(testContext)
     skeleton.cornerType = BpkImageSkeleton.CornerType.Square
-    snap(skeleton)
+    snap(skeleton, width = 200, height = 200)
   }
 
   @Test
-  fun screenshotTestRoundedImageSkeleton() {
+  fun rounded() {
     val skeleton = BpkImageSkeleton(testContext)
     skeleton.cornerType = BpkImageSkeleton.CornerType.Rounded
-    snap(skeleton)
+    snap(skeleton, width = 200, height = 200)
   }
 }

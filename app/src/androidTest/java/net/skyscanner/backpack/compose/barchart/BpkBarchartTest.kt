@@ -20,13 +20,11 @@ package net.skyscanner.backpack.compose.barchart
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.data.BpkBarChartData
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.threeten.bp.Month
@@ -34,11 +32,6 @@ import kotlin.math.roundToInt
 
 @RunWith(AndroidJUnit4::class)
 class BpkBarchartTest : BpkSnapshotTest() {
-
-  @Before
-  fun setup() {
-    snapshotSize = IntSize(400, 300)
-  }
 
   @Test
   fun default() {

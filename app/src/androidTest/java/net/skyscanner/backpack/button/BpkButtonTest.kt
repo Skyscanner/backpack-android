@@ -18,22 +18,19 @@
 
 package net.skyscanner.backpack.button
 
-import android.view.Gravity
 import android.view.View
-import android.widget.FrameLayout
 import androidx.annotation.ColorRes
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import org.junit.Assume.assumeTrue
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
+class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, flavour.second)) {
 
   private val type: BpkButton.Type = flavour.first
   private val size: BpkButton.Size = flavour.second
@@ -46,19 +43,13 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
       }
     )
 
-  @Before
-  fun setup() {
-    setDimensions(64, 160)
-  }
-
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun text() {
-    capture(background = type.rowBackground()) {
-      BpkButton(testContext, type, size).apply {
-        text = "Button"
-      }
+    val view = BpkButton(testContext, type, size).apply {
+      text = "Button"
     }
+    snap(view, background = type.rowBackground() ?: R.color.bpkCanvas)
   }
 
   @Test
@@ -66,23 +57,21 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
   fun disabled() {
     assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
 
-    capture(background = type.rowBackground()) {
-      BpkButton(testContext, type, size).apply {
-        text = "Button"
-        isEnabled = false
-      }
+    val view = BpkButton(testContext, type, size).apply {
+      text = "Button"
+      isEnabled = false
     }
+    snap(view, background = type.rowBackground() ?: R.color.bpkCanvas)
   }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun loading() {
-    capture(background = type.rowBackground()) {
-      BpkButton(testContext, type, size).apply {
-        text = "Button"
-        loading = true
-      }
+    val view = BpkButton(testContext, type, size).apply {
+      text = "Button"
+      loading = true
     }
+    snap(view, background = type.rowBackground() ?: R.color.bpkCanvas)
   }
 
   @Test
@@ -91,14 +80,13 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
 
-    capture {
-      BpkButton(testContext, type, size).apply {
-        text = "Button"
-        icon = this@BpkButtonTest.icon
-        iconPosition = BpkButton.START
-        loading = true
-      }
+    val view = BpkButton(testContext, type, size).apply {
+      text = "Button"
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.START
+      loading = true
     }
+    snap(view)
   }
 
   @Test
@@ -107,13 +95,12 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
 
-    capture {
-      BpkButton(testContext, type, size).apply {
-        icon = this@BpkButtonTest.icon
-        iconPosition = BpkButton.ICON_ONLY
-        loading = true
-      }
+    val view = BpkButton(testContext, type, size).apply {
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.ICON_ONLY
+      loading = true
     }
+    snap(view)
   }
 
   @Test
@@ -122,13 +109,12 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
-    capture {
-      BpkButton(testContext, type, size).apply {
-        text = "Button"
-        icon = this@BpkButtonTest.icon
-        iconPosition = BpkButton.START
-      }
+    val view = BpkButton(testContext, type, size).apply {
+      text = "Button"
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.START
     }
+    snap(view)
   }
 
   @Test
@@ -137,13 +123,12 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
-    capture {
-      BpkButton(testContext, type, size).apply {
-        text = "Button"
-        icon = this@BpkButtonTest.icon
-        iconPosition = BpkButton.END
-      }
+    val view = BpkButton(testContext, type, size).apply {
+      text = "Button"
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.END
     }
+    snap(view)
   }
 
   @Test
@@ -152,32 +137,11 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest() {
     assumeTrue(type == BpkButton.Type.Primary) // the layout the same across different button types
     // icon is bigger on large size, so we need to test this
 
-    capture {
-      BpkButton(testContext, type, size).apply {
-        icon = this@BpkButtonTest.icon
-        iconPosition = BpkButton.ICON_ONLY
-      }
+    val view = BpkButton(testContext, type, size).apply {
+      icon = this@BpkButtonTest.icon
+      iconPosition = BpkButton.ICON_ONLY
     }
-  }
-
-  private fun capture(
-    @ColorRes background: Int? = null,
-    content: () -> View,
-  ) {
-    val wrapper = FrameLayout(testContext).apply {
-      layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-        .apply { gravity = Gravity.TOP or Gravity.START }
-    }
-    if (background != null) {
-      wrapper.setBackgroundColor(testContext.getColor(background))
-    }
-    val padding = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
-    wrapper.setPaddingRelative(padding, padding, padding, padding)
-    wrapper.addView(
-      content(),
-      FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
-    )
-    snap(wrapper, tags = listOf(type, size))
+    snap(view)
   }
 
   companion object {

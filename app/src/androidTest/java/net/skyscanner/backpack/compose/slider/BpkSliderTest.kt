@@ -19,30 +19,24 @@
 
 package net.skyscanner.backpack.compose.slider
 
-import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.DefaultSliderSample
 import net.skyscanner.backpack.demo.compose.RangeSliderSample
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkSliderTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    snapshotSize = IntSize(200, 200)
-  }
-
   @Test
-  fun default() = snap {
+  fun default() = snap(width = 200.dp) {
     DefaultSliderSample()
   }
 
   @Test
-  fun range() = snap {
+  fun range() = snap(width = 200.dp) {
     RangeSliderSample()
   }
 }

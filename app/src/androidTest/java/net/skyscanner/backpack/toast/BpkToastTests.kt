@@ -20,7 +20,6 @@ package net.skyscanner.backpack.toast
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -28,13 +27,8 @@ import org.junit.runner.RunWith
 @Suppress("DEPRECATION")
 class BpkToastTests : BpkSnapshotTest() {
 
-  @Before
-  fun setUp() {
-    setDimensions(42, 120)
-  }
-
   @Test
-  fun screenshotTestToast_Default() {
+  fun default() {
     val toast = BpkToast.makeText(testContext, "Test", BpkToast.LENGTH_SHORT)
     toast.show()
     snap(toast.view!!)

@@ -30,122 +30,121 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(700, 400)
     AndroidThreeTen.init(testContext)
   }
 
   @Test
-  fun screenshotTestCalendarDefault() {
+  fun default() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.Default)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestLabeledCalendarDefault() {
+  fun labeledCalendarDefault() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.Labeled)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarPast() {
+  fun past() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.Past)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarLeapFebruary() {
+  fun leapFebruary() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.LeapFebruary)
     calendar.setSelection(BpkCalendarTestCases.Selection.LeapFebruary)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarNonLeapFebruary() {
+  fun nonLeapFebruary() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.NonLeapFebruary)
     calendar.setSelection(BpkCalendarTestCases.Selection.NonLeapFebruary)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarTodayIsLastDayOfMonth() {
+  fun todayIsLastDayOfMonth() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.TodayIsLastDayOfMonth)
     calendar.setSelection(BpkCalendarTestCases.Selection.TodayIsLastDayOfMonth)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarTodayIsNewYear() {
+  fun todayIsNewYear() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.TodayIsNewYear)
     calendar.setSelection(BpkCalendarTestCases.Selection.TodayIsNewYear)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarWithRangeSet() {
+  fun withRangeSet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithRangeSetProgrammatically)
     calendar.setSelection(BpkCalendarTestCases.Selection.WithRangeSetProgrammatically)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarWithSingleDaySet() {
+  fun withSingleDaySet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithSingleDaySetProgrammatically)
     calendar.setSelection(BpkCalendarTestCases.Selection.WithSingleDaySetProgrammatically)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarWithDisabledDates() {
+  fun withDisabledDates() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarWithDisabledDates_SelectSingle() {
+  fun withDisabledDates_SelectSingle() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectSingle)
     calendar.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectSingle)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarWithDisabledDates_SelectRange() {
+  fun withDisabledDates_SelectRange() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectRange)
     calendar.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectRange)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarWithDisabledDates_SelectDisabledDate() {
+  fun withDisabledDates_SelectDisabledDate() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectDisabledDate)
     calendar.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectDisabledDate)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarWithWholeMonthButtonEnabled() {
+  fun withWholeMonthButtonEnabled() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthButtonEnabled)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 
   @Test
-  fun screenshotTestCalendarWithWholeMonthSet() {
+  fun withWholeMonthSet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
     calendar.setSelection(BpkCalendarTestCases.Selection.WithWholeMonthSetProgrammatically)
-    snap(calendar)
+    snap(calendar, padding = 0)
   }
 }

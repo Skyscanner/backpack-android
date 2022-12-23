@@ -28,7 +28,6 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,13 +38,8 @@ class BpkBarchartTests : BpkSnapshotTest() {
   @get:Rule
   val rule = activityScenarioRule<AppCompatActivity>()
 
-  @Before
-  fun setup() {
-    setDimensions(400, 400)
-  }
-
   @Test
-  fun screenshotTestBarChart_Empty() {
+  fun empty() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -57,7 +51,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBarChart_Half() {
+  fun half() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -69,7 +63,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBarChart_Full() {
+  fun full() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -81,7 +75,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBarChart_Overfilled() {
+  fun overfilled() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -93,7 +87,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBarChart_Inactive() {
+  fun inactive() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -105,7 +99,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBarChart_WithLegend() {
+  fun withLegend() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -122,7 +116,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBarChart_WithBadge() {
+  fun withBadge() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -136,7 +130,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun screenshotTestBarChart_WithoutBadge() {
+  fun withoutBadge() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -166,7 +160,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
       .block()
       .check { v, _ -> view = v }
 
-    snap(view!!)
+    snap(view!!, width = 400)
   }
 
   private fun createMonth(

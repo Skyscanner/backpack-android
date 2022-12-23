@@ -18,32 +18,26 @@
 
 package net.skyscanner.backpack.compose.bottomsheet
 
-import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkBottomSheetTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    snapshotSize = IntSize(300, 400)
-  }
-
   @Test
   fun default() {
-    snap {
+    snap(height = 400.dp, padding = 0.dp) {
       BottomSheetStory()
     }
   }
 
   @Test
   fun expanded() {
-    snap {
+    snap(height = 400.dp, padding = 0.dp) {
       BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)
     }
   }

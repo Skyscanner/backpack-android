@@ -32,23 +32,22 @@ class BpkNudgerTest : BpkSnapshotTest() {
   @Before
   fun setup() {
     nudger = BpkNudger(testContext)
-    setDimensions(50, 150)
   }
 
   @Test
-  fun screenshotTestNudger_minusDisabled() {
+  fun minusDisabled() {
     snap(nudger)
   }
 
   @Test
-  fun screenshotTestNudger_plusDisabled() {
+  fun plusDisabled() {
     nudger.value = 10
     nudger.maxValue = 10
     snap(nudger)
   }
 
   @Test
-  fun screenshotTestNudger_standard() {
+  fun standard() {
     nudger.value = 5
     snap(nudger)
   }

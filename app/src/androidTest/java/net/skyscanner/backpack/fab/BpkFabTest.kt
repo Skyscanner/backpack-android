@@ -21,7 +21,6 @@ package net.skyscanner.backpack.fab
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -30,24 +29,19 @@ class BpkFabTest : BpkSnapshotTest() {
 
   private val fab = BpkFab(testContext)
 
-  @Before
-  fun setup() {
-    setDimensions(56, 56)
-  }
-
   @Test
-  fun screenshotTestFab_Default() {
+  fun default() {
     snap(fab)
   }
 
   @Test
-  fun screenshotTestFab_CustomIcon() {
+  fun customIcon() {
     fab.setImageResource(R.drawable.bpk_search)
     snap(fab)
   }
 
   @Test
-  fun screenshotTestFab_CustomIcon_Disabled() {
+  fun customIcon_Disabled() {
     fab.setImageResource(R.drawable.bpk_search)
     fab.isEnabled = false
     snap(fab)

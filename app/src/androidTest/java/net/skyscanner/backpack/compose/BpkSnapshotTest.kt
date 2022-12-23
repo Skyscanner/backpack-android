@@ -18,29 +18,35 @@
 
 package net.skyscanner.backpack.compose
 
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
-import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 import androidx.test.core.app.launchActivity
 import androidx.test.platform.app.InstrumentationRegistry
 import com.karumi.shot.ScreenshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.SnapshotUtil.screenshotName
-import net.skyscanner.backpack.demo.compose.BackpackPreview
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.BackpackDemoTheme
 import org.junit.Rule
 
-open class BpkSnapshotTest : ScreenshotTest {
-
-  var snapshotSize = IntSize(200, 50)
+open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : ScreenshotTest {
 
   private val variant = BpkTestVariant.current
   var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
@@ -49,9 +55,10 @@ open class BpkSnapshotTest : ScreenshotTest {
   val composeTestRule = createEmptyComposeRule()
 
   protected fun snap(
-    size: IntSize = snapshotSize,
-    background: Color = Color.Unspecified,
-    tags: List<Any> = emptyList(),
+    background: @Composable () -> Color = { Color.Unspecified },
+    width: Dp = Dp.Unspecified,
+    height: Dp = Dp.Unspecified,
+    padding: Dp = BpkSpacing.Md,
     vararg providers: ProvidedValue<*>,
     assertion: ComposeTestRule.() -> Unit = {},
     content: @Composable () -> Unit,
@@ -59,13 +66,24 @@ open class BpkSnapshotTest : ScreenshotTest {
     val scenario = launchActivity<AppCompatActivity>()
     scenario.onActivity { activity ->
       activity.setContent {
-        activity.window.clearFlags(FLAG_TRANSLUCENT_STATUS)
-        BackpackPreview(
-          modifier = Modifier.size(size.width.dp, size.height.dp),
-          background = background,
-          providers = providers,
-          content = content,
+        @Suppress("DEPRECATION")
+        activity.window.clearFlags(
+          FLAG_TRANSLUCENT_STATUS or
+            SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+            SYSTEM_UI_FLAG_LAYOUT_STABLE
         )
+        BackpackDemoTheme {
+          CompositionLocalProvider(*providers) {
+            Box(
+              Modifier
+                .size(width, height)
+                .background(background().takeOrElse { BpkTheme.colors.canvas })
+                .padding(padding)
+            ) {
+              content()
+            }
+          }
+        }
       }
     }
     composeTestRule.assertion()

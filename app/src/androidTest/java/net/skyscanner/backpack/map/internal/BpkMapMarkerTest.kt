@@ -25,7 +25,6 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,46 +35,40 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
   @get:Rule
   val rule = activityScenarioRule<AppCompatActivity>()
 
-  @Before
-  fun setup() {
-    setBackground(android.R.color.transparent)
-    setDimensions(56, 128)
-  }
-
   @Test
-  fun screenshotTestMapMarker_Default() {
+  fun default() {
     val view = createMarker(0, true)
     snap(view)
   }
 
   @Test
-  fun screenshotTestMapMarker_Default_Selected() {
+  fun selected() {
     val view = createMarker(0, true)
     view.isSelected = true
     snap(view)
   }
 
   @Test
-  fun screenshotTestMapMarker_Default_NoPointer() {
+  fun noPointer() {
     val view = createMarker(0, false)
     snap(view)
   }
 
   @Test
-  fun screenshotTestMapMarker_WithIcon() {
+  fun withIcon() {
     val view = createMarker(R.drawable.bpk_map, true)
     snap(view)
   }
 
   @Test
-  fun screenshotTestMapMarker_WithIcon_Selected() {
+  fun withIcon_Selected() {
     val view = createMarker(R.drawable.bpk_map, true)
     view.isSelected = true
     snap(view)
   }
 
   @Test
-  fun screenshotTestMapMarker_WithIcon_NoPointer() {
+  fun withIcon_NoPointer() {
     val view = createMarker(R.drawable.bpk_map, false)
     snap(view)
   }

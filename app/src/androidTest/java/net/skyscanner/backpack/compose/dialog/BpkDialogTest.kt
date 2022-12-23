@@ -19,8 +19,6 @@
 package net.skyscanner.backpack.compose.dialog
 
 import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
@@ -29,13 +27,12 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.test.ext.junit.rules.activityScenarioRule
-import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.compose.BackpackPreview
 import net.skyscanner.backpack.demo.compose.DestructiveDialogExample
 import net.skyscanner.backpack.demo.compose.FlareDialogExample
 import net.skyscanner.backpack.demo.compose.ImageDialogEndAlignmentExample
@@ -45,7 +42,6 @@ import net.skyscanner.backpack.demo.compose.SuccessOneButtonDialogExample
 import net.skyscanner.backpack.demo.compose.SuccessThreeButtonsDialogExample
 import net.skyscanner.backpack.demo.compose.SuccessTwoButtonsDialogExample
 import net.skyscanner.backpack.demo.compose.WarningDialogExample
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -58,11 +54,6 @@ class BpkDialogTest : BpkSnapshotTest() {
 
   @get:Rule
   val rule = activityScenarioRule<AppCompatActivity>()
-
-  @Before
-  fun setup() {
-    setDimensions(height = 600, width = 420)
-  }
 
   @Test
   fun successOneButton() = record {
@@ -112,7 +103,6 @@ class BpkDialogTest : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun flare() {
-    setDimensions(height = 700, width = 420)
     record {
       FlareDialogExample()
     }
@@ -120,7 +110,6 @@ class BpkDialogTest : BpkSnapshotTest() {
 
   @Test
   fun imageStartAlignment() {
-    setDimensions(height = 700, width = 420)
     record {
       ImageDialogStartAlignmentExample()
     }
@@ -128,7 +117,6 @@ class BpkDialogTest : BpkSnapshotTest() {
 
   @Test
   fun imageEndAlignment() {
-    setDimensions(height = 700, width = 420)
     record {
       ImageDialogEndAlignmentExample()
     }
@@ -137,33 +125,14 @@ class BpkDialogTest : BpkSnapshotTest() {
   private fun record(content: @Composable () -> Unit) {
     rule.scenario.onActivity { activity ->
       activity.setContent {
-        BackpackPreview(
+        BackpackDemoTheme(
           content = content,
         )
       }
     }
 
     val view = composeTestRule.onNode(isDialog()).fetchRootView()
-
-    rule.scenario.waitForActivity().also { activity ->
-      // This is not ideal but we need to see the background contrast as well
-      var wrapper: FrameLayout? = null
-      runOnUi {
-        val viewRoot = view.parent as ViewGroup
-        viewRoot.removeView(view)
-
-        wrapper = FrameLayout(activity).apply {
-          layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT,
-            FrameLayout.LayoutParams.WRAP_CONTENT
-          )
-          setPadding(20, 20, 20, 20)
-          setBackgroundColor(activity.getColor(R.color.bpkTextSecondary))
-          addView(view)
-        }
-      }
-      snap(wrapper!!)
-    }
+    snap(view, background = R.color.bpkTextSecondary, width = 420)
   }
 
   private fun SemanticsNodeInteraction.fetchRootView(): View {

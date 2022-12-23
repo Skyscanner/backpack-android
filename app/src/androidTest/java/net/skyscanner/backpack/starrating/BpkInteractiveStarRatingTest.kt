@@ -20,7 +20,6 @@ package net.skyscanner.backpack.starrating
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -29,75 +28,69 @@ class BpkInteractiveStarRatingTest : BpkSnapshotTest() {
 
   private val rating = BpkInteractiveStarRating(testContext)
 
-  @Before
-  fun setup() {
-    setDimensions(40, 200)
-  }
-
   @Test
-  fun screenshotTestInteractiveStarRating_Default() {
+  fun default() {
     snap(rating)
   }
 
   @Test
-  fun screenshotTestInteractiveStarRating_CustomMaxRatingIncreasing() {
-    setDimensions(40, 400)
+  fun customMaxRatingIncreasing() {
     rating.maxRating = 5
     rating.maxRating = 10
     snap(rating)
   }
 
   @Test
-  fun screenshotTestInteractiveStarRating_CustomMaxRatingDecreasing() {
+  fun customMaxRatingDecreasing() {
     rating.maxRating = 5
     rating.maxRating = 3
     snap(rating)
   }
 
   @Test
-  fun screenshotTestInteractiveStarRating_NegativeRating() {
+  fun negativeRating() {
     rating.maxRating = 5
     rating.rating = -0.5f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestInteractiveStarRating_ZeroRating() {
+  fun zeroRating() {
     rating.maxRating = 5
     rating.rating = 0.0f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestInteractiveStarRating_RatingValueBetween0And0_5() {
+  fun ratingValueBetween0And0_5() {
     rating.maxRating = 5
     rating.rating = 0.4999999f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestInteractiveStarRating_RatingValue0_5() {
+  fun ratingValue0_5() {
     rating.maxRating = 5
     rating.rating = 0.5f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestInteractiveStarRating_RatingValueBetween0_5And1() {
+  fun ratingValueBetween0_5And1() {
     rating.maxRating = 5
     rating.rating = 0.9999999f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestInteractiveStarRating_RatingValue1() {
+  fun ratingValue1() {
     rating.maxRating = 5
     rating.rating = 1.0f
     snap(rating)
   }
 
   @Test
-  fun screenshotTestInteractiveStarRating_6withMax5() {
+  fun SixWithMax5() {
     rating.maxRating = 5
     rating.rating = 6.0f
     snap(rating)

@@ -23,7 +23,6 @@ import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -32,37 +31,32 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
 
   private val horizontalNav = BpkHorizontalNav(testContext).init()
 
-  @Before
-  fun setup() {
-    setDimensions(36, 300)
-  }
-
   @Test
-  fun screenshotHorizontalNav_Default() {
+  fun default() {
     snap(horizontalNav)
   }
 
   @Test
-  fun screenshotHorizontalNav_fixed() {
+  fun fixed() {
     horizontalNav.tabMode = TabLayout.MODE_FIXED
     snap(horizontalNav)
   }
 
   @Test
-  fun screenshotHorizontalNav_scrollable() {
+  fun scrollable() {
     horizontalNav.tabMode = TabLayout.MODE_SCROLLABLE
     snap(horizontalNav)
   }
 
   @Test
-  fun screenshotHorizontalNav_small() {
+  fun small() {
     val horizontalNav = BpkHorizontalNav(testContext).init()
     horizontalNav.size = BpkHorizontalNav.Size.Small
     snap(horizontalNav)
   }
 
   @Test
-  fun screenshotHorizontalNav_icons() {
+  fun icons() {
     val horizontalNav = BpkHorizontalNav(testContext).apply {
       addTab(newTab().setText("Tab 1").setIcon(R.drawable.bpk_cars))
       addTab(newTab().setText("Tab 2").setIcon(R.drawable.bpk_cars))

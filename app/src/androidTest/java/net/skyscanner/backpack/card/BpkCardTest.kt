@@ -22,7 +22,6 @@ import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.R
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -30,19 +29,13 @@ import org.junit.runner.RunWith
 
 class BpkCardTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(150, 150)
-    setBackground(android.R.color.transparent)
-  }
-
   @Test
   fun default() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
     card.addView(text)
-    snap(card)
+    snap(card, android.R.color.transparent)
   }
 
   @Test
@@ -52,7 +45,7 @@ class BpkCardTest : BpkSnapshotTest() {
     text.text = "message"
     card.addView(text)
     card.padded = true
-    snap(card)
+    snap(card, android.R.color.transparent)
   }
 
   @Test
@@ -62,7 +55,7 @@ class BpkCardTest : BpkSnapshotTest() {
     text.text = "message"
     card.addView(text)
     card.padded = false
-    snap(card)
+    snap(card, android.R.color.transparent)
   }
 
   @Test
@@ -72,18 +65,17 @@ class BpkCardTest : BpkSnapshotTest() {
     text.text = "message"
     card.addView(text)
     card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
-    snap(card)
+    snap(card, android.R.color.transparent)
   }
 
   @Test
   fun noElevation() {
-    setBackground(R.color.bpkSurfaceHighlight)
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
     card.addView(text)
     card.elevationLevel = BpkCardView.ElevationLevel.NONE
-    snap(card)
+    snap(card, R.color.bpkSurfaceHighlight)
   }
 
   @Test
@@ -94,7 +86,7 @@ class BpkCardTest : BpkSnapshotTest() {
     card.addView(text)
     card.padded = true
     card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
-    snap(card)
+    snap(card, android.R.color.transparent)
   }
 
   @Test
@@ -107,7 +99,7 @@ class BpkCardTest : BpkSnapshotTest() {
       )
       cornerStyle = BpkCardView.CornerStyle.LARGE
     }
-    snap(card)
+    snap(card, android.R.color.transparent)
   }
 
   @Test
@@ -121,6 +113,6 @@ class BpkCardTest : BpkSnapshotTest() {
       elevationLevel = BpkCardView.ElevationLevel.FOCUSED
       cornerStyle = BpkCardView.CornerStyle.LARGE
     }
-    snap(card)
+    snap(card, android.R.color.transparent)
   }
 }

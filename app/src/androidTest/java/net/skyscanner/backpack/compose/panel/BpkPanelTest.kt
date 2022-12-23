@@ -18,24 +18,17 @@
 
 package net.skyscanner.backpack.compose.panel
 
-import androidx.compose.ui.unit.IntSize
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.compose.DefaultPanelExample
 import net.skyscanner.backpack.demo.compose.NoPaddingPanelExample
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkPanelTest : BpkSnapshotTest() {
-
-  @Before
-  fun setup() {
-    snapshotSize = IntSize(200, 200)
-  }
 
   @Test
   fun padded() = snap {
@@ -44,9 +37,7 @@ class BpkPanelTest : BpkSnapshotTest() {
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun noPadding() {
-    snap {
-      NoPaddingPanelExample()
-    }
+  fun noPadding() = snap {
+    NoPaddingPanelExample()
   }
 }

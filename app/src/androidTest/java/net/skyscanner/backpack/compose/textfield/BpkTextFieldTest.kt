@@ -18,7 +18,7 @@
 
 package net.skyscanner.backpack.compose.textfield
 
-import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -26,17 +26,11 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Accessibility
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkTextFieldTest : BpkSnapshotTest() {
-
-  @Before
-  fun setup() {
-    snapshotSize = IntSize(200, 128)
-  }
 
   @Test
   fun default() = snap {
@@ -91,7 +85,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default)
   fun singleLine() {
-    snap {
+    snap(width = 200.dp) {
       BpkTextField(
         value = "Value ".repeat(20),
         onValueChange = {},
@@ -105,7 +99,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default)
   fun singleLinePlaceholder() {
-    snap {
+    snap(width = 200.dp) {
       BpkTextField(
         value = "",
         onValueChange = {},
@@ -119,7 +113,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default)
   fun multiline() {
-    snap {
+    snap(width = 200.dp) {
       BpkTextField(
         value = "Value ".repeat(20),
         onValueChange = {},
@@ -132,7 +126,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
 
   @Test
   fun multilinePlaceholder() {
-    snap {
+    snap(width = 200.dp) {
       BpkTextField(
         value = "",
         onValueChange = {},
