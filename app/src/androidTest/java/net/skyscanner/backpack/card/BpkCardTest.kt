@@ -75,7 +75,7 @@ class BpkCardTest : BpkSnapshotTest() {
     text.text = "message"
     card.addView(text)
     card.elevationLevel = BpkCardView.ElevationLevel.NONE
-    snap(card,R.color.bpkSurfaceHighlight)
+    snap(card, R.color.bpkSurfaceHighlight)
   }
 
   @Test
