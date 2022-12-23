@@ -20,12 +20,15 @@
 
 package net.skyscanner.backpack.compose.calendar
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.compose.ui.unit.IntSize
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
 import net.skyscanner.backpack.calendar2.CalendarParams
 import org.junit.Before
@@ -37,7 +40,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(700, 400)
+    snapshotSize = IntSize(400, 700)
     AndroidThreeTen.init(testContext)
   }
 
@@ -142,7 +145,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   private fun snap(controller: BpkCalendarController) =
-    composed {
+    snap {
       BpkCalendar(controller = controller)
     }
 

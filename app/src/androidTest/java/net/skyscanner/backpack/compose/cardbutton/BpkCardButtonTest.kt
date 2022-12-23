@@ -27,7 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntSize
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import org.junit.Test
@@ -43,7 +43,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun defaultSaveButton() {
     capture(
-      background = { BpkTheme.colors.textPrimaryInverse }
+      background = { BpkTheme.colors.surfaceDefault }
     ) {
       BpkSaveButton(
         checked = checked,
@@ -73,7 +73,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun containedSaveButton() {
     capture(
-      background = { BpkTheme.colors.surfaceContrast }
+      background = { BpkTheme.colors.surfaceHighlight }
     ) {
       BpkSaveButton(
         checked = checked,
@@ -88,7 +88,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun defaultShareButton() {
     capture(
-      background = { BpkTheme.colors.textPrimaryInverse }
+      background = { BpkTheme.colors.surfaceDefault }
     ) {
       BpkShareButton(
         contentDescription = "",
@@ -102,7 +102,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun onDarkShareButton() {
     capture(
-      background = { BpkTheme.colors.textPrimaryInverse }
+      background = { BpkTheme.colors.surfaceContrast }
     ) {
       BpkShareButton(
         contentDescription = "",
@@ -116,7 +116,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
   @Test
   fun containedShareButton() {
     capture(
-      background = { BpkTheme.colors.textPrimaryInverse }
+      background = { BpkTheme.colors.surfaceHighlight }
     ) {
       BpkShareButton(
         contentDescription = "",
@@ -131,7 +131,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest() {
     background: @Composable () -> Color = { Color.Unspecified },
     content: @Composable () -> Unit,
   ) {
-    composed(
+    snap(
       size = IntSize(100, 100),
       tags = listOf(size, checked),
     ) {

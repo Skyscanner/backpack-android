@@ -16,7 +16,7 @@
 # limitations under the License.
 
 set -e
-./gradlew :app:verifyOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=default
-./gradlew :app:verifyOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=themed
-./gradlew :app:verifyOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=rtl
-./gradlew :app:verifyOssDebugAndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=dm
+./gradlew ossDebugExecuteScreenshotTests -PdirectorySuffix=default
+./gradlew ossDebugExecuteScreenshotTests -PdirectorySuffix=dm
+./gradlew ossDebugExecuteScreenshotTests -PdirectorySuffix=rtl
+./gradlew ossDebugExecuteScreenshotTests -PdirectorySuffix=themed

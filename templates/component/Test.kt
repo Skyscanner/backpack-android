@@ -18,14 +18,14 @@
 
 package net.skyscanner.backpack.compose.$package
 
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.${name}Story
 import org.junit.Test
 
 class Bpk${name}Test : BpkSnapshotTest() {
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     ${name}Story()
   }
 }

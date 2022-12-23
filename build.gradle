@@ -31,7 +31,7 @@ buildscript {
     classpath 'com.android.tools.build:gradle:7.3.1' // keep in sync with lint version - If the Gradle plugin version is X.Y.Z, then the lint version is (X+23).Y.Z.
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath dokka
-    classpath 'com.facebook.testing.screenshot:plugin:0.15.0'
+    classpath 'com.karumi:shot:5.14.1'
     classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
     classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
   }
@@ -104,6 +104,7 @@ ext {
   kotlinReflection = "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
   junit = "junit:junit:4.13.2"
   stetho = "com.facebook.stetho:stetho:1.6.0"
+  facebookSnapshotTestingCore = "com.facebook.testing.screenshot:core:0.14.0"
   espressoCore = "androidx.test.espresso:espresso-core:3.5.0"
   espressoContrib = "com.android.support.test.espresso:espresso-contrib:3.1.0"
   testRules = "androidx.test:rules:1.5.0"
@@ -130,7 +131,7 @@ ext {
   composeUiTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
   composeActivity = "androidx.activity:activity-compose:1.6.1"
   composeUtil = "androidx.compose.ui:ui-util:$composeVersion"
-  composeFoundation = "androidx.compose.foundation:foundation:$composeVersion"
+  composeTestManifest = "androidx.compose.ui:ui-test-manifest:$composeVersion"
 
   accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
 }

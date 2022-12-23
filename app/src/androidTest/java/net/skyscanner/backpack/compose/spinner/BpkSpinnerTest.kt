@@ -19,9 +19,11 @@
 package net.skyscanner.backpack.compose.spinner
 
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import androidx.compose.ui.unit.IntSize
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import org.junit.Before
@@ -33,50 +35,50 @@ class BpkSpinnerTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 24, width = 24)
+    snapshotSize = IntSize(24, 24)
   }
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     BpkSpinner(size = BpkSpinnerSize.Large)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun small() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkSpinner(size = BpkSpinnerSize.Small)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun textPrimary() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.TextPrimary)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabled() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.Disabled)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun onDarkSurface() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed(background = BpkColor.Black) {
+    snap(background = BpkColor.Black) {
       BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.OnDarkSurface)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun dynamicOnDarkSurface() {
-    assumeVariant(BpkTestVariant.Default)
-    composed(background = BpkColor.Black) {
+    snap(background = BpkColor.Black) {
       CompositionLocalProvider(LocalContentColor provides BpkColor.White) {
         BpkSpinner(size = BpkSpinnerSize.Large)
       }
@@ -84,9 +86,9 @@ class BpkSpinnerTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun dynamicTextPrimary() {
-    assumeVariant(BpkTestVariant.Default)
-    composed(background = BpkColor.White) {
+    snap(background = BpkColor.White) {
       CompositionLocalProvider(LocalContentColor provides BpkColor.Black) {
         BpkSpinner(size = BpkSpinnerSize.Large)
       }

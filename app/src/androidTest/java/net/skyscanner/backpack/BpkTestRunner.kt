@@ -23,14 +23,16 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.test.runner.AndroidJUnitRunner
-import com.facebook.testing.screenshot.ScreenshotRunner
+import com.karumi.shot.ShotTestRunner
 
 @Suppress("unused")
-class BpkTestRunner : AndroidJUnitRunner() {
+class BpkTestRunner : ShotTestRunner() {
 
-  override fun onCreate(args: Bundle?) {
-    ScreenshotRunner.onCreate(this, args)
+  override fun onCreate(args: Bundle) {
+    if (args.getString("variant") == "themed") {
+      args.putString("notPackage", "net.skyscanner.backpack.compose")
+    }
+    args.putString("filter", "net.skyscanner.backpack.VariantFilter")
     super.onCreate(args)
   }
 
@@ -51,9 +53,4 @@ class BpkTestRunner : AndroidJUnitRunner() {
 
   override fun newActivity(cl: ClassLoader?, className: String?, intent: Intent?): Activity =
     BpkTestVariant.current.newActivity(super.newActivity(cl, className, intent))
-
-  override fun finish(resultCode: Int, results: Bundle) {
-    ScreenshotRunner.onDestroy()
-    super.finish(resultCode, results)
-  }
 }

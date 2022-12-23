@@ -18,66 +18,61 @@
 
 package net.skyscanner.backpack.compose.nudger
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.compose.NudgerExample
 import net.skyscanner.backpack.demo.compose.NudgerStoryAvg
 import net.skyscanner.backpack.demo.compose.NudgerStoryMax
 import net.skyscanner.backpack.demo.compose.NudgerStoryMin
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkNudgerTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(50, 150)
-  }
-
   @Test
-  fun default() = composed {
+  fun default() = snap {
     NudgerExample(initialValue = NudgerStoryAvg)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabled() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       NudgerExample(initialValue = NudgerStoryAvg, enabled = false)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun minusDisabled() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       NudgerExample(initialValue = NudgerStoryMin)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun plusDisabled() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       NudgerExample(initialValue = NudgerStoryMax)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun positiveOverflow() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       NudgerExample(initialValue = NudgerStoryMax + NudgerStoryMax)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun negativeOverflow() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       NudgerExample(initialValue = NudgerStoryMin - NudgerStoryMax)
     }
   }

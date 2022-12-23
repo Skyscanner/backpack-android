@@ -27,10 +27,11 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkNudgerTest : BpkSnapshotTest() {
 
-  private val nudger = BpkNudger(testContext)
+  private lateinit var nudger : BpkNudger
 
   @Before
   fun setup() {
+    nudger = BpkNudger(testContext)
     setDimensions(50, 150)
   }
 

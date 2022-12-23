@@ -18,9 +18,11 @@
 
 package net.skyscanner.backpack.compose.textfield
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import androidx.compose.ui.unit.IntSize
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Accessibility
@@ -33,11 +35,11 @@ class BpkTextFieldTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 128, width = 200)
+    snapshotSize = IntSize(200, 128)
   }
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     BpkTextField(
       value = "Value",
       onValueChange = {},
@@ -47,9 +49,9 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun readOnly() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkTextField(
         value = "Value",
         onValueChange = {},
@@ -61,9 +63,9 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun placeholder() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkTextField(
         value = "",
         onValueChange = {},
@@ -75,8 +77,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
 
   @Test
   fun withLeadingIcon() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkTextField(
         value = "Value",
         onValueChange = {},
@@ -88,9 +89,9 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun singleLine() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkTextField(
         value = "Value ".repeat(20),
         onValueChange = {},
@@ -102,9 +103,9 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun singleLinePlaceholder() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkTextField(
         value = "",
         onValueChange = {},
@@ -116,9 +117,9 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun multiline() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BpkTextField(
         value = "Value ".repeat(20),
         onValueChange = {},
@@ -131,8 +132,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
 
   @Test
   fun multilinePlaceholder() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    composed {
+    snap {
       BpkTextField(
         value = "",
         onValueChange = {},
@@ -144,9 +144,9 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabled() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkTextField(
         value = "Value",
         onValueChange = {},
@@ -157,9 +157,9 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabledPlaceholder() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkTextField(
         value = "",
         onValueChange = {},
@@ -171,8 +171,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
 
   @Test
   fun validated() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    composed {
+    snap {
       BpkTextField(
         value = "Value",
         onValueChange = {},
@@ -184,8 +183,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
 
   @Test
   fun error() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-    composed {
+    snap {
       BpkTextField(
         value = "Value",
         onValueChange = {},

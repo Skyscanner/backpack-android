@@ -18,59 +18,54 @@
 
 package net.skyscanner.backpack.compose.switch
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.compose.CustomContentSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultCheckedSwitchExample
 import net.skyscanner.backpack.demo.compose.DefaultUncheckedSwitchExample
 import net.skyscanner.backpack.demo.compose.DisabledCheckedSwitchExample
 import net.skyscanner.backpack.demo.compose.DisabledUncheckedSwitchExample
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkSwitchTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(height = 50, width = 200)
-  }
-
   @Test
-  fun defaultUnchecked() = composed {
+  fun defaultUnchecked() = snap {
     DefaultUncheckedSwitchExample()
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun defaultChecked() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       DefaultCheckedSwitchExample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabledUnchecked() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       DisabledUncheckedSwitchExample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabledChecked() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       DisabledCheckedSwitchExample()
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun customContent() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       CustomContentSwitchExample()
     }
   }

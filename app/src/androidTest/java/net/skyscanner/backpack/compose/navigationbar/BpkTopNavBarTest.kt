@@ -22,9 +22,10 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.compose.ActionsTopNavBar
 import net.skyscanner.backpack.demo.compose.BackTopNavBar
@@ -41,76 +42,76 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 50, width = 400)
+    snapshotSize = IntSize(400, 50)
   }
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     ActionsTopNavBar(Modifier.fillMaxWidth())
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun noNavIcon() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    composed {
+    snap {
       NoNavIconTopNavBar(Modifier.fillMaxWidth())
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun back() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       BackTopNavBar(Modifier.fillMaxWidth())
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun close() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       CloseTopNavBar(Modifier.fillMaxWidth())
     }
   }
 
   @Test
-  fun textAction() = composed {
+  fun textAction() = snap {
     TextActionTopNavBar(Modifier.fillMaxWidth())
   }
 
   @Test
-  fun expanded() = composed(IntSize(400, 100)) {
+  fun expanded() = snap(IntSize(400, 100)) {
     CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Expanded, showList = false)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun collapsed() {
-    assumeVariant(BpkTestVariant.Default)
-    composed {
+    snap {
       CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun expandedNoNavIcon() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    composed(IntSize(400, 100)) {
+    snap(IntSize(400, 100)) {
       CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Expanded, showNav = false)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun expandedNoActions() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
-    composed(IntSize(400, 100)) {
+    snap(IntSize(400, 100)) {
       CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Expanded, showActions = false, showList = false)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun windowInsets() {
-    assumeVariant(BpkTestVariant.Default)
-    composed(IntSize(400, 100)) {
+    snap(IntSize(400, 100)) {
       CollapsibleNavigationBarStory(
         initialStatus = TopNavBarStatus.Expanded,
         showActions = false,

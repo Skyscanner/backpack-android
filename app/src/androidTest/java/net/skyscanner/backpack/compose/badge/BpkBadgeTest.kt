@@ -18,95 +18,90 @@
 
 package net.skyscanner.backpack.compose.badge
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.Variants
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.CloseCircle
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkBadgeTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    setDimensions(height = 50, width = 200)
-  }
-
   @Test
-  fun default() = composed {
+  fun default() = snap {
     BpkBadge(text = "Default", type = BpkBadgeType.Destructive)
   }
 
   @Test
-  fun withIcon() = composed {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.Rtl)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+  fun withIcon() = snap {
     BpkBadge(text = "Default", type = BpkBadgeType.Destructive, icon = BpkIcon.CloseCircle)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun normal() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkBadge(text = BpkBadgeType.Normal.toString(), type = BpkBadgeType.Normal)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun strong() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkBadge(text = BpkBadgeType.Strong.toString(), type = BpkBadgeType.Strong)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun success() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkBadge(text = BpkBadgeType.Success.toString(), type = BpkBadgeType.Success)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun warning() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkBadge(text = BpkBadgeType.Warning.toString(), type = BpkBadgeType.Warning)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun destructive() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkBadge(text = BpkBadgeType.Destructive.toString(), type = BpkBadgeType.Destructive)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun inverse() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed(background = BpkColor.SkyBlue) {
+    snap(background = BpkColor.SkyBlue) {
       BpkBadge(text = BpkBadgeType.Inverse.toString(), type = BpkBadgeType.Inverse)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun outline() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed(background = BpkColor.SkyBlue) {
+    snap(background = BpkColor.SkyBlue) {
       BpkBadge(text = BpkBadgeType.Outline.toString(), type = BpkBadgeType.Outline)
     }
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun brand() {
-    assumeVariant(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-    composed {
+    snap {
       BpkBadge(text = BpkBadgeType.Brand.toString(), type = BpkBadgeType.Brand)
     }
   }

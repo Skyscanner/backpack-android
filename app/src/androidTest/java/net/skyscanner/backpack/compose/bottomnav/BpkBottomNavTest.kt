@@ -19,8 +19,9 @@
 
 package net.skyscanner.backpack.compose.bottomnav
 
+import androidx.compose.ui.unit.IntSize
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.BpkBottomNavSample
 import org.junit.Before
 import org.junit.Test
@@ -31,16 +32,16 @@ class BpkBottomNavTest : BpkSnapshotTest() {
 
   @Before
   fun setup() {
-    setDimensions(height = 80, width = 250)
+    snapshotSize = IntSize(250, 80)
   }
 
   @Test
-  fun default() = composed {
+  fun default() = snap {
     BpkBottomNavSample()
   }
 
   @Test
-  fun selectionUpdated() = composed {
+  fun selectionUpdated() = snap {
     BpkBottomNavSample(defaultItemId = 2)
   }
 }

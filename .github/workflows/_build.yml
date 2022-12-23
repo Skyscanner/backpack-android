@@ -162,15 +162,6 @@ jobs:
           distribution: 'adopt'
           cache: gradle
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-          cache: 'pip'
-          cache-dependency-path: 'snapshot-requirements.txt'
-      - name: Install Python dependencies
-        run: pip3 install -r snapshot-requirements.txt
-
       - name: AVD cache
         uses: actions/cache@v3
         id: avd-cache
@@ -179,6 +170,9 @@ jobs:
             ~/.android/avd/*
             ~/.android/adb*
           key: avd-${{ env.api-level }}
+
+      - name: Delete existing snapshots
+        run: rm -rf app/screenshots/oss/${{ env.config }}/${{ matrix.variant }}
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -206,7 +200,7 @@ jobs:
             touch logcat.log
             chmod 777 logcat.log
             adb logcat > logcat.log &
-            ./gradlew :app:record${{ env.flavour }}${{ env.config }}AndroidTestScreenshotTest -Pandroid.testInstrumentationRunnerArguments.variant=${{ matrix.variant }}
+            ./gradlew ${{ env.flavour }}${{ env.config }}ExecuteScreenshotTests -Precord -PdirectorySuffix=${{ matrix.variant }}
 
             changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
 
@@ -220,7 +214,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-screenshot-test-output
-          path: app/build/screenshots${{ env.flavour }}${{ env.config }}AndroidTest/
+          path: app/build/reports/shot/
           retention-days: 5
 
       - name: Upload Logcat Logs
