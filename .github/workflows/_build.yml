@@ -132,8 +132,8 @@ jobs:
         id: get_head_commit_message
         run: echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
 
-  Screenshots:
-    name: Screenshots tests
+  Snapshots:
+    name: Snapshot tests
     runs-on: macos-latest
     needs: CheckCommitMessage
     permissions:
@@ -186,8 +186,8 @@ jobs:
           disable-animations: false
           script: echo "Generated AVD snapshot for caching."
 
-      - name: Screenshot Tests
-        id: screenshotTests
+      - name: Snapshots Tests
+        id: snapshotTests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           profile: Nexus 4
@@ -209,7 +209,7 @@ jobs:
         if: ${{ needs.CheckCommitMessage.outputs.head-commit-message != 'Record snapshots' }}
         run: ./scripts/check-no-changes.sh
 
-      - name: Upload Screenshot Tests Artifact
+      - name: Upload Snapshot Tests Artifact
         if: ${{ failure() }}
         uses: actions/upload-artifact@v3
         with:
@@ -225,16 +225,16 @@ jobs:
           path: logcat.log
           retention-days: 5
 
-      - name: Notify PR of screenshots changes
-        if: ${{ (failure() || needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots') && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+      - name: Notify PR of snapshot changes
+        if: ${{ (failure() || needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots') && steps.snapshotTests.outputs.CHANGED_FILES != '' }}
         uses: actions/github-script@v6
         with:
           script: |
             var body;
             if ("${{ needs.CheckCommitMessage.outputs.head-commit-message }}" != "Record snapshots") {
-              body = `### '${{ matrix.variant }}' files were changed.\nIf these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.\n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
+              body = `### '${{ matrix.variant }}' files were changed.\nIf these changes are intentional please run \`./scripts/record_snapshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.\n\n>'${{ steps.snapshotTests.outputs.CHANGED_FILES }}'`;
             } else {
-              body = `### '${{ matrix.variant }}' snapshots were updated. Please verify the changes match the expected layout. \n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
+              body = `### '${{ matrix.variant }}' snapshots were updated. Please verify the changes match the expected layout. \n\n>'${{ steps.snapshotTests.outputs.CHANGED_FILES }}'`;
             }
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -244,7 +244,7 @@ jobs:
             })
 
       - name: Commit changes
-        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots' && steps.snapshotTests.outputs.CHANGED_FILES != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -255,4 +255,108 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git add app/screenshots/*
           git diff-index --quiet HEAD || git commit -m "Updated snapshots for '${{ matrix.variant }}'"
+          git push
+
+  Screenshot:
+    name: Screenshots recording
+    runs-on: macos-latest
+    needs: CheckCommitMessage
+    if: ${{ needs.CheckCommitMessage.outputs.head-commit-message == 'Record screenshots' }}
+    permissions:
+      pull-requests: write
+      contents: write
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: true
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: gradle
+
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ env.api-level }}
+
+      - name: Delete existing screenshots
+        run: |
+          rm -rf docs/view/*/screenshots/*
+          rm -rf docs/compose/*/screenshots/*
+
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          profile: Pixel
+          sdcard-path-or-size: 512M
+          api-level: 31
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
+
+      - name: Screenshots recording
+        id: screenshotsRecording
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          profile: Pixel
+          sdcard-path-or-size: 512M
+          api-level: 31
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: |
+            touch logcat_screenshots.log
+            chmod 777 logcat_screenshots.log
+            adb logcat > logcat_screenshots.log &
+            ./scripts/generate_screenshots.sh
+            changedFiles=`git status --porcelain` && echo "CHANGED_FILES=${changedFiles//$'\n'/'%0A'}" >> $GITHUB_OUTPUT
+
+      - name: Upload Logcat Logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.flavour }}${{ env.config }}-${{ matrix.variant }}-logcat-output
+          path: logcat_screenshots.log
+          retention-days: 5
+
+      - name: Notify PR of screenshot changes
+        if: ${{ (failure() || needs.CheckCommitMessage.outputs.head-commit-message == 'Record screenshots') && steps.screenshotsRecording.outputs.CHANGED_FILES != '' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            var body = `### Screenshots were updated. Please verify the changes match the expected output. \n\n>'${{ steps.screenshotsRecording.outputs.CHANGED_FILES }}'`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            })
+
+      - name: Commit changes
+        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message == 'Record screenshots' && steps.screenshotsRecording.outputs.CHANGED_FILES != '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/${{ github.repository }}
+          git fetch origin $GITHUB_HEAD_REF
+          git checkout $GITHUB_HEAD_REF
+          git add docs/*
+          git diff-index --quiet HEAD || git commit -m "Updated screenshots"
           git push

@@ -121,7 +121,7 @@ To ensure snapshots get saved for all parameters pass the `tags` property in the
 After adding new snapshot tests or making UI changes, run
 
 ```
- ./scripts/record_screenshot_tests.sh
+ ./scripts/record_snapshot_tests.sh
 ```
 
 This will generate the latest snapshots. Verify the changes & generated snapshots are as expected and commit the changes.
