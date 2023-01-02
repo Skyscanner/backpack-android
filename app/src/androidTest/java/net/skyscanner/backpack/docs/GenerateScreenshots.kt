@@ -21,7 +21,6 @@ package net.skyscanner.backpack.docs
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.demo.ComponentDetailActivity
 import net.skyscanner.backpack.demo.ComponentDetailFragment
@@ -56,13 +55,6 @@ open class GenerateScreenshots(
       return "${componentName.replace(" ", "")}_$screenshotName"
     }
 
-  private val screenGrab by lazy {
-    val serverIp = InstrumentationRegistry.getArguments().getString("screenshotServer")
-      ?: throw IllegalStateException("screenshotServer argument not provided or null")
-
-    RemoteScreenGrab(serverIp)
-  }
-
   @Test
   fun testTakeScreenshot() {
     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -91,6 +83,6 @@ open class GenerateScreenshots(
     } else {
       screenshotFullName
     }
-    screenGrab.takeScreenshot(name, path)
+    RemoteScreenGrab.takeScreenshot(name, path)
   }
 }

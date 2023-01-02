@@ -24,9 +24,10 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-class RemoteScreenGrab(
-  private val serverIp: String
-) {
+object RemoteScreenGrab {
+
+  private val serverIp: String = "10.0.2.2"
+
   fun takeScreenshot(name: String, path: String) {
     val url = URL("http://$serverIp:8888?name=$name&path=$path")
     val con = url.openConnection() as HttpURLConnection

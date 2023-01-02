@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
+
 /**
  * Backpack for Android - Skyscanner's Design System
  *
@@ -67,19 +69,32 @@ android {
       dimension "version"
       versionNameSuffix "-internal"
     }
+    screenshots {
+      dimension "version"
+      versionNameSuffix "-screenshots"
+      testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.*"
+      testInstrumentationRunnerArgument "class", "net.skyscanner.backpack.docs.GenerateScreenshots"
+    }
+  }
+  sourceSets {
+    screenshots {
+      res.srcDirs += ['src/oss/res']
+      java.srcDirs += ['src/oss/java']
+    }
   }
   testOptions {
     animationsDisabled = true
+    managedDevices {
+      managedDevices.devices {
+        Pixel (ManagedVirtualDevice) {
+          device = "Pixel"
+          apiLevel = 30
+          systemImageSource = "aosp"
+        }
+      }
+    }
   }
   flavorDimensions "version"
-  productFlavors {
-    oss {
-      dimension "version"
-    }
-    internal {
-      dimension "version"
-    }
-  }
   buildFeatures {
     compose true
   }
