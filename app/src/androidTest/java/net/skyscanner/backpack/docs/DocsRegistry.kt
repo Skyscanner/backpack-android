@@ -170,14 +170,14 @@ fun ComposeScreenshot(
   screenshotName: String,
   setup: ((AndroidComposeTestRule<*, *>) -> Unit)? = null,
 ): Array<Any?> =
-  arrayOf(name, screenshotName, "docs/compose", setup)
+  arrayOf(name, screenshotName, "compose", setup)
 
 fun ViewScreenshot(
   name: String,
   screenshotName: String,
   setup: ((ComposeTestRule) -> Unit)? = null,
 ): Array<Any?> =
-  arrayOf(name, screenshotName, "docs/view", setup)
+  arrayOf(name, screenshotName, "view", setup)
 
 @Suppress("DEPRECATION")
 private fun setupCalendar() {

@@ -33,7 +33,7 @@ import org.junit.runners.Parameterized
 open class GenerateScreenshots(
   private val componentPath: String,
   private val screenshotName: String,
-  private val path: String,
+  private val componentType: String,
   private val setup: ((AndroidComposeTestRule<*, *>) -> Unit)?
 ) {
 
@@ -48,12 +48,6 @@ open class GenerateScreenshots(
 
   @get:Rule
   val composeTestRule = AndroidComposeTestRule(activityRule) { it.activity }
-
-  private val screenshotFullName: String
-    get() {
-      val componentName = componentPath.split(" - ").first()
-      return "${componentName.replace(" ", "")}_$screenshotName"
-    }
 
   @Test
   fun testTakeScreenshot() {
@@ -77,12 +71,11 @@ open class GenerateScreenshots(
     activityRule.finishActivity()
   }
 
-  private fun takeScreenshot(suffix: String? = null) {
-    val name = if (suffix != null) {
-      "${screenshotFullName}_$suffix"
-    } else {
-      screenshotFullName
-    }
-    RemoteScreenGrab.takeScreenshot(name, path)
+  private fun takeScreenshot(suffix: String?) {
+    RemoteScreenGrab.takeScreenshot(
+      type = componentType,
+      component = componentPath.split(" - ").first().replace(" ", ""),
+      file = listOfNotNull(screenshotName, suffix).joinToString(separator = "_"),
+    )
   }
 }

@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.ManagedVirtualDevice
+import net.skyscanner.backpack.screenshots.ScreenshotTestsServer
 
 /**
  * Backpack for Android - Skyscanner's Design System
@@ -78,8 +79,8 @@ android {
   }
   sourceSets {
     screenshots {
-      res.srcDirs += ['src/oss/res']
-      java.srcDirs += ['src/oss/java']
+      res.srcDirs += ['src/internal/res']
+      java.srcDirs += ['src/internal/java']
     }
   }
   testOptions {
@@ -107,6 +108,29 @@ android {
     exclude "META-INF/AL2.0"
     exclude "META-INF/LGPL2.1"
   }
+}
+
+def server = new ScreenshotTestsServer(rootProject.file("docs"))
+
+tasks.create("startScreenshotsServer") {
+  doFirst {
+    server.start()
+  }
+  finalizedBy("stopScreenshotsServer")
+}
+
+tasks.create("stopScreenshotsServer") {
+  doLast {
+    server.close()
+  }
+}
+
+tasks.create("recordScreenshots") {
+  dependsOn(
+    "startScreenshotsServer",
+    "PixelScreenshotsDebugAndroidTest",
+  )
+  finalizedBy("stopScreenshotsServer")
 }
 
 dependencies {
