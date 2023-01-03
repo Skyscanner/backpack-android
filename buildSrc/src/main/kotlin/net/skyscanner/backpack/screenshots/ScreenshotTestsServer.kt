@@ -15,7 +15,8 @@ class ScreenshotTestsServer @JvmOverloads constructor(
 ) : AutoCloseable {
 
   private val server = ::app.asServer(Undertow(serverPort))
-  private val adb by lazy { Dadb.discover()!! }
+
+  private val adb by lazy { Dadb.discover()!!.apply { setup() } }
 
   fun start() {
     require(Dadb.list().isEmpty()) { "No device or emulator should be running before the tests" }
@@ -42,9 +43,7 @@ class ScreenshotTestsServer @JvmOverloads constructor(
         outFile.createNewFile()
       }
 
-      val screencap = adb.shell("screencap -p $tmpRemoteFile")
-      require(screencap.exitCode == 0) { "Unable to screencap the screenshot, ${screencap.allOutput}" }
-
+      adb.requireShell("screencap -p $tmpRemoteFile")
       adb.pull(outFile, tmpRemoteFile)
 
       Response(Status.OK)
@@ -52,5 +51,20 @@ class ScreenshotTestsServer @JvmOverloads constructor(
       close()
       throw t
     }
+
+  private fun Dadb.setup(): Unit {
+    requireShell("settings put global sysui_demo_allowed 1")
+    requireShell("am broadcast -a com.android.systemui.demo -e command clock -e hhmm 1000")
+    requireShell("am broadcast -a com.android.systemui.demo -e command battery -e plugged false")
+    requireShell("am broadcast -a com.android.systemui.demo -e command battery -e level 100")
+    requireShell("am broadcast -a com.android.systemui.demo -e command network -e wifi show -e level 4")
+    requireShell("am broadcast -a com.android.systemui.demo -e command network -e mobile show -e datatype none -e level 4")
+    requireShell("am broadcast -a com.android.systemui.demo -e command notifications -e visible false")
+  }
+
+  private fun Dadb.requireShell(command: String) {
+    val result = shell(command)
+    require (result.exitCode == 0) { "'$command' failed Output: \n ${result.allOutput}"}
+  }
 
 }
