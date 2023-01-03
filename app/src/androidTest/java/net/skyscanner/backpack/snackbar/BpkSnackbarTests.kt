@@ -116,6 +116,6 @@ class BpkSnackbarTests : BpkSnapshotTest() {
     val snackbar: BpkSnackbar = what()
     snackbar.show()
 
-    snap(snackbar.rawSnackbar.view, wrapView = false, width = 350)
+    snap(snackbar.rawSnackbar.view, padding = 0, width = 350)
   }
 }

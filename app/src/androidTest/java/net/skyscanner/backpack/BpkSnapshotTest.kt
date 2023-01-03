@@ -50,9 +50,6 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
     @Dimension(unit = DP) width: Int? = null,
     @Dimension(unit = DP) height: Int? = null,
     @Dimension(unit = DP) padding: Int = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd),
-    // wrapView should almost always be true - in some rare cases (like Snackbar) wrapping the view may break.
-    // padding + background won't be applied if used
-    wrapView: Boolean = true,
   ) {
     runOnUi {
       view.layoutDirection = testContext.resources.configuration.layoutDirection
@@ -61,34 +58,27 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
       view = view,
       background = background,
       padding = padding,
-      wrapView = wrapView,
     )
     wrappedView.measure(measureSpec(width), measureSpec(height))
     compareScreenshot(
       view = wrappedView,
-      widthInPx = wrappedView.measuredWidth,
-      heightInPx = wrappedView.measuredHeight,
+      widthInPx = width?.let { dpToPx(it) } ?: wrappedView.measuredWidth,
+      heightInPx = height?.let { dpToPx(it) } ?: wrappedView.measuredHeight,
       name = screenshotName(tags),
     )
   }
 
   private fun measureSpec(size: Int?): Int {
-    val dimenSize = if (size == null) {
-      0
-    } else {
-      (size * testContext.resources.displayMetrics.density).toInt()
-    }
+    val dimenSize = size?.let { dpToPx(it) } ?: 0
     return makeMeasureSpec(dimenSize, if (size == null) View.MeasureSpec.UNSPECIFIED else View.MeasureSpec.EXACTLY)
   }
 
-  private fun wrapMeasuredViewWithBackground(view: View, background: Int, padding: Int, wrapView: Boolean): View {
-    if (!wrapView) {
-      return view
-    }
+  private fun wrapMeasuredViewWithBackground(view: View, background: Int, padding: Int): View {
     val result = FrameLayout(view.context)
     if (view.parent != null) {
       runOnUi {
         (view.parent as ViewGroup).removeView(view)
+        view.visibility = View.VISIBLE
       }
     }
     result.addView(view)
@@ -96,5 +86,9 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
     result.setPadding(padding)
 
     return result
+  }
+
+  private fun dpToPx(@Dimension dp: Int): Int {
+    return (dp * testContext.resources.displayMetrics.density).toInt()
   }
 }
