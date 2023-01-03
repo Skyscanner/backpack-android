@@ -18,38 +18,19 @@
 
 package net.skyscanner.backpack.snackbar
 
-import android.view.View
 import android.widget.FrameLayout
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
-import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
-import org.hamcrest.Matcher
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkSnackbarTests : BpkSnapshotTest() {
 
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
-
   private val root by unsafeLazy {
-    FrameLayout(testContext).apply {
-      rule.scenario.onActivity { activity ->
-        activity.setContentView(this)
-      }
-    }
+    FrameLayout(testContext)
   }
 
   @Test
@@ -132,40 +113,9 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   private inline fun capture(crossinline what: () -> BpkSnackbar) {
-    var snackbar: BpkSnackbar? = null
-    rule.scenario.waitForActivity().also {
-      runOnUi {
-        snackbar = what()
-        snackbar?.show()
-      }
-    }
-    Espresso.onView(ViewMatchers.withId(R.id.snackbar_text)).perform(waitForOpaque(300))
-      .check { _, _ ->
-        rule.scenario.waitForActivity()
-      }
+    val snackbar: BpkSnackbar = what()
+    snackbar.show()
 
-    snap(snackbar!!.rawSnackbar.view, wrapView = false, width = 350)
-  }
-}
-
-fun waitForOpaque(timeout: Long): ViewAction {
-  return object : ViewAction {
-
-    override fun getConstraints(): Matcher<View> {
-      return isAssignableFrom(TextView::class.java)
-    }
-
-    override fun getDescription(): String {
-      return "wait up to $timeout milliseconds for the view to be opaque"
-    }
-
-    override fun perform(uiController: UiController, view: View) {
-      val endTime = System.currentTimeMillis() + timeout
-
-      do {
-        if (view.alpha == 1f) return
-        uiController.loopMainThreadForAtLeast(50)
-      } while (System.currentTimeMillis() < endTime)
-    }
+    snap(snackbar.rawSnackbar.view, padding = 0, width = 350)
   }
 }
