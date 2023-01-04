@@ -89,7 +89,7 @@ ext {
   threeTenAbp = "org.threeten:threetenbp:$threeTenAbpVersion"
   threeTenAbpAndroid = "com.jakewharton.threetenabp:threetenabp:$threeTenAbpVersion"
 
-  androidXJunitVersion = "1.1.4"
+  androidXJunitVersion = "1.1.5"
   junitKtx = "androidx.test.ext:junit-ktx:$androidXJunitVersion"
   junitAndroid = "androidx.test.ext:junit:$androidXJunitVersion"
 
