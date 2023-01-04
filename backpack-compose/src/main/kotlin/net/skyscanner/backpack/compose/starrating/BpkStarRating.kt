@@ -22,7 +22,9 @@ package net.skyscanner.backpack.compose.starrating
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.R
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.StarOutline
 
 @Composable
 fun BpkStarRating(
@@ -31,7 +33,11 @@ fun BpkStarRating(
   rating: Float = 2.5f,
 //  rounding: Any = RoundingType.Up,
 ) {
-  Row(modifier = modifier) {
-    R.drawable.bpk_star_outline
+  Row() {
+    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
+    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
+    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
+    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
+    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
   }
 }
