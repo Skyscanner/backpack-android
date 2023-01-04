@@ -75,9 +75,9 @@ internal class ButtonStyle(
           pressed = roundRectDrawable(bgPressedColor),
           drawable = roundRectDrawable(bgColor),
         ) {
-          val strokeAnimation = context.resources.getInteger(R.integer.bpkAnimationDurationSm)
-          setEnterFadeDuration(strokeAnimation)
-          setExitFadeDuration(strokeAnimation)
+//          val strokeAnimation = context.resources.getInteger(R.integer.bpkAnimationDurationSm)
+//          setEnterFadeDuration(strokeAnimation)
+//          setExitFadeDuration(strokeAnimation)
         },
         rippleColor = rippleColor,
       )

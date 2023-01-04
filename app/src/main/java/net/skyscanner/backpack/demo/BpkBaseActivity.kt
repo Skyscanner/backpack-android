@@ -80,7 +80,7 @@ open class BpkBaseActivity : AppCompatActivity() {
   }
 
   private fun onShaked() {
-//    val intent = Intent(this, SettingsActivity::class.java)
-//    startActivity(intent)
+    val intent = Intent(this, SettingsActivity::class.java)
+    startActivity(intent)
   }
 }
