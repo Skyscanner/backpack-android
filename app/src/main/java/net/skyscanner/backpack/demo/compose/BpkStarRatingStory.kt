@@ -19,8 +19,9 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,21 +29,32 @@ import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
 fun BpkStarRatingStory(
   modifier: Modifier = Modifier,
 ) {
-  Column(
-    modifier = modifier,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
+  Box(
+    modifier = modifier.fillMaxHeight(),
+    contentAlignment = Alignment.Center,
   ) {
-    BpkText(
-      text = stringResource(R.string.star_rating_0_5),
-      style = BpkTheme.typography.label2,
-    )
-    BpkStarRating(maxRating = 5)
+    Column() {
+      BpkText(
+        text = stringResource(R.string.star_rating_0_5),
+        style = BpkTheme.typography.label2,
+      )
+      BpkStarRating(maxRating = 5)
+      BpkText(
+        text = stringResource(R.string.star_rating_25_5),
+        style = BpkTheme.typography.label2,
+      )
+      BpkStarRating(maxRating = 5)
+      BpkText(
+        text = stringResource(R.string.star_rating_5_5),
+        style = BpkTheme.typography.label2,
+      )
+      BpkStarRating(maxRating = 5)
+    }
   }
 }
