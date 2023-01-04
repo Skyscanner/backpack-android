@@ -29,6 +29,7 @@ import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import net.skyscanner.backpack.demo.compose.BpkBottomNavStory
 import net.skyscanner.backpack.demo.compose.BpkFabStory
 import net.skyscanner.backpack.demo.compose.BpkSliderStory
+import net.skyscanner.backpack.demo.compose.BpkStarRatingStory
 import net.skyscanner.backpack.demo.compose.ButtonDrawableIconStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
@@ -459,12 +460,18 @@ object ComponentRegistry {
       ),
     ),
     "Star Rating" story NodeData(
-      { children -> SubStory of children },
+      { children -> TabStory of children },
       mapOf(
-        "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
-        "RTL" story NodeData { Story of R.layout.fragment_star_rating_default with Direction.RTL },
-        "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
-        "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max },
+        TAB_TITLE_VIEW story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" story NodeData { Story of R.layout.fragment_star_rating_default },
+            "RTL" story NodeData { Story of R.layout.fragment_star_rating_default with Direction.RTL },
+            "Different values" story NodeData { Story of R.layout.fragment_star_rating_values },
+            "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max },
+          ),
+        ),
+        TAB_TITLE_COMPOSE composeStory { BpkStarRatingStory() },
       ),
     ),
     "Star Rating Interactive" story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
