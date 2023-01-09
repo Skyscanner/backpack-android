@@ -67,7 +67,6 @@ open class GenerateScreenshots(
     intent.putExtra(ComponentDetailFragment.AUTOMATION_MODE, true)
     activityRule.launchActivity(intent)
     setup?.invoke(composeTestRule)
-    composeTestRule.waitForIdle()
     takeScreenshot(suffix)
     activityRule.finishActivity()
   }
