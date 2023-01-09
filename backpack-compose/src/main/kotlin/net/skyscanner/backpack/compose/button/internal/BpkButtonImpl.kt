@@ -52,6 +52,7 @@ import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.compose.utils.getAnimationScaleFactor
 import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
@@ -65,7 +66,11 @@ internal fun BpkButtonImpl(
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   content: @Composable RowScope.() -> Unit,
 ) {
-  CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(type.rippleColor())) {
+  val scaleFactor = getAnimationScaleFactor()
+
+  CompositionLocalProvider(
+    LocalRippleTheme provides ButtonRippleTheme(color = if (scaleFactor == 0f) Color.Transparent else type.rippleColor()),
+  ) {
     Button(
       onClick = onClick,
       enabled = enabled && !loading,
@@ -145,7 +150,7 @@ internal fun ButtonDrawable(
 }
 
 private class ButtonRippleTheme(
-  private val color: Color = Color.Black,
+  private val color: Color,
 ) : RippleTheme {
 
   private val alpha = RippleAlpha(color.alpha, color.alpha, color.alpha, color.alpha)
