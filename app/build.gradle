@@ -77,6 +77,12 @@ android {
       testInstrumentationRunnerArgument "class", "net.skyscanner.backpack.docs.GenerateScreenshots"
     }
   }
+  sourceSets {
+    screenshots {
+      res.srcDirs += ['src/internal/res']
+      java.srcDirs += ['src/internal/java']
+    }
+  }
   testOptions {
     animationsDisabled = true
     managedDevices {
@@ -134,7 +140,6 @@ dependencies {
   implementation rootProject.ext.androidXLifecycleKtx
   implementation rootProject.ext.composeActivity
   implementation rootProject.ext.kotlinReflection
-  implementation rootProject.ext.composeMaterial
   implementation rootProject.ext.stetho
   testImplementation rootProject.ext.junit
   debugImplementation rootProject.ext.composeTestManifest
