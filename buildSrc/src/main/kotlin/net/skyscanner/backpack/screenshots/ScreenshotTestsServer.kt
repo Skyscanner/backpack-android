@@ -43,6 +43,9 @@ class ScreenshotTestsServer @JvmOverloads constructor(
         outFile.createNewFile()
       }
 
+      // 17ms delay to make sure the buttons are unpressed and states is updated
+      Thread.sleep(17L)
+
       adb.requireShell("screencap -p $tmpRemoteFile")
       adb.pull(outFile, tmpRemoteFile)
 
@@ -61,7 +64,7 @@ class ScreenshotTestsServer @JvmOverloads constructor(
     requireShell("am broadcast -a com.android.systemui.demo -e command battery -e plugged false -e level 100")
     requireShell("am broadcast -a com.android.systemui.demo -e command network -e wifi hide -e level 4 -e mobile show -e datatype none")
     requireShell("am broadcast -a com.android.systemui.demo -e command notifications -e visible false")
-    Thread.sleep(1000L) // sleeping for 1 sec to make sure these settings actually applied
+    Thread.sleep(50L) // sleeping for 50 msec to make sure these settings actually applied
   }
 
   private fun Dadb.requireShell(command: String) {
