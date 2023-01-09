@@ -1495,7 +1495,7 @@ Adds Backpack radii tokens. See the full list in the [README.md](../README.md#ra
 Usage:
 
 ```XML
-<corners android:radius="@dimen/bpkBorderRadiusPill" />
+<corners android:radius="@dimen/bpkBorderRadiusXl" />
 ```
 
 Adds Backpack elevation tokens. See the full list in the [README.md](../README.md#elevation).
