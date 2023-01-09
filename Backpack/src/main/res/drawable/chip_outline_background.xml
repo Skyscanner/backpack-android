@@ -8,10 +8,10 @@
     android:left="@dimen/bpkSpacingBase"
     android:right="@dimen/bpkSpacingBase" />
   <corners
-    android:bottomLeftRadius="@dimen/bpkBorderRadiusPill"
-    android:bottomRightRadius="@dimen/bpkBorderRadiusPill"
-    android:topLeftRadius="@dimen/bpkBorderRadiusPill"
-    android:topRightRadius="@dimen/bpkBorderRadiusPill" />
+    android:bottomLeftRadius="@dimen/bpkBorderRadiusXl"
+    android:bottomRightRadius="@dimen/bpkBorderRadiusXl"
+    android:topLeftRadius="@dimen/bpkBorderRadiusXl"
+    android:topRightRadius="@dimen/bpkBorderRadiusXl" />
   <stroke
     android:width="@dimen/bpkBorderSizeSm"
     android:color="@color/bpkLineDark" />

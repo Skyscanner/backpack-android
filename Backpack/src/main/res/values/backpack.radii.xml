@@ -26,6 +26,6 @@
 
 	<dimen name="bpkBorderRadiusLg">24dp</dimen>
 
-	<dimen name="bpkBorderRadiusPill">40dp</dimen>
+	<dimen name="bpkBorderRadiusXl">40dp</dimen>
 
  </resources>
