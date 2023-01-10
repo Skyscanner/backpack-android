@@ -1,6 +1,3 @@
-import com.android.build.api.dsl.ManagedVirtualDevice
-import net.skyscanner.backpack.screenshots.ScreenshotTestsServer
-
 /**
  * Backpack for Android - Skyscanner's Design System
  *
@@ -24,6 +21,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'shot'
 
 apply from: "$rootProject.projectDir/android-configuration.gradle"
+apply from: "screenshots.gradle"
 
 def properties = new Properties()
 properties.putAll(System.getenv())
@@ -70,26 +68,19 @@ android {
       dimension "version"
       versionNameSuffix "-internal"
     }
-    screenshots {
-      dimension "version"
-      versionNameSuffix "-screenshots"
-      testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.*"
-      testInstrumentationRunnerArgument "class", "net.skyscanner.backpack.docs.GenerateScreenshots"
-    }
   }
   testOptions {
     animationsDisabled = true
-    managedDevices {
-      managedDevices.devices {
-        Pixel (ManagedVirtualDevice) {
-          device = "Pixel"
-          apiLevel = 30
-          systemImageSource = "aosp"
-        }
-      }
-    }
   }
   flavorDimensions "version"
+  productFlavors {
+    oss {
+      dimension "version"
+    }
+    internal {
+      dimension "version"
+    }
+  }
   buildFeatures {
     compose true
   }
@@ -102,29 +93,6 @@ android {
     exclude "META-INF/AL2.0"
     exclude "META-INF/LGPL2.1"
   }
-}
-
-def server = new ScreenshotTestsServer(rootProject.file("docs"))
-
-tasks.create("startScreenshotsServer") {
-  doFirst {
-    server.start()
-  }
-  finalizedBy("stopScreenshotsServer")
-}
-
-tasks.create("stopScreenshotsServer") {
-  doLast {
-    server.close()
-  }
-}
-
-tasks.create("recordScreenshots") {
-  dependsOn(
-    "startScreenshotsServer",
-    "PixelScreenshotsDebugAndroidTest",
-  )
-  finalizedBy("stopScreenshotsServer")
 }
 
 dependencies {

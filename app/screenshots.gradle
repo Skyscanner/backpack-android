@@ -1,0 +1,48 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
+import net.skyscanner.backpack.screenshots.ScreenshotTestsServer
+
+android {
+  productFlavors {
+    screenshots {
+      dimension "version"
+      versionNameSuffix "-screenshots"
+      testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.*"
+      testInstrumentationRunnerArgument "class", "net.skyscanner.backpack.docs.GenerateScreenshots"
+    }
+  }
+  testOptions {
+    animationsDisabled = true
+    managedDevices {
+      managedDevices.devices {
+        Pixel (ManagedVirtualDevice) {
+          device = "Pixel"
+          apiLevel = 30
+          systemImageSource = "aosp"
+        }
+      }
+    }
+  }
+}
+
+def server = new ScreenshotTestsServer(rootProject.file("docs"))
+
+tasks.create("startScreenshotsServer") {
+  doFirst {
+    server.start()
+  }
+  finalizedBy("stopScreenshotsServer")
+}
+
+tasks.create("stopScreenshotsServer") {
+  doLast {
+    server.close()
+  }
+}
+
+tasks.create("recordScreenshots") {
+  dependsOn(
+    "startScreenshotsServer",
+    "PixelScreenshotsDebugAndroidTest",
+  )
+  finalizedBy("stopScreenshotsServer")
+}
