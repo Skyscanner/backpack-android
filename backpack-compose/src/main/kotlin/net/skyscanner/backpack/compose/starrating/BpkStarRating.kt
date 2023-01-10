@@ -40,12 +40,13 @@ fun BpkStarRating(
   modifier: Modifier = Modifier,
   rating: Float = 2.5f,
 ) {
-  val roundedRating = when (rounding) {
-    RoundingType.Down -> floor(rating * 2) / 2
-    RoundingType.Up -> ceil(rating * 2) / 2
-    RoundingType.Nearest -> round(rating * 2) / 2
-  }
-  Row {
+
+  Row(modifier = modifier) {
+    val roundedRating = when (rounding) {
+      RoundingType.Down -> floor(rating * 2) / 2
+      RoundingType.Up -> ceil(rating * 2) / 2
+      RoundingType.Nearest -> round(rating * 2) / 2
+    }
     for (item in 0 until maxRating) {
       val value = (roundedRating - item).coerceIn(0f, 1f)
       when {
