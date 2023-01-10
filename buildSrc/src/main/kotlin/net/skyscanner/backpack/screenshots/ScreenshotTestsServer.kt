@@ -1,12 +1,15 @@
 package net.skyscanner.backpack.screenshots
 
 import dadb.Dadb
+import org.http4k.client.JavaHttpClient
+import org.http4k.core.Method
 import org.http4k.core.Request
 import org.http4k.core.Response
 import org.http4k.core.Status
 import org.http4k.server.Undertow
 import org.http4k.server.asServer
 import java.io.File
+import java.net.BindException
 
 class ScreenshotTestsServer @JvmOverloads constructor(
   private val outDir: File,
@@ -20,11 +23,27 @@ class ScreenshotTestsServer @JvmOverloads constructor(
 
   fun start() {
     require(Dadb.list().isEmpty()) { "No device or emulator should be running before the tests" }
-    server.start()
+    try {
+      server.start()
+    } catch (t: BindException) {
+      // port is already taken: gradle didn't finalise the previous run properly
+      // if we just send an empty ping request, the server will close itself due the request being invalid
+      JavaHttpClient().invoke(Request(Method.GET, "http://localhost:$serverPort")).close()
+      // slleping for 3 seconds to make sure the server is closed
+      Thread.sleep(3000L)
+      // another attempt
+      require(Dadb.list().isEmpty()) { "No device or emulator should be running before the tests" }
+      server.start()
+    }
   }
 
   override fun close() {
     server.stop()
+    try {
+      adb.close()
+    } catch (t: Throwable) {
+      // do nothing
+    }
   }
 
   private fun app(request: Request) : Response =
@@ -43,8 +62,8 @@ class ScreenshotTestsServer @JvmOverloads constructor(
         outFile.createNewFile()
       }
 
-      // 17ms delay to make sure the buttons are unpressed and states is updated
-      Thread.sleep(17L)
+      // 20ms delay to make sure the buttons are unpressed and states is updated
+      Thread.sleep(20L)
 
       adb.requireShell("screencap -p $tmpRemoteFile")
       adb.pull(outFile, tmpRemoteFile)
@@ -52,7 +71,8 @@ class ScreenshotTestsServer @JvmOverloads constructor(
       Response(Status.OK)
     } catch (t: Throwable) {
       close()
-      throw t
+      t.printStackTrace()
+      Response(Status.INTERNAL_SERVER_ERROR)
     }
 
   private fun Dadb.setup(): Unit {
