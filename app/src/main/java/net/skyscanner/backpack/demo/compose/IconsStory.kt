@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -37,7 +36,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -102,14 +100,6 @@ fun IconsStoryCompose() {
     val context = LocalContext.current
     val clipboardManager = LocalClipboardManager.current
 
-    val autoMirrorBackground = BpkTheme.colors.statusSuccessSpot
-    val autoMirrorAlpha by animateFloatAsState(
-      targetValue = when (layoutDirection) {
-        LayoutDirection.Ltr -> 0f
-        LayoutDirection.Rtl -> 1f
-      },
-    )
-
     BpkText(
       text = stringResource(R.string.icons_story_guide),
       style = BpkTheme.typography.caption,
@@ -125,9 +115,6 @@ fun IconsStoryCompose() {
             contentAlignment = Alignment.Center,
             modifier = Modifier
               .border(Dp.Hairline, BpkTheme.colors.line)
-              .drawBehind {
-                drawRect(color = autoMirrorBackground, alpha = if (icon.autoMirror) autoMirrorAlpha else 0f)
-              }
               .clickable {
                 clipboardManager.setText(AnnotatedString(icon.name))
                 BpkToast.makeText(
