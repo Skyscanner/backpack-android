@@ -6,6 +6,7 @@ import org.http4k.core.Method
 import org.http4k.core.Request
 import org.http4k.core.Response
 import org.http4k.core.Status
+import org.http4k.server.Http4kServer
 import org.http4k.server.Undertow
 import org.http4k.server.asServer
 import java.io.File
@@ -17,34 +18,36 @@ class ScreenshotTestsServer @JvmOverloads constructor(
   private val tmpRemoteFile: String = "/data/local/tmp/screenshot.png",
 ) : AutoCloseable {
 
-  private val server = ::app.asServer(Undertow(serverPort))
-
-  private val adb by lazy { Dadb.discover()!!.apply { setup() } }
-
   fun start() {
     require(Dadb.list().isEmpty()) { "No device or emulator should be running before the tests" }
+
     try {
-      server.start()
-    } catch (t: BindException) {
+      startServer()
+    } catch (t: Throwable) {
       // port is already taken: gradle didn't finalise the previous run properly
       // if we just send an empty ping request, the server will close itself due the request being invalid
-      JavaHttpClient().invoke(Request(Method.GET, "http://localhost:$serverPort")).close()
-      // slleping for 3 seconds to make sure the server is closed
+      JavaHttpClient().invoke(Request(Method.GET, "http://localhost:$serverPort"))
+      // sleeping for 3 seconds to make sure the server is closed
       Thread.sleep(3000L)
       // another attempt
-      require(Dadb.list().isEmpty()) { "No device or emulator should be running before the tests" }
-      server.start()
+      startServer()
     }
+  }
+
+  private var server: Http4kServer? = null
+
+  private fun startServer() {
+    close()
+    server = ::app.asServer(Undertow(serverPort))
+    server?.start()
   }
 
   override fun close() {
-    server.stop()
-    try {
-      adb.close()
-    } catch (t: Throwable) {
-      // do nothing
-    }
+    server?.close()
+    server = null
   }
+
+  private val adb by lazy { Dadb.discover()!!.apply { setup() } }
 
   private fun app(request: Request) : Response =
     try {
@@ -71,8 +74,7 @@ class ScreenshotTestsServer @JvmOverloads constructor(
       Response(Status.OK)
     } catch (t: Throwable) {
       close()
-      t.printStackTrace()
-      Response(Status.INTERNAL_SERVER_ERROR)
+      throw t
     }
 
   private fun Dadb.setup(): Unit {
