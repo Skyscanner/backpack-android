@@ -22,22 +22,63 @@ package net.skyscanner.backpack.compose.starrating
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import kotlin.math.ceil
+import kotlin.math.floor
+import kotlin.math.round
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.Star
+import net.skyscanner.backpack.compose.tokens.StarHalf
 import net.skyscanner.backpack.compose.tokens.StarOutline
 
 @Composable
 fun BpkStarRating(
   maxRating: Int,
+  rounding: RoundingType,
   modifier: Modifier = Modifier,
   rating: Float = 2.5f,
-//  rounding: Any = RoundingType.Up,
 ) {
-  Row() {
-    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
-    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
-    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
-    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
-    BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
+  val roundedRating = when (rounding) {
+    RoundingType.Down -> floor(rating * 2) / 2
+    RoundingType.Up -> ceil(rating * 2) / 2
+    RoundingType.Nearest -> round(rating * 2) / 2
   }
+  Row {
+    for (item in 0 until maxRating) {
+
+      val value = (roundedRating - item).coerceIn(0f, 1f)
+      when {
+        (value >= 0.0f && value < 0.5f) -> BpkStar(icon = StarType.Empty)
+        (value >= 0.5f && value < 1.0f) -> BpkStar(icon = StarType.Half)
+        else -> BpkStar(icon = StarType.Full)
+      }
+    }
+  }
+}
+
+@Composable
+private fun BpkStar(icon: StarType) {
+  when (icon) {
+    StarType.Empty -> {
+      BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, tint = BpkTheme.colors.textDisabled)
+    }
+    StarType.Half -> {
+      BpkIcon(icon = BpkIcon.StarHalf, contentDescription = null, tint = BpkTheme.colors.statusWarningSpot)
+    }
+    StarType.Full -> {
+      BpkIcon(icon = BpkIcon.Star, contentDescription = null, tint = BpkTheme.colors.statusWarningSpot)
+    }
+  }
+}
+
+private enum class StarType {
+  Empty,
+  Half,
+  Full,
+}
+
+enum class RoundingType {
+  Down,
+  Up,
+  Nearest,
 }
