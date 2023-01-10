@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
+import net.skyscanner.backpack.compose.starrating.RoundingType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
@@ -44,17 +45,17 @@ fun BpkStarRatingStory(
         text = stringResource(R.string.star_rating_0_5),
         style = BpkTheme.typography.label2,
       )
-      BpkStarRating(maxRating = 5)
+      BpkStarRating(maxRating = 5, rating = 2.5f, rounding = RoundingType.Up)
       BpkText(
         text = stringResource(R.string.star_rating_25_5),
         style = BpkTheme.typography.label2,
       )
-      BpkStarRating(maxRating = 5)
+      BpkStarRating(maxRating = 5, rating = 4.4f, rounding = RoundingType.Up)
       BpkText(
         text = stringResource(R.string.star_rating_5_5),
         style = BpkTheme.typography.label2,
       )
-      BpkStarRating(maxRating = 5)
+      BpkStarRating(maxRating = 5, rating = 1.9f, rounding = RoundingType.Up)
     }
   }
 }
