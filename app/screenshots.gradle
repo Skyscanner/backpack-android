@@ -26,21 +26,27 @@ android {
 
 def server = new ScreenshotTestsServer(rootProject.file("docs"))
 
-tasks.create("startScreenshotsServer") {
+task copyInternalFontsToScreenshots(type: Copy) {
+  from 'src/internal/res/font'
+  from 'src/sreenshot/res/font'
+}
+
+task startScreenshotsServer() {
   doFirst {
     server.start()
   }
   finalizedBy("stopScreenshotsServer")
 }
 
-tasks.create("stopScreenshotsServer") {
+task stopScreenshotsServer() {
   doLast {
     server.close()
   }
 }
 
-tasks.create("recordScreenshots") {
+task recordScreenshots() {
   dependsOn(
+    "copyInternalFontsToScreenshots",
     "startScreenshotsServer",
     "PixelScreenshotsDebugAndroidTest",
   )
