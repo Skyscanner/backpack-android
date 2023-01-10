@@ -21,15 +21,19 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
 import net.skyscanner.backpack.compose.starrating.RoundingType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
@@ -42,20 +46,26 @@ fun BpkStarRatingStory(
   ) {
     Column() {
       BpkText(
-        text = stringResource(R.string.star_rating_0_5),
+        text = stringResource(R.string.icons_large),
         style = BpkTheme.typography.label2,
       )
-      BpkStarRating(maxRating = 5, rating = 2.5f, rounding = RoundingType.Up)
+      BpkStarRating(maxRating = 5, rating = 1f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 2f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 3f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 3.5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 4f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
       BpkText(
-        text = stringResource(R.string.star_rating_25_5),
+        text = stringResource(R.string.icons_small),
         style = BpkTheme.typography.label2,
       )
-      BpkStarRating(maxRating = 5, rating = 4.4f, rounding = RoundingType.Up)
-      BpkText(
-        text = stringResource(R.string.star_rating_5_5),
-        style = BpkTheme.typography.label2,
-      )
-      BpkStarRating(maxRating = 5, rating = 1.9f, rounding = RoundingType.Up)
+      BpkStarRating(maxRating = 5, rating = 1f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 2f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 3f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 3.5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 4f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
     }
   }
 }
