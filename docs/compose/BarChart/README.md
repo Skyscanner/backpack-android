@@ -6,9 +6,9 @@
 
 ## Default
 
-| Day                                                                                                                                                          | Night |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BarChart/screenshots/all.png" alt="BarChart component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BarChart/screenshots/all_dm.png" alt="BarChart component - dark mode" width="375" /> |
+| Day                                                                                                                                                                 | Night |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BarChart/screenshots/default.png" alt="BarChart component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/BarChart/screenshots/default_dm.png" alt="BarChart component - dark mode" width="375" /> |
 
 ## Installation
 

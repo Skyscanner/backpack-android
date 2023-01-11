@@ -30,7 +30,6 @@ import java.io.File
 data class BpkIcon(
   val name: String,
   val types: Map<Type, String>,
-  val autoMirror: Boolean,
 ) {
 
   enum class Type {
@@ -60,9 +59,6 @@ data class BpkIcon(
               }
               .filterValues { it != null }
               .let { it as Map<Type, String> },
-            autoMirror = files
-              .filter { it.nameWithoutExtension.startsWith(name) }
-              .any { it.readText().contains("android:automirrored=\"true\"", ignoreCase = true) },
           )
         }
         .sortedBy { it.name }
@@ -118,11 +114,6 @@ private fun toCompose(
           .addStatement("name = %S,", icon.name)
           .addStatement("small = %T.drawable.%N,", rClass, small)
           .addStatement("large = %T.drawable.%N,", rClass, large)
-          .apply {
-            if (icon.autoMirror) {
-              addStatement("autoMirror = %L,", icon.autoMirror)
-            }
-          }
           .unindent()
           .addStatement(")")
           .unindent()

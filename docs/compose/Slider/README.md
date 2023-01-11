@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/slider/screenshots/default.png" alt="Slider component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/slider/screenshots/default_dm.png" alt="Slider component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Slider/screenshots/default.png" alt="Slider component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Slider/screenshots/default_dm.png" alt="Slider component - dark mode" width="375" /> |
 
 ## Installation
 

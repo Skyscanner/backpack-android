@@ -33,5 +33,5 @@ public object BpkBorderRadius {
 
   public val Lg: Dp = 24.dp
 
-  public val Pill: Dp = 40.dp
+  public val Xl: Dp = 40.dp
 }
