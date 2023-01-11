@@ -28,11 +28,9 @@ Install system images
 ```
 # x86
 $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-26;google_apis;x86"
-$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;x86"
 
 # ARM
 $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-26;google_apis;arm64-v8a"
-$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;arm64-v8a"
 ```
 
 ## Setup
@@ -195,33 +193,16 @@ To add a new component open `net/skyscanner/backpack/demo/data/ComponentRegistry
 
 To make our documentation clearer we include screenshots on the docs site for each components.
 
-### Setup
-
-Before running the script install and start the docs emulator.
-
-```
-# x86
-$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name "bpk-droid-screenshot-avd" --device "pixel" --package "system-images;android-30;google_apis;x86" --tag "google_apis" --abi "x86"
-$ANDROID_HOME/tools/emulator -avd bpk-droid-screenshot-avd
-
-
-# ARM
-$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager --verbose create avd --force --name "bpk-droid-screenshot-avd" --device "pixel" --package "system-images;android-30;google_apis;arm64-v8a" --tag "google_apis" --abi "arm64-v8a"
-$ANDROID_HOME/emulator/emulator -avd bpk-droid-screenshot-avd
-```
-
-### Generating screenshots
-
 To add a new screenshot open `net/skyscanner/backpack/docs/DocsRegistry.kt` and add the screenshot to the `screenshots` list.
 **Important**: For the screenshot to be generated the name must match the title of the page.
 
-Run `./scripts/generate_screenshots.sh` to capture all screenshots. Files will be saved in the correct directory.
+Run `./gradlew :app:recordScreenshots` to capture all screenshots. Files will be saved in the correct directory.
 
 > Note: Python is required.
 
 Verify the screenshots and commit the changes.
 
-> Note: Unfortunately the screenshot generation may also contain changes to other screenshots. Unless they are intended remove these changes and only commit the ones with intended changes.
+> Note: Sometimes the screenshot generation may also contain changes to other screenshots. Unless they are intended remove these changes and only commit the ones with intended changes.
 
 ## Demo app shortcuts
 
