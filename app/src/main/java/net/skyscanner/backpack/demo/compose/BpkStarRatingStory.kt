@@ -29,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.icon.BpkIconSize
-import net.skyscanner.backpack.compose.starrating.BpkInteractiveStarRating
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
 import net.skyscanner.backpack.compose.starrating.RoundingType
 import net.skyscanner.backpack.compose.text.BpkText
@@ -67,40 +66,6 @@ fun BpkStarRatingStory(
       BpkStarRating(maxRating = 5, rating = 3.5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
       BpkStarRating(maxRating = 5, rating = 4f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
       BpkStarRating(maxRating = 5, rating = 5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
-    }
-  }
-}
-
-@Composable
-fun BpkInteractiveStarRatingStory(
-  modifier: Modifier = Modifier,
-) {
-  Box(
-    modifier = modifier.fillMaxHeight(),
-    contentAlignment = Alignment.Center,
-  ) {
-    Column() {
-      BpkText(
-        text = stringResource(R.string.icons_large),
-        style = BpkTheme.typography.label2,
-      )
-      BpkInteractiveStarRating(maxRating = 5, rating = 1f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
-      BpkInteractiveStarRating(maxRating = 5, rating = 2f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
-      BpkInteractiveStarRating(maxRating = 5, rating = 3f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
-      BpkInteractiveStarRating(maxRating = 5, rating = 3.5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
-      BpkInteractiveStarRating(maxRating = 5, rating = 4f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
-      BpkInteractiveStarRating(maxRating = 5, rating = 5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
-      Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
-      BpkText(
-        text = stringResource(R.string.icons_small),
-        style = BpkTheme.typography.label2,
-      )
-      BpkInteractiveStarRating(maxRating = 5, rating = 1f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
-      BpkInteractiveStarRating(maxRating = 5, rating = 2f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
-      BpkInteractiveStarRating(maxRating = 5, rating = 3f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
-      BpkInteractiveStarRating(maxRating = 5, rating = 3.5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
-      BpkInteractiveStarRating(maxRating = 5, rating = 4f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
-      BpkInteractiveStarRating(maxRating = 5, rating = 5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
     }
   }
 }
