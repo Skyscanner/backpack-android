@@ -40,7 +40,31 @@ fun BpkStarRating(
   modifier: Modifier = Modifier,
   rating: Float = 2.5f,
 ) {
+  Row(modifier = modifier) {
+    val roundedRating = when (rounding) {
+      RoundingType.Down -> floor(rating * 2) / 2
+      RoundingType.Up -> ceil(rating * 2) / 2
+      RoundingType.Nearest -> round(rating * 2) / 2
+    }
+    for (item in 0 until maxRating) {
+      val value = (roundedRating - item).coerceIn(0f, 1f)
+      when {
+        (value >= 0.0f && value < 0.5f) -> BpkStar(icon = StarType.Empty, iconSize = iconSize)
+        (value >= 0.5f && value < 1.0f) -> BpkStar(icon = StarType.Half, iconSize = iconSize)
+        else -> BpkStar(icon = StarType.Full, iconSize = iconSize)
+      }
+    }
+  }
+}
 
+@Composable
+fun BpkInteractiveStarRating(
+  maxRating: Int,
+  rounding: RoundingType,
+  iconSize: BpkIconSize,
+  modifier: Modifier = Modifier,
+  rating: Float = 2.5f,
+) {
   Row(modifier = modifier) {
     val roundedRating = when (rounding) {
       RoundingType.Down -> floor(rating * 2) / 2
