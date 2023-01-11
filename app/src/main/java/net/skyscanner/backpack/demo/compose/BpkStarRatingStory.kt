@@ -69,3 +69,37 @@ fun BpkStarRatingStory(
     }
   }
 }
+
+@Composable
+fun BpkInteractiveStarRatingStory(
+  modifier: Modifier = Modifier,
+) {
+  Box(
+    modifier = modifier.fillMaxHeight(),
+    contentAlignment = Alignment.Center,
+  ) {
+    Column() {
+      BpkText(
+        text = stringResource(R.string.icons_large),
+        style = BpkTheme.typography.label2,
+      )
+      BpkStarRating(maxRating = 5, rating = 1f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 2f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 3f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 3.5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 4f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      BpkStarRating(maxRating = 5, rating = 5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
+      Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
+      BpkText(
+        text = stringResource(R.string.icons_small),
+        style = BpkTheme.typography.label2,
+      )
+      BpkStarRating(maxRating = 5, rating = 1f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 2f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 3f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 3.5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 4f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+      BpkStarRating(maxRating = 5, rating = 5f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
+    }
+  }
+}
