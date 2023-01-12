@@ -18,28 +18,30 @@
 
 package net.skyscanner.backpack.docs
 
-import java.io.BufferedInputStream
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
+import okhttp3.HttpUrl
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
-class RemoteScreenGrab(
-  private val serverIp: String
-) {
-  fun takeScreenshot(name: String, path: String) {
-    val url = URL("http://$serverIp:8888?name=$name&path=$path")
-    val con = url.openConnection() as HttpURLConnection
-    con.requestMethod = "POST"
-    try {
-      val inStream = BufferedInputStream(con.inputStream)
-      // Output should to be read
-      BufferedReader(InputStreamReader(inStream)).readText()
-      if (con.responseCode != 200) {
-        throw Exception("Unable to take screenshot for $name. Error code: ${con.responseCode}")
-      }
-    } finally {
-      con.disconnect()
-    }
+object RemoteScreenGrab {
+
+  private val serverIp: String = "10.0.2.2"
+  private val serverPort = 8888
+  private val okHttp = OkHttpClient()
+
+  fun takeScreenshot(component: String, type: String, file: String) {
+    val response = okHttp.newCall(
+        Request.Builder().url(
+            HttpUrl.Builder()
+              .scheme("http")
+              .host(serverIp)
+              .port(serverPort)
+              .setQueryParameter("component", component)
+              .setQueryParameter("type", type)
+              .setQueryParameter("file", file)
+            .build()
+          ).build()
+      ).execute()
+
+    require(response.code() == 200) { "Unable to take screenshot for $component. Error code: ${response.code()}" }
   }
 }
