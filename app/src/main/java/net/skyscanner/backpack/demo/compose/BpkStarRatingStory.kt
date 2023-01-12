@@ -47,7 +47,7 @@ fun BpkStarRatingStory(
     Column() {
       BpkText(
         text = stringResource(R.string.icons_large),
-        style = BpkTheme.typography.label2,
+        style = BpkTheme.typography.heading3,
       )
       BpkStarRating(maxRating = 5, rating = 1f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
       BpkStarRating(maxRating = 5, rating = 2f, rounding = RoundingType.Up, iconSize = BpkIconSize.Large)
@@ -58,7 +58,7 @@ fun BpkStarRatingStory(
       Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
       BpkText(
         text = stringResource(R.string.icons_small),
-        style = BpkTheme.typography.label2,
+        style = BpkTheme.typography.heading3,
       )
       BpkStarRating(maxRating = 5, rating = 1f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
       BpkStarRating(maxRating = 5, rating = 2f, rounding = RoundingType.Up, iconSize = BpkIconSize.Small)
