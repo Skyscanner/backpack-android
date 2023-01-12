@@ -30,7 +30,8 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Snackbar
@@ -59,8 +60,8 @@ internal fun BpkFloatingNotificationImpl(
 
   Snackbar(
     modifier = modifier
-      .floatingNotificationSize(LocalConfiguration.current)
-      .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+      .fillMaxWidth()
+      .floatingNotificationSize(LocalConfiguration.current),
     shape = RoundedCornerShape(BpkBorderRadius.Md),
     backgroundColor = BpkTheme.colors.corePrimary,
     contentColor = BpkTheme.colors.textOnDark,
@@ -110,21 +111,16 @@ internal fun floatingNotificationTransforms(): AnimatedContentScope<BpkFloatingN
   }
 
 private object BpkFloatingNotificationSizes {
-  const val SMALL_MOBILE_MAX_WIDTH = 360
-  const val MOBILE_MAX_WIDTH = 512
-
-  val SmallMobile = DpSize(288.dp, 52.dp)
-  val Mobile = DpSize(312.dp, 52.dp)
-  val Tablet = DpSize(400.dp, 72.dp)
+  const val TABLET_MIN_WIDTH = 769
+  val PhoneAndSmallTableWidth = 52.dp
+  val TabletAndLarger = DpSize(400.dp, 72.dp)
 }
 
 private fun Modifier.floatingNotificationSize(configuration: Configuration): Modifier =
   when {
-    configuration.screenWidthDp < BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH ->
-      requiredSize(BpkFloatingNotificationSizes.SmallMobile)
-    configuration.screenWidthDp in BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH..BpkFloatingNotificationSizes.MOBILE_MAX_WIDTH ->
-      requiredSize(BpkFloatingNotificationSizes.Mobile)
-    else -> requiredSize(BpkFloatingNotificationSizes.Tablet)
+    configuration.screenWidthDp < BpkFloatingNotificationSizes.TABLET_MIN_WIDTH ->
+      requiredHeight(BpkFloatingNotificationSizes.PhoneAndSmallTableWidth)
+    else -> requiredSize(BpkFloatingNotificationSizes.TabletAndLarger)
   }
 
 private const val TRANSITION_DURATION = 300
