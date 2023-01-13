@@ -190,7 +190,7 @@ class DialogStory : Story() {
     BpkDialog(requireContext(), BpkDialog.Type.Flare).apply {
       title = getString(R.string.dialog_title)
       description = getString(R.string.dialog_text)
-      Picasso.get().load("file:///android_asset/dialog_sample.jpg").into(image)
+      Picasso.get().load("file:///android_asset/dialog_sample.jpg").noFade().into(image)
 
       addActionButton(
         BpkDialog.Button(getString(R.string.dialog_confirmation)) {

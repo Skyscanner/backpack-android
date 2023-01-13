@@ -21,6 +21,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'shot'
 
 apply from: "$rootProject.projectDir/android-configuration.gradle"
+apply from: "screenshots.gradle"
 
 def properties = new Properties()
 properties.putAll(System.getenv())
