@@ -44,8 +44,6 @@ import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
-import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloatingNotificationSizes.PhoneAndSmallTable
-import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloatingNotificationSizes.TabletAndLarger
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
@@ -62,10 +60,10 @@ internal fun BpkFloatingNotificationImpl(
   Snackbar(
     modifier = modifier
       .requiredHeight(
-        if (LocalConfiguration.current.screenWidthDp >= BpkFloatingNotificationSizes.TABLET_MIN_WIDTH) TabletAndLarger.height
-        else PhoneAndSmallTable.height,
+        if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height
+        else DefaultPhoneSize.height,
       )
-      .widthIn(max = TabletAndLarger.width),
+      .widthIn(max = DefaultTabletSize.width),
     shape = RoundedCornerShape(BpkBorderRadius.Md),
     backgroundColor = BpkTheme.colors.corePrimary,
     contentColor = BpkTheme.colors.textOnDark,
@@ -114,10 +112,7 @@ internal fun floatingNotificationTransforms(): AnimatedContentScope<BpkFloatingN
     )
   }
 
-private object BpkFloatingNotificationSizes {
-  const val TABLET_MIN_WIDTH = 769
-  val PhoneAndSmallTable = DpSize(Dp.Unspecified, 52.dp)
-  val TabletAndLarger = DpSize(400.dp, 72.dp)
-}
-
+private const val TABLET_MIN_WIDTH = 769
+private val DefaultPhoneSize = DpSize(Dp.Unspecified, 52.dp)
+private val DefaultTabletSize = DpSize(400.dp, 72.dp)
 private const val TRANSITION_DURATION = 300
