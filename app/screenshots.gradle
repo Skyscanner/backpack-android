@@ -28,8 +28,8 @@ android {
 def server = new ScreenshotTestsServer(rootProject.file("docs"))
 
 task copyInternalFontsToScreenshots(type: Copy) {
-  from 'src/internal/res/font'
-  from 'src/sreenshot/res/font'
+  from "src/internal/res/font"
+  into "src/screenshots/res/font"
 }
 
 task startScreenshotsServer() {
@@ -51,6 +51,11 @@ tasks.withType(ManagedDeviceInstrumentationTestTask) {
 }
 
 task recordScreenshots() {
+  mustRunAfter(
+    "copyInternalFontsToScreenshots",
+    "startScreenshotsServer",
+  )
+
   dependsOn(
     "copyInternalFontsToScreenshots",
     "startScreenshotsServer",
