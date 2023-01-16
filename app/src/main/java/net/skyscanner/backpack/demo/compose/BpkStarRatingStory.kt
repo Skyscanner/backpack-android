@@ -26,12 +26,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.starrating.BpkHotelRating
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
+import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
 import net.skyscanner.backpack.compose.starrating.RoundingType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -45,9 +45,12 @@ fun BpkStarRatingStory(
   val context = LocalContext.current
   Box(
     modifier = modifier.fillMaxHeight(),
-    contentAlignment = Alignment.Center,
   ) {
     Column() {
+      BpkText(
+        text = stringResource(R.string.static_default_rating_title),
+        style = BpkTheme.typography.heading2,
+      )
       BpkText(
         text = stringResource(R.string.icons_large),
         style = BpkTheme.typography.heading3,
@@ -58,6 +61,7 @@ fun BpkStarRatingStory(
           context.getString(R.string.star_rating_accessibility_status, value, max)
         },
         rounding = RoundingType.Up,
+        size = BpkStarRatingSize.Large,
       )
       BpkStarRating(
         rating = 2f,
@@ -65,6 +69,7 @@ fun BpkStarRatingStory(
           context.getString(R.string.star_rating_accessibility_status, value, max)
         },
         rounding = RoundingType.Up,
+        size = BpkStarRatingSize.Large,
       )
       BpkStarRating(
         rating = 3f,
@@ -72,6 +77,7 @@ fun BpkStarRatingStory(
           context.getString(R.string.star_rating_accessibility_status, value, max)
         },
         rounding = RoundingType.Up,
+        size = BpkStarRatingSize.Large,
       )
       BpkStarRating(
         rating = 3.5f,
@@ -80,6 +86,7 @@ fun BpkStarRatingStory(
           context.getString(R.string.star_rating_decimal_accessibility_status, value, max)
         },
         rounding = RoundingType.Up,
+        size = BpkStarRatingSize.Large,
       )
       BpkStarRating(
         rating = 4f,
@@ -87,6 +94,7 @@ fun BpkStarRatingStory(
           context.getString(R.string.star_rating_accessibility_status, value, max)
         },
         rounding = RoundingType.Up,
+        size = BpkStarRatingSize.Large,
       )
       BpkStarRating(
         rating = 5f,
@@ -94,8 +102,9 @@ fun BpkStarRatingStory(
           context.getString(R.string.star_rating_accessibility_status, value, max)
         },
         rounding = RoundingType.Up,
+        size = BpkStarRatingSize.Large,
       )
-      Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
+//      Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
       BpkText(
         text = stringResource(R.string.icons_small),
         style = BpkTheme.typography.heading3,
@@ -142,8 +151,81 @@ fun BpkStarRatingStory(
         },
         rounding = RoundingType.Up,
       )
+      Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
+      BpkText(
+        text = stringResource(R.string.hotel_star_rating_title),
+        style = BpkTheme.typography.heading2,
+      )
+      BpkText(
+        text = stringResource(R.string.icons_large),
+        style = BpkTheme.typography.heading3,
+      )
+      BpkHotelRating(
+        rating = 1f,
+        contentDescription = { value, max ->
+          context.getString(R.string.star_rating_accessibility_status, value, max)
+        },
+        size = BpkStarRatingSize.Large,
+      )
+      BpkHotelRating(
+        rating = 2f,
+        contentDescription = { value, max ->
+          context.getString(R.string.star_rating_accessibility_status, value, max)
+        },
+        size = BpkStarRatingSize.Large,
+      )
       BpkHotelRating(
         rating = 3f,
+        contentDescription = { value, max ->
+          context.getString(R.string.star_rating_accessibility_status, value, max)
+        },
+        size = BpkStarRatingSize.Large,
+      )
+      BpkHotelRating(
+        rating = 4f,
+        contentDescription = { value, max ->
+          context.getString(R.string.star_rating_accessibility_status, value, max)
+        },
+        size = BpkStarRatingSize.Large,
+      )
+      BpkHotelRating(
+        rating = 5f,
+        contentDescription = { value, max ->
+          context.getString(R.string.star_rating_accessibility_status, value, max)
+        },
+        size = BpkStarRatingSize.Large,
+      )
+//      Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
+      BpkText(
+        text = stringResource(R.string.icons_small),
+        style = BpkTheme.typography.heading3,
+      )
+      BpkHotelRating(
+        rating = 1f,
+        contentDescription = { value, max ->
+          context.getString(R.string.star_rating_accessibility_status, value, max)
+        },
+      )
+      BpkHotelRating(
+        rating = 2f,
+        contentDescription = { value, max ->
+          context.getString(R.string.star_rating_accessibility_status, value, max)
+        },
+      )
+      BpkHotelRating(
+        rating = 3f,
+        contentDescription = { value, max ->
+          context.getString(R.string.star_rating_accessibility_status, value, max)
+        },
+      )
+      BpkHotelRating(
+        rating = 4f,
+        contentDescription = { value, max ->
+          context.getString(R.string.star_rating_accessibility_status, value, max)
+        },
+      )
+      BpkHotelRating(
+        rating = 5f,
         contentDescription = { value, max ->
           context.getString(R.string.star_rating_accessibility_status, value, max)
         },
