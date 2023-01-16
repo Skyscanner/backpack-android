@@ -1,6 +1,7 @@
 import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestTask
 import net.skyscanner.backpack.screenshots.ScreenshotTestsServer
+import org.apache.commons.io.FileUtils
 
 android {
   productFlavors {
@@ -27,9 +28,11 @@ android {
 
 def server = new ScreenshotTestsServer(rootProject.file("docs"))
 
-task copyInternalFontsToScreenshots(type: Copy) {
-  from 'src/internal/res/font'
-  from 'src/sreenshot/res/font'
+task copyInternalFontsToScreenshots() {
+  FileUtils.copyDirectory(
+    new File(projectDir.absolutePath, "src/internal/res/font"),
+    new File(projectDir.absolutePath, "src/screenshots/res/font"),
+  )
 }
 
 task startScreenshotsServer() {
