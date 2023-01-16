@@ -268,4 +268,6 @@
   <string name="price_trailing_text">per day</string>
   <string name="price_line_through_text">£2,033</string>
   <string name="price_leading_text">App only deal</string>
+  <string name="hotel_star_rating_title">Hotels</string>
+  <string name="static_default_rating_title">Static (default)</string>
 </resources>
