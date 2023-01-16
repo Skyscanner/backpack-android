@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.compose.floatingnotification.internal
 
-import android.content.res.Configuration
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -30,8 +29,8 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Snackbar
 import androidx.compose.runtime.Composable
@@ -39,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -59,8 +59,11 @@ internal fun BpkFloatingNotificationImpl(
 
   Snackbar(
     modifier = modifier
-      .floatingNotificationSize(LocalConfiguration.current)
-      .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+      .requiredHeight(
+        if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height
+        else DefaultPhoneSize.height,
+      )
+      .widthIn(max = DefaultTabletSize.width),
     shape = RoundedCornerShape(BpkBorderRadius.Md),
     backgroundColor = BpkTheme.colors.corePrimary,
     contentColor = BpkTheme.colors.textOnDark,
@@ -109,22 +112,7 @@ internal fun floatingNotificationTransforms(): AnimatedContentScope<BpkFloatingN
     )
   }
 
-private object BpkFloatingNotificationSizes {
-  const val SMALL_MOBILE_MAX_WIDTH = 360
-  const val MOBILE_MAX_WIDTH = 512
-
-  val SmallMobile = DpSize(288.dp, 52.dp)
-  val Mobile = DpSize(312.dp, 52.dp)
-  val Tablet = DpSize(400.dp, 72.dp)
-}
-
-private fun Modifier.floatingNotificationSize(configuration: Configuration): Modifier =
-  when {
-    configuration.screenWidthDp < BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH ->
-      requiredSize(BpkFloatingNotificationSizes.SmallMobile)
-    configuration.screenWidthDp in BpkFloatingNotificationSizes.SMALL_MOBILE_MAX_WIDTH..BpkFloatingNotificationSizes.MOBILE_MAX_WIDTH ->
-      requiredSize(BpkFloatingNotificationSizes.Mobile)
-    else -> requiredSize(BpkFloatingNotificationSizes.Tablet)
-  }
-
+private const val TABLET_MIN_WIDTH = 769
+private val DefaultPhoneSize = DpSize(Dp.Unspecified, 52.dp)
+private val DefaultTabletSize = DpSize(400.dp, 72.dp)
 private const val TRANSITION_DURATION = 300
