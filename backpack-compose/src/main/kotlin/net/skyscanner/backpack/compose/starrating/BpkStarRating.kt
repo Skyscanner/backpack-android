@@ -22,6 +22,8 @@ package net.skyscanner.backpack.compose.starrating
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.round
@@ -32,20 +34,69 @@ import net.skyscanner.backpack.compose.tokens.Star
 import net.skyscanner.backpack.compose.tokens.StarHalf
 import net.skyscanner.backpack.compose.tokens.StarOutline
 
+enum class BpkStarRatingSize {
+  Large,
+  Small,
+}
+
 @Composable
 fun BpkStarRating(
+  rating: Float,
+  contentDescription: (Float, Int) -> String,
+  modifier: Modifier = Modifier,
+  rounding: RoundingType = RoundingType.Down,
+  size: BpkStarRatingSize = BpkStarRatingSize.Small,
+) {
+  BpkStarRating(
+    maxRating = 5,
+    rounding = rounding,
+    iconSize = when (size) {
+      BpkStarRatingSize.Large -> BpkIconSize.Large
+      BpkStarRatingSize.Small -> BpkIconSize.Small
+    },
+    modifier = modifier,
+    rating = rating,
+    contentDescription = contentDescription,
+  )
+}
+
+@Composable
+fun BpkHotelRating(
+  rating: Float,
+  contentDescription: (Float, Int) -> String,
+  modifier: Modifier = Modifier,
+  size: BpkStarRatingSize = BpkStarRatingSize.Small,
+) {
+  BpkStarRating(
+    maxRating = rating.toInt(),
+    rounding = RoundingType.Down,
+    iconSize = when (size) {
+      BpkStarRatingSize.Large -> BpkIconSize.Large
+      BpkStarRatingSize.Small -> BpkIconSize.Small
+    },
+    modifier = modifier,
+    rating = rating,
+    contentDescription = contentDescription,
+  )
+}
+
+@Composable
+private fun BpkStarRating(
+  rating: Float,
   maxRating: Int,
   rounding: RoundingType,
   iconSize: BpkIconSize,
+  contentDescription: (Float, Int) -> String,
   modifier: Modifier = Modifier,
-  rating: Float = 2.5f,
 ) {
-  Row(modifier = modifier) {
-    val roundedRating = when (rounding) {
-      RoundingType.Down -> floor(rating * 2) / 2
-      RoundingType.Up -> ceil(rating * 2) / 2
-      RoundingType.Nearest -> round(rating * 2) / 2
-    }
+  val coercedRating = rating.coerceIn(0f, maxRating.toFloat())
+  val roundedRating = when (rounding) {
+    RoundingType.Down -> floor(coercedRating * 2) / 2
+    RoundingType.Up -> ceil(coercedRating * 2) / 2
+    RoundingType.Nearest -> round(coercedRating * 2) / 2
+  }
+  Row(modifier = modifier.semantics { this.contentDescription = contentDescription(roundedRating, maxRating) }) {
+
     for (item in 0 until maxRating) {
       val value = (roundedRating - item).coerceIn(0f, 1f)
       when {
