@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
     "prebuild": "npm run lint",
-    "build": "gulp && npm run spellcheck && ./gradlew :backpack-compose:generateEverything",
+    "build": "gulp && npm run spellcheck && ./gradlew generateTokens",
     "danger": "danger ci",
     "prettier": "prettier --config .prettierrc --write \"**/*.js\"",
     "spellcheck": "mdspell -r --en-gb --ignore-acronyms --ignore-numbers --no-suggestions '*.md' '**/*.md' '!**/node_modules/**/*.md'",
