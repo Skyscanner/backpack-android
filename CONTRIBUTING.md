@@ -65,7 +65,7 @@ We use snapshot testing to ensure there are no unintended changes to UI componen
 #### Setup
 
 > Note: Currently, snapshot tests run on Apple chips will result in a different snapshot to Intel-based laptops or CI.
-> Consider recording snapshots on Intel-based macs or using GitHub Actions (see [below](#using-ci-for-generating-snapshot)).
+> You should use it for debug purposes only.
 
 Create an AVD using the following command
 
@@ -115,24 +115,20 @@ You can do this by adding the `@Variant` annotation to either the test class (ap
 For some more complex components with many different types you may want to make use of the `Parameterized` test runner to test all variants.
 To ensure snapshots get saved for all parameters pass the `tags` property in the `BpkSnapshotTest` constructor. For an example look at `BpkButtonTest`.
 
-#### Verifying changes
+#### Debugging snapshot tests
 After adding new snapshot tests or making UI changes, run
 
 ```
  ./scripts/record_screenshot_tests.sh
 ```
 
-This will generate the latest snapshots. Verify the changes & generated snapshots are as expected and commit the changes.
-
-To test changes use
-
-```
-./scripts/verify_screenshot_tests.sh
-```
+This will generate the snapshots. Verify the changes & generated snapshots are as expected,
+but don't commit the snapshot files – our CI uses different emulator environment to validate snapshots. Therefore, snapshots,
+generated on the local machine will be different, and the CI will fail. You should only use it for debugging purposes.
 
 If the check fails you either need to fix the issue if a change was unintended or record script above instead to update the snapshots.
 
-### Running individual test classes
+### Debugging individual test classes
 
 While you're creating your snapshot tests or are debugging an issue it may be helpful to run an individual test class. You can do that with the following command:
 
@@ -142,25 +138,11 @@ While you're creating your snapshot tests or are debugging an issue it may be he
 
 You can replace the `directorySuffix` property with `dm`, `rtl` or `themed` depending on what you're trying to test.
 
-> Note: Please do not commit these changes when using an Apple Chip machine - use the CI method below instead.
+### Verifying the snapshot tests with the CI
 
-### Using CI for generating snapshot
-
-Alternatively, you can use GitHub Actions CI to generate the snapshots. Simply add an empty commit with "Record snapshots" as a commit message:
-
-```
-git commit --allow-empty -m "Record snapshots" && git push
-```
-
-> Note: Please wait until all snapshots are updated before pushing any further changes as they'll cancel the updates.
-
-Since CI run cannot trigger CI checks again, you need to commit something after the snapshots have been generated to trigger the CI check.
-
-If you don't have any pending changes, you can use an empty commit again to trigger the CI:
-
-```
-git commit --allow-empty -m "Trigger CI" && git push
-```
+Our CI will always update the snapshots on each run. It's responsibility of the contributor and the reviewer
+to validate and verify it. The snapshots for the PR can be found in "Files changed" tab. The snapshots for the commit can be
+found in the same tab once you click on the comment.
 
 ### Espresso tests
 If your component contains logic that can't be verified via snapshot tests you can use espresso to test the logic. These tests live in the `Backpack` (for View components) or `backpack-compose` (for Compose components) module, depending on the component.
