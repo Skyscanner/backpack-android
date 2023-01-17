@@ -112,13 +112,28 @@ private fun BpkStarRating(
 private fun BpkStar(icon: StarType, iconSize: BpkIconSize) {
   when (icon) {
     StarType.Empty -> {
-      BpkIcon(icon = BpkIcon.StarOutline, contentDescription = null, size = iconSize, tint = BpkTheme.colors.textDisabled)
+      BpkIcon(
+        icon = BpkIcon.StarOutline,
+        contentDescription = null,
+        size = iconSize,
+        tint = BpkTheme.colors.textDisabled,
+      )
     }
     StarType.Half -> {
-      BpkIcon(icon = BpkIcon.StarHalf, contentDescription = null, size = iconSize, tint = BpkTheme.colors.statusWarningSpot)
+      BpkIcon(
+        icon = BpkIcon.StarHalf,
+        contentDescription = null,
+        size = iconSize,
+        tint = BpkTheme.colors.statusWarningSpot,
+      )
     }
     StarType.Full -> {
-      BpkIcon(icon = BpkIcon.Star, contentDescription = null, size = iconSize, tint = BpkTheme.colors.statusWarningSpot)
+      BpkIcon(
+        icon = BpkIcon.Star,
+        contentDescription = null,
+        size = iconSize,
+        tint = BpkTheme.colors.statusWarningSpot,
+      )
     }
   }
 }
