@@ -213,7 +213,6 @@ public val BpkIcon.Companion.ArrowLeft: BpkIcon by Delegates.singleton(
     name = "ArrowLeft",
     small = R.drawable.bpk_arrow_left_sm,
     large = R.drawable.bpk_arrow_left,
-    autoMirror = true,
   )
 )
 
@@ -223,7 +222,6 @@ public val BpkIcon.Companion.ArrowRight: BpkIcon by Delegates.singleton(
     name = "ArrowRight",
     small = R.drawable.bpk_arrow_right_sm,
     large = R.drawable.bpk_arrow_right,
-    autoMirror = true,
   )
 )
 
@@ -548,7 +546,6 @@ public val BpkIcon.Companion.ChevronLeft: BpkIcon by Delegates.singleton(
     name = "ChevronLeft",
     small = R.drawable.bpk_chevron_left_sm,
     large = R.drawable.bpk_chevron_left,
-    autoMirror = true,
   )
 )
 
@@ -558,7 +555,6 @@ public val BpkIcon.Companion.ChevronRight: BpkIcon by Delegates.singleton(
     name = "ChevronRight",
     small = R.drawable.bpk_chevron_right_sm,
     large = R.drawable.bpk_chevron_right,
-    autoMirror = true,
   )
 )
 
@@ -946,7 +942,6 @@ public val BpkIcon.Companion.FastTrack: BpkIcon by Delegates.singleton(
     name = "FastTrack",
     small = R.drawable.bpk_fast_track_sm,
     large = R.drawable.bpk_fast_track,
-    autoMirror = true,
   )
 )
 
@@ -1361,7 +1356,6 @@ public val BpkIcon.Companion.List: BpkIcon by Delegates.singleton(
     name = "List",
     small = R.drawable.bpk_list_sm,
     large = R.drawable.bpk_list,
-    autoMirror = true,
   )
 )
 
@@ -1407,7 +1401,6 @@ public val BpkIcon.Companion.LongArrowLeft: BpkIcon by Delegates.singleton(
     name = "LongArrowLeft",
     small = R.drawable.bpk_long_arrow_left_sm,
     large = R.drawable.bpk_long_arrow_left,
-    autoMirror = true,
   )
 )
 
@@ -1417,7 +1410,6 @@ public val BpkIcon.Companion.LongArrowRight: BpkIcon by Delegates.singleton(
     name = "LongArrowRight",
     small = R.drawable.bpk_long_arrow_right_sm,
     large = R.drawable.bpk_long_arrow_right,
-    autoMirror = true,
   )
 )
 
@@ -1580,7 +1572,6 @@ public val BpkIcon.Companion.NativeAndroidBack: BpkIcon by Delegates.singleton(
     name = "NativeAndroidBack",
     small = R.drawable.bpk_native_android__back_sm,
     large = R.drawable.bpk_native_android__back,
-    autoMirror = true,
   )
 )
 
@@ -1599,7 +1590,6 @@ public val BpkIcon.Companion.NativeAndroidForward: BpkIcon by Delegates.singleto
     name = "NativeAndroidForward",
     small = R.drawable.bpk_native_android__forward_sm,
     large = R.drawable.bpk_native_android__forward,
-    autoMirror = true,
   )
 )
 
@@ -1789,7 +1779,6 @@ public val BpkIcon.Companion.Policy: BpkIcon by Delegates.singleton(
     name = "Policy",
     small = R.drawable.bpk_policy_sm,
     large = R.drawable.bpk_policy,
-    autoMirror = true,
   )
 )
 
@@ -1943,7 +1932,6 @@ public val BpkIcon.Companion.Share: BpkIcon by Delegates.singleton(
     name = "Share",
     small = R.drawable.bpk_share_sm,
     large = R.drawable.bpk_share,
-    autoMirror = true,
   )
 )
 
@@ -2034,7 +2022,6 @@ public val BpkIcon.Companion.Star: BpkIcon by Delegates.singleton(
     name = "Star",
     small = R.drawable.bpk_star_sm,
     large = R.drawable.bpk_star,
-    autoMirror = true,
   )
 )
 
@@ -2044,7 +2031,6 @@ public val BpkIcon.Companion.StarHalf: BpkIcon by Delegates.singleton(
     name = "StarHalf",
     small = R.drawable.bpk_star_half_sm,
     large = R.drawable.bpk_star_half,
-    autoMirror = true,
   )
 )
 
@@ -2072,7 +2058,6 @@ public val BpkIcon.Companion.Swap: BpkIcon by Delegates.singleton(
     name = "Swap",
     small = R.drawable.bpk_swap_sm,
     large = R.drawable.bpk_swap,
-    autoMirror = true,
   )
 )
 
@@ -2082,7 +2067,6 @@ public val BpkIcon.Companion.SwapHorizontal: BpkIcon by Delegates.singleton(
     name = "SwapHorizontal",
     small = R.drawable.bpk_swap__horizontal_sm,
     large = R.drawable.bpk_swap__horizontal,
-    autoMirror = true,
   )
 )
 
@@ -2092,7 +2076,6 @@ public val BpkIcon.Companion.SwapVertical: BpkIcon by Delegates.singleton(
     name = "SwapVertical",
     small = R.drawable.bpk_swap__vertical_sm,
     large = R.drawable.bpk_swap__vertical,
-    autoMirror = true,
   )
 )
 
@@ -2219,7 +2202,6 @@ public val BpkIcon.Companion.Trend: BpkIcon by Delegates.singleton(
     name = "Trend",
     small = R.drawable.bpk_trend_sm,
     large = R.drawable.bpk_trend,
-    autoMirror = true,
   )
 )
 
@@ -2229,7 +2211,6 @@ public val BpkIcon.Companion.TrendDown: BpkIcon by Delegates.singleton(
     name = "TrendDown",
     small = R.drawable.bpk_trend__down_sm,
     large = R.drawable.bpk_trend__down,
-    autoMirror = true,
   )
 )
 
@@ -2239,7 +2220,6 @@ public val BpkIcon.Companion.TrendSteady: BpkIcon by Delegates.singleton(
     name = "TrendSteady",
     small = R.drawable.bpk_trend__steady_sm,
     large = R.drawable.bpk_trend__steady,
-    autoMirror = true,
   )
 )
 
@@ -2249,7 +2229,6 @@ public val BpkIcon.Companion.TrendWillRise: BpkIcon by Delegates.singleton(
     name = "TrendWillRise",
     small = R.drawable.bpk_trend__will_rise_sm,
     large = R.drawable.bpk_trend__will_rise,
-    autoMirror = true,
   )
 )
 

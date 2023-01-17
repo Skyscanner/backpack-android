@@ -35,6 +35,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
@@ -58,18 +59,22 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
 
   @Test
   fun default() {
-    snap(setupBottomSheet(), width = 200, height = 200, padding = 0)
+    capture(STATE_COLLAPSED)
   }
 
   @Test
   @Variants(BpkTestVariant.Default)
   fun expanded() {
+    capture(STATE_EXPANDED)
+  }
+
+  private fun capture(state: Int) {
     rule.scenario.waitForActivity().also { activity ->
       runOnUi {
         val root = setupBottomSheet()
         activity.setContentView(root)
         root.post {
-          bottomSheetBehaviour.state = STATE_EXPANDED
+          bottomSheetBehaviour.state = state
         }
       }
     }

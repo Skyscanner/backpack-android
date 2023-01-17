@@ -1,0 +1,65 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
+import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestTask
+import net.skyscanner.backpack.screenshots.ScreenshotTestsServer
+
+android {
+  productFlavors {
+    screenshots {
+      dimension "version"
+      versionNameSuffix "-screenshots"
+      testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.*"
+      testInstrumentationRunnerArgument "class", "net.skyscanner.backpack.docs.GenerateScreenshots"
+    }
+  }
+  testOptions {
+    animationsDisabled = true
+    managedDevices {
+      managedDevices.devices {
+        Docs (ManagedVirtualDevice) {
+          device = "Pixel"
+          apiLevel = 30
+          systemImageSource = "aosp"
+        }
+      }
+    }
+  }
+}
+
+def server = new ScreenshotTestsServer(rootProject.file("docs"))
+
+task copyInternalFontsToScreenshots(type: Copy) {
+  from "src/internal/res/font"
+  into "src/screenshots/res/font"
+}
+
+task startScreenshotsServer() {
+  doFirst {
+    server.start()
+  }
+  finalizedBy("stopScreenshotsServer")
+}
+
+task stopScreenshotsServer() {
+  doLast {
+    server.close()
+  }
+}
+
+// disable gradle caching for recording screenshots
+tasks.withType(ManagedDeviceInstrumentationTestTask) {
+  outputs.upToDateWhen { deviceName.get() != "Docs" }
+}
+
+task recordScreenshots() {
+  mustRunAfter(
+    "copyInternalFontsToScreenshots",
+    "startScreenshotsServer",
+  )
+
+  dependsOn(
+    "copyInternalFontsToScreenshots",
+    "startScreenshotsServer",
+    "DocsScreenshotsDebugAndroidTest",
+  )
+  finalizedBy("stopScreenshotsServer")
+}

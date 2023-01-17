@@ -184,8 +184,6 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { net.skyscanner.backpack.demo.compose.BarChartStory() },
       ),
     ),
-    "Bottom Nav" story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
-    "Bar Chart" story NodeData { BarChartStory of R.layout.fragment_bar_chart },
     "Bottom Nav" story NodeData(
       { children -> TabStory of children },
       mapOf(

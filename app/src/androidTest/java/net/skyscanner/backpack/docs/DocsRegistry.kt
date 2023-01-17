@@ -61,9 +61,6 @@ object DocsRegistry {
     ComposeScreenshot("Button - Compose - Large", "large"),
     ComposeScreenshot("Button - Compose - Link", "link"),
     ComposeScreenshot("Button - Compose - Drawable Icon", "drawable-icon"),
-    ViewScreenshot("Calendar - Default", "range") { setupCalendar() },
-    ViewScreenshot("Calendar - Colored", "colored") { setupCalendar() },
-    ViewScreenshot("Calendar - Labeled", "labeled") { setupCalendar() },
     ViewScreenshot("Calendar 2 - View - Pre-selected range", "range") { setupCalendar2() },
     ViewScreenshot("Calendar 2 - View - Day labels", "labeled") { setupCalendar2() },
     ViewScreenshot("Calendar 2 - View - Selection Whole Month", "month") { setupWholeMonthCalendar() },
@@ -170,29 +167,14 @@ fun ComposeScreenshot(
   screenshotName: String,
   setup: ((AndroidComposeTestRule<*, *>) -> Unit)? = null,
 ): Array<Any?> =
-  arrayOf(name, screenshotName, "docs/compose", setup)
+  arrayOf(name, screenshotName, "compose", setup)
 
 fun ViewScreenshot(
   name: String,
   screenshotName: String,
   setup: ((ComposeTestRule) -> Unit)? = null,
 ): Array<Any?> =
-  arrayOf(name, screenshotName, "docs/view", setup)
-
-@Suppress("DEPRECATION")
-private fun setupCalendar() {
-  Espresso.onView(ViewMatchers.withId(R.id.bpkCalendar))
-    .check { view, _ ->
-      view as BpkCalendar
-      view.controller?.updateSelection(
-        CalendarRange(
-          LocalDate.now().plusDays(5),
-          LocalDate.now().plusDays(10)
-        )
-      )
-      view.controller?.updateContent()
-    }
-}
+  arrayOf(name, screenshotName, "view", setup)
 
 private fun setupCalendar2() {
   Espresso.onView(ViewMatchers.withId(R.id.calendar2))
