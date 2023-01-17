@@ -17,17 +17,10 @@
   limitations under the License.
 -->
 <resources>
-
-	<dimen name="bpkElevationXs">1dp</dimen>
-
-	<dimen name="bpkElevationSm">2dp</dimen>
-
-	<dimen name="bpkElevationBase">4dp</dimen>
-
-	<dimen name="bpkElevationLg">8dp</dimen>
-
-	<dimen name="bpkElevationXl">16dp</dimen>
-
-	<dimen name="bpkElevationXxl">24dp</dimen>
-
- </resources>
+  <dimen name="bpkElevationXs">1dp</dimen>
+  <dimen name="bpkElevationSm">2dp</dimen>
+  <dimen name="bpkElevationBase">4dp</dimen>
+  <dimen name="bpkElevationLg">8dp</dimen>
+  <dimen name="bpkElevationXl">16dp</dimen>
+  <dimen name="bpkElevationXxl">24dp</dimen>
+</resources>

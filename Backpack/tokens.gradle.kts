@@ -33,12 +33,58 @@ import net.skyscanner.backpack.tokens.transformTo
 tasks {
   val group = "tokens"
 
+  val src = project.projectDir.resolve("src/main/res").path
+  val valuesFolder = "values"
   val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
     .readAs(BpkFormat.Json)
 
+  val generateElevationTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDimension.Category.Elevation)
+        .transformTo(BpkDimension.Format.Xml(namespace = "bpkElevation"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "elevation"))
+        .execute()
+    }
+  }
+
+  val generateSpacingTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDimension.Category.Spacing)
+        .transformTo(BpkDimension.Format.Xml(namespace = "bpkSpacing"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "dimensions.spacing"))
+        .execute()
+    }
+  }
+
+  val generateRadiiTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDimension.Category.Radii)
+        .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderRadius"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "radii"))
+        .execute()
+    }
+  }
+
+  val generateBorderSizeTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDimension.Category.Border)
+        .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderSize"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "borders"))
+        .execute()
+    }
+  }
+
   val generateSizeTokens by creating {
     this.group = group
-    dependsOn() // TODO fill with size token tasks
+    dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
   }
 
   val generateTextTokens by creating {
