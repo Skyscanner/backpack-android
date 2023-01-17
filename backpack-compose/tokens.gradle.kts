@@ -175,7 +175,7 @@ tasks {
       .execute()
   }
 
-  val generateEverything by creating {
+  val generateTokens by creating {
     this.group = group
     dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateIcons)
   }
