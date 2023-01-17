@@ -28,13 +28,13 @@ import org.junit.runner.RunWith
 class BpkStarRatingTest : BpkSnapshotTest() {
 
   @Test
-  fun default() = snap {
+  fun ratingFullStar() = snap {
     BpkStarRating(rating = 2f, contentDescription = { _, _ -> "" },
     )
   }
 
   @Test
-  fun range() = snap {
+  fun ratingHalfStar() = snap {
     BpkStarRating(rating = 3.5f, contentDescription = { _, _ -> "" },
     )
   }
