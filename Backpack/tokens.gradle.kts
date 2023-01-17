@@ -18,6 +18,7 @@
 import com.squareup.kotlinpoet.ClassName
 import net.skyscanner.backpack.tokens.BpkColor
 import net.skyscanner.backpack.tokens.BpkDimension
+import net.skyscanner.backpack.tokens.BpkDuration
 import net.skyscanner.backpack.tokens.BpkFormat
 import net.skyscanner.backpack.tokens.BpkIcon
 import net.skyscanner.backpack.tokens.BpkOutput
@@ -82,9 +83,25 @@ tasks {
     }
   }
 
+  val generateAnimationDurationTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDuration.Category.Animation)
+        .transformTo(BpkDuration.Format.Xml(namespace = "bpkAnimationDuration"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "animation"))
+        .execute()
+    }
+  }
+
   val generateSizeTokens by creating {
     this.group = group
     dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
+  }
+
+  val generateDurationTokens by creating {
+    this.group = group
+    dependsOn(generateAnimationDurationTokens)
   }
 
   val generateTextTokens by creating {
@@ -99,6 +116,6 @@ tasks {
 
   val generateTokens by creating {
     this.group = group
-    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens)
+    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateDurationTokens)
   }
 }
