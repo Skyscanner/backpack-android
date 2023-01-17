@@ -57,10 +57,18 @@ fun BpkStarRatingStory(
       )
       Row() {
         Column(modifier = Modifier.padding(end = BpkSpacing.Xl)) {
-          StaticRatingSample(context, size = BpkStarRatingSize.Large, text = stringResource(R.string.icons_large))
+          StaticRatingSample(
+            context = context,
+            size = BpkStarRatingSize.Large,
+            text = stringResource(R.string.icons_large),
+          )
         }
         Column() {
-          StaticRatingSample(context, size = BpkStarRatingSize.Small, text = stringResource(R.string.icons_small))
+          StaticRatingSample(
+            context = context,
+            size = BpkStarRatingSize.Small,
+            text = stringResource(R.string.icons_small),
+          )
         }
       }
       Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
@@ -71,10 +79,18 @@ fun BpkStarRatingStory(
         )
         Row() {
           Column(modifier = Modifier.padding(end = BpkSpacing.Xl)) {
-            HotelRatingSample(context = context, size = BpkStarRatingSize.Large, text = stringResource(R.string.icons_large))
+            HotelRatingSample(
+              context = context,
+              size = BpkStarRatingSize.Large,
+              text = stringResource(R.string.icons_large),
+            )
           }
           Column() {
-            HotelRatingSample(context, size = BpkStarRatingSize.Small, text = stringResource(R.string.icons_small))
+            HotelRatingSample(
+              context = context,
+              size = BpkStarRatingSize.Small,
+              text = stringResource(R.string.icons_small),
+            )
           }
         }
       }
