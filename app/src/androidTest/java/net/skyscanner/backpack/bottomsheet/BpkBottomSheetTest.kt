@@ -20,40 +20,21 @@ package net.skyscanner.backpack.bottomsheet
 
 import android.view.View
 import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.IdlingRegistry
-import androidx.test.espresso.IdlingResource
-import androidx.test.espresso.IdlingResource.ResourceCallback
-import androidx.test.espresso.matcher.ViewMatchers.assertThat
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
-import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.Matchers.greaterThanOrEqualTo
-import org.hamcrest.Matchers.lessThanOrEqualTo
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class BpkBottomSheetTest : BpkSnapshotTest() {
-
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
 
   private lateinit var bottomSheetBehaviour: BpkBottomSheetBehaviour<BpkBottomSheet>
 
@@ -69,27 +50,12 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
   }
 
   private fun capture(state: Int) {
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        val root = setupBottomSheet()
-        activity.setContentView(root)
-        root.post {
-          bottomSheetBehaviour.state = state
-        }
-      }
-    }
-    val callback = Callback(bottomSheetBehaviour)
-    IdlingRegistry.getInstance().register(callback)
-
-    InstrumentationRegistry.getInstrumentation().waitForIdleSync()
-    var bottomSheet: View? = null
-    Espresso.onView(withId(TEST_ID)).check { view, _ -> bottomSheet = view }
-    snap(bottomSheet!!, width = 200, height = 200, padding = 0)
-    IdlingRegistry.getInstance().unregister(callback)
+    val root = setupBottomSheet(state)
+    snap(root, width = 200, height = 200, padding = 0)
   }
 
-  private fun setupBottomSheet(): View {
-    val root = CoordinatorLayout(testContext).apply { id = TEST_ID }
+  private fun setupBottomSheet(state: Int): View {
+    val root = CoordinatorLayout(testContext)
     val frameLayout = FrameLayout(root.context)
     frameLayout.background = AppCompatResources.getDrawable(frameLayout.context, R.color.bpkCanvasContrast)
     frameLayout.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
@@ -99,53 +65,11 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
     val bottomSheetParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
     bottomSheetBehaviour = BpkBottomSheetBehaviour(root.context)
     bottomSheetBehaviour.peekHeight = bottomSheet.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl)
+    bottomSheetBehaviour.state = state
     bottomSheetParams.behavior = bottomSheetBehaviour
     bottomSheet.layoutParams = bottomSheetParams
     root.addView(bottomSheet)
 
     return root
   }
-
-  class Callback(behavior: BottomSheetBehavior<*>) : BottomSheetCallback(), IdlingResource {
-    private var isIdleNow: Boolean
-
-    override fun isIdleNow(): Boolean {
-      return isIdleNow
-    }
-
-    private var resourceCallback: ResourceCallback? = null
-
-    init {
-      behavior.addBottomSheetCallback(this)
-      val state = behavior.state
-      isIdleNow = isIdleState(state)
-    }
-
-    override fun onStateChanged(bottomSheet: View, @BottomSheetBehavior.State newState: Int) {
-      val wasIdle = isIdleNow
-      isIdleNow = isIdleState(newState)
-      if (!wasIdle && isIdleNow && resourceCallback != null) {
-        resourceCallback!!.onTransitionToIdle()
-      }
-    }
-
-    override fun onSlide(bottomSheet: View, slideOffset: Float) {
-      assertThat(slideOffset, `is`(greaterThanOrEqualTo(-1f)))
-      assertThat(slideOffset, `is`(lessThanOrEqualTo(1f)))
-    }
-
-    override fun getName(): String {
-      return Callback::class.java.simpleName
-    }
-
-    override fun registerIdleTransitionCallback(callback: ResourceCallback?) {
-      resourceCallback = callback
-    }
-
-    private fun isIdleState(state: Int): Boolean {
-      return (state != BottomSheetBehavior.STATE_DRAGGING && state != BottomSheetBehavior.STATE_SETTLING)
-    }
-  }
 }
-
-private val TEST_ID = 123
