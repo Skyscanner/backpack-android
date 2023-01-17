@@ -3,8 +3,6 @@ name: Main
 on:
   push:
     branches: [main]
-    inputs:
-      type: "main"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}

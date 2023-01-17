@@ -191,7 +191,7 @@ jobs:
 
       - name: Check snapshot changes
         id: checkSnapshotChanges
-        if: ${{ github.event.inputs.type != 'pr' }}
+        if: ${{ github.event_name != 'pull_request' }}
         run: ./scripts/check-no-changes.sh
 
       - name: Upload Screenshot Tests Artifact
@@ -211,7 +211,7 @@ jobs:
           retention-days: 5
 
       - name: Commit changes
-        if: ${{ github.event.inputs.type == 'pr' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+        if: ${{ github.event_name == 'pull_request' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
