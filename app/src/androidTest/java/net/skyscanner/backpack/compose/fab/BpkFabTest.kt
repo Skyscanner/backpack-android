@@ -22,6 +22,7 @@ package net.skyscanner.backpack.compose.fab
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.tokens.Accessibility
 import net.skyscanner.backpack.compose.tokens.Search
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,7 +34,7 @@ class BpkFabTest : BpkSnapshotTest() {
   fun default() = snap {
     BpkFab(
       onClick = {},
-      icon = BpkIcon.Search,
+      icon = BpkIcon.Accessibility,
       contentDescription = "Content description",
     )
   }
