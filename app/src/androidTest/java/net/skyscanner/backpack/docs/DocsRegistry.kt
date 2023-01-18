@@ -142,6 +142,7 @@ object DocsRegistry {
     ComposeScreenshot("Spinner - Compose", "default"),
     ViewScreenshot("Star Rating - Default", "default"),
     ViewScreenshot("Star Rating Interactive", "default"),
+    ComposeScreenshot("Star Rating - Compose", "default"),
     ViewScreenshot("Switch - View", "default"),
     ComposeScreenshot("Switch - Compose", "default"),
     ViewScreenshot("Text - View - Body", "body"),
