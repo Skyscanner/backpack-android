@@ -17,6 +17,9 @@
   limitations under the License.
 -->
 <resources>
+
+  <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
+
   <dimen name="bpkSpacingSm">4dp</dimen>
   <dimen name="bpkSpacingMd">8dp</dimen>
   <dimen name="bpkSpacingBase">16dp</dimen>

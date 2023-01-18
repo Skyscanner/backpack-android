@@ -41,24 +41,6 @@ const PATHS = {
   lintSrc: path.join(__dirname, 'backpack-lint', 'src', 'main', 'java', 'net', 'skyscanner', 'backpack', 'lint', 'check'),
 };
 
-const FONT_WEIGHTS = {
-  normal: 'normal',
-  emphasized: 'emphasized',
-  heavy: 'heavy',
-};
-
-const fontFamilyMappings = {
-  [FONT_WEIGHTS.normal]: '?bpkFontFamilyBase',
-  [FONT_WEIGHTS.emphasized]: '?bpkFontFamilyEmphasized',
-  [FONT_WEIGHTS.heavy]: '?bpkFontFamilyHeavy',
-};
-
-const fontWeightMappings = {
-  400: FONT_WEIGHTS.normal,
-  700: FONT_WEIGHTS.emphasized,
-  900: FONT_WEIGHTS.heavy,
-};
-
 const pascalCase = s =>
   _.flow(
     _.camelCase,
@@ -66,8 +48,6 @@ const pascalCase = s =>
   )(s);
 
 const tokensWithType = type => Object.values(tokens.props).filter(i => i.type === type);
-
-const tokensWithCategory = category => Object.values(tokens.props).filter(i => i.category === category && !i.deprecated);
 
 const shouldAutoMirror = chunk => {
   const iconMetadata = iconsMetadata[chunk.stem];
@@ -109,57 +89,6 @@ const convertToXml = (chunk, enc, cb) => {
       cb(null, chunk);
     })
     .catch(cb);
-};
-
-const getTextDimensions = () =>
-  tokensWithCategory('typesettings')
-    .filter(({ name }) => name.startsWith("FONT_SIZE"))
-    .map(({ value, name }) => ({
-      name: `bpkText${pascalCase(name.split('_')[2])}Size`,
-      size: Number.parseInt(value, 10),
-  }));
-
-const getTextStyles = () => {
-  const result = _.chain(
-    [].concat(
-      tokensWithCategory('font-sizes'),
-      tokensWithCategory('font-weights'),
-      tokensWithCategory('letter-spacings'),
-      tokensWithCategory('typesettings'),
-    ),
-  )
-    .groupBy(({ name }) =>
-      name
-        .replace('_FONT_SIZE', '')
-        .replace('_FONT_WEIGHT', '')
-        .replace('_LETTER_SPACING', '')
-        .replace('_LINE_HEIGHT', ''),
-    )
-    .map((values, key) => [values, key])
-    .filter(token => token[1].startsWith('TEXT_'))
-    .map(token => {
-      const properties = token[0];
-      const key = token[1];
-
-      const sizeProp = _.filter(properties, ({ category }) => category === 'font-sizes');
-      const weightProp = _.filter(properties, ({ category }) => category === 'font-weights');
-      const letterSpacingProp = _.filter(properties, ({ category }) => category === 'letter-spacings');
-      const lineHeightProp = _.filter(properties, ({ category }) => category === 'typesettings');
-      if (sizeProp.length !== 1 || weightProp.length !== 1) {
-        throw new Error('Expected all text sizes to have a weight and font size.');
-      }
-      const fontWeight = fontWeightMappings[weightProp[0].value];
-
-      return {
-        name: `bpk${pascalCase(key)}`,
-        size: `@dimen/bpkText${pascalCase(sizeProp[0].originalValue.split('_')[2])}Size`,
-        fontFamily: fontFamilyMappings[fontWeight],
-        lineHeight: (lineHeightProp.length == 1) ? lineHeightProp[0].value : null,
-        letterSpacing: (letterSpacingProp.length == 1) ? letterSpacingProp[0].value : null,
-      };
-    })
-    .value();
-  return result;
 };
 
 const isSemanticColor = entity => entity.value && entity.darkValue;
@@ -266,19 +195,6 @@ gulp.task('template:deprecatedTokens', () => {
     .pipe(gulp.dest(PATHS.lintSrc));
 });
 
-gulp.task('template:text', () =>
-  gulp
-    .src(`${PATHS.templates}/BackpackText.njk`)
-    .pipe(
-      nunjucks.compile({
-        dimensions: [...getTextDimensions()],
-        data: [...getTextStyles()],
-      }),
-    )
-    .pipe(rename('values/backpack.text.xml'))
-    .pipe(gulp.dest(PATHS.outputRes)),
-);
-
 gulp.task('template:icons', () =>
   gulp
     .src('node_modules/@skyscanner/bpk-svgs/dist/svgs/icons/**/*.svg')
@@ -292,33 +208,9 @@ gulp.task(
     'template:color',
     'template:semanticColor',
     'template:icons',
-    'template:text',
     'template:deprecatedTokens',
   ),
   () => {},
 );
 
 gulp.task('clean', () => del([PATHS.outputRes], { force: true }));
-
-gulp.task('printTextAttributes', done => {
-  getTextStyles().forEach(({ name }) => {
-    console.log(`<attr name="${name}Appearance" format="reference" />`);
-  });
-  done();
-});
-
-/**
- * Generate text styles for our themes
- * Usage:
- *  gulp printTextAppearenceStyles
- *  // Add a suffix to the style name. eg `bpkTextBaseSerif`
- *  gulp printTextAppearenceStyles --serif
- */
-gulp.task('printTextAppearenceStyles', done => {
-  const parseSuffix = _.flow([s => s.substring(2), _.capitalize]);
-  const fontSuffix = parseSuffix(process.argv[3] || '');
-  getTextStyles().forEach(({ name }) => {
-    console.log(`<item name="${name}Appearance">@style/${name}${fontSuffix}</item>`);
-  });
-  done();
-});

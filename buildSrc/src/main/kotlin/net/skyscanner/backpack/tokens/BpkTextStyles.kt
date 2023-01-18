@@ -30,10 +30,15 @@ interface BpkTextStyles : List<BpkTextStyleModel>
 
 data class BpkTextStyleModel(
   val name: String,
-  val fontSize: String,
-  val fontWeight: String,
-  val lineHeight: String,
-  val letterSpacing: String?,
+  val fontSize: Token,
+  val fontWeight: Token,
+  val lineHeight: Token,
+  val letterSpacing: Token?,
+)
+
+data class Token(
+  val name: String,
+  val value: String,
 )
 
 object BpkTextStyle {
@@ -44,11 +49,16 @@ object BpkTextStyle {
       parseTextStyles(source)
   }
 
-  sealed class Format : BpkTransformer<BpkTextStyles, TypeSpec> {
+  sealed class Format<Output> : BpkTransformer<BpkTextStyles, Output> {
 
-    data class Compose(val className: String) : BpkTextStyle.Format() {
+    data class Compose(val className: String) : Format<TypeSpec>() {
       override fun invoke(source: BpkTextStyles): TypeSpec =
         toCompose(source, className)
+    }
+
+    object Xml : Format<String>() {
+      override fun invoke(source: BpkTextStyles): String =
+        toXml(source)
     }
   }
 }
@@ -59,19 +69,15 @@ private fun parseTextStyles(source: Map<String, Any>): BpkTextStyles {
   fun String.trimReference(): String =
     removePrefix("{!").removeSuffix("}")
 
-  fun String.toSemanticName() =
-    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this.replace('-', '_'))
-
-  fun String.wrapIfDigits() = if (first().isDigit()) { "`$this`" } else this
-
-  fun List<Map.Entry<String, Map<String, String>>>.findTokenName(type: String): String? {
+  fun List<Map.Entry<String, Map<String, String>>>.findToken(type: String): Token? {
     return firstOrNull { it.key.endsWith(type) }
       ?.let {
-        it.value["originalValue"]!!
-          .trimReference()
-          .removePrefix("${type}_")
-          .toSemanticName()
-          .wrapIfDigits()
+        Token(
+          name = it.value["originalValue"]!!
+            .trimReference()
+            .removePrefix("${type}_"),
+          value = it.value["value"]!!
+        )
       }
   }
 
@@ -88,10 +94,10 @@ private fun parseTextStyles(source: Map<String, Any>): BpkTextStyles {
     .map {
       BpkTextStyleModel(
         name = it.key,
-        fontSize = it.value.findTokenName("FONT_SIZE")!!,
-        fontWeight = it.value.findTokenName("FONT_WEIGHT")!!.let { if (it == "Book") "Normal" else it },
-        lineHeight = it.value.findTokenName("LINE_HEIGHT")!!,
-        letterSpacing = it.value.findTokenName("LETTER_SPACING"),
+        fontSize = it.value.findToken("FONT_SIZE")!!,
+        fontWeight = it.value.findToken("FONT_WEIGHT")!!,
+        lineHeight = it.value.findToken("LINE_HEIGHT")!!,
+        letterSpacing = it.value.findToken("LETTER_SPACING"),
       )
     }
     .sortedBy { it.name }
@@ -109,7 +115,6 @@ private val BpkFontSizeClass = ClassName("net.skyscanner.backpack.compose.tokens
 private val BpkLineHeightClass = ClassName("net.skyscanner.backpack.compose.tokens", "BpkLineHeight")
 private val BpkLetterSpacingClass = ClassName("net.skyscanner.backpack.compose.tokens", "BpkLetterSpacing")
 
-
 private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
   val defaultFontFamily = "defaultFontFamily"
 
@@ -120,12 +125,20 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
 
     fun BpkTextStyles.toConstructorFunction(): FunSpec {
 
+      fun String.wrapIfDigits() = if (first().isDigit()) {
+        "`$this`"
+      } else this
+
+      fun Token.toName() =
+        CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name.replace('-', '_'))
+          .wrapIfDigits()
+
       fun BpkTextStyleModel.toParameter(): String =
         "%textStyle:T(\n" +
-          "    fontWeight = %fontWeight:T.$fontWeight,\n" +
-          "    fontSize = %fontSize:T.$fontSize,\n" +
-          "    lineHeight = %lineHeight:T.$lineHeight,\n" + if (letterSpacing != null) {
-          "    letterSpacing = %letterSpacing:T.$letterSpacing,\n"
+          "    fontWeight = %fontWeight:T.${fontWeight.toName().let { if (it == "Book") "Normal" else it }},\n" +
+          "    fontSize = %fontSize:T.${fontSize.toName()},\n" +
+          "    lineHeight = %lineHeight:T.${lineHeight.toName()},\n" + if (letterSpacing != null) {
+          "    letterSpacing = %letterSpacing:T.${letterSpacing.toName()},\n"
         } else {
           ""
         } +
@@ -134,23 +147,29 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
 
       return FunSpec.constructorBuilder()
         .addModifiers(KModifier.INTERNAL)
-        .addParameter(ParameterSpec
-          .builder(defaultFontFamily, FontFamilyClass)
-          .defaultValue("%T.SansSerif", FontFamilyClass)
-          .build())
-        .callThisConstructor(CodeBlock.builder().addNamed(joinToString(
-          prefix = "\n  ",
-          separator = ",\n  ",
-          postfix = ",\n",
-        ) {
-          "${it.name.toSemanticName()} = ${it.toParameter()}"
-        }, mapOf(
-          "textStyle" to TextStyleClass,
-          "fontWeight" to FontWeightClass,
-          "fontSize" to BpkFontSizeClass,
-          "lineHeight" to BpkLineHeightClass,
-          "letterSpacing" to BpkLetterSpacingClass,
-        )).build())
+        .addParameter(
+          ParameterSpec
+            .builder(defaultFontFamily, FontFamilyClass)
+            .defaultValue("%T.SansSerif", FontFamilyClass)
+            .build()
+        )
+        .callThisConstructor(
+          CodeBlock.builder().addNamed(
+            joinToString(
+              prefix = "\n  ",
+              separator = ",\n  ",
+              postfix = ",\n",
+            ) {
+              "${it.name.toSemanticName()} = ${it.toParameter()}"
+            }, mapOf(
+              "textStyle" to TextStyleClass,
+              "fontWeight" to FontWeightClass,
+              "fontSize" to BpkFontSizeClass,
+              "lineHeight" to BpkLineHeightClass,
+              "letterSpacing" to BpkLetterSpacingClass,
+            )
+          ).build()
+        )
         .build()
     }
 
@@ -179,4 +198,44 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
   }
 
   return source.toTextStyleClass()
+}
+
+private fun toXml(source: BpkTextStyles): String {
+  val textStylesDeclaration = """
+  <declare-styleable name="BpkTextStyle">
+    <attr name="android:fontFamily" />
+    <attr name="android:textSize" />
+    <attr name="android:letterSpacing" />
+    <attr name="lineHeight" />
+  </declare-styleable>
+  """
+
+  fun String.toSemanticName() =
+    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this.replace('-', '_'))
+
+  fun String.toFontWeightName() =
+    toSemanticName().let {
+      when (it) {
+        "Book" -> "Base"
+        "Bold" -> "Emphasized"
+        else -> it
+      }
+    }
+
+  fun BpkTextStyleModel.toXml(): String {
+    val content = listOfNotNull(
+      "    <item name=\"android:fontFamily\">?bpkFontFamily${fontWeight.name.toFontWeightName()}</item>",
+      "    <item name=\"android:textColor\">@color/bpkTextPrimary</item>",
+      "    <item name=\"android:textSize\">@dimen/bpkText${fontSize.name.toSemanticName()}Size</item>",
+      "    <item name=\"lineHeight\">${lineHeight.value}sp</item>",
+      letterSpacing?.let { "    <item name=\"android:letterSpacing\">${letterSpacing.value}</item>" },
+    )
+    return """
+  <style name="bpkText${name.toSemanticName()}">
+${content.joinToString("\n")}
+  </style>"""
+  }
+
+  return textStylesDeclaration + source.joinToString("\n") { it.toXml() }
+
 }

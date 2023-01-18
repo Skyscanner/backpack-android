@@ -52,13 +52,17 @@ object BpkTextUnit {
 
   }
 
-  sealed class Format : BpkTransformer<BpkTextUnits, TypeSpec> {
+  sealed class Format<Output> : BpkTransformer<BpkTextUnits, Output> {
 
-    data class Compose(val namespace: String, val internal: Boolean = false) : Format() {
+    data class Compose(val namespace: String, val internal: Boolean = false) : Format<TypeSpec>() {
       override fun invoke(source: BpkTextUnits): TypeSpec =
         toCompose(source, namespace, internal)
     }
 
+    object Xml : Format<String>() {
+      override fun invoke(source: BpkTextUnits): String =
+        toXml(source)
+    }
   }
 
 }
@@ -124,3 +128,10 @@ private fun toCompose(
       }
     )
     .build()
+
+private fun toXml(
+  source: BpkTextUnits,
+) : String =
+  source.map { (name, value) ->
+    "  <dimen name=\"bpkText${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}Size\">${value.toInt()}sp</dimen>"
+  }.joinToString("\n")
