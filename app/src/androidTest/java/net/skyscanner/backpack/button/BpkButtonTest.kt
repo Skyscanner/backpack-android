@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.button
 
-import android.view.View
-import androidx.annotation.ColorRes
 import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
@@ -53,7 +51,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabled() {
     assumeTrue(size == BpkButton.Size.Standard) // colors will be the same on large size
 
@@ -65,7 +63,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun loading() {
     val view = BpkButton(testContext, type, size).apply {
       text = "Button"
@@ -75,7 +73,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+  @Variants(BpkTestVariant.Default)
   fun loadingWithIcon() {
     assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
@@ -90,7 +88,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+  @Variants(BpkTestVariant.Default)
   fun loadingWithIconOnly() {
     assumeTrue(type == BpkButton.Type.Primary) // colors will be the same on all loading buttons
     // we need to run it on large size as well and the progress size will be different
