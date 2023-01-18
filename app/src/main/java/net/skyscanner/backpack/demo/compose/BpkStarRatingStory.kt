@@ -156,7 +156,7 @@ private fun StaticRatingSample(context: Context, size: BpkStarRatingSize, text: 
   )
   BpkStarRating(
     rating = 3.5f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 3.5f, 5),
+    contentDescription = context.getString(R.string.star_rating_decimal_accessibility_status, 3.5f, 5),
     rounding = RoundingType.Up,
     size = size,
   )
