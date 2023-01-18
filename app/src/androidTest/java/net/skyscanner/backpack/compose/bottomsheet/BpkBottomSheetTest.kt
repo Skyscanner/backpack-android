@@ -20,6 +20,8 @@ package net.skyscanner.backpack.compose.bottomsheet
 
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import org.junit.Test
@@ -36,6 +38,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun expanded() {
     snap(height = 400.dp, padding = 0.dp) {
       BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)

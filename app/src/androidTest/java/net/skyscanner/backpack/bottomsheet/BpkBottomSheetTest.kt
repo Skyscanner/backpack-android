@@ -44,7 +44,7 @@ class BpkBottomSheetTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun expanded() {
     capture(STATE_EXPANDED)
   }
