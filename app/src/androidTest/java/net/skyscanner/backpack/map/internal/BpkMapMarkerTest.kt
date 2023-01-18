@@ -24,6 +24,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import org.junit.Rule
 import org.junit.Test
@@ -42,6 +44,7 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun selected() {
     val view = createMarker(0, true)
     view.isSelected = true
@@ -49,18 +52,21 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun noPointer() {
     val view = createMarker(0, false)
     snap(view)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withIcon() {
     val view = createMarker(R.drawable.bpk_map, true)
     snap(view)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun withIcon_Selected() {
     val view = createMarker(R.drawable.bpk_map, true)
     view.isSelected = true
@@ -68,6 +74,7 @@ class BpkMapMarkerTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withIcon_NoPointer() {
     val view = createMarker(R.drawable.bpk_map, false)
     snap(view)
