@@ -20,6 +20,8 @@ package net.skyscanner.backpack.checkbox
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -36,21 +38,33 @@ class BpkCheckboxTests : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun unchecked() {
+    checkbox.isChecked = false
+    snap(checkbox)
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun checked() {
     checkbox.isChecked = true
     snap(checkbox)
   }
 
   @Test
-  fun disabled() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun disabledUnchecked() {
     checkbox.isEnabled = false
+    checkbox.isChecked = false
     snap(checkbox)
   }
 
   @Test
-  fun checkedDisabled() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun disabledChecked() {
     checkbox.isEnabled = false
     checkbox.isChecked = true
     snap(checkbox)
   }
+
 }
