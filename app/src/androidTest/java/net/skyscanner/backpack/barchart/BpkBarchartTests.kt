@@ -27,6 +27,8 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import org.junit.Rule
 import org.junit.Test
@@ -39,7 +41,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   val rule = activityScenarioRule<AppCompatActivity>()
 
   @Test
-  fun empty() {
+  fun default() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -51,7 +53,8 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun half() {
+  @Variants(BpkTestVariant.Default)
+  fun halfFilled() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -63,7 +66,8 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun full() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun fullyFilled() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -75,6 +79,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun overfilled() {
     init {
       model = BpkBarChart.Model(
@@ -87,6 +92,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun inactive() {
     init {
       model = BpkBarChart.Model(
@@ -116,7 +122,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun withBadge() {
+  fun selected() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
@@ -130,7 +136,8 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun withoutBadge() {
+  @Variants(BpkTestVariant.Default)
+  fun unselected() {
     init {
       model = BpkBarChart.Model(
         groups = listOf(
