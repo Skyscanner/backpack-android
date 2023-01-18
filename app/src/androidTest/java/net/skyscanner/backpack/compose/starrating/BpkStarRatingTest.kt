@@ -29,13 +29,17 @@ class BpkStarRatingTest : BpkSnapshotTest() {
 
   @Test
   fun ratingFullStar() = snap {
-    BpkStarRating(rating = 2f, contentDescription = { _, _ -> "" },
+    BpkStarRating(
+      rating = 2f,
+      contentDescription = "",
     )
   }
 
   @Test
   fun ratingHalfStar() = snap {
-    BpkStarRating(rating = 3.5f, contentDescription = { _, _ -> "" },
+    BpkStarRating(
+      rating = 3.5f,
+      contentDescription = "",
     )
   }
 }
