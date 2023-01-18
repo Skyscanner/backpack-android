@@ -35,7 +35,8 @@ import org.junit.Test
 class BpkIconTest : BpkSnapshotTest() {
 
   @Test
-  fun allSmallIcons() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+  fun small() {
     val icons = getIcons(true)
     val layout = setupLayout(icons)
 
@@ -43,7 +44,8 @@ class BpkIconTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun allLargeIcons() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+  fun large() {
     val icons = getIcons(false)
     val layout = setupLayout(icons)
 
