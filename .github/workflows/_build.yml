@@ -118,24 +118,9 @@ jobs:
           disable-animations: true
           script: ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest
 
-  CheckCommitMessage:
-    name: Check commit message
-    runs-on: ubuntu-latest
-    outputs:
-      head-commit-message: ${{ steps.get_head_commit_message.outputs.headCommitMsg }}
-    steps:
-      - name: Get repo
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-      - name: Print head git commit message
-        id: get_head_commit_message
-        run: echo "headCommitMsg=$(git show -s --format=%s)" >> $GITHUB_OUTPUT
-
   Screenshots:
     name: Screenshots tests
     runs-on: macos-latest
-    needs: CheckCommitMessage
     permissions:
       pull-requests: write
       contents: write
@@ -206,7 +191,7 @@ jobs:
 
       - name: Check snapshot changes
         id: checkSnapshotChanges
-        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message != 'Record snapshots' }}
+        if: ${{ github.event_name != 'pull_request' }}
         run: ./scripts/check-no-changes.sh
 
       - name: Upload Screenshot Tests Artifact
@@ -225,26 +210,8 @@ jobs:
           path: logcat.log
           retention-days: 5
 
-      - name: Notify PR of screenshots changes
-        if: ${{ (failure() || needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots') && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            var body;
-            if ("${{ needs.CheckCommitMessage.outputs.head-commit-message }}" != "Record snapshots") {
-              body = `### '${{ matrix.variant }}' files were changed.\nIf these changes are intentional please run \`./scripts/record_screenshot_tests.sh\` locally and commit the changes or add an empty commit with the message 'Record snapshots'.\n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
-            } else {
-              body = `### '${{ matrix.variant }}' snapshots were updated. Please verify the changes match the expected layout. \n\n>'${{ steps.screenshotTests.outputs.CHANGED_FILES }}'`;
-            }
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: body
-            })
-
       - name: Commit changes
-        if: ${{ needs.CheckCommitMessage.outputs.head-commit-message == 'Record snapshots' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
+        if: ${{ github.event_name == 'pull_request' && steps.screenshotTests.outputs.CHANGED_FILES != '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
