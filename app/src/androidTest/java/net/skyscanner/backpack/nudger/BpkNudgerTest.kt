@@ -20,6 +20,8 @@ package net.skyscanner.backpack.nudger
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,20 +37,24 @@ class BpkNudgerTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun minusDisabled() {
+  fun default() {
+    nudger.value = 5
     snap(nudger)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
+  fun minusDisabled() {
+    nudger.value = 0
+    snap(nudger)
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default)
   fun plusDisabled() {
     nudger.value = 10
     nudger.maxValue = 10
     snap(nudger)
   }
 
-  @Test
-  fun standard() {
-    nudger.value = 5
-    snap(nudger)
-  }
 }
