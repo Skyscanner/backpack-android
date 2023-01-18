@@ -17,6 +17,9 @@
   limitations under the License.
 -->
 <resources>
+
+  <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
+
   <dimen name="bpkBorderRadiusXs">4dp</dimen>
   <dimen name="bpkBorderRadiusSm">8dp</dimen>
   <dimen name="bpkBorderRadiusMd">12dp</dimen>

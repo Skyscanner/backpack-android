@@ -20,10 +20,16 @@
 
   <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
 
-  <dimen name="bpkElevationXs">1dp</dimen>
-  <dimen name="bpkElevationSm">2dp</dimen>
-  <dimen name="bpkElevationBase">4dp</dimen>
-  <dimen name="bpkElevationLg">8dp</dimen>
-  <dimen name="bpkElevationXl">16dp</dimen>
-  <dimen name="bpkElevationXxl">24dp</dimen>
+  <dimen name="bpkTextXlSize">24sp</dimen>
+  <dimen name="bpkTextXxxlSize">40sp</dimen>
+  <dimen name="bpkTextSmSize">14sp</dimen>
+  <dimen name="bpkTextXsSize">12sp</dimen>
+  <dimen name="bpkTextLgSize">20sp</dimen>
+  <dimen name="bpkText5xlSize">64sp</dimen>
+  <dimen name="bpkText6xlSize">76sp</dimen>
+  <dimen name="bpkText7xlSize">96sp</dimen>
+  <dimen name="bpkText8xlSize">120sp</dimen>
+  <dimen name="bpkTextXxlSize">32sp</dimen>
+  <dimen name="bpkTextXxxxlSize">48sp</dimen>
+  <dimen name="bpkTextBaseSize">16sp</dimen>
 </resources>

@@ -94,6 +94,28 @@ tasks {
     }
   }
 
+  val generateTextSizeTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkTextUnit.Category.FontSize)
+        .transformTo(BpkTextUnit.Format.Xml)
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "text.size"))
+        .execute()
+    }
+  }
+
+  val generateTypographyTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkTextStyle.Category)
+        .transformTo(BpkTextStyle.Format.Xml)
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "text"))
+        .execute()
+    }
+  }
+
   val generateSizeTokens by creating {
     this.group = group
     dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
@@ -106,7 +128,7 @@ tasks {
 
   val generateTextTokens by creating {
     this.group = group
-    dependsOn() // TODO fill with text token tasks
+    dependsOn(generateTextSizeTokens, generateTypographyTokens)
   }
 
   val generateColorTokens by creating {
