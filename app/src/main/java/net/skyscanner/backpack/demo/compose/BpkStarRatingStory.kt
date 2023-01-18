@@ -50,7 +50,7 @@ fun BpkStarRatingStory(
     modifier = modifier.fillMaxHeight(),
     contentAlignment = Alignment.Center,
   ) {
-    Column() {
+    Column(modifier = Modifier.padding(start = BpkSpacing.Lg)) {
       BpkText(
         text = stringResource(R.string.static_default_rating_title),
         style = BpkTheme.typography.heading2,
