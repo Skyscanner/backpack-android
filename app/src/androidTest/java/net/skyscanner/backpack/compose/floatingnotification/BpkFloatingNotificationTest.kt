@@ -24,6 +24,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.Heart
@@ -48,6 +50,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withIcon() {
     scope.launch {
       state.show(
@@ -61,6 +64,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withCta() {
     scope.launch {
       state.show(
@@ -75,6 +79,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withIconAndCta() {
     scope.launch {
       state.show(
