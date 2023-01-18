@@ -17,11 +17,7 @@
   limitations under the License.
 -->
 <resources>
-
-	<dimen name="bpkBorderSizeSm">1dp</dimen>
-
-	<dimen name="bpkBorderSizeLg">2dp</dimen>
-
-	<dimen name="bpkBorderSizeXl">3dp</dimen>
-
- </resources>
+  <dimen name="bpkBorderSizeSm">1dp</dimen>
+  <dimen name="bpkBorderSizeLg">2dp</dimen>
+  <dimen name="bpkBorderSizeXl">3dp</dimen>
+</resources>

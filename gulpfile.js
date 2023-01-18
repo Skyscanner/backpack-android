@@ -41,8 +41,6 @@ const PATHS = {
   lintSrc: path.join(__dirname, 'backpack-lint', 'src', 'main', 'java', 'net', 'skyscanner', 'backpack', 'lint', 'check'),
 };
 
-const VALID_SPACINGS = new Set(['sm', 'md', 'base', 'lg', 'xl', 'xxl']);
-
 const FONT_WEIGHTS = {
   normal: 'normal',
   emphasized: 'emphasized',
@@ -268,28 +266,6 @@ gulp.task('template:deprecatedTokens', () => {
     .pipe(gulp.dest(PATHS.lintSrc));
 });
 
-gulp.task('template:spacing', () => {
-  const getSpacing = () =>
-    tokensWithCategory('spacings')
-      .map(token => JSON.parse(JSON.stringify(token)))
-      .filter(({ name }) => VALID_SPACINGS.has(name.toLowerCase().replace('spacing_', '')))
-      .map(token => {
-        const newToken = token;
-        newToken.name = `bpk${pascalCase(newToken.name.replace(newToken.type.toUpperCase(), ''))}`;
-        return newToken;
-      });
-
-  return gulp
-    .src(`${PATHS.templates}/BackpackSpacing.njk`)
-    .pipe(
-      nunjucks.compile({
-        data: getSpacing(),
-      }),
-    )
-    .pipe(rename('values/backpack.dimensions.spacing.xml'))
-    .pipe(gulp.dest(PATHS.outputRes));
-});
-
 gulp.task('template:text', () =>
   gulp
     .src(`${PATHS.templates}/BackpackText.njk`)
@@ -302,59 +278,6 @@ gulp.task('template:text', () =>
     .pipe(rename('values/backpack.text.xml'))
     .pipe(gulp.dest(PATHS.outputRes)),
 );
-gulp.task('template:radii', () => {
-  const getRadii = () =>
-    tokensWithCategory('radii').map(token => {
-      const newToken = JSON.parse(JSON.stringify(token));
-      newToken.name = `bpk${pascalCase(newToken.name)}`;
-      return newToken;
-    });
-  return gulp
-    .src(`${PATHS.templates}/BackpackRadii.njk`)
-    .pipe(
-      nunjucks.compile({
-        data: getRadii(),
-      }),
-    )
-    .pipe(rename('values/backpack.radii.xml'))
-    .pipe(gulp.dest(PATHS.outputRes));
-});
-
-gulp.task('template:borders', () => {
-  const getBorders = () =>
-    tokensWithCategory('borders').map(token => {
-      const newToken = JSON.parse(JSON.stringify(token));
-      newToken.name = `bpk${pascalCase(newToken.name)}`;
-      return newToken;
-    });
-  return gulp
-    .src(`${PATHS.templates}/BackpackBorders.njk`)
-    .pipe(
-      nunjucks.compile({
-        data: getBorders(),
-      }),
-    )
-    .pipe(rename('values/backpack.borders.xml'))
-    .pipe(gulp.dest(PATHS.outputRes));
-});
-
-gulp.task('template:elevation', () => {
-  const getElevation = () =>
-    tokensWithCategory('elevation').map(token => {
-      const newToken = JSON.parse(JSON.stringify(token));
-      newToken.name = `bpk${pascalCase(newToken.name)}`;
-      return newToken;
-    });
-  return gulp
-    .src(`${PATHS.templates}/BackpackElevation.njk`)
-    .pipe(
-      nunjucks.compile({
-        data: getElevation(),
-      }),
-    )
-    .pipe(rename('values/backpack.elevation.xml'))
-    .pipe(gulp.dest(PATHS.outputRes));
-});
 
 gulp.task('template:icons', () =>
   gulp
@@ -363,36 +286,12 @@ gulp.task('template:icons', () =>
     .pipe(gulp.dest(PATHS.drawableRes)),
 );
 
-gulp.task('template:animation', () => {
-  const getAnimation = () =>
-    tokensWithCategory('animations').map(token => {
-      const newToken = JSON.parse(JSON.stringify(token));
-      newToken.name = `bpk${pascalCase(newToken.name)}`;
-      newToken.value = newToken.value.slice(0, -2);
-      return newToken;
-    });
-  return gulp
-    .src(`${PATHS.templates}/BackpackAnimation.njk`)
-    .pipe(
-      nunjucks.compile({
-        data: getAnimation(),
-      }),
-    )
-    .pipe(rename('values/backpack.animation.xml'))
-    .pipe(gulp.dest(PATHS.outputRes));
-});
-
 gulp.task(
   'default',
   gulp.series(
-    'template:animation',
-    'template:borders',
     'template:color',
     'template:semanticColor',
-    'template:elevation',
     'template:icons',
-    'template:radii',
-    'template:spacing',
     'template:text',
     'template:deprecatedTokens',
   ),

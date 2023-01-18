@@ -16,22 +16,18 @@
  * limitations under the License.
  */
 
+// Auto-generated: do not edit
+@file:Suppress("RedundantVisibilityModifier","unused")
+
 package net.skyscanner.backpack.compose.tokens
 
-import androidx.compose.runtime.Stable
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
-object BpkDimension {
+public object BpkBorderSize {
+  public val Sm: Dp = 1.dp
 
-  @Stable
-  val BorderRadius = BpkBorderRadius
+  public val Lg: Dp = 2.dp
 
-  @Stable
-  val BorderSize = BpkBorderSize
-
-  @Stable
-  val Elevation = BpkElevation
-
-  @Stable
-  val Spacing = BpkSpacing
-
+  public val Xl: Dp = 3.dp
 }

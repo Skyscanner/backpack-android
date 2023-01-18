@@ -17,7 +17,5 @@
   limitations under the License.
 -->
 <resources>
-{% for elevation in data %}
-	<dimen name="{{elevation.name}}">{{elevation.value}}dp</dimen>
-{% endfor %}
- </resources>
+{{content}}
+</resources>

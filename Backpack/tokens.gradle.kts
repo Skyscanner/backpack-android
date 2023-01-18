@@ -18,6 +18,7 @@
 import com.squareup.kotlinpoet.ClassName
 import net.skyscanner.backpack.tokens.BpkColor
 import net.skyscanner.backpack.tokens.BpkDimension
+import net.skyscanner.backpack.tokens.BpkDuration
 import net.skyscanner.backpack.tokens.BpkFormat
 import net.skyscanner.backpack.tokens.BpkIcon
 import net.skyscanner.backpack.tokens.BpkOutput
@@ -33,12 +34,74 @@ import net.skyscanner.backpack.tokens.transformTo
 tasks {
   val group = "tokens"
 
+  val src = project.projectDir.resolve("src/main/res").path
+  val valuesFolder = "values"
   val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
     .readAs(BpkFormat.Json)
 
+  val generateElevationTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDimension.Category.Elevation)
+        .transformTo(BpkDimension.Format.Xml(namespace = "bpkElevation"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "elevation"))
+        .execute()
+    }
+  }
+
+  val generateSpacingTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDimension.Category.Spacing)
+        .transformTo(BpkDimension.Format.Xml(namespace = "bpkSpacing"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "dimensions.spacing"))
+        .execute()
+    }
+  }
+
+  val generateRadiiTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDimension.Category.Radii)
+        .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderRadius"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "radii"))
+        .execute()
+    }
+  }
+
+  val generateBorderSizeTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDimension.Category.Border)
+        .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderSize"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "borders"))
+        .execute()
+    }
+  }
+
+  val generateAnimationDurationTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDuration.Category.Animation)
+        .transformTo(BpkDuration.Format.Xml(namespace = "bpkAnimationDuration"))
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "animation"))
+        .execute()
+    }
+  }
+
   val generateSizeTokens by creating {
     this.group = group
-    dependsOn() // TODO fill with size token tasks
+    dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
+  }
+
+  val generateDurationTokens by creating {
+    this.group = group
+    dependsOn(generateAnimationDurationTokens)
   }
 
   val generateTextTokens by creating {
@@ -53,6 +116,6 @@ tasks {
 
   val generateTokens by creating {
     this.group = group
-    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens)
+    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateDurationTokens)
   }
 }
