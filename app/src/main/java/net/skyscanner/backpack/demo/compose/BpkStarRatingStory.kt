@@ -20,7 +20,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -106,37 +105,27 @@ private fun HotelRatingSample(context: Context, size: BpkStarRatingSize, text: S
   )
   BpkHotelRating(
     rating = 1f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 1f, 5),
     size = size,
   )
   BpkHotelRating(
     rating = 2f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 2f, 5),
     size = size,
   )
   BpkHotelRating(
     rating = 3f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 3f, 5),
     size = size,
   )
   BpkHotelRating(
     rating = 4f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 4f, 5),
     size = size,
   )
   BpkHotelRating(
     rating = 5f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 5f, 5),
     size = size,
   )
 }
@@ -149,50 +138,37 @@ private fun StaticRatingSample(context: Context, size: BpkStarRatingSize, text: 
   )
   BpkStarRating(
     rating = 1f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 1f, 5),
     rounding = RoundingType.Up,
     size = size,
   )
   BpkStarRating(
     rating = 2f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 2f, 5),
     rounding = RoundingType.Up,
     size = size,
   )
   BpkStarRating(
     rating = 3f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 3f, 5),
     rounding = RoundingType.Up,
     size = size,
   )
   BpkStarRating(
     rating = 3.5f,
-    contentDescription = { value, max ->
-      Log.d("TAG", "The rating is $value out of $max")
-      context.getString(R.string.star_rating_decimal_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 3.5f, 5),
     rounding = RoundingType.Up,
     size = size,
   )
   BpkStarRating(
     rating = 4f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 4f, 5),
     rounding = RoundingType.Up,
     size = size,
   )
   BpkStarRating(
     rating = 5f,
-    contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
-    },
+    contentDescription = context.getString(R.string.star_rating_accessibility_status, 5f, 5),
     rounding = RoundingType.Up,
     size = size,
   )
