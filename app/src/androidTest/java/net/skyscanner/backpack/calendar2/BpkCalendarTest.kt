@@ -21,6 +21,8 @@ package net.skyscanner.backpack.calendar2
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.jakewharton.threetenabp.AndroidThreeTen
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -41,13 +43,15 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun labeledCalendarDefault() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun labeled() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.Labeled)
     snap(calendar, padding = 0)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun past() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.Past)
@@ -55,6 +59,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun leapFebruary() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.LeapFebruary)
@@ -63,6 +68,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun nonLeapFebruary() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.NonLeapFebruary)
@@ -71,6 +77,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun todayIsLastDayOfMonth() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.TodayIsLastDayOfMonth)
@@ -79,6 +86,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun todayIsNewYear() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.TodayIsNewYear)
@@ -87,6 +95,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withRangeSet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithRangeSetProgrammatically)
@@ -95,6 +104,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun withSingleDaySet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithSingleDaySetProgrammatically)
@@ -103,6 +113,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun withDisabledDates() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates)
@@ -118,6 +129,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withDisabledDates_SelectRange() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectRange)
@@ -126,6 +138,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withDisabledDates_SelectDisabledDate() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectDisabledDate)
@@ -134,6 +147,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withWholeMonthButtonEnabled() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthButtonEnabled)
@@ -141,6 +155,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun withWholeMonthSet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
