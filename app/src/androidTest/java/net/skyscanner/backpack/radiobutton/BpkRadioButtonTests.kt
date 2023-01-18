@@ -20,6 +20,8 @@ package net.skyscanner.backpack.radiobutton
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -31,24 +33,27 @@ class BpkRadioButtonTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun default() {
+  fun defaultUnchecked() {
     snap(radioButton)
   }
 
   @Test
-  fun checked() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun defaultChecked() {
     radioButton.isChecked = true
     snap(radioButton)
   }
 
   @Test
-  fun disabled() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun disabledUnchecked() {
     radioButton.isEnabled = false
     snap(radioButton)
   }
 
   @Test
-  fun checkedDisabled() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun disabledChecked() {
     radioButton.isEnabled = false
     radioButton.isChecked = true
     snap(radioButton)
