@@ -25,6 +25,8 @@ import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
 import org.junit.Before
@@ -67,20 +69,21 @@ class BpkOverlayTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Ignore("Screenshot testing library does not capture rounded corners")
+  @Variants(BpkTestVariant.Default)
   fun roundedCorners() {
     overlay.cornerType = BpkOverlay.CornerType.Rounded
     snap(overlay, width = 100)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun tint() {
     overlay.overlayType = BpkOverlay.OverlayType.Tint
     snap(overlay, width = 100)
   }
 
   @Test
-  @Ignore("Screenshot testing library does not capture rounded corners")
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun tintAndCorners() {
     overlay.cornerType = BpkOverlay.CornerType.Rounded
     overlay.overlayType = BpkOverlay.OverlayType.Tint
