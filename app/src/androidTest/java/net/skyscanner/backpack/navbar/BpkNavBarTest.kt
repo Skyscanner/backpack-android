@@ -26,6 +26,8 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import org.junit.Rule
 import org.junit.Test
@@ -47,6 +49,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun collapsed() {
     init(expanded = false)
     var view: View? = null
@@ -56,6 +59,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun collapsed_icon() {
     init(icon = true, expanded = false)
     var view: View? = null
@@ -65,6 +69,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun expanded_icon() {
     init(icon = true)
     var view: View? = null
@@ -83,6 +88,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun expanded_menu() {
     init(menu = true)
     var view: View? = null
@@ -92,6 +98,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl, BpkTestVariant.DarkMode)
   fun collapsed_iconAndMenu() {
     init(icon = true, menu = true, expanded = false)
     var view: View? = null
@@ -101,6 +108,7 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl, BpkTestVariant.DarkMode)
   fun expanded_iconAndMenu() {
     init(icon = true, menu = true)
     var view: View? = null
