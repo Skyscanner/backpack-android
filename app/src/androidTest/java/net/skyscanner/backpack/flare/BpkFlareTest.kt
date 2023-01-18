@@ -29,6 +29,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.text.BpkText
 import org.junit.Test
@@ -57,7 +59,20 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun rounded() {
+  @Variants(BpkTestVariant.Default)
+  fun up() {
+    snap(
+      setupViewForInsetPaddingTest(testContext) {
+        subject.pointerDirection = BpkFlare.PointerDirection.UP
+        subject.insetPaddingMode = BpkFlare.InsetPaddingMode.TOP
+      },
+      width = 300,
+    )
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default)
+  fun radius() {
     snap(
       subject.apply {
         addView(imageView)
@@ -67,6 +82,18 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
+  fun contentPadding() {
+    snap(
+      setupViewForInsetPaddingTest(testContext) {
+        subject.insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
+      },
+      width = 300,
+    )
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun pointerPositionStart() {
     snap(
       subject.apply {
@@ -77,43 +104,13 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun pointerPositionEnd() {
     snap(
       subject.apply {
         addView(imageView)
         pointerPosition = BpkFlare.PointerPosition.END
       }
-    )
-  }
-
-  @Test
-  fun insetPaddingMode() {
-    snap(
-      setupViewForInsetPaddingTest(testContext) {
-        subject.insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
-      },
-      width = 300,
-    )
-  }
-
-  @Test
-  fun withPointerDirectionUP() {
-    snap(
-      subject.apply {
-        addView(imageView)
-        pointerDirection = BpkFlare.PointerDirection.UP
-      }
-    )
-  }
-
-  @Test
-  fun withPaddingModeTop_andPointerDirectionUP() {
-    snap(
-      setupViewForInsetPaddingTest(testContext) {
-        subject.pointerDirection = BpkFlare.PointerDirection.UP
-        subject.insetPaddingMode = BpkFlare.InsetPaddingMode.TOP
-      },
-      width = 300,
     )
   }
 
