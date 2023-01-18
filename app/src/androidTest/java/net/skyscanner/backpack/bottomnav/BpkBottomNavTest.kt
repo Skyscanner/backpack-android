@@ -20,7 +20,10 @@ package net.skyscanner.backpack.bottomnav
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.compose.BpkBottomNavSample
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -39,4 +42,20 @@ class BpkBottomNavTest : BpkSnapshotTest() {
       padding = 0,
     )
   }
+
+  @Test
+  @Variants(BpkTestVariant.Default)
+  fun selectionUpdated() {
+    snap(
+      BpkBottomNav(testContext).apply {
+        addItem(1, R.string.bottom_nav_home, R.drawable.bpk_aircraft)
+        addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
+        addItem(3, R.string.bottom_nav_trips, R.drawable.bpk_star)
+        addItem(4, R.string.bottom_nav_profile, R.drawable.bpk_account_circle)
+        selectedItemId = 2
+      },
+      padding = 0,
+    )
+  }
+
 }
