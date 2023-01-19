@@ -21,6 +21,8 @@ package net.skyscanner.backpack.snackbar
 import android.widget.FrameLayout
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.util.unsafeLazy
 import org.junit.Test
@@ -41,7 +43,8 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun defaultWithAction() {
+  @Variants(BpkTestVariant.Default)
+  fun withAction() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setAction("Action") {}
@@ -49,6 +52,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withTitle() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
@@ -58,6 +62,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withIcon() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
@@ -67,6 +72,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl, BpkTestVariant.Themed)
   fun withTitleAndIcon() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
@@ -77,6 +83,7 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun iconOnly() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
@@ -85,7 +92,8 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun iconOnly_withTitle() {
+  @Variants(BpkTestVariant.Default)
+  fun titleWithAction() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setTitle("Title")
@@ -94,7 +102,8 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun iconOnly_withIcon() {
+  @Variants(BpkTestVariant.Default)
+  fun iconWithAction() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setIcon(R.drawable.bpk_tick_circle)
@@ -103,7 +112,8 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  fun iconOnly_withTitleAndIcon() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl, BpkTestVariant.Themed)
+  fun titleWithIconAndAction() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
         .setTitle("Title")
