@@ -126,7 +126,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun multilinePlaceholder() {
     snap(width = 200.dp) {
       BpkTextField(
@@ -166,7 +166,6 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun validated() {
     snap {
       BpkTextField(
@@ -179,7 +178,6 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun error() {
     snap {
       BpkTextField(

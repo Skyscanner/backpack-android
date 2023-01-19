@@ -59,7 +59,7 @@ class BpkFlareTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun up() {
     snap(
       setupViewForInsetPaddingTest(testContext) {

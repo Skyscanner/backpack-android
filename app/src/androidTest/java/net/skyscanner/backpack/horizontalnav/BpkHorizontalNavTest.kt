@@ -57,14 +57,14 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun fixed() {
     horizontalNav.tabMode = TabLayout.MODE_FIXED
     snap(horizontalNav)
   }
 
   @Test
-  @Variants(BpkTestVariant.Default)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun scrollable() {
     horizontalNav.tabMode = TabLayout.MODE_SCROLLABLE
     snap(horizontalNav)

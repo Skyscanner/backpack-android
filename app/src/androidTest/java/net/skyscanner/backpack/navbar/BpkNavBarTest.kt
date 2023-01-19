@@ -98,7 +98,6 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl, BpkTestVariant.DarkMode)
   fun collapsed_iconAndMenu() {
     init(icon = true, menu = true, expanded = false)
     var view: View? = null
@@ -108,7 +107,6 @@ class BpkNavBarTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl, BpkTestVariant.DarkMode)
   fun expanded_iconAndMenu() {
     init(icon = true, menu = true)
     var view: View? = null

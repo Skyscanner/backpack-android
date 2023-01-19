@@ -43,14 +43,13 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun hint() {
     subject.setText("")
     snap(subject)
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabled() {
     subject.isEnabled = false
     snap(subject)
@@ -70,19 +69,4 @@ class BpkTextFieldTests : BpkSnapshotTest() {
     snap(subject)
   }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun iconStart_withTint() {
-    subject.setText("")
-    subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
-    snap(subject)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun iconEnd_withTint() {
-    subject.setText("")
-    subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
-    snap(subject)
-  }
 }

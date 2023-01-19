@@ -72,7 +72,6 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl, BpkTestVariant.Themed)
   fun withTitleAndIcon() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
@@ -112,7 +111,6 @@ class BpkSnackbarTests : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl, BpkTestVariant.Themed)
   fun titleWithIconAndAction() {
     capture {
       BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)

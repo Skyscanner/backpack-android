@@ -38,21 +38,21 @@ class BpkRadioButtonTests : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun defaultChecked() {
     radioButton.isChecked = true
     snap(radioButton)
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabledUnchecked() {
     radioButton.isEnabled = false
     snap(radioButton)
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabledChecked() {
     radioButton.isEnabled = false
     radioButton.isChecked = true

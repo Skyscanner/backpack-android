@@ -43,14 +43,14 @@ class BpkNudgerTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun minusDisabled() {
     nudger.value = 0
     snap(nudger)
   }
 
   @Test
-  @Variants(BpkTestVariant.Default)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun plusDisabled() {
     nudger.value = 10
     nudger.maxValue = 10

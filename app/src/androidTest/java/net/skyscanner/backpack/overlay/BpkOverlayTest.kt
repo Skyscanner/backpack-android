@@ -70,6 +70,7 @@ class BpkOverlayTest : BpkSnapshotTest() {
 
   @Test
   @Variants(BpkTestVariant.Default)
+  @Ignore("Screenshot testing library does not capture rounded corners")
   fun roundedCorners() {
     overlay.cornerType = BpkOverlay.CornerType.Rounded
     snap(overlay, width = 100)
@@ -84,6 +85,7 @@ class BpkOverlayTest : BpkSnapshotTest() {
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Ignore("Screenshot testing library does not capture rounded corners")
   fun tintAndCorners() {
     overlay.cornerType = BpkOverlay.CornerType.Rounded
     overlay.overlayType = BpkOverlay.OverlayType.Tint
