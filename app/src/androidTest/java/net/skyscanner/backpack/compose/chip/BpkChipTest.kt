@@ -85,7 +85,6 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withIcon() {
     snap {
       BpkChip(text = "Chip", icon = BpkIcon.Deals)
@@ -109,7 +108,6 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withIconAndType() {
     snap {
       BpkChip(text = "Chip", type = BpkChipType.Dismiss, icon = BpkIcon.Deals)

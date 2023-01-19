@@ -38,7 +38,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun notSelected() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -47,7 +47,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun selected() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -56,7 +56,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabled() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -65,7 +65,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun notSelected_OnDark() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -75,7 +75,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun selected_OnDark() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -85,7 +85,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabled_OnDark() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -95,7 +95,6 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withIcon() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -122,7 +121,6 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withIconAndType() {
     val view = BpkChip(testContext)
     view.text = "Chip"

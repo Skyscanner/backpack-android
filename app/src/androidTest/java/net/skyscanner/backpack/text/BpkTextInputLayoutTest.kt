@@ -65,7 +65,6 @@ class BpkTextInputLayoutTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun helperAndError() {
     subject.error = "Error"
     subject.helperText = "Helper"

@@ -95,7 +95,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withRangeSet() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithRangeSetProgrammatically)
@@ -147,7 +146,6 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withWholeMonthButtonEnabled() {
     val calendar = BpkCalendar(testContext)
     calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthButtonEnabled)

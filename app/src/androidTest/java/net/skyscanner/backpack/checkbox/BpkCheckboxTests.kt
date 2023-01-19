@@ -38,21 +38,21 @@ class BpkCheckboxTests : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun unchecked() {
     checkbox.isChecked = false
     snap(checkbox)
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun checked() {
     checkbox.isChecked = true
     snap(checkbox)
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabledUnchecked() {
     checkbox.isEnabled = false
     checkbox.isChecked = false
@@ -60,7 +60,7 @@ class BpkCheckboxTests : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabledChecked() {
     checkbox.isEnabled = false
     checkbox.isChecked = true

@@ -66,7 +66,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun fullyFilled() {
     init {
       model = BpkBarChart.Model(
@@ -92,7 +92,7 @@ class BpkBarchartTests : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun inactive() {
     init {
       model = BpkBarChart.Model(

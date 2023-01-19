@@ -79,7 +79,6 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withIconAndCta() {
     scope.launch {
       state.show(

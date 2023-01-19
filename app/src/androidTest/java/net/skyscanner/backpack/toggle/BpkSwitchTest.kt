@@ -34,13 +34,13 @@ class BpkSwitchTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun defaultChecked() {
     snap(BpkSwitch(testContext).apply { isChecked = true })
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabledUnchecked() {
     snap(BpkSwitch(testContext).apply {
       isChecked = false
@@ -49,7 +49,7 @@ class BpkSwitchTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabledChecked() {
     snap(BpkSwitch(testContext).apply {
       isChecked = true
