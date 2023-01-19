@@ -183,6 +183,7 @@ class BpkTextTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun link() {
     val text = BpkText(testContext)
     text.setText(R.string.txt_lorem_ipsum_link)
