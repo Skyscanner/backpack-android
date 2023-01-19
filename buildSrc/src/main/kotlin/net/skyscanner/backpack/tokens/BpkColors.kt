@@ -72,11 +72,6 @@ object BpkColor {
 
   sealed class Format<In, Out> : BpkTransformer<In, Out> {
 
-    data class StaticCompose(val namespace: String) : Format<BpkColors, TypeSpec>() {
-      override fun invoke(source: BpkColors): TypeSpec =
-        toStaticCompose(source, namespace)
-    }
-
     data class SemanticCompose(val className: String) : Format<BpkColors, TypeSpec>() {
       override fun invoke(source: BpkColors): TypeSpec =
         toSemanticCompose(source, className)
@@ -177,29 +172,6 @@ private fun deprecationProperty(): PropertySpec =
 
 @OptIn(ExperimentalStdlibApi::class)
 private fun String.toHexColor() = uppercase().run { "0x${substring(7)}${substring(1, 7)}" }
-
-private fun toStaticCompose(
-  source: BpkColors,
-  namespace: String,
-): TypeSpec {
-
-  fun BpkColorModel.toProperty(): PropertySpec {
-
-    fun String.toComposeStaticName() =
-      CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
-
-    return PropertySpec
-      .builder(name.toComposeStaticName(), ColorClass)
-      .initializer(defaultValue.toHexColorBlock())
-      .withDeprecation(this)
-      .build()
-  }
-
-  return TypeSpec.objectBuilder(namespace)
-    .addProperties(source.map(BpkColorModel::toProperty))
-    .addProperty(deprecationProperty())
-    .build()
-}
 
 private fun toSemanticCompose(
   source: BpkColors,

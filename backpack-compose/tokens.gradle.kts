@@ -128,17 +128,6 @@ tasks {
     }
   }
 
-  val generateStaticColors by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkColor.Static)
-        .transformTo(BpkColor.Format.StaticCompose(namespace = "BpkColor"))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
-    }
-  }
-
   val generateSemanticColors by creating {
     this.group = group
     doLast {
@@ -173,7 +162,7 @@ tasks {
 
   val generateColorTokens by creating {
     this.group = group
-    dependsOn(generateStaticColors, generateSemanticColors, generateInternalColors)
+    dependsOn(generateSemanticColors, generateInternalColors)
   }
 
   val generateIcons by creating {
