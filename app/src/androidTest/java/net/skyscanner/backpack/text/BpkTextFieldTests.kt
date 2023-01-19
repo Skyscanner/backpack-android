@@ -21,6 +21,8 @@ package net.skyscanner.backpack.text
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -41,30 +43,35 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun hint() {
     subject.setText("")
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabled() {
     subject.isEnabled = false
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun iconStart() {
     subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun iconEnd() {
     subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun iconStart_withTint() {
     subject.setText("")
     subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
@@ -72,6 +79,7 @@ class BpkTextFieldTests : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun iconEnd_withTint() {
     subject.setText("")
     subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
