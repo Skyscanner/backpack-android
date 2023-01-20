@@ -19,28 +19,14 @@
 const path = require('path');
 
 const gulp = require('gulp');
-const nunjucks = require('gulp-nunjucks');
-const rename = require('gulp-rename');
-const _ = require('lodash');
 const through = require('through2');
 const svg2vectordrawable = require('svg2vectordrawable');
 const xmldom = require('@xmldom/xmldom');
-const tokens = require('@skyscanner/bpk-foundations-android/tokens/base.raw.android.json');
 const iconsMetadata = require('@skyscanner/bpk-svgs/dist/metadata.json');
 
 const PATHS = {
-  templates: path.join(__dirname, 'templates'),
   drawableRes: path.join(__dirname, 'backpack-common', 'src', 'main', 'res', 'drawable-nodpi'),
-  lintSrc: path.join(__dirname, 'backpack-lint', 'src', 'main', 'java', 'net', 'skyscanner', 'backpack', 'lint', 'check'),
 };
-
-const pascalCase = s =>
-  _.flow(
-    _.camelCase,
-    _.upperFirst,
-  )(s);
-
-const tokensWithType = type => Object.values(tokens.props).filter(i => i.type === type);
 
 const shouldAutoMirror = chunk => {
   const iconMetadata = iconsMetadata[chunk.stem];
@@ -84,27 +70,6 @@ const convertToXml = (chunk, enc, cb) => {
     .catch(cb);
 };
 
-gulp.task('template:deprecatedTokens', () => {
-  const getColors = () =>
-    tokensWithType('color')
-      .map(color => {
-        const colorObject = JSON.parse(JSON.stringify(color));
-        colorObject.name = `bpk${pascalCase(colorObject.name.replace(colorObject.type.toUpperCase(), ''))}`;
-        return colorObject;
-      })
-      .filter(entry => entry.deprecated);
-
-  return gulp
-    .src(`${PATHS.templates}/BackpackDeprecation.njk`)
-    .pipe(
-      nunjucks.compile({
-        colors: getColors(),
-      }),
-    )
-    .pipe(rename('BpkDeprecatedTokens.kt'))
-    .pipe(gulp.dest(PATHS.lintSrc));
-});
-
 gulp.task('template:icons', () =>
   gulp
     .src('node_modules/@skyscanner/bpk-svgs/dist/svgs/icons/**/*.svg')
@@ -116,7 +81,6 @@ gulp.task(
   'default',
   gulp.series(
     'template:icons',
-    'template:deprecatedTokens',
   ),
   () => {},
 );
