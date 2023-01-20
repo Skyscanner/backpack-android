@@ -116,7 +116,7 @@ You can use the following set of rules to determine the variants:
 * There should be at least one test covering all the variants (usually it's `default()`)
 * If you expect the test to behave differently in layout, include `Rtl` variant
 * If you expect the colours to be different in the dark mode, include `DarkMode` variant
-* If you have customisable theme properties which may change the colours in this specific test, include Themed variant
+* If you have customisable theme properties which may change the colours in this specific test, include `Themed` variant
 * If the same test variance is covered in other tests, consider having only one test with different variants. For instance,
 if you have tests for toolbar with home icon, action icon, action text and one combined test, which includes all of this
 elements displayed together, consider having the variants only for the last test.
