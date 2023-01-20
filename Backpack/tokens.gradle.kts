@@ -116,6 +116,39 @@ tasks {
     }
   }
 
+  val generateStaticColors by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkColor.Static)
+        .transformTo(BpkColor.Format.StaticXml)
+        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "color"))
+        .execute()
+    }
+  }
+
+  val generateSemanticColors by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkColor.Semantic)
+        .transformTo(BpkColor.Format.SemanticXml)
+        .saveTo(BpkOutput.XmlFiles(src, valuesFolder, "semantic.color"))
+        .execute()
+    }
+  }
+
+  val generateInternalColors by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkColor.Internal)
+        .transformTo(BpkColor.Format.SemanticXml)
+        .saveTo(BpkOutput.XmlFiles(src, valuesFolder, "internal.color"))
+        .execute()
+    }
+  }
+
   val generateSizeTokens by creating {
     this.group = group
     dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
@@ -133,7 +166,7 @@ tasks {
 
   val generateColorTokens by creating {
     this.group = group
-    dependsOn() // TODO fill with color token tasks
+    dependsOn(generateStaticColors, generateSemanticColors, generateInternalColors)
   }
 
   val generateTokens by creating {

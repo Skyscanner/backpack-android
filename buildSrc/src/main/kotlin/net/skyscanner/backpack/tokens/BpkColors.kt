@@ -38,7 +38,14 @@ data class BpkColorModel(
   val darkReference: String?,
   val darkValue: String?,
   val deprecated: Boolean,
-)
+) {
+
+  fun value(isLight: Boolean) = if (isLight) {
+    defaultValue
+  } else {
+    darkValue ?: defaultValue
+  }
+}
 
 interface BpkColors : List<BpkColorModel>
 
@@ -48,7 +55,7 @@ object BpkColor {
 
     override fun invoke(source: Map<String, Any>): BpkColors =
       parseColors(source, resolveReferences = false) {
-        !it.isSemanticColor() && !it.isMarcomms()
+        !it.isSemanticColor() && !it.hasSemanticSuffix(newSemanticSuffixes) && !it.isMarcomms()
       }.toBpkColors()
   }
 
@@ -58,16 +65,10 @@ object BpkColor {
       parseColors(source, resolveReferences = true) { it.isSemanticColor() && !it.isPrivate }.toBpkColors()
   }
 
-  object Internal : BpkParser<Map<String, Any>, Map<String, BpkColors>> {
+  object Internal : BpkParser<Map<String, Any>, BpkColors> {
 
-    override fun invoke(source: Map<String, Any>): Map<String, BpkColors> =
-      parseColors(source, resolveReferences = true) { it.isSemanticColor() && it.isPrivate }
-        .groupBy { it.fileName() }.mapValues { it.value.toBpkColors() }
-
-    private fun BpkColorModel.fileName(): String = "Bpk${category.toCamelCase()}Colors"
-
-    private fun String.toCamelCase() =
-      CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_CAMEL, this)
+    override fun invoke(source: Map<String, Any>): BpkColors =
+      parseColors(source, resolveReferences = true) { it.isSemanticColor() && it.isPrivate }.toBpkColors()
   }
 
   sealed class Format<In, Out> : BpkTransformer<In, Out> {
@@ -77,11 +78,25 @@ object BpkColor {
         toSemanticCompose(source, className)
     }
 
-    object InternalCompose : Format<Map<String, BpkColors>, List<TypeSpec>>() {
-      override fun invoke(source: Map<String, BpkColors>): List<TypeSpec> =
-        source.map { toInternalCompose(it.value, it.key) }
+    object InternalCompose : Format<BpkColors, List<TypeSpec>>() {
+      override fun invoke(source: BpkColors): List<TypeSpec> =
+        source.groupBy { it.fileName() }
+        .map { toInternalCompose(it.value.toBpkColors(), it.key) }
+
+      private fun BpkColorModel.fileName(): String = "Bpk${category.toCamelCase()}Colors"
+
+      private fun String.toCamelCase() = CaseFormat.LOWER_HYPHEN.to(CaseFormat.UPPER_CAMEL, this)
     }
 
+    object StaticXml : Format<BpkColors, String>() {
+      override fun invoke(source: BpkColors): String =
+        toXml(source, isLight = true)
+    }
+
+    object SemanticXml : Format<BpkColors, Map<String, String>>() {
+      override fun invoke(source: BpkColors): Map<String, String> =
+        toSemanticXml(source)
+    }
   }
 
   private fun BpkColorModel.isMarcomms(): Boolean = name.startsWith("MARCOMMS_")
@@ -90,11 +105,12 @@ object BpkColor {
     darkValue != null && !hasSemanticSuffix() && !isMarcomms()
 
   @OptIn(ExperimentalStdlibApi::class)
-  private fun BpkColorModel.hasSemanticSuffix(): Boolean {
+  private fun BpkColorModel.hasSemanticSuffix(suffixes: List<String> = semanticSuffixes): Boolean {
     val name = name.lowercase()
-    return semanticSuffixes.any { name.endsWith("_$it") && !name.endsWith("_on_$it") }
+    return suffixes.any { name.endsWith("_$it") && !name.endsWith("_on_$it") }
   }
 
+  private val newSemanticSuffixes = listOf("day", "night")
   private val semanticSuffixes = listOf("light", "dark", "day", "night")
 
   private fun List<BpkColorModel>.toBpkColors(): BpkColors =
@@ -170,8 +186,10 @@ private fun deprecationProperty(): PropertySpec =
     .addModifiers(KModifier.CONST, KModifier.PRIVATE)
     .build()
 
+private fun String.toArgb() = substring(7) + substring(1, 7)
+
 @OptIn(ExperimentalStdlibApi::class)
-private fun String.toHexColor() = uppercase().run { "0x${substring(7)}${substring(1, 7)}" }
+private fun String.toHexColor() = uppercase().run { "0x${toArgb()}" }
 
 private fun toSemanticCompose(
   source: BpkColors,
@@ -217,13 +235,7 @@ private fun toSemanticCompose(
 
     val functionName = if (isLight) "light" else "dark"
 
-    fun BpkColorModel.value() = if (isLight) {
-      defaultValue
-    } else {
-      darkValue ?: defaultValue
-    }
-
-    fun BpkColorModel.toDefaultValue(): CodeBlock = value().toHexColorBlock()
+    fun BpkColorModel.toDefaultValue(): CodeBlock = value(isLight).toHexColorBlock()
 
     fun BpkColorModel.toParameter(): ParameterSpec =
       ParameterSpec
@@ -303,3 +315,29 @@ private fun toInternalCompose(
     .addProperties(source.map(BpkColorModel::toProperty))
     .build()
 }
+
+private fun toXml(source: BpkColors, isLight: Boolean): String {
+  fun String.toCamelCase() =
+    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this)
+
+  fun BpkColorModel.name() =
+    if (isPrivate) {
+      "__private${name.toCamelCase()}"
+    } else {
+      "bpk${name.toCamelCase()}"
+    }
+
+  return source.joinToString("\n") { model ->
+    "    <color name=\"${model.name()}\">#${
+      model.value(isLight).toArgb()
+    }</color>"
+  }
+}
+
+private fun toSemanticXml(source: BpkColors): Map<String, String> {
+  return mapOf(
+    "" to toXml(source, isLight = true),
+    "-night" to toXml(source, isLight = false),
+  )
+}
+

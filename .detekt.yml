@@ -199,7 +199,7 @@ formatting:
   NoBlankLineBeforeRbrace:
     active: true
     autoCorrect: true
-    excludes: [ '**/tokens/**' ]
+    excludes: [ '**/tokens/**', '**/check/BpkDeprecatedTokens.kt' ]
   NoConsecutiveBlankLines:
     active: true
     autoCorrect: true
@@ -248,7 +248,6 @@ formatting:
   SpacingAroundComma:
     active: true
     autoCorrect: true
-    excludes: [ '**/tokens/**' ]
   SpacingAroundCurly:
     active: true
     autoCorrect: true
