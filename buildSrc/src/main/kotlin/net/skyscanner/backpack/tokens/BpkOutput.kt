@@ -124,7 +124,7 @@ private fun FileSpec.Builder.suppressWarningTypes(vararg types: String): FileSpe
     return this
   }
 
-  val format = "%S,".repeat(types.count()).trimEnd(',')
+  val format = "%S, ".repeat(types.count()).trimEnd(',', ' ')
   return addAnnotation(
     AnnotationSpec.builder(ClassName("", "Suppress"))
       .addMember(format, *types)
