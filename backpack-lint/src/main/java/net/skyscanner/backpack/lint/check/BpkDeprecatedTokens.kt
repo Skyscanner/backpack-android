@@ -16,12 +16,16 @@
  * limitations under the License.
  */
 
-/** THIS FILE IS AUTO GENERATED. DO NOT MODIFY! **/
+// Auto-generated: do not edit
+@file:Suppress("RedundantVisibilityModifier", "unused")
 
 package net.skyscanner.backpack.lint.check
 
+import kotlin.String
+import kotlin.collections.List
+
 internal object BpkDeprecatedTokens {
-  val deprecatedColors = listOf(
+  public val deprecatedColors: List<String> = listOf(
     "bpkSkyBlueShade03",
     "bpkPrimaryGradientLight",
     "bpkErfoud",
@@ -100,4 +104,5 @@ internal object BpkDeprecatedTokens {
     "bpkBackgroundAlternative",
     "bpkPrimary",
   )
+
 }
