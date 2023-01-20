@@ -78,16 +78,30 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
     val name: String,
   ) : BpkOutput<String>() {
     override fun invoke(content: String): Boolean {
-      val target = File(File(srcDir, folder), "backpack.$name.xml")
-      target.createNewFile()
-
-      val template = Resources.toString(Resources.getResource("resource_file_template.txt"), StandardCharsets.UTF_8)
-
-      target.writeText(template.replace("{{content}}", content))
+      content.writeToFile(srcDir, folder, name)
       return true
     }
-
   }
+
+  data class XmlFiles(
+    val srcDir: String,
+    val folder: String,
+    val name: String,
+  ) : BpkOutput<Map<String, String>>() {
+    override fun invoke(contents: Map<String, String>): Boolean {
+      contents.forEach { (folderSuffix, content) -> content.writeToFile(srcDir, folder + folderSuffix, name) }
+      return true
+    }
+  }
+}
+
+private fun String.writeToFile(srcDir: String, folder: String, name: String) {
+  val target = File(File(srcDir, folder), "backpack.$name.xml")
+  target.createNewFile()
+
+  val template = Resources.toString(Resources.getResource("resource_file_template.txt"), StandardCharsets.UTF_8)
+
+  target.writeText(template.replace("{{content}}", this))
 }
 
 private fun FileSpec.writeWithCopyright(directory: File) {
