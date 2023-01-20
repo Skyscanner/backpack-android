@@ -41,7 +41,6 @@ import net.skyscanner.backpack.compose.chip.BpkChipType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Deals
 import net.skyscanner.backpack.demo.R
@@ -76,7 +75,7 @@ private fun ChipsColumn(
     BpkText(
       text = style.toString(),
       style = BpkTheme.typography.heading5,
-      color = if (forceDarkBackground) BpkColor.White else LocalContentColor.current,
+      color = if (forceDarkBackground) BpkTheme.colors.textOnDark else LocalContentColor.current,
     )
 
     BpkChipType.values().forEach { type ->

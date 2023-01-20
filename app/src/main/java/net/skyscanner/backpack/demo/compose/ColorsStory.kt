@@ -36,7 +36,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.tokens.BpkColor
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.data.Token
 import net.skyscanner.backpack.demo.data.values
@@ -44,8 +44,8 @@ import net.skyscanner.backpack.demo.data.values
 @Composable
 @Preview
 fun ColorsComposeStory() {
-  LazyColumn() {
-    val data: List<Token<Color>> = BpkColor.values
+  val data: List<Token<Color>> = BpkTheme.colors.values
+  LazyColumn {
     items(data) { item ->
       ColorSampleRow(token = item)
     }
