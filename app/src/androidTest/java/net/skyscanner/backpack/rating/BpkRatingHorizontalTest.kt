@@ -20,6 +20,8 @@ package net.skyscanner.backpack.rating
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -41,24 +43,28 @@ class BpkRatingHorizontalTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun extraSmall() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.ExtraSmall)
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun small() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Small)
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun base() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Base)
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun large() {
     val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
     snap(subject)

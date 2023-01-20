@@ -27,7 +27,7 @@ import org.junit.runner.RunWith
 class BpkBodyTextSkeletonTest : BpkSnapshotTest() {
 
   @Test
-  fun default() {
+  fun bodyText() {
     val skeleton = BpkBodyTextSkeleton(testContext)
     snap(skeleton, width = 200, height = 80)
   }

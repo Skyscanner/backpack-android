@@ -20,6 +20,8 @@ package net.skyscanner.backpack.text
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -42,18 +44,21 @@ class BpkTextInputLayoutTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun disabled() {
     textField.isEnabled = false
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun error() {
     subject.error = "Error"
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun helper() {
     subject.helperText = "Helper"
     snap(subject)
@@ -67,6 +72,7 @@ class BpkTextInputLayoutTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun errorNoLabel() {
     subject.label = null
     subject.error = "Error"

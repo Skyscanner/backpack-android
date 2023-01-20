@@ -20,6 +20,8 @@ package net.skyscanner.backpack.starrating
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -34,20 +36,23 @@ class BpkInteractiveStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun customMaxRatingIncreasing() {
+  @Variants(BpkTestVariant.Default)
+  fun maxRatingIncreases() {
     rating.maxRating = 5
     rating.maxRating = 10
     snap(rating)
   }
 
   @Test
-  fun customMaxRatingDecreasing() {
+  @Variants(BpkTestVariant.Default)
+  fun maxRatingDecreases() {
     rating.maxRating = 5
     rating.maxRating = 3
     snap(rating)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun negativeRating() {
     rating.maxRating = 5
     rating.rating = -0.5f
@@ -55,6 +60,7 @@ class BpkInteractiveStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun zeroRating() {
     rating.maxRating = 5
     rating.rating = 0.0f
@@ -62,6 +68,7 @@ class BpkInteractiveStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun ratingValueBetween0And0_5() {
     rating.maxRating = 5
     rating.rating = 0.4999999f
@@ -69,6 +76,7 @@ class BpkInteractiveStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun ratingValue0_5() {
     rating.maxRating = 5
     rating.rating = 0.5f
@@ -76,6 +84,7 @@ class BpkInteractiveStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun ratingValueBetween0_5And1() {
     rating.maxRating = 5
     rating.rating = 0.9999999f
@@ -83,6 +92,7 @@ class BpkInteractiveStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun ratingValue1() {
     rating.maxRating = 5
     rating.rating = 1.0f
@@ -90,6 +100,7 @@ class BpkInteractiveStarRatingTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun SixWithMax5() {
     rating.maxRating = 5
     rating.rating = 6.0f

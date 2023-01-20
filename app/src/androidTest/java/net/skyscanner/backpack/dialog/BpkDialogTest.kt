@@ -31,6 +31,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.karumi.shot.ActivityScenarioUtils.waitForActivity
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.demo.R
 import org.junit.Rule
@@ -68,6 +70,7 @@ class BpkDialogTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun fullscreen() {
     var dialog: BpkDialog? = null
     rule.scenario.waitForActivity().also { activity ->

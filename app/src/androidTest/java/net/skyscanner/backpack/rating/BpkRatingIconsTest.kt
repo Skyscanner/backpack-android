@@ -20,6 +20,8 @@ package net.skyscanner.backpack.rating
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -27,18 +29,21 @@ import org.junit.runner.RunWith
 class BpkRatingIconsTest : BpkSnapshotTest() {
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun low() {
     val subject = createTestRating(testContext, size = BpkRating.Size.Icon, value = 3.0f)
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun medium() {
     val subject = createTestRating(testContext, size = BpkRating.Size.Icon, value = 6.0f)
     snap(subject)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun high() {
     val subject = createTestRating(testContext, size = BpkRating.Size.Icon, value = 8.0f)
     snap(subject)

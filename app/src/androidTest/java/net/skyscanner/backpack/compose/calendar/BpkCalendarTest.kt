@@ -26,6 +26,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.calendar2.BpkCalendarTestCases
 import net.skyscanner.backpack.calendar2.CalendarParams
@@ -48,18 +50,21 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun labeled() {
     val controller = createController(BpkCalendarTestCases.Params.Labeled)
     snap(controller)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun past() {
     val controller = createController(BpkCalendarTestCases.Params.Past)
     snap(controller)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun leapFebruary() {
     val controller = createController(BpkCalendarTestCases.Params.LeapFebruary)
     controller.setSelection(BpkCalendarTestCases.Selection.LeapFebruary)
@@ -67,6 +72,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun nonLeapFebruary() {
     val controller = createController(BpkCalendarTestCases.Params.NonLeapFebruary)
     controller.setSelection(BpkCalendarTestCases.Selection.NonLeapFebruary)
@@ -74,6 +80,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun todayIsLastDayOfMonth() {
     val controller = createController(BpkCalendarTestCases.Params.TodayIsLastDayOfMonth)
     controller.setSelection(BpkCalendarTestCases.Selection.TodayIsLastDayOfMonth)
@@ -81,6 +88,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun todayIsNewYear() {
     val controller = createController(BpkCalendarTestCases.Params.TodayIsNewYear)
     controller.setSelection(BpkCalendarTestCases.Selection.TodayIsNewYear)
@@ -88,6 +96,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withRangeSet() {
     val controller = createController(BpkCalendarTestCases.Params.WithRangeSetProgrammatically)
     controller.setSelection(BpkCalendarTestCases.Selection.WithRangeSetProgrammatically)
@@ -95,6 +104,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun withSingleDaySet() {
     val controller = createController(BpkCalendarTestCases.Params.WithSingleDaySetProgrammatically)
     controller.setSelection(BpkCalendarTestCases.Selection.WithSingleDaySetProgrammatically)
@@ -102,12 +112,14 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun withDisabledDates() {
     val controller = createController(BpkCalendarTestCases.Params.WithDisabledDates)
     snap(controller)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withDisabledDates_SelectSingle() {
     val controller = createController(BpkCalendarTestCases.Params.WithDisabledDates_SelectSingle)
     controller.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectSingle)
@@ -115,6 +127,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withDisabledDates_SelectRange() {
     val controller = createController(BpkCalendarTestCases.Params.WithDisabledDates_SelectRange)
     controller.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectRange)
@@ -122,6 +135,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default)
   fun withDisabledDates_SelectDisabledDate() {
     val controller = createController(BpkCalendarTestCases.Params.WithDisabledDates_SelectDisabledDate)
     controller.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectDisabledDate)
@@ -129,12 +143,14 @@ class BpkCalendarTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
   fun withWholeMonthButtonEnabled() {
     val controller = createController(BpkCalendarTestCases.Params.WithWholeMonthButtonEnabled)
     snap(controller)
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun withWholeMonthSet() {
     val controller = createController(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
     controller.setSelection(BpkCalendarTestCases.Selection.WithWholeMonthSetProgrammatically)

@@ -36,7 +36,7 @@ class BpkLinksSpanTests : BpkSnapshotTest() {
   private val textView = TextView(testContext)
 
   @Test
-  fun custom() {
+  fun default() {
     val span = BpkLinkSpan(testContext, link, handler)
     textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
     snap(textView)

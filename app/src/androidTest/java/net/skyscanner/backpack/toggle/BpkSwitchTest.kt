@@ -20,6 +20,8 @@ package net.skyscanner.backpack.toggle
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -27,12 +29,32 @@ import org.junit.runner.RunWith
 class BpkSwitchTest : BpkSnapshotTest() {
 
   @Test
-  fun default() {
+  fun defaultUnchecked() {
     snap(BpkSwitch(testContext))
   }
 
   @Test
-  fun checked() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+  fun defaultChecked() {
     snap(BpkSwitch(testContext).apply { isChecked = true })
   }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+  fun disabledUnchecked() {
+    snap(BpkSwitch(testContext).apply {
+      isChecked = false
+      isEnabled = false
+    })
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+  fun disabledChecked() {
+    snap(BpkSwitch(testContext).apply {
+      isChecked = true
+      isEnabled = false
+    })
+  }
+
 }
