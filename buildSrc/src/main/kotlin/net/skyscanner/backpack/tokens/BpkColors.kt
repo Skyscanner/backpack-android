@@ -48,7 +48,7 @@ object BpkColor {
 
     override fun invoke(source: Map<String, Any>): BpkColors =
       parseColors(source, resolveReferences = false) {
-        it.name == it.defaultReference && !it.isMarcomms()
+        !it.isSemanticColor() && !it.isMarcomms()
       }.toBpkColors()
   }
 
@@ -87,7 +87,7 @@ object BpkColor {
   private fun BpkColorModel.isMarcomms(): Boolean = name.startsWith("MARCOMMS_")
 
   private fun BpkColorModel.isSemanticColor(): Boolean =
-    name != defaultReference && !hasSemanticSuffix() && !isMarcomms()
+    darkValue != null && !hasSemanticSuffix() && !isMarcomms()
 
   @OptIn(ExperimentalStdlibApi::class)
   private fun BpkColorModel.hasSemanticSuffix(): Boolean {
