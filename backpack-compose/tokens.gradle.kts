@@ -73,6 +73,17 @@ tasks {
     }
   }
 
+  val generateBorderSizeTokens by creating {
+    this.group = group
+    doLast {
+      source
+        .parseAs(BpkDimension.Category.Border)
+        .transformTo(BpkDimension.Format.Compose(namespace = "BpkBorderSize"))
+        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
+        .execute()
+    }
+  }
+
   val generateFontSizeTokens by creating {
     this.group = group
     doLast {
@@ -117,17 +128,6 @@ tasks {
     }
   }
 
-  val generateStaticColors by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkColor.Static)
-        .transformTo(BpkColor.Format.StaticCompose(namespace = "BpkColor"))
-        .saveTo(BpkOutput.KotlinFile(src, tokensPackage))
-        .execute()
-    }
-  }
-
   val generateSemanticColors by creating {
     this.group = group
     doLast {
@@ -152,7 +152,7 @@ tasks {
 
   val generateSizeTokens by creating {
     this.group = group
-    dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens)
+    dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
   }
 
   val generateTextTokens by creating {
@@ -162,7 +162,7 @@ tasks {
 
   val generateColorTokens by creating {
     this.group = group
-    dependsOn(generateStaticColors, generateSemanticColors, generateInternalColors)
+    dependsOn(generateSemanticColors, generateInternalColors)
   }
 
   val generateIcons by creating {
@@ -175,7 +175,7 @@ tasks {
       .execute()
   }
 
-  val generateEverything by creating {
+  val generateTokens by creating {
     this.group = group
     dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateIcons)
   }

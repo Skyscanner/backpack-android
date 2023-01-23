@@ -33,12 +33,6 @@ class BpkPrimaryColorSpanTests : BpkSnapshotTest() {
 
   @Test
   fun default() {
-    textView.text = "Test"
-    snap(textView)
-  }
-
-  @Test
-  fun custom() {
     val span = BpkPrimaryColorSpan(testContext)
     textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
     snap(textView)

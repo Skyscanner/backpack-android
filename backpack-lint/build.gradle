@@ -17,6 +17,7 @@
  */
 
 apply plugin: 'kotlin'
+apply from: "tokens.gradle.kts"
 
 dependencies {
   compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

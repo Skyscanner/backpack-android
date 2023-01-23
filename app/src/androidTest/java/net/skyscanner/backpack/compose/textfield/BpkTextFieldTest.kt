@@ -70,6 +70,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun withLeadingIcon() {
     snap {
       BpkTextField(
@@ -125,6 +126,7 @@ class BpkTextFieldTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun multilinePlaceholder() {
     snap(width = 200.dp) {
       BpkTextField(

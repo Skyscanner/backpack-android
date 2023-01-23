@@ -80,6 +80,7 @@ The design system tokens are located in a `net.skyscanner.backpack.compose.token
 Here's the list of the token types and the samples of its usage:
 
 * [border radii](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkBorderRadius.kt) – `BpkBorderRadius.Lg`
+* [border sizes](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkBorderSize.kt) – `BpkBorderSize.Sm`
 * [colours](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkColor.kt) – `BpkColor.SkyBlue`
 * [semantic colours](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkColors.kt) – `BpkTheme.colors.textPrimary`
 * [elevations](backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/tokens/BpkElevation.kt) – `BpkElevation.Sm`

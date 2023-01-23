@@ -47,15 +47,24 @@ object BpkDimension {
         parseDimensions(source, "elevation", "ELEVATION_")
     }
 
+    object Border : Category() {
+      override fun invoke(source: Map<String, Any>): BpkDimensions =
+        parseDimensions(source, "borders", "BORDER_SIZE_")
+    }
+
   }
 
-  sealed class Format : BpkTransformer<BpkDimensions, TypeSpec> {
+  sealed class Format<Output> : BpkTransformer<BpkDimensions, Output> {
 
-    data class Compose(val namespace: String) : Format() {
+    data class Compose(val namespace: String) : Format<TypeSpec>() {
       override fun invoke(source: BpkDimensions): TypeSpec =
         toCompose(source, namespace)
     }
 
+    data class Xml(val namespace: String) : Format<String>() {
+      override fun invoke(source: BpkDimensions): String =
+        toXml(source, namespace)
+    }
   }
 
 }
@@ -101,3 +110,8 @@ private fun toCompose(
       }
     )
     .build()
+
+private fun toXml(source: BpkDimensions, type: String): String =
+  source.map { (name, value) ->
+    "  <dimen name=\"$type${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}\">${value}dp</dimen>"
+  }.joinToString("\n")

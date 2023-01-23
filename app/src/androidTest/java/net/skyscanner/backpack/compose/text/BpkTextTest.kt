@@ -43,6 +43,7 @@ class BpkTextTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun colored() = snap {
     ColoredTextExample()
   }

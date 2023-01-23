@@ -20,6 +20,8 @@ package net.skyscanner.backpack.badge
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,6 +37,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun success() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Success
@@ -43,6 +46,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun destructive() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Destructive
@@ -51,6 +55,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun inverse() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Inverse
@@ -59,6 +64,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun normal() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Normal
@@ -67,6 +73,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun strong() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Strong
@@ -75,6 +82,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun warning() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Warning
@@ -83,6 +91,7 @@ class BpkBadgeTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun outline() {
     val badge = BpkBadge(testContext)
     badge.type = BpkBadge.Type.Outline

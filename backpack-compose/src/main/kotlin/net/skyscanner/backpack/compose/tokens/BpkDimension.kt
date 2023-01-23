@@ -26,6 +26,9 @@ object BpkDimension {
   val BorderRadius = BpkBorderRadius
 
   @Stable
+  val BorderSize = BpkBorderSize
+
+  @Stable
   val Elevation = BpkElevation
 
   @Stable

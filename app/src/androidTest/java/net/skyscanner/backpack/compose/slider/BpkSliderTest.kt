@@ -21,6 +21,8 @@ package net.skyscanner.backpack.compose.slider
 
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.DefaultSliderSample
 import net.skyscanner.backpack.demo.compose.RangeSliderSample
@@ -36,6 +38,7 @@ class BpkSliderTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun range() = snap(width = 200.dp) {
     RangeSliderSample()
   }

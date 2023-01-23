@@ -20,6 +20,8 @@ package net.skyscanner.backpack.slider
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -35,6 +37,7 @@ class BpkSliderTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun stepped() {
     slider.valueTo = 100f
     slider.value = 10f
@@ -43,6 +46,7 @@ class BpkSliderTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun range() {
     slider.valueTo = 100f
     slider.setValues(25f, 75f)

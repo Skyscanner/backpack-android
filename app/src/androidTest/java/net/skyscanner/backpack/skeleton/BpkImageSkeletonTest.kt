@@ -27,14 +27,14 @@ import org.junit.runner.RunWith
 class BpkImageSkeletonTest : BpkSnapshotTest() {
 
   @Test
-  fun square() {
+  fun imageSquare() {
     val skeleton = BpkImageSkeleton(testContext)
     skeleton.cornerType = BpkImageSkeleton.CornerType.Square
     snap(skeleton, width = 200, height = 200)
   }
 
   @Test
-  fun rounded() {
+  fun imageRounded() {
     val skeleton = BpkImageSkeleton(testContext)
     skeleton.cornerType = BpkImageSkeleton.CornerType.Rounded
     snap(skeleton, width = 200, height = 200)

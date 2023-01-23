@@ -21,6 +21,8 @@ package net.skyscanner.backpack.horizontalnav
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.android.material.tabs.TabLayout
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
 import org.junit.Test
@@ -37,18 +39,7 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun fixed() {
-    horizontalNav.tabMode = TabLayout.MODE_FIXED
-    snap(horizontalNav)
-  }
-
-  @Test
-  fun scrollable() {
-    horizontalNav.tabMode = TabLayout.MODE_SCROLLABLE
-    snap(horizontalNav)
-  }
-
-  @Test
+  @Variants(BpkTestVariant.Default)
   fun small() {
     val horizontalNav = BpkHorizontalNav(testContext).init()
     horizontalNav.size = BpkHorizontalNav.Size.Small
@@ -56,12 +47,26 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun icons() {
+  fun withIcons() {
     val horizontalNav = BpkHorizontalNav(testContext).apply {
       addTab(newTab().setText("Tab 1").setIcon(R.drawable.bpk_cars))
       addTab(newTab().setText("Tab 2").setIcon(R.drawable.bpk_cars))
       addTab(newTab().setText("Tab 3").setIcon(R.drawable.bpk_cars))
     }
+    snap(horizontalNav)
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+  fun fixed() {
+    horizontalNav.tabMode = TabLayout.MODE_FIXED
+    snap(horizontalNav)
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+  fun scrollable() {
+    horizontalNav.tabMode = TabLayout.MODE_SCROLLABLE
     snap(horizontalNav)
   }
 

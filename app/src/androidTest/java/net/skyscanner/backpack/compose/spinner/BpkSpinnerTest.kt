@@ -25,7 +25,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -73,7 +72,7 @@ class BpkSpinnerTest : BpkSnapshotTest() {
   @Variants(BpkTestVariant.Default)
   fun dynamicOnDarkSurface() {
     snap(background = { BpkTheme.colors.surfaceContrast }) {
-      CompositionLocalProvider(LocalContentColor provides BpkColor.White) {
+      CompositionLocalProvider(LocalContentColor provides BpkTheme.colors.textOnDark) {
         BpkSpinner(size = BpkSpinnerSize.Large)
       }
     }
@@ -83,7 +82,7 @@ class BpkSpinnerTest : BpkSnapshotTest() {
   @Variants(BpkTestVariant.Default)
   fun dynamicTextPrimary() {
     snap {
-      CompositionLocalProvider(LocalContentColor provides BpkColor.Black) {
+      CompositionLocalProvider(LocalContentColor provides BpkTheme.colors.textOnLight) {
         BpkSpinner(size = BpkSpinnerSize.Large)
       }
     }

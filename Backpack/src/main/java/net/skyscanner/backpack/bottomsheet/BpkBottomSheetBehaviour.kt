@@ -24,6 +24,7 @@ import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import net.skyscanner.backpack.R
@@ -42,7 +43,6 @@ class BpkBottomSheetBehaviour<V : View>(context: Context, attrs: AttributeSet? =
     addBottomSheetCallback(
       object : BottomSheetCallback() {
         override fun onStateChanged(bottomSheet: View, newState: Int) {
-          bottomSheet.background = background
           (bottomSheet as? ViewGroup)?.apply {
             clipToPadding = false
             clipChildren = false
@@ -59,6 +59,23 @@ class BpkBottomSheetBehaviour<V : View>(context: Context, attrs: AttributeSet? =
         }
       },
     )
+  }
+
+  override fun onLayoutChild(parent: CoordinatorLayout, child: V, layoutDirection: Int): Boolean {
+    return super.onLayoutChild(parent, child, layoutDirection).apply { child.background = background }
+  }
+
+  override fun setState(state: Int) {
+    super.setState(state)
+    if (this.state == state) {
+      // this means that the state was updated immediately, rather than transitioning.
+      // this is the case when the state is set when the bottom sheet it being set up, rather than later on
+      when (this.state) {
+        STATE_COLLAPSED -> updateBackground(0f)
+        STATE_EXPANDED -> updateBackground(1f)
+        else -> {}
+      }
+    }
   }
 
   private fun updateBackground(slideOffset: Float) {

@@ -18,14 +18,11 @@
 -->
 <resources>
 
-	<dimen name="bpkBorderRadiusXs">4dp</dimen>
+  <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
 
-	<dimen name="bpkBorderRadiusSm">8dp</dimen>
-
-	<dimen name="bpkBorderRadiusMd">12dp</dimen>
-
-	<dimen name="bpkBorderRadiusLg">24dp</dimen>
-
-	<dimen name="bpkBorderRadiusXl">40dp</dimen>
-
- </resources>
+  <dimen name="bpkBorderRadiusXs">4dp</dimen>
+  <dimen name="bpkBorderRadiusSm">8dp</dimen>
+  <dimen name="bpkBorderRadiusMd">12dp</dimen>
+  <dimen name="bpkBorderRadiusLg">24dp</dimen>
+  <dimen name="bpkBorderRadiusXl">40dp</dimen>
+</resources>

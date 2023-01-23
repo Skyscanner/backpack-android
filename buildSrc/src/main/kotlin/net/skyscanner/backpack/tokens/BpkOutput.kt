@@ -71,6 +71,37 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
       return true
     }
   }
+
+  data class XmlFile(
+    val srcDir: String,
+    val folder: String,
+    val name: String,
+  ) : BpkOutput<String>() {
+    override fun invoke(content: String): Boolean {
+      content.writeToFile(srcDir, folder, name)
+      return true
+    }
+  }
+
+  data class XmlFiles(
+    val srcDir: String,
+    val folder: String,
+    val name: String,
+  ) : BpkOutput<Map<String, String>>() {
+    override fun invoke(contents: Map<String, String>): Boolean {
+      contents.forEach { (folderSuffix, content) -> content.writeToFile(srcDir, folder + folderSuffix, name) }
+      return true
+    }
+  }
+}
+
+private fun String.writeToFile(srcDir: String, folder: String, name: String) {
+  val target = File(File(srcDir, folder), "backpack.$name.xml")
+  target.createNewFile()
+
+  val template = Resources.toString(Resources.getResource("resource_file_template.txt"), StandardCharsets.UTF_8)
+
+  target.writeText(template.replace("{{content}}", this))
 }
 
 private fun FileSpec.writeWithCopyright(directory: File) {
@@ -93,7 +124,7 @@ private fun FileSpec.Builder.suppressWarningTypes(vararg types: String): FileSpe
     return this
   }
 
-  val format = "%S,".repeat(types.count()).trimEnd(',')
+  val format = "%S, ".repeat(types.count()).trimEnd(',', ' ')
   return addAnnotation(
     AnnotationSpec.builder(ClassName("", "Suppress"))
       .addMember(format, *types)

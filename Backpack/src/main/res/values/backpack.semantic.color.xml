@@ -18,152 +18,44 @@
 -->
 <resources>
 
-	<color name="bpkCanvas">#ffffffff</color>
-
-	<color name="bpkCanvasContrast">#ffeff1f2</color>
-
-	<color name="bpkCoreEco">#ff0fa1a9</color>
-
-	<color name="bpkCoreAccent">#ff0062e3</color>
-
-	<color name="bpkCorePrimary">#ff05203c</color>
-
-	<color name="bpkStatusSuccessSpot">#ff0c838a</color>
-
-	<color name="bpkStatusSuccessFill">#ffd4fff2</color>
-
-	<color name="bpkStatusDangerSpot">#ffe70866</color>
-
-	<color name="bpkStatusWarningSpot">#fff55d42</color>
-
-	<color name="bpkStatusDangerFill">#ffffe9f9</color>
-
-	<color name="bpkStatusWarningFill">#fffff7cf</color>
-
-	<color name="bpkSurfaceContrast">#ff05203c</color>
-
-	<color name="bpkSurfaceDefault">#ffffffff</color>
-
-	<color name="bpkSurfaceElevated">#ffffffff</color>
-
-	<color name="bpkSurfaceHighlight">#ffe0e3e5</color>
-
-	<color name="bpkTextOnDark">#ffffffff</color>
-
-	<color name="bpkTextOnLight">#ff161616</color>
-
-	<color name="bpkTextDisabledOnDark">#80ffffff</color>
-
-	<color name="bpkTextLink">#ff0062e3</color>
-
-	<color name="bpkTextDisabled">#33000000</color>
-
-	<color name="bpkTextPrimary">#ff161616</color>
-
-	<color name="bpkTextQuaternary">#33000000</color>
-
-	<color name="bpkTextError">#ffe70866</color>
-
-	<color name="bpkTextTertiary">#33000000</color>
-
-	<color name="bpkTextSecondary">#ff545860</color>
-
-	<color name="bpkTextPrimaryInverse">#ffffffff</color>
-
-	<color name="bpkScrim">#b3000000</color>
-
-	<color name="bpkBackgroundElevation03">#ffffffff</color>
-
-	<color name="bpkBackgroundElevation02">#ffffffff</color>
-
-	<color name="bpkLineOnDark">#80ffffff</color>
-
-	<color name="bpkLine">#ffc2c9cd</color>
-
-	<color name="bpkBackgroundElevation01">#ffffffff</color>
-
-	<color name="bpkBackgroundAlternativeSecondary">#ffffffff</color>
-
-	<color name="bpkBackground">#ffffffff</color>
-
-	<color name="bpkBackgroundTertiary">#ffffffff</color>
-
-	<color name="bpkBackgroundSecondary">#ffeff1f2</color>
-
-	<color name="bpkBackgroundAlternative">#ffeff1f2</color>
-
-	<color name="bpkPrimary">#ff0062e3</color>
-
-	<color name="__privateChipOnDarkNormalBackground">#33ffffff</color>
-
-	<color name="__privateChipOnDarkPressedBackground">#ffc2c9cd</color>
-
-	<color name="__privateChipOnDarkOnBackground">#ffffffff</color>
-
-	<color name="__privateChipDefaultNormalBackground">#ffe0e3e5</color>
-
-	<color name="__privateChipDefaultOnBackground">#ff05203c</color>
-
-	<color name="__privateChipDisabledBackground">#ffe0e3e5</color>
-
-	<color name="__privateChipDefaultPressedBackground">#ffc2c9cd</color>
-
-	<color name="__privateButtonSecondaryPressedBackground">#ffc2c9cd</color>
-
-	<color name="__privateButtonLinkNormalForeground">#ff0062e3</color>
-
-	<color name="__privateButtonLinkOnDarkDisabledForeground">#33ffffff</color>
-
-	<color name="__privateButtonSecondaryNormalBackground">#ffe0e3e5</color>
-
-	<color name="__privateButtonPrimaryOnLightPressedBackground">#ff154679</color>
-
-	<color name="__privateButtonFeaturedNormalBackground">#ff0062e3</color>
-
-	<color name="__privateButtonFeaturedPressedBackground">#ff024daf</color>
-
-	<color name="__privateButtonPrimaryOnLightNormalBackground">#ff05203c</color>
-
-	<color name="__privateButtonPrimaryOnLightDisabledForeground">#33000000</color>
-
-	<color name="__privateButtonSecondaryOnDarkDisabledBackground">#ff0b121d</color>
-
-	<color name="__privateButtonDestructiveNormalForeground">#ffc80456</color>
-
-	<color name="__privateButtonPrimaryOnDarkNormalBackground">#ffffffff</color>
-
-	<color name="__privateButtonPrimaryOnDarkDisabledForeground">#33000000</color>
-
-	<color name="__privateButtonSecondaryOnDarkPressedBackground">#ff010913</color>
-
-	<color name="__privateButtonLinkPressedForeground">#ff154679</color>
-
-	<color name="__privateButtonPrimaryOnLightDisabledBackground">#ffe0e3e5</color>
-
-	<color name="__privateButtonDestructiveNormalBackground">#ffe0e3e5</color>
-
-	<color name="__privateButtonPrimaryNormalBackground">#ff05203c</color>
-
-	<color name="__privateButtonDestructivePressedBackground">#ffc80456</color>
-
-	<color name="__privateButtonPrimaryPressedBackground">#ff154679</color>
-
-	<color name="__privateButtonPrimaryOnDarkDisabledBackground">#ffe0e3e5</color>
-
-	<color name="__privateButtonLinkOnDarkPressedForeground">#80ffffff</color>
-
-	<color name="__privateButtonLinkOnDarkNormalForeground">#ffffffff</color>
-
-	<color name="__privateButtonDisabledBackground">#ffe0e3e5</color>
-
-	<color name="__privateButtonSecondaryOnDarkNormalBackground">#ff243346</color>
-
-	<color name="__privateButtonSecondaryOnDarkDisabledForeground">#33ffffff</color>
-
-	<color name="__privateButtonPrimaryOnDarkPressedBackground">#ffc2c9cd</color>
-
-	<color name="__privateSkeletonShimmerStartEnd">#00ffffff</color>
-
-	<color name="__privateSkeletonShimmerCenter">#99ffffff</color>
-
- </resources>
+  <!-- THIS FILE IS AUTO GENERATED. DO NOT MODIFY! -->
+
+    <color name="bpkBackground">#ffffffff</color>
+    <color name="bpkBackgroundAlternative">#ffeff1f2</color>
+    <color name="bpkBackgroundAlternativeSecondary">#ffffffff</color>
+    <color name="bpkBackgroundElevation01">#ffffffff</color>
+    <color name="bpkBackgroundElevation02">#ffffffff</color>
+    <color name="bpkBackgroundElevation03">#ffffffff</color>
+    <color name="bpkBackgroundSecondary">#ffeff1f2</color>
+    <color name="bpkBackgroundTertiary">#ffffffff</color>
+    <color name="bpkCanvas">#ffffffff</color>
+    <color name="bpkCanvasContrast">#ffeff1f2</color>
+    <color name="bpkCoreAccent">#ff0062e3</color>
+    <color name="bpkCoreEco">#ff0fa1a9</color>
+    <color name="bpkCorePrimary">#ff05203c</color>
+    <color name="bpkLine">#ffc2c9cd</color>
+    <color name="bpkLineOnDark">#80ffffff</color>
+    <color name="bpkPrimary">#ff0062e3</color>
+    <color name="bpkScrim">#b3000000</color>
+    <color name="bpkStatusDangerFill">#ffffe9f9</color>
+    <color name="bpkStatusDangerSpot">#ffe70866</color>
+    <color name="bpkStatusSuccessFill">#ffd4fff2</color>
+    <color name="bpkStatusSuccessSpot">#ff0c838a</color>
+    <color name="bpkStatusWarningFill">#fffff7cf</color>
+    <color name="bpkStatusWarningSpot">#fff55d42</color>
+    <color name="bpkSurfaceContrast">#ff05203c</color>
+    <color name="bpkSurfaceDefault">#ffffffff</color>
+    <color name="bpkSurfaceElevated">#ffffffff</color>
+    <color name="bpkSurfaceHighlight">#ffe0e3e5</color>
+    <color name="bpkTextDisabled">#33000000</color>
+    <color name="bpkTextDisabledOnDark">#80ffffff</color>
+    <color name="bpkTextError">#ffe70866</color>
+    <color name="bpkTextLink">#ff0062e3</color>
+    <color name="bpkTextOnDark">#ffffffff</color>
+    <color name="bpkTextOnLight">#ff161616</color>
+    <color name="bpkTextPrimary">#ff161616</color>
+    <color name="bpkTextPrimaryInverse">#ffffffff</color>
+    <color name="bpkTextQuaternary">#33000000</color>
+    <color name="bpkTextSecondary">#ff545860</color>
+    <color name="bpkTextTertiary">#33000000</color>
+</resources>

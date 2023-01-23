@@ -21,6 +21,8 @@ package net.skyscanner.backpack.skeleton
 import android.view.ViewGroup
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -28,28 +30,31 @@ import org.junit.runner.RunWith
 class BpkHeadlineSkeletonTest : BpkSnapshotTest() {
 
   @Test
-  fun small() {
+  fun smallHeadline() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Small
     snap(skeleton, width = 100, height = 30)
   }
 
   @Test
-  fun medium() {
+  @Variants(BpkTestVariant.Default)
+  fun mediumHeadline() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Medium
     snap(skeleton, width = 100, height = 40)
   }
 
   @Test
-  fun large() {
+  @Variants(BpkTestVariant.Default)
+  fun largeHeadline() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Large
     snap(skeleton, width = 100, height = 50)
   }
 
   @Test
-  fun customHeight() {
+  @Variants(BpkTestVariant.Default)
+  fun headlineWithCustomHeight() {
     val skeleton = BpkHeadlineSkeleton(testContext)
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Custom
     skeleton.layoutParams = ViewGroup.LayoutParams(

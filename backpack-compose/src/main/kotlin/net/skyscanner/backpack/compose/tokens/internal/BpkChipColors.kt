@@ -17,7 +17,7 @@
  */
 
 // Auto-generated: do not edit
-@file:Suppress("RedundantVisibilityModifier","unused")
+@file:Suppress("RedundantVisibilityModifier", "unused")
 
 package net.skyscanner.backpack.compose.tokens.`internal`
 

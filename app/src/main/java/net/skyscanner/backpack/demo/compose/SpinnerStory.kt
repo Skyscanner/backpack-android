@@ -36,7 +36,6 @@ import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
@@ -77,7 +76,7 @@ private fun SpinnersRow(
           BpkText(
             text = size.name,
             style = BpkTheme.typography.caption,
-            color = if (style == BpkSpinnerStyle.OnDarkSurface) BpkColor.White else LocalContentColor.current,
+            color = if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.textOnDark else LocalContentColor.current,
           )
         }
       }

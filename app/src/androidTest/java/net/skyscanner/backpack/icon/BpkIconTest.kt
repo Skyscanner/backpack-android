@@ -35,7 +35,7 @@ import org.junit.Test
 class BpkIconTest : BpkSnapshotTest() {
 
   @Test
-  fun allSmallIcons() {
+  fun small() {
     val icons = getIcons(true)
     val layout = setupLayout(icons)
 
@@ -43,7 +43,7 @@ class BpkIconTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun allLargeIcons() {
+  fun large() {
     val icons = getIcons(false)
     val layout = setupLayout(icons)
 

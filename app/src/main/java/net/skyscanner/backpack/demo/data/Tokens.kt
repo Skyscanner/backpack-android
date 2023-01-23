@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.data
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkColors
 import net.skyscanner.backpack.compose.tokens.BpkElevation
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -36,9 +35,6 @@ val BpkBorderRadius.values: List<Token<Dp>>
   get() = values()
 
 val BpkElevation.values: List<Token<Dp>>
-  get() = values()
-
-val BpkColor.values: List<Token<Color>>
   get() = values()
 
 val BpkColors.values: List<Token<Color>>

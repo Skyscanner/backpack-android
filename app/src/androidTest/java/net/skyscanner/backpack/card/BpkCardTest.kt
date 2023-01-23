@@ -21,7 +21,9 @@ package net.skyscanner.backpack.card
 import android.widget.TextView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkSnapshotTest
+import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.R
+import net.skyscanner.backpack.Variants
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -30,7 +32,7 @@ import org.junit.runner.RunWith
 class BpkCardTest : BpkSnapshotTest() {
 
   @Test
-  fun default() {
+  fun smallCorner() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -39,17 +41,22 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun withPadding() {
-    val card = BpkCardView(testContext)
-    val text = TextView(testContext)
-    text.text = "message"
-    card.addView(text)
-    card.padded = true
+  @Variants(BpkTestVariant.Default)
+  fun largeCorner() {
+    val card = BpkCardView(testContext).apply {
+      addView(
+        TextView(testContext).apply {
+          text = "message"
+        }
+      )
+      cornerStyle = BpkCardView.CornerStyle.LARGE
+    }
     snap(card, android.R.color.transparent)
   }
 
   @Test
-  fun withoutPadding() {
+  @Variants(BpkTestVariant.Default)
+  fun noPadding() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -59,7 +66,18 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun withFocus() {
+  fun unfocused() {
+    val card = BpkCardView(testContext)
+    val text = TextView(testContext)
+    text.text = "message"
+    card.addView(text)
+    card.elevationLevel = BpkCardView.ElevationLevel.DEFAULT
+    snap(card, android.R.color.transparent)
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun focused() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
     text.text = "message"
@@ -69,6 +87,7 @@ class BpkCardTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun noElevation() {
     val card = BpkCardView(testContext)
     val text = TextView(testContext)
@@ -78,41 +97,4 @@ class BpkCardTest : BpkSnapshotTest() {
     snap(card, R.color.bpkSurfaceHighlight)
   }
 
-  @Test
-  fun withoutPaddingAndFocus() {
-    val card = BpkCardView(testContext)
-    val text = TextView(testContext)
-    text.text = "message"
-    card.addView(text)
-    card.padded = true
-    card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
-    snap(card, android.R.color.transparent)
-  }
-
-  @Test
-  fun withCornerStyleLarge() {
-    val card = BpkCardView(testContext).apply {
-      addView(
-        TextView(testContext).apply {
-          text = "message"
-        }
-      )
-      cornerStyle = BpkCardView.CornerStyle.LARGE
-    }
-    snap(card, android.R.color.transparent)
-  }
-
-  @Test
-  fun withCornerStyleLargeAndFocus() {
-    val card = BpkCardView(testContext).apply {
-      addView(
-        TextView(testContext).apply {
-          text = "message"
-        }
-      )
-      elevationLevel = BpkCardView.ElevationLevel.FOCUSED
-      cornerStyle = BpkCardView.CornerStyle.LARGE
-    }
-    snap(card, android.R.color.transparent)
-  }
 }

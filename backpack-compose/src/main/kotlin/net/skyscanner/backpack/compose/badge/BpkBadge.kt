@@ -37,7 +37,6 @@ import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
-import net.skyscanner.backpack.compose.tokens.BpkColor
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 enum class BpkBadgeType {
@@ -96,7 +95,7 @@ private val BpkBadgeType.contentColor: Color
     BpkBadgeType.Warning -> BpkTheme.colors.textOnLight
     BpkBadgeType.Destructive -> BpkTheme.colors.textOnLight
     BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
-    BpkBadgeType.Outline -> BpkColor.White
+    BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
     BpkBadgeType.Brand -> BpkTheme.colors.textPrimaryInverse
   }
 
