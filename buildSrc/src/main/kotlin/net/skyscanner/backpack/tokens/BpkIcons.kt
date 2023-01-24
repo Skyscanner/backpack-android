@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.tokens
 
+import com.android.ide.common.vectordrawable.Svg2Vector
 import com.google.common.base.CaseFormat
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
@@ -25,6 +26,7 @@ import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.asClassName
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 data class BpkIcon(
@@ -64,13 +66,47 @@ data class BpkIcon(
             .replace("__", "_"),
         )
     }
+
+    object Svg : Parser() {
+      override fun invoke(folders: List<File>): BpkIcons {
+        return folders.flatMap { folder ->
+          val type = when (folder.name) {
+            "lg" -> Type.Lg
+            "sm" -> Type.Sm
+            else -> throw IllegalStateException("Unknown icon type")
+          }
+          folder.listFiles()!!.map { file ->
+            val stream = ByteArrayOutputStream()
+            Svg2Vector.parseSvgToXml(file, stream)
+            BpkIcon(
+              name = transformIconName(file.name, type),
+              type = type,
+              value = String(stream.toByteArray())
+            )
+          }
+        }
+      }
+
+      private fun transformIconName(name: String, type: Type): String =
+        CaseFormat.LOWER_HYPHEN.to(CaseFormat.LOWER_UNDERSCORE, name)
+          .removeSuffix(".svg")
+          .let {
+            val suffix = if (type == Type.Sm) "_sm" else ""
+            "bpk_$it$suffix"
+          }
+    }
   }
 
-  sealed class Format : BpkTransformer<BpkIcons, List<PropertySpec>> {
+  sealed class Format<Output> : BpkTransformer<BpkIcons, Output> {
 
-    data class Compose(val rClass: ClassName) : Format() {
+    data class Compose(val rClass: ClassName) : Format<List<PropertySpec>>() {
       override fun invoke(source: BpkIcons): List<PropertySpec> =
         toCompose(rClass, source)
+    }
+
+    object Xml : Format<Map<String, String>>() {
+      override fun invoke(source: BpkIcons): Map<String, String> =
+        toXml(source)
     }
   }
 }
@@ -90,8 +126,12 @@ private fun toCompose(
   .groupBy { it.name }
   .map { (name, icons) ->
 
-    val small = icons.firstOrNull { it.type == BpkIcon.Type.Sm }?.value ?: icons.firstOrNull { it.type == BpkIcon.Type.Lg }?.value ?: error("Invalid icon format! : $name")
-    val large = icons.firstOrNull { it.type == BpkIcon.Type.Lg }?.value ?: icons.firstOrNull { it.type == BpkIcon.Type.Sm }?.value ?: error("Invalid icon format! : $name")
+    val small =
+      icons.firstOrNull { it.type == BpkIcon.Type.Sm }?.value ?: icons.firstOrNull { it.type == BpkIcon.Type.Lg }?.value
+      ?: error("Invalid icon format! : $name")
+    val large =
+      icons.firstOrNull { it.type == BpkIcon.Type.Lg }?.value ?: icons.firstOrNull { it.type == BpkIcon.Type.Sm }?.value
+      ?: error("Invalid icon format! : $name")
 
     PropertySpec.builder(
       name = name,
@@ -141,5 +181,8 @@ private fun toCompose(
           .build()
       )
       .build()
-
   )
+
+private fun toXml(source: BpkIcons): Map<String, String> =
+  source.associateBy { it.name }
+    .mapValues { it.value.value.replace("android:fillColor=\"#FF000000\"", "android:fillColor=\"@color/bpkTextPrimary\"") }
