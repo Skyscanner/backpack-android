@@ -19,6 +19,7 @@ object SnapshotsVisitor : KSDefaultVisitor<Map<String, ComponentDefinition>, Sna
     return when {
       annotation != null && location is FileLocation -> SnapshotDefinition(
         variants = annotation[SnapshotAnnotation.paramVariants],
+        previewProvider = PreviewProviderFinder.find(function.parameters),
         component = data[location.filePath] ?: error("No component definition is found!"),
         location = location,
       )

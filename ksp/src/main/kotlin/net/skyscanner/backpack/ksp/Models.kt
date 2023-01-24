@@ -13,6 +13,7 @@ data class StoryDefinition(
   val name: String,
   val screenshot: Boolean,
   val component: ComponentDefinition,
+  val previewProvider: PreviewProviderDefinition?,
   val location: FileLocation,
 )
 
@@ -26,7 +27,14 @@ data class SampleDefinition(
 data class SnapshotDefinition(
   val variants: List<EnumValue>,
   val component: ComponentDefinition,
+  val previewProvider: PreviewProviderDefinition?,
   val location: FileLocation,
+)
+
+data class PreviewProviderDefinition(
+  val name: String,
+  val limit: Int,
+  val type: String,
 )
 
 data class EnumValue(

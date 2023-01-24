@@ -40,6 +40,12 @@ private fun enumParamOf(name: String): AnnotationParam<EnumValue> =
       )
   }
 
+private fun typeParamOf(name: String): AnnotationParam<String> =
+  object : AnnotationParam<String>(name) {
+    override fun parse(value: Any): String =
+      (value as KSType).declaration.qualifiedName!!.asString()
+  }
+
 private fun enumParamsOf(name: String): AnnotationParam<List<EnumValue>> =
   object : AnnotationParam<List<EnumValue>>(name) {
     override fun parse(value: Any): List<EnumValue> =
@@ -76,4 +82,11 @@ object SnapshotAnnotation : AnnotationDefinition {
   override val simpleName = "Snapshot"
   override val qualifiedName = "$demoPkg.meta.$simpleName"
   val paramVariants = enumParamsOf("variants")
+}
+
+object PreviewParameter : AnnotationDefinition {
+  override val simpleName = "PreviewParameter"
+  override val qualifiedName = "androidx.compose.ui.tooling.preview.$simpleName"
+  val paramLimit = intParamOf("limit")
+  val paramsProvider = typeParamOf("provider")
 }

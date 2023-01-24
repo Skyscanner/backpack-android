@@ -21,6 +21,7 @@ object StoriesVisitor : KSDefaultVisitor<Map<String, ComponentDefinition>, Story
         name = annotation[StoryAnnotation.paramName],
         screenshot = annotation[StoryAnnotation.paramScreenshot],
         component = data[location.filePath] ?: error("No component definition is found!"),
+        previewProvider = PreviewProviderFinder.find(function.parameters),
         location = location,
       )
       else -> super.visitFunctionDeclaration(function, data)
