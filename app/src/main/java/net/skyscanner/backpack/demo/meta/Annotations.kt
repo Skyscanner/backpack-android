@@ -23,7 +23,7 @@ annotation class Component(
   val kind: Kind = Kind.ViewAndCompose,
 )
 
-@Target(AnnotationTarget.TYPE)
+@Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
 annotation class Sample
 

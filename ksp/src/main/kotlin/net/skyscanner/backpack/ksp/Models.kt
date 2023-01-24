@@ -15,3 +15,10 @@ data class StoryDefinition(
   val component: ComponentDefinition,
   val location: FileLocation,
 )
+
+data class SampleDefinition(
+  val kDocs: String?,
+  val body: String,
+  val component: ComponentDefinition,
+  val location: FileLocation,
+)
