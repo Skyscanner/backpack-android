@@ -13,19 +13,18 @@ class BackpackSymbolProcessor : SymbolProcessor {
 
   override fun process(resolver: Resolver): List<KSAnnotated> {
 
-    val components = mutableMapOf<String, ComponentDefinition>()
-    resolver
+    val components = resolver
       .getSymbolsWithAnnotation(References.ComponentAnnotation)
       .filter { it.validate() }
-      .forEach { it.accept(ComponentsVisitor(components), Unit) }
+      .mapNotNull { it.accept(ComponentsVisitor, Unit) }
+      .associateBy { it.location.filePath }
 
-    val stories = mutableListOf<StoryDefinition>()
-    resolver
+    val stories = resolver
       .getSymbolsWithAnnotation(References.StoryAnnotation)
       .filter { it.validate() }
-      .forEach { it.accept(StoriesVisitor(components, stories), Unit) }
+      .mapNotNull { it.accept(StoriesVisitor, components) }
 
-//    fileLog("ksp", stories.joinToString(separator = "\n"))
+    fileLog("ksp", stories.joinToString(separator = "\n"))
 
     return emptyList()
   }
