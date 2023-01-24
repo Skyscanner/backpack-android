@@ -29,7 +29,8 @@ import java.io.File
 
 data class BpkIcon(
   val name: String,
-  val types: Map<Type, String>,
+  val type: Type,
+  val value: String
 ) {
 
   enum class Type {
@@ -37,40 +38,32 @@ data class BpkIcon(
     Lg,
   }
 
-  object Parser : BpkParser<List<File>, BpkIcons> {
-    override fun invoke(files: List<File>): BpkIcons {
+  sealed class Parser : BpkParser<List<File>, BpkIcons> {
 
-      val iconFiles = files.filter { it.extension == "xml" }
+    object Xml : Parser() {
+      override fun invoke(files: List<File>): BpkIcons {
 
-      return iconFiles
-        .map { it.nameWithoutExtension.removeSuffix("_sm") }
-        .distinct()
-        .map { name ->
-          BpkIcon(
-            name = transformIconName(name),
-            types = Type.values()
-              .associateWith { type ->
-                iconFiles.find {
-                  when (type) {
-                    Type.Sm -> it.nameWithoutExtension == "${name}_sm"
-                    Type.Lg -> it.nameWithoutExtension == name
-                  }
-                }?.nameWithoutExtension
-              }
-              .filterValues { it != null }
-              .let { it as Map<Type, String> },
-          )
-        }
-        .sortedBy { it.name }
+        val iconFiles = files.filter { it.extension == "xml" }
+
+        return iconFiles
+          .map { file ->
+            BpkIcon(
+              name = transformIconName(file.nameWithoutExtension),
+              type = if (file.nameWithoutExtension.endsWith("_sm")) Type.Sm else Type.Lg,
+              value = file.nameWithoutExtension
+            )
+          }
+          .sortedBy { it.name }
+      }
+
+      private fun transformIconName(name: String): String =
+        CaseFormat.UPPER_UNDERSCORE.to(
+          CaseFormat.UPPER_CAMEL,
+          name.removePrefix("bpk_")
+            .removeSuffix("_sm")
+            .replace("__", "_"),
+        )
     }
-
-    private fun transformIconName(name: String): String =
-      CaseFormat.UPPER_UNDERSCORE.to(
-        CaseFormat.UPPER_CAMEL,
-        name.removePrefix("bpk_")
-          .removeSuffix("_sm")
-          .replace("__", "_"),
-      )
   }
 
   sealed class Format : BpkTransformer<BpkIcons, List<PropertySpec>> {
@@ -94,13 +87,14 @@ private fun toCompose(
   rClass: ClassName,
   source: BpkIcons,
 ): List<PropertySpec> = source
-  .map { icon ->
+  .groupBy { it.name }
+  .map { (name, icons) ->
 
-    val small = icon.types[BpkIcon.Type.Sm] ?: icon.types[BpkIcon.Type.Lg] ?: error("Invalid icon format! : $icon")
-    val large = icon.types[BpkIcon.Type.Lg] ?: icon.types[BpkIcon.Type.Sm] ?: error("Invalid icon format! : $icon")
+    val small = icons.firstOrNull { it.type == BpkIcon.Type.Sm }?.value ?: icons.firstOrNull { it.type == BpkIcon.Type.Lg }?.value ?: error("Invalid icon format! : $name")
+    val large = icons.firstOrNull { it.type == BpkIcon.Type.Lg }?.value ?: icons.firstOrNull { it.type == BpkIcon.Type.Sm }?.value ?: error("Invalid icon format! : $name")
 
     PropertySpec.builder(
-      name = icon.name,
+      name = name,
       type = BpkIconClass,
     )
       .receiver(BpkIconReceiverClass)
@@ -111,7 +105,7 @@ private fun toCompose(
           .indent()
           .addStatement("%T(", BpkIconClass)
           .indent()
-          .addStatement("name = %S,", icon.name)
+          .addStatement("name = %S,", name)
           .addStatement("small = %T.drawable.%N,", rClass, small)
           .addStatement("large = %T.drawable.%N,", rClass, large)
           .unindent()
@@ -136,8 +130,8 @@ private fun toCompose(
           .addStatement("listOf(", BpkIconClass)
           .indent()
           .apply {
-            source.forEach {
-              add("%T.%N, ", BpkIconClass, it.name)
+            source.map { it.name }.distinct().forEach {
+              add("%T.%N, ", BpkIconClass, it)
             }
           }
           .unindent()
