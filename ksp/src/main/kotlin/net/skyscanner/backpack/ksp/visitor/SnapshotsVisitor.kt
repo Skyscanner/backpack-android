@@ -22,6 +22,7 @@ object SnapshotsVisitor : KSDefaultVisitor<Map<String, ComponentDefinition>, Sna
         previewProvider = PreviewProviderFinder.find(function.parameters),
         component = data[location.filePath] ?: error("No component definition is found!"),
         location = location,
+        reference = function.qualifiedName!!.asString(),
       )
       else -> super.visitFunctionDeclaration(function, data)
     }

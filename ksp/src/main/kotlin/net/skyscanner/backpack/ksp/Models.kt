@@ -15,11 +15,12 @@ data class StoryDefinition(
   val component: ComponentDefinition,
   val previewProvider: PreviewProviderDefinition?,
   val location: FileLocation,
+  val reference: String,
 )
 
 data class SampleDefinition(
   val kDocs: String?,
-  val body: String,
+  val sourceCode: String,
   val component: ComponentDefinition,
   val location: FileLocation,
 )
@@ -29,6 +30,7 @@ data class SnapshotDefinition(
   val component: ComponentDefinition,
   val previewProvider: PreviewProviderDefinition?,
   val location: FileLocation,
+  val reference: String,
 )
 
 data class PreviewProviderDefinition(

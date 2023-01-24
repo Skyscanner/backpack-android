@@ -18,7 +18,7 @@ object SamplesVisitor : KSDefaultVisitor<Map<String, ComponentDefinition>, Sampl
     return when {
       annotation != null && location is FileLocation -> SampleDefinition(
         kDocs = function.docString,
-        body = "TODO: function body here",
+        sourceCode = "TODO: function body here",
         component = data[location.filePath] ?: error("No component definition is found!"),
         location = location,
       )

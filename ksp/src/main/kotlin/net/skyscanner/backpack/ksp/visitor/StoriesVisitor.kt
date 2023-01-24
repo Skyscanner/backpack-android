@@ -23,6 +23,7 @@ object StoriesVisitor : KSDefaultVisitor<Map<String, ComponentDefinition>, Story
         component = data[location.filePath] ?: error("No component definition is found!"),
         previewProvider = PreviewProviderFinder.find(function.parameters),
         location = location,
+        reference = function.qualifiedName!!.asString(),
       )
       else -> super.visitFunctionDeclaration(function, data)
     }
