@@ -27,13 +27,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.viewinterop.AndroidView
 import net.skyscanner.backpack.compose.rating.BpkRating
 import net.skyscanner.backpack.compose.rating.BpkRatingScale
 import net.skyscanner.backpack.compose.rating.BpkRatingSize
+import net.skyscanner.backpack.compose.starrating.BpkStarRating
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.starrating.BpkStarRating
 
 @Composable
 @Preview
@@ -180,15 +179,7 @@ internal fun BpkRatingLargeCustomContentNoSubtitleSample(
 private fun CustomContent(
   modifier: Modifier = Modifier,
 ) {
-  AndroidView(
-    modifier = modifier,
-    factory = {
-      BpkStarRating(it).apply {
-        maxRating = 5
-        rating = RatingValue
-      }
-    },
-  )
+  BpkStarRating(rating = 4f, contentDescription = stringResource(R.string.star_rating_accessibility_status, 4f, 5), modifier = modifier)
 }
 
 private const val RatingValue = 4.57f
