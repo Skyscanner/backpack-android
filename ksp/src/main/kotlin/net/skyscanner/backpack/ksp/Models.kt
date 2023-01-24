@@ -11,7 +11,7 @@ data class ComponentDefinition(
 
 data class StoryDefinition(
   val name: String,
-  val screenshot: String,
+  val screenshot: Boolean,
   val component: ComponentDefinition,
   val location: FileLocation,
 )

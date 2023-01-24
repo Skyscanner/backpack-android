@@ -1,19 +1,65 @@
 package net.skyscanner.backpack.ksp
 
-object References {
+private const val demoPkg = "net.skyscanner.backpack.demo"
 
-  const val pkg = "net.skyscanner.backpack.demo"
-
-  const val StoryAnnotation = "$pkg.meta.${Names.StoryAnnotation}"
-  const val ComponentAnnotation = "$pkg.meta.${Names.ComponentAnnotation}"
-  const val SampleAnnotation = "$pkg.meta.${Names.SampleAnnotation}"
-  const val SnapshotAnnotation = "$pkg.meta.${Names.SnapshotAnnotation}"
+interface AnnotationDefinition {
+  val simpleName: String
+  val qualifiedName: String
 }
 
-object Names {
+abstract class AnnotationParam<Type>(val name: String) {
+  abstract fun parse(value: String): Type
+}
 
-  const val StoryAnnotation = "Story"
-  const val ComponentAnnotation = "Component"
-  const val SampleAnnotation = "Sample"
-  const val SnapshotAnnotation = "Snapshot"
+private fun stringParamOf(name: String): AnnotationParam<String> =
+  object : AnnotationParam<String>(name) {
+    override fun parse(value: String): String =
+      value
+  }
+
+private fun booleanParamOf(name: String): AnnotationParam<Boolean> =
+  object : AnnotationParam<Boolean>(name) {
+    override fun parse(value: String): Boolean =
+      java.lang.Boolean.parseBoolean(value)
+  }
+
+private fun intParamOf(name: String): AnnotationParam<Int> =
+  object : AnnotationParam<Int>(name) {
+    override fun parse(value: String): Int =
+      Integer.parseInt(value)
+  }
+
+private fun stringArrayParamOf(name: String): AnnotationParam<List<String>> =
+  object : AnnotationParam<List<String>>(name) {
+    override fun parse(value: String): List<String> =
+      value.removePrefix("[")
+        .removeSuffix("]")
+        .split(",")
+        .map { it.trim() }
+  }
+
+object StoryAnnotation : AnnotationDefinition {
+  override val simpleName = "Story"
+  override val qualifiedName = "$demoPkg.meta.$simpleName"
+  val paramName = stringParamOf("name")
+  val paramScreenshot = booleanParamOf("screenshot")
+}
+
+object ComponentAnnotation : AnnotationDefinition {
+  override val simpleName = "Component"
+  override val qualifiedName = "$demoPkg.meta.$simpleName"
+  val paramName = stringParamOf("name")
+  val paramLink = stringParamOf("link")
+  val paramKind = stringParamOf("kind")
+}
+
+object SampleAnnotation : AnnotationDefinition {
+  override val simpleName = "Sample"
+  override val qualifiedName = "$demoPkg.meta.$simpleName"
+}
+
+object SnapshotAnnotation : AnnotationDefinition {
+  override val simpleName = "Snapshot"
+  override val qualifiedName = "$demoPkg.meta.$simpleName"
+  val paramVariants = stringArrayParamOf("variants")
 }

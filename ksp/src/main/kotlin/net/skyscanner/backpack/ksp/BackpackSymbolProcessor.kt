@@ -16,27 +16,27 @@ class BackpackSymbolProcessor : SymbolProcessor {
   override fun process(resolver: Resolver): List<KSAnnotated> {
 
     val components = resolver
-      .getSymbolsWithAnnotation(References.ComponentAnnotation)
+      .getSymbolsWithAnnotation(ComponentAnnotation.qualifiedName)
       .filter { it.validate() }
       .mapNotNull { it.accept(ComponentsVisitor, Unit) }
       .associateBy { it.location.filePath }
 
     val stories = resolver
-      .getSymbolsWithAnnotation(References.StoryAnnotation)
+      .getSymbolsWithAnnotation(StoryAnnotation.qualifiedName)
       .filter { it.validate() }
       .mapNotNull { it.accept(StoriesVisitor, components) }
 
     val samples = resolver
-      .getSymbolsWithAnnotation(References.SampleAnnotation)
+      .getSymbolsWithAnnotation(SampleAnnotation.qualifiedName)
       .filter { it.validate() }
       .mapNotNull { it.accept(SamplesVisitor, components) }
 
     val snapshots = resolver
-      .getSymbolsWithAnnotation(References.SnapshotAnnotation)
+      .getSymbolsWithAnnotation(SnapshotAnnotation.qualifiedName)
       .filter { it.validate() }
       .mapNotNull { it.accept(SnapshotsVisitor, components) }
 
-    fileLog("ksp", snapshots.joinToString(separator = "\n"))
+    fileLog("ksp", stories.joinToString(separator = "\n"))
 
     return emptyList()
   }
