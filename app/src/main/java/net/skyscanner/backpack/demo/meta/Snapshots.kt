@@ -8,6 +8,8 @@ annotation class Snapshot(
   vararg val variants: Variants = [Variants.Default, Variants.DarkMode, Variants.Rtl, Variants.Themed],
 )
 
+object Snapshots
+
 data class SnapshotEntry(
   val name: String,
   val component: ComponentEntry,

@@ -8,6 +8,8 @@ annotation class Component(
   val kind: Kind = Kind.ViewAndCompose,
 )
 
+object Components
+
 data class ComponentEntry(
   val name: String,
   val link: String,

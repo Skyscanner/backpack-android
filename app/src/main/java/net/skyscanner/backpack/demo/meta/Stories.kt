@@ -15,6 +15,8 @@ annotation class Story(
   val screenshot: Boolean = true,
 )
 
+object Stories
+
 data class StoryEntry(
   val name: String,
   val component: ComponentEntry,
