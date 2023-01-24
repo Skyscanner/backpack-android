@@ -8,6 +8,7 @@ import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.validate
 import net.skyscanner.backpack.ksp.visitor.ComponentsVisitor
 import net.skyscanner.backpack.ksp.visitor.SamplesVisitor
+import net.skyscanner.backpack.ksp.visitor.SnapshotsVisitor
 import net.skyscanner.backpack.ksp.visitor.StoriesVisitor
 
 class BackpackSymbolProcessor : SymbolProcessor {
@@ -30,7 +31,12 @@ class BackpackSymbolProcessor : SymbolProcessor {
       .filter { it.validate() }
       .mapNotNull { it.accept(SamplesVisitor, components) }
 
-    fileLog("ksp", samples.joinToString(separator = "\n"))
+    val snapshots = resolver
+      .getSymbolsWithAnnotation(References.SnapshotAnnotation)
+      .filter { it.validate() }
+      .mapNotNull { it.accept(SnapshotsVisitor, components) }
+
+    fileLog("ksp", snapshots.joinToString(separator = "\n"))
 
     return emptyList()
   }
