@@ -5,7 +5,7 @@ import com.google.devtools.ksp.symbol.FileLocation
 data class ComponentDefinition(
   val name: String,
   val link: String,
-  val kind: String,
+  val kind: EnumValue,
   val location: FileLocation,
 )
 
@@ -22,8 +22,14 @@ data class SampleDefinition(
   val component: ComponentDefinition,
   val location: FileLocation,
 )
+
 data class SnapshotDefinition(
-  val variants: List<String>,
+  val variants: List<EnumValue>,
   val component: ComponentDefinition,
   val location: FileLocation,
+)
+
+data class EnumValue(
+  val value: String,
+  val type: String,
 )
