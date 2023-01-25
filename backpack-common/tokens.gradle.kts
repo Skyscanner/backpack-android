@@ -34,7 +34,8 @@ tasks {
 
   val group = "tokens"
   val src = project.projectDir.resolve("src/main/res/drawable-nodpi").path
-  val metadata = project.nodeFileOf("@skyscanner/bpk-svgs", "dist/metadata.json")
+  val rootDir = project.rootDir.path
+  val metadata = "node_modules/@skyscanner/bpk-svgs/dist/metadata.json"
   val source = project.nodeFileOf("@skyscanner/bpk-svgs", "dist/svgs/icons")
     .readAs(BpkFormat.Folder)
 
@@ -42,7 +43,7 @@ tasks {
     this.group = group
     source
       .parseAs(BpkIcon.Parser.Svg)
-      .transformTo(BpkIcon.Format.Xml(metadata.execute()))
+      .transformTo(BpkIcon.Format.Xml(rootDir, metadata))
       .saveTo(BpkOutput.XmlIconFiles(src))
       .execute()
   }

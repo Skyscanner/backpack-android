@@ -99,9 +99,9 @@ data class BpkIcon(
         toCompose(rClass, source)
     }
 
-    data class Xml(val metadata: File) : Format<Map<String, String>>() {
+    data class Xml(val rootDir: String, val metadataPath: String) : Format<Map<String, String>>() {
       override fun invoke(source: BpkIcons): Map<String, String> =
-        toXml(source, metadata)
+        toXml(source, rootDir, metadataPath)
     }
   }
 }
@@ -178,7 +178,7 @@ private fun toCompose(
       .build()
   )
 
-private fun toXml(source: BpkIcons, metadataFile: File): Map<String, String> {
+private fun toXml(source: BpkIcons, rootDir: String, metadataPath: String): Map<String, String> {
   fun BpkIcon.fileName() =
     CaseFormat.LOWER_HYPHEN.to(CaseFormat.LOWER_UNDERSCORE, name)
       .removeSuffix(".svg")
@@ -198,7 +198,7 @@ private fun toXml(source: BpkIcons, metadataFile: File): Map<String, String> {
         }
       }
 
-  val metadata = BpkFormat.Json(metadataFile).mapValues { (it.value as Map<String, String>)["autoMirror"] }
+  val metadata = BpkFormat.Json(File(rootDir, metadataPath)).mapValues { (it.value as Map<String, String>)["autoMirror"] }
   return source.associate { icon ->
     icon.fileName() to icon.fileContent(metadata)
   }
