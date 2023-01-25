@@ -6,9 +6,9 @@
 
 ## Default
 
-| Day                                                                                                                                                                  | Night                                                                                                                                                                               |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/all.png" alt="Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/all_dm.png" alt="Star Rating component - dark mode" width="375" /> |
+| Day                                                                                                                                                                      | Night                                                                                                                                                                                   |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/default.png" alt="Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/default_dm.png" alt="Star Rating component - dark mode" width="375" /> |
 
 ## Installation
 

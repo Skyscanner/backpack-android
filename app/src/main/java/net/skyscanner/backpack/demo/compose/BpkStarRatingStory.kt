@@ -103,14 +103,12 @@ private fun HotelRatingSample(context: Context, size: BpkStarRatingSize, text: S
     text = text,
     style = BpkTheme.typography.heading3,
   )
-  var count = 1
   for (i in 1..5) {
     BpkHotelRating(
-      rating = count,
+      rating = i,
       contentDescription = context.getString(R.string.star_rating_accessibility_status, 1f, 5),
       size = size,
     )
-    count += 1
   }
 }
 
