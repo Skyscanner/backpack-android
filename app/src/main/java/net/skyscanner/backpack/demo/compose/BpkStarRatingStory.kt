@@ -71,12 +71,12 @@ fun BpkStarRatingStory(
         }
       }
       Spacer(modifier = Modifier.padding(top = BpkSpacing.Lg))
-      Column() {
+      Column {
         BpkText(
           text = stringResource(R.string.hotel_star_rating_title),
           style = BpkTheme.typography.heading2,
         )
-        Row() {
+        Row {
           Column(modifier = Modifier.padding(end = BpkSpacing.Xl)) {
             HotelRatingSample(
               context = context,
@@ -84,7 +84,7 @@ fun BpkStarRatingStory(
               text = stringResource(R.string.icons_large),
             )
           }
-          Column() {
+          Column {
             HotelRatingSample(
               context = context,
               size = BpkStarRatingSize.Small,
@@ -103,31 +103,15 @@ private fun HotelRatingSample(context: Context, size: BpkStarRatingSize, text: S
     text = text,
     style = BpkTheme.typography.heading3,
   )
-  BpkHotelRating(
-    rating = 1f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 1f, 5),
-    size = size,
-  )
-  BpkHotelRating(
-    rating = 2f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 2f, 5),
-    size = size,
-  )
-  BpkHotelRating(
-    rating = 3f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 3f, 5),
-    size = size,
-  )
-  BpkHotelRating(
-    rating = 4f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 4f, 5),
-    size = size,
-  )
-  BpkHotelRating(
-    rating = 5f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 5f, 5),
-    size = size,
-  )
+  var count = 1
+  for (i in 1..5) {
+    BpkHotelRating(
+      rating = count,
+      contentDescription = context.getString(R.string.star_rating_accessibility_status, 1f, 5),
+      size = size,
+    )
+    count += 1
+  }
 }
 
 @Composable
@@ -136,40 +120,13 @@ private fun StaticRatingSample(context: Context, size: BpkStarRatingSize, text: 
     text = text,
     style = BpkTheme.typography.heading3,
   )
-  BpkStarRating(
-    rating = 1f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 1f, 5),
-    rounding = RoundingType.Up,
-    size = size,
-  )
-  BpkStarRating(
-    rating = 2f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 2f, 5),
-    rounding = RoundingType.Up,
-    size = size,
-  )
-  BpkStarRating(
-    rating = 3f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 3f, 5),
-    rounding = RoundingType.Up,
-    size = size,
-  )
-  BpkStarRating(
-    rating = 3.5f,
-    contentDescription = context.getString(R.string.star_rating_decimal_accessibility_status, 3.5f, 5),
-    rounding = RoundingType.Up,
-    size = size,
-  )
-  BpkStarRating(
-    rating = 4f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 4f, 5),
-    rounding = RoundingType.Up,
-    size = size,
-  )
-  BpkStarRating(
-    rating = 5f,
-    contentDescription = context.getString(R.string.star_rating_accessibility_status, 5f, 5),
-    rounding = RoundingType.Up,
-    size = size,
-  )
+  val ratings = listOf(1, 2, 3, 3.5, 4, 5)
+  for (i in ratings) {
+    BpkStarRating(
+      rating = i.toFloat(),
+      contentDescription = context.getString(R.string.star_rating_accessibility_status, 1f, 5),
+      rounding = RoundingType.Up,
+      size = size,
+    )
+  }
 }

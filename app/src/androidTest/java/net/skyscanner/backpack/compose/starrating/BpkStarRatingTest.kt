@@ -42,4 +42,72 @@ class BpkStarRatingTest : BpkSnapshotTest() {
       contentDescription = "",
     )
   }
+
+  @Test
+  fun zeroRating() = snap {
+    BpkStarRating(
+      rating = 0f,
+      contentDescription = "",
+    )
+  }
+
+  @Test
+  fun negativeRating() = snap {
+    BpkStarRating(
+      rating = -3f,
+      contentDescription = "",
+    )
+  }
+
+  @Test
+  fun roundingTypeUp() = snap {
+    BpkStarRating(
+      rating = 2.9f,
+      contentDescription = "",
+      rounding = RoundingType.Up,
+    )
+  }
+
+  @Test
+  fun roundingTypeDown() = snap {
+    BpkStarRating(
+      rating = 2.9f,
+      contentDescription = "",
+      rounding = RoundingType.Down,
+    )
+  }
+
+  @Test
+  fun aboveMaxRating() = snap {
+    BpkStarRating(
+      rating = 7f,
+      contentDescription = "",
+    )
+  }
+
+  @Test
+  fun starSizeSmall() = snap {
+    BpkStarRating(
+      rating = 3f,
+      contentDescription = "",
+      size = BpkStarRatingSize.Small,
+    )
+  }
+
+  @Test
+  fun starSizeLarge() = snap {
+    BpkStarRating(
+      rating = 3f,
+      contentDescription = "",
+      size = BpkStarRatingSize.Large,
+    )
+  }
+
+  @Test
+  fun hotelStarRating4() = snap {
+    BpkHotelRating(
+      rating = 4,
+      contentDescription = "",
+    )
+  }
 }

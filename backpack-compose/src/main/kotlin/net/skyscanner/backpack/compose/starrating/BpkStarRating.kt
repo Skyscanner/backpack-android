@@ -62,20 +62,20 @@ fun BpkStarRating(
 
 @Composable
 fun BpkHotelRating(
-  rating: Float,
+  rating: Int,
   contentDescription: String,
   modifier: Modifier = Modifier,
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
   BpkStarRating(
-    maxRating = rating.toInt(),
+    maxRating = rating,
     rounding = RoundingType.Down,
     iconSize = when (size) {
       BpkStarRatingSize.Large -> BpkIconSize.Large
       BpkStarRatingSize.Small -> BpkIconSize.Small
     },
     modifier = modifier,
-    rating = rating,
+    rating = rating.toFloat(),
     contentDescription = contentDescription,
   )
 }
@@ -111,30 +111,24 @@ private fun BpkStarRating(
 @Composable
 private fun BpkStar(icon: StarType, iconSize: BpkIconSize) {
   when (icon) {
-    StarType.Empty -> {
-      BpkIcon(
-        icon = BpkIcon.StarOutline,
-        contentDescription = null,
-        size = iconSize,
-        tint = BpkTheme.colors.textDisabled,
-      )
-    }
-    StarType.Half -> {
-      BpkIcon(
-        icon = BpkIcon.StarHalf,
-        contentDescription = null,
-        size = iconSize,
-        tint = BpkTheme.colors.statusWarningSpot,
-      )
-    }
-    StarType.Full -> {
-      BpkIcon(
-        icon = BpkIcon.Star,
-        contentDescription = null,
-        size = iconSize,
-        tint = BpkTheme.colors.statusWarningSpot,
-      )
-    }
+    StarType.Empty -> BpkIcon(
+      icon = BpkIcon.StarOutline,
+      contentDescription = null,
+      size = iconSize,
+      tint = BpkTheme.colors.textDisabled,
+    )
+    StarType.Half -> BpkIcon(
+      icon = BpkIcon.StarHalf,
+      contentDescription = null,
+      size = iconSize,
+      tint = BpkTheme.colors.statusWarningSpot,
+    )
+    StarType.Full -> BpkIcon(
+      icon = BpkIcon.Star,
+      contentDescription = null,
+      size = iconSize,
+      tint = BpkTheme.colors.statusWarningSpot,
+    )
   }
 }
 

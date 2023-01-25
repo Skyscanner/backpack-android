@@ -16,20 +16,40 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 
 ## Usage
 
-Example of a BpkStarRating with full star rating:
+Example of a `BpkStarRating` with full star rating:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
 
-BpkStarRating (rating = 2f, contentDescription = { _, _ -> "" })
+BpkStarRating(
+    rating = 2f,
+    contentDescription = "",
+    rounding = RoundingType.Up,
+    size = BpkStarRatingSize.Small,
+)
 ```
 
-Example of a BpkStarRating with half star rating:
+Example of a `BpkStarRating` with half star rating:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
 
-BpkStarRating (rating = 3.5f, contentDescription = { _, _ -> "" })
+BpkStarRating(
+    rating = 3.5f,
+    contentDescription = "",
+    rounding = RoundingType.Down,
+    size = BpkStarRatingSize.Large,
+)
 ```
 
+Example of a `BpkHotelRating`:
 
+```Kotlin
+import net.skyscanner.backpack.compose.starrating.BpkStarRating
+
+BpkHotelRating(
+    rating = 3,
+    contentDescription = "",
+    size = BpkStarRatingSize.Small,
+)
+```
