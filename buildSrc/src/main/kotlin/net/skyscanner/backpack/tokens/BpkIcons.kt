@@ -192,7 +192,7 @@ private fun toXml(source: BpkIcons, metadataFile: File): Map<String, String> {
       .replace("android:fillColor=\"#FF000000\"", "android:fillColor=\"@color/bpkTextPrimary\"")
       .let {
         if (metadata.containsKey(name) && metadata[name] == "true") {
-          it.replaceFirst("\n", "\n    android:autoMirror=\"true\"\n")
+          it.replaceFirst("\n", "\n    android:autoMirrored=\"true\"\n")
         } else {
           it
         }
