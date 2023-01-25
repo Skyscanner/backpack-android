@@ -25,6 +25,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -37,10 +41,10 @@ import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.compose.ComponentItem
 import net.skyscanner.backpack.demo.compose.ComponentsTitle
-import net.skyscanner.backpack.demo.data.ComponentRegistry
-import net.skyscanner.backpack.demo.data.ComposeNode
-import net.skyscanner.backpack.demo.data.NodeItem
-import net.skyscanner.backpack.demo.data.RegistryItem
+import net.skyscanner.backpack.demo.meta.ComponentEntry
+import net.skyscanner.backpack.demo.meta.Stories
+import net.skyscanner.backpack.demo.meta.StoryEntry
+import net.skyscanner.backpack.demo.meta.all
 
 /**
  * An activity representing a list of Components. This activity
@@ -54,54 +58,142 @@ class MainActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    val screens = Stories.all()
+    val components = screens.groupBy { it.component }
     setContent {
       BackpackDemoTheme {
-        ComponentScreen()
-      }
-    }
-  }
 
-  @Composable
-  private fun ComponentScreen(modifier: Modifier = Modifier) {
-    val state = rememberTopAppBarState()
-    Column(modifier = modifier.nestedScroll(state)) {
-      val context = LocalContext.current
-      BpkTopNavBar(
-        state = state,
-        navIcon = NavIcon.None,
-        title = stringResource(R.string.app_name),
-        actions = listOf(
-          IconAction(
-            icon = BpkIcon.Settings,
-            contentDescription = stringResource(R.string.settings_title),
-            onClick = {
-              val intent = Intent(context, SettingsActivity::class.java)
-              context.startActivity(intent)
+        var currentComponent by remember { mutableStateOf<ComponentEntry?>(null) }
+        var currentCase by remember { mutableStateOf<StoryEntry?>(null) }
+
+        when {
+          currentCase != null -> DemoScreen(
+            case = currentCase!!,
+            onBack = {
+              if (components[currentComponent!!]!!.size == 1) {
+                currentComponent = null
+              }
+              currentCase = null
             },
-          ),
-        ),
-      )
-      LazyColumn {
-        item {
-          ComponentsTitle(stringResource(R.string.tokens_title))
-        }
-        items(ComponentRegistry.TOKENS.values.toList()) {
-          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
-        }
-        item {
-          ComponentsTitle(title = stringResource(R.string.components_title))
-        }
-        items(ComponentRegistry.COMPONENTS.values.toList()) {
-          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
+          )
+          currentComponent != null -> CasesScreen(
+            cases = components[currentComponent!!]!!,
+            onBack = { currentComponent = null },
+            onClick = { currentCase = it },
+          )
+          else -> ComponentsScreen(
+            components = components.keys.toList().sortedBy { it.name },
+            onClick = {
+              currentComponent = it
+              if (components[currentComponent!!]!!.size == 1) {
+                currentCase = components[currentComponent!!]!!.first()
+              }
+            },
+          )
         }
       }
     }
   }
+}
 
-  private fun hasComposeNodes(item: RegistryItem): Boolean {
-    if (item is ComposeNode) {
-      return true
+@Composable
+private fun ComponentsScreen(
+  components: List<ComponentEntry>,
+  modifier: Modifier = Modifier,
+  onClick: (ComponentEntry) -> Unit,
+) {
+  val state = rememberTopAppBarState()
+  Column(modifier = modifier.nestedScroll(state)) {
+    val context = LocalContext.current
+    BpkTopNavBar(
+      state = state,
+      navIcon = NavIcon.None,
+      title = stringResource(R.string.app_name),
+      actions = listOf(
+        IconAction(
+          icon = BpkIcon.Settings,
+          contentDescription = stringResource(R.string.settings_title),
+          onClick = {
+            val intent = Intent(context, SettingsActivity::class.java)
+            context.startActivity(intent)
+          },
+        ),
+      ),
+    )
+    LazyColumn {
+      item {
+        ComponentsTitle(title = stringResource(R.string.components_title))
+      }
+      items(components) {
+        ComponentItem(title = it.name, showComposeBadge = true) {
+          onClick(it)
+        }
+      }
     }
-    return item is NodeItem && item.subItems.values.any { hasComposeNodes(it) }
+  }
+}
+
+@Composable
+private fun CasesScreen(
+  cases: List<StoryEntry>,
+  onBack: () -> Unit,
+  onClick: (StoryEntry) -> Unit,
+  modifier: Modifier = Modifier,
+) {
+  Column(modifier = modifier) {
+    val context = LocalContext.current
+    BpkTopNavBar(
+      navIcon = NavIcon.Back(
+        contentDescription = "Back",
+        onClick = { onBack() },
+      ),
+      title = cases.first().component.name,
+      actions = listOf(
+        IconAction(
+          icon = BpkIcon.Settings,
+          contentDescription = stringResource(R.string.settings_title),
+          onClick = {
+            val intent = Intent(context, SettingsActivity::class.java)
+            context.startActivity(intent)
+          },
+        ),
+      ),
+    )
+    LazyColumn {
+      items(cases) {
+        ComponentItem(title = it.name, showComposeBadge = true) {
+          onClick(it)
+        }
+      }
+    }
+  }
+}
+
+@Composable
+private fun DemoScreen(
+  case: StoryEntry,
+  modifier: Modifier = Modifier,
+  onBack: () -> Unit,
+) {
+  Column(modifier = modifier) {
+    val context = LocalContext.current
+    BpkTopNavBar(
+      navIcon = NavIcon.Back(
+        contentDescription = "Back",
+        onClick = { onBack() },
+      ),
+      title = case.component.name + " - " + case.name,
+      actions = listOf(
+        IconAction(
+          icon = BpkIcon.Settings,
+          contentDescription = stringResource(R.string.settings_title),
+          onClick = {
+            val intent = Intent(context, SettingsActivity::class.java)
+            context.startActivity(intent)
+          },
+        ),
+      ),
+    )
+    case.content()
   }
 }

@@ -96,6 +96,12 @@ android {
   }
 }
 
+kotlin {
+  sourceSets {
+    main.kotlin.srcDirs += 'build/generated/ksp/internalDebug/kotlin'
+  }
+}
+
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation rootProject.ext.picasso

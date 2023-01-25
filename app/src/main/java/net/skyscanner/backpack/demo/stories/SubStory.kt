@@ -42,7 +42,7 @@ open class SubStory : Story() {
           BackpackDemoTheme {
             LazyColumn {
               items(stories) {
-                ComponentItem(title = it)
+                ComponentItem(title = it, onClick = {})
               }
             }
           }
