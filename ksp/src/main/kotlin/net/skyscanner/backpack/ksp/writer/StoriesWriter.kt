@@ -6,9 +6,11 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.MemberName
 import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import com.squareup.kotlinpoet.asClassName
 import net.skyscanner.backpack.ksp.ComponentDefinition
+import net.skyscanner.backpack.ksp.PreviewProviderDefinition
 import net.skyscanner.backpack.ksp.StoryDefinition
 
 private const val MetaPackage = "net.skyscanner.backpack.demo.meta"
@@ -51,9 +53,29 @@ private fun CodeBlock.Builder.writeStoryCreator(story: StoryDefinition) =
     .addStatement("name = %S,", story.name)
     .addStatement("screenshot = %L,", story.screenshot)
     .writeComponent("component", story.component)
-    .addStatement("content = { %T() },", ClassName.bestGuess(story.reference))
+    .writeContentBlock("content", story.reference, story.previewProvider)
     .unindent()
     .addStatement("),")
+
+private val RememberReference = MemberName("androidx.compose.runtime", "remember")
+private val ColumnReference = MemberName("androidx.compose.foundation.layout", "Column")
+private val TextReference = MemberName("net.skyscanner.backpack.compose.text", "BpkText")
+
+private fun CodeBlock.Builder.writeContentBlock(name: String, reference: String, provider: PreviewProviderDefinition?) =
+  if (provider == null) {
+    addStatement("$name = { %T() },", ClassName.bestGuess(reference))
+  } else {
+    beginControlFlow("$name =")
+      .addStatement("val provider = %M { %T() }", RememberReference, ClassName.bestGuess(provider.type))
+      .addStatement("val entries = provider.values.take(%L)", provider.limit)
+      .beginControlFlow("%M(%T.%M)", ColumnReference)
+      .beginControlFlow("for (entry in entries)")
+      .addStatement("%M(entry.toString())", TextReference)
+      .addStatement("%T(${provider.name} = entry)", ClassName.bestGuess(reference))
+      .endControlFlow()
+      .endControlFlow()
+      .endControlFlow()
+  }
 
 private fun CodeBlock.Builder.writeComponent(name: String, component: ComponentDefinition) =
   addStatement("$name = %T(", ComponentEntryClass)
