@@ -36,7 +36,6 @@ import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.compose.tokens.Star
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.meta.Component
-import net.skyscanner.backpack.demo.meta.Kind
 import net.skyscanner.backpack.demo.meta.Sample
 import net.skyscanner.backpack.demo.meta.Snapshot
 import net.skyscanner.backpack.demo.meta.Story
@@ -45,7 +44,6 @@ import net.skyscanner.backpack.toast.BpkToast
 @Component(
   name = "Floating action button",
   link = "floating-action-button",
-  kind = Kind.Compose,
 )
 annotation class FabComponent
 
@@ -57,6 +55,7 @@ annotation class FabComponent
 @Composable
 @Sample
 fun BpkFabStory(modifier: Modifier = Modifier) {
+
   Column(
     modifier = modifier.padding(BpkSpacing.Xl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Xxl, Alignment.CenterVertically),

@@ -35,12 +35,20 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.Story
+
+@Component(
+  name = "Checkbox",
+  link = "checkbox",
+)
+annotation class CheckboxComponent
 
 @Composable
-@Preview
-fun CheckboxStory() {
+@Story
+fun CheckboxStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 

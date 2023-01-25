@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import kotlinx.coroutines.flow.filter
 import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarSelection
@@ -28,10 +29,22 @@ import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStoryType
+import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.EnumProvider
+import net.skyscanner.backpack.demo.meta.Story
+
+@Component(
+  name = "Calendar",
+  link = "calendar",
+)
+annotation class CalendarComponent
+
+class CalendarStoryTypeProvider : EnumProvider<CalendarStoryType>(CalendarStoryType::class)
 
 @Composable
+@Story
 fun CalendarStory(
-  type: CalendarStoryType,
+  @PreviewParameter(CalendarStoryTypeProvider::class) type: CalendarStoryType,
   modifier: Modifier = Modifier,
 ) {
   val automationMode = LocalAutomationMode.current

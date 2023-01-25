@@ -26,15 +26,22 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheet
 import net.skyscanner.backpack.compose.bottomsheet.BpkBottomSheetValue
 import net.skyscanner.backpack.compose.bottomsheet.rememberBpkBottomSheetState
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.Story
 
-@Preview
+@Component(
+  name = "BottomSheet",
+  link = "bottom-sheet",
+)
+annotation class BottomSheetComponent
+
+@Story
 @Composable
 fun BottomSheetStory(
   modifier: Modifier = Modifier,

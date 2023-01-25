@@ -5,7 +5,7 @@ package net.skyscanner.backpack.demo.meta
 annotation class Component(
   val name: String,
   val link: String,
-  val kind: Kind = Kind.ViewAndCompose,
+  val kind: Kind = Kind.Compose,
 )
 
 object Components
@@ -19,5 +19,4 @@ data class ComponentEntry(
 enum class Kind {
   View,
   Compose,
-  ViewAndCompose,
 }

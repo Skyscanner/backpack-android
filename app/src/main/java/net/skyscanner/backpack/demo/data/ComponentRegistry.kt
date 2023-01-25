@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
+import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.price.BpkPriceSize
@@ -173,7 +174,7 @@ object ComponentRegistry {
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_badge },
-        TAB_TITLE_COMPOSE composeStory { BadgeStory() },
+        TAB_TITLE_COMPOSE composeStory { BadgeStory(type = BpkBadgeType.Strong) },
       ),
     ),
     "Bar Chart" story NodeData(

@@ -52,7 +52,27 @@ import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.LongArrowRight
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.Story
 import kotlin.time.Duration.Companion.seconds
+
+@Component(
+  name = "Button",
+  link = "button",
+)
+annotation class ButtonComponent
+
+@Composable
+@Story(name = "Default")
+fun ButtonsStoryDefault(modifier: Modifier = Modifier) {
+  ButtonsStory(BpkButtonSize.Default, modifier)
+}
+
+@Composable
+@Story(name = "Large")
+fun ButtonsStoryLarge(modifier: Modifier = Modifier) {
+  ButtonsStory(BpkButtonSize.Large, modifier)
+}
 
 @Composable
 fun ButtonsStory(

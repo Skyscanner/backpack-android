@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,7 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -37,20 +36,22 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.HelpCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
+import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.EnumProvider
+import net.skyscanner.backpack.demo.meta.Story
+
+@Component(
+  name = "Badge",
+  link = "badge",
+)
+annotation class BadgeComponent
+
+class BadgeTypeProvider : EnumProvider<BpkBadgeType>(BpkBadgeType::class)
 
 @Composable
-@Preview
-fun BadgeStory() {
-  Column {
-    BpkBadgeType.values().forEach { type ->
-      BadgeRow(type = type)
-    }
-  }
-}
-
-@Composable
-private fun BadgeRow(
-  type: BpkBadgeType,
+@Story
+fun BadgeStory(
+  @PreviewParameter(BadgeTypeProvider::class) type: BpkBadgeType,
   modifier: Modifier = Modifier,
 ) {
   Row(

@@ -44,12 +44,20 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.Story
+
+@Component(
+  name = "Card",
+  link = "card",
+)
+annotation class CardComponent
 
 @Composable
-@Preview
-fun CardStory() {
+@Story
+fun CardStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier
+    modifier = modifier
       .background(BpkTheme.colors.line)
       .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),

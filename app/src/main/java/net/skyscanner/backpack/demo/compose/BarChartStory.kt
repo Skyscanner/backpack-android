@@ -29,13 +29,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.barchart.BpkBarChart
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.data.BpkBarChartData
+import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.Story
 
-@Preview
+@Component(
+  name = "BarChart",
+  link = "barchart",
+)
+annotation class BarChartComponent
+
 @Composable
+@Story
 fun BarChartStory(modifier: Modifier = Modifier) {
 
   val automationMode = LocalAutomationMode.current

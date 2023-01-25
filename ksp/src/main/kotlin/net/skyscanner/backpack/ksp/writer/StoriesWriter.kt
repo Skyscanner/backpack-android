@@ -68,7 +68,7 @@ private fun CodeBlock.Builder.writeContentBlock(name: String, reference: String,
     beginControlFlow("$name =")
       .addStatement("val provider = %M { %T() }", RememberReference, ClassName.bestGuess(provider.type))
       .addStatement("val entries = provider.values.take(%L)", provider.limit)
-      .beginControlFlow("%M(%T.%M)", ColumnReference)
+      .beginControlFlow("%M", ColumnReference)
       .beginControlFlow("for (entry in entries)")
       .addStatement("%M(entry.toString())", TextReference)
       .addStatement("%T(${provider.name} = entry)", ClassName.bestGuess(reference))

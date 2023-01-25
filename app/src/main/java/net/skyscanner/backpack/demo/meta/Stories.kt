@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(name = "Night", uiMode = Configuration.UI_MODE_NIGHT_YES, locale = "en", showBackground = true, backgroundColor = 0xFF000000)
 @Preview(name = "Rtl", uiMode = Configuration.UI_MODE_NIGHT_NO, locale = "ar", showBackground = true, backgroundColor = 0xFFFFFFFF)
 annotation class Story(
-  val name: String,
+  val name: String = "Default",
   val screenshot: Boolean = true,
 )
 
