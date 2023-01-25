@@ -93,6 +93,23 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
       return true
     }
   }
+
+  data class XmlIconFiles(
+    val srcDir: String,
+  ) : BpkOutput<Map<String, String>>() {
+    override fun invoke(contents: Map<String, String>): Boolean {
+      val folder = File(srcDir)
+      folder.deleteRecursively()
+      folder.mkdir()
+      contents.forEach { (name, content) ->
+        val target = File(srcDir, "$name.xml")
+        target.createNewFile()
+
+        target.writeText(content)
+      }
+      return true
+    }
+  }
 }
 
 private fun String.writeToFile(srcDir: String, folder: String, name: String) {

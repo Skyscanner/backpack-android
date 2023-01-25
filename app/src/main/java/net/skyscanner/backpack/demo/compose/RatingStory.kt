@@ -179,7 +179,7 @@ internal fun BpkRatingLargeCustomContentNoSubtitleSample(
 private fun CustomContent(
   modifier: Modifier = Modifier,
 ) {
-  BpkStarRating(rating = 4f, contentDescription = stringResource(R.string.star_rating_accessibility_status, 4f, 5), modifier = modifier)
+  BpkStarRating(rating = RatingValue, contentDescription = stringResource(R.string.star_rating_accessibility_status, 4f, 5), modifier = modifier)
 }
 
 private const val RatingValue = 4.57f

@@ -73,7 +73,7 @@ class ScreenshotTestsServer @JvmOverloads constructor(
       val file = request.query("file")!!
 
       val folder = outDir.resolve("$type/$component/screenshots")
-      if (folder.exists()) {
+      if (!folder.exists()) {
         folder.mkdirs()
       }
 
