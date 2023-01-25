@@ -79,7 +79,7 @@ data class BpkIcon(
             val stream = ByteArrayOutputStream()
             Svg2Vector.parseSvgToXml(file, stream)
             BpkIcon(
-              name = transformIconName(file.name, type),
+              name = transformIconName(file.name),
               type = type,
               value = String(stream.toByteArray())
             )
@@ -87,13 +87,8 @@ data class BpkIcon(
         }
       }
 
-      private fun transformIconName(name: String, type: Type): String =
-        CaseFormat.LOWER_HYPHEN.to(CaseFormat.LOWER_UNDERSCORE, name)
-          .removeSuffix(".svg")
-          .let {
-            val suffix = if (type == Type.Sm) "_sm" else ""
-            "bpk_$it$suffix"
-          }
+      private fun transformIconName(name: String): String =
+        name.removeSuffix(".svg")
     }
   }
 
@@ -104,9 +99,9 @@ data class BpkIcon(
         toCompose(rClass, source)
     }
 
-    object Xml : Format<Map<String, String>>() {
+    data class Xml(val metadata: File) : Format<Map<String, String>>() {
       override fun invoke(source: BpkIcons): Map<String, String> =
-        toXml(source)
+        toXml(source, metadata)
     }
   }
 }
@@ -183,6 +178,28 @@ private fun toCompose(
       .build()
   )
 
-private fun toXml(source: BpkIcons): Map<String, String> =
-  source.associateBy { it.name }
-    .mapValues { it.value.value.replace("android:fillColor=\"#FF000000\"", "android:fillColor=\"@color/bpkTextPrimary\"") }
+private fun toXml(source: BpkIcons, metadataFile: File): Map<String, String> {
+  fun BpkIcon.fileName() =
+    CaseFormat.LOWER_HYPHEN.to(CaseFormat.LOWER_UNDERSCORE, name)
+      .removeSuffix(".svg")
+      .let {
+        val suffix = if (type == BpkIcon.Type.Sm) "_sm" else ""
+        "bpk_$it$suffix"
+      }
+
+  fun BpkIcon.fileContent(metadata: Map<String, String?>) =
+    value
+      .replace("android:fillColor=\"#FF000000\"", "android:fillColor=\"@color/bpkTextPrimary\"")
+      .let {
+        if (metadata.containsKey(name) && metadata[name] == "true") {
+          it.replaceFirst("\n", "\n    android:autoMirror=\"true\"\n")
+        } else {
+          it
+        }
+      }
+
+  val metadata = BpkFormat.Json(metadataFile).mapValues { (it.value as Map<String, String>)["autoMirror"] }
+  return source.associate { icon ->
+    icon.fileName() to icon.fileContent(metadata)
+  }
+}
