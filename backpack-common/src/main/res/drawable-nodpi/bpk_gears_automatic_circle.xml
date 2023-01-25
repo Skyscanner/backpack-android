@@ -1,3 +1,9 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
-    <path android:pathData="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z m-2 15a1 1 0 1 1 1-1 1 1 0 0 1-1 1z m2-3H8a1 1 0 0 1 0-2h1V8a1 1 0 0 1 2 0v4h1a1 1 0 0 1 0 2z m4 3a1 1 0 1 1 1-1 1 1 0 0 1-1 1z m0-4a1 1 0 1 1 1-1 1 1 0 0 1-1 1z m0-4a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" android:fillColor="@color/bpkTextPrimary"/>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:fillColor="@color/bpkTextPrimary"
+      android:pathData="M12,2a10,10 0,1 0,10 10A10,10 0,0 0,12 2zM10,17a1,1 0,1 1,1 -1,1 1,0 0,1 -1,1zM12,14L8,14a1,1 0,0 1,0 -2h1L9,8a1,1 0,0 1,2 0v4h1a1,1 0,0 1,0 2zM16,17a1,1 0,1 1,1 -1,1 1,0 0,1 -1,1zM16,13a1,1 0,1 1,1 -1,1 1,0 0,1 -1,1zM16,9a1,1 0,1 1,1 -1,1 1,0 0,1 -1,1z"/>
 </vector>

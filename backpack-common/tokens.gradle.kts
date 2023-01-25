@@ -33,10 +33,21 @@ import net.skyscanner.backpack.tokens.transformTo
 tasks {
 
   val group = "tokens"
+  val src = project.projectDir.resolve("src/main/res/drawable-nodpi").path
+  val rootDir = project.rootDir.path
+  val metadata = "node_modules/@skyscanner/bpk-svgs/dist/metadata.json"
+  val source = project.nodeFileOf("@skyscanner/bpk-svgs", "dist/svgs/icons")
+    .readAs(BpkFormat.Folder)
 
   val generateIcons by creating {
     this.group = group
-    // TODO implement icons token task
+    doLast {
+      source
+        .parseAs(BpkIcon.Parser.Svg)
+        .transformTo(BpkIcon.Format.Xml(rootDir, metadata))
+        .saveTo(BpkOutput.XmlIconFiles(src))
+        .execute()
+    }
   }
 
   val generateTokens by creating {
