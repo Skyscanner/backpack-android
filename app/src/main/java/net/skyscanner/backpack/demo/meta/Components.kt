@@ -35,5 +35,4 @@ data class ComponentEntry(
 enum class Kind {
   View,
   Compose,
-  ViewAndCompose,
 }

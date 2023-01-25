@@ -120,7 +120,7 @@ private fun ComponentsScreen(
         ComponentsTitle(title = stringResource(R.string.components_title))
       }
       items(components) {
-        ComponentItem(title = it.name, showComposeBadge = it.kind == Kind.Compose || it.kind == Kind.ViewAndCompose) {
+        ComponentItem(title = it.name, showComposeBadge = it.kind == Kind.Compose) {
           onClick(it)
         }
       }
