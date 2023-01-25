@@ -21,6 +21,5 @@ data class StoryEntry(
   val name: String,
   val component: ComponentEntry,
   val screenshot: Boolean = true,
-  val previewParameter: PreviewParameterInfo?,
   val content: @Composable () -> Unit,
 )
