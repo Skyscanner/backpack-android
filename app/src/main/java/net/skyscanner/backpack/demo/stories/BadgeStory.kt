@@ -80,3 +80,12 @@ fun BadgeStory(
     )
   }
 }
+
+@Composable
+@Story(name = "Test")
+fun BadgeStory1(
+  @PreviewParameter(BadgeTypeProvider::class) type: BpkBadge.Type,
+  modifier: Modifier = Modifier,
+) {
+  BadgeStory(type = type, modifier)
+}
