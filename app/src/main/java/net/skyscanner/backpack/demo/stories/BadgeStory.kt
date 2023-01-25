@@ -18,21 +18,11 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.viewinterop.AndroidView
 import net.skyscanner.backpack.badge.BpkBadge
-import net.skyscanner.backpack.compose.badge.BpkBadge
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.meta.Component
 import net.skyscanner.backpack.demo.meta.EnumProvider
 import net.skyscanner.backpack.demo.meta.Kind
@@ -53,39 +43,12 @@ fun BadgeStory(
   @PreviewParameter(BadgeTypeProvider::class) type: BpkBadge.Type,
   modifier: Modifier = Modifier,
 ) {
-  Row(
-    verticalAlignment = Alignment.CenterVertically,
-    modifier = modifier
-      .fillMaxWidth()
-      .background(
-        when (type) {
-          BpkBadge.Type.Outline, BpkBadge.Type.Inverse -> BpkTheme.colors.corePrimary
-          else -> Color.Transparent
-        },
-      )
-      .padding(vertical = BpkSpacing.Sm)
-      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
-  ) {
-
-    AndroidView(
-      factory = {
-        BpkBadge(it).apply {
-          this.type = type
-          this.text = type.toString()
-        }
-      },
-      modifier = Modifier
-        .weight(1f)
-        .wrapContentWidth(align = Alignment.CenterHorizontally),
-    )
-  }
-}
-
-@Composable
-@Story(name = "Test")
-fun BadgeStory1(
-  @PreviewParameter(BadgeTypeProvider::class) type: BpkBadge.Type,
-  modifier: Modifier = Modifier,
-) {
-  BadgeStory(type = type, modifier)
+  AndroidView(
+    factory = {
+      BpkBadge(it).apply {
+        this.type = type
+        this.text = type.toString()
+      }
+    },
+  )
 }
