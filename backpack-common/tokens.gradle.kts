@@ -41,11 +41,13 @@ tasks {
 
   val generateIcons by creating {
     this.group = group
-    source
-      .parseAs(BpkIcon.Parser.Svg)
-      .transformTo(BpkIcon.Format.Xml(rootDir, metadata))
-      .saveTo(BpkOutput.XmlIconFiles(src))
-      .execute()
+    doLast {
+      source
+        .parseAs(BpkIcon.Parser.Svg)
+        .transformTo(BpkIcon.Format.Xml(rootDir, metadata))
+        .saveTo(BpkOutput.XmlIconFiles(src))
+        .execute()
+    }
   }
 
   val generateTokens by creating {
