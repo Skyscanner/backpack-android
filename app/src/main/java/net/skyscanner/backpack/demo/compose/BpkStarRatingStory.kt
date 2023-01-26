@@ -19,7 +19,6 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import android.content.Context
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,7 +28,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.starrating.BpkHotelRating
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
@@ -44,7 +42,6 @@ import net.skyscanner.backpack.demo.R
 fun BpkStarRatingStory(
   modifier: Modifier = Modifier,
 ) {
-  val context = LocalContext.current
   Box(
     modifier = modifier.fillMaxHeight(),
     contentAlignment = Alignment.Center,
@@ -57,14 +54,12 @@ fun BpkStarRatingStory(
       Row() {
         Column(modifier = Modifier.padding(end = BpkSpacing.Xl)) {
           StaticRatingSample(
-            context = context,
             size = BpkStarRatingSize.Large,
             text = stringResource(R.string.icons_large),
           )
         }
         Column() {
           StaticRatingSample(
-            context = context,
             size = BpkStarRatingSize.Small,
             text = stringResource(R.string.icons_small),
           )
@@ -79,14 +74,12 @@ fun BpkStarRatingStory(
         Row {
           Column(modifier = Modifier.padding(end = BpkSpacing.Xl)) {
             HotelRatingSample(
-              context = context,
               size = BpkStarRatingSize.Large,
               text = stringResource(R.string.icons_large),
             )
           }
           Column {
             HotelRatingSample(
-              context = context,
               size = BpkStarRatingSize.Small,
               text = stringResource(R.string.icons_small),
             )
@@ -98,7 +91,7 @@ fun BpkStarRatingStory(
 }
 
 @Composable
-private fun HotelRatingSample(context: Context, size: BpkStarRatingSize, text: String) {
+private fun HotelRatingSample(size: BpkStarRatingSize, text: String) {
   BpkText(
     text = text,
     style = BpkTheme.typography.heading3,
@@ -107,7 +100,7 @@ private fun HotelRatingSample(context: Context, size: BpkStarRatingSize, text: S
     BpkHotelRating(
       rating = i,
       contentDescription = { value, max ->
-        context.getString(R.string.star_rating_accessibility_status, value, max)
+        stringResource(R.string.star_rating_accessibility_status, value, max)
       },
       size = size,
     )
@@ -115,17 +108,17 @@ private fun HotelRatingSample(context: Context, size: BpkStarRatingSize, text: S
 }
 
 @Composable
-private fun StaticRatingSample(context: Context, size: BpkStarRatingSize, text: String) {
+private fun StaticRatingSample(size: BpkStarRatingSize, text: String) {
   BpkText(
     text = text,
     style = BpkTheme.typography.heading3,
   )
-  val ratings = listOf(1, 2, 3, 3.5, 4, 5)
+  val ratings = listOf(1f, 2f, 3f, 3.5f, 4f, 5f)
   for (i in ratings) {
     BpkStarRating(
-      rating = i.toFloat(),
+      rating = i,
       contentDescription = { value, max ->
-        context.getString(R.string.star_rating_accessibility_status, value, max)
+        stringResource(R.string.star_rating_accessibility_status, value, max)
       },
       rounding = RoundingType.Up,
       size = size,
