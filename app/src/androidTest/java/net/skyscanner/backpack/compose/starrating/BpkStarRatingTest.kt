@@ -19,7 +19,6 @@
 
 package net.skyscanner.backpack.compose.starrating
 
-import androidx.compose.ui.res.stringResource
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
@@ -31,7 +30,6 @@ class BpkStarRatingTest : BpkSnapshotTest() {
 
   @Test
   fun ratingFullStar() = snap {
-
     BpkStarRating(
       rating = 2f,
       contentDescription = { value, max ->

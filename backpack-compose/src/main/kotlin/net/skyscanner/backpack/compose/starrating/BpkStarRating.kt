@@ -33,6 +33,8 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Star
 import net.skyscanner.backpack.compose.tokens.StarHalf
 import net.skyscanner.backpack.compose.tokens.StarOutline
+import net.skyscanner.backpack.compose.utils.ContentDescriptionScope
+import net.skyscanner.backpack.compose.utils.rememberContentDescriptionScope
 
 enum class BpkStarRatingSize {
   Large,
@@ -42,7 +44,7 @@ enum class BpkStarRatingSize {
 @Composable
 fun BpkStarRating(
   rating: Float,
-  contentDescription: @Composable (Float, Int) -> String,
+  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
   rounding: RoundingType = RoundingType.Down,
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
@@ -63,7 +65,7 @@ fun BpkStarRating(
 @Composable
 fun BpkHotelRating(
   rating: Int,
-  contentDescription: @Composable (Float, Int) -> String,
+  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
@@ -86,7 +88,7 @@ private fun BpkStarRating(
   maxRating: Int,
   rounding: RoundingType,
   iconSize: BpkIconSize,
-  contentDescription: @Composable (Float, Int) -> String,
+  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
 ) {
   val coercedRating = rating.coerceIn(0f, maxRating.toFloat())
@@ -95,8 +97,8 @@ private fun BpkStarRating(
     RoundingType.Up -> ceil(coercedRating * 2) / 2
     RoundingType.Nearest -> round(coercedRating * 2) / 2
   }
-  val contentDescriptionText = contentDescription(roundedRating, maxRating)
-  Row(modifier = modifier.semantics { this.contentDescription = contentDescriptionText }) {
+  val scope = rememberContentDescriptionScope()
+  Row(modifier = modifier.semantics { this.contentDescription = scope.contentDescription(roundedRating, maxRating) }) {
     for (item in 0 until maxRating) {
       val value = (roundedRating - item).coerceIn(0f, 1f)
       when {
