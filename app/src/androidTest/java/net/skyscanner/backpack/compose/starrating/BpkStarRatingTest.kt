@@ -19,8 +19,10 @@
 
 package net.skyscanner.backpack.compose.starrating
 
+import androidx.compose.ui.res.stringResource
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.demo.R
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -29,9 +31,12 @@ class BpkStarRatingTest : BpkSnapshotTest() {
 
   @Test
   fun ratingFullStar() = snap {
+
     BpkStarRating(
       rating = 2f,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
     )
   }
 
@@ -39,7 +44,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun ratingHalfStar() = snap {
     BpkStarRating(
       rating = 3.5f,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
     )
   }
 
@@ -47,7 +54,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun zeroRating() = snap {
     BpkStarRating(
       rating = 0f,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
     )
   }
 
@@ -55,7 +64,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun negativeRating() = snap {
     BpkStarRating(
       rating = -3f,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
     )
   }
 
@@ -63,7 +74,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun roundingTypeUp() = snap {
     BpkStarRating(
       rating = 2.9f,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
       rounding = RoundingType.Up,
     )
   }
@@ -72,7 +85,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun roundingTypeDown() = snap {
     BpkStarRating(
       rating = 2.9f,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
       rounding = RoundingType.Down,
     )
   }
@@ -81,7 +96,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun aboveMaxRating() = snap {
     BpkStarRating(
       rating = 7f,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
     )
   }
 
@@ -89,7 +106,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun starSizeSmall() = snap {
     BpkStarRating(
       rating = 3f,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
       size = BpkStarRatingSize.Small,
     )
   }
@@ -98,7 +117,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun starSizeLarge() = snap {
     BpkStarRating(
       rating = 3f,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
       size = BpkStarRatingSize.Large,
     )
   }
@@ -107,7 +128,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
   fun hotelStarRating4() = snap {
     BpkHotelRating(
       rating = 4,
-      contentDescription = "",
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
     )
   }
 }
