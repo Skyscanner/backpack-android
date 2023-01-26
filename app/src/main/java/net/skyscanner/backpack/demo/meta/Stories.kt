@@ -1,5 +1,6 @@
 package net.skyscanner.backpack.demo.meta
 
+import android.content.Context
 import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +57,7 @@ inline fun <reified T : View> AndroidView(
 ) {
   AndroidView(
     modifier = modifier,
-    factory = { T::class.java.constructors.first { it.parameters.size == 1 }.newInstance(it) as T },
+    factory = { T::class.java.getConstructor(Context::class.java).newInstance(it) as T },
     update = { update(it) },
   )
 }
