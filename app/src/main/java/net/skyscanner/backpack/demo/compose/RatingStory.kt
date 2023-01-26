@@ -25,6 +25,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.rating.BpkRating
@@ -179,7 +180,14 @@ internal fun BpkRatingLargeCustomContentNoSubtitleSample(
 private fun CustomContent(
   modifier: Modifier = Modifier,
 ) {
-  BpkStarRating(rating = RatingValue, contentDescription = stringResource(R.string.star_rating_accessibility_status, 4f, 5), modifier = modifier)
+  val context = LocalContext.current
+  BpkStarRating(
+    rating = RatingValue,
+    contentDescription = { _, max ->
+      context.getString(R.string.star_rating_accessibility_status, RatingValue, max)
+    },
+    modifier = modifier,
+  )
 }
 
 private const val RatingValue = 4.57f

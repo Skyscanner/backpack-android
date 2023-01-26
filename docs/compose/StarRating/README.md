@@ -23,7 +23,9 @@ import net.skyscanner.backpack.compose.starrating.BpkStarRating
 
 BpkStarRating(
     rating = 2f,
-    contentDescription = "",
+    contentDescription = { value, max ->
+      context.getString(R.string.star_rating_accessibility_status, value, max)
+    },
     rounding = RoundingType.Up,
     size = BpkStarRatingSize.Small,
 )
@@ -36,7 +38,9 @@ import net.skyscanner.backpack.compose.starrating.BpkStarRating
 
 BpkStarRating(
     rating = 3.5f,
-    contentDescription = "",
+    contentDescription = { value, max ->
+      context.getString(R.string.star_rating_accessibility_status, value, max)
+    },
     rounding = RoundingType.Down,
     size = BpkStarRatingSize.Large,
 )
@@ -49,7 +53,9 @@ import net.skyscanner.backpack.compose.starrating.BpkStarRating
 
 BpkHotelRating(
     rating = 3,
-    contentDescription = "",
+    contentDescription = { value, max ->
+      context.getString(R.string.star_rating_accessibility_status, value, max)
+    },
     size = BpkStarRatingSize.Small,
 )
 ```

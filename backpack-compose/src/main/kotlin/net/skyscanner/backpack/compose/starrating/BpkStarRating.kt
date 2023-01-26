@@ -42,7 +42,7 @@ enum class BpkStarRatingSize {
 @Composable
 fun BpkStarRating(
   rating: Float,
-  contentDescription: String,
+  contentDescription: (Float, Int) -> String,
   modifier: Modifier = Modifier,
   rounding: RoundingType = RoundingType.Down,
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
@@ -63,7 +63,7 @@ fun BpkStarRating(
 @Composable
 fun BpkHotelRating(
   rating: Int,
-  contentDescription: String,
+  contentDescription: (Float, Int) -> String,
   modifier: Modifier = Modifier,
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
@@ -86,7 +86,7 @@ private fun BpkStarRating(
   maxRating: Int,
   rounding: RoundingType,
   iconSize: BpkIconSize,
-  contentDescription: String,
+  contentDescription: (Float, Int) -> String,
   modifier: Modifier = Modifier,
 ) {
   val coercedRating = rating.coerceIn(0f, maxRating.toFloat())
@@ -95,8 +95,7 @@ private fun BpkStarRating(
     RoundingType.Up -> ceil(coercedRating * 2) / 2
     RoundingType.Nearest -> round(coercedRating * 2) / 2
   }
-  Row(modifier = modifier.semantics { this.contentDescription = contentDescription }) {
-
+  Row(modifier = modifier.semantics { this.contentDescription = contentDescription(roundedRating, maxRating) }) {
     for (item in 0 until maxRating) {
       val value = (roundedRating - item).coerceIn(0f, 1f)
       when {

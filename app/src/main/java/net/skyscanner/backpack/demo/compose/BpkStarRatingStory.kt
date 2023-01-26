@@ -106,7 +106,9 @@ private fun HotelRatingSample(context: Context, size: BpkStarRatingSize, text: S
   for (i in 1..5) {
     BpkHotelRating(
       rating = i,
-      contentDescription = context.getString(R.string.star_rating_accessibility_status, 1f, 5),
+      contentDescription = { value, max ->
+        context.getString(R.string.star_rating_accessibility_status, value, max)
+      },
       size = size,
     )
   }
@@ -122,7 +124,9 @@ private fun StaticRatingSample(context: Context, size: BpkStarRatingSize, text: 
   for (i in ratings) {
     BpkStarRating(
       rating = i.toFloat(),
-      contentDescription = context.getString(R.string.star_rating_accessibility_status, 1f, 5),
+      contentDescription = { value, max ->
+        context.getString(R.string.star_rating_accessibility_status, value, max)
+      },
       rounding = RoundingType.Up,
       size = size,
     )
