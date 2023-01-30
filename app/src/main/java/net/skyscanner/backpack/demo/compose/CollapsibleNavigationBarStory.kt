@@ -20,12 +20,17 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import net.skyscanner.backpack.compose.card.BpkCard
+import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
@@ -33,9 +38,12 @@ import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Accessibility
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.AccountIdCard
+import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.demo.R
 
 @Composable
@@ -66,11 +74,20 @@ fun CollapsibleNavigationBarStory(
     )
     if (showList) {
       LazyColumn {
-        item {
-          ListItem(title = stringResource(R.string.generic_scroll_the_list))
-        }
-        item {
-          ListItem(title = stringResource(R.string.generic_scroll_the_list))
+        items(count = 2) {
+          BpkCard(
+            modifier = Modifier
+              .fillMaxWidth()
+              .padding(horizontal = BpkDimension.Spacing.Lg),
+          ) {
+            Column {
+              BpkText(
+                text = stringResource(R.string.generic_scroll_the_list),
+                style = BpkTheme.typography.bodyLongform,
+              )
+            }
+          }
+          BpkDivider(Modifier.alpha(0f))
         }
         items(100) {
           ListItem(title = stringResource(R.string.generic_scroll_the_list))
