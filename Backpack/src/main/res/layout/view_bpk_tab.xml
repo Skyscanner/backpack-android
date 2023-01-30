@@ -18,7 +18,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@android:id/text1"
     app:layout_constraintHorizontal_chainStyle="packed"
-    android:layout_marginStart="@dimen/bpkSpacingSm"
+    android:layout_marginHorizontal="@dimen/bpkSpacingSm"
     android:importantForAccessibility="no"
     />
 
