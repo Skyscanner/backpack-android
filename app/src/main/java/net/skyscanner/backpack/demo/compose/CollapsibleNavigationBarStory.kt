@@ -39,7 +39,6 @@ import net.skyscanner.backpack.compose.navigationbar.TopNavBarStatus
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Accessibility
 import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.AccountIdCard
@@ -81,10 +80,7 @@ fun CollapsibleNavigationBarStory(
               .padding(horizontal = BpkDimension.Spacing.Lg),
           ) {
             Column {
-              BpkText(
-                text = stringResource(R.string.generic_scroll_the_list),
-                style = BpkTheme.typography.bodyLongform,
-              )
+              BpkText(text = stringResource(R.string.generic_scroll_the_list))
             }
           }
           BpkDivider(Modifier.alpha(0f))
