@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "eslint . --ext .js,.jsx",
     "prebuild": "npm run lint",
-    "build": "gulp && npm run spellcheck && ./gradlew generateTokens",
+    "build": "npm run spellcheck",
     "danger": "danger ci",
     "prettier": "prettier --config .prettierrc --write \"**/*.js\"",
     "spellcheck": "mdspell -r --en-gb --ignore-acronyms --ignore-numbers --no-suggestions '*.md' '**/*.md' '!**/node_modules/**/*.md'",
@@ -46,7 +46,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "gulp": "^4.0.2",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.0",
     "lodash": "^4.17.21",

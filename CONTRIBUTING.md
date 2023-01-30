@@ -38,7 +38,6 @@ $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-26;goog
 Given that you have a compatible environment as stated above you can now set up the project.
 
 + `npm install` to install npm dependencies
-+ `npm run build` to build Backpack tokens
 +  Open the project in Android Studio
 + If you are a Skyscanner employee, search the internal documentation for _"Guide – Setup Internal Backpack Android Builds"_ and follow the instructions.
 
@@ -205,6 +204,14 @@ Verify the screenshots and commit the changes.
 
 - `Shift + D` : Toggle story view between RTL and LTR
 - `Shift + T` : Hide the toolbar
+
+## Token generation
+
+In some cases you may need to re-generate tokens after an update in foundation. To do so:
+- Ensure the version for foundations + SVGs is up-to-date in `package.json`
+- Run `npm install` to ensure the node package is installed
+- Run `./gradlew generateTokens` to generate the tokens
+- Commit the changes
 
 ## Code Style
 Code style is ensured by [detekt](https://github.com/detekt/detekt). It runs automatically during the `check` phase but can also be executed by running `./gradlew detekt`.

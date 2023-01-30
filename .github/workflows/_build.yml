@@ -55,9 +55,13 @@ jobs:
         run: |
           ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
 
-      - name: Tokens check
+      - name: Node Build
         run: |
           npm run build
+
+      - name: Tokens check
+        run: |
+          ./gradlew generateTokens -PdisablePreDex
           ./scripts/check-no-changes.sh
 
       - name: Detekt check
