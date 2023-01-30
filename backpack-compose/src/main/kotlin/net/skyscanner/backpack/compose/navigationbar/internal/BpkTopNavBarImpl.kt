@@ -65,7 +65,7 @@ internal fun BpkTopNavBarImpl(
     contentColor = BpkTheme.colors.textPrimary,
     elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
     shape = RectangleShape,
-    modifier = modifier.zIndex(Float.MAX_VALUE),
+    modifier = modifier.zIndex(1f),
   ) {
 
     val titleStyle = lerp(
