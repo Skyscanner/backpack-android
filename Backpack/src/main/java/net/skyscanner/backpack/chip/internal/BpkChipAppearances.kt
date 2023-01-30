@@ -56,12 +56,14 @@ internal sealed class BpkChipAppearances : BpkChipAppearance {
         disabled = context.getColor(R.color.bpkTextDisabled),
       )
 
-    internal class Default(context: Context, typedArray: TypedArray?) : Solid(context) {
+    internal class Default(context: Context, private val typedArray: TypedArray?) : Solid(context) {
       constructor(
         context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int,
-      ) : this(context, context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0))
+      ) : this(context, context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)) {
+        typedArray?.recycle()
+      }
 
       override var selectedBackgroundColor: Int = context.getColor(R.color.__privateChipDefaultOnBackground)
       override var backgroundColor: Int = context.getColor(R.color.__privateChipDefaultNormalBackground)
@@ -80,17 +82,18 @@ internal sealed class BpkChipAppearances : BpkChipAppearance {
           disabledBackgroundColor =
             typedArray.getColor(R.styleable.BpkChip_chipDisabledBackgroundColor, disabledBackgroundColor)
           textColor = typedArray.getColor(R.styleable.BpkChip_chipTextColor, textColor)
-          typedArray.recycle()
         }
       }
     }
 
-    internal class OnDark(context: Context, typedArray: TypedArray?) : Solid(context) {
+    internal class OnDark(context: Context, private val typedArray: TypedArray?) : Solid(context) {
       constructor(
         context: Context,
         attrs: AttributeSet?,
         defStyleAttr: Int,
-      ) : this(context, context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0))
+      ) : this(context, context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)) {
+        typedArray?.recycle()
+      }
 
       override var selectedBackgroundColor: Int = context.getColor(R.color.__privateChipOnDarkOnBackground)
       override var backgroundColor: Int = context.getColor(R.color.__privateChipOnDarkNormalBackground)
@@ -109,7 +112,6 @@ internal sealed class BpkChipAppearances : BpkChipAppearance {
           disabledBackgroundColor =
             typedArray.getColor(R.styleable.BpkChip_chipDisabledBackgroundColor, disabledBackgroundColor)
           textColor = typedArray.getColor(R.styleable.BpkChip_chipTextColor, textColor)
-          typedArray.recycle()
         }
       }
     }
