@@ -65,7 +65,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode) // TODO: add themed once KOA-5874 is done
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun notSelected_OnDark() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -75,7 +75,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode) // TODO: add themed once KOA-5874 is done
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun selected_OnDark() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -85,7 +85,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode) // TODO: add themed once KOA-5874 is done
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
   fun disabled_OnDark() {
     val view = BpkChip(testContext)
     view.text = "Chip"
