@@ -37,6 +37,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.lerp
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.navigationbar.Action
@@ -64,7 +65,7 @@ internal fun BpkTopNavBarImpl(
     contentColor = BpkTheme.colors.textPrimary,
     elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
     shape = RectangleShape,
-    modifier = modifier,
+    modifier = modifier.zIndex(1f),
   ) {
 
     val titleStyle = lerp(
