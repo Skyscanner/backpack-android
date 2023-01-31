@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -103,13 +104,15 @@ private fun HotelRatingSample(
       style = BpkTheme.typography.heading3,
     )
     for (i in 1..5) {
-      BpkHotelRating(
-        rating = i,
-        contentDescription = { value, max ->
-          stringResource(R.string.star_rating_accessibility_status, value, max)
-        },
-        size = size,
-      )
+      key(i) {
+        BpkHotelRating(
+          rating = i,
+          contentDescription = { value, max ->
+            stringResource(R.string.star_rating_accessibility_status, value, max)
+          },
+          size = size,
+        )
+      }
     }
   }
 }
@@ -127,14 +130,16 @@ private fun StaticRatingSample(
     )
     val ratings = listOf(1f, 2f, 3f, 3.5f, 4f, 5f)
     for (i in ratings) {
-      BpkStarRating(
-        rating = i,
-        contentDescription = { value, max ->
-          stringResource(R.string.star_rating_accessibility_status, value, max)
-        },
-        rounding = BpkRatingRounding.Up,
-        size = size,
-      )
+      key(i) {
+        BpkStarRating(
+          rating = i,
+          contentDescription = { value, max ->
+            stringResource(R.string.star_rating_accessibility_status, value, max)
+          },
+          rounding = BpkRatingRounding.Up,
+          size = size,
+        )
+      }
     }
   }
 }
