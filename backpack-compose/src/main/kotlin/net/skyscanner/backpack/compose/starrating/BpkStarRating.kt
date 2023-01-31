@@ -41,12 +41,24 @@ enum class BpkStarRatingSize {
   Small,
 }
 
+private enum class BpkRatingStarType {
+  Empty,
+  Half,
+  Full,
+}
+
+enum class BpkRatingRounding {
+  Down,
+  Up,
+  Nearest,
+}
+
 @Composable
 fun BpkStarRating(
   rating: Float,
   contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
-  rounding: RoundingType = RoundingType.Down,
+  rounding: BpkRatingRounding = BpkRatingRounding.Down,
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
   BpkStarRating(
@@ -71,7 +83,7 @@ fun BpkHotelRating(
 ) {
   BpkStarRating(
     maxRating = rating,
-    rounding = RoundingType.Down,
+    rounding = BpkRatingRounding.Down,
     iconSize = when (size) {
       BpkStarRatingSize.Large -> BpkIconSize.Large
       BpkStarRatingSize.Small -> BpkIconSize.Small
@@ -86,62 +98,50 @@ fun BpkHotelRating(
 private fun BpkStarRating(
   rating: Float,
   maxRating: Int,
-  rounding: RoundingType,
+  rounding: BpkRatingRounding,
   iconSize: BpkIconSize,
   contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
 ) {
   val coercedRating = rating.coerceIn(0f, maxRating.toFloat())
   val roundedRating = when (rounding) {
-    RoundingType.Down -> floor(coercedRating * 2) / 2
-    RoundingType.Up -> ceil(coercedRating * 2) / 2
-    RoundingType.Nearest -> round(coercedRating * 2) / 2
+    BpkRatingRounding.Down -> floor(coercedRating * 2) / 2
+    BpkRatingRounding.Up -> ceil(coercedRating * 2) / 2
+    BpkRatingRounding.Nearest -> round(coercedRating * 2) / 2
   }
   val scope = rememberContentDescriptionScope()
   Row(modifier = modifier.semantics { this.contentDescription = scope.contentDescription(roundedRating, maxRating) }) {
     for (item in 0 until maxRating) {
       val value = (roundedRating - item).coerceIn(0f, 1f)
       when {
-        (value >= 0.0f && value < 0.5f) -> BpkStar(icon = StarType.Empty, iconSize = iconSize)
-        (value >= 0.5f && value < 1.0f) -> BpkStar(icon = StarType.Half, iconSize = iconSize)
-        else -> BpkStar(icon = StarType.Full, iconSize = iconSize)
+        (value >= 0.0f && value < 0.5f) -> BpkStar(icon = BpkRatingStarType.Empty, iconSize = iconSize)
+        (value >= 0.5f && value < 1.0f) -> BpkStar(icon = BpkRatingStarType.Half, iconSize = iconSize)
+        else -> BpkStar(icon = BpkRatingStarType.Full, iconSize = iconSize)
       }
     }
   }
 }
 
 @Composable
-private fun BpkStar(icon: StarType, iconSize: BpkIconSize) {
+private fun BpkStar(icon: BpkRatingStarType, iconSize: BpkIconSize) {
   when (icon) {
-    StarType.Empty -> BpkIcon(
+    BpkRatingStarType.Empty -> BpkIcon(
       icon = BpkIcon.StarOutline,
       contentDescription = null,
       size = iconSize,
       tint = BpkTheme.colors.textDisabled,
     )
-    StarType.Half -> BpkIcon(
+    BpkRatingStarType.Half -> BpkIcon(
       icon = BpkIcon.StarHalf,
       contentDescription = null,
       size = iconSize,
       tint = BpkTheme.colors.statusWarningSpot,
     )
-    StarType.Full -> BpkIcon(
+    BpkRatingStarType.Full -> BpkIcon(
       icon = BpkIcon.Star,
       contentDescription = null,
       size = iconSize,
       tint = BpkTheme.colors.statusWarningSpot,
     )
   }
-}
-
-private enum class StarType {
-  Empty,
-  Half,
-  Full,
-}
-
-enum class RoundingType {
-  Down,
-  Up,
-  Nearest,
 }

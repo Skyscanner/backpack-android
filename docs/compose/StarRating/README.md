@@ -20,13 +20,16 @@ Example of a `BpkStarRating` with full star rating:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
+import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
+
+
 
 BpkStarRating(
     rating = 2f,
     contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
+      stringResource(R.string.star_rating_accessibility_status, value, max)
     },
-    rounding = RoundingType.Up,
+    rounding = BpkRatingRounding.Up,
     size = BpkStarRatingSize.Small,
 )
 ```
@@ -35,13 +38,17 @@ Example of a `BpkStarRating` with half star rating:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
+import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
+import net.skyscanner.backpack.compose.starrating.BpkRatingRounding
+
+
 
 BpkStarRating(
     rating = 3.5f,
     contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
+      stringResource(R.string.star_rating_accessibility_status, value, max)
     },
-    rounding = RoundingType.Down,
+    rounding = BpkRatingRounding.Down,
     size = BpkStarRatingSize.Large,
 )
 ```
@@ -50,11 +57,13 @@ Example of a `BpkHotelRating`:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
+import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
+
 
 BpkHotelRating(
     rating = 3,
     contentDescription = { value, max ->
-      context.getString(R.string.star_rating_accessibility_status, value, max)
+      stringResource(R.string.star_rating_accessibility_status, value, max)
     },
     size = BpkStarRatingSize.Small,
 )

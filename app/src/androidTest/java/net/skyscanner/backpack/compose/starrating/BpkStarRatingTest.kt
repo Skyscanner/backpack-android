@@ -75,7 +75,7 @@ class BpkStarRatingTest : BpkSnapshotTest() {
       contentDescription = { value, max ->
         stringResource(R.string.star_rating_accessibility_status, value, max)
       },
-      rounding = RoundingType.Up,
+      rounding = BpkRatingRounding.Up,
     )
   }
 
@@ -86,7 +86,7 @@ class BpkStarRatingTest : BpkSnapshotTest() {
       contentDescription = { value, max ->
         stringResource(R.string.star_rating_accessibility_status, value, max)
       },
-      rounding = RoundingType.Down,
+      rounding = BpkRatingRounding.Down,
     )
   }
 
