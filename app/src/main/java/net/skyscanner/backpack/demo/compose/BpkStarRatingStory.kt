@@ -47,12 +47,18 @@ fun BpkStarRatingStory(
     modifier = modifier.fillMaxHeight(),
     contentAlignment = Alignment.Center,
   ) {
-    Column(modifier = Modifier.padding(start = BpkSpacing.Xl), verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg)) {
+    Column(
+      modifier = Modifier.padding(start = BpkSpacing.Xl),
+      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+    ) {
       BpkText(
         text = stringResource(R.string.static_default_rating_title),
         style = BpkTheme.typography.heading2,
       )
-      Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg)) {
+      Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+      ) {
         StaticRatingSample(
           size = BpkStarRatingSize.Large,
           text = stringResource(R.string.icons_large),
@@ -67,7 +73,10 @@ fun BpkStarRatingStory(
           text = stringResource(R.string.hotel_star_rating_title),
           style = BpkTheme.typography.heading2,
         )
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg)) {
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+        ) {
           HotelRatingSample(
             size = BpkStarRatingSize.Large,
             text = stringResource(R.string.icons_large),
@@ -83,7 +92,11 @@ fun BpkStarRatingStory(
 }
 
 @Composable
-private fun HotelRatingSample(size: BpkStarRatingSize, text: String, modifier: Modifier = Modifier) {
+private fun HotelRatingSample(
+  size: BpkStarRatingSize,
+  text: String,
+  modifier: Modifier = Modifier,
+) {
   Column(modifier = modifier) {
     BpkText(
       text = text,
@@ -102,7 +115,11 @@ private fun HotelRatingSample(size: BpkStarRatingSize, text: String, modifier: M
 }
 
 @Composable
-private fun StaticRatingSample(size: BpkStarRatingSize, text: String, modifier: Modifier = Modifier) {
+private fun StaticRatingSample(
+  size: BpkStarRatingSize,
+  text: String,
+  modifier: Modifier = Modifier,
+) {
   Column(modifier = modifier) {
     BpkText(
       text = text,

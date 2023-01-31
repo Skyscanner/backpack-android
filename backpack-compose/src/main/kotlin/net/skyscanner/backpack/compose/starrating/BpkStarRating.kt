@@ -41,12 +41,6 @@ enum class BpkStarRatingSize {
   Small,
 }
 
-private enum class BpkRatingStarType {
-  Empty,
-  Half,
-  Full,
-}
-
 enum class BpkRatingRounding {
   Down,
   Up,
@@ -123,25 +117,38 @@ private fun BpkStarRating(
 }
 
 @Composable
-private fun BpkStar(icon: BpkRatingStarType, iconSize: BpkIconSize) {
+private fun BpkStar(
+  icon: BpkRatingStarType,
+  iconSize: BpkIconSize,
+  modifier: Modifier = Modifier,
+) {
   when (icon) {
     BpkRatingStarType.Empty -> BpkIcon(
       icon = BpkIcon.StarOutline,
       contentDescription = null,
       size = iconSize,
       tint = BpkTheme.colors.textDisabled,
+      modifier = modifier,
     )
     BpkRatingStarType.Half -> BpkIcon(
       icon = BpkIcon.StarHalf,
       contentDescription = null,
       size = iconSize,
       tint = BpkTheme.colors.statusWarningSpot,
+      modifier = modifier,
     )
     BpkRatingStarType.Full -> BpkIcon(
       icon = BpkIcon.Star,
       contentDescription = null,
       size = iconSize,
       tint = BpkTheme.colors.statusWarningSpot,
+      modifier = modifier,
     )
   }
+}
+
+private enum class BpkRatingStarType {
+  Empty,
+  Half,
+  Full,
 }

@@ -21,6 +21,7 @@ Example of a `BpkStarRating` with full star rating:
 ```Kotlin
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
 import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
+import net.skyscanner.backpack.compose.starrating.BpkRatingRounding
 
 
 
