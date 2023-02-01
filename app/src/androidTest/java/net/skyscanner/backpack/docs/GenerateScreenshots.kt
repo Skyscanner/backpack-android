@@ -20,10 +20,22 @@ package net.skyscanner.backpack.docs
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.test.rule.ActivityTestRule
-import net.skyscanner.backpack.demo.ComponentDetailActivity
-import net.skyscanner.backpack.demo.ComponentDetailFragment
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
+import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
+import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
+import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.demo.BackpackDemoTheme
+import net.skyscanner.backpack.demo.BpkBaseActivity
+import net.skyscanner.backpack.demo.compose.LocalAutomationMode
+import net.skyscanner.backpack.demo.compose.LocalFloatingNotification
+import net.skyscanner.backpack.demo.meta.Stories
+import net.skyscanner.backpack.demo.meta.StoryEntry
+import net.skyscanner.backpack.demo.meta.all
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,20 +43,17 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 open class GenerateScreenshots(
-  private val componentPath: String,
-  private val screenshotName: String,
-  private val componentType: String,
-  private val setup: ((AndroidComposeTestRule<*, *>) -> Unit)?
+  private val storyEntry: StoryEntry,
 ) {
 
   companion object {
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
-    fun data() = DocsRegistry.screenshots
+    fun data(): List<StoryEntry> = Stories.all().filter { it.screenshot }
   }
 
   @get:Rule
-  var activityRule = ActivityTestRule(ComponentDetailActivity::class.java, true, false)
+  var activityRule = ActivityTestRule(BpkBaseActivity::class.java, true, false)
 
   @get:Rule
   val composeTestRule = AndroidComposeTestRule(activityRule) { it.activity }
@@ -63,19 +72,36 @@ open class GenerateScreenshots(
 
   private fun runActivityAndTakeScreenshot(suffix: String? = null) {
     val intent = Intent()
-    intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, componentPath)
-    intent.putExtra(ComponentDetailFragment.AUTOMATION_MODE, true)
     activityRule.launchActivity(intent)
-    setup?.invoke(composeTestRule)
+    composeTestRule.setContent {
+      BackpackDemoTheme {
+        val floatingNotificationState = rememberBpkFloatingNotificationState()
+        CompositionLocalProvider(
+          LocalAutomationMode provides true,
+          LocalFloatingNotification provides floatingNotificationState,
+        ) {
+          Box {
+            Column {
+              BpkTopNavBar(
+                navIcon = NavIcon.Back("back", {}),
+                title = storyEntry.component.name,
+              )
+              storyEntry.content()
+            }
+            BpkFloatingNotification(state = floatingNotificationState)
+          }
+        }
+      }
+    }
     takeScreenshot(suffix)
     activityRule.finishActivity()
   }
 
   private fun takeScreenshot(suffix: String?) {
     RemoteScreenGrab.takeScreenshot(
-      type = componentType,
-      component = componentPath.split(" - ").first().replace(" ", ""),
-      file = listOfNotNull(screenshotName, suffix).joinToString(separator = "_"),
+      type = "Test",
+      component = storyEntry.component.name,
+      file = if (suffix != null) "default_$suffix" else "default",
     )
   }
 }

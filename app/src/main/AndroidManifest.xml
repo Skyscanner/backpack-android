@@ -22,6 +22,7 @@
           </intent-filter>
       </activity>
     <activity android:name=".ComponentDetailActivity" />
+    <activity android:name=".BpkBaseActivity" />
     <activity android:name=".SettingsActivity" />
     <activity android:name="androidx.appcompat.app.AppCompatActivity" />
   </application>
