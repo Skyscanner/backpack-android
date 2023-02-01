@@ -62,7 +62,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/bpkSpacingMd"
-    android:text="@string/chip_select"
+    android:text="@string/chip_dropdown"
     app:textStyle="heading5" />
 
   <androidx.appcompat.widget.LinearLayoutCompat
@@ -75,7 +75,7 @@
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Afghanistan"
       app:chipIcon="@drawable/bpk_award"
-      app:chipType="select"
+      app:chipType="dropdown"
       app:disabled="true"
       app:selected="false" />
 
@@ -85,7 +85,7 @@
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Belgium"
       app:chipIcon="@drawable/bpk_account"
-      app:chipType="select"
+      app:chipType="dropdown"
       app:disabled="false"
       app:selected="false" />
 
@@ -100,7 +100,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Lesotho"
-      app:chipType="select"
+      app:chipType="dropdown"
       app:disabled="false"
       app:selected="false" />
 
@@ -110,7 +110,7 @@
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Madagascar"
       app:chipIcon="@drawable/bpk_camera"
-      app:chipType="select"
+      app:chipType="dropdown"
       app:disabled="false"
       app:selected="true" />
   </androidx.appcompat.widget.LinearLayoutCompat>

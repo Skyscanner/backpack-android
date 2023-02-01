@@ -162,7 +162,7 @@
   <string name="badge_pears">Pears</string>
 
   <string name="chip_option">Option</string>
-  <string name="chip_select">Select</string>
+  <string name="chip_dropdown">Dropdown</string>
   <string name="chip_dismiss">Dismiss</string>
 
   <string name="tabs_small">Small</string>

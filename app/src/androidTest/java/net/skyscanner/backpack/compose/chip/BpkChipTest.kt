@@ -85,6 +85,30 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun notSelected_OnImage() {
+    snap(background = { BpkTheme.colors.coreAccent }) {
+      BpkChip(text = "Chip", selected = false, style = BpkChipStyle.OnImage)
+    }
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun selected_OnImage() {
+    snap(background = { BpkTheme.colors.coreAccent }) {
+      BpkChip(text = "Chip", selected = true, style = BpkChipStyle.OnImage)
+    }
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun disabled_OnImage() {
+    snap(background = { BpkTheme.colors.coreAccent }) {
+      BpkChip(text = "Chip", enabled = false, style = BpkChipStyle.OnImage)
+    }
+  }
+
+  @Test
   fun withIcon() {
     snap {
       BpkChip(text = "Chip", icon = BpkIcon.Deals)
@@ -93,9 +117,9 @@ class BpkChipTest : BpkSnapshotTest() {
 
   @Test
   @Variants(BpkTestVariant.Default)
-  fun typeSelect() {
+  fun typeDropdown() {
     snap {
-      BpkChip(text = "Chip", type = BpkChipType.Select)
+      BpkChip(text = "Chip", type = BpkChipType.Dropdown)
     }
   }
 
@@ -103,20 +127,12 @@ class BpkChipTest : BpkSnapshotTest() {
   @Variants(BpkTestVariant.Default)
   fun typeDismiss() {
     snap {
-      BpkChip(text = "Chip", type = BpkChipType.Dismiss)
+      BpkChip(text = "Chip", type = BpkChipType.Dismiss, selected = true)
     }
   }
 
   @Test
-  fun withIconAndType() {
-    snap {
-      BpkChip(text = "Chip", type = BpkChipType.Dismiss, icon = BpkIcon.Deals)
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun withIconAndType_Selected() {
+  fun withIconAndTypeDismiss() {
     snap {
       BpkChip(text = "Chip", type = BpkChipType.Dismiss, icon = BpkIcon.Deals, selected = true)
     }
@@ -124,10 +140,25 @@ class BpkChipTest : BpkSnapshotTest() {
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun withIconAndType_Disabled() {
+  fun withIconAndTypeDropdown() {
     snap {
-      BpkChip(text = "Chip", type = BpkChipType.Dismiss, icon = BpkIcon.Deals, enabled = false)
+      BpkChip(text = "Chip", type = BpkChipType.Dropdown, icon = BpkIcon.Deals)
     }
   }
 
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun withIconAndTypeDropdown_Selected() {
+    snap {
+      BpkChip(text = "Chip", type = BpkChipType.Dropdown, icon = BpkIcon.Deals, selected = true)
+    }
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun withIconAndTypeDropdown_Disabled() {
+    snap {
+      BpkChip(text = "Chip", type = BpkChipType.Dropdown, icon = BpkIcon.Deals, enabled = false)
+    }
+  }
 }

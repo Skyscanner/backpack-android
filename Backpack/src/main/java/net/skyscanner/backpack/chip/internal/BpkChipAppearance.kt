@@ -28,7 +28,13 @@ internal interface BpkChipAppearance {
 
   val background: Drawable
 
+  val dismissibleBackground: Drawable
+
   val text: ColorStateList
+
+  val dismissibleText: ColorStateList
+
+  val dismissibleIcon: ColorStateList
 
   @get:ColorInt
   @setparam:ColorInt
@@ -57,4 +63,16 @@ internal interface BpkChipAppearance {
   @get:ColorInt
   @setparam:ColorInt
   var selectedTextColor: Int
+
+  @get:ColorInt
+  @setparam:ColorInt
+  var dismissibleIconColor: Int
+
+  @get:ColorInt
+  @setparam:ColorInt
+  var strokeColor: Int
+
+  @get:ColorInt
+  @setparam:ColorInt
+  var pressedStrokeColor: Int
 }

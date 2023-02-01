@@ -95,6 +95,36 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+  fun notSelected_OnImage() {
+    val view = BpkChip(testContext)
+    view.text = "Chip"
+    view.style = BpkChip.Style.OnImage
+    view.isSelected = false
+    snap(view, background = R.color.bpkTextOnLight)
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+  fun selected_OnImage() {
+    val view = BpkChip(testContext)
+    view.text = "Chip"
+    view.style = BpkChip.Style.OnImage
+    view.isSelected = true
+    snap(view, R.color.bpkTextOnLight)
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+  fun disabled_OnImage() {
+    val view = BpkChip(testContext)
+    view.text = "Chip"
+    view.style = BpkChip.Style.OnImage
+    view.disabled = true
+    snap(view)
+  }
+
+  @Test
   fun withIcon() {
     val view = BpkChip(testContext)
     view.text = "Chip"
@@ -104,10 +134,10 @@ class BpkChipTest : BpkSnapshotTest() {
 
   @Test
   @Variants(BpkTestVariant.Default)
-  fun typeSelect() {
+  fun typeDropdown() {
     val view = BpkChip(testContext)
     view.text = "Chip"
-    view.type = BpkChip.Type.Select
+    view.type = BpkChip.Type.Dropdown
     snap(view)
   }
 
@@ -121,7 +151,7 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  fun withIconAndType() {
+  fun withIconAndTypeDismiss() {
     val view = BpkChip(testContext)
     view.text = "Chip"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
@@ -130,23 +160,33 @@ class BpkChipTest : BpkSnapshotTest() {
   }
 
   @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun withIconAndType_Selected() {
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+  fun withIconAndTypeDropdown() {
     val view = BpkChip(testContext)
     view.text = "Chip"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
-    view.type = BpkChip.Type.Select
+    view.type = BpkChip.Type.Dropdown
+    snap(view)
+  }
+
+  @Test
+  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+  fun withIconAndTypeDropdown_Selected() {
+    val view = BpkChip(testContext)
+    view.text = "Chip"
+    view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
+    view.type = BpkChip.Type.Dropdown
     view.isSelected = true
     snap(view)
   }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun withIconAndType_Disabled() {
+  fun withIconAndTypeDropdown_Disabled() {
     val view = BpkChip(testContext)
     view.text = "Chip"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
-    view.type = BpkChip.Type.Select
+    view.type = BpkChip.Type.Dropdown
     view.disabled = true
     snap(view)
   }
