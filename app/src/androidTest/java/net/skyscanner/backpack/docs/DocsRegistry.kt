@@ -31,13 +31,10 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.platform.app.InstrumentationRegistry
-import net.skyscanner.backpack.calendar.BpkCalendar
-import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.ShownDialog
-import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.YearMonth
 
@@ -140,7 +137,8 @@ object DocsRegistry {
     ViewScreenshot("Snackbar", "icon") { setupSnackbarIconAction() },
     ViewScreenshot("Spinner - View", "default"),
     ComposeScreenshot("Spinner - Compose", "default"),
-    ViewScreenshot("Star Rating - Default", "default"),
+    ViewScreenshot("Star Rating - View - Default", "default"),
+    ComposeScreenshot("Star Rating - Compose", "default"),
     ViewScreenshot("Star Rating Interactive", "default"),
     ViewScreenshot("Switch - View", "default"),
     ComposeScreenshot("Switch - Compose", "default"),
