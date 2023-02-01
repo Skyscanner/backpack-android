@@ -46,7 +46,7 @@ class BpkChipTest {
   fun test_toggle_when_disabled() {
     val chip = BpkChip(context).apply {
       isSelected = false
-      disabled = true
+      isEnabled = false
     }
 
     chip.toggle()
