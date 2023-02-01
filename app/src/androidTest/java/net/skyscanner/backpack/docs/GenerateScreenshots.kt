@@ -101,7 +101,13 @@ open class GenerateScreenshots(
     RemoteScreenGrab.takeScreenshot(
       type = "Test",
       component = storyEntry.component.name,
-      file = if (suffix != null) "default_$suffix" else "default",
+      file = storyEntry.name
+        .lowercase()
+        .replace(" ", "")
+        .replace("-", "_")
+        .replace("–", "_")
+        .let { if (suffix != null) "${it}_$suffix" else it }
+      ,
     )
   }
 }
