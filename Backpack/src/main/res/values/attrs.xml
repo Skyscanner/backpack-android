@@ -133,7 +133,6 @@
   </declare-styleable>
 
   <declare-styleable name="BpkChip">
-    <attr name="disabled" format="boolean" />
     <attr name="selected" format="boolean" />
     <attr name="chipsStyle" format="enum">
       <enum name="normal" value="0" />

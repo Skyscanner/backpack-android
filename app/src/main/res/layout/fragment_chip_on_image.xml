@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   style="@style/App.Story"
-  android:background="@color/bpkSurfaceContrast"
+  android:background="@drawable/canadian_rockies_canada"
   android:orientation="vertical">
 
   <LinearLayout
@@ -14,7 +14,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="@string/chip_option"
-      app:chipsStyle="onDark"
+      app:chipsStyle="onImage"
       app:selected="false" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -22,7 +22,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="@string/chip_option"
-      app:chipsStyle="onDark"
+      app:chipsStyle="onImage"
       app:selected="true" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -31,7 +31,7 @@
       android:layout_margin="@dimen/bpkSpacingSm"
       android:enabled="false"
       android:text="@string/chip_option"
-      app:chipsStyle="onDark" />
+      app:chipsStyle="onImage" />
   </LinearLayout>
 
   <LinearLayout
@@ -44,7 +44,7 @@
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="@string/chip_dropdown"
       app:chipType="dropdown"
-      app:chipsStyle="onDark"
+      app:chipsStyle="onImage"
       app:selected="false" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -53,7 +53,7 @@
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="@string/chip_dropdown"
       app:chipType="dropdown"
-      app:chipsStyle="onDark"
+      app:chipsStyle="onImage"
       app:selected="true" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -63,7 +63,7 @@
       android:enabled="false"
       android:text="@string/chip_dropdown"
       app:chipType="dropdown"
-      app:chipsStyle="onDark" />
+      app:chipsStyle="onImage" />
   </LinearLayout>
 
   <net.skyscanner.backpack.chip.BpkChip
@@ -73,7 +73,7 @@
     android:layout_margin="@dimen/bpkSpacingSm"
     android:text="@string/chip_dismiss"
     app:chipType="dismiss"
-    app:chipsStyle="onDark" />
+    app:chipsStyle="onImage" />
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -85,7 +85,7 @@
       android:layout_margin="@dimen/bpkSpacingSm"
       android:drawableStart="@drawable/bpk_deals"
       android:text="@string/chip_option"
-      app:chipsStyle="onDark"
+      app:chipsStyle="onImage"
       app:selected="false" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -94,7 +94,7 @@
       android:layout_margin="@dimen/bpkSpacingSm"
       android:drawableStart="@drawable/bpk_deals"
       android:text="@string/chip_option"
-      app:chipsStyle="onDark"
+      app:chipsStyle="onImage"
       app:selected="true" />
 
     <net.skyscanner.backpack.chip.BpkChip
@@ -104,7 +104,7 @@
       android:drawableStart="@drawable/bpk_deals"
       android:enabled="false"
       android:text="@string/chip_option"
-      app:chipsStyle="onDark" />
+      app:chipsStyle="onImage" />
   </LinearLayout>
 </LinearLayout>
 

@@ -39,12 +39,6 @@ open class BpkChip @JvmOverloads constructor(
   private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
   private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
 
-  var disabled: Boolean = false
-    set(value) {
-      field = value
-      this.isEnabled = !disabled
-    }
-
   private var appearance: BpkChipAppearance
 
   var style: Style
@@ -86,7 +80,6 @@ open class BpkChip @JvmOverloads constructor(
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
       .use {
-        disabled = it.getBoolean(R.styleable.BpkChip_disabled, false)
         isSelected = it.getBoolean(R.styleable.BpkChip_selected, false)
         val iconId = it.getResourceId(R.styleable.BpkChip_chipIcon, 0)
         if (iconId != 0) {
@@ -99,7 +92,7 @@ open class BpkChip @JvmOverloads constructor(
   }
 
   fun toggle() {
-    if (!disabled) {
+    if (isEnabled) {
       isSelected = !isSelected
     }
   }

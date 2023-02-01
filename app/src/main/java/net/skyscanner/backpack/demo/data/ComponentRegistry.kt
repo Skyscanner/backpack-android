@@ -94,6 +94,7 @@ import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
 import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
+import net.skyscanner.backpack.compose.chip.BpkChipStyle
 
 interface RegistryItem {
   val name: String
@@ -300,11 +301,17 @@ object ComponentRegistry {
           mapOf(
             "Default" story NodeData { ChipStory of R.layout.fragment_chip },
             "On Dark" story NodeData { ChipStory of R.layout.fragment_chip_ondark },
-            "With icon" story NodeData { ChipStory of R.layout.fragment_chip_with_icon },
-            "With icon RTL" story NodeData { ChipStory of R.layout.fragment_chip_with_icon with Direction.RTL },
+            "On Image" story NodeData { ChipStory of R.layout.fragment_chip_on_image },
           ),
         ),
-        TAB_TITLE_COMPOSE composeStory { ComposeChipStory() },
+        TAB_TITLE_COMPOSE story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Default" composeStory { ComposeChipStory(BpkChipStyle.Default) },
+            "On Dark" composeStory { ComposeChipStory(BpkChipStyle.OnDark) },
+            "On Image" composeStory { ComposeChipStory(BpkChipStyle.OnImage) },
+          ),
+        ),
       ),
     ),
     "Checkbox" story NodeData(

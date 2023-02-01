@@ -60,7 +60,7 @@ class BpkChipTest : BpkSnapshotTest() {
   fun disabled() {
     val view = BpkChip(testContext)
     view.text = "Chip"
-    view.disabled = true
+    view.isEnabled = false
     snap(view)
   }
 
@@ -90,7 +90,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "Chip"
     view.style = BpkChip.Style.OnDark
-    view.disabled = true
+    view.isEnabled = false
     snap(view)
   }
 
@@ -120,7 +120,7 @@ class BpkChipTest : BpkSnapshotTest() {
     val view = BpkChip(testContext)
     view.text = "Chip"
     view.style = BpkChip.Style.OnImage
-    view.disabled = true
+    view.isEnabled = false
     snap(view)
   }
 
@@ -187,7 +187,7 @@ class BpkChipTest : BpkSnapshotTest() {
     view.text = "Chip"
     view.icon = AppCompatResources.getDrawable(testContext, R.drawable.bpk_account)
     view.type = BpkChip.Type.Dropdown
-    view.disabled = true
+    view.isEnabled = true
     snap(view)
   }
 }
