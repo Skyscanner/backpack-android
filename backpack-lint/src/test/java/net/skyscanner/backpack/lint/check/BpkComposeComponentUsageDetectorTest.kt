@@ -44,7 +44,7 @@ fun CustomButton() { Button() }""",
       .expectWarningCount(1)
       .expect(
         """
-src/test.kt:4: Warning: Backpack component available for androidx.compose.material.Button. Use net.skyscanner.backpack.compose.button.BpkButton instead. More info at https://backpack.github.io/components/button [BpkComposeComponentUsage]
+src/test.kt:4: Warning: Backpack component available for androidx.compose.material.Button. Use net.skyscanner.backpack.compose.button.BpkButton instead. More info at https://skyscanner.design/latest/components/button/compose.html [BpkComposeComponentUsage]
 fun CustomButton() { Button() }
                      ~~~~~~~~
 0 errors, 1 warnings
