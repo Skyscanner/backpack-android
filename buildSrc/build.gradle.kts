@@ -10,7 +10,7 @@ plugins {
 dependencies {
   implementation(gradleApi())
   implementation("com.android.tools.build:gradle:7.4.1")  // keep in sync with sdk-common version - If the Gradle plugin version is X.Y.Z, then the sdk-common version is (X+23).Y.Z.
-  implementation("com.android.tools:sdk-common:30.4.0")
+  implementation("com.android.tools:sdk-common:30.4.1")
   implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
   implementation("com.squareup:kotlinpoet:1.12.0")
   implementation("com.google.guava:guava:31.1-jre")
