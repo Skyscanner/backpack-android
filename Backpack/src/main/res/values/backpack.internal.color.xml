@@ -47,13 +47,10 @@
     <color name="__privateButtonSecondaryOnDarkNormalBackground">#ff243346</color>
     <color name="__privateButtonSecondaryOnDarkPressedBackground">#ff010913</color>
     <color name="__privateButtonSecondaryPressedBackground">#ffc2c9cd</color>
-    <color name="__privateChipDefaultNormalBackground">#ffe0e3e5</color>
-    <color name="__privateChipDefaultOnBackground">#ff05203c</color>
-    <color name="__privateChipDefaultPressedBackground">#ffc2c9cd</color>
     <color name="__privateChipDisabledBackground">#ffe0e3e5</color>
-    <color name="__privateChipOnDarkNormalBackground">#33ffffff</color>
     <color name="__privateChipOnDarkOnBackground">#ffffffff</color>
-    <color name="__privateChipOnDarkPressedBackground">#ffc2c9cd</color>
+    <color name="__privateChipOnDarkOnDismissIcon">#ff545860</color>
+    <color name="__privateChipOnDarkPressedStroke">#ffffffff</color>
     <color name="__privateSkeletonShimmerCenter">#99ffffff</color>
     <color name="__privateSkeletonShimmerStartEnd">#00ffffff</color>
 </resources>
