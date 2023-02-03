@@ -118,6 +118,7 @@ object DocsRegistry {
     ViewScreenshot("Nudger - View", "all"),
     ComposeScreenshot("Nudger - Compose", "all"),
     ViewScreenshot("Overlay", "all"),
+    ComposeScreenshot("Page Indicator - Compose", "all"),
     ViewScreenshot("Panel - View", "all"),
     ComposeScreenshot("Panel - Compose", "all"),
     ComposeScreenshot("Price - Small", "small"),

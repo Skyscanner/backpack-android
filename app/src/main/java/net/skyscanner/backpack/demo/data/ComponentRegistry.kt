@@ -50,6 +50,7 @@ import net.skyscanner.backpack.demo.compose.HorizontalNavComposeStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.NudgerStory
+import net.skyscanner.backpack.demo.compose.PageIndicatorStory
 import net.skyscanner.backpack.demo.compose.PanelStory
 import net.skyscanner.backpack.demo.compose.PriceStory
 import net.skyscanner.backpack.demo.compose.RadiiComposeStory
@@ -395,6 +396,7 @@ object ComponentRegistry {
       ),
     ),
     "Overlay" story NodeData { Story of R.layout.fragment_overlay },
+    "Page Indicator" composeStory { PageIndicatorStory() },
     "Panel" story NodeData(
       { children -> TabStory of children },
       mapOf(
