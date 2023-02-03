@@ -18,12 +18,10 @@
 
 package net.skyscanner.backpack.compose.pageindicator
 
-import androidx.compose.foundation.background
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -71,9 +69,15 @@ class BpkPageIndicatorTest : BpkSnapshotTest() {
     currentIndex: Int,
     totalIndicators: Int,
     style: BpkPageIndicatorStyle,
-  ) = snap {
+  ) = snap(
+    background = {
+      when (style) {
+        BpkPageIndicatorStyle.Default -> BpkTheme.colors.canvas
+        else -> BpkTheme.colors.surfaceContrast
+      }
+    }
+  ) {
     BpkPageIndicator(
-      modifier = Modifier.background(color = Color.Magenta),
       currentIndex = currentIndex,
       totalIndicators = totalIndicators,
       style = style,
