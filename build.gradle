@@ -17,7 +17,7 @@
  */
 
 buildscript {
-  ext.kotlin_version = '1.8.0'
+  ext.kotlin_version = '1.8.10'
   ext.compose_compiler_version = '1.4.0'
   ext.detekt_version = '1.22.0'
   ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.7.20"
