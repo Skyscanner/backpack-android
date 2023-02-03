@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
   style="@style/App.Story"
-  android:background="@color/bpkTextOnLight"
-  android:orientation="vertical"
-  tools:ignore="HardcodedText">
+  android:background="@color/bpkSurfaceContrast"
+  android:orientation="vertical">
 
-  <androidx.appcompat.widget.LinearLayoutCompat
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -15,39 +13,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Afghanistan"
-      app:chipsStyle="onDark"
-      app:disabled="true"
-      app:selected="false" />
-
-    <net.skyscanner.backpack.chip.BpkChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Belgium"
-      app:chipsStyle="onDark"
-      app:disabled="false"
-      app:selected="false" />
-
-    <net.skyscanner.backpack.chip.BpkChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Canada"
-      app:chipsStyle="onDark"
-      app:disabled="false"
-      app:selected="false" />
-  </androidx.appcompat.widget.LinearLayoutCompat>
-
-  <androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <net.skyscanner.backpack.chip.BpkChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Denmark"
+      android:text="@string/chip_option"
       app:chipsStyle="onDark"
       app:selected="false" />
 
@@ -55,22 +21,20 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Ethiopia"
+      android:text="@string/chip_option"
       app:chipsStyle="onDark"
-      app:disabled="false"
       app:selected="true" />
 
     <net.skyscanner.backpack.chip.BpkChip
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Fiji"
-      app:chipsStyle="onDark"
-      app:disabled="false"
-      app:selected="false" />
-  </androidx.appcompat.widget.LinearLayoutCompat>
+      android:enabled="false"
+      android:text="@string/chip_option"
+      app:chipsStyle="onDark" />
+  </LinearLayout>
 
-  <androidx.appcompat.widget.LinearLayoutCompat
+  <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -78,7 +42,8 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Germany"
+      android:text="@string/chip_dropdown"
+      app:chipType="dropdown"
       app:chipsStyle="onDark"
       app:selected="false" />
 
@@ -86,57 +51,60 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Honduras"
+      android:text="@string/chip_dropdown"
+      app:chipType="dropdown"
       app:chipsStyle="onDark"
-      app:disabled="false"
-      app:selected="false" />
-
-    <net.skyscanner.backpack.chip.BpkChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="India"
-      app:chipsStyle="onDark"
-      app:disabled="false"
       app:selected="true" />
-  </androidx.appcompat.widget.LinearLayoutCompat>
-
-  <androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
     <net.skyscanner.backpack.chip.BpkChip
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Jamaica"
-      app:chipsStyle="onDark"
-      app:selected="false" />
+      android:enabled="false"
+      android:text="@string/chip_dropdown"
+      app:chipType="dropdown"
+      app:chipsStyle="onDark" />
+  </LinearLayout>
 
-    <net.skyscanner.backpack.chip.BpkChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Kosovo"
-      app:chipsStyle="onDark"
-      app:disabled="true" />
-
-    <net.skyscanner.backpack.chip.BpkChip
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:text="Lesotho"
-      app:chipsStyle="onDark"
-      app:disabled="false"
-      app:selected="false" />
-  </androidx.appcompat.widget.LinearLayoutCompat>
   <net.skyscanner.backpack.chip.BpkChip
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
     android:layout_margin="@dimen/bpkSpacingSm"
-    android:text="Madagascar"
-    app:chipsStyle="onDark"
-    app:disabled="false"
-    app:selected="true" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+    android:text="@string/chip_dismiss"
+    app:chipType="dismiss"
+    app:chipsStyle="onDark" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <net.skyscanner.backpack.chip.BpkChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:drawableStart="@drawable/bpk_deals"
+      android:text="@string/chip_option"
+      app:chipsStyle="onDark"
+      app:selected="false" />
+
+    <net.skyscanner.backpack.chip.BpkChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:drawableStart="@drawable/bpk_deals"
+      android:text="@string/chip_option"
+      app:chipsStyle="onDark"
+      app:selected="true" />
+
+    <net.skyscanner.backpack.chip.BpkChip
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/bpkSpacingSm"
+      android:drawableStart="@drawable/bpk_deals"
+      android:enabled="false"
+      android:text="@string/chip_option"
+      app:chipsStyle="onDark" />
+  </LinearLayout>
+</LinearLayout>
 

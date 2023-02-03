@@ -16,11 +16,11 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/on-dark.png" alt="On dark Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/on-dark_dm.png" alt="On dark Chip component - dark mode" width="375" /> |
 
-## With icon
+## On Image
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/with-icon.png" alt="With icon Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/with-icon_dm.png" alt="With icon Chip component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/on-image.png" alt="On Image Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/on-image_dm.png" alt="On Image Chip component - dark mode" width="375" /> |
 
 ## Installation
 
@@ -38,11 +38,11 @@ Example of a chip in XML
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/bpkSpacingSm"
       android:text="Message"
-      app:disabled="true"
+      android:enabled="true"
       app:selected="true"
       app:chipIcon="@drawable/bpk_close"
       app:chipStyle="onDark"
-      app:chipType="select" />
+      app:chipType="dropdown" />
 ```
 
 Example of a chip in Kotlin
@@ -53,14 +53,14 @@ import net.skyscanner.backpack.chip.BpkChip
 BpkChip(context).apply {
   text = "Message"
   isSelected = true
-  disabled = false
+  enabled = true
   chipBackgroundColor = context.getColor(R.color.bpkSkyGrayTint07)
   chipTextColor = context.getColor(R.color.bpkTextPrimary)
   chipSelectedBackgroundColor = context.getColor(R.color.bpkSkyBlue)
   disabledBackgroundColor = context.getColor(R.color.bpkSkyGrayTint07)
   chipIcon = AppCompatResources.getDrawable(context, R.drawable.bpk_account)
   style = BpkChip.Style.OnDark
-  type = BpkChip.Type.Select
+  type = BpkChip.Type.Dropdown
 }
 ```
 
