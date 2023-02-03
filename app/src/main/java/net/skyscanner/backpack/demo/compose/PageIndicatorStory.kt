@@ -57,10 +57,10 @@ fun PageIndicatorStory(
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
     BpkText(text = stringResource(id = R.string.page_indicator_less_than_5))
-    PageIndicatorRow(totalIndicators = 3, style = BpkPageIndicatorStyle.Default)
+    Row(totalIndicators = 3, style = BpkPageIndicatorStyle.Default)
 
     BpkText(text = stringResource(id = R.string.page_indicator_more_than_5))
-    PageIndicatorRow(totalIndicators = 8, style = BpkPageIndicatorStyle.Default)
+    Row(totalIndicators = 8, style = BpkPageIndicatorStyle.Default)
 
     BpkText(text = stringResource(id = R.string.page_indicator_over_image))
     Box(
@@ -74,13 +74,13 @@ fun PageIndicatorStory(
         contentDescription = "",
         contentScale = ContentScale.FillWidth,
       )
-      PageIndicatorRow(totalIndicators = 8, style = BpkPageIndicatorStyle.OverImage)
+      Row(totalIndicators = 8, style = BpkPageIndicatorStyle.OverImage)
     }
   }
 }
 
 @Composable
-private fun PageIndicatorRow(
+private fun Row(
   totalIndicators: Int,
   style: BpkPageIndicatorStyle,
   modifier: Modifier = Modifier,

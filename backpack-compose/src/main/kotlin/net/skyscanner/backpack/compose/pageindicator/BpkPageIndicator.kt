@@ -28,11 +28,12 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -40,10 +41,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import java.lang.Integer.min
@@ -64,9 +67,11 @@ fun BpkPageIndicator(
   style: BpkPageIndicatorStyle = BpkPageIndicatorStyle.Default,
 ) {
 
+  if (totalIndicators <= 1) return
   val indicatorSize = BpkSpacing.Md
   val indicatorCount = min(totalIndicators, DISPLAY_DOTS_MAX)
   val transitionDistance = LocalDensity.current.run { (indicatorSize * 2).toPx().toInt() }
+  val rtlMultiplier = if (LocalLayoutDirection.current == LayoutDirection.Rtl) -1 else 1
 
   AnimatedContent(
     modifier = modifier.pageIndicatorModifier(
@@ -85,11 +90,11 @@ fun BpkPageIndicator(
       ContentTransform(
         targetContentEnter = if (shouldAnimate) slideInHorizontally(
           animationSpec = tween(TRANSITION_DURATION),
-          initialOffsetX = { transitionDistance * multiplier },
+          initialOffsetX = { transitionDistance * multiplier * rtlMultiplier },
         ) else EnterTransition.None,
         initialContentExit = if (shouldAnimate) slideOutHorizontally(
           animationSpec = tween(TRANSITION_DURATION),
-          targetOffsetX = { transitionDistance * -multiplier },
+          targetOffsetX = { transitionDistance * -multiplier * rtlMultiplier },
         ) else ExitTransition.None,
       )
     },
@@ -114,7 +119,6 @@ private fun PageIndicatorRow(
   Row(
     modifier = modifier,
     verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.spacedBy(indicatorSize),
   ) {
     val targetIndex = if (totalIndicators > DISPLAY_DOTS_MAX) {
       when (index) {
@@ -132,6 +136,7 @@ private fun PageIndicatorRow(
         isSelected = i == targetIndex,
         style = style,
       )
+      Spacer(modifier = Modifier.width(indicatorSize))
     }
   }
 }
@@ -151,7 +156,9 @@ private fun PageIndicatorDot(
         color = animateColorAsState(
           targetValue = when {
             isSelected -> if (style == BpkPageIndicatorStyle.Default) BpkTheme.colors.textSecondary else BpkTheme.colors.textOnDark
-            else -> if (style == BpkPageIndicatorStyle.Default) BpkTheme.colors.line else BpkTheme.colors.textOnDark.copy(alpha = 0.5f)
+            else -> if (style == BpkPageIndicatorStyle.Default) BpkTheme.colors.line else BpkTheme.colors.textOnDark.copy(
+              alpha = 0.5f,
+            )
           },
           animationSpec = tween(TRANSITION_DURATION),
         ).value,
@@ -166,7 +173,7 @@ private fun Modifier.pageIndicatorModifier(
   currentIndex: Int,
   indicatorLabel: String,
 ): Modifier = size(
-  width = indicatorSize * (2 * indicatorCount - 1) + indicatorSize * 2,
+  width = indicatorSize * (2 * indicatorCount + 1),
   height = indicatorSize * 3,
 )
   .padding(start = indicatorSize, end = indicatorSize)
@@ -190,4 +197,4 @@ private fun Modifier.pageIndicatorModifier(
   )
 
 private const val DISPLAY_DOTS_MAX = 5
-private const val TRANSITION_DURATION = 300
+private const val TRANSITION_DURATION = 200

@@ -276,5 +276,5 @@
   <string name="page_indicator_over_image">Over Image</string>
   <string name="page_indicator_next">Next</string>
   <string name="page_indicator_prev">Prev</string>
-  <string name="page_indicator_label_indicator">%d out of %d</string>
+  <string name="page_indicator_label_indicator">page %d of %d</string>
 </resources>
