@@ -22,41 +22,62 @@ import androidx.compose.foundation.background
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.Parameterized
 
-@RunWith(Parameterized::class)
-class BpkPageIndicatorTest(val style: BpkPageIndicatorStyle) : BpkSnapshotTest() {
+@RunWith(AndroidJUnit4::class)
+class BpkPageIndicatorTest : BpkSnapshotTest() {
 
   @Test
-  fun lessThan5pages() = snap {
-    BpkPageIndicator(
-      modifier = Modifier.background(color = Color.Magenta),
+  fun lessThan5pagesDefault() {
+    testPageIndicator(
       currentIndex = 0,
       totalIndicators = 3,
-      style = style,
-      indicatorLabel = stringResource(R.string.page_indicator_label_indicator, 1, 3),
+      style = BpkPageIndicatorStyle.Default,
     )
   }
 
   @Test
-  fun moreThan5pages() = snap {
-    BpkPageIndicator(
-      modifier = Modifier.background(color = Color.Magenta),
-      currentIndex = 4,
-      totalIndicators = 8,
-      style = style,
-      indicatorLabel = stringResource(R.string.page_indicator_label_indicator, 4, 8),
+  fun lessThan5pagesOverImage() {
+    testPageIndicator(
+      currentIndex = 0,
+      totalIndicators = 3,
+      style = BpkPageIndicatorStyle.OverImage,
     )
   }
 
-  companion object {
+  @Test
+  fun moreThan5pagesDefault() {
+    testPageIndicator(
+      currentIndex = 4,
+      totalIndicators = 8,
+      style = BpkPageIndicatorStyle.Default,
+    )
+  }
 
-    @JvmStatic
-    @Parameterized.Parameters(name = "{0} Screenshot")
-    fun flavours(): List<BpkPageIndicatorStyle> = BpkPageIndicatorStyle.values().toList()
+  @Test
+  fun moreThan5pagesOverImage() {
+    testPageIndicator(
+      currentIndex = 4,
+      totalIndicators = 8,
+      style = BpkPageIndicatorStyle.OverImage,
+    )
+  }
+
+  private fun testPageIndicator(
+    currentIndex: Int,
+    totalIndicators: Int,
+    style: BpkPageIndicatorStyle,
+  ) = snap {
+    BpkPageIndicator(
+      modifier = Modifier.background(color = Color.Magenta),
+      currentIndex = currentIndex,
+      totalIndicators = totalIndicators,
+      style = style,
+      indicatorLabel = stringResource(R.string.page_indicator_label_indicator, currentIndex, totalIndicators),
+    )
   }
 }
