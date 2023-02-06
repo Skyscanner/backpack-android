@@ -6,9 +6,6 @@
     "node": "^16.13.0",
     "npm": "^8.1.0"
   },
-  "scripts": {
-    "danger": "danger ci"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Skyscanner/backpack-android.git"
@@ -21,8 +18,6 @@
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
     "@skyscanner/bpk-foundations-android": "^7.0.0",
-    "@skyscanner/bpk-svgs": "^16.1.1",
-    "danger": "^11.0.2",
-    "lodash": "^4.17.21"
+    "@skyscanner/bpk-svgs": "^16.1.1"
   }
 }

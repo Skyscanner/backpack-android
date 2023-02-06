@@ -33,8 +33,10 @@ jobs:
           nvm use
           npm ci
 
-      - name: Danger check
-        run: npm run danger
+      - name: Danger
+        uses: docker://ghcr.io/danger/danger-kotlin:1.2.0
+        with:
+          args: --failOnErrors --no-publish-check
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
