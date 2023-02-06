@@ -37,10 +37,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -158,6 +161,7 @@ private fun PageIndicatorDot(
   )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 private fun Modifier.pageIndicatorModifier(
   indicatorCount: Int,
   indicatorSize: Dp,
@@ -166,6 +170,7 @@ private fun Modifier.pageIndicatorModifier(
   height = indicatorSize * 3,
 )
   .padding(start = indicatorSize, end = indicatorSize)
+  .semantics(mergeDescendants = true) { invisibleToUser() }
 
 private const val DISPLAY_DOTS_MAX = 5
 private const val TRANSITION_DURATION = 200
