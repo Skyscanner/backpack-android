@@ -20,9 +20,8 @@ package net.skyscanner.backpack.compose.pageindicator
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -51,6 +50,7 @@ enum class BpkPageIndicatorStyle {
   OverImage,
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BpkPageIndicator(
   currentIndex: Int,
@@ -62,21 +62,25 @@ fun BpkPageIndicator(
   if (totalIndicators <= 1) throw IllegalArgumentException("totalIndicators must be greater than 1")
   if (currentIndex !in 0 until totalIndicators) throw IllegalArgumentException("currentIndex must be between 0 and $totalIndicators")
   val indicatorSize = BpkSpacing.Md
+  val indicatorBoxWidth = indicatorSize * 2
+  val indicatorBoxHeight = indicatorSize * 3
   val indicatorCount = min(totalIndicators, DISPLAY_DOTS_MAX)
+  val rowWidth = (indicatorBoxWidth * indicatorCount) + indicatorSize
 
   val coroutineScope = rememberCoroutineScope()
   val state = rememberLazyListState()
 
-  val offsetCount = if (totalIndicators > DISPLAY_DOTS_MAX) {
-    when (currentIndex) {
-      0 -> 0
-      1 -> 2
-      totalIndicators - 2 -> 6
-      totalIndicators - 1 -> 8
-      else -> 4
+  val offsetCount = when {
+    totalIndicators > DISPLAY_DOTS_MAX -> {
+      when (currentIndex) {
+        0 -> 0
+        1 -> 2
+        totalIndicators - 2 -> 6
+        totalIndicators - 1 -> 8
+        else -> 4
+      }
     }
-  } else {
-    0
+    else -> 0
   }
   val offsetPx = with(LocalDensity.current) { (indicatorSize * offsetCount).toPx().toInt() }
   LaunchedEffect(currentIndex) {
@@ -86,27 +90,21 @@ fun BpkPageIndicator(
   }
 
   LazyRow(
-    modifier = modifier.pageIndicatorModifier(indicatorCount, indicatorSize),
+    modifier = modifier.width(rowWidth)
+      .height(indicatorBoxHeight)
+      .padding(start = indicatorSize / 2, end = indicatorSize / 2)
+      .semantics(mergeDescendants = true) { invisibleToUser() },
     state = state,
-    horizontalArrangement = Arrangement.Center,
     verticalAlignment = Alignment.CenterVertically,
     userScrollEnabled = false,
   ) {
     itemsIndexed(
-      items = (0 until totalIndicators - 1).toList(),
+      items = (0 until totalIndicators).toList(),
       key = { index, _ -> index.hashCode() },
     ) { index, _ ->
       PageIndicatorDot(
         indicatorSize = indicatorSize,
         isSelected = index == currentIndex,
-        style = style,
-      )
-      Spacer(modifier = Modifier.width(indicatorSize))
-    }
-    item {
-      PageIndicatorDot(
-        indicatorSize = indicatorSize,
-        isSelected = totalIndicators - 1 == currentIndex,
         style = style,
       )
     }
@@ -121,31 +119,25 @@ private fun PageIndicatorDot(
   modifier: Modifier = Modifier,
 ) {
   Box(
-    modifier = modifier
-      .clip(CircleShape)
-      .size(indicatorSize)
-      .background(
-        color = animateColorAsState(
-          targetValue = when {
-            isSelected -> if (style == BpkPageIndicatorStyle.Default) BpkTheme.colors.textSecondary else BpkTheme.colors.textOnDark
-            else -> if (style == BpkPageIndicatorStyle.Default) BpkTheme.colors.line else BpkTheme.colors.textOnDark.copy(
-              alpha = 0.5f,
-            )
-          },
-        ).value,
-      ),
-  )
+    modifier = modifier.size(indicatorSize * 2),
+    contentAlignment = Alignment.Center,
+  ) {
+    Box(
+      modifier = Modifier
+        .clip(CircleShape)
+        .size(indicatorSize)
+        .background(
+          color = animateColorAsState(
+            targetValue = when {
+              isSelected -> if (style == BpkPageIndicatorStyle.Default) BpkTheme.colors.textSecondary else BpkTheme.colors.textOnDark
+              else -> if (style == BpkPageIndicatorStyle.Default) BpkTheme.colors.line else BpkTheme.colors.textOnDark.copy(
+                alpha = 0.5f,
+              )
+            },
+          ).value,
+        ),
+    )
+  }
 }
-
-@OptIn(ExperimentalComposeUiApi::class)
-private fun Modifier.pageIndicatorModifier(
-  indicatorCount: Int,
-  indicatorSize: Dp,
-): Modifier = size(
-  width = indicatorSize * (2 * indicatorCount + 1),
-  height = indicatorSize * 3,
-)
-  .padding(start = indicatorSize, end = indicatorSize)
-  .semantics(mergeDescendants = true) { invisibleToUser() }
 
 private const val DISPLAY_DOTS_MAX = 5
