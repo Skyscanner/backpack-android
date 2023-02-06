@@ -18,34 +18,30 @@
 
 package net.skyscanner.backpack.compose.pageindicator
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ContentTransform
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.LayoutDirection
+import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import java.lang.Integer.min
@@ -55,7 +51,6 @@ enum class BpkPageIndicatorStyle {
   OverImage,
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BpkPageIndicator(
   currentIndex: Int,
@@ -68,70 +63,52 @@ fun BpkPageIndicator(
   if (currentIndex !in 0 until totalIndicators) throw IllegalArgumentException("currentIndex must be between 0 and $totalIndicators")
   val indicatorSize = BpkSpacing.Md
   val indicatorCount = min(totalIndicators, DISPLAY_DOTS_MAX)
-  val transitionDistance = with(LocalDensity.current) { (indicatorSize * 2).toPx().toInt() }
-  val rtlMultiplier = if (LocalLayoutDirection.current == LayoutDirection.Rtl) -1 else 1
 
-  AnimatedContent(
-    modifier = modifier.pageIndicatorModifier(
-      indicatorCount = indicatorCount,
-      indicatorSize = indicatorSize,
-    ),
-    targetState = currentIndex,
-    transitionSpec = {
-      val isIncreasing = targetState >= initialState
-      val multiplier = if (isIncreasing) 1 else -1
-      val indexRange = if (isIncreasing) 3..totalIndicators - 3 else 2..totalIndicators - 4
-      val shouldAnimate = totalIndicators > DISPLAY_DOTS_MAX && currentIndex in indexRange
-      ContentTransform(
-        targetContentEnter = if (shouldAnimate) slideInHorizontally(
-          animationSpec = tween(TRANSITION_DURATION),
-          initialOffsetX = { transitionDistance * multiplier * rtlMultiplier },
-        ) else EnterTransition.None,
-        initialContentExit = if (shouldAnimate) slideOutHorizontally(
-          animationSpec = tween(TRANSITION_DURATION),
-          targetOffsetX = { transitionDistance * -multiplier * rtlMultiplier },
-        ) else ExitTransition.None,
-      )
-    },
-  ) { index ->
-    PageIndicatorRow(
-      indicatorSize = indicatorSize,
-      totalIndicators = totalIndicators,
-      index = index,
-      style = style,
-    )
-  }
-}
+  val coroutineScope = rememberCoroutineScope()
+  val state = rememberLazyListState()
 
-@Composable
-private fun PageIndicatorRow(
-  indicatorSize: Dp,
-  totalIndicators: Int,
-  index: Int,
-  style: BpkPageIndicatorStyle,
-  modifier: Modifier = Modifier,
-) {
-  Row(
-    modifier = modifier,
-    verticalAlignment = Alignment.CenterVertically,
-  ) {
-    val targetIndex = if (totalIndicators > DISPLAY_DOTS_MAX) {
-      when (index) {
-        in 0..2 -> index
-        totalIndicators - 2 -> DISPLAY_DOTS_MAX - 2
-        totalIndicators - 1 -> DISPLAY_DOTS_MAX - 1
-        else -> 2
-      }
-    } else {
-      index
+  val offsetCount = if (totalIndicators > DISPLAY_DOTS_MAX) {
+    when (currentIndex) {
+      0 -> 0
+      1 -> 2
+      totalIndicators - 2 -> 6
+      totalIndicators - 1 -> 8
+      else -> 4
     }
-    for (i in 0 until totalIndicators) {
+  } else {
+    0
+  }
+  val offsetPx = with(LocalDensity.current) { (indicatorSize * offsetCount).toPx().toInt() }
+  LaunchedEffect(currentIndex) {
+    coroutineScope.launch {
+      state.animateScrollToItem(currentIndex, -offsetPx)
+    }
+  }
+
+  LazyRow(
+    modifier = modifier.pageIndicatorModifier(indicatorCount, indicatorSize),
+    state = state,
+    horizontalArrangement = Arrangement.Center,
+    verticalAlignment = Alignment.CenterVertically,
+    userScrollEnabled = false,
+  ) {
+    itemsIndexed(
+      items = (0 until totalIndicators - 1).toList(),
+      key = { index, _ -> index.hashCode() },
+    ) { index, _ ->
       PageIndicatorDot(
         indicatorSize = indicatorSize,
-        isSelected = i == targetIndex,
+        isSelected = index == currentIndex,
         style = style,
       )
       Spacer(modifier = Modifier.width(indicatorSize))
+    }
+    item {
+      PageIndicatorDot(
+        indicatorSize = indicatorSize,
+        isSelected = totalIndicators - 1 == currentIndex,
+        style = style,
+      )
     }
   }
 }
@@ -155,7 +132,6 @@ private fun PageIndicatorDot(
               alpha = 0.5f,
             )
           },
-          animationSpec = tween(TRANSITION_DURATION),
         ).value,
       ),
   )
@@ -173,4 +149,3 @@ private fun Modifier.pageIndicatorModifier(
   .semantics(mergeDescendants = true) { invisibleToUser() }
 
 private const val DISPLAY_DOTS_MAX = 5
-private const val TRANSITION_DURATION = 200

@@ -24,6 +24,5 @@ BpkPageIndicator(
   currentIndex = 1,
   totalIndicators = 8,
   style = BpkPageIndicatorStyle.Default,
-  indicatorLabel = "screen 1 of 8",
 )
 ```
