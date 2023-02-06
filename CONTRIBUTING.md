@@ -10,10 +10,6 @@ Please ensure you have push rights to this repository, rather than forking the r
 
 ## Environment
 
-We use Node in this project. To manage the language runtime we recommend using [`nvm`][1]. The required Node version is in `.nvmrc`.
-
-With `nvm`, use `nvm use` to set the correct Node version in your machine.
-
 To set up the Android environment, install Android Studio. Make sure that "Android SDK Command-line Tools (latest)" are installed as well (in Android SDK manager). Once installed, use the following commands to set up the Android SDK:
 
 ```
@@ -37,7 +33,6 @@ $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-26;goog
 
 Given that you have a compatible environment as stated above you can now set up the project.
 
-+ `npm install` to install npm dependencies
 +  Open the project in Android Studio
 + If you are a Skyscanner employee, search the internal documentation for _"Guide – Setup Internal Backpack Android Builds"_ and follow the instructions.
 
@@ -207,7 +202,11 @@ Verify the screenshots and commit the changes.
 
 ## Token generation
 
-In some cases you may need to re-generate tokens after an update in foundation. To do so:
+In some cases you may need to re-generate tokens after an update in foundation. Token generation currently relies on node. To manage the language runtime we recommend using [`nvm`](https://github.com/creationix/nvm). The required Node version is in `.nvmrc`.
+
+With `nvm`, use `nvm use` to set the correct Node version in your machine.
+
+To update tokens:
 - Ensure the version for foundations + SVGs is up-to-date in `package.json`
 - Run `npm install` to ensure the node package is installed
 - Run `./gradlew generateTokens` to generate the tokens
@@ -232,10 +231,4 @@ Please see the [code review guidelines](https://github.com/Skyscanner/backpack/b
 
 ## Docs
 
-Run `npm run docs` to generate API docs. Docs will be generated in the `build/docs` folder by default. To provide a different output folder use `npm run docs -- -PdokkaOutput=/path/to/folder`
-
-Run `npm run docs:clean` to remove generated docs.
-
-
-
-[1]: https://github.com/creationix/nvm
+Run `./gradlew dokkaHtmlMultiModule` to generate API docs. Docs will be generated in the `dokka` folder.
