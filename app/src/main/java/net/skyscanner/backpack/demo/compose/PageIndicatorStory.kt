@@ -101,7 +101,6 @@ private fun PageIndicatorSample(
       currentIndex = currentIndex,
       totalIndicators = totalIndicators,
       style = style,
-      indicatorLabel = currentIndex.toString(),
     )
     BpkButton(text = stringResource(id = R.string.page_indicator_next)) {
       currentIndex = minOf(currentIndex + 1, totalIndicators - 1)

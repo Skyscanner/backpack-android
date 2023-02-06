@@ -34,7 +34,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -42,15 +41,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.setProgress
-import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import java.lang.Integer.min
-import kotlin.math.roundToInt
 
 enum class BpkPageIndicatorStyle {
   Default,
@@ -62,7 +57,6 @@ enum class BpkPageIndicatorStyle {
 fun BpkPageIndicator(
   currentIndex: Int,
   totalIndicators: Int,
-  indicatorLabel: String,
   modifier: Modifier = Modifier,
   style: BpkPageIndicatorStyle = BpkPageIndicatorStyle.Default,
 ) {
@@ -78,9 +72,6 @@ fun BpkPageIndicator(
     modifier = modifier.pageIndicatorModifier(
       indicatorCount = indicatorCount,
       indicatorSize = indicatorSize,
-      range = 0 until totalIndicators,
-      currentIndex = currentIndex,
-      indicatorLabel = indicatorLabel,
     ),
     targetState = currentIndex,
     transitionSpec = {
@@ -170,32 +161,11 @@ private fun PageIndicatorDot(
 private fun Modifier.pageIndicatorModifier(
   indicatorCount: Int,
   indicatorSize: Dp,
-  range: IntRange,
-  currentIndex: Int,
-  indicatorLabel: String,
 ): Modifier = size(
   width = indicatorSize * (2 * indicatorCount + 1),
   height = indicatorSize * 3,
 )
   .padding(start = indicatorSize, end = indicatorSize)
-  .semantics(mergeDescendants = true) {
-    setProgress { targetValue ->
-      // without this rounding the values will only decrease
-      val newValue = targetValue
-        .roundToInt()
-        .coerceIn(range)
-      newValue != currentIndex
-    }
-
-    // override describing percents
-    stateDescription = indicatorLabel
-  }
-  .progressSemantics(
-    // this is needed to use volume keys
-    value = currentIndex.toFloat(),
-    valueRange = range.first.toFloat()..range.last.toFloat(),
-    steps = range.last - range.first,
-  )
 
 private const val DISPLAY_DOTS_MAX = 5
 private const val TRANSITION_DURATION = 200

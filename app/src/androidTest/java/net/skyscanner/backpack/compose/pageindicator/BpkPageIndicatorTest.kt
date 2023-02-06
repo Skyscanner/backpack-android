@@ -18,11 +18,9 @@
 
 package net.skyscanner.backpack.compose.pageindicator
 
-import androidx.compose.ui.res.stringResource
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.demo.R
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -81,7 +79,6 @@ class BpkPageIndicatorTest : BpkSnapshotTest() {
       currentIndex = currentIndex,
       totalIndicators = totalIndicators,
       style = style,
-      indicatorLabel = stringResource(R.string.page_indicator_label_indicator, currentIndex, totalIndicators),
     )
   }
 }
