@@ -34,6 +34,7 @@ import net.skyscanner.backpack.compose.tokens.Star
 import net.skyscanner.backpack.compose.tokens.StarHalf
 import net.skyscanner.backpack.compose.tokens.StarOutline
 import net.skyscanner.backpack.compose.utils.ContentDescriptionScope
+import net.skyscanner.backpack.compose.utils.clickable
 import net.skyscanner.backpack.compose.utils.rememberContentDescriptionScope
 
 enum class BpkStarRatingSize {
@@ -65,6 +66,7 @@ fun BpkStarRating(
     modifier = modifier,
     rating = rating,
     contentDescription = contentDescription,
+    onRatingSelected = null,
   )
 }
 
@@ -85,6 +87,30 @@ fun BpkHotelRating(
     modifier = modifier,
     rating = rating.toFloat(),
     contentDescription = contentDescription,
+    onRatingSelected = null,
+  )
+}
+
+@Composable
+fun BpkInteractiveStarRating(
+  onStarClicked: (Int) -> Unit,
+  selectedRating: Int,
+  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
+  modifier: Modifier = Modifier,
+  rounding: BpkRatingRounding = BpkRatingRounding.Down,
+  size: BpkStarRatingSize = BpkStarRatingSize.Small,
+) {
+  BpkStarRating(
+    maxRating = 5,
+    rounding = rounding,
+    iconSize = when (size) {
+      BpkStarRatingSize.Large -> BpkIconSize.Large
+      BpkStarRatingSize.Small -> BpkIconSize.Small
+    },
+    modifier = modifier,
+    onRatingSelected = onStarClicked,
+    rating = selectedRating.toFloat(),
+    contentDescription = contentDescription,
   )
 }
 
@@ -95,6 +121,7 @@ private fun BpkStarRating(
   rounding: BpkRatingRounding,
   iconSize: BpkIconSize,
   contentDescription: ContentDescriptionScope.(Float, Int) -> String,
+  onRatingSelected: ((Int) -> Unit)?,
   modifier: Modifier = Modifier,
 ) {
   val coercedRating = rating.coerceIn(0f, maxRating.toFloat())
@@ -107,10 +134,23 @@ private fun BpkStarRating(
   Row(modifier = modifier.semantics { this.contentDescription = scope.contentDescription(roundedRating, maxRating) }) {
     for (item in 0 until maxRating) {
       val value = (roundedRating - item).coerceIn(0f, 1f)
+      val starModifier = Modifier.clickable { onRatingSelected?.invoke(item + 1) }
       when {
-        (value >= 0.0f && value < 0.5f) -> BpkStar(icon = BpkRatingStarType.Empty, iconSize = iconSize)
-        (value >= 0.5f && value < 1.0f) -> BpkStar(icon = BpkRatingStarType.Half, iconSize = iconSize)
-        else -> BpkStar(icon = BpkRatingStarType.Full, iconSize = iconSize)
+        (value >= 0.0f && value < 0.5f) -> BpkStar(
+          icon = BpkRatingStarType.Empty,
+          iconSize = iconSize,
+          modifier = starModifier,
+        )
+        (value >= 0.5f && value < 1.0f) -> BpkStar(
+          icon = BpkRatingStarType.Half,
+          iconSize = iconSize,
+          modifier = starModifier,
+        )
+        else -> BpkStar(
+          icon = BpkRatingStarType.Full,
+          iconSize = iconSize,
+          modifier = starModifier,
+        )
       }
     }
   }
