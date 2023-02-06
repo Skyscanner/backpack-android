@@ -148,6 +148,14 @@ tasks.dokkaHtmlMultiModule.configure {
   }
 }
 
+task installGitHooks(type: Copy) {
+  from new File(rootProject.rootDir, 'scripts/pre-commit')
+  into { new File(rootProject.rootDir, '.git/hooks') }
+  fileMode 0777
+}
+
+tasks.getByPath(':app:preBuild').dependsOn installGitHooks
+
 static File createNewFile(File parent, String path) {
   def file = new File(parent, path)
   file.parentFile.mkdirs()

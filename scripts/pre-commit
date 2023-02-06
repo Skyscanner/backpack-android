@@ -1,0 +1,2 @@
+#!/bin/sh
+./scripts/detekt-pre-commit-hook.sh
