@@ -60,7 +60,7 @@ fun BpkPageIndicator(
 ) {
 
   if (totalIndicators <= 1) throw IllegalArgumentException("totalIndicators must be greater than 1")
-  if (currentIndex !in 0 until totalIndicators) throw IllegalArgumentException("currentIndex must be between 0 and $totalIndicators")
+  val coercedIndex = currentIndex.coerceIn(0 until totalIndicators)
   val indicatorSize = BpkSpacing.Md
   val indicatorBoxWidth = indicatorSize * 2
   val indicatorBoxHeight = indicatorSize * 3
@@ -72,7 +72,7 @@ fun BpkPageIndicator(
 
   val offsetCount = when {
     totalIndicators > DISPLAY_DOTS_MAX -> {
-      when (currentIndex) {
+      when (coercedIndex) {
         0 -> 0
         1 -> 2
         totalIndicators - 2 -> 6
@@ -83,9 +83,9 @@ fun BpkPageIndicator(
     else -> 0
   }
   val offsetPx = with(LocalDensity.current) { (indicatorSize * offsetCount).toPx().toInt() }
-  LaunchedEffect(currentIndex) {
+  LaunchedEffect(coercedIndex) {
     coroutineScope.launch {
-      state.animateScrollToItem(currentIndex, -offsetPx)
+      state.animateScrollToItem(coercedIndex, -offsetPx)
     }
   }
 
@@ -104,7 +104,7 @@ fun BpkPageIndicator(
     ) { index, _ ->
       PageIndicatorDot(
         indicatorSize = indicatorSize,
-        isSelected = index == currentIndex,
+        isSelected = index == coercedIndex,
         style = style,
       )
     }
