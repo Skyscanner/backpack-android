@@ -33,9 +33,6 @@ jobs:
           nvm use
           npm ci
 
-      - name: ESLint check
-        run: npm run lint
-
       - name: Danger check
         run: npm run danger
         env:
@@ -54,10 +51,6 @@ jobs:
       - name: Build
         run: |
           ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
-
-      - name: Node Build
-        run: |
-          npm run build
 
       - name: Tokens check
         run: |

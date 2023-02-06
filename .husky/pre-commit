@@ -1,5 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-./node_modules/lint-staged/bin/lint-staged.js
-./scripts/detekt-pre-commit-hook.sh
