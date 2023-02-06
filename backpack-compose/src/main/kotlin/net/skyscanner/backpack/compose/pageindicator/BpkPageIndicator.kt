@@ -67,10 +67,11 @@ fun BpkPageIndicator(
   style: BpkPageIndicatorStyle = BpkPageIndicatorStyle.Default,
 ) {
 
-  if (totalIndicators <= 1) return
+  if (totalIndicators <= 1) throw IllegalArgumentException("totalIndicators must be greater than 1")
+  if (currentIndex !in 0 until totalIndicators) throw IllegalArgumentException("currentIndex must be between 0 and $totalIndicators")
   val indicatorSize = BpkSpacing.Md
   val indicatorCount = min(totalIndicators, DISPLAY_DOTS_MAX)
-  val transitionDistance = LocalDensity.current.run { (indicatorSize * 2).toPx().toInt() }
+  val transitionDistance = with(LocalDensity.current) { (indicatorSize * 2).toPx().toInt() }
   val rtlMultiplier = if (LocalLayoutDirection.current == LayoutDirection.Rtl) -1 else 1
 
   AnimatedContent(

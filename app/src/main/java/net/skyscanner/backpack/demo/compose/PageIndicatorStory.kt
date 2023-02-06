@@ -28,8 +28,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -57,10 +59,10 @@ fun PageIndicatorStory(
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
     BpkText(text = stringResource(id = R.string.page_indicator_less_than_5))
-    Row(totalIndicators = 3, style = BpkPageIndicatorStyle.Default)
+    PageIndicatorSample(totalIndicators = 3, style = BpkPageIndicatorStyle.Default)
 
     BpkText(text = stringResource(id = R.string.page_indicator_more_than_5))
-    Row(totalIndicators = 8, style = BpkPageIndicatorStyle.Default)
+    PageIndicatorSample(totalIndicators = 8, style = BpkPageIndicatorStyle.Default)
 
     BpkText(text = stringResource(id = R.string.page_indicator_over_image))
     Box(
@@ -74,18 +76,18 @@ fun PageIndicatorStory(
         contentDescription = "",
         contentScale = ContentScale.FillWidth,
       )
-      Row(totalIndicators = 8, style = BpkPageIndicatorStyle.OverImage)
+      PageIndicatorSample(totalIndicators = 8, style = BpkPageIndicatorStyle.OverImage)
     }
   }
 }
 
 @Composable
-private fun Row(
+private fun PageIndicatorSample(
   totalIndicators: Int,
   style: BpkPageIndicatorStyle,
   modifier: Modifier = Modifier,
 ) {
-  val (currentIndex, setCurrentIndex) = remember { mutableStateOf(0) }
+  var currentIndex by remember { mutableStateOf(0) }
 
   Row(
     modifier = modifier.fillMaxWidth(),
@@ -93,7 +95,7 @@ private fun Row(
     verticalAlignment = Alignment.CenterVertically,
   ) {
     BpkButton(text = stringResource(id = R.string.page_indicator_prev)) {
-      setCurrentIndex(maxOf(currentIndex - 1, 0))
+      currentIndex = maxOf(currentIndex - 1, 0)
     }
     BpkPageIndicator(
       currentIndex = currentIndex,
@@ -102,7 +104,7 @@ private fun Row(
       indicatorLabel = currentIndex.toString(),
     )
     BpkButton(text = stringResource(id = R.string.page_indicator_next)) {
-      setCurrentIndex(minOf(currentIndex + 1, totalIndicators - 1))
+      currentIndex = minOf(currentIndex + 1, totalIndicators - 1)
     }
   }
 }
