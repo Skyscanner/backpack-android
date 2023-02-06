@@ -93,7 +93,7 @@ fun BpkHotelRating(
 
 @Composable
 fun BpkInteractiveStarRating(
-  onStarClicked: (Int) -> Unit,
+  onRatingSelected: (Int) -> Unit,
   selectedRating: Int,
   contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
@@ -108,7 +108,7 @@ fun BpkInteractiveStarRating(
       BpkStarRatingSize.Small -> BpkIconSize.Small
     },
     modifier = modifier,
-    onRatingSelected = onStarClicked,
+    onRatingSelected = onRatingSelected,
     rating = selectedRating.toFloat(),
     contentDescription = contentDescription,
   )
