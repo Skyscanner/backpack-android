@@ -148,10 +148,14 @@ tasks.dokkaHtmlMultiModule.configure {
   }
 }
 
-task installGitHooks(type: Copy) {
-  from new File(rootProject.rootDir, 'scripts/pre-commit')
-  into { new File(rootProject.rootDir, '.git/hooks') }
-  fileMode 0777
+task installGitHooks() {
+  def command = Runtime.getRuntime().exec("git config core.hooksPath")
+  def currentGitHookDir = command.inputStream.text.trim()
+  def hooksPath = "hooks"
+  if (currentGitHookDir != hooksPath) {
+    Runtime.getRuntime().exec("git config --local core.hooksPath ${hooksPath}")
+    Runtime.getRuntime().exec("chmod -R +x ${hooksPath}")
+  }
 }
 
 tasks.getByPath(':app:preBuild').dependsOn installGitHooks
