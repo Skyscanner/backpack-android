@@ -95,7 +95,7 @@ private fun PageIndicatorSample(
     verticalAlignment = Alignment.CenterVertically,
   ) {
     BpkButton(text = stringResource(id = R.string.page_indicator_prev)) {
-      currentIndex = maxOf(currentIndex - 1, 0)
+      currentIndex = (currentIndex - 1).coerceIn(0 until totalIndicators)
     }
     BpkPageIndicator(
       currentIndex = currentIndex,
@@ -103,7 +103,7 @@ private fun PageIndicatorSample(
       style = style,
     )
     BpkButton(text = stringResource(id = R.string.page_indicator_next)) {
-      currentIndex = minOf(currentIndex + 1, totalIndicators - 1)
+      currentIndex = (currentIndex + 1).coerceIn(0 until totalIndicators)
     }
   }
 }
