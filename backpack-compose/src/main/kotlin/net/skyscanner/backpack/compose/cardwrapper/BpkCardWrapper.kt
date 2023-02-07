@@ -39,7 +39,7 @@ fun BpkCardWrapper(
   card: @Composable () -> Unit,
 ) {
   Card(
-    Modifier.fillMaxWidth().border(width = 2.dp, color = backgroundColor, shape = cardShape(corner)),
+    modifier = modifier.fillMaxWidth().border(width = 2.dp, color = backgroundColor, shape = cardShape(corner)),
     backgroundColor = backgroundColor,
     shape = cardShape(corner),
   ) {
