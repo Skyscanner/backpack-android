@@ -162,7 +162,7 @@
   <string name="badge_pears">Pears</string>
 
   <string name="chip_option">Option</string>
-  <string name="chip_select">Select</string>
+  <string name="chip_dropdown">Dropdown</string>
   <string name="chip_dismiss">Dismiss</string>
 
   <string name="tabs_small">Small</string>
@@ -270,4 +270,10 @@
   <string name="price_leading_text">App only deal</string>
   <string name="hotel_star_rating_title">Hotel star rating</string>
   <string name="static_default_rating_title">Static (default)</string>
+
+  <string name="page_indicator_less_than_5">Less than 5 pages</string>
+  <string name="page_indicator_more_than_5">More than 5 pages</string>
+  <string name="page_indicator_over_image">Over Image</string>
+  <string name="page_indicator_next">Next</string>
+  <string name="page_indicator_prev">Prev</string>
 </resources>

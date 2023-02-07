@@ -39,24 +39,19 @@ open class BpkChip @JvmOverloads constructor(
   private val iconPadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
   private val iconSize = context.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
 
-  var disabled: Boolean = false
-    set(value) {
-      field = value
-      this.isEnabled = !disabled
-    }
-
   private var appearance: BpkChipAppearance
 
   var style: Style
     get() = appearance.style
     set(value) {
-      appearance = BpkChipAppearances.Solid.fromTheme(context, value)
+      appearance = BpkChipAppearances.fromTheme(context, value)
       updateStyle()
     }
 
   var type: Type = Type.Option
     set(value) {
       field = value
+      updateStyle()
       updateIcons()
     }
 
@@ -66,7 +61,6 @@ open class BpkChip @JvmOverloads constructor(
         ?.mutate()
         ?.apply {
           setBounds(0, 0, iconSize, iconSize)
-          setTintList(textColors)
         }
       updateIcons()
     }
@@ -80,19 +74,12 @@ open class BpkChip @JvmOverloads constructor(
     this.isSingleLine = true
     this.height = resources.getDimensionPixelSize(R.dimen.bpk_chip_height)
 
-    setPadding(
-      resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
-      0,
-      resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
-      0,
-    )
     initialize(attrs, defStyleAttr)
   }
 
   private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
     context.theme.obtainStyledAttributes(attrs, R.styleable.BpkChip, defStyleAttr, 0)
       .use {
-        disabled = it.getBoolean(R.styleable.BpkChip_disabled, false)
         isSelected = it.getBoolean(R.styleable.BpkChip_selected, false)
         val iconId = it.getResourceId(R.styleable.BpkChip_chipIcon, 0)
         if (iconId != 0) {
@@ -105,36 +92,61 @@ open class BpkChip @JvmOverloads constructor(
   }
 
   fun toggle() {
-    if (!disabled) {
+    if (isEnabled) {
       isSelected = !isSelected
     }
   }
 
   internal open fun provideAppearance(context: Context, attrs: AttributeSet?, defStyleAttr: Int): BpkChipAppearance =
-    BpkChipAppearances.Solid.fromAttrs(context, attrs, defStyleAttr)
+    BpkChipAppearances.fromAttrs(context, attrs, defStyleAttr)
 
   private fun updateStyle() {
-    this.background = appearance.background
-    setTextColor(appearance.text)
-    compoundDrawableTintList = appearance.text
+    elevation = if (style == Style.OnImage) resources.getDimension(R.dimen.bpkElevationSm) else 0f
+    if (type == Type.Dismiss) {
+      setTextColor(appearance.dismissibleText)
+      this.background = appearance.dismissibleBackground
+    } else {
+      setTextColor(appearance.text)
+      this.background = appearance.background
+    }
+    updateIcons()
   }
 
   private fun updateIcons() {
     val endIcon = when (type) {
       Type.Option -> null
-      Type.Select -> AppCompatResources.getDrawable(context, R.drawable.bpk_tick)
+      Type.Dropdown -> AppCompatResources.getDrawable(context, R.drawable.bpk_chevron_down)
       Type.Dismiss -> AppCompatResources.getDrawable(context, R.drawable.bpk_close_circle)
     }?.mutate()
       ?.apply {
         setBounds(0, 0, iconSize, iconSize)
-        setTintList(textColors)
+        if (type == Type.Dismiss) {
+          setTintList(appearance.dismissibleIcon)
+        } else {
+          setTintList(appearance.text)
+        }
       }
-    this.setCompoundDrawablesRelative(icon, null, endIcon, null)
+    val startIcon = icon?.apply {
+      if (type == Type.Dismiss) {
+        setTintList(appearance.dismissibleText)
+      } else {
+        setTintList(appearance.text)
+      }
+    }
+    this.setCompoundDrawablesRelative(startIcon, null, endIcon, null)
+
+    setPadding(
+      resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
+      0,
+      resources.getDimensionPixelSize(if (type == Type.Option) R.dimen.bpkSpacingBase else R.dimen.bpkSpacingMd),
+      0,
+    )
   }
 
   enum class Style {
     Default,
     OnDark,
+    OnImage,
     ;
 
     companion object {
@@ -142,6 +154,7 @@ open class BpkChip @JvmOverloads constructor(
         when (value) {
           0 -> Default
           1 -> OnDark
+          2 -> OnImage
           else -> throw IllegalStateException("Unknown chip style")
         }
     }
@@ -149,7 +162,7 @@ open class BpkChip @JvmOverloads constructor(
 
   enum class Type {
     Option,
-    Select,
+    Dropdown,
     Dismiss,
     ;
 
@@ -157,7 +170,7 @@ open class BpkChip @JvmOverloads constructor(
       internal fun fromAttr(value: Int): Type =
         when (value) {
           0 -> Option
-          1 -> Select
+          1 -> Dropdown
           2 -> Dismiss
           else -> throw IllegalStateException("Unknown chip type")
         }

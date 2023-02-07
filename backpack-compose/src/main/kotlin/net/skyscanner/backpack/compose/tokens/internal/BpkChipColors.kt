@@ -26,31 +26,19 @@ import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 internal object BpkChipColors {
-  internal val defaultNormalBackground: Color
-    @Composable
-    get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFF243346))
-
-  internal val defaultOnBackground: Color
-    @Composable
-    get() = dynamicColorOf(Color(0xFF05203C), Color(0xFF054184))
-
-  internal val defaultPressedBackground: Color
-    @Composable
-    get() = dynamicColorOf(Color(0xFFC2C9CD), Color(0xFF002B5B))
-
   internal val disabledBackground: Color
     @Composable
     get() = dynamicColorOf(Color(0xFFE0E3E5), Color(0xFF0B121D))
-
-  internal val onDarkNormalBackground: Color
-    @Composable
-    get() = dynamicColorOf(Color(0x33FFFFFF), Color(0xFF243346))
 
   internal val onDarkOnBackground: Color
     @Composable
     get() = dynamicColorOf(Color(0xFFFFFFFF), Color(0xFF054184))
 
-  internal val onDarkPressedBackground: Color
+  internal val onDarkOnDismissIcon: Color
     @Composable
-    get() = dynamicColorOf(Color(0xFFC2C9CD), Color(0xFF002B5B))
+    get() = dynamicColorOf(Color(0xFF545860), Color(0x80FFFFFF))
+
+  internal val onDarkPressedStroke: Color
+    @Composable
+    get() = dynamicColorOf(Color(0xFFFFFFFF), Color(0xFF054184))
 }
