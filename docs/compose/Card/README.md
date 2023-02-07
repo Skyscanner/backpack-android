@@ -100,3 +100,40 @@ BpkDividedCard(
   onClick = {}
 )
 ```
+
+Example of a Card Wrapper:
+
+```Kotlin
+import net.skyscanner.backpack.compose.cardwrapper.BpkCardWrapper
+import net.skyscanner.backpack.compose.dividedcard.dividedCardWidth
+
+BpkCardWrapper(
+  modifier = Modifier.fillMaxWidth(),
+  backgroundColor = BpkTheme.colors.coreEco,
+  header = {
+    BpkText(
+      modifier = Modifier
+        .fillMaxWidth()
+        .height(BpkSpacing.Xxl),
+      text = stringResource("BpkCardWrapper header sample"),
+    )
+  },
+  card = {
+    Image(
+      modifier = Modifier
+        .height(BpkSpacing.Xxl * 2)
+        .fillMaxWidth(),
+      painter = painterResource(id = R.drawable.canadian_rockies_canada),
+      contentDescription = "",
+      contentScale = ContentScale.Crop
+    )
+    BpkText(
+      modifier = Modifier.fillMaxWidth(),
+      text = stringResource("BpkCardWrapper card sample"),
+      style = BpkTheme.typography.bodyDefault,
+      textAlign = TextAlign.Center
+    )
+  },
+  onClick = {}
+)
+```

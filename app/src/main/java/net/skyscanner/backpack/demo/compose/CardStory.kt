@@ -39,6 +39,7 @@ import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.BpkCardPadding
+import net.skyscanner.backpack.compose.cardwrapper.BpkCardWrapper
 import net.skyscanner.backpack.compose.dividedcard.BpkDividedCard
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -72,6 +73,8 @@ fun CardStory() {
     FocusableCardExample(cardModifier)
 
     DividedCardExample(cardModifier)
+
+    CardWrapperExample(cardModifier)
   }
 }
 
@@ -192,5 +195,46 @@ fun DividedCardExample(
       )
     },
     onClick = {},
+  )
+}
+
+@Composable
+@Preview
+fun CardWrapperExample(
+  modifier: Modifier = Modifier,
+) {
+  BpkCardWrapper(
+    modifier = Modifier.fillMaxWidth(),
+    backgroundColor = BpkTheme.colors.coreEco,
+    header = {
+      Column() {
+        BpkText(
+          modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl),
+          text = stringResource(id = R.string.card_wrapper_header),
+          style = BpkTheme.typography.bodyDefault,
+          textAlign = TextAlign.Center,
+        )
+      }
+    },
+    card = {
+      Column() {
+        BpkText(
+          modifier = Modifier
+            .fillMaxWidth()
+            .height(BpkSpacing.Xxl),
+          text = stringResource(id = R.string.card_wrapper_card),
+          style = BpkTheme.typography.bodyDefault,
+          textAlign = TextAlign.Center,
+        )
+        BpkText(
+          modifier = Modifier
+            .fillMaxWidth()
+            .height(BpkSpacing.Xxl),
+          text = stringResource(id = R.string.card_wrapper_card),
+          style = BpkTheme.typography.bodyDefault,
+          textAlign = TextAlign.Center,
+        )
+      }
+    },
   )
 }
