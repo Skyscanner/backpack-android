@@ -31,7 +31,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -40,7 +39,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
-import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import java.lang.Integer.min
@@ -59,38 +57,36 @@ fun BpkPageIndicator(
   style: BpkPageIndicatorStyle = BpkPageIndicatorStyle.Default,
 ) {
 
-  if (totalIndicators <= 1) throw IllegalArgumentException("totalIndicators must be greater than 1")
-  if (currentIndex !in 0 until totalIndicators) throw IllegalArgumentException("currentIndex must be between 0 and $totalIndicators")
+  require(totalIndicators > 1) { "totalIndicators must be greater than 1" }
+  require(currentIndex in 0 until totalIndicators) { "currentIndex must be between 0 and $totalIndicators" }
   val indicatorSize = BpkSpacing.Md
   val indicatorBoxWidth = indicatorSize * 2
   val indicatorBoxHeight = indicatorSize * 3
   val indicatorCount = min(totalIndicators, DISPLAY_DOTS_MAX)
   val rowWidth = (indicatorBoxWidth * indicatorCount) + indicatorSize
 
-  val coroutineScope = rememberCoroutineScope()
   val state = rememberLazyListState()
 
-  val offsetCount = when {
-    totalIndicators > DISPLAY_DOTS_MAX -> {
+  val itemsOffsetCount = when {
+    totalIndicators > DISPLAY_DOTS_MAX ->
       when (currentIndex) {
         0 -> 0
-        1 -> 2
-        totalIndicators - 2 -> 6
-        totalIndicators - 1 -> 8
-        else -> 4
+        1 -> 1
+        totalIndicators - 2 -> DISPLAY_DOTS_MAX - 2
+        totalIndicators - 1 -> DISPLAY_DOTS_MAX - 1
+        else -> 2
       }
-    }
     else -> 0
   }
-  val offsetPx = with(LocalDensity.current) { (indicatorSize * offsetCount).toPx().toInt() }
+
+  val offsetPx = with(LocalDensity.current) { (indicatorSize * itemsOffsetCount * 2).toPx().toInt() }
   LaunchedEffect(currentIndex) {
-    coroutineScope.launch {
-      state.animateScrollToItem(currentIndex, -offsetPx)
-    }
+    state.animateScrollToItem(currentIndex, -offsetPx)
   }
 
   LazyRow(
-    modifier = modifier.width(rowWidth)
+    modifier = modifier
+      .width(rowWidth)
       .height(indicatorBoxHeight)
       .padding(start = indicatorSize / 2, end = indicatorSize / 2)
       .semantics(mergeDescendants = true) { invisibleToUser() },
