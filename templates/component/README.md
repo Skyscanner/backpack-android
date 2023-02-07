@@ -6,6 +6,8 @@
 
 ## Default
 
+| Day | Night |
+| --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/${name}/screenshots/default.png" alt="${name} component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/${name}/screenshots/default_dm.png" alt="${name} component - dark mode" width="375" /> |
 
 ## Installation
