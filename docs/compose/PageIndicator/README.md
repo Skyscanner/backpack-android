@@ -6,6 +6,8 @@
 
 ## Default
 
+| Day | Night |
+| --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/PageIndicator/screenshots/default.png" alt="PageIndicator component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/PageIndicator/screenshots/default_dm.png" alt="PageIndicator component - dark mode" width="375" /> |
 
 ## Installation
