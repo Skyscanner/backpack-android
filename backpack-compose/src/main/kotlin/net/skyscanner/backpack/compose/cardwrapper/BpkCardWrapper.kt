@@ -51,7 +51,7 @@ fun BpkCardWrapper(
         header.invoke()
       }
       BpkCard(
-        Modifier.border(width = 2.dp, color = backgroundColor, shape = cardShape(corner)),
+        modifier = Modifier.border(width = 2.dp, color = backgroundColor, shape = cardShape(corner)),
       ) {
         card.invoke()
       }
