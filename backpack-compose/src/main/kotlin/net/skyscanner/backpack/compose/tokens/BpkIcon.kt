@@ -1657,6 +1657,15 @@ public val BpkIcon.Companion.Onsen: BpkIcon by Delegates.singleton(
 )
 
 
+public val BpkIcon.Companion.Origin: BpkIcon by Delegates.singleton(
+  BpkIcon(
+    name = "Origin",
+    small = R.drawable.bpk_origin_sm,
+    large = R.drawable.bpk_origin,
+  )
+)
+
+
 public val BpkIcon.Companion.Paid: BpkIcon by Delegates.singleton(
   BpkIcon(
     name = "Paid",
@@ -2502,25 +2511,26 @@ public val BpkIcon.Companion.values: List<BpkIcon> by Delegates.singleton(
         BpkIcon.Mobile, BpkIcon.Money, BpkIcon.MultipleBookings, BpkIcon.Music, BpkIcon.Mute,
         BpkIcon.NativeAndroidBack, BpkIcon.NativeAndroidClose, BpkIcon.NativeAndroidForward,
         BpkIcon.NativeIosClose, BpkIcon.Navigation, BpkIcon.NewWindow, BpkIcon.News, BpkIcon.Night,
-        BpkIcon.NotAllowed, BpkIcon.Onsen, BpkIcon.Paid, BpkIcon.Paperclip, BpkIcon.Parking,
-        BpkIcon.Passport, BpkIcon.Pause, BpkIcon.PaymentCard, BpkIcon.Petrol, BpkIcon.PhoneCall,
-        BpkIcon.Picture, BpkIcon.Pin, BpkIcon.PlaneSeat, BpkIcon.Play, BpkIcon.Plus, BpkIcon.Policy,
-        BpkIcon.Powerplug, BpkIcon.Ppe, BpkIcon.PriceAlerts, BpkIcon.PriceTag, BpkIcon.Print,
-        BpkIcon.RecentSearches, BpkIcon.Redo, BpkIcon.Refresh, BpkIcon.Return, BpkIcon.Room,
-        BpkIcon.Scales, BpkIcon.Search, BpkIcon.SelfService, BpkIcon.SendMessage, BpkIcon.Services,
-        BpkIcon.Settings, BpkIcon.Share, BpkIcon.ShareAndroid, BpkIcon.ShareIos,
-        BpkIcon.SingleBooking, BpkIcon.SocialDistancing, BpkIcon.SocialLike, BpkIcon.Sort,
-        BpkIcon.SortDown, BpkIcon.SortUp, BpkIcon.Speaker, BpkIcon.Star, BpkIcon.StarHalf,
-        BpkIcon.StarOutline, BpkIcon.Stops, BpkIcon.Swap, BpkIcon.SwapHorizontal,
-        BpkIcon.SwapVertical, BpkIcon.Taxi, BpkIcon.ThumbsDown, BpkIcon.ThumbsUp, BpkIcon.Tick,
-        BpkIcon.TickCircle, BpkIcon.Ticket, BpkIcon.TicketFlexible, BpkIcon.Time, BpkIcon.Toilets,
-        BpkIcon.Train, BpkIcon.TransmissionAutomatic, BpkIcon.TransmissionManual, BpkIcon.Trash,
-        BpkIcon.Trend, BpkIcon.TrendDown, BpkIcon.TrendSteady, BpkIcon.TrendWillRise, BpkIcon.Trips,
-        BpkIcon.Undo, BpkIcon.Unlock, BpkIcon.Unmute, BpkIcon.Upgrade, BpkIcon.UseLocation,
-        BpkIcon.View, BpkIcon.Virus, BpkIcon.Wallet, BpkIcon.Weather, BpkIcon.WeatherClear,
-        BpkIcon.WeatherCloudy, BpkIcon.WeatherFog, BpkIcon.WeatherPartlyCloudy, BpkIcon.WeatherRain,
-        BpkIcon.WeatherSnow, BpkIcon.WeatherThunderstorm, BpkIcon.WeatherTornado,
-        BpkIcon.WeatherWind, BpkIcon.Wifi, BpkIcon.Window, BpkIcon.WindowReduce, BpkIcon.WorldAmer,
-        BpkIcon.WorldApac, BpkIcon.WorldEmea, )
+        BpkIcon.NotAllowed, BpkIcon.Onsen, BpkIcon.Origin, BpkIcon.Paid, BpkIcon.Paperclip,
+        BpkIcon.Parking, BpkIcon.Passport, BpkIcon.Pause, BpkIcon.PaymentCard, BpkIcon.Petrol,
+        BpkIcon.PhoneCall, BpkIcon.Picture, BpkIcon.Pin, BpkIcon.PlaneSeat, BpkIcon.Play,
+        BpkIcon.Plus, BpkIcon.Policy, BpkIcon.Powerplug, BpkIcon.Ppe, BpkIcon.PriceAlerts,
+        BpkIcon.PriceTag, BpkIcon.Print, BpkIcon.RecentSearches, BpkIcon.Redo, BpkIcon.Refresh,
+        BpkIcon.Return, BpkIcon.Room, BpkIcon.Scales, BpkIcon.Search, BpkIcon.SelfService,
+        BpkIcon.SendMessage, BpkIcon.Services, BpkIcon.Settings, BpkIcon.Share,
+        BpkIcon.ShareAndroid, BpkIcon.ShareIos, BpkIcon.SingleBooking, BpkIcon.SocialDistancing,
+        BpkIcon.SocialLike, BpkIcon.Sort, BpkIcon.SortDown, BpkIcon.SortUp, BpkIcon.Speaker,
+        BpkIcon.Star, BpkIcon.StarHalf, BpkIcon.StarOutline, BpkIcon.Stops, BpkIcon.Swap,
+        BpkIcon.SwapHorizontal, BpkIcon.SwapVertical, BpkIcon.Taxi, BpkIcon.ThumbsDown,
+        BpkIcon.ThumbsUp, BpkIcon.Tick, BpkIcon.TickCircle, BpkIcon.Ticket, BpkIcon.TicketFlexible,
+        BpkIcon.Time, BpkIcon.Toilets, BpkIcon.Train, BpkIcon.TransmissionAutomatic,
+        BpkIcon.TransmissionManual, BpkIcon.Trash, BpkIcon.Trend, BpkIcon.TrendDown,
+        BpkIcon.TrendSteady, BpkIcon.TrendWillRise, BpkIcon.Trips, BpkIcon.Undo, BpkIcon.Unlock,
+        BpkIcon.Unmute, BpkIcon.Upgrade, BpkIcon.UseLocation, BpkIcon.View, BpkIcon.Virus,
+        BpkIcon.Wallet, BpkIcon.Weather, BpkIcon.WeatherClear, BpkIcon.WeatherCloudy,
+        BpkIcon.WeatherFog, BpkIcon.WeatherPartlyCloudy, BpkIcon.WeatherRain, BpkIcon.WeatherSnow,
+        BpkIcon.WeatherThunderstorm, BpkIcon.WeatherTornado, BpkIcon.WeatherWind, BpkIcon.Wifi,
+        BpkIcon.Window, BpkIcon.WindowReduce, BpkIcon.WorldAmer, BpkIcon.WorldApac,
+        BpkIcon.WorldEmea, )
 )
 
