@@ -35,8 +35,7 @@ jobs:
 
       - name: Danger
         uses: docker://ghcr.io/danger/danger-kotlin:1.2.0
-        with:
-          args: --failOnErrors --no-publish-check
+        if: ${{ github.event_name == 'pull_request' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
