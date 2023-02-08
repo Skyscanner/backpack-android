@@ -1,0 +1,95 @@
+/**
+ * Backpack for Android - Skyscanner's Design System
+ *
+ * Copyright 2018 Skyscanner Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package net.skyscanner.backpack.demo.compose
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import net.skyscanner.backpack.compose.cardwrapper.BpkCardWrapper
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
+
+@Composable
+@Preview
+fun CardWrapperStory() {
+  Column(
+    modifier = Modifier
+      .background(BpkTheme.colors.line)
+      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+  ) {
+
+    val cardModifier = Modifier
+      .fillMaxWidth()
+      .weight(1f)
+
+    CardWrapperExample(cardModifier)
+  }
+}
+
+@Composable
+@Preview
+fun CardWrapperExample(
+  modifier: Modifier = Modifier,
+) {
+  BpkCardWrapper(
+    modifier = Modifier.fillMaxWidth(),
+    backgroundColor = BpkTheme.colors.coreEco,
+    header = {
+      Column() {
+        BpkText(
+          modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl),
+          text = stringResource(id = R.string.card_wrapper_header),
+          style = BpkTheme.typography.bodyDefault,
+          textAlign = TextAlign.Center,
+        )
+      }
+    },
+    card = {
+      Column() {
+        BpkText(
+          modifier = Modifier
+            .fillMaxWidth()
+            .height(BpkSpacing.Xxl),
+          text = stringResource(id = R.string.card_wrapper_card),
+          style = BpkTheme.typography.bodyDefault,
+          textAlign = TextAlign.Center,
+        )
+        BpkText(
+          modifier = Modifier
+            .fillMaxWidth()
+            .height(BpkSpacing.Xxl),
+          text = stringResource(id = R.string.card_wrapper_card),
+          style = BpkTheme.typography.bodyDefault,
+          textAlign = TextAlign.Center,
+        )
+      }
+    },
+  )
+}
