@@ -59,7 +59,7 @@ BpkTheme {
 
 ### Android View system
 
-You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=android).
+You can find the list of the available components, as well as the code samples and the screenshots [here](https://skyscanner.design/latest/components/text/android.html).
 
 All design system tokens exist as public Android resources. Here's the list of the token types and the samples of its usage:
 
@@ -74,7 +74,7 @@ All design system tokens exist as public Android resources. Here's the list of t
 
 Backpack for Compose targets **stable Compose** releases.
 
-You can find the list of the available components, as well as the code samples and the screenshots [here](https://backpack.github.io/components/text?platform=compose).
+You can find the list of the available components, as well as the code samples and the screenshots [here](https://skyscanner.design/latest/components/text/compose.html).
 
 The design system tokens are located in a `net.skyscanner.backpack.compose.tokens` package.
 Here's the list of the token types and the samples of its usage:

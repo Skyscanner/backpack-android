@@ -29,7 +29,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkLinksSpanTests : BpkSnapshotTest() {
 
-  private val link = "https://backpack.github.io/"
+  private val link = "https://skyscanner.design/"
   private val handler = { _: String ->
   }
 

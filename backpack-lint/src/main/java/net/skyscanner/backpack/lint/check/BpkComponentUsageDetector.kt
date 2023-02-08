@@ -241,7 +241,7 @@ class BpkComponentUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
     ),
     ;
 
-    val url: String = "https://backpack.github.io/components/$webName"
+    val url: String = "https://skyscanner.design/latest/components/$webName/android.html"
 
     private fun replacesComponent(componentToReplace: String) = componentsToReplace.contains(componentToReplace)
 
