@@ -27,41 +27,36 @@ import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.card.internal.cardShape
+import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 
 @Composable
 fun BpkCardWrapper(
   backgroundColor: Color,
-  header: @Composable () -> Unit,
+  headerContent: @Composable () -> Unit,
+  cardContent: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   corner: BpkCardCorner = BpkCardCorner.Small,
   elevation: BpkCardElevation = BpkCardElevation.Default,
-  card: @Composable () -> Unit,
 ) {
   Card(
-    modifier = modifier.fillMaxWidth().border(width = 2.dp, color = backgroundColor, shape = cardShape(corner)),
+    modifier = modifier.fillMaxWidth().border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner)),
     backgroundColor = backgroundColor,
     shape = cardShape(corner),
   ) {
     Column {
-      Card(
-        backgroundColor = backgroundColor,
-        elevation = 0.dp,
-      ) {
-        header.invoke()
-      }
+      headerContent.invoke()
       BpkCard(
         modifier = Modifier
           .background(color = backgroundColor, shape = cardShape(corner))
-          .border(width = 2.dp, color = backgroundColor, shape = cardShape(corner))
-          .padding(2.dp),
+          .border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner))
+          .padding(BpkBorderSize.Lg),
         elevation = elevation,
       ) {
-        card.invoke()
+        cardContent.invoke()
       }
     }
   }

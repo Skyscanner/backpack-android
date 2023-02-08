@@ -61,7 +61,7 @@ fun CardWrapperExample(
   BpkCardWrapper(
     modifier = Modifier.fillMaxWidth(),
     backgroundColor = BpkTheme.colors.coreEco,
-    header = {
+    headerContent = {
       Column() {
         BpkText(
           modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl),
@@ -71,7 +71,7 @@ fun CardWrapperExample(
         )
       }
     },
-    card = {
+    cardContent = {
       Column() {
         BpkText(
           modifier = Modifier

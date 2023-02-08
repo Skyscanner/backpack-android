@@ -110,7 +110,7 @@ import net.skyscanner.backpack.compose.dividedcard.dividedCardWidth
 BpkCardWrapper(
   modifier = Modifier.fillMaxWidth(),
   backgroundColor = BpkTheme.colors.coreEco,
-  header = {
+  headerContent = {
     BpkText(
       modifier = Modifier
         .fillMaxWidth()
@@ -118,7 +118,7 @@ BpkCardWrapper(
       text = stringResource("BpkCardWrapper header sample"),
     )
   },
-  card = {
+  cardContent = {
     Image(
       modifier = Modifier
         .height(BpkSpacing.Xxl * 2)
