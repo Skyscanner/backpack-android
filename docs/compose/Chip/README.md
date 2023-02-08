@@ -10,6 +10,18 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/default.png" alt="Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/default_dm.png" alt="Chip component - dark mode" width="375" /> |
 
+## On dark
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/on-dark.png" alt="On dark Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/on-dark_dm.png" alt="On dark Chip component - dark mode" width="375" /> |
+
+## On Image
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/on-image.png" alt="On Image Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Chip/screenshots/on-image_dm.png" alt="On Image Chip component - dark mode" width="375" /> |
+
 ## Installation
 
 Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
@@ -74,14 +86,22 @@ BpkChip(
 )
 ```
 
-Example of a Chip with different semantic type:
+Example of a dropdown chip:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.chip.BpkChip
-import net.skyscanner.backpack.compose.chip.BpkChipType
 
-BpkChip(
+BpkDropdownChip(
   text = "Chip text",
-  type = BpkChipType.Dismiss,
+)
+```
+
+Example of a dismissible chip:
+
+```Kotlin
+import net.skyscanner.backpack.compose.chip.BpkChip
+
+BpkDismissibleChip(
+  text = "Chip text",
 )
 ```

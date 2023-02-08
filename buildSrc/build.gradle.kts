@@ -9,14 +9,14 @@ plugins {
 
 dependencies {
   implementation(gradleApi())
-  implementation("com.android.tools.build:gradle:7.4.0")  // keep in sync with sdk-common version - If the Gradle plugin version is X.Y.Z, then the sdk-common version is (X+23).Y.Z.
-  implementation("com.android.tools:sdk-common:30.4.0")
+  implementation("com.android.tools.build:gradle:7.4.1")  // keep in sync with sdk-common version - If the Gradle plugin version is X.Y.Z, then the sdk-common version is (X+23).Y.Z.
+  implementation("com.android.tools:sdk-common:30.4.1")
   implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
   implementation("com.squareup:kotlinpoet:1.12.0")
   implementation("com.google.guava:guava:31.1-jre")
   implementation("com.google.code.gson:gson:2.10.1")
 
-  implementation(platform("org.http4k:http4k-bom:4.37.0.0"))
+  implementation(platform("org.http4k:http4k-bom:4.39.0.0"))
   implementation("org.http4k:http4k-core")
   implementation("org.http4k:http4k-server-undertow")
   implementation("org.http4k:http4k-client-apache")

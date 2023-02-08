@@ -227,3 +227,4 @@ backpack.android.demo.key
 
 .idea/androidTestResultsUserPreferences.xml
 logcat.log
+danger_out.json

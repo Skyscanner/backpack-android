@@ -31,13 +31,10 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.platform.app.InstrumentationRegistry
-import net.skyscanner.backpack.calendar.BpkCalendar
-import net.skyscanner.backpack.calendar.model.CalendarRange
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.ShownDialog
-import org.threeten.bp.LocalDate
 import org.threeten.bp.Month
 import org.threeten.bp.YearMonth
 
@@ -82,8 +79,10 @@ object DocsRegistry {
     ComposeScreenshot("Card Button - Small", "small"),
     ViewScreenshot("Chip - View - Default", "all"),
     ViewScreenshot("Chip - View - On Dark", "on-dark"),
-    ViewScreenshot("Chip - View - With icon", "with-icon"),
-    ComposeScreenshot("Chip - Compose", "default"),
+    ViewScreenshot("Chip - View - On Image", "on-image"),
+    ComposeScreenshot("Chip - Compose - Default", "default"),
+    ComposeScreenshot("Chip - Compose - On Dark", "on-dark"),
+    ComposeScreenshot("Chip - Compose - On Image", "on-image"),
     ViewScreenshot("Checkbox - View", "default"),
     ComposeScreenshot("Checkbox - Compose", "default"),
     ViewScreenshot("Dialog - View", "with-cta") { setupDialog("Success Three Buttons") },
@@ -123,6 +122,7 @@ object DocsRegistry {
     ViewScreenshot("Nudger - View", "all"),
     ComposeScreenshot("Nudger - Compose", "all"),
     ViewScreenshot("Overlay", "all"),
+    ComposeScreenshot("Page Indicator", "default"),
     ViewScreenshot("Panel - View", "all"),
     ComposeScreenshot("Panel - Compose", "all"),
     ComposeScreenshot("Price - Small", "small"),
@@ -142,7 +142,8 @@ object DocsRegistry {
     ViewScreenshot("Snackbar", "icon") { setupSnackbarIconAction() },
     ViewScreenshot("Spinner - View", "default"),
     ComposeScreenshot("Spinner - Compose", "default"),
-    ViewScreenshot("Star Rating - Default", "default"),
+    ViewScreenshot("Star Rating - View - Default", "default"),
+    ComposeScreenshot("Star Rating - Compose", "default"),
     ViewScreenshot("Star Rating Interactive", "default"),
     ViewScreenshot("Switch - View", "default"),
     ComposeScreenshot("Switch - Compose", "default"),

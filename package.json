@@ -6,24 +6,6 @@
     "node": "^16.13.0",
     "npm": "^8.1.0"
   },
-  "scripts": {
-    "lint": "eslint . --ext .js,.jsx",
-    "prebuild": "npm run lint",
-    "build": "npm run spellcheck",
-    "danger": "danger ci",
-    "prettier": "prettier --config .prettierrc --write \"**/*.js\"",
-    "spellcheck": "mdspell -r --en-gb --ignore-acronyms --ignore-numbers --no-suggestions '*.md' '**/*.md' '!**/node_modules/**/*.md'",
-    "spellcheck:interactive": "mdspell --en-gb --ignore-acronyms --no-suggestions --ignore-numbers '*.md' '**/*.md' '!**/node_modules/**/*.md'",
-    "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint"
-    ],
-    "*.md": [
-      "mdspell -r --en-gb --ignore-acronyms --ignore-numbers --no-suggestions"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Skyscanner/backpack-android.git"
@@ -35,21 +17,7 @@
   },
   "homepage": "https://github.com/Skyscanner/backpack-android#readme",
   "devDependencies": {
-    "@babel/core": "^7.17.8",
-    "@babel/eslint-parser": "^7.17.0",
-    "@babel/preset-env": "^7.9.6",
-    "@skyscanner/bpk-foundations-android": "^6.0.0",
-    "@skyscanner/bpk-svgs": "^16.1.0",
-    "danger": "^11.0.2",
-    "eslint": "^8.11.0",
-    "eslint-config-airbnb": "^19.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.0",
-    "lodash": "^4.17.21",
-    "markdown-spellcheck": "^1.3.1",
-    "prettier": "^2.3.2"
+    "@skyscanner/bpk-foundations-android": "^7.0.0",
+    "@skyscanner/bpk-svgs": "^16.2.0"
   }
 }

@@ -33,11 +33,9 @@ jobs:
           nvm use
           npm ci
 
-      - name: ESLint check
-        run: npm run lint
-
-      - name: Danger check
-        run: npm run danger
+      - name: Danger
+        uses: docker://ghcr.io/danger/danger-kotlin:1.2.0
+        if: ${{ github.event_name == 'pull_request' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -54,10 +52,6 @@ jobs:
       - name: Build
         run: |
           ./gradlew assemble${{ env.flavour }}${{ env.config }} -PdisablePreDex
-
-      - name: Node Build
-        run: |
-          npm run build
 
       - name: Tokens check
         run: |

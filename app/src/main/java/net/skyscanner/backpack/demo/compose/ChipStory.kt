@@ -18,10 +18,14 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
@@ -32,14 +36,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.compose.chip.BpkChipType
+import net.skyscanner.backpack.compose.chip.BpkDismissibleChip
+import net.skyscanner.backpack.compose.chip.BpkDropdownChip
 import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Deals
@@ -47,52 +52,45 @@ import net.skyscanner.backpack.demo.R
 
 @Composable
 @Preview
-fun ChipStory() {
-  Column(
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
-    BpkChipStyle.values().forEach { style ->
-      ChipsColumn(style)
+fun ChipStory(style: BpkChipStyle = BpkChipStyle.Default) {
+
+  Box {
+    if (style == BpkChipStyle.OnImage) {
+      Image(
+        painter = painterResource(R.drawable.canadian_rockies_canada),
+        contentDescription = null,
+        contentScale = ContentScale.Crop,
+        modifier = Modifier.fillMaxSize(),
+      )
     }
-  }
-}
-
-@Composable
-private fun ChipsColumn(
-  style: BpkChipStyle,
-  modifier: Modifier = Modifier,
-) {
-
-  val forceDarkBackground = style == BpkChipStyle.OnDark && BpkTheme.colors.isLight
-
-  Column(
-    modifier = modifier
-      .background(if (forceDarkBackground) BpkTheme.colors.textOnLight else Color.Transparent)
-      .padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
-
-    BpkText(
-      text = style.toString(),
-      style = BpkTheme.typography.heading5,
-      color = if (forceDarkBackground) BpkTheme.colors.textOnDark else LocalContentColor.current,
-    )
-
-    BpkChipType.values().forEach { type ->
-      ChipsRow(style, type, null)
+    val background = when (style) {
+      BpkChipStyle.Default -> Color.Transparent
+      BpkChipStyle.OnDark -> BpkTheme.colors.surfaceContrast
+      BpkChipStyle.OnImage -> Color.Transparent
     }
 
-    ChipsRow(style, BpkChipType.Option, BpkIcon.Deals, text = stringResource(R.string.with_icon))
+    Column(
+      modifier = Modifier
+        .fillMaxSize()
+        .background(background)
+        .padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
+      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+      ChipsRow(style, text = stringResource(R.string.chip_option))
+      ChipsRow(style, withDropdown = true, text = stringResource(R.string.chip_dropdown))
+      DismissibleChipsRow(style = style, icon = null, text = stringResource(R.string.chip_dismiss))
+      ChipsRow(style, icon = BpkIcon.Deals, text = stringResource(R.string.with_icon))
+    }
   }
 }
 
 @Composable
 private fun ChipsRow(
   style: BpkChipStyle,
-  type: BpkChipType,
-  icon: BpkIcon?,
+  text: String,
   modifier: Modifier = Modifier,
-  text: String = type.toString(),
+  withDropdown: Boolean = false,
+  icon: BpkIcon? = null,
 ) {
   Row(modifier) {
     ChipSample(
@@ -104,7 +102,7 @@ private fun ChipsRow(
       enabled = true,
       style = style,
       icon = icon,
-      type = type,
+      withDropdown = withDropdown,
     )
     ChipSample(
       text = text,
@@ -115,7 +113,7 @@ private fun ChipsRow(
       enabled = true,
       style = style,
       icon = icon,
-      type = type,
+      withDropdown = withDropdown,
     )
     ChipSample(
       text = text,
@@ -126,7 +124,27 @@ private fun ChipsRow(
       enabled = false,
       style = style,
       icon = icon,
-      type = type,
+      withDropdown = withDropdown,
+    )
+  }
+}
+
+@Composable
+private fun DismissibleChipsRow(
+  style: BpkChipStyle,
+  icon: BpkIcon?,
+  text: String,
+  modifier: Modifier = Modifier,
+) {
+  Row(
+    horizontalArrangement = Arrangement.Center,
+    modifier = modifier.fillMaxWidth(),
+  ) {
+    BpkDismissibleChip(
+      text = text,
+      style = style,
+      icon = icon,
+      onClick = {},
     )
   }
 }
@@ -138,20 +156,31 @@ private fun ChipSample(
   enabled: Boolean,
   style: BpkChipStyle,
   icon: BpkIcon?,
-  type: BpkChipType,
+  withDropdown: Boolean,
   modifier: Modifier = Modifier,
 ) {
 
   var selected by rememberSaveable { mutableStateOf(initialState) }
 
-  BpkChip(
-    text = text,
-    modifier = modifier,
-    selected = selected,
-    enabled = enabled,
-    style = style,
-    icon = icon,
-    type = type,
-    onSelectedChange = { selected = it },
-  )
+  if (withDropdown) {
+    BpkDropdownChip(
+      text = text,
+      modifier = modifier,
+      selected = selected,
+      enabled = enabled,
+      style = style,
+      icon = icon,
+      onSelectedChange = { selected = it },
+    )
+  } else {
+    BpkChip(
+      text = text,
+      modifier = modifier,
+      selected = selected,
+      enabled = enabled,
+      style = style,
+      icon = icon,
+      onSelectedChange = { selected = it },
+    )
+  }
 }
