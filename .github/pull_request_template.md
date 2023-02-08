@@ -13,6 +13,5 @@ Add `major`, `minor` or `patch` label depending on the change according to [semv
 Remember to include the following changes:
 + [ ] Component `README.md`
 + [ ] Tests
-+ [ ] Docs (either update [backpack-docs](https://github.com/Skyscanner/backpack-docs) now, or create a follow up ticket)
 
 If you are curious about how we review, please read through the [code review guidelines](https://github.com/Skyscanner/backpack/blob/main/CODE_REVIEW_GUIDELINES.md)
