@@ -10,6 +10,18 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/default.png" alt="Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/default_dm.png" alt="Card component - dark mode" width="375" /> |
 
+## Divided Card
+
+| Day                                                                                                                                                              | Night |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/divided-card.png" alt="Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/divided-card_dm.png" alt="Card component - dark mode" width="375" /> |
+
+## Card Wrapper
+
+| Day                                                                                                                                                              | Night |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/card-wrapper.png" alt="Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/card-wrapper_dm.png" alt="Card component - dark mode" width="375" /> |
+
 
 ## Installation
 
