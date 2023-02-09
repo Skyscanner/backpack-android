@@ -22,6 +22,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.dialog.BpkDestructiveDialog
 import net.skyscanner.backpack.compose.dialog.BpkFlareDialog
@@ -187,6 +189,7 @@ fun FlareDialogExample(onDismiss: () -> Unit = {}) {
       painter = painterResource(R.drawable.canadian_rockies_canada),
       contentDescription = stringResource(R.string.image_rockies_content_description),
       contentScale = ContentScale.Crop,
+      modifier = Modifier.height(264.dp),
     )
   }
 }
@@ -206,6 +209,7 @@ fun ImageDialogStartAlignmentExample(onDismiss: () -> Unit = {}) {
       painter = painterResource(R.drawable.canadian_rockies_canada),
       contentDescription = stringResource(R.string.image_rockies_content_description),
       contentScale = ContentScale.Crop,
+      modifier = Modifier.height(192.dp),
     )
   }
 }
@@ -225,6 +229,7 @@ fun ImageDialogEndAlignmentExample(onDismiss: () -> Unit = {}) {
       painter = painterResource(R.drawable.canadian_rockies_canada),
       contentDescription = stringResource(R.string.image_rockies_content_description),
       contentScale = ContentScale.Crop,
+      modifier = Modifier.height(192.dp),
     )
   }
 }
