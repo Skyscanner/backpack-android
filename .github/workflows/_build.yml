@@ -180,6 +180,8 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
+            adb shell settings put global hidden_api_policy_pre_p_apps 1
+            adb shell settings put global hidden_api_policy_p_apps 1
             touch logcat.log
             chmod 777 logcat.log
             adb logcat > logcat.log &

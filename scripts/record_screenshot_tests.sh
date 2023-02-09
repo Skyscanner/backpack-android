@@ -17,6 +17,8 @@
 
 set -e
 rm -rf app/screenshots/oss
+adb shell settings put global hidden_api_policy_pre_p_apps 1
+adb shell settings put global hidden_api_policy_p_apps 1
 ./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=default
 ./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=dm
 ./gradlew ossDebugExecuteScreenshotTests -Precord -PdirectorySuffix=rtl
