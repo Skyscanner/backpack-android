@@ -24,7 +24,6 @@
     android:singleLine="true"
     android:textColor="@color/bpkTextPrimary"
     app:textStyle="heading4"
-    tools:targetApi="p"
     tools:text="January"
     />
 
@@ -37,6 +36,5 @@
     android:layout_gravity="center"
     android:singleLine="true"
     app:buttonType="link"
-    tools:targetApi="p"
     />
 </LinearLayout>
