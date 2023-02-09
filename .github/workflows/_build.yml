@@ -11,7 +11,7 @@ defaults:
 env:
   flavour: oss
   config: debug
-  api-level: 26
+  api-level: 28
 
 jobs:
 
