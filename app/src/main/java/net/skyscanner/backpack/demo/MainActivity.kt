@@ -22,8 +22,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,17 +30,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav
-import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavTab
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.tokens.Settings
-import net.skyscanner.backpack.demo.compose.ComponentItem
 import net.skyscanner.backpack.demo.meta.Component
 import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.meta.all
+import net.skyscanner.backpack.demo.ui.CasesScreen
 import net.skyscanner.backpack.demo.ui.ComponentsScreen
 
 /**
@@ -74,69 +70,12 @@ class MainActivity : BpkBaseActivity() {
           )
           currentComponent != null -> CasesScreen(
             component = currentComponent!!,
-            cases = components[currentComponent!!]!!,
             onBack = { currentComponent = null },
             onClick = { currentCase = it },
           )
           else -> ComponentsScreen(
             onClick = { currentComponent = it },
           )
-        }
-      }
-    }
-  }
-}
-
-@Composable
-private fun CasesScreen(
-  component: Component,
-  cases: List<Story>,
-  onBack: () -> Unit,
-  onClick: (Story) -> Unit,
-  modifier: Modifier = Modifier,
-) {
-
-  Column(modifier = modifier) {
-    val context = LocalContext.current
-    BpkTopNavBar(
-      navIcon = NavIcon.Back(
-        contentDescription = "Back",
-        onClick = { onBack() },
-      ),
-      title = cases.first().component.name,
-      actions = listOf(
-        IconAction(
-          icon = BpkIcon.Settings,
-          contentDescription = stringResource(R.string.settings_title),
-          onClick = {
-            val intent = Intent(context, SettingsActivity::class.java)
-            context.startActivity(intent)
-          },
-        ),
-      ),
-    )
-
-    var isCompose by remember { mutableStateOf(true) }
-
-    if (cases.distinctBy { it.isCompose }.size > 1) {
-      BpkHorizontalNav(
-        tabs = listOf(
-          BpkHorizontalNavTab(title = "View"),
-          BpkHorizontalNavTab(title = "Compose"),
-        ),
-        activeIndex = if (isCompose) 1 else 0,
-        onChanged = { isCompose = it != 0 },
-      )
-    }
-
-    if (cases.size == 1) {
-      cases.first().content()
-    } else {
-      LazyColumn {
-        items(cases) {
-          ComponentItem(title = it.name, showComposeBadge = false) {
-            onClick(it)
-          }
         }
       }
     }

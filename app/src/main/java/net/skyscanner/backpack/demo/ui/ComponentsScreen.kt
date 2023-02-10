@@ -32,7 +32,7 @@ fun ComponentsScreen(
 ) {
 
   val state = rememberTopAppBarState()
-  val map = remember(stories) { stories.groupBy { it.component } }
+  val map = remember(stories) { stories.groupBy { it.component }.filter { it.value.isNotEmpty() } }
   val components = remember(map) { map.keys.sortedBy { it.name } }
 
   Column(modifier = modifier.nestedScroll(state)) {
