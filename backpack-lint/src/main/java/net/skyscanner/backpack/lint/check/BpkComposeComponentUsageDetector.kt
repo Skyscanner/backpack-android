@@ -73,7 +73,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
   ) {
     BOTTOM_NAV(
       fullName = "net.skyscanner.backpack.compose.bottomnav.BpkBottomNav",
-      webName = "bottom-nav",
+      webName = "bottom-navigation",
       componentsToReplace = setOf("androidx.compose.material.BottomNavigation"),
     ),
     BOTTOM_SHEET(
@@ -138,7 +138,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
     ),
     HORIZONTAL_NAV(
       fullName = "net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav",
-      webName = "horizontal-nav",
+      webName = "horizontal-navigation",
       componentsToReplace = setOf(
         "androidx.compose.material.Tab",
         "androidx.compose.material.TabRow",
@@ -195,7 +195,7 @@ class BpkComposeComponentUsageDetector : Detector(), SourceCodeScanner {
     ),
     ;
 
-    val url: String = "https://backpack.github.io/components/$webName"
+    val url: String = "https://skyscanner.design/latest/components/$webName/compose.html"
 
     private fun replacesComponent(componentToReplace: String) = componentsToReplace.contains(componentToReplace)
 

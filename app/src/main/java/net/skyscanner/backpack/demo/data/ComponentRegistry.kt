@@ -36,6 +36,8 @@ import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CalendarStory
 import net.skyscanner.backpack.demo.compose.CardButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
+import net.skyscanner.backpack.demo.compose.DividedCardStory
+import net.skyscanner.backpack.demo.compose.CardWrapperStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
@@ -243,7 +245,14 @@ object ComponentRegistry {
             },
           ),
         ),
-        TAB_TITLE_COMPOSE composeStory { CardStory() },
+        TAB_TITLE_COMPOSE story NodeData(
+          { children -> SubStory of children },
+          mapOf(
+            "Card" composeStory { CardStory() },
+            "Divided card" composeStory { DividedCardStory() },
+            "Card wrapper" composeStory { CardWrapperStory() },
+          ),
+        ),
       ),
     ),
     "Card Button" story NodeData(
