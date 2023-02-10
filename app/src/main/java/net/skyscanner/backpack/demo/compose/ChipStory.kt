@@ -54,9 +54,12 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @ComposeStory
 @ChipComponent
-fun ChipStory(style: BpkChipStyle = BpkChipStyle.Default) {
+fun ChipStory(
+  modifier: Modifier = Modifier,
+  style: BpkChipStyle = BpkChipStyle.Default,
+) {
 
-  Box {
+  Box(modifier) {
     if (style == BpkChipStyle.OnImage) {
       Image(
         painter = painterResource(R.drawable.canadian_rockies_canada),

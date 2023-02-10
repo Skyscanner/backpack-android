@@ -43,10 +43,8 @@ import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.compose.ComponentItem
 import net.skyscanner.backpack.demo.compose.ComponentsTitle
-import net.skyscanner.backpack.demo.meta.ComponentEntry
-import net.skyscanner.backpack.demo.meta.Kind
-import net.skyscanner.backpack.demo.meta.Stories
-import net.skyscanner.backpack.demo.meta.StoryEntry
+import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.meta.all
 
 /**
@@ -61,15 +59,15 @@ class MainActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val screens = Stories.all()
+    val screens = Story.all()
     val components = screens
       .groupBy { it.component }
 
     setContent {
       BackpackDemoTheme {
 
-        var currentComponent by remember { mutableStateOf<ComponentEntry?>(null) }
-        var currentCase by remember { mutableStateOf<StoryEntry?>(null) }
+        var currentComponent by remember { mutableStateOf<Component?>(null) }
+        var currentCase by remember { mutableStateOf<Story?>(null) }
 
         when {
           currentCase != null -> DemoScreen(
@@ -77,12 +75,13 @@ class MainActivity : BpkBaseActivity() {
             onBack = { currentCase = null },
           )
           currentComponent != null -> CasesScreen(
+            component = currentComponent!!,
             cases = components[currentComponent!!]!!,
             onBack = { currentComponent = null },
             onClick = { currentCase = it },
           )
           else -> ComponentsScreen(
-            components = components.keys.toList().sortedBy { it.name },
+            components = components,
             onClick = { currentComponent = it },
           )
         }
@@ -93,9 +92,9 @@ class MainActivity : BpkBaseActivity() {
 
 @Composable
 private fun ComponentsScreen(
-  components: List<ComponentEntry>,
+  components: Map<Component, List<Story>>,
   modifier: Modifier = Modifier,
-  onClick: (ComponentEntry) -> Unit,
+  onClick: (Component) -> Unit,
 ) {
   val state = rememberTopAppBarState()
   Column(modifier = modifier.nestedScroll(state)) {
@@ -119,8 +118,10 @@ private fun ComponentsScreen(
       item {
         ComponentsTitle(title = stringResource(R.string.components_title))
       }
-      items(components) {
-        ComponentItem(title = it.name, showComposeBadge = it.kind == Kind.Compose)
+      items(components.keys.toList()) {
+        ComponentItem(title = it.name, showComposeBadge = components[it]!!.any { it.isCompose }) {
+          onClick(it)
+        }
       }
     }
   }
@@ -128,12 +129,12 @@ private fun ComponentsScreen(
 
 @Composable
 private fun CasesScreen(
-  cases: List<StoryEntry>,
+  component: Component,
+  cases: List<Story>,
   onBack: () -> Unit,
-  onClick: (StoryEntry) -> Unit,
+  onClick: (Story) -> Unit,
   modifier: Modifier = Modifier,
 ) {
-  val component = cases.first().component
 
   Column(modifier = modifier) {
     val context = LocalContext.current
@@ -155,26 +156,27 @@ private fun CasesScreen(
       ),
     )
 
-    var kind by remember { mutableStateOf(component.kind) }
+    var isCompose by remember { mutableStateOf(true) }
 
-    if (cases.distinctBy { it.component.kind }.size > 1) {
+    if (cases.distinctBy { it.isCompose }.size > 1) {
       BpkHorizontalNav(
         tabs = listOf(
           BpkHorizontalNavTab(title = "View"),
           BpkHorizontalNavTab(title = "Compose"),
         ),
-        activeIndex = if (kind == Kind.View) 0 else 1,
-        onChanged = { kind = if (it == 0) Kind.View else Kind.Compose },
+        activeIndex = if (isCompose) 1 else 0,
+        onChanged = { isCompose = it != 0 },
       )
     }
 
-    val cases = cases.filter { it.component.kind == kind }
     if (cases.size == 1) {
       cases.first().content()
     } else {
       LazyColumn {
         items(cases) {
-          ComponentItem(title = it.name, showComposeBadge = false)
+          ComponentItem(title = it.name, showComposeBadge = false) {
+            onClick(it)
+          }
         }
       }
     }
@@ -183,7 +185,7 @@ private fun CasesScreen(
 
 @Composable
 private fun DemoScreen(
-  case: StoryEntry,
+  case: Story,
   modifier: Modifier = Modifier,
   onBack: () -> Unit,
 ) {

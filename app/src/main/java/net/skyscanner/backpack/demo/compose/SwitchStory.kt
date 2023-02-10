@@ -119,7 +119,7 @@ fun CustomContentSwitchExample() {
   }
 }
 
-@ViewStory(R.layout.fragment_switch)
+@ViewStory(layoutId = R.layout.fragment_switch)
 @SwitchComponent
 fun switchStory() {
 }

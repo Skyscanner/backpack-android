@@ -28,6 +28,7 @@ object ComposeStoriesVisitor : KSDefaultVisitor<Map<KSName, ComponentDefinition>
         isCompose = true,
         isScreenshot = annotation[ComposeStoryAnnotation.paramScreenshot],
         reference = function.qualifiedName!!.asString(),
+        layoutId = 0,
         location = location,
       )
       else -> super.visitFunctionDeclaration(function, data)
