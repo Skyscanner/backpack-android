@@ -38,14 +38,12 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
-import net.skyscanner.backpack.compose.navigationbar.nestedScroll
-import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.compose.ComponentItem
-import net.skyscanner.backpack.demo.compose.ComponentsTitle
 import net.skyscanner.backpack.demo.meta.Component
 import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.meta.all
+import net.skyscanner.backpack.demo.ui.ComponentsScreen
 
 /**
  * An activity representing a list of Components. This activity
@@ -81,46 +79,8 @@ class MainActivity : BpkBaseActivity() {
             onClick = { currentCase = it },
           )
           else -> ComponentsScreen(
-            components = components,
             onClick = { currentComponent = it },
           )
-        }
-      }
-    }
-  }
-}
-
-@Composable
-private fun ComponentsScreen(
-  components: Map<Component, List<Story>>,
-  modifier: Modifier = Modifier,
-  onClick: (Component) -> Unit,
-) {
-  val state = rememberTopAppBarState()
-  Column(modifier = modifier.nestedScroll(state)) {
-    val context = LocalContext.current
-    BpkTopNavBar(
-      state = state,
-      navIcon = NavIcon.None,
-      title = stringResource(R.string.app_name),
-      actions = listOf(
-        IconAction(
-          icon = BpkIcon.Settings,
-          contentDescription = stringResource(R.string.settings_title),
-          onClick = {
-            val intent = Intent(context, SettingsActivity::class.java)
-            context.startActivity(intent)
-          },
-        ),
-      ),
-    )
-    LazyColumn {
-      item {
-        ComponentsTitle(title = stringResource(R.string.components_title))
-      }
-      items(components.keys.toList()) {
-        ComponentItem(title = it.name, showComposeBadge = components[it]!!.any { it.isCompose }) {
-          onClick(it)
         }
       }
     }
