@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -36,14 +37,11 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.HelpCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
-import net.skyscanner.backpack.demo.components.BadgeComponent
-import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@BadgeComponent
-@ComposeStory
-fun BadgeStory(modifier: Modifier = Modifier) {
-  Column(modifier) {
+@Preview
+fun BadgeStory() {
+  Column {
     BpkBadgeType.values().forEach { type ->
       BadgeRow(type = type)
     }

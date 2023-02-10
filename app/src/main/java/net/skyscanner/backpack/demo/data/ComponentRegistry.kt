@@ -318,9 +318,9 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Default" composeStory { ComposeChipStory(style = BpkChipStyle.Default) },
-            "On Dark" composeStory { ComposeChipStory(style = BpkChipStyle.OnDark) },
-            "On Image" composeStory { ComposeChipStory(style = BpkChipStyle.OnImage) },
+            "Default" composeStory { ComposeChipStory(BpkChipStyle.Default) },
+            "On Dark" composeStory { ComposeChipStory(BpkChipStyle.OnDark) },
+            "On Image" composeStory { ComposeChipStory(BpkChipStyle.OnImage) },
           ),
         ),
       ),

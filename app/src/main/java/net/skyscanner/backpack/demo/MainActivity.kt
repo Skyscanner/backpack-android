@@ -18,17 +18,29 @@
 
 package net.skyscanner.backpack.demo
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import net.skyscanner.backpack.demo.meta.Component
-import net.skyscanner.backpack.demo.meta.Story
-import net.skyscanner.backpack.demo.ui.CasesScreen
-import net.skyscanner.backpack.demo.ui.ComponentsScreen
-import net.skyscanner.backpack.demo.ui.DemoScreen
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import net.skyscanner.backpack.compose.icon.BpkIcon
+import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
+import net.skyscanner.backpack.compose.navigationbar.IconAction
+import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.navigationbar.nestedScroll
+import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
+import net.skyscanner.backpack.compose.tokens.Settings
+import net.skyscanner.backpack.demo.compose.ComponentItem
+import net.skyscanner.backpack.demo.compose.ComponentsTitle
+import net.skyscanner.backpack.demo.data.ComponentRegistry
+import net.skyscanner.backpack.demo.data.ComposeNode
+import net.skyscanner.backpack.demo.data.NodeItem
+import net.skyscanner.backpack.demo.data.RegistryItem
 
 /**
  * An activity representing a list of Components. This activity
@@ -42,28 +54,64 @@ class MainActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
     setContent {
       BackpackDemoTheme {
+        ComponentScreen()
+      }
+    }
+  }
 
-        var currentComponent by remember { mutableStateOf<Component?>(null) }
-        var currentCase by remember { mutableStateOf<Story?>(null) }
-
-        when {
-          currentCase != null -> DemoScreen(
-            case = currentCase!!,
-            onBack = { currentCase = null },
-          )
-          currentComponent != null -> CasesScreen(
-            component = currentComponent!!,
-            onBack = { currentComponent = null },
-            onClick = { currentCase = it },
-          )
-          else -> ComponentsScreen(
-            onClick = { currentComponent = it },
-          )
+  @Composable
+  private fun ComponentScreen(modifier: Modifier = Modifier) {
+    val state = rememberTopAppBarState()
+    Column(modifier = modifier.nestedScroll(state)) {
+      val context = LocalContext.current
+      BpkTopNavBar(
+        state = state,
+        navIcon = NavIcon.None,
+        title = stringResource(R.string.app_name),
+        actions = listOf(
+          IconAction(
+            icon = BpkIcon.Settings,
+            contentDescription = stringResource(R.string.settings_title),
+            onClick = {
+              val intent = Intent(context, SettingsActivity::class.java)
+              context.startActivity(intent)
+            },
+          ),
+        ),
+      )
+      LazyColumn {
+        item {
+          ComponentsTitle(stringResource(R.string.tokens_title))
+        }
+        items(ComponentRegistry.TOKENS.values.toList()) {
+          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it)) {
+            showComponentDetail(it.name)
+          }
+        }
+        item {
+          ComponentsTitle(title = stringResource(R.string.components_title))
+        }
+        items(ComponentRegistry.COMPONENTS.values.toList()) {
+          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it)) {
+            showComponentDetail(it.name)
+          }
         }
       }
     }
+  }
+
+  private fun showComponentDetail(title: String) {
+    val intent = Intent(this, ComponentDetailActivity::class.java)
+    intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, title)
+    startActivity(intent)
+  }
+
+  private fun hasComposeNodes(item: RegistryItem): Boolean {
+    if (item is ComposeNode) {
+      return true
+    }
+    return item is NodeItem && item.subItems.values.any { hasComposeNodes(it) }
   }
 }

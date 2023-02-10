@@ -36,12 +36,8 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.AccountCircle
 import net.skyscanner.backpack.compose.tokens.Trips
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.components.BottomNavComponent
-import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@ComposeStory
-@BottomNavComponent
 fun BpkBottomNavStory(modifier: Modifier = Modifier) {
   Box(
     modifier = modifier.fillMaxSize(),

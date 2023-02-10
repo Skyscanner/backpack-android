@@ -40,16 +40,13 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.CloseCircle
 import net.skyscanner.backpack.compose.tokens.TickCircle
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.components.HorizontalNavComponent
-import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@HorizontalNavComponent
-@ComposeStory
-fun HorizontalNavComposeStory(modifier: Modifier = Modifier) {
+@Preview
+fun HorizontalNavComposeStory() {
 
   Column(
-    modifier = modifier
+    modifier = Modifier
       .background(BpkTheme.colors.surfaceHighlight)
       .padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),

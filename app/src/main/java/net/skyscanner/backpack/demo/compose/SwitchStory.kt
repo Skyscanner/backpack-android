@@ -35,8 +35,6 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.components.SwitchComponent
-import net.skyscanner.backpack.demo.meta.ViewStory
 
 @Composable
 @Preview
@@ -117,9 +115,4 @@ fun CustomContentSwitchExample() {
       BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
     }
   }
-}
-
-@ViewStory(layoutId = R.layout.fragment_switch)
-@SwitchComponent
-fun switchStory() {
 }

@@ -38,15 +38,12 @@ import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
-import net.skyscanner.backpack.demo.components.CardComponent
-import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@CardComponent
-@ComposeStory
-fun CardStory(modifier: Modifier = Modifier) {
+@Preview
+fun CardStory() {
   Column(
-    modifier = modifier
+    modifier = Modifier
       .background(BpkTheme.colors.line)
       .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
