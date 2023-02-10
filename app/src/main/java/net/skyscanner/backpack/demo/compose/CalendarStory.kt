@@ -26,8 +26,19 @@ import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
+import net.skyscanner.backpack.demo.components.CalendarComponent
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStoryType
+import net.skyscanner.backpack.demo.meta.ComposeStory
+
+@Composable
+@ComposeStory
+@CalendarComponent
+fun CalendarStory(
+  modifier: Modifier = Modifier,
+) {
+  CalendarStory(CalendarStoryType.PreselectedRange)
+}
 
 @Composable
 fun CalendarStory(

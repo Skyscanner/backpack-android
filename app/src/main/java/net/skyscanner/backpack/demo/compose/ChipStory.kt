@@ -39,7 +39,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkDismissibleChip
@@ -49,9 +48,12 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Deals
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.ChipComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
+@ComposeStory
+@ChipComponent
 fun ChipStory(style: BpkChipStyle = BpkChipStyle.Default) {
 
   Box {
