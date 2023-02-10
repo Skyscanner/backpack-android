@@ -23,6 +23,8 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
@@ -32,10 +34,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloatingNotificationData
 import net.skyscanner.backpack.compose.floatingnotification.internal.BpkFloatingNotificationImpl
 import net.skyscanner.backpack.compose.floatingnotification.internal.floatingNotificationTransforms
@@ -57,11 +62,13 @@ fun BpkFloatingNotification(
       currentData.dismiss()
     }
   }
+  val componentHeight = if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height else DefaultPhoneSize.height
+  val slideDistancePx = with(LocalDensity.current) { (BpkSpacing.Lg + componentHeight).toPx().toInt() }
 
   AnimatedContent(
     targetState = currentData,
     modifier = modifier,
-    transitionSpec = floatingNotificationTransforms(),
+    transitionSpec = floatingNotificationTransforms(slideDistancePx),
   ) { data ->
 
     Box(
@@ -72,7 +79,11 @@ fun BpkFloatingNotification(
     ) {
 
       if (data != null) {
-        BpkFloatingNotificationImpl(data)
+        BpkFloatingNotificationImpl(
+          data = data,
+          modifier = Modifier.requiredHeight(componentHeight)
+            .widthIn(max = DefaultTabletSize.width),
+        )
       }
     }
   }
@@ -80,8 +91,6 @@ fun BpkFloatingNotification(
 
 @Stable
 class BpkFloatingNotificationState {
-
-  private val mutex = Mutex()
 
   internal var currentData by mutableStateOf<BpkFloatingNotificationData?>(null)
     private set
@@ -91,17 +100,15 @@ class BpkFloatingNotificationState {
     cta: String? = null,
     onClick: (() -> Unit)? = null,
     icon: BpkIcon? = null,
-    hideAfter: Long = 4000L,
+    hideAfter: Long = DEFAULT_DELAY,
     onExit: (() -> Unit)? = null,
   ): Unit =
-    mutex.withLock {
-      try {
-        return suspendCancellableCoroutine { continuation ->
-          currentData = BpkFloatingNotificationData(text, icon, cta, hideAfter, onExit, onClick, continuation)
-        }
-      } finally {
-        currentData = null
+    try {
+      suspendCancellableCoroutine { continuation ->
+        currentData = BpkFloatingNotificationData(text, icon, cta, hideAfter, onExit, onClick, continuation)
       }
+    } finally {
+      currentData = null
     }
 }
 
@@ -110,3 +117,8 @@ fun rememberBpkFloatingNotificationState(): BpkFloatingNotificationState =
   remember {
     BpkFloatingNotificationState()
   }
+
+private const val DEFAULT_DELAY = 4000L
+private const val TABLET_MIN_WIDTH = 769
+private val DefaultPhoneSize = DpSize(Dp.Unspecified, 52.dp)
+private val DefaultTabletSize = DpSize(400.dp, 72.dp)
