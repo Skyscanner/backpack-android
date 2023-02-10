@@ -18,28 +18,17 @@
 
 package net.skyscanner.backpack.demo
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
-import net.skyscanner.backpack.compose.navigationbar.IconAction
-import net.skyscanner.backpack.compose.navigationbar.NavIcon
-import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.meta.Component
 import net.skyscanner.backpack.demo.meta.Story
-import net.skyscanner.backpack.demo.meta.all
 import net.skyscanner.backpack.demo.ui.CasesScreen
 import net.skyscanner.backpack.demo.ui.ComponentsScreen
+import net.skyscanner.backpack.demo.ui.DemoScreen
 
 /**
  * An activity representing a list of Components. This activity
@@ -53,9 +42,6 @@ class MainActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val screens = Story.all()
-    val components = screens
-      .groupBy { it.component }
 
     setContent {
       BackpackDemoTheme {
@@ -79,34 +65,5 @@ class MainActivity : BpkBaseActivity() {
         }
       }
     }
-  }
-}
-
-@Composable
-private fun DemoScreen(
-  case: Story,
-  modifier: Modifier = Modifier,
-  onBack: () -> Unit,
-) {
-  Column(modifier = modifier) {
-    val context = LocalContext.current
-    BpkTopNavBar(
-      navIcon = NavIcon.Back(
-        contentDescription = "Back",
-        onClick = { onBack() },
-      ),
-      title = case.component.name + " - " + case.name,
-      actions = listOf(
-        IconAction(
-          icon = BpkIcon.Settings,
-          contentDescription = stringResource(R.string.settings_title),
-          onClick = {
-            val intent = Intent(context, SettingsActivity::class.java)
-            context.startActivity(intent)
-          },
-        ),
-      ),
-    )
-    case.content()
   }
 }
