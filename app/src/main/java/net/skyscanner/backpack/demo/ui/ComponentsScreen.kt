@@ -61,9 +61,7 @@ fun ComponentsScreen(
         ComponentItem(
           title = component.name,
           showComposeBadge = map.getValue(component).any { it.isCompose },
-          onClick = {
-            onClick(component)
-          },
+          onClick = { onClick(component) },
         )
       }
     }
