@@ -20,13 +20,17 @@
 package net.skyscanner.backpack.compose.starrating
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.progressSemantics
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.composed
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.setProgress
+import androidx.compose.ui.semantics.stateDescription
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.round
+import kotlin.math.roundToInt
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.icon.BpkIconSize
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -86,7 +90,7 @@ fun BpkHotelRating(
 
 @Composable
 fun BpkInteractiveStarRating(
-  onRatingSelected: (Int) -> Unit,
+  onRatingChanged: (Int) -> Unit,
   selectedRating: Int,
   contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
@@ -97,7 +101,7 @@ fun BpkInteractiveStarRating(
     maxRating = 5,
     rounding = rounding,
     modifier = modifier,
-    onRatingSelected = onRatingSelected,
+    onRatingChanged = onRatingChanged,
     rating = selectedRating.toFloat(),
     contentDescription = contentDescription,
     size = size,
@@ -112,7 +116,7 @@ private fun BpkStarRating(
   contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
-  onRatingSelected: ((Int) -> Unit)? = null,
+  onRatingChanged: ((Int) -> Unit)? = null,
 ) {
   val iconSize = when (size) {
     BpkStarRatingSize.Large -> BpkIconSize.Large
@@ -124,13 +128,19 @@ private fun BpkStarRating(
     BpkRatingRounding.Up -> ceil(coercedRating * 2) / 2
     BpkRatingRounding.Nearest -> round(coercedRating * 2) / 2
   }
-  val scope = rememberContentDescriptionScope()
-  Row(modifier = modifier.semantics { this.contentDescription = scope.contentDescription(roundedRating, maxRating) }) {
+  Row(
+    modifier = modifier.interactiveStarRatingSemantics(
+      contentDescription = contentDescription,
+      maxRating = maxRating,
+      onRatingChanged = onRatingChanged,
+      rating = rating,
+    ),
+  ) {
     for (item in 0 until maxRating) {
       val value = (roundedRating - item).coerceIn(0f, 1f)
       val starModifier = Modifier
-        .applyIf(onRatingSelected != null) {
-          clickable { onRatingSelected?.invoke(item + 1) }
+        .applyIf(onRatingChanged != null) {
+          clickable { onRatingChanged?.invoke(item + 1) }
         }
       when {
         (value >= 0.0f && value < 0.5f) -> BpkStar(
@@ -188,4 +198,38 @@ private enum class BpkRatingStarType {
   Empty,
   Half,
   Full,
+}
+
+private fun Modifier.interactiveStarRatingSemantics(
+  rating: Float,
+  maxRating: Int,
+  onRatingChanged: ((Int) -> Unit)?,
+  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
+): Modifier = composed {
+  val range = 0f..maxRating.toFloat()
+  val scope = rememberContentDescriptionScope()
+  semantics(mergeDescendants = true) {
+
+    // this is needed to use volume keys
+    if (onRatingChanged != null) {
+      setProgress { targetValue ->
+        val newValue = targetValue
+          .coerceIn(range)
+        if (newValue != rating) {
+          onRatingChanged(newValue.roundToInt())
+          true
+        } else {
+          false
+        }
+      }
+    }
+    // override describing percents
+    stateDescription = scope.contentDescription(rating, maxRating)
+  }
+    .progressSemantics(
+      // this is needed to use volume keys
+      value = rating,
+      valueRange = range,
+      steps = maxRating,
+    )
 }

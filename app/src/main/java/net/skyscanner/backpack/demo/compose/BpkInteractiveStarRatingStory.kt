@@ -81,7 +81,7 @@ private fun InteractiveRatingSample(
       key(i) {
         var selectedRating by remember { mutableStateOf(i) }
         BpkInteractiveStarRating(
-          onRatingSelected = { selectedRating = it },
+          onRatingChanged = { selectedRating = it },
           selectedRating = selectedRating,
           contentDescription = { value, max ->
             stringResource(R.string.star_rating_accessibility_status, value, max)
