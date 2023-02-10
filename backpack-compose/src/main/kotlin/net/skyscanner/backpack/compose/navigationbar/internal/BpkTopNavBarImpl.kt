@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.compose.navigationbar.internal
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
@@ -61,7 +62,7 @@ internal fun BpkTopNavBarImpl(
   actions: List<Action> = emptyList(),
 ) {
   Surface(
-    color = BpkTheme.colors.surfaceDefault,
+    color = animateColorAsState(targetValue = if (fraction == 0f) BpkTheme.colors.surfaceDefault else BpkTheme.colors.canvas).value,
     contentColor = BpkTheme.colors.textPrimary,
     elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
     shape = RectangleShape,
