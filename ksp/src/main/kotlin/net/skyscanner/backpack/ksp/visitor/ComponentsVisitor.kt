@@ -14,13 +14,14 @@ object ComponentsVisitor : KSDefaultVisitor<Unit, ComponentDefinition?>() {
   override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit): ComponentDefinition? {
     val annotation = classDeclaration.annotations.find(ComponentAnnotation)
     val location = classDeclaration.location
+    val qualifiedName = classDeclaration.qualifiedName
 
     return when {
-      annotation != null && location is FileLocation ->
+      annotation != null && qualifiedName != null && location is FileLocation ->
         ComponentDefinition(
+          id = qualifiedName,
           name = annotation[ComponentAnnotation.paramName],
           link = annotation[ComponentAnnotation.paramLink],
-          kind = annotation[ComponentAnnotation.paramKind],
           location = location,
         )
       else -> super.visitClassDeclaration(classDeclaration, data)

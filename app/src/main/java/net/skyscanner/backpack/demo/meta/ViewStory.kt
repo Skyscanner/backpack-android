@@ -35,5 +35,5 @@ import javax.annotation.concurrent.Immutable
 annotation class ViewStory(
   val name: String = "Default",
   val screenshot: Boolean = true,
-  @LayoutRes val layout: Int = 0,
+  @LayoutRes val layoutId: Int = 0,
 )

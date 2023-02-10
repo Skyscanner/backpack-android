@@ -9,9 +9,8 @@ import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.validate
 import net.skyscanner.backpack.ksp.visitor.ComponentsVisitor
-import net.skyscanner.backpack.ksp.visitor.SamplesVisitor
-import net.skyscanner.backpack.ksp.visitor.SnapshotsVisitor
-import net.skyscanner.backpack.ksp.visitor.StoriesVisitor
+import net.skyscanner.backpack.ksp.visitor.ComposeStoriesVisitor
+import net.skyscanner.backpack.ksp.visitor.ViewStoriesVisitor
 import net.skyscanner.backpack.ksp.writer.writeListOfStories
 
 @OptIn(ExperimentalProcessingApi::class)
@@ -32,25 +31,21 @@ class BackpackSymbolProcessor(
       .getSymbolsWithAnnotation(ComponentAnnotation.qualifiedName)
       .filter { it.validate() }
       .mapNotNull { it.accept(ComponentsVisitor, Unit) }
-      .associateBy { it.location.filePath }
+      .associateBy { it.id }
 
-    val stories = resolver
-      .getSymbolsWithAnnotation(StoryAnnotation.qualifiedName)
+    val composeStories = resolver
+      .getSymbolsWithAnnotation(ComposeStoryAnnotation.qualifiedName)
       .filter { it.validate() }
-      .mapNotNull { it.accept(StoriesVisitor, components) }
-      .also { writeListOfStories(it.toList(), filer) }
+      .mapNotNull { it.accept(ComposeStoriesVisitor, components) }
 
-    val samples = resolver
-      .getSymbolsWithAnnotation(SampleAnnotation.qualifiedName)
+    val viewStories = resolver
+      .getSymbolsWithAnnotation(ViewStoryAnnotation.qualifiedName)
       .filter { it.validate() }
-      .mapNotNull { it.accept(SamplesVisitor, components) }
+      .mapNotNull { it.accept(ViewStoriesVisitor, components) }
 
-    val snapshots = resolver
-      .getSymbolsWithAnnotation(SnapshotAnnotation.qualifiedName)
-      .filter { it.validate() }
-      .mapNotNull { it.accept(SnapshotsVisitor, components) }
+    writeListOfStories((composeStories + viewStories).toList(), filer)
 
-    fileLog("ksp", stories.joinToString(separator = "\n"))
+    fileLog("ksp", composeStories.joinToString(separator = "\n"))
 
     invoked = true
     return emptyList()
