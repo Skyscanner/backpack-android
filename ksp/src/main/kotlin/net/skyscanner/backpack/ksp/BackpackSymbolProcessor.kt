@@ -45,8 +45,6 @@ class BackpackSymbolProcessor(
 
     writeListOfStories((composeStories + viewStories).toList(), filer)
 
-    fileLog("ksp", composeStories.joinToString(separator = "\n"))
-
     invoked = true
     return emptyList()
   }
