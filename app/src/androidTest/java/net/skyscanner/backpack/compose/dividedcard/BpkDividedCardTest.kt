@@ -31,6 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
+import net.skyscanner.backpack.compose.card.BpkCardElevation
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -102,6 +103,34 @@ class BpkDividedCardTest : BpkSnapshotTest() {
     snap {
       BpkDividedCard(
         modifier = Modifier.width(400.dp),
+        primaryContent = {
+          Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+          BpkText(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.divided_card_primary_content),
+            style = BpkTheme.typography.bodyDefault,
+            textAlign = TextAlign.Center,
+          )
+        },
+        secondaryContent = {
+          Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+          BpkText(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.divided_card_secondary_content),
+            style = BpkTheme.typography.bodyDefault,
+            textAlign = TextAlign.Center,
+          )
+        },
+      )
+    }
+  }
+
+  @Test
+  fun noShadowCard() {
+    snap {
+      BpkDividedCard(
+        modifier = Modifier.width(400.dp),
+        isElevated = BpkCardElevation.None,
         primaryContent = {
           Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
           BpkText(
