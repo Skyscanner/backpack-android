@@ -265,7 +265,9 @@
   <string name="divided_card_width_less_than_minimum"><![CDATA[Card width < 240 Dp]]></string>
   <string name="divided_card_empty_card">Empty Card</string>
   <string name="divided_card_primary_content">Divided Card primary content</string>
+  <string name="divided_card_no_shadow_primary_content">Divided Card No Shadow primary content</string>
   <string name="divided_card_secondary_content">Divided Card secondary content</string>
+  <string name="divided_card_no_shadow_secondary_content">Divided Card No Shadow secondary content</string>
   <string name="price_price">£1,830</string>
   <string name="price_trailing_text">per day</string>
   <string name="price_line_through_text">£2,033</string>
