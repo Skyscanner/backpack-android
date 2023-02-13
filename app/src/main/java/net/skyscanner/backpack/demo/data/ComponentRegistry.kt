@@ -63,6 +63,7 @@ import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.TextFiledStory
+import net.skyscanner.backpack.demo.compose.CarouselStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
 import net.skyscanner.backpack.demo.stories.Calendar2Story
@@ -262,6 +263,7 @@ object ComponentRegistry {
         "Small" composeStory { CardButtonsStory(size = BpkCardButtonSize.Small) },
       ),
     ),
+    "Carousel" composeStory { CarouselStory() },
     "Calendar" story NodeData(
       { children -> SubStory of children },
       mapOf(

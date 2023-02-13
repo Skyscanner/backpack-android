@@ -60,6 +60,7 @@ dependencies {
   implementation rootProject.ext.androidXLifecycleViewmodelKtx
   implementation rootProject.ext.ktx
   implementation rootProject.ext.composeFoundation
+  implementation rootProject.ext.accompanistPager
 
   androidTestImplementation rootProject.ext.junitAndroid
   androidTestImplementation rootProject.ext.testRules

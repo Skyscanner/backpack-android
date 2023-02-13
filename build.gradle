@@ -135,6 +135,7 @@ ext {
   composeActivity = "androidx.activity:activity-compose:1.6.1"
 
   accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
+  accompanistPager = "com.google.accompanist:accompanist-pager:0.28.0"
 }
 
 tasks.dokkaHtmlMultiModule.configure {
