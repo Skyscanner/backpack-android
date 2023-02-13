@@ -226,10 +226,12 @@ private fun Modifier.interactiveStarRatingSemantics(
     // override describing percents
     stateDescription = scope.contentDescription(rating, maxRating)
   }
-    .progressSemantics(
-      // this is needed to use volume keys
-      value = rating,
-      valueRange = range,
-      steps = maxRating,
-    )
+    .applyIf(onRatingChanged != null) {
+      progressSemantics(
+        // this is needed to use volume keys
+        value = rating,
+        valueRange = range,
+        steps = maxRating,
+      )
+    }
 }
