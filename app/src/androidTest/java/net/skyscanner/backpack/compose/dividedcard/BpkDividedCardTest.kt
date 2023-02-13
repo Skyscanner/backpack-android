@@ -130,7 +130,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
     snap {
       BpkDividedCard(
         modifier = Modifier.width(400.dp),
-        isElevated = BpkCardElevation.None,
+        elevation = BpkCardElevation.None,
         primaryContent = {
           Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
           BpkText(

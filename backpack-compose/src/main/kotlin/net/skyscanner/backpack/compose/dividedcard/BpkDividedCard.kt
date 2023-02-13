@@ -40,7 +40,7 @@ fun BpkDividedCard(
   secondaryContent: @Composable () -> Unit,
   modifier: Modifier = Modifier,
   onClick: (() -> Unit)? = null,
-  isElevated: BpkCardElevation = BpkCardElevation.Default,
+  elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
   onClick?.let {
     BpkCard(
@@ -48,7 +48,7 @@ fun BpkDividedCard(
       modifier = modifier,
       corner = BpkCardCorner.Small,
       padding = BpkCardPadding.None,
-      elevation = isElevated,
+      elevation = elevation,
     ) {
       Content(
         primaryContent = primaryContent,
@@ -60,7 +60,7 @@ fun BpkDividedCard(
       modifier = modifier,
       corner = BpkCardCorner.Small,
       padding = BpkCardPadding.None,
-      elevation = isElevated,
+      elevation = elevation,
     ) {
       Content(
         primaryContent = primaryContent,
