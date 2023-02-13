@@ -22,6 +22,7 @@ package net.skyscanner.backpack.compose.starrating
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.semantics.semantics
@@ -137,27 +138,29 @@ private fun BpkStarRating(
     ),
   ) {
     for (item in 0 until maxRating) {
-      val value = (roundedRating - item).coerceIn(0f, 1f)
-      val starModifier = Modifier
-        .applyIf(onRatingChanged != null) {
-          clickable { onRatingChanged?.invoke(item + 1) }
+      key(item) {
+        val value = (roundedRating - item).coerceIn(0f, 1f)
+        val starModifier = Modifier
+          .applyIf(onRatingChanged != null) {
+            clickable(bounded = false) { onRatingChanged?.invoke(item + 1) }
+          }
+        when {
+          (value >= 0.0f && value < 0.5f) -> BpkStar(
+            icon = BpkRatingStarType.Empty,
+            iconSize = iconSize,
+            modifier = starModifier,
+          )
+          (value >= 0.5f && value < 1.0f) -> BpkStar(
+            icon = BpkRatingStarType.Half,
+            iconSize = iconSize,
+            modifier = starModifier,
+          )
+          else -> BpkStar(
+            icon = BpkRatingStarType.Full,
+            iconSize = iconSize,
+            modifier = starModifier,
+          )
         }
-      when {
-        (value >= 0.0f && value < 0.5f) -> BpkStar(
-          icon = BpkRatingStarType.Empty,
-          iconSize = iconSize,
-          modifier = starModifier,
-        )
-        (value >= 0.5f && value < 1.0f) -> BpkStar(
-          icon = BpkRatingStarType.Half,
-          iconSize = iconSize,
-          modifier = starModifier,
-        )
-        else -> BpkStar(
-          icon = BpkRatingStarType.Full,
-          iconSize = iconSize,
-          modifier = starModifier,
-        )
       }
     }
   }
