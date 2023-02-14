@@ -63,7 +63,7 @@ fun CarouselStory(
     BpkText(text = stringResource(id = R.string.carousel_multiple_items))
     CarouselSample(totalItems = 3)
 
-    BpkText(text = stringResource(id = R.string.carousel_multiple_items))
+    BpkText(text = stringResource(id = R.string.carousel_start_at_different_index))
     CarouselSample(totalItems = 3, currentImage = 2)
 
     BpkText(text = stringResource(id = R.string.carousel_image_change_callback))
