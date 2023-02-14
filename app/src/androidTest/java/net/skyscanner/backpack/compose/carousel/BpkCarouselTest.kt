@@ -26,6 +26,7 @@ import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import org.junit.Test
 import org.junit.runner.RunWith
+import net.skyscanner.backpack.demo.R
 
 @RunWith(AndroidJUnit4::class)
 class BpkCarouselTest : BpkSnapshotTest() {
@@ -75,10 +76,10 @@ class BpkCarouselTest : BpkSnapshotTest() {
   }
 
   private fun imageResAtIndex(index: Int) = when (index) {
-    0 -> net.skyscanner.backpack.demo.R.drawable.canadian_rockies_canada
-    1 -> net.skyscanner.backpack.demo.R.drawable.canadian_rockies_canada
-    2 -> net.skyscanner.backpack.demo.R.drawable.canadian_rockies_canada
-    else -> net.skyscanner.backpack.demo.R.drawable.canadian_rockies_canada
+    0 -> R.drawable.canadian_rockies_canada
+    1 -> R.drawable.beach
+    2 -> R.drawable.city
+    else -> R.drawable.canadian_rockies_canada
   }
 
 }

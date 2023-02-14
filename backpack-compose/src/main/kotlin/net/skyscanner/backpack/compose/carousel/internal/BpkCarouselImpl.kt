@@ -38,10 +38,10 @@ import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 internal fun BpkCarouselImpl(
-  modifier: Modifier = Modifier,
   imageContent: @Composable (BoxScope.(Int) -> Unit),
-  currentImage: Int,
   count: Int,
+  currentImage: Int,
+  modifier: Modifier = Modifier,
   onImageChanged: ((Int) -> Unit)? = null,
 ) {
   Box(modifier = modifier) {
@@ -61,7 +61,7 @@ internal fun BpkCarouselImpl(
     HorizontalPager(
       modifier = Modifier.testTag("pager"),
       count = if (count > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
-      state = pagerState
+      state = pagerState,
     ) { index ->
       val page = getModNumber(index, count)
       imageContent(page)
@@ -75,7 +75,7 @@ internal fun BpkCarouselImpl(
           .testTag("pageIndicator"),
         totalIndicators = count,
         currentIndex = selectedPage,
-        style = BpkPageIndicatorStyle.OverImage
+        style = BpkPageIndicatorStyle.OverImage,
       )
     }
   }

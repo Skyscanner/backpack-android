@@ -25,10 +25,10 @@ import net.skyscanner.backpack.compose.carousel.internal.BpkCarouselImpl
 
 @Composable
 fun BpkCarousel(
-  modifier: Modifier = Modifier,
   imageContent: @Composable (BoxScope.(Int) -> Unit),
-  currentImage: Int = 0,
   count: Int,
+  modifier: Modifier = Modifier,
+  currentImage: Int = 0,
   onImageChanged: ((Int) -> Unit)? = null,
 ) {
   BpkCarouselImpl(
@@ -36,6 +36,6 @@ fun BpkCarousel(
     imageContent = { imageContent(it) },
     currentImage = currentImage,
     count = count,
-    onImageChanged = { onImageChanged?.invoke(it) }
+    onImageChanged = { onImageChanged?.invoke(it) },
   )
 }

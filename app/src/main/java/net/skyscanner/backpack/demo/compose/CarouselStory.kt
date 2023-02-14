@@ -54,7 +54,7 @@ fun CarouselStory(
       .fillMaxSize()
       .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Base)
       .verticalScroll(rememberScrollState()),
-    horizontalAlignment = Alignment.CenterHorizontally
+    horizontalAlignment = Alignment.CenterHorizontally,
   ) {
 
     BpkText(text = stringResource(id = R.string.carousel_only_1_item))
@@ -69,7 +69,7 @@ fun CarouselStory(
     BpkText(text = stringResource(id = R.string.carousel_image_change_callback))
     BpkText(
       text = stringResource(id = R.string.carousel_current_image).format(currentIndex),
-      style = BpkTheme.typography.caption
+      style = BpkTheme.typography.caption,
     )
     CarouselSample(totalItems = 3, currentImage = 1, onImageChange = { currentIndex = it })
   }
@@ -77,10 +77,10 @@ fun CarouselStory(
 
 @Composable
 private fun CarouselSample(
-  modifier: Modifier = Modifier,
   totalItems: Int,
+  modifier: Modifier = Modifier,
   currentImage: Int = 0,
-  onImageChange: ((Int) -> Unit)? = null
+  onImageChange: ((Int) -> Unit)? = null,
 ) {
   BpkCarousel(
     modifier = modifier
@@ -96,14 +96,14 @@ private fun CarouselSample(
             1 -> R.drawable.beach
             2 -> R.drawable.city
             else -> R.drawable.canadian_rockies_canada
-          }
+          },
         ),
         contentDescription = null,
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Crop,
       )
     },
     onImageChanged = {
       onImageChange?.invoke(it)
-    }
+    },
   )
 }
