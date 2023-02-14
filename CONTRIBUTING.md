@@ -20,15 +20,6 @@ source ~/.bash_profile
 
 You may also have to install "Android SDK Command Line Tools" from the SDK tools screen in Android Studio.
 
-Install system images
-```
-# x86
-$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-26;google_apis;x86"
-
-# ARM
-$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-26;google_apis;arm64-v8a"
-```
-
 ## Setup
 
 Given that you have a compatible environment as stated above you can now set up the project.
@@ -61,15 +52,15 @@ We use snapshot testing to ensure there are no unintended changes to UI componen
 > Note: Currently, snapshot tests run on Apple chips will result in a different snapshot to Intel-based laptops or CI.
 > You should use it for debug purposes only.
 
-Create an AVD using the following command
-
+Install system images & create an AVD
 ```
 # x86
-$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-26;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
-
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-28;google_apis;x86"
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-28;google_apis;x86" --device "Nexus 4" && cp bpk-droid-local.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 
 # ARM
-$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-26;google_apis;arm64-v8a" --device "Nexus 4" && cp bpk-droid-local-arm.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-28;google_apis;arm64-v8a"
+$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd --name "bpk-droid-avd" --force --package "system-images;android-28;google_apis;arm64-v8a" --device "Nexus 4" && cp bpk-droid-local-arm.ini ~/.android/avd/bpk-droid-avd.avd/config.ini
 ```
 
 Create an SD card for the snapshot tests

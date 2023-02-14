@@ -25,8 +25,6 @@ import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
-import android.graphics.Region
-import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -222,10 +220,10 @@ open class BpkFlare @JvmOverloads constructor(
     pointerXEnd: Float,
   ) {
     clipRect.set(0f, pointerYStart, pointerXStart, height)
-    canvas.clipOutRectCompat(clipRect)
+    canvas.clipOutRect(clipRect)
 
     clipRect.set(width, pointerYStart, pointerXEnd, height)
-    canvas.clipOutRectCompat(clipRect)
+    canvas.clipOutRect(clipRect)
   }
 
   private fun drawPointerMask(canvas: Canvas, pointerXStart: Float, pointerYStart: Float) {
@@ -289,14 +287,5 @@ open class BpkFlare @JvmOverloads constructor(
     } else {
       child.setPadding(child.paddingLeft, paddingTop, child.paddingRight, paddingBottom)
     }
-  }
-}
-
-private fun Canvas.clipOutRectCompat(rect: RectF) {
-  if (Build.VERSION.SDK_INT >= 26) {
-    this.clipOutRect(rect)
-  } else {
-    @Suppress("DEPRECATION")
-    this.clipRect(rect, Region.Op.DIFFERENCE)
   }
 }
