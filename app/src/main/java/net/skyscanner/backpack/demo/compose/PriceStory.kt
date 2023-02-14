@@ -64,7 +64,7 @@ private fun ColumnScope.PriceRowWithSize(size: BpkPriceSize) {
   )
   PriceRow(
     price = stringResource(id = R.string.price_price),
-    lineThroughText = stringResource(id = R.string.price_line_through_text),
+    previousPrice = stringResource(id = R.string.price_line_through_text),
     trailingText = stringResource(id = R.string.price_trailing_text),
     size = size,
   )
@@ -76,7 +76,7 @@ private fun ColumnScope.PriceRowWithSize(size: BpkPriceSize) {
   )
   PriceRow(
     price = stringResource(id = R.string.price_price),
-    lineThroughText = stringResource(id = R.string.price_line_through_text),
+    previousPrice = stringResource(id = R.string.price_line_through_text),
     leadingText = stringResource(id = R.string.price_leading_text),
     trailingText = stringResource(id = R.string.price_trailing_text),
     size = size,
@@ -87,7 +87,7 @@ private fun ColumnScope.PriceRowWithSize(size: BpkPriceSize) {
 private fun PriceRow(
   price: String,
   size: BpkPriceSize,
-  lineThroughText: String? = null,
+  previousPrice: String? = null,
   leadingText: String? = null,
   trailingText: String? = null,
 ) {
@@ -99,7 +99,7 @@ private fun PriceRow(
   ) {
     BpkPrice(
       price = price,
-      lineThroughText = lineThroughText,
+      previousPrice = previousPrice,
       leadingText = leadingText,
       trailingText = trailingText,
       size = size,
@@ -107,7 +107,7 @@ private fun PriceRow(
     )
     BpkPrice(
       price = price,
-      lineThroughText = lineThroughText,
+      previousPrice = previousPrice,
       leadingText = leadingText,
       trailingText = trailingText,
       size = size,

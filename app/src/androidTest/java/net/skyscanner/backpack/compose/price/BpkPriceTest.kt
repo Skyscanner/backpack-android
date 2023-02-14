@@ -60,7 +60,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
       BpkPrice(
         price = stringResource(id = R.string.price_price),
         trailingText = stringResource(id = R.string.price_trailing_text),
-        lineThroughText = stringResource(id = R.string.price_line_through_text),
+        previousPrice = stringResource(id = R.string.price_line_through_text),
         size = size,
         align = align
       )
@@ -73,7 +73,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
       BpkPrice(
         price = stringResource(id = R.string.price_price),
         trailingText = stringResource(id = R.string.price_trailing_text),
-        lineThroughText = stringResource(id = R.string.price_line_through_text),
+        previousPrice = stringResource(id = R.string.price_line_through_text),
         leadingText = stringResource(id = R.string.price_leading_text),
         size = size,
         align = align

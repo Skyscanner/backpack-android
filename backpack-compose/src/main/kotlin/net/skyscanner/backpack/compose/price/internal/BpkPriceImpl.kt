@@ -36,13 +36,13 @@ internal fun BpkPriceAlignStart(
   price: String,
   modifier: Modifier = Modifier,
   leadingText: String? = null,
-  lineThroughText: String? = null,
+  previousPrice: String? = null,
   trailingText: String? = null,
   size: BpkPriceSize = BpkPriceSize.Small,
 ) {
   Column(modifier = modifier) {
     Row {
-      lineThroughText?.let {
+      previousPrice?.let {
         BpkText(
           text = it,
           color = BpkTheme.colors.textSecondary,
@@ -52,7 +52,7 @@ internal fun BpkPriceAlignStart(
       }
       leadingText?.let {
         val builder = StringBuilder()
-        lineThroughText?.let { builder.append(" • ") }
+        previousPrice?.let { builder.append(" • ") }
         builder.append(it)
         BpkText(
           text = builder.toString(),
@@ -90,7 +90,7 @@ internal fun BpkPriceAlignEnd(
   price: String,
   modifier: Modifier = Modifier,
   leadingText: String? = null,
-  lineThroughText: String? = null,
+  previousPrice: String? = null,
   trailingText: String? = null,
   size: BpkPriceSize = BpkPriceSize.Small,
 ) {
@@ -102,14 +102,14 @@ internal fun BpkPriceAlignEnd(
       leadingText?.let {
         val builder = StringBuilder()
         builder.append(it)
-        lineThroughText?.let { builder.append(" • ") }
+        previousPrice?.let { builder.append(" • ") }
         BpkText(
           text = builder.toString(),
           color = BpkTheme.colors.textSecondary,
           style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
         )
       }
-      lineThroughText?.let {
+      previousPrice?.let {
         BpkText(
           text = it,
           color = BpkTheme.colors.textSecondary,
