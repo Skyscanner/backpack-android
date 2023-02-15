@@ -32,7 +32,7 @@ import net.skyscanner.backpack.compose.price.BpkPriceSize
 
 BpkPrice(
   price = "£1,830",
-  lineThroughText = "£2,033",
+  previousPriceText = "£2,033",
   leadingText = "App only deal",
   trailingText = "per day",
   size = BpkPriceSize.Large,
