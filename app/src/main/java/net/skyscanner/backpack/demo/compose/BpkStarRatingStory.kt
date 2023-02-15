@@ -107,8 +107,8 @@ private fun HotelRatingSample(
       key(i) {
         BpkHotelRating(
           rating = i,
-          contentDescription = { value, _ ->
-            stringResource(R.string.star_rating_accessibility_status, value, 5)
+          contentDescription = { value, max ->
+            stringResource(R.string.star_rating_accessibility_status, value, max)
           },
           size = size,
         )

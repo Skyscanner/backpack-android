@@ -64,6 +64,7 @@ fun BpkStarRating(
 ) {
   BpkStarRating(
     maxRating = 5,
+    numberOfStars = 5,
     rounding = rounding,
     modifier = modifier,
     rating = rating,
@@ -80,7 +81,8 @@ fun BpkHotelRating(
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
   BpkStarRating(
-    maxRating = rating,
+    maxRating = 5,
+    numberOfStars = rating,
     rounding = BpkRatingRounding.Down,
     modifier = modifier,
     rating = rating.toFloat(),
@@ -91,19 +93,19 @@ fun BpkHotelRating(
 
 @Composable
 fun BpkInteractiveStarRating(
+  rating: Int,
   onRatingChanged: (Int) -> Unit,
-  selectedRating: Int,
   contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
-  rounding: BpkRatingRounding = BpkRatingRounding.Down,
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
   BpkStarRating(
     maxRating = 5,
-    rounding = rounding,
+    numberOfStars = 5,
+    rounding = BpkRatingRounding.Down,
     modifier = modifier,
     onRatingChanged = onRatingChanged,
-    rating = selectedRating.toFloat(),
+    rating = rating.toFloat(),
     contentDescription = contentDescription,
     size = size,
   )
@@ -113,17 +115,18 @@ fun BpkInteractiveStarRating(
 private fun BpkStarRating(
   rating: Float,
   maxRating: Int,
+  numberOfStars: Int,
   rounding: BpkRatingRounding,
   contentDescription: ContentDescriptionScope.(Float, Int) -> String,
   modifier: Modifier = Modifier,
-  size: BpkStarRatingSize = BpkStarRatingSize.Small,
+  size: BpkStarRatingSize = BpkStarRatingSize.Large,
   onRatingChanged: ((Int) -> Unit)? = null,
 ) {
   val iconSize = when (size) {
     BpkStarRatingSize.Large -> BpkIconSize.Large
     BpkStarRatingSize.Small -> BpkIconSize.Small
   }
-  val coercedRating = rating.coerceIn(0f, maxRating.toFloat())
+  val coercedRating = rating.coerceIn(0f, numberOfStars.toFloat())
   val roundedRating = when (rounding) {
     BpkRatingRounding.Down -> floor(coercedRating * 2) / 2
     BpkRatingRounding.Up -> ceil(coercedRating * 2) / 2
@@ -133,11 +136,12 @@ private fun BpkStarRating(
     modifier = modifier.interactiveStarRatingSemantics(
       contentDescription = contentDescription,
       maxRating = maxRating,
+      numberOfStars = numberOfStars,
       onRatingChanged = onRatingChanged,
       rating = rating,
     ),
   ) {
-    for (item in 0 until maxRating) {
+    for (item in 0 until numberOfStars) {
       key(item) {
         val value = (roundedRating - item).coerceIn(0f, 1f)
         val starModifier = Modifier
@@ -206,10 +210,11 @@ private enum class BpkRatingStarType {
 private fun Modifier.interactiveStarRatingSemantics(
   rating: Float,
   maxRating: Int,
+  numberOfStars: Int,
   onRatingChanged: ((Int) -> Unit)?,
   contentDescription: ContentDescriptionScope.(Float, Int) -> String,
 ): Modifier = composed {
-  val range = 0f..maxRating.toFloat()
+  val range = 0f..numberOfStars.toFloat()
   val scope = rememberContentDescriptionScope()
   semantics(mergeDescendants = true) {
 
@@ -234,7 +239,7 @@ private fun Modifier.interactiveStarRatingSemantics(
         // this is needed to use volume keys
         value = rating,
         valueRange = range,
-        steps = maxRating,
+        steps = numberOfStars,
       )
     }
 }

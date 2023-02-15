@@ -79,13 +79,16 @@ BpkHotelRating(
 Example of a `BpkInteractiveStarRating`:
 
 ```Kotlin
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import net.skyscanner.backpack.compose.starrating.BpkInteractiveStarRating
 import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
 
 
 BpkInteractiveStarRating(
-    onRatingSelected = { selectedRating = it },
-    selectedRating = 2,
+    onRatingSelected = { rating = it },
+    rating = 2,
     contentDescription = { value, max ->
       stringResource(R.string.star_rating_accessibility_status, value, max)
     },

@@ -34,7 +34,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.starrating.BpkInteractiveStarRating
-import net.skyscanner.backpack.compose.starrating.BpkRatingRounding
 import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -79,14 +78,13 @@ private fun InteractiveRatingSample(
     val ratings = listOf(1, 2, 3, 4, 5)
     for (i in ratings) {
       key(i) {
-        var selectedRating by remember { mutableStateOf(i) }
+        var rating by remember { mutableStateOf(i) }
         BpkInteractiveStarRating(
-          onRatingChanged = { selectedRating = it },
-          selectedRating = selectedRating,
+          onRatingChanged = { rating = it },
+          rating = rating,
           contentDescription = { value, max ->
             stringResource(R.string.star_rating_accessibility_status, value, max)
           },
-          rounding = BpkRatingRounding.Up,
           size = size,
         )
       }

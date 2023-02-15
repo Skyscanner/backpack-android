@@ -142,7 +142,7 @@ class BpkStarRatingTest : BpkSnapshotTest() {
     var selectedRating by remember { mutableStateOf(rating) }
     BpkInteractiveStarRating(
       onRatingChanged = { selectedRating = it },
-      selectedRating = selectedRating,
+      rating = selectedRating,
       contentDescription = { value, max ->
         stringResource(R.string.star_rating_accessibility_status, value, max)
       },
