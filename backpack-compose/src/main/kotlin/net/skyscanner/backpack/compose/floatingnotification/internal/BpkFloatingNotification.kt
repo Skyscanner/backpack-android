@@ -29,18 +29,12 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Snackbar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.DpSize
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.button.BpkButtonType
@@ -58,12 +52,7 @@ internal fun BpkFloatingNotificationImpl(
 ) {
 
   Snackbar(
-    modifier = modifier
-      .requiredHeight(
-        if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height
-        else DefaultPhoneSize.height,
-      )
-      .widthIn(max = DefaultTabletSize.width),
+    modifier = modifier,
     shape = RoundedCornerShape(BpkBorderRadius.Md),
     backgroundColor = BpkTheme.colors.corePrimary,
     contentColor = BpkTheme.colors.textOnDark,
@@ -104,15 +93,13 @@ internal fun BpkFloatingNotificationImpl(
 }
 
 @OptIn(ExperimentalAnimationApi::class)
-internal fun floatingNotificationTransforms(): AnimatedContentScope<BpkFloatingNotificationData?>.() -> ContentTransform =
+@Composable
+internal fun floatingNotificationTransforms(slideDistancePx: Int): AnimatedContentScope<BpkFloatingNotificationData?>.() -> ContentTransform =
   {
     ContentTransform(
-      targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { it / 2 },
-      initialContentExit = fadeOut(tween(TRANSITION_DURATION)) + slideOutVertically(tween(TRANSITION_DURATION)) { it / 2 },
+      targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { slideDistancePx },
+      initialContentExit = fadeOut(tween(TRANSITION_DURATION)) + slideOutVertically(tween(TRANSITION_DURATION)) { slideDistancePx },
     )
   }
 
-private const val TABLET_MIN_WIDTH = 769
-private val DefaultPhoneSize = DpSize(Dp.Unspecified, 52.dp)
-private val DefaultTabletSize = DpSize(400.dp, 72.dp)
-private const val TRANSITION_DURATION = 300
+private const val TRANSITION_DURATION = 500

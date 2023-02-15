@@ -23,7 +23,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.graphics.Typeface
-import android.os.Build
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -209,7 +208,7 @@ private fun internalGetFont(context: Context, textStyle: BpkText.TextStyle): Bpk
   val typeface = if (typefaceResId == -1) {
     textStyleAttributes.getString(R.styleable.BpkTextStyle_android_fontFamily)?.let { Typeface.create(it, Typeface.NORMAL) }
   } else {
-    if (context.isInEditMode() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+    if (context.isInEditMode()) {
       // Preview is broken when using the compat version for font loading as of AS 4.2 (see https://issuetracker.google.com/issues/150587499)
       context.resources.getFont(typefaceResId)
     } else {

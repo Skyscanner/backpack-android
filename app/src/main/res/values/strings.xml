@@ -18,7 +18,7 @@
   <string name="stub_xs" translatable="false">Lorem ipsum dolor sit amet.</string>
 
   <string name="txt_lorem_ipsum">Lorem ipsum</string>
-  <string name="txt_lorem_ipsum_link">Lorem ipsum <a href="https://backpack.github.io/">Click me!</a></string>
+  <string name="txt_lorem_ipsum_link">Lorem ipsum <a href="https://skyscanner.design">Click me!</a></string>
   <string name="preference_file_key">bpk_preferences</string>
 
   <string name="calendar_colored_switch">Shift colors</string>
@@ -234,6 +234,8 @@
   <string name="floating_notification_text_with_icon">Text with icon</string>
   <string name="floating_notification_with_action">With action</string>
   <string name="floating_notification_with_icon_and_action">With icon and action</string>
+  <string name="floating_notification_saved">Saved</string>
+  <string name="floating_notification_view">View</string>
 
   <string name="rating_title">Excellent</string>
   <string name="rating_subtitle">1532 reviews</string>
@@ -263,7 +265,9 @@
   <string name="divided_card_width_less_than_minimum"><![CDATA[Card width < 240 Dp]]></string>
   <string name="divided_card_empty_card">Empty Card</string>
   <string name="divided_card_primary_content">Divided Card primary content</string>
+  <string name="divided_card_no_shadow_primary_content">Divided Card No Shadow primary content</string>
   <string name="divided_card_secondary_content">Divided Card secondary content</string>
+  <string name="divided_card_no_shadow_secondary_content">Divided Card No Shadow secondary content</string>
   <string name="price_price">£1,830</string>
   <string name="price_trailing_text">per day</string>
   <string name="price_line_through_text">£2,033</string>
@@ -276,4 +280,6 @@
   <string name="page_indicator_over_image">Over Image</string>
   <string name="page_indicator_next">Next</string>
   <string name="page_indicator_prev">Prev</string>
+  <string name="card_wrapper_header">Card Wrapper header</string>
+  <string name="card_wrapper_card">Card Wrapper card</string>
 </resources>

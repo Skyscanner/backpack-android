@@ -10,6 +10,18 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/default.png" alt="Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/default_dm.png" alt="Card component - dark mode" width="375" /> |
 
+## Divided Card
+
+| Day                                                                                                                                                              | Night |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/divided-card.png" alt="Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/divided-card_dm.png" alt="Card component - dark mode" width="375" /> |
+
+## Card Wrapper
+
+| Day                                                                                                                                                              | Night |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------| --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/card-wrapper.png" alt="Card component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Card/screenshots/card-wrapper_dm.png" alt="Card component - dark mode" width="375" /> |
+
 
 ## Installation
 
@@ -95,6 +107,43 @@ BpkDividedCard(
     BpkText(
       modifier = Modifier.fillMaxWidth(),
       text = stringResource("BpkDividedCard sample"),
+    )
+  },
+  onClick = {}
+)
+```
+
+Example of a Card Wrapper:
+
+```Kotlin
+import net.skyscanner.backpack.compose.cardwrapper.BpkCardWrapper
+import net.skyscanner.backpack.compose.dividedcard.dividedCardWidth
+
+BpkCardWrapper(
+  modifier = Modifier.fillMaxWidth(),
+  backgroundColor = BpkTheme.colors.coreEco,
+  headerContent = {
+    BpkText(
+      modifier = Modifier
+        .fillMaxWidth()
+        .height(BpkSpacing.Xxl),
+      text = stringResource("BpkCardWrapper header sample"),
+    )
+  },
+  cardContent = {
+    Image(
+      modifier = Modifier
+        .height(BpkSpacing.Xxl * 2)
+        .fillMaxWidth(),
+      painter = painterResource(id = R.drawable.canadian_rockies_canada),
+      contentDescription = "",
+      contentScale = ContentScale.Crop
+    )
+    BpkText(
+      modifier = Modifier.fillMaxWidth(),
+      text = stringResource("BpkCardWrapper card sample"),
+      style = BpkTheme.typography.bodyDefault,
+      textAlign = TextAlign.Center
     )
   },
   onClick = {}

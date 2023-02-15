@@ -17,8 +17,8 @@
  */
 
 buildscript {
-  ext.kotlin_version = '1.8.0'
-  ext.compose_compiler_version = '1.4.0'
+  ext.kotlin_version = '1.8.10'
+  ext.compose_compiler_version = '1.4.2'
   ext.detekt_version = '1.22.0'
   ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.7.20"
   repositories {
@@ -76,7 +76,7 @@ ext {
   group = "net.skyscanner.backpack"
   dokkaOutputDir = "dokka"
 
-  androidxAppCompat = "androidx.appcompat:appcompat:1.6.0"
+  androidxAppCompat = "androidx.appcompat:appcompat:1.6.1"
   androidxAnnotations = "androidx.annotation:annotation:1.5.0"
 
   lifecycleVersion = "2.5.1"
