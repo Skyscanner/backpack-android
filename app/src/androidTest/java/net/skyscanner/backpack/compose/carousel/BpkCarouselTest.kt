@@ -45,7 +45,7 @@ class BpkCarouselTest : BpkSnapshotTest() {
   @OptIn(ExperimentalPagerApi::class)
   @Test
   fun multipleImageDefault() = snap {
-    BpkCarousel(count = 3, imageContent = {
+    BpkCarousel(count = 3, content = {
       Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
     })
   }
@@ -54,7 +54,7 @@ class BpkCarouselTest : BpkSnapshotTest() {
   @OptIn(ExperimentalPagerApi::class)
   @Test
   fun setCurrentImage() = snap {
-    BpkCarousel(count = 3, imageContent = {
+    BpkCarousel(count = 3, content = {
       Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
     })
   }
@@ -63,7 +63,7 @@ class BpkCarouselTest : BpkSnapshotTest() {
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun multipleImageDarkMode() = snap {
-    BpkCarousel(count = 2, imageContent = {
+    BpkCarousel(count = 2, content = {
       Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
     })
   }

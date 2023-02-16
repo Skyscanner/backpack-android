@@ -56,7 +56,7 @@ internal fun BpkCarouselImpl(
       modifier = Modifier
         .testTag("pager")
         .fillMaxSize(),
-      count = Int.MAX_VALUE, // if count > 1, set to Int.MAX_VALUE for infinite looping
+      count = if (count > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
       state = pagerState,
     ) { index ->
       val page = getModNumber(index, count)

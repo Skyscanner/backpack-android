@@ -34,14 +34,14 @@ fun BpkCarousel(
   modifier: Modifier = Modifier,
   onImageChanged: ((Int) -> Unit)? = null,
   pagerState: PagerState = rememberPagerState(),
-  imageContent: @Composable (BoxScope.(Int) -> Unit),
+  content: @Composable (BoxScope.(Int) -> Unit),
 ) {
   BpkCarouselImpl(
     count = count,
     modifier = modifier,
     pagerState = pagerState,
     onImageChanged = { onImageChanged?.invoke(it) },
-    imageContent = { imageContent(it) },
+    imageContent = { content(it) },
   )
 }
 
