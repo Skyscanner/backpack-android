@@ -16,19 +16,37 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.demo.meta
+package net.skyscanner.backpack.compose.annotation
 
-import androidx.annotation.LayoutRes
-import net.skyscanner.backpack.compose.annotation.BpkPreviews
-import javax.annotation.concurrent.Immutable
+import android.content.res.Configuration
+import androidx.compose.ui.tooling.preview.Preview
 
-@Immutable
-@Suppress("Detekt.PreviewNaming")
-@Target(AnnotationTarget.FUNCTION)
-@Retention(AnnotationRetention.BINARY)
-@BpkPreviews
-annotation class ViewStory(
-  val name: String = "Default",
-  val screenshot: Boolean = true,
-  @LayoutRes val layoutId: Int = 0,
+@Target(
+  AnnotationTarget.ANNOTATION_CLASS,
+  AnnotationTarget.FUNCTION,
 )
+
+@Retention(AnnotationRetention.BINARY)
+
+@Preview(name = "Default",
+  uiMode = Configuration.UI_MODE_NIGHT_NO,
+  locale = "en",
+  showBackground = true,
+  backgroundColor = 0xFFFFFFFF,
+)
+
+@Preview(name = "DM",
+  uiMode = Configuration.UI_MODE_NIGHT_YES,
+  locale = "en",
+  showBackground = true,
+  backgroundColor = 0xFF010913,
+)
+
+@Preview(name = "RTL",
+  uiMode = Configuration.UI_MODE_NIGHT_NO,
+  locale = "ar",
+  showBackground = true,
+  backgroundColor = 0xFFFFFFFF,
+)
+
+annotation class BpkPreviews

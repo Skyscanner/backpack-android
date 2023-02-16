@@ -18,37 +18,14 @@
 
 package net.skyscanner.backpack.demo.meta
 
-import android.content.res.Configuration
-import android.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import javax.annotation.concurrent.Immutable
 
 @Immutable
 @Suppress("Detekt.PreviewNaming")
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
-
-@Preview(name = "Default",
-  uiMode = Configuration.UI_MODE_NIGHT_NO,
-  locale = "en",
-  showBackground = true,
-  backgroundColor = Color.WHITE.toLong(),
-)
-
-@Preview(name = "Night",
-  uiMode = Configuration.UI_MODE_NIGHT_YES,
-  locale = "en",
-  showBackground = true,
-  backgroundColor = Color.BLACK.toLong(),
-)
-
-@Preview(name = "Rtl",
-  uiMode = Configuration.UI_MODE_NIGHT_NO,
-  locale = "ar",
-  showBackground = true,
-  backgroundColor = Color.BLACK.toLong(),
-)
-
+@BpkPreviews
 annotation class ComposeStory(
   val name: String = "Default",
   val screenshot: Boolean = true,
