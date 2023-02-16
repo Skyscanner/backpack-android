@@ -10,9 +10,17 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/default.png" alt="Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRating/screenshots/default_dm.png" alt="Star Rating component - dark mode" width="375" /> |
 
+## Interactive
+
+| Day                                                                                                                                                                                             | Night                                                                                                                                                                                                          |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/default.png" alt="Interactive Star Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/StarRatingInteractive/screenshots/default_dm.png" alt="Interactive Star Rating component - dark mode" width="375" /> |
+
 ## Installation
 
-Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
+Backpack Compose is available
+through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the
+main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
 
 ## Usage
 
@@ -24,14 +32,13 @@ import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
 import net.skyscanner.backpack.compose.starrating.BpkRatingRounding
 
 
-
 BpkStarRating(
-    rating = 2f,
-    contentDescription = { value, max ->
-      stringResource(R.string.star_rating_accessibility_status, value, max)
-    },
-    rounding = BpkRatingRounding.Up,
-    size = BpkStarRatingSize.Small,
+  rating = 2f,
+  contentDescription = { value, max ->
+    stringResource(R.string.star_rating_accessibility_status, value, max)
+  },
+  rounding = BpkRatingRounding.Up,
+  size = BpkStarRatingSize.Small,
 )
 ```
 
@@ -43,14 +50,13 @@ import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
 import net.skyscanner.backpack.compose.starrating.BpkRatingRounding
 
 
-
 BpkStarRating(
-    rating = 3.5f,
-    contentDescription = { value, max ->
-      stringResource(R.string.star_rating_accessibility_status, value, max)
-    },
-    rounding = BpkRatingRounding.Down,
-    size = BpkStarRatingSize.Large,
+  rating = 3.5f,
+  contentDescription = { value, max ->
+    stringResource(R.string.star_rating_accessibility_status, value, max)
+  },
+  rounding = BpkRatingRounding.Down,
+  size = BpkStarRatingSize.Large,
 )
 ```
 
@@ -62,10 +68,33 @@ import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
 
 
 BpkHotelRating(
-    rating = 3,
-    contentDescription = { value, max ->
-      stringResource(R.string.star_rating_accessibility_status, value, max)
-    },
-    size = BpkStarRatingSize.Small,
+  rating = 3,
+  contentDescription = { value, max ->
+    stringResource(R.string.star_rating_accessibility_status, value, max)
+  },
+  size = BpkStarRatingSize.Small,
+)
+```
+
+Example of a `BpkInteractiveStarRating`:
+
+```Kotlin
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
+import net.skyscanner.backpack.compose.starrating.BpkInteractiveStarRating
+import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
+
+var rating by remember { mutableStateOf(0) }
+
+BpkInteractiveStarRating(
+  rating = rating,
+  onRatingChanged = { rating = it },
+  contentDescription = { value, max ->
+    stringResource(R.string.star_rating_accessibility_status, value, max)
+  },
+  size = BpkStarRatingSize.Small,
 )
 ```

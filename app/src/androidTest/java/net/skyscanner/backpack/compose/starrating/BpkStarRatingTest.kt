@@ -131,4 +131,15 @@ class BpkStarRatingTest : BpkSnapshotTest() {
       },
     )
   }
+
+  @Test
+  fun interactiveStarRating() = snap {
+    BpkInteractiveStarRating(
+      rating = 2,
+      onRatingChanged = { },
+      contentDescription = { value, max ->
+        stringResource(R.string.star_rating_accessibility_status, value, max)
+      },
+    )
+  }
 }
