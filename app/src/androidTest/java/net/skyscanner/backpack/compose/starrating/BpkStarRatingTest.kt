@@ -19,10 +19,6 @@
 
 package net.skyscanner.backpack.compose.starrating
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.R
@@ -138,11 +134,9 @@ class BpkStarRatingTest : BpkSnapshotTest() {
 
   @Test
   fun interactiveStarRating() = snap {
-    val rating = 2
-    var selectedRating by remember { mutableStateOf(rating) }
     BpkInteractiveStarRating(
-      onRatingChanged = { selectedRating = it },
-      rating = selectedRating,
+      rating = 2,
+      onRatingChanged = { },
       contentDescription = { value, max ->
         stringResource(R.string.star_rating_accessibility_status, value, max)
       },

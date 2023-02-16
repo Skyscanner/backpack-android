@@ -63,11 +63,11 @@ fun BpkStarRating(
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
   BpkStarRating(
+    rating = rating,
     maxRating = 5,
     numberOfStars = 5,
     rounding = rounding,
     modifier = modifier,
-    rating = rating,
     contentDescription = contentDescription,
     size = size,
   )
@@ -81,11 +81,11 @@ fun BpkHotelRating(
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
   BpkStarRating(
+    rating = rating.toFloat(),
     maxRating = 5,
     numberOfStars = rating,
     rounding = BpkRatingRounding.Down,
     modifier = modifier,
-    rating = rating.toFloat(),
     contentDescription = contentDescription,
     size = size,
   )
@@ -100,12 +100,12 @@ fun BpkInteractiveStarRating(
   size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
   BpkStarRating(
+    rating = rating.toFloat(),
     maxRating = 5,
     numberOfStars = 5,
     rounding = BpkRatingRounding.Down,
     modifier = modifier,
     onRatingChanged = onRatingChanged,
-    rating = rating.toFloat(),
     contentDescription = contentDescription,
     size = size,
   )
@@ -134,11 +134,11 @@ private fun BpkStarRating(
   }
   Row(
     modifier = modifier.starRatingSemantics(
-      contentDescription = contentDescription,
+      rating = rating,
       maxRating = maxRating,
       numberOfStars = numberOfStars,
       onRatingChanged = onRatingChanged,
-      rating = rating,
+      contentDescription = contentDescription,
     ),
   ) {
     for (item in 0 until numberOfStars) {
