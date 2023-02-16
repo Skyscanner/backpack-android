@@ -133,7 +133,7 @@ private fun BpkStarRating(
     BpkRatingRounding.Nearest -> round(coercedRating * 2) / 2
   }
   Row(
-    modifier = modifier.interactiveStarRatingSemantics(
+    modifier = modifier.starRatingSemantics(
       contentDescription = contentDescription,
       maxRating = maxRating,
       numberOfStars = numberOfStars,
@@ -207,7 +207,7 @@ private enum class BpkRatingStarType {
   Full,
 }
 
-private fun Modifier.interactiveStarRatingSemantics(
+private fun Modifier.starRatingSemantics(
   rating: Float,
   maxRating: Int,
   numberOfStars: Int,
