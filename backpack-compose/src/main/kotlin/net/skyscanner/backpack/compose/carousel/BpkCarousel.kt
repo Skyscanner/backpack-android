@@ -32,14 +32,12 @@ import net.skyscanner.backpack.compose.carousel.internal.BpkCarouselImpl
 fun BpkCarousel(
   count: Int,
   modifier: Modifier = Modifier,
-  currentImage: Int = 0,
   onImageChanged: ((Int) -> Unit)? = null,
   pagerState: PagerState = rememberPagerState(),
   imageContent: @Composable (BoxScope.(Int) -> Unit),
 ) {
   BpkCarouselImpl(
     count = count,
-    currentImage = currentImage,
     modifier = modifier,
     pagerState = pagerState,
     onImageChanged = { onImageChanged?.invoke(it) },

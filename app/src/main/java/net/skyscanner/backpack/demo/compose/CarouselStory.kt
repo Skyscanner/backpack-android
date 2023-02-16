@@ -92,7 +92,6 @@ private fun CarouselSample(
     modifier = modifier
       .aspectRatio(1.9f)
       .padding(vertical = BpkSpacing.Base),
-    currentImage = currentImage,
     pagerState = pagerState,
     onImageChanged = {
       onImageChange?.invoke(it)

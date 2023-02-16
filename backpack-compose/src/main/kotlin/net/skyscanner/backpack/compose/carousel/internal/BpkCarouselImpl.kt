@@ -20,6 +20,7 @@ package net.skyscanner.backpack.compose.carousel.internal
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
@@ -38,7 +39,6 @@ import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 @Composable
 internal fun BpkCarouselImpl(
   count: Int,
-  currentImage: Int,
   modifier: Modifier = Modifier,
   pagerState: PagerState = rememberPagerState(),
   onImageChanged: ((Int) -> Unit)? = null,
