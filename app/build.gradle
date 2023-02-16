@@ -124,5 +124,5 @@ dependencies {
   androidTestImplementation rootProject.ext.facebookSnapshotTestingCore
   implementation project(':Backpack')
   implementation project(':backpack-compose')
-  ksp project(":ksp")
+  ksp project(":meta-processor")
 }
