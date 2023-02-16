@@ -21,12 +21,9 @@ Example of a Carousel:
 ```Kotlin
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
 
-BpkCarousel(
-  count = 3,
-  imageContent = {
-    Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
-  }
-)
+BpkCarousel(count = 3){ index ->
+  Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
+}
 ```
 
 Example of a image changed callback:
@@ -36,10 +33,26 @@ import net.skyscanner.backpack.compose.carousel.BpkCarousel
 
 BpkCarousel(
   count = 3,
-  imageContent = {
-    Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
-  },
+  onImageChanged = {  index ->
+    // do something
+  }
 ) { index ->
-  // do something
+  Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
+}
+```
+
+Example of starting in a different image:
+
+```Kotlin
+import net.skyscanner.backpack.compose.carousel.BpkCarousel
+import net.skyscanner.backpack.compose.carousel.rememberCarouselPagerState
+
+val pagerState = rememberCarouselPagerState(currentImage = 1) // show carousel with image index 1
+
+BpkCarousel(
+  count = 3,
+  pagerState = pagerState,
+) { index ->
+  Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
 }
 ```
