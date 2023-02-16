@@ -90,7 +90,7 @@ import net.skyscanner.backpack.compose.starrating.BpkStarRatingSize
 var rating by remember { mutableStateOf(0) }
 
 BpkInteractiveStarRating(
-  rating = 2,
+  rating = rating,
   onRatingChanged = { rating = it },
   contentDescription = { value, max ->
     stringResource(R.string.star_rating_accessibility_status, value, max)
