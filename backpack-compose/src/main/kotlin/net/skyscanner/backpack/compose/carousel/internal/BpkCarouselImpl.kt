@@ -22,14 +22,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.flow.distinctUntilChanged
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
@@ -38,29 +37,26 @@ import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 internal fun BpkCarouselImpl(
-  imageContent: @Composable (BoxScope.(Int) -> Unit),
   count: Int,
   currentImage: Int,
   modifier: Modifier = Modifier,
+  pagerState: PagerState = rememberPagerState(),
   onImageChanged: ((Int) -> Unit)? = null,
+  imageContent: @Composable (BoxScope.(Int) -> Unit),
 ) {
   Box(modifier = modifier) {
-    val initialPageIndex = (Int.MAX_VALUE / 2) + currentImage
-    val (selectedPage, setSelectedPage) = rememberSaveable { mutableStateOf(currentImage) }
-
-    val pagerState = rememberPagerState(initialPageIndex).also {
-      LaunchedEffect(it) {
-        snapshotFlow { it.currentPage }.distinctUntilChanged().collect { index ->
-          val page = getModNumber(index, count)
-          setSelectedPage(page)
-          onImageChanged?.invoke(page)
-        }
+    LaunchedEffect(pagerState.currentPage) {
+      snapshotFlow { pagerState.currentPage }.distinctUntilChanged().collect { index ->
+        val page = getModNumber(index, count)
+        onImageChanged?.invoke(page)
       }
     }
 
     HorizontalPager(
-      modifier = Modifier.testTag("pager"),
-      count = if (count > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
+      modifier = Modifier
+        .testTag("pager")
+        .fillMaxSize(),
+      count = Int.MAX_VALUE, // if count > 1, set to Int.MAX_VALUE for infinite looping
       state = pagerState,
     ) { index ->
       val page = getModNumber(index, count)
@@ -74,7 +70,7 @@ internal fun BpkCarouselImpl(
           .align(Alignment.BottomCenter)
           .testTag("pageIndicator"),
         totalIndicators = count,
-        currentIndex = selectedPage,
+        currentIndex = getModNumber(pagerState.currentPage, count),
         style = BpkPageIndicatorStyle.OverImage,
       )
     }

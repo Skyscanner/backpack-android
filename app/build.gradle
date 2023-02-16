@@ -103,6 +103,7 @@ dependencies {
   implementation rootProject.ext.composeActivity
   implementation rootProject.ext.kotlinReflection
   implementation rootProject.ext.stetho
+  implementation rootProject.ext.accompanistPager
   testImplementation rootProject.ext.junit
   debugImplementation rootProject.ext.composeTestManifest
   androidTestImplementation rootProject.ext.composeFoundation

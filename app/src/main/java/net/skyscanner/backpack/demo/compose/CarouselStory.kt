@@ -36,7 +36,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.accompanist.pager.ExperimentalPagerApi
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
+import net.skyscanner.backpack.compose.carousel.rememberCarouselPagerState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -75,6 +77,7 @@ fun CarouselStory(
   }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun CarouselSample(
   totalItems: Int,
@@ -82,28 +85,31 @@ private fun CarouselSample(
   currentImage: Int = 0,
   onImageChange: ((Int) -> Unit)? = null,
 ) {
+  val pagerState = rememberCarouselPagerState(currentImage = currentImage)
+
   BpkCarousel(
+    count = totalItems,
     modifier = modifier
       .aspectRatio(1.9f)
-      .padding(vertical = BpkSpacing.Md),
-    count = totalItems,
+      .padding(vertical = BpkSpacing.Base),
     currentImage = currentImage,
-    imageContent = {
-      Image(
-        painter = painterResource(
-          id = when (it) {
-            0 -> R.drawable.canadian_rockies_canada
-            1 -> R.drawable.beach
-            2 -> R.drawable.city
-            else -> R.drawable.canadian_rockies_canada
-          },
-        ),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-      )
-    },
+    pagerState = pagerState,
     onImageChanged = {
       onImageChange?.invoke(it)
     },
-  )
+  ) {
+    Image(
+      modifier = Modifier.fillMaxSize(),
+      painter = painterResource(
+        id = when (it) {
+          0 -> R.drawable.canadian_rockies_canada
+          1 -> R.drawable.beach
+          2 -> R.drawable.city
+          else -> R.drawable.canadian_rockies_canada
+        },
+      ),
+      contentDescription = "Image $it",
+      contentScale = ContentScale.Crop,
+    )
+  }
 }
