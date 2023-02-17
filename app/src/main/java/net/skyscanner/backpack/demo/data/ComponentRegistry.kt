@@ -100,6 +100,7 @@ import net.skyscanner.backpack.demo.stories.ToastStory
 import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
+import net.skyscanner.backpack.demo.compose.OverlayStory
 
 interface RegistryItem {
   val name: String
@@ -412,7 +413,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { NudgerStory() },
       ),
     ),
-    "Overlay" story NodeData { Story of R.layout.fragment_overlay },
+    "Overlay" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_overlay },
+        TAB_TITLE_COMPOSE composeStory { OverlayStory() },
+      ),
+    ),
     "Page Indicator" composeStory { PageIndicatorStory() },
     "Panel" story NodeData(
       { children -> TabStory of children },
@@ -498,7 +505,6 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { BpkInteractiveStarRatingStory() },
       ),
     ),
-
     "Switch" story NodeData(
       { children -> TabStory of children },
       mapOf(
