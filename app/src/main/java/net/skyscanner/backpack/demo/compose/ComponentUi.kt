@@ -19,21 +19,17 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
-import net.skyscanner.backpack.demo.ComponentDetailActivity
-import net.skyscanner.backpack.demo.ComponentDetailFragment
 import net.skyscanner.backpack.demo.R
 
 @Composable
@@ -56,16 +52,12 @@ fun ComponentItem(
   title: String,
   modifier: Modifier = Modifier,
   showComposeBadge: Boolean = false,
+  onClick: () -> Unit,
 ) {
-  val context = LocalContext.current
   ListItem(
     title = title,
     modifier = modifier
-      .clickable {
-        val intent = Intent(context, ComponentDetailActivity::class.java)
-        intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, title)
-        context.startActivity(intent)
-      },
+      .clickable { onClick() },
   ) {
     if (showComposeBadge) {
       BpkBadge(

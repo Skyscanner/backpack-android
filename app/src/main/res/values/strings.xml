@@ -282,4 +282,6 @@
   <string name="page_indicator_prev">Prev</string>
   <string name="card_wrapper_header">Card Wrapper header</string>
   <string name="card_wrapper_card">Card Wrapper card</string>
+  <string name="tab_view">View</string>
+  <string name="tab_compose">Compose</string>
 </resources>

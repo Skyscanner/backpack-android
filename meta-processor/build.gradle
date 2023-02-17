@@ -1,0 +1,12 @@
+apply plugin: 'kotlin'
+
+dependencies {
+  implementation rootProject.ext.kspApi
+  implementation rootProject.ext.kotlinPoet
+  implementation rootProject.ext.roomCompilerProcessing
+}
+
+sourceSets.main {
+  java.srcDirs("src/main/kotlin")
+}
+

@@ -87,13 +87,13 @@
     android:orientation="vertical"
     android:visibility="gone">
 
-    <net.skyscanner.backpack.demo.components.SettingsThemeOption
+    <net.skyscanner.backpack.demo.ui.SettingsThemeOption
       android:id="@+id/theme_london"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:themeName="@string/settings_theme_london" />
 
-    <net.skyscanner.backpack.demo.components.SettingsThemeOption
+    <net.skyscanner.backpack.demo.ui.SettingsThemeOption
       android:id="@+id/theme_doha"
       android:layout_width="match_parent"
       android:layout_height="match_parent"

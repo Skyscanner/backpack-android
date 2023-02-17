@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.demo.components
+package net.skyscanner.backpack.demo.ui
 
 import android.content.Context
 import android.util.AttributeSet
