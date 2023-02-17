@@ -34,7 +34,7 @@ import net.skyscanner.backpack.demo.SettingsActivity
 import net.skyscanner.backpack.demo.meta.Story
 
 @Composable
-fun DemoScreen(
+fun StoryScreen(
   case: Story,
   modifier: Modifier = Modifier,
   onBack: () -> Unit,
