@@ -28,6 +28,7 @@ import net.skyscanner.backpack.demo.compose.BodyStyleStory
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
 import net.skyscanner.backpack.demo.compose.BpkBottomNavStory
 import net.skyscanner.backpack.demo.compose.BpkFabStory
+import net.skyscanner.backpack.demo.compose.BpkInteractiveStarRatingStory
 import net.skyscanner.backpack.demo.compose.BpkSliderStory
 import net.skyscanner.backpack.demo.compose.BpkStarRatingStory
 import net.skyscanner.backpack.demo.compose.ButtonDrawableIconStory
@@ -490,7 +491,14 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { BpkStarRatingStory() },
       ),
     ),
-    "Star Rating Interactive" story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
+    "Star Rating Interactive" story NodeData(
+      { children -> TabStory of children },
+      mapOf(
+        TAB_TITLE_VIEW story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
+        TAB_TITLE_COMPOSE composeStory { BpkInteractiveStarRatingStory() },
+      ),
+    ),
+
     "Switch" story NodeData(
       { children -> TabStory of children },
       mapOf(

@@ -134,7 +134,7 @@ private fun StaticRatingSample(
         BpkStarRating(
           rating = i,
           contentDescription = { value, max ->
-            stringResource(R.string.star_rating_accessibility_status, value, max)
+            stringResource(R.string.star_rating_decimal_accessibility_status, value, max)
           },
           rounding = BpkRatingRounding.Up,
           size = size,

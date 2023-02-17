@@ -34,7 +34,7 @@ Box {
     BpkButton(text = "Show notification") {
         scope.launch {
             state.show(
-                text = "Lorem ipsum dolor sit amet."
+                text = "Saved"
             )
         }
     }
@@ -62,7 +62,7 @@ Box {
   BpkButton(text = "Show notification") {
     scope.launch {
       state.show(
-        text = "Lorem ipsum dolor sit amet.",
+        text = "Saved",
         icon = BpkIcon.Heart,
         cta = "View",
         onClick = { println("action performed") },

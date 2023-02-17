@@ -47,9 +47,8 @@ fun FloatingNotificationStory(
     val state = rememberBpkFloatingNotificationState()
     val scope: CoroutineScope = rememberCoroutineScope()
 
-    val stubXs = stringResource(id = R.string.stub_xs)
-    val stubSm = stringResource(id = R.string.stub_sm)
-    val dismiss = stringResource(id = R.string.generic_dismiss)
+    val text = stringResource(R.string.floating_notification_saved)
+    val cta = stringResource(R.string.floating_notification_view)
 
     Column(
       modifier = Modifier.padding(BpkSpacing.Base),
@@ -59,7 +58,7 @@ fun FloatingNotificationStory(
       BpkButton(text = stringResource(R.string.floating_notification_just_text)) {
         scope.launch {
           state.show(
-            text = stubXs,
+            text = text,
           )
         }
       }
@@ -67,7 +66,7 @@ fun FloatingNotificationStory(
       BpkButton(text = stringResource(R.string.floating_notification_text_with_icon)) {
         scope.launch {
           state.show(
-            text = stubSm,
+            text = text,
             icon = BpkIcon.Heart,
           )
         }
@@ -76,8 +75,8 @@ fun FloatingNotificationStory(
       BpkButton(text = stringResource(R.string.floating_notification_with_action)) {
         scope.launch {
           state.show(
-            text = stubXs,
-            cta = dismiss,
+            text = text,
+            cta = cta,
             onClick = {},
           )
         }
@@ -86,9 +85,9 @@ fun FloatingNotificationStory(
       BpkButton(text = stringResource(R.string.floating_notification_with_icon_and_action)) {
         scope.launch {
           state.show(
-            text = stubSm,
+            text = text,
             icon = BpkIcon.Heart,
-            cta = dismiss,
+            cta = cta,
             onClick = {},
             onExit = {},
           )
