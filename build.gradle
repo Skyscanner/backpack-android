@@ -114,7 +114,7 @@ ext {
   mockitoAndroid = "org.mockito:mockito-android:5.1.1"
 
   kotlinPoet = "com.squareup:kotlinpoet:1.12.0"
-  roomCompilerProcessing = "androidx.room:room-compiler-processing:2.4.3"
+  roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.0"
   kspApi = "com.google.devtools.ksp:symbol-processing-api:$ksp_version"
 
   coroutinesVersion = "1.6.4"
