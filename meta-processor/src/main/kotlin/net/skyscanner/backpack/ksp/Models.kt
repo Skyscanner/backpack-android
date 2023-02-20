@@ -33,7 +33,6 @@ data class StoryDefinition(
   val name: String,
   val isCompose: Boolean,
   val isScreenshot: Boolean,
-  val layoutId: Int,
   val reference: String,
   val location: FileLocation,
 )

@@ -64,23 +64,17 @@ fun writeListOfStories(stories: List<StoryDefinition>, output: XFiler) {
 }
 
 private fun CodeBlock.Builder.writeStoryCreator(story: StoryDefinition) =
-  addStatement("%T(", StoryClass)
-    .indent()
-    .addStatement("name = %S,", story.name)
-    .addStatement("isScreenshot = %L,", story.isScreenshot)
-    .addStatement("isCompose = %L,", story.isCompose)
-    .writeComponent("component", story.component)
-    .writeContentBlock("content", story)
+  when {
+    else -> addStatement("%T(", StoryClass)
+      .indent()
+      .addStatement("name = %S,", story.name)
+      .addStatement("isScreenshot = %L,", story.isScreenshot)
+      .addStatement("isCompose = %L,", story.isCompose)
+      .writeComponent("component", story.component)
+      .addStatement("${"content"} = { %T() },", ClassName.bestGuess(story.reference))
+  }
     .unindent()
     .addStatement("),")
-
-private val AndroidLayout = ClassName("net.skyscanner.backpack.demo.ui", "AndroidLayout")
-
-private fun CodeBlock.Builder.writeContentBlock(name: String, story: StoryDefinition) =
-  when {
-    story.layoutId != 0 -> addStatement("$name = { %T(%L) },", AndroidLayout, story.layoutId)
-    else -> addStatement("$name = { %T() },", ClassName.bestGuess(story.reference))
-  }
 
 private fun CodeBlock.Builder.writeComponent(name: String, component: ComponentDefinition) =
   addStatement("$name = %T(", ComponentClass)
