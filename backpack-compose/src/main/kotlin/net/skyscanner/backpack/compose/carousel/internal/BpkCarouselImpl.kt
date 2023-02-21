@@ -30,14 +30,14 @@ import androidx.compose.ui.platform.testTag
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import kotlinx.coroutines.flow.distinctUntilChanged
-import net.skyscanner.backpack.compose.carousel.BpkCarouselStateImpl
+import net.skyscanner.backpack.compose.carousel.BpkCarouselInternalState
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 internal fun BpkCarouselImpl(
-  state: BpkCarouselStateImpl,
+  state: BpkCarouselInternalState,
   modifier: Modifier = Modifier,
   onImageChanged: ((Int) -> Unit)? = null,
   imageContent: @Composable (BoxScope.(Int) -> Unit),

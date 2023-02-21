@@ -27,7 +27,7 @@ import androidx.compose.runtime.remember
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import net.skyscanner.backpack.compose.carousel.internal.getModdedPageNumber
+import net.skyscanner.backpack.compose.carousel.internal.BpkCarouselStateImpl
 
 sealed interface BpkCarouselState : ScrollableState {
 
@@ -75,30 +75,12 @@ fun BpkCarouselState(
 }
 
 @OptIn(ExperimentalPagerApi::class)
-internal class BpkCarouselStateImpl constructor(
-  val delegate: PagerState,
-  private val totalImages: Int,
-) : BpkCarouselState, ScrollableState by delegate {
-
-  override val interactionSource: InteractionSource
-    get() = delegate.interactionSource
-
-  override val pageCount: Int
-    get() = totalImages
-
-  override val currentPage: Int
-    get() = getModdedPageNumber(delegate.currentPage, totalImages)
-
-  override val currentPageOffset: Float
-    get() = delegate.currentPageOffset
-
-  override suspend fun animateScrollToPage(page: Int, pageOffset: Float) =
-    delegate.animateScrollToPage(getTargetPage(page), pageOffset)
-
-  override suspend fun scrollToPage(page: Int, pageOffset: Float) =
-    delegate.scrollToPage(getTargetPage(page), pageOffset)
-
-  private fun getTargetPage(page: Int): Int {
-    return delegate.currentPage - (currentPage - page)
-  }
+internal interface BpkCarouselInternalState : BpkCarouselState {
+  val delegate: PagerState
+  val totalImages: Int
 }
+
+internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
+  when (this) {
+    is BpkCarouselInternalState -> this
+  }

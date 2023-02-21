@@ -31,7 +31,7 @@ fun BpkCarousel(
   imageContent: @Composable (BoxScope.(Int) -> Unit),
 ) {
   BpkCarouselImpl(
-    state = state as BpkCarouselStateImpl,
+    state = state.asInternalState(),
     modifier = modifier,
     onImageChanged = { onImageChanged?.invoke(it) },
     imageContent = { imageContent(it) },
