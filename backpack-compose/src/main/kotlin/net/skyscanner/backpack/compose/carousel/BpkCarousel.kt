@@ -18,38 +18,22 @@
 
 package net.skyscanner.backpack.compose.carousel
 
-import androidx.annotation.IntRange
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.PagerState
-import com.google.accompanist.pager.rememberPagerState
 import net.skyscanner.backpack.compose.carousel.internal.BpkCarouselImpl
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BpkCarousel(
-  count: Int,
+  state: BpkCarouselState,
   modifier: Modifier = Modifier,
   onImageChanged: ((Int) -> Unit)? = null,
-  pagerState: PagerState = rememberPagerState(),
-  content: @Composable (BoxScope.(Int) -> Unit),
+  imageContent: @Composable (BoxScope.(Int) -> Unit),
 ) {
   BpkCarouselImpl(
-    count = count,
+    state = state as BpkCarouselStateImpl,
     modifier = modifier,
-    pagerState = pagerState,
     onImageChanged = { onImageChanged?.invoke(it) },
-    imageContent = { content(it) },
+    imageContent = { imageContent(it) },
   )
-}
-
-@ExperimentalPagerApi
-@Composable
-fun rememberCarouselPagerState(
-  @IntRange(from = 0) currentImage: Int = 0,
-): PagerState {
-  val initialPageIndex = (Int.MAX_VALUE / 2) + currentImage
-  return rememberPagerState(initialPageIndex)
 }

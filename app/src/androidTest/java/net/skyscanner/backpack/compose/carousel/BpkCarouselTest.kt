@@ -21,7 +21,6 @@ package net.skyscanner.backpack.compose.carousel
 import androidx.compose.foundation.Image
 import androidx.compose.ui.res.painterResource
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.google.accompanist.pager.ExperimentalPagerApi
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
@@ -32,40 +31,42 @@ import net.skyscanner.backpack.demo.R
 @RunWith(AndroidJUnit4::class)
 class BpkCarouselTest : BpkSnapshotTest() {
 
-  @OptIn(ExperimentalPagerApi::class)
   @Test
   fun singleImageDefault() = snap {
     BpkCarousel(
-      count = 1,
+      state = rememberBpkCarouselState(totalImages = 1),
     ) {
       Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
     }
   }
 
-  @OptIn(ExperimentalPagerApi::class)
   @Test
   fun multipleImageDefault() = snap {
-    BpkCarousel(count = 3, content = {
+    BpkCarousel(
+      state = BpkCarouselState(totalImages = 3),
+    ) {
       Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
-    })
+    }
   }
 
 
-  @OptIn(ExperimentalPagerApi::class)
   @Test
   fun setCurrentImage() = snap {
-    BpkCarousel(count = 3, content = {
+    BpkCarousel(
+      state = rememberBpkCarouselState(totalImages = 3, currentImage = 1),
+    ) {
       Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
-    })
+    }
   }
 
-  @OptIn(ExperimentalPagerApi::class)
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun multipleImageDarkMode() = snap {
-    BpkCarousel(count = 2, content = {
+    BpkCarousel(
+      state = rememberBpkCarouselState(totalImages = 2),
+    ) {
       Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
-    })
+    }
   }
 
   private fun imageResAtIndex(index: Int) = when (index) {

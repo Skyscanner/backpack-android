@@ -20,9 +20,9 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -38,7 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.pager.ExperimentalPagerApi
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
-import net.skyscanner.backpack.compose.carousel.rememberCarouselPagerState
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -60,39 +60,38 @@ fun CarouselStory(
   ) {
 
     BpkText(text = stringResource(id = R.string.carousel_only_1_item))
-    CarouselSample(totalItems = 1)
+    CarouselSample(totalImages = 1)
 
     BpkText(text = stringResource(id = R.string.carousel_multiple_items))
-    CarouselSample(totalItems = 3)
+    CarouselSample(totalImages = 3)
 
     BpkText(text = stringResource(id = R.string.carousel_start_at_different_index))
-    CarouselSample(totalItems = 3, currentImage = 2)
+    CarouselSample(totalImages = 3, currentImage = 2)
 
     BpkText(text = stringResource(id = R.string.carousel_image_change_callback))
     BpkText(
       text = stringResource(id = R.string.carousel_current_image).format(currentIndex),
       style = BpkTheme.typography.caption,
     )
-    CarouselSample(totalItems = 3, currentImage = 1, onImageChange = { currentIndex = it })
+    CarouselSample(totalImages = 3, currentImage = 1, onImageChange = { currentIndex = it })
   }
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun CarouselSample(
-  totalItems: Int,
+  totalImages: Int,
   modifier: Modifier = Modifier,
   currentImage: Int = 0,
   onImageChange: ((Int) -> Unit)? = null,
 ) {
-  val pagerState = rememberCarouselPagerState(currentImage = currentImage)
+  val pagerState = rememberBpkCarouselState(totalImages = totalImages, currentImage = currentImage)
 
   BpkCarousel(
-    count = totalItems,
     modifier = modifier
       .aspectRatio(1.9f)
       .padding(vertical = BpkSpacing.Base),
-    pagerState = pagerState,
+    state = pagerState,
     onImageChanged = {
       onImageChange?.invoke(it)
     },

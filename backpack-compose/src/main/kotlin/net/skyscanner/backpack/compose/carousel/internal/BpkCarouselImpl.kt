@@ -29,26 +29,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.PagerState
-import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.flow.distinctUntilChanged
+import net.skyscanner.backpack.compose.carousel.BpkCarouselStateImpl
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 internal fun BpkCarouselImpl(
-  count: Int,
+  state: BpkCarouselStateImpl,
   modifier: Modifier = Modifier,
-  pagerState: PagerState = rememberPagerState(),
   onImageChanged: ((Int) -> Unit)? = null,
   imageContent: @Composable (BoxScope.(Int) -> Unit),
 ) {
   Box(modifier = modifier) {
-    LaunchedEffect(pagerState.currentPage) {
-      snapshotFlow { pagerState.currentPage }.distinctUntilChanged().collect { index ->
-        val page = getModNumber(index, count)
-        onImageChanged?.invoke(page)
+    LaunchedEffect(state.currentPage) {
+      snapshotFlow { state.currentPage }.distinctUntilChanged().collect { index ->
+        onImageChanged?.invoke(index)
       }
     }
 
@@ -56,28 +53,27 @@ internal fun BpkCarouselImpl(
       modifier = Modifier
         .testTag("pager")
         .fillMaxSize(),
-      count = if (count > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
-      state = pagerState,
-    ) { index ->
-      val page = getModNumber(index, count)
-      imageContent(page)
+      count = if (state.pageCount > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
+      state = state.delegate,
+    ) {
+      imageContent(getModdedPageNumber(it, state.pageCount))
     }
 
     // if there is more than one image, display the page indicator
-    if (count > 1) {
+    if (state.pageCount > 1) {
       BpkPageIndicator(
         modifier = Modifier
           .align(Alignment.BottomCenter)
           .testTag("pageIndicator"),
-        totalIndicators = count,
-        currentIndex = getModNumber(pagerState.currentPage, count),
+        totalIndicators = state.pageCount,
+        currentIndex = state.currentPage,
         style = BpkPageIndicatorStyle.OverImage,
       )
     }
   }
 }
 
-private fun getModNumber(index: Int, count: Int) = (index - (Int.MAX_VALUE / 2)).floorMod(count)
+internal fun getModdedPageNumber(index: Int, count: Int) = (index - (Int.MAX_VALUE / 2)).floorMod(count)
 
 // floor modulo operation
 private fun Int.floorMod(other: Int): Int = when (other) {
