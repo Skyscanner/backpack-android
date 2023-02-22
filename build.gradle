@@ -33,7 +33,7 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath dokka
     classpath 'com.karumi:shot:5.14.1'
-    classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
+    classpath 'io.github.gradle-nexus:publish-plugin:1.2.0'
     classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
     classpath "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:$ksp_version"
   }
