@@ -86,16 +86,26 @@ class MainActivity : BpkBaseActivity() {
           ComponentsTitle(stringResource(R.string.tokens_title))
         }
         items(ComponentRegistry.TOKENS.values.toList()) {
-          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
+          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it)) {
+            showComponentDetail(it.name)
+          }
         }
         item {
           ComponentsTitle(title = stringResource(R.string.components_title))
         }
         items(ComponentRegistry.COMPONENTS.values.toList()) {
-          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it))
+          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it)) {
+            showComponentDetail(it.name)
+          }
         }
       }
     }
+  }
+
+  private fun showComponentDetail(title: String) {
+    val intent = Intent(this, ComponentDetailActivity::class.java)
+    intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, title)
+    startActivity(intent)
   }
 
   private fun hasComposeNodes(item: RegistryItem): Boolean {

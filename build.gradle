@@ -19,6 +19,7 @@
 buildscript {
   ext.kotlin_version = '1.8.10'
   ext.compose_compiler_version = '1.4.2'
+  ext.ksp_version = '1.8.10-1.0.9'
   ext.detekt_version = '1.22.0'
   ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.7.20"
   repositories {
@@ -32,8 +33,9 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath dokka
     classpath 'com.karumi:shot:5.14.1'
-    classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
+    classpath 'io.github.gradle-nexus:publish-plugin:1.2.0'
     classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
+    classpath "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:$ksp_version"
   }
 }
 
@@ -62,7 +64,7 @@ subprojects {
   }
 
   dependencies {
-    detektPlugins "com.twitter.compose.rules:detekt:0.0.26"
+    detektPlugins "io.nlopez.compose.rules:detekt:0.1.1"
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-rules-libraries:$detekt_version"
   }
@@ -110,6 +112,10 @@ ext {
   testRules = "androidx.test:rules:1.5.0"
   mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
   mockitoAndroid = "org.mockito:mockito-android:5.1.1"
+
+  kotlinPoet = "com.squareup:kotlinpoet:1.12.0"
+  roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.0"
+  kspApi = "com.google.devtools.ksp:symbol-processing-api:$ksp_version"
 
   coroutinesVersion = "1.6.4"
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"

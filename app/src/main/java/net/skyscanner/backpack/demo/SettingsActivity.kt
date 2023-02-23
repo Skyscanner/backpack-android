@@ -24,7 +24,7 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import net.skyscanner.backpack.demo.components.SettingsThemeOption
+import net.skyscanner.backpack.demo.ui.SettingsThemeOption
 import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.toggle.BpkSwitch
 

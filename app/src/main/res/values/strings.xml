@@ -288,4 +288,7 @@
   <string name="carousel_start_at_different_index">Start at the end</string>
   <string name="carousel_image_change_callback">Image change callback</string>
   <string name="carousel_current_image">Current Image: %s</string>
+
+  <string name="tab_view">View</string>
+  <string name="tab_compose">Compose</string>
 </resources>

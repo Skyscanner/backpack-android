@@ -114,7 +114,14 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest
+          script: |
+            # uninstall first to avoid signature error. see https://github.com/ReactiveCircus/android-emulator-runner/issues/319
+            adb uninstall net.skyscanner.backpack || :
+            adb uninstall net.skyscanner.backpack.test || :
+            adb uninstall net.skyscanner.backpack.compose.test || :
+            adb uninstall net.skyscanner.backpack.common.test || :
+
+            ./gradlew :Backpack:connected${{ env.config }}AndroidTest :backpack-compose:connected${{ env.config }}AndroidTest :backpack-common:connected${{ env.config }}AndroidTest
 
   Screenshots:
     name: Screenshots tests
@@ -180,6 +187,10 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
+            # uninstall first to avoid signature error. see https://github.com/ReactiveCircus/android-emulator-runner/issues/319
+            adb uninstall net.skyscanner.backpack || :
+            adb uninstall net.skyscanner.backpack.test || :
+
             adb shell settings put global hidden_api_policy_pre_p_apps 1
             adb shell settings put global hidden_api_policy_p_apps 1
             touch logcat.log

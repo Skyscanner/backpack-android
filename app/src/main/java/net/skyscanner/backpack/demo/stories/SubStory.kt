@@ -18,6 +18,7 @@
 
 package net.skyscanner.backpack.demo.stories
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.platform.ComposeView
 import net.skyscanner.backpack.demo.BackpackDemoTheme
+import net.skyscanner.backpack.demo.ComponentDetailActivity
 import net.skyscanner.backpack.demo.compose.ComponentItem
 
 open class SubStory : Story() {
@@ -42,7 +44,11 @@ open class SubStory : Story() {
           BackpackDemoTheme {
             LazyColumn {
               items(stories) {
-                ComponentItem(title = it)
+                ComponentItem(title = it) {
+                  val intent = Intent(context, ComponentDetailActivity::class.java)
+                  intent.putExtra(ARG_ITEM_ID, it)
+                  startActivity(intent)
+                }
               }
             }
           }

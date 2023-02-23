@@ -38,7 +38,7 @@ fun BpkPrice(
   price: String,
   modifier: Modifier = Modifier,
   leadingText: String? = null,
-  lineThroughText: String? = null,
+  previousPrice: String? = null,
   trailingText: String? = null,
   align: BpkPriceAlign = BpkPriceAlign.Start,
   size: BpkPriceSize = BpkPriceSize.Small,
@@ -49,7 +49,7 @@ fun BpkPrice(
         price = price,
         modifier = modifier,
         leadingText = leadingText,
-        lineThroughText = lineThroughText,
+        previousPrice = previousPrice,
         trailingText = trailingText,
         size = size,
       )
@@ -59,7 +59,7 @@ fun BpkPrice(
         price = price,
         modifier = modifier,
         leadingText = leadingText,
-        lineThroughText = lineThroughText,
+        previousPrice = previousPrice,
         trailingText = trailingText,
         size = size,
       )
