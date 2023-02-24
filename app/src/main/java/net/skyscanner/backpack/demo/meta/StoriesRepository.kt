@@ -21,6 +21,9 @@ package net.skyscanner.backpack.demo.meta
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.ui.AndroidView
+import net.skyscanner.backpack.text.BpkText
 import org.jetbrains.annotations.TestOnly
 
 interface StoriesRepository {
@@ -71,13 +74,20 @@ private object StoriesRepositoryImpl : StoriesRepository {
   override fun testStories() = testStories
 }
 
-@Component(name = "TestComponent", link = "test")
+@Component(name = "TestComponent")
 private annotation class TestComponent
 
 @ComposeStory(screenshot = false)
 @TestComponent
 @Composable
 internal fun TestComposeStory(modifier: Modifier = Modifier) {
+  Box(modifier = modifier)
+}
+
+@ComposeStory(name = "TestCustomName")
+@TestComponent
+@Composable
+internal fun TestComposeStoryWithCustomName(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
@@ -99,5 +109,7 @@ internal fun TestComposeScreenshot(modifier: Modifier = Modifier) {
 @TestComponent
 @Composable
 internal fun TestViewScreenshot(modifier: Modifier = Modifier) {
-  Box(modifier = modifier)
+  AndroidView<BpkText>(modifier = modifier) {
+    text = context.getString(R.string.app_name)
+  }
 }

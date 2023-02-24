@@ -42,6 +42,16 @@ class StoriesTests {
   }
 
   @Test
+  fun assertStoriesIncludeScreenshot() {
+    assertTrue(repository.testStories().any { it.isScreenshot })
+  }
+
+  @Test
+  fun assertStoriesSupportCustomName() {
+    assertTrue(repository.testStories().any { it.name == "TestCustomName" })
+  }
+
+  @Test
   fun assertTestComponentIsPresent() {
     assertTrue(repository.testStories().any { it.component.name == "TestComponent" })
   }

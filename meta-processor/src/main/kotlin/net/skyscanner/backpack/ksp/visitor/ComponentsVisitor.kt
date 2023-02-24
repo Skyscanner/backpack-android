@@ -39,7 +39,6 @@ object ComponentsVisitor : KSDefaultVisitor<Unit, ComponentDefinition?>() {
         ComponentDefinition(
           id = qualifiedName,
           name = annotation[ComponentAnnotation.paramName],
-          link = annotation[ComponentAnnotation.paramLink],
           location = location,
         )
       else -> super.visitClassDeclaration(classDeclaration, data)

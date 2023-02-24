@@ -64,15 +64,13 @@ fun writeListOfStories(stories: List<StoryDefinition>, output: XFiler) {
 }
 
 private fun CodeBlock.Builder.writeStoryCreator(story: StoryDefinition) =
-  when {
-    else -> addStatement("%T(", StoryClass)
-      .indent()
-      .addStatement("name = %S,", story.name)
-      .addStatement("isScreenshot = %L,", story.isScreenshot)
-      .addStatement("isCompose = %L,", story.isCompose)
-      .writeComponent("component", story.component)
-      .addStatement("${"content"} = { %T() },", ClassName.bestGuess(story.reference))
-  }
+  addStatement("%T(", StoryClass)
+    .indent()
+    .addStatement("name = %S,", story.name)
+    .addStatement("isScreenshot = %L,", story.isScreenshot)
+    .addStatement("isCompose = %L,", story.isCompose)
+    .writeComponent("component", story.component)
+    .addStatement("${"content"} = { %T() },", ClassName.bestGuess(story.reference))
     .unindent()
     .addStatement("),")
 
@@ -80,6 +78,5 @@ private fun CodeBlock.Builder.writeComponent(name: String, component: ComponentD
   addStatement("$name = %T(", ComponentClass)
     .indent()
     .addStatement("name = %S,", component.name)
-    .addStatement("link = %S,", component.link)
     .unindent()
     .addStatement("),")
