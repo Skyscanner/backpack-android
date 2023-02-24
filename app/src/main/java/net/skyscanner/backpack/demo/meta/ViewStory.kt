@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.meta
 
-import androidx.annotation.LayoutRes
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import javax.annotation.concurrent.Immutable
 
@@ -30,5 +29,4 @@ import javax.annotation.concurrent.Immutable
 annotation class ViewStory(
   val name: String = "Default",
   val screenshot: Boolean = true,
-  @LayoutRes val layoutId: Int = 0,
 )

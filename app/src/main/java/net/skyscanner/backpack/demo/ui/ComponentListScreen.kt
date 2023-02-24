@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -39,19 +38,16 @@ import net.skyscanner.backpack.demo.SettingsActivity
 import net.skyscanner.backpack.demo.compose.ComponentItem
 import net.skyscanner.backpack.demo.compose.ComponentsTitle
 import net.skyscanner.backpack.demo.meta.Component
-import net.skyscanner.backpack.demo.meta.Story
-import net.skyscanner.backpack.demo.meta.all
+import net.skyscanner.backpack.demo.meta.StoriesRepository
 
 @Composable
 fun ComponentListScreen(
   modifier: Modifier = Modifier,
-  stories: List<Story> = remember { Story.all() },
+  repository: StoriesRepository = StoriesRepository.getInstance(),
   onClick: (Component) -> Unit,
 ) {
 
   val state = rememberTopAppBarState()
-  val map = remember(stories) { stories.groupBy { it.component }.filter { it.value.isNotEmpty() } }
-  val components = remember(map) { map.keys.sortedBy { it.name } }
 
   Column(modifier = modifier.nestedScroll(state)) {
     val context = LocalContext.current
@@ -75,10 +71,10 @@ fun ComponentListScreen(
         ComponentsTitle(title = stringResource(R.string.components_title))
       }
 
-      items(components) { component ->
+      items(repository.allComponents()) { component ->
         ComponentItem(
           title = component.name,
-          showComposeBadge = map.getValue(component).any { it.isCompose },
+          showComposeBadge = repository.isComposeSupportedFor(component),
           onClick = { onClick(component) },
         )
       }
