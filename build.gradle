@@ -79,7 +79,7 @@ ext {
   dokkaOutputDir = "dokka"
 
   androidxAppCompat = "androidx.appcompat:appcompat:1.6.1"
-  androidxAnnotations = "androidx.annotation:annotation:1.5.0"
+  androidxAnnotations = "androidx.annotation:annotation:1.6.0"
 
   lifecycleVersion = "2.5.1"
   androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
