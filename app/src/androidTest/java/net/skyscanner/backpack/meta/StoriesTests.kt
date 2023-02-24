@@ -32,28 +32,33 @@ class StoriesTests {
   }
 
   @Test
-  fun assertStoriesIncludeView() {
-    assertTrue(repository.testStories().any { !it.isCompose })
+  fun assertViewStoryIsGenerated() {
+    assertTrue(repository.testStories().any { it.name == "TestViewStory" && !it.isCompose })
   }
 
   @Test
-  fun assertStoriesIncludeCompose() {
-    assertTrue(repository.testStories().any { it.isCompose })
+  fun assertComposeStoryIsGenerated() {
+    assertTrue(repository.testStories().any { it.name == "TestComposeStory" && it.isCompose })
   }
 
   @Test
-  fun assertStoriesIncludeScreenshot() {
-    assertTrue(repository.testStories().any { it.isScreenshot })
+  fun assertComposeScreenshotStoryIsGenerated() {
+    assertTrue(repository.testStories().any { it.name == "TestComposeScreenshot" && it.isScreenshot })
   }
 
   @Test
-  fun assertStoriesSupportCustomName() {
-    assertTrue(repository.testStories().any { it.name == "TestCustomName" })
+  fun assertViewScreenshotStoryIsGenerated() {
+    assertTrue(repository.testStories().any { it.name == "TestViewScreenshot" && it.isScreenshot })
+  }
+
+  @Test
+  fun assertStoriesSupportDefaultName() {
+    assertTrue(repository.testStories().any { it.name == "Default" })
   }
 
   @Test
   fun assertTestComponentIsPresent() {
-    assertTrue(repository.testStories().any { it.component.name == "TestComponent" })
+    assertTrue(repository.testStories().any { it.name == "TestComposeStory" && it.component.name == "TestComponent" })
   }
 
 }

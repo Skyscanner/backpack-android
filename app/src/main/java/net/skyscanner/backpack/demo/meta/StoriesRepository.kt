@@ -77,35 +77,35 @@ private object StoriesRepositoryImpl : StoriesRepository {
 @Component(name = "TestComponent")
 private annotation class TestComponent
 
-@ComposeStory(screenshot = false)
+@ComposeStory(name = "TestComposeStory", screenshot = false)
 @TestComponent
 @Composable
 internal fun TestComposeStory(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ComposeStory(name = "TestCustomName")
-@TestComponent
-@Composable
-internal fun TestComposeStoryWithCustomName(modifier: Modifier = Modifier) {
-  Box(modifier = modifier)
-}
-
-@ViewStory(screenshot = false)
+@ViewStory(name = "TestViewStory", screenshot = false)
 @TestComponent
 @Composable
 internal fun TestViewStory(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ComposeStory(screenshot = true)
+@ComposeStory(name = "TestComposeScreenshot", screenshot = true)
 @TestComponent
 @Composable
 internal fun TestComposeScreenshot(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ViewStory(screenshot = true)
+@ComposeStory(screenshot = true)
+@TestComponent
+@Composable
+internal fun TestDefaultStory(modifier: Modifier = Modifier) {
+  Box(modifier = modifier)
+}
+
+@ViewStory(name = "TestViewScreenshot", screenshot = true)
 @TestComponent
 @Composable
 internal fun TestViewScreenshot(modifier: Modifier = Modifier) {
