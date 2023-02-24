@@ -20,26 +20,19 @@ package net.skyscanner.backpack.docs
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.test.rule.ActivityTestRule
-import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
-import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
-import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
-import net.skyscanner.backpack.compose.navigationbar.NavIcon
-import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.BpkBaseActivity
-import net.skyscanner.backpack.demo.compose.LocalAutomationMode
-import net.skyscanner.backpack.demo.compose.LocalFloatingNotification
+import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
-import net.skyscanner.backpack.demo.meta.all
+import net.skyscanner.backpack.demo.ui.BpkScaffold
+import net.skyscanner.backpack.demo.ui.StoryScreen
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
+// todo: rename it when we all the stories migrated
 @RunWith(Parameterized::class)
 open class GenerateScreenshots1(
   private val story: Story,
@@ -49,7 +42,7 @@ open class GenerateScreenshots1(
 
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
-    fun data(): List<Story> = Story.all().filter { it.isScreenshot }
+    fun data(): List<Story> = StoriesRepository.getInstance().screenshotStories()
 
   }
 
@@ -75,23 +68,8 @@ open class GenerateScreenshots1(
     val intent = Intent()
     activityRule.launchActivity(intent)
     composeTestRule.setContent {
-      BackpackDemoTheme {
-        val floatingNotificationState = rememberBpkFloatingNotificationState()
-        CompositionLocalProvider(
-          LocalAutomationMode provides true,
-          LocalFloatingNotification provides floatingNotificationState,
-        ) {
-          Box {
-            Column {
-              BpkTopNavBar(
-                navIcon = NavIcon.Back("back", {}),
-                title = story.component.name,
-              )
-              story.content()
-            }
-            BpkFloatingNotification(state = floatingNotificationState)
-          }
-        }
+      BpkScaffold(automationMode = true) {
+        StoryScreen(story = story, onBack = {})
       }
     }
     takeScreenshot(suffix)

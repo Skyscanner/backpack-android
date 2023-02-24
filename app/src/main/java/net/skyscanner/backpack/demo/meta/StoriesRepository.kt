@@ -9,6 +9,8 @@ interface StoriesRepository {
 
   fun allComponents(): List<Component>
 
+  fun screenshotStories(): List<Story>
+
   fun storiesOf(component: Component, compose: Boolean): List<Story>
 
   fun isComposeSupportedFor(component: Component): Boolean
@@ -24,10 +26,11 @@ interface StoriesRepository {
 
 private object StoriesRepositoryImpl : StoriesRepository {
 
-  private val allStories = Story.all()
-  private val testStories = allStories.filter { it.component.name != "TestComponent" }
+  private val generatedStories = Story.all()
+  private val testStories = generatedStories.filter { it.component.name != "TestComponent" }
+  private val allStories = generatedStories - testStories
 
-  private val map = (allStories - testStories)
+  private val map = allStories
     .groupBy { it.component }
     .filter { (_, stories) -> stories.isNotEmpty() }
     .toSortedMap(compareBy { it.name })
@@ -35,6 +38,8 @@ private object StoriesRepositoryImpl : StoriesRepository {
   private val components = map.keys.toList()
 
   override fun allComponents() = components
+
+  override fun screenshotStories() = allStories.filter { it.isScreenshot }
 
   override fun storiesOf(component: Component, compose: Boolean): List<Story> =
     map[component]
