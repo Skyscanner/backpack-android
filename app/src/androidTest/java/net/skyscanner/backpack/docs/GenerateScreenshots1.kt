@@ -25,7 +25,7 @@ import androidx.test.rule.ActivityTestRule
 import net.skyscanner.backpack.demo.BpkBaseActivity
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
-import net.skyscanner.backpack.demo.ui.BpkScaffold
+import net.skyscanner.backpack.demo.ui.DemoScaffold
 import net.skyscanner.backpack.demo.ui.StoryScreen
 import org.junit.Rule
 import org.junit.Test
@@ -68,7 +68,7 @@ open class GenerateScreenshots1(
     val intent = Intent()
     activityRule.launchActivity(intent)
     composeTestRule.setContent {
-      BpkScaffold(automationMode = true) {
+      DemoScaffold(automationMode = true) {
         StoryScreen(story = story, onBack = {})
       }
     }

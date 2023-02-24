@@ -29,7 +29,7 @@ import net.skyscanner.backpack.demo.compose.LocalAutomationMode
 import net.skyscanner.backpack.demo.compose.LocalFloatingNotification
 
 @Composable
-fun BpkScaffold(
+fun DemoScaffold(
   modifier: Modifier = Modifier,
   automationMode: Boolean = false,
   content: @Composable () -> Unit,
