@@ -18,28 +18,47 @@
 
 package net.skyscanner.backpack.meta
 
-import net.skyscanner.backpack.demo.meta.Story
-import net.skyscanner.backpack.demo.meta.all
+import net.skyscanner.backpack.demo.meta.StoriesRepository
 import org.junit.Assert.assertTrue
-import org.junit.Ignore
 import org.junit.Test
 
-@Ignore("These tests are ignored because we need to migrate the stories first")
 class StoriesTests {
+
+  private val repository = StoriesRepository.getInstance()
 
   @Test
   fun assertStoriesAreNotEmpty() {
-    assertTrue(Story.all().isNotEmpty())
+    assertTrue(repository.testStories().isNotEmpty())
   }
 
   @Test
-  fun assertStoriesIncludeView() {
-    assertTrue(Story.all().any { !it.isCompose })
+  fun assertViewStoryIsGenerated() {
+    assertTrue(repository.testStories().any { it.name == "TestViewStory" && !it.isCompose })
   }
 
   @Test
-  fun assertStoriesIncludeCompose() {
-    assertTrue(Story.all().any { it.isCompose })
+  fun assertComposeStoryIsGenerated() {
+    assertTrue(repository.testStories().any { it.name == "TestComposeStory" && it.isCompose })
+  }
+
+  @Test
+  fun assertComposeScreenshotStoryIsGenerated() {
+    assertTrue(repository.testStories().any { it.name == "TestComposeScreenshot" && it.isScreenshot })
+  }
+
+  @Test
+  fun assertViewScreenshotStoryIsGenerated() {
+    assertTrue(repository.testStories().any { it.name == "TestViewScreenshot" && it.isScreenshot })
+  }
+
+  @Test
+  fun assertStoriesSupportDefaultName() {
+    assertTrue(repository.testStories().any { it.name == "Default" })
+  }
+
+  @Test
+  fun assertTestComponentIsPresent() {
+    assertTrue(repository.testStories().any { it.name == "TestComposeStory" && it.component.name == "TestComponent" })
   }
 
 }

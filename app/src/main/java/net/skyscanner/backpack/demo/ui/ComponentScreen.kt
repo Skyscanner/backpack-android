@@ -41,8 +41,8 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.SettingsActivity
 import net.skyscanner.backpack.demo.compose.ComponentItem
 import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
-import net.skyscanner.backpack.demo.meta.all
 
 @Composable
 fun ComponentScreen(
@@ -50,7 +50,7 @@ fun ComponentScreen(
   onBack: () -> Unit,
   onClick: (Story) -> Unit,
   modifier: Modifier = Modifier,
-  stories: List<Story> = remember { Story.all() },
+  repository: StoriesRepository = StoriesRepository.getInstance(),
   story: @Composable (@Composable () -> Unit) -> Unit = { it() },
 ) {
 
@@ -74,8 +74,8 @@ fun ComponentScreen(
       ),
     )
 
-    val viewStories = remember(stories, component) { stories.filter { !it.isCompose && it.component == component } }
-    val composeStories = remember(stories, component) { stories.filter { it.isCompose && it.component == component } }
+    val viewStories = repository.storiesOf(component, compose = false)
+    val composeStories = repository.storiesOf(component, compose = true)
 
     var composeTabSelected by remember { mutableStateOf(composeStories.isNotEmpty()) }
 
