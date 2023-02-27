@@ -24,65 +24,39 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.model.CalendarLabel
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.CalendarComponent
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
+import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import org.threeten.bp.LocalDate
 
-class LabeledCalendarStory : Story() {
+@Composable
+@CalendarComponent
+@ViewStory("Labeled")
+fun LabeledCalendarStory(modifier: Modifier = Modifier) {
+  val automationMode = LocalAutomationMode.current
+  AndroidLayout(R.layout.fragment_calendar_default, modifier) {
+    val calendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
+    initSelectionTypeSwitcher(this, automationMode, calendar::setController)
+  }
+}
 
-  lateinit var controller: ExampleBpkCalendarController
+class LabeledCalendarStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
     val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
     val calendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
-    controller = ExampleBpkCalendarController(
-      requireContext(),
-      SelectionType.RANGE,
-      disableDates = false,
-      calendarLabels = createLabels(),
-      automationMode = automationMode,
-    )
-    calendar.setController(controller)
-    initSelectionTypeSwitcher()
+    initSelectionTypeSwitcher(view, automationMode, calendar::setController)
   }
-
-  private fun initSelectionTypeSwitcher() {
-    val single = requireView().findViewById<RadioButton>(R.id.single)
-    val range = requireView().findViewById<RadioButton>(R.id.range)
-    val selectionType = requireView().findViewById<RadioGroup>(R.id.selection_type)
-    val bpkCalendar = requireView().findViewById<BpkCalendar>(R.id.bpkCalendar)
-
-    single.text = getString(R.string.calendar_single)
-    range.text = getString(R.string.calendar_range)
-    range.isChecked = true
-
-    selectionType.visibility = View.VISIBLE
-
-    selectionType.setOnCheckedChangeListener { _, checkedId ->
-      when (checkedId) {
-        R.id.single -> {
-          controller = ExampleBpkCalendarController(requireContext(), SelectionType.SINGLE, calendarLabels = createLabels())
-        }
-        R.id.range -> {
-          controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE, calendarLabels = createLabels())
-        }
-      }
-      bpkCalendar.setController(controller)
-    }
-  }
-
-  private fun createLabels(startDate: LocalDate = LocalDate.now()) = mapOf(
-    startDate.plusDays(1) to CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
-    startDate.plusDays(2) to CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
-    startDate.plusDays(3) to CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
-    startDate.plusDays(4) to CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
-    startDate.plusDays(5) to CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
-  )
 
   companion object {
     private const val LAYOUT_ID = "fragment_id"
@@ -93,3 +67,38 @@ class LabeledCalendarStory : Story() {
     }
   }
 }
+
+private fun initSelectionTypeSwitcher(
+  view: View,
+  automationMode: Boolean,
+  onControllerChange: (ExampleBpkCalendarController) -> Unit,
+) {
+  val single = view.findViewById<RadioButton>(R.id.single)
+  val range = view.findViewById<RadioButton>(R.id.range)
+  val selectionType = view.findViewById<RadioGroup>(R.id.selection_type)
+
+  single.text = view.context.getString(R.string.calendar_single)
+  range.text = view.context.getString(R.string.calendar_range)
+
+  selectionType.visibility = View.VISIBLE
+
+  selectionType.setOnCheckedChangeListener { _, checkedId ->
+    val controller = when (checkedId) {
+      R.id.single -> ExampleBpkCalendarController(view.context, SelectionType.SINGLE, calendarLabels = createLabels(), automationMode = automationMode)
+      R.id.range -> ExampleBpkCalendarController(view.context, SelectionType.RANGE, calendarLabels = createLabels(), automationMode = automationMode)
+      else -> throw IllegalStateException("Unknown selection type")
+    }
+    onControllerChange(controller)
+  }
+
+  // this invokes the listener and does the initial assignment
+  range.isChecked = true
+}
+
+private fun createLabels(startDate: LocalDate = LocalDate.now()) = mapOf(
+  startDate.plusDays(1) to CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
+  startDate.plusDays(2) to CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
+  startDate.plusDays(3) to CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
+  startDate.plusDays(4) to CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
+  startDate.plusDays(5) to CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
+)
