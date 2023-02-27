@@ -35,11 +35,15 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.NudgerComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun NudgerStory() {
+@NudgerComponent
+@ComposeStory
+fun NudgerStory(modifier: Modifier = Modifier) {
   Column(
+    modifier = modifier,
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
   ) {
