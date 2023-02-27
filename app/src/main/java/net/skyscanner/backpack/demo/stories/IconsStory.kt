@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import net.skyscanner.backpack.demo.R
 
+// todo: remove it
 private const val PLATFORM_VD_CLAZZ = "android.graphics.drawable.VectorDrawable"
 private const val ICON_TYPE = "icon_type"
 
