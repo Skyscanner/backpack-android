@@ -40,7 +40,7 @@ import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 @ViewStory("Colored")
 fun ColoredCalendarStory(modifier: Modifier = Modifier) {
   val automationMode = LocalAutomationMode.current
-  AndroidLayout(R.layout.fragment_calendar_colored) {
+  AndroidLayout(R.layout.fragment_calendar_colored, modifier) {
     var controller = ExampleBpkCalendarController(context, SelectionType.RANGE, false, automationMode)
     val bpkCalendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
     val shiftColorsButton = findViewById<View>(R.id.shiftColorsButton)

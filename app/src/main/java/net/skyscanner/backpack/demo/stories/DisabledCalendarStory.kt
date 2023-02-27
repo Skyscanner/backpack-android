@@ -24,54 +24,56 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.CalendarComponent
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
+import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 
-class DisabledCalendarStory : Story() {
+@Composable
+@CalendarComponent
+@ViewStory("Colored")
+fun DisabledCalendarStory(modifier: Modifier = Modifier) {
+  val automationMode = LocalAutomationMode.current
+  AndroidLayout(R.layout.fragment_calendar_disabled, modifier) {
+    var controller = ExampleBpkCalendarController(context, disableDates = true)
+    val bpkCalendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
+    val shiftColorsButton = findViewById<View>(R.id.shiftColorsButton)
 
-  lateinit var controller: ExampleBpkCalendarController
+    initSelectionTypeSwitcher(this, automationMode) {
+      controller = it
+      bpkCalendar.setController(controller)
+    }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    controller = ExampleBpkCalendarController(requireContext(), disableDates = true)
-    val bpkCalendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
-    val shiftColorsButton = view.findViewById<View>(R.id.shiftColorsButton)
-
-    controller.isColoredCalendar = true
-    initSelectionTypeSwitcher()
     shiftColorsButton.setOnClickListener {
       controller.shiftDisabledDates()
       controller.updateContent()
     }
-    bpkCalendar.setController(controller)
   }
+}
 
-  private fun initSelectionTypeSwitcher() {
-    val single = requireView().findViewById<RadioButton>(R.id.single)
-    val range = requireView().findViewById<RadioButton>(R.id.range)
-    val selectionType = requireView().findViewById<RadioGroup>(R.id.selection_type)
-    val bpkCalendar = requireView().findViewById<BpkCalendar>(R.id.bpkCalendar)
+class DisabledCalendarStory : Story() {
 
-    single.text = getString(R.string.calendar_single)
-    range.text = getString(R.string.calendar_range)
-    range.isChecked = true
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
 
-    selectionType.visibility = View.VISIBLE
+    var controller = ExampleBpkCalendarController(requireContext(), disableDates = true)
+    val bpkCalendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
+    val shiftColorsButton = view.findViewById<View>(R.id.shiftColorsButton)
+    val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
 
-    selectionType.setOnCheckedChangeListener { _, checkedId ->
-      when (checkedId) {
-        R.id.single -> {
-          controller = ExampleBpkCalendarController(requireContext(), SelectionType.SINGLE, disableDates = true)
-        }
-        R.id.range -> {
-          controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE, disableDates = true)
-        }
-      }
-      controller.isColoredCalendar = true
+    initSelectionTypeSwitcher(view, automationMode) {
+      controller = it
       bpkCalendar.setController(controller)
+    }
+    shiftColorsButton.setOnClickListener {
+      controller.shiftDisabledDates()
+      controller.updateContent()
     }
   }
 
@@ -83,4 +85,32 @@ class DisabledCalendarStory : Story() {
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }
   }
+}
+
+private fun initSelectionTypeSwitcher(
+  view: View,
+  automationMode: Boolean,
+  onControllerChange: (ExampleBpkCalendarController) -> Unit,
+) {
+  val single = view.findViewById<RadioButton>(R.id.single)
+  val range = view.findViewById<RadioButton>(R.id.range)
+  val selectionType = view.findViewById<RadioGroup>(R.id.selection_type)
+
+  single.text = view.context.getString(R.string.calendar_single)
+  range.text = view.context.getString(R.string.calendar_range)
+
+  selectionType.visibility = View.VISIBLE
+
+  selectionType.setOnCheckedChangeListener { _, checkedId ->
+    val controller = when (checkedId) {
+      R.id.single -> ExampleBpkCalendarController(view.context, SelectionType.SINGLE, disableDates = true, automationMode = automationMode)
+      R.id.range -> ExampleBpkCalendarController(view.context, SelectionType.RANGE, disableDates = true, automationMode = automationMode)
+      else -> throw IllegalStateException("Unknown selection type")
+    }
+    controller.isColoredCalendar = true
+    onControllerChange(controller)
+  }
+
+  // this invokes the listener and does the initial assignment
+  range.isChecked = true
 }

@@ -40,7 +40,7 @@ import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 @ViewStory("Default")
 fun DefaultCalendarStory(modifier: Modifier = Modifier) {
   val automationMode = LocalAutomationMode.current
-  AndroidLayout(R.layout.fragment_calendar_default) {
+  AndroidLayout(R.layout.fragment_calendar_default, modifier) {
     val calendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
     initSelectionTypeSwitcher(this, automationMode, calendar::setController)
   }
