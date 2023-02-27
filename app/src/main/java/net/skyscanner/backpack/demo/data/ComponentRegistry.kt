@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
-import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
@@ -41,6 +40,9 @@ import net.skyscanner.backpack.demo.compose.CardButtonSmallStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CardWrapperStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
+import net.skyscanner.backpack.demo.compose.ChipStoryDefault
+import net.skyscanner.backpack.demo.compose.ChipStoryOnDark
+import net.skyscanner.backpack.demo.compose.ChipStoryOnImage
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
 import net.skyscanner.backpack.demo.compose.DividedCardStory
@@ -101,7 +103,6 @@ import net.skyscanner.backpack.demo.stories.SubStory
 import net.skyscanner.backpack.demo.stories.TabStory
 import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
-import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
 import net.skyscanner.backpack.demo.compose.HorizontalNavStory as ComposeHorizontalNavStory
 
@@ -323,9 +324,9 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Default" composeStory { ComposeChipStory(BpkChipStyle.Default) },
-            "On Dark" composeStory { ComposeChipStory(BpkChipStyle.OnDark) },
-            "On Image" composeStory { ComposeChipStory(BpkChipStyle.OnImage) },
+            "Default" composeStory { ChipStoryDefault() },
+            "On Dark" composeStory { ChipStoryOnDark() },
+            "On Image" composeStory { ChipStoryOnImage() },
           ),
         ),
       ),

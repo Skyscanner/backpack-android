@@ -28,7 +28,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -44,9 +43,12 @@ import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.AccountIdCard
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.NavBarComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
+@NavBarComponent
+@ComposeStory("Collapsible")
 fun CollapsibleNavigationBarStory(
   modifier: Modifier = Modifier,
   initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,

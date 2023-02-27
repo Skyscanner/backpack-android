@@ -36,21 +36,24 @@ import net.skyscanner.backpack.compose.tokens.Account
 import net.skyscanner.backpack.compose.tokens.AccountIdCard
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.NavBarComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun NavigationBarStory() {
+@NavBarComponent
+@ComposeStory("Default")
+fun NavigationBarStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(vertical = BpkSpacing.Base),
+    modifier = modifier.padding(vertical = BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
-    val modifier = Modifier.fillMaxWidth()
-    NoNavIconTopNavBar(modifier)
-    BackTopNavBar(modifier)
-    CloseTopNavBar(modifier)
-    ActionsTopNavBar(modifier)
-    TextActionTopNavBar(modifier)
+    val childModifier = Modifier.fillMaxWidth()
+    NoNavIconTopNavBar(childModifier)
+    BackTopNavBar(childModifier)
+    CloseTopNavBar(childModifier)
+    ActionsTopNavBar(childModifier)
+    TextActionTopNavBar(childModifier)
   }
 }
 
