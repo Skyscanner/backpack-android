@@ -42,17 +42,17 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @BottomNavComponent
 @ComposeStory
-fun BpkBottomNavStory(modifier: Modifier = Modifier) {
+fun BottomNavStory(modifier: Modifier = Modifier) {
   Box(
     modifier = modifier.fillMaxSize(),
     contentAlignment = Alignment.BottomEnd,
   ) {
-    BpkBottomNavSample()
+    BottomNavSample()
   }
 }
 
 @Composable
-fun BpkBottomNavSample(
+fun BottomNavSample(
   modifier: Modifier = Modifier,
   defaultItemId: Int = 1,
 ) {

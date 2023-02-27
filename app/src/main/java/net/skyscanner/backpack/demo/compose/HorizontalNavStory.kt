@@ -43,7 +43,7 @@ import net.skyscanner.backpack.demo.R
 
 @Composable
 @Preview
-fun HorizontalNavComposeStory() {
+fun HorizontalNavStory() {
 
   Column(
     modifier = Modifier
@@ -53,22 +53,22 @@ fun HorizontalNavComposeStory() {
   ) {
 
     BpkText(text = stringResource(R.string.tabs_small))
-    BpkHorizontalNav_Small_Sample()
+    HorizontalNav_Small_Sample()
 
     BpkText(text = stringResource(R.string.tabs_small_with_icon))
-    BpkHorizontalNav_SmallWithIcon_Sample()
+    HorizontalNav_SmallWithIcon_Sample()
 
     BpkText(text = stringResource(R.string.tabs_large))
-    BpkHorizontalNav_Large_Sample()
+    HorizontalNav_Large_Sample()
 
     BpkText(text = stringResource(R.string.tabs_large_with_icon))
-    BpkHorizontalNav_LargeWithIcon_Sample()
+    HorizontalNav_LargeWithIcon_Sample()
   }
 }
 
 @Preview
 @Composable
-internal fun BpkHorizontalNav_Small_Sample() {
+internal fun HorizontalNav_Small_Sample() {
   val tabs = listOf(
     BpkHorizontalNavTab(
       title = stringResource(R.string.tabs_one),
@@ -90,7 +90,7 @@ internal fun BpkHorizontalNav_Small_Sample() {
 
 @Preview
 @Composable
-internal fun BpkHorizontalNav_SmallWithIcon_Sample() {
+internal fun HorizontalNav_SmallWithIcon_Sample() {
   val tabs = listOf(
     BpkHorizontalNavTab(
       title = stringResource(R.string.tabs_one),
@@ -114,7 +114,7 @@ internal fun BpkHorizontalNav_SmallWithIcon_Sample() {
 
 @Preview
 @Composable
-internal fun BpkHorizontalNav_Large_Sample() {
+internal fun HorizontalNav_Large_Sample() {
   val tabs = listOf(
     BpkHorizontalNavTab(
       title = stringResource(R.string.tabs_one),
@@ -135,7 +135,7 @@ internal fun BpkHorizontalNav_Large_Sample() {
 
 @Preview
 @Composable
-internal fun BpkHorizontalNav_LargeWithIcon_Sample() {
+internal fun HorizontalNav_LargeWithIcon_Sample() {
   val tabs = listOf(
     BpkHorizontalNavTab(
       title = stringResource(R.string.tabs_one),

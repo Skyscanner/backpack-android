@@ -40,7 +40,7 @@ import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 @Preview
-fun BpkFabStory() {
+fun FabStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Xl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Xxl, Alignment.CenterVertically),

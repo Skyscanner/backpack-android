@@ -26,11 +26,9 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
-import net.skyscanner.backpack.demo.compose.BpkBottomNavStory
-import net.skyscanner.backpack.demo.compose.BpkFabStory
-import net.skyscanner.backpack.demo.compose.BpkInteractiveStarRatingStory
-import net.skyscanner.backpack.demo.compose.BpkSliderStory
-import net.skyscanner.backpack.demo.compose.BpkStarRatingStory
+import net.skyscanner.backpack.demo.compose.FabStory
+import net.skyscanner.backpack.demo.compose.SliderStory
+import net.skyscanner.backpack.demo.compose.StarRatingStory
 import net.skyscanner.backpack.demo.compose.ButtonDrawableIconStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
 import net.skyscanner.backpack.demo.compose.ButtonsStory
@@ -49,7 +47,7 @@ import net.skyscanner.backpack.demo.compose.FlareStory
 import net.skyscanner.backpack.demo.compose.FloatingNotificationStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
-import net.skyscanner.backpack.demo.compose.HorizontalNavComposeStory
+import net.skyscanner.backpack.demo.compose.HorizontalNavStory as ComposeHorizontalNavStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.NudgerStory
@@ -193,7 +191,7 @@ object ComponentRegistry {
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
-        TAB_TITLE_COMPOSE composeStory { BpkBottomNavStory() },
+        TAB_TITLE_COMPOSE composeStory { BottomNavStory() },
       ),
     ),
     "Bottom Sheet" story NodeData(
@@ -363,7 +361,7 @@ object ComponentRegistry {
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_fab },
-        TAB_TITLE_COMPOSE composeStory { BpkFabStory() },
+        TAB_TITLE_COMPOSE composeStory { FabStory() },
       ),
     ),
     "Floating Notification" composeStory { FloatingNotificationStory() },
@@ -371,7 +369,7 @@ object ComponentRegistry {
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
-        TAB_TITLE_COMPOSE composeStory { HorizontalNavComposeStory() },
+        TAB_TITLE_COMPOSE composeStory { ComposeHorizontalNavStory() },
       ),
     ),
     "Map Markers" story NodeData(
@@ -465,7 +463,7 @@ object ComponentRegistry {
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { Story of R.layout.fragment_slider },
-        TAB_TITLE_COMPOSE composeStory { BpkSliderStory() },
+        TAB_TITLE_COMPOSE composeStory { SliderStory() },
       ),
     ),
     "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
@@ -488,14 +486,14 @@ object ComponentRegistry {
             "Custom Max Rating" story NodeData { Story of R.layout.fragment_star_rating_max },
           ),
         ),
-        TAB_TITLE_COMPOSE composeStory { BpkStarRatingStory() },
+        TAB_TITLE_COMPOSE composeStory { StarRatingStory() },
       ),
     ),
     "Star Rating Interactive" story NodeData(
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
-        TAB_TITLE_COMPOSE composeStory { BpkInteractiveStarRatingStory() },
+        TAB_TITLE_COMPOSE composeStory { InteractiveStarRatingStory() },
       ),
     ),
 

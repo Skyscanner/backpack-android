@@ -22,10 +22,10 @@ import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
-import net.skyscanner.backpack.demo.compose.BpkHorizontalNav_LargeWithIcon_Sample
-import net.skyscanner.backpack.demo.compose.BpkHorizontalNav_Large_Sample
-import net.skyscanner.backpack.demo.compose.BpkHorizontalNav_SmallWithIcon_Sample
-import net.skyscanner.backpack.demo.compose.BpkHorizontalNav_Small_Sample
+import net.skyscanner.backpack.demo.compose.HorizontalNav_LargeWithIcon_Sample
+import net.skyscanner.backpack.demo.compose.HorizontalNav_Large_Sample
+import net.skyscanner.backpack.demo.compose.HorizontalNav_SmallWithIcon_Sample
+import net.skyscanner.backpack.demo.compose.HorizontalNav_Small_Sample
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -34,21 +34,21 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
 
   @Test
   fun default() = snap {
-    BpkHorizontalNav_Large_Sample()
+    HorizontalNav_Large_Sample()
   }
 
   @Test
   @Variants(BpkTestVariant.Default)
   fun small() {
     snap {
-      BpkHorizontalNav_Small_Sample()
+      HorizontalNav_Small_Sample()
     }
   }
 
   @Test
   fun smallWithIcon() {
     snap {
-      BpkHorizontalNav_SmallWithIcon_Sample()
+      HorizontalNav_SmallWithIcon_Sample()
     }
   }
 
@@ -56,14 +56,14 @@ class BpkHorizontalNavTest : BpkSnapshotTest() {
   @Variants(BpkTestVariant.Default)
   fun large() {
     snap {
-      BpkHorizontalNav_Large_Sample()
+      HorizontalNav_Large_Sample()
     }
   }
 
   @Test
   fun largeWithIcon() {
     snap {
-      BpkHorizontalNav_LargeWithIcon_Sample()
+      HorizontalNav_LargeWithIcon_Sample()
     }
   }
 }

@@ -40,7 +40,7 @@ import net.skyscanner.backpack.demo.R
 
 @Composable
 @Preview
-fun BpkSliderStory() {
+fun SliderStory() {
   Column(
     modifier = Modifier.padding(BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
