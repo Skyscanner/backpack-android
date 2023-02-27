@@ -30,19 +30,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.slider.BpkRangeSlider
 import net.skyscanner.backpack.compose.slider.BpkSlider
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.SliderComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun SliderStory() {
+@SliderComponent
+@ComposeStory
+fun SliderStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Xxl),
+    modifier = modifier.padding(BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
   ) {
     BpkText(
@@ -64,27 +66,30 @@ fun SliderStory() {
 }
 
 @Composable
-fun RangeSliderSample() {
+internal fun RangeSliderSample(modifier: Modifier = Modifier) {
   var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
   BpkRangeSlider(
+    modifier = modifier,
     value = rangeSliderValue,
     onValueChange = { newValue -> rangeSliderValue = newValue },
   )
 }
 
 @Composable
-fun DefaultSliderSample() {
+internal fun DefaultSliderSample(modifier: Modifier = Modifier) {
   var sliderValue by remember { mutableStateOf(0.5f) }
   BpkSlider(
+    modifier = modifier,
     value = sliderValue,
     onValueChange = { newValue -> sliderValue = newValue },
   )
 }
 
 @Composable
-fun SteppedSliderSample() {
+internal fun SteppedSliderSample(modifier: Modifier = Modifier) {
   var sliderValue by remember { mutableStateOf(0.5f) }
   BpkSlider(
+    modifier = modifier,
     value = sliderValue,
     onValueChange = { newValue -> sliderValue = newValue },
     steps = 10,
