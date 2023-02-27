@@ -21,8 +21,31 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.ButtonComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
 import kotlin.math.max
+
+@Composable
+@ButtonComponent
+@ViewStory("Changeable")
+fun ChangeableButtonsStory(modifier: Modifier = Modifier) {
+  AndroidLayout(R.layout.fragment_buttons_changeable, modifier) {
+
+    findViewById<TextView>(R.id.button_increase).setOnClickListener {
+      it as TextView
+      it.text = context.getString(R.string.button_increased, it.text.toString())
+    }
+
+    findViewById<TextView>(R.id.button_decrease).setOnClickListener {
+      it as TextView
+      it.text = it.text.substring(0, max(0, it.length() - 1))
+    }
+  }
+}
 
 class ChangeableButtonsStory : Story() {
 

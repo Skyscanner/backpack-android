@@ -28,15 +28,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
-fun <T : View> AndroidLayout(
+fun AndroidLayout(
   @LayoutRes layoutId: Int,
   modifier: Modifier = Modifier,
-  update: T.() -> Unit = {},
-  init: T.() -> Unit,
+  update: View.() -> Unit = {},
+  init: View.() -> Unit,
 ) {
   AndroidView(
     modifier = modifier,
-    factory = { LayoutInflater.from(it).inflate(layoutId, null).let { it as T }.also(init) },
+    factory = { LayoutInflater.from(it).inflate(layoutId, null).also(init) },
     update = { update(it) },
   )
 }
@@ -49,7 +49,7 @@ fun <T : View> AndroidLayout(
   update: T.() -> Unit = {},
   init: T.() -> Unit,
 ) {
-  AndroidLayout<View>(
+  AndroidLayout(
     layoutId = layoutId,
     modifier = modifier,
     init = { findViewById<T>(viewId).also(init) },
@@ -62,7 +62,7 @@ fun AndroidLayout(
   @LayoutRes layoutId: Int,
   modifier: Modifier = Modifier,
 ) =
-  AndroidLayout<View>(layoutId, modifier, init = {})
+  AndroidLayout(layoutId, modifier, init = {})
 
 @Composable
 inline fun <reified T : View> AndroidView(
