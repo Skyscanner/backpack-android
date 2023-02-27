@@ -20,32 +20,38 @@ package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
+import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
 import net.skyscanner.backpack.demo.compose.BottomSheetStory
-import net.skyscanner.backpack.demo.compose.FabStory
-import net.skyscanner.backpack.demo.compose.SliderStory
-import net.skyscanner.backpack.demo.compose.StarRatingStory
 import net.skyscanner.backpack.demo.compose.ButtonDrawableIconStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
-import net.skyscanner.backpack.demo.compose.CalendarStory
+import net.skyscanner.backpack.demo.compose.ButtonsDefaultSizeStory
+import net.skyscanner.backpack.demo.compose.ButtonsLargeSizeStory
+import net.skyscanner.backpack.demo.compose.CalendarDayLabels
+import net.skyscanner.backpack.demo.compose.CalendarDisabledWeekends
+import net.skyscanner.backpack.demo.compose.CalendarPreSelectedRange
+import net.skyscanner.backpack.demo.compose.CalendarSelectionDisabledStory
+import net.skyscanner.backpack.demo.compose.CalendarSelectionRangeStory
+import net.skyscanner.backpack.demo.compose.CalendarSelectionSingleStory
+import net.skyscanner.backpack.demo.compose.CalendarSelectionWholeMonthStory
 import net.skyscanner.backpack.demo.compose.CardButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
-import net.skyscanner.backpack.demo.compose.DividedCardStory
 import net.skyscanner.backpack.demo.compose.CardWrapperStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
+import net.skyscanner.backpack.demo.compose.DividedCardStory
 import net.skyscanner.backpack.demo.compose.DividerStory
 import net.skyscanner.backpack.demo.compose.ElevationComposeStory
+import net.skyscanner.backpack.demo.compose.FabStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
 import net.skyscanner.backpack.demo.compose.FloatingNotificationStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
-import net.skyscanner.backpack.demo.compose.HorizontalNavStory as ComposeHorizontalNavStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.NudgerStory
@@ -56,8 +62,10 @@ import net.skyscanner.backpack.demo.compose.RadiiComposeStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.RatingStory
 import net.skyscanner.backpack.demo.compose.SkeletonStory
+import net.skyscanner.backpack.demo.compose.SliderStory
 import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
+import net.skyscanner.backpack.demo.compose.StarRatingStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.TextFiledStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
@@ -95,9 +103,7 @@ import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
 import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
-import net.skyscanner.backpack.compose.chip.BpkChipStyle
-import net.skyscanner.backpack.demo.compose.ButtonsDefaultSizeStory
-import net.skyscanner.backpack.demo.compose.ButtonsLargeSizeStory
+import net.skyscanner.backpack.demo.compose.HorizontalNavStory as ComposeHorizontalNavStory
 
 interface RegistryItem {
   val name: String
@@ -292,13 +298,13 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Selection Disabled" composeStory { CalendarStory(CalendarStoryType.SelectionDisabled) },
-            "Selection Single" composeStory { CalendarStory(CalendarStoryType.SelectionSingle) },
-            "Selection Range" composeStory { CalendarStory(CalendarStoryType.SelectionRange) },
-            "Selection Whole Month" composeStory { CalendarStory(CalendarStoryType.SelectionWholeMonth) },
-            "Disabled weekends" composeStory { CalendarStory(CalendarStoryType.WithDisabledDates) },
-            "Day labels" composeStory { CalendarStory(CalendarStoryType.WithLabels) },
-            "Pre-selected range" composeStory { CalendarStory(CalendarStoryType.PreselectedRange) },
+            "Selection Disabled" composeStory { CalendarSelectionDisabledStory() },
+            "Selection Single" composeStory { CalendarSelectionSingleStory() },
+            "Selection Range" composeStory { CalendarSelectionRangeStory() },
+            "Selection Whole Month" composeStory { CalendarSelectionWholeMonthStory() },
+            "Disabled weekends" composeStory { CalendarDisabledWeekends() },
+            "Day labels" composeStory { CalendarDayLabels() },
+            "Pre-selected range" composeStory { CalendarPreSelectedRange() },
           ),
         ),
       ),
