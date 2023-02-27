@@ -20,8 +20,12 @@ Example of a Carousel:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 
-BpkCarousel(count = 3){ index ->
+// show carousel with image index 1
+val state = rememberBpkCarouselState(totalImages = totalImages)
+
+BpkCarousel(state = state){ index ->
   Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
 }
 ```
@@ -29,14 +33,17 @@ BpkCarousel(count = 3){ index ->
 Example of a image changed callback:
 
 ```Kotlin
+import androidx.compose.runtime.LaunchedEffect
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 
-BpkCarousel(
-  count = 3,
-  onImageChanged = {  index ->
-    // do something
-  }
-) { index ->
+val state = rememberBpkCarouselState(totalImages = totalImages)
+
+LaunchedEffect(state.currentPage) {
+  print("current page: ${state.currentPage}")
+}
+
+BpkCarousel(state = state) { index ->
   Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
 }
 ```
@@ -45,14 +52,12 @@ Example of starting in a different image:
 
 ```Kotlin
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
-import net.skyscanner.backpack.compose.carousel.rememberCarouselPagerState
+import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 
-val pagerState = rememberCarouselPagerState(currentImage = 1) // show carousel with image index 1
+// show carousel with image index 1
+val state = rememberBpkCarouselState(totalImages = totalImages, currentImage = currentImage)
 
-BpkCarousel(
-  count = 3,
-  pagerState = pagerState,
-) { index ->
+BpkCarousel(state = state) { index ->
   Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
 }
 ```

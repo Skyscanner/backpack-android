@@ -45,10 +45,10 @@ fun BpkCarousel(
       modifier = Modifier
         .testTag("pager")
         .fillMaxSize(),
-      count = if (state.pageCount > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
+      count = if (internalState.pageCount > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
       state = internalState.delegate,
     ) {
-      imageContent(state.currentPage)
+      imageContent(internalState.currentPage)
     }
 
     // if there is more than one image, display the page indicator
