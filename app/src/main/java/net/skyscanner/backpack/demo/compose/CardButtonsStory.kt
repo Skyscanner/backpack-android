@@ -36,7 +36,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonStyle
 import net.skyscanner.backpack.compose.cardbutton.BpkSaveButton
@@ -45,12 +44,27 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.CardButtonComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun CardButtonsStory(
+@CardButtonComponent
+@ComposeStory("Default")
+fun CardButtonDefaultStory(modifier: Modifier = Modifier) {
+  CardButtonsDemo(size = BpkCardButtonSize.Default, modifier = modifier)
+}
+
+@Composable
+@CardButtonComponent
+@ComposeStory("Small")
+fun CardButtonSmallStory(modifier: Modifier = Modifier) {
+  CardButtonsDemo(size = BpkCardButtonSize.Small, modifier = modifier)
+}
+
+@Composable
+private fun CardButtonsDemo(
+  size: BpkCardButtonSize,
   modifier: Modifier = Modifier,
-  size: BpkCardButtonSize = BpkCardButtonSize.Default,
 ) {
   LazyColumn(
     modifier

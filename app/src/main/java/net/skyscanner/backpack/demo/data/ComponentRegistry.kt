@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
-import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.demo.R
@@ -37,7 +36,8 @@ import net.skyscanner.backpack.demo.compose.CalendarSelectionDisabledStory
 import net.skyscanner.backpack.demo.compose.CalendarSelectionRangeStory
 import net.skyscanner.backpack.demo.compose.CalendarSelectionSingleStory
 import net.skyscanner.backpack.demo.compose.CalendarSelectionWholeMonthStory
-import net.skyscanner.backpack.demo.compose.CardButtonsStory
+import net.skyscanner.backpack.demo.compose.CardButtonDefaultStory
+import net.skyscanner.backpack.demo.compose.CardButtonSmallStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CardWrapperStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
@@ -263,8 +263,8 @@ object ComponentRegistry {
     "Card Button" story NodeData(
       { children -> SubStory of children },
       mapOf(
-        "Default" composeStory { CardButtonsStory(size = BpkCardButtonSize.Default) },
-        "Small" composeStory { CardButtonsStory(size = BpkCardButtonSize.Small) },
+        "Default" composeStory { CardButtonDefaultStory() },
+        "Small" composeStory { CardButtonSmallStory() },
       ),
     ),
     "Calendar" story NodeData(
