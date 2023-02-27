@@ -71,9 +71,7 @@ fun ButtonsLargeSizeStory(modifier: Modifier = Modifier) =
 @Composable
 @ButtonComponent
 @ComposeStory("Link")
-fun ButtonLinkStory(
-  modifier: Modifier = Modifier,
-) {
+fun ButtonLinkStory(modifier: Modifier = Modifier) {
   LazyColumn(
     modifier
       .fillMaxSize()
@@ -96,9 +94,7 @@ fun ButtonLinkStory(
 @Composable
 @ButtonComponent
 @ComposeStory("Drawable Icon")
-fun ButtonDrawableIconStory(
-  modifier: Modifier = Modifier,
-) {
+fun ButtonDrawableIconStory(modifier: Modifier = Modifier) {
   LazyColumn(
     modifier
       .fillMaxSize()

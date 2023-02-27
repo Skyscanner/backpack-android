@@ -32,7 +32,7 @@ import java.util.Random
 @Composable
 @BarChartComponent
 @ViewStory
-fun BarChartStory(modifier: Modifier = Modifier) {
+fun BarChartStory(modifier: Modifier = Modifier) =
   AndroidLayout<BpkBarChart>(R.layout.fragment_bar_chart, R.id.bar_chart, modifier) {
     model = BpkBarChart.Model(
       groups = listOf(
@@ -50,7 +50,6 @@ fun BarChartStory(modifier: Modifier = Modifier) {
       ),
     )
   }
-}
 
 class BarChartStory : Story() {
 

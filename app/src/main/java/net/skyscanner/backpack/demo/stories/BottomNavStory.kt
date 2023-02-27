@@ -32,7 +32,7 @@ import net.skyscanner.backpack.toast.BpkToast
 @Composable
 @BottomNavComponent
 @ViewStory
-fun BottomNavStory(modifier: Modifier = Modifier) {
+fun BottomNavStory(modifier: Modifier = Modifier) =
   AndroidLayout<BpkBottomNav>(R.layout.fragment_bottom_nav, R.id.bottom_nav, modifier) {
     addItem(1, R.string.bottom_nav_home, R.drawable.bpk_hotels)
     addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
@@ -45,7 +45,6 @@ fun BottomNavStory(modifier: Modifier = Modifier) {
       BpkToast.makeText(context, "${item.title} #$index is selected!", BpkToast.LENGTH_SHORT).show()
     }
   }
-}
 
 class BottomNavStory : Story() {
 

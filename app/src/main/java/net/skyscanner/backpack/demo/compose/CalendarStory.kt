@@ -36,51 +36,44 @@ import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
 @Composable
 @Calendar2Component
 @ComposeStory("Selection Disabled")
-fun CalendarSelectionDisabledStory(modifier: Modifier = Modifier) {
+fun CalendarSelectionDisabledStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionDisabled, modifier)
-}
 
 @Composable
 @Calendar2Component
 @ComposeStory("Selection Single")
-fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) {
+fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionSingle, modifier)
-}
 
 @Composable
 @Calendar2Component
 @ComposeStory("Selection Range")
-fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) {
+fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionRange, modifier)
-}
 
 @Composable
 @Calendar2Component
 @ComposeStory("Selection Whole Month")
-fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) {
+fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionWholeMonth, modifier)
-}
 
 @Composable
 @Calendar2Component
 @ComposeStory("Disabled weekends")
-fun CalendarDisabledWeekends(modifier: Modifier = Modifier) {
+fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.WithDisabledDates, modifier)
-}
 
 @Composable
 @Calendar2Component
 @ComposeStory("Day labels")
-fun CalendarDayLabels(modifier: Modifier = Modifier) {
+fun CalendarDayLabels(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.WithLabels, modifier)
-}
 
 @Composable
 @Calendar2Component
 @ComposeStory("Pre-selected range")
-fun CalendarPreSelectedRange(modifier: Modifier = Modifier) {
+fun CalendarPreSelectedRange(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.PreselectedRange, modifier)
-}
 
 @Composable
 private fun CalendarDemo(

@@ -54,23 +54,20 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @ChipComponent
 @ComposeStory("Default")
-fun ChipStoryDefault(modifier: Modifier = Modifier) {
+fun ChipStoryDefault(modifier: Modifier = Modifier) =
   ChipDemo(BpkChipStyle.Default, modifier)
-}
 
 @Composable
 @ChipComponent
 @ComposeStory("On Dark")
-fun ChipStoryOnDark(modifier: Modifier = Modifier) {
+fun ChipStoryOnDark(modifier: Modifier = Modifier) =
   ChipDemo(BpkChipStyle.OnDark, modifier)
-}
 
 @Composable
 @ChipComponent
 @ComposeStory("On Image")
-fun ChipStoryOnImage(modifier: Modifier = Modifier) {
+fun ChipStoryOnImage(modifier: Modifier = Modifier) =
   ChipDemo(BpkChipStyle.OnImage, modifier)
-}
 
 @Composable
 private fun ChipDemo(

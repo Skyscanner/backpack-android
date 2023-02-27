@@ -32,7 +32,7 @@ import kotlin.math.max
 @Composable
 @ButtonComponent
 @ViewStory("Changeable")
-fun ChangeableButtonsStory(modifier: Modifier = Modifier) {
+fun ChangeableButtonsStory(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_buttons_changeable, modifier) {
 
     findViewById<TextView>(R.id.button_increase).setOnClickListener {
@@ -45,7 +45,6 @@ fun ChangeableButtonsStory(modifier: Modifier = Modifier) {
       it.text = it.text.substring(0, max(0, it.length() - 1))
     }
   }
-}
 
 class ChangeableButtonsStory : Story() {
 

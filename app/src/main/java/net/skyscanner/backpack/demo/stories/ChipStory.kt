@@ -33,23 +33,20 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @Composable
 @ChipComponent
 @ViewStory("Default")
-fun ChipStoryDefault(modifier: Modifier = Modifier) {
+fun ChipStoryDefault(modifier: Modifier = Modifier) =
   ChipDemo(R.layout.fragment_chip, modifier)
-}
 
 @Composable
 @ChipComponent
 @ViewStory("On Dark")
-fun ChipStoryOnDark(modifier: Modifier = Modifier) {
+fun ChipStoryOnDark(modifier: Modifier = Modifier) =
   ChipDemo(R.layout.fragment_chip_ondark, modifier)
-}
 
 @Composable
 @ChipComponent
 @ViewStory("On Image")
-fun ChipStoryOnImage(modifier: Modifier = Modifier) {
+fun ChipStoryOnImage(modifier: Modifier = Modifier) =
   ChipDemo(R.layout.fragment_chip_on_image, modifier)
-}
 
 @Composable
 private fun ChipDemo(

@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.skyscanner.backpack.demo.R
 import java.lang.reflect.Field
 
+// todo: remove it
 class ColorStory : Story() {
   override fun onCreateView(
     inflater: LayoutInflater,
