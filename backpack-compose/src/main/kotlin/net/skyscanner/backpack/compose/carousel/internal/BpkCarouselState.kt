@@ -51,4 +51,12 @@ class BpkCarouselStateImpl constructor(
   private fun getTargetPage(page: Int): Int {
     return delegate.currentPage - (currentPage - page)
   }
+
+  private fun getModdedPageNumber(index: Int, count: Int) = (index - (Int.MAX_VALUE / 2)).floorMod(count)
+}
+
+// floor modulo operation
+private fun Int.floorMod(other: Int): Int = when (other) {
+  0 -> this
+  else -> this - floorDiv(other) * other
 }

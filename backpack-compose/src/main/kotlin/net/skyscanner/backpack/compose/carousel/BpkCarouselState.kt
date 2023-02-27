@@ -60,7 +60,7 @@ fun rememberBpkCarouselState(
 ): BpkCarouselState {
   val initialPage = (Int.MAX_VALUE / 2) + currentImage
   val pagerState = rememberPagerState(initialPage = initialPage)
-  return remember(pagerState) {
+  return remember(pagerState, totalImages) {
     BpkCarouselStateImpl(delegate = pagerState, totalImages = totalImages)
   }
 }

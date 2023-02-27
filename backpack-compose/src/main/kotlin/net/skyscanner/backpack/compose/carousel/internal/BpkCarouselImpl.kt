@@ -23,13 +23,11 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
-import kotlinx.coroutines.flow.distinctUntilChanged
 import net.skyscanner.backpack.compose.carousel.BpkCarouselInternalState
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
 import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
@@ -44,9 +42,7 @@ internal fun BpkCarouselImpl(
 ) {
   Box(modifier = modifier) {
     LaunchedEffect(state.currentPage) {
-      snapshotFlow { state.currentPage }.distinctUntilChanged().collect { index ->
-        onImageChanged?.invoke(index)
-      }
+      onImageChanged?.invoke(state.currentPage)
     }
 
     HorizontalPager(
@@ -56,7 +52,7 @@ internal fun BpkCarouselImpl(
       count = if (state.pageCount > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
       state = state.delegate,
     ) {
-      imageContent(getModdedPageNumber(it, state.pageCount))
+      imageContent(state.currentPage)
     }
 
     // if there is more than one image, display the page indicator
@@ -71,12 +67,4 @@ internal fun BpkCarouselImpl(
       )
     }
   }
-}
-
-internal fun getModdedPageNumber(index: Int, count: Int) = (index - (Int.MAX_VALUE / 2)).floorMod(count)
-
-// floor modulo operation
-private fun Int.floorMod(other: Int): Int = when (other) {
-  0 -> this
-  else -> this - floorDiv(other) * other
 }
