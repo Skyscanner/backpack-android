@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.ui
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,24 +29,40 @@ import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
 fun <T : View> AndroidLayout(
-  @LayoutRes id: Int,
+  @LayoutRes layoutId: Int,
   modifier: Modifier = Modifier,
   update: T.() -> Unit = {},
   init: T.() -> Unit,
 ) {
   AndroidView(
     modifier = modifier,
-    factory = { LayoutInflater.from(it).inflate(id, null).let { it as T }.also(init) },
+    factory = { LayoutInflater.from(it).inflate(layoutId, null).let { it as T }.also(init) },
     update = { update(it) },
   )
 }
 
 @Composable
+fun <T : View> AndroidLayout(
+  @LayoutRes layoutId: Int,
+  @IdRes viewId: Int,
+  modifier: Modifier = Modifier,
+  update: T.() -> Unit = {},
+  init: T.() -> Unit,
+) {
+  AndroidLayout<View>(
+    layoutId = layoutId,
+    modifier = modifier,
+    init = { findViewById<T>(viewId).also(init) },
+    update = { findViewById<T>(viewId).also(update) },
+  )
+}
+
+@Composable
 fun AndroidLayout(
-  @LayoutRes id: Int,
+  @LayoutRes layoutId: Int,
   modifier: Modifier = Modifier,
 ) =
-  AndroidLayout<View>(id, modifier) {}
+  AndroidLayout<View>(layoutId, modifier, init = {})
 
 @Composable
 inline fun <reified T : View> AndroidView(
