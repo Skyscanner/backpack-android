@@ -18,15 +18,14 @@
 
 package net.skyscanner.backpack.compose.text
 
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.demo.compose.AnnotatedTextExample
-import net.skyscanner.backpack.demo.compose.ColoredTextExample
-import net.skyscanner.backpack.demo.compose.DefaultTextExample
-import net.skyscanner.backpack.demo.compose.StyledTextExample
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -38,24 +37,37 @@ class BpkTextTest : BpkSnapshotTest() {
   @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl, BpkTestVariant.DarkMode)
   fun default() {
     snap {
-      DefaultTextExample()
+        BpkText(text = "Sample")
     }
   }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
   fun colored() = snap {
-    ColoredTextExample()
+    BpkText(
+      text = "Sample",
+      color = BpkTheme.colors.textLink,
+    )
   }
 
   @Test
   fun styled() = snap {
-    StyledTextExample()
+    BpkText(
+      text = "Sample",
+      style = BpkTheme.typography.heading4,
+    )
   }
 
   @Test
   fun annotated() = snap {
-    AnnotatedTextExample()
+    BpkText(
+      text = buildAnnotatedString {
+        append("Sample ")
+        withStyle(style = SpanStyle(color = BpkTheme.colors.textLink)) {
+          append("Text")
+        }
+      },
+    )
   }
 
   @Test

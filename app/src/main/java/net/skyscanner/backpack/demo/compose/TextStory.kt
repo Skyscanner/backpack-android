@@ -24,18 +24,17 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.TextComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
-@Preview
 @Composable
+@TextComponent
+@ComposeStory("Hero")
 fun HeroStyleStory() {
   val styles = listOf(
     BpkTheme.typography.hero1 to stringResource(R.string.text_hero1),
@@ -47,8 +46,9 @@ fun HeroStyleStory() {
   TypographyStylesStory(styles = styles)
 }
 
-@Preview
 @Composable
+@TextComponent
+@ComposeStory("Heading")
 fun HeadingStyleStory() {
   val styles = listOf(
     BpkTheme.typography.heading1 to stringResource(R.string.text_heading1),
@@ -60,8 +60,9 @@ fun HeadingStyleStory() {
   TypographyStylesStory(styles = styles)
 }
 
-@Preview
 @Composable
+@TextComponent
+@ComposeStory("Body")
 fun BodyStyleStory() {
   val styles = listOf(
     BpkTheme.typography.subheading to stringResource(R.string.text_subheading),
@@ -86,41 +87,4 @@ private fun TypographyStylesStory(styles: List<Pair<TextStyle, String>>) {
       )
     }
   }
-}
-
-@Preview
-@Composable
-fun DefaultTextExample() {
-  BpkText(text = "Sample")
-}
-
-@Preview
-@Composable
-fun ColoredTextExample() {
-  BpkText(
-    text = "Sample",
-    color = BpkTheme.colors.textLink,
-  )
-}
-
-@Preview
-@Composable
-fun StyledTextExample() {
-  BpkText(
-    text = "Sample",
-    style = BpkTheme.typography.heading4,
-  )
-}
-
-@Preview
-@Composable
-fun AnnotatedTextExample() {
-  BpkText(
-    text = buildAnnotatedString {
-      append("Sample ")
-      withStyle(style = SpanStyle(color = BpkTheme.colors.textLink)) {
-        append("Text")
-      }
-    },
-  )
 }
