@@ -35,8 +35,8 @@ import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.tokens.Settings
-import net.skyscanner.backpack.demo.compose.ComponentItem
-import net.skyscanner.backpack.demo.compose.ComponentsTitle
+import net.skyscanner.backpack.demo.ui.ComponentItem
+import net.skyscanner.backpack.demo.ui.ComponentsTitle
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 import net.skyscanner.backpack.demo.data.ComposeNode
 import net.skyscanner.backpack.demo.data.NodeItem

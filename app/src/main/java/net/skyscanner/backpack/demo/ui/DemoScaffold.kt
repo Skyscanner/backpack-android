@@ -25,8 +25,6 @@ import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
 import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.demo.BackpackDemoTheme
-import net.skyscanner.backpack.demo.compose.LocalAutomationMode
-import net.skyscanner.backpack.demo.compose.LocalFloatingNotification
 
 @Composable
 fun DemoScaffold(

@@ -34,6 +34,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.components.BarChartComponent
 import net.skyscanner.backpack.demo.data.BpkBarChartData
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 
 @Composable
 @BarChartComponent

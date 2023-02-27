@@ -35,8 +35,6 @@ import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.SettingsActivity
-import net.skyscanner.backpack.demo.compose.ComponentItem
-import net.skyscanner.backpack.demo.compose.ComponentsTitle
 import net.skyscanner.backpack.demo.meta.Component
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 

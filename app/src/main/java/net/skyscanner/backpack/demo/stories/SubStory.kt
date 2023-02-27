@@ -28,7 +28,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.platform.ComposeView
 import net.skyscanner.backpack.demo.BackpackDemoTheme
 import net.skyscanner.backpack.demo.ComponentDetailActivity
-import net.skyscanner.backpack.demo.compose.ComponentItem
+import net.skyscanner.backpack.demo.ui.ComponentItem
 
 open class SubStory : Story() {
 
