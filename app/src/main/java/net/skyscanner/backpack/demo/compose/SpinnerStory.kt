@@ -29,7 +29,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.LocalContentColor
 import net.skyscanner.backpack.compose.spinner.BpkSpinner
 import net.skyscanner.backpack.compose.spinner.BpkSpinnerSize
@@ -37,11 +36,17 @@ import net.skyscanner.backpack.compose.spinner.BpkSpinnerStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.components.SpinnerComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun SpinnerStory() {
-  Column(Modifier.padding(BpkSpacing.Base), verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+@SpinnerComponent
+@ComposeStory
+fun SpinnerStory(modifier: Modifier = Modifier) {
+  Column(
+    modifier = modifier.padding(BpkSpacing.Base),
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+  ) {
     BpkSpinnerStyle.values().forEach { style ->
       SpinnersRow(style = style)
     }
