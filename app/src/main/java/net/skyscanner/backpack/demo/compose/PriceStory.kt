@@ -28,21 +28,33 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.price.BpkPrice
 import net.skyscanner.backpack.compose.price.BpkPriceAlign
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.PriceComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun PriceStory(
+@PriceComponent
+@ComposeStory("Small")
+fun PriceSmallStory(modifier: Modifier = Modifier) =
+  PriceDemo(BpkPriceSize.Small, modifier)
+
+@Composable
+@PriceComponent
+@ComposeStory("Large")
+fun PriceLargeStory(modifier: Modifier = Modifier) =
+  PriceDemo(BpkPriceSize.Large, modifier)
+
+@Composable
+private fun PriceDemo(
+  size: BpkPriceSize,
   modifier: Modifier = Modifier,
-  size: BpkPriceSize = BpkPriceSize.Large,
 ) {
   Column(
-    modifier = Modifier
+    modifier = modifier
       .padding(BpkSpacing.Base)
       .fillMaxSize(),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),

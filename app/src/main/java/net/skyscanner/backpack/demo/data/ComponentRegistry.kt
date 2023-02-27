@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
-import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
 import net.skyscanner.backpack.demo.compose.BodyStyleStory
@@ -55,12 +54,12 @@ import net.skyscanner.backpack.demo.compose.FloatingNotificationStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
-import net.skyscanner.backpack.demo.compose.InteractiveStarRatingStory as ComposeInteractiveStarRatingStory
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.NudgerStory
 import net.skyscanner.backpack.demo.compose.PageIndicatorStory
 import net.skyscanner.backpack.demo.compose.PanelStory
-import net.skyscanner.backpack.demo.compose.PriceStory
+import net.skyscanner.backpack.demo.compose.PriceLargeStory
+import net.skyscanner.backpack.demo.compose.PriceSmallStory
 import net.skyscanner.backpack.demo.compose.RadiiComposeStory
 import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.RatingStory
@@ -106,6 +105,7 @@ import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
 import net.skyscanner.backpack.demo.compose.HorizontalNavStory as ComposeHorizontalNavStory
+import net.skyscanner.backpack.demo.compose.InteractiveStarRatingStory as ComposeInteractiveStarRatingStory
 
 interface RegistryItem {
   val name: String
@@ -430,8 +430,8 @@ object ComponentRegistry {
     "Price" story NodeData(
       { children -> SubStory of children },
       mapOf(
-        "Small" composeStory { PriceStory(size = BpkPriceSize.Small) },
-        "Large" composeStory { PriceStory(size = BpkPriceSize.Large) },
+        "Small" composeStory { PriceSmallStory() },
+        "Large" composeStory { PriceLargeStory() },
       ),
     ),
     "RadioButton" story NodeData(
