@@ -20,9 +20,39 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.barchart.BpkBarChart
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.BarChartComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
 import java.util.Random
+
+@Composable
+@BarChartComponent
+@ViewStory
+fun BarChartStory(modifier: Modifier = Modifier) {
+  AndroidLayout<View>(R.layout.fragment_bar_chart) {
+    findViewById<BpkBarChart>(R.id.bar_chart).apply {
+      model = BpkBarChart.Model(
+        groups = listOf(
+          createMonth(0),
+          createMonth(1),
+          createMonth(2),
+          createMonth(3),
+          createMonth(4),
+          createMonth(5),
+        ),
+        legend = BpkBarChart.Legend(
+          selectedTitle = "Selected",
+          inactiveTitle = "No Price",
+          activeTitle = "Price",
+        ),
+      )
+    }
+  }
+}
 
 class BarChartStory : Story() {
 
@@ -48,25 +78,6 @@ class BarChartStory : Story() {
     }
   }
 
-  private val random = Random(18735)
-
-  private fun createMonth(month: Int) = BpkBarChart.Group(
-    title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
-    items = mutableListOf<BpkBarChart.Column>().apply {
-      for (dayOfTheMonth in 0 until 30) {
-        add(createBar(month * 30 + dayOfTheMonth))
-      }
-    },
-  )
-
-  private fun createBar(dayOfTheYear: Int) = BpkBarChart.Column(
-    title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
-    subtitle = (dayOfTheYear % 30 + 1).toString(),
-    badge = "£" + random.nextInt(100),
-    value = random.nextInt(120) / 100f,
-    inactive = random.nextInt(5) == 0,
-  )
-
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
@@ -76,3 +87,22 @@ class BarChartStory : Story() {
     }
   }
 }
+
+private val random = Random(18735)
+
+private fun createMonth(month: Int) = BpkBarChart.Group(
+  title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
+  items = mutableListOf<BpkBarChart.Column>().apply {
+    for (dayOfTheMonth in 0 until 30) {
+      add(createBar(month * 30 + dayOfTheMonth))
+    }
+  },
+)
+
+private fun createBar(dayOfTheYear: Int) = BpkBarChart.Column(
+  title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
+  subtitle = (dayOfTheYear % 30 + 1).toString(),
+  badge = "£" + random.nextInt(100),
+  value = random.nextInt(120) / 100f,
+  inactive = random.nextInt(5) == 0,
+)
