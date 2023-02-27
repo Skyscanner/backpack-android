@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.data
 
 import androidx.compose.runtime.Composable
-import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.demo.R
@@ -31,7 +30,6 @@ import net.skyscanner.backpack.demo.compose.SliderStory
 import net.skyscanner.backpack.demo.compose.StarRatingStory
 import net.skyscanner.backpack.demo.compose.ButtonDrawableIconStory
 import net.skyscanner.backpack.demo.compose.ButtonLinkStory
-import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CalendarStory
 import net.skyscanner.backpack.demo.compose.CardButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
@@ -98,6 +96,8 @@ import net.skyscanner.backpack.demo.stories.ToastStory
 import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
+import net.skyscanner.backpack.demo.compose.ButtonsDefaultSizeStory
+import net.skyscanner.backpack.demo.compose.ButtonsLargeSizeStory
 
 interface RegistryItem {
   val name: String
@@ -217,8 +217,8 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Default" composeStory { ButtonsStory(BpkButtonSize.Default) },
-            "Large" composeStory { ButtonsStory(BpkButtonSize.Large) },
+            "Default" composeStory { ButtonsDefaultSizeStory() },
+            "Large" composeStory { ButtonsLargeSizeStory() },
             "Link" composeStory { ButtonLinkStory() },
             "Drawable Icon" composeStory { ButtonDrawableIconStory() },
           ),

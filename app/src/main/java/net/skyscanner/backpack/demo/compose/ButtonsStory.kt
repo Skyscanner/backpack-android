@@ -52,36 +52,25 @@ import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.LongArrowRight
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.ButtonComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
-fun ButtonsStory(
-  size: BpkButtonSize,
-  modifier: Modifier = Modifier,
-) {
-  LazyColumn(
-    modifier
-      .fillMaxSize()
-      .padding(top = BpkDimension.Spacing.Md),
-  ) {
-    item {
-      ButtonsRow(
-        type = BpkButtonType.Primary,
-        size = size,
-        enabled = false,
-      )
-    }
-    items(BpkButtonType.values().filter { !it.linkType() }) {
-      ButtonsRow(
-        type = it,
-        size = size,
-        enabled = true,
-      )
-    }
-  }
-}
+@ButtonComponent
+@ComposeStory("Default")
+fun ButtonsDefaultSizeStory(modifier: Modifier = Modifier) =
+  ButtonsTypesDemo(BpkButtonSize.Default, modifier)
 
 @Composable
+@ButtonComponent
+@ComposeStory("Large")
+fun ButtonsLargeSizeStory(modifier: Modifier = Modifier) =
+  ButtonsTypesDemo(BpkButtonSize.Large, modifier)
+
+@Composable
+@ButtonComponent
+@ComposeStory("Link")
 fun ButtonLinkStory(
   modifier: Modifier = Modifier,
 ) {
@@ -105,6 +94,8 @@ fun ButtonLinkStory(
 }
 
 @Composable
+@ButtonComponent
+@ComposeStory("Drawable Icon")
 fun ButtonDrawableIconStory(
   modifier: Modifier = Modifier,
 ) {
@@ -138,6 +129,33 @@ fun ButtonDrawableIconStory(
           enabled = true,
         )
       }
+    }
+  }
+}
+
+@Composable
+private fun ButtonsTypesDemo(
+  size: BpkButtonSize,
+  modifier: Modifier = Modifier,
+) {
+  LazyColumn(
+    modifier
+      .fillMaxSize()
+      .padding(top = BpkDimension.Spacing.Md),
+  ) {
+    item {
+      ButtonsRow(
+        type = BpkButtonType.Primary,
+        size = size,
+        enabled = false,
+      )
+    }
+    items(BpkButtonType.values().filter { !it.linkType() }) {
+      ButtonsRow(
+        type = it,
+        size = size,
+        enabled = true,
+      )
     }
   }
 }
