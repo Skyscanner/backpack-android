@@ -284,4 +284,7 @@
   <string name="card_wrapper_card">Card Wrapper card</string>
   <string name="tab_view">View</string>
   <string name="tab_compose">Compose</string>
+
+  <string name="flight_leg_basic_example">Basic Flight Leg</string>
+  <string name="flight_leg_complete_example">Complete Flight Leg</string>
 </resources>

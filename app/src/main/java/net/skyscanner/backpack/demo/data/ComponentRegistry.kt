@@ -100,6 +100,7 @@ import net.skyscanner.backpack.demo.stories.ToastStory
 import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
+import net.skyscanner.backpack.demo.compose.FlightLegStory
 
 interface RegistryItem {
   val name: String
@@ -359,6 +360,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { FlareStory() },
       ),
     ),
+    "FlightLeg" composeStory { FlightLegStory() },
     "Floating Action Button" story NodeData(
       { children -> TabStory of children },
       mapOf(
