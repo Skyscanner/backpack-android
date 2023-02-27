@@ -30,11 +30,12 @@ import androidx.compose.ui.viewinterop.AndroidView
 fun <T : View> AndroidLayout(
   @LayoutRes id: Int,
   modifier: Modifier = Modifier,
-  update: T.() -> Unit,
+  update: T.() -> Unit = {},
+  init: T.() -> Unit,
 ) {
   AndroidView(
     modifier = modifier,
-    factory = { LayoutInflater.from(it).inflate(id, null) as T },
+    factory = { LayoutInflater.from(it).inflate(id, null).let { it as T }.also(init) },
     update = { update(it) },
   )
 }

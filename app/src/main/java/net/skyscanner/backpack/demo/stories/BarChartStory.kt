@@ -33,7 +33,7 @@ import java.util.Random
 @BarChartComponent
 @ViewStory
 fun BarChartStory(modifier: Modifier = Modifier) {
-  AndroidLayout<View>(R.layout.fragment_bar_chart) {
+  AndroidLayout<View>(R.layout.fragment_bar_chart, modifier) {
     findViewById<BpkBarChart>(R.id.bar_chart).apply {
       model = BpkBarChart.Model(
         groups = listOf(
