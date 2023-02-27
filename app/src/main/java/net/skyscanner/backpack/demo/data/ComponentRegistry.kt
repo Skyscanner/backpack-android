@@ -55,6 +55,7 @@ import net.skyscanner.backpack.demo.compose.FloatingNotificationStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
+import net.skyscanner.backpack.demo.compose.InteractiveStarRatingStory as ComposeInteractiveStarRatingStory
 import net.skyscanner.backpack.demo.compose.NavigationBarStory
 import net.skyscanner.backpack.demo.compose.NudgerStory
 import net.skyscanner.backpack.demo.compose.PageIndicatorStory
@@ -500,7 +501,7 @@ object ComponentRegistry {
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
-        TAB_TITLE_COMPOSE composeStory { InteractiveStarRatingStory() },
+        TAB_TITLE_COMPOSE composeStory { ComposeInteractiveStarRatingStory() },
       ),
     ),
 

@@ -39,11 +39,13 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.StarRatingInteractiveComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-fun InteractiveStarRatingStory(
-  modifier: Modifier = Modifier,
-) {
+@StarRatingInteractiveComponent
+@ComposeStory
+fun InteractiveStarRatingStory(modifier: Modifier = Modifier) {
   Box(
     modifier = modifier.fillMaxHeight(),
     contentAlignment = Alignment.Center,
