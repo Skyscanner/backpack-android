@@ -24,14 +24,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.DividerComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
+@DividerComponent
+@ComposeStory
 fun DividerStory(modifier: Modifier = Modifier) {
   Column(modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
 
@@ -53,13 +55,11 @@ fun DividerStory(modifier: Modifier = Modifier) {
   }
 }
 
-@Preview
 @Composable
 internal fun DividerSampleNoIndent(modifier: Modifier = Modifier) {
   BpkDivider(modifier = modifier)
 }
 
-@Preview
 @Composable
 internal fun DividerSample_WithIndent(modifier: Modifier = Modifier) {
   BpkDivider(modifier = modifier, startIndent = BpkSpacing.Base)
