@@ -21,7 +21,51 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.chip.BpkChip
+import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.ChipComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
+
+@Composable
+@ChipComponent
+@ViewStory("Default")
+fun ChipStoryDefault(modifier: Modifier = Modifier) {
+  ChipDemo(R.layout.fragment_chip, modifier)
+}
+
+@Composable
+@ChipComponent
+@ViewStory("On Dark")
+fun ChipStoryOnDark(modifier: Modifier = Modifier) {
+  ChipDemo(R.layout.fragment_chip_ondark, modifier)
+}
+
+@Composable
+@ChipComponent
+@ViewStory("On Image")
+fun ChipStoryOnImage(modifier: Modifier = Modifier) {
+  ChipDemo(R.layout.fragment_chip_on_image, modifier)
+}
+
+@Composable
+private fun ChipDemo(
+  @LayoutRes layoutId: Int,
+  modifier: Modifier = Modifier,
+) =
+  AndroidLayout(
+    layoutId = layoutId,
+    modifier = modifier,
+  ) {
+    forEachChip(this as ViewGroup) { chip ->
+      chip.setOnClickListener {
+        chip.toggle()
+      }
+    }
+  }
 
 class ChipStory : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,23 +78,23 @@ class ChipStory : Story() {
     }
   }
 
-  private fun forEachChip(view: ViewGroup, cb: (chip: BpkChip) -> Unit) {
-    (0..(view.childCount - 1)).forEach {
-      val child = view.getChildAt(it)
-      if (child is ViewGroup) {
-        forEachChip(child, cb)
-      } else if (child is BpkChip) {
-        cb(child)
-      }
-    }
-  }
-
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
     infix fun of(fragmentLayout: Int) = ChipStory().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
+    }
+  }
+}
+
+private fun forEachChip(view: ViewGroup, block: (chip: BpkChip) -> Unit) {
+  (0..(view.childCount - 1)).forEach {
+    val child = view.getChildAt(it)
+    if (child is ViewGroup) {
+      forEachChip(child, block)
+    } else if (child is BpkChip) {
+      block(child)
     }
   }
 }
