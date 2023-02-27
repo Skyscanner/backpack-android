@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
-import net.skyscanner.backpack.compose.carousel.internal.BpkCarouselStateImpl
 
 sealed interface BpkCarouselState : ScrollableState {
 
@@ -61,7 +60,7 @@ fun rememberBpkCarouselState(
   val initialPage = (Int.MAX_VALUE / 2) + currentImage
   val pagerState = rememberPagerState(initialPage = initialPage)
   return remember(pagerState, totalImages) {
-    BpkCarouselStateImpl(delegate = pagerState, totalImages = totalImages)
+    BpkCarouselInternalState(delegate = pagerState, totalImages = totalImages)
   }
 }
 
@@ -71,16 +70,47 @@ fun BpkCarouselState(
   currentImage: Int = 0,
 ): BpkCarouselState {
   val initialPage = (Int.MAX_VALUE / 2) + currentImage
-  return BpkCarouselStateImpl(delegate = PagerState(currentPage = initialPage), totalImages = totalImages)
-}
-
-@OptIn(ExperimentalPagerApi::class)
-internal interface BpkCarouselInternalState : BpkCarouselState {
-  val delegate: PagerState
-  val totalImages: Int
+  return BpkCarouselInternalState(delegate = PagerState(currentPage = initialPage), totalImages = totalImages)
 }
 
 internal fun BpkCarouselState.asInternalState(): BpkCarouselInternalState =
   when (this) {
     is BpkCarouselInternalState -> this
   }
+
+@OptIn(ExperimentalPagerApi::class)
+internal class BpkCarouselInternalState constructor(
+  val delegate: PagerState,
+  val totalImages: Int,
+) : BpkCarouselState, ScrollableState by delegate {
+
+  override val interactionSource: InteractionSource
+    get() = delegate.interactionSource
+
+  override val pageCount: Int
+    get() = totalImages
+
+  override val currentPage: Int
+    get() = getModdedPageNumber(delegate.currentPage, totalImages)
+
+  override val currentPageOffset: Float
+    get() = delegate.currentPageOffset
+
+  override suspend fun animateScrollToPage(page: Int, pageOffset: Float) =
+    delegate.animateScrollToPage(getTargetPage(page), pageOffset)
+
+  override suspend fun scrollToPage(page: Int, pageOffset: Float) =
+    delegate.scrollToPage(getTargetPage(page), pageOffset)
+
+  private fun getTargetPage(page: Int): Int {
+    return delegate.currentPage - (currentPage - page)
+  }
+
+  private fun getModdedPageNumber(index: Int, count: Int) = (index - (Int.MAX_VALUE / 2)).floorMod(count)
+}
+
+// floor modulo operation
+private fun Int.floorMod(other: Int): Int = when (other) {
+  0 -> this
+  else -> this - floorDiv(other) * other
+}

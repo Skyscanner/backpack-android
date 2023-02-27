@@ -18,22 +18,73 @@
 
 package net.skyscanner.backpack.compose.carousel
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.carousel.internal.BpkCarouselImpl
+import androidx.compose.ui.platform.testTag
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicator
+import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BpkCarousel(
   state: BpkCarouselState,
   modifier: Modifier = Modifier,
-  onImageChanged: ((Int) -> Unit)? = null,
   imageContent: @Composable (BoxScope.(Int) -> Unit),
 ) {
-  BpkCarouselImpl(
-    state = state.asInternalState(),
+  val internalState = state.asInternalState()
+  Box(modifier = modifier) {
+    HorizontalPager(
+      modifier = Modifier
+        .testTag("pager")
+        .fillMaxSize(),
+      count = if (state.pageCount > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
+      state = internalState.delegate,
+    ) {
+      imageContent(state.currentPage)
+    }
+
+    // if there is more than one image, display the page indicator
+    if (internalState.pageCount > 1) {
+      BpkPageIndicator(
+        modifier = Modifier
+          .align(Alignment.BottomCenter)
+          .testTag("pageIndicator"),
+        totalIndicators = internalState.pageCount,
+        currentIndex = internalState.currentPage,
+        style = BpkPageIndicatorStyle.OverImage,
+      )
+    }
+  }
+}
+
+@Composable
+fun BpkCarousel(
+  currentImage: Int,
+  onImageChanged: (Int) -> Unit,
+  totalImages: Int,
+  modifier: Modifier = Modifier,
+  imageContent: @Composable (BoxScope.(Int) -> Unit),
+) {
+  val state = rememberBpkCarouselState(totalImages = totalImages, currentImage = currentImage)
+  LaunchedEffect(currentImage) {
+    snapshotFlow { currentImage }.collect { index ->
+      state.animateScrollToPage(currentImage)
+    }
+  }
+  LaunchedEffect(state.currentPage) {
+    onImageChanged(state.currentPage)
+  }
+  BpkCarousel(
+    state = state,
     modifier = modifier,
-    onImageChanged = { onImageChanged?.invoke(it) },
-    imageContent = { imageContent(it) },
+    imageContent = imageContent,
   )
 }

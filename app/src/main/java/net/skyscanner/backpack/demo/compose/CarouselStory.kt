@@ -49,7 +49,7 @@ import net.skyscanner.backpack.demo.R
 fun CarouselStory(
   modifier: Modifier = Modifier,
 ) {
-  var currentIndex by remember { mutableStateOf(0) }
+  var currentIndex by remember { mutableStateOf(1) }
 
   Column(
     modifier = modifier
@@ -69,11 +69,7 @@ fun CarouselStory(
     CarouselSample(totalImages = 3, currentImage = 2)
 
     BpkText(text = stringResource(id = R.string.carousel_image_change_callback))
-    BpkText(
-      text = stringResource(id = R.string.carousel_current_image).format(currentIndex),
-      style = BpkTheme.typography.caption,
-    )
-    CarouselSample(totalImages = 3, currentImage = 1, onImageChange = { currentIndex = it })
+    CarouselSample(totalImages = 3, currentImage = currentIndex, showCurrentPageLabel = true)
   }
 }
 
@@ -83,18 +79,22 @@ private fun CarouselSample(
   totalImages: Int,
   modifier: Modifier = Modifier,
   currentImage: Int = 0,
-  onImageChange: ((Int) -> Unit)? = null,
+  showCurrentPageLabel: Boolean = false,
 ) {
   val pagerState = rememberBpkCarouselState(totalImages = totalImages, currentImage = currentImage)
+
+  if (showCurrentPageLabel) {
+    BpkText(
+      text = stringResource(id = R.string.carousel_current_image).format(pagerState.currentPage),
+      style = BpkTheme.typography.caption,
+    )
+  }
 
   BpkCarousel(
     modifier = modifier
       .aspectRatio(1.9f)
       .padding(vertical = BpkSpacing.Base),
     state = pagerState,
-    onImageChanged = {
-      onImageChange?.invoke(it)
-    },
   ) {
     Image(
       modifier = Modifier.fillMaxSize(),
