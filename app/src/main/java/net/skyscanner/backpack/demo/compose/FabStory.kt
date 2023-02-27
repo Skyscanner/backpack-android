@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.fab.BpkFab
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -36,13 +35,16 @@ import net.skyscanner.backpack.compose.tokens.Flight
 import net.skyscanner.backpack.compose.tokens.Search
 import net.skyscanner.backpack.compose.tokens.Star
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.FabComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
-@Preview
-fun FabStory() {
+@FabComponent
+@ComposeStory
+fun FabStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Xl),
+    modifier = modifier.padding(BpkSpacing.Xl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Xxl, Alignment.CenterVertically),
   ) {
     val context = LocalContext.current
