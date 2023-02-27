@@ -21,33 +21,55 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.button.BpkButton
+import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.ButtonComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
 import kotlin.time.Duration.Companion.seconds
+
+@Composable
+@ButtonComponent
+@ViewStory("Standard")
+fun LoadingButtonStoryStandard(modifier: Modifier = Modifier) =
+  LoadingButtonDemo(R.layout.fragment_button_standard, modifier)
+
+@Composable
+@ButtonComponent
+@ViewStory("Large")
+fun LoadingButtonStoryLarge(modifier: Modifier = Modifier) =
+  LoadingButtonDemo(R.layout.fragment_button_large, modifier)
+
+@Composable
+@ButtonComponent
+@ViewStory("Link")
+fun LoadingButtonStoryLink(modifier: Modifier = Modifier) =
+  LoadingButtonDemo(R.layout.fragment_button_link, modifier)
+
+@Composable
+private fun LoadingButtonDemo(
+  @LayoutRes layoutId: Int,
+  modifier: Modifier = Modifier,
+) {
+  val scope = rememberCoroutineScope()
+  AndroidLayout(layoutId, modifier) {
+    makeButtonsLoadeable(this as ViewGroup, scope)
+  }
+}
 
 class LoadingButtonStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    makeButtonsLoadeable(view as ViewGroup)
-  }
-
-  private fun makeButtonsLoadeable(parent: ViewGroup) {
-    for (i in 0 until parent.childCount) {
-      val child = parent.getChildAt(i)
-      when (child) {
-        is ViewGroup -> makeButtonsLoadeable(child)
-        is BpkButton -> child.setOnClickListener {
-          viewLifecycleOwner.lifecycleScope.launch {
-            child.loading = true
-            delay(2.5.seconds)
-            child.loading = false
-          }
-        }
-      }
-    }
+    makeButtonsLoadeable(view as ViewGroup, viewLifecycleOwner.lifecycleScope)
   }
 
   companion object {
@@ -56,6 +78,22 @@ class LoadingButtonStory : Story() {
     infix fun of(fragmentLayout: Int) = LoadingButtonStory().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
+    }
+  }
+}
+
+private fun makeButtonsLoadeable(parent: ViewGroup, scope: CoroutineScope) {
+  for (i in 0 until parent.childCount) {
+    val child = parent.getChildAt(i)
+    when (child) {
+      is ViewGroup -> makeButtonsLoadeable(child, scope)
+      is BpkButton -> child.setOnClickListener {
+        scope.launch {
+          child.loading = true
+          delay(2.5.seconds)
+          child.loading = false
+        }
+      }
     }
   }
 }
