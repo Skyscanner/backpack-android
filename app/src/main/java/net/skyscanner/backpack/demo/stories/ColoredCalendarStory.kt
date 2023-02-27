@@ -45,7 +45,7 @@ fun ColoredCalendarStory(modifier: Modifier = Modifier) {
     val bpkCalendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
     val shiftColorsButton = findViewById<View>(R.id.shiftColorsButton)
 
-    initSelectionTypeSwitcher(this) {
+    initSelectionTypeSwitcher(this, automationMode) {
       controller = it
       bpkCalendar.setController(controller)
     }
@@ -62,17 +62,15 @@ fun ColoredCalendarStory(modifier: Modifier = Modifier) {
 
 class ColoredCalendarStory : Story() {
 
-  lateinit var controller: ExampleBpkCalendarController
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
     val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
-    controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE, false, automationMode)
+    var controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE, false, automationMode)
     val bpkCalendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
     val shiftColorsButton = view.findViewById<View>(R.id.shiftColorsButton)
 
-    initSelectionTypeSwitcher(view) {
+    initSelectionTypeSwitcher(view, automationMode) {
       controller = it
       bpkCalendar.setController(controller)
     }
@@ -95,7 +93,11 @@ class ColoredCalendarStory : Story() {
   }
 }
 
-private fun initSelectionTypeSwitcher(view: View, onControllerChange: (ExampleBpkCalendarController) -> Unit) {
+private fun initSelectionTypeSwitcher(
+  view: View,
+  automationMode: Boolean,
+  onControllerChange: (ExampleBpkCalendarController) -> Unit,
+) {
   val single = view.findViewById<RadioButton>(R.id.single)
   val range = view.findViewById<RadioButton>(R.id.range)
   val selectionType = view.findViewById<RadioGroup>(R.id.selection_type)
@@ -107,8 +109,8 @@ private fun initSelectionTypeSwitcher(view: View, onControllerChange: (ExampleBp
 
   selectionType.setOnCheckedChangeListener { _, checkedId ->
     val controller = when (checkedId) {
-      R.id.single -> ExampleBpkCalendarController(view.context, SelectionType.SINGLE)
-      R.id.range -> ExampleBpkCalendarController(view.context, SelectionType.RANGE)
+      R.id.single -> ExampleBpkCalendarController(view.context, SelectionType.SINGLE, automationMode = automationMode)
+      R.id.range -> ExampleBpkCalendarController(view.context, SelectionType.RANGE, automationMode = automationMode)
       else -> throw IllegalStateException("Unknown selection type")
     }
     controller.isColoredCalendar = true
