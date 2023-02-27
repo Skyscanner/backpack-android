@@ -27,7 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.BpkDimension
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.TextComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
@@ -35,7 +35,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @TextComponent
 @ComposeStory("Hero")
-fun HeroStyleStory() {
+fun HeroStyleStory(modifier: Modifier = Modifier) {
   val styles = listOf(
     BpkTheme.typography.hero1 to stringResource(R.string.text_hero1),
     BpkTheme.typography.hero2 to stringResource(R.string.text_hero2),
@@ -43,13 +43,13 @@ fun HeroStyleStory() {
     BpkTheme.typography.hero4 to stringResource(R.string.text_hero4),
     BpkTheme.typography.hero5 to stringResource(R.string.text_hero5),
   )
-  TypographyStylesStory(styles = styles)
+  TypographyStylesStory(styles = styles, modifier = modifier)
 }
 
 @Composable
 @TextComponent
 @ComposeStory("Heading")
-fun HeadingStyleStory() {
+fun HeadingStyleStory(modifier: Modifier = Modifier) {
   val styles = listOf(
     BpkTheme.typography.heading1 to stringResource(R.string.text_heading1),
     BpkTheme.typography.heading2 to stringResource(R.string.text_heading2),
@@ -57,13 +57,13 @@ fun HeadingStyleStory() {
     BpkTheme.typography.heading4 to stringResource(R.string.text_heading4),
     BpkTheme.typography.heading5 to stringResource(R.string.text_heading5),
   )
-  TypographyStylesStory(styles = styles)
+  TypographyStylesStory(styles = styles, modifier = modifier)
 }
 
 @Composable
 @TextComponent
 @ComposeStory("Body")
-fun BodyStyleStory() {
+fun BodyStyleStory(modifier: Modifier = Modifier) {
   val styles = listOf(
     BpkTheme.typography.subheading to stringResource(R.string.text_subheading),
     BpkTheme.typography.bodyLongform to stringResource(R.string.text_body_longform),
@@ -74,12 +74,15 @@ fun BodyStyleStory() {
     BpkTheme.typography.label2 to stringResource(R.string.text_label2),
     BpkTheme.typography.label3 to stringResource(R.string.text_label3),
   )
-  TypographyStylesStory(styles = styles)
+  TypographyStylesStory(styles = styles, modifier = modifier)
 }
 
 @Composable
-private fun TypographyStylesStory(styles: List<Pair<TextStyle, String>>) {
-  LazyColumn(modifier = Modifier.padding(BpkDimension.Spacing.Base)) {
+private fun TypographyStylesStory(
+  styles: List<Pair<TextStyle, String>>,
+  modifier: Modifier = Modifier,
+) {
+  LazyColumn(modifier = modifier.padding(BpkSpacing.Base)) {
     items(styles) { style ->
       BpkText(
         style = style.first,
