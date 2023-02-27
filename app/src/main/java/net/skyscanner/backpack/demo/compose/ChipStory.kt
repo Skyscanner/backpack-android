@@ -39,7 +39,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.chip.BpkChip
 import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.chip.BpkDismissibleChip
@@ -49,12 +48,37 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Deals
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.ChipComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun ChipStory(style: BpkChipStyle = BpkChipStyle.Default) {
+@ChipComponent
+@ComposeStory("Default")
+fun ChipStoryDefault(modifier: Modifier = Modifier) {
+  ChipDemo(BpkChipStyle.Default, modifier)
+}
 
-  Box {
+@Composable
+@ChipComponent
+@ComposeStory("On Dark")
+fun ChipStoryOnDark(modifier: Modifier = Modifier) {
+  ChipDemo(BpkChipStyle.OnDark, modifier)
+}
+
+@Composable
+@ChipComponent
+@ComposeStory("On Image")
+fun ChipStoryOnImage(modifier: Modifier = Modifier) {
+  ChipDemo(BpkChipStyle.OnImage, modifier)
+}
+
+@Composable
+private fun ChipDemo(
+  style: BpkChipStyle,
+  modifier: Modifier = Modifier,
+) {
+
+  Box(modifier) {
     if (style == BpkChipStyle.OnImage) {
       Image(
         painter = painterResource(R.drawable.canadian_rockies_canada),
