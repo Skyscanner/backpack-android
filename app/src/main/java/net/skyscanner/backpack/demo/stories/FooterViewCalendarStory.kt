@@ -23,6 +23,8 @@ package net.skyscanner.backpack.demo.stories
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.calendar.BpkCalendar
 import net.skyscanner.backpack.calendar.model.CalendarCellStyle
 import net.skyscanner.backpack.calendar.model.CalendarColoring
@@ -30,7 +32,18 @@ import net.skyscanner.backpack.calendar.model.ColoredBucket
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter
 import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter.HighlightedDay
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.CalendarComponent
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
+
+@Composable
+@CalendarComponent
+@ViewStory("Footer view")
+fun FooterViewCalendarStory(modifier: Modifier = Modifier) =
+  AndroidLayout<BpkCalendar>(R.layout.fragment_calendar_default, R.id.bpkCalendar, modifier) {
+    setController(FooterViewCalendarController(context))
+  }
 
 private class FooterViewCalendarController(
   context: Context,
