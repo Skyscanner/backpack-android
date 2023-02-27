@@ -65,7 +65,6 @@ import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.RatingStory
 import net.skyscanner.backpack.demo.compose.SkeletonStory
 import net.skyscanner.backpack.demo.compose.SliderStory
-import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.StarRatingStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
@@ -595,7 +594,7 @@ object ComponentRegistry {
       { children -> TabStory of children },
       mapOf(
         TAB_TITLE_VIEW story NodeData { SpacingStory() },
-        TAB_TITLE_COMPOSE composeStory { SpacingComposeStory() },
+        TAB_TITLE_COMPOSE composeStory { SpacingStory() },
       ),
     ),
   )
