@@ -19,18 +19,24 @@
 package net.skyscanner.backpack.demo.ui
 
 import android.content.Intent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.zIndex
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavSize
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavTab
@@ -38,31 +44,34 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.SettingsActivity
-import net.skyscanner.backpack.demo.meta.Component
 import net.skyscanner.backpack.demo.meta.StoriesRepository
-import net.skyscanner.backpack.demo.meta.Story
+import net.skyscanner.backpack.demo.ui.destinations.StoryScreenDestination
 
 @Composable
+@Destination("component")
 fun ComponentScreen(
-  component: Component,
-  onBack: () -> Unit,
-  onClick: (Story) -> Unit,
+  component: String,
   modifier: Modifier = Modifier,
+  navigator: DestinationsNavigator = EmptyDestinationsNavigator,
   repository: StoriesRepository = StoriesRepository.getInstance(),
   story: @Composable (@Composable () -> Unit) -> Unit = { it() },
 ) {
 
-  Column(modifier = modifier) {
+  Column(modifier = modifier
+    .background(BpkTheme.colors.canvas)
+    .fillMaxSize(),
+  ) {
     val context = LocalContext.current
     BpkTopNavBar(
       navIcon = NavIcon.Back(
         contentDescription = stringResource(R.string.navigation_back),
-        onClick = { onBack() },
+        onClick = navigator::popBackStack,
       ),
-      title = component.name,
+      title = component,
       actions = listOf(
         IconAction(
           icon = BpkIcon.Settings,
@@ -75,10 +84,10 @@ fun ComponentScreen(
       ),
     )
 
-    val viewStories = repository.storiesOf(component, compose = false)
-    val composeStories = repository.storiesOf(component, compose = true)
+    val viewStories = remember(repository, component) { repository.storiesOf(component, compose = false) }
+    val composeStories = remember(repository, component) { repository.storiesOf(component, compose = true) }
 
-    var composeTabSelected by remember { mutableStateOf(false) }
+    var composeTabSelected by rememberSaveable { mutableStateOf(false) }
 
     if (viewStories.isNotEmpty() && composeStories.isNotEmpty()) {
       BpkHorizontalNav(
@@ -105,7 +114,7 @@ fun ComponentScreen(
           ComponentItem(
             title = it.name,
             showComposeBadge = false,
-            onClick = { onClick(it) },
+            onClick = { navigator.navigate(StoryScreenDestination(it.component.name, it.name, it.isCompose)) },
           )
         }
       }

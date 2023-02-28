@@ -28,15 +28,17 @@ import org.jetbrains.annotations.TestOnly
 
 interface StoriesRepository {
 
-  fun allComponents(): List<Component>
+  fun uiComponents(): List<Component>
 
   fun tokenComponents(): List<Component>
 
   fun screenshotStories(): List<Story>
 
-  fun storiesOf(component: Component, compose: Boolean): List<Story>
+  fun storiesOf(component: String, compose: Boolean): List<Story>
 
-  fun isComposeSupportedFor(component: Component): Boolean
+  fun storyOf(component: String, story: String, compose: Boolean): Story
+
+  fun isComposeSupportedFor(component: String): Boolean
 
   @TestOnly
   fun testStories(): List<Story>
@@ -53,27 +55,39 @@ private object StoriesRepositoryImpl : StoriesRepository {
   private val testStories = generatedStories.filter { it.component.name == "TestComponent" }
   private val allStories = generatedStories - testStories
 
-  private val map = allStories
-    .groupBy { it.component }
-    .filter { (_, stories) -> stories.isNotEmpty() }
-    .toSortedMap(compareBy { it.name })
+  private val allComponents = allStories
+    .map { it.component }
+    .distinct()
+    .sortedBy { it.name }
 
-  private val allComponents = map.keys.toList()
-
-  override fun allComponents() = allComponents.filter { !it.isToken }
+  override fun uiComponents() = allComponents.filter { !it.isToken }
 
   override fun tokenComponents() = allComponents.filter { it.isToken }
 
   override fun screenshotStories() = allStories.filter { it.isScreenshot }
 
-  override fun storiesOf(component: Component, compose: Boolean): List<Story> =
-    map[component]
-      ?.filter { it.isCompose == compose }
-      ?.sortedBy { it.name }
-      ?: emptyList()
+  private val storiesMap = allStories
+    .groupBy { it.component.name }
+    .filter { (_, stories) -> stories.isNotEmpty() }
 
-  override fun isComposeSupportedFor(component: Component): Boolean =
-    map[component]?.any { it.isCompose } ?: false
+  override fun storiesOf(component: String, compose: Boolean): List<Story> =
+    storiesMap.getValue(component)
+      .filter { it.isCompose == compose }
+      .sortedBy {
+        // sort by name, prioritising default stories
+        when {
+          it.name.equals("default", true) -> ""
+          it.name.equals("standard", true) -> ""
+          else -> it.name
+        }
+      }
+
+  override fun storyOf(component: String, story: String, compose: Boolean): Story =
+    storiesMap.getValue(component)
+      .first { it.name == story && it.isCompose == compose }
+
+  override fun isComposeSupportedFor(component: String): Boolean =
+    storiesMap[component]?.any { it.isCompose } ?: false
 
   override fun testStories() = testStories
 }

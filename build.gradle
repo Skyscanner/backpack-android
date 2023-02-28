@@ -141,6 +141,11 @@ ext {
   composeTestManifest = [composeBom, "androidx.compose.ui:ui-test-manifest"]
   composeActivity = "androidx.activity:activity-compose:1.6.1"
 
+  // update this alongside with Compose version
+  destinationsVersion = "1.7.34-beta"
+  destinationsCore = "io.github.raamcosta.compose-destinations:animations-core:$destinationsVersion"
+  destinationsKsp = "io.github.raamcosta.compose-destinations:ksp:$destinationsVersion"
+
   accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
 }
 
