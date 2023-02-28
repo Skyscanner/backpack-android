@@ -65,6 +65,7 @@ import net.skyscanner.backpack.demo.compose.RadioButtonStory
 import net.skyscanner.backpack.demo.compose.RatingStory
 import net.skyscanner.backpack.demo.compose.SkeletonStory
 import net.skyscanner.backpack.demo.compose.SliderStory
+import net.skyscanner.backpack.demo.compose.SpacingStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.StarRatingStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
@@ -74,25 +75,19 @@ import net.skyscanner.backpack.demo.stories.BottomNavFragment
 import net.skyscanner.backpack.demo.stories.Calendar2Fragment
 import net.skyscanner.backpack.demo.stories.ChangeableButtonsFragment
 import net.skyscanner.backpack.demo.stories.ChipFragment
-import net.skyscanner.backpack.demo.stories.ColorStory
 import net.skyscanner.backpack.demo.stories.ColoredCalendarFragment
 import net.skyscanner.backpack.demo.stories.ComposeStory
 import net.skyscanner.backpack.demo.stories.DefaultCalendarFragment
 import net.skyscanner.backpack.demo.stories.DialogFragment
 import net.skyscanner.backpack.demo.stories.DisabledCalendarFragment
-import net.skyscanner.backpack.demo.stories.ElevationStory
 import net.skyscanner.backpack.demo.stories.FooterViewCalendarFragment
 import net.skyscanner.backpack.demo.stories.HorizontalNavFragment
-import net.skyscanner.backpack.demo.stories.IconType
-import net.skyscanner.backpack.demo.stories.IconsStory
 import net.skyscanner.backpack.demo.stories.InteractiveStarRatingFragment
 import net.skyscanner.backpack.demo.stories.LabeledCalendarFragment
 import net.skyscanner.backpack.demo.stories.LoadingButtonFragment
 import net.skyscanner.backpack.demo.stories.MapFragment
 import net.skyscanner.backpack.demo.stories.NavBarFragment
-import net.skyscanner.backpack.demo.stories.RadiiStory
 import net.skyscanner.backpack.demo.stories.SnackbarFragment
-import net.skyscanner.backpack.demo.stories.SpacingStory
 import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.Story.Companion.Direction
 import net.skyscanner.backpack.demo.stories.Story.Companion.scrollable
@@ -553,50 +548,11 @@ object ComponentRegistry {
   )
 
   val TOKENS = mapOf(
-    "All Icons" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_VIEW story NodeData(
-          { children -> SubStory of children },
-          mapOf(
-            "Default" story NodeData { IconsStory of IconType.Default },
-            "RTL" story NodeData { IconsStory of IconType.Default with Direction.RTL },
-            "Small" story NodeData { IconsStory of IconType.Small },
-            "Small RTL" story NodeData { IconsStory of IconType.Small with Direction.RTL },
-          ),
-        ),
-        TAB_TITLE_COMPOSE composeStory { IconsStoryCompose() },
-      ),
-    ),
-    "Color" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_VIEW story NodeData { ColorStory() },
-        TAB_TITLE_COMPOSE composeStory { ColorsComposeStory() },
-      ),
-    ),
-    "Elevation" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_VIEW story NodeData { ElevationStory() },
-        TAB_TITLE_COMPOSE composeStory { ElevationComposeStory() },
-      ),
-    ),
-    "Icons" story NodeData { Story of R.layout.fragment_icons },
-    "Radii" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_VIEW story NodeData { RadiiStory() },
-        TAB_TITLE_COMPOSE composeStory { RadiiComposeStory() },
-      ),
-    ),
-    "Spacing" story NodeData(
-      { children -> TabStory of children },
-      mapOf(
-        TAB_TITLE_VIEW story NodeData { SpacingStory() },
-        TAB_TITLE_COMPOSE composeStory { SpacingStory() },
-      ),
-    ),
+    "All Icons" composeStory { IconsStoryCompose() },
+    "Color" composeStory { ColorsComposeStory() },
+    "Elevation" composeStory { ElevationComposeStory() },
+    "Radii" composeStory { RadiiComposeStory() },
+    "Spacing" composeStory { SpacingStory() },
   )
 
   fun getStoryCreator(fullyQualifiedName: String): RegistryItem {
