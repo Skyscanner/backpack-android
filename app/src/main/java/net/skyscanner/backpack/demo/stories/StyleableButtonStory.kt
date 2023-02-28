@@ -21,28 +21,38 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.button.BpkButton.Type
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.ButtonComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
+
+@Composable
+@ButtonComponent
+@ViewStory("Styleable")
+fun StyleableButtonStory(modifier: Modifier = Modifier) =
+  AndroidLayout(R.layout.fragment_buttons_styleable, modifier) {
+    findViewById<View>(R.id.primary).setOnClickListener { setButtonType(this, Type.Primary) }
+    findViewById<View>(R.id.secondary).setOnClickListener { setButtonType(this, Type.Secondary) }
+    findViewById<View>(R.id.destructive).setOnClickListener { setButtonType(this, Type.Destructive) }
+    findViewById<View>(R.id.featured).setOnClickListener { setButtonType(this, Type.Featured) }
+    findViewById<View>(R.id.primaryOnDark).setOnClickListener { setButtonType(this, Type.PrimaryOnDark) }
+    findViewById<View>(R.id.primaryOnLight).setOnClickListener { setButtonType(this, Type.PrimaryOnLight) }
+  }
 
 class StyleableButtonStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    view.findViewById<View>(R.id.primary).setOnClickListener { setButtonType(Type.Primary) }
-    view.findViewById<View>(R.id.secondary).setOnClickListener { setButtonType(Type.Secondary) }
-    view.findViewById<View>(R.id.destructive).setOnClickListener { setButtonType(Type.Destructive) }
-    view.findViewById<View>(R.id.featured).setOnClickListener { setButtonType(Type.Featured) }
-    view.findViewById<View>(R.id.primaryOnDark).setOnClickListener { setButtonType(Type.PrimaryOnDark) }
-    view.findViewById<View>(R.id.primaryOnLight).setOnClickListener { setButtonType(Type.PrimaryOnLight) }
-  }
-
-  private fun setButtonType(type: Type) {
-    requireView().findViewById<ViewGroup>(R.id.buttonsContainer).run {
-      for (i in 0 until childCount) {
-        (getChildAt(i) as? BpkButton?)?.type = type
-      }
-    }
+    view.findViewById<View>(R.id.primary).setOnClickListener { setButtonType(view, Type.Primary) }
+    view.findViewById<View>(R.id.secondary).setOnClickListener { setButtonType(view, Type.Secondary) }
+    view.findViewById<View>(R.id.destructive).setOnClickListener { setButtonType(view, Type.Destructive) }
+    view.findViewById<View>(R.id.featured).setOnClickListener { setButtonType(view, Type.Featured) }
+    view.findViewById<View>(R.id.primaryOnDark).setOnClickListener { setButtonType(view, Type.PrimaryOnDark) }
+    view.findViewById<View>(R.id.primaryOnLight).setOnClickListener { setButtonType(view, Type.PrimaryOnLight) }
   }
 
   companion object {
@@ -51,6 +61,14 @@ class StyleableButtonStory : Story() {
     infix fun of(fragmentLayout: Int) = StyleableButtonStory().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
+    }
+  }
+}
+
+private fun setButtonType(view: View, type: Type) {
+  view.findViewById<ViewGroup>(R.id.buttonsContainer).run {
+    for (i in 0 until childCount) {
+      (getChildAt(i) as? BpkButton?)?.type = type
     }
   }
 }
