@@ -97,7 +97,7 @@ fun CompleteFlightLegSample() {
       withStyle(
         SpanStyle(
           color = BpkTheme.colors.textError,
-        )
+        ),
       ) {
         append("2 stops")
       }
