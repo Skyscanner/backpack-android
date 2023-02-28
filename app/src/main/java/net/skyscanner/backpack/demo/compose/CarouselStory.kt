@@ -26,9 +26,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -48,8 +45,6 @@ import net.skyscanner.backpack.demo.R
 fun CarouselStory(
   modifier: Modifier = Modifier,
 ) {
-  val currentIndex by remember { mutableStateOf(1) }
-
   Column(
     modifier = modifier
       .fillMaxSize()
@@ -68,7 +63,7 @@ fun CarouselStory(
     CarouselSample(totalImages = 3, initialImage = 2)
 
     BpkText(text = stringResource(id = R.string.carousel_image_change_callback))
-    CarouselSample(totalImages = 3, initialImage = currentIndex, showCurrentPageLabel = true)
+    CarouselSample(totalImages = 3, initialImage = 1, showCurrentPageLabel = true)
   }
 }
 
