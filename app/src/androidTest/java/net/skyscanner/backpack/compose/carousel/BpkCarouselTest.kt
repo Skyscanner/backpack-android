@@ -53,7 +53,7 @@ class BpkCarouselTest : BpkSnapshotTest() {
   @Test
   fun setCurrentImage() = snap {
     BpkCarousel(
-      state = rememberBpkCarouselState(totalImages = 3, currentImage = 1),
+      state = rememberBpkCarouselState(totalImages = 3, initialImage = 1),
     ) {
       Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
     }

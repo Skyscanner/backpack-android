@@ -55,9 +55,9 @@ sealed interface BpkCarouselState : ScrollableState {
 @Composable
 fun rememberBpkCarouselState(
   totalImages: Int,
-  currentImage: Int = 0,
+  initialImage: Int = 0,
 ): BpkCarouselState {
-  val initialPage = (Int.MAX_VALUE / 2) + currentImage
+  val initialPage = (Int.MAX_VALUE / 2) + initialImage
   val pagerState = rememberPagerState(initialPage = initialPage)
   return remember(pagerState, totalImages) {
     BpkCarouselInternalState(delegate = pagerState, totalImages = totalImages)
@@ -67,9 +67,9 @@ fun rememberBpkCarouselState(
 @OptIn(ExperimentalPagerApi::class)
 fun BpkCarouselState(
   totalImages: Int,
-  currentImage: Int = 0,
+  initialImage: Int = 0,
 ): BpkCarouselState {
-  val initialPage = (Int.MAX_VALUE / 2) + currentImage
+  val initialPage = (Int.MAX_VALUE / 2) + initialImage
   return BpkCarouselInternalState(delegate = PagerState(currentPage = initialPage), totalImages = totalImages)
 }
 
@@ -107,10 +107,9 @@ internal class BpkCarouselInternalState constructor(
   }
 
   private fun getModdedPageNumber(index: Int, count: Int) = (index - (Int.MAX_VALUE / 2)).floorMod(count)
-}
 
-// floor modulo operation
-private fun Int.floorMod(other: Int): Int = when (other) {
-  0 -> this
-  else -> this - floorDiv(other) * other
+  private fun Int.floorMod(other: Int): Int = when (other) {
+    0 -> this
+    else -> this - floorDiv(other) * other
+  }
 }

@@ -22,8 +22,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -63,28 +61,4 @@ fun BpkCarousel(
       )
     }
   }
-}
-
-@Composable
-fun BpkCarousel(
-  currentImage: Int,
-  onImageChanged: (Int) -> Unit,
-  totalImages: Int,
-  modifier: Modifier = Modifier,
-  imageContent: @Composable (BoxScope.(Int) -> Unit),
-) {
-  val state = rememberBpkCarouselState(totalImages = totalImages, currentImage = currentImage)
-  LaunchedEffect(currentImage) {
-    snapshotFlow { currentImage }.collect { index ->
-      state.animateScrollToPage(currentImage)
-    }
-  }
-  LaunchedEffect(state.currentPage) {
-    onImageChanged(state.currentPage)
-  }
-  BpkCarousel(
-    state = state,
-    modifier = modifier,
-    imageContent = imageContent,
-  )
 }

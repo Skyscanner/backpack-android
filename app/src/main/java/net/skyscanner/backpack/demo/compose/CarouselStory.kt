@@ -65,10 +65,10 @@ fun CarouselStory(
     CarouselSample(totalImages = 3)
 
     BpkText(text = stringResource(id = R.string.carousel_start_at_different_index))
-    CarouselSample(totalImages = 3, currentImage = 2)
+    CarouselSample(totalImages = 3, initialImage = 2)
 
     BpkText(text = stringResource(id = R.string.carousel_image_change_callback))
-    CarouselSample(totalImages = 3, currentImage = currentIndex, showCurrentPageLabel = true)
+    CarouselSample(totalImages = 3, initialImage = currentIndex, showCurrentPageLabel = true)
   }
 }
 
@@ -77,10 +77,10 @@ fun CarouselStory(
 private fun CarouselSample(
   totalImages: Int,
   modifier: Modifier = Modifier,
-  currentImage: Int = 0,
+  initialImage: Int = 0,
   showCurrentPageLabel: Boolean = false,
 ) {
-  val pagerState = rememberBpkCarouselState(totalImages = totalImages, currentImage = currentImage)
+  val pagerState = rememberBpkCarouselState(totalImages = totalImages, initialImage = initialImage)
 
   if (showCurrentPageLabel) {
     BpkText(
