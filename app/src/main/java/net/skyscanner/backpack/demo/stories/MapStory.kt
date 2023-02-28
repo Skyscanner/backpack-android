@@ -26,6 +26,7 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.map.addBpkMarker
 import net.skyscanner.backpack.map.getBpkMapAsync
 
+// todo: update for Compose version
 class MapStory : Story() {
 
   enum class Type {
