@@ -38,6 +38,7 @@ import net.skyscanner.backpack.demo.compose.CardButtonDefaultStory
 import net.skyscanner.backpack.demo.compose.CardButtonSmallStory
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CardWrapperStory
+import net.skyscanner.backpack.demo.compose.CarouselStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.ChipStoryDefault
 import net.skyscanner.backpack.demo.compose.ChipStoryOnDark

@@ -31,17 +31,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import com.google.accompanist.pager.ExperimentalPagerApi
 import net.skyscanner.backpack.compose.carousel.BpkCarousel
 import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.CarouselComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
+@CarouselComponent
+@ComposeStory
 fun CarouselStory(
   modifier: Modifier = Modifier,
 ) {
@@ -67,7 +68,6 @@ fun CarouselStory(
   }
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun CarouselSample(
   totalImages: Int,
