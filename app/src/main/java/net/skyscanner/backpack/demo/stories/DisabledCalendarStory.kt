@@ -57,7 +57,7 @@ fun DisabledCalendarStory(modifier: Modifier = Modifier) {
   }
 }
 
-class DisabledCalendarStory : Story() {
+class DisabledCalendarFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -80,7 +80,7 @@ class DisabledCalendarStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = DisabledCalendarStory().apply {
+    infix fun of(fragmentLayout: Int) = DisabledCalendarFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

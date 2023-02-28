@@ -69,39 +69,39 @@ import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.StarRatingStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.TextFiledStory
-import net.skyscanner.backpack.demo.stories.BarChartStory
-import net.skyscanner.backpack.demo.stories.BottomNavStory
-import net.skyscanner.backpack.demo.stories.Calendar2Story
-import net.skyscanner.backpack.demo.stories.ChangeableButtonsStory
-import net.skyscanner.backpack.demo.stories.ChipStory
+import net.skyscanner.backpack.demo.stories.BarChartFragment
+import net.skyscanner.backpack.demo.stories.BottomNavFragment
+import net.skyscanner.backpack.demo.stories.Calendar2Fragment
+import net.skyscanner.backpack.demo.stories.ChangeableButtonsFragment
+import net.skyscanner.backpack.demo.stories.ChipFragment
 import net.skyscanner.backpack.demo.stories.ColorStory
-import net.skyscanner.backpack.demo.stories.ColoredCalendarStory
+import net.skyscanner.backpack.demo.stories.ColoredCalendarFragment
 import net.skyscanner.backpack.demo.stories.ComposeStory
-import net.skyscanner.backpack.demo.stories.DefaultCalendarStory
-import net.skyscanner.backpack.demo.stories.DialogStory
-import net.skyscanner.backpack.demo.stories.DisabledCalendarStory
+import net.skyscanner.backpack.demo.stories.DefaultCalendarFragment
+import net.skyscanner.backpack.demo.stories.DialogFragment
+import net.skyscanner.backpack.demo.stories.DisabledCalendarFragment
 import net.skyscanner.backpack.demo.stories.ElevationStory
-import net.skyscanner.backpack.demo.stories.FooterViewCalendarStory
-import net.skyscanner.backpack.demo.stories.HorizontalNavStory
+import net.skyscanner.backpack.demo.stories.FooterViewCalendarFragment
+import net.skyscanner.backpack.demo.stories.HorizontalNavFragment
 import net.skyscanner.backpack.demo.stories.IconType
 import net.skyscanner.backpack.demo.stories.IconsStory
-import net.skyscanner.backpack.demo.stories.InteractiveStarRatingStory
-import net.skyscanner.backpack.demo.stories.LabeledCalendarStory
-import net.skyscanner.backpack.demo.stories.LoadingButtonStory
-import net.skyscanner.backpack.demo.stories.MapStory
-import net.skyscanner.backpack.demo.stories.NavBarStory
+import net.skyscanner.backpack.demo.stories.InteractiveStarRatingFragment
+import net.skyscanner.backpack.demo.stories.LabeledCalendarFragment
+import net.skyscanner.backpack.demo.stories.LoadingButtonFragment
+import net.skyscanner.backpack.demo.stories.MapFragment
+import net.skyscanner.backpack.demo.stories.NavBarFragment
 import net.skyscanner.backpack.demo.stories.RadiiStory
-import net.skyscanner.backpack.demo.stories.SnackbarStory
+import net.skyscanner.backpack.demo.stories.SnackbarFragment
 import net.skyscanner.backpack.demo.stories.SpacingStory
 import net.skyscanner.backpack.demo.stories.Story
 import net.skyscanner.backpack.demo.stories.Story.Companion.Direction
 import net.skyscanner.backpack.demo.stories.Story.Companion.scrollable
 import net.skyscanner.backpack.demo.stories.Story.Companion.with
-import net.skyscanner.backpack.demo.stories.StyleableButtonStory
+import net.skyscanner.backpack.demo.stories.StyleableButtonFragment
 import net.skyscanner.backpack.demo.stories.SubStory
 import net.skyscanner.backpack.demo.stories.TabStory
-import net.skyscanner.backpack.demo.stories.TextSpansStory
-import net.skyscanner.backpack.demo.stories.ToastStory
+import net.skyscanner.backpack.demo.stories.TextSpansFragment
+import net.skyscanner.backpack.demo.stories.ToastFragment
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
 import net.skyscanner.backpack.demo.compose.HorizontalNavStory as ComposeHorizontalNavStory
 import net.skyscanner.backpack.demo.compose.InteractiveStarRatingStory as ComposeInteractiveStarRatingStory
@@ -190,15 +190,15 @@ object ComponentRegistry {
     "Bar Chart" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData { BarChartStory of R.layout.fragment_bar_chart },
+        TAB_TITLE_VIEW story NodeData { BarChartFragment of R.layout.fragment_bar_chart },
         TAB_TITLE_COMPOSE composeStory { net.skyscanner.backpack.demo.compose.BarChartStory() },
       ),
     ),
     "Bottom Nav" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData { BottomNavStory of R.layout.fragment_bottom_nav },
-        TAB_TITLE_COMPOSE composeStory { BottomNavStory() },
+        TAB_TITLE_VIEW story NodeData { BottomNavFragment of R.layout.fragment_bottom_nav },
+        TAB_TITLE_COMPOSE composeStory { BottomNavFragment() },
       ),
     ),
     "Bottom Sheet" story NodeData(
@@ -214,11 +214,11 @@ object ComponentRegistry {
         TAB_TITLE_VIEW story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Standard" story NodeData { LoadingButtonStory of R.layout.fragment_button_standard },
-            "Large" story NodeData { LoadingButtonStory of R.layout.fragment_button_large },
-            "Link" story NodeData { LoadingButtonStory of R.layout.fragment_button_link },
-            "Changeable" story NodeData { ChangeableButtonsStory of R.layout.fragment_buttons_changeable },
-            "Styleable" story NodeData { StyleableButtonStory of R.layout.fragment_buttons_styleable },
+            "Standard" story NodeData { LoadingButtonFragment of R.layout.fragment_button_standard },
+            "Large" story NodeData { LoadingButtonFragment of R.layout.fragment_button_large },
+            "Link" story NodeData { LoadingButtonFragment of R.layout.fragment_button_link },
+            "Changeable" story NodeData { ChangeableButtonsFragment of R.layout.fragment_buttons_changeable },
+            "Styleable" story NodeData { StyleableButtonFragment of R.layout.fragment_buttons_styleable },
           ),
         ),
         TAB_TITLE_COMPOSE story NodeData(
@@ -271,14 +271,14 @@ object ComponentRegistry {
     "Calendar" story NodeData(
       { children -> SubStory of children },
       mapOf(
-        "Default" story NodeData { DefaultCalendarStory of R.layout.fragment_calendar_default },
-        "Colored" story NodeData { ColoredCalendarStory of R.layout.fragment_calendar_colored },
-        "Disabled Dates" story NodeData { DisabledCalendarStory of R.layout.fragment_calendar_disabled },
-        "Footer view" story NodeData { FooterViewCalendarStory of R.layout.fragment_calendar_footer_view },
+        "Default" story NodeData { DefaultCalendarFragment of R.layout.fragment_calendar_default },
+        "Colored" story NodeData { ColoredCalendarFragment of R.layout.fragment_calendar_colored },
+        "Disabled Dates" story NodeData { DisabledCalendarFragment of R.layout.fragment_calendar_disabled },
+        "Footer view" story NodeData { FooterViewCalendarFragment of R.layout.fragment_calendar_footer_view },
         "Footer view RTL" story NodeData {
-          FooterViewCalendarStory of R.layout.fragment_calendar_footer_view with Direction.RTL
+          FooterViewCalendarFragment of R.layout.fragment_calendar_footer_view with Direction.RTL
         },
-        "Labeled" story NodeData { LabeledCalendarStory of R.layout.fragment_calendar_default },
+        "Labeled" story NodeData { LabeledCalendarFragment of R.layout.fragment_calendar_default },
       ),
     ),
     "Calendar 2" story NodeData(
@@ -287,13 +287,13 @@ object ComponentRegistry {
         TAB_TITLE_VIEW story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Selection Disabled" story NodeData { Calendar2Story of CalendarStoryType.SelectionDisabled },
-            "Selection Single" story NodeData { Calendar2Story of CalendarStoryType.SelectionSingle },
-            "Selection Range" story NodeData { Calendar2Story of CalendarStoryType.SelectionRange },
-            "Selection Whole Month" story NodeData { Calendar2Story of CalendarStoryType.SelectionWholeMonth },
-            "Disabled weekends" story NodeData { Calendar2Story of CalendarStoryType.WithDisabledDates },
-            "Day labels" story NodeData { Calendar2Story of CalendarStoryType.WithLabels },
-            "Pre-selected range" story NodeData { Calendar2Story of CalendarStoryType.PreselectedRange },
+            "Selection Disabled" story NodeData { Calendar2Fragment of CalendarStoryType.SelectionDisabled },
+            "Selection Single" story NodeData { Calendar2Fragment of CalendarStoryType.SelectionSingle },
+            "Selection Range" story NodeData { Calendar2Fragment of CalendarStoryType.SelectionRange },
+            "Selection Whole Month" story NodeData { Calendar2Fragment of CalendarStoryType.SelectionWholeMonth },
+            "Disabled weekends" story NodeData { Calendar2Fragment of CalendarStoryType.WithDisabledDates },
+            "Day labels" story NodeData { Calendar2Fragment of CalendarStoryType.WithLabels },
+            "Pre-selected range" story NodeData { Calendar2Fragment of CalendarStoryType.PreselectedRange },
           ),
         ),
         TAB_TITLE_COMPOSE story NodeData(
@@ -316,9 +316,9 @@ object ComponentRegistry {
         TAB_TITLE_VIEW story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Default" story NodeData { ChipStory of R.layout.fragment_chip },
-            "On Dark" story NodeData { ChipStory of R.layout.fragment_chip_ondark },
-            "On Image" story NodeData { ChipStory of R.layout.fragment_chip_on_image },
+            "Default" story NodeData { ChipFragment of R.layout.fragment_chip },
+            "On Dark" story NodeData { ChipFragment of R.layout.fragment_chip_ondark },
+            "On Image" story NodeData { ChipFragment of R.layout.fragment_chip_on_image },
           ),
         ),
         TAB_TITLE_COMPOSE story NodeData(
@@ -341,7 +341,7 @@ object ComponentRegistry {
     "Dialog" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData { DialogStory() },
+        TAB_TITLE_VIEW story NodeData { DialogFragment() },
         TAB_TITLE_COMPOSE composeStory { ComposeDialogStory() },
       ),
     ),
@@ -375,16 +375,16 @@ object ComponentRegistry {
     "Horizontal Nav" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData { HorizontalNavStory of R.layout.fragment_horizontal_nav_default },
+        TAB_TITLE_VIEW story NodeData { HorizontalNavFragment of R.layout.fragment_horizontal_nav_default },
         TAB_TITLE_COMPOSE composeStory { ComposeHorizontalNavStory() },
       ),
     ),
     "Map Markers" story NodeData(
       { children -> SubStory of children },
       mapOf(
-        "Pointers" story NodeData { MapStory of MapStory.Type.PointersOnly },
-        "Badges " story NodeData { MapStory of MapStory.Type.Badges },
-        "With icons" story NodeData { MapStory of MapStory.Type.BadgesWithIcons },
+        "Pointers" story NodeData { MapFragment of MapFragment.Type.PointersOnly },
+        "Badges " story NodeData { MapFragment of MapFragment.Type.Badges },
+        "With icons" story NodeData { MapFragment of MapFragment.Type.BadgesWithIcons },
       ),
     ),
     "Nav Bar" story NodeData(
@@ -393,12 +393,12 @@ object ComponentRegistry {
         TAB_TITLE_VIEW story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Default" story NodeData { NavBarStory of R.layout.fragment_nav_bar },
-            "RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar with Direction.RTL },
-            "With Icon" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon },
-            "With Icon RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_icon with Direction.RTL },
-            "With Menu" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu },
-            "With Menu RTL" story NodeData { NavBarStory of R.layout.fragment_nav_bar_with_menu with Direction.RTL },
+            "Default" story NodeData { NavBarFragment of R.layout.fragment_nav_bar },
+            "RTL" story NodeData { NavBarFragment of R.layout.fragment_nav_bar with Direction.RTL },
+            "With Icon" story NodeData { NavBarFragment of R.layout.fragment_nav_bar_with_icon },
+            "With Icon RTL" story NodeData { NavBarFragment of R.layout.fragment_nav_bar_with_icon with Direction.RTL },
+            "With Menu" story NodeData { NavBarFragment of R.layout.fragment_nav_bar_with_menu },
+            "With Menu RTL" story NodeData { NavBarFragment of R.layout.fragment_nav_bar_with_menu with Direction.RTL },
           ),
         ),
         TAB_TITLE_COMPOSE story NodeData(
@@ -473,7 +473,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { SliderStory() },
       ),
     ),
-    "Snackbar" story NodeData { SnackbarStory of R.layout.fragment_snackbar },
+    "Snackbar" story NodeData { SnackbarFragment of R.layout.fragment_snackbar },
     "Spinner" story NodeData(
       { children -> TabStory of children },
       mapOf(
@@ -499,7 +499,7 @@ object ComponentRegistry {
     "Star Rating Interactive" story NodeData(
       { children -> TabStory of children },
       mapOf(
-        TAB_TITLE_VIEW story NodeData { InteractiveStarRatingStory of R.layout.fragment_star_rating_interactive },
+        TAB_TITLE_VIEW story NodeData { InteractiveStarRatingFragment of R.layout.fragment_star_rating_interactive },
         TAB_TITLE_COMPOSE composeStory { ComposeInteractiveStarRatingStory() },
       ),
     ),
@@ -548,8 +548,8 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { TextFiledStory() },
       ),
     ),
-    "Text Spans" story NodeData { TextSpansStory of R.layout.fragment_text_spans },
-    "Toast" story NodeData { ToastStory of R.layout.fragment_toasts },
+    "Text Spans" story NodeData { TextSpansFragment of R.layout.fragment_text_spans },
+    "Toast" story NodeData { ToastFragment of R.layout.fragment_toasts },
   )
 
   val TOKENS = mapOf(

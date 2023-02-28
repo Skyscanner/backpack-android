@@ -46,7 +46,7 @@ fun BottomNavStory(modifier: Modifier = Modifier) =
     }
   }
 
-class BottomNavStory : Story() {
+class BottomNavFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -68,7 +68,7 @@ class BottomNavStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = BottomNavStory().apply {
+    infix fun of(fragmentLayout: Int) = BottomNavFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

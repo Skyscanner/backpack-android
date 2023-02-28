@@ -43,7 +43,7 @@ fun StyleableButtonStory(modifier: Modifier = Modifier) =
     findViewById<View>(R.id.primaryOnLight).setOnClickListener { setButtonType(this, Type.PrimaryOnLight) }
   }
 
-class StyleableButtonStory : Story() {
+class StyleableButtonFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -58,7 +58,7 @@ class StyleableButtonStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = StyleableButtonStory().apply {
+    infix fun of(fragmentLayout: Int) = StyleableButtonFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

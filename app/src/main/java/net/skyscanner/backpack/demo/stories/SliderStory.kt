@@ -43,7 +43,7 @@ fun SliderStory(modifier: Modifier = Modifier) =
     }
   }
 
-class SliderStory : Story() {
+class SliderFragment : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -58,7 +58,7 @@ class SliderStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = SliderStory().apply {
+    infix fun of(fragmentLayout: Int) = SliderFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

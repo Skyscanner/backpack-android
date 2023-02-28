@@ -51,7 +51,7 @@ fun BarChartStory(modifier: Modifier = Modifier) =
     )
   }
 
-class BarChartStory : Story() {
+class BarChartFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -78,7 +78,7 @@ class BarChartStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = BarChartStory().apply {
+    infix fun of(fragmentLayout: Int) = BarChartFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

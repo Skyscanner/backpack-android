@@ -37,7 +37,7 @@ fun SnackbarStory(modifier: Modifier = Modifier) =
     setupSnackbars(this)
   }
 
-class SnackbarStory : Story() {
+class SnackbarFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -47,7 +47,7 @@ class SnackbarStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = SnackbarStory().apply {
+    infix fun of(fragmentLayout: Int) = SnackbarFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

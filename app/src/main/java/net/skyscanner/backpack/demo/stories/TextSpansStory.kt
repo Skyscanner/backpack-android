@@ -44,7 +44,7 @@ fun TextSpansStory(modifier: Modifier = Modifier) =
     setupTextSpans(this)
   }
 
-class TextSpansStory : Story() {
+class TextSpansFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -54,7 +54,7 @@ class TextSpansStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = TextSpansStory().apply {
+    infix fun of(fragmentLayout: Int) = TextSpansFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

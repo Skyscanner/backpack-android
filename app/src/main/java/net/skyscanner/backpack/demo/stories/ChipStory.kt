@@ -64,7 +64,7 @@ private fun ChipDemo(
     }
   }
 
-class ChipStory : Story() {
+class ChipFragment : Story() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -78,7 +78,7 @@ class ChipStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = ChipStory().apply {
+    infix fun of(fragmentLayout: Int) = ChipFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

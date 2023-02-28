@@ -120,7 +120,7 @@ private fun Calendar2Demo(
   }
 }
 
-class Calendar2Story : Story() {
+class Calendar2Fragment : Story() {
 
   private val calendar by unsafeLazy { requireView().findViewById<BpkCalendar>(R.id.calendar2)!! }
   private val type by unsafeLazy { requireArguments().getSerializable(TYPE) as CalendarStoryType }
@@ -168,7 +168,7 @@ class Calendar2Story : Story() {
   companion object {
     private const val TYPE = "TYPE"
 
-    infix fun of(type: CalendarStoryType) = Calendar2Story().apply {
+    infix fun of(type: CalendarStoryType) = Calendar2Fragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, R.layout.fragment_calendar_2)
       arguments?.putBoolean(SCROLLABLE, false)

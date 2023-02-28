@@ -48,7 +48,7 @@ fun LabeledCalendarStory(modifier: Modifier = Modifier) {
   }
 }
 
-class LabeledCalendarStory : Story() {
+class LabeledCalendarFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -61,7 +61,7 @@ class LabeledCalendarStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = LabeledCalendarStory().apply {
+    infix fun of(fragmentLayout: Int) = LabeledCalendarFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

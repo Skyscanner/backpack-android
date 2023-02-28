@@ -44,7 +44,7 @@ fun DialogStory(modifier: Modifier = Modifier) =
     }
   }
 
-class DialogStory : Story() {
+class DialogFragment : Story() {
 
   override fun onCreateView(
     inflater: LayoutInflater,

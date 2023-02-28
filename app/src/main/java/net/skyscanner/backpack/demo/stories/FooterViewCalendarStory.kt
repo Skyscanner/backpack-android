@@ -89,7 +89,7 @@ private class FooterViewCalendarController(
     )
 }
 
-class FooterViewCalendarStory : Story() {
+class FooterViewCalendarFragment : Story() {
   private lateinit var controller: FooterViewCalendarController
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -103,7 +103,7 @@ class FooterViewCalendarStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = FooterViewCalendarStory().apply {
+    infix fun of(fragmentLayout: Int) = FooterViewCalendarFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

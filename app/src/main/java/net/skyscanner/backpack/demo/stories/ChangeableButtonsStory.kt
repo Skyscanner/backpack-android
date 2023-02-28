@@ -46,7 +46,7 @@ fun ChangeableButtonsStory(modifier: Modifier = Modifier) =
     }
   }
 
-class ChangeableButtonsStory : Story() {
+class ChangeableButtonsFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -65,7 +65,7 @@ class ChangeableButtonsStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = ChangeableButtonsStory().apply {
+    infix fun of(fragmentLayout: Int) = ChangeableButtonsFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

@@ -39,23 +39,23 @@ import net.skyscanner.backpack.map.getBpkMapAsync
 @MapMarkersComponent
 @ViewStory("Pointers")
 fun MapMarkerPointersStory(modifier: Modifier = Modifier) =
-  MapMarkerDemo(MapStory.Type.PointersOnly, modifier)
+  MapMarkerDemo(MapFragment.Type.PointersOnly, modifier)
 
 @Composable
 @MapMarkersComponent
 @ViewStory("Badges")
 fun MapMarkerBadgesStory(modifier: Modifier = Modifier) =
-  MapMarkerDemo(MapStory.Type.Badges, modifier)
+  MapMarkerDemo(MapFragment.Type.Badges, modifier)
 
 @Composable
 @MapMarkersComponent
 @ViewStory("With icons")
 fun MapMarkerWithIconsStory(modifier: Modifier = Modifier) =
-  MapMarkerDemo(MapStory.Type.BadgesWithIcons, modifier)
+  MapMarkerDemo(MapFragment.Type.BadgesWithIcons, modifier)
 
 @Composable
 fun MapMarkerDemo(
-  type: MapStory.Type,
+  type: MapFragment.Type,
   modifier: Modifier = Modifier,
 ) {
   val context = LocalContext.current
@@ -66,8 +66,7 @@ fun MapMarkerDemo(
   }
 }
 
-// todo: update for Compose version
-class MapStory : Story() {
+class MapFragment : Story() {
 
   enum class Type {
     PointersOnly,
@@ -88,7 +87,7 @@ class MapStory : Story() {
   companion object {
     private const val TYPE = "type"
 
-    infix fun of(type: Type) = MapStory().apply {
+    infix fun of(type: Type) = MapFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, R.layout.fragment_map)
       arguments?.putBoolean(SCROLLABLE, false)
@@ -97,26 +96,26 @@ class MapStory : Story() {
   }
 }
 
-private fun setupMapMarkers(context: Context, map: GoogleMap, type: MapStory.Type) {
+private fun setupMapMarkers(context: Context, map: GoogleMap, type: MapFragment.Type) {
   map.addBpkMarker(
     context = context,
     position = LatLng(45.0, 0.0),
     title = "Badge 1",
-    icon = if (type == MapStory.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-    pointerOnly = type == MapStory.Type.PointersOnly,
+    icon = if (type == MapFragment.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+    pointerOnly = type == MapFragment.Type.PointersOnly,
   )
   map.addBpkMarker(
     context = context,
     position = LatLng(0.0, 0.0),
     title = "Badge 2",
-    icon = if (type == MapStory.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-    pointerOnly = type == MapStory.Type.PointersOnly,
+    icon = if (type == MapFragment.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+    pointerOnly = type == MapFragment.Type.PointersOnly,
   )
   map.addBpkMarker(
     context = context,
     position = LatLng(-45.0, 0.0),
     title = "Badge 3",
-    icon = if (type == MapStory.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-    pointerOnly = type == MapStory.Type.PointersOnly,
+    icon = if (type == MapFragment.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+    pointerOnly = type == MapFragment.Type.PointersOnly,
   )
 }

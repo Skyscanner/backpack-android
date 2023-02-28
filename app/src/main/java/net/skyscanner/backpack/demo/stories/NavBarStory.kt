@@ -71,7 +71,7 @@ private fun NavBarDemo(
     }
   }
 
-class NavBarStory : Story() {
+class NavBarFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -96,7 +96,7 @@ class NavBarStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = NavBarStory().apply {
+    infix fun of(fragmentLayout: Int) = NavBarFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
       arguments?.putBoolean(SCROLLABLE, false)

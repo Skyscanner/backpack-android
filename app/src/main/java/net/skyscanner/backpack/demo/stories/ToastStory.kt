@@ -45,7 +45,7 @@ fun ToastStory(modifier: Modifier = Modifier) =
     }
   }
 
-class ToastStory : Story() {
+class ToastFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -64,7 +64,7 @@ class ToastStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = ToastStory().apply {
+    infix fun of(fragmentLayout: Int) = ToastFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

@@ -42,7 +42,7 @@ fun HorizontalNavStory(modifier: Modifier = Modifier) =
     init(findViewById(R.id.horizontal_nav_icons))
   }
 
-class HorizontalNavStory : Story() {
+class HorizontalNavFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -58,7 +58,7 @@ class HorizontalNavStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = HorizontalNavStory().apply {
+    infix fun of(fragmentLayout: Int) = HorizontalNavFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

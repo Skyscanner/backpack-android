@@ -46,7 +46,7 @@ fun InteractiveStarRatingStory(modifier: Modifier = Modifier) =
     }
   }
 
-class InteractiveStarRatingStory : Story() {
+class InteractiveStarRatingFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -66,7 +66,7 @@ class InteractiveStarRatingStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = InteractiveStarRatingStory().apply {
+    infix fun of(fragmentLayout: Int) = InteractiveStarRatingFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }
