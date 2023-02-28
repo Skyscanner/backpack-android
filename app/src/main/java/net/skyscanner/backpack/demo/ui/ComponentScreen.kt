@@ -113,7 +113,6 @@ fun ComponentScreen(
         items(storiesToDisplay) {
           ComponentItem(
             title = it.name,
-            showComposeBadge = false,
             onClick = { navigator.navigate(StoryScreenDestination(it.component.name, it.name, it.isCompose)) },
           )
         }

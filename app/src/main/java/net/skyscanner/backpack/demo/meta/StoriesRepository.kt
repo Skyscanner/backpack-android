@@ -38,7 +38,9 @@ interface StoriesRepository {
 
   fun storyOf(component: String, story: String, compose: Boolean): Story
 
-  fun isComposeSupportedFor(component: String): Boolean
+  fun isComposeOnly(component: String): Boolean
+
+  fun isViewOnly(component: String): Boolean
 
   @TestOnly
   fun testStories(): List<Story>
@@ -86,8 +88,11 @@ private object StoriesRepositoryImpl : StoriesRepository {
     storiesMap.getValue(component)
       .first { it.name == story && it.isCompose == compose }
 
-  override fun isComposeSupportedFor(component: String): Boolean =
-    storiesMap[component]?.any { it.isCompose } ?: false
+  override fun isComposeOnly(component: String): Boolean =
+    storiesMap.getValue(component).all { it.isCompose }
+
+  override fun isViewOnly(component: String): Boolean =
+    storiesMap.getValue(component).all { !it.isCompose }
 
   override fun testStories() = testStories
 }

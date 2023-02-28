@@ -88,7 +88,8 @@
   <string name="snackbar_icon_content_description">Close</string>
   <string name="snackbar_action">Action!</string>
 
-  <string name="story_badge_compose">Compose</string>
+  <string name="story_badge_compose">Compose-only</string>
+  <string name="story_badge_view">View-only</string>
 
   <string name="text_subheading">Subheading</string>
   <string name="text_body_default">Body Default</string>

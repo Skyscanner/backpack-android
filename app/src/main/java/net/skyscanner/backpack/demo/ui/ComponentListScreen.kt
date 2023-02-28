@@ -32,6 +32,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
@@ -84,7 +85,6 @@ fun ComponentListScreen(
       items(repository.tokenComponents()) { component ->
         ComponentItem(
           title = component.name,
-          showComposeBadge = repository.isComposeSupportedFor(component.name),
           onClick = { navigator.navigate(ComponentScreenDestination(component.name)) },
         )
       }
@@ -93,9 +93,20 @@ fun ComponentListScreen(
         ComponentsTitle(title = stringResource(R.string.components_title))
       }
       items(repository.uiComponents()) { component ->
+        val composeOnly = repository.isComposeOnly(component.name)
+        val viewOnly = repository.isViewOnly(component.name)
         ComponentItem(
           title = component.name,
-          showComposeBadge = repository.isComposeSupportedFor(component.name),
+          badgeType = when {
+            composeOnly -> BpkBadgeType.Success
+            viewOnly -> BpkBadgeType.Normal
+            else -> null
+          },
+          badgeText = when {
+            composeOnly -> stringResource(R.string.story_badge_compose)
+            viewOnly -> stringResource(R.string.story_badge_view)
+            else -> null
+          },
           onClick = { navigator.navigate(ComponentScreenDestination(component.name)) },
         )
       }

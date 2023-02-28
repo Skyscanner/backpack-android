@@ -24,13 +24,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import net.skyscanner.backpack.compose.badge.BpkBadge
 import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkDimension
-import net.skyscanner.backpack.demo.R
 
 @Composable
 fun ComponentsTitle(title: String, modifier: Modifier = Modifier) {
@@ -51,7 +49,8 @@ fun ComponentsTitle(title: String, modifier: Modifier = Modifier) {
 fun ComponentItem(
   title: String,
   modifier: Modifier = Modifier,
-  showComposeBadge: Boolean = false,
+  badgeText: String? = null,
+  badgeType: BpkBadgeType? = null,
   onClick: () -> Unit,
 ) {
   ListItem(
@@ -59,10 +58,10 @@ fun ComponentItem(
     modifier = modifier
       .clickable { onClick() },
   ) {
-    if (showComposeBadge) {
+    if (badgeType != null) {
       BpkBadge(
-        text = stringResource(R.string.story_badge_compose),
-        type = BpkBadgeType.Success,
+        text = badgeText ?: "",
+        type = badgeType,
         modifier = Modifier.padding(start = BpkDimension.Spacing.Base),
       )
     }
