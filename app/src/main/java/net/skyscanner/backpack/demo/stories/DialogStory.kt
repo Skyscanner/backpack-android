@@ -18,12 +18,14 @@
 
 package net.skyscanner.backpack.demo.stories
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.forEach
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.demo.R
@@ -35,14 +37,16 @@ import net.skyscanner.backpack.dialog.BpkDialog
 @Composable
 @DialogComponent
 @ViewStory
-fun DialogStory(modifier: Modifier = Modifier) =
+fun DialogStory(modifier: Modifier = Modifier) {
+  val activity = LocalContext.current as Activity
   AndroidLayout(R.layout.fragment_dialog, modifier) {
     findViewById<ViewGroup>(R.id.dialog_root).forEach { buttonView ->
       buttonView.setOnClickListener {
-        it.handleOnClick(buttonView)
+        activity.handleOnClick(buttonView)
       }
     }
   }
+}
 
 class DialogFragment : Story() {
 
@@ -56,13 +60,13 @@ class DialogFragment : Story() {
     super.onViewCreated(view, savedInstanceState)
     view.findViewById<ViewGroup>(R.id.dialog_root).forEach { buttonView ->
       buttonView.setOnClickListener {
-        it.handleOnClick(buttonView)
+        requireActivity().handleOnClick(buttonView)
       }
     }
   }
 }
 
-private fun View.handleOnClick(view: View) {
+private fun Activity.handleOnClick(view: View) {
   when (view.id) {
     R.id.dialog_success_one_button -> successOneButtonDialogExample()
     R.id.dialog_success_two_buttons -> successTwoButtonsDialogExample()
@@ -75,8 +79,8 @@ private fun View.handleOnClick(view: View) {
   }
 }
 
-private fun View.successOneButtonDialogExample() {
-  BpkDialog(context, BpkDialog.Type.Success).apply {
+private fun Activity.successOneButtonDialogExample() {
+  BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
     icon = BpkDialog.Icon(R.drawable.bpk_tick)
@@ -88,8 +92,8 @@ private fun View.successOneButtonDialogExample() {
   }.show()
 }
 
-private fun View.successTwoButtonsDialogExample() {
-  BpkDialog(context, BpkDialog.Type.Success).apply {
+private fun Activity.successTwoButtonsDialogExample() {
+  BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
     icon = BpkDialog.Icon(R.drawable.bpk_tick)
@@ -106,8 +110,8 @@ private fun View.successTwoButtonsDialogExample() {
   }.show()
 }
 
-private fun View.successThreeButtonsDialogExample() {
-  BpkDialog(context, BpkDialog.Type.Success).apply {
+private fun Activity.successThreeButtonsDialogExample() {
+  BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
     icon = BpkDialog.Icon(R.drawable.bpk_tick)
@@ -129,8 +133,8 @@ private fun View.successThreeButtonsDialogExample() {
   }.show()
 }
 
-private fun View.warningDialogExample() {
-  BpkDialog(context, BpkDialog.Type.Warning).apply {
+private fun Activity.warningDialogExample() {
+  BpkDialog(this, BpkDialog.Type.Warning).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
     icon = BpkDialog.Icon(R.drawable.bpk_alert__add)
@@ -152,8 +156,8 @@ private fun View.warningDialogExample() {
   }.show()
 }
 
-private fun View.destructiveDialogExample() {
-  BpkDialog(context, BpkDialog.Type.Destructive).apply {
+private fun Activity.destructiveDialogExample() {
+  BpkDialog(this, BpkDialog.Type.Destructive).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
     icon = BpkDialog.Icon(R.drawable.bpk_trash)
@@ -170,8 +174,8 @@ private fun View.destructiveDialogExample() {
   }.show()
 }
 
-private fun View.longDialogExample() {
-  BpkDialog(context, BpkDialog.Type.Success).apply {
+private fun Activity.longDialogExample() {
+  BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.stub).repeat(3)
     addActionButton(
@@ -187,8 +191,8 @@ private fun View.longDialogExample() {
   }.show()
 }
 
-private fun View.noIconDialogExample() {
-  BpkDialog(context, BpkDialog.Type.Success).apply {
+private fun Activity.noIconDialogExample() {
+  BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
     addActionButton(
@@ -204,8 +208,8 @@ private fun View.noIconDialogExample() {
   }.show()
 }
 
-private fun View.flareDialogExample() {
-  BpkDialog(context, BpkDialog.Type.Flare).apply {
+private fun Activity.flareDialogExample() {
+  BpkDialog(this, BpkDialog.Type.Flare).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
     Picasso.get().load("file:///android_asset/dialog_sample.jpg").noFade().into(image)

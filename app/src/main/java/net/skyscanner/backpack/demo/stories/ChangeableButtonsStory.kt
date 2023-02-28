@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
@@ -33,7 +34,7 @@ import kotlin.math.max
 @ButtonComponent
 @ViewStory("Changeable")
 fun ChangeableButtonsStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_buttons_changeable, modifier) {
+  AndroidLayout(R.layout.fragment_buttons_changeable, modifier.fillMaxSize()) {
 
     findViewById<TextView>(R.id.button_increase).setOnClickListener {
       it as TextView

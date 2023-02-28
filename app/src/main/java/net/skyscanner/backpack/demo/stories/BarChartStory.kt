@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.barchart.BpkBarChart
@@ -33,7 +34,7 @@ import java.util.Random
 @BarChartComponent
 @ViewStory
 fun BarChartStory(modifier: Modifier = Modifier) =
-  AndroidLayout<BpkBarChart>(R.layout.fragment_bar_chart, R.id.bar_chart, modifier) {
+  AndroidLayout<BpkBarChart>(R.layout.fragment_bar_chart, R.id.bar_chart, modifier.fillMaxSize()) {
     model = BpkBarChart.Model(
       groups = listOf(
         createMonth(0),

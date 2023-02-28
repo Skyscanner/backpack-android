@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
@@ -33,7 +34,7 @@ import net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
 @HorizontalNavComponent
 @ViewStory
 fun HorizontalNavStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_horizontal_nav_default, modifier) {
+  AndroidLayout(R.layout.fragment_horizontal_nav_default, modifier.fillMaxSize()) {
     init(findViewById(R.id.horizontal_nav))
     init(findViewById(R.id.horizontal_nav_scrollable))
     init(findViewById(R.id.horizontal_nav_small))

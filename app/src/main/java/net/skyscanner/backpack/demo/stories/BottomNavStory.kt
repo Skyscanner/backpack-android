@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.bottomnav.BpkBottomNav
@@ -33,7 +34,7 @@ import net.skyscanner.backpack.toast.BpkToast
 @BottomNavComponent
 @ViewStory
 fun BottomNavStory(modifier: Modifier = Modifier) =
-  AndroidLayout<BpkBottomNav>(R.layout.fragment_bottom_nav, R.id.bottom_nav, modifier) {
+  AndroidLayout<BpkBottomNav>(R.layout.fragment_bottom_nav, R.id.bottom_nav, modifier.fillMaxSize()) {
     addItem(1, R.string.bottom_nav_home, R.drawable.bpk_hotels)
     addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
     addItem(3, R.string.bottom_nav_trips, R.drawable.bpk_trips)

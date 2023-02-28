@@ -24,6 +24,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.calendar.BpkCalendar
@@ -37,10 +38,10 @@ import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 
 @Composable
 @CalendarComponent
-@ViewStory("Colored")
+@ViewStory("Disabled")
 fun DisabledCalendarStory(modifier: Modifier = Modifier) {
   val automationMode = LocalAutomationMode.current
-  AndroidLayout(R.layout.fragment_calendar_disabled, modifier) {
+  AndroidLayout(R.layout.fragment_calendar_disabled, modifier.fillMaxSize()) {
     var controller = ExampleBpkCalendarController(context, disableDates = true)
     val bpkCalendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
     val shiftColorsButton = findViewById<View>(R.id.shiftColorsButton)

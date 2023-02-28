@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
@@ -34,7 +35,7 @@ import java.util.Currency
 @SliderComponent
 @ViewStory
 fun SliderStory(modifier: Modifier = Modifier) =
-  AndroidLayout<BpkSlider>(R.layout.fragment_slider, R.id.formatted_slider, modifier) {
+  AndroidLayout<BpkSlider>(R.layout.fragment_slider, R.id.formatted_slider, modifier.fillMaxSize()) {
     setLabelFormatter { value: Float ->
       val format = NumberFormat.getCurrencyInstance()
       format.maximumFractionDigits = 0

@@ -20,6 +20,7 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -92,7 +93,7 @@ private fun Calendar2Demo(
   val scope = rememberCoroutineScope()
   val automationMode = LocalAutomationMode.current
 
-  AndroidLayout<BpkCalendar>(R.layout.fragment_calendar_2, R.id.calendar2, modifier) {
+  AndroidLayout<BpkCalendar>(R.layout.fragment_calendar_2, R.id.calendar2, modifier.fillMaxSize()) {
     state
       .filter { it.selection !is CalendarSelection.None }
       .onEach {

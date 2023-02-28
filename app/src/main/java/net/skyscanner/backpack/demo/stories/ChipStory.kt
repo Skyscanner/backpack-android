@@ -22,6 +22,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.chip.BpkChip
@@ -55,7 +56,7 @@ private fun ChipDemo(
 ) =
   AndroidLayout(
     layoutId = layoutId,
-    modifier = modifier,
+    modifier = modifier.fillMaxSize(),
   ) {
     forEachChip(this as ViewGroup) { chip ->
       chip.setOnClickListener {

@@ -34,6 +34,8 @@ import net.skyscanner.backpack.demo.components.MapMarkersComponent
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.map.addBpkMarker
 import net.skyscanner.backpack.map.getBpkMapAsync
+import net.skyscanner.backpack.map.setupBpkInfoWindowAdapter
+import net.skyscanner.backpack.util.InternalBackpackApi
 
 @Composable
 @MapMarkersComponent
@@ -53,6 +55,7 @@ fun MapMarkerBadgesStory(modifier: Modifier = Modifier) =
 fun MapMarkerWithIconsStory(modifier: Modifier = Modifier) =
   MapMarkerDemo(MapFragment.Type.BadgesWithIcons, modifier)
 
+@OptIn(InternalBackpackApi::class)
 @Composable
 fun MapMarkerDemo(
   type: MapFragment.Type,
@@ -61,6 +64,7 @@ fun MapMarkerDemo(
   val context = LocalContext.current
   GoogleMap(modifier) {
     MapEffect(context, type) {
+      it.setupBpkInfoWindowAdapter(context)
       setupMapMarkers(context, it, type)
     }
   }

@@ -25,13 +25,14 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import net.skyscanner.backpack.map.internal.createBpkMarkerView
+import net.skyscanner.backpack.util.InternalBackpackApi
 
 /**
  * Receives the map in async mode and adds some Backpack customisations to it.
  */
 fun MapView.getBpkMapAsync(onReady: (GoogleMap) -> Unit) {
   getMapAsync {
-    it.setInfoWindowAdapter(BpkWindowInfoAdapter(context))
+    it.setupBpkInfoWindowAdapter(context)
     onReady(it)
   }
 }
@@ -41,10 +42,15 @@ fun MapView.getBpkMapAsync(onReady: (GoogleMap) -> Unit) {
  */
 fun SupportMapFragment.getBpkMapAsync(onReady: (GoogleMap) -> Unit) {
   getMapAsync {
-    it.setInfoWindowAdapter(BpkWindowInfoAdapter(requireContext()))
+    it.setupBpkInfoWindowAdapter(requireContext())
     onReady(it)
   }
 }
+
+// this will be removed once there's a version for Compose – for now it only exists for story demo purposes
+@InternalBackpackApi
+fun GoogleMap.setupBpkInfoWindowAdapter(context: Context) =
+  setInfoWindowAdapter(BpkWindowInfoAdapter(context))
 
 private class BpkWindowInfoAdapter(
   private val context: Context,

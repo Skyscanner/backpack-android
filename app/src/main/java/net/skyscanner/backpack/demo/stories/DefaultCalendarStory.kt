@@ -24,6 +24,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.calendar.BpkCalendar
@@ -40,7 +41,7 @@ import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 @ViewStory("Default")
 fun DefaultCalendarStory(modifier: Modifier = Modifier) {
   val automationMode = LocalAutomationMode.current
-  AndroidLayout(R.layout.fragment_calendar_default, modifier) {
+  AndroidLayout(R.layout.fragment_calendar_default, modifier.fillMaxSize()) {
     val calendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
     initSelectionTypeSwitcher(this, automationMode, calendar::setController)
   }
