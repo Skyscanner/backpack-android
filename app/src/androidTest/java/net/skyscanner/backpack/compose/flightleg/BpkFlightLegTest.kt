@@ -18,76 +18,20 @@
 
 package net.skyscanner.backpack.compose.flightleg
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.compose.icon.BpkIcon
-import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.compose.tokens.Aircraft
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.compose.BasicFlightLegSample
+import net.skyscanner.backpack.demo.compose.CompleteFlightLegSample
 import org.junit.Test
 
 class BpkFlightLegTest : BpkSnapshotTest() {
 
   @Test
   fun simpleLegTest() = snap {
-    BpkFlightLeg(
-      modifier = Modifier.background(BpkTheme.colors.canvas),
-      departureArrivalTime = "19:50 - 22:45",
-      description = AnnotatedString("LHR-SIN,SwissAir"),
-      stopsInfo = AnnotatedString("Direct"),
-      duration = "7h 55m",
-      carrierLogo = {
-        Box(
-          modifier = Modifier.padding(top = BpkSpacing.Sm),
-        ) {
-          BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
-        }
-      },
-    )
+    BasicFlightLegSample()
   }
 
   @Test
   fun completeLegTest() = snap {
-    BpkFlightLeg(
-      departureArrivalTime = "19:50 - 22:45",
-      description = buildAnnotatedString {
-        withStyle(
-          SpanStyle(
-            background = BpkTheme.colors.statusDangerFill,
-            color = BpkTheme.colors.textOnLight,
-          ),
-        ) {
-          append("LHR")
-        }
-        append("-SIN, SwissAir")
-      },
-      stopsInfo = buildAnnotatedString {
-        withStyle(
-          SpanStyle(
-            color = BpkTheme.colors.textError,
-          ),
-        ) {
-          append("2 stops")
-        }
-      },
-      duration = "7h 55m",
-      nextDayArrival = "+1",
-      operatedBy = "Operated by Ryanair",
-      warning = "Change airports in London",
-      carrierLogo = {
-        Box(
-          modifier = Modifier.padding(top = BpkSpacing.Sm),
-        ) {
-          BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
-        }
-      },
-    )
+    CompleteFlightLegSample()
   }
 }

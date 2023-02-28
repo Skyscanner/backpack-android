@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.compose
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,12 +61,11 @@ fun FlightLegStory(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 fun BasicFlightLegSample() {
   BpkFlightLeg(
-    modifier = Modifier.background(BpkTheme.colors.canvas),
     departureArrivalTime = "19:50 - 22:45",
     description = AnnotatedString("LHR-SIN,SwissAir"),
     stopsInfo = AnnotatedString("Direct"),
     duration = "7h 55m",
-    carrierLogo = {
+    carrierLogoContent = {
       Box(
         modifier = Modifier.padding(top = BpkSpacing.Sm),
       ) {
@@ -106,7 +104,7 @@ fun CompleteFlightLegSample() {
     nextDayArrival = "+1",
     operatedBy = "Operated by Ryanair",
     warning = "Change airports in London",
-    carrierLogo = {
+    carrierLogoContent = {
       Box(
         modifier = Modifier.padding(top = BpkSpacing.Sm),
       ) {
