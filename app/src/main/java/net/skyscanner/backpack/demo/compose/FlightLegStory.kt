@@ -64,6 +64,7 @@ fun BasicFlightLegSample() {
     description = AnnotatedString("LHR-SIN,SwissAir"),
     stopsInfo = "Direct",
     duration = "7h 55m",
+    contentDescription = null,
     carrierLogoContent = {
       BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
     },
@@ -92,6 +93,7 @@ fun CompleteFlightLegSample() {
     nextDayArrival = "+1",
     operatedBy = "Operated by Ryanair",
     warning = "Change airports in London",
+    contentDescription = null,
     carrierLogoContent = {
       BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
     },

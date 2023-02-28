@@ -49,12 +49,12 @@ fun BpkFlightLeg(
   description: AnnotatedString,
   stopsInfo: String,
   duration: String,
+  contentDescription: String?,
   modifier: Modifier = Modifier,
   nextDayArrival: String? = null,
   highlightStopsInfo: Boolean = false,
   operatedBy: String? = null,
   warning: String? = null,
-  contentDescription: String? = null,
   carrierLogoContent: @Composable (BoxScope.() -> Unit)? = null,
 ) {
   Box(
@@ -88,14 +88,15 @@ fun BpkFlightLeg(
               withStyle(
                 SpanStyle(
                   color = BpkTheme.colors.textPrimary,
-                  fontSize = BpkTheme.typography.label3.fontSize,
-                  baselineShift = BaselineShift.Superscript,
+                  fontSize = BpkTheme.typography.caption.fontSize,
+                  baselineShift = BaselineShift(0.2f),
                 ),
               ) {
                 append(it)
               }
             }
           },
+          style = BpkTheme.typography.heading5,
           color = BpkTheme.colors.textPrimary,
         )
         BpkText(
@@ -113,7 +114,7 @@ fun BpkFlightLeg(
         warning?.let {
           BpkText(
             text = it,
-            style = BpkTheme.typography.caption,
+            style = BpkTheme.typography.label3,
             color = BpkTheme.colors.textError,
           )
         }

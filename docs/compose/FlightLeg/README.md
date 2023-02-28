@@ -42,6 +42,7 @@ BpkFlightLeg(
   nextDayArrival = "+1",
   operatedBy = "Operated by Ryanair",
   warning = "Change airports in London",
+  contentDescription = null,
   carrierLogoContent = {
     BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
   },
