@@ -548,7 +548,7 @@ object ComponentRegistry {
   )
 
   val TOKENS = mapOf(
-    "All Icons" composeStory { IconsStoryCompose() },
+    "All icons" composeStory { IconsStoryCompose() },
     "Color" composeStory { ColorsComposeStory() },
     "Elevation" composeStory { ElevationComposeStory() },
     "Radii" composeStory { RadiiComposeStory() },

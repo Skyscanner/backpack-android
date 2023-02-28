@@ -57,7 +57,7 @@ fun CheckboxStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun DefaultCheckboxSample(modifier: Modifier = Modifier) {
+internal fun DefaultCheckboxSample(modifier: Modifier = Modifier) {
   var checked by remember { mutableStateOf(true) }
 
   BpkCheckbox(
@@ -69,7 +69,7 @@ private fun DefaultCheckboxSample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun IntermediateCheckboxSample(modifier: Modifier = Modifier) {
+internal fun IntermediateCheckboxSample(modifier: Modifier = Modifier) {
   BpkCheckbox(
     modifier = modifier,
     text = stringResource(id = R.string.toggle_indeterminate),
@@ -79,7 +79,7 @@ private fun IntermediateCheckboxSample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun UncheckedCheckboxSample(modifier: Modifier = Modifier) {
+internal fun UncheckedCheckboxSample(modifier: Modifier = Modifier) {
   BpkCheckbox(
     modifier = modifier,
     text = stringResource(id = R.string.toggle_default_unchecked),
@@ -89,7 +89,7 @@ private fun UncheckedCheckboxSample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun CheckedCheckboxSample(modifier: Modifier = Modifier) {
+internal fun CheckedCheckboxSample(modifier: Modifier = Modifier) {
   BpkCheckbox(
     modifier = modifier,
     text = stringResource(id = R.string.toggle_default_checked),
@@ -99,7 +99,7 @@ private fun CheckedCheckboxSample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun DisabledUncheckedCheckboxSample(modifier: Modifier = Modifier) {
+internal fun DisabledUncheckedCheckboxSample(modifier: Modifier = Modifier) {
   BpkCheckbox(
     modifier = modifier,
     text = stringResource(id = R.string.toggle_disabled_unchecked),
@@ -110,7 +110,7 @@ private fun DisabledUncheckedCheckboxSample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun DisabledCheckedCheckboxSample(modifier: Modifier = Modifier) {
+internal fun DisabledCheckedCheckboxSample(modifier: Modifier = Modifier) {
   BpkCheckbox(
     modifier = modifier,
     text = stringResource(id = R.string.toggle_disabled_checked),
@@ -121,7 +121,7 @@ private fun DisabledCheckedCheckboxSample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun CustomContentCheckboxSample(modifier: Modifier = Modifier) {
+internal fun CustomContentCheckboxSample(modifier: Modifier = Modifier) {
   BpkCheckbox(
     modifier = modifier,
     checked = true,

@@ -69,7 +69,11 @@ open class GenerateScreenshots1(
     activityRule.launchActivity(intent)
     composeTestRule.setContent {
       DemoScaffold(automationMode = true) {
-        StoryScreen(story = story, onBack = {})
+        StoryScreen(
+          component = story.component.name,
+          story = story.name,
+          isCompose = story.isCompose,
+        )
       }
     }
     takeScreenshot(suffix)

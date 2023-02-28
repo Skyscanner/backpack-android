@@ -70,7 +70,7 @@ fun CardStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun SmallCornersCardExample(modifier: Modifier = Modifier) {
+internal fun SmallCornersCardExample(modifier: Modifier = Modifier) {
   BpkCard(
     modifier = modifier,
     onClick = {},
@@ -81,7 +81,7 @@ private fun SmallCornersCardExample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun LargeCornersCardExample(modifier: Modifier = Modifier) {
+internal fun LargeCornersCardExample(modifier: Modifier = Modifier) {
   BpkCard(
     modifier = modifier,
     onClick = {},
@@ -93,7 +93,7 @@ private fun LargeCornersCardExample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun NoPaddingCardExample(modifier: Modifier = Modifier) {
+internal fun NoPaddingCardExample(modifier: Modifier = Modifier) {
   BpkCard(
     modifier = modifier,
     onClick = {},
@@ -105,14 +105,14 @@ private fun NoPaddingCardExample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun NonClickableCardExample(modifier: Modifier = Modifier) {
+internal fun NonClickableCardExample(modifier: Modifier = Modifier) {
   BpkCard(modifier, contentAlignment = Alignment.Center) {
     BpkText("Non clickable")
   }
 }
 
 @Composable
-private fun FocusableCardExample(modifier: Modifier = Modifier) {
+internal fun FocusableCardExample(modifier: Modifier = Modifier) {
   var elevation by remember { mutableStateOf(BpkCardElevation.Focus) }
 
   BpkCard(
@@ -131,7 +131,7 @@ private fun FocusableCardExample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun NoElevationCardExample(modifier: Modifier = Modifier) {
+internal fun NoElevationCardExample(modifier: Modifier = Modifier) {
   BpkCard(
     modifier = modifier,
     onClick = {},

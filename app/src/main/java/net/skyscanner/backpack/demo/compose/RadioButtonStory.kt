@@ -56,7 +56,7 @@ fun RadioButtonStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun DefaultUncheckedRadioButtonExample(
+internal fun DefaultUncheckedRadioButtonExample(
   modifier: Modifier = Modifier,
   selected: Boolean = false,
   onClick: (() -> Unit)? = null,
@@ -70,7 +70,7 @@ private fun DefaultUncheckedRadioButtonExample(
 }
 
 @Composable
-private fun DefaultCheckedRadioButtonExample(
+internal fun DefaultCheckedRadioButtonExample(
   modifier: Modifier = Modifier,
   selected: Boolean = true,
   onClick: (() -> Unit)? = null,
@@ -84,7 +84,7 @@ private fun DefaultCheckedRadioButtonExample(
 }
 
 @Composable
-private fun DisabledUnCheckedRadioButtonExample(modifier: Modifier = Modifier) {
+internal fun DisabledUnCheckedRadioButtonExample(modifier: Modifier = Modifier) {
   BpkRadioButton(
     modifier = modifier,
     text = stringResource(id = R.string.toggle_disabled_unchecked),
@@ -95,7 +95,7 @@ private fun DisabledUnCheckedRadioButtonExample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun DisabledCheckedRadioButtonExample(modifier: Modifier = Modifier) {
+internal fun DisabledCheckedRadioButtonExample(modifier: Modifier = Modifier) {
   BpkRadioButton(
     modifier = modifier,
     text = stringResource(id = R.string.toggle_disabled_checked),
@@ -106,7 +106,7 @@ private fun DisabledCheckedRadioButtonExample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun CustomContentRadioButtonExample(modifier: Modifier = Modifier) {
+internal fun CustomContentRadioButtonExample(modifier: Modifier = Modifier) {
   var selected by remember { mutableStateOf(false) }
   BpkRadioButton(
     modifier = modifier,
