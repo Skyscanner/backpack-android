@@ -20,9 +20,56 @@ package net.skyscanner.backpack.demo.stories
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.LayoutRes
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.NavBarComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.navbar.BpkNavBar
 import net.skyscanner.backpack.toast.BpkToast
+
+@Composable
+@NavBarComponent
+@ViewStory("Default")
+fun NavBarStoryDefault(modifier: Modifier = Modifier) =
+  NavBarDemo(R.layout.fragment_nav_bar, modifier)
+
+@Composable
+@NavBarComponent
+@ViewStory("With Icon")
+fun NavBarStoryWithIcon(modifier: Modifier = Modifier) =
+  NavBarDemo(R.layout.fragment_nav_bar_with_icon, modifier)
+
+@Composable
+@NavBarComponent
+@ViewStory("With Menu")
+fun NavBarStoryWithMenu(modifier: Modifier = Modifier) =
+  NavBarDemo(R.layout.fragment_nav_bar_with_menu, modifier)
+
+@Composable
+private fun NavBarDemo(
+  @LayoutRes layoutId: Int,
+  modifier: Modifier = Modifier,
+) =
+  AndroidLayout<BpkNavBar>(layoutId, R.id.appBar, modifier) {
+    title = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+      "عنوان الصفحة"
+    } else {
+      "Nav Bar"
+    }
+    navAction = {
+      BpkToast.makeText(context, "Nav is clicked!", BpkToast.LENGTH_SHORT).show()
+    }
+    menuAction = {
+      BpkToast.makeText(
+        context,
+        "${it.itemId.let(resources::getResourceEntryName)} is clicked!",
+        BpkToast.LENGTH_SHORT,
+      ).show()
+    }
+  }
 
 class NavBarStory : Story() {
 
