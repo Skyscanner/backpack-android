@@ -110,6 +110,7 @@ dependencies {
   implementation rootProject.ext.composeActivity
   implementation rootProject.ext.kotlinReflection
   implementation rootProject.ext.stetho
+  implementation rootProject.ext.googleMapsCompose
   testImplementation rootProject.ext.junit
   debugImplementation rootProject.ext.composeTestManifest
   androidTestImplementation rootProject.ext.composeFoundation

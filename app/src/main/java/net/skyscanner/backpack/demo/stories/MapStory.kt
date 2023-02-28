@@ -18,13 +18,53 @@
 
 package net.skyscanner.backpack.demo.stories
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapEffect
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.MapMarkersComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.map.addBpkMarker
 import net.skyscanner.backpack.map.getBpkMapAsync
+
+@Composable
+@MapMarkersComponent
+@ViewStory("Pointers")
+fun MapMarkerPointersStory(modifier: Modifier = Modifier) =
+  MapMarkerDemo(MapStory.Type.PointersOnly, modifier)
+
+@Composable
+@MapMarkersComponent
+@ViewStory("Badges")
+fun MapMarkerBadgesStory(modifier: Modifier = Modifier) =
+  MapMarkerDemo(MapStory.Type.Badges, modifier)
+
+@Composable
+@MapMarkersComponent
+@ViewStory("With icons")
+fun MapMarkerWithIconsStory(modifier: Modifier = Modifier) =
+  MapMarkerDemo(MapStory.Type.BadgesWithIcons, modifier)
+
+@Composable
+fun MapMarkerDemo(
+  type: MapStory.Type,
+  modifier: Modifier = Modifier,
+) {
+  val context = LocalContext.current
+  GoogleMap(modifier) {
+    MapEffect(context, type) {
+      setupMapMarkers(context, it, type)
+    }
+  }
+}
 
 // todo: update for Compose version
 class MapStory : Story() {
@@ -41,27 +81,7 @@ class MapStory : Story() {
     val context = requireContext()
     val type = arguments?.getSerializable(TYPE) as Type
     mapFragment.getBpkMapAsync {
-      it.addBpkMarker(
-        context = context,
-        position = LatLng(45.0, 0.0),
-        title = "Badge 1",
-        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-        pointerOnly = type == Type.PointersOnly,
-      )
-      it.addBpkMarker(
-        context = context,
-        position = LatLng(0.0, 0.0),
-        title = "Badge 2",
-        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-        pointerOnly = type == Type.PointersOnly,
-      )
-      it.addBpkMarker(
-        context = context,
-        position = LatLng(-45.0, 0.0),
-        title = "Badge 3",
-        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-        pointerOnly = type == Type.PointersOnly,
-      )
+      setupMapMarkers(context, it, type)
     }
   }
 
@@ -75,4 +95,28 @@ class MapStory : Story() {
       arguments?.putSerializable(TYPE, type)
     }
   }
+}
+
+private fun setupMapMarkers(context: Context, map: GoogleMap, type: MapStory.Type) {
+  map.addBpkMarker(
+    context = context,
+    position = LatLng(45.0, 0.0),
+    title = "Badge 1",
+    icon = if (type == MapStory.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+    pointerOnly = type == MapStory.Type.PointersOnly,
+  )
+  map.addBpkMarker(
+    context = context,
+    position = LatLng(0.0, 0.0),
+    title = "Badge 2",
+    icon = if (type == MapStory.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+    pointerOnly = type == MapStory.Type.PointersOnly,
+  )
+  map.addBpkMarker(
+    context = context,
+    position = LatLng(-45.0, 0.0),
+    title = "Badge 3",
+    icon = if (type == MapStory.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+    pointerOnly = type == MapStory.Type.PointersOnly,
+  )
 }

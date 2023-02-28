@@ -98,6 +98,7 @@ ext {
   androidMaterial = "com.google.android.material:material:1.8.0"
   cardView = "androidx.cardview:cardview:1.0.0"
   googleMaps = "com.google.android.gms:play-services-maps:18.1.0"
+  googleMapsCompose = "com.google.maps.android:maps-compose:2.10.0"
   constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
   swiperefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
   picasso = "com.squareup.picasso:picasso:2.71828"
