@@ -66,9 +66,19 @@ fun ComponentListScreen(
     )
     LazyColumn {
       item {
-        ComponentsTitle(title = stringResource(R.string.components_title))
+        ComponentsTitle(title = stringResource(R.string.tokens_title))
+      }
+      items(repository.tokenComponents()) { component ->
+        ComponentItem(
+          title = component.name,
+          showComposeBadge = repository.isComposeSupportedFor(component),
+          onClick = { onClick(component) },
+        )
       }
 
+      item {
+        ComponentsTitle(title = stringResource(R.string.components_title))
+      }
       items(repository.allComponents()) { component ->
         ComponentItem(
           title = component.name,

@@ -30,6 +30,8 @@ interface StoriesRepository {
 
   fun allComponents(): List<Component>
 
+  fun tokenComponents(): List<Component>
+
   fun screenshotStories(): List<Story>
 
   fun storiesOf(component: Component, compose: Boolean): List<Story>
@@ -56,9 +58,11 @@ private object StoriesRepositoryImpl : StoriesRepository {
     .filter { (_, stories) -> stories.isNotEmpty() }
     .toSortedMap(compareBy { it.name })
 
-  private val components = map.keys.toList()
+  private val allComponents = map.keys.toList()
 
-  override fun allComponents() = components
+  override fun allComponents() = allComponents.filter { !it.isToken }
+
+  override fun tokenComponents() = allComponents.filter { it.isToken }
 
   override fun screenshotStories() = allStories.filter { it.isScreenshot }
 
