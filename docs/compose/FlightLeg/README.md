@@ -36,20 +36,13 @@ BpkFlightLeg(
     }
     append("-SIN, SwissAir")
   },
-  stopsInfo = buildAnnotatedString {
-    withStyle(
-      SpanStyle(
-        color = BpkTheme.colors.textError,
-      ),
-    ) {
-      append("2 stops")
-    }
-  },
+  stopsInfo = "2 Stops",
+  highlightStopsInfo = true,
   duration = "7h 55m",
   nextDayArrival = "+1",
   operatedBy = "Operated by Ryanair",
   warning = "Change airports in London",
-  carrierLogo = {
+  carrierLogoContent = {
     Box(
       modifier = Modifier.padding(top = BpkSpacing.Sm),
     ) {

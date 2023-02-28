@@ -46,10 +46,11 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 fun BpkFlightLeg(
   departureArrivalTime: String,
   description: AnnotatedString,
-  stopsInfo: AnnotatedString,
+  stopsInfo: String,
   duration: String,
   modifier: Modifier = Modifier,
   nextDayArrival: String? = null,
+  highlightStopsInfo: Boolean = false,
   operatedBy: String? = null,
   warning: String? = null,
   contentDescription: String? = null,
@@ -129,7 +130,7 @@ fun BpkFlightLeg(
         BpkText(
           text = stopsInfo,
           style = BpkTheme.typography.label3,
-          color = BpkTheme.colors.textPrimary,
+          color = if (highlightStopsInfo) BpkTheme.colors.textError else BpkTheme.colors.textPrimary,
         )
         BpkText(
           text = duration,
