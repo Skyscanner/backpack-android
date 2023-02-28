@@ -12,7 +12,9 @@
 
 ## Installation
 
-Backpack Compose is available through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
+Backpack Compose is available
+through [Maven Central](https://search.maven.org/artifact/net.skyscanner.backpack/backpack-compose). Check the
+main [Readme](https://github.com/skyscanner/backpack-android#installation) for a complete installation guide.
 
 ## Usage
 
@@ -22,6 +24,37 @@ Example of a FlightLeg:
 import net.skyscanner.backpack.compose.flightleg.BpkFlightLeg
 
 BpkFlightLeg(
-  // TODO
+  departureArrivalTime = "19:50 - 22:45",
+  description = buildAnnotatedString {
+    withStyle(
+      SpanStyle(
+        background = BpkTheme.colors.statusDangerFill,
+        color = BpkTheme.colors.textOnLight,
+      ),
+    ) {
+      append("LHR")
+    }
+    append("-SIN, SwissAir")
+  },
+  stopsInfo = buildAnnotatedString {
+    withStyle(
+      SpanStyle(
+        color = BpkTheme.colors.textError,
+      ),
+    ) {
+      append("2 stops")
+    }
+  },
+  duration = "7h 55m",
+  nextDayArrival = "+1",
+  operatedBy = "Operated by Ryanair",
+  warning = "Change airports in London",
+  carrierLogo = {
+    Box(
+      modifier = Modifier.padding(top = BpkSpacing.Sm),
+    ) {
+      BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
+    }
+  },
 )
 ```
