@@ -94,14 +94,6 @@ android {
     exclude "META-INF/AL2.0"
     exclude "META-INF/LGPL2.1"
   }
-
-  // a fix for IDE to see KSP-generated files
-  // also fixed conflicting overloads error when switching flavours
-  applicationVariants.all { variant ->
-    variant.addJavaSourceFoldersToModel(
-      new File(buildDir, "generated/ksp/${variant.name}/kotlin")
-    )
-  }
 }
 
 dependencies {
