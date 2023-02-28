@@ -40,7 +40,7 @@ fun BpkAccessoryTitleDetails(
   titleStyle: TextStyle = BpkTheme.typography.heading5,
   details: List<AnnotatedString>? = null,
   textAlignment: Alignment.Horizontal = Alignment.Start,
-  accessoryView: @Composable (BoxScope.() -> Unit)? = null
+  accessoryView: @Composable (BoxScope.() -> Unit)? = null,
 ) {
   Row(modifier = modifier) {
     accessoryView?.let {

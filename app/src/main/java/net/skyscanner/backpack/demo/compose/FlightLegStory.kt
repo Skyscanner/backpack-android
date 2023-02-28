@@ -43,9 +43,9 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 
 @Composable
-fun FlightLegStory() {
+fun FlightLegStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier
+    modifier = modifier
       .fillMaxSize()
       .padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),

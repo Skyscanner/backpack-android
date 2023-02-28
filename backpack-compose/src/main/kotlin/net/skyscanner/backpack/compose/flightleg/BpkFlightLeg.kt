@@ -57,7 +57,7 @@ fun BpkFlightLeg(
   operatedBy: String? = null,
   warning: String? = null,
   contentDescription: String? = null,
-  carrierLogo: @Composable (BoxScope.() -> Unit)? = null
+  carrierLogo: @Composable (BoxScope.() -> Unit)? = null,
 ) {
   Box(modifier = modifier
     .fillMaxWidth()
@@ -69,7 +69,7 @@ fun BpkFlightLeg(
       } else {
         this.contentDescription = contentDescription
       }
-    }
+    },
   ) {
     BpkAccessoryTitleDetails(
       modifier = Modifier.fillMaxWidth(fraction = 0.67f),
@@ -80,8 +80,8 @@ fun BpkFlightLeg(
             SpanStyle(
               color = BpkTheme.colors.textPrimary,
               fontSize = BpkTheme.typography.label3.fontSize,
-              baselineShift = BaselineShift.Superscript
-            )
+              baselineShift = BaselineShift.Superscript,
+            ),
           ) {
             append(it)
           }
@@ -98,16 +98,16 @@ fun BpkFlightLeg(
               withStyle(
                 SpanStyle(
                   color = BpkTheme.colors.textError,
-                  fontSize = BpkTheme.typography.caption.fontSize
-                )
+                  fontSize = BpkTheme.typography.caption.fontSize,
+                ),
               ) {
                 append(it)
               }
-            }
+            },
           )
         }
       },
-      accessoryView = carrierLogo
+      accessoryView = carrierLogo,
     )
     BpkAccessoryTitleDetails(
       modifier = Modifier.align(Alignment.TopEnd),
@@ -115,7 +115,7 @@ fun BpkFlightLeg(
       textAlignment = Alignment.End,
       titleStyle = BpkTheme.typography.label3,
       details = listOf(
-        AnnotatedString(duration)
+        AnnotatedString(duration),
       ),
     )
   }
@@ -131,11 +131,11 @@ private fun LightModeSimpleDirect() {
     duration = "7h 55m",
     carrierLogo = {
       Box(
-        modifier = Modifier.padding(top = BpkSpacing.Sm)
+        modifier = Modifier.padding(top = BpkSpacing.Sm),
       ) {
         BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
       }
-    }
+    },
   )
 }
 
@@ -149,7 +149,7 @@ private fun LightModeComplete() {
         SpanStyle(
           background = BpkTheme.colors.statusDangerFill,
           color = BpkTheme.colors.textOnLight,
-        )
+        ),
       ) {
         append("LHR")
       }
@@ -159,7 +159,7 @@ private fun LightModeComplete() {
       withStyle(
         SpanStyle(
           color = BpkTheme.colors.textError,
-        )
+        ),
       ) {
         append("2 stops")
       }
@@ -170,11 +170,11 @@ private fun LightModeComplete() {
     warning = "Change airports in London",
     carrierLogo = {
       Box(
-        modifier = Modifier.padding(top = BpkSpacing.Sm)
+        modifier = Modifier.padding(top = BpkSpacing.Sm),
       ) {
         BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
       }
-    }
+    },
   )
 }
 
@@ -188,11 +188,11 @@ private fun DarkModeSimpleDirect() {
     duration = "7h 55m",
     carrierLogo = {
       Box(
-        modifier = Modifier.padding(top = BpkSpacing.Sm)
+        modifier = Modifier.padding(top = BpkSpacing.Sm),
       ) {
         BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
       }
-    }
+    },
   )
 }
 
@@ -206,7 +206,7 @@ private fun DarkModeComplete() {
         SpanStyle(
           background = BpkTheme.colors.statusDangerFill,
           color = BpkTheme.colors.textOnLight,
-        )
+        ),
       ) {
         append("LHR")
       }
@@ -216,7 +216,7 @@ private fun DarkModeComplete() {
       withStyle(
         SpanStyle(
           color = BpkTheme.colors.textError,
-        )
+        ),
       ) {
         append("2 stops")
       }
@@ -227,11 +227,11 @@ private fun DarkModeComplete() {
     warning = "Change airports in London",
     carrierLogo = {
       Box(
-        modifier = Modifier.padding(top = BpkSpacing.Sm)
+        modifier = Modifier.padding(top = BpkSpacing.Sm),
       ) {
         BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
       }
-    }
+    },
   )
 }
 
@@ -246,7 +246,7 @@ private fun LightModeRTL() {
       warning = "تغییر فرودگاه در لندن",
       carrierLogo = {
         Box(
-          modifier = Modifier.padding(top = BpkSpacing.Sm)
+          modifier = Modifier.padding(top = BpkSpacing.Sm),
         ) {
           BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
         }
@@ -255,12 +255,12 @@ private fun LightModeRTL() {
         withStyle(
           SpanStyle(
             color = BpkTheme.colors.textError,
-          )
+          ),
         ) {
           append("۲ توقف")
         }
       },
-      duration = "۷ ساعت و ۵۵ دقیقه"
+      duration = "۷ ساعت و ۵۵ دقیقه",
     )
   }
 }
