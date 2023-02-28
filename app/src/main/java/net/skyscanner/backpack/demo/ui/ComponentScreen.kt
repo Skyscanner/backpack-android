@@ -30,7 +30,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.zIndex
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNav
+import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavSize
 import net.skyscanner.backpack.compose.horizontalnav.BpkHorizontalNavTab
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
@@ -76,7 +78,7 @@ fun ComponentScreen(
     val viewStories = repository.storiesOf(component, compose = false)
     val composeStories = repository.storiesOf(component, compose = true)
 
-    var composeTabSelected by remember { mutableStateOf(composeStories.isNotEmpty()) }
+    var composeTabSelected by remember { mutableStateOf(false) }
 
     if (viewStories.isNotEmpty() && composeStories.isNotEmpty()) {
       BpkHorizontalNav(
@@ -84,8 +86,10 @@ fun ComponentScreen(
           BpkHorizontalNavTab(title = stringResource(R.string.tab_view)),
           BpkHorizontalNavTab(title = stringResource(R.string.tab_compose)),
         ),
+        size = BpkHorizontalNavSize.Small,
         activeIndex = if (composeTabSelected) 1 else 0,
         onChanged = { composeTabSelected = it != 0 },
+        modifier = Modifier.zIndex(Float.MAX_VALUE),
       )
     } else {
       composeTabSelected = composeStories.isNotEmpty()
