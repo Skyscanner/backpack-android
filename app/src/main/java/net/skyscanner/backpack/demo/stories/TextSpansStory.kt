@@ -24,42 +24,31 @@ import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.TextView
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.TextSpansComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.text.BpkFontSpan
 import net.skyscanner.backpack.text.BpkLinkSpan
 import net.skyscanner.backpack.text.BpkPrimaryColorSpan
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.toast.BpkToast
 
-class TextSpansStory : Story() {
-
-  private val linksHandler = { link: String ->
-    BpkToast.makeText(requireContext(), link, BpkToast.LENGTH_SHORT).show()
+@Composable
+@TextSpansComponent
+@ViewStory
+fun TextSpansStory(modifier: Modifier = Modifier) =
+  AndroidLayout<TextView>(R.layout.fragment_text_spans, R.id.text, modifier) {
+    setupTextSpans(this)
   }
+
+class TextSpansStory : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    val textView = view.findViewById<TextView>(R.id.text)
-    textView.movementMethod = LinkMovementMethod.getInstance()
-    textView.text = SpannableStringBuilder().apply {
-      append("This is an example of \n")
-      append("primary color span \n", BpkPrimaryColorSpan(requireActivity()), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-      append("This is an example of \n")
-      append(
-        "Backpack font span \n",
-        BpkFontSpan(requireActivity(), BpkText.TextStyle.Heading4),
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
-      )
-
-      append("This is an example of \n")
-      append(
-        "Backpack link span \n",
-        BpkLinkSpan(requireActivity(), "Link clicked!", linksHandler),
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
-      )
-    }
+    setupTextSpans(view.findViewById(R.id.text))
   }
 
   companion object {
@@ -69,5 +58,32 @@ class TextSpansStory : Story() {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }
+  }
+}
+
+private fun setupTextSpans(textView: TextView) {
+
+  val linksHandler = { link: String ->
+    BpkToast.makeText(textView.context, link, BpkToast.LENGTH_SHORT).show()
+  }
+
+  textView.movementMethod = LinkMovementMethod.getInstance()
+  textView.text = SpannableStringBuilder().apply {
+    append("This is an example of \n")
+    append("primary color span \n", BpkPrimaryColorSpan(textView.context), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+    append("This is an example of \n")
+    append(
+      "Backpack font span \n",
+      BpkFontSpan(textView.context, BpkText.TextStyle.Heading4),
+      Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
+    )
+
+    append("This is an example of \n")
+    append(
+      "Backpack link span \n",
+      BpkLinkSpan(textView.context, "Link clicked!", linksHandler),
+      Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
+    )
   }
 }
