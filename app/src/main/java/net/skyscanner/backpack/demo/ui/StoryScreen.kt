@@ -35,7 +35,7 @@ import net.skyscanner.backpack.demo.meta.Story
 
 @Composable
 fun StoryScreen(
-  case: Story,
+  story: Story,
   modifier: Modifier = Modifier,
   onBack: () -> Unit,
 ) {
@@ -46,7 +46,7 @@ fun StoryScreen(
         contentDescription = stringResource(R.string.navigation_back),
         onClick = { onBack() },
       ),
-      title = case.component.name + " - " + case.name,
+      title = story.component.name + " - " + story.name,
       actions = listOf(
         IconAction(
           icon = BpkIcon.Settings,
@@ -58,6 +58,6 @@ fun StoryScreen(
         ),
       ),
     )
-    case.content()
+    story.content()
   }
 }

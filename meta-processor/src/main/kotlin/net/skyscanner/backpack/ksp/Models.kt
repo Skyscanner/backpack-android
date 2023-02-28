@@ -24,7 +24,6 @@ import com.google.devtools.ksp.symbol.KSName
 data class ComponentDefinition(
   val id: KSName,
   val name: String,
-  val link: String,
   val location: FileLocation,
 )
 
@@ -33,7 +32,6 @@ data class StoryDefinition(
   val name: String,
   val isCompose: Boolean,
   val isScreenshot: Boolean,
-  val layoutId: Int,
   val reference: String,
   val location: FileLocation,
 )
