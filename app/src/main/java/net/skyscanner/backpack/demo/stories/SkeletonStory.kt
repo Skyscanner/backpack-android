@@ -22,18 +22,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.components.TextFieldComponent
+import net.skyscanner.backpack.demo.components.SkeletonComponent
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 
 @Composable
-@TextFieldComponent
-@ViewStory("Default")
-fun TextFieldStoryDefault(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_text_fields, modifier.fillMaxSize())
-
-@Composable
-@TextFieldComponent
-@ViewStory("With labels")
-fun TextFieldStoryLabels(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_text_fields_labels, modifier.fillMaxSize())
+@SkeletonComponent
+@ViewStory
+fun SkeletonStory(modifier: Modifier = Modifier) =
+  AndroidLayout(R.layout.fragment_skeletons, modifier.fillMaxSize())

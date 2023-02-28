@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,6 +50,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 fun HorizontalNavStory(modifier: Modifier = Modifier) {
   Column(
     modifier = modifier
+      .fillMaxSize()
       .background(BpkTheme.colors.surfaceHighlight)
       .padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),

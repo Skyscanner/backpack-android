@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
@@ -33,7 +34,7 @@ import net.skyscanner.backpack.toast.BpkToast
 @ToastComponent
 @ViewStory
 fun ToastStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_toasts, modifier) {
+  AndroidLayout(R.layout.fragment_toasts, modifier.fillMaxSize()) {
     findViewById<TextView>(R.id.toast_short).setOnClickListener {
       it as TextView
       BpkToast.makeText(context, it.text, BpkToast.LENGTH_SHORT).show()

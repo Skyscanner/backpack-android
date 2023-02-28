@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.button.BpkButton
@@ -34,7 +35,7 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @ButtonComponent
 @ViewStory("Styleable")
 fun StyleableButtonStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_buttons_styleable, modifier) {
+  AndroidLayout(R.layout.fragment_buttons_styleable, modifier.fillMaxSize()) {
     findViewById<View>(R.id.primary).setOnClickListener { setButtonType(this, Type.Primary) }
     findViewById<View>(R.id.secondary).setOnClickListener { setButtonType(this, Type.Secondary) }
     findViewById<View>(R.id.destructive).setOnClickListener { setButtonType(this, Type.Destructive) }
