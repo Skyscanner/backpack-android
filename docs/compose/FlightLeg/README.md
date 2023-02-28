@@ -43,11 +43,7 @@ BpkFlightLeg(
   operatedBy = "Operated by Ryanair",
   warning = "Change airports in London",
   carrierLogoContent = {
-    Box(
-      modifier = Modifier.padding(top = BpkSpacing.Sm),
-    ) {
-      BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
-    }
+    BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
   },
 )
 ```

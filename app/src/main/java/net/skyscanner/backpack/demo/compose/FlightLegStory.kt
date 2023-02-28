@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,7 +31,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
+import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import net.skyscanner.backpack.compose.flightleg.BpkFlightLeg
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
@@ -58,7 +57,7 @@ fun FlightLegStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-@Preview(showBackground = true)
+@BpkPreviews
 fun BasicFlightLegSample() {
   BpkFlightLeg(
     departureArrivalTime = "19:50 - 22:45",
@@ -66,17 +65,13 @@ fun BasicFlightLegSample() {
     stopsInfo = "Direct",
     duration = "7h 55m",
     carrierLogoContent = {
-      Box(
-        modifier = Modifier.padding(top = BpkSpacing.Sm),
-      ) {
-        BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
-      }
+      BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
     },
   )
 }
 
 @Composable
-@Preview(showBackground = true)
+@BpkPreviews
 fun CompleteFlightLegSample() {
   BpkFlightLeg(
     departureArrivalTime = "19:50 - 22:45",
@@ -98,11 +93,7 @@ fun CompleteFlightLegSample() {
     operatedBy = "Operated by Ryanair",
     warning = "Change airports in London",
     carrierLogoContent = {
-      Box(
-        modifier = Modifier.padding(top = BpkSpacing.Sm),
-      ) {
-        BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
-      }
+      BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
     },
   )
 }

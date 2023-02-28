@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -71,7 +72,10 @@ fun BpkFlightLeg(
   ) {
     Row(modifier = Modifier.fillMaxWidth()) {
       carrierLogoContent?.let {
-        Box(content = it)
+        Box(
+          modifier = Modifier.padding(top = BpkSpacing.Sm),
+          content = it,
+        )
         Spacer(modifier = Modifier.width(BpkSpacing.Base))
       }
       Column(
@@ -94,33 +98,24 @@ fun BpkFlightLeg(
           },
           color = BpkTheme.colors.textPrimary,
         )
-        mutableListOf<AnnotatedString>().apply {
-          add(description)
-          operatedBy?.let {
-            add(AnnotatedString(it))
-          }
-          warning?.let {
-            add(
-              buildAnnotatedString {
-                withStyle(
-                  SpanStyle(
-                    color = BpkTheme.colors.textError,
-                    fontSize = BpkTheme.typography.caption.fontSize,
-                  ),
-                ) {
-                  append(it)
-                }
-              },
-            )
-          }
-        }.let { details ->
-          details.map {
-            BpkText(
-              text = it,
-              style = BpkTheme.typography.caption,
-              color = BpkTheme.colors.textSecondary,
-            )
-          }
+        BpkText(
+          text = description,
+          style = BpkTheme.typography.caption,
+          color = BpkTheme.colors.textSecondary,
+        )
+        operatedBy?.let {
+          BpkText(
+            text = it,
+            style = BpkTheme.typography.caption,
+            color = BpkTheme.colors.textSecondary,
+          )
+        }
+        warning?.let {
+          BpkText(
+            text = it,
+            style = BpkTheme.typography.caption,
+            color = BpkTheme.colors.textError,
+          )
         }
       }
       Spacer(modifier = Modifier.weight(1f))
