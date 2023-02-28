@@ -77,6 +77,7 @@ object DocsRegistry {
     ComposeScreenshot("Card - Compose - Card wrapper", "card-wrapper"),
     ComposeScreenshot("Card Button - Default", "default"),
     ComposeScreenshot("Card Button - Small", "small"),
+    ComposeScreenshot("Carousel", "default"),
     ViewScreenshot("Chip - View - Default", "all"),
     ViewScreenshot("Chip - View - On Dark", "on-dark"),
     ViewScreenshot("Chip - View - On Image", "on-image"),

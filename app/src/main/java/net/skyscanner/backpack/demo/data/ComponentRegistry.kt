@@ -263,6 +263,7 @@ object ComponentRegistry {
         "Small" composeStory { CardButtonSmallStory() },
       ),
     ),
+    "Carousel" composeStory { CarouselStory() },
     "Calendar" story NodeData(
       { children -> SubStory of children },
       mapOf(

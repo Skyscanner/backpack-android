@@ -114,6 +114,7 @@ dependencies {
   implementation rootProject.ext.stetho
   implementation rootProject.ext.googleMapsCompose
   implementation rootProject.ext.destinationsCore
+  implementation rootProject.ext.accompanistPager
   testImplementation rootProject.ext.junit
   debugImplementation rootProject.ext.composeTestManifest
   androidTestImplementation rootProject.ext.composeFoundation
