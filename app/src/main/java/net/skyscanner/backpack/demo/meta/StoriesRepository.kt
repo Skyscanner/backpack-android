@@ -75,24 +75,18 @@ private object StoriesRepositoryImpl : StoriesRepository {
   override fun storiesOf(component: String, compose: Boolean): List<Story> =
     storiesMap.getValue(component)
       .filter { it.isCompose == compose }
-      .sortedBy {
-        // sort by name, prioritising default stories
-        when {
-          it.name.equals("default", true) -> ""
-          it.name.equals("standard", true) -> ""
-          else -> it.name
-        }
-      }
 
   override fun storyOf(component: String, story: String, compose: Boolean): Story =
     storiesMap.getValue(component)
       .first { it.name == story && it.isCompose == compose }
 
   override fun isComposeOnly(component: String): Boolean =
-    storiesMap.getValue(component).all { it.isCompose }
+    storiesMap.getValue(component)
+      .all { it.isCompose }
 
   override fun isViewOnly(component: String): Boolean =
-    storiesMap.getValue(component).all { !it.isCompose }
+    storiesMap.getValue(component)
+      .all { !it.isCompose }
 
   override fun testStories() = testStories
 }

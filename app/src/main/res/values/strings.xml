@@ -292,4 +292,8 @@
 
   <string name="tab_view">View</string>
   <string name="tab_compose">Compose</string>
+  <string name="maps_markers_pointers_only">Pointers</string>
+  <string name="maps_markers_badges">Badges</string>
+  <string name="maps_markers_badges_with_icons">With icons</string>
+  <string name="map_markers">Map markers</string>
 </resources>

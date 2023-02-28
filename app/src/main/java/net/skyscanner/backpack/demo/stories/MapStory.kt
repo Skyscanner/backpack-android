@@ -19,54 +19,87 @@
 package net.skyscanner.backpack.demo.stories
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.google.android.gms.maps.GoogleMap
+import androidx.compose.ui.res.stringResource
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.GoogleMap
-import com.google.maps.android.compose.MapEffect
+import net.skyscanner.backpack.compose.button.BpkButton
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.BpkBaseActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.map.addBpkMarker
 import net.skyscanner.backpack.map.getBpkMapAsync
-import net.skyscanner.backpack.map.setupBpkInfoWindowAdapter
-import net.skyscanner.backpack.util.InternalBackpackApi
+import net.skyscanner.backpack.util.unsafeLazy
 
 @Composable
 @MapMarkersComponent
-@ViewStory("Pointers")
-fun MapMarkerPointersStory(modifier: Modifier = Modifier) =
-  MapMarkerDemo(MapFragment.Type.PointersOnly, modifier)
-
-@Composable
-@MapMarkersComponent
-@ViewStory("Badges")
-fun MapMarkerBadgesStory(modifier: Modifier = Modifier) =
-  MapMarkerDemo(MapFragment.Type.Badges, modifier)
-
-@Composable
-@MapMarkersComponent
-@ViewStory("With icons")
-fun MapMarkerWithIconsStory(modifier: Modifier = Modifier) =
-  MapMarkerDemo(MapFragment.Type.BadgesWithIcons, modifier)
-
-@OptIn(InternalBackpackApi::class)
-@Composable
-fun MapMarkerDemo(
-  type: MapFragment.Type,
-  modifier: Modifier = Modifier,
-) {
+@ViewStory
+fun MapStory(modifier: Modifier = Modifier) {
   val context = LocalContext.current
-  GoogleMap(modifier) {
-    MapEffect(context, type) {
-      it.setupBpkInfoWindowAdapter(context)
-      setupMapMarkers(context, it, type)
+  Column(
+    modifier = modifier.fillMaxSize(),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
+  ) {
+    BpkButton(stringResource(R.string.maps_markers_pointers_only)) {
+      context.openMapStory(MapFragment.Type.PointersOnly)
     }
+    BpkButton(stringResource(R.string.maps_markers_badges)) {
+      context.openMapStory(MapFragment.Type.Badges)
+    }
+    BpkButton(stringResource(R.string.maps_markers_badges_with_icons)) {
+      context.openMapStory(MapFragment.Type.Badges)
+    }
+  }
+}
+
+private fun Context.openMapStory(type: MapFragment.Type) =
+  startActivity(
+    Intent(this, MapActivity::class.java)
+      .putExtra(MapActivity.EXTRA_TYPE, type),
+  )
+
+class MapActivity : BpkBaseActivity() {
+
+  companion object {
+    const val EXTRA_TYPE = "type"
+  }
+
+  private val detailToolbar by unsafeLazy { findViewById<Toolbar>(R.id.detail_toolbar) }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_component_detail)
+    setSupportActionBar(detailToolbar)
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    setTitle(R.string.map_markers)
+
+    if (savedInstanceState == null) {
+      val type = intent.getSerializableExtra(EXTRA_TYPE) as MapFragment.Type
+      supportFragmentManager.beginTransaction()
+        .add(R.id.component_detail_container, MapFragment.of(type))
+        .commit()
+    }
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      android.R.id.home -> this.onBackPressed()
+    }
+    return super.onOptionsItemSelected(item)
   }
 }
 
@@ -84,7 +117,27 @@ class MapFragment : Story() {
     val context = requireContext()
     val type = arguments?.getSerializable(TYPE) as Type
     mapFragment.getBpkMapAsync {
-      setupMapMarkers(context, it, type)
+      it.addBpkMarker(
+        context = context,
+        position = LatLng(45.0, 0.0),
+        title = "Badge 1",
+        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+        pointerOnly = type == Type.PointersOnly,
+      )
+      it.addBpkMarker(
+        context = context,
+        position = LatLng(0.0, 0.0),
+        title = "Badge 2",
+        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+        pointerOnly = type == Type.PointersOnly,
+      )
+      it.addBpkMarker(
+        context = context,
+        position = LatLng(-45.0, 0.0),
+        title = "Badge 3",
+        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+        pointerOnly = type == Type.PointersOnly,
+      )
     }
   }
 
@@ -98,28 +151,4 @@ class MapFragment : Story() {
       arguments?.putSerializable(TYPE, type)
     }
   }
-}
-
-private fun setupMapMarkers(context: Context, map: GoogleMap, type: MapFragment.Type) {
-  map.addBpkMarker(
-    context = context,
-    position = LatLng(45.0, 0.0),
-    title = "Badge 1",
-    icon = if (type == MapFragment.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-    pointerOnly = type == MapFragment.Type.PointersOnly,
-  )
-  map.addBpkMarker(
-    context = context,
-    position = LatLng(0.0, 0.0),
-    title = "Badge 2",
-    icon = if (type == MapFragment.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-    pointerOnly = type == MapFragment.Type.PointersOnly,
-  )
-  map.addBpkMarker(
-    context = context,
-    position = LatLng(-45.0, 0.0),
-    title = "Badge 3",
-    icon = if (type == MapFragment.Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-    pointerOnly = type == MapFragment.Type.PointersOnly,
-  )
 }
