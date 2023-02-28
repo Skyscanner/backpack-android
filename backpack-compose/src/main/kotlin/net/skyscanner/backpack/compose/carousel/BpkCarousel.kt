@@ -35,7 +35,7 @@ import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 fun BpkCarousel(
   state: BpkCarouselState,
   modifier: Modifier = Modifier,
-  imageContent: @Composable (BoxScope.(Int) -> Unit),
+  content: @Composable (BoxScope.(Int) -> Unit),
 ) {
   val internalState = state.asInternalState()
   Box(modifier = modifier) {
@@ -46,7 +46,7 @@ fun BpkCarousel(
       count = if (internalState.pageCount > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
       state = internalState.delegate,
     ) {
-      imageContent(internalState.currentPage)
+      content(internalState.currentPage)
     }
 
     // if there is more than one image, display the page indicator

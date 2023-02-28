@@ -84,7 +84,7 @@ private fun CarouselSample(
 
   if (showCurrentPageLabel) {
     BpkText(
-      text = stringResource(id = R.string.carousel_current_image).format(pagerState.currentPage),
+      text = stringResource(R.string.carousel_current_image, pagerState.currentPage),
       style = BpkTheme.typography.caption,
     )
   }

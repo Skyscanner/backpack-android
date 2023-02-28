@@ -25,7 +25,7 @@ import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 // show carousel with image index 1
 val state = rememberBpkCarouselState(totalImages = totalImages)
 
-BpkCarousel(state = state){ index ->
+BpkCarousel(state){ index ->
   Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
 }
 ```
@@ -43,7 +43,7 @@ LaunchedEffect(state.currentPage) {
   print("current page: ${state.currentPage}")
 }
 
-BpkCarousel(state = state) { index ->
+BpkCarousel(state) { index ->
   Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
 }
 ```
@@ -57,7 +57,7 @@ import net.skyscanner.backpack.compose.carousel.rememberBpkCarouselState
 // show carousel with image index 1
 val state = rememberBpkCarouselState(totalImages = totalImages, currentImage = currentImage)
 
-BpkCarousel(state = state) { index ->
+BpkCarousel(state) { index ->
   Image(painter = painterResource(id = imageResAtIndex(index)), contentDescription = "")
 }
 ```
