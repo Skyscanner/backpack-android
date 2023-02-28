@@ -21,8 +21,29 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.ToastComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.toast.BpkToast
+
+@Composable
+@ToastComponent
+@ViewStory
+fun ToastStory(modifier: Modifier = Modifier) =
+  AndroidLayout(R.layout.fragment_toasts, modifier) {
+    findViewById<TextView>(R.id.toast_short).setOnClickListener {
+      it as TextView
+      BpkToast.makeText(context, it.text, BpkToast.LENGTH_SHORT).show()
+    }
+
+    findViewById<TextView>(R.id.toast_long).setOnClickListener {
+      it as TextView
+      BpkToast.makeText(context, it.text, BpkToast.LENGTH_LONG).show()
+    }
+  }
 
 class ToastStory : Story() {
 
