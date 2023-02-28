@@ -25,6 +25,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -41,6 +45,11 @@ import net.skyscanner.backpack.demo.data.ComponentRegistry
 import net.skyscanner.backpack.demo.data.ComposeNode
 import net.skyscanner.backpack.demo.data.NodeItem
 import net.skyscanner.backpack.demo.data.RegistryItem
+import net.skyscanner.backpack.demo.meta.Component
+import net.skyscanner.backpack.demo.meta.Story
+import net.skyscanner.backpack.demo.ui.ComponentListScreen
+import net.skyscanner.backpack.demo.ui.DemoScaffold
+import net.skyscanner.backpack.demo.ui.StoryScreen
 
 /**
  * An activity representing a list of Components. This activity
@@ -55,8 +64,20 @@ class MainActivity : BpkBaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
-      BackpackDemoTheme {
-        ComponentScreen()
+      DemoScaffold {
+        var selectedComponent by remember { mutableStateOf<Component?>(null) }
+        var selectedStory by remember { mutableStateOf<Story?>(null) }
+
+        when {
+          selectedComponent != null && selectedStory != null ->
+            StoryScreen(story = selectedStory!!, onBack = { selectedStory = null })
+          selectedComponent != null -> net.skyscanner.backpack.demo.ui.ComponentScreen(
+            component = selectedComponent!!,
+            onBack = { selectedComponent = null },
+            onClick = { selectedStory = it },
+          )
+          else -> ComponentListScreen(onClick = { selectedComponent = it })
+        }
       }
     }
   }
