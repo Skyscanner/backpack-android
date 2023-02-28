@@ -50,11 +50,10 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 fun BpkFlightLeg(
   departureArrivalTime: String,
   description: AnnotatedString,
-  stopsInfo: String,
+  stopsInfo: AnnotatedString,
   duration: String,
   modifier: Modifier = Modifier,
   nextDayArrival: String? = null,
-  highlightStopsInfo: Boolean = false,
   operatedBy: String? = null,
   warning: String? = null,
   contentDescription: String? = null,
@@ -112,19 +111,7 @@ fun BpkFlightLeg(
     )
     BpkAccessoryTitleDetails(
       modifier = Modifier.align(Alignment.TopEnd),
-      title = buildAnnotatedString {
-        if (highlightStopsInfo) {
-          withStyle(
-            SpanStyle(
-              color = BpkTheme.colors.textError,
-            )
-          ) {
-            append(stopsInfo)
-          }
-        } else {
-          append(stopsInfo)
-        }
-      },
+      title = stopsInfo,
       textAlignment = Alignment.End,
       titleStyle = BpkTheme.typography.label3,
       details = listOf(
@@ -140,7 +127,7 @@ private fun LightModeSimpleDirect() {
   BpkFlightLeg(
     departureArrivalTime = "19:50 - 22:45",
     description = AnnotatedString("LHR-SIN,SwissAir"),
-    stopsInfo = "Direct",
+    stopsInfo = AnnotatedString("Direct"),
     duration = "7h 55m",
     carrierLogo = {
       Box(
@@ -168,8 +155,15 @@ private fun LightModeComplete() {
       }
       append("-SIN, SwissAir")
     },
-    stopsInfo = "2 Stops",
-    highlightStopsInfo = true,
+    stopsInfo = buildAnnotatedString {
+      withStyle(
+        SpanStyle(
+          color = BpkTheme.colors.textError,
+        )
+      ) {
+        append("2 stops")
+      }
+    },
     duration = "7h 55m",
     nextDayArrival = "+1",
     operatedBy = "Operated by Ryanair",
@@ -190,7 +184,7 @@ private fun DarkModeSimpleDirect() {
   BpkFlightLeg(
     departureArrivalTime = "19:50 - 22:45",
     description = AnnotatedString("LHR-SIN,SwissAir"),
-    stopsInfo = "Direct",
+    stopsInfo = AnnotatedString("Direct"),
     duration = "7h 55m",
     carrierLogo = {
       Box(
@@ -218,8 +212,15 @@ private fun DarkModeComplete() {
       }
       append("-SIN, SwissAir")
     },
-    stopsInfo = "2 Stops",
-    highlightStopsInfo = true,
+    stopsInfo = buildAnnotatedString {
+      withStyle(
+        SpanStyle(
+          color = BpkTheme.colors.textError,
+        )
+      ) {
+        append("2 stops")
+      }
+    },
     duration = "7h 55m",
     nextDayArrival = "+1",
     operatedBy = "Operated by Ryanair",
@@ -250,7 +251,15 @@ private fun LightModeRTL() {
           BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
         }
       },
-      stopsInfo = "۲ توقف",
+      stopsInfo = buildAnnotatedString {
+        withStyle(
+          SpanStyle(
+            color = BpkTheme.colors.textError,
+          )
+        ) {
+          append("۲ توقف")
+        }
+      },
       duration = "۷ ساعت و ۵۵ دقیقه"
     )
   }

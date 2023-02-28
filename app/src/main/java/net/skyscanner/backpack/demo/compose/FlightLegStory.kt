@@ -65,7 +65,7 @@ fun BasicFlightLegSample() {
     modifier = Modifier.background(BpkTheme.colors.canvas),
     departureArrivalTime = "19:50 - 22:45",
     description = AnnotatedString("LHR-SIN,SwissAir"),
-    stopsInfo = "Direct",
+    stopsInfo = AnnotatedString("Direct"),
     duration = "7h 55m",
     carrierLogo = {
       Box(
@@ -93,8 +93,15 @@ fun CompleteFlightLegSample() {
       }
       append("-SIN, SwissAir")
     },
-    stopsInfo = "2 Stops",
-    highlightStopsInfo = true,
+    stopsInfo = buildAnnotatedString {
+      withStyle(
+        SpanStyle(
+          color = BpkTheme.colors.textError,
+        )
+      ) {
+        append("2 stops")
+      }
+    },
     duration = "7h 55m",
     nextDayArrival = "+1",
     operatedBy = "Operated by Ryanair",
