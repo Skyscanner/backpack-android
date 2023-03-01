@@ -20,14 +20,7 @@ package net.skyscanner.backpack.demo
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedContentScope
-import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
-import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.ramcosta.composedestinations.DestinationsNavHost
-import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
-import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import net.skyscanner.backpack.demo.ui.DemoScaffold
 import net.skyscanner.backpack.demo.ui.NavGraphs
 
@@ -41,21 +34,12 @@ import net.skyscanner.backpack.demo.ui.NavGraphs
  */
 class MainActivity : BpkBaseActivity() {
 
-  @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
       DemoScaffold {
         DestinationsNavHost(
           navGraph = NavGraphs.root,
-          engine = rememberAnimatedNavHostEngine(
-            rootDefaultAnimations = RootNavGraphDefaultAnimations(
-              enterTransition = { slideIntoContainer(AnimatedContentScope.SlideDirection.Left) },
-              exitTransition = { scaleOut(targetScale = 0.95f) },
-              popEnterTransition = { scaleIn(initialScale = 0.95f) },
-              popExitTransition = { slideOutOfContainer(AnimatedContentScope.SlideDirection.Right) },
-            ),
-          ),
         )
       }
     }
