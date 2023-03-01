@@ -36,7 +36,6 @@ import net.skyscanner.backpack.demo.data.BpkBarChartData
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 
-// todo
 @Composable
 @BarChartComponent
 @ComposeStory
