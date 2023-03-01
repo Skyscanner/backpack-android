@@ -34,10 +34,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.BaselineShift
-import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -81,24 +77,21 @@ fun BpkFlightLeg(
       Column(
         horizontalAlignment = Alignment.Start,
       ) {
-        BpkText(
-          text = buildAnnotatedString {
-            append(departureArrivalTime)
-            nextDayArrival?.let {
-              withStyle(
-                SpanStyle(
-                  color = BpkTheme.colors.textPrimary,
-                  fontSize = BpkTheme.typography.caption.fontSize,
-                  baselineShift = BaselineShift(0.2f),
-                ),
-              ) {
-                append(it)
-              }
-            }
-          },
-          style = BpkTheme.typography.heading5,
-          color = BpkTheme.colors.textPrimary,
-        )
+        Row {
+          BpkText(
+            text = departureArrivalTime,
+            style = BpkTheme.typography.heading5,
+            color = BpkTheme.colors.textPrimary,
+          )
+          nextDayArrival?.let {
+            BpkText(
+              modifier = Modifier.align(Alignment.Top),
+              text = it,
+              style = BpkTheme.typography.caption,
+              color = BpkTheme.colors.textPrimary,
+            )
+          }
+        }
         BpkText(
           text = description,
           style = BpkTheme.typography.caption,

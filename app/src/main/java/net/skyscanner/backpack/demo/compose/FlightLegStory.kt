@@ -61,7 +61,7 @@ fun FlightLegStory(modifier: Modifier = Modifier) {
 fun BasicFlightLegSample() {
   BpkFlightLeg(
     departureArrivalTime = "19:50 - 22:45",
-    description = AnnotatedString("LHR-SIN,SwissAir"),
+    description = AnnotatedString("LHR-SIN, SwissAir"),
     stopsInfo = "Direct",
     duration = "7h 55m",
     contentDescription = null,
