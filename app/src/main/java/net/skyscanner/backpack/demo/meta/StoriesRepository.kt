@@ -91,7 +91,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
   override fun testStories() = testStories
 }
 
-@Component(name = "TestComponent")
+@Component(name = "TestComponent", isToken = true)
 private annotation class TestComponent
 
 @ComposeStory(name = "TestComposeStory", screenshot = false)

@@ -61,4 +61,9 @@ class StoriesTests {
     assertTrue(repository.testStories().any { it.name == "TestComposeStory" && it.component.name == "TestComponent" })
   }
 
+  @Test
+  fun assertTestComponentIsToken() {
+    assertTrue(repository.testStories().any { it.name == "TestComposeStory" && it.isToken })
+  }
+
 }
