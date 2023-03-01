@@ -84,7 +84,7 @@ import net.skyscanner.backpack.demo.stories.DisabledCalendarFragment
 import net.skyscanner.backpack.demo.stories.FooterViewCalendarFragment
 import net.skyscanner.backpack.demo.stories.HorizontalNavFragment
 import net.skyscanner.backpack.demo.stories.IconType
-import net.skyscanner.backpack.demo.stories.IconsStory
+import net.skyscanner.backpack.demo.stories.IconsFragment
 import net.skyscanner.backpack.demo.stories.InteractiveStarRatingFragment
 import net.skyscanner.backpack.demo.stories.LabeledCalendarFragment
 import net.skyscanner.backpack.demo.stories.LoadingButtonFragment
@@ -558,10 +558,10 @@ object ComponentRegistry {
         TAB_TITLE_VIEW story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Default" story NodeData { IconsStory of IconType.Default },
-            "RTL" story NodeData { IconsStory of IconType.Default with Direction.RTL },
-            "Small" story NodeData { IconsStory of IconType.Small },
-            "Small RTL" story NodeData { IconsStory of IconType.Small with Direction.RTL },
+            "Default" story NodeData { IconsFragment of IconType.Default },
+            "RTL" story NodeData { IconsFragment of IconType.Default with Direction.RTL },
+            "Small" story NodeData { IconsFragment of IconType.Small },
+            "Small RTL" story NodeData { IconsFragment of IconType.Small with Direction.RTL },
           ),
         ),
         TAB_TITLE_COMPOSE composeStory { IconsStoryCompose() },

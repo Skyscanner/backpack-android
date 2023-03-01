@@ -80,7 +80,7 @@ internal enum class IconType {
   abstract fun matchesName(name: String): Boolean
 }
 
-class IconsStory : Story() {
+class IconsFragment : Story() {
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -108,7 +108,7 @@ class IconsStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    internal infix fun of(type: IconType) = IconsStory().apply {
+    internal infix fun of(type: IconType) = IconsFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, R.layout.fragment_all_icons)
       arguments?.putSerializable(ICON_TYPE, type)
