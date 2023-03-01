@@ -6,9 +6,9 @@
 
 ## Default
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FlightLeg/screenshots/default.png" alt="FlightLeg component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FlightLeg/screenshots/default_dm.png" alt="FlightLeg component - dark mode" width="375" /> |
+| Day                                                                                                                                                                    | Night                                                                                                                                                                                 |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FlightLeg/screenshots/default.png" alt="Flight Leg component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/FlightLeg/screenshots/default_dm.png" alt="Flight Leg component - dark mode" width="375" /> |
 
 ## Installation
 
@@ -27,10 +27,7 @@ BpkFlightLeg(
   departureArrivalTime = "19:50 - 22:45",
   description = buildAnnotatedString {
     withStyle(
-      SpanStyle(
-        background = BpkTheme.colors.statusDangerFill,
-        color = BpkTheme.colors.textOnLight,
-      ),
+      bpkAirportHighlightStyle()
     ) {
       append("LHR")
     }

@@ -28,14 +28,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import net.skyscanner.backpack.compose.flightleg.BpkFlightLeg
+import net.skyscanner.backpack.compose.flightleg.bpkAirportHighlightStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
-import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Aircraft
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
@@ -78,10 +77,7 @@ fun CompleteFlightLegSample() {
     departureArrivalTime = "19:50 - 22:45",
     description = buildAnnotatedString {
       withStyle(
-        SpanStyle(
-          background = BpkTheme.colors.statusDangerFill,
-          color = BpkTheme.colors.textOnLight,
-        ),
+        bpkAirportHighlightStyle(),
       ) {
         append("LHR")
       }

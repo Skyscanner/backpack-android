@@ -34,6 +34,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -42,6 +43,10 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @Composable
 fun BpkFlightLeg(
   departureArrivalTime: String,
+  /**
+   * Please use `bpkAirportHighlightStyle()` on your `SpanStyle` if you need to highlight an airport
+   * to indicate different arrival / departure airports between the legs. See the docs for usage example
+   */
   description: AnnotatedString,
   stopsInfo: String,
   duration: String,
@@ -130,3 +135,9 @@ fun BpkFlightLeg(
     }
   }
 }
+
+@Composable
+fun bpkAirportHighlightStyle() = SpanStyle(
+  background = BpkTheme.colors.statusDangerFill,
+  color = BpkTheme.colors.textOnLight,
+)
