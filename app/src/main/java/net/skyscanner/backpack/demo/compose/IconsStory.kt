@@ -41,7 +41,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import com.google.accompanist.flowlayout.FlowRow
@@ -54,13 +53,16 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.values
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.IconComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
-@Preview
-fun IconsStoryCompose() {
+@IconComponent
+@ComposeStory
+fun IconsStoryCompose(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {

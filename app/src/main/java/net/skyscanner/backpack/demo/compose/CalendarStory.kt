@@ -26,11 +26,57 @@ import net.skyscanner.backpack.calendar2.CalendarEffect
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
+import net.skyscanner.backpack.demo.components.Calendar2Component
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStoryType
+import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.ui.LocalAutomationMode
+import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
 
 @Composable
-fun CalendarStory(
+@Calendar2Component
+@ComposeStory("Selection Disabled")
+fun CalendarSelectionDisabledStory(modifier: Modifier = Modifier) =
+  CalendarDemo(CalendarStoryType.SelectionDisabled, modifier)
+
+@Composable
+@Calendar2Component
+@ComposeStory("Selection Single")
+fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
+  CalendarDemo(CalendarStoryType.SelectionSingle, modifier)
+
+@Composable
+@Calendar2Component
+@ComposeStory("Selection Range")
+fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
+  CalendarDemo(CalendarStoryType.SelectionRange, modifier)
+
+@Composable
+@Calendar2Component
+@ComposeStory("Selection Whole Month")
+fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
+  CalendarDemo(CalendarStoryType.SelectionWholeMonth, modifier)
+
+@Composable
+@Calendar2Component
+@ComposeStory("Disabled weekends")
+fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
+  CalendarDemo(CalendarStoryType.WithDisabledDates, modifier)
+
+@Composable
+@Calendar2Component
+@ComposeStory("Day labels")
+fun CalendarDayLabels(modifier: Modifier = Modifier) =
+  CalendarDemo(CalendarStoryType.WithLabels, modifier)
+
+@Composable
+@Calendar2Component
+@ComposeStory("Pre-selected range")
+fun CalendarPreSelectedRange(modifier: Modifier = Modifier) =
+  CalendarDemo(CalendarStoryType.PreselectedRange, modifier)
+
+@Composable
+private fun CalendarDemo(
   type: CalendarStoryType,
   modifier: Modifier = Modifier,
 ) {

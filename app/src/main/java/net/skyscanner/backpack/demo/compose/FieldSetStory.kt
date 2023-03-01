@@ -27,18 +27,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.fieldset.BpkFieldSet
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.compose.textfield.BpkTextField
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.FieldSetComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun FieldSetStory() {
+@FieldSetComponent
+@ComposeStory
+fun FieldSetStory(modifier: Modifier = Modifier) {
   FieldStatusSwitcher(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) { status ->
     FieldSetWithDescriptionExample(status)
@@ -47,9 +49,8 @@ fun FieldSetStory() {
   }
 }
 
-@Preview
 @Composable
-fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+internal fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
     label = stringResource(R.string.generic_with_description),
     description = stringResource(R.string.generic_description),
@@ -64,9 +65,8 @@ fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Defau
   }
 }
 
-@Preview
 @Composable
-fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+internal fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
     label = stringResource(R.string.generic_no_description),
     status = status,
@@ -80,9 +80,8 @@ fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus
   }
 }
 
-@Preview
 @Composable
-fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+internal fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
     status = status,
   ) {

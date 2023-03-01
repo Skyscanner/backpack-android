@@ -88,7 +88,8 @@
   <string name="snackbar_icon_content_description">Close</string>
   <string name="snackbar_action">Action!</string>
 
-  <string name="story_badge_compose">Compose</string>
+  <string name="story_badge_compose">Compose-only</string>
+  <string name="story_badge_view">View-only</string>
 
   <string name="text_subheading">Subheading</string>
   <string name="text_body_default">Body Default</string>
@@ -294,4 +295,9 @@
 
   <string name="flight_leg_basic_example">Basic Flight Leg</string>
   <string name="flight_leg_complete_example">Complete Flight Leg</string>
+  <string name="maps_markers_pointers_only">Pointers</string>
+  <string name="maps_markers_badges">Badges</string>
+  <string name="maps_markers_badges_with_icons">With icons</string>
+  <string name="map_markers">Map markers</string>
+  <string name="compose">Compose</string>
 </resources>

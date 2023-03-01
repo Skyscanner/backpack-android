@@ -23,6 +23,7 @@
       </activity>
     <activity android:name=".ComponentDetailActivity" />
     <activity android:name=".SettingsActivity" />
+    <activity android:name=".stories.MapActivity" />
     <activity android:name="androidx.appcompat.app.AppCompatActivity" />
   </application>
 

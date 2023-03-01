@@ -29,18 +29,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.switch.BpkSwitch
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.SwitchComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun SwitchStory() {
+@SwitchComponent
+@ComposeStory
+fun SwitchStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
@@ -53,35 +55,32 @@ fun SwitchStory() {
   }
 }
 
-@Preview
 @Composable
-fun DefaultUncheckedSwitchExample() {
+internal fun DefaultUncheckedSwitchExample(modifier: Modifier = Modifier) {
   var checked by remember { mutableStateOf(false) }
   BpkSwitch(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier.fillMaxWidth(),
     text = stringResource(id = R.string.toggle_default_unchecked),
     checked = checked,
     onCheckedChange = { checked = it },
   )
 }
 
-@Preview
 @Composable
-fun DefaultCheckedSwitchExample() {
+internal fun DefaultCheckedSwitchExample(modifier: Modifier = Modifier) {
   var checked by remember { mutableStateOf(true) }
   BpkSwitch(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier.fillMaxWidth(),
     text = stringResource(id = R.string.toggle_default_checked),
     checked = checked,
     onCheckedChange = { checked = it },
   )
 }
 
-@Preview
 @Composable
-fun DisabledUncheckedSwitchExample() {
+internal fun DisabledUncheckedSwitchExample(modifier: Modifier = Modifier) {
   BpkSwitch(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier.fillMaxWidth(),
     text = stringResource(id = R.string.toggle_disabled_unchecked),
     enabled = false,
     checked = false,
@@ -89,11 +88,10 @@ fun DisabledUncheckedSwitchExample() {
   )
 }
 
-@Preview
 @Composable
-fun DisabledCheckedSwitchExample() {
+internal fun DisabledCheckedSwitchExample(modifier: Modifier = Modifier) {
   BpkSwitch(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier.fillMaxWidth(),
     text = stringResource(id = R.string.toggle_disabled_checked),
     enabled = false,
     checked = true,
@@ -101,12 +99,11 @@ fun DisabledCheckedSwitchExample() {
   )
 }
 
-@Preview
 @Composable
-fun CustomContentSwitchExample() {
+internal fun CustomContentSwitchExample(modifier: Modifier = Modifier) {
   var checked by remember { mutableStateOf(false) }
   BpkSwitch(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier.fillMaxWidth(),
     checked = checked,
     onCheckedChange = { checked = it },
   ) {

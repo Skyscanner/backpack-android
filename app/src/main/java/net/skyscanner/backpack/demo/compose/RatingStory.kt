@@ -34,12 +34,13 @@ import net.skyscanner.backpack.compose.rating.BpkRatingSize
 import net.skyscanner.backpack.compose.starrating.BpkStarRating
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.RatingComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun RatingStory(
-  modifier: Modifier = Modifier,
-) {
+@RatingComponent
+@ComposeStory
+fun RatingStory(modifier: Modifier = Modifier) {
   Column(
     modifier = modifier
       .verticalScroll(rememberScrollState())
@@ -60,11 +61,9 @@ fun RatingStory(
 }
 
 @Composable
-@Preview
-internal fun BpkRatingDefaultSample(
-  modifier: Modifier = Modifier,
-) {
+internal fun BpkRatingDefaultSample(modifier: Modifier = Modifier) {
   BpkRating(
+    modifier = modifier,
     title = stringResource(R.string.rating_title),
     subtitle = stringResource(R.string.rating_subtitle),
     value = RatingValue,
@@ -72,11 +71,9 @@ internal fun BpkRatingDefaultSample(
 }
 
 @Composable
-@Preview
-internal fun BpkRatingTitleOnlySample(
-  modifier: Modifier = Modifier,
-) {
+internal fun BpkRatingTitleOnlySample(modifier: Modifier = Modifier) {
   BpkRating(
+    modifier = modifier,
     title = stringResource(R.string.rating_title),
     value = RatingValue,
     scale = BpkRatingScale.ZeroToTen,
@@ -84,11 +81,9 @@ internal fun BpkRatingTitleOnlySample(
 }
 
 @Composable
-@Preview
-internal fun BpkRatingNoScaleSample(
-  modifier: Modifier = Modifier,
-) {
+internal fun BpkRatingNoScaleSample(modifier: Modifier = Modifier) {
   BpkRating(
+    modifier = modifier,
     title = stringResource(R.string.rating_title),
     subtitle = stringResource(R.string.rating_subtitle),
     value = RatingValue,
@@ -97,11 +92,9 @@ internal fun BpkRatingNoScaleSample(
 }
 
 @Composable
-@Preview
-internal fun BpkRatingCustomContentSample(
-  modifier: Modifier = Modifier,
-) {
+internal fun BpkRatingCustomContentSample(modifier: Modifier = Modifier) {
   BpkRating(
+    modifier = modifier,
     value = RatingValue,
     subtitle = stringResource(R.string.rating_subtitle),
   ) {
@@ -110,11 +103,9 @@ internal fun BpkRatingCustomContentSample(
 }
 
 @Composable
-@Preview
-internal fun BpkRatingLargeSample(
-  modifier: Modifier = Modifier,
-) {
+internal fun BpkRatingLargeSample(modifier: Modifier = Modifier) {
   BpkRating(
+    modifier = modifier,
     title = stringResource(R.string.rating_title),
     subtitle = stringResource(R.string.rating_subtitle),
     value = RatingValue,
@@ -123,11 +114,9 @@ internal fun BpkRatingLargeSample(
 }
 
 @Composable
-@Preview
-internal fun BpkRatingLargeTitleOnlySample(
-  modifier: Modifier = Modifier,
-) {
+internal fun BpkRatingLargeTitleOnlySample(modifier: Modifier = Modifier) {
   BpkRating(
+    modifier = modifier,
     title = stringResource(R.string.rating_title),
     value = RatingValue,
     size = BpkRatingSize.Large,
@@ -136,11 +125,9 @@ internal fun BpkRatingLargeTitleOnlySample(
 }
 
 @Composable
-@Preview
-internal fun BpkRatingLargeNoScaleSample(
-  modifier: Modifier = Modifier,
-) {
+internal fun BpkRatingLargeNoScaleSample(modifier: Modifier = Modifier) {
   BpkRating(
+    modifier = modifier,
     title = stringResource(R.string.rating_title),
     subtitle = stringResource(R.string.rating_subtitle),
     value = RatingValue,
@@ -164,11 +151,9 @@ internal fun BpkRatingLargeCustomContentSample(
 }
 
 @Composable
-@Preview
-internal fun BpkRatingLargeCustomContentNoSubtitleSample(
-  modifier: Modifier = Modifier,
-) {
+internal fun BpkRatingLargeCustomContentNoSubtitleSample(modifier: Modifier = Modifier) {
   BpkRating(
+    modifier = modifier,
     value = RatingValue,
     size = BpkRatingSize.Large,
   ) {

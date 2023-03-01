@@ -31,20 +31,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.SpacingTokensComponent
 import net.skyscanner.backpack.demo.data.Token
 import net.skyscanner.backpack.demo.data.values
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun SpacingComposeStory() {
-  LazyColumn() {
+@SpacingTokensComponent
+@ComposeStory
+fun SpacingStory(modifier: Modifier = Modifier) {
+  LazyColumn(modifier) {
     val data: List<Token<Dp>> = BpkSpacing.values.sortedBy { it.value }
     items(data) { item ->
       SpacingSampleRow(token = item)

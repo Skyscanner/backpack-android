@@ -27,19 +27,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.panel.BpkPanel
 import net.skyscanner.backpack.compose.panel.BpkPanelPadding
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.PanelComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun PanelStory() {
+@PanelComponent
+@ComposeStory
+fun PanelStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
@@ -62,10 +64,7 @@ fun PanelStory() {
 }
 
 @Composable
-@Preview
-fun DefaultPanelExample(
-  modifier: Modifier = Modifier,
-) {
+internal fun DefaultPanelExample(modifier: Modifier = Modifier) {
   BpkPanel(
     modifier = modifier,
     contentAlignment = Alignment.Center,
@@ -78,10 +77,7 @@ fun DefaultPanelExample(
 }
 
 @Composable
-@Preview
-fun NoPaddingPanelExample(
-  modifier: Modifier = Modifier,
-) {
+internal fun NoPaddingPanelExample(modifier: Modifier = Modifier) {
   BpkPanel(
     modifier = modifier,
     contentAlignment = Alignment.Center,

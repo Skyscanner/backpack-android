@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
@@ -36,12 +35,13 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.FloatingNotificationComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun FloatingNotificationStory(
-  modifier: Modifier = Modifier,
-) {
+@FloatingNotificationComponent
+@ComposeStory
+fun FloatingNotificationStory(modifier: Modifier = Modifier) {
   Box(modifier) {
 
     val state = rememberBpkFloatingNotificationState()
