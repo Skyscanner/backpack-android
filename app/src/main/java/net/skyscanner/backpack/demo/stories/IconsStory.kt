@@ -42,15 +42,15 @@ import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 @IconComponent
-@ViewStory("Small")
-fun IconsStorySmall(modifier: Modifier = Modifier) =
-  IconsDemo(IconType.Small, modifier)
-
-@Composable
-@IconComponent
 @ViewStory("Default")
 fun IconsStoryDefault(modifier: Modifier = Modifier) =
   IconsDemo(IconType.Default, modifier)
+
+@Composable
+@IconComponent
+@ViewStory("Small")
+fun IconsStorySmall(modifier: Modifier = Modifier) =
+  IconsDemo(IconType.Small, modifier)
 
 @Composable
 private fun IconsDemo(
