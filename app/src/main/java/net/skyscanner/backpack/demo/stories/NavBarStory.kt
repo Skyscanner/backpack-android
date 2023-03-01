@@ -29,6 +29,8 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.navbar.BpkNavBar
 import net.skyscanner.backpack.toast.BpkToast
 
+// todo
+// todo: collapsed?
 @Composable
 @NavBarComponent
 @ViewStory("Default")

@@ -37,7 +37,7 @@ import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 
 @Composable
 @CalendarComponent
-@ViewStory("Disabled")
+@ViewStory("Disabled", screenshot = false)
 fun DisabledCalendarStory(modifier: Modifier = Modifier) {
   val automationMode = LocalAutomationMode.current
   AndroidLayout(R.layout.fragment_calendar_disabled, modifier.fillMaxSize()) {

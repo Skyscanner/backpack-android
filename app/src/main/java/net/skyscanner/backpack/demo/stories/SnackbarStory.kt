@@ -28,6 +28,8 @@ import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.snackbar.BpkSnackbar
 
+// todo
+// todo: variants
 @Composable
 @SnackbarComponent
 @ViewStory

@@ -33,12 +33,12 @@ fun StarRatingStoryDefault(modifier: Modifier = Modifier) =
 
 @Composable
 @StarRatingComponent
-@ViewStory("Different values")
+@ViewStory("Different values", screenshot = false)
 fun StarRatingStoryValues(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_star_rating_values, modifier)
 
 @Composable
 @StarRatingComponent
-@ViewStory("Custom Max Rating")
+@ViewStory("Custom Max Rating", screenshot = false)
 fun StarRatingStoryMax(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_star_rating_max, modifier)

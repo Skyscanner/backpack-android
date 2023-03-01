@@ -39,22 +39,23 @@ import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 @Calendar2Component
-@ViewStory("Selection Disabled")
+@ViewStory("Selection Disabled", screenshot = false)
 fun CalendarSelectionDisabledStory(modifier: Modifier = Modifier) =
   Calendar2Demo(CalendarStoryType.SelectionDisabled, modifier)
 
 @Composable
 @Calendar2Component
-@ViewStory("Selection Single")
+@ViewStory("Selection Single", screenshot = false)
 fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
   Calendar2Demo(CalendarStoryType.SelectionSingle, modifier)
 
 @Composable
 @Calendar2Component
-@ViewStory("Selection Range")
+@ViewStory("Selection Range", screenshot = false)
 fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
   Calendar2Demo(CalendarStoryType.SelectionRange, modifier)
 
+// todo
 @Composable
 @Calendar2Component
 @ViewStory("Selection Whole Month")
@@ -63,16 +64,18 @@ fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
 
 @Composable
 @Calendar2Component
-@ViewStory("Disabled weekends")
+@ViewStory("Disabled weekends", screenshot = false)
 fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
   Calendar2Demo(CalendarStoryType.WithDisabledDates, modifier)
 
+// todo
 @Composable
 @Calendar2Component
 @ViewStory("Day labels")
 fun CalendarDayLabels(modifier: Modifier = Modifier) =
   Calendar2Demo(CalendarStoryType.WithLabels, modifier)
 
+// todo
 @Composable
 @Calendar2Component
 @ViewStory("Pre-selected range")

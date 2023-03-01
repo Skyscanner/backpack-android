@@ -46,7 +46,7 @@ fun CardStorySelected(modifier: Modifier = Modifier) =
 
 @Composable
 @CardComponent
-@ViewStory("No elevation")
+@ViewStory("No elevation", screenshot = false)
 fun CardStoryNoElevation(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_card_no_elevation, modifier.fillMaxSize())
 

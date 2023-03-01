@@ -32,6 +32,8 @@ import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.dialog.BpkDialog
 
+// todo
+// todo: variants
 @Composable
 @DialogComponent
 @ViewStory
