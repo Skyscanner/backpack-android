@@ -51,6 +51,7 @@ import net.skyscanner.backpack.demo.compose.ElevationComposeStory
 import net.skyscanner.backpack.demo.compose.FabStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
+import net.skyscanner.backpack.demo.compose.FlightLegStory
 import net.skyscanner.backpack.demo.compose.FloatingNotificationStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
@@ -363,6 +364,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { FlareStory() },
       ),
     ),
+    "Flight Leg" composeStory { FlightLegStory() },
     "Floating Action Button" story NodeData(
       { children -> TabStory of children },
       mapOf(
