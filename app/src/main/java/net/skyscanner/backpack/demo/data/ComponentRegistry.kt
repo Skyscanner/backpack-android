@@ -21,6 +21,7 @@ package net.skyscanner.backpack.demo.data
 import androidx.compose.runtime.Composable
 import net.skyscanner.backpack.compose.button.BpkButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
+import net.skyscanner.backpack.compose.chip.BpkChipStyle
 import net.skyscanner.backpack.compose.price.BpkPriceSize
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.BadgeStory
@@ -37,15 +38,17 @@ import net.skyscanner.backpack.demo.compose.ButtonsStory
 import net.skyscanner.backpack.demo.compose.CalendarStory
 import net.skyscanner.backpack.demo.compose.CardButtonsStory
 import net.skyscanner.backpack.demo.compose.CardStory
-import net.skyscanner.backpack.demo.compose.DividedCardStory
 import net.skyscanner.backpack.demo.compose.CardWrapperStory
+import net.skyscanner.backpack.demo.compose.CarouselStory
 import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
+import net.skyscanner.backpack.demo.compose.DividedCardStory
 import net.skyscanner.backpack.demo.compose.DividerStory
 import net.skyscanner.backpack.demo.compose.ElevationComposeStory
 import net.skyscanner.backpack.demo.compose.FieldSetStory
 import net.skyscanner.backpack.demo.compose.FlareStory
+import net.skyscanner.backpack.demo.compose.FlightLegStory
 import net.skyscanner.backpack.demo.compose.FloatingNotificationStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
@@ -64,7 +67,6 @@ import net.skyscanner.backpack.demo.compose.SpacingComposeStory
 import net.skyscanner.backpack.demo.compose.SpinnerStory
 import net.skyscanner.backpack.demo.compose.SwitchStory
 import net.skyscanner.backpack.demo.compose.TextFiledStory
-import net.skyscanner.backpack.demo.compose.CarouselStory
 import net.skyscanner.backpack.demo.stories.BarChartStory
 import net.skyscanner.backpack.demo.stories.BottomNavStory
 import net.skyscanner.backpack.demo.stories.Calendar2Story
@@ -100,7 +102,6 @@ import net.skyscanner.backpack.demo.stories.TextSpansStory
 import net.skyscanner.backpack.demo.stories.ToastStory
 import net.skyscanner.backpack.demo.compose.ChipStory as ComposeChipStory
 import net.skyscanner.backpack.demo.compose.DialogStory as ComposeDialogStory
-import net.skyscanner.backpack.compose.chip.BpkChipStyle
 
 interface RegistryItem {
   val name: String
@@ -361,6 +362,7 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE composeStory { FlareStory() },
       ),
     ),
+    "Flight Leg" composeStory { FlightLegStory() },
     "Floating Action Button" story NodeData(
       { children -> TabStory of children },
       mapOf(

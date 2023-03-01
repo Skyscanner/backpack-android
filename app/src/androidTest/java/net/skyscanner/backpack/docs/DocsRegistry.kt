@@ -110,6 +110,7 @@ object DocsRegistry {
     ViewScreenshot("Flare - View - Rounded", "rounded"),
     ViewScreenshot("Flare - View - Inset padding mode", "inset-padding"),
     ComposeScreenshot("Flare - Compose", "default"),
+    ComposeScreenshot("Flight Leg", "default"),
     ComposeScreenshot("Floating Notification", "default") { setupFloatingNotification(it) },
     ViewScreenshot("Floating Action Button - View", "default"),
     ComposeScreenshot("Floating Action Button - Compose", "default"),
