@@ -30,7 +30,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.nudger.BpkNudger
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -68,8 +67,7 @@ fun NudgerStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-@Preview
-fun NudgerExample(
+private fun NudgerExample(
   modifier: Modifier = Modifier,
   initialValue: Int = NudgerStoryAvg,
   enabled: Boolean = true,
@@ -77,6 +75,7 @@ fun NudgerExample(
   var value by remember { mutableStateOf(initialValue) }
 
   BpkNudger(
+    modifier = modifier,
     value = value,
     onValueChange = { value = it },
     min = NudgerStoryMin,

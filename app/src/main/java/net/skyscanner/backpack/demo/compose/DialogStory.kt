@@ -53,6 +53,8 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.DialogComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
 
+// todo: add more examples
+// also todo: show different dialogs
 @Composable
 @DialogComponent
 @ComposeStory

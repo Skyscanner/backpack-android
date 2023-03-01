@@ -43,7 +43,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @ElevationTokensComponent
-@ComposeStory
+@ComposeStory(screenshot = false)
 fun ElevationComposeStory(modifier: Modifier = Modifier) {
   Column(modifier = modifier.padding(vertical = BpkSpacing.Base)) {
     val data = BpkElevation.values.sortedBy { it.value }

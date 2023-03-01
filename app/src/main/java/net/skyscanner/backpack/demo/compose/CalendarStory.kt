@@ -35,22 +35,23 @@ import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
 
 @Composable
 @Calendar2Component
-@ComposeStory("Selection Disabled")
+@ComposeStory("Selection Disabled", screenshot = false)
 fun CalendarSelectionDisabledStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionDisabled, modifier)
 
 @Composable
 @Calendar2Component
-@ComposeStory("Selection Single")
+@ComposeStory("Selection Single", screenshot = false)
 fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionSingle, modifier)
 
 @Composable
 @Calendar2Component
-@ComposeStory("Selection Range")
+@ComposeStory("Selection Range", screenshot = false)
 fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionRange, modifier)
 
+// todo
 @Composable
 @Calendar2Component
 @ComposeStory("Selection Whole Month")
@@ -59,16 +60,18 @@ fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
 
 @Composable
 @Calendar2Component
-@ComposeStory("Disabled weekends")
+@ComposeStory("Disabled weekends", screenshot = false)
 fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.WithDisabledDates, modifier)
 
+// todo
 @Composable
 @Calendar2Component
 @ComposeStory("Day labels")
 fun CalendarDayLabels(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.WithLabels, modifier)
 
+// todo
 @Composable
 @Calendar2Component
 @ComposeStory("Pre-selected range")

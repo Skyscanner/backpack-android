@@ -59,7 +59,7 @@ fun FlightLegStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BasicFlightLegSample(modifier: Modifier = Modifier) {
+private fun BasicFlightLegSample(modifier: Modifier = Modifier) {
   BpkFlightLeg(
     modifier = modifier,
     departureArrivalTime = "19:50 - 22:45",
@@ -74,7 +74,7 @@ fun BasicFlightLegSample(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun CompleteFlightLegSample(modifier: Modifier = Modifier) {
+private fun CompleteFlightLegSample(modifier: Modifier = Modifier) {
   BpkFlightLeg(
     modifier = modifier,
     departureArrivalTime = "19:50 - 22:45",

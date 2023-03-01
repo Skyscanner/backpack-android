@@ -44,7 +44,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @SpacingTokensComponent
-@ComposeStory
+@ComposeStory(screenshot = false)
 fun SpacingStory(modifier: Modifier = Modifier) {
   LazyColumn(modifier) {
     val data: List<Token<Dp>> = BpkSpacing.values.sortedBy { it.value }
