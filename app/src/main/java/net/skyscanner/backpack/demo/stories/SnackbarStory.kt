@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.compose.runtime.Composable
@@ -36,23 +35,6 @@ fun SnackbarStory(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_snackbar, modifier) {
     setupSnackbars(this)
   }
-
-class SnackbarFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    setupSnackbars(view)
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = SnackbarFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-    }
-  }
-}
 
 private fun setupSnackbars(view: View) {
 

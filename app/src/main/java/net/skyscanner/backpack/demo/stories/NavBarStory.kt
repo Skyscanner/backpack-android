@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.compose.runtime.Composable
@@ -70,36 +69,3 @@ private fun NavBarDemo(
       ).show()
     }
   }
-
-class NavBarFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    val navBar = view.findViewById<BpkNavBar>(R.id.appBar)
-    navBar.title = if (view.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
-      "عنوان الصفحة"
-    } else {
-      "Nav Bar"
-    }
-    navBar.navAction = {
-      BpkToast.makeText(requireContext(), "Nav is clicked!", BpkToast.LENGTH_SHORT).show()
-    }
-    navBar.menuAction = {
-      BpkToast.makeText(
-        requireContext(),
-        "${it.itemId.let(resources::getResourceEntryName)} is clicked!",
-        BpkToast.LENGTH_SHORT,
-      ).show()
-    }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = NavBarFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-      arguments?.putBoolean(SCROLLABLE, false)
-    }
-  }
-}

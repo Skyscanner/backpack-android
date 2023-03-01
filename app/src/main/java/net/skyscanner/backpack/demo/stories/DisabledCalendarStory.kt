@@ -20,7 +20,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -54,36 +53,6 @@ fun DisabledCalendarStory(modifier: Modifier = Modifier) {
     shiftColorsButton.setOnClickListener {
       controller.shiftDisabledDates()
       controller.updateContent()
-    }
-  }
-}
-
-class DisabledCalendarFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    var controller = ExampleBpkCalendarController(requireContext(), disableDates = true)
-    val bpkCalendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
-    val shiftColorsButton = view.findViewById<View>(R.id.shiftColorsButton)
-    val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
-
-    initSelectionTypeSwitcher(view, automationMode) {
-      controller = it
-      bpkCalendar.setController(controller)
-    }
-    shiftColorsButton.setOnClickListener {
-      controller.shiftDisabledDates()
-      controller.updateContent()
-    }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = DisabledCalendarFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }
   }
 }

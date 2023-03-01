@@ -19,8 +19,6 @@
 package net.skyscanner.backpack.demo.stories
 
 import android.app.Activity
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.Composable
@@ -43,24 +41,6 @@ fun DialogStory(modifier: Modifier = Modifier) {
     findViewById<ViewGroup>(R.id.dialog_root).forEach { buttonView ->
       buttonView.setOnClickListener {
         activity.handleOnClick(buttonView)
-      }
-    }
-  }
-}
-
-class DialogFragment : Story() {
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?,
-  ): View? = inflater.inflate(R.layout.fragment_dialog, container, false)
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    view.findViewById<ViewGroup>(R.id.dialog_root).forEach { buttonView ->
-      buttonView.setOnClickListener {
-        requireActivity().handleOnClick(buttonView)
       }
     }
   }

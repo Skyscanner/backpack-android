@@ -18,15 +18,10 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
-import android.view.View
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,7 +36,6 @@ import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import net.skyscanner.backpack.toast.BpkToast
-import net.skyscanner.backpack.util.unsafeLazy
 
 @Composable
 @Calendar2Component
@@ -117,63 +111,6 @@ private fun Calendar2Demo(
       CalendarStoryType.SelectionWholeMonth -> setSelection(CalendarStorySelection.WholeMonthRange)
       CalendarStoryType.PreselectedRange -> setSelection(CalendarStorySelection.PreselectedRange)
       else -> Unit
-    }
-  }
-}
-
-class Calendar2Fragment : Story() {
-
-  private val calendar by unsafeLazy { requireView().findViewById<BpkCalendar>(R.id.calendar2)!! }
-  private val type by unsafeLazy { requireArguments().getSerializable(TYPE) as CalendarStoryType }
-
-  private var scope: CoroutineScope? = null
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    scope?.cancel()
-    scope = CoroutineScope(Dispatchers.Main)
-
-    val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
-    calendar.state
-      .filter { it.selection !is CalendarSelection.None }
-      .onEach {
-        if (!automationMode) {
-          BpkToast.makeText(requireContext(), it.selection.toString(), BpkToast.LENGTH_SHORT).show()
-        }
-      }
-      .launchIn(scope!!)
-
-    calendar.effects
-      .filter { it is CalendarEffect.MonthSelected }
-      .onEach {
-        if (!automationMode) {
-          BpkToast.makeText(requireContext(), it.toString(), BpkToast.LENGTH_SHORT).show()
-        }
-      }
-      .launchIn(scope!!)
-
-    calendar.setParams(CalendarStoryType.createInitialParams(type))
-    when (type) {
-      CalendarStoryType.SelectionWholeMonth -> calendar.setSelection(CalendarStorySelection.WholeMonthRange)
-      CalendarStoryType.PreselectedRange -> calendar.setSelection(CalendarStorySelection.PreselectedRange)
-      else -> Unit
-    }
-  }
-
-  override fun onDestroyView() {
-    super.onDestroyView()
-    scope?.cancel()
-    scope = null
-  }
-
-  companion object {
-    private const val TYPE = "TYPE"
-
-    infix fun of(type: CalendarStoryType) = Calendar2Fragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, R.layout.fragment_calendar_2)
-      arguments?.putBoolean(SCROLLABLE, false)
-      arguments?.putSerializable(TYPE, type)
     }
   }
 }

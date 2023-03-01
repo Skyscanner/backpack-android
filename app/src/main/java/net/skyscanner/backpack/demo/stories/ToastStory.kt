@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -45,29 +43,3 @@ fun ToastStory(modifier: Modifier = Modifier) =
       BpkToast.makeText(context, it.text, BpkToast.LENGTH_LONG).show()
     }
   }
-
-class ToastFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    view.findViewById<TextView>(R.id.toast_short).setOnClickListener {
-      it as TextView
-      BpkToast.makeText(requireActivity(), it.text, BpkToast.LENGTH_SHORT).show()
-    }
-
-    view.findViewById<TextView>(R.id.toast_long).setOnClickListener {
-      it as TextView
-      BpkToast.makeText(requireActivity(), it.text, BpkToast.LENGTH_LONG).show()
-    }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = ToastFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-    }
-  }
-}

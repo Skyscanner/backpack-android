@@ -20,7 +20,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -57,39 +56,6 @@ fun ColoredCalendarStory(modifier: Modifier = Modifier) {
     }
     if (automationMode) {
       shiftColorsButton.visibility = View.INVISIBLE
-    }
-  }
-}
-
-class ColoredCalendarFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
-    var controller = ExampleBpkCalendarController(requireContext(), SelectionType.RANGE, false, automationMode)
-    val bpkCalendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
-    val shiftColorsButton = view.findViewById<View>(R.id.shiftColorsButton)
-
-    initSelectionTypeSwitcher(view, automationMode) {
-      controller = it
-      bpkCalendar.setController(controller)
-    }
-    shiftColorsButton.setOnClickListener {
-      controller.newColors()
-      controller.updateContent()
-    }
-    if (automationMode) {
-      shiftColorsButton.visibility = View.INVISIBLE
-    }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = ColoredCalendarFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }
   }
 }

@@ -24,14 +24,6 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import net.skyscanner.backpack.demo.ui.DemoScaffold
 import net.skyscanner.backpack.demo.ui.NavGraphs
 
-/**
- * An activity representing a list of Components. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a [ComponentDetailActivity] representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
- */
 class MainActivity : BpkBaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {

@@ -20,7 +20,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -44,25 +43,6 @@ fun DefaultCalendarStory(modifier: Modifier = Modifier) {
   AndroidLayout(R.layout.fragment_calendar_default, modifier.fillMaxSize()) {
     val calendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
     initSelectionTypeSwitcher(this, automationMode, calendar::setController)
-  }
-}
-
-class DefaultCalendarFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    val automationMode = arguments?.getBoolean(AUTOMATION_MODE) ?: false
-    val calendar = view.findViewById<BpkCalendar>(R.id.bpkCalendar)
-    initSelectionTypeSwitcher(view, automationMode, calendar::setController)
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = DefaultCalendarFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-    }
   }
 }
 

@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
-import android.view.View
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -51,40 +49,6 @@ fun BarChartStory(modifier: Modifier = Modifier) =
       ),
     )
   }
-
-class BarChartFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    view.findViewById<BpkBarChart>(R.id.bar_chart).apply {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0),
-          createMonth(1),
-          createMonth(2),
-          createMonth(3),
-          createMonth(4),
-          createMonth(5),
-        ),
-        legend = BpkBarChart.Legend(
-          selectedTitle = "Selected",
-          inactiveTitle = "No Price",
-          activeTitle = "Price",
-        ),
-      )
-    }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = BarChartFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-    }
-  }
-}
 
 private val random = Random(18735)
 

@@ -18,7 +18,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -27,7 +26,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -98,23 +96,6 @@ private fun LoadingButtonDemo(
   }
 }
 
-class LoadingButtonFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    makeButtonsLoadeable(view as ViewGroup, viewLifecycleOwner.lifecycleScope)
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = LoadingButtonFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-    }
-  }
-}
-
 private fun makeButtonsLoadeable(parent: ViewGroup, scope: CoroutineScope) {
   for (i in 0 until parent.childCount) {
     val child = parent.getChildAt(i)
@@ -131,58 +112,10 @@ private fun makeButtonsLoadeable(parent: ViewGroup, scope: CoroutineScope) {
   }
 }
 
-class StyleableButtonFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    view.findViewById<View>(R.id.primary).setOnClickListener { setButtonType(view, BpkButton.Type.Primary) }
-    view.findViewById<View>(R.id.secondary).setOnClickListener { setButtonType(view, BpkButton.Type.Secondary) }
-    view.findViewById<View>(R.id.destructive).setOnClickListener { setButtonType(view, BpkButton.Type.Destructive) }
-    view.findViewById<View>(R.id.featured).setOnClickListener { setButtonType(view, BpkButton.Type.Featured) }
-    view.findViewById<View>(R.id.primaryOnDark).setOnClickListener { setButtonType(view, BpkButton.Type.PrimaryOnDark) }
-    view.findViewById<View>(R.id.primaryOnLight).setOnClickListener { setButtonType(view, BpkButton.Type.PrimaryOnLight) }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = StyleableButtonFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-    }
-  }
-}
-
 private fun setButtonType(view: View, type: BpkButton.Type) {
   view.findViewById<ViewGroup>(R.id.buttonsContainer).run {
     for (i in 0 until childCount) {
       (getChildAt(i) as? BpkButton?)?.type = type
-    }
-  }
-}
-
-class ChangeableButtonsFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    view.findViewById<TextView>(R.id.button_increase).setOnClickListener {
-      it as TextView
-      it.text = getString(R.string.button_increased, it.text.toString())
-    }
-
-    view.findViewById<TextView>(R.id.button_decrease).setOnClickListener {
-      it as TextView
-      it.text = it.text.substring(0, max(0, it.length() - 1))
-    }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = ChangeableButtonsFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }
   }
 }
