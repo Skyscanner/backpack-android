@@ -34,6 +34,7 @@ import org.junit.runners.Parameterized
 
 // todo: rename it when we all the stories migrated
 @RunWith(Parameterized::class)
+@Ignore // todo: unignore when we all the stories migrated
 open class GenerateScreenshots1(
   private val story: Story,
 ) {
