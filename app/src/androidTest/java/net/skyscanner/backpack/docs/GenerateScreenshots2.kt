@@ -22,34 +22,29 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.test.rule.ActivityTestRule
-import net.skyscanner.backpack.demo.BpkBaseActivity
-import net.skyscanner.backpack.demo.meta.StoriesRepository
-import net.skyscanner.backpack.demo.meta.Story
-import net.skyscanner.backpack.demo.ui.DemoScaffold
-import net.skyscanner.backpack.demo.ui.StoryScreen
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
-// todo: rename it when we all the stories migrated
 @RunWith(Parameterized::class)
-@Ignore // todo: unignore when we all the stories migrated
-open class GenerateScreenshots1(
-  private val story: Story,
+@Ignore
+open class GenerateScreenshots2(
+  private val componentPath: String,
+  private val screenshotName: String,
+  private val componentType: String,
+  private val setup: ((AndroidComposeTestRule<*, *>) -> Unit)?
 ) {
 
   companion object {
-
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
-    fun data(): List<Story> = StoriesRepository.getInstance().screenshotStories()
-
+    fun data() = DocsRegistry.screenshots
   }
 
   @get:Rule
-  var activityRule = ActivityTestRule(BpkBaseActivity::class.java, true, false)
+  var activityRule = ActivityTestRule(androidx.activity.ComponentActivity::class.java, true, false)
 
   @get:Rule
   val composeTestRule = AndroidComposeTestRule(activityRule) { it.activity }
@@ -68,31 +63,19 @@ open class GenerateScreenshots1(
 
   private fun runActivityAndTakeScreenshot(suffix: String? = null) {
     val intent = Intent()
+//    intent.putExtra(ComponentDetailFragment.ARG_ITEM_ID, componentPath)
+//    intent.putExtra(ComponentDetailFragment.AUTOMATION_MODE, true)
     activityRule.launchActivity(intent)
-    composeTestRule.setContent {
-      DemoScaffold(automationMode = true) {
-        StoryScreen(
-          component = story.component.name,
-          story = story.name,
-          isCompose = story.isCompose,
-        )
-      }
-    }
+    setup?.invoke(composeTestRule)
     takeScreenshot(suffix)
     activityRule.finishActivity()
   }
 
   private fun takeScreenshot(suffix: String?) {
     RemoteScreenGrab.takeScreenshot(
-      component = story.component.name,
-      type = if (story.isCompose) "compose" else "view",
-      file = story.name
-        .lowercase()
-        .replace(" ", "")
-        .replace("-", "_")
-        .replace("–", "_")
-        .let { if (suffix != null) "${it}_$suffix" else it }
-      ,
+      type = componentType,
+      component = componentPath.split(" - ").first().replace(" ", ""),
+      file = listOfNotNull(screenshotName, suffix).joinToString(separator = "_"),
     )
   }
 }

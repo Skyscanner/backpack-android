@@ -67,7 +67,7 @@ fun NudgerStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun NudgerExample(
+internal fun NudgerExample(
   modifier: Modifier = Modifier,
   initialValue: Int = NudgerStoryAvg,
   enabled: Boolean = true,
@@ -85,7 +85,7 @@ private fun NudgerExample(
 }
 
 @Composable
-private fun NudgerExample(
+internal fun NudgerExample(
   name: String,
   modifier: Modifier = Modifier,
   content: @Composable ColumnScope.() -> Unit,
