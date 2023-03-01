@@ -299,4 +299,5 @@
   <string name="maps_markers_badges">Badges</string>
   <string name="maps_markers_badges_with_icons">With icons</string>
   <string name="map_markers">Map markers</string>
+  <string name="compose">Compose</string>
 </resources>
