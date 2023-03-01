@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -30,6 +31,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import net.skyscanner.backpack.compose.button.BpkButton
 import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotification
+import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificationState
 import net.skyscanner.backpack.compose.floatingnotification.rememberBpkFloatingNotificationState
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
@@ -37,8 +39,8 @@ import net.skyscanner.backpack.compose.tokens.Heart
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FloatingNotificationComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 
-// todo
 @Composable
 @FloatingNotificationComponent
 @ComposeStory
@@ -84,18 +86,29 @@ fun FloatingNotificationStory(modifier: Modifier = Modifier) {
       }
 
       BpkButton(text = stringResource(R.string.floating_notification_with_icon_and_action)) {
-        scope.launch {
-          state.show(
-            text = text,
-            icon = BpkIcon.Heart,
-            cta = cta,
-            onClick = {},
-            onExit = {},
-          )
-        }
+        scope.showNotificationWithIconAndAction(state, text, cta)
       }
     }
 
     BpkFloatingNotification(state)
+
+    val automationMode = LocalAutomationMode.current
+    LaunchedEffect(scope, state, automationMode) {
+      if (automationMode) {
+        scope.showNotificationWithIconAndAction(state, text, cta)
+      }
+    }
+  }
+}
+
+private fun CoroutineScope.showNotificationWithIconAndAction(state: BpkFloatingNotificationState, text: String, cta: String) {
+  launch {
+    state.show(
+      text = text,
+      icon = BpkIcon.Heart,
+      cta = cta,
+      onClick = {},
+      onExit = {},
+    )
   }
 }
