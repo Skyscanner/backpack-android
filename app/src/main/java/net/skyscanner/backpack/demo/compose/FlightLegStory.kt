@@ -30,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
-import net.skyscanner.backpack.compose.annotation.BpkPreviews
 import net.skyscanner.backpack.compose.flightleg.BpkFlightLeg
 import net.skyscanner.backpack.compose.flightleg.bpkAirportHighlightStyle
 import net.skyscanner.backpack.compose.icon.BpkIcon
@@ -38,8 +37,12 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.tokens.Aircraft
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.FlightLegComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
+@FlightLegComponent
+@ComposeStory
 fun FlightLegStory(modifier: Modifier = Modifier) {
   Column(
     modifier = modifier
@@ -56,9 +59,9 @@ fun FlightLegStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-@BpkPreviews
-fun BasicFlightLegSample() {
+fun BasicFlightLegSample(modifier: Modifier = Modifier) {
   BpkFlightLeg(
+    modifier = modifier,
     departureArrivalTime = "19:50 - 22:45",
     description = AnnotatedString("LHR-SIN, SwissAir"),
     stopsInfo = "Direct",
@@ -71,9 +74,9 @@ fun BasicFlightLegSample() {
 }
 
 @Composable
-@BpkPreviews
-fun CompleteFlightLegSample() {
+fun CompleteFlightLegSample(modifier: Modifier = Modifier) {
   BpkFlightLeg(
+    modifier = modifier,
     departureArrivalTime = "19:50 - 22:45",
     description = buildAnnotatedString {
       withStyle(
