@@ -51,7 +51,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @CardButtonComponent
 @ComposeStory("Default")
 fun CardButtonStoryDefault(modifier: Modifier = Modifier) =
-  CardButtonsDemo(size = BpkCardButtonSize.Default, modifier)
+  CardButtonsDemo(BpkCardButtonSize.Default, modifier)
 
 @Composable
 @CardButtonComponent
