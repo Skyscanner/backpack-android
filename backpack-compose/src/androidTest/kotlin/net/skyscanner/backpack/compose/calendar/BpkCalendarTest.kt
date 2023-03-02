@@ -34,7 +34,7 @@ import net.skyscanner.backpack.calendar2.CalendarParams
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.calendar.internal.CALENDAR_GRID_TEST_TAG
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.threeten.bp.LocalDate
@@ -110,7 +110,7 @@ class BpkCalendarTest {
   fun withStartAndEndDateSelected() = runTest {
     val expected = CalendarSelection.Dates(
       start = LocalDate.of(2019, 1, 17),
-      end = LocalDate.of(2019, 2, 14)
+      end = LocalDate.of(2019, 2, 14),
     )
     val controller = createController(DefaultRange)
 
@@ -131,7 +131,6 @@ class BpkCalendarTest {
 
     assertEquals(expected, state.selection)
   }
-
 
   @Test
   fun withStartDateSelected() = runTest {

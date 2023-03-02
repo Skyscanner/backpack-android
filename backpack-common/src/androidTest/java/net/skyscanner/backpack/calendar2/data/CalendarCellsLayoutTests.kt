@@ -77,7 +77,7 @@ class CalendarCellsLayoutTests {
     testCalendarWith(
       CalendarSettings.Default.copy(
         range = CalendarSettings.Default.range.start.plusDays(3)..CalendarSettings.Default.range.endInclusive,
-      )
+      ),
     ) {
       verify {
         assertEquals(1, (state.cells[7] as CalendarCell.Day).date.dayOfMonth)
@@ -97,7 +97,7 @@ class CalendarCellsLayoutTests {
     testCalendarWith(
       CalendarSettings.Default.copy(
         range = CalendarSettings.Default.range.start..CalendarSettings.Default.range.start.plusDays(27),
-      )
+      ),
     ) {
       verify {
         assertEquals(31, (state.cells[37] as CalendarCell.Day).date.dayOfMonth)
@@ -142,7 +142,7 @@ class CalendarCellsLayoutTests {
   fun select_whole_month_button_is_shown_when_whole_month_selection_is_enabled() {
     val monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
     val calenderParams = CalendarSettings.Default.copy(
-      monthSelectionMode = monthSelectionMode
+      monthSelectionMode = monthSelectionMode,
     )
     testCalendarWith(calenderParams) {
       verify {
