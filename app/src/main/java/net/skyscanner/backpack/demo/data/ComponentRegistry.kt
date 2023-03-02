@@ -43,7 +43,7 @@ import net.skyscanner.backpack.demo.compose.CheckboxStory
 import net.skyscanner.backpack.demo.compose.ChipStoryDefault
 import net.skyscanner.backpack.demo.compose.ChipStoryOnDark
 import net.skyscanner.backpack.demo.compose.ChipStoryOnImage
-import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
+import net.skyscanner.backpack.demo.compose.CollapsibleNavBarStory
 import net.skyscanner.backpack.demo.compose.ColorsComposeStory
 import net.skyscanner.backpack.demo.compose.DividedCardStory
 import net.skyscanner.backpack.demo.compose.DividerStory
@@ -56,7 +56,7 @@ import net.skyscanner.backpack.demo.compose.FloatingNotificationStory
 import net.skyscanner.backpack.demo.compose.HeadingStyleStory
 import net.skyscanner.backpack.demo.compose.HeroStyleStory
 import net.skyscanner.backpack.demo.compose.IconsStoryCompose
-import net.skyscanner.backpack.demo.compose.NavigationBarStory
+import net.skyscanner.backpack.demo.compose.NavBarStory
 import net.skyscanner.backpack.demo.compose.NudgerStory
 import net.skyscanner.backpack.demo.compose.PageIndicatorStory
 import net.skyscanner.backpack.demo.compose.PanelStory
@@ -405,8 +405,8 @@ object ComponentRegistry {
         TAB_TITLE_COMPOSE story NodeData(
           { children -> SubStory of children },
           mapOf(
-            "Default" composeStory { NavigationBarStory() },
-            "Collapsible" composeStory { CollapsibleNavigationBarStory() },
+            "Default" composeStory { NavBarStory() },
+            "Collapsible" composeStory { CollapsibleNavBarStory() },
           ),
         ),
       ),

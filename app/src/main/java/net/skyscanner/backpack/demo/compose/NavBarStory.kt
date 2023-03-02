@@ -53,7 +53,7 @@ import net.skyscanner.backpack.demo.ui.ListItem
 @Composable
 @NavBarComponent
 @ComposeStory("Default")
-fun NavigationBarStory(modifier: Modifier = Modifier) {
+fun NavBarStory(modifier: Modifier = Modifier) {
   Column(
     modifier = modifier.padding(vertical = BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
@@ -71,7 +71,7 @@ fun NavigationBarStory(modifier: Modifier = Modifier) {
 @Composable
 @NavBarComponent
 @ComposeStory("Collapsible")
-fun CollapsibleNavigationBarStory(
+fun CollapsibleNavBarStory(
   modifier: Modifier = Modifier,
   initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,
   showList: Boolean = true,
@@ -157,7 +157,7 @@ internal fun ActionsTopNavBar(modifier: Modifier = Modifier) {
 @Composable
 internal fun TextActionTopNavBar(modifier: Modifier = Modifier) {
   BpkTopNavBar(
-    navigationIcon = NavIcon.None,
+    navIcon = NavIcon.None,
     title = stringResource(R.string.navigation_bar_title),
     action = TextAction(text = stringResource(R.string.navigation_text_action)) {},
     modifier = modifier,
