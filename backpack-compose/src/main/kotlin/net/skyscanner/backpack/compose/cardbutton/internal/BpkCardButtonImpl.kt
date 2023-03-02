@@ -59,13 +59,13 @@ private enum class BpkCardButtonState {
 }
 
 @Composable
-fun BpkSaveCardButtonImpl(
+internal fun BpkSaveCardButtonImpl(
   checked: Boolean,
   contentDescription: String,
   onCheckedChange: (Boolean) -> Unit,
+  size: BpkCardButtonSize,
+  style: BpkCardButtonStyle,
   modifier: Modifier = Modifier,
-  size: BpkCardButtonSize = BpkCardButtonSize.Default,
-  style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
 ) {
   var state by remember { mutableStateOf(BpkCardButtonState.Rest) }
   val scaleAnimation = remember { Animatable(1f) }
@@ -103,7 +103,7 @@ fun BpkSaveCardButtonImpl(
     Box(
       modifier = Modifier
         .clip(shape = CircleShape)
-        .size(if (size == BpkCardButtonSize.Default) BpkSpacing.Xxl else BpkSpacing.Xl)
+        .size(if (size == BpkCardButtonSize.Large) BpkSpacing.Xxl else BpkSpacing.Xl)
         .background(
           color = when (style) {
             BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
@@ -118,7 +118,7 @@ fun BpkSaveCardButtonImpl(
               role = Role.Switch,
               onValueChange = { checked ->
                 if (checked) state = BpkCardButtonState.Transition
-                onCheckedChange.invoke(checked)
+                onCheckedChange(checked)
               },
             )
           } else Modifier,
@@ -129,7 +129,7 @@ fun BpkSaveCardButtonImpl(
         BpkIcon(
           icon = if (checked) BpkIcon.Heart else BpkIcon.HeartOutline,
           contentDescription = null,
-          size = if (size == BpkCardButtonSize.Default) BpkIconSize.Large else BpkIconSize.Small,
+          size = if (size == BpkCardButtonSize.Large) BpkIconSize.Large else BpkIconSize.Small,
           tint = colorAnimation,
         )
       }
@@ -138,12 +138,12 @@ fun BpkSaveCardButtonImpl(
 }
 
 @Composable
-fun BpkShareCardButtonImpl(
+internal fun BpkShareCardButtonImpl(
   contentDescription: String,
   onClick: () -> Unit,
+  size: BpkCardButtonSize,
+  style: BpkCardButtonStyle,
   modifier: Modifier = Modifier,
-  size: BpkCardButtonSize = BpkCardButtonSize.Default,
-  style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
 ) {
   Box(
     modifier = modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
@@ -152,7 +152,7 @@ fun BpkShareCardButtonImpl(
     Box(
       modifier = Modifier
         .clip(shape = CircleShape)
-        .size(if (size == BpkCardButtonSize.Default) BpkSpacing.Xxl else BpkSpacing.Xl)
+        .size(if (size == BpkCardButtonSize.Large) BpkSpacing.Xxl else BpkSpacing.Xl)
         .background(
           color = when (style) {
             BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
@@ -166,7 +166,7 @@ fun BpkShareCardButtonImpl(
         modifier = Modifier,
         icon = BpkIcon.ShareIos,
         contentDescription = contentDescription,
-        size = if (size == BpkCardButtonSize.Default) BpkIconSize.Large else BpkIconSize.Small,
+        size = if (size == BpkCardButtonSize.Large) BpkIconSize.Large else BpkIconSize.Small,
         tint = when (style) {
           BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
           else -> BpkTheme.colors.textPrimary
