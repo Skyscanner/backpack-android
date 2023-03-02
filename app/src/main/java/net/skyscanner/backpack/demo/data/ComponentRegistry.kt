@@ -34,8 +34,8 @@ import net.skyscanner.backpack.demo.compose.CalendarSelectionDisabledStory
 import net.skyscanner.backpack.demo.compose.CalendarSelectionRangeStory
 import net.skyscanner.backpack.demo.compose.CalendarSelectionSingleStory
 import net.skyscanner.backpack.demo.compose.CalendarSelectionWholeMonthStory
-import net.skyscanner.backpack.demo.compose.CardButtonDefaultStory
-import net.skyscanner.backpack.demo.compose.CardButtonSmallStory
+import net.skyscanner.backpack.demo.compose.CardButtonStoryLarge
+import net.skyscanner.backpack.demo.compose.CardButtonStoryDefault
 import net.skyscanner.backpack.demo.compose.CardStory
 import net.skyscanner.backpack.demo.compose.CardWrapperStory
 import net.skyscanner.backpack.demo.compose.CarouselStory
@@ -263,8 +263,8 @@ object ComponentRegistry {
     "Card Button" story NodeData(
       { children -> SubStory of children },
       mapOf(
-        "Default" composeStory { CardButtonDefaultStory() },
-        "Small" composeStory { CardButtonSmallStory() },
+        "Default" composeStory { CardButtonStoryDefault() },
+        "Large" composeStory { CardButtonStoryLarge() },
       ),
     ),
     "Carousel" composeStory { CarouselStory() },

@@ -50,14 +50,14 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @Composable
 @CardButtonComponent
 @ComposeStory("Default")
-fun CardButtonDefaultStory(modifier: Modifier = Modifier) =
-  CardButtonsDemo(BpkCardButtonSize.Default, modifier)
+fun CardButtonStoryDefault(modifier: Modifier = Modifier) =
+  CardButtonsDemo(size = BpkCardButtonSize.Default, modifier)
 
 @Composable
 @CardButtonComponent
-@ComposeStory("Small")
-fun CardButtonSmallStory(modifier: Modifier = Modifier) =
-  CardButtonsDemo(size = BpkCardButtonSize.Small, modifier)
+@ComposeStory("Large")
+fun CardButtonStoryLarge(modifier: Modifier = Modifier) =
+  CardButtonsDemo(BpkCardButtonSize.Large, modifier)
 
 @Composable
 private fun CardButtonsDemo(
