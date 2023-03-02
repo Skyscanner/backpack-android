@@ -340,4 +340,3 @@ private fun toSemanticXml(source: BpkColors): Map<String, String> {
     "-night" to toXml(source, isLight = false),
   )
 }
-

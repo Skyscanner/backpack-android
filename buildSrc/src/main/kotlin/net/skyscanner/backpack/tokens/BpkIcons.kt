@@ -32,7 +32,7 @@ import java.io.File
 data class BpkIcon(
   val name: String,
   val type: Type,
-  val value: String
+  val value: String,
 ) {
 
   enum class Type {

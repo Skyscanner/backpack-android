@@ -25,7 +25,7 @@ interface Pipeline<T> {
 
 }
 
-fun <T> Pipeline<File>.readAs(format: BpkFormat<T>) : Pipeline<T> =
+fun <T> Pipeline<File>.readAs(format: BpkFormat<T>): Pipeline<T> =
   pipeTo(format)
 
 fun <T> Pipeline<T>.saveTo(output: BpkOutput<T>): Pipeline<Boolean> =
@@ -37,9 +37,9 @@ fun <Input, Output> Pipeline<Input>.parseAs(parser: BpkParser<Input, Output>): P
 fun <In, Out> Pipeline<In>.transformTo(transformer: BpkTransformer<In, Out>): Pipeline<Out> =
   pipeTo(transformer)
 
-internal fun <T> pipelineOf(block: () -> T) : Pipeline<T> =
+internal fun <T> pipelineOf(block: () -> T): Pipeline<T> =
   object : Pipeline<T> {
-    override fun execute(): T  =
+    override fun execute(): T =
       block()
   }
 

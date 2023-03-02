@@ -20,8 +20,7 @@ package net.skyscanner.backpack.tokens
 import com.google.gson.Gson
 import java.io.File
 
-
-sealed class BpkFormat<T>: (File) -> T {
+sealed class BpkFormat<T> : (File) -> T {
 
   object Json : BpkFormat<Map<String, Any>>() {
     override fun invoke(file: File): Map<String, Any> {
