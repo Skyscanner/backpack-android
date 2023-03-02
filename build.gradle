@@ -64,7 +64,7 @@ subprojects {
   }
 
   dependencies {
-    detektPlugins "io.nlopez.compose.rules:detekt:0.1.1"
+    detektPlugins "io.nlopez.compose.rules:detekt:0.1.2"
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-rules-libraries:$detekt_version"
   }
@@ -121,7 +121,7 @@ ext {
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
-  lintVersion = "30.4.1"
+  lintVersion = "30.4.2"
   lint = "com.android.tools.lint:lint:$lintVersion"
   lintApi = "com.android.tools.lint:lint-api:$lintVersion"
   lintTests = "com.android.tools.lint:lint-tests:$lintVersion"
@@ -140,7 +140,15 @@ ext {
   composeTestManifest = [composeBom, "androidx.compose.ui:ui-test-manifest"]
   composeActivity = "androidx.activity:activity-compose:1.6.1"
 
-  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
+  // update this alongside with Compose version
+  destinationsVersion = "1.7.34-beta"
+  destinationsCore = "io.github.raamcosta.compose-destinations:core:$destinationsVersion"
+  destinationsKsp = "io.github.raamcosta.compose-destinations:ksp:$destinationsVersion"
+
+  // update this alongside with Compose version
+  accompanistVersion = "0.28.0"
+  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
+  accompanistPager = "com.google.accompanist:accompanist-pager:$accompanistVersion"
 }
 
 tasks.dokkaHtmlMultiModule.configure {

@@ -50,12 +50,15 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.tokens.Tick
 import net.skyscanner.backpack.compose.tokens.Trash
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.DialogComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun DialogStory() {
+@DialogComponent
+@ComposeStory
+fun DialogStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
     var shownDialog by rememberSaveable { mutableStateOf(ShownDialog.None) }
@@ -98,7 +101,7 @@ enum class ShownDialog(@StringRes val buttonText: Int) {
 
 @Preview
 @Composable
-fun SuccessOneButtonDialogExample(onDismiss: () -> Unit = {}) {
+internal fun SuccessOneButtonDialogExample(onDismiss: () -> Unit = {}) {
   BpkSuccessDialog(
     icon = BpkIcon.Tick,
     title = stringResource(id = R.string.dialog_title),
@@ -110,7 +113,7 @@ fun SuccessOneButtonDialogExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun SuccessTwoButtonsDialogExample(onDismiss: () -> Unit = {}) {
+internal fun SuccessTwoButtonsDialogExample(onDismiss: () -> Unit = {}) {
   BpkSuccessDialog(
     icon = BpkIcon.Tick,
     title = stringResource(id = R.string.dialog_title),
@@ -123,7 +126,7 @@ fun SuccessTwoButtonsDialogExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun SuccessThreeButtonsDialogExample(onDismiss: () -> Unit = {}) {
+internal fun SuccessThreeButtonsDialogExample(onDismiss: () -> Unit = {}) {
   BpkSuccessDialog(
     icon = BpkIcon.Tick,
     title = stringResource(id = R.string.dialog_title),
@@ -137,7 +140,7 @@ fun SuccessThreeButtonsDialogExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun WarningDialogExample(onDismiss: () -> Unit = {}) {
+internal fun WarningDialogExample(onDismiss: () -> Unit = {}) {
   BpkWarningDialog(
     icon = BpkIcon.AlertAdd,
     title = stringResource(id = R.string.dialog_title),
@@ -151,7 +154,7 @@ fun WarningDialogExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun DestructiveDialogExample(onDismiss: () -> Unit = {}) {
+internal fun DestructiveDialogExample(onDismiss: () -> Unit = {}) {
   BpkDestructiveDialog(
     icon = BpkIcon.Trash,
     title = stringResource(id = R.string.dialog_title),
@@ -164,7 +167,7 @@ fun DestructiveDialogExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun NoIconDialogExample(onDismiss: () -> Unit = {}) {
+internal fun NoIconDialogExample(onDismiss: () -> Unit = {}) {
   BpkSuccessDialog(
     icon = null,
     title = stringResource(id = R.string.dialog_title),
@@ -177,7 +180,7 @@ fun NoIconDialogExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun FlareDialogExample(onDismiss: () -> Unit = {}) {
+internal fun FlareDialogExample(onDismiss: () -> Unit = {}) {
   BpkFlareDialog(
     title = stringResource(id = R.string.dialog_title),
     text = stringResource(id = R.string.dialog_text),
@@ -196,7 +199,7 @@ fun FlareDialogExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun ImageDialogStartAlignmentExample(onDismiss: () -> Unit = {}) {
+internal fun ImageDialogStartAlignmentExample(onDismiss: () -> Unit = {}) {
   BpkImageDialog(
     title = stringResource(id = R.string.dialog_title),
     text = stringResource(id = R.string.dialog_text),
@@ -216,7 +219,7 @@ fun ImageDialogStartAlignmentExample(onDismiss: () -> Unit = {}) {
 
 @Preview
 @Composable
-fun ImageDialogEndAlignmentExample(onDismiss: () -> Unit = {}) {
+internal fun ImageDialogEndAlignmentExample(onDismiss: () -> Unit = {}) {
   BpkImageDialog(
     title = stringResource(id = R.string.dialog_title),
     text = stringResource(id = R.string.dialog_text),

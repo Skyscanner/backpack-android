@@ -19,34 +19,47 @@
 package net.skyscanner.backpack.demo.ui
 
 import android.content.Intent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
 import net.skyscanner.backpack.compose.navigationbar.NavIcon
+import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.Settings
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.SettingsActivity
-import net.skyscanner.backpack.demo.meta.Story
+import net.skyscanner.backpack.demo.meta.StoriesRepository
 
 @Composable
+@Destination("story")
 fun StoryScreen(
-  story: Story,
+  component: String,
+  story: String,
+  isCompose: Boolean,
   modifier: Modifier = Modifier,
-  onBack: () -> Unit,
+  navigator: DestinationsNavigator = EmptyDestinationsNavigator,
+  repository: StoriesRepository = StoriesRepository.getInstance(),
 ) {
-  Column(modifier = modifier) {
+  Column(modifier = modifier
+    .background(BpkTheme.colors.canvas)
+    .fillMaxSize(),
+  ) {
     val context = LocalContext.current
     BpkTopNavBar(
       navIcon = NavIcon.Back(
         contentDescription = stringResource(R.string.navigation_back),
-        onClick = { onBack() },
+        onClick = navigator::popBackStack,
       ),
-      title = story.component.name + " - " + story.name,
+      title = "$component - $story",
       actions = listOf(
         IconAction(
           icon = BpkIcon.Settings,
@@ -58,6 +71,7 @@ fun StoryScreen(
         ),
       ),
     )
-    story.content()
+
+    repository.storyOf(component, story, isCompose).content()
   }
 }

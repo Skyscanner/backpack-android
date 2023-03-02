@@ -96,12 +96,6 @@ android {
   }
 }
 
-kotlin {
-  sourceSets {
-    main.kotlin.srcDirs += 'build/generated/ksp/internalDebug/kotlin'
-  }
-}
-
 dependencies {
   implementation fileTree(include: ['*.jar'], dir: 'libs')
   implementation rootProject.ext.picasso
@@ -110,6 +104,8 @@ dependencies {
   implementation rootProject.ext.composeActivity
   implementation rootProject.ext.kotlinReflection
   implementation rootProject.ext.stetho
+  implementation rootProject.ext.destinationsCore
+  implementation rootProject.ext.accompanistPager
   testImplementation rootProject.ext.junit
   debugImplementation rootProject.ext.composeTestManifest
   androidTestImplementation rootProject.ext.composeFoundation
@@ -125,4 +121,5 @@ dependencies {
   implementation project(':Backpack')
   implementation project(':backpack-compose')
   ksp project(":meta-processor")
+  ksp rootProject.ext.destinationsKsp
 }

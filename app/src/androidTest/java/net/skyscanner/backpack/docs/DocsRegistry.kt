@@ -40,7 +40,7 @@ import org.threeten.bp.YearMonth
 
 object DocsRegistry {
   val screenshots = listOf(
-    ComposeScreenshot("All Icons - Compose", "default"),
+    ComposeScreenshot("All icons", "default"),
     ViewScreenshot("Badge - View", "all"),
     ComposeScreenshot("Badge - Compose", "default"),
     ViewScreenshot("Bar Chart", "default"),
@@ -77,6 +77,7 @@ object DocsRegistry {
     ComposeScreenshot("Card - Compose - Card wrapper", "card-wrapper"),
     ComposeScreenshot("Card Button - Default", "default"),
     ComposeScreenshot("Card Button - Small", "small"),
+    ComposeScreenshot("Carousel", "default"),
     ViewScreenshot("Chip - View - Default", "all"),
     ViewScreenshot("Chip - View - On Dark", "on-dark"),
     ViewScreenshot("Chip - View - On Image", "on-image"),
@@ -109,6 +110,7 @@ object DocsRegistry {
     ViewScreenshot("Flare - View - Rounded", "rounded"),
     ViewScreenshot("Flare - View - Inset padding mode", "inset-padding"),
     ComposeScreenshot("Flare - Compose", "default"),
+    ComposeScreenshot("Flight Leg", "default"),
     ComposeScreenshot("Floating Notification", "default") { setupFloatingNotification(it) },
     ViewScreenshot("Floating Action Button - View", "default"),
     ComposeScreenshot("Floating Action Button - Compose", "default"),

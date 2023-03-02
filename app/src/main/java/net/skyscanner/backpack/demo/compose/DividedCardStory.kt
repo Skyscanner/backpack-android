@@ -29,18 +29,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.dividedcard.BpkDividedCard
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.CardComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun DividedCardStory() {
+@CardComponent
+@ComposeStory("Divided card")
+fun DividedCardStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier
+    modifier = modifier
       .background(BpkTheme.colors.line)
       .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
@@ -55,12 +57,9 @@ fun DividedCardStory() {
 }
 
 @Composable
-@Preview
-fun DividedCardExample(
-  modifier: Modifier = Modifier,
-) {
+private fun DividedCardExample(modifier: Modifier = Modifier) {
   BpkDividedCard(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier.fillMaxWidth(),
     primaryContent = {
       Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
       BpkText(

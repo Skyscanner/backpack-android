@@ -24,6 +24,7 @@ import com.google.devtools.ksp.symbol.KSName
 data class ComponentDefinition(
   val id: KSName,
   val name: String,
+  val isToken: Boolean,
   val location: FileLocation,
 )
 

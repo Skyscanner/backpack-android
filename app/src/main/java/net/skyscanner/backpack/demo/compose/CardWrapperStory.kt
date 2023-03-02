@@ -28,18 +28,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.cardwrapper.BpkCardWrapper
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.CardComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun CardWrapperStory() {
+@CardComponent
+@ComposeStory("Card wrapper")
+fun CardWrapperStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier
+    modifier = modifier
       .background(BpkTheme.colors.line)
       .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
@@ -54,12 +56,9 @@ fun CardWrapperStory() {
 }
 
 @Composable
-@Preview
-fun CardWrapperExample(
-  modifier: Modifier = Modifier,
-) {
+private fun CardWrapperExample(modifier: Modifier = Modifier) {
   BpkCardWrapper(
-    modifier = Modifier.fillMaxWidth(),
+    modifier = modifier.fillMaxWidth(),
     backgroundColor = BpkTheme.colors.coreEco,
     headerContent = {
       Column() {

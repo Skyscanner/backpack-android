@@ -28,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import net.skyscanner.backpack.compose.badge.BpkBadgeType
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.navigationbar.BpkTopNavBar
 import net.skyscanner.backpack.compose.navigationbar.IconAction
@@ -35,12 +36,12 @@ import net.skyscanner.backpack.compose.navigationbar.NavIcon
 import net.skyscanner.backpack.compose.navigationbar.nestedScroll
 import net.skyscanner.backpack.compose.navigationbar.rememberTopAppBarState
 import net.skyscanner.backpack.compose.tokens.Settings
-import net.skyscanner.backpack.demo.compose.ComponentItem
-import net.skyscanner.backpack.demo.compose.ComponentsTitle
 import net.skyscanner.backpack.demo.data.ComponentRegistry
 import net.skyscanner.backpack.demo.data.ComposeNode
 import net.skyscanner.backpack.demo.data.NodeItem
 import net.skyscanner.backpack.demo.data.RegistryItem
+import net.skyscanner.backpack.demo.ui.ComponentItem
+import net.skyscanner.backpack.demo.ui.ComponentsTitle
 
 /**
  * An activity representing a list of Components. This activity
@@ -86,7 +87,7 @@ class MainActivity : BpkBaseActivity() {
           ComponentsTitle(stringResource(R.string.tokens_title))
         }
         items(ComponentRegistry.TOKENS.values.toList()) {
-          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it)) {
+          ComponentItem(title = it.name) {
             showComponentDetail(it.name)
           }
         }
@@ -94,7 +95,12 @@ class MainActivity : BpkBaseActivity() {
           ComponentsTitle(title = stringResource(R.string.components_title))
         }
         items(ComponentRegistry.COMPONENTS.values.toList()) {
-          ComponentItem(title = it.name, showComposeBadge = hasComposeNodes(item = it)) {
+          val hasComposeNodes = hasComposeNodes(item = it)
+          ComponentItem(
+            title = it.name,
+            badgeType = if (hasComposeNodes) BpkBadgeType.Success else null,
+            badgeText = if (hasComposeNodes) stringResource(R.string.compose) else null,
+          ) {
             showComponentDetail(it.name)
           }
         }

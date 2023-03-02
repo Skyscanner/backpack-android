@@ -27,6 +27,7 @@ import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.ui.DemoScaffold
 import net.skyscanner.backpack.demo.ui.StoryScreen
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,6 +35,7 @@ import org.junit.runners.Parameterized
 
 // todo: rename it when we all the stories migrated
 @RunWith(Parameterized::class)
+@Ignore // todo: unignore when we all the stories migrated
 open class GenerateScreenshots1(
   private val story: Story,
 ) {
@@ -69,7 +71,11 @@ open class GenerateScreenshots1(
     activityRule.launchActivity(intent)
     composeTestRule.setContent {
       DemoScaffold(automationMode = true) {
-        StoryScreen(story = story, onBack = {})
+        StoryScreen(
+          component = story.component.name,
+          story = story.name,
+          isCompose = story.isCompose,
+        )
       }
     }
     takeScreenshot(suffix)

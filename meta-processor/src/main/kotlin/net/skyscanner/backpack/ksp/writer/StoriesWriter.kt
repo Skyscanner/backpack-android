@@ -78,5 +78,6 @@ private fun CodeBlock.Builder.writeComponent(name: String, component: ComponentD
   addStatement("$name = %T(", ComponentClass)
     .indent()
     .addStatement("name = %S,", component.name)
+    .addStatement("isToken = %L,", component.isToken)
     .unindent()
     .addStatement("),")
