@@ -102,18 +102,18 @@ object BpkCalendarTestCases {
     val WithDisabledDates_SelectDisabledDate = WithDisabledDates
 
     val WithWholeMonthButtonEnabled = DefaultRange.copy(
-      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
+      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
     )
 
     val WithWholeMonthSetProgrammatically = DefaultRange.copy(
       range = LocalDate.of(2019, 1, 1)..(LocalDate.of(2019, 1, 1) + Period.ofYears(2)),
       now = LocalDate.of(2019, 1, 1),
-      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month")
+      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
     )
 
     private fun disabledDayOfTheWeekInfo(
       range: ClosedRange<LocalDate>,
-      disabledDayOfWeek: DayOfWeek
+      disabledDayOfWeek: DayOfWeek,
     ): Map<LocalDate, CellInfo> =
       range
         .toIterable()

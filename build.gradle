@@ -61,6 +61,7 @@ subprojects {
   detekt {
     config = files("$rootDir/.detekt.yml", "$rootDir/.detekt-compose.yml")
     buildUponDefaultConfig = true
+    source = files("src", "$rootDir/buildSrc/src")
   }
 
   dependencies {

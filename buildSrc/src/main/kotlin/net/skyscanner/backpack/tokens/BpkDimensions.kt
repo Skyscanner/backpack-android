@@ -51,7 +51,6 @@ object BpkDimension {
       override fun invoke(source: Map<String, Any>): BpkDimensions =
         parseDimensions(source, "borders", "BORDER_SIZE_")
     }
-
   }
 
   sealed class Format<Output> : BpkTransformer<BpkDimensions, Output> {
@@ -66,7 +65,6 @@ object BpkDimension {
         toXml(source, namespace)
     }
   }
-
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -107,7 +105,7 @@ private fun toCompose(
           .builder(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name), DpClass)
           .initializer(buildCodeBlock { add("%L.%M", value, dpExtension) })
           .build()
-      }
+      },
     )
     .build()
 

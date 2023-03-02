@@ -47,7 +47,7 @@ class BpkCardTest : BpkSnapshotTest() {
       addView(
         TextView(testContext).apply {
           text = "message"
-        }
+        },
       )
       cornerStyle = BpkCardView.CornerStyle.LARGE
     }
@@ -96,5 +96,4 @@ class BpkCardTest : BpkSnapshotTest() {
     card.elevationLevel = BpkCardView.ElevationLevel.NONE
     snap(card, R.color.bpkSurfaceHighlight)
   }
-
 }

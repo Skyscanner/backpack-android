@@ -59,7 +59,7 @@ class BpkHeadlineSkeletonTest : BpkSnapshotTest() {
     skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Custom
     skeleton.layoutParams = ViewGroup.LayoutParams(
       ViewGroup.LayoutParams.MATCH_PARENT,
-      (testContext.resources.displayMetrics.density * 30).toInt()
+      (testContext.resources.displayMetrics.density * 30).toInt(),
     )
     snap(skeleton, width = 100, height = 50)
   }

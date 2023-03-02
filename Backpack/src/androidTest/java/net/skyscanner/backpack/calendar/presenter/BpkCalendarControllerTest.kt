@@ -33,7 +33,7 @@ import org.threeten.bp.LocalDate
 import java.util.Locale
 
 internal open class BpkCalendarControllerTestImpl(
-  selectionType: SelectionType = SelectionType.RANGE
+  selectionType: SelectionType = SelectionType.RANGE,
 ) : BpkCalendarController(selectionType) {
 
   var currentRange: CalendarSelection? = null
