@@ -141,7 +141,7 @@ ext {
   composeActivity = "androidx.activity:activity-compose:1.6.1"
 
   // update this alongside with Compose version
-  destinationsVersion = "1.7.34-beta"
+  destinationsVersion = "1.8.35-beta"
   destinationsCore = "io.github.raamcosta.compose-destinations:core:$destinationsVersion"
   destinationsKsp = "io.github.raamcosta.compose-destinations:ksp:$destinationsVersion"
 
