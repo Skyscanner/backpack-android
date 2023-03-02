@@ -93,7 +93,7 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
   @Variants(BpkTestVariant.Default)
   fun windowInsets() {
     snap {
-      CollapsibleNavigationBarStory(
+      CollapsibleNavBarStory(
         initialStatus = TopNavBarStatus.Expanded,
         showActions = false,
         showList = false,
