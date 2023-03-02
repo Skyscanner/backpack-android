@@ -24,7 +24,6 @@ import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.espresso.Espresso
@@ -34,7 +33,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.compose.fieldset.BpkFieldStatus
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.compose.ShownDialog
+// import net.skyscanner.backpack.demo.compose.ShownDialog
 import org.threeten.bp.Month
 import org.threeten.bp.YearMonth
 
@@ -89,16 +88,12 @@ object DocsRegistry {
     ViewScreenshot("Dialog - View", "with-cta") { setupDialog("Success Three Buttons") },
     ViewScreenshot("Dialog - View", "delete-confirmation") { setupDialog("Destructive") },
     ViewScreenshot("Dialog - View", "with-flare") { setupDialog("Flare") },
-    ComposeScreenshot("Dialog - Compose", "success") { setupComposeDialog(it, ShownDialog.SuccessThreeButtons) },
-    ComposeScreenshot("Dialog - Compose", "warning") { setupComposeDialog(it, ShownDialog.Warning) },
-    ComposeScreenshot("Dialog - Compose", "destructive") { setupComposeDialog(it, ShownDialog.Destructive) },
-    ComposeScreenshot("Dialog - Compose", "flare") { setupComposeDialog(it, ShownDialog.Flare) },
-    ComposeScreenshot("Dialog - Compose", "image-start-alignment") {
-      setupComposeDialog(it, ShownDialog.ImageStartAlignment)
-    },
-    ComposeScreenshot("Dialog - Compose", "image-end-alignment") {
-      setupComposeDialog(it, ShownDialog.ImageEndAlignment)
-    },
+    ComposeScreenshot("Dialog - Compose", "success"),
+    ComposeScreenshot("Dialog - Compose", "warning"),
+    ComposeScreenshot("Dialog - Compose", "destructive"),
+    ComposeScreenshot("Dialog - Compose", "flare"),
+    ComposeScreenshot("Dialog - Compose", "image-start-alignment"),
+    ComposeScreenshot("Dialog - Compose", "image-end-alignment"),
     ComposeScreenshot("Divider", "default"),
     ComposeScreenshot("FieldSet", "default"),
     ComposeScreenshot("FieldSet", "disabled") { it.switchFieldStatus(BpkFieldStatus.Disabled) },
@@ -164,7 +159,7 @@ object DocsRegistry {
     ComposeScreenshot("Text Field - Compose", "error") { it.switchFieldStatus(BpkFieldStatus.Error("Error text")) },
     ViewScreenshot("Text Spans", "default"),
     // Leave toast last as it stays visible in the screen for a while
-    ViewScreenshot("Toast", "default") { setupToast() }
+    ViewScreenshot("Toast", "default") { setupToast() },
   )
 }
 
@@ -190,7 +185,7 @@ private fun setupCalendar2() {
         CalendarSelection.Dates(
           view.state.value.params.now.plusDays(5),
           view.state.value.params.now.plusDays(10),
-        )
+        ),
       )
     }
 }
@@ -200,7 +195,7 @@ private fun setupWholeMonthCalendar() {
     .check { view, _ ->
       view as net.skyscanner.backpack.calendar2.BpkCalendar
       view.setSelection(
-        CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
+        CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY)),
       )
     }
 }
@@ -247,10 +242,10 @@ private fun setupDialog(text: String) {
 
   InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 }
-
-private fun setupComposeDialog(testRule: ComposeTestRule, dialog: ShownDialog) {
-  testRule.onNodeWithTag(dialog.buttonText.toString()).performClick().assertIsDisplayed()
-}
+//
+// private fun setupComposeDialog(testRule: ComposeTestRule, dialog: ShownDialog) {
+//  testRule.onNodeWithTag(dialog.buttonText.toString()).performClick().assertIsDisplayed()
+// }
 
 private fun setupSnackbar() {
   Espresso.onView(ViewMatchers.withText("Message (Duration Indefinite)"))

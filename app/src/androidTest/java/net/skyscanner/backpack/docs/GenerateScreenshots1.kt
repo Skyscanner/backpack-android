@@ -45,7 +45,6 @@ open class GenerateScreenshots1(
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
     fun data(): List<Story> = StoriesRepository.getInstance().screenshotStories()
-
   }
 
   @get:Rule
@@ -91,8 +90,7 @@ open class GenerateScreenshots1(
         .replace(" ", "")
         .replace("-", "_")
         .replace("–", "_")
-        .let { if (suffix != null) "${it}_$suffix" else it }
-      ,
+        .let { if (suffix != null) "${it}_$suffix" else it },
     )
   }
 }

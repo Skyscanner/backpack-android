@@ -68,5 +68,4 @@ class BpkTextFieldTests : BpkSnapshotTest() {
     subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
     snap(subject)
   }
-
 }

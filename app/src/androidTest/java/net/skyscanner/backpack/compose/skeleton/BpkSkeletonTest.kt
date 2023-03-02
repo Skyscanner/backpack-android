@@ -67,7 +67,7 @@ class BpkSkeletonTest : BpkSnapshotTest() {
   fun smallHeadline() = snap {
     BpkHeadlineSkeleton(
       modifier = Modifier.width(BpkSpacing.Xxl.times(2)),
-      skeletonHeightSize = BpkSkeletonHeightSizeType.Medium
+      skeletonHeightSize = BpkSkeletonHeightSizeType.Medium,
     )
   }
 
@@ -79,7 +79,7 @@ class BpkSkeletonTest : BpkSnapshotTest() {
         modifier = Modifier
           .width(BpkSpacing.Xxl.times(2))
           .height(BpkSpacing.Xxl),
-        skeletonHeightSize = BpkSkeletonHeightSizeType.Custom
+        skeletonHeightSize = BpkSkeletonHeightSizeType.Custom,
       )
     }
   }
