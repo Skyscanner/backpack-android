@@ -22,7 +22,6 @@ import java.io.File
 interface Pipeline<T> {
 
   fun execute(): T
-
 }
 
 fun <T> Pipeline<File>.readAs(format: BpkFormat<T>): Pipeline<T> =

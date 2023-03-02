@@ -29,7 +29,6 @@ object BpkDuration {
       override fun invoke(source: Map<String, Any>): BpkDurations =
         parseIntegers(source, "animations", "ANIMATION_DURATION_")
     }
-
   }
 
   sealed class Format<Output> : BpkTransformer<BpkDurations, Output> {
@@ -39,7 +38,6 @@ object BpkDuration {
         toXml(source, namespace)
     }
   }
-
 }
 
 @Suppress("UNCHECKED_CAST")
