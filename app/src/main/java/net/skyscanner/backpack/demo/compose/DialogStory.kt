@@ -205,9 +205,9 @@ private fun DialogDemo(
 ) {
 
   val dispatcher = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
-  val onDismiss = remember {
-    { dispatcher.onBackPressed() }
-  }
+
+  @Suppress("SuspiciousCallableReferenceInLambda")
+  val onDismiss: () -> Unit = remember(dispatcher) { dispatcher::onBackPressed }
 
   content(onDismiss)
 }
