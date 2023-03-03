@@ -43,7 +43,7 @@ import net.skyscanner.backpack.demo.R
 
 @Composable
 fun OverlayStory(modifier: Modifier = Modifier) {
-  Column {
+  Column(modifier = modifier) {
     OverlaySampleRow {
       DefaultOverlaySample(overlayType = BpkOverlayType.SolidLow)
       DefaultOverlaySample(overlayType = BpkOverlayType.SolidMedium)
@@ -81,11 +81,18 @@ fun OverlaySampleRow(
   modifier: Modifier = Modifier,
   content: @Composable RowScope.() -> Unit,
 ) {
-  Row(content = content, horizontalArrangement = Arrangement.SpaceEvenly, modifier = modifier.fillMaxWidth())
+  Row(
+    content = content,
+    horizontalArrangement = Arrangement.SpaceEvenly,
+    modifier = modifier.fillMaxWidth(),
+  )
 }
 
 @Composable
-fun DefaultOverlaySample(overlayType: BpkOverlayType, modifier: Modifier = Modifier) {
+fun DefaultOverlaySample(
+  overlayType: BpkOverlayType,
+  modifier: Modifier = Modifier,
+) {
   Column(horizontalAlignment = Alignment.CenterHorizontally) {
     BpkOverlay(
       modifier = modifier
@@ -105,7 +112,10 @@ fun DefaultOverlaySample(overlayType: BpkOverlayType, modifier: Modifier = Modif
 }
 
 @Composable
-fun WithTextOverlaySample(overlayType: BpkOverlayType, modifier: Modifier = Modifier) {
+fun WithTextOverlaySample(
+  overlayType: BpkOverlayType,
+  modifier: Modifier = Modifier,
+) {
   Column(horizontalAlignment = Alignment.CenterHorizontally) {
     BpkOverlay(
       modifier = modifier

@@ -132,7 +132,10 @@ fun BpkOverlay(
 }
 
 @Composable
-fun BoxScope.Overlay(overlayType: BpkOverlayType, modifier: Modifier = Modifier) {
+fun BoxScope.Overlay(
+  overlayType: BpkOverlayType,
+  modifier: Modifier = Modifier,
+) {
   val direction = overlayType.toDirection()
   val level = overlayType.toGradientlevel()
   Box(
