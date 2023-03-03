@@ -25,6 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 enum class BpkOverlayType {
@@ -61,6 +63,7 @@ enum class GradientDirection {
   Vignette,
 }
 
+@Composable
 fun BpkOverlayType.toGradientlevel(): GradientColourLevel =
   when (this) {
     BpkOverlayType.SolidLow,
@@ -84,6 +87,7 @@ fun BpkOverlayType.toGradientlevel(): GradientColourLevel =
     BpkOverlayType.Vignette -> GradientColourLevel.High
   }
 
+@Composable
 fun BpkOverlayType.toDirection(): GradientDirection =
   when (this) {
     BpkOverlayType.SolidLow,
@@ -101,11 +105,19 @@ fun BpkOverlayType.toDirection(): GradientDirection =
     BpkOverlayType.LeftLow,
     BpkOverlayType.LeftMedium,
     BpkOverlayType.LeftHigh,
-    -> GradientDirection.Left
+    -> if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
+      GradientDirection.Right
+    } else {
+      GradientDirection.Left
+    }
     BpkOverlayType.RightLow,
     BpkOverlayType.RightMedium,
     BpkOverlayType.RightHigh,
-    -> GradientDirection.Right
+    -> if (LocalLayoutDirection.current == LayoutDirection.Rtl) {
+      GradientDirection.Left
+    } else {
+      GradientDirection.Right
+    }
     BpkOverlayType.Vignette -> GradientDirection.Vignette
   }
 
@@ -141,9 +153,9 @@ fun BoxScope.Overlay(overlayType: BpkOverlayType, modifier: Modifier = Modifier)
 @Composable
 private fun GradientColourLevel.toColor(): Color =
   when (this) {
-    GradientColourLevel.Low -> BpkTheme.colors.textPrimary.copy(alpha = 0.15f)
-    GradientColourLevel.Medium -> BpkTheme.colors.textPrimary.copy(alpha = 0.3f)
-    GradientColourLevel.High -> BpkTheme.colors.textPrimary.copy(alpha = 0.45f)
+    GradientColourLevel.Low -> BpkTheme.colors.textOnLight.copy(alpha = 0.15f)
+    GradientColourLevel.Medium -> BpkTheme.colors.textOnLight.copy(alpha = 0.3f)
+    GradientColourLevel.High -> BpkTheme.colors.textOnLight.copy(alpha = 0.45f)
   }
 
 @Composable
