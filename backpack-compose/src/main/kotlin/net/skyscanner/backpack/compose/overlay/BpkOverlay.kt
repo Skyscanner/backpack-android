@@ -105,19 +105,11 @@ fun BpkOverlayType.toDirection(): GradientDirection =
     BpkOverlayType.LeftLow,
     BpkOverlayType.LeftMedium,
     BpkOverlayType.LeftHigh,
-    -> if (LocalLayoutDirection.current != LayoutDirection.Rtl) {
-      GradientDirection.Left
-    } else {
-      GradientDirection.Right
-    }
+    -> if (LocalLayoutDirection.current != LayoutDirection.Rtl) GradientDirection.Left else GradientDirection.Right
     BpkOverlayType.RightLow,
     BpkOverlayType.RightMedium,
     BpkOverlayType.RightHigh,
-    -> if (LocalLayoutDirection.current != LayoutDirection.Rtl) {
-      GradientDirection.Right
-    } else {
-      GradientDirection.Left
-    }
+    -> if (LocalLayoutDirection.current != LayoutDirection.Rtl) GradientDirection.Right else GradientDirection.Left
     BpkOverlayType.Vignette -> GradientDirection.Vignette
   }
 
