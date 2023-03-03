@@ -18,21 +18,116 @@
 
 package net.skyscanner.backpack.demo.compose
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.overlay.BpkOverlay
+import net.skyscanner.backpack.compose.overlay.BpkOverlayType
+import net.skyscanner.backpack.compose.text.BpkText
+import net.skyscanner.backpack.compose.theme.BpkTheme
+import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.R
 
 @Composable
 fun OverlayStory(modifier: Modifier = Modifier) {
   Column {
-    DefaultOverlaySample()
+    OverlaySampleRow {
+      DefaultOverlaySample(overlayType = BpkOverlayType.SolidLow)
+      DefaultOverlaySample(overlayType = BpkOverlayType.SolidMedium)
+      DefaultOverlaySample(overlayType = BpkOverlayType.SolidHigh)
+    }
+    OverlaySampleRow {
+      DefaultOverlaySample(overlayType = BpkOverlayType.TopLow)
+      DefaultOverlaySample(overlayType = BpkOverlayType.TopMedium)
+      DefaultOverlaySample(overlayType = BpkOverlayType.TopHigh)
+    }
+    OverlaySampleRow {
+      DefaultOverlaySample(overlayType = BpkOverlayType.BottomLow)
+      DefaultOverlaySample(overlayType = BpkOverlayType.BottomMedium)
+      DefaultOverlaySample(overlayType = BpkOverlayType.BottomHigh)
+    }
+    OverlaySampleRow {
+      DefaultOverlaySample(overlayType = BpkOverlayType.LeftLow)
+      DefaultOverlaySample(overlayType = BpkOverlayType.LeftMedium)
+      DefaultOverlaySample(overlayType = BpkOverlayType.LeftHigh)
+    }
+    OverlaySampleRow {
+      DefaultOverlaySample(overlayType = BpkOverlayType.RightLow)
+      DefaultOverlaySample(overlayType = BpkOverlayType.RightMedium)
+      DefaultOverlaySample(overlayType = BpkOverlayType.RightHigh)
+    }
+    OverlaySampleRow {
+      DefaultOverlaySample(overlayType = BpkOverlayType.Vignette)
+      WithTextOverlaySample(overlayType = BpkOverlayType.SolidHigh)
+    }
   }
 }
 
 @Composable
-@Preview
-fun DefaultOverlaySample() {
-  BpkOverlay()
+fun OverlaySampleRow(
+  modifier: Modifier = Modifier,
+  content: @Composable RowScope.() -> Unit,
+) {
+  Row(content = content, horizontalArrangement = Arrangement.SpaceEvenly, modifier = modifier.fillMaxWidth())
+}
+
+@Composable
+fun DefaultOverlaySample(overlayType: BpkOverlayType, modifier: Modifier = Modifier) {
+  Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    BpkOverlay(
+      modifier = modifier
+        .size(90.dp)
+        .padding(top = BpkSpacing.Base),
+      overlayType = overlayType,
+    ) {
+      Image(
+        painter = painterResource(R.drawable.sea),
+        contentDescription = stringResource(R.string.image_rockies_content_description),
+        modifier = Modifier.fillMaxSize(),
+        contentScale = ContentScale.Crop,
+      )
+    }
+    BpkText(text = overlayType.toString())
+  }
+}
+
+@Composable
+fun WithTextOverlaySample(overlayType: BpkOverlayType, modifier: Modifier = Modifier) {
+  Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    BpkOverlay(
+      modifier = modifier
+        .size(90.dp)
+        .padding(top = BpkSpacing.Base),
+      overlayType = overlayType,
+      foregroundContent = {
+        BpkText(
+          modifier = Modifier.align(Alignment.Center),
+          text = "With text",
+          color = BpkTheme.colors.canvas,
+          style = BpkTheme.typography.bodyDefault,
+        )
+      },
+    ) {
+      Image(
+        painter = painterResource(R.drawable.sea),
+        contentDescription = stringResource(R.string.image_rockies_content_description),
+        modifier = Modifier.fillMaxSize(),
+        contentScale = ContentScale.Crop,
+      )
+    }
+    BpkText(text = overlayType.toString())
+  }
 }
