@@ -18,9 +18,141 @@
 
 package net.skyscanner.backpack.compose.overlay
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import net.skyscanner.backpack.compose.theme.BpkTheme
+
+enum class BpkOverlayType {
+  SolidLow,
+  SolidMedium,
+  SolidHigh,
+  TopLow,
+  TopMedium,
+  TopHigh,
+  BottomLow,
+  BottomMedium,
+  BottomHigh,
+  LeftLow,
+  LeftMedium,
+  LeftHigh,
+  RightLow,
+  RightMedium,
+  RightHigh,
+  Vignette,
+}
+
+enum class GradientColourLevel {
+  Low,
+  Medium,
+  High,
+}
+
+enum class GradientDirection {
+  Solid,
+  Top,
+  Bottom,
+  Left,
+  Right,
+  Vignette,
+}
+
+fun BpkOverlayType.toGradientlevel(): GradientColourLevel =
+  when (this) {
+    BpkOverlayType.SolidLow,
+    BpkOverlayType.TopLow,
+    BpkOverlayType.BottomLow,
+    BpkOverlayType.LeftLow,
+    BpkOverlayType.RightLow,
+    -> GradientColourLevel.Low
+    BpkOverlayType.SolidMedium,
+    BpkOverlayType.TopMedium,
+    BpkOverlayType.BottomMedium,
+    BpkOverlayType.LeftMedium,
+    BpkOverlayType.RightMedium,
+    -> GradientColourLevel.Medium
+    BpkOverlayType.SolidHigh,
+    BpkOverlayType.TopHigh,
+    BpkOverlayType.BottomHigh,
+    BpkOverlayType.LeftHigh,
+    BpkOverlayType.RightHigh,
+    -> GradientColourLevel.High
+    BpkOverlayType.Vignette -> GradientColourLevel.High
+  }
+
+fun BpkOverlayType.toDirection(): GradientDirection =
+  when (this) {
+    BpkOverlayType.SolidLow,
+    BpkOverlayType.SolidMedium,
+    BpkOverlayType.SolidHigh,
+    -> GradientDirection.Solid
+    BpkOverlayType.TopLow,
+    BpkOverlayType.TopMedium,
+    BpkOverlayType.TopHigh,
+    -> GradientDirection.Top
+    BpkOverlayType.BottomLow,
+    BpkOverlayType.BottomMedium,
+    BpkOverlayType.BottomHigh,
+    -> GradientDirection.Bottom
+    BpkOverlayType.LeftLow,
+    BpkOverlayType.LeftMedium,
+    BpkOverlayType.LeftHigh,
+    -> GradientDirection.Left
+    BpkOverlayType.RightLow,
+    BpkOverlayType.RightMedium,
+    BpkOverlayType.RightHigh,
+    -> GradientDirection.Right
+    BpkOverlayType.Vignette -> GradientDirection.Vignette
+  }
 
 @Composable
-fun BpkOverlay(modifier: Modifier = Modifier) {
+fun BpkOverlay(
+  modifier: Modifier = Modifier,
+  overlayType: BpkOverlayType = BpkOverlayType.SolidHigh,
+  foregroundContent: (@Composable BoxScope.() -> Unit)? = null,
+  content: @Composable BoxScope.() -> Unit,
+) {
+  Box(
+    modifier = modifier,
+  ) {
+    content()
+    Overlay(overlayType = overlayType)
+    if (foregroundContent != null) {
+      foregroundContent()
+    }
+  }
 }
+
+@Composable
+fun BoxScope.Overlay(overlayType: BpkOverlayType, modifier: Modifier = Modifier) {
+  val direction = overlayType.toDirection()
+  val level = overlayType.toGradientlevel()
+  Box(
+    modifier = modifier
+      .matchParentSize()
+      .background(direction.toBrush(gradientLevel = level)),
+  )
+}
+
+@Composable
+private fun GradientColourLevel.toColor(): Color =
+  when (this) {
+    GradientColourLevel.Low -> BpkTheme.colors.textPrimary.copy(alpha = 0.15f)
+    GradientColourLevel.Medium -> BpkTheme.colors.textPrimary.copy(alpha = 0.3f)
+    GradientColourLevel.High -> BpkTheme.colors.textPrimary.copy(alpha = 0.45f)
+  }
+
+@Composable
+private fun GradientDirection.toBrush(gradientLevel: GradientColourLevel): Brush =
+  when (this) {
+    GradientDirection.Solid -> Brush.verticalGradient(listOf(gradientLevel.toColor(), gradientLevel.toColor()))
+    GradientDirection.Top -> Brush.verticalGradient(listOf(gradientLevel.toColor(), Color.Transparent))
+    GradientDirection.Bottom -> Brush.verticalGradient(listOf(Color.Transparent, gradientLevel.toColor()))
+    GradientDirection.Left -> Brush.horizontalGradient(listOf(gradientLevel.toColor(), Color.Transparent))
+    GradientDirection.Right -> Brush.horizontalGradient(listOf(Color.Transparent, gradientLevel.toColor()))
+    GradientDirection.Vignette -> Brush.radialGradient(listOf(Color.Transparent, gradientLevel.toColor()))
+  }
