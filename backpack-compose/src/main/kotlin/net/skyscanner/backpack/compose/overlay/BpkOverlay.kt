@@ -48,7 +48,7 @@ enum class BpkOverlayType {
   Vignette,
 }
 
-enum class GradientColourLevel {
+enum class GradientLevel {
   Low,
   Medium,
   High,
@@ -64,27 +64,27 @@ enum class GradientDirection {
 }
 
 @Composable
-fun BpkOverlayType.toGradientlevel(): GradientColourLevel =
+fun BpkOverlayType.toGradientlevel(): GradientLevel =
   when (this) {
     BpkOverlayType.SolidLow,
     BpkOverlayType.TopLow,
     BpkOverlayType.BottomLow,
     BpkOverlayType.LeftLow,
     BpkOverlayType.RightLow,
-    -> GradientColourLevel.Low
+    -> GradientLevel.Low
     BpkOverlayType.SolidMedium,
     BpkOverlayType.TopMedium,
     BpkOverlayType.BottomMedium,
     BpkOverlayType.LeftMedium,
     BpkOverlayType.RightMedium,
-    -> GradientColourLevel.Medium
+    -> GradientLevel.Medium
     BpkOverlayType.SolidHigh,
     BpkOverlayType.TopHigh,
     BpkOverlayType.BottomHigh,
     BpkOverlayType.LeftHigh,
     BpkOverlayType.RightHigh,
-    -> GradientColourLevel.High
-    BpkOverlayType.Vignette -> GradientColourLevel.High
+    -> GradientLevel.High
+    BpkOverlayType.Vignette -> GradientLevel.High
   }
 
 @Composable
@@ -151,15 +151,15 @@ fun BoxScope.Overlay(overlayType: BpkOverlayType, modifier: Modifier = Modifier)
 }
 
 @Composable
-private fun GradientColourLevel.toColor(): Color =
+private fun GradientLevel.toColor(): Color =
   when (this) {
-    GradientColourLevel.Low -> BpkTheme.colors.textOnLight.copy(alpha = 0.15f)
-    GradientColourLevel.Medium -> BpkTheme.colors.textOnLight.copy(alpha = 0.3f)
-    GradientColourLevel.High -> BpkTheme.colors.textOnLight.copy(alpha = 0.45f)
+    GradientLevel.Low -> BpkTheme.colors.textOnLight.copy(alpha = 0.15f)
+    GradientLevel.Medium -> BpkTheme.colors.textOnLight.copy(alpha = 0.3f)
+    GradientLevel.High -> BpkTheme.colors.textOnLight.copy(alpha = 0.45f)
   }
 
 @Composable
-private fun GradientDirection.toBrush(gradientLevel: GradientColourLevel): Brush =
+private fun GradientDirection.toBrush(gradientLevel: GradientLevel): Brush =
   when (this) {
     GradientDirection.Solid -> Brush.verticalGradient(listOf(gradientLevel.toColor(), gradientLevel.toColor()))
     GradientDirection.Top -> Brush.verticalGradient(listOf(gradientLevel.toColor(), Color.Transparent))
