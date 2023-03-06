@@ -42,7 +42,7 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
 @CardComponent
-@ComposeStory("Card")
+@ComposeStory
 fun CardStory(modifier: Modifier = Modifier) {
   Column(
     modifier = modifier

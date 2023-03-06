@@ -80,13 +80,13 @@ open class GenerateScreenshots(
 
   private fun takeScreenshot(suffix: String?) {
     RemoteScreenGrab.takeScreenshot(
-      component = story.component.name,
+      component = story.component.name.replace(" ", ""),
       type = if (story.isCompose) "compose" else "view",
       file = story.name
         .lowercase()
-        .replace(" ", "")
         .replace("-", "_")
         .replace("–", "_")
+        .replace(" ", "-")
         .let { if (suffix != null) "${it}_$suffix" else it },
     )
   }
