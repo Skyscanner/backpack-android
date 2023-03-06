@@ -21,7 +21,7 @@ buildscript {
   ext.compose_compiler_version = '1.4.2'
   ext.ksp_version = '1.8.10-1.0.9'
   ext.detekt_version = '1.22.0'
-  ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.7.20"
+  ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.8.10"
   repositories {
     google()
     mavenCentral()
