@@ -29,7 +29,7 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 interface TestStateMachineResult
 
 class TestStateMachineScope<SM : StateMachine<State, *>, State>(
-  val stateMachine: SM
+  val stateMachine: SM,
 ) {
 
   val state: State
@@ -50,7 +50,7 @@ class TestStateMachineResultScope<State>(
 @OptIn(ExperimentalCoroutinesApi::class)
 fun <SM : StateMachine<State, *>, State> testStateMachine(
   creator: CoroutineScope.() -> SM,
-  block: suspend TestStateMachineScope<SM, State>.() -> TestStateMachineResult
+  block: suspend TestStateMachineScope<SM, State>.() -> TestStateMachineResult,
 ) {
   val testCoroutineScheduler = TestCoroutineScheduler()
   val coroutineScope = TestScope(testCoroutineScheduler) + UnconfinedTestDispatcher(testCoroutineScheduler)

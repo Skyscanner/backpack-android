@@ -34,7 +34,7 @@ open class GenerateScreenshots2(
   private val componentPath: String,
   private val screenshotName: String,
   private val componentType: String,
-  private val setup: ((AndroidComposeTestRule<*, *>) -> Unit)?
+  private val setup: ((AndroidComposeTestRule<*, *>) -> Unit)?,
 ) {
 
   companion object {

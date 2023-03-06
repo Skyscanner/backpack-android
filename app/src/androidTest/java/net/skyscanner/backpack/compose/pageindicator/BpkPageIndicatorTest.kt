@@ -73,7 +73,7 @@ class BpkPageIndicatorTest : BpkSnapshotTest() {
         BpkPageIndicatorStyle.Default -> BpkTheme.colors.canvas
         else -> BpkTheme.colors.surfaceContrast
       }
-    }
+    },
   ) {
     BpkPageIndicator(
       currentIndex = currentIndex,

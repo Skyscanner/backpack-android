@@ -29,7 +29,7 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.compose.ActionsTopNavBar
 import net.skyscanner.backpack.demo.compose.BackTopNavBar
 import net.skyscanner.backpack.demo.compose.CloseTopNavBar
-import net.skyscanner.backpack.demo.compose.CollapsibleNavigationBarStory
+import net.skyscanner.backpack.demo.compose.CollapsibleNavBarStory
 import net.skyscanner.backpack.demo.compose.NoNavIconTopNavBar
 import net.skyscanner.backpack.demo.compose.TextActionTopNavBar
 import org.junit.Test
@@ -68,32 +68,32 @@ class BpkTopNavBarTest : BpkSnapshotTest() {
 
   @Test
   fun expanded() = snap {
-    CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Expanded, showList = false)
+    CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Expanded, showList = false)
   }
 
   @Test
   @Variants(BpkTestVariant.Default)
   fun collapsed() = snap {
-    CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
+    CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
   }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun expandedNoNavIcon() = snap {
-    CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Expanded, showNav = false, showList = false)
+    CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Expanded, showNav = false, showList = false)
   }
 
   @Test
   @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
   fun expandedNoActions() = snap {
-    CollapsibleNavigationBarStory(initialStatus = TopNavBarStatus.Expanded, showActions = false, showList = false)
+    CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Expanded, showActions = false, showList = false)
   }
 
   @Test
   @Variants(BpkTestVariant.Default)
   fun windowInsets() {
     snap {
-      CollapsibleNavigationBarStory(
+      CollapsibleNavBarStory(
         initialStatus = TopNavBarStatus.Expanded,
         showActions = false,
         showList = false,

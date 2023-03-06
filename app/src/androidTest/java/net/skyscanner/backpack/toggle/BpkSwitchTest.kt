@@ -45,7 +45,7 @@ class BpkSwitchTest : BpkSnapshotTest() {
     snap(BpkSwitch(testContext).apply {
       isChecked = false
       isEnabled = false
-    })
+    },)
   }
 
   @Test
@@ -54,7 +54,6 @@ class BpkSwitchTest : BpkSnapshotTest() {
     snap(BpkSwitch(testContext).apply {
       isChecked = true
       isEnabled = false
-    })
+    },)
   }
-
 }

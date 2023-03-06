@@ -49,7 +49,6 @@ class BpkCarouselTest : BpkSnapshotTest() {
     }
   }
 
-
   @Test
   fun setCurrentImage() = snap {
     BpkCarousel(
@@ -75,5 +74,4 @@ class BpkCarouselTest : BpkSnapshotTest() {
     2 -> R.drawable.city
     else -> R.drawable.canadian_rockies_canada
   }
-
 }

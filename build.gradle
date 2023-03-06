@@ -61,6 +61,7 @@ subprojects {
   detekt {
     config = files("$rootDir/.detekt.yml", "$rootDir/.detekt-compose.yml")
     buildUponDefaultConfig = true
+    source = files("src", "$rootDir/buildSrc/src")
   }
 
   dependencies {
@@ -121,7 +122,7 @@ ext {
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
-  lintVersion = "30.4.1"
+  lintVersion = "30.4.2"
   lint = "com.android.tools.lint:lint:$lintVersion"
   lintApi = "com.android.tools.lint:lint-api:$lintVersion"
   lintTests = "com.android.tools.lint:lint-tests:$lintVersion"

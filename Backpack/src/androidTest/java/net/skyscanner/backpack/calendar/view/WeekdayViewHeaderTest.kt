@@ -46,7 +46,7 @@ class WeekdayViewHeaderTest {
   fun test_initializeWithLocale() {
     listOf(
       "pt-br" to arrayOf("dom", "seg", "ter", "qua", "qui", "sex", "sáb"),
-      "en" to arrayOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+      "en" to arrayOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"),
     ).forEach {
       val locale = it.first
       val expected = it.second
@@ -59,7 +59,7 @@ class WeekdayViewHeaderTest {
 
       Assert.assertArrayEquals(
         allDays,
-        expected
+        expected,
       )
     }
   }
@@ -72,7 +72,7 @@ class WeekdayViewHeaderTest {
       R.id.fourth_weekday_label,
       R.id.fifth_weekday_label,
       R.id.sixth_weekday_label,
-      R.id.seventh_weekday_label
+      R.id.seventh_weekday_label,
     ).map {
       view.findViewById<BpkText>(it).text
     }.toTypedArray()

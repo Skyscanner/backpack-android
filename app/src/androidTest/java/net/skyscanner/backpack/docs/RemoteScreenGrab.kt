@@ -30,17 +30,17 @@ object RemoteScreenGrab {
 
   fun takeScreenshot(component: String, type: String, file: String) {
     val response = okHttp.newCall(
-        Request.Builder().url(
-            HttpUrl.Builder()
-              .scheme("http")
-              .host(serverIp)
-              .port(serverPort)
-              .setQueryParameter("component", component)
-              .setQueryParameter("type", type)
-              .setQueryParameter("file", file)
-            .build()
-          ).build()
-      ).execute()
+      Request.Builder().url(
+        HttpUrl.Builder()
+          .scheme("http")
+          .host(serverIp)
+          .port(serverPort)
+          .setQueryParameter("component", component)
+          .setQueryParameter("type", type)
+          .setQueryParameter("file", file)
+          .build(),
+      ).build(),
+    ).execute()
 
     require(response.code() == 200) { "Unable to take screenshot for $component. Error code: ${response.code()}" }
   }

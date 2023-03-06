@@ -56,5 +56,4 @@ class BpkBottomNavTest : BpkSnapshotTest() {
       padding = 0,
     )
   }
-
 }

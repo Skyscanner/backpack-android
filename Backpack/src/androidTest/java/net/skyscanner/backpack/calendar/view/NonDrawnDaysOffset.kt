@@ -49,7 +49,7 @@ class NonDrawnDaysOffset {
     val monthView = givenMonthView(
       locale = Locale.US,
       startDate = LocalDate.of(2019, 1, 2),
-      drawMonth = 2
+      drawMonth = 2,
     )
 
     val offset = monthView.getNonDrawnDaysOffset()
@@ -62,7 +62,7 @@ class NonDrawnDaysOffset {
     val monthView = givenMonthView(
       locale = Locale.US,
       startDate = LocalDate.of(2019, 2, 13),
-      drawMonth = 2
+      drawMonth = 2,
     )
 
     val offset = monthView.getNonDrawnDaysOffset()
@@ -75,7 +75,7 @@ class NonDrawnDaysOffset {
     val monthView = givenMonthView(
       locale = Locale.GERMANY,
       startDate = LocalDate.of(2019, 2, 13),
-      drawMonth = 2
+      drawMonth = 2,
     )
 
     val offset = monthView.getNonDrawnDaysOffset()
@@ -88,7 +88,7 @@ class NonDrawnDaysOffset {
     val monthView = givenMonthView(
       locale = Locale.US,
       startDate = LocalDate.of(2019, 3, 31),
-      drawMonth = 3
+      drawMonth = 3,
     )
 
     val offset = monthView.getNonDrawnDaysOffset()
@@ -101,7 +101,7 @@ class NonDrawnDaysOffset {
     val monthView = givenMonthView(
       locale = Locale.GERMANY,
       startDate = LocalDate.of(2019, 3, 31),
-      drawMonth = 3
+      drawMonth = 3,
     )
 
     val offset = monthView.getNonDrawnDaysOffset()
@@ -114,7 +114,7 @@ class NonDrawnDaysOffset {
     val monthView = givenMonthView(
       locale = Locale.GERMANY,
       startDate = LocalDate.of(2019, 3, 31),
-      drawMonth = 4
+      drawMonth = 4,
     )
 
     val offset = monthView.getNonDrawnDaysOffset()

@@ -58,7 +58,7 @@ internal fun BpkTopNavBarImpl(
   title: String,
   modifier: Modifier = Modifier,
   insets: WindowInsets? = null,
-  navigationIcon: IconAction? = null,
+  navIcon: IconAction? = null,
   actions: List<Action> = emptyList(),
 ) {
   Surface(
@@ -84,8 +84,8 @@ internal fun BpkTopNavBarImpl(
         fraction = fraction,
         modifier = if (insets != null) Modifier.windowInsetsPadding(insets) else Modifier,
         navIcon = {
-          if (navigationIcon != null) {
-            IconAction(action = navigationIcon)
+          if (navIcon != null) {
+            IconAction(action = navIcon)
           }
         },
         title = {

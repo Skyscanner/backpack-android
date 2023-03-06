@@ -76,7 +76,7 @@ object DocsRegistry {
     ComposeScreenshot("Card - Compose - Divided card", "divided-card"),
     ComposeScreenshot("Card - Compose - Card wrapper", "card-wrapper"),
     ComposeScreenshot("Card Button - Default", "default"),
-    ComposeScreenshot("Card Button - Small", "small"),
+    ComposeScreenshot("Card Button - Large", "large"),
     ComposeScreenshot("Carousel", "default"),
     ViewScreenshot("Chip - View - Default", "all"),
     ViewScreenshot("Chip - View - On Dark", "on-dark"),
@@ -164,7 +164,7 @@ object DocsRegistry {
     ComposeScreenshot("Text Field - Compose", "error") { it.switchFieldStatus(BpkFieldStatus.Error("Error text")) },
     ViewScreenshot("Text Spans", "default"),
     // Leave toast last as it stays visible in the screen for a while
-    ViewScreenshot("Toast", "default") { setupToast() }
+    ViewScreenshot("Toast", "default") { setupToast() },
   )
 }
 
@@ -190,7 +190,7 @@ private fun setupCalendar2() {
         CalendarSelection.Dates(
           view.state.value.params.now.plusDays(5),
           view.state.value.params.now.plusDays(10),
-        )
+        ),
       )
     }
 }
@@ -200,7 +200,7 @@ private fun setupWholeMonthCalendar() {
     .check { view, _ ->
       view as net.skyscanner.backpack.calendar2.BpkCalendar
       view.setSelection(
-        CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
+        CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY)),
       )
     }
 }

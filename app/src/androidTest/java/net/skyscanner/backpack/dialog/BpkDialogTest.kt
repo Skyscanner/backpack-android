@@ -20,7 +20,6 @@ package net.skyscanner.backpack.dialog
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.test.espresso.Espresso.onView
@@ -56,11 +55,11 @@ class BpkDialogTest : BpkSnapshotTest() {
           icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
           addActionButton(
-            BpkDialog.Button("Continue") { }
+            BpkDialog.Button("Continue") { },
           )
 
           addActionButton(
-            BpkDialog.Button("Skip") { }
+            BpkDialog.Button("Skip") { },
           )
         }
       }
@@ -84,11 +83,11 @@ class BpkDialogTest : BpkSnapshotTest() {
           icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
           addActionButton(
-            BpkDialog.Button("Continue") { }
+            BpkDialog.Button("Continue") { },
           )
 
           addActionButton(
-            BpkDialog.Button("Skip") { }
+            BpkDialog.Button("Skip") { },
           )
         }
       }
@@ -108,11 +107,11 @@ class BpkDialogTest : BpkSnapshotTest() {
           icon = BpkDialog.Icon(R.drawable.bpk_trash)
 
           addActionButton(
-            BpkDialog.Button("Delete") { }
+            BpkDialog.Button("Delete") { },
           )
 
           addActionButton(
-            BpkDialog.Button("Cancel") { }
+            BpkDialog.Button("Cancel") { },
           )
         }
       }
@@ -136,19 +135,19 @@ class BpkDialogTest : BpkSnapshotTest() {
             BpkButton(activity).apply {
               type = BpkButton.Type.Secondary
               text = "Secondary"
-            }
+            },
           )
           addActionButton(
             BpkButton(activity).apply {
               type = BpkButton.Type.Destructive
               text = "Destructive"
-            }
+            },
           )
           addActionButton(
             BpkButton(activity).apply {
               type = BpkButton.Type.Featured
               text = "Featured"
-            }
+            },
           )
         }
       }
@@ -169,11 +168,11 @@ class BpkDialogTest : BpkSnapshotTest() {
           icon = BpkDialog.Icon(R.drawable.bpk_trash)
 
           addActionButton(
-            BpkDialog.Button("Create") { }
+            BpkDialog.Button("Create") { },
           )
 
           addActionButton(
-            BpkDialog.Button("No, Thanks!") { }
+            BpkDialog.Button("No, Thanks!") { },
           )
         }
       }
@@ -197,11 +196,11 @@ class BpkDialogTest : BpkSnapshotTest() {
           image!!.setImageBitmap(bitmap)
 
           addActionButton(
-            BpkDialog.Button("Continue") { }
+            BpkDialog.Button("Continue") { },
           )
 
           addActionButton(
-            BpkDialog.Button("Skip") { }
+            BpkDialog.Button("Skip") { },
           )
         }
       }

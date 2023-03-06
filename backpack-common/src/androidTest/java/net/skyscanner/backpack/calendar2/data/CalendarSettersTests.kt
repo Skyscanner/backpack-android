@@ -111,7 +111,7 @@ class CalendarSettersTests {
       selectionMode = CalendarParams.SelectionMode.Single,
       cellsInfo = mapOf(
         CalendarSettings.Default.range.start to CellInfo(disabled = true),
-      )
+      ),
     )
     testCalendarWith(disabledParams) {
       stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
@@ -128,7 +128,7 @@ class CalendarSettersTests {
       selectionMode = CalendarParams.SelectionMode.Range,
       cellsInfo = mapOf(
         CalendarSettings.Default.range.start to CellInfo(disabled = true),
-      )
+      ),
     )
     testCalendarWith(disabledParams) {
       stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = null))
@@ -145,7 +145,7 @@ class CalendarSettersTests {
       selectionMode = CalendarParams.SelectionMode.Range,
       cellsInfo = mapOf(
         CalendarSettings.Default.range.endInclusive to CellInfo(disabled = true),
-      )
+      ),
     )
     testCalendarWith(disabledParams) {
       stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = lastDay.date))
@@ -203,8 +203,8 @@ class CalendarSettersTests {
     testCalendarWith(CalendarSettings.Default) {
       stateMachine.setParams(
         CalendarSettings.Default.copy(
-          selectionMode = CalendarParams.SelectionMode.Range
-        )
+          selectionMode = CalendarParams.SelectionMode.Range,
+        ),
       )
       verify {
         assertEquals(CalendarParams.SelectionMode.Range, state.params.selectionMode)

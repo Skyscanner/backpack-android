@@ -43,7 +43,7 @@ class BpkFloatingNotificationTest : BpkSnapshotTest() {
   fun textOnly() {
     scope.launch {
       state.show(
-        text = "Lorem ipsum dolor sit amet"
+        text = "Lorem ipsum dolor sit amet",
       )
     }
     snap(height = 110.dp) { BpkFloatingNotification(state) }

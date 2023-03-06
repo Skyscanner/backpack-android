@@ -27,7 +27,6 @@ import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.ui.DemoScaffold
 import net.skyscanner.backpack.demo.ui.StoryScreen
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -43,7 +42,6 @@ open class GenerateScreenshots(
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
     fun data(): List<Story> = StoriesRepository.getInstance().screenshotStories()
-
   }
 
   @get:Rule
@@ -89,8 +87,7 @@ open class GenerateScreenshots(
         .replace(" ", "")
         .replace("-", "_")
         .replace("–", "_")
-        .let { if (suffix != null) "${it}_$suffix" else it }
-      ,
+        .let { if (suffix != null) "${it}_$suffix" else it },
     )
   }
 }

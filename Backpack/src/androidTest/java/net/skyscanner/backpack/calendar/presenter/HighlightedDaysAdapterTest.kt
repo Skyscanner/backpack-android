@@ -56,23 +56,23 @@ class HighlightedDaysAdapterTest {
     holidays = mapOf(
       "2020-1" to setOf(
         HighlightedDay(
-          LocalDate.of(2020, 1, 1), "New Year's Day"
-        )
+          LocalDate.of(2020, 1, 1), "New Year's Day",
+        ),
       ),
       "2020-12" to setOf(
         HighlightedDay(
-          LocalDate.of(2020, 12, 25), "Christmas Day"
+          LocalDate.of(2020, 12, 25), "Christmas Day",
         ),
         HighlightedDay(
-          LocalDate.of(2020, 12, 31), "New Year's Eve"
-        )
-      )
+          LocalDate.of(2020, 12, 31), "New Year's Eve",
+        ),
+      ),
     )
 
     subject = HighlightedDaysAdapter(
       context,
       Locale.UK,
-      holidays.values.flatten().toSet()
+      holidays.values.flatten().toSet(),
     )
   }
 
@@ -89,12 +89,12 @@ class HighlightedDaysAdapterTest {
   fun test_onCreateView() {
     assertThat(
       subject.onCreateView(1, 2020),
-      `is`(instanceOf(HighlightedDaysMonthFooter::class.java))
+      `is`(instanceOf(HighlightedDaysMonthFooter::class.java)),
     )
 
     assertThat(
       subject.onCreateView(12, 2020),
-      `is`(instanceOf(HighlightedDaysMonthFooter::class.java))
+      `is`(instanceOf(HighlightedDaysMonthFooter::class.java)),
     )
   }
 
@@ -106,14 +106,14 @@ class HighlightedDaysAdapterTest {
     assertNotNull(view.holidays)
     assertArrayEquals(
       holidays["2020-1"]?.toTypedArray(),
-      view.holidays?.toTypedArray()
+      view.holidays?.toTypedArray(),
     )
 
     subject.onBindView(view, 12, 2020)
     assertNotNull(view.holidays)
     assertArrayEquals(
       holidays["2020-12"]?.toTypedArray(),
-      view.holidays?.toTypedArray()
+      view.holidays?.toTypedArray(),
     )
   }
 
@@ -131,7 +131,7 @@ class HighlightedDaysAdapterTest {
     val subject = HighlightedDaysAdapter(
       context,
       Locale.forLanguageTag("pt-BR"),
-      holidays.values.flatten().toSet()
+      holidays.values.flatten().toSet(),
     )
     val view = subject.onCreateView(12, 2020) as HighlightedDaysMonthFooter
     subject.onBindView(view, 12, 2020)

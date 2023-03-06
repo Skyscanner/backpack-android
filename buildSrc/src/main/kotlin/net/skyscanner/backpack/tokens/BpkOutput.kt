@@ -145,6 +145,6 @@ private fun FileSpec.Builder.suppressWarningTypes(vararg types: String): FileSpe
   return addAnnotation(
     AnnotationSpec.builder(ClassName("", "Suppress"))
       .addMember(format, *types)
-      .build()
+      .build(),
   )
 }

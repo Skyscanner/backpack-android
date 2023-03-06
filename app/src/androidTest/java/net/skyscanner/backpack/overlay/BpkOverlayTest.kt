@@ -45,7 +45,7 @@ class BpkOverlayTest : BpkSnapshotTest() {
         adjustViewBounds = true
         scaleType = ImageView.ScaleType.CENTER_CROP
       },
-      LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+      LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT),
     )
     addView(
       BpkText(context).apply {
@@ -53,7 +53,7 @@ class BpkOverlayTest : BpkSnapshotTest() {
         setTextColor(Color.WHITE)
         text = "Text"
       },
-      LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER)
+      LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER),
     )
   }
 

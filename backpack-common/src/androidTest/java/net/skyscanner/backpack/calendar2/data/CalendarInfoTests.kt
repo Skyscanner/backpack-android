@@ -42,7 +42,7 @@ class CalendarInfoTests {
     val params = CalendarSettings.Default.copy(
       cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
         CellInfo(disabled = true)
-      }
+      },
     )
     testCalendarWith(params) {
       verify {
@@ -61,7 +61,7 @@ class CalendarInfoTests {
     val params = CalendarSettings.Default.copy(
       cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
         CellInfo(label = it.dayOfMonth.toString())
-      }
+      },
     )
 
     testCalendarWith(params) {
@@ -82,7 +82,7 @@ class CalendarInfoTests {
     val params = CalendarSettings.Default.copy(
       cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
         CellInfo(status = statuses[it.dayOfMonth % statuses.size], style = CellStatusStyle.Label)
-      }
+      },
     )
 
     testCalendarWith(params) {

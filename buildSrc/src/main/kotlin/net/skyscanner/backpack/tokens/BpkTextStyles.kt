@@ -76,7 +76,7 @@ private fun parseTextStyles(source: Map<String, Any>): BpkTextStyles {
           name = it.value["originalValue"]!!
             .trimReference()
             .removePrefix("${type}_"),
-          value = it.value["value"]!!
+          value = it.value["value"]!!,
         )
       }
   }
@@ -151,7 +151,7 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
           ParameterSpec
             .builder(defaultFontFamily, FontFamilyClass)
             .defaultValue("%T.SansSerif", FontFamilyClass)
-            .build()
+            .build(),
         )
         .callThisConstructor(
           CodeBlock.builder().addNamed(
@@ -167,8 +167,8 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
               "fontSize" to BpkFontSizeClass,
               "lineHeight" to BpkLineHeightClass,
               "letterSpacing" to BpkLetterSpacingClass,
-            )
-          ).build()
+            ),
+          ).build(),
         )
         .build()
     }
@@ -189,7 +189,7 @@ private fun toCompose(source: BpkTextStyles, className: String): TypeSpec {
         FunSpec.constructorBuilder()
           .addModifiers(KModifier.INTERNAL)
           .addParameters(map(BpkTextStyleModel::toParameter))
-          .build()
+          .build(),
       )
       .addFunction(source.toConstructorFunction())
       .addProperties(map(BpkTextStyleModel::toProperty))
@@ -237,5 +237,4 @@ ${content.joinToString("\n")}
   }
 
   return textStylesDeclaration + source.joinToString("\n") { it.toXml() }
-
 }
