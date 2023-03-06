@@ -40,8 +40,12 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.OverlayComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
+@OverlayComponent
+@ComposeStory
 fun OverlayStory(modifier: Modifier = Modifier) {
   Column(modifier = modifier) {
     OverlaySampleRow {
@@ -133,7 +137,7 @@ fun WithTextOverlaySample(
     ) {
       Image(
         painter = painterResource(R.drawable.sea),
-        contentDescription = stringResource(R.string.image_rockies_content_description),
+        contentDescription = stringResource(R.string.image_sea_content_description),
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop,
       )
