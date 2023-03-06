@@ -29,7 +29,6 @@ object BpkDuration {
       override fun invoke(source: Map<String, Any>): BpkDurations =
         parseIntegers(source, "animations", "ANIMATION_DURATION_")
     }
-
   }
 
   sealed class Format<Output> : BpkTransformer<BpkDurations, Output> {
@@ -39,7 +38,6 @@ object BpkDuration {
         toXml(source, namespace)
     }
   }
-
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -68,5 +66,5 @@ private fun parseIntegers(
 
 private fun toXml(source: BpkDurations, type: String): String =
   source.map { (name, value) ->
-    "  <integer name=\"$type${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}\">${value}</integer>"
+    "  <integer name=\"$type${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}\">$value</integer>"
   }.joinToString("\n")

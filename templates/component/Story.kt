@@ -33,5 +33,5 @@ fun ${name}Story() {
 @Composable
 @Preview
 fun Default${name}Sample() {
-  BpkSlider()
+  Bpk${name}()
 }

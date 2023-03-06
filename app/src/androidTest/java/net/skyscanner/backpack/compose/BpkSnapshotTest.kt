@@ -70,7 +70,7 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
         activity.window.clearFlags(
           FLAG_TRANSLUCENT_STATUS or
             SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-            SYSTEM_UI_FLAG_LAYOUT_STABLE
+            SYSTEM_UI_FLAG_LAYOUT_STABLE,
         )
         BackpackDemoTheme {
           CompositionLocalProvider(*providers) {
@@ -78,7 +78,7 @@ open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : Screensh
               Modifier
                 .size(width, height)
                 .background(background().takeOrElse { BpkTheme.colors.canvas })
-                .padding(padding)
+                .padding(padding),
             ) {
               content()
             }

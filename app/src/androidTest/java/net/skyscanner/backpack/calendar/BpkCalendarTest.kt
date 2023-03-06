@@ -99,7 +99,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       Locale.UK,
       LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31)
+      LocalDate.of(2019, 12, 31),
     )
 
     calendar.setController(controller)
@@ -116,7 +116,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       initialStartDate,
       initialEndDate,
       SelectionType.RANGE,
-      multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext)
+      multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext),
     )
 
     calendar.setController(controller)
@@ -157,7 +157,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       Locale.UK,
       LocalDate.of(2017, 1, 2),
-      LocalDate.of(2017, 12, 31)
+      LocalDate.of(2017, 12, 31),
     )
 
     calendar.setController(controller)
@@ -170,7 +170,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       Locale.UK,
       LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31)
+      LocalDate.of(2019, 12, 31),
     )
 
     calendar.setController(controller)
@@ -195,7 +195,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       Locale.UK,
       LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31)
+      LocalDate.of(2019, 12, 31),
     )
 
     calendar.setController(controller)
@@ -224,7 +224,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       Locale.UK,
       LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31)
+      LocalDate.of(2019, 12, 31),
     )
 
     calendar.setController(controller)
@@ -242,7 +242,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       initialStartDate,
       initialEndDate,
       SelectionType.RANGE,
-      multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext)
+      multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext),
     )
 
     calendar.setController(controller)
@@ -257,7 +257,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       Locale.UK,
       LocalDate.of(2019, 1, 2),
       LocalDate.of(2019, 12, 31),
-      SelectionType.SINGLE
+      SelectionType.SINGLE,
     )
     calendar.setController(controller)
 
@@ -289,7 +289,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       Locale.UK,
       LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31)
+      LocalDate.of(2019, 12, 31),
     )
     calendar.setController(controller)
     controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9)))
@@ -303,7 +303,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       Locale.UK,
       LocalDate.of(2019, 1, 2),
       LocalDate.of(2019, 12, 31),
-      SelectionType.SINGLE
+      SelectionType.SINGLE,
     )
 
     calendar.setController(controller)
@@ -319,7 +319,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       LocalDate.of(2019, 1, 2),
       LocalDate.of(2019, 12, 31),
       SelectionType.SINGLE,
-      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY
+      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
     )
 
     calendar.setController(controller)
@@ -334,7 +334,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       LocalDate.of(2019, 1, 2),
       LocalDate.of(2019, 12, 31),
       SelectionType.SINGLE,
-      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY
+      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
     )
 
     calendar.setController(controller)
@@ -349,7 +349,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       Locale.UK,
       LocalDate.of(2019, 1, 2),
       LocalDate.of(2019, 12, 31),
-      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY
+      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
     )
     calendar.setController(controller)
     controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10)))
@@ -364,7 +364,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       LocalDate.of(2019, 1, 2),
       LocalDate.of(2019, 12, 31),
       SelectionType.SINGLE,
-      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY
+      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
     )
 
     calendar.setController(controller)
@@ -377,7 +377,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val calendar = BpkCalendar(testContext)
     val controller = BpkCalendarControllerImpl(
       Locale.GERMAN,
-      LocalDate.of(2019, 6, 8)
+      LocalDate.of(2019, 6, 8),
     )
     calendar.setController(controller)
     capture(calendar)
@@ -389,7 +389,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
     val controller = BpkCalendarControllerImpl(
       Locale.UK,
       LocalDate.of(2017, 1, 2),
-      LocalDate.of(2017, 12, 31)
+      LocalDate.of(2017, 12, 31),
     )
 
     calendar.setController(controller)
@@ -404,14 +404,14 @@ class BpkCalendarTest : BpkSnapshotTest() {
       Locale.UK,
       setOf(
         HighlightedDaysAdapter.HighlightedDay(
-          LocalDate.of(2017, 1, 1), "New Year's Day"
+          LocalDate.of(2017, 1, 1), "New Year's Day",
         ),
         HighlightedDaysAdapter.HighlightedDay(
           date = LocalDate.of(2017, 1, 2),
           description = "Bank Holiday",
-          descriptionOnly = true
-        )
-      )
+          descriptionOnly = true,
+        ),
+      ),
     )
 
     val calendar = BpkCalendar(testContext)
@@ -422,7 +422,7 @@ class BpkCalendarTest : BpkSnapshotTest() {
       SelectionType.RANGE,
       null,
       null,
-      monthFooterAdapter
+      monthFooterAdapter,
     )
 
     calendar.setController(controller)

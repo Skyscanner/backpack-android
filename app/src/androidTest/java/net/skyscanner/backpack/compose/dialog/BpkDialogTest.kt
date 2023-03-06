@@ -18,23 +18,15 @@
 
 package net.skyscanner.backpack.compose.dialog
 
-import android.view.View
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.ViewRootForTest
-import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.isDialog
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.junit4.createEmptyComposeRule
-import androidx.test.ext.junit.rules.activityScenarioRule
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.theme.BpkTheme
-import net.skyscanner.backpack.demo.BackpackDemoTheme
-import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.compose.DestructiveDialogExample
 import net.skyscanner.backpack.demo.compose.FlareDialogExample
 import net.skyscanner.backpack.demo.compose.ImageDialogEndAlignmentExample
@@ -125,5 +117,4 @@ class BpkDialogTest : BpkSnapshotTest() {
 
     compareScreenshot(rule.onNode(isDialog()))
   }
-
 }

@@ -21,10 +21,32 @@ package net.skyscanner.backpack.demo.stories
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.StarRatingInteractiveComponent
+import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.starrating.BpkInteractiveStarRating
 import net.skyscanner.backpack.toast.BpkToast
 
-class InteractiveStarRatingStory : Story() {
+@Composable
+@StarRatingInteractiveComponent
+@ViewStory
+fun InteractiveStarRatingStory(modifier: Modifier = Modifier) =
+  AndroidLayout(R.layout.fragment_star_rating_interactive, modifier) {
+    this as ViewGroup
+    (0 until childCount).forEach { idx ->
+      val child = getChildAt(idx)
+      if (child is BpkInteractiveStarRating) {
+        child.onRatingChangedListener = { current, max ->
+          BpkToast.makeText(context, "$current/$max", BpkToast.LENGTH_SHORT).show()
+        }
+      }
+    }
+  }
+
+class InteractiveStarRatingFragment : Story() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -44,7 +66,7 @@ class InteractiveStarRatingStory : Story() {
   companion object {
     private const val LAYOUT_ID = "fragment_id"
 
-    infix fun of(fragmentLayout: Int) = InteractiveStarRatingStory().apply {
+    infix fun of(fragmentLayout: Int) = InteractiveStarRatingFragment().apply {
       arguments = Bundle()
       arguments?.putInt(LAYOUT_ID, fragmentLayout)
     }

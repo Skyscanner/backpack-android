@@ -19,6 +19,7 @@
 buildscript {
   ext.kotlin_version = '1.8.10'
   ext.compose_compiler_version = '1.4.2'
+  ext.ksp_version = '1.8.10-1.0.9'
   ext.detekt_version = '1.22.0'
   ext.dokka = "org.jetbrains.dokka:dokka-gradle-plugin:1.7.20"
   repositories {
@@ -32,8 +33,9 @@ buildscript {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath dokka
     classpath 'com.karumi:shot:5.14.1'
-    classpath 'io.github.gradle-nexus:publish-plugin:1.1.0'
+    classpath 'io.github.gradle-nexus:publish-plugin:1.2.0'
     classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
+    classpath "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:$ksp_version"
   }
 }
 
@@ -59,10 +61,11 @@ subprojects {
   detekt {
     config = files("$rootDir/.detekt.yml", "$rootDir/.detekt-compose.yml")
     buildUponDefaultConfig = true
+    source = files("src", "$rootDir/buildSrc/src")
   }
 
   dependencies {
-    detektPlugins "com.twitter.compose.rules:detekt:0.0.26"
+    detektPlugins "io.nlopez.compose.rules:detekt:0.1.2"
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$detekt_version"
     detektPlugins "io.gitlab.arturbosch.detekt:detekt-rules-libraries:$detekt_version"
   }
@@ -77,7 +80,7 @@ ext {
   dokkaOutputDir = "dokka"
 
   androidxAppCompat = "androidx.appcompat:appcompat:1.6.1"
-  androidxAnnotations = "androidx.annotation:annotation:1.5.0"
+  androidxAnnotations = "androidx.annotation:annotation:1.6.0"
 
   lifecycleVersion = "2.5.1"
   androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
@@ -111,11 +114,15 @@ ext {
   mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
   mockitoAndroid = "org.mockito:mockito-android:5.1.1"
 
+  kotlinPoet = "com.squareup:kotlinpoet:1.12.0"
+  roomCompilerProcessing = "androidx.room:room-compiler-processing:2.5.0"
+  kspApi = "com.google.devtools.ksp:symbol-processing-api:$ksp_version"
+
   coroutinesVersion = "1.6.4"
   coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
   coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
-  lintVersion = "30.4.1"
+  lintVersion = "30.4.2"
   lint = "com.android.tools.lint:lint:$lintVersion"
   lintApi = "com.android.tools.lint:lint-api:$lintVersion"
   lintTests = "com.android.tools.lint:lint-tests:$lintVersion"
@@ -134,7 +141,15 @@ ext {
   composeTestManifest = [composeBom, "androidx.compose.ui:ui-test-manifest"]
   composeActivity = "androidx.activity:activity-compose:1.6.1"
 
-  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:0.28.0"
+  // update this alongside with Compose version
+  destinationsVersion = "1.7.34-beta"
+  destinationsCore = "io.github.raamcosta.compose-destinations:core:$destinationsVersion"
+  destinationsKsp = "io.github.raamcosta.compose-destinations:ksp:$destinationsVersion"
+
+  // update this alongside with Compose version
+  accompanistVersion = "0.28.0"
+  accompanistFlowLayout = "com.google.accompanist:accompanist-flowlayout:$accompanistVersion"
+  accompanistPager = "com.google.accompanist:accompanist-pager:$accompanistVersion"
 }
 
 tasks.dokkaHtmlMultiModule.configure {

@@ -25,22 +25,21 @@ import org.junit.runner.Description
 internal class VariantFilter : AbstractFilter() {
   override fun evaluateTest(description: Description): Boolean {
     return when {
-        description.annotations.filterIsInstance<Variants>().isNotEmpty() -> {
-          val condition = description.getAnnotation(Variants::class.java)!!
-          condition.variants.contains(BpkTestVariant.current)
-        }
-        description.testClass.annotations.filterIsInstance<Variants>().isNotEmpty() -> {
-          val condition = description.testClass.getAnnotation(Variants::class.java)!!
-          condition.variants.contains(BpkTestVariant.current)
-        }
-        else -> true
+      description.annotations.filterIsInstance<Variants>().isNotEmpty() -> {
+        val condition = description.getAnnotation(Variants::class.java)!!
+        condition.variants.contains(BpkTestVariant.current)
+      }
+      description.testClass.annotations.filterIsInstance<Variants>().isNotEmpty() -> {
+        val condition = description.testClass.getAnnotation(Variants::class.java)!!
+        condition.variants.contains(BpkTestVariant.current)
+      }
+      else -> true
     }
   }
 
   override fun describe(): String {
     return "Only run tests annotated with the supplied variants"
   }
-
 }
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)

@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.flare.BpkFlare
 import net.skyscanner.backpack.compose.flare.BpkFlarePointerDirection
@@ -38,12 +37,15 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.FlareComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun FlareStory() {
+@FlareComponent
+@ComposeStory
+fun FlareStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
@@ -58,40 +60,37 @@ fun FlareStory() {
 }
 
 @Composable
-@Preview
-fun DefaultFlareExample(modifier: Modifier = Modifier) {
+internal fun DefaultFlareExample(modifier: Modifier = Modifier) {
   BpkFlare(modifier) {
     RockiesImage()
   }
 }
 
 @Composable
-@Preview
-fun UpFlareExample(modifier: Modifier = Modifier) {
+internal fun UpFlareExample(modifier: Modifier = Modifier) {
   BpkFlare(modifier, pointerDirection = BpkFlarePointerDirection.Up) {
     RockiesImage()
   }
 }
 
 @Composable
-@Preview
-fun RadiusFlareExample(modifier: Modifier = Modifier) {
+internal fun RadiusFlareExample(modifier: Modifier = Modifier) {
   BpkFlare(modifier, radius = BpkFlareRadius.Medium) {
     RockiesImage()
   }
 }
 
 @Composable
-@Preview
-fun ContentPaddingFlareExample(modifier: Modifier = Modifier) {
+internal fun ContentPaddingFlareExample(modifier: Modifier = Modifier) {
   BpkFlare(modifier, background = BpkTheme.colors.coreAccent, insetContent = true) {
     BpkText(text = stringResource(R.string.stub), color = BpkTheme.colors.textPrimaryInverse)
   }
 }
 
 @Composable
-private fun RockiesImage() {
+private fun RockiesImage(modifier: Modifier = Modifier) {
   Image(
+    modifier = modifier,
     painter = painterResource(R.drawable.canadian_rockies_canada),
     contentDescription = stringResource(R.string.image_rockies_content_description),
     contentScale = ContentScale.Crop,

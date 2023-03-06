@@ -32,7 +32,7 @@ import java.io.File
 data class BpkIcon(
   val name: String,
   val type: Type,
-  val value: String
+  val value: String,
 ) {
 
   enum class Type {
@@ -52,7 +52,7 @@ data class BpkIcon(
             BpkIcon(
               name = transformIconName(file.nameWithoutExtension),
               type = if (file.nameWithoutExtension.endsWith("_sm")) Type.Sm else Type.Lg,
-              value = file.nameWithoutExtension
+              value = file.nameWithoutExtension,
             )
           }
           .sortedBy { it.name }
@@ -81,7 +81,7 @@ data class BpkIcon(
             BpkIcon(
               name = transformIconName(file.name),
               type = type,
-              value = String(stream.toByteArray())
+              value = String(stream.toByteArray()),
             )
           }
         }
@@ -123,10 +123,10 @@ private fun toCompose(
 
     val small =
       icons.firstOrNull { it.type == BpkIcon.Type.Sm }?.value ?: icons.firstOrNull { it.type == BpkIcon.Type.Lg }?.value
-      ?: error("Invalid icon format! : $name")
+        ?: error("Invalid icon format! : $name")
     val large =
       icons.firstOrNull { it.type == BpkIcon.Type.Lg }?.value ?: icons.firstOrNull { it.type == BpkIcon.Type.Sm }?.value
-      ?: error("Invalid icon format! : $name")
+        ?: error("Invalid icon format! : $name")
 
     PropertySpec.builder(
       name = name,
@@ -147,7 +147,7 @@ private fun toCompose(
           .addStatement(")")
           .unindent()
           .addStatement(")")
-          .build()
+          .build(),
       )
       .build()
   }
@@ -173,9 +173,9 @@ private fun toCompose(
           .addStatement(")")
           .unindent()
           .addStatement(")")
-          .build()
+          .build(),
       )
-      .build()
+      .build(),
   )
 
 private fun toXml(source: BpkIcons, rootDir: String, metadataPath: String): Map<String, String> {

@@ -10,11 +10,11 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardButton/screenshots/default.png" alt="Card Button component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardButton/screenshots/default_dm.png" alt="Card Button component - dark mode" width="375" /> |
 
-## Small
+## Large
 
 | Day                                                                                                                                                                          | Night                                                                                                                                                                                       |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardButton/screenshots/small.png" alt="Small Card Button component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardButton/screenshots/small_dm.png" alt="Small Card Button component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardButton/screenshots/large.png" alt="Large Card Button component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/CardButton/screenshots/large_dm.png" alt="Large Card Button component - dark mode" width="375" /> |
 
 ## Installation
 
@@ -27,11 +27,11 @@ Example of a Save Button on light background:
 ```Kotlin
 import net.skyscanner.backpack.compose.cardbutton.BpkSaveButton
 
-var checked1 by remember { mutableStateOf(false) }
+var checked by remember { mutableStateOf(false) }
 BpkSaveButton(
-  checked = checked1,
+  checked = checked,
   contentDescription = "",
-  onCheckedChange = { checked1 = !checked1 }
+  onCheckedChange = { checked = it }
 )
 ```
 
@@ -43,7 +43,7 @@ import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonSize
 import net.skyscanner.backpack.compose.cardbutton.BpkCardButtonStyle
 
 BpkShareButton(
-  size = BpkCardButtonSize.Small,
+  size = BpkCardButtonSize.Default,
   style = BpkCardButtonStyle.Contained,
   contentDescription = "",
   onClick = {}

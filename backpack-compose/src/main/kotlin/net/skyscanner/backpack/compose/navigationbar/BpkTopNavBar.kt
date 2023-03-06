@@ -52,14 +52,14 @@ fun BpkTopNavBar(
     title = title,
     modifier = modifier,
     insets = insets,
-    navigationIcon = navIcon.toAction(),
+    navIcon = navIcon.toAction(),
     actions = actions,
   )
 }
 
 @Composable
 fun BpkTopNavBar(
-  navigationIcon: NavIcon,
+  navIcon: NavIcon,
   title: String,
   action: TextAction,
   modifier: Modifier = Modifier,
@@ -70,7 +70,7 @@ fun BpkTopNavBar(
     title = title,
     modifier = modifier,
     insets = insets,
-    navigationIcon = navigationIcon.toAction(),
+    navIcon = navIcon.toAction(),
     actions = listOf(action),
   )
 }
@@ -89,7 +89,7 @@ fun BpkTopNavBar(
     title = title,
     modifier = modifier,
     insets = insets,
-    navigationIcon = navIcon.toAction(),
+    navIcon = navIcon.toAction(),
     actions = actions,
   )
 }
@@ -97,7 +97,7 @@ fun BpkTopNavBar(
 @Composable
 fun BpkTopNavBar(
   state: TopNavBarState,
-  navigationIcon: NavIcon,
+  navIcon: NavIcon,
   title: String,
   action: TextAction,
   modifier: Modifier = Modifier,
@@ -108,7 +108,7 @@ fun BpkTopNavBar(
     title = title,
     modifier = modifier,
     insets = insets,
-    navigationIcon = navigationIcon.toAction(),
+    navIcon = navIcon.toAction(),
     actions = listOf(action),
   )
 }

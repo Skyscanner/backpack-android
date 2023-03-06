@@ -38,7 +38,7 @@ class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, fla
       when (size) {
         BpkButton.Size.Standard -> R.drawable.bpk_long_arrow_right_sm
         BpkButton.Size.Large -> R.drawable.bpk_long_arrow_right
-      }
+      },
     )
 
   @Test
@@ -164,7 +164,8 @@ private fun BpkButton.Type.rowBackground() =
   when (this) {
     BpkButton.Type.SecondaryOnDark,
     BpkButton.Type.PrimaryOnDark,
-    BpkButton.Type.LinkOnDark -> R.color.bpkSurfaceContrast
+    BpkButton.Type.LinkOnDark,
+    -> R.color.bpkSurfaceContrast
     BpkButton.Type.PrimaryOnLight -> R.color.bpkTextOnDark
     else -> null
   }

@@ -19,6 +19,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'shot'
+apply plugin: 'com.google.devtools.ksp'
 
 apply from: "$rootProject.projectDir/android-configuration.gradle"
 apply from: "screenshots.gradle"
@@ -103,6 +104,8 @@ dependencies {
   implementation rootProject.ext.composeActivity
   implementation rootProject.ext.kotlinReflection
   implementation rootProject.ext.stetho
+  implementation rootProject.ext.destinationsCore
+  implementation rootProject.ext.accompanistPager
   testImplementation rootProject.ext.junit
   debugImplementation rootProject.ext.composeTestManifest
   androidTestImplementation rootProject.ext.composeFoundation
@@ -117,4 +120,6 @@ dependencies {
   androidTestImplementation rootProject.ext.facebookSnapshotTestingCore
   implementation project(':Backpack')
   implementation project(':backpack-compose')
+  ksp project(":meta-processor")
+  ksp rootProject.ext.destinationsKsp
 }

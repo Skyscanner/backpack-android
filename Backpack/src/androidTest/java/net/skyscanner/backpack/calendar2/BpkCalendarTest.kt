@@ -122,7 +122,7 @@ class BpkCalendarTest {
   fun withStartAndEndDateSelected() = runTest {
     val expected = CalendarSelection.Dates(
       start = LocalDate.of(2019, 1, 17),
-      end = LocalDate.of(2019, 2, 14)
+      end = LocalDate.of(2019, 2, 14),
     )
 
     val calendar = BpkCalendar(context)

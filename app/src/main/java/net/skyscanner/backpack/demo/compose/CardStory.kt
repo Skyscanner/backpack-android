@@ -30,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
@@ -38,12 +37,15 @@ import net.skyscanner.backpack.compose.card.BpkCardPadding
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
+import net.skyscanner.backpack.demo.components.CardComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun CardStory() {
+@CardComponent
+@ComposeStory("Card")
+fun CardStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier
+    modifier = modifier
       .background(BpkTheme.colors.line)
       .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
@@ -68,10 +70,7 @@ fun CardStory() {
 }
 
 @Composable
-@Preview
-fun SmallCornersCardExample(
-  modifier: Modifier = Modifier,
-) {
+internal fun SmallCornersCardExample(modifier: Modifier = Modifier) {
   BpkCard(
     modifier = modifier,
     onClick = {},
@@ -82,10 +81,7 @@ fun SmallCornersCardExample(
 }
 
 @Composable
-@Preview
-fun LargeCornersCardExample(
-  modifier: Modifier = Modifier,
-) {
+internal fun LargeCornersCardExample(modifier: Modifier = Modifier) {
   BpkCard(
     modifier = modifier,
     onClick = {},
@@ -97,10 +93,7 @@ fun LargeCornersCardExample(
 }
 
 @Composable
-@Preview
-fun NoPaddingCardExample(
-  modifier: Modifier = Modifier,
-) {
+internal fun NoPaddingCardExample(modifier: Modifier = Modifier) {
   BpkCard(
     modifier = modifier,
     onClick = {},
@@ -112,20 +105,14 @@ fun NoPaddingCardExample(
 }
 
 @Composable
-@Preview
-fun NonClickableCardExample(
-  modifier: Modifier = Modifier,
-) {
+internal fun NonClickableCardExample(modifier: Modifier = Modifier) {
   BpkCard(modifier, contentAlignment = Alignment.Center) {
     BpkText("Non clickable")
   }
 }
 
 @Composable
-@Preview
-fun FocusableCardExample(
-  modifier: Modifier = Modifier,
-) {
+internal fun FocusableCardExample(modifier: Modifier = Modifier) {
   var elevation by remember { mutableStateOf(BpkCardElevation.Focus) }
 
   BpkCard(
@@ -144,10 +131,7 @@ fun FocusableCardExample(
 }
 
 @Composable
-@Preview
-fun NoElevationCardExample(
-  modifier: Modifier = Modifier,
-) {
+internal fun NoElevationCardExample(modifier: Modifier = Modifier) {
   BpkCard(
     modifier = modifier,
     onClick = {},

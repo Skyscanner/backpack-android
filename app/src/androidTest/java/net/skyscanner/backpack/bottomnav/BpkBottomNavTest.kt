@@ -23,7 +23,6 @@ import net.skyscanner.backpack.BpkSnapshotTest
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.demo.R
-import net.skyscanner.backpack.demo.compose.BpkBottomNavSample
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -57,5 +56,4 @@ class BpkBottomNavTest : BpkSnapshotTest() {
       padding = 0,
     )
   }
-
 }

@@ -37,7 +37,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
       BpkPrice(
         price = stringResource(id = R.string.price_price),
         size = size,
-        align = align
+        align = align,
       )
     }
   }
@@ -49,7 +49,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
         price = stringResource(id = R.string.price_price),
         trailingText = stringResource(id = R.string.price_trailing_text),
         size = size,
-        align = align
+        align = align,
       )
     }
   }
@@ -62,7 +62,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
         trailingText = stringResource(id = R.string.price_trailing_text),
         previousPrice = stringResource(id = R.string.price_line_through_text),
         size = size,
-        align = align
+        align = align,
       )
     }
   }
@@ -76,7 +76,7 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
         previousPrice = stringResource(id = R.string.price_line_through_text),
         leadingText = stringResource(id = R.string.price_leading_text),
         size = size,
-        align = align
+        align = align,
       )
     }
   }
@@ -94,5 +94,5 @@ class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.
 
 data class Flavor(
   val size: BpkPriceSize,
-  val align: BpkPriceAlign
+  val align: BpkPriceAlign,
 )

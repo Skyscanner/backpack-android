@@ -1,8 +1,6 @@
-TwitterCompose:
+Compose:
   CompositionLocalAllowlist:
     active: false
-  CompositionLocalNaming:
-    active: true
   ContentEmitterReturningValues:
     active: true
   ModifierComposable:

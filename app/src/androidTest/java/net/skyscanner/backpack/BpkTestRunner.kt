@@ -48,7 +48,7 @@ class BpkTestRunner : ShotTestRunner() {
         override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
           BpkTestVariant.current.applyToActivity(activity)
         }
-      })
+      },)
     }
 
   override fun newActivity(cl: ClassLoader?, className: String?, intent: Intent?): Activity =

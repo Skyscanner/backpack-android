@@ -31,7 +31,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.sleketon.BpkBodyTextSkeleton
 import net.skyscanner.backpack.compose.sleketon.BpkCircleSizeType
@@ -45,12 +44,15 @@ import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
+import net.skyscanner.backpack.demo.components.SkeletonComponent
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-@Preview
-fun SkeletonStory() {
+@SkeletonComponent
+@ComposeStory
+fun SkeletonStory(modifier: Modifier = Modifier) {
   Column(
-    modifier = Modifier.padding(BpkSpacing.Base),
+    modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
   ) {
     CircleSkeletonExample()
@@ -62,9 +64,8 @@ fun SkeletonStory() {
 }
 
 @Composable
-@Preview
-fun ImageSkeletonExample() {
-  Column() {
+internal fun ImageSkeletonExample(modifier: Modifier = Modifier) {
+  Column(modifier) {
     BpkText(
       modifier = Modifier.padding(bottom = BpkSpacing.Sm),
       text = stringResource(id = R.string.image_skeleton_title),
@@ -87,9 +88,8 @@ fun ImageSkeletonExample() {
 }
 
 @Composable
-@Preview
-fun CircleSkeletonExample() {
-  Column() {
+internal fun CircleSkeletonExample(modifier: Modifier = Modifier) {
+  Column(modifier) {
     BpkText(
       modifier = Modifier.padding(bottom = BpkSpacing.Sm),
       text = stringResource(id = R.string.circle_skeleton_title),
@@ -107,9 +107,8 @@ fun CircleSkeletonExample() {
 }
 
 @Composable
-@Preview
-fun BodyTextSkeletonExample() {
-  Column() {
+internal fun BodyTextSkeletonExample(modifier: Modifier = Modifier) {
+  Column(modifier) {
     BpkText(
       modifier = Modifier.padding(bottom = BpkSpacing.Sm),
       text = stringResource(id = R.string.body_text_skeleton_title),
@@ -122,9 +121,8 @@ fun BodyTextSkeletonExample() {
 }
 
 @Composable
-@Preview
-fun HeadlineSkeletonExample() {
-  Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+internal fun HeadlineSkeletonExample(modifier: Modifier = Modifier) {
+  Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
     BpkText(text = stringResource(id = R.string.headline_skeleton_title), style = BpkTheme.typography.footnote)
     Row(
       modifier = Modifier.fillMaxWidth(),
@@ -144,9 +142,8 @@ fun HeadlineSkeletonExample() {
 }
 
 @Composable
-@Preview
-fun BpkShimmerSkeletonExample() {
-  Column(verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+internal fun BpkShimmerSkeletonExample(modifier: Modifier = Modifier) {
+  Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
     BpkText(text = stringResource(id = R.string.shimmer_overlay_title), style = BpkTheme.typography.footnote)
     Row(
       modifier = Modifier.fillMaxWidth(),

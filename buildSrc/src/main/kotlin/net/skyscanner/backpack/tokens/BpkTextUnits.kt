@@ -49,7 +49,6 @@ object BpkTextUnit {
           !it.key.startsWith("TEXT_")
         }
     }
-
   }
 
   sealed class Format<Output> : BpkTransformer<BpkTextUnits, Output> {
@@ -64,7 +63,6 @@ object BpkTextUnit {
         toXml(source)
     }
   }
-
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -123,15 +121,15 @@ private fun toCompose(
             } else {
               add("%L.%M", value, extension)
             }
-          })
+          },)
           .build()
-      }
+      },
     )
     .build()
 
 private fun toXml(
   source: BpkTextUnits,
-) : String =
+): String =
   source.map { (name, value) ->
     "  <dimen name=\"bpkText${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}Size\">${value.toInt()}sp</dimen>"
   }.joinToString("\n")

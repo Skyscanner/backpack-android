@@ -23,7 +23,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.Variants
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.BpkBottomNavSample
+import net.skyscanner.backpack.demo.compose.BottomNavSample
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -32,12 +32,12 @@ class BpkBottomNavTest : BpkSnapshotTest() {
 
   @Test
   fun default() = snap {
-    BpkBottomNavSample()
+    BottomNavSample()
   }
 
   @Test
   @Variants(BpkTestVariant.Default)
   fun selectionUpdated() = snap {
-    BpkBottomNavSample(defaultItemId = 2)
+    BottomNavSample(defaultItemId = 2)
   }
 }
