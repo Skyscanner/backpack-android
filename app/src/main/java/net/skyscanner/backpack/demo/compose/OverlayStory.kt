@@ -133,7 +133,7 @@ fun WithTextOverlaySample(
         BpkText(
           modifier = Modifier.align(Alignment.Center),
           text = "With text",
-          color = BpkTheme.colors.canvas,
+          color = BpkTheme.colors.textOnDark,
           style = BpkTheme.typography.bodyDefault,
         )
       },
