@@ -100,7 +100,7 @@ fun DefaultOverlaySample(
   Column(horizontalAlignment = Alignment.CenterHorizontally) {
     BpkOverlay(
       modifier = modifier
-        .size(90.dp)
+        .size(85.dp)
         .padding(top = BpkSpacing.Base),
       overlayType = overlayType,
     ) {
@@ -123,7 +123,7 @@ fun WithTextOverlaySample(
   Column(horizontalAlignment = Alignment.CenterHorizontally) {
     BpkOverlay(
       modifier = modifier
-        .size(90.dp)
+        .size(85.dp)
         .padding(top = BpkSpacing.Base),
       overlayType = overlayType,
       foregroundContent = {
