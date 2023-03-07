@@ -25,8 +25,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -100,8 +101,9 @@ fun DefaultOverlaySample(
   Column(horizontalAlignment = Alignment.CenterHorizontally) {
     BpkOverlay(
       modifier = modifier
-        .size(85.dp)
-        .padding(top = BpkSpacing.Base),
+        .width(110.dp)
+        .height(78.dp)
+        .padding(top = BpkSpacing.Sm),
       overlayType = overlayType,
     ) {
       Image(
@@ -123,8 +125,9 @@ fun WithTextOverlaySample(
   Column(horizontalAlignment = Alignment.CenterHorizontally) {
     BpkOverlay(
       modifier = modifier
-        .size(85.dp)
-        .padding(top = BpkSpacing.Base),
+        .width(110.dp)
+        .height(78.dp)
+        .padding(top = BpkSpacing.Sm),
       overlayType = overlayType,
       foregroundContent = {
         BpkText(
