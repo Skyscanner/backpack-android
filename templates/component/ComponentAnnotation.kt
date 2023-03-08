@@ -16,27 +16,9 @@
  * limitations under the License.
  */
 
-package net.skyscanner.backpack.demo.compose
+package net.skyscanner.backpack.demo.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import net.skyscanner.backpack.compose.${package}.Bpk$name
-import net.skyscanner.backpack.demo.components.${name}Component
-import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.meta.Component
 
-@Composable
-@${name}Component
-@ComposeStory
-fun ${name}Story(modifier: Modifier = Modifier) {
-  Column(modifier) {
-    Default${name}Sample()
-  }
-}
-
-@Composable
-internal fun Default${name}Sample(modifier: Modifier = Modifier) {
-  Bpk${name}(
-    modifier = modifier,
-  )
-}
+@Component("${name}")
+annotation class ${name}Component
