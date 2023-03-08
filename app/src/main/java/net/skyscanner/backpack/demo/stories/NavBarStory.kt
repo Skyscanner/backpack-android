@@ -24,13 +24,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.NavBarComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.navbar.BpkNavBar
 import net.skyscanner.backpack.toast.BpkToast
 
-// todo
-// todo: collapsed?
 @Composable
 @NavBarComponent
 @ViewStory("Default")
@@ -39,7 +38,15 @@ fun NavBarStoryDefault(modifier: Modifier = Modifier) =
 
 @Composable
 @NavBarComponent
-@ViewStory("With Icon")
+@ViewStory("Collapsed", kind = StoryKind.ScreenshotOnly)
+fun NavBarStoryCollapsed(modifier: Modifier = Modifier) =
+  NavBarDemo(R.layout.fragment_nav_bar, modifier) {
+    setExpanded(false)
+  }
+
+@Composable
+@NavBarComponent
+@ViewStory("With Icon", kind = StoryKind.StoryOnly)
 fun NavBarStoryWithIcon(modifier: Modifier = Modifier) =
   NavBarDemo(R.layout.fragment_nav_bar_with_icon, modifier)
 
@@ -47,12 +54,15 @@ fun NavBarStoryWithIcon(modifier: Modifier = Modifier) =
 @NavBarComponent
 @ViewStory("With Menu")
 fun NavBarStoryWithMenu(modifier: Modifier = Modifier) =
-  NavBarDemo(R.layout.fragment_nav_bar_with_menu, modifier)
+  NavBarDemo(R.layout.fragment_nav_bar_with_menu, modifier) {
+    setExpanded(false)
+  }
 
 @Composable
 private fun NavBarDemo(
   @LayoutRes layoutId: Int,
   modifier: Modifier = Modifier,
+  init: BpkNavBar.() -> Unit = {},
 ) =
   AndroidLayout<BpkNavBar>(layoutId, R.id.appBar, modifier) {
     title = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
@@ -70,4 +80,5 @@ private fun NavBarDemo(
         BpkToast.LENGTH_SHORT,
       ).show()
     }
+    init()
   }
