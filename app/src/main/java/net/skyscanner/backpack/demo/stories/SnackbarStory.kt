@@ -20,101 +20,128 @@ package net.skyscanner.backpack.demo.stories
 
 import android.view.View
 import android.widget.TextView
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.SnackbarComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
+import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import net.skyscanner.backpack.snackbar.BpkSnackbar
 
-// todo
-// todo: variants
 @Composable
 @SnackbarComponent
 @ViewStory
-fun SnackbarStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_snackbar, modifier) {
-    setupSnackbars(this)
-  }
-
-private fun setupSnackbars(view: View) {
-
-  view.findViewById<TextView>(R.id.snackbar_short).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_SHORT)
-      .setAction(R.string.snackbar_action) {}
-      .show()
-  }
-
-  view.findViewById<TextView>(R.id.snackbar_long).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_LONG)
-      .setAction(R.string.snackbar_action) {}
-      .show()
-  }
-
-  view.findViewById<TextView>(R.id.snackbar_indefinite).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, it.text, BpkSnackbar.LENGTH_INDEFINITE)
-      .setAction(R.string.snackbar_action) {}
-      .show()
-  }
-
-  view.findViewById<TextView>(R.id.snackbar_title).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-      .setTitle(view.context.getString(R.string.snackbar_title))
-      .setAction(R.string.snackbar_action) {}
-      .show()
-  }
-
-  view.findViewById<TextView>(R.id.snackbar_icon).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-      .setIcon(R.drawable.bpk_tick_circle)
-      .setAction(R.string.snackbar_action) {}
-      .show()
-  }
-
-  view.findViewById<TextView>(R.id.snackbar_title_icon).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-      .setTitle(view.context.getString(R.string.snackbar_title))
-      .setIcon(R.drawable.bpk_tick_circle)
-      .setAction(R.string.snackbar_action) {}
-      .show()
-  }
-
-  view.findViewById<TextView>(R.id.snackbar_iconOnly).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-      .setAction(R.drawable.bpk_close, view.context.getString(R.string.snackbar_icon_content_description)) { }
-      .show()
-  }
-
-  view.findViewById<TextView>(R.id.snackbar_title_iconOnly).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-      .setTitle(view.context.getString(R.string.snackbar_title))
-      .setAction(R.drawable.bpk_close, view.context.getString(R.string.snackbar_icon_content_description)) { }
-      .show()
-  }
-
-  view.findViewById<TextView>(R.id.snackbar_icon_iconOnly).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-      .setIcon(R.drawable.bpk_tick_circle)
-      .setAction(R.drawable.bpk_close, view.context.getString(R.string.snackbar_icon_content_description)) { }
-      .show()
-  }
-
-  view.findViewById<TextView>(R.id.snackbar_title_icon_iconOnly).setOnClickListener {
-    it as TextView
-    BpkSnackbar.make(view, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
-      .setTitle(view.context.getString(R.string.snackbar_title))
-      .setAction(R.drawable.bpk_close, view.context.getString(R.string.snackbar_icon_content_description)) { }
-      .setIcon(R.drawable.bpk_tick_circle)
-      .show()
+fun SnackbarStory(
+  modifier: Modifier = Modifier,
+  init: View.() -> Unit = {},
+) {
+  val automationMode = LocalAutomationMode.current
+  SnackbarDemo(modifier) {
+    if (automationMode) {
+      findViewById<View>(R.id.snackbar_indefinite).performClick()
+    }
   }
 }
+
+@Composable
+@SnackbarComponent
+@ViewStory("Icon", StoryKind.ScreenshotOnly)
+fun SnackbarScreenshotWithActionAndIcon(modifier: Modifier = Modifier) {
+  val automationMode = LocalAutomationMode.current
+  SnackbarDemo(modifier) {
+    if (automationMode) {
+      findViewById<View>(R.id.snackbar_title_icon_iconOnly).performClick()
+    }
+  }
+}
+
+@Composable
+private fun SnackbarDemo(
+  modifier: Modifier = Modifier,
+  init: View.() -> Unit = {},
+) =
+  AndroidLayout(R.layout.fragment_snackbar, modifier.fillMaxSize()) {
+
+    findViewById<TextView>(R.id.snackbar_short).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, it.text, BpkSnackbar.LENGTH_SHORT)
+        .setAction(R.string.snackbar_action) {}
+        .show()
+    }
+
+    findViewById<TextView>(R.id.snackbar_long).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, it.text, BpkSnackbar.LENGTH_LONG)
+        .setAction(R.string.snackbar_action) {}
+        .show()
+    }
+
+    findViewById<TextView>(R.id.snackbar_indefinite).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, it.text, BpkSnackbar.LENGTH_INDEFINITE)
+        .setAction(R.string.snackbar_action) {}
+        .show()
+    }
+
+    findViewById<TextView>(R.id.snackbar_title).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle(context.getString(R.string.snackbar_title))
+        .setAction(R.string.snackbar_action) {}
+        .show()
+    }
+
+    findViewById<TextView>(R.id.snackbar_icon).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction(R.string.snackbar_action) {}
+        .show()
+    }
+
+    findViewById<TextView>(R.id.snackbar_title_icon).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle(context.getString(R.string.snackbar_title))
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction(R.string.snackbar_action) {}
+        .show()
+    }
+
+    findViewById<TextView>(R.id.snackbar_iconOnly).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setAction(R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
+        .show()
+    }
+
+    findViewById<TextView>(R.id.snackbar_title_iconOnly).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle(context.getString(R.string.snackbar_title))
+        .setAction(R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
+        .show()
+    }
+
+    findViewById<TextView>(R.id.snackbar_icon_iconOnly).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setIcon(R.drawable.bpk_tick_circle)
+        .setAction(R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
+        .show()
+    }
+
+    findViewById<TextView>(R.id.snackbar_title_icon_iconOnly).setOnClickListener {
+      it as TextView
+      BpkSnackbar.make(this, R.string.snackbar_message, BpkSnackbar.LENGTH_INDEFINITE)
+        .setTitle(context.getString(R.string.snackbar_title))
+        .setAction(R.drawable.bpk_close, context.getString(R.string.snackbar_icon_content_description)) { }
+        .setIcon(R.drawable.bpk_tick_circle)
+        .show()
+    }
+
+    init()
+  }
