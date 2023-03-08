@@ -19,7 +19,6 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,51 +40,42 @@ import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
 @Composable
 @FieldSetComponent
 @ComposeStory(kind = StoryKind.StoryOnly)
-fun FieldSetStory(modifier: Modifier = Modifier) =
+fun FieldSetStory(
+  modifier: Modifier = Modifier,
+  initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
+) =
   FieldStatusSwitcher(
     modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    content = { FieldSetDemo(it) },
-  )
+  ) { status ->
+    FieldSetWithDescriptionExample(status)
+    BpkFieldSetWithoutDescriptionExample(status)
+    BpkFieldSetNoLabelExample(status)
+  }
 
 @Composable
 @FieldSetComponent
 @ComposeStory("Default", StoryKind.ScreenshotOnly)
 internal fun FieldSetScreenshotDefault(modifier: Modifier = Modifier) =
-  FieldSetDemo(BpkFieldStatus.Default, modifier.padding(BpkSpacing.Base))
+  FieldSetStory(modifier, BpkFieldStatus.Default)
 
 @Composable
 @FieldSetComponent
 @ComposeStory("Disabled", StoryKind.ScreenshotOnly)
 internal fun FieldSetScreenshotDisabled(modifier: Modifier = Modifier) =
-  FieldSetDemo(BpkFieldStatus.Disabled, modifier.padding(BpkSpacing.Base))
+  FieldSetStory(modifier, BpkFieldStatus.Disabled)
 
 @Composable
 @FieldSetComponent
 @ComposeStory("Validated", StoryKind.ScreenshotOnly)
 internal fun FieldSetScreenshotValidated(modifier: Modifier = Modifier) =
-  FieldSetDemo(BpkFieldStatus.Validated, modifier.padding(BpkSpacing.Base))
+  FieldSetStory(modifier, BpkFieldStatus.Validated)
 
 @Composable
 @FieldSetComponent
 @ComposeStory("Error", StoryKind.ScreenshotOnly)
 internal fun FieldSetScreenshotError(modifier: Modifier = Modifier) =
-  FieldSetDemo(BpkFieldStatus.Error(stringResource(R.string.generic_error_text)), modifier.padding(BpkSpacing.Base))
-
-@Composable
-private fun FieldSetDemo(
-  status: BpkFieldStatus,
-  modifier: Modifier = Modifier,
-) {
-  Column(
-    modifier = modifier,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
-    FieldSetWithDescriptionExample(status)
-    BpkFieldSetWithoutDescriptionExample(status)
-    BpkFieldSetNoLabelExample(status)
-  }
-}
+  FieldSetStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
 
 @Composable
 internal fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
