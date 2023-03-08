@@ -51,47 +51,65 @@ interface StoriesRepository {
   }
 }
 
-// todo: refactor with properties
 private object StoriesRepositoryImpl : StoriesRepository {
 
-  private val generatedStories = Story.all()
+  private val generatedStories = Story
+    .all()
+    .asSequence()
 
   override val testStories =
-    generatedStories.filter { it.component.name == "TestComponent" }
+    generatedStories
+      .filter { it.isTestStory() }
+      .toList()
 
-  private val allStories = generatedStories - testStories
+  private val stories = generatedStories - testStories.toSet()
 
-  private val allComponents = allStories
+  private val visibleStories = stories
     .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.StoryOnly }
-    .map { it.component }
-    .distinct()
-    .sortedBy { it.name }
 
-  override val uiComponents get() = allComponents.filter { !it.isToken }
+  override val uiComponents =
+    visibleStories
+      .filter { !it.component.isToken }
+      .map(Story::component)
+      .distinct()
+      .sortedBy(Component::name)
+      .toList()
 
-  override val tokenComponents get() = allComponents.filter { it.isToken }
+  override val tokenComponents =
+    visibleStories
+      .filter { it.component.isToken }
+      .map(Story::component)
+      .distinct()
+      .sortedBy(Component::name)
+      .toList()
 
-  override val screenshotStories get() = allStories.filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.ScreenshotOnly }
-
-  private val storiesMap = allStories
-    .groupBy { it.component.name }
-    .filter { (_, stories) -> stories.isNotEmpty() }
+  override val screenshotStories =
+    stories
+      .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.ScreenshotOnly }
+      .toList()
 
   override fun storiesOf(component: String, compose: Boolean): List<Story> =
-    storiesMap.getValue(component)
-      .filter { it.isCompose == compose }
+    visibleStories
+      .filter { it.component.name == component && it.isCompose == compose }
+      .toList()
 
   override fun storyOf(component: String, story: String, compose: Boolean): Story =
-    storiesMap.getValue(component)
-      .first { it.name == story && it.isCompose == compose }
+    visibleStories
+      .filter { it.component.name == component && it.name == story && it.isCompose == compose }
+      .first()
 
   override fun isComposeOnly(component: String): Boolean =
-    storiesMap.getValue(component)
+    visibleStories
+      .filter { it.component.name == component }
       .all { it.isCompose }
 
   override fun isViewOnly(component: String): Boolean =
-    storiesMap.getValue(component)
-      .all { !it.isCompose }
+    visibleStories
+      .filter { it.component.name == component }
+      .none { it.isCompose }
+
+  private fun Story.isTestStory() =
+    this.component.name == "TestComponent"
 }
 
 @Component(name = "TestComponent", isToken = true)
