@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,17 +35,52 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FieldSetComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
 
-// todo
-// also todo: different cases
 @Composable
 @FieldSetComponent
-@ComposeStory
-fun FieldSetStory(modifier: Modifier = Modifier) {
+@ComposeStory(kind = StoryKind.StoryOnly)
+fun FieldSetStory(modifier: Modifier = Modifier) =
   FieldStatusSwitcher(
     modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) { status ->
+    content = { FieldSetDemo(it) },
+  )
+
+@Composable
+@FieldSetComponent
+@ComposeStory("Default", StoryKind.ScreenshotOnly)
+internal fun FieldSetScreenshotDefault(modifier: Modifier = Modifier) =
+  FieldSetDemo(BpkFieldStatus.Default, modifier.padding(BpkSpacing.Base))
+
+@Composable
+@FieldSetComponent
+@ComposeStory("Disabled", StoryKind.ScreenshotOnly)
+internal fun FieldSetScreenshotDisabled(modifier: Modifier = Modifier) =
+  FieldSetDemo(BpkFieldStatus.Disabled, modifier.padding(BpkSpacing.Base))
+
+@Composable
+@FieldSetComponent
+@ComposeStory("Validated", StoryKind.ScreenshotOnly)
+internal fun FieldSetScreenshotValidated(modifier: Modifier = Modifier) =
+  FieldSetDemo(BpkFieldStatus.Validated, modifier.padding(BpkSpacing.Base))
+
+@Composable
+@FieldSetComponent
+@ComposeStory("Error", StoryKind.ScreenshotOnly)
+internal fun FieldSetScreenshotError(modifier: Modifier = Modifier) =
+  FieldSetDemo(BpkFieldStatus.Error(stringResource(R.string.generic_error_text)), modifier.padding(BpkSpacing.Base))
+
+@Composable
+private fun FieldSetDemo(
+  status: BpkFieldStatus,
+  modifier: Modifier = Modifier,
+) {
+  Column(
+    modifier = modifier,
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+  ) {
     FieldSetWithDescriptionExample(status)
     BpkFieldSetWithoutDescriptionExample(status)
     BpkFieldSetNoLabelExample(status)
