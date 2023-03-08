@@ -169,14 +169,38 @@ implementation 'net.skyscanner.backpack:backpack-android:x.x.x-SNAPSHOT'
 ## Demo app screens
 
 To verify changes during development, generate docs screenshots and showcase our components internally & externally we provide a demo app with all our components.
-To add a new component open `net/skyscanner/backpack/demo/data/ComponentRegistry.kt` and add your component to the list. For compose components use `composeStory` and use a newly created component story from the `compose` package. For view components you can add `story NodeData { Story of R.layout.fragment_x }` for simple components, or use a custom story instead of `Story` for more complex stories.
+
+To add a new component, add an annotation to `components` package:
+
+```kotlin
+import net.skyscanner.backpack.demo.meta.Component
+
+@Component("My Component")
+annotation class MyComponent
+```
+
+To add a new demo screen, annotate your composable function with the component and story annotations:
+
+```kotlin
+@Composable
+@MyComponent
+@ComposeStory
+// or @ComposeStory("Custom story name")
+// or @ViewStory for view components
+fun MyStory(modifier: Modifier = Modifier) {
+  // your story
+}
+```
 
 ## Docs screenshots
 
 To make our documentation clearer we include screenshots on the docs site for each components.
 
-To add a new screenshot open `net/skyscanner/backpack/docs/DocsRegistry.kt` and add the screenshot to the `screenshots` list.
-**Important**: For the screenshot to be generated the name must match the title of the page.
+By default, every story will have a screenshot generated. To exclude a story from the screenshot generation,
+set `kind` attribute to `StoryOnly`: `@ComposeStory(kind = StoryKind.StoryOnly)`.
+
+If you want to create a screenshot for a story that is not included in the demo app,
+set `kind` attribute to `ScreenshotOnly`: `@ViewStory(kind = StoryKind.ScreenshotOnly)`.
 
 Run `./gradlew :app:recordScreenshots` to capture all screenshots. Files will be saved in the correct directory.
 
