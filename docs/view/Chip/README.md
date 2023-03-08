@@ -6,9 +6,9 @@
 
 ## All
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/all.png" alt="Chip component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/all_dm.png" alt="Chip component - dark mode" width="375" /> |
+| Day | Night                                                                                                                                                                   |
+| --- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/default.png" alt="Chip component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Chip/screenshots/default_dm.png" alt="Chip component - dark mode" width="375" /> |
 
 ## On dark
 

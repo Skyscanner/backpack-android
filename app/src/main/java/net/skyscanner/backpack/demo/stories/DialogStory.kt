@@ -27,12 +27,13 @@ import androidx.compose.ui.platform.LocalContext
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.DialogComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.dialog.BpkDialog
 
 @Composable
 @DialogComponent
-@ViewStory("Success One Button")
+@ViewStory("Success One Button", StoryKind.StoryOnly)
 internal fun SuccessOneButtonDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
@@ -51,7 +52,7 @@ internal fun SuccessOneButtonDialogExample() = DialogDemo { onDismiss ->
 
 @Composable
 @DialogComponent
-@ViewStory("Success Two Buttons")
+@ViewStory("Success Two Buttons", StoryKind.StoryOnly)
 internal fun SuccessTwoButtonsDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
@@ -104,7 +105,7 @@ internal fun SuccessThreeButtonsDialogExample() = DialogDemo { onDismiss ->
 
 @Composable
 @DialogComponent
-@ViewStory("Warning")
+@ViewStory("Warning", StoryKind.StoryOnly)
 internal fun WarningDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Warning).apply {
     title = context.getString(R.string.dialog_title)
@@ -157,7 +158,7 @@ internal fun DestructiveDialogExample() = DialogDemo { onDismiss ->
 
 @Composable
 @DialogComponent
-@ViewStory("Long text")
+@ViewStory("Long text", StoryKind.StoryOnly)
 internal fun LongDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
@@ -180,7 +181,7 @@ internal fun LongDialogExample() = DialogDemo { onDismiss ->
 
 @Composable
 @DialogComponent
-@ViewStory("No Icon")
+@ViewStory("No Icon", StoryKind.StoryOnly)
 internal fun NoIconDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)

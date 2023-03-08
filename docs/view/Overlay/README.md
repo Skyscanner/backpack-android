@@ -6,9 +6,9 @@
 
 ## All
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Overlay/screenshots/all.png" alt="Overlay component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Overlay/screenshots/all_dm.png" alt="Overlay component - dark mode" width="375" /> |
+| Day | Night                                                                                                                                                                         |
+| --- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Overlay/screenshots/default.png" alt="Overlay component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Overlay/screenshots/default_dm.png" alt="Overlay component - dark mode" width="375" /> |
 
 ## Installation
 

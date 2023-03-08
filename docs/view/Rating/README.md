@@ -16,11 +16,11 @@
 | --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/pill.png" alt="Pill Rating component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/pill_dm.png" alt="Pill Rating component - dark mode" width="375" /> |
 
-## Sizes
+## Horizontal
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/sizes.png" alt="Sizes Rating component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/sizes_dm.png" alt="Sizes Rating component - dark mode" width="375" /> |
+| Day                                                                                                                                                                        | Night                                                                                                                                                                                |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/horizontal.png" alt="Horizontal Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/horizontal_dm.png" alt="Horizontal Rating component - dark mode" width="375" /> |
 
 ## Vertical
 

@@ -12,9 +12,9 @@
 
 ## Labels
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextField/screenshots/labels.png" alt="Labels TextField component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextField/screenshots/labels_dm.png" alt="Labels TextField component - dark mode" width="375" /> |
+| Day | Night                                                                                                                                                                                        |
+| --- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextField/screenshots/with-labels.png" alt="Labels TextField component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/TextField/screenshots/with-labels_dm.png" alt="Labels TextField component - dark mode" width="375" /> |
 
 ## Installation
 

@@ -10,9 +10,9 @@
 
 ## Inset padding
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding.png" alt="Inset padding Flare component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding_dm.png" alt="Inset padding Flare component - dark mode" width="375" /> |
+| Day | Night                                                                                                                                                                                              |
+| --- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding-mode.png" alt="Inset padding Flare component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Flare/screenshots/inset-padding-mode_dm.png" alt="Inset padding Flare component - dark mode" width="375" /> |
 
 ## Pointer offset
 

@@ -6,9 +6,9 @@
 
 ## All
 
-| Day | Night |
-| --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Nudger/screenshots/all.png" alt="Nudger component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Nudger/screenshots/all_dm.png" alt="Nudger component - dark mode" width="375" /> |
+| Day | Night                                                                                                                                                                       |
+| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Nudger/screenshots/default.png" alt="Nudger component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Nudger/screenshots/default_dm.png" alt="Nudger component - dark mode" width="375" /> |
 
 ## Installation
 
