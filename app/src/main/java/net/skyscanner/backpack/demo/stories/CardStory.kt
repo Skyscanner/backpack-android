@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CardComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 
@@ -46,7 +47,7 @@ fun CardStorySelected(modifier: Modifier = Modifier) =
 
 @Composable
 @CardComponent
-@ViewStory("No elevation", screenshot = false)
+@ViewStory("No elevation", kind = StoryKind.StoryOnly)
 fun CardStoryNoElevation(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_card_no_elevation, modifier.fillMaxSize())
 

@@ -51,6 +51,7 @@ interface StoriesRepository {
   }
 }
 
+// todo: refactor with properties
 private object StoriesRepositoryImpl : StoriesRepository {
 
   private val generatedStories = Story.all()
@@ -58,6 +59,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
   private val allStories = generatedStories - testStories
 
   private val allComponents = allStories
+    .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.StoryOnly }
     .map { it.component }
     .distinct()
     .sortedBy { it.name }
@@ -66,7 +68,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
 
   override fun tokenComponents() = allComponents.filter { it.isToken }
 
-  override fun screenshotStories() = allStories.filter { it.isScreenshot }
+  override fun screenshotStories() = allStories.filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.ScreenshotOnly }
 
   private val storiesMap = allStories
     .groupBy { it.component.name }
@@ -94,35 +96,35 @@ private object StoriesRepositoryImpl : StoriesRepository {
 @Component(name = "TestComponent", isToken = true)
 private annotation class TestComponent
 
-@ComposeStory(name = "TestComposeStory", screenshot = false)
+@ComposeStory(name = "TestComposeStory", kind = StoryKind.StoryOnly)
 @TestComponent
 @Composable
 internal fun TestComposeStory(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ViewStory(name = "TestViewStory", screenshot = false)
+@ViewStory(name = "TestViewStory", kind = StoryKind.StoryOnly)
 @TestComponent
 @Composable
 internal fun TestViewStory(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ComposeStory(name = "TestComposeScreenshot", screenshot = true)
+@ComposeStory(name = "TestComposeScreenshot", kind = StoryKind.ScreenshotOnly)
 @TestComponent
 @Composable
 internal fun TestComposeScreenshot(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ComposeStory(screenshot = true)
+@ComposeStory(kind = StoryKind.ScreenshotOnly)
 @TestComponent
 @Composable
 internal fun TestDefaultStory(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ViewStory(name = "TestViewScreenshot", screenshot = true)
+@ViewStory(name = "TestViewScreenshot", kind = StoryKind.ScreenshotOnly)
 @TestComponent
 @Composable
 internal fun TestViewScreenshot(modifier: Modifier = Modifier) {

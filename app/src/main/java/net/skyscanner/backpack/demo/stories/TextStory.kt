@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.TextComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 
@@ -45,12 +46,12 @@ fun TextStoryHero(modifier: Modifier = Modifier) =
 
 @Composable
 @TextComponent
-@ViewStory("With drawables", screenshot = false)
+@ViewStory("With drawables", kind = StoryKind.StoryOnly)
 fun TextStoryDrawables(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_text_drawables, modifier)
 
 @Composable
 @TextComponent
-@ViewStory("With links", screenshot = false)
+@ViewStory("With links", kind = StoryKind.StoryOnly)
 fun TextStoryLinks(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_text_links, modifier)

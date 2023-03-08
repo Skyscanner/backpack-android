@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.RatingComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 
@@ -33,13 +34,13 @@ fun RatingStoryDefault(modifier: Modifier = Modifier) =
 
 @Composable
 @RatingComponent
-@ViewStory("Icons", screenshot = false)
+@ViewStory("Icons", kind = StoryKind.StoryOnly)
 fun RatingStoryIcons(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_rating_icons, modifier)
 
 @Composable
 @RatingComponent
-@ViewStory("No selectors", screenshot = false)
+@ViewStory("No selectors", kind = StoryKind.StoryOnly)
 fun RatingStoryNoSelectors(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_rating_no_selectors, modifier)
 
@@ -63,6 +64,6 @@ fun RatingStoryPill(modifier: Modifier = Modifier) =
 
 @Composable
 @RatingComponent
-@ViewStory("Zero to Five Scale", screenshot = false)
+@ViewStory("Zero to Five Scale", kind = StoryKind.StoryOnly)
 fun RatingStoryZeroToFive(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_rating_zero_to_five, modifier)

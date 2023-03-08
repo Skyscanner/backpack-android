@@ -67,7 +67,7 @@ private fun CodeBlock.Builder.writeStoryCreator(story: StoryDefinition) =
   addStatement("%T(", StoryClass)
     .indent()
     .addStatement("name = %S,", story.name)
-    .addStatement("isScreenshot = %L,", story.isScreenshot)
+    .addStatement("kind = %T.%N,", ClassName.bestGuess(story.kind.type), story.kind.value)
     .addStatement("isCompose = %L,", story.isCompose)
     .writeComponent("component", story.component)
     .addStatement("${"content"} = { %T() },", ClassName.bestGuess(story.reference))

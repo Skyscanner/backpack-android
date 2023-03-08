@@ -26,10 +26,16 @@ data class Story(
   val component: Component,
   val name: String,
   val isCompose: Boolean,
-  val isScreenshot: Boolean,
+  val kind: StoryKind,
   val content: @Composable () -> Unit,
 ) {
 
   // used for code-generated extensions
   companion object
+}
+
+enum class StoryKind {
+  StoryOnly,
+  ScreenshotOnly,
+  StoryAndScreenshot,
 }

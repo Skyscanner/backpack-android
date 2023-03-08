@@ -32,6 +32,7 @@ import kotlinx.coroutines.launch
 import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ButtonComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import kotlin.math.max
@@ -57,7 +58,7 @@ fun LoadingButtonStoryLink(modifier: Modifier = Modifier) =
 
 @Composable
 @ButtonComponent
-@ViewStory("Changeable", screenshot = false)
+@ViewStory("Changeable", kind = StoryKind.StoryOnly)
 fun ChangeableButtonsStory(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_buttons_changeable, modifier.fillMaxSize()) {
 
@@ -74,7 +75,7 @@ fun ChangeableButtonsStory(modifier: Modifier = Modifier) =
 
 @Composable
 @ButtonComponent
-@ViewStory("Styleable", screenshot = false)
+@ViewStory("Styleable", kind = StoryKind.StoryOnly)
 fun StyleableButtonStory(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_buttons_styleable, modifier.fillMaxSize()) {
     findViewById<View>(R.id.primary).setOnClickListener { setButtonType(this, BpkButton.Type.Primary) }

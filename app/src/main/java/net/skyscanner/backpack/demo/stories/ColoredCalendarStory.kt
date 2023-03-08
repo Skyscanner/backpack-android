@@ -31,13 +31,14 @@ import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CalendarComponent
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 
 @Composable
 @CalendarComponent
-@ViewStory("Colored", screenshot = false)
+@ViewStory("Colored", kind = StoryKind.StoryOnly)
 fun ColoredCalendarStory(modifier: Modifier = Modifier) {
   val automationMode = LocalAutomationMode.current
   AndroidLayout(R.layout.fragment_calendar_colored, modifier.fillMaxSize()) {

@@ -32,6 +32,7 @@ import net.skyscanner.backpack.calendar.presenter.SelectionType
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CalendarComponent
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
@@ -39,7 +40,7 @@ import org.threeten.bp.LocalDate
 
 @Composable
 @CalendarComponent
-@ViewStory("Labeled", screenshot = false)
+@ViewStory("Labeled", kind = StoryKind.StoryOnly)
 fun LabeledCalendarStory(modifier: Modifier = Modifier) {
   val automationMode = LocalAutomationMode.current
   AndroidLayout(R.layout.fragment_calendar_default, modifier.fillMaxSize()) {

@@ -30,24 +30,25 @@ import net.skyscanner.backpack.demo.components.Calendar2Component
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
 
 @Composable
 @Calendar2Component
-@ComposeStory("Selection Disabled", screenshot = false)
+@ComposeStory("Selection Disabled", kind = StoryKind.StoryOnly)
 fun CalendarSelectionDisabledStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionDisabled, modifier)
 
 @Composable
 @Calendar2Component
-@ComposeStory("Selection Single", screenshot = false)
+@ComposeStory("Selection Single", kind = StoryKind.StoryOnly)
 fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionSingle, modifier)
 
 @Composable
 @Calendar2Component
-@ComposeStory("Selection Range", screenshot = false)
+@ComposeStory("Selection Range", kind = StoryKind.StoryOnly)
 fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionRange, modifier)
 
@@ -59,7 +60,7 @@ fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
 
 @Composable
 @Calendar2Component
-@ComposeStory("Disabled weekends", screenshot = false)
+@ComposeStory("Disabled weekends", kind = StoryKind.StoryOnly)
 fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.WithDisabledDates, modifier)
 

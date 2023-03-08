@@ -35,6 +35,7 @@ import com.google.android.gms.maps.model.LatLng
 import net.skyscanner.backpack.demo.BpkBaseActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.ComponentItem
 import net.skyscanner.backpack.map.addBpkMarker
@@ -42,7 +43,7 @@ import net.skyscanner.backpack.map.getBpkMapAsync
 
 @Composable
 @MapMarkersComponent
-@ViewStory(screenshot = false)
+@ViewStory(kind = StoryKind.StoryOnly)
 fun MapStory(modifier: Modifier = Modifier) {
   val context = LocalContext.current
   val values = remember { MapActivity.Type.values().toList() }

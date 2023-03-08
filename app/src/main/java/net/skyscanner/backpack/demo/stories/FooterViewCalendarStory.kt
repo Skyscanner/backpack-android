@@ -33,12 +33,13 @@ import net.skyscanner.backpack.calendar.presenter.HighlightedDaysAdapter.Highlig
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.CalendarComponent
 import net.skyscanner.backpack.demo.data.ExampleBpkCalendarController
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 
 @Composable
 @CalendarComponent
-@ViewStory("Footer view", screenshot = false)
+@ViewStory("Footer view", kind = StoryKind.StoryOnly)
 fun FooterViewCalendarStory(modifier: Modifier = Modifier) =
   AndroidLayout<BpkCalendar>(R.layout.fragment_calendar_default, R.id.bpkCalendar, modifier.fillMaxSize()) {
     setController(FooterViewCalendarController(context))

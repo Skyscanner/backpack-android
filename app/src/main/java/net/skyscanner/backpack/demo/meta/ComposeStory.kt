@@ -28,5 +28,5 @@ import javax.annotation.concurrent.Immutable
 @BpkPreviews
 annotation class ComposeStory(
   val name: String = "Default",
-  val screenshot: Boolean = true,
+  val kind: StoryKind = StoryKind.StoryAndScreenshot,
 )
