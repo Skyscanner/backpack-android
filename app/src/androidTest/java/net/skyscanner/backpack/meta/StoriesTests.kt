@@ -29,41 +29,41 @@ class StoriesTests {
 
   @Test
   fun assertStoriesAreNotEmpty() {
-    assertTrue(repository.testStories().isNotEmpty())
+    assertTrue(repository.testStories.isNotEmpty())
   }
 
   @Test
   fun assertViewStoryIsGenerated() {
-    assertTrue(repository.testStories().any { it.name == "TestViewStory" && !it.isCompose })
+    assertTrue(repository.testStories.any { it.name == "TestViewStory" && !it.isCompose })
   }
 
   @Test
   fun assertComposeStoryIsGenerated() {
-    assertTrue(repository.testStories().any { it.name == "TestComposeStory" && it.isCompose })
+    assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.isCompose })
   }
 
   @Test
   fun assertComposeScreenshotStoryIsGenerated() {
-    assertTrue(repository.testStories().any { it.name == "TestComposeScreenshot" && it.kind == StoryKind.ScreenshotOnly })
+    assertTrue(repository.testStories.any { it.name == "TestComposeScreenshot" && it.kind == StoryKind.ScreenshotOnly })
   }
 
   @Test
   fun assertViewScreenshotStoryIsGenerated() {
-    assertTrue(repository.testStories().any { it.name == "TestViewScreenshot" && it.kind == StoryKind.ScreenshotOnly })
+    assertTrue(repository.testStories.any { it.name == "TestViewScreenshot" && it.kind == StoryKind.ScreenshotOnly })
   }
 
   @Test
   fun assertStoriesSupportDefaultName() {
-    assertTrue(repository.testStories().any { it.name == "Default" })
+    assertTrue(repository.testStories.any { it.name == "Default" })
   }
 
   @Test
   fun assertTestComponentIsPresent() {
-    assertTrue(repository.testStories().any { it.name == "TestComposeStory" && it.component.name == "TestComponent" })
+    assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.component.name == "TestComponent" })
   }
 
   @Test
   fun assertTestComponentIsToken() {
-    assertTrue(repository.testStories().any { it.name == "TestComposeStory" && it.component.isToken })
+    assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.component.isToken })
   }
 }

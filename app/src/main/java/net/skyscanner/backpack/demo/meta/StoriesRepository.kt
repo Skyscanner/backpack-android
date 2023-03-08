@@ -94,7 +94,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
       .toList()
 
   override fun storyOf(component: String, story: String, compose: Boolean): Story =
-    visibleStories
+    stories
       .filter { it.component.name == component && it.name == story && it.isCompose == compose }
       .first()
 

@@ -41,7 +41,7 @@ open class GenerateScreenshots(
 
     @JvmStatic
     @Parameterized.Parameters(name = "{0} Screenshot")
-    fun data(): List<Story> = StoriesRepository.getInstance().screenshotStories()
+    fun data(): List<Story> = StoriesRepository.getInstance().screenshotStories
   }
 
   @get:Rule
