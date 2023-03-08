@@ -51,7 +51,6 @@ fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
 fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionRange, modifier)
 
-// todo
 @Composable
 @Calendar2Component
 @ComposeStory("Selection Whole Month")
@@ -64,14 +63,12 @@ fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
 fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.WithDisabledDates, modifier)
 
-// todo
 @Composable
 @Calendar2Component
 @ComposeStory("Day labels")
 fun CalendarDayLabels(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.WithLabels, modifier)
 
-// todo
 @Composable
 @Calendar2Component
 @ComposeStory("Pre-selected range")
@@ -90,7 +87,8 @@ private fun CalendarDemo(
   LaunchedEffect(type, controller, automationMode) {
     when (type) {
       CalendarStoryType.SelectionWholeMonth -> controller.setSelection(CalendarStorySelection.WholeMonthRange)
-      CalendarStoryType.PreselectedRange -> controller.setSelection(CalendarStorySelection.PreselectedRange)
+      CalendarStoryType.PreselectedRange -> controller.setSelection(CalendarStorySelection.PreSelectedRange)
+      CalendarStoryType.WithLabels -> controller.setSelection(CalendarStorySelection.WithLabels)
       else -> Unit
     }
 

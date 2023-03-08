@@ -55,7 +55,6 @@ fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
 fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
   Calendar2Demo(CalendarStoryType.SelectionRange, modifier)
 
-// todo
 @Composable
 @Calendar2Component
 @ViewStory("Selection Whole Month")
@@ -68,14 +67,12 @@ fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
 fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
   Calendar2Demo(CalendarStoryType.WithDisabledDates, modifier)
 
-// todo
 @Composable
 @Calendar2Component
 @ViewStory("Day labels")
 fun CalendarDayLabels(modifier: Modifier = Modifier) =
   Calendar2Demo(CalendarStoryType.WithLabels, modifier)
 
-// todo
 @Composable
 @Calendar2Component
 @ViewStory("Pre-selected range")
@@ -112,7 +109,8 @@ private fun Calendar2Demo(
     setParams(CalendarStoryType.createInitialParams(type))
     when (type) {
       CalendarStoryType.SelectionWholeMonth -> setSelection(CalendarStorySelection.WholeMonthRange)
-      CalendarStoryType.PreselectedRange -> setSelection(CalendarStorySelection.PreselectedRange)
+      CalendarStoryType.PreselectedRange -> setSelection(CalendarStorySelection.PreSelectedRange)
+      CalendarStoryType.WithLabels -> setSelection(CalendarStorySelection.WithLabels)
       else -> Unit
     }
   }

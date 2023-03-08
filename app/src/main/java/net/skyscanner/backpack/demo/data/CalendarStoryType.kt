@@ -126,10 +126,12 @@ enum class CalendarStoryType {
 }
 
 object CalendarStorySelection {
-  val PreselectedRange = CalendarSelection.Dates(
+  val WithLabels = CalendarSelection.Dates(
     start = range.start.plusDays(10),
     end = range.start.plusDays(20),
   )
+
+  val PreSelectedRange = WithLabels
 
   val WholeMonthRange = CalendarSelection.Month(
     month = YearMonth.of(2019, Month.JANUARY),
