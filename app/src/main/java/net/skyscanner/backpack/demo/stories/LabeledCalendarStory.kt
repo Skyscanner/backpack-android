@@ -40,7 +40,7 @@ import org.threeten.bp.LocalDate
 
 @Composable
 @CalendarComponent
-@ViewStory("Labeled", kind = StoryKind.StoryOnly)
+@ViewStory("Labeled", StoryKind.StoryOnly)
 fun LabeledCalendarStory(modifier: Modifier = Modifier) {
   val automationMode = LocalAutomationMode.current
   AndroidLayout(R.layout.fragment_calendar_default, modifier.fillMaxSize()) {

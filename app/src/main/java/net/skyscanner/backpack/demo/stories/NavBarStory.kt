@@ -38,7 +38,7 @@ fun NavBarStoryDefault(modifier: Modifier = Modifier) =
 
 @Composable
 @NavBarComponent
-@ViewStory("Collapsed", kind = StoryKind.ScreenshotOnly)
+@ViewStory("Collapsed", StoryKind.ScreenshotOnly)
 fun NavBarStoryCollapsed(modifier: Modifier = Modifier) =
   NavBarDemo(R.layout.fragment_nav_bar, modifier) {
     setExpanded(false)
@@ -46,7 +46,7 @@ fun NavBarStoryCollapsed(modifier: Modifier = Modifier) =
 
 @Composable
 @NavBarComponent
-@ViewStory("With Icon", kind = StoryKind.StoryOnly)
+@ViewStory("With Icon", StoryKind.StoryOnly)
 fun NavBarStoryWithIcon(modifier: Modifier = Modifier) =
   NavBarDemo(R.layout.fragment_nav_bar_with_icon, modifier)
 
