@@ -47,6 +47,7 @@ fun FieldSetStory(
   FieldStatusSwitcher(
     modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    initialStatus = initialStatus,
   ) { status ->
     FieldSetWithDescriptionExample(status)
     BpkFieldSetWithoutDescriptionExample(status)
@@ -78,7 +79,7 @@ internal fun FieldSetScreenshotError(modifier: Modifier = Modifier) =
   FieldSetStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
 
 @Composable
-internal fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+private fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
     label = stringResource(R.string.generic_with_description),
     description = stringResource(R.string.generic_description),
@@ -94,7 +95,7 @@ internal fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldSta
 }
 
 @Composable
-internal fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+private fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
     label = stringResource(R.string.generic_no_description),
     status = status,
@@ -109,7 +110,7 @@ internal fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFi
 }
 
 @Composable
-internal fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+private fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
     status = status,
   ) {

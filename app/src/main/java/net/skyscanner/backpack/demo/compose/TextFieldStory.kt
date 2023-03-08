@@ -41,16 +41,18 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.TextFieldComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
 
-// todo: different variations of text field
-// todo
 @Composable
 @TextFieldComponent
-@ComposeStory
-fun TextFiledStory(modifier: Modifier = Modifier) {
-
+@ComposeStory(kind = StoryKind.StoryOnly)
+fun TextFieldStory(
+  modifier: Modifier = Modifier,
+  initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
+) =
   FieldStatusSwitcher(
+    initialStatus = initialStatus,
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     modifier = modifier
       .verticalScroll(rememberScrollState())
@@ -74,7 +76,30 @@ fun TextFiledStory(modifier: Modifier = Modifier) {
       TextFieldMultilineExample(status = status)
     }
   }
-}
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Default", StoryKind.ScreenshotOnly)
+internal fun TextFieldScreenshotDefault(modifier: Modifier = Modifier) =
+  TextFieldStory(modifier, BpkFieldStatus.Default)
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Disabled", StoryKind.ScreenshotOnly)
+internal fun TextFieldScreenshotDisabled(modifier: Modifier = Modifier) =
+  TextFieldStory(modifier, BpkFieldStatus.Disabled)
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Validated", StoryKind.ScreenshotOnly)
+internal fun TextFieldScreenshotValidated(modifier: Modifier = Modifier) =
+  TextFieldStory(modifier, BpkFieldStatus.Validated)
+
+@Composable
+@TextFieldComponent
+@ComposeStory("Error", StoryKind.ScreenshotOnly)
+internal fun TextFieldScreenshotError(modifier: Modifier = Modifier) =
+  TextFieldStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
 
 @Composable
 private fun TextFieldDefaultExample(
