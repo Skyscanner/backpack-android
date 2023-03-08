@@ -19,9 +19,25 @@ Backpack Compose is available through [Maven Central](https://search.maven.org/a
 Example of a Overlay:
 
 ```Kotlin
+
 import net.skyscanner.backpack.compose.overlay.BpkOverlay
 
 BpkOverlay(
-  // TODO
-)
+  overlayType = BpkOverlayType.SolidHigh,
+  foregroundContent = {
+    BpkText(
+      modifier = Modifier.align(Alignment.Center),
+      text = "With text",
+    )
+  },
+) {
+  content = {
+      Image(
+          painter = painterResource(R.drawable.image),
+          contentDescription = stringResource(R.string.content_description),
+          modifier = Modifier.fillMaxSize(),
+          contentScale = ContentScale.Crop,
+      )
+  }
+}
 ```
