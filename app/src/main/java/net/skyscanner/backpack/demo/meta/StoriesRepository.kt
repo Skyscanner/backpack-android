@@ -28,11 +28,11 @@ import org.jetbrains.annotations.TestOnly
 
 interface StoriesRepository {
 
-  fun uiComponents(): List<Component>
+  val uiComponents: List<Component>
 
-  fun tokenComponents(): List<Component>
+  val tokenComponents: List<Component>
 
-  fun screenshotStories(): List<Story>
+  val screenshotStories: List<Story>
 
   fun storiesOf(component: String, compose: Boolean): List<Story>
 
@@ -42,8 +42,8 @@ interface StoriesRepository {
 
   fun isViewOnly(component: String): Boolean
 
-  @TestOnly
-  fun testStories(): List<Story>
+  @get:TestOnly
+  val testStories: List<Story>
 
   companion object {
 
@@ -55,7 +55,10 @@ interface StoriesRepository {
 private object StoriesRepositoryImpl : StoriesRepository {
 
   private val generatedStories = Story.all()
-  private val testStories = generatedStories.filter { it.component.name == "TestComponent" }
+
+  override val testStories =
+    generatedStories.filter { it.component.name == "TestComponent" }
+
   private val allStories = generatedStories - testStories
 
   private val allComponents = allStories
@@ -64,11 +67,11 @@ private object StoriesRepositoryImpl : StoriesRepository {
     .distinct()
     .sortedBy { it.name }
 
-  override fun uiComponents() = allComponents.filter { !it.isToken }
+  override val uiComponents get() = allComponents.filter { !it.isToken }
 
-  override fun tokenComponents() = allComponents.filter { it.isToken }
+  override val tokenComponents get() = allComponents.filter { it.isToken }
 
-  override fun screenshotStories() = allStories.filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.ScreenshotOnly }
+  override val screenshotStories get() = allStories.filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.ScreenshotOnly }
 
   private val storiesMap = allStories
     .groupBy { it.component.name }
@@ -89,8 +92,6 @@ private object StoriesRepositoryImpl : StoriesRepository {
   override fun isViewOnly(component: String): Boolean =
     storiesMap.getValue(component)
       .all { !it.isCompose }
-
-  override fun testStories() = testStories
 }
 
 @Component(name = "TestComponent", isToken = true)
