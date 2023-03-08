@@ -6,20 +6,20 @@
 
 ## Delete confirmation
 
-| Day | Night                                                                                                                                                                                               |
-| --- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Day | Night |
+| --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/destructive.png" alt="Delete confirmation Dialog component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/destructive_dm.png" alt="Delete confirmation Dialog component - dark mode" width="375" /> |
 
 ## With CTA
 
-| Day | Night                                                                                                                                                                                              |
-| --- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Day | Night |
+| --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/success-three-buttons.png" alt="With cta Dialog component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/success-three-buttons_dm.png" alt="With cta Dialog component - dark mode" width="375" /> |
 
 ## With flare
 
-| Day | Night                                                                                                                                                                                |
-| --- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Day | Night |
+| --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/flare.png" alt="With flare Dialog component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Dialog/screenshots/flare_dm.png" alt="With flare Dialog component - dark mode" width="375" /> |
 
 ## Installation

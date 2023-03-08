@@ -6,8 +6,8 @@
 
 ## All
 
-| Day                                                                                                                                                        | Night                                                                                                                                                                     |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Day | Night |
+| --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Badge/screenshots/default.png" alt="Badge component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Badge/screenshots/default_dm.png" alt="Badge component - dark mode" width="375" /> |
 
 ## Installation

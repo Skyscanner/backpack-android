@@ -18,8 +18,8 @@
 
 ## Horizontal
 
-| Day                                                                                                                                                                        | Night                                                                                                                                                                                |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Day | Night |
+| --- | --- |
 | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/horizontal.png" alt="Horizontal Rating component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Rating/screenshots/horizontal_dm.png" alt="Horizontal Rating component - dark mode" width="375" /> |
 
 ## Vertical
