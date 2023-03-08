@@ -47,11 +47,7 @@ fun CardWrapperStory(modifier: Modifier = Modifier) {
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
-    val cardModifier = Modifier
-      .fillMaxWidth()
-      .weight(1f)
-
-    CardWrapperExample(cardModifier)
+    CardWrapperExample(Modifier.fillMaxWidth())
   }
 }
 
