@@ -19,13 +19,19 @@
 package net.skyscanner.backpack.compose.overlay
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
-import net.skyscanner.backpack.demo.compose.OverlayStory
+import net.skyscanner.backpack.demo.compose.DefaultOverlaySample
+import net.skyscanner.backpack.demo.compose.WithTextOverlaySample
 import org.junit.Test
 
 class BpkOverlayTest : BpkSnapshotTest() {
 
   @Test
-  fun default() = snap {
-    OverlayStory()
+  fun defaultOverlay() = snap {
+    DefaultOverlaySample(overlayType = BpkOverlayType.SolidHigh)
+  }
+
+  @Test
+  fun withTextOverlay() = snap {
+    WithTextOverlaySample(overlayType = BpkOverlayType.LeftHigh)
   }
 }
