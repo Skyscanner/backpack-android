@@ -25,19 +25,9 @@ import net.skyscanner.backpack.compose.overlay.BpkOverlay
 BpkOverlay(
   overlayType = BpkOverlayType.SolidHigh,
   foregroundContent = {
-    BpkText(
-      modifier = Modifier.align(Alignment.Center),
-      text = "With text",
-    )
+    /** text **/
   },
 ) {
-  content = {
-      Image(
-          painter = painterResource(R.drawable.image),
-          contentDescription = stringResource(R.string.content_description),
-          modifier = Modifier.fillMaxSize(),
-          contentScale = ContentScale.Crop,
-      )
-  }
+  /** image **/
 }
 ```
