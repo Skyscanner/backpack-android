@@ -19,6 +19,7 @@
 package net.skyscanner.backpack.meta
 
 import net.skyscanner.backpack.demo.meta.StoriesRepository
+import net.skyscanner.backpack.demo.meta.StoryKind
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -43,12 +44,12 @@ class StoriesTests {
 
   @Test
   fun assertComposeScreenshotStoryIsGenerated() {
-    assertTrue(repository.testStories().any { it.name == "TestComposeScreenshot" && it.isScreenshot })
+    assertTrue(repository.testStories().any { it.name == "TestComposeScreenshot" && it.kind == StoryKind.ScreenshotOnly })
   }
 
   @Test
   fun assertViewScreenshotStoryIsGenerated() {
-    assertTrue(repository.testStories().any { it.name == "TestViewScreenshot" && it.isScreenshot })
+    assertTrue(repository.testStories().any { it.name == "TestViewScreenshot" && it.kind == StoryKind.ScreenshotOnly })
   }
 
   @Test
