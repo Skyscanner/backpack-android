@@ -20,7 +20,7 @@
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar2/screenshots/pre_selected-range.png" alt="Range Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar2/screenshots/pre_selected-range_dm.png" alt="Range Calendar2 component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar2/screenshots/pre-selected-range.png" alt="Range Calendar2 component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/Calendar2/screenshots/pre-selected-range_dm.png" alt="Range Calendar2 component - dark mode" width="375" /> |
 
 ## Installation
 

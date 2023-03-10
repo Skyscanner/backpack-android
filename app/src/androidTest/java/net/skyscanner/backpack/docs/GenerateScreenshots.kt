@@ -84,8 +84,7 @@ open class GenerateScreenshots(
       type = if (story.isCompose) "compose" else "view",
       file = story.name
         .lowercase()
-        .replace("-", "_")
-        .replace("–", "_")
+        .replace("–", "-")
         .replace(" ", "-")
         .let { if (suffix != null) "${it}_$suffix" else it },
     )
