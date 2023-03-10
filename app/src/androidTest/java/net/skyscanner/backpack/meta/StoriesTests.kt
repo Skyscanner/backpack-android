@@ -66,4 +66,15 @@ class StoriesTests {
   fun assertTestComponentIsToken() {
     assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.component.isToken })
   }
+
+  @Test
+  fun assertTestComponentIsNotIncludedToTheApp() {
+    assertTrue(repository.uiComponents.none { it.name == "TestViewStory" })
+    assertTrue(repository.tokenComponents.none { it.name == "TestViewStory" })
+  }
+
+  @Test
+  fun assertTestStoriesAreNotIncludedToTheScreenshots() {
+    assertTrue(repository.screenshotStories.none { it.component.name == "TestViewStory" })
+  }
 }

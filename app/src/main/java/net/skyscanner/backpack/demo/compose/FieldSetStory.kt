@@ -39,7 +39,7 @@ import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
 
 @Composable
 @FieldSetComponent
-@ComposeStory(kind = StoryKind.StoryOnly)
+@ComposeStory
 fun FieldSetStory(
   modifier: Modifier = Modifier,
   initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
@@ -53,12 +53,6 @@ fun FieldSetStory(
     BpkFieldSetWithoutDescriptionExample(status)
     BpkFieldSetNoLabelExample(status)
   }
-
-@Composable
-@FieldSetComponent
-@ComposeStory("Default", StoryKind.ScreenshotOnly)
-internal fun FieldSetScreenshotDefault(modifier: Modifier = Modifier) =
-  FieldSetStory(modifier, BpkFieldStatus.Default)
 
 @Composable
 @FieldSetComponent

@@ -46,7 +46,7 @@ import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
 
 @Composable
 @TextFieldComponent
-@ComposeStory(kind = StoryKind.StoryOnly)
+@ComposeStory
 fun TextFieldStory(
   modifier: Modifier = Modifier,
   initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
@@ -76,12 +76,6 @@ fun TextFieldStory(
       TextFieldMultilineExample(status = status)
     }
   }
-
-@Composable
-@TextFieldComponent
-@ComposeStory("Default", StoryKind.ScreenshotOnly)
-internal fun TextFieldScreenshotDefault(modifier: Modifier = Modifier) =
-  TextFieldStory(modifier, BpkFieldStatus.Default)
 
 @Composable
 @TextFieldComponent

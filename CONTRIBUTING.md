@@ -175,21 +175,30 @@ To add a new component, add an annotation to `components` package:
 ```kotlin
 import net.skyscanner.backpack.demo.meta.Component
 
-@Component("My Component")
+@Component("My Component") // name of the component to be used in UI
 annotation class MyComponent
 ```
 
-To add a new demo screen, annotate your composable function with the component and story annotations:
+To add a new demo screen (we call it a story), annotate your composable function with the component and story annotations:
 
 ```kotlin
 @Composable
 @MyComponent
-@ComposeStory
-// or @ComposeStory("Custom story name")
-// or @ViewStory for view components
+@ComposeStory("Name to be used in samples list for component, `Default` is used by default")
 fun MyStory(modifier: Modifier = Modifier) {
   // your story
 }
+```
+
+Here's an example of a simple View story:
+
+```kotlin
+
+@Composable
+@MyComponent
+@ViewStory
+fun MyViewStory(modifier: Modifier = Modifier) =
+  AndroidLayout(R.layout.my_layout, modifier)
 ```
 
 ## Docs screenshots
@@ -205,6 +214,22 @@ set `kind` attribute to `ScreenshotOnly`: `@ViewStory(kind = StoryKind.Screensho
 Run `./gradlew :app:recordScreenshots` to capture all screenshots. Files will be saved in the correct directory.
 
 > Note: Python is required.
+
+The generated screenshots will be saved in the component folder in `docs` directory. To include it to readme, you can use the following syntax (for Compose, for View replace the path):
+
+```md
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ComponentName/screenshots/default.png" alt="ComponentName component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ComponentName/screenshots/default_dm.png" alt="ComponentName component - dark mode" width="375" /> |
+
+```
+
+In case you want to auto-perforce some actions for screenshots, you can check whether you're in a screenshot mode by following:
+
+```kotlin
+val automationMode = LocalAutomationMode.current
+```
 
 Verify the screenshots and commit the changes.
 
