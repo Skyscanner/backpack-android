@@ -67,7 +67,7 @@ fun NudgerStory(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun NudgerExample(
+internal fun NudgerExample(
   modifier: Modifier = Modifier,
   initialValue: Int = NudgerStoryAvg,
   enabled: Boolean = true,

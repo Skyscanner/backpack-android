@@ -77,4 +77,25 @@ class StoriesTests {
   fun assertTestStoriesAreNotIncludedToTheScreenshots() {
     assertTrue(repository.screenshotStories.none { it.component.name == "TestViewStory" })
   }
+
+  @Test
+  fun assertNoDemoOnlyStoriesInScreenshots() {
+    assertTrue(repository.screenshotStories.none { it.kind == StoryKind.DemoOnly })
+  }
+
+  @Test
+  fun assertNoScreenshotOnlyStoriesInDemos() {
+    assertTrue(repository.uiComponents.none {
+      repository.storiesOf(it.name, compose = true).any { it.kind == StoryKind.ScreenshotOnly }
+    },)
+    assertTrue(repository.uiComponents.none {
+      repository.storiesOf(it.name, compose = false).any { it.kind == StoryKind.ScreenshotOnly }
+    },)
+    assertTrue(repository.tokenComponents.none {
+      repository.storiesOf(it.name, compose = true).any { it.kind == StoryKind.ScreenshotOnly }
+    },)
+    assertTrue(repository.tokenComponents.none {
+      repository.storiesOf(it.name, compose = false).any { it.kind == StoryKind.ScreenshotOnly }
+    },)
+  }
 }
