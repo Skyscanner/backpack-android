@@ -43,7 +43,7 @@ import net.skyscanner.backpack.map.getBpkMapAsync
 
 @Composable
 @MapMarkersComponent
-@ViewStory(kind = StoryKind.StoryOnly)
+@ViewStory(kind = StoryKind.DemoOnly)
 fun MapStory(modifier: Modifier = Modifier) {
   val context = LocalContext.current
   val values = remember { MapActivity.Type.values().toList() }

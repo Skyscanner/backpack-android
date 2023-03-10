@@ -39,7 +39,7 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 
 @Composable
 @CalendarComponent
-@ViewStory("Footer view", StoryKind.StoryOnly)
+@ViewStory("Footer view", StoryKind.DemoOnly)
 fun FooterViewCalendarStory(modifier: Modifier = Modifier) =
   AndroidLayout<BpkCalendar>(R.layout.fragment_calendar_default, R.id.bpkCalendar, modifier.fillMaxSize()) {
     setController(FooterViewCalendarController(context))

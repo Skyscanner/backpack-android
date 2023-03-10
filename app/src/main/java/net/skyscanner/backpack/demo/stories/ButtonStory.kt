@@ -58,7 +58,7 @@ fun LoadingButtonStoryLink(modifier: Modifier = Modifier) =
 
 @Composable
 @ButtonComponent
-@ViewStory("Changeable", StoryKind.StoryOnly)
+@ViewStory("Changeable", StoryKind.DemoOnly)
 fun ChangeableButtonsStory(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_buttons_changeable, modifier.fillMaxSize()) {
 
@@ -75,7 +75,7 @@ fun ChangeableButtonsStory(modifier: Modifier = Modifier) =
 
 @Composable
 @ButtonComponent
-@ViewStory("Styleable", StoryKind.StoryOnly)
+@ViewStory("Styleable", StoryKind.DemoOnly)
 fun StyleableButtonStory(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_buttons_styleable, modifier.fillMaxSize()) {
     findViewById<View>(R.id.primary).setOnClickListener { setButtonType(this, BpkButton.Type.Primary) }

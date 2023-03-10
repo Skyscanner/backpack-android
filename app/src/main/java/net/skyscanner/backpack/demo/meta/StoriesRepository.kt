@@ -65,7 +65,7 @@ private object StoriesRepositoryImpl : StoriesRepository {
   private val stories = generatedStories - testStories.toSet()
 
   private val visibleStories = stories
-    .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.StoryOnly }
+    .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.DemoOnly }
 
   override val uiComponents =
     visibleStories
@@ -115,14 +115,14 @@ private object StoriesRepositoryImpl : StoriesRepository {
 @Component(name = "TestComponent", isToken = true)
 private annotation class TestComponent
 
-@ComposeStory(name = "TestComposeStory", kind = StoryKind.StoryOnly)
+@ComposeStory(name = "TestComposeStory", kind = StoryKind.DemoOnly)
 @TestComponent
 @Composable
 internal fun TestComposeStory(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ViewStory(name = "TestViewStory", kind = StoryKind.StoryOnly)
+@ViewStory(name = "TestViewStory", kind = StoryKind.DemoOnly)
 @TestComponent
 @Composable
 internal fun TestViewStory(modifier: Modifier = Modifier) {

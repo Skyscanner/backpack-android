@@ -46,7 +46,7 @@ import net.skyscanner.backpack.demo.meta.StoryKind
 
 @Composable
 @DialogComponent
-@ComposeStory("Success One Button", StoryKind.StoryOnly)
+@ComposeStory("Success One Button", StoryKind.DemoOnly)
 internal fun SuccessOneButtonDialogExample() =
   DialogDemo { onDismiss ->
     BpkSuccessDialog(
@@ -60,7 +60,7 @@ internal fun SuccessOneButtonDialogExample() =
 
 @Composable
 @DialogComponent
-@ComposeStory("Success Two Buttons", StoryKind.StoryOnly)
+@ComposeStory("Success Two Buttons", StoryKind.DemoOnly)
 internal fun SuccessTwoButtonsDialogExample() =
   DialogDemo { onDismiss ->
     BpkSuccessDialog(
@@ -122,7 +122,7 @@ internal fun DestructiveDialogExample() =
 
 @Composable
 @DialogComponent
-@ComposeStory("No Icon", StoryKind.StoryOnly)
+@ComposeStory("No Icon", StoryKind.DemoOnly)
 internal fun NoIconDialogExample() =
   DialogDemo { onDismiss ->
     BpkSuccessDialog(

@@ -38,7 +38,7 @@ import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 
 @Composable
 @CalendarComponent
-@ViewStory("Colored", StoryKind.StoryOnly)
+@ViewStory("Colored", StoryKind.DemoOnly)
 fun ColoredCalendarStory(modifier: Modifier = Modifier) {
   val automationMode = LocalAutomationMode.current
   AndroidLayout(R.layout.fragment_calendar_colored, modifier.fillMaxSize()) {

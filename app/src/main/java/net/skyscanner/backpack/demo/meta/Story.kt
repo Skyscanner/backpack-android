@@ -35,7 +35,7 @@ data class Story(
 }
 
 enum class StoryKind {
-  StoryOnly,
+  DemoOnly,
   ScreenshotOnly,
   StoryAndScreenshot,
 }

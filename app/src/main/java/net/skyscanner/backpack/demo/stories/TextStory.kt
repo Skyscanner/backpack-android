@@ -46,12 +46,12 @@ fun TextStoryHero(modifier: Modifier = Modifier) =
 
 @Composable
 @TextComponent
-@ViewStory("With drawables", StoryKind.StoryOnly)
+@ViewStory("With drawables", StoryKind.DemoOnly)
 fun TextStoryDrawables(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_text_drawables, modifier)
 
 @Composable
 @TextComponent
-@ViewStory("With links", StoryKind.StoryOnly)
+@ViewStory("With links", StoryKind.DemoOnly)
 fun TextStoryLinks(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_text_links, modifier)

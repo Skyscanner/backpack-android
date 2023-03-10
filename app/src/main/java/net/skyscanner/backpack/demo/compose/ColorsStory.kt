@@ -45,7 +45,7 @@ import net.skyscanner.backpack.demo.meta.StoryKind
 
 @Composable
 @ColorTokensComponent
-@ComposeStory(kind = StoryKind.StoryOnly)
+@ComposeStory(kind = StoryKind.DemoOnly)
 fun ColorsComposeStory(modifier: Modifier = Modifier) {
   val data: List<Token<Color>> = BpkTheme.colors.values
   LazyColumn(modifier) {

@@ -33,7 +33,7 @@ import net.skyscanner.backpack.dialog.BpkDialog
 
 @Composable
 @DialogComponent
-@ViewStory("Success One Button", StoryKind.StoryOnly)
+@ViewStory("Success One Button", StoryKind.DemoOnly)
 internal fun SuccessOneButtonDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
@@ -52,7 +52,7 @@ internal fun SuccessOneButtonDialogExample() = DialogDemo { onDismiss ->
 
 @Composable
 @DialogComponent
-@ViewStory("Success Two Buttons", StoryKind.StoryOnly)
+@ViewStory("Success Two Buttons", StoryKind.DemoOnly)
 internal fun SuccessTwoButtonsDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
@@ -105,7 +105,7 @@ internal fun SuccessThreeButtonsDialogExample() = DialogDemo { onDismiss ->
 
 @Composable
 @DialogComponent
-@ViewStory("Warning", StoryKind.StoryOnly)
+@ViewStory("Warning", StoryKind.DemoOnly)
 internal fun WarningDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Warning).apply {
     title = context.getString(R.string.dialog_title)
@@ -158,7 +158,7 @@ internal fun DestructiveDialogExample() = DialogDemo { onDismiss ->
 
 @Composable
 @DialogComponent
-@ViewStory("Long text", StoryKind.StoryOnly)
+@ViewStory("Long text", StoryKind.DemoOnly)
 internal fun LongDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
@@ -181,7 +181,7 @@ internal fun LongDialogExample() = DialogDemo { onDismiss ->
 
 @Composable
 @DialogComponent
-@ViewStory("No Icon", StoryKind.StoryOnly)
+@ViewStory("No Icon", StoryKind.DemoOnly)
 internal fun NoIconDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)

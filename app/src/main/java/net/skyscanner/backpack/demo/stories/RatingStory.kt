@@ -34,13 +34,13 @@ fun RatingStoryDefault(modifier: Modifier = Modifier) =
 
 @Composable
 @RatingComponent
-@ViewStory("Icons", StoryKind.StoryOnly)
+@ViewStory("Icons", StoryKind.DemoOnly)
 fun RatingStoryIcons(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_rating_icons, modifier)
 
 @Composable
 @RatingComponent
-@ViewStory("No selectors", StoryKind.StoryOnly)
+@ViewStory("No selectors", StoryKind.DemoOnly)
 fun RatingStoryNoSelectors(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_rating_no_selectors, modifier)
 
@@ -64,6 +64,6 @@ fun RatingStoryPill(modifier: Modifier = Modifier) =
 
 @Composable
 @RatingComponent
-@ViewStory("Zero to Five Scale", StoryKind.StoryOnly)
+@ViewStory("Zero to Five Scale", StoryKind.DemoOnly)
 fun RatingStoryZeroToFive(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_rating_zero_to_five, modifier)
