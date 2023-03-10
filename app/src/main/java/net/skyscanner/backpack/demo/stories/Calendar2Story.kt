@@ -31,6 +31,7 @@ import net.skyscanner.backpack.calendar2.CalendarSelection
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.Calendar2Component
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
+import net.skyscanner.backpack.demo.data.CalendarStorySelection.PreselectedRange
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
@@ -110,8 +111,8 @@ private fun Calendar2Demo(
     setParams(CalendarStoryType.createInitialParams(type))
     when (type) {
       CalendarStoryType.SelectionWholeMonth -> setSelection(CalendarStorySelection.WholeMonthRange)
-      CalendarStoryType.PreselectedRange -> setSelection(CalendarStorySelection.PreSelectedRange)
-      CalendarStoryType.WithLabels -> setSelection(CalendarStorySelection.WithLabels)
+      CalendarStoryType.PreselectedRange -> setSelection(PreselectedRange)
+      CalendarStoryType.WithLabels -> setSelection(CalendarStorySelection.PreselectedRange)
       else -> Unit
     }
   }

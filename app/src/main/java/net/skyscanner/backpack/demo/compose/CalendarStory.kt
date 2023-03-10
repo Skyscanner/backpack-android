@@ -28,6 +28,7 @@ import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 import net.skyscanner.backpack.demo.components.Calendar2Component
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
+import net.skyscanner.backpack.demo.data.CalendarStorySelection.PreselectedRange
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.demo.meta.ComposeStory
 import net.skyscanner.backpack.demo.meta.StoryKind
@@ -88,8 +89,8 @@ private fun CalendarDemo(
   LaunchedEffect(type, controller, automationMode) {
     when (type) {
       CalendarStoryType.SelectionWholeMonth -> controller.setSelection(CalendarStorySelection.WholeMonthRange)
-      CalendarStoryType.PreselectedRange -> controller.setSelection(CalendarStorySelection.PreSelectedRange)
-      CalendarStoryType.WithLabels -> controller.setSelection(CalendarStorySelection.WithLabels)
+      CalendarStoryType.PreselectedRange -> controller.setSelection(PreselectedRange)
+      CalendarStoryType.WithLabels -> controller.setSelection(CalendarStorySelection.PreselectedRange)
       else -> Unit
     }
 

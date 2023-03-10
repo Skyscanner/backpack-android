@@ -175,7 +175,7 @@ To add a new component, add an annotation to `components` package:
 ```kotlin
 import net.skyscanner.backpack.demo.meta.Component
 
-@Component("My Component") // name of the component to be used in UI
+@Component("My Component") // name of the component to be used in UI. Also used for the docs folder
 annotation class MyComponent
 ```
 
@@ -184,7 +184,7 @@ To add a new demo screen (we call it a story), annotate your composable function
 ```kotlin
 @Composable
 @MyComponent
-@ComposeStory("Name to be used in samples list for component, `Default` is used by default")
+@ComposeStory
 fun MyStory(modifier: Modifier = Modifier) {
   // your story
 }
@@ -201,6 +201,12 @@ fun MyViewStory(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.my_layout, modifier)
 ```
 
+In a case you have multiple sections for the component, you need to specified the name of each section in the story annotation:
+
+```kotlin
+@ComposeStory("Section name") // note this name will also be used for the screenshot
+```
+
 ## Docs screenshots
 
 To make our documentation clearer we include screenshots on the docs site for each components.
@@ -215,7 +221,12 @@ Run `./gradlew :app:recordScreenshots` to capture all screenshots. Files will be
 
 > Note: Python is required.
 
-The generated screenshots will be saved in the component folder in `docs` directory. To include it to readme, you can use the following syntax (for Compose, for View replace the path):
+The generated screenshots will be saved in the component folder in `docs` directory.
+By default, the screenshots will be named `default.png` and `default_dm.png` for day and night mode respectively.
+If you specified the section name, it'll be converted to lowercase with spaces replaced with dashes:
+`Test story name` -> `test-story-name.png`.
+
+To include it to readme, you can use the following syntax (for Compose, for View replace the path):
 
 ```md
 
@@ -225,7 +236,7 @@ The generated screenshots will be saved in the component folder in `docs` direct
 
 ```
 
-In case you want to auto-perforce some actions for screenshots, you can check whether you're in a screenshot mode by following:
+In case you want to auto-perform some actions for screenshots, you can check whether you're in a screenshot mode by following:
 
 ```kotlin
 val automationMode = LocalAutomationMode.current
