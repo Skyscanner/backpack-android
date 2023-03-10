@@ -201,10 +201,10 @@ fun MyViewStory(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.my_layout, modifier)
 ```
 
-In a case you have multiple sections for the component, you need to specified the name of each section in the story annotation:
+In a case you have multiple sections for the component, you need to specify the name of each story in the annotation:
 
 ```kotlin
-@ComposeStory("Section name") // note this name will also be used for the screenshot
+@ComposeStory("Story name") // note this name will also be used for the screenshot
 ```
 
 ## Docs screenshots
@@ -223,7 +223,7 @@ Run `./gradlew :app:recordScreenshots` to capture all screenshots. Files will be
 
 The generated screenshots will be saved in the component folder in `docs` directory.
 By default, the screenshots will be named `default.png` and `default_dm.png` for day and night mode respectively.
-If you specified the section name, it'll be converted to lowercase with spaces replaced with dashes:
+If you specified the story name, it'll be converted to lowercase with spaces replaced with dashes:
 `Test story name` -> `test-story-name.png`.
 
 To include it to readme, you can use the following syntax (for Compose, for View replace the path):
