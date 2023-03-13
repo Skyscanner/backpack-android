@@ -82,7 +82,7 @@ ext {
   androidxAppCompat = "androidx.appcompat:appcompat:1.6.1"
   androidxAnnotations = "androidx.annotation:annotation:1.6.0"
 
-  lifecycleVersion = "2.5.1"
+  lifecycleVersion = "2.6.0"
   androidXLifecycleKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
   // The below dependencies can be removed once the following issue is fixed: https://issuetracker.google.com/issues/238425626
   androidXLifecycleViewmodel = "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
