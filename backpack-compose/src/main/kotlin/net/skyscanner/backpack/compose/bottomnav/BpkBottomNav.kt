@@ -82,7 +82,7 @@ fun BpkBottomNav(
     modifier = modifier,
     containerColor = BpkTheme.colors.surfaceDefault,
     contentColor = BpkTheme.colors.textSecondary,
-    tonalElevation = elevation,
+    tonalElevation = elevation, // todo: that's not the elevation we're looking for
   ) {
     items.forEach { tabItem ->
       NavigationBarItem(
@@ -125,7 +125,7 @@ fun BpkBottomNav(
           selectedTextColor = BpkTheme.colors.textLink,
           unselectedIconColor = BpkTheme.colors.textSecondary,
           unselectedTextColor = BpkTheme.colors.textSecondary,
-          indicatorColor = Color.Transparent,
+          indicatorColor = Color.Transparent, // todo: we don't use indicator colors here
         ),
       )
     }
