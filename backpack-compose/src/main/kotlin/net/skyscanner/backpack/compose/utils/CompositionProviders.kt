@@ -18,9 +18,8 @@
 
 package net.skyscanner.backpack.compose.utils
 
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.LocalTextStyle
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -36,9 +35,9 @@ internal fun BpkToggleableContent(
     else -> BpkTheme.colors.textDisabled
   }
 
+  // todo: no content alpha here!
   CompositionLocalProvider(
     LocalContentColor provides contentColor,
-    LocalContentAlpha provides contentColor.alpha,
     LocalTextStyle provides BpkTheme.typography.footnote,
     content = content,
   )
