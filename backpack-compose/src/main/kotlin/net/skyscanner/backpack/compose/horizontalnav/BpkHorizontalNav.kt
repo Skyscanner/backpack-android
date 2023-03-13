@@ -22,6 +22,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,6 +59,12 @@ fun BpkHorizontalNav(
       if (BpkTheme.colors.isLight) {
         BpkDivider() // todo: check the divider
       }
+    },
+    indicator = { tabPositions ->
+      TabRowDefaults.Indicator(
+        modifier = Modifier.tabIndicatorOffset(tabPositions[activeIndex]),
+        color = BpkTheme.colors.coreAccent,
+      )
     },
     modifier = modifier, // todo: limiting tabs height is no longer possible
 //    modifier = modifier.height(
