@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -33,6 +32,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.calendar2.CalendarParams
+import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
@@ -60,6 +60,6 @@ internal fun BpkCalendarHeader(
         current += 1
       } while (current != params.weekFields.firstDayOfWeek)
     }
-    Divider(color = BpkTheme.colors.line, thickness = 1.dp)
+    BpkDivider()
   }
 }
