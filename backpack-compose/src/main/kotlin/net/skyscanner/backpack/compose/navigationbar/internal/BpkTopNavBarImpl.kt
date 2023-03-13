@@ -26,9 +26,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.Surface
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -64,7 +63,7 @@ internal fun BpkTopNavBarImpl(
   Surface(
     color = animateColorAsState(targetValue = if (fraction == 0f) BpkTheme.colors.surfaceDefault else BpkTheme.colors.canvas).value,
     contentColor = BpkTheme.colors.textPrimary,
-    elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
+    shadowElevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value, // todo: check vs tonal elevation
     shape = RectangleShape,
     modifier = modifier.zIndex(1f),
   ) {
@@ -75,8 +74,8 @@ internal fun BpkTopNavBarImpl(
       fraction = fraction,
     )
 
+    // todo: content alpha was removed here
     CompositionLocalProvider(
-      LocalContentAlpha provides 1f,
       LocalTextStyle provides titleStyle,
     ) {
 
