@@ -54,7 +54,7 @@ dependencies {
   api rootProject.ext.composeFoundation
   api rootProject.ext.composeUiToolingPreview
   api rootProject.ext.composeUtil
-  implementation rootProject.ext.composeMaterial
+  implementation rootProject.ext.composeMaterial3
 
   implementation rootProject.ext.androidXLifecycleViewmodel
   implementation rootProject.ext.androidXLifecycleViewmodelKtx
