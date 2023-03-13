@@ -48,13 +48,13 @@ enum class BpkOverlayType {
   Vignette,
 }
 
-enum class GradientLevel {
+private enum class GradientLevel {
   Low,
   Medium,
   High,
 }
 
-enum class GradientDirection {
+private enum class GradientDirection {
   Solid,
   Top,
   Bottom,
@@ -63,8 +63,7 @@ enum class GradientDirection {
   Vignette,
 }
 
-@Composable
-fun BpkOverlayType.toGradientlevel(): GradientLevel =
+private fun BpkOverlayType.toGradientlevel(): GradientLevel =
   when (this) {
     BpkOverlayType.SolidLow,
     BpkOverlayType.TopLow,
@@ -88,7 +87,7 @@ fun BpkOverlayType.toGradientlevel(): GradientLevel =
   }
 
 @Composable
-fun BpkOverlayType.toDirection(): GradientDirection =
+private fun BpkOverlayType.toDirection(): GradientDirection =
   when (this) {
     BpkOverlayType.SolidLow,
     BpkOverlayType.SolidMedium,
@@ -132,7 +131,7 @@ fun BpkOverlay(
 }
 
 @Composable
-fun BoxScope.Overlay(
+private fun BoxScope.Overlay(
   overlayType: BpkOverlayType,
   modifier: Modifier = Modifier,
 ) {

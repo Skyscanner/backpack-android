@@ -23,18 +23,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.overlay.BpkOverlay
 import net.skyscanner.backpack.compose.overlay.BpkOverlayType
 import net.skyscanner.backpack.compose.text.BpkText
@@ -48,35 +49,47 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @OverlayComponent
 @ComposeStory
 fun OverlayStory(modifier: Modifier = Modifier) {
-  Column(modifier = modifier) {
+  Column(
+    modifier = modifier
+      .verticalScroll(rememberScrollState())
+      .padding(BpkSpacing.Base),
+    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+  ) {
     OverlaySampleRow {
-      DefaultOverlaySample(overlayType = BpkOverlayType.SolidLow)
-      DefaultOverlaySample(overlayType = BpkOverlayType.SolidMedium)
-      DefaultOverlaySample(overlayType = BpkOverlayType.SolidHigh)
+      val childModifier = Modifier.weight(1f)
+      DefaultOverlaySample(overlayType = BpkOverlayType.SolidLow, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.SolidMedium, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.SolidHigh, modifier = childModifier)
     }
     OverlaySampleRow {
-      DefaultOverlaySample(overlayType = BpkOverlayType.TopLow)
-      DefaultOverlaySample(overlayType = BpkOverlayType.TopMedium)
-      DefaultOverlaySample(overlayType = BpkOverlayType.TopHigh)
+      val childModifier = Modifier.weight(1f)
+      DefaultOverlaySample(overlayType = BpkOverlayType.TopLow, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.TopMedium, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.TopHigh, modifier = childModifier)
     }
     OverlaySampleRow {
-      DefaultOverlaySample(overlayType = BpkOverlayType.BottomLow)
-      DefaultOverlaySample(overlayType = BpkOverlayType.BottomMedium)
-      DefaultOverlaySample(overlayType = BpkOverlayType.BottomHigh)
+      val childModifier = Modifier.weight(1f)
+      DefaultOverlaySample(overlayType = BpkOverlayType.BottomLow, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.BottomMedium, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.BottomHigh, modifier = childModifier)
     }
     OverlaySampleRow {
-      DefaultOverlaySample(overlayType = BpkOverlayType.LeftLow)
-      DefaultOverlaySample(overlayType = BpkOverlayType.LeftMedium)
-      DefaultOverlaySample(overlayType = BpkOverlayType.LeftHigh)
+      val childModifier = Modifier.weight(1f)
+      DefaultOverlaySample(overlayType = BpkOverlayType.LeftLow, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.LeftMedium, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.LeftHigh, modifier = childModifier)
     }
     OverlaySampleRow {
-      DefaultOverlaySample(overlayType = BpkOverlayType.RightLow)
-      DefaultOverlaySample(overlayType = BpkOverlayType.RightMedium)
-      DefaultOverlaySample(overlayType = BpkOverlayType.RightHigh)
+      val childModifier = Modifier.weight(1f)
+      DefaultOverlaySample(overlayType = BpkOverlayType.RightLow, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.RightMedium, modifier = childModifier)
+      DefaultOverlaySample(overlayType = BpkOverlayType.RightHigh, modifier = childModifier)
     }
     OverlaySampleRow {
-      DefaultOverlaySample(overlayType = BpkOverlayType.Vignette)
-      WithTextOverlaySample(overlayType = BpkOverlayType.SolidHigh)
+      val childModifier = Modifier.weight(1f)
+      DefaultOverlaySample(overlayType = BpkOverlayType.Vignette, modifier = childModifier)
+      WithTextOverlaySample(overlayType = BpkOverlayType.SolidHigh, modifier = childModifier)
+      Spacer(modifier = childModifier)
     }
   }
 }
@@ -88,7 +101,7 @@ fun OverlaySampleRow(
 ) {
   Row(
     content = content,
-    horizontalArrangement = Arrangement.SpaceEvenly,
+    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     modifier = modifier.fillMaxWidth(),
   )
 }
@@ -98,17 +111,16 @@ fun DefaultOverlaySample(
   overlayType: BpkOverlayType,
   modifier: Modifier = Modifier,
 ) {
-  Column(horizontalAlignment = Alignment.CenterHorizontally) {
+  Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
     BpkOverlay(
-      modifier = modifier
-        .width(110.dp)
-        .height(78.dp)
-        .padding(top = BpkSpacing.Sm),
+      modifier = Modifier
+        .fillMaxWidth()
+        .aspectRatio(1.5f),
       overlayType = overlayType,
     ) {
       Image(
         painter = painterResource(R.drawable.sea),
-        contentDescription = stringResource(R.string.image_rockies_content_description),
+        contentDescription = stringResource(R.string.image_sea_content_description),
         modifier = Modifier.fillMaxSize(),
         contentScale = ContentScale.Crop,
       )
@@ -122,12 +134,11 @@ fun WithTextOverlaySample(
   overlayType: BpkOverlayType,
   modifier: Modifier = Modifier,
 ) {
-  Column(horizontalAlignment = Alignment.CenterHorizontally) {
+  Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
     BpkOverlay(
-      modifier = modifier
-        .width(110.dp)
-        .height(78.dp)
-        .padding(top = BpkSpacing.Sm),
+      modifier = Modifier
+        .fillMaxWidth()
+        .aspectRatio(1.5f),
       overlayType = overlayType,
       foregroundContent = {
         BpkText(
