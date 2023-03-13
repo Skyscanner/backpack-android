@@ -132,7 +132,6 @@ ext {
   composeUi = [composeBom, "androidx.compose.ui:ui"]
   composeFoundation = [composeBom, "androidx.compose.foundation:foundation"]
   composeRuntime = [composeBom, "androidx.compose.runtime:runtime"]
-  composeMaterial = [composeBom, "androidx.compose.material:material"]
   composeMaterial3 = [composeBom, "androidx.compose.material3:material3"]
   composeUiToolingPreview = [composeBom, "androidx.compose.ui:ui-tooling-preview"]
   composeTestJUnit = [composeBom, "androidx.compose.ui:ui-test-junit4"]
