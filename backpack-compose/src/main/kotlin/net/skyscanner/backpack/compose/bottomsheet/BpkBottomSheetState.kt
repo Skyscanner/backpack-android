@@ -19,14 +19,14 @@
 package net.skyscanner.backpack.compose.bottomsheet
 
 import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.SwipeableDefaults
-import androidx.compose.material.SwipeableState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import net.skyscanner.backpack.compose.BpkSwipeableState
+import net.skyscanner.backpack.compose.swipeable.SwipeableDefaults
+import net.skyscanner.backpack.compose.swipeable.SwipeableState
 
 @Composable
 fun rememberBpkBottomSheetState(
@@ -53,7 +53,7 @@ enum class BpkBottomSheetValue {
   Expanded,
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Stable
 class BpkBottomSheetState private constructor(
   internal val wrapped: SwipeableState<BpkBottomSheetValue>,
