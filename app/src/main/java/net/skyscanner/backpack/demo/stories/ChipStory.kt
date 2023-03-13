@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
-import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.compose.foundation.layout.fillMaxSize
@@ -64,27 +62,6 @@ private fun ChipDemo(
       }
     }
   }
-
-class ChipFragment : Story() {
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    forEachChip(view as ViewGroup) { chip ->
-      chip.setOnClickListener {
-        chip.toggle()
-      }
-    }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = ChipFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-    }
-  }
-}
 
 private fun forEachChip(view: ViewGroup, block: (chip: BpkChip) -> Unit) {
   (0..(view.childCount - 1)).forEach {

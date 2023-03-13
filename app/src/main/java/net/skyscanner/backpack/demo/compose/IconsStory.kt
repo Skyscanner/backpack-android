@@ -60,7 +60,7 @@ import net.skyscanner.backpack.toast.BpkToast
 @Composable
 @IconComponent
 @ComposeStory
-fun IconsStoryCompose(modifier: Modifier = Modifier) {
+fun IconsStory(modifier: Modifier = Modifier) {
   Column(
     modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),

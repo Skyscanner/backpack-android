@@ -14,13 +14,13 @@
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/expanded.png" alt="Expanded NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/expanded_dm.png" alt="Expanded NavBar component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/default.png" alt="Expanded NavBar component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/default_dm.png" alt="Expanded NavBar component - dark mode" width="375" /> |
 
 ## Navigation
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/navigation.png" alt="Navigation NavBar component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/navigation_dm.png" alt="Navigation NavBar component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/with-menu.png" alt="Navigation NavBar component" width="375" /> | <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/view/NavBar/screenshots/with-menu_dm.png" alt="Navigation NavBar component - dark mode" width="375" /> |
 
 ## Installation
 

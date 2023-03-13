@@ -169,18 +169,78 @@ implementation 'net.skyscanner.backpack:backpack-android:x.x.x-SNAPSHOT'
 ## Demo app screens
 
 To verify changes during development, generate docs screenshots and showcase our components internally & externally we provide a demo app with all our components.
-To add a new component open `net/skyscanner/backpack/demo/data/ComponentRegistry.kt` and add your component to the list. For compose components use `composeStory` and use a newly created component story from the `compose` package. For view components you can add `story NodeData { Story of R.layout.fragment_x }` for simple components, or use a custom story instead of `Story` for more complex stories.
+
+To add a new component, add an annotation to `components` package:
+
+```kotlin
+import net.skyscanner.backpack.demo.meta.Component
+
+@Component("My Component") // name of the component to be used in UI. Also used for the docs folder
+annotation class MyComponent
+```
+
+To add a new demo screen (we call it a story), annotate your composable function with the component and story annotations:
+
+```kotlin
+@Composable
+@MyComponent
+@ComposeStory
+fun MyStory(modifier: Modifier = Modifier) {
+  // your story
+}
+```
+
+Here's an example of a simple View story:
+
+```kotlin
+
+@Composable
+@MyComponent
+@ViewStory
+fun MyViewStory(modifier: Modifier = Modifier) =
+  AndroidLayout(R.layout.my_layout, modifier)
+```
+
+In a case you have multiple sections for the component, you need to specify the name of each story in the annotation:
+
+```kotlin
+@ComposeStory("Story name") // note this name will also be used for the screenshot
+```
 
 ## Docs screenshots
 
 To make our documentation clearer we include screenshots on the docs site for each components.
 
-To add a new screenshot open `net/skyscanner/backpack/docs/DocsRegistry.kt` and add the screenshot to the `screenshots` list.
-**Important**: For the screenshot to be generated the name must match the title of the page.
+By default, every story will have a screenshot generated. To exclude a story from the screenshot generation,
+set `kind` attribute to `StoryOnly`: `@ComposeStory(kind = StoryKind.StoryOnly)`.
+
+If you want to create a screenshot for a story that is not included in the demo app,
+set `kind` attribute to `ScreenshotOnly`: `@ViewStory(kind = StoryKind.ScreenshotOnly)`.
 
 Run `./gradlew :app:recordScreenshots` to capture all screenshots. Files will be saved in the correct directory.
 
 > Note: Python is required.
+
+The generated screenshots will be saved in the component folder in `docs` directory.
+By default, the screenshots will be named `default.png` and `default_dm.png` for day and night mode respectively.
+If you specified the story name, it'll be converted to lowercase with spaces replaced with dashes:
+`Test story name` -> `test-story-name.png`.
+
+To include it to readme, you can use the following syntax (for Compose, for View replace the path):
+
+```md
+
+| Day | Night |
+| --- | --- |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ComponentName/screenshots/default.png" alt="ComponentName component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/ComponentName/screenshots/default_dm.png" alt="ComponentName component - dark mode" width="375" /> |
+
+```
+
+In case you want to auto-perform some actions for screenshots, you can check whether you're in a screenshot mode by following:
+
+```kotlin
+val automationMode = LocalAutomationMode.current
+```
 
 Verify the screenshots and commit the changes.
 
@@ -219,6 +279,10 @@ Please see the [code review guidelines](https://github.com/Skyscanner/backpack/b
  - Publish the latest draft on the [releases pages](https://github.com/Skyscanner/backpack-android/releases)
  - Ensure CI runs the release workflow successfully
  - Once released verify the artifacts are available
+
+ The release workflow will also trigger our design docs publish. If successful, you should see your component changes at [skyscanner.design](https://skyscanner.design).
+ > Note: Don't forget that new components need to be added manually!
+
 
 ## Docs
 

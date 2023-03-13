@@ -23,6 +23,6 @@ import net.skyscanner.backpack.ksp.ComposeStoryAnnotation
 object ComposeStoriesVisitor : AbstractStoriesVisitor(
   annotationDefinition = ComposeStoryAnnotation,
   paramName = ComposeStoryAnnotation.paramName,
-  paramScreenshot = ComposeStoryAnnotation.paramScreenshot,
+  paramKind = ComposeStoryAnnotation.paramKind,
   isCompose = true,
 )

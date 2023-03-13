@@ -34,23 +34,46 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.FieldSetComponent
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.meta.StoryKind
+import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
 
 @Composable
 @FieldSetComponent
 @ComposeStory
-fun FieldSetStory(modifier: Modifier = Modifier) {
+fun FieldSetStory(
+  modifier: Modifier = Modifier,
+  initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
+) =
   FieldStatusSwitcher(
     modifier = modifier.padding(BpkSpacing.Base),
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    initialStatus = initialStatus,
   ) { status ->
     FieldSetWithDescriptionExample(status)
     BpkFieldSetWithoutDescriptionExample(status)
     BpkFieldSetNoLabelExample(status)
   }
-}
 
 @Composable
-internal fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+@FieldSetComponent
+@ComposeStory("Disabled", StoryKind.ScreenshotOnly)
+internal fun FieldSetScreenshotDisabled(modifier: Modifier = Modifier) =
+  FieldSetStory(modifier, BpkFieldStatus.Disabled)
+
+@Composable
+@FieldSetComponent
+@ComposeStory("Validated", StoryKind.ScreenshotOnly)
+internal fun FieldSetScreenshotValidated(modifier: Modifier = Modifier) =
+  FieldSetStory(modifier, BpkFieldStatus.Validated)
+
+@Composable
+@FieldSetComponent
+@ComposeStory("Error", StoryKind.ScreenshotOnly)
+internal fun FieldSetScreenshotError(modifier: Modifier = Modifier) =
+  FieldSetStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
+
+@Composable
+private fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
     label = stringResource(R.string.generic_with_description),
     description = stringResource(R.string.generic_description),
@@ -66,7 +89,7 @@ internal fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldSta
 }
 
 @Composable
-internal fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+private fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
     label = stringResource(R.string.generic_no_description),
     status = status,
@@ -81,7 +104,7 @@ internal fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFi
 }
 
 @Composable
-internal fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
+private fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
   BpkFieldSet(
     status = status,
   ) {

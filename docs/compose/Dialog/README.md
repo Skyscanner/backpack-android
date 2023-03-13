@@ -8,7 +8,7 @@
 
 | Day | Night |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/success.png" alt="Success Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/success_dm.png" alt="Success Dialog component - dark mode" width="375" /> |
+| <img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/success-three-buttons.png" alt="Success Dialog component" width="375" /> |<img src="https://raw.githubusercontent.com/Skyscanner/backpack-android/main/docs/compose/Dialog/screenshots/success-three-buttons_dm.png" alt="Success Dialog component - dark mode" width="375" /> |
 
 ## Warning
 

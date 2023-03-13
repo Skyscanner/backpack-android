@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.StarRatingComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 
@@ -33,12 +34,12 @@ fun StarRatingStoryDefault(modifier: Modifier = Modifier) =
 
 @Composable
 @StarRatingComponent
-@ViewStory("Different values")
+@ViewStory("Different values", StoryKind.DemoOnly)
 fun StarRatingStoryValues(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_star_rating_values, modifier)
 
 @Composable
 @StarRatingComponent
-@ViewStory("Custom Max Rating")
+@ViewStory("Custom Max Rating", StoryKind.DemoOnly)
 fun StarRatingStoryMax(modifier: Modifier = Modifier) =
   AndroidLayout(R.layout.fragment_star_rating_max, modifier)

@@ -135,6 +135,7 @@
   <string name="dialog_link_optional">Link optional</string>
   <string name="dialog_delete">Delete</string>
   <string name="dialog_cancel">Cancel</string>
+  <string name="dialog_continue">Continue</string>
   <string name="copied_to_clipboard">\'%s\' has been copied to the clipboard</string>
   <string name="icons_story_guide">Click on icon to copy its name</string>
   <string name="icons_story_content_description">Icon \'%s\'</string>
@@ -187,18 +188,6 @@
   <string name="spinner_textPrimary">TextPrimary</string>
   <string name="spinner_disabled">Disabled</string>
   <string name="spinner_onDarkSurface">OnDarkSurface</string>
-
-  <string name="dialog_success_one_button">Success One Button</string>
-  <string name="dialog_success_two_buttons">Success Two Buttons</string>
-  <string name="dialog_success_three_buttons">Success Three Buttons</string>
-  <string name="dialog_warning">Warning</string>
-  <string name="dialog_destructive">Destructive</string>
-  <string name="dialog_no_icon">No Icon</string>
-  <string name="dialog_flare">Flare</string>
-  <string name="dialog_image_start">Image Start alignment</string>
-  <string name="dialog_image_end">Image End alignment</string>
-  <string name="dialog_long_text">Long text</string>
-  <string name="dialog_continue">Continue</string>
 
   <string name="content_description">Content description</string>
 

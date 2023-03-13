@@ -18,11 +18,9 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
-import android.view.View
 import android.widget.TextView
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -43,23 +41,6 @@ fun TextSpansStory(modifier: Modifier = Modifier) =
   AndroidLayout<TextView>(R.layout.fragment_text_spans, R.id.text, modifier) {
     setupTextSpans(this)
   }
-
-class TextSpansFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    setupTextSpans(view.findViewById(R.id.text))
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = TextSpansFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-    }
-  }
-}
 
 private fun setupTextSpans(textView: TextView) {
 
