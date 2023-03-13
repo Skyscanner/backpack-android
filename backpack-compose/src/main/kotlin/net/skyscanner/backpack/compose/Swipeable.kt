@@ -18,9 +18,9 @@
 
 package net.skyscanner.backpack.compose
 
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.SwipeableState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Stable
+import net.skyscanner.backpack.compose.swipeable.SwipeableState
 
 @Stable
 interface BpkSwipeableState<T> {
@@ -36,7 +36,7 @@ interface BpkSwipeableState<T> {
   suspend fun animateTo(targetValue: T)
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun <T> BpkSwipeableState(
   wrapped: SwipeableState<T>,
 ): BpkSwipeableState<T> = object : BpkSwipeableState<T> {

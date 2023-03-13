@@ -20,13 +20,7 @@ package net.skyscanner.backpack.compose.utils
 
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FixedThreshold
-import androidx.compose.material.ResistanceConfig
-import androidx.compose.material.SwipeableDefaults
-import androidx.compose.material.SwipeableState
-import androidx.compose.material.ThresholdConfig
-import androidx.compose.material.swipeable
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
@@ -35,10 +29,16 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.swipeable.FixedThreshold
+import net.skyscanner.backpack.compose.swipeable.ResistanceConfig
+import net.skyscanner.backpack.compose.swipeable.SwipeableDefaults
+import net.skyscanner.backpack.compose.swipeable.SwipeableState
+import net.skyscanner.backpack.compose.swipeable.ThresholdConfig
+import net.skyscanner.backpack.compose.swipeable.swipeable
 
 // to resolve one of the issues in Material Design library, see
 // https://github.com/androidx/androidx/blob/133b57f4ff1506abeda479a95c357b8e7bdca2d7/compose/material/material/src/commonMain/kotlin/androidx/compose/material/Swipeable.kt#L845
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 internal fun <T> Modifier.nestedScrollFixedSwipeable(
   state: SwipeableState<T>,
   anchors: Map<Float, T>,
@@ -65,7 +65,7 @@ internal fun <T> Modifier.nestedScrollFixedSwipeable(
     velocityThreshold = velocityThreshold,
   )
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 private fun <T> SwipeableState<T>.preUpPostDownNestedScrollConnection(
   minBound: Float,
 ): NestedScrollConnection =
