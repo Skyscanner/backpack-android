@@ -19,8 +19,8 @@
 package net.skyscanner.backpack.compose.spinner
 
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.LocalContentColor
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
