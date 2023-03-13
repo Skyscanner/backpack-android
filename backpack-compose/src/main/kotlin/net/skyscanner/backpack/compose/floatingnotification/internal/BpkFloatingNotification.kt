@@ -30,7 +30,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Snackbar
+import androidx.compose.material3.Snackbar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,7 +54,8 @@ internal fun BpkFloatingNotificationImpl(
   Snackbar(
     modifier = modifier,
     shape = RoundedCornerShape(BpkBorderRadius.Md),
-    backgroundColor = BpkTheme.colors.corePrimary,
+    // todo: action container color have its own color now
+    containerColor = BpkTheme.colors.corePrimary,
     contentColor = BpkTheme.colors.textOnDark,
   ) {
 
