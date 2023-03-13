@@ -27,14 +27,16 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationDefaults
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarDefaults
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -74,16 +76,16 @@ fun BpkBottomNav(
   selectedItemId: Int,
   items: List<BpkBottomNavItem>,
   modifier: Modifier = Modifier,
-  elevation: Dp = BottomNavigationDefaults.Elevation,
+  elevation: Dp = NavigationBarDefaults.Elevation,
 ) {
-  BottomNavigation(
+  NavigationBar(
     modifier = modifier,
-    backgroundColor = BpkTheme.colors.surfaceDefault,
+    containerColor = BpkTheme.colors.surfaceDefault,
     contentColor = BpkTheme.colors.textSecondary,
-    elevation = elevation,
+    tonalElevation = elevation,
   ) {
     items.forEach { tabItem ->
-      BottomNavigationItem(
+      NavigationBarItem(
         selected = selectedItemId == tabItem.id,
         onClick = { onTabClicked(tabItem.id) },
         icon = {
@@ -94,6 +96,7 @@ fun BpkBottomNav(
                 contentDescription = null,
                 size = BpkIconSize.Large,
               )
+
               is PainterBottomNavItem -> Icon(
                 modifier = Modifier.height(BpkSpacing.Lg),
                 painter = tabItem.painter,
@@ -117,8 +120,13 @@ fun BpkBottomNav(
             overflow = TextOverflow.Ellipsis,
           )
         },
-        selectedContentColor = BpkTheme.colors.textLink,
-        unselectedContentColor = BpkTheme.colors.textSecondary,
+        colors = NavigationBarItemDefaults.colors(
+          selectedIconColor = BpkTheme.colors.textLink,
+          selectedTextColor = BpkTheme.colors.textLink,
+          unselectedIconColor = BpkTheme.colors.textSecondary,
+          unselectedTextColor = BpkTheme.colors.textSecondary,
+          indicatorColor = Color.Transparent,
+        ),
       )
     }
   }
