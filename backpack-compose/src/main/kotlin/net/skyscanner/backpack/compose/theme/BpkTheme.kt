@@ -19,10 +19,12 @@
 package net.skyscanner.backpack.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.Colors
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalElevationOverlay
 import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -52,16 +54,20 @@ fun BpkTheme(
   val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
   val shapes = BpkShapes()
 
-  CompositionLocalProvider(
-    LocalBpkTypography provides typography,
-    LocalBpkColors provides colors,
-    LocalBpkShapes provides shapes,
-    LocalContentColor provides colors.textPrimary,
-    LocalElevationOverlay provides null,
-    LocalTextStyle provides typography.bodyDefault,
-    LocalContentAlpha provides 1f,
-    content = content,
-  )
+  MaterialTheme(
+    colors = colors.toMaterialColors(),
+  ) {
+    CompositionLocalProvider(
+      LocalBpkTypography provides typography,
+      LocalBpkColors provides colors,
+      LocalBpkShapes provides shapes,
+      LocalContentColor provides colors.textPrimary,
+      LocalElevationOverlay provides null,
+      LocalTextStyle provides typography.bodyDefault,
+      LocalContentAlpha provides 1f,
+      content = content,
+    )
+  }
 }
 
 object BpkTheme {
@@ -99,3 +105,20 @@ object BpkTheme {
       LocalBpkShapes.current
     }
 }
+
+private fun BpkColors.toMaterialColors(): Colors =
+  Colors(
+    primary = corePrimary,
+    primaryVariant = corePrimary,
+    secondary = coreAccent,
+    secondaryVariant = coreAccent,
+    background = canvas,
+    surface = surfaceDefault,
+    error = textError,
+    onPrimary = textOnDark,
+    onSecondary = textPrimaryInverse,
+    onBackground = textPrimary,
+    onSurface = textPrimary,
+    onError = textOnDark,
+    isLight = isLight,
+  )
