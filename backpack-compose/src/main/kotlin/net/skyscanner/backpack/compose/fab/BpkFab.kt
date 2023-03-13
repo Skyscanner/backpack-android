@@ -21,8 +21,8 @@ package net.skyscanner.backpack.compose.fab
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.FloatingActionButtonDefaults
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -44,7 +44,7 @@ fun BpkFab(
     interactionSource = interactionSource,
     modifier = modifier,
     shape = CircleShape,
-    backgroundColor = BpkTheme.colors.coreAccent,
+    containerColor = BpkTheme.colors.coreAccent,
     contentColor = BpkTheme.colors.textPrimaryInverse,
     elevation = FloatingActionButtonDefaults.elevation(BpkElevation.Xl, BpkElevation.Xl, BpkElevation.Xl, BpkElevation.Xl),
   ) {
