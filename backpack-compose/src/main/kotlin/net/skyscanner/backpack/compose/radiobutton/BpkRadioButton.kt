@@ -23,10 +23,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalMinimumTouchTargetEnforcement
-import androidx.compose.material.RadioButton
-import androidx.compose.material.RadioButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -99,7 +99,7 @@ fun BpkRadioButton(
   }
 }
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun BpkRadioButtonImpl(
   selected: Boolean,
@@ -120,7 +120,9 @@ private fun BpkRadioButtonImpl(
       colors = RadioButtonDefaults.colors(
         selectedColor = BpkTheme.colors.coreAccent,
         unselectedColor = BpkTheme.colors.textSecondary,
-        disabledColor = BpkTheme.colors.textDisabled,
+        // todo: disabled colors are now the same
+        disabledSelectedColor = BpkTheme.colors.textDisabled,
+        disabledUnselectedColor = BpkTheme.colors.textDisabled,
       ),
     )
   }
