@@ -20,13 +20,11 @@ package net.skyscanner.backpack.compose.horizontalnav
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
@@ -60,12 +58,13 @@ fun BpkHorizontalNav(
         BpkDivider() // todo: check the divider
       }
     },
-    modifier = modifier.height(
-      when (size) {
-        BpkHorizontalNavSize.Default -> 48.dp
-        BpkHorizontalNavSize.Small -> 36.dp
-      },
-    ),
+    modifier = modifier, // todo: limiting tabs height is no longer possible
+//    modifier = modifier.height(
+//      when (size) {
+//        BpkHorizontalNavSize.Default -> 48.dp
+//        BpkHorizontalNavSize.Small -> 36.dp
+//      },
+//    ),
   ) {
     tabs.forEachIndexed { index, tab ->
       Tab(
