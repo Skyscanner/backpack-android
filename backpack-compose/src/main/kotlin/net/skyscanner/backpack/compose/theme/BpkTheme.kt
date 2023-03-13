@@ -55,7 +55,7 @@ fun BpkTheme(
   val shapes = BpkShapes()
 
   MaterialTheme(
-    colors = colors.toMaterialColors(),
+    colors = colors.toMaterialColors(MaterialTheme.colors),
   ) {
     CompositionLocalProvider(
       LocalBpkTypography provides typography,
@@ -106,19 +106,19 @@ object BpkTheme {
     }
 }
 
-private fun BpkColors.toMaterialColors(): Colors =
-  Colors(
+private fun BpkColors.toMaterialColors(mdColors: Colors): Colors =
+  mdColors.copy(
     primary = corePrimary,
     primaryVariant = corePrimary,
     secondary = coreAccent,
     secondaryVariant = coreAccent,
     background = canvas,
     surface = surfaceDefault,
-    error = textError,
-    onPrimary = textOnDark,
-    onSecondary = textPrimaryInverse,
-    onBackground = textPrimary,
-    onSurface = textPrimary,
-    onError = textOnDark,
+//    error = textError,
+//    onPrimary = textOnDark,
+//    onSecondary = textPrimaryInverse,
+//    onBackground = textPrimary,
+//    onSurface = textPrimary,
+//    onError = textOnDark,
     isLight = isLight,
   )
