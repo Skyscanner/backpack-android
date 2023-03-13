@@ -23,10 +23,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.selection.toggleable
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalMinimumTouchTargetEnforcement
-import androidx.compose.material.Switch
-import androidx.compose.material.SwitchDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -97,7 +97,7 @@ fun BpkSwitch(
   }
 }
 
-@OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun BpkSwitchImpl(
   checked: Boolean,
@@ -116,12 +116,11 @@ private fun BpkSwitchImpl(
       enabled = enabled,
       interactionSource = interactionSource,
       colors = SwitchDefaults.colors(
+        // todo: alpha were removed, the new API also introduces borders
         checkedThumbColor = BpkTheme.colors.coreAccent,
         checkedTrackColor = BpkTheme.colors.textDisabled,
-        checkedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
         uncheckedThumbColor = BpkTheme.colors.textOnDark,
         uncheckedTrackColor = BpkTheme.colors.textDisabled,
-        uncheckedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
         disabledCheckedThumbColor = BpkTheme.colors.coreAccent,
         disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
         disabledUncheckedThumbColor = BpkTheme.colors.textOnDark,
