@@ -20,8 +20,9 @@ package net.skyscanner.backpack.compose.card
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -49,7 +50,7 @@ enum class BpkCardElevation {
   Focus,
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkCard(
   onClick: () -> Unit,
@@ -68,9 +69,8 @@ fun BpkCard(
     modifier = modifier,
     enabled = enabled,
     shape = cardShape(corner),
-    backgroundColor = cardBackgroundColor(elevation),
-    contentColor = BpkTheme.colors.textPrimary,
-    elevation = cardElevation(elevation),
+    colors = cardColorsImpl(elevation),
+    elevation = cardElevationImpl(elevation),
     interactionSource = interactionSource,
     content = { CardContent(padding, contentAlignment, content) },
   )
@@ -88,9 +88,28 @@ fun BpkCard(
   Card(
     modifier = modifier,
     shape = cardShape(corner),
-    backgroundColor = cardBackgroundColor(elevation),
-    contentColor = BpkTheme.colors.textPrimary,
-    elevation = cardElevation(elevation),
+    colors = cardColorsImpl(elevation),
+    elevation = cardElevationImpl(elevation),
     content = { CardContent(padding, contentAlignment, content) },
   )
 }
+
+@Composable
+private fun cardColorsImpl(elevation: BpkCardElevation) =
+  // todo: missing disabled colors
+  CardDefaults.cardColors(
+    containerColor = cardBackgroundColor(elevation),
+    contentColor = BpkTheme.colors.textPrimary,
+  )
+
+@Composable
+private fun cardElevationImpl(elevation: BpkCardElevation) =
+  // todo: that's not correct elevation
+  CardDefaults.cardElevation(
+    defaultElevation = cardElevation(elevation),
+    pressedElevation = cardElevation(elevation),
+    focusedElevation = cardElevation(elevation),
+    hoveredElevation = cardElevation(elevation),
+    draggedElevation = cardElevation(elevation),
+    disabledElevation = cardElevation(elevation),
+  )
