@@ -18,6 +18,6 @@
 
 package net.skyscanner.backpack.compose
 
-val LocalContentColor = androidx.compose.material.LocalContentColor
+val LocalContentColor = androidx.compose.material3.LocalContentColor
 
-val LocalTextStyle = androidx.compose.material.LocalTextStyle
+val LocalTextStyle = androidx.compose.material3.LocalTextStyle
