@@ -81,7 +81,7 @@ object BpkColor {
     object InternalCompose : Format<BpkColors, List<TypeSpec>>() {
       override fun invoke(source: BpkColors): List<TypeSpec> =
         source.groupBy { it.fileName() }
-        .map { toInternalCompose(it.value.toBpkColors(), it.key) }
+          .map { toInternalCompose(it.value.toBpkColors(), it.key) }
 
       private fun BpkColorModel.fileName(): String = "Bpk${category.toCamelCase()}Colors"
 
@@ -154,7 +154,7 @@ private fun parseColors(
         darkValue = it.value["darkValue"],
         defaultReference = resolveReference(it.value["originalValue"], isDark = false)?.trimReference()?.trimName(),
         darkReference = resolveReference(it.value["originalDarkValue"], isDark = true)?.trimReference()?.trimName(),
-        deprecated = it.value["deprecated"].toBoolean()
+        deprecated = it.value["deprecated"].toBoolean(),
       )
     }
     .filter(filter)
@@ -181,7 +181,7 @@ private fun deprecationProperty(): PropertySpec =
   PropertySpec.builder(deprecationMessageProperty, String::class)
     .initializer(
       "%S",
-      "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
+      "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation",
     )
     .addModifiers(KModifier.CONST, KModifier.PRIVATE)
     .build()
@@ -219,13 +219,13 @@ private fun toSemanticCompose(
           .addModifiers(KModifier.PRIVATE)
           .addParameter(isLightProperty, Boolean::class)
           .addParameters(map(BpkColorModel::toParameter))
-          .build()
+          .build(),
       )
       .addProperty(
         PropertySpec
           .builder(isLightProperty, Boolean::class)
           .initializer(isLightProperty)
-          .build()
+          .build(),
       )
       .addProperties(map(BpkColorModel::toProperty))
       .build()
@@ -254,7 +254,7 @@ private fun toSemanticCompose(
           postfix = ",\n)",
         ) {
           "${it.name.toSemanticName()} = ${it.name.toSemanticName()}"
-        }
+        },
       )
       .build()
   }
@@ -268,7 +268,7 @@ private fun toSemanticCompose(
         .addFunction(source.toFactoryFunction(isLight = true))
         .addFunction(source.toFactoryFunction(isLight = false))
         .addProperty(deprecationProperty())
-        .build()
+        .build(),
     )
     .build()
 }
@@ -297,8 +297,8 @@ private fun toInternalCompose(
           .addCode(buildCodeBlock {
             val dynamicColorOf = MemberName("net.skyscanner.backpack.compose.utils", "dynamicColorOf")
             add("return %M(%T(%L), %T(%L))", dynamicColorOf, ColorClass, defaultValue.toHexColor(), ColorClass, darkValue.toHexColor())
-          })
-          .build()
+          },)
+          .build(),
         )
       } else {
         initializer(defaultValue.toHexColorBlock())
@@ -329,7 +329,7 @@ private fun toXml(source: BpkColors, isLight: Boolean): String {
 
   return source.joinToString("\n") { model ->
     "    <color name=\"${model.name()}\">#${
-      model.value(isLight).toArgb()
+    model.value(isLight).toArgb()
     }</color>"
   }
 }
@@ -340,4 +340,3 @@ private fun toSemanticXml(source: BpkColors): Map<String, String> {
     "-night" to toXml(source, isLight = false),
   )
 }
-

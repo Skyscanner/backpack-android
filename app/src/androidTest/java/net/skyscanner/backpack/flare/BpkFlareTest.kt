@@ -54,7 +54,7 @@ class BpkFlareTest : BpkSnapshotTest() {
     snap(
       subject.apply {
         addView(imageView)
-      }
+      },
     )
   }
 
@@ -77,7 +77,7 @@ class BpkFlareTest : BpkSnapshotTest() {
       subject.apply {
         addView(imageView)
         round = true
-      }
+      },
     )
   }
 
@@ -99,7 +99,7 @@ class BpkFlareTest : BpkSnapshotTest() {
       subject.apply {
         addView(imageView)
         pointerPosition = BpkFlare.PointerPosition.START
-      }
+      },
     )
   }
 
@@ -110,14 +110,14 @@ class BpkFlareTest : BpkSnapshotTest() {
       subject.apply {
         addView(imageView)
         pointerPosition = BpkFlare.PointerPosition.END
-      }
+      },
     )
   }
 
   private fun setupViewForInsetPaddingTest(context: Context, configSubject: () -> Unit): View {
     val wrapContent = ViewGroup.LayoutParams(
       ViewGroup.LayoutParams.WRAP_CONTENT,
-      ViewGroup.LayoutParams.WRAP_CONTENT
+      ViewGroup.LayoutParams.WRAP_CONTENT,
     )
 
     return FrameLayout(testContext).apply {
@@ -135,11 +135,11 @@ class BpkFlareTest : BpkSnapshotTest() {
                 BpkText(testContext).apply {
                   layoutParams = wrapContent
                   text = testContext.resources.getString(R.string.stub_sm)
-                }
+                },
               )
-            }
+            },
           )
-        }
+        },
       )
     }
   }

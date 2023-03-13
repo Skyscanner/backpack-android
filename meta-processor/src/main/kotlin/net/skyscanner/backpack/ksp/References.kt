@@ -24,14 +24,14 @@ object ComposeStoryAnnotation : AnnotationDefinition {
   override val simpleName = "ComposeStory"
   override val pkg = metaPkg
   val paramName = stringParamOf("name")
-  val paramScreenshot = booleanParamOf("screenshot")
+  val paramKind = enumParamOf("kind")
 }
 
 object ViewStoryAnnotation : AnnotationDefinition {
   override val simpleName = "ViewStory"
   override val pkg = metaPkg
   val paramName = stringParamOf("name")
-  val paramScreenshot = booleanParamOf("screenshot")
+  val paramKind = enumParamOf("kind")
 }
 
 object ComponentAnnotation : AnnotationDefinition {

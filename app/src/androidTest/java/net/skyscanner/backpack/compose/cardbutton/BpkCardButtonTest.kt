@@ -39,7 +39,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, fl
         contentDescription = "",
         style = style,
         size = size,
-        onCheckedChange = {}
+        onCheckedChange = {},
       )
     }
   }
@@ -52,7 +52,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, fl
         contentDescription = "",
         style = style,
         size = size,
-        onCheckedChange = {}
+        onCheckedChange = {},
       )
     }
   }
@@ -64,7 +64,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, fl
         contentDescription = "",
         style = style,
         size = size,
-        onClick = {}
+        onClick = {},
       )
     }
   }
@@ -80,7 +80,7 @@ class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, fl
 
 data class Flavor(
   val size: BpkCardButtonSize,
-  val style: BpkCardButtonStyle
+  val style: BpkCardButtonStyle,
 )
 
 @Composable

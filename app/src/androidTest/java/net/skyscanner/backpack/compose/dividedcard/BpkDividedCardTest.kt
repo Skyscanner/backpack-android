@@ -54,7 +54,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
               .fillMaxWidth(),
             painter = painterResource(id = R.drawable.canadian_rockies_canada),
             contentDescription = "",
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
           )
         },
         secondaryContent = {
@@ -62,10 +62,10 @@ class BpkDividedCardTest : BpkSnapshotTest() {
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.divided_card_width_less_than_minimum),
             style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
           )
         },
-        onClick = {}
+        onClick = {},
       )
     }
   }
@@ -82,7 +82,7 @@ class BpkDividedCardTest : BpkSnapshotTest() {
               .fillMaxWidth(),
             painter = painterResource(id = R.drawable.canadian_rockies_canada),
             contentDescription = "",
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
           )
         },
         secondaryContent = {
@@ -90,10 +90,10 @@ class BpkDividedCardTest : BpkSnapshotTest() {
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.divided_card_width_more_than_minimum),
             style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
           )
         },
-        onClick = {}
+        onClick = {},
       )
     }
   }

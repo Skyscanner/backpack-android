@@ -46,20 +46,10 @@ mapping = {
 }
 dirname = os.path.dirname(__file__)
 generate_file(os.path.join(dirname, '../templates/component/Component.kt'), os.path.join(dirname, f'../backpack-compose/src/main/kotlin/net/skyscanner/backpack/compose/{package}/'), f'Bpk{name}.kt', mapping)
+generate_file(os.path.join(dirname, '../templates/component/ComponentAnnotation.kt'), os.path.join(dirname, f'../app/src/main/java/net/skyscanner/backpack/demo/components/'), f'{name}Component.kt', mapping)
 generate_file(os.path.join(dirname, '../templates/component/Story.kt'), os.path.join(dirname, f'../app/src/main/java/net/skyscanner/backpack/demo/compose/'), f'{name}Story.kt', mapping)
 generate_file(os.path.join(dirname, '../templates/component/Test.kt'), os.path.join(dirname, f'../app/src/androidTest/java/net/skyscanner/backpack/compose/{package}/'), f'Bpk{name}Test.kt', mapping)
 generate_file(os.path.join(dirname, '../templates/component/README.md'), os.path.join(dirname, f'../docs/compose/{name}/'), 'README.md', mapping)
-
-print('')
-print('To include the component in the demo app add the following line to the ComponentRegistry.kt COMPONENT list in alphabetic position:')
-print(f'"{name}" composeStory {{ {name}Story() }}')
-print('')
-
-print('To add it to the screenshot generation add the following line to the DocsRegistry.kt screenshots list in alphabetic position:')
-print(f'ComposeScreenshot("{name}", "default")')
-
-print('')
-print('Note: If the component already exists in the view system the guide above will need to be adopted slightly - see CONTRIBUTING.md for details')
 
 print('')
 print('Enjoy building the component!')

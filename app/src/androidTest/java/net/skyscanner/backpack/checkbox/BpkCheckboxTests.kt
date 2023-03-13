@@ -66,5 +66,4 @@ class BpkCheckboxTests : BpkSnapshotTest() {
     checkbox.isChecked = true
     snap(checkbox)
   }
-
 }

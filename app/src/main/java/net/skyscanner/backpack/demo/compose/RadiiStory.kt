@@ -41,10 +41,11 @@ import net.skyscanner.backpack.demo.components.RadiiTokensComponent
 import net.skyscanner.backpack.demo.data.Token
 import net.skyscanner.backpack.demo.data.values
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.meta.StoryKind
 
 @Composable
 @RadiiTokensComponent
-@ComposeStory
+@ComposeStory(kind = StoryKind.DemoOnly)
 fun RadiiComposeStory(modifier: Modifier = Modifier) {
   LazyColumn(modifier) {
     val data: List<Token<Dp>> = BpkBorderRadius.values.sortedBy { it.value }

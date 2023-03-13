@@ -37,7 +37,7 @@ class BpkTextTest : BpkSnapshotTest() {
   @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl, BpkTestVariant.DarkMode)
   fun default() {
     snap {
-        BpkText(text = "Sample")
+      BpkText(text = "Sample")
     }
   }
 

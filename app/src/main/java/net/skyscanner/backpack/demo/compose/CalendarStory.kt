@@ -28,26 +28,28 @@ import net.skyscanner.backpack.compose.calendar.BpkCalendar
 import net.skyscanner.backpack.compose.calendar.rememberCalendarController
 import net.skyscanner.backpack.demo.components.Calendar2Component
 import net.skyscanner.backpack.demo.data.CalendarStorySelection
+import net.skyscanner.backpack.demo.data.CalendarStorySelection.PreselectedRange
 import net.skyscanner.backpack.demo.data.CalendarStoryType
 import net.skyscanner.backpack.demo.meta.ComposeStory
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
 
 @Composable
 @Calendar2Component
-@ComposeStory("Selection Disabled")
+@ComposeStory("Selection Disabled", StoryKind.DemoOnly)
 fun CalendarSelectionDisabledStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionDisabled, modifier)
 
 @Composable
 @Calendar2Component
-@ComposeStory("Selection Single")
+@ComposeStory("Selection Single", StoryKind.DemoOnly)
 fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionSingle, modifier)
 
 @Composable
 @Calendar2Component
-@ComposeStory("Selection Range")
+@ComposeStory("Selection Range", StoryKind.DemoOnly)
 fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.SelectionRange, modifier)
 
@@ -59,7 +61,7 @@ fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
 
 @Composable
 @Calendar2Component
-@ComposeStory("Disabled weekends")
+@ComposeStory("Disabled weekends", StoryKind.DemoOnly)
 fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
   CalendarDemo(CalendarStoryType.WithDisabledDates, modifier)
 
@@ -87,7 +89,8 @@ private fun CalendarDemo(
   LaunchedEffect(type, controller, automationMode) {
     when (type) {
       CalendarStoryType.SelectionWholeMonth -> controller.setSelection(CalendarStorySelection.WholeMonthRange)
-      CalendarStoryType.PreselectedRange -> controller.setSelection(CalendarStorySelection.PreselectedRange)
+      CalendarStoryType.PreselectedRange -> controller.setSelection(PreselectedRange)
+      CalendarStoryType.WithLabels -> controller.setSelection(CalendarStorySelection.PreselectedRange)
       else -> Unit
     }
 

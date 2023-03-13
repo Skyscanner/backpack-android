@@ -28,11 +28,11 @@ import org.jetbrains.annotations.TestOnly
 
 interface StoriesRepository {
 
-  fun uiComponents(): List<Component>
+  val uiComponents: List<Component>
 
-  fun tokenComponents(): List<Component>
+  val tokenComponents: List<Component>
 
-  fun screenshotStories(): List<Story>
+  val screenshotStories: List<Story>
 
   fun storiesOf(component: String, compose: Boolean): List<Story>
 
@@ -42,8 +42,8 @@ interface StoriesRepository {
 
   fun isViewOnly(component: String): Boolean
 
-  @TestOnly
-  fun testStories(): List<Story>
+  @get:TestOnly
+  val testStories: List<Story>
 
   companion object {
 
@@ -53,76 +53,97 @@ interface StoriesRepository {
 
 private object StoriesRepositoryImpl : StoriesRepository {
 
-  private val generatedStories = Story.all()
-  private val testStories = generatedStories.filter { it.component.name == "TestComponent" }
-  private val allStories = generatedStories - testStories
+  private val generatedStories = Story
+    .all()
+    .asSequence()
 
-  private val allComponents = allStories
-    .map { it.component }
-    .distinct()
-    .sortedBy { it.name }
+  override val testStories =
+    generatedStories
+      .filter { it.isTestStory() }
+      .toList()
 
-  override fun uiComponents() = allComponents.filter { !it.isToken }
+  private val stories = generatedStories - testStories.toSet()
 
-  override fun tokenComponents() = allComponents.filter { it.isToken }
+  private val visibleStories = stories
+    .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.DemoOnly }
 
-  override fun screenshotStories() = allStories.filter { it.isScreenshot }
+  override val uiComponents =
+    visibleStories
+      .filter { !it.component.isToken }
+      .map(Story::component)
+      .distinct()
+      .sortedBy(Component::name)
+      .toList()
 
-  private val storiesMap = allStories
-    .groupBy { it.component.name }
-    .filter { (_, stories) -> stories.isNotEmpty() }
+  override val tokenComponents =
+    visibleStories
+      .filter { it.component.isToken }
+      .map(Story::component)
+      .distinct()
+      .sortedBy(Component::name)
+      .toList()
+
+  override val screenshotStories =
+    stories
+      .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.ScreenshotOnly }
+      .toList()
 
   override fun storiesOf(component: String, compose: Boolean): List<Story> =
-    storiesMap.getValue(component)
-      .filter { it.isCompose == compose }
+    visibleStories
+      .filter { it.component.name == component && it.isCompose == compose }
+      .toList()
 
   override fun storyOf(component: String, story: String, compose: Boolean): Story =
-    storiesMap.getValue(component)
-      .first { it.name == story && it.isCompose == compose }
+    stories
+      .filter { it.component.name == component && it.name == story && it.isCompose == compose }
+      .first()
 
   override fun isComposeOnly(component: String): Boolean =
-    storiesMap.getValue(component)
+    visibleStories
+      .filter { it.component.name == component }
       .all { it.isCompose }
 
   override fun isViewOnly(component: String): Boolean =
-    storiesMap.getValue(component)
-      .all { !it.isCompose }
+    visibleStories
+      .filter { it.component.name == component }
+      .none { it.isCompose }
 
-  override fun testStories() = testStories
+  private fun Story.isTestStory() =
+    this.component.name == "TestComponent"
 }
 
 @Component(name = "TestComponent", isToken = true)
 private annotation class TestComponent
 
-@ComposeStory(name = "TestComposeStory", screenshot = false)
+@ComposeStory(name = "TestComposeStory", kind = StoryKind.DemoOnly)
 @TestComponent
 @Composable
 internal fun TestComposeStory(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ViewStory(name = "TestViewStory", screenshot = false)
+@ViewStory(name = "TestViewStory", kind = StoryKind.DemoOnly)
 @TestComponent
 @Composable
 internal fun TestViewStory(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ComposeStory(name = "TestComposeScreenshot", screenshot = true)
+@ComposeStory(name = "TestComposeScreenshot", kind = StoryKind.ScreenshotOnly)
 @TestComponent
 @Composable
 internal fun TestComposeScreenshot(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ComposeStory(screenshot = true)
+@ComposeStory(kind = StoryKind.ScreenshotOnly)
 @TestComponent
 @Composable
 internal fun TestDefaultStory(modifier: Modifier = Modifier) {
   Box(modifier = modifier)
 }
 
-@ViewStory(name = "TestViewScreenshot", screenshot = true)
+@ViewStory(name = "TestViewScreenshot", kind = StoryKind.ScreenshotOnly)
 @TestComponent
 @Composable
 internal fun TestViewScreenshot(modifier: Modifier = Modifier) {

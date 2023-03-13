@@ -48,11 +48,7 @@ fun DividedCardStory(modifier: Modifier = Modifier) {
     verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
   ) {
 
-    val cardModifier = Modifier
-      .fillMaxWidth()
-      .weight(1f)
-
-    DividedCardExample(cardModifier)
+    DividedCardExample(Modifier.fillMaxWidth())
   }
 }
 

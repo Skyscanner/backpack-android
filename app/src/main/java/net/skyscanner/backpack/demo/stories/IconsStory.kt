@@ -21,7 +21,6 @@ package net.skyscanner.backpack.demo.stories
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -78,42 +77,6 @@ internal enum class IconType {
   }, ;
 
   abstract fun matchesName(name: String): Boolean
-}
-
-class IconsFragment : Story() {
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?,
-  ): View? =
-    super.onCreateView(inflater, container, savedInstanceState)?.apply {
-      // we force LTR layout here as we need to show LTR grid alignment with LTR/RTL icons
-      layoutDirection = View.LAYOUT_DIRECTION_LTR
-    }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    val iconsGridView: RecyclerView = view.findViewById(R.id.lst_icons)
-
-    val iconType: IconType = arguments?.getSerializable(ICON_TYPE) as? IconType? ?: IconType.Default
-
-    iconsGridView.layoutManager = GridLayoutManager(context, 10)
-    iconsGridView.adapter = IconsAdapter(
-      fetchAllIcons(requireContext(), iconType),
-      if (isRtl) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR,
-    )
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    internal infix fun of(type: IconType) = IconsFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, R.layout.fragment_all_icons)
-      arguments?.putSerializable(ICON_TYPE, type)
-    }
-  }
 }
 
 private data class BpkIcon(

@@ -29,7 +29,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkNudgerTest : BpkSnapshotTest() {
 
-  private lateinit var nudger : BpkNudger
+  private lateinit var nudger: BpkNudger
 
   @Before
   fun setup() {
@@ -56,5 +56,4 @@ class BpkNudgerTest : BpkSnapshotTest() {
     nudger.maxValue = 10
     snap(nudger)
   }
-
 }

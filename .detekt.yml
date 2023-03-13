@@ -184,7 +184,7 @@ formatting:
     active: true
     autoCorrect: true
     indentSize: 2
-    excludes: [ '**/tokens/**' ]
+    excludes: [ '**/compose/tokens/**' ]
   KdocWrapping:
     active: false
   MaximumLineLength:
@@ -199,11 +199,11 @@ formatting:
   NoBlankLineBeforeRbrace:
     active: true
     autoCorrect: true
-    excludes: [ '**/tokens/**', '**/check/BpkDeprecatedTokens.kt' ]
+    excludes: [ '**/compose/tokens/**', '**/check/BpkDeprecatedTokens.kt' ]
   NoConsecutiveBlankLines:
     active: true
     autoCorrect: true
-    excludes: [ '**/tokens/**' ]
+    excludes: [ '**/compose/tokens/**' ]
   NoEmptyClassBody:
     active: true
     autoCorrect: true
@@ -265,7 +265,7 @@ formatting:
   SpacingAroundParens:
     active: true
     autoCorrect: true
-    excludes: [ '**/tokens/**' ]
+    excludes: [ '**/compose/tokens/**' ]
   SpacingAroundRangeOperator:
     active: true
     autoCorrect: true
@@ -280,7 +280,7 @@ formatting:
     autoCorrect: true
   TrailingCommaOnCallSite:
     active: true
-    excludes: [ '**/tokens/**' ]
+    excludes: [ '**/compose/tokens/**' ]
   TrailingCommaOnDeclarationSite:
     active: true
   TypeArgumentListSpacing:

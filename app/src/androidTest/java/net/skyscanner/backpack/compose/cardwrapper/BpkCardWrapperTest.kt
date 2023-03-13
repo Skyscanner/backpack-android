@@ -61,15 +61,15 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
               .fillMaxWidth(),
             painter = painterResource(id = R.drawable.canadian_rockies_canada),
             contentDescription = "",
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
           )
           BpkText(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.card_wrapper_card),
             style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
           )
-        }
+        },
       )
     }
   }
@@ -97,15 +97,15 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
               .fillMaxWidth(),
             painter = painterResource(id = R.drawable.canadian_rockies_canada),
             contentDescription = "",
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
           )
           BpkText(
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.card_wrapper_card),
             style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
           )
-        }
+        },
       )
     }
   }
@@ -131,9 +131,9 @@ class BpkCardWrapperTest : BpkSnapshotTest() {
             modifier = Modifier.fillMaxWidth(),
             text = stringResource(id = R.string.card_wrapper_card),
             style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
           )
-        }
+        },
       )
     }
   }

@@ -22,76 +22,90 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.widget.Toolbar
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import net.skyscanner.backpack.compose.button.BpkButton
-import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.demo.BpkBaseActivity
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.MapMarkersComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
+import net.skyscanner.backpack.demo.ui.ComponentItem
 import net.skyscanner.backpack.map.addBpkMarker
 import net.skyscanner.backpack.map.getBpkMapAsync
-import net.skyscanner.backpack.util.unsafeLazy
 
 @Composable
 @MapMarkersComponent
-@ViewStory
+@ViewStory(kind = StoryKind.DemoOnly)
 fun MapStory(modifier: Modifier = Modifier) {
   val context = LocalContext.current
-  Column(
-    modifier = modifier.fillMaxSize(),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
-  ) {
-    BpkButton(stringResource(R.string.maps_markers_pointers_only)) {
-      context.openMapStory(MapFragment.Type.PointersOnly)
-    }
-    BpkButton(stringResource(R.string.maps_markers_badges)) {
-      context.openMapStory(MapFragment.Type.Badges)
-    }
-    BpkButton(stringResource(R.string.maps_markers_badges_with_icons)) {
-      context.openMapStory(MapFragment.Type.Badges)
+  val values = remember { MapActivity.Type.values().toList() }
+
+  LazyColumn(modifier.fillMaxSize()) {
+    items(values) {
+      ComponentItem(
+        title = when (it) {
+          MapActivity.Type.PointersOnly -> stringResource(R.string.maps_markers_pointers_only)
+          MapActivity.Type.Badges -> stringResource(R.string.maps_markers_badges)
+          MapActivity.Type.BadgesWithIcons -> stringResource(R.string.maps_markers_badges_with_icons)
+        },
+        onClick = { context.startActivity(MapActivity.of(context, it)) },
+      )
     }
   }
 }
 
-private fun Context.openMapStory(type: MapFragment.Type) =
-  startActivity(
-    Intent(this, MapActivity::class.java)
-      .putExtra(MapActivity.EXTRA_TYPE, type),
-  )
-
 class MapActivity : BpkBaseActivity() {
 
-  companion object {
-    const val EXTRA_TYPE = "type"
+  enum class Type {
+    PointersOnly,
+    Badges,
+    BadgesWithIcons,
   }
-
-  private val detailToolbar by unsafeLazy { findViewById<Toolbar>(R.id.detail_toolbar) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_component_detail)
-    setSupportActionBar(detailToolbar)
+    setContentView(R.layout.activity_map)
+    setSupportActionBar(findViewById(R.id.detail_toolbar))
     supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    setTitle(R.string.map_markers)
+
+    val type = intent.getSerializableExtra(EXTRA_TYPE) as Type
+    val context = this
 
     if (savedInstanceState == null) {
-      val type = intent.getSerializableExtra(EXTRA_TYPE) as MapFragment.Type
-      supportFragmentManager.beginTransaction()
-        .add(R.id.component_detail_container, MapFragment.of(type))
-        .commit()
+      supportFragmentManager
+        .findFragmentById(R.id.map_fragment)
+        .let { it as SupportMapFragment }
+        .getBpkMapAsync {
+          it.addBpkMarker(
+            context = context,
+            position = LatLng(45.0, 0.0),
+            title = "Badge 1",
+            icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+            pointerOnly = type == Type.PointersOnly,
+          )
+          it.addBpkMarker(
+            context = context,
+            position = LatLng(0.0, 0.0),
+            title = "Badge 2",
+            icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+            pointerOnly = type == Type.PointersOnly,
+          )
+          it.addBpkMarker(
+            context = context,
+            position = LatLng(-45.0, 0.0),
+            title = "Badge 3",
+            icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
+            pointerOnly = type == Type.PointersOnly,
+          )
+        }
     }
   }
 
@@ -101,54 +115,13 @@ class MapActivity : BpkBaseActivity() {
     }
     return super.onOptionsItemSelected(item)
   }
-}
-
-class MapFragment : Story() {
-
-  enum class Type {
-    PointersOnly,
-    Badges,
-    BadgesWithIcons,
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-    val context = requireContext()
-    val type = arguments?.getSerializable(TYPE) as Type
-    mapFragment.getBpkMapAsync {
-      it.addBpkMarker(
-        context = context,
-        position = LatLng(45.0, 0.0),
-        title = "Badge 1",
-        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-        pointerOnly = type == Type.PointersOnly,
-      )
-      it.addBpkMarker(
-        context = context,
-        position = LatLng(0.0, 0.0),
-        title = "Badge 2",
-        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-        pointerOnly = type == Type.PointersOnly,
-      )
-      it.addBpkMarker(
-        context = context,
-        position = LatLng(-45.0, 0.0),
-        title = "Badge 3",
-        icon = if (type == Type.BadgesWithIcons) R.drawable.bpk_city else 0,
-        pointerOnly = type == Type.PointersOnly,
-      )
-    }
-  }
 
   companion object {
-    private const val TYPE = "type"
 
-    infix fun of(type: Type) = MapFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, R.layout.fragment_map)
-      arguments?.putBoolean(SCROLLABLE, false)
-      arguments?.putSerializable(TYPE, type)
-    }
+    private const val EXTRA_TYPE = "type"
+
+    fun of(context: Context, type: Type): Intent =
+      Intent(context, MapActivity::class.java)
+        .putExtra(EXTRA_TYPE, type)
   }
 }

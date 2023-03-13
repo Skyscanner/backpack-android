@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -28,12 +26,15 @@ import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.ToastComponent
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
+import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 import net.skyscanner.backpack.toast.BpkToast
 
 @Composable
 @ToastComponent
 @ViewStory
-fun ToastStory(modifier: Modifier = Modifier) =
+fun ToastStory(modifier: Modifier = Modifier) {
+  val automationMode = LocalAutomationMode.current
+
   AndroidLayout(R.layout.fragment_toasts, modifier.fillMaxSize()) {
     findViewById<TextView>(R.id.toast_short).setOnClickListener {
       it as TextView
@@ -44,30 +45,9 @@ fun ToastStory(modifier: Modifier = Modifier) =
       it as TextView
       BpkToast.makeText(context, it.text, BpkToast.LENGTH_LONG).show()
     }
-  }
 
-class ToastFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    view.findViewById<TextView>(R.id.toast_short).setOnClickListener {
-      it as TextView
-      BpkToast.makeText(requireActivity(), it.text, BpkToast.LENGTH_SHORT).show()
-    }
-
-    view.findViewById<TextView>(R.id.toast_long).setOnClickListener {
-      it as TextView
-      BpkToast.makeText(requireActivity(), it.text, BpkToast.LENGTH_LONG).show()
-    }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = ToastFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
+    if (automationMode) {
+      findViewById<TextView>(R.id.toast_short).performClick()
     }
   }
 }
