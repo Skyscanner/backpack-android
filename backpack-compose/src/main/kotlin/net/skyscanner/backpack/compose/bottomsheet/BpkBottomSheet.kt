@@ -34,9 +34,8 @@ import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomSheetScaffoldDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Surface
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -63,14 +62,14 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 import net.skyscanner.backpack.compose.utils.nestedScrollFixedSwipeable
 import kotlin.math.roundToInt
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkBottomSheet(
   sheetContent: @Composable ColumnScope.(PaddingValues) -> Unit,
   modifier: Modifier = Modifier,
   state: BpkBottomSheetState = rememberBpkBottomSheetState(BpkBottomSheetValue.Collapsed),
   sheetGesturesEnabled: Boolean = true,
-  peekHeight: Dp = BottomSheetScaffoldDefaults.SheetPeekHeight,
+  peekHeight: Dp = 56.dp, // todo: replacing the value with the constant?
   content: @Composable (PaddingValues) -> Unit,
 ) {
 
@@ -98,7 +97,7 @@ fun BpkBottomSheet(
         .onGloballyPositioned { bottomSheetHeight = it.size.height.toFloat() }
         .offset { IntOffset(0, state.wrapped.offset.value.roundToInt()) },
       shape = RoundedCornerShape(topStart = radius, topEnd = radius),
-      elevation = BpkElevation.Lg,
+      shadowElevation = BpkElevation.Lg, // todo: shadow or tonal elevation?
       color = BpkTheme.colors.surfaceElevated,
       contentColor = BpkTheme.colors.textPrimary,
       content = {
@@ -117,7 +116,7 @@ fun BpkBottomSheet(
   }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 private fun Modifier.bottomSheetSwipeable(
   state: BpkBottomSheetState,
   fullHeight: Float,
