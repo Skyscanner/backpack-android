@@ -19,9 +19,8 @@
 package net.skyscanner.backpack.compose.icon
 
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -63,7 +62,7 @@ fun BpkIcon(
   contentDescription: String?,
   modifier: Modifier = Modifier,
   size: BpkIconSize = LocalBpkIconSize.current,
-  tint: Color = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+  tint: Color = LocalContentColor.current, // todo: alpha was removed
 ) {
   Icon(
     painter = painterResource(id = icon[size]),
