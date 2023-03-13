@@ -22,9 +22,8 @@ import android.icu.text.DecimalFormat
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.LocalTextStyle
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -88,10 +87,10 @@ internal fun BpkRatingTitle(
   modifier: Modifier = Modifier,
   content: @Composable () -> Unit,
 ) {
+  // todo: local content alpha was removed
   CompositionLocalProvider(
     LocalTextStyle provides BpkTheme.typography.heading5,
     LocalContentColor provides BpkTheme.colors.textPrimary,
-    LocalContentAlpha provides 1f,
   ) {
     Box(
       modifier = modifier.heightIn(max = BpkSpacing.Lg),
