@@ -250,7 +250,6 @@
   <string name="bar_chart_accessibility_label">%1$s the %2$s of %3$s, price is %4$s</string>
   <string name="bar_chart_accessibility_label_price_is_unknown">%1$s the %2$s of %3$s, price is unknown</string>
   <string name="divider_no_indent">No indent</string>
-  <string name="divider_indent">With indent</string>
   <string name="divided_card_width_more_than_minimum"><![CDATA[Card width >= 240 Dp]]></string>
   <string name="divided_card_width_less_than_minimum"><![CDATA[Card width < 240 Dp]]></string>
   <string name="divided_card_empty_card">Empty Card</string>

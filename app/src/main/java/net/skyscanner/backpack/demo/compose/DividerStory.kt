@@ -44,23 +44,10 @@ fun DividerStory(modifier: Modifier = Modifier) {
       )
       DividerSampleNoIndent()
     }
-
-    Column {
-      BpkText(
-        text = stringResource(R.string.divider_indent),
-        modifier = Modifier.padding(BpkSpacing.Base),
-      )
-      DividerSample_WithIndent()
-    }
   }
 }
 
 @Composable
 internal fun DividerSampleNoIndent(modifier: Modifier = Modifier) {
   BpkDivider(modifier = modifier)
-}
-
-@Composable
-internal fun DividerSample_WithIndent(modifier: Modifier = Modifier) {
-  BpkDivider(modifier = modifier, startIndent = BpkSpacing.Base)
 }
