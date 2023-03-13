@@ -48,6 +48,24 @@ enum class BpkOverlayType {
   Vignette,
 }
 
+@Composable
+fun BpkOverlay(
+  modifier: Modifier = Modifier,
+  overlayType: BpkOverlayType = BpkOverlayType.SolidHigh,
+  foregroundContent: (@Composable BoxScope.() -> Unit)? = null,
+  content: @Composable BoxScope.() -> Unit,
+) {
+  Box(
+    modifier = modifier,
+  ) {
+    content()
+    Overlay(overlayType = overlayType)
+    if (foregroundContent != null) {
+      foregroundContent()
+    }
+  }
+}
+
 private enum class GradientLevel {
   Low,
   Medium,
@@ -110,24 +128,6 @@ private fun BpkOverlayType.toDirection(layoutDirection: LayoutDirection): Gradie
     -> if (layoutDirection == LayoutDirection.Ltr) GradientDirection.Right else GradientDirection.Left
     BpkOverlayType.Vignette -> GradientDirection.Vignette
   }
-
-@Composable
-fun BpkOverlay(
-  modifier: Modifier = Modifier,
-  overlayType: BpkOverlayType = BpkOverlayType.SolidHigh,
-  foregroundContent: (@Composable BoxScope.() -> Unit)? = null,
-  content: @Composable BoxScope.() -> Unit,
-) {
-  Box(
-    modifier = modifier,
-  ) {
-    content()
-    Overlay(overlayType = overlayType)
-    if (foregroundContent != null) {
-      foregroundContent()
-    }
-  }
-}
 
 @Composable
 private fun BoxScope.Overlay(
