@@ -19,21 +19,16 @@
 package net.skyscanner.backpack.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.Colors
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalElevationOverlay
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Shapes
-import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import net.skyscanner.backpack.compose.tokens.BpkColors
 import net.skyscanner.backpack.compose.tokens.BpkShapes
 import net.skyscanner.backpack.compose.tokens.BpkTypography
@@ -57,22 +52,16 @@ fun BpkTheme(
   val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
   val shapes = BpkShapes()
 
-  MaterialTheme(
-    typography = typography.toMaterialTypography(fontFamily),
-    colors = colors.toMaterialColors(),
-    shapes = shapes.toMaterialShapes(),
-  ) {
-    CompositionLocalProvider(
-      LocalBpkTypography provides typography,
-      LocalBpkColors provides colors,
-      LocalBpkShapes provides shapes,
-      LocalContentColor provides colors.textPrimary,
-      LocalElevationOverlay provides null,
-      LocalTextStyle provides typography.bodyDefault,
-      LocalContentAlpha provides 1f,
-      content = content,
-    )
-  }
+  CompositionLocalProvider(
+    LocalBpkTypography provides typography,
+    LocalBpkColors provides colors,
+    LocalBpkShapes provides shapes,
+    LocalContentColor provides colors.textPrimary,
+    LocalElevationOverlay provides null,
+    LocalTextStyle provides typography.bodyDefault,
+    LocalContentAlpha provides 1f,
+    content = content,
+  )
 }
 
 object BpkTheme {
@@ -110,45 +99,3 @@ object BpkTheme {
       LocalBpkShapes.current
     }
 }
-
-private fun BpkTypography.toMaterialTypography(fontFamily: FontFamily): Typography =
-  Typography(
-    defaultFontFamily = fontFamily,
-    h1 = hero2,
-    h2 = hero4,
-    h3 = hero5,
-    h4 = heading2,
-    h5 = heading3,
-    h6 = heading4,
-    subtitle1 = bodyDefault,
-    subtitle2 = footnote,
-    body1 = bodyDefault,
-    body2 = footnote,
-    button = label2,
-    caption = caption,
-    overline = caption.copy(fontWeight = FontWeight.Bold),
-  )
-
-private fun BpkColors.toMaterialColors(): Colors =
-  Colors(
-    primary = corePrimary,
-    primaryVariant = corePrimary,
-    secondary = coreAccent,
-    secondaryVariant = coreAccent,
-    background = canvas,
-    surface = surfaceDefault,
-    error = textError,
-    onPrimary = textOnDark,
-    onSecondary = textPrimaryInverse,
-    onBackground = textPrimary,
-    onSurface = textPrimary,
-    onError = textOnDark,
-    isLight = isLight,
-  )
-
-private fun BpkShapes.toMaterialShapes(): Shapes =
-  Shapes(
-    small = small,
-    medium = medium,
-    large = large,
-  )
