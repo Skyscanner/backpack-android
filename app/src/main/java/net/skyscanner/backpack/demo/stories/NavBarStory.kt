@@ -18,13 +18,13 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.NavBarComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
 import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.navbar.BpkNavBar
@@ -38,7 +38,15 @@ fun NavBarStoryDefault(modifier: Modifier = Modifier) =
 
 @Composable
 @NavBarComponent
-@ViewStory("With Icon")
+@ViewStory("Collapsed", StoryKind.ScreenshotOnly)
+fun NavBarStoryCollapsed(modifier: Modifier = Modifier) =
+  NavBarDemo(R.layout.fragment_nav_bar, modifier) {
+    setExpanded(false)
+  }
+
+@Composable
+@NavBarComponent
+@ViewStory("With Icon", StoryKind.DemoOnly)
 fun NavBarStoryWithIcon(modifier: Modifier = Modifier) =
   NavBarDemo(R.layout.fragment_nav_bar_with_icon, modifier)
 
@@ -46,12 +54,15 @@ fun NavBarStoryWithIcon(modifier: Modifier = Modifier) =
 @NavBarComponent
 @ViewStory("With Menu")
 fun NavBarStoryWithMenu(modifier: Modifier = Modifier) =
-  NavBarDemo(R.layout.fragment_nav_bar_with_menu, modifier)
+  NavBarDemo(R.layout.fragment_nav_bar_with_menu, modifier) {
+    setExpanded(false)
+  }
 
 @Composable
 private fun NavBarDemo(
   @LayoutRes layoutId: Int,
   modifier: Modifier = Modifier,
+  init: BpkNavBar.() -> Unit = {},
 ) =
   AndroidLayout<BpkNavBar>(layoutId, R.id.appBar, modifier) {
     title = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
@@ -69,37 +80,5 @@ private fun NavBarDemo(
         BpkToast.LENGTH_SHORT,
       ).show()
     }
+    init()
   }
-
-class NavBarFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    val navBar = view.findViewById<BpkNavBar>(R.id.appBar)
-    navBar.title = if (view.layoutDirection == View.LAYOUT_DIRECTION_RTL) {
-      "عنوان الصفحة"
-    } else {
-      "Nav Bar"
-    }
-    navBar.navAction = {
-      BpkToast.makeText(requireContext(), "Nav is clicked!", BpkToast.LENGTH_SHORT).show()
-    }
-    navBar.menuAction = {
-      BpkToast.makeText(
-        requireContext(),
-        "${it.itemId.let(resources::getResourceEntryName)} is clicked!",
-        BpkToast.LENGTH_SHORT,
-      ).show()
-    }
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = NavBarFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-      arguments?.putBoolean(SCROLLABLE, false)
-    }
-  }
-}

@@ -20,18 +20,23 @@ package net.skyscanner.backpack.demo.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.Modifier
 import net.skyscanner.backpack.compose.${package}.Bpk$name
+import net.skyscanner.backpack.demo.components.${name}Component
+import net.skyscanner.backpack.demo.meta.ComposeStory
 
 @Composable
-fun ${name}Story() {
-  Column {
+@${name}Component
+@ComposeStory
+fun ${name}Story(modifier: Modifier = Modifier) {
+  Column(modifier) {
     Default${name}Sample()
   }
 }
 
 @Composable
-@Preview
-fun Default${name}Sample() {
-  Bpk${name}()
+internal fun Default${name}Sample(modifier: Modifier = Modifier) {
+  Bpk${name}(
+    modifier = modifier,
+  )
 }

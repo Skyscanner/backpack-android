@@ -26,6 +26,7 @@ import com.google.devtools.ksp.visitor.KSDefaultVisitor
 import net.skyscanner.backpack.ksp.AnnotationDefinition
 import net.skyscanner.backpack.ksp.AnnotationParam
 import net.skyscanner.backpack.ksp.ComponentDefinition
+import net.skyscanner.backpack.ksp.EnumValue
 import net.skyscanner.backpack.ksp.StoryDefinition
 import net.skyscanner.backpack.ksp.find
 import net.skyscanner.backpack.ksp.get
@@ -33,7 +34,7 @@ import net.skyscanner.backpack.ksp.get
 sealed class AbstractStoriesVisitor(
   private val annotationDefinition: AnnotationDefinition,
   private val paramName: AnnotationParam<String>,
-  private val paramScreenshot: AnnotationParam<Boolean>,
+  private val paramKind: AnnotationParam<EnumValue>,
   private val isCompose: Boolean,
 ) : KSDefaultVisitor<Map<KSName, ComponentDefinition>, StoryDefinition?>() {
 
@@ -50,7 +51,7 @@ sealed class AbstractStoriesVisitor(
         component = componentAnnotation ?: error("No component definition is found!"),
         name = annotation[paramName],
         isCompose = isCompose,
-        isScreenshot = annotation[paramScreenshot],
+        kind = annotation[paramKind],
         reference = function.qualifiedName!!.asString(),
         location = location,
       )

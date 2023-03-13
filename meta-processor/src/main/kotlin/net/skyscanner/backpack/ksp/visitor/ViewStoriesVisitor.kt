@@ -23,6 +23,6 @@ import net.skyscanner.backpack.ksp.ViewStoryAnnotation
 object ViewStoriesVisitor : AbstractStoriesVisitor(
   annotationDefinition = ViewStoryAnnotation,
   paramName = ViewStoryAnnotation.paramName,
-  paramScreenshot = ViewStoryAnnotation.paramScreenshot,
+  paramKind = ViewStoryAnnotation.paramKind,
   isCompose = false,
 )

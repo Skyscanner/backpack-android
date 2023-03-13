@@ -18,8 +18,6 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.os.Bundle
-import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -42,29 +40,6 @@ fun HorizontalNavStory(modifier: Modifier = Modifier) =
     init(findViewById(R.id.horizontal_nav_rtl))
     init(findViewById(R.id.horizontal_nav_icons))
   }
-
-class HorizontalNavFragment : Story() {
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-
-    init(view.findViewById(R.id.horizontal_nav))
-    init(view.findViewById(R.id.horizontal_nav_scrollable))
-    init(view.findViewById(R.id.horizontal_nav_small))
-    init(view.findViewById(R.id.horizontal_nav_alternate))
-    init(view.findViewById(R.id.horizontal_nav_rtl))
-    init(view.findViewById(R.id.horizontal_nav_icons))
-  }
-
-  companion object {
-    private const val LAYOUT_ID = "fragment_id"
-
-    infix fun of(fragmentLayout: Int) = HorizontalNavFragment().apply {
-      arguments = Bundle()
-      arguments?.putInt(LAYOUT_ID, fragmentLayout)
-    }
-  }
-}
 
 private fun init(horizontalNav: BpkHorizontalNav) {
   horizontalNav.addTab("Flights", R.drawable.bpk_flight_sm)

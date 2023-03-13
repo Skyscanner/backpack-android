@@ -18,68 +18,23 @@
 
 package net.skyscanner.backpack.demo.stories
 
-import android.app.Activity
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.content.Context
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import androidx.core.view.forEach
 import com.squareup.picasso.Picasso
 import net.skyscanner.backpack.demo.R
 import net.skyscanner.backpack.demo.components.DialogComponent
+import net.skyscanner.backpack.demo.meta.StoryKind
 import net.skyscanner.backpack.demo.meta.ViewStory
-import net.skyscanner.backpack.demo.ui.AndroidLayout
 import net.skyscanner.backpack.dialog.BpkDialog
 
 @Composable
 @DialogComponent
-@ViewStory
-fun DialogStory(modifier: Modifier = Modifier) {
-  val activity = LocalContext.current as Activity
-  AndroidLayout(R.layout.fragment_dialog, modifier) {
-    findViewById<ViewGroup>(R.id.dialog_root).forEach { buttonView ->
-      buttonView.setOnClickListener {
-        activity.handleOnClick(buttonView)
-      }
-    }
-  }
-}
-
-class DialogFragment : Story() {
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?,
-  ): View? = inflater.inflate(R.layout.fragment_dialog, container, false)
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    view.findViewById<ViewGroup>(R.id.dialog_root).forEach { buttonView ->
-      buttonView.setOnClickListener {
-        requireActivity().handleOnClick(buttonView)
-      }
-    }
-  }
-}
-
-private fun Activity.handleOnClick(view: View) {
-  when (view.id) {
-    R.id.dialog_success_one_button -> successOneButtonDialogExample()
-    R.id.dialog_success_two_buttons -> successTwoButtonsDialogExample()
-    R.id.dialog_success_three_buttons -> successThreeButtonsDialogExample()
-    R.id.dialog_warning -> warningDialogExample()
-    R.id.dialog_destructive -> destructiveDialogExample()
-    R.id.dialog_no_icon -> noIconDialogExample()
-    R.id.dialog_long_text -> longDialogExample()
-    R.id.dialog_flare -> flareDialogExample()
-  }
-}
-
-private fun Activity.successOneButtonDialogExample() {
+@ViewStory("Success One Button", StoryKind.DemoOnly)
+internal fun SuccessOneButtonDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
@@ -89,10 +44,16 @@ private fun Activity.successOneButtonDialogExample() {
         dismiss()
       },
     )
+    setOnDismissListener {
+      onDismiss()
+    }
   }.show()
 }
 
-private fun Activity.successTwoButtonsDialogExample() {
+@Composable
+@DialogComponent
+@ViewStory("Success Two Buttons", StoryKind.DemoOnly)
+internal fun SuccessTwoButtonsDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
@@ -107,10 +68,16 @@ private fun Activity.successTwoButtonsDialogExample() {
         dismiss()
       },
     )
+    setOnDismissListener {
+      onDismiss()
+    }
   }.show()
 }
 
-private fun Activity.successThreeButtonsDialogExample() {
+@Composable
+@DialogComponent
+@ViewStory("Success Three Buttons")
+internal fun SuccessThreeButtonsDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
@@ -130,10 +97,16 @@ private fun Activity.successThreeButtonsDialogExample() {
         dismiss()
       },
     )
+    setOnDismissListener {
+      onDismiss()
+    }
   }.show()
 }
 
-private fun Activity.warningDialogExample() {
+@Composable
+@DialogComponent
+@ViewStory("Warning", StoryKind.DemoOnly)
+internal fun WarningDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Warning).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
@@ -153,10 +126,16 @@ private fun Activity.warningDialogExample() {
         dismiss()
       },
     )
+    setOnDismissListener {
+      onDismiss()
+    }
   }.show()
 }
 
-private fun Activity.destructiveDialogExample() {
+@Composable
+@DialogComponent
+@ViewStory("Destructive")
+internal fun DestructiveDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Destructive).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
@@ -171,10 +150,16 @@ private fun Activity.destructiveDialogExample() {
         dismiss()
       },
     )
+    setOnDismissListener {
+      onDismiss()
+    }
   }.show()
 }
 
-private fun Activity.longDialogExample() {
+@Composable
+@DialogComponent
+@ViewStory("Long text", StoryKind.DemoOnly)
+internal fun LongDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.stub).repeat(3)
@@ -188,10 +173,16 @@ private fun Activity.longDialogExample() {
         dismiss()
       },
     )
+    setOnDismissListener {
+      onDismiss()
+    }
   }.show()
 }
 
-private fun Activity.noIconDialogExample() {
+@Composable
+@DialogComponent
+@ViewStory("No Icon", StoryKind.DemoOnly)
+internal fun NoIconDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Success).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
@@ -205,10 +196,16 @@ private fun Activity.noIconDialogExample() {
         dismiss()
       },
     )
+    setOnDismissListener {
+      onDismiss()
+    }
   }.show()
 }
 
-private fun Activity.flareDialogExample() {
+@Composable
+@DialogComponent
+@ViewStory("Flare")
+internal fun FlareDialogExample() = DialogDemo { onDismiss ->
   BpkDialog(this, BpkDialog.Type.Flare).apply {
     title = context.getString(R.string.dialog_title)
     description = context.getString(R.string.dialog_text)
@@ -224,5 +221,25 @@ private fun Activity.flareDialogExample() {
         dismiss()
       },
     )
+    setOnDismissListener {
+      onDismiss()
+    }
   }.show()
+}
+
+@Composable
+private fun DialogDemo(
+  content: Context.(onDismiss: () -> Unit) -> Unit,
+) {
+
+  val dispatcher = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
+
+  @Suppress("SuspiciousCallableReferenceInLambda")
+  val onDismiss: () -> Unit = remember(dispatcher) { dispatcher::onBackPressed }
+
+  val context = LocalContext.current
+
+  LaunchedEffect(context, onDismiss, content) {
+    context.content(onDismiss)
+  }
 }

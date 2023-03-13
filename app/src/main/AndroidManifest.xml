@@ -21,7 +21,7 @@
               <category android:name="android.intent.category.LAUNCHER" />
           </intent-filter>
       </activity>
-    <activity android:name=".ComponentDetailActivity" />
+    <activity android:name=".BpkBaseActivity" />
     <activity android:name=".SettingsActivity" />
     <activity android:name=".stories.MapActivity" />
     <activity android:name="androidx.appcompat.app.AppCompatActivity" />

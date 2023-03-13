@@ -23,7 +23,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -77,7 +76,7 @@ fun CollapsibleNavBarStory(
   showList: Boolean = true,
   showActions: Boolean = true,
   showNav: Boolean = true,
-  insets: WindowInsets = WindowInsets.statusBars,
+  insets: WindowInsets? = null,
 ) {
   val state = rememberTopAppBarState(initialStatus)
   Column(modifier.nestedScroll(state)) {
@@ -119,7 +118,12 @@ fun CollapsibleNavBarStory(
 
 @Composable
 internal fun NoNavIconTopNavBar(modifier: Modifier = Modifier) {
-  BpkTopNavBar(navIcon = NavIcon.None, title = stringResource(R.string.navigation_bar_title), modifier = modifier)
+  BpkTopNavBar(
+    navIcon = NavIcon.None,
+    title = stringResource(R.string.navigation_bar_title),
+    modifier = modifier,
+    insets = null,
+  )
 }
 
 @Composable
@@ -128,6 +132,7 @@ internal fun BackTopNavBar(modifier: Modifier = Modifier) {
     title = stringResource(R.string.navigation_bar_title),
     navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {},
     modifier = modifier,
+    insets = null,
   )
 }
 
@@ -137,6 +142,7 @@ internal fun CloseTopNavBar(modifier: Modifier = Modifier) {
     title = stringResource(R.string.navigation_bar_title),
     navIcon = NavIcon.Close(contentDescription = stringResource(R.string.navigation_close)) {},
     modifier = modifier,
+    insets = null,
   )
 }
 
@@ -151,6 +157,7 @@ internal fun ActionsTopNavBar(modifier: Modifier = Modifier) {
       IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
     ),
     modifier = modifier,
+    insets = null,
   )
 }
 
@@ -161,5 +168,6 @@ internal fun TextActionTopNavBar(modifier: Modifier = Modifier) {
     title = stringResource(R.string.navigation_bar_title),
     action = TextAction(text = stringResource(R.string.navigation_text_action)) {},
     modifier = modifier,
+    insets = null,
   )
 }

@@ -82,7 +82,7 @@ fun ComponentListScreen(
       item {
         ComponentsTitle(title = stringResource(R.string.tokens_title))
       }
-      items(repository.tokenComponents()) { component ->
+      items(repository.tokenComponents) { component ->
         ComponentItem(
           title = component.name,
           onClick = { navigator.navigate(ComponentScreenDestination(component.name)) },
@@ -92,7 +92,7 @@ fun ComponentListScreen(
       item {
         ComponentsTitle(title = stringResource(R.string.components_title))
       }
-      items(repository.uiComponents()) { component ->
+      items(repository.uiComponents) { component ->
         val composeOnly = repository.isComposeOnly(component.name)
         val viewOnly = repository.isViewOnly(component.name)
         ComponentItem(

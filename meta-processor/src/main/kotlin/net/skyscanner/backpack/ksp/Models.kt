@@ -32,7 +32,7 @@ data class StoryDefinition(
   val component: ComponentDefinition,
   val name: String,
   val isCompose: Boolean,
-  val isScreenshot: Boolean,
+  val kind: EnumValue,
   val reference: String,
   val location: FileLocation,
 )
