@@ -108,12 +108,12 @@ object BpkTheme {
 
 private fun BpkColors.toMaterialColors(mdColors: Colors): Colors =
   mdColors.copy(
-    primary = corePrimary,
-    primaryVariant = corePrimary,
-    secondary = coreAccent,
-    secondaryVariant = coreAccent,
-    background = canvas,
-    surface = surfaceDefault,
+//    primary = corePrimary,
+//    primaryVariant = corePrimary,
+//    secondary = coreAccent,
+//    secondaryVariant = coreAccent,
+//    background = canvas,
+//    surface = surfaceDefault,
 //    error = textError,
 //    onPrimary = textOnDark,
 //    onSecondary = textPrimaryInverse,
