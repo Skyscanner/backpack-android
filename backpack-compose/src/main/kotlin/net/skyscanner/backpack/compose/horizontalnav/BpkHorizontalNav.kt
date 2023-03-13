@@ -21,13 +21,13 @@ package net.skyscanner.backpack.compose.horizontalnav
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.TabRowDefaults
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import net.skyscanner.backpack.compose.divider.BpkDivider
 import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.text.BpkText
 import net.skyscanner.backpack.compose.theme.BpkTheme
@@ -53,11 +53,11 @@ fun BpkHorizontalNav(
 ) {
   TabRow(
     contentColor = BpkTheme.colors.textLink,
-    backgroundColor = BpkTheme.colors.surfaceDefault,
+    containerColor = BpkTheme.colors.surfaceDefault,
     selectedTabIndex = activeIndex,
     divider = {
       if (BpkTheme.colors.isLight) {
-        TabRowDefaults.Divider(color = BpkTheme.colors.line)
+        BpkDivider() // todo: check the divider
       }
     },
     modifier = modifier.height(
