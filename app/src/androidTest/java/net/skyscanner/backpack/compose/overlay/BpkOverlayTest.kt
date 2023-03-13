@@ -20,18 +20,22 @@ package net.skyscanner.backpack.compose.overlay
 
 import net.skyscanner.backpack.compose.BpkSnapshotTest
 import net.skyscanner.backpack.demo.compose.DefaultOverlaySample
-import net.skyscanner.backpack.demo.compose.WithTextOverlaySample
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.Parameterized
 
-class BpkOverlayTest : BpkSnapshotTest() {
+@RunWith(Parameterized::class)
+class BpkOverlayTest(private val overlayType: BpkOverlayType) : BpkSnapshotTest(listOf(overlayType)) {
 
   @Test
-  fun defaultOverlay() = snap {
-    DefaultOverlaySample(overlayType = BpkOverlayType.SolidHigh)
+  fun default() = snap {
+    DefaultOverlaySample(overlayType = overlayType)
   }
 
-  @Test
-  fun withTextOverlay() = snap {
-    WithTextOverlaySample(overlayType = BpkOverlayType.LeftHigh)
+  companion object {
+    @JvmStatic
+    @Parameterized.Parameters(name = "{0} Screenshot")
+    fun overlayTypes(): List<BpkOverlayType> =
+      BpkOverlayType.values().toList()
   }
 }
