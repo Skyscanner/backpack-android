@@ -23,7 +23,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,8 +44,13 @@ fun BpkCardWrapper(
   elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
   Card(
-    modifier = modifier.fillMaxWidth().border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner)),
-    backgroundColor = backgroundColor,
+    modifier = modifier
+      .fillMaxWidth()
+      .border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner)),
+    colors = CardDefaults.cardColors(
+      containerColor = backgroundColor,
+      disabledContainerColor = backgroundColor, // todo: this ignores the disabled state and content color
+    ),
     shape = cardShape(corner),
   ) {
     Column {
