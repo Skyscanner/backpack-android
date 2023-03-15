@@ -23,9 +23,13 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.isUnspecified
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.clipRect
+import androidx.compose.ui.graphics.drawscope.scale
 import androidx.compose.ui.unit.LayoutDirection
+import kotlin.math.hypot
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 enum class BpkOverlayType {
@@ -101,7 +105,7 @@ private fun BpkOverlayType.toGradientlevel(): GradientLevel =
     BpkOverlayType.LeftHigh,
     BpkOverlayType.RightHigh,
     -> GradientLevel.High
-    BpkOverlayType.Vignette -> GradientLevel.High
+    BpkOverlayType.Vignette -> GradientLevel.Vignette
   }
 
 private fun BpkOverlayType.toDirection(layoutDirection: LayoutDirection): GradientDirection =
@@ -143,6 +147,20 @@ private fun BoxScope.Overlay(
         val level = overlayType.toGradientlevel()
         val brush = direction.toBrush(gradientLevel = level, color = gradientColor)
         onDrawBehind {
+          if (overlayType == BpkOverlayType.Vignette) {
+            if (size.isUnspecified || size.isEmpty()) {
+              return@onDrawBehind
+            }
+            val diagonal = hypot(x = size.width, y = size.height)
+            val scaleFactor = diagonal / size.minDimension
+            clipRect {
+              scale(scaleFactor) {
+                drawRect(brush)
+              }
+            }
+          } else {
+            drawRect(brush)
+          }
         }
       },
   )
