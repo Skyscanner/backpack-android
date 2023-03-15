@@ -28,6 +28,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import net.skyscanner.backpack.compose.card.BpkCard
 import net.skyscanner.backpack.compose.card.BpkCardCorner
 import net.skyscanner.backpack.compose.card.BpkCardElevation
@@ -51,6 +52,7 @@ fun BpkCardWrapper(
       containerColor = backgroundColor,
       disabledContainerColor = backgroundColor, // todo: this ignores the disabled state and content color
     ),
+    elevation = CardDefaults.cardElevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
     shape = cardShape(corner),
   ) {
     Column {

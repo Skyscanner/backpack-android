@@ -27,7 +27,7 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 @Composable
 fun BpkDivider(
   modifier: Modifier = Modifier,
-) {
+) { // todo: breaking API change
   Divider(
     modifier = modifier,
     color = BpkTheme.colors.line,
