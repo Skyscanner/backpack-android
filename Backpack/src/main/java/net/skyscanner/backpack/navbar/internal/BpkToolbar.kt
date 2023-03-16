@@ -23,7 +23,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.ContextThemeWrapper
 import android.view.Menu
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.resolveThemeId
 
@@ -31,7 +31,7 @@ internal class BpkToolbar @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
-) : Toolbar(ContextThemeWrapper(context, resolveThemeId(context, R.attr.toolbarStyle)), attrs, defStyleAttr) {
+) : MaterialToolbar(ContextThemeWrapper(context, resolveThemeId(context, com.google.android.material.R.attr.toolbarStyle)), attrs, defStyleAttr) {
 
   init {
     background = null

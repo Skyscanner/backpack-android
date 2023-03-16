@@ -39,7 +39,7 @@ import net.skyscanner.backpack.util.use
 open class BpkHorizontalNav @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+  defStyleAttr: Int = com.google.android.material.R.attr.tabStyle,
 ) : TabLayout(context, attrs, defStyleAttr) {
 
   @Deprecated("Alternate styling is no longer supported - please remove usages")

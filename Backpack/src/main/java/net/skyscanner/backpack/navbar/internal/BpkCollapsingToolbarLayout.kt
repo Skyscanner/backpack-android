@@ -28,7 +28,7 @@ import net.skyscanner.backpack.util.resolveThemeId
 internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+  defStyleAttr: Int = com.google.android.material.R.attr.collapsingToolbarLayoutStyle,
 ) : CollapsingToolbarLayout(context, attrs, defStyleAttr) {
 
   init {

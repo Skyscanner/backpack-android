@@ -28,7 +28,7 @@ import net.skyscanner.backpack.util.use
 open class BpkSlider @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+  defStyleAttr: Int = R.attr.sliderStyle,
 ) : RangeSlider(
   createContextThemeWrapper(
     createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.sliderStyle),

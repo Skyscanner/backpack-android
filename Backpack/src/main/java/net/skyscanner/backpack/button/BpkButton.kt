@@ -57,18 +57,18 @@ open class BpkButton(
 
   constructor(
     context: Context,
-  ) : this(context, null, 0, Type.Primary, Size.Standard)
+  ) : this(context, null, com.google.android.material.R.attr.materialButtonStyle, Type.Primary, Size.Standard)
 
   constructor(
     context: Context,
     type: Type,
     size: Size = Size.Standard,
-  ) : this(context, null, 0, type, size)
+  ) : this(context, null, com.google.android.material.R.attr.materialButtonStyle, type, size)
 
   constructor(
     context: Context,
     attrs: AttributeSet?,
-  ) : this(context, attrs, 0, Type.fromAttrs(context, attrs), Size.fromAttrs(context, attrs))
+  ) : this(context, attrs, com.google.android.material.R.attr.materialButtonStyle, Type.fromAttrs(context, attrs), Size.fromAttrs(context, attrs))
 
   constructor(
     context: Context,

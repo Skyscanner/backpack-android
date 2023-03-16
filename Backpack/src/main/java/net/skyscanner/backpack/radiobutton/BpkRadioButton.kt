@@ -21,7 +21,7 @@ package net.skyscanner.backpack.radiobutton
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatRadioButton
+import com.google.android.material.radiobutton.MaterialRadioButton
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -31,9 +31,9 @@ open class BpkRadioButton @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
-) : AppCompatRadioButton(
+) : MaterialRadioButton(
   createContextThemeWrapper(
-    createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.radioButtonStyle),
+    createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.radioButtonStyle),
     attrs, R.attr.bpkRadioButtonStyle,
   ),
   attrs,

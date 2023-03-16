@@ -28,9 +28,9 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.StyleRes
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.TextViewCompat
+import com.google.android.material.textview.MaterialTextView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.ResourcesUtil
 import net.skyscanner.backpack.util.isInEditMode
@@ -39,8 +39,8 @@ import net.skyscanner.backpack.util.use
 open class BpkText @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
-) : AppCompatTextView(context, attrs, defStyleAttr) {
+  defStyleAttr: Int = android.R.attr.textViewStyle,
+) : MaterialTextView(context, attrs, defStyleAttr) {
 
   enum class TextStyle(internal val id: Int) {
     Hero1(0),

@@ -21,13 +21,13 @@ package net.skyscanner.backpack.toggle
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
-import androidx.appcompat.widget.SwitchCompat
+import com.google.android.material.materialswitch.MaterialSwitch
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
 private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
-  val withBaseStyle = createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.switchStyle)
+  val withBaseStyle = createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.materialSwitchStyle)
   return createContextThemeWrapper(withBaseStyle, attrs, R.attr.bpkSwitchStyle)
 }
 
@@ -44,7 +44,7 @@ open class BpkSwitch @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
-) : SwitchCompat(wrapContext(context, attrs), attrs, defStyleAttr) {
+) : MaterialSwitch(wrapContext(context, attrs), attrs, defStyleAttr) {
 
   init {
     initialize(attrs, defStyleAttr)

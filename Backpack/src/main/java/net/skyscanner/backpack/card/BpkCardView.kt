@@ -24,6 +24,7 @@ import android.util.AttributeSet
 import androidx.annotation.DimenRes
 import androidx.annotation.Dimension
 import androidx.cardview.widget.CardView
+import com.google.android.material.card.MaterialCardView
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 
@@ -36,8 +37,8 @@ import net.skyscanner.backpack.util.use
 open class BpkCardView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_card,
-) : CardView(context, attrs, defStyleAttr) {
+  defStyleAttr: Int = com.google.android.material.R.attr.materialCardViewElevatedStyle,
+) : MaterialCardView(context, attrs, defStyleAttr) {
 
   /**
    * List of possible border radius for the [BpkCardView].

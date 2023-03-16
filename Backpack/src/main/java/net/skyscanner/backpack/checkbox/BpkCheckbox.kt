@@ -21,7 +21,7 @@ package net.skyscanner.backpack.checkbox
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatCheckBox
+import com.google.android.material.checkbox.MaterialCheckBox
 import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.createContextThemeWrapper
@@ -31,9 +31,9 @@ open class BpkCheckbox @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
-) : AppCompatCheckBox(
+) : MaterialCheckBox(
   createContextThemeWrapper(
-    createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.checkboxStyle),
+    createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.checkboxStyle),
     attrs, R.attr.bpkCheckboxStyle,
   ),
   attrs,
