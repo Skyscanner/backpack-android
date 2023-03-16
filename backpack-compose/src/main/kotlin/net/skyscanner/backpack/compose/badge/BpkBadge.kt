@@ -40,83 +40,83 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderRadius
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 enum class BpkBadgeType {
-  Normal,
-  Strong,
-  Success,
-  Warning,
-  Destructive,
-  Inverse,
-  Outline,
-  Brand,
+    Normal,
+    Strong,
+    Success,
+    Warning,
+    Destructive,
+    Inverse,
+    Outline,
+    Brand,
 }
 
 @Composable
 fun BpkBadge(
-  text: String,
-  type: BpkBadgeType,
-  modifier: Modifier = Modifier,
-  icon: BpkIcon? = null,
+    text: String,
+    type: BpkBadgeType,
+    modifier: Modifier = Modifier,
+    icon: BpkIcon? = null,
 ) {
-  Row(
-    modifier = modifier
-      .semantics(mergeDescendants = true) { }
-      .requiredHeight(BpkSpacing.Lg)
-      .border(1.dp, type.borderColor, BadgeShape)
-      .background(type.backgroundColor, BadgeShape)
-      .padding(horizontal = BpkSpacing.Md),
-    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
-    verticalAlignment = Alignment.CenterVertically,
-  ) {
-    val contentColor = type.contentColor
-    if (icon != null) {
-      BpkIcon(
-        icon = icon,
-        contentDescription = null,
-        size = BpkIconSize.Small,
-        tint = contentColor,
-      )
+    Row(
+        modifier = modifier
+            .semantics(mergeDescendants = true) { }
+            .requiredHeight(BpkSpacing.Lg)
+            .border(1.dp, type.borderColor, BadgeShape)
+            .background(type.backgroundColor, BadgeShape)
+            .padding(horizontal = BpkSpacing.Md),
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        val contentColor = type.contentColor
+        if (icon != null) {
+            BpkIcon(
+                icon = icon,
+                contentDescription = null,
+                size = BpkIconSize.Small,
+                tint = contentColor,
+            )
+        }
+        BpkText(
+            text = text,
+            color = contentColor,
+            style = BpkTheme.typography.caption,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
     }
-    BpkText(
-      text = text,
-      color = contentColor,
-      style = BpkTheme.typography.caption,
-      maxLines = 1,
-      overflow = TextOverflow.Ellipsis,
-    )
-  }
 }
 
 private val BpkBadgeType.contentColor: Color
-  @Composable
-  get() = when (this) {
-    BpkBadgeType.Normal -> BpkTheme.colors.textPrimary
-    BpkBadgeType.Strong -> BpkTheme.colors.textOnDark
-    BpkBadgeType.Success -> BpkTheme.colors.textOnLight
-    BpkBadgeType.Warning -> BpkTheme.colors.textOnLight
-    BpkBadgeType.Destructive -> BpkTheme.colors.textOnLight
-    BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
-    BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
-    BpkBadgeType.Brand -> BpkTheme.colors.textPrimaryInverse
-  }
+    @Composable
+    get() = when (this) {
+        BpkBadgeType.Normal -> BpkTheme.colors.textPrimary
+        BpkBadgeType.Strong -> BpkTheme.colors.textOnDark
+        BpkBadgeType.Success -> BpkTheme.colors.textOnLight
+        BpkBadgeType.Warning -> BpkTheme.colors.textOnLight
+        BpkBadgeType.Destructive -> BpkTheme.colors.textOnLight
+        BpkBadgeType.Inverse -> BpkTheme.colors.textPrimary
+        BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
+        BpkBadgeType.Brand -> BpkTheme.colors.textPrimaryInverse
+    }
 
 private val BpkBadgeType.backgroundColor: Color
-  @Composable
-  get() = when (this) {
-    BpkBadgeType.Normal -> BpkTheme.colors.surfaceHighlight
-    BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
-    BpkBadgeType.Success -> BpkTheme.colors.statusSuccessFill
-    BpkBadgeType.Warning -> BpkTheme.colors.statusWarningFill
-    BpkBadgeType.Destructive -> BpkTheme.colors.statusDangerFill
-    BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
-    BpkBadgeType.Outline -> Color.Transparent
-    BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
-  }
+    @Composable
+    get() = when (this) {
+        BpkBadgeType.Normal -> BpkTheme.colors.surfaceHighlight
+        BpkBadgeType.Strong -> BpkTheme.colors.corePrimary
+        BpkBadgeType.Success -> BpkTheme.colors.statusSuccessFill
+        BpkBadgeType.Warning -> BpkTheme.colors.statusWarningFill
+        BpkBadgeType.Destructive -> BpkTheme.colors.statusDangerFill
+        BpkBadgeType.Inverse -> BpkTheme.colors.surfaceDefault
+        BpkBadgeType.Outline -> Color.Transparent
+        BpkBadgeType.Brand -> BpkTheme.colors.coreAccent
+    }
 
 private val BpkBadgeType.borderColor: Color
-  @Composable
-  get() = when (this) {
-    BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
-    else -> Color.Transparent
-  }
+    @Composable
+    get() = when (this) {
+        BpkBadgeType.Outline -> BpkTheme.colors.textOnDark
+        else -> Color.Transparent
+    }
 
 private val BadgeShape = RoundedCornerShape(BpkBorderRadius.Xs)

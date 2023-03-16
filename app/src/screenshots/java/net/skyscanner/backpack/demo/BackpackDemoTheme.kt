@@ -26,13 +26,13 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
 fun BackpackDemoTheme(
-  content: @Composable () -> Unit,
+    content: @Composable () -> Unit,
 ) {
-  BpkTheme(
-    fontFamily = FontFamily(
-      Font(R.font.skyscanner_relative_android_book),
-      Font(R.font.skyscanner_relative_android_bold, weight = FontWeight.Bold),
-    ),
-    content = content,
-  )
+    BpkTheme(
+        fontFamily = FontFamily(
+            Font(R.font.skyscanner_relative_android_book),
+            Font(R.font.skyscanner_relative_android_bold, weight = FontWeight.Bold),
+        ),
+        content = content,
+    )
 }

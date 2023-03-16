@@ -26,9 +26,9 @@ import org.threeten.bp.YearMonth
  */
 @Stable
 sealed interface CalendarEffect {
-  /**
-   * A Month [date] [CalendarEffect] is selected
-   */
-  @Immutable
-  data class MonthSelected(val date: YearMonth) : CalendarEffect
+    /**
+     * A Month [date] [CalendarEffect] is selected
+     */
+    @Immutable
+    data class MonthSelected(val date: YearMonth) : CalendarEffect
 }

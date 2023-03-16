@@ -30,4 +30,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @CheckboxComponent
 @ViewStory
 fun CheckboxStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_checkbox, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_checkbox, modifier.fillMaxSize())

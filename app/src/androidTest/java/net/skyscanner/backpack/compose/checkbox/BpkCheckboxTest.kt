@@ -35,56 +35,56 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkCheckboxTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    DefaultCheckboxSample()
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun intermediate() {
-    snap {
-      IntermediateCheckboxSample()
+    @Test
+    fun default() = snap {
+        DefaultCheckboxSample()
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun unchecked() {
-    snap {
-      UncheckedCheckboxSample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun intermediate() {
+        snap {
+            IntermediateCheckboxSample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun checked() {
-    snap {
-      CheckedCheckboxSample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun unchecked() {
+        snap {
+            UncheckedCheckboxSample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabledUnchecked() {
-    snap {
-      DisabledUncheckedCheckboxSample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun checked() {
+        snap {
+            CheckedCheckboxSample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabledChecked() {
-    snap {
-      DisabledCheckedCheckboxSample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabledUnchecked() {
+        snap {
+            DisabledUncheckedCheckboxSample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun customContent() {
-    snap {
-      CustomContentCheckboxSample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabledChecked() {
+        snap {
+            DisabledCheckedCheckboxSample()
+        }
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun customContent() {
+        snap {
+            CustomContentCheckboxSample()
+        }
+    }
 }

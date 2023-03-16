@@ -29,38 +29,38 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkHeadlineSkeletonTest : BpkSnapshotTest() {
 
-  @Test
-  fun smallHeadline() {
-    val skeleton = BpkHeadlineSkeleton(testContext)
-    skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Small
-    snap(skeleton, width = 100, height = 30)
-  }
+    @Test
+    fun smallHeadline() {
+        val skeleton = BpkHeadlineSkeleton(testContext)
+        skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Small
+        snap(skeleton, width = 100, height = 30)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun mediumHeadline() {
-    val skeleton = BpkHeadlineSkeleton(testContext)
-    skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Medium
-    snap(skeleton, width = 100, height = 40)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun mediumHeadline() {
+        val skeleton = BpkHeadlineSkeleton(testContext)
+        skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Medium
+        snap(skeleton, width = 100, height = 40)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun largeHeadline() {
-    val skeleton = BpkHeadlineSkeleton(testContext)
-    skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Large
-    snap(skeleton, width = 100, height = 50)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeHeadline() {
+        val skeleton = BpkHeadlineSkeleton(testContext)
+        skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Large
+        snap(skeleton, width = 100, height = 50)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun headlineWithCustomHeight() {
-    val skeleton = BpkHeadlineSkeleton(testContext)
-    skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Custom
-    skeleton.layoutParams = ViewGroup.LayoutParams(
-      ViewGroup.LayoutParams.MATCH_PARENT,
-      (testContext.resources.displayMetrics.density * 30).toInt(),
-    )
-    snap(skeleton, width = 100, height = 50)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun headlineWithCustomHeight() {
+        val skeleton = BpkHeadlineSkeleton(testContext)
+        skeleton.heightSize = BpkHeadlineSkeleton.SkeletonHeightSizeType.Custom
+        skeleton.layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            (testContext.resources.displayMetrics.density * 30).toInt(),
+        )
+        snap(skeleton, width = 100, height = 50)
+    }
 }

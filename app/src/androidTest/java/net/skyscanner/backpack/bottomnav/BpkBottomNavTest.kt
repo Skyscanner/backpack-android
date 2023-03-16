@@ -29,31 +29,31 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkBottomNavTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() {
-    snap(
-      BpkBottomNav(testContext).apply {
-        addItem(1, R.string.bottom_nav_home, R.drawable.bpk_aircraft)
-        addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
-        addItem(3, R.string.bottom_nav_trips, R.drawable.bpk_star)
-        addItem(4, R.string.bottom_nav_profile, R.drawable.bpk_account_circle)
-      },
-      padding = 0,
-    )
-  }
+    @Test
+    fun default() {
+        snap(
+            BpkBottomNav(testContext).apply {
+                addItem(1, R.string.bottom_nav_home, R.drawable.bpk_aircraft)
+                addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
+                addItem(3, R.string.bottom_nav_trips, R.drawable.bpk_star)
+                addItem(4, R.string.bottom_nav_profile, R.drawable.bpk_account_circle)
+            },
+            padding = 0,
+        )
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun selectionUpdated() {
-    snap(
-      BpkBottomNav(testContext).apply {
-        addItem(1, R.string.bottom_nav_home, R.drawable.bpk_aircraft)
-        addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
-        addItem(3, R.string.bottom_nav_trips, R.drawable.bpk_star)
-        addItem(4, R.string.bottom_nav_profile, R.drawable.bpk_account_circle)
-        selectedItemId = 2
-      },
-      padding = 0,
-    )
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun selectionUpdated() {
+        snap(
+            BpkBottomNav(testContext).apply {
+                addItem(1, R.string.bottom_nav_home, R.drawable.bpk_aircraft)
+                addItem(2, R.string.bottom_nav_explore, R.drawable.bpk_navigation)
+                addItem(3, R.string.bottom_nav_trips, R.drawable.bpk_star)
+                addItem(4, R.string.bottom_nav_profile, R.drawable.bpk_account_circle)
+                selectedItemId = 2
+            },
+            padding = 0,
+        )
+    }
 }

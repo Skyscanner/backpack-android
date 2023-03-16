@@ -26,21 +26,21 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.resolveThemeId
 
 internal class BpkCollapsingToolbarLayout @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : CollapsingToolbarLayout(context, attrs, defStyleAttr) {
 
-  init {
-    setExpandedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading2Appearance))
-    setCollapsedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading5Appearance))
+    init {
+        setExpandedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading2Appearance))
+        setCollapsedTitleTextAppearance(resolveThemeId(context, R.attr.bpkTextHeading5Appearance))
 
-    expandedTitleMarginStart = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small)
-    expandedTitleMarginEnd = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small)
-    expandedTitleMarginTop = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_top)
-    expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_bottom)
+        expandedTitleMarginStart = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small)
+        expandedTitleMarginEnd = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_horizontal_small)
+        expandedTitleMarginTop = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_top)
+        expandedTitleMarginBottom = resources.getDimensionPixelSize(R.dimen.bpk_nav_bar_expanded_spacing_bottom)
 
-    setScrimsShown(false)
-    contentScrim = ColorDrawable(context.getColor(R.color.bpkSurfaceDefault))
-  }
+        setScrimsShown(false)
+        contentScrim = ColorDrawable(context.getColor(R.color.bpkSurfaceDefault))
+    }
 }

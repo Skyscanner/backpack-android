@@ -29,94 +29,94 @@ import net.skyscanner.backpack.demo.data.SharedPreferences
 import net.skyscanner.backpack.toggle.BpkSwitch
 
 class SettingsActivity : AppCompatActivity() {
-  private lateinit var themes: List<SettingsThemeOption>
-  private val themeMapping = mapOf(
-    "AppTheme" to R.style.AppTheme,
-    "London" to R.style.LondonTheme,
-    "Doha" to R.style.DohaTheme,
-  )
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    val theme = SharedPreferences.getTheme(this)
-    setTheme(theme)
-    val hasCustomTheme = theme != R.style.AppTheme
-
-    setContentView(R.layout.activity_settings)
-
-    val toolbar = findViewById<Toolbar>(R.id.settings_toolbar)
-    toolbar.title = getString(R.string.settings_title)
-    setSupportActionBar(toolbar)
-
-    supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-    themes = listOf(
-      findViewById<SettingsThemeOption>(R.id.theme_london).apply { setOnClickListener(::onThemeSelected) },
-      findViewById<SettingsThemeOption>(R.id.theme_doha).apply { setOnClickListener(::onThemeSelected) },
+    private lateinit var themes: List<SettingsThemeOption>
+    private val themeMapping = mapOf(
+        "AppTheme" to R.style.AppTheme,
+        "London" to R.style.LondonTheme,
+        "Doha" to R.style.DohaTheme,
     )
 
-    val themeToggle = findViewById<BpkSwitch>(R.id.theme_toggle)
-    val themePicker = findViewById<View>(R.id.theme_picker)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val theme = SharedPreferences.getTheme(this)
+        setTheme(theme)
+        val hasCustomTheme = theme != R.style.AppTheme
 
-    themePicker.setOnClickListener {
-      themeToggle.isChecked = !themeToggle.isChecked
-      onThemeSwitchClicked(themeToggle.isChecked)
-    }
+        setContentView(R.layout.activity_settings)
 
-    if (hasCustomTheme) {
-      themeToggle.isChecked = true
-      onThemeSwitchClicked(themeToggle.isChecked)
-      themes.forEach {
-        if (themeMapping[it.text] == theme) {
-          it.isCurrent = true
+        val toolbar = findViewById<Toolbar>(R.id.settings_toolbar)
+        toolbar.title = getString(R.string.settings_title)
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        themes = listOf(
+            findViewById<SettingsThemeOption>(R.id.theme_london).apply { setOnClickListener(::onThemeSelected) },
+            findViewById<SettingsThemeOption>(R.id.theme_doha).apply { setOnClickListener(::onThemeSelected) },
+        )
+
+        val themeToggle = findViewById<BpkSwitch>(R.id.theme_toggle)
+        val themePicker = findViewById<View>(R.id.theme_picker)
+
+        themePicker.setOnClickListener {
+            themeToggle.isChecked = !themeToggle.isChecked
+            onThemeSwitchClicked(themeToggle.isChecked)
         }
-      }
-    }
-  }
 
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-      android.R.id.home -> this.onBackPressed()
-    }
-    return super.onOptionsItemSelected(item)
-  }
-
-  fun onThemeSelected(view: View) {
-    themes.forEach { it.isCurrent = false }
-
-    view as SettingsThemeOption
-    view.isCurrent = !view.isCurrent
-
-    updateTheme()
-  }
-
-  private fun onThemeSwitchClicked(isChecked: Boolean) {
-    val themeList = findViewById<LinearLayout>(R.id.themes_list)
-
-    themes.forEach { it.isCurrent = false }
-
-    if (isChecked) {
-      themeList.visibility = View.VISIBLE
-    } else {
-      themeList.visibility = View.GONE
+        if (hasCustomTheme) {
+            themeToggle.isChecked = true
+            onThemeSwitchClicked(themeToggle.isChecked)
+            themes.forEach {
+                if (themeMapping[it.text] == theme) {
+                    it.isCurrent = true
+                }
+            }
+        }
     }
 
-    if (!isChecked) {
-      updateTheme()
-    }
-  }
-
-  private fun updateTheme() {
-    var theme = "AppTheme"
-    themes.forEach {
-      if (it.isCurrent) {
-        theme = it.text as String
-      }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> this.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
-    themeMapping[theme]?.let {
-      SharedPreferences.saveTheme(this, it)
-      BackpackDemoApplication.triggerRebirth(this)
+    fun onThemeSelected(view: View) {
+        themes.forEach { it.isCurrent = false }
+
+        view as SettingsThemeOption
+        view.isCurrent = !view.isCurrent
+
+        updateTheme()
     }
-  }
+
+    private fun onThemeSwitchClicked(isChecked: Boolean) {
+        val themeList = findViewById<LinearLayout>(R.id.themes_list)
+
+        themes.forEach { it.isCurrent = false }
+
+        if (isChecked) {
+            themeList.visibility = View.VISIBLE
+        } else {
+            themeList.visibility = View.GONE
+        }
+
+        if (!isChecked) {
+            updateTheme()
+        }
+    }
+
+    private fun updateTheme() {
+        var theme = "AppTheme"
+        themes.forEach {
+            if (it.isCurrent) {
+                theme = it.text as String
+            }
+        }
+
+        themeMapping[theme]?.let {
+            SharedPreferences.saveTheme(this, it)
+            BackpackDemoApplication.triggerRebirth(this)
+        }
+    }
 }

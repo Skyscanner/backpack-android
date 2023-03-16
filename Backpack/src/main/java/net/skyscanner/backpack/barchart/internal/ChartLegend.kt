@@ -30,44 +30,44 @@ import net.skyscanner.backpack.util.Consumer
 
 @SuppressLint("ViewConstructor")
 internal class ChartLegend constructor(
-  context: Context,
-  colors: BpkBarChart.Colors,
+    context: Context,
+    colors: BpkBarChart.Colors,
 ) : LinearLayout(context), Consumer<BpkBarChart.Legend?> {
 
-  init {
-    orientation = HORIZONTAL
-    LayoutInflater.from(context).inflate(R.layout.view_bpk_barchart_legend, this, true)
-  }
-
-  private val selected = findViewById<BpkBadge>(R.id.bpk_barchart_legend_selected).apply {
-    isSelected = true
-    isActivated = true
-    setBackground(colors.chartForeground)
-    setTextColor(context.getColor(R.color.bpkTextPrimaryInverse))
-  }
-  private val activated = findViewById<BpkBadge>(R.id.bpk_barchart_legend_activated).apply {
-    isActivated = true
-    setBackground(colors.chartForeground)
-    setTextColor(context.getColor(R.color.bpkTextOnDark))
-  }
-  private val inactivated = findViewById<BpkBadge>(R.id.bpk_barchart_legend_inactivated).apply {
-    isActivated = false
-    setBackground(colors.chartForeground)
-    setTextColor(context.getColor(R.color.bpkTextPrimary))
-  }
-
-  override fun invoke(legend: BpkBarChart.Legend?) {
-    if (legend == null) {
-      activated.visibility = View.GONE
-      inactivated.visibility = View.GONE
-      selected.visibility = View.GONE
-    } else {
-      activated.visibility = View.VISIBLE
-      inactivated.visibility = View.VISIBLE
-      selected.visibility = View.VISIBLE
-      activated.text = legend.activeTitle
-      inactivated.text = legend.inactiveTitle
-      selected.text = legend.selectedTitle
+    init {
+        orientation = HORIZONTAL
+        LayoutInflater.from(context).inflate(R.layout.view_bpk_barchart_legend, this, true)
     }
-  }
+
+    private val selected = findViewById<BpkBadge>(R.id.bpk_barchart_legend_selected).apply {
+        isSelected = true
+        isActivated = true
+        setBackground(colors.chartForeground)
+        setTextColor(context.getColor(R.color.bpkTextPrimaryInverse))
+    }
+    private val activated = findViewById<BpkBadge>(R.id.bpk_barchart_legend_activated).apply {
+        isActivated = true
+        setBackground(colors.chartForeground)
+        setTextColor(context.getColor(R.color.bpkTextOnDark))
+    }
+    private val inactivated = findViewById<BpkBadge>(R.id.bpk_barchart_legend_inactivated).apply {
+        isActivated = false
+        setBackground(colors.chartForeground)
+        setTextColor(context.getColor(R.color.bpkTextPrimary))
+    }
+
+    override fun invoke(legend: BpkBarChart.Legend?) {
+        if (legend == null) {
+            activated.visibility = View.GONE
+            inactivated.visibility = View.GONE
+            selected.visibility = View.GONE
+        } else {
+            activated.visibility = View.VISIBLE
+            inactivated.visibility = View.VISIBLE
+            selected.visibility = View.VISIBLE
+            activated.text = legend.activeTitle
+            inactivated.text = legend.inactiveTitle
+            selected.text = legend.selectedTitle
+        }
+    }
 }

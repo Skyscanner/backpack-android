@@ -24,48 +24,48 @@ import net.skyscanner.backpack.compose.cardbutton.internal.BpkSaveCardButtonImpl
 import net.skyscanner.backpack.compose.cardbutton.internal.BpkShareCardButtonImpl
 
 enum class BpkCardButtonStyle {
-  Default,
-  Contained,
-  OnDark,
+    Default,
+    Contained,
+    OnDark,
 }
 
 enum class BpkCardButtonSize {
-  Default,
-  Large,
+    Default,
+    Large,
 }
 
 @Composable
 fun BpkSaveButton(
-  checked: Boolean,
-  contentDescription: String,
-  onCheckedChange: (Boolean) -> Unit,
-  modifier: Modifier = Modifier,
-  size: BpkCardButtonSize = BpkCardButtonSize.Default,
-  style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
+    checked: Boolean,
+    contentDescription: String,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    size: BpkCardButtonSize = BpkCardButtonSize.Default,
+    style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
 ) {
-  BpkSaveCardButtonImpl(
-    checked = checked,
-    contentDescription = contentDescription,
-    style = style,
-    size = size,
-    onCheckedChange = onCheckedChange,
-    modifier = modifier,
-  )
+    BpkSaveCardButtonImpl(
+        checked = checked,
+        contentDescription = contentDescription,
+        style = style,
+        size = size,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+    )
 }
 
 @Composable
 fun BpkShareButton(
-  contentDescription: String,
-  onClick: () -> Unit,
-  modifier: Modifier = Modifier,
-  size: BpkCardButtonSize = BpkCardButtonSize.Default,
-  style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
+    contentDescription: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    size: BpkCardButtonSize = BpkCardButtonSize.Default,
+    style: BpkCardButtonStyle = BpkCardButtonStyle.Default,
 ) {
-  BpkShareCardButtonImpl(
-    contentDescription = contentDescription,
-    style = style,
-    size = size,
-    onClick = onClick,
-    modifier = modifier,
-  )
+    BpkShareCardButtonImpl(
+        contentDescription = contentDescription,
+        style = style,
+        size = size,
+        onClick = onClick,
+        modifier = modifier,
+    )
 }

@@ -30,31 +30,31 @@ import org.junit.Test
 
 class CalendarSelectionTests {
 
-  @Before
-  fun setup() {
-    initAndroidThreeTen()
-  }
-
-  @Test
-  fun no_date_selected_by_default() {
-    testCalendarWith(CalendarSettings.Default) {
-      verify {
-        assertTrue(state.selection is CalendarSelection.None)
-      }
+    @Before
+    fun setup() {
+        initAndroidThreeTen()
     }
-  }
 
-  @Test
-  fun if_selection_is_disabled_no_date_can_be_selected() {
-    val disabledDates = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Disabled,
-    )
-    testCalendarWith(disabledDates) {
-      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-
-      verify {
-        assertTrue(state.selection is CalendarSelection.None)
-      }
+    @Test
+    fun no_date_selected_by_default() {
+        testCalendarWith(CalendarSettings.Default) {
+            verify {
+                assertTrue(state.selection is CalendarSelection.None)
+            }
+        }
     }
-  }
+
+    @Test
+    fun if_selection_is_disabled_no_date_can_be_selected() {
+        val disabledDates = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Disabled,
+        )
+        testCalendarWith(disabledDates) {
+            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+
+            verify {
+                assertTrue(state.selection is CalendarSelection.None)
+            }
+        }
+    }
 }

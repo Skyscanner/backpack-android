@@ -21,8 +21,8 @@ package net.skyscanner.backpack.ksp.visitor
 import net.skyscanner.backpack.ksp.ViewStoryAnnotation
 
 object ViewStoriesVisitor : AbstractStoriesVisitor(
-  annotationDefinition = ViewStoryAnnotation,
-  paramName = ViewStoryAnnotation.paramName,
-  paramKind = ViewStoryAnnotation.paramKind,
-  isCompose = false,
+    annotationDefinition = ViewStoryAnnotation,
+    paramName = ViewStoryAnnotation.paramName,
+    paramKind = ViewStoryAnnotation.paramKind,
+    isCompose = false,
 )

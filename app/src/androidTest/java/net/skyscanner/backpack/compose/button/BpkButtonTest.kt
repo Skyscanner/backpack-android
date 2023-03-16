@@ -34,120 +34,120 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 class BpkButtonTest(flavour: Flavor) : BpkSnapshotTest(listOf(flavour.first, flavour.second)) {
 
-  private val type: BpkButtonType = flavour.first
-  private val size: BpkButtonSize = flavour.second
-  private val icon = BpkIcon.LongArrowRight
-  private val iconDrawableRes = R.drawable.sample_icon
+    private val type: BpkButtonType = flavour.first
+    private val size: BpkButtonSize = flavour.second
+    private val icon = BpkIcon.LongArrowRight
+    private val iconDrawableRes = R.drawable.sample_icon
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun text() {
-    snap(background = { type.rowBackground() }) {
-      BpkButton("Button", type = type, size = size, onClick = {})
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabled() {
-    assumeTrue(size == BpkButtonSize.Default) // colors will be the same on large size
-
-    snap(background = { type.rowBackground() }) {
-      BpkButton("Button", type = type, size = size, enabled = false, onClick = {})
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun loading() {
-    snap(background = { type.rowBackground() }) {
-      BpkButton("Button", type = type, size = size, loading = true, onClick = {})
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun iconAtStart() {
-    assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
-    // icon is bigger on large size, so we need to test this
-
-    snap {
-      BpkButton("Button", icon, BpkButtonIconPosition.Start, type = type, size = size, onClick = {})
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun iconAtEnd() {
-    assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
-    // icon is bigger on large size, so we need to test this
-
-    snap {
-      BpkButton("Button", icon, BpkButtonIconPosition.End, type = type, size = size, onClick = {})
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun iconOnly() {
-    assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
-    // icon is bigger on large size, so we need to test this
-
-    snap {
-      BpkButton(icon, "contentDescription", type = type, size = size, onClick = {})
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun drawableAtStart() {
-    assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
-    // icon is bigger on large size, so we need to test this
-
-    snap {
-      BpkButton(
-        text = "Button",
-        icon = painterResource(id = iconDrawableRes),
-        position = BpkButtonIconPosition.Start,
-        type = type,
-        size = size,
-        onClick = {},
-      )
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun drawableAtEnd() {
-    assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
-    // icon is bigger on large size, so we need to test this
-
-    snap {
-      BpkButton(
-        text = "Button",
-        icon = painterResource(id = iconDrawableRes),
-        position = BpkButtonIconPosition.End,
-        type = type,
-        size = size,
-        onClick = {},
-      )
-    }
-  }
-
-  companion object {
-
-    @JvmStatic
-    @Parameterized.Parameters(name = "{0} Screenshot")
-    fun flavours(): List<Flavor> = BpkButtonType.values().flatMap { type ->
-      BpkButtonSize.values().mapNotNull { size ->
-        if (type == BpkButtonType.Primary || size == BpkButtonSize.Default) {
-          Flavor(type, size)
-        } else {
-          null
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun text() {
+        snap(background = { type.rowBackground() }) {
+            BpkButton("Button", type = type, size = size, onClick = {})
         }
-      }
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabled() {
+        assumeTrue(size == BpkButtonSize.Default) // colors will be the same on large size
+
+        snap(background = { type.rowBackground() }) {
+            BpkButton("Button", type = type, size = size, enabled = false, onClick = {})
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun loading() {
+        snap(background = { type.rowBackground() }) {
+            BpkButton("Button", type = type, size = size, loading = true, onClick = {})
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun iconAtStart() {
+        assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
+        // icon is bigger on large size, so we need to test this
+
+        snap {
+            BpkButton("Button", icon, BpkButtonIconPosition.Start, type = type, size = size, onClick = {})
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun iconAtEnd() {
+        assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
+        // icon is bigger on large size, so we need to test this
+
+        snap {
+            BpkButton("Button", icon, BpkButtonIconPosition.End, type = type, size = size, onClick = {})
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun iconOnly() {
+        assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
+        // icon is bigger on large size, so we need to test this
+
+        snap {
+            BpkButton(icon, "contentDescription", type = type, size = size, onClick = {})
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun drawableAtStart() {
+        assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
+        // icon is bigger on large size, so we need to test this
+
+        snap {
+            BpkButton(
+                text = "Button",
+                icon = painterResource(id = iconDrawableRes),
+                position = BpkButtonIconPosition.Start,
+                type = type,
+                size = size,
+                onClick = {},
+            )
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun drawableAtEnd() {
+        assumeTrue(type == BpkButtonType.Primary) // the layout the same across different button types
+        // icon is bigger on large size, so we need to test this
+
+        snap {
+            BpkButton(
+                text = "Button",
+                icon = painterResource(id = iconDrawableRes),
+                position = BpkButtonIconPosition.End,
+                type = type,
+                size = size,
+                onClick = {},
+            )
+        }
+    }
+
+    companion object {
+
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0} Screenshot")
+        fun flavours(): List<Flavor> = BpkButtonType.values().flatMap { type ->
+            BpkButtonSize.values().mapNotNull { size ->
+                if (type == BpkButtonType.Primary || size == BpkButtonSize.Default) {
+                    Flavor(type, size)
+                } else {
+                    null
+                }
+            }
+        }
+    }
 }
 
 private typealias Flavor = Pair<BpkButtonType, BpkButtonSize>

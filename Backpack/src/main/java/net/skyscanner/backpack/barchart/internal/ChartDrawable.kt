@@ -29,83 +29,83 @@ import net.skyscanner.backpack.util.withSave
 import kotlin.math.min
 
 internal class ChartDrawable(
-  private val background: ColorStateList,
-  private val foreground: ColorStateList,
+    private val background: ColorStateList,
+    private val foreground: ColorStateList,
 ) : Drawable() {
 
-  private val backgroundPaint = Paint().apply {
-    isAntiAlias = true
-    isDither = true
-    style = Paint.Style.FILL_AND_STROKE
-  }
-
-  private val foregroundPaint = Paint().apply {
-    isAntiAlias = true
-    isDither = true
-    style = Paint.Style.FILL_AND_STROKE
-  }
-
-  var value: Float = 0f
-    set(value) {
-      if (field != value) {
-        field = value
-        invalidateSelf()
-      }
+    private val backgroundPaint = Paint().apply {
+        isAntiAlias = true
+        isDither = true
+        style = Paint.Style.FILL_AND_STROKE
     }
 
-  private val totalRange: Float
-    get() {
-      val minRange = diameter
-      val maxRange = bounds.height()
-      return maxRange - minRange
+    private val foregroundPaint = Paint().apply {
+        isAntiAlias = true
+        isDither = true
+        style = Paint.Style.FILL_AND_STROKE
     }
 
-  val diameter: Float
-    get() = bounds.width().toFloat()
+    var value: Float = 0f
+        set(value) {
+            if (field != value) {
+                field = value
+                invalidateSelf()
+            }
+        }
 
-  val radius: Float
-    get() = diameter / 2
+    private val totalRange: Float
+        get() {
+            val minRange = diameter
+            val maxRange = bounds.height()
+            return maxRange - minRange
+        }
 
-  val valueInPixels: Float
-    get() = totalRange * min(1.0f, value)
+    val diameter: Float
+        get() = bounds.width().toFloat()
 
-  override fun getAlpha(): Int =
-    backgroundPaint.alpha
+    val radius: Float
+        get() = diameter / 2
 
-  override fun setAlpha(alpha: Int) {
-    backgroundPaint.alpha = alpha
-    foregroundPaint.alpha = alpha
-  }
+    val valueInPixels: Float
+        get() = totalRange * min(1.0f, value)
 
-  @Deprecated("Deprecated in Java")
-  override fun getOpacity(): Int =
-    PixelFormat.TRANSPARENT
+    override fun getAlpha(): Int =
+        backgroundPaint.alpha
 
-  override fun setColorFilter(colorFilter: ColorFilter?) {
-    backgroundPaint.colorFilter = colorFilter
-    foregroundPaint.colorFilter = colorFilter
-  }
-
-  override fun getColorFilter(): ColorFilter? =
-    backgroundPaint.colorFilter
-
-  override fun isStateful(): Boolean =
-    background.isStateful || foreground.isStateful
-
-  override fun onStateChange(state: IntArray): Boolean =
-    isStateful
-
-  override fun draw(canvas: Canvas) {
-    val width = bounds.width().toFloat()
-    val height = bounds.height().toFloat()
-
-    backgroundPaint.color = background.getColorForState(state)
-    foregroundPaint.color = foreground.getColorForState(state)
-
-    canvas.withSave {
-      canvas.drawRoundRect(0f, 0f, width, height, radius, radius, backgroundPaint)
-      val foregroundTop = totalRange - valueInPixels
-      canvas.drawRoundRect(0f, foregroundTop, width, height, radius, radius, foregroundPaint)
+    override fun setAlpha(alpha: Int) {
+        backgroundPaint.alpha = alpha
+        foregroundPaint.alpha = alpha
     }
-  }
+
+    @Deprecated("Deprecated in Java")
+    override fun getOpacity(): Int =
+        PixelFormat.TRANSPARENT
+
+    override fun setColorFilter(colorFilter: ColorFilter?) {
+        backgroundPaint.colorFilter = colorFilter
+        foregroundPaint.colorFilter = colorFilter
+    }
+
+    override fun getColorFilter(): ColorFilter? =
+        backgroundPaint.colorFilter
+
+    override fun isStateful(): Boolean =
+        background.isStateful || foreground.isStateful
+
+    override fun onStateChange(state: IntArray): Boolean =
+        isStateful
+
+    override fun draw(canvas: Canvas) {
+        val width = bounds.width().toFloat()
+        val height = bounds.height().toFloat()
+
+        backgroundPaint.color = background.getColorForState(state)
+        foregroundPaint.color = foreground.getColorForState(state)
+
+        canvas.withSave {
+            canvas.drawRoundRect(0f, 0f, width, height, radius, radius, backgroundPaint)
+            val foregroundTop = totalRange - valueInPixels
+            canvas.drawRoundRect(0f, foregroundTop, width, height, radius, radius, foregroundPaint)
+        }
+    }
 }

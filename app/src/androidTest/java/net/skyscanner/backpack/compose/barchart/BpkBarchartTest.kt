@@ -33,125 +33,125 @@ import kotlin.math.roundToInt
 @RunWith(AndroidJUnit4::class)
 class BpkBarchartTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() {
-    snap {
-      BpkBarChart(
-        model = BpkBarChartModel(
-          caption = "Bar chart",
-          items = createMonth(Month.JANUARY, value = 0.0f),
-        ),
-        selected = null,
-        onSelectionChange = {},
-      )
+    @Test
+    fun default() {
+        snap {
+            BpkBarChart(
+                model = BpkBarChartModel(
+                    caption = "Bar chart",
+                    items = createMonth(Month.JANUARY, value = 0.0f),
+                ),
+                selected = null,
+                onSelectionChange = {},
+            )
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun halfFilled() {
-    snap {
-      BpkBarChart(
-        model = BpkBarChartModel(
-          caption = "Bar chart",
-          items = createMonth(Month.JANUARY, value = 0.5f),
-        ),
-        selected = null,
-        onSelectionChange = {},
-      )
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun halfFilled() {
+        snap {
+            BpkBarChart(
+                model = BpkBarChartModel(
+                    caption = "Bar chart",
+                    items = createMonth(Month.JANUARY, value = 0.5f),
+                ),
+                selected = null,
+                onSelectionChange = {},
+            )
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun fullyFilled() {
-    snap {
-      BpkBarChart(
-        model = BpkBarChartModel(
-          caption = "Bar chart",
-          items = createMonth(Month.JANUARY, value = 1.0f),
-        ),
-        selected = null,
-        onSelectionChange = {},
-      )
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun fullyFilled() {
+        snap {
+            BpkBarChart(
+                model = BpkBarChartModel(
+                    caption = "Bar chart",
+                    items = createMonth(Month.JANUARY, value = 1.0f),
+                ),
+                selected = null,
+                onSelectionChange = {},
+            )
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun overfilled() {
-    snap {
-      BpkBarChart(
-        model = BpkBarChartModel(
-          caption = "Bar chart",
-          items = createMonth(Month.JANUARY, value = 1.1f),
-        ),
-        selected = null,
-        onSelectionChange = {},
-      )
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun overfilled() {
+        snap {
+            BpkBarChart(
+                model = BpkBarChartModel(
+                    caption = "Bar chart",
+                    items = createMonth(Month.JANUARY, value = 1.1f),
+                ),
+                selected = null,
+                onSelectionChange = {},
+            )
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun inactive() {
-    snap {
-      BpkBarChart(
-        model = BpkBarChartModel(
-          caption = "Bar chart",
-          items = createMonth(Month.JANUARY, value = null),
-        ),
-        selected = null,
-        onSelectionChange = {},
-      )
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun inactive() {
+        snap {
+            BpkBarChart(
+                model = BpkBarChartModel(
+                    caption = "Bar chart",
+                    items = createMonth(Month.JANUARY, value = null),
+                ),
+                selected = null,
+                onSelectionChange = {},
+            )
+        }
     }
-  }
 
-  @Test
-  fun withLegend() {
-    snap {
-      BpkBarChart(
-        model = BpkBarChartModel(
-          caption = "Bar chart",
-          legend = BpkBarChartModel.Legend(
-            selectedTitle = "Selected",
-            activeTitle = "Enabled",
-            inactiveTitle = "Disabled",
-          ),
-          items = createMonth(Month.JANUARY),
-        ),
-        selected = null,
-        onSelectionChange = {},
-      )
+    @Test
+    fun withLegend() {
+        snap {
+            BpkBarChart(
+                model = BpkBarChartModel(
+                    caption = "Bar chart",
+                    legend = BpkBarChartModel.Legend(
+                        selectedTitle = "Selected",
+                        activeTitle = "Enabled",
+                        inactiveTitle = "Disabled",
+                    ),
+                    items = createMonth(Month.JANUARY),
+                ),
+                selected = null,
+                onSelectionChange = {},
+            )
+        }
     }
-  }
 
-  @Test
-  fun selected() {
-    val model = BpkBarChartModel(caption = "Bar chart", items = createMonth(Month.JANUARY))
-    snap(assertion = { onNodeWithText(model.items[10].values?.text!!).assertIsDisplayed() }) {
-      BpkBarChart(
-        model = model,
-        selected = model.items[10],
-        onSelectionChange = {},
-      )
+    @Test
+    fun selected() {
+        val model = BpkBarChartModel(caption = "Bar chart", items = createMonth(Month.JANUARY))
+        snap(assertion = { onNodeWithText(model.items[10].values?.text!!).assertIsDisplayed() }) {
+            BpkBarChart(
+                model = model,
+                selected = model.items[10],
+                onSelectionChange = {},
+            )
+        }
     }
-  }
 
-  private fun createMonth(
-    month: Month,
-    value: Float? = 0.5f,
-  ): List<BpkBarChartModel.Item> =
-    BpkBarChartData.createMonth(month, testContext.resources) { date ->
-      BpkBarChartData.createBar(
-        date = date,
-        resources = testContext.resources,
-        values = value?.let {
-          BpkBarChartModel.Values(
-            percent = it,
-            text = (it * 100).roundToInt().toString(),
-          )
-        },
-      )
-    }
+    private fun createMonth(
+        month: Month,
+        value: Float? = 0.5f,
+    ): List<BpkBarChartModel.Item> =
+        BpkBarChartData.createMonth(month, testContext.resources) { date ->
+            BpkBarChartData.createBar(
+                date = date,
+                resources = testContext.resources,
+                values = value?.let {
+                    BpkBarChartModel.Values(
+                        percent = it,
+                        text = (it * 100).roundToInt().toString(),
+                    )
+                },
+            )
+        }
 }

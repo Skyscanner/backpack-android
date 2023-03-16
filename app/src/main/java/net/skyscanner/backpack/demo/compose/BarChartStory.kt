@@ -41,18 +41,18 @@ import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 @ComposeStory
 fun BarChartStory(modifier: Modifier = Modifier) {
 
-  val automationMode = LocalAutomationMode.current
-  val context = LocalContext.current
-  val model = remember(context) { BpkBarChartData.generateModel(context) }
-  var selectedItem by remember { mutableStateOf(model.items[10].takeIf { automationMode }) }
+    val automationMode = LocalAutomationMode.current
+    val context = LocalContext.current
+    val model = remember(context) { BpkBarChartData.generateModel(context) }
+    var selectedItem by remember { mutableStateOf(model.items[10].takeIf { automationMode }) }
 
-  Column(modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+    Column(modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
 
-    BpkBarChart(
-      model = model,
-      selected = selectedItem,
-      onSelectionChange = { selectedItem = it },
-      modifier = Modifier.padding(vertical = BpkSpacing.Md),
-    )
-  }
+        BpkBarChart(
+            model = model,
+            selected = selectedItem,
+            onSelectionChange = { selectedItem = it },
+            modifier = Modifier.padding(vertical = BpkSpacing.Md),
+        )
+    }
 }

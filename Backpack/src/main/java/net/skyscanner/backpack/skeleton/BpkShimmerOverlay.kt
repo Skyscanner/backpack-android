@@ -27,40 +27,40 @@ import androidx.annotation.AttrRes
 import net.skyscanner.backpack.R
 
 class BpkShimmerOverlay @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  @AttrRes defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    @AttrRes defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-  init {
-    inflate(this.context, R.layout.bpk_shimmer_skeleton, this)
-    startShimmer()
-  }
-
-  override fun addView(child: View?) {
-    if (child?.id != R.id.bpk_skeleton_container) {
-      super.addView(child)
-    } else {
-      val container = findViewById<FrameLayout>(R.id.bpk_skeleton_container)
-      container.addView(child)
-      container.bringChildToFront(findViewById(R.id.bpk_skeleton_shimmer))
+    init {
+        inflate(this.context, R.layout.bpk_shimmer_skeleton, this)
+        startShimmer()
     }
-  }
 
-  override fun onViewAdded(child: View?) {
-    super.onViewAdded(child)
-    if (child?.id != R.id.bpk_skeleton_container) {
-      this.bringChildToFront(findViewById(R.id.bpk_skeleton_container))
+    override fun addView(child: View?) {
+        if (child?.id != R.id.bpk_skeleton_container) {
+            super.addView(child)
+        } else {
+            val container = findViewById<FrameLayout>(R.id.bpk_skeleton_container)
+            container.addView(child)
+            container.bringChildToFront(findViewById(R.id.bpk_skeleton_shimmer))
+        }
     }
-  }
 
-  private fun startShimmer() {
-    // Use ObjectAnimator to draw the animation for translationX, translate the position from left to right.
-    ObjectAnimator.ofFloat(findViewById(R.id.bpk_skeleton_shimmer), "translationX", -500f, 500f).apply {
-      duration = 1000 // Per specification.
-      repeatCount = ObjectAnimator.INFINITE
-      startDelay = 200 // Per specification.
-      start()
+    override fun onViewAdded(child: View?) {
+        super.onViewAdded(child)
+        if (child?.id != R.id.bpk_skeleton_container) {
+            this.bringChildToFront(findViewById(R.id.bpk_skeleton_container))
+        }
     }
-  }
+
+    private fun startShimmer() {
+        // Use ObjectAnimator to draw the animation for translationX, translate the position from left to right.
+        ObjectAnimator.ofFloat(findViewById(R.id.bpk_skeleton_shimmer), "translationX", -500f, 500f).apply {
+            duration = 1000 // Per specification.
+            repeatCount = ObjectAnimator.INFINITE
+            startDelay = 200 // Per specification.
+            start()
+        }
+    }
 }

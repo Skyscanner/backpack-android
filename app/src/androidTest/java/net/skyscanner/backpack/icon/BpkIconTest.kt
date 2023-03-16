@@ -34,45 +34,45 @@ import org.junit.Test
 @Variants(BpkTestVariant.Default)
 class BpkIconTest : BpkSnapshotTest() {
 
-  @Test
-  fun small() {
-    val icons = getIcons(true)
-    val layout = setupLayout(icons)
+    @Test
+    fun small() {
+        val icons = getIcons(true)
+        val layout = setupLayout(icons)
 
-    snap(layout)
-  }
-
-  @Test
-  fun large() {
-    val icons = getIcons(false)
-    val layout = setupLayout(icons)
-
-    snap(layout)
-  }
-
-  private fun setupLayout(icons: List<Drawable>): GridLayout {
-    val layout = GridLayout(testContext).apply {
-      columnCount = 12
-      layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        snap(layout)
     }
-    icons.forEach { icon ->
-      val imageView = ImageView(testContext).apply { setImageDrawable(icon) }
-      layout.addView(imageView)
-    }
-    return layout
-  }
 
-  private fun getIcons(small: Boolean): List<Drawable> {
-    return R.drawable::class.java.fields.mapNotNull { field ->
-      if (field.name.startsWith("bpk_") && field.name.endsWith("_sm") == small) {
-        try {
-          AppCompatResources.getDrawable(testContext, field.getInt(null))?.takeIf { it is VectorDrawable }
-        } catch (e: Resources.NotFoundException) {
-          null
+    @Test
+    fun large() {
+        val icons = getIcons(false)
+        val layout = setupLayout(icons)
+
+        snap(layout)
+    }
+
+    private fun setupLayout(icons: List<Drawable>): GridLayout {
+        val layout = GridLayout(testContext).apply {
+            columnCount = 12
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
-      } else {
-        null
-      }
+        icons.forEach { icon ->
+            val imageView = ImageView(testContext).apply { setImageDrawable(icon) }
+            layout.addView(imageView)
+        }
+        return layout
     }
-  }
+
+    private fun getIcons(small: Boolean): List<Drawable> {
+        return R.drawable::class.java.fields.mapNotNull { field ->
+            if (field.name.startsWith("bpk_") && field.name.endsWith("_sm") == small) {
+                try {
+                    AppCompatResources.getDrawable(testContext, field.getInt(null))?.takeIf { it is VectorDrawable }
+                } catch (e: Resources.NotFoundException) {
+                    null
+                }
+            } else {
+                null
+            }
+        }
+    }
 }

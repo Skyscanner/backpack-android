@@ -35,114 +35,114 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
 open class BpkBottomNav @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : BottomNavigationView(context, attrs, defStyleAttr) {
 
-  private val listeners = ListenersDelegate(menu).also {
-    super.setOnItemReselectedListener(it)
-    super.setOnItemSelectedListener(it)
-  }
+    private val listeners = ListenersDelegate(menu).also {
+        super.setOnItemReselectedListener(it)
+        super.setOnItemSelectedListener(it)
+    }
 
-  private val fontSpan = BottomNavSpan(context)
+    private val fontSpan = BottomNavSpan(context)
 
-  init {
-    labelVisibilityMode = LABEL_VISIBILITY_LABELED
-    background = AppCompatResources.getDrawable(context, R.drawable.bpk_bottom_nav_background)
-    minimumHeight = resources.getDimensionPixelSize(R.dimen.bpk_bottom_nav_height)
-    itemTextColor = context.getColorStateList(R.color.bpk_bottom_nav_selector)
-    itemIconTintList = itemTextColor
-    elevation = resources.getDimension(R.dimen.bpkElevationLg)
-  }
+    init {
+        labelVisibilityMode = LABEL_VISIBILITY_LABELED
+        background = AppCompatResources.getDrawable(context, R.drawable.bpk_bottom_nav_background)
+        minimumHeight = resources.getDimensionPixelSize(R.dimen.bpk_bottom_nav_height)
+        itemTextColor = context.getColorStateList(R.color.bpk_bottom_nav_selector)
+        itemIconTintList = itemTextColor
+        elevation = resources.getDimension(R.dimen.bpkElevationLg)
+    }
 
-  fun addItem(id: Int, title: String, icon: Drawable): MenuItem =
-    menu.add(
-      Menu.NONE,
-      id,
-      menu.size(),
-      SpannableStringBuilder().append(title, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE),
+    fun addItem(id: Int, title: String, icon: Drawable): MenuItem =
+        menu.add(
+            Menu.NONE,
+            id,
+            menu.size(),
+            SpannableStringBuilder().append(title, fontSpan, Spannable.SPAN_INCLUSIVE_INCLUSIVE),
+        )
+            .setIcon(icon)
+
+    fun addItem(id: Int, @StringRes title: Int, @DrawableRes icon: Int): MenuItem =
+        addItem(id, resources.getString(title), AppCompatResources.getDrawable(context, icon)!!)
+
+    fun addOnNavigationItemSelectedListener(listener: (MenuItem, Int) -> Unit) {
+        listeners.selected += listener
+    }
+
+    fun addOnNavigationItemReselectedListener(listener: (MenuItem, Int) -> Unit) {
+        listeners.reselected += listener
+    }
+
+    fun removeOnNavigationItemSelectedListener(listener: (MenuItem, Int) -> Unit) {
+        listeners.selected -= listener
+    }
+
+    fun removeOnNavigationItemReselectedListener(listener: (MenuItem, Int) -> Unit) {
+        listeners.reselected -= listener
+    }
+
+    @Deprecated(
+        "Use add/remove OnNavigationItemSelectedListener instead",
+        replaceWith = ReplaceWith("addOnNavigationItemSelectedListener"),
     )
-      .setIcon(icon)
-
-  fun addItem(id: Int, @StringRes title: Int, @DrawableRes icon: Int): MenuItem =
-    addItem(id, resources.getString(title), AppCompatResources.getDrawable(context, icon)!!)
-
-  fun addOnNavigationItemSelectedListener(listener: (MenuItem, Int) -> Unit) {
-    listeners.selected += listener
-  }
-
-  fun addOnNavigationItemReselectedListener(listener: (MenuItem, Int) -> Unit) {
-    listeners.reselected += listener
-  }
-
-  fun removeOnNavigationItemSelectedListener(listener: (MenuItem, Int) -> Unit) {
-    listeners.selected -= listener
-  }
-
-  fun removeOnNavigationItemReselectedListener(listener: (MenuItem, Int) -> Unit) {
-    listeners.reselected -= listener
-  }
-
-  @Deprecated(
-    "Use add/remove OnNavigationItemSelectedListener instead",
-    replaceWith = ReplaceWith("addOnNavigationItemSelectedListener"),
-  )
-  override fun setOnItemSelectedListener(listener: OnItemSelectedListener?) {
-    throw UnsupportedOperationException("Not supported")
-  }
-
-  @Deprecated(
-    "Use add/remove OnNavigationItemSelectedListener instead",
-    replaceWith = ReplaceWith("addOnNavigationItemReselectedListener"),
-  )
-  override fun setOnItemReselectedListener(listener: OnItemReselectedListener?) {
-    throw UnsupportedOperationException("Not supported")
-  }
-
-  private class ListenersDelegate(
-    private val menu: Menu,
-  ) : OnItemSelectedListener, OnItemReselectedListener {
-
-    val reselected = mutableListOf<(MenuItem, Int) -> Unit>()
-    val selected = mutableListOf<(MenuItem, Int) -> Unit>()
-
-    override fun onNavigationItemReselected(item: MenuItem) {
-      val index = findIndexOf(item)
-      if (index != -1) {
-        reselected.forEach { it.invoke(item, index) }
-      }
+    override fun setOnItemSelectedListener(listener: OnItemSelectedListener?) {
+        throw UnsupportedOperationException("Not supported")
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-      val index = findIndexOf(item)
-      if (index != -1) {
-        selected.forEach { it.invoke(item, index) }
-      }
-      return true
+    @Deprecated(
+        "Use add/remove OnNavigationItemSelectedListener instead",
+        replaceWith = ReplaceWith("addOnNavigationItemReselectedListener"),
+    )
+    override fun setOnItemReselectedListener(listener: OnItemReselectedListener?) {
+        throw UnsupportedOperationException("Not supported")
     }
 
-    private fun findIndexOf(item: MenuItem): Int {
-      for (i in 0 until menu.size()) {
-        if (menu.getItem(i) == item) {
-          return i
+    private class ListenersDelegate(
+        private val menu: Menu,
+    ) : OnItemSelectedListener, OnItemReselectedListener {
+
+        val reselected = mutableListOf<(MenuItem, Int) -> Unit>()
+        val selected = mutableListOf<(MenuItem, Int) -> Unit>()
+
+        override fun onNavigationItemReselected(item: MenuItem) {
+            val index = findIndexOf(item)
+            if (index != -1) {
+                reselected.forEach { it.invoke(item, index) }
+            }
         }
-      }
-      return -1
+
+        override fun onNavigationItemSelected(item: MenuItem): Boolean {
+            val index = findIndexOf(item)
+            if (index != -1) {
+                selected.forEach { it.invoke(item, index) }
+            }
+            return true
+        }
+
+        private fun findIndexOf(item: MenuItem): Int {
+            for (i in 0 until menu.size()) {
+                if (menu.getItem(i) == item) {
+                    return i
+                }
+            }
+            return -1
+        }
     }
-  }
 
-  // We have to create a custom span as a BpkFontSpan causes some animation glitches as it sets text size as well.
-  private class BottomNavSpan(private val font: BpkText.FontDefinition) : CharacterStyle() {
+    // We have to create a custom span as a BpkFontSpan causes some animation glitches as it sets text size as well.
+    private class BottomNavSpan(private val font: BpkText.FontDefinition) : CharacterStyle() {
 
-    constructor(
-      context: Context,
-      textStyle: BpkText.TextStyle = BpkText.TextStyle.BodyDefault,
-    ) :
-      this(BpkText.getFont(context, textStyle))
+        constructor(
+            context: Context,
+            textStyle: BpkText.TextStyle = BpkText.TextStyle.BodyDefault,
+        ) :
+            this(BpkText.getFont(context, textStyle))
 
-    override fun updateDrawState(tp: TextPaint) {
-      tp.typeface = font.typeface
+        override fun updateDrawState(tp: TextPaint) {
+            tp.typeface = font.typeface
+        }
     }
-  }
 }

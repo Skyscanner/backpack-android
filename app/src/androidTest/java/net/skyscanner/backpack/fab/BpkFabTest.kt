@@ -29,19 +29,19 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkFabTest : BpkSnapshotTest() {
 
-  private val fab = BpkFab(testContext)
+    private val fab = BpkFab(testContext)
 
-  @Test
-  fun default() {
-    fab.setImageResource(R.drawable.bpk_search)
-    snap(fab)
-  }
+    @Test
+    fun default() {
+        fab.setImageResource(R.drawable.bpk_search)
+        snap(fab)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun customIcon_Disabled() {
-    fab.setImageResource(R.drawable.bpk_search)
-    fab.isEnabled = false
-    snap(fab)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun customIcon_Disabled() {
+        fab.setImageResource(R.drawable.bpk_search)
+        fab.isEnabled = false
+        snap(fab)
+    }
 }

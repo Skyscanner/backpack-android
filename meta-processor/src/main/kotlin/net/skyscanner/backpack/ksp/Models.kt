@@ -22,22 +22,22 @@ import com.google.devtools.ksp.symbol.FileLocation
 import com.google.devtools.ksp.symbol.KSName
 
 data class ComponentDefinition(
-  val id: KSName,
-  val name: String,
-  val isToken: Boolean,
-  val location: FileLocation,
+    val id: KSName,
+    val name: String,
+    val isToken: Boolean,
+    val location: FileLocation,
 )
 
 data class StoryDefinition(
-  val component: ComponentDefinition,
-  val name: String,
-  val isCompose: Boolean,
-  val kind: EnumValue,
-  val reference: String,
-  val location: FileLocation,
+    val component: ComponentDefinition,
+    val name: String,
+    val isCompose: Boolean,
+    val kind: EnumValue,
+    val reference: String,
+    val location: FileLocation,
 )
 
 data class EnumValue(
-  val value: String,
-  val type: String,
+    val value: String,
+    val type: String,
 )

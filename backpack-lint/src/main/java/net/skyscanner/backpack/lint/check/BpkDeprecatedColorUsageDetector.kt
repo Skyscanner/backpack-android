@@ -38,73 +38,73 @@ import org.w3c.dom.Element
 @Suppress("UnstableApiUsage")
 class BpkDeprecatedColorUsageDetector : Detector(), SourceCodeScanner, XmlScanner {
 
-  companion object {
-    private const val EXPLANATION =
-      "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
+    companion object {
+        private const val EXPLANATION =
+            "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation."
 
-    val ISSUE = Issue.create(
-      id = "BpkDeprecatedColorUsage",
-      briefDescription = "Deprecated color used",
-      explanation = EXPLANATION,
-      category = Category.CORRECTNESS,
-      severity = Severity.WARNING,
-      implementation = Implementation(
-        BpkDeprecatedColorUsageDetector::class.java,
-        Scope.JAVA_AND_RESOURCE_FILES,
-      ),
-    )
+        val ISSUE = Issue.create(
+            id = "BpkDeprecatedColorUsage",
+            briefDescription = "Deprecated color used",
+            explanation = EXPLANATION,
+            category = Category.CORRECTNESS,
+            severity = Severity.WARNING,
+            implementation = Implementation(
+                BpkDeprecatedColorUsageDetector::class.java,
+                Scope.JAVA_AND_RESOURCE_FILES,
+            ),
+        )
 
-    private const val COLOR_RES_PREFIX = "@color/"
-  }
-
-  override fun appliesTo(folderType: ResourceFolderType): Boolean {
-    return folderType == ResourceFolderType.LAYOUT ||
-      folderType == ResourceFolderType.COLOR ||
-      folderType == ResourceFolderType.VALUES
-  }
-
-  override fun getApplicableAttributes(): Collection<String> = XmlScannerConstants.ALL
-
-  override fun visitAttribute(context: XmlContext, attribute: Attr) {
-    if (attribute.value.isColor() && BpkDeprecatedTokens.deprecatedColors.contains(attribute.value.trimPrefix())) {
-      context.report(
-        ISSUE,
-        context.getValueLocation(attribute),
-        EXPLANATION,
-      )
+        private const val COLOR_RES_PREFIX = "@color/"
     }
-  }
 
-  override fun getApplicableElements(): Collection<String> = listOf("color")
-
-  override fun visitElement(context: XmlContext, element: Element) {
-    if (element.textContent.isColor() && BpkDeprecatedTokens.deprecatedColors.contains(element.textContent.trimPrefix())) {
-      context.report(
-        ISSUE,
-        context.getElementLocation(element),
-        EXPLANATION,
-      )
+    override fun appliesTo(folderType: ResourceFolderType): Boolean {
+        return folderType == ResourceFolderType.LAYOUT ||
+            folderType == ResourceFolderType.COLOR ||
+            folderType == ResourceFolderType.VALUES
     }
-  }
 
-  override fun appliesToResourceRefs(): Boolean = true
+    override fun getApplicableAttributes(): Collection<String> = XmlScannerConstants.ALL
 
-  override fun visitResourceReference(
-    context: JavaContext,
-    node: UElement,
-    type: ResourceType,
-    name: String,
-    isFramework: Boolean,
-  ) {
-    if (BpkDeprecatedTokens.deprecatedColors.contains(name)) {
-      context.report(
-        ISSUE,
-        context.getLocation(node),
-        EXPLANATION,
-      )
+    override fun visitAttribute(context: XmlContext, attribute: Attr) {
+        if (attribute.value.isColor() && BpkDeprecatedTokens.deprecatedColors.contains(attribute.value.trimPrefix())) {
+            context.report(
+                ISSUE,
+                context.getValueLocation(attribute),
+                EXPLANATION,
+            )
+        }
     }
-  }
 
-  private fun String.isColor() = startsWith(COLOR_RES_PREFIX)
-  private fun String.trimPrefix() = removePrefix(COLOR_RES_PREFIX)
+    override fun getApplicableElements(): Collection<String> = listOf("color")
+
+    override fun visitElement(context: XmlContext, element: Element) {
+        if (element.textContent.isColor() && BpkDeprecatedTokens.deprecatedColors.contains(element.textContent.trimPrefix())) {
+            context.report(
+                ISSUE,
+                context.getElementLocation(element),
+                EXPLANATION,
+            )
+        }
+    }
+
+    override fun appliesToResourceRefs(): Boolean = true
+
+    override fun visitResourceReference(
+        context: JavaContext,
+        node: UElement,
+        type: ResourceType,
+        name: String,
+        isFramework: Boolean,
+    ) {
+        if (BpkDeprecatedTokens.deprecatedColors.contains(name)) {
+            context.report(
+                ISSUE,
+                context.getLocation(node),
+                EXPLANATION,
+            )
+        }
+    }
+
+    private fun String.isColor() = startsWith(COLOR_RES_PREFIX)
+    private fun String.trimPrefix() = removePrefix(COLOR_RES_PREFIX)
 }

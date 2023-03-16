@@ -21,8 +21,8 @@ package net.skyscanner.backpack.ksp.visitor
 import net.skyscanner.backpack.ksp.ComposeStoryAnnotation
 
 object ComposeStoriesVisitor : AbstractStoriesVisitor(
-  annotationDefinition = ComposeStoryAnnotation,
-  paramName = ComposeStoryAnnotation.paramName,
-  paramKind = ComposeStoryAnnotation.paramKind,
-  isCompose = true,
+    annotationDefinition = ComposeStoryAnnotation,
+    paramName = ComposeStoryAnnotation.paramName,
+    paramKind = ComposeStoryAnnotation.paramKind,
+    isCompose = true,
 )

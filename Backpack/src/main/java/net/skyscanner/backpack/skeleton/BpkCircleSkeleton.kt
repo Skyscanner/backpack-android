@@ -30,95 +30,95 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 
 class BpkCircleSkeleton @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  @AttrRes defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    @AttrRes defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
-  val paint = Paint().apply {
-    color = context.getColor(R.color.bpkSurfaceHighlight)
-    style = Paint.Style.FILL
-    isAntiAlias = true
-  }
+    val paint = Paint().apply {
+        color = context.getColor(R.color.bpkSurfaceHighlight)
+        style = Paint.Style.FILL
+        isAntiAlias = true
+    }
 
-  enum class CircleSize(
-    internal val id: Int,
-  ) {
+    enum class CircleSize(
+        internal val id: Int,
+    ) {
+        /**
+         * Small size: 32.dp
+         */
+        Small(0),
+
+        /**
+         * Large size: 48.dp
+         */
+        Large(1),
+
+        /**
+         * Custom. Need decide the size by diameter property.
+         */
+        Custom(2),
+    }
+
     /**
-     * Small size: 32.dp
+     * Only for CircleSize.Custom
      */
-    Small(0),
-
-    /**
-     * Large size: 48.dp
-     */
-    Large(1),
-
-    /**
-     * Custom. Need decide the size by diameter property.
-     */
-    Custom(2),
-  }
-
-  /**
-   * Only for CircleSize.Custom
-   */
-  @Dimension
-  var diameter = 0
-    set(value) {
-      field = value
-      invalidate()
-    }
-
-  /**
-   * Small: 32dp, Large: 48dp, or use Custom and then set diameter property.
-   */
-  var size = CircleSize.Small
-    set(value) {
-      field = value
-      invalidate()
-    }
-
-  init {
-    context.obtainStyledAttributes(attrs, R.styleable.BpkCircleSkeleton, defStyleAttr, 0).use {
-      diameter = parseDiameterAttribute(it, diameter)
-      size = parseCircleSizeAttribute(it, size)
-    }
-  }
-
-  @Dimension
-  private fun getInternalSize(): Int {
-    return when (size) {
-      CircleSize.Custom -> diameter
-      CircleSize.Small -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
-      CircleSize.Large -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg) * 2
-    }
-  }
-
-  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-    super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-    val internalSize = getInternalSize()
-    setMeasuredDimension(internalSize, internalSize)
-  }
-
-  override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-    val internalSize = getInternalSize()
-    super.onLayout(changed, 0, 0, internalSize, internalSize)
-  }
-
-  override fun onDraw(canvas: Canvas?) {
-    val internalSize = getInternalSize()
-    val radius = internalSize.toFloat().div(2)
-    canvas?.drawCircle(radius, radius, radius, paint)
-  }
-
-  private companion object {
     @Dimension
-    private fun parseDiameterAttribute(it: TypedArray, fallback: Int) =
-      it.getDimensionPixelSize(R.styleable.BpkCircleSkeleton_skeletonDiameter, fallback)
+    var diameter = 0
+        set(value) {
+            field = value
+            invalidate()
+        }
 
-    private fun parseCircleSizeAttribute(it: TypedArray, fallback: CircleSize) =
-      it.getInt(R.styleable.BpkCircleSkeleton_skeletonCircleSize, fallback.id).let { id ->
-        CircleSize.values().find { it.id == id } ?: fallback
-      }
-  }
+    /**
+     * Small: 32dp, Large: 48dp, or use Custom and then set diameter property.
+     */
+    var size = CircleSize.Small
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    init {
+        context.obtainStyledAttributes(attrs, R.styleable.BpkCircleSkeleton, defStyleAttr, 0).use {
+            diameter = parseDiameterAttribute(it, diameter)
+            size = parseCircleSizeAttribute(it, size)
+        }
+    }
+
+    @Dimension
+    private fun getInternalSize(): Int {
+        return when (size) {
+            CircleSize.Custom -> diameter
+            CircleSize.Small -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
+            CircleSize.Large -> context.resources.getDimensionPixelSize(R.dimen.bpkSpacingLg) * 2
+        }
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        val internalSize = getInternalSize()
+        setMeasuredDimension(internalSize, internalSize)
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        val internalSize = getInternalSize()
+        super.onLayout(changed, 0, 0, internalSize, internalSize)
+    }
+
+    override fun onDraw(canvas: Canvas?) {
+        val internalSize = getInternalSize()
+        val radius = internalSize.toFloat().div(2)
+        canvas?.drawCircle(radius, radius, radius, paint)
+    }
+
+    private companion object {
+        @Dimension
+        private fun parseDiameterAttribute(it: TypedArray, fallback: Int) =
+            it.getDimensionPixelSize(R.styleable.BpkCircleSkeleton_skeletonDiameter, fallback)
+
+        private fun parseCircleSizeAttribute(it: TypedArray, fallback: CircleSize) =
+            it.getInt(R.styleable.BpkCircleSkeleton_skeletonCircleSize, fallback.id).let { id ->
+                CircleSize.values().find { it.id == id } ?: fallback
+            }
+    }
 }

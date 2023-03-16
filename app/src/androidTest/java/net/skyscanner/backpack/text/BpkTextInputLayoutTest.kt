@@ -28,54 +28,54 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkTextInputLayoutTest : BpkSnapshotTest() {
 
-  private val textField = BpkTextField(testContext).apply {
-    hint = "Hint"
-    setText("Text")
-  }
+    private val textField = BpkTextField(testContext).apply {
+        hint = "Hint"
+        setText("Text")
+    }
 
-  private val subject = BpkTextInputLayout(testContext).apply {
-    label = "Label"
-    addView(textField)
-  }
+    private val subject = BpkTextInputLayout(testContext).apply {
+        label = "Label"
+        addView(textField)
+    }
 
-  @Test
-  fun default() {
-    snap(subject)
-  }
+    @Test
+    fun default() {
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabled() {
-    textField.isEnabled = false
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabled() {
+        textField.isEnabled = false
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun error() {
-    subject.error = "Error"
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun error() {
+        subject.error = "Error"
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun helper() {
-    subject.helperText = "Helper"
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun helper() {
+        subject.helperText = "Helper"
+        snap(subject)
+    }
 
-  @Test
-  fun helperAndError() {
-    subject.error = "Error"
-    subject.helperText = "Helper"
-    snap(subject)
-  }
+    @Test
+    fun helperAndError() {
+        subject.error = "Error"
+        subject.helperText = "Helper"
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun errorNoLabel() {
-    subject.label = null
-    subject.error = "Error"
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun errorNoLabel() {
+        subject.label = null
+        subject.error = "Error"
+        snap(subject)
+    }
 }

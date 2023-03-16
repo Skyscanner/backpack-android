@@ -24,22 +24,22 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 
 @Stable
 internal data class BpkFloatingNotificationData(
-  val text: String,
-  val icon: BpkIcon?,
-  val cta: String?,
-  val hideAfter: Long,
-  val onExit: (() -> Unit)?,
-  private val onClick: (() -> Unit)?,
-  private val continuation: CancellableContinuation<Unit>,
+    val text: String,
+    val icon: BpkIcon?,
+    val cta: String?,
+    val hideAfter: Long,
+    val onExit: (() -> Unit)?,
+    private val onClick: (() -> Unit)?,
+    private val continuation: CancellableContinuation<Unit>,
 ) {
 
-  fun performAction() {
-    if (continuation.isActive) continuation.resume(Unit, onCancellation = null)
-    onClick?.invoke()
-  }
+    fun performAction() {
+        if (continuation.isActive) continuation.resume(Unit, onCancellation = null)
+        onClick?.invoke()
+    }
 
-  fun dismiss() {
-    if (continuation.isActive) continuation.resume(Unit, onCancellation = null)
-    onExit?.invoke()
-  }
+    fun dismiss() {
+        if (continuation.isActive) continuation.resume(Unit, onCancellation = null)
+        onExit?.invoke()
+    }
 }

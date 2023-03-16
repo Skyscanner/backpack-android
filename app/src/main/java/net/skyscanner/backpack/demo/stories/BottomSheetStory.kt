@@ -30,4 +30,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @BottomSheetComponent
 @ViewStory
 fun BottomSheetStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_bottom_sheet, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_bottom_sheet, modifier.fillMaxSize())

@@ -28,45 +28,45 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkRatingVerticalTest : BpkSnapshotTest() {
 
-  private val style = BpkRating.Style.Vertical
+    private val style = BpkRating.Style.Vertical
 
-  @Test
-  fun default() {
-    val subject = createTestRating(testContext, style = style)
-    snap(subject)
-  }
+    @Test
+    fun default() {
+        val subject = createTestRating(testContext, style = style)
+        snap(subject)
+    }
 
-  @Test
-  fun icon() {
-    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Icon)
-    snap(subject)
-  }
+    @Test
+    fun icon() {
+        val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Icon)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun extraSmall() {
-    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.ExtraSmall)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun extraSmall() {
+        val subject = createTestRating(testContext, style = style, size = BpkRating.Size.ExtraSmall)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun small() {
-    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Small)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun small() {
+        val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Small)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun base() {
-    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Base)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun base() {
+        val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Base)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun large() {
-    val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun large() {
+        val subject = createTestRating(testContext, style = style, size = BpkRating.Size.Large)
+        snap(subject)
+    }
 }

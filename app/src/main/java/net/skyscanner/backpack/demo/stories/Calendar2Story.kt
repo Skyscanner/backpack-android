@@ -43,77 +43,77 @@ import net.skyscanner.backpack.toast.BpkToast
 @Calendar2Component
 @ViewStory("Selection Disabled", StoryKind.DemoOnly)
 fun CalendarSelectionDisabledStory(modifier: Modifier = Modifier) =
-  Calendar2Demo(CalendarStoryType.SelectionDisabled, modifier)
+    Calendar2Demo(CalendarStoryType.SelectionDisabled, modifier)
 
 @Composable
 @Calendar2Component
 @ViewStory("Selection Single", StoryKind.DemoOnly)
 fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
-  Calendar2Demo(CalendarStoryType.SelectionSingle, modifier)
+    Calendar2Demo(CalendarStoryType.SelectionSingle, modifier)
 
 @Composable
 @Calendar2Component
 @ViewStory("Selection Range", StoryKind.DemoOnly)
 fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
-  Calendar2Demo(CalendarStoryType.SelectionRange, modifier)
+    Calendar2Demo(CalendarStoryType.SelectionRange, modifier)
 
 @Composable
 @Calendar2Component
 @ViewStory("Selection Whole Month")
 fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
-  Calendar2Demo(CalendarStoryType.SelectionWholeMonth, modifier)
+    Calendar2Demo(CalendarStoryType.SelectionWholeMonth, modifier)
 
 @Composable
 @Calendar2Component
 @ViewStory("Disabled weekends", StoryKind.DemoOnly)
 fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
-  Calendar2Demo(CalendarStoryType.WithDisabledDates, modifier)
+    Calendar2Demo(CalendarStoryType.WithDisabledDates, modifier)
 
 @Composable
 @Calendar2Component
 @ViewStory("Day labels")
 fun CalendarDayLabels(modifier: Modifier = Modifier) =
-  Calendar2Demo(CalendarStoryType.WithLabels, modifier)
+    Calendar2Demo(CalendarStoryType.WithLabels, modifier)
 
 @Composable
 @Calendar2Component
 @ViewStory("Pre-selected range")
 fun CalendarPreSelectedRange(modifier: Modifier = Modifier) =
-  Calendar2Demo(CalendarStoryType.PreselectedRange, modifier)
+    Calendar2Demo(CalendarStoryType.PreselectedRange, modifier)
 
 @Composable
 private fun Calendar2Demo(
-  type: CalendarStoryType,
-  modifier: Modifier = Modifier,
+    type: CalendarStoryType,
+    modifier: Modifier = Modifier,
 ) {
-  val scope = rememberCoroutineScope()
-  val automationMode = LocalAutomationMode.current
+    val scope = rememberCoroutineScope()
+    val automationMode = LocalAutomationMode.current
 
-  AndroidLayout<BpkCalendar>(R.layout.fragment_calendar_2, R.id.calendar2, modifier.fillMaxSize()) {
-    state
-      .filter { it.selection !is CalendarSelection.None }
-      .onEach {
-        if (!automationMode) {
-          BpkToast.makeText(context, it.selection.toString(), BpkToast.LENGTH_SHORT).show()
+    AndroidLayout<BpkCalendar>(R.layout.fragment_calendar_2, R.id.calendar2, modifier.fillMaxSize()) {
+        state
+            .filter { it.selection !is CalendarSelection.None }
+            .onEach {
+                if (!automationMode) {
+                    BpkToast.makeText(context, it.selection.toString(), BpkToast.LENGTH_SHORT).show()
+                }
+            }
+            .launchIn(scope)
+
+        effects
+            .filter { it is CalendarEffect.MonthSelected }
+            .onEach {
+                if (!automationMode) {
+                    BpkToast.makeText(context, it.toString(), BpkToast.LENGTH_SHORT).show()
+                }
+            }
+            .launchIn(scope)
+
+        setParams(CalendarStoryType.createInitialParams(type))
+        when (type) {
+            CalendarStoryType.SelectionWholeMonth -> setSelection(CalendarStorySelection.WholeMonthRange)
+            CalendarStoryType.PreselectedRange -> setSelection(PreselectedRange)
+            CalendarStoryType.WithLabels -> setSelection(CalendarStorySelection.PreselectedRange)
+            else -> Unit
         }
-      }
-      .launchIn(scope)
-
-    effects
-      .filter { it is CalendarEffect.MonthSelected }
-      .onEach {
-        if (!automationMode) {
-          BpkToast.makeText(context, it.toString(), BpkToast.LENGTH_SHORT).show()
-        }
-      }
-      .launchIn(scope)
-
-    setParams(CalendarStoryType.createInitialParams(type))
-    when (type) {
-      CalendarStoryType.SelectionWholeMonth -> setSelection(CalendarStorySelection.WholeMonthRange)
-      CalendarStoryType.PreselectedRange -> setSelection(PreselectedRange)
-      CalendarStoryType.WithLabels -> setSelection(CalendarStorySelection.PreselectedRange)
-      else -> Unit
     }
-  }
 }

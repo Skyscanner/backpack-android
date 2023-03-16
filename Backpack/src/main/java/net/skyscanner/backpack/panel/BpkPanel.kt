@@ -26,36 +26,36 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import net.skyscanner.backpack.R
 
 open class BpkPanel @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.style.Bpk_panel,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = R.style.Bpk_panel,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
-  @Dimension
-  private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase)
+    @Dimension
+    private var paddingSize = resources.getDimensionPixelOffset(R.dimen.bpkSpacingBase)
 
-  init {
-    initialize(attrs, defStyleAttr)
-  }
-
-  /**
-   * @property padding
-   * padding for panel
-   */
-  var padding: Boolean = false
-    set(value) {
-      field = value
-      if (this.padding) {
-        this.setPadding(paddingSize, paddingSize, paddingSize, paddingSize)
-      } else {
-        this.setPadding(0, 0, 0, 0)
-      }
+    init {
+        initialize(attrs, defStyleAttr)
     }
 
-  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val a = context.obtainStyledAttributes(attrs, R.styleable.BpkPanel, R.attr.padding, defStyleAttr)
-    padding = a.getBoolean(R.styleable.BpkPanel_padding, true)
-    this.background = AppCompatResources.getDrawable(context, R.drawable.border)
-    a.recycle()
-  }
+    /**
+     * @property padding
+     * padding for panel
+     */
+    var padding: Boolean = false
+        set(value) {
+            field = value
+            if (this.padding) {
+                this.setPadding(paddingSize, paddingSize, paddingSize, paddingSize)
+            } else {
+                this.setPadding(0, 0, 0, 0)
+            }
+        }
+
+    private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
+        val a = context.obtainStyledAttributes(attrs, R.styleable.BpkPanel, R.attr.padding, defStyleAttr)
+        padding = a.getBoolean(R.styleable.BpkPanel_padding, true)
+        this.background = AppCompatResources.getDrawable(context, R.drawable.border)
+        a.recycle()
+    }
 }

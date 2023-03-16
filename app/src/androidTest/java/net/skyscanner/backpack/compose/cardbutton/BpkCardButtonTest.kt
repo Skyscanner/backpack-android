@@ -28,65 +28,65 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 class BpkCardButtonTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.style)) {
 
-  private val size: BpkCardButtonSize = flavor.size
-  private val style: BpkCardButtonStyle = flavor.style
+    private val size: BpkCardButtonSize = flavor.size
+    private val style: BpkCardButtonStyle = flavor.style
 
-  @Test
-  fun defaultSaveButton() {
-    snap(background = { style.background() }) {
-      BpkSaveButton(
-        checked = false,
-        contentDescription = "",
-        style = style,
-        size = size,
-        onCheckedChange = {},
-      )
+    @Test
+    fun defaultSaveButton() {
+        snap(background = { style.background() }) {
+            BpkSaveButton(
+                checked = false,
+                contentDescription = "",
+                style = style,
+                size = size,
+                onCheckedChange = {},
+            )
+        }
     }
-  }
 
-  @Test
-  fun checkedSaveButton() {
-    snap(background = { style.background() }) {
-      BpkSaveButton(
-        checked = true,
-        contentDescription = "",
-        style = style,
-        size = size,
-        onCheckedChange = {},
-      )
+    @Test
+    fun checkedSaveButton() {
+        snap(background = { style.background() }) {
+            BpkSaveButton(
+                checked = true,
+                contentDescription = "",
+                style = style,
+                size = size,
+                onCheckedChange = {},
+            )
+        }
     }
-  }
 
-  @Test
-  fun defaultShareButton() {
-    snap(background = { style.background() }) {
-      BpkShareButton(
-        contentDescription = "",
-        style = style,
-        size = size,
-        onClick = {},
-      )
+    @Test
+    fun defaultShareButton() {
+        snap(background = { style.background() }) {
+            BpkShareButton(
+                contentDescription = "",
+                style = style,
+                size = size,
+                onClick = {},
+            )
+        }
     }
-  }
 
-  companion object {
-    @JvmStatic
-    @Parameterized.Parameters(name = "{0} Screenshot")
-    fun flavours(): List<Flavor> = BpkCardButtonSize.values().map { size ->
-      BpkCardButtonStyle.values().map { style -> Flavor(size, style) }
-    }.flatten()
-  }
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0} Screenshot")
+        fun flavours(): List<Flavor> = BpkCardButtonSize.values().map { size ->
+            BpkCardButtonStyle.values().map { style -> Flavor(size, style) }
+        }.flatten()
+    }
 }
 
 data class Flavor(
-  val size: BpkCardButtonSize,
-  val style: BpkCardButtonStyle,
+    val size: BpkCardButtonSize,
+    val style: BpkCardButtonStyle,
 )
 
 @Composable
 private fun BpkCardButtonStyle.background() =
-  when (this) {
-    BpkCardButtonStyle.Default -> BpkTheme.colors.surfaceDefault
-    BpkCardButtonStyle.OnDark -> BpkTheme.colors.surfaceContrast
-    BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceHighlight
-  }
+    when (this) {
+        BpkCardButtonStyle.Default -> BpkTheme.colors.surfaceDefault
+        BpkCardButtonStyle.OnDark -> BpkTheme.colors.surfaceContrast
+        BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceHighlight
+    }

@@ -36,60 +36,60 @@ import org.junit.runner.RunWith
 @OptIn(ExperimentalCoroutinesApi::class)
 class BpkFloatingNotificationTest : BpkSnapshotTest() {
 
-  private val state = BpkFloatingNotificationState()
-  private val scope = TestScope(UnconfinedTestDispatcher())
+    private val state = BpkFloatingNotificationState()
+    private val scope = TestScope(UnconfinedTestDispatcher())
 
-  @Test
-  fun textOnly() {
-    scope.launch {
-      state.show(
-        text = "Lorem ipsum dolor sit amet",
-      )
+    @Test
+    fun textOnly() {
+        scope.launch {
+            state.show(
+                text = "Lorem ipsum dolor sit amet",
+            )
+        }
+        snap(height = 110.dp) { BpkFloatingNotification(state) }
     }
-    snap(height = 110.dp) { BpkFloatingNotification(state) }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun withIcon() {
-    scope.launch {
-      state.show(
-        text = "Lorem ipsum dolor sit amet",
-        icon = BpkIcon.Heart,
-      )
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withIcon() {
+        scope.launch {
+            state.show(
+                text = "Lorem ipsum dolor sit amet",
+                icon = BpkIcon.Heart,
+            )
+        }
+        snap(height = 110.dp) {
+            BpkFloatingNotification(state)
+        }
     }
-    snap(height = 110.dp) {
-      BpkFloatingNotification(state)
-    }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun withCta() {
-    scope.launch {
-      state.show(
-        text = "Lorem ipsum dolor sit amet",
-        cta = "Open",
-        onClick = {},
-      )
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withCta() {
+        scope.launch {
+            state.show(
+                text = "Lorem ipsum dolor sit amet",
+                cta = "Open",
+                onClick = {},
+            )
+        }
+        snap(height = 110.dp) {
+            BpkFloatingNotification(state)
+        }
     }
-    snap(height = 110.dp) {
-      BpkFloatingNotification(state)
-    }
-  }
 
-  @Test
-  fun withIconAndCta() {
-    scope.launch {
-      state.show(
-        text = "Lorem ipsum dolor sit amet",
-        cta = "Open",
-        onClick = {},
-        icon = BpkIcon.Heart,
-      )
+    @Test
+    fun withIconAndCta() {
+        scope.launch {
+            state.show(
+                text = "Lorem ipsum dolor sit amet",
+                cta = "Open",
+                onClick = {},
+                icon = BpkIcon.Heart,
+            )
+        }
+        snap(height = 110.dp) {
+            BpkFloatingNotification(state)
+        }
     }
-    snap(height = 110.dp) {
-      BpkFloatingNotification(state)
-    }
-  }
 }

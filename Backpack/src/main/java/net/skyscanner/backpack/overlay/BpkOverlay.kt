@@ -39,92 +39,92 @@ import kotlin.math.roundToInt
  * extends [FrameLayout] and inherits its behaviour.
  */
 open class BpkOverlay @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-  enum class CornerType(
-    internal val id: Int,
-    internal val clipToOutline: Boolean = false,
-    internal val outlineProvider: ViewOutlineProvider = EmptyViewOutlineProvider,
-  ) {
-    None(0),
-    Rounded(
-      id = 1,
-      clipToOutline = true,
-      outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs),
-    ),
-  }
-
-  enum class OverlayType(
-    internal val id: Int,
-    internal val colorRes: Int = android.R.color.transparent,
-    internal val opacity: Float = 0.0f,
-  ) {
-    None(0),
-    Tint(
-      id = 1,
-      colorRes = R.color.bpkBlack,
-      opacity = 0.56f,
-    ),
-  }
-
-  var cornerType: CornerType = CornerType.None
-    set(value) {
-      field = value
-      outlineProvider = value.outlineProvider
-      clipToOutline = value.clipToOutline
+    enum class CornerType(
+        internal val id: Int,
+        internal val clipToOutline: Boolean = false,
+        internal val outlineProvider: ViewOutlineProvider = EmptyViewOutlineProvider,
+    ) {
+        None(0),
+        Rounded(
+            id = 1,
+            clipToOutline = true,
+            outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs),
+        ),
     }
 
-  private var overlayColor = Color.TRANSPARENT
-
-  var overlayType: OverlayType = OverlayType.None
-    set(value) {
-      field = value
-
-      val color = context.getColor(value.colorRes)
-
-      this.overlayColor = Color.argb(
-        (field.opacity * 255).roundToInt(),
-        Color.red(color),
-        Color.green(color),
-        Color.blue(color),
-      )
-
-      invalidate()
+    enum class OverlayType(
+        internal val id: Int,
+        internal val colorRes: Int = android.R.color.transparent,
+        internal val opacity: Float = 0.0f,
+    ) {
+        None(0),
+        Tint(
+            id = 1,
+            colorRes = R.color.bpkBlack,
+            opacity = 0.56f,
+        ),
     }
 
-  init {
-    var cornerType = cornerType
-    var overlayType = overlayType
+    var cornerType: CornerType = CornerType.None
+        set(value) {
+            field = value
+            outlineProvider = value.outlineProvider
+            clipToOutline = value.clipToOutline
+        }
 
-    context.obtainStyledAttributes(attrs, R.styleable.BpkOverlay, defStyleAttr, 0).use {
-      cornerType = parseCornerAttribute(it, cornerType)
-      overlayType = parseOverlayAttribute(it, overlayType)
+    private var overlayColor = Color.TRANSPARENT
+
+    var overlayType: OverlayType = OverlayType.None
+        set(value) {
+            field = value
+
+            val color = context.getColor(value.colorRes)
+
+            this.overlayColor = Color.argb(
+                (field.opacity * 255).roundToInt(),
+                Color.red(color),
+                Color.green(color),
+                Color.blue(color),
+            )
+
+            invalidate()
+        }
+
+    init {
+        var cornerType = cornerType
+        var overlayType = overlayType
+
+        context.obtainStyledAttributes(attrs, R.styleable.BpkOverlay, defStyleAttr, 0).use {
+            cornerType = parseCornerAttribute(it, cornerType)
+            overlayType = parseOverlayAttribute(it, overlayType)
+        }
+        this.cornerType = cornerType
+        this.overlayType = overlayType
     }
-    this.cornerType = cornerType
-    this.overlayType = overlayType
-  }
 
-  override fun drawChild(canvas: Canvas, child: View, drawingTime: Long): Boolean {
-    val result = super.drawChild(canvas, child, drawingTime)
-    if (child == getChildAt(0)) {
-      canvas.drawColor(overlayColor)
+    override fun drawChild(canvas: Canvas, child: View, drawingTime: Long): Boolean {
+        val result = super.drawChild(canvas, child, drawingTime)
+        if (child == getChildAt(0)) {
+            canvas.drawColor(overlayColor)
+        }
+        return result
     }
-    return result
-  }
 
-  private companion object {
+    private companion object {
 
-    private fun parseOverlayAttribute(it: TypedArray, fallback: OverlayType) =
-      it.getInt(R.styleable.BpkOverlay_overlayType, fallback.id).let { id ->
-        OverlayType.values().find { it.id == id } ?: fallback
-      }
+        private fun parseOverlayAttribute(it: TypedArray, fallback: OverlayType) =
+            it.getInt(R.styleable.BpkOverlay_overlayType, fallback.id).let { id ->
+                OverlayType.values().find { it.id == id } ?: fallback
+            }
 
-    private fun parseCornerAttribute(it: TypedArray, fallback: CornerType) =
-      it.getInt(R.styleable.BpkOverlay_overlayCornerType, fallback.id).let { id ->
-        CornerType.values().find { it.id == id } ?: fallback
-      }
-  }
+        private fun parseCornerAttribute(it: TypedArray, fallback: CornerType) =
+            it.getInt(R.styleable.BpkOverlay_overlayCornerType, fallback.id).let { id ->
+                CornerType.values().find { it.id == id } ?: fallback
+            }
+    }
 }

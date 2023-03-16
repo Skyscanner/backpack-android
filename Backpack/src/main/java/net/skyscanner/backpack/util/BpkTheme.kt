@@ -30,29 +30,29 @@ import androidx.appcompat.view.ContextThemeWrapper
 import net.skyscanner.backpack.R
 
 class BpkTheme {
-  companion object {
+    companion object {
 
-    /***
-     * Utility function to fetch Backpack's primary color.
-     *
-     * The primary color can set via theming via the `bpkPrimaryColor` attribute.
-     *
-     * The attribute is expected to be either a color or a color reference.
-     * In case the attribute is not found the default [R.color.bpkPrimary]
-     * will be returned.
-     *
-     * @param context the current ui context.
-     * @return a color integer
-     */
-    @JvmStatic
-    @ColorInt
-    @Deprecated("Use bpkCoreAccent instead")
-    fun getPrimaryColor(context: Context) =
-      resolveThemeColor(context, R.attr.bpkPrimaryColor)
-        // This should only ever happen if the value defined for the color is wrong as the property
-        // is guaranteed to be there because of the ContextThemeWrapper
-        ?: throw IllegalStateException("Could not resolve themed color!")
-  }
+        /***
+         * Utility function to fetch Backpack's primary color.
+         *
+         * The primary color can set via theming via the `bpkPrimaryColor` attribute.
+         *
+         * The attribute is expected to be either a color or a color reference.
+         * In case the attribute is not found the default [R.color.bpkPrimary]
+         * will be returned.
+         *
+         * @param context the current ui context.
+         * @return a color integer
+         */
+        @JvmStatic
+        @ColorInt
+        @Deprecated("Use bpkCoreAccent instead")
+        fun getPrimaryColor(context: Context) =
+            resolveThemeColor(context, R.attr.bpkPrimaryColor)
+                // This should only ever happen if the value defined for the color is wrong as the property
+                // is guaranteed to be there because of the ContextThemeWrapper
+                ?: throw IllegalStateException("Could not resolve themed color!")
+    }
 }
 
 /**
@@ -63,45 +63,45 @@ class BpkTheme {
  * @param resId the attribute id.
  */
 internal fun resolveThemeColor(context: Context, resId: Int): Int? {
-  val typedValue = TypedValue()
-  val wasResolved = context.theme.resolveAttribute(resId, typedValue, true)
+    val typedValue = TypedValue()
+    val wasResolved = context.theme.resolveAttribute(resId, typedValue, true)
 
-  return if (wasResolved && typedValue.resourceId == 0) {
-    typedValue.data
-  } else if (wasResolved) {
-    context.getColor(typedValue.resourceId)
-  } else {
-    null
-  }
+    return if (wasResolved && typedValue.resourceId == 0) {
+        typedValue.data
+    } else if (wasResolved) {
+        context.getColor(typedValue.resourceId)
+    } else {
+        null
+    }
 }
 
 internal fun resolveThemeDrawable(context: Context, @AttrRes resId: Int): Drawable? {
-  val typedValue = TypedValue()
-  val wasResolved = context.theme.resolveAttribute(resId, typedValue, true)
+    val typedValue = TypedValue()
+    val wasResolved = context.theme.resolveAttribute(resId, typedValue, true)
 
-  return if (wasResolved && typedValue.resourceId == 0) {
-    AppCompatResources.getDrawable(context, typedValue.data)
-  } else if (wasResolved) {
-    AppCompatResources.getDrawable(context, typedValue.resourceId)
-  } else {
-    null
-  }
+    return if (wasResolved && typedValue.resourceId == 0) {
+        AppCompatResources.getDrawable(context, typedValue.data)
+    } else if (wasResolved) {
+        AppCompatResources.getDrawable(context, typedValue.resourceId)
+    } else {
+        null
+    }
 }
 
 internal fun resolveThemeId(context: Context, @AttrRes id: Int, fallback: Int = 0): Int {
-  val tv = TypedValue()
-  if (context.theme.resolveAttribute(id, tv, true)) {
-    return tv.resourceId
-  }
-  return fallback
+    val tv = TypedValue()
+    if (context.theme.resolveAttribute(id, tv, true)) {
+        return tv.resourceId
+    }
+    return fallback
 }
 
 internal fun resolveThemeDimen(context: Context, @AttrRes id: Int, @DimenRes fallback: Int = 0): Int {
-  val tv = TypedValue()
-  if (context.theme.resolveAttribute(id, tv, true)) {
-    return TypedValue.complexToDimensionPixelSize(tv.data, context.resources.displayMetrics)
-  }
-  return context.resources.getDimensionPixelSize(fallback)
+    val tv = TypedValue()
+    if (context.theme.resolveAttribute(id, tv, true)) {
+        return TypedValue.complexToDimensionPixelSize(tv.data, context.resources.displayMetrics)
+    }
+    return context.resources.getDimensionPixelSize(fallback)
 }
 
 /**
@@ -112,12 +112,12 @@ internal fun resolveThemeDimen(context: Context, @AttrRes id: Int, @DimenRes fal
  * @param styleAttr Style attribute to provide default values for the current context.
  */
 internal fun createContextThemeWrapper(
-  context: Context,
-  attributeSet: AttributeSet?,
-  styleAttr: Int,
+    context: Context,
+    attributeSet: AttributeSet?,
+    styleAttr: Int,
 ): Context {
-  val a = context.obtainStyledAttributes(attributeSet, intArrayOf(styleAttr), 0, 0)
-  val themeId = a.getResourceId(0, 0)
-  a.recycle()
-  return ContextThemeWrapper(context, themeId)
+    val a = context.obtainStyledAttributes(attributeSet, intArrayOf(styleAttr), 0, 0)
+    val themeId = a.getResourceId(0, 0)
+    a.recycle()
+    return ContextThemeWrapper(context, themeId)
 }

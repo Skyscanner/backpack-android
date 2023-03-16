@@ -42,114 +42,114 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkDividedCardTest : BpkSnapshotTest() {
 
-  @Test
-  fun cardWidthSmallerThanMinimum() {
-    snap {
-      BpkDividedCard(
-        modifier = Modifier.dividedCardWidth(BpkSpacing.Xxl),
-        primaryContent = {
-          Image(
-            modifier = Modifier
-              .height(BpkSpacing.Xxl * 2)
-              .fillMaxWidth(),
-            painter = painterResource(id = R.drawable.canadian_rockies_canada),
-            contentDescription = "",
-            contentScale = ContentScale.Crop,
-          )
-        },
-        secondaryContent = {
-          BpkText(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.divided_card_width_less_than_minimum),
-            style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center,
-          )
-        },
-        onClick = {},
-      )
+    @Test
+    fun cardWidthSmallerThanMinimum() {
+        snap {
+            BpkDividedCard(
+                modifier = Modifier.dividedCardWidth(BpkSpacing.Xxl),
+                primaryContent = {
+                    Image(
+                        modifier = Modifier
+                            .height(BpkSpacing.Xxl * 2)
+                            .fillMaxWidth(),
+                        painter = painterResource(id = R.drawable.canadian_rockies_canada),
+                        contentDescription = "",
+                        contentScale = ContentScale.Crop,
+                    )
+                },
+                secondaryContent = {
+                    BpkText(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.divided_card_width_less_than_minimum),
+                        style = BpkTheme.typography.bodyDefault,
+                        textAlign = TextAlign.Center,
+                    )
+                },
+                onClick = {},
+            )
+        }
     }
-  }
 
-  @Test
-  fun cardWidthGreaterThanMinimum() {
-    snap {
-      BpkDividedCard(
-        modifier = Modifier.width(400.dp),
-        primaryContent = {
-          Image(
-            modifier = Modifier
-              .height(BpkSpacing.Xxl * 2)
-              .fillMaxWidth(),
-            painter = painterResource(id = R.drawable.canadian_rockies_canada),
-            contentDescription = "",
-            contentScale = ContentScale.Crop,
-          )
-        },
-        secondaryContent = {
-          BpkText(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.divided_card_width_more_than_minimum),
-            style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center,
-          )
-        },
-        onClick = {},
-      )
+    @Test
+    fun cardWidthGreaterThanMinimum() {
+        snap {
+            BpkDividedCard(
+                modifier = Modifier.width(400.dp),
+                primaryContent = {
+                    Image(
+                        modifier = Modifier
+                            .height(BpkSpacing.Xxl * 2)
+                            .fillMaxWidth(),
+                        painter = painterResource(id = R.drawable.canadian_rockies_canada),
+                        contentDescription = "",
+                        contentScale = ContentScale.Crop,
+                    )
+                },
+                secondaryContent = {
+                    BpkText(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.divided_card_width_more_than_minimum),
+                        style = BpkTheme.typography.bodyDefault,
+                        textAlign = TextAlign.Center,
+                    )
+                },
+                onClick = {},
+            )
+        }
     }
-  }
 
-  @Test
-  fun emptyCard() {
-    snap {
-      BpkDividedCard(
-        modifier = Modifier.width(400.dp),
-        primaryContent = {
-          Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
-          BpkText(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.divided_card_primary_content),
-            style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center,
-          )
-        },
-        secondaryContent = {
-          Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
-          BpkText(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.divided_card_secondary_content),
-            style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center,
-          )
-        },
-      )
+    @Test
+    fun emptyCard() {
+        snap {
+            BpkDividedCard(
+                modifier = Modifier.width(400.dp),
+                primaryContent = {
+                    Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+                    BpkText(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.divided_card_primary_content),
+                        style = BpkTheme.typography.bodyDefault,
+                        textAlign = TextAlign.Center,
+                    )
+                },
+                secondaryContent = {
+                    Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+                    BpkText(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.divided_card_secondary_content),
+                        style = BpkTheme.typography.bodyDefault,
+                        textAlign = TextAlign.Center,
+                    )
+                },
+            )
+        }
     }
-  }
 
-  @Test
-  fun noShadowCard() {
-    snap {
-      BpkDividedCard(
-        modifier = Modifier.width(400.dp),
-        elevation = BpkCardElevation.None,
-        primaryContent = {
-          Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
-          BpkText(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.divided_card_primary_content),
-            style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center,
-          )
-        },
-        secondaryContent = {
-          Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
-          BpkText(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(id = R.string.divided_card_secondary_content),
-            style = BpkTheme.typography.bodyDefault,
-            textAlign = TextAlign.Center,
-          )
-        },
-      )
+    @Test
+    fun noShadowCard() {
+        snap {
+            BpkDividedCard(
+                modifier = Modifier.width(400.dp),
+                elevation = BpkCardElevation.None,
+                primaryContent = {
+                    Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+                    BpkText(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.divided_card_primary_content),
+                        style = BpkTheme.typography.bodyDefault,
+                        textAlign = TextAlign.Center,
+                    )
+                },
+                secondaryContent = {
+                    Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+                    BpkText(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(id = R.string.divided_card_secondary_content),
+                        style = BpkTheme.typography.bodyDefault,
+                        textAlign = TextAlign.Center,
+                    )
+                },
+            )
+        }
     }
-  }
 }

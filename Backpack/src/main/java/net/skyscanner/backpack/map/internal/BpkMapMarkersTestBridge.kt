@@ -31,7 +31,7 @@ import androidx.annotation.VisibleForTesting.Companion.NONE
 // It's not a part of public API and may be changed at any moment without being considered as a breaking change.
 @VisibleForTesting(otherwise = NONE)
 object BpkMapMarkersTestBridge {
-  fun create(context: Context, title: String, icon: Int, showPointer: Boolean): View {
-    return createBpkMarkerView(context, title, icon, showPointer)
-  }
+    fun create(context: Context, title: String, icon: Int, showPointer: Boolean): View {
+        return createBpkMarkerView(context, title, icon, showPointer)
+    }
 }

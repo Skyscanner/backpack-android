@@ -24,55 +24,55 @@ import androidx.annotation.ColorInt
 import net.skyscanner.backpack.chip.BpkChip
 
 internal interface BpkChipAppearance {
-  val style: BpkChip.Style
+    val style: BpkChip.Style
 
-  val background: Drawable
+    val background: Drawable
 
-  val dismissibleBackground: Drawable
+    val dismissibleBackground: Drawable
 
-  val text: ColorStateList
+    val text: ColorStateList
 
-  val dismissibleText: ColorStateList
+    val dismissibleText: ColorStateList
 
-  val dismissibleIcon: ColorStateList
+    val dismissibleIcon: ColorStateList
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var selectedBackgroundColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var selectedBackgroundColor: Int
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var pressedBackgroundColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var pressedBackgroundColor: Int
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var backgroundColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var backgroundColor: Int
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var disabledBackgroundColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var disabledBackgroundColor: Int
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var textColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var textColor: Int
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var pressedTextColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var pressedTextColor: Int
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var selectedTextColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var selectedTextColor: Int
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var dismissibleIconColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var dismissibleIconColor: Int
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var strokeColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var strokeColor: Int
 
-  @get:ColorInt
-  @setparam:ColorInt
-  var pressedStrokeColor: Int
+    @get:ColorInt
+    @setparam:ColorInt
+    var pressedStrokeColor: Int
 }

@@ -35,46 +35,46 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 class WeekdayViewHeaderTest {
 
-  private val context = TestContext
+    private val context = TestContext
 
-  @Before
-  fun setUp() {
-    AndroidThreeTen.init(context)
-  }
-
-  @Test
-  fun test_initializeWithLocale() {
-    listOf(
-      "pt-br" to arrayOf("dom", "seg", "ter", "qua", "qui", "sex", "sáb"),
-      "en" to arrayOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"),
-    ).forEach {
-      val locale = it.first
-      val expected = it.second
-
-      val view = WeekdayHeaderView(context).apply {
-        initializeWithLocale(Locale.forLanguageTag(locale))
-      }
-
-      val allDays = getAllLabels(view)
-
-      Assert.assertArrayEquals(
-        allDays,
-        expected,
-      )
+    @Before
+    fun setUp() {
+        AndroidThreeTen.init(context)
     }
-  }
 
-  private fun getAllLabels(view: ViewGroup): Array<CharSequence> {
-    return arrayOf(
-      R.id.first_weekday_label,
-      R.id.second_weekday_label,
-      R.id.third_weekday_label,
-      R.id.fourth_weekday_label,
-      R.id.fifth_weekday_label,
-      R.id.sixth_weekday_label,
-      R.id.seventh_weekday_label,
-    ).map {
-      view.findViewById<BpkText>(it).text
-    }.toTypedArray()
-  }
+    @Test
+    fun test_initializeWithLocale() {
+        listOf(
+            "pt-br" to arrayOf("dom", "seg", "ter", "qua", "qui", "sex", "sáb"),
+            "en" to arrayOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"),
+        ).forEach {
+            val locale = it.first
+            val expected = it.second
+
+            val view = WeekdayHeaderView(context).apply {
+                initializeWithLocale(Locale.forLanguageTag(locale))
+            }
+
+            val allDays = getAllLabels(view)
+
+            Assert.assertArrayEquals(
+                allDays,
+                expected,
+            )
+        }
+    }
+
+    private fun getAllLabels(view: ViewGroup): Array<CharSequence> {
+        return arrayOf(
+            R.id.first_weekday_label,
+            R.id.second_weekday_label,
+            R.id.third_weekday_label,
+            R.id.fourth_weekday_label,
+            R.id.fifth_weekday_label,
+            R.id.sixth_weekday_label,
+            R.id.seventh_weekday_label,
+        ).map {
+            view.findViewById<BpkText>(it).text
+        }.toTypedArray()
+    }
 }

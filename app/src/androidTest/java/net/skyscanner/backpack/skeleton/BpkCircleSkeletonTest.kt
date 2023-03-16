@@ -28,27 +28,27 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkCircleSkeletonTest : BpkSnapshotTest() {
 
-  @Test
-  fun circleWithSmallType() {
-    val skeleton = BpkCircleSkeleton(testContext)
-    skeleton.size = BpkCircleSkeleton.CircleSize.Small
-    snap(skeleton, width = 50, height = 50)
-  }
+    @Test
+    fun circleWithSmallType() {
+        val skeleton = BpkCircleSkeleton(testContext)
+        skeleton.size = BpkCircleSkeleton.CircleSize.Small
+        snap(skeleton, width = 50, height = 50)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun circleWithLargeType() {
-    val skeleton = BpkCircleSkeleton(testContext)
-    skeleton.size = BpkCircleSkeleton.CircleSize.Large
-    snap(skeleton, width = 75, height = 75)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun circleWithLargeType() {
+        val skeleton = BpkCircleSkeleton(testContext)
+        skeleton.size = BpkCircleSkeleton.CircleSize.Large
+        snap(skeleton, width = 75, height = 75)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun circleWithCustomDiameter() {
-    val skeleton = BpkCircleSkeleton(testContext)
-    skeleton.size = BpkCircleSkeleton.CircleSize.Custom
-    skeleton.diameter = (50 * testContext.resources.displayMetrics.density).toInt()
-    snap(skeleton, width = 75, height = 75)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun circleWithCustomDiameter() {
+        val skeleton = BpkCircleSkeleton(testContext)
+        skeleton.size = BpkCircleSkeleton.CircleSize.Custom
+        skeleton.diameter = (50 * testContext.resources.displayMetrics.density).toInt()
+        snap(skeleton, width = 75, height = 75)
+    }
 }

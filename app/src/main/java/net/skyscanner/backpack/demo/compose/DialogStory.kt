@@ -48,167 +48,167 @@ import net.skyscanner.backpack.demo.meta.StoryKind
 @DialogComponent
 @ComposeStory("Success One Button", StoryKind.DemoOnly)
 internal fun SuccessOneButtonDialogExample() =
-  DialogDemo { onDismiss ->
-    BpkSuccessDialog(
-      icon = BpkIcon.Tick,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+    DialogDemo { onDismiss ->
+        BpkSuccessDialog(
+            icon = BpkIcon.Tick,
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            onDismissRequest = onDismiss,
+        )
+    }
 
 @Composable
 @DialogComponent
 @ComposeStory("Success Two Buttons", StoryKind.DemoOnly)
 internal fun SuccessTwoButtonsDialogExample() =
-  DialogDemo { onDismiss ->
-    BpkSuccessDialog(
-      icon = BpkIcon.Tick,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+    DialogDemo { onDismiss ->
+        BpkSuccessDialog(
+            icon = BpkIcon.Tick,
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+            onDismissRequest = onDismiss,
+        )
+    }
 
 @Composable
 @DialogComponent
 @ComposeStory("Success Three Buttons")
 internal fun SuccessThreeButtonsDialogExample() =
-  DialogDemo { onDismiss ->
-    BpkSuccessDialog(
-      icon = BpkIcon.Tick,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      linkButton = DialogButton(stringResource(id = R.string.dialog_link_optional), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+    DialogDemo { onDismiss ->
+        BpkSuccessDialog(
+            icon = BpkIcon.Tick,
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+            linkButton = DialogButton(stringResource(id = R.string.dialog_link_optional), onDismiss),
+            onDismissRequest = onDismiss,
+        )
+    }
 
 @Composable
 @DialogComponent
 @ComposeStory("Warning")
 internal fun WarningDialogExample() =
-  DialogDemo { onDismiss ->
-    BpkWarningDialog(
-      icon = BpkIcon.AlertAdd,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      linkButton = DialogButton(stringResource(id = R.string.dialog_link_optional), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+    DialogDemo { onDismiss ->
+        BpkWarningDialog(
+            icon = BpkIcon.AlertAdd,
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+            linkButton = DialogButton(stringResource(id = R.string.dialog_link_optional), onDismiss),
+            onDismissRequest = onDismiss,
+        )
+    }
 
 @Composable
 @DialogComponent
 @ComposeStory("Destructive")
 internal fun DestructiveDialogExample() =
-  DialogDemo { onDismiss ->
-    BpkDestructiveDialog(
-      icon = BpkIcon.Trash,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_delete), onDismiss),
-      linkButton = DialogButton(stringResource(id = R.string.dialog_cancel), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+    DialogDemo { onDismiss ->
+        BpkDestructiveDialog(
+            icon = BpkIcon.Trash,
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_delete), onDismiss),
+            linkButton = DialogButton(stringResource(id = R.string.dialog_cancel), onDismiss),
+            onDismissRequest = onDismiss,
+        )
+    }
 
 @Composable
 @DialogComponent
 @ComposeStory("No Icon", StoryKind.DemoOnly)
 internal fun NoIconDialogExample() =
-  DialogDemo { onDismiss ->
-    BpkSuccessDialog(
-      icon = null,
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      onDismissRequest = onDismiss,
-    )
-  }
+    DialogDemo { onDismiss ->
+        BpkSuccessDialog(
+            icon = null,
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+            onDismissRequest = onDismiss,
+        )
+    }
 
 @Composable
 @DialogComponent
 @ComposeStory("Flare")
 internal fun FlareDialogExample() =
-  DialogDemo { onDismiss ->
-    BpkFlareDialog(
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      onDismissRequest = onDismiss,
-    ) {
-      Image(
-        painter = painterResource(R.drawable.canadian_rockies_canada),
-        contentDescription = stringResource(R.string.image_rockies_content_description),
-        contentScale = ContentScale.Crop,
-        modifier = Modifier.height(264.dp),
-      )
+    DialogDemo { onDismiss ->
+        BpkFlareDialog(
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+            onDismissRequest = onDismiss,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.canadian_rockies_canada),
+                contentDescription = stringResource(R.string.image_rockies_content_description),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.height(264.dp),
+            )
+        }
     }
-  }
 
 @Composable
 @DialogComponent
 @ComposeStory("Image Start alignment")
 internal fun ImageDialogStartAlignmentExample() =
-  DialogDemo { onDismiss ->
-    BpkImageDialog(
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      onDismissRequest = onDismiss,
-      textAlign = TextAlign.Start,
-    ) {
-      Image(
-        painter = painterResource(R.drawable.canadian_rockies_canada),
-        contentDescription = stringResource(R.string.image_rockies_content_description),
-        contentScale = ContentScale.Crop,
-        modifier = Modifier.height(192.dp),
-      )
+    DialogDemo { onDismiss ->
+        BpkImageDialog(
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+            onDismissRequest = onDismiss,
+            textAlign = TextAlign.Start,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.canadian_rockies_canada),
+                contentDescription = stringResource(R.string.image_rockies_content_description),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.height(192.dp),
+            )
+        }
     }
-  }
 
 @Composable
 @DialogComponent
 @ComposeStory("Image End alignment")
 internal fun ImageDialogEndAlignmentExample() =
-  DialogDemo { onDismiss ->
-    BpkImageDialog(
-      title = stringResource(id = R.string.dialog_title),
-      text = stringResource(id = R.string.dialog_text),
-      confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
-      secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
-      onDismissRequest = onDismiss,
-      textAlign = TextAlign.End,
-    ) {
-      Image(
-        painter = painterResource(R.drawable.canadian_rockies_canada),
-        contentDescription = stringResource(R.string.image_rockies_content_description),
-        contentScale = ContentScale.Crop,
-        modifier = Modifier.height(192.dp),
-      )
+    DialogDemo { onDismiss ->
+        BpkImageDialog(
+            title = stringResource(id = R.string.dialog_title),
+            text = stringResource(id = R.string.dialog_text),
+            confirmButton = DialogButton(stringResource(id = R.string.dialog_confirmation), onDismiss),
+            secondaryButton = DialogButton(stringResource(id = R.string.dialog_skip), onDismiss),
+            onDismissRequest = onDismiss,
+            textAlign = TextAlign.End,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.canadian_rockies_canada),
+                contentDescription = stringResource(R.string.image_rockies_content_description),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.height(192.dp),
+            )
+        }
     }
-  }
 
 @Composable
 private fun DialogDemo(
-  content: @Composable (onDismiss: () -> Unit) -> Unit,
+    content: @Composable (onDismiss: () -> Unit) -> Unit,
 ) {
 
-  val dispatcher = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
+    val dispatcher = LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
 
-  @Suppress("SuspiciousCallableReferenceInLambda")
-  val onDismiss: () -> Unit = remember(dispatcher) { dispatcher::onBackPressed }
+    @Suppress("SuspiciousCallableReferenceInLambda")
+    val onDismiss: () -> Unit = remember(dispatcher) { dispatcher::onBackPressed }
 
-  content(onDismiss)
+    content(onDismiss)
 }

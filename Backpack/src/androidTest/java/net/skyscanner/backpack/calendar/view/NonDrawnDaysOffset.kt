@@ -37,112 +37,112 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 class NonDrawnDaysOffset {
 
-  private val context = TestContext
+    private val context = TestContext
 
-  @Before
-  fun setUp() {
-    AndroidThreeTen.init(context)
-  }
+    @Before
+    fun setUp() {
+        AndroidThreeTen.init(context)
+    }
 
-  @Test
-  fun givenFirstFewDaysInMonth_whenGetOffset_thenNoOffset() {
-    val monthView = givenMonthView(
-      locale = Locale.US,
-      startDate = LocalDate.of(2019, 1, 2),
-      drawMonth = 2,
-    )
+    @Test
+    fun givenFirstFewDaysInMonth_whenGetOffset_thenNoOffset() {
+        val monthView = givenMonthView(
+            locale = Locale.US,
+            startDate = LocalDate.of(2019, 1, 2),
+            drawMonth = 2,
+        )
 
-    val offset = monthView.getNonDrawnDaysOffset()
+        val offset = monthView.getNonDrawnDaysOffset()
 
-    Assert.assertEquals(0, offset)
-  }
+        Assert.assertEquals(0, offset)
+    }
 
-  @Test
-  fun givenMidMonthAndSunWeekStart_whenGetOffset_thenOffsetToPreviousSat() {
-    val monthView = givenMonthView(
-      locale = Locale.US,
-      startDate = LocalDate.of(2019, 2, 13),
-      drawMonth = 2,
-    )
+    @Test
+    fun givenMidMonthAndSunWeekStart_whenGetOffset_thenOffsetToPreviousSat() {
+        val monthView = givenMonthView(
+            locale = Locale.US,
+            startDate = LocalDate.of(2019, 2, 13),
+            drawMonth = 2,
+        )
 
-    val offset = monthView.getNonDrawnDaysOffset()
+        val offset = monthView.getNonDrawnDaysOffset()
 
-    Assert.assertEquals(9, offset)
-  }
+        Assert.assertEquals(9, offset)
+    }
 
-  @Test
-  fun givenMidMonthAndMonWeekStart_whenGetOffset_thenOffsetToPreviousSun() {
-    val monthView = givenMonthView(
-      locale = Locale.GERMANY,
-      startDate = LocalDate.of(2019, 2, 13),
-      drawMonth = 2,
-    )
+    @Test
+    fun givenMidMonthAndMonWeekStart_whenGetOffset_thenOffsetToPreviousSun() {
+        val monthView = givenMonthView(
+            locale = Locale.GERMANY,
+            startDate = LocalDate.of(2019, 2, 13),
+            drawMonth = 2,
+        )
 
-    val offset = monthView.getNonDrawnDaysOffset()
+        val offset = monthView.getNonDrawnDaysOffset()
 
-    Assert.assertEquals(10, offset)
-  }
+        Assert.assertEquals(10, offset)
+    }
 
-  @Test
-  fun givenLastDayInMonthOnSunAndSunWeekStart_whenGetOffset_thenOffsetToPreviousSun() {
-    val monthView = givenMonthView(
-      locale = Locale.US,
-      startDate = LocalDate.of(2019, 3, 31),
-      drawMonth = 3,
-    )
+    @Test
+    fun givenLastDayInMonthOnSunAndSunWeekStart_whenGetOffset_thenOffsetToPreviousSun() {
+        val monthView = givenMonthView(
+            locale = Locale.US,
+            startDate = LocalDate.of(2019, 3, 31),
+            drawMonth = 3,
+        )
 
-    val offset = monthView.getNonDrawnDaysOffset()
+        val offset = monthView.getNonDrawnDaysOffset()
 
-    Assert.assertEquals(30, offset)
-  }
+        Assert.assertEquals(30, offset)
+    }
 
-  @Test
-  fun givenLastDayInMonthOnSunAndMonWeekStart_whenGetOffset_thenOffsetToPreviousMon() {
-    val monthView = givenMonthView(
-      locale = Locale.GERMANY,
-      startDate = LocalDate.of(2019, 3, 31),
-      drawMonth = 3,
-    )
+    @Test
+    fun givenLastDayInMonthOnSunAndMonWeekStart_whenGetOffset_thenOffsetToPreviousMon() {
+        val monthView = givenMonthView(
+            locale = Locale.GERMANY,
+            startDate = LocalDate.of(2019, 3, 31),
+            drawMonth = 3,
+        )
 
-    val offset = monthView.getNonDrawnDaysOffset()
+        val offset = monthView.getNonDrawnDaysOffset()
 
-    Assert.assertEquals(24, offset)
-  }
+        Assert.assertEquals(24, offset)
+    }
 
-  @Test
-  fun givenOtherMonthIsDrawn_whenGetOffset_thenNoOffset() {
-    val monthView = givenMonthView(
-      locale = Locale.GERMANY,
-      startDate = LocalDate.of(2019, 3, 31),
-      drawMonth = 4,
-    )
+    @Test
+    fun givenOtherMonthIsDrawn_whenGetOffset_thenNoOffset() {
+        val monthView = givenMonthView(
+            locale = Locale.GERMANY,
+            startDate = LocalDate.of(2019, 3, 31),
+            drawMonth = 4,
+        )
 
-    val offset = monthView.getNonDrawnDaysOffset()
+        val offset = monthView.getNonDrawnDaysOffset()
 
-    Assert.assertEquals(0, offset)
-  }
+        Assert.assertEquals(0, offset)
+    }
 
-  private fun givenMonthView(locale: Locale, startDate: LocalDate, drawMonth: Int): MonthView {
-    val monthView = MonthView(context = context)
+    private fun givenMonthView(locale: Locale, startDate: LocalDate, drawMonth: Int): MonthView {
+        val monthView = MonthView(context = context)
 
-    monthView.controller = object : TestBpkCalendarController() {
-      override val locale: Locale
-        get() {
-          return locale
+        monthView.controller = object : TestBpkCalendarController() {
+            override val locale: Locale
+                get() {
+                    return locale
+                }
+            override val startDate: LocalDate
+                get() {
+                    return startDate
+                }
         }
-      override val startDate: LocalDate
-        get() {
-          return startDate
+        monthView.calendarDrawingParams = CalendarDrawingParams(2019, drawMonth, null, null, labels = null)
+        return monthView
+    }
+
+    abstract class TestBpkCalendarController : BpkCalendarController(SelectionType.RANGE) {
+
+        override fun onRangeSelected(range: CalendarSelection) {
+            // unused
         }
     }
-    monthView.calendarDrawingParams = CalendarDrawingParams(2019, drawMonth, null, null, labels = null)
-    return monthView
-  }
-
-  abstract class TestBpkCalendarController : BpkCalendarController(SelectionType.RANGE) {
-
-    override fun onRangeSelected(range: CalendarSelection) {
-      // unused
-    }
-  }
 }

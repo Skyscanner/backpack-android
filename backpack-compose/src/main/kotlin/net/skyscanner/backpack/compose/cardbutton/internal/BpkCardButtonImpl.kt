@@ -54,124 +54,124 @@ import net.skyscanner.backpack.compose.tokens.ShareIos
 import net.skyscanner.backpack.compose.utils.clickable
 
 private enum class BpkCardButtonState {
-  Rest,
-  Transition,
+    Rest,
+    Transition,
 }
 
 @Composable
 internal fun BpkSaveCardButtonImpl(
-  checked: Boolean,
-  contentDescription: String,
-  onCheckedChange: (Boolean) -> Unit,
-  size: BpkCardButtonSize,
-  style: BpkCardButtonStyle,
-  modifier: Modifier = Modifier,
+    checked: Boolean,
+    contentDescription: String,
+    onCheckedChange: (Boolean) -> Unit,
+    size: BpkCardButtonSize,
+    style: BpkCardButtonStyle,
+    modifier: Modifier = Modifier,
 ) {
-  var state by remember { mutableStateOf(BpkCardButtonState.Rest) }
-  val scaleAnimation = remember { Animatable(1f) }
-  if (state == BpkCardButtonState.Transition) {
-    LaunchedEffect(key1 = Unit) {
-      scaleAnimation.animateTo(
-        targetValue = 30f / 24f,
-        animationSpec = tween(
-          durationMillis = 400,
-          easing = { OvershootInterpolator().getInterpolation(it) },
-        ),
-      )
-      delay(500)
-      scaleAnimation.animateTo(
-        targetValue = 1f,
-        animationSpec = tween(
-          durationMillis = 300,
-          easing = { OvershootInterpolator().getInterpolation(it) },
-        ),
-      )
-      state = BpkCardButtonState.Rest
-    }
-  }
-  val colorAnimation by animateColorAsState(
-    targetValue = when (style) {
-      BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
-      else -> if (checked) BpkTheme.colors.coreAccent else BpkTheme.colors.textPrimary
-    },
-    animationSpec = tween(300),
-  )
-  Box(
-    modifier = modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
-    contentAlignment = Alignment.Center,
-  ) {
-    Box(
-      modifier = Modifier
-        .clip(shape = CircleShape)
-        .size(if (size == BpkCardButtonSize.Large) BpkSpacing.Xxl else BpkSpacing.Xl)
-        .background(
-          color = when (style) {
-            BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
-            else -> Color.Transparent
-          },
-        )
-        .semantics { this.contentDescription = contentDescription }
-        .then(
-          if (state == BpkCardButtonState.Rest) {
-            Modifier.toggleable(
-              value = checked,
-              role = Role.Switch,
-              onValueChange = { checked ->
-                if (checked) state = BpkCardButtonState.Transition
-                onCheckedChange(checked)
-              },
+    var state by remember { mutableStateOf(BpkCardButtonState.Rest) }
+    val scaleAnimation = remember { Animatable(1f) }
+    if (state == BpkCardButtonState.Transition) {
+        LaunchedEffect(key1 = Unit) {
+            scaleAnimation.animateTo(
+                targetValue = 30f / 24f,
+                animationSpec = tween(
+                    durationMillis = 400,
+                    easing = { OvershootInterpolator().getInterpolation(it) },
+                ),
             )
-          } else Modifier,
-        ),
-      contentAlignment = Alignment.Center,
-    ) {
-      Box(modifier = Modifier.scale(scaleAnimation.value)) {
-        BpkIcon(
-          icon = if (checked) BpkIcon.Heart else BpkIcon.HeartOutline,
-          contentDescription = null,
-          size = if (size == BpkCardButtonSize.Large) BpkIconSize.Large else BpkIconSize.Small,
-          tint = colorAnimation,
-        )
-      }
+            delay(500)
+            scaleAnimation.animateTo(
+                targetValue = 1f,
+                animationSpec = tween(
+                    durationMillis = 300,
+                    easing = { OvershootInterpolator().getInterpolation(it) },
+                ),
+            )
+            state = BpkCardButtonState.Rest
+        }
     }
-  }
+    val colorAnimation by animateColorAsState(
+        targetValue = when (style) {
+            BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
+            else -> if (checked) BpkTheme.colors.coreAccent else BpkTheme.colors.textPrimary
+        },
+        animationSpec = tween(300),
+    )
+    Box(
+        modifier = modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
+        contentAlignment = Alignment.Center,
+    ) {
+        Box(
+            modifier = Modifier
+                .clip(shape = CircleShape)
+                .size(if (size == BpkCardButtonSize.Large) BpkSpacing.Xxl else BpkSpacing.Xl)
+                .background(
+                    color = when (style) {
+                        BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
+                        else -> Color.Transparent
+                    },
+                )
+                .semantics { this.contentDescription = contentDescription }
+                .then(
+                    if (state == BpkCardButtonState.Rest) {
+                        Modifier.toggleable(
+                            value = checked,
+                            role = Role.Switch,
+                            onValueChange = { checked ->
+                                if (checked) state = BpkCardButtonState.Transition
+                                onCheckedChange(checked)
+                            },
+                        )
+                    } else Modifier,
+                ),
+            contentAlignment = Alignment.Center,
+        ) {
+            Box(modifier = Modifier.scale(scaleAnimation.value)) {
+                BpkIcon(
+                    icon = if (checked) BpkIcon.Heart else BpkIcon.HeartOutline,
+                    contentDescription = null,
+                    size = if (size == BpkCardButtonSize.Large) BpkIconSize.Large else BpkIconSize.Small,
+                    tint = colorAnimation,
+                )
+            }
+        }
+    }
 }
 
 @Composable
 internal fun BpkShareCardButtonImpl(
-  contentDescription: String,
-  onClick: () -> Unit,
-  size: BpkCardButtonSize,
-  style: BpkCardButtonStyle,
-  modifier: Modifier = Modifier,
+    contentDescription: String,
+    onClick: () -> Unit,
+    size: BpkCardButtonSize,
+    style: BpkCardButtonStyle,
+    modifier: Modifier = Modifier,
 ) {
-  Box(
-    modifier = modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
-    contentAlignment = Alignment.Center,
-  ) {
     Box(
-      modifier = Modifier
-        .clip(shape = CircleShape)
-        .size(if (size == BpkCardButtonSize.Large) BpkSpacing.Xxl else BpkSpacing.Xl)
-        .background(
-          color = when (style) {
-            BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
-            else -> BpkTheme.colors.textOnDark.copy(alpha = 0.0F)
-          },
-        )
-        .clickable(onClick = onClick),
-      contentAlignment = Alignment.Center,
+        modifier = modifier.size(BpkSpacing.Xxl + BpkSpacing.Md),
+        contentAlignment = Alignment.Center,
     ) {
-      BpkIcon(
-        modifier = Modifier,
-        icon = BpkIcon.ShareIos,
-        contentDescription = contentDescription,
-        size = if (size == BpkCardButtonSize.Large) BpkIconSize.Large else BpkIconSize.Small,
-        tint = when (style) {
-          BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
-          else -> BpkTheme.colors.textPrimary
-        },
-      )
+        Box(
+            modifier = Modifier
+                .clip(shape = CircleShape)
+                .size(if (size == BpkCardButtonSize.Large) BpkSpacing.Xxl else BpkSpacing.Xl)
+                .background(
+                    color = when (style) {
+                        BpkCardButtonStyle.Contained -> BpkTheme.colors.surfaceDefault.copy(alpha = 0.5F)
+                        else -> BpkTheme.colors.textOnDark.copy(alpha = 0.0F)
+                    },
+                )
+                .clickable(onClick = onClick),
+            contentAlignment = Alignment.Center,
+        ) {
+            BpkIcon(
+                modifier = Modifier,
+                icon = BpkIcon.ShareIos,
+                contentDescription = contentDescription,
+                size = if (size == BpkCardButtonSize.Large) BpkIconSize.Large else BpkIconSize.Small,
+                tint = when (style) {
+                    BpkCardButtonStyle.OnDark -> BpkTheme.colors.textOnDark
+                    else -> BpkTheme.colors.textPrimary
+                },
+            )
+        }
     }
-  }
 }

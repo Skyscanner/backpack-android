@@ -29,31 +29,31 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkNudgerTest : BpkSnapshotTest() {
 
-  private lateinit var nudger: BpkNudger
+    private lateinit var nudger: BpkNudger
 
-  @Before
-  fun setup() {
-    nudger = BpkNudger(testContext)
-  }
+    @Before
+    fun setup() {
+        nudger = BpkNudger(testContext)
+    }
 
-  @Test
-  fun default() {
-    nudger.value = 5
-    snap(nudger)
-  }
+    @Test
+    fun default() {
+        nudger.value = 5
+        snap(nudger)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun minusDisabled() {
-    nudger.value = 0
-    snap(nudger)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun minusDisabled() {
+        nudger.value = 0
+        snap(nudger)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun plusDisabled() {
-    nudger.value = 10
-    nudger.maxValue = 10
-    snap(nudger)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun plusDisabled() {
+        nudger.value = 10
+        nudger.maxValue = 10
+        snap(nudger)
+    }
 }

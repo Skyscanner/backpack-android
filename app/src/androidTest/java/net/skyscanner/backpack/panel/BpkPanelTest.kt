@@ -29,24 +29,24 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkPanelTest : BpkSnapshotTest() {
 
-  @Test
-  fun padded() {
-    val panel = BpkPanel(testContext)
-    val text = TextView(testContext)
-    text.text = "message"
-    panel.addView(text)
-    panel.padding = true
-    snap(panel)
-  }
+    @Test
+    fun padded() {
+        val panel = BpkPanel(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        panel.addView(text)
+        panel.padding = true
+        snap(panel)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun noPadding() {
-    val panel = BpkPanel(testContext)
-    val text = TextView(testContext)
-    text.text = "message"
-    panel.addView(text)
-    panel.padding = false
-    snap(panel)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noPadding() {
+        val panel = BpkPanel(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        panel.addView(text)
+        panel.padding = false
+        snap(panel)
+    }
 }

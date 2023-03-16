@@ -44,103 +44,103 @@ import org.threeten.bp.Period
 import org.threeten.bp.YearMonth
 
 class BpkCalendar private constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
-  private val scope: CoroutineScope,
-  private val stateMachine: CalendarStateMachine = CalendarStateMachine(
-    scope = scope,
-    initialParams = CalendarParams(
-      range = LocalDate.now() - Period.ofYears(1)..LocalDate.now() + Period.ofYears(1),
-      selectionMode = CalendarParams.SelectionMode.Range,
-    ),
-  ),
-) : ConstraintLayout(context, attrs, defStyleAttr), CalendarComponent by stateMachine {
-
-  @JvmOverloads
-  constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-  ) : this(context, attrs, defStyleAttr, CoroutineScope(Dispatchers.Unconfined))
+    private val scope: CoroutineScope,
+    private val stateMachine: CalendarStateMachine = CalendarStateMachine(
+        scope = scope,
+        initialParams = CalendarParams(
+            range = LocalDate.now() - Period.ofYears(1)..LocalDate.now() + Period.ofYears(1),
+            selectionMode = CalendarParams.SelectionMode.Range,
+        ),
+    ),
+) : ConstraintLayout(context, attrs, defStyleAttr), CalendarComponent by stateMachine {
 
-  init {
-    inflate(context, R.layout.view_bpk_calendar_2, this)
-  }
+    @JvmOverloads
+    constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0,
+    ) : this(context, attrs, defStyleAttr, CoroutineScope(Dispatchers.Unconfined))
 
-  private val headerView by unsafeLazy { findViewById<CalendarHeaderView>(R.id.bpk_calendar_header) }
-  private val recyclerView by unsafeLazy { findViewById<RecyclerView>(R.id.bpk_calendar_recycler_view) }
-  private val badge by unsafeLazy { findViewById<TextView>(R.id.bpk_calendar_badge) }
+    init {
+        inflate(context, R.layout.view_bpk_calendar_2, this)
+    }
 
-  private val scrollListeners = mutableListOf<(YearMonth) -> Unit>()
-  private val calendarAdapter = CalendarAdapter(stateMachine::onClick)
-  private val spanSizeLookup = CalendarSpanSizeLookup(calendarAdapter)
-  private val calendarLayoutManager = CalendarLayoutManager(context, spanSizeLookup)
+    private val headerView by unsafeLazy { findViewById<CalendarHeaderView>(R.id.bpk_calendar_header) }
+    private val recyclerView by unsafeLazy { findViewById<RecyclerView>(R.id.bpk_calendar_recycler_view) }
+    private val badge by unsafeLazy { findViewById<TextView>(R.id.bpk_calendar_badge) }
 
-  init {
-    recyclerView.layoutManager = calendarLayoutManager
-    recyclerView.adapter = calendarAdapter
-    recyclerView.itemAnimator = null
-    recyclerView.setAccessibilityDelegateCompat(NoCellPositionAccessibilityInfo(recyclerView))
-    recyclerView.addOnScrollListener(
-      object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+    private val scrollListeners = mutableListOf<(YearMonth) -> Unit>()
+    private val calendarAdapter = CalendarAdapter(stateMachine::onClick)
+    private val spanSizeLookup = CalendarSpanSizeLookup(calendarAdapter)
+    private val calendarLayoutManager = CalendarLayoutManager(context, spanSizeLookup)
 
-          val firstItemPosition = calendarLayoutManager.findFirstVisibleItemPosition()
-          val item = state.value.cells[firstItemPosition]
+    init {
+        recyclerView.layoutManager = calendarLayoutManager
+        recyclerView.adapter = calendarAdapter
+        recyclerView.itemAnimator = null
+        recyclerView.setAccessibilityDelegateCompat(NoCellPositionAccessibilityInfo(recyclerView))
+        recyclerView.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
-          scrollListeners.forEach {
-            it.invoke(item.yearMonth)
-          }
+                    val firstItemPosition = calendarLayoutManager.findFirstVisibleItemPosition()
+                    val item = state.value.cells[firstItemPosition]
+
+                    scrollListeners.forEach {
+                        it.invoke(item.yearMonth)
+                    }
+                }
+            },
+        )
+
+        state.onEach {
+            headerView(it.params)
+            calendarAdapter(it.cells)
+        }.launchIn(scope)
+
+        scrollListeners += {
+            badge.text = it.year.toString()
+            badge.isVisible = it.year != state.value.params.now.year
         }
-      },
-    )
-
-    state.onEach {
-      headerView(it.params)
-      calendarAdapter(it.cells)
-    }.launchIn(scope)
-
-    scrollListeners += {
-      badge.text = it.year.toString()
-      badge.isVisible = it.year != state.value.params.now.year
     }
-  }
 
-  override fun onConfigurationChanged(newConfig: Configuration) {
-    super.onConfigurationChanged(newConfig)
-    stateMachine.onLocaleChanged(newConfig.locales.get(0))
-  }
-
-  /**
-   * Scrolls to a specific date in a calendar.
-   * Does nothing if the date is out of range.
-   */
-  fun scrollToDate(date: LocalDate) {
-    val index = state.value.cells.indexOf(date)
-    if (index >= 0) {
-      recyclerView.scrollToPosition(index)
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        stateMachine.onLocaleChanged(newConfig.locales.get(0))
     }
-  }
 
-  /**
-   * Scrolls with animation to a specific date in a calendar.
-   * Does nothing if the date is out of range.
-   */
-  fun smoothScrollToDate(date: LocalDate) {
-    val index = state.value.cells.indexOf(date)
-    if (index >= 0) {
-      recyclerView.smoothScrollToPosition(index)
+    /**
+     * Scrolls to a specific date in a calendar.
+     * Does nothing if the date is out of range.
+     */
+    fun scrollToDate(date: LocalDate) {
+        val index = state.value.cells.indexOf(date)
+        if (index >= 0) {
+            recyclerView.scrollToPosition(index)
+        }
     }
-  }
 
-  private class NoCellPositionAccessibilityInfo(
-    recyclerView: RecyclerView,
-  ) : RecyclerViewAccessibilityDelegate(recyclerView) {
-
-    override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfoCompat) {
-      super.onInitializeAccessibilityNodeInfo(host, info)
-      info.setCollectionInfo(null)
+    /**
+     * Scrolls with animation to a specific date in a calendar.
+     * Does nothing if the date is out of range.
+     */
+    fun smoothScrollToDate(date: LocalDate) {
+        val index = state.value.cells.indexOf(date)
+        if (index >= 0) {
+            recyclerView.smoothScrollToPosition(index)
+        }
     }
-  }
+
+    private class NoCellPositionAccessibilityInfo(
+        recyclerView: RecyclerView,
+    ) : RecyclerViewAccessibilityDelegate(recyclerView) {
+
+        override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfoCompat) {
+            super.onInitializeAccessibilityNodeInfo(host, info)
+            info.setCollectionInfo(null)
+        }
+    }
 }

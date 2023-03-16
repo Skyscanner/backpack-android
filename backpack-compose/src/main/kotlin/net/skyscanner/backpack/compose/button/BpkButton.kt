@@ -32,166 +32,166 @@ import net.skyscanner.backpack.compose.button.internal.minHeight
 import net.skyscanner.backpack.compose.icon.BpkIcon
 
 enum class BpkButtonIconPosition {
-  Start,
-  End,
+    Start,
+    End,
 }
 
 enum class BpkButtonSize {
-  Default,
-  Large,
+    Default,
+    Large,
 }
 
 enum class BpkButtonType {
-  Primary,
-  Secondary,
-  Featured,
-  PrimaryOnDark,
-  PrimaryOnLight,
-  SecondaryOnDark,
-  Destructive,
-  Link,
-  LinkOnDark,
+    Primary,
+    Secondary,
+    Featured,
+    PrimaryOnDark,
+    PrimaryOnLight,
+    SecondaryOnDark,
+    Destructive,
+    Link,
+    LinkOnDark,
 }
 
 @Composable
 fun BpkButton(
-  text: String,
-  modifier: Modifier = Modifier,
-  size: BpkButtonSize = DefaultSize,
-  type: BpkButtonType = DefaultType,
-  enabled: Boolean = DefaultEnabled,
-  loading: Boolean = DefaultLoading,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  onClick: () -> Unit,
+    text: String,
+    modifier: Modifier = Modifier,
+    size: BpkButtonSize = DefaultSize,
+    type: BpkButtonType = DefaultType,
+    enabled: Boolean = DefaultEnabled,
+    loading: Boolean = DefaultLoading,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: () -> Unit,
 ) {
-  BpkButtonImpl(
-    size = size,
-    type = type,
-    enabled = enabled,
-    loading = loading,
-    interactionSource = interactionSource,
-    modifier = modifier,
-    onClick = onClick,
-    content = { ButtonText(text) },
-  )
+    BpkButtonImpl(
+        size = size,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        interactionSource = interactionSource,
+        modifier = modifier,
+        onClick = onClick,
+        content = { ButtonText(text) },
+    )
 }
 
 @Composable
 fun BpkButton(
-  icon: BpkIcon,
-  contentDescription: String,
-  modifier: Modifier = Modifier,
-  size: BpkButtonSize = DefaultSize,
-  type: BpkButtonType = DefaultType,
-  enabled: Boolean = DefaultEnabled,
-  loading: Boolean = DefaultLoading,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  onClick: () -> Unit,
+    icon: BpkIcon,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+    size: BpkButtonSize = DefaultSize,
+    type: BpkButtonType = DefaultType,
+    enabled: Boolean = DefaultEnabled,
+    loading: Boolean = DefaultLoading,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: () -> Unit,
 ) {
-  BpkButtonImpl(
-    size = size,
-    type = type,
-    enabled = enabled,
-    loading = loading,
-    interactionSource = interactionSource,
-    modifier = modifier.requiredWidth(size.minHeight),
-    onClick = onClick,
-    content = { ButtonIcon(icon, contentDescription, size) },
-  )
+    BpkButtonImpl(
+        size = size,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        interactionSource = interactionSource,
+        modifier = modifier.requiredWidth(size.minHeight),
+        onClick = onClick,
+        content = { ButtonIcon(icon, contentDescription, size) },
+    )
 }
 
 @Composable
 fun BpkButton(
-  text: String,
-  icon: BpkIcon,
-  position: BpkButtonIconPosition,
-  modifier: Modifier = Modifier,
-  size: BpkButtonSize = DefaultSize,
-  type: BpkButtonType = DefaultType,
-  enabled: Boolean = DefaultEnabled,
-  loading: Boolean = DefaultLoading,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  onClick: () -> Unit,
+    text: String,
+    icon: BpkIcon,
+    position: BpkButtonIconPosition,
+    modifier: Modifier = Modifier,
+    size: BpkButtonSize = DefaultSize,
+    type: BpkButtonType = DefaultType,
+    enabled: Boolean = DefaultEnabled,
+    loading: Boolean = DefaultLoading,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: () -> Unit,
 ) {
-  BpkButtonImpl(
-    size = size,
-    type = type,
-    enabled = enabled,
-    loading = loading,
-    interactionSource = interactionSource,
-    modifier = modifier,
-    onClick = onClick,
-  ) {
-    when (position) {
-      BpkButtonIconPosition.Start -> {
-        ButtonIcon(icon, null, size)
-        ButtonText(text)
-      }
-      BpkButtonIconPosition.End -> {
-        ButtonText(text)
-        ButtonIcon(icon, null, size)
-      }
+    BpkButtonImpl(
+        size = size,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        interactionSource = interactionSource,
+        modifier = modifier,
+        onClick = onClick,
+    ) {
+        when (position) {
+            BpkButtonIconPosition.Start -> {
+                ButtonIcon(icon, null, size)
+                ButtonText(text)
+            }
+            BpkButtonIconPosition.End -> {
+                ButtonText(text)
+                ButtonIcon(icon, null, size)
+            }
+        }
     }
-  }
 }
 
 @Composable
 fun BpkButton(
-  icon: Painter,
-  contentDescription: String,
-  modifier: Modifier = Modifier,
-  size: BpkButtonSize = DefaultSize,
-  type: BpkButtonType = DefaultType,
-  enabled: Boolean = DefaultEnabled,
-  loading: Boolean = DefaultLoading,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  onClick: () -> Unit,
+    icon: Painter,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+    size: BpkButtonSize = DefaultSize,
+    type: BpkButtonType = DefaultType,
+    enabled: Boolean = DefaultEnabled,
+    loading: Boolean = DefaultLoading,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: () -> Unit,
 ) {
-  BpkButtonImpl(
-    size = size,
-    type = type,
-    enabled = enabled,
-    loading = loading,
-    interactionSource = interactionSource,
-    modifier = modifier.requiredWidth(size.minHeight),
-    onClick = onClick,
-    content = { ButtonDrawable(icon, contentDescription, size) },
-  )
+    BpkButtonImpl(
+        size = size,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        interactionSource = interactionSource,
+        modifier = modifier.requiredWidth(size.minHeight),
+        onClick = onClick,
+        content = { ButtonDrawable(icon, contentDescription, size) },
+    )
 }
 
 @Composable
 fun BpkButton(
-  text: String,
-  icon: Painter,
-  position: BpkButtonIconPosition,
-  modifier: Modifier = Modifier,
-  size: BpkButtonSize = DefaultSize,
-  type: BpkButtonType = DefaultType,
-  enabled: Boolean = DefaultEnabled,
-  loading: Boolean = DefaultLoading,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  onClick: () -> Unit,
+    text: String,
+    icon: Painter,
+    position: BpkButtonIconPosition,
+    modifier: Modifier = Modifier,
+    size: BpkButtonSize = DefaultSize,
+    type: BpkButtonType = DefaultType,
+    enabled: Boolean = DefaultEnabled,
+    loading: Boolean = DefaultLoading,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: () -> Unit,
 ) {
-  BpkButtonImpl(
-    size = size,
-    type = type,
-    enabled = enabled,
-    loading = loading,
-    interactionSource = interactionSource,
-    modifier = modifier,
-    onClick = onClick,
-  ) {
-    when (position) {
-      BpkButtonIconPosition.Start -> {
-        ButtonDrawable(icon, null, size)
-        ButtonText(text)
-      }
-      BpkButtonIconPosition.End -> {
-        ButtonText(text)
-        ButtonDrawable(icon, null, size)
-      }
+    BpkButtonImpl(
+        size = size,
+        type = type,
+        enabled = enabled,
+        loading = loading,
+        interactionSource = interactionSource,
+        modifier = modifier,
+        onClick = onClick,
+    ) {
+        when (position) {
+            BpkButtonIconPosition.Start -> {
+                ButtonDrawable(icon, null, size)
+                ButtonText(text)
+            }
+            BpkButtonIconPosition.End -> {
+                ButtonText(text)
+                ButtonDrawable(icon, null, size)
+            }
+        }
     }
-  }
 }
 
 private val DefaultSize = BpkButtonSize.Default

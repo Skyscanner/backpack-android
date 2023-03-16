@@ -22,13 +22,13 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 
 internal fun YearMonth.firstDay(): LocalDate =
-  atDay(1)
+    atDay(1)
 
 internal fun YearMonth.lastDay(): LocalDate =
-  atEndOfMonth()
+    atEndOfMonth()
 
 internal fun YearMonth.prevMonth(): YearMonth =
-  minusMonths(1)
+    minusMonths(1)
 
 internal fun YearMonth.nextMonth(): YearMonth =
-  plusMonths(1)
+    plusMonths(1)

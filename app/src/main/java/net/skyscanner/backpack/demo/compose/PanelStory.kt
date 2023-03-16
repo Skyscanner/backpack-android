@@ -40,52 +40,52 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @PanelComponent
 @ComposeStory
 fun PanelStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    val panelModifier = Modifier
-      .fillMaxWidth()
-      .weight(1f)
+        val panelModifier = Modifier
+            .fillMaxWidth()
+            .weight(1f)
 
-    BpkText(
-      text = stringResource(id = R.string.panel_default),
-      style = BpkTheme.typography.heading3,
-    )
-    DefaultPanelExample(panelModifier)
+        BpkText(
+            text = stringResource(id = R.string.panel_default),
+            style = BpkTheme.typography.heading3,
+        )
+        DefaultPanelExample(panelModifier)
 
-    BpkText(
-      text = stringResource(id = R.string.panel_no_padding),
-      style = BpkTheme.typography.heading3,
-    )
-    NoPaddingPanelExample(Modifier.fillMaxWidth())
-  }
+        BpkText(
+            text = stringResource(id = R.string.panel_no_padding),
+            style = BpkTheme.typography.heading3,
+        )
+        NoPaddingPanelExample(Modifier.fillMaxWidth())
+    }
 }
 
 @Composable
 internal fun DefaultPanelExample(modifier: Modifier = Modifier) {
-  BpkPanel(
-    modifier = modifier,
-    contentAlignment = Alignment.Center,
-  ) {
-    BpkText(
-      text = stringResource(R.string.stub),
-      overflow = TextOverflow.Clip,
-    )
-  }
+    BpkPanel(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkText(
+            text = stringResource(R.string.stub),
+            overflow = TextOverflow.Clip,
+        )
+    }
 }
 
 @Composable
 internal fun NoPaddingPanelExample(modifier: Modifier = Modifier) {
-  BpkPanel(
-    modifier = modifier,
-    contentAlignment = Alignment.Center,
-    padding = BpkPanelPadding.None,
-  ) {
-    BpkText(
-      text = stringResource(R.string.stub),
-      overflow = TextOverflow.Clip,
-    )
-  }
+    BpkPanel(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+        padding = BpkPanelPadding.None,
+    ) {
+        BpkText(
+            text = stringResource(R.string.stub),
+            overflow = TextOverflow.Clip,
+        )
+    }
 }

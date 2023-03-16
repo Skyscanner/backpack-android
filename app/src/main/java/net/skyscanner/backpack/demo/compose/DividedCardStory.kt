@@ -41,39 +41,39 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @CardComponent
 @ComposeStory("Divided card")
 fun DividedCardStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier
-      .background(BpkTheme.colors.line)
-      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    DividedCardExample(Modifier.fillMaxWidth())
-  }
+        DividedCardExample(Modifier.fillMaxWidth())
+    }
 }
 
 @Composable
 private fun DividedCardExample(modifier: Modifier = Modifier) {
-  BpkDividedCard(
-    modifier = modifier.fillMaxWidth(),
-    primaryContent = {
-      Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
-      BpkText(
-        modifier = Modifier.fillMaxWidth(),
-        text = stringResource(id = R.string.divided_card_primary_content),
-        style = BpkTheme.typography.bodyDefault,
-        textAlign = TextAlign.Center,
-      )
-    },
-    secondaryContent = {
-      Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
-      BpkText(
-        modifier = Modifier.fillMaxWidth(),
-        text = stringResource(id = R.string.divided_card_secondary_content),
-        style = BpkTheme.typography.bodyDefault,
-        textAlign = TextAlign.Center,
-      )
-    },
-    onClick = {},
-  )
+    BpkDividedCard(
+        modifier = modifier.fillMaxWidth(),
+        primaryContent = {
+            Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+            BpkText(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(id = R.string.divided_card_primary_content),
+                style = BpkTheme.typography.bodyDefault,
+                textAlign = TextAlign.Center,
+            )
+        },
+        secondaryContent = {
+            Spacer(modifier = Modifier.height(BpkSpacing.Xxl))
+            BpkText(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(id = R.string.divided_card_secondary_content),
+                style = BpkTheme.typography.bodyDefault,
+                textAlign = TextAlign.Center,
+            )
+        },
+        onClick = {},
+    )
 }

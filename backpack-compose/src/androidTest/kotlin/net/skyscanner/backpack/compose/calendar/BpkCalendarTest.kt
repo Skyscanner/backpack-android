@@ -43,115 +43,115 @@ import java.util.*
 @OptIn(ExperimentalCoroutinesApi::class)
 class BpkCalendarTest {
 
-  private val initialStartDate = LocalDate.of(2019, 1, 2)
-  private val initialEndDate = LocalDate.of(2019, 12, 31)
-  private val initialRange = initialStartDate..initialEndDate
-  private val now = initialStartDate
+    private val initialStartDate = LocalDate.of(2019, 1, 2)
+    private val initialEndDate = LocalDate.of(2019, 12, 31)
+    private val initialRange = initialStartDate..initialEndDate
+    private val now = initialStartDate
 
-  private val DefaultSingle = CalendarParams(
-    locale = Locale.UK,
-    selectionMode = CalendarParams.SelectionMode.Single,
-    range = initialRange,
-    now = now,
-  )
-
-  private val DefaultRange = DefaultSingle.copy(selectionMode = CalendarParams.SelectionMode.Range)
-
-  @get:Rule
-  val composeTestRule = createComposeRule()
-
-  @Test
-  fun withSameStartAndEndDateSelected() = runTest {
-    val expected = CalendarSelection.Dates(
-      start = LocalDate.of(2019, 1, 17),
-      end = LocalDate.of(2019, 1, 17),
-    )
-    val controller = createController(DefaultRange)
-
-    composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
-
-    composeTestRule.onAllNodesWithText("17")
-      .onFirst()
-      .performClick()
-
-    composeTestRule.onAllNodesWithText("17")
-      .onFirst()
-      .performClick()
-
-    val state = controller.state.first()
-
-    assertEquals(expected, state.selection)
-  }
-
-  @Test
-  fun withSingleDaySelected() = runTest {
-    val expected = CalendarSelection.Single(LocalDate.of(2019, 2, 14))
-    val controller = createController(DefaultSingle)
-
-    composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
-
-    composeTestRule.onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-      .performScrollToIndex(8)
-
-    composeTestRule.onAllNodesWithText("13")
-      .onLast()
-      .performClick()
-
-    composeTestRule.onAllNodesWithText("14")
-      .onLast()
-      .performClick()
-
-    val state = controller.state.first()
-
-    assertEquals(expected, state.selection)
-  }
-
-  @Test
-  fun withStartAndEndDateSelected() = runTest {
-    val expected = CalendarSelection.Dates(
-      start = LocalDate.of(2019, 1, 17),
-      end = LocalDate.of(2019, 2, 14),
-    )
-    val controller = createController(DefaultRange)
-
-    composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
-
-    composeTestRule.onNodeWithTag(CALENDAR_GRID_TEST_TAG)
-      .performScrollToIndex(8)
-
-    composeTestRule.onAllNodesWithText("17")
-      .onFirst()
-      .performClick()
-
-    composeTestRule.onAllNodesWithText("14")
-      .onLast()
-      .performClick()
-
-    val state = controller.state.first()
-
-    assertEquals(expected, state.selection)
-  }
-
-  @Test
-  fun withStartDateSelected() = runTest {
-    val expected = CalendarSelection.Dates(
-      start = LocalDate.of(2019, 1, 17),
-      end = null,
+    private val DefaultSingle = CalendarParams(
+        locale = Locale.UK,
+        selectionMode = CalendarParams.SelectionMode.Single,
+        range = initialRange,
+        now = now,
     )
 
-    val controller = createController(DefaultRange)
+    private val DefaultRange = DefaultSingle.copy(selectionMode = CalendarParams.SelectionMode.Range)
 
-    composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
+    @get:Rule
+    val composeTestRule = createComposeRule()
 
-    composeTestRule.onAllNodesWithText("17")
-      .onFirst()
-      .performClick()
+    @Test
+    fun withSameStartAndEndDateSelected() = runTest {
+        val expected = CalendarSelection.Dates(
+            start = LocalDate.of(2019, 1, 17),
+            end = LocalDate.of(2019, 1, 17),
+        )
+        val controller = createController(DefaultRange)
 
-    val state = controller.state.first()
+        composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
 
-    assertEquals(expected, state.selection)
-  }
+        composeTestRule.onAllNodesWithText("17")
+            .onFirst()
+            .performClick()
 
-  private fun createController(params: CalendarParams): BpkCalendarController =
-    BpkCalendarController(initialParams = params, coroutineScope = TestScope(UnconfinedTestDispatcher()))
+        composeTestRule.onAllNodesWithText("17")
+            .onFirst()
+            .performClick()
+
+        val state = controller.state.first()
+
+        assertEquals(expected, state.selection)
+    }
+
+    @Test
+    fun withSingleDaySelected() = runTest {
+        val expected = CalendarSelection.Single(LocalDate.of(2019, 2, 14))
+        val controller = createController(DefaultSingle)
+
+        composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
+
+        composeTestRule.onNodeWithTag(CALENDAR_GRID_TEST_TAG)
+            .performScrollToIndex(8)
+
+        composeTestRule.onAllNodesWithText("13")
+            .onLast()
+            .performClick()
+
+        composeTestRule.onAllNodesWithText("14")
+            .onLast()
+            .performClick()
+
+        val state = controller.state.first()
+
+        assertEquals(expected, state.selection)
+    }
+
+    @Test
+    fun withStartAndEndDateSelected() = runTest {
+        val expected = CalendarSelection.Dates(
+            start = LocalDate.of(2019, 1, 17),
+            end = LocalDate.of(2019, 2, 14),
+        )
+        val controller = createController(DefaultRange)
+
+        composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
+
+        composeTestRule.onNodeWithTag(CALENDAR_GRID_TEST_TAG)
+            .performScrollToIndex(8)
+
+        composeTestRule.onAllNodesWithText("17")
+            .onFirst()
+            .performClick()
+
+        composeTestRule.onAllNodesWithText("14")
+            .onLast()
+            .performClick()
+
+        val state = controller.state.first()
+
+        assertEquals(expected, state.selection)
+    }
+
+    @Test
+    fun withStartDateSelected() = runTest {
+        val expected = CalendarSelection.Dates(
+            start = LocalDate.of(2019, 1, 17),
+            end = null,
+        )
+
+        val controller = createController(DefaultRange)
+
+        composeTestRule.setContent { BpkTheme { BpkCalendar(controller) } }
+
+        composeTestRule.onAllNodesWithText("17")
+            .onFirst()
+            .performClick()
+
+        val state = controller.state.first()
+
+        assertEquals(expected, state.selection)
+    }
+
+    private fun createController(params: CalendarParams): BpkCalendarController =
+        BpkCalendarController(initialParams = params, coroutineScope = TestScope(UnconfinedTestDispatcher()))
 }

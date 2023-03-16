@@ -32,60 +32,60 @@ import java.io.Serializable
 @Stable
 sealed class CalendarSelection : Serializable {
 
-  /**
-   * Check whether selection contains the date
-   */
-  abstract operator fun contains(date: LocalDate): Boolean
+    /**
+     * Check whether selection contains the date
+     */
+    abstract operator fun contains(date: LocalDate): Boolean
 
-  /**
-   * No dates are selected
-   */
-  object None : CalendarSelection() {
-    override fun contains(date: LocalDate): Boolean =
-      false
-  }
+    /**
+     * No dates are selected
+     */
+    object None : CalendarSelection() {
+        override fun contains(date: LocalDate): Boolean =
+            false
+    }
 
-  /**
-   * Single [date] is selected
-   */
-  @Immutable
-  data class Single(
-    val date: LocalDate,
-  ) : CalendarSelection() {
+    /**
+     * Single [date] is selected
+     */
+    @Immutable
+    data class Single(
+        val date: LocalDate,
+    ) : CalendarSelection() {
 
-    override fun contains(date: LocalDate): Boolean =
-      this.date == date
-  }
+        override fun contains(date: LocalDate): Boolean =
+            this.date == date
+    }
 
-  /**
-   * Describes the current range selection in the calendar.
-   */
-  @Stable
-  sealed class Range : CalendarSelection() {
-    abstract val start: LocalDate
-    abstract val end: LocalDate?
+    /**
+     * Describes the current range selection in the calendar.
+     */
+    @Stable
+    sealed class Range : CalendarSelection() {
+        abstract val start: LocalDate
+        abstract val end: LocalDate?
 
-    override fun contains(date: LocalDate): Boolean =
-      when (end) {
-        null -> date == start
-        else -> date >= start && date <= end
-      }
-  }
+        override fun contains(date: LocalDate): Boolean =
+            when (end) {
+                null -> date == start
+                else -> date >= start && date <= end
+            }
+    }
 
-  /**
-   * A whole [month] is selected.
-   */
-  @Immutable
-  data class Month(val month: YearMonth) : Range() {
-    override val start: LocalDate = month.firstDay()
-    override val end: LocalDate = month.lastDay()
-  }
+    /**
+     * A whole [month] is selected.
+     */
+    @Immutable
+    data class Month(val month: YearMonth) : Range() {
+        override val start: LocalDate = month.firstDay()
+        override val end: LocalDate = month.lastDay()
+    }
 
-  /**
-   * A range of dates is selected.
-   * @param start of range
-   * @param end end of range. May be null if user haven't selected the end date yet
-   */
-  @Immutable
-  data class Dates(override val start: LocalDate, override val end: LocalDate?) : Range()
+    /**
+     * A range of dates is selected.
+     * @param start of range
+     * @param end end of range. May be null if user haven't selected the end date yet
+     */
+    @Immutable
+    data class Dates(override val start: LocalDate, override val end: LocalDate?) : Range()
 }

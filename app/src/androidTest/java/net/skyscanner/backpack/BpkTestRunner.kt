@@ -28,29 +28,29 @@ import com.karumi.shot.ShotTestRunner
 @Suppress("unused")
 class BpkTestRunner : ShotTestRunner() {
 
-  override fun onCreate(args: Bundle) {
-    if (args.getString("variant") == "themed") {
-      args.putString("notPackage", "net.skyscanner.backpack.compose")
-    }
-    args.putString("filter", "net.skyscanner.backpack.VariantFilter")
-    super.onCreate(args)
-  }
-
-  override fun newApplication(cl: ClassLoader?, className: String?, context: Context?): Application =
-    super.newApplication(cl, className, context).apply {
-      registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
-        override fun onActivityPaused(activity: Activity) {}
-        override fun onActivityResumed(activity: Activity) {}
-        override fun onActivityStarted(activity: Activity) {}
-        override fun onActivityDestroyed(activity: Activity) {}
-        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
-        override fun onActivityStopped(activity: Activity) {}
-        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-          BpkTestVariant.current.applyToActivity(activity)
+    override fun onCreate(args: Bundle) {
+        if (args.getString("variant") == "themed") {
+            args.putString("notPackage", "net.skyscanner.backpack.compose")
         }
-      },)
+        args.putString("filter", "net.skyscanner.backpack.VariantFilter")
+        super.onCreate(args)
     }
 
-  override fun newActivity(cl: ClassLoader?, className: String?, intent: Intent?): Activity =
-    BpkTestVariant.current.newActivity(super.newActivity(cl, className, intent))
+    override fun newApplication(cl: ClassLoader?, className: String?, context: Context?): Application =
+        super.newApplication(cl, className, context).apply {
+            registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+                override fun onActivityPaused(activity: Activity) {}
+                override fun onActivityResumed(activity: Activity) {}
+                override fun onActivityStarted(activity: Activity) {}
+                override fun onActivityDestroyed(activity: Activity) {}
+                override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+                override fun onActivityStopped(activity: Activity) {}
+                override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+                    BpkTestVariant.current.applyToActivity(activity)
+                }
+            },)
+        }
+
+    override fun newActivity(cl: ClassLoader?, className: String?, intent: Intent?): Activity =
+        BpkTestVariant.current.newActivity(super.newActivity(cl, className, intent))
 }

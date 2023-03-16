@@ -41,61 +41,61 @@ import kotlinx.coroutines.sync.withLock
 @Stable
 interface StateMachine<State, Effect> {
 
-  val state: StateFlow<State>
+    val state: StateFlow<State>
 
-  val effects: SharedFlow<Effect>
+    val effects: SharedFlow<Effect>
 }
 
 @Stable
 @InternalBackpackApi
 interface MutableStateMachine<State, Effect> : StateMachine<State, Effect> {
 
-  interface CommitScope<Effect> {
+    interface CommitScope<Effect> {
 
-    fun emmit(effect: Effect)
-  }
+        fun emmit(effect: Effect)
+    }
 
-  fun commit(block: suspend CommitScope<Effect>.(State) -> State)
+    fun commit(block: suspend CommitScope<Effect>.(State) -> State)
 }
 
 @InternalBackpackApi
 @Suppress("FunctionName")
 fun <State, Effect> MutableStateMachine(
-  scope: CoroutineScope,
-  initial: State,
+    scope: CoroutineScope,
+    initial: State,
 ): MutableStateMachine<State, Effect> {
 
-  val state = MutableStateFlow(initial)
-  val effects = MutableSharedFlow<Effect>()
-  val mutex = Mutex()
+    val state = MutableStateFlow(initial)
+    val effects = MutableSharedFlow<Effect>()
+    val mutex = Mutex()
 
-  return object : MutableStateMachine<State, Effect> {
+    return object : MutableStateMachine<State, Effect> {
 
-    override val effects: SharedFlow<Effect> = effects
+        override val effects: SharedFlow<Effect> = effects
 
-    override val state: StateFlow<State> = state
+        override val state: StateFlow<State> = state
 
-    override fun commit(block: suspend MutableStateMachine.CommitScope<Effect>.(State) -> State) {
-      scope.launch {
-        val accumulator = EffectsAccumulator<Effect>()
-        mutex.withLock {
-          state.value = accumulator.block(state.value)
-          accumulator.sinkTo(effects)
+        override fun commit(block: suspend MutableStateMachine.CommitScope<Effect>.(State) -> State) {
+            scope.launch {
+                val accumulator = EffectsAccumulator<Effect>()
+                mutex.withLock {
+                    state.value = accumulator.block(state.value)
+                    accumulator.sinkTo(effects)
+                }
+            }
         }
-      }
     }
-  }
 }
 
 private class EffectsAccumulator<Effect> : MutableStateMachine.CommitScope<Effect> {
 
-  private var effects: MutableList<Effect>? = null
+    private var effects: MutableList<Effect>? = null
 
-  override fun emmit(effect: Effect) {
-    (effects ?: mutableListOf<Effect>().also { effects = it }).add(effect)
-  }
+    override fun emmit(effect: Effect) {
+        (effects ?: mutableListOf<Effect>().also { effects = it }).add(effect)
+    }
 
-  suspend fun sinkTo(sink: MutableSharedFlow<Effect>) {
-    effects?.forEach { sink.emit(it) }
-  }
+    suspend fun sinkTo(sink: MutableSharedFlow<Effect>) {
+        effects?.forEach { sink.emit(it) }
+    }
 }

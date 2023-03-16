@@ -30,8 +30,8 @@ import androidx.annotation.ColorInt
  * @return Int
  */
 internal fun darken(@ColorInt normalColor: Int, factor: Float = .2f): Int {
-  val hsv = FloatArray(3)
-  Color.colorToHSV(normalColor, hsv)
-  hsv[2] *= 1f - factor // value component
-  return Color.HSVToColor(hsv)
+    val hsv = FloatArray(3)
+    Color.colorToHSV(normalColor, hsv)
+    hsv[2] *= 1f - factor // value component
+    return Color.HSVToColor(hsv)
 }

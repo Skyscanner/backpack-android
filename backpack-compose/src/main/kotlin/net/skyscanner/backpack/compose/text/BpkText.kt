@@ -32,54 +32,54 @@ import androidx.compose.ui.text.style.TextOverflow
 
 @Composable
 fun BpkText(
-  text: String,
-  modifier: Modifier = Modifier,
-  color: Color = Color.Unspecified,
-  textDecoration: TextDecoration? = null,
-  textAlign: TextAlign? = null,
-  overflow: TextOverflow = TextOverflow.Clip,
-  softWrap: Boolean = true,
-  maxLines: Int = Int.MAX_VALUE,
-  onTextLayout: (TextLayoutResult) -> Unit = {},
-  style: TextStyle = LocalTextStyle.current,
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified,
+    textDecoration: TextDecoration? = null,
+    textAlign: TextAlign? = null,
+    overflow: TextOverflow = TextOverflow.Clip,
+    softWrap: Boolean = true,
+    maxLines: Int = Int.MAX_VALUE,
+    onTextLayout: (TextLayoutResult) -> Unit = {},
+    style: TextStyle = LocalTextStyle.current,
 ) {
-  BpkText(
-    text = AnnotatedString(text),
-    modifier = modifier,
-    color = color,
-    textDecoration = textDecoration,
-    textAlign = textAlign,
-    overflow = overflow,
-    softWrap = softWrap,
-    maxLines = maxLines,
-    onTextLayout = onTextLayout,
-    style = style,
-  )
+    BpkText(
+        text = AnnotatedString(text),
+        modifier = modifier,
+        color = color,
+        textDecoration = textDecoration,
+        textAlign = textAlign,
+        overflow = overflow,
+        softWrap = softWrap,
+        maxLines = maxLines,
+        onTextLayout = onTextLayout,
+        style = style,
+    )
 }
 
 @Composable
 fun BpkText(
-  text: AnnotatedString,
-  modifier: Modifier = Modifier,
-  color: Color = Color.Unspecified,
-  textDecoration: TextDecoration? = null,
-  textAlign: TextAlign? = null,
-  overflow: TextOverflow = TextOverflow.Clip,
-  softWrap: Boolean = true,
-  maxLines: Int = Int.MAX_VALUE,
-  onTextLayout: (TextLayoutResult) -> Unit = {},
-  style: TextStyle = LocalTextStyle.current,
+    text: AnnotatedString,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified,
+    textDecoration: TextDecoration? = null,
+    textAlign: TextAlign? = null,
+    overflow: TextOverflow = TextOverflow.Clip,
+    softWrap: Boolean = true,
+    maxLines: Int = Int.MAX_VALUE,
+    onTextLayout: (TextLayoutResult) -> Unit = {},
+    style: TextStyle = LocalTextStyle.current,
 ) {
-  Text(
-    text = text,
-    modifier = modifier,
-    color = color,
-    textDecoration = textDecoration,
-    textAlign = textAlign,
-    overflow = overflow,
-    softWrap = softWrap,
-    maxLines = maxLines,
-    onTextLayout = onTextLayout,
-    style = style,
-  )
+    Text(
+        text = text,
+        modifier = modifier,
+        color = color,
+        textDecoration = textDecoration,
+        textAlign = textAlign,
+        overflow = overflow,
+        softWrap = softWrap,
+        maxLines = maxLines,
+        onTextLayout = onTextLayout,
+        style = style,
+    )
 }

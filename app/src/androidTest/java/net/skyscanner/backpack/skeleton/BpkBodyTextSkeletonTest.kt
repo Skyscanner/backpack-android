@@ -26,9 +26,9 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkBodyTextSkeletonTest : BpkSnapshotTest() {
 
-  @Test
-  fun bodyText() {
-    val skeleton = BpkBodyTextSkeleton(testContext)
-    snap(skeleton, width = 200, height = 80)
-  }
+    @Test
+    fun bodyText() {
+        val skeleton = BpkBodyTextSkeleton(testContext)
+        snap(skeleton, width = 200, height = 80)
+    }
 }

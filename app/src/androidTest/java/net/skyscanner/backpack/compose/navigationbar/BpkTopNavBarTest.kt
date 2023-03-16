@@ -38,67 +38,67 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkTopNavBarTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    ActionsTopNavBar(Modifier.fillMaxWidth())
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun noNavIcon() = snap {
-    NoNavIconTopNavBar(Modifier.fillMaxWidth())
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun back() = snap {
-    BackTopNavBar(Modifier.fillMaxWidth())
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun close() = snap {
-    CloseTopNavBar(Modifier.fillMaxWidth())
-  }
-
-  @Test
-  fun textAction() = snap {
-    TextActionTopNavBar(Modifier.fillMaxWidth())
-  }
-
-  @Test
-  fun expanded() = snap {
-    CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Expanded, showList = false)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun collapsed() = snap {
-    CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun expandedNoNavIcon() = snap {
-    CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Expanded, showNav = false, showList = false)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun expandedNoActions() = snap {
-    CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Expanded, showActions = false, showList = false)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun windowInsets() {
-    snap {
-      CollapsibleNavBarStory(
-        initialStatus = TopNavBarStatus.Expanded,
-        showActions = false,
-        showList = false,
-        insets = WindowInsets(top = BpkSpacing.Md),
-      )
+    @Test
+    fun default() = snap {
+        ActionsTopNavBar(Modifier.fillMaxWidth())
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun noNavIcon() = snap {
+        NoNavIconTopNavBar(Modifier.fillMaxWidth())
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun back() = snap {
+        BackTopNavBar(Modifier.fillMaxWidth())
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun close() = snap {
+        CloseTopNavBar(Modifier.fillMaxWidth())
+    }
+
+    @Test
+    fun textAction() = snap {
+        TextActionTopNavBar(Modifier.fillMaxWidth())
+    }
+
+    @Test
+    fun expanded() = snap {
+        CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Expanded, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun collapsed() = snap {
+        CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Collapsed, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun expandedNoNavIcon() = snap {
+        CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Expanded, showNav = false, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun expandedNoActions() = snap {
+        CollapsibleNavBarStory(initialStatus = TopNavBarStatus.Expanded, showActions = false, showList = false)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun windowInsets() {
+        snap {
+            CollapsibleNavBarStory(
+                initialStatus = TopNavBarStatus.Expanded,
+                showActions = false,
+                showList = false,
+                insets = WindowInsets(top = BpkSpacing.Md),
+            )
+        }
+    }
 }

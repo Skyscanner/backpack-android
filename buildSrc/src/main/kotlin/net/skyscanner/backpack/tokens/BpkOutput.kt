@@ -28,123 +28,125 @@ import java.nio.charset.StandardCharsets
 
 sealed class BpkOutput<Input> : (Input) -> Boolean {
 
-  data class KotlinFile(
-    val srcDir: String,
-    val pkg: String,
-  ) : BpkOutput<TypeSpec>() {
+    data class KotlinFile(
+        val srcDir: String,
+        val pkg: String,
+    ) : BpkOutput<TypeSpec>() {
 
-    override fun invoke(typeSpec: TypeSpec): Boolean {
-      FileSpec.builder(pkg, typeSpec.name!!)
-        .suppressWarningTypes("RedundantVisibilityModifier", "unused")
-        .addType(typeSpec)
-        .build()
-        .writeWithCopyright(File(srcDir))
-      return true
-    }
-  }
-
-  data class KotlinFiles(
-    val srcDir: String,
-    val pkg: String,
-  ) : BpkOutput<List<TypeSpec>>() {
-
-    override fun invoke(typeSpecs: List<TypeSpec>): Boolean {
-      typeSpecs.forEach { typeSpec -> KotlinFile(srcDir, pkg).invoke(typeSpec) }
-      return true
-    }
-  }
-
-  data class KotlinExtensionFile(
-    val srcDir: String,
-    val pkg: String,
-    val name: String,
-  ) : BpkOutput<List<PropertySpec>>() {
-
-    override fun invoke(properties: List<PropertySpec>): Boolean {
-      FileSpec.builder(pkg, name)
-        .suppressWarningTypes("RedundantVisibilityModifier", "unused")
-        .apply {
-          properties.forEach { addProperty(it) }
+        override fun invoke(typeSpec: TypeSpec): Boolean {
+            FileSpec.builder(pkg, typeSpec.name!!)
+                .indent(" ".repeat(4))
+                .suppressWarningTypes("RedundantVisibilityModifier", "unused")
+                .addType(typeSpec)
+                .build()
+                .writeWithCopyright(File(srcDir))
+            return true
         }
-        .build()
-        .writeWithCopyright(File(srcDir))
-      return true
     }
-  }
 
-  data class XmlFile(
-    val srcDir: String,
-    val folder: String,
-    val name: String,
-  ) : BpkOutput<String>() {
-    override fun invoke(content: String): Boolean {
-      content.writeToFile(srcDir, folder, name)
-      return true
+    data class KotlinFiles(
+        val srcDir: String,
+        val pkg: String,
+    ) : BpkOutput<List<TypeSpec>>() {
+
+        override fun invoke(typeSpecs: List<TypeSpec>): Boolean {
+            typeSpecs.forEach { typeSpec -> KotlinFile(srcDir, pkg).invoke(typeSpec) }
+            return true
+        }
     }
-  }
 
-  data class XmlFiles(
-    val srcDir: String,
-    val folder: String,
-    val name: String,
-  ) : BpkOutput<Map<String, String>>() {
-    override fun invoke(contents: Map<String, String>): Boolean {
-      contents.forEach { (folderSuffix, content) -> content.writeToFile(srcDir, folder + folderSuffix, name) }
-      return true
+    data class KotlinExtensionFile(
+        val srcDir: String,
+        val pkg: String,
+        val name: String,
+    ) : BpkOutput<List<PropertySpec>>() {
+
+        override fun invoke(properties: List<PropertySpec>): Boolean {
+            FileSpec.builder(pkg, name)
+                .indent(" ".repeat(4))
+                .suppressWarningTypes("RedundantVisibilityModifier", "unused")
+                .apply {
+                    properties.forEach { addProperty(it) }
+                }
+                .build()
+                .writeWithCopyright(File(srcDir))
+            return true
+        }
     }
-  }
 
-  data class XmlIconFiles(
-    val srcDir: String,
-  ) : BpkOutput<Map<String, String>>() {
-    override fun invoke(contents: Map<String, String>): Boolean {
-      val folder = File(srcDir)
-      folder.deleteRecursively()
-      folder.mkdir()
-      contents.forEach { (name, content) ->
-        val target = File(srcDir, "$name.xml")
-        target.createNewFile()
-
-        target.writeText(content)
-      }
-      return true
+    data class XmlFile(
+        val srcDir: String,
+        val folder: String,
+        val name: String,
+    ) : BpkOutput<String>() {
+        override fun invoke(content: String): Boolean {
+            content.writeToFile(srcDir, folder, name)
+            return true
+        }
     }
-  }
+
+    data class XmlFiles(
+        val srcDir: String,
+        val folder: String,
+        val name: String,
+    ) : BpkOutput<Map<String, String>>() {
+        override fun invoke(contents: Map<String, String>): Boolean {
+            contents.forEach { (folderSuffix, content) -> content.writeToFile(srcDir, folder + folderSuffix, name) }
+            return true
+        }
+    }
+
+    data class XmlIconFiles(
+        val srcDir: String,
+    ) : BpkOutput<Map<String, String>>() {
+        override fun invoke(contents: Map<String, String>): Boolean {
+            val folder = File(srcDir)
+            folder.deleteRecursively()
+            folder.mkdir()
+            contents.forEach { (name, content) ->
+                val target = File(srcDir, "$name.xml")
+                target.createNewFile()
+
+                target.writeText(content)
+            }
+            return true
+        }
+    }
 }
 
 private fun String.writeToFile(srcDir: String, folder: String, name: String) {
-  val target = File(File(srcDir, folder), "backpack.$name.xml")
-  target.createNewFile()
+    val target = File(File(srcDir, folder), "backpack.$name.xml")
+    target.createNewFile()
 
-  val template = Resources.toString(Resources.getResource("resource_file_template.txt"), StandardCharsets.UTF_8)
+    val template = Resources.toString(Resources.getResource("resource_file_template.txt"), StandardCharsets.UTF_8)
 
-  target.writeText(template.replace("{{content}}", this))
+    target.writeText(template.replace("{{content}}", this))
 }
 
 private fun FileSpec.writeWithCopyright(directory: File) {
-  toBuilder()
-    .addFileComment("Auto-generated: do not edit")
-    .build()
-    .writeTo(directory)
+    toBuilder()
+        .addFileComment("Auto-generated: do not edit")
+        .build()
+        .writeTo(directory)
 
-  val target = File(File(directory, packageName.replace(".", "/")), "$name.kt")
-  require(target.exists()) { "Unable to write copyright header" }
+    val target = File(File(directory, packageName.replace(".", "/")), "$name.kt")
+    require(target.exists()) { "Unable to write copyright header" }
 
-  val source = target.readText()
-  val copyright = Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
+    val source = target.readText()
+    val copyright = Resources.toString(Resources.getResource("copyright.txt"), StandardCharsets.UTF_8)
 
-  target.writeText(copyright + source)
+    target.writeText(copyright + source)
 }
 
 private fun FileSpec.Builder.suppressWarningTypes(vararg types: String): FileSpec.Builder {
-  if (types.isEmpty()) {
-    return this
-  }
+    if (types.isEmpty()) {
+        return this
+    }
 
-  val format = "%S, ".repeat(types.count()).trimEnd(',', ' ')
-  return addAnnotation(
-    AnnotationSpec.builder(ClassName("", "Suppress"))
-      .addMember(format, *types)
-      .build(),
-  )
+    val format = "%S, ".repeat(types.count()).trimEnd(',', ' ')
+    return addAnnotation(
+        AnnotationSpec.builder(ClassName("", "Suppress"))
+            .addMember(format, *types)
+            .build(),
+    )
 }

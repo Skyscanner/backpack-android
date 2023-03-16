@@ -31,78 +31,78 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkBadgeTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    BpkBadge(text = "Default", type = BpkBadgeType.Destructive)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun withIcon() = snap {
-    BpkBadge(text = "Default", type = BpkBadgeType.Destructive, icon = BpkIcon.CloseCircle)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun normal() {
-    snap {
-      BpkBadge(text = BpkBadgeType.Normal.toString(), type = BpkBadgeType.Normal)
+    @Test
+    fun default() = snap {
+        BpkBadge(text = "Default", type = BpkBadgeType.Destructive)
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun strong() {
-    snap {
-      BpkBadge(text = BpkBadgeType.Strong.toString(), type = BpkBadgeType.Strong)
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun withIcon() = snap {
+        BpkBadge(text = "Default", type = BpkBadgeType.Destructive, icon = BpkIcon.CloseCircle)
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun success() {
-    snap {
-      BpkBadge(text = BpkBadgeType.Success.toString(), type = BpkBadgeType.Success)
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun normal() {
+        snap {
+            BpkBadge(text = BpkBadgeType.Normal.toString(), type = BpkBadgeType.Normal)
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun warning() {
-    snap {
-      BpkBadge(text = BpkBadgeType.Warning.toString(), type = BpkBadgeType.Warning)
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun strong() {
+        snap {
+            BpkBadge(text = BpkBadgeType.Strong.toString(), type = BpkBadgeType.Strong)
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun destructive() {
-    snap {
-      BpkBadge(text = BpkBadgeType.Destructive.toString(), type = BpkBadgeType.Destructive)
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun success() {
+        snap {
+            BpkBadge(text = BpkBadgeType.Success.toString(), type = BpkBadgeType.Success)
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun inverse() {
-    snap(background = { BpkTheme.colors.surfaceContrast }) {
-      BpkBadge(text = BpkBadgeType.Inverse.toString(), type = BpkBadgeType.Inverse)
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun warning() {
+        snap {
+            BpkBadge(text = BpkBadgeType.Warning.toString(), type = BpkBadgeType.Warning)
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun outline() {
-    snap(background = { BpkTheme.colors.surfaceContrast }) {
-      BpkBadge(text = BpkBadgeType.Outline.toString(), type = BpkBadgeType.Outline)
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun destructive() {
+        snap {
+            BpkBadge(text = BpkBadgeType.Destructive.toString(), type = BpkBadgeType.Destructive)
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun brand() {
-    snap {
-      BpkBadge(text = BpkBadgeType.Brand.toString(), type = BpkBadgeType.Brand)
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun inverse() {
+        snap(background = { BpkTheme.colors.surfaceContrast }) {
+            BpkBadge(text = BpkBadgeType.Inverse.toString(), type = BpkBadgeType.Inverse)
+        }
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun outline() {
+        snap(background = { BpkTheme.colors.surfaceContrast }) {
+            BpkBadge(text = BpkBadgeType.Outline.toString(), type = BpkBadgeType.Outline)
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun brand() {
+        snap {
+            BpkBadge(text = BpkBadgeType.Brand.toString(), type = BpkBadgeType.Brand)
+        }
+    }
 }

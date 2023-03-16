@@ -33,43 +33,43 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @ChipComponent
 @ViewStory("Default")
 fun ChipStoryDefault(modifier: Modifier = Modifier) =
-  ChipDemo(R.layout.fragment_chip, modifier)
+    ChipDemo(R.layout.fragment_chip, modifier)
 
 @Composable
 @ChipComponent
 @ViewStory("On Dark")
 fun ChipStoryOnDark(modifier: Modifier = Modifier) =
-  ChipDemo(R.layout.fragment_chip_ondark, modifier)
+    ChipDemo(R.layout.fragment_chip_ondark, modifier)
 
 @Composable
 @ChipComponent
 @ViewStory("On Image")
 fun ChipStoryOnImage(modifier: Modifier = Modifier) =
-  ChipDemo(R.layout.fragment_chip_on_image, modifier)
+    ChipDemo(R.layout.fragment_chip_on_image, modifier)
 
 @Composable
 private fun ChipDemo(
-  @LayoutRes layoutId: Int,
-  modifier: Modifier = Modifier,
+    @LayoutRes layoutId: Int,
+    modifier: Modifier = Modifier,
 ) =
-  AndroidLayout(
-    layoutId = layoutId,
-    modifier = modifier.fillMaxSize(),
-  ) {
-    forEachChip(this as ViewGroup) { chip ->
-      chip.setOnClickListener {
-        chip.toggle()
-      }
+    AndroidLayout(
+        layoutId = layoutId,
+        modifier = modifier.fillMaxSize(),
+    ) {
+        forEachChip(this as ViewGroup) { chip ->
+            chip.setOnClickListener {
+                chip.toggle()
+            }
+        }
     }
-  }
 
 private fun forEachChip(view: ViewGroup, block: (chip: BpkChip) -> Unit) {
-  (0..(view.childCount - 1)).forEach {
-    val child = view.getChildAt(it)
-    if (child is ViewGroup) {
-      forEachChip(child, block)
-    } else if (child is BpkChip) {
-      block(child)
+    (0..(view.childCount - 1)).forEach {
+        val child = view.getChildAt(it)
+        if (child is ViewGroup) {
+            forEachChip(child, block)
+        } else if (child is BpkChip) {
+            block(child)
+        }
     }
-  }
 }

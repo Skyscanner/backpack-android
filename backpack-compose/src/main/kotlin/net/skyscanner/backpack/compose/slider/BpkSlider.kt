@@ -31,58 +31,58 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
 fun BpkSlider(
-  value: Float,
-  onValueChange: (Float) -> Unit,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  minValue: Float = 0f,
-  maxValue: Float = 1f,
-  steps: Int = 0,
-  onValueChangeFinished: (() -> Unit)? = null,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    value: Float,
+    onValueChange: (Float) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    minValue: Float = 0f,
+    maxValue: Float = 1f,
+    steps: Int = 0,
+    onValueChangeFinished: (() -> Unit)? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-  Slider(
-    value = value,
-    onValueChange = onValueChange,
-    modifier = modifier,
-    enabled = enabled,
-    valueRange = minValue..maxValue,
-    steps = steps,
-    onValueChangeFinished = onValueChangeFinished,
-    interactionSource = interactionSource,
-    colors = sliderColors(),
-  )
+    Slider(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        enabled = enabled,
+        valueRange = minValue..maxValue,
+        steps = steps,
+        onValueChangeFinished = onValueChangeFinished,
+        interactionSource = interactionSource,
+        colors = sliderColors(),
+    )
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BpkRangeSlider(
-  value: ClosedFloatingPointRange<Float>,
-  onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  minValue: Float = 0f,
-  maxValue: Float = 1f,
-  steps: Int = 0,
-  onValueChangeFinished: (() -> Unit)? = null,
+    value: ClosedFloatingPointRange<Float>,
+    onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    minValue: Float = 0f,
+    maxValue: Float = 1f,
+    steps: Int = 0,
+    onValueChangeFinished: (() -> Unit)? = null,
 ) {
-  RangeSlider(
-    value = value,
-    onValueChange = onValueChange,
-    modifier = modifier,
-    enabled = enabled,
-    valueRange = minValue..maxValue,
-    steps = steps,
-    onValueChangeFinished = onValueChangeFinished,
-    colors = sliderColors(),
-  )
+    RangeSlider(
+        value = value,
+        onValueChange = onValueChange,
+        modifier = modifier,
+        enabled = enabled,
+        valueRange = minValue..maxValue,
+        steps = steps,
+        onValueChangeFinished = onValueChangeFinished,
+        colors = sliderColors(),
+    )
 }
 
 @Composable
 private fun sliderColors() = SliderDefaults.colors(
-  thumbColor = BpkTheme.colors.coreAccent,
-  activeTrackColor = BpkTheme.colors.coreAccent,
-  inactiveTrackColor = BpkTheme.colors.line,
-  activeTickColor = BpkTheme.colors.coreAccent,
-  inactiveTickColor = BpkTheme.colors.line,
+    thumbColor = BpkTheme.colors.coreAccent,
+    activeTrackColor = BpkTheme.colors.coreAccent,
+    inactiveTrackColor = BpkTheme.colors.line,
+    activeTickColor = BpkTheme.colors.coreAccent,
+    inactiveTickColor = BpkTheme.colors.line,
 )

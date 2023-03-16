@@ -25,19 +25,19 @@ import android.view.View
 import net.skyscanner.backpack.R
 
 class BpkLinkSpan<T>(
-  context: Context,
-  private val link: T,
-  private val linkHandler: (T) -> Unit,
+    context: Context,
+    private val link: T,
+    private val linkHandler: (T) -> Unit,
 ) : ClickableSpan() {
 
-  private val color = context.getColor(R.color.bpkTextLink)
+    private val color = context.getColor(R.color.bpkTextLink)
 
-  override fun updateDrawState(tp: TextPaint) {
-    tp.color = color
-    tp.isUnderlineText = true
-  }
+    override fun updateDrawState(tp: TextPaint) {
+        tp.color = color
+        tp.isUnderlineText = true
+    }
 
-  override fun onClick(widget: View) {
-    linkHandler(link)
-  }
+    override fun onClick(widget: View) {
+        linkHandler(link)
+    }
 }

@@ -35,48 +35,48 @@ import net.skyscanner.backpack.util.InternalBackpackApi
 @SuppressLint("RestrictedApi")
 @Composable
 internal fun BpkCalendarGrid(
-  state: CalendarState,
-  lazyGridState: LazyGridState,
-  modifier: Modifier = Modifier,
-  onClick: (CalendarInteraction) -> Unit,
+    state: CalendarState,
+    lazyGridState: LazyGridState,
+    modifier: Modifier = Modifier,
+    onClick: (CalendarInteraction) -> Unit,
 ) {
-  LazyVerticalGrid(
-    modifier = modifier.testTag(CALENDAR_GRID_TEST_TAG),
-    state = lazyGridState,
-    columns = GridCells.Fixed(COLUMN_COUNT),
-  ) {
+    LazyVerticalGrid(
+        modifier = modifier.testTag(CALENDAR_GRID_TEST_TAG),
+        state = lazyGridState,
+        columns = GridCells.Fixed(COLUMN_COUNT),
+    ) {
 
-    items(
-      count = state.cells.size,
-      span = { index ->
-        when (state.cells[index]) {
-          is CalendarCell.Header -> GridItemSpan(COLUMN_COUNT)
-          else -> GridItemSpan(1)
-        }
-      },
-      key = { index ->
-        when (val item = state.cells[index]) {
-          is CalendarCell.Day -> item.date
-          is CalendarCell.Header -> item.yearMonth
-          is CalendarCell.Space -> index
-        }
-      },
-      contentType = { index ->
-        when (state.cells[index]) {
-          is CalendarCell.Day -> CONTENT_TYPE_DAY
-          is CalendarCell.Header -> CONTENT_TYPE_HEADER
-          is CalendarCell.Space -> CONTENT_TYPE_SPACE
-        }
-      },
-      itemContent = { index ->
-        when (val item = state.cells[index]) {
-          is CalendarCell.Day -> BpkCalendarDayCell(item) { onClick(CalendarInteraction.DateClicked(it)) }
-          is CalendarCell.Header -> BpkCalendarHeaderCell(item) { onClick(CalendarInteraction.SelectMonthClicked(it)) }
-          is CalendarCell.Space -> BpkCalendarSpaceCell(item)
-        }
-      },
-    )
-  }
+        items(
+            count = state.cells.size,
+            span = { index ->
+                when (state.cells[index]) {
+                    is CalendarCell.Header -> GridItemSpan(COLUMN_COUNT)
+                    else -> GridItemSpan(1)
+                }
+            },
+            key = { index ->
+                when (val item = state.cells[index]) {
+                    is CalendarCell.Day -> item.date
+                    is CalendarCell.Header -> item.yearMonth
+                    is CalendarCell.Space -> index
+                }
+            },
+            contentType = { index ->
+                when (state.cells[index]) {
+                    is CalendarCell.Day -> CONTENT_TYPE_DAY
+                    is CalendarCell.Header -> CONTENT_TYPE_HEADER
+                    is CalendarCell.Space -> CONTENT_TYPE_SPACE
+                }
+            },
+            itemContent = { index ->
+                when (val item = state.cells[index]) {
+                    is CalendarCell.Day -> BpkCalendarDayCell(item) { onClick(CalendarInteraction.DateClicked(it)) }
+                    is CalendarCell.Header -> BpkCalendarHeaderCell(item) { onClick(CalendarInteraction.SelectMonthClicked(it)) }
+                    is CalendarCell.Space -> BpkCalendarSpaceCell(item)
+                }
+            },
+        )
+    }
 }
 
 private const val COLUMN_COUNT = 7

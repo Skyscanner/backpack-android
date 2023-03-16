@@ -30,4 +30,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @RadioButtonComponent
 @ViewStory
 fun RadioButtonStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_radio_button, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_radio_button, modifier.fillMaxSize())

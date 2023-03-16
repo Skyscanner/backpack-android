@@ -24,22 +24,22 @@ import android.content.ContextWrapper
 import android.view.accessibility.AccessibilityManager
 
 internal fun Context.isInEditMode(): Boolean =
-  unwrapped()::class.qualifiedName == "com.android.layoutlib.bridge.android.BridgeContext"
+    unwrapped()::class.qualifiedName == "com.android.layoutlib.bridge.android.BridgeContext"
 
 private fun Context.unwrapped(): Context {
-  var context = this
-  while (context is ContextWrapper) {
-    context = context.baseContext
-  }
-  return context
+    var context = this
+    while (context is ContextWrapper) {
+        context = context.baseContext
+    }
+    return context
 }
 
 internal fun Context.isScreenReaderOn(): Boolean {
-  val am = getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
-  if (am != null && am.isEnabled) {
-    val serviceInfoList =
-      am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_SPOKEN)
-    return serviceInfoList.isNotEmpty()
-  }
-  return false
+    val am = getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
+    if (am != null && am.isEnabled) {
+        val serviceInfoList =
+            am.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_SPOKEN)
+        return serviceInfoList.isNotEmpty()
+    }
+    return false
 }

@@ -34,61 +34,61 @@ import org.junit.Before
 
 open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : ScreenshotTest {
 
-  private val variant = BpkTestVariant.current
-  var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
+    private val variant = BpkTestVariant.current
+    var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
 
-  @Before
-  fun initLooper() {
-    if (Looper.myLooper() == null) {
-      Looper.prepare()
+    @Before
+    fun initLooper() {
+        if (Looper.myLooper() == null) {
+            Looper.prepare()
+        }
     }
-  }
 
-  protected fun snap(
-    view: View,
-    @ColorRes background: Int = R.color.bpkCanvas,
-    @Dimension(unit = DP) width: Int? = null,
-    @Dimension(unit = DP) height: Int? = null,
-    @Dimension(unit = DP) padding: Int = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd),
-  ) {
-    runOnUi {
-      view.layoutDirection = testContext.resources.configuration.layoutDirection
+    protected fun snap(
+        view: View,
+        @ColorRes background: Int = R.color.bpkCanvas,
+        @Dimension(unit = DP) width: Int? = null,
+        @Dimension(unit = DP) height: Int? = null,
+        @Dimension(unit = DP) padding: Int = testContext.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd),
+    ) {
+        runOnUi {
+            view.layoutDirection = testContext.resources.configuration.layoutDirection
+        }
+        val wrappedView = wrapMeasuredViewWithBackground(
+            view = view,
+            background = background,
+            padding = padding,
+        )
+        wrappedView.measure(measureSpec(width), measureSpec(height))
+        compareScreenshot(
+            view = wrappedView,
+            widthInPx = width?.let { dpToPx(it) } ?: wrappedView.measuredWidth,
+            heightInPx = height?.let { dpToPx(it) } ?: wrappedView.measuredHeight,
+            name = screenshotName(tags),
+        )
     }
-    val wrappedView = wrapMeasuredViewWithBackground(
-      view = view,
-      background = background,
-      padding = padding,
-    )
-    wrappedView.measure(measureSpec(width), measureSpec(height))
-    compareScreenshot(
-      view = wrappedView,
-      widthInPx = width?.let { dpToPx(it) } ?: wrappedView.measuredWidth,
-      heightInPx = height?.let { dpToPx(it) } ?: wrappedView.measuredHeight,
-      name = screenshotName(tags),
-    )
-  }
 
-  private fun measureSpec(size: Int?): Int {
-    val dimenSize = size?.let { dpToPx(it) } ?: 0
-    return makeMeasureSpec(dimenSize, if (size == null) View.MeasureSpec.UNSPECIFIED else View.MeasureSpec.EXACTLY)
-  }
-
-  private fun wrapMeasuredViewWithBackground(view: View, background: Int, padding: Int): View {
-    val result = FrameLayout(view.context)
-    if (view.parent != null) {
-      runOnUi {
-        (view.parent as ViewGroup).removeView(view)
-        view.visibility = View.VISIBLE
-      }
+    private fun measureSpec(size: Int?): Int {
+        val dimenSize = size?.let { dpToPx(it) } ?: 0
+        return makeMeasureSpec(dimenSize, if (size == null) View.MeasureSpec.UNSPECIFIED else View.MeasureSpec.EXACTLY)
     }
-    result.addView(view)
-    result.setBackgroundResource(background)
-    result.setPadding(padding)
 
-    return result
-  }
+    private fun wrapMeasuredViewWithBackground(view: View, background: Int, padding: Int): View {
+        val result = FrameLayout(view.context)
+        if (view.parent != null) {
+            runOnUi {
+                (view.parent as ViewGroup).removeView(view)
+                view.visibility = View.VISIBLE
+            }
+        }
+        result.addView(view)
+        result.setBackgroundResource(background)
+        result.setPadding(padding)
 
-  private fun dpToPx(@Dimension dp: Int): Int {
-    return (dp * testContext.resources.displayMetrics.density).toInt()
-  }
+        return result
+    }
+
+    private fun dpToPx(@Dimension dp: Int): Int {
+        return (dp * testContext.resources.displayMetrics.density).toInt()
+    }
 }

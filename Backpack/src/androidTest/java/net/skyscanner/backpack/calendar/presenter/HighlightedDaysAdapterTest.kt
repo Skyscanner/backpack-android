@@ -44,99 +44,99 @@ import java.util.Locale
 @RunWith(AndroidJUnit4::class)
 class HighlightedDaysAdapterTest {
 
-  private val context = TestContext
+    private val context = TestContext
 
-  private lateinit var subject: HighlightedDaysAdapter
-  private lateinit var holidays: Map<String, Set<HighlightedDay>>
+    private lateinit var subject: HighlightedDaysAdapter
+    private lateinit var holidays: Map<String, Set<HighlightedDay>>
 
-  @Before
-  fun setup() {
-    AndroidThreeTen.init(context)
+    @Before
+    fun setup() {
+        AndroidThreeTen.init(context)
 
-    holidays = mapOf(
-      "2020-1" to setOf(
-        HighlightedDay(
-          LocalDate.of(2020, 1, 1), "New Year's Day",
-        ),
-      ),
-      "2020-12" to setOf(
-        HighlightedDay(
-          LocalDate.of(2020, 12, 25), "Christmas Day",
-        ),
-        HighlightedDay(
-          LocalDate.of(2020, 12, 31), "New Year's Eve",
-        ),
-      ),
-    )
+        holidays = mapOf(
+            "2020-1" to setOf(
+                HighlightedDay(
+                    LocalDate.of(2020, 1, 1), "New Year's Day",
+                ),
+            ),
+            "2020-12" to setOf(
+                HighlightedDay(
+                    LocalDate.of(2020, 12, 25), "Christmas Day",
+                ),
+                HighlightedDay(
+                    LocalDate.of(2020, 12, 31), "New Year's Eve",
+                ),
+            ),
+        )
 
-    subject = HighlightedDaysAdapter(
-      context,
-      Locale.UK,
-      holidays.values.flatten().toSet(),
-    )
-  }
+        subject = HighlightedDaysAdapter(
+            context,
+            Locale.UK,
+            holidays.values.flatten().toSet(),
+        )
+    }
 
-  @Test
-  fun test_hasFooterForMonth() {
-    assertTrue(subject.hasFooterForMonth(1, 2020))
-    assertTrue(subject.hasFooterForMonth(12, 2020))
+    @Test
+    fun test_hasFooterForMonth() {
+        assertTrue(subject.hasFooterForMonth(1, 2020))
+        assertTrue(subject.hasFooterForMonth(12, 2020))
 
-    assertFalse(subject.hasFooterForMonth(2, 2020))
-    assertFalse(subject.hasFooterForMonth(11, 2020))
-  }
+        assertFalse(subject.hasFooterForMonth(2, 2020))
+        assertFalse(subject.hasFooterForMonth(11, 2020))
+    }
 
-  @Test
-  fun test_onCreateView() {
-    assertThat(
-      subject.onCreateView(1, 2020),
-      `is`(instanceOf(HighlightedDaysMonthFooter::class.java)),
-    )
+    @Test
+    fun test_onCreateView() {
+        assertThat(
+            subject.onCreateView(1, 2020),
+            `is`(instanceOf(HighlightedDaysMonthFooter::class.java)),
+        )
 
-    assertThat(
-      subject.onCreateView(12, 2020),
-      `is`(instanceOf(HighlightedDaysMonthFooter::class.java)),
-    )
-  }
+        assertThat(
+            subject.onCreateView(12, 2020),
+            `is`(instanceOf(HighlightedDaysMonthFooter::class.java)),
+        )
+    }
 
-  @Test
-  fun test_onBindView() {
-    val view = HighlightedDaysMonthFooter(context) { it.toString() }
+    @Test
+    fun test_onBindView() {
+        val view = HighlightedDaysMonthFooter(context) { it.toString() }
 
-    subject.onBindView(view, 1, 2020)
-    assertNotNull(view.holidays)
-    assertArrayEquals(
-      holidays["2020-1"]?.toTypedArray(),
-      view.holidays?.toTypedArray(),
-    )
+        subject.onBindView(view, 1, 2020)
+        assertNotNull(view.holidays)
+        assertArrayEquals(
+            holidays["2020-1"]?.toTypedArray(),
+            view.holidays?.toTypedArray(),
+        )
 
-    subject.onBindView(view, 12, 2020)
-    assertNotNull(view.holidays)
-    assertArrayEquals(
-      holidays["2020-12"]?.toTypedArray(),
-      view.holidays?.toTypedArray(),
-    )
-  }
+        subject.onBindView(view, 12, 2020)
+        assertNotNull(view.holidays)
+        assertArrayEquals(
+            holidays["2020-12"]?.toTypedArray(),
+            view.holidays?.toTypedArray(),
+        )
+    }
 
-  @Test
-  fun test_date_formatter() {
-    val view = subject.onCreateView(1, 2020) as HighlightedDaysMonthFooter
-    subject.onBindView(view, 1, 2020)
+    @Test
+    fun test_date_formatter() {
+        val view = subject.onCreateView(1, 2020) as HighlightedDaysMonthFooter
+        subject.onBindView(view, 1, 2020)
 
-    val dateView = view.getChildAt(0).findViewById<BpkText>(R.id.date)
-    assertEquals("01 Jan", dateView.text)
-  }
+        val dateView = view.getChildAt(0).findViewById<BpkText>(R.id.date)
+        assertEquals("01 Jan", dateView.text)
+    }
 
-  @Test
-  fun test_date_formatter_custom_locale() {
-    val subject = HighlightedDaysAdapter(
-      context,
-      Locale.forLanguageTag("pt-BR"),
-      holidays.values.flatten().toSet(),
-    )
-    val view = subject.onCreateView(12, 2020) as HighlightedDaysMonthFooter
-    subject.onBindView(view, 12, 2020)
+    @Test
+    fun test_date_formatter_custom_locale() {
+        val subject = HighlightedDaysAdapter(
+            context,
+            Locale.forLanguageTag("pt-BR"),
+            holidays.values.flatten().toSet(),
+        )
+        val view = subject.onCreateView(12, 2020) as HighlightedDaysMonthFooter
+        subject.onBindView(view, 12, 2020)
 
-    val dateView = view.getChildAt(0).findViewById<BpkText>(R.id.date)
-    assertEquals("25 dez", dateView.text)
-  }
+        val dateView = view.getChildAt(0).findViewById<BpkText>(R.id.date)
+        assertEquals("25 dez", dateView.text)
+    }
 }

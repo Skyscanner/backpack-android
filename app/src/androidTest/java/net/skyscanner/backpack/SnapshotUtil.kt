@@ -22,10 +22,10 @@ import com.facebook.testing.screenshot.internal.TestNameDetector
 
 object SnapshotUtil {
 
-  fun screenshotName(tags: List<Any>): String? =
-    if (tags.isEmpty()) {
-      null
-    } else {
-      tags.joinToString(separator = "_", prefix = TestNameDetector.getTestName() + ".") { it.toString() }
-    }
+    fun screenshotName(tags: List<Any>): String? =
+        if (tags.isEmpty()) {
+            null
+        } else {
+            tags.joinToString(separator = "_", prefix = TestNameDetector.getTestName() + ".") { it.toString() }
+        }
 }

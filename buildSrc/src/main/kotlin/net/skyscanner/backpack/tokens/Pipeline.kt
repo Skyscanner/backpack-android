@@ -21,28 +21,28 @@ import java.io.File
 
 interface Pipeline<T> {
 
-  fun execute(): T
+    fun execute(): T
 }
 
 fun <T> Pipeline<File>.readAs(format: BpkFormat<T>): Pipeline<T> =
-  pipeTo(format)
+    pipeTo(format)
 
 fun <T> Pipeline<T>.saveTo(output: BpkOutput<T>): Pipeline<Boolean> =
-  pipeTo(output)
+    pipeTo(output)
 
 fun <Input, Output> Pipeline<Input>.parseAs(parser: BpkParser<Input, Output>): Pipeline<Output> =
-  pipeTo(parser)
+    pipeTo(parser)
 
 fun <In, Out> Pipeline<In>.transformTo(transformer: BpkTransformer<In, Out>): Pipeline<Out> =
-  pipeTo(transformer)
+    pipeTo(transformer)
 
 internal fun <T> pipelineOf(block: () -> T): Pipeline<T> =
-  object : Pipeline<T> {
-    override fun execute(): T =
-      block()
-  }
+    object : Pipeline<T> {
+        override fun execute(): T =
+            block()
+    }
 
 internal fun <T, R> Pipeline<T>.pipeTo(transformer: (T) -> R): Pipeline<R> =
-  pipelineOf {
-    transformer(this@pipeTo.execute())
-  }
+    pipelineOf {
+        transformer(this@pipeTo.execute())
+    }

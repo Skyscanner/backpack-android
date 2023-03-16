@@ -33,102 +33,102 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BpkPriceAlignStart(
-  price: String,
-  modifier: Modifier = Modifier,
-  leadingText: String? = null,
-  previousPrice: String? = null,
-  trailingText: String? = null,
-  size: BpkPriceSize = BpkPriceSize.Small,
+    price: String,
+    modifier: Modifier = Modifier,
+    leadingText: String? = null,
+    previousPrice: String? = null,
+    trailingText: String? = null,
+    size: BpkPriceSize = BpkPriceSize.Small,
 ) {
-  Column(modifier = modifier) {
-    Row {
-      previousPrice?.let {
-        BpkText(
-          text = it,
-          color = BpkTheme.colors.textSecondary,
-          style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
-          textDecoration = TextDecoration.LineThrough,
-        )
-      }
-      leadingText?.let {
-        val builder = StringBuilder()
-        previousPrice?.let { builder.append(" • ") }
-        builder.append(it)
-        BpkText(
-          text = builder.toString(),
-          color = BpkTheme.colors.textSecondary,
-          style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
-        )
-      }
-    }
-    Row(verticalAlignment = Alignment.Bottom) {
-      BpkText(
-        modifier = Modifier.alignByBaseline(),
-        text = price,
-        color = BpkTheme.colors.textPrimary,
-        style = if (size == BpkPriceSize.Large) BpkTheme.typography.heading2 else BpkTheme.typography.heading4,
-      )
-      trailingText?.let {
-        Box(
-          modifier = Modifier
-            .padding(start = BpkSpacing.Sm)
-            .alignByBaseline(),
-        ) {
-          BpkText(
-            text = it,
-            color = BpkTheme.colors.textSecondary,
-            style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
-          )
+    Column(modifier = modifier) {
+        Row {
+            previousPrice?.let {
+                BpkText(
+                    text = it,
+                    color = BpkTheme.colors.textSecondary,
+                    style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
+                    textDecoration = TextDecoration.LineThrough,
+                )
+            }
+            leadingText?.let {
+                val builder = StringBuilder()
+                previousPrice?.let { builder.append(" • ") }
+                builder.append(it)
+                BpkText(
+                    text = builder.toString(),
+                    color = BpkTheme.colors.textSecondary,
+                    style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
+                )
+            }
         }
-      }
+        Row(verticalAlignment = Alignment.Bottom) {
+            BpkText(
+                modifier = Modifier.alignByBaseline(),
+                text = price,
+                color = BpkTheme.colors.textPrimary,
+                style = if (size == BpkPriceSize.Large) BpkTheme.typography.heading2 else BpkTheme.typography.heading4,
+            )
+            trailingText?.let {
+                Box(
+                    modifier = Modifier
+                        .padding(start = BpkSpacing.Sm)
+                        .alignByBaseline(),
+                ) {
+                    BpkText(
+                        text = it,
+                        color = BpkTheme.colors.textSecondary,
+                        style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
+                    )
+                }
+            }
+        }
     }
-  }
 }
 
 @Composable
 internal fun BpkPriceAlignEnd(
-  price: String,
-  modifier: Modifier = Modifier,
-  leadingText: String? = null,
-  previousPrice: String? = null,
-  trailingText: String? = null,
-  size: BpkPriceSize = BpkPriceSize.Small,
+    price: String,
+    modifier: Modifier = Modifier,
+    leadingText: String? = null,
+    previousPrice: String? = null,
+    trailingText: String? = null,
+    size: BpkPriceSize = BpkPriceSize.Small,
 ) {
-  Column(
-    modifier = modifier,
-    horizontalAlignment = Alignment.End,
-  ) {
-    Row {
-      leadingText?.let {
-        val builder = StringBuilder()
-        builder.append(it)
-        previousPrice?.let { builder.append(" • ") }
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.End,
+    ) {
+        Row {
+            leadingText?.let {
+                val builder = StringBuilder()
+                builder.append(it)
+                previousPrice?.let { builder.append(" • ") }
+                BpkText(
+                    text = builder.toString(),
+                    color = BpkTheme.colors.textSecondary,
+                    style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
+                )
+            }
+            previousPrice?.let {
+                BpkText(
+                    text = it,
+                    color = BpkTheme.colors.textSecondary,
+                    style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
+                    textDecoration = TextDecoration.LineThrough,
+                )
+            }
+        }
         BpkText(
-          text = builder.toString(),
-          color = BpkTheme.colors.textSecondary,
-          style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
+            text = price,
+            color = BpkTheme.colors.textPrimary,
+            style = if (size == BpkPriceSize.Large) BpkTheme.typography.heading2 else BpkTheme.typography.heading4,
         )
-      }
-      previousPrice?.let {
-        BpkText(
-          text = it,
-          color = BpkTheme.colors.textSecondary,
-          style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
-          textDecoration = TextDecoration.LineThrough,
-        )
-      }
+        trailingText?.let {
+            BpkText(
+                text = it,
+                color = BpkTheme.colors.textSecondary,
+                style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
+            )
+        }
     }
-    BpkText(
-      text = price,
-      color = BpkTheme.colors.textPrimary,
-      style = if (size == BpkPriceSize.Large) BpkTheme.typography.heading2 else BpkTheme.typography.heading4,
-    )
-    trailingText?.let {
-      BpkText(
-        text = it,
-        color = BpkTheme.colors.textSecondary,
-        style = if (size == BpkPriceSize.Large) BpkTheme.typography.footnote else BpkTheme.typography.caption,
-      )
-    }
-  }
 }

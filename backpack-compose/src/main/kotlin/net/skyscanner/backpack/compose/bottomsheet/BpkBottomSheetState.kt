@@ -30,66 +30,66 @@ import net.skyscanner.backpack.compose.BpkSwipeableState
 
 @Composable
 fun rememberBpkBottomSheetState(
-  initialValue: BpkBottomSheetValue,
-  animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
-  confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
+    initialValue: BpkBottomSheetValue,
+    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
+    confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
 ): BpkBottomSheetState =
-  rememberSaveable(
-    animationSpec,
-    saver = BpkBottomSheetState.Saver(
-      animationSpec = animationSpec,
-      confirmStateChange = confirmStateChange,
-    ),
-  ) {
-    BpkBottomSheetState(
-      initialValue = initialValue,
-      animationSpec = animationSpec,
-      confirmStateChange = confirmStateChange,
-    )
-  }
+    rememberSaveable(
+        animationSpec,
+        saver = BpkBottomSheetState.Saver(
+            animationSpec = animationSpec,
+            confirmStateChange = confirmStateChange,
+        ),
+    ) {
+        BpkBottomSheetState(
+            initialValue = initialValue,
+            animationSpec = animationSpec,
+            confirmStateChange = confirmStateChange,
+        )
+    }
 
 enum class BpkBottomSheetValue {
-  Collapsed,
-  Expanded,
+    Collapsed,
+    Expanded,
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Stable
 class BpkBottomSheetState private constructor(
-  internal val wrapped: SwipeableState<BpkBottomSheetValue>,
-  internal val confirmStateChange: (BpkBottomSheetValue) -> Boolean,
+    internal val wrapped: SwipeableState<BpkBottomSheetValue>,
+    internal val confirmStateChange: (BpkBottomSheetValue) -> Boolean,
 ) : BpkSwipeableState<BpkBottomSheetValue> by BpkSwipeableState(wrapped) {
 
-  constructor(
-    initialValue: BpkBottomSheetValue,
-    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
-    confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
-  ) : this(SwipeableState(initialValue, animationSpec, confirmStateChange), confirmStateChange)
+    constructor(
+        initialValue: BpkBottomSheetValue,
+        animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
+        confirmStateChange: (BpkBottomSheetValue) -> Boolean = { true },
+    ) : this(SwipeableState(initialValue, animationSpec, confirmStateChange), confirmStateChange)
 
-  val isExpanded: Boolean
-    get() = currentValue == BpkBottomSheetValue.Expanded
+    val isExpanded: Boolean
+        get() = currentValue == BpkBottomSheetValue.Expanded
 
-  val isCollapsed: Boolean
-    get() = currentValue == BpkBottomSheetValue.Collapsed
+    val isCollapsed: Boolean
+        get() = currentValue == BpkBottomSheetValue.Collapsed
 
-  suspend fun expand() = animateTo(BpkBottomSheetValue.Expanded)
+    suspend fun expand() = animateTo(BpkBottomSheetValue.Expanded)
 
-  suspend fun collapse() = animateTo(BpkBottomSheetValue.Collapsed)
+    suspend fun collapse() = animateTo(BpkBottomSheetValue.Collapsed)
 
-  companion object {
+    companion object {
 
-    fun Saver(
-      animationSpec: AnimationSpec<Float>,
-      confirmStateChange: (BpkBottomSheetValue) -> Boolean,
-    ): Saver<BpkBottomSheetState, *> = Saver(
-      save = { it.currentValue },
-      restore = {
-        BpkBottomSheetState(
-          initialValue = it,
-          animationSpec = animationSpec,
-          confirmStateChange = confirmStateChange,
+        fun Saver(
+            animationSpec: AnimationSpec<Float>,
+            confirmStateChange: (BpkBottomSheetValue) -> Boolean,
+        ): Saver<BpkBottomSheetState, *> = Saver(
+            save = { it.currentValue },
+            restore = {
+                BpkBottomSheetState(
+                    initialValue = it,
+                    animationSpec = animationSpec,
+                    confirmStateChange = confirmStateChange,
+                )
+            },
         )
-      },
-    )
-  }
+    }
 }

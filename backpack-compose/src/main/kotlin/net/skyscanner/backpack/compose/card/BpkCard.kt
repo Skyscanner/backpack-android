@@ -34,63 +34,63 @@ import net.skyscanner.backpack.compose.card.internal.cardShape
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 enum class BpkCardCorner {
-  Small,
-  Large,
+    Small,
+    Large,
 }
 
 enum class BpkCardPadding {
-  None,
-  Small,
+    None,
+    Small,
 }
 
 enum class BpkCardElevation {
-  None,
-  Default,
-  Focus,
+    None,
+    Default,
+    Focus,
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BpkCard(
-  onClick: () -> Unit,
-  modifier: Modifier = Modifier,
-  corner: BpkCardCorner = BpkCardCorner.Small,
-  padding: BpkCardPadding = BpkCardPadding.Small,
-  elevation: BpkCardElevation = BpkCardElevation.Default,
-  contentAlignment: Alignment = Alignment.TopStart,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  enabled: Boolean = true,
-  onClickLabel: String? = null,
-  role: Role? = null,
-  content: @Composable BoxScope.() -> Unit,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    corner: BpkCardCorner = BpkCardCorner.Small,
+    padding: BpkCardPadding = BpkCardPadding.Small,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
+    contentAlignment: Alignment = Alignment.TopStart,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    enabled: Boolean = true,
+    onClickLabel: String? = null,
+    role: Role? = null,
+    content: @Composable BoxScope.() -> Unit,
 ) {
-  Card(onClick = onClick,
-    modifier = modifier,
-    enabled = enabled,
-    shape = cardShape(corner),
-    backgroundColor = cardBackgroundColor(elevation),
-    contentColor = BpkTheme.colors.textPrimary,
-    elevation = cardElevation(elevation),
-    interactionSource = interactionSource,
-    content = { CardContent(padding, contentAlignment, content) },
-  )
+    Card(onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        shape = cardShape(corner),
+        backgroundColor = cardBackgroundColor(elevation),
+        contentColor = BpkTheme.colors.textPrimary,
+        elevation = cardElevation(elevation),
+        interactionSource = interactionSource,
+        content = { CardContent(padding, contentAlignment, content) },
+    )
 }
 
 @Composable
 fun BpkCard(
-  modifier: Modifier = Modifier,
-  corner: BpkCardCorner = BpkCardCorner.Small,
-  padding: BpkCardPadding = BpkCardPadding.Small,
-  contentAlignment: Alignment = Alignment.TopStart,
-  elevation: BpkCardElevation = BpkCardElevation.Default,
-  content: @Composable BoxScope.() -> Unit,
+    modifier: Modifier = Modifier,
+    corner: BpkCardCorner = BpkCardCorner.Small,
+    padding: BpkCardPadding = BpkCardPadding.Small,
+    contentAlignment: Alignment = Alignment.TopStart,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
+    content: @Composable BoxScope.() -> Unit,
 ) {
-  Card(
-    modifier = modifier,
-    shape = cardShape(corner),
-    backgroundColor = cardBackgroundColor(elevation),
-    contentColor = BpkTheme.colors.textPrimary,
-    elevation = cardElevation(elevation),
-    content = { CardContent(padding, contentAlignment, content) },
-  )
+    Card(
+        modifier = modifier,
+        shape = cardShape(corner),
+        backgroundColor = cardBackgroundColor(elevation),
+        contentColor = BpkTheme.colors.textPrimary,
+        elevation = cardElevation(elevation),
+        content = { CardContent(padding, contentAlignment, content) },
+    )
 }

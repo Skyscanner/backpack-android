@@ -23,26 +23,26 @@ import net.skyscanner.backpack.calendar2.data.CalendarCell
 import net.skyscanner.backpack.calendar2.data.CalendarCells
 
 internal class CalendarDiffCalculator(
-  private val oldState: CalendarCells,
-  private val newState: CalendarCells,
+    private val oldState: CalendarCells,
+    private val newState: CalendarCells,
 ) : DiffUtil.Callback() {
 
-  override fun getOldListSize(): Int =
-    oldState.size
+    override fun getOldListSize(): Int =
+        oldState.size
 
-  override fun getNewListSize(): Int =
-    newState.size
+    override fun getNewListSize(): Int =
+        newState.size
 
-  override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-    val old = oldState[oldItemPosition]
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val old = oldState[oldItemPosition]
 
-    return when (val new = newState[newItemPosition]) {
-      is CalendarCell.Day -> new.date == (old as? CalendarCell.Day)?.date
-      is CalendarCell.Header -> new.yearMonth == (old as? CalendarCell.Header)?.yearMonth
-      is CalendarCell.Space -> new.yearMonth == (old as? CalendarCell.Space)?.yearMonth && new.position == old.position
+        return when (val new = newState[newItemPosition]) {
+            is CalendarCell.Day -> new.date == (old as? CalendarCell.Day)?.date
+            is CalendarCell.Header -> new.yearMonth == (old as? CalendarCell.Header)?.yearMonth
+            is CalendarCell.Space -> new.yearMonth == (old as? CalendarCell.Space)?.yearMonth && new.position == old.position
+        }
     }
-  }
 
-  override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-    newState[newItemPosition] == oldState[oldItemPosition]
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+        newState[newItemPosition] == oldState[oldItemPosition]
 }

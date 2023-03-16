@@ -31,47 +31,47 @@ import net.skyscanner.backpack.demo.R
 @RunWith(AndroidJUnit4::class)
 class BpkCarouselTest : BpkSnapshotTest() {
 
-  @Test
-  fun singleImageDefault() = snap {
-    BpkCarousel(
-      state = rememberBpkCarouselState(totalImages = 1),
-    ) {
-      Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+    @Test
+    fun singleImageDefault() = snap {
+        BpkCarousel(
+            state = rememberBpkCarouselState(totalImages = 1),
+        ) {
+            Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+        }
     }
-  }
 
-  @Test
-  fun multipleImageDefault() = snap {
-    BpkCarousel(
-      state = BpkCarouselState(totalImages = 3),
-    ) {
-      Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+    @Test
+    fun multipleImageDefault() = snap {
+        BpkCarousel(
+            state = BpkCarouselState(totalImages = 3),
+        ) {
+            Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+        }
     }
-  }
 
-  @Test
-  fun setCurrentImage() = snap {
-    BpkCarousel(
-      state = rememberBpkCarouselState(totalImages = 3, initialImage = 1),
-    ) {
-      Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+    @Test
+    fun setCurrentImage() = snap {
+        BpkCarousel(
+            state = rememberBpkCarouselState(totalImages = 3, initialImage = 1),
+        ) {
+            Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun multipleImageDarkMode() = snap {
-    BpkCarousel(
-      state = rememberBpkCarouselState(totalImages = 2),
-    ) {
-      Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun multipleImageDarkMode() = snap {
+        BpkCarousel(
+            state = rememberBpkCarouselState(totalImages = 2),
+        ) {
+            Image(painter = painterResource(id = imageResAtIndex(it)), contentDescription = "")
+        }
     }
-  }
 
-  private fun imageResAtIndex(index: Int) = when (index) {
-    0 -> R.drawable.canadian_rockies_canada
-    1 -> R.drawable.beach
-    2 -> R.drawable.city
-    else -> R.drawable.canadian_rockies_canada
-  }
+    private fun imageResAtIndex(index: Int) = when (index) {
+        0 -> R.drawable.canadian_rockies_canada
+        1 -> R.drawable.beach
+        2 -> R.drawable.city
+        else -> R.drawable.canadian_rockies_canada
+    }
 }

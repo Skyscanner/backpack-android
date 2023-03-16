@@ -42,36 +42,36 @@ import net.skyscanner.backpack.demo.meta.StoriesRepository
 @Composable
 @Destination("story")
 fun StoryScreen(
-  component: String,
-  story: String,
-  isCompose: Boolean,
-  modifier: Modifier = Modifier,
-  navigator: DestinationsNavigator = EmptyDestinationsNavigator,
-  repository: StoriesRepository = StoriesRepository.getInstance(),
+    component: String,
+    story: String,
+    isCompose: Boolean,
+    modifier: Modifier = Modifier,
+    navigator: DestinationsNavigator = EmptyDestinationsNavigator,
+    repository: StoriesRepository = StoriesRepository.getInstance(),
 ) {
-  Column(modifier = modifier
-    .background(BpkTheme.colors.canvas)
-    .fillMaxSize(),
-  ) {
-    val context = LocalContext.current
-    BpkTopNavBar(
-      navIcon = NavIcon.Back(
-        contentDescription = stringResource(R.string.navigation_back),
-        onClick = navigator::popBackStack,
-      ),
-      title = "$component - $story",
-      actions = listOf(
-        IconAction(
-          icon = BpkIcon.Settings,
-          contentDescription = stringResource(R.string.settings_title),
-          onClick = {
-            val intent = Intent(context, SettingsActivity::class.java)
-            context.startActivity(intent)
-          },
-        ),
-      ),
-    )
+    Column(modifier = modifier
+        .background(BpkTheme.colors.canvas)
+        .fillMaxSize(),
+    ) {
+        val context = LocalContext.current
+        BpkTopNavBar(
+            navIcon = NavIcon.Back(
+                contentDescription = stringResource(R.string.navigation_back),
+                onClick = navigator::popBackStack,
+            ),
+            title = "$component - $story",
+            actions = listOf(
+                IconAction(
+                    icon = BpkIcon.Settings,
+                    contentDescription = stringResource(R.string.settings_title),
+                    onClick = {
+                        val intent = Intent(context, SettingsActivity::class.java)
+                        context.startActivity(intent)
+                    },
+                ),
+            ),
+        )
 
-    repository.storyOf(component, story, isCompose).content()
-  }
+        repository.storyOf(component, story, isCompose).content()
+    }
 }

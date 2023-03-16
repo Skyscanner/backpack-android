@@ -30,18 +30,18 @@ import org.threeten.bp.temporal.TemporalUnit
  */
 @Stable
 fun ClosedRange<LocalDate>.toIterable(
-  amount: Long = 1L,
-  unit: TemporalUnit = ChronoUnit.DAYS,
+    amount: Long = 1L,
+    unit: TemporalUnit = ChronoUnit.DAYS,
 ): Iterable<LocalDate> =
-  object : Iterable<LocalDate> {
-    override fun iterator(): Iterator<LocalDate> = object : Iterator<LocalDate> {
+    object : Iterable<LocalDate> {
+        override fun iterator(): Iterator<LocalDate> = object : Iterator<LocalDate> {
 
-      var current = start
+            var current = start
 
-      override fun hasNext(): Boolean =
-        current <= endInclusive
+            override fun hasNext(): Boolean =
+                current <= endInclusive
 
-      override fun next(): LocalDate =
-        current.also { current = current.plus(amount, unit) }
+            override fun next(): LocalDate =
+                current.also { current = current.plus(amount, unit) }
+        }
     }
-  }

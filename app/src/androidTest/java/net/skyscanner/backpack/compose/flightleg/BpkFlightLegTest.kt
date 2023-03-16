@@ -25,13 +25,13 @@ import org.junit.Test
 
 class BpkFlightLegTest : BpkSnapshotTest() {
 
-  @Test
-  fun simpleLegTest() = snap {
-    BasicFlightLegSample()
-  }
+    @Test
+    fun simpleLegTest() = snap {
+        BasicFlightLegSample()
+    }
 
-  @Test
-  fun completeLegTest() = snap {
-    CompleteFlightLegSample()
-  }
+    @Test
+    fun completeLegTest() = snap {
+        CompleteFlightLegSample()
+    }
 }

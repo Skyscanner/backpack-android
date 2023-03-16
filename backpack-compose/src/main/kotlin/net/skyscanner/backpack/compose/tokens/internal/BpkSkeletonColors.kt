@@ -26,11 +26,11 @@ import androidx.compose.ui.graphics.Color
 import net.skyscanner.backpack.compose.utils.dynamicColorOf
 
 internal object BpkSkeletonColors {
-  internal val shimmerCenter: Color
-    @Composable
-    get() = dynamicColorOf(Color(0x99FFFFFF), Color(0x33000000))
+    internal val shimmerCenter: Color
+        @Composable
+        get() = dynamicColorOf(Color(0x99FFFFFF), Color(0x33000000))
 
-  internal val shimmerStartEnd: Color
-    @Composable
-    get() = dynamicColorOf(Color(0x00FFFFFF), Color(0x00000000))
+    internal val shimmerStartEnd: Color
+        @Composable
+        get() = dynamicColorOf(Color(0x00FFFFFF), Color(0x00000000))
 }
