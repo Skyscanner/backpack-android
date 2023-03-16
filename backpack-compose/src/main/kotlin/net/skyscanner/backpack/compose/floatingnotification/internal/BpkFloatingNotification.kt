@@ -30,8 +30,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.Snackbar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,36 +59,37 @@ internal fun BpkFloatingNotificationImpl(
         backgroundColor = BpkTheme.colors.corePrimary,
         contentColor = BpkTheme.colors.textOnDark,
     ) {
+        CompositionLocalProvider(LocalContentAlpha provides 1f) {
+            Row(
+                modifier = Modifier.fillMaxHeight(),
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
 
-        Row(
-            modifier = Modifier.fillMaxHeight(),
-            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
+                data.icon?.let { icon ->
+                    BpkIcon(
+                        icon = icon,
+                        contentDescription = null,
+                        size = BpkIconSize.Small,
+                    )
+                }
 
-            data.icon?.let { icon ->
-                BpkIcon(
-                    icon = icon,
-                    contentDescription = null,
-                    size = BpkIconSize.Small,
+                BpkText(
+                    modifier = Modifier.weight(1f),
+                    text = data.text,
+                    maxLines = 2,
+                    style = BpkTheme.typography.footnote,
+                    overflow = TextOverflow.Ellipsis,
                 )
-            }
 
-            BpkText(
-                modifier = Modifier.weight(1f),
-                text = data.text,
-                maxLines = 2,
-                style = BpkTheme.typography.footnote,
-                overflow = TextOverflow.Ellipsis,
-            )
-
-            data.cta?.let { cta ->
-                BpkButton(
-                    text = cta,
-                    type = BpkButtonType.LinkOnDark,
-                    onClick = { data.performAction() },
-                    size = BpkButtonSize.Default,
-                )
+                data.cta?.let { cta ->
+                    BpkButton(
+                        text = cta,
+                        type = BpkButtonType.LinkOnDark,
+                        onClick = { data.performAction() },
+                        size = BpkButtonSize.Default,
+                    )
+                }
             }
         }
     }
