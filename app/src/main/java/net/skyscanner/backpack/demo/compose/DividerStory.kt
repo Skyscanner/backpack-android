@@ -35,19 +35,19 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @DividerComponent
 @ComposeStory
 fun DividerStory(modifier: Modifier = Modifier) {
-  Column(modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+    Column(modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
 
-    Column {
-      BpkText(
-        text = stringResource(R.string.divider_no_indent),
-        modifier = Modifier.padding(BpkSpacing.Base),
-      )
-      DividerSampleNoIndent()
+        Column {
+            BpkText(
+                text = stringResource(R.string.divider_no_indent),
+                modifier = Modifier.padding(BpkSpacing.Base),
+            )
+            DividerSampleNoIndent()
+        }
     }
-  }
 }
 
 @Composable
 internal fun DividerSampleNoIndent(modifier: Modifier = Modifier) {
-  BpkDivider(modifier = modifier)
+    BpkDivider(modifier = modifier)
 }

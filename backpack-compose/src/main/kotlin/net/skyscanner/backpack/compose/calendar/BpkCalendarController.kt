@@ -37,60 +37,60 @@ import java.io.Serializable
 
 @Stable
 class BpkCalendarController private constructor(
-  internal val lazyGridState: LazyGridState,
-  internal val stateMachine: CalendarStateMachine,
+    internal val lazyGridState: LazyGridState,
+    internal val stateMachine: CalendarStateMachine,
 ) : CalendarComponent by stateMachine {
 
-  constructor(
-    initialParams: CalendarParams,
-    coroutineScope: CoroutineScope,
-    lazyGridState: LazyGridState = LazyGridState(),
-  ) : this(lazyGridState, CalendarStateMachine(coroutineScope, initialParams))
+    constructor(
+        initialParams: CalendarParams,
+        coroutineScope: CoroutineScope,
+        lazyGridState: LazyGridState = LazyGridState(),
+    ) : this(lazyGridState, CalendarStateMachine(coroutineScope, initialParams))
 
-  /**
-   * Scrolls to a specific date in a calendar.
-   * Does nothing if the date is out of range.
-   */
-  suspend fun scrollToDate(date: LocalDate) {
-    val index = state.value.cells.indexOf(date)
-    if (index >= 0) {
-      lazyGridState.scrollToItem(index)
+    /**
+     * Scrolls to a specific date in a calendar.
+     * Does nothing if the date is out of range.
+     */
+    suspend fun scrollToDate(date: LocalDate) {
+        val index = state.value.cells.indexOf(date)
+        if (index >= 0) {
+            lazyGridState.scrollToItem(index)
+        }
     }
-  }
 
-  /**
-   * Scrolls with animation to a specific date in a calendar.
-   * Does nothing if the date is out of range.
-   */
-  suspend fun smoothScrollToDate(date: LocalDate) {
-    val index = state.value.cells.indexOf(date)
-    if (index >= 0) {
-      lazyGridState.animateScrollToItem(index)
+    /**
+     * Scrolls with animation to a specific date in a calendar.
+     * Does nothing if the date is out of range.
+     */
+    suspend fun smoothScrollToDate(date: LocalDate) {
+        val index = state.value.cells.indexOf(date)
+        if (index >= 0) {
+            lazyGridState.animateScrollToItem(index)
+        }
     }
-  }
 
-  internal val firstVisibleItemYear by derivedStateOf {
-    state.value.cells[lazyGridState.firstVisibleItemIndex].yearMonth.year
-  }
+    internal val firstVisibleItemYear by derivedStateOf {
+        state.value.cells[lazyGridState.firstVisibleItemIndex].yearMonth.year
+    }
 }
 
 @Composable
 fun rememberCalendarController(
-  initialParams: CalendarParams,
-  coroutineScope: CoroutineScope = rememberCoroutineScope(),
-  lazyGridState: LazyGridState = rememberLazyGridState(),
+    initialParams: CalendarParams,
+    coroutineScope: CoroutineScope = rememberCoroutineScope(),
+    lazyGridState: LazyGridState = rememberLazyGridState(),
 ): BpkCalendarController =
-  rememberSaveable(
-    coroutineScope, lazyGridState,
-    saver = Saver<BpkCalendarController, Serializable>(
-      save = { it.state.value.selection },
-      restore = {
-        BpkCalendarController(initialParams, coroutineScope, lazyGridState).apply {
-          setSelection(it as CalendarSelection)
-        }
-      },
-    ),
-    init = {
-      BpkCalendarController(initialParams, coroutineScope, lazyGridState)
-    },
-  )
+    rememberSaveable(
+        coroutineScope, lazyGridState,
+        saver = Saver<BpkCalendarController, Serializable>(
+            save = { it.state.value.selection },
+            restore = {
+                BpkCalendarController(initialParams, coroutineScope, lazyGridState).apply {
+                    setSelection(it as CalendarSelection)
+                }
+            },
+        ),
+        init = {
+            BpkCalendarController(initialParams, coroutineScope, lazyGridState)
+        },
+    )

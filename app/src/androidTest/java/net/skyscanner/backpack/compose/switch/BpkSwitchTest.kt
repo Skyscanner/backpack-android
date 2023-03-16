@@ -34,32 +34,32 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkSwitchTest : BpkSnapshotTest() {
 
-  @Test
-  fun defaultUnchecked() = snap(width = 200.dp) {
-    DefaultUncheckedSwitchExample()
-  }
+    @Test
+    fun defaultUnchecked() = snap(width = 200.dp) {
+        DefaultUncheckedSwitchExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun defaultChecked() = snap(width = 200.dp) {
-    DefaultCheckedSwitchExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun defaultChecked() = snap(width = 200.dp) {
+        DefaultCheckedSwitchExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabledUnchecked() = snap(width = 200.dp) {
-    DisabledUncheckedSwitchExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabledUnchecked() = snap(width = 200.dp) {
+        DisabledUncheckedSwitchExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabledChecked() = snap(width = 200.dp) {
-    DisabledCheckedSwitchExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabledChecked() = snap(width = 200.dp) {
+        DisabledCheckedSwitchExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun customContent() = snap(width = 200.dp) {
-    CustomContentSwitchExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun customContent() = snap(width = 200.dp) {
+        CustomContentSwitchExample()
+    }
 }

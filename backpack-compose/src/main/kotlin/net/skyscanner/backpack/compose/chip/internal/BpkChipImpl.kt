@@ -58,211 +58,211 @@ import net.skyscanner.backpack.compose.utils.animateAsColor
 import net.skyscanner.backpack.compose.utils.applyIf
 
 internal enum class BpkChipType {
-  Selectable,
-  Dropdown,
-  Dismiss,
+    Selectable,
+    Dropdown,
+    Dismiss,
 }
 
 @Composable
 internal fun BpkChipImpl(
-  text: String,
-  type: BpkChipType,
-  selected: Boolean,
-  onSelectedChange: ((Boolean) -> Unit)?,
-  enabled: Boolean,
-  style: BpkChipStyle,
-  icon: BpkIcon?,
-  modifier: Modifier = Modifier,
+    text: String,
+    type: BpkChipType,
+    selected: Boolean,
+    onSelectedChange: ((Boolean) -> Unit)?,
+    enabled: Boolean,
+    style: BpkChipStyle,
+    icon: BpkIcon?,
+    modifier: Modifier = Modifier,
 ) {
-  val interactionSource = remember { MutableInteractionSource() }
-  BpkChipImpl(
-    text = text,
-    selected = selected,
-    enabled = enabled,
-    style = style,
-    icon = icon,
-    type = type,
-    interactionSource = interactionSource,
-    modifier = modifier.applyIf(onSelectedChange != null) {
-      selectable(
+    val interactionSource = remember { MutableInteractionSource() }
+    BpkChipImpl(
+        text = text,
         selected = selected,
         enabled = enabled,
+        style = style,
+        icon = icon,
+        type = type,
         interactionSource = interactionSource,
-        indication = LocalIndication.current,
-      ) { onSelectedChange!!.invoke(!selected) }
-    },
-  )
+        modifier = modifier.applyIf(onSelectedChange != null) {
+            selectable(
+                selected = selected,
+                enabled = enabled,
+                interactionSource = interactionSource,
+                indication = LocalIndication.current,
+            ) { onSelectedChange!!.invoke(!selected) }
+        },
+    )
 }
 
 @Composable
 internal fun BpkChipImpl(
-  text: String,
-  selected: Boolean,
-  enabled: Boolean,
-  style: BpkChipStyle,
-  icon: BpkIcon?,
-  type: BpkChipType,
-  interactionSource: MutableInteractionSource,
-  modifier: Modifier = Modifier,
+    text: String,
+    selected: Boolean,
+    enabled: Boolean,
+    style: BpkChipStyle,
+    icon: BpkIcon?,
+    type: BpkChipType,
+    interactionSource: MutableInteractionSource,
+    modifier: Modifier = Modifier,
 ) {
-  val backgroundColor by animateColorAsState(
-    targetValue = when {
-      !enabled -> BpkChipColors.disabledBackground
-      selected -> style.selectedBackgroundColor
-      else -> interactionSource.animateAsColor(
-        default = style.backgroundColor,
-        pressed = style.pressedBackgroundColor,
-      )
-    },
-  )
-
-  val strokeColor by animateColorAsState(
-    targetValue = when {
-      !enabled || selected -> Color.Transparent
-      else -> interactionSource.animateAsColor(
-        default = style.strokeColor,
-        pressed = style.pressedStrokeColor,
-      )
-    },
-  )
-
-  val contentColor by animateColorAsState(
-    targetValue = when {
-      !enabled -> BpkTheme.colors.textDisabled
-      selected -> style.selectedContentColor
-      else -> style.contentColor
-    },
-  )
-
-  Row(
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-    modifier = modifier
-      .height(BpkSpacing.Xl)
-      .border(BorderStroke(BpkBorderSize.Sm, strokeColor), ChipShape)
-      .shadow(if (style == BpkChipStyle.OnImage) BpkElevation.Sm else 0.dp, ChipShape)
-      .background(backgroundColor, ChipShape)
-      .clip(ChipShape)
-      .padding(start = BpkSpacing.Base, end = BpkSpacing.Md),
-  ) {
-
-    if (icon != null) {
-      BpkIcon(
-        icon = icon,
-        size = BpkIconSize.Small,
-        contentDescription = null,
-        tint = contentColor,
-      )
-    }
-
-    BpkText(
-      text = text,
-      color = contentColor,
-      style = BpkTheme.typography.footnote,
-      maxLines = 1,
-      overflow = TextOverflow.Ellipsis,
+    val backgroundColor by animateColorAsState(
+        targetValue = when {
+            !enabled -> BpkChipColors.disabledBackground
+            selected -> style.selectedBackgroundColor
+            else -> interactionSource.animateAsColor(
+                default = style.backgroundColor,
+                pressed = style.pressedBackgroundColor,
+            )
+        },
     )
 
-    val trailingIcon = type.icon
-    if (trailingIcon != null) {
-      val trailingIconColor by animateColorAsState(
+    val strokeColor by animateColorAsState(
         targetValue = when {
-          !enabled -> BpkTheme.colors.textDisabled
-          type == BpkChipType.Dismiss -> interactionSource.animateAsColor(
-            default = style.dismissibleTrailingIconColor,
-            pressed = style.dismissibleTrailingIconPressedColor,
-          )
-          selected -> style.selectedContentColor
-          else -> interactionSource.animateAsColor(
-            default = style.contentColor,
-            pressed = BpkTheme.colors.textPrimary,
-          )
+            !enabled || selected -> Color.Transparent
+            else -> interactionSource.animateAsColor(
+                default = style.strokeColor,
+                pressed = style.pressedStrokeColor,
+            )
         },
-      )
+    )
 
-      BpkIcon(
-        icon = trailingIcon,
-        size = BpkIconSize.Small,
-        contentDescription = null,
-        tint = trailingIconColor,
-      )
-    } else {
-      // due to the vertical spacing this ends up with 8dp again
-      Spacer(modifier = Modifier.width(0.dp))
+    val contentColor by animateColorAsState(
+        targetValue = when {
+            !enabled -> BpkTheme.colors.textDisabled
+            selected -> style.selectedContentColor
+            else -> style.contentColor
+        },
+    )
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+        modifier = modifier
+            .height(BpkSpacing.Xl)
+            .border(BorderStroke(BpkBorderSize.Sm, strokeColor), ChipShape)
+            .shadow(if (style == BpkChipStyle.OnImage) BpkElevation.Sm else 0.dp, ChipShape)
+            .background(backgroundColor, ChipShape)
+            .clip(ChipShape)
+            .padding(start = BpkSpacing.Base, end = BpkSpacing.Md),
+    ) {
+
+        if (icon != null) {
+            BpkIcon(
+                icon = icon,
+                size = BpkIconSize.Small,
+                contentDescription = null,
+                tint = contentColor,
+            )
+        }
+
+        BpkText(
+            text = text,
+            color = contentColor,
+            style = BpkTheme.typography.footnote,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+
+        val trailingIcon = type.icon
+        if (trailingIcon != null) {
+            val trailingIconColor by animateColorAsState(
+                targetValue = when {
+                    !enabled -> BpkTheme.colors.textDisabled
+                    type == BpkChipType.Dismiss -> interactionSource.animateAsColor(
+                        default = style.dismissibleTrailingIconColor,
+                        pressed = style.dismissibleTrailingIconPressedColor,
+                    )
+                    selected -> style.selectedContentColor
+                    else -> interactionSource.animateAsColor(
+                        default = style.contentColor,
+                        pressed = BpkTheme.colors.textPrimary,
+                    )
+                },
+            )
+
+            BpkIcon(
+                icon = trailingIcon,
+                size = BpkIconSize.Small,
+                contentDescription = null,
+                tint = trailingIconColor,
+            )
+        } else {
+            // due to the vertical spacing this ends up with 8dp again
+            Spacer(modifier = Modifier.width(0.dp))
+        }
     }
-  }
 }
 
 private val BpkChipStyle.selectedBackgroundColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.corePrimary
-    BpkChipStyle.OnDark -> BpkChipColors.onDarkOnBackground
-  }
+    @Composable
+    get() = when (this) {
+        BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.corePrimary
+        BpkChipStyle.OnDark -> BpkChipColors.onDarkOnBackground
+    }
 
 private val BpkChipStyle.pressedBackgroundColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipStyle.Default, BpkChipStyle.OnDark -> Color.Transparent
-    BpkChipStyle.OnImage -> BpkTheme.colors.canvasContrast
-  }
+    @Composable
+    get() = when (this) {
+        BpkChipStyle.Default, BpkChipStyle.OnDark -> Color.Transparent
+        BpkChipStyle.OnImage -> BpkTheme.colors.canvasContrast
+    }
 
 private val BpkChipStyle.backgroundColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipStyle.Default, BpkChipStyle.OnDark -> Color.Transparent
-    BpkChipStyle.OnImage -> BpkTheme.colors.surfaceDefault
-  }
+    @Composable
+    get() = when (this) {
+        BpkChipStyle.Default, BpkChipStyle.OnDark -> Color.Transparent
+        BpkChipStyle.OnImage -> BpkTheme.colors.surfaceDefault
+    }
 
 private val BpkChipStyle.pressedStrokeColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipStyle.Default -> BpkTheme.colors.corePrimary
-    BpkChipStyle.OnDark -> BpkChipColors.onDarkPressedStroke
-    BpkChipStyle.OnImage -> Color.Transparent
-  }
+    @Composable
+    get() = when (this) {
+        BpkChipStyle.Default -> BpkTheme.colors.corePrimary
+        BpkChipStyle.OnDark -> BpkChipColors.onDarkPressedStroke
+        BpkChipStyle.OnImage -> Color.Transparent
+    }
 
 private val BpkChipStyle.strokeColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipStyle.Default -> BpkTheme.colors.line
-    BpkChipStyle.OnDark -> BpkTheme.colors.lineOnDark
-    BpkChipStyle.OnImage -> Color.Transparent
-  }
+    @Composable
+    get() = when (this) {
+        BpkChipStyle.Default -> BpkTheme.colors.line
+        BpkChipStyle.OnDark -> BpkTheme.colors.lineOnDark
+        BpkChipStyle.OnImage -> Color.Transparent
+    }
 
 private val BpkChipStyle.selectedContentColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.textOnDark
-    BpkChipStyle.OnDark -> BpkTheme.colors.textPrimary
-  }
+    @Composable
+    get() = when (this) {
+        BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.textOnDark
+        BpkChipStyle.OnDark -> BpkTheme.colors.textPrimary
+    }
 
 private val BpkChipStyle.contentColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.textPrimary
-    BpkChipStyle.OnDark -> BpkTheme.colors.textOnDark
-  }
+    @Composable
+    get() = when (this) {
+        BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.textPrimary
+        BpkChipStyle.OnDark -> BpkTheme.colors.textOnDark
+    }
 
 private val BpkChipStyle.dismissibleTrailingIconColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.textDisabledOnDark
-    BpkChipStyle.OnDark -> BpkChipColors.onDarkOnDismissIcon
-  }
+    @Composable
+    get() = when (this) {
+        BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.textDisabledOnDark
+        BpkChipStyle.OnDark -> BpkChipColors.onDarkOnDismissIcon
+    }
 
 private val BpkChipStyle.dismissibleTrailingIconPressedColor: Color
-  @Composable
-  get() = when (this) {
-    BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.textOnDark
-    BpkChipStyle.OnDark -> BpkTheme.colors.textPrimary
-  }
+    @Composable
+    get() = when (this) {
+        BpkChipStyle.Default, BpkChipStyle.OnImage -> BpkTheme.colors.textOnDark
+        BpkChipStyle.OnDark -> BpkTheme.colors.textPrimary
+    }
 
 private val BpkChipType.icon: BpkIcon?
-  get() = when (this) {
-    BpkChipType.Selectable -> null
-    BpkChipType.Dropdown -> BpkIcon.ChevronDown
-    BpkChipType.Dismiss -> BpkIcon.CloseCircle
-  }
+    get() = when (this) {
+        BpkChipType.Selectable -> null
+        BpkChipType.Dropdown -> BpkIcon.ChevronDown
+        BpkChipType.Dismiss -> BpkIcon.CloseCircle
+    }
 
 private val ChipShape = RoundedCornerShape(BpkBorderRadius.Sm)

@@ -24,24 +24,24 @@ import okhttp3.Request
 
 object RemoteScreenGrab {
 
-  private val serverIp: String = "10.0.2.2"
-  private val serverPort = 8888
-  private val okHttp = OkHttpClient()
+    private val serverIp: String = "10.0.2.2"
+    private val serverPort = 8888
+    private val okHttp = OkHttpClient()
 
-  fun takeScreenshot(component: String, type: String, file: String) {
-    val response = okHttp.newCall(
-      Request.Builder().url(
-        HttpUrl.Builder()
-          .scheme("http")
-          .host(serverIp)
-          .port(serverPort)
-          .setQueryParameter("component", component)
-          .setQueryParameter("type", type)
-          .setQueryParameter("file", file)
-          .build(),
-      ).build(),
-    ).execute()
+    fun takeScreenshot(component: String, type: String, file: String) {
+        val response = okHttp.newCall(
+            Request.Builder().url(
+                HttpUrl.Builder()
+                    .scheme("http")
+                    .host(serverIp)
+                    .port(serverPort)
+                    .setQueryParameter("component", component)
+                    .setQueryParameter("type", type)
+                    .setQueryParameter("file", file)
+                    .build(),
+            ).build(),
+        ).execute()
 
-    require(response.code() == 200) { "Unable to take screenshot for $component. Error code: ${response.code()}" }
-  }
+        require(response.code() == 200) { "Unable to take screenshot for $component. Error code: ${response.code()}" }
+    }
 }

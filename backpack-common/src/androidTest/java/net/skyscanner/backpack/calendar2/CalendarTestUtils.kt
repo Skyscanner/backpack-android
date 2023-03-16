@@ -32,41 +32,41 @@ import java.util.Locale
 internal typealias CalendarTestScope = TestStateMachineScope<CalendarStateMachine, CalendarState>
 
 internal val CalendarTestScope.firstDay: CalendarCell.Day
-  get() {
-    val index = state.cells.indexOf(CalendarSettings.Default.range.start)
-    return state.cells[index] as CalendarCell.Day
-  }
+    get() {
+        val index = state.cells.indexOf(CalendarSettings.Default.range.start)
+        return state.cells[index] as CalendarCell.Day
+    }
 
 internal val CalendarTestScope.lastDay: CalendarCell.Day
-  get() {
-    val index = state.cells.indexOf(CalendarSettings.Default.range.endInclusive)
-    return state.cells[index] as CalendarCell.Day
-  }
+    get() {
+        val index = state.cells.indexOf(CalendarSettings.Default.range.endInclusive)
+        return state.cells[index] as CalendarCell.Day
+    }
 
 internal val CalendarTestScope.header: CalendarCell.Header
-  get() = state.cells[0] as CalendarCell.Header
+    get() = state.cells[0] as CalendarCell.Header
 
 internal fun CalendarTestScope.rangeOf(start: CalendarCell.Day, end: CalendarCell.Day): IntRange {
-  val indexOfFirst = state.cells.indexOf(start.date)
-  val indexOfLast = state.cells.indexOf(end.date)
-  return indexOfFirst..indexOfLast
+    val indexOfFirst = state.cells.indexOf(start.date)
+    val indexOfLast = state.cells.indexOf(end.date)
+    return indexOfFirst..indexOfLast
 }
 
 internal fun initAndroidThreeTen() {
-  AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().context)
+    AndroidThreeTen.init(InstrumentationRegistry.getInstrumentation().context)
 }
 
 internal fun testCalendarWith(
-  params: CalendarParams,
-  block: suspend CalendarTestScope.() -> TestStateMachineResult,
+    params: CalendarParams,
+    block: suspend CalendarTestScope.() -> TestStateMachineResult,
 ) =
-  testStateMachine(creator = { CalendarStateMachine(this, params) }, block = block)
+    testStateMachine(creator = { CalendarStateMachine(this, params) }, block = block)
 
 object CalendarSettings {
 
-  val Default = CalendarParams(
-    range = LocalDate.of(2000, Month.JANUARY, 1)..LocalDate.of(2000, Month.DECEMBER, 31),
-    selectionMode = CalendarParams.SelectionMode.Single,
-    locale = Locale.ENGLISH,
-  )
+    val Default = CalendarParams(
+        range = LocalDate.of(2000, Month.JANUARY, 1)..LocalDate.of(2000, Month.DECEMBER, 31),
+        selectionMode = CalendarParams.SelectionMode.Single,
+        locale = Locale.ENGLISH,
+    )
 }

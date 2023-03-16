@@ -31,27 +31,27 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkFontSpanTests : BpkSnapshotTest() {
 
-  private val textView = TextView(testContext)
+    private val textView = TextView(testContext)
 
-  @Test
-  fun default() {
-    textView.text = "Test"
-    snap(textView)
-  }
+    @Test
+    fun default() {
+        textView.text = "Test"
+        snap(textView)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun custom() {
-    val span = BpkFontSpan(testContext, BpkText.TextStyle.Heading2)
-    textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-    snap(textView)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun custom() {
+        val span = BpkFontSpan(testContext, BpkText.TextStyle.Heading2)
+        textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        snap(textView)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun injected() {
-    val font = BpkText.getFont(testContext, BpkText.TextStyle.Heading2)
-    textView.text = SpannableStringBuilder().append("Test", BpkFontSpan(font), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-    snap(textView)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun injected() {
+        val font = BpkText.getFont(testContext, BpkText.TextStyle.Heading2)
+        textView.text = SpannableStringBuilder().append("Test", BpkFontSpan(font), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        snap(textView)
+    }
 }

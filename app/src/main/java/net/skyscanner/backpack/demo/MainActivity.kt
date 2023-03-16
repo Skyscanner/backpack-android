@@ -26,14 +26,14 @@ import net.skyscanner.backpack.demo.ui.NavGraphs
 
 class MainActivity : BpkBaseActivity() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent {
-      DemoScaffold {
-        DestinationsNavHost(
-          navGraph = NavGraphs.root,
-        )
-      }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            DemoScaffold {
+                DestinationsNavHost(
+                    navGraph = NavGraphs.root,
+                )
+            }
+        }
     }
-  }
 }

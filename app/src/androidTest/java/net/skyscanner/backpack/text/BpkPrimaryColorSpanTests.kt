@@ -29,12 +29,12 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkPrimaryColorSpanTests : BpkSnapshotTest() {
 
-  private val textView = TextView(testContext)
+    private val textView = TextView(testContext)
 
-  @Test
-  fun default() {
-    val span = BpkPrimaryColorSpan(testContext)
-    textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-    snap(textView)
-  }
+    @Test
+    fun default() {
+        val span = BpkPrimaryColorSpan(testContext)
+        textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        snap(textView)
+    }
 }

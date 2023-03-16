@@ -34,38 +34,38 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkCardTest : BpkSnapshotTest() {
 
-  @Test
-  fun smallCorner() = snap {
-    SmallCornersCardExample()
-  }
+    @Test
+    fun smallCorner() = snap {
+        SmallCornersCardExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun largeCorner() = snap {
-    LargeCornersCardExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeCorner() = snap {
+        LargeCornersCardExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun noPadding() = snap {
-    NoPaddingCardExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noPadding() = snap {
+        NoPaddingCardExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun unfocused() = snap {
-    NonClickableCardExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun unfocused() = snap {
+        NonClickableCardExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun focused() = snap {
-    FocusableCardExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun focused() = snap {
+        FocusableCardExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun noElevation() = snap {
-    NoElevationCardExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun noElevation() = snap {
+        NoElevationCardExample()
+    }
 }

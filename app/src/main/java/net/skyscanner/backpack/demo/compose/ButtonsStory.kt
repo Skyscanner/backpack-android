@@ -60,278 +60,278 @@ import kotlin.time.Duration.Companion.seconds
 @ButtonComponent
 @ComposeStory("Default")
 fun ButtonsDefaultSizeStory(modifier: Modifier = Modifier) =
-  ButtonsTypesDemo(BpkButtonSize.Default, modifier)
+    ButtonsTypesDemo(BpkButtonSize.Default, modifier)
 
 @Composable
 @ButtonComponent
 @ComposeStory("Large")
 fun ButtonsLargeSizeStory(modifier: Modifier = Modifier) =
-  ButtonsTypesDemo(BpkButtonSize.Large, modifier)
+    ButtonsTypesDemo(BpkButtonSize.Large, modifier)
 
 @Composable
 @ButtonComponent
 @ComposeStory("Link")
 fun ButtonLinkStory(modifier: Modifier = Modifier) {
-  LazyColumn(
-    modifier
-      .fillMaxSize()
-      .padding(top = BpkDimension.Spacing.Md),
-  ) {
-    LinkRows(BpkButtonSize.Default)
-    item {
-      BpkText(
-        text = stringResource(BpkButtonSize.Large.labelResource()),
-        style = BpkTheme.typography.heading4,
-        modifier = Modifier
-          .padding(horizontal = BpkDimension.Spacing.Base)
-          .padding(top = BpkDimension.Spacing.Md),
-      )
+    LazyColumn(
+        modifier
+            .fillMaxSize()
+            .padding(top = BpkDimension.Spacing.Md),
+    ) {
+        LinkRows(BpkButtonSize.Default)
+        item {
+            BpkText(
+                text = stringResource(BpkButtonSize.Large.labelResource()),
+                style = BpkTheme.typography.heading4,
+                modifier = Modifier
+                    .padding(horizontal = BpkDimension.Spacing.Base)
+                    .padding(top = BpkDimension.Spacing.Md),
+            )
+        }
+        LinkRows(BpkButtonSize.Large)
     }
-    LinkRows(BpkButtonSize.Large)
-  }
 }
 
 @Composable
 @ButtonComponent
 @ComposeStory("Drawable Icon")
 fun ButtonDrawableIconStory(modifier: Modifier = Modifier) {
-  LazyColumn(
-    modifier
-      .fillMaxSize()
-      .padding(top = BpkDimension.Spacing.Md),
-  ) {
-
-    BpkButtonSize.values().map { size ->
-      item {
-        BpkText(
-          text = stringResource(size.labelResource()),
-          style = BpkTheme.typography.heading4,
-          modifier = Modifier
-            .padding(horizontal = BpkDimension.Spacing.Base)
+    LazyColumn(
+        modifier
+            .fillMaxSize()
             .padding(top = BpkDimension.Spacing.Md),
-        )
-      }
-      item {
-        DrawableButtonsRow(
-          type = BpkButtonType.Primary,
-          size = size,
-          enabled = false,
-        )
-      }
-      items(BpkButtonType.values().filter { !it.linkType() }) {
-        DrawableButtonsRow(
-          type = it,
-          size = size,
-          enabled = true,
-        )
-      }
+    ) {
+
+        BpkButtonSize.values().map { size ->
+            item {
+                BpkText(
+                    text = stringResource(size.labelResource()),
+                    style = BpkTheme.typography.heading4,
+                    modifier = Modifier
+                        .padding(horizontal = BpkDimension.Spacing.Base)
+                        .padding(top = BpkDimension.Spacing.Md),
+                )
+            }
+            item {
+                DrawableButtonsRow(
+                    type = BpkButtonType.Primary,
+                    size = size,
+                    enabled = false,
+                )
+            }
+            items(BpkButtonType.values().filter { !it.linkType() }) {
+                DrawableButtonsRow(
+                    type = it,
+                    size = size,
+                    enabled = true,
+                )
+            }
+        }
     }
-  }
 }
 
 @Composable
 private fun ButtonsTypesDemo(
-  size: BpkButtonSize,
-  modifier: Modifier = Modifier,
+    size: BpkButtonSize,
+    modifier: Modifier = Modifier,
 ) {
-  LazyColumn(
-    modifier
-      .fillMaxSize()
-      .padding(top = BpkDimension.Spacing.Md),
-  ) {
-    item {
-      ButtonsRow(
-        type = BpkButtonType.Primary,
-        size = size,
-        enabled = false,
-      )
+    LazyColumn(
+        modifier
+            .fillMaxSize()
+            .padding(top = BpkDimension.Spacing.Md),
+    ) {
+        item {
+            ButtonsRow(
+                type = BpkButtonType.Primary,
+                size = size,
+                enabled = false,
+            )
+        }
+        items(BpkButtonType.values().filter { !it.linkType() }) {
+            ButtonsRow(
+                type = it,
+                size = size,
+                enabled = true,
+            )
+        }
     }
-    items(BpkButtonType.values().filter { !it.linkType() }) {
-      ButtonsRow(
-        type = it,
-        size = size,
-        enabled = true,
-      )
-    }
-  }
 }
 
 private fun LazyListScope.LinkRows(size: BpkButtonSize) {
-  items(BpkButtonType.values().filter { it.linkType() }) {
-    Column {
-      ButtonsRow(
-        type = it,
-        size = size,
-        enabled = true,
-      )
-      ButtonsRow(
-        type = it,
-        size = size,
-        enabled = false,
-      )
+    items(BpkButtonType.values().filter { it.linkType() }) {
+        Column {
+            ButtonsRow(
+                type = it,
+                size = size,
+                enabled = true,
+            )
+            ButtonsRow(
+                type = it,
+                size = size,
+                enabled = false,
+            )
+        }
     }
-  }
 }
 
 @Composable
 private fun ButtonsRow(
-  type: BpkButtonType,
-  size: BpkButtonSize,
-  enabled: Boolean,
-  modifier: Modifier = Modifier,
+    type: BpkButtonType,
+    size: BpkButtonSize,
+    enabled: Boolean,
+    modifier: Modifier = Modifier,
 ) {
-  Row(
-    modifier
-      .fillMaxWidth()
-      .background(type.rowBackground())
-      .padding(vertical = BpkSpacing.Md, horizontal = BpkSpacing.Base),
-    horizontalArrangement = Arrangement.SpaceBetween,
-  ) {
+    Row(
+        modifier
+            .fillMaxWidth()
+            .background(type.rowBackground())
+            .padding(vertical = BpkSpacing.Md, horizontal = BpkSpacing.Base),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
 
-    LoadingScope {
-      BpkButton(
-        text = stringResource(R.string.button),
-        size = size,
-        type = type,
-        loading = loading,
-        enabled = enabled,
-        onClick = ::load,
-      )
-    }
+        LoadingScope {
+            BpkButton(
+                text = stringResource(R.string.button),
+                size = size,
+                type = type,
+                loading = loading,
+                enabled = enabled,
+                onClick = ::load,
+            )
+        }
 
-    LoadingScope {
-      BpkButton(
-        text = stringResource(R.string.button),
-        icon = BpkIcon.LongArrowRight,
-        position = BpkButtonIconPosition.Start,
-        size = size,
-        type = type,
-        enabled = enabled,
-        loading = loading,
-        onClick = ::load,
-      )
-    }
+        LoadingScope {
+            BpkButton(
+                text = stringResource(R.string.button),
+                icon = BpkIcon.LongArrowRight,
+                position = BpkButtonIconPosition.Start,
+                size = size,
+                type = type,
+                enabled = enabled,
+                loading = loading,
+                onClick = ::load,
+            )
+        }
 
-    LoadingScope {
-      BpkButton(
-        text = stringResource(R.string.button),
-        icon = BpkIcon.LongArrowRight,
-        position = BpkButtonIconPosition.End,
-        size = size,
-        type = type,
-        enabled = enabled,
-        loading = loading,
-        onClick = ::load,
-      )
-    }
+        LoadingScope {
+            BpkButton(
+                text = stringResource(R.string.button),
+                icon = BpkIcon.LongArrowRight,
+                position = BpkButtonIconPosition.End,
+                size = size,
+                type = type,
+                enabled = enabled,
+                loading = loading,
+                onClick = ::load,
+            )
+        }
 
-    LoadingScope {
-      BpkButton(
-        icon = BpkIcon.LongArrowRight,
-        contentDescription = stringResource(R.string.button),
-        size = size,
-        type = type,
-        enabled = enabled,
-        loading = loading,
-        onClick = ::load,
-      )
+        LoadingScope {
+            BpkButton(
+                icon = BpkIcon.LongArrowRight,
+                contentDescription = stringResource(R.string.button),
+                size = size,
+                type = type,
+                enabled = enabled,
+                loading = loading,
+                onClick = ::load,
+            )
+        }
     }
-  }
 }
 
 @Composable
 private fun DrawableButtonsRow(
-  type: BpkButtonType,
-  size: BpkButtonSize,
-  enabled: Boolean,
-  modifier: Modifier = Modifier,
+    type: BpkButtonType,
+    size: BpkButtonSize,
+    enabled: Boolean,
+    modifier: Modifier = Modifier,
 ) {
-  Row(
-    modifier
-      .fillMaxWidth()
-      .background(type.rowBackground())
-      .padding(vertical = BpkSpacing.Md, horizontal = BpkSpacing.Base),
-    horizontalArrangement = Arrangement.SpaceEvenly,
-  ) {
+    Row(
+        modifier
+            .fillMaxWidth()
+            .background(type.rowBackground())
+            .padding(vertical = BpkSpacing.Md, horizontal = BpkSpacing.Base),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+    ) {
 
-    LoadingScope {
-      BpkButton(
-        text = stringResource(R.string.button),
-        icon = painterResource(id = R.drawable.sample_icon),
-        position = BpkButtonIconPosition.Start,
-        size = size,
-        type = type,
-        enabled = enabled,
-        loading = loading,
-        onClick = ::load,
-      )
-    }
+        LoadingScope {
+            BpkButton(
+                text = stringResource(R.string.button),
+                icon = painterResource(id = R.drawable.sample_icon),
+                position = BpkButtonIconPosition.Start,
+                size = size,
+                type = type,
+                enabled = enabled,
+                loading = loading,
+                onClick = ::load,
+            )
+        }
 
-    LoadingScope {
-      BpkButton(
-        text = stringResource(R.string.button),
-        icon = painterResource(id = R.drawable.sample_icon),
-        position = BpkButtonIconPosition.End,
-        size = size,
-        type = type,
-        enabled = enabled,
-        loading = loading,
-        onClick = ::load,
-      )
-    }
+        LoadingScope {
+            BpkButton(
+                text = stringResource(R.string.button),
+                icon = painterResource(id = R.drawable.sample_icon),
+                position = BpkButtonIconPosition.End,
+                size = size,
+                type = type,
+                enabled = enabled,
+                loading = loading,
+                onClick = ::load,
+            )
+        }
 
-    LoadingScope {
-      BpkButton(
-        icon = painterResource(id = R.drawable.sample_icon),
-        contentDescription = stringResource(R.string.button),
-        size = size,
-        type = type,
-        enabled = enabled,
-        loading = loading,
-        onClick = ::load,
-      )
+        LoadingScope {
+            BpkButton(
+                icon = painterResource(id = R.drawable.sample_icon),
+                contentDescription = stringResource(R.string.button),
+                size = size,
+                type = type,
+                enabled = enabled,
+                loading = loading,
+                onClick = ::load,
+            )
+        }
     }
-  }
 }
 
 @Composable
 private inline fun LoadingScope(
-  content: @Composable LoadingScope.() -> Unit,
+    content: @Composable LoadingScope.() -> Unit,
 ) {
-  val coroutineScope = rememberCoroutineScope()
-  val loadingScope = remember(coroutineScope) { LoadingScope(coroutineScope) }
-  loadingScope.content()
+    val coroutineScope = rememberCoroutineScope()
+    val loadingScope = remember(coroutineScope) { LoadingScope(coroutineScope) }
+    loadingScope.content()
 }
 
 private class LoadingScope(private val scope: CoroutineScope) {
 
-  var loading by mutableStateOf(false)
+    var loading by mutableStateOf(false)
 
-  fun load() {
-    scope.launch {
-      loading = true
-      delay(2.seconds)
-      loading = false
+    fun load() {
+        scope.launch {
+            loading = true
+            delay(2.seconds)
+            loading = false
+        }
     }
-  }
 }
 
 private fun BpkButtonType.linkType() =
-  when (this) {
-    BpkButtonType.Link, BpkButtonType.LinkOnDark -> true
-    else -> false
-  }
+    when (this) {
+        BpkButtonType.Link, BpkButtonType.LinkOnDark -> true
+        else -> false
+    }
 
 private fun BpkButtonSize.labelResource() =
-  when (this) {
-    BpkButtonSize.Default -> R.string.generic_default
-    BpkButtonSize.Large -> R.string.icons_large
-  }
+    when (this) {
+        BpkButtonSize.Default -> R.string.generic_default
+        BpkButtonSize.Large -> R.string.icons_large
+    }
 
 @Composable
 internal fun BpkButtonType.rowBackground() =
-  when (this) {
-    BpkButtonType.SecondaryOnDark, BpkButtonType.LinkOnDark, BpkButtonType.PrimaryOnDark -> BpkTheme.colors.surfaceContrast
-    BpkButtonType.PrimaryOnLight -> BpkTheme.colors.textOnDark
-    else -> Color.Transparent
-  }
+    when (this) {
+        BpkButtonType.SecondaryOnDark, BpkButtonType.LinkOnDark, BpkButtonType.PrimaryOnDark -> BpkTheme.colors.surfaceContrast
+        BpkButtonType.PrimaryOnLight -> BpkTheme.colors.textOnDark
+        else -> Color.Transparent
+    }

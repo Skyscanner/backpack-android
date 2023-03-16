@@ -30,77 +30,77 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.utils.applyIf
 
 enum class BpkChipStyle {
-  Default,
-  OnDark,
-  OnImage,
+    Default,
+    OnDark,
+    OnImage,
 }
 
 @Composable
 fun BpkChip(
-  text: String,
-  modifier: Modifier = Modifier,
-  selected: Boolean = false,
-  onSelectedChange: ((Boolean) -> Unit)? = null,
-  enabled: Boolean = true,
-  style: BpkChipStyle = BpkChipStyle.Default,
-  icon: BpkIcon? = null,
+    text: String,
+    modifier: Modifier = Modifier,
+    selected: Boolean = false,
+    onSelectedChange: ((Boolean) -> Unit)? = null,
+    enabled: Boolean = true,
+    style: BpkChipStyle = BpkChipStyle.Default,
+    icon: BpkIcon? = null,
 ) {
-  BpkChipImpl(
-    text = text,
-    selected = selected,
-    enabled = enabled,
-    style = style,
-    icon = icon,
-    type = BpkChipType.Selectable,
-    onSelectedChange = onSelectedChange,
-    modifier = modifier,
-  )
+    BpkChipImpl(
+        text = text,
+        selected = selected,
+        enabled = enabled,
+        style = style,
+        icon = icon,
+        type = BpkChipType.Selectable,
+        onSelectedChange = onSelectedChange,
+        modifier = modifier,
+    )
 }
 
 @Composable
 fun BpkDropdownChip(
-  text: String,
-  modifier: Modifier = Modifier,
-  selected: Boolean = false,
-  onSelectedChange: ((Boolean) -> Unit)? = null,
-  enabled: Boolean = true,
-  style: BpkChipStyle = BpkChipStyle.Default,
-  icon: BpkIcon? = null,
+    text: String,
+    modifier: Modifier = Modifier,
+    selected: Boolean = false,
+    onSelectedChange: ((Boolean) -> Unit)? = null,
+    enabled: Boolean = true,
+    style: BpkChipStyle = BpkChipStyle.Default,
+    icon: BpkIcon? = null,
 ) {
-  BpkChipImpl(
-    text = text,
-    selected = selected,
-    enabled = enabled,
-    style = style,
-    icon = icon,
-    type = BpkChipType.Dropdown,
-    onSelectedChange = onSelectedChange,
-    modifier = modifier,
-  )
+    BpkChipImpl(
+        text = text,
+        selected = selected,
+        enabled = enabled,
+        style = style,
+        icon = icon,
+        type = BpkChipType.Dropdown,
+        onSelectedChange = onSelectedChange,
+        modifier = modifier,
+    )
 }
 
 @Composable
 fun BpkDismissibleChip(
-  text: String,
-  modifier: Modifier = Modifier,
-  onClick: (() -> Unit)? = null,
-  style: BpkChipStyle = BpkChipStyle.Default,
-  icon: BpkIcon? = null,
+    text: String,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    style: BpkChipStyle = BpkChipStyle.Default,
+    icon: BpkIcon? = null,
 ) {
-  val interactionSource = remember { MutableInteractionSource() }
-  BpkChipImpl(
-    text = text,
-    selected = true,
-    enabled = true,
-    style = style,
-    icon = icon,
-    type = BpkChipType.Dismiss,
-    interactionSource = interactionSource,
-    modifier = modifier.applyIf(onClick != null) {
-      clickable(
+    val interactionSource = remember { MutableInteractionSource() }
+    BpkChipImpl(
+        text = text,
+        selected = true,
+        enabled = true,
+        style = style,
+        icon = icon,
+        type = BpkChipType.Dismiss,
         interactionSource = interactionSource,
-        indication = LocalIndication.current,
-      ) { onClick!!.invoke() }
-    },
-  )
+        modifier = modifier.applyIf(onClick != null) {
+            clickable(
+                interactionSource = interactionSource,
+                indication = LocalIndication.current,
+            ) { onClick!!.invoke() }
+        },
+    )
 }

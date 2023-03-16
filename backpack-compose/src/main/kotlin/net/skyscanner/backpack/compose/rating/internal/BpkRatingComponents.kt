@@ -43,94 +43,94 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BpkRatingNumbers(
-  value: Float,
-  scale: BpkRatingScale,
-  size: BpkRatingSize,
-  showScale: Boolean,
-  modifier: Modifier = Modifier,
+    value: Float,
+    scale: BpkRatingScale,
+    size: BpkRatingSize,
+    showScale: Boolean,
+    modifier: Modifier = Modifier,
 ) {
-  Row(modifier = modifier) {
+    Row(modifier = modifier) {
 
-    val numberFormat = remember(LocalConfiguration.current.locales) { DecimalFormat("#0.0") }
+        val numberFormat = remember(LocalConfiguration.current.locales) { DecimalFormat("#0.0") }
 
-    BpkText(
-      modifier = Modifier.alignByBaseline(),
-      text = formatValue(value, scale, numberFormat),
-      style = when (size) {
-        BpkRatingSize.Base -> BpkTheme.typography.label1
-        BpkRatingSize.Large -> BpkTheme.typography.hero5
-      },
-      color = BpkTheme.colors.textPrimary,
-      maxLines = 1,
-      overflow = TextOverflow.Ellipsis,
-    )
+        BpkText(
+            modifier = Modifier.alignByBaseline(),
+            text = formatValue(value, scale, numberFormat),
+            style = when (size) {
+                BpkRatingSize.Base -> BpkTheme.typography.label1
+                BpkRatingSize.Large -> BpkTheme.typography.hero5
+            },
+            color = BpkTheme.colors.textPrimary,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
 
-    if (showScale) {
-      BpkText(
-        modifier = Modifier.alignByBaseline(),
-        text = "/${scale.range.endInclusive.toInt()}",
-        style = when (size) {
-          BpkRatingSize.Base -> BpkTheme.typography.caption
-          BpkRatingSize.Large -> BpkTheme.typography.bodyDefault
-        },
-        color = BpkTheme.colors.textSecondary,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-      )
+        if (showScale) {
+            BpkText(
+                modifier = Modifier.alignByBaseline(),
+                text = "/${scale.range.endInclusive.toInt()}",
+                style = when (size) {
+                    BpkRatingSize.Base -> BpkTheme.typography.caption
+                    BpkRatingSize.Large -> BpkTheme.typography.bodyDefault
+                },
+                color = BpkTheme.colors.textSecondary,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
     }
-  }
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BpkRatingTitle(
-  modifier: Modifier = Modifier,
-  content: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
 ) {
-  // todo: local content alpha was removed
-  CompositionLocalProvider(
-    LocalTextStyle provides BpkTheme.typography.heading5,
-    LocalContentColor provides BpkTheme.colors.textPrimary,
-  ) {
-    Box(
-      modifier = modifier.heightIn(max = BpkSpacing.Lg),
-      contentAlignment = Alignment.CenterStart,
+    // todo: local content alpha was removed
+    CompositionLocalProvider(
+        LocalTextStyle provides BpkTheme.typography.heading5,
+        LocalContentColor provides BpkTheme.colors.textPrimary,
     ) {
-      // a little trick to provide baseline params for the custom layouts with invisible text
-      BpkText(
-        text = "",
-        modifier = Modifier
-          .alpha(0f)
-          .semantics { invisibleToUser() },
-      )
-      content()
+        Box(
+            modifier = modifier.heightIn(max = BpkSpacing.Lg),
+            contentAlignment = Alignment.CenterStart,
+        ) {
+            // a little trick to provide baseline params for the custom layouts with invisible text
+            BpkText(
+                text = "",
+                modifier = Modifier
+                    .alpha(0f)
+                    .semantics { invisibleToUser() },
+            )
+            content()
+        }
     }
-  }
 }
 
 @Composable
 internal fun BpkRatingSubtitle(
-  subtitle: String,
-  modifier: Modifier = Modifier,
+    subtitle: String,
+    modifier: Modifier = Modifier,
 ) {
-  BpkText(
-    modifier = modifier,
-    text = subtitle,
-    style = BpkTheme.typography.bodyDefault,
-    color = BpkTheme.colors.textSecondary,
-    maxLines = 1,
-    overflow = TextOverflow.Ellipsis,
-  )
+    BpkText(
+        modifier = modifier,
+        text = subtitle,
+        style = BpkTheme.typography.bodyDefault,
+        color = BpkTheme.colors.textSecondary,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+    )
 }
 
 private fun formatValue(value: Float, scale: BpkRatingScale, format: DecimalFormat): String {
-  val coerced = value.coerceIn(scale.range)
-  val rounded = (coerced * 10).toInt() / 10f // rounding to one decimal
-  return format.format(rounded)
+    val coerced = value.coerceIn(scale.range)
+    val rounded = (coerced * 10).toInt() / 10f // rounding to one decimal
+    return format.format(rounded)
 }
 
 private val BpkRatingScale.range: ClosedFloatingPointRange<Float>
-  get() = when (this) {
-    BpkRatingScale.ZeroToFive -> 0f..5f
-    BpkRatingScale.ZeroToTen -> 0f..10f
-  }
+    get() = when (this) {
+        BpkRatingScale.ZeroToFive -> 0f..5f
+        BpkRatingScale.ZeroToTen -> 0f..10f
+    }

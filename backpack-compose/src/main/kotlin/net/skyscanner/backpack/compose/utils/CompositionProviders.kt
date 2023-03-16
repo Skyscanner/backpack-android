@@ -26,19 +26,19 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
 internal fun BpkToggleableContent(
-  enabled: Boolean,
-  content: @Composable () -> Unit,
+    enabled: Boolean,
+    content: @Composable () -> Unit,
 ) {
 
-  val contentColor = when {
-    enabled -> BpkTheme.colors.textPrimary
-    else -> BpkTheme.colors.textDisabled
-  }
+    val contentColor = when {
+        enabled -> BpkTheme.colors.textPrimary
+        else -> BpkTheme.colors.textDisabled
+    }
 
-  // todo: no content alpha here!
-  CompositionLocalProvider(
-    LocalContentColor provides contentColor,
-    LocalTextStyle provides BpkTheme.typography.footnote,
-    content = content,
-  )
+    // todo: no content alpha here!
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalTextStyle provides BpkTheme.typography.footnote,
+        content = content,
+    )
 }

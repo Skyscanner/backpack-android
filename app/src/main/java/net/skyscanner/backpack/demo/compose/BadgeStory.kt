@@ -43,47 +43,47 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @BadgeComponent
 @ComposeStory
 fun BadgeStory(modifier: Modifier = Modifier) {
-  Column(modifier) {
-    BpkBadgeType.values().forEach { type ->
-      BadgeRow(type = type)
+    Column(modifier) {
+        BpkBadgeType.values().forEach { type ->
+            BadgeRow(type = type)
+        }
     }
-  }
 }
 
 @Composable
 private fun BadgeRow(
-  type: BpkBadgeType,
-  modifier: Modifier = Modifier,
+    type: BpkBadgeType,
+    modifier: Modifier = Modifier,
 ) {
-  Row(
-    verticalAlignment = Alignment.CenterVertically,
-    modifier = modifier
-      .fillMaxWidth()
-      .background(
-        when (type) {
-          BpkBadgeType.Outline, BpkBadgeType.Inverse -> BpkTheme.colors.corePrimary
-          else -> Color.Transparent
-        },
-      )
-      .padding(vertical = BpkSpacing.Sm)
-      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
-  ) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(
+                when (type) {
+                    BpkBadgeType.Outline, BpkBadgeType.Inverse -> BpkTheme.colors.corePrimary
+                    else -> Color.Transparent
+                },
+            )
+            .padding(vertical = BpkSpacing.Sm)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Md),
+    ) {
 
-    BpkBadge(
-      text = type.toString(),
-      type = type,
-      modifier = Modifier.weight(1f).wrapContentWidth(align = Alignment.CenterHorizontally),
-    )
+        BpkBadge(
+            text = type.toString(),
+            type = type,
+            modifier = Modifier.weight(1f).wrapContentWidth(align = Alignment.CenterHorizontally),
+        )
 
-    BpkBadge(
-      text = type.toString(),
-      modifier = Modifier.weight(1f).wrapContentWidth(align = Alignment.CenterHorizontally),
-      type = type,
-      icon = when (type) {
-        BpkBadgeType.Warning -> BpkIcon.HelpCircle
-        BpkBadgeType.Destructive -> BpkIcon.CloseCircle
-        else -> BpkIcon.TickCircle
-      },
-    )
-  }
+        BpkBadge(
+            text = type.toString(),
+            modifier = Modifier.weight(1f).wrapContentWidth(align = Alignment.CenterHorizontally),
+            type = type,
+            icon = when (type) {
+                BpkBadgeType.Warning -> BpkIcon.HelpCircle
+                BpkBadgeType.Destructive -> BpkIcon.CloseCircle
+                else -> BpkIcon.TickCircle
+            },
+        )
+    }
 }

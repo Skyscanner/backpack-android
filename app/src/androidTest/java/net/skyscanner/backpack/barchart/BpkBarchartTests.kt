@@ -37,168 +37,168 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkBarchartTests : BpkSnapshotTest() {
 
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
+    @get:Rule
+    val rule = activityScenarioRule<AppCompatActivity>()
 
-  @Test
-  fun default() {
-    init {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0, value = 0.0f),
-        ),
-      )
+    @Test
+    fun default() {
+        init {
+            model = BpkBarChart.Model(
+                groups = listOf(
+                    createMonth(0, value = 0.0f),
+                ),
+            )
+        }
+        capture()
     }
-    capture()
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun halfFilled() {
-    init {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0, value = 0.5f),
-        ),
-      )
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun halfFilled() {
+        init {
+            model = BpkBarChart.Model(
+                groups = listOf(
+                    createMonth(0, value = 0.5f),
+                ),
+            )
+        }
+        capture()
     }
-    capture()
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun fullyFilled() {
-    init {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0, value = 1.0f),
-        ),
-      )
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun fullyFilled() {
+        init {
+            model = BpkBarChart.Model(
+                groups = listOf(
+                    createMonth(0, value = 1.0f),
+                ),
+            )
+        }
+        capture()
     }
-    capture()
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun overfilled() {
-    init {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0, value = 1.1f),
-        ),
-      )
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun overfilled() {
+        init {
+            model = BpkBarChart.Model(
+                groups = listOf(
+                    createMonth(0, value = 1.1f),
+                ),
+            )
+        }
+        capture()
     }
-    capture()
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun inactive() {
-    init {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0, inactive = true),
-        ),
-      )
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun inactive() {
+        init {
+            model = BpkBarChart.Model(
+                groups = listOf(
+                    createMonth(0, inactive = true),
+                ),
+            )
+        }
+        capture()
     }
-    capture()
-  }
 
-  @Test
-  fun withLegend() {
-    init {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0),
-        ),
-        legend = BpkBarChart.Legend(
-          selectedTitle = "Selected",
-          activeTitle = "Enabled",
-          inactiveTitle = "Disabled",
-        ),
-      )
+    @Test
+    fun withLegend() {
+        init {
+            model = BpkBarChart.Model(
+                groups = listOf(
+                    createMonth(0),
+                ),
+                legend = BpkBarChart.Legend(
+                    selectedTitle = "Selected",
+                    activeTitle = "Enabled",
+                    inactiveTitle = "Disabled",
+                ),
+            )
+        }
+        capture()
     }
-    capture()
-  }
 
-  @Test
-  fun selected() {
-    init {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0),
-        ),
-      )
+    @Test
+    fun selected() {
+        init {
+            model = BpkBarChart.Model(
+                groups = listOf(
+                    createMonth(0),
+                ),
+            )
+        }
+        capture {
+            perform(ViewActions.click())
+        }
     }
-    capture {
-      perform(ViewActions.click())
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun unselected() {
+        init {
+            model = BpkBarChart.Model(
+                groups = listOf(
+                    createMonth(0),
+                ),
+            )
+        }
+        capture {
+            perform(ViewActions.click())
+            perform(ViewActions.click())
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun unselected() {
-    init {
-      model = BpkBarChart.Model(
-        groups = listOf(
-          createMonth(0),
-        ),
-      )
+    private inline fun init(crossinline block: BpkBarChart.() -> Unit) {
+        rule.scenario.onActivity { activity ->
+            activity.runOnUiThread {
+                activity.setContentView(R.layout.fragment_bar_chart)
+                val barChart = activity.findViewById<BpkBarChart>(R.id.bar_chart)
+                block(barChart)
+            }
+        }
     }
-    capture {
-      perform(ViewActions.click())
-      perform(ViewActions.click())
+
+    private inline fun capture(crossinline block: ViewInteraction.() -> ViewInteraction = { this }) {
+        var view: View? = null
+        onView(ViewMatchers.withId(R.id.bar_chart))
+            .block()
+            .check { v, _ -> view = v }
+
+        snap(view!!, width = 400)
     }
-  }
 
-  private inline fun init(crossinline block: BpkBarChart.() -> Unit) {
-    rule.scenario.onActivity { activity ->
-      activity.runOnUiThread {
-        activity.setContentView(R.layout.fragment_bar_chart)
-        val barChart = activity.findViewById<BpkBarChart>(R.id.bar_chart)
-        block(barChart)
-      }
-    }
-  }
+    private fun createMonth(
+        month: Int,
+        badge: Int = 100,
+        value: Float = 0.5f,
+        inactive: Boolean = false,
+    ) = BpkBarChart.Group(
+        title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
+        items = ArrayList<BpkBarChart.Column>(10).apply {
+            for (dayOfTheMonth in 0 until 30) {
+                add(
+                    createBar(
+                        month * 30 + dayOfTheMonth,
+                        badge, value, inactive,
+                    ),
+                )
+            }
+        },
+    )
 
-  private inline fun capture(crossinline block: ViewInteraction.() -> ViewInteraction = { this }) {
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.bar_chart))
-      .block()
-      .check { v, _ -> view = v }
-
-    snap(view!!, width = 400)
-  }
-
-  private fun createMonth(
-    month: Int,
-    badge: Int = 100,
-    value: Float = 0.5f,
-    inactive: Boolean = false,
-  ) = BpkBarChart.Group(
-    title = arrayOf("January", "February", "March", "April", "May", "June", "July")[month % 6],
-    items = ArrayList<BpkBarChart.Column>(10).apply {
-      for (dayOfTheMonth in 0 until 30) {
-        add(
-          createBar(
-            month * 30 + dayOfTheMonth,
-            badge, value, inactive,
-          ),
-        )
-      }
-    },
-  )
-
-  private fun createBar(
-    dayOfTheYear: Int,
-    badge: Int = 100,
-    value: Float = 0.5f,
-    inactive: Boolean = false,
-  ) = BpkBarChart.Column(
-    title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
-    subtitle = (dayOfTheYear % 30 + 1).toString(),
-    badge = "£$badge",
-    value = value,
-    inactive = inactive,
-  )
+    private fun createBar(
+        dayOfTheYear: Int,
+        badge: Int = 100,
+        value: Float = 0.5f,
+        inactive: Boolean = false,
+    ) = BpkBarChart.Column(
+        title = arrayOf("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")[dayOfTheYear % 7],
+        subtitle = (dayOfTheYear % 30 + 1).toString(),
+        badge = "£$badge",
+        value = value,
+        inactive = inactive,
+    )
 }

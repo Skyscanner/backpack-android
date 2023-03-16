@@ -25,34 +25,34 @@ import net.skyscanner.backpack.compose.swipeable.SwipeableState
 @Stable
 interface BpkSwipeableState<T> {
 
-  val currentValue: T
+    val currentValue: T
 
-  val isAnimationRunning: Boolean
+    val isAnimationRunning: Boolean
 
-  val targetValue: T
+    val targetValue: T
 
-  suspend fun snapTo(targetValue: T)
+    suspend fun snapTo(targetValue: T)
 
-  suspend fun animateTo(targetValue: T)
+    suspend fun animateTo(targetValue: T)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun <T> BpkSwipeableState(
-  wrapped: SwipeableState<T>,
+    wrapped: SwipeableState<T>,
 ): BpkSwipeableState<T> = object : BpkSwipeableState<T> {
 
-  override val currentValue: T
-    get() = wrapped.currentValue
+    override val currentValue: T
+        get() = wrapped.currentValue
 
-  override val isAnimationRunning: Boolean
-    get() = wrapped.isAnimationRunning
+    override val isAnimationRunning: Boolean
+        get() = wrapped.isAnimationRunning
 
-  override val targetValue: T
-    get() = wrapped.targetValue
+    override val targetValue: T
+        get() = wrapped.targetValue
 
-  override suspend fun animateTo(targetValue: T) =
-    wrapped.animateTo(targetValue)
+    override suspend fun animateTo(targetValue: T) =
+        wrapped.animateTo(targetValue)
 
-  override suspend fun snapTo(targetValue: T) =
-    wrapped.snapTo(targetValue)
+    override suspend fun snapTo(targetValue: T) =
+        wrapped.snapTo(targetValue)
 }

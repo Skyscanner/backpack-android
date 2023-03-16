@@ -40,36 +40,36 @@ import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 @CalendarComponent
 @ViewStory("Default", StoryKind.DemoOnly)
 fun DefaultCalendarStory(modifier: Modifier = Modifier) {
-  val automationMode = LocalAutomationMode.current
-  AndroidLayout(R.layout.fragment_calendar_default, modifier.fillMaxSize()) {
-    val calendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
-    initSelectionTypeSwitcher(this, automationMode, calendar::setController)
-  }
+    val automationMode = LocalAutomationMode.current
+    AndroidLayout(R.layout.fragment_calendar_default, modifier.fillMaxSize()) {
+        val calendar = findViewById<BpkCalendar>(R.id.bpkCalendar)
+        initSelectionTypeSwitcher(this, automationMode, calendar::setController)
+    }
 }
 
 private fun initSelectionTypeSwitcher(
-  view: View,
-  automationMode: Boolean,
-  onControllerChange: (ExampleBpkCalendarController) -> Unit,
+    view: View,
+    automationMode: Boolean,
+    onControllerChange: (ExampleBpkCalendarController) -> Unit,
 ) {
-  val single = view.findViewById<RadioButton>(R.id.single)
-  val range = view.findViewById<RadioButton>(R.id.range)
-  val selectionType = view.findViewById<RadioGroup>(R.id.selection_type)
+    val single = view.findViewById<RadioButton>(R.id.single)
+    val range = view.findViewById<RadioButton>(R.id.range)
+    val selectionType = view.findViewById<RadioGroup>(R.id.selection_type)
 
-  single.text = view.context.getString(R.string.calendar_single)
-  range.text = view.context.getString(R.string.calendar_range)
+    single.text = view.context.getString(R.string.calendar_single)
+    range.text = view.context.getString(R.string.calendar_range)
 
-  selectionType.visibility = View.VISIBLE
+    selectionType.visibility = View.VISIBLE
 
-  selectionType.setOnCheckedChangeListener { _, checkedId ->
-    val controller = when (checkedId) {
-      R.id.single -> ExampleBpkCalendarController(view.context, SelectionType.SINGLE, automationMode = automationMode)
-      R.id.range -> ExampleBpkCalendarController(view.context, SelectionType.RANGE, automationMode = automationMode)
-      else -> throw IllegalStateException("Unknown selection type")
+    selectionType.setOnCheckedChangeListener { _, checkedId ->
+        val controller = when (checkedId) {
+            R.id.single -> ExampleBpkCalendarController(view.context, SelectionType.SINGLE, automationMode = automationMode)
+            R.id.range -> ExampleBpkCalendarController(view.context, SelectionType.RANGE, automationMode = automationMode)
+            else -> throw IllegalStateException("Unknown selection type")
+        }
+        onControllerChange(controller)
     }
-    onControllerChange(controller)
-  }
 
-  // this invokes the listener and does the initial assignment
-  range.isChecked = true
+    // this invokes the listener and does the initial assignment
+    range.isChecked = true
 }

@@ -48,48 +48,48 @@ import org.junit.Rule
 
 open class BpkSnapshotTest(private val tags: List<Any> = emptyList()) : ScreenshotTest {
 
-  private val variant = BpkTestVariant.current
-  var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
+    private val variant = BpkTestVariant.current
+    var testContext = variant.newContext(InstrumentationRegistry.getInstrumentation().targetContext)
 
-  @get:Rule
-  val composeTestRule = createEmptyComposeRule()
+    @get:Rule
+    val composeTestRule = createEmptyComposeRule()
 
-  protected fun snap(
-    background: @Composable () -> Color = { Color.Unspecified },
-    width: Dp = Dp.Unspecified,
-    height: Dp = Dp.Unspecified,
-    padding: Dp = BpkSpacing.Md,
-    vararg providers: ProvidedValue<*>,
-    assertion: ComposeTestRule.() -> Unit = {},
-    content: @Composable () -> Unit,
-  ) {
-    val scenario = launchActivity<AppCompatActivity>()
-    scenario.onActivity { activity ->
-      activity.setContent {
-        @Suppress("DEPRECATION")
-        activity.window.clearFlags(
-          FLAG_TRANSLUCENT_STATUS or
-            SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-            SYSTEM_UI_FLAG_LAYOUT_STABLE,
-        )
-        BackpackDemoTheme {
-          CompositionLocalProvider(*providers) {
-            Box(
-              Modifier
-                .size(width, height)
-                .background(background().takeOrElse { BpkTheme.colors.canvas })
-                .padding(padding),
-            ) {
-              content()
+    protected fun snap(
+        background: @Composable () -> Color = { Color.Unspecified },
+        width: Dp = Dp.Unspecified,
+        height: Dp = Dp.Unspecified,
+        padding: Dp = BpkSpacing.Md,
+        vararg providers: ProvidedValue<*>,
+        assertion: ComposeTestRule.() -> Unit = {},
+        content: @Composable () -> Unit,
+    ) {
+        val scenario = launchActivity<AppCompatActivity>()
+        scenario.onActivity { activity ->
+            activity.setContent {
+                @Suppress("DEPRECATION")
+                activity.window.clearFlags(
+                    FLAG_TRANSLUCENT_STATUS or
+                        SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                        SYSTEM_UI_FLAG_LAYOUT_STABLE,
+                )
+                BackpackDemoTheme {
+                    CompositionLocalProvider(*providers) {
+                        Box(
+                            Modifier
+                                .size(width, height)
+                                .background(background().takeOrElse { BpkTheme.colors.canvas })
+                                .padding(padding),
+                        ) {
+                            content()
+                        }
+                    }
+                }
             }
-          }
         }
-      }
+        composeTestRule.assertion()
+
+        compareScreenshot(composeTestRule, screenshotName(tags))
+
+        scenario.close()
     }
-    composeTestRule.assertion()
-
-    compareScreenshot(composeTestRule, screenshotName(tags))
-
-    scenario.close()
-  }
 }

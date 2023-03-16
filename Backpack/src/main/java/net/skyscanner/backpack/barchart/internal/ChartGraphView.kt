@@ -32,67 +32,67 @@ import net.skyscanner.backpack.util.Consumer
 
 @SuppressLint("ViewConstructor")
 internal class ChartGraphView constructor(
-  context: Context,
-  colors: BpkBarChart.Colors,
-  onClick: Consumer<BpkBarChart.Column>,
+    context: Context,
+    colors: BpkBarChart.Colors,
+    onClick: Consumer<BpkBarChart.Column>,
 ) : FrameLayout(context), Consumer<List<BpkBarChart.Group>?> {
 
-  private val onClickWrapper = { holder: ChartBarHolder ->
-    onClick(holder.model!!)
-    lineDecoration(holder)
-    recyclerView.invalidateItemDecorations()
-  }
+    private val onClickWrapper = { holder: ChartBarHolder ->
+        onClick(holder.model!!)
+        lineDecoration(holder)
+        recyclerView.invalidateItemDecorations()
+    }
 
-  private val titleHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
-  private val titleSpacing = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
-    resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
+    private val titleHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingXl)
+    private val titleSpacing = resources.getDimensionPixelSize(R.dimen.bpkSpacingMd) +
+        resources.getDimensionPixelSize(R.dimen.bpkSpacingSm)
 
-  private val title = BpkText(context).also {
-    it.setTextColor(colors.groupTitle)
-    it.textStyle = BpkText.TextStyle.Heading4
-    it.gravity = Gravity.START or Gravity.CENTER_VERTICAL
-    addView(it, LayoutParams(LayoutParams.WRAP_CONTENT, titleHeight))
-  }
+    private val title = BpkText(context).also {
+        it.setTextColor(colors.groupTitle)
+        it.textStyle = BpkText.TextStyle.Heading4
+        it.gravity = Gravity.START or Gravity.CENTER_VERTICAL
+        addView(it, LayoutParams(LayoutParams.WRAP_CONTENT, titleHeight))
+    }
 
-  private val recyclerView: RecyclerView = RecyclerView(context).also {
-    it.clipToPadding = false
-    it.clipChildren = false
-    it.setPadding(0, titleHeight + titleSpacing, 0, 0)
-    it.addOnScrollListener(
-      object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-          val position = layoutManager.findFirstVisibleItemPosition()
-          val group = model.getGroup(position)
-          if (title.text != group.title) {
-            title.text = group.title
-          }
-        }
-      },
-    )
-    it.addItemDecoration(ChartPopupDecoration(context, colors))
-    addView(it, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
-  }
+    private val recyclerView: RecyclerView = RecyclerView(context).also {
+        it.clipToPadding = false
+        it.clipChildren = false
+        it.setPadding(0, titleHeight + titleSpacing, 0, 0)
+        it.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    val position = layoutManager.findFirstVisibleItemPosition()
+                    val group = model.getGroup(position)
+                    if (title.text != group.title) {
+                        title.text = group.title
+                    }
+                }
+            },
+        )
+        it.addItemDecoration(ChartPopupDecoration(context, colors))
+        addView(it, LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
+    }
 
-  private val layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false).also {
-    recyclerView.layoutManager = it
-  }
+    private val layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false).also {
+        recyclerView.layoutManager = it
+    }
 
-  private val lineDecoration = ChartLineDecoration(resources, colors).also {
-    recyclerView.addItemDecoration(it)
-  }
+    private val lineDecoration = ChartLineDecoration(resources, colors).also {
+        recyclerView.addItemDecoration(it)
+    }
 
-  private val popupDecoration = ChartPopupDecoration(context, colors).also {
-    recyclerView.addItemDecoration(it)
-  }
+    private val popupDecoration = ChartPopupDecoration(context, colors).also {
+        recyclerView.addItemDecoration(it)
+    }
 
-  private val adapter = ChartAdapter(colors, onClickWrapper).also {
-    recyclerView.adapter = it
-  }
+    private val adapter = ChartAdapter(colors, onClickWrapper).also {
+        recyclerView.adapter = it
+    }
 
-  private var model: ChartData = ChartData()
+    private var model: ChartData = ChartData()
 
-  override fun invoke(groups: List<BpkBarChart.Group>?) {
-    this.model = ChartData(groups)
-    adapter.invoke(model)
-  }
+    override fun invoke(groups: List<BpkBarChart.Group>?) {
+        this.model = ChartData(groups)
+        adapter.invoke(model)
+    }
 }

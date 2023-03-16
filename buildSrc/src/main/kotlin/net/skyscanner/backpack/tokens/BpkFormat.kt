@@ -22,29 +22,29 @@ import java.io.File
 
 sealed class BpkFormat<T> : (File) -> T {
 
-  object Json : BpkFormat<Map<String, Any>>() {
-    override fun invoke(file: File): Map<String, Any> {
-      val content = file.readText()
-      val map = Gson().fromJson(content, Map::class.java)
-      return map.toStringKeyMap()
+    object Json : BpkFormat<Map<String, Any>>() {
+        override fun invoke(file: File): Map<String, Any> {
+            val content = file.readText()
+            val map = Gson().fromJson(content, Map::class.java)
+            return map.toStringKeyMap()
+        }
     }
-  }
 
-  object Folder : BpkFormat<List<File>>() {
+    object Folder : BpkFormat<List<File>>() {
 
-    override fun invoke(file: File): List<File> =
-      file.listFiles()?.toList().orEmpty()
-  }
+        override fun invoke(file: File): List<File> =
+            file.listFiles()?.toList().orEmpty()
+    }
 }
 
 private fun Map<*, *>.toStringKeyMap(): Map<String, Any> {
-  val result = mutableMapOf<String, Any>()
-  for ((key, value) in entries) {
-    if (value is Map<*, *>) {
-      result[key.toString()] = value.toStringKeyMap()
-    } else if (value != null) {
-      result[key.toString()] = value.toString()
+    val result = mutableMapOf<String, Any>()
+    for ((key, value) in entries) {
+        if (value is Map<*, *>) {
+            result[key.toString()] = value.toStringKeyMap()
+        } else if (value != null) {
+            result[key.toString()] = value.toString()
+        }
     }
-  }
-  return result
+    return result
 }

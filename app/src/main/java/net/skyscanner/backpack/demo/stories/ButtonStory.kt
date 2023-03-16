@@ -42,81 +42,81 @@ import kotlin.time.Duration.Companion.seconds
 @ButtonComponent
 @ViewStory("Standard")
 fun LoadingButtonStoryStandard(modifier: Modifier = Modifier) =
-  LoadingButtonDemo(R.layout.fragment_button_standard, modifier)
+    LoadingButtonDemo(R.layout.fragment_button_standard, modifier)
 
 @Composable
 @ButtonComponent
 @ViewStory("Large")
 fun LoadingButtonStoryLarge(modifier: Modifier = Modifier) =
-  LoadingButtonDemo(R.layout.fragment_button_large, modifier)
+    LoadingButtonDemo(R.layout.fragment_button_large, modifier)
 
 @Composable
 @ButtonComponent
 @ViewStory("Link")
 fun LoadingButtonStoryLink(modifier: Modifier = Modifier) =
-  LoadingButtonDemo(R.layout.fragment_button_link, modifier)
+    LoadingButtonDemo(R.layout.fragment_button_link, modifier)
 
 @Composable
 @ButtonComponent
 @ViewStory("Changeable", StoryKind.DemoOnly)
 fun ChangeableButtonsStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_buttons_changeable, modifier.fillMaxSize()) {
+    AndroidLayout(R.layout.fragment_buttons_changeable, modifier.fillMaxSize()) {
 
-    findViewById<TextView>(R.id.button_increase).setOnClickListener {
-      it as TextView
-      it.text = context.getString(R.string.button_increased, it.text.toString())
-    }
+        findViewById<TextView>(R.id.button_increase).setOnClickListener {
+            it as TextView
+            it.text = context.getString(R.string.button_increased, it.text.toString())
+        }
 
-    findViewById<TextView>(R.id.button_decrease).setOnClickListener {
-      it as TextView
-      it.text = it.text.substring(0, max(0, it.length() - 1))
+        findViewById<TextView>(R.id.button_decrease).setOnClickListener {
+            it as TextView
+            it.text = it.text.substring(0, max(0, it.length() - 1))
+        }
     }
-  }
 
 @Composable
 @ButtonComponent
 @ViewStory("Styleable", StoryKind.DemoOnly)
 fun StyleableButtonStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_buttons_styleable, modifier.fillMaxSize()) {
-    findViewById<View>(R.id.primary).setOnClickListener { setButtonType(this, BpkButton.Type.Primary) }
-    findViewById<View>(R.id.secondary).setOnClickListener { setButtonType(this, BpkButton.Type.Secondary) }
-    findViewById<View>(R.id.destructive).setOnClickListener { setButtonType(this, BpkButton.Type.Destructive) }
-    findViewById<View>(R.id.featured).setOnClickListener { setButtonType(this, BpkButton.Type.Featured) }
-    findViewById<View>(R.id.primaryOnDark).setOnClickListener { setButtonType(this, BpkButton.Type.PrimaryOnDark) }
-    findViewById<View>(R.id.primaryOnLight).setOnClickListener { setButtonType(this, BpkButton.Type.PrimaryOnLight) }
-  }
+    AndroidLayout(R.layout.fragment_buttons_styleable, modifier.fillMaxSize()) {
+        findViewById<View>(R.id.primary).setOnClickListener { setButtonType(this, BpkButton.Type.Primary) }
+        findViewById<View>(R.id.secondary).setOnClickListener { setButtonType(this, BpkButton.Type.Secondary) }
+        findViewById<View>(R.id.destructive).setOnClickListener { setButtonType(this, BpkButton.Type.Destructive) }
+        findViewById<View>(R.id.featured).setOnClickListener { setButtonType(this, BpkButton.Type.Featured) }
+        findViewById<View>(R.id.primaryOnDark).setOnClickListener { setButtonType(this, BpkButton.Type.PrimaryOnDark) }
+        findViewById<View>(R.id.primaryOnLight).setOnClickListener { setButtonType(this, BpkButton.Type.PrimaryOnLight) }
+    }
 
 @Composable
 private fun LoadingButtonDemo(
-  @LayoutRes layoutId: Int,
-  modifier: Modifier = Modifier,
+    @LayoutRes layoutId: Int,
+    modifier: Modifier = Modifier,
 ) {
-  val scope = rememberCoroutineScope()
-  AndroidLayout(layoutId, modifier.fillMaxSize()) {
-    makeButtonsLoadeable(this as ViewGroup, scope)
-  }
+    val scope = rememberCoroutineScope()
+    AndroidLayout(layoutId, modifier.fillMaxSize()) {
+        makeButtonsLoadeable(this as ViewGroup, scope)
+    }
 }
 
 private fun makeButtonsLoadeable(parent: ViewGroup, scope: CoroutineScope) {
-  for (i in 0 until parent.childCount) {
-    val child = parent.getChildAt(i)
-    when (child) {
-      is ViewGroup -> makeButtonsLoadeable(child, scope)
-      is BpkButton -> child.setOnClickListener {
-        scope.launch {
-          child.loading = true
-          delay(2.5.seconds)
-          child.loading = false
+    for (i in 0 until parent.childCount) {
+        val child = parent.getChildAt(i)
+        when (child) {
+            is ViewGroup -> makeButtonsLoadeable(child, scope)
+            is BpkButton -> child.setOnClickListener {
+                scope.launch {
+                    child.loading = true
+                    delay(2.5.seconds)
+                    child.loading = false
+                }
+            }
         }
-      }
     }
-  }
 }
 
 private fun setButtonType(view: View, type: BpkButton.Type) {
-  view.findViewById<ViewGroup>(R.id.buttonsContainer).run {
-    for (i in 0 until childCount) {
-      (getChildAt(i) as? BpkButton?)?.type = type
+    view.findViewById<ViewGroup>(R.id.buttonsContainer).run {
+        for (i in 0 until childCount) {
+            (getChildAt(i) as? BpkButton?)?.type = type
+        }
     }
-  }
 }

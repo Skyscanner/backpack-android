@@ -40,45 +40,45 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal inline fun CardContent(
-  padding: BpkCardPadding,
-  contentAlignment: Alignment,
-  content: @Composable BoxScope.() -> Unit,
+    padding: BpkCardPadding,
+    contentAlignment: Alignment,
+    content: @Composable BoxScope.() -> Unit,
 ) {
-  Box(
-    modifier = Modifier.padding(
-      all = when (padding) {
-        BpkCardPadding.None -> 0.dp
-        BpkCardPadding.Small -> BpkSpacing.Base
-      },
-    ),
-    contentAlignment = contentAlignment,
-    content = content,
-  )
+    Box(
+        modifier = Modifier.padding(
+            all = when (padding) {
+                BpkCardPadding.None -> 0.dp
+                BpkCardPadding.Small -> BpkSpacing.Base
+            },
+        ),
+        contentAlignment = contentAlignment,
+        content = content,
+    )
 }
 
 @Composable
 internal fun cardBackgroundColor(elevation: BpkCardElevation): Color =
-  animateColorAsState(
-    when (elevation) {
-      BpkCardElevation.Focus -> BpkTheme.colors.surfaceElevated
-      BpkCardElevation.None, BpkCardElevation.Default -> BpkTheme.colors.surfaceDefault
-    },
-  ).value
+    animateColorAsState(
+        when (elevation) {
+            BpkCardElevation.Focus -> BpkTheme.colors.surfaceElevated
+            BpkCardElevation.None, BpkCardElevation.Default -> BpkTheme.colors.surfaceDefault
+        },
+    ).value
 
 @Composable
 internal fun cardElevation(elevation: BpkCardElevation): Dp =
-  animateDpAsState(
-    when (elevation) {
-      BpkCardElevation.None -> 0.dp
-      BpkCardElevation.Focus -> BpkElevation.Xl
-      BpkCardElevation.Default -> BpkElevation.Sm
-    },
-  ).value
+    animateDpAsState(
+        when (elevation) {
+            BpkCardElevation.None -> 0.dp
+            BpkCardElevation.Focus -> BpkElevation.Xl
+            BpkCardElevation.Default -> BpkElevation.Sm
+        },
+    ).value
 
 internal fun cardShape(corner: BpkCardCorner) =
-  RoundedCornerShape(
-    size = when (corner) {
-      BpkCardCorner.Small -> BpkBorderRadius.Md
-      BpkCardCorner.Large -> BpkBorderRadius.Lg
-    },
-  )
+    RoundedCornerShape(
+        size = when (corner) {
+            BpkCardCorner.Small -> BpkBorderRadius.Md
+            BpkCardCorner.Large -> BpkBorderRadius.Lg
+        },
+    )

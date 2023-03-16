@@ -24,33 +24,33 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.button.BpkButton
 
 internal fun BpkButton.Type.Companion.fromAttrs(context: Context, attrs: AttributeSet?): BpkButton.Type {
-  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
-  return fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
+    val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkButton, 0, 0)
+    return fromId(attr.getInt(R.styleable.BpkButton_buttonType, 0))
 }
 
 internal fun BpkButton.Type.Companion.fromId(id: Int): BpkButton.Type =
-  when (id) {
-    0 -> BpkButton.Type.Primary
-    1 -> BpkButton.Type.Secondary
-    2 -> BpkButton.Type.Featured
-    3 -> BpkButton.Type.Destructive
-    4 -> BpkButton.Type.PrimaryOnDark
-    5 -> BpkButton.Type.PrimaryOnLight
-    6 -> BpkButton.Type.SecondaryOnDark
-    7 -> BpkButton.Type.Link
-    8 -> BpkButton.Type.LinkOnDark
-    else -> throw IllegalArgumentException()
-  }
+    when (id) {
+        0 -> BpkButton.Type.Primary
+        1 -> BpkButton.Type.Secondary
+        2 -> BpkButton.Type.Featured
+        3 -> BpkButton.Type.Destructive
+        4 -> BpkButton.Type.PrimaryOnDark
+        5 -> BpkButton.Type.PrimaryOnLight
+        6 -> BpkButton.Type.SecondaryOnDark
+        7 -> BpkButton.Type.Link
+        8 -> BpkButton.Type.LinkOnDark
+        else -> throw IllegalArgumentException()
+    }
 
 internal fun BpkButton.Type.createStyle(context: Context): ButtonStyle =
-  when (this) {
-    BpkButton.Type.Primary -> ButtonStyles.Primary(context)
-    BpkButton.Type.Secondary -> ButtonStyles.Secondary(context)
-    BpkButton.Type.Featured -> ButtonStyles.Featured(context)
-    BpkButton.Type.Destructive -> ButtonStyles.Destructive(context)
-    BpkButton.Type.PrimaryOnDark -> ButtonStyles.PrimaryOnDark(context)
-    BpkButton.Type.PrimaryOnLight -> ButtonStyles.PrimaryOnLight(context)
-    BpkButton.Type.SecondaryOnDark -> ButtonStyles.SecondaryOnDark(context)
-    BpkButton.Type.Link -> ButtonStyles.Link(context)
-    BpkButton.Type.LinkOnDark -> ButtonStyles.LinkOnDark(context)
-  }
+    when (this) {
+        BpkButton.Type.Primary -> ButtonStyles.Primary(context)
+        BpkButton.Type.Secondary -> ButtonStyles.Secondary(context)
+        BpkButton.Type.Featured -> ButtonStyles.Featured(context)
+        BpkButton.Type.Destructive -> ButtonStyles.Destructive(context)
+        BpkButton.Type.PrimaryOnDark -> ButtonStyles.PrimaryOnDark(context)
+        BpkButton.Type.PrimaryOnLight -> ButtonStyles.PrimaryOnLight(context)
+        BpkButton.Type.SecondaryOnDark -> ButtonStyles.SecondaryOnDark(context)
+        BpkButton.Type.Link -> ButtonStyles.Link(context)
+        BpkButton.Type.LinkOnDark -> ButtonStyles.LinkOnDark(context)
+    }

@@ -56,113 +56,113 @@ import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
 internal fun BpkButtonImpl(
-  onClick: () -> Unit,
-  modifier: Modifier = Modifier,
-  size: BpkButtonSize = BpkButtonSize.Default,
-  type: BpkButtonType = BpkButtonType.Primary,
-  enabled: Boolean = true,
-  loading: Boolean = false,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  content: @Composable RowScope.() -> Unit,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    size: BpkButtonSize = BpkButtonSize.Default,
+    type: BpkButtonType = BpkButtonType.Primary,
+    enabled: Boolean = true,
+    loading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.() -> Unit,
 ) {
-  CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(type.rippleColor())) {
-    Button(
-      onClick = onClick,
-      enabled = enabled && !loading,
-      modifier = modifier
-        .defaultMinSize(BpkSpacing.Sm, size.minHeight)
-        .requiredHeight(size.minHeight),
-      interactionSource = interactionSource,
-      colors = ButtonDefaults.buttonColors(
-        containerColor = type.backgroundColor(interactionSource),
-        contentColor = type.contentColor(interactionSource),
-        disabledContainerColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
-        disabledContentColor = if (loading) type.loadingContentColor() else type.disabledContentColor(),
-      ),
-      shape = ButtonShape,
-      contentPadding = type.contentPadding,
-      elevation = null,
-      content = {
-        CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
-          Box {
-            Row(
-              modifier = Modifier.hideContentIf(loading),
-              horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
-              verticalAlignment = Alignment.CenterVertically,
-              content = content,
-            )
+    CompositionLocalProvider(LocalRippleTheme provides ButtonRippleTheme(type.rippleColor())) {
+        Button(
+            onClick = onClick,
+            enabled = enabled && !loading,
+            modifier = modifier
+                .defaultMinSize(BpkSpacing.Sm, size.minHeight)
+                .requiredHeight(size.minHeight),
+            interactionSource = interactionSource,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = type.backgroundColor(interactionSource),
+                contentColor = type.contentColor(interactionSource),
+                disabledContainerColor = if (loading) type.loadingBackgroundColor() else type.disabledBackgroundColor(),
+                disabledContentColor = if (loading) type.loadingContentColor() else type.disabledContentColor(),
+            ),
+            shape = ButtonShape,
+            contentPadding = type.contentPadding,
+            elevation = null,
+            content = {
+                CompositionLocalProvider(LocalTextStyle provides size.textStyle()) {
+                    Box {
+                        Row(
+                            modifier = Modifier.hideContentIf(loading),
+                            horizontalArrangement = Arrangement.spacedBy(size.horizontalSpacing),
+                            verticalAlignment = Alignment.CenterVertically,
+                            content = content,
+                        )
 
-            if (loading) {
-              BpkSpinner(
-                modifier = Modifier.align(Alignment.Center),
-                color = LocalContentColor.current,
-                size = when (size) {
-                  BpkButtonSize.Default -> BpkSpinnerSize.Small
-                  BpkButtonSize.Large -> BpkSpinnerSize.Large
-                },
-              )
-            }
-          }
-        }
-      },
-    )
-  }
+                        if (loading) {
+                            BpkSpinner(
+                                modifier = Modifier.align(Alignment.Center),
+                                color = LocalContentColor.current,
+                                size = when (size) {
+                                    BpkButtonSize.Default -> BpkSpinnerSize.Small
+                                    BpkButtonSize.Large -> BpkSpinnerSize.Large
+                                },
+                            )
+                        }
+                    }
+                }
+            },
+        )
+    }
 }
 
 @Composable
 internal fun ButtonIcon(
-  icon: BpkIcon,
-  contentDescription: String?,
-  size: BpkButtonSize,
-  modifier: Modifier = Modifier,
+    icon: BpkIcon,
+    contentDescription: String?,
+    size: BpkButtonSize,
+    modifier: Modifier = Modifier,
 ) {
-  BpkIcon(icon, contentDescription, size = size.iconSize, modifier = modifier)
+    BpkIcon(icon, contentDescription, size = size.iconSize, modifier = modifier)
 }
 
 @Composable
 internal fun ButtonText(text: String, modifier: Modifier = Modifier) {
-  BpkText(
-    text = text,
-    modifier = modifier,
-    maxLines = 1,
-    overflow = TextOverflow.Ellipsis,
-  )
+    BpkText(
+        text = text,
+        modifier = modifier,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+    )
 }
 
 @Composable
 internal fun ButtonDrawable(
-  icon: Painter,
-  contentDescription: String?,
-  size: BpkButtonSize,
-  modifier: Modifier = Modifier,
+    icon: Painter,
+    contentDescription: String?,
+    size: BpkButtonSize,
+    modifier: Modifier = Modifier,
 ) {
-  size.iconSize
-  Image(
-    painter = icon,
-    contentDescription = contentDescription,
-    modifier = modifier.defaultIconSize(size.iconSize),
-  )
+    size.iconSize
+    Image(
+        painter = icon,
+        contentDescription = contentDescription,
+        modifier = modifier.defaultIconSize(size.iconSize),
+    )
 }
 
 private class ButtonRippleTheme(
-  private val color: Color = Color.Black,
+    private val color: Color = Color.Black,
 ) : RippleTheme {
 
-  private val alpha = RippleAlpha(color.alpha, color.alpha, color.alpha, color.alpha)
+    private val alpha = RippleAlpha(color.alpha, color.alpha, color.alpha, color.alpha)
 
-  @Composable
-  override fun defaultColor(): Color =
-    color
+    @Composable
+    override fun defaultColor(): Color =
+        color
 
-  @Composable
-  override fun rippleAlpha(): RippleAlpha =
-    alpha
+    @Composable
+    override fun rippleAlpha(): RippleAlpha =
+        alpha
 }
 
 private val ButtonShape = RoundedCornerShape(BpkBorderRadius.Sm)
 
 private fun Modifier.defaultIconSize(size: BpkIconSize): Modifier =
-  when (size) {
-    BpkIconSize.Small -> requiredSize(BpkSpacing.Base, BpkSpacing.Base)
-    BpkIconSize.Large -> requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
-  }
+    when (size) {
+        BpkIconSize.Small -> requiredSize(BpkSpacing.Base, BpkSpacing.Base)
+        BpkIconSize.Large -> requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
+    }

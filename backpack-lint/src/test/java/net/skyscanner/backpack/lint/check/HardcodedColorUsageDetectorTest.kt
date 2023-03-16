@@ -25,68 +25,68 @@ import org.junit.Test
 @Suppress("UnstableApiUsage")
 class HardcodedColorUsageDetectorTest {
 
-  @Test
-  fun `clean when layout is using color attribute`() {
-    val layout = xml(
-      "layout/color_layout.xml",
-      """<?xml version="1.0" encoding="utf-8"?>
+    @Test
+    fun `clean when layout is using color attribute`() {
+        val layout = xml(
+            "layout/color_layout.xml",
+            """<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:background="?colorPrimary"
   android:layout_width="match_parent"
   android:layout_height="match_parent" />""",
-    )
-      .indented()
-      .within("res")
-    lint().files(layout)
-      .allowMissingSdk()
-      .issues(HardcodedColorUsageDetector.ISSUE)
-      .run()
-      .expectClean()
-  }
+        )
+            .indented()
+            .within("res")
+        lint().files(layout)
+            .allowMissingSdk()
+            .issues(HardcodedColorUsageDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
 
-  @Test
-  fun `clean when layout is using color resource`() {
-    val layout = xml(
-      "layout/color_layout.xml",
-      """<?xml version="1.0" encoding="utf-8"?>
+    @Test
+    fun `clean when layout is using color resource`() {
+        val layout = xml(
+            "layout/color_layout.xml",
+            """<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:background="@color/bpk_black"
   android:layout_width="match_parent"
   android:layout_height="match_parent" />""",
-    )
-      .indented()
-      .within("res")
-    lint().files(layout)
-      .allowMissingSdk()
-      .issues(HardcodedColorUsageDetector.ISSUE)
-      .run()
-      .expectClean()
-  }
+        )
+            .indented()
+            .within("res")
+        lint().files(layout)
+            .allowMissingSdk()
+            .issues(HardcodedColorUsageDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
 
-  @Test
-  fun `warning when layout has a hardcoded color`() {
-    val expected =
-      """res/layout/color_layout.xml:3: Warning: Avoid using hardcoded colors. This may cause issues with theming and dark mode. [HardcodedColorUsage]
+    @Test
+    fun `warning when layout has a hardcoded color`() {
+        val expected =
+            """res/layout/color_layout.xml:3: Warning: Avoid using hardcoded colors. This may cause issues with theming and dark mode. [HardcodedColorUsage]
   android:background="#fff"
                       ~~~~
 0 errors, 1 warnings"""
 
-    val layout = xml(
-      "layout/color_layout.xml",
-      """<?xml version="1.0" encoding="utf-8"?>
+        val layout = xml(
+            "layout/color_layout.xml",
+            """<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   android:background="#fff"
   android:layout_width="match_parent"
   android:layout_height="match_parent" />""",
-    )
-      .indented()
-      .within("res")
+        )
+            .indented()
+            .within("res")
 
-    lint().files(layout)
-      .allowMissingSdk()
-      .issues(HardcodedColorUsageDetector.ISSUE)
-      .run()
-      .expectWarningCount(1)
-      .expect(expected)
-  }
+        lint().files(layout)
+            .allowMissingSdk()
+            .issues(HardcodedColorUsageDetector.ISSUE)
+            .run()
+            .expectWarningCount(1)
+            .expect(expected)
+    }
 }

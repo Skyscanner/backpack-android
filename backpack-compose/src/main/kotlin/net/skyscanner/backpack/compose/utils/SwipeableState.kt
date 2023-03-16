@@ -40,74 +40,74 @@ import net.skyscanner.backpack.compose.swipeable.swipeable
 // https://github.com/androidx/androidx/blob/133b57f4ff1506abeda479a95c357b8e7bdca2d7/compose/material/material/src/commonMain/kotlin/androidx/compose/material/Swipeable.kt#L845
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun <T> Modifier.nestedScrollFixedSwipeable(
-  state: SwipeableState<T>,
-  anchors: Map<Float, T>,
-  orientation: Orientation,
-  enabled: Boolean = true,
-  reverseDirection: Boolean = false,
-  interactionSource: MutableInteractionSource? = null,
-  thresholds: (from: T, to: T) -> ThresholdConfig = { _, _ -> FixedThreshold(56.dp) },
-  resistance: ResistanceConfig? = SwipeableDefaults.resistanceConfig(anchors.keys),
-  velocityThreshold: Dp = SwipeableDefaults.VelocityThreshold,
+    state: SwipeableState<T>,
+    anchors: Map<Float, T>,
+    orientation: Orientation,
+    enabled: Boolean = true,
+    reverseDirection: Boolean = false,
+    interactionSource: MutableInteractionSource? = null,
+    thresholds: (from: T, to: T) -> ThresholdConfig = { _, _ -> FixedThreshold(56.dp) },
+    resistance: ResistanceConfig? = SwipeableDefaults.resistanceConfig(anchors.keys),
+    velocityThreshold: Dp = SwipeableDefaults.VelocityThreshold,
 ): Modifier = this
-  .nestedScroll(
-    connection = state.preUpPostDownNestedScrollConnection(anchors.keys.minOrNull() ?: Float.NEGATIVE_INFINITY),
-  )
-  .swipeable(
-    state = state,
-    anchors = anchors,
-    orientation = orientation,
-    enabled = enabled,
-    reverseDirection = reverseDirection,
-    interactionSource = interactionSource,
-    thresholds = thresholds,
-    resistance = resistance,
-    velocityThreshold = velocityThreshold,
-  )
+    .nestedScroll(
+        connection = state.preUpPostDownNestedScrollConnection(anchors.keys.minOrNull() ?: Float.NEGATIVE_INFINITY),
+    )
+    .swipeable(
+        state = state,
+        anchors = anchors,
+        orientation = orientation,
+        enabled = enabled,
+        reverseDirection = reverseDirection,
+        interactionSource = interactionSource,
+        thresholds = thresholds,
+        resistance = resistance,
+        velocityThreshold = velocityThreshold,
+    )
 
 @OptIn(ExperimentalMaterial3Api::class)
 private fun <T> SwipeableState<T>.preUpPostDownNestedScrollConnection(
-  minBound: Float,
+    minBound: Float,
 ): NestedScrollConnection =
-  object : NestedScrollConnection {
-    override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-      val delta = available.toFloat()
-      return if (delta < 0 && source == NestedScrollSource.Drag) {
-        performDrag(delta).toOffset()
-      } else {
-        Offset.Zero
-      }
+    object : NestedScrollConnection {
+        override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+            val delta = available.toFloat()
+            return if (delta < 0 && source == NestedScrollSource.Drag) {
+                performDrag(delta).toOffset()
+            } else {
+                Offset.Zero
+            }
+        }
+
+        override fun onPostScroll(
+            consumed: Offset,
+            available: Offset,
+            source: NestedScrollSource,
+        ): Offset {
+            return if (source == NestedScrollSource.Drag) {
+                performDrag(available.toFloat()).toOffset()
+            } else {
+                Offset.Zero
+            }
+        }
+
+        override suspend fun onPreFling(available: Velocity): Velocity {
+            val toFling = Offset(available.x, available.y).toFloat()
+            return if (toFling < 0 && offset.value > minBound) {
+                performFling(velocity = toFling)
+                // since we go to the anchor with tween settling, consume all for the best UX
+                available
+            } else {
+                Velocity.Zero
+            }
+        }
+
+        override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity {
+            performFling(velocity = Offset(available.x, available.y).toFloat())
+            return available
+        }
+
+        private fun Float.toOffset(): Offset = Offset(0f, this)
+
+        private fun Offset.toFloat(): Float = this.y
     }
-
-    override fun onPostScroll(
-      consumed: Offset,
-      available: Offset,
-      source: NestedScrollSource,
-    ): Offset {
-      return if (source == NestedScrollSource.Drag) {
-        performDrag(available.toFloat()).toOffset()
-      } else {
-        Offset.Zero
-      }
-    }
-
-    override suspend fun onPreFling(available: Velocity): Velocity {
-      val toFling = Offset(available.x, available.y).toFloat()
-      return if (toFling < 0 && offset.value > minBound) {
-        performFling(velocity = toFling)
-        // since we go to the anchor with tween settling, consume all for the best UX
-        available
-      } else {
-        Velocity.Zero
-      }
-    }
-
-    override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity {
-      performFling(velocity = Offset(available.x, available.y).toFloat())
-      return available
-    }
-
-    private fun Float.toOffset(): Offset = Offset(0f, this)
-
-    private fun Offset.toFloat(): Float = this.y
-  }

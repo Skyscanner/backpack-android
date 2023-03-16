@@ -27,31 +27,31 @@ import net.skyscanner.backpack.util.use
 internal typealias CalendarDaySelectionContentColor = (CalendarCell.Selection?) -> ColorStateList
 
 internal fun CalendarDaySelectionContentColor(
-  context: Context,
+    context: Context,
 ): CalendarDaySelectionContentColor {
 
-  val default: ColorStateList = context.getColorStateList(R.color.bpkTextPrimary)
-  val selected: ColorStateList
-  val range: ColorStateList
+    val default: ColorStateList = context.getColorStateList(R.color.bpkTextPrimary)
+    val selected: ColorStateList
+    val range: ColorStateList
 
-  context.obtainStyledAttributes(null, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0).use {
-    selected = it.getColorStateList(R.styleable.BpkCalendar_calendarDateSelectedTextColor)
-      ?: context.getColorStateList(R.color.bpkTextPrimaryInverse)
+    context.obtainStyledAttributes(null, R.styleable.BpkCalendar, R.attr.bpkCalendarStyle, 0).use {
+        selected = it.getColorStateList(R.styleable.BpkCalendar_calendarDateSelectedTextColor)
+            ?: context.getColorStateList(R.color.bpkTextPrimaryInverse)
 
-    range = it.getColorStateList(R.styleable.BpkCalendar_calendarRangeTextColor)
-      ?: context.getColorStateList(R.color.bpkTextPrimary)
-  }
-
-  return { selection ->
-    when (selection) {
-      CalendarCell.Selection.Single -> selected
-      CalendarCell.Selection.Double -> selected
-      CalendarCell.Selection.Start -> selected
-      CalendarCell.Selection.StartMonth -> range
-      CalendarCell.Selection.Middle -> range
-      CalendarCell.Selection.End -> selected
-      CalendarCell.Selection.EndMonth -> range
-      null -> default
+        range = it.getColorStateList(R.styleable.BpkCalendar_calendarRangeTextColor)
+            ?: context.getColorStateList(R.color.bpkTextPrimary)
     }
-  }
+
+    return { selection ->
+        when (selection) {
+            CalendarCell.Selection.Single -> selected
+            CalendarCell.Selection.Double -> selected
+            CalendarCell.Selection.Start -> selected
+            CalendarCell.Selection.StartMonth -> range
+            CalendarCell.Selection.Middle -> range
+            CalendarCell.Selection.End -> selected
+            CalendarCell.Selection.EndMonth -> range
+            null -> default
+        }
+    }
 }

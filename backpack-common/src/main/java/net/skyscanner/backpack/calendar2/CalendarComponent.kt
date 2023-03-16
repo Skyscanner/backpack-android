@@ -31,38 +31,38 @@ import kotlinx.coroutines.flow.StateFlow
 @Stable
 interface CalendarComponent {
 
-  /**
-   * The current state the calendar in.
-   */
-  val state: StateFlow<CalendarState>
+    /**
+     * The current state the calendar in.
+     */
+    val state: StateFlow<CalendarState>
 
-  /**
-   * The side effects the calendar emits.
-   */
-  val effects: SharedFlow<CalendarEffect>
+    /**
+     * The side effects the calendar emits.
+     */
+    val effects: SharedFlow<CalendarEffect>
 
-  /**
-   * Updates the params used to configure the calendar.
-   * Please note the changes won't apply immediately – the new state will be calculated in background thread.
-   */
-  fun setParams(value: CalendarParams)
+    /**
+     * Updates the params used to configure the calendar.
+     * Please note the changes won't apply immediately – the new state will be calculated in background thread.
+     */
+    fun setParams(value: CalendarParams)
 
-  /**
-   * Sets custom dates selection programmatically.
-   *
-   * [CalendarSelection] needs to meet to validity criteria, otherwise this method will have no effect.
-   *
-   * Validity criteria:
-   * – selection is within the [CalendarParams.range]
-   * – selection boundaries are not disabled dates
-   * – selection type corresponds to [CalendarParams.selectionMode]
-   *
-   * If [selection] is [CalendarSelection.Range]:
-   * - range has start date set
-   * – start date is lower than end date (if end date is present)
-   *
-   * Please note the changes won't apply immediately – the new state will be calculated in background thread.
-   */
+    /**
+     * Sets custom dates selection programmatically.
+     *
+     * [CalendarSelection] needs to meet to validity criteria, otherwise this method will have no effect.
+     *
+     * Validity criteria:
+     * – selection is within the [CalendarParams.range]
+     * – selection boundaries are not disabled dates
+     * – selection type corresponds to [CalendarParams.selectionMode]
+     *
+     * If [selection] is [CalendarSelection.Range]:
+     * - range has start date set
+     * – start date is lower than end date (if end date is present)
+     *
+     * Please note the changes won't apply immediately – the new state will be calculated in background thread.
+     */
 
-  fun setSelection(selection: CalendarSelection)
+    fun setSelection(selection: CalendarSelection)
 }

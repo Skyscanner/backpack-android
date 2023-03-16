@@ -34,74 +34,74 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 enum class BpkHorizontalNavSize {
-  Default,
-  Small,
+    Default,
+    Small,
 }
 
 data class BpkHorizontalNavTab(
-  val title: String,
-  val icon: BpkIcon? = null,
+    val title: String,
+    val icon: BpkIcon? = null,
 )
 
 @Composable
 fun BpkHorizontalNav(
-  tabs: List<BpkHorizontalNavTab>,
-  activeIndex: Int,
-  onChanged: (Int) -> Unit,
-  modifier: Modifier = Modifier,
-  size: BpkHorizontalNavSize = BpkHorizontalNavSize.Default,
+    tabs: List<BpkHorizontalNavTab>,
+    activeIndex: Int,
+    onChanged: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+    size: BpkHorizontalNavSize = BpkHorizontalNavSize.Default,
 ) {
-  TabRow(
-    contentColor = BpkTheme.colors.textLink,
-    containerColor = BpkTheme.colors.surfaceDefault,
-    selectedTabIndex = activeIndex,
-    divider = {
-      if (BpkTheme.colors.isLight) {
-        BpkDivider() // todo: check the divider
-      }
-    },
-    indicator = { tabPositions ->
-      TabRowDefaults.Indicator(
-        modifier = Modifier.tabIndicatorOffset(tabPositions[activeIndex]),
-        color = BpkTheme.colors.coreAccent,
-      )
-    },
-    modifier = modifier, // todo: limiting tabs height is no longer possible
+    TabRow(
+        contentColor = BpkTheme.colors.textLink,
+        containerColor = BpkTheme.colors.surfaceDefault,
+        selectedTabIndex = activeIndex,
+        divider = {
+            if (BpkTheme.colors.isLight) {
+                BpkDivider() // todo: check the divider
+            }
+        },
+        indicator = { tabPositions ->
+            TabRowDefaults.Indicator(
+                modifier = Modifier.tabIndicatorOffset(tabPositions[activeIndex]),
+                color = BpkTheme.colors.coreAccent,
+            )
+        },
+        modifier = modifier, // todo: limiting tabs height is no longer possible
 //    modifier = modifier.height(
 //      when (size) {
 //        BpkHorizontalNavSize.Default -> 48.dp
 //        BpkHorizontalNavSize.Small -> 36.dp
 //      },
 //    ),
-  ) {
-    tabs.forEachIndexed { index, tab ->
-      Tab(
-        selected = index == activeIndex,
-        onClick = { onChanged(index) },
-        selectedContentColor = BpkTheme.colors.textLink,
-        unselectedContentColor = BpkTheme.colors.textPrimary,
-        text = {
-          Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-          ) {
-            if (tab.icon != null) {
-              BpkIcon(
-                icon = tab.icon,
-                contentDescription = null,
-              )
-            }
+    ) {
+        tabs.forEachIndexed { index, tab ->
+            Tab(
+                selected = index == activeIndex,
+                onClick = { onChanged(index) },
+                selectedContentColor = BpkTheme.colors.textLink,
+                unselectedContentColor = BpkTheme.colors.textPrimary,
+                text = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+                    ) {
+                        if (tab.icon != null) {
+                            BpkIcon(
+                                icon = tab.icon,
+                                contentDescription = null,
+                            )
+                        }
 
-            BpkText(
-              text = tab.title,
-              style = when (size) {
-                BpkHorizontalNavSize.Default -> BpkTheme.typography.label1
-                BpkHorizontalNavSize.Small -> BpkTheme.typography.label2
-              },
+                        BpkText(
+                            text = tab.title,
+                            style = when (size) {
+                                BpkHorizontalNavSize.Default -> BpkTheme.typography.label1
+                                BpkHorizontalNavSize.Small -> BpkTheme.typography.label2
+                            },
+                        )
+                    }
+                },
             )
-          }
-        },
-      )
+        }
     }
-  }
 }

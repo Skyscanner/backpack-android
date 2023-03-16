@@ -32,61 +32,61 @@ import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarCellDayHolder(
-  parent: ViewGroup,
-  output: Consumer<CalendarInteraction>,
+    parent: ViewGroup,
+    output: Consumer<CalendarInteraction>,
 ) : ItemHolder<CalendarCell.Day>(parent, R.layout.view_bpk_calendar_day) {
 
-  private val day = findViewById<TextView>(R.id.bpk_calendar_cell_date)
-  private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label)
+    private val day = findViewById<TextView>(R.id.bpk_calendar_cell_date)
+    private val label = findViewById<TextView>(R.id.bpk_calendar_cell_label)
 
-  private val selectionBackground = CalendarDaySelectionBackground(context)
+    private val selectionBackground = CalendarDaySelectionBackground(context)
 
-  private val selectionContentColor = CalendarDaySelectionContentColor(context)
-  private val labelColor = CalendarDayLabelContentColor(context)
+    private val selectionContentColor = CalendarDaySelectionContentColor(context)
+    private val labelColor = CalendarDayLabelContentColor(context)
 
-  private val defaultTextColor = context.getColorStateList(R.color.bpkTextPrimary)
-  private val disabledTextColor = context.getColorStateList(R.color.bpkTextDisabled)
+    private val defaultTextColor = context.getColorStateList(R.color.bpkTextPrimary)
+    private val disabledTextColor = context.getColorStateList(R.color.bpkTextDisabled)
 
-  init {
-    view.setOnClickListener {
-      model?.let { CalendarInteraction.DateClicked(it) }?.let { day -> output.invoke(day) }
-    }
-  }
-
-  override fun bind(model: CalendarCell.Day) {
-    view.isEnabled = !model.inactive
-    view.isSelected = model.selection != null
-
-    day.text = model.text
-    label.text = model.info.label
-
-    when {
-      model.selection != null -> {
-        day.setTextColor(selectionContentColor(model.selection))
-        day.background = selectionBackground(model.selection)
-      }
-      model.inactive -> {
-        day.setTextColor(disabledTextColor)
-        day.background = null
-      }
-      else -> {
-        day.setTextColor(defaultTextColor)
-        day.background = null
-      }
+    init {
+        view.setOnClickListener {
+            model?.let { CalendarInteraction.DateClicked(it) }?.let { day -> output.invoke(day) }
+        }
     }
 
-    when {
-      model.inactive -> {
-        label.isVisible = false
-      }
-      model.info.style == CellStatusStyle.Label -> {
-        label.isVisible = !model.info.label.isNullOrEmpty()
-        label.setTextColor(labelColor(model.info.status))
-      }
-      else -> {
-        label.isVisible = !model.info.label.isNullOrEmpty()
-        label.setTextColor(labelColor(null))
-      }
+    override fun bind(model: CalendarCell.Day) {
+        view.isEnabled = !model.inactive
+        view.isSelected = model.selection != null
+
+        day.text = model.text
+        label.text = model.info.label
+
+        when {
+            model.selection != null -> {
+                day.setTextColor(selectionContentColor(model.selection))
+                day.background = selectionBackground(model.selection)
+            }
+            model.inactive -> {
+                day.setTextColor(disabledTextColor)
+                day.background = null
+            }
+            else -> {
+                day.setTextColor(defaultTextColor)
+                day.background = null
+            }
+        }
+
+        when {
+            model.inactive -> {
+                label.isVisible = false
+            }
+            model.info.style == CellStatusStyle.Label -> {
+                label.isVisible = !model.info.label.isNullOrEmpty()
+                label.setTextColor(labelColor(model.info.status))
+            }
+            else -> {
+                label.isVisible = !model.info.label.isNullOrEmpty()
+                label.setTextColor(labelColor(null))
+            }
+        }
     }
-  }
 }

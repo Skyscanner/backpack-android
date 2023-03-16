@@ -31,52 +31,52 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @CardComponent
 @ViewStory("Default")
 fun CardStoryDefault(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_card, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_card, modifier.fillMaxSize())
 
 @Composable
 @CardComponent
 @ViewStory("Without padding")
 fun CardStoryWithoutPadding(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_card_without_padding, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_card_without_padding, modifier.fillMaxSize())
 
 @Composable
 @CardComponent
 @ViewStory("Selected")
 fun CardStorySelected(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_card_selected, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_card_selected, modifier.fillMaxSize())
 
 @Composable
 @CardComponent
 @ViewStory("No elevation", StoryKind.DemoOnly)
 fun CardStoryNoElevation(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_card_no_elevation, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_card_no_elevation, modifier.fillMaxSize())
 
 @Composable
 @CardComponent
 @ViewStory("Corner style large")
 fun CardStoryCornerStyleLarge(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_card_cornerstyle_large, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_card_cornerstyle_large, modifier.fillMaxSize())
 
 @Composable
 @CardComponent
 @ViewStory("With divider")
 fun CardStoryWithDivider(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_card_with_divider, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_card_with_divider, modifier.fillMaxSize())
 
 @Composable
 @CardComponent
 @ViewStory("With divider arranged vertically")
 fun CardStoryWithDividerVertical(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_card_with_divider_vertical, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_card_with_divider_vertical, modifier.fillMaxSize())
 
 @Composable
 @CardComponent
 @ViewStory("With divider without padding")
 fun CardStoryWithDividerNoPadding(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_card_with_divider_no_padding, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_card_with_divider_no_padding, modifier.fillMaxSize())
 
 @Composable
 @CardComponent
 @ViewStory("With divider and corner style large")
 fun CardStoryWithDividerCornerStyleLarge(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_card_with_divider_cornerstyle_large, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_card_with_divider_cornerstyle_large, modifier.fillMaxSize())

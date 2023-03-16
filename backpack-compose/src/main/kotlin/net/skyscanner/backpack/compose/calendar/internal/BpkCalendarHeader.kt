@@ -39,27 +39,27 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BpkCalendarHeader(
-  params: CalendarParams,
-  modifier: Modifier = Modifier,
+    params: CalendarParams,
+    modifier: Modifier = Modifier,
 ) {
-  Column(modifier = modifier.semantics { invisibleToUser() }) {
-    Row(
-      modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 50.dp),
-      verticalAlignment = Alignment.CenterVertically,
-      horizontalArrangement = Arrangement.SpaceAround,
-    ) {
-      var current = params.weekFields.firstDayOfWeek
-      do {
-        BpkText(
-          text = current.getDisplayName(params.dayOfWeekText, params.locale).uppercase(params.locale),
-          style = BpkTheme.typography.label2,
-          color = BpkTheme.colors.textSecondary,
-          textAlign = TextAlign.Center,
-          maxLines = 1,
-        )
-        current += 1
-      } while (current != params.weekFields.firstDayOfWeek)
+    Column(modifier = modifier.semantics { invisibleToUser() }) {
+        Row(
+            modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 50.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround,
+        ) {
+            var current = params.weekFields.firstDayOfWeek
+            do {
+                BpkText(
+                    text = current.getDisplayName(params.dayOfWeekText, params.locale).uppercase(params.locale),
+                    style = BpkTheme.typography.label2,
+                    color = BpkTheme.colors.textSecondary,
+                    textAlign = TextAlign.Center,
+                    maxLines = 1,
+                )
+                current += 1
+            } while (current != params.weekFields.firstDayOfWeek)
+        }
+        BpkDivider()
     }
-    BpkDivider()
-  }
 }

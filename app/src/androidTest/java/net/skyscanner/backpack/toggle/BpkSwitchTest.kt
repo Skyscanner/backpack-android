@@ -28,32 +28,32 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkSwitchTest : BpkSnapshotTest() {
 
-  @Test
-  fun defaultUnchecked() {
-    snap(BpkSwitch(testContext))
-  }
+    @Test
+    fun defaultUnchecked() {
+        snap(BpkSwitch(testContext))
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun defaultChecked() {
-    snap(BpkSwitch(testContext).apply { isChecked = true })
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun defaultChecked() {
+        snap(BpkSwitch(testContext).apply { isChecked = true })
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun disabledUnchecked() {
-    snap(BpkSwitch(testContext).apply {
-      isChecked = false
-      isEnabled = false
-    },)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun disabledUnchecked() {
+        snap(BpkSwitch(testContext).apply {
+            isChecked = false
+            isEnabled = false
+        },)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun disabledChecked() {
-    snap(BpkSwitch(testContext).apply {
-      isChecked = true
-      isEnabled = false
-    },)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun disabledChecked() {
+        snap(BpkSwitch(testContext).apply {
+            isChecked = true
+            isEnabled = false
+        },)
+    }
 }

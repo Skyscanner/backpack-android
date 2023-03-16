@@ -35,28 +35,28 @@ import net.skyscanner.backpack.compose.tokens.BpkDimension
 
 @Composable
 fun ListItem(
-  title: String,
-  modifier: Modifier = Modifier,
-  showDivider: Boolean = true,
-  trailing: @Composable RowScope.() -> Unit = {},
+    title: String,
+    modifier: Modifier = Modifier,
+    showDivider: Boolean = true,
+    trailing: @Composable RowScope.() -> Unit = {},
 ) {
-  Column(
-    modifier = modifier
-      .defaultMinSize(minHeight = 56.dp)
-      .fillMaxWidth()
-      .padding(horizontal = BpkDimension.Spacing.Lg),
-  ) {
-
-    Row(
-      modifier = Modifier.weight(1f),
-      verticalAlignment = Alignment.CenterVertically,
+    Column(
+        modifier = modifier
+            .defaultMinSize(minHeight = 56.dp)
+            .fillMaxWidth()
+            .padding(horizontal = BpkDimension.Spacing.Lg),
     ) {
-      BpkText(text = title, style = BpkTheme.typography.bodyLongform)
-      trailing()
-    }
 
-    if (showDivider) {
-      BpkDivider()
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            BpkText(text = title, style = BpkTheme.typography.bodyLongform)
+            trailing()
+        }
+
+        if (showDivider) {
+            BpkDivider()
+        }
     }
-  }
 }

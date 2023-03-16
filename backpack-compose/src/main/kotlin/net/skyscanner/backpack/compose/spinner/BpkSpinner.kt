@@ -31,57 +31,57 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 enum class BpkSpinnerSize {
-  Small,
-  Large,
-  XLarge,
+    Small,
+    Large,
+    XLarge,
 }
 
 enum class BpkSpinnerStyle {
-  TextPrimary,
-  Disabled,
-  OnDarkSurface,
+    TextPrimary,
+    Disabled,
+    OnDarkSurface,
 }
 
 @Composable
 fun BpkSpinner(
-  size: BpkSpinnerSize,
-  modifier: Modifier = Modifier,
-  style: BpkSpinnerStyle = findBestSpinnerStyleFor(LocalContentColor.current, BpkTheme.colors.isLight),
+    size: BpkSpinnerSize,
+    modifier: Modifier = Modifier,
+    style: BpkSpinnerStyle = findBestSpinnerStyleFor(LocalContentColor.current, BpkTheme.colors.isLight),
 ) {
-  BpkSpinner(
-    size = size,
-    modifier = modifier,
-    color = when (style) {
-      BpkSpinnerStyle.TextPrimary -> BpkTheme.colors.textPrimary
-      BpkSpinnerStyle.Disabled -> BpkTheme.colors.textDisabled
-      BpkSpinnerStyle.OnDarkSurface -> BpkTheme.colors.textOnDark
-    },
-  )
+    BpkSpinner(
+        size = size,
+        modifier = modifier,
+        color = when (style) {
+            BpkSpinnerStyle.TextPrimary -> BpkTheme.colors.textPrimary
+            BpkSpinnerStyle.Disabled -> BpkTheme.colors.textDisabled
+            BpkSpinnerStyle.OnDarkSurface -> BpkTheme.colors.textOnDark
+        },
+    )
 }
 
 @Composable
 internal fun BpkSpinner(
-  size: BpkSpinnerSize,
-  color: Color,
-  modifier: Modifier = Modifier,
+    size: BpkSpinnerSize,
+    color: Color,
+    modifier: Modifier = Modifier,
 ) {
-  CircularProgressIndicator(
-    modifier = modifier.requiredSize(size.dp, size.dp),
-    strokeWidth = 2.dp,
-    color = color,
-  )
+    CircularProgressIndicator(
+        modifier = modifier.requiredSize(size.dp, size.dp),
+        strokeWidth = 2.dp,
+        color = color,
+    )
 }
 
 private val BpkSpinnerSize.dp: Dp
-  get() = when (this) {
-    BpkSpinnerSize.Small -> BpkSpacing.Base
-    BpkSpinnerSize.Large -> BpkSpacing.Lg
-    BpkSpinnerSize.XLarge -> BpkSpacing.Xl
-  }
+    get() = when (this) {
+        BpkSpinnerSize.Small -> BpkSpacing.Base
+        BpkSpinnerSize.Large -> BpkSpacing.Lg
+        BpkSpinnerSize.XLarge -> BpkSpacing.Xl
+    }
 
 private fun findBestSpinnerStyleFor(contentColor: Color, lightMode: Boolean): BpkSpinnerStyle =
-  if (contentColor.luminance() > 0.5f && lightMode) {
-    BpkSpinnerStyle.OnDarkSurface
-  } else {
-    BpkSpinnerStyle.TextPrimary
-  }
+    if (contentColor.luminance() > 0.5f && lightMode) {
+        BpkSpinnerStyle.OnDarkSurface
+    } else {
+        BpkSpinnerStyle.TextPrimary
+    }

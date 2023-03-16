@@ -31,56 +31,56 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Immutable
 class BpkIcon internal constructor(
-  val name: String,
-  val autoMirror: Boolean = false,
-  internal val small: Int,
-  internal val large: Int,
+    val name: String,
+    val autoMirror: Boolean = false,
+    internal val small: Int,
+    internal val large: Int,
 ) {
 
-  override fun equals(other: Any?): Boolean =
-    this === other // all the icons are expected to be singletons
+    override fun equals(other: Any?): Boolean =
+        this === other // all the icons are expected to be singletons
 
-  override fun hashCode(): Int =
-    name.hashCode() // all the names are expected to be unique
+    override fun hashCode(): Int =
+        name.hashCode() // all the names are expected to be unique
 
-  override fun toString(): String =
-    name
+    override fun toString(): String =
+        name
 
-  companion object // the receiver for static extensions
+    companion object // the receiver for static extensions
 }
 
 enum class BpkIconSize {
-  Small,
-  Large,
+    Small,
+    Large,
 }
 
 val LocalBpkIconSize = staticCompositionLocalOf { BpkIconSize.Small }
 
 @Composable
 fun BpkIcon(
-  icon: BpkIcon,
-  contentDescription: String?,
-  modifier: Modifier = Modifier,
-  size: BpkIconSize = LocalBpkIconSize.current,
-  tint: Color = LocalContentColor.current, // todo: alpha was removed
+    icon: BpkIcon,
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    size: BpkIconSize = LocalBpkIconSize.current,
+    tint: Color = LocalContentColor.current, // todo: alpha was removed
 ) {
-  Icon(
-    painter = painterResource(id = icon[size]),
-    contentDescription = contentDescription,
-    tint = tint,
-    modifier = modifier
-      .defaultMinSize(size),
-  )
+    Icon(
+        painter = painterResource(id = icon[size]),
+        contentDescription = contentDescription,
+        tint = tint,
+        modifier = modifier
+            .defaultMinSize(size),
+    )
 }
 
 private operator fun BpkIcon.get(size: BpkIconSize): Int =
-  when (size) {
-    BpkIconSize.Small -> small
-    BpkIconSize.Large -> large
-  }
+    when (size) {
+        BpkIconSize.Small -> small
+        BpkIconSize.Large -> large
+    }
 
 private fun Modifier.defaultMinSize(size: BpkIconSize): Modifier =
-  when (size) {
-    BpkIconSize.Small -> requiredSize(BpkSpacing.Base, BpkSpacing.Base)
-    BpkIconSize.Large -> requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
-  }
+    when (size) {
+        BpkIconSize.Small -> requiredSize(BpkSpacing.Base, BpkSpacing.Base)
+        BpkIconSize.Large -> requiredSize(BpkSpacing.Lg, BpkSpacing.Lg)
+    }

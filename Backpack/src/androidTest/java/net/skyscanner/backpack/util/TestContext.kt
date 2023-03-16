@@ -23,4 +23,4 @@ import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.R
 
 val TestContext: Context =
-  InstrumentationRegistry.getInstrumentation().targetContext.apply { setTheme(R.style.BpkTheme) }
+    InstrumentationRegistry.getInstrumentation().targetContext.apply { setTheme(R.style.BpkTheme) }

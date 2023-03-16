@@ -41,78 +41,78 @@ import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
 @FieldSetComponent
 @ComposeStory
 fun FieldSetStory(
-  modifier: Modifier = Modifier,
-  initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
+    modifier: Modifier = Modifier,
+    initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
 ) =
-  FieldStatusSwitcher(
-    modifier = modifier.padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    initialStatus = initialStatus,
-  ) { status ->
-    FieldSetWithDescriptionExample(status)
-    BpkFieldSetWithoutDescriptionExample(status)
-    BpkFieldSetNoLabelExample(status)
-  }
+    FieldStatusSwitcher(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        initialStatus = initialStatus,
+    ) { status ->
+        FieldSetWithDescriptionExample(status)
+        BpkFieldSetWithoutDescriptionExample(status)
+        BpkFieldSetNoLabelExample(status)
+    }
 
 @Composable
 @FieldSetComponent
 @ComposeStory("Disabled", StoryKind.ScreenshotOnly)
 internal fun FieldSetScreenshotDisabled(modifier: Modifier = Modifier) =
-  FieldSetStory(modifier, BpkFieldStatus.Disabled)
+    FieldSetStory(modifier, BpkFieldStatus.Disabled)
 
 @Composable
 @FieldSetComponent
 @ComposeStory("Validated", StoryKind.ScreenshotOnly)
 internal fun FieldSetScreenshotValidated(modifier: Modifier = Modifier) =
-  FieldSetStory(modifier, BpkFieldStatus.Validated)
+    FieldSetStory(modifier, BpkFieldStatus.Validated)
 
 @Composable
 @FieldSetComponent
 @ComposeStory("Error", StoryKind.ScreenshotOnly)
 internal fun FieldSetScreenshotError(modifier: Modifier = Modifier) =
-  FieldSetStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
+    FieldSetStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
 
 @Composable
 private fun FieldSetWithDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
-  BpkFieldSet(
-    label = stringResource(R.string.generic_with_description),
-    description = stringResource(R.string.generic_description),
-    status = status,
-  ) {
-    var value by remember { mutableStateOf("") }
-    BpkTextField(
-      value = value,
-      onValueChange = { value = it },
-      placeholder = stringResource(R.string.generic_placeholder),
-    )
-  }
+    BpkFieldSet(
+        label = stringResource(R.string.generic_with_description),
+        description = stringResource(R.string.generic_description),
+        status = status,
+    ) {
+        var value by remember { mutableStateOf("") }
+        BpkTextField(
+            value = value,
+            onValueChange = { value = it },
+            placeholder = stringResource(R.string.generic_placeholder),
+        )
+    }
 }
 
 @Composable
 private fun BpkFieldSetWithoutDescriptionExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
-  BpkFieldSet(
-    label = stringResource(R.string.generic_no_description),
-    status = status,
-  ) {
-    var value by remember { mutableStateOf("") }
-    BpkTextField(
-      value = value,
-      onValueChange = { value = it },
-      placeholder = stringResource(R.string.generic_placeholder),
-    )
-  }
+    BpkFieldSet(
+        label = stringResource(R.string.generic_no_description),
+        status = status,
+    ) {
+        var value by remember { mutableStateOf("") }
+        BpkTextField(
+            value = value,
+            onValueChange = { value = it },
+            placeholder = stringResource(R.string.generic_placeholder),
+        )
+    }
 }
 
 @Composable
 private fun BpkFieldSetNoLabelExample(status: BpkFieldStatus = BpkFieldStatus.Default) {
-  BpkFieldSet(
-    status = status,
-  ) {
-    var value by remember { mutableStateOf("") }
-    BpkTextField(
-      value = value,
-      onValueChange = { value = it },
-      placeholder = stringResource(R.string.generic_no_label),
-    )
-  }
+    BpkFieldSet(
+        status = status,
+    ) {
+        var value by remember { mutableStateOf("") }
+        BpkTextField(
+            value = value,
+            onValueChange = { value = it },
+            placeholder = stringResource(R.string.generic_no_label),
+        )
+    }
 }

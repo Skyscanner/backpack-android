@@ -29,4 +29,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @FabComponent
 @ViewStory
 fun FabStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_fab, modifier)
+    AndroidLayout(R.layout.fragment_fab, modifier)

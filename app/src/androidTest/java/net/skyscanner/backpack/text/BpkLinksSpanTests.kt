@@ -29,16 +29,16 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkLinksSpanTests : BpkSnapshotTest() {
 
-  private val link = "https://skyscanner.design/"
-  private val handler = { _: String ->
-  }
+    private val link = "https://skyscanner.design/"
+    private val handler = { _: String ->
+    }
 
-  private val textView = TextView(testContext)
+    private val textView = TextView(testContext)
 
-  @Test
-  fun default() {
-    val span = BpkLinkSpan(testContext, link, handler)
-    textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-    snap(textView)
-  }
+    @Test
+    fun default() {
+        val span = BpkLinkSpan(testContext, link, handler)
+        textView.text = SpannableStringBuilder().append("Test", span, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        snap(textView)
+    }
 }

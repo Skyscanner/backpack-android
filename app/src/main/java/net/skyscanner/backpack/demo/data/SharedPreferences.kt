@@ -23,29 +23,29 @@ import net.skyscanner.backpack.demo.R
 
 class SharedPreferences {
 
-  companion object {
-    val THEME = "theme"
+    companion object {
+        val THEME = "theme"
 
-    fun getTheme(context: Context): Int {
-      return context
-        .getSharedPreferences(
-          context.getString(R.string.preference_file_key),
-          Context.MODE_PRIVATE,
-        )
-        .getInt(THEME, R.style.AppTheme)
+        fun getTheme(context: Context): Int {
+            return context
+                .getSharedPreferences(
+                    context.getString(R.string.preference_file_key),
+                    Context.MODE_PRIVATE,
+                )
+                .getInt(THEME, R.style.AppTheme)
+        }
+
+        fun saveTheme(context: Context, theme: Int) {
+            val sharedPref = context
+                .getSharedPreferences(
+                    context.getString(R.string.preference_file_key),
+                    Context.MODE_PRIVATE,
+                )
+
+            with(sharedPref.edit()) {
+                putInt(THEME, theme)
+                commit()
+            }
+        }
     }
-
-    fun saveTheme(context: Context, theme: Int) {
-      val sharedPref = context
-        .getSharedPreferences(
-          context.getString(R.string.preference_file_key),
-          Context.MODE_PRIVATE,
-        )
-
-      with(sharedPref.edit()) {
-        putInt(THEME, theme)
-        commit()
-      }
-    }
-  }
 }

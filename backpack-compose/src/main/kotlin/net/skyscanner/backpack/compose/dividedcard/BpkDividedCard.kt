@@ -36,59 +36,59 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
 fun BpkDividedCard(
-  primaryContent: @Composable () -> Unit,
-  secondaryContent: @Composable () -> Unit,
-  modifier: Modifier = Modifier,
-  onClick: (() -> Unit)? = null,
-  elevation: BpkCardElevation = BpkCardElevation.Default,
+    primaryContent: @Composable () -> Unit,
+    secondaryContent: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
-  onClick?.let {
-    BpkCard(
-      onClick = it,
-      modifier = modifier,
-      corner = BpkCardCorner.Small,
-      padding = BpkCardPadding.None,
-      elevation = elevation,
-    ) {
-      Content(
-        primaryContent = primaryContent,
-        secondaryContent = secondaryContent,
-      )
+    onClick?.let {
+        BpkCard(
+            onClick = it,
+            modifier = modifier,
+            corner = BpkCardCorner.Small,
+            padding = BpkCardPadding.None,
+            elevation = elevation,
+        ) {
+            Content(
+                primaryContent = primaryContent,
+                secondaryContent = secondaryContent,
+            )
+        }
+    } ?: run {
+        BpkCard(
+            modifier = modifier,
+            corner = BpkCardCorner.Small,
+            padding = BpkCardPadding.None,
+            elevation = elevation,
+        ) {
+            Content(
+                primaryContent = primaryContent,
+                secondaryContent = secondaryContent,
+            )
+        }
     }
-  } ?: run {
-    BpkCard(
-      modifier = modifier,
-      corner = BpkCardCorner.Small,
-      padding = BpkCardPadding.None,
-      elevation = elevation,
-    ) {
-      Content(
-        primaryContent = primaryContent,
-        secondaryContent = secondaryContent,
-      )
-    }
-  }
 }
 
 @Composable
 private fun Content(
-  primaryContent: @Composable () -> Unit,
-  secondaryContent: @Composable () -> Unit,
+    primaryContent: @Composable () -> Unit,
+    secondaryContent: @Composable () -> Unit,
 ) {
-  Column {
-    primaryContent.invoke()
-    Spacer(
-      modifier = Modifier
-        .height(1.dp)
-        .fillMaxWidth()
-        .background(color = BpkTheme.colors.surfaceHighlight),
-    )
-    secondaryContent.invoke()
-  }
+    Column {
+        primaryContent.invoke()
+        Spacer(
+            modifier = Modifier
+                .height(1.dp)
+                .fillMaxWidth()
+                .background(color = BpkTheme.colors.surfaceHighlight),
+        )
+        secondaryContent.invoke()
+    }
 }
 
 fun Modifier.dividedCardWidth(cardWidth: Dp): Modifier {
-  val minWidth = 240.dp
-  val width = if (cardWidth < minWidth) minWidth else cardWidth
-  return requiredWidth(width)
+    val minWidth = 240.dp
+    val width = if (cardWidth < minWidth) minWidth else cardWidth
+    return requiredWidth(width)
 }

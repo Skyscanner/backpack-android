@@ -49,157 +49,157 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BpkDialogImpl(
-  onDismissRequest: () -> Unit,
-  icon: Dialog.Icon?,
-  title: String,
-  text: String,
-  buttons: List<Dialog.Button>,
-  properties: DialogProperties,
+    onDismissRequest: () -> Unit,
+    icon: Dialog.Icon?,
+    title: String,
+    text: String,
+    buttons: List<Dialog.Button>,
+    properties: DialogProperties,
 ) {
-  Dialog(onDismissRequest = onDismissRequest, properties = properties) {
-    Box(contentAlignment = Alignment.TopCenter) {
-      Surface(
-        modifier = Modifier.padding(top = IconPadding),
-        shape = BpkTheme.shapes.medium,
-        color = BpkTheme.colors.surfaceDefault,
-      ) {
-        DialogContent(
-          title = title,
-          text = text,
-          buttons = buttons,
-          modifier = Modifier.padding(top = BpkDimension.Spacing.Base),
-        )
-      }
-      DialogIcon(icon = icon)
+    Dialog(onDismissRequest = onDismissRequest, properties = properties) {
+        Box(contentAlignment = Alignment.TopCenter) {
+            Surface(
+                modifier = Modifier.padding(top = IconPadding),
+                shape = BpkTheme.shapes.medium,
+                color = BpkTheme.colors.surfaceDefault,
+            ) {
+                DialogContent(
+                    title = title,
+                    text = text,
+                    buttons = buttons,
+                    modifier = Modifier.padding(top = BpkDimension.Spacing.Base),
+                )
+            }
+            DialogIcon(icon = icon)
+        }
     }
-  }
 }
 
 @Composable
 internal fun BpkFlareDialogImpl(
-  onDismissRequest: () -> Unit,
-  title: String,
-  text: String,
-  buttons: List<Dialog.Button>,
-  properties: DialogProperties,
-  content: @Composable BoxScope.() -> Unit,
+    onDismissRequest: () -> Unit,
+    title: String,
+    text: String,
+    buttons: List<Dialog.Button>,
+    properties: DialogProperties,
+    content: @Composable BoxScope.() -> Unit,
 ) {
-  Dialog(onDismissRequest = onDismissRequest, properties = properties) {
-    Surface(
-      modifier = Modifier.padding(top = IconPadding),
-      shape = BpkTheme.shapes.medium,
-      color = BpkTheme.colors.surfaceDefault,
-    ) {
-      Column {
-        BpkFlare(content = content)
-        DialogContent(title = title, text = text, buttons = buttons)
-      }
+    Dialog(onDismissRequest = onDismissRequest, properties = properties) {
+        Surface(
+            modifier = Modifier.padding(top = IconPadding),
+            shape = BpkTheme.shapes.medium,
+            color = BpkTheme.colors.surfaceDefault,
+        ) {
+            Column {
+                BpkFlare(content = content)
+                DialogContent(title = title, text = text, buttons = buttons)
+            }
+        }
     }
-  }
 }
 
 @Composable
 internal fun BpkImageDialogImpl(
-  onDismissRequest: () -> Unit,
-  title: String,
-  text: String,
-  buttons: List<Dialog.Button>,
-  properties: DialogProperties,
-  textAlign: TextAlign,
-  content: @Composable BoxScope.() -> Unit,
+    onDismissRequest: () -> Unit,
+    title: String,
+    text: String,
+    buttons: List<Dialog.Button>,
+    properties: DialogProperties,
+    textAlign: TextAlign,
+    content: @Composable BoxScope.() -> Unit,
 ) {
-  Dialog(onDismissRequest = onDismissRequest, properties = properties) {
-    Surface(
-      modifier = Modifier.padding(top = IconPadding),
-      shape = BpkTheme.shapes.medium,
-      color = BpkTheme.colors.surfaceDefault,
-    ) {
-      Column {
-        Box(content = content)
-        DialogContent(title = title, text = text, textAlign = textAlign, buttons = buttons)
-      }
+    Dialog(onDismissRequest = onDismissRequest, properties = properties) {
+        Surface(
+            modifier = Modifier.padding(top = IconPadding),
+            shape = BpkTheme.shapes.medium,
+            color = BpkTheme.colors.surfaceDefault,
+        ) {
+            Column {
+                Box(content = content)
+                DialogContent(title = title, text = text, textAlign = textAlign, buttons = buttons)
+            }
+        }
     }
-  }
 }
 
 @Composable
 private fun DialogContent(
-  title: String,
-  text: String,
-  buttons: List<Dialog.Button>,
-  modifier: Modifier = Modifier,
-  textAlign: TextAlign = TextAlign.Center,
+    title: String,
+    text: String,
+    buttons: List<Dialog.Button>,
+    modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Center,
 ) {
-  Column(
-    modifier = modifier.padding(BpkDimension.Spacing.Lg),
-    horizontalAlignment = Alignment.CenterHorizontally,
-  ) {
-    DialogTextContent(title = title, text = text, textAlign = textAlign)
-    DialogButtons(buttons)
-  }
+    Column(
+        modifier = modifier.padding(BpkDimension.Spacing.Lg),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        DialogTextContent(title = title, text = text, textAlign = textAlign)
+        DialogButtons(buttons)
+    }
 }
 
 @Composable
 private fun ColumnScope.DialogTextContent(
-  title: String,
-  text: String,
-  textAlign: TextAlign,
-  modifier: Modifier = Modifier,
+    title: String,
+    text: String,
+    textAlign: TextAlign,
+    modifier: Modifier = Modifier,
 ) {
-  BpkText(
-    modifier = modifier.fillMaxWidth(),
-    text = title,
-    style = BpkTheme.typography.heading3,
-    textAlign = textAlign,
-    color = BpkTheme.colors.textPrimary,
-  )
-  BpkText(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(top = BpkDimension.Spacing.Base, bottom = BpkDimension.Spacing.Lg),
-    text = text,
-    textAlign = textAlign,
-    color = BpkTheme.colors.textPrimary,
-  )
+    BpkText(
+        modifier = modifier.fillMaxWidth(),
+        text = title,
+        style = BpkTheme.typography.heading3,
+        textAlign = textAlign,
+        color = BpkTheme.colors.textPrimary,
+    )
+    BpkText(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = BpkDimension.Spacing.Base, bottom = BpkDimension.Spacing.Lg),
+        text = text,
+        textAlign = textAlign,
+        color = BpkTheme.colors.textPrimary,
+    )
 }
 
 @Composable
 private fun DialogButtons(buttons: List<Dialog.Button>) {
-  Column(
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-  ) {
-    buttons.forEach {
-      BpkButton(
-        modifier = Modifier.fillMaxWidth(),
-        text = it.button.text,
-        onClick = it.button.onClick,
-        size = BpkButtonSize.Large,
-        type = it.type,
-      )
+    Column(
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+    ) {
+        buttons.forEach {
+            BpkButton(
+                modifier = Modifier.fillMaxWidth(),
+                text = it.button.text,
+                onClick = it.button.onClick,
+                size = BpkButtonSize.Large,
+                type = it.type,
+            )
+        }
     }
-  }
 }
 
 @Composable
 private fun DialogIcon(icon: Dialog.Icon?) {
-  icon?.let {
-    Box(
-      modifier = Modifier
-        .clip(CircleShape)
-        .background(BpkTheme.colors.surfaceDefault)
-        .padding(IconBorder)
-        .background(icon.backgroundColor, CircleShape)
-        .defaultMinSize(minWidth = IconSize, minHeight = IconSize),
-      contentAlignment = Alignment.Center,
-    ) {
-      BpkIcon(
-        icon = icon.icon,
-        contentDescription = null,
-        tint = BpkTheme.colors.textPrimaryInverse,
-        size = BpkIconSize.Large,
-      )
+    icon?.let {
+        Box(
+            modifier = Modifier
+                .clip(CircleShape)
+                .background(BpkTheme.colors.surfaceDefault)
+                .padding(IconBorder)
+                .background(icon.backgroundColor, CircleShape)
+                .defaultMinSize(minWidth = IconSize, minHeight = IconSize),
+            contentAlignment = Alignment.Center,
+        ) {
+            BpkIcon(
+                icon = icon.icon,
+                contentDescription = null,
+                tint = BpkTheme.colors.textPrimaryInverse,
+                size = BpkIconSize.Large,
+            )
+        }
     }
-  }
 }
 
 private val IconSize = 64.dp

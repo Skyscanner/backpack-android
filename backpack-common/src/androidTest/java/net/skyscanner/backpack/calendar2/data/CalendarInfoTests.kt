@@ -32,69 +32,69 @@ import org.junit.Test
 
 class CalendarInfoTests {
 
-  @Before
-  fun setup() {
-    initAndroidThreeTen()
-  }
-
-  @Test
-  fun if_date_is_disabled_cell_has_correct_state() {
-    val params = CalendarSettings.Default.copy(
-      cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
-        CellInfo(disabled = true)
-      },
-    )
-    testCalendarWith(params) {
-      verify {
-        for (i in 0 until state.cells.size) {
-          val cell = state.cells[i]
-          if (cell is CalendarCell.Day) {
-            assertTrue(cell.info.disabled)
-          }
-        }
-      }
+    @Before
+    fun setup() {
+        initAndroidThreeTen()
     }
-  }
 
-  @Test
-  fun if_date_with_label_cell_has_correct_state() {
-    val params = CalendarSettings.Default.copy(
-      cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
-        CellInfo(label = it.dayOfMonth.toString())
-      },
-    )
-
-    testCalendarWith(params) {
-      verify {
-        for (i in 0 until state.cells.size) {
-          val cell = state.cells[i]
-          if (cell is CalendarCell.Day) {
-            assertEquals(cell.date.dayOfMonth.toString(), cell.info.label)
-          }
+    @Test
+    fun if_date_is_disabled_cell_has_correct_state() {
+        val params = CalendarSettings.Default.copy(
+            cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
+                CellInfo(disabled = true)
+            },
+        )
+        testCalendarWith(params) {
+            verify {
+                for (i in 0 until state.cells.size) {
+                    val cell = state.cells[i]
+                    if (cell is CalendarCell.Day) {
+                        assertTrue(cell.info.disabled)
+                    }
+                }
+            }
         }
-      }
     }
-  }
 
-  @Test
-  fun if_date_with_status_as_label_cell_has_correct_state() {
-    val statuses = CellStatus.values()
-    val params = CalendarSettings.Default.copy(
-      cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
-        CellInfo(status = statuses[it.dayOfMonth % statuses.size], style = CellStatusStyle.Label)
-      },
-    )
+    @Test
+    fun if_date_with_label_cell_has_correct_state() {
+        val params = CalendarSettings.Default.copy(
+            cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
+                CellInfo(label = it.dayOfMonth.toString())
+            },
+        )
 
-    testCalendarWith(params) {
-      verify {
-        for (i in 0 until state.cells.size) {
-          val cell = state.cells[i]
-          if (cell is CalendarCell.Day) {
-            assertEquals(statuses[cell.date.dayOfMonth % statuses.size], cell.info.status)
-            assertEquals(CellStatusStyle.Label, cell.info.style)
-          }
+        testCalendarWith(params) {
+            verify {
+                for (i in 0 until state.cells.size) {
+                    val cell = state.cells[i]
+                    if (cell is CalendarCell.Day) {
+                        assertEquals(cell.date.dayOfMonth.toString(), cell.info.label)
+                    }
+                }
+            }
         }
-      }
     }
-  }
+
+    @Test
+    fun if_date_with_status_as_label_cell_has_correct_state() {
+        val statuses = CellStatus.values()
+        val params = CalendarSettings.Default.copy(
+            cellsInfo = CalendarSettings.Default.range.toIterable().associateWith {
+                CellInfo(status = statuses[it.dayOfMonth % statuses.size], style = CellStatusStyle.Label)
+            },
+        )
+
+        testCalendarWith(params) {
+            verify {
+                for (i in 0 until state.cells.size) {
+                    val cell = state.cells[i]
+                    if (cell is CalendarCell.Day) {
+                        assertEquals(statuses[cell.date.dayOfMonth % statuses.size], cell.info.status)
+                        assertEquals(CellStatusStyle.Label, cell.info.style)
+                    }
+                }
+            }
+        }
+    }
 }

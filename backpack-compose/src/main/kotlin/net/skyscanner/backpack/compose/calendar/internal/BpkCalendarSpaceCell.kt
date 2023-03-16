@@ -29,14 +29,14 @@ import net.skyscanner.backpack.compose.utils.applyIf
 
 @Composable
 internal fun BpkCalendarSpaceCell(
-  model: CalendarCell.Space,
-  modifier: Modifier = Modifier,
+    model: CalendarCell.Space,
+    modifier: Modifier = Modifier,
 ) {
-  Spacer(
-    modifier = modifier
-      .height(BpkCalendarSizes.SelectionHeight)
-      .applyIf(model.selected) {
-        background(BpkTheme.colors.surfaceHighlight)
-      },
-  )
+    Spacer(
+        modifier = modifier
+            .height(BpkCalendarSizes.SelectionHeight)
+            .applyIf(model.selected) {
+                background(BpkTheme.colors.surfaceHighlight)
+            },
+    )
 }

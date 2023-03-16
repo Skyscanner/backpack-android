@@ -53,75 +53,75 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BarChartColumn(
-  model: BpkBarChartModel.Item,
-  selected: Boolean,
-  onSelected: (BpkBarChartModel.Item) -> Unit,
-  onSelectedAndPositioned: (LayoutCoordinates) -> Unit,
-  modifier: Modifier = Modifier,
+    model: BpkBarChartModel.Item,
+    selected: Boolean,
+    onSelected: (BpkBarChartModel.Item) -> Unit,
+    onSelectedAndPositioned: (LayoutCoordinates) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
 
-  Column(
-    horizontalAlignment = Alignment.CenterHorizontally,
-    modifier = modifier
-      .semantics { contentDescription = model.contentDescription }
-      .selectable(
-        selected = selected,
-        enabled = model.values != null,
-        indication = null,
-        interactionSource = remember { MutableInteractionSource() },
-        onClick = { onSelected(model) },
-      ),
-  ) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .semantics { contentDescription = model.contentDescription }
+            .selectable(
+                selected = selected,
+                enabled = model.values != null,
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() },
+                onClick = { onSelected(model) },
+            ),
+    ) {
 
-    Spacer(
-      modifier = Modifier
-        .padding(bottom = BpkSpacing.Md)
-        .width(BpkSpacing.Base)
-        .weight(1f, fill = false)
-        .background(BpkTheme.colors.surfaceHighlight, CircleShape)
-        .run {
-          when (model.values) {
-            null -> inset { bounds ->
-              bounds.copy(top = bounds.height - BpkSpacing.Lg.roundToPx())
-            }
+        Spacer(
+            modifier = Modifier
+                .padding(bottom = BpkSpacing.Md)
+                .width(BpkSpacing.Base)
+                .weight(1f, fill = false)
+                .background(BpkTheme.colors.surfaceHighlight, CircleShape)
+                .run {
+                    when (model.values) {
+                        null -> inset { bounds ->
+                            bounds.copy(top = bounds.height - BpkSpacing.Lg.roundToPx())
+                        }
 
-            else -> composed {
-              val value by animateFloatAsState(model.values.percent)
-              inset { bounds ->
-                bounds.copy(top = bounds.height - max((bounds.height * value).roundToInt(), bounds.width))
-              }
-            }
-          }
-        }
-        .applyIf(selected) { onGloballyPositioned(onSelectedAndPositioned) }
-        .background(
-          shape = CircleShape,
-          color = animateColorAsState(
-            targetValue = when {
-              model.values == null -> BpkTheme.colors.line
-              selected -> BpkTheme.colors.coreAccent
-              else -> BpkTheme.colors.corePrimary
-            },
-          ).value,
-        ),
-    )
+                        else -> composed {
+                            val value by animateFloatAsState(model.values.percent)
+                            inset { bounds ->
+                                bounds.copy(top = bounds.height - max((bounds.height * value).roundToInt(), bounds.width))
+                            }
+                        }
+                    }
+                }
+                .applyIf(selected) { onGloballyPositioned(onSelectedAndPositioned) }
+                .background(
+                    shape = CircleShape,
+                    color = animateColorAsState(
+                        targetValue = when {
+                            model.values == null -> BpkTheme.colors.line
+                            selected -> BpkTheme.colors.coreAccent
+                            else -> BpkTheme.colors.corePrimary
+                        },
+                    ).value,
+                ),
+        )
 
-    BpkText(
-      text = model.title,
-      style = BpkTheme.typography.label2,
-      maxLines = 1,
-      overflow = TextOverflow.Ellipsis,
-      color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textPrimary).value,
-      modifier = Modifier.semantics { invisibleToUser() },
-    )
+        BpkText(
+            text = model.title,
+            style = BpkTheme.typography.label2,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textPrimary).value,
+            modifier = Modifier.semantics { invisibleToUser() },
+        )
 
-    BpkText(
-      text = model.subtitle,
-      style = BpkTheme.typography.footnote,
-      maxLines = 1,
-      overflow = TextOverflow.Ellipsis,
-      color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textSecondary).value,
-      modifier = Modifier.semantics { invisibleToUser() },
-    )
-  }
+        BpkText(
+            text = model.subtitle,
+            style = BpkTheme.typography.footnote,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            color = animateColorAsState(if (selected) BpkTheme.colors.coreAccent else BpkTheme.colors.textSecondary).value,
+            modifier = Modifier.semantics { invisibleToUser() },
+        )
+    }
 }

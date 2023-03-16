@@ -27,28 +27,28 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.dialog.BpkDialog
 
 internal class AlertDialogImpl(
-  dialog: Dialog,
-  type: BpkDialog.Type?,
+    dialog: Dialog,
+    type: BpkDialog.Type?,
 ) : BpkDialogImpl.Base(R.layout.bpk_dialog, dialog, type) {
 
-  init {
-    dialog.window?.let {
-      @Suppress("DEPRECATION")
-      it.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-      it.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-      @Suppress("DEPRECATION")
-      it.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
-      it.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-      it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    }
-
-    root.findViewById<DialogWindowLayout>(R.id.dialog_window_layout).apply {
-      verticalGravity = DialogWindowLayout.Gravity.Center
-      dismissListener = {
-        if (isCanceledOnTouchOutside) {
-          dialog.dismiss()
+    init {
+        dialog.window?.let {
+            @Suppress("DEPRECATION")
+            it.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            it.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            @Suppress("DEPRECATION")
+            it.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+            it.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+            it.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
-      }
+
+        root.findViewById<DialogWindowLayout>(R.id.dialog_window_layout).apply {
+            verticalGravity = DialogWindowLayout.Gravity.Center
+            dismissListener = {
+                if (isCanceledOnTouchOutside) {
+                    dialog.dismiss()
+                }
+            }
+        }
     }
-  }
 }

@@ -47,31 +47,31 @@ import net.skyscanner.backpack.demo.meta.StoryKind
 @SpacingTokensComponent
 @ComposeStory(kind = StoryKind.DemoOnly)
 fun SpacingStory(modifier: Modifier = Modifier) {
-  LazyColumn(modifier) {
-    val data: List<Token<Dp>> = BpkSpacing.values.sortedBy { it.value }
-    items(data) { item ->
-      SpacingSampleRow(token = item)
+    LazyColumn(modifier) {
+        val data: List<Token<Dp>> = BpkSpacing.values.sortedBy { it.value }
+        items(data) { item ->
+            SpacingSampleRow(token = item)
+        }
     }
-  }
 }
 
 @Composable
 private fun SpacingSampleRow(token: Token<Dp>) {
-  Row(
-    modifier = Modifier
-      .height(56.dp)
-      .padding(BpkSpacing.Base),
-    verticalAlignment = Alignment.CenterVertically,
-  ) {
-    BpkText(
-      text = stringResource(R.string.token_placeholder, token.name, token.value),
-      modifier = Modifier.weight(1f),
-    )
-    Box(
-      modifier = Modifier
-        .height(BpkSpacing.Base)
-        .width(token.value)
-        .background(color = BpkTheme.colors.coreAccent),
-    )
-  }
+    Row(
+        modifier = Modifier
+            .height(56.dp)
+            .padding(BpkSpacing.Base),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        BpkText(
+            text = stringResource(R.string.token_placeholder, token.name, token.value),
+            modifier = Modifier.weight(1f),
+        )
+        Box(
+            modifier = Modifier
+                .height(BpkSpacing.Base)
+                .width(token.value)
+                .background(color = BpkTheme.colors.coreAccent),
+        )
+    }
 }

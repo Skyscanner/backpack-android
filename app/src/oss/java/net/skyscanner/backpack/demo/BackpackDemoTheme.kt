@@ -23,9 +23,9 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
 fun BackpackDemoTheme(
-  content: @Composable () -> Unit,
+    content: @Composable () -> Unit,
 ) {
-  BpkTheme(
-    content = content,
-  )
+    BpkTheme(
+        content = content,
+    )
 }

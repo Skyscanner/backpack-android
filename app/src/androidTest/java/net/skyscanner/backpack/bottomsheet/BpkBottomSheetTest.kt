@@ -36,40 +36,40 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkBottomSheetTest : BpkSnapshotTest() {
 
-  private lateinit var bottomSheetBehaviour: BpkBottomSheetBehaviour<BpkBottomSheet>
+    private lateinit var bottomSheetBehaviour: BpkBottomSheetBehaviour<BpkBottomSheet>
 
-  @Test
-  fun default() {
-    capture(STATE_COLLAPSED)
-  }
+    @Test
+    fun default() {
+        capture(STATE_COLLAPSED)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun expanded() {
-    capture(STATE_EXPANDED)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun expanded() {
+        capture(STATE_EXPANDED)
+    }
 
-  private fun capture(state: Int) {
-    val root = setupBottomSheet(state)
-    snap(root, width = 200, height = 200, padding = 0)
-  }
+    private fun capture(state: Int) {
+        val root = setupBottomSheet(state)
+        snap(root, width = 200, height = 200, padding = 0)
+    }
 
-  private fun setupBottomSheet(state: Int): View {
-    val root = CoordinatorLayout(testContext)
-    val frameLayout = FrameLayout(root.context)
-    frameLayout.background = AppCompatResources.getDrawable(frameLayout.context, R.color.bpkCanvasContrast)
-    frameLayout.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-    root.addView(frameLayout)
+    private fun setupBottomSheet(state: Int): View {
+        val root = CoordinatorLayout(testContext)
+        val frameLayout = FrameLayout(root.context)
+        frameLayout.background = AppCompatResources.getDrawable(frameLayout.context, R.color.bpkCanvasContrast)
+        frameLayout.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        root.addView(frameLayout)
 
-    val bottomSheet = BpkBottomSheet(frameLayout.context)
-    val bottomSheetParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-    bottomSheetBehaviour = BpkBottomSheetBehaviour(root.context)
-    bottomSheetBehaviour.peekHeight = bottomSheet.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl)
-    bottomSheetBehaviour.state = state
-    bottomSheetParams.behavior = bottomSheetBehaviour
-    bottomSheet.layoutParams = bottomSheetParams
-    root.addView(bottomSheet)
+        val bottomSheet = BpkBottomSheet(frameLayout.context)
+        val bottomSheetParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+        bottomSheetBehaviour = BpkBottomSheetBehaviour(root.context)
+        bottomSheetBehaviour.peekHeight = bottomSheet.resources.getDimensionPixelSize(R.dimen.bpkSpacingXxl)
+        bottomSheetBehaviour.state = state
+        bottomSheetParams.behavior = bottomSheetBehaviour
+        bottomSheet.layoutParams = bottomSheetParams
+        root.addView(bottomSheet)
 
-    return root
-  }
+        return root
+    }
 }

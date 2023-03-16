@@ -43,48 +43,48 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @SpinnerComponent
 @ComposeStory
 fun SpinnerStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
-    BpkSpinnerStyle.values().forEach { style ->
-      SpinnersRow(style = style)
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkSpinnerStyle.values().forEach { style ->
+            SpinnersRow(style = style)
+        }
     }
-  }
 }
 
 @Composable
 private fun SpinnersRow(
-  style: BpkSpinnerStyle,
-  modifier: Modifier = Modifier,
+    style: BpkSpinnerStyle,
+    modifier: Modifier = Modifier,
 ) {
-  Column(modifier) {
+    Column(modifier) {
 
-    BpkText(style.name)
+        BpkText(style.name)
 
-    Row(
-      modifier = Modifier.background(
-        if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.surfaceContrast else Color.Transparent,
-      ),
-    ) {
-      BpkSpinnerSize.values().forEach { size ->
-
-        Column(
-          modifier = Modifier.weight(1f),
-          horizontalAlignment = Alignment.CenterHorizontally,
+        Row(
+            modifier = Modifier.background(
+                if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.surfaceContrast else Color.Transparent,
+            ),
         ) {
+            BpkSpinnerSize.values().forEach { size ->
 
-          Box(Modifier.height(BpkSpacing.Xxl), contentAlignment = Alignment.Center) {
-            BpkSpinner(size = size, style = style)
-          }
+                Column(
+                    modifier = Modifier.weight(1f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
 
-          BpkText(
-            text = size.name,
-            style = BpkTheme.typography.caption,
-            color = if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.textOnDark else LocalContentColor.current,
-          )
+                    Box(Modifier.height(BpkSpacing.Xxl), contentAlignment = Alignment.Center) {
+                        BpkSpinner(size = size, style = style)
+                    }
+
+                    BpkText(
+                        text = size.name,
+                        style = BpkTheme.typography.caption,
+                        color = if (style == BpkSpinnerStyle.OnDarkSurface) BpkTheme.colors.textOnDark else LocalContentColor.current,
+                    )
+                }
+            }
         }
-      }
     }
-  }
 }

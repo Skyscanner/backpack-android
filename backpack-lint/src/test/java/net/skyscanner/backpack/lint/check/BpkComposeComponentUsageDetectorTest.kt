@@ -28,64 +28,64 @@ import org.junit.Test
 @Suppress("UnstableApiUsage")
 class BpkComposeComponentUsageDetectorTest {
 
-  @Test
-  fun `warning when using component to replace`() {
-    lint()
-      .files(
-        kotlin(
-          """import androidx.compose.material.Button
+    @Test
+    fun `warning when using component to replace`() {
+        lint()
+            .files(
+                kotlin(
+                    """import androidx.compose.material.Button
 
 @Composable
 fun CustomButton() { Button() }""",
-        ),
-        button(),
-      )
-      .runCheck()
-      .expectWarningCount(1)
-      .expect(
-        """
+                ),
+                button(),
+            )
+            .runCheck()
+            .expectWarningCount(1)
+            .expect(
+                """
 src/test.kt:4: Warning: Backpack component available for androidx.compose.material.Button. Use net.skyscanner.backpack.compose.button.BpkButton instead. More info at https://skyscanner.design/latest/components/button/compose.html [BpkComposeComponentUsage]
 fun CustomButton() { Button() }
                      ~~~~~~~~
 0 errors, 1 warnings
       """,
-      )
-  }
+            )
+    }
 
-  @Test
-  fun `clean when using backpack component`() {
-    lint()
-      .files(
-        kotlin(
-          """import net.skyscanner.backpack.compose.button.BpkButton
+    @Test
+    fun `clean when using backpack component`() {
+        lint()
+            .files(
+                kotlin(
+                    """import net.skyscanner.backpack.compose.button.BpkButton
 
 @Composable
 fun CustomButton() { BpkButton() }""",
-        ),
-        bpkButton(),
-      )
-      .runCheck()
-      .expectClean()
-  }
+                ),
+                bpkButton(),
+            )
+            .runCheck()
+            .expectClean()
+    }
 
-  private fun bpkButton(): TestFile =
-    kotlin(
-      """package net.skyscanner.backpack.compose.button
+    private fun bpkButton(): TestFile =
+        kotlin(
+            """package net.skyscanner.backpack.compose.button
 
 @Composable
 fun BpkButton() {}""",
-    )
+        )
 
-  private fun button(): TestFile =
-    kotlin(
-      """package androidx.compose.material
+    private fun button(): TestFile =
+        kotlin(
+            """package androidx.compose.material
 
 @Composable
 fun Button() {}""",
-    )
+        )
 
-  private fun TestLintTask.runCheck(): TestLintResult =
-    issues(BpkComposeComponentUsageDetector.ISSUE)
-      .allowMissingSdk()
-      .run()
+    private fun TestLintTask.runCheck(): TestLintResult =
+        issues(BpkComposeComponentUsageDetector.ISSUE)
+            .allowMissingSdk()
+            .run()
 }

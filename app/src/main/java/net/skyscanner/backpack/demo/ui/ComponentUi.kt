@@ -32,38 +32,38 @@ import net.skyscanner.backpack.compose.tokens.BpkDimension
 
 @Composable
 fun ComponentsTitle(title: String, modifier: Modifier = Modifier) {
-  BpkText(
-    text = title.uppercase(),
-    modifier = modifier
-      .fillMaxWidth()
-      .padding(
-        vertical = BpkDimension.Spacing.Base,
-        horizontal = BpkDimension.Spacing.Lg,
-      ),
-    color = BpkTheme.colors.textSecondary,
-    style = BpkTheme.typography.label2,
-  )
+    BpkText(
+        text = title.uppercase(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(
+                vertical = BpkDimension.Spacing.Base,
+                horizontal = BpkDimension.Spacing.Lg,
+            ),
+        color = BpkTheme.colors.textSecondary,
+        style = BpkTheme.typography.label2,
+    )
 }
 
 @Composable
 fun ComponentItem(
-  title: String,
-  modifier: Modifier = Modifier,
-  badgeText: String? = null,
-  badgeType: BpkBadgeType? = null,
-  onClick: () -> Unit,
+    title: String,
+    modifier: Modifier = Modifier,
+    badgeText: String? = null,
+    badgeType: BpkBadgeType? = null,
+    onClick: () -> Unit,
 ) {
-  ListItem(
-    title = title,
-    modifier = modifier
-      .clickable { onClick() },
-  ) {
-    if (badgeType != null) {
-      BpkBadge(
-        text = badgeText ?: "",
-        type = badgeType,
-        modifier = Modifier.padding(start = BpkDimension.Spacing.Base),
-      )
+    ListItem(
+        title = title,
+        modifier = modifier
+            .clickable { onClick() },
+    ) {
+        if (badgeType != null) {
+            BpkBadge(
+                text = badgeText ?: "",
+                type = badgeType,
+                modifier = Modifier.padding(start = BpkDimension.Spacing.Base),
+            )
+        }
     }
-  }
 }

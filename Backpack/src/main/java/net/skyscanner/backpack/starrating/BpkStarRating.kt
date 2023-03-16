@@ -26,36 +26,36 @@ import net.skyscanner.backpack.starrating.internal.BpkStarRatingBase
 import net.skyscanner.backpack.util.createContextThemeWrapper
 
 open class BpkStarRating @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : BpkStarRatingBase(
-  context = createContextThemeWrapper(context, attrs, R.attr.bpkStarRatingStyle),
-  attrs = attrs,
-  defStyleAttr = defStyleAttr,
-  empty = R.drawable.bpk_star_outline,
-  half = R.drawable.bpk_star_half,
-  full = R.drawable.bpk_star,
-  starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
+    context = createContextThemeWrapper(context, attrs, R.attr.bpkStarRatingStyle),
+    attrs = attrs,
+    defStyleAttr = defStyleAttr,
+    empty = R.drawable.bpk_star_outline,
+    half = R.drawable.bpk_star_half,
+    full = R.drawable.bpk_star,
+    starSize = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase),
 ) {
 
-  override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
-    super.onInitializeAccessibilityNodeInfo(info)
-    val text = getAccessibilityText()
-    if (text != null) {
-      if (info.contentDescription != null) {
-        // append the content description to match other announcements.
-        // Using `announceForAccessibility` or similar methods didn't get announced when focused, so this is a workaround
-        info.contentDescription = "$text ${info.contentDescription}"
-      } else {
-        info.contentDescription = text
-      }
+    override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
+        super.onInitializeAccessibilityNodeInfo(info)
+        val text = getAccessibilityText()
+        if (text != null) {
+            if (info.contentDescription != null) {
+                // append the content description to match other announcements.
+                // Using `announceForAccessibility` or similar methods didn't get announced when focused, so this is a workaround
+                info.contentDescription = "$text ${info.contentDescription}"
+            } else {
+                info.contentDescription = text
+            }
+        }
     }
-  }
 
-  final override var rating: Float
-    get() = super.rating
-    set(value) {
-      super.rating = value
-    }
+    final override var rating: Float
+        get() = super.rating
+        set(value) {
+            super.rating = value
+        }
 }

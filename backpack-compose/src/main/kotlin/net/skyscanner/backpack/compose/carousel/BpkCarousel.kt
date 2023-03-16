@@ -33,32 +33,32 @@ import net.skyscanner.backpack.compose.pageindicator.BpkPageIndicatorStyle
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun BpkCarousel(
-  state: BpkCarouselState,
-  modifier: Modifier = Modifier,
-  content: @Composable (BoxScope.(Int) -> Unit),
+    state: BpkCarouselState,
+    modifier: Modifier = Modifier,
+    content: @Composable (BoxScope.(Int) -> Unit),
 ) {
-  val internalState = state.asInternalState()
-  Box(modifier = modifier) {
-    HorizontalPager(
-      modifier = Modifier
-        .testTag("pager")
-        .fillMaxSize(),
-      count = if (internalState.pageCount > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
-      state = internalState.delegate,
-    ) {
-      content(internalState.currentPage)
-    }
+    val internalState = state.asInternalState()
+    Box(modifier = modifier) {
+        HorizontalPager(
+            modifier = Modifier
+                .testTag("pager")
+                .fillMaxSize(),
+            count = if (internalState.pageCount > 1) Int.MAX_VALUE else 1, // if count > 1, set to Int.MAX_VALUE for infinite looping
+            state = internalState.delegate,
+        ) {
+            content(internalState.currentPage)
+        }
 
-    // if there is more than one image, display the page indicator
-    if (internalState.pageCount > 1) {
-      BpkPageIndicator(
-        modifier = Modifier
-          .align(Alignment.BottomCenter)
-          .testTag("pageIndicator"),
-        totalIndicators = internalState.pageCount,
-        currentIndex = internalState.currentPage,
-        style = BpkPageIndicatorStyle.OverImage,
-      )
+        // if there is more than one image, display the page indicator
+        if (internalState.pageCount > 1) {
+            BpkPageIndicator(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .testTag("pageIndicator"),
+                totalIndicators = internalState.pageCount,
+                currentIndex = internalState.currentPage,
+                style = BpkPageIndicatorStyle.OverImage,
+            )
+        }
     }
-  }
 }

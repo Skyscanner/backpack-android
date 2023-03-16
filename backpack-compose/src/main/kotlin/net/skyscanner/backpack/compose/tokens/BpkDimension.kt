@@ -22,16 +22,16 @@ import androidx.compose.runtime.Stable
 
 object BpkDimension {
 
-  @Stable
-  val BorderRadius = BpkBorderRadius
+    @Stable
+    val BorderRadius = BpkBorderRadius
 
-  @Stable
-  val BorderSize = BpkBorderSize
+    @Stable
+    val BorderSize = BpkBorderSize
 
-  @Stable
-  val Elevation = BpkElevation
+    @Stable
+    val Elevation = BpkElevation
 
-  @Stable
-  val Spacing = BpkSpacing
+    @Stable
+    val Spacing = BpkSpacing
 
 }

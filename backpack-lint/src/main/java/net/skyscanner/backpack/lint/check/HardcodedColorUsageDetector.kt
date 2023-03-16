@@ -32,37 +32,37 @@ import org.w3c.dom.Attr
 @Suppress("UnstableApiUsage")
 class HardcodedColorUsageDetector : ResourceXmlDetector() {
 
-  companion object {
-    private const val EXPLANATION = "Avoid using hardcoded colors. This may cause issues with theming and dark mode."
+    companion object {
+        private const val EXPLANATION = "Avoid using hardcoded colors. This may cause issues with theming and dark mode."
 
-    val ISSUE = Issue.create(
-      id = "HardcodedColorUsage",
-      briefDescription = "Hardcoded color used",
-      explanation = EXPLANATION,
-      category = Category.CORRECTNESS,
-      severity = Severity.WARNING,
-      implementation = Implementation(
-        HardcodedColorUsageDetector::class.java,
-        Scope.RESOURCE_FILE_SCOPE,
-      ),
-    )
-  }
-
-  override fun appliesTo(folderType: ResourceFolderType): Boolean {
-    return folderType == ResourceFolderType.LAYOUT
-  }
-
-  override fun getApplicableAttributes(): Collection<String> {
-    return XmlScannerConstants.ALL
-  }
-
-  override fun visitAttribute(context: XmlContext, attribute: Attr) {
-    if (attribute.value.startsWith("#")) {
-      context.report(
-        ISSUE,
-        context.getValueLocation(attribute),
-        EXPLANATION,
-      )
+        val ISSUE = Issue.create(
+            id = "HardcodedColorUsage",
+            briefDescription = "Hardcoded color used",
+            explanation = EXPLANATION,
+            category = Category.CORRECTNESS,
+            severity = Severity.WARNING,
+            implementation = Implementation(
+                HardcodedColorUsageDetector::class.java,
+                Scope.RESOURCE_FILE_SCOPE,
+            ),
+        )
     }
-  }
+
+    override fun appliesTo(folderType: ResourceFolderType): Boolean {
+        return folderType == ResourceFolderType.LAYOUT
+    }
+
+    override fun getApplicableAttributes(): Collection<String> {
+        return XmlScannerConstants.ALL
+    }
+
+    override fun visitAttribute(context: XmlContext, attribute: Attr) {
+        if (attribute.value.startsWith("#")) {
+            context.report(
+                ISSUE,
+                context.getValueLocation(attribute),
+                EXPLANATION,
+            )
+        }
+    }
 }

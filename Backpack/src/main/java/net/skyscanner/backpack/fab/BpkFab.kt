@@ -29,62 +29,62 @@ import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
 open class BpkFab @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : FloatingActionButton(
-  createContextThemeWrapper(
-    createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.floatingActionButtonStyle),
-    attrs, R.attr.bpkFabStyle,
-  ),
-  attrs,
-  defStyleAttr,
+    createContextThemeWrapper(
+        createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.floatingActionButtonStyle),
+        attrs, R.attr.bpkFabStyle,
+    ),
+    attrs,
+    defStyleAttr,
 ) {
 
-  init {
-    initialize(attrs, defStyleAttr)
-  }
-
-  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    var backgroundColour = context.getColor(R.color.bpkCoreAccent)
-    var iconColour = context.getColor(R.color.bpkTextPrimaryInverse)
-
-    context.theme.obtainStyledAttributes(
-      attrs,
-      R.styleable.BpkFab,
-      defStyleAttr,
-      0,
-    ).use {
-      backgroundColour = it.getColor(R.styleable.BpkFab_fabBackgroundColor, backgroundColour)
-      iconColour = it.getColor(R.styleable.BpkFab_fabIconColor, iconColour)
+    init {
+        initialize(attrs, defStyleAttr)
     }
 
-    this.imageTintList = getColorSelector(
-      iconColour,
-      context.getColor(R.color.bpkTextDisabled),
-    )
-    this.isClickable = isEnabled
-    this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
-    this.elevation = resources.getDimensionPixelSize(R.dimen.bpkElevationBase).toFloat()
-    this.backgroundTintList = getColorSelector(
-      backgroundColour,
-      context.getColor(R.color.__privateButtonDisabledBackground),
-    )
-  }
+    private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
+        var backgroundColour = context.getColor(R.color.bpkCoreAccent)
+        var iconColour = context.getColor(R.color.bpkTextPrimaryInverse)
 
-  override fun setEnabled(enabled: Boolean) {
-    super.setEnabled(enabled)
-    isClickable = enabled
-  }
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.BpkFab,
+            defStyleAttr,
+            0,
+        ).use {
+            backgroundColour = it.getColor(R.styleable.BpkFab_fabBackgroundColor, backgroundColour)
+            iconColour = it.getColor(R.styleable.BpkFab_fabIconColor, iconColour)
+        }
 
-  private fun getColorSelector(
-    @ColorInt normalColor: Int,
-    @ColorInt disabledColor: Int,
-  ) = ColorStateList(
-    arrayOf(
-      intArrayOf(-android.R.attr.state_enabled),
-      intArrayOf(),
-    ),
-    intArrayOf(disabledColor, normalColor),
-  )
+        this.imageTintList = getColorSelector(
+            iconColour,
+            context.getColor(R.color.bpkTextDisabled),
+        )
+        this.isClickable = isEnabled
+        this.stateListAnimator = AnimatorInflater.loadStateListAnimator(context, R.drawable.bpk_button_state_animator)
+        this.elevation = resources.getDimensionPixelSize(R.dimen.bpkElevationBase).toFloat()
+        this.backgroundTintList = getColorSelector(
+            backgroundColour,
+            context.getColor(R.color.__privateButtonDisabledBackground),
+        )
+    }
+
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        isClickable = enabled
+    }
+
+    private fun getColorSelector(
+        @ColorInt normalColor: Int,
+        @ColorInt disabledColor: Int,
+    ) = ColorStateList(
+        arrayOf(
+            intArrayOf(-android.R.attr.state_enabled),
+            intArrayOf(),
+        ),
+        intArrayOf(disabledColor, normalColor),
+    )
 }

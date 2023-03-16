@@ -49,110 +49,110 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Stable
 sealed interface BpkBottomNavItem {
-  val title: String
-  val id: Int
-  val showBadge: Boolean
+    val title: String
+    val id: Int
+    val showBadge: Boolean
 }
 
 fun BpkBottomNavItem(
-  title: String,
-  id: Int,
-  icon: BpkIcon,
-  showBadge: Boolean = false,
+    title: String,
+    id: Int,
+    icon: BpkIcon,
+    showBadge: Boolean = false,
 ): BpkBottomNavItem =
-  IconBottomNavItem(title, id, showBadge, icon)
+    IconBottomNavItem(title, id, showBadge, icon)
 
 fun BpkBottomNavItem(
-  title: String,
-  id: Int,
-  painter: Painter,
-  showBadge: Boolean = false,
+    title: String,
+    id: Int,
+    painter: Painter,
+    showBadge: Boolean = false,
 ): BpkBottomNavItem =
-  PainterBottomNavItem(title, id, showBadge, painter)
+    PainterBottomNavItem(title, id, showBadge, painter)
 
 @Composable
 fun BpkBottomNav(
-  onTabClicked: (Int) -> Unit,
-  selectedItemId: Int,
-  items: List<BpkBottomNavItem>,
-  modifier: Modifier = Modifier,
-  elevation: Dp = NavigationBarDefaults.Elevation,
+    onTabClicked: (Int) -> Unit,
+    selectedItemId: Int,
+    items: List<BpkBottomNavItem>,
+    modifier: Modifier = Modifier,
+    elevation: Dp = NavigationBarDefaults.Elevation,
 ) {
-  NavigationBar(
-    modifier = modifier,
-    containerColor = BpkTheme.colors.surfaceDefault,
-    contentColor = BpkTheme.colors.textSecondary,
-    tonalElevation = elevation, // todo: that's not the elevation we're looking for
-  ) {
-    items.forEach { tabItem ->
-      NavigationBarItem(
-        selected = selectedItemId == tabItem.id,
-        onClick = { onTabClicked(tabItem.id) },
-        icon = {
-          Box {
-            when (tabItem) {
-              is IconBottomNavItem -> BpkIcon(
-                icon = tabItem.icon,
-                contentDescription = null,
-                size = BpkIconSize.Large,
-              )
+    NavigationBar(
+        modifier = modifier,
+        containerColor = BpkTheme.colors.surfaceDefault,
+        contentColor = BpkTheme.colors.textSecondary,
+        tonalElevation = elevation, // todo: that's not the elevation we're looking for
+    ) {
+        items.forEach { tabItem ->
+            NavigationBarItem(
+                selected = selectedItemId == tabItem.id,
+                onClick = { onTabClicked(tabItem.id) },
+                icon = {
+                    Box {
+                        when (tabItem) {
+                            is IconBottomNavItem -> BpkIcon(
+                                icon = tabItem.icon,
+                                contentDescription = null,
+                                size = BpkIconSize.Large,
+                            )
 
-              is PainterBottomNavItem -> Icon(
-                modifier = Modifier.height(BpkSpacing.Lg),
-                painter = tabItem.painter,
-                contentDescription = null,
-              )
-            }
-            if (tabItem.showBadge) {
-              NotificationDot(
-                Modifier
-                  .align(Alignment.BottomEnd)
-                  .offset(x = 1.dp, y = (-2).dp),
-              )
-            }
-          }
-        },
-        label = {
-          BpkText(
-            text = tabItem.title,
-            style = BpkTheme.typography.label3,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-          )
-        },
-        colors = NavigationBarItemDefaults.colors(
-          selectedIconColor = BpkTheme.colors.textLink,
-          selectedTextColor = BpkTheme.colors.textLink,
-          unselectedIconColor = BpkTheme.colors.textSecondary,
-          unselectedTextColor = BpkTheme.colors.textSecondary,
-          indicatorColor = Color.Transparent, // todo: we don't use indicator colors here
-        ),
-      )
+                            is PainterBottomNavItem -> Icon(
+                                modifier = Modifier.height(BpkSpacing.Lg),
+                                painter = tabItem.painter,
+                                contentDescription = null,
+                            )
+                        }
+                        if (tabItem.showBadge) {
+                            NotificationDot(
+                                Modifier
+                                    .align(Alignment.BottomEnd)
+                                    .offset(x = 1.dp, y = (-2).dp),
+                            )
+                        }
+                    }
+                },
+                label = {
+                    BpkText(
+                        text = tabItem.title,
+                        style = BpkTheme.typography.label3,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = BpkTheme.colors.textLink,
+                    selectedTextColor = BpkTheme.colors.textLink,
+                    unselectedIconColor = BpkTheme.colors.textSecondary,
+                    unselectedTextColor = BpkTheme.colors.textSecondary,
+                    indicatorColor = Color.Transparent, // todo: we don't use indicator colors here
+                ),
+            )
+        }
     }
-  }
 }
 
 @Composable
 private fun NotificationDot(modifier: Modifier = Modifier) {
-  Box(
-    modifier = modifier
-      .size(12.dp)
-      .border(width = 2.dp, color = BpkTheme.colors.surfaceDefault, shape = CircleShape)
-      .padding(2.dp)
-      .background(color = BpkTheme.colors.coreAccent, shape = CircleShape),
-  )
+    Box(
+        modifier = modifier
+            .size(12.dp)
+            .border(width = 2.dp, color = BpkTheme.colors.surfaceDefault, shape = CircleShape)
+            .padding(2.dp)
+            .background(color = BpkTheme.colors.coreAccent, shape = CircleShape),
+    )
 }
 
 private data class IconBottomNavItem(
-  override val title: String,
-  override val id: Int,
-  override val showBadge: Boolean,
-  val icon: BpkIcon,
+    override val title: String,
+    override val id: Int,
+    override val showBadge: Boolean,
+    val icon: BpkIcon,
 ) : BpkBottomNavItem
 
 private data class PainterBottomNavItem(
-  override val title: String,
-  override val id: Int,
-  override val showBadge: Boolean,
-  val painter: Painter,
+    override val title: String,
+    override val id: Int,
+    override val showBadge: Boolean,
+    val painter: Painter,
 ) : BpkBottomNavItem

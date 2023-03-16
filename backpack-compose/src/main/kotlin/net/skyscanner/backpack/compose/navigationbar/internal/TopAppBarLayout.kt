@@ -37,81 +37,81 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.lerp
 
 private enum class TopAppBarLayoutId {
-  Nav, Title, Actions,
+    Nav, Title, Actions,
 }
 
 @Composable
 internal fun TopAppBarLayout(
-  fraction: Float,
-  navIcon: @Composable BoxScope.() -> Unit,
-  title: @Composable BoxScope.() -> Unit,
-  actions: @Composable RowScope.() -> Unit,
-  modifier: Modifier = Modifier,
+    fraction: Float,
+    navIcon: @Composable BoxScope.() -> Unit,
+    title: @Composable BoxScope.() -> Unit,
+    actions: @Composable RowScope.() -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-  Layout(
-    measurePolicy = TopNavBarMeasuringPolicy(fraction),
-    modifier = modifier
-      .requiredHeight(lerp(TopNavBarSizes.CollapsedHeight, TopNavBarSizes.ExpandedHeight, fraction)),
-    content = {
-      Box(
-        content = navIcon,
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-          .layoutId(TopAppBarLayoutId.Nav)
-          .padding(vertical = TopNavBarSizes.InternalSpacing)
-          .padding(start = TopNavBarSizes.InternalSpacing),
-      )
-      Box(
-        content = title,
-        contentAlignment = Alignment.Center,
-        modifier = Modifier
-          .layoutId(TopAppBarLayoutId.Title)
-          .padding(all = TopNavBarSizes.InternalSpacing),
-      )
-      Row(
-        content = actions,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
-          .layoutId(TopAppBarLayoutId.Actions)
-          .padding(vertical = TopNavBarSizes.InternalSpacing)
-          .padding(end = TopNavBarSizes.InternalSpacing),
-      )
-    },
-  )
+    Layout(
+        measurePolicy = TopNavBarMeasuringPolicy(fraction),
+        modifier = modifier
+            .requiredHeight(lerp(TopNavBarSizes.CollapsedHeight, TopNavBarSizes.ExpandedHeight, fraction)),
+        content = {
+            Box(
+                content = navIcon,
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .layoutId(TopAppBarLayoutId.Nav)
+                    .padding(vertical = TopNavBarSizes.InternalSpacing)
+                    .padding(start = TopNavBarSizes.InternalSpacing),
+            )
+            Box(
+                content = title,
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .layoutId(TopAppBarLayoutId.Title)
+                    .padding(all = TopNavBarSizes.InternalSpacing),
+            )
+            Row(
+                content = actions,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .layoutId(TopAppBarLayoutId.Actions)
+                    .padding(vertical = TopNavBarSizes.InternalSpacing)
+                    .padding(end = TopNavBarSizes.InternalSpacing),
+            )
+        },
+    )
 }
 
 private fun TopNavBarMeasuringPolicy(fraction: Float): MeasurePolicy =
-  MeasurePolicy { measurables, constraints ->
+    MeasurePolicy { measurables, constraints ->
 
-    val navIcon = measurables.first { it.layoutId == TopAppBarLayoutId.Nav }.measure(iconConstrains())
-    val actions = measurables.first { it.layoutId == TopAppBarLayoutId.Actions }.measure(iconConstrains())
+        val navIcon = measurables.first { it.layoutId == TopAppBarLayoutId.Nav }.measure(iconConstrains())
+        val actions = measurables.first { it.layoutId == TopAppBarLayoutId.Actions }.measure(iconConstrains())
 
-    val title = measurables.first { it.layoutId == TopAppBarLayoutId.Title }.measure(
-      constraints = constraints.copy(
-        minWidth = 0,
-        maxWidth = constraints.maxWidth - titlePaddingStart(navIcon, fraction) - titlePaddingEnd(actions, fraction),
-      ),
-    )
+        val title = measurables.first { it.layoutId == TopAppBarLayoutId.Title }.measure(
+            constraints = constraints.copy(
+                minWidth = 0,
+                maxWidth = constraints.maxWidth - titlePaddingStart(navIcon, fraction) - titlePaddingEnd(actions, fraction),
+            ),
+        )
 
-    layout(constraints.maxWidth, constraints.maxHeight) {
-      navIcon.placeRelative(0, 0)
-      actions.placeRelative(constraints.maxWidth - actions.measuredWidth, 0)
-      title.placeRelative(titlePaddingStart(navIcon, fraction), 0)
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            navIcon.placeRelative(0, 0)
+            actions.placeRelative(constraints.maxWidth - actions.measuredWidth, 0)
+            title.placeRelative(titlePaddingStart(navIcon, fraction), 0)
+        }
     }
-  }
 
 private fun Density.titlePaddingStart(navIcon: Placeable, fraction: Float): Int {
-  val isNavIconSet = navIcon.measuredWidth >= TopNavBarSizes.InternalSpacing.toPx()
-  val extraPadding = when {
-    isNavIconSet -> TopNavBarSizes.ExpandedTitlePaddingStartWithNavIcon
-    else -> TopNavBarSizes.ExpandedTitlePaddingStartWithoutNavIcon
-  }.roundToPx()
+    val isNavIconSet = navIcon.measuredWidth >= TopNavBarSizes.InternalSpacing.toPx()
+    val extraPadding = when {
+        isNavIconSet -> TopNavBarSizes.ExpandedTitlePaddingStartWithNavIcon
+        else -> TopNavBarSizes.ExpandedTitlePaddingStartWithoutNavIcon
+    }.roundToPx()
 
-  return lerp(navIcon.measuredWidth, navIcon.measuredWidth + extraPadding, fraction)
+    return lerp(navIcon.measuredWidth, navIcon.measuredWidth + extraPadding, fraction)
 }
 
 private fun Density.titlePaddingEnd(actions: Placeable, fraction: Float): Int =
-  lerp(actions.measuredWidth, TopNavBarSizes.ExpandedTitlePaddingEnd.roundToPx(), fraction)
+    lerp(actions.measuredWidth, TopNavBarSizes.ExpandedTitlePaddingEnd.roundToPx(), fraction)
 
 private fun Density.iconConstrains(): Constraints =
-  Constraints.fixedHeight(TopNavBarSizes.CollapsedHeight.roundToPx())
+    Constraints.fixedHeight(TopNavBarSizes.CollapsedHeight.roundToPx())

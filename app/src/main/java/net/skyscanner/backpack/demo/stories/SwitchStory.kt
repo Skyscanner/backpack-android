@@ -30,4 +30,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @SwitchComponent
 @ViewStory
 fun SwitchStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_switch, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_switch, modifier.fillMaxSize())

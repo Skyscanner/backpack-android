@@ -48,129 +48,129 @@ import net.skyscanner.backpack.demo.ui.FieldStatusSwitcher
 @TextFieldComponent
 @ComposeStory
 fun TextFieldStory(
-  modifier: Modifier = Modifier,
-  initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
+    modifier: Modifier = Modifier,
+    initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
 ) =
-  FieldStatusSwitcher(
-    initialStatus = initialStatus,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    modifier = modifier
-      .verticalScroll(rememberScrollState())
-      .padding(BpkSpacing.Base),
-  ) { status ->
-    CompositionLocalProvider(LocalTextStyle provides BpkTheme.typography.label2) {
+    FieldStatusSwitcher(
+        initialStatus = initialStatus,
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(BpkSpacing.Base),
+    ) { status ->
+        CompositionLocalProvider(LocalTextStyle provides BpkTheme.typography.label2) {
 
-      BpkText(text = stringResource(R.string.generic_default))
-      TextFieldDefaultExample(status = status)
+            BpkText(text = stringResource(R.string.generic_default))
+            TextFieldDefaultExample(status = status)
 
-      BpkText(stringResource(R.string.generic_read_only))
-      TextFieldReadOnlyExample(status = status)
+            BpkText(stringResource(R.string.generic_read_only))
+            TextFieldReadOnlyExample(status = status)
 
-      BpkText(stringResource(R.string.generic_with_leading_icon))
-      TextFieldLeadingIconExample(status = status)
+            BpkText(stringResource(R.string.generic_with_leading_icon))
+            TextFieldLeadingIconExample(status = status)
 
-      BpkText(stringResource(R.string.generic_single_line))
-      TextFieldSingleLineExample(status = status)
+            BpkText(stringResource(R.string.generic_single_line))
+            TextFieldSingleLineExample(status = status)
 
-      BpkText(stringResource(R.string.generic_multiline))
-      TextFieldMultilineExample(status = status)
+            BpkText(stringResource(R.string.generic_multiline))
+            TextFieldMultilineExample(status = status)
+        }
     }
-  }
 
 @Composable
 @TextFieldComponent
 @ComposeStory("Disabled", StoryKind.ScreenshotOnly)
 internal fun TextFieldScreenshotDisabled(modifier: Modifier = Modifier) =
-  TextFieldStory(modifier, BpkFieldStatus.Disabled)
+    TextFieldStory(modifier, BpkFieldStatus.Disabled)
 
 @Composable
 @TextFieldComponent
 @ComposeStory("Validated", StoryKind.ScreenshotOnly)
 internal fun TextFieldScreenshotValidated(modifier: Modifier = Modifier) =
-  TextFieldStory(modifier, BpkFieldStatus.Validated)
+    TextFieldStory(modifier, BpkFieldStatus.Validated)
 
 @Composable
 @TextFieldComponent
 @ComposeStory("Error", StoryKind.ScreenshotOnly)
 internal fun TextFieldScreenshotError(modifier: Modifier = Modifier) =
-  TextFieldStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
+    TextFieldStory(modifier, BpkFieldStatus.Error(stringResource(R.string.generic_error_text)))
 
 @Composable
 private fun TextFieldDefaultExample(
-  modifier: Modifier = Modifier,
-  status: BpkFieldStatus = BpkFieldStatus.Default,
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
 ) {
-  var value by remember { mutableStateOf("") }
-  BpkTextField(
-    modifier = modifier,
-    value = value,
-    status = status,
-    onValueChange = { value = it },
-    placeholder = stringResource(R.string.generic_placeholder),
-  )
+    var value by remember { mutableStateOf("") }
+    BpkTextField(
+        modifier = modifier,
+        value = value,
+        status = status,
+        onValueChange = { value = it },
+        placeholder = stringResource(R.string.generic_placeholder),
+    )
 }
 
 @Composable
 private fun TextFieldReadOnlyExample(
-  modifier: Modifier = Modifier,
-  status: BpkFieldStatus = BpkFieldStatus.Default,
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
 ) {
-  BpkTextField(
-    modifier = modifier,
-    readOnly = true,
-    value = stringResource(R.string.generic_read_only_value),
-    onValueChange = { },
-    placeholder = stringResource(R.string.generic_placeholder),
-    status = status,
-  )
+    BpkTextField(
+        modifier = modifier,
+        readOnly = true,
+        value = stringResource(R.string.generic_read_only_value),
+        onValueChange = { },
+        placeholder = stringResource(R.string.generic_placeholder),
+        status = status,
+    )
 }
 
 @Composable
 private fun TextFieldLeadingIconExample(
-  modifier: Modifier = Modifier,
-  status: BpkFieldStatus = BpkFieldStatus.Default,
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
 ) {
-  var value by remember { mutableStateOf("") }
-  BpkTextField(
-    modifier = modifier,
-    value = value,
-    onValueChange = { value = it },
-    placeholder = stringResource(R.string.generic_placeholder),
-    icon = BpkIcon.Accessibility,
-    status = status,
-  )
+    var value by remember { mutableStateOf("") }
+    BpkTextField(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        placeholder = stringResource(R.string.generic_placeholder),
+        icon = BpkIcon.Accessibility,
+        status = status,
+    )
 }
 
 @Composable
 private fun TextFieldSingleLineExample(
-  modifier: Modifier = Modifier,
-  status: BpkFieldStatus = BpkFieldStatus.Default,
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
 ) {
-  val loremIpsum = stringResource(R.string.stub_sm)
-  var value by remember { mutableStateOf("") }
-  BpkTextField(
-    modifier = modifier,
-    value = value,
-    onValueChange = { value = it },
-    placeholder = loremIpsum,
-    status = status,
-  )
+    val loremIpsum = stringResource(R.string.stub_sm)
+    var value by remember { mutableStateOf("") }
+    BpkTextField(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        placeholder = loremIpsum,
+        status = status,
+    )
 }
 
 @Composable
 private fun TextFieldMultilineExample(
-  modifier: Modifier = Modifier,
-  status: BpkFieldStatus = BpkFieldStatus.Default,
+    modifier: Modifier = Modifier,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
 ) {
-  val loremIpsum = stringResource(R.string.stub_sm)
-  var value by remember { mutableStateOf(loremIpsum) }
-  BpkTextField(
-    modifier = modifier,
-    value = value,
-    onValueChange = { value = it },
-    placeholder = stringResource(R.string.generic_placeholder),
-    icon = BpkIcon.Accessibility,
-    status = status,
-    maxLines = Int.MAX_VALUE,
-  )
+    val loremIpsum = stringResource(R.string.stub_sm)
+    var value by remember { mutableStateOf(loremIpsum) }
+    BpkTextField(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        placeholder = stringResource(R.string.generic_placeholder),
+        icon = BpkIcon.Accessibility,
+        status = status,
+        maxLines = Int.MAX_VALUE,
+    )
 }

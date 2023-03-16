@@ -34,16 +34,16 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun BarChartLegend(
-  legend: BpkBarChartModel.Legend,
-  modifier: Modifier = Modifier,
+    legend: BpkBarChartModel.Legend,
+    modifier: Modifier = Modifier,
 ) {
-  Row(
-    modifier = modifier.semantics { invisibleToUser() },
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
-  ) {
-    BpkBadge(text = legend.selectedTitle, type = BpkBadgeType.Brand)
-    BpkBadge(text = legend.inactiveTitle, type = BpkBadgeType.Normal)
-    BpkBadge(text = legend.activeTitle, type = BpkBadgeType.Strong)
-  }
+    Row(
+        modifier = modifier.semantics { invisibleToUser() },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+    ) {
+        BpkBadge(text = legend.selectedTitle, type = BpkBadgeType.Brand)
+        BpkBadge(text = legend.inactiveTitle, type = BpkBadgeType.Normal)
+        BpkBadge(text = legend.activeTitle, type = BpkBadgeType.Strong)
+    }
 }

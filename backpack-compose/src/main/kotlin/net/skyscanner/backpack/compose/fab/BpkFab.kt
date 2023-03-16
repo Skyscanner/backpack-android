@@ -33,25 +33,25 @@ import net.skyscanner.backpack.compose.tokens.BpkElevation
 
 @Composable
 fun BpkFab(
-  onClick: () -> Unit,
-  icon: BpkIcon,
-  contentDescription: String,
-  modifier: Modifier = Modifier,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    onClick: () -> Unit,
+    icon: BpkIcon,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-  FloatingActionButton(
-    onClick = onClick,
-    interactionSource = interactionSource,
-    modifier = modifier,
-    shape = CircleShape,
-    containerColor = BpkTheme.colors.coreAccent,
-    contentColor = BpkTheme.colors.textPrimaryInverse,
-    elevation = FloatingActionButtonDefaults.elevation(BpkElevation.Xl, BpkElevation.Xl, BpkElevation.Xl, BpkElevation.Xl),
-  ) {
-    BpkIcon(
-      icon = icon,
-      contentDescription = contentDescription,
-      size = BpkIconSize.Large,
-    )
-  }
+    FloatingActionButton(
+        onClick = onClick,
+        interactionSource = interactionSource,
+        modifier = modifier,
+        shape = CircleShape,
+        containerColor = BpkTheme.colors.coreAccent,
+        contentColor = BpkTheme.colors.textPrimaryInverse,
+        elevation = FloatingActionButtonDefaults.elevation(BpkElevation.Xl, BpkElevation.Xl, BpkElevation.Xl, BpkElevation.Xl),
+    ) {
+        BpkIcon(
+            icon = icon,
+            contentDescription = contentDescription,
+            size = BpkIconSize.Large,
+        )
+    }
 }

@@ -31,60 +31,60 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkSpinnerTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    BpkSpinner(size = BpkSpinnerSize.Large)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun small() {
-    snap {
-      BpkSpinner(size = BpkSpinnerSize.Small)
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun textPrimary() {
-    snap {
-      BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.TextPrimary)
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabled() {
-    snap {
-      BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.Disabled)
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun onDarkSurface() {
-    snap(background = { BpkTheme.colors.surfaceContrast }) {
-      BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.OnDarkSurface)
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun dynamicOnDarkSurface() {
-    snap(background = { BpkTheme.colors.surfaceContrast }) {
-      CompositionLocalProvider(LocalContentColor provides BpkTheme.colors.textOnDark) {
+    @Test
+    fun default() = snap {
         BpkSpinner(size = BpkSpinnerSize.Large)
-      }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun dynamicTextPrimary() {
-    snap {
-      CompositionLocalProvider(LocalContentColor provides BpkTheme.colors.textOnLight) {
-        BpkSpinner(size = BpkSpinnerSize.Large)
-      }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun small() {
+        snap {
+            BpkSpinner(size = BpkSpinnerSize.Small)
+        }
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun textPrimary() {
+        snap {
+            BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.TextPrimary)
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabled() {
+        snap {
+            BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.Disabled)
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun onDarkSurface() {
+        snap(background = { BpkTheme.colors.surfaceContrast }) {
+            BpkSpinner(size = BpkSpinnerSize.Large, style = BpkSpinnerStyle.OnDarkSurface)
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun dynamicOnDarkSurface() {
+        snap(background = { BpkTheme.colors.surfaceContrast }) {
+            CompositionLocalProvider(LocalContentColor provides BpkTheme.colors.textOnDark) {
+                BpkSpinner(size = BpkSpinnerSize.Large)
+            }
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun dynamicTextPrimary() {
+        snap {
+            CompositionLocalProvider(LocalContentColor provides BpkTheme.colors.textOnLight) {
+                BpkSpinner(size = BpkSpinnerSize.Large)
+            }
+        }
+    }
 }

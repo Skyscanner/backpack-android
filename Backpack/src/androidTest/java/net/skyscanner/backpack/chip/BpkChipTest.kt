@@ -27,29 +27,29 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkChipTest {
 
-  private val context = TestContext
+    private val context = TestContext
 
-  @Test
-  fun test_toggle() {
-    val chip = BpkChip(context).apply {
-      isSelected = false
+    @Test
+    fun test_toggle() {
+        val chip = BpkChip(context).apply {
+            isSelected = false
+        }
+
+        chip.toggle()
+        Assert.assertTrue(chip.isSelected)
+
+        chip.toggle()
+        Assert.assertFalse(chip.isSelected)
     }
 
-    chip.toggle()
-    Assert.assertTrue(chip.isSelected)
+    @Test
+    fun test_toggle_when_disabled() {
+        val chip = BpkChip(context).apply {
+            isSelected = false
+            isEnabled = false
+        }
 
-    chip.toggle()
-    Assert.assertFalse(chip.isSelected)
-  }
-
-  @Test
-  fun test_toggle_when_disabled() {
-    val chip = BpkChip(context).apply {
-      isSelected = false
-      isEnabled = false
+        chip.toggle()
+        Assert.assertFalse(chip.isSelected)
     }
-
-    chip.toggle()
-    Assert.assertFalse(chip.isSelected)
-  }
 }

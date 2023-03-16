@@ -32,88 +32,88 @@ import net.skyscanner.backpack.util.unsafeLazy
 import kotlin.math.roundToInt
 
 internal class DialogWindowLayout @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-  enum class Gravity {
-    Top,
-    Center,
-    Bottom,
-  }
-
-  private val content by unsafeLazy { getChildAt(0) }
-
-  private val contentParams: LayoutParams
-    get() = content.layoutParams.let { it as LayoutParams }
-
-  private val contentHitRect = Rect()
-
-  private var fullscreen = false
-    set(value) {
-      field = value
-      background = if (value) AppCompatResources.getDrawable(context, R.color.bpkSurfaceDefault) else modalBg
+    enum class Gravity {
+        Top,
+        Center,
+        Bottom,
     }
 
-  private val modalPadding = resources.getDimensionPixelSize(R.dimen.bpk_dialog_margin)
+    private val content by unsafeLazy { getChildAt(0) }
 
-  var dismissListener: () -> Unit = {}
+    private val contentParams: LayoutParams
+        get() = content.layoutParams.let { it as LayoutParams }
 
-  var verticalGravity: Gravity = Gravity.Center
-    set(value) {
-      field = value
+    private val contentHitRect = Rect()
 
-      when (value) {
-        Gravity.Top -> {
-          contentParams.topToTop = LayoutParams.PARENT_ID
-          contentParams.bottomToBottom = LayoutParams.UNSET
-          setPadding(modalPadding, 0, modalPadding, modalPadding)
+    private var fullscreen = false
+        set(value) {
+            field = value
+            background = if (value) AppCompatResources.getDrawable(context, R.color.bpkSurfaceDefault) else modalBg
         }
-        Gravity.Center -> {
-          contentParams.topToTop = LayoutParams.PARENT_ID
-          contentParams.bottomToBottom = LayoutParams.PARENT_ID
-          setPadding(modalPadding, 0, modalPadding, 0)
+
+    private val modalPadding = resources.getDimensionPixelSize(R.dimen.bpk_dialog_margin)
+
+    var dismissListener: () -> Unit = {}
+
+    var verticalGravity: Gravity = Gravity.Center
+        set(value) {
+            field = value
+
+            when (value) {
+                Gravity.Top -> {
+                    contentParams.topToTop = LayoutParams.PARENT_ID
+                    contentParams.bottomToBottom = LayoutParams.UNSET
+                    setPadding(modalPadding, 0, modalPadding, modalPadding)
+                }
+                Gravity.Center -> {
+                    contentParams.topToTop = LayoutParams.PARENT_ID
+                    contentParams.bottomToBottom = LayoutParams.PARENT_ID
+                    setPadding(modalPadding, 0, modalPadding, 0)
+                }
+                Gravity.Bottom -> {
+                    contentParams.topToTop = LayoutParams.UNSET
+                    contentParams.bottomToBottom = LayoutParams.PARENT_ID
+                    setPadding(modalPadding, modalPadding, modalPadding, 0)
+                }
+            }
+
+            content.requestLayout()
         }
-        Gravity.Bottom -> {
-          contentParams.topToTop = LayoutParams.UNSET
-          contentParams.bottomToBottom = LayoutParams.PARENT_ID
-          setPadding(modalPadding, modalPadding, modalPadding, 0)
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        fullscreen = content.measuredHeight >= measuredHeight * heightPercentageToShowFullScreen
+    }
+
+    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
+        super.onLayout(changed, left, top, right, bottom)
+        content.getHitRect(contentHitRect)
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (fullscreen || contentHitRect.contains(ev.x.roundToInt(), ev.y.roundToInt())) {
+            return super.dispatchTouchEvent(ev)
         }
-      }
-
-      content.requestLayout()
+        dismissListener()
+        return false
     }
 
-  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-    super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-    fullscreen = content.measuredHeight >= measuredHeight * heightPercentageToShowFullScreen
-  }
-
-  override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-    super.onLayout(changed, left, top, right, bottom)
-    content.getHitRect(contentHitRect)
-  }
-
-  override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-    if (fullscreen || contentHitRect.contains(ev.x.roundToInt(), ev.y.roundToInt())) {
-      return super.dispatchTouchEvent(ev)
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouchEvent(ev: MotionEvent): Boolean {
+        if (fullscreen || contentHitRect.contains(ev.x.roundToInt(), ev.y.roundToInt())) {
+            return super.onTouchEvent(ev)
+        }
+        dismissListener()
+        return false
     }
-    dismissListener()
-    return false
-  }
 
-  @SuppressLint("ClickableViewAccessibility")
-  override fun onTouchEvent(ev: MotionEvent): Boolean {
-    if (fullscreen || contentHitRect.contains(ev.x.roundToInt(), ev.y.roundToInt())) {
-      return super.onTouchEvent(ev)
+    private companion object {
+        val modalBg = ColorDrawable(Color.TRANSPARENT)
+        const val heightPercentageToShowFullScreen = 0.75f
     }
-    dismissListener()
-    return false
-  }
-
-  private companion object {
-    val modalBg = ColorDrawable(Color.TRANSPARENT)
-    const val heightPercentageToShowFullScreen = 0.75f
-  }
 }

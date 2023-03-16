@@ -65,114 +65,114 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BpkBottomSheet(
-  sheetContent: @Composable ColumnScope.(PaddingValues) -> Unit,
-  modifier: Modifier = Modifier,
-  state: BpkBottomSheetState = rememberBpkBottomSheetState(BpkBottomSheetValue.Collapsed),
-  sheetGesturesEnabled: Boolean = true,
-  peekHeight: Dp = 56.dp, // todo: replacing the value with the constant?
-  content: @Composable (PaddingValues) -> Unit,
+    sheetContent: @Composable ColumnScope.(PaddingValues) -> Unit,
+    modifier: Modifier = Modifier,
+    state: BpkBottomSheetState = rememberBpkBottomSheetState(BpkBottomSheetValue.Collapsed),
+    sheetGesturesEnabled: Boolean = true,
+    peekHeight: Dp = 56.dp, // todo: replacing the value with the constant?
+    content: @Composable (PaddingValues) -> Unit,
 ) {
 
-  BoxWithConstraints(modifier) {
-    val fullHeight = constraints.maxHeight.toFloat()
-    val peekHeightWithHandle = peekHeight + HandleHeight
-    val peekHeightPx = with(LocalDensity.current) { peekHeightWithHandle.toPx() }
-    var bottomSheetHeight by remember { mutableStateOf(fullHeight) }
-    val progress = state.wrapped.progress
-    val openingPercent = when (progress.to) {
-      BpkBottomSheetValue.Expanded -> (1f - progress.fraction)
-      BpkBottomSheetValue.Collapsed -> progress.fraction
-    }
-
-    val radius = BpkBorderRadius.Lg * openingPercent
-
-    content(PaddingValues(bottom = peekHeightWithHandle))
-
-    Surface(
-      modifier = Modifier
-        .bottomSheetSwipeable(state, fullHeight, peekHeightPx, bottomSheetHeight, sheetGesturesEnabled)
-        .bottomSheetSemantics(state, peekHeightPx, bottomSheetHeight)
-        .fillMaxWidth()
-        .requiredHeightIn(min = peekHeightWithHandle)
-        .onGloballyPositioned { bottomSheetHeight = it.size.height.toFloat() }
-        .offset { IntOffset(0, state.wrapped.offset.value.roundToInt()) },
-      shape = RoundedCornerShape(topStart = radius, topEnd = radius),
-      shadowElevation = BpkElevation.Lg, // todo: shadow or tonal elevation?
-      color = BpkTheme.colors.surfaceElevated,
-      contentColor = BpkTheme.colors.textPrimary,
-      content = {
-        Box {
-          BpkBottomSheetHandle(
-            modifier = Modifier
-              .align(Alignment.TopCenter)
-              .alpha(openingPercent),
-          )
-          Column {
-            sheetContent(PaddingValues(top = HandleHeight * openingPercent))
-          }
+    BoxWithConstraints(modifier) {
+        val fullHeight = constraints.maxHeight.toFloat()
+        val peekHeightWithHandle = peekHeight + HandleHeight
+        val peekHeightPx = with(LocalDensity.current) { peekHeightWithHandle.toPx() }
+        var bottomSheetHeight by remember { mutableStateOf(fullHeight) }
+        val progress = state.wrapped.progress
+        val openingPercent = when (progress.to) {
+            BpkBottomSheetValue.Expanded -> (1f - progress.fraction)
+            BpkBottomSheetValue.Collapsed -> progress.fraction
         }
-      },
-    )
-  }
+
+        val radius = BpkBorderRadius.Lg * openingPercent
+
+        content(PaddingValues(bottom = peekHeightWithHandle))
+
+        Surface(
+            modifier = Modifier
+                .bottomSheetSwipeable(state, fullHeight, peekHeightPx, bottomSheetHeight, sheetGesturesEnabled)
+                .bottomSheetSemantics(state, peekHeightPx, bottomSheetHeight)
+                .fillMaxWidth()
+                .requiredHeightIn(min = peekHeightWithHandle)
+                .onGloballyPositioned { bottomSheetHeight = it.size.height.toFloat() }
+                .offset { IntOffset(0, state.wrapped.offset.value.roundToInt()) },
+            shape = RoundedCornerShape(topStart = radius, topEnd = radius),
+            shadowElevation = BpkElevation.Lg, // todo: shadow or tonal elevation?
+            color = BpkTheme.colors.surfaceElevated,
+            contentColor = BpkTheme.colors.textPrimary,
+            content = {
+                Box {
+                    BpkBottomSheetHandle(
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .alpha(openingPercent),
+                    )
+                    Column {
+                        sheetContent(PaddingValues(top = HandleHeight * openingPercent))
+                    }
+                }
+            },
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 private fun Modifier.bottomSheetSwipeable(
-  state: BpkBottomSheetState,
-  fullHeight: Float,
-  peekHeightPx: Float,
-  bottomSheetHeight: Float,
-  sheetGesturesEnabled: Boolean,
+    state: BpkBottomSheetState,
+    fullHeight: Float,
+    peekHeightPx: Float,
+    bottomSheetHeight: Float,
+    sheetGesturesEnabled: Boolean,
 ): Modifier =
-  nestedScrollFixedSwipeable(
-    state = state.wrapped,
-    anchors = mapOf(
-      fullHeight - peekHeightPx to BpkBottomSheetValue.Collapsed,
-      fullHeight - bottomSheetHeight to BpkBottomSheetValue.Expanded,
-    ),
-    orientation = Orientation.Vertical,
-    enabled = sheetGesturesEnabled,
-    resistance = null,
-  )
+    nestedScrollFixedSwipeable(
+        state = state.wrapped,
+        anchors = mapOf(
+            fullHeight - peekHeightPx to BpkBottomSheetValue.Collapsed,
+            fullHeight - bottomSheetHeight to BpkBottomSheetValue.Expanded,
+        ),
+        orientation = Orientation.Vertical,
+        enabled = sheetGesturesEnabled,
+        resistance = null,
+    )
 
 private fun Modifier.bottomSheetSemantics(
-  state: BpkBottomSheetState,
-  peekHeightPx: Float,
-  bottomSheetHeight: Float,
+    state: BpkBottomSheetState,
+    peekHeightPx: Float,
+    bottomSheetHeight: Float,
 ): Modifier = composed {
-  val scope = rememberCoroutineScope()
-  semantics {
-    if (peekHeightPx != bottomSheetHeight) {
-      if (state.isCollapsed) {
-        expand {
-          if (state.confirmStateChange(BpkBottomSheetValue.Expanded)) {
-            scope.launch { state.expand() }
-          }
-          true
+    val scope = rememberCoroutineScope()
+    semantics {
+        if (peekHeightPx != bottomSheetHeight) {
+            if (state.isCollapsed) {
+                expand {
+                    if (state.confirmStateChange(BpkBottomSheetValue.Expanded)) {
+                        scope.launch { state.expand() }
+                    }
+                    true
+                }
+            } else {
+                collapse {
+                    if (state.confirmStateChange(BpkBottomSheetValue.Collapsed)) {
+                        scope.launch { state.collapse() }
+                    }
+                    true
+                }
+            }
         }
-      } else {
-        collapse {
-          if (state.confirmStateChange(BpkBottomSheetValue.Collapsed)) {
-            scope.launch { state.collapse() }
-          }
-          true
-        }
-      }
     }
-  }
 }
 
 @Composable
 private fun BpkBottomSheetHandle(
-  modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
 ) {
-  Spacer(
-    modifier = modifier
-      .height(HandleHeight)
-      .padding(BpkSpacing.Md)
-      .width(HandleWidth)
-      .background(BpkTheme.colors.line, CircleShape),
-  )
+    Spacer(
+        modifier = modifier
+            .height(HandleHeight)
+            .padding(BpkSpacing.Md)
+            .width(HandleWidth)
+            .background(BpkTheme.colors.line, CircleShape),
+    )
 }
 
 private val HandleWidth = 36.dp

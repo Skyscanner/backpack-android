@@ -36,35 +36,35 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BpkCalendarHeaderCell(
-  model: CalendarCell.Header,
-  modifier: Modifier = Modifier,
-  onSelectWholeMonth: (CalendarCell.Header) -> Unit,
+    model: CalendarCell.Header,
+    modifier: Modifier = Modifier,
+    onSelectWholeMonth: (CalendarCell.Header) -> Unit,
 ) {
-  Row(
-    modifier = modifier.padding(horizontal = BpkSpacing.Base),
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Row(
+        modifier = modifier.padding(horizontal = BpkSpacing.Base),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    BpkText(
-      text = model.title,
-      maxLines = 1,
-      color = BpkTheme.colors.textPrimary,
-      style = BpkTheme.typography.heading4,
-      modifier = Modifier
-        .weight(1f)
-        .semantics { heading() }
-        .padding(vertical = BpkSpacing.Lg),
-    )
+        BpkText(
+            text = model.title,
+            maxLines = 1,
+            color = BpkTheme.colors.textPrimary,
+            style = BpkTheme.typography.heading4,
+            modifier = Modifier
+                .weight(1f)
+                .semantics { heading() }
+                .padding(vertical = BpkSpacing.Lg),
+        )
 
-    val monthSelectionMode = model.monthSelectionMode
-    if (monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth) {
-      BpkButton(
-        text = monthSelectionMode.label,
-        enabled = model.calendarSelectionMode !is CalendarParams.SelectionMode.Disabled,
-        type = BpkButtonType.Link,
-        onClick = { onSelectWholeMonth(model) },
-      )
+        val monthSelectionMode = model.monthSelectionMode
+        if (monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth) {
+            BpkButton(
+                text = monthSelectionMode.label,
+                enabled = model.calendarSelectionMode !is CalendarParams.SelectionMode.Disabled,
+                type = BpkButtonType.Link,
+                onClick = { onSelectWholeMonth(model) },
+            )
+        }
     }
-  }
 }

@@ -50,66 +50,66 @@ import net.skyscanner.backpack.demo.ui.destinations.ComponentScreenDestination
 @Destination("/")
 @RootNavGraph(start = true)
 fun ComponentListScreen(
-  modifier: Modifier = Modifier,
-  repository: StoriesRepository = StoriesRepository.getInstance(),
-  navigator: DestinationsNavigator = EmptyDestinationsNavigator,
+    modifier: Modifier = Modifier,
+    repository: StoriesRepository = StoriesRepository.getInstance(),
+    navigator: DestinationsNavigator = EmptyDestinationsNavigator,
 ) {
 
-  val state = rememberTopAppBarState()
+    val state = rememberTopAppBarState()
 
-  Column(modifier = modifier
-    .background(BpkTheme.colors.canvas)
-    .fillMaxSize()
-    .nestedScroll(state),
-  ) {
-    val context = LocalContext.current
-    BpkTopNavBar(
-      state = state,
-      navIcon = NavIcon.None,
-      title = stringResource(R.string.app_name),
-      actions = listOf(
-        IconAction(
-          icon = BpkIcon.Settings,
-          contentDescription = stringResource(R.string.settings_title),
-          onClick = {
-            val intent = Intent(context, SettingsActivity::class.java)
-            context.startActivity(intent)
-          },
-        ),
-      ),
-    )
-    LazyColumn {
-      item {
-        ComponentsTitle(title = stringResource(R.string.tokens_title))
-      }
-      items(repository.tokenComponents) { component ->
-        ComponentItem(
-          title = component.name,
-          onClick = { navigator.navigate(ComponentScreenDestination(component.name)) },
+    Column(modifier = modifier
+        .background(BpkTheme.colors.canvas)
+        .fillMaxSize()
+        .nestedScroll(state),
+    ) {
+        val context = LocalContext.current
+        BpkTopNavBar(
+            state = state,
+            navIcon = NavIcon.None,
+            title = stringResource(R.string.app_name),
+            actions = listOf(
+                IconAction(
+                    icon = BpkIcon.Settings,
+                    contentDescription = stringResource(R.string.settings_title),
+                    onClick = {
+                        val intent = Intent(context, SettingsActivity::class.java)
+                        context.startActivity(intent)
+                    },
+                ),
+            ),
         )
-      }
+        LazyColumn {
+            item {
+                ComponentsTitle(title = stringResource(R.string.tokens_title))
+            }
+            items(repository.tokenComponents) { component ->
+                ComponentItem(
+                    title = component.name,
+                    onClick = { navigator.navigate(ComponentScreenDestination(component.name)) },
+                )
+            }
 
-      item {
-        ComponentsTitle(title = stringResource(R.string.components_title))
-      }
-      items(repository.uiComponents) { component ->
-        val composeOnly = repository.isComposeOnly(component.name)
-        val viewOnly = repository.isViewOnly(component.name)
-        ComponentItem(
-          title = component.name,
-          badgeType = when {
-            composeOnly -> BpkBadgeType.Success
-            viewOnly -> BpkBadgeType.Normal
-            else -> null
-          },
-          badgeText = when {
-            composeOnly -> stringResource(R.string.story_badge_compose)
-            viewOnly -> stringResource(R.string.story_badge_view)
-            else -> null
-          },
-          onClick = { navigator.navigate(ComponentScreenDestination(component.name)) },
-        )
-      }
+            item {
+                ComponentsTitle(title = stringResource(R.string.components_title))
+            }
+            items(repository.uiComponents) { component ->
+                val composeOnly = repository.isComposeOnly(component.name)
+                val viewOnly = repository.isViewOnly(component.name)
+                ComponentItem(
+                    title = component.name,
+                    badgeType = when {
+                        composeOnly -> BpkBadgeType.Success
+                        viewOnly -> BpkBadgeType.Normal
+                        else -> null
+                    },
+                    badgeText = when {
+                        composeOnly -> stringResource(R.string.story_badge_compose)
+                        viewOnly -> stringResource(R.string.story_badge_view)
+                        else -> null
+                    },
+                    onClick = { navigator.navigate(ComponentScreenDestination(component.name)) },
+                )
+            }
+        }
     }
-  }
 }

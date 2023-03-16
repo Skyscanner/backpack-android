@@ -26,45 +26,45 @@ import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
 open class BpkSlider @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = R.attr.sliderStyle,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = R.attr.sliderStyle,
 ) : RangeSlider(
-  createContextThemeWrapper(
-    createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.sliderStyle),
-    attrs, R.attr.bpkSliderStyle,
-  ),
-  attrs,
-  defStyleAttr,
+    createContextThemeWrapper(
+        createContextThemeWrapper(context, attrs, com.google.android.material.R.attr.sliderStyle),
+        attrs, R.attr.bpkSliderStyle,
+    ),
+    attrs,
+    defStyleAttr,
 ) {
 
-  var value: Float
-    set(value) = setValues(value)
-    get() = values[0]
+    var value: Float
+        set(value) = setValues(value)
+        get() = values[0]
 
-  init {
-    initialize(attrs, defStyleAttr)
-  }
-
-  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    context.theme.obtainStyledAttributes(
-      attrs,
-      R.styleable.BpkSlider,
-      defStyleAttr,
-      0,
-    ).use {
-      val primaryColor = context.getColorStateList(R.color.bpkCoreAccent)
-      val lineColor = context.getColorStateList(R.color.bpkLine)
-
-      thumbTintList = it.getColorStateList(R.styleable.BpkSlider_sliderThumbColor) ?: primaryColor
-      trackActiveTintList = it.getColorStateList(R.styleable.BpkSlider_sliderTrackColorActive) ?: primaryColor
-      trackInactiveTintList = it.getColorStateList(R.styleable.BpkSlider_sliderTrackColorInactive) ?: lineColor
-
-      if (it.hasValue(R.styleable.BpkSlider_android_value)) {
-        value = it.getFloat(R.styleable.BpkSlider_android_value, 0.0f)
-      }
-
-      isTickVisible = false
+    init {
+        initialize(attrs, defStyleAttr)
     }
-  }
+
+    private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.BpkSlider,
+            defStyleAttr,
+            0,
+        ).use {
+            val primaryColor = context.getColorStateList(R.color.bpkCoreAccent)
+            val lineColor = context.getColorStateList(R.color.bpkLine)
+
+            thumbTintList = it.getColorStateList(R.styleable.BpkSlider_sliderThumbColor) ?: primaryColor
+            trackActiveTintList = it.getColorStateList(R.styleable.BpkSlider_sliderTrackColorActive) ?: primaryColor
+            trackInactiveTintList = it.getColorStateList(R.styleable.BpkSlider_sliderTrackColorInactive) ?: lineColor
+
+            if (it.hasValue(R.styleable.BpkSlider_android_value)) {
+                value = it.getFloat(R.styleable.BpkSlider_android_value, 0.0f)
+            }
+
+            isTickVisible = false
+        }
+    }
 }

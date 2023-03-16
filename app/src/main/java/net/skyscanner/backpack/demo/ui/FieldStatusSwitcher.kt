@@ -38,37 +38,37 @@ import net.skyscanner.backpack.demo.R
 
 @Composable
 internal fun FieldStatusSwitcher(
-  modifier: Modifier = Modifier,
-  initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
-  errorText: String = stringResource(R.string.generic_error_text),
-  verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-  horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-  content: @Composable ColumnScope.(status: BpkFieldStatus) -> Unit,
+    modifier: Modifier = Modifier,
+    initialStatus: BpkFieldStatus = BpkFieldStatus.Default,
+    errorText: String = stringResource(R.string.generic_error_text),
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
+    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    content: @Composable ColumnScope.(status: BpkFieldStatus) -> Unit,
 ) {
 
-  var status by remember { mutableStateOf(initialStatus) }
+    var status by remember { mutableStateOf(initialStatus) }
 
-  Column(
-    modifier = modifier,
-    verticalArrangement = verticalArrangement,
-    horizontalAlignment = horizontalAlignment,
-  ) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = verticalArrangement,
+        horizontalAlignment = horizontalAlignment,
+    ) {
 
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-      BpkButton(text = BpkFieldStatus.Default::class.simpleName!!, type = BpkButtonType.Featured) {
-        status = BpkFieldStatus.Default
-      }
-      BpkButton(text = BpkFieldStatus.Disabled::class.simpleName!!, type = BpkButtonType.Secondary) {
-        status = BpkFieldStatus.Disabled
-      }
-      BpkButton(text = BpkFieldStatus.Validated::class.simpleName!!, type = BpkButtonType.Primary) {
-        status = BpkFieldStatus.Validated
-      }
-      BpkButton(text = BpkFieldStatus.Error::class.simpleName!!, type = BpkButtonType.Destructive) {
-        status = BpkFieldStatus.Error(errorText)
-      }
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+            BpkButton(text = BpkFieldStatus.Default::class.simpleName!!, type = BpkButtonType.Featured) {
+                status = BpkFieldStatus.Default
+            }
+            BpkButton(text = BpkFieldStatus.Disabled::class.simpleName!!, type = BpkButtonType.Secondary) {
+                status = BpkFieldStatus.Disabled
+            }
+            BpkButton(text = BpkFieldStatus.Validated::class.simpleName!!, type = BpkButtonType.Primary) {
+                status = BpkFieldStatus.Validated
+            }
+            BpkButton(text = BpkFieldStatus.Error::class.simpleName!!, type = BpkButtonType.Destructive) {
+                status = BpkFieldStatus.Error(errorText)
+            }
+        }
+
+        content(status)
     }
-
-    content(status)
-  }
 }
