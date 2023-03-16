@@ -18,15 +18,10 @@
 
 package net.skyscanner.backpack.docs
 
-import android.content.Context
-import android.content.res.Configuration
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.view.ContextThemeWrapper
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import net.skyscanner.backpack.demo.BpkBaseActivity
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.ui.DemoScaffold
@@ -49,7 +44,7 @@ open class GenerateScreenshots(
     }
 
     @get:Rule
-    val composeTestRule = createComposeRule()
+    val composeTestRule = createAndroidComposeRule(BpkBaseActivity::class.java)
 
     @Test
     fun testTakeScreenshot() {
@@ -66,32 +61,15 @@ open class GenerateScreenshots(
             AppCompatDelegate.setDefaultNightMode(if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
         }
         composeTestRule.setContent {
-            val currentContext = LocalContext.current
-            val context = remember(currentContext, isDarkMode) { createDmContext(currentContext, isDarkMode) }
-
-            CompositionLocalProvider(
-                LocalContext provides context,
-                LocalConfiguration provides context.resources.configuration,
-            ) {
-                DemoScaffold(automationMode = true) {
-                    StoryScreen(
-                        component = story.component.name,
-                        story = story.name,
-                        isCompose = story.isCompose,
-                    )
-                }
+            DemoScaffold(automationMode = true) {
+                StoryScreen(
+                    component = story.component.name,
+                    story = story.name,
+                    isCompose = story.isCompose,
+                )
             }
         }
         takeScreenshot(if (isDarkMode) "dm" else null)
-    }
-
-    private fun createDmContext(context: Context, isDarkMode: Boolean): Context {
-        val configuration = Configuration(context.resources.configuration)
-        val uiModeMask = if (isDarkMode) Configuration.UI_MODE_NIGHT_YES else Configuration.UI_MODE_NIGHT_NO
-        configuration.uiMode = uiModeMask
-        return ContextThemeWrapper(context, 0).apply {
-            applyOverrideConfiguration(configuration)
-        }
     }
 
     private fun takeScreenshot(suffix: String?) {
