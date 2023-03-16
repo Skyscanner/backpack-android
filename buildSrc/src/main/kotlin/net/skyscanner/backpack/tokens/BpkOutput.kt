@@ -35,6 +35,7 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
 
         override fun invoke(typeSpec: TypeSpec): Boolean {
             FileSpec.builder(pkg, typeSpec.name!!)
+                .indent(" ".repeat(4))
                 .suppressWarningTypes("RedundantVisibilityModifier", "unused")
                 .addType(typeSpec)
                 .build()
@@ -62,6 +63,7 @@ sealed class BpkOutput<Input> : (Input) -> Boolean {
 
         override fun invoke(properties: List<PropertySpec>): Boolean {
             FileSpec.builder(pkg, name)
+                .indent(" ".repeat(4))
                 .suppressWarningTypes("RedundantVisibilityModifier", "unused")
                 .apply {
                     properties.forEach { addProperty(it) }
