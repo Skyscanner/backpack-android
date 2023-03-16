@@ -18,10 +18,9 @@
 
 package net.skyscanner.backpack.docs
 
-import android.content.Intent
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.compose.ui.test.junit4.AndroidComposeTestRule
-import androidx.test.rule.ActivityTestRule
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import net.skyscanner.backpack.demo.BpkBaseActivity
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
@@ -45,26 +44,22 @@ open class GenerateScreenshots(
     }
 
     @get:Rule
-    var activityRule = ActivityTestRule(BpkBaseActivity::class.java, true, false)
-
-    @get:Rule
-    val composeTestRule = AndroidComposeTestRule(activityRule) { it.activity }
+    val composeTestRule = createAndroidComposeRule(BpkBaseActivity::class.java)
 
     @Test
     fun testTakeScreenshot() {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        runActivityAndTakeScreenshot()
+        runActivityAndTakeScreenshot(isDarkMode = false)
     }
 
     @Test
     fun testTakeScreenshotDm() {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        runActivityAndTakeScreenshot("dm")
+        runActivityAndTakeScreenshot(isDarkMode = true)
     }
 
-    private fun runActivityAndTakeScreenshot(suffix: String? = null) {
-        val intent = Intent()
-        activityRule.launchActivity(intent)
+    private fun runActivityAndTakeScreenshot(isDarkMode: Boolean) {
+        composeTestRule.runOnUiThread {
+            AppCompatDelegate.setDefaultNightMode(if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
+        }
         composeTestRule.setContent {
             DemoScaffold(automationMode = true) {
                 StoryScreen(
@@ -74,8 +69,7 @@ open class GenerateScreenshots(
                 )
             }
         }
-        takeScreenshot(suffix)
-        activityRule.finishActivity()
+        takeScreenshot(if (isDarkMode) "dm" else null)
     }
 
     private fun takeScreenshot(suffix: String?) {
