@@ -27,6 +27,7 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
 import androidx.annotation.MenuRes
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import net.skyscanner.backpack.R
@@ -46,7 +47,7 @@ class BpkNavBar @JvmOverloads constructor(
         addView(it, COLLAPSING_LAYOUT_PARAMS)
     }
 
-    private val toolbar = BpkToolbar(context).also {
+    private val toolbar: Toolbar = BpkToolbar(context).also {
         val toolbarHeight = resolveThemeDimen(context, android.R.attr.actionBarSize, R.dimen.bpk_nav_bar_toolbar_height)
         val params = CollapsingToolbarLayout.LayoutParams(LayoutParams.MATCH_PARENT, toolbarHeight).apply {
             collapseMode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
