@@ -280,6 +280,10 @@ Please see the [code review guidelines](https://github.com/Skyscanner/backpack/b
  - Ensure CI runs the release workflow successfully
  - Once released verify the artifacts are available
 
+ The release workflow will also trigger our design docs publish. If successful, you should see your component changes at [skyscanner.design](https://skyscanner.design).
+ > Note: Don't forget that new components need to be added manually!
+
+
 ## Docs
 
 Run `./gradlew dokkaHtmlMultiModule` to generate API docs. Docs will be generated in the `dokka` folder.
