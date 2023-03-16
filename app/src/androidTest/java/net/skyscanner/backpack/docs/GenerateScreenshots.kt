@@ -20,13 +20,13 @@ package net.skyscanner.backpack.docs
 
 import android.content.Context
 import android.content.res.Configuration
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
-import net.skyscanner.backpack.BpkTestVariant
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.ui.DemoScaffold
@@ -53,18 +53,21 @@ open class GenerateScreenshots(
 
     @Test
     fun testTakeScreenshot() {
-        runActivityAndTakeScreenshot(BpkTestVariant.Default)
+        runActivityAndTakeScreenshot(isDarkMode = false)
     }
 
     @Test
     fun testTakeScreenshotDm() {
-        runActivityAndTakeScreenshot(BpkTestVariant.DarkMode)
+        runActivityAndTakeScreenshot(isDarkMode = true)
     }
 
-    private fun runActivityAndTakeScreenshot(variant: BpkTestVariant) {
+    private fun runActivityAndTakeScreenshot(isDarkMode: Boolean) {
+        composeTestRule.runOnUiThread {
+            AppCompatDelegate.setDefaultNightMode(if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
+        }
         composeTestRule.setContent {
             val currentContext = LocalContext.current
-            val context = remember(currentContext, variant) { variant.newContext(currentContext) }
+            val context = remember(currentContext, isDarkMode) { createDmContext(currentContext, isDarkMode) }
 
             CompositionLocalProvider(
                 LocalContext provides context,
@@ -79,8 +82,7 @@ open class GenerateScreenshots(
                 }
             }
         }
-
-        takeScreenshot(variant.takeUnless { it == BpkTestVariant.Default }?.id)
+        takeScreenshot(if (isDarkMode) "dm" else null)
     }
 
     private fun createDmContext(context: Context, isDarkMode: Boolean): Context {
