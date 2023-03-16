@@ -23,19 +23,19 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 data class Story(
-  val component: Component,
-  val name: String,
-  val isCompose: Boolean,
-  val kind: StoryKind,
-  val content: @Composable () -> Unit,
+    val component: Component,
+    val name: String,
+    val isCompose: Boolean,
+    val kind: StoryKind,
+    val content: @Composable () -> Unit,
 ) {
 
-  // used for code-generated extensions
-  companion object
+    // used for code-generated extensions
+    companion object
 }
 
 enum class StoryKind {
-  DemoOnly,
-  ScreenshotOnly,
-  StoryAndScreenshot,
+    DemoOnly,
+    ScreenshotOnly,
+    StoryAndScreenshot,
 }

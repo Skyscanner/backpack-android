@@ -29,47 +29,47 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.dialog.BpkDialog
 
 internal class BpkDialogIcon @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : AppCompatImageView(context, attrs, defStyleAttr) {
 
-  var type: BpkDialog.Type? = null
+    var type: BpkDialog.Type? = null
 
-  private val size = resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_size)
+    private val size = resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_size)
 
-  init {
-    minimumWidth = size
-    minimumHeight = size
-    maxWidth = size
-    maxHeight = size
-    scaleType = ScaleType.CENTER
-    imageTintList = context.getColorStateList(R.color.bpkTextPrimaryInverse)
-  }
-
-  var icon: BpkDialog.Icon? = null
-    set(value) {
-      field = value
-      if (value != null) {
-        setImageDrawable(AppCompatResources.getDrawable(context, value.drawableRes))
-        @Suppress("DEPRECATION")
-        background = createBackground(value.color)
-      }
+    init {
+        minimumWidth = size
+        minimumHeight = size
+        maxWidth = size
+        maxHeight = size
+        scaleType = ScaleType.CENTER
+        imageTintList = context.getColorStateList(R.color.bpkTextPrimaryInverse)
     }
 
-  private fun createBackground(@ColorInt backgroundColor: Int) =
-    GradientDrawable().apply {
-      cornerRadius = size / 2f
-      color = when (type) {
-        BpkDialog.Type.Success -> context.getColorStateList(R.color.bpkCoreAccent)
-        BpkDialog.Type.Warning -> context.getColorStateList(R.color.bpkStatusWarningSpot)
-        BpkDialog.Type.Destructive -> context.getColorStateList(R.color.bpkStatusDangerSpot)
-        else -> ColorStateList.valueOf(backgroundColor)
-      }
+    var icon: BpkDialog.Icon? = null
+        set(value) {
+            field = value
+            if (value != null) {
+                setImageDrawable(AppCompatResources.getDrawable(context, value.drawableRes))
+                @Suppress("DEPRECATION")
+                background = createBackground(value.color)
+            }
+        }
 
-      setStroke(
-        resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
-        context.getColorStateList(R.color.bpkSurfaceDefault),
-      )
-    }
+    private fun createBackground(@ColorInt backgroundColor: Int) =
+        GradientDrawable().apply {
+            cornerRadius = size / 2f
+            color = when (type) {
+                BpkDialog.Type.Success -> context.getColorStateList(R.color.bpkCoreAccent)
+                BpkDialog.Type.Warning -> context.getColorStateList(R.color.bpkStatusWarningSpot)
+                BpkDialog.Type.Destructive -> context.getColorStateList(R.color.bpkStatusDangerSpot)
+                else -> ColorStateList.valueOf(backgroundColor)
+            }
+
+            setStroke(
+                resources.getDimensionPixelSize(R.dimen.bpk_dialog_icon_stroke),
+                context.getColorStateList(R.color.bpkSurfaceDefault),
+            )
+        }
 }

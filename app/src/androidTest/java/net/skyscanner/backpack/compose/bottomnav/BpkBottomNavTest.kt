@@ -30,14 +30,14 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkBottomNavTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    BottomNavSample()
-  }
+    @Test
+    fun default() = snap {
+        BottomNavSample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun selectionUpdated() = snap {
-    BottomNavSample(defaultItemId = 2)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun selectionUpdated() = snap {
+        BottomNavSample(defaultItemId = 2)
+    }
 }

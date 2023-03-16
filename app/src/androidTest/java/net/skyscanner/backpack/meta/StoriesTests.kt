@@ -25,77 +25,77 @@ import org.junit.Test
 
 class StoriesTests {
 
-  private val repository = StoriesRepository.getInstance()
+    private val repository = StoriesRepository.getInstance()
 
-  @Test
-  fun assertStoriesAreNotEmpty() {
-    assertTrue(repository.testStories.isNotEmpty())
-  }
+    @Test
+    fun assertStoriesAreNotEmpty() {
+        assertTrue(repository.testStories.isNotEmpty())
+    }
 
-  @Test
-  fun assertViewStoryIsGenerated() {
-    assertTrue(repository.testStories.any { it.name == "TestViewStory" && !it.isCompose })
-  }
+    @Test
+    fun assertViewStoryIsGenerated() {
+        assertTrue(repository.testStories.any { it.name == "TestViewStory" && !it.isCompose })
+    }
 
-  @Test
-  fun assertComposeStoryIsGenerated() {
-    assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.isCompose })
-  }
+    @Test
+    fun assertComposeStoryIsGenerated() {
+        assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.isCompose })
+    }
 
-  @Test
-  fun assertComposeScreenshotStoryIsGenerated() {
-    assertTrue(repository.testStories.any { it.name == "TestComposeScreenshot" && it.kind == StoryKind.ScreenshotOnly })
-  }
+    @Test
+    fun assertComposeScreenshotStoryIsGenerated() {
+        assertTrue(repository.testStories.any { it.name == "TestComposeScreenshot" && it.kind == StoryKind.ScreenshotOnly })
+    }
 
-  @Test
-  fun assertViewScreenshotStoryIsGenerated() {
-    assertTrue(repository.testStories.any { it.name == "TestViewScreenshot" && it.kind == StoryKind.ScreenshotOnly })
-  }
+    @Test
+    fun assertViewScreenshotStoryIsGenerated() {
+        assertTrue(repository.testStories.any { it.name == "TestViewScreenshot" && it.kind == StoryKind.ScreenshotOnly })
+    }
 
-  @Test
-  fun assertStoriesSupportDefaultName() {
-    assertTrue(repository.testStories.any { it.name == "Default" })
-  }
+    @Test
+    fun assertStoriesSupportDefaultName() {
+        assertTrue(repository.testStories.any { it.name == "Default" })
+    }
 
-  @Test
-  fun assertTestComponentIsPresent() {
-    assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.component.name == "TestComponent" })
-  }
+    @Test
+    fun assertTestComponentIsPresent() {
+        assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.component.name == "TestComponent" })
+    }
 
-  @Test
-  fun assertTestComponentIsToken() {
-    assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.component.isToken })
-  }
+    @Test
+    fun assertTestComponentIsToken() {
+        assertTrue(repository.testStories.any { it.name == "TestComposeStory" && it.component.isToken })
+    }
 
-  @Test
-  fun assertTestComponentIsNotIncludedToTheApp() {
-    assertTrue(repository.uiComponents.none { it.name == "TestViewStory" })
-    assertTrue(repository.tokenComponents.none { it.name == "TestViewStory" })
-  }
+    @Test
+    fun assertTestComponentIsNotIncludedToTheApp() {
+        assertTrue(repository.uiComponents.none { it.name == "TestViewStory" })
+        assertTrue(repository.tokenComponents.none { it.name == "TestViewStory" })
+    }
 
-  @Test
-  fun assertTestStoriesAreNotIncludedToTheScreenshots() {
-    assertTrue(repository.screenshotStories.none { it.component.name == "TestViewStory" })
-  }
+    @Test
+    fun assertTestStoriesAreNotIncludedToTheScreenshots() {
+        assertTrue(repository.screenshotStories.none { it.component.name == "TestViewStory" })
+    }
 
-  @Test
-  fun assertNoDemoOnlyStoriesInScreenshots() {
-    assertTrue(repository.screenshotStories.none { it.kind == StoryKind.DemoOnly })
-  }
+    @Test
+    fun assertNoDemoOnlyStoriesInScreenshots() {
+        assertTrue(repository.screenshotStories.none { it.kind == StoryKind.DemoOnly })
+    }
 
-  @Test
-  fun assertNoScreenshotOnlyStoriesInDemos() {
-    assertTrue(repository.uiComponents.none {
-      repository.storiesOf(it.name, compose = true).any { it.kind == StoryKind.ScreenshotOnly }
-    },)
-    assertTrue(repository.uiComponents.none {
-      repository.storiesOf(it.name, compose = false).any { it.kind == StoryKind.ScreenshotOnly }
-    },)
-    assertTrue(repository.tokenComponents.none {
-      repository.storiesOf(it.name, compose = true).any { it.kind == StoryKind.ScreenshotOnly }
-    },)
-    assertTrue(repository.tokenComponents.none {
-      repository.storiesOf(it.name, compose = false).any { it.kind == StoryKind.ScreenshotOnly }
-    },)
-  }
+    @Test
+    fun assertNoScreenshotOnlyStoriesInDemos() {
+        assertTrue(repository.uiComponents.none {
+            repository.storiesOf(it.name, compose = true).any { it.kind == StoryKind.ScreenshotOnly }
+        },)
+        assertTrue(repository.uiComponents.none {
+            repository.storiesOf(it.name, compose = false).any { it.kind == StoryKind.ScreenshotOnly }
+        },)
+        assertTrue(repository.tokenComponents.none {
+            repository.storiesOf(it.name, compose = true).any { it.kind == StoryKind.ScreenshotOnly }
+        },)
+        assertTrue(repository.tokenComponents.none {
+            repository.storiesOf(it.name, compose = false).any { it.kind == StoryKind.ScreenshotOnly }
+        },)
+    }
 }

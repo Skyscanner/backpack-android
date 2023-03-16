@@ -30,40 +30,40 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @RatingComponent
 @ViewStory("Default")
 fun RatingStoryDefault(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_rating_default, modifier)
+    AndroidLayout(R.layout.fragment_rating_default, modifier)
 
 @Composable
 @RatingComponent
 @ViewStory("Icons", StoryKind.DemoOnly)
 fun RatingStoryIcons(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_rating_icons, modifier)
+    AndroidLayout(R.layout.fragment_rating_icons, modifier)
 
 @Composable
 @RatingComponent
 @ViewStory("No selectors", StoryKind.DemoOnly)
 fun RatingStoryNoSelectors(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_rating_no_selectors, modifier)
+    AndroidLayout(R.layout.fragment_rating_no_selectors, modifier)
 
 @Composable
 @RatingComponent
 @ViewStory("Horizontal")
 fun RatingStoryHorizontal(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_rating_sizes, modifier)
+    AndroidLayout(R.layout.fragment_rating_sizes, modifier)
 
 @Composable
 @RatingComponent
 @ViewStory("Vertical")
 fun RatingStoryVertical(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_rating_sizes_vertical, modifier)
+    AndroidLayout(R.layout.fragment_rating_sizes_vertical, modifier)
 
 @Composable
 @RatingComponent
 @ViewStory("Pill")
 fun RatingStoryPill(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_rating_sizes_pill, modifier)
+    AndroidLayout(R.layout.fragment_rating_sizes_pill, modifier)
 
 @Composable
 @RatingComponent
 @ViewStory("Zero to Five Scale", StoryKind.DemoOnly)
 fun RatingStoryZeroToFive(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_rating_zero_to_five, modifier)
+    AndroidLayout(R.layout.fragment_rating_zero_to_five, modifier)

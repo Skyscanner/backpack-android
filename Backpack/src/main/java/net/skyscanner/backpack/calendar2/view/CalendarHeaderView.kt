@@ -34,44 +34,44 @@ import net.skyscanner.backpack.util.Consumer
 import org.threeten.bp.DayOfWeek
 
 internal class CalendarHeaderView @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr), Consumer<CalendarParams> {
 
-  private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-    style = Paint.Style.FILL_AND_STROKE
-    color = context.getColor(R.color.bpkLine)
-    strokeWidth = resources.getDimension(R.dimen.bpk_calendar_border_width)
-  }
-
-  init {
-    orientation = HORIZONTAL
-    repeat(DayOfWeek.values().size) {
-      val text = BpkText(context)
-      text.textStyle = BpkText.TextStyle.Label2
-      text.setTextColor(context.getColorStateList(R.color.bpkTextSecondary))
-      text.gravity = Gravity.CENTER
-      text.maxLines = 1
-      text.isSingleLine = true
-      text.isAllCaps = true
-      text.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
-      addView(text, LayoutParams(0, LayoutParams.MATCH_PARENT, 1f))
+    private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.FILL_AND_STROKE
+        color = context.getColor(R.color.bpkLine)
+        strokeWidth = resources.getDimension(R.dimen.bpk_calendar_border_width)
     }
-  }
 
-  override fun invoke(params: CalendarParams) {
-    var current = params.weekFields.firstDayOfWeek
-    forEach {
-      it as TextView
-      it.text = current.getDisplayName(params.dayOfWeekText, params.locale)
-      current += 1
+    init {
+        orientation = HORIZONTAL
+        repeat(DayOfWeek.values().size) {
+            val text = BpkText(context)
+            text.textStyle = BpkText.TextStyle.Label2
+            text.setTextColor(context.getColorStateList(R.color.bpkTextSecondary))
+            text.gravity = Gravity.CENTER
+            text.maxLines = 1
+            text.isSingleLine = true
+            text.isAllCaps = true
+            text.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+            addView(text, LayoutParams(0, LayoutParams.MATCH_PARENT, 1f))
+        }
     }
-  }
 
-  override fun dispatchDraw(canvas: Canvas) {
-    super.dispatchDraw(canvas)
-    val y = height.toFloat() - linePaint.strokeWidth / 2
-    canvas.drawLine(0f, y, width.toFloat(), y, linePaint)
-  }
+    override fun invoke(params: CalendarParams) {
+        var current = params.weekFields.firstDayOfWeek
+        forEach {
+            it as TextView
+            it.text = current.getDisplayName(params.dayOfWeekText, params.locale)
+            current += 1
+        }
+    }
+
+    override fun dispatchDraw(canvas: Canvas) {
+        super.dispatchDraw(canvas)
+        val y = height.toFloat() - linePaint.strokeWidth / 2
+        canvas.drawLine(0f, y, width.toFloat(), y, linePaint)
+    }
 }

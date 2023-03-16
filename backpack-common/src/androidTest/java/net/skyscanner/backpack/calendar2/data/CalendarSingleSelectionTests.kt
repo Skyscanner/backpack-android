@@ -33,61 +33,61 @@ import org.junit.Test
 
 class CalendarSingleSelectionTests {
 
-  private val singleSelection = CalendarSettings.Default.copy(
-    selectionMode = CalendarParams.SelectionMode.Single,
-  )
-
-  @Before
-  fun setup() {
-    initAndroidThreeTen()
-  }
-
-  @Test
-  fun date_can_be_selected() {
-    testCalendarWith(singleSelection) {
-      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-
-      verify {
-        assertEquals(CalendarSelection.Single(firstDay.date), state.selection)
-      }
-    }
-  }
-
-  @Test
-  fun when_selection_is_in_place_cells_have_correct_state() {
-    testCalendarWith(singleSelection) {
-      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-
-      verify {
-        assertEquals(CalendarCell.Selection.Single, firstDay.selection)
-      }
-    }
-  }
-
-  @Test
-  fun selected_date_can_be_changed() {
-    testCalendarWith(singleSelection) {
-      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-      stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
-
-      verify {
-        assertEquals(CalendarSelection.Single(lastDay.date), state.selection)
-      }
-    }
-  }
-
-  @Test
-  fun disabled_date_cannot_be_selected() {
-    val disabledDates = mapOf(
-      singleSelection.range.start to CellInfo(disabled = true),
+    private val singleSelection = CalendarSettings.Default.copy(
+        selectionMode = CalendarParams.SelectionMode.Single,
     )
 
-    testCalendarWith(singleSelection.copy(cellsInfo = disabledDates)) {
-      stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
-
-      verify {
-        assertTrue(state.selection is CalendarSelection.None)
-      }
+    @Before
+    fun setup() {
+        initAndroidThreeTen()
     }
-  }
+
+    @Test
+    fun date_can_be_selected() {
+        testCalendarWith(singleSelection) {
+            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+
+            verify {
+                assertEquals(CalendarSelection.Single(firstDay.date), state.selection)
+            }
+        }
+    }
+
+    @Test
+    fun when_selection_is_in_place_cells_have_correct_state() {
+        testCalendarWith(singleSelection) {
+            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+
+            verify {
+                assertEquals(CalendarCell.Selection.Single, firstDay.selection)
+            }
+        }
+    }
+
+    @Test
+    fun selected_date_can_be_changed() {
+        testCalendarWith(singleSelection) {
+            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+            stateMachine.onClick(CalendarInteraction.DateClicked(lastDay))
+
+            verify {
+                assertEquals(CalendarSelection.Single(lastDay.date), state.selection)
+            }
+        }
+    }
+
+    @Test
+    fun disabled_date_cannot_be_selected() {
+        val disabledDates = mapOf(
+            singleSelection.range.start to CellInfo(disabled = true),
+        )
+
+        testCalendarWith(singleSelection.copy(cellsInfo = disabledDates)) {
+            stateMachine.onClick(CalendarInteraction.DateClicked(firstDay))
+
+            verify {
+                assertTrue(state.selection is CalendarSelection.None)
+            }
+        }
+    }
 }

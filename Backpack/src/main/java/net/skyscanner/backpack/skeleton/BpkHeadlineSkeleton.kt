@@ -31,78 +31,78 @@ import net.skyscanner.backpack.overlay.internal.CornerRadiusViewOutlineProvider
 import net.skyscanner.backpack.util.use
 
 class BpkHeadlineSkeleton @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  @AttrRes defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    @AttrRes defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
-  val paint = Paint().apply {
-    color = context.getColor(R.color.bpkSurfaceHighlight)
-    style = Paint.Style.FILL
-    isAntiAlias = true
-  }
-
-  enum class SkeletonHeightSizeType(
-    internal val id: Int,
-  ) {
-    /**
-     * Small size: 8dp
-     */
-    Small(0),
-    /**
-     * Medium size: 16dp
-     */
-    Medium(1),
-    /**
-     * Large size: 32dp
-     */
-    Large(2),
-    /**
-     * Custom size, need set a detail height of the component.
-     */
-    Custom(3),
-  }
-
-  /**
-   * Small: 8dp, Medium: 16dp, Large: 32dp, or set to Custom and set height of the component.
-   */
-  var heightSize = SkeletonHeightSizeType.Small
-
-  @DimenRes
-  private fun getHeightSize(size: SkeletonHeightSizeType): Int {
-    return when (size) {
-      SkeletonHeightSizeType.Custom -> 0
-      SkeletonHeightSizeType.Small -> R.dimen.bpkSpacingMd
-      SkeletonHeightSizeType.Medium -> R.dimen.bpkSpacingBase
-      SkeletonHeightSizeType.Large -> R.dimen.bpkSpacingXl
-    }
-  }
-
-  init {
-    context.obtainStyledAttributes(attrs, R.styleable.BpkHeadlineSkeleton, defStyleAttr, 0).use {
-      heightSize = parseHeightTypeAttribute(it, heightSize)
+    val paint = Paint().apply {
+        color = context.getColor(R.color.bpkSurfaceHighlight)
+        style = Paint.Style.FILL
+        isAntiAlias = true
     }
 
-    outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs)
-    clipToOutline = true
-  }
+    enum class SkeletonHeightSizeType(
+        internal val id: Int,
+    ) {
+        /**
+         * Small size: 8dp
+         */
+        Small(0),
+        /**
+         * Medium size: 16dp
+         */
+        Medium(1),
+        /**
+         * Large size: 32dp
+         */
+        Large(2),
+        /**
+         * Custom size, need set a detail height of the component.
+         */
+        Custom(3),
+    }
 
-  override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-    super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    /**
+     * Small: 8dp, Medium: 16dp, Large: 32dp, or set to Custom and set height of the component.
+     */
+    var heightSize = SkeletonHeightSizeType.Small
 
-    if (heightSize === SkeletonHeightSizeType.Custom) return
-    val heightSize = context.resources.getDimensionPixelSize(getHeightSize(heightSize))
-    setMeasuredDimension(widthMeasureSpec, heightSize)
-  }
+    @DimenRes
+    private fun getHeightSize(size: SkeletonHeightSizeType): Int {
+        return when (size) {
+            SkeletonHeightSizeType.Custom -> 0
+            SkeletonHeightSizeType.Small -> R.dimen.bpkSpacingMd
+            SkeletonHeightSizeType.Medium -> R.dimen.bpkSpacingBase
+            SkeletonHeightSizeType.Large -> R.dimen.bpkSpacingXl
+        }
+    }
 
-  override fun onDraw(canvas: Canvas?) {
-    val borderRadius = context.resources.getDimensionPixelSize(R.dimen.bpkBorderRadiusXs)
-    canvas?.drawRoundRect(0f, 0f, width.toFloat(), height.toFloat(), borderRadius.toFloat(), borderRadius.toFloat(), paint)
-  }
+    init {
+        context.obtainStyledAttributes(attrs, R.styleable.BpkHeadlineSkeleton, defStyleAttr, 0).use {
+            heightSize = parseHeightTypeAttribute(it, heightSize)
+        }
 
-  private companion object {
-    private fun parseHeightTypeAttribute(it: TypedArray, fallback: SkeletonHeightSizeType) =
-      it.getInt(R.styleable.BpkHeadlineSkeleton_skeletonHeadlineHeightSize, fallback.id).let { id ->
-        SkeletonHeightSizeType.values().find { it.id == id } ?: fallback
-      }
-  }
+        outlineProvider = CornerRadiusViewOutlineProvider(R.dimen.bpkBorderRadiusXs)
+        clipToOutline = true
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        if (heightSize === SkeletonHeightSizeType.Custom) return
+        val heightSize = context.resources.getDimensionPixelSize(getHeightSize(heightSize))
+        setMeasuredDimension(widthMeasureSpec, heightSize)
+    }
+
+    override fun onDraw(canvas: Canvas?) {
+        val borderRadius = context.resources.getDimensionPixelSize(R.dimen.bpkBorderRadiusXs)
+        canvas?.drawRoundRect(0f, 0f, width.toFloat(), height.toFloat(), borderRadius.toFloat(), borderRadius.toFloat(), paint)
+    }
+
+    private companion object {
+        private fun parseHeightTypeAttribute(it: TypedArray, fallback: SkeletonHeightSizeType) =
+            it.getInt(R.styleable.BpkHeadlineSkeleton_skeletonHeadlineHeightSize, fallback.id).let { id ->
+                SkeletonHeightSizeType.values().find { it.id == id } ?: fallback
+            }
+    }
 }

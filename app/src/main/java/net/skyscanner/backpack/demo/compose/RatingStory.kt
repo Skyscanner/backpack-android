@@ -41,138 +41,138 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @RatingComponent
 @ComposeStory
 fun RatingStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier
-      .verticalScroll(rememberScrollState())
-      .padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
-    BpkRatingDefaultSample()
-    BpkRatingTitleOnlySample()
-    BpkRatingNoScaleSample()
-    BpkRatingCustomContentSample()
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        BpkRatingDefaultSample()
+        BpkRatingTitleOnlySample()
+        BpkRatingNoScaleSample()
+        BpkRatingCustomContentSample()
 
-    BpkRatingLargeSample()
-    BpkRatingLargeTitleOnlySample()
-    BpkRatingLargeNoScaleSample()
-    BpkRatingLargeCustomContentSample()
-    BpkRatingLargeCustomContentNoSubtitleSample()
-  }
+        BpkRatingLargeSample()
+        BpkRatingLargeTitleOnlySample()
+        BpkRatingLargeNoScaleSample()
+        BpkRatingLargeCustomContentSample()
+        BpkRatingLargeCustomContentNoSubtitleSample()
+    }
 }
 
 @Composable
 internal fun BpkRatingDefaultSample(modifier: Modifier = Modifier) {
-  BpkRating(
-    modifier = modifier,
-    title = stringResource(R.string.rating_title),
-    subtitle = stringResource(R.string.rating_subtitle),
-    value = RatingValue,
-  )
+    BpkRating(
+        modifier = modifier,
+        title = stringResource(R.string.rating_title),
+        subtitle = stringResource(R.string.rating_subtitle),
+        value = RatingValue,
+    )
 }
 
 @Composable
 internal fun BpkRatingTitleOnlySample(modifier: Modifier = Modifier) {
-  BpkRating(
-    modifier = modifier,
-    title = stringResource(R.string.rating_title),
-    value = RatingValue,
-    scale = BpkRatingScale.ZeroToTen,
-  )
+    BpkRating(
+        modifier = modifier,
+        title = stringResource(R.string.rating_title),
+        value = RatingValue,
+        scale = BpkRatingScale.ZeroToTen,
+    )
 }
 
 @Composable
 internal fun BpkRatingNoScaleSample(modifier: Modifier = Modifier) {
-  BpkRating(
-    modifier = modifier,
-    title = stringResource(R.string.rating_title),
-    subtitle = stringResource(R.string.rating_subtitle),
-    value = RatingValue,
-    showScale = false,
-  )
+    BpkRating(
+        modifier = modifier,
+        title = stringResource(R.string.rating_title),
+        subtitle = stringResource(R.string.rating_subtitle),
+        value = RatingValue,
+        showScale = false,
+    )
 }
 
 @Composable
 internal fun BpkRatingCustomContentSample(modifier: Modifier = Modifier) {
-  BpkRating(
-    modifier = modifier,
-    value = RatingValue,
-    subtitle = stringResource(R.string.rating_subtitle),
-  ) {
-    CustomContent()
-  }
+    BpkRating(
+        modifier = modifier,
+        value = RatingValue,
+        subtitle = stringResource(R.string.rating_subtitle),
+    ) {
+        CustomContent()
+    }
 }
 
 @Composable
 internal fun BpkRatingLargeSample(modifier: Modifier = Modifier) {
-  BpkRating(
-    modifier = modifier,
-    title = stringResource(R.string.rating_title),
-    subtitle = stringResource(R.string.rating_subtitle),
-    value = RatingValue,
-    size = BpkRatingSize.Large,
-  )
+    BpkRating(
+        modifier = modifier,
+        title = stringResource(R.string.rating_title),
+        subtitle = stringResource(R.string.rating_subtitle),
+        value = RatingValue,
+        size = BpkRatingSize.Large,
+    )
 }
 
 @Composable
 internal fun BpkRatingLargeTitleOnlySample(modifier: Modifier = Modifier) {
-  BpkRating(
-    modifier = modifier,
-    title = stringResource(R.string.rating_title),
-    value = RatingValue,
-    size = BpkRatingSize.Large,
-    scale = BpkRatingScale.ZeroToTen,
-  )
+    BpkRating(
+        modifier = modifier,
+        title = stringResource(R.string.rating_title),
+        value = RatingValue,
+        size = BpkRatingSize.Large,
+        scale = BpkRatingScale.ZeroToTen,
+    )
 }
 
 @Composable
 internal fun BpkRatingLargeNoScaleSample(modifier: Modifier = Modifier) {
-  BpkRating(
-    modifier = modifier,
-    title = stringResource(R.string.rating_title),
-    subtitle = stringResource(R.string.rating_subtitle),
-    value = RatingValue,
-    size = BpkRatingSize.Large,
-    showScale = false,
-  )
+    BpkRating(
+        modifier = modifier,
+        title = stringResource(R.string.rating_title),
+        subtitle = stringResource(R.string.rating_subtitle),
+        value = RatingValue,
+        size = BpkRatingSize.Large,
+        showScale = false,
+    )
 }
 
 @Composable
 @Preview
 internal fun BpkRatingLargeCustomContentSample(
-  modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
 ) {
-  BpkRating(
-    value = RatingValue,
-    size = BpkRatingSize.Large,
-    subtitle = stringResource(R.string.rating_subtitle),
-  ) {
-    CustomContent()
-  }
+    BpkRating(
+        value = RatingValue,
+        size = BpkRatingSize.Large,
+        subtitle = stringResource(R.string.rating_subtitle),
+    ) {
+        CustomContent()
+    }
 }
 
 @Composable
 internal fun BpkRatingLargeCustomContentNoSubtitleSample(modifier: Modifier = Modifier) {
-  BpkRating(
-    modifier = modifier,
-    value = RatingValue,
-    size = BpkRatingSize.Large,
-  ) {
-    CustomContent()
-  }
+    BpkRating(
+        modifier = modifier,
+        value = RatingValue,
+        size = BpkRatingSize.Large,
+    ) {
+        CustomContent()
+    }
 }
 
 @Composable
 private fun CustomContent(
-  modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
 ) {
-  val context = LocalContext.current
-  BpkStarRating(
-    rating = RatingValue,
-    contentDescription = { _, max ->
-      context.getString(R.string.star_rating_accessibility_status, RatingValue, max)
-    },
-    modifier = modifier,
-  )
+    val context = LocalContext.current
+    BpkStarRating(
+        rating = RatingValue,
+        contentDescription = { _, max ->
+            context.getString(R.string.star_rating_accessibility_status, RatingValue, max)
+        },
+        modifier = modifier,
+    )
 }
 
 private const val RatingValue = 4.57f

@@ -54,108 +54,108 @@ private const val INVALID_RES = -1
  * @see [BpkSpinner.Type]
  */
 open class BpkSpinner @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-  private val colors = arrayOf(
-    R.color.bpkPrimary,
-    R.color.bpkWhite,
-    R.color.bpkSkyGrayTint01,
-    R.color.bpkTextPrimary,
-    R.color.bpkTextDisabled,
-    R.color.bpkTextOnDark,
-  )
+    private val colors = arrayOf(
+        R.color.bpkPrimary,
+        R.color.bpkWhite,
+        R.color.bpkSkyGrayTint01,
+        R.color.bpkTextPrimary,
+        R.color.bpkTextDisabled,
+        R.color.bpkTextOnDark,
+    )
 
-  private val animationsEnabled =
-    Global.getFloat(context.contentResolver, Global.ANIMATOR_DURATION_SCALE, 1f) != 0f
+    private val animationsEnabled =
+        Global.getFloat(context.contentResolver, Global.ANIMATOR_DURATION_SCALE, 1f) != 0f
 
-  private var progressBar: ProgressBar? = null
-  @ColorInt
-  private var themePrimaryColor: Int = INVALID_RES
+    private var progressBar: ProgressBar? = null
+    @ColorInt
+    private var themePrimaryColor: Int = INVALID_RES
 
-  /**
-   * Updates the Spinner's type.
-   * @see [BpkSpinner.Type]
-   */
-  @Suppress("DEPRECATION")
-  var type = Type.PRIMARY
-    set(value) {
-      field = value
-      updateColor()
-    }
-
-  /**
-   * Toggles the small version of the Spinner
-   */
-  var small = false
-    set(value) {
-      field = value
-      updateSize()
-    }
-
-  init {
-    initialize(attrs, defStyleAttr)
-  }
-
-  @ColorInt
-  fun getColor(): Int {
+    /**
+     * Updates the Spinner's type.
+     * @see [BpkSpinner.Type]
+     */
     @Suppress("DEPRECATION")
-    if (type === Type.PRIMARY && themePrimaryColor != INVALID_RES) {
-      return themePrimaryColor
+    var type = Type.PRIMARY
+        set(value) {
+            field = value
+            updateColor()
+        }
+
+    /**
+     * Toggles the small version of the Spinner
+     */
+    var small = false
+        set(value) {
+            field = value
+            updateSize()
+        }
+
+    init {
+        initialize(attrs, defStyleAttr)
     }
-    return context.getColor(colors[type.ordinal])
-  }
 
-  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val wrappedContext = createContextThemeWrapper(context, attrs, R.attr.bpkSpinnerPrimaryStyle)
-    wrappedContext.obtainStyledAttributes(attrs, R.styleable.BpkSpinner, defStyleAttr, 0).use {
-      themePrimaryColor = it.getColor(R.styleable.BpkSpinner_spinnerColor, INVALID_RES)
-      this.small = it.getBoolean(R.styleable.BpkSpinner_small, false)
-      this.type = Type.values()[it.getInt(R.styleable.BpkSpinner_type, 0)]
+    @ColorInt
+    fun getColor(): Int {
+        @Suppress("DEPRECATION")
+        if (type === Type.PRIMARY && themePrimaryColor != INVALID_RES) {
+            return themePrimaryColor
+        }
+        return context.getColor(colors[type.ordinal])
     }
-  }
 
-  private fun updateColor() {
-    progressBar?.indeterminateDrawable?.mutate()?.colorFilter =
-      BlendModeColorFilterCompat.createBlendModeColorFilterCompat(getColor(), BlendModeCompat.SRC_IN)
-  }
-
-  private fun updateSize() {
-    // Progress animation causes a timeout error in espresso tests:
-    //   - Perhaps the main thread has not gone idle within a reasonable amount of time? There could be an animation or something constantly repainting the screen.
-    //
-    // Since this component only makes sense with animations we simple don't add the progress bar when animations are disabled.
-
-    // td
-    if (animationsEnabled || Build.VERSION.SDK_INT >= 29) {
-      val style = if (small) android.R.attr.progressBarStyleSmall else android.R.attr.progressBarStyle
-      progressBar = ProgressBar(context, null, style)
-
-      removeAllViews()
-      addView(
-        progressBar,
-        ViewGroup.LayoutParams(
-          ViewGroup.LayoutParams.MATCH_PARENT,
-          ViewGroup.LayoutParams.MATCH_PARENT,
-        ),
-      )
-
-      updateColor()
+    private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
+        val wrappedContext = createContextThemeWrapper(context, attrs, R.attr.bpkSpinnerPrimaryStyle)
+        wrappedContext.obtainStyledAttributes(attrs, R.styleable.BpkSpinner, defStyleAttr, 0).use {
+            themePrimaryColor = it.getColor(R.styleable.BpkSpinner_spinnerColor, INVALID_RES)
+            this.small = it.getBoolean(R.styleable.BpkSpinner_small, false)
+            this.type = Type.values()[it.getInt(R.styleable.BpkSpinner_type, 0)]
+        }
     }
-  }
 
-  enum class Type {
-    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) PRIMARY,
-    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("OnDarkSurface")) LIGHT,
-    @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) DARK,
-    TextPrimary,
-    Disabled,
-    OnDarkSurface,
-    ;
-    private companion object {
-      const val DeprecatedMessage = "These styles are not supported anymore and will be removed soon"
+    private fun updateColor() {
+        progressBar?.indeterminateDrawable?.mutate()?.colorFilter =
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(getColor(), BlendModeCompat.SRC_IN)
     }
-  }
+
+    private fun updateSize() {
+        // Progress animation causes a timeout error in espresso tests:
+        //   - Perhaps the main thread has not gone idle within a reasonable amount of time? There could be an animation or something constantly repainting the screen.
+        //
+        // Since this component only makes sense with animations we simple don't add the progress bar when animations are disabled.
+
+        // td
+        if (animationsEnabled || Build.VERSION.SDK_INT >= 29) {
+            val style = if (small) android.R.attr.progressBarStyleSmall else android.R.attr.progressBarStyle
+            progressBar = ProgressBar(context, null, style)
+
+            removeAllViews()
+            addView(
+                progressBar,
+                ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                ),
+            )
+
+            updateColor()
+        }
+    }
+
+    enum class Type {
+        @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) PRIMARY,
+        @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("OnDarkSurface")) LIGHT,
+        @Deprecated(message = DeprecatedMessage, replaceWith = ReplaceWith("TextPrimary")) DARK,
+        TextPrimary,
+        Disabled,
+        OnDarkSurface,
+        ;
+        private companion object {
+            const val DeprecatedMessage = "These styles are not supported anymore and will be removed soon"
+        }
+    }
 }

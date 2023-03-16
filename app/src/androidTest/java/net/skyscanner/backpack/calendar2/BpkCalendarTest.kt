@@ -30,134 +30,134 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkCalendarTest : BpkSnapshotTest() {
 
-  @Before
-  fun setup() {
-    AndroidThreeTen.init(testContext)
-  }
+    @Before
+    fun setup() {
+        AndroidThreeTen.init(testContext)
+    }
 
-  @Test
-  fun default() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.Default)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    fun default() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.Default)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun labeled() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.Labeled)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun labeled() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.Labeled)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun past() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.Past)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun past() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.Past)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun leapFebruary() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.LeapFebruary)
-    calendar.setSelection(BpkCalendarTestCases.Selection.LeapFebruary)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun leapFebruary() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.LeapFebruary)
+        calendar.setSelection(BpkCalendarTestCases.Selection.LeapFebruary)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun nonLeapFebruary() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.NonLeapFebruary)
-    calendar.setSelection(BpkCalendarTestCases.Selection.NonLeapFebruary)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun nonLeapFebruary() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.NonLeapFebruary)
+        calendar.setSelection(BpkCalendarTestCases.Selection.NonLeapFebruary)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun todayIsLastDayOfMonth() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.TodayIsLastDayOfMonth)
-    calendar.setSelection(BpkCalendarTestCases.Selection.TodayIsLastDayOfMonth)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun todayIsLastDayOfMonth() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.TodayIsLastDayOfMonth)
+        calendar.setSelection(BpkCalendarTestCases.Selection.TodayIsLastDayOfMonth)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun todayIsNewYear() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.TodayIsNewYear)
-    calendar.setSelection(BpkCalendarTestCases.Selection.TodayIsNewYear)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun todayIsNewYear() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.TodayIsNewYear)
+        calendar.setSelection(BpkCalendarTestCases.Selection.TodayIsNewYear)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  fun withRangeSet() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithRangeSetProgrammatically)
-    calendar.setSelection(BpkCalendarTestCases.Selection.WithRangeSetProgrammatically)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    fun withRangeSet() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.WithRangeSetProgrammatically)
+        calendar.setSelection(BpkCalendarTestCases.Selection.WithRangeSetProgrammatically)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun withSingleDaySet() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithSingleDaySetProgrammatically)
-    calendar.setSelection(BpkCalendarTestCases.Selection.WithSingleDaySetProgrammatically)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun withSingleDaySet() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.WithSingleDaySetProgrammatically)
+        calendar.setSelection(BpkCalendarTestCases.Selection.WithSingleDaySetProgrammatically)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun withDisabledDates() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun withDisabledDates() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  fun withDisabledDates_SelectSingle() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectSingle)
-    calendar.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectSingle)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    fun withDisabledDates_SelectSingle() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectSingle)
+        calendar.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectSingle)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun withDisabledDates_SelectRange() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectRange)
-    calendar.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectRange)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withDisabledDates_SelectRange() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectRange)
+        calendar.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectRange)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun withDisabledDates_SelectDisabledDate() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectDisabledDate)
-    calendar.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectDisabledDate)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withDisabledDates_SelectDisabledDate() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.WithDisabledDates_SelectDisabledDate)
+        calendar.setSelection(BpkCalendarTestCases.Selection.WithDisabledDates_SelectDisabledDate)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  fun withWholeMonthButtonEnabled() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthButtonEnabled)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    fun withWholeMonthButtonEnabled() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthButtonEnabled)
+        snap(calendar, padding = 0)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun withWholeMonthSet() {
-    val calendar = BpkCalendar(testContext)
-    calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
-    calendar.setSelection(BpkCalendarTestCases.Selection.WithWholeMonthSetProgrammatically)
-    snap(calendar, padding = 0)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun withWholeMonthSet() {
+        val calendar = BpkCalendar(testContext)
+        calendar.setParams(BpkCalendarTestCases.Params.WithWholeMonthSetProgrammatically)
+        calendar.setSelection(BpkCalendarTestCases.Selection.WithWholeMonthSetProgrammatically)
+        snap(calendar, padding = 0)
+    }
 }

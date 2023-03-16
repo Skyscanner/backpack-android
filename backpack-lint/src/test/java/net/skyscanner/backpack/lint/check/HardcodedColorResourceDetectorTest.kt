@@ -25,107 +25,107 @@ import org.junit.Test
 @Suppress("UnstableApiUsage")
 class HardcodedColorResourceDetectorTest {
 
-  @Test
-  fun `clean when color is using color resource`() {
-    val layout = xml(
-      "values/colors.xml",
-      """<?xml version="1.0" encoding="utf-8"?>
+    @Test
+    fun `clean when color is using color resource`() {
+        val layout = xml(
+            "values/colors.xml",
+            """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">@color/bpkBlack</color>
 </resources>""",
-    )
-      .indented()
-      .within("res")
-    TestLintTask.lint().files(layout)
-      .allowMissingSdk()
-      .issues(HardcodedColorResourceDetector.ISSUE)
-      .run()
-      .expectClean()
-  }
+        )
+            .indented()
+            .within("res")
+        TestLintTask.lint().files(layout)
+            .allowMissingSdk()
+            .issues(HardcodedColorResourceDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
 
-  @Test
-  fun `clean when defining transparent black`() {
-    val layout = xml(
-      "values/colors.xml",
-      """<?xml version="1.0" encoding="utf-8"?>
+    @Test
+    fun `clean when defining transparent black`() {
+        val layout = xml(
+            "values/colors.xml",
+            """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">#18000000</color>
 </resources>""",
-    )
-      .indented()
-      .within("res")
-    TestLintTask.lint().files(layout)
-      .allowMissingSdk()
-      .issues(HardcodedColorResourceDetector.ISSUE)
-      .run()
-      .expectClean()
-  }
+        )
+            .indented()
+            .within("res")
+        TestLintTask.lint().files(layout)
+            .allowMissingSdk()
+            .issues(HardcodedColorResourceDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
 
-  @Test
-  fun `clean when defining transparent white`() {
-    val layout = xml(
-      "values/colors.xml",
-      """<?xml version="1.0" encoding="utf-8"?>
+    @Test
+    fun `clean when defining transparent white`() {
+        val layout = xml(
+            "values/colors.xml",
+            """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">#18FFFFFF</color>
 </resources>""",
-    )
-      .indented()
-      .within("res")
-    TestLintTask.lint().files(layout)
-      .allowMissingSdk()
-      .issues(HardcodedColorResourceDetector.ISSUE)
-      .run()
-      .expectClean()
-  }
+        )
+            .indented()
+            .within("res")
+        TestLintTask.lint().files(layout)
+            .allowMissingSdk()
+            .issues(HardcodedColorResourceDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
 
-  @Test
-  fun `warning when defining transparent color`() {
-    val expected =
-      """res/values/colors.xml:3: Warning: Use Backpack colors to improve consistency and dark mode support. [HardcodedColorResourceDetector]
+    @Test
+    fun `warning when defining transparent color`() {
+        val expected =
+            """res/values/colors.xml:3: Warning: Use Backpack colors to improve consistency and dark mode support. [HardcodedColorResourceDetector]
   <color name="background_color">#18f1f2f8</color>
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 0 errors, 1 warnings"""
 
-    val layout = xml(
-      "values/colors.xml",
-      """<?xml version="1.0" encoding="utf-8"?>
+        val layout = xml(
+            "values/colors.xml",
+            """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">#18f1f2f8</color>
 </resources>""",
-    )
-      .indented()
-      .within("res")
-    TestLintTask.lint().files(layout)
-      .allowMissingSdk()
-      .issues(HardcodedColorResourceDetector.ISSUE)
-      .run()
-      .expectWarningCount(1)
-      .expect(expected)
-  }
+        )
+            .indented()
+            .within("res")
+        TestLintTask.lint().files(layout)
+            .allowMissingSdk()
+            .issues(HardcodedColorResourceDetector.ISSUE)
+            .run()
+            .expectWarningCount(1)
+            .expect(expected)
+    }
 
-  @Test
-  fun `warning when defining color`() {
-    val expected =
-      """res/values/colors.xml:3: Warning: Use Backpack colors to improve consistency and dark mode support. [HardcodedColorResourceDetector]
+    @Test
+    fun `warning when defining color`() {
+        val expected =
+            """res/values/colors.xml:3: Warning: Use Backpack colors to improve consistency and dark mode support. [HardcodedColorResourceDetector]
   <color name="background_color">#f1f2f8</color>
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 0 errors, 1 warnings"""
 
-    val layout = xml(
-      "values/colors.xml",
-      """<?xml version="1.0" encoding="utf-8"?>
+        val layout = xml(
+            "values/colors.xml",
+            """<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <color name="background_color">#f1f2f8</color>
 </resources>""",
-    )
-      .indented()
-      .within("res")
-    TestLintTask.lint().files(layout)
-      .allowMissingSdk()
-      .issues(HardcodedColorResourceDetector.ISSUE)
-      .run()
-      .expectWarningCount(1)
-      .expect(expected)
-  }
+        )
+            .indented()
+            .within("res")
+        TestLintTask.lint().files(layout)
+            .allowMissingSdk()
+            .issues(HardcodedColorResourceDetector.ISSUE)
+            .run()
+            .expectWarningCount(1)
+            .expect(expected)
+    }
 }

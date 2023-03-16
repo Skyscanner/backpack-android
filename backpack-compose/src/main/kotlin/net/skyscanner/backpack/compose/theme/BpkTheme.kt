@@ -39,116 +39,116 @@ import net.skyscanner.backpack.compose.tokens.BpkShapes
 import net.skyscanner.backpack.compose.tokens.BpkTypography
 
 private val LocalBpkTypography = staticCompositionLocalOf<BpkTypography> {
-  error("Wrap you content with BpkTheme {} to get access to Backpack typography")
+    error("Wrap you content with BpkTheme {} to get access to Backpack typography")
 }
 private val LocalBpkColors = staticCompositionLocalOf<BpkColors> {
-  error("Wrap you content with BpkTheme {} to get access to Backpack colors")
+    error("Wrap you content with BpkTheme {} to get access to Backpack colors")
 }
 private val LocalBpkShapes = staticCompositionLocalOf<BpkShapes> {
-  error("Wrap you content with BpkTheme {} to get access to Backpack shapes")
+    error("Wrap you content with BpkTheme {} to get access to Backpack shapes")
 }
 
 @Composable
 fun BpkTheme(
-  fontFamily: FontFamily = FontFamily.SansSerif,
-  content: @Composable () -> Unit,
+    fontFamily: FontFamily = FontFamily.SansSerif,
+    content: @Composable () -> Unit,
 ) {
-  val typography = BpkTypography(defaultFontFamily = fontFamily)
-  val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
-  val shapes = BpkShapes()
+    val typography = BpkTypography(defaultFontFamily = fontFamily)
+    val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
+    val shapes = BpkShapes()
 
-  MaterialTheme(
-    typography = typography.toMaterialTypography(fontFamily),
-    colors = colors.toMaterialColors(),
-    shapes = shapes.toMaterialShapes(),
-  ) {
-    CompositionLocalProvider(
-      LocalBpkTypography provides typography,
-      LocalBpkColors provides colors,
-      LocalBpkShapes provides shapes,
-      LocalContentColor provides colors.textPrimary,
-      LocalElevationOverlay provides null,
-      LocalTextStyle provides typography.bodyDefault,
-      LocalContentAlpha provides 1f,
-      content = content,
-    )
-  }
+    MaterialTheme(
+        typography = typography.toMaterialTypography(fontFamily),
+        colors = colors.toMaterialColors(),
+        shapes = shapes.toMaterialShapes(),
+    ) {
+        CompositionLocalProvider(
+            LocalBpkTypography provides typography,
+            LocalBpkColors provides colors,
+            LocalBpkShapes provides shapes,
+            LocalContentColor provides colors.textPrimary,
+            LocalElevationOverlay provides null,
+            LocalTextStyle provides typography.bodyDefault,
+            LocalContentAlpha provides 1f,
+            content = content,
+        )
+    }
 }
 
 object BpkTheme {
 
-  val typography: BpkTypography
-    @Composable
-    @ReadOnlyComposable
-    get() = if (LocalInspectionMode.current) {
-      // when in preview mode return a default typography object to ensure previews work
-      // without wrapping it in another composable
-      BpkTypography(defaultFontFamily = FontFamily.SansSerif)
-    } else {
-      LocalBpkTypography.current
-    }
+    val typography: BpkTypography
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocalInspectionMode.current) {
+            // when in preview mode return a default typography object to ensure previews work
+            // without wrapping it in another composable
+            BpkTypography(defaultFontFamily = FontFamily.SansSerif)
+        } else {
+            LocalBpkTypography.current
+        }
 
-  val colors: BpkColors
-    @Composable
-    @ReadOnlyComposable
-    get() = if (LocalInspectionMode.current) {
-      // when in preview mode return a default colour object to ensure previews work
-      // without wrapping it in another composable
-      if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
-    } else {
-      LocalBpkColors.current
-    }
+    val colors: BpkColors
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocalInspectionMode.current) {
+            // when in preview mode return a default colour object to ensure previews work
+            // without wrapping it in another composable
+            if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
+        } else {
+            LocalBpkColors.current
+        }
 
-  val shapes: BpkShapes
-    @Composable
-    @ReadOnlyComposable
-    get() = if (LocalInspectionMode.current) {
-      // when in preview mode return a default typography object to ensure previews work
-      // without wrapping it in another composable
-      BpkShapes()
-    } else {
-      LocalBpkShapes.current
-    }
+    val shapes: BpkShapes
+        @Composable
+        @ReadOnlyComposable
+        get() = if (LocalInspectionMode.current) {
+            // when in preview mode return a default typography object to ensure previews work
+            // without wrapping it in another composable
+            BpkShapes()
+        } else {
+            LocalBpkShapes.current
+        }
 }
 
 private fun BpkTypography.toMaterialTypography(fontFamily: FontFamily): Typography =
-  Typography(
-    defaultFontFamily = fontFamily,
-    h1 = hero2,
-    h2 = hero4,
-    h3 = hero5,
-    h4 = heading2,
-    h5 = heading3,
-    h6 = heading4,
-    subtitle1 = bodyDefault,
-    subtitle2 = footnote,
-    body1 = bodyDefault,
-    body2 = footnote,
-    button = label2,
-    caption = caption,
-    overline = caption.copy(fontWeight = FontWeight.Bold),
-  )
+    Typography(
+        defaultFontFamily = fontFamily,
+        h1 = hero2,
+        h2 = hero4,
+        h3 = hero5,
+        h4 = heading2,
+        h5 = heading3,
+        h6 = heading4,
+        subtitle1 = bodyDefault,
+        subtitle2 = footnote,
+        body1 = bodyDefault,
+        body2 = footnote,
+        button = label2,
+        caption = caption,
+        overline = caption.copy(fontWeight = FontWeight.Bold),
+    )
 
 private fun BpkColors.toMaterialColors(): Colors =
-  Colors(
-    primary = corePrimary,
-    primaryVariant = corePrimary,
-    secondary = coreAccent,
-    secondaryVariant = coreAccent,
-    background = canvas,
-    surface = surfaceDefault,
-    error = textError,
-    onPrimary = textOnDark,
-    onSecondary = textPrimaryInverse,
-    onBackground = textPrimary,
-    onSurface = textPrimary,
-    onError = textOnDark,
-    isLight = isLight,
-  )
+    Colors(
+        primary = corePrimary,
+        primaryVariant = corePrimary,
+        secondary = coreAccent,
+        secondaryVariant = coreAccent,
+        background = canvas,
+        surface = surfaceDefault,
+        error = textError,
+        onPrimary = textOnDark,
+        onSecondary = textPrimaryInverse,
+        onBackground = textPrimary,
+        onSurface = textPrimary,
+        onError = textOnDark,
+        isLight = isLight,
+    )
 
 private fun BpkShapes.toMaterialShapes(): Shapes =
-  Shapes(
-    small = small,
-    medium = medium,
-    large = large,
-  )
+    Shapes(
+        small = small,
+        medium = medium,
+        large = large,
+    )

@@ -39,50 +39,50 @@ import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
 internal fun Modifier.hideContentIf(hide: Boolean): Modifier = layout { measurable, constraints ->
-  val placeable = measurable.measure(constraints)
-  layout(placeable.width, placeable.height) {
-    if (!hide) {
-      placeable.place(0, 0)
+    val placeable = measurable.measure(constraints)
+    layout(placeable.width, placeable.height) {
+        if (!hide) {
+            placeable.place(0, 0)
+        }
     }
-  }
 }
 
 @OptIn(ExperimentalContracts::class)
 internal inline fun Modifier.applyIf(predicate: Boolean, block: Modifier.() -> Modifier): Modifier {
-  contract {
-    callsInPlace(block, InvocationKind.AT_MOST_ONCE)
-  }
-  return if (predicate) block() else this
+    contract {
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
+    }
+    return if (predicate) block() else this
 }
 
 internal fun Modifier.clickable(bounded: Boolean = true, role: Role? = null, onClick: () -> Unit): Modifier = composed {
-  clickable(
-    interactionSource = remember { MutableInteractionSource() },
-    indication = rememberRipple(bounded = bounded),
-    role = role,
-    onClick = onClick,
-  )
+    clickable(
+        interactionSource = remember { MutableInteractionSource() },
+        indication = rememberRipple(bounded = bounded),
+        role = role,
+        onClick = onClick,
+    )
 }
 
 internal fun Modifier.inset(inset: IntrinsicMeasureScope.(bounds: IntRect) -> IntRect): Modifier =
-  layout { measurable, constraints ->
-    val rect = inset(IntRect(left = 0, right = constraints.maxWidth, top = 0, bottom = constraints.maxHeight))
-    val placeable = measurable.measure(Constraints.fixed(rect.width, rect.height))
-    layout(constraints.maxWidth, constraints.maxHeight) {
-      placeable.place(x = rect.left, y = rect.top)
+    layout { measurable, constraints ->
+        val rect = inset(IntRect(left = 0, right = constraints.maxWidth, top = 0, bottom = constraints.maxHeight))
+        val placeable = measurable.measure(Constraints.fixed(rect.width, rect.height))
+        layout(constraints.maxWidth, constraints.maxHeight) {
+            placeable.place(x = rect.left, y = rect.top)
+        }
     }
-  }
 
 internal fun Modifier.offsetWithSize(offset: IntrinsicMeasureScope.(size: IntSize) -> IntOffset): Modifier =
-  layout { measurable, constraints ->
-    val placeable = measurable.measure(constraints)
-    val size = IntSize(placeable.width, placeable.height)
-    layout(size.width, size.height) {
-      val offsetValue = offset(size)
-      placeable.place(offsetValue.x, offsetValue.y)
+    layout { measurable, constraints ->
+        val placeable = measurable.measure(constraints)
+        val size = IntSize(placeable.width, placeable.height)
+        layout(size.width, size.height) {
+            val offsetValue = offset(size)
+            placeable.place(offsetValue.x, offsetValue.y)
+        }
     }
-  }
 
 internal fun Modifier.alignBy(anchor: Offset, alignment: Alignment): Modifier = offsetWithSize { size ->
-  anchor.round() - alignment.align(IntSize.Zero, size, layoutDirection)
+    anchor.round() - alignment.align(IntSize.Zero, size, layoutDirection)
 }

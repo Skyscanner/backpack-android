@@ -29,12 +29,12 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkFabTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    BpkFab(
-      onClick = {},
-      icon = BpkIcon.Search,
-      contentDescription = "Content description",
-    )
-  }
+    @Test
+    fun default() = snap {
+        BpkFab(
+            onClick = {},
+            icon = BpkIcon.Search,
+            contentDescription = "Content description",
+        )
+    }
 }

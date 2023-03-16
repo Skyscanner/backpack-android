@@ -31,44 +31,44 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkIconTest : BpkSnapshotTest() {
 
-  private val icon = BpkIcon.LongArrowLeft
+    private val icon = BpkIcon.LongArrowLeft
 
-  @Test
-  fun default() = snap {
-    BpkIcon(icon = icon, contentDescription = null)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun small() {
-    snap {
-      BpkIcon(icon = icon, contentDescription = null, size = BpkIconSize.Small)
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun large() {
-    snap {
-      BpkIcon(icon = icon, contentDescription = null, size = BpkIconSize.Large)
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun tinted() {
-    snap {
-      BpkIcon(icon = icon, contentDescription = null, tint = BpkTheme.colors.statusDangerSpot)
-    }
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun compositionLocalProviderOverride() {
-    snap {
-      CompositionLocalProvider(LocalBpkIconSize provides BpkIconSize.Large) {
+    @Test
+    fun default() = snap {
         BpkIcon(icon = icon, contentDescription = null)
-      }
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun small() {
+        snap {
+            BpkIcon(icon = icon, contentDescription = null, size = BpkIconSize.Small)
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun large() {
+        snap {
+            BpkIcon(icon = icon, contentDescription = null, size = BpkIconSize.Large)
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun tinted() {
+        snap {
+            BpkIcon(icon = icon, contentDescription = null, tint = BpkTheme.colors.statusDangerSpot)
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun compositionLocalProviderOverride() {
+        snap {
+            CompositionLocalProvider(LocalBpkIconSize provides BpkIconSize.Large) {
+                BpkIcon(icon = icon, contentDescription = null)
+            }
+        }
+    }
 }

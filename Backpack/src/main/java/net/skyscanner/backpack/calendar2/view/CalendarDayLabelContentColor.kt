@@ -26,20 +26,20 @@ import net.skyscanner.backpack.calendar2.CellStatus
 internal typealias CalendarDayLabelContentColor = (CellStatus?) -> ColorStateList
 
 internal fun CalendarDayLabelContentColor(
-  context: Context,
+    context: Context,
 ): CalendarDayLabelContentColor {
 
-  val default = context.getColorStateList(R.color.bpkTextSecondary)
-  val positive = context.getColorStateList(R.color.bpkStatusSuccessSpot)
-  val empty = context.getColorStateList(R.color.bpkTextDisabled)
+    val default = context.getColorStateList(R.color.bpkTextSecondary)
+    val positive = context.getColorStateList(R.color.bpkStatusSuccessSpot)
+    val empty = context.getColorStateList(R.color.bpkTextDisabled)
 
-  return { status ->
-    when (status) {
-      CellStatus.Positive -> positive
-      CellStatus.Neutral -> default
-      CellStatus.Negative -> default
-      CellStatus.Empty -> empty
-      null -> default
+    return { status ->
+        when (status) {
+            CellStatus.Positive -> positive
+            CellStatus.Neutral -> default
+            CellStatus.Negative -> default
+            CellStatus.Empty -> empty
+            null -> default
+        }
     }
-  }
 }

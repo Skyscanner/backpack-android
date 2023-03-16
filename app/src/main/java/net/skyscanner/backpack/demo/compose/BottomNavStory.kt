@@ -43,41 +43,41 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @BottomNavComponent
 @ComposeStory
 fun BottomNavStory(modifier: Modifier = Modifier) {
-  Box(
-    modifier = modifier.fillMaxSize(),
-    contentAlignment = Alignment.BottomEnd,
-  ) {
-    BottomNavSample()
-  }
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomEnd,
+    ) {
+        BottomNavSample()
+    }
 }
 
 @Composable
 fun BottomNavSample(
-  modifier: Modifier = Modifier,
-  defaultItemId: Int = 1,
+    modifier: Modifier = Modifier,
+    defaultItemId: Int = 1,
 ) {
-  var selectedItemId by remember { mutableStateOf(defaultItemId) }
-  BpkBottomNav(
-    modifier = modifier,
-    items = listOf(
-      BpkBottomNavItem(
-        painter = painterResource(id = R.drawable.sample_icon),
-        title = stringResource(R.string.bottom_nav_explore),
-        id = 1,
-      ),
-      BpkBottomNavItem(
-        icon = BpkIcon.Trips,
-        title = stringResource(R.string.bottom_nav_trips),
-        id = 2,
-      ),
-      BpkBottomNavItem(
-        icon = BpkIcon.AccountCircle,
-        title = stringResource(R.string.navigation_account),
-        id = 3,
-        showBadge = true,
-      ),
-    ),
-    selectedItemId = selectedItemId,
-    onTabClicked = { selectedItemId = it },
-  )
+    var selectedItemId by remember { mutableStateOf(defaultItemId) }
+    BpkBottomNav(
+        modifier = modifier,
+        items = listOf(
+            BpkBottomNavItem(
+                painter = painterResource(id = R.drawable.sample_icon),
+                title = stringResource(R.string.bottom_nav_explore),
+                id = 1,
+            ),
+            BpkBottomNavItem(
+                icon = BpkIcon.Trips,
+                title = stringResource(R.string.bottom_nav_trips),
+                id = 2,
+            ),
+            BpkBottomNavItem(
+                icon = BpkIcon.AccountCircle,
+                title = stringResource(R.string.navigation_account),
+                id = 3,
+                showBadge = true,
+            ),
+        ),
+        selectedItemId = selectedItemId,
+        onTabClicked = { selectedItemId = it },
+    )
 }

@@ -36,48 +36,48 @@ private val ComponentClass = ClassName(MetaPackage, "Component")
 private val StoriesClass = List::class.asClassName().parameterizedBy(StoryClass)
 
 fun writeListOfStories(stories: List<StoryDefinition>, output: XFiler) {
-  FunSpec
-    .builder("all")
-    .receiver(StoryCompanion)
-    .returns(StoriesClass)
-    .addCode(CodeBlock
-      .builder()
-      .add("return listOf(\n")
-      .indent()
-      .apply {
-        stories.forEach {
-          writeStoryCreator(it)
-        }
-      }
-      .unindent()
-      .add(")")
-      .build(),
-    )
-    .build()
-    .let {
-      FileSpec
-        .builder(MetaPackage, "GeneratedStories")
-        .addFunction(it)
+    FunSpec
+        .builder("all")
+        .receiver(StoryCompanion)
+        .returns(StoriesClass)
+        .addCode(CodeBlock
+            .builder()
+            .add("return listOf(\n")
+            .indent()
+            .apply {
+                stories.forEach {
+                    writeStoryCreator(it)
+                }
+            }
+            .unindent()
+            .add(")")
+            .build(),
+        )
         .build()
-        .writeTo(output, mode = XFiler.Mode.Aggregating)
-    }
+        .let {
+            FileSpec
+                .builder(MetaPackage, "GeneratedStories")
+                .addFunction(it)
+                .build()
+                .writeTo(output, mode = XFiler.Mode.Aggregating)
+        }
 }
 
 private fun CodeBlock.Builder.writeStoryCreator(story: StoryDefinition) =
-  addStatement("%T(", StoryClass)
-    .indent()
-    .addStatement("name = %S,", story.name)
-    .addStatement("kind = %T.%N,", ClassName.bestGuess(story.kind.type), story.kind.value)
-    .addStatement("isCompose = %L,", story.isCompose)
-    .writeComponent("component", story.component)
-    .addStatement("${"content"} = { %T() },", ClassName.bestGuess(story.reference))
-    .unindent()
-    .addStatement("),")
+    addStatement("%T(", StoryClass)
+        .indent()
+        .addStatement("name = %S,", story.name)
+        .addStatement("kind = %T.%N,", ClassName.bestGuess(story.kind.type), story.kind.value)
+        .addStatement("isCompose = %L,", story.isCompose)
+        .writeComponent("component", story.component)
+        .addStatement("${"content"} = { %T() },", ClassName.bestGuess(story.reference))
+        .unindent()
+        .addStatement("),")
 
 private fun CodeBlock.Builder.writeComponent(name: String, component: ComponentDefinition) =
-  addStatement("$name = %T(", ComponentClass)
-    .indent()
-    .addStatement("name = %S,", component.name)
-    .addStatement("isToken = %L,", component.isToken)
-    .unindent()
-    .addStatement("),")
+    addStatement("$name = %T(", ComponentClass)
+        .indent()
+        .addStatement("name = %S,", component.name)
+        .addStatement("isToken = %L,", component.isToken)
+        .unindent()
+        .addStatement("),")

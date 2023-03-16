@@ -28,118 +28,118 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkStarRatingTest : BpkSnapshotTest() {
 
-  @Test
-  fun ratingFullStar() = snap {
-    BpkStarRating(
-      rating = 2f,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-    )
-  }
+    @Test
+    fun ratingFullStar() = snap {
+        BpkStarRating(
+            rating = 2f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+        )
+    }
 
-  @Test
-  fun ratingHalfStar() = snap {
-    BpkStarRating(
-      rating = 3.5f,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-    )
-  }
+    @Test
+    fun ratingHalfStar() = snap {
+        BpkStarRating(
+            rating = 3.5f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+        )
+    }
 
-  @Test
-  fun zeroRating() = snap {
-    BpkStarRating(
-      rating = 0f,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-    )
-  }
+    @Test
+    fun zeroRating() = snap {
+        BpkStarRating(
+            rating = 0f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+        )
+    }
 
-  @Test
-  fun negativeRating() = snap {
-    BpkStarRating(
-      rating = -3f,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-    )
-  }
+    @Test
+    fun negativeRating() = snap {
+        BpkStarRating(
+            rating = -3f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+        )
+    }
 
-  @Test
-  fun roundingTypeUp() = snap {
-    BpkStarRating(
-      rating = 2.9f,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-      rounding = BpkRatingRounding.Up,
-    )
-  }
+    @Test
+    fun roundingTypeUp() = snap {
+        BpkStarRating(
+            rating = 2.9f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            rounding = BpkRatingRounding.Up,
+        )
+    }
 
-  @Test
-  fun roundingTypeDown() = snap {
-    BpkStarRating(
-      rating = 2.9f,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-      rounding = BpkRatingRounding.Down,
-    )
-  }
+    @Test
+    fun roundingTypeDown() = snap {
+        BpkStarRating(
+            rating = 2.9f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            rounding = BpkRatingRounding.Down,
+        )
+    }
 
-  @Test
-  fun aboveMaxRating() = snap {
-    BpkStarRating(
-      rating = 7f,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-    )
-  }
+    @Test
+    fun aboveMaxRating() = snap {
+        BpkStarRating(
+            rating = 7f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+        )
+    }
 
-  @Test
-  fun starSizeSmall() = snap {
-    BpkStarRating(
-      rating = 3f,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-      size = BpkStarRatingSize.Small,
-    )
-  }
+    @Test
+    fun starSizeSmall() = snap {
+        BpkStarRating(
+            rating = 3f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            size = BpkStarRatingSize.Small,
+        )
+    }
 
-  @Test
-  fun starSizeLarge() = snap {
-    BpkStarRating(
-      rating = 3f,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-      size = BpkStarRatingSize.Large,
-    )
-  }
+    @Test
+    fun starSizeLarge() = snap {
+        BpkStarRating(
+            rating = 3f,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+            size = BpkStarRatingSize.Large,
+        )
+    }
 
-  @Test
-  fun hotelStarRating4() = snap {
-    BpkHotelRating(
-      rating = 4,
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-    )
-  }
+    @Test
+    fun hotelStarRating4() = snap {
+        BpkHotelRating(
+            rating = 4,
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+        )
+    }
 
-  @Test
-  fun interactiveStarRating() = snap {
-    BpkInteractiveStarRating(
-      rating = 2,
-      onRatingChanged = { },
-      contentDescription = { value, max ->
-        stringResource(R.string.star_rating_accessibility_status, value, max)
-      },
-    )
-  }
+    @Test
+    fun interactiveStarRating() = snap {
+        BpkInteractiveStarRating(
+            rating = 2,
+            onRatingChanged = { },
+            contentDescription = { value, max ->
+                stringResource(R.string.star_rating_accessibility_status, value, max)
+            },
+        )
+    }
 }

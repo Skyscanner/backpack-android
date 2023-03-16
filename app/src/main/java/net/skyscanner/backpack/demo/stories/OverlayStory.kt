@@ -29,4 +29,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @OverlayComponent
 @ViewStory
 fun OverlayStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_overlay, modifier)
+    AndroidLayout(R.layout.fragment_overlay, modifier)

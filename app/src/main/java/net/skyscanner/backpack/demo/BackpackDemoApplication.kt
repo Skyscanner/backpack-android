@@ -31,25 +31,25 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 
 class BackpackDemoApplication : Application() {
 
-  companion object {
+    companion object {
 
-    private lateinit var instance: BackpackDemoApplication
+        private lateinit var instance: BackpackDemoApplication
 
-    fun triggerRebirth(context: Context) {
-      val packageManager = context.packageManager
-      val intent = packageManager.getLaunchIntentForPackage(context.packageName)
-      val componentName = intent!!.component
-      val mainIntent = Intent.makeRestartActivityTask(componentName)
-      context.startActivity(mainIntent)
-      Runtime.getRuntime().exit(0)
+        fun triggerRebirth(context: Context) {
+            val packageManager = context.packageManager
+            val intent = packageManager.getLaunchIntentForPackage(context.packageName)
+            val componentName = intent!!.component
+            val mainIntent = Intent.makeRestartActivityTask(componentName)
+            context.startActivity(mainIntent)
+            Runtime.getRuntime().exit(0)
+        }
     }
-  }
 
-  override fun onCreate() {
-    super.onCreate()
-    AndroidThreeTen.init(this)
-    instance = applicationContext!! as BackpackDemoApplication
-    Stetho.initializeWithDefaults(this)
-    AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-  }
+    override fun onCreate() {
+        super.onCreate()
+        AndroidThreeTen.init(this)
+        instance = applicationContext!! as BackpackDemoApplication
+        Stetho.initializeWithDefaults(this)
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+    }
 }

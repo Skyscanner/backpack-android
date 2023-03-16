@@ -30,4 +30,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @SpinnerComponent
 @ViewStory
 fun SpinnerStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_spinner, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_spinner, modifier.fillMaxSize())

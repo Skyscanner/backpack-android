@@ -36,58 +36,58 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @TextComponent
 @ComposeStory("Hero")
 fun HeroStyleStory(modifier: Modifier = Modifier) {
-  val styles = listOf(
-    BpkTheme.typography.hero1 to stringResource(R.string.text_hero1),
-    BpkTheme.typography.hero2 to stringResource(R.string.text_hero2),
-    BpkTheme.typography.hero3 to stringResource(R.string.text_hero3),
-    BpkTheme.typography.hero4 to stringResource(R.string.text_hero4),
-    BpkTheme.typography.hero5 to stringResource(R.string.text_hero5),
-  )
-  TypographyStylesStory(styles = styles, modifier = modifier)
+    val styles = listOf(
+        BpkTheme.typography.hero1 to stringResource(R.string.text_hero1),
+        BpkTheme.typography.hero2 to stringResource(R.string.text_hero2),
+        BpkTheme.typography.hero3 to stringResource(R.string.text_hero3),
+        BpkTheme.typography.hero4 to stringResource(R.string.text_hero4),
+        BpkTheme.typography.hero5 to stringResource(R.string.text_hero5),
+    )
+    TypographyStylesStory(styles = styles, modifier = modifier)
 }
 
 @Composable
 @TextComponent
 @ComposeStory("Heading")
 fun HeadingStyleStory(modifier: Modifier = Modifier) {
-  val styles = listOf(
-    BpkTheme.typography.heading1 to stringResource(R.string.text_heading1),
-    BpkTheme.typography.heading2 to stringResource(R.string.text_heading2),
-    BpkTheme.typography.heading3 to stringResource(R.string.text_heading3),
-    BpkTheme.typography.heading4 to stringResource(R.string.text_heading4),
-    BpkTheme.typography.heading5 to stringResource(R.string.text_heading5),
-  )
-  TypographyStylesStory(styles = styles, modifier = modifier)
+    val styles = listOf(
+        BpkTheme.typography.heading1 to stringResource(R.string.text_heading1),
+        BpkTheme.typography.heading2 to stringResource(R.string.text_heading2),
+        BpkTheme.typography.heading3 to stringResource(R.string.text_heading3),
+        BpkTheme.typography.heading4 to stringResource(R.string.text_heading4),
+        BpkTheme.typography.heading5 to stringResource(R.string.text_heading5),
+    )
+    TypographyStylesStory(styles = styles, modifier = modifier)
 }
 
 @Composable
 @TextComponent
 @ComposeStory("Body")
 fun BodyStyleStory(modifier: Modifier = Modifier) {
-  val styles = listOf(
-    BpkTheme.typography.subheading to stringResource(R.string.text_subheading),
-    BpkTheme.typography.bodyLongform to stringResource(R.string.text_body_longform),
-    BpkTheme.typography.bodyDefault to stringResource(R.string.text_body_default),
-    BpkTheme.typography.footnote to stringResource(R.string.text_footnote),
-    BpkTheme.typography.caption to stringResource(R.string.text_caption),
-    BpkTheme.typography.label1 to stringResource(R.string.text_label1),
-    BpkTheme.typography.label2 to stringResource(R.string.text_label2),
-    BpkTheme.typography.label3 to stringResource(R.string.text_label3),
-  )
-  TypographyStylesStory(styles = styles, modifier = modifier)
+    val styles = listOf(
+        BpkTheme.typography.subheading to stringResource(R.string.text_subheading),
+        BpkTheme.typography.bodyLongform to stringResource(R.string.text_body_longform),
+        BpkTheme.typography.bodyDefault to stringResource(R.string.text_body_default),
+        BpkTheme.typography.footnote to stringResource(R.string.text_footnote),
+        BpkTheme.typography.caption to stringResource(R.string.text_caption),
+        BpkTheme.typography.label1 to stringResource(R.string.text_label1),
+        BpkTheme.typography.label2 to stringResource(R.string.text_label2),
+        BpkTheme.typography.label3 to stringResource(R.string.text_label3),
+    )
+    TypographyStylesStory(styles = styles, modifier = modifier)
 }
 
 @Composable
 private fun TypographyStylesStory(
-  styles: List<Pair<TextStyle, String>>,
-  modifier: Modifier = Modifier,
+    styles: List<Pair<TextStyle, String>>,
+    modifier: Modifier = Modifier,
 ) {
-  LazyColumn(modifier = modifier.padding(BpkSpacing.Base)) {
-    items(styles) { style ->
-      BpkText(
-        style = style.first,
-        text = style.second,
-      )
+    LazyColumn(modifier = modifier.padding(BpkSpacing.Base)) {
+        items(styles) { style ->
+            BpkText(
+                style = style.first,
+                text = style.second,
+            )
+        }
     }
-  }
 }

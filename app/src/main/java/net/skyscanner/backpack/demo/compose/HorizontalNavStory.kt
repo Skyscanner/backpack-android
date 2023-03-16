@@ -47,114 +47,114 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @HorizontalNavComponent
 @ComposeStory
 fun HorizontalNavStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier
-      .fillMaxSize()
-      .background(BpkTheme.colors.surfaceHighlight)
-      .padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(BpkTheme.colors.surfaceHighlight)
+            .padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    BpkText(text = stringResource(R.string.tabs_small))
-    HorizontalNav_Small_Sample()
+        BpkText(text = stringResource(R.string.tabs_small))
+        HorizontalNav_Small_Sample()
 
-    BpkText(text = stringResource(R.string.tabs_small_with_icon))
-    HorizontalNav_SmallWithIcon_Sample()
+        BpkText(text = stringResource(R.string.tabs_small_with_icon))
+        HorizontalNav_SmallWithIcon_Sample()
 
-    BpkText(text = stringResource(R.string.tabs_large))
-    HorizontalNav_Large_Sample()
+        BpkText(text = stringResource(R.string.tabs_large))
+        HorizontalNav_Large_Sample()
 
-    BpkText(text = stringResource(R.string.tabs_large_with_icon))
-    HorizontalNav_LargeWithIcon_Sample()
-  }
+        BpkText(text = stringResource(R.string.tabs_large_with_icon))
+        HorizontalNav_LargeWithIcon_Sample()
+    }
 }
 
 @Composable
 internal fun HorizontalNav_Small_Sample(modifier: Modifier = Modifier) {
-  val tabs = listOf(
-    BpkHorizontalNavTab(
-      title = stringResource(R.string.tabs_one),
-    ),
-    BpkHorizontalNavTab(
-      title = stringResource(R.string.tabs_two),
-    ),
-  )
+    val tabs = listOf(
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_one),
+        ),
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_two),
+        ),
+    )
 
-  var activeIndex by rememberSaveable { mutableStateOf(0) }
+    var activeIndex by rememberSaveable { mutableStateOf(0) }
 
-  BpkHorizontalNav(
-    modifier = modifier,
-    tabs = tabs,
-    activeIndex = activeIndex,
-    size = BpkHorizontalNavSize.Small,
-    onChanged = { activeIndex = it },
-  )
+    BpkHorizontalNav(
+        modifier = modifier,
+        tabs = tabs,
+        activeIndex = activeIndex,
+        size = BpkHorizontalNavSize.Small,
+        onChanged = { activeIndex = it },
+    )
 }
 
 @Composable
 internal fun HorizontalNav_SmallWithIcon_Sample(modifier: Modifier = Modifier) {
-  val tabs = listOf(
-    BpkHorizontalNavTab(
-      title = stringResource(R.string.tabs_one),
-      icon = BpkIcon.TickCircle,
-    ),
-    BpkHorizontalNavTab(
-      title = stringResource(R.string.tabs_two),
-      icon = BpkIcon.CloseCircle,
-    ),
-  )
+    val tabs = listOf(
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_one),
+            icon = BpkIcon.TickCircle,
+        ),
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_two),
+            icon = BpkIcon.CloseCircle,
+        ),
+    )
 
-  var activeIndex by rememberSaveable { mutableStateOf(0) }
+    var activeIndex by rememberSaveable { mutableStateOf(0) }
 
-  BpkHorizontalNav(
-    modifier = modifier,
-    tabs = tabs,
-    activeIndex = activeIndex,
-    size = BpkHorizontalNavSize.Small,
-    onChanged = { activeIndex = it },
-  )
+    BpkHorizontalNav(
+        modifier = modifier,
+        tabs = tabs,
+        activeIndex = activeIndex,
+        size = BpkHorizontalNavSize.Small,
+        onChanged = { activeIndex = it },
+    )
 }
 
 @Composable
 internal fun HorizontalNav_Large_Sample(modifier: Modifier = Modifier) {
-  val tabs = listOf(
-    BpkHorizontalNavTab(
-      title = stringResource(R.string.tabs_one),
-    ),
-    BpkHorizontalNavTab(
-      title = stringResource(R.string.tabs_two),
-    ),
-  )
+    val tabs = listOf(
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_one),
+        ),
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_two),
+        ),
+    )
 
-  var activeIndex by rememberSaveable { mutableStateOf(0) }
+    var activeIndex by rememberSaveable { mutableStateOf(0) }
 
-  BpkHorizontalNav(
-    modifier = modifier,
-    tabs = tabs,
-    activeIndex = activeIndex,
-    onChanged = { activeIndex = it },
-  )
+    BpkHorizontalNav(
+        modifier = modifier,
+        tabs = tabs,
+        activeIndex = activeIndex,
+        onChanged = { activeIndex = it },
+    )
 }
 
 @Composable
 internal fun HorizontalNav_LargeWithIcon_Sample(modifier: Modifier = Modifier) {
-  val tabs = listOf(
-    BpkHorizontalNavTab(
-      title = stringResource(R.string.tabs_one),
-      icon = BpkIcon.TickCircle,
-    ),
-    BpkHorizontalNavTab(
-      title = stringResource(R.string.tabs_two),
-      icon = BpkIcon.CloseCircle,
-    ),
-  )
+    val tabs = listOf(
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_one),
+            icon = BpkIcon.TickCircle,
+        ),
+        BpkHorizontalNavTab(
+            title = stringResource(R.string.tabs_two),
+            icon = BpkIcon.CloseCircle,
+        ),
+    )
 
-  var activeIndex by rememberSaveable { mutableStateOf(0) }
+    var activeIndex by rememberSaveable { mutableStateOf(0) }
 
-  BpkHorizontalNav(
-    modifier = modifier,
-    tabs = tabs,
-    activeIndex = activeIndex,
-    onChanged = { activeIndex = it },
-  )
+    BpkHorizontalNav(
+        modifier = modifier,
+        tabs = tabs,
+        activeIndex = activeIndex,
+        onChanged = { activeIndex = it },
+    )
 }

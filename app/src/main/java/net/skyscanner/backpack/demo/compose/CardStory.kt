@@ -44,100 +44,100 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @CardComponent
 @ComposeStory
 fun CardStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier
-      .background(BpkTheme.colors.line)
-      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    val cardModifier = Modifier
-      .fillMaxWidth()
-      .weight(1f)
+        val cardModifier = Modifier
+            .fillMaxWidth()
+            .weight(1f)
 
-    SmallCornersCardExample(cardModifier)
+        SmallCornersCardExample(cardModifier)
 
-    LargeCornersCardExample(cardModifier)
+        LargeCornersCardExample(cardModifier)
 
-    NoPaddingCardExample(Modifier.fillMaxWidth())
+        NoPaddingCardExample(Modifier.fillMaxWidth())
 
-    NonClickableCardExample(cardModifier)
+        NonClickableCardExample(cardModifier)
 
-    NoElevationCardExample(cardModifier)
+        NoElevationCardExample(cardModifier)
 
-    FocusableCardExample(cardModifier)
-  }
+        FocusableCardExample(cardModifier)
+    }
 }
 
 @Composable
 internal fun SmallCornersCardExample(modifier: Modifier = Modifier) {
-  BpkCard(
-    modifier = modifier,
-    onClick = {},
-    contentAlignment = Alignment.Center,
-  ) {
-    BpkText("Small corners")
-  }
+    BpkCard(
+        modifier = modifier,
+        onClick = {},
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkText("Small corners")
+    }
 }
 
 @Composable
 internal fun LargeCornersCardExample(modifier: Modifier = Modifier) {
-  BpkCard(
-    modifier = modifier,
-    onClick = {},
-    corner = BpkCardCorner.Large,
-    contentAlignment = Alignment.Center,
-  ) {
-    BpkText("Large corners")
-  }
+    BpkCard(
+        modifier = modifier,
+        onClick = {},
+        corner = BpkCardCorner.Large,
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkText("Large corners")
+    }
 }
 
 @Composable
 internal fun NoPaddingCardExample(modifier: Modifier = Modifier) {
-  BpkCard(
-    modifier = modifier,
-    onClick = {},
-    padding = BpkCardPadding.None,
-    contentAlignment = Alignment.Center,
-  ) {
-    BpkText("No padding")
-  }
+    BpkCard(
+        modifier = modifier,
+        onClick = {},
+        padding = BpkCardPadding.None,
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkText("No padding")
+    }
 }
 
 @Composable
 internal fun NonClickableCardExample(modifier: Modifier = Modifier) {
-  BpkCard(modifier, contentAlignment = Alignment.Center) {
-    BpkText("Non clickable")
-  }
+    BpkCard(modifier, contentAlignment = Alignment.Center) {
+        BpkText("Non clickable")
+    }
 }
 
 @Composable
 internal fun FocusableCardExample(modifier: Modifier = Modifier) {
-  var elevation by remember { mutableStateOf(BpkCardElevation.Focus) }
+    var elevation by remember { mutableStateOf(BpkCardElevation.Focus) }
 
-  BpkCard(
-    modifier = modifier,
-    elevation = elevation,
-    contentAlignment = Alignment.Center,
-    onClick = {
-      elevation = when (elevation) {
-        BpkCardElevation.None, BpkCardElevation.Default -> BpkCardElevation.Focus
-        BpkCardElevation.Focus -> BpkCardElevation.Default
-      }
-    },
-  ) {
-    BpkText(if (elevation == BpkCardElevation.Focus) "Tap to unfocus" else "Tap to focus")
-  }
+    BpkCard(
+        modifier = modifier,
+        elevation = elevation,
+        contentAlignment = Alignment.Center,
+        onClick = {
+            elevation = when (elevation) {
+                BpkCardElevation.None, BpkCardElevation.Default -> BpkCardElevation.Focus
+                BpkCardElevation.Focus -> BpkCardElevation.Default
+            }
+        },
+    ) {
+        BpkText(if (elevation == BpkCardElevation.Focus) "Tap to unfocus" else "Tap to focus")
+    }
 }
 
 @Composable
 internal fun NoElevationCardExample(modifier: Modifier = Modifier) {
-  BpkCard(
-    modifier = modifier,
-    onClick = {},
-    contentAlignment = Alignment.Center,
-    elevation = BpkCardElevation.None,
-  ) {
-    BpkText("No elevation")
-  }
+    BpkCard(
+        modifier = modifier,
+        onClick = {},
+        contentAlignment = Alignment.Center,
+        elevation = BpkCardElevation.None,
+    ) {
+        BpkText("No elevation")
+    }
 }

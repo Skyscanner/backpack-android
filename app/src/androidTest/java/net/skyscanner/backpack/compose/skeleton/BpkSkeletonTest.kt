@@ -40,52 +40,52 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkSkeletonTest : BpkSnapshotTest() {
 
-  @Test
-  fun imageSquare() = snap {
-    BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xl, BpkSpacing.Xl))
-  }
-
-  @Test
-  fun imageRounded() = snap {
-    BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xl, BpkSpacing.Xl), cornerType = BpkSkeletonCornerType.Rounded)
-  }
-
-  @Test
-  fun circleWithSizeType() = snap {
-    BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun circleWithCustomDiameter() {
-    snap {
-      BpkCircleSkeleton(circleSize = BpkCircleSizeType.Custom(BpkSpacing.Xl))
+    @Test
+    fun imageSquare() = snap {
+        BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xl, BpkSpacing.Xl))
     }
-  }
 
-  @Test
-  fun smallHeadline() = snap {
-    BpkHeadlineSkeleton(
-      modifier = Modifier.width(BpkSpacing.Xxl.times(2)),
-      skeletonHeightSize = BpkSkeletonHeightSizeType.Medium,
-    )
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun headlineWithCustomHeight() {
-    snap {
-      BpkHeadlineSkeleton(
-        modifier = Modifier
-          .width(BpkSpacing.Xxl.times(2))
-          .height(BpkSpacing.Xxl),
-        skeletonHeightSize = BpkSkeletonHeightSizeType.Custom,
-      )
+    @Test
+    fun imageRounded() = snap {
+        BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xl, BpkSpacing.Xl), cornerType = BpkSkeletonCornerType.Rounded)
     }
-  }
 
-  @Test
-  fun bodyText() = snap {
-    BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
-  }
+    @Test
+    fun circleWithSizeType() = snap {
+        BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun circleWithCustomDiameter() {
+        snap {
+            BpkCircleSkeleton(circleSize = BpkCircleSizeType.Custom(BpkSpacing.Xl))
+        }
+    }
+
+    @Test
+    fun smallHeadline() = snap {
+        BpkHeadlineSkeleton(
+            modifier = Modifier.width(BpkSpacing.Xxl.times(2)),
+            skeletonHeightSize = BpkSkeletonHeightSizeType.Medium,
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun headlineWithCustomHeight() {
+        snap {
+            BpkHeadlineSkeleton(
+                modifier = Modifier
+                    .width(BpkSpacing.Xxl.times(2))
+                    .height(BpkSpacing.Xxl),
+                skeletonHeightSize = BpkSkeletonHeightSizeType.Custom,
+            )
+        }
+    }
+
+    @Test
+    fun bodyText() = snap {
+        BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)))
+    }
 }

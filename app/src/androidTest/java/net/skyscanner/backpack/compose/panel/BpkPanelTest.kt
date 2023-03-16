@@ -30,14 +30,14 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkPanelTest : BpkSnapshotTest() {
 
-  @Test
-  fun padded() = snap {
-    DefaultPanelExample()
-  }
+    @Test
+    fun padded() = snap {
+        DefaultPanelExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun noPadding() = snap {
-    NoPaddingPanelExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun noPadding() = snap {
+        NoPaddingPanelExample()
+    }
 }

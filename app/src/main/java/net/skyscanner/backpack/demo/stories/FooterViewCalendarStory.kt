@@ -41,50 +41,50 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @CalendarComponent
 @ViewStory("Footer view", StoryKind.DemoOnly)
 fun FooterViewCalendarStory(modifier: Modifier = Modifier) =
-  AndroidLayout<BpkCalendar>(R.layout.fragment_calendar_default, R.id.bpkCalendar, modifier.fillMaxSize()) {
-    setController(FooterViewCalendarController(context))
-  }
+    AndroidLayout<BpkCalendar>(R.layout.fragment_calendar_default, R.id.bpkCalendar, modifier.fillMaxSize()) {
+        setController(FooterViewCalendarController(context))
+    }
 
 private class FooterViewCalendarController(
-  context: Context,
+    context: Context,
 ) : ExampleBpkCalendarController(context) {
-  override val calendarColoring: CalendarColoring = CalendarColoring(
-    coloredBuckets = setOf(
-      ColoredBucket(
-        CalendarCellStyle.Hightlight,
-        setOf(
-          startDate.plusDays(2),
-          endDate.minusDays(1),
+    override val calendarColoring: CalendarColoring = CalendarColoring(
+        coloredBuckets = setOf(
+            ColoredBucket(
+                CalendarCellStyle.Hightlight,
+                setOf(
+                    startDate.plusDays(2),
+                    endDate.minusDays(1),
+                ),
+            ),
+            ColoredBucket(
+                CalendarCellStyle.Negative,
+                setOf(
+                    startDate.plusDays(1),
+                ),
+            ),
         ),
-      ),
-      ColoredBucket(
-        CalendarCellStyle.Negative,
-        setOf(
-          startDate.plusDays(1),
-        ),
-      ),
-    ),
-  )
-
-  override val monthFooterAdapter =
-    HighlightedDaysAdapter(
-      context,
-      locale,
-      setOf(
-        HighlightedDay(
-          startDate.plusDays(1),
-          "Do nothing day",
-          CalendarCellStyle.Negative.color(context),
-        ),
-        HighlightedDay(
-          startDate.plusDays(2),
-          "Tea day",
-          descriptionOnly = true,
-        ),
-        HighlightedDay(
-          endDate.minusDays(1),
-          "I wish it was Friday day",
-        ),
-      ),
     )
+
+    override val monthFooterAdapter =
+        HighlightedDaysAdapter(
+            context,
+            locale,
+            setOf(
+                HighlightedDay(
+                    startDate.plusDays(1),
+                    "Do nothing day",
+                    CalendarCellStyle.Negative.color(context),
+                ),
+                HighlightedDay(
+                    startDate.plusDays(2),
+                    "Tea day",
+                    descriptionOnly = true,
+                ),
+                HighlightedDay(
+                    endDate.minusDays(1),
+                    "I wish it was Friday day",
+                ),
+            ),
+        )
 }

@@ -22,18 +22,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import net.skyscanner.backpack.calendar2.data.CalendarCell
 
 internal class CalendarSpanSizeLookup(
-  private val adapter: CalendarAdapter,
+    private val adapter: CalendarAdapter,
 ) : GridLayoutManager.SpanSizeLookup() {
 
-  val totalSpans = NUM_COLUMNS
+    val totalSpans = NUM_COLUMNS
 
-  override fun getSpanSize(position: Int): Int = when (adapter[position]) {
-    is CalendarCell.Day -> 1
-    is CalendarCell.Header -> NUM_COLUMNS
-    is CalendarCell.Space -> 1
-  }
+    override fun getSpanSize(position: Int): Int = when (adapter[position]) {
+        is CalendarCell.Day -> 1
+        is CalendarCell.Header -> NUM_COLUMNS
+        is CalendarCell.Space -> 1
+    }
 
-  private companion object {
-    const val NUM_COLUMNS = 7
-  }
+    private companion object {
+        const val NUM_COLUMNS = 7
+    }
 }

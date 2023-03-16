@@ -36,64 +36,64 @@ import org.mockito.Mockito.verifyNoInteractions
 @RunWith(AndroidJUnit4::class)
 class BpkNudgerTest {
 
-  private lateinit var subject: BpkNudger
+    private lateinit var subject: BpkNudger
 
-  @get:Rule
-  internal var activityRule: ActivityScenarioRule<TestActivity> =
-    ActivityScenarioRule(TestActivity::class.java)
+    @get:Rule
+    internal var activityRule: ActivityScenarioRule<TestActivity> =
+        ActivityScenarioRule(TestActivity::class.java)
 
-  @Before
-  fun setUp() {
-    activityRule.scenario.onActivity {
-      subject = BpkNudger(it)
+    @Before
+    fun setUp() {
+        activityRule.scenario.onActivity {
+            subject = BpkNudger(it)
+        }
     }
-  }
 
-  @Test
-  fun test_listenerIsNotInvoked_onSet() {
-    val listener = mock<(Int) -> Unit>()
-    subject.onChangeListener = listener
-    verifyNoInteractions(listener)
-  }
-
-  @Test
-  fun test_listenerIsNotInvoked_whenValueSet() {
-    val listener = mock<(Int) -> Unit>()
-    subject.onChangeListener = listener
-    subject.value = 5
-    verifyNoInteractions(listener)
-  }
-
-  @Test
-  fun test_listenerIsInvoked_whenValueIncreased() {
-    activityRule.scenario.onActivity { it.setContentView(subject) }
-    var lastCurrent = 0
-    var invocationsCount = 0
-    val listener = { current: Int ->
-      invocationsCount++
-      lastCurrent = current
+    @Test
+    fun test_listenerIsNotInvoked_onSet() {
+        val listener = mock<(Int) -> Unit>()
+        subject.onChangeListener = listener
+        verifyNoInteractions(listener)
     }
-    subject.onChangeListener = listener
-    onView(withId(R.id.bpk_nudger_increment)).perform(click())
-    assertEquals(1, lastCurrent)
-    assertEquals(1, invocationsCount)
-  }
 
-  @Test
-  fun test_listenerIsInvoked_whenValueDecreased() {
-    activityRule.scenario.onActivity { it.setContentView(subject) }
-    var lastCurrent = 0
-    var invocationsCount = 0
-    val listener = { current: Int ->
-      invocationsCount++
-      lastCurrent = current
+    @Test
+    fun test_listenerIsNotInvoked_whenValueSet() {
+        val listener = mock<(Int) -> Unit>()
+        subject.onChangeListener = listener
+        subject.value = 5
+        verifyNoInteractions(listener)
     }
-    activityRule.scenario.onActivity {
-      subject.value = 2
-      subject.onChangeListener = listener
+
+    @Test
+    fun test_listenerIsInvoked_whenValueIncreased() {
+        activityRule.scenario.onActivity { it.setContentView(subject) }
+        var lastCurrent = 0
+        var invocationsCount = 0
+        val listener = { current: Int ->
+            invocationsCount++
+            lastCurrent = current
+        }
+        subject.onChangeListener = listener
+        onView(withId(R.id.bpk_nudger_increment)).perform(click())
+        assertEquals(1, lastCurrent)
+        assertEquals(1, invocationsCount)
     }
-    onView(withId(R.id.bpk_nudger_decrement)).perform(click())
-    assertEquals(1, lastCurrent)
-    assertEquals(1, invocationsCount)
-  }
+
+    @Test
+    fun test_listenerIsInvoked_whenValueDecreased() {
+        activityRule.scenario.onActivity { it.setContentView(subject) }
+        var lastCurrent = 0
+        var invocationsCount = 0
+        val listener = { current: Int ->
+            invocationsCount++
+            lastCurrent = current
+        }
+        activityRule.scenario.onActivity {
+            subject.value = 2
+            subject.onChangeListener = listener
+        }
+        onView(withId(R.id.bpk_nudger_decrement)).perform(click())
+        assertEquals(1, lastCurrent)
+        assertEquals(1, invocationsCount)
+    }
 }

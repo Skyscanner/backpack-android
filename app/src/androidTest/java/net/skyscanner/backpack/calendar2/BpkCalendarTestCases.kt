@@ -28,120 +28,120 @@ import java.util.Locale
 
 object BpkCalendarTestCases {
 
-  object Params {
+    object Params {
 
-    private val initialStartDate = LocalDate.of(2019, 1, 2)
-    private val initialEndDate = LocalDate.of(2019, 12, 31)
-    private val initialRange = initialStartDate..initialEndDate
-    private val now = initialStartDate
+        private val initialStartDate = LocalDate.of(2019, 1, 2)
+        private val initialEndDate = LocalDate.of(2019, 12, 31)
+        private val initialRange = initialStartDate..initialEndDate
+        private val now = initialStartDate
 
-    private val DefaultSingle = CalendarParams(
-      locale = Locale.UK,
-      selectionMode = CalendarParams.SelectionMode.Single,
-      range = initialRange,
-      now = now,
-    )
+        private val DefaultSingle = CalendarParams(
+            locale = Locale.UK,
+            selectionMode = CalendarParams.SelectionMode.Single,
+            range = initialRange,
+            now = now,
+        )
 
-    private val DefaultRange = DefaultSingle.copy(selectionMode = CalendarParams.SelectionMode.Range)
+        private val DefaultRange = DefaultSingle.copy(selectionMode = CalendarParams.SelectionMode.Range)
 
-    val Default = DefaultRange
+        val Default = DefaultRange
 
-    val Labeled = DefaultRange.copy(
-      cellsInfo = mapOf(
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 1) to
-          CellInfo(style = CellStatusStyle.Label, label = "£10", status = CellStatus.Negative),
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 2) to
-          CellInfo(style = CellStatusStyle.Label, label = "£11", status = CellStatus.Neutral),
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
-          CellInfo(style = CellStatusStyle.Label, label = "£12", status = CellStatus.Positive),
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
-          CellInfo(style = CellStatusStyle.Label, label = "£900000000000000", status = CellStatus.Positive),
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
-          CellInfo(style = CellStatusStyle.Label, label = "£900000", status = CellStatus.Positive),
-      ),
-    )
+        val Labeled = DefaultRange.copy(
+            cellsInfo = mapOf(
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 1) to
+                    CellInfo(style = CellStatusStyle.Label, label = "£10", status = CellStatus.Negative),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 2) to
+                    CellInfo(style = CellStatusStyle.Label, label = "£11", status = CellStatus.Neutral),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
+                    CellInfo(style = CellStatusStyle.Label, label = "£12", status = CellStatus.Positive),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
+                    CellInfo(style = CellStatusStyle.Label, label = "£900000000000000", status = CellStatus.Positive),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
+                    CellInfo(style = CellStatusStyle.Label, label = "£900000", status = CellStatus.Positive),
+            ),
+        )
 
-    val Past = DefaultRange.copy(
-      range = LocalDate.of(2017, 1, 2)..LocalDate.of(2017, 12, 31),
-    )
+        val Past = DefaultRange.copy(
+            range = LocalDate.of(2017, 1, 2)..LocalDate.of(2017, 12, 31),
+        )
 
-    val LeapFebruary = DefaultSingle.copy(
-      range = LocalDate.of(2020, 2, 1)..LocalDate.of(2020, 12, 31),
-      now = LocalDate.of(2020, 2, 1),
-    )
+        val LeapFebruary = DefaultSingle.copy(
+            range = LocalDate.of(2020, 2, 1)..LocalDate.of(2020, 12, 31),
+            now = LocalDate.of(2020, 2, 1),
+        )
 
-    val NonLeapFebruary = DefaultSingle.copy(
-      range = LocalDate.of(2021, 2, 1)..LocalDate.of(2021, 12, 31),
-      now = LocalDate.of(2021, 2, 1),
-    )
+        val NonLeapFebruary = DefaultSingle.copy(
+            range = LocalDate.of(2021, 2, 1)..LocalDate.of(2021, 12, 31),
+            now = LocalDate.of(2021, 2, 1),
+        )
 
-    val TodayIsLastDayOfMonth = DefaultSingle.copy(
-      range = LocalDate.of(2017, 1, 1)..LocalDate.of(2017, 12, 31),
-      now = LocalDate.of(2017, 1, 31),
-    )
+        val TodayIsLastDayOfMonth = DefaultSingle.copy(
+            range = LocalDate.of(2017, 1, 1)..LocalDate.of(2017, 12, 31),
+            now = LocalDate.of(2017, 1, 31),
+        )
 
-    val TodayIsNewYear = DefaultSingle.copy(
-      range = LocalDate.of(2017, 12, 1)..LocalDate.of(2018, 12, 31),
-      now = LocalDate.of(2017, 12, 31),
-    )
+        val TodayIsNewYear = DefaultSingle.copy(
+            range = LocalDate.of(2017, 12, 1)..LocalDate.of(2018, 12, 31),
+            now = LocalDate.of(2017, 12, 31),
+        )
 
-    val WithRangeSetProgrammatically = Default
+        val WithRangeSetProgrammatically = Default
 
-    val WithSingleDaySetProgrammatically = DefaultSingle
+        val WithSingleDaySetProgrammatically = DefaultSingle
 
-    val WithDisabledDates = DefaultSingle.copy(
-      cellsInfo = disabledDayOfTheWeekInfo(initialRange, DayOfWeek.WEDNESDAY),
-    )
+        val WithDisabledDates = DefaultSingle.copy(
+            cellsInfo = disabledDayOfTheWeekInfo(initialRange, DayOfWeek.WEDNESDAY),
+        )
 
-    val WithDisabledDates_SelectSingle = WithDisabledDates
+        val WithDisabledDates_SelectSingle = WithDisabledDates
 
-    val WithDisabledDates_SelectRange = DefaultRange.copy(
-      cellsInfo = disabledDayOfTheWeekInfo(initialRange, DayOfWeek.WEDNESDAY),
-    )
+        val WithDisabledDates_SelectRange = DefaultRange.copy(
+            cellsInfo = disabledDayOfTheWeekInfo(initialRange, DayOfWeek.WEDNESDAY),
+        )
 
-    val WithDisabledDates_SelectDisabledDate = WithDisabledDates
+        val WithDisabledDates_SelectDisabledDate = WithDisabledDates
 
-    val WithWholeMonthButtonEnabled = DefaultRange.copy(
-      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
-    )
+        val WithWholeMonthButtonEnabled = DefaultRange.copy(
+            monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
+        )
 
-    val WithWholeMonthSetProgrammatically = DefaultRange.copy(
-      range = LocalDate.of(2019, 1, 1)..(LocalDate.of(2019, 1, 1) + Period.ofYears(2)),
-      now = LocalDate.of(2019, 1, 1),
-      monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
-    )
+        val WithWholeMonthSetProgrammatically = DefaultRange.copy(
+            range = LocalDate.of(2019, 1, 1)..(LocalDate.of(2019, 1, 1) + Period.ofYears(2)),
+            now = LocalDate.of(2019, 1, 1),
+            monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
+        )
 
-    private fun disabledDayOfTheWeekInfo(
-      range: ClosedRange<LocalDate>,
-      disabledDayOfWeek: DayOfWeek,
-    ): Map<LocalDate, CellInfo> =
-      range
-        .toIterable()
-        .filter { it.dayOfWeek == disabledDayOfWeek }
-        .associateWith { CellInfo(disabled = true) }
-  }
+        private fun disabledDayOfTheWeekInfo(
+            range: ClosedRange<LocalDate>,
+            disabledDayOfWeek: DayOfWeek,
+        ): Map<LocalDate, CellInfo> =
+            range
+                .toIterable()
+                .filter { it.dayOfWeek == disabledDayOfWeek }
+                .associateWith { CellInfo(disabled = true) }
+    }
 
-  object Selection {
+    object Selection {
 
-    val LeapFebruary = CalendarSelection.Single(LocalDate.of(2020, 2, 1))
+        val LeapFebruary = CalendarSelection.Single(LocalDate.of(2020, 2, 1))
 
-    val NonLeapFebruary = CalendarSelection.Single(LocalDate.of(2021, 2, 1))
+        val NonLeapFebruary = CalendarSelection.Single(LocalDate.of(2021, 2, 1))
 
-    val TodayIsLastDayOfMonth = CalendarSelection.Single(LocalDate.of(2017, 1, 31))
+        val TodayIsLastDayOfMonth = CalendarSelection.Single(LocalDate.of(2017, 1, 31))
 
-    val TodayIsNewYear = CalendarSelection.Single(LocalDate.of(2017, 12, 31))
+        val TodayIsNewYear = CalendarSelection.Single(LocalDate.of(2017, 12, 31))
 
-    val WithRangeSetProgrammatically =
-      CalendarSelection.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9))
+        val WithRangeSetProgrammatically =
+            CalendarSelection.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9))
 
-    val WithSingleDaySetProgrammatically = CalendarSelection.Single(LocalDate.of(2019, 1, 16))
+        val WithSingleDaySetProgrammatically = CalendarSelection.Single(LocalDate.of(2019, 1, 16))
 
-    val WithDisabledDates_SelectSingle = CalendarSelection.Single(LocalDate.of(2019, 1, 10))
+        val WithDisabledDates_SelectSingle = CalendarSelection.Single(LocalDate.of(2019, 1, 10))
 
-    val WithDisabledDates_SelectRange = CalendarSelection.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10))
+        val WithDisabledDates_SelectRange = CalendarSelection.Dates(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10))
 
-    val WithDisabledDates_SelectDisabledDate = CalendarSelection.Single(LocalDate.of(2019, 1, 9))
+        val WithDisabledDates_SelectDisabledDate = CalendarSelection.Single(LocalDate.of(2019, 1, 9))
 
-    val WithWholeMonthSetProgrammatically = CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
-  }
+        val WithWholeMonthSetProgrammatically = CalendarSelection.Month(YearMonth.of(2019, Month.JANUARY))
+    }
 }

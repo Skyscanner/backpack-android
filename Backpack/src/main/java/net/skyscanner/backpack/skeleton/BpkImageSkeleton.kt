@@ -29,42 +29,42 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.util.use
 
 class BpkImageSkeleton @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  @AttrRes defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    @AttrRes defStyleAttr: Int = 0,
 ) : View(context, attrs, defStyleAttr) {
 
-  enum class CornerType(
-    internal val id: Int,
-  ) {
-    Square(0),
-    Rounded(1),
-  }
-
-  var cornerType: CornerType = CornerType.Square
-    set(value) {
-      field = value
-      if (value === CornerType.Rounded) {
-        backgroundDrawable.cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusSm)
-      } else {
-        backgroundDrawable.cornerRadius = 0f
-      }
+    enum class CornerType(
+        internal val id: Int,
+    ) {
+        Square(0),
+        Rounded(1),
     }
 
-  private val backgroundDrawable: GradientDrawable
+    var cornerType: CornerType = CornerType.Square
+        set(value) {
+            field = value
+            if (value === CornerType.Rounded) {
+                backgroundDrawable.cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusSm)
+            } else {
+                backgroundDrawable.cornerRadius = 0f
+            }
+        }
 
-  init {
-    backgroundDrawable = AppCompatResources.getDrawable(context, R.drawable.bpk_skeleton_bg) as GradientDrawable
-    background = backgroundDrawable.mutate()
-    context.obtainStyledAttributes(attrs, R.styleable.BpkImageSkeleton, defStyleAttr, 0).use {
-      cornerType = parseCornerAttribute(it, cornerType)
+    private val backgroundDrawable: GradientDrawable
+
+    init {
+        backgroundDrawable = AppCompatResources.getDrawable(context, R.drawable.bpk_skeleton_bg) as GradientDrawable
+        background = backgroundDrawable.mutate()
+        context.obtainStyledAttributes(attrs, R.styleable.BpkImageSkeleton, defStyleAttr, 0).use {
+            cornerType = parseCornerAttribute(it, cornerType)
+        }
     }
-  }
 
-  private companion object {
-    private fun parseCornerAttribute(it: TypedArray, fallback: CornerType) =
-      it.getInt(R.styleable.BpkImageSkeleton_skeletonCornerType, fallback.id).let { id ->
-        CornerType.values().find { it.id == id } ?: fallback
-      }
-  }
+    private companion object {
+        private fun parseCornerAttribute(it: TypedArray, fallback: CornerType) =
+            it.getInt(R.styleable.BpkImageSkeleton_skeletonCornerType, fallback.id).let { id ->
+                CornerType.values().find { it.id == id } ?: fallback
+            }
+    }
 }

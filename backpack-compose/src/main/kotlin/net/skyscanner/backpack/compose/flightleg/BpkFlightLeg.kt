@@ -42,102 +42,102 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BpkFlightLeg(
-  departureArrivalTime: String,
-  /**
-   * Please use `bpkAirportHighlightStyle()` on your `SpanStyle` if you need to highlight an airport
-   * to indicate different arrival / departure airports between the legs. See the docs for usage example
-   */
-  description: AnnotatedString,
-  stopsInfo: String,
-  duration: String,
-  contentDescription: String?,
-  modifier: Modifier = Modifier,
-  nextDayArrival: String? = null,
-  highlightStopsInfo: Boolean = false,
-  operatedBy: String? = null,
-  warning: String? = null,
-  carrierLogoContent: @Composable (BoxScope.() -> Unit)? = null,
+    departureArrivalTime: String,
+    /**
+     * Please use `bpkAirportHighlightStyle()` on your `SpanStyle` if you need to highlight an airport
+     * to indicate different arrival / departure airports between the legs. See the docs for usage example
+     */
+    description: AnnotatedString,
+    stopsInfo: String,
+    duration: String,
+    contentDescription: String?,
+    modifier: Modifier = Modifier,
+    nextDayArrival: String? = null,
+    highlightStopsInfo: Boolean = false,
+    operatedBy: String? = null,
+    warning: String? = null,
+    carrierLogoContent: @Composable (BoxScope.() -> Unit)? = null,
 ) {
-  Box(
-    modifier = modifier
-      .fillMaxWidth()
-      .semantics(mergeDescendants = true) {
-        if (contentDescription == null) {
-          // prevent screen readers from reading this allowing a broader
-          // content description to be set on the parent node
-          invisibleToUser()
-        } else {
-          this.contentDescription = contentDescription
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .semantics(mergeDescendants = true) {
+                if (contentDescription == null) {
+                    // prevent screen readers from reading this allowing a broader
+                    // content description to be set on the parent node
+                    invisibleToUser()
+                } else {
+                    this.contentDescription = contentDescription
+                }
+            },
+    ) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            carrierLogoContent?.let {
+                Box(
+                    modifier = Modifier.padding(top = BpkSpacing.Sm),
+                    content = it,
+                )
+                Spacer(modifier = Modifier.width(BpkSpacing.Base))
+            }
+            Column(
+                horizontalAlignment = Alignment.Start,
+            ) {
+                Row {
+                    BpkText(
+                        text = departureArrivalTime,
+                        style = BpkTheme.typography.heading5,
+                        color = BpkTheme.colors.textPrimary,
+                    )
+                    nextDayArrival?.let {
+                        BpkText(
+                            modifier = Modifier.align(Alignment.Top),
+                            text = it,
+                            style = BpkTheme.typography.caption,
+                            color = BpkTheme.colors.textPrimary,
+                        )
+                    }
+                }
+                BpkText(
+                    text = description,
+                    style = BpkTheme.typography.caption,
+                    color = BpkTheme.colors.textSecondary,
+                )
+                operatedBy?.let {
+                    BpkText(
+                        text = it,
+                        style = BpkTheme.typography.caption,
+                        color = BpkTheme.colors.textSecondary,
+                    )
+                }
+                warning?.let {
+                    BpkText(
+                        text = it,
+                        style = BpkTheme.typography.label3,
+                        color = BpkTheme.colors.textError,
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.weight(1f))
+            Column(
+                horizontalAlignment = Alignment.End,
+            ) {
+                BpkText(
+                    text = stopsInfo,
+                    style = BpkTheme.typography.label3,
+                    color = if (highlightStopsInfo) BpkTheme.colors.textError else BpkTheme.colors.textPrimary,
+                )
+                BpkText(
+                    text = duration,
+                    style = BpkTheme.typography.caption,
+                    color = BpkTheme.colors.textSecondary,
+                )
+            }
         }
-      },
-  ) {
-    Row(modifier = Modifier.fillMaxWidth()) {
-      carrierLogoContent?.let {
-        Box(
-          modifier = Modifier.padding(top = BpkSpacing.Sm),
-          content = it,
-        )
-        Spacer(modifier = Modifier.width(BpkSpacing.Base))
-      }
-      Column(
-        horizontalAlignment = Alignment.Start,
-      ) {
-        Row {
-          BpkText(
-            text = departureArrivalTime,
-            style = BpkTheme.typography.heading5,
-            color = BpkTheme.colors.textPrimary,
-          )
-          nextDayArrival?.let {
-            BpkText(
-              modifier = Modifier.align(Alignment.Top),
-              text = it,
-              style = BpkTheme.typography.caption,
-              color = BpkTheme.colors.textPrimary,
-            )
-          }
-        }
-        BpkText(
-          text = description,
-          style = BpkTheme.typography.caption,
-          color = BpkTheme.colors.textSecondary,
-        )
-        operatedBy?.let {
-          BpkText(
-            text = it,
-            style = BpkTheme.typography.caption,
-            color = BpkTheme.colors.textSecondary,
-          )
-        }
-        warning?.let {
-          BpkText(
-            text = it,
-            style = BpkTheme.typography.label3,
-            color = BpkTheme.colors.textError,
-          )
-        }
-      }
-      Spacer(modifier = Modifier.weight(1f))
-      Column(
-        horizontalAlignment = Alignment.End,
-      ) {
-        BpkText(
-          text = stopsInfo,
-          style = BpkTheme.typography.label3,
-          color = if (highlightStopsInfo) BpkTheme.colors.textError else BpkTheme.colors.textPrimary,
-        )
-        BpkText(
-          text = duration,
-          style = BpkTheme.typography.caption,
-          color = BpkTheme.colors.textSecondary,
-        )
-      }
     }
-  }
 }
 
 @Composable
 fun bpkAirportHighlightStyle() = SpanStyle(
-  background = BpkTheme.colors.statusDangerFill,
-  color = BpkTheme.colors.textOnLight,
+    background = BpkTheme.colors.statusDangerFill,
+    color = BpkTheme.colors.textOnLight,
 )

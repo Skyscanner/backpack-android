@@ -34,59 +34,59 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 open class GenerateScreenshots(
-  private val story: Story,
+    private val story: Story,
 ) {
 
-  companion object {
+    companion object {
 
-    @JvmStatic
-    @Parameterized.Parameters(name = "{0} Screenshot")
-    fun data(): List<Story> = StoriesRepository.getInstance().screenshotStories
-  }
-
-  @get:Rule
-  var activityRule = ActivityTestRule(BpkBaseActivity::class.java, true, false)
-
-  @get:Rule
-  val composeTestRule = AndroidComposeTestRule(activityRule) { it.activity }
-
-  @Test
-  fun testTakeScreenshot() {
-    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-    runActivityAndTakeScreenshot()
-  }
-
-  @Test
-  fun testTakeScreenshotDm() {
-    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-    runActivityAndTakeScreenshot("dm")
-  }
-
-  private fun runActivityAndTakeScreenshot(suffix: String? = null) {
-    val intent = Intent()
-    activityRule.launchActivity(intent)
-    composeTestRule.setContent {
-      DemoScaffold(automationMode = true) {
-        StoryScreen(
-          component = story.component.name,
-          story = story.name,
-          isCompose = story.isCompose,
-        )
-      }
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0} Screenshot")
+        fun data(): List<Story> = StoriesRepository.getInstance().screenshotStories
     }
-    takeScreenshot(suffix)
-    activityRule.finishActivity()
-  }
 
-  private fun takeScreenshot(suffix: String?) {
-    RemoteScreenGrab.takeScreenshot(
-      component = story.component.name.replace(" ", ""),
-      type = if (story.isCompose) "compose" else "view",
-      file = story.name
-        .lowercase()
-        .replace("–", "-")
-        .replace(" ", "-")
-        .let { if (suffix != null) "${it}_$suffix" else it },
-    )
-  }
+    @get:Rule
+    var activityRule = ActivityTestRule(BpkBaseActivity::class.java, true, false)
+
+    @get:Rule
+    val composeTestRule = AndroidComposeTestRule(activityRule) { it.activity }
+
+    @Test
+    fun testTakeScreenshot() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        runActivityAndTakeScreenshot()
+    }
+
+    @Test
+    fun testTakeScreenshotDm() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        runActivityAndTakeScreenshot("dm")
+    }
+
+    private fun runActivityAndTakeScreenshot(suffix: String? = null) {
+        val intent = Intent()
+        activityRule.launchActivity(intent)
+        composeTestRule.setContent {
+            DemoScaffold(automationMode = true) {
+                StoryScreen(
+                    component = story.component.name,
+                    story = story.name,
+                    isCompose = story.isCompose,
+                )
+            }
+        }
+        takeScreenshot(suffix)
+        activityRule.finishActivity()
+    }
+
+    private fun takeScreenshot(suffix: String?) {
+        RemoteScreenGrab.takeScreenshot(
+            component = story.component.name.replace(" ", ""),
+            type = if (story.isCompose) "compose" else "view",
+            file = story.name
+                .lowercase()
+                .replace("–", "-")
+                .replace(" ", "-")
+                .let { if (suffix != null) "${it}_$suffix" else it },
+        )
+    }
 }

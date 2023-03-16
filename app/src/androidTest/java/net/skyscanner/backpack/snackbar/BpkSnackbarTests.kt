@@ -31,99 +31,99 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkSnackbarTests : BpkSnapshotTest() {
 
-  private val root by unsafeLazy {
-    FrameLayout(testContext)
-  }
-
-  @Test
-  fun default() {
-    capture {
-      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+    private val root by unsafeLazy {
+        FrameLayout(testContext)
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun withAction() {
-    capture {
-      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setAction("Action") {}
+    @Test
+    fun default() {
+        capture {
+            BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun withTitle() {
-    capture {
-      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setTitle("Title")
-        .setAction("Action") {}
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withAction() {
+        capture {
+            BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+                .setAction("Action") {}
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun withIcon() {
-    capture {
-      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setIcon(R.drawable.bpk_tick_circle)
-        .setAction("Action") {}
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withTitle() {
+        capture {
+            BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+                .setTitle("Title")
+                .setAction("Action") {}
+        }
     }
-  }
 
-  @Test
-  fun withTitleAndIcon() {
-    capture {
-      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setTitle("Title")
-        .setIcon(R.drawable.bpk_tick_circle)
-        .setAction("Action") {}
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withIcon() {
+        capture {
+            BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+                .setIcon(R.drawable.bpk_tick_circle)
+                .setAction("Action") {}
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun iconOnly() {
-    capture {
-      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setAction(R.drawable.bpk_close, "Close") {}
+    @Test
+    fun withTitleAndIcon() {
+        capture {
+            BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+                .setTitle("Title")
+                .setIcon(R.drawable.bpk_tick_circle)
+                .setAction("Action") {}
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun titleWithAction() {
-    capture {
-      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setTitle("Title")
-        .setAction(R.drawable.bpk_close, "Close") {}
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun iconOnly() {
+        capture {
+            BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+                .setAction(R.drawable.bpk_close, "Close") {}
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun iconWithAction() {
-    capture {
-      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setIcon(R.drawable.bpk_tick_circle)
-        .setAction(R.drawable.bpk_close, "Close") {}
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun titleWithAction() {
+        capture {
+            BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+                .setTitle("Title")
+                .setAction(R.drawable.bpk_close, "Close") {}
+        }
     }
-  }
 
-  @Test
-  fun titleWithIconAndAction() {
-    capture {
-      BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
-        .setTitle("Title")
-        .setIcon(R.drawable.bpk_tick_circle)
-        .setAction(R.drawable.bpk_close, "Close") {}
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun iconWithAction() {
+        capture {
+            BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+                .setIcon(R.drawable.bpk_tick_circle)
+                .setAction(R.drawable.bpk_close, "Close") {}
+        }
     }
-  }
 
-  private inline fun capture(crossinline what: () -> BpkSnackbar) {
-    val snackbar: BpkSnackbar = what()
-    snackbar.show()
+    @Test
+    fun titleWithIconAndAction() {
+        capture {
+            BpkSnackbar.make(root, "Test", BpkSnackbar.LENGTH_INDEFINITE)
+                .setTitle("Title")
+                .setIcon(R.drawable.bpk_tick_circle)
+                .setAction(R.drawable.bpk_close, "Close") {}
+        }
+    }
 
-    snap(snackbar.rawSnackbar.view, padding = 0, width = 350)
-  }
+    private inline fun capture(crossinline what: () -> BpkSnackbar) {
+        val snackbar: BpkSnackbar = what()
+        snackbar.show()
+
+        snap(snackbar.rawSnackbar.view, padding = 0, width = 350)
+    }
 }

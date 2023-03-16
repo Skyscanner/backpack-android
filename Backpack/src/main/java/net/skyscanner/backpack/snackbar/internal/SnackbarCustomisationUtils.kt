@@ -28,26 +28,26 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.snackbar.BpkSnackbar
 
 internal fun Snackbar.setBackgroundColorCompat(@ColorInt color: Int) {
-  var background = view.background
-  if (background != null) {
-    background = background.mutate()
-    background.setTint(color)
-  } else {
-    background = ColorDrawable(color)
-  }
-  view.background = background
+    var background = view.background
+    if (background != null) {
+        background = background.mutate()
+        background.setTint(color)
+    } else {
+        background = ColorDrawable(color)
+    }
+    view.background = background
 }
 
 internal fun BpkSnackbar.createIconDrawable(drawable: Drawable?, @ColorInt tint: Int) =
-  drawable
-    ?.mutate()
-    ?.apply {
-      setTint(tint)
-      val size = rawSnackbar.view.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
-      setBounds(0, 0, size, size)
-    }
+    drawable
+        ?.mutate()
+        ?.apply {
+            setTint(tint)
+            val size = rawSnackbar.view.resources.getDimensionPixelSize(R.dimen.bpk_icon_size_small)
+            setBounds(0, 0, size, size)
+        }
 
 internal fun BpkSnackbar.customiseText(text: CharSequence, span: Any): CharSequence =
-  SpannableStringBuilder(text).apply {
-    setSpan(span, 0, length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
-  }
+    SpannableStringBuilder(text).apply {
+        setSpan(span, 0, length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
+    }

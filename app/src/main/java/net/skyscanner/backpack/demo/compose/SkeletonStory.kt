@@ -51,117 +51,117 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @SkeletonComponent
 @ComposeStory
 fun SkeletonStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-  ) {
-    CircleSkeletonExample()
-    ImageSkeletonExample()
-    HeadlineSkeletonExample()
-    BodyTextSkeletonExample()
-    BpkShimmerSkeletonExample()
-  }
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+    ) {
+        CircleSkeletonExample()
+        ImageSkeletonExample()
+        HeadlineSkeletonExample()
+        BodyTextSkeletonExample()
+        BpkShimmerSkeletonExample()
+    }
 }
 
 @Composable
 internal fun ImageSkeletonExample(modifier: Modifier = Modifier) {
-  Column(modifier) {
-    BpkText(
-      modifier = Modifier.padding(bottom = BpkSpacing.Sm),
-      text = stringResource(id = R.string.image_skeleton_title),
-      style = BpkTheme.typography.footnote,
-    )
-    Row(
-      modifier = Modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceAround,
-    ) {
-      BpkImageSkeleton(
-        modifier = Modifier.size(BpkSpacing.Xxl.times(2), BpkSpacing.Xxl.times(2)),
-        cornerType = BpkSkeletonCornerType.Square,
-      )
-      BpkImageSkeleton(
-        modifier = Modifier.size(BpkSpacing.Xl.times(3), BpkSpacing.Xl.times(2)),
-        cornerType = BpkSkeletonCornerType.Rounded,
-      )
+    Column(modifier) {
+        BpkText(
+            modifier = Modifier.padding(bottom = BpkSpacing.Sm),
+            text = stringResource(id = R.string.image_skeleton_title),
+            style = BpkTheme.typography.footnote,
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+        ) {
+            BpkImageSkeleton(
+                modifier = Modifier.size(BpkSpacing.Xxl.times(2), BpkSpacing.Xxl.times(2)),
+                cornerType = BpkSkeletonCornerType.Square,
+            )
+            BpkImageSkeleton(
+                modifier = Modifier.size(BpkSpacing.Xl.times(3), BpkSpacing.Xl.times(2)),
+                cornerType = BpkSkeletonCornerType.Rounded,
+            )
+        }
     }
-  }
 }
 
 @Composable
 internal fun CircleSkeletonExample(modifier: Modifier = Modifier) {
-  Column(modifier) {
-    BpkText(
-      modifier = Modifier.padding(bottom = BpkSpacing.Sm),
-      text = stringResource(id = R.string.circle_skeleton_title),
-      style = BpkTheme.typography.footnote,
-    )
-    Row(
-      modifier = Modifier.fillMaxWidth(),
-      verticalAlignment = Alignment.CenterVertically,
-      horizontalArrangement = Arrangement.SpaceAround,
-    ) {
-      BpkCircleSkeleton(circleSize = BpkCircleSizeType.Custom(BpkSpacing.Xl))
-      BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
+    Column(modifier) {
+        BpkText(
+            modifier = Modifier.padding(bottom = BpkSpacing.Sm),
+            text = stringResource(id = R.string.circle_skeleton_title),
+            style = BpkTheme.typography.footnote,
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceAround,
+        ) {
+            BpkCircleSkeleton(circleSize = BpkCircleSizeType.Custom(BpkSpacing.Xl))
+            BpkCircleSkeleton(circleSize = BpkCircleSizeType.Large)
+        }
     }
-  }
 }
 
 @Composable
 internal fun BodyTextSkeletonExample(modifier: Modifier = Modifier) {
-  Column(modifier) {
-    BpkText(
-      modifier = Modifier.padding(bottom = BpkSpacing.Sm),
-      text = stringResource(id = R.string.body_text_skeleton_title),
-      style = BpkTheme.typography.footnote,
-    )
-    Column() {
-      BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(5)))
+    Column(modifier) {
+        BpkText(
+            modifier = Modifier.padding(bottom = BpkSpacing.Sm),
+            text = stringResource(id = R.string.body_text_skeleton_title),
+            style = BpkTheme.typography.footnote,
+        )
+        Column() {
+            BpkBodyTextSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(5)))
+        }
     }
-  }
 }
 
 @Composable
 internal fun HeadlineSkeletonExample(modifier: Modifier = Modifier) {
-  Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
-    BpkText(text = stringResource(id = R.string.headline_skeleton_title), style = BpkTheme.typography.footnote)
-    Row(
-      modifier = Modifier.fillMaxWidth(),
-      verticalAlignment = Alignment.CenterVertically,
-      horizontalArrangement = Arrangement.SpaceEvenly,
-    ) {
-      BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonHeightSizeType.Small)
-      BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonHeightSizeType.Medium)
-      BpkHeadlineSkeleton(
-        modifier = Modifier
-          .width(BpkSpacing.Xxl.times(2))
-          .height(50.dp),
-        skeletonHeightSize = BpkSkeletonHeightSizeType.Custom,
-      )
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+        BpkText(text = stringResource(id = R.string.headline_skeleton_title), style = BpkTheme.typography.footnote)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly,
+        ) {
+            BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonHeightSizeType.Small)
+            BpkHeadlineSkeleton(modifier = Modifier.width(BpkSpacing.Xxl.times(2)), BpkSkeletonHeightSizeType.Medium)
+            BpkHeadlineSkeleton(
+                modifier = Modifier
+                    .width(BpkSpacing.Xxl.times(2))
+                    .height(50.dp),
+                skeletonHeightSize = BpkSkeletonHeightSizeType.Custom,
+            )
+        }
     }
-  }
 }
 
 @Composable
 internal fun BpkShimmerSkeletonExample(modifier: Modifier = Modifier) {
-  Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
-    BpkText(text = stringResource(id = R.string.shimmer_overlay_title), style = BpkTheme.typography.footnote)
-    Row(
-      modifier = Modifier.fillMaxWidth(),
-    ) {
-      BpkShimmerOverlay(
-        modifier = Modifier
-          .width(200.dp)
-          .wrapContentHeight(),
-      ) {
-        Row() {
-          BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xxl, BpkSpacing.Xxl))
-          BpkBodyTextSkeleton(
-            modifier = Modifier
-              .padding(start = BpkSpacing.Md)
-              .width(152.dp),
-          )
+    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base)) {
+        BpkText(text = stringResource(id = R.string.shimmer_overlay_title), style = BpkTheme.typography.footnote)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            BpkShimmerOverlay(
+                modifier = Modifier
+                    .width(200.dp)
+                    .wrapContentHeight(),
+            ) {
+                Row() {
+                    BpkImageSkeleton(modifier = Modifier.size(BpkSpacing.Xxl, BpkSpacing.Xxl))
+                    BpkBodyTextSkeleton(
+                        modifier = Modifier
+                            .padding(start = BpkSpacing.Md)
+                            .width(152.dp),
+                    )
+                }
+            }
         }
-      }
     }
-  }
 }

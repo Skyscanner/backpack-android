@@ -31,15 +31,15 @@ import net.skyscanner.backpack.lint.check.HardcodedColorUsageDetector
 @Suppress("unused", "UnstableApiUsage")
 class IssueRegistry : IssueRegistry() {
 
-  override val api: Int = CURRENT_API
+    override val api: Int = CURRENT_API
 
-  override val issues: List<Issue> = listOf(
-    BpkComposeComponentUsageDetector.ISSUE,
-    BpkComponentUsageDetector.ISSUE,
-    HardcodedColorUsageDetector.ISSUE,
-    HardcodedColorResourceDetector.ISSUE,
-    BpkDeprecatedColorUsageDetector.ISSUE,
-  )
+    override val issues: List<Issue> = listOf(
+        BpkComposeComponentUsageDetector.ISSUE,
+        BpkComponentUsageDetector.ISSUE,
+        HardcodedColorUsageDetector.ISSUE,
+        HardcodedColorResourceDetector.ISSUE,
+        BpkDeprecatedColorUsageDetector.ISSUE,
+    )
 
-  override val vendor: Vendor = Vendor(vendorName = "Skyscanner", identifier = "backpack-android")
+    override val vendor: Vendor = Vendor(vendorName = "Skyscanner", identifier = "backpack-android")
 }

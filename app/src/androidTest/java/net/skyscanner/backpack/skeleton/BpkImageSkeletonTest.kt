@@ -26,17 +26,17 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkImageSkeletonTest : BpkSnapshotTest() {
 
-  @Test
-  fun imageSquare() {
-    val skeleton = BpkImageSkeleton(testContext)
-    skeleton.cornerType = BpkImageSkeleton.CornerType.Square
-    snap(skeleton, width = 200, height = 200)
-  }
+    @Test
+    fun imageSquare() {
+        val skeleton = BpkImageSkeleton(testContext)
+        skeleton.cornerType = BpkImageSkeleton.CornerType.Square
+        snap(skeleton, width = 200, height = 200)
+    }
 
-  @Test
-  fun imageRounded() {
-    val skeleton = BpkImageSkeleton(testContext)
-    skeleton.cornerType = BpkImageSkeleton.CornerType.Rounded
-    snap(skeleton, width = 200, height = 200)
-  }
+    @Test
+    fun imageRounded() {
+        val skeleton = BpkImageSkeleton(testContext)
+        skeleton.cornerType = BpkImageSkeleton.CornerType.Rounded
+        snap(skeleton, width = 200, height = 200)
+    }
 }

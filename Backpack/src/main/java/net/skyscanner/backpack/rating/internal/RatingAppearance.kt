@@ -27,99 +27,99 @@ import net.skyscanner.backpack.text.BpkText
 import net.skyscanner.backpack.util.use
 
 internal class RatingAppearance(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
-  defaultStyle: BpkRating.Style,
-  defaultSize: BpkRating.Size,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defaultStyle: BpkRating.Style,
+    defaultSize: BpkRating.Size,
 ) {
 
-  val style: BpkRating.Style
+    val style: BpkRating.Style
 
-  val size: BpkRating.Size
+    val size: BpkRating.Size
 
-  val score: BpkText.FontDefinition
+    val score: BpkText.FontDefinition
 
-  val title: BpkText.FontDefinition
+    val title: BpkText.FontDefinition
 
-  val subtitle: BpkText.FontDefinition?
+    val subtitle: BpkText.FontDefinition?
 
-  @Px
-  val badgeWidth: Int
+    @Px
+    val badgeWidth: Int
 
-  @Px
-  val badgeHeight: Int
+    @Px
+    val badgeHeight: Int
 
-  @Px
-  val spacing: Int
+    @Px
+    val spacing: Int
 
-  init {
-    var style = defaultStyle
-    var size = defaultSize
-    context.theme.obtainStyledAttributes(
-      attrs,
-      R.styleable.BpkRating,
-      defStyleAttr, 0,
-    ).use { ta ->
-      style = ta.getInt(R.styleable.BpkRating_ratingStyle, style.xmlId)
-        .let(::mapXmlToStyle) ?: style
+    init {
+        var style = defaultStyle
+        var size = defaultSize
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.BpkRating,
+            defStyleAttr, 0,
+        ).use { ta ->
+            style = ta.getInt(R.styleable.BpkRating_ratingStyle, style.xmlId)
+                .let(::mapXmlToStyle) ?: style
 
-      size = ta.getInt(R.styleable.BpkRating_ratingSize, size.xmlId)
-        .let(::mapXmlToSize) ?: size
+            size = ta.getInt(R.styleable.BpkRating_ratingSize, size.xmlId)
+                .let(::mapXmlToSize) ?: size
+        }
+
+        this.style = style
+        this.size = size
+        val styles = size.style
+
+        this.title = BpkText.getFont(context, styles.titleStyle)
+        this.subtitle = styles.subtitleStyle?.let { BpkText.getFont(context, it) }
+        this.score = BpkText.getFont(context, styles.scoreStyle)
+        this.spacing = when (style) {
+            BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.spacingPill)
+            BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.spacing)
+            BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.spacing)
+        }
+        this.badgeWidth = when (style) {
+            BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.pillWidth)
+            BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.badgeSize)
+            BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.badgeSize)
+        }
+        this.badgeHeight = when (style) {
+            BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.pillHeight)
+            BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.badgeSize)
+            BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.badgeSize)
+        }
     }
 
-    this.style = style
-    this.size = size
-    val styles = size.style
+    private val BpkRating.Style.xmlId
+        get() = when (this) {
+            BpkRating.Style.Horizontal -> 0
+            BpkRating.Style.Vertical -> 1
+            BpkRating.Style.Pill -> 2
+        }
 
-    this.title = BpkText.getFont(context, styles.titleStyle)
-    this.subtitle = styles.subtitleStyle?.let { BpkText.getFont(context, it) }
-    this.score = BpkText.getFont(context, styles.scoreStyle)
-    this.spacing = when (style) {
-      BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.spacingPill)
-      BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.spacing)
-      BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.spacing)
-    }
-    this.badgeWidth = when (style) {
-      BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.pillWidth)
-      BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.badgeSize)
-      BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.badgeSize)
-    }
-    this.badgeHeight = when (style) {
-      BpkRating.Style.Pill -> context.resources.getDimensionPixelSize(styles.pillHeight)
-      BpkRating.Style.Horizontal -> context.resources.getDimensionPixelSize(styles.badgeSize)
-      BpkRating.Style.Vertical -> context.resources.getDimensionPixelSize(styles.badgeSize)
-    }
-  }
+    private fun mapXmlToStyle(id: Int) =
+        BpkRating.Style.values().find { it.xmlId == id }
 
-  private val BpkRating.Style.xmlId
-    get() = when (this) {
-      BpkRating.Style.Horizontal -> 0
-      BpkRating.Style.Vertical -> 1
-      BpkRating.Style.Pill -> 2
-    }
+    private val BpkRating.Size.xmlId
+        get() = when (this) {
+            BpkRating.Size.Icon -> 0
+            BpkRating.Size.ExtraSmall -> 1
+            BpkRating.Size.Small -> 2
+            BpkRating.Size.Base -> 3
+            BpkRating.Size.Large -> 4
+        }
 
-  private fun mapXmlToStyle(id: Int) =
-    BpkRating.Style.values().find { it.xmlId == id }
+    private fun mapXmlToSize(id: Int) =
+        BpkRating.Size.values().find { it.xmlId == id }
 
-  private val BpkRating.Size.xmlId
-    get() = when (this) {
-      BpkRating.Size.Icon -> 0
-      BpkRating.Size.ExtraSmall -> 1
-      BpkRating.Size.Small -> 2
-      BpkRating.Size.Base -> 3
-      BpkRating.Size.Large -> 4
-    }
-
-  private fun mapXmlToSize(id: Int) =
-    BpkRating.Size.values().find { it.xmlId == id }
-
-  private val BpkRating.Size.style
-    get() = when (this) {
-      BpkRating.Size.Icon -> RatingStyles.Icon
-      BpkRating.Size.ExtraSmall -> RatingStyles.ExtraSmall
-      BpkRating.Size.Small -> RatingStyles.Small
-      BpkRating.Size.Base -> RatingStyles.Base
-      BpkRating.Size.Large -> RatingStyles.Large
-    }
+    private val BpkRating.Size.style
+        get() = when (this) {
+            BpkRating.Size.Icon -> RatingStyles.Icon
+            BpkRating.Size.ExtraSmall -> RatingStyles.ExtraSmall
+            BpkRating.Size.Small -> RatingStyles.Small
+            BpkRating.Size.Base -> RatingStyles.Base
+            BpkRating.Size.Large -> RatingStyles.Large
+        }
 }

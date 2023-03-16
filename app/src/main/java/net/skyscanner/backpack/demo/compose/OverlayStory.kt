@@ -49,113 +49,113 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @OverlayComponent
 @ComposeStory
 fun OverlayStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier
-      .verticalScroll(rememberScrollState())
-      .padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
-    OverlaySampleRow {
-      val childModifier = Modifier.weight(1f)
-      DefaultOverlaySample(overlayType = BpkOverlayType.SolidLow, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.SolidMedium, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.SolidHigh, modifier = childModifier)
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        OverlaySampleRow {
+            val childModifier = Modifier.weight(1f)
+            DefaultOverlaySample(overlayType = BpkOverlayType.SolidLow, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.SolidMedium, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.SolidHigh, modifier = childModifier)
+        }
+        OverlaySampleRow {
+            val childModifier = Modifier.weight(1f)
+            DefaultOverlaySample(overlayType = BpkOverlayType.TopLow, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.TopMedium, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.TopHigh, modifier = childModifier)
+        }
+        OverlaySampleRow {
+            val childModifier = Modifier.weight(1f)
+            DefaultOverlaySample(overlayType = BpkOverlayType.BottomLow, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.BottomMedium, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.BottomHigh, modifier = childModifier)
+        }
+        OverlaySampleRow {
+            val childModifier = Modifier.weight(1f)
+            DefaultOverlaySample(overlayType = BpkOverlayType.LeftLow, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.LeftMedium, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.LeftHigh, modifier = childModifier)
+        }
+        OverlaySampleRow {
+            val childModifier = Modifier.weight(1f)
+            DefaultOverlaySample(overlayType = BpkOverlayType.RightLow, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.RightMedium, modifier = childModifier)
+            DefaultOverlaySample(overlayType = BpkOverlayType.RightHigh, modifier = childModifier)
+        }
+        OverlaySampleRow {
+            val childModifier = Modifier.weight(1f)
+            DefaultOverlaySample(overlayType = BpkOverlayType.Vignette, modifier = childModifier)
+            WithTextOverlaySample(overlayType = BpkOverlayType.SolidHigh, modifier = childModifier)
+            Spacer(modifier = childModifier)
+        }
     }
-    OverlaySampleRow {
-      val childModifier = Modifier.weight(1f)
-      DefaultOverlaySample(overlayType = BpkOverlayType.TopLow, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.TopMedium, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.TopHigh, modifier = childModifier)
-    }
-    OverlaySampleRow {
-      val childModifier = Modifier.weight(1f)
-      DefaultOverlaySample(overlayType = BpkOverlayType.BottomLow, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.BottomMedium, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.BottomHigh, modifier = childModifier)
-    }
-    OverlaySampleRow {
-      val childModifier = Modifier.weight(1f)
-      DefaultOverlaySample(overlayType = BpkOverlayType.LeftLow, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.LeftMedium, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.LeftHigh, modifier = childModifier)
-    }
-    OverlaySampleRow {
-      val childModifier = Modifier.weight(1f)
-      DefaultOverlaySample(overlayType = BpkOverlayType.RightLow, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.RightMedium, modifier = childModifier)
-      DefaultOverlaySample(overlayType = BpkOverlayType.RightHigh, modifier = childModifier)
-    }
-    OverlaySampleRow {
-      val childModifier = Modifier.weight(1f)
-      DefaultOverlaySample(overlayType = BpkOverlayType.Vignette, modifier = childModifier)
-      WithTextOverlaySample(overlayType = BpkOverlayType.SolidHigh, modifier = childModifier)
-      Spacer(modifier = childModifier)
-    }
-  }
 }
 
 @Composable
 fun OverlaySampleRow(
-  modifier: Modifier = Modifier,
-  content: @Composable RowScope.() -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable RowScope.() -> Unit,
 ) {
-  Row(
-    content = content,
-    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    modifier = modifier.fillMaxWidth(),
-  )
+    Row(
+        content = content,
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        modifier = modifier.fillMaxWidth(),
+    )
 }
 
 @Composable
 fun DefaultOverlaySample(
-  overlayType: BpkOverlayType,
-  modifier: Modifier = Modifier,
+    overlayType: BpkOverlayType,
+    modifier: Modifier = Modifier,
 ) {
-  Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-    BpkOverlay(
-      modifier = Modifier
-        .fillMaxWidth()
-        .aspectRatio(1.5f),
-      overlayType = overlayType,
-    ) {
-      Image(
-        painter = painterResource(R.drawable.sea),
-        contentDescription = stringResource(R.string.image_sea_content_description),
-        modifier = Modifier.fillMaxSize(),
-        contentScale = ContentScale.Crop,
-      )
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        BpkOverlay(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1.5f),
+            overlayType = overlayType,
+        ) {
+            Image(
+                painter = painterResource(R.drawable.sea),
+                contentDescription = stringResource(R.string.image_sea_content_description),
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+            )
+        }
+        BpkText(text = overlayType.toString())
     }
-    BpkText(text = overlayType.toString())
-  }
 }
 
 @Composable
 fun WithTextOverlaySample(
-  overlayType: BpkOverlayType,
-  modifier: Modifier = Modifier,
+    overlayType: BpkOverlayType,
+    modifier: Modifier = Modifier,
 ) {
-  Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-    BpkOverlay(
-      modifier = Modifier
-        .fillMaxWidth()
-        .aspectRatio(1.5f),
-      overlayType = overlayType,
-      foregroundContent = {
-        BpkText(
-          modifier = Modifier.align(Alignment.Center),
-          text = "With text",
-          color = BpkTheme.colors.textOnDark,
-          style = BpkTheme.typography.bodyDefault,
-        )
-      },
-    ) {
-      Image(
-        painter = painterResource(R.drawable.sea),
-        contentDescription = stringResource(R.string.image_sea_content_description),
-        modifier = Modifier.fillMaxSize(),
-        contentScale = ContentScale.Crop,
-      )
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        BpkOverlay(
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(1.5f),
+            overlayType = overlayType,
+            foregroundContent = {
+                BpkText(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = "With text",
+                    color = BpkTheme.colors.textOnDark,
+                    style = BpkTheme.typography.bodyDefault,
+                )
+            },
+        ) {
+            Image(
+                painter = painterResource(R.drawable.sea),
+                contentDescription = stringResource(R.string.image_sea_content_description),
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+            )
+        }
+        BpkText(text = overlayType.toString())
     }
-    BpkText(text = overlayType.toString())
-  }
 }

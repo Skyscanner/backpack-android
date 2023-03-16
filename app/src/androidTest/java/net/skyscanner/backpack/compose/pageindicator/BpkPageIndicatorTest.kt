@@ -27,58 +27,58 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkPageIndicatorTest : BpkSnapshotTest() {
 
-  @Test
-  fun lessThan5pagesDefault() {
-    testPageIndicator(
-      currentIndex = 0,
-      totalIndicators = 3,
-      style = BpkPageIndicatorStyle.Default,
-    )
-  }
+    @Test
+    fun lessThan5pagesDefault() {
+        testPageIndicator(
+            currentIndex = 0,
+            totalIndicators = 3,
+            style = BpkPageIndicatorStyle.Default,
+        )
+    }
 
-  @Test
-  fun lessThan5pagesOverImage() {
-    testPageIndicator(
-      currentIndex = 0,
-      totalIndicators = 3,
-      style = BpkPageIndicatorStyle.OverImage,
-    )
-  }
+    @Test
+    fun lessThan5pagesOverImage() {
+        testPageIndicator(
+            currentIndex = 0,
+            totalIndicators = 3,
+            style = BpkPageIndicatorStyle.OverImage,
+        )
+    }
 
-  @Test
-  fun moreThan5pagesDefault() {
-    testPageIndicator(
-      currentIndex = 4,
-      totalIndicators = 8,
-      style = BpkPageIndicatorStyle.Default,
-    )
-  }
+    @Test
+    fun moreThan5pagesDefault() {
+        testPageIndicator(
+            currentIndex = 4,
+            totalIndicators = 8,
+            style = BpkPageIndicatorStyle.Default,
+        )
+    }
 
-  @Test
-  fun moreThan5pagesOverImage() {
-    testPageIndicator(
-      currentIndex = 4,
-      totalIndicators = 8,
-      style = BpkPageIndicatorStyle.OverImage,
-    )
-  }
+    @Test
+    fun moreThan5pagesOverImage() {
+        testPageIndicator(
+            currentIndex = 4,
+            totalIndicators = 8,
+            style = BpkPageIndicatorStyle.OverImage,
+        )
+    }
 
-  private fun testPageIndicator(
-    currentIndex: Int,
-    totalIndicators: Int,
-    style: BpkPageIndicatorStyle,
-  ) = snap(
-    background = {
-      when (style) {
-        BpkPageIndicatorStyle.Default -> BpkTheme.colors.canvas
-        else -> BpkTheme.colors.surfaceContrast
-      }
-    },
-  ) {
-    BpkPageIndicator(
-      currentIndex = currentIndex,
-      totalIndicators = totalIndicators,
-      style = style,
-    )
-  }
+    private fun testPageIndicator(
+        currentIndex: Int,
+        totalIndicators: Int,
+        style: BpkPageIndicatorStyle,
+    ) = snap(
+        background = {
+            when (style) {
+                BpkPageIndicatorStyle.Default -> BpkTheme.colors.canvas
+                else -> BpkTheme.colors.surfaceContrast
+            }
+        },
+    ) {
+        BpkPageIndicator(
+            currentIndex = currentIndex,
+            totalIndicators = totalIndicators,
+            style = style,
+        )
+    }
 }

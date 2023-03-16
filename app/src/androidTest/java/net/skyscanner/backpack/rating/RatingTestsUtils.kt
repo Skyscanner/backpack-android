@@ -23,37 +23,37 @@ import androidx.appcompat.content.res.AppCompatResources
 import net.skyscanner.backpack.demo.R
 
 internal fun createTestRating(
-  context: Context,
-  style: BpkRating.Style = BpkRating.Style.Horizontal,
-  size: BpkRating.Size = BpkRating.Size.Base,
-  scale: BpkRating.Scale = BpkRating.Scale.ZeroToTen,
-  value: Float = 7f,
+    context: Context,
+    style: BpkRating.Style = BpkRating.Style.Horizontal,
+    size: BpkRating.Size = BpkRating.Size.Base,
+    scale: BpkRating.Scale = BpkRating.Scale.ZeroToTen,
+    value: Float = 7f,
 ) =
-  BpkRating(context, style, size, scale).apply {
-    icon = {
-      when (it) {
-        BpkRating.Score.Low -> AppCompatResources.getDrawable(context, R.drawable.bpk_star_outline)
-        BpkRating.Score.Medium -> AppCompatResources.getDrawable(context, R.drawable.bpk_star_half)
-        BpkRating.Score.High -> AppCompatResources.getDrawable(context, R.drawable.bpk_star)
-      }
-    }
-    title = {
-      val array = resources.getStringArray(R.array.rating_sample_titles)
+    BpkRating(context, style, size, scale).apply {
+        icon = {
+            when (it) {
+                BpkRating.Score.Low -> AppCompatResources.getDrawable(context, R.drawable.bpk_star_outline)
+                BpkRating.Score.Medium -> AppCompatResources.getDrawable(context, R.drawable.bpk_star_half)
+                BpkRating.Score.High -> AppCompatResources.getDrawable(context, R.drawable.bpk_star)
+            }
+        }
+        title = {
+            val array = resources.getStringArray(R.array.rating_sample_titles)
 
-      when (it) {
-        BpkRating.Score.Low -> array[0]
-        BpkRating.Score.Medium -> array[1]
-        BpkRating.Score.High -> array[2]
-      }
-    }
-    subtitle = {
-      val array = resources.getStringArray(R.array.rating_sample_subtitles)
+            when (it) {
+                BpkRating.Score.Low -> array[0]
+                BpkRating.Score.Medium -> array[1]
+                BpkRating.Score.High -> array[2]
+            }
+        }
+        subtitle = {
+            val array = resources.getStringArray(R.array.rating_sample_subtitles)
 
-      when (it) {
-        BpkRating.Score.Low -> array[0]
-        BpkRating.Score.Medium -> array[1]
-        BpkRating.Score.High -> array[2]
-      }
+            when (it) {
+                BpkRating.Score.Low -> array[0]
+                BpkRating.Score.Medium -> array[1]
+                BpkRating.Score.High -> array[2]
+            }
+        }
+        this.value = value
     }
-    this.value = value
-  }

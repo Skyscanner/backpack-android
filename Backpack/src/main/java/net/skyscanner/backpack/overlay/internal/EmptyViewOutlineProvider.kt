@@ -24,5 +24,5 @@ import android.view.ViewOutlineProvider
 
 internal object EmptyViewOutlineProvider : ViewOutlineProvider() {
 
-  override fun getOutline(view: View, outline: Outline) = Unit
+    override fun getOutline(view: View, outline: Outline) = Unit
 }

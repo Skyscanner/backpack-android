@@ -55,153 +55,153 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ChipComponent
 @ComposeStory("Default")
 fun ChipStoryDefault(modifier: Modifier = Modifier) =
-  ChipDemo(BpkChipStyle.Default, modifier)
+    ChipDemo(BpkChipStyle.Default, modifier)
 
 @Composable
 @ChipComponent
 @ComposeStory("On Dark")
 fun ChipStoryOnDark(modifier: Modifier = Modifier) =
-  ChipDemo(BpkChipStyle.OnDark, modifier)
+    ChipDemo(BpkChipStyle.OnDark, modifier)
 
 @Composable
 @ChipComponent
 @ComposeStory("On Image")
 fun ChipStoryOnImage(modifier: Modifier = Modifier) =
-  ChipDemo(BpkChipStyle.OnImage, modifier)
+    ChipDemo(BpkChipStyle.OnImage, modifier)
 
 @Composable
 private fun ChipDemo(
-  style: BpkChipStyle,
-  modifier: Modifier = Modifier,
+    style: BpkChipStyle,
+    modifier: Modifier = Modifier,
 ) {
 
-  Box(modifier) {
-    if (style == BpkChipStyle.OnImage) {
-      Image(
-        painter = painterResource(R.drawable.canadian_rockies_canada),
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-        modifier = Modifier.fillMaxSize(),
-      )
-    }
-    val background = when (style) {
-      BpkChipStyle.Default -> Color.Transparent
-      BpkChipStyle.OnDark -> BpkTheme.colors.surfaceContrast
-      BpkChipStyle.OnImage -> Color.Transparent
-    }
+    Box(modifier) {
+        if (style == BpkChipStyle.OnImage) {
+            Image(
+                painter = painterResource(R.drawable.canadian_rockies_canada),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize(),
+            )
+        }
+        val background = when (style) {
+            BpkChipStyle.Default -> Color.Transparent
+            BpkChipStyle.OnDark -> BpkTheme.colors.surfaceContrast
+            BpkChipStyle.OnImage -> Color.Transparent
+        }
 
-    Column(
-      modifier = Modifier
-        .fillMaxSize()
-        .background(background)
-        .padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
-      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
-      ChipsRow(style, text = stringResource(R.string.chip_option))
-      ChipsRow(style, withDropdown = true, text = stringResource(R.string.chip_dropdown))
-      DismissibleChipsRow(style = style, icon = null, text = stringResource(R.string.chip_dismiss))
-      ChipsRow(style, icon = BpkIcon.Deals, text = stringResource(R.string.with_icon))
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(background)
+                .padding(vertical = BpkSpacing.Base, horizontal = BpkSpacing.Base),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        ) {
+            ChipsRow(style, text = stringResource(R.string.chip_option))
+            ChipsRow(style, withDropdown = true, text = stringResource(R.string.chip_dropdown))
+            DismissibleChipsRow(style = style, icon = null, text = stringResource(R.string.chip_dismiss))
+            ChipsRow(style, icon = BpkIcon.Deals, text = stringResource(R.string.with_icon))
+        }
     }
-  }
 }
 
 @Composable
 private fun ChipsRow(
-  style: BpkChipStyle,
-  text: String,
-  modifier: Modifier = Modifier,
-  withDropdown: Boolean = false,
-  icon: BpkIcon? = null,
+    style: BpkChipStyle,
+    text: String,
+    modifier: Modifier = Modifier,
+    withDropdown: Boolean = false,
+    icon: BpkIcon? = null,
 ) {
-  Row(modifier) {
-    ChipSample(
-      text = text,
-      modifier = Modifier
-        .weight(1f)
-        .wrapContentWidth(Alignment.CenterHorizontally),
-      initialState = false,
-      enabled = true,
-      style = style,
-      icon = icon,
-      withDropdown = withDropdown,
-    )
-    ChipSample(
-      text = text,
-      modifier = Modifier
-        .weight(1f)
-        .wrapContentWidth(Alignment.CenterHorizontally),
-      initialState = true,
-      enabled = true,
-      style = style,
-      icon = icon,
-      withDropdown = withDropdown,
-    )
-    ChipSample(
-      text = text,
-      modifier = Modifier
-        .weight(1f)
-        .wrapContentWidth(Alignment.CenterHorizontally),
-      initialState = false,
-      enabled = false,
-      style = style,
-      icon = icon,
-      withDropdown = withDropdown,
-    )
-  }
+    Row(modifier) {
+        ChipSample(
+            text = text,
+            modifier = Modifier
+                .weight(1f)
+                .wrapContentWidth(Alignment.CenterHorizontally),
+            initialState = false,
+            enabled = true,
+            style = style,
+            icon = icon,
+            withDropdown = withDropdown,
+        )
+        ChipSample(
+            text = text,
+            modifier = Modifier
+                .weight(1f)
+                .wrapContentWidth(Alignment.CenterHorizontally),
+            initialState = true,
+            enabled = true,
+            style = style,
+            icon = icon,
+            withDropdown = withDropdown,
+        )
+        ChipSample(
+            text = text,
+            modifier = Modifier
+                .weight(1f)
+                .wrapContentWidth(Alignment.CenterHorizontally),
+            initialState = false,
+            enabled = false,
+            style = style,
+            icon = icon,
+            withDropdown = withDropdown,
+        )
+    }
 }
 
 @Composable
 private fun DismissibleChipsRow(
-  style: BpkChipStyle,
-  icon: BpkIcon?,
-  text: String,
-  modifier: Modifier = Modifier,
+    style: BpkChipStyle,
+    icon: BpkIcon?,
+    text: String,
+    modifier: Modifier = Modifier,
 ) {
-  Row(
-    horizontalArrangement = Arrangement.Center,
-    modifier = modifier.fillMaxWidth(),
-  ) {
-    BpkDismissibleChip(
-      text = text,
-      style = style,
-      icon = icon,
-      onClick = {},
-    )
-  }
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxWidth(),
+    ) {
+        BpkDismissibleChip(
+            text = text,
+            style = style,
+            icon = icon,
+            onClick = {},
+        )
+    }
 }
 
 @Composable
 private fun ChipSample(
-  text: String,
-  initialState: Boolean,
-  enabled: Boolean,
-  style: BpkChipStyle,
-  icon: BpkIcon?,
-  withDropdown: Boolean,
-  modifier: Modifier = Modifier,
+    text: String,
+    initialState: Boolean,
+    enabled: Boolean,
+    style: BpkChipStyle,
+    icon: BpkIcon?,
+    withDropdown: Boolean,
+    modifier: Modifier = Modifier,
 ) {
 
-  var selected by rememberSaveable { mutableStateOf(initialState) }
+    var selected by rememberSaveable { mutableStateOf(initialState) }
 
-  if (withDropdown) {
-    BpkDropdownChip(
-      text = text,
-      modifier = modifier,
-      selected = selected,
-      enabled = enabled,
-      style = style,
-      icon = icon,
-      onSelectedChange = { selected = it },
-    )
-  } else {
-    BpkChip(
-      text = text,
-      modifier = modifier,
-      selected = selected,
-      enabled = enabled,
-      style = style,
-      icon = icon,
-      onSelectedChange = { selected = it },
-    )
-  }
+    if (withDropdown) {
+        BpkDropdownChip(
+            text = text,
+            modifier = modifier,
+            selected = selected,
+            enabled = enabled,
+            style = style,
+            icon = icon,
+            onSelectedChange = { selected = it },
+        )
+    } else {
+        BpkChip(
+            text = text,
+            modifier = modifier,
+            selected = selected,
+            enabled = enabled,
+            style = style,
+            icon = icon,
+            onSelectedChange = { selected = it },
+        )
+    }
 }

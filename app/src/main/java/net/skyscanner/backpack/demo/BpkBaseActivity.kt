@@ -32,55 +32,55 @@ import net.skyscanner.backpack.util.unsafeLazy
 @SuppressLint("Registered")
 open class BpkBaseActivity : AppCompatActivity() {
 
-  private val sensorManager by unsafeLazy {
-    getSystemService(SENSOR_SERVICE) as SensorManager
-  }
+    private val sensorManager by unsafeLazy {
+        getSystemService(SENSOR_SERVICE) as SensorManager
+    }
 
-  private val accelerometer by unsafeLazy {
-    sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-  }
+    private val accelerometer by unsafeLazy {
+        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    }
 
-  private val shakeListener by unsafeLazy {
-    ShakeListener(this::onShaked)
-  }
+    private val shakeListener by unsafeLazy {
+        ShakeListener(this::onShaked)
+    }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setTheme(SharedPreferences.getTheme(this))
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setTheme(SharedPreferences.getTheme(this))
 
-    val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-    sensorManager.registerListener(shakeListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
-  }
+        val sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        sensorManager.registerListener(shakeListener, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+    }
 
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.settings, menu)
-    return super.onCreateOptionsMenu(menu)
-  }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.settings, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-      R.id.settings_button -> {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.settings_button -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        accelerometer?.let {
+            sensorManager.registerListener(shakeListener, it, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(shakeListener)
+    }
+
+    private fun onShaked() {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
-      }
     }
-    return super.onOptionsItemSelected(item)
-  }
-
-  override fun onResume() {
-    super.onResume()
-    accelerometer?.let {
-      sensorManager.registerListener(shakeListener, it, SensorManager.SENSOR_DELAY_NORMAL)
-    }
-  }
-
-  override fun onPause() {
-    super.onPause()
-    sensorManager.unregisterListener(shakeListener)
-  }
-
-  private fun onShaked() {
-    val intent = Intent(this, SettingsActivity::class.java)
-    startActivity(intent)
-  }
 }

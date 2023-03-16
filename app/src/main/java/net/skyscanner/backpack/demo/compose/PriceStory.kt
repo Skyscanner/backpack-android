@@ -40,90 +40,90 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @PriceComponent
 @ComposeStory("Small")
 fun PriceSmallStory(modifier: Modifier = Modifier) =
-  PriceDemo(BpkPriceSize.Small, modifier)
+    PriceDemo(BpkPriceSize.Small, modifier)
 
 @Composable
 @PriceComponent
 @ComposeStory("Large")
 fun PriceLargeStory(modifier: Modifier = Modifier) =
-  PriceDemo(BpkPriceSize.Large, modifier)
+    PriceDemo(BpkPriceSize.Large, modifier)
 
 @Composable
 private fun PriceDemo(
-  size: BpkPriceSize,
-  modifier: Modifier = Modifier,
+    size: BpkPriceSize,
+    modifier: Modifier = Modifier,
 ) {
-  Column(
-    modifier = modifier
-      .padding(BpkSpacing.Base)
-      .fillMaxSize(),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
-    PriceRowWithSize(size = size)
-  }
+    Column(
+        modifier = modifier
+            .padding(BpkSpacing.Base)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
+        PriceRowWithSize(size = size)
+    }
 }
 
 @Composable
 private fun ColumnScope.PriceRowWithSize(size: BpkPriceSize) {
-  PriceRow(
-    price = stringResource(id = R.string.price_price),
-    size = size,
-  )
-  PriceRow(
-    price = stringResource(id = R.string.price_price),
-    trailingText = stringResource(id = R.string.price_trailing_text),
-    size = size,
-  )
-  PriceRow(
-    price = stringResource(id = R.string.price_price),
-    previousPrice = stringResource(id = R.string.price_line_through_text),
-    trailingText = stringResource(id = R.string.price_trailing_text),
-    size = size,
-  )
-  PriceRow(
-    price = stringResource(id = R.string.price_price),
-    leadingText = stringResource(id = R.string.price_leading_text),
-    trailingText = stringResource(id = R.string.price_trailing_text),
-    size = size,
-  )
-  PriceRow(
-    price = stringResource(id = R.string.price_price),
-    previousPrice = stringResource(id = R.string.price_line_through_text),
-    leadingText = stringResource(id = R.string.price_leading_text),
-    trailingText = stringResource(id = R.string.price_trailing_text),
-    size = size,
-  )
+    PriceRow(
+        price = stringResource(id = R.string.price_price),
+        size = size,
+    )
+    PriceRow(
+        price = stringResource(id = R.string.price_price),
+        trailingText = stringResource(id = R.string.price_trailing_text),
+        size = size,
+    )
+    PriceRow(
+        price = stringResource(id = R.string.price_price),
+        previousPrice = stringResource(id = R.string.price_line_through_text),
+        trailingText = stringResource(id = R.string.price_trailing_text),
+        size = size,
+    )
+    PriceRow(
+        price = stringResource(id = R.string.price_price),
+        leadingText = stringResource(id = R.string.price_leading_text),
+        trailingText = stringResource(id = R.string.price_trailing_text),
+        size = size,
+    )
+    PriceRow(
+        price = stringResource(id = R.string.price_price),
+        previousPrice = stringResource(id = R.string.price_line_through_text),
+        leadingText = stringResource(id = R.string.price_leading_text),
+        trailingText = stringResource(id = R.string.price_trailing_text),
+        size = size,
+    )
 }
 
 @Composable
 private fun PriceRow(
-  price: String,
-  size: BpkPriceSize,
-  previousPrice: String? = null,
-  leadingText: String? = null,
-  trailingText: String? = null,
+    price: String,
+    size: BpkPriceSize,
+    previousPrice: String? = null,
+    leadingText: String? = null,
+    trailingText: String? = null,
 ) {
-  Row(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
-    horizontalArrangement = Arrangement.SpaceBetween,
-  ) {
-    BpkPrice(
-      price = price,
-      previousPrice = previousPrice,
-      leadingText = leadingText,
-      trailingText = trailingText,
-      size = size,
-      align = BpkPriceAlign.Start,
-    )
-    BpkPrice(
-      price = price,
-      previousPrice = previousPrice,
-      leadingText = leadingText,
-      trailingText = trailingText,
-      size = size,
-      align = BpkPriceAlign.End,
-    )
-  }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = BpkSpacing.Base, end = BpkSpacing.Base),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        BpkPrice(
+            price = price,
+            previousPrice = previousPrice,
+            leadingText = leadingText,
+            trailingText = trailingText,
+            size = size,
+            align = BpkPriceAlign.Start,
+        )
+        BpkPrice(
+            price = price,
+            previousPrice = previousPrice,
+            leadingText = leadingText,
+            trailingText = trailingText,
+            size = size,
+            align = BpkPriceAlign.End,
+        )
+    }
 }

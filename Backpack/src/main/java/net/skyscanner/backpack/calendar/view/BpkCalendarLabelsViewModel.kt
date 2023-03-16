@@ -36,106 +36,106 @@ import org.threeten.bp.LocalDate
 import kotlin.math.roundToInt
 
 internal class BpkCalendarLabelsViewModel(
-  context: Context,
+    context: Context,
 ) {
 
-  private val paints: Map<CalendarLabel.Style, TextPaint> =
-    CalendarLabel.Style.values().associateWith { it.createTextPaint(context) }
+    private val paints: Map<CalendarLabel.Style, TextPaint> =
+        CalendarLabel.Style.values().associateWith { it.createTextPaint(context) }
 
-  private var labels: Map<LocalDate, BpkCalendarLabelViewModel> = emptyMap()
+    private var labels: Map<LocalDate, BpkCalendarLabelViewModel> = emptyMap()
 
-  private val placeholder = BpkCalendarLabelViewModel(
-    label = CalendarLabel(
-      text = "–",
-      style = CalendarLabel.Style.PriceMedium,
-    ),
-    paints.getValue(CalendarLabel.Style.PriceMedium),
-  )
-
-  fun isEmpty(): Boolean =
-    labels.isEmpty()
-
-  fun update(data: Map<LocalDate, CalendarLabel>?) {
-    labels = data?.mapValues { BpkCalendarLabelViewModel(it.value, paints.getValue(it.value.style)) } ?: emptyMap()
-    if (cellWidth > 0) {
-      labels.forEach { it.value.width = cellWidth }
-      placeholder.width = cellWidth
-    }
-  }
-
-  var cellWidth: Float = 0f
-    set(value) {
-      if (field != value) {
-        field = value
-        labels.forEach { it.value.width = cellWidth }
-        placeholder.width = cellWidth
-      }
-    }
-
-  fun draw(canvas: Canvas, date: LocalDate, x: Float, y: Float, disabled: Boolean) {
-    if (disabled || isEmpty()) {
-      return
-    }
-    val label = labels.getOrElse(date) { placeholder }
-    label.draw(canvas, x, y)
-  }
-
-  class BpkCalendarLabelViewModel(
-    private val label: CalendarLabel,
-    private val paint: TextPaint,
-  ) {
-
-    private lateinit var text: StaticLayout
-
-    var width: Float = 0f
-      set(value) {
-        if (field != value) {
-          field = value
-          val outerWidth = value.roundToInt()
-          text = StaticLayout.Builder.obtain(
-            label.text,
-            0,
-            label.text.length,
-            paint,
-            outerWidth,
-          )
-            .setAlignment(Layout.Alignment.ALIGN_NORMAL)
-            .setTextDirection(TextDirectionHeuristics.FIRSTSTRONG_LTR)
-            .setLineSpacing(
-              0f,
-              1f,
-            )
-            .setIncludePad(true)
-            .setEllipsize(TextUtils.TruncateAt.END)
-            .setEllipsizedWidth(outerWidth)
-            .setMaxLines(2)
-            .build()
-        }
-      }
-
-    fun draw(canvas: Canvas, x: Float, y: Float) {
-      canvas.withSave {
-        translate(x, y)
-        text.draw(canvas)
-      }
-    }
-  }
-
-  private fun CalendarLabel.Style.createTextPaint(
-    context: Context,
-  ): TextPaint = TextPaint().apply {
-    isAntiAlias = true
-    style = Paint.Style.FILL
-    textAlign = Paint.Align.CENTER
-
-    BpkText.getFont(context, BpkText.TextStyle.Caption).applyTo(this)
-
-    color = context.getColor(
-      when (this@createTextPaint) {
-        CalendarLabel.Style.PriceLow -> R.color.bpkStatusSuccessSpot
-        CalendarLabel.Style.PriceMedium -> R.color.bpkTextSecondary
-        CalendarLabel.Style.PriceHigh -> R.color.bpkTextSecondary
-      },
+    private val placeholder = BpkCalendarLabelViewModel(
+        label = CalendarLabel(
+            text = "–",
+            style = CalendarLabel.Style.PriceMedium,
+        ),
+        paints.getValue(CalendarLabel.Style.PriceMedium),
     )
-  }
+
+    fun isEmpty(): Boolean =
+        labels.isEmpty()
+
+    fun update(data: Map<LocalDate, CalendarLabel>?) {
+        labels = data?.mapValues { BpkCalendarLabelViewModel(it.value, paints.getValue(it.value.style)) } ?: emptyMap()
+        if (cellWidth > 0) {
+            labels.forEach { it.value.width = cellWidth }
+            placeholder.width = cellWidth
+        }
+    }
+
+    var cellWidth: Float = 0f
+        set(value) {
+            if (field != value) {
+                field = value
+                labels.forEach { it.value.width = cellWidth }
+                placeholder.width = cellWidth
+            }
+        }
+
+    fun draw(canvas: Canvas, date: LocalDate, x: Float, y: Float, disabled: Boolean) {
+        if (disabled || isEmpty()) {
+            return
+        }
+        val label = labels.getOrElse(date) { placeholder }
+        label.draw(canvas, x, y)
+    }
+
+    class BpkCalendarLabelViewModel(
+        private val label: CalendarLabel,
+        private val paint: TextPaint,
+    ) {
+
+        private lateinit var text: StaticLayout
+
+        var width: Float = 0f
+            set(value) {
+                if (field != value) {
+                    field = value
+                    val outerWidth = value.roundToInt()
+                    text = StaticLayout.Builder.obtain(
+                        label.text,
+                        0,
+                        label.text.length,
+                        paint,
+                        outerWidth,
+                    )
+                        .setAlignment(Layout.Alignment.ALIGN_NORMAL)
+                        .setTextDirection(TextDirectionHeuristics.FIRSTSTRONG_LTR)
+                        .setLineSpacing(
+                            0f,
+                            1f,
+                        )
+                        .setIncludePad(true)
+                        .setEllipsize(TextUtils.TruncateAt.END)
+                        .setEllipsizedWidth(outerWidth)
+                        .setMaxLines(2)
+                        .build()
+                }
+            }
+
+        fun draw(canvas: Canvas, x: Float, y: Float) {
+            canvas.withSave {
+                translate(x, y)
+                text.draw(canvas)
+            }
+        }
+    }
+
+    private fun CalendarLabel.Style.createTextPaint(
+        context: Context,
+    ): TextPaint = TextPaint().apply {
+        isAntiAlias = true
+        style = Paint.Style.FILL
+        textAlign = Paint.Align.CENTER
+
+        BpkText.getFont(context, BpkText.TextStyle.Caption).applyTo(this)
+
+        color = context.getColor(
+            when (this@createTextPaint) {
+                CalendarLabel.Style.PriceLow -> R.color.bpkStatusSuccessSpot
+                CalendarLabel.Style.PriceMedium -> R.color.bpkTextSecondary
+                CalendarLabel.Style.PriceHigh -> R.color.bpkTextSecondary
+            },
+        )
+    }
 }

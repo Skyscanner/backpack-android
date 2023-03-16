@@ -25,59 +25,59 @@ import net.skyscanner.backpack.compose.rating.internal.BpkRatingLayout
 import net.skyscanner.backpack.compose.text.BpkText
 
 enum class BpkRatingSize {
-  Base,
-  Large,
+    Base,
+    Large,
 }
 
 enum class BpkRatingScale {
-  ZeroToFive,
-  ZeroToTen,
+    ZeroToFive,
+    ZeroToTen,
 }
 
 @Composable
 fun BpkRating(
-  title: String,
-  value: Float,
-  modifier: Modifier = Modifier,
-  scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
-  size: BpkRatingSize = BpkRatingSize.Base,
-  subtitle: String? = null,
-  showScale: Boolean = true,
+    title: String,
+    value: Float,
+    modifier: Modifier = Modifier,
+    scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
+    size: BpkRatingSize = BpkRatingSize.Base,
+    subtitle: String? = null,
+    showScale: Boolean = true,
 ) {
-  BpkRatingLayout(
-    value = value,
-    modifier = modifier,
-    scale = scale,
-    size = size,
-    subtitle = subtitle,
-    showScale = showScale,
-  ) {
-    BpkText(
-      text = title,
-      maxLines = 1,
-      overflow = TextOverflow.Ellipsis,
-    )
-  }
+    BpkRatingLayout(
+        value = value,
+        modifier = modifier,
+        scale = scale,
+        size = size,
+        subtitle = subtitle,
+        showScale = showScale,
+    ) {
+        BpkText(
+            text = title,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+    }
 }
 
 @Composable
 fun BpkRating(
-  value: Float,
-  modifier: Modifier = Modifier,
-  scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
-  size: BpkRatingSize = BpkRatingSize.Base,
-  subtitle: String? = null,
-  showScale: Boolean = true,
-  title: @Composable () -> Unit,
+    value: Float,
+    modifier: Modifier = Modifier,
+    scale: BpkRatingScale = BpkRatingScale.ZeroToFive,
+    size: BpkRatingSize = BpkRatingSize.Base,
+    subtitle: String? = null,
+    showScale: Boolean = true,
+    title: @Composable () -> Unit,
 ) {
-  BpkRatingLayout(
-    value = value,
-    modifier = modifier,
-    scale = scale,
-    size = size,
-    subtitle = subtitle,
-    showScale = showScale,
-  ) {
-    title()
-  }
+    BpkRatingLayout(
+        value = value,
+        modifier = modifier,
+        scale = scale,
+        size = size,
+        subtitle = subtitle,
+        showScale = showScale,
+    ) {
+        title()
+    }
 }

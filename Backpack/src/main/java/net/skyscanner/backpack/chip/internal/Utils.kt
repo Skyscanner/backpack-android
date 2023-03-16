@@ -25,33 +25,33 @@ import android.graphics.drawable.GradientDrawable
 import net.skyscanner.backpack.R
 
 internal fun chipRoundedRect(
-  context: Context,
-  background: ColorStateList,
-  border: ColorStateList,
-  borderWidth: Int,
+    context: Context,
+    background: ColorStateList,
+    border: ColorStateList,
+    borderWidth: Int,
 ): Drawable = GradientDrawable().apply {
-  shape = GradientDrawable.RECTANGLE
-  cornerRadii = FloatArray(8) { context.resources.getDimension(R.dimen.bpkBorderRadiusSm) }
-  color = background
-  setStroke(borderWidth, border)
+    shape = GradientDrawable.RECTANGLE
+    cornerRadii = FloatArray(8) { context.resources.getDimension(R.dimen.bpkBorderRadiusSm) }
+    color = background
+    setStroke(borderWidth, border)
 }
 
 internal fun chipColors(
-  selected: Int,
-  default: Int,
-  pressed: Int,
-  disabled: Int,
+    selected: Int,
+    default: Int,
+    pressed: Int,
+    disabled: Int,
 ) = ColorStateList(
-  arrayOf(
-    intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
-    intArrayOf(-android.R.attr.state_enabled),
-    intArrayOf(android.R.attr.state_pressed),
-    intArrayOf(android.R.attr.state_enabled),
-  ),
-  intArrayOf(
-    selected,
-    disabled,
-    pressed,
-    default,
-  ),
+    arrayOf(
+        intArrayOf(android.R.attr.state_enabled, android.R.attr.state_selected),
+        intArrayOf(-android.R.attr.state_enabled),
+        intArrayOf(android.R.attr.state_pressed),
+        intArrayOf(android.R.attr.state_enabled),
+    ),
+    intArrayOf(
+        selected,
+        disabled,
+        pressed,
+        default,
+    ),
 )

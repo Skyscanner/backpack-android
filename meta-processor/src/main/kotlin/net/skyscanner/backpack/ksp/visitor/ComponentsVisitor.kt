@@ -29,25 +29,25 @@ import net.skyscanner.backpack.ksp.get
 
 object ComponentsVisitor : KSDefaultVisitor<Unit, ComponentDefinition?>() {
 
-  override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit): ComponentDefinition? {
-    val annotation = classDeclaration.annotations.find(ComponentAnnotation)
-    val location = classDeclaration.location
-    val qualifiedName = classDeclaration.qualifiedName
+    override fun visitClassDeclaration(classDeclaration: KSClassDeclaration, data: Unit): ComponentDefinition? {
+        val annotation = classDeclaration.annotations.find(ComponentAnnotation)
+        val location = classDeclaration.location
+        val qualifiedName = classDeclaration.qualifiedName
 
-    return when {
-      annotation != null && qualifiedName != null && location is FileLocation ->
-        ComponentDefinition(
-          id = qualifiedName,
-          name = annotation[ComponentAnnotation.paramName],
-          isToken = annotation[ComponentAnnotation.paramToken],
-          location = location,
-        )
-      else -> super.visitClassDeclaration(classDeclaration, data)
+        return when {
+            annotation != null && qualifiedName != null && location is FileLocation ->
+                ComponentDefinition(
+                    id = qualifiedName,
+                    name = annotation[ComponentAnnotation.paramName],
+                    isToken = annotation[ComponentAnnotation.paramToken],
+                    location = location,
+                )
+            else -> super.visitClassDeclaration(classDeclaration, data)
+        }
     }
-  }
 
-  override fun defaultHandler(node: KSNode, data: Unit): ComponentDefinition? {
-    // do nothing
-    return null
-  }
+    override fun defaultHandler(node: KSNode, data: Unit): ComponentDefinition? {
+        // do nothing
+        return null
+    }
 }

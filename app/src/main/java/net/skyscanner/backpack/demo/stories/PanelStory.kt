@@ -29,4 +29,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @PanelComponent
 @ViewStory
 fun PanelStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_panel, modifier)
+    AndroidLayout(R.layout.fragment_panel, modifier)

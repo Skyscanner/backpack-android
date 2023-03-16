@@ -41,213 +41,213 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkDialogTest : BpkSnapshotTest() {
 
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
+    @get:Rule
+    val rule = activityScenarioRule<AppCompatActivity>()
 
-  @Test
-  fun default() {
-    var dialog: BpkDialog? = null
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
-          title = "You are going to Tokyo!"
-          description = "Your flight is all booked. Why not check out some hotels now?"
-          icon = BpkDialog.Icon(R.drawable.bpk_tick)
-
-          addActionButton(
-            BpkDialog.Button("Continue") { },
-          )
-
-          addActionButton(
-            BpkDialog.Button("Skip") { },
-          )
-        }
-      }
-    }
-
-    record(dialog!!)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun fullscreen() {
-    var dialog: BpkDialog? = null
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
-          title = "You are going to Tokyo!"
-          description = Array(30) {
-            "Your flight is all booked. Why not check out some hotels now?"
-          }.joinToString(separator = "\n")
-
-          icon = BpkDialog.Icon(R.drawable.bpk_tick)
-
-          addActionButton(
-            BpkDialog.Button("Continue") { },
-          )
-
-          addActionButton(
-            BpkDialog.Button("Skip") { },
-          )
-        }
-      }
-    }
-
-    record(dialog!!)
-  }
-
-  @Test
-  fun destructive() {
-    var dialog: BpkDialog? = null
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        dialog = BpkDialog(activity, BpkDialog.Type.Destructive).apply {
-          title = "Delete?"
-          description = "Delete your profile?"
-          icon = BpkDialog.Icon(R.drawable.bpk_trash)
-
-          addActionButton(
-            BpkDialog.Button("Delete") { },
-          )
-
-          addActionButton(
-            BpkDialog.Button("Cancel") { },
-          )
-        }
-      }
-    }
-
-    record(dialog!!)
-  }
-
-  @Suppress("DEPRECATION")
-  @Test
-  fun deprecated() {
-    var dialog: BpkDialog? = null
-    rule.scenario.onActivity { activity ->
-      runOnUi {
-        dialog = BpkDialog(activity, BpkDialog.Style.ALERT).apply {
-          title = "Delete?"
-          description = "Delete your profile?"
-          icon = BpkDialog.Icon(R.drawable.bpk_trash, activity.getColor(R.color.bpkValensole))
-
-          addActionButton(
-            BpkButton(activity).apply {
-              type = BpkButton.Type.Secondary
-              text = "Secondary"
-            },
-          )
-          addActionButton(
-            BpkButton(activity).apply {
-              type = BpkButton.Type.Destructive
-              text = "Destructive"
-            },
-          )
-          addActionButton(
-            BpkButton(activity).apply {
-              type = BpkButton.Type.Featured
-              text = "Featured"
-            },
-          )
-        }
-      }
-    }
-
-    record(dialog!!)
-  }
-
-  @Test
-  fun warning() {
-    var dialog: BpkDialog? = null
-    rule.scenario.onActivity { activity ->
-      runOnUi {
-        dialog = BpkDialog(activity, BpkDialog.Type.Warning)
-        dialog!!.apply {
-          title = "Want to know when prices change?"
-          description = "Create a price alert and we'll let you know changes for this route"
-          icon = BpkDialog.Icon(R.drawable.bpk_trash)
-
-          addActionButton(
-            BpkDialog.Button("Create") { },
-          )
-
-          addActionButton(
-            BpkDialog.Button("No, Thanks!") { },
-          )
-        }
-      }
-    }
-
-    record(dialog!!)
-  }
-
-  @Test
-  fun flare() {
-    val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
-
-    var dialog: BpkDialog? = null
-    rule.scenario.onActivity { activity ->
-      runOnUi {
-        dialog = BpkDialog(activity, BpkDialog.Type.Flare).apply {
-          title = "You are going to Tokyo!"
-          description = "Your flight is all booked."
-          icon = BpkDialog.Icon(R.drawable.bpk_tick)
-
-          image!!.setImageBitmap(bitmap)
-
-          addActionButton(
-            BpkDialog.Button("Continue") { },
-          )
-
-          addActionButton(
-            BpkDialog.Button("Skip") { },
-          )
-        }
-      }
-    }
-
-    record(dialog!!)
-  }
-
-  private fun record(dialog: BpkDialog) {
-    // not ideal, but the scrollbar disappears too early when running on CI causing test failures if visible
-    dialog.window?.decorView?.findScrollView()?.scrollBarDefaultDelayBeforeFade = 5000
-
-    rule.scenario.waitForActivity().also {
-      runOnUi {
-        dialog.show()
-      }
-    }
-
-    var view: View? = null
-    onView(withId(R.id.dialog_buttons_root))
-      .inRoot(isDialog())
-      .check { _, _ ->
+    @Test
+    fun default() {
+        var dialog: BpkDialog? = null
         rule.scenario.waitForActivity().also { activity ->
-          runOnUi {
-            val rootView = dialog.window!!.decorView
-            activity.windowManager.removeView(rootView)
+            runOnUi {
+                dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
+                    title = "You are going to Tokyo!"
+                    description = "Your flight is all booked. Why not check out some hotels now?"
+                    icon = BpkDialog.Icon(R.drawable.bpk_tick)
 
-            view = rootView
-          }
-        }
-      }
-    snap(view!!, background = R.color.bpkTextSecondary, padding = 0, width = 420, height = 600)
-  }
+                    addActionButton(
+                        BpkDialog.Button("Continue") { },
+                    )
 
-  private fun View.findScrollView(): ScrollView? {
-    if (this !is ViewGroup) return null
-    for (i in 0..childCount) {
-      val child = getChildAt(i)
-      if (child is ScrollView) {
-        return child
-      } else if (child is ViewGroup) {
-        val view = child.findScrollView()
-        if (view != null) {
-          return view
+                    addActionButton(
+                        BpkDialog.Button("Skip") { },
+                    )
+                }
+            }
         }
-      }
+
+        record(dialog!!)
     }
-    return null
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun fullscreen() {
+        var dialog: BpkDialog? = null
+        rule.scenario.waitForActivity().also { activity ->
+            runOnUi {
+                dialog = BpkDialog(activity, BpkDialog.Type.Success).apply {
+                    title = "You are going to Tokyo!"
+                    description = Array(30) {
+                        "Your flight is all booked. Why not check out some hotels now?"
+                    }.joinToString(separator = "\n")
+
+                    icon = BpkDialog.Icon(R.drawable.bpk_tick)
+
+                    addActionButton(
+                        BpkDialog.Button("Continue") { },
+                    )
+
+                    addActionButton(
+                        BpkDialog.Button("Skip") { },
+                    )
+                }
+            }
+        }
+
+        record(dialog!!)
+    }
+
+    @Test
+    fun destructive() {
+        var dialog: BpkDialog? = null
+        rule.scenario.waitForActivity().also { activity ->
+            runOnUi {
+                dialog = BpkDialog(activity, BpkDialog.Type.Destructive).apply {
+                    title = "Delete?"
+                    description = "Delete your profile?"
+                    icon = BpkDialog.Icon(R.drawable.bpk_trash)
+
+                    addActionButton(
+                        BpkDialog.Button("Delete") { },
+                    )
+
+                    addActionButton(
+                        BpkDialog.Button("Cancel") { },
+                    )
+                }
+            }
+        }
+
+        record(dialog!!)
+    }
+
+    @Suppress("DEPRECATION")
+    @Test
+    fun deprecated() {
+        var dialog: BpkDialog? = null
+        rule.scenario.onActivity { activity ->
+            runOnUi {
+                dialog = BpkDialog(activity, BpkDialog.Style.ALERT).apply {
+                    title = "Delete?"
+                    description = "Delete your profile?"
+                    icon = BpkDialog.Icon(R.drawable.bpk_trash, activity.getColor(R.color.bpkValensole))
+
+                    addActionButton(
+                        BpkButton(activity).apply {
+                            type = BpkButton.Type.Secondary
+                            text = "Secondary"
+                        },
+                    )
+                    addActionButton(
+                        BpkButton(activity).apply {
+                            type = BpkButton.Type.Destructive
+                            text = "Destructive"
+                        },
+                    )
+                    addActionButton(
+                        BpkButton(activity).apply {
+                            type = BpkButton.Type.Featured
+                            text = "Featured"
+                        },
+                    )
+                }
+            }
+        }
+
+        record(dialog!!)
+    }
+
+    @Test
+    fun warning() {
+        var dialog: BpkDialog? = null
+        rule.scenario.onActivity { activity ->
+            runOnUi {
+                dialog = BpkDialog(activity, BpkDialog.Type.Warning)
+                dialog!!.apply {
+                    title = "Want to know when prices change?"
+                    description = "Create a price alert and we'll let you know changes for this route"
+                    icon = BpkDialog.Icon(R.drawable.bpk_trash)
+
+                    addActionButton(
+                        BpkDialog.Button("Create") { },
+                    )
+
+                    addActionButton(
+                        BpkDialog.Button("No, Thanks!") { },
+                    )
+                }
+            }
+        }
+
+        record(dialog!!)
+    }
+
+    @Test
+    fun flare() {
+        val bitmap = Picasso.get().load("file:///android_asset/dialog_sample.jpg").get()
+
+        var dialog: BpkDialog? = null
+        rule.scenario.onActivity { activity ->
+            runOnUi {
+                dialog = BpkDialog(activity, BpkDialog.Type.Flare).apply {
+                    title = "You are going to Tokyo!"
+                    description = "Your flight is all booked."
+                    icon = BpkDialog.Icon(R.drawable.bpk_tick)
+
+                    image!!.setImageBitmap(bitmap)
+
+                    addActionButton(
+                        BpkDialog.Button("Continue") { },
+                    )
+
+                    addActionButton(
+                        BpkDialog.Button("Skip") { },
+                    )
+                }
+            }
+        }
+
+        record(dialog!!)
+    }
+
+    private fun record(dialog: BpkDialog) {
+        // not ideal, but the scrollbar disappears too early when running on CI causing test failures if visible
+        dialog.window?.decorView?.findScrollView()?.scrollBarDefaultDelayBeforeFade = 5000
+
+        rule.scenario.waitForActivity().also {
+            runOnUi {
+                dialog.show()
+            }
+        }
+
+        var view: View? = null
+        onView(withId(R.id.dialog_buttons_root))
+            .inRoot(isDialog())
+            .check { _, _ ->
+                rule.scenario.waitForActivity().also { activity ->
+                    runOnUi {
+                        val rootView = dialog.window!!.decorView
+                        activity.windowManager.removeView(rootView)
+
+                        view = rootView
+                    }
+                }
+            }
+        snap(view!!, background = R.color.bpkTextSecondary, padding = 0, width = 420, height = 600)
+    }
+
+    private fun View.findScrollView(): ScrollView? {
+        if (this !is ViewGroup) return null
+        for (i in 0..childCount) {
+            val child = getChildAt(i)
+            if (child is ScrollView) {
+                return child
+            } else if (child is ViewGroup) {
+                val view = child.findScrollView()
+                if (view != null) {
+                    return view
+                }
+            }
+        }
+        return null
+    }
 }

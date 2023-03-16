@@ -40,82 +40,82 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @RadioButtonComponent
 @ComposeStory
 fun RadioButtonStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    var selectedIndex by remember { mutableStateOf(1) }
-    DefaultUncheckedRadioButtonExample(selected = selectedIndex == 0, onClick = { selectedIndex = 0 })
-    DefaultCheckedRadioButtonExample(selected = selectedIndex == 1, onClick = { selectedIndex = 1 })
+        var selectedIndex by remember { mutableStateOf(1) }
+        DefaultUncheckedRadioButtonExample(selected = selectedIndex == 0, onClick = { selectedIndex = 0 })
+        DefaultCheckedRadioButtonExample(selected = selectedIndex == 1, onClick = { selectedIndex = 1 })
 
-    DisabledUnCheckedRadioButtonExample()
-    DisabledCheckedRadioButtonExample()
-    CustomContentRadioButtonExample()
-  }
+        DisabledUnCheckedRadioButtonExample()
+        DisabledCheckedRadioButtonExample()
+        CustomContentRadioButtonExample()
+    }
 }
 
 @Composable
 internal fun DefaultUncheckedRadioButtonExample(
-  modifier: Modifier = Modifier,
-  selected: Boolean = false,
-  onClick: (() -> Unit)? = null,
+    modifier: Modifier = Modifier,
+    selected: Boolean = false,
+    onClick: (() -> Unit)? = null,
 ) {
-  BpkRadioButton(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_default_unchecked),
-    selected = selected,
-    onClick = onClick,
-  )
+    BpkRadioButton(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_default_unchecked),
+        selected = selected,
+        onClick = onClick,
+    )
 }
 
 @Composable
 internal fun DefaultCheckedRadioButtonExample(
-  modifier: Modifier = Modifier,
-  selected: Boolean = true,
-  onClick: (() -> Unit)? = null,
+    modifier: Modifier = Modifier,
+    selected: Boolean = true,
+    onClick: (() -> Unit)? = null,
 ) {
-  BpkRadioButton(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_default_checked),
-    selected = selected,
-    onClick = onClick,
-  )
+    BpkRadioButton(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_default_checked),
+        selected = selected,
+        onClick = onClick,
+    )
 }
 
 @Composable
 internal fun DisabledUnCheckedRadioButtonExample(modifier: Modifier = Modifier) {
-  BpkRadioButton(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_disabled_unchecked),
-    enabled = false,
-    selected = false,
-    onClick = null,
-  )
+    BpkRadioButton(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_disabled_unchecked),
+        enabled = false,
+        selected = false,
+        onClick = null,
+    )
 }
 
 @Composable
 internal fun DisabledCheckedRadioButtonExample(modifier: Modifier = Modifier) {
-  BpkRadioButton(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_disabled_checked),
-    enabled = false,
-    selected = true,
-    onClick = null,
-  )
+    BpkRadioButton(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_disabled_checked),
+        enabled = false,
+        selected = true,
+        onClick = null,
+    )
 }
 
 @Composable
 internal fun CustomContentRadioButtonExample(modifier: Modifier = Modifier) {
-  var selected by remember { mutableStateOf(false) }
-  BpkRadioButton(
-    modifier = modifier,
-    selected = selected,
-    onClick = { selected = !selected },
-  ) {
-    Column {
-      BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
-      BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
+    var selected by remember { mutableStateOf(false) }
+    BpkRadioButton(
+        modifier = modifier,
+        selected = selected,
+        onClick = { selected = !selected },
+    ) {
+        Column {
+            BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
+            BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
+        }
     }
-  }
 }

@@ -46,102 +46,102 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @StarRatingComponent
 @ComposeStory
 fun StarRatingStory(modifier: Modifier = Modifier) {
-  Box(
-    modifier = modifier.fillMaxHeight(),
-    contentAlignment = Alignment.Center,
-  ) {
-    Column(
-      modifier = Modifier.padding(start = BpkSpacing.Xl),
-      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+    Box(
+        modifier = modifier.fillMaxHeight(),
+        contentAlignment = Alignment.Center,
     ) {
-      BpkText(
-        text = stringResource(R.string.static_default_rating_title),
-        style = BpkTheme.typography.heading2,
-      )
-      Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
-      ) {
-        StaticRatingSample(
-          size = BpkStarRatingSize.Large,
-          text = stringResource(R.string.icons_large),
-        )
-        StaticRatingSample(
-          size = BpkStarRatingSize.Small,
-          text = stringResource(R.string.icons_small),
-        )
-      }
-      Column {
-        BpkText(
-          text = stringResource(R.string.hotel_star_rating_title),
-          style = BpkTheme.typography.heading2,
-        )
-        Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+        Column(
+            modifier = Modifier.padding(start = BpkSpacing.Xl),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
         ) {
-          HotelRatingSample(
-            size = BpkStarRatingSize.Large,
-            text = stringResource(R.string.icons_large),
-          )
-          HotelRatingSample(
-            size = BpkStarRatingSize.Small,
-            text = stringResource(R.string.icons_small),
-          )
+            BpkText(
+                text = stringResource(R.string.static_default_rating_title),
+                style = BpkTheme.typography.heading2,
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+            ) {
+                StaticRatingSample(
+                    size = BpkStarRatingSize.Large,
+                    text = stringResource(R.string.icons_large),
+                )
+                StaticRatingSample(
+                    size = BpkStarRatingSize.Small,
+                    text = stringResource(R.string.icons_small),
+                )
+            }
+            Column {
+                BpkText(
+                    text = stringResource(R.string.hotel_star_rating_title),
+                    style = BpkTheme.typography.heading2,
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+                ) {
+                    HotelRatingSample(
+                        size = BpkStarRatingSize.Large,
+                        text = stringResource(R.string.icons_large),
+                    )
+                    HotelRatingSample(
+                        size = BpkStarRatingSize.Small,
+                        text = stringResource(R.string.icons_small),
+                    )
+                }
+            }
         }
-      }
     }
-  }
 }
 
 @Composable
 private fun HotelRatingSample(
-  size: BpkStarRatingSize,
-  text: String,
-  modifier: Modifier = Modifier,
+    size: BpkStarRatingSize,
+    text: String,
+    modifier: Modifier = Modifier,
 ) {
-  Column(modifier = modifier) {
-    BpkText(
-      text = text,
-      style = BpkTheme.typography.heading3,
-    )
-    for (i in 1..5) {
-      key(i) {
-        BpkHotelRating(
-          rating = i,
-          contentDescription = { value, max ->
-            stringResource(R.string.star_rating_accessibility_status, value, max)
-          },
-          size = size,
+    Column(modifier = modifier) {
+        BpkText(
+            text = text,
+            style = BpkTheme.typography.heading3,
         )
-      }
+        for (i in 1..5) {
+            key(i) {
+                BpkHotelRating(
+                    rating = i,
+                    contentDescription = { value, max ->
+                        stringResource(R.string.star_rating_accessibility_status, value, max)
+                    },
+                    size = size,
+                )
+            }
+        }
     }
-  }
 }
 
 @Composable
 private fun StaticRatingSample(
-  size: BpkStarRatingSize,
-  text: String,
-  modifier: Modifier = Modifier,
+    size: BpkStarRatingSize,
+    text: String,
+    modifier: Modifier = Modifier,
 ) {
-  Column(modifier = modifier) {
-    BpkText(
-      text = text,
-      style = BpkTheme.typography.heading3,
-    )
-    val ratings = listOf(1f, 2f, 3f, 3.5f, 4f, 5f)
-    for (i in ratings) {
-      key(i) {
-        BpkStarRating(
-          rating = i,
-          contentDescription = { value, max ->
-            stringResource(R.string.star_rating_decimal_accessibility_status, value, max)
-          },
-          rounding = BpkRatingRounding.Up,
-          size = size,
+    Column(modifier = modifier) {
+        BpkText(
+            text = text,
+            style = BpkTheme.typography.heading3,
         )
-      }
+        val ratings = listOf(1f, 2f, 3f, 3.5f, 4f, 5f)
+        for (i in ratings) {
+            key(i) {
+                BpkStarRating(
+                    rating = i,
+                    contentDescription = { value, max ->
+                        stringResource(R.string.star_rating_decimal_accessibility_status, value, max)
+                    },
+                    rounding = BpkRatingRounding.Up,
+                    size = size,
+                )
+            }
+        }
     }
-  }
 }

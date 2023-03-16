@@ -29,122 +29,122 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkFieldSetTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    BpkFieldSet(
-      label = "Title",
-      description = "Description",
-      status = BpkFieldStatus.Default,
-    ) {
-      BpkTextField(
-        value = "",
-        onValueChange = { },
-        placeholder = "Placeholder",
-      )
+    @Test
+    fun default() = snap {
+        BpkFieldSet(
+            label = "Title",
+            description = "Description",
+            status = BpkFieldStatus.Default,
+        ) {
+            BpkTextField(
+                value = "",
+                onValueChange = { },
+                placeholder = "Placeholder",
+            )
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun noTitle() {
-    snap {
-      BpkFieldSet(
-        description = "Description",
-        status = BpkFieldStatus.Default,
-      ) {
-        BpkTextField(
-          value = "",
-          onValueChange = { },
-          placeholder = "Placeholder",
-        )
-      }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noTitle() {
+        snap {
+            BpkFieldSet(
+                description = "Description",
+                status = BpkFieldStatus.Default,
+            ) {
+                BpkTextField(
+                    value = "",
+                    onValueChange = { },
+                    placeholder = "Placeholder",
+                )
+            }
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun noDescription() {
-    snap {
-      BpkFieldSet(
-        description = "Description",
-        status = BpkFieldStatus.Default,
-      ) {
-        BpkTextField(
-          value = "",
-          onValueChange = { },
-          placeholder = "Placeholder",
-        )
-      }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noDescription() {
+        snap {
+            BpkFieldSet(
+                description = "Description",
+                status = BpkFieldStatus.Default,
+            ) {
+                BpkTextField(
+                    value = "",
+                    onValueChange = { },
+                    placeholder = "Placeholder",
+                )
+            }
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun noTitleAndDescription() {
-    snap {
-      BpkFieldSet(
-        status = BpkFieldStatus.Default,
-      ) {
-        BpkTextField(
-          value = "",
-          onValueChange = { },
-          placeholder = "Placeholder",
-        )
-      }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noTitleAndDescription() {
+        snap {
+            BpkFieldSet(
+                status = BpkFieldStatus.Default,
+            ) {
+                BpkTextField(
+                    value = "",
+                    onValueChange = { },
+                    placeholder = "Placeholder",
+                )
+            }
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabled() {
-    snap {
-      BpkFieldSet(
-        label = "Title",
-        description = "Description",
-        status = BpkFieldStatus.Disabled,
-      ) {
-        BpkTextField(
-          value = "",
-          onValueChange = { },
-          placeholder = "Placeholder",
-        )
-      }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabled() {
+        snap {
+            BpkFieldSet(
+                label = "Title",
+                description = "Description",
+                status = BpkFieldStatus.Disabled,
+            ) {
+                BpkTextField(
+                    value = "",
+                    onValueChange = { },
+                    placeholder = "Placeholder",
+                )
+            }
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun validated() {
-    snap {
-      BpkFieldSet(
-        label = "Title",
-        description = "Description",
-        status = BpkFieldStatus.Validated,
-      ) {
-        BpkTextField(
-          value = "",
-          onValueChange = { },
-          placeholder = "Placeholder",
-        )
-      }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun validated() {
+        snap {
+            BpkFieldSet(
+                label = "Title",
+                description = "Description",
+                status = BpkFieldStatus.Validated,
+            ) {
+                BpkTextField(
+                    value = "",
+                    onValueChange = { },
+                    placeholder = "Placeholder",
+                )
+            }
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun error() {
-    snap {
-      BpkFieldSet(
-        label = "Title",
-        description = "Description",
-        status = BpkFieldStatus.Error("Error text"),
-      ) {
-        BpkTextField(
-          value = "",
-          onValueChange = { },
-          placeholder = "Placeholder",
-        )
-      }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun error() {
+        snap {
+            BpkFieldSet(
+                label = "Title",
+                description = "Description",
+                status = BpkFieldStatus.Error("Error text"),
+            ) {
+                BpkTextField(
+                    value = "",
+                    onValueChange = { },
+                    placeholder = "Placeholder",
+                )
+            }
+        }
     }
-  }
 }

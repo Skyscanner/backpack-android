@@ -30,36 +30,36 @@ import net.skyscanner.backpack.compose.navigationbar.internal.TopNavBarStateImpl
 import net.skyscanner.backpack.compose.navigationbar.internal.TopNavBarSizes
 
 enum class TopNavBarStatus {
-  Expanded,
-  Collapsed,
+    Expanded,
+    Collapsed,
 }
 
 @Stable
 sealed interface TopNavBarState
 
 fun Modifier.nestedScroll(state: TopNavBarState): Modifier =
-  nestedScroll(state.asInternalState().nestedScrollConnection)
+    nestedScroll(state.asInternalState().nestedScrollConnection)
 
 @Composable
 fun rememberTopAppBarState(initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded): TopNavBarState {
-  val offsetRange = with(LocalDensity.current) { (TopNavBarSizes.ExpandedHeight - TopNavBarSizes.CollapsedHeight).toPx() }
-  val flingBehavior = ScrollableDefaults.flingBehavior()
-  return rememberSaveable(
-    offsetRange, flingBehavior,
-    saver = TopNavBarStateImpl.saver(offsetRange, flingBehavior),
-    init = { TopNavBarStateImpl(initialStatus, offsetRange = offsetRange, flingBehavior = flingBehavior) },
-  )
+    val offsetRange = with(LocalDensity.current) { (TopNavBarSizes.ExpandedHeight - TopNavBarSizes.CollapsedHeight).toPx() }
+    val flingBehavior = ScrollableDefaults.flingBehavior()
+    return rememberSaveable(
+        offsetRange, flingBehavior,
+        saver = TopNavBarStateImpl.saver(offsetRange, flingBehavior),
+        init = { TopNavBarStateImpl(initialStatus, offsetRange = offsetRange, flingBehavior = flingBehavior) },
+    )
 }
 
 @Stable
 internal interface TopNavBarInternalState : TopNavBarState {
 
-  val fraction: Float
+    val fraction: Float
 
-  val nestedScrollConnection: NestedScrollConnection
+    val nestedScrollConnection: NestedScrollConnection
 }
 
 internal fun TopNavBarState.asInternalState(): TopNavBarInternalState =
-  when (this) {
-    is TopNavBarInternalState -> this
-  }
+    when (this) {
+        is TopNavBarInternalState -> this
+    }

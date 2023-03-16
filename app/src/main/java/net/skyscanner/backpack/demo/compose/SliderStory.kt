@@ -43,55 +43,55 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @SliderComponent
 @ComposeStory
 fun SliderStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(BpkSpacing.Xxl),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
-  ) {
-    BpkText(
-      text = stringResource(R.string.slider_standard),
-      style = BpkTheme.typography.label2,
-    )
-    DefaultSliderSample()
-    BpkText(
-      text = stringResource(R.string.slider_stepped),
-      style = BpkTheme.typography.label2,
-    )
-    SteppedSliderSample()
-    BpkText(
-      text = stringResource(R.string.slider_range),
-      style = BpkTheme.typography.label2,
-    )
-    RangeSliderSample()
-  }
+    Column(
+        modifier = modifier.padding(BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
+    ) {
+        BpkText(
+            text = stringResource(R.string.slider_standard),
+            style = BpkTheme.typography.label2,
+        )
+        DefaultSliderSample()
+        BpkText(
+            text = stringResource(R.string.slider_stepped),
+            style = BpkTheme.typography.label2,
+        )
+        SteppedSliderSample()
+        BpkText(
+            text = stringResource(R.string.slider_range),
+            style = BpkTheme.typography.label2,
+        )
+        RangeSliderSample()
+    }
 }
 
 @Composable
 internal fun RangeSliderSample(modifier: Modifier = Modifier) {
-  var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
-  BpkRangeSlider(
-    modifier = modifier,
-    value = rangeSliderValue,
-    onValueChange = { newValue -> rangeSliderValue = newValue },
-  )
+    var rangeSliderValue by remember { mutableStateOf(0.2f..0.8f) }
+    BpkRangeSlider(
+        modifier = modifier,
+        value = rangeSliderValue,
+        onValueChange = { newValue -> rangeSliderValue = newValue },
+    )
 }
 
 @Composable
 internal fun DefaultSliderSample(modifier: Modifier = Modifier) {
-  var sliderValue by remember { mutableStateOf(0.5f) }
-  BpkSlider(
-    modifier = modifier,
-    value = sliderValue,
-    onValueChange = { newValue -> sliderValue = newValue },
-  )
+    var sliderValue by remember { mutableStateOf(0.5f) }
+    BpkSlider(
+        modifier = modifier,
+        value = sliderValue,
+        onValueChange = { newValue -> sliderValue = newValue },
+    )
 }
 
 @Composable
 internal fun SteppedSliderSample(modifier: Modifier = Modifier) {
-  var sliderValue by remember { mutableStateOf(0.5f) }
-  BpkSlider(
-    modifier = modifier,
-    value = sliderValue,
-    onValueChange = { newValue -> sliderValue = newValue },
-    steps = 10,
-  )
+    var sliderValue by remember { mutableStateOf(0.5f) }
+    BpkSlider(
+        modifier = modifier,
+        value = sliderValue,
+        onValueChange = { newValue -> sliderValue = newValue },
+        steps = 10,
+    )
 }

@@ -43,31 +43,31 @@ import net.skyscanner.backpack.toast.BpkToast
 @FabComponent
 @ComposeStory
 fun FabStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(BpkSpacing.Xl),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Xxl, Alignment.CenterVertically),
-  ) {
-    val context = LocalContext.current
-    BpkFab(
-      onClick = { showGenericMessageToast(context) },
-      icon = BpkIcon.Search,
-      contentDescription = stringResource(R.string.content_description),
-    )
+    Column(
+        modifier = modifier.padding(BpkSpacing.Xl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Xxl, Alignment.CenterVertically),
+    ) {
+        val context = LocalContext.current
+        BpkFab(
+            onClick = { showGenericMessageToast(context) },
+            icon = BpkIcon.Search,
+            contentDescription = stringResource(R.string.content_description),
+        )
 
-    BpkFab(
-      onClick = { showGenericMessageToast(context) },
-      icon = BpkIcon.Star,
-      contentDescription = stringResource(R.string.content_description),
-    )
+        BpkFab(
+            onClick = { showGenericMessageToast(context) },
+            icon = BpkIcon.Star,
+            contentDescription = stringResource(R.string.content_description),
+        )
 
-    BpkFab(
-      onClick = { showGenericMessageToast(context) },
-      icon = BpkIcon.Flight,
-      contentDescription = stringResource(R.string.content_description),
-    )
-  }
+        BpkFab(
+            onClick = { showGenericMessageToast(context) },
+            icon = BpkIcon.Flight,
+            contentDescription = stringResource(R.string.content_description),
+        )
+    }
 }
 
 private fun showGenericMessageToast(context: Context) {
-  BpkToast.makeText(context, context.getString(R.string.generic_message), BpkToast.LENGTH_SHORT).show()
+    BpkToast.makeText(context, context.getString(R.string.generic_message), BpkToast.LENGTH_SHORT).show()
 }

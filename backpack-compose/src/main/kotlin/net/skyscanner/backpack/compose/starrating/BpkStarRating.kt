@@ -44,202 +44,202 @@ import net.skyscanner.backpack.compose.utils.clickable
 import net.skyscanner.backpack.compose.utils.rememberContentDescriptionScope
 
 enum class BpkStarRatingSize {
-  Large,
-  Small,
+    Large,
+    Small,
 }
 
 enum class BpkRatingRounding {
-  Down,
-  Up,
-  Nearest,
+    Down,
+    Up,
+    Nearest,
 }
 
 @Composable
 fun BpkStarRating(
-  rating: Float,
-  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
-  modifier: Modifier = Modifier,
-  rounding: BpkRatingRounding = BpkRatingRounding.Down,
-  size: BpkStarRatingSize = BpkStarRatingSize.Small,
+    rating: Float,
+    contentDescription: ContentDescriptionScope.(Float, Int) -> String,
+    modifier: Modifier = Modifier,
+    rounding: BpkRatingRounding = BpkRatingRounding.Down,
+    size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
-  BpkStarRating(
-    rating = rating,
-    maxRating = 5,
-    numberOfStars = 5,
-    rounding = rounding,
-    modifier = modifier,
-    contentDescription = contentDescription,
-    size = size,
-  )
+    BpkStarRating(
+        rating = rating,
+        maxRating = 5,
+        numberOfStars = 5,
+        rounding = rounding,
+        modifier = modifier,
+        contentDescription = contentDescription,
+        size = size,
+    )
 }
 
 @Composable
 fun BpkHotelRating(
-  rating: Int,
-  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
-  modifier: Modifier = Modifier,
-  size: BpkStarRatingSize = BpkStarRatingSize.Small,
+    rating: Int,
+    contentDescription: ContentDescriptionScope.(Float, Int) -> String,
+    modifier: Modifier = Modifier,
+    size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
-  BpkStarRating(
-    rating = rating.toFloat(),
-    maxRating = 5,
-    numberOfStars = rating,
-    rounding = BpkRatingRounding.Down,
-    modifier = modifier,
-    contentDescription = contentDescription,
-    size = size,
-  )
+    BpkStarRating(
+        rating = rating.toFloat(),
+        maxRating = 5,
+        numberOfStars = rating,
+        rounding = BpkRatingRounding.Down,
+        modifier = modifier,
+        contentDescription = contentDescription,
+        size = size,
+    )
 }
 
 @Composable
 fun BpkInteractiveStarRating(
-  rating: Int,
-  onRatingChanged: (Int) -> Unit,
-  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
-  modifier: Modifier = Modifier,
-  size: BpkStarRatingSize = BpkStarRatingSize.Small,
+    rating: Int,
+    onRatingChanged: (Int) -> Unit,
+    contentDescription: ContentDescriptionScope.(Float, Int) -> String,
+    modifier: Modifier = Modifier,
+    size: BpkStarRatingSize = BpkStarRatingSize.Small,
 ) {
-  BpkStarRating(
-    rating = rating.toFloat(),
-    maxRating = 5,
-    numberOfStars = 5,
-    rounding = BpkRatingRounding.Down,
-    modifier = modifier,
-    onRatingChanged = onRatingChanged,
-    contentDescription = contentDescription,
-    size = size,
-  )
+    BpkStarRating(
+        rating = rating.toFloat(),
+        maxRating = 5,
+        numberOfStars = 5,
+        rounding = BpkRatingRounding.Down,
+        modifier = modifier,
+        onRatingChanged = onRatingChanged,
+        contentDescription = contentDescription,
+        size = size,
+    )
 }
 
 @Composable
 private fun BpkStarRating(
-  rating: Float,
-  maxRating: Int,
-  numberOfStars: Int,
-  rounding: BpkRatingRounding,
-  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
-  modifier: Modifier = Modifier,
-  size: BpkStarRatingSize = BpkStarRatingSize.Large,
-  onRatingChanged: ((Int) -> Unit)? = null,
+    rating: Float,
+    maxRating: Int,
+    numberOfStars: Int,
+    rounding: BpkRatingRounding,
+    contentDescription: ContentDescriptionScope.(Float, Int) -> String,
+    modifier: Modifier = Modifier,
+    size: BpkStarRatingSize = BpkStarRatingSize.Large,
+    onRatingChanged: ((Int) -> Unit)? = null,
 ) {
-  val iconSize = when (size) {
-    BpkStarRatingSize.Large -> BpkIconSize.Large
-    BpkStarRatingSize.Small -> BpkIconSize.Small
-  }
-  val coercedRating = rating.coerceIn(0f, numberOfStars.toFloat())
-  val roundedRating = when (rounding) {
-    BpkRatingRounding.Down -> floor(coercedRating * 2) / 2
-    BpkRatingRounding.Up -> ceil(coercedRating * 2) / 2
-    BpkRatingRounding.Nearest -> round(coercedRating * 2) / 2
-  }
-  Row(
-    modifier = modifier.starRatingSemantics(
-      rating = rating,
-      maxRating = maxRating,
-      numberOfStars = numberOfStars,
-      onRatingChanged = onRatingChanged,
-      contentDescription = contentDescription,
-    ),
-  ) {
-    for (item in 0 until numberOfStars) {
-      key(item) {
-        val value = (roundedRating - item).coerceIn(0f, 1f)
-        val starModifier = Modifier
-          .applyIf(onRatingChanged != null) {
-            clickable(bounded = false) { onRatingChanged?.invoke(item + 1) }
-          }
-        when {
-          (value >= 0.0f && value < 0.5f) -> BpkStar(
-            icon = BpkRatingStarType.Empty,
-            iconSize = iconSize,
-            modifier = starModifier,
-          )
-          (value >= 0.5f && value < 1.0f) -> BpkStar(
-            icon = BpkRatingStarType.Half,
-            iconSize = iconSize,
-            modifier = starModifier,
-          )
-          else -> BpkStar(
-            icon = BpkRatingStarType.Full,
-            iconSize = iconSize,
-            modifier = starModifier,
-          )
-        }
-      }
+    val iconSize = when (size) {
+        BpkStarRatingSize.Large -> BpkIconSize.Large
+        BpkStarRatingSize.Small -> BpkIconSize.Small
     }
-  }
+    val coercedRating = rating.coerceIn(0f, numberOfStars.toFloat())
+    val roundedRating = when (rounding) {
+        BpkRatingRounding.Down -> floor(coercedRating * 2) / 2
+        BpkRatingRounding.Up -> ceil(coercedRating * 2) / 2
+        BpkRatingRounding.Nearest -> round(coercedRating * 2) / 2
+    }
+    Row(
+        modifier = modifier.starRatingSemantics(
+            rating = rating,
+            maxRating = maxRating,
+            numberOfStars = numberOfStars,
+            onRatingChanged = onRatingChanged,
+            contentDescription = contentDescription,
+        ),
+    ) {
+        for (item in 0 until numberOfStars) {
+            key(item) {
+                val value = (roundedRating - item).coerceIn(0f, 1f)
+                val starModifier = Modifier
+                    .applyIf(onRatingChanged != null) {
+                        clickable(bounded = false) { onRatingChanged?.invoke(item + 1) }
+                    }
+                when {
+                    (value >= 0.0f && value < 0.5f) -> BpkStar(
+                        icon = BpkRatingStarType.Empty,
+                        iconSize = iconSize,
+                        modifier = starModifier,
+                    )
+                    (value >= 0.5f && value < 1.0f) -> BpkStar(
+                        icon = BpkRatingStarType.Half,
+                        iconSize = iconSize,
+                        modifier = starModifier,
+                    )
+                    else -> BpkStar(
+                        icon = BpkRatingStarType.Full,
+                        iconSize = iconSize,
+                        modifier = starModifier,
+                    )
+                }
+            }
+        }
+    }
 }
 
 @Composable
 private fun BpkStar(
-  icon: BpkRatingStarType,
-  iconSize: BpkIconSize,
-  modifier: Modifier = Modifier,
+    icon: BpkRatingStarType,
+    iconSize: BpkIconSize,
+    modifier: Modifier = Modifier,
 ) {
-  when (icon) {
-    BpkRatingStarType.Empty -> BpkIcon(
-      icon = BpkIcon.StarOutline,
-      contentDescription = null,
-      size = iconSize,
-      tint = BpkTheme.colors.textDisabled,
-      modifier = modifier,
-    )
-    BpkRatingStarType.Half -> BpkIcon(
-      icon = BpkIcon.StarHalf,
-      contentDescription = null,
-      size = iconSize,
-      tint = BpkTheme.colors.statusWarningSpot,
-      modifier = modifier,
-    )
-    BpkRatingStarType.Full -> BpkIcon(
-      icon = BpkIcon.Star,
-      contentDescription = null,
-      size = iconSize,
-      tint = BpkTheme.colors.statusWarningSpot,
-      modifier = modifier,
-    )
-  }
+    when (icon) {
+        BpkRatingStarType.Empty -> BpkIcon(
+            icon = BpkIcon.StarOutline,
+            contentDescription = null,
+            size = iconSize,
+            tint = BpkTheme.colors.textDisabled,
+            modifier = modifier,
+        )
+        BpkRatingStarType.Half -> BpkIcon(
+            icon = BpkIcon.StarHalf,
+            contentDescription = null,
+            size = iconSize,
+            tint = BpkTheme.colors.statusWarningSpot,
+            modifier = modifier,
+        )
+        BpkRatingStarType.Full -> BpkIcon(
+            icon = BpkIcon.Star,
+            contentDescription = null,
+            size = iconSize,
+            tint = BpkTheme.colors.statusWarningSpot,
+            modifier = modifier,
+        )
+    }
 }
 
 private enum class BpkRatingStarType {
-  Empty,
-  Half,
-  Full,
+    Empty,
+    Half,
+    Full,
 }
 
 private fun Modifier.starRatingSemantics(
-  rating: Float,
-  maxRating: Int,
-  numberOfStars: Int,
-  onRatingChanged: ((Int) -> Unit)?,
-  contentDescription: ContentDescriptionScope.(Float, Int) -> String,
+    rating: Float,
+    maxRating: Int,
+    numberOfStars: Int,
+    onRatingChanged: ((Int) -> Unit)?,
+    contentDescription: ContentDescriptionScope.(Float, Int) -> String,
 ): Modifier = composed {
-  val range = 0f..numberOfStars.toFloat()
-  val scope = rememberContentDescriptionScope()
-  semantics(mergeDescendants = true) {
+    val range = 0f..numberOfStars.toFloat()
+    val scope = rememberContentDescriptionScope()
+    semantics(mergeDescendants = true) {
 
-    // this is needed to use volume keys
-    if (onRatingChanged != null) {
-      setProgress { targetValue ->
-        val newValue = targetValue
-          .coerceIn(range)
-        if (newValue != rating) {
-          onRatingChanged(newValue.roundToInt())
-          true
-        } else {
-          false
-        }
-      }
-    }
-    // override describing percents
-    stateDescription = scope.contentDescription(rating, maxRating)
-  }
-    .applyIf(onRatingChanged != null) {
-      progressSemantics(
         // this is needed to use volume keys
-        value = rating,
-        valueRange = range,
-        steps = numberOfStars,
-      )
+        if (onRatingChanged != null) {
+            setProgress { targetValue ->
+                val newValue = targetValue
+                    .coerceIn(range)
+                if (newValue != rating) {
+                    onRatingChanged(newValue.roundToInt())
+                    true
+                } else {
+                    false
+                }
+            }
+        }
+        // override describing percents
+        stateDescription = scope.contentDescription(rating, maxRating)
     }
+        .applyIf(onRatingChanged != null) {
+            progressSemantics(
+                // this is needed to use volume keys
+                value = rating,
+                valueRange = range,
+                steps = numberOfStars,
+            )
+        }
 }

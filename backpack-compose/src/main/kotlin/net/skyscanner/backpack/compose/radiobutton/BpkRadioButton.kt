@@ -44,84 +44,84 @@ import net.skyscanner.backpack.compose.utils.applyIf
 
 @Composable
 fun BpkRadioButton(
-  text: String,
-  selected: Boolean,
-  onClick: (() -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    text: String,
+    selected: Boolean,
+    onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-  BpkRadioButton(
-    selected = selected,
-    onClick = onClick,
-    modifier = modifier,
-    enabled = enabled,
-    interactionSource = interactionSource,
-    content = { BpkText(text) },
-  )
+    BpkRadioButton(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        interactionSource = interactionSource,
+        content = { BpkText(text) },
+    )
 }
 
 @Composable
 fun BpkRadioButton(
-  selected: Boolean,
-  onClick: (() -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  content: @Composable RowScope.(Boolean) -> Unit,
+    selected: Boolean,
+    onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.(Boolean) -> Unit,
 ) {
 
-  Row(
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Md),
-    modifier = modifier.applyIf(onClick != null) {
-      selectable(
-        selected = selected,
-        interactionSource = interactionSource,
-        indication = null,
-        role = Role.RadioButton,
-        onClick = onClick!!,
-      )
-    },
-  ) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(BpkDimension.Spacing.Md),
+        modifier = modifier.applyIf(onClick != null) {
+            selectable(
+                selected = selected,
+                interactionSource = interactionSource,
+                indication = null,
+                role = Role.RadioButton,
+                onClick = onClick!!,
+            )
+        },
+    ) {
 
-    BpkRadioButtonImpl(
-      selected = selected,
-      onClick = onClick,
-      enabled = enabled,
-      interactionSource = interactionSource,
-    )
+        BpkRadioButtonImpl(
+            selected = selected,
+            onClick = onClick,
+            enabled = enabled,
+            interactionSource = interactionSource,
+        )
 
-    BpkToggleableContent(
-      enabled = enabled,
-      content = { content(selected) },
-    )
-  }
+        BpkToggleableContent(
+            enabled = enabled,
+            content = { content(selected) },
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun BpkRadioButtonImpl(
-  selected: Boolean,
-  onClick: (() -> Unit)?,
-  enabled: Boolean,
-  interactionSource: MutableInteractionSource,
-  modifier: Modifier = Modifier,
+    selected: Boolean,
+    onClick: (() -> Unit)?,
+    enabled: Boolean,
+    interactionSource: MutableInteractionSource,
+    modifier: Modifier = Modifier,
 ) {
-  // our design system isn't designed with the minimum touch target in mind at the moment.
-  // Disable the enforcement to avoid the extra padding
-  CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-    RadioButton(
-      selected = selected,
-      onClick = onClick,
-      modifier = modifier.semantics { invisibleToUser() },
-      enabled = enabled,
-      interactionSource = interactionSource,
-      colors = RadioButtonDefaults.colors(
-        selectedColor = BpkTheme.colors.coreAccent,
-        unselectedColor = BpkTheme.colors.textSecondary,
-        disabledColor = BpkTheme.colors.textDisabled,
-      ),
-    )
-  }
+    // our design system isn't designed with the minimum touch target in mind at the moment.
+    // Disable the enforcement to avoid the extra padding
+    CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
+        RadioButton(
+            selected = selected,
+            onClick = onClick,
+            modifier = modifier.semantics { invisibleToUser() },
+            enabled = enabled,
+            interactionSource = interactionSource,
+            colors = RadioButtonDefaults.colors(
+                selectedColor = BpkTheme.colors.coreAccent,
+                unselectedColor = BpkTheme.colors.textSecondary,
+                disabledColor = BpkTheme.colors.textDisabled,
+            ),
+        )
+    }
 }

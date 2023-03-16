@@ -44,57 +44,57 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @FlareComponent
 @ComposeStory
 fun FlareStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    val flareModifier = Modifier
-      .fillMaxWidth()
-      .height(CardHeight)
-    DefaultFlareExample(flareModifier)
-    UpFlareExample(flareModifier)
-    RadiusFlareExample(flareModifier)
-    ContentPaddingFlareExample(flareModifier)
-  }
+        val flareModifier = Modifier
+            .fillMaxWidth()
+            .height(CardHeight)
+        DefaultFlareExample(flareModifier)
+        UpFlareExample(flareModifier)
+        RadiusFlareExample(flareModifier)
+        ContentPaddingFlareExample(flareModifier)
+    }
 }
 
 @Composable
 internal fun DefaultFlareExample(modifier: Modifier = Modifier) {
-  BpkFlare(modifier) {
-    RockiesImage()
-  }
+    BpkFlare(modifier) {
+        RockiesImage()
+    }
 }
 
 @Composable
 internal fun UpFlareExample(modifier: Modifier = Modifier) {
-  BpkFlare(modifier, pointerDirection = BpkFlarePointerDirection.Up) {
-    RockiesImage()
-  }
+    BpkFlare(modifier, pointerDirection = BpkFlarePointerDirection.Up) {
+        RockiesImage()
+    }
 }
 
 @Composable
 internal fun RadiusFlareExample(modifier: Modifier = Modifier) {
-  BpkFlare(modifier, radius = BpkFlareRadius.Medium) {
-    RockiesImage()
-  }
+    BpkFlare(modifier, radius = BpkFlareRadius.Medium) {
+        RockiesImage()
+    }
 }
 
 @Composable
 internal fun ContentPaddingFlareExample(modifier: Modifier = Modifier) {
-  BpkFlare(modifier, background = BpkTheme.colors.coreAccent, insetContent = true) {
-    BpkText(text = stringResource(R.string.stub), color = BpkTheme.colors.textPrimaryInverse)
-  }
+    BpkFlare(modifier, background = BpkTheme.colors.coreAccent, insetContent = true) {
+        BpkText(text = stringResource(R.string.stub), color = BpkTheme.colors.textPrimaryInverse)
+    }
 }
 
 @Composable
 private fun RockiesImage(modifier: Modifier = Modifier) {
-  Image(
-    modifier = modifier,
-    painter = painterResource(R.drawable.canadian_rockies_canada),
-    contentDescription = stringResource(R.string.image_rockies_content_description),
-    contentScale = ContentScale.Crop,
-  )
+    Image(
+        modifier = modifier,
+        painter = painterResource(R.drawable.canadian_rockies_canada),
+        contentDescription = stringResource(R.string.image_rockies_content_description),
+        contentScale = ContentScale.Crop,
+    )
 }
 
 private val CardHeight = 150.dp

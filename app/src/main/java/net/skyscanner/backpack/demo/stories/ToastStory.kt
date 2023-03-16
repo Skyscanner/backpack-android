@@ -33,21 +33,21 @@ import net.skyscanner.backpack.toast.BpkToast
 @ToastComponent
 @ViewStory
 fun ToastStory(modifier: Modifier = Modifier) {
-  val automationMode = LocalAutomationMode.current
+    val automationMode = LocalAutomationMode.current
 
-  AndroidLayout(R.layout.fragment_toasts, modifier.fillMaxSize()) {
-    findViewById<TextView>(R.id.toast_short).setOnClickListener {
-      it as TextView
-      BpkToast.makeText(context, it.text, BpkToast.LENGTH_SHORT).show()
-    }
+    AndroidLayout(R.layout.fragment_toasts, modifier.fillMaxSize()) {
+        findViewById<TextView>(R.id.toast_short).setOnClickListener {
+            it as TextView
+            BpkToast.makeText(context, it.text, BpkToast.LENGTH_SHORT).show()
+        }
 
-    findViewById<TextView>(R.id.toast_long).setOnClickListener {
-      it as TextView
-      BpkToast.makeText(context, it.text, BpkToast.LENGTH_LONG).show()
-    }
+        findViewById<TextView>(R.id.toast_long).setOnClickListener {
+            it as TextView
+            BpkToast.makeText(context, it.text, BpkToast.LENGTH_LONG).show()
+        }
 
-    if (automationMode) {
-      findViewById<TextView>(R.id.toast_short).performClick()
+        if (automationMode) {
+            findViewById<TextView>(R.id.toast_short).performClick()
+        }
     }
-  }
 }

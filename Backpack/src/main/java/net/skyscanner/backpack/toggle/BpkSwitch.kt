@@ -27,8 +27,8 @@ import net.skyscanner.backpack.util.createContextThemeWrapper
 import net.skyscanner.backpack.util.use
 
 private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
-  val withBaseStyle = createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.switchStyle)
-  return createContextThemeWrapper(withBaseStyle, attrs, R.attr.bpkSwitchStyle)
+    val withBaseStyle = createContextThemeWrapper(context, attrs, androidx.appcompat.R.attr.switchStyle)
+    return createContextThemeWrapper(withBaseStyle, attrs, R.attr.bpkSwitchStyle)
 }
 
 /**
@@ -41,43 +41,43 @@ private fun wrapContext(context: Context, attrs: AttributeSet?): Context {
  * @see SwitchCompat
  */
 open class BpkSwitch @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : SwitchCompat(wrapContext(context, attrs), attrs, defStyleAttr) {
 
-  init {
-    initialize(attrs, defStyleAttr)
-  }
-
-  fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
-    val textDisabledColor = context.getColor(R.color.bpkTextDisabled)
-    val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
-    context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
-      val primaryColor = context.getColor(R.color.bpkCoreAccent)
-      val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, primaryColor)
-
-      trackTintList = context.getColorStateList(R.color.bpkTextDisabled)
-      thumbTintList = getColorStateList(checkedColor, context.getColor(R.color.bpkTextOnDark))
+    init {
+        initialize(attrs, defStyleAttr)
     }
-    setTextColor(
-      ColorStateList(
-        arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
-        intArrayOf(textDisabledColor, textEnabledColor),
-      ),
-    )
-    switchMinWidth = resources.getDimensionPixelSize(R.dimen.bpk_switch_min_width)
-  }
 
-  private fun getColorStateList(checkedColor: Int, uncheckedColor: Int) =
-    ColorStateList(
-      arrayOf(
-        intArrayOf(android.R.attr.state_checked),
-        intArrayOf(-android.R.attr.state_checked),
-      ),
-      intArrayOf(
-        checkedColor,
-        uncheckedColor,
-      ),
-    )
+    fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
+        val textDisabledColor = context.getColor(R.color.bpkTextDisabled)
+        val textEnabledColor = context.getColor(R.color.bpkTextPrimary)
+        context.theme.obtainStyledAttributes(attrs, R.styleable.BpkSwitch, defStyleAttr, 0).use {
+            val primaryColor = context.getColor(R.color.bpkCoreAccent)
+            val checkedColor = it.getColor(R.styleable.BpkSwitch_switchPrimaryColor, primaryColor)
+
+            trackTintList = context.getColorStateList(R.color.bpkTextDisabled)
+            thumbTintList = getColorStateList(checkedColor, context.getColor(R.color.bpkTextOnDark))
+        }
+        setTextColor(
+            ColorStateList(
+                arrayOf(intArrayOf(-android.R.attr.state_enabled), intArrayOf()),
+                intArrayOf(textDisabledColor, textEnabledColor),
+            ),
+        )
+        switchMinWidth = resources.getDimensionPixelSize(R.dimen.bpk_switch_min_width)
+    }
+
+    private fun getColorStateList(checkedColor: Int, uncheckedColor: Int) =
+        ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_checked),
+                intArrayOf(-android.R.attr.state_checked),
+            ),
+            intArrayOf(
+                checkedColor,
+                uncheckedColor,
+            ),
+        )
 }

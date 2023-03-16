@@ -27,13 +27,13 @@ import net.skyscanner.backpack.compose.navigationbar.internal.BpkTopNavBarImpl
 import net.skyscanner.backpack.compose.navigationbar.internal.toAction
 
 sealed interface NavIcon {
-  object None : NavIcon
-  data class Back(val contentDescription: String, val onClick: () -> Unit) : NavIcon
-  data class Close(val contentDescription: String, val onClick: () -> Unit) : NavIcon
+    object None : NavIcon
+    data class Back(val contentDescription: String, val onClick: () -> Unit) : NavIcon
+    data class Close(val contentDescription: String, val onClick: () -> Unit) : NavIcon
 }
 
 internal sealed interface Action {
-  val onClick: () -> Unit
+    val onClick: () -> Unit
 }
 
 data class IconAction(val icon: BpkIcon, val contentDescription: String, override val onClick: () -> Unit) : Action
@@ -41,74 +41,74 @@ data class TextAction(val text: String, override val onClick: () -> Unit) : Acti
 
 @Composable
 fun BpkTopNavBar(
-  navIcon: NavIcon,
-  title: String,
-  modifier: Modifier = Modifier,
-  insets: WindowInsets? = WindowInsets.statusBars,
-  actions: List<IconAction> = emptyList(),
+    navIcon: NavIcon,
+    title: String,
+    modifier: Modifier = Modifier,
+    insets: WindowInsets? = WindowInsets.statusBars,
+    actions: List<IconAction> = emptyList(),
 ) {
-  BpkTopNavBarImpl(
-    fraction = 0f,
-    title = title,
-    modifier = modifier,
-    insets = insets,
-    navIcon = navIcon.toAction(),
-    actions = actions,
-  )
+    BpkTopNavBarImpl(
+        fraction = 0f,
+        title = title,
+        modifier = modifier,
+        insets = insets,
+        navIcon = navIcon.toAction(),
+        actions = actions,
+    )
 }
 
 @Composable
 fun BpkTopNavBar(
-  navIcon: NavIcon,
-  title: String,
-  action: TextAction,
-  modifier: Modifier = Modifier,
-  insets: WindowInsets? = WindowInsets.statusBars,
+    navIcon: NavIcon,
+    title: String,
+    action: TextAction,
+    modifier: Modifier = Modifier,
+    insets: WindowInsets? = WindowInsets.statusBars,
 ) {
-  BpkTopNavBarImpl(
-    fraction = 0f,
-    title = title,
-    modifier = modifier,
-    insets = insets,
-    navIcon = navIcon.toAction(),
-    actions = listOf(action),
-  )
+    BpkTopNavBarImpl(
+        fraction = 0f,
+        title = title,
+        modifier = modifier,
+        insets = insets,
+        navIcon = navIcon.toAction(),
+        actions = listOf(action),
+    )
 }
 
 @Composable
 fun BpkTopNavBar(
-  state: TopNavBarState,
-  navIcon: NavIcon,
-  title: String,
-  modifier: Modifier = Modifier,
-  insets: WindowInsets? = WindowInsets.statusBars,
-  actions: List<IconAction> = emptyList(),
+    state: TopNavBarState,
+    navIcon: NavIcon,
+    title: String,
+    modifier: Modifier = Modifier,
+    insets: WindowInsets? = WindowInsets.statusBars,
+    actions: List<IconAction> = emptyList(),
 ) {
-  BpkTopNavBarImpl(
-    fraction = state.asInternalState().fraction,
-    title = title,
-    modifier = modifier,
-    insets = insets,
-    navIcon = navIcon.toAction(),
-    actions = actions,
-  )
+    BpkTopNavBarImpl(
+        fraction = state.asInternalState().fraction,
+        title = title,
+        modifier = modifier,
+        insets = insets,
+        navIcon = navIcon.toAction(),
+        actions = actions,
+    )
 }
 
 @Composable
 fun BpkTopNavBar(
-  state: TopNavBarState,
-  navIcon: NavIcon,
-  title: String,
-  action: TextAction,
-  modifier: Modifier = Modifier,
-  insets: WindowInsets? = WindowInsets.statusBars,
+    state: TopNavBarState,
+    navIcon: NavIcon,
+    title: String,
+    action: TextAction,
+    modifier: Modifier = Modifier,
+    insets: WindowInsets? = WindowInsets.statusBars,
 ) {
-  BpkTopNavBarImpl(
-    fraction = state.asInternalState().fraction,
-    title = title,
-    modifier = modifier,
-    insets = insets,
-    navIcon = navIcon.toAction(),
-    actions = listOf(action),
-  )
+    BpkTopNavBarImpl(
+        fraction = state.asInternalState().fraction,
+        title = title,
+        modifier = modifier,
+        insets = insets,
+        navIcon = navIcon.toAction(),
+        actions = listOf(action),
+    )
 }

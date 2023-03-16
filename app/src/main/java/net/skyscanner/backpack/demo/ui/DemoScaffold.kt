@@ -28,20 +28,20 @@ import net.skyscanner.backpack.demo.BackpackDemoTheme
 
 @Composable
 fun DemoScaffold(
-  modifier: Modifier = Modifier,
-  automationMode: Boolean = false,
-  content: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    automationMode: Boolean = false,
+    content: @Composable () -> Unit,
 ) {
-  BackpackDemoTheme {
-    val floatingNotificationState = rememberBpkFloatingNotificationState()
-    CompositionLocalProvider(
-      LocalAutomationMode provides automationMode,
-      LocalFloatingNotification provides floatingNotificationState,
-    ) {
-      Box(modifier) {
-        content()
-        BpkFloatingNotification(state = floatingNotificationState)
-      }
+    BackpackDemoTheme {
+        val floatingNotificationState = rememberBpkFloatingNotificationState()
+        CompositionLocalProvider(
+            LocalAutomationMode provides automationMode,
+            LocalFloatingNotification provides floatingNotificationState,
+        ) {
+            Box(modifier) {
+                content()
+                BpkFloatingNotification(state = floatingNotificationState)
+            }
+        }
     }
-  }
 }

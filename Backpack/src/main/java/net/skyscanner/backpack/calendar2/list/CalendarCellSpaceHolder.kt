@@ -26,13 +26,13 @@ import net.skyscanner.backpack.calendar2.view.CalendarDaySelectionBackground
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarCellSpaceHolder(
-  parent: ViewGroup,
+    parent: ViewGroup,
 ) : ItemHolder<CalendarCell.Space>(parent, R.layout.view_bpk_calendar_space) {
 
-  private val background = CalendarDaySelectionBackground(context)
-  private val space = view.findViewById<View>(R.id.bpk_calendar_space)
+    private val background = CalendarDaySelectionBackground(context)
+    private val space = view.findViewById<View>(R.id.bpk_calendar_space)
 
-  override fun bind(model: CalendarCell.Space) {
-    space.background = background(if (model.selected) CalendarCell.Selection.Middle else null)
-  }
+    override fun bind(model: CalendarCell.Space) {
+        space.background = background(if (model.selected) CalendarCell.Selection.Middle else null)
+    }
 }

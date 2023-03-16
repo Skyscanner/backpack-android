@@ -26,19 +26,19 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
 internal fun createBpkMarkerView(
-  context: Context,
-  title: String?,
-  icon: Int,
-  showPointer: Boolean,
+    context: Context,
+    title: String?,
+    icon: Int,
+    showPointer: Boolean,
 ): View {
-  val root: View
-  if (icon != 0) {
-    root = View.inflate(context, R.layout.view_bpk_map_marker_label_with_icon, null)
-    root.findViewById<ImageView>(R.id.icon).setImageDrawable(AppCompatResources.getDrawable(context, icon))
-  } else {
-    root = View.inflate(context, R.layout.view_bpk_map_marker_label, null)
-  }
-  root.findViewById<BpkText>(R.id.text).text = title
-  root.findViewById<View>(R.id.pointer).visibility = if (showPointer) View.VISIBLE else View.GONE
-  return root
+    val root: View
+    if (icon != 0) {
+        root = View.inflate(context, R.layout.view_bpk_map_marker_label_with_icon, null)
+        root.findViewById<ImageView>(R.id.icon).setImageDrawable(AppCompatResources.getDrawable(context, icon))
+    } else {
+        root = View.inflate(context, R.layout.view_bpk_map_marker_label, null)
+    }
+    root.findViewById<BpkText>(R.id.text).text = title
+    root.findViewById<View>(R.id.pointer).visibility = if (showPointer) View.VISIBLE else View.GONE
+    return root
 }

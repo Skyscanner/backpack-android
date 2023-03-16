@@ -28,53 +28,53 @@ import java.util.Locale
 
 enum class BpkTestVariant(val id: String, private val themeId: Int = R.style.AppTheme) {
 
-  Default("default"),
-  Themed("themed", R.style.LondonTheme),
-  DarkMode("dm"),
-  Rtl("rtl"),
-  ;
+    Default("default"),
+    Themed("themed", R.style.LondonTheme),
+    DarkMode("dm"),
+    Rtl("rtl"),
+    ;
 
-  fun applyToActivity(activity: Activity): Activity =
-    activity.apply { setTheme(themeId) }
+    fun applyToActivity(activity: Activity): Activity =
+        activity.apply { setTheme(themeId) }
 
-  fun newActivity(activity: Activity): Activity {
-    activity.applyOverrideConfiguration(setup(Configuration()))
-    return activity
-  }
-
-  fun newContext(context: Context): Context =
-    context.createConfigurationContext(setup(Configuration(context.resources.configuration))).apply {
-      setTheme(themeId)
+    fun newActivity(activity: Activity): Activity {
+        activity.applyOverrideConfiguration(setup(Configuration()))
+        return activity
     }
 
-  private fun setup(configuration: Configuration) =
-    when (this) {
-      Default, Themed -> configuration
-      DarkMode -> {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        configuration.apply {
-          uiMode = (uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or Configuration.UI_MODE_NIGHT_YES
+    fun newContext(context: Context): Context =
+        context.createConfigurationContext(setup(Configuration(context.resources.configuration))).apply {
+            setTheme(themeId)
         }
-      }
-      Rtl -> {
-        val rtlLocale = Locale("ar")
-        Locale.setDefault(rtlLocale)
-        configuration.apply {
-          setLayoutDirection(rtlLocale)
-          setLocale(rtlLocale)
+
+    private fun setup(configuration: Configuration) =
+        when (this) {
+            Default, Themed -> configuration
+            DarkMode -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                configuration.apply {
+                    uiMode = (uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or Configuration.UI_MODE_NIGHT_YES
+                }
+            }
+            Rtl -> {
+                val rtlLocale = Locale("ar")
+                Locale.setDefault(rtlLocale)
+                configuration.apply {
+                    setLayoutDirection(rtlLocale)
+                    setLocale(rtlLocale)
+                }
+            }
         }
-      }
+
+    companion object {
+
+        val current: BpkTestVariant
+            get() = when (InstrumentationRegistry.getArguments().getString("variant")) {
+                Default.id -> Default
+                Themed.id -> Themed
+                DarkMode.id -> DarkMode
+                Rtl.id -> Rtl
+                else -> Default
+            }
     }
-
-  companion object {
-
-    val current: BpkTestVariant
-      get() = when (InstrumentationRegistry.getArguments().getString("variant")) {
-        Default.id -> Default
-        Themed.id -> Themed
-        DarkMode.id -> DarkMode
-        Rtl.id -> Rtl
-        else -> Default
-      }
-  }
 }

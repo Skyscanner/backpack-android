@@ -50,73 +50,73 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BpkFloatingNotification(
-  state: BpkFloatingNotificationState,
-  modifier: Modifier = Modifier,
+    state: BpkFloatingNotificationState,
+    modifier: Modifier = Modifier,
 ) {
 
-  val currentData = state.currentData
-  LaunchedEffect(currentData) {
-    if (currentData != null) {
-      val duration = currentData.hideAfter
-      delay(duration)
-      currentData.dismiss()
+    val currentData = state.currentData
+    LaunchedEffect(currentData) {
+        if (currentData != null) {
+            val duration = currentData.hideAfter
+            delay(duration)
+            currentData.dismiss()
+        }
     }
-  }
-  val componentHeight = if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height else DefaultPhoneSize.height
-  val slideDistancePx = with(LocalDensity.current) { (BpkSpacing.Lg + componentHeight).toPx().toInt() }
+    val componentHeight = if (LocalConfiguration.current.screenWidthDp >= TABLET_MIN_WIDTH) DefaultTabletSize.height else DefaultPhoneSize.height
+    val slideDistancePx = with(LocalDensity.current) { (BpkSpacing.Lg + componentHeight).toPx().toInt() }
 
-  AnimatedContent(
-    targetState = currentData,
-    modifier = modifier,
-    transitionSpec = floatingNotificationTransforms(slideDistancePx),
-  ) { data ->
+    AnimatedContent(
+        targetState = currentData,
+        modifier = modifier,
+        transitionSpec = floatingNotificationTransforms(slideDistancePx),
+    ) { data ->
 
-    Box(
-      modifier = Modifier
-        .fillMaxSize()
-        .padding(start = BpkSpacing.Lg, end = BpkSpacing.Lg, bottom = BpkSpacing.Lg),
-      contentAlignment = Alignment.BottomCenter,
-    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = BpkSpacing.Lg, end = BpkSpacing.Lg, bottom = BpkSpacing.Lg),
+            contentAlignment = Alignment.BottomCenter,
+        ) {
 
-      if (data != null) {
-        BpkFloatingNotificationImpl(
-          data = data,
-          modifier = Modifier.requiredHeight(componentHeight)
-            .widthIn(max = DefaultTabletSize.width),
-        )
-      }
+            if (data != null) {
+                BpkFloatingNotificationImpl(
+                    data = data,
+                    modifier = Modifier.requiredHeight(componentHeight)
+                        .widthIn(max = DefaultTabletSize.width),
+                )
+            }
+        }
     }
-  }
 }
 
 @Stable
 class BpkFloatingNotificationState {
 
-  internal var currentData by mutableStateOf<BpkFloatingNotificationData?>(null)
-    private set
+    internal var currentData by mutableStateOf<BpkFloatingNotificationData?>(null)
+        private set
 
-  suspend fun show(
-    text: String,
-    cta: String? = null,
-    onClick: (() -> Unit)? = null,
-    icon: BpkIcon? = null,
-    hideAfter: Long = DEFAULT_DELAY,
-    onExit: (() -> Unit)? = null,
-  ): Unit =
-    try {
-      suspendCancellableCoroutine { continuation ->
-        currentData = BpkFloatingNotificationData(text, icon, cta, hideAfter, onExit, onClick, continuation)
-      }
-    } finally {
-      currentData = null
-    }
+    suspend fun show(
+        text: String,
+        cta: String? = null,
+        onClick: (() -> Unit)? = null,
+        icon: BpkIcon? = null,
+        hideAfter: Long = DEFAULT_DELAY,
+        onExit: (() -> Unit)? = null,
+    ): Unit =
+        try {
+            suspendCancellableCoroutine { continuation ->
+                currentData = BpkFloatingNotificationData(text, icon, cta, hideAfter, onExit, onClick, continuation)
+            }
+        } finally {
+            currentData = null
+        }
 }
 
 @Composable
 fun rememberBpkFloatingNotificationState(): BpkFloatingNotificationState =
-  remember {
-    BpkFloatingNotificationState()
-  }
+    remember {
+        BpkFloatingNotificationState()
+    }
 
 private const val DEFAULT_DELAY = 4000L
 private const val TABLET_MIN_WIDTH = 769

@@ -35,34 +35,34 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 sealed interface BpkPanelPadding {
 
-  object None : BpkPanelPadding
+    object None : BpkPanelPadding
 
-  object Base : BpkPanelPadding
+    object Base : BpkPanelPadding
 }
 
 @Composable
 fun BpkPanel(
-  modifier: Modifier = Modifier,
-  contentAlignment: Alignment = Alignment.TopStart,
-  propagateMinConstraints: Boolean = false,
-  padding: BpkPanelPadding = BpkPanelPadding.Base,
-  content: @Composable BoxScope.() -> Unit,
+    modifier: Modifier = Modifier,
+    contentAlignment: Alignment = Alignment.TopStart,
+    propagateMinConstraints: Boolean = false,
+    padding: BpkPanelPadding = BpkPanelPadding.Base,
+    content: @Composable BoxScope.() -> Unit,
 ) {
-  Box(
-    contentAlignment = contentAlignment,
-    propagateMinConstraints = propagateMinConstraints,
-    content = content,
-    modifier = modifier
-      .clip(PanelShape)
-      .background(BpkTheme.colors.surfaceDefault)
-      .border(1.dp, BpkTheme.colors.line, PanelShape)
-      .padding(
-        all = when (padding) {
-          BpkPanelPadding.None -> 0.dp
-          BpkPanelPadding.Base -> BpkSpacing.Base
-        },
-      ),
-  )
+    Box(
+        contentAlignment = contentAlignment,
+        propagateMinConstraints = propagateMinConstraints,
+        content = content,
+        modifier = modifier
+            .clip(PanelShape)
+            .background(BpkTheme.colors.surfaceDefault)
+            .border(1.dp, BpkTheme.colors.line, PanelShape)
+            .padding(
+                all = when (padding) {
+                    BpkPanelPadding.None -> 0.dp
+                    BpkPanelPadding.Base -> BpkSpacing.Base
+                },
+            ),
+    )
 }
 
 private val PanelShape = RoundedCornerShape(BpkBorderRadius.Md)

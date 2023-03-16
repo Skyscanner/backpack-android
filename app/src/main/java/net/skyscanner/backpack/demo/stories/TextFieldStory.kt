@@ -30,10 +30,10 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @TextFieldComponent
 @ViewStory("Default")
 fun TextFieldStoryDefault(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_text_fields, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_text_fields, modifier.fillMaxSize())
 
 @Composable
 @TextFieldComponent
 @ViewStory("With labels")
 fun TextFieldStoryLabels(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_text_fields_labels, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_text_fields_labels, modifier.fillMaxSize())

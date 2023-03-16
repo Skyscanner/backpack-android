@@ -26,63 +26,63 @@ import net.skyscanner.backpack.rating.BpkRating
 import net.skyscanner.backpack.util.use
 
 internal class RatingScore(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
-  defaultScale: BpkRating.Scale,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defaultScale: BpkRating.Scale,
 ) : () -> BpkRating.Score {
 
-  var rating: Float = 0f
-    set(value) {
-      val clamped = clamp(value, minRating, maxRating)
-      field = (clamped * 10).toInt() / 10f // rounding to one decimal
+    var rating: Float = 0f
+        set(value) {
+            val clamped = clamp(value, minRating, maxRating)
+            field = (clamped * 10).toInt() / 10f // rounding to one decimal
+        }
+
+    var scale: BpkRating.Scale = defaultScale
+
+    override fun toString() =
+        rating.toString()
+
+    override fun invoke(): BpkRating.Score = when {
+        rating >= minRating && rating < mediumRatingThreshold -> BpkRating.Score.Low
+        rating >= mediumRatingThreshold && rating < highRatingThreshold -> BpkRating.Score.Medium
+        rating in highRatingThreshold..maxRating -> BpkRating.Score.High
+        else -> throw IllegalArgumentException("Invalid rating=$rating")
     }
 
-  var scale: BpkRating.Scale = defaultScale
-
-  override fun toString() =
-    rating.toString()
-
-  override fun invoke(): BpkRating.Score = when {
-    rating >= minRating && rating < mediumRatingThreshold -> BpkRating.Score.Low
-    rating >= mediumRatingThreshold && rating < highRatingThreshold -> BpkRating.Score.Medium
-    rating in highRatingThreshold..maxRating -> BpkRating.Score.High
-    else -> throw IllegalArgumentException("Invalid rating=$rating")
-  }
-
-  init {
-    context.theme.obtainStyledAttributes(
-      attrs,
-      R.styleable.BpkRating,
-      defStyleAttr, 0,
-    ).use {
-      scale = it.getInt(R.styleable.BpkRating_ratingScale, scale.xmlId)
-        .let(::mapXmlToScale) ?: scale
-      rating = it.getFloat(R.styleable.BpkRating_ratingValue, rating)
-    }
-  }
-
-  private fun mapXmlToScale(id: Int) =
-    BpkRating.Scale.values().find { it.xmlId == id }
-
-  private val BpkRating.Scale.xmlId
-    get() = when (this) {
-      BpkRating.Scale.ZeroToTen -> 0
-      BpkRating.Scale.ZeroToFive -> 1
+    init {
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.BpkRating,
+            defStyleAttr, 0,
+        ).use {
+            scale = it.getInt(R.styleable.BpkRating_ratingScale, scale.xmlId)
+                .let(::mapXmlToScale) ?: scale
+            rating = it.getFloat(R.styleable.BpkRating_ratingValue, rating)
+        }
     }
 
-  // currently always 0
-  private val minRating: Float = 0.0f
+    private fun mapXmlToScale(id: Int) =
+        BpkRating.Scale.values().find { it.xmlId == id }
 
-  private val maxRating: Float
-    get() = when (scale) {
-      BpkRating.Scale.ZeroToTen -> 10.0f
-      BpkRating.Scale.ZeroToFive -> 5.0f
-    }
+    private val BpkRating.Scale.xmlId
+        get() = when (this) {
+            BpkRating.Scale.ZeroToTen -> 0
+            BpkRating.Scale.ZeroToFive -> 1
+        }
 
-  private val mediumRatingThreshold: Float
-    get() = maxRating * 0.6f
+    // currently always 0
+    private val minRating: Float = 0.0f
 
-  private val highRatingThreshold: Float
-    get() = maxRating * 0.8f
+    private val maxRating: Float
+        get() = when (scale) {
+            BpkRating.Scale.ZeroToTen -> 10.0f
+            BpkRating.Scale.ZeroToFive -> 5.0f
+        }
+
+    private val mediumRatingThreshold: Float
+        get() = maxRating * 0.6f
+
+    private val highRatingThreshold: Float
+        get() = maxRating * 0.8f
 }

@@ -58,251 +58,251 @@ import net.skyscanner.backpack.util.use
  */
 @Suppress("MemberVisibilityCanBePrivate")
 class BpkSnackbar private constructor(
-  private val context: Context,
-  view: View,
-  duration: Int,
-  @ColorInt private val textColor: Int,
-  @ColorInt actionColor: Int,
-  @ColorInt backgroundColor: Int,
+    private val context: Context,
+    view: View,
+    duration: Int,
+    @ColorInt private val textColor: Int,
+    @ColorInt actionColor: Int,
+    @ColorInt backgroundColor: Int,
 ) {
 
-  private val callbacks = ArrayList<BaseTransientBottomBar.BaseCallback<BpkSnackbar>>()
+    private val callbacks = ArrayList<BaseTransientBottomBar.BaseCallback<BpkSnackbar>>()
 
-  private val snackbar = Snackbar.make(view, "", duration).apply {
-    setBackgroundColorCompat(backgroundColor)
-    addCallback(
-      object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-        override fun onShown(transientBottomBar: Snackbar?) {
-          callbacks.forEach { it.onShown(this@BpkSnackbar) }
-        }
+    private val snackbar = Snackbar.make(view, "", duration).apply {
+        setBackgroundColorCompat(backgroundColor)
+        addCallback(
+            object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                override fun onShown(transientBottomBar: Snackbar?) {
+                    callbacks.forEach { it.onShown(this@BpkSnackbar) }
+                }
 
-        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-          callbacks.forEach { it.onDismissed(this@BpkSnackbar, event) }
-        }
-      },
-    )
-  }
-
-  private val titleFontSpan = BpkFontSpan(context, BpkText.TextStyle.Label2)
-  private val textFontSpan = BpkFontSpan(context, BpkText.TextStyle.Footnote)
-
-  private val textView = snackbar.view.findViewById<TextView>(R.id.snackbar_text).apply {
-    gravity = Gravity.START or Gravity.CENTER_VERTICAL
-    compoundDrawablePadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
-    setTextColor(textColor)
-    minimumHeight = context.resources.getDimensionPixelSize(R.dimen.bpk_snackbar_min_height)
-  }
-
-  private val actionView = snackbar.view.findViewById<TextView>(R.id.snackbar_action).apply {
-    setTextColor(actionColor)
-    BpkText.getFont(context, BpkText.TextStyle.Label2).applyTo(this)
-    transformationMethod = null
-  }
-
-  private var title: CharSequence? = null
-  private var text: CharSequence? = null
-
-  fun setTitle(title: CharSequence): BpkSnackbar = apply {
-    this.title = title.toString().uppercase(context.resources.configuration.locales[0])
-    updateTitleIfShown(isShown)
-  }
-
-  fun setText(message: CharSequence): BpkSnackbar = apply {
-    this.text = message
-    updateTitleIfShown(isShown)
-  }
-
-  fun setIcon(icon: Drawable?): BpkSnackbar = apply {
-    textView.setCompoundDrawablesRelative(createIconDrawable(icon, textColor), null, null, null)
-  }
-
-  fun setIcon(@DrawableRes icon: Int): BpkSnackbar =
-    setIcon(AppCompatResources.getDrawable(context, icon))
-
-  fun setText(@StringRes resId: Int): BpkSnackbar =
-    setText(context.getString(resId))
-
-  fun setAction(text: CharSequence, listener: View.OnClickListener): BpkSnackbar = apply {
-    setActionInternal(text = text, icon = null, callback = listener, contentDescription = null)
-  }
-
-  fun setAction(@StringRes resId: Int, listener: View.OnClickListener): BpkSnackbar = apply {
-    return setAction(context.getText(resId), listener)
-  }
-
-  fun setAction(@DrawableRes resId: Int, contentDescription: String, listener: View.OnClickListener): BpkSnackbar = apply {
-    return setAction(AppCompatResources.getDrawable(context, resId)!!, contentDescription, listener)
-  }
-
-  fun setAction(icon: Drawable, contentDescription: String, listener: View.OnClickListener): BpkSnackbar = apply {
-    setActionInternal(text = null, icon = icon, callback = listener, contentDescription = contentDescription)
-  }
-
-  val duration: Int
-    get() = snackbar.duration
-
-  /**
-   * @param duration one of the [LENGTH_SHORT], [LENGTH_LONG], [LENGTH_INDEFINITE]
-   */
-  fun setDuration(duration: Int): BpkSnackbar = apply {
-    snackbar.duration = duration
-  }
-
-  val isShown: Boolean
-    get() = snackbar.isShown
-
-  fun show() =
-    snackbar
-      .show()
-      .also { updateTitleIfShown(true) }
-
-  fun dismiss() =
-    snackbar.dismiss()
-
-  fun addCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
-    callback?.let(callbacks::add)
-  }
-
-  fun setOnDismissed(ignoreDismissAfterAction: Boolean = true, callback: () -> Unit) =
-    addCallback(
-      object : Callback() {
-        override fun onDismissed(transientBottomBar: BpkSnackbar?, event: Int) {
-          super.onDismissed(transientBottomBar, event)
-          if (ignoreDismissAfterAction && event == DISMISS_EVENT_ACTION) return
-          callback()
-        }
-      },
-    )
-
-  fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
-    callbacks.remove(callback)
-  }
-
-  val behaviour: BaseTransientBottomBar.Behavior?
-    get() = snackbar.behavior
-
-  fun setBehaviour(behavior: BaseTransientBottomBar.Behavior?): BpkSnackbar = apply {
-    snackbar.behavior = behavior
-  }
-
-  /**
-   * Provides access to internal [Snackbar] instance.
-   * This method should only be used for accessing properties and methods
-   * that [BpkSnackbar] does not have.
-   *
-   * Neither of [Snackbar.setAction], [Snackbar.setActionTextColor], [Snackbar.setText]
-   * should be used with the instance.
-   */
-  val rawSnackbar: Snackbar =
-    snackbar
-
-  private fun updateTitleIfShown(isShown: Boolean) {
-    if (isShown) {
-      val ssb = SpannableStringBuilder()
-      title?.let {
-        ssb.append(customiseText(it, titleFontSpan))
-        ssb.append(" ")
-      }
-      text?.let {
-        ssb.append(customiseText(it, textFontSpan))
-      }
-      snackbar.setText(ssb)
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    callbacks.forEach { it.onDismissed(this@BpkSnackbar, event) }
+                }
+            },
+        )
     }
-  }
 
-  private fun setActionInternal(
-    text: CharSequence?,
-    icon: Drawable?,
-    contentDescription: String?,
-    callback: View.OnClickListener,
-  ) {
-    actionView.gravity = when {
-      icon != null -> Gravity.CENTER
-      else -> Gravity.START or Gravity.CENTER_VERTICAL
+    private val titleFontSpan = BpkFontSpan(context, BpkText.TextStyle.Label2)
+    private val textFontSpan = BpkFontSpan(context, BpkText.TextStyle.Footnote)
+
+    private val textView = snackbar.view.findViewById<TextView>(R.id.snackbar_text).apply {
+        gravity = Gravity.START or Gravity.CENTER_VERTICAL
+        compoundDrawablePadding = context.resources.getDimensionPixelSize(R.dimen.bpkSpacingMd)
+        setTextColor(textColor)
+        minimumHeight = context.resources.getDimensionPixelSize(R.dimen.bpk_snackbar_min_height)
     }
-    snackbar.setAction(
-      when {
-        !text.isNullOrEmpty() -> text
-        icon != null -> customiseText(contentDescription ?: " ", ImageSpan(createIconDrawable(icon, textColor)!!))
-        else -> ""
-      },
-      callback,
-    )
-  }
 
-  companion object {
+    private val actionView = snackbar.view.findViewById<TextView>(R.id.snackbar_action).apply {
+        setTextColor(actionColor)
+        BpkText.getFont(context, BpkText.TextStyle.Label2).applyTo(this)
+        transformationMethod = null
+    }
 
-    const val LENGTH_INDEFINITE = Snackbar.LENGTH_INDEFINITE
+    private var title: CharSequence? = null
+    private var text: CharSequence? = null
 
-    const val LENGTH_SHORT = Snackbar.LENGTH_SHORT
+    fun setTitle(title: CharSequence): BpkSnackbar = apply {
+        this.title = title.toString().uppercase(context.resources.configuration.locales[0])
+        updateTitleIfShown(isShown)
+    }
 
-    const val LENGTH_LONG = Snackbar.LENGTH_LONG
+    fun setText(message: CharSequence): BpkSnackbar = apply {
+        this.text = message
+        updateTitleIfShown(isShown)
+    }
 
-    private const val LENGTH_SCREENREADER = 30 * 1000 // 30 seconds
+    fun setIcon(icon: Drawable?): BpkSnackbar = apply {
+        textView.setCompoundDrawablesRelative(createIconDrawable(icon, textColor), null, null, null)
+    }
+
+    fun setIcon(@DrawableRes icon: Int): BpkSnackbar =
+        setIcon(AppCompatResources.getDrawable(context, icon))
+
+    fun setText(@StringRes resId: Int): BpkSnackbar =
+        setText(context.getString(resId))
+
+    fun setAction(text: CharSequence, listener: View.OnClickListener): BpkSnackbar = apply {
+        setActionInternal(text = text, icon = null, callback = listener, contentDescription = null)
+    }
+
+    fun setAction(@StringRes resId: Int, listener: View.OnClickListener): BpkSnackbar = apply {
+        return setAction(context.getText(resId), listener)
+    }
+
+    fun setAction(@DrawableRes resId: Int, contentDescription: String, listener: View.OnClickListener): BpkSnackbar = apply {
+        return setAction(AppCompatResources.getDrawable(context, resId)!!, contentDescription, listener)
+    }
+
+    fun setAction(icon: Drawable, contentDescription: String, listener: View.OnClickListener): BpkSnackbar = apply {
+        setActionInternal(text = null, icon = icon, callback = listener, contentDescription = contentDescription)
+    }
+
+    val duration: Int
+        get() = snackbar.duration
 
     /**
-     * Creates a new [Snackbar] instance using the given [text] and [duration].
-     * [view] is used for accessing the themed context and hierarchy, to decide where to render the [Snackbar]
-     *
-     * @param view the view to render the snackbar
-     * @param text the snackbar message
-     * @param duration the snackbar duration
-     *
-     * @see [BpkSnackbar.LENGTH_INDEFINITE]
-     * @see [BpkSnackbar.LENGTH_SHORT]
-     * @see [BpkSnackbar.LENGTH_LONG]
+     * @param duration one of the [LENGTH_SHORT], [LENGTH_LONG], [LENGTH_INDEFINITE]
      */
-    @SuppressLint("Recycle")
-    @JvmStatic
-    fun make(view: View, text: CharSequence, duration: Int): BpkSnackbar {
-      val context = view.context
+    fun setDuration(duration: Int): BpkSnackbar = apply {
+        snackbar.duration = duration
+    }
 
-      @ColorInt var textColor = context.getColor(R.color.bpkTextOnDark)
-      @ColorInt var actionColor = context.getColor(R.color.bpkTextOnDark)
-      @ColorInt var backgroundColor = context.getColor(R.color.bpkCorePrimary)
+    val isShown: Boolean
+        get() = snackbar.isShown
 
-      val outValue = TypedValue()
-      context.theme.resolveAttribute(R.attr.bpkSnackbarStyle, outValue, true)
+    fun show() =
+        snackbar
+            .show()
+            .also { updateTitleIfShown(true) }
 
-      context.obtainStyledAttributes(outValue.resourceId, R.styleable.BpkSnackbar).use {
-        textColor = it.getColor(R.styleable.BpkSnackbar_snackbarTextColor, textColor)
-        actionColor = it.getColor(R.styleable.BpkSnackbar_snackbarActionColor, actionColor)
-        backgroundColor = it.getColor(R.styleable.BpkSnackbar_snackbarBackgroundColor, backgroundColor)
-      }
+    fun dismiss() =
+        snackbar.dismiss()
 
-      val adjustedDuration = if (duration != LENGTH_INDEFINITE && context.isScreenReaderOn()) {
-        LENGTH_SCREENREADER
-      } else {
-        duration
-      }
+    fun addCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
+        callback?.let(callbacks::add)
+    }
 
-      return BpkSnackbar(
-        context = context,
-        view = view,
-        duration = adjustedDuration,
-        textColor = textColor,
-        actionColor = actionColor,
-        backgroundColor = backgroundColor,
-      )
-        .setText(text)
+    fun setOnDismissed(ignoreDismissAfterAction: Boolean = true, callback: () -> Unit) =
+        addCallback(
+            object : Callback() {
+                override fun onDismissed(transientBottomBar: BpkSnackbar?, event: Int) {
+                    super.onDismissed(transientBottomBar, event)
+                    if (ignoreDismissAfterAction && event == DISMISS_EVENT_ACTION) return
+                    callback()
+                }
+            },
+        )
+
+    fun removeCallback(callback: BaseTransientBottomBar.BaseCallback<BpkSnackbar>?): BpkSnackbar = apply {
+        callbacks.remove(callback)
+    }
+
+    val behaviour: BaseTransientBottomBar.Behavior?
+        get() = snackbar.behavior
+
+    fun setBehaviour(behavior: BaseTransientBottomBar.Behavior?): BpkSnackbar = apply {
+        snackbar.behavior = behavior
     }
 
     /**
-     * Creates a new [Snackbar] instance using the given [text] and [duration].
-     * [view] is used for accessing the themed context and hierarchy, to decide where to render the [Snackbar]
+     * Provides access to internal [Snackbar] instance.
+     * This method should only be used for accessing properties and methods
+     * that [BpkSnackbar] does not have.
      *
-     * @param view the view to render the snackbar
-     * @param text the snackbar message
-     * @param duration the snackbar duration
-     *
-     * @see [BpkSnackbar.LENGTH_INDEFINITE]
-     * @see [BpkSnackbar.LENGTH_SHORT]
-     * @see [BpkSnackbar.LENGTH_LONG]
+     * Neither of [Snackbar.setAction], [Snackbar.setActionTextColor], [Snackbar.setText]
+     * should be used with the instance.
      */
-    @JvmStatic
-    fun make(view: View, @StringRes text: Int, duration: Int) =
-      make(view, view.resources.getString(text), duration)
-  }
+    val rawSnackbar: Snackbar =
+        snackbar
 
-  abstract class Callback : BaseTransientBottomBar.BaseCallback<BpkSnackbar>()
+    private fun updateTitleIfShown(isShown: Boolean) {
+        if (isShown) {
+            val ssb = SpannableStringBuilder()
+            title?.let {
+                ssb.append(customiseText(it, titleFontSpan))
+                ssb.append(" ")
+            }
+            text?.let {
+                ssb.append(customiseText(it, textFontSpan))
+            }
+            snackbar.setText(ssb)
+        }
+    }
+
+    private fun setActionInternal(
+        text: CharSequence?,
+        icon: Drawable?,
+        contentDescription: String?,
+        callback: View.OnClickListener,
+    ) {
+        actionView.gravity = when {
+            icon != null -> Gravity.CENTER
+            else -> Gravity.START or Gravity.CENTER_VERTICAL
+        }
+        snackbar.setAction(
+            when {
+                !text.isNullOrEmpty() -> text
+                icon != null -> customiseText(contentDescription ?: " ", ImageSpan(createIconDrawable(icon, textColor)!!))
+                else -> ""
+            },
+            callback,
+        )
+    }
+
+    companion object {
+
+        const val LENGTH_INDEFINITE = Snackbar.LENGTH_INDEFINITE
+
+        const val LENGTH_SHORT = Snackbar.LENGTH_SHORT
+
+        const val LENGTH_LONG = Snackbar.LENGTH_LONG
+
+        private const val LENGTH_SCREENREADER = 30 * 1000 // 30 seconds
+
+        /**
+         * Creates a new [Snackbar] instance using the given [text] and [duration].
+         * [view] is used for accessing the themed context and hierarchy, to decide where to render the [Snackbar]
+         *
+         * @param view the view to render the snackbar
+         * @param text the snackbar message
+         * @param duration the snackbar duration
+         *
+         * @see [BpkSnackbar.LENGTH_INDEFINITE]
+         * @see [BpkSnackbar.LENGTH_SHORT]
+         * @see [BpkSnackbar.LENGTH_LONG]
+         */
+        @SuppressLint("Recycle")
+        @JvmStatic
+        fun make(view: View, text: CharSequence, duration: Int): BpkSnackbar {
+            val context = view.context
+
+            @ColorInt var textColor = context.getColor(R.color.bpkTextOnDark)
+            @ColorInt var actionColor = context.getColor(R.color.bpkTextOnDark)
+            @ColorInt var backgroundColor = context.getColor(R.color.bpkCorePrimary)
+
+            val outValue = TypedValue()
+            context.theme.resolveAttribute(R.attr.bpkSnackbarStyle, outValue, true)
+
+            context.obtainStyledAttributes(outValue.resourceId, R.styleable.BpkSnackbar).use {
+                textColor = it.getColor(R.styleable.BpkSnackbar_snackbarTextColor, textColor)
+                actionColor = it.getColor(R.styleable.BpkSnackbar_snackbarActionColor, actionColor)
+                backgroundColor = it.getColor(R.styleable.BpkSnackbar_snackbarBackgroundColor, backgroundColor)
+            }
+
+            val adjustedDuration = if (duration != LENGTH_INDEFINITE && context.isScreenReaderOn()) {
+                LENGTH_SCREENREADER
+            } else {
+                duration
+            }
+
+            return BpkSnackbar(
+                context = context,
+                view = view,
+                duration = adjustedDuration,
+                textColor = textColor,
+                actionColor = actionColor,
+                backgroundColor = backgroundColor,
+            )
+                .setText(text)
+        }
+
+        /**
+         * Creates a new [Snackbar] instance using the given [text] and [duration].
+         * [view] is used for accessing the themed context and hierarchy, to decide where to render the [Snackbar]
+         *
+         * @param view the view to render the snackbar
+         * @param text the snackbar message
+         * @param duration the snackbar duration
+         *
+         * @see [BpkSnackbar.LENGTH_INDEFINITE]
+         * @see [BpkSnackbar.LENGTH_SHORT]
+         * @see [BpkSnackbar.LENGTH_LONG]
+         */
+        @JvmStatic
+        fun make(view: View, @StringRes text: Int, duration: Int) =
+            make(view, view.resources.getString(text), duration)
+    }
+
+    abstract class Callback : BaseTransientBottomBar.BaseCallback<BpkSnackbar>()
 }

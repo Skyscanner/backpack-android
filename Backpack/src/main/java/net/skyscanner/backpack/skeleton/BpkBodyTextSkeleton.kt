@@ -26,22 +26,22 @@ import androidx.annotation.AttrRes
 import net.skyscanner.backpack.R
 
 class BpkBodyTextSkeleton @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  @AttrRes defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    @AttrRes defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-  init {
-    inflate(this.context, R.layout.view_bpk_skeleton_body_text, this)
+    init {
+        inflate(this.context, R.layout.view_bpk_skeleton_body_text, this)
 
-    initSubBlock(findViewById(R.id.firstLine))
-    initSubBlock(findViewById(R.id.secondLine))
-    initSubBlock(findViewById(R.id.thirdLine))
-  }
-
-  private fun initSubBlock(view: View) {
-    view.apply {
-      setBackgroundResource(R.drawable.bpk_skeleton_bg)
+        initSubBlock(findViewById(R.id.firstLine))
+        initSubBlock(findViewById(R.id.secondLine))
+        initSubBlock(findViewById(R.id.thirdLine))
     }
-  }
+
+    private fun initSubBlock(view: View) {
+        view.apply {
+            setBackgroundResource(R.drawable.bpk_skeleton_bg)
+        }
+    }
 }

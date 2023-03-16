@@ -31,78 +31,78 @@ import kotlin.math.max
 import kotlin.math.min
 
 open class BpkNudger @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : LinearLayoutCompat(context, attrs, defStyleAttr) {
 
-  private val decrementButton by unsafeLazy<View> {
-    findViewById(R.id.bpk_nudger_decrement)
-  }
-
-  private val incrementButton by unsafeLazy<View> {
-    findViewById(R.id.bpk_nudger_increment)
-  }
-
-  private val label by unsafeLazy<TextView> {
-    findViewById(R.id.bpk_nudger_label)
-  }
-
-  var value: Int = 0
-    set(value) {
-      if (field != value) {
-        field = value.coerceIn(minValue, maxValue)
-        update()
-      }
+    private val decrementButton by unsafeLazy<View> {
+        findViewById(R.id.bpk_nudger_decrement)
     }
 
-  var minValue: Int = 0
-    set(value) {
-      if (value > maxValue) {
-        throw IllegalArgumentException("Cannot set minValue $value when maxValue is $maxValue")
-      }
-      field = value
-      this.value = max(this.value, value)
-      update()
+    private val incrementButton by unsafeLazy<View> {
+        findViewById(R.id.bpk_nudger_increment)
     }
 
-  var maxValue: Int = 100
-    set(value) {
-      if (value < minValue) {
-        throw IllegalArgumentException("Cannot set maxValue $value when minValue is $minValue")
-      }
-      field = value
-      this.value = min(this.value, value)
-      update()
+    private val label by unsafeLazy<TextView> {
+        findViewById(R.id.bpk_nudger_label)
     }
 
-  var onChangeListener: ((Int) -> Unit)? = null
+    var value: Int = 0
+        set(value) {
+            if (field != value) {
+                field = value.coerceIn(minValue, maxValue)
+                update()
+            }
+        }
 
-  init {
-    LayoutInflater.from(context).inflate(R.layout.view_bpk_nudger, this, true)
-    context.theme.obtainStyledAttributes(
-      attrs,
-      R.styleable.BpkNudger,
-      defStyleAttr, 0,
-    ).use {
-      minValue = it.getInt(R.styleable.BpkNudger_nudgerMinValue, minValue)
-      maxValue = it.getInt(R.styleable.BpkNudger_nudgerMaxValue, maxValue)
-      value = it.getInt(R.styleable.BpkNudger_nudgerValue, value)
+    var minValue: Int = 0
+        set(value) {
+            if (value > maxValue) {
+                throw IllegalArgumentException("Cannot set minValue $value when maxValue is $maxValue")
+            }
+            field = value
+            this.value = max(this.value, value)
+            update()
+        }
+
+    var maxValue: Int = 100
+        set(value) {
+            if (value < minValue) {
+                throw IllegalArgumentException("Cannot set maxValue $value when minValue is $minValue")
+            }
+            field = value
+            this.value = min(this.value, value)
+            update()
+        }
+
+    var onChangeListener: ((Int) -> Unit)? = null
+
+    init {
+        LayoutInflater.from(context).inflate(R.layout.view_bpk_nudger, this, true)
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.BpkNudger,
+            defStyleAttr, 0,
+        ).use {
+            minValue = it.getInt(R.styleable.BpkNudger_nudgerMinValue, minValue)
+            maxValue = it.getInt(R.styleable.BpkNudger_nudgerMaxValue, maxValue)
+            value = it.getInt(R.styleable.BpkNudger_nudgerValue, value)
+        }
+
+        decrementButton.setOnClickListener {
+            value--
+            onChangeListener?.invoke(value)
+        }
+        incrementButton.setOnClickListener {
+            value++
+            onChangeListener?.invoke(value)
+        }
     }
 
-    decrementButton.setOnClickListener {
-      value--
-      onChangeListener?.invoke(value)
+    private fun update() {
+        decrementButton.isEnabled = value > minValue
+        incrementButton.isEnabled = value < maxValue
+        label.text = value.toString()
     }
-    incrementButton.setOnClickListener {
-      value++
-      onChangeListener?.invoke(value)
-    }
-  }
-
-  private fun update() {
-    decrementButton.isEnabled = value > minValue
-    incrementButton.isEnabled = value < maxValue
-    label.text = value.toString()
-  }
 }

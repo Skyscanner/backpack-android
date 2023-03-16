@@ -27,13 +27,13 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
 fun BpkDivider(
-  modifier: Modifier = Modifier,
-  startIndent: Dp = 0.dp,
+    modifier: Modifier = Modifier,
+    startIndent: Dp = 0.dp,
 ) {
-  Divider(
-    modifier = modifier,
-    color = BpkTheme.colors.line,
-    thickness = 1.dp,
-    startIndent = startIndent,
-  )
+    Divider(
+        modifier = modifier,
+        color = BpkTheme.colors.line,
+        thickness = 1.dp,
+        startIndent = startIndent,
+    )
 }

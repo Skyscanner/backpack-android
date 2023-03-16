@@ -22,21 +22,21 @@ import android.content.res.ColorStateList
 import androidx.annotation.ColorInt
 
 internal fun ColorStateList.getColorForState(state: IntArray) =
-  getColorForState(state, defaultColor)
+    getColorForState(state, defaultColor)
 
 internal fun colorStateList(
-  @ColorInt color: Int,
-  @ColorInt pressedColor: Int = color,
-  @ColorInt focusedColor: Int = pressedColor,
-  @ColorInt activatedColor: Int = pressedColor,
-  @ColorInt disabledColor: Int,
+    @ColorInt color: Int,
+    @ColorInt pressedColor: Int = color,
+    @ColorInt focusedColor: Int = pressedColor,
+    @ColorInt activatedColor: Int = pressedColor,
+    @ColorInt disabledColor: Int,
 ) = ColorStateList(
-  arrayOf(
-    intArrayOf(-android.R.attr.state_enabled),
-    intArrayOf(android.R.attr.state_pressed),
-    intArrayOf(android.R.attr.state_focused),
-    intArrayOf(android.R.attr.state_activated),
-    intArrayOf(),
-  ),
-  intArrayOf(disabledColor, pressedColor, focusedColor, activatedColor, color),
+    arrayOf(
+        intArrayOf(-android.R.attr.state_enabled),
+        intArrayOf(android.R.attr.state_pressed),
+        intArrayOf(android.R.attr.state_focused),
+        intArrayOf(android.R.attr.state_activated),
+        intArrayOf(),
+    ),
+    intArrayOf(disabledColor, pressedColor, focusedColor, activatedColor, color),
 )

@@ -26,43 +26,43 @@ import net.skyscanner.backpack.button.BpkButton
 import net.skyscanner.backpack.text.BpkText
 
 internal fun BpkButton.Size.Companion.fromAttrs(context: Context, attrs: AttributeSet?): BpkButton.Size {
-  val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkBaseButton, 0, 0)
-  return when (attr.getInt(R.styleable.BpkBaseButton_bpkButtonSize, 0)) {
-    0 -> BpkButton.Size.Standard
-    1 -> BpkButton.Size.Large
-    else -> throw IllegalArgumentException()
-  }
+    val attr = context.theme.obtainStyledAttributes(attrs, R.styleable.BpkBaseButton, 0, 0)
+    return when (attr.getInt(R.styleable.BpkBaseButton_bpkButtonSize, 0)) {
+        0 -> BpkButton.Size.Standard
+        1 -> BpkButton.Size.Large
+        else -> throw IllegalArgumentException()
+    }
 }
 
 internal val BpkButton.Size.textStyle: BpkText.TextStyle
-  get() =
-    when (this) {
-      BpkButton.Size.Standard -> BpkText.TextStyle.Label2
-      BpkButton.Size.Large -> BpkText.TextStyle.Label1
-    }
+    get() =
+        when (this) {
+            BpkButton.Size.Standard -> BpkText.TextStyle.Label2
+            BpkButton.Size.Large -> BpkText.TextStyle.Label1
+        }
 
 @get:DimenRes
 internal val BpkButton.Size.iconSize: Int
-  get() =
-    when (this) {
-      BpkButton.Size.Standard -> R.dimen.bpkSpacingBase
-      BpkButton.Size.Large -> R.dimen.bpkSpacingLg
-    }
+    get() =
+        when (this) {
+            BpkButton.Size.Standard -> R.dimen.bpkSpacingBase
+            BpkButton.Size.Large -> R.dimen.bpkSpacingLg
+        }
 
 @get:DimenRes
 internal val BpkButton.Size.minHeight: Int
-  get() =
-    when (this) {
-      BpkButton.Size.Standard -> R.dimen.bpk_button_default_height
-      BpkButton.Size.Large -> R.dimen.bpk_button_large_height
-    }
+    get() =
+        when (this) {
+            BpkButton.Size.Standard -> R.dimen.bpk_button_default_height
+            BpkButton.Size.Large -> R.dimen.bpk_button_large_height
+        }
 
 @get:DimenRes
 internal val BpkButton.Size.horizontalPadding: Int
-  get() =
-    R.dimen.bpkSpacingBase
+    get() =
+        R.dimen.bpkSpacingBase
 
 @get:DimenRes
 internal val BpkButton.Size.horizontalSpacing: Int
-  get() =
-    R.dimen.bpkSpacingMd
+    get() =
+        R.dimen.bpkSpacingMd

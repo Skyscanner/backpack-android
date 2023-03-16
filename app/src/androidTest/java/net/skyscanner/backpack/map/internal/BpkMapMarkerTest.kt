@@ -34,57 +34,57 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkMapMarkerTest : BpkSnapshotTest() {
 
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
+    @get:Rule
+    val rule = activityScenarioRule<AppCompatActivity>()
 
-  @Test
-  fun default() {
-    val view = createMarker(0, true)
-    snap(view)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun selected() {
-    val view = createMarker(0, true)
-    view.isSelected = true
-    snap(view)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun noPointer() {
-    val view = createMarker(0, false)
-    snap(view)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
-  fun withIcon() {
-    val view = createMarker(R.drawable.bpk_map, true)
-    snap(view)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun withIcon_Selected() {
-    val view = createMarker(R.drawable.bpk_map, true)
-    view.isSelected = true
-    snap(view)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun withIcon_NoPointer() {
-    val view = createMarker(R.drawable.bpk_map, false)
-    snap(view)
-  }
-
-  private fun createMarker(@DrawableRes icon: Int, showPointer: Boolean): View {
-    var view: View? = null
-    rule.scenario.onActivity { activity ->
-      view = BpkMapMarkersTestBridge.create(activity, "Title", icon, showPointer)
+    @Test
+    fun default() {
+        val view = createMarker(0, true)
+        snap(view)
     }
-    return view!!
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun selected() {
+        val view = createMarker(0, true)
+        view.isSelected = true
+        snap(view)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noPointer() {
+        val view = createMarker(0, false)
+        snap(view)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Rtl)
+    fun withIcon() {
+        val view = createMarker(R.drawable.bpk_map, true)
+        snap(view)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun withIcon_Selected() {
+        val view = createMarker(R.drawable.bpk_map, true)
+        view.isSelected = true
+        snap(view)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun withIcon_NoPointer() {
+        val view = createMarker(R.drawable.bpk_map, false)
+        snap(view)
+    }
+
+    private fun createMarker(@DrawableRes icon: Int, showPointer: Boolean): View {
+        var view: View? = null
+        rule.scenario.onActivity { activity ->
+            view = BpkMapMarkersTestBridge.create(activity, "Title", icon, showPointer)
+        }
+        return view!!
+    }
 }

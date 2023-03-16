@@ -28,42 +28,42 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkCheckboxTests : BpkSnapshotTest() {
 
-  private val checkbox = BpkCheckbox(testContext).apply {
-    text = "Checkbox"
-  }
+    private val checkbox = BpkCheckbox(testContext).apply {
+        text = "Checkbox"
+    }
 
-  @Test
-  fun default() {
-    snap(checkbox)
-  }
+    @Test
+    fun default() {
+        snap(checkbox)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun unchecked() {
-    checkbox.isChecked = false
-    snap(checkbox)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun unchecked() {
+        checkbox.isChecked = false
+        snap(checkbox)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun checked() {
-    checkbox.isChecked = true
-    snap(checkbox)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun checked() {
+        checkbox.isChecked = true
+        snap(checkbox)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun disabledUnchecked() {
-    checkbox.isEnabled = false
-    checkbox.isChecked = false
-    snap(checkbox)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun disabledUnchecked() {
+        checkbox.isEnabled = false
+        checkbox.isChecked = false
+        snap(checkbox)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun disabledChecked() {
-    checkbox.isEnabled = false
-    checkbox.isChecked = true
-    snap(checkbox)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun disabledChecked() {
+        checkbox.isEnabled = false
+        checkbox.isChecked = true
+        snap(checkbox)
+    }
 }

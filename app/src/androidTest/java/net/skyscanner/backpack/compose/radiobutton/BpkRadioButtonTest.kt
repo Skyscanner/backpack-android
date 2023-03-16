@@ -33,40 +33,40 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkRadioButtonTest : BpkSnapshotTest() {
 
-  @Test
-  fun defaultUnchecked() = snap {
-    DefaultUncheckedRadioButtonExample()
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun defaultChecked() {
-    snap {
-      DefaultCheckedRadioButtonExample()
+    @Test
+    fun defaultUnchecked() = snap {
+        DefaultUncheckedRadioButtonExample()
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabledUnchecked() {
-    snap {
-      DisabledUnCheckedRadioButtonExample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun defaultChecked() {
+        snap {
+            DefaultCheckedRadioButtonExample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabledChecked() {
-    snap {
-      DisabledCheckedRadioButtonExample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabledUnchecked() {
+        snap {
+            DisabledUnCheckedRadioButtonExample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun customContent() {
-    snap {
-      CustomContentRadioButtonExample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabledChecked() {
+        snap {
+            DisabledCheckedRadioButtonExample()
+        }
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun customContent() {
+        snap {
+            CustomContentRadioButtonExample()
+        }
+    }
 }

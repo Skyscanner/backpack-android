@@ -31,49 +31,49 @@ internal const val ICON_POSITION_END = 1
 internal const val ICON_POSITION_ICON_ONLY = 2
 
 abstract class BpkButtonBase internal constructor(
-  context: Context,
-  attrs: AttributeSet?,
-  defStyleAttr: Int,
+    context: Context,
+    attrs: AttributeSet?,
+    defStyleAttr: Int,
 ) : MaterialButton(context, attrs, defStyleAttr) {
 
-  internal var iconDrawablePosition: Int = ICON_POSITION_END
-    set(value) {
-      field = value
-      iconGravity = when (value) {
-        ICON_POSITION_START -> ICON_GRAVITY_TEXT_START
-        else -> ICON_GRAVITY_TEXT_END
-      }
-      if (value == ICON_POSITION_ICON_ONLY) {
-        text = ""
-      }
+    internal var iconDrawablePosition: Int = ICON_POSITION_END
+        set(value) {
+            field = value
+            iconGravity = when (value) {
+                ICON_POSITION_START -> ICON_GRAVITY_TEXT_START
+                else -> ICON_GRAVITY_TEXT_END
+            }
+            if (value == ICON_POSITION_ICON_ONLY) {
+                text = ""
+            }
+        }
+
+    abstract var iconPosition: Int
+
+    override fun setText(text: CharSequence, type: BufferType) {
+        if (iconDrawablePosition == ICON_POSITION_ICON_ONLY) {
+            super.setText("", type)
+        } else {
+            super.setText(text, type)
+        }
     }
 
-  abstract var iconPosition: Int
-
-  override fun setText(text: CharSequence, type: BufferType) {
-    if (iconDrawablePosition == ICON_POSITION_ICON_ONLY) {
-      super.setText("", type)
-    } else {
-      super.setText(text, type)
+    override fun setTextColor(color: Int) {
+        super.setTextColor(color)
+        iconTint = ColorStateList.valueOf(color)
     }
-  }
 
-  override fun setTextColor(color: Int) {
-    super.setTextColor(color)
-    iconTint = ColorStateList.valueOf(color)
-  }
+    override fun setTextColor(colors: ColorStateList) {
+        super.setTextColor(colors)
+        iconTint = colors
+    }
 
-  override fun setTextColor(colors: ColorStateList) {
-    super.setTextColor(colors)
-    iconTint = colors
-  }
-
-  init {
-    maxLines = 1
-    gravity = Gravity.CENTER
-    ellipsize = TextUtils.TruncateAt.END
-    isClickable = isEnabled
-    iconSize = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
-    backgroundTintList = null
-  }
+    init {
+        maxLines = 1
+        gravity = Gravity.CENTER
+        ellipsize = TextUtils.TruncateAt.END
+        isClickable = isEnabled
+        iconSize = resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+        backgroundTintList = null
+    }
 }

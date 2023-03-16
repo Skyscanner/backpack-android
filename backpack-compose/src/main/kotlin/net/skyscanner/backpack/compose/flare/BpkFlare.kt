@@ -33,43 +33,43 @@ import net.skyscanner.backpack.compose.flare.internal.FlareRectShape
 import net.skyscanner.backpack.compose.flare.internal.FlareShape
 
 enum class BpkFlareRadius {
-  None,
-  Medium,
+    None,
+    Medium,
 }
 
 enum class BpkFlarePointerDirection {
-  Up,
-  Down,
+    Up,
+    Down,
 }
 
 @Composable
 fun BpkFlare(
-  modifier: Modifier = Modifier,
-  radius: BpkFlareRadius = BpkFlareRadius.None,
-  pointerDirection: BpkFlarePointerDirection = BpkFlarePointerDirection.Down,
-  background: Color = Color.Unspecified,
-  insetContent: Boolean = false,
-  contentAlignment: Alignment = Alignment.TopStart,
-  propagateMinConstraints: Boolean = true,
-  content: @Composable BoxScope.() -> Unit,
+    modifier: Modifier = Modifier,
+    radius: BpkFlareRadius = BpkFlareRadius.None,
+    pointerDirection: BpkFlarePointerDirection = BpkFlarePointerDirection.Down,
+    background: Color = Color.Unspecified,
+    insetContent: Boolean = false,
+    contentAlignment: Alignment = Alignment.TopStart,
+    propagateMinConstraints: Boolean = true,
+    content: @Composable BoxScope.() -> Unit,
 ) {
-  Box(
-    modifier = modifier
-      .clip(FlareRectShape(radius)) // this exists to improve anti-aliasing on < sdk 30. remove when dropping support
-      .clip(FlareShape(radius, pointerDirection))
-      .background(background)
-      .padding(
-        top = when (pointerDirection) {
-          BpkFlarePointerDirection.Up -> FlareContentPadding(insetContent)
-          BpkFlarePointerDirection.Down -> 0.dp
-        },
-        bottom = when (pointerDirection) {
-          BpkFlarePointerDirection.Up -> 0.dp
-          BpkFlarePointerDirection.Down -> FlareContentPadding(insetContent)
-        },
-      ),
-    propagateMinConstraints = propagateMinConstraints,
-    contentAlignment = contentAlignment,
-    content = content,
-  )
+    Box(
+        modifier = modifier
+            .clip(FlareRectShape(radius)) // this exists to improve anti-aliasing on < sdk 30. remove when dropping support
+            .clip(FlareShape(radius, pointerDirection))
+            .background(background)
+            .padding(
+                top = when (pointerDirection) {
+                    BpkFlarePointerDirection.Up -> FlareContentPadding(insetContent)
+                    BpkFlarePointerDirection.Down -> 0.dp
+                },
+                bottom = when (pointerDirection) {
+                    BpkFlarePointerDirection.Up -> 0.dp
+                    BpkFlarePointerDirection.Down -> FlareContentPadding(insetContent)
+                },
+            ),
+        propagateMinConstraints = propagateMinConstraints,
+        contentAlignment = contentAlignment,
+        content = content,
+    )
 }

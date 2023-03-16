@@ -30,42 +30,42 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkTextFieldTests : BpkSnapshotTest() {
 
-  private val subject = BpkTextField(testContext).also(::init)
+    private val subject = BpkTextField(testContext).also(::init)
 
-  private fun init(it: BpkTextField) {
-    it.hint = "Hint"
-    it.setText("Text")
-  }
+    private fun init(it: BpkTextField) {
+        it.hint = "Hint"
+        it.setText("Text")
+    }
 
-  @Test
-  fun default() {
-    snap(subject)
-  }
+    @Test
+    fun default() {
+        snap(subject)
+    }
 
-  @Test
-  fun hint() {
-    subject.setText("")
-    snap(subject)
-  }
+    @Test
+    fun hint() {
+        subject.setText("")
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
-  fun disabled() {
-    subject.isEnabled = false
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode, BpkTestVariant.Themed)
+    fun disabled() {
+        subject.isEnabled = false
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun iconStart() {
-    subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun iconStart() {
+        subject.iconStart = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun iconEnd() {
-    subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun iconEnd() {
+        subject.iconEnd = AppCompatResources.getDrawable(testContext, R.drawable.bpk_search)
+        snap(subject)
+    }
 }

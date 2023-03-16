@@ -32,48 +32,48 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkNudgerTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    NudgerExample(initialValue = NudgerStoryAvg)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun disabled() {
-    snap {
-      NudgerExample(initialValue = NudgerStoryAvg, enabled = false)
+    @Test
+    fun default() = snap {
+        NudgerExample(initialValue = NudgerStoryAvg)
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun minusDisabled() {
-    snap {
-      NudgerExample(initialValue = NudgerStoryMin)
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun disabled() {
+        snap {
+            NudgerExample(initialValue = NudgerStoryAvg, enabled = false)
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun plusDisabled() {
-    snap {
-      NudgerExample(initialValue = NudgerStoryMax)
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun minusDisabled() {
+        snap {
+            NudgerExample(initialValue = NudgerStoryMin)
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun positiveOverflow() {
-    snap {
-      NudgerExample(initialValue = NudgerStoryMax + NudgerStoryMax)
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun plusDisabled() {
+        snap {
+            NudgerExample(initialValue = NudgerStoryMax)
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun negativeOverflow() {
-    snap {
-      NudgerExample(initialValue = NudgerStoryMin - NudgerStoryMax)
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun positiveOverflow() {
+        snap {
+            NudgerExample(initialValue = NudgerStoryMax + NudgerStoryMax)
+        }
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun negativeOverflow() {
+        snap {
+            NudgerExample(initialValue = NudgerStoryMin - NudgerStoryMax)
+        }
+    }
 }

@@ -28,66 +28,66 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkRatingValuesTest : BpkSnapshotTest() {
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun zero() {
-    val subject = createTestRating(testContext, value = 0.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun zero() {
+        val subject = createTestRating(testContext, value = 0.0f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun low() {
-    val subject = createTestRating(testContext, value = 3.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun low() {
+        val subject = createTestRating(testContext, value = 3.0f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun lowBoundary() {
-    val subject = createTestRating(testContext, value = 5.999999f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun lowBoundary() {
+        val subject = createTestRating(testContext, value = 5.999999f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun medium() {
-    val subject = createTestRating(testContext, value = 6.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun medium() {
+        val subject = createTestRating(testContext, value = 6.0f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun mediumBoundary() {
-    val subject = createTestRating(testContext, value = 7.999999f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun mediumBoundary() {
+        val subject = createTestRating(testContext, value = 7.999999f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun high() {
-    val subject = createTestRating(testContext, value = 8.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun high() {
+        val subject = createTestRating(testContext, value = 8.0f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun max() {
-    val subject = createTestRating(testContext, value = 10.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun max() {
+        val subject = createTestRating(testContext, value = 10.0f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun clampsDown() {
-    val subject = createTestRating(testContext, value = -10.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun clampsDown() {
+        val subject = createTestRating(testContext, value = -10.0f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun clampsUp() {
-    val subject = createTestRating(testContext, value = 20.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun clampsUp() {
+        val subject = createTestRating(testContext, value = 20.0f)
+        snap(subject)
+    }
 }

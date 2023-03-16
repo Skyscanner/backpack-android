@@ -29,30 +29,30 @@ import kotlin.math.roundToInt
 
 internal object ResourcesUtil {
 
-  @Dimension
-  fun dpToPx(@Dimension dp: Int, context: Context): Int {
-    return dpToPx(dp.toFloat(), context).roundToInt()
-  }
+    @Dimension
+    fun dpToPx(@Dimension dp: Int, context: Context): Int {
+        return dpToPx(dp.toFloat(), context).roundToInt()
+    }
 
-  @Dimension
-  fun dpToPx(@Dimension dp: Float, context: Context): Float {
-    return dp * context.resources.displayMetrics.density
-  }
+    @Dimension
+    fun dpToPx(@Dimension dp: Float, context: Context): Float {
+        return dp * context.resources.displayMetrics.density
+    }
 
-  @Dimension
-  fun pxToDp(px: Float, context: Context): Float {
-    return (px / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT))
-  }
+    @Dimension
+    fun pxToDp(px: Float, context: Context): Float {
+        return (px / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT))
+    }
 }
 
 @OptIn(ExperimentalContracts::class)
 internal inline fun <R> TypedArray.use(block: (TypedArray) -> R): R {
-  contract {
-    callsInPlace(block, InvocationKind.EXACTLY_ONCE)
-  }
-  try {
-    return this.let(block)
-  } finally {
-    this.recycle()
-  }
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    try {
+        return this.let(block)
+    } finally {
+        this.recycle()
+    }
 }
