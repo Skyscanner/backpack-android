@@ -18,10 +18,9 @@
 
 package net.skyscanner.backpack.docs
 
-import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import net.skyscanner.backpack.demo.BpkBaseActivity
 import net.skyscanner.backpack.demo.meta.StoriesRepository
 import net.skyscanner.backpack.demo.meta.Story
 import net.skyscanner.backpack.demo.ui.DemoScaffold
@@ -44,22 +43,23 @@ open class GenerateScreenshots(
     }
 
     @get:Rule
-    val composeTestRule = createAndroidComposeRule(BpkBaseActivity::class.java)
+    val composeTestRule = createAndroidComposeRule<AppCompatActivity>()
 
     @Test
     fun testTakeScreenshot() {
-        runActivityAndTakeScreenshot(isDarkMode = false)
+        composeTestRule.runOnUiThread { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) }
+        setScreenshotContent()
+        captureScreenshot()
     }
 
     @Test
     fun testTakeScreenshotDm() {
-        runActivityAndTakeScreenshot(isDarkMode = true)
+        composeTestRule.runOnUiThread { AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) }
+        setScreenshotContent()
+        captureScreenshot("dm")
     }
 
-    private fun runActivityAndTakeScreenshot(isDarkMode: Boolean) {
-        composeTestRule.runOnUiThread {
-            AppCompatDelegate.setDefaultNightMode(if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
-        }
+    private fun setScreenshotContent() {
         composeTestRule.setContent {
             DemoScaffold(automationMode = true) {
                 StoryScreen(
@@ -69,10 +69,10 @@ open class GenerateScreenshots(
                 )
             }
         }
-        takeScreenshot(if (isDarkMode) "dm" else null)
+        composeTestRule.waitForIdle()
     }
 
-    private fun takeScreenshot(suffix: String?) {
+    private fun captureScreenshot(suffix: String? = null) {
         RemoteScreenGrab.takeScreenshot(
             component = story.component.name.replace(" ", ""),
             type = if (story.isCompose) "compose" else "view",
