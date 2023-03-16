@@ -23,7 +23,6 @@ import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.LocalElevationOverlay
 import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -53,20 +52,16 @@ fun BpkTheme(
     val colors = if (isSystemInDarkTheme()) BpkColors.dark() else BpkColors.light()
     val shapes = BpkShapes()
 
-    MaterialTheme(
-        colors = MaterialTheme.colors.copy(isLight = colors.isLight),
-    ) {
-        CompositionLocalProvider(
-            LocalBpkTypography provides typography,
-            LocalBpkColors provides colors,
-            LocalBpkShapes provides shapes,
-            LocalContentColor provides colors.textPrimary,
-            LocalElevationOverlay provides null,
-            LocalTextStyle provides typography.bodyDefault,
-            LocalContentAlpha provides 1f,
-            content = content,
-        )
-    }
+    CompositionLocalProvider(
+        LocalBpkTypography provides typography,
+        LocalBpkColors provides colors,
+        LocalBpkShapes provides shapes,
+        LocalContentColor provides colors.textPrimary,
+        LocalElevationOverlay provides null,
+        LocalTextStyle provides typography.bodyDefault,
+        LocalContentAlpha provides 1f,
+        content = content,
+    )
 }
 
 object BpkTheme {
