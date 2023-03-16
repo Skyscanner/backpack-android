@@ -59,9 +59,7 @@ internal fun BpkFloatingNotificationImpl(
         backgroundColor = BpkTheme.colors.corePrimary,
         contentColor = BpkTheme.colors.textOnDark,
     ) {
-        CompositionLocalProvider(
-            LocalContentAlpha provides 1f,
-        ) {
+        CompositionLocalProvider(LocalContentAlpha provides 1f) {
             Row(
                 modifier = Modifier.fillMaxHeight(),
                 horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
