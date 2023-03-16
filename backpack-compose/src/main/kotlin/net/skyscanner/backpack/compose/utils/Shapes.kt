@@ -30,18 +30,18 @@ import androidx.compose.ui.util.lerp
  * which takes only left-half of its original size.
  */
 internal fun RelativeRectangleShape(
-  horizontal: ClosedFloatingPointRange<Float> = 0f..1f,
-  vertical: ClosedFloatingPointRange<Float> = 0f..1f,
-  autoMirror: Boolean = true,
+    horizontal: ClosedFloatingPointRange<Float> = 0f..1f,
+    vertical: ClosedFloatingPointRange<Float> = 0f..1f,
+    autoMirror: Boolean = true,
 ): Shape =
-  GenericShape { size, layoutDirection ->
+    GenericShape { size, layoutDirection ->
 
-    val top = lerp(0f, size.height, vertical.start)
-    val bottom = lerp(0f, size.height, vertical.endInclusive)
+        val top = lerp(0f, size.height, vertical.start)
+        val bottom = lerp(0f, size.height, vertical.endInclusive)
 
-    val mirror = layoutDirection == LayoutDirection.Rtl && autoMirror
-    val left = lerp(0f, size.width, if (mirror) 1f - horizontal.start else horizontal.start)
-    val right = lerp(0f, size.width, if (mirror) 1f - horizontal.endInclusive else horizontal.endInclusive)
+        val mirror = layoutDirection == LayoutDirection.Rtl && autoMirror
+        val left = lerp(0f, size.width, if (mirror) 1f - horizontal.start else horizontal.start)
+        val right = lerp(0f, size.width, if (mirror) 1f - horizontal.endInclusive else horizontal.endInclusive)
 
-    addRect(Rect(left, top, right, bottom))
-  }
+        addRect(Rect(left, top, right, bottom))
+    }

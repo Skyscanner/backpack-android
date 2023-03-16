@@ -21,23 +21,23 @@ package net.skyscanner.backpack.barchart.internal
 import net.skyscanner.backpack.barchart.BpkBarChart
 
 internal class ChartData(
-  groups: List<BpkBarChart.Group>? = null,
+    groups: List<BpkBarChart.Group>? = null,
 ) {
 
-  private val data: List<Item> =
-    groups?.flatMap { group -> group.items.map { Item(group, it) } } ?: emptyList()
+    private val data: List<Item> =
+        groups?.flatMap { group -> group.items.map { Item(group, it) } } ?: emptyList()
 
-  val size: Int
-    get() = data.size
+    val size: Int
+        get() = data.size
 
-  fun getItem(index: Int): BpkBarChart.Column =
-    data[index].column
+    fun getItem(index: Int): BpkBarChart.Column =
+        data[index].column
 
-  fun getGroup(index: Int): BpkBarChart.Group =
-    data[index].group
+    fun getGroup(index: Int): BpkBarChart.Group =
+        data[index].group
 
-  private data class Item(
-    val group: BpkBarChart.Group,
-    val column: BpkBarChart.Column,
-  )
+    private data class Item(
+        val group: BpkBarChart.Group,
+        val column: BpkBarChart.Column,
+    )
 }

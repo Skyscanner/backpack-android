@@ -28,28 +28,28 @@ import net.skyscanner.backpack.compose.tokens.BpkDimension
 import net.skyscanner.backpack.compose.utils.FlareShape
 
 internal fun FlareShape(
-  radius: BpkFlareRadius,
-  pointerDirection: BpkFlarePointerDirection,
+    radius: BpkFlareRadius,
+    pointerDirection: BpkFlarePointerDirection,
 ): Shape =
-  FlareShape(
-    flareHeight = FlareHeight,
-    pointerDirection = pointerDirection,
-    applyAntialiasFix = true,
-    borderRadius = when (radius) {
-      BpkFlareRadius.None -> 0.dp
-      BpkFlareRadius.Medium -> BpkDimension.BorderRadius.Md
-    },
-  )
+    FlareShape(
+        flareHeight = FlareHeight,
+        pointerDirection = pointerDirection,
+        applyAntialiasFix = true,
+        borderRadius = when (radius) {
+            BpkFlareRadius.None -> 0.dp
+            BpkFlareRadius.Medium -> BpkDimension.BorderRadius.Md
+        },
+    )
 
 internal fun FlareRectShape(radius: BpkFlareRadius): Shape = when (radius) {
-  BpkFlareRadius.None -> RectangleShape
-  BpkFlareRadius.Medium -> RoundedCornerShape(BpkDimension.BorderRadius.Md)
+    BpkFlareRadius.None -> RectangleShape
+    BpkFlareRadius.Medium -> RoundedCornerShape(BpkDimension.BorderRadius.Md)
 }
 
 internal fun FlareContentPadding(insetContent: Boolean = false) =
-  when (insetContent) {
-    true -> FlareHeight
-    false -> 0.dp
-  }
+    when (insetContent) {
+        true -> FlareHeight
+        false -> 0.dp
+    }
 
 private val FlareHeight = 11.dp

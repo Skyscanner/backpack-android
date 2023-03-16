@@ -38,33 +38,33 @@ import net.skyscanner.backpack.toast.BpkToast
 @TextSpansComponent
 @ViewStory
 fun TextSpansStory(modifier: Modifier = Modifier) =
-  AndroidLayout<TextView>(R.layout.fragment_text_spans, R.id.text, modifier) {
-    setupTextSpans(this)
-  }
+    AndroidLayout<TextView>(R.layout.fragment_text_spans, R.id.text, modifier) {
+        setupTextSpans(this)
+    }
 
 private fun setupTextSpans(textView: TextView) {
 
-  val linksHandler = { link: String ->
-    BpkToast.makeText(textView.context, link, BpkToast.LENGTH_SHORT).show()
-  }
+    val linksHandler = { link: String ->
+        BpkToast.makeText(textView.context, link, BpkToast.LENGTH_SHORT).show()
+    }
 
-  textView.movementMethod = LinkMovementMethod.getInstance()
-  textView.text = SpannableStringBuilder().apply {
-    append("This is an example of \n")
-    append("primary color span \n", BpkPrimaryColorSpan(textView.context), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    textView.movementMethod = LinkMovementMethod.getInstance()
+    textView.text = SpannableStringBuilder().apply {
+        append("This is an example of \n")
+        append("primary color span \n", BpkPrimaryColorSpan(textView.context), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-    append("This is an example of \n")
-    append(
-      "Backpack font span \n",
-      BpkFontSpan(textView.context, BpkText.TextStyle.Heading4),
-      Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
-    )
+        append("This is an example of \n")
+        append(
+            "Backpack font span \n",
+            BpkFontSpan(textView.context, BpkText.TextStyle.Heading4),
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
+        )
 
-    append("This is an example of \n")
-    append(
-      "Backpack link span \n",
-      BpkLinkSpan(textView.context, "Link clicked!", linksHandler),
-      Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
-    )
-  }
+        append("This is an example of \n")
+        append(
+            "Backpack link span \n",
+            BpkLinkSpan(textView.context, "Link clicked!", linksHandler),
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
+        )
+    }
 }

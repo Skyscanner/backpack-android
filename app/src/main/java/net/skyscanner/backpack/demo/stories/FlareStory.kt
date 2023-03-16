@@ -30,28 +30,28 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @FlareComponent
 @ViewStory("Default")
 fun FlareStoryDefault(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_flare, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_flare, modifier.fillMaxSize())
 
 @Composable
 @FlareComponent
 @ViewStory("Pointing up")
 fun FlareStoryUp(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_flare_up, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_flare_up, modifier.fillMaxSize())
 
 @Composable
 @FlareComponent
 @ViewStory("Pointer offset")
 fun FlareStoryOffset(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_flare_pointer_offset, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_flare_pointer_offset, modifier.fillMaxSize())
 
 @Composable
 @FlareComponent
 @ViewStory("Rounded")
 fun FlareStoryRounded(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_flare_rounded, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_flare_rounded, modifier.fillMaxSize())
 
 @Composable
 @FlareComponent
 @ViewStory("Inset padding mode")
 fun FlareStoryInsetPaddingMode(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_flare_inset_padding_mode, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_flare_inset_padding_mode, modifier.fillMaxSize())

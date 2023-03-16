@@ -24,12 +24,12 @@ import android.text.style.CharacterStyle
 
 class BpkFontSpan(private val font: BpkText.FontDefinition) : CharacterStyle() {
 
-  constructor(
-    context: Context,
-    textStyle: BpkText.TextStyle = BpkText.TextStyle.BodyDefault,
-  ) :
-    this(BpkText.getFont(context, textStyle))
+    constructor(
+        context: Context,
+        textStyle: BpkText.TextStyle = BpkText.TextStyle.BodyDefault,
+    ) :
+        this(BpkText.getFont(context, textStyle))
 
-  override fun updateDrawState(tp: TextPaint) =
-    font.applyTo(tp)
+    override fun updateDrawState(tp: TextPaint) =
+        font.applyTo(tp)
 }

@@ -54,90 +54,90 @@ import net.skyscanner.backpack.compose.utils.clickable
 
 @Composable
 internal fun BpkTopNavBarImpl(
-  fraction: Float,
-  title: String,
-  modifier: Modifier = Modifier,
-  insets: WindowInsets? = null,
-  navIcon: IconAction? = null,
-  actions: List<Action> = emptyList(),
+    fraction: Float,
+    title: String,
+    modifier: Modifier = Modifier,
+    insets: WindowInsets? = null,
+    navIcon: IconAction? = null,
+    actions: List<Action> = emptyList(),
 ) {
-  Surface(
-    color = animateColorAsState(targetValue = if (fraction == 0f) BpkTheme.colors.surfaceDefault else BpkTheme.colors.canvas).value,
-    contentColor = BpkTheme.colors.textPrimary,
-    elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
-    shape = RectangleShape,
-    modifier = modifier.zIndex(1f),
-  ) {
-
-    val titleStyle = lerp(
-      start = BpkTheme.typography.heading4,
-      stop = BpkTheme.typography.heading2,
-      fraction = fraction,
-    )
-
-    CompositionLocalProvider(
-      LocalContentAlpha provides 1f,
-      LocalTextStyle provides titleStyle,
+    Surface(
+        color = animateColorAsState(targetValue = if (fraction == 0f) BpkTheme.colors.surfaceDefault else BpkTheme.colors.canvas).value,
+        contentColor = BpkTheme.colors.textPrimary,
+        elevation = animateDpAsState(targetValue = if (fraction == 0f) BpkDimension.Elevation.Sm else 0.dp).value,
+        shape = RectangleShape,
+        modifier = modifier.zIndex(1f),
     ) {
 
-      TopAppBarLayout(
-        fraction = fraction,
-        modifier = if (insets != null) Modifier.windowInsetsPadding(insets) else Modifier,
-        navIcon = {
-          if (navIcon != null) {
-            IconAction(action = navIcon)
-          }
-        },
-        title = {
-          BpkText(text = title, maxLines = 1, overflow = TextOverflow.Ellipsis)
-        },
-        actions = {
-          actions.forEach { action ->
-            when (action) {
-              is IconAction -> IconAction(action)
-              is TextAction -> TextAction(action)
-            }
-          }
-        },
-      )
+        val titleStyle = lerp(
+            start = BpkTheme.typography.heading4,
+            stop = BpkTheme.typography.heading2,
+            fraction = fraction,
+        )
+
+        CompositionLocalProvider(
+            LocalContentAlpha provides 1f,
+            LocalTextStyle provides titleStyle,
+        ) {
+
+            TopAppBarLayout(
+                fraction = fraction,
+                modifier = if (insets != null) Modifier.windowInsetsPadding(insets) else Modifier,
+                navIcon = {
+                    if (navIcon != null) {
+                        IconAction(action = navIcon)
+                    }
+                },
+                title = {
+                    BpkText(text = title, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                },
+                actions = {
+                    actions.forEach { action ->
+                        when (action) {
+                            is IconAction -> IconAction(action)
+                            is TextAction -> TextAction(action)
+                        }
+                    }
+                },
+            )
+        }
     }
-  }
 }
 
 @Composable
 private fun IconAction(action: IconAction, modifier: Modifier = Modifier) {
-  Box(
-    modifier = modifier
-      .size(TopNavBarSizes.IconActionSize)
-      .clickable(bounded = false, role = Role.Button) { action.onClick() },
-    contentAlignment = Alignment.Center,
-  ) {
-    BpkIcon(icon = action.icon, contentDescription = action.contentDescription, size = BpkIconSize.Large)
-  }
+    Box(
+        modifier = modifier
+            .size(TopNavBarSizes.IconActionSize)
+            .clickable(bounded = false, role = Role.Button) { action.onClick() },
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkIcon(icon = action.icon, contentDescription = action.contentDescription, size = BpkIconSize.Large)
+    }
 }
 
 @Composable
 private fun TextAction(action: TextAction, modifier: Modifier = Modifier) {
-  Box(
-    modifier = modifier
-      .fillMaxHeight()
-      .padding(horizontal = BpkDimension.Spacing.Md)
-      .clickable(bounded = false, role = Role.Button) { action.onClick() },
-    contentAlignment = Alignment.Center,
-  ) {
-    BpkText(
-      text = action.text,
-      color = BpkTheme.colors.textLink,
-      style = BpkTheme.typography.label1,
-      maxLines = 1,
-      overflow = TextOverflow.Ellipsis,
-    )
-  }
+    Box(
+        modifier = modifier
+            .fillMaxHeight()
+            .padding(horizontal = BpkDimension.Spacing.Md)
+            .clickable(bounded = false, role = Role.Button) { action.onClick() },
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkText(
+            text = action.text,
+            color = BpkTheme.colors.textLink,
+            style = BpkTheme.typography.label1,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+    }
 }
 
 internal fun NavIcon.toAction(): IconAction? =
-  when (this) {
-    is NavIcon.Back -> IconAction(BpkIcon.NativeAndroidBack, contentDescription, onClick)
-    is NavIcon.Close -> IconAction(BpkIcon.NativeAndroidClose, contentDescription, onClick)
-    is NavIcon.None -> null
-  }
+    when (this) {
+        is NavIcon.Back -> IconAction(BpkIcon.NativeAndroidBack, contentDescription, onClick)
+        is NavIcon.Close -> IconAction(BpkIcon.NativeAndroidClose, contentDescription, onClick)
+        is NavIcon.None -> null
+    }

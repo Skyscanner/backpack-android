@@ -29,4 +29,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @BadgeComponent
 @ViewStory
 fun BadgeStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_badge, modifier)
+    AndroidLayout(R.layout.fragment_badge, modifier)

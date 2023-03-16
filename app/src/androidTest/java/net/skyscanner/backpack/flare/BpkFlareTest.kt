@@ -39,108 +39,108 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkFlareTest : BpkSnapshotTest() {
 
-  private val subject = BpkFlare(testContext).apply {
-    layoutParams = ViewGroup.LayoutParams(300, 100)
-  }
-
-  private val imageView = ImageView(testContext).apply {
-    setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.canadian_rockies_canada))
-    layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-    scaleType = ImageView.ScaleType.CENTER_CROP
-  }
-
-  @Test
-  fun default() {
-    snap(
-      subject.apply {
-        addView(imageView)
-      },
-    )
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun up() {
-    snap(
-      setupViewForInsetPaddingTest(testContext) {
-        subject.pointerDirection = BpkFlare.PointerDirection.UP
-        subject.insetPaddingMode = BpkFlare.InsetPaddingMode.TOP
-      },
-      width = 300,
-    )
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun radius() {
-    snap(
-      subject.apply {
-        addView(imageView)
-        round = true
-      },
-    )
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun contentPadding() {
-    snap(
-      setupViewForInsetPaddingTest(testContext) {
-        subject.insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
-      },
-      width = 300,
-    )
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun pointerPositionStart() {
-    snap(
-      subject.apply {
-        addView(imageView)
-        pointerPosition = BpkFlare.PointerPosition.START
-      },
-    )
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun pointerPositionEnd() {
-    snap(
-      subject.apply {
-        addView(imageView)
-        pointerPosition = BpkFlare.PointerPosition.END
-      },
-    )
-  }
-
-  private fun setupViewForInsetPaddingTest(context: Context, configSubject: () -> Unit): View {
-    val wrapContent = ViewGroup.LayoutParams(
-      ViewGroup.LayoutParams.WRAP_CONTENT,
-      ViewGroup.LayoutParams.WRAP_CONTENT,
-    )
-
-    return FrameLayout(testContext).apply {
-      addView(
-        subject.apply {
-          layoutParams = wrapContent
-          configSubject()
-
-          addView(
-            LinearLayoutCompat(context).apply {
-              layoutParams = wrapContent
-              background = ColorDrawable(Color.LTGRAY)
-
-              addView(
-                BpkText(testContext).apply {
-                  layoutParams = wrapContent
-                  text = testContext.resources.getString(R.string.stub_sm)
-                },
-              )
-            },
-          )
-        },
-      )
+    private val subject = BpkFlare(testContext).apply {
+        layoutParams = ViewGroup.LayoutParams(300, 100)
     }
-  }
+
+    private val imageView = ImageView(testContext).apply {
+        setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.canadian_rockies_canada))
+        layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        scaleType = ImageView.ScaleType.CENTER_CROP
+    }
+
+    @Test
+    fun default() {
+        snap(
+            subject.apply {
+                addView(imageView)
+            },
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun up() {
+        snap(
+            setupViewForInsetPaddingTest(testContext) {
+                subject.pointerDirection = BpkFlare.PointerDirection.UP
+                subject.insetPaddingMode = BpkFlare.InsetPaddingMode.TOP
+            },
+            width = 300,
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun radius() {
+        snap(
+            subject.apply {
+                addView(imageView)
+                round = true
+            },
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun contentPadding() {
+        snap(
+            setupViewForInsetPaddingTest(testContext) {
+                subject.insetPaddingMode = BpkFlare.InsetPaddingMode.BOTTOM
+            },
+            width = 300,
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun pointerPositionStart() {
+        snap(
+            subject.apply {
+                addView(imageView)
+                pointerPosition = BpkFlare.PointerPosition.START
+            },
+        )
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun pointerPositionEnd() {
+        snap(
+            subject.apply {
+                addView(imageView)
+                pointerPosition = BpkFlare.PointerPosition.END
+            },
+        )
+    }
+
+    private fun setupViewForInsetPaddingTest(context: Context, configSubject: () -> Unit): View {
+        val wrapContent = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+        )
+
+        return FrameLayout(testContext).apply {
+            addView(
+                subject.apply {
+                    layoutParams = wrapContent
+                    configSubject()
+
+                    addView(
+                        LinearLayoutCompat(context).apply {
+                            layoutParams = wrapContent
+                            background = ColorDrawable(Color.LTGRAY)
+
+                            addView(
+                                BpkText(testContext).apply {
+                                    layoutParams = wrapContent
+                                    text = testContext.resources.getString(R.string.stub_sm)
+                                },
+                            )
+                        },
+                    )
+                },
+            )
+        }
+    }
 }

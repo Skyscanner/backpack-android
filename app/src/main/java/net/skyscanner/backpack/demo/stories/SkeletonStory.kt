@@ -30,4 +30,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @SkeletonComponent
 @ViewStory
 fun SkeletonStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_skeletons, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_skeletons, modifier.fillMaxSize())

@@ -22,31 +22,31 @@ import android.content.res.Configuration
 import androidx.compose.ui.tooling.preview.Preview
 
 @Target(
-  AnnotationTarget.ANNOTATION_CLASS,
-  AnnotationTarget.FUNCTION,
+    AnnotationTarget.ANNOTATION_CLASS,
+    AnnotationTarget.FUNCTION,
 )
 
 @Retention(AnnotationRetention.BINARY)
 
 @Preview(name = "Default",
-  uiMode = Configuration.UI_MODE_NIGHT_NO,
-  locale = "en",
-  showBackground = true,
-  backgroundColor = 0xFFFFFFFF, // BpkTheme.colors.canvas, LM
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    locale = "en",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFFF, // BpkTheme.colors.canvas, LM
 )
 
 @Preview(name = "DM",
-  uiMode = Configuration.UI_MODE_NIGHT_YES,
-  locale = "en",
-  showBackground = true,
-  backgroundColor = 0xFF010913, // BpkTheme.colors.canvas, DM
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    locale = "en",
+    showBackground = true,
+    backgroundColor = 0xFF010913, // BpkTheme.colors.canvas, DM
 )
 
 @Preview(name = "RTL",
-  uiMode = Configuration.UI_MODE_NIGHT_NO,
-  locale = "ar",
-  showBackground = true,
-  backgroundColor = 0xFFFFFFFF, // BpkTheme.colors.canvas, LM
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    locale = "ar",
+    showBackground = true,
+    backgroundColor = 0xFFFFFFFF, // BpkTheme.colors.canvas, LM
 )
 
 annotation class BpkPreviews

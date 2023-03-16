@@ -32,35 +32,35 @@ import net.skyscanner.backpack.ksp.find
 import net.skyscanner.backpack.ksp.get
 
 sealed class AbstractStoriesVisitor(
-  private val annotationDefinition: AnnotationDefinition,
-  private val paramName: AnnotationParam<String>,
-  private val paramKind: AnnotationParam<EnumValue>,
-  private val isCompose: Boolean,
+    private val annotationDefinition: AnnotationDefinition,
+    private val paramName: AnnotationParam<String>,
+    private val paramKind: AnnotationParam<EnumValue>,
+    private val isCompose: Boolean,
 ) : KSDefaultVisitor<Map<KSName, ComponentDefinition>, StoryDefinition?>() {
 
-  override fun visitFunctionDeclaration(function: KSFunctionDeclaration, data: Map<KSName, ComponentDefinition>): StoryDefinition? {
-    val annotation = function.annotations.find(annotationDefinition)
-    val location = function.location
+    override fun visitFunctionDeclaration(function: KSFunctionDeclaration, data: Map<KSName, ComponentDefinition>): StoryDefinition? {
+        val annotation = function.annotations.find(annotationDefinition)
+        val location = function.location
 
-    val componentAnnotation = function.annotations.firstNotNullOfOrNull {
-      it.annotationType.resolve().declaration.qualifiedName?.let(data::get)
+        val componentAnnotation = function.annotations.firstNotNullOfOrNull {
+            it.annotationType.resolve().declaration.qualifiedName?.let(data::get)
+        }
+
+        return when {
+            annotation != null && location is FileLocation -> StoryDefinition(
+                component = componentAnnotation ?: error("No component definition is found!"),
+                name = annotation[paramName],
+                isCompose = isCompose,
+                kind = annotation[paramKind],
+                reference = function.qualifiedName!!.asString(),
+                location = location,
+            )
+            else -> super.visitFunctionDeclaration(function, data)
+        }
     }
 
-    return when {
-      annotation != null && location is FileLocation -> StoryDefinition(
-        component = componentAnnotation ?: error("No component definition is found!"),
-        name = annotation[paramName],
-        isCompose = isCompose,
-        kind = annotation[paramKind],
-        reference = function.qualifiedName!!.asString(),
-        location = location,
-      )
-      else -> super.visitFunctionDeclaration(function, data)
+    override fun defaultHandler(node: KSNode, data: Map<KSName, ComponentDefinition>): StoryDefinition? {
+        // do nothing
+        return null
     }
-  }
-
-  override fun defaultHandler(node: KSNode, data: Map<KSName, ComponentDefinition>): StoryDefinition? {
-    // do nothing
-    return null
-  }
 }

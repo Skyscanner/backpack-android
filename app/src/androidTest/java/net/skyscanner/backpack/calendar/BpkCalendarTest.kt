@@ -56,403 +56,403 @@ private val today = LocalDate.of(2019, 1, 2)
 @VisibleForTesting
 class MockDateProvider(private val value: LocalDate) : CurrentDateProvider {
 
-  override fun invoke(): LocalDate = value
+    override fun invoke(): LocalDate = value
 }
 
 private class BpkCalendarControllerImpl(
-  override val locale: Locale,
-  private val initialStartDate: LocalDate? = null,
-  private val initialEndDate: LocalDate? = null,
-  override val selectionType: SelectionType = SelectionType.RANGE,
-  override val calendarColoring: CalendarColoring? = null,
-  private val disabledDayOfTheWeek: DayOfWeek? = null,
-  override val monthFooterAdapter: MonthFooterAdapter? = null,
-  override val calendarLabels: Map<LocalDate, CalendarLabel>? = null,
+    override val locale: Locale,
+    private val initialStartDate: LocalDate? = null,
+    private val initialEndDate: LocalDate? = null,
+    override val selectionType: SelectionType = SelectionType.RANGE,
+    override val calendarColoring: CalendarColoring? = null,
+    private val disabledDayOfTheWeek: DayOfWeek? = null,
+    override val monthFooterAdapter: MonthFooterAdapter? = null,
+    override val calendarLabels: Map<LocalDate, CalendarLabel>? = null,
 ) : BpkCalendarController(selectionType, MockDateProvider(today)) {
-  override val startDate: LocalDate
-    get() = initialStartDate ?: super.startDate
+    override val startDate: LocalDate
+        get() = initialStartDate ?: super.startDate
 
-  override val endDate: LocalDate
-    get() = initialEndDate ?: super.endDate
+    override val endDate: LocalDate
+        get() = initialEndDate ?: super.endDate
 
-  override fun onRangeSelected(range: CalendarSelection) {}
+    override fun onRangeSelected(range: CalendarSelection) {}
 
-  override fun isDateDisabled(date: LocalDate): Boolean {
-    return date.dayOfWeek == disabledDayOfTheWeek
-  }
+    override fun isDateDisabled(date: LocalDate): Boolean {
+        return date.dayOfWeek == disabledDayOfTheWeek
+    }
 }
 
 @RunWith(AndroidJUnit4::class)
 class BpkCalendarTest : BpkSnapshotTest() {
 
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
+    @get:Rule
+    val rule = activityScenarioRule<AppCompatActivity>()
 
-  @Before
-  fun setup() {
-    AndroidThreeTen.init(testContext)
-  }
-
-  @Test
-  fun default() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-    )
-
-    calendar.setController(controller)
-    capture(calendar)
-  }
-
-  @Test
-  fun coloredCalendarDefault() {
-    val calendar = BpkCalendar(testContext)
-    val initialStartDate = LocalDate.of(2019, 1, 2)
-    val initialEndDate = LocalDate.of(2019, 12, 31)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      initialStartDate,
-      initialEndDate,
-      SelectionType.RANGE,
-      multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext),
-    )
-
-    calendar.setController(controller)
-    capture(calendar)
-  }
-
-  @Test
-  fun labeledCalendarDefault() {
-    val calendar = BpkCalendar(testContext)
-    val initialStartDate = LocalDate.of(2019, 1, 2)
-    val initialEndDate = LocalDate.of(2019, 12, 31)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      initialStartDate,
-      initialEndDate,
-      SelectionType.RANGE,
-      calendarLabels = mapOf(
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 1) to
-          CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 2) to
-          CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
-          CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
-          CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
-        LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
-          CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
-      ),
-    )
-
-    calendar.setController(controller)
-    capture(calendar)
-  }
-
-  @Test
-  fun past() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2017, 1, 2),
-      LocalDate.of(2017, 12, 31),
-    )
-
-    calendar.setController(controller)
-    capture(calendar)
-  }
-
-  @Test
-  fun withStartDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-    )
-
-    calendar.setController(controller)
-
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-        rootLayout.addView(calendar)
-      }
+    @Before
+    fun setup() {
+        AndroidThreeTen.init(testContext)
     }
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
+    @Test
+    fun default() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+        )
 
-    capture(calendar)
-  }
-
-  @Test
-  fun withSameStartAndEndDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-    )
-
-    calendar.setController(controller)
-
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-        rootLayout.addView(calendar)
-      }
+        calendar.setController(controller)
+        capture(calendar)
     }
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
+    @Test
+    fun coloredCalendarDefault() {
+        val calendar = BpkCalendar(testContext)
+        val initialStartDate = LocalDate.of(2019, 1, 2)
+        val initialEndDate = LocalDate.of(2019, 12, 31)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            initialStartDate,
+            initialEndDate,
+            SelectionType.RANGE,
+            multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext),
+        )
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
-
-    capture(calendar)
-  }
-
-  @Test
-  fun withStartAndEndDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-    )
-
-    calendar.setController(controller)
-
-    selectStartEnd(calendar)
-  }
-
-  @Test
-  fun coloredCalendarWithStartAndEndDateSelected() {
-    val calendar = BpkCalendar(testContext)
-    val initialStartDate = LocalDate.of(2019, 1, 2)
-    val initialEndDate = LocalDate.of(2019, 12, 31)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      initialStartDate,
-      initialEndDate,
-      SelectionType.RANGE,
-      multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext),
-    )
-
-    calendar.setController(controller)
-
-    selectStartEnd(calendar)
-  }
-
-  @Test
-  fun withSingleDaySelected() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-      SelectionType.SINGLE,
-    )
-    calendar.setController(controller)
-
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-        rootLayout.addView(calendar)
-      }
+        calendar.setController(controller)
+        capture(calendar)
     }
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
+    @Test
+    fun labeledCalendarDefault() {
+        val calendar = BpkCalendar(testContext)
+        val initialStartDate = LocalDate.of(2019, 1, 2)
+        val initialEndDate = LocalDate.of(2019, 12, 31)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            initialStartDate,
+            initialEndDate,
+            SelectionType.RANGE,
+            calendarLabels = mapOf(
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 1) to
+                    CalendarLabel(text = "£10", style = CalendarLabel.Style.PriceHigh),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 2) to
+                    CalendarLabel(text = "£11", style = CalendarLabel.Style.PriceMedium),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 3) to
+                    CalendarLabel(text = "£12", style = CalendarLabel.Style.PriceLow),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 4) to
+                    CalendarLabel(text = "£900000000000000", style = CalendarLabel.Style.PriceLow),
+                LocalDate.of(initialStartDate.year, initialStartDate.month, initialStartDate.dayOfMonth + 5) to
+                    CalendarLabel(text = "£900000", style = CalendarLabel.Style.PriceLow),
+            ),
+        )
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(1)
-      .perform(ViewActions.click())
-
-    Espresso.onData(CoreMatchers.anything()) // Clicking on multiple dates should result in only one selected
-      .atPosition(1)
-      .perform(ViewActions.scrollTo())
-
-    capture(calendar)
-  }
-
-  @Test
-  fun withRangeSetProgrammatically() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-    )
-    calendar.setController(controller)
-    controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9)))
-    capture(calendar)
-  }
-
-  @Test
-  fun withSingleDaySetProgrammatically() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-      SelectionType.SINGLE,
-    )
-
-    calendar.setController(controller)
-    controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 16)))
-    capture(calendar)
-  }
-
-  @Test
-  fun withDisabledDates() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-      SelectionType.SINGLE,
-      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
-    )
-
-    calendar.setController(controller)
-    capture(calendar)
-  }
-
-  @Test
-  fun withDisabledDates_SelectSingle() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-      SelectionType.SINGLE,
-      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
-    )
-
-    calendar.setController(controller)
-    controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 10)))
-    capture(calendar)
-  }
-
-  @Test
-  fun withDisabledDates_SelectRange() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
-    )
-    calendar.setController(controller)
-    controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10)))
-    capture(calendar)
-  }
-
-  @Test
-  fun withDisabledDates_SelectDisabledDate() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2019, 1, 2),
-      LocalDate.of(2019, 12, 31),
-      SelectionType.SINGLE,
-      disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
-    )
-
-    calendar.setController(controller)
-    controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 9)))
-    capture(calendar)
-  }
-
-  @Test
-  fun past_cutPreviousWeeks() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.GERMAN,
-      LocalDate.of(2019, 6, 8),
-    )
-    calendar.setController(controller)
-    capture(calendar)
-  }
-
-  @Test
-  fun setSelectionFromTop() {
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2017, 1, 2),
-      LocalDate.of(2017, 12, 31),
-    )
-
-    calendar.setController(controller)
-    calendar.setSelectionFromTop(2)
-    capture(calendar)
-  }
-
-  @Test
-  fun withHighlightedDaysFooter() {
-    val monthFooterAdapter = HighlightedDaysAdapter(
-      testContext,
-      Locale.UK,
-      setOf(
-        HighlightedDaysAdapter.HighlightedDay(
-          LocalDate.of(2017, 1, 1), "New Year's Day",
-        ),
-        HighlightedDaysAdapter.HighlightedDay(
-          date = LocalDate.of(2017, 1, 2),
-          description = "Bank Holiday",
-          descriptionOnly = true,
-        ),
-      ),
-    )
-
-    val calendar = BpkCalendar(testContext)
-    val controller = BpkCalendarControllerImpl(
-      Locale.UK,
-      LocalDate.of(2017, 1, 2),
-      LocalDate.of(2017, 12, 31),
-      SelectionType.RANGE,
-      null,
-      null,
-      monthFooterAdapter,
-    )
-
-    calendar.setController(controller)
-    capture(calendar)
-  }
-
-  private fun selectStartEnd(view: View) {
-    rule.scenario.waitForActivity().also { activity ->
-      runOnUi {
-        val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
-        rootLayout.addView(view)
-      }
+        calendar.setController(controller)
+        capture(calendar)
     }
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.click())
+    @Test
+    fun past() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2017, 1, 2),
+            LocalDate.of(2017, 12, 31),
+        )
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(1)
-      .perform(ViewActions.click())
+        calendar.setController(controller)
+        capture(calendar)
+    }
 
-    Espresso.onData(CoreMatchers.anything())
-      .atPosition(0)
-      .perform(ViewActions.scrollTo())
+    @Test
+    fun withStartDateSelected() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+        )
 
-    capture(view)
-  }
+        calendar.setController(controller)
 
-  private fun capture(view: View) {
-    snap(view, width = 400, height = 700)
-  }
+        rule.scenario.waitForActivity().also { activity ->
+            runOnUi {
+                val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+                rootLayout.addView(calendar)
+            }
+        }
+
+        Espresso.onData(CoreMatchers.anything())
+            .atPosition(0)
+            .perform(ViewActions.click())
+
+        capture(calendar)
+    }
+
+    @Test
+    fun withSameStartAndEndDateSelected() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+        )
+
+        calendar.setController(controller)
+
+        rule.scenario.waitForActivity().also { activity ->
+            runOnUi {
+                val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+                rootLayout.addView(calendar)
+            }
+        }
+
+        Espresso.onData(CoreMatchers.anything())
+            .atPosition(0)
+            .perform(ViewActions.click())
+
+        Espresso.onData(CoreMatchers.anything())
+            .atPosition(0)
+            .perform(ViewActions.click())
+
+        capture(calendar)
+    }
+
+    @Test
+    fun withStartAndEndDateSelected() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+        )
+
+        calendar.setController(controller)
+
+        selectStartEnd(calendar)
+    }
+
+    @Test
+    fun coloredCalendarWithStartAndEndDateSelected() {
+        val calendar = BpkCalendar(testContext)
+        val initialStartDate = LocalDate.of(2019, 1, 2)
+        val initialEndDate = LocalDate.of(2019, 12, 31)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            initialStartDate,
+            initialEndDate,
+            SelectionType.RANGE,
+            multiColoredExampleCalendarColoring(0, initialStartDate, initialEndDate, testContext),
+        )
+
+        calendar.setController(controller)
+
+        selectStartEnd(calendar)
+    }
+
+    @Test
+    fun withSingleDaySelected() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+            SelectionType.SINGLE,
+        )
+        calendar.setController(controller)
+
+        rule.scenario.waitForActivity().also { activity ->
+            runOnUi {
+                val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+                rootLayout.addView(calendar)
+            }
+        }
+
+        Espresso.onData(CoreMatchers.anything())
+            .atPosition(0)
+            .perform(ViewActions.click())
+
+        Espresso.onData(CoreMatchers.anything())
+            .atPosition(1)
+            .perform(ViewActions.click())
+
+        Espresso.onData(CoreMatchers.anything()) // Clicking on multiple dates should result in only one selected
+            .atPosition(1)
+            .perform(ViewActions.scrollTo())
+
+        capture(calendar)
+    }
+
+    @Test
+    fun withRangeSetProgrammatically() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+        )
+        calendar.setController(controller)
+        controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 9)))
+        capture(calendar)
+    }
+
+    @Test
+    fun withSingleDaySetProgrammatically() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+            SelectionType.SINGLE,
+        )
+
+        calendar.setController(controller)
+        controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 16)))
+        capture(calendar)
+    }
+
+    @Test
+    fun withDisabledDates() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+            SelectionType.SINGLE,
+            disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
+        )
+
+        calendar.setController(controller)
+        capture(calendar)
+    }
+
+    @Test
+    fun withDisabledDates_SelectSingle() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+            SelectionType.SINGLE,
+            disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
+        )
+
+        calendar.setController(controller)
+        controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 10)))
+        capture(calendar)
+    }
+
+    @Test
+    fun withDisabledDates_SelectRange() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+            disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
+        )
+        calendar.setController(controller)
+        controller.updateSelection(CalendarRange(LocalDate.of(2019, 1, 4), LocalDate.of(2019, 1, 10)))
+        capture(calendar)
+    }
+
+    @Test
+    fun withDisabledDates_SelectDisabledDate() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2019, 1, 2),
+            LocalDate.of(2019, 12, 31),
+            SelectionType.SINGLE,
+            disabledDayOfTheWeek = DayOfWeek.WEDNESDAY,
+        )
+
+        calendar.setController(controller)
+        controller.updateSelection(SingleDay(LocalDate.of(2019, 1, 9)))
+        capture(calendar)
+    }
+
+    @Test
+    fun past_cutPreviousWeeks() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.GERMAN,
+            LocalDate.of(2019, 6, 8),
+        )
+        calendar.setController(controller)
+        capture(calendar)
+    }
+
+    @Test
+    fun setSelectionFromTop() {
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2017, 1, 2),
+            LocalDate.of(2017, 12, 31),
+        )
+
+        calendar.setController(controller)
+        calendar.setSelectionFromTop(2)
+        capture(calendar)
+    }
+
+    @Test
+    fun withHighlightedDaysFooter() {
+        val monthFooterAdapter = HighlightedDaysAdapter(
+            testContext,
+            Locale.UK,
+            setOf(
+                HighlightedDaysAdapter.HighlightedDay(
+                    LocalDate.of(2017, 1, 1), "New Year's Day",
+                ),
+                HighlightedDaysAdapter.HighlightedDay(
+                    date = LocalDate.of(2017, 1, 2),
+                    description = "Bank Holiday",
+                    descriptionOnly = true,
+                ),
+            ),
+        )
+
+        val calendar = BpkCalendar(testContext)
+        val controller = BpkCalendarControllerImpl(
+            Locale.UK,
+            LocalDate.of(2017, 1, 2),
+            LocalDate.of(2017, 12, 31),
+            SelectionType.RANGE,
+            null,
+            null,
+            monthFooterAdapter,
+        )
+
+        calendar.setController(controller)
+        capture(calendar)
+    }
+
+    private fun selectStartEnd(view: View) {
+        rule.scenario.waitForActivity().also { activity ->
+            runOnUi {
+                val rootLayout = activity.findViewById(android.R.id.content) as FrameLayout
+                rootLayout.addView(view)
+            }
+        }
+
+        Espresso.onData(CoreMatchers.anything())
+            .atPosition(0)
+            .perform(ViewActions.click())
+
+        Espresso.onData(CoreMatchers.anything())
+            .atPosition(1)
+            .perform(ViewActions.click())
+
+        Espresso.onData(CoreMatchers.anything())
+            .atPosition(0)
+            .perform(ViewActions.scrollTo())
+
+        capture(view)
+    }
+
+    private fun capture(view: View) {
+        snap(view, width = 400, height = 700)
+    }
 }

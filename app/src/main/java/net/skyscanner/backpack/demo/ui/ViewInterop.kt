@@ -29,49 +29,49 @@ import androidx.compose.ui.viewinterop.AndroidView
 
 @Composable
 fun AndroidLayout(
-  @LayoutRes layoutId: Int,
-  modifier: Modifier = Modifier,
-  update: View.() -> Unit = {},
-  init: View.() -> Unit,
+    @LayoutRes layoutId: Int,
+    modifier: Modifier = Modifier,
+    update: View.() -> Unit = {},
+    init: View.() -> Unit,
 ) {
-  AndroidView(
-    modifier = modifier,
-    factory = { LayoutInflater.from(it).inflate(layoutId, null).also(init) },
-    update = { update(it) },
-  )
+    AndroidView(
+        modifier = modifier,
+        factory = { LayoutInflater.from(it).inflate(layoutId, null).also(init) },
+        update = { update(it) },
+    )
 }
 
 @Composable
 fun <T : View> AndroidLayout(
-  @LayoutRes layoutId: Int,
-  @IdRes viewId: Int,
-  modifier: Modifier = Modifier,
-  update: T.() -> Unit = {},
-  init: T.() -> Unit,
+    @LayoutRes layoutId: Int,
+    @IdRes viewId: Int,
+    modifier: Modifier = Modifier,
+    update: T.() -> Unit = {},
+    init: T.() -> Unit,
 ) {
-  AndroidLayout(
-    layoutId = layoutId,
-    modifier = modifier,
-    init = { findViewById<T>(viewId).also(init) },
-    update = { findViewById<T>(viewId).also(update) },
-  )
+    AndroidLayout(
+        layoutId = layoutId,
+        modifier = modifier,
+        init = { findViewById<T>(viewId).also(init) },
+        update = { findViewById<T>(viewId).also(update) },
+    )
 }
 
 @Composable
 fun AndroidLayout(
-  @LayoutRes layoutId: Int,
-  modifier: Modifier = Modifier,
+    @LayoutRes layoutId: Int,
+    modifier: Modifier = Modifier,
 ) =
-  AndroidLayout(layoutId, modifier, init = {})
+    AndroidLayout(layoutId, modifier, init = {})
 
 @Composable
 inline fun <reified T : View> AndroidView(
-  modifier: Modifier = Modifier,
-  crossinline update: T.() -> Unit,
+    modifier: Modifier = Modifier,
+    crossinline update: T.() -> Unit,
 ) {
-  AndroidView(
-    modifier = modifier,
-    factory = { T::class.java.getConstructor(Context::class.java).newInstance(it) as T },
-    update = { update(it) },
-  )
+    AndroidView(
+        modifier = modifier,
+        factory = { T::class.java.getConstructor(Context::class.java).newInstance(it) as T },
+        update = { update(it) },
+    )
 }

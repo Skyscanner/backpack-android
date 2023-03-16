@@ -32,27 +32,27 @@ import net.skyscanner.backpack.horisontalnav.BpkHorizontalNav
 @HorizontalNavComponent
 @ViewStory
 fun HorizontalNavStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_horizontal_nav_default, modifier.fillMaxSize()) {
-    init(findViewById(R.id.horizontal_nav))
-    init(findViewById(R.id.horizontal_nav_scrollable))
-    init(findViewById(R.id.horizontal_nav_small))
-    init(findViewById(R.id.horizontal_nav_alternate))
-    init(findViewById(R.id.horizontal_nav_rtl))
-    init(findViewById(R.id.horizontal_nav_icons))
-  }
+    AndroidLayout(R.layout.fragment_horizontal_nav_default, modifier.fillMaxSize()) {
+        init(findViewById(R.id.horizontal_nav))
+        init(findViewById(R.id.horizontal_nav_scrollable))
+        init(findViewById(R.id.horizontal_nav_small))
+        init(findViewById(R.id.horizontal_nav_alternate))
+        init(findViewById(R.id.horizontal_nav_rtl))
+        init(findViewById(R.id.horizontal_nav_icons))
+    }
 
 private fun init(horizontalNav: BpkHorizontalNav) {
-  horizontalNav.addTab("Flights", R.drawable.bpk_flight_sm)
-  horizontalNav.addTab("Hotels", R.drawable.bpk_hotels_sm)
-  horizontalNav.addTab("Car Hire", R.drawable.bpk_cars_sm)
+    horizontalNav.addTab("Flights", R.drawable.bpk_flight_sm)
+    horizontalNav.addTab("Hotels", R.drawable.bpk_hotels_sm)
+    horizontalNav.addTab("Car Hire", R.drawable.bpk_cars_sm)
 }
 
 private fun BpkHorizontalNav.addTab(tabText: String, @DrawableRes icon: Int) {
-  val tab = newTab().apply {
-    text = tabText
-  }
-  addTab(tab)
-  if (id == R.id.horizontal_nav_icons) {
-    tab.setIcon(icon)
-  }
+    val tab = newTab().apply {
+        text = tabText
+    }
+    addTab(tab)
+    if (id == R.id.horizontal_nav_icons) {
+        tab.setIcon(icon)
+    }
 }

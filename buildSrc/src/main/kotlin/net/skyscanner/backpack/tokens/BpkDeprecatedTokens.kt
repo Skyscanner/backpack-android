@@ -28,75 +28,75 @@ import com.squareup.kotlinpoet.buildCodeBlock
 interface BpkDeprecatedTokens : List<BpkDeprecatedTokenModel>
 
 data class BpkDeprecatedTokenModel(
-  val name: String,
+    val name: String,
 )
 
 object BpkDeprecatedToken {
 
-  object Category : BpkParser<Map<String, Any>, BpkDeprecatedTokens> {
+    object Category : BpkParser<Map<String, Any>, BpkDeprecatedTokens> {
 
-    override fun invoke(source: Map<String, Any>): BpkDeprecatedTokens =
-      parseDeprecatedTokens(source)
-  }
-
-  sealed class Format : BpkTransformer<BpkDeprecatedTokens, TypeSpec> {
-
-    data class Kotlin(val className: String) : Format() {
-      override fun invoke(source: BpkDeprecatedTokens): TypeSpec =
-        toKotlin(source, className)
+        override fun invoke(source: Map<String, Any>): BpkDeprecatedTokens =
+            parseDeprecatedTokens(source)
     }
-  }
+
+    sealed class Format : BpkTransformer<BpkDeprecatedTokens, TypeSpec> {
+
+        data class Kotlin(val className: String) : Format() {
+            override fun invoke(source: BpkDeprecatedTokens): TypeSpec =
+                toKotlin(source, className)
+        }
+    }
 }
 
 @Suppress("UNCHECKED_CAST")
 private fun parseDeprecatedTokens(source: Map<String, Any>): BpkDeprecatedTokens {
 
-  fun String.trimName(): String =
-    removePrefix("PRIVATE_").removePrefix("COLOR_").removeSuffix("_COLOR")
+    fun String.trimName(): String =
+        removePrefix("PRIVATE_").removePrefix("COLOR_").removeSuffix("_COLOR")
 
-  val props = source.getValue("props") as Map<String, Map<String, String>>
-  val data = props.filter { (_, value) ->
-    value["deprecated"] == "true" &&
-      value["type"] == "color"
-  }.keys
+    val props = source.getValue("props") as Map<String, Map<String, String>>
+    val data = props.filter { (_, value) ->
+        value["deprecated"] == "true" &&
+            value["type"] == "color"
+    }.keys
 
-  val list = data
-    .map {
-      BpkDeprecatedTokenModel(
-        name = it.trimName(),
-      )
+    val list = data
+        .map {
+            BpkDeprecatedTokenModel(
+                name = it.trimName(),
+            )
+        }
+
+    return object : BpkDeprecatedTokens, List<BpkDeprecatedTokenModel> by list {
+        override fun toString(): String =
+            list.toString()
     }
-
-  return object : BpkDeprecatedTokens, List<BpkDeprecatedTokenModel> by list {
-    override fun toString(): String =
-      list.toString()
-  }
 }
 
 private val StringClass = String::class.asClassName()
 private val StringListClass = List::class.asClassName().parameterizedBy(StringClass)
 
 private fun toKotlin(source: BpkDeprecatedTokens, className: String): TypeSpec {
-  fun String.toSemanticName() =
-    CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this.replace('-', '_'))
+    fun String.toSemanticName() =
+        CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, this.replace('-', '_'))
 
-  return TypeSpec.objectBuilder(className)
-    .addModifiers(KModifier.INTERNAL)
-    .addProperty(
-      PropertySpec
-        .builder("deprecatedColors", StringListClass)
-        .initializer(buildCodeBlock {
-          addStatement("listOf(", StringClass)
-          indent()
-          apply {
-            source.forEach {
-              add("%S,\n", "bpk${it.name.toSemanticName()}")
-            }
-          }
-          unindent()
-          addStatement(")")
-        },)
-        .build(),
-    )
-    .build()
+    return TypeSpec.objectBuilder(className)
+        .addModifiers(KModifier.INTERNAL)
+        .addProperty(
+            PropertySpec
+                .builder("deprecatedColors", StringListClass)
+                .initializer(buildCodeBlock {
+                    addStatement("listOf(", StringClass)
+                    indent()
+                    apply {
+                        source.forEach {
+                            add("%S,\n", "bpk${it.name.toSemanticName()}")
+                        }
+                    }
+                    unindent()
+                    addStatement(")")
+                },)
+                .build(),
+        )
+        .build()
 }

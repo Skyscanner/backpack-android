@@ -34,51 +34,51 @@ import net.skyscanner.backpack.toast.BpkToast
 @NavBarComponent
 @ViewStory("Default")
 fun NavBarStoryDefault(modifier: Modifier = Modifier) =
-  NavBarDemo(R.layout.fragment_nav_bar, modifier)
+    NavBarDemo(R.layout.fragment_nav_bar, modifier)
 
 @Composable
 @NavBarComponent
 @ViewStory("Collapsed", StoryKind.ScreenshotOnly)
 fun NavBarStoryCollapsed(modifier: Modifier = Modifier) =
-  NavBarDemo(R.layout.fragment_nav_bar, modifier) {
-    setExpanded(false)
-  }
+    NavBarDemo(R.layout.fragment_nav_bar, modifier) {
+        setExpanded(false)
+    }
 
 @Composable
 @NavBarComponent
 @ViewStory("With Icon", StoryKind.DemoOnly)
 fun NavBarStoryWithIcon(modifier: Modifier = Modifier) =
-  NavBarDemo(R.layout.fragment_nav_bar_with_icon, modifier)
+    NavBarDemo(R.layout.fragment_nav_bar_with_icon, modifier)
 
 @Composable
 @NavBarComponent
 @ViewStory("With Menu")
 fun NavBarStoryWithMenu(modifier: Modifier = Modifier) =
-  NavBarDemo(R.layout.fragment_nav_bar_with_menu, modifier) {
-    setExpanded(false)
-  }
+    NavBarDemo(R.layout.fragment_nav_bar_with_menu, modifier) {
+        setExpanded(false)
+    }
 
 @Composable
 private fun NavBarDemo(
-  @LayoutRes layoutId: Int,
-  modifier: Modifier = Modifier,
-  init: BpkNavBar.() -> Unit = {},
+    @LayoutRes layoutId: Int,
+    modifier: Modifier = Modifier,
+    init: BpkNavBar.() -> Unit = {},
 ) =
-  AndroidLayout<BpkNavBar>(layoutId, R.id.appBar, modifier) {
-    title = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
-      "عنوان الصفحة"
-    } else {
-      "Nav Bar"
+    AndroidLayout<BpkNavBar>(layoutId, R.id.appBar, modifier) {
+        title = if (layoutDirection == View.LAYOUT_DIRECTION_RTL) {
+            "عنوان الصفحة"
+        } else {
+            "Nav Bar"
+        }
+        navAction = {
+            BpkToast.makeText(context, "Nav is clicked!", BpkToast.LENGTH_SHORT).show()
+        }
+        menuAction = {
+            BpkToast.makeText(
+                context,
+                "${it.itemId.let(resources::getResourceEntryName)} is clicked!",
+                BpkToast.LENGTH_SHORT,
+            ).show()
+        }
+        init()
     }
-    navAction = {
-      BpkToast.makeText(context, "Nav is clicked!", BpkToast.LENGTH_SHORT).show()
-    }
-    menuAction = {
-      BpkToast.makeText(
-        context,
-        "${it.itemId.let(resources::getResourceEntryName)} is clicked!",
-        BpkToast.LENGTH_SHORT,
-      ).show()
-    }
-    init()
-  }

@@ -47,59 +47,59 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BpkFloatingNotificationImpl(
-  data: BpkFloatingNotificationData,
-  modifier: Modifier = Modifier,
+    data: BpkFloatingNotificationData,
+    modifier: Modifier = Modifier,
 ) {
 
-  Snackbar(
-    modifier = modifier,
-    shape = RoundedCornerShape(BpkBorderRadius.Md),
-    backgroundColor = BpkTheme.colors.corePrimary,
-    contentColor = BpkTheme.colors.textOnDark,
-  ) {
-
-    Row(
-      modifier = Modifier.fillMaxHeight(),
-      horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-      verticalAlignment = Alignment.CenterVertically,
+    Snackbar(
+        modifier = modifier,
+        shape = RoundedCornerShape(BpkBorderRadius.Md),
+        backgroundColor = BpkTheme.colors.corePrimary,
+        contentColor = BpkTheme.colors.textOnDark,
     ) {
 
-      data.icon?.let { icon ->
-        BpkIcon(
-          icon = icon,
-          contentDescription = null,
-          size = BpkIconSize.Small,
-        )
-      }
+        Row(
+            modifier = Modifier.fillMaxHeight(),
+            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
 
-      BpkText(
-        modifier = Modifier.weight(1f),
-        text = data.text,
-        maxLines = 2,
-        style = BpkTheme.typography.footnote,
-        overflow = TextOverflow.Ellipsis,
-      )
+            data.icon?.let { icon ->
+                BpkIcon(
+                    icon = icon,
+                    contentDescription = null,
+                    size = BpkIconSize.Small,
+                )
+            }
 
-      data.cta?.let { cta ->
-        BpkButton(
-          text = cta,
-          type = BpkButtonType.LinkOnDark,
-          onClick = { data.performAction() },
-          size = BpkButtonSize.Default,
-        )
-      }
+            BpkText(
+                modifier = Modifier.weight(1f),
+                text = data.text,
+                maxLines = 2,
+                style = BpkTheme.typography.footnote,
+                overflow = TextOverflow.Ellipsis,
+            )
+
+            data.cta?.let { cta ->
+                BpkButton(
+                    text = cta,
+                    type = BpkButtonType.LinkOnDark,
+                    onClick = { data.performAction() },
+                    size = BpkButtonSize.Default,
+                )
+            }
+        }
     }
-  }
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun floatingNotificationTransforms(slideDistancePx: Int): AnimatedContentScope<BpkFloatingNotificationData?>.() -> ContentTransform =
-  {
-    ContentTransform(
-      targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { slideDistancePx },
-      initialContentExit = fadeOut(tween(TRANSITION_DURATION)) + slideOutVertically(tween(TRANSITION_DURATION)) { slideDistancePx },
-    )
-  }
+    {
+        ContentTransform(
+            targetContentEnter = fadeIn(tween(TRANSITION_DURATION)) + slideInVertically(tween(TRANSITION_DURATION)) { slideDistancePx },
+            initialContentExit = fadeOut(tween(TRANSITION_DURATION)) + slideOutVertically(tween(TRANSITION_DURATION)) { slideDistancePx },
+        )
+    }
 
 private const val TRANSITION_DURATION = 500

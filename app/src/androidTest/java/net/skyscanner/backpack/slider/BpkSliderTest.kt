@@ -28,28 +28,28 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkSliderTest : BpkSnapshotTest() {
 
-  private val slider = BpkSlider(testContext)
+    private val slider = BpkSlider(testContext)
 
-  @Test
-  fun default() {
-    slider.value = 0.5f
-    snap(slider, width = 200)
-  }
+    @Test
+    fun default() {
+        slider.value = 0.5f
+        snap(slider, width = 200)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun stepped() {
-    slider.valueTo = 100f
-    slider.value = 10f
-    slider.stepSize = 10f
-    snap(slider, width = 200)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun stepped() {
+        slider.valueTo = 100f
+        slider.value = 10f
+        slider.stepSize = 10f
+        snap(slider, width = 200)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun range() {
-    slider.valueTo = 100f
-    slider.setValues(25f, 75f)
-    snap(slider, width = 200)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun range() {
+        slider.valueTo = 100f
+        slider.setValues(25f, 75f)
+        snap(slider, width = 200)
+    }
 }

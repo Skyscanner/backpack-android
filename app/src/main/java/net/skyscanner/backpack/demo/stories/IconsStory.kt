@@ -43,110 +43,110 @@ import net.skyscanner.backpack.toast.BpkToast
 @IconComponent
 @ViewStory("Default")
 fun IconsStoryDefault(modifier: Modifier = Modifier) =
-  IconsDemo(IconType.Default, modifier)
+    IconsDemo(IconType.Default, modifier)
 
 @Composable
 @IconComponent
 @ViewStory("Small")
 fun IconsStorySmall(modifier: Modifier = Modifier) =
-  IconsDemo(IconType.Small, modifier)
+    IconsDemo(IconType.Small, modifier)
 
 @Composable
 private fun IconsDemo(
-  iconType: IconType,
-  modifier: Modifier = Modifier,
+    iconType: IconType,
+    modifier: Modifier = Modifier,
 ) {
-  AndroidLayout<RecyclerView>(R.layout.fragment_all_icons, R.id.lst_icons, modifier.fillMaxSize()) {
-    layoutManager = GridLayoutManager(context, 10)
-    adapter = IconsAdapter(
-      fetchAllIcons(context, iconType),
-      View.LAYOUT_DIRECTION_LTR,
-    )
-  }
+    AndroidLayout<RecyclerView>(R.layout.fragment_all_icons, R.id.lst_icons, modifier.fillMaxSize()) {
+        layoutManager = GridLayoutManager(context, 10)
+        adapter = IconsAdapter(
+            fetchAllIcons(context, iconType),
+            View.LAYOUT_DIRECTION_LTR,
+        )
+    }
 }
 
 private const val PLATFORM_VD_CLAZZ = "android.graphics.drawable.VectorDrawable"
 private const val ICON_TYPE = "icon_type"
 
 internal enum class IconType {
-  Default {
-    override fun matchesName(name: String): Boolean = !name.endsWith("_sm")
-  },
-  Small {
-    override fun matchesName(name: String) = name.endsWith("_sm")
-  }, ;
+    Default {
+        override fun matchesName(name: String): Boolean = !name.endsWith("_sm")
+    },
+    Small {
+        override fun matchesName(name: String) = name.endsWith("_sm")
+    }, ;
 
-  abstract fun matchesName(name: String): Boolean
+    abstract fun matchesName(name: String): Boolean
 }
 
 private data class BpkIcon(
-  val name: String,
-  val drawable: Drawable,
+    val name: String,
+    val drawable: Drawable,
 )
 
 private fun fetchAllIcons(context: Context, iconType: IconType): List<BpkIcon> {
 
-  fun isVectorDrawable(d: Drawable): Boolean {
-    return d is VectorDrawableCompat || PLATFORM_VD_CLAZZ == d.javaClass.name
-  }
-
-  val icons = mutableListOf<BpkIcon>()
-
-  for (field in R.drawable::class.java.fields) {
-    if (field.name.startsWith("bpk_") && iconType.matchesName(field.name)) {
-      try {
-        AppCompatResources.getDrawable(context, field.getInt(null))?.apply {
-          if (isVectorDrawable(this)) {
-            icons.add(BpkIcon(field.name, this))
-          }
-        }
-      } catch (e: Exception) {
-        Log.w("IconStory", "unable to load ${field.name}")
-      }
+    fun isVectorDrawable(d: Drawable): Boolean {
+        return d is VectorDrawableCompat || PLATFORM_VD_CLAZZ == d.javaClass.name
     }
-  }
 
-  return icons
+    val icons = mutableListOf<BpkIcon>()
+
+    for (field in R.drawable::class.java.fields) {
+        if (field.name.startsWith("bpk_") && iconType.matchesName(field.name)) {
+            try {
+                AppCompatResources.getDrawable(context, field.getInt(null))?.apply {
+                    if (isVectorDrawable(this)) {
+                        icons.add(BpkIcon(field.name, this))
+                    }
+                }
+            } catch (e: Exception) {
+                Log.w("IconStory", "unable to load ${field.name}")
+            }
+        }
+    }
+
+    return icons
 }
 
 private class IconsAdapter(
-  private var icons: List<BpkIcon>,
-  private val direction: Int,
+    private var icons: List<BpkIcon>,
+    private val direction: Int,
 ) : RecyclerView.Adapter<IconsAdapter.ViewHolder>() {
 
-  private var rtlIconBackgroundColor: Int = 0
+    private var rtlIconBackgroundColor: Int = 0
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    val view = LayoutInflater.from(parent.context)
-      .inflate(R.layout.icon_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.icon_item, parent, false)
 
-    rtlIconBackgroundColor = parent.context.getColor(R.color.bpkLine)
-    return ViewHolder(view)
-  }
-
-  override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    holder.img.setImageDrawable(icons[position].drawable)
-    holder.img.setOnClickListener {
-      BpkToast.makeText(holder.itemView.context, icons[position].name, BpkToast.LENGTH_SHORT).show()
+        rtlIconBackgroundColor = parent.context.getColor(R.color.bpkLine)
+        return ViewHolder(view)
     }
-    holder.img.contentDescription = icons[position].name
-      .replace("bpk_", "")
-      .replace("_sm", "")
-      .replace("_", " ")
 
-    // We do this instead of setting the parent's layout direction to avoid changing the
-    // position of all icons to make it easier to see which icons currently support RTL
-    if (direction == View.LAYOUT_DIRECTION_RTL && icons[position].drawable.isAutoMirrored) {
-      holder.img.rotationY = 180f
-      holder.img.background = ColorDrawable(rtlIconBackgroundColor)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.img.setImageDrawable(icons[position].drawable)
+        holder.img.setOnClickListener {
+            BpkToast.makeText(holder.itemView.context, icons[position].name, BpkToast.LENGTH_SHORT).show()
+        }
+        holder.img.contentDescription = icons[position].name
+            .replace("bpk_", "")
+            .replace("_sm", "")
+            .replace("_", " ")
+
+        // We do this instead of setting the parent's layout direction to avoid changing the
+        // position of all icons to make it easier to see which icons currently support RTL
+        if (direction == View.LAYOUT_DIRECTION_RTL && icons[position].drawable.isAutoMirrored) {
+            holder.img.rotationY = 180f
+            holder.img.background = ColorDrawable(rtlIconBackgroundColor)
+        }
     }
-  }
 
-  override fun getItemCount(): Int {
-    return icons.size
-  }
+    override fun getItemCount(): Int {
+        return icons.size
+    }
 
-  inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    var img: ImageView = itemView.findViewById(R.id.img_icon_item)
-  }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var img: ImageView = itemView.findViewById(R.id.img_icon_item)
+    }
 }

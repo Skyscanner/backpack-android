@@ -47,37 +47,37 @@ import net.skyscanner.backpack.demo.meta.StoryKind
 @RadiiTokensComponent
 @ComposeStory(kind = StoryKind.DemoOnly)
 fun RadiiComposeStory(modifier: Modifier = Modifier) {
-  LazyColumn(modifier) {
-    val data: List<Token<Dp>> = BpkBorderRadius.values.sortedBy { it.value }
-    items(data) { item ->
-      RadiiSample(token = item)
+    LazyColumn(modifier) {
+        val data: List<Token<Dp>> = BpkBorderRadius.values.sortedBy { it.value }
+        items(data) { item ->
+            RadiiSample(token = item)
+        }
     }
-  }
 }
 
 @Composable
 private fun RadiiSample(token: Token<Dp>) {
-  Box(
-    modifier = Modifier.padding(BpkSpacing.Base),
-  ) {
-    RadiiCard(token = token)
-  }
+    Box(
+        modifier = Modifier.padding(BpkSpacing.Base),
+    ) {
+        RadiiCard(token = token)
+    }
 }
 
 @Composable
 private fun RadiiCard(token: Token<Dp>) {
-  Box(
-    contentAlignment = Alignment.Center,
-    modifier = Modifier
-      .fillMaxWidth()
-      .sizeIn(minHeight = token.value * 2)
-      .background(BpkTheme.colors.coreAccent, RoundedCornerShape(token.value))
-      .padding(BpkSpacing.Base),
-  ) {
-    BpkText(
-      text = stringResource(R.string.token_placeholder, token.name, token.value),
-      style = BpkTheme.typography.bodyLongform,
-      color = BpkTheme.colors.textPrimaryInverse,
-    )
-  }
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .sizeIn(minHeight = token.value * 2)
+            .background(BpkTheme.colors.coreAccent, RoundedCornerShape(token.value))
+            .padding(BpkSpacing.Base),
+    ) {
+        BpkText(
+            text = stringResource(R.string.token_placeholder, token.name, token.value),
+            style = BpkTheme.typography.bodyLongform,
+            color = BpkTheme.colors.textPrimaryInverse,
+        )
+    }
 }

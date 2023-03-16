@@ -32,31 +32,31 @@ import net.skyscanner.backpack.dialog.BpkDialog
 import kotlin.math.min
 
 internal class FlareDialogImpl(
-  dialog: Dialog,
+    dialog: Dialog,
 ) : BpkDialogImpl.Base(R.layout.bpk_dialog_flare, dialog, BpkDialog.Type.Flare) {
 
-  init {
-    dialog.window?.let {
-      val maxWidth = dialog.context.resources.getDimensionPixelSize(R.dimen.bpk_dialog_flare_max_width)
-      val displayWidth = getScreenWidth(dialog)
-      it.setLayout(min(displayWidth, maxWidth), LayoutParams.WRAP_CONTENT)
+    init {
+        dialog.window?.let {
+            val maxWidth = dialog.context.resources.getDimensionPixelSize(R.dimen.bpk_dialog_flare_max_width)
+            val displayWidth = getScreenWidth(dialog)
+            it.setLayout(min(displayWidth, maxWidth), LayoutParams.WRAP_CONTENT)
 
-      val background = ColorDrawable(Color.TRANSPARENT)
-      val margin = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
-      it.setBackgroundDrawable(InsetDrawable(background, margin))
+            val background = ColorDrawable(Color.TRANSPARENT)
+            val margin = dialog.context.resources.getDimensionPixelSize(R.dimen.bpkSpacingBase)
+            it.setBackgroundDrawable(InsetDrawable(background, margin))
+        }
     }
-  }
 
-  private fun getScreenWidth(dialog: Dialog): Int {
-    val windowManager = dialog.context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-      val metrics = windowManager.currentWindowMetrics
-      metrics.bounds.width()
-    } else {
-      val metrics = DisplayMetrics()
-      @Suppress("DEPRECATION")
-      windowManager.defaultDisplay.getMetrics(metrics)
-      metrics.widthPixels
+    private fun getScreenWidth(dialog: Dialog): Int {
+        val windowManager = dialog.context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val metrics = windowManager.currentWindowMetrics
+            metrics.bounds.width()
+        } else {
+            val metrics = DisplayMetrics()
+            @Suppress("DEPRECATION")
+            windowManager.defaultDisplay.getMetrics(metrics)
+            metrics.widthPixels
+        }
     }
-  }
 }

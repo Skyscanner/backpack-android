@@ -38,69 +38,69 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkRatingTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    BpkRatingDefaultSample()
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun titleOnly() {
-    snap {
-      BpkRatingTitleOnlySample()
+    @Test
+    fun default() = snap {
+        BpkRatingDefaultSample()
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun noScale() {
-    snap {
-      BpkRatingNoScaleSample()
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun titleOnly() {
+        snap {
+            BpkRatingTitleOnlySample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun customContent() {
-    snap {
-      BpkRatingCustomContentSample()
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noScale() {
+        snap {
+            BpkRatingNoScaleSample()
+        }
     }
-  }
 
-  @Test
-  fun large() = snap {
-    BpkRatingLargeSample()
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun largeTitleOnly() {
-    snap {
-      BpkRatingLargeTitleOnlySample()
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun customContent() {
+        snap {
+            BpkRatingCustomContentSample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun largeNoScale() {
-    snap {
-      BpkRatingLargeNoScaleSample()
+    @Test
+    fun large() = snap {
+        BpkRatingLargeSample()
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun largeCustomContent() {
-    snap {
-      BpkRatingLargeCustomContentSample()
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeTitleOnly() {
+        snap {
+            BpkRatingLargeTitleOnlySample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun largeCustomContentMoSubtitle() {
-    snap {
-      BpkRatingLargeCustomContentNoSubtitleSample()
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeNoScale() {
+        snap {
+            BpkRatingLargeNoScaleSample()
+        }
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeCustomContent() {
+        snap {
+            BpkRatingLargeCustomContentSample()
+        }
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeCustomContentMoSubtitle() {
+        snap {
+            BpkRatingLargeCustomContentNoSubtitleSample()
+        }
+    }
 }

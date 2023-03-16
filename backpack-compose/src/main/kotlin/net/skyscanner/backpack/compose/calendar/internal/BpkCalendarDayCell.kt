@@ -51,157 +51,157 @@ import net.skyscanner.backpack.compose.utils.RelativeRectangleShape
 
 @Composable
 internal fun BpkCalendarDayCell(
-  model: CalendarCell.Day,
-  modifier: Modifier = Modifier,
-  onClick: (CalendarCell.Day) -> Unit,
+    model: CalendarCell.Day,
+    modifier: Modifier = Modifier,
+    onClick: (CalendarCell.Day) -> Unit,
 ) {
 
-  val selection = model.selection
-  val inactive = model.inactive
+    val selection = model.selection
+    val inactive = model.inactive
 
-  val status = model.info.status
-  val style = model.info.style
-  val label = model.info.label
+    val status = model.info.status
+    val style = model.info.style
+    val label = model.info.label
 
-  Column(
-    verticalArrangement = Arrangement.Top,
-    horizontalAlignment = Alignment.CenterHorizontally,
-    modifier = modifier
-      .padding(bottom = BpkSpacing.Lg)
-      .selectable(
-        indication = null,
-        selected = selection != null,
-        enabled = !inactive,
-        onClick = { onClick(model) },
-        interactionSource = remember { MutableInteractionSource() },
-      ),
-  ) {
-
-    Box(
-      contentAlignment = Alignment.Center,
-      modifier = Modifier
-        .fillMaxWidth()
-        .cellSelectionBackground(selection),
+    Column(
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .padding(bottom = BpkSpacing.Lg)
+            .selectable(
+                indication = null,
+                selected = selection != null,
+                enabled = !inactive,
+                onClick = { onClick(model) },
+                interactionSource = remember { MutableInteractionSource() },
+            ),
     ) {
 
-      Spacer(
-        Modifier
-          .size(BpkCalendarSizes.SelectionHeight)
-          .cellDayBackground(selection, status, inactive, style),
-      )
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .cellSelectionBackground(selection),
+        ) {
 
-      BpkText(
-        text = model.text.toString(),
-        overflow = TextOverflow.Ellipsis,
-        maxLines = 1,
-        style = BpkTheme.typography.heading5,
-        color = dateColor(selection, status, inactive, style),
-      )
-    }
+            Spacer(
+                Modifier
+                    .size(BpkCalendarSizes.SelectionHeight)
+                    .cellDayBackground(selection, status, inactive, style),
+            )
 
-    if (!inactive && !label.isNullOrEmpty()) {
-      BpkText(
-        text = label,
-        modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
-        overflow = TextOverflow.Ellipsis,
-        textAlign = TextAlign.Center,
-        maxLines = 2,
-        style = BpkTheme.typography.caption,
-        color = labelColor(status, style),
-      )
+            BpkText(
+                text = model.text.toString(),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
+                style = BpkTheme.typography.heading5,
+                color = dateColor(selection, status, inactive, style),
+            )
+        }
+
+        if (!inactive && !label.isNullOrEmpty()) {
+            BpkText(
+                text = label,
+                modifier = Modifier.padding(horizontal = BpkSpacing.Sm),
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                style = BpkTheme.typography.caption,
+                color = labelColor(status, style),
+            )
+        }
     }
-  }
 }
 
 private fun Modifier.cellSelectionBackground(selection: Selection?): Modifier = composed {
-  when (selection) {
-    Selection.Start,
-    Selection.StartMonth,
-    -> background(BpkTheme.colors.surfaceHighlight, EndSemiRect)
+    when (selection) {
+        Selection.Start,
+        Selection.StartMonth,
+        -> background(BpkTheme.colors.surfaceHighlight, EndSemiRect)
 
-    Selection.End,
-    Selection.EndMonth,
-    -> background(BpkTheme.colors.surfaceHighlight, StartSemiRect)
+        Selection.End,
+        Selection.EndMonth,
+        -> background(BpkTheme.colors.surfaceHighlight, StartSemiRect)
 
-    Selection.Middle -> background(BpkTheme.colors.surfaceHighlight, RectangleShape)
+        Selection.Middle -> background(BpkTheme.colors.surfaceHighlight, RectangleShape)
 
-    Selection.Single,
-    Selection.Double,
-    null,
-    -> this
-  }
+        Selection.Single,
+        Selection.Double,
+        null,
+        -> this
+    }
 }
 
 private fun Modifier.cellDayBackground(
-  selection: Selection?,
-  status: CellStatus?,
-  inactive: Boolean,
-  style: CellStatusStyle?,
+    selection: Selection?,
+    status: CellStatus?,
+    inactive: Boolean,
+    style: CellStatusStyle?,
 ): Modifier = composed {
-  when {
-    selection != null ->
-      when (selection) {
-        Selection.Double -> this
-          .border(1.dp, BpkTheme.colors.coreAccent, CircleShape)
-          .padding(3.dp)
-          .background(BpkTheme.colors.coreAccent, CircleShape)
+    when {
+        selection != null ->
+            when (selection) {
+                Selection.Double -> this
+                    .border(1.dp, BpkTheme.colors.coreAccent, CircleShape)
+                    .padding(3.dp)
+                    .background(BpkTheme.colors.coreAccent, CircleShape)
 
-        Selection.StartMonth,
-        Selection.Middle,
-        Selection.EndMonth,
-        -> background(BpkTheme.colors.surfaceHighlight, CircleShape)
+                Selection.StartMonth,
+                Selection.Middle,
+                Selection.EndMonth,
+                -> background(BpkTheme.colors.surfaceHighlight, CircleShape)
 
-        Selection.Single,
-        Selection.Start,
-        Selection.End,
-        -> background(BpkTheme.colors.coreAccent, CircleShape)
-      }
+                Selection.Single,
+                Selection.Start,
+                Selection.End,
+                -> background(BpkTheme.colors.coreAccent, CircleShape)
+            }
 
-    else -> this
-  }
+        else -> this
+    }
 }
 
 @Composable
 private fun dateColor(
-  selection: Selection?,
-  status: CellStatus?,
-  inactive: Boolean,
-  style: CellStatusStyle?,
+    selection: Selection?,
+    status: CellStatus?,
+    inactive: Boolean,
+    style: CellStatusStyle?,
 ): Color =
-  when {
-    selection != null ->
-      when (selection) {
-        Selection.Single,
-        Selection.Double,
-        Selection.Start,
-        Selection.End,
-        -> BpkTheme.colors.textPrimaryInverse
+    when {
+        selection != null ->
+            when (selection) {
+                Selection.Single,
+                Selection.Double,
+                Selection.Start,
+                Selection.End,
+                -> BpkTheme.colors.textPrimaryInverse
 
-        Selection.StartMonth,
-        Selection.Middle,
-        Selection.EndMonth,
-        -> BpkTheme.colors.textPrimary
-      }
+                Selection.StartMonth,
+                Selection.Middle,
+                Selection.EndMonth,
+                -> BpkTheme.colors.textPrimary
+            }
 
-    inactive -> BpkTheme.colors.textDisabled
+        inactive -> BpkTheme.colors.textDisabled
 
-    else -> BpkTheme.colors.textPrimary
-  }
+        else -> BpkTheme.colors.textPrimary
+    }
 
 @Composable
 private fun labelColor(status: CellStatus?, style: CellStatusStyle?): Color =
-  when {
+    when {
 
-    style == CellStatusStyle.Label && status != null ->
-      when (status) {
-        CellStatus.Positive -> BpkTheme.colors.statusSuccessSpot
-        CellStatus.Neutral -> BpkTheme.colors.textSecondary
-        CellStatus.Negative -> BpkTheme.colors.textSecondary
-        CellStatus.Empty -> BpkTheme.colors.textDisabled
-      }
+        style == CellStatusStyle.Label && status != null ->
+            when (status) {
+                CellStatus.Positive -> BpkTheme.colors.statusSuccessSpot
+                CellStatus.Neutral -> BpkTheme.colors.textSecondary
+                CellStatus.Negative -> BpkTheme.colors.textSecondary
+                CellStatus.Empty -> BpkTheme.colors.textDisabled
+            }
 
-    else -> BpkTheme.colors.textSecondary
-  }
+        else -> BpkTheme.colors.textSecondary
+    }
 
 private val StartSemiRect = RelativeRectangleShape(0f..0.5f)
 private val EndSemiRect = RelativeRectangleShape(0.5f..1f)

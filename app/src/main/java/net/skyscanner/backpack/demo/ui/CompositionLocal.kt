@@ -24,5 +24,5 @@ import net.skyscanner.backpack.compose.floatingnotification.BpkFloatingNotificat
 val LocalAutomationMode = staticCompositionLocalOf { false }
 
 val LocalFloatingNotification = staticCompositionLocalOf<BpkFloatingNotificationState> {
-  error("LocalFloatingNotification must be injected from ComposeStory")
+    error("LocalFloatingNotification must be injected from ComposeStory")
 }

@@ -30,4 +30,4 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @NudgerComponent
 @ViewStory
 fun NudgerStory(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_nudger, modifier.fillMaxSize())
+    AndroidLayout(R.layout.fragment_nudger, modifier.fillMaxSize())

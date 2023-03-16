@@ -29,44 +29,44 @@ import net.skyscanner.backpack.util.InternalBackpackApi
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarAdapter(
-  private val output: Consumer<CalendarInteraction>,
+    private val output: Consumer<CalendarInteraction>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Consumer<CalendarCells> {
 
-  private var data: CalendarCells = CalendarCells(emptyList())
+    private var data: CalendarCells = CalendarCells(emptyList())
 
-  @OptIn(InternalBackpackApi::class)
-  override fun invoke(data: CalendarCells) {
-    val calculator = CalendarDiffCalculator(this.data, data)
-    val diff = DiffUtil.calculateDiff(calculator, false)
-    this.data = data
-    diff.dispatchUpdatesTo(this)
-  }
+    @OptIn(InternalBackpackApi::class)
+    override fun invoke(data: CalendarCells) {
+        val calculator = CalendarDiffCalculator(this.data, data)
+        val diff = DiffUtil.calculateDiff(calculator, false)
+        this.data = data
+        diff.dispatchUpdatesTo(this)
+    }
 
-  operator fun get(position: Int): CalendarCell =
-    data[position]
+    operator fun get(position: Int): CalendarCell =
+        data[position]
 
-  override fun getItemCount(): Int =
-    data.size
+    override fun getItemCount(): Int =
+        data.size
 
-  override fun getItemViewType(position: Int): Int = when (data[position]) {
-    is CalendarCell.Day -> TYPE_DAY
-    is CalendarCell.Header -> TYPE_HEADER
-    is CalendarCell.Space -> TYPE_SPACE
-  }
+    override fun getItemViewType(position: Int): Int = when (data[position]) {
+        is CalendarCell.Day -> TYPE_DAY
+        is CalendarCell.Header -> TYPE_HEADER
+        is CalendarCell.Space -> TYPE_SPACE
+    }
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
-    TYPE_HEADER -> CalendarCellHeaderHolder(parent, output)
-    TYPE_DAY -> CalendarCellDayHolder(parent, output)
-    else -> CalendarCellSpaceHolder(parent)
-  }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
+        TYPE_HEADER -> CalendarCellHeaderHolder(parent, output)
+        TYPE_DAY -> CalendarCellDayHolder(parent, output)
+        else -> CalendarCellSpaceHolder(parent)
+    }
 
-  @Suppress("UNCHECKED_CAST")
-  override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
-    (holder as ItemHolder<CalendarCell>).invoke(data[position])
+    @Suppress("UNCHECKED_CAST")
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
+        (holder as ItemHolder<CalendarCell>).invoke(data[position])
 
-  companion object {
-    private const val TYPE_SPACE = 0
-    private const val TYPE_HEADER = 1
-    private const val TYPE_DAY = 2
-  }
+    companion object {
+        private const val TYPE_SPACE = 0
+        private const val TYPE_HEADER = 1
+        private const val TYPE_DAY = 2
+    }
 }

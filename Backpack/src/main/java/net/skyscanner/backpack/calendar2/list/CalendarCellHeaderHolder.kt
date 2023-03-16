@@ -30,28 +30,28 @@ import net.skyscanner.backpack.util.Consumer
 import net.skyscanner.backpack.util.ItemHolder
 
 internal class CalendarCellHeaderHolder(
-  parent: ViewGroup,
-  private val output: Consumer<CalendarInteraction>,
+    parent: ViewGroup,
+    private val output: Consumer<CalendarInteraction>,
 ) : ItemHolder<CalendarCell.Header>(parent, R.layout.view_bpk_calendar_header) {
 
-  private val month = findViewById<TextView>(R.id.bpk_calendar_cell_month)
-  private val btnSelectWholeMonth = findViewById<BpkButton>(R.id.bpk_calendar_cell_whole_month_selection)
+    private val month = findViewById<TextView>(R.id.bpk_calendar_cell_month)
+    private val btnSelectWholeMonth = findViewById<BpkButton>(R.id.bpk_calendar_cell_whole_month_selection)
 
-  init {
-    btnSelectWholeMonth.setOnClickListener {
-      model?.let {
-        CalendarInteraction.SelectMonthClicked(it)
-      }?.let { header ->
-        output.invoke(header)
-      }
+    init {
+        btnSelectWholeMonth.setOnClickListener {
+            model?.let {
+                CalendarInteraction.SelectMonthClicked(it)
+            }?.let { header ->
+                output.invoke(header)
+            }
+        }
     }
-  }
-  override fun bind(model: CalendarCell.Header) {
-    month.text = model.title
-    btnSelectWholeMonth.apply {
-      isVisible = model.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth
-      isEnabled = model.calendarSelectionMode !is CalendarParams.SelectionMode.Disabled
-      text = (model.monthSelectionMode as? CalendarParams.MonthSelectionMode.SelectWholeMonth)?.label ?: ""
+    override fun bind(model: CalendarCell.Header) {
+        month.text = model.title
+        btnSelectWholeMonth.apply {
+            isVisible = model.monthSelectionMode is CalendarParams.MonthSelectionMode.SelectWholeMonth
+            isEnabled = model.calendarSelectionMode !is CalendarParams.SelectionMode.Disabled
+            text = (model.monthSelectionMode as? CalendarParams.MonthSelectionMode.SelectWholeMonth)?.label ?: ""
+        }
     }
-  }
 }

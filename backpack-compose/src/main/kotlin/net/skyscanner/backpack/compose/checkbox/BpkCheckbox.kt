@@ -46,129 +46,129 @@ import net.skyscanner.backpack.compose.utils.applyIf
 
 @Composable
 fun BpkCheckbox(
-  text: String,
-  checked: Boolean,
-  onCheckedChange: ((Boolean) -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    text: String,
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-  BpkCheckbox(
-    checked = checked,
-    onCheckedChange = onCheckedChange,
-    interactionSource = interactionSource,
-    enabled = enabled,
-    modifier = modifier,
-    content = { BpkText(text) },
-  )
-}
-
-@Composable
-fun BpkCheckbox(
-  text: String,
-  state: ToggleableState,
-  onClick: (() -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-) {
-  BpkCheckbox(
-    state = state,
-    onClick = onClick,
-    modifier = modifier,
-    enabled = enabled,
-    interactionSource = interactionSource,
-    content = { BpkText(text) },
-  )
-}
-
-@Composable
-fun BpkCheckbox(
-  checked: Boolean,
-  onCheckedChange: ((Boolean) -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  content: @Composable RowScope.(Boolean) -> Unit,
-) {
-  BpkCheckbox(
-    state = ToggleableState(checked),
-    onClick = if (onCheckedChange != null) {
-      { onCheckedChange(!checked) }
-    } else null,
-    interactionSource = interactionSource,
-    enabled = enabled,
-    modifier = modifier,
-    content = { content(checked) },
-  )
-}
-
-@Composable
-fun BpkCheckbox(
-  state: ToggleableState,
-  onClick: (() -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  content: @Composable RowScope.(ToggleableState) -> Unit,
-) {
-  Row(
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.SpaceBetween,
-    modifier = modifier.applyIf(onClick != null) {
-      triStateToggleable(
-        state = state,
+    BpkCheckbox(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
         interactionSource = interactionSource,
-        indication = null,
         enabled = enabled,
-        role = Role.Checkbox,
-        onClick = onClick!!,
-      )
-    },
-  ) {
-
-    BpkCheckboxImpl(
-      modifier = Modifier.padding(end = BpkSpacing.Md),
-      state = state,
-      enabled = enabled,
-      interactionSource = interactionSource,
-      onClick = onClick,
+        modifier = modifier,
+        content = { BpkText(text) },
     )
+}
 
-    BpkToggleableContent(
-      enabled = enabled,
-      content = { content(state) },
+@Composable
+fun BpkCheckbox(
+    text: String,
+    state: ToggleableState,
+    onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    BpkCheckbox(
+        state = state,
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        interactionSource = interactionSource,
+        content = { BpkText(text) },
     )
-  }
+}
+
+@Composable
+fun BpkCheckbox(
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.(Boolean) -> Unit,
+) {
+    BpkCheckbox(
+        state = ToggleableState(checked),
+        onClick = if (onCheckedChange != null) {
+            { onCheckedChange(!checked) }
+        } else null,
+        interactionSource = interactionSource,
+        enabled = enabled,
+        modifier = modifier,
+        content = { content(checked) },
+    )
+}
+
+@Composable
+fun BpkCheckbox(
+    state: ToggleableState,
+    onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.(ToggleableState) -> Unit,
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = modifier.applyIf(onClick != null) {
+            triStateToggleable(
+                state = state,
+                interactionSource = interactionSource,
+                indication = null,
+                enabled = enabled,
+                role = Role.Checkbox,
+                onClick = onClick!!,
+            )
+        },
+    ) {
+
+        BpkCheckboxImpl(
+            modifier = Modifier.padding(end = BpkSpacing.Md),
+            state = state,
+            enabled = enabled,
+            interactionSource = interactionSource,
+            onClick = onClick,
+        )
+
+        BpkToggleableContent(
+            enabled = enabled,
+            content = { content(state) },
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class, androidx.compose.ui.ExperimentalComposeUiApi::class)
 @Composable
 private fun BpkCheckboxImpl(
-  state: ToggleableState,
-  onClick: (() -> Unit)?,
-  enabled: Boolean,
-  interactionSource: MutableInteractionSource,
-  modifier: Modifier = Modifier,
+    state: ToggleableState,
+    onClick: (() -> Unit)?,
+    enabled: Boolean,
+    interactionSource: MutableInteractionSource,
+    modifier: Modifier = Modifier,
 ) {
-  // our design system isn't designed with the minimum touch target in mind at the moment.
-  // Disable the enforcement to avoid the extra padding
-  CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-    TriStateCheckbox(
-      state = state,
-      onClick = onClick,
-      enabled = enabled,
-      modifier = modifier.scale(BackpackCheckboxScale).semantics { invisibleToUser() },
-      interactionSource = interactionSource,
-      colors = CheckboxDefaults.colors(
-        checkedColor = BpkTheme.colors.coreAccent,
-        uncheckedColor = BpkTheme.colors.textSecondary,
-        checkmarkColor = BpkTheme.colors.textPrimaryInverse,
-        disabledColor = BpkTheme.colors.textDisabled,
-        disabledIndeterminateColor = BpkTheme.colors.textDisabled,
-      ),
-    )
-  }
+    // our design system isn't designed with the minimum touch target in mind at the moment.
+    // Disable the enforcement to avoid the extra padding
+    CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
+        TriStateCheckbox(
+            state = state,
+            onClick = onClick,
+            enabled = enabled,
+            modifier = modifier.scale(BackpackCheckboxScale).semantics { invisibleToUser() },
+            interactionSource = interactionSource,
+            colors = CheckboxDefaults.colors(
+                checkedColor = BpkTheme.colors.coreAccent,
+                uncheckedColor = BpkTheme.colors.textSecondary,
+                checkmarkColor = BpkTheme.colors.textPrimaryInverse,
+                disabledColor = BpkTheme.colors.textDisabled,
+                disabledIndeterminateColor = BpkTheme.colors.textDisabled,
+            ),
+        )
+    }
 }
 
 private const val BackpackCheckboxScale = 0.89f

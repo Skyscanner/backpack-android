@@ -43,78 +43,78 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkDialogTest : BpkSnapshotTest() {
 
-  @get:Rule
-  val rule = createComposeRule()
-  @Test
-  fun successOneButton() = record {
-    SuccessOneButtonDialogExample()
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun successTwoButtons() {
-    record {
-      SuccessTwoButtonsDialogExample()
+    @get:Rule
+    val rule = createComposeRule()
+    @Test
+    fun successOneButton() = record {
+        SuccessOneButtonDialogExample()
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun successThreeButtons() {
-    record {
-      SuccessThreeButtonsDialogExample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun successTwoButtons() {
+        record {
+            SuccessTwoButtonsDialogExample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun warning() {
-    record {
-      WarningDialogExample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun successThreeButtons() {
+        record {
+            SuccessThreeButtonsDialogExample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun destructive() {
-    record {
-      DestructiveDialogExample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun warning() {
+        record {
+            WarningDialogExample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun noIcon() {
-    record {
-      NoIconDialogExample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun destructive() {
+        record {
+            DestructiveDialogExample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun flare() {
-    record {
-      FlareDialogExample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun noIcon() {
+        record {
+            NoIconDialogExample()
+        }
     }
-  }
 
-  @Test
-  fun imageStartAlignment() {
-    record {
-      ImageDialogStartAlignmentExample()
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun flare() {
+        record {
+            FlareDialogExample()
+        }
     }
-  }
 
-  @Test
-  fun imageEndAlignment() {
-    record {
-      ImageDialogEndAlignmentExample()
+    @Test
+    fun imageStartAlignment() {
+        record {
+            ImageDialogStartAlignmentExample()
+        }
     }
-  }
 
-  private fun record(content: @Composable () -> Unit) {
-    rule.setContent { BpkTheme { content() } }
+    @Test
+    fun imageEndAlignment() {
+        record {
+            ImageDialogEndAlignmentExample()
+        }
+    }
 
-    compareScreenshot(rule.onNode(isDialog()))
-  }
+    private fun record(content: @Composable () -> Unit) {
+        rule.setContent { BpkTheme { content() } }
+
+        compareScreenshot(rule.onNode(isDialog()))
+    }
 }

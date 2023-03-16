@@ -23,48 +23,48 @@ interface BpkDurations : Map<String, Int>
 
 object BpkDuration {
 
-  sealed class Category : BpkParser<Map<String, Any>, BpkDurations> {
+    sealed class Category : BpkParser<Map<String, Any>, BpkDurations> {
 
-    object Animation : Category() {
-      override fun invoke(source: Map<String, Any>): BpkDurations =
-        parseIntegers(source, "animations", "ANIMATION_DURATION_")
+        object Animation : Category() {
+            override fun invoke(source: Map<String, Any>): BpkDurations =
+                parseIntegers(source, "animations", "ANIMATION_DURATION_")
+        }
     }
-  }
 
-  sealed class Format<Output> : BpkTransformer<BpkDurations, Output> {
+    sealed class Format<Output> : BpkTransformer<BpkDurations, Output> {
 
-    data class Xml(val namespace: String) : Format<String>() {
-      override fun invoke(source: BpkDurations): String =
-        toXml(source, namespace)
+        data class Xml(val namespace: String) : Format<String>() {
+            override fun invoke(source: BpkDurations): String =
+                toXml(source, namespace)
+        }
     }
-  }
 }
 
 @Suppress("UNCHECKED_CAST")
 private fun parseIntegers(
-  source: Map<String, Any>,
-  category: String,
-  prefixToRemove: String,
-  filter: (Map.Entry<String, Int>) -> Boolean = { true },
+    source: Map<String, Any>,
+    category: String,
+    prefixToRemove: String,
+    filter: (Map.Entry<String, Int>) -> Boolean = { true },
 ): BpkDurations {
 
-  val props = source.getValue("props") as Map<String, Map<String, String>>
-  val data = props.filter { (_, value) -> value["type"] == "duration" && value["category"] == category }
+    val props = source.getValue("props") as Map<String, Map<String, String>>
+    val data = props.filter { (_, value) -> value["type"] == "duration" && value["category"] == category }
 
-  val map = data
-    .mapValues { it.value.getValue("value").removeSuffix("ms").toIntOrNull() }
-    .mapKeys { it.key.removePrefix(prefixToRemove) }
-    .filterValues { it != null }
-    .let { it as Map<String, Int> }
-    .filter(filter)
+    val map = data
+        .mapValues { it.value.getValue("value").removeSuffix("ms").toIntOrNull() }
+        .mapKeys { it.key.removePrefix(prefixToRemove) }
+        .filterValues { it != null }
+        .let { it as Map<String, Int> }
+        .filter(filter)
 
-  return object : BpkDurations, Map<String, Int> by map {
-    override fun toString(): String =
-      map.toString()
-  }
+    return object : BpkDurations, Map<String, Int> by map {
+        override fun toString(): String =
+            map.toString()
+    }
 }
 
 private fun toXml(source: BpkDurations, type: String): String =
-  source.map { (name, value) ->
-    "  <integer name=\"$type${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}\">$value</integer>"
-  }.joinToString("\n")
+    source.map { (name, value) ->
+        "  <integer name=\"$type${CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name)}\">$value</integer>"
+    }.joinToString("\n")

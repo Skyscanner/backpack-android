@@ -24,7 +24,7 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 class BpkShapes(
-  val small: CornerBasedShape = RoundedCornerShape(BpkBorderRadius.Sm),
-  val medium: CornerBasedShape = RoundedCornerShape(BpkBorderRadius.Md),
-  val large: CornerBasedShape = RoundedCornerShape(BpkBorderRadius.Lg),
+    val small: CornerBasedShape = RoundedCornerShape(BpkBorderRadius.Sm),
+    val medium: CornerBasedShape = RoundedCornerShape(BpkBorderRadius.Md),
+    val large: CornerBasedShape = RoundedCornerShape(BpkBorderRadius.Lg),
 )

@@ -22,6 +22,6 @@ import android.content.Context
 import androidx.recyclerview.widget.GridLayoutManager
 
 internal fun CalendarLayoutManager(context: Context, spanSizeLookup: CalendarSpanSizeLookup) =
-  GridLayoutManager(context, spanSizeLookup.totalSpans).apply {
-    this.spanSizeLookup = spanSizeLookup
-  }
+    GridLayoutManager(context, spanSizeLookup.totalSpans).apply {
+        this.spanSizeLookup = spanSizeLookup
+    }

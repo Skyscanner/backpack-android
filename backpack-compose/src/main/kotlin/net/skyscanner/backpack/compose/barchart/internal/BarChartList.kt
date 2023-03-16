@@ -47,69 +47,69 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BarChartList(
-  model: BpkBarChartModel,
-  selected: BpkBarChartModel.Item?,
-  onSelected: (BpkBarChartModel.Item) -> Unit,
-  state: LazyListState,
-  modifier: Modifier = Modifier,
+    model: BpkBarChartModel,
+    selected: BpkBarChartModel.Item?,
+    onSelected: (BpkBarChartModel.Item) -> Unit,
+    state: LazyListState,
+    modifier: Modifier = Modifier,
 ) {
 
-  var rootLayoutCoordinates: LayoutCoordinates? = null
-  var badgeAnchor by remember { mutableStateOf(Offset.Unspecified) }
+    var rootLayoutCoordinates: LayoutCoordinates? = null
+    var badgeAnchor by remember { mutableStateOf(Offset.Unspecified) }
 
-  Box(modifier = modifier.onGloballyPositioned { rootLayoutCoordinates = it }) {
+    Box(modifier = modifier.onGloballyPositioned { rootLayoutCoordinates = it }) {
 
-    LazyRow(
-      state = state,
-      modifier = Modifier.drawSelectionLine(selected, badgeAnchor),
-      contentPadding = PaddingValues(horizontal = BpkSpacing.Base),
-    ) {
-      items(
-        items = model.items,
-        key = { it.key },
-      ) { item ->
-        BarChartColumn(
-          modifier = Modifier.requiredSize(ItemWidth, ItemHeight),
-          model = item,
-          selected = item == selected,
-          onSelected = onSelected,
-          onSelectedAndPositioned = { bar ->
-            rootLayoutCoordinates?.let { root ->
-              badgeAnchor = root.localPositionOf(bar, Offset(x = bar.size.width / 2f, y = 0f))
+        LazyRow(
+            state = state,
+            modifier = Modifier.drawSelectionLine(selected, badgeAnchor),
+            contentPadding = PaddingValues(horizontal = BpkSpacing.Base),
+        ) {
+            items(
+                items = model.items,
+                key = { it.key },
+            ) { item ->
+                BarChartColumn(
+                    modifier = Modifier.requiredSize(ItemWidth, ItemHeight),
+                    model = item,
+                    selected = item == selected,
+                    onSelected = onSelected,
+                    onSelectedAndPositioned = { bar ->
+                        rootLayoutCoordinates?.let { root ->
+                            badgeAnchor = root.localPositionOf(bar, Offset(x = bar.size.width / 2f, y = 0f))
+                        }
+                    },
+                )
             }
-          },
-        )
-      }
-    }
+        }
 
-    if (badgeAnchor.isSpecified && selected != null) {
-      BarChartBadge(
-        model = model,
-        state = state,
-        selected = selected,
-        anchor = badgeAnchor,
-        // we align badge by absolute coordinates, so no auto-RTL is needed
-        modifier = Modifier.align { size, space, _ -> Alignment.TopStart.align(size, space, LayoutDirection.Ltr) },
-      )
+        if (badgeAnchor.isSpecified && selected != null) {
+            BarChartBadge(
+                model = model,
+                state = state,
+                selected = selected,
+                anchor = badgeAnchor,
+                // we align badge by absolute coordinates, so no auto-RTL is needed
+                modifier = Modifier.align { size, space, _ -> Alignment.TopStart.align(size, space, LayoutDirection.Ltr) },
+            )
+        }
     }
-  }
 }
 
 private fun Modifier.drawSelectionLine(
-  selected: BpkBarChartModel.Item?,
-  badgeOffset: Offset,
-  strokeWidth: Dp = 1.dp,
+    selected: BpkBarChartModel.Item?,
+    badgeOffset: Offset,
+    strokeWidth: Dp = 1.dp,
 ): Modifier =
-  composed {
-    val y = if (badgeOffset.isSpecified) animateFloatAsState(badgeOffset.y).value else 0f
-    val alpha by animateFloatAsState(if (selected != null) 1f else 0f)
-    val color = BpkTheme.colors.coreAccent
+    composed {
+        val y = if (badgeOffset.isSpecified) animateFloatAsState(badgeOffset.y).value else 0f
+        val alpha by animateFloatAsState(if (selected != null) 1f else 0f)
+        val color = BpkTheme.colors.coreAccent
 
-    drawWithContent {
-      drawContent()
-      drawLine(color.copy(alpha = alpha), start = Offset(0f, y), end = Offset(size.width, y), strokeWidth.toPx())
+        drawWithContent {
+            drawContent()
+            drawLine(color.copy(alpha = alpha), start = Offset(0f, y), end = Offset(size.width, y), strokeWidth.toPx())
+        }
     }
-  }
 
 private val ItemWidth = 32.dp
 private val ItemHeight = 168.dp

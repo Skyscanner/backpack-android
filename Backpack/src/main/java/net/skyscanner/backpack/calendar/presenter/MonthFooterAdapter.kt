@@ -62,40 +62,40 @@ import android.view.View
  */
 @Deprecated("Use Calendar2 instead")
 interface MonthFooterAdapter {
-  /**
-   * Indicate that a month/year combination has a footer view.
-   *
-   * If this method returns true for the month/year combination
-   * [onCreateView] and [onBindView] will be called to create/bind the view.
-   *
-   * @param month The current month
-   * @param year The current year
-   *
-   * @return True if the month has a footer or false otherwise.
-   */
-  fun hasFooterForMonth(month: Int, year: Int): Boolean
+    /**
+     * Indicate that a month/year combination has a footer view.
+     *
+     * If this method returns true for the month/year combination
+     * [onCreateView] and [onBindView] will be called to create/bind the view.
+     *
+     * @param month The current month
+     * @param year The current year
+     *
+     * @return True if the month has a footer or false otherwise.
+     */
+    fun hasFooterForMonth(month: Int, year: Int): Boolean
 
-  /**
-   * Called when a new instance of a footer view should be created.
-   *
-   * @see hasFooterForMonth
-   *
-   * @param month The current month
-   * @param year The current year
-   *
-   * @return a View
-   */
-  fun onCreateView(month: Int, year: Int): View
+    /**
+     * Called when a new instance of a footer view should be created.
+     *
+     * @see hasFooterForMonth
+     *
+     * @param month The current month
+     * @param year The current year
+     *
+     * @return a View
+     */
+    fun onCreateView(month: Int, year: Int): View
 
-  /**
-   * Called when data should be bind to `View`.
-   *
-   * @see hasFooterForMonth
-   *
-   * @param view The View to bind
-   * @param month The current month
-   * @param year The current year
-   *
-   */
-  fun onBindView(view: View, month: Int, year: Int): Unit
+    /**
+     * Called when data should be bind to `View`.
+     *
+     * @see hasFooterForMonth
+     *
+     * @param view The View to bind
+     * @param month The current month
+     * @param year The current year
+     *
+     */
+    fun onBindView(view: View, month: Int, year: Int): Unit
 }

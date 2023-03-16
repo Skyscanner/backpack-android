@@ -28,24 +28,24 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkRatingIconsTest : BpkSnapshotTest() {
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun low() {
-    val subject = createTestRating(testContext, size = BpkRating.Size.Icon, value = 3.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun low() {
+        val subject = createTestRating(testContext, size = BpkRating.Size.Icon, value = 3.0f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun medium() {
-    val subject = createTestRating(testContext, size = BpkRating.Size.Icon, value = 6.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun medium() {
+        val subject = createTestRating(testContext, size = BpkRating.Size.Icon, value = 6.0f)
+        snap(subject)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun high() {
-    val subject = createTestRating(testContext, size = BpkRating.Size.Icon, value = 8.0f)
-    snap(subject)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun high() {
+        val subject = createTestRating(testContext, size = BpkRating.Size.Icon, value = 8.0f)
+        snap(subject)
+    }
 }

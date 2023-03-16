@@ -28,71 +28,71 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 class BpkPriceTest(flavor: Flavor) : BpkSnapshotTest(listOf(flavor.size, flavor.align)) {
 
-  private val size = flavor.size
-  private val align = flavor.align
+    private val size = flavor.size
+    private val align = flavor.align
 
-  @Test
-  fun priceOnly() {
-    snap {
-      BpkPrice(
-        price = stringResource(id = R.string.price_price),
-        size = size,
-        align = align,
-      )
+    @Test
+    fun priceOnly() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                size = size,
+                align = align,
+            )
+        }
     }
-  }
 
-  @Test
-  fun priceTrailing() {
-    snap {
-      BpkPrice(
-        price = stringResource(id = R.string.price_price),
-        trailingText = stringResource(id = R.string.price_trailing_text),
-        size = size,
-        align = align,
-      )
+    @Test
+    fun priceTrailing() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                trailingText = stringResource(id = R.string.price_trailing_text),
+                size = size,
+                align = align,
+            )
+        }
     }
-  }
 
-  @Test
-  fun priceLineThroughTrailing() {
-    snap {
-      BpkPrice(
-        price = stringResource(id = R.string.price_price),
-        trailingText = stringResource(id = R.string.price_trailing_text),
-        previousPrice = stringResource(id = R.string.price_line_through_text),
-        size = size,
-        align = align,
-      )
+    @Test
+    fun priceLineThroughTrailing() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                trailingText = stringResource(id = R.string.price_trailing_text),
+                previousPrice = stringResource(id = R.string.price_line_through_text),
+                size = size,
+                align = align,
+            )
+        }
     }
-  }
 
-  @Test
-  fun priceFull() {
-    snap {
-      BpkPrice(
-        price = stringResource(id = R.string.price_price),
-        trailingText = stringResource(id = R.string.price_trailing_text),
-        previousPrice = stringResource(id = R.string.price_line_through_text),
-        leadingText = stringResource(id = R.string.price_leading_text),
-        size = size,
-        align = align,
-      )
+    @Test
+    fun priceFull() {
+        snap {
+            BpkPrice(
+                price = stringResource(id = R.string.price_price),
+                trailingText = stringResource(id = R.string.price_trailing_text),
+                previousPrice = stringResource(id = R.string.price_line_through_text),
+                leadingText = stringResource(id = R.string.price_leading_text),
+                size = size,
+                align = align,
+            )
+        }
     }
-  }
 
-  companion object {
-    @JvmStatic
-    @Parameterized.Parameters(name = "{0} Screenshot")
-    fun flavours(): List<Flavor> = BpkPriceSize.values().flatMap { size ->
-      BpkPriceAlign.values().map { align ->
-        Flavor(size = size, align = align)
-      }
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0} Screenshot")
+        fun flavours(): List<Flavor> = BpkPriceSize.values().flatMap { size ->
+            BpkPriceAlign.values().map { align ->
+                Flavor(size = size, align = align)
+            }
+        }
     }
-  }
 }
 
 data class Flavor(
-  val size: BpkPriceSize,
-  val align: BpkPriceAlign,
+    val size: BpkPriceSize,
+    val align: BpkPriceAlign,
 )

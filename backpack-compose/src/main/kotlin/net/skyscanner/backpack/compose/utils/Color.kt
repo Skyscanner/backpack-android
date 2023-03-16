@@ -29,23 +29,23 @@ import net.skyscanner.backpack.compose.theme.BpkTheme
 
 @Composable
 internal fun InteractionSource.animateAsColor(
-  default: Color,
-  pressed: Color = default,
-  focused: Color = pressed,
+    default: Color,
+    pressed: Color = default,
+    focused: Color = pressed,
 ): Color {
-  if (default == pressed && default == focused) {
-    return default
-  }
-  val isPressed by collectIsPressedAsState()
-  val isFocused by collectIsFocusedAsState()
-  val target = when {
-    isPressed -> pressed
-    isFocused -> focused
-    else -> default
-  }
-  return animateColorAsState(target).value
+    if (default == pressed && default == focused) {
+        return default
+    }
+    val isPressed by collectIsPressedAsState()
+    val isFocused by collectIsFocusedAsState()
+    val target = when {
+        isPressed -> pressed
+        isFocused -> focused
+        else -> default
+    }
+    return animateColorAsState(target).value
 }
 
 @Composable
 internal fun dynamicColorOf(light: Color, dark: Color): Color =
-  if (BpkTheme.colors.isLight) light else dark
+    if (BpkTheme.colors.isLight) light else dark

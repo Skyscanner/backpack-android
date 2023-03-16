@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 public object BpkBorderSize {
-  public val Sm: Dp = 1.dp
+    public val Sm: Dp = 1.dp
 
-  public val Lg: Dp = 2.dp
+    public val Lg: Dp = 2.dp
 
-  public val Xl: Dp = 3.dp
+    public val Xl: Dp = 3.dp
 }

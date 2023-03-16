@@ -32,38 +32,38 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkHorizontalNavTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap {
-    HorizontalNav_Large_Sample()
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun small() {
-    snap {
-      HorizontalNav_Small_Sample()
+    @Test
+    fun default() = snap {
+        HorizontalNav_Large_Sample()
     }
-  }
 
-  @Test
-  fun smallWithIcon() {
-    snap {
-      HorizontalNav_SmallWithIcon_Sample()
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun small() {
+        snap {
+            HorizontalNav_Small_Sample()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun large() {
-    snap {
-      HorizontalNav_Large_Sample()
+    @Test
+    fun smallWithIcon() {
+        snap {
+            HorizontalNav_SmallWithIcon_Sample()
+        }
     }
-  }
 
-  @Test
-  fun largeWithIcon() {
-    snap {
-      HorizontalNav_LargeWithIcon_Sample()
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun large() {
+        snap {
+            HorizontalNav_Large_Sample()
+        }
     }
-  }
+
+    @Test
+    fun largeWithIcon() {
+        snap {
+            HorizontalNav_LargeWithIcon_Sample()
+        }
+    }
 }

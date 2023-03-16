@@ -49,91 +49,91 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun BpkNudger(
-  value: Int,
-  onValueChange: (Int) -> Unit,
-  min: Int,
-  max: Int,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = LocalFieldStatus.current != BpkFieldStatus.Disabled,
+    value: Int,
+    onValueChange: (Int) -> Unit,
+    min: Int,
+    max: Int,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = LocalFieldStatus.current != BpkFieldStatus.Disabled,
 ) {
-  val range = min..max
-  val coerced = value.coerceIn(range)
+    val range = min..max
+    val coerced = value.coerceIn(range)
 
-  fun setValue(value: Int) =
-    onValueChange(value.coerceIn(range))
+    fun setValue(value: Int) =
+        onValueChange(value.coerceIn(range))
 
-  Row(
-    modifier = modifier.nudgerSemantics(value, ::setValue, range, enabled),
-    verticalAlignment = Alignment.CenterVertically,
-  ) {
+    Row(
+        modifier = modifier.nudgerSemantics(value, ::setValue, range, enabled),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
 
-    BpkButton(
-      icon = BpkIcon.Minus,
-      contentDescription = "", // handled by semantics modifier
-      enabled = enabled && coerced > range.first,
-      size = BpkButtonSize.Default,
-      type = BpkButtonType.Secondary,
-      onClick = { setValue(coerced - 1) },
-    )
+        BpkButton(
+            icon = BpkIcon.Minus,
+            contentDescription = "", // handled by semantics modifier
+            enabled = enabled && coerced > range.first,
+            size = BpkButtonSize.Default,
+            type = BpkButtonType.Secondary,
+            onClick = { setValue(coerced - 1) },
+        )
 
-    BpkText(
-      text = coerced.toString(),
-      style = BpkTheme.typography.heading5,
-      maxLines = 1,
-      textAlign = TextAlign.Center,
-      modifier = Modifier
-        .semantics { invisibleToUser() }
-        .padding(horizontal = BpkSpacing.Md)
-        .widthIn(min = BpkSpacing.Lg),
-      color = animateColorAsState(
-        when {
-          enabled -> BpkTheme.colors.textPrimary
-          else -> BpkTheme.colors.textDisabled
-        },
-      ).value,
-    )
+        BpkText(
+            text = coerced.toString(),
+            style = BpkTheme.typography.heading5,
+            maxLines = 1,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .semantics { invisibleToUser() }
+                .padding(horizontal = BpkSpacing.Md)
+                .widthIn(min = BpkSpacing.Lg),
+            color = animateColorAsState(
+                when {
+                    enabled -> BpkTheme.colors.textPrimary
+                    else -> BpkTheme.colors.textDisabled
+                },
+            ).value,
+        )
 
-    BpkButton(
-      icon = BpkIcon.Plus,
-      contentDescription = "", // handled by semantics modifier
-      enabled = enabled && coerced < range.last,
-      size = BpkButtonSize.Default,
-      type = BpkButtonType.Secondary,
-      onClick = { setValue(coerced + 1) },
-    )
-  }
+        BpkButton(
+            icon = BpkIcon.Plus,
+            contentDescription = "", // handled by semantics modifier
+            enabled = enabled && coerced < range.last,
+            size = BpkButtonSize.Default,
+            type = BpkButtonType.Secondary,
+            onClick = { setValue(coerced + 1) },
+        )
+    }
 }
 
 private fun Modifier.nudgerSemantics(
-  value: Int,
-  onValueChange: (Int) -> Unit,
-  range: IntRange,
-  enabled: Boolean,
+    value: Int,
+    onValueChange: (Int) -> Unit,
+    range: IntRange,
+    enabled: Boolean,
 ): Modifier =
-  semantics(mergeDescendants = true) {
+    semantics(mergeDescendants = true) {
 
-    // this is needed to use volume keys
-    setProgress { targetValue ->
-      // without this rounding the values will only decrease
-      val newValue = targetValue
-        .roundToInt()
-        .coerceIn(range)
-      if (newValue != value) {
-        onValueChange(newValue)
-        true
-      } else {
-        false
-      }
+        // this is needed to use volume keys
+        setProgress { targetValue ->
+            // without this rounding the values will only decrease
+            val newValue = targetValue
+                .roundToInt()
+                .coerceIn(range)
+            if (newValue != value) {
+                onValueChange(newValue)
+                true
+            } else {
+                false
+            }
+        }
+
+        // override describing percents
+        stateDescription = value.toString()
+
+        if (!enabled) disabled()
     }
-
-    // override describing percents
-    stateDescription = value.toString()
-
-    if (!enabled) disabled()
-  }
-    .progressSemantics(
-      // this is needed to use volume keys
-      value = value.toFloat(),
-      valueRange = range.first.toFloat()..range.last.toFloat(),
-      steps = range.last - range.first,
-    )
+        .progressSemantics(
+            // this is needed to use volume keys
+            value = value.toFloat(),
+            valueRange = range.first.toFloat()..range.last.toFloat(),
+            steps = range.last - range.first,
+        )

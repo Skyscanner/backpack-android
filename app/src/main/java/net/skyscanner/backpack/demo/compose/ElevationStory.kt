@@ -46,33 +46,33 @@ import net.skyscanner.backpack.demo.meta.StoryKind
 @ElevationTokensComponent
 @ComposeStory(kind = StoryKind.DemoOnly)
 fun ElevationComposeStory(modifier: Modifier = Modifier) {
-  Column(modifier = modifier.padding(vertical = BpkSpacing.Base)) {
-    val data = BpkElevation.values.sortedBy { it.value }
-    for (item in data) {
-      ElevationSample(token = item)
+    Column(modifier = modifier.padding(vertical = BpkSpacing.Base)) {
+        val data = BpkElevation.values.sortedBy { it.value }
+        for (item in data) {
+            ElevationSample(token = item)
+        }
     }
-  }
 }
 
 @Composable
 private fun ElevationCard(token: Token<Dp>) {
-  Box(
-    modifier = Modifier
-      .fillMaxWidth()
-      .shadow(token.value, BpkTheme.shapes.medium)
-      .background(BpkTheme.colors.surfaceElevated, BpkTheme.shapes.medium),
-    contentAlignment = Alignment.Center,
-  ) {
-    BpkText(
-      text = stringResource(R.string.token_placeholder, token.name, token.value),
-      modifier = Modifier.padding(BpkSpacing.Base),
-    )
-  }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .shadow(token.value, BpkTheme.shapes.medium)
+            .background(BpkTheme.colors.surfaceElevated, BpkTheme.shapes.medium),
+        contentAlignment = Alignment.Center,
+    ) {
+        BpkText(
+            text = stringResource(R.string.token_placeholder, token.name, token.value),
+            modifier = Modifier.padding(BpkSpacing.Base),
+        )
+    }
 }
 
 @Composable
 private fun ElevationSample(token: Token<Dp>) {
-  Box(Modifier.padding(max(BpkSpacing.Base, token.value))) {
-    ElevationCard(token)
-  }
+    Box(Modifier.padding(max(BpkSpacing.Base, token.value))) {
+        ElevationCard(token)
+    }
 }

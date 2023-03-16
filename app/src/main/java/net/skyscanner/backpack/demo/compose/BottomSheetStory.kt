@@ -40,28 +40,28 @@ import net.skyscanner.backpack.demo.ui.ListItem
 @BottomSheetComponent
 @ComposeStory
 fun BottomSheetStory(
-  modifier: Modifier = Modifier,
-  initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
+    modifier: Modifier = Modifier,
+    initialValue: BpkBottomSheetValue = BpkBottomSheetValue.Collapsed,
 ) {
-  val state = rememberBpkBottomSheetState(initialValue)
-  BpkBottomSheet(
-    modifier = modifier,
-    state = state,
-    peekHeight = 56.dp * 3,
-    sheetContent = { contentPadding ->
-      LazyColumn(contentPadding = contentPadding) {
-        items(100) {
-          ListItem(title = stringResource(R.string.generic_list_item, it), showDivider = false)
-        }
-      }
-    },
-    content = { contentPadding ->
-      Spacer(
-        modifier = Modifier
-          .fillMaxSize()
-          .background(BpkTheme.colors.canvasContrast)
-          .padding(contentPadding),
-      )
-    },
-  )
+    val state = rememberBpkBottomSheetState(initialValue)
+    BpkBottomSheet(
+        modifier = modifier,
+        state = state,
+        peekHeight = 56.dp * 3,
+        sheetContent = { contentPadding ->
+            LazyColumn(contentPadding = contentPadding) {
+                items(100) {
+                    ListItem(title = stringResource(R.string.generic_list_item, it), showDivider = false)
+                }
+            }
+        },
+        content = { contentPadding ->
+            Spacer(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(BpkTheme.colors.canvasContrast)
+                    .padding(contentPadding),
+            )
+        },
+    )
 }

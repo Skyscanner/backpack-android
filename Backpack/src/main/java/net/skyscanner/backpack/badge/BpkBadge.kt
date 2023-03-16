@@ -30,144 +30,144 @@ import net.skyscanner.backpack.R
 import net.skyscanner.backpack.text.BpkText
 
 open class BpkBadge @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : BpkText(context, attrs, defStyleAttr) {
 
-  private var initialized = false
+    private var initialized = false
 
-  init {
-    initialize(attrs, defStyleAttr)
-    initialized = true
-  }
+    init {
+        initialize(attrs, defStyleAttr)
+        initialized = true
+    }
 
-  enum class Type(
-    internal var id: Int,
-    @ColorRes internal var bgColor: Int,
-    @ColorRes internal var textColor: Int,
-  ) {
-    /**
-     * Style for badges with positive messages
-     */
-    Success(1, R.color.bpkStatusSuccessFill, R.color.bpkTextOnLight),
-    /**
-     *  Style for badges with warning messages
-     */
-    Warning(2, R.color.bpkStatusWarningFill, R.color.bpkTextOnLight),
-    /**
-     * Style for badges with error messages
-     */
-    Destructive(3, R.color.bpkStatusDangerFill, R.color.bpkTextOnLight),
-    /**
-     *  Light themed style for badges
-     */
-    @Deprecated("Switch to a different badge style")
-    Light(4, R.color.bpkSkyGrayTint07, R.color.bpkSkyBlueShade03),
-    /**
-     *  Style for badges on dark themes
-     */
-    Inverse(5, R.color.bpkSurfaceDefault, R.color.bpkTextPrimary),
-    /**
-     * Style for badges with a thin white outline
-     */
-    Outline(6, R.color.bpkTextOnDark, R.color.bpkTextOnDark),
-    /**
-     * Style for badges with a dark background
-     */
-    @Deprecated("Switch to a different badge style")
-    Dark(7, R.color.bpkSkyGray, R.color.bpkWhite),
-    /**
-     * Style for badges
-     */
-    Normal(8, R.color.bpkSurfaceHighlight, R.color.bpkTextPrimary),
-    /**
-     * Style for badges with emphasis
-     */
-    Strong(9, R.color.bpkCorePrimary, R.color.bpkTextOnDark),
-    ;
+    enum class Type(
+        internal var id: Int,
+        @ColorRes internal var bgColor: Int,
+        @ColorRes internal var textColor: Int,
+    ) {
+        /**
+         * Style for badges with positive messages
+         */
+        Success(1, R.color.bpkStatusSuccessFill, R.color.bpkTextOnLight),
+        /**
+         *  Style for badges with warning messages
+         */
+        Warning(2, R.color.bpkStatusWarningFill, R.color.bpkTextOnLight),
+        /**
+         * Style for badges with error messages
+         */
+        Destructive(3, R.color.bpkStatusDangerFill, R.color.bpkTextOnLight),
+        /**
+         *  Light themed style for badges
+         */
+        @Deprecated("Switch to a different badge style")
+        Light(4, R.color.bpkSkyGrayTint07, R.color.bpkSkyBlueShade03),
+        /**
+         *  Style for badges on dark themes
+         */
+        Inverse(5, R.color.bpkSurfaceDefault, R.color.bpkTextPrimary),
+        /**
+         * Style for badges with a thin white outline
+         */
+        Outline(6, R.color.bpkTextOnDark, R.color.bpkTextOnDark),
+        /**
+         * Style for badges with a dark background
+         */
+        @Deprecated("Switch to a different badge style")
+        Dark(7, R.color.bpkSkyGray, R.color.bpkWhite),
+        /**
+         * Style for badges
+         */
+        Normal(8, R.color.bpkSurfaceHighlight, R.color.bpkTextPrimary),
+        /**
+         * Style for badges with emphasis
+         */
+        Strong(9, R.color.bpkCorePrimary, R.color.bpkTextOnDark),
+        ;
 
-    internal companion object {
+        internal companion object {
 
-      internal fun fromId(id: Int): Type {
-        for (f in values()) {
-          if (f.id == id) return f
+            internal fun fromId(id: Int): Type {
+                for (f in values()) {
+                    if (f.id == id) return f
+                }
+                throw IllegalArgumentException()
+            }
         }
-        throw IllegalArgumentException()
-      }
-    }
-  }
-
-  /**
-   * @property type
-   * Type of badge. Default Type.Success
-   */
-  var type: Type = Type.Success
-    set(value) {
-      field = value
-      if (initialized) setup()
-    }
-  /**
-   * @property message
-   * message on the badge
-   */
-  var message: String? = null
-    set(value) {
-      field = value
-      this.text = message
     }
 
-  private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
+    /**
+     * @property type
+     * Type of badge. Default Type.Success
+     */
+    var type: Type = Type.Success
+        set(value) {
+            field = value
+            if (initialized) setup()
+        }
+    /**
+     * @property message
+     * message on the badge
+     */
+    var message: String? = null
+        set(value) {
+            field = value
+            this.text = message
+        }
 
-    val a: TypedArray = context.theme.obtainStyledAttributes(
-      attrs,
-      R.styleable.BpkBadge,
-      defStyleAttr,
-      0,
-    )
+    private fun initialize(attrs: AttributeSet?, defStyleAttr: Int) {
 
-    type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
-    message = a.getString(R.styleable.BpkBadge_message)
+        val a: TypedArray = context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.BpkBadge,
+            defStyleAttr,
+            0,
+        )
 
-    a.recycle()
+        type = Type.fromId(a.getInt(R.styleable.BpkBadge_badgeType, 1))
+        message = a.getString(R.styleable.BpkBadge_message)
 
-    setup()
-  }
+        a.recycle()
 
-  private fun setup() {
-    this.includeFontPadding = true
-    this.textStyle = TextStyle.Caption
-    this.minHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
-    this.text = message
-
-    // set padding
-    val paddingMd = resources.getDimension(R.dimen.bpkSpacingMd).toInt()
-    val paddingSm = resources.getDimension(R.dimen.bpkSpacingSm).toInt()
-    this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
-
-    // set Text color
-    this.setTextColor(context.getColor(type.textColor))
-
-    // Set background
-    val bgColor = context.getColorStateList(type.bgColor)
-    if (type == Type.Outline) {
-      setBackground(ColorStateList.valueOf(Color.TRANSPARENT), bgColor)
-    } else {
-      setBackground(bgColor)
+        setup()
     }
-    this.gravity = Gravity.CENTER
-  }
 
-  internal fun setBackground(
-    solid: ColorStateList,
-    stroke: ColorStateList = solid,
-  ) {
-    val drawable = GradientDrawable()
-    drawable.color = solid
-    drawable.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), stroke)
+    private fun setup() {
+        this.includeFontPadding = true
+        this.textStyle = TextStyle.Caption
+        this.minHeight = resources.getDimensionPixelSize(R.dimen.bpkSpacingLg)
+        this.text = message
 
-    val cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusXs)
-    drawable.cornerRadius = cornerRadius
-    this.background = drawable
-  }
+        // set padding
+        val paddingMd = resources.getDimension(R.dimen.bpkSpacingMd).toInt()
+        val paddingSm = resources.getDimension(R.dimen.bpkSpacingSm).toInt()
+        this.setPadding(paddingMd, paddingSm, paddingMd, paddingSm)
+
+        // set Text color
+        this.setTextColor(context.getColor(type.textColor))
+
+        // Set background
+        val bgColor = context.getColorStateList(type.bgColor)
+        if (type == Type.Outline) {
+            setBackground(ColorStateList.valueOf(Color.TRANSPARENT), bgColor)
+        } else {
+            setBackground(bgColor)
+        }
+        this.gravity = Gravity.CENTER
+    }
+
+    internal fun setBackground(
+        solid: ColorStateList,
+        stroke: ColorStateList = solid,
+    ) {
+        val drawable = GradientDrawable()
+        drawable.color = solid
+        drawable.setStroke(resources.getDimension(R.dimen.badge_border_size).toInt(), stroke)
+
+        val cornerRadius = resources.getDimension(R.dimen.bpkBorderRadiusXs)
+        drawable.cornerRadius = cornerRadius
+        this.background = drawable
+    }
 }

@@ -30,13 +30,13 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkDividerTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap(width = 100.dp) {
-    DividerSampleNoIndent()
-  }
+    @Test
+    fun default() = snap(width = 100.dp) {
+        DividerSampleNoIndent()
+    }
 
-  @Test
-  fun withIndent() = snap(width = 100.dp) {
-    DividerSample_WithIndent()
-  }
+    @Test
+    fun withIndent() = snap(width = 100.dp) {
+        DividerSample_WithIndent()
+    }
 }

@@ -29,95 +29,95 @@ import net.skyscanner.backpack.dialog.internal.AlertDialogImpl
 import net.skyscanner.backpack.dialog.internal.FlareDialogImpl
 
 open class BpkDialog private constructor(
-  context: Context,
-  val style: Style,
-  val type: Type?,
+    context: Context,
+    val style: Style,
+    val type: Type?,
 ) : Dialog(context, 0) {
 
-  @Deprecated("Use BpkDialog(Context, Type) instead")
-  constructor(
-    context: Context,
-    style: Style = Style.ALERT,
-  ) : this(
-    context = context,
-    style = style,
-    type = if (style == Style.FLARE) Type.Flare else null,
-  )
+    @Deprecated("Use BpkDialog(Context, Type) instead")
+    constructor(
+        context: Context,
+        style: Style = Style.ALERT,
+    ) : this(
+        context = context,
+        style = style,
+        type = if (style == Style.FLARE) Type.Flare else null,
+    )
 
-  constructor(
-    context: Context,
-    type: Type,
-  ) : this(
-    context = context,
-    type = type,
-    style = when (type) {
-      Type.Flare -> Style.FLARE
-      else -> Style.ALERT
-    },
-  )
+    constructor(
+        context: Context,
+        type: Type,
+    ) : this(
+        context = context,
+        type = type,
+        style = when (type) {
+            Type.Flare -> Style.FLARE
+            else -> Style.ALERT
+        },
+    )
 
-  data class Button(internal val text: String, internal val onClick: () -> Unit)
+    data class Button(internal val text: String, internal val onClick: () -> Unit)
 
-  data class Icon
-  @Deprecated("Custom icon background are not supported now and will be removed from public API soon")
-  constructor(
-    @DrawableRes val drawableRes: Int,
-    @Deprecated("Icon background is semantic now. This field will not contain any useful data if Type is used")
-    @ColorInt val color: Int,
-  ) {
+    data class Icon
+    @Deprecated("Custom icon background are not supported now and will be removed from public API soon")
+    constructor(
+        @DrawableRes val drawableRes: Int,
+        @Deprecated("Icon background is semantic now. This field will not contain any useful data if Type is used")
+        @ColorInt val color: Int,
+    ) {
 
-    @Suppress("DEPRECATION")
-    constructor(@DrawableRes drawableRes: Int) : this(drawableRes, Color.TRANSPARENT)
-  }
-
-  enum class Type {
-    Success,
-    Warning,
-    Destructive,
-    Flare,
-  }
-
-  enum class Style {
-    ALERT, FLARE,
-  }
-
-  private val impl = when (type) {
-    Type.Flare -> FlareDialogImpl(this)
-    else -> AlertDialogImpl(this, type)
-  }
-
-  var title: String
-    get() = impl.title
-    set(value) {
-      impl.title = value
+        @Suppress("DEPRECATION")
+        constructor(@DrawableRes drawableRes: Int) : this(drawableRes, Color.TRANSPARENT)
     }
 
-  var description: String
-    get() = impl.description
-    set(value) {
-      impl.description = value
+    enum class Type {
+        Success,
+        Warning,
+        Destructive,
+        Flare,
     }
 
-  val image: ImageView?
-    get() = impl.image
-
-  var icon: Icon?
-    get() = impl.icon
-    set(value) {
-      impl.icon = value
+    enum class Style {
+        ALERT, FLARE,
     }
 
-  @Deprecated("Use addActionButton(BpkDialog.Button) instead")
-  fun addActionButton(view: View) {
-    impl.addActionButton(view)
-  }
+    private val impl = when (type) {
+        Type.Flare -> FlareDialogImpl(this)
+        else -> AlertDialogImpl(this, type)
+    }
 
-  fun addActionButton(button: Button) {
-    impl.addActionButton(button)
-  }
+    var title: String
+        get() = impl.title
+        set(value) {
+            impl.title = value
+        }
 
-  override fun setCanceledOnTouchOutside(cancel: Boolean) {
-    super.setCanceledOnTouchOutside(cancel)
-    impl.isCanceledOnTouchOutside = cancel
-  }
+    var description: String
+        get() = impl.description
+        set(value) {
+            impl.description = value
+        }
+
+    val image: ImageView?
+        get() = impl.image
+
+    var icon: Icon?
+        get() = impl.icon
+        set(value) {
+            impl.icon = value
+        }
+
+    @Deprecated("Use addActionButton(BpkDialog.Button) instead")
+    fun addActionButton(view: View) {
+        impl.addActionButton(view)
+    }
+
+    fun addActionButton(button: Button) {
+        impl.addActionButton(button)
+    }
+
+    override fun setCanceledOnTouchOutside(cancel: Boolean) {
+        super.setCanceledOnTouchOutside(cancel)
+        impl.isCanceledOnTouchOutside = cancel
+    }
 }

@@ -29,35 +29,35 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 interface TestStateMachineResult
 
 class TestStateMachineScope<SM : StateMachine<State, *>, State>(
-  val stateMachine: SM,
+    val stateMachine: SM,
 ) {
 
-  val state: State
-    get() = stateMachine.state.value
+    val state: State
+        get() = stateMachine.state.value
 
-  fun verify(block: TestStateMachineResultScope<State>.() -> Unit): TestStateMachineResult {
-    val currentState = stateMachine.state.value
-    val verificationScope = TestStateMachineResultScope(currentState)
-    verificationScope.block()
-    return object : TestStateMachineResult {}
-  }
+    fun verify(block: TestStateMachineResultScope<State>.() -> Unit): TestStateMachineResult {
+        val currentState = stateMachine.state.value
+        val verificationScope = TestStateMachineResultScope(currentState)
+        verificationScope.block()
+        return object : TestStateMachineResult {}
+    }
 }
 
 class TestStateMachineResultScope<State>(
-  val state: State,
+    val state: State,
 )
 
 @OptIn(ExperimentalCoroutinesApi::class)
 fun <SM : StateMachine<State, *>, State> testStateMachine(
-  creator: CoroutineScope.() -> SM,
-  block: suspend TestStateMachineScope<SM, State>.() -> TestStateMachineResult,
+    creator: CoroutineScope.() -> SM,
+    block: suspend TestStateMachineScope<SM, State>.() -> TestStateMachineResult,
 ) {
-  val testCoroutineScheduler = TestCoroutineScheduler()
-  val coroutineScope = TestScope(testCoroutineScheduler) + UnconfinedTestDispatcher(testCoroutineScheduler)
+    val testCoroutineScheduler = TestCoroutineScheduler()
+    val coroutineScope = TestScope(testCoroutineScheduler) + UnconfinedTestDispatcher(testCoroutineScheduler)
 
-  runBlocking(testCoroutineScheduler) {
-    val stateMachine = coroutineScope.creator()
-    val testScope = TestStateMachineScope(stateMachine)
-    testScope.block()
-  }
+    runBlocking(testCoroutineScheduler) {
+        val stateMachine = coroutineScope.creator()
+        val testScope = TestStateMachineScope(stateMachine)
+        testScope.block()
+    }
 }

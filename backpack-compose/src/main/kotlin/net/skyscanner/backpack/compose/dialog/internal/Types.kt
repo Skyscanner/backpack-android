@@ -26,33 +26,33 @@ import net.skyscanner.backpack.compose.icon.BpkIcon
 import net.skyscanner.backpack.compose.theme.BpkTheme
 
 internal object Dialog {
-  internal sealed class Icon {
-    abstract val icon: BpkIcon
+    internal sealed class Icon {
+        abstract val icon: BpkIcon
 
-    @get:Composable
-    abstract val backgroundColor: Color
+        @get:Composable
+        abstract val backgroundColor: Color
 
-    data class Success(override val icon: BpkIcon) : Icon() {
+        data class Success(override val icon: BpkIcon) : Icon() {
 
-      override val backgroundColor
-        @Composable
-        get() = BpkTheme.colors.coreAccent
+            override val backgroundColor
+                @Composable
+                get() = BpkTheme.colors.coreAccent
+        }
+
+        data class Warning(override val icon: BpkIcon) : Icon() {
+
+            override val backgroundColor
+                @Composable
+                get() = BpkTheme.colors.statusWarningSpot
+        }
+
+        data class Destructive(override val icon: BpkIcon) : Icon() {
+
+            override val backgroundColor
+                @Composable
+                get() = BpkTheme.colors.statusDangerSpot
+        }
     }
 
-    data class Warning(override val icon: BpkIcon) : Icon() {
-
-      override val backgroundColor
-        @Composable
-        get() = BpkTheme.colors.statusWarningSpot
-    }
-
-    data class Destructive(override val icon: BpkIcon) : Icon() {
-
-      override val backgroundColor
-        @Composable
-        get() = BpkTheme.colors.statusDangerSpot
-    }
-  }
-
-  internal data class Button(val type: BpkButtonType, val button: DialogButton)
+    internal data class Button(val type: BpkButtonType, val button: DialogButton)
 }

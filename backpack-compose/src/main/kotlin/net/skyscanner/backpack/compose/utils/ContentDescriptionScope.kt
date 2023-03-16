@@ -28,22 +28,22 @@ import androidx.compose.ui.platform.LocalContext
 @Stable
 interface ContentDescriptionScope {
 
-  fun stringResource(@StringRes id: Int): String
+    fun stringResource(@StringRes id: Int): String
 
-  fun stringResource(@StringRes id: Int, vararg formatArgs: Any): String
+    fun stringResource(@StringRes id: Int, vararg formatArgs: Any): String
 }
 
 @Composable
 internal fun rememberContentDescriptionScope(): ContentDescriptionScope {
-  val resources = LocalContext.current.resources
-  return remember(resources) {
-    object : ContentDescriptionScope {
+    val resources = LocalContext.current.resources
+    return remember(resources) {
+        object : ContentDescriptionScope {
 
-      override fun stringResource(id: Int): String =
-        resources.getString(id)
+            override fun stringResource(id: Int): String =
+                resources.getString(id)
 
-      override fun stringResource(id: Int, vararg formatArgs: Any): String =
-        resources.getString(id, *formatArgs)
+            override fun stringResource(id: Int, vararg formatArgs: Any): String =
+                resources.getString(id, *formatArgs)
+        }
     }
-  }
 }

@@ -30,30 +30,30 @@ import net.skyscanner.backpack.map.internal.createBpkMarkerView
  * Receives the map in async mode and adds some Backpack customisations to it.
  */
 fun MapView.getBpkMapAsync(onReady: (GoogleMap) -> Unit) {
-  getMapAsync {
-    it.setInfoWindowAdapter(BpkWindowInfoAdapter(context))
-    onReady(it)
-  }
+    getMapAsync {
+        it.setInfoWindowAdapter(BpkWindowInfoAdapter(context))
+        onReady(it)
+    }
 }
 
 /**
  * Receives the map in async mode and adds some Backpack customisations to it.
  */
 fun SupportMapFragment.getBpkMapAsync(onReady: (GoogleMap) -> Unit) {
-  getMapAsync {
-    it.setInfoWindowAdapter(BpkWindowInfoAdapter(requireContext()))
-    onReady(it)
-  }
+    getMapAsync {
+        it.setInfoWindowAdapter(BpkWindowInfoAdapter(requireContext()))
+        onReady(it)
+    }
 }
 
 private class BpkWindowInfoAdapter(
-  private val context: Context,
+    private val context: Context,
 ) : GoogleMap.InfoWindowAdapter {
 
-  override fun getInfoWindow(marker: Marker): View =
-    createBpkMarkerView(context, marker.title, marker.icon, showPointer = !marker.pointerOnly)
-      .apply { isSelected = true }
+    override fun getInfoWindow(marker: Marker): View =
+        createBpkMarkerView(context, marker.title, marker.icon, showPointer = !marker.pointerOnly)
+            .apply { isSelected = true }
 
-  override fun getInfoContents(p0: Marker): View? =
-    null
+    override fun getInfoContents(p0: Marker): View? =
+        null
 }

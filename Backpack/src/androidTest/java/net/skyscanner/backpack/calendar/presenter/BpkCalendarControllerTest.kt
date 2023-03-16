@@ -33,138 +33,138 @@ import org.threeten.bp.LocalDate
 import java.util.Locale
 
 internal open class BpkCalendarControllerTestImpl(
-  selectionType: SelectionType = SelectionType.RANGE,
+    selectionType: SelectionType = SelectionType.RANGE,
 ) : BpkCalendarController(selectionType) {
 
-  var currentRange: CalendarSelection? = null
+    var currentRange: CalendarSelection? = null
 
-  override val locale: Locale = Locale.forLanguageTag("pt-br")
-  override fun onRangeSelected(range: CalendarSelection) { currentRange = range }
+    override val locale: Locale = Locale.forLanguageTag("pt-br")
+    override fun onRangeSelected(range: CalendarSelection) { currentRange = range }
 }
 
 @RunWith(AndroidJUnit4::class)
 class BpkCalendarControllerTest {
 
-  private lateinit var subject: BpkCalendarControllerTestImpl
+    private lateinit var subject: BpkCalendarControllerTestImpl
 
-  @Before
-  fun setUp() {
-    AndroidThreeTen.init(TestContext)
-    subject = BpkCalendarControllerTestImpl()
-  }
+    @Before
+    fun setUp() {
+        AndroidThreeTen.init(TestContext)
+        subject = BpkCalendarControllerTestImpl()
+    }
 
-  // region selection type Range
-  @Test
-  fun test_default_dates() {
-    val today = LocalDate.now()
-    val nextYear = LocalDate.now().plusYears(1)
+    // region selection type Range
+    @Test
+    fun test_default_dates() {
+        val today = LocalDate.now()
+        val nextYear = LocalDate.now().plusYears(1)
 
-    Assert.assertEquals(today, subject.startDate)
-    Assert.assertEquals(nextYear, subject.endDate)
-  }
+        Assert.assertEquals(today, subject.startDate)
+        Assert.assertEquals(nextYear, subject.endDate)
+    }
 
-  @Test
-  fun test_get_localized_date() {
-    val date = LocalDate.of(2019, 2, 1)
+    @Test
+    fun test_get_localized_date() {
+        val date = LocalDate.of(2019, 2, 1)
 
-    Assert.assertEquals("2019-fev-01", subject.getLocalizedDate(date, "yyyy-MMM-dd"))
-  }
+        Assert.assertEquals("2019-fev-01", subject.getLocalizedDate(date, "yyyy-MMM-dd"))
+    }
 
-  @Test
-  fun test_onDayOfMonthSelected_when_first_selected() {
-    val day = LocalDate.of(2019, 1, 1)
-    val expectedRange = CalendarRange(day, null)
+    @Test
+    fun test_onDayOfMonthSelected_when_first_selected() {
+        val day = LocalDate.of(2019, 1, 1)
+        val expectedRange = CalendarRange(day, null)
 
-    subject.onDayOfMonthSelected(day)
-    Assert.assertEquals(expectedRange, subject.currentRange)
-  }
+        subject.onDayOfMonthSelected(day)
+        Assert.assertEquals(expectedRange, subject.currentRange)
+    }
 
-  @Test
-  fun test_onDayOfMonthSelected_when_selecting_range_end() {
-    val start = LocalDate.of(2019, 1, 1)
-    val end = LocalDate.of(2019, 1, 4)
-    val expectedRange = CalendarRange(start, end)
+    @Test
+    fun test_onDayOfMonthSelected_when_selecting_range_end() {
+        val start = LocalDate.of(2019, 1, 1)
+        val end = LocalDate.of(2019, 1, 4)
+        val expectedRange = CalendarRange(start, end)
 
-    subject.onDayOfMonthSelected(start)
-    subject.onDayOfMonthSelected(end)
+        subject.onDayOfMonthSelected(start)
+        subject.onDayOfMonthSelected(end)
 
-    Assert.assertEquals(expectedRange, subject.currentRange)
-  }
+        Assert.assertEquals(expectedRange, subject.currentRange)
+    }
 
-  @Test
-  fun test_onDayOfMonthSelected_when_selecting_same_day() {
-    val start = LocalDate.of(2019, 1, 1)
-    val expectedRange = CalendarRange(start, start)
+    @Test
+    fun test_onDayOfMonthSelected_when_selecting_same_day() {
+        val start = LocalDate.of(2019, 1, 1)
+        val expectedRange = CalendarRange(start, start)
 
-    subject.onDayOfMonthSelected(start)
-    subject.onDayOfMonthSelected(start)
+        subject.onDayOfMonthSelected(start)
+        subject.onDayOfMonthSelected(start)
 
-    Assert.assertEquals(expectedRange, subject.currentRange)
-  }
+        Assert.assertEquals(expectedRange, subject.currentRange)
+    }
 
-  @Test
-  fun test_onDayOfMonthSelected_when_selecting_same_day_thrice() {
-    val day = LocalDate.of(2019, 1, 1)
-    val expectedRange = CalendarRange(null, null)
+    @Test
+    fun test_onDayOfMonthSelected_when_selecting_same_day_thrice() {
+        val day = LocalDate.of(2019, 1, 1)
+        val expectedRange = CalendarRange(null, null)
 
-    subject.onDayOfMonthSelected(day)
-    subject.onDayOfMonthSelected(day)
-    subject.onDayOfMonthSelected(day)
+        subject.onDayOfMonthSelected(day)
+        subject.onDayOfMonthSelected(day)
+        subject.onDayOfMonthSelected(day)
 
-    Assert.assertEquals(expectedRange, subject.currentRange)
-  }
+        Assert.assertEquals(expectedRange, subject.currentRange)
+    }
 
-  @Test
-  fun test_onDayOfMonthSelected_when_selecting_day_before_start_day() {
-    val start = LocalDate.of(2019, 1, 2)
-    val end = LocalDate.of(2019, 1, 1)
+    @Test
+    fun test_onDayOfMonthSelected_when_selecting_day_before_start_day() {
+        val start = LocalDate.of(2019, 1, 2)
+        val end = LocalDate.of(2019, 1, 1)
 
-    val expectedRange = CalendarRange(end, null)
+        val expectedRange = CalendarRange(end, null)
 
-    subject.onDayOfMonthSelected(start)
-    subject.onDayOfMonthSelected(end)
+        subject.onDayOfMonthSelected(start)
+        subject.onDayOfMonthSelected(end)
 
-    Assert.assertEquals(expectedRange, subject.currentRange)
-  }
+        Assert.assertEquals(expectedRange, subject.currentRange)
+    }
 
-  @Test
-  fun test_onDayOfMonthSelected_when_selecting_different_range_end() {
-    val start = LocalDate.of(2019, 1, 1)
-    val end1 = LocalDate.of(2019, 1, 4)
-    val start2 = LocalDate.of(2019, 1, 3)
+    @Test
+    fun test_onDayOfMonthSelected_when_selecting_different_range_end() {
+        val start = LocalDate.of(2019, 1, 1)
+        val end1 = LocalDate.of(2019, 1, 4)
+        val start2 = LocalDate.of(2019, 1, 3)
 
-    val expectedRange = CalendarRange(start2, null)
+        val expectedRange = CalendarRange(start2, null)
 
-    subject.onDayOfMonthSelected(start)
-    subject.onDayOfMonthSelected(end1)
-    subject.onDayOfMonthSelected(start2)
+        subject.onDayOfMonthSelected(start)
+        subject.onDayOfMonthSelected(end1)
+        subject.onDayOfMonthSelected(start2)
 
-    Assert.assertEquals(expectedRange, subject.currentRange)
-  }
+        Assert.assertEquals(expectedRange, subject.currentRange)
+    }
 
-  @Test
-  fun test_isToday() {
-    val today = LocalDate.now()
+    @Test
+    fun test_isToday() {
+        val today = LocalDate.now()
 
-    val dayOfMonth = today.dayOfMonth % 28 + 1
-    Assert.assertTrue(subject.isToday(today.year, today.monthValue, today.dayOfMonth))
-    Assert.assertFalse(subject.isToday(today.year, today.monthValue, dayOfMonth))
-    Assert.assertFalse(subject.isToday(today.year, today.monthValue % 12 + 1, dayOfMonth))
-    Assert.assertFalse(subject.isToday(today.year + 1, today.monthValue, today.dayOfMonth))
-  }
+        val dayOfMonth = today.dayOfMonth % 28 + 1
+        Assert.assertTrue(subject.isToday(today.year, today.monthValue, today.dayOfMonth))
+        Assert.assertFalse(subject.isToday(today.year, today.monthValue, dayOfMonth))
+        Assert.assertFalse(subject.isToday(today.year, today.monthValue % 12 + 1, dayOfMonth))
+        Assert.assertFalse(subject.isToday(today.year + 1, today.monthValue, today.dayOfMonth))
+    }
 
-  // endregion
+    // endregion
 
-  // region selection type Single day
-  @Test
-  fun test_onDayOfMonthSelected_whenSingleDaySelection() {
-    val subject = BpkCalendarControllerTestImpl(SelectionType.SINGLE)
-    val selectedDay = LocalDate.of(2019, 4, 16)
+    // region selection type Single day
+    @Test
+    fun test_onDayOfMonthSelected_whenSingleDaySelection() {
+        val subject = BpkCalendarControllerTestImpl(SelectionType.SINGLE)
+        val selectedDay = LocalDate.of(2019, 4, 16)
 
-    subject.onDayOfMonthSelected(selectedDay)
+        subject.onDayOfMonthSelected(selectedDay)
 
-    Assert.assertEquals(SingleDay(selectedDay), subject.currentRange)
-  }
+        Assert.assertEquals(SingleDay(selectedDay), subject.currentRange)
+    }
 
-  // endregion
+    // endregion
 }

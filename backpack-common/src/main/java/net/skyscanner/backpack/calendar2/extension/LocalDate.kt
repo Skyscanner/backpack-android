@@ -22,4 +22,4 @@ import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
 
 internal fun LocalDate.yearMonth(): YearMonth =
-  YearMonth.of(year, month)
+    YearMonth.of(year, month)

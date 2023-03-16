@@ -27,15 +27,15 @@ import org.junit.runners.Parameterized
 @RunWith(Parameterized::class)
 class BpkOverlayTest(private val overlayType: BpkOverlayType) : BpkSnapshotTest(listOf(overlayType)) {
 
-  @Test
-  fun default() = snap {
-    DefaultOverlaySample(overlayType = overlayType)
-  }
+    @Test
+    fun default() = snap {
+        DefaultOverlaySample(overlayType = overlayType)
+    }
 
-  companion object {
-    @JvmStatic
-    @Parameterized.Parameters(name = "{0} Screenshot")
-    fun overlayTypes(): List<BpkOverlayType> =
-      BpkOverlayType.values().toList()
-  }
+    companion object {
+        @JvmStatic
+        @Parameterized.Parameters(name = "{0} Screenshot")
+        fun overlayTypes(): List<BpkOverlayType> =
+            BpkOverlayType.values().toList()
+    }
 }

@@ -51,59 +51,59 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @ComposeStory
 fun PageIndicatorStory(modifier: Modifier = Modifier) {
 
-  Column(
-    modifier = modifier
-      .fillMaxSize()
-      .padding(BpkSpacing.Base),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
-    BpkText(text = stringResource(id = R.string.page_indicator_less_than_5))
-    PageIndicatorSample(totalIndicators = 3, style = BpkPageIndicatorStyle.Default)
-
-    BpkText(text = stringResource(id = R.string.page_indicator_more_than_5))
-    PageIndicatorSample(totalIndicators = 8, style = BpkPageIndicatorStyle.Default)
-
-    BpkText(text = stringResource(id = R.string.page_indicator_over_image))
-    Box(
-      modifier = Modifier
-        .fillMaxWidth()
-        .height(BpkSpacing.Xxl * 2),
-      contentAlignment = Alignment.BottomCenter,
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(BpkSpacing.Base),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
     ) {
-      Image(
-        painter = painterResource(id = R.drawable.canadian_rockies_canada),
-        contentDescription = "",
-        contentScale = ContentScale.FillWidth,
-      )
-      PageIndicatorSample(totalIndicators = 8, style = BpkPageIndicatorStyle.OverImage)
+        BpkText(text = stringResource(id = R.string.page_indicator_less_than_5))
+        PageIndicatorSample(totalIndicators = 3, style = BpkPageIndicatorStyle.Default)
+
+        BpkText(text = stringResource(id = R.string.page_indicator_more_than_5))
+        PageIndicatorSample(totalIndicators = 8, style = BpkPageIndicatorStyle.Default)
+
+        BpkText(text = stringResource(id = R.string.page_indicator_over_image))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(BpkSpacing.Xxl * 2),
+            contentAlignment = Alignment.BottomCenter,
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.canadian_rockies_canada),
+                contentDescription = "",
+                contentScale = ContentScale.FillWidth,
+            )
+            PageIndicatorSample(totalIndicators = 8, style = BpkPageIndicatorStyle.OverImage)
+        }
     }
-  }
 }
 
 @Composable
 private fun PageIndicatorSample(
-  totalIndicators: Int,
-  style: BpkPageIndicatorStyle,
-  modifier: Modifier = Modifier,
+    totalIndicators: Int,
+    style: BpkPageIndicatorStyle,
+    modifier: Modifier = Modifier,
 ) {
-  var currentIndex by remember { mutableStateOf(0) }
+    var currentIndex by remember { mutableStateOf(0) }
 
-  Row(
-    modifier = modifier.fillMaxWidth(),
-    horizontalArrangement = Arrangement.SpaceEvenly,
-    verticalAlignment = Alignment.CenterVertically,
-  ) {
-    BpkButton(text = stringResource(id = R.string.page_indicator_prev)) {
-      currentIndex = (currentIndex - 1).coerceIn(0 until totalIndicators)
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        BpkButton(text = stringResource(id = R.string.page_indicator_prev)) {
+            currentIndex = (currentIndex - 1).coerceIn(0 until totalIndicators)
+        }
+        BpkPageIndicator(
+            currentIndex = currentIndex,
+            totalIndicators = totalIndicators,
+            style = style,
+        )
+        BpkButton(text = stringResource(id = R.string.page_indicator_next)) {
+            currentIndex = (currentIndex + 1).coerceIn(0 until totalIndicators)
+        }
     }
-    BpkPageIndicator(
-      currentIndex = currentIndex,
-      totalIndicators = totalIndicators,
-      style = style,
-    )
-    BpkButton(text = stringResource(id = R.string.page_indicator_next)) {
-      currentIndex = (currentIndex + 1).coerceIn(0 until totalIndicators)
-    }
-  }
 }

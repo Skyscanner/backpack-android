@@ -44,57 +44,57 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @FlightLegComponent
 @ComposeStory
 fun FlightLegStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier
-      .fillMaxSize()
-      .padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
-  ) {
-    BpkText(text = stringResource(id = R.string.flight_leg_basic_example))
-    BasicFlightLegSample()
-    Spacer(modifier = Modifier.height(BpkSpacing.Lg))
-    BpkText(text = stringResource(id = R.string.flight_leg_complete_example))
-    CompleteFlightLegSample()
-  }
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Sm),
+    ) {
+        BpkText(text = stringResource(id = R.string.flight_leg_basic_example))
+        BasicFlightLegSample()
+        Spacer(modifier = Modifier.height(BpkSpacing.Lg))
+        BpkText(text = stringResource(id = R.string.flight_leg_complete_example))
+        CompleteFlightLegSample()
+    }
 }
 
 @Composable
 internal fun BasicFlightLegSample(modifier: Modifier = Modifier) {
-  BpkFlightLeg(
-    modifier = modifier,
-    departureArrivalTime = "19:50 - 22:45",
-    description = AnnotatedString("LHR-SIN, SwissAir"),
-    stopsInfo = "Direct",
-    duration = "7h 55m",
-    contentDescription = null,
-    carrierLogoContent = {
-      BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
-    },
-  )
+    BpkFlightLeg(
+        modifier = modifier,
+        departureArrivalTime = "19:50 - 22:45",
+        description = AnnotatedString("LHR-SIN, SwissAir"),
+        stopsInfo = "Direct",
+        duration = "7h 55m",
+        contentDescription = null,
+        carrierLogoContent = {
+            BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
+        },
+    )
 }
 
 @Composable
 internal fun CompleteFlightLegSample(modifier: Modifier = Modifier) {
-  BpkFlightLeg(
-    modifier = modifier,
-    departureArrivalTime = "19:50 - 22:45",
-    description = buildAnnotatedString {
-      withStyle(
-        bpkAirportHighlightStyle(),
-      ) {
-        append("LHR")
-      }
-      append("-SIN, SwissAir")
-    },
-    stopsInfo = "2 Stops",
-    highlightStopsInfo = true,
-    duration = "7h 55m",
-    nextDayArrival = "+1",
-    operatedBy = "Operated by Ryanair",
-    warning = "Change airports in London",
-    contentDescription = null,
-    carrierLogoContent = {
-      BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
-    },
-  )
+    BpkFlightLeg(
+        modifier = modifier,
+        departureArrivalTime = "19:50 - 22:45",
+        description = buildAnnotatedString {
+            withStyle(
+                bpkAirportHighlightStyle(),
+            ) {
+                append("LHR")
+            }
+            append("-SIN, SwissAir")
+        },
+        stopsInfo = "2 Stops",
+        highlightStopsInfo = true,
+        duration = "7h 55m",
+        nextDayArrival = "+1",
+        operatedBy = "Operated by Ryanair",
+        warning = "Change airports in London",
+        contentDescription = null,
+        carrierLogoContent = {
+            BpkIcon(icon = BpkIcon.Aircraft, contentDescription = null)
+        },
+    )
 }

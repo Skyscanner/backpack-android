@@ -35,25 +35,25 @@ import net.skyscanner.backpack.compose.badge.BpkBadgeType
 
 @Composable
 internal fun BpkCalendarBadge(
-  firstVisibleItemYear: Int,
-  params: CalendarParams,
-  modifier: Modifier = Modifier,
+    firstVisibleItemYear: Int,
+    params: CalendarParams,
+    modifier: Modifier = Modifier,
 ) {
 
-  var yearToBadge by remember { mutableStateOf(firstVisibleItemYear) }
-  if (firstVisibleItemYear != params.now.year) {
-    yearToBadge = firstVisibleItemYear
-  }
+    var yearToBadge by remember { mutableStateOf(firstVisibleItemYear) }
+    if (firstVisibleItemYear != params.now.year) {
+        yearToBadge = firstVisibleItemYear
+    }
 
-  AnimatedVisibility(
-    modifier = modifier,
-    visible = firstVisibleItemYear != params.now.year,
-    enter = fadeIn() + slideInVertically(),
-    exit = slideOutVertically() + fadeOut(),
-  ) {
-    BpkBadge(
-      text = yearToBadge.toString(),
-      type = BpkBadgeType.Strong,
-    )
-  }
+    AnimatedVisibility(
+        modifier = modifier,
+        visible = firstVisibleItemYear != params.now.year,
+        enter = fadeIn() + slideInVertically(),
+        exit = slideOutVertically() + fadeOut(),
+    ) {
+        BpkBadge(
+            text = yearToBadge.toString(),
+            type = BpkBadgeType.Strong,
+        )
+    }
 }

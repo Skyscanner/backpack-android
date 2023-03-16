@@ -30,49 +30,49 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkTextInputLayoutTest {
 
-  private lateinit var subject: BpkTextInputLayout
+    private lateinit var subject: BpkTextInputLayout
 
-  private val indicatorView: View
-    get() = subject.findViewById(R.id.bpk_input_indicator)
+    private val indicatorView: View
+        get() = subject.findViewById(R.id.bpk_input_indicator)
 
-  private val context = TestContext
+    private val context = TestContext
 
-  @Before
-  fun setUp() {
-    val textField = BpkTextField(context).apply {
-      hint = "Hint"
-      setText("Text")
+    @Before
+    fun setUp() {
+        val textField = BpkTextField(context).apply {
+            hint = "Hint"
+            setText("Text")
+        }
+        subject = BpkTextInputLayout(context).apply {
+            label = "Label"
+            addView(textField)
+        }
     }
-    subject = BpkTextInputLayout(context).apply {
-      label = "Label"
-      addView(textField)
+
+    @Test
+    fun test_errorFieldInvisibleWhenErrorEnabled() {
+        subject.errorEnabled = true
+
+        assertEquals(indicatorView.visibility, View.INVISIBLE)
     }
-  }
 
-  @Test
-  fun test_errorFieldInvisibleWhenErrorEnabled() {
-    subject.errorEnabled = true
+    @Test
+    fun test_errorFieldGoneWithoutError() {
+        assertEquals(indicatorView.visibility, View.GONE)
+    }
 
-    assertEquals(indicatorView.visibility, View.INVISIBLE)
-  }
+    @Test
+    fun test_errorFieldVisibleWithError() {
+        subject.error = "Error"
 
-  @Test
-  fun test_errorFieldGoneWithoutError() {
-    assertEquals(indicatorView.visibility, View.GONE)
-  }
+        assertEquals(indicatorView.visibility, View.VISIBLE)
+    }
 
-  @Test
-  fun test_errorFieldVisibleWithError() {
-    subject.error = "Error"
+    @Test
+    fun test_errorFieldGoneAfterErrorDisabled() {
+        subject.error = "Error"
+        subject.errorEnabled = false
 
-    assertEquals(indicatorView.visibility, View.VISIBLE)
-  }
-
-  @Test
-  fun test_errorFieldGoneAfterErrorDisabled() {
-    subject.error = "Error"
-    subject.errorEnabled = false
-
-    assertEquals(indicatorView.visibility, View.GONE)
-  }
+        assertEquals(indicatorView.visibility, View.GONE)
+    }
 }

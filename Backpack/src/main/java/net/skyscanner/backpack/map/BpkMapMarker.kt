@@ -37,10 +37,10 @@ import net.skyscanner.backpack.util.rasterize
  * An icon which will be displayed on the badge.
  */
 var Marker.icon: Int
-  @DrawableRes get() = extra.icon
-  set(@DrawableRes value) {
-    extra = extra.copy(icon = value)
-  }
+    @DrawableRes get() = extra.icon
+    set(@DrawableRes value) {
+        extra = extra.copy(icon = value)
+    }
 
 /**
  * An alternative solution to associate some object with given [Marker].
@@ -52,10 +52,10 @@ var Marker.icon: Int
  * @see Marker.setTag
  */
 var Marker.bpkTag: Any?
-  get() = extra.bpkTag
-  set(value) {
-    extra = extra.copy(bpkTag = value)
-  }
+    get() = extra.bpkTag
+    set(value) {
+        extra = extra.copy(bpkTag = value)
+    }
 
 /**
  * Adds custom Backpack marker to the map.
@@ -73,83 +73,83 @@ var Marker.bpkTag: Any?
  * @return [Marker] added to the map.
  */
 fun GoogleMap.addBpkMarker(
-  context: Context,
-  position: LatLng,
-  title: String,
-  pointerOnly: Boolean,
-  @DrawableRes icon: Int = 0,
-  tag: Any? = null,
+    context: Context,
+    position: LatLng,
+    title: String,
+    pointerOnly: Boolean,
+    @DrawableRes icon: Int = 0,
+    tag: Any? = null,
 ): Marker? = addMarker(
-  MarkerOptions()
-    .position(position)
-    .title(title)
-    .also {
-      if (pointerOnly) {
-        it.icon(
-          context.generatePointer { x, y ->
-            it.anchor(x, y)
-          },
-        )
-      } else {
-        it.icon(
-          context.generateLabelIcon(title, icon) { x, y ->
-            it.anchor(x, y)
-            it.infoWindowAnchor(0.5f, 1f)
-          },
-        )
-      }
-    },
+    MarkerOptions()
+        .position(position)
+        .title(title)
+        .also {
+            if (pointerOnly) {
+                it.icon(
+                    context.generatePointer { x, y ->
+                        it.anchor(x, y)
+                    },
+                )
+            } else {
+                it.icon(
+                    context.generateLabelIcon(title, icon) { x, y ->
+                        it.anchor(x, y)
+                        it.infoWindowAnchor(0.5f, 1f)
+                    },
+                )
+            }
+        },
 )?.apply {
-  this.icon = icon
-  this.bpkTag = tag
-  this.pointerOnly = pointerOnly
+    this.icon = icon
+    this.bpkTag = tag
+    this.pointerOnly = pointerOnly
 }
 
 internal inline fun Context.generatePointer(
-  onAnchorPositionCalculated: (Float, Float) -> Unit,
+    onAnchorPositionCalculated: (Float, Float) -> Unit,
 ): BitmapDescriptor {
-  val drawable = AppCompatResources.getDrawable(this, R.drawable.bpk_map_marker_pointer)!!
-  val bitmap = drawable.rasterize()
-  onAnchorPositionCalculated(0.5f, 0.5f)
-  return BitmapDescriptorFactory.fromBitmap(bitmap)
+    val drawable = AppCompatResources.getDrawable(this, R.drawable.bpk_map_marker_pointer)!!
+    val bitmap = drawable.rasterize()
+    onAnchorPositionCalculated(0.5f, 0.5f)
+    return BitmapDescriptorFactory.fromBitmap(bitmap)
 }
 
 internal inline fun Context.generateLabelIcon(
-  title: String,
-  icon: Int = 0,
-  onAnchorPositionCalculated: (Float, Float) -> Unit,
+    title: String,
+    icon: Int = 0,
+    onAnchorPositionCalculated: (Float, Float) -> Unit,
 ): BitmapDescriptor {
 
-  val bitmap = createBpkMarkerView(this, title, icon, true).rasterize {
-    val pointer = it.findViewById<View>(R.id.pointer)
-    val halfPointerYPosition = it.height - (pointer.height / 2f)
-    onAnchorPositionCalculated(0.5f, halfPointerYPosition / it.height)
-  }
+    val bitmap = createBpkMarkerView(this, title, icon, true).rasterize {
+        val pointer = it.findViewById<View>(R.id.pointer)
+        val halfPointerYPosition = it.height - (pointer.height / 2f)
+        onAnchorPositionCalculated(0.5f, halfPointerYPosition / it.height)
+    }
 
-  return BitmapDescriptorFactory.fromBitmap(bitmap)
+    return BitmapDescriptorFactory.fromBitmap(bitmap)
 }
 
 private var Marker.extra: Extra
-  get() {
-    val bpkTag = tag
-    if (bpkTag != null) {
-      require(bpkTag is Extra) { "Use Marker.bpkTag instead of Marker.tag" }
-      return bpkTag
+    get() {
+        val bpkTag = tag
+        if (bpkTag != null) {
+            require(bpkTag is Extra) { "Use Marker.bpkTag instead of Marker.tag" }
+            return bpkTag
+        }
+        return Extra().also { tag = it }
     }
-    return Extra().also { tag = it }
-  }
-  set(value) {
-    tag = value
-  }
+    set(value) {
+        tag = value
+    }
 
 internal var Marker.pointerOnly: Boolean
-  get() = extra.pointerOnly
-  set(value) {
-    extra = extra.copy(pointerOnly = value)
-  }
+    get() = extra.pointerOnly
+    set(value) {
+        extra = extra.copy(pointerOnly = value)
+    }
 
 private data class Extra(
-  @DrawableRes val icon: Int = 0,
-  val pointerOnly: Boolean = true,
-  val bpkTag: Any? = null,
+    @DrawableRes val icon: Int = 0,
+    val pointerOnly: Boolean = true,
+    val bpkTag: Any? = null,
 )

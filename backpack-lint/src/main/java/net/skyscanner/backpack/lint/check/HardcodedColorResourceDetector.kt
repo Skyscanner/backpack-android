@@ -33,42 +33,42 @@ import org.w3c.dom.Element
 @Suppress("UnstableApiUsage")
 class HardcodedColorResourceDetector : ResourceXmlDetector() {
 
-  companion object {
+    companion object {
 
-    private const val EXPLANATION = "Use Backpack colors to improve consistency and dark mode support."
+        private const val EXPLANATION = "Use Backpack colors to improve consistency and dark mode support."
 
-    val ISSUE = Issue.create(
-      id = "HardcodedColorResourceDetector",
-      briefDescription = "Hardcoded color resource definition found",
-      explanation = "Use Backpack colors to improve consistency and dark mode support.",
-      category = Category.CORRECTNESS,
-      severity = Severity.WARNING,
-      implementation = Implementation(
-        HardcodedColorResourceDetector::class.java,
-        Scope.RESOURCE_FILE_SCOPE,
-      ),
-    )
-  }
-
-  override fun appliesTo(folderType: ResourceFolderType): Boolean {
-    return folderType == ResourceFolderType.VALUES
-  }
-
-  override fun getApplicableElements(): Collection<String> {
-    return listOf("color")
-  }
-
-  override fun visitElement(context: XmlContext, element: Element) {
-    val value = element.text()
-    if (value.startsWith("#") && !value.endsWith("000000") && !value.toLowerCaseAsciiOnly().endsWith("ffffff")) {
-      /** check for colour resources specified directly - these will mostly be non-backpack colours.
-       Some colours for black/white may exist for alpha
-       **/
-      context.report(
-        ISSUE,
-        context.getElementLocation(element),
-        EXPLANATION,
-      )
+        val ISSUE = Issue.create(
+            id = "HardcodedColorResourceDetector",
+            briefDescription = "Hardcoded color resource definition found",
+            explanation = "Use Backpack colors to improve consistency and dark mode support.",
+            category = Category.CORRECTNESS,
+            severity = Severity.WARNING,
+            implementation = Implementation(
+                HardcodedColorResourceDetector::class.java,
+                Scope.RESOURCE_FILE_SCOPE,
+            ),
+        )
     }
-  }
+
+    override fun appliesTo(folderType: ResourceFolderType): Boolean {
+        return folderType == ResourceFolderType.VALUES
+    }
+
+    override fun getApplicableElements(): Collection<String> {
+        return listOf("color")
+    }
+
+    override fun visitElement(context: XmlContext, element: Element) {
+        val value = element.text()
+        if (value.startsWith("#") && !value.endsWith("000000") && !value.toLowerCaseAsciiOnly().endsWith("ffffff")) {
+            /** check for colour resources specified directly - these will mostly be non-backpack colours.
+             Some colours for black/white may exist for alpha
+             **/
+            context.report(
+                ISSUE,
+                context.getElementLocation(element),
+                EXPLANATION,
+            )
+        }
+    }
 }

@@ -31,32 +31,32 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BpkButtonSize.textStyle(): TextStyle =
-  when (this) {
-    BpkButtonSize.Default -> BpkTheme.typography.label2
-    BpkButtonSize.Large -> BpkTheme.typography.label1
-  }
+    when (this) {
+        BpkButtonSize.Default -> BpkTheme.typography.label2
+        BpkButtonSize.Large -> BpkTheme.typography.label1
+    }
 
 internal val BpkButtonSize.iconSize: BpkIconSize
-  get() =
-    when (this) {
-      BpkButtonSize.Default -> BpkIconSize.Small
-      BpkButtonSize.Large -> BpkIconSize.Large
-    }
+    get() =
+        when (this) {
+            BpkButtonSize.Default -> BpkIconSize.Small
+            BpkButtonSize.Large -> BpkIconSize.Large
+        }
 
 internal val BpkButtonSize.minHeight: Dp
-  get() =
-    when (this) {
-      BpkButtonSize.Default -> 36.dp
-      BpkButtonSize.Large -> 48.dp
-    }
+    get() =
+        when (this) {
+            BpkButtonSize.Default -> 36.dp
+            BpkButtonSize.Large -> 48.dp
+        }
 
 internal val BpkButtonSize.horizontalSpacing: Dp
-  get() =
-    BpkSpacing.Md
+    get() =
+        BpkSpacing.Md
 
 internal val BpkButtonType.contentPadding: PaddingValues
-  get() =
-    when (this) {
-      BpkButtonType.Link, BpkButtonType.LinkOnDark -> PaddingValues(0.dp)
-      else -> PaddingValues(horizontal = BpkSpacing.Base)
-    }
+    get() =
+        when (this) {
+            BpkButtonType.Link, BpkButtonType.LinkOnDark -> PaddingValues(0.dp)
+            else -> PaddingValues(horizontal = BpkSpacing.Base)
+        }

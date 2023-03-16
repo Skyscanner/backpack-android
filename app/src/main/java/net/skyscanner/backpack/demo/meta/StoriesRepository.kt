@@ -28,88 +28,88 @@ import org.jetbrains.annotations.TestOnly
 
 interface StoriesRepository {
 
-  val uiComponents: List<Component>
+    val uiComponents: List<Component>
 
-  val tokenComponents: List<Component>
+    val tokenComponents: List<Component>
 
-  val screenshotStories: List<Story>
+    val screenshotStories: List<Story>
 
-  fun storiesOf(component: String, compose: Boolean): List<Story>
+    fun storiesOf(component: String, compose: Boolean): List<Story>
 
-  fun storyOf(component: String, story: String, compose: Boolean): Story
+    fun storyOf(component: String, story: String, compose: Boolean): Story
 
-  fun isComposeOnly(component: String): Boolean
+    fun isComposeOnly(component: String): Boolean
 
-  fun isViewOnly(component: String): Boolean
+    fun isViewOnly(component: String): Boolean
 
-  @get:TestOnly
-  val testStories: List<Story>
+    @get:TestOnly
+    val testStories: List<Story>
 
-  companion object {
+    companion object {
 
-    fun getInstance(): StoriesRepository = StoriesRepositoryImpl
-  }
+        fun getInstance(): StoriesRepository = StoriesRepositoryImpl
+    }
 }
 
 private object StoriesRepositoryImpl : StoriesRepository {
 
-  private val generatedStories = Story
-    .all()
-    .asSequence()
+    private val generatedStories = Story
+        .all()
+        .asSequence()
 
-  override val testStories =
-    generatedStories
-      .filter { it.isTestStory() }
-      .toList()
+    override val testStories =
+        generatedStories
+            .filter { it.isTestStory() }
+            .toList()
 
-  private val stories = generatedStories - testStories.toSet()
+    private val stories = generatedStories - testStories.toSet()
 
-  private val visibleStories = stories
-    .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.DemoOnly }
+    private val visibleStories = stories
+        .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.DemoOnly }
 
-  override val uiComponents =
-    visibleStories
-      .filter { !it.component.isToken }
-      .map(Story::component)
-      .distinct()
-      .sortedBy(Component::name)
-      .toList()
+    override val uiComponents =
+        visibleStories
+            .filter { !it.component.isToken }
+            .map(Story::component)
+            .distinct()
+            .sortedBy(Component::name)
+            .toList()
 
-  override val tokenComponents =
-    visibleStories
-      .filter { it.component.isToken }
-      .map(Story::component)
-      .distinct()
-      .sortedBy(Component::name)
-      .toList()
+    override val tokenComponents =
+        visibleStories
+            .filter { it.component.isToken }
+            .map(Story::component)
+            .distinct()
+            .sortedBy(Component::name)
+            .toList()
 
-  override val screenshotStories =
-    stories
-      .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.ScreenshotOnly }
-      .toList()
+    override val screenshotStories =
+        stories
+            .filter { it.kind == StoryKind.StoryAndScreenshot || it.kind == StoryKind.ScreenshotOnly }
+            .toList()
 
-  override fun storiesOf(component: String, compose: Boolean): List<Story> =
-    visibleStories
-      .filter { it.component.name == component && it.isCompose == compose }
-      .toList()
+    override fun storiesOf(component: String, compose: Boolean): List<Story> =
+        visibleStories
+            .filter { it.component.name == component && it.isCompose == compose }
+            .toList()
 
-  override fun storyOf(component: String, story: String, compose: Boolean): Story =
-    stories
-      .filter { it.component.name == component && it.name == story && it.isCompose == compose }
-      .first()
+    override fun storyOf(component: String, story: String, compose: Boolean): Story =
+        stories
+            .filter { it.component.name == component && it.name == story && it.isCompose == compose }
+            .first()
 
-  override fun isComposeOnly(component: String): Boolean =
-    visibleStories
-      .filter { it.component.name == component }
-      .all { it.isCompose }
+    override fun isComposeOnly(component: String): Boolean =
+        visibleStories
+            .filter { it.component.name == component }
+            .all { it.isCompose }
 
-  override fun isViewOnly(component: String): Boolean =
-    visibleStories
-      .filter { it.component.name == component }
-      .none { it.isCompose }
+    override fun isViewOnly(component: String): Boolean =
+        visibleStories
+            .filter { it.component.name == component }
+            .none { it.isCompose }
 
-  private fun Story.isTestStory() =
-    this.component.name == "TestComponent"
+    private fun Story.isTestStory() =
+        this.component.name == "TestComponent"
 }
 
 @Component(name = "TestComponent", isToken = true)
@@ -119,35 +119,35 @@ private annotation class TestComponent
 @TestComponent
 @Composable
 internal fun TestComposeStory(modifier: Modifier = Modifier) {
-  Box(modifier = modifier)
+    Box(modifier = modifier)
 }
 
 @ViewStory(name = "TestViewStory", kind = StoryKind.DemoOnly)
 @TestComponent
 @Composable
 internal fun TestViewStory(modifier: Modifier = Modifier) {
-  Box(modifier = modifier)
+    Box(modifier = modifier)
 }
 
 @ComposeStory(name = "TestComposeScreenshot", kind = StoryKind.ScreenshotOnly)
 @TestComponent
 @Composable
 internal fun TestComposeScreenshot(modifier: Modifier = Modifier) {
-  Box(modifier = modifier)
+    Box(modifier = modifier)
 }
 
 @ComposeStory(kind = StoryKind.ScreenshotOnly)
 @TestComponent
 @Composable
 internal fun TestDefaultStory(modifier: Modifier = Modifier) {
-  Box(modifier = modifier)
+    Box(modifier = modifier)
 }
 
 @ViewStory(name = "TestViewScreenshot", kind = StoryKind.ScreenshotOnly)
 @TestComponent
 @Composable
 internal fun TestViewScreenshot(modifier: Modifier = Modifier) {
-  AndroidView<BpkText>(modifier = modifier) {
-    text = context.getString(R.string.app_name)
-  }
+    AndroidView<BpkText>(modifier = modifier) {
+        text = context.getString(R.string.app_name)
+    }
 }

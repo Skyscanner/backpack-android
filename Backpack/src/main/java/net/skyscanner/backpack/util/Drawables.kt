@@ -29,48 +29,48 @@ import android.util.StateSet
 import androidx.annotation.ColorInt
 
 internal inline fun stateListDrawable(
-  drawable: Drawable,
-  disabled: Drawable? = null,
-  pressed: Drawable? = null,
-  selected: Drawable? = null,
-  block: StateListDrawable.() -> Unit = {},
+    drawable: Drawable,
+    disabled: Drawable? = null,
+    pressed: Drawable? = null,
+    selected: Drawable? = null,
+    block: StateListDrawable.() -> Unit = {},
 ): StateListDrawable = StateListDrawable().apply {
-  if (disabled != null) {
-    addState(intArrayOf(-android.R.attr.state_enabled), disabled)
-  }
-  if (pressed != null) {
-    addState(intArrayOf(android.R.attr.state_pressed), pressed)
-  }
-  if (selected != null) {
-    addState(intArrayOf(android.R.attr.state_selected), selected)
-  }
-  addState(StateSet.WILD_CARD, drawable)
-  block()
+    if (disabled != null) {
+        addState(intArrayOf(-android.R.attr.state_enabled), disabled)
+    }
+    if (pressed != null) {
+        addState(intArrayOf(android.R.attr.state_pressed), pressed)
+    }
+    if (selected != null) {
+        addState(intArrayOf(android.R.attr.state_selected), selected)
+    }
+    addState(StateSet.WILD_CARD, drawable)
+    block()
 }
 
 internal fun rippleDrawable(
-  content: Drawable,
-  mask: Drawable,
-  @ColorInt rippleColor: Int,
+    content: Drawable,
+    mask: Drawable,
+    @ColorInt rippleColor: Int,
 ): RippleDrawable {
 
-  val rippleColorStateList = ColorStateList.valueOf(rippleColor)
+    val rippleColorStateList = ColorStateList.valueOf(rippleColor)
 
-  return RippleDrawable(
-    rippleColorStateList,
-    content,
-    mask,
-  )
+    return RippleDrawable(
+        rippleColorStateList,
+        content,
+        mask,
+    )
 }
 
 internal fun Drawable.rasterize(
-  width: Int = intrinsicWidth,
-  height: Int = intrinsicHeight,
-  config: Bitmap.Config = Bitmap.Config.ARGB_8888,
+    width: Int = intrinsicWidth,
+    height: Int = intrinsicHeight,
+    config: Bitmap.Config = Bitmap.Config.ARGB_8888,
 ): Bitmap {
-  setBounds(0, 0, width, height)
-  val bitmap = Bitmap.createBitmap(width, height, config)
-  bitmap.eraseColor(Color.TRANSPARENT)
-  draw(Canvas(bitmap))
-  return bitmap
+    setBounds(0, 0, width, height)
+    val bitmap = Bitmap.createBitmap(width, height, config)
+    bitmap.eraseColor(Color.TRANSPARENT)
+    draw(Canvas(bitmap))
+    return bitmap
 }

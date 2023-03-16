@@ -35,35 +35,35 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 fun BpkCalendar(
-  controller: BpkCalendarController,
-  modifier: Modifier = Modifier,
+    controller: BpkCalendarController,
+    modifier: Modifier = Modifier,
 ) {
 
-  val state by controller.state.collectAsState()
+    val state by controller.state.collectAsState()
 
-  Column(modifier = modifier) {
+    Column(modifier = modifier) {
 
-    BpkCalendarHeader(
-      params = state.params,
-      modifier = Modifier.fillMaxWidth(),
-    )
+        BpkCalendarHeader(
+            params = state.params,
+            modifier = Modifier.fillMaxWidth(),
+        )
 
-    Box(modifier = Modifier.weight(1f)) {
+        Box(modifier = Modifier.weight(1f)) {
 
-      BpkCalendarGrid(
-        state = state,
-        lazyGridState = controller.lazyGridState,
-        onClick = controller.stateMachine::onClick,
-        modifier = Modifier.fillMaxSize(),
-      )
+            BpkCalendarGrid(
+                state = state,
+                lazyGridState = controller.lazyGridState,
+                onClick = controller.stateMachine::onClick,
+                modifier = Modifier.fillMaxSize(),
+            )
 
-      BpkCalendarBadge(
-        firstVisibleItemYear = controller.firstVisibleItemYear,
-        params = state.params,
-        modifier = Modifier
-          .align(Alignment.TopCenter)
-          .padding(top = BpkSpacing.Base),
-      )
+            BpkCalendarBadge(
+                firstVisibleItemYear = controller.firstVisibleItemYear,
+                params = state.params,
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(top = BpkSpacing.Base),
+            )
+        }
     }
-  }
 }

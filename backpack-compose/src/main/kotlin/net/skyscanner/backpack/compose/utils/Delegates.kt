@@ -22,4 +22,4 @@ import kotlin.properties.Delegates
 import kotlin.properties.ReadOnlyProperty
 
 internal fun <T> Delegates.singleton(value: T): ReadOnlyProperty<Any?, T> =
-  ReadOnlyProperty { _, _ -> value }
+    ReadOnlyProperty { _, _ -> value }

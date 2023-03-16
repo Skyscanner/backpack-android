@@ -44,64 +44,64 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @CarouselComponent
 @ComposeStory
 fun CarouselStory(
-  modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
 ) {
-  Column(
-    modifier = modifier
-      .fillMaxSize()
-      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Base)
-      .verticalScroll(rememberScrollState()),
-    horizontalAlignment = Alignment.CenterHorizontally,
-  ) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Base)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
 
-    BpkText(text = stringResource(id = R.string.carousel_only_1_item))
-    CarouselSample(totalImages = 1)
+        BpkText(text = stringResource(id = R.string.carousel_only_1_item))
+        CarouselSample(totalImages = 1)
 
-    BpkText(text = stringResource(id = R.string.carousel_multiple_items))
-    CarouselSample(totalImages = 3)
+        BpkText(text = stringResource(id = R.string.carousel_multiple_items))
+        CarouselSample(totalImages = 3)
 
-    BpkText(text = stringResource(id = R.string.carousel_start_at_different_index))
-    CarouselSample(totalImages = 3, initialImage = 2)
+        BpkText(text = stringResource(id = R.string.carousel_start_at_different_index))
+        CarouselSample(totalImages = 3, initialImage = 2)
 
-    BpkText(text = stringResource(id = R.string.carousel_image_change_callback))
-    CarouselSample(totalImages = 3, initialImage = 1, showCurrentPageLabel = true)
-  }
+        BpkText(text = stringResource(id = R.string.carousel_image_change_callback))
+        CarouselSample(totalImages = 3, initialImage = 1, showCurrentPageLabel = true)
+    }
 }
 
 @Composable
 private fun CarouselSample(
-  totalImages: Int,
-  modifier: Modifier = Modifier,
-  initialImage: Int = 0,
-  showCurrentPageLabel: Boolean = false,
+    totalImages: Int,
+    modifier: Modifier = Modifier,
+    initialImage: Int = 0,
+    showCurrentPageLabel: Boolean = false,
 ) {
-  val pagerState = rememberBpkCarouselState(totalImages = totalImages, initialImage = initialImage)
+    val pagerState = rememberBpkCarouselState(totalImages = totalImages, initialImage = initialImage)
 
-  if (showCurrentPageLabel) {
-    BpkText(
-      text = stringResource(R.string.carousel_current_image, pagerState.currentPage),
-      style = BpkTheme.typography.caption,
-    )
-  }
+    if (showCurrentPageLabel) {
+        BpkText(
+            text = stringResource(R.string.carousel_current_image, pagerState.currentPage),
+            style = BpkTheme.typography.caption,
+        )
+    }
 
-  BpkCarousel(
-    modifier = modifier
-      .aspectRatio(1.9f)
-      .padding(vertical = BpkSpacing.Base),
-    state = pagerState,
-  ) {
-    Image(
-      modifier = Modifier.fillMaxSize(),
-      painter = painterResource(
-        id = when (it) {
-          0 -> R.drawable.canadian_rockies_canada
-          1 -> R.drawable.beach
-          2 -> R.drawable.city
-          else -> R.drawable.canadian_rockies_canada
-        },
-      ),
-      contentDescription = "Image $it",
-      contentScale = ContentScale.Crop,
-    )
-  }
+    BpkCarousel(
+        modifier = modifier
+            .aspectRatio(1.9f)
+            .padding(vertical = BpkSpacing.Base),
+        state = pagerState,
+    ) {
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(
+                id = when (it) {
+                    0 -> R.drawable.canadian_rockies_canada
+                    1 -> R.drawable.beach
+                    2 -> R.drawable.city
+                    else -> R.drawable.canadian_rockies_canada
+                },
+            ),
+            contentDescription = "Image $it",
+            contentScale = ContentScale.Crop,
+        )
+    }
 }

@@ -45,83 +45,83 @@ internal val LocalFieldStatus = staticCompositionLocalOf<BpkFieldStatus> { BpkFi
 
 sealed interface BpkFieldStatus {
 
-  object Default : BpkFieldStatus
+    object Default : BpkFieldStatus
 
-  object Disabled : BpkFieldStatus
+    object Disabled : BpkFieldStatus
 
-  data class Error(val text: String) : BpkFieldStatus
+    data class Error(val text: String) : BpkFieldStatus
 
-  object Validated : BpkFieldStatus
+    object Validated : BpkFieldStatus
 }
 
 @Composable
 fun BpkFieldSet(
-  modifier: Modifier = Modifier,
-  label: String? = null,
-  description: String? = null,
-  status: BpkFieldStatus = BpkFieldStatus.Default,
-  content: @Composable ColumnScope.(BpkFieldStatus) -> Unit,
+    modifier: Modifier = Modifier,
+    label: String? = null,
+    description: String? = null,
+    status: BpkFieldStatus = BpkFieldStatus.Default,
+    content: @Composable ColumnScope.(BpkFieldStatus) -> Unit,
 ) {
 
-  Column(modifier) {
+    Column(modifier) {
 
-    if (label != null) {
-      BpkText(
-        text = label,
-        style = BpkTheme.typography.label2,
-        modifier = Modifier.padding(bottom = BpkSpacing.Md),
-        color = animateColorAsState(
-          when (status) {
-            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-            is BpkFieldStatus.Error -> BpkTheme.colors.textError
-            is BpkFieldStatus.Validated -> BpkTheme.colors.textPrimary
-            is BpkFieldStatus.Default -> BpkTheme.colors.textPrimary
-          },
-        ).value,
-      )
-    }
+        if (label != null) {
+            BpkText(
+                text = label,
+                style = BpkTheme.typography.label2,
+                modifier = Modifier.padding(bottom = BpkSpacing.Md),
+                color = animateColorAsState(
+                    when (status) {
+                        is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
+                        is BpkFieldStatus.Error -> BpkTheme.colors.textError
+                        is BpkFieldStatus.Validated -> BpkTheme.colors.textPrimary
+                        is BpkFieldStatus.Default -> BpkTheme.colors.textPrimary
+                    },
+                ).value,
+            )
+        }
 
-    CompositionLocalProvider(LocalFieldStatus provides status) {
-      content(status)
-    }
+        CompositionLocalProvider(LocalFieldStatus provides status) {
+            content(status)
+        }
 
-    if (description != null) {
-      BpkText(
-        text = description,
-        style = BpkTheme.typography.footnote,
-        color = animateColorAsState(
-          when (status) {
-            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-            else -> BpkTheme.colors.textSecondary
-          },
-        ).value,
-        modifier = Modifier.padding(top = BpkSpacing.Md),
-      )
-    }
+        if (description != null) {
+            BpkText(
+                text = description,
+                style = BpkTheme.typography.footnote,
+                color = animateColorAsState(
+                    when (status) {
+                        is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
+                        else -> BpkTheme.colors.textSecondary
+                    },
+                ).value,
+                modifier = Modifier.padding(top = BpkSpacing.Md),
+            )
+        }
 
-    var lastErrorText by remember { mutableStateOf("") }
-    if (status is BpkFieldStatus.Error) {
-      lastErrorText = status.text
-    }
+        var lastErrorText by remember { mutableStateOf("") }
+        if (status is BpkFieldStatus.Error) {
+            lastErrorText = status.text
+        }
 
-    AnimatedVisibility(status is BpkFieldStatus.Error) {
-      Row(
-        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(top = BpkSpacing.Md),
-      ) {
-        BpkIcon(
-          icon = BpkIcon.ExclamationCircle,
-          contentDescription = null,
-          size = BpkIconSize.Small,
-          tint = BpkTheme.colors.textError,
-        )
-        BpkText(
-          text = lastErrorText,
-          style = BpkTheme.typography.label2,
-          color = BpkTheme.colors.textError,
-        )
-      }
+        AnimatedVisibility(status is BpkFieldStatus.Error) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(top = BpkSpacing.Md),
+            ) {
+                BpkIcon(
+                    icon = BpkIcon.ExclamationCircle,
+                    contentDescription = null,
+                    size = BpkIconSize.Small,
+                    tint = BpkTheme.colors.textError,
+                )
+                BpkText(
+                    text = lastErrorText,
+                    style = BpkTheme.typography.label2,
+                    color = BpkTheme.colors.textError,
+                )
+            }
+        }
     }
-  }
 }

@@ -35,49 +35,49 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 fun BpkBarChart(
-  model: BpkBarChartModel,
-  selected: BpkBarChartModel.Item?,
-  onSelectionChange: (BpkBarChartModel.Item) -> Unit,
-  modifier: Modifier = Modifier,
-  state: LazyListState = rememberLazyListState(),
+    model: BpkBarChartModel,
+    selected: BpkBarChartModel.Item?,
+    onSelectionChange: (BpkBarChartModel.Item) -> Unit,
+    modifier: Modifier = Modifier,
+    state: LazyListState = rememberLazyListState(),
 ) {
-  Column(modifier = modifier) {
+    Column(modifier = modifier) {
 
-    Row(
-      horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-      modifier = Modifier
-        .padding(horizontal = BpkSpacing.Base)
-        .padding(top = BpkSpacing.Base),
-    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+            modifier = Modifier
+                .padding(horizontal = BpkSpacing.Base)
+                .padding(top = BpkSpacing.Base),
+        ) {
 
-      Column(Modifier.weight(1f)) {
+            Column(Modifier.weight(1f)) {
 
-        BpkText(
-          text = model.caption,
-          maxLines = 1,
-          color = BpkTheme.colors.textSecondary,
-          style = BpkTheme.typography.label2,
+                BpkText(
+                    text = model.caption,
+                    maxLines = 1,
+                    color = BpkTheme.colors.textSecondary,
+                    style = BpkTheme.typography.label2,
+                )
+
+                BarChartTitle(
+                    model = model,
+                    state = state,
+                )
+            }
+
+            model.legend?.let { legend ->
+                BarChartLegend(
+                    legend = legend,
+                )
+            }
+        }
+
+        BarChartList(
+            modifier = Modifier.padding(top = BpkSpacing.Lg, bottom = BpkSpacing.Xl),
+            model = model,
+            selected = selected,
+            onSelected = onSelectionChange,
+            state = state,
         )
-
-        BarChartTitle(
-          model = model,
-          state = state,
-        )
-      }
-
-      model.legend?.let { legend ->
-        BarChartLegend(
-          legend = legend,
-        )
-      }
     }
-
-    BarChartList(
-      modifier = Modifier.padding(top = BpkSpacing.Lg, bottom = BpkSpacing.Xl),
-      model = model,
-      selected = selected,
-      onSelected = onSelectionChange,
-      state = state,
-    )
-  }
 }

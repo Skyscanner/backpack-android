@@ -35,29 +35,29 @@ import net.skyscanner.backpack.compose.tokens.BpkBorderSize
 
 @Composable
 fun BpkCardWrapper(
-  backgroundColor: Color,
-  headerContent: @Composable () -> Unit,
-  cardContent: @Composable () -> Unit,
-  modifier: Modifier = Modifier,
-  corner: BpkCardCorner = BpkCardCorner.Small,
-  elevation: BpkCardElevation = BpkCardElevation.Default,
+    backgroundColor: Color,
+    headerContent: @Composable () -> Unit,
+    cardContent: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    corner: BpkCardCorner = BpkCardCorner.Small,
+    elevation: BpkCardElevation = BpkCardElevation.Default,
 ) {
-  Card(
-    modifier = modifier.fillMaxWidth().border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner)),
-    backgroundColor = backgroundColor,
-    shape = cardShape(corner),
-  ) {
-    Column {
-      headerContent.invoke()
-      BpkCard(
-        modifier = Modifier
-          .background(color = backgroundColor, shape = cardShape(corner))
-          .border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner))
-          .padding(BpkBorderSize.Lg),
-        elevation = elevation,
-      ) {
-        cardContent.invoke()
-      }
+    Card(
+        modifier = modifier.fillMaxWidth().border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner)),
+        backgroundColor = backgroundColor,
+        shape = cardShape(corner),
+    ) {
+        Column {
+            headerContent.invoke()
+            BpkCard(
+                modifier = Modifier
+                    .background(color = backgroundColor, shape = cardShape(corner))
+                    .border(width = BpkBorderSize.Lg, color = backgroundColor, shape = cardShape(corner))
+                    .padding(BpkBorderSize.Lg),
+                elevation = elevation,
+            ) {
+                cardContent.invoke()
+            }
+        }
     }
-  }
 }

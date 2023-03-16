@@ -51,85 +51,85 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @CardButtonComponent
 @ComposeStory("Default")
 fun CardButtonStoryDefault(modifier: Modifier = Modifier) =
-  CardButtonsDemo(BpkCardButtonSize.Default, modifier)
+    CardButtonsDemo(BpkCardButtonSize.Default, modifier)
 
 @Composable
 @CardButtonComponent
 @ComposeStory("Large")
 fun CardButtonStoryLarge(modifier: Modifier = Modifier) =
-  CardButtonsDemo(BpkCardButtonSize.Large, modifier)
+    CardButtonsDemo(BpkCardButtonSize.Large, modifier)
 
 @Composable
 private fun CardButtonsDemo(
-  size: BpkCardButtonSize,
-  modifier: Modifier = Modifier,
+    size: BpkCardButtonSize,
+    modifier: Modifier = Modifier,
 ) {
-  LazyColumn(
-    modifier
-      .fillMaxSize()
-      .padding(top = BpkDimension.Spacing.Md),
-  ) {
-    item {
-      Row(
-        modifier = Modifier
-          .background(BpkTheme.colors.textPrimaryInverse)
-          .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-      ) {
-        CardRow(size = size, style = BpkCardButtonStyle.Default)
-      }
-    }
-    item {
-      Row(
-        modifier = Modifier
-          .background(BpkTheme.colors.surfaceContrast)
-          .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-      ) {
-        CardRow(size = size, style = BpkCardButtonStyle.OnDark)
-      }
-    }
-    item {
-      Box(modifier = Modifier.height(BpkSpacing.Xxl + BpkSpacing.Md)) {
-        Image(
-          modifier = Modifier.fillMaxWidth(),
-          painter = painterResource(id = R.drawable.canadian_rockies_canada),
-          contentScale = ContentScale.FillWidth,
-          contentDescription = "",
-        )
-        Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceEvenly,
-        ) {
-          CardRow(size = size, style = BpkCardButtonStyle.Contained)
+    LazyColumn(
+        modifier
+            .fillMaxSize()
+            .padding(top = BpkDimension.Spacing.Md),
+    ) {
+        item {
+            Row(
+                modifier = Modifier
+                    .background(BpkTheme.colors.textPrimaryInverse)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+            ) {
+                CardRow(size = size, style = BpkCardButtonStyle.Default)
+            }
         }
-      }
+        item {
+            Row(
+                modifier = Modifier
+                    .background(BpkTheme.colors.surfaceContrast)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+            ) {
+                CardRow(size = size, style = BpkCardButtonStyle.OnDark)
+            }
+        }
+        item {
+            Box(modifier = Modifier.height(BpkSpacing.Xxl + BpkSpacing.Md)) {
+                Image(
+                    modifier = Modifier.fillMaxWidth(),
+                    painter = painterResource(id = R.drawable.canadian_rockies_canada),
+                    contentScale = ContentScale.FillWidth,
+                    contentDescription = "",
+                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                ) {
+                    CardRow(size = size, style = BpkCardButtonStyle.Contained)
+                }
+            }
+        }
     }
-  }
 }
 
 @Composable
 private fun CardRow(size: BpkCardButtonSize, style: BpkCardButtonStyle) {
-  var checked1 by remember { mutableStateOf(false) }
-  BpkSaveButton(
-    checked = checked1,
-    size = size,
-    style = style,
-    contentDescription = "",
-    onCheckedChange = { checked1 = !checked1 },
-  )
-  var checked2 by remember { mutableStateOf(true) }
-  BpkSaveButton(
-    checked = checked2,
-    size = size,
-    style = style,
-    contentDescription = "",
-    onCheckedChange = { checked2 = !checked2 },
-  )
-  BpkShareButton(
-    size = size,
-    style = style,
-    contentDescription = "",
-    onClick = {},
-  )
+    var checked1 by remember { mutableStateOf(false) }
+    BpkSaveButton(
+        checked = checked1,
+        size = size,
+        style = style,
+        contentDescription = "",
+        onCheckedChange = { checked1 = !checked1 },
+    )
+    var checked2 by remember { mutableStateOf(true) }
+    BpkSaveButton(
+        checked = checked2,
+        size = size,
+        style = style,
+        contentDescription = "",
+        onCheckedChange = { checked2 = !checked2 },
+    )
+    BpkShareButton(
+        size = size,
+        style = style,
+        contentDescription = "",
+        onClick = {},
+    )
 }

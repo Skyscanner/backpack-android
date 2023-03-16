@@ -47,45 +47,45 @@ import net.skyscanner.backpack.demo.meta.StoryKind
 @ColorTokensComponent
 @ComposeStory(kind = StoryKind.DemoOnly)
 fun ColorsComposeStory(modifier: Modifier = Modifier) {
-  val data: List<Token<Color>> = BpkTheme.colors.values
-  LazyColumn(modifier) {
-    items(data) { item ->
-      ColorSampleRow(token = item)
+    val data: List<Token<Color>> = BpkTheme.colors.values
+    LazyColumn(modifier) {
+        items(data) { item ->
+            ColorSampleRow(token = item)
+        }
     }
-  }
 }
 
 @Composable
 private fun ColorSampleRow(token: Token<Color>) {
-  Row(
-    modifier = Modifier.height(56.dp),
-    verticalAlignment = Alignment.CenterVertically,
-  ) {
-    BpkText(
-      text = token.name,
-      modifier = Modifier
-        .weight(1f)
-        .padding(BpkSpacing.Base),
-    )
-    Box(
-      modifier = Modifier
-        .height(56.dp)
-        .width(112.dp)
-        .padding(1.dp)
-        .background(token.value),
-      contentAlignment = Alignment.Center,
+    Row(
+        modifier = Modifier.height(56.dp),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-      BpkText(
-        text = colorToHex(color = token.value),
-        color = if (token.value.luminance() > 0.5) Color.Black else Color.White,
-      )
+        BpkText(
+            text = token.name,
+            modifier = Modifier
+                .weight(1f)
+                .padding(BpkSpacing.Base),
+        )
+        Box(
+            modifier = Modifier
+                .height(56.dp)
+                .width(112.dp)
+                .padding(1.dp)
+                .background(token.value),
+            contentAlignment = Alignment.Center,
+        ) {
+            BpkText(
+                text = colorToHex(color = token.value),
+                color = if (token.value.luminance() > 0.5) Color.Black else Color.White,
+            )
+        }
     }
-  }
 }
 
 private fun colorToHex(color: Color): String {
-  val argb = color.toArgb()
-  val hexString = Integer.toHexString(argb)
-  val truncatedHexString = hexString.removeRange(0..1)
-  return "#$truncatedHexString".uppercase()
+    val argb = color.toArgb()
+    val hexString = Integer.toHexString(argb)
+    val truncatedHexString = hexString.removeRange(0..1)
+    return "#$truncatedHexString".uppercase()
 }

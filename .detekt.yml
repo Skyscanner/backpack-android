@@ -183,7 +183,7 @@ formatting:
   Indentation:
     active: true
     autoCorrect: true
-    indentSize: 2
+    indentSize: 4
     excludes: [ '**/compose/tokens/**' ]
   KdocWrapping:
     active: false

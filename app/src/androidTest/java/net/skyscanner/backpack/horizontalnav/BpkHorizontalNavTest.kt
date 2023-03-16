@@ -31,48 +31,48 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkHorizontalNavTest : BpkSnapshotTest() {
 
-  private val horizontalNav = BpkHorizontalNav(testContext).init()
+    private val horizontalNav = BpkHorizontalNav(testContext).init()
 
-  @Test
-  fun default() {
-    snap(horizontalNav)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun small() {
-    val horizontalNav = BpkHorizontalNav(testContext).init()
-    horizontalNav.size = BpkHorizontalNav.Size.Small
-    snap(horizontalNav)
-  }
-
-  @Test
-  fun withIcons() {
-    val horizontalNav = BpkHorizontalNav(testContext).apply {
-      addTab(newTab().setText("Tab 1").setIcon(R.drawable.bpk_cars))
-      addTab(newTab().setText("Tab 2").setIcon(R.drawable.bpk_cars))
-      addTab(newTab().setText("Tab 3").setIcon(R.drawable.bpk_cars))
+    @Test
+    fun default() {
+        snap(horizontalNav)
     }
-    snap(horizontalNav)
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun fixed() {
-    horizontalNav.tabMode = TabLayout.MODE_FIXED
-    snap(horizontalNav)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun small() {
+        val horizontalNav = BpkHorizontalNav(testContext).init()
+        horizontalNav.size = BpkHorizontalNav.Size.Small
+        snap(horizontalNav)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun scrollable() {
-    horizontalNav.tabMode = TabLayout.MODE_SCROLLABLE
-    snap(horizontalNav)
-  }
+    @Test
+    fun withIcons() {
+        val horizontalNav = BpkHorizontalNav(testContext).apply {
+            addTab(newTab().setText("Tab 1").setIcon(R.drawable.bpk_cars))
+            addTab(newTab().setText("Tab 2").setIcon(R.drawable.bpk_cars))
+            addTab(newTab().setText("Tab 3").setIcon(R.drawable.bpk_cars))
+        }
+        snap(horizontalNav)
+    }
 
-  private fun BpkHorizontalNav.init() = apply {
-    addTab(newTab().setText("Tab 1"))
-    addTab(newTab().setText("Tab 2"))
-    addTab(newTab().setText("Tab 3"))
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun fixed() {
+        horizontalNav.tabMode = TabLayout.MODE_FIXED
+        snap(horizontalNav)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun scrollable() {
+        horizontalNav.tabMode = TabLayout.MODE_SCROLLABLE
+        snap(horizontalNav)
+    }
+
+    private fun BpkHorizontalNav.init() = apply {
+        addTab(newTab().setText("Tab 1"))
+        addTab(newTab().setText("Tab 2"))
+        addTab(newTab().setText("Tab 3"))
+    }
 }

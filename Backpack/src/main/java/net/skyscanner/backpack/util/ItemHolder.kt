@@ -28,30 +28,30 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 
 internal abstract class ItemHolder<T>(
-  protected val view: View,
+    protected val view: View,
 ) : RecyclerView.ViewHolder(view), Consumer<T> {
 
-  val context: Context
-    get() = itemView.context
+    val context: Context
+        get() = itemView.context
 
-  val resources: Resources
-    get() = itemView.resources
+    val resources: Resources
+        get() = itemView.resources
 
-  var model: T? = null
-    private set
+    var model: T? = null
+        private set
 
-  constructor(parent: ViewGroup, @LayoutRes layout: Int) :
-    this(LayoutInflater.from(parent.context).inflate(layout, parent, false))
+    constructor(parent: ViewGroup, @LayoutRes layout: Int) :
+        this(LayoutInflater.from(parent.context).inflate(layout, parent, false))
 
-  final override fun invoke(model: T) {
-    if (this.model != model) {
-      this.model = model
-      bind(model)
+    final override fun invoke(model: T) {
+        if (this.model != model) {
+            this.model = model
+            bind(model)
+        }
     }
-  }
 
-  protected abstract fun bind(model: T)
+    protected abstract fun bind(model: T)
 
-  fun <T : View> findViewById(@IdRes id: Int): T =
-    view.findViewById(id)
+    fun <T : View> findViewById(@IdRes id: Int): T =
+        view.findViewById(id)
 }

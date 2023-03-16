@@ -43,56 +43,56 @@ import java.util.Locale
  */
 @Immutable
 data class CalendarParams(
-  val selectionMode: SelectionMode,
-  val range: ClosedRange<LocalDate> = LocalDate.now()..LocalDate.now().plusYears(1),
-  val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
-  val locale: Locale = Locale.getDefault(),
-  val dayOfWeekText: TextStyle = TextStyle.NARROW,
-  val now: LocalDate = LocalDate.now(),
-  val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
+    val selectionMode: SelectionMode,
+    val range: ClosedRange<LocalDate> = LocalDate.now()..LocalDate.now().plusYears(1),
+    val cellsInfo: Map<LocalDate, CellInfo> = emptyMap(),
+    val locale: Locale = Locale.getDefault(),
+    val dayOfWeekText: TextStyle = TextStyle.NARROW,
+    val now: LocalDate = LocalDate.now(),
+    val monthSelectionMode: MonthSelectionMode = MonthSelectionMode.Disabled,
 ) {
 
-  @InternalBackpackApi
-  val weekFields = WeekFields.of(locale)
+    @InternalBackpackApi
+    val weekFields = WeekFields.of(locale)
 
-  internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
-
-  /**
-   * Describes the selection behaviour
-   */
-  @Stable
-  sealed interface SelectionMode {
-    /**
-     * No date can be selected
-     */
-    object Disabled : SelectionMode
+    internal val monthsFormatter = SimpleDateFormat("LLLL", locale)
 
     /**
-     * Only a single, non-disabled date can be selected.
+     * Describes the selection behaviour
      */
-    object Single : SelectionMode
+    @Stable
+    sealed interface SelectionMode {
+        /**
+         * No date can be selected
+         */
+        object Disabled : SelectionMode
+
+        /**
+         * Only a single, non-disabled date can be selected.
+         */
+        object Single : SelectionMode
+
+        /**
+         * A range of dates can be selected.
+         */
+        object Range : SelectionMode
+    }
 
     /**
-     * A range of dates can be selected.
+     * Describes the month selection behaviour
      */
-    object Range : SelectionMode
-  }
+    @Stable
+    sealed interface MonthSelectionMode {
+        /**
+         * No whole month selection is allowed.
+         */
+        object Disabled : MonthSelectionMode
 
-  /**
-   * Describes the month selection behaviour
-   */
-  @Stable
-  sealed interface MonthSelectionMode {
-    /**
-     * No whole month selection is allowed.
-     */
-    object Disabled : MonthSelectionMode
-
-    /**
-     * Only an entire month can be selected, by tapping on the [label] next to its name.
-     */
-    data class SelectWholeMonth(val label: String) : MonthSelectionMode
-  }
+        /**
+         * Only an entire month can be selected, by tapping on the [label] next to its name.
+         */
+        data class SelectWholeMonth(val label: String) : MonthSelectionMode
+    }
 }
 
 /**
@@ -105,15 +105,15 @@ data class CalendarParams(
  */
 @Immutable
 data class CellInfo(
-  val disabled: Boolean = false,
-  val status: CellStatus? = null,
-  val label: String? = null,
-  val style: CellStatusStyle = CellStatusStyle.Label,
+    val disabled: Boolean = false,
+    val status: CellStatus? = null,
+    val label: String? = null,
+    val style: CellStatusStyle = CellStatusStyle.Label,
 ) {
 
-  internal companion object {
-    val Default = CellInfo()
-  }
+    internal companion object {
+        val Default = CellInfo()
+    }
 }
 
 /**
@@ -121,25 +121,25 @@ data class CellInfo(
  */
 enum class CellStatus {
 
-  /**
-   * Positive (green) colouring
-   */
-  Positive,
+    /**
+     * Positive (green) colouring
+     */
+    Positive,
 
-  /**
-   * Neutral (yellow) colouring
-   */
-  Neutral,
+    /**
+     * Neutral (yellow) colouring
+     */
+    Neutral,
 
-  /**
-   * Negative (red) colouring
-   */
-  Negative,
+    /**
+     * Negative (red) colouring
+     */
+    Negative,
 
-  /**
-   * Empty (grey) colouring
-   */
-  Empty,
+    /**
+     * Empty (grey) colouring
+     */
+    Empty,
 }
 
 /**
@@ -147,8 +147,8 @@ enum class CellStatus {
  */
 enum class CellStatusStyle {
 
-  /**
-   * The colour will be used as [CellInfo.label] text colour
-   */
-  Label,
+    /**
+     * The colour will be used as [CellInfo.label] text colour
+     */
+    Label,
 }

@@ -34,101 +34,101 @@ import org.threeten.bp.YearMonth
 @InternalBackpackApi
 sealed class CalendarCell {
 
-  abstract val yearMonth: YearMonth
+    abstract val yearMonth: YearMonth
 
-  @Immutable
-  @InternalBackpackApi
-  data class Space internal constructor(
-    val selected: Boolean,
-    val position: Int,
-    override val yearMonth: YearMonth,
-  ) : CalendarCell()
+    @Immutable
+    @InternalBackpackApi
+    data class Space internal constructor(
+        val selected: Boolean,
+        val position: Int,
+        override val yearMonth: YearMonth,
+    ) : CalendarCell()
 
-  @Immutable
-  @InternalBackpackApi
-  data class Header internal constructor(
-    val title: String,
-    val calendarSelectionMode: CalendarParams.SelectionMode,
-    val monthSelectionMode: CalendarParams.MonthSelectionMode,
-    override val yearMonth: YearMonth,
-  ) : CalendarCell()
+    @Immutable
+    @InternalBackpackApi
+    data class Header internal constructor(
+        val title: String,
+        val calendarSelectionMode: CalendarParams.SelectionMode,
+        val monthSelectionMode: CalendarParams.MonthSelectionMode,
+        override val yearMonth: YearMonth,
+    ) : CalendarCell()
 
-  @Immutable
-  @InternalBackpackApi
-  data class Day internal constructor(
-    val date: LocalDate,
-    val info: CellInfo,
-    val selection: Selection?,
-    val text: CharSequence,
-    val outOfRange: Boolean,
-    override val yearMonth: YearMonth,
-  ) : CalendarCell() {
+    @Immutable
+    @InternalBackpackApi
+    data class Day internal constructor(
+        val date: LocalDate,
+        val info: CellInfo,
+        val selection: Selection?,
+        val text: CharSequence,
+        val outOfRange: Boolean,
+        override val yearMonth: YearMonth,
+    ) : CalendarCell() {
 
-    val inactive: Boolean
-      get() = info.disabled || outOfRange
-  }
+        val inactive: Boolean
+            get() = info.disabled || outOfRange
+    }
 
-  enum class Selection {
-    Single,
-    Double,
-    Start,
-    Middle,
-    End,
-    StartMonth,
-    EndMonth,
-  }
+    enum class Selection {
+        Single,
+        Double,
+        Start,
+        Middle,
+        End,
+        StartMonth,
+        EndMonth,
+    }
 }
 
 @Stable
 @InternalBackpackApi
 sealed interface CalendarInteraction {
 
-  @Immutable
-  @InternalBackpackApi
-  data class DateClicked(val day: CalendarCell.Day) : CalendarInteraction
+    @Immutable
+    @InternalBackpackApi
+    data class DateClicked(val day: CalendarCell.Day) : CalendarInteraction
 
-  @Immutable
-  @InternalBackpackApi
-  data class SelectMonthClicked(val header: CalendarCell.Header) : CalendarInteraction
+    @Immutable
+    @InternalBackpackApi
+    data class SelectMonthClicked(val header: CalendarCell.Header) : CalendarInteraction
 }
 
 internal fun CalendarCellDay(
-  date: LocalDate,
-  yearMonth: YearMonth,
-  selection: CalendarSelection,
-  params: CalendarParams,
+    date: LocalDate,
+    yearMonth: YearMonth,
+    selection: CalendarSelection,
+    params: CalendarParams,
 ): CalendarCell.Day = CalendarCell.Day(
-  date = date,
-  yearMonth = yearMonth,
-  info = params.cellsInfo[date] ?: CellInfo.Default,
-  outOfRange = date !in params.range,
-  text = buildSpannedString {
-    val span = TtsSpan.DateBuilder()
-      .setDay(date.dayOfMonth)
-      .setMonth(date.month.ordinal)
-      .setWeekday(date.dayOfWeek.value)
-      .build()
-    append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-  },
-  selection = when (selection) {
-    is CalendarSelection.None -> null
-    is CalendarSelection.Single -> when (date) {
-      selection.date -> CalendarCell.Selection.Single
-      else -> null
-    }
-    is CalendarSelection.Dates -> when {
-      selection.start == date && selection.end == date -> CalendarCell.Selection.Double
-      selection.start == date && selection.end == null -> CalendarCell.Selection.Single
-      selection.start == date && selection.end != null -> CalendarCell.Selection.Start
-      selection.end == date -> CalendarCell.Selection.End
-      selection.end != null && date in selection -> CalendarCell.Selection.Middle
-      else -> null
-    }
-    is CalendarSelection.Month -> when {
-      selection.start == date -> CalendarCell.Selection.StartMonth
-      selection.end == date -> CalendarCell.Selection.EndMonth
-      date in selection -> CalendarCell.Selection.Middle
-      else -> null
-    }
-  },
+    date = date,
+    yearMonth = yearMonth,
+    info = params.cellsInfo[date] ?: CellInfo.Default,
+    outOfRange = date !in params.range,
+    text = buildSpannedString {
+        val span = TtsSpan.DateBuilder()
+            .setDay(date.dayOfMonth)
+            .setMonth(date.month.ordinal)
+            .setWeekday(date.dayOfWeek.value)
+            .build()
+        append(date.dayOfMonth.toString(), span, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    },
+    selection = when (selection) {
+        is CalendarSelection.None -> null
+        is CalendarSelection.Single -> when (date) {
+            selection.date -> CalendarCell.Selection.Single
+            else -> null
+        }
+        is CalendarSelection.Dates -> when {
+            selection.start == date && selection.end == date -> CalendarCell.Selection.Double
+            selection.start == date && selection.end == null -> CalendarCell.Selection.Single
+            selection.start == date && selection.end != null -> CalendarCell.Selection.Start
+            selection.end == date -> CalendarCell.Selection.End
+            selection.end != null && date in selection -> CalendarCell.Selection.Middle
+            else -> null
+        }
+        is CalendarSelection.Month -> when {
+            selection.start == date -> CalendarCell.Selection.StartMonth
+            selection.end == date -> CalendarCell.Selection.EndMonth
+            date in selection -> CalendarCell.Selection.Middle
+            else -> null
+        }
+    },
 )

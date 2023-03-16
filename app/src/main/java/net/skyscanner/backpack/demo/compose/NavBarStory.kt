@@ -53,121 +53,121 @@ import net.skyscanner.backpack.demo.ui.ListItem
 @NavBarComponent
 @ComposeStory("Default")
 fun NavBarStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(vertical = BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier.padding(vertical = BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    val childModifier = Modifier.fillMaxWidth()
-    NoNavIconTopNavBar(childModifier)
-    BackTopNavBar(childModifier)
-    CloseTopNavBar(childModifier)
-    ActionsTopNavBar(childModifier)
-    TextActionTopNavBar(childModifier)
-  }
+        val childModifier = Modifier.fillMaxWidth()
+        NoNavIconTopNavBar(childModifier)
+        BackTopNavBar(childModifier)
+        CloseTopNavBar(childModifier)
+        ActionsTopNavBar(childModifier)
+        TextActionTopNavBar(childModifier)
+    }
 }
 
 @Composable
 @NavBarComponent
 @ComposeStory("Collapsible")
 fun CollapsibleNavBarStory(
-  modifier: Modifier = Modifier,
-  initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,
-  showList: Boolean = true,
-  showActions: Boolean = true,
-  showNav: Boolean = true,
-  insets: WindowInsets? = null,
+    modifier: Modifier = Modifier,
+    initialStatus: TopNavBarStatus = TopNavBarStatus.Expanded,
+    showList: Boolean = true,
+    showActions: Boolean = true,
+    showNav: Boolean = true,
+    insets: WindowInsets? = null,
 ) {
-  val state = rememberTopAppBarState(initialStatus)
-  Column(modifier.nestedScroll(state)) {
-    BpkTopNavBar(
-      state = state,
-      title = stringResource(R.string.navigation_bar_title),
-      insets = insets,
-      navIcon = when {
-        showNav -> NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {}
-        else -> NavIcon.None
-      },
-      actions = if (showActions) listOf(
-        IconAction(icon = BpkIcon.AccountIdCard, contentDescription = stringResource(R.string.navigation_id_card)) {},
-        IconAction(icon = BpkIcon.Accessibility, contentDescription = stringResource(R.string.navigation_accessibility)) {},
-        IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
-      ) else emptyList(),
-    )
-    if (showList) {
-      LazyColumn {
-        items(count = 2) {
-          BpkCard(
-            modifier = Modifier
-              .fillMaxWidth()
-              .padding(horizontal = BpkDimension.Spacing.Lg),
-          ) {
-            Column {
-              BpkText(text = stringResource(R.string.generic_scroll_the_list))
+    val state = rememberTopAppBarState(initialStatus)
+    Column(modifier.nestedScroll(state)) {
+        BpkTopNavBar(
+            state = state,
+            title = stringResource(R.string.navigation_bar_title),
+            insets = insets,
+            navIcon = when {
+                showNav -> NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {}
+                else -> NavIcon.None
+            },
+            actions = if (showActions) listOf(
+                IconAction(icon = BpkIcon.AccountIdCard, contentDescription = stringResource(R.string.navigation_id_card)) {},
+                IconAction(icon = BpkIcon.Accessibility, contentDescription = stringResource(R.string.navigation_accessibility)) {},
+                IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
+            ) else emptyList(),
+        )
+        if (showList) {
+            LazyColumn {
+                items(count = 2) {
+                    BpkCard(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = BpkDimension.Spacing.Lg),
+                    ) {
+                        Column {
+                            BpkText(text = stringResource(R.string.generic_scroll_the_list))
+                        }
+                    }
+                    BpkDivider(Modifier.alpha(0f))
+                }
+                items(100) {
+                    ListItem(title = stringResource(R.string.generic_scroll_the_list))
+                }
             }
-          }
-          BpkDivider(Modifier.alpha(0f))
         }
-        items(100) {
-          ListItem(title = stringResource(R.string.generic_scroll_the_list))
-        }
-      }
     }
-  }
 }
 
 @Composable
 internal fun NoNavIconTopNavBar(modifier: Modifier = Modifier) {
-  BpkTopNavBar(
-    navIcon = NavIcon.None,
-    title = stringResource(R.string.navigation_bar_title),
-    modifier = modifier,
-    insets = null,
-  )
+    BpkTopNavBar(
+        navIcon = NavIcon.None,
+        title = stringResource(R.string.navigation_bar_title),
+        modifier = modifier,
+        insets = null,
+    )
 }
 
 @Composable
 internal fun BackTopNavBar(modifier: Modifier = Modifier) {
-  BpkTopNavBar(
-    title = stringResource(R.string.navigation_bar_title),
-    navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {},
-    modifier = modifier,
-    insets = null,
-  )
+    BpkTopNavBar(
+        title = stringResource(R.string.navigation_bar_title),
+        navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {},
+        modifier = modifier,
+        insets = null,
+    )
 }
 
 @Composable
 internal fun CloseTopNavBar(modifier: Modifier = Modifier) {
-  BpkTopNavBar(
-    title = stringResource(R.string.navigation_bar_title),
-    navIcon = NavIcon.Close(contentDescription = stringResource(R.string.navigation_close)) {},
-    modifier = modifier,
-    insets = null,
-  )
+    BpkTopNavBar(
+        title = stringResource(R.string.navigation_bar_title),
+        navIcon = NavIcon.Close(contentDescription = stringResource(R.string.navigation_close)) {},
+        modifier = modifier,
+        insets = null,
+    )
 }
 
 @Composable
 internal fun ActionsTopNavBar(modifier: Modifier = Modifier) {
-  BpkTopNavBar(
-    title = stringResource(R.string.navigation_bar_title),
-    navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {},
-    actions = listOf(
-      IconAction(icon = BpkIcon.AccountIdCard, contentDescription = stringResource(R.string.navigation_id_card)) {},
-      IconAction(icon = BpkIcon.Accessibility, contentDescription = stringResource(R.string.navigation_accessibility)) {},
-      IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
-    ),
-    modifier = modifier,
-    insets = null,
-  )
+    BpkTopNavBar(
+        title = stringResource(R.string.navigation_bar_title),
+        navIcon = NavIcon.Back(contentDescription = stringResource(R.string.navigation_back)) {},
+        actions = listOf(
+            IconAction(icon = BpkIcon.AccountIdCard, contentDescription = stringResource(R.string.navigation_id_card)) {},
+            IconAction(icon = BpkIcon.Accessibility, contentDescription = stringResource(R.string.navigation_accessibility)) {},
+            IconAction(icon = BpkIcon.Account, contentDescription = stringResource(R.string.navigation_account)) {},
+        ),
+        modifier = modifier,
+        insets = null,
+    )
 }
 
 @Composable
 internal fun TextActionTopNavBar(modifier: Modifier = Modifier) {
-  BpkTopNavBar(
-    navIcon = NavIcon.None,
-    title = stringResource(R.string.navigation_bar_title),
-    action = TextAction(text = stringResource(R.string.navigation_text_action)) {},
-    modifier = modifier,
-    insets = null,
-  )
+    BpkTopNavBar(
+        navIcon = NavIcon.None,
+        title = stringResource(R.string.navigation_bar_title),
+        action = TextAction(text = stringResource(R.string.navigation_text_action)) {},
+        modifier = modifier,
+        insets = null,
+    )
 }

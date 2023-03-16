@@ -46,50 +46,50 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @StarRatingInteractiveComponent
 @ComposeStory
 fun InteractiveStarRatingStory(modifier: Modifier = Modifier) {
-  Box(
-    modifier = modifier.fillMaxHeight(),
-    contentAlignment = Alignment.Center,
-  ) {
-    Column(
-      modifier = Modifier.padding(start = BpkSpacing.Xl),
-      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+    Box(
+        modifier = modifier.fillMaxHeight(),
+        contentAlignment = Alignment.Center,
     ) {
-      InteractiveRatingSample(
-        size = BpkStarRatingSize.Large,
-        text = stringResource(R.string.icons_large),
-      )
-      InteractiveRatingSample(
-        size = BpkStarRatingSize.Small,
-        text = stringResource(R.string.icons_small),
-      )
+        Column(
+            modifier = Modifier.padding(start = BpkSpacing.Xl),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Lg),
+        ) {
+            InteractiveRatingSample(
+                size = BpkStarRatingSize.Large,
+                text = stringResource(R.string.icons_large),
+            )
+            InteractiveRatingSample(
+                size = BpkStarRatingSize.Small,
+                text = stringResource(R.string.icons_small),
+            )
+        }
     }
-  }
 }
 
 @Composable
 private fun InteractiveRatingSample(
-  size: BpkStarRatingSize,
-  text: String,
-  modifier: Modifier = Modifier,
+    size: BpkStarRatingSize,
+    text: String,
+    modifier: Modifier = Modifier,
 ) {
-  Column(modifier = modifier) {
-    BpkText(
-      text = text,
-      style = BpkTheme.typography.heading3,
-    )
-    val ratings = listOf(1, 2, 3, 4, 5)
-    for (i in ratings) {
-      key(i) {
-        var rating by remember { mutableStateOf(i) }
-        BpkInteractiveStarRating(
-          rating = rating,
-          onRatingChanged = { rating = it },
-          contentDescription = { value, max ->
-            stringResource(R.string.star_rating_accessibility_status, value, max)
-          },
-          size = size,
+    Column(modifier = modifier) {
+        BpkText(
+            text = text,
+            style = BpkTheme.typography.heading3,
         )
-      }
+        val ratings = listOf(1, 2, 3, 4, 5)
+        for (i in ratings) {
+            key(i) {
+                var rating by remember { mutableStateOf(i) }
+                BpkInteractiveStarRating(
+                    rating = rating,
+                    onRatingChanged = { rating = it },
+                    contentDescription = { value, max ->
+                        stringResource(R.string.star_rating_accessibility_status, value, max)
+                    },
+                    size = size,
+                )
+            }
+        }
     }
-  }
 }

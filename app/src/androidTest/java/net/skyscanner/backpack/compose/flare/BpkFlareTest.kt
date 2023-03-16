@@ -33,26 +33,26 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkFlareTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap(width = 200.dp, height = 150.dp) {
-    DefaultFlareExample()
-  }
+    @Test
+    fun default() = snap(width = 200.dp, height = 150.dp) {
+        DefaultFlareExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun up() = snap(width = 200.dp, height = 150.dp) {
-    UpFlareExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun up() = snap(width = 200.dp, height = 150.dp) {
+        UpFlareExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun radius() = snap(width = 200.dp, height = 150.dp) {
-    RadiusFlareExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun radius() = snap(width = 200.dp, height = 150.dp) {
+        RadiusFlareExample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun contentPadding() = snap(width = 200.dp, height = 150.dp) {
-    ContentPaddingFlareExample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun contentPadding() = snap(width = 200.dp, height = 150.dp) {
+        ContentPaddingFlareExample()
+    }
 }

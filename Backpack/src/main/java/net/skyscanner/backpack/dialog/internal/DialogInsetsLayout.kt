@@ -23,12 +23,12 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 
 internal class DialogInsetsLayout @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0,
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-  init {
-    fitsSystemWindows = true
-  }
+    init {
+        fitsSystemWindows = true
+    }
 }

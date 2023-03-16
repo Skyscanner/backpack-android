@@ -29,73 +29,73 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkBadgeTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() {
-    val badge = BpkBadge(testContext)
-    badge.text = "Message"
-    snap(badge)
-  }
+    @Test
+    fun default() {
+        val badge = BpkBadge(testContext)
+        badge.text = "Message"
+        snap(badge)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun success() {
-    val badge = BpkBadge(testContext)
-    badge.type = BpkBadge.Type.Success
-    badge.text = "Message"
-    snap(badge)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun success() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Success
+        badge.text = "Message"
+        snap(badge)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun destructive() {
-    val badge = BpkBadge(testContext)
-    badge.type = BpkBadge.Type.Destructive
-    badge.text = "Message"
-    snap(badge)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun destructive() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Destructive
+        badge.text = "Message"
+        snap(badge)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun inverse() {
-    val badge = BpkBadge(testContext)
-    badge.type = BpkBadge.Type.Inverse
-    badge.text = "Message"
-    snap(badge, background = R.color.bpkCorePrimary)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun inverse() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Inverse
+        badge.text = "Message"
+        snap(badge, background = R.color.bpkCorePrimary)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun normal() {
-    val badge = BpkBadge(testContext)
-    badge.type = BpkBadge.Type.Normal
-    badge.text = "Message"
-    snap(badge)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun normal() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Normal
+        badge.text = "Message"
+        snap(badge)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun strong() {
-    val badge = BpkBadge(testContext)
-    badge.type = BpkBadge.Type.Strong
-    badge.text = "Message"
-    snap(badge)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun strong() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Strong
+        badge.text = "Message"
+        snap(badge)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun warning() {
-    val badge = BpkBadge(testContext)
-    badge.type = BpkBadge.Type.Warning
-    badge.text = "Message"
-    snap(badge)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun warning() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Warning
+        badge.text = "Message"
+        snap(badge)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun outline() {
-    val badge = BpkBadge(testContext)
-    badge.type = BpkBadge.Type.Outline
-    badge.text = "Message"
-    snap(badge, background = R.color.bpkCorePrimary)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun outline() {
+        val badge = BpkBadge(testContext)
+        badge.type = BpkBadge.Type.Outline
+        badge.text = "Message"
+        snap(badge, background = R.color.bpkCorePrimary)
+    }
 }

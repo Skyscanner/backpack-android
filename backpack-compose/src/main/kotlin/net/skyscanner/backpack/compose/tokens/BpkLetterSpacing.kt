@@ -25,5 +25,5 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.em
 
 internal object BpkLetterSpacing {
-  internal val Tight: TextUnit = -(0.02).em
+    internal val Tight: TextUnit = -(0.02).em
 }

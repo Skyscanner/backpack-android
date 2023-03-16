@@ -32,106 +32,106 @@ import org.threeten.bp.LocalDate
 
 @Deprecated("Use Calendar2 instead")
 data class CalendarColoring(
-  val coloredBuckets: Set<ColoredBucket>,
+    val coloredBuckets: Set<ColoredBucket>,
 )
 
 @Deprecated("Use Calendar2 instead")
 data class ColoredBucket(
-  val calendarCellStyle: CalendarCellStyle,
-  val days: Set<LocalDate>,
+    val calendarCellStyle: CalendarCellStyle,
+    val days: Set<LocalDate>,
 )
 
 @Deprecated("Use Calendar2 instead")
 sealed class CalendarCellStyle {
 
-  /**
-   * Text style of the calendar cell. Where [Light] and [Dark] refer to the background colour.
-   * I.e.
-   *  [Light] should be used to indicate the background is light and black text should be used.
-   *  [Dark] should be used to indicate the background is dark and white text should be used.
-   */
-  @Deprecated("Use Calendar2 instead")
-  enum class TextStyle {
-    Light,
-    Dark,
-  }
-
-  /**
-   * A positive cell style which is suitable to indicate for example
-   * a date which has a comparatively low price among the dates in
-   * the calendar.
-   */
-  @Deprecated("Use Calendar2 instead")
-  object Positive : CalendarCellStyle() {
-    override fun color(context: Context) =
-      context.getColor(R.color.bpkStatusSuccessSpot)
-  }
-
-  /**
-   * A neutral cell style which is suitable to indicate for example
-   * a date which has a comparatively average price among the dates in
-   * the calendar.
-   */
-  @Deprecated("Use Calendar2 instead")
-  object Neutral : CalendarCellStyle() {
-    override fun color(context: Context) =
-      context.getColor(R.color.bpkStatusWarningSpot)
-  }
-
-  /**
-   * A negative cell style which is suitable to indicate for example
-   * a date which has a comparatively high price among the dates in
-   * the calendar.
-   */
-  @Deprecated("Use Calendar2 instead")
-  object Negative : CalendarCellStyle() {
-    override fun color(context: Context) =
-      context.getColor(R.color.bpkStatusDangerSpot)
-
-    override fun textStyle(context: Context): TextStyle {
-      val nightModeFlags: Int = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-
-      return if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
-        Light
-      } else {
-        Dark
-      }
+    /**
+     * Text style of the calendar cell. Where [Light] and [Dark] refer to the background colour.
+     * I.e.
+     *  [Light] should be used to indicate the background is light and black text should be used.
+     *  [Dark] should be used to indicate the background is dark and white text should be used.
+     */
+    @Deprecated("Use Calendar2 instead")
+    enum class TextStyle {
+        Light,
+        Dark,
     }
-  }
 
-  /**
-   * A cell style which is suitable to indicate a holiday.
-   * Use this in conjunction with [HighlightedDaysAdapter] to
-   * show a footer with the list of holidays for the month.
-   *
-   * @see HighlightedDaysAdapter
-   */
-  @Deprecated("Use Calendar2 instead")
-  object Hightlight : CalendarCellStyle() {
-    override fun color(context: Context) =
-      context.getColor(R.color.bpkLine)
-  }
-
-  /**
-   * A custom cell style.
-   */
-  @Deprecated("Use Calendar2 instead")
-  data class Custom(
-    @ColorInt private val color: Int,
-    private val textStyle: TextStyle? = null,
-  ) : CalendarCellStyle() {
-    override fun color(context: Context) = color
-    override fun textStyle(context: Context): TextStyle {
-      return textStyle ?: super.textStyle(context)
+    /**
+     * A positive cell style which is suitable to indicate for example
+     * a date which has a comparatively low price among the dates in
+     * the calendar.
+     */
+    @Deprecated("Use Calendar2 instead")
+    object Positive : CalendarCellStyle() {
+        override fun color(context: Context) =
+            context.getColor(R.color.bpkStatusSuccessSpot)
     }
-  }
 
-  @ColorInt
-  abstract fun color(context: Context): Int
+    /**
+     * A neutral cell style which is suitable to indicate for example
+     * a date which has a comparatively average price among the dates in
+     * the calendar.
+     */
+    @Deprecated("Use Calendar2 instead")
+    object Neutral : CalendarCellStyle() {
+        override fun color(context: Context) =
+            context.getColor(R.color.bpkStatusWarningSpot)
+    }
 
-  open fun textStyle(context: Context): TextStyle =
-    if (ColorUtils.calculateLuminance(color(context)) < 0.5f)
-      TextStyle.Dark
-    else
-      TextStyle.Light
+    /**
+     * A negative cell style which is suitable to indicate for example
+     * a date which has a comparatively high price among the dates in
+     * the calendar.
+     */
+    @Deprecated("Use Calendar2 instead")
+    object Negative : CalendarCellStyle() {
+        override fun color(context: Context) =
+            context.getColor(R.color.bpkStatusDangerSpot)
+
+        override fun textStyle(context: Context): TextStyle {
+            val nightModeFlags: Int = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+            return if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+                Light
+            } else {
+                Dark
+            }
+        }
+    }
+
+    /**
+     * A cell style which is suitable to indicate a holiday.
+     * Use this in conjunction with [HighlightedDaysAdapter] to
+     * show a footer with the list of holidays for the month.
+     *
+     * @see HighlightedDaysAdapter
+     */
+    @Deprecated("Use Calendar2 instead")
+    object Hightlight : CalendarCellStyle() {
+        override fun color(context: Context) =
+            context.getColor(R.color.bpkLine)
+    }
+
+    /**
+     * A custom cell style.
+     */
+    @Deprecated("Use Calendar2 instead")
+    data class Custom(
+        @ColorInt private val color: Int,
+        private val textStyle: TextStyle? = null,
+    ) : CalendarCellStyle() {
+        override fun color(context: Context) = color
+        override fun textStyle(context: Context): TextStyle {
+            return textStyle ?: super.textStyle(context)
+        }
+    }
+
+    @ColorInt
+    abstract fun color(context: Context): Int
+
+    open fun textStyle(context: Context): TextStyle =
+        if (ColorUtils.calculateLuminance(color(context)) < 0.5f)
+            TextStyle.Dark
+        else
+            TextStyle.Light
 }

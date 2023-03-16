@@ -31,46 +31,46 @@ import net.skyscanner.backpack.compose.tokens.BpkSpacing
 
 @Composable
 internal fun BpkRatingLayout(
-  value: Float,
-  scale: BpkRatingScale,
-  size: BpkRatingSize,
-  subtitle: String?,
-  showScale: Boolean,
-  modifier: Modifier = Modifier,
-  title: @Composable () -> Unit,
+    value: Float,
+    scale: BpkRatingScale,
+    size: BpkRatingSize,
+    subtitle: String?,
+    showScale: Boolean,
+    modifier: Modifier = Modifier,
+    title: @Composable () -> Unit,
 ) {
 
-  Row(
-    modifier = modifier.semantics(mergeDescendants = true) { },
-    horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-  ) {
+    Row(
+        modifier = modifier.semantics(mergeDescendants = true) { },
+        horizontalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+    ) {
 
-    BpkRatingNumbers(
-      modifier = Modifier.alignByBaseline(),
-      value = value,
-      scale = scale,
-      size = size,
-      showScale = showScale,
-    )
+        BpkRatingNumbers(
+            modifier = Modifier.alignByBaseline(),
+            value = value,
+            scale = scale,
+            size = size,
+            showScale = showScale,
+        )
 
-    when (size) {
+        when (size) {
 
-      BpkRatingSize.Base -> {
-        BpkRatingTitle(Modifier.alignByBaseline(), title)
-        if (subtitle != null) {
-          BpkRatingSubtitle(subtitle, Modifier.alignByBaseline())
-        }
-      }
+            BpkRatingSize.Base -> {
+                BpkRatingTitle(Modifier.alignByBaseline(), title)
+                if (subtitle != null) {
+                    BpkRatingSubtitle(subtitle, Modifier.alignByBaseline())
+                }
+            }
 
-      BpkRatingSize.Large ->
-        Column(
-          modifier = Modifier.alignBy(LastBaseline),
-        ) {
-          BpkRatingTitle(content = title)
-          if (subtitle != null) {
-            BpkRatingSubtitle(subtitle)
-          }
+            BpkRatingSize.Large ->
+                Column(
+                    modifier = Modifier.alignBy(LastBaseline),
+                ) {
+                    BpkRatingTitle(content = title)
+                    if (subtitle != null) {
+                        BpkRatingSubtitle(subtitle)
+                    }
+                }
         }
     }
-  }
 }

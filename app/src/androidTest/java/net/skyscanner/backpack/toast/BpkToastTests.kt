@@ -27,10 +27,10 @@ import org.junit.runner.RunWith
 @Suppress("DEPRECATION")
 class BpkToastTests : BpkSnapshotTest() {
 
-  @Test
-  fun default() {
-    val toast = BpkToast.makeText(testContext, "Test", BpkToast.LENGTH_SHORT)
-    toast.show()
-    snap(toast.view!!)
-  }
+    @Test
+    fun default() {
+        val toast = BpkToast.makeText(testContext, "Test", BpkToast.LENGTH_SHORT)
+        toast.show()
+        snap(toast.view!!)
+    }
 }

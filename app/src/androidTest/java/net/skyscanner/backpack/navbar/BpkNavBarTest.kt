@@ -36,108 +36,108 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkNavBarTest : BpkSnapshotTest() {
 
-  @get:Rule
-  val rule = activityScenarioRule<AppCompatActivity>()
+    @get:Rule
+    val rule = activityScenarioRule<AppCompatActivity>()
 
-  @Test
-  fun default() {
-    init()
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.appBar))
-      .check { v, _ -> view = v }
-    snap(view!!, width = 400)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun collapsed() {
-    init(expanded = false)
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.appBar))
-      .check { v, _ -> view = v }
-    snap(view!!, width = 400)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun collapsed_icon() {
-    init(icon = true, expanded = false)
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.appBar))
-      .check { v, _ -> view = v }
-    snap(view!!, width = 400)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun expanded_icon() {
-    init(icon = true)
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.appBar))
-      .check { v, _ -> view = v }
-    snap(view!!, width = 400)
-  }
-
-  @Test
-  fun collapsed_menu() {
-    init(menu = true, expanded = false)
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.appBar))
-      .check { v, _ -> view = v }
-    snap(view!!, width = 400)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun expanded_menu() {
-    init(menu = true)
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.appBar))
-      .check { v, _ -> view = v }
-    snap(view!!, width = 400)
-  }
-
-  @Test
-  fun collapsed_iconAndMenu() {
-    init(icon = true, menu = true, expanded = false)
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.appBar))
-      .check { v, _ -> view = v }
-    snap(view!!, width = 400)
-  }
-
-  @Test
-  fun expanded_iconAndMenu() {
-    init(icon = true, menu = true)
-    var view: View? = null
-    onView(ViewMatchers.withId(R.id.appBar))
-      .check { v, _ -> view = v }
-    snap(view!!, width = 400)
-  }
-
-  private fun init(
-    icon: Boolean = false,
-    menu: Boolean = false,
-    expanded: Boolean = true,
-  ) {
-    rule.scenario.waitForActivity().apply {
-      runOnUi {
-        setContentView(R.layout.fragment_nav_bar)
-        val navBar = findViewById<BpkNavBar>(R.id.appBar)
-        navBar.title = "Nav Bar"
-
-        if (icon) {
-          navBar.icon = getDrawable(R.drawable.bpk_native_android__back)
-        } else {
-          navBar.icon = null
-        }
-        if (menu) {
-          navBar.menu = R.menu.settings
-        } else {
-          navBar.menu = 0
-        }
-        navBar.setExpanded(expanded, false)
-      }
+    @Test
+    fun default() {
+        init()
+        var view: View? = null
+        onView(ViewMatchers.withId(R.id.appBar))
+            .check { v, _ -> view = v }
+        snap(view!!, width = 400)
     }
-  }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun collapsed() {
+        init(expanded = false)
+        var view: View? = null
+        onView(ViewMatchers.withId(R.id.appBar))
+            .check { v, _ -> view = v }
+        snap(view!!, width = 400)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun collapsed_icon() {
+        init(icon = true, expanded = false)
+        var view: View? = null
+        onView(ViewMatchers.withId(R.id.appBar))
+            .check { v, _ -> view = v }
+        snap(view!!, width = 400)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun expanded_icon() {
+        init(icon = true)
+        var view: View? = null
+        onView(ViewMatchers.withId(R.id.appBar))
+            .check { v, _ -> view = v }
+        snap(view!!, width = 400)
+    }
+
+    @Test
+    fun collapsed_menu() {
+        init(menu = true, expanded = false)
+        var view: View? = null
+        onView(ViewMatchers.withId(R.id.appBar))
+            .check { v, _ -> view = v }
+        snap(view!!, width = 400)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun expanded_menu() {
+        init(menu = true)
+        var view: View? = null
+        onView(ViewMatchers.withId(R.id.appBar))
+            .check { v, _ -> view = v }
+        snap(view!!, width = 400)
+    }
+
+    @Test
+    fun collapsed_iconAndMenu() {
+        init(icon = true, menu = true, expanded = false)
+        var view: View? = null
+        onView(ViewMatchers.withId(R.id.appBar))
+            .check { v, _ -> view = v }
+        snap(view!!, width = 400)
+    }
+
+    @Test
+    fun expanded_iconAndMenu() {
+        init(icon = true, menu = true)
+        var view: View? = null
+        onView(ViewMatchers.withId(R.id.appBar))
+            .check { v, _ -> view = v }
+        snap(view!!, width = 400)
+    }
+
+    private fun init(
+        icon: Boolean = false,
+        menu: Boolean = false,
+        expanded: Boolean = true,
+    ) {
+        rule.scenario.waitForActivity().apply {
+            runOnUi {
+                setContentView(R.layout.fragment_nav_bar)
+                val navBar = findViewById<BpkNavBar>(R.id.appBar)
+                navBar.title = "Nav Bar"
+
+                if (icon) {
+                    navBar.icon = getDrawable(R.drawable.bpk_native_android__back)
+                } else {
+                    navBar.icon = null
+                }
+                if (menu) {
+                    navBar.menu = R.menu.settings
+                } else {
+                    navBar.menu = 0
+                }
+                navBar.setExpanded(expanded, false)
+            }
+        }
+    }
 }

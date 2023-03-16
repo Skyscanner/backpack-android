@@ -42,62 +42,62 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @NudgerComponent
 @ComposeStory
 fun NudgerStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.fillMaxSize(),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
-  ) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base, Alignment.CenterVertically),
+    ) {
 
-    NudgerExample(name = stringResource(R.string.generic_default)) {
-      NudgerExample()
-    }
+        NudgerExample(name = stringResource(R.string.generic_default)) {
+            NudgerExample()
+        }
 
-    NudgerExample(name = stringResource(R.string.nudger_minus_disabled)) {
-      NudgerExample(initialValue = NudgerStoryMin)
-    }
+        NudgerExample(name = stringResource(R.string.nudger_minus_disabled)) {
+            NudgerExample(initialValue = NudgerStoryMin)
+        }
 
-    NudgerExample(name = stringResource(R.string.nudger_plus_disabled)) {
-      NudgerExample(initialValue = NudgerStoryMax)
-    }
+        NudgerExample(name = stringResource(R.string.nudger_plus_disabled)) {
+            NudgerExample(initialValue = NudgerStoryMax)
+        }
 
-    NudgerExample(name = stringResource(R.string.generic_disabled)) {
-      NudgerExample(enabled = false)
+        NudgerExample(name = stringResource(R.string.generic_disabled)) {
+            NudgerExample(enabled = false)
+        }
     }
-  }
 }
 
 @Composable
 internal fun NudgerExample(
-  modifier: Modifier = Modifier,
-  initialValue: Int = NudgerStoryAvg,
-  enabled: Boolean = true,
+    modifier: Modifier = Modifier,
+    initialValue: Int = NudgerStoryAvg,
+    enabled: Boolean = true,
 ) {
-  var value by remember { mutableStateOf(initialValue) }
+    var value by remember { mutableStateOf(initialValue) }
 
-  BpkNudger(
-    modifier = modifier,
-    value = value,
-    onValueChange = { value = it },
-    min = NudgerStoryMin,
-    max = NudgerStoryMax,
-    enabled = enabled,
-  )
+    BpkNudger(
+        modifier = modifier,
+        value = value,
+        onValueChange = { value = it },
+        min = NudgerStoryMin,
+        max = NudgerStoryMax,
+        enabled = enabled,
+    )
 }
 
 @Composable
 private fun NudgerExample(
-  name: String,
-  modifier: Modifier = Modifier,
-  content: @Composable ColumnScope.() -> Unit,
+    name: String,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit,
 ) {
-  Column(
-    modifier = modifier,
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
-  ) {
-    BpkText(text = name, style = BpkTheme.typography.footnote)
-    content()
-  }
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Md),
+    ) {
+        BpkText(text = name, style = BpkTheme.typography.footnote)
+        content()
+    }
 }
 
 internal val NudgerStoryMin = 0

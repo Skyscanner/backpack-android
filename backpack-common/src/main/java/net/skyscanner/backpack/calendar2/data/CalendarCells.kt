@@ -31,90 +31,90 @@ import org.threeten.bp.LocalDate
 @Immutable
 @InternalBackpackApi
 data class CalendarCells(
-  private val months: List<CalendarMonth>,
+    private val months: List<CalendarMonth>,
 ) {
 
-  val size: Int = months.sumOf { it.cells.size }
+    val size: Int = months.sumOf { it.cells.size }
 
-  operator fun get(position: Int): CalendarCell {
-    var month: CalendarMonth? = null
-    var localIndex = position
-    for (it in months) {
-      if (localIndex in it.cells.indices) {
-        month = it
-        break
-      }
-      localIndex -= it.cells.size
+    operator fun get(position: Int): CalendarCell {
+        var month: CalendarMonth? = null
+        var localIndex = position
+        for (it in months) {
+            if (localIndex in it.cells.indices) {
+                month = it
+                break
+            }
+            localIndex -= it.cells.size
+        }
+
+        return month?.cells?.getOrNull(localIndex) ?: error("Unable to find a month for index $position")
     }
 
-    return month?.cells?.getOrNull(localIndex) ?: error("Unable to find a month for index $position")
-  }
-
-  fun indexOf(date: LocalDate): Int {
-    var accumulated = 0
-    months.forEach { month ->
-      val indexInMonth = month.cells.indexOfFirst { (it as? CalendarCell.Day)?.date == date }
-      if (indexInMonth < 0) {
-        accumulated += month.cells.size
-      } else {
-        return indexInMonth + accumulated
-      }
+    fun indexOf(date: LocalDate): Int {
+        var accumulated = 0
+        months.forEach { month ->
+            val indexInMonth = month.cells.indexOfFirst { (it as? CalendarCell.Day)?.date == date }
+            if (indexInMonth < 0) {
+                accumulated += month.cells.size
+            } else {
+                return indexInMonth + accumulated
+            }
+        }
+        return -1
     }
-    return -1
-  }
 }
 
 internal fun CalendarCells(
-  params: CalendarParams,
-  selection: CalendarSelection,
+    params: CalendarParams,
+    selection: CalendarSelection,
 ): CalendarCells {
-  val months = params
-    .range
-    .toIterable()
-    .let { daysBeforeRangeStarts(params) + it + daysAfterRangeEnds(params) }
-    .groupBy { date -> date.yearMonth() }
-    .toSortedMap()
-    .map { entry ->
-      CalendarMonth(
-        days = entry.value.sortedBy { date -> date.dayOfMonth },
-        yearMonth = entry.key,
-        locale = params.locale,
-        monthsFormatter = params.monthsFormatter,
-        weekFields = params.weekFields,
-        selection = selection,
-        monthSelectionMode = params.monthSelectionMode,
-        calendarSelectionMode = params.selectionMode,
-      ) { yearMonth, date ->
-        CalendarCellDay(
-          date = date,
-          yearMonth = yearMonth,
-          selection = selection,
-          params = params,
-        )
-      }
-    }
+    val months = params
+        .range
+        .toIterable()
+        .let { daysBeforeRangeStarts(params) + it + daysAfterRangeEnds(params) }
+        .groupBy { date -> date.yearMonth() }
+        .toSortedMap()
+        .map { entry ->
+            CalendarMonth(
+                days = entry.value.sortedBy { date -> date.dayOfMonth },
+                yearMonth = entry.key,
+                locale = params.locale,
+                monthsFormatter = params.monthsFormatter,
+                weekFields = params.weekFields,
+                selection = selection,
+                monthSelectionMode = params.monthSelectionMode,
+                calendarSelectionMode = params.selectionMode,
+            ) { yearMonth, date ->
+                CalendarCellDay(
+                    date = date,
+                    yearMonth = yearMonth,
+                    selection = selection,
+                    params = params,
+                )
+            }
+        }
 
-  return CalendarCells(months = months)
+    return CalendarCells(months = months)
 }
 
 private fun daysBeforeRangeStarts(params: CalendarParams): List<LocalDate> {
-  val result = mutableListOf<LocalDate>()
-  val firstDay = params.range.start.yearMonth().firstDay()
-  var current = params.range.start
-  while (current != firstDay) {
-    current = current.plusDays(-1)
-    result += current
-  }
-  return result
+    val result = mutableListOf<LocalDate>()
+    val firstDay = params.range.start.yearMonth().firstDay()
+    var current = params.range.start
+    while (current != firstDay) {
+        current = current.plusDays(-1)
+        result += current
+    }
+    return result
 }
 
 private fun daysAfterRangeEnds(params: CalendarParams): List<LocalDate> {
-  val result = mutableListOf<LocalDate>()
-  val lastDay = params.range.endInclusive.yearMonth().lastDay()
-  var current = params.range.endInclusive
-  while (current != lastDay) {
-    current = current.plusDays(1)
-    result += current
-  }
-  return result
+    val result = mutableListOf<LocalDate>()
+    val lastDay = params.range.endInclusive.yearMonth().lastDay()
+    var current = params.range.endInclusive
+    while (current != lastDay) {
+        current = current.plusDays(1)
+        result += current
+    }
+    return result
 }

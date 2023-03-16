@@ -30,28 +30,28 @@ import net.skyscanner.backpack.demo.ui.AndroidLayout
 @TextComponent
 @ViewStory("Body")
 fun TextStoryBody(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_text_body, modifier)
+    AndroidLayout(R.layout.fragment_text_body, modifier)
 
 @Composable
 @TextComponent
 @ViewStory("Heading")
 fun TextStoryHeading(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_text_heading, modifier)
+    AndroidLayout(R.layout.fragment_text_heading, modifier)
 
 @Composable
 @TextComponent
 @ViewStory("Hero")
 fun TextStoryHero(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_text_hero, modifier)
+    AndroidLayout(R.layout.fragment_text_hero, modifier)
 
 @Composable
 @TextComponent
 @ViewStory("With drawables", StoryKind.DemoOnly)
 fun TextStoryDrawables(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_text_drawables, modifier)
+    AndroidLayout(R.layout.fragment_text_drawables, modifier)
 
 @Composable
 @TextComponent
 @ViewStory("With links", StoryKind.DemoOnly)
 fun TextStoryLinks(modifier: Modifier = Modifier) =
-  AndroidLayout(R.layout.fragment_text_links, modifier)
+    AndroidLayout(R.layout.fragment_text_links, modifier)

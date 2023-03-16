@@ -39,39 +39,39 @@ import net.skyscanner.backpack.compose.utils.lastScrollingDirection
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 internal fun BarChartTitle(
-  model: BpkBarChartModel,
-  state: LazyListState,
-  modifier: Modifier = Modifier,
+    model: BpkBarChartModel,
+    state: LazyListState,
+    modifier: Modifier = Modifier,
 ) {
 
-  val title by remember { derivedStateOf { model.items[state.firstVisibleItemIndex].group } }
-  val scrollingDirection = state.lastScrollingDirection()
+    val title by remember { derivedStateOf { model.items[state.firstVisibleItemIndex].group } }
+    val scrollingDirection = state.lastScrollingDirection()
 
-  AnimatedContent(
-    targetState = title,
-    modifier = modifier,
-    content = {
-      BpkText(
-        text = it,
-        maxLines = 1,
-        style = BpkTheme.typography.heading4,
-        color = BpkTheme.colors.textPrimary,
-      )
-    },
-    transitionSpec = {
-      when (scrollingDirection) {
-        ScrollingDirection.Forward ->
-          ContentTransform(
-            targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.Start),
-            initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.Start),
-          )
+    AnimatedContent(
+        targetState = title,
+        modifier = modifier,
+        content = {
+            BpkText(
+                text = it,
+                maxLines = 1,
+                style = BpkTheme.typography.heading4,
+                color = BpkTheme.colors.textPrimary,
+            )
+        },
+        transitionSpec = {
+            when (scrollingDirection) {
+                ScrollingDirection.Forward ->
+                    ContentTransform(
+                        targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.Start),
+                        initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.Start),
+                    )
 
-        ScrollingDirection.Backward ->
-          ContentTransform(
-            targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.End),
-            initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.End),
-          )
-      }
-    },
-  )
+                ScrollingDirection.Backward ->
+                    ContentTransform(
+                        targetContentEnter = fadeIn() + slideIntoContainer(AnimatedContentScope.SlideDirection.End),
+                        initialContentExit = fadeOut() + slideOutOfContainer(AnimatedContentScope.SlideDirection.End),
+                    )
+            }
+        },
+    )
 }

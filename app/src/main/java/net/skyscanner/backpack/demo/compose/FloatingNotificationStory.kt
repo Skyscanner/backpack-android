@@ -45,70 +45,70 @@ import net.skyscanner.backpack.demo.ui.LocalAutomationMode
 @FloatingNotificationComponent
 @ComposeStory
 fun FloatingNotificationStory(modifier: Modifier = Modifier) {
-  Box(modifier) {
+    Box(modifier) {
 
-    val state = rememberBpkFloatingNotificationState()
-    val scope: CoroutineScope = rememberCoroutineScope()
+        val state = rememberBpkFloatingNotificationState()
+        val scope: CoroutineScope = rememberCoroutineScope()
 
-    val text = stringResource(R.string.floating_notification_saved)
-    val cta = stringResource(R.string.floating_notification_view)
+        val text = stringResource(R.string.floating_notification_saved)
+        val cta = stringResource(R.string.floating_notification_view)
 
-    Column(
-      modifier = Modifier.padding(BpkSpacing.Base),
-      verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-    ) {
+        Column(
+            modifier = Modifier.padding(BpkSpacing.Base),
+            verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+        ) {
 
-      BpkButton(text = stringResource(R.string.floating_notification_just_text)) {
-        scope.launch {
-          state.show(
-            text = text,
-          )
+            BpkButton(text = stringResource(R.string.floating_notification_just_text)) {
+                scope.launch {
+                    state.show(
+                        text = text,
+                    )
+                }
+            }
+
+            BpkButton(text = stringResource(R.string.floating_notification_text_with_icon)) {
+                scope.launch {
+                    state.show(
+                        text = text,
+                        icon = BpkIcon.Heart,
+                    )
+                }
+            }
+
+            BpkButton(text = stringResource(R.string.floating_notification_with_action)) {
+                scope.launch {
+                    state.show(
+                        text = text,
+                        cta = cta,
+                        onClick = {},
+                    )
+                }
+            }
+
+            BpkButton(text = stringResource(R.string.floating_notification_with_icon_and_action)) {
+                scope.showNotificationWithIconAndAction(state, text, cta)
+            }
         }
-      }
 
-      BpkButton(text = stringResource(R.string.floating_notification_text_with_icon)) {
-        scope.launch {
-          state.show(
-            text = text,
-            icon = BpkIcon.Heart,
-          )
+        BpkFloatingNotification(state)
+
+        val automationMode = LocalAutomationMode.current
+        LaunchedEffect(scope, state, automationMode) {
+            if (automationMode) {
+                scope.showNotificationWithIconAndAction(state, text, cta)
+            }
         }
-      }
-
-      BpkButton(text = stringResource(R.string.floating_notification_with_action)) {
-        scope.launch {
-          state.show(
-            text = text,
-            cta = cta,
-            onClick = {},
-          )
-        }
-      }
-
-      BpkButton(text = stringResource(R.string.floating_notification_with_icon_and_action)) {
-        scope.showNotificationWithIconAndAction(state, text, cta)
-      }
     }
-
-    BpkFloatingNotification(state)
-
-    val automationMode = LocalAutomationMode.current
-    LaunchedEffect(scope, state, automationMode) {
-      if (automationMode) {
-        scope.showNotificationWithIconAndAction(state, text, cta)
-      }
-    }
-  }
 }
 
 private fun CoroutineScope.showNotificationWithIconAndAction(state: BpkFloatingNotificationState, text: String, cta: String) {
-  launch {
-    state.show(
-      text = text,
-      icon = BpkIcon.Heart,
-      cta = cta,
-      onClick = {},
-      onExit = {},
-    )
-  }
+    launch {
+        state.show(
+            text = text,
+            icon = BpkIcon.Heart,
+            cta = cta,
+            onClick = {},
+            onExit = {},
+        )
+    }
 }

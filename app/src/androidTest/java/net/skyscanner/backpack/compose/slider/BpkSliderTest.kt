@@ -32,14 +32,14 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkSliderTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() = snap(width = 200.dp) {
-    DefaultSliderSample()
-  }
+    @Test
+    fun default() = snap(width = 200.dp) {
+        DefaultSliderSample()
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
-  fun range() = snap(width = 200.dp) {
-    RangeSliderSample()
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.Rtl)
+    fun range() = snap(width = 200.dp) {
+        RangeSliderSample()
+    }
 }

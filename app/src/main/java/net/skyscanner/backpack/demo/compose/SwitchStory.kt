@@ -41,75 +41,75 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @SwitchComponent
 @ComposeStory
 fun SwitchStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    DefaultUncheckedSwitchExample()
-    DefaultCheckedSwitchExample()
+        DefaultUncheckedSwitchExample()
+        DefaultCheckedSwitchExample()
 
-    DisabledUncheckedSwitchExample()
-    DisabledCheckedSwitchExample()
-    CustomContentSwitchExample()
-  }
+        DisabledUncheckedSwitchExample()
+        DisabledCheckedSwitchExample()
+        CustomContentSwitchExample()
+    }
 }
 
 @Composable
 internal fun DefaultUncheckedSwitchExample(modifier: Modifier = Modifier) {
-  var checked by remember { mutableStateOf(false) }
-  BpkSwitch(
-    modifier = modifier.fillMaxWidth(),
-    text = stringResource(id = R.string.toggle_default_unchecked),
-    checked = checked,
-    onCheckedChange = { checked = it },
-  )
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(id = R.string.toggle_default_unchecked),
+        checked = checked,
+        onCheckedChange = { checked = it },
+    )
 }
 
 @Composable
 internal fun DefaultCheckedSwitchExample(modifier: Modifier = Modifier) {
-  var checked by remember { mutableStateOf(true) }
-  BpkSwitch(
-    modifier = modifier.fillMaxWidth(),
-    text = stringResource(id = R.string.toggle_default_checked),
-    checked = checked,
-    onCheckedChange = { checked = it },
-  )
+    var checked by remember { mutableStateOf(true) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(id = R.string.toggle_default_checked),
+        checked = checked,
+        onCheckedChange = { checked = it },
+    )
 }
 
 @Composable
 internal fun DisabledUncheckedSwitchExample(modifier: Modifier = Modifier) {
-  BpkSwitch(
-    modifier = modifier.fillMaxWidth(),
-    text = stringResource(id = R.string.toggle_disabled_unchecked),
-    enabled = false,
-    checked = false,
-    onCheckedChange = null,
-  )
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(id = R.string.toggle_disabled_unchecked),
+        enabled = false,
+        checked = false,
+        onCheckedChange = null,
+    )
 }
 
 @Composable
 internal fun DisabledCheckedSwitchExample(modifier: Modifier = Modifier) {
-  BpkSwitch(
-    modifier = modifier.fillMaxWidth(),
-    text = stringResource(id = R.string.toggle_disabled_checked),
-    enabled = false,
-    checked = true,
-    onCheckedChange = null,
-  )
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        text = stringResource(id = R.string.toggle_disabled_checked),
+        enabled = false,
+        checked = true,
+        onCheckedChange = null,
+    )
 }
 
 @Composable
 internal fun CustomContentSwitchExample(modifier: Modifier = Modifier) {
-  var checked by remember { mutableStateOf(false) }
-  BpkSwitch(
-    modifier = modifier.fillMaxWidth(),
-    checked = checked,
-    onCheckedChange = { checked = it },
-  ) {
-    Column {
-      BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
-      BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
+    var checked by remember { mutableStateOf(false) }
+    BpkSwitch(
+        modifier = modifier.fillMaxWidth(),
+        checked = checked,
+        onCheckedChange = { checked = it },
+    ) {
+        Column {
+            BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
+            BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
+        }
     }
-  }
 }

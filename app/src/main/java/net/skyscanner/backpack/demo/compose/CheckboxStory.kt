@@ -41,95 +41,95 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @CheckboxComponent
 @ComposeStory
 fun CheckboxStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier.padding(BpkSpacing.Base),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier.padding(BpkSpacing.Base),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    DefaultCheckboxSample()
-    IntermediateCheckboxSample()
-    UncheckedCheckboxSample()
-    CheckedCheckboxSample()
-    DisabledUncheckedCheckboxSample()
-    DisabledCheckedCheckboxSample()
-    CustomContentCheckboxSample()
-  }
+        DefaultCheckboxSample()
+        IntermediateCheckboxSample()
+        UncheckedCheckboxSample()
+        CheckedCheckboxSample()
+        DisabledUncheckedCheckboxSample()
+        DisabledCheckedCheckboxSample()
+        CustomContentCheckboxSample()
+    }
 }
 
 @Composable
 internal fun DefaultCheckboxSample(modifier: Modifier = Modifier) {
-  var checked by remember { mutableStateOf(true) }
+    var checked by remember { mutableStateOf(true) }
 
-  BpkCheckbox(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_default),
-    checked = checked,
-    onCheckedChange = { checked = it },
-  )
+    BpkCheckbox(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_default),
+        checked = checked,
+        onCheckedChange = { checked = it },
+    )
 }
 
 @Composable
 internal fun IntermediateCheckboxSample(modifier: Modifier = Modifier) {
-  BpkCheckbox(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_indeterminate),
-    state = ToggleableState.Indeterminate,
-    onClick = { },
-  )
+    BpkCheckbox(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_indeterminate),
+        state = ToggleableState.Indeterminate,
+        onClick = { },
+    )
 }
 
 @Composable
 internal fun UncheckedCheckboxSample(modifier: Modifier = Modifier) {
-  BpkCheckbox(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_default_unchecked),
-    checked = false,
-    onCheckedChange = {},
-  )
+    BpkCheckbox(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_default_unchecked),
+        checked = false,
+        onCheckedChange = {},
+    )
 }
 
 @Composable
 internal fun CheckedCheckboxSample(modifier: Modifier = Modifier) {
-  BpkCheckbox(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_default_checked),
-    checked = true,
-    onCheckedChange = {},
-  )
+    BpkCheckbox(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_default_checked),
+        checked = true,
+        onCheckedChange = {},
+    )
 }
 
 @Composable
 internal fun DisabledUncheckedCheckboxSample(modifier: Modifier = Modifier) {
-  BpkCheckbox(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_disabled_unchecked),
-    checked = false,
-    enabled = false,
-    onCheckedChange = {},
-  )
+    BpkCheckbox(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_disabled_unchecked),
+        checked = false,
+        enabled = false,
+        onCheckedChange = {},
+    )
 }
 
 @Composable
 internal fun DisabledCheckedCheckboxSample(modifier: Modifier = Modifier) {
-  BpkCheckbox(
-    modifier = modifier,
-    text = stringResource(id = R.string.toggle_disabled_checked),
-    checked = true,
-    enabled = false,
-    onCheckedChange = {},
-  )
+    BpkCheckbox(
+        modifier = modifier,
+        text = stringResource(id = R.string.toggle_disabled_checked),
+        checked = true,
+        enabled = false,
+        onCheckedChange = {},
+    )
 }
 
 @Composable
 internal fun CustomContentCheckboxSample(modifier: Modifier = Modifier) {
-  BpkCheckbox(
-    modifier = modifier,
-    checked = true,
-    onCheckedChange = {},
-  ) {
-    Column {
-      BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
-      BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
+    BpkCheckbox(
+        modifier = modifier,
+        checked = true,
+        onCheckedChange = {},
+    ) {
+        Column {
+            BpkText(text = stringResource(id = R.string.toggle_custom_title), style = BpkTheme.typography.heading5)
+            BpkText(text = stringResource(id = R.string.toggle_custom_subtitle))
+        }
     }
-  }
 }

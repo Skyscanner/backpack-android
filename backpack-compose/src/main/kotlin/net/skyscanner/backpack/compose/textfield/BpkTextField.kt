@@ -67,160 +67,160 @@ import net.skyscanner.backpack.compose.utils.hideContentIf
 
 @Composable
 fun BpkTextField(
-  value: String,
-  onValueChange: (String) -> Unit,
-  modifier: Modifier = Modifier,
-  readOnly: Boolean = false,
-  placeholder: String? = null,
-  icon: BpkIcon? = null,
-  status: BpkFieldStatus = LocalFieldStatus.current,
-  visualTransformation: VisualTransformation = VisualTransformation.None,
-  keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-  keyboardActions: KeyboardActions = KeyboardActions(),
-  maxLines: Int = 1,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    readOnly: Boolean = false,
+    placeholder: String? = null,
+    icon: BpkIcon? = null,
+    status: BpkFieldStatus = LocalFieldStatus.current,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions(),
+    maxLines: Int = 1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
 
-  var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
-  val textFieldValue = textFieldValueState.copy(text = value)
+    var textFieldValueState by remember { mutableStateOf(TextFieldValue(text = value)) }
+    val textFieldValue = textFieldValueState.copy(text = value)
 
-  BpkTextField(
-    value = textFieldValue,
-    onValueChange = {
-      textFieldValueState = it
-      if (value != it.text) {
-        onValueChange(it.text)
-      }
-    },
-    modifier = modifier,
-    readOnly = readOnly,
-    placeholder = placeholder,
-    icon = icon,
-    status = status,
-    visualTransformation = visualTransformation,
-    keyboardOptions = keyboardOptions,
-    keyboardActions = keyboardActions,
-    maxLines = maxLines,
-    interactionSource = interactionSource,
-  )
+    BpkTextField(
+        value = textFieldValue,
+        onValueChange = {
+            textFieldValueState = it
+            if (value != it.text) {
+                onValueChange(it.text)
+            }
+        },
+        modifier = modifier,
+        readOnly = readOnly,
+        placeholder = placeholder,
+        icon = icon,
+        status = status,
+        visualTransformation = visualTransformation,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        maxLines = maxLines,
+        interactionSource = interactionSource,
+    )
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun BpkTextField(
-  value: TextFieldValue,
-  onValueChange: (TextFieldValue) -> Unit,
-  modifier: Modifier = Modifier,
-  readOnly: Boolean = false,
-  placeholder: String? = null,
-  icon: BpkIcon? = null,
-  status: BpkFieldStatus = LocalFieldStatus.current,
-  visualTransformation: VisualTransformation = VisualTransformation.None,
-  keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-  keyboardActions: KeyboardActions = KeyboardActions(),
-  maxLines: Int = 1,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    value: TextFieldValue,
+    onValueChange: (TextFieldValue) -> Unit,
+    modifier: Modifier = Modifier,
+    readOnly: Boolean = false,
+    placeholder: String? = null,
+    icon: BpkIcon? = null,
+    status: BpkFieldStatus = LocalFieldStatus.current,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions(),
+    maxLines: Int = 1,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
 
-  val isFocused by interactionSource.collectIsFocusedAsState()
+    val isFocused by interactionSource.collectIsFocusedAsState()
 
-  Row(
-    verticalAlignment = Alignment.CenterVertically,
-    modifier = modifier
-      .width(IntrinsicSize.Max)
-      .requiredHeightIn(min = BpkSpacing.Xxl + BpkSpacing.Md)
-      .border(
-        width = 1.dp, shape = Shape,
-        color = animateColorAsState(
-          when {
-            status is BpkFieldStatus.Disabled -> BpkTheme.colors.surfaceHighlight
-            status is BpkFieldStatus.Error -> BpkTheme.colors.textError
-            isFocused -> BpkTheme.colors.coreAccent
-            else -> BpkTheme.colors.line
-          },
-        ).value,
-      )
-      .background(BpkTheme.colors.surfaceDefault, Shape)
-      .padding(horizontal = BpkSpacing.Md),
-  ) {
-
-    if (icon != null) {
-      BpkIcon(
-        icon = icon,
-        contentDescription = null,
-        size = BpkIconSize.Large,
-        modifier = Modifier.padding(start = BpkSpacing.Sm),
-        tint = animateColorAsState(
-          when (status) {
-            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-            else -> BpkTheme.colors.textSecondary
-          },
-        ).value,
-      )
-    }
-
-    Box(
-      modifier = Modifier
-        .weight(1f)
-        .padding(BpkSpacing.Md),
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .width(IntrinsicSize.Max)
+            .requiredHeightIn(min = BpkSpacing.Xxl + BpkSpacing.Md)
+            .border(
+                width = 1.dp, shape = Shape,
+                color = animateColorAsState(
+                    when {
+                        status is BpkFieldStatus.Disabled -> BpkTheme.colors.surfaceHighlight
+                        status is BpkFieldStatus.Error -> BpkTheme.colors.textError
+                        isFocused -> BpkTheme.colors.coreAccent
+                        else -> BpkTheme.colors.line
+                    },
+                ).value,
+            )
+            .background(BpkTheme.colors.surfaceDefault, Shape)
+            .padding(horizontal = BpkSpacing.Md),
     ) {
 
-      BpkText(
-        text = placeholder ?: "",
-        color = BpkTheme.colors.textDisabled,
-        maxLines = maxLines,
-        modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
-        style = BpkTheme.typography.bodyDefault,
-        overflow = TextOverflow.Ellipsis,
-      )
-
-      BasicTextField(
-        value = value,
-        onValueChange = onValueChange,
-        enabled = status != BpkFieldStatus.Disabled,
-        readOnly = readOnly,
-        textStyle = BpkTheme.typography.bodyDefault.copy(
-          color = animateColorAsState(
-            when (status) {
-              is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
-              else -> BpkTheme.colors.textPrimary
-            },
-          ).value,
-        ),
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
-        singleLine = maxLines == 1,
-        maxLines = maxLines,
-        visualTransformation = visualTransformation,
-        interactionSource = interactionSource,
-        cursorBrush = SolidColor(BpkTheme.colors.coreAccent),
-      )
-    }
-
-    var lastIcon by remember { mutableStateOf<Pair<BpkIcon, Color>?>(null) }
-    when (status) {
-      is BpkFieldStatus.Validated -> lastIcon = Pair(BpkIcon.TickCircle, BpkTheme.colors.statusSuccessSpot)
-      is BpkFieldStatus.Error -> lastIcon = Pair(BpkIcon.ExclamationCircle, BpkTheme.colors.statusDangerSpot)
-      else -> Unit // do nothing
-    }
-
-    AnimatedVisibility(
-      visible = status is BpkFieldStatus.Validated || status is BpkFieldStatus.Error,
-      enter = fadeIn() + scaleIn(),
-      exit = scaleOut() + fadeOut(),
-    ) {
-      lastIcon?.let {
-        Crossfade(it) { (icon, color) ->
-          BpkIcon(
-            icon = icon,
-            contentDescription = null,
-            size = BpkIconSize.Large,
-            tint = color,
-          )
+        if (icon != null) {
+            BpkIcon(
+                icon = icon,
+                contentDescription = null,
+                size = BpkIconSize.Large,
+                modifier = Modifier.padding(start = BpkSpacing.Sm),
+                tint = animateColorAsState(
+                    when (status) {
+                        is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
+                        else -> BpkTheme.colors.textSecondary
+                    },
+                ).value,
+            )
         }
-      }
+
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .padding(BpkSpacing.Md),
+        ) {
+
+            BpkText(
+                text = placeholder ?: "",
+                color = BpkTheme.colors.textDisabled,
+                maxLines = maxLines,
+                modifier = Modifier.hideContentIf(value.text.isNotEmpty()),
+                style = BpkTheme.typography.bodyDefault,
+                overflow = TextOverflow.Ellipsis,
+            )
+
+            BasicTextField(
+                value = value,
+                onValueChange = onValueChange,
+                enabled = status != BpkFieldStatus.Disabled,
+                readOnly = readOnly,
+                textStyle = BpkTheme.typography.bodyDefault.copy(
+                    color = animateColorAsState(
+                        when (status) {
+                            is BpkFieldStatus.Disabled -> BpkTheme.colors.textDisabled
+                            else -> BpkTheme.colors.textPrimary
+                        },
+                    ).value,
+                ),
+                keyboardOptions = keyboardOptions,
+                keyboardActions = keyboardActions,
+                singleLine = maxLines == 1,
+                maxLines = maxLines,
+                visualTransformation = visualTransformation,
+                interactionSource = interactionSource,
+                cursorBrush = SolidColor(BpkTheme.colors.coreAccent),
+            )
+        }
+
+        var lastIcon by remember { mutableStateOf<Pair<BpkIcon, Color>?>(null) }
+        when (status) {
+            is BpkFieldStatus.Validated -> lastIcon = Pair(BpkIcon.TickCircle, BpkTheme.colors.statusSuccessSpot)
+            is BpkFieldStatus.Error -> lastIcon = Pair(BpkIcon.ExclamationCircle, BpkTheme.colors.statusDangerSpot)
+            else -> Unit // do nothing
+        }
+
+        AnimatedVisibility(
+            visible = status is BpkFieldStatus.Validated || status is BpkFieldStatus.Error,
+            enter = fadeIn() + scaleIn(),
+            exit = scaleOut() + fadeOut(),
+        ) {
+            lastIcon?.let {
+                Crossfade(it) { (icon, color) ->
+                    BpkIcon(
+                        icon = icon,
+                        contentDescription = null,
+                        size = BpkIconSize.Large,
+                        tint = color,
+                    )
+                }
+            }
+        }
     }
-  }
 }
 
 private val Shape = RoundedCornerShape(BpkBorderRadius.Sm)

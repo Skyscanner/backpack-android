@@ -24,45 +24,45 @@ import net.skyscanner.backpack.compose.price.internal.BpkPriceAlignEnd
 import net.skyscanner.backpack.compose.price.internal.BpkPriceAlignStart
 
 enum class BpkPriceAlign {
-  Start,
-  End,
+    Start,
+    End,
 }
 
 enum class BpkPriceSize {
-  Large,
-  Small,
+    Large,
+    Small,
 }
 
 @Composable
 fun BpkPrice(
-  price: String,
-  modifier: Modifier = Modifier,
-  leadingText: String? = null,
-  previousPrice: String? = null,
-  trailingText: String? = null,
-  align: BpkPriceAlign = BpkPriceAlign.Start,
-  size: BpkPriceSize = BpkPriceSize.Small,
+    price: String,
+    modifier: Modifier = Modifier,
+    leadingText: String? = null,
+    previousPrice: String? = null,
+    trailingText: String? = null,
+    align: BpkPriceAlign = BpkPriceAlign.Start,
+    size: BpkPriceSize = BpkPriceSize.Small,
 ) {
-  when (align) {
-    BpkPriceAlign.Start -> {
-      BpkPriceAlignStart(
-        price = price,
-        modifier = modifier,
-        leadingText = leadingText,
-        previousPrice = previousPrice,
-        trailingText = trailingText,
-        size = size,
-      )
+    when (align) {
+        BpkPriceAlign.Start -> {
+            BpkPriceAlignStart(
+                price = price,
+                modifier = modifier,
+                leadingText = leadingText,
+                previousPrice = previousPrice,
+                trailingText = trailingText,
+                size = size,
+            )
+        }
+        BpkPriceAlign.End -> {
+            BpkPriceAlignEnd(
+                price = price,
+                modifier = modifier,
+                leadingText = leadingText,
+                previousPrice = previousPrice,
+                trailingText = trailingText,
+                size = size,
+            )
+        }
     }
-    BpkPriceAlign.End -> {
-      BpkPriceAlignEnd(
-        price = price,
-        modifier = modifier,
-        leadingText = leadingText,
-        previousPrice = previousPrice,
-        trailingText = trailingText,
-        size = size,
-      )
-    }
-  }
 }

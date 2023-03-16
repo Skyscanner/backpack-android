@@ -53,58 +53,58 @@ import kotlin.math.roundToInt
 
 @Composable
 internal fun BarChartBadge(
-  anchor: Offset,
-  model: BpkBarChartModel,
-  state: LazyListState,
-  selected: BpkBarChartModel.Item,
-  modifier: Modifier = Modifier,
+    anchor: Offset,
+    model: BpkBarChartModel,
+    state: LazyListState,
+    selected: BpkBarChartModel.Item,
+    modifier: Modifier = Modifier,
 ) {
 
-  val isInVisibleRage by remember(model, selected, state) {
-    derivedStateOf {
-      val selectedIndex = model.items.indexOf(selected)
-      val first = state.layoutInfo.visibleItemsInfo.first().index
-      val last = state.layoutInfo.visibleItemsInfo.last().index
-      selectedIndex in first..last
+    val isInVisibleRage by remember(model, selected, state) {
+        derivedStateOf {
+            val selectedIndex = model.items.indexOf(selected)
+            val first = state.layoutInfo.visibleItemsInfo.first().index
+            val last = state.layoutInfo.visibleItemsInfo.last().index
+            selectedIndex in first..last
+        }
     }
-  }
 
-  val values = selected.values ?: return
-  var displayedBadgeText by remember { mutableStateOf(values.text) }
-  val animatable = remember { Animatable(0f) }
+    val values = selected.values ?: return
+    var displayedBadgeText by remember { mutableStateOf(values.text) }
+    val animatable = remember { Animatable(0f) }
 
-  LaunchedEffect(selected, isInVisibleRage) {
-    if (isInVisibleRage) {
-      animatable.snapTo(0f)
-      displayedBadgeText = values.text
-      animatable.animateTo(1f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
-    } else {
-      animatable.animateTo(0f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+    LaunchedEffect(selected, isInVisibleRage) {
+        if (isInVisibleRage) {
+            animatable.snapTo(0f)
+            displayedBadgeText = values.text
+            animatable.animateTo(1f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        } else {
+            animatable.animateTo(0f, animationSpec = spring(stiffness = Spring.StiffnessMediumLow))
+        }
     }
-  }
 
-  BpkText(
-    text = displayedBadgeText,
-    color = BpkTheme.colors.textPrimaryInverse,
-    style = BpkTheme.typography.label2,
-    textAlign = TextAlign.Center,
-    maxLines = 1,
-    modifier = modifier
-      .alignBy(anchor, Alignment.BottomCenter)
-      .padding(bottom = BpkSpacing.Sm)
-      .widthIn(min = 48.dp)
-      .height(36.dp)
-      .offsetWithSize { IntOffset(x = 0, y = ((1f - animatable.value) * it.height).roundToInt()) }
-      .graphicsLayer { alpha = animatable.value }
-      .background(
-        color = BpkTheme.colors.coreAccent,
-        shape = FlareShape(
-          borderRadius = BpkBorderRadius.Xs,
-          flareHeight = BpkSpacing.Sm,
-          pointerDirection = BpkFlarePointerDirection.Down,
-        ),
-      )
-      .padding(bottom = BpkSpacing.Sm)
-      .padding(all = BpkSpacing.Md),
-  )
+    BpkText(
+        text = displayedBadgeText,
+        color = BpkTheme.colors.textPrimaryInverse,
+        style = BpkTheme.typography.label2,
+        textAlign = TextAlign.Center,
+        maxLines = 1,
+        modifier = modifier
+            .alignBy(anchor, Alignment.BottomCenter)
+            .padding(bottom = BpkSpacing.Sm)
+            .widthIn(min = 48.dp)
+            .height(36.dp)
+            .offsetWithSize { IntOffset(x = 0, y = ((1f - animatable.value) * it.height).roundToInt()) }
+            .graphicsLayer { alpha = animatable.value }
+            .background(
+                color = BpkTheme.colors.coreAccent,
+                shape = FlareShape(
+                    borderRadius = BpkBorderRadius.Xs,
+                    flareHeight = BpkSpacing.Sm,
+                    pointerDirection = BpkFlarePointerDirection.Down,
+                ),
+            )
+            .padding(bottom = BpkSpacing.Sm)
+            .padding(all = BpkSpacing.Md),
+    )
 }

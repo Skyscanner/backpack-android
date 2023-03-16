@@ -54,69 +54,69 @@ import net.skyscanner.backpack.demo.ui.destinations.StoryScreenDestination
 @Composable
 @Destination("component")
 fun ComponentScreen(
-  component: String,
-  modifier: Modifier = Modifier,
-  navigator: DestinationsNavigator = EmptyDestinationsNavigator,
-  repository: StoriesRepository = StoriesRepository.getInstance(),
-  story: @Composable (@Composable () -> Unit) -> Unit = { it() },
+    component: String,
+    modifier: Modifier = Modifier,
+    navigator: DestinationsNavigator = EmptyDestinationsNavigator,
+    repository: StoriesRepository = StoriesRepository.getInstance(),
+    story: @Composable (@Composable () -> Unit) -> Unit = { it() },
 ) {
 
-  Column(modifier = modifier
-    .background(BpkTheme.colors.canvas)
-    .fillMaxSize(),
-  ) {
-    val context = LocalContext.current
-    BpkTopNavBar(
-      navIcon = NavIcon.Back(
-        contentDescription = stringResource(R.string.navigation_back),
-        onClick = navigator::popBackStack,
-      ),
-      title = component,
-      actions = listOf(
-        IconAction(
-          icon = BpkIcon.Settings,
-          contentDescription = stringResource(R.string.settings_title),
-          onClick = {
-            val intent = Intent(context, SettingsActivity::class.java)
-            context.startActivity(intent)
-          },
-        ),
-      ),
-    )
+    Column(modifier = modifier
+        .background(BpkTheme.colors.canvas)
+        .fillMaxSize(),
+    ) {
+        val context = LocalContext.current
+        BpkTopNavBar(
+            navIcon = NavIcon.Back(
+                contentDescription = stringResource(R.string.navigation_back),
+                onClick = navigator::popBackStack,
+            ),
+            title = component,
+            actions = listOf(
+                IconAction(
+                    icon = BpkIcon.Settings,
+                    contentDescription = stringResource(R.string.settings_title),
+                    onClick = {
+                        val intent = Intent(context, SettingsActivity::class.java)
+                        context.startActivity(intent)
+                    },
+                ),
+            ),
+        )
 
-    val viewStories = remember(repository, component) { repository.storiesOf(component, compose = false) }
-    val composeStories = remember(repository, component) { repository.storiesOf(component, compose = true) }
+        val viewStories = remember(repository, component) { repository.storiesOf(component, compose = false) }
+        val composeStories = remember(repository, component) { repository.storiesOf(component, compose = true) }
 
-    var composeTabSelected by rememberSaveable { mutableStateOf(false) }
+        var composeTabSelected by rememberSaveable { mutableStateOf(false) }
 
-    if (viewStories.isNotEmpty() && composeStories.isNotEmpty()) {
-      BpkHorizontalNav(
-        tabs = listOf(
-          BpkHorizontalNavTab(title = stringResource(R.string.tab_view)),
-          BpkHorizontalNavTab(title = stringResource(R.string.tab_compose)),
-        ),
-        size = BpkHorizontalNavSize.Small,
-        activeIndex = if (composeTabSelected) 1 else 0,
-        onChanged = { composeTabSelected = it != 0 },
-        modifier = Modifier.zIndex(Float.MAX_VALUE),
-      )
-    } else {
-      composeTabSelected = composeStories.isNotEmpty()
-    }
-
-    val storiesToDisplay = if (composeTabSelected) composeStories else viewStories
-
-    if (storiesToDisplay.size == 1) {
-      story(storiesToDisplay.first().content)
-    } else {
-      LazyColumn {
-        items(storiesToDisplay) {
-          ComponentItem(
-            title = it.name,
-            onClick = { navigator.navigate(StoryScreenDestination(it.component.name, it.name, it.isCompose)) },
-          )
+        if (viewStories.isNotEmpty() && composeStories.isNotEmpty()) {
+            BpkHorizontalNav(
+                tabs = listOf(
+                    BpkHorizontalNavTab(title = stringResource(R.string.tab_view)),
+                    BpkHorizontalNavTab(title = stringResource(R.string.tab_compose)),
+                ),
+                size = BpkHorizontalNavSize.Small,
+                activeIndex = if (composeTabSelected) 1 else 0,
+                onChanged = { composeTabSelected = it != 0 },
+                modifier = Modifier.zIndex(Float.MAX_VALUE),
+            )
+        } else {
+            composeTabSelected = composeStories.isNotEmpty()
         }
-      }
+
+        val storiesToDisplay = if (composeTabSelected) composeStories else viewStories
+
+        if (storiesToDisplay.size == 1) {
+            story(storiesToDisplay.first().content)
+        } else {
+            LazyColumn {
+                items(storiesToDisplay) {
+                    ComponentItem(
+                        title = it.name,
+                        onClick = { navigator.navigate(StoryScreenDestination(it.component.name, it.name, it.isCompose)) },
+                    )
+                }
+            }
+        }
     }
-  }
 }

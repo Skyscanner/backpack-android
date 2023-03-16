@@ -35,103 +35,103 @@ private val now = LocalDate.of(2019, 1, 1)
 private val range = now..(now + Period.ofYears(2))
 
 enum class CalendarStoryType {
-  SelectionDisabled,
-  SelectionSingle,
-  SelectionRange,
-  SelectionWholeMonth,
-  WithDisabledDates,
-  WithLabels,
-  PreselectedRange,
-  ;
+    SelectionDisabled,
+    SelectionSingle,
+    SelectionRange,
+    SelectionWholeMonth,
+    WithDisabledDates,
+    WithLabels,
+    PreselectedRange,
+    ;
 
-  companion object {
+    companion object {
 
-    private const val minPrice = 0
-    private const val maxPrice = 5
-    private const val noPriceThreshold = 0
-    private const val emptyPriceThreshold = 1
-    private const val positivePriceThreshold = 2
-    private const val neutralPriceThreshold = 3
-    private const val negativePriceThreshold = 4
+        private const val minPrice = 0
+        private const val maxPrice = 5
+        private const val noPriceThreshold = 0
+        private const val emptyPriceThreshold = 1
+        private const val positivePriceThreshold = 2
+        private const val neutralPriceThreshold = 3
+        private const val negativePriceThreshold = 4
 
-    fun createInitialParams(type: CalendarStoryType): CalendarParams =
-      when (type) {
-        SelectionDisabled -> CalendarParams(
-          now = now,
-          range = range,
-          selectionMode = CalendarParams.SelectionMode.Disabled,
-        )
+        fun createInitialParams(type: CalendarStoryType): CalendarParams =
+            when (type) {
+                SelectionDisabled -> CalendarParams(
+                    now = now,
+                    range = range,
+                    selectionMode = CalendarParams.SelectionMode.Disabled,
+                )
 
-        SelectionSingle -> CalendarParams(
-          now = now,
-          range = range,
-          selectionMode = CalendarParams.SelectionMode.Single,
-        )
+                SelectionSingle -> CalendarParams(
+                    now = now,
+                    range = range,
+                    selectionMode = CalendarParams.SelectionMode.Single,
+                )
 
-        SelectionRange -> CalendarParams(
-          now = now,
-          range = range,
-          selectionMode = CalendarParams.SelectionMode.Range,
-        )
+                SelectionRange -> CalendarParams(
+                    now = now,
+                    range = range,
+                    selectionMode = CalendarParams.SelectionMode.Range,
+                )
 
-        SelectionWholeMonth -> CalendarParams(
-          now = now,
-          range = range,
-          selectionMode = CalendarParams.SelectionMode.Range,
-          monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
-        )
+                SelectionWholeMonth -> CalendarParams(
+                    now = now,
+                    range = range,
+                    selectionMode = CalendarParams.SelectionMode.Range,
+                    monthSelectionMode = CalendarParams.MonthSelectionMode.SelectWholeMonth("Select whole month"),
+                )
 
-        WithDisabledDates -> CalendarParams(
-          now = now,
-          range = range,
-          selectionMode = CalendarParams.SelectionMode.Range,
-          cellsInfo = range
-            .toIterable()
-            .associateWith { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
-        )
+                WithDisabledDates -> CalendarParams(
+                    now = now,
+                    range = range,
+                    selectionMode = CalendarParams.SelectionMode.Range,
+                    cellsInfo = range
+                        .toIterable()
+                        .associateWith { CellInfo(disabled = it.dayOfWeek == DayOfWeek.SATURDAY || it.dayOfWeek == DayOfWeek.SUNDAY) },
+                )
 
-        WithLabels -> CalendarParams(
-          now = now,
-          range = range,
-          selectionMode = CalendarParams.SelectionMode.Range,
-          cellsInfo = range
-            .toIterable()
-            .associateWith {
-              val price = it.dayOfMonth % maxPrice
-              CellInfo(
-                label = when (price) {
-                  in minPrice..noPriceThreshold -> "-"
-                  else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
-                },
-                status = when (price) {
-                  noPriceThreshold -> null
-                  emptyPriceThreshold -> CellStatus.Empty
-                  positivePriceThreshold -> CellStatus.Positive
-                  neutralPriceThreshold -> CellStatus.Neutral
-                  negativePriceThreshold -> CellStatus.Negative
-                  else -> CellStatus.Empty
-                },
-                style = CellStatusStyle.Label,
-              )
-            },
-        )
+                WithLabels -> CalendarParams(
+                    now = now,
+                    range = range,
+                    selectionMode = CalendarParams.SelectionMode.Range,
+                    cellsInfo = range
+                        .toIterable()
+                        .associateWith {
+                            val price = it.dayOfMonth % maxPrice
+                            CellInfo(
+                                label = when (price) {
+                                    in minPrice..noPriceThreshold -> "-"
+                                    else -> "£${(it.dayOfMonth * 2.35f).roundToInt()}"
+                                },
+                                status = when (price) {
+                                    noPriceThreshold -> null
+                                    emptyPriceThreshold -> CellStatus.Empty
+                                    positivePriceThreshold -> CellStatus.Positive
+                                    neutralPriceThreshold -> CellStatus.Neutral
+                                    negativePriceThreshold -> CellStatus.Negative
+                                    else -> CellStatus.Empty
+                                },
+                                style = CellStatusStyle.Label,
+                            )
+                        },
+                )
 
-        PreselectedRange -> CalendarParams(
-          now = now,
-          range = range,
-          selectionMode = CalendarParams.SelectionMode.Range,
-        )
-      }
-  }
+                PreselectedRange -> CalendarParams(
+                    now = now,
+                    range = range,
+                    selectionMode = CalendarParams.SelectionMode.Range,
+                )
+            }
+    }
 }
 
 object CalendarStorySelection {
-  val PreselectedRange = CalendarSelection.Dates(
-    start = range.start.plusDays(10),
-    end = range.start.plusDays(20),
-  )
+    val PreselectedRange = CalendarSelection.Dates(
+        start = range.start.plusDays(10),
+        end = range.start.plusDays(20),
+    )
 
-  val WholeMonthRange = CalendarSelection.Month(
-    month = YearMonth.of(2019, Month.JANUARY),
-  )
+    val WholeMonthRange = CalendarSelection.Month(
+        month = YearMonth.of(2019, Month.JANUARY),
+    )
 }

@@ -31,69 +31,69 @@ import org.junit.runner.RunWith
 
 class BpkCardTest : BpkSnapshotTest() {
 
-  @Test
-  fun smallCorner() {
-    val card = BpkCardView(testContext)
-    val text = TextView(testContext)
-    text.text = "message"
-    card.addView(text)
-    snap(card, android.R.color.transparent)
-  }
-
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun largeCorner() {
-    val card = BpkCardView(testContext).apply {
-      addView(
-        TextView(testContext).apply {
-          text = "message"
-        },
-      )
-      cornerStyle = BpkCardView.CornerStyle.LARGE
+    @Test
+    fun smallCorner() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        snap(card, android.R.color.transparent)
     }
-    snap(card, android.R.color.transparent)
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default)
-  fun noPadding() {
-    val card = BpkCardView(testContext)
-    val text = TextView(testContext)
-    text.text = "message"
-    card.addView(text)
-    card.padded = false
-    snap(card, android.R.color.transparent)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun largeCorner() {
+        val card = BpkCardView(testContext).apply {
+            addView(
+                TextView(testContext).apply {
+                    text = "message"
+                },
+            )
+            cornerStyle = BpkCardView.CornerStyle.LARGE
+        }
+        snap(card, android.R.color.transparent)
+    }
 
-  @Test
-  fun unfocused() {
-    val card = BpkCardView(testContext)
-    val text = TextView(testContext)
-    text.text = "message"
-    card.addView(text)
-    card.elevationLevel = BpkCardView.ElevationLevel.DEFAULT
-    snap(card, android.R.color.transparent)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default)
+    fun noPadding() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.padded = false
+        snap(card, android.R.color.transparent)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun focused() {
-    val card = BpkCardView(testContext)
-    val text = TextView(testContext)
-    text.text = "message"
-    card.addView(text)
-    card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
-    snap(card, android.R.color.transparent)
-  }
+    @Test
+    fun unfocused() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.elevationLevel = BpkCardView.ElevationLevel.DEFAULT
+        snap(card, android.R.color.transparent)
+    }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun noElevation() {
-    val card = BpkCardView(testContext)
-    val text = TextView(testContext)
-    text.text = "message"
-    card.addView(text)
-    card.elevationLevel = BpkCardView.ElevationLevel.NONE
-    snap(card, R.color.bpkSurfaceHighlight)
-  }
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun focused() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.elevationLevel = BpkCardView.ElevationLevel.FOCUSED
+        snap(card, android.R.color.transparent)
+    }
+
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun noElevation() {
+        val card = BpkCardView(testContext)
+        val text = TextView(testContext)
+        text.text = "message"
+        card.addView(text)
+        card.elevationLevel = BpkCardView.ElevationLevel.NONE
+        snap(card, R.color.bpkSurfaceHighlight)
+    }
 }

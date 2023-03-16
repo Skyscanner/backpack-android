@@ -30,18 +30,18 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class BpkBottomSheetTest : BpkSnapshotTest() {
 
-  @Test
-  fun default() {
-    snap(height = 400.dp, padding = 0.dp) {
-      BottomSheetStory()
+    @Test
+    fun default() {
+        snap(height = 400.dp, padding = 0.dp) {
+            BottomSheetStory()
+        }
     }
-  }
 
-  @Test
-  @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
-  fun expanded() {
-    snap(height = 400.dp, padding = 0.dp) {
-      BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)
+    @Test
+    @Variants(BpkTestVariant.Default, BpkTestVariant.DarkMode)
+    fun expanded() {
+        snap(height = 400.dp, padding = 0.dp) {
+            BottomSheetStory(initialValue = BpkBottomSheetValue.Expanded)
+        }
     }
-  }
 }

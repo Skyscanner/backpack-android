@@ -24,6 +24,6 @@ import javax.annotation.concurrent.Immutable
 @Target(AnnotationTarget.ANNOTATION_CLASS)
 @Retention(AnnotationRetention.BINARY)
 annotation class Component(
-  val name: String,
-  val isToken: Boolean = false,
+    val name: String,
+    val isToken: Boolean = false,
 )

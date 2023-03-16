@@ -39,77 +39,77 @@ import net.skyscanner.backpack.demo.ui.LocalFloatingNotification
 @Calendar2Component
 @ComposeStory("Selection Disabled", StoryKind.DemoOnly)
 fun CalendarSelectionDisabledStory(modifier: Modifier = Modifier) =
-  CalendarDemo(CalendarStoryType.SelectionDisabled, modifier)
+    CalendarDemo(CalendarStoryType.SelectionDisabled, modifier)
 
 @Composable
 @Calendar2Component
 @ComposeStory("Selection Single", StoryKind.DemoOnly)
 fun CalendarSelectionSingleStory(modifier: Modifier = Modifier) =
-  CalendarDemo(CalendarStoryType.SelectionSingle, modifier)
+    CalendarDemo(CalendarStoryType.SelectionSingle, modifier)
 
 @Composable
 @Calendar2Component
 @ComposeStory("Selection Range", StoryKind.DemoOnly)
 fun CalendarSelectionRangeStory(modifier: Modifier = Modifier) =
-  CalendarDemo(CalendarStoryType.SelectionRange, modifier)
+    CalendarDemo(CalendarStoryType.SelectionRange, modifier)
 
 @Composable
 @Calendar2Component
 @ComposeStory("Selection Whole Month")
 fun CalendarSelectionWholeMonthStory(modifier: Modifier = Modifier) =
-  CalendarDemo(CalendarStoryType.SelectionWholeMonth, modifier)
+    CalendarDemo(CalendarStoryType.SelectionWholeMonth, modifier)
 
 @Composable
 @Calendar2Component
 @ComposeStory("Disabled weekends", StoryKind.DemoOnly)
 fun CalendarDisabledWeekends(modifier: Modifier = Modifier) =
-  CalendarDemo(CalendarStoryType.WithDisabledDates, modifier)
+    CalendarDemo(CalendarStoryType.WithDisabledDates, modifier)
 
 @Composable
 @Calendar2Component
 @ComposeStory("Day labels")
 fun CalendarDayLabels(modifier: Modifier = Modifier) =
-  CalendarDemo(CalendarStoryType.WithLabels, modifier)
+    CalendarDemo(CalendarStoryType.WithLabels, modifier)
 
 @Composable
 @Calendar2Component
 @ComposeStory("Pre-selected range")
 fun CalendarPreSelectedRange(modifier: Modifier = Modifier) =
-  CalendarDemo(CalendarStoryType.PreselectedRange, modifier)
+    CalendarDemo(CalendarStoryType.PreselectedRange, modifier)
 
 @Composable
 private fun CalendarDemo(
-  type: CalendarStoryType,
-  modifier: Modifier = Modifier,
+    type: CalendarStoryType,
+    modifier: Modifier = Modifier,
 ) {
-  val automationMode = LocalAutomationMode.current
-  val floatingNotification = LocalFloatingNotification.current
-  val controller = rememberCalendarController(initialParams = CalendarStoryType.createInitialParams(type))
+    val automationMode = LocalAutomationMode.current
+    val floatingNotification = LocalFloatingNotification.current
+    val controller = rememberCalendarController(initialParams = CalendarStoryType.createInitialParams(type))
 
-  LaunchedEffect(type, controller, automationMode) {
-    when (type) {
-      CalendarStoryType.SelectionWholeMonth -> controller.setSelection(CalendarStorySelection.WholeMonthRange)
-      CalendarStoryType.PreselectedRange -> controller.setSelection(PreselectedRange)
-      CalendarStoryType.WithLabels -> controller.setSelection(CalendarStorySelection.PreselectedRange)
-      else -> Unit
+    LaunchedEffect(type, controller, automationMode) {
+        when (type) {
+            CalendarStoryType.SelectionWholeMonth -> controller.setSelection(CalendarStorySelection.WholeMonthRange)
+            CalendarStoryType.PreselectedRange -> controller.setSelection(PreselectedRange)
+            CalendarStoryType.WithLabels -> controller.setSelection(CalendarStorySelection.PreselectedRange)
+            else -> Unit
+        }
+
+        controller.state
+            .filter { it.selection !is CalendarSelection.None }
+            .collect {
+                if (!automationMode) {
+                    floatingNotification.show(it.selection.toString())
+                }
+            }
+
+        controller.effects
+            .filter { it is CalendarEffect.MonthSelected }
+            .collect {
+                if (!automationMode) {
+                    floatingNotification.show(it.toString())
+                }
+            }
     }
 
-    controller.state
-      .filter { it.selection !is CalendarSelection.None }
-      .collect {
-        if (!automationMode) {
-          floatingNotification.show(it.selection.toString())
-        }
-      }
-
-    controller.effects
-      .filter { it is CalendarEffect.MonthSelected }
-      .collect {
-        if (!automationMode) {
-          floatingNotification.show(it.toString())
-        }
-      }
-  }
-
-  BpkCalendar(controller = controller, modifier = modifier)
+    BpkCalendar(controller = controller, modifier = modifier)
 }

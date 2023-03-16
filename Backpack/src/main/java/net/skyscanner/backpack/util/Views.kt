@@ -24,20 +24,20 @@ import android.graphics.Color
 import android.view.View
 
 internal inline fun View.rasterize(
-  widthMeasureSpec: Int = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-  heightMeasureSpec: Int = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-  bitmapConfig: Bitmap.Config = Bitmap.Config.ARGB_8888,
-  onLayoutDone: (View) -> Unit = {},
+    widthMeasureSpec: Int = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+    heightMeasureSpec: Int = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+    bitmapConfig: Bitmap.Config = Bitmap.Config.ARGB_8888,
+    onLayoutDone: (View) -> Unit = {},
 ): Bitmap {
 
-  measure(widthMeasureSpec, heightMeasureSpec)
-  layout(0, 0, measuredWidth, measuredHeight)
+    measure(widthMeasureSpec, heightMeasureSpec)
+    layout(0, 0, measuredWidth, measuredHeight)
 
-  onLayoutDone(this)
+    onLayoutDone(this)
 
-  val bitmap = Bitmap.createBitmap(width, height, bitmapConfig)
-  bitmap.eraseColor(Color.TRANSPARENT)
-  draw(Canvas(bitmap))
+    val bitmap = Bitmap.createBitmap(width, height, bitmapConfig)
+    bitmap.eraseColor(Color.TRANSPARENT)
+    draw(Canvas(bitmap))
 
-  return bitmap
+    return bitmap
 }

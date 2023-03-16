@@ -21,22 +21,22 @@ package net.skyscanner.backpack.ksp
 private const val metaPkg = "net.skyscanner.backpack.demo.meta"
 
 object ComposeStoryAnnotation : AnnotationDefinition {
-  override val simpleName = "ComposeStory"
-  override val pkg = metaPkg
-  val paramName = stringParamOf("name")
-  val paramKind = enumParamOf("kind")
+    override val simpleName = "ComposeStory"
+    override val pkg = metaPkg
+    val paramName = stringParamOf("name")
+    val paramKind = enumParamOf("kind")
 }
 
 object ViewStoryAnnotation : AnnotationDefinition {
-  override val simpleName = "ViewStory"
-  override val pkg = metaPkg
-  val paramName = stringParamOf("name")
-  val paramKind = enumParamOf("kind")
+    override val simpleName = "ViewStory"
+    override val pkg = metaPkg
+    val paramName = stringParamOf("name")
+    val paramKind = enumParamOf("kind")
 }
 
 object ComponentAnnotation : AnnotationDefinition {
-  override val simpleName = "Component"
-  override val pkg = metaPkg
-  val paramName = stringParamOf("name")
-  val paramToken = booleanParamOf("isToken")
+    override val simpleName = "Component"
+    override val pkg = metaPkg
+    val paramName = stringParamOf("name")
+    val paramToken = booleanParamOf("isToken")
 }

@@ -33,58 +33,58 @@ import java.util.Locale
 
 class CalendarLocalisationTests {
 
-  private val russianLocale = CalendarSettings.Default.copy(
-    locale = Locale.forLanguageTag("ru-RU"),
-  )
+    private val russianLocale = CalendarSettings.Default.copy(
+        locale = Locale.forLanguageTag("ru-RU"),
+    )
 
-  @Before
-  fun setup() {
-    initAndroidThreeTen()
-  }
-
-  @Test
-  fun month_titles_depend_on_locale() {
-    testCalendarWith(russianLocale) {
-      verify {
-        assertEquals("Январь", (state.cells[0] as CalendarCell.Header).title)
-      }
+    @Before
+    fun setup() {
+        initAndroidThreeTen()
     }
-  }
 
-  @Test
-  fun week_fields_order_depends_on_locale() {
-    testCalendarWith(CalendarSettings.Default) {
-      verify {
-        assertEquals(DayOfWeek.SUNDAY, state.params.weekFields.firstDayOfWeek)
-      }
+    @Test
+    fun month_titles_depend_on_locale() {
+        testCalendarWith(russianLocale) {
+            verify {
+                assertEquals("Январь", (state.cells[0] as CalendarCell.Header).title)
+            }
+        }
     }
-  }
 
-  @Test
-  fun when_locale_changes_week_fields_order_is_updated() {
-    testCalendarWith(CalendarSettings.Default) {
-      stateMachine.onLocaleChanged(russianLocale.locale)
-      verify {
-        assertEquals(DayOfWeek.MONDAY, state.params.weekFields.firstDayOfWeek)
-      }
+    @Test
+    fun week_fields_order_depends_on_locale() {
+        testCalendarWith(CalendarSettings.Default) {
+            verify {
+                assertEquals(DayOfWeek.SUNDAY, state.params.weekFields.firstDayOfWeek)
+            }
+        }
     }
-  }
 
-  @Test
-  fun days_content_description_is_a_correct_Tts_span() {
-    testCalendarWith(CalendarSettings.Default) {
-      verify {
-        val cell = state.cells[7] as CalendarCell.Day
-        val text = cell.text as Spanned
-        val spans = text.getSpans<TtsSpan>()
-        assertTrue(spans.size == 1)
-
-        val ttsSpan = spans.first()
-
-        assertEquals(1, ttsSpan.args.get(TtsSpan.ARG_DAY)) // 1st
-        assertEquals(0, ttsSpan.args.get(TtsSpan.ARG_MONTH)) // of Jan
-        assertEquals(6, ttsSpan.args.get(TtsSpan.ARG_WEEKDAY)) // Saturday
-      }
+    @Test
+    fun when_locale_changes_week_fields_order_is_updated() {
+        testCalendarWith(CalendarSettings.Default) {
+            stateMachine.onLocaleChanged(russianLocale.locale)
+            verify {
+                assertEquals(DayOfWeek.MONDAY, state.params.weekFields.firstDayOfWeek)
+            }
+        }
     }
-  }
+
+    @Test
+    fun days_content_description_is_a_correct_Tts_span() {
+        testCalendarWith(CalendarSettings.Default) {
+            verify {
+                val cell = state.cells[7] as CalendarCell.Day
+                val text = cell.text as Spanned
+                val spans = text.getSpans<TtsSpan>()
+                assertTrue(spans.size == 1)
+
+                val ttsSpan = spans.first()
+
+                assertEquals(1, ttsSpan.args.get(TtsSpan.ARG_DAY)) // 1st
+                assertEquals(0, ttsSpan.args.get(TtsSpan.ARG_MONTH)) // of Jan
+                assertEquals(6, ttsSpan.args.get(TtsSpan.ARG_WEEKDAY)) // Saturday
+            }
+        }
+    }
 }

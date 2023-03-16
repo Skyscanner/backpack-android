@@ -40,51 +40,51 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @CardComponent
 @ComposeStory("Card wrapper")
 fun CardWrapperStory(modifier: Modifier = Modifier) {
-  Column(
-    modifier = modifier
-      .background(BpkTheme.colors.line)
-      .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
-    verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
-  ) {
+    Column(
+        modifier = modifier
+            .background(BpkTheme.colors.line)
+            .padding(horizontal = BpkSpacing.Base, vertical = BpkSpacing.Xxl),
+        verticalArrangement = Arrangement.spacedBy(BpkSpacing.Base),
+    ) {
 
-    CardWrapperExample(Modifier.fillMaxWidth())
-  }
+        CardWrapperExample(Modifier.fillMaxWidth())
+    }
 }
 
 @Composable
 private fun CardWrapperExample(modifier: Modifier = Modifier) {
-  BpkCardWrapper(
-    modifier = modifier.fillMaxWidth(),
-    backgroundColor = BpkTheme.colors.coreEco,
-    headerContent = {
-      Column() {
-        BpkText(
-          modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl),
-          text = stringResource(id = R.string.card_wrapper_header),
-          style = BpkTheme.typography.bodyDefault,
-          textAlign = TextAlign.Center,
-        )
-      }
-    },
-    cardContent = {
-      Column() {
-        BpkText(
-          modifier = Modifier
-            .fillMaxWidth()
-            .height(BpkSpacing.Xxl),
-          text = stringResource(id = R.string.card_wrapper_card),
-          style = BpkTheme.typography.bodyDefault,
-          textAlign = TextAlign.Center,
-        )
-        BpkText(
-          modifier = Modifier
-            .fillMaxWidth()
-            .height(BpkSpacing.Xxl),
-          text = stringResource(id = R.string.card_wrapper_card),
-          style = BpkTheme.typography.bodyDefault,
-          textAlign = TextAlign.Center,
-        )
-      }
-    },
-  )
+    BpkCardWrapper(
+        modifier = modifier.fillMaxWidth(),
+        backgroundColor = BpkTheme.colors.coreEco,
+        headerContent = {
+            Column() {
+                BpkText(
+                    modifier = Modifier.fillMaxWidth().height(BpkSpacing.Xxl),
+                    text = stringResource(id = R.string.card_wrapper_header),
+                    style = BpkTheme.typography.bodyDefault,
+                    textAlign = TextAlign.Center,
+                )
+            }
+        },
+        cardContent = {
+            Column() {
+                BpkText(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(BpkSpacing.Xxl),
+                    text = stringResource(id = R.string.card_wrapper_card),
+                    style = BpkTheme.typography.bodyDefault,
+                    textAlign = TextAlign.Center,
+                )
+                BpkText(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(BpkSpacing.Xxl),
+                    text = stringResource(id = R.string.card_wrapper_card),
+                    style = BpkTheme.typography.bodyDefault,
+                    textAlign = TextAlign.Center,
+                )
+            }
+        },
+    )
 }

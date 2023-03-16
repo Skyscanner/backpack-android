@@ -43,90 +43,90 @@ import net.skyscanner.backpack.compose.utils.applyIf
 
 @Composable
 fun BpkSwitch(
-  text: String,
-  checked: Boolean,
-  onCheckedChange: ((Boolean) -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    text: String,
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-  BpkSwitch(
-    checked = checked,
-    onCheckedChange = onCheckedChange,
-    modifier = modifier,
-    enabled = enabled,
-    interactionSource = interactionSource,
-    content = { BpkText(text) },
-  )
+    BpkSwitch(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+        enabled = enabled,
+        interactionSource = interactionSource,
+        content = { BpkText(text) },
+    )
 }
 
 @Composable
 fun BpkSwitch(
-  checked: Boolean,
-  onCheckedChange: ((Boolean) -> Unit)?,
-  modifier: Modifier = Modifier,
-  enabled: Boolean = true,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  content: @Composable RowScope.(Boolean) -> Unit,
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.(Boolean) -> Unit,
 ) {
-  Row(
-    verticalAlignment = Alignment.CenterVertically,
-    horizontalArrangement = Arrangement.SpaceBetween,
-    modifier = modifier.applyIf(onCheckedChange != null) {
-      toggleable(
-        value = checked,
-        role = Role.Switch,
-        interactionSource = interactionSource,
-        indication = null,
-        onValueChange = onCheckedChange!!,
-      )
-    },
-  ) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = modifier.applyIf(onCheckedChange != null) {
+            toggleable(
+                value = checked,
+                role = Role.Switch,
+                interactionSource = interactionSource,
+                indication = null,
+                onValueChange = onCheckedChange!!,
+            )
+        },
+    ) {
 
-    BpkToggleableContent(
-      enabled = enabled,
-      content = { content(checked) },
-    )
+        BpkToggleableContent(
+            enabled = enabled,
+            content = { content(checked) },
+        )
 
-    BpkSwitchImpl(
-      checked = checked,
-      onCheckedChange = onCheckedChange,
-      enabled = enabled,
-      interactionSource = interactionSource,
-    )
-  }
+        BpkSwitchImpl(
+            checked = checked,
+            onCheckedChange = onCheckedChange,
+            enabled = enabled,
+            interactionSource = interactionSource,
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun BpkSwitchImpl(
-  checked: Boolean,
-  onCheckedChange: ((Boolean) -> Unit)?,
-  enabled: Boolean,
-  interactionSource: MutableInteractionSource,
-  modifier: Modifier = Modifier,
+    checked: Boolean,
+    onCheckedChange: ((Boolean) -> Unit)?,
+    enabled: Boolean,
+    interactionSource: MutableInteractionSource,
+    modifier: Modifier = Modifier,
 ) {
-  // our design system isn't designed with the minimum touch target in mind at the moment.
-  // Disable the enforcement to avoid the extra padding
-  CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-    Switch(
-      checked = checked,
-      onCheckedChange = onCheckedChange,
-      modifier = modifier.semantics { invisibleToUser() },
-      enabled = enabled,
-      interactionSource = interactionSource,
-      colors = SwitchDefaults.colors(
-        checkedThumbColor = BpkTheme.colors.coreAccent,
-        checkedTrackColor = BpkTheme.colors.textDisabled,
-        checkedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
-        uncheckedThumbColor = BpkTheme.colors.textOnDark,
-        uncheckedTrackColor = BpkTheme.colors.textDisabled,
-        uncheckedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
-        disabledCheckedThumbColor = BpkTheme.colors.coreAccent,
-        disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
-        disabledUncheckedThumbColor = BpkTheme.colors.textOnDark,
-        disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
-      ),
-    )
-  }
+    // our design system isn't designed with the minimum touch target in mind at the moment.
+    // Disable the enforcement to avoid the extra padding
+    CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
+        Switch(
+            checked = checked,
+            onCheckedChange = onCheckedChange,
+            modifier = modifier.semantics { invisibleToUser() },
+            enabled = enabled,
+            interactionSource = interactionSource,
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = BpkTheme.colors.coreAccent,
+                checkedTrackColor = BpkTheme.colors.textDisabled,
+                checkedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
+                uncheckedThumbColor = BpkTheme.colors.textOnDark,
+                uncheckedTrackColor = BpkTheme.colors.textDisabled,
+                uncheckedTrackAlpha = BpkTheme.colors.textDisabled.alpha,
+                disabledCheckedThumbColor = BpkTheme.colors.coreAccent,
+                disabledCheckedTrackColor = BpkTheme.colors.textDisabled,
+                disabledUncheckedThumbColor = BpkTheme.colors.textOnDark,
+                disabledUncheckedTrackColor = BpkTheme.colors.textDisabled,
+            ),
+        )
+    }
 }

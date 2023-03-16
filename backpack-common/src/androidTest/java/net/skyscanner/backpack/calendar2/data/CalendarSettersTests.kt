@@ -32,183 +32,183 @@ import org.junit.Test
 
 class CalendarSettersTests {
 
-  @Before
-  fun setup() {
-    initAndroidThreeTen()
-  }
-
-  @Test
-  fun setParams_changes_params() {
-    testCalendarWith(CalendarSettings.Default) {
-      stateMachine.setParams(CalendarSettings.Default.copy(selectionMode = CalendarParams.SelectionMode.Disabled))
-      verify {
-        assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
-      }
+    @Before
+    fun setup() {
+        initAndroidThreeTen()
     }
-  }
 
-  @Test
-  fun setSelection_of_single_changes_selection() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Single,
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
-
-      verify {
-        assertEquals(CalendarSelection.Single(firstDay.date), state.selection)
-      }
+    @Test
+    fun setParams_changes_params() {
+        testCalendarWith(CalendarSettings.Default) {
+            stateMachine.setParams(CalendarSettings.Default.copy(selectionMode = CalendarParams.SelectionMode.Disabled))
+            verify {
+                assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_range_changes_selection() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Range,
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Dates(firstDay.date, lastDay.date))
+    @Test
+    fun setSelection_of_single_changes_selection() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Single,
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
 
-      verify {
-        assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
-      }
+            verify {
+                assertEquals(CalendarSelection.Single(firstDay.date), state.selection)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_single_ignores_change_when_selectionMode_is_disabled() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Disabled,
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
+    @Test
+    fun setSelection_of_range_changes_selection() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Range,
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Dates(firstDay.date, lastDay.date))
 
-      verify {
-        assertEquals(CalendarSelection.None, state.selection)
-        assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
-      }
+            verify {
+                assertEquals(CalendarSelection.Dates(firstDay.date, lastDay.date), state.selection)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_range_ignores_change_when_selectionMode_is_disabled() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Disabled,
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Dates(firstDay.date, lastDay.date))
+    @Test
+    fun setSelection_of_single_ignores_change_when_selectionMode_is_disabled() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Disabled,
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
 
-      verify {
-        assertEquals(CalendarSelection.None, state.selection)
-        assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
-      }
+            verify {
+                assertEquals(CalendarSelection.None, state.selection)
+                assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_single_ignores_change_when_date_is_disabled() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Single,
-      cellsInfo = mapOf(
-        CalendarSettings.Default.range.start to CellInfo(disabled = true),
-      ),
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
+    @Test
+    fun setSelection_of_range_ignores_change_when_selectionMode_is_disabled() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Disabled,
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Dates(firstDay.date, lastDay.date))
 
-      verify {
-        assertEquals(CalendarSelection.None, state.selection)
-      }
+            verify {
+                assertEquals(CalendarSelection.None, state.selection)
+                assertEquals(CalendarParams.SelectionMode.Disabled, state.params.selectionMode)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_range_ignores_change_when_start_date_is_disabled() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Range,
-      cellsInfo = mapOf(
-        CalendarSettings.Default.range.start to CellInfo(disabled = true),
-      ),
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = null))
+    @Test
+    fun setSelection_of_single_ignores_change_when_date_is_disabled() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Single,
+            cellsInfo = mapOf(
+                CalendarSettings.Default.range.start to CellInfo(disabled = true),
+            ),
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Single(firstDay.date))
 
-      verify {
-        assertEquals(CalendarSelection.None, state.selection)
-      }
+            verify {
+                assertEquals(CalendarSelection.None, state.selection)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_range_ignores_change_when_end_date_is_disabled() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Range,
-      cellsInfo = mapOf(
-        CalendarSettings.Default.range.endInclusive to CellInfo(disabled = true),
-      ),
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = lastDay.date))
+    @Test
+    fun setSelection_of_range_ignores_change_when_start_date_is_disabled() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Range,
+            cellsInfo = mapOf(
+                CalendarSettings.Default.range.start to CellInfo(disabled = true),
+            ),
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = null))
 
-      verify {
-        assertEquals(CalendarSelection.None, state.selection)
-      }
+            verify {
+                assertEquals(CalendarSelection.None, state.selection)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_single_ignores_change_when_date_is_out_of_range() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Single,
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Single(firstDay.date.minusMonths(1)))
+    @Test
+    fun setSelection_of_range_ignores_change_when_end_date_is_disabled() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Range,
+            cellsInfo = mapOf(
+                CalendarSettings.Default.range.endInclusive to CellInfo(disabled = true),
+            ),
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = lastDay.date))
 
-      verify {
-        assertEquals(CalendarSelection.None, state.selection)
-      }
+            verify {
+                assertEquals(CalendarSelection.None, state.selection)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_range_ignores_change_when_start_date_is_out_of_range() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Range,
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date.minusMonths(1), end = null))
+    @Test
+    fun setSelection_of_single_ignores_change_when_date_is_out_of_range() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Single,
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Single(firstDay.date.minusMonths(1)))
 
-      verify {
-        assertEquals(CalendarSelection.None, state.selection)
-      }
+            verify {
+                assertEquals(CalendarSelection.None, state.selection)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_range_ignores_change_when_end_date_is_out_of_range() {
-    val disabledParams = CalendarSettings.Default.copy(
-      selectionMode = CalendarParams.SelectionMode.Range,
-    )
-    testCalendarWith(disabledParams) {
-      stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = lastDay.date.plusMonths(1)))
+    @Test
+    fun setSelection_of_range_ignores_change_when_start_date_is_out_of_range() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Range,
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date.minusMonths(1), end = null))
 
-      verify {
-        assertEquals(CalendarSelection.None, state.selection)
-      }
+            verify {
+                assertEquals(CalendarSelection.None, state.selection)
+            }
+        }
     }
-  }
 
-  @Test
-  fun setSelection_of_month_changes_selection() {
-    testCalendarWith(CalendarSettings.Default) {
-      stateMachine.setParams(
-        CalendarSettings.Default.copy(
-          selectionMode = CalendarParams.SelectionMode.Range,
-        ),
-      )
-      verify {
-        assertEquals(CalendarParams.SelectionMode.Range, state.params.selectionMode)
-      }
+    @Test
+    fun setSelection_of_range_ignores_change_when_end_date_is_out_of_range() {
+        val disabledParams = CalendarSettings.Default.copy(
+            selectionMode = CalendarParams.SelectionMode.Range,
+        )
+        testCalendarWith(disabledParams) {
+            stateMachine.setSelection(CalendarSelection.Dates(start = firstDay.date, end = lastDay.date.plusMonths(1)))
+
+            verify {
+                assertEquals(CalendarSelection.None, state.selection)
+            }
+        }
     }
-  }
+
+    @Test
+    fun setSelection_of_month_changes_selection() {
+        testCalendarWith(CalendarSettings.Default) {
+            stateMachine.setParams(
+                CalendarSettings.Default.copy(
+                    selectionMode = CalendarParams.SelectionMode.Range,
+                ),
+            )
+            verify {
+                assertEquals(CalendarParams.SelectionMode.Range, state.params.selectionMode)
+            }
+        }
+    }
 }
