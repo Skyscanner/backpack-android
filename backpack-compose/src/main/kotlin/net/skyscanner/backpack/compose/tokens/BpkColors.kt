@@ -80,7 +80,7 @@ public class BpkColors private constructor(
 ) {
     internal companion object {
         private const val DEPRECATION_MESSAGE: String =
-            "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
+                "This colour is now deprecated. Please switch to the new semantic colours - see internal New Colours documentation"
 
         public fun light(
             background: Color = Color(0xFFFFFFFF),
