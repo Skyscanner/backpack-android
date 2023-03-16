@@ -22,6 +22,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.test.platform.app.InstrumentationRegistry
 import net.skyscanner.backpack.demo.R
 import java.util.Locale
@@ -43,8 +44,8 @@ enum class BpkTestVariant(val id: String, private val themeId: Int = R.style.App
     }
 
     fun newContext(context: Context): Context =
-        context.createConfigurationContext(setup(Configuration(context.resources.configuration))).apply {
-            setTheme(themeId)
+        ContextThemeWrapper(context, themeId).apply {
+            applyOverrideConfiguration(setup(Configuration(context.resources.configuration)))
         }
 
     private fun setup(configuration: Configuration) =
