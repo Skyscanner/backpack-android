@@ -37,17 +37,15 @@ fun ToastStory(modifier: Modifier = Modifier) {
 
     AndroidLayout(R.layout.fragment_toasts, modifier.fillMaxSize()) {
         findViewById<TextView>(R.id.toast_short).setOnClickListener {
-            it as TextView
-            BpkToast.makeText(context, it.text, BpkToast.LENGTH_SHORT).show()
+            BpkToast.makeText(context, R.string.toast_short, BpkToast.LENGTH_SHORT).show()
         }
 
         findViewById<TextView>(R.id.toast_long).setOnClickListener {
-            it as TextView
-            BpkToast.makeText(context, it.text, BpkToast.LENGTH_LONG).show()
+            BpkToast.makeText(context, R.string.toast_long, BpkToast.LENGTH_LONG).show()
         }
 
         if (automationMode) {
-            findViewById<TextView>(R.id.toast_short).performClick()
+            BpkToast.makeText(context, R.string.toast_short, BpkToast.LENGTH_SHORT).show()
         }
     }
 }
