@@ -3,62 +3,62 @@ import com.android.build.gradle.internal.tasks.ManagedDeviceInstrumentationTestT
 import net.skyscanner.backpack.screenshots.ScreenshotTestsServer
 
 android {
-  productFlavors {
-    screenshots {
-      dimension "version"
-      versionNameSuffix "-screenshots"
-      testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.*"
-      testInstrumentationRunnerArgument "class", "net.skyscanner.backpack.docs.GenerateScreenshots"
-    }
-  }
-  sourceSets {
-    screenshots {
-      java.srcDirs = ['src/internal/java']
-      res.srcDirs = ['src/internal/res']
-    }
-  }
-  testOptions {
-    animationsDisabled = true
-    managedDevices {
-      managedDevices.devices {
-        Docs (ManagedVirtualDevice) {
-          device = "Pixel"
-          apiLevel = 30
-          systemImageSource = "aosp"
+    productFlavors {
+        screenshots {
+            dimension "version"
+            versionNameSuffix "-screenshots"
+            testInstrumentationRunnerArgument "notClass", "net.skyscanner.backpack.*"
+            testInstrumentationRunnerArgument "class", "net.skyscanner.backpack.docs.GenerateScreenshots"
         }
-      }
     }
-  }
+    sourceSets {
+        screenshots {
+            java.srcDirs = ['src/internal/java']
+            res.srcDirs = ['src/internal/res']
+        }
+    }
+    testOptions {
+        animationsDisabled = true
+        managedDevices {
+            managedDevices.devices {
+                Docs(ManagedVirtualDevice) {
+                    device = "Pixel"
+                    apiLevel = 30
+                    systemImageSource = "aosp"
+                }
+            }
+        }
+    }
 }
 
 def server = new ScreenshotTestsServer(rootProject.file("docs"))
 
 task startScreenshotsServer() {
-  doFirst {
-    server.start()
-  }
-  finalizedBy("stopScreenshotsServer")
+    doFirst {
+        server.start()
+    }
+    finalizedBy("stopScreenshotsServer")
 }
 
 task stopScreenshotsServer() {
-  doLast {
-    server.close()
-  }
+    doLast {
+        server.close()
+    }
 }
 
 // disable gradle caching for recording screenshots
 tasks.withType(ManagedDeviceInstrumentationTestTask) {
-  outputs.upToDateWhen { deviceName.get() != "Docs" }
+    outputs.upToDateWhen { deviceName.get() != "Docs" }
 }
 
 task recordScreenshots() {
-  mustRunAfter(
-    "startScreenshotsServer",
-  )
+    mustRunAfter(
+        "startScreenshotsServer",
+    )
 
-  dependsOn(
-    "startScreenshotsServer",
-    "DocsScreenshotsDebugAndroidTest",
-  )
-  finalizedBy("stopScreenshotsServer")
+    dependsOn(
+        "startScreenshotsServer",
+        "DocsScreenshotsDebugAndroidTest",
+    )
+    finalizedBy("stopScreenshotsServer")
 }
