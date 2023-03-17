@@ -3,7 +3,7 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-  <path
-      android:fillColor="@color/bpkTextPrimary"
-      android:pathData="M12,2a10,10 0,1 0,10 10A10,10 0,0 0,12 2zM12,17a1,1 0,1 1,1 -1,1 1,0 0,1 -1,1zM15.707,12.121a1,1 0,0 1,-1.414 0L13,10.828L13,13a1,1 0,0 1,-2 0v-2.172l-1.293,1.293 -0.025,0.025a1,1 0,1 1,-1.389 -1.439L12,7l3.707,3.707a1,1 0,0 1,0 1.414z"/>
+    <path
+        android:fillColor="@color/bpkTextPrimary"
+        android:pathData="M12,2a10,10 0,1 0,10 10A10,10 0,0 0,12 2zM12,17a1,1 0,1 1,1 -1,1 1,0 0,1 -1,1zM15.707,12.121a1,1 0,0 1,-1.414 0L13,10.828L13,13a1,1 0,0 1,-2 0v-2.172l-1.293,1.293 -0.025,0.025a1,1 0,1 1,-1.389 -1.439L12,7l3.707,3.707a1,1 0,0 1,0 1.414z" />
 </vector>
