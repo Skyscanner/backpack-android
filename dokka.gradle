@@ -18,19 +18,19 @@
 apply plugin: 'org.jetbrains.dokka'
 
 buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath rootProject.ext.dokka
-  }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath rootProject.ext.dokka
+    }
 }
 
 tasks.named("dokkaHtml") {
-  moduleName = project.artifactId
-  dokkaSourceSets {
-    named("main") {
-      reportUndocumented = false
+    moduleName = project.artifactId
+    dokkaSourceSets {
+        named("main") {
+            reportUndocumented = false
+        }
     }
-  }
 }

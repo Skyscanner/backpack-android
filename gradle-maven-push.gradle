@@ -2,62 +2,62 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 task sourceJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  from android.sourceSets.main.kotlin.srcDirs
-  classifier "source"
+    from android.sourceSets.main.java.srcDirs
+    from android.sourceSets.main.kotlin.srcDirs
+    classifier "source"
 }
 
 artifacts {
-  archives sourceJar
+    archives sourceJar
 }
 
 afterEvaluate { project ->
-  publishing {
-    publications {
-      maven(MavenPublication) {
-        groupId rootProject.ext.group
-        artifactId project.artifactId
-        version project.version
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId rootProject.ext.group
+                artifactId project.artifactId
+                version project.version
 
-        from components.release
-        artifact sourceJar
+                from components.release
+                artifact sourceJar
 
-        pom {
-          name = project.artifactId
-          description = "Backpack is a collection of design resources, reusable components and guidelines for creating Skyscanner's products."
-          url = 'https://github.com/Skyscanner/backpack-android'
+                pom {
+                    name = project.artifactId
+                    description = "Backpack is a collection of design resources, reusable components and guidelines for creating Skyscanner's products."
+                    url = 'https://github.com/Skyscanner/backpack-android'
 
-          licenses {
-            license {
-              name = 'The Apache License, Version 2.0'
-              url = 'https://github.com/Skyscanner/backpack-android/blob/main/LICENSE.txt'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'https://github.com/Skyscanner/backpack-android/blob/main/LICENSE.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'skyscanner'
+                            name = 'Skyscanner Open Source'
+                            email = 'koalasquad@skyscanner.net'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:git://github.com/Skyscanner/backpack-android.git'
+                        developerConnection = 'scm:git:ssh://github.com/Skyscanner/backpack-android.git'
+                        url = 'http://github.com/Skyscanner/backpack-android/tree/main'
+                    }
+                }
             }
-          }
-          developers {
-            developer {
-              id = 'skyscanner'
-              name = 'Skyscanner Open Source'
-              email = 'koalasquad@skyscanner.net'
-            }
-          }
-          scm {
-            connection = 'scm:git:git://github.com/Skyscanner/backpack-android.git'
-            developerConnection = 'scm:git:ssh://github.com/Skyscanner/backpack-android.git'
-            url = 'http://github.com/Skyscanner/backpack-android/tree/main'
-          }
         }
-      }
     }
-  }
 }
 
 tasks.register('checkMavenCredentials') {
-  doLast {
-    def props = ["ossrhUsername", "ossrhPassword", "signing.keyId", "signing.password", "signing.secretKeyRingFile", "sonatypeStagingProfileId"]
-    if (props.any { rootProject.ext[it]?.isEmpty() }) {
-      ant.fail("Missing maven credentials")
+    doLast {
+        def props = ["ossrhUsername", "ossrhPassword", "signing.keyId", "signing.password", "signing.secretKeyRingFile", "sonatypeStagingProfileId"]
+        if (props.any { rootProject.ext[it]?.isEmpty() }) {
+            ant.fail("Missing maven credentials")
+        }
     }
-  }
 }
 
 ext["signing.keyId"] = rootProject.ext["signing.keyId"]
@@ -65,9 +65,9 @@ ext["signing.password"] = rootProject.ext["signing.password"]
 ext["signing.secretKeyRingFile"] = rootProject.ext["signing.secretKeyRingFile"]
 
 signing {
-  sign publishing.publications
+    sign publishing.publications
 }
 
 tasks.withType(Sign) {
-  onlyIf { !project.version.endsWith("SNAPSHOT") }
+    onlyIf { !project.version.endsWith("SNAPSHOT") }
 }

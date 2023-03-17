@@ -20,7 +20,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 ext {
-  artifactId = "backpack-compose"
+    artifactId = "backpack-compose"
 }
 
 apply from: "$rootProject.projectDir/gradle-maven-push.gradle"
@@ -29,53 +29,53 @@ apply from: "$rootProject.projectDir/android-configuration.gradle"
 apply from: "tokens.gradle.kts"
 
 android {
-  namespace 'net.skyscanner.backpack.compose'
-  buildFeatures {
-    compose true
-    resValues false
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion compose_compiler_version
-  }
-  packagingOptions {
-    exclude "**/attach_hotspot_windows.dll"
-    exclude "META-INF/licenses/**"
-    exclude "META-INF/AL2.0"
-    exclude "META-INF/LGPL2.1"
-  }
-  kotlinOptions {
-    freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi"
-    freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi"
-  }
+    namespace 'net.skyscanner.backpack.compose'
+    buildFeatures {
+        compose true
+        resValues false
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_compiler_version
+    }
+    packagingOptions {
+        exclude "**/attach_hotspot_windows.dll"
+        exclude "META-INF/licenses/**"
+        exclude "META-INF/AL2.0"
+        exclude "META-INF/LGPL2.1"
+    }
+    kotlinOptions {
+        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.ExperimentalBackpackApi"
+        freeCompilerArgs += "-Xopt-in=net.skyscanner.backpack.util.InternalBackpackApi"
+    }
 }
 
 dependencies {
-  api rootProject.ext.composeUi
-  api rootProject.ext.composeFoundation
-  api rootProject.ext.composeUiToolingPreview
-  api rootProject.ext.composeUtil
-  implementation rootProject.ext.composeMaterial3
+    api rootProject.ext.composeUi
+    api rootProject.ext.composeFoundation
+    api rootProject.ext.composeUiToolingPreview
+    api rootProject.ext.composeUtil
+    implementation rootProject.ext.composeMaterial3
 
-  implementation rootProject.ext.androidXLifecycleViewmodel
-  implementation rootProject.ext.androidXLifecycleViewmodelKtx
-  implementation rootProject.ext.ktx
-  implementation rootProject.ext.composeFoundation
-  implementation rootProject.ext.accompanistPager
+    implementation rootProject.ext.androidXLifecycleViewmodel
+    implementation rootProject.ext.androidXLifecycleViewmodelKtx
+    implementation rootProject.ext.ktx
+    implementation rootProject.ext.composeFoundation
+    implementation rootProject.ext.accompanistPager
 
-  androidTestImplementation rootProject.ext.junitAndroid
-  androidTestImplementation rootProject.ext.testRules
-  androidTestImplementation rootProject.ext.mockitoKotlin
-  androidTestImplementation rootProject.ext.mockitoAndroid
-  androidTestImplementation rootProject.ext.composeTestJUnit
+    androidTestImplementation rootProject.ext.junitAndroid
+    androidTestImplementation rootProject.ext.testRules
+    androidTestImplementation rootProject.ext.mockitoKotlin
+    androidTestImplementation rootProject.ext.mockitoAndroid
+    androidTestImplementation rootProject.ext.composeTestJUnit
 
-  debugImplementation rootProject.ext.composeUiTooling
-  debugImplementation rootProject.ext.composeUiTestManifest
+    debugImplementation rootProject.ext.composeUiTooling
+    debugImplementation rootProject.ext.composeUiTestManifest
 
-  testImplementation rootProject.ext.junit
-  testImplementation rootProject.ext.coroutinesTest
+    testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.coroutinesTest
 
-  lintPublish(project(":backpack-lint"))
-  implementation(project(":backpack-common"))
+    lintPublish(project(":backpack-lint"))
+    implementation(project(":backpack-common"))
 }
 
 apply from: "$rootProject.projectDir/android-configuration-check.gradle"

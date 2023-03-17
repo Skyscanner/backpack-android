@@ -62,6 +62,8 @@ fun BpkTheme(
             LocalBpkShapes provides shapes,
             LocalContentColor provides colors.textPrimary,
             LocalTextStyle provides typography.bodyDefault,
+//            LocalElevationOverlay provides null,
+//            LocalContentAlpha provides 1f,
 //      LocalColorScheme provides rememberedColorScheme,
 //      LocalIndication provides rippleIndication,
 //      LocalRippleTheme provides MaterialRippleTheme,

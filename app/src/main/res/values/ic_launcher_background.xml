@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!--suppress HardcodedColorResourceDetector -->
-  <color name="ic_launcher_background">#ff05203c</color>
+    <!--suppress HardcodedColorResourceDetector -->
+    <color name="ic_launcher_background">#ff05203c</color>
 </resources>

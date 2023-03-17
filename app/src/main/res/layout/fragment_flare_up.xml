@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  style="@style/App.Story"
-  android:padding="0dp"
-  android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/App.Story"
+    android:orientation="vertical"
+    android:padding="0dp">
 
-  <net.skyscanner.backpack.flare.BpkFlare
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:layout_marginBottom="@dimen/bpkSpacingMd"
-    app:flarePointerDirection="up">
+    <net.skyscanner.backpack.flare.BpkFlare
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="@dimen/bpkSpacingMd"
+        app:flarePointerDirection="up">
 
-    <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:scaleType="centerCrop"
-      android:contentDescription="@string/image_rockies_content_description"
-      app:srcCompat="@drawable/canadian_rockies_canada"/>
-  </net.skyscanner.backpack.flare.BpkFlare>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/image_rockies_content_description"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/canadian_rockies_canada" />
+    </net.skyscanner.backpack.flare.BpkFlare>
 </androidx.appcompat.widget.LinearLayoutCompat>

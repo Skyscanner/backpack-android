@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="@dimen/bpkSpacingXl"
-  android:background="?attr/selectableItemBackground"
-  android:paddingHorizontal="@dimen/bpkSpacingBase"
-  android:orientation="horizontal"
-  android:weightSum="1">
-
-  <net.skyscanner.backpack.text.BpkText
-    android:id="@+id/theme_name"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bpkSpacingXl"
-    android:layout_weight=".8"
-    android:gravity="center_vertical|start"
-    tools:text="London" />
+    android:background="?attr/selectableItemBackground"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/bpkSpacingBase"
+    android:weightSum="1">
 
-  <ImageView
-    android:id="@+id/selected_indicator"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_weight=".2"
-    android:contentDescription="@string/settings_selected"
-    android:src="@drawable/bpk_tick"
-    android:visibility="gone"
-    app:tint="?attr/colorPrimary" />
+    <net.skyscanner.backpack.text.BpkText
+        android:id="@+id/theme_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bpkSpacingXl"
+        android:layout_weight=".8"
+        android:gravity="center_vertical|start"
+        tools:text="London" />
+
+    <ImageView
+        android:id="@+id/selected_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".2"
+        android:contentDescription="@string/settings_selected"
+        android:src="@drawable/bpk_tick"
+        android:visibility="gone"
+        app:tint="?attr/colorPrimary" />
 </LinearLayout>

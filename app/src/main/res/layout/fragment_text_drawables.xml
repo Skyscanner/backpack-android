@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  style="@style/App.Story"
-  android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/App.Story"
+    android:orientation="vertical">
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:drawableTint="@color/bpkStatusSuccessSpot"
-    android:drawableStart="@drawable/bpk_flight"
-    android:drawableEnd="@drawable/bpk_arrow_right"
-    app:textStyle="bodyLongform" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/bpk_flight"
+        android:drawableEnd="@drawable/bpk_arrow_right"
+        android:text="@string/txt_lorem_ipsum"
+        app:drawableTint="@color/bpkStatusSuccessSpot"
+        app:textStyle="bodyLongform" />
 
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/txt_lorem_ipsum"
-    app:drawableTint="@color/bpkStatusSuccessSpot"
-    android:drawableEnd="@drawable/bpk_arrow_right"
-    android:drawableStart="@drawable/bpk_flight"
-    app:textStyle="bodyLongform" />
+    <net.skyscanner.backpack.text.BpkText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/bpk_flight"
+        android:drawableEnd="@drawable/bpk_arrow_right"
+        android:text="@string/txt_lorem_ipsum"
+        app:drawableTint="@color/bpkStatusSuccessSpot"
+        app:textStyle="bodyLongform" />
 
 </LinearLayout>

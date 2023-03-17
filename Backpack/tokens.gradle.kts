@@ -32,145 +32,145 @@ import net.skyscanner.backpack.tokens.saveTo
 import net.skyscanner.backpack.tokens.transformTo
 
 tasks {
-  val group = "tokens"
+    val group = "tokens"
 
-  val src = project.projectDir.resolve("src/main/res").path
-  val valuesFolder = "values"
-  val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
-    .readAs(BpkFormat.Json)
+    val src = project.projectDir.resolve("src/main/res").path
+    val valuesFolder = "values"
+    val source = project.nodeFileOf("@skyscanner/bpk-foundations-android", "tokens/base.raw.android.json")
+        .readAs(BpkFormat.Json)
 
-  val generateElevationTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkDimension.Category.Elevation)
-        .transformTo(BpkDimension.Format.Xml(namespace = "bpkElevation"))
-        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "elevation"))
-        .execute()
+    val generateElevationTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDimension.Category.Elevation)
+                .transformTo(BpkDimension.Format.Xml(namespace = "bpkElevation"))
+                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "elevation"))
+                .execute()
+        }
     }
-  }
 
-  val generateSpacingTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkDimension.Category.Spacing)
-        .transformTo(BpkDimension.Format.Xml(namespace = "bpkSpacing"))
-        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "dimensions.spacing"))
-        .execute()
+    val generateSpacingTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDimension.Category.Spacing)
+                .transformTo(BpkDimension.Format.Xml(namespace = "bpkSpacing"))
+                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "dimensions.spacing"))
+                .execute()
+        }
     }
-  }
 
-  val generateRadiiTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkDimension.Category.Radii)
-        .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderRadius"))
-        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "radii"))
-        .execute()
+    val generateRadiiTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDimension.Category.Radii)
+                .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderRadius"))
+                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "radii"))
+                .execute()
+        }
     }
-  }
 
-  val generateBorderSizeTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkDimension.Category.Border)
-        .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderSize"))
-        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "borders"))
-        .execute()
+    val generateBorderSizeTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDimension.Category.Border)
+                .transformTo(BpkDimension.Format.Xml(namespace = "bpkBorderSize"))
+                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "borders"))
+                .execute()
+        }
     }
-  }
 
-  val generateAnimationDurationTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkDuration.Category.Animation)
-        .transformTo(BpkDuration.Format.Xml(namespace = "bpkAnimationDuration"))
-        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "animation"))
-        .execute()
+    val generateAnimationDurationTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkDuration.Category.Animation)
+                .transformTo(BpkDuration.Format.Xml(namespace = "bpkAnimationDuration"))
+                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "animation"))
+                .execute()
+        }
     }
-  }
 
-  val generateTextSizeTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkTextUnit.Category.FontSize)
-        .transformTo(BpkTextUnit.Format.Xml)
-        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "text.size"))
-        .execute()
+    val generateTextSizeTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkTextUnit.Category.FontSize)
+                .transformTo(BpkTextUnit.Format.Xml)
+                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "text.size"))
+                .execute()
+        }
     }
-  }
 
-  val generateTypographyTokens by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkTextStyle.Category)
-        .transformTo(BpkTextStyle.Format.Xml)
-        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "text"))
-        .execute()
+    val generateTypographyTokens by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkTextStyle.Category)
+                .transformTo(BpkTextStyle.Format.Xml)
+                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "text"))
+                .execute()
+        }
     }
-  }
 
-  val generateStaticColors by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkColor.Static)
-        .transformTo(BpkColor.Format.StaticXml)
-        .saveTo(BpkOutput.XmlFile(src, valuesFolder, "color"))
-        .execute()
+    val generateStaticColors by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkColor.Static)
+                .transformTo(BpkColor.Format.StaticXml)
+                .saveTo(BpkOutput.XmlFile(src, valuesFolder, "color"))
+                .execute()
+        }
     }
-  }
 
-  val generateSemanticColors by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkColor.Semantic)
-        .transformTo(BpkColor.Format.SemanticXml)
-        .saveTo(BpkOutput.XmlFiles(src, valuesFolder, "semantic.color"))
-        .execute()
+    val generateSemanticColors by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkColor.Semantic)
+                .transformTo(BpkColor.Format.SemanticXml)
+                .saveTo(BpkOutput.XmlFiles(src, valuesFolder, "semantic.color"))
+                .execute()
+        }
     }
-  }
 
-  val generateInternalColors by creating {
-    this.group = group
-    doLast {
-      source
-        .parseAs(BpkColor.Internal)
-        .transformTo(BpkColor.Format.SemanticXml)
-        .saveTo(BpkOutput.XmlFiles(src, valuesFolder, "internal.color"))
-        .execute()
+    val generateInternalColors by creating {
+        this.group = group
+        doLast {
+            source
+                .parseAs(BpkColor.Internal)
+                .transformTo(BpkColor.Format.SemanticXml)
+                .saveTo(BpkOutput.XmlFiles(src, valuesFolder, "internal.color"))
+                .execute()
+        }
     }
-  }
 
-  val generateSizeTokens by creating {
-    this.group = group
-    dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
-  }
+    val generateSizeTokens by creating {
+        this.group = group
+        dependsOn(generateElevationTokens, generateSpacingTokens, generateRadiiTokens, generateBorderSizeTokens)
+    }
 
-  val generateDurationTokens by creating {
-    this.group = group
-    dependsOn(generateAnimationDurationTokens)
-  }
+    val generateDurationTokens by creating {
+        this.group = group
+        dependsOn(generateAnimationDurationTokens)
+    }
 
-  val generateTextTokens by creating {
-    this.group = group
-    dependsOn(generateTextSizeTokens, generateTypographyTokens)
-  }
+    val generateTextTokens by creating {
+        this.group = group
+        dependsOn(generateTextSizeTokens, generateTypographyTokens)
+    }
 
-  val generateColorTokens by creating {
-    this.group = group
-    dependsOn(generateStaticColors, generateSemanticColors, generateInternalColors)
-  }
+    val generateColorTokens by creating {
+        this.group = group
+        dependsOn(generateStaticColors, generateSemanticColors, generateInternalColors)
+    }
 
-  val generateTokens by creating {
-    this.group = group
-    dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateDurationTokens)
-  }
+    val generateTokens by creating {
+        this.group = group
+        dependsOn(generateSizeTokens, generateColorTokens, generateTextTokens, generateDurationTokens)
+    }
 }

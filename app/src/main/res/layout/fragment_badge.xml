@@ -1,449 +1,449 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  style="@style/App.Story">
-  <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/App.Story">
 
-    <net.skyscanner.backpack.text.BpkText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="@dimen/bpkSpacingSm"
-      app:textStyle="footnote"
-      android:text="@string/badge_success"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:padding="@dimen/bpkSpacingSm"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:orientation="horizontal">
-
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/success_1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:badgeType="success"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/success_2"
-        app:message="@string/badge_apples"/>
+        android:orientation="vertical">
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/success_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="success"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/success_1"
-        app:layout_constraintEnd_toStartOf="@+id/success_3"
-        app:message="@string/badge_bananas"/>
+        <net.skyscanner.backpack.text.BpkText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bpkSpacingSm"
+            android:text="@string/badge_success"
+            app:textStyle="footnote" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/success_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="success"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/success_2"
-        app:layout_constraintEnd_toStartOf="@+id/success_4"
-        app:message="@string/badge_strawberries"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/bpkSpacingSm"
+            android:orientation="horizontal"
+            android:padding="@dimen/bpkSpacingSm">
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/success_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="success"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/success_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:message="@string/badge_pears"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/success_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="success"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/success_2"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_apples" />
 
-    <net.skyscanner.backpack.text.BpkText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:textStyle="footnote"
-      android:text="@string/badge_warning"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/success_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="success"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/success_3"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/success_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_bananas" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:padding="@dimen/bpkSpacingSm"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:orientation="horizontal">
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/success_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="success"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/success_4"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/success_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_strawberries" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/warning_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="warning"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/warning_2"
-        app:message="@string/badge_apples"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/success_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="success"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/success_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_pears" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/warning_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="warning"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/warning_1"
-        app:layout_constraintEnd_toStartOf="@+id/warning_3"
-        app:message="@string/badge_bananas"/>
+        <net.skyscanner.backpack.text.BpkText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/badge_warning"
+            app:textStyle="footnote" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/warning_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="warning"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/warning_2"
-        app:layout_constraintEnd_toStartOf="@+id/warning_4"
-        app:message="@string/badge_strawberries"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/bpkSpacingSm"
+            android:orientation="horizontal"
+            android:padding="@dimen/bpkSpacingSm">
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/warning_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="warning"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/warning_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:message="@string/badge_pears"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/warning_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="warning"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/warning_2"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_apples" />
 
-    <net.skyscanner.backpack.text.BpkText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:textStyle="footnote"
-      android:text="@string/badge_destructive"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/warning_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="warning"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/warning_3"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/warning_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_bananas" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:padding="@dimen/bpkSpacingSm"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:orientation="horizontal">
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/warning_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="warning"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/warning_4"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/warning_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_strawberries" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/destructive_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="destructive"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/destructive_2"
-        app:message="@string/badge_apples"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/warning_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="warning"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/warning_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_pears" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/destructive_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="destructive"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/destructive_1"
-        app:layout_constraintEnd_toStartOf="@+id/destructive_3"
-        app:message="@string/badge_bananas"/>
+        <net.skyscanner.backpack.text.BpkText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/badge_destructive"
+            app:textStyle="footnote" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/destructive_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="destructive"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/destructive_2"
-        app:layout_constraintEnd_toStartOf="@+id/destructive_4"
-        app:message="@string/badge_strawberries"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/bpkSpacingSm"
+            android:orientation="horizontal"
+            android:padding="@dimen/bpkSpacingSm">
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/destructive_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="destructive"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/destructive_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:message="@string/badge_pears"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/destructive_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="destructive"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/destructive_2"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_apples" />
 
-    <net.skyscanner.backpack.text.BpkText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:textStyle="footnote"
-      android:text="@string/badge_normal"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/destructive_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="destructive"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/destructive_3"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/destructive_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_bananas" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:padding="@dimen/bpkSpacingSm"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:orientation="horizontal">
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/destructive_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="destructive"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/destructive_4"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/destructive_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_strawberries" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/normal_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="normal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/normal_2"
-        app:message="@string/badge_apples"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/destructive_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="destructive"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/destructive_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_pears" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/normal_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="normal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/normal_1"
-        app:layout_constraintEnd_toStartOf="@+id/normal_3"
-        app:message="@string/badge_bananas"/>
+        <net.skyscanner.backpack.text.BpkText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/badge_normal"
+            app:textStyle="footnote" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/normal_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="normal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/normal_2"
-        app:layout_constraintEnd_toStartOf="@+id/normal_4"
-        app:message="@string/badge_strawberries"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/bpkSpacingSm"
+            android:orientation="horizontal"
+            android:padding="@dimen/bpkSpacingSm">
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/normal_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="normal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/normal_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:message="@string/badge_pears"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/normal_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/normal_2"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_apples" />
 
-    <net.skyscanner.backpack.text.BpkText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:textStyle="footnote"
-      android:text="@string/badge_strong"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/normal_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/normal_3"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/normal_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_bananas" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:padding="@dimen/bpkSpacingSm"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:orientation="horizontal">
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/normal_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/normal_4"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/normal_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_strawberries" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/strong_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="strong"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/strong_2"
-        app:message="@string/badge_apples"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/normal_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/normal_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_pears" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/strong_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="strong"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/strong_1"
-        app:layout_constraintEnd_toStartOf="@+id/strong_3"
-        app:message="@string/badge_bananas"/>
+        <net.skyscanner.backpack.text.BpkText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/badge_strong"
+            app:textStyle="footnote" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/strong_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="strong"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/strong_2"
-        app:layout_constraintEnd_toStartOf="@+id/strong_4"
-        app:message="@string/badge_strawberries"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/bpkSpacingSm"
+            android:orientation="horizontal"
+            android:padding="@dimen/bpkSpacingSm">
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/strong_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="strong"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/strong_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:message="@string/badge_pears"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/strong_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="strong"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/strong_2"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_apples" />
 
-    <net.skyscanner.backpack.text.BpkText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:textStyle="footnote"
-      android:text="@string/badge_inverse"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/strong_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="strong"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/strong_3"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/strong_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_bananas" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@color/bpkCorePrimary"
-      android:padding="@dimen/bpkSpacingSm"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:orientation="horizontal">
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/strong_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="strong"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/strong_4"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/strong_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_strawberries" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/inverse_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="inverse"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/inverse_2"
-        app:message="@string/badge_apples"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/strong_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="strong"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/strong_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_pears" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/inverse_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="inverse"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/inverse_1"
-        app:layout_constraintEnd_toStartOf="@+id/inverse_3"
-        app:message="@string/badge_bananas"/>
+        <net.skyscanner.backpack.text.BpkText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/badge_inverse"
+            app:textStyle="footnote" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/inverse_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="inverse"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/inverse_2"
-        app:layout_constraintEnd_toStartOf="@+id/inverse_4"
-        app:message="@string/badge_strawberries"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/bpkSpacingSm"
+            android:background="@color/bpkCorePrimary"
+            android:orientation="horizontal"
+            android:padding="@dimen/bpkSpacingSm">
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/inverse_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="inverse"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/inverse_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:message="@string/badge_pears"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/inverse_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="inverse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/inverse_2"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_apples" />
 
-    <net.skyscanner.backpack.text.BpkText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:textStyle="footnote"
-      android:text="@string/badge_outline"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/inverse_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="inverse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/inverse_3"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/inverse_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_bananas" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@color/bpkCorePrimary"
-      android:padding="@dimen/bpkSpacingSm"
-      android:layout_margin="@dimen/bpkSpacingSm"
-      android:orientation="horizontal">
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/inverse_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="inverse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/inverse_4"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/inverse_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_strawberries" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/outline_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="outline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/outline_2"
-        app:message="@string/badge_apples"/>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/inverse_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="inverse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/inverse_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_pears" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/outline_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="outline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/outline_1"
-        app:layout_constraintEnd_toStartOf="@+id/outline_3"
-        app:message="@string/badge_bananas"/>
+        <net.skyscanner.backpack.text.BpkText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/badge_outline"
+            app:textStyle="footnote" />
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/outline_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="outline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/outline_2"
-        app:layout_constraintEnd_toStartOf="@+id/outline_4"
-        app:message="@string/badge_strawberries"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/bpkSpacingSm"
+            android:background="@color/bpkCorePrimary"
+            android:orientation="horizontal"
+            android:padding="@dimen/bpkSpacingSm">
 
-      <net.skyscanner.backpack.badge.BpkBadge
-        android:id="@+id/outline_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:badgeType="outline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toEndOf="@+id/outline_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:message="@string/badge_pears"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/outline_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="outline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/outline_2"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_apples" />
 
-  </LinearLayout>
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/outline_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="outline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/outline_3"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/outline_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_bananas" />
+
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/outline_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="outline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/outline_4"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/outline_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_strawberries" />
+
+            <net.skyscanner.backpack.badge.BpkBadge
+                android:id="@+id/outline_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:badgeType="outline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@+id/outline_3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:message="@string/badge_pears" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 </RelativeLayout>

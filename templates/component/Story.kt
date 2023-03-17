@@ -29,14 +29,14 @@ import net.skyscanner.backpack.demo.meta.ComposeStory
 @${name}Component
 @ComposeStory
 fun ${name}Story(modifier: Modifier = Modifier) {
-  Column(modifier) {
-    Default${name}Sample()
-  }
+    Column(modifier) {
+        Default${name}Sample()
+    }
 }
 
 @Composable
 internal fun Default${name}Sample(modifier: Modifier = Modifier) {
   Bpk${name}(
-    modifier = modifier,
+      modifier = modifier,
   )
 }
