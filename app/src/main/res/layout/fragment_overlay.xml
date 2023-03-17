@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  style="@style/App.Story"
-  android:orientation="vertical"
-  tools:ignore="HardcodedText">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/App.Story"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
 
-  <net.skyscanner.backpack.overlay.BpkOverlay
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?selectableItemBackground"
-    android:layout_marginBottom="@dimen/bpkSpacingLg"
-    app:overlayCornerType="rounded"
-    app:overlayType="tint">
+    <net.skyscanner.backpack.overlay.BpkOverlay
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/bpkSpacingLg"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        app:overlayCornerType="rounded"
+        app:overlayType="tint">
 
-    <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:adjustViewBounds="true"
-      android:scaleType="centerCrop"
-      android:contentDescription="@string/image_rockies_content_description"
-      android:src="@drawable/canadian_rockies_canada" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_rockies_content_description"
+            android:scaleType="centerCrop"
+            android:src="@drawable/canadian_rockies_canada" />
 
-    <net.skyscanner.backpack.text.BpkText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:text="@string/overlay_rounded_corners"
-      android:textColor="@color/bpkTextOnDark"
-      app:textStyle="bodyLongform" />
+        <net.skyscanner.backpack.text.BpkText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/overlay_rounded_corners"
+            android:textColor="@color/bpkTextOnDark"
+            app:textStyle="bodyLongform" />
 
-  </net.skyscanner.backpack.overlay.BpkOverlay>
+    </net.skyscanner.backpack.overlay.BpkOverlay>
 
-  <net.skyscanner.backpack.overlay.BpkOverlay
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?selectableItemBackground"
-    app:overlayCornerType="none"
-    app:overlayType="tint">
+    <net.skyscanner.backpack.overlay.BpkOverlay
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        app:overlayCornerType="none"
+        app:overlayType="tint">
 
-    <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:adjustViewBounds="true"
-      android:scaleType="centerCrop"
-      android:contentDescription="@string/image_rockies_content_description"
-      android:src="@drawable/canadian_rockies_canada" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/image_rockies_content_description"
+            android:scaleType="centerCrop"
+            android:src="@drawable/canadian_rockies_canada" />
 
-    <net.skyscanner.backpack.text.BpkText
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:text="@string/overlay_no_rounded_corners"
-      android:textColor="@color/bpkTextOnDark"
-      app:textStyle="bodyLongform" />
+        <net.skyscanner.backpack.text.BpkText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/overlay_no_rounded_corners"
+            android:textColor="@color/bpkTextOnDark"
+            app:textStyle="bodyLongform" />
 
-  </net.skyscanner.backpack.overlay.BpkOverlay>
+    </net.skyscanner.backpack.overlay.BpkOverlay>
 
 </LinearLayout>

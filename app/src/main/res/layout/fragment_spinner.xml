@@ -1,229 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  style="@style/App.Story"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:gravity="top"
-  android:orientation="vertical"
-  android:paddingHorizontal="@dimen/bpkSpacingBase">
-
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/spinner_textPrimary" />
-
-  <androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/App.Story"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="match_parent"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/bpkSpacingBase">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:gravity="center_horizontal"
-      android:orientation="vertical">
-
-      <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="@dimen/bpkSpacingSm">
-
-        <net.skyscanner.backpack.spinner.BpkSpinner
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          app:small="true"
-          app:type="textPrimary" />
-
-      </FrameLayout>
-
-      <net.skyscanner.backpack.text.BpkText
+    <net.skyscanner.backpack.text.BpkText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/generic_small"
-        app:textStyle="caption" />
+        android:text="@string/spinner_textPrimary" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="@dimen/bpkSpacingSm">
+
+                <net.skyscanner.backpack.spinner.BpkSpinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:small="true"
+                    app:type="textPrimary" />
+
+            </FrameLayout>
+
+            <net.skyscanner.backpack.text.BpkText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_small"
+                app:textStyle="caption" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="@dimen/bpkSpacingSm">
+
+                <net.skyscanner.backpack.spinner.BpkSpinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:type="textPrimary" />
+
+            </FrameLayout>
+
+            <net.skyscanner.backpack.text.BpkText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_default"
+                app:textStyle="caption" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:gravity="center_horizontal"
-      android:orientation="vertical">
-
-      <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="@dimen/bpkSpacingSm">
-
-        <net.skyscanner.backpack.spinner.BpkSpinner
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          app:type="textPrimary" />
-
-      </FrameLayout>
-
-      <net.skyscanner.backpack.text.BpkText
+    <net.skyscanner.backpack.text.BpkText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/generic_default"
-        app:textStyle="caption" />
+        android:paddingTop="@dimen/bpkSpacingBase"
+        android:text="@string/spinner_disabled" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="@dimen/bpkSpacingSm">
+
+                <net.skyscanner.backpack.spinner.BpkSpinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:small="true"
+                    app:type="disabled" />
+
+            </FrameLayout>
+
+            <net.skyscanner.backpack.text.BpkText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_small"
+                app:textStyle="caption" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="@dimen/bpkSpacingSm">
+
+                <net.skyscanner.backpack.spinner.BpkSpinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:type="disabled" />
+
+            </FrameLayout>
+
+            <net.skyscanner.backpack.text.BpkText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_default"
+                app:textStyle="caption" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-  </androidx.appcompat.widget.LinearLayoutCompat>
-
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingTop="@dimen/bpkSpacingBase"
-    android:text="@string/spinner_disabled" />
-
-  <androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:gravity="center_horizontal"
-      android:orientation="vertical">
-
-      <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="@dimen/bpkSpacingSm">
-
-        <net.skyscanner.backpack.spinner.BpkSpinner
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          app:small="true"
-          app:type="disabled" />
-
-      </FrameLayout>
-
-      <net.skyscanner.backpack.text.BpkText
+    <net.skyscanner.backpack.text.BpkText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/generic_small"
-        app:textStyle="caption" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        android:paddingTop="@dimen/bpkSpacingBase"
+        android:text="@string/spinner_onDarkSurface" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:gravity="center_horizontal"
-      android:orientation="vertical">
-
-      <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="@dimen/bpkSpacingSm">
-
-        <net.skyscanner.backpack.spinner.BpkSpinner
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          app:type="disabled" />
-
-      </FrameLayout>
-
-      <net.skyscanner.backpack.text.BpkText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/generic_default"
-        app:textStyle="caption" />
+        android:background="@color/bpkSurfaceContrast"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="@dimen/bpkSpacingSm">
+
+                <net.skyscanner.backpack.spinner.BpkSpinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:small="true"
+                    app:type="onDarkSurface" />
+
+            </FrameLayout>
+
+            <net.skyscanner.backpack.text.BpkText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_small"
+                android:textColor="@color/bpkTextOnDark"
+                app:textStyle="caption" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="@dimen/bpkSpacingSm">
+
+                <net.skyscanner.backpack.spinner.BpkSpinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:type="onDarkSurface" />
+
+            </FrameLayout>
+
+            <net.skyscanner.backpack.text.BpkText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generic_default"
+                android:textColor="@color/bpkTextOnDark"
+                app:textStyle="caption" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-  </androidx.appcompat.widget.LinearLayoutCompat>
-
-  <net.skyscanner.backpack.text.BpkText
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingTop="@dimen/bpkSpacingBase"
-    android:text="@string/spinner_onDarkSurface" />
-
-  <androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/bpkSurfaceContrast"
-    android:orientation="horizontal">
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:gravity="center_horizontal"
-      android:orientation="vertical">
-
-      <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="@dimen/bpkSpacingSm">
-
-        <net.skyscanner.backpack.spinner.BpkSpinner
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          app:small="true"
-          app:type="onDarkSurface" />
-
-      </FrameLayout>
-
-      <net.skyscanner.backpack.text.BpkText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/generic_small"
-        android:textColor="@color/bpkTextOnDark"
-        app:textStyle="caption" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      android:layout_weight="1"
-      android:gravity="center_horizontal"
-      android:orientation="vertical">
-
-      <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="@dimen/bpkSpacingSm">
-
-        <net.skyscanner.backpack.spinner.BpkSpinner
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          app:type="onDarkSurface" />
-
-      </FrameLayout>
-
-      <net.skyscanner.backpack.text.BpkText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/generic_default"
-        android:textColor="@color/bpkTextOnDark"
-        app:textStyle="caption" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-  </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
