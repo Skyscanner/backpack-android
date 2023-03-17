@@ -189,7 +189,10 @@ private fun toXml(source: BpkIcons, rootDir: String, metadataPath: String): Map<
 
     fun BpkIcon.fileContent(metadata: Map<String, String?>) =
         value
-            .replace("android:fillColor=\"#FF000000\"", "android:fillColor=\"@color/bpkTextPrimary\"")
+            .replace("android:fillColor=\"#FF000000\"", "  android:fillColor=\"@color/bpkTextPrimary\"")
+            .replace("<path", "  <path")
+            .replace("android:pathData=", "  android:pathData=")
+            .replace("\"/>", "\" />")
             .let {
                 if (metadata.containsKey(name) && metadata[name] == "true") {
                     it.replaceFirst("\n", "\n    android:autoMirrored=\"true\"\n")
@@ -197,7 +200,6 @@ private fun toXml(source: BpkIcons, rootDir: String, metadataPath: String): Map<
                     it
                 }
             }
-            .replace("  <path", "    <path")
 
     val metadata = BpkFormat.Json(File(rootDir, metadataPath)).mapValues { (it.value as Map<String, String>)["autoMirror"] }
     return source.associate { icon ->
