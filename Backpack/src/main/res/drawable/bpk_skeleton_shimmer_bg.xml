@@ -3,9 +3,8 @@
     android:shape="rectangle">
     <gradient
         android:angle="0"
-        android:startColor="@color/__privateSkeletonShimmerStartEnd"
         android:centerColor="@color/__privateSkeletonShimmerCenter"
         android:endColor="@color/__privateSkeletonShimmerStartEnd"
-        android:type="linear"
-        />
+        android:startColor="@color/__privateSkeletonShimmerStartEnd"
+        android:type="linear" />
 </shape>
