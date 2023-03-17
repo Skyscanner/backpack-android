@@ -98,5 +98,14 @@ jobs:
     runs-on: ubuntu-latest
     environment: Publishing
     steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup NPM
+        run: |
+          nvm install
+          npm install --global gulp-cli
+          nvm use
+          npm ci
+
       - name: Update Supernova docs
         run: supernova publish-documentation --apiKey=${{ secrets.SUPERNOVA_API_KEY }} --designSystemid=${{ secrets.SUPERNOVA_DESIGN_SYSTEM_ID }}
